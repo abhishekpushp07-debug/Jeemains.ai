@@ -234,7 +234,7 @@ def render_report(a, loader):
             parts = ["Concept: " + ai["concept"]]
             if ai["given"]:
                 parts.append("Given: " + "; ".join(ai["given"]))
-            parts += [f"Step {i}. {re.sub(r'^\d+[.)]\s*', '', s['title'])}: {s['explanation']}" for i, s in enumerate(ai["steps"], 1)]
+            parts += ["Step %d. %s: %s" % (i, re.sub(r'^\d+[.)]\s*', '', s['title']), s['explanation']) for i, s in enumerate(ai["steps"], 1)]
             parts.append(f"Answer: ({ai['final_answer']})" + ("" if ai["key_agrees"] else " — AI differs from the supplied key; the key and score are unchanged."))
             parts.append("Insight: " + ai["insight"])
             if ai["shortcut"]:

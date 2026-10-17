@@ -3,6 +3,7 @@ from pathlib import Path
 
 load_dotenv(Path(__file__).parent / ".env")
 import os, uuid, time, asyncio
+import tejas.reports  # noqa: F401  fail fast on report syntax errors (it is otherwise imported lazily)
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.exceptions import RequestValidationError

@@ -96,6 +96,8 @@ async def read(id:str,qid:str,u=Depends(current)):
 
 @router.post('/{id}/solutions/{qid}',response_model=SolutionResponse)
 async def request_solution(id:str,qid:str,bg:BackgroundTasks,u=Depends(current)):
+    # Students never trigger AI: solutions are pre-generated owner-side and saved on each question (mock_solutions.py).
+    raise HTTPException(410,'AI solutions are prepared in advance and appear automatically on your results.')
     from .astra import student_budget
     from .jobs import run_job
     a,q=await released_question(id,qid,u)

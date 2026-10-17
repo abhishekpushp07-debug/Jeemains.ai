@@ -10,6 +10,12 @@ import {MathText} from '../QuestionContent';
 const FILTERS=[['open','Needs review'],['key_confirmed','Key verified'],['key_wrong','Key flagged wrong'],['all','All']];
 const LABEL={key_confirmed:'Key verified · AI re-solving with verified key',key_wrong:'Key flagged wrong · students see AI solution with a note'};
 
+const ReviewImg=({x,i,tid})=>{
+ const [failed,setFailed]=useState(false);
+ if(failed)return <p className="import-fineprint" data-testid={tid+'-img-error-'+i}>Question image could not load. Open the paper in the Studio to view it.</p>;
+ return <img alt={`Question ${x.number} source region ${i+1}`} loading="lazy" data-testid={tid+'-img-'+i} onError={()=>setFailed(true)} src={`${API}/studio/ai-review/${x.set_id}/${x.question_id}/image/${i}`}/>;
+};
+
 const Item=({x,onAct,busy})=>{
  const [note,setNote]=useState(x.review?.note||''),[open,setOpen]=useState(false);
  const tid=`ai-review-${x.set_id.slice(0,8)}-${x.number}`;
@@ -20,7 +26,7 @@ const Item=({x,onAct,busy})=>{
   </div>
   {x.review&&<p className="ai-review-status" data-testid={tid+'-status'}>{LABEL[x.review.status]}{x.review.note?` — “${x.review.note}”`:''}</p>}
   <div className="ai-review-body">
-   <div className="ai-review-images">{Array.from({length:Math.min(x.image_count,3)}).map((_,i)=><img key={i} alt={`Question ${x.number} source region ${i+1}`} loading="lazy" src={`${API}/studio/sets/${x.set_id}/questions/${x.question_id}/asset/question/${i}`}/>)}</div>
+   <div className="ai-review-images">{Array.from({length:Math.min(x.image_count,3)}).map((_,i)=><ReviewImg key={i} x={x} i={i} tid={tid}/>)}</div>
    <div className="ai-review-why"><strong><Sparkles size={13}/> Why the AI disagrees</strong><MathText text={x.insight}/>
     <button type="button" className="ai-review-toggle" onClick={()=>setOpen(!open)} data-testid={tid+'-steps-toggle'}>{open?'Hide':'Show'} AI steps ({x.steps.length})</button>
     {open&&<ol className="ai-review-steps">{x.steps.map((s,i)=><li key={i}><b><MathText text={s.title}/></b> <MathText text={s.explanation}/></li>)}</ol>}

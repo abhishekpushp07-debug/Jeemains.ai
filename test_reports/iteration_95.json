@@ -1,0 +1,44 @@
+{
+  "summary": "Tested owner-side AI solution tagging, the student read-only path, disagreement gating, the Studio AI Answer Review (API + UI) and regressions. Working: the worker runs (one process). Tags grew from 1650 to 1943 ready during the session (about 30/min), and all 142 Mock 01 questions are tagged. GET /api/attempts/{id}/ai-solutions answered in 0.11 s with 142/142 ready for Mock 01. M10 Q105 returns under_review and the UI shows ai-solution-pending-105 with no AI block. Studio review list, counts, progress and filters work, and the item shows key A vs AI C. key_wrong makes the student see the solution with a flag; reopen puts it back to under_review; an invalid action gives 422; an unknown question gives 404; a student gets 401/403. key_confirmed on M11 Q136 re-queued it: queued -> solving -> ready in about 20 s, and the new AI answer C agrees with the key. Regression: 50 live, 94 chapter tests, mock panel AI progress OK. Found 2 bugs: (1) PDF report generation was completely broken by a SyntaxError in reports.py (I fixed it; verified 289 pages with 142 AI blocks). (2) Question images in the AI review panel are broken: the asset route returns 503 because of the packet-1 safety hold (not fixed). Also, the legacy student-triggered AI route is still registered.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/attempts/{id}/report (tejas/reports.py:237)", "issue": "SyntaxError on Python 3.11: an f-string expression contained a backslash (re.sub(r'^\\d+...')). Every PDF report job failed with 'Processing could not finish'. FIXED by testing agent: the f-string was replaced with % formatting. After POST /api/jobs/{id}/retry the job finished and the PDF has 289 pages with 142 'AI generated step-by-step solution' blocks.", "priority": "CRITICAL"},
+      {"endpoint": "GET /api/studio/sets/{set}/questions/{q}/asset/question/0", "issue": "Returns 503 capability_held (X-Tejas-Safety-Hold: packet-1). tejas/safety.py ROUTES holds SOURCE_PARSE for this exact path, so every question image in the Studio AI Answer Review panel is broken (naturalWidth 0). The owner cannot see the question while reviewing.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "GET/POST /api/attempts/{id}/solutions/{qid} (tejas/ai_solutions.py)", "issue": "The legacy student-triggered AI solution router is still registered in server.py. POST runs a gpt-6-astra call on a student request, which goes against the user's request. The frontend no longer calls it; GET returned 200 'not_requested'. Remove it or disable it."},
+      {"endpoint": "POST /api/studio/ai-review (key_wrong/reopen)", "issue": "The review is stored only on the set tag. key_confirmed also writes the review to the tejas_question_solutions doc, but reopen and key_wrong do not clear or update it. If a re-solve or a tag restore happens later (enqueue_all -> make_tag(doc)), the stale key_confirmed review comes back."},
+      {"endpoint": "GET /api/studio/ai-review?state=key_confirmed", "issue": "When a confirmed item is re-solved and the new answer agrees, it drops out of the list completely (counts key_confirmed 0). The owner has no history of the keys they verified. Consider listing tags with review!=null even when agrees=true."},
+      {"endpoint": "mock_solutions.enqueue_all/solve", "issue": "A question with an answer but no q_refs is still queued, and solve() then calls the model with zero images, which invites a hallucinated solution. Skip questions that have no q_refs."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "AiReviewPanel", "issue": "The question image is broken (asset 503). It shows the alt text inside a large empty box.", "selector": "[data-testid=ai-review-1a43cf59-105] img", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Studio AI review", "issues": ["A broken image keeps its full height and leaves a large blank area. Add an onError fallback."]},
+      {"screen": "Results AI solution", "issues": ["The AI output still uses \\boxed (a boxed 4/7 is rendered) even though the prompt forbids it. It is cosmetic only and renders fine."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_ai_tags_review.py", "/app/test_reports/pytest/pytest_ai_tags.xml"],
+  "action_items": [
+    "Make the Studio AI-review question images load. Either add the read-only studio asset GET to an allowlist in tejas/safety.py, or add a dedicated staff route such as /api/studio/ai-review/{set}/{q}/image/{i} that renders the crop. Add an onError fallback to the <img>.",
+    "Remove or disable the legacy student-triggered AI router tejas/ai_solutions.py (POST /api/attempts/{id}/solutions/{qid}) so no AI call can ever run on a student request.",
+    "Keep tejas_question_solutions.review in sync on key_wrong/reopen, or stop make_tag from using doc.review.",
+    "Keep the reports.py fix (f-string backslash). Consider adding a py_compile/import check for tejas/reports.py at startup."
+  ],
+  "critical_code_review_comments": [
+    "reports.py is imported lazily inside generate_report, so the SyntaxError was invisible at startup and only showed up as failed jobs. Import it eagerly so errors fail fast.",
+    "review_list aggregates and unwinds all 11800 questions on every call. It is acceptable now, but consider an index or a projection of only the disagreeing tags.",
+    "With key_confirmed, the model is told the 'VERIFIED' answer. This invites conformity: Q136 had a blank AI answer before and agreed instantly after. Owners should know this re-solve is not independent."
+  ],
+  "updated_files": ["/app/backend/tejas/reports.py", "/app/backend/tests/test_ai_tags_review.py"],
+  "success_rate": {"backend": "90% (9/10 pytest; the asset 503 failure is a real bug; PDF passed after the fix)", "frontend": "90% (results AI block, pending block, review panel actions all OK; question images broken)"},
+  "seed_data_creation": "TEST phones 9900000355/376/393 were created. Their profiles, attempts and jobs were deleted at the end. M10 Q105 was reviewed key_wrong then reopened (now open). M11 Q136 is key_confirmed (note TEST_confirm) and has been re-solved; it now agrees with the key.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run tests/test_ai_tags_review.py with -n0 (pytest.ini defaults to xdist; the tests share state). Open disagreements now: M10 Q105 (A vs C) and M11 Q113 (D vs A). The worker is at about 1950/11800 tags and processes full mocks first. The PDF job id is deterministic, so a failed job needs POST /api/jobs/{id}/retry.",
+  "rca of the issue": "PDF: reports.py:237 used re.sub(r'^\\d+...') inside an f-string {} expression. That is illegal before Python 3.12, so importing the module raised SyntaxError, generate_report failed, and the job was marked failed. Images: tejas/safety.py HELD_CAPABILITIES = frozenset(Capability) holds SOURCE_PARSE for GET /api/studio/sets/*/questions/*/asset/*/*, and the new AiReviewPanel uses exactly that route."
+}

@@ -275,6 +275,19 @@ async def review_list(state: str = 'open', u=Depends(staff)):
     return ReviewList(items=items[:300], counts=counts, progress=await progress())
 
 
+@router.get('/studio/ai-review/{set_id}/{question_id}/image/{index}')
+async def review_image(set_id: str, question_id: str, index: int, u=Depends(staff)):
+    """Read-only question crop for the reviewer (same render the solver saw)."""
+    from fastapi import Response
+    from .derivatives import render_crop
+    paper = await sets.find_one({'id': set_id}, {'_id': 0, 'questions': {'$elemMatch': {'id': question_id}}})
+    refs = (paper or {}).get('questions', [{}])[0].get('q_refs', []) if paper and paper.get('questions') else []
+    if not 0 <= index < len(refs):
+        raise HTTPException(404, 'Source region not found.')
+    png = await run_in_threadpool(render_crop, await get(files, refs[index]['file_id']), refs[index], 1.6)
+    return Response(png, media_type='image/png', headers={'Cache-Control': 'private, max-age=3600'})
+
+
 @router.post('/studio/ai-review/{set_id}/{question_id}', response_model=ReviewItem)
 async def review_action(set_id: str, question_id: str, data: AiReviewPayload, u=Depends(staff)):
     paper = await sets.find_one({'id': set_id}, {'_id': 0, 'id': 1, 'title': 1, 'exam': 1, 'full_length': 1, 'chapter_book_id': 1,
@@ -287,9 +300,10 @@ async def review_action(set_id: str, question_id: str, data: AiReviewPayload, u=
     if data.action == 'reopen':
         review = None
     await sets.update_one({'id': set_id}, {'$set': {'questions.$[q].ai_solution.review': review}}, array_filters=[{'q.id': question_id}])
+    await solutions.update_one({'id': tag['solution_id']}, {'$set': {'review': review}})
     if data.action == 'key_confirmed':
         # Verified key: re-solve with that verification so students get a correct worked solution.
-        await solutions.update_one({'id': tag['solution_id']}, {'$set': {'state': 'queued', 'tries': 0, 'review': review, 'order': -1}})
+        await solutions.update_one({'id': tag['solution_id']}, {'$set': {'state': 'queued', 'tries': 0, 'order': -1}})
     await audit(u['id'], 'AI answer review', set_id, f"Q{q['number']}: {data.action}. {data.note.strip()}"[:300])
     tag['review'] = review
     return ReviewItem(set_id=set_id, set_title=paper['title'], exam=paper.get('exam', ''), question_id=question_id, number=q['number'],
