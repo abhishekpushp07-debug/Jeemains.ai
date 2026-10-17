@@ -1,0 +1,41 @@
+{
+  "summary": "End-to-end testing of 50 BITSAT full mocks (130 main + 12 bonus, 180 min, +3/-1/0) - backend API (13 pytest tests, all pass) and UI (desktop 1920 + mobile 390). Verified: health; student phone login; Home shows JEE Main/BITSAT/COMEDK; /exams/bitsat/mocks lists 50 live mocks 'BITSAT Full Mock 01..50' in order, 12/page, 5 pages; chapter-wise still Physics 30 / Chemistry 32 / Mathematics 32 (94 total), chapter test 50 Q / 60 min / +3/-1; SetDetail preflight (~1.9s) -> start; player shows 130 main questions grouped Physics 30, Chemistry 30, English Proficiency 10, Logical Reasoning 20, Mathematics 40; timer 02:59:58; source images render in Fit view; no answer keys in the attempt payload. Bonus gate: waiting with 'N left' (visiting doesn't count; 129 answered -> still 409 '1 still unanswered'); ready + 'Attempt Bonus Questions' only after the 130th answer was saved through the UI; warning dialog (player-bonus-warning) has lock text; confirm -> 12 bonus Q131-142 only, banner player-bonus-gate-open; main PUT -> 409 'Main answers are locked'; early bonus unlock 409; bonus PUT before unlock 409; unlock is idempotent. Offline: answering a bonus question offline shows 'Offline · 1 pending' and it syncs after reconnect (server confirmed). Submit -> results score / 426, results-mock-section-scores with physics..mathematics, main-total, bonus rows; bonus-not-entered row shows correctly for an attempt where the bonus was never entered; per-question review shows Your response vs Accepted answer. PDF: UI download (4.1MB) and API job (148 pages) include 'Section-wise scores', each section line and the Bonus line. Time limit: own TEST attempt deadline set in the past (DB) -> next save 409, attempt auto-finalized with reason=time_limit, results computed. Studio (owner): studio-mock-book-panel 50 live / 0 held / none-held message, 'All 50 mocks' expands to 50 rows; student gets 401/403 on /api/studio/mock-books. Mobile 390: gate waiting/ready/open and the confirm dialog fit (scrollWidth == 390). No functional bugs found; only minor UX issues listed below.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "scoring summary (GET /api/attempts/{id}/results)", "issue": "When the bonus is never entered, the 12 unreachable bonus questions still count as 'skipped' (top tile shows Skipped 141). They also lower attempt_rate. Maximum stays 426 as the spec asks, but consider leaving unreachable bonus questions out of the skipped count / attempt rate, or labelling them separately."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Results review filter tabs", "issue": "The 'Bonus' filter tab on a mock result shows 0 items. It filters disposition=bonus_all (bonus-to-all), not the 12 bonus-section questions (131-142). For mock students this label is misleading. Rename it (e.g. 'Bonus-to-all') or add a 'Bonus section' filter for mocks.", "selector": "[data-testid=results-filter-tabs] button:has-text('Bonus')", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Player savebar", "issues": ["Progress reads '0 / 142 saved answers · Main section' while only 130 main questions are reachable. Consider showing 'x / 130' in the main section and 'x / 12' in the bonus section."]},
+      {"screen": "Player desktop", "issues": ["The inline ready/open bonus banner (.bonus-gate-inline) is wider than the question card below it (about 955px vs 792px), so the left and right edges don't line up."]},
+      {"screen": "Mock catalogue cards", "issues": ["Live mock card descriptions say 'TEJAS200 BITSAT full mock (private review edition)'. The words 'private review edition' on a live student card are confusing."]},
+      {"screen": "Mobile player (390px)", "issues": ["Fit view renders the source question image very small (text hard to read) until the student picks Readable. This is existing behaviour, noted for awareness."]},
+      {"screen": "Offline", "issues": ["If a question's source image never loaded before going offline, the options are disabled ('source image did not load'). This is by design, but you could prefetch the images to make offline use more robust."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_bitsat_mocks.py", "/app/backend/tests/test_bitsat_mock_expiry.py", "/app/test_reports/pytest/bitsat_mocks.xml"],
+  "action_items": [
+    "(Medium) Rename the results 'Bonus' filter or add a bonus-section filter for mock results",
+    "(Low) Player progress denominator: show 130 (main) or 12 (bonus) instead of 142",
+    "(Low) Optional: leave unreachable, never-entered bonus questions out of the 'Skipped' count and attempt rate",
+    "(Low) Align the inline bonus banner width with the question card on desktop; reword 'private review edition' on live mock cards"
+  ],
+  "critical_code_review_comments": [
+    "Bonus gating is sound: server-side 409s in save_answer, completeness check from response_schema, and a server_seq CAS in unlock_bonus guard against a race between the last main save and the lock. A guard filter on bonus_unlocked_at existence prevents TOCTOU.",
+    "Mock sets have end_at = 2027-10-17 (same window as chapter tests); the mocks will disappear from the catalogue after that date. Make sure this is intentional.",
+    "React warns that a <span> is a child of <tbody> in MockSectionScores. The span is injected by the visual-edit tooling (data-ve-dynamic), not by app code, so it doesn't affect production.",
+    "attempts.py is 642 lines (close to the 700-line limit)."
+  ],
+  "updated_files": ["/app/backend/tests/test_bitsat_mocks.py", "/app/backend/tests/test_bitsat_mock_expiry.py"],
+  "success_rate": {"backend": "100% (13/13)", "frontend": "100% of requested flows pass; 1 medium UX issue + minor design notes"},
+  "seed_data_creation": "Test student attempts only (phones 99000001xx: 9900000155/156/157/177 + a time-based 99000001xx): mock 01 completed with bonus, mock 02 active with bonus unlocked (mobile), mocks 49/50 completed, mock 37 expired via a deadline edit on that test attempt only. No set or chapter data was modified and the importer was not run.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && REACT_APP_BACKEND_URL=... pytest tests/test_bitsat_mocks.py tests/test_bitsat_mock_expiry.py -n 0 (pytest.ini forces xdist; use -n 0 so the class order holds). Send an Origin header for writes. Owner login is limited to 5 attempts per 15 min. Options in attempt questions are a dict (keys A-D). Answer keys differ per mock, but each section has the same per-letter key distribution, so all-'A' answers give identical section scores on different mocks. This is not a bug."
+}

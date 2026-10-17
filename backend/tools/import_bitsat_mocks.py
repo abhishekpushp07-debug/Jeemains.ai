@@ -107,7 +107,7 @@ async def main():
         sections = dict(Counter(q['section'] for q in qs if not q['bonus']))
         s = {'id': sid, 'mock_book_id': book_id, 'mock_number': n, 'title': title, 'exam': 'BITSAT', 'year': '',
              'test_kind': 'mock', 'full_length': True,
-             'source': 'TEJAS200 BITSAT full mock (private review edition). Answer keys supplied; no worked solutions.',
+             'source': 'TEJAS200 BITSAT full mock · 130 + 12 bonus questions. Answer keys supplied; no worked solutions.',
              'attribution': 'TEJAS200 · Owner-supplied original practice material', 'questions': questions, 'file_ids': [fid],
              'rules': rules, 'status': 'published' if valid else 'draft', 'version': 1, 'revision': 1, 'created_at': start,
              'profile_mode': 'practice', 'audience': 'all', 'rights_upload': True, 'rights_publish': True, 'rights_report': True,

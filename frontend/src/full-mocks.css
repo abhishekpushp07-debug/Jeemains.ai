@@ -7,6 +7,7 @@
 .bonus-gate.is-ready .btn { flex:1 1 100%; justify-content:center; }
 .bonus-gate.is-open { background:var(--warning-soft); border-color:var(--warning-line); color:var(--warning); }
 .bonus-gate.is-open > svg, .bonus-gate.is-open strong { color:var(--warning); }
+.bonus-gate-inline { max-width:970px; margin:0 auto; }
 .bonus-gate-inline .bonus-gate { margin-top:0; }
 @media (min-width: 1024px) { .bonus-gate-inline .bonus-gate.is-waiting { display:none; } }
 .bonus-warning p { margin:0 0 10px; line-height:1.6; }
@@ -23,7 +24,9 @@
 
 .mock-section-scores { margin:var(--space-6, 1.5rem) 0; }
 .mock-section-table-wrap { overflow-x:auto; }
-.mock-section-table { width:100%; border-collapse:collapse; font-size:13px; min-width:420px; }
+.mock-section-table { width:100%; border-collapse:collapse; font-size:13px; }
+.mock-section-table td:first-of-type { white-space:nowrap; }
+@media (max-width: 520px) { .mock-section-table { font-size:11.5px; } .mock-section-table th, .mock-section-table td { padding:8px 4px !important; } .mock-section-table td[colspan] { white-space:normal; } }
 .mock-section-table th, .mock-section-table td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); }
 .mock-section-table td { font-family:'Roboto Mono', monospace; }
 .mock-section-table tbody tr:nth-last-child(-n+2) th { font-weight:600; }

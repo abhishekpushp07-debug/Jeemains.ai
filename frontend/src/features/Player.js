@@ -118,6 +118,7 @@ export default function Player() {
     String(a.answers[x.id]?.value || "").trim(),
   ).length;
   const mainCommitted = bonusRule ? a.questions.filter((x) => !x.bonus && String(a.answers[x.id]?.value || "").trim()).length : 0;
+  const sectionCommitted = qs.filter((x) => String(a.answers[x.id]?.value || "").trim()).length;
   const gate = bonusRule && <BonusGate rule={bonusRule} open={bonusOpen} answered={mainCommitted} pending={nPendingCount(pending)} ended={seconds === 0} online={online} onEnter={() => setBonusConfirm(true)} />;
   const marked = qs.filter((x) => all[x.id]?.marked).length,
     nPending = Object.keys(pending).length;
@@ -192,7 +193,7 @@ export default function Player() {
                 : "All responses saved"}
         </span>
         <span className="player-progress">
-          {committed} / {a.count} saved answers{bonusRule ? (bonusOpen ? " · Bonus section" : " · Main section") : ""}
+          {bonusRule ? `${sectionCommitted} / ${qs.length} saved answers · ${bonusOpen ? "Bonus section" : "Main section"}` : `${committed} / ${a.count} saved answers`}
         </span>
       </div>
       <p className="compact-practice-note">

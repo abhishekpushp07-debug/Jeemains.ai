@@ -134,7 +134,7 @@ export default function Results() {
   const qs = r.questions.filter(
     (q) =>
       filter === "all" ||
-      (filter === "marked" ? q.marked : q.outcome === filter),
+      (filter === "marked" ? q.marked : filter === "bonus-section" ? q.bonus : q.outcome === filter),
   );
   const lateKey = `tejas-draft-${user.id}-${id}`;
   let late = {};
@@ -369,7 +369,8 @@ export default function Results() {
           ["correct", "Correct"],
           ["marked", "Marked for review"],
           ["dropped", "Dropped"],
-          ["bonus", "Bonus"],
+          ["bonus", "Bonus-to-all"],
+          ...(s.sections ? [["bonus-section", "Bonus section"]] : []),
         ].map(([v, l]) => (
           <button
             data-testid={"results-filter-" + v}

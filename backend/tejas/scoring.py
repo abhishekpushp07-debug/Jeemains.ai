@@ -96,7 +96,9 @@ def score(attempt):
                 "solution_release": "released_after_submission",
             }
         )
-    eligible = [r for r in rows if r["outcome"] not in ["dropped", "bonus"]]
+    # A never-entered bonus section was unreachable, not skipped by choice.
+    unreachable = {r["id"] for r in rows if r.get("bonus") and rules.get("bonus_rule") and not attempt.get("bonus_unlocked_at")}
+    eligible = [r for r in rows if r["outcome"] not in ["dropped", "bonus"] and r["id"] not in unreachable]
     c = sum(r["outcome"] == "correct" for r in eligible)
     w = sum(r["outcome"] == "incorrect" for r in eligible)
     tried = c + w
@@ -108,7 +110,7 @@ def score(attempt):
         "percentage": round(float(net / maximum * 100), 2) if maximum else None,
         "correct": c,
         "incorrect": w,
-        "skipped": sum(r["outcome"] == "skipped" for r in rows),
+        "skipped": sum(r["outcome"] == "skipped" and r["id"] not in unreachable for r in rows),
         "dropped": sum(r["outcome"] == "dropped" for r in rows),
         "bonus": sum(r["outcome"] == "bonus" for r in rows),
         "attempted": tried,
