@@ -1,0 +1,13 @@
+{
+  "scope": "Unified PDF/XLSX import, scheduling, Live/Unlive, competition cohort rankings, descriptive insights",
+  "frontend_build": "pass",
+  "isolated_suite": {"passed": 185, "known_deferred_xfailed": 6, "unexpected_failures": 0, "log": "/app/test_reports/product_final_regression.log"},
+  "real_pdf_report": {"bytes":132073,"pages":6,"source_images":6,"status":"pass"},
+  "real_excel_report": {"bytes":63206,"pages":3,"status":"pass","evidence":"/app/test_reports/excel_real_report_final.log"},
+  "actual_browser_flow": {"xlsx_upload_to_ready":"pass","direct_text_preview":"pass","date_time_schedule":"pass","unlive_confirmation":"pass","source_png":"200 image/png","competition_ranks":"visible","result_insights":"visible","mobile_toast_below_header":"pass","desktop_viewport":"1920x800","mobile_viewport":"390x844","horizontal_overflow":[],"dark_mode":"pass"},
+  "agent_report_corrections": ["Iteration49 source and unlive failures were incorrect test URLs; correct endpoints return200", "Iteration50 incomplete Excel report flow completed using existing corrected smoke helpers; actual PDF downloaded", "No production-readiness claim accepted from earlier reports"],
+  "qa_cleanup": {"private_imports_archived":11,"scheduled_test_sets_withdrawn":6,"existing_content_edited":false},
+  "application_apis_mocked": false,
+  "isolated_test_storage_mocked": true,
+  "remaining_limits": ["Six deferred architecture regressions", "Other dependency advisories and prior staff-credential rotation remain unresolved", "Full60 analyses not implemented", "500000 concurrency not qualified", "Searchable numbered PDF and template-based XLSX only"]
+}

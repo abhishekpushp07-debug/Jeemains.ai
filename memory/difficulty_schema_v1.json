@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "description": "Difficulty Fingerprint Schema for JEE Advanced questions",
+  "fields": {
+    "DI": {
+      "name": "Difficulty Index",
+      "range": [0, 100],
+      "description": "Overall difficulty (0=easiest, 100=hardest)"
+    },
+    "TI": {
+      "name": "Time Index",
+      "unit": "seconds",
+      "description": "Expected solving time for average S80 student"
+    },
+    "EI": {
+      "name": "Error/Trap Index",
+      "range": [0, 100],
+      "description": "Likelihood of common mistakes/traps"
+    },
+    "II": {
+      "name": "Integration Index",
+      "range": [0, 100],
+      "description": "Multi-concept integration requirement"
+    }
+  },
+  "supporting_features": {
+    "reading_len": "Character count of stem + options",
+    "equation_count": "Number of equations/formulas",
+    "option_similarity": "0-1 score of how similar options are",
+    "diagram_flag": "Boolean: has diagram/figure",
+    "step_count_est": "Estimated solution steps",
+    "concept_tags": "List of concept identifiers"
+  },
+  "personas": {
+    "S60": "60th percentile student - struggles with advanced concepts",
+    "S80": "80th percentile student - average JEE aspirant",
+    "S90": "90th percentile student - above average",
+    "S97": "97th percentile student - top performer"
+  },
+  "aggregation_formula": {
+    "DI": "100 - mean(persona_p_correct) * 100",
+    "TI": "mean(persona_time_est)",
+    "EI": "weighted_avg(persona_pitfalls) * 100",
+    "II": "concept_count / max_concepts * 100"
+  },
+  "distribution_thresholds": {
+    "KS_DI": 0.08,
+    "KS_TI": 0.10,
+    "type_DI_drift": 4,
+    "subject_TI_drift": 0.10
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "schema_version": "capacity-profile-v1",
+  "evidence_status": "PLANNING_ONLY_UNQUALIFIED",
+  "workload": {
+    "active_attempts": 500000,
+    "steady_seconds": 10800,
+    "cell_count": 20,
+    "commit_interval_seconds": 30,
+    "dirty_percentage": 20,
+    "draft_interval_seconds": 10,
+    "lease_interval_seconds": 60,
+    "telemetry_interval_seconds": 30,
+    "start_window_seconds": 120,
+    "submit_window_seconds": 30,
+    "candidate_package_bytes": 2000000,
+    "items_per_attempt": 75,
+    "grade_window_seconds": 120
+  },
+  "rates": {
+    "commit": {
+      "numerator": 50000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "16,666.6667"
+    },
+    "draft": {
+      "numerator": 10000,
+      "denominator": 1,
+      "unit": "requests/second",
+      "display": "10,000.0000"
+    },
+    "lease": {
+      "numerator": 25000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "8,333.3333"
+    },
+    "live": {
+      "numerator": 35000,
+      "denominator": 1,
+      "unit": "requests/second",
+      "display": "35,000.0000"
+    },
+    "telemetry": {
+      "numerator": 50000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "16,666.6667"
+    },
+    "combined": {
+      "numerator": 155000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "51,666.6667"
+    },
+    "double_live": {
+      "numerator": 70000,
+      "denominator": 1,
+      "unit": "requests/second",
+      "display": "70,000.0000"
+    },
+    "double_combined": {
+      "numerator": 310000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "103,333.3333"
+    },
+    "per_cell_live": {
+      "numerator": 1750,
+      "denominator": 1,
+      "unit": "requests/second",
+      "display": "1,750.0000"
+    },
+    "start_overlay": {
+      "numerator": 12500,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "4,166.6667"
+    },
+    "submit_overlay": {
+      "numerator": 50000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "16,666.6667"
+    },
+    "start_live_overlap": {
+      "numerator": 117500,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "39,166.6667"
+    },
+    "submit_live_overlap": {
+      "numerator": 155000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "51,666.6667"
+    },
+    "submit_combined_overlap": {
+      "numerator": 205000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "68,333.3333"
+    },
+    "pathological_live": {
+      "numerator": 125000,
+      "denominator": 1,
+      "unit": "requests/second",
+      "display": "125,000.0000"
+    },
+    "pathological_combined": {
+      "numerator": 425000,
+      "denominator": 3,
+      "unit": "requests/second",
+      "display": "141,666.6667"
+    },
+    "grade_item_demand": {
+      "numerator": 312500,
+      "denominator": 1,
+      "unit": "items/second",
+      "display": "312,500.0000"
+    },
+    "candidate_egress": {
+      "numerator": 200000000000,
+      "denominator": 3,
+      "unit": "bits/second",
+      "display": "66,666,666,666.6667"
+    }
+  },
+  "volumes": {
+    "commits": {
+      "numerator": 180000000,
+      "denominator": 1,
+      "unit": "operations",
+      "display": "180,000,000.0000"
+    },
+    "drafts": {
+      "numerator": 108000000,
+      "denominator": 1,
+      "unit": "operations",
+      "display": "108,000,000.0000"
+    },
+    "leases": {
+      "numerator": 90000000,
+      "denominator": 1,
+      "unit": "operations",
+      "display": "90,000,000.0000"
+    },
+    "live": {
+      "numerator": 378000000,
+      "denominator": 1,
+      "unit": "operations",
+      "display": "378,000,000.0000"
+    },
+    "telemetry": {
+      "numerator": 180000000,
+      "denominator": 1,
+      "unit": "operations",
+      "display": "180,000,000.0000"
+    },
+    "candidate_wave": {
+      "numerator": 1000000000000,
+      "denominator": 1,
+      "unit": "bytes",
+      "display": "1,000,000,000,000.0000"
+    }
+  },
+  "stages": [
+    {
+      "actors": 1000,
+      "steady_minutes": 15
+    },
+    {
+      "actors": 10000,
+      "steady_minutes": 30
+    },
+    {
+      "actors": 50000,
+      "steady_minutes": 45
+    },
+    {
+      "actors": 100000,
+      "steady_minutes": 60
+    },
+    {
+      "actors": 250000,
+      "steady_minutes": 90
+    },
+    {
+      "actors": 500000,
+      "steady_minutes": 180
+    }
+  ],
+  "slos": [
+    {
+      "id": "commit-p95",
+      "unit": "milliseconds",
+      "limit": 300,
+      "percentile": "p95",
+      "measurement": "Server ingress through durable acknowledgement, including queueing and database commit"
+    },
+    {
+      "id": "commit-p99",
+      "unit": "milliseconds",
+      "limit": 1000,
+      "percentile": "p99",
+      "measurement": "Server ingress through durable acknowledgement"
+    },
+    {
+      "id": "submit-p99",
+      "unit": "milliseconds",
+      "limit": 2000,
+      "percentile": "p99",
+      "measurement": "Ingress to durable terminal receipt under declared submit burst"
+    },
+    {
+      "id": "grade-p95",
+      "unit": "milliseconds",
+      "limit": 60000,
+      "percentile": "p95",
+      "measurement": "Durable receipt to correct frozen core grade, including queue wait"
+    },
+    {
+      "id": "grade-p99",
+      "unit": "milliseconds",
+      "limit": 120000,
+      "percentile": "p99",
+      "measurement": "Durable receipt to correct frozen core grade"
+    },
+    {
+      "id": "server-errors",
+      "unit": "parts-per-million",
+      "limit": 1000,
+      "percentile": "maximum",
+      "measurement": "Overall AND every predeclared critical window; admitted overload failures count"
+    },
+    {
+      "id": "integrity-violations",
+      "unit": "violations",
+      "limit": 0,
+      "percentile": "maximum",
+      "measurement": "Covered failures: lost acknowledged commits, wrong grades, duplicate effects, key leakage"
+    }
+  ],
+  "qualified_active_attempts": null,
+  "warnings": [
+    "These are exact planning equations and proposed guide SLOs, NOT load-test results.",
+    "Independent database cells, operator-approved budgets and failure tests are not provisioned here.",
+    "Retries, reads, auth, exports, asset requests and connection demand must be added explicitly.",
+    "Two-times normal traffic does not qualify pathological draft traffic or failover.",
+    "No actor, browser, connection, AZ-loss or regional-restore qualification has passed."
+  ]
+}

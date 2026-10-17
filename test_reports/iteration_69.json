@@ -1,0 +1,84 @@
+{
+  "summary": "Fixed all testing harness bugs in test_confidence_reviews.py. All 33 confidence review tests now pass. Full packet1 suite: 288 passed, 2 failed (catalogue updates needed by main agent, not test harness bugs).",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": [],
+    "catalogue_updates_needed": [
+      {
+        "issue": "Operation catalogue missing new routes",
+        "routes": [
+          "POST /api/attempts/{id}/expected-value",
+          "PUT /api/attempts/{id}/reviews/{qid}"
+        ],
+        "impact": "test_baseline_evidence.py and test_ingress_contracts.py fail",
+        "fix_priority": "MEDIUM",
+        "note": "Main agent needs to update operation catalogue - not a test harness bug"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "All 33 test_confidence_reviews.py tests pass",
+    "test_confidence_0_and_1_retained",
+    "test_empty_before_first_nonempty_not_captured",
+    "test_changed_response_excluded_from_confidence_metrics",
+    "test_same_response_confidence_change_not_excluded",
+    "test_idempotent_confidence_save_exact_body_replay",
+    "test_different_body_same_request_id_rejected",
+    "test_a41_requires_20_rated_total_10_per_bin",
+    "test_a41_bin_requires_10_items_endpoint_1_included",
+    "test_a41_bins_below_10_not_displayed",
+    "test_a42_requires_20_rated_items",
+    "test_a42_rational_result_precision",
+    "test_a43_requires_10_rated_items",
+    "test_a43_threshold_strict_less_than",
+    "test_a43_no_negative_contribution_from_guessed",
+    "test_a43_configurable_threshold",
+    "test_a45_requires_5_labelled_wrong_only",
+    "test_a45_skipped_and_correct_not_in_denominator",
+    "test_a50_requires_verified_first_exposure",
+    "test_a50_exact_count_with_verified_first_exposure",
+    "test_review_put_ownership_401_404",
+    "test_review_put_active_embargo_denied",
+    "test_review_put_grading_pending_409",
+    "test_review_put_cas_concurrent_winners",
+    "test_review_put_identical_replay_idempotent",
+    "test_review_put_payload_mismatch_409",
+    "test_review_put_validation_category_note_solution",
+    "test_expected_value_boundaries_0_1_point2",
+    "test_expected_value_different_marking_schemes",
+    "test_expected_value_nan_infinity_rejected",
+    "test_expected_value_no_mutation",
+    "test_cleared_response_excluded_from_confidence",
+    "test_reverted_response_excluded_from_confidence",
+    "test_missing_original_confidence_cannot_be_added_retrospectively"
+  ],
+  "test_report_links": [
+    "/app/tests/packet1/test_confidence_reviews.py"
+  ],
+  "success_percentage": {
+    "test_confidence_reviews": "100% (33/33 passed)",
+    "full_packet1_suite": "99.3% (288/290 passed, 2 catalogue-related failures for main agent)"
+  },
+  "updated_files": [
+    "/app/tests/packet1/test_confidence_reviews.py"
+  ],
+  "action_item_for_main_agent": "Update operation catalogue to include new routes: POST /api/attempts/{id}/expected-value and PUT /api/attempts/{id}/reviews/{qid}. This will fix test_baseline_evidence.py and test_ingress_contracts.py failures.",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": true,
+  "test_harness_fixes_applied": [
+    "Fixed save_answer dict access - now uses dict keys instead of Pydantic attributes (line 282-294)",
+    "Fixed A41 high-bin label check - now checks for '[0.8, 1.0]' with numerical mean and count verification (line 401-405)",
+    "Refactored tests to not reopen completed attempts - all response changes/clears/reverts done BEFORE finalize (lines 158-215, 217-262, 635-695)",
+    "Fixed HTTP error response format - now checks response.json()['error']['message'] instead of response.json()['detail'] (lines 885-1209)",
+    "Fixed wrong-user test - now properly inserts staff user into database using session fixture pattern (lines 830-883)",
+    "Added missing test: cleared response exclusion (lines 1420-1507)",
+    "Added missing test: reverted response exclusion A→B→A pattern (lines 1510-1577)",
+    "Added missing test: missing original confidence cannot be added retrospectively (lines 1580-1625)",
+    "Fixed HTTP envelope response access for review and expected-value endpoints - now accesses response.json()['data'] (lines 1012-1070, 1215-1319)"
+  ]
+}

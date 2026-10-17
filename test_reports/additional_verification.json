@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-10-12T09:57:54.145496",
+  "base_url": "https://campus-launch-2.preview.emergentagent.com",
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0
+  },
+  "results": [
+    {
+      "test": "Existing own result 273f767b... returns 200",
+      "passed": true,
+      "details": "Status 200"
+    },
+    {
+      "test": "PDF report download returns 200 for owner",
+      "passed": true,
+      "details": "Status 200"
+    },
+    {
+      "test": "PDF report download returns 404 for other student",
+      "passed": true,
+      "details": "Status 404"
+    },
+    {
+      "test": "Owner phone NOT throttled (3 requests succeed)",
+      "passed": true,
+      "details": "3/3 succeeded"
+    }
+  ]
+}

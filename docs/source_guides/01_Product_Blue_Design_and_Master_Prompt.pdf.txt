@@ -1,0 +1,1293 @@
+=== PAGE 1 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 01 / 27
+The opening prompt and the
+five-volume workflow
+COPY INTO EMERGENT FIRST
+Build Tejas Exam Studio, a polished blue-themed exam practice platform for Tejas and a large
+student community. The name is provisional and must be configurable.
+Copy-ready master instruction
+Act as a senior product engineer, exam-domain analyst, accessible interface designer, and quality
+owner. Build a working application in reviewable increments. Students must take JEE Main, BITSAT,
+WBJEE, and COMEDK practice examinations using approved, year-specific exam profiles. Label
+WBJEE as a digital practice adaptation of an official OMR examination. Administrators will upload
+question PDFs and separate answer-key or solution PDFs. Import these into an editable review
+workflow, publish only approved papers, preserve question-level provenance, and present correct,
+reproducible results with at least 40 distinct analyses. Volume 4 specifies 60 analyses and the
+evidence each requires.
+Use a simple, beautiful, restrained blue interface. Prioritize correct question rendering, answer
+persistence, scoring, timer behavior, recoverable failures, and useful review over decorative
+effects. Design for a large registered audience, and prove simultaneous capacity through
+measured tests rather than claims. This is an independent practice service: never imply official
+affiliation or that platform percentile is an official exam percentile.
+Supply the volumes in this order
+First load this product and UX volume to establish the application purpose and screens. Next apply
+Volume 2 for official evidence, exam profiles, state transitions, and scoring rules. Then apply
+Volume 3 for PDF ingestion, question data, solutions, tagging, and editorial quality. Apply Volume 4
+for measurement definitions, results, cohort statistics, and recommendations. Finally apply Volume
+5 for architecture, security, operations, implementation stages, and release verification.
+Do not paste all five PDFs into one uncontrolled generation. In each stage ask Emergent to
+summarize the binding requirements, identify unresolved decisions, implement the agreed slice,
+show actual evidence, and update a requirement traceability checklist and changelog. Ask it to
+read the relevant pages again before changes that affect that area. Clear purpose, core features,
+and design guidance follow Emergent's prompting recommendations [V1-S3].
+Resolve conflicts explicitly
+Official source evidence outranks examples in this pack for official exam behavior. An approved,
+versioned exam profile implements that evidence. Content publication and analytics must follow
+that profile. If source evidence is unclear, show a review task and keep that profile unpublished.
+Product examples never override a verified rule. Development shortcuts must not silently become
+production behavior.
+ACCEPTANCE / PRECAUTIONS
+Demonstrate one complete student attempt and one complete administrator publishing flow
+before adding breadth.
+Maintain a decision log with source, owner, version, date, and affected acceptance tests.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.01  /  27
+
+
+=== PAGE 2 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 02 / 27
+Product promise, boundaries, and
+honest claims
+PRODUCT CONTRACT
+The product succeeds when a student can complete a dependable practice attempt and
+understand what to improve next without needing help to interpret the interface.
+The promise to the student
+Offer faithful practice for supported exam profiles, clear custom practice for selected chapters,
+readable questions and solutions, and analysis that identifies concrete actions. Preserve the
+distinction between an exam simulation and a teaching session. A simulation follows its approved
+navigation and submission rules; a learning session may reveal hints or explanations only if
+explicitly enabled. Every attempt shows its mode before starting and in its final report.
+Treat Tejas as an initial student persona, not as a special privileged account. His restricted chapter
+selection and integer-only practice requirements are supported through general configuration that
+any permitted student can use. Keep personal student names out of public marketing copy and
+shared examples unless they are intentional, approved content.
+Boundaries that prevent misleading behavior
+Do not promise official exam scores, admission chances, guaranteed ranks, or psychological
+diagnoses. Do not call a self-selected practice cohort the national population. Never produce a
+percentile when the metric definition lacks a suitable cohort, eligibility rules, or minimum evidence.
+Provide an unavailable state with a practical explanation. Predicted outcomes, when supported
+later, must have a model version, uncertainty, validation, and a clearly visible prediction label.
+Question quality and answer correctness are editorial responsibilities. AI may suggest extraction,
+tags, or explanations, but an attractive interface does not validate those outputs. Show content
+quality status to administrators and prevent unapproved content from appearing in student
+attempts.
+Scope for the first working release
+Deliver approved exam profiles, PDF import review, a reliable exam shell, scoring, question-wise
+review, basic progress history, and a meaningful subset of the Volume 4 analytics. Build the
+remaining analytics as available data permits. The required launch threshold is at least 40 correctly
+implemented, distinct analyses with explicit unavailable states; 60 is the complete specification.
+Repeated visualizations of the same number do not count as separate analyses.
+Acceptance language for Emergent
+Copy this requirement: Every visible product claim must correspond to a tested capability or a
+clearly stated limitation. Use actual application records for screenshots and demos. Label
+demonstration data. Produce a short release note that states what works, which exam profile
+versions were verified, and which planned capabilities remain unavailable.
+ACCEPTANCE / PRECAUTIONS
+The landing page says independent practice platform and names supported profiles accurately.
+Results distinguish measured values, derived values, unavailable analyses, and predictions.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.02  /  27
+
+
+=== PAGE 3 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 03 / 27
+Modes, personas, and role boundaries
+ONE PRODUCT, EXPLICIT MODES
+Use a small set of understandable modes and roles. Avoid granting privileges because a user
+reaches an administrator-looking URL.
+Student modes
+Full Simulation loads an approved complete paper, its exam profile, its time budget, and its allowed
+interaction rules. For WBJEE, this is a digital practice adaptation; never market it as an official CBT
+replica. Custom Practice lets a student select approved subjects, chapters, question types, count, and a
+supported time setting. Label integer-only JEE-style practice as Custom Practice when its composition
+differs from the official profile. Topic Learning is an optional later mode with hints and immediate
+explanations. Its attempts must be excluded from simulation comparison cohorts unless a metric
+specifically includes them.
+Each attempt stores mode, paper revision, exam-profile version, content release, language,
+accommodation setting, and cohort eligibility. These identifiers stay fixed after start. A saved attempt
+cannot acquire different scoring rules because an administrator updates the profile while it is in progress.
+Personas and the tasks they need
+A first-time student needs a quick orientation, one suitable paper, and confidence that answers save. A
+returning student needs unfinished attempts, previous errors, and a small next-action list. A parent or
+mentor may need an explicitly shared progress view, but sharing is optional and permission-controlled. A
+content editor needs PDF comparison, unresolved import issues, question editing, and validation. An
+exam-rule reviewer needs evidence and profile approval. An operator needs incident visibility and
+support tools with limited access.
+Role design
+Define Student, Content Editor, Content Reviewer, Exam Profile Reviewer, Support Operator, and
+Platform Administrator as permission sets. Small teams may assign multiple sets to a person, but each
+privileged action still requires its relevant permission. Separate uploading from publication approval by
+default. Support personnel cannot browse complete student answer histories merely because they can
+resolve a login ticket.
+Invite and remove administrator access through an auditable interface. Require additional authentication
+for sensitive actions as specified in Volume 5. Never expose role changes, answer keys, or unpublished
+solutions to public clients.
+Mode selection interaction
+Present a simple choice with a one-sentence explanation and clear consequence. A simulation card
+states the profile and separate result and solution release conditions, including any scheduled embargo.
+A custom-practice card says that chapter and composition settings differ from a full exam. Show a
+confirmation if changing a configured practice mode would discard selections.
+ACCEPTANCE / PRECAUTIONS
+A student token cannot publish a paper, read unreleased solutions, or assign roles.
+Reports and comparison filters always show or retain the attempt mode.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.03  /  27
+
+
+=== PAGE 4 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 04 / 27
+The restrained blue design system
+EXACT VISUAL TOKENS
+Build a consistent interface from tokens. The exam workspace should feel calm, legible, and
+predictable for a long attempt.
+Color tokens and their purpose
+Use primary #1D4ED8, primary-hover #1E40AF, primary-soft #EFF6FF, page-background
+#F5F8FD, surface #FFFFFF, text-strong #0F172A, text-muted #475569, border #CBD5E1, success
+#166534, success-soft #F0FDF4, warning #92400E, warning-soft #FFFBEB, danger #B91C1C, and
+danger-soft #FEF2F2. Use focus-ring #2563EB with a visible outer offset. Verify every actual
+text/background pairing and state rather than assuming a token alone passes accessibility.
+Status must combine color with a label, symbol, or shape. Marked-for-review, answered, and
+unanswered states must remain distinguishable in grayscale. Avoid gradients behind mathematical
+content, low-contrast pastel text, pulsing urgency effects, and decorative backgrounds in the exam
+area.
+Typography and spacing
+Use Inter when available, with system-ui and sans-serif fallbacks. Use a separate tested math
+renderer and its compatible fonts. Desktop body text is 16 px with 1.5 line height; question content
+defaults to 18 px with 1.55 line height and offers a readable size setting. Small metadata is 14 px.
+Headings use 24, 30, or 36 px only where hierarchy warrants it. Avoid condensing body text to fit a
+card.
+Use spacing steps 4, 8, 12, 16, 24, 32, 48, and 64 px. Cards have 12 px corner radius; controls
+have 8 px radius; dialogs have 16 px radius. Default card padding is 24 px on desktop and 16 px on
+narrow screens. Use light borders and restrained shadows. The question canvas is the visual
+center.
+Layout tokens
+Set reading content to a comfortable maximum width of 720 px, general dashboard content to
+1200 px, and the desktop exam palette to roughly 280 px where space permits. Treat these as
+layout targets that must adapt without clipping. Use a consistent header, breadcrumb, page title,
+and action placement. Avoid displaying more than one competing primary action in the same
+decision area.
+Implementation direction
+Define the tokens centrally as CSS variables and application theme values. Components consume
+tokens rather than hard-coded ad hoc colors. Ship light mode first; dark mode is optional only after
+question figures, math, status colors, contrast, and screenshots have all been verified.
+ACCEPTANCE / PRECAUTIONS
+Check the complete theme against WCAG 2.2 contrast and focus expectations [V1-S1].
+At 200% zoom, controls remain visible and no question or answer is clipped.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.04  /  27
+
+
+=== PAGE 5 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 05 / 27
+Components and predictable interaction
+UI CONTRACT
+A component is complete only when its loading, focus, disabled, error, and success states are
+understandable.
+The shared component inventory
+Create buttons, text fields, selects, numeric answer fields, radio options, checkboxes, tabs, dialogs,
+tooltips, notices, skeletons, badges, empty states, tables, pagination, paper cards, question cards,
+palette cells, save indicators, and metric cards. Document permitted variants and accessibility
+semantics. Keep student and administrator interfaces visually related while allowing denser editorial
+tools.
+Buttons must have an action label: Start simulation, Continue attempt, Save and next, Review paper,
+or Publish approved paper. Avoid generic Submit wherever it hides what will happen. Show a loading
+label only when a request is actually running. Prevent duplicate actions through the mutation
+contract, with interface feedback that does not depend solely on disabling a button.
+Interaction details
+A modal dialog announces its purpose, receives focus, traps focus while open, and returns focus to its
+trigger when dismissed. Keep destructive actions visually distinct and require an intentional choice for
+the affected record. Menus close predictably with Escape. Tooltip content is supplemental;
+instructions required to complete an action must be visible without hovering.
+For editable fields, associate labels, guidance, and validation errors programmatically. Preserve
+entered values after a failed request. Set focus to the first relevant error when a form cannot proceed,
+without destroying the rest of the input. Keep inline feedback close to the control; use a summary
+when there are several failures.
+Exam-specific exceptions
+Use stable option positions throughout an attempt. Do not animate selected options, shuffle answers
+after a revisit, or show correctness before the mode permits it. A numeric field must reflect the
+allowed answer syntax of the approved profile; it must not infer permissibility from a browser
+keyboard alone. Keyboard shortcuts are discoverable and configurable, and must not intercept text
+entry.
+Copy-ready implementation requirement
+Build a component gallery route accessible only to the team. Show every interaction state with actual
+semantics, not screenshots. Include a long mathematical stem, a tall figure, mixed-language content,
+a large option, a failed save, and a narrow viewport. Reuse these fixtures in device checks. Document
+any deliberate differences between the official simulation controls and ordinary dashboard controls.
+ACCEPTANCE / PRECAUTIONS
+Keyboard users can activate, exit, and revisit every interactive component.
+Disabled controls explain their condition when the user needs that explanation; success messages
+reflect server-confirmed outcomes.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.05  /  27
+
+
+=== PAGE 6 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 06 / 27
+Routes, navigation, and permission
+guards
+SITEMAP THAT IMPLEMENTS THE PRODUCT
+Create clear destinations and preserve context through navigation. A route list is not
+sufficient without data access and state behavior.
+Student routes
+Use / for the public landing page; /sign-in and /onboarding for access and orientation; /dashboard
+for the student home; /exams for the catalog; /exams/:paperId for details; /practice/new for custom
+configuration; /attempts/:attemptId/instructions for readiness; /attempts/:attemptId for the exam
+shell; /attempts/:attemptId/results for the overview; and /attempts/:attemptId/review/:questionId
+for question-wise review.
+Use /analytics for longitudinal views, /library for bookmarked and previously missed questions,
+/planner for next actions, /profile for preferences and permitted data controls, and /help for product
+support. Keep URLs stable enough that a student can reopen a permitted result link. A shared link
+must apply its own authorization policy and never inherit accidental access from a guessed
+identifier.
+Administrator routes
+Provide /admin/papers, /admin/imports/:importId, /admin/questions/:questionId, /admin/profiles,
+/admin/reviews, /admin/cohorts, /admin/support, and /admin/audit with role-specific guards. Route
+guards improve navigation but server authorization controls every record and action. Editors do
+not gain access to other organizations or all student records by changing a URL.
+Navigation behavior
+The student sidebar groups Home, Exams, Results, Question Library, and Planner. Hide optional
+unfinished areas. Keep the active destination visible and retain catalog filters when returning from
+exam details. The exam shell uses its own focused layout; ordinary marketing navigation must not
+distract from an active attempt. Navigating away invokes only the warnings and continuation
+behavior permitted by that profile.
+Handle not-found, unavailable, forbidden, and signed-out states separately. If an expired session
+can be renewed, preserve the intended safe destination. Do not put sensitive answer values,
+private student identifiers, or access tokens into URLs.
+Deep-link acceptance
+Copy this direction: Test each protected route as an owner, another student, a signed-out visitor,
+and each relevant administrator role. Verify the API denies forbidden data before it reaches the
+client. Opening an already-submitted attempt redirects to its permitted report; opening an
+unavailable paper gives an explanatory page rather than a broken exam shell.
+ACCEPTANCE / PRECAUTIONS
+Browser Back restores useful catalog or review context without restarting an attempt.
+A forged URL cannot reveal another student report or unpublished answer key.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.06  /  27
+
+
+=== PAGE 7 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 07 / 27
+Onboarding, sign-in, and a useful first
+session
+REDUCE FRICTION WITHOUT HIDING CHOICES
+A new student should understand the platform and reach a suitable paper quickly. Collect only
+information with a clear product purpose.
+The onboarding sequence
+Start with account access, then ask for a display name, target exams, preferred interface language,
+and an optional preparation stage. Explain why each field is useful. Keep examination year
+selectable rather than inferring it from age or school year. Allow students to skip optional
+personalization and change it later. Do not request marks, school, phone number, or demographic
+details simply to make onboarding look complete.
+Offer two first actions: Try the short interface rehearsal or Browse papers. The rehearsal uses
+demonstration questions, records no competitive percentile, and clearly says it is not an official
+mock. Returning students see Continue attempt only when a continuable attempt exists under its
+profile rules.
+Account behavior
+Use the authentication mechanisms implemented and verified in Volume 5. Provide clear request,
+confirmation, expired-link, retry, and signed-out states. Avoid revealing whether a particular email
+belongs to a student through uncontrolled account lookup. Keep sign-in feedback consistent and
+specific enough to help the person using it. Support deliberate sign-out and explain what happens to
+a running attempt before the student takes that action.
+Treat a student account as personal. If mentor views are included later, the student initiates a
+scoped sharing invitation, sees what will be shared, and can revoke it. No public profile or
+leaderboard participation is assumed at registration.
+Preferences and responsible defaults
+Store readable question size, language, motion preference, notification choices, and permitted
+accessibility preferences. Provide an explicit first-session privacy notice with links to the applicable
+policy. Handling minors, consent, and data retention requires the applicable implementation review
+described in Volume 5; do not invent an age threshold or call a checkbox legally sufficient.
+Default to a quiet dashboard with no autoplay, no notification barrage, and no pressure countdown
+unrelated to an exam. Do not turn the first login into a mandatory purchase or a multi-screen survey.
+First-session quality
+Present the chosen exam, a suggested available paper, its mode, and its expected time
+commitment. If suitable approved content is unavailable, say so and show alternatives without
+silently switching examination formats. Show a help link near the first start action.
+ACCEPTANCE / PRECAUTIONS
+A new account can start a suitable available paper without completing optional fields.
+Refreshing onboarding, signing out, and returning do not create duplicate accounts or discard valid
+preferences.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.07  /  27
+
+
+=== PAGE 8 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 08 / 27
+Catalog, search, and paper discovery
+HELP STUDENTS PICK THE RIGHT ATTEMPT
+Make the exam catalog informative enough to choose a paper without exposing unreleased
+questions or solutions.
+Catalog structure
+Provide tabs or filters for exam family, profile year, Full Simulation or Custom Practice, subject,
+chapter coverage, duration, language, difficulty descriptor, and availability. Display only meaningful
+filters backed by indexed approved data. Use an obvious Clear filters action and preserve selections
+in safe URL parameters. Search matches paper titles and approved topic labels; it does not leak
+private solution text.
+Each paper card displays title, examination family, profile version or year, mode, subject coverage,
+question count, permitted duration summary, content quality status, and the action available to this
+student. A published card can say Reviewed. Avoid a decorative Verified badge unless the exact
+verification scope is explained.
+Selecting and comparing papers
+A paper detail link is separate from Start. Show completed-attempt count and a clearly labeled latest
+personal score where useful. A student who already started the same assigned attempt sees
+Continue, not another ambiguous Start button. An optional Compare view may show up to three
+papers using comparable attributes; it must not imply their raw marks are directly comparable
+across examination families.
+Display difficulty labels as editorial or empirical according to their source. Empirical labels need their
+cohort and version; new papers can have an editorial label or show Not yet calibrated. Do not
+fabricate the number of students who took a paper.
+Empty and unavailable states
+When filters match nothing, retain the filters, explain the mismatch, and offer to remove the most
+restrictive selection. When the catalog is empty, say No published papers are available yet. If access
+is required, explain the applicable entitlement accurately. If an import is still under review, hide it
+from students or label it as unavailable without offering Start.
+Search loading must not resemble an empty result. A failed request shows Retry while preserving the
+query. Keep prior results visibly stale only if that state is clear and safe.
+Implementation direction
+Copy this requirement: Build catalog search with stable pagination or a tested incremental-loading
+strategy, keyboard-operable filters, and understandable result counts. Test a large paper list with
+long names and many chapters. Ensure the backend applies publication and access filters before
+returning records, rather than filtering restricted records only in the browser.
+ACCEPTANCE / PRECAUTIONS
+A student can identify exam family, mode, and time commitment before starting.
+No unpublished questions or solutions are included in catalog responses.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.08  /  27
+
+
+=== PAGE 9 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 09 / 27
+Exam details and pre-start readiness
+MAKE THE COMMITMENT UNDERSTANDABLE
+The exam detail page should answer what the student will take, under which rules, and what is
+needed for a reliable attempt.
+Information before the start action
+Show the paper title, independent practice disclaimer, exam family, year-specific profile, mode,
+language, subject and section structure, question count, duration summary, scoring summary, and
+publication revision. All numerical rules come from Volume 2 and the approved configuration. Link
+to the expanded instructions. Custom-practice details show selected chapters and deviations from a
+full simulation prominently.
+Explain whether the student can pause, resume after disconnection, move across sections, revisit
+answers, and change answers after advancing. Use the actual approved profile behavior. Avoid
+universal phrases such as Resume anytime when only some modes permit it. State when solutions
+become available and which events end the attempt.
+Readiness check
+Check whether the browser can load the question assets and communicate with the attempt
+service. Offer a short demonstration of selecting an option, entering a numeric answer, marking
+review, and moving between permitted questions. Show recommended device conditions as
+guidance; do not require a desktop if the product supports phones. Keep the readiness check
+separate from a guarantee that the connection will never fail.
+Show current connectivity and a tested save-status example. If prerequisites fail, describe the
+failing requirement and provide a retry path. Do not allow a failed readiness check to consume an
+examination timer unintentionally. Accommodations must be selected and authorized before the
+attempt snapshots its profile.
+Starting without duplicate attempts
+The start button creates or resumes the appropriate attempt through an idempotent server action.
+Show Creating attempt and move to instructions only after confirmation. A double click, refresh, or
+repeated network request must not create duplicate assigned attempts. If a practice policy
+intentionally allows another attempt, label it Start another attempt and describe any comparison
+consequences.
+Version and fairness disclosure
+Store the displayed paper revision and rule version with the attempt. If the paper becomes
+unavailable before start, show a clear explanation and return to discovery. If a published correction
+affects completed attempts, use the revision and regrade procedure in Volumes 3 and 5; do not
+quietly replace the report that the student previously saw.
+ACCEPTANCE / PRECAUTIONS
+The shown rules match the configuration that the server snapshots at start.
+A failed start request preserves selections and offers a safe retry without duplicate records.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.09  /  27
+
+
+=== PAGE 10 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 10 / 27
+Instructions and the interface rehearsal
+CONFIRM UNDERSTANDING, NOT JUST A CHECKBOX
+Use concise instructions with expandable detail. Important consequences must remain visible
+before the timer begins.
+Instruction page composition
+Begin with the mode, examination profile, and duration. Present answer types and scoring,
+navigation restrictions, save behavior, review markers, timing, submission, and permitted
+continuation as separate readable blocks. Include an accessible legend for palette statuses.
+Numerical and transition details are supplied by Volume 2. Show a short section summary even
+when the full rule text is available below.
+Place the primary Begin timed attempt action at the bottom of the required instruction content, with
+the time consequence beside it. Do not preselect a rule-acceptance control. Agreement records
+acknowledgment of these instructions; it is not a substitute for an actual working save and timer
+system. If rules have materially changed since a previous attempt, highlight the change.
+Rehearsal behavior
+Offer a separate untimed rehearsal using obvious demonstration content. Practice choosing an
+option, clearing a permitted answer, entering a numeric value, marking review, opening the palette,
+and confirming a demonstration submission. The rehearsal must reflect the interaction affordances
+of the selected profile, while avoiding false claims that it reproduces every official
+examination-room condition.
+After rehearsal, return to instructions without carrying answers into the real attempt. Explain any
+control that differs by mode, such as hints being available in learning practice but not simulation.
+The student may skip rehearsal after understanding the controls.
+Accessibility and clarity
+Provide a textual status legend, visible focus, readable tables, and an accessible order for screen
+readers. Do not express review status using colors alone. Keep rule sentences short. Explain
+ambiguous terms such as attempted, submitted, and marked for review using the approved state
+definitions. Provide a translated interface where approved, without automatically translating
+mathematical question content.
+Instruction acceptance evidence
+Copy this acceptance request into Emergent: Demonstrate instructions for each supported
+examination family and for custom integer practice. Show that starting begins the correct timer only
+after the server transition succeeds. Test back navigation, refresh, delayed network response,
+double activation, and session expiry. No request failure may leave the student believing the exam
+started when the server has not created an active attempt.
+ACCEPTANCE / PRECAUTIONS
+A student can explain when an answer is saved and when an attempt becomes final.
+The rehearsal does not contaminate analytics, rankings, or actual attempt responses.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.10  /  27
+
+
+=== PAGE 11 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 11 / 27
+The desktop examination workspace
+FOCUS ON THE QUESTION
+Implement the exam shell as a dedicated workspace with stable controls and no unnecessary
+competing content.
+Layout and reading
+Use a compact top bar for paper identity, the approved timer display, connection and save status,
+and a Help or instructions control. Place the current section and question identifier above the main
+question canvas. The desktop palette occupies the right panel when width allows. Keep the answer
+controls and profile-permitted navigation actions near the question, with enough space that long
+diagrams do not overlap them.
+Render the full question stem, options, tables, formulas, units, and figure captions. Preserve
+meaningful reading order. Allow students to zoom an image in an accessible viewer without
+changing answer state. The question number in the interface is a display position; the backend uses
+a stable question identifier. Do not load or reveal the answer key in the exam client.
+Answer interactions
+For single-choice questions, support exactly the selection behavior of the configured type.
+Multi-select and numeric controls appear only when that profile and question schema permit them.
+Use visible labels, focus states, and error messaging. Input validation distinguishes an invalid
+format from an incorrect answer; correctness is withheld until the mode allows release.
+Use Save and next, Clear response, Mark for review, and navigation controls only in the
+combinations defined by the profile. An answer and a review marker may coexist if that is
+permitted. Never represent review status as a substitute for a response value. The transition engine
+in Volume 2 decides the authoritative state.
+Distraction and stability rules
+No advertisements, upsells, achievement popups, public chat, recommendation panels, or
+celebratory animation appear during a simulation. Do not shift the content vertically when a save
+succeeds. Keep the question scroll position stable while updating background indicators. Refresh
+recovers the permitted authoritative attempt state rather than reconstructing it from a visual status
+color.
+Copy-ready implementation direction
+Build the shell with fixtures for a short MCQ, long derivation, scanned figure, numeric response,
+missing asset, and section-specific restriction. Demonstrate the same server-side attempt through
+answer selection, revisit, reload, and submission. Verify the recorded response exactly matches the
+selected option or submitted value and that the interface does not imply a successful save before
+acknowledgment.
+ACCEPTANCE / PRECAUTIONS
+Long mathematics and figures remain readable without overlapping timer or actions.
+The application never exposes unreleased correct answers in exam HTML, bundles, or API payloads.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.11  /  27
+
+
+=== PAGE 12 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 12 / 27
+Question navigation and status
+semantics
+THE PALETTE IS A VIEW OF STATE
+Students must be able to locate unfinished work without interpreting hidden status rules or losing a
+response during navigation.
+Palette model
+Use the approved profile to determine which statuses exist and how they map to saved responses and
+review markers. A common product display may distinguish unseen, seen without response, answered,
+marked for review, and answered plus marked for review when those states are permitted. The
+authoritative mappings, transitions, and scoring consequences come from Volume 2; do not assume this
+display vocabulary applies unchanged to every exam.
+Every palette cell has a visible question number, an accessible label containing position and status, a
+focus state, and a distinct current-question indicator. Include a persistent legend or an easily reachable
+legend control. For many questions, use a scrollable palette that keeps the current section clear and does
+not trap keyboard users.
+Moving between questions
+Changing questions follows the configured navigation policy in Volume 2. Distinguish unsaved drafts from
+responses committed by an explicit SAVE or REVIEW action permitted by the profile. If navigation discards
+a draft under that policy, explain the consequence in instructions and the unsaved indicator; preserve the
+committed answer. Background draft recovery is never an exam commitment. Handle pending commits
+under Volume 5.
+Where section access is restricted, unavailable destinations explain the reason. A profile may allow
+returning to a question, forbid certain backtracking, or impose section timing. Implement those behaviors
+from the configuration rather than disabling controls cosmetically. Student-visible instructions and server
+enforcement must agree.
+Keyboard and visibility
+Provide predictable keyboard access to the palette, answer controls, and navigation actions. Announce
+question changes without repeatedly reading the entire dashboard. Do not steal focus when a background
+save completes. On narrow screens the palette opens as a drawer with an accessible close action and
+returns focus to its trigger.
+Show section-level counts only from current authoritative state. If an event is still awaiting
+acknowledgment, separate its pending indicator from the confirmed count. Do not round or estimate the
+number of answered questions.
+Verification direction
+Copy this test requirement: Exercise every allowed transition for each profile, including selecting then
+clearing, answering then marking review, viewing without answering, revisiting a saved numeric answer,
+and attempting a forbidden transition. Compare the resulting palette, saved response record, and scored
+result against the same state-transition specification.
+ACCEPTANCE / PRECAUTIONS
+No palette state is meaningful only through color.
+Rapid navigation does not lose an answer or create a false confirmed count.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.12  /  27
+
+
+=== PAGE 13 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 13 / 27
+Timing, save feedback, and recoverable
+interruption
+TRUST MUST BE VISIBLE
+Make the timer and save system trustworthy through clear status and recovery behavior. A
+visible countdown alone is not an examination clock.
+Timer presentation
+Display time remaining using the authoritative attempt policy and server time reference described in
+Volumes 2 and 5. Keep its location stable. Show low-time warnings only at configured thresholds, with
+text and accessible announcements that do not continually interrupt screen readers. A browser clock
+change, hidden tab, or refresh must not reset or extend the allowed time.
+If a mode supports pause, make the paused state and restart conditions explicit. If it does not, a
+connection interruption must not appear to pause the examination. Do not offer controls that conflict
+with the approved rules. Show any authorized accommodation in the instructions and stored attempt
+metadata.
+Save-state vocabulary
+Use Unsaved selection for an uncommitted draft. Use Saving response only while an explicit SAVE or
+REVIEW commit request is pending, Response saved after server acknowledgment, Connection lost -
+response pending when appropriate, and Save failed - retry available when recovery requires action.
+Distinguish recoverable drafts, queued commits, and server-confirmed responses. Avoid a green saved
+badge driven only by a local browser write.
+Keep pending counts small and relevant. When several commits are queued, state how many await
+acknowledgment. A failed numeric validation identifies the syntax problem without implying that the
+answer is academically wrong. Do not permit UI retries to reorder or overwrite newer responses with
+stale requests.
+Interruption and return
+After a refresh, device reconnection, or session renewal, fetch the authoritative attempt and reconcile
+permitted pending commits according to the conflict policy. A recovered draft remains uncommitted.
+Show Restoring attempt state until this finishes. If an attempt expired or was already submitted,
+present its terminal state and explain where queued changes stand.
+If using multiple devices is restricted, show a clear message and follow a tested ownership policy. A
+new device must not silently create a second simultaneous writable copy. Recovery should not require
+a student to guess which answers were saved.
+Submission feedback
+The final confirmation summarizes the consequences and relevant response counts. After confirmation
+show Submitting attempt until the server confirms completion. Then display receipt time and result
+availability. A network failure does not produce a fake success page; safe retry uses the same
+submission identity.
+ACCEPTANCE / PRECAUTIONS
+Reload, offline recovery, and duplicate submission demonstrations show consistent server records.
+Students can tell pending, confirmed, expired, and submitted states apart without developer tools.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.13  /  27
+
+
+=== PAGE 14 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 14 / 27
+Mobile and narrow-screen examination
+experience
+RESPONSIVE WITHOUT CHANGING THE RULES
+Support phones through explicit design and verification. A smaller screen must not introduce
+different scoring, timing, or response persistence.
+Narrow-screen layout
+Keep the timer, current question identity, and save state visible in a compact top bar. Stack the
+question content and answer controls. Move the palette into an accessible drawer or sheet with a
+visible trigger and current-status summary. Use a sticky action row only when it does not cover
+content or the browser keyboard. Allow scrolling through long questions without trapping the student
+between fixed bars.
+Use sufficiently large touch targets and spacing so Clear response and Save and next cannot be
+confused by a small movement. Meet the applicable WCAG 2.2 target-size requirements and test
+actual controls [V1-S1]. Do not rely on swipe gestures for essential actions. A swipe may be an
+optional shortcut only if it is safe, discoverable, and consistent with the selected profile.
+Mathematics and figures
+Responsive equations must remain legible and keep semantic order. For an equation or table that
+genuinely needs more width, offer controlled horizontal scrolling inside that content region and a
+visual cue. Do not force the entire page to scroll sideways. Figures may open in a zoomable viewer
+with an accessible caption and close action.
+Preserve aspect ratio and prevent important labels from being cropped. If a scan is too blurred for a
+phone, flag a content-quality issue rather than claiming responsiveness fixes it. For numeric
+answers, select a useful keyboard without relying on it to enforce valid syntax.
+Device interruptions
+Test rotation, browser address-bar changes, software keyboard appearance, incoming
+backgrounding, connection changes, and memory-related reloads. Returning to the page applies the
+same recovery and timer policy as desktop. A mobile browser tab must not receive unlimited time
+because animation frames paused.
+Avoid opening new tabs for core examination controls. A solution viewer after submission may use a
+dedicated route, but the student should be able to return to the same review position.
+Verification direction
+Copy this requirement: Test real narrow-screen behavior using representative Android and iOS
+browsers, an ordinary laptop, and a tablet. Confirm the full path from onboarding to final review with
+actual data. Include long mathematics, tall diagrams, large text, and failed saves. Emergent
+recommends real end-to-end and device checks before sharing [V1-S2].
+ACCEPTANCE / PRECAUTIONS
+At narrow widths, the software keyboard never hides the active numeric input or its essential action.
+The same saved attempt produces the same result across supported devices.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.14  /  27
+
+
+=== PAGE 15 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 15 / 27
+Results overview and the first useful
+explanation
+LEAD WITH MEASURED OUTCOMES
+The first result screen should explain the attempt clearly before asking the student to explore
+detailed charts.
+Overview composition
+Show paper identity, mode, profile version, attempt date, submission state, and whether the result is
+final or provisional. Place the measured score and its maximum or applicable scale first. Follow with
+subject or section contribution, correct and incorrect counts, unattempted count, time use, and one
+concise next-step panel. Every value must use the definition in Volume 4 and the scoring rules in
+Volume 2.
+Use a small number of meaningful cards instead of a wall of 60 metrics. A card should show value,
+unit, denominator, definition link, and data status where relevant. Keep charts consistent with table
+values. Explain negative marks and unanswered questions using the configured rules rather than a
+generic interpretation.
+Result authority and update states
+Show Pending evaluation when the server has accepted the attempt but scoring is not yet available.
+A failed analytics job does not invalidate a correctly stored submission. Allow the score to appear
+separately from later analyses if the workflow supports that separation. Clearly distinguish
+unavailable analysis from zero.
+If an approved answer-key correction creates a regrade, show the report revision and a concise
+explanation of changed outcomes. Preserve access to the change history where permitted. Do not
+overwrite a previous score without recording the correction and notifying affected students through
+the approved product channels.
+Percentile and comparison placement
+Display platform percentile only when the eligibility and evidence rules in Volume 4 are satisfied. Put
+the cohort label, eligible sample size, paper or comparability scope, and computation time near it.
+Show an explanatory unavailable state for a small, incompatible, or contaminated cohort. Never
+relabel this number Official NTA percentile or national rank.
+Keep comparison optional and secondary to learning. If a leaderboard is included, its visibility and
+identity rules must be explicit and student-controlled. A result report remains useful without a public
+ranking.
+Calls to action
+Offer Review questions as the main next action, then Explore analyses and Save next steps. Provide
+a clean printable or exportable report if included in the approved scope. Exports repeat mode,
+version, cohort labels, and unavailable states so a downloaded file cannot misrepresent the result.
+ACCEPTANCE / PRECAUTIONS
+Scores and counts reconcile with the stored response-level scoring ledger.
+The report never replaces missing evidence with a reassuring invented metric.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.15  /  27
+
+
+=== PAGE 16 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 16 / 27
+Question-wise review and solution
+presentation
+CONNECT EACH ERROR TO EVIDENCE
+A student should be able to inspect any question, understand the recorded response, and follow
+its approved solution without losing review context.
+Question review layout
+Show original stem and figures, recorded final response, approved answer, outcome, awarded marks,
+response or review status, and relevant time measurements with their interpretation limits. Include
+subject, chapter, concept, question type, difficulty source, and content revision tags. Use a clear
+visual distinction between Your answer and Approved answer; correctness is also written in text.
+Allow filters for correct, incorrect, unanswered, marked review, subject, chapter, and supported issue
+categories. Navigate previous and next within the current filtered set. Keep the student's place when
+returning from a solution image or related question. Stable question identifiers prevent review from
+pointing at the wrong item after ordering changes.
+Solutions from supplied PDFs
+Attach an approved question-to-solution mapping, not merely the entire solution PDF beneath every
+question. Present the explanation as readable structured content when reliable extraction is
+approved, and retain a source-page crop or PDF reference for provenance. Preserve formulas, units,
+diagrams, and the logical order of steps. When only a reviewed page image is available, label its
+format accurately.
+The answer key and the worked solution may disagree. Volume 3 defines the editorial resolution
+workflow. Students must not see an unresolved contradiction presented as authoritative. If a solution
+is unavailable, say Solution not yet approved rather than generating an unchecked explanation on
+demand.
+Student annotations and issue reports
+Permit private bookmarks and notes if included in scope. A structured issue report can identify
+unclear question, suspected wrong answer, mismatched solution, poor figure, or missing explanation.
+Include the question and attempt identifiers automatically. A report creates a review item; it does not
+change the student score immediately.
+Learning suggestions may point to an approved concept explanation or another practice set. Do not
+tell a student that a single wrong answer proves a stable weakness. Separate observed errors from
+suggested causes.
+Question-level cohort information
+Show empirical solve rate, option distribution, or time comparison only when the Volume 4 evidence
+gates pass. Question-wise percentile refers to a specifically defined comparable performance metric,
+not a percentile inherent in the question. Explain exclusions and missing evidence near the chart.
+ACCEPTANCE / PRECAUTIONS
+Each solution belongs to the correct stable question identifier and reviewed content version.
+A submitted issue can be tracked without exposing private notes to other students.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.16  /  27
+
+
+=== PAGE 17 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 17 / 27
+Analytics navigation and interpretation
+60 DEFINITIONS, A SMALL NUMBER OF CLEAR VIEWS
+Use the Volume 4 analytics registry to organize analysis. Do not invent additional scores merely
+to fill the result dashboard.
+Information architecture
+Group analytics into Score and coverage, Accuracy and response choices, Time and pacing, Topic and
+skill evidence, Strategy and review behavior, Cohort comparisons, Progress over attempts, and
+Recommendations. These groups are navigation containers, not separate metrics. The registry
+defines which individual analyses count toward the required minimum of 40 and the complete target
+of 60.
+Open the most relevant group from the result overview or question review. Provide a persistent paper
+and attempt context, then allow permitted filters by subject, chapter, question type, and time
+window. A longitudinal view shows exactly which attempts are included and why. Do not combine
+custom learning and full simulation attempts by default.
+Metric card contract
+Each analytic panel exposes a plain-language definition, calculation basis, denominator or population,
+unit, eligibility, exclusions, version, and unavailable reason where needed. Include an expandable
+calculation example for advanced metrics. Charts have accessible summaries and a table alternative.
+A tooltip alone is insufficient for crucial caveats.
+Values must come from the tested analytics layer. The interface never computes a competing
+percentile formula from a convenient subset of browser data. Repeated visualizations, renamed
+totals, and sorting the same score by a different color do not count as new analyses.
+Risk, precaution, and interpretation
+Risk means a defined educational or strategy observation, such as repeated negative-mark exposure
+or poor time allocation, with evidence and a proportionate action. It is not a diagnosis of personality,
+intelligence, anxiety, or future success. Precautions are specific: practice response validation, reserve
+review time, or verify a known unit conversion, when the recorded data supports the suggestion.
+Mark uncertainty where evidence is sparse or time telemetry is incomplete. One session does not
+establish a reliable trend. A graph across incomparable papers must explain normalization or show
+the series separately. Avoid false precision in recommendation confidence.
+Copy-ready requirement
+For each implemented analysis, show a demonstration record with the underlying inputs and the
+expected output from a reproducible fixture. Show zero, insufficient-data, filtered-empty, and
+permission-restricted cases. Let administrators see analytics job health without exposing extra
+student data. Complete definitions and tests before decorative chart styling.
+ACCEPTANCE / PRECAUTIONS
+At least 40 distinct registry analyses work, with honest unavailable states where evidence is absent.
+A student can identify the cohort and denominator behind any displayed comparative number.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.17  /  27
+
+
+=== PAGE 18 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 18 / 27
+Question library and an actionable
+study planner
+TURN REVIEW INTO A SMALL NEXT STEP
+The platform should help students act on results without creating a complex productivity
+application they must maintain.
+Private question library
+Collect bookmarked questions, previously incorrect questions, unanswered reviewed questions, and
+questions assigned through approved practice sets. Let students filter by exam family, subject,
+chapter, concept, question type, and last outcome. A saved question references its stable content
+identifier and approved revision. If content is corrected or withdrawn, reflect that status and retain the
+explanation needed to understand prior attempt records.
+Separate private notes from platform explanations and public content. A student can remove a
+bookmark without deleting attempt history. Search shows only questions the student is entitled to
+view. Questions from unreleased papers or active attempts with hidden solutions must not become
+visible through the library.
+Planner basics
+Offer a short list of concrete actions based on recent review: revisit a small set of mistakes, complete
+one concept practice set, or take the next comparable simulation. Each action includes the evidence
+that generated it, an estimated commitment if justified, and an easy completion or dismiss control. Use
+optional dates and reminders only if implemented and permitted.
+Support student-created tasks such as revise integration methods or attempt WBJEE practice. Keep
+planner items separate from inferred recommendations. Recommendations should not silently
+overwrite a student's plan. Allow snooze, dismiss with a reason, and mark complete without claiming
+mastery from a checkbox.
+Personalization limits
+Avoid unsupported promises such as Your score will improve by 20 marks if you complete this task.
+Explain suggestions with observed evidence and conservative language. If a chapter has too few
+questions, say More evidence is needed rather than classifying it as mastered or weak. Retakes may
+reflect memory; longitudinal comparisons must treat that explicitly.
+A recommendation engine can begin with transparent tested rules. Do not add opaque AI ranking
+merely to claim personalization. Advanced model-generated plans require the validation and audit
+standards in Volume 4.
+Implementation priority
+Copy this direction: Launch bookmarks and a simple next-action list after the exam and review flows
+work. Keep a richer planner, reminders, mentor collaboration, and spaced-repetition scheduling as
+later increments. Show an actual mistake flowing from submitted result to library to a new approved
+practice session, with permissions preserved across the entire flow.
+ACCEPTANCE / PRECAUTIONS
+Private notes never appear in another student account or public cohort analysis.
+A suggested task states its evidence and remains editable or dismissible by the student.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.18  /  27
+
+
+=== PAGE 19 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 19 / 27
+Administrator screens and editorial
+control
+MAKE PDF REVIEW PRACTICAL
+Administrators need an efficient workbench that surfaces uncertainty. Publication quality cannot
+depend on remembering a hidden checklist.
+Import workbench
+Provide an upload screen for question PDF, answer-key PDF, and solution PDF, allowing the answer key
+and solutions to share one source when appropriate. Ask for examination family, candidate profile,
+language, paper title, and source rights declaration or record as required by the deployment policy.
+Show upload status, processing stages, and meaningful extraction errors.
+The review screen pairs the source page or crop with extracted question content. Highlight
+low-confidence boundaries, option parsing, formulas, diagrams, missing answers, ambiguous
+mappings, and duplicate candidates. Editors can correct text, preserve page references, split merged
+questions, and link the correct solution. Volume 3 specifies the data and pipeline behavior.
+Review and publication
+Show the paper inventory with draft, processing, needs review, approved, published, corrected, and
+withdrawn statuses as applicable. Publication requires the explicit checks in Volumes 2 and 3: profile
+compatibility, completeness, answer-key validation, solution mapping where provided, figure
+readability, permitted composition, and reviewer sign-off. Display blockers and warnings separately.
+Require a preview in the student exam shell before publication. Administrators can take a non-public
+verification attempt and inspect the scoring ledger. The preview is excluded from student analytics and
+comparisons. Editing a published paper creates a revision workflow instead of silently mutating an
+active attempt.
+Profile and operational screens
+The profile editor shows official source links, effective year, rule fields, reviewer decision, and the
+impact of a proposed change. Keep unverified rules visibly unpublished. Cohort tools show inclusion
+policy, eligible sample size, contamination checks, and metric availability; they do not manufacture a
+high percentile for marketing.
+Support screens search permitted account and attempt identifiers, show save or submission status
+relevant to the incident, and record support actions. Mask unrelated personal information. Audit
+screens show who changed, approved, published, withdrew, or regraded records.
+Copy-ready requirement
+Build administrator interfaces with actual review states, permission checks, and an audit trail before
+importing a large corpus. Demonstrate one imperfect PDF progressing through flagged extraction,
+human correction, question-to-solution mapping, approval, preview, and publication. Include a failed
+publication attempt so reviewers can see that blockers are enforced server-side.
+ACCEPTANCE / PRECAUTIONS
+Unapproved imports never reach the student catalog or answer-key endpoints.
+An editor can identify and resolve every blocking issue from the workbench without editing the
+database manually.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.19  /  27
+
+
+=== PAGE 20 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 20 / 27
+Accessibility, language, and permitted
+accommodations
+INCLUSION THROUGH TESTED BEHAVIOR
+Target WCAG 2.2 Level AA for the supported application scope. Treat conformance as verified
+behavior, not a badge added after styling.
+Core accessibility contract
+Use semantic headings, labeled controls, meaningful link text, table headers, accessible dialog
+behavior, and logical focus order. Provide visible focus that is not hidden by sticky elements. Verify
+contrast for text, controls, focus, and meaningful graphics. Support keyboard operation without
+requiring a pointer. Avoid using color, location, shape, or sound alone to communicate an essential
+instruction [V1-S1].
+Check text resizing and reflow. Keep essential reading and actions usable at zoom. Apply appropriate
+target-size requirements and spacing. Respect reduced-motion preferences and avoid flashing,
+autoplay, or nonessential movement. Test with automated tools and manual keyboard and
+screen-reader workflows; an automated score does not prove full conformance.
+Mathematics and figure access
+Use accessible mathematical rendering where practical, with semantic source and tested
+assistive-technology behavior. Supply reviewed text descriptions for essential figures where those
+descriptions can preserve the question's meaning without supplying the answer. Do not invent a
+diagram description from an unreviewed model output. Content accessibility must be part of the
+editorial record.
+If a figure-dependent question cannot be made accessible in a mode, document that limitation, identify
+appropriate reviewed alternatives, and handle accommodation through the approved policy. Do not
+claim that adding generic alt text makes every mathematical diagram equivalent.
+Localization
+Separate interface strings from question content. English interface is the initial default; other interface
+languages use reviewed translations and preserve numerical, mathematical, and proper-name
+meaning. Question language options correspond to approved content versions. Never automatically
+translate a live exam question and present it as official or editorially approved.
+Keep units, numeric syntax, decimal separators, answer validation, and locale formatting compatible
+with the exam profile. A language preference must not change scoring rules. Long translated labels
+must fit buttons, palette descriptions, notices, and mobile layouts.
+Accommodations
+Support approved accommodation settings such as additional time only through the explicit profile and
+authorization workflow. Snapshot them before start, display their consequences, and retain them in
+comparison eligibility. Timing-sensitive exam content may have applicable accessibility exceptions;
+review and document them rather than silently altering an official simulation to meet a generic default.
+ACCEPTANCE / PRECAUTIONS
+Complete an attempt and review using keyboard alone and a representative screen reader.
+Claims of accessibility identify tested scope, known limitations, and the current verification date.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.20  /  27
+
+
+=== PAGE 21 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 21 / 27
+Error language, empty states, and
+product trust
+WRITE WHAT ACTUALLY HAPPENED
+Use short, specific messages that explain the state and the next safe action. Avoid blaming the
+student for technical failures.
+Exam and result messages
+Use Connection lost. Your latest response is waiting to sync. The exam timer continues under this
+profile. Use Response saved only after server confirmation. Use We could not confirm submission yet.
+Retry submission; your attempt ID is unchanged when idempotent retry is available. Use This attempt
+has ended. Open the result or submission status instead of presenting an editable expired paper.
+For analytics, use This comparison needs more eligible attempts, Time analysis is incomplete, or No
+questions match these filters. Explain missing values separately from zero. A missing solution says
+Solution not yet approved.
+Catalog and import messages
+Use No published papers match these filters with Clear filters. Use This paper was withdrawn; choose
+another available paper with a catalog link. Use This PDF is readable, but several question boundaries
+need review for a partial extraction. Use Publication blocked: three questions have no approved
+answer rather than a generic validation failure.
+Associate errors with their affected action or record. Preserve entered data and source files when a
+recoverable operation fails. Do not ask a user to upload the same large PDF again if the server still
+has a valid uploaded source. Provide a support reference that contains no sensitive answer or
+personal data.
+Trust-building copy
+Call simulations Practice simulations and comparison values Platform percentile or the exact
+approved label. Explain that exam rules are based on the displayed official sources and profile
+version. Do not call the platform an official examination portal. Marketing claims about student
+counts, success rates, speed, or capacity require actual measured evidence and scope.
+Recommendations use language such as Your recorded errors suggest reviewing this concept or In
+this attempt, later questions received less time. Avoid You are careless, Your intelligence is low, or
+You will fail. The interface should support improvement without making unsupported judgments.
+Copy review procedure
+Copy this requirement: Keep messages in a shared string catalog with states, triggers, and
+recommended actions. Test long translations and screen-reader announcements. During review,
+provoke each failure with controlled fixtures and verify that the message matches the server state.
+Remove placeholder toasts and generic Something went wrong where a useful specific explanation is
+available.
+ACCEPTANCE / PRECAUTIONS
+Every important failure offers a safe next step and preserves recoverable work.
+No message describes locally queued work as confirmed or a practice statistic as official.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.21  /  27
+
+
+=== PAGE 22 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 22 / 27
+Implementation priorities and the
+product acceptance gate
+PROVE THE COMPLETE PATH
+Build in stages that produce a usable vertical slice. A polished landing page is not evidence that the
+examination platform works.
+Stage priorities
+Stage 1 establishes one approved profile, one reviewed paper, authentication, the responsive exam shell,
+answer persistence, timing, submission, scoring, and question review. Stage 2 adds the general PDF
+workbench, the remaining approved exam profiles, custom integer practice, publication controls, and
+basic results. Stage 3 completes at least 40 registry analyses, cohort evidence gates, progress history,
+bookmarks, and simple next actions. Stage 4 completes the 60-analysis specification and advanced
+features after evidence supports them.
+Across all stages, treat authorization, answer-key confidentiality, accessibility, content correctness, and
+recoverable failure as foundational. Volume 5 expands implementation and capacity gates. Hundreds of
+thousands of registered students is a scale intention; release claims must describe the simultaneous load
+actually tested.
+Demonstrable product acceptance rubric
+Require ten demonstrations: create an account and choose an available paper; review its exact profile;
+complete instructions; answer every supported type; navigate every permitted status; recover from a
+reload and connection loss; submit once under duplicate requests; reconcile scoring with the approved
+key; inspect a correctly mapped solution; and follow a supported next action. Each demonstration
+includes the browser behavior and the relevant authoritative records.
+Then require administrator evidence: upload imperfect PDFs, correct flagged content, resolve an
+answer/solution conflict, block invalid publication, approve and publish a revision, and verify access
+restrictions. Show phone and keyboard workflows. Provide measured end-to-end checks before sharing;
+use the Emergent review guidance as supporting workflow, not as a substitute for this acceptance
+contract [V1-S2].
+Rubric for readiness
+The release is ready only when required journeys pass, no critical or high-severity defects remain, the
+source/profile/content/analytics versions are traceable, data-backed values reconcile, and recovery does
+not lose confirmed responses. A partial feature has a visible unavailable state and does not produce
+fabricated data. Label unfinished development screens and keep them outside public navigation.
+Final prompt to Emergent
+Show the working release, evidence for every binding requirement, the latest decision log, the tested
+device matrix, and known limitations. Separate completed capabilities from planned ones. Ask for the
+next implementation stage only after the current slice is reviewable. Keep the interface simple and the
+correctness evidence detailed.
+ACCEPTANCE / PRECAUTIONS
+Release review covers actual student and administrator journeys using persisted application data.
+The owner receives a concrete checklist of passed requirements and unresolved blockers, not a claim
+that everything is production-ready.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.22  /  27
+
+
+=== PAGE 23 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 23 / 27
+Desktop exam workspace: layout
+blueprint
+VISUAL ACCEPTANCE REFERENCE | PROPOSED JEE MAIN PRACTICE SHELL
+Use this layout to build a calm, readable desktop exam workspace. The diagram specifies
+hierarchy and control placement; Volume 2 determines the exact official-baseline behavior
+for each configuration.
+ANNOTATED STRUCTURE REFERENCE - PROPOSED PRODUCT LAYOUT
+JEE Main | Practice simulation
+Time left 02:16:40
+Physics     Chemistry     Mathematics
+Question 12  |  MCQ  |  +4 / -1
+Question text, equations and diagram appear here. Content is loaded from the
+approved paper version.
+A. Option one
+B. Option two
+C. Option three
+D. Option four
+Draft selected - use Save & Next to commit
+QUESTION PALETTE
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+States use labels and shape.
+Mark review & next
+Clear response
+Save & next
+Submit
+Values and content shown are illustrative; approved configuration and backend data control the live interface.
+Build the interaction behind every control
+Keep the timer, current subject and save status visible. Show one question at a time with large
+mathematical content and a question palette beside it. Differentiate a local selection from a
+server-acknowledged committed response. Palette navigation must follow the configured draft
+policy; it must never silently convert an unsaved selection into a scored answer.
+Adapt the shell to the selected exam
+Load the palette legend, answer controls, section labels, marks and review actions from the
+immutable configuration. Replace radio buttons with checkboxes for WBJEE Category III and with
+the approved numerical keypad for JEE numerical items. A BITSAT bonus-entry confirmation is a
+separate irreversible dialog. Reuse visual primitives while keeping each rule explicit.
+ACCEPTANCE / PRECAUTIONS
+At 1280-pixel width, the question and palette fit without page-level horizontal scrolling.
+At 200% zoom, controls remain reachable and focused content is visible.
+The selected answer, saved answer and review state have clear text equivalents.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.23  /  27
+
+
+=== PAGE 24 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 24 / 27
+Phone exam workspace: layout
+blueprint
+VISUAL ACCEPTANCE REFERENCE | RESPONSIVE PRACTICE MODE
+Implement mobile practice as a deliberate responsive layout. Keep the familiar rules but
+acknowledge that a phone cannot reproduce an examination-center workstation. Give
+students a usable experience without obscuring mathematical content.
+ANNOTATED STRUCTURE REFERENCE - PROPOSED PRODUCT LAYOUT
+Physics
+02:16:40
+Q12 / 75     Palette
+Question text reflows. Wide
+equations and diagrams scroll
+within their own region.
+A. Option one
+B. Option two
+C. Option three
+D. Option four
+Review
+Save & next
+1. Keep status visible
+Timer and save acknowledgement stay visible without obscuring the current
+question.
+2. Use a drawer for navigation
+Palette opens on request and closes after a deliberate jump. Restore focus to
+the chosen question.
+3. Protect touch actions
+Primary controls have generous touch targets. Confirm final submission and
+any irreversible transition.
+4. Preserve question content
+No full-page horizontal scrolling. Zoomable figures retain labels and accessible
+descriptions.
+Values and content shown are illustrative; approved configuration and backend data control the live interface.
+Navigation and input behavior
+Use an on-demand question-palette drawer and a compact subject selector. When a drawer closes,
+return focus to the chosen question. Position the primary save action consistently. Let the
+operating system keyboard open without covering numerical entry or the current save state.
+Suppress accidental form submission by Enter unless the active exam configuration explicitly maps
+that key.
+Content and device checks
+Reflow normal prose at a narrow viewport. Give long equations and figures their own pan or zoom
+region, with accessible text and reset controls. Re-check the layout on Android Chrome, iOS Safari
+and a foldable screen. Rotate, background and resume the app while the server deadline
+continues. Never depend on mobile background timers for finalization.
+ACCEPTANCE / PRECAUTIONS
+At a 360-pixel viewport, essential controls and the timer remain visible.
+Opening the keyboard does not hide the current numerical input or commit control.
+A reconnect banner explains unsent changes and the authoritative deadline.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.24  /  27
+
+
+=== PAGE 25 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 25 / 27
+Result dashboard: layout blueprint
+VISUAL ACCEPTANCE REFERENCE | PROGRESSIVE DISCLOSURE OF 60 ANALYSES
+Make the first result screen easy to understand. Present the score, accuracy and an eligible
+cohort comparison before the full analysis library. Every displayed number must come from a
+documented, versioned backend computation.
+ANNOTATED STRUCTURE REFERENCE - PROPOSED PRODUCT LAYOUT
+Your test result
+Paper version | Grading version | First eligible attempt
+Marks
+Net score + subject split
+Accuracy
+Correct / graded attempts
+Cohort percentile
+Same paper | N | date
+Overview    Question review    Timing    Study plan
+Question
+Outcome
+Marks
+Time
+Tags
+Solution
+Q1
+Correct
+Backend
+Measured
+Verified
+Open
+Q2
+Incorrect
+Backend
+Measured
+Verified
+Open
+Q3
+Skipped
+Backend
+Measured
+Verified
+Open
+Next steps: a small evidence-linked study plan, then the detailed 60-analysis library.
+Values and content shown are illustrative; approved configuration and backend data control the live interface.
+A readable first screen
+Start with marks and subject splits, then show attempted, correct, incorrect and skipped counts.
+Put a short explanation beside the platform cohort percentile, including eligible N and the snapshot
+date. If no valid cohort exists, show an unavailable state instead of a fabricated comparison. Use a
+compact tab layout for overview, question review, timing and study plan.
+Question-wise evidence and next actions
+The question review table must link the committed response, award, measured timing, verified
+tags and released solution. Selecting a row opens the full question and explanation, preserving the
+result filters. Include a small, evidence-linked plan, then make all 60 analyses searchable by
+category. Keep formulas, coverage limits and revision lineage available on demand.
+ACCEPTANCE / PRECAUTIONS
+Cards, question rows and downloaded reports reconcile with the same grading version.
+No official rank, admission guarantee or NTA-normalized percentile is inferred from a mock cohort.
+A student can move from a weak topic to the relevant question evidence and revision action.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.25  /  27
+
+
+=== PAGE 26 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 26 / 27
+Shared contract across all five volumes
+CANONICAL NAMES | API PREFIX | RULE PRECEDENCE
+Treat the five volumes as one specification. Resolve wording differences through the
+following shared contract before implementing APIs, migrations or scoring. Record any
+deliberate deviation in the project decision log.
+Canonical entities and naming aliases
+Use Question (also called Item) for the reusable bank identity and QuestionVersion (ItemVersion)
+for an immutable content snapshot. ExamConfig or ExamProfile describes the versioned rules; an
+Adapter is the code that interprets those rules. PaperVersion is the published ordered manifest of
+question versions, configuration version, solution versions and release policy. Attempt binds one
+student to that immutable manifest. GradingVersion records the scoring implementation, key
+revision and correction lineage. Internal naming may differ, but every migration and API must map
+these concepts consistently.
+One API contract and two response states
+Use /v1 as the canonical API prefix and publish one OpenAPI specification. Short /admin, /attempts
+or /uploads routes in worked examples are endpoint families under /v1, rather than separate
+unversioned APIs. Separate draft_response from committed_response. Background persistence
+may recover a draft, but only a profile-eligible explicit commitment event changes the response
+eligible for scoring. Show local edit, durable draft save and committed-answer acknowledgement
+as distinct states. Finalization freezes the eligible committed responses; it must not invent a
+missing Save or Review action.
+Precedence and change control
+A current official rule source establishes the relevant exam baseline. The administrator-approved
+immutable exam configuration implements that source. Volume 2 defines its executable
+interpretation; Volume 3 binds reviewed content to it; Volume 4 derives analysis from accepted
+attempts; Volume 5 preserves those contracts in production. Volume 1 controls product language
+and presentation. Custom practice overrides must be labeled and versioned. If a verified source
+conflicts with a proposal, correct the proposal, publish a new approved version and demonstrate
+regression fixtures. Do not change rules for attempts already running.
+ACCEPTANCE / PRECAUTIONS
+Generate typed clients from the canonical OpenAPI contract and validate all example endpoint
+families against it.
+Prove that a durably autosaved draft remains unscored until the required commitment action.
+Before launch, publish a traceability matrix linking requirement, configuration, implementation
+and test evidence.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.26  /  27
+
+
+=== PAGE 27 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 01  |  PRODUCT + DESIGN
+CHAPTER 27 / 27
+Source register and implementation
+handoff
+EVIDENCE AND SCOPE OF THIS SPECIFICATION
+Use these references to verify the stated baseline. Requirements and engineering thresholds
+in this volume are proposed product decisions unless a source explicitly establishes them.
+V1-S1 | W3C: Web Content Accessibility Guidelines (WCAG) 2.2
+https://www.w3.org/TR/WCAG22/
+Checked: 2026-10-12. Primary normative reference for the accessibility target. Apply specific
+success criteria and test actual application states. Source verified by the coordinating agent.
+V1-S2 | Emergent: Try it before you share it
+https://emergent.sh/docs/try-it-before-you-share-it
+Checked: 2026-10-12. Primary product documentation supporting real end-to-end and device
+checks before sharing. Source verified by the coordinating agent.
+V1-S3 | Emergent: Write prompts that work
+https://emergent.sh/docs/write-prompts-that-work
+Checked: 2026-10-12. Primary product documentation supporting clear purpose, core features,
+design feel, examples, a changelog, and incremental refinements. Source verified by the
+coordinating agent.
+ACCEPTANCE / PRECAUTIONS
+Before release, retain the approved configuration, source document date, verification owner and
+test evidence. Re-check any rule that changes for a new exam year.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+1.27  /  27

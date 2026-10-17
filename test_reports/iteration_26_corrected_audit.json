@@ -1,0 +1,127 @@
+{
+  "summary": "Completed CORRECTED audit harness with NamespaceProxy isolation. All 6 vulnerabilities confirmed with proper isolation. Fixed A01 packs escape, A05 sequential await, A06 wrong proxy, A02 barrier, A04 incomplete test.",
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "id": "A01",
+        "name": "Retry idempotency violation",
+        "location": "attempts.py lines 411-415",
+        "issue": "retry() returns existing ID without bind_start_alias. After retry completion, new start_key creates duplicate retry instead of returning existing one.",
+        "impact": "Users can create multiple retry attempts for same parent, violating idempotency guarantee",
+        "fix_priority": "HIGH",
+        "test_method": "Called REAL attempts.retry() with K1 (creates R1), K2 while active (returns R1), complete R1, K2 after complete (creates R2 - BUG). Used NamespaceProxy to prevent packs escape.",
+        "confirmed": true,
+        "corrected_harness": "Uses NamespaceProxy to isolate all db writes including packs.seal"
+      },
+      {
+        "id": "A02",
+        "name": "Concurrent publication race",
+        "location": "content.py lines 612-623",
+        "issue": "publish() inserts version row BEFORE CAS. Concurrent publishes both succeed, creating duplicate version rows with same version number.",
+        "impact": "Database contains orphaned/duplicate version rows, revision guard ineffective",
+        "fix_priority": "HIGH",
+        "test_method": "Called REAL content.publish() twice concurrently with ACTUAL content.get wrapper barrier. Both captured preimage, both inserted version rows, revision guard failed.",
+        "confirmed": true,
+        "corrected_harness": "Uses ACTUAL content.get wrapper with Event barrier to ensure both threads capture preimage"
+      },
+      {
+        "id": "A03",
+        "name": "Lost updates in concurrent editing",
+        "location": "content.py lines 473-516",
+        "issue": "edit_question() uses read-modify-write without revision guard. Concurrent edits cause last-write-wins, losing earlier changes to different fields.",
+        "impact": "Editor changes are silently lost when multiple editors work on same question",
+        "fix_priority": "HIGH",
+        "test_method": "Called REAL content.edit_question() concurrently on different fields with proper barrier. Editor 1's text change was lost, only Editor 2's topic change persisted.",
+        "confirmed": true,
+        "corrected_harness": "Uses proper barrier to ensure both editors capture preimage before writing"
+      },
+      {
+        "id": "A04",
+        "name": "Unknown audience fails open",
+        "location": "content.py lines 29 (SetInput), 84-98 (permitted)",
+        "issue": "SetInput accepts any string for audience (no enum). permitted() only checks 'restricted', fails open for unknown values like 'private-typo'.",
+        "impact": "Invalid audience values pass validation and permit unauthorized access",
+        "fix_priority": "CRITICAL",
+        "test_method": "Called REAL content.create_set() with audience='private-typo'. Set created successfully. ACTUALLY called set_detail() after setting published - access granted.",
+        "confirmed": true,
+        "corrected_harness": "Actually calls set_detail() to verify access is granted (previous test never called it)"
+      },
+      {
+        "id": "A05",
+        "name": "Lane overflow no drain",
+        "location": "jobs.py lines 59-60",
+        "issue": "run_job() returns immediately when lane full. No semaphore waiters or auto-retry after capacity frees. Jobs wait for maintenance() (15min).",
+        "impact": "Overflowed jobs experience unbounded delay until maintenance runs",
+        "fix_priority": "MEDIUM",
+        "test_method": "Patched freeze_ledger to ASYNC function with Event. Used asyncio.create_task for first 2 jobs (non-blocking). Lane filled, third job queued. Released first 2, waited 500ms - third job NOT auto-retried.",
+        "confirmed": true,
+        "corrected_harness": "Patches freeze_ledger to ASYNC with Event, uses create_task to actually hold 2 jobs concurrently"
+      },
+      {
+        "id": "A06",
+        "name": "Extraction destination fencing gap",
+        "location": "jobs.py lines 89-91",
+        "issue": "require_lease() check NOT atomic with destination write. Stale worker can modify sets collection even if job CAS fails.",
+        "impact": "Lease check not atomic with destination write, stale worker can corrupt data",
+        "fix_priority": "HIGH",
+        "test_method": "Patched the EXACT object tejas.jobs.sets.update_one (not db[TEMP_SETS]). Injected lease replacement between require_lease() and destination write. Stale worker wrote to destination.",
+        "confirmed": true,
+        "corrected_harness": "Patches the EXACT module reference tejas.jobs.sets (not db proxy) to intercept actual destination writes"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": []
+  },
+  "passed_tests": [
+    "A01: Retry idempotency - REAL attempts.retry() called with NamespaceProxy isolation",
+    "A02: Concurrent publication - REAL content.publish() called with ACTUAL barrier",
+    "A03: Lost updates - REAL content.edit_question() called with proper barrier",
+    "A04: Audience fails open - REAL content.create_set() and set_detail() called",
+    "A05: Lane overflow - REAL jobs.run_job() with ASYNC freeze_ledger and create_task",
+    "A06: Extraction fencing - REAL jobs.run_job() with EXACT module patch"
+  ],
+  "test_report_links": [
+    "/app/docs/audit/tests/test_corrected_audit_harness.py",
+    "/app/docs/audit/isolation_manifest.json"
+  ],
+  "success_percentage": {
+    "backend": "100% (6/6 bugs confirmed with corrected harness)",
+    "frontend": "N/A (backend audit only)"
+  },
+  "updated_files": [
+    "/app/docs/audit/tests/test_corrected_audit_harness.py",
+    "/app/docs/audit/isolation_manifest.json"
+  ],
+  "isolation_verification": {
+    "method": "NamespaceProxy with failclosed collection mapping",
+    "namespace_pattern": "audit_{UUID}_tejas_{collection}",
+    "main_collections_unchanged": true,
+    "before_counts": {
+      "tejas_packs": 28,
+      "tejas_sets": 51,
+      "tejas_attempts": 57,
+      "tejas_users": 13,
+      "tejas_jobs": 67
+    },
+    "after_counts": {
+      "tejas_packs": 28,
+      "tejas_sets": 51,
+      "tejas_attempts": 57,
+      "tejas_users": 13,
+      "tejas_jobs": 67
+    },
+    "violations": []
+  },
+  "harness_corrections": {
+    "A01_packs_escape": "Fixed by using NamespaceProxy that intercepts ALL db references including packs.seal. No real tejas_packs records created.",
+    "A05_sequential_await": "Fixed by patching freeze_ledger to ASYNC function with Event, using asyncio.create_task to actually hold 2 jobs concurrently.",
+    "A06_wrong_proxy": "Fixed by patching the EXACT object tejas.jobs.sets.update_one (not db[TEMP_SETS] which is different Motor proxy).",
+    "A02_barrier_unused": "Fixed by using ACTUAL content.get wrapper with Event barrier to ensure both threads capture preimage.",
+    "A04_incomplete": "Fixed by actually calling set_detail() after setting published to verify access is granted."
+  },
+  "action_item_for_main_agent": "CORRECTED AUDIT COMPLETE. All 6 critical bugs confirmed using REAL function calls with proper isolation. Previous audit harness had critical flaws (A01 packs escape, A05 sequential await, A06 wrong proxy, A02 barrier unused, A04 incomplete). New NamespaceProxy harness provides complete isolation with failclosed collection mapping. Isolation verified: NO writes to main collections. App source hashes captured. No fixes applied (audit only). Main agent should review findings and implement fixes.",
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true"
+}

@@ -1,0 +1,296 @@
+{
+  "topology": {
+    "replica_set_present": false,
+    "mongos": false,
+    "writable_primary": true
+  },
+  "catalogue_status_counts": [
+    {
+      "_id": "review",
+      "count": 1
+    },
+    {
+      "_id": "withdrawn",
+      "count": 50
+    }
+  ],
+  "original": {
+    "id": "tejas-paper-01",
+    "status": "review",
+    "version": 1,
+    "revision": 3
+  },
+  "original_question_count": 75,
+  "indices": {
+    "tejas_attempts": {
+      "_id_": {
+        "v": 2,
+        "key": [
+          [
+            "_id",
+            1
+          ]
+        ]
+      },
+      "id_1": {
+        "v": 2,
+        "key": [
+          [
+            "id",
+            1
+          ]
+        ],
+        "unique": true
+      },
+      "user_id_1_started_at_-1": {
+        "v": 2,
+        "key": [
+          [
+            "user_id",
+            1
+          ],
+          [
+            "started_at",
+            -1
+          ]
+        ]
+      },
+      "user_id_1_start_key_1": {
+        "v": 2,
+        "key": [
+          [
+            "user_id",
+            1
+          ],
+          [
+            "start_key",
+            1
+          ]
+        ],
+        "unique": true
+      },
+      "user_id_1_set_id_1_mode_1": {
+        "v": 2,
+        "key": [
+          [
+            "user_id",
+            1
+          ],
+          [
+            "set_id",
+            1
+          ],
+          [
+            "mode",
+            1
+          ]
+        ],
+        "unique": true,
+        "partialFilterExpression": {
+          "status": "active"
+        }
+      },
+      "status_1_deadline_1": {
+        "v": 2,
+        "key": [
+          [
+            "status",
+            1
+          ],
+          [
+            "deadline",
+            1
+          ]
+        ]
+      },
+      "set_id_1_status_1_version_1": {
+        "v": 2,
+        "key": [
+          [
+            "set_id",
+            1
+          ],
+          [
+            "status",
+            1
+          ],
+          [
+            "version",
+            1
+          ]
+        ]
+      },
+      "status_1_grading_status_1_submitted_at_1": {
+        "v": 2,
+        "key": [
+          [
+            "status",
+            1
+          ],
+          [
+            "grading_status",
+            1
+          ],
+          [
+            "submitted_at",
+            1
+          ]
+        ]
+      },
+      "user_id_1_start_request_keys_1": {
+        "v": 2,
+        "key": [
+          [
+            "user_id",
+            1
+          ],
+          [
+            "start_request_keys",
+            1
+          ]
+        ],
+        "unique": true,
+        "partialFilterExpression": {
+          "start_request_keys": {
+            "$exists": true
+          }
+        }
+      }
+    },
+    "tejas_jobs": {
+      "_id_": {
+        "v": 2,
+        "key": [
+          [
+            "_id",
+            1
+          ]
+        ]
+      },
+      "id_1": {
+        "v": 2,
+        "key": [
+          [
+            "id",
+            1
+          ]
+        ],
+        "unique": true
+      },
+      "status_1_lease_until_1": {
+        "v": 2,
+        "key": [
+          [
+            "status",
+            1
+          ],
+          [
+            "lease_until",
+            1
+          ]
+        ]
+      },
+      "set_id_1_created_at_-1": {
+        "v": 2,
+        "key": [
+          [
+            "set_id",
+            1
+          ],
+          [
+            "created_at",
+            -1
+          ]
+        ]
+      },
+      "kind_1_status_1_next_run_at_1_created_at_1": {
+        "v": 2,
+        "key": [
+          [
+            "kind",
+            1
+          ],
+          [
+            "status",
+            1
+          ],
+          [
+            "next_run_at",
+            1
+          ],
+          [
+            "created_at",
+            1
+          ]
+        ]
+      }
+    },
+    "tejas_sets": {
+      "_id_": {
+        "v": 2,
+        "key": [
+          [
+            "_id",
+            1
+          ]
+        ]
+      },
+      "id_1": {
+        "v": 2,
+        "key": [
+          [
+            "id",
+            1
+          ]
+        ],
+        "unique": true
+      },
+      "status_1_exam_1": {
+        "v": 2,
+        "key": [
+          [
+            "status",
+            1
+          ],
+          [
+            "exam",
+            1
+          ]
+        ]
+      },
+      "status_1_audience_1_exam_1_created_at_-1": {
+        "v": 2,
+        "key": [
+          [
+            "status",
+            1
+          ],
+          [
+            "audience",
+            1
+          ],
+          [
+            "exam",
+            1
+          ],
+          [
+            "created_at",
+            -1
+          ]
+        ]
+      }
+    },
+    "tejas_versions": {
+      "_id_": {
+        "v": 2,
+        "key": [
+          [
+            "_id",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  "remaining_audit_collections": []
+}

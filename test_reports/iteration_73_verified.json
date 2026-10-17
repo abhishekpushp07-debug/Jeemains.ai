@@ -1,0 +1,29 @@
+{
+  "status": "GUIDE04_FEATURE_VERIFIED_WITH_RELEASE_BLOCKERS",
+  "backend_tests": {"passed": 294, "failed": 0, "source": "test_reports/guide04_full_packet1.log"},
+  "frontend_build": {"passed": true, "source": "test_reports/frontend_security_build.log"},
+  "independent_reports": ["test_reports/iteration_72.json", "test_reports/iteration_73.json"],
+  "post_dependency_main_verification": {
+    "reflection_save": "PASS: saved status observed after changing note on restricted QA attempt",
+    "expected_value": "PASS: p=0.2, correct=4, wrong=-1 returns0marks",
+    "session": "HTTP200",
+    "uncaught_browser_errors": [],
+    "desktop_viewport": {"width": 1920, "height": 800},
+    "mobile_viewport": {"width": 390, "height": 844},
+    "horizontal_overflow": [],
+    "screenshot_log": "/root/.emergent/automation_output/20261014_121721/console_20261014_121721.log"
+  },
+  "iteration73_findings_disposition": {
+    "networkidle_timeout": "Harness wait on background/edge requests, not blocked app readiness. Mobile h1/results/reflection load with domcontentloaded and element waits.",
+    "auth_session_aborted": "Navigation cancellation, not reproduced as an API failure; final authenticated session returned200.",
+    "cdn_cgi_rum": "External Cloudflare telemetry request failure; not application API. Infrastructure telemetry not modified.",
+    "a44_not_located_and_reflection_save_not_tested": "Closed by main browser checks using actual source test IDs; both API-connected interactions passed after dependency update.",
+    "intermediate_main_locator_timeouts": "Wrong test selectors were corrected after reading source. No app code workaround was applied."
+  },
+  "frontend_audit": {"clean": false, "unique_advisories_before": 26, "unique_advisories_after": 25, "dependency_paths_before": 299, "dependency_paths_after": 49},
+  "mocked_apis": [],
+  "browser_data": "Restricted synthetic QA fixture, not the owner paper; cleanup follows testing.",
+  "release_blockers": ["Residual deprecated CRA-chain security advisories", "500000 active-user capacity, fault and restore qualification not executed", "Remaining production architecture packets and evidence-gated metrics require their actual data/infrastructure prerequisites"],
+  "capacity_qualification": "UNQUALIFIED",
+  "owner_import_changed": false
+}

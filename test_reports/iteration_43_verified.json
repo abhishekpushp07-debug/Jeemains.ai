@@ -1,0 +1,46 @@
+{
+  "case": "Packet1_continuation_scoped_verification",
+  "counts_each_of_three_runs": {
+    "passed": 143,
+    "strict_known_open_xfail": 6,
+    "unexpected_failures": 0,
+    "errors": 0
+  },
+  "suite_total_cases": 149,
+  "main_agent_corrected_and_executed": true,
+  "testing_agent_called": true,
+  "not_an_independent_load_or_security_certification": true,
+  "known_open_invariants": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06"
+  ],
+  "new_code_bugs_remaining_known": [],
+  "release_blockers": [
+    "live staff credential rotation pending",
+    "full atomic source review incomplete",
+    "full target contracts and operator approvals incomplete",
+    "dependency advisories and unscanned packages unresolved",
+    "infrastructure and500000-active-attempt qualification not provisioned or tested"
+  ],
+  "mocked": [
+    "A06 parser/storage inputs",
+    "explicit race and failure-injection controls",
+    "main-agent Studio browser-only API fixtures; real ASGI/Mongo tests separate"
+  ],
+  "browser_evidence": [
+    "docs/packet1/evidence/browser-allowlist-result.json",
+    "docs/packet1/evidence/toast-layout-verification.json"
+  ],
+  "rejected_scope_evidence": [
+    "iteration_41 did not perform requested mocked write verification",
+    "iteration_42 test escaped required fixture boundary; replaced and exact-marker residue check found0"
+  ],
+  "status_document": "docs/packet1/CONTINUATION_STATUS.md",
+  "manifest": "docs/packet1/evidence/continuation-artifact-manifest.json",
+  "packet1_status": "IN_PROGRESS_BLOCKED_EXIT",
+  "capacity_status": "UNQUALIFIED"
+}

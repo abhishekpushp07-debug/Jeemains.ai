@@ -1,0 +1,185 @@
+{
+  "summary": "Completed comprehensive backend testing for phone-based authentication and pure scoring logic. Validated all 75 questions from source PDFs (60 MCQ + 15 integer). All scoring edge cases, phone auth flows, and immutable ledger preservation tested successfully. No frontend testing performed as per review request.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "medium_priority": [],
+    "low_priority": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "note": "Frontend testing was skipped as per review request (backend only)"
+  },
+  "passed_tests": [
+    "Pure scoring: all 75 correct = 300 marks",
+    "Pure scoring: wrong answers with -1 penalty (including numerical)",
+    "Pure scoring: blank answers = 0 marks",
+    "Canonical numeric formats: 0, negative, 03, whitespace, Unicode minus accepted",
+    "Canonical rejects invalid: 3.0, text for integers",
+    "Scoring dropped questions: excluded from maximum",
+    "Scoring bonus_all: gives marks to all",
+    "Scoring multiple_accepted: verifies any accepted key",
+    "Scoring fraction-based marks: exact strings preserved",
+    "Phone auth: valid number creates student profile",
+    "Phone auth: same normalized +91 number reopens same profile",
+    "Phone auth: different numbers create separate records",
+    "Phone auth: malformed numbers return 422",
+    "Phone auth: HttpOnly Secure cookies set (access_token, refresh_token)",
+    "Phone auth: GET /me always returns role=student for phone profiles",
+    "Phone auth: phone profiles cannot access staff endpoints (403)",
+    "Owner password login: still works from .env",
+    "Phone auth: logout revokes session (401 on replay)",
+    "System: no public papers exist (/api/sets empty)",
+    "System: JSON envelope format (data/error/meta)",
+    "Actual 75 questions: all extracted from source PDFs",
+    "Actual 75 questions: 60 MCQ + 15 integer breakdown correct",
+    "Actual 75 questions: Q37, Q61, Q67, Q69, Q70 all present (no exclusion)",
+    "Actual 75 questions: using numbered 1-4 option family (not A-D figure labels)",
+    "Actual 75 questions: scoring all correct = 300 marks",
+    "Actual 75 questions: mixed scoring (correct/wrong/blank) works correctly",
+    "Immutable ledger: preserves original summary when keys altered",
+    "Immutable ledger: all questions still paired in result",
+    "Immutable ledger: fresh scoring uses new keys"
+  ],
+  "test_report_links": [
+    "/app/backend/backend_test_phone_scoring.py",
+    "/app/backend/test_actual_75_questions.py",
+    "/app/backend/test_immutable_ledger.py"
+  ],
+  "success_percentage": {
+    "backend_scoring_logic": "100% (9/9 tests passed)",
+    "backend_phone_auth": "100% (9/9 tests passed)",
+    "backend_system": "100% (2/2 tests passed)",
+    "backend_actual_questions": "100% (6/6 tests passed)",
+    "backend_immutable_ledger": "100% (3/3 tests passed)",
+    "backend_overall": "100% (29/29 tests passed)"
+  },
+  "updated_files": [
+    "/app/backend/backend_test_phone_scoring.py",
+    "/app/backend/test_actual_75_questions.py",
+    "/app/backend/test_immutable_ledger.py"
+  ],
+  "action_item_for_main_agent": {
+    "critical": [],
+    "high_priority": [],
+    "medium_priority": [],
+    "low_priority": [],
+    "completed_validations": [
+      "All 75 questions (60 MCQ + 15 integer) extracted and validated from source PDFs",
+      "Pure scoring.py logic tested against actual questions with all edge cases",
+      "Phone-based authentication fully functional with proper security (HttpOnly Secure cookies)",
+      "Same phone number reopens same profile across different browsers/sessions",
+      "Different phone numbers create separate student records",
+      "Malformed phone numbers properly rejected with 422",
+      "Phone profiles always have role=student and cannot access staff endpoints",
+      "Owner password login still works from .env credentials",
+      "Logout properly revokes sessions (401 on replay)",
+      "No public papers exist (/api/sets empty) as required",
+      "Immutable ledger preserves original summary when answer keys are altered",
+      "All scoring dispositions work: standard, dropped, bonus_all, multiple_accepted",
+      "Numeric answer handling: 0, negative, 03, whitespace, Unicode minus all accepted",
+      "Invalid formats (3.0, text) properly rejected for integer questions",
+      "Fraction-based marks with exact strings preserved",
+      "Critical questions Q37, Q61, Q67, Q69, Q70 all present (no exclusion)",
+      "Option families use numbered 1-4 (not A-D figure labels) as required"
+    ]
+  },
+  "test_coverage_completed": {
+    "pure_scoring_logic": [
+      "All 75 correct = 300 marks",
+      "Wrong answers with -1 penalty (MCQ and integer)",
+      "Blank answers = 0 marks",
+      "Canonical numeric formats (0, negative, 03, whitespace, Unicode minus)",
+      "Invalid format rejection (3.0, text)",
+      "Dropped questions excluded from maximum",
+      "Bonus_all gives marks to all",
+      "Multiple_accepted verifies any accepted key",
+      "Fraction-based marks with exact strings"
+    ],
+    "phone_authentication": [
+      "Valid phone number creates student profile",
+      "Same normalized number reopens same profile",
+      "Different numbers create separate records",
+      "Malformed numbers return 422",
+      "HttpOnly Secure cookies set",
+      "GET /me always returns role=student",
+      "Phone profiles cannot access staff endpoints (403)",
+      "Owner password login still works",
+      "Logout revokes session (401 on replay)"
+    ],
+    "actual_75_questions": [
+      "All 75 questions extracted from source PDFs",
+      "60 MCQ + 15 integer breakdown validated",
+      "Critical questions Q37, Q61, Q67, Q69, Q70 present",
+      "Numbered 1-4 option family (not A-D)",
+      "Scoring all correct = 300 marks",
+      "Mixed scoring (correct/wrong/blank) works"
+    ],
+    "immutable_ledger": [
+      "Ledger preserves original summary when keys altered",
+      "All questions still paired in result",
+      "Fresh scoring uses new keys"
+    ],
+    "system_validation": [
+      "No public papers exist (/api/sets empty)",
+      "JSON envelope format (data/error/meta)"
+    ]
+  },
+  "test_data_used": {
+    "source": "Actual TEJAS source PDFs from /app/sources/",
+    "questions_pdf": "/app/sources/questions.pdf (221KB, 75 questions)",
+    "solutions_pdf": "/app/sources/solutions.pdf (407KB, 75 solutions)",
+    "test_phone_numbers": "Valid Indian phone numbers (+91...) for testing",
+    "owner_credentials": "Loaded from /app/backend/.env (not hardcoded)",
+    "no_mocked_data": true,
+    "no_real_user_data": true
+  },
+  "security_validations": {
+    "credentials": "Owner credentials loaded dynamically from .env, never hardcoded or logged",
+    "phone_profiles": "Used named testing fixtures, cleaned up after tests",
+    "cookies": "HttpOnly Secure cookies verified for both access_token and refresh_token",
+    "session_revocation": "Logout properly revokes sessions, replay returns 401",
+    "access_control": "Phone profiles cannot elevate to staff role or access staff endpoints",
+    "no_sms_calls": "No SMS integration tested (as required)"
+  },
+  "requirements_compliance": {
+    "all_75_questions": "✅ All 75 questions present (60 MCQ + 15 integer)",
+    "no_exclusion": "✅ Q37, Q61, Q67, Q69, Q70 all present",
+    "numbered_options": "✅ Using numbered 1-4 family (not A-D figure labels)",
+    "scoring_rules": "✅ +4 correct, -1 wrong, 0 blank",
+    "numeric_handling": "✅ 0, negative, 03, whitespace, Unicode minus accepted",
+    "invalid_rejection": "✅ 3.0, text rejected for integers",
+    "dispositions": "✅ dropped, bonus_all, multiple_accepted all work",
+    "immutable_ledger": "✅ Preserves original summary when keys altered",
+    "phone_auth": "✅ Phone-only entry, no OTP/password/email",
+    "same_number_reopens": "✅ Same normalized number reopens same profile",
+    "different_numbers_separate": "✅ Different numbers create separate records",
+    "malformed_422": "✅ Malformed numbers return 422",
+    "httponly_secure": "✅ HttpOnly Secure cookies set",
+    "role_always_student": "✅ GET /me always returns role=student",
+    "no_role_elevation": "✅ Phone profiles cannot become staff",
+    "owner_login_works": "✅ Owner password login still works",
+    "logout_revocation": "✅ Logout revokes session (401 on replay)",
+    "no_public_papers": "✅ /api/sets empty",
+    "no_qa_created": "✅ No QA sets created or published",
+    "json_envelope": "✅ JSON envelope format (data/error/meta)"
+  },
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  "notes": [
+    "All backend testing completed successfully with 100% pass rate (29/29 tests)",
+    "Pure scoring.py logic validated against actual 75 questions from source PDFs",
+    "Phone-based authentication fully functional with proper security measures",
+    "No frontend testing performed as per review request (backend only)",
+    "No QA sets created or published as per instructions",
+    "All test credentials loaded from .env, never hardcoded",
+    "Test phone profiles use named fixtures and are properly isolated",
+    "Immutable ledger correctly preserves original scoring when answer keys are corrected",
+    "All scoring edge cases validated: correct, wrong, blank, dropped, bonus, multiple_accepted",
+    "Numeric answer handling comprehensive: 0, negative, leading zeros, whitespace, Unicode minus",
+    "Critical questions Q37, Q61, Q67, Q69, Q70 all present (no exclusion as required)",
+    "Option families correctly use numbered 1-4 (not A-D figure labels)",
+    "No issues found, all requirements met"
+  ]
+}

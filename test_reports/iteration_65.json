@@ -1,0 +1,191 @@
+{
+  "summary": "CRITICAL option extraction bug found in Q37/51/56/60/67/70 - questions with lettered diagrams have INCORRECT OPTIONS extracted. Letter labels (A,B,C,D) in diagrams are being treated as option markers, causing wrong option extraction. Actual options are numbered (1-4) but extraction splits on letter labels instead. Assets are stored correctly in object storage with file_ids.",
+  
+  "critical_finding": {
+    "bug_type": "Incorrect option extraction for questions with lettered diagrams",
+    "affected_questions": [37, 51, 56, 60, 67, 70],
+    "impact": "CRITICAL - Options are extracted incorrectly, making questions unsolvable or confusing for students",
+    "root_cause": "pdf_organiser_worker.py choose_options() function treats letter labels in diagrams as option markers, splitting on (A), (B), (C), (D) when actual options are numbered (1), (2), (3), (4)"
+  },
+  
+  "detailed_analysis": {
+    "questions_affected": {
+      "Q37": {
+        "subject": "Physics",
+        "type": "mcq",
+        "letter_labels": ["A", "B", "C", "D"],
+        "expected_options": {"1": "(A)-(I), (B)-(III), (C)-(IV), (D)-(II)", "2": "(A)-(III), (B)-(II), (C)-(IV), (D)-(I)", "3": "(A)-(III), (B)-(I), (C)-(II), (D)-(IV)", "4": "(A)-(III), (B)-(I), (C)-(IV), (D)-(II)"},
+        "actual_options": {"A": "-(III),", "B": "-(I),", "C": "-(IV),", "D": "-(II)"},
+        "issue": "Options extracted using letter labels (A-D) instead of numbers (1-4). Match List-I with List-II question has diagram labels confused with option markers."
+      },
+      "Q51": {
+        "subject": "Chemistry",
+        "type": "mcq",
+        "letter_labels": ["A", "B", "C", "D", "E"],
+        "expected_options": {"1": "(A), (C), (D) and (E) only", "2": "(A), (C) and (E) only", "3": "(A), (B), (C) and (E) only", "4": "(C) and (E) only"},
+        "actual_options": {"A": ",", "B": ",", "C": "and (E) only", "D": "and (E) only"},
+        "issue": "Options completely broken - extracted using statement labels (A-E) instead of numbers (1-4)"
+      },
+      "Q56": {
+        "subject": "Chemistry",
+        "type": "mcq",
+        "letter_labels": ["A", "B", "C", "D"],
+        "expected_options": {"1": "(A)", "2": "(B)", "3": "(C)", "4": "(D)"},
+        "actual_options": {"A": "(2)", "B": "(3)", "C": "(4)", "D": "See source option D"},
+        "issue": "Chemical structures (A-D) in figure confused with options. Should ask 'which structure' with numbered options, but extracted structure labels as option keys."
+      },
+      "Q60": {
+        "subject": "Chemistry",
+        "type": "mcq",
+        "letter_labels": ["A", "B", "C", "D", "E"],
+        "expected_options": {"1": "(A), (B), (C) and (E) only", "2": "(A), (B), (D) and (E) only", "3": "(B), (C) and (E) only", "4": "(A), (C), (D) and (E) only"},
+        "actual_options": {"A": ",", "B": ",", "C": ",", "D": "and (E) only"},
+        "issue": "Options completely broken - extracted using statement labels (A-E) instead of numbers (1-4)"
+      },
+      "Q67": {
+        "subject": "Chemistry",
+        "type": "mcq",
+        "letter_labels": ["A", "B", "C", "D", "E", "F", "G", "H"],
+        "expected_options": {"1": "4", "2": "6", "3": "3", "4": "5"},
+        "actual_options": {"A": "OH", "B": "OH", "C": "OH", "D": "OH\n(E)\nOH\n(F)\nOH\n(G)\nOH\n(H)\n(1) 4\n(2) 6\n(3) 3\n(4) 5"},
+        "issue": "Chemical structures (A-H) in figure confused with options. Should have numbered options (1-4) with values (4, 6, 3, 5), but extracted structure labels as option keys."
+      },
+      "Q70": {
+        "subject": "Chemistry",
+        "type": "mcq",
+        "letter_labels": ["A", "B", "C", "D"],
+        "expected_options": {"1": "(A)-(II), (B)-(IV), (C)-(III), (D)-(I)", "2": "(A)-(IV), (B)-(II), (C)-(I), (D)-(III)", "3": "(A)-(IV), (B)-(II), (C)-(III), (D)-(I)", "4": "(A)-(II), (B)-(IV), (C)-(I), (D)-(III)"},
+        "actual_options": {"A": "-(II),", "B": "-(IV),", "C": "-(I),", "D": "-(III)"},
+        "issue": "Options extracted using letter labels (A-D) instead of numbers (1-4). Match List-I with List-II question has diagram labels confused with option markers."
+      }
+    },
+    
+    "pattern_identified": {
+      "all_6_questions": {
+        "have_letter_labels_in_text": true,
+        "expected_numbered_options": true,
+        "actual_letter_options": true,
+        "options_incorrectly_extracted": true
+      },
+      "conclusion": "Option extraction code treats letter labels in diagrams/statements as option markers, splitting on (A), (B), (C), (D) when actual options are numbered (1), (2), (3), (4). This causes completely wrong option extraction."
+    }
+  },
+  
+  "technical_root_cause": {
+    "file": "/app/backend/tejas/pdf_organiser_worker.py",
+    "function": "choose_options()",
+    "lines": "146-167",
+    "issue": "Function searches for option families (ABCD or 1234) and splits text on first complete family found. For questions with letter labels in diagrams/statements, it incorrectly identifies (A), (B), (C), (D) as options when actual options are (1), (2), (3), (4).",
+    "code_snippet": "for family in ('ABCD','1234'):\n    pattern=re.compile(r'\\((['+family+r'])\\)|(?<!\\w)(['+family+r'])[.)]\\s')\n    matches=list(pattern.finditer(text))\n    # ... finds ABCD first, treats as options",
+    "problem": "Function prioritizes ABCD family over 1234 family. When both exist (letter labels in text + numbered options), it incorrectly chooses ABCD as options.",
+    "fix_needed": "Modify choose_options() to prefer numbered options (1234) when both letter labels and numbered options exist, or detect when letters are diagram labels vs option markers"
+  },
+  
+  "verification_evidence": {
+    "test_files_created": [
+      "/app/backend/test_lettered_diagram_questions.py",
+      "/app/backend/test_detailed_label_inspection.py",
+      "/app/backend/test_assets_inspection.py",
+      "/app/backend/test_pdf_organiser_worker_direct.py",
+      "/app/backend/test_database_import_assets.py",
+      "/app/backend/test_tejas200_import_assets.py",
+      "/app/backend/test_refs_file_ids.py",
+      "/app/backend/test_options_and_answers.py"
+    ],
+    "test_results": {
+      "all_75_questions_extracted": true,
+      "60_mcq_15_integer": true,
+      "6_questions_have_letter_labels": true,
+      "pdf_organiser_generates_assets": true,
+      "database_import_has_file_ids": true,
+      "options_incorrectly_extracted": true,
+      "all_6_questions_use_letter_options_instead_of_numbered": true
+    },
+    "data_files_generated": [
+      "/app/test_reports/lettered_diagram_findings.json",
+      "/app/test_reports/detailed_label_inspection.json",
+      "/app/test_reports/assets_inspection.json",
+      "/app/test_reports/pdf_organiser_worker_output.json",
+      "/app/test_reports/database_tejas200_assets.json",
+      "/app/test_reports/refs_file_ids.json",
+      "/app/test_reports/options_and_answers.json"
+    ]
+  },
+  
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "component": "pdf_organiser_worker.py choose_options()",
+        "issue": "Incorrect option extraction for questions with letter labels in diagrams/statements. Function treats letter labels (A,B,C,D) as option markers when actual options are numbered (1,2,3,4)",
+        "impact": "Questions Q37/51/56/60/67/70 have completely wrong options extracted, making them unsolvable or confusing",
+        "affected_questions": [37, 51, 56, 60, 67, 70],
+        "fix_priority": "CRITICAL",
+        "fix_required": "Modify choose_options() to prefer numbered options (1234) when both letter labels and numbered options exist, or detect when letters are diagram labels vs option markers. Consider checking for 'List-I', 'List-II', 'shown in figure', 'structures' keywords to identify diagram label questions."
+      }
+    ]
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Question display with incorrect options",
+        "issue": "Questions Q37/51/56/60/67/70 will display wrong options to students due to backend extraction bug",
+        "affected_questions": [37, 51, 56, 60, 67, 70],
+        "note": "Backend must be fixed first. Frontend displays whatever options backend provides."
+      }
+    ]
+  },
+  
+  "passed_tests": [
+    "All 75 questions extracted successfully",
+    "60 MCQ + 15 integer breakdown correct",
+    "Letter labels (A-D) correctly preserved in question text",
+    "PDF references (q_refs, s_refs) correctly extracted with file_ids",
+    "Render mode correctly set to 'source' for questions with diagrams",
+    "Assets correctly generated by pdf_organiser_worker.py",
+    "Assets correctly stored in object storage with file_ids in refs"
+  ],
+  
+  "test_report_links": [
+    "/app/backend/test_actual_75_questions.py",
+    "/app/backend/test_lettered_diagram_questions.py",
+    "/app/backend/test_detailed_label_inspection.py",
+    "/app/backend/test_assets_inspection.py",
+    "/app/backend/test_pdf_organiser_worker_direct.py",
+    "/app/backend/test_tejas200_import_assets.py",
+    "/app/backend/test_refs_file_ids.py",
+    "/app/backend/test_options_and_answers.py",
+    "/app/test_reports/lettered_diagram_findings.json",
+    "/app/test_reports/detailed_label_inspection.json",
+    "/app/test_reports/assets_inspection.json",
+    "/app/test_reports/pdf_organiser_worker_output.json",
+    "/app/test_reports/database_tejas200_assets.json",
+    "/app/test_reports/refs_file_ids.json",
+    "/app/test_reports/options_and_answers.json"
+  ],
+  
+  "updated_files": [
+    "/app/backend/test_lettered_diagram_questions.py",
+    "/app/backend/test_detailed_label_inspection.py",
+    "/app/backend/test_assets_inspection.py",
+    "/app/backend/test_pdf_organiser_worker_direct.py",
+    "/app/backend/test_database_import_assets.py",
+    "/app/backend/test_tejas200_import_assets.py",
+    "/app/backend/test_refs_file_ids.py",
+    "/app/backend/test_options_and_answers.py"
+  ],
+  
+  "action_item_for_main_agent": "CRITICAL: Fix incorrect option extraction for Q37/51/56/60/67/70. Root cause: pdf_organiser_worker.py choose_options() treats letter labels (A,B,C,D) in diagrams/statements as option markers when actual options are numbered (1,2,3,4). This causes completely wrong options to be extracted. Examples: Q37 has options 'A: -(III),' instead of '1: (A)-(I), (B)-(III)...'; Q67 has options 'A: OH' instead of '1: 4'. Fix: Modify choose_options() to prefer numbered options when both exist, or detect diagram label questions using keywords like 'List-I', 'shown in figure', 'structures'. Assets are working correctly (stored in object storage with file_ids).",
+  
+  "success_percentage": {
+    "backend": "92% - 69/75 questions have correct options, 6/75 have incorrect option extraction",
+    "frontend": "Not tested - backend issue must be fixed first",
+    "overall": "92%"
+  },
+  
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  
+  "conclusion": "✅ CRITICAL BUG IDENTIFIED - Questions Q37/51/56/60/67/70 with lettered diagrams have INCORRECT OPTIONS extracted. Letter labels (A,B,C,D) in diagrams/statements are being treated as option markers when actual options are numbered (1,2,3,4). Root cause: pdf_organiser_worker.py choose_options() function prioritizes ABCD family over 1234 family. Examples: Q37 options are 'A: -(III),' instead of '1: (A)-(I), (B)-(III)...'; Q51 options are 'A: ,' instead of '1: (A), (C), (D) and (E) only'; Q67 options are 'A: OH' instead of '1: 4'. This makes these questions unsolvable or confusing. Assets are working correctly (stored in object storage with file_ids in refs). Main agent must fix choose_options() to prefer numbered options when both letter labels and numbered options exist."
+}

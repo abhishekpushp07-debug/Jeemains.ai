@@ -1,0 +1,108 @@
+{
+  "summary": "Backend regression testing complete: Added 10 new regression tests for chapter book metadata projection, catalog history aggregation, and preflight deduplication. All 342 isolated tests pass. HTTP and BSON benchmarks completed.",
+  
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  
+  "passed_tests": [
+    "All 342 packet1 isolated tests passed",
+    "10 new regression tests added and passing:",
+    "  - test_book_chapter_project_excludes_sources_answers: Verifies BOOK_CHAPTER_PROJECT excludes sensitive fields",
+    "  - test_book_view_full_vs_projected_equality: Verifies projected view returns same metadata as full",
+    "  - test_catalog_history_per_set_not_truncated_200: Verifies >200 attempts on one chapter don't hide another",
+    "  - test_catalog_history_cross_user_filtered: Verifies catalog history is per-user",
+    "  - test_catalog_history_mode_filtered: Verifies only practice mode attempts appear in catalog",
+    "  - test_catalog_history_same_timestamp_deterministic: Verifies deterministic ordering with same timestamp",
+    "  - test_catalog_history_expired_marked_completed: Verifies expired attempts marked as completed",
+    "  - test_preflight_deduplicates_identical_refs: Verifies preflight deduplicates identical refs",
+    "  - test_preflight_validates_all_unique_refs_including_invalid: Verifies all unique refs validated",
+    "  - test_preflight_no_cross_request_cache: Verifies no cross-request caching",
+    "HTTP benchmark: 40 requests, 100% success rate, p50=69.54ms, p95=139.4ms, p99=306.9ms",
+    "BSON benchmark: 97.1% bytes saved with BOOK_CHAPTER_PROJECT (5.6MB -> 168KB for 94 docs)"
+  ],
+  
+  "test_report_links": [
+    "/app/tests/packet1/test_chapter_books.py (lines 1381-1956: new regression tests)",
+    "/app/tests/load/catalog_smoke.py (HTTP benchmark)",
+    "/app/tests/load/bson_bytes_benchmark.py (BSON benchmark)",
+    "/app/test_reports/capacity_catalog_smoke.json",
+    "/app/test_reports/bson_bytes_benchmark.json"
+  ],
+  
+  "success_percentage": {
+    "backend_isolated_tests": "100% (342/342 passed)",
+    "http_benchmark": "100% (40/40 requests successful)",
+    "bson_benchmark": "97.1% bytes saved"
+  },
+  
+  "updated_files": [
+    "/app/tests/packet1/test_chapter_books.py (added 10 regression tests)",
+    "/app/tests/load/catalog_smoke.py (new HTTP benchmark)",
+    "/app/tests/load/bson_bytes_benchmark.py (new BSON benchmark)"
+  ],
+  
+  "action_item_for_main_agent": "",
+  
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  
+  "detailed_findings": {
+    "code_modifications_verified": {
+      "chapter_books.py": "BOOK_CHAPTER_PROJECT metadata projection verified - excludes source/answer fields, 97.1% BSON bytes saved",
+      "db.py": "chapter_attempt_latest index verified - used in catalog history aggregation",
+      "attempts.py": "preflight deduplication verified - deduplicates exact identical source refs per request, validates all unique refs, no cross-request caching",
+      "exam_catalogue": "history aggregation verified - per visible set newest by started_at/id, fixes old 200 row truncate"
+    },
+    "regression_tests_coverage": {
+      "metadata_projection": "Verified BOOK_CHAPTER_PROJECT excludes sensitive fields (answer, solution, text, options, q_refs, s_refs)",
+      "book_view_equality": "Verified projected view returns same metadata count as full query",
+      "catalog_history_per_set": "Verified >200 attempts on one chapter don't hide active attempt on another chapter",
+      "catalog_history_filtering": "Verified cross-user filtering, mode filtering (practice only), expired attempts marked completed",
+      "catalog_history_deterministic": "Verified same-timestamp ordering uses id as tiebreaker",
+      "preflight_deduplication": "Verified deduplication of identical refs, validation of all unique refs including invalid ones, no cross-request caching"
+    },
+    "http_benchmark_results": {
+      "endpoint": "https://campus-launch-2.preview.emergentagent.com",
+      "total_requests": 40,
+      "success_rate": "100%",
+      "actual_rps": 4.98,
+      "latency_p50_ms": 69.54,
+      "latency_p95_ms": 139.4,
+      "latency_p99_ms": 306.9,
+      "endpoints_tested": [
+        "/api/chapter-exams",
+        "/api/chapter-exams?subject=Physics",
+        "/api/chapter-exams?subject=Chemistry",
+        "/api/chapter-exams?subject=Mathematics",
+        "/api/chapter-exams?page=1",
+        "/api/chapter-exams?page=2"
+      ],
+      "rate_limited": false,
+      "disclaimer": "UNQUALIFIED_500K - Bounded smoke test, NOT a capacity qualification for 500k users"
+    },
+    "bson_benchmark_results": {
+      "full_metadata_total_bytes": 5793146,
+      "full_metadata_avg_bytes_per_doc": 61629,
+      "projected_metadata_total_bytes": 167977,
+      "projected_metadata_avg_bytes_per_doc": 1786,
+      "bytes_saved": 5625169,
+      "percent_saved": "97.1%",
+      "document_count": 94,
+      "note": "BOOK_CHAPTER_PROJECT excludes question text, options, answers, solutions, and source refs"
+    },
+    "test_isolation": {
+      "database": "Isolated test database with guarded Motor namespace",
+      "external_http": "Blocked in isolated tests",
+      "storage": "Mocked for chapter book tests",
+      "fixtures": "Synthetic users (staff, owner, student) with session tokens"
+    }
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "summary": "FINAL VERIFICATION: Packet1 test suite fully operational. Executed `python -m pytest /app/tests/packet1 -q --tb=short` three times with consistent results: 71 passed, 6 xfailed, 0 fail, 0 error in ~2s. All 77 tests run deterministically with proper isolation.",
+  "verification_runs": {
+    "run_1": {
+      "passed": 71,
+      "xfailed": 6,
+      "failed": 0,
+      "errors": 0,
+      "time": "2.17s",
+      "log": "/tmp/packet1_run1.log"
+    },
+    "run_2": {
+      "passed": 71,
+      "xfailed": 6,
+      "failed": 0,
+      "errors": 0,
+      "time": "2.11s",
+      "log": "/tmp/packet1_run2.log"
+    },
+    "run_3": {
+      "passed": 71,
+      "xfailed": 6,
+      "failed": 0,
+      "errors": 0,
+      "time": "2.09s",
+      "log": "/tmp/packet1_run3.log"
+    }
+  },
+  "backend_issues": {
+    "critical_bugs": [],
+    "open_invariants_documented": [
+      {
+        "id": "A01",
+        "test": "test_a01_retry_alias_survives_completed_retry",
+        "issue": "Retry idempotency - accepted retry alias lost after completion",
+        "status": "XFAIL with OpenInvariant (strict=True)",
+        "ownership": "Packet 06",
+        "priority": "P06"
+      },
+      {
+        "id": "A02",
+        "test": "test_a02_publish_has_one_same_version_archive",
+        "issue": "Concurrent publish creates duplicate same-version archive",
+        "status": "XFAIL with OpenInvariant (strict=True)",
+        "ownership": "Packet 05",
+        "priority": "P05"
+      },
+      {
+        "id": "A03",
+        "test": "test_a03_concurrent_question_edits_preserve_both",
+        "issue": "Concurrent edits on different fields - accepted edit overwritten",
+        "status": "XFAIL with OpenInvariant (strict=True)",
+        "ownership": "Packet 05",
+        "priority": "P05"
+      },
+      {
+        "id": "A04",
+        "test": "test_a04_unknown_audience_denied",
+        "issue": "Unknown audience value fails open (permits access)",
+        "status": "XFAIL with OpenInvariant (strict=True)",
+        "ownership": "Packet 05",
+        "priority": "P05"
+      },
+      {
+        "id": "A05",
+        "test": "test_a05_waiting_grade_job_drains_without_second_trigger",
+        "issue": "Persisted waiting job never dispatches after slot release",
+        "status": "XFAIL with OpenInvariant (strict=True)",
+        "ownership": "Packet 04",
+        "priority": "P04"
+      },
+      {
+        "id": "A06",
+        "test": "test_a06_replaced_lease_cannot_write_destination",
+        "issue": "Stale extraction worker writes academic destination after lease replaced",
+        "status": "XFAIL with OpenInvariant (strict=True)",
+        "ownership": "Packet 04",
+        "priority": "P04"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "notes": "Frontend build verified at /tmp/tejas-packet1-frontend-build.log - compiled successfully. Screenshot evidence at /root/.emergent/automation_output/20261012_143750 (desktop 1920x800, mobile 390x844) shows expected overflow/empty phone behavior."
+  },
+  "passed_tests": [
+    "6 GREEN boundary tests in test_audit_regressions.py (Motor guards, held jobs, body immutability, direct protected deny, hold rejects without body, phone practice full flow)",
+    "21 baseline evidence tests (source inventory, requirements, release gates, coverage manifest, operation catalogue, workload profile)",
+    "17 command contract tests (canonical bytes, command intent, exact marks, frozen DTOs)",
+    "10 engineering endpoint tests (capacity profile 401/403/200, safety status 401/200, security config, no auth override)",
+    "1 golden practice scorer test",
+    "16 safety holds tests (source upload/parse/publication/extraction/regrade held with 503, health/answer not held, bypass prevention, hold headers)"
+  ],
+  "test_report_links": [
+    "/app/tests/packet1/test_audit_regressions.py",
+    "/app/tests/packet1/test_baseline_evidence.py",
+    "/app/tests/packet1/test_command_contracts.py",
+    "/app/tests/packet1/test_engineering_endpoints.py",
+    "/app/tests/packet1/test_golden_practice.py",
+    "/app/tests/packet1/test_safety_holds.py",
+    "/app/tests/packet1/conftest.py",
+    "/tmp/packet1_run1.log",
+    "/tmp/packet1_run2.log",
+    "/tmp/packet1_run3.log",
+    "/tmp/packet1_collect.log"
+  ],
+  "success_percentage": {
+    "backend": "92.2% (71/77 passed, 6 documented open invariants)",
+    "frontend": "N/A (backend-only Packet1 testing)",
+    "green_boundaries": "100% (6/6 passed)",
+    "audit_regressions": "100% (6 xfail correctly document open bugs with OpenInvariant)",
+    "deterministic_execution": "100% (3/3 runs identical outcomes)"
+  },
+  "updated_files": [],
+  "action_item_for_main_agent": "",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": true,
+  "verification_details": {
+    "total_tests": 77,
+    "test_count_verified": "77 collected (not 80 assumed)",
+    "xfail_tests": 6,
+    "passed_tests": 71,
+    "failed_tests": 0,
+    "error_tests": 0,
+    "execution_time": "~2s per run",
+    "consistency": "All 3 runs identical: 71 passed, 6 xfailed",
+    "test_categories": {
+      "audit_regressions": {
+        "total": 12,
+        "xfail": 6,
+        "passed": 6,
+        "notes": "A01-A06 use OpenInvariant (custom AssertionError), not generic assertions. A02/A03 use same_preimage read barriers. A05 pauses real grader with Event. A06 replaces lease AFTER require_lease BEFORE destination update via forwarding proxy. Only extraction storage/parser mocked in A06."
+      },
+      "baseline_evidence": {
+        "total": 21,
+        "passed": 21
+      },
+      "command_contracts": {
+        "total": 17,
+        "passed": 17
+      },
+      "engineering_endpoints": {
+        "total": 10,
+        "passed": 10,
+        "notes": "All staff endpoint 200/403/401 tests passed. No app code changes."
+      },
+      "golden_practice": {
+        "total": 1,
+        "passed": 1
+      },
+      "safety_holds": {
+        "total": 16,
+        "passed": 16
+      }
+    },
+    "conftest_verification": {
+      "uuid_db": "tejas_p1_test_{32hex_uuid} - one per session",
+      "session_loop": "pytest.mark.asyncio(loop_scope='session') applied to all async tests",
+      "indexes_once": "await tejas_db.indexes() called once in test_client fixture (session scope)",
+      "delete_many_guarded": "clean_db fixture uses delete_many({}) only inside exact guarded namespace, cleanup errors fail suite",
+      "motor_guards": "AsyncIOMotorClient.get_database/__getitem__/drop_database/AsyncIOMotorDatabase.__init__ all guarded to reject non-test DB",
+      "no_mongo_auto_reconnect": "Prior MongoAutoReconnect from excessive index drop/create churn eliminated"
+    },
+    "requirements_verification": {
+      "pytest": "8.4.2",
+      "pytest_asyncio": "0.24.0",
+      "markdown": "3.10.2",
+      "notes": "Only test dependencies changed from past doc checks"
+    },
+    "frontend_verification": {
+      "build_log": "/tmp/tejas-packet1-frontend-build.log",
+      "build_status": "Compiled successfully in 19.10s",
+      "screenshot_evidence": "/root/.emergent/automation_output/20261012_143750",
+      "desktop_screenshot": "packet1-desktop.jpeg (1920x800)",
+      "mobile_screenshot": "packet1-mobile.jpeg (390x844)",
+      "console_log": "Expected overflow empty phone TEL no password behavior"
+    },
+    "iteration_36_superseded": true,
+    "iteration_36_issues": "iteration_36 claimed 100% but had 70 passed, 4 xfailed, 2 errors, 1 failed. Weak regressions corrected by main agent.",
+    "no_mocks_claimed": "ACCURATE - Only A06 stubs parser/storage bytes. A02/A03 use forwarding read barriers. A05 pauses real grader. All other tests use real functions + real isolated MongoDB.",
+    "xfail_strict_verified": "All 6 xfail tests use strict=True, raises=OpenInvariant (custom exception), not generic AssertionError/timeouts"
+  },
+  "packet1_exit_status": {
+    "blocked": true,
+    "reason": "500k UNQUALIFIED - atomic coverage, full contracts, credential rotation, signed SBOM, etc. not complete",
+    "coverage_manifest_verified": "test_packet1_exit_blocked PASSED - confirms BLOCKED status"
+  },
+  "notes": [
+    "All 77 tests run deterministically across 3 fresh process runs",
+    "No orphan tasks detected",
+    "No cleanup failures",
+    "Capability globals restore verified (safety.HELD_CAPABILITIES scoped in A02/A06 RED cases)",
+    "Test isolation working correctly (UUID DB per session, Motor guards prevent cross-DB access)",
+    "Frontend build and screenshot evidence already completed (no repeat needed)",
+    "Staff endpoint tests (200/403/401) all passing with no app code changes",
+    "Honest reporting: 71 green + 6 OPEN invariants, NOT '6 bugs fixed' or '100% pass rate'",
+    "iteration_36 superseded - weak regressions corrected, all current 77 tests now run properly"
+  ]
+}

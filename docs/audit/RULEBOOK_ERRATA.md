@@ -1,0 +1,17 @@
+# Rulebook errata — findings only, no application changes
+
+Source precedence: the five uploaded PDFs, except explicit latest user overrides (matte maroon and phone-only student entry). Internal documentation cannot silently lower a requirement.
+
+| ID | Current internal statement / omission | Authoritative requirement | Required correction |
+|---|---|---|---|
+| E01 | `docs/RULEBOOK_ARCHITECTURE_V5.md` §6 says at least40 meaningful analyses | V4 p1: **Deliver all60 numbered analyses**, with informative unavailable states when evidence is missing. V5 p64 acceptance table: all60calculations match reference cases | Replace the40minimum with all60; distinguish implementation/unavailable evidence rather than omit analyses. The audit extracts all60 entries in `analytics_60_matrix.csv` |
+| E02 | Custom autosave is an acknowledged pilot exception but sometimes discussed alongside full session correctness | V2 p13–17 and V5 p7,10,29–31 require draft vs explicit commit, command identity, fenced authority, admission and terminal drain rules | Keep custom-practice disclosure, but mark full official session protocol noncompliant until implemented; it is not a user-approved replacement for the guide |
+| E03 | Prior “lease-fenced jobs” language can imply protected outputs | V5 p10,40,50: old writers must not publish after authority changes | Require a destination-side generation/token condition or equivalent transactional fence. A06 proves check-then-write is insufficient |
+| E04 | Bounded lanes described as a scale enabler can imply independent queue execution | V5 p44–46,52: separate failure/resource domains and functioning queue service | State explicitly that current slots are per-process limits and queued work does not self-drain after capacity is freed (A05) |
+| E05 | Existing response envelope described as a versioned API boundary | V5 p28: complete versioned OpenAPI/contracts, bounded schemas, errors, idempotency, status/header conventions | Record46routes/two explicit response models as partial, not contract-first completion |
+| E06 | Immutable/hash snapshots can be mistaken for protected academic truth | V5 p17–27: independent approvals, signed immutable activation/lineage, key custody and storage retention controls | Separate content-addressed snapshots from cryptographic attestation, WORM and authorization boundaries |
+| E07 | Positive scorer fixtures / pending-grade tests treated as overall analytics proof | V4 p5–6 requires null/unavailable for zero denominators, full outcome/award decomposition and evidence metadata | Test metric semantics separately from net marks. Current zero-default accuracy/percentage behavior is not proof of correct unavailable states |
+| E08 | Legacy reports use broad success percentages or prose “all good” conclusions | V5 p64–68 requires reproducible golden, load, fault, restore and gate evidence | Preserve raw reports but bind conclusions to tested scopes; supersede copied/no-op/incorrect-encoding tests, never present their percentages as readiness |
+| E09 | Scope casually called “vaulted/modular/scalable” | V5 p44–50 separates live cells, control/trust, batch, analytics, edge and operations | Call the current deployment a modular monolith with a standalone writer. The reference topology is unprovisioned and unqualified |
+
+These are audit findings. The binding source PDFs, user decisions and application code were not edited during this audit. A corrected implementation/rulebook revision should be approved as a subsequent change set.

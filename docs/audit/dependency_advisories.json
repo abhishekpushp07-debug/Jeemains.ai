@@ -1,0 +1,430 @@
+{
+  "advisories": [
+    {
+      "module": "@eslint/plugin-kit",
+      "severity": "low",
+      "title": "@eslint/plugin-kit is vulnerable to Regular Expression Denial of Service attacks through ConfigCommentParser",
+      "url": "https://github.com/advisories/GHSA-xffm-g5w8-qvg7",
+      "vulnerable_versions": "<0.3.4",
+      "patched_versions": ">=0.3.4"
+    },
+    {
+      "module": "katex",
+      "severity": "low",
+      "title": "KaTeX: Existing prototype pollution can bypass trust restrictions",
+      "url": "https://github.com/advisories/GHSA-238p-pmpm-9mq7",
+      "vulnerable_versions": ">=0.11.0 <0.18.2",
+      "patched_versions": ">=0.18.2"
+    },
+    {
+      "module": "postcss-selector-parser",
+      "severity": "moderate",
+      "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "vulnerable_versions": "<7.1.6",
+      "patched_versions": ">=7.1.6"
+    },
+    {
+      "module": "postcss-selector-parser",
+      "severity": "moderate",
+      "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "vulnerable_versions": "<7.1.6",
+      "patched_versions": ">=7.1.6"
+    },
+    {
+      "module": "nth-check",
+      "severity": "high",
+      "title": "Inefficient Regular Expression Complexity in nth-check",
+      "url": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
+      "vulnerable_versions": "<2.0.1",
+      "patched_versions": ">=2.0.1"
+    },
+    {
+      "module": "webpack-dev-server",
+      "severity": "moderate",
+      "title": "webpack-dev-server users' source code may be stolen when they access a malicious web site with non-Chromium based browser",
+      "url": "https://github.com/advisories/GHSA-9jgg-88mc-972h",
+      "vulnerable_versions": "<=5.2.0",
+      "patched_versions": ">=5.2.1"
+    },
+    {
+      "module": "webpack-dev-server",
+      "severity": "moderate",
+      "title": "webpack-dev-server users' source code may be stolen when they access a malicious web site",
+      "url": "https://github.com/advisories/GHSA-4v9v-hfq4-rm2v",
+      "vulnerable_versions": "<=5.2.0",
+      "patched_versions": ">=5.2.1"
+    },
+    {
+      "module": "webpack-dev-server",
+      "severity": "moderate",
+      "title": "webpack-dev-server vulnerable to cross-origin source code exposure on non-HTTPS origins",
+      "url": "https://github.com/advisories/GHSA-79cf-xcqc-c78w",
+      "vulnerable_versions": "<=5.2.3",
+      "patched_versions": ">=5.2.4"
+    },
+    {
+      "module": "webpack-dev-server",
+      "severity": "moderate",
+      "title": "webpack-dev-server vulnerable to HMR WebSocket interception via permissive user proxies",
+      "url": "https://github.com/advisories/GHSA-mx8g-39q3-5c79",
+      "vulnerable_versions": "<5.2.5",
+      "patched_versions": ">=5.2.5"
+    },
+    {
+      "module": "webpack-dev-server",
+      "severity": "moderate",
+      "title": "webpack-dev-server vulnerable to cross-site request forgery via internal developer endpoints",
+      "url": "https://github.com/advisories/GHSA-f5vj-f2hx-8m93",
+      "vulnerable_versions": "<=5.2.5",
+      "patched_versions": ">=5.2.6"
+    },
+    {
+      "module": "webpack-dev-server",
+      "severity": "moderate",
+      "title": "webpack-dev-server vulnerable to denial of service via a malformed Host or Origin header",
+      "url": "https://github.com/advisories/GHSA-m28w-2pqf-7qgj",
+      "vulnerable_versions": "<=5.2.5",
+      "patched_versions": ">=5.2.6"
+    },
+    {
+      "module": "postcss",
+      "severity": "moderate",
+      "title": "PostCSS line return parsing error",
+      "url": "https://github.com/advisories/GHSA-7fh5-64p2-3v2j",
+      "vulnerable_versions": "<8.4.31",
+      "patched_versions": ">=8.4.31"
+    },
+    {
+      "module": "postcss",
+      "severity": "moderate",
+      "title": "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output",
+      "url": "https://github.com/advisories/GHSA-qx2v-qp2m-jg93",
+      "vulnerable_versions": "<8.5.10",
+      "patched_versions": ">=8.5.10"
+    },
+    {
+      "module": "postcss",
+      "severity": "high",
+      "title": "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments",
+      "url": "https://github.com/advisories/GHSA-6g55-p6wh-862q",
+      "vulnerable_versions": "<=8.5.11",
+      "patched_versions": ">=8.5.12"
+    },
+    {
+      "module": "postcss",
+      "severity": "moderate",
+      "title": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q \u2014 attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset",
+      "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+      "vulnerable_versions": "<=8.5.22",
+      "patched_versions": ">=8.5.23"
+    },
+    {
+      "module": "postcss",
+      "severity": "high",
+      "title": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure",
+      "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849",
+      "vulnerable_versions": "<=8.5.17",
+      "patched_versions": ">=8.5.18"
+    },
+    {
+      "module": "serialize-javascript",
+      "severity": "high",
+      "title": "Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()",
+      "url": "https://github.com/advisories/GHSA-5c6j-r48x-rmvq",
+      "vulnerable_versions": "<=7.0.2",
+      "patched_versions": ">=7.0.3"
+    },
+    {
+      "module": "serialize-javascript",
+      "severity": "high",
+      "title": "Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()",
+      "url": "https://github.com/advisories/GHSA-5c6j-r48x-rmvq",
+      "vulnerable_versions": "<=7.0.2",
+      "patched_versions": ">=7.0.3"
+    },
+    {
+      "module": "serialize-javascript",
+      "severity": "moderate",
+      "title": "Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects",
+      "url": "https://github.com/advisories/GHSA-qj8w-gfj5-8c6v",
+      "vulnerable_versions": ">=5.0.0 <7.0.5",
+      "patched_versions": ">=7.0.5"
+    },
+    {
+      "module": "underscore",
+      "severity": "high",
+      "title": "Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack",
+      "url": "https://github.com/advisories/GHSA-qpx9-hpmf-5gmw",
+      "vulnerable_versions": "<=1.13.7",
+      "patched_versions": ">=1.13.8"
+    },
+    {
+      "module": "@tootallnate/once",
+      "severity": "low",
+      "title": "@tootallnate/once vulnerable to Incorrect Control Flow Scoping",
+      "url": "https://github.com/advisories/GHSA-vpq2-c234-7xj6",
+      "vulnerable_versions": "<2.0.1",
+      "patched_versions": ">=2.0.1"
+    },
+    {
+      "module": "@tootallnate/once",
+      "severity": "low",
+      "title": "@tootallnate/once vulnerable to Incorrect Control Flow Scoping",
+      "url": "https://github.com/advisories/GHSA-vpq2-c234-7xj6",
+      "vulnerable_versions": "<2.0.1",
+      "patched_versions": ">=2.0.1"
+    },
+    {
+      "module": "@tootallnate/once",
+      "severity": "low",
+      "title": "@tootallnate/once vulnerable to Incorrect Control Flow Scoping",
+      "url": "https://github.com/advisories/GHSA-vpq2-c234-7xj6",
+      "vulnerable_versions": "<2.0.1",
+      "patched_versions": ">=2.0.1"
+    },
+    {
+      "module": "uuid",
+      "severity": "moderate",
+      "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+      "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+      "vulnerable_versions": "<11.1.1",
+      "patched_versions": ">=11.1.1"
+    },
+    {
+      "module": "svgo",
+      "severity": "high",
+      "title": "SVGO removeScripts plugin leaves some executable scripts intact",
+      "url": "https://github.com/advisories/GHSA-2p49-hgcm-8545",
+      "vulnerable_versions": ">=1.0.0 <2.8.3",
+      "patched_versions": ">=2.8.3"
+    },
+    {
+      "module": "svgo",
+      "severity": "high",
+      "title": "SVGO: removeScripts allows executable links through namespace and control-character bypasses",
+      "url": "https://github.com/advisories/GHSA-w27v-7q3p-w38r",
+      "vulnerable_versions": ">=1.0.0 <2.8.4",
+      "patched_versions": ">=2.8.4"
+    },
+    {
+      "module": "svgo",
+      "severity": "moderate",
+      "title": "SVGO: removeScripts incompletely sanitizes executable HTML in SVG foreignObject elements",
+      "url": "https://github.com/advisories/GHSA-4vpr-x523-8j87",
+      "vulnerable_versions": ">=1.0.0 <2.8.4",
+      "patched_versions": ">=2.8.4"
+    },
+    {
+      "module": "webpack-dev-middleware",
+      "severity": "high",
+      "title": "webpack-dev-middleware vulnerable to Path Traversal via non-slash-terminated publicPath",
+      "url": "https://github.com/advisories/GHSA-g84c-rxfj-3j2c",
+      "vulnerable_versions": "<7.4.5",
+      "patched_versions": ">=7.4.6"
+    },
+    {
+      "module": "node-forge",
+      "severity": "high",
+      "title": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
+      "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
+      "vulnerable_versions": "<=1.4.0",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "braces",
+      "severity": "high",
+      "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+      "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+      "vulnerable_versions": "<=3.0.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "sprintf-js",
+      "severity": "moderate",
+      "title": "sprintf-js vulnerable to denial of service through unbounded precision specifiers",
+      "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+      "vulnerable_versions": "<=1.1.3",
+      "patched_versions": "<0.0.0"
+    },
+    {
+      "module": "postcss-selector-parser",
+      "severity": "moderate",
+      "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "vulnerable_versions": "<7.1.6",
+      "patched_versions": ">=7.1.6"
+    },
+    {
+      "module": "postcss-selector-parser",
+      "severity": "moderate",
+      "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "vulnerable_versions": "<7.1.6",
+      "patched_versions": ">=7.1.6"
+    },
+    {
+      "module": "postcss-selector-parser",
+      "severity": "moderate",
+      "title": "PostCSS: Quadratic complexity in flat selector parsing allows CPU exhaustion",
+      "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "vulnerable_versions": "<7.1.6",
+      "patched_versions": ">=7.1.6"
+    }
+  ],
+  "tool_status": [
+    {
+      "type": "auditSummary",
+      "data": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 5,
+          "moderate": 25,
+          "high": 21,
+          "critical": 0
+        },
+        "dependencies": 1450,
+        "devDependencies": 0,
+        "optionalDependencies": 0,
+        "totalDependencies": 1450
+      }
+    }
+  ]
+}

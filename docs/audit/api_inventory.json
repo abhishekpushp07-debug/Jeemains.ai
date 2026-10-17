@@ -1,0 +1,436 @@
+[
+  {
+    "file": "backend/tejas/jobs.py",
+    "function": "status",
+    "line": 136,
+    "method": "GET",
+    "route": "/jobs/{id}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/jobs.py",
+    "function": "retry_job",
+    "line": 146,
+    "method": "POST",
+    "route": "/jobs/{id}/retry",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/jobs.py",
+    "function": "download",
+    "line": 160,
+    "method": "GET",
+    "route": "/jobs/{id}/download",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/jobs.py",
+    "function": "cron",
+    "line": 192,
+    "method": "POST",
+    "route": "/cron/maintenance",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "catalogue",
+    "line": 129,
+    "method": "GET",
+    "route": "/sets",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "set_detail",
+    "line": 142,
+    "method": "GET",
+    "route": "/sets/{id}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "studio_sets",
+    "line": 152,
+    "method": "GET",
+    "route": "/studio/sets",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "create_set",
+    "line": 159,
+    "method": "POST",
+    "route": "/studio/sets",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "studio_set",
+    "line": 187,
+    "method": "GET",
+    "route": "/studio/sets/{id}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "update_set",
+    "line": 208,
+    "method": "PUT",
+    "route": "/studio/sets/{id}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "upload",
+    "line": 245,
+    "method": "POST",
+    "route": "/studio/sets/{id}/files",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "source_page",
+    "line": 285,
+    "method": "GET",
+    "route": "/studio/files/{id}/page/{page}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "source_text",
+    "line": 301,
+    "method": "GET",
+    "route": "/studio/files/{id}/text/{page}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "source_download",
+    "line": 315,
+    "method": "GET",
+    "route": "/studio/files/{id}/download",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "extract",
+    "line": 325,
+    "method": "POST",
+    "route": "/studio/sets/{id}/extract",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "add_question",
+    "line": 435,
+    "method": "POST",
+    "route": "/studio/sets/{id}/questions",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "edit_question",
+    "line": 472,
+    "method": "PUT",
+    "route": "/studio/sets/{id}/questions/{qid}",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "approve_question",
+    "line": 523,
+    "method": "POST",
+    "route": "/studio/sets/{id}/questions/{qid}/approve",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "publish",
+    "line": 565,
+    "method": "POST",
+    "route": "/studio/sets/{id}/publish",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "withdraw",
+    "line": 637,
+    "method": "POST",
+    "route": "/studio/sets/{id}/withdraw",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "subset",
+    "line": 649,
+    "method": "POST",
+    "route": "/studio/sets/{id}/subset",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/content.py",
+    "function": "preview_asset",
+    "line": 680,
+    "method": "GET",
+    "route": "/studio/sets/{id}/questions/{qid}/asset/{kind}/{index}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "my_sets",
+    "line": 120,
+    "method": "GET",
+    "route": "/my/sets",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "my_set",
+    "line": 128,
+    "method": "GET",
+    "route": "/my/sets/{id}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "preflight",
+    "line": 136,
+    "method": "POST",
+    "route": "/sets/{id}/preflight",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "start",
+    "line": 165,
+    "method": "POST",
+    "route": "/sets/{id}/start",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "history",
+    "line": 249,
+    "method": "GET",
+    "route": "/attempts",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "read_attempt",
+    "line": 261,
+    "method": "GET",
+    "route": "/attempts/{id}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "visit_question",
+    "line": 270,
+    "method": "POST",
+    "route": "/attempts/{id}/visit",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "submit",
+    "line": 304,
+    "method": "POST",
+    "route": "/attempts/{id}/submit",
+    "response_model": true,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "results",
+    "line": 323,
+    "method": "GET",
+    "route": "/attempts/{id}/results",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "asset",
+    "line": 357,
+    "method": "GET",
+    "route": "/attempts/{id}/questions/{qid}/asset/{kind}/{index}",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "retry",
+    "line": 388,
+    "method": "POST",
+    "route": "/attempts/{id}/retry",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/attempts.py",
+    "function": "report",
+    "line": 492,
+    "method": "POST",
+    "route": "/attempts/{id}/report",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/profiles.py",
+    "function": "profiles",
+    "line": 98,
+    "method": "GET",
+    "route": "",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "register",
+    "line": 141,
+    "method": "POST",
+    "route": "/register",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "login",
+    "line": 149,
+    "method": "POST",
+    "route": "/login",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "session",
+    "line": 174,
+    "method": "GET",
+    "route": "/session",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "me",
+    "line": 193,
+    "method": "GET",
+    "route": "/me",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "refresh",
+    "line": 198,
+    "method": "POST",
+    "route": "/refresh",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "logout",
+    "line": 223,
+    "method": "POST",
+    "route": "/logout",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/auth.py",
+    "function": "preferences",
+    "line": 242,
+    "method": "PATCH",
+    "route": "/preferences",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/corrections.py",
+    "function": "regrade",
+    "line": 165,
+    "method": "POST",
+    "route": "/studio/sets/{id}/regrade",
+    "response_model": false,
+    "dict_body_args": [
+      "data"
+    ]
+  },
+  {
+    "file": "backend/tejas/reviewers.py",
+    "function": "update_access",
+    "line": 18,
+    "method": "POST",
+    "route": "/reviewers",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/phone.py",
+    "function": "access",
+    "line": 34,
+    "method": "POST",
+    "route": "/phone",
+    "response_model": false,
+    "dict_body_args": []
+  },
+  {
+    "file": "backend/tejas/answers.py",
+    "function": "save_answer",
+    "line": 46,
+    "method": "PUT",
+    "route": "/{id}/answers/{qid}",
+    "response_model": true,
+    "dict_body_args": []
+  }
+]

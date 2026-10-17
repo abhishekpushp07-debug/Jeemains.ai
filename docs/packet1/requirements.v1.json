@@ -1,0 +1,2473 @@
+{
+  "version": 1,
+  "complete": false,
+  "requirements": [
+    {
+      "id": "IDENTITY-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        1,
+        43
+      ],
+      "obligation": "Active attempts, not idle users, define the 500000 target",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "capacity.calculate",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "capacity_arithmetic",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "IDENTITY-02",
+      "source": "PDF-01",
+      "pages_1based": [
+        1,
+        26
+      ],
+      "obligation": "Phone-only student entry is an explicit user override, not verified ownership",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 3,
+      "owner_role": "application_lead",
+      "contract_boundary": "auth/phone",
+      "depends_on_packets": [
+        1,
+        2
+      ],
+      "acceptance_target": "phone_only",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        11
+      ],
+      "obligation": "Locked original bytes and approved truth are never edited in place",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 5,
+      "owner_role": "application_lead",
+      "contract_boundary": "source-vault",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "acceptance_target": "locked_truth_denial",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        11,
+        16
+      ],
+      "obligation": "Corrections create reviewed successor versions",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 5,
+      "owner_role": "application_lead",
+      "contract_boundary": "content-version-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "acceptance_target": "successor_version",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        11,
+        26
+      ],
+      "obligation": "Active attempts retain pinned question/key/rule/release versions",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "attempt-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "pinned_versions",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-04",
+      "source": "PDF-05",
+      "pages_1based": [
+        26,
+        42
+      ],
+      "obligation": "Candidate packages exclude keys, hidden answers and source maps",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 5,
+      "owner_role": "application_lead",
+      "contract_boundary": "CandidateQuestion",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "acceptance_target": "candidate_projection",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-05",
+      "source": "PDF-05",
+      "pages_1based": [
+        14,
+        25
+      ],
+      "obligation": "Source/candidate/key/solution classes have separated workload authority",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 3,
+      "owner_role": "application_lead",
+      "contract_boundary": "data-ownership-map",
+      "depends_on_packets": [
+        1,
+        2
+      ],
+      "acceptance_target": "artifact_identity_isolation",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-06",
+      "source": "PDF-03",
+      "pages_1based": [
+        1,
+        2,
+        3
+      ],
+      "obligation": "Each question preserves exact matched solution and source provenance",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 5,
+      "owner_role": "application_lead",
+      "contract_boundary": "SourceAnchor",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "acceptance_target": "source_pairing",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SOURCE-07",
+      "source": "PDF-05",
+      "pages_1based": [
+        11,
+        16
+      ],
+      "obligation": "Academic approval and source rights are independent publication gates",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 5,
+      "owner_role": "application_lead",
+      "contract_boundary": "publication-policy",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "acceptance_target": "publication_rights",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SECURITY-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        13,
+        14
+      ],
+      "obligation": "Privileged staff authenticate with MFA before a secondary action gate",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 3,
+      "owner_role": "application_lead",
+      "contract_boundary": "staff-identity-provider",
+      "depends_on_packets": [
+        1,
+        2
+      ],
+      "acceptance_target": "staff_mfa",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SECURITY-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        13,
+        38
+      ],
+      "obligation": "Single-use grants bind actor/session/tenant/target/version/action/diff/reason/nonce",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 3,
+      "owner_role": "application_lead",
+      "contract_boundary": "protected-command-repository",
+      "depends_on_packets": [
+        1,
+        2
+      ],
+      "acceptance_target": "grant_binding",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SECURITY-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        13
+      ],
+      "obligation": "Failed verifier/secrets/policy/grant services deny protected actions",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 3,
+      "owner_role": "application_lead",
+      "contract_boundary": "grant-policy",
+      "depends_on_packets": [
+        1,
+        2
+      ],
+      "acceptance_target": "fail_closed_dependencies",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SECURITY-04",
+      "source": "PDF-05",
+      "pages_1based": [
+        13,
+        38
+      ],
+      "obligation": "Credentials and verifiers never appear in evidence/log payloads",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 1,
+      "owner_role": "application_lead",
+      "contract_boundary": "safe-evidence",
+      "depends_on_packets": [],
+      "acceptance_target": "evidence_redaction",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "API-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        28
+      ],
+      "obligation": "Versioned executable OpenAPI and local JSON Schemas identify every operation",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 1,
+      "owner_role": "application_lead",
+      "contract_boundary": "operation_catalogue",
+      "depends_on_packets": [],
+      "acceptance_target": "catalogue_coverage",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "API-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        28
+      ],
+      "obligation": "Every operation declares ownership, roles, lane, idempotency, body budgets and errors",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 1,
+      "owner_role": "application_lead",
+      "contract_boundary": "operation_catalogue",
+      "depends_on_packets": [],
+      "acceptance_target": "catalogue_metadata",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "API-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        29
+      ],
+      "obligation": "Same operation key and intent return the original durable outcome",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "CommandIntent",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "A01",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "API-04",
+      "source": "PDF-05",
+      "pages_1based": [
+        29
+      ],
+      "obligation": "Changed intent under the same scoped key conflicts",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "CommandIntent",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "command_scope",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "API-05",
+      "source": "PDF-05",
+      "pages_1based": [
+        28,
+        38
+      ],
+      "obligation": "Protected edits enforce exact parent preconditions and review invalidation",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 5,
+      "owner_role": "application_lead",
+      "contract_boundary": "editorial-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "acceptance_target": "A03",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "API-06",
+      "source": "PDF-05",
+      "pages_1based": [
+        29,
+        40
+      ],
+      "obligation": "Durable async acceptance exposes typed receipt, status, Location and Retry-After",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 4,
+      "owner_role": "application_lead",
+      "contract_boundary": "job-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3
+      ],
+      "acceptance_target": "async_receipt",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        44,
+        45
+      ],
+      "obligation": "Assign and persist one home cell before attempt admission",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 2,
+      "owner_role": "application_lead",
+      "contract_boundary": "admission-repository",
+      "depends_on_packets": [
+        1
+      ],
+      "acceptance_target": "home_cell",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        44,
+        45
+      ],
+      "obligation": "Never reroute active writers as ordinary load balancing",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 2,
+      "owner_role": "application_lead",
+      "contract_boundary": "routing-policy",
+      "depends_on_packets": [
+        1
+      ],
+      "acceptance_target": "writer_isolation",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        7,
+        30,
+        31,
+        50
+      ],
+      "obligation": "Admission consumption, attempt creation, receipt and capacity charge are atomic",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "admission-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "reservation_atomicity",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-04",
+      "source": "PDF-05",
+      "pages_1based": [
+        7,
+        30,
+        31,
+        50
+      ],
+      "obligation": "Acquire the serializing lock before sampling authoritative cutoff time",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "command-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "cutoff_lock_wait",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-05",
+      "source": "PDF-05",
+      "pages_1based": [
+        30,
+        31,
+        50
+      ],
+      "obligation": "Draft persistence is distinct from grading-eligible explicit commitment",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "command-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "committed_a_draft_b",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-06",
+      "source": "PDF-05",
+      "pages_1based": [
+        31,
+        50
+      ],
+      "obligation": "Writer generations fence every authoritative mutation",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "command-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "stale_writer",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-07",
+      "source": "PDF-05",
+      "pages_1based": [
+        31,
+        50
+      ],
+      "obligation": "Seal admitted watermark, classify/drain eligible work before final grading",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "terminal-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "seal_drain",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "LIVE-08",
+      "source": "PDF-05",
+      "pages_1based": [
+        2,
+        44,
+        52
+      ],
+      "obligation": "Global catalogue, analytics and optional reports cannot block admitted commits",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 2,
+      "owner_role": "application_lead",
+      "contract_boundary": "data-ownership-map",
+      "depends_on_packets": [
+        1
+      ],
+      "acceptance_target": "control_outage",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "WORKER-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        40,
+        44,
+        52
+      ],
+      "obligation": "Durable queued work drains autonomously without browser polling",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 4,
+      "owner_role": "application_lead",
+      "contract_boundary": "job-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3
+      ],
+      "acceptance_target": "A05",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "WORKER-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        10,
+        40,
+        50
+      ],
+      "obligation": "Destination writes participate in the current generation/lease authority",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 4,
+      "owner_role": "application_lead",
+      "contract_boundary": "job-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3
+      ],
+      "acceptance_target": "A06",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "WORKER-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        21,
+        40,
+        52
+      ],
+      "obligation": "Untrusted parse resource limits apply before expensive processing",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 4,
+      "owner_role": "application_lead",
+      "contract_boundary": "upload-sandbox",
+      "depends_on_packets": [
+        1,
+        2,
+        3
+      ],
+      "acceptance_target": "S01",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "GRADE-01",
+      "source": "PDF-02",
+      "pages_1based": [
+        13,
+        18
+      ],
+      "obligation": "Exact scoring uses only final committed responses and pinned rules",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 6,
+      "owner_role": "application_lead",
+      "contract_boundary": "ExactMarks",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "acceptance_target": "exact_marks",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYTICS-00",
+      "source": "PDF-04",
+      "pages_1based": [
+        1
+      ],
+      "obligation": "Deliver all60 analyses, with unavailable states for missing evidence",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 8,
+      "owner_role": "application_lead",
+      "contract_boundary": "analysis-registry",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "all_60",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYTICS-61",
+      "source": "PDF-05",
+      "pages_1based": [
+        2,
+        64,
+        68
+      ],
+      "obligation": "Analytical materializations never query the live writer for each page",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 8,
+      "owner_role": "application_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "no_hot_scans",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "REPORT-01",
+      "source": "PDF-04",
+      "pages_1based": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "obligation": "Screen and complete PDF share one immutable grade/version and release policy",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 9,
+      "owner_role": "application_lead",
+      "contract_boundary": "report-snapshot",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "acceptance_target": "snapshot_pdf_parity",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SCALE-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        3,
+        46,
+        56
+      ],
+      "obligation": "Versioned workload includes independent commit/draft/lease/telemetry streams",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 1,
+      "owner_role": "application_lead",
+      "contract_boundary": "capacity.calculate",
+      "depends_on_packets": [],
+      "acceptance_target": "capacity_arithmetic",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SCALE-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        47,
+        56,
+        59
+      ],
+      "obligation": "Start and submission waves overlay the surviving baseline",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "capacity.calculate",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "capacity_overlays",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SCALE-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        43,
+        48
+      ],
+      "obligation": "Machine counts require measured unit capacity and approved quota evidence",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "capacity-evidence",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "no_unqualified_claim",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "SCALE-04",
+      "source": "PDF-05",
+      "pages_1based": [
+        52,
+        63
+      ],
+      "obligation": "Budget and overload controls protect admitted sessions ahead of optional work",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "admission-policy",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "optional_shedding",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-01",
+      "source": "PDF-05",
+      "pages_1based": [
+        57
+      ],
+      "obligation": "Actor, browser and connection evidence are independent tracks",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "run-manifest",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "three_tracks",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-02",
+      "source": "PDF-05",
+      "pages_1based": [
+        58
+      ],
+      "obligation": "All six exact active-soak stages pass before final qualification",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "capacity.calculate",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "capacity_stages",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-03",
+      "source": "PDF-05",
+      "pages_1based": [
+        55,
+        61
+      ],
+      "obligation": "Evaluate latency and error gates overall and in predeclared critical windows",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "slo-manifest",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "critical_windows",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-04",
+      "source": "PDF-05",
+      "pages_1based": [
+        58,
+        68
+      ],
+      "obligation": "Under-generated or generator-saturated runs fail",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "run-manifest",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "offered_load",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-05",
+      "source": "PDF-05",
+      "pages_1based": [
+        60,
+        62
+      ],
+      "obligation": "Covered crash/AZ loss preserves acknowledged commits; regional loss is disclosed",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "restore-evidence",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "receipt_reconciliation",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-06",
+      "source": "PDF-05",
+      "pages_1based": [
+        61
+      ],
+      "obligation": "Metrics use bounded labels without learner or attempt identities",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "metric-contract",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "metric_cardinality",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "EVIDENCE-07",
+      "source": "PDF-05",
+      "pages_1based": [
+        66,
+        68
+      ],
+      "obligation": "Release evidence binds tested artifacts, signed digests, SBOM and compatible migrations",
+      "scope": "reviewed_subset_not_exhaustive",
+      "repair_packet": 10,
+      "owner_role": "operator",
+      "contract_boundary": "release-evidence",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "acceptance_target": "same_artifact",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A01",
+      "source": "PDF-04",
+      "pages_1based": [
+        5
+      ],
+      "obligation": "Net awarded marks",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A02",
+      "source": "PDF-04",
+      "pages_1based": [
+        5
+      ],
+      "obligation": "Fully correct response count",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A03",
+      "source": "PDF-04",
+      "pages_1based": [
+        5
+      ],
+      "obligation": "Incorrect and partial outcomes",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A04",
+      "source": "PDF-04",
+      "pages_1based": [
+        5
+      ],
+      "obligation": "Attempted-answer accuracy",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A05",
+      "source": "PDF-04",
+      "pages_1based": [
+        5
+      ],
+      "obligation": "Response completion rate",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A06",
+      "source": "PDF-04",
+      "pages_1based": [
+        6
+      ],
+      "obligation": "Ordinary positive marks earned",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A07",
+      "source": "PDF-04",
+      "pages_1based": [
+        6
+      ],
+      "obligation": "Penalty marks lost",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A08",
+      "source": "PDF-04",
+      "pages_1based": [
+        6
+      ],
+      "obligation": "Penalty-to-positive-marks ratio",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A09",
+      "source": "PDF-04",
+      "pages_1based": [
+        6
+      ],
+      "obligation": "Percentage of configured maximum marks",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A10",
+      "source": "PDF-04",
+      "pages_1based": [
+        6
+      ],
+      "obligation": "Subject marks contribution",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A11",
+      "source": "PDF-04",
+      "pages_1based": [
+        7
+      ],
+      "obligation": "Chapter mark contribution",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A12",
+      "source": "PDF-04",
+      "pages_1based": [
+        7
+      ],
+      "obligation": "Concept attempted accuracy",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A13",
+      "source": "PDF-04",
+      "pages_1based": [
+        7
+      ],
+      "obligation": "Response-type performance",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A14",
+      "source": "PDF-04",
+      "pages_1based": [
+        7
+      ],
+      "obligation": "Editorial difficulty outcome matrix",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A15",
+      "source": "PDF-04",
+      "pages_1based": [
+        7
+      ],
+      "obligation": "First-exposure versus repeat performance",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A16",
+      "source": "PDF-04",
+      "pages_1based": [
+        8
+      ],
+      "obligation": "Timer time consumed",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A17",
+      "source": "PDF-04",
+      "pages_1based": [
+        8
+      ],
+      "obligation": "Observed visible question time",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A18",
+      "source": "PDF-04",
+      "pages_1based": [
+        8
+      ],
+      "obligation": "Unobserved timer fraction",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A19",
+      "source": "PDF-04",
+      "pages_1based": [
+        8
+      ],
+      "obligation": "Time on slow incorrect responses",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A20",
+      "source": "PDF-04",
+      "pages_1based": [
+        8
+      ],
+      "obligation": "Question budget overrun",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A21",
+      "source": "PDF-04",
+      "pages_1based": [
+        9
+      ],
+      "obligation": "Subject time allocation",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A22",
+      "source": "PDF-04",
+      "pages_1based": [
+        9
+      ],
+      "obligation": "First-visit duration",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A23",
+      "source": "PDF-04",
+      "pages_1based": [
+        9
+      ],
+      "obligation": "Revisit time share",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A24",
+      "source": "PDF-04",
+      "pages_1based": [
+        9
+      ],
+      "obligation": "Positive score difference after revisions",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A25",
+      "source": "PDF-04",
+      "pages_1based": [
+        9
+      ],
+      "obligation": "Negative score difference after revisions",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A26",
+      "source": "PDF-04",
+      "pages_1based": [
+        10
+      ],
+      "obligation": "Late-window attempted accuracy",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A27",
+      "source": "PDF-04",
+      "pages_1based": [
+        10
+      ],
+      "obligation": "Recovery of unanswered review items",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A28",
+      "source": "PDF-04",
+      "pages_1based": [
+        10
+      ],
+      "obligation": "Unvisited eligible-item rate",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A29",
+      "source": "PDF-04",
+      "pages_1based": [
+        10
+      ],
+      "obligation": "Time spent on viewed omissions",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A30",
+      "source": "PDF-04",
+      "pages_1based": [
+        10
+      ],
+      "obligation": "Median time on fully correct items",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A31",
+      "source": "PDF-04",
+      "pages_1based": [
+        11
+      ],
+      "obligation": "Overall platform cohort percentile",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A32",
+      "source": "PDF-04",
+      "pages_1based": [
+        11
+      ],
+      "obligation": "Subject platform cohort percentile",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A33",
+      "source": "PDF-04",
+      "pages_1based": [
+        11
+      ],
+      "obligation": "Item full-correct cohort proportion",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A34",
+      "source": "PDF-04",
+      "pages_1based": [
+        11
+      ],
+      "obligation": "Item accuracy among attempted responses",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A35",
+      "source": "PDF-04",
+      "pages_1based": [
+        11
+      ],
+      "obligation": "Committed option-selection distribution",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A36",
+      "source": "PDF-04",
+      "pages_1based": [
+        12
+      ],
+      "obligation": "Correct-response time percentile",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A37",
+      "source": "PDF-04",
+      "pages_1based": [
+        12
+      ],
+      "obligation": "Cohort median correct-response time",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A38",
+      "source": "PDF-04",
+      "pages_1based": [
+        12
+      ],
+      "obligation": "Personal-to-benchmark time ratio",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A39",
+      "source": "PDF-04",
+      "pages_1based": [
+        12
+      ],
+      "obligation": "Item omission cohort rate",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A40",
+      "source": "PDF-04",
+      "pages_1based": [
+        12
+      ],
+      "obligation": "Item upper-minus-lower response difference",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A41",
+      "source": "PDF-04",
+      "pages_1based": [
+        13
+      ],
+      "obligation": "Confidence calibration by bin",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A42",
+      "source": "PDF-04",
+      "pages_1based": [
+        13
+      ],
+      "obligation": "Binary Brier score",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A43",
+      "source": "PDF-04",
+      "pages_1based": [
+        13
+      ],
+      "obligation": "Low-confidence penalty exposure",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A44",
+      "source": "PDF-04",
+      "pages_1based": [
+        13
+      ],
+      "obligation": "Assumption-based expected marks",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A45",
+      "source": "PDF-04",
+      "pages_1based": [
+        13
+      ],
+      "obligation": "Confirmed error-cause distribution",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A46",
+      "source": "PDF-04",
+      "pages_1based": [
+        14
+      ],
+      "obligation": "Comparable first-attempt score change",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A47",
+      "source": "PDF-04",
+      "pages_1based": [
+        14
+      ],
+      "obligation": "Fresh concept accuracy change",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A48",
+      "source": "PDF-04",
+      "pages_1based": [
+        14
+      ],
+      "obligation": "Comparable score variability",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A49",
+      "source": "PDF-04",
+      "pages_1based": [
+        14
+      ],
+      "obligation": "Repeated-item score difference",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A50",
+      "source": "PDF-04",
+      "pages_1based": [
+        14
+      ],
+      "obligation": "Unresolved review backlog",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A51",
+      "source": "PDF-04",
+      "pages_1based": [
+        15
+      ],
+      "obligation": "Recurring concept error count",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A52",
+      "source": "PDF-04",
+      "pages_1based": [
+        15
+      ],
+      "obligation": "Fresh review-check success rate",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A53",
+      "source": "PDF-04",
+      "pages_1based": [
+        15
+      ],
+      "obligation": "Delayed fresh-check accuracy",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A54",
+      "source": "PDF-04",
+      "pages_1based": [
+        15
+      ],
+      "obligation": "Assigned prerequisite coverage",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A55",
+      "source": "PDF-04",
+      "pages_1based": [
+        15
+      ],
+      "obligation": "Error-category marks-at-stake ceiling",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A56",
+      "source": "PDF-04",
+      "pages_1based": [
+        16
+      ],
+      "obligation": "Released-solution consultation rate",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A57",
+      "source": "PDF-04",
+      "pages_1based": [
+        16
+      ],
+      "obligation": "Observed solution review duration",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A58",
+      "source": "PDF-04",
+      "pages_1based": [
+        16
+      ],
+      "obligation": "Approved-key score revision impact",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A59",
+      "source": "PDF-04",
+      "pages_1based": [
+        16
+      ],
+      "obligation": "Approved explanation availability",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    },
+    {
+      "id": "ANALYSIS-A60",
+      "source": "PDF-04",
+      "pages_1based": [
+        16
+      ],
+      "obligation": "Usable timing evidence coverage",
+      "scope": "feature_obligation_needs_formula_subclauses",
+      "repair_packet": 8,
+      "owner_role": "analytics_lead",
+      "contract_boundary": "analytics-snapshot-repository",
+      "depends_on_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "acceptance_target": "independent_formula_unavailable_and_export_cases",
+      "evidence": [],
+      "implementation_status": "UNVERIFIED"
+    }
+  ]
+}

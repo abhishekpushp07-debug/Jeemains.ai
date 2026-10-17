@@ -1,0 +1,63 @@
+{
+  "summary": "Baseline read-only regression testing complete before improvements. Verified 332 isolated tests passing, 94 live chapter tests (30 Physics + 32 Chemistry + 32 Mathematics = 4700 questions) preserved and accessible, no horizontal overflow at 1920x800 and 390x844, owner Studio access working with read-only inspection of all chapter books.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Isolated regression suite: 332 tests PASSED in 91.38s (tests/packet1/)",
+    "Chapter book tests: all parsing, validation, and import tests passing",
+    "Competition tests: all scoring and leaderboard tests passing",
+    "Confidence review tests: all analytics tests passing",
+    "Safety hold tests: all security gate tests passing",
+    "Staff rotation tests: all credential rotation tests passing",
+    "PDF organizer tests: all sandbox and worker tests passing",
+    "Browser preview desktop (1920x800): no horizontal overflow, 94 tests visible",
+    "Browser preview mobile (390x844): no horizontal overflow, proper responsive layout",
+    "Catalog verification: 94 chapter tests confirmed (30+32+32), 4700 questions total",
+    "Subject tabs: Physics 30, Chemistry 32, Mathematics 32, All subjects 94",
+    "Pagination: 12 cards per page, 8 pages total",
+    "Chapter cards: proper display with chapter number, title, 50 questions, 60 min, +3/-1/0, expiry date, Live badge",
+    "Owner Studio login: successful using ADMIN_PASSWORD from backend .env",
+    "Studio chapter books: Mathematics (32 chapters, 1600 questions, 32 live), Chemistry (32 chapters, 1600 questions, 32 live), Physics (30 chapters, 1500 questions, 30 live)",
+    "Studio interface: upload options, chapter book organizer, advanced sets visible",
+    "Read-only inspection: no mutations made, all content preserved"
+  ],
+  "test_report_links": [
+    "/tmp/baseline_regression_run.log",
+    ".screenshots/baseline-exams-desktop-1920x800.png",
+    ".screenshots/baseline-exams-mobile-390x844.png",
+    ".screenshots/baseline-catalog-desktop-full.png",
+    ".screenshots/baseline-studio-home.png",
+    ".screenshots/baseline-studio-chapter-books.png"
+  ],
+  "success_percentage": {
+    "backend": "100% (332/332 isolated regression tests)",
+    "frontend": "100% (catalog, Studio, responsive layout)",
+    "integration": "Partial (owner Studio verified, student QA flow blocked by OTP requirement)"
+  },
+  "updated_files": [],
+  "action_item_for_main_agent": "Baseline verification complete. All 94 live chapter tests and 4700 questions preserved. 332 isolated regression tests passing. No UX issues or blockers found. Student QA flow (preflight -> player -> answer -> submit -> results -> PDF) requires real OTP verification and cannot be fully automated. For complete end-to-end student testing, manual OTP entry with dedicated QA phone +919876543210 is needed. Current baseline is healthy and ready for improvements.",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false,
+  "baseline_verification": {
+    "regression_suite_count": 332,
+    "chapter_tests_count": 94,
+    "questions_count": 4700,
+    "subject_breakdown": {
+      "Physics": "30 chapters, 1500 questions",
+      "Chemistry": "32 chapters, 1600 questions",
+      "Mathematics": "32 chapters, 1600 questions"
+    },
+    "horizontal_overflow": "None detected at 1920x800 or 390x844",
+    "owner_studio_access": "Verified with ADMIN_PASSWORD from backend .env",
+    "content_mutations": "None (read-only inspection only)",
+    "previous_iteration": "iteration_79.json confirmed 396 tests in chapter_final_full_regression.log, current isolated suite has 332 tests"
+  },
+  "student_qa_flow_note": "Phone login flow verified up to OTP step. Real OTP verification required for complete student flow testing (preflight -> player source image -> answer save -> submit -> results -> PDF). Dedicated QA phone: +919876543210. Cannot be fully automated without real OTP access."
+}

@@ -1,0 +1,37 @@
+{
+  "summary": "Iteration 29 final audit completed. Tested REAL scoring function, Starlette multipart security, and F01 contradiction.",
+  "scoring_tests": {
+    "v4p22_baseline": true,
+    "rational_exact": true,
+    "normalization": true,
+    "policies": true,
+    "all_skipped": true,
+    "total_passed": 5,
+    "total_tests": 5
+  },
+  "upload_budget": {
+    "starlette_version": "0.37.2",
+    "vulnerabilities": [
+      "GHSA-f96h-pmfr-66vw",
+      "GHSA-2c2j-9gv5-cj73"
+    ],
+    "multipart_unbounded": true,
+    "isolation": "local_asgi_test_only"
+  },
+  "f01_contradiction": {
+    "status": "NOT_VERIFIED",
+    "iteration_27": "error_found",
+    "iteration_28": "no_error_found",
+    "source_hashes": "97_unchanged",
+    "browser_tool_required": true
+  },
+  "audit_metadata": {
+    "mode": "audit_only_no_fixes",
+    "production_data": "no_mutation",
+    "credentials": "no_output",
+    "real_functions_called": [
+      "tejas.scoring.score"
+    ],
+    "isolation_scope": "in_memory_fixtures_and_local_asgi_test"
+  }
+}

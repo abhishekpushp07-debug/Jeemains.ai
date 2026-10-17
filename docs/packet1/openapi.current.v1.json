@@ -1,0 +1,6685 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Tejas Exam Platform API",
+    "version": "1.0.0",
+    "description": "Pinned current API inventory; legacy gaps remain. Target /api/v1 aliases are not implemented. Not a full production contract freeze."
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "public_liveness_only",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Register",
+        "operationId": "register_api_auth_register_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "removed_endpoint",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "gone",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Login",
+        "operationId": "login_api_auth_login_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_password_session",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "new_session",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/session": {
+      "get": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Session",
+        "operationId": "session_api_auth_session_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "cookie_identity",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read_refresh_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Me",
+        "operationId": "me_api_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_identity",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Refresh",
+        "operationId": "refresh_api_auth_refresh_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_refresh_session",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "session_refresh",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Logout",
+        "operationId": "logout_api_auth_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_cookie_sessions_only",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "repeatable_delete",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/preferences": {
+      "patch": {
+        "tags": [
+          "Staff accounts and sessions"
+        ],
+        "summary": "Preferences",
+        "operationId": "preferences_api_auth_preferences_patch",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreferencePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_profile_only",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "replace_field",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/auth/phone": {
+      "post": {
+        "tags": [
+          "Unverified phone access"
+        ],
+        "summary": "Access",
+        "operationId": "access_api_auth_phone_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhonePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "unverified_phone_profile_only",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "profile_upsert_new_session",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/sets": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Catalogue",
+        "operationId": "catalogue_api_sets_get",
+        "parameters": [
+          {
+            "name": "exam",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Exam"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "public_published_audience",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/sets/{id}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Set Detail",
+        "operationId": "set_detail_api_sets__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "public_published_audience",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Studio Sets",
+        "operationId": "studio_sets_api_studio_sets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Create Set",
+        "operationId": "create_set_api_studio_sets_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "not_idempotent",
+        "x-body-limit-bytes": 65536,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Studio Set",
+        "operationId": "studio_set_api_studio_sets__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      },
+      "put": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Update Set",
+        "operationId": "update_set_api_studio_sets__id__put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "legacy_unfenced_edit",
+        "x-body-limit-bytes": 65536,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/files": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Upload",
+        "operationId": "upload_api_studio_sets__id__files_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_api_studio_sets__id__files_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_private_source",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/files/{id}/page/{page}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Source Page",
+        "operationId": "source_page_api_studio_files__id__page__page__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_private_source",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/files/{id}/text/{page}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Source Text",
+        "operationId": "source_text_api_studio_files__id__text__page__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_private_source",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/files/{id}/download": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Source Download",
+        "operationId": "source_download_api_studio_files__id__download_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_private_source",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/extract": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Extract",
+        "operationId": "extract_api_studio_sets__id__extract_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/questions": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Add Question",
+        "operationId": "add_question_api_studio_sets__id__questions_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "not_idempotent",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/questions/{qid}": {
+      "put": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Edit Question",
+        "operationId": "edit_question_api_studio_sets__id__questions__qid__put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "legacy_unfenced_edit",
+        "x-body-limit-bytes": 262144,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/questions/{qid}/approve": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Approve Question",
+        "operationId": "approve_question_api_studio_sets__id__questions__qid__approve_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "revision_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/publish": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Publish",
+        "operationId": "publish_api_studio_sets__id__publish_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_publication_rights",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/withdraw": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Withdraw",
+        "operationId": "withdraw_api_studio_sets__id__withdraw_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WithdrawalPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_publication_rights",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "repeatable_state_change_audit_each_call",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/subset": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Subset",
+        "operationId": "subset_api_studio_sets__id__subset_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubsetPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "not_idempotent",
+        "x-body-limit-bytes": 65536,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/questions/{qid}/asset/{kind}/{index}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Preview Asset",
+        "operationId": "preview_asset_api_studio_sets__id__questions__qid__asset__kind___index__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Kind"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Index"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_private_source",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/answers/{qid}": {
+      "put": {
+        "tags": [
+          "Acknowledged answers"
+        ],
+        "summary": "Save Answer",
+        "operationId": "save_answer_api_attempts__id__answers__qid__put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnswerPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnswerReceipt"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_active_deadline",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "live",
+        "x-idempotency-mode": "stored_request_receipt_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/my/sets": {
+      "get": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "My Sets",
+        "operationId": "my_sets_api_my_sets_get",
+        "parameters": [
+          {
+            "name": "exam",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Exam"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_profile_audience",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/my/sets/{id}": {
+      "get": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "My Set",
+        "operationId": "my_set_api_my_sets__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_profile_audience",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/sets/{id}/preflight": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Preflight",
+        "operationId": "preflight_api_sets__id__preflight_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreflightPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_profile_audience_or_staff_preview",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "upsert_preflight",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/sets/{id}/start": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Start",
+        "operationId": "start_api_sets__id__start_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_profile_audience_or_staff_preview",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "live",
+        "x-idempotency-mode": "start_key_receipt_legacy",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts": {
+      "get": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "History",
+        "operationId": "history_api_attempts_get",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read_with_expiry_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}": {
+      "get": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Read Attempt",
+        "operationId": "read_attempt_api_attempts__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "live",
+        "x-idempotency-mode": "read_with_expiry_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/visit": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Visit Question",
+        "operationId": "visit_question_api_attempts__id__visit_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VisitPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_active_deadline",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "live",
+        "x-idempotency-mode": "set_membership",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/submit": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Submit",
+        "operationId": "submit_api_attempts__id__submit_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionReceipt"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "live",
+        "x-idempotency-mode": "atomic_seal_receipt",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/results": {
+      "get": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Results",
+        "operationId": "results_api_attempts__id__results_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "score_version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "original",
+              "title": "Score Version"
+            }
+          },
+          {
+            "name": "confidence_threshold",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "default": 0.2,
+              "title": "Confidence Threshold"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_and_solution_release",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read_grade_enqueue_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/questions/{qid}/asset/{kind}/{index}": {
+      "get": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Asset",
+        "operationId": "asset_api_attempts__id__questions__qid__asset__kind___index__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Kind"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Index"
+            }
+          },
+          {
+            "name": "score_version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "original",
+              "title": "Score Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_and_solution_release",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read_with_expiry_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/questions/{qid}/solution-open": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Solution Consulted",
+        "operationId": "solution_consulted_api_attempts__id__questions__qid__solution_open_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolutionConsulted"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_released_solutions",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "set_membership_idempotent",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/retry": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Retry",
+        "operationId": "retry_api_attempts__id__retry_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetryPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_frozen_grade",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "KNOWN_A01_alias_gap",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/report": {
+      "post": {
+        "tags": [
+          "Practice"
+        ],
+        "summary": "Report",
+        "operationId": "report_api_attempts__id__report_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_and_report_rights",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "versioned_report_job",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/jobs/{id}": {
+      "get": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Status",
+        "operationId": "status_api_jobs__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "job_owner_or_staff_set_scope",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read_dispatch_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/jobs/{id}/retry": {
+      "post": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Retry Job",
+        "operationId": "retry_job_api_jobs__id__retry_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "job_owner_or_staff_set_scope",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "job_state_retry",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/jobs/{id}/download": {
+      "get": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Download",
+        "operationId": "download_api_jobs__id__download_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "job_owner_and_report_rights",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/cron/maintenance": {
+      "post": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Cron",
+        "operationId": "cron_api_cron_maintenance_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "cron_secret_dependency",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "maintenance_replay",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/reviewers": {
+      "post": {
+        "tags": [
+          "Reviewer authorization"
+        ],
+        "summary": "Update Access",
+        "operationId": "update_access_api_studio_reviewers_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewerPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_reviewer_administration",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "role_replace",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/profiles": {
+      "get": {
+        "tags": [
+          "Immutable exam profile catalogue"
+        ],
+        "summary": "Profiles",
+        "operationId": "profiles_api_studio_profiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authorized_editorial_workspace",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/sets/{id}/regrade": {
+      "post": {
+        "tags": [
+          "Score corrections"
+        ],
+        "summary": "Regrade",
+        "operationId": "regrade_api_studio_sets__id__regrade_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegradePayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_scoring_successor",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "HELD",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/internal/capacity/profile": {
+      "get": {
+        "tags": [
+          "Staff engineering baseline"
+        ],
+        "summary": "Capacity Profile",
+        "operationId": "internal_capacity_profile_v1",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CapacityProfile"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_engineering_only",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/internal/safety/status": {
+      "get": {
+        "tags": [
+          "Staff engineering baseline"
+        ],
+        "summary": "Safety Status",
+        "operationId": "internal_safety_status_v1",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SafetyStatus"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_engineering_only",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/template": {
+      "get": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Template",
+        "operationId": "template_api_studio_imports_template_get",
+        "parameters": [
+          {
+            "name": "variant",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "combined",
+              "title": "Variant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_template",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports": {
+      "get": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "List Imports",
+        "operationId": "list_imports_api_studio_imports_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportList"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_imports",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Create Import",
+        "operationId": "create_import_api_studio_imports_post",
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportView"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_private_sources",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "request_uuid_fingerprint",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/{id}": {
+      "get": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Read Import",
+        "operationId": "read_import_api_studio_imports__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_imports",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/{id}/retry": {
+      "post": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Retry Import",
+        "operationId": "retry_import_api_studio_imports__id__retry_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_imports",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "lease_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/{id}/errors": {
+      "get": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Error Report",
+        "operationId": "error_report_api_studio_imports__id__errors_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_imports",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/{id}/questions/{qid}/asset/{kind}/{index}": {
+      "get": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Import Asset",
+        "operationId": "import_asset_api_studio_imports__id__questions__qid__asset__kind___index__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Kind"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Index"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_imports",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/{id}/schedule": {
+      "post": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Schedule Import",
+        "operationId": "schedule_import_api_studio_imports__id__schedule_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_immutable_import_publication",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "insert_or_revision_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/imports/{id}/live": {
+      "post": {
+        "tags": [
+          "Unified test importer"
+        ],
+        "summary": "Toggle Live",
+        "operationId": "toggle_live_api_studio_imports__id__live_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_import_admission",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "revision_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/competitions": {
+      "get": {
+        "tags": [
+          "Competitions"
+        ],
+        "summary": "Catalogue",
+        "operationId": "catalogue_api_competitions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompetitionList"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "authenticated_competition_metadata",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/competitions/{id}": {
+      "get": {
+        "tags": [
+          "Competitions"
+        ],
+        "summary": "Leaderboard",
+        "operationId": "leaderboard_api_competitions__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Leaderboard"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "anonymous_cohort_after_close",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/reviews/{qid}": {
+      "put": {
+        "tags": [
+          "Private study review"
+        ],
+        "summary": "Save Review",
+        "operationId": "save_review_api_attempts__id__reviews__qid__put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewWrite"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewState"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_private_post_release_notes",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "question_version_revision_CAS_body_receipt",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/attempts/{id}/expected-value": {
+      "post": {
+        "tags": [
+          "Private study review"
+        ],
+        "summary": "Expected Value",
+        "operationId": "expected_value_api_attempts__id__expected_value_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProbabilityInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpectedValue"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "attempt_owner_released_rules_only",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "stateless_hypothetical",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books": {
+      "get": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "List Books",
+        "operationId": "list_books_api_studio_chapter_books_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookList"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_chapter_metadata",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Upload Book",
+        "operationId": "upload_book_api_studio_chapter_books_post",
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookView"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_private_chapter_source",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "source_hash_and_request_receipt",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books/{id}": {
+      "get": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Read Book",
+        "operationId": "read_book_api_studio_chapter_books__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_chapter_metadata",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books/{id}/retry": {
+      "post": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Retry Book",
+        "operationId": "retry_book_api_studio_chapter_books__id__retry_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_chapter_processing",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "lease_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books/{id}/chapters/{sid}": {
+      "get": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Preview Chapter",
+        "operationId": "preview_chapter_api_studio_chapter_books__id__chapters__sid__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChapterPreview"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_chapter_content",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books/{id}/chapters/{sid}/questions/{qid}/asset/{kind}/{index}": {
+      "get": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Chapter Asset",
+        "operationId": "chapter_asset_api_studio_chapter_books__id__chapters__sid__questions__qid__asset__kind___index__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          },
+          {
+            "name": "qid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Qid"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Kind"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Index"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "staff_private_chapter_source",
+        "x-role-scope": [
+          "owner",
+          "reviewer"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books/{id}/publish": {
+      "post": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Publish Book",
+        "operationId": "publish_book_api_studio_chapter_books__id__publish_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChapterAction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_verified_chapter_publication",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "per_set_once_same_validity",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/studio/chapter-books/{id}/chapters/{sid}/live": {
+      "post": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Chapter Live",
+        "operationId": "chapter_live_api_studio_chapter_books__id__chapters__sid__live_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Sid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChapterLive"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookView"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "owner_chapter_admission",
+        "x-role-scope": [
+          "owner"
+        ],
+        "x-workload-tier": "control",
+        "x-idempotency-mode": "revision_CAS",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/chapter-exams": {
+      "get": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "Public Exams",
+        "operationId": "public_exams_api_chapter_exams_get",
+        "parameters": [
+          {
+            "name": "subject",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Subject"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "public_chapter_metadata",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/my/chapter-exams": {
+      "get": {
+        "tags": [
+          "Chapter exams"
+        ],
+        "summary": "My Exams",
+        "operationId": "my_exams_api_my_chapter_exams_get",
+        "parameters": [
+          {
+            "name": "subject",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Subject"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "current_profile_chapter_metadata",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AcceptedAnswer": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Value",
+            "default": ""
+          },
+          "marked": {
+            "type": "boolean",
+            "title": "Marked",
+            "default": false
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confidence"
+          },
+          "revision": {
+            "type": "integer",
+            "maximum": 10001.0,
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "request_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Request Id"
+          },
+          "normalized_value": {
+            "type": "string",
+            "title": "Normalized Value"
+          },
+          "accepted_at": {
+            "type": "number",
+            "title": "Accepted At"
+          },
+          "server_seq": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Server Seq"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "revision",
+          "request_id",
+          "normalized_value",
+          "accepted_at"
+        ],
+        "title": "AcceptedAnswer"
+      },
+      "Access": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "initial_password": {
+            "type": "string",
+            "maxLength": 64,
+            "title": "Initial Password",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "role"
+        ],
+        "title": "Access"
+      },
+      "AnswerReceipt": {
+        "properties": {
+          "accepted": {
+            "$ref": "#/components/schemas/AcceptedAnswer"
+          },
+          "server_now": {
+            "type": "number",
+            "title": "Server Now"
+          },
+          "current_revision": {
+            "type": "integer",
+            "title": "Current Revision"
+          },
+          "duplicate": {
+            "type": "boolean",
+            "title": "Duplicate",
+            "default": false
+          },
+          "command_state": {
+            "type": "string",
+            "title": "Command State",
+            "default": "applied"
+          }
+        },
+        "type": "object",
+        "required": [
+          "accepted",
+          "server_now",
+          "current_revision"
+        ],
+        "title": "AnswerReceipt"
+      },
+      "AnswerWrite": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Value",
+            "default": ""
+          },
+          "marked": {
+            "type": "boolean",
+            "title": "Marked",
+            "default": false
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confidence"
+          },
+          "revision": {
+            "type": "integer",
+            "maximum": 10001.0,
+            "minimum": 1.0,
+            "title": "Revision"
+          },
+          "request_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Request Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "revision",
+          "request_id"
+        ],
+        "title": "AnswerWrite"
+      },
+      "Body_upload_api_studio_sets__id__files_post": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "file"
+        ],
+        "title": "Body_upload_api_studio_sets__id__files_post"
+      },
+      "BookList": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/BookView"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "BookList"
+      },
+      "BookView": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "subject": {
+            "type": "string",
+            "title": "Subject",
+            "default": ""
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": ""
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision",
+            "default": 0
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "default": 0
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages",
+            "default": 0
+          },
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/ChapterView"
+            },
+            "type": "array",
+            "title": "Chapters",
+            "default": []
+          },
+          "source_sha256": {
+            "type": "string",
+            "title": "Source Sha256",
+            "default": ""
+          },
+          "server_now": {
+            "type": "number",
+            "title": "Server Now"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "status",
+          "server_now"
+        ],
+        "title": "BookView"
+      },
+      "CapabilityState": {
+        "properties": {
+          "capability": {
+            "type": "string",
+            "title": "Capability"
+          },
+          "held": {
+            "type": "boolean",
+            "title": "Held"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "capability",
+          "held"
+        ],
+        "title": "CapabilityState"
+      },
+      "CapacityProfile": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "capacity-profile-v1",
+            "title": "Schema Version",
+            "default": "capacity-profile-v1"
+          },
+          "evidence_status": {
+            "type": "string",
+            "const": "PLANNING_ONLY_UNQUALIFIED",
+            "title": "Evidence Status",
+            "default": "PLANNING_ONLY_UNQUALIFIED"
+          },
+          "workload": {
+            "$ref": "#/components/schemas/Workload"
+          },
+          "rates": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ExactQuantity"
+            },
+            "type": "object",
+            "title": "Rates"
+          },
+          "volumes": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ExactQuantity"
+            },
+            "type": "object",
+            "title": "Volumes"
+          },
+          "stages": {
+            "items": {
+              "$ref": "#/components/schemas/Stage"
+            },
+            "type": "array",
+            "title": "Stages"
+          },
+          "slos": {
+            "items": {
+              "$ref": "#/components/schemas/Slo"
+            },
+            "type": "array",
+            "title": "Slos"
+          },
+          "qualified_active_attempts": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qualified Active Attempts"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "workload",
+          "rates",
+          "volumes",
+          "stages",
+          "slos",
+          "warnings"
+        ],
+        "title": "CapacityProfile"
+      },
+      "ChapterAction": {
+        "additionalProperties": false,
+        "properties": {
+          "revision": {
+            "minimum": 0,
+            "title": "Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "revision"
+        ],
+        "title": "ChapterAction",
+        "type": "object"
+      },
+      "ChapterLive": {
+        "additionalProperties": false,
+        "properties": {
+          "revision": {
+            "minimum": 0,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "live": {
+            "title": "Live",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "revision",
+          "live"
+        ],
+        "title": "ChapterLive",
+        "type": "object"
+      },
+      "ChapterPreview": {
+        "properties": {
+          "chapter": {
+            "$ref": "#/components/schemas/ChapterView"
+          },
+          "questions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Questions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "chapter",
+          "questions"
+        ],
+        "title": "ChapterPreview"
+      },
+      "ChapterView": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "chapter_number": {
+            "type": "integer",
+            "title": "Chapter Number"
+          },
+          "subject": {
+            "type": "string",
+            "title": "Subject"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "start_page": {
+            "type": "integer",
+            "title": "Start Page"
+          },
+          "end_page": {
+            "type": "integer",
+            "title": "End Page"
+          },
+          "key_page": {
+            "type": "integer",
+            "title": "Key Page"
+          },
+          "verification": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Verification"
+          },
+          "independent_check": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Independent Check"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At"
+          },
+          "live_enabled": {
+            "type": "boolean",
+            "title": "Live Enabled",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "chapter_number",
+          "subject",
+          "count",
+          "status",
+          "start_page",
+          "end_page",
+          "key_page",
+          "verification",
+          "revision"
+        ],
+        "title": "ChapterView"
+      },
+      "Competition": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "exam": {
+            "type": "string",
+            "title": "Exam"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "minutes": {
+            "type": "integer",
+            "title": "Minutes"
+          },
+          "start_at": {
+            "type": "number",
+            "title": "Start At"
+          },
+          "end_at": {
+            "type": "number",
+            "title": "End At"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "attempt_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Id"
+          },
+          "attempt_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "exam",
+          "count",
+          "minutes",
+          "start_at",
+          "end_at",
+          "status"
+        ],
+        "title": "Competition"
+      },
+      "CompetitionList": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Competition"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "server_now": {
+            "type": "number",
+            "title": "Server Now"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "server_now"
+        ],
+        "title": "CompetitionList"
+      },
+      "Credentials": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 8,
+            "title": "Password"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "default": "Reviewer"
+          },
+          "exam": {
+            "type": "string",
+            "title": "Exam",
+            "default": "JEE Main"
+          },
+          "consent": {
+            "type": "boolean",
+            "title": "Consent",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "Credentials"
+      },
+      "ExactQuantity": {
+        "properties": {
+          "numerator": {
+            "type": "integer",
+            "title": "Numerator"
+          },
+          "denominator": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Denominator"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "display": {
+            "type": "string",
+            "title": "Display"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "numerator",
+          "denominator",
+          "unit",
+          "display"
+        ],
+        "title": "ExactQuantity"
+      },
+      "ExamList": {
+        "properties": {
+          "items": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          },
+          "pages": {
+            "type": "integer",
+            "title": "Pages"
+          },
+          "subject_counts": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Subject Counts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "pages",
+          "subject_counts"
+        ],
+        "title": "ExamList"
+      },
+      "ExpectedValue": {
+        "properties": {
+          "probability": {
+            "type": "number",
+            "title": "Probability"
+          },
+          "correct_marks": {
+            "type": "number",
+            "title": "Correct Marks"
+          },
+          "wrong_marks": {
+            "type": "number",
+            "title": "Wrong Marks"
+          },
+          "skipped_marks": {
+            "type": "number",
+            "title": "Skipped Marks"
+          },
+          "expected_marks": {
+            "type": "number",
+            "title": "Expected Marks"
+          },
+          "expected_exact": {
+            "type": "string",
+            "title": "Expected Exact"
+          },
+          "break_even_probability": {
+            "type": "number",
+            "title": "Break Even Probability"
+          },
+          "hypothetical": {
+            "type": "boolean",
+            "title": "Hypothetical",
+            "default": true
+          },
+          "note": {
+            "type": "string",
+            "title": "Note",
+            "default": "Uses your probability assumption and this attempt’s frozen ordinary marking rule. Not a prediction, admission estimate, or instruction to attempt a question."
+          }
+        },
+        "type": "object",
+        "required": [
+          "probability",
+          "correct_marks",
+          "wrong_marks",
+          "skipped_marks",
+          "expected_marks",
+          "expected_exact",
+          "break_even_probability"
+        ],
+        "title": "ExpectedValue"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ImportIssue": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "question": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "sheet": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sheet"
+          },
+          "row": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Row"
+          },
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "ImportIssue"
+      },
+      "ImportList": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ImportView"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "ImportList"
+      },
+      "ImportView": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "format": {
+            "type": "string",
+            "title": "Format"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "default": ""
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/ImportedQuestion"
+            },
+            "type": "array",
+            "title": "Questions",
+            "default": []
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/ImportIssue"
+            },
+            "type": "array",
+            "title": "Issues",
+            "default": []
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "default": 0
+          },
+          "exam": {
+            "type": "string",
+            "title": "Exam",
+            "default": "JEE Main"
+          },
+          "duration_minutes": {
+            "type": "integer",
+            "title": "Duration Minutes",
+            "default": 180
+          },
+          "set_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Set Id"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At"
+          },
+          "live_enabled": {
+            "type": "boolean",
+            "title": "Live Enabled",
+            "default": false
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision",
+            "default": 0
+          },
+          "server_now": {
+            "type": "number",
+            "title": "Server Now"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "format",
+          "status",
+          "server_now"
+        ],
+        "title": "ImportView"
+      },
+      "ImportedQuestion": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "number": {
+            "type": "integer",
+            "title": "Number"
+          },
+          "subject": {
+            "type": "string",
+            "title": "Subject"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "options": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Options"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "solution": {
+            "type": "string",
+            "title": "Solution"
+          },
+          "render_mode": {
+            "type": "string",
+            "title": "Render Mode"
+          },
+          "render_reason": {
+            "type": "string",
+            "title": "Render Reason",
+            "default": ""
+          },
+          "q_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Q Refs",
+            "default": []
+          },
+          "s_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "S Refs",
+            "default": []
+          },
+          "issues": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Issues",
+            "default": []
+          },
+          "pairing_evidence": {
+            "type": "string",
+            "title": "Pairing Evidence",
+            "default": ""
+          },
+          "source_row": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Row"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "subject",
+          "type",
+          "text",
+          "options",
+          "answer",
+          "solution",
+          "render_mode"
+        ],
+        "title": "ImportedQuestion"
+      },
+      "Leaderboard": {
+        "properties": {
+          "competition": {
+            "$ref": "#/components/schemas/Competition"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "participants": {
+            "type": "integer",
+            "title": "Participants",
+            "default": 0
+          },
+          "graded": {
+            "type": "integer",
+            "title": "Graded",
+            "default": 0
+          },
+          "pending": {
+            "type": "integer",
+            "title": "Pending",
+            "default": 0
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/Ranking"
+            },
+            "type": "array",
+            "title": "Rows",
+            "default": []
+          },
+          "you": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Ranking"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "server_now": {
+            "type": "number",
+            "title": "Server Now"
+          },
+          "policy": {
+            "type": "string",
+            "title": "Policy",
+            "default": "First competition attempt per phone profile. Equal scores share rank (1, 1, 3). Practice retries and previews excluded. Phone ownership is not verified; this is a practice cohort, not an official percentile."
+          }
+        },
+        "type": "object",
+        "required": [
+          "competition",
+          "status",
+          "server_now"
+        ],
+        "title": "Leaderboard"
+      },
+      "LiveInput": {
+        "additionalProperties": false,
+        "properties": {
+          "live": {
+            "title": "Live",
+            "type": "boolean"
+          },
+          "revision": {
+            "minimum": 0,
+            "title": "Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "live",
+          "revision"
+        ],
+        "title": "LiveInput",
+        "type": "object"
+      },
+      "PhoneInput": {
+        "properties": {
+          "phone": {
+            "type": "string",
+            "maxLength": 32,
+            "minLength": 5,
+            "title": "Phone"
+          }
+        },
+        "type": "object",
+        "required": [
+          "phone"
+        ],
+        "title": "PhoneInput"
+      },
+      "ProbabilityInput": {
+        "additionalProperties": false,
+        "properties": {
+          "probability": {
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Probability",
+            "type": "number"
+          }
+        },
+        "required": [
+          "probability"
+        ],
+        "title": "ProbabilityInput",
+        "type": "object"
+      },
+      "Ranking": {
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "learner": {
+            "type": "string",
+            "title": "Learner"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accuracy"
+          },
+          "is_you": {
+            "type": "boolean",
+            "title": "Is You",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "rank",
+          "learner",
+          "score"
+        ],
+        "title": "Ranking"
+      },
+      "ReviewState": {
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "title": "Question Id"
+          },
+          "score_version": {
+            "type": "string",
+            "title": "Score Version",
+            "default": "original"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "concept_gap",
+                  "calculation",
+                  "silly_mistake",
+                  "time_pressure",
+                  "misread",
+                  "guess",
+                  "other"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note",
+            "default": ""
+          },
+          "identified_error": {
+            "type": "boolean",
+            "title": "Identified Error",
+            "default": false
+          },
+          "wrote_note": {
+            "type": "boolean",
+            "title": "Wrote Note",
+            "default": false
+          },
+          "reviewed_solution": {
+            "type": "boolean",
+            "title": "Reviewed Solution",
+            "default": false
+          },
+          "retry_planned": {
+            "type": "boolean",
+            "title": "Retry Planned",
+            "default": false
+          },
+          "completed": {
+            "type": "boolean",
+            "title": "Completed",
+            "default": false
+          },
+          "updated_at": {
+            "type": "number",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question_id",
+          "revision",
+          "updated_at"
+        ],
+        "title": "ReviewState"
+      },
+      "ReviewWrite": {
+        "additionalProperties": false,
+        "properties": {
+          "request_id": {
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Request Id",
+            "type": "string"
+          },
+          "revision": {
+            "maximum": 65,
+            "minimum": 1,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "score_version": {
+            "default": "original",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Score Version",
+            "type": "string"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "enum": [
+                  "concept_gap",
+                  "calculation",
+                  "silly_mistake",
+                  "time_pressure",
+                  "misread",
+                  "guess",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Category"
+          },
+          "note": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Note",
+            "type": "string"
+          },
+          "identified_error": {
+            "default": false,
+            "title": "Identified Error",
+            "type": "boolean"
+          },
+          "wrote_note": {
+            "default": false,
+            "title": "Wrote Note",
+            "type": "boolean"
+          },
+          "reviewed_solution": {
+            "default": false,
+            "title": "Reviewed Solution",
+            "type": "boolean"
+          },
+          "retry_planned": {
+            "default": false,
+            "title": "Retry Planned",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "request_id",
+          "revision"
+        ],
+        "title": "ReviewWrite",
+        "type": "object"
+      },
+      "SafetyStatus": {
+        "properties": {
+          "packet": {
+            "type": "integer",
+            "const": 1,
+            "title": "Packet",
+            "default": 1
+          },
+          "packet_status": {
+            "type": "string",
+            "const": "IN_PROGRESS_BLOCKED_EXIT",
+            "title": "Packet Status",
+            "default": "IN_PROGRESS_BLOCKED_EXIT"
+          },
+          "capacity_status": {
+            "type": "string",
+            "const": "UNQUALIFIED",
+            "title": "Capacity Status",
+            "default": "UNQUALIFIED"
+          },
+          "credential_rotation": {
+            "type": "string",
+            "const": "PENDING_AUTHORIZED_OPERATOR",
+            "title": "Credential Rotation",
+            "default": "PENDING_AUTHORIZED_OPERATOR"
+          },
+          "capabilities": {
+            "items": {
+              "$ref": "#/components/schemas/CapabilityState"
+            },
+            "type": "array",
+            "title": "Capabilities"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "capabilities",
+          "note"
+        ],
+        "title": "SafetyStatus"
+      },
+      "ScheduleInput": {
+        "additionalProperties": false,
+        "properties": {
+          "start_at": {
+            "maxLength": 40,
+            "minLength": 20,
+            "title": "Start At",
+            "type": "string"
+          },
+          "revision": {
+            "minimum": 0,
+            "title": "Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "start_at",
+          "revision"
+        ],
+        "title": "ScheduleInput",
+        "type": "object"
+      },
+      "SetInput": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 3,
+            "title": "Title"
+          },
+          "exam": {
+            "type": "string",
+            "title": "Exam",
+            "default": "JEE Main"
+          },
+          "year": {
+            "type": "string",
+            "maxLength": 10,
+            "title": "Year",
+            "default": ""
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Source",
+            "default": ""
+          },
+          "attribution": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Attribution",
+            "default": ""
+          },
+          "audience": {
+            "type": "string",
+            "title": "Audience",
+            "default": "all"
+          },
+          "allowed_emails": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowed Emails",
+            "default": []
+          },
+          "allowed_phones": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowed Phones",
+            "default": []
+          },
+          "profile_mode": {
+            "type": "string",
+            "title": "Profile Mode",
+            "default": "practice"
+          },
+          "expires": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires",
+            "default": ""
+          },
+          "rights_upload": {
+            "type": "boolean",
+            "title": "Rights Upload",
+            "default": false
+          },
+          "rights_publish": {
+            "type": "boolean",
+            "title": "Rights Publish",
+            "default": false
+          },
+          "rights_report": {
+            "type": "boolean",
+            "title": "Rights Report",
+            "default": false
+          },
+          "rules": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Rules"
+          },
+          "expected_revision": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Revision"
+          },
+          "change_reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Change Reason",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "SetInput"
+      },
+      "Slo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "percentile": {
+            "type": "string",
+            "enum": [
+              "p95",
+              "p99",
+              "maximum"
+            ],
+            "title": "Percentile"
+          },
+          "measurement": {
+            "type": "string",
+            "title": "Measurement"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "unit",
+          "limit",
+          "percentile",
+          "measurement"
+        ],
+        "title": "Slo"
+      },
+      "SolutionConsulted": {
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "title": "Question Id"
+          },
+          "recorded": {
+            "type": "boolean",
+            "title": "Recorded"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question_id",
+          "recorded"
+        ],
+        "title": "SolutionConsulted"
+      },
+      "Stage": {
+        "properties": {
+          "actors": {
+            "type": "integer",
+            "title": "Actors"
+          },
+          "steady_minutes": {
+            "type": "integer",
+            "title": "Steady Minutes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "actors",
+          "steady_minutes"
+        ],
+        "title": "Stage"
+      },
+      "Start": {
+        "properties": {
+          "start_key": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Start Key"
+          },
+          "device_checked": {
+            "type": "boolean",
+            "title": "Device Checked",
+            "default": false
+          },
+          "preview": {
+            "type": "boolean",
+            "title": "Preview",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "start_key"
+        ],
+        "title": "Start"
+      },
+      "SubmissionReceipt": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "receipt": {
+            "type": "string",
+            "title": "Receipt"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "submitted_at": {
+            "type": "number",
+            "title": "Submitted At"
+          },
+          "sealed_seq": {
+            "type": "integer",
+            "title": "Sealed Seq",
+            "default": 0
+          },
+          "grading_status": {
+            "type": "string",
+            "title": "Grading Status"
+          },
+          "command_state": {
+            "type": "string",
+            "title": "Command State",
+            "default": "applied"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "receipt",
+          "status",
+          "submitted_at",
+          "grading_status"
+        ],
+        "title": "SubmissionReceipt"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "Visit": {
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "maxLength": 36,
+            "minLength": 36,
+            "title": "Question Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question_id"
+        ],
+        "title": "Visit"
+      },
+      "Workload": {
+        "properties": {
+          "active_attempts": {
+            "type": "integer",
+            "maximum": 500000.0,
+            "minimum": 1.0,
+            "title": "Active Attempts",
+            "default": 500000
+          },
+          "steady_seconds": {
+            "type": "integer",
+            "maximum": 86400.0,
+            "minimum": 1.0,
+            "title": "Steady Seconds",
+            "default": 10800
+          },
+          "cell_count": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Cell Count",
+            "default": 20
+          },
+          "commit_interval_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Commit Interval Seconds",
+            "default": 30
+          },
+          "dirty_percentage": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Dirty Percentage",
+            "default": 20
+          },
+          "draft_interval_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Draft Interval Seconds",
+            "default": 10
+          },
+          "lease_interval_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Lease Interval Seconds",
+            "default": 60
+          },
+          "telemetry_interval_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Telemetry Interval Seconds",
+            "default": 30
+          },
+          "start_window_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Start Window Seconds",
+            "default": 120
+          },
+          "submit_window_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Submit Window Seconds",
+            "default": 30
+          },
+          "candidate_package_bytes": {
+            "type": "integer",
+            "maximum": 100000000.0,
+            "minimum": 1.0,
+            "title": "Candidate Package Bytes",
+            "default": 2000000
+          },
+          "items_per_attempt": {
+            "type": "integer",
+            "maximum": 1000.0,
+            "minimum": 1.0,
+            "title": "Items Per Attempt",
+            "default": 75
+          },
+          "grade_window_seconds": {
+            "type": "integer",
+            "maximum": 3600.0,
+            "minimum": 1.0,
+            "title": "Grade Window Seconds",
+            "default": 120
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Workload"
+      },
+      "EmptyPayload": {
+        "additionalProperties": false,
+        "properties": {},
+        "title": "EmptyPayload",
+        "type": "object"
+      },
+      "LoginPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 64,
+            "minLength": 8,
+            "title": "Password",
+            "type": "string"
+          },
+          "name": {
+            "default": "Reviewer",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "exam": {
+            "default": "JEE Main",
+            "enum": [
+              "JEE Main",
+              "BITSAT"
+            ],
+            "title": "Exam",
+            "type": "string"
+          },
+          "consent": {
+            "default": false,
+            "title": "Consent",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "LoginPayload",
+        "type": "object"
+      },
+      "PreferencePayload": {
+        "additionalProperties": false,
+        "properties": {
+          "exam": {
+            "enum": [
+              "JEE Main",
+              "BITSAT"
+            ],
+            "title": "Exam",
+            "type": "string"
+          }
+        },
+        "required": [
+          "exam"
+        ],
+        "title": "PreferencePayload",
+        "type": "object"
+      },
+      "PhonePayload": {
+        "additionalProperties": false,
+        "properties": {
+          "phone": {
+            "maxLength": 32,
+            "minLength": 5,
+            "title": "Phone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "phone"
+        ],
+        "title": "PhonePayload",
+        "type": "object"
+      },
+      "RulesPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "default": 0,
+            "maximum": 1440,
+            "minimum": 0,
+            "title": "Minutes",
+            "type": "number"
+          },
+          "correct": {
+            "default": 4,
+            "exclusiveMinimum": 0,
+            "maximum": 100,
+            "title": "Correct",
+            "type": "number"
+          },
+          "wrong": {
+            "default": -1,
+            "maximum": 0,
+            "minimum": -100,
+            "title": "Wrong",
+            "type": "number"
+          },
+          "skipped": {
+            "const": 0,
+            "default": 0,
+            "title": "Skipped",
+            "type": "integer"
+          },
+          "numeric_rule": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Numeric Rule",
+            "type": "string"
+          },
+          "navigation": {
+            "const": "free",
+            "default": "free",
+            "title": "Navigation",
+            "type": "string"
+          },
+          "numeric_policy": {
+            "const": "integer_exact",
+            "default": "integer_exact",
+            "title": "Numeric Policy",
+            "type": "string"
+          },
+          "solution_release": {
+            "const": "after_submit",
+            "default": "after_submit",
+            "title": "Solution Release",
+            "type": "string"
+          }
+        },
+        "title": "RulesPayload",
+        "type": "object"
+      },
+      "SetPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "expected_revision": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Expected Revision"
+          },
+          "title": {
+            "maxLength": 160,
+            "minLength": 3,
+            "title": "Title",
+            "type": "string"
+          },
+          "exam": {
+            "default": "JEE Main",
+            "enum": [
+              "JEE Main",
+              "BITSAT"
+            ],
+            "title": "Exam",
+            "type": "string"
+          },
+          "year": {
+            "default": "",
+            "maxLength": 10,
+            "title": "Year",
+            "type": "string"
+          },
+          "source": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Source",
+            "type": "string"
+          },
+          "attribution": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Attribution",
+            "type": "string"
+          },
+          "audience": {
+            "default": "all",
+            "enum": [
+              "all",
+              "restricted"
+            ],
+            "title": "Audience",
+            "type": "string"
+          },
+          "allowed_emails": {
+            "items": {
+              "maxLength": 254,
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Allowed Emails",
+            "type": "array"
+          },
+          "allowed_phones": {
+            "items": {
+              "maxLength": 32,
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "title": "Allowed Phones",
+            "type": "array"
+          },
+          "profile_mode": {
+            "const": "practice",
+            "default": "practice",
+            "title": "Profile Mode",
+            "type": "string"
+          },
+          "expires": {
+            "anyOf": [
+              {
+                "maxLength": 10,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "",
+            "title": "Expires"
+          },
+          "rights_upload": {
+            "default": false,
+            "title": "Rights Upload",
+            "type": "boolean"
+          },
+          "rights_publish": {
+            "default": false,
+            "title": "Rights Publish",
+            "type": "boolean"
+          },
+          "rights_report": {
+            "default": false,
+            "title": "Rights Report",
+            "type": "boolean"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/RulesPayload"
+          },
+          "change_reason": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Change Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "SetPayload",
+        "type": "object"
+      },
+      "ExtractPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "replace_drafts": {
+            "default": false,
+            "title": "Replace Drafts",
+            "type": "boolean"
+          }
+        },
+        "title": "ExtractPayload",
+        "type": "object"
+      },
+      "RegionPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "file_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "File Id",
+            "type": "string"
+          },
+          "page": {
+            "maximum": 10000,
+            "minimum": 1,
+            "title": "Page",
+            "type": "integer"
+          },
+          "rect": {
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "title": "Rect",
+            "type": "array"
+          }
+        },
+        "required": [
+          "file_id",
+          "page",
+          "rect"
+        ],
+        "title": "RegionPayload",
+        "type": "object"
+      },
+      "QuestionPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "expected_revision": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Expected Revision"
+          },
+          "number": {
+            "default": 1,
+            "maximum": 10000,
+            "minimum": 1,
+            "title": "Number",
+            "type": "integer"
+          },
+          "solution_number": {
+            "anyOf": [
+              {
+                "maximum": 10000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Solution Number"
+          },
+          "subject": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Subject",
+            "type": "string"
+          },
+          "section": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Section",
+            "type": "string"
+          },
+          "type": {
+            "default": "mcq",
+            "enum": [
+              "mcq",
+              "integer"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "text": {
+            "default": "",
+            "maxLength": 30000,
+            "title": "Text",
+            "type": "string"
+          },
+          "options": {
+            "additionalProperties": {
+              "maxLength": 8192,
+              "type": "string"
+            },
+            "maxProperties": 8,
+            "propertyNames": {
+              "maxLength": 16,
+              "minLength": 1
+            },
+            "title": "Options",
+            "type": "object"
+          },
+          "answer": {
+            "default": "",
+            "maxLength": 128,
+            "title": "Answer",
+            "type": "string"
+          },
+          "solution": {
+            "default": "",
+            "maxLength": 30000,
+            "title": "Solution",
+            "type": "string"
+          },
+          "topic": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Topic",
+            "type": "string"
+          },
+          "difficulty": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Difficulty",
+            "type": "string"
+          },
+          "render_mode": {
+            "default": "typed",
+            "enum": [
+              "source",
+              "typed"
+            ],
+            "title": "Render Mode",
+            "type": "string"
+          },
+          "q_refs": {
+            "items": {
+              "$ref": "#/components/schemas/RegionPayload"
+            },
+            "maxItems": 40,
+            "title": "Q Refs",
+            "type": "array"
+          },
+          "s_refs": {
+            "items": {
+              "$ref": "#/components/schemas/RegionPayload"
+            },
+            "maxItems": 40,
+            "title": "S Refs",
+            "type": "array"
+          },
+          "accessible_text": {
+            "default": "",
+            "maxLength": 30000,
+            "title": "Accessible Text",
+            "type": "string"
+          },
+          "solution_accessible_text": {
+            "default": "",
+            "maxLength": 30000,
+            "title": "Solution Accessible Text",
+            "type": "string"
+          },
+          "review_note": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Review Note",
+            "type": "string"
+          },
+          "disposition": {
+            "default": "standard",
+            "enum": [
+              "standard",
+              "dropped",
+              "bonus_all",
+              "multiple_accepted",
+              "under_review"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "accepted_answers": {
+            "items": {
+              "maxLength": 128,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Accepted Answers",
+            "type": "array"
+          }
+        },
+        "title": "QuestionPayload",
+        "type": "object"
+      },
+      "PublishPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "confirm": {
+            "title": "Confirm",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "confirm"
+        ],
+        "title": "PublishPayload",
+        "type": "object"
+      },
+      "WithdrawalPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "WithdrawalPayload",
+        "type": "object"
+      },
+      "SubsetPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "default": "Revision set",
+            "maxLength": 160,
+            "minLength": 3,
+            "title": "Title",
+            "type": "string"
+          },
+          "question_ids": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "title": "Question Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "question_ids"
+        ],
+        "title": "SubsetPayload",
+        "type": "object"
+      },
+      "AnswerPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "anyOf": [
+              {
+                "maximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Confidence"
+          },
+          "value": {
+            "maxLength": 128,
+            "title": "Value",
+            "type": "string"
+          },
+          "marked": {
+            "default": false,
+            "title": "Marked",
+            "type": "boolean"
+          },
+          "revision": {
+            "maximum": 100000,
+            "minimum": 1,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "request_id": {
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Request Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "revision",
+          "request_id"
+        ],
+        "title": "AnswerPayload",
+        "type": "object"
+      },
+      "PreflightPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "preview": {
+            "default": false,
+            "title": "Preview",
+            "type": "boolean"
+          },
+          "test_response": {
+            "default": "",
+            "maxLength": 30,
+            "title": "Test Response",
+            "type": "string"
+          }
+        },
+        "title": "PreflightPayload",
+        "type": "object"
+      },
+      "StartPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "start_key": {
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Start Key",
+            "type": "string"
+          },
+          "device_checked": {
+            "default": false,
+            "title": "Device Checked",
+            "type": "boolean"
+          },
+          "preview": {
+            "default": false,
+            "title": "Preview",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "start_key"
+        ],
+        "title": "StartPayload",
+        "type": "object"
+      },
+      "VisitPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "question_id": {
+            "maxLength": 36,
+            "minLength": 36,
+            "title": "Question Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question_id"
+        ],
+        "title": "VisitPayload",
+        "type": "object"
+      },
+      "RetryPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "start_key": {
+            "maxLength": 100,
+            "minLength": 8,
+            "title": "Start Key",
+            "type": "string"
+          },
+          "score_version": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Score Version"
+          }
+        },
+        "required": [
+          "start_key"
+        ],
+        "title": "RetryPayload",
+        "type": "object"
+      },
+      "ReportPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "score_version": {
+            "default": "original",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Score Version",
+            "type": "string"
+          }
+        },
+        "title": "ReportPayload",
+        "type": "object"
+      },
+      "ReviewerPayload": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "student",
+              "reviewer"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "initial_password": {
+            "default": "",
+            "maxLength": 64,
+            "title": "Initial Password",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "role"
+        ],
+        "title": "ReviewerPayload",
+        "type": "object"
+      },
+      "RegradePayload": {
+        "additionalProperties": false,
+        "properties": {
+          "note": {
+            "maxLength": 2000,
+            "minLength": 8,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "title": "RegradePayload",
+        "type": "object"
+      }
+    }
+  }
+}

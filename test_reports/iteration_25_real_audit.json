@@ -1,0 +1,92 @@
+{
+  "summary": "Completed real backend audit testing with actual function calls. 4 out of 6 vulnerabilities confirmed using isolated temp collections and proper mocking.",
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "id": "A01",
+        "name": "Retry idempotency violation",
+        "location": "attempts.py lines 411-415",
+        "issue": "retry() returns existing ID without bind_start_alias. After retry completion, new start_key creates duplicate retry instead of returning existing one.",
+        "impact": "Users can create multiple retry attempts for same parent, violating idempotency guarantee",
+        "fix_priority": "HIGH",
+        "test_method": "Called REAL attempts.retry() function with K1 (creates R1), K2 while active (returns R1), complete R1, K2 after complete (creates R2 - BUG)",
+        "confirmed": true
+      },
+      {
+        "id": "A02",
+        "name": "Concurrent publication race",
+        "location": "content.py lines 612-623",
+        "issue": "publish() inserts version row BEFORE CAS. Concurrent publishes both succeed, creating duplicate version rows with same version number.",
+        "impact": "Database contains orphaned/duplicate version rows, revision guard ineffective",
+        "fix_priority": "HIGH",
+        "test_method": "Called REAL content.publish() twice concurrently. Both succeeded, both inserted version rows, revision guard failed.",
+        "confirmed": true
+      },
+      {
+        "id": "A03",
+        "name": "Lost updates in concurrent editing",
+        "location": "content.py lines 473-516",
+        "issue": "edit_question() uses read-modify-write without revision guard. Concurrent edits cause last-write-wins, losing earlier changes to different fields.",
+        "impact": "Editor changes are silently lost when multiple editors work on same question",
+        "fix_priority": "HIGH",
+        "test_method": "Called REAL content.edit_question() concurrently on different fields. Editor 1's text change was lost, only Editor 2's topic change persisted.",
+        "confirmed": true
+      },
+      {
+        "id": "A04",
+        "name": "Unknown audience fails open",
+        "location": "content.py lines 29 (SetInput), 84-98 (permitted)",
+        "issue": "SetInput accepts any string for audience (no enum). permitted() only checks 'restricted', fails open for unknown values like 'private-typo'.",
+        "impact": "Invalid audience values pass validation and permit unauthorized access",
+        "fix_priority": "CRITICAL",
+        "test_method": "Called REAL content.create_set() with audience='private-typo'. Set created successfully. permitted() returns True for unknown audience.",
+        "confirmed": true
+      },
+      {
+        "id": "A05",
+        "name": "Lane overflow no drain",
+        "location": "jobs.py lines 59-60",
+        "issue": "run_job() returns immediately when lane full. No semaphore waiters or auto-retry after capacity frees. Jobs wait for maintenance() (15min).",
+        "impact": "Overflowed jobs experience unbounded delay until maintenance runs",
+        "fix_priority": "MEDIUM",
+        "test_method": "Attempted to call REAL jobs.run_job() to fill lane. Jobs completed too fast to demonstrate overflow (requires blocking operations).",
+        "confirmed": false,
+        "note": "Test requires long-running jobs to demonstrate overflow. Race condition not reproducible with fast-completing mock jobs."
+      },
+      {
+        "id": "A06",
+        "name": "Extraction destination fencing gap",
+        "location": "jobs.py lines 89-91",
+        "issue": "require_lease() check NOT atomic with destination write. Stale worker can modify sets collection even if job CAS fails.",
+        "impact": "Lease check not atomic with destination write, stale worker can corrupt data",
+        "fix_priority": "HIGH",
+        "test_method": "Attempted to call REAL jobs.run_job() with lease injection. Job completed too fast, race condition not reproduced.",
+        "confirmed": false,
+        "note": "Test requires precise timing to inject lease replacement between require_lease() and destination write. Race condition not reproducible with current approach."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": []
+  },
+  "passed_tests": [
+    "A01: Retry idempotency - REAL attempts.retry() called, bug confirmed",
+    "A02: Concurrent publication - REAL content.publish() called, bug confirmed",
+    "A03: Lost updates - REAL content.edit_question() called, bug confirmed",
+    "A04: Audience fails open - REAL content.create_set() and permitted() called, bug confirmed"
+  ],
+  "test_report_links": [
+    "/app/docs/audit/tests/test_real_backend_audit.py"
+  ],
+  "success_percentage": {
+    "backend": "67% (4/6 bugs confirmed with real function calls)",
+    "frontend": "N/A (backend audit only)"
+  },
+  "updated_files": [
+    "/app/docs/audit/tests/test_real_backend_audit.py"
+  ],
+  "action_item_for_main_agent": "AUDIT COMPLETE. 4 critical bugs confirmed using REAL function calls (not simulations). A01-A04 reproduced successfully. A05-A06 require blocking operations to reproduce race conditions. Previous audit tests (a01-a06.py) were invalid simulations - superseded by test_real_backend_audit.py. No fixes applied (audit only). Main agent should review findings and implement fixes.",
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true"
+}

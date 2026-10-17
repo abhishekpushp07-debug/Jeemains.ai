@@ -1,0 +1,316 @@
+{
+  "CommandIntent": {
+    "additionalProperties": false,
+    "properties": {
+      "tenant_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Tenant Id",
+        "type": "string"
+      },
+      "actor_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Actor Id",
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "START",
+          "DRAFT",
+          "COMMIT",
+          "CLEAR",
+          "TAKEOVER",
+          "SUBMIT",
+          "PUBLISH",
+          "REGRADE"
+        ],
+        "title": "Operation",
+        "type": "string"
+      },
+      "target_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Target Id",
+        "type": "string"
+      },
+      "request_key": {
+        "maxLength": 100,
+        "minLength": 8,
+        "title": "Request Key",
+        "type": "string"
+      },
+      "expected_version": {
+        "maximum": 9223372036854775807,
+        "minimum": 0,
+        "title": "Expected Version",
+        "type": "integer"
+      },
+      "writer_generation": {
+        "maximum": 9223372036854775807,
+        "minimum": 0,
+        "title": "Writer Generation",
+        "type": "integer"
+      },
+      "body": {
+        "additionalProperties": true,
+        "title": "Body",
+        "type": "object"
+      }
+    },
+    "required": [
+      "tenant_id",
+      "actor_id",
+      "operation",
+      "target_id",
+      "request_key",
+      "expected_version",
+      "writer_generation",
+      "body"
+    ],
+    "title": "CommandIntent",
+    "type": "object"
+  },
+  "CommandReceipt": {
+    "additionalProperties": false,
+    "properties": {
+      "receipt_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Receipt Id",
+        "type": "string"
+      },
+      "attempt_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Attempt Id",
+        "type": "string"
+      },
+      "home_cell_id": {
+        "pattern": "^cell-[0-9]{2}$",
+        "title": "Home Cell Id",
+        "type": "string"
+      },
+      "request_scope_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Request Scope Sha256",
+        "type": "string"
+      },
+      "intent_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Intent Sha256",
+        "type": "string"
+      },
+      "state": {
+        "enum": [
+          "RECEIVED",
+          "APPLIED",
+          "REJECTED",
+          "SEALED"
+        ],
+        "title": "State",
+        "type": "string"
+      },
+      "server_seq": {
+        "maximum": 9223372036854775807,
+        "minimum": 0,
+        "title": "Server Seq",
+        "type": "integer"
+      },
+      "writer_generation": {
+        "maximum": 9223372036854775807,
+        "minimum": 0,
+        "title": "Writer Generation",
+        "type": "integer"
+      },
+      "accepted_at_utc_ms": {
+        "maximum": 9223372036854775807,
+        "minimum": 0,
+        "title": "Accepted At Utc Ms",
+        "type": "integer"
+      },
+      "pinned_package_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Pinned Package Sha256",
+        "type": "string"
+      }
+    },
+    "required": [
+      "receipt_id",
+      "attempt_id",
+      "home_cell_id",
+      "request_scope_sha256",
+      "intent_sha256",
+      "state",
+      "server_seq",
+      "writer_generation",
+      "accepted_at_utc_ms",
+      "pinned_package_sha256"
+    ],
+    "title": "CommandReceipt",
+    "type": "object"
+  },
+  "ExactMarks": {
+    "additionalProperties": false,
+    "properties": {
+      "numerator": {
+        "maximum": 9223372036854775807,
+        "minimum": -9223372036854775808,
+        "title": "Numerator",
+        "type": "integer"
+      },
+      "denominator": {
+        "maximum": 9223372036854775807,
+        "minimum": 1,
+        "title": "Denominator",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "numerator",
+      "denominator"
+    ],
+    "title": "ExactMarks",
+    "type": "object"
+  },
+  "SourceAnchor": {
+    "additionalProperties": false,
+    "properties": {
+      "source_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Source Id",
+        "type": "string"
+      },
+      "source_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Source Sha256",
+        "type": "string"
+      },
+      "source_role": {
+        "enum": [
+          "questions",
+          "solutions",
+          "key",
+          "combined"
+        ],
+        "title": "Source Role",
+        "type": "string"
+      },
+      "page_1based": {
+        "maximum": 10000,
+        "minimum": 1,
+        "title": "Page 1Based",
+        "type": "integer"
+      },
+      "coordinate_system": {
+        "const": "pdf_points_top_left_v1",
+        "title": "Coordinate System",
+        "type": "string"
+      },
+      "rect_millipoints": {
+        "maxItems": 4,
+        "minItems": 4,
+        "prefixItems": [
+          {
+            "maximum": 9223372036854775807,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "maximum": 9223372036854775807,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "maximum": 9223372036854775807,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "maximum": 9223372036854775807,
+            "minimum": 0,
+            "type": "integer"
+          }
+        ],
+        "title": "Rect Millipoints",
+        "type": "array"
+      }
+    },
+    "required": [
+      "source_id",
+      "source_sha256",
+      "source_role",
+      "page_1based",
+      "coordinate_system",
+      "rect_millipoints"
+    ],
+    "title": "SourceAnchor",
+    "type": "object"
+  },
+  "CandidateQuestion": {
+    "additionalProperties": false,
+    "description": "Allowlisted reference projection; source/key/solution fields are forbidden.",
+    "properties": {
+      "question_id": {
+        "maxLength": 36,
+        "minLength": 36,
+        "title": "Question Id",
+        "type": "string"
+      },
+      "package_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "title": "Package Sha256",
+        "type": "string"
+      },
+      "response_kind": {
+        "enum": [
+          "single_choice",
+          "multiple_choice",
+          "integer",
+          "decimal"
+        ],
+        "title": "Response Kind",
+        "type": "string"
+      },
+      "stem": {
+        "maxLength": 30000,
+        "minLength": 1,
+        "title": "Stem",
+        "type": "string"
+      },
+      "options": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "maxProperties": 8,
+        "title": "Options",
+        "type": "object"
+      },
+      "asset_ids": {
+        "items": {
+          "maxLength": 36,
+          "minLength": 36,
+          "type": "string"
+        },
+        "maxItems": 16,
+        "title": "Asset Ids",
+        "type": "array"
+      },
+      "accessible_text": {
+        "default": "",
+        "maxLength": 30000,
+        "title": "Accessible Text",
+        "type": "string"
+      }
+    },
+    "required": [
+      "question_id",
+      "package_sha256",
+      "response_kind",
+      "stem"
+    ],
+    "title": "CandidateQuestion",
+    "type": "object"
+  }
+}

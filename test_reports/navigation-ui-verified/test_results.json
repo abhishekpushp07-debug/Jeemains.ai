@@ -1,0 +1,60 @@
+{
+  "test_run": "2026-10-17T14:53:38.471617+00:00",
+  "base_url": "https://campus-launch-2.preview.emergentagent.com",
+  "test_phone": "+12025550347",
+  "passed_tests": [
+    "Login with QA phone",
+    "Home page 3 exam cards verified on desktop and mobile",
+    "BITSAT hub verified on desktop and mobile",
+    "Chapter catalog: 32 total, 12+12+8 pagination verified",
+    "Image fit buttons: all 5 tests passed with correct selectors and aria-pressed verification",
+    "Answer and submit exam",
+    "PDF download: 51 pages, JEE MAINS.AI header verified",
+    "Results history: Chapter/Mock filtering verified with actual clicks",
+    "JEE Main and COMEDK: Empty-state verified, 0 cards, no leaks",
+    "Landing page themes"
+  ],
+  "failed_tests": [],
+  "screenshots": [
+    "/app/test_reports/navigation-ui-verified/01_home_desktop.jpg",
+    "/app/test_reports/navigation-ui-verified/02_home_mobile.jpg",
+    "/app/test_reports/navigation-ui-verified/03_bitsat_hub_desktop.jpg",
+    "/app/test_reports/navigation-ui-verified/04_bitsat_hub_mobile.jpg",
+    "/app/test_reports/navigation-ui-verified/05_chapters_subjects.jpg",
+    "/app/test_reports/navigation-ui-verified/06_chemistry_chapters_page1.jpg",
+    "/app/test_reports/navigation-ui-verified/07_chemistry_chapters_page2.jpg",
+    "/app/test_reports/navigation-ui-verified/08_chemistry_chapters_page3.jpg",
+    "/app/test_reports/navigation-ui-verified/09_set_detail.jpg",
+    "/app/test_reports/navigation-ui-verified/10_player_initial.jpg",
+    "/app/test_reports/navigation-ui-verified/11_player_after_fit_tests.jpg",
+    "/app/test_reports/navigation-ui-verified/12_results_summary.jpg",
+    "/app/test_reports/navigation-ui-verified/13_question_review.jpg",
+    "/app/test_reports/navigation-ui-verified/14_bitsat_results_history.jpg",
+    "/app/test_reports/navigation-ui-verified/15_results_chapter_filter.jpg",
+    "/app/test_reports/navigation-ui-verified/16_results_mock_filter.jpg",
+    "/app/test_reports/navigation-ui-verified/17_jee_main_hub.jpg",
+    "/app/test_reports/navigation-ui-verified/18_jee_main_chapters_empty.jpg",
+    "/app/test_reports/navigation-ui-verified/19_comedk_hub.jpg",
+    "/app/test_reports/navigation-ui-verified/20_comedk_chapters_empty.jpg",
+    "/app/test_reports/navigation-ui-verified/21_landing_light.jpg",
+    "/app/test_reports/navigation-ui-verified/22_landing_dark.jpg"
+  ],
+  "pdf_downloads": [
+    {
+      "path": "/app/test_reports/navigation-ui-verified/result_report.pdf",
+      "size_bytes": 1509804,
+      "page_count": 51,
+      "header_verified": true
+    }
+  ],
+  "overflow_offenders": [],
+  "test_details": {
+    "chapter_catalog": {
+      "total_count": 32,
+      "page1_cards": 12,
+      "page2_cards": 12,
+      "page3_cards": 8,
+      "total_cards": 32
+    }
+  }
+}

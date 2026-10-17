@@ -1,0 +1,123 @@
+{
+  "summary": "Completed iteration 20 testing: JSON body limits backend tests (5/6 passed), desktop/mobile UI regression (light/dark, no overflow, navigation), login flow with phone +12025550184. CRITICAL BLOCKER: Fixture f565e4db-19bb-45c2-95ef-75b74bd985b6 returns 'not available for public practice yet' - cannot test device check, preflight, start, active attempt, offline/reconnect, submit, grading, PDF download, or results switching flows.",
+  
+  "backend_issues": {
+    "critical_bugs": [],
+    "minor_issues": [
+      {
+        "endpoint": "/api/auth/login",
+        "issue": "Login throttling returns 422 instead of 429 after 5 failed attempts",
+        "impact": "Minor - throttling works but status code doesn't match HTTP standard for rate limiting",
+        "fix_priority": "LOW"
+      }
+    ],
+    "passed_tests": [
+      "Duplicate JSON keys rejected with 400",
+      "NaN values rejected with 400",
+      ">1MiB JSON rejected with 413",
+      ">40 nesting levels rejected with 400",
+      "Regular phone mutations return 200"
+    ]
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Mobile Sheet/Drawer",
+        "issue": "Sheet overlay intercepts pointer events, preventing theme toggle click when drawer is open",
+        "selector": "[data-testid='theme-toggle']",
+        "fix_priority": "MEDIUM",
+        "evidence": "Playwright error: 'subtree intercepts pointer events' when clicking theme toggle with drawer open"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "blocking_issues": [
+      {
+        "flow": "Exam Detail / Device Check / Preflight",
+        "issue": "Fixture f565e4db-19bb-45c2-95ef-75b74bd985b6 returns error: 'This practice set is not available for public practice yet'",
+        "impact": "CRITICAL - Cannot test device check, preflight consent, start button, active attempts, offline/reconnect, submit, grading status 202, PDF download, or results score version switching",
+        "affected_tests": [
+          "Device check flow",
+          "Shadcn consent checkbox click",
+          "Start button enable/disable",
+          "Active attempt start/resume",
+          "Offline edit and reconnect persistence",
+          "Submit and 202 pending grade status",
+          "PDF download via Report Button",
+          "Results original/corrected score switching (attempt ae468cf9-6141-4cf8-9257-99d3161c0656)"
+        ],
+        "evidence": "Screenshot: exam_detail_page.png shows error message",
+        "next_steps": "Main agent needs to either: (1) publish this fixture, (2) provide a different accessible fixture with 3 typed MCQ, or (3) grant access to restricted sets for phone +12025550184"
+      }
+    ]
+  },
+  
+  "passed_tests": [
+    "Desktop 1920x800 landing page - light mode (no horizontal overflow)",
+    "Desktop 1920x800 landing page - dark mode (no horizontal overflow)",
+    "Theme toggle desktop (light/dark switch working)",
+    "Navigation links present (nav-exams, nav-login)",
+    "Font readability check (16px Figtree, good contrast)",
+    "Login flow with phone +12025550184 (successful redirect to /home)",
+    "Mobile 390x844 landing page (no horizontal overflow)",
+    "Mobile drawer opens (no horizontal overflow after animation)",
+    "Mobile navigation links visible in drawer",
+    "JSON body limits: duplicate keys → 400",
+    "JSON body limits: NaN → 400",
+    "JSON body limits: >1MiB → 413",
+    "JSON body limits: >40 nesting → 400",
+    "Regular mutations → 200"
+  ],
+  
+  "test_report_links": [
+    "/app/backend/test_json_limits.py",
+    "/app/.screenshots/desktop_landing_light.png",
+    "/app/.screenshots/desktop_landing_dark.png",
+    "/app/.screenshots/after_login_retry.png",
+    "/app/.screenshots/mobile_landing_light.png",
+    "/app/.screenshots/mobile_drawer_open.png",
+    "/app/.screenshots/exam_detail_page.png"
+  ],
+  
+  "action_item_for_main_agent": "CRITICAL BLOCKER: Fixture f565e4db-19bb-45c2-95ef-75b74bd985b6 is not accessible (returns 'not available for public practice yet'). Cannot complete testing of: device check, preflight consent (Shadcn checkbox), start button, active attempts, offline/reconnect persistence, submit flow, 202 pending grade status, PDF download, or results score version switching. Main agent must either: (1) publish this fixture for public practice, (2) provide alternative accessible fixture with 3 typed MCQ for phone +12025550184, or (3) grant restricted access to this user. Also fix: mobile drawer overlay blocking theme toggle clicks (MEDIUM priority).",
+  
+  "updated_files": [
+    "/app/backend/test_json_limits.py (NEW - JSON body limits tests)",
+    "/app/test_reports/iteration_20.json (NEW - this report)"
+  ],
+  
+  "success_percentage": {
+    "backend": "83% (5/6 JSON limit tests passed, 1 minor issue with 422 vs 429)",
+    "frontend_ui": "90% (desktop/mobile UI, light/dark, no overflow, navigation all passed; 1 mobile drawer overlay issue)",
+    "frontend_integration": "0% (blocked by fixture unavailability - cannot test device check, preflight, attempts, grading, PDF, results)"
+  },
+  
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  
+  "detailed_evidence": {
+    "json_limits_test_output": "5/6 tests passed. Duplicate keys, NaN, >1MiB, >40 nesting all correctly rejected. Regular mutations work. Only issue: throttling returns 422 instead of 429.",
+    "desktop_ui_evidence": "Screenshots show clean matte-maroon UI in both light and dark modes. No horizontal overflow (body=1920px, window=1920px). Theme toggle works. Navigation links present.",
+    "mobile_ui_evidence": "Screenshots show responsive mobile layout at 390x844. No horizontal overflow before or after drawer animation. Drawer opens correctly. Mobile nav links visible. Theme toggle blocked by drawer overlay (Playwright error: 'subtree intercepts pointer events').",
+    "login_evidence": "Phone +12025550184 successfully logs in and redirects to /home. Screenshot confirms successful authentication.",
+    "fixture_blocker_evidence": "Navigating to /sets/f565e4db-19bb-45c2-95ef-75b74bd985b6 shows error: 'This practice set is not available for public practice yet' with 'Try again' button. Cannot proceed with any attempt-based testing."
+  },
+  
+  "tests_not_completed_due_to_blocker": [
+    "Device check with test answer input",
+    "Shadcn consent checkbox click validation",
+    "Start button enable/disable logic",
+    "Active attempt creation and resume",
+    "Offline edit and reconnect with persisted drafts",
+    "Refresh during active attempt",
+    "Submit and verify 202 pending grade status",
+    "Wait for grade resolution to actual score",
+    "Download real PDF via Report Button",
+    "Results page original/corrected score version switching",
+    "Known attempt ae468cf9-6141-4cf8-9257-99d3161c0656 verification (original 20/20, corrected 15/20)",
+    "Invalid version friendly retry (no stale PDF)",
+    "Network failure recovery (force GET failure then restore)",
+    "Retry backoff verification"
+  ]
+}

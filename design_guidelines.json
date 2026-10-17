@@ -1,0 +1,200 @@
+{
+  "identity": {
+    "name": "E1",
+    "persona": "Creative Designer - The Anti-AI Designer",
+    "principles": [
+      "Fusion over Imitation",
+      "Emotion First",
+      "Content is King",
+      "Zoom In",
+      "Negative Space",
+      "Contrast"
+    ]
+  },
+  "project_context": {
+    "app_name": "JEE Advanced Paper Source Module",
+    "app_type": "Admin Dashboard",
+    "theme_mode": "dark",
+    "target_audience": "Admin users, Quality Reviewers",
+    "emotional_tone": "Precision, Trust, Efficiency, Clarity"
+  },
+  "typography": {
+    "fonts": {
+      "headings": {
+        "family": "Manrope",
+        "fallback": "sans-serif",
+        "weights": ["400", "600", "800"],
+        "import_url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap"
+      },
+      "body": {
+        "family": "Public Sans",
+        "fallback": "sans-serif",
+        "weights": ["400", "500", "600"],
+        "import_url": "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap"
+      },
+      "code": {
+        "family": "JetBrains Mono",
+        "fallback": "monospace",
+        "weights": ["400", "500"],
+        "import_url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      }
+    },
+    "styles": {
+      "h1": "font-heading text-4xl font-bold tracking-tight text-foreground lg:text-5xl",
+      "h2": "font-heading text-3xl font-semibold tracking-tight text-foreground first:mt-0",
+      "h3": "font-heading text-2xl font-semibold tracking-tight text-foreground",
+      "body": "font-body text-base leading-7 text-muted-foreground",
+      "small": "font-body text-sm font-medium leading-none",
+      "mono": "font-mono text-sm"
+    }
+  },
+  "colors": {
+    "palette": {
+      "mode": "dark",
+      "background": "#09090b",
+      "foreground": "#f8fafc",
+      "card": "#18181b",
+      "card_foreground": "#f8fafc",
+      "popover": "#18181b",
+      "popover_foreground": "#f8fafc",
+      "primary": "#3b82f6",
+      "primary_foreground": "#ffffff",
+      "secondary": "#27272a",
+      "secondary_foreground": "#f8fafc",
+      "muted": "#27272a",
+      "muted_foreground": "#94a3b8",
+      "accent": "#27272a",
+      "accent_foreground": "#f8fafc",
+      "destructive": "#ef4444",
+      "destructive_foreground": "#ffffff",
+      "border": "#27272a",
+      "input": "#27272a",
+      "ring": "#3b82f6"
+    },
+    "status": {
+      "new": { "bg": "#1e293b", "text": "#94a3b8", "border": "#334155" },
+      "downloaded": { "bg": "#172554", "text": "#60a5fa", "border": "#1e3a8a" },
+      "parsed": { "bg": "#422006", "text": "#facc15", "border": "#713f12" },
+      "locked": { "bg": "#052e16", "text": "#4ade80", "border": "#14532d" },
+      "error": { "bg": "#450a0a", "text": "#f87171", "border": "#7f1d1d" }
+    },
+    "custom_classes": {
+      "bg_app": "bg-background",
+      "bg_card": "bg-card",
+      "text_main": "text-foreground",
+      "text_muted": "text-muted-foreground"
+    }
+  },
+  "layout": {
+    "spacing_scale": ["0", "1", "2", "4", "6", "8", "12", "16", "24", "32", "48", "64"],
+    "container": {
+      "padding": "p-6 md:p-8 lg:p-12",
+      "max_width": "max-w-7xl mx-auto"
+    },
+    "grids": {
+      "dashboard": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+      "catalog": "w-full",
+      "detail_view": "grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-4rem)]"
+    },
+    "sidebar": {
+      "width": "w-64",
+      "collapsed_width": "w-16",
+      "bg": "bg-card border-r border-border"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm h-9 px-4 py-2 rounded-md font-medium transition-colors",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-4 py-2 rounded-md font-medium transition-colors",
+      "ghost": "hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 rounded-md font-medium transition-colors",
+      "destructive": "bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-4 py-2 rounded-md font-medium transition-colors",
+      "icon": "h-9 w-9 p-0 flex items-center justify-center rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+    },
+    "cards": {
+      "base": "rounded-xl border border-border bg-card text-card-foreground shadow-sm",
+      "header": "flex flex-col space-y-1.5 p-6",
+      "content": "p-6 pt-0",
+      "footer": "flex items-center p-6 pt-0"
+    },
+    "inputs": {
+      "base": "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "badges": {
+      "base": "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+      "variants": {
+        "default": "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
+        "secondary": "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "destructive": "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
+        "outline": "text-foreground"
+      }
+    },
+    "tables": {
+      "wrapper": "relative w-full overflow-auto",
+      "base": "w-full caption-bottom text-sm",
+      "header": "[&_tr]:border-b",
+      "head_cell": "h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "row": "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+      "cell": "p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "bg-background/80 backdrop-blur-md border-b border-border supports-[backdrop-filter]:bg-background/60",
+    "grid_borders": "divide-y divide-border border rounded-md",
+    "active_state": "bg-accent text-accent-foreground border-l-2 border-primary",
+    "focus_ring": "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+  },
+  "motion": {
+    "transitions": "transition-all duration-200 ease-in-out",
+    "hover_lift": "hover:-translate-y-0.5 hover:shadow-md",
+    "modal_enter": {
+      "initial": { "opacity": 0, "scale": 0.95 },
+      "animate": { "opacity": 1, "scale": 1 },
+      "exit": { "opacity": 0, "scale": 0.95 }
+    }
+  },
+  "accessibility": {
+    "contrast_ratio": "APCA preferred or WCAG AA (4.5:1)",
+    "interactive_elements": "Min 44x44px touch target",
+    "focus_visible": "Must have visible focus ring",
+    "aria_labels": "Mandatory for icon-only buttons"
+  },
+  "assets": {
+    "icons": "lucide-react",
+    "images": []
+  },
+  "instructions_to_main_agent": {
+    "general": [
+      "Follow the 'Dark Mode Admin' aesthetic strictly.",
+      "Use 'Manrope' for all headings and 'Public Sans' for body text.",
+      "Use 'JetBrains Mono' for IDs, JSON, and LaTeX code blocks.",
+      "Implement the 'Status Colors' faithfully for paper and question statuses.",
+      "Ensure all interactive elements have data-testid attributes.",
+      "Use the defined spacing scale; avoid magic numbers.",
+      "For the 'YearSpec Review', use a split-pane layout (PDF/Evidence on left, Form on right).",
+      "For 'Question Review', use a master-detail view or a side-sheet for editing.",
+      "Validate inputs rigorously before 'LOCK' status transition.",
+      "Use Shadcn UI components as the base but apply the custom styles defined here.",
+      "Do NOT use gradients for backgrounds; stick to solid dark colors with subtle borders."
+    ],
+    "files": {
+      "tailwind_config": "Update tailwind.config.js to include the custom font families and color palette extensions.",
+      "global_css": "Update index.css to import the fonts and set the base styles."
+    }
+  },
+  "universal_guidelines": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) for sticky headers.",
+    "You MUST NOT apply universal transition (e.g., transition: all).",
+    "You MUST NOT center align the app container.",
+    "Always use modern button styles (sharp or slightly rounded).",
+    "NEVER use AI assistant Emoji characters like 🤖🧠 etc.",
+    "Every interaction needs micro-animations (hover, focus, active).",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Subtle grain textures or noise overlays can be used for 'empty states' or '404 pages' only.",
+    "Components MUST use named exports.",
+    "Pages MUST use default exports.",
+    "Use 'sonner' for toasts."
+  ]
+}

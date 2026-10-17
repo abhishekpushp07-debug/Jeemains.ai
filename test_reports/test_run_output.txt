@@ -1,0 +1,53 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.17, pytest-9.1.1, pluggy-1.6.0 -- /root/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /app
+configfile: pytest.ini
+plugins: anyio-4.15.1, asyncio-1.4.0, xdist-3.8.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=session, asyncio_default_test_loop_scope=function
+collecting ... collected 29 items
+
+tests/test_analytics_deep_validation.py::test_analytics_registry_structure PASSED [  3%]
+tests/test_analytics_deep_validation.py::test_oracle_metric_names_match_guide PASSED [  6%]
+tests/test_analytics_deep_validation.py::test_a01_net_marks_includes_bonus_excludes_dropped PASSED [ 10%]
+tests/test_analytics_deep_validation.py::test_a02_correct_count_not_percentage PASSED [ 13%]
+tests/test_analytics_deep_validation.py::test_a03_incorrect_and_partial_separate PASSED [ 17%]
+tests/test_analytics_deep_validation.py::test_a04_accuracy_formula_c_over_a FAILED [ 20%]
+tests/test_analytics_deep_validation.py::test_a05_completion_formula_a_over_e FAILED [ 24%]
+tests/test_analytics_deep_validation.py::test_a04_unavailable_when_no_attempts PASSED [ 27%]
+tests/test_analytics_deep_validation.py::test_a05_unavailable_when_no_eligible PASSED [ 31%]
+tests/test_analytics_deep_validation.py::test_a06_ordinary_positive_marks_g PASSED [ 34%]
+tests/test_analytics_deep_validation.py::test_a07_penalty_marks_l PASSED [ 37%]
+tests/test_analytics_deep_validation.py::test_a08_penalty_ratio_gated_by_g_positive PASSED [ 41%]
+tests/test_analytics_deep_validation.py::test_a08_unavailable_when_g_zero PASSED [ 44%]
+tests/test_analytics_deep_validation.py::test_a09_percentage_allows_negative PASSED [ 48%]
+tests/test_analytics_deep_validation.py::test_a13_score_ratio_not_percentage PASSED [ 51%]
+tests/test_analytics_deep_validation.py::test_a24_positive_delta_sum_exact PASSED [ 55%]
+tests/test_analytics_deep_validation.py::test_a25_negative_delta_sum_exact PASSED [ 58%]
+tests/test_analytics_deep_validation.py::test_a24_a25_no_arbitrary_10_threshold PASSED [ 62%]
+tests/test_analytics_deep_validation.py::test_a26_late_window_20_percent_boundary PASSED [ 65%]
+tests/test_analytics_deep_validation.py::test_a26_requires_10_in_each_group FAILED [ 68%]
+tests/test_analytics_deep_validation.py::test_a56_opened_over_all_released PASSED [ 72%]
+tests/test_analytics_deep_validation.py::test_a58_original_ledger_with_deltas PASSED [ 75%]
+tests/test_analytics_deep_validation.py::test_a59_approved_maps_vs_all_released PASSED [ 79%]
+tests/test_analytics_deep_validation.py::test_unavailable_metrics_return_none_not_zero PASSED [ 82%]
+tests/test_analytics_deep_validation.py::test_analytics_total_count_always_60 PASSED [ 86%]
+tests/test_analytics_deep_validation.py::test_solution_open_endpoint_authenticated_released_only PASSED [ 89%]
+tests/test_analytics_deep_validation.py::test_solution_open_idempotent PASSED [ 93%]
+tests/test_analytics_deep_validation.py::test_first_answer_capture_atomic PASSED [ 96%]
+tests/test_analytics_deep_validation.py::test_no_secrets_in_analytics_output PASSED [100%]
+
+=================================== FAILURES ===================================
+E   AssertionError: assert 'Formula: 100 * C / A' in '100 * C / A.'
+/app/backend/tests/test_analytics_deep_validation.py:248: AssertionError: assert 'Formula: 100 * C / A' in '100 * C / A.'
+E   AssertionError: assert 'Formula: 100 * A / E' in '100 * A / E, with unanswered count E - A.'
+/app/backend/tests/test_analytics_deep_validation.py:279: AssertionError: assert 'Formula: 100 * A / E' in '100 * A / E, with unanswered count E - A.'
+E   AssertionError: assert 'at least 10 items in EACH' in 'requires valid first-commit times and at least10items in each of the final20% and earlier groups.'
+     +  where 'requires valid first-commit times and at least10items in each of the final20% and earlier groups.' = <built-in method lower of str object at 0xf9c393976150>()
+     +    where <built-in method lower of str object at 0xf9c393976150> = 'Requires valid first-commit times and at least10items in EACH of the final20% and earlier groups.'.lower
+/app/backend/tests/test_analytics_deep_validation.py:708: AssertionError: assert 'at least 10 items in EACH' in 'requires valid first-commit times and at least10items in each of the final20% and earlier groups.'
+=========================== short test summary info ============================
+FAILED tests/test_analytics_deep_validation.py::test_a04_accuracy_formula_c_over_a
+FAILED tests/test_analytics_deep_validation.py::test_a05_completion_formula_a_over_e
+FAILED tests/test_analytics_deep_validation.py::test_a26_requires_10_in_each_group
+========================= 3 failed, 26 passed in 3.40s =========================

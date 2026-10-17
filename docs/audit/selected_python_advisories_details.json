@@ -1,0 +1,979 @@
+[
+  {
+    "id": "GHSA-f96h-pmfr-66vw",
+    "summary": "Starlette Denial of service (DoS) via multipart/form-data",
+    "details": "### Summary\nStarlette treats `multipart/form-data` parts without a `filename` as text form fields and buffers those in byte strings with no size limit. This allows an attacker to upload arbitrary large form fields and cause Starlette to both slow down significantly due to excessive memory allocations and copy operations, and also consume more and more memory until the server starts swapping and grinds to a halt, or the OS terminates the server process with an OOM error. Uploading multiple such requests in parallel may be enough to render a service practically unusable, even if reasonable request size limits are enforced by a reverse proxy in front of Starlette.\n\n### PoC\n\n```python\nfrom starlette.applications import Starlette\nfrom starlette.routing import Route\n\nasync def poc(request):\n    async with request.form():\n        pass\n\napp = Starlette(routes=[\n    Route('/', poc, methods=[\"POST\"]),\n])\n```\n\n```sh\ncurl http://localhost:8000 -F 'big=</dev/urandom'\n```\n\n### Impact\nThis Denial of service (DoS) vulnerability affects all applications built with Starlette (or FastAPI) accepting form requests.\n",
+    "aliases": [
+      "CVE-2024-47874",
+      "PYSEC-2026-1943"
+    ],
+    "modified": "2026-09-10T03:50:19.756287586Z",
+    "published": "2024-10-15T18:12:57Z",
+    "database_specific": {
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "severity": "HIGH",
+      "github_reviewed": true,
+      "github_reviewed_at": "2024-10-15T18:12:57Z",
+      "nvd_published_at": "2024-10-15T16:15:05Z"
+    },
+    "references": [
+      {
+        "type": "WEB",
+        "url": "https://github.com/encode/starlette/security/advisories/GHSA-f96h-pmfr-66vw"
+      },
+      {
+        "type": "ADVISORY",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47874"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/encode/starlette/commit/fd038f3070c302bff17ef7d173dbb0b007617733"
+      },
+      {
+        "type": "PACKAGE",
+        "url": "https://github.com/encode/starlette"
+      }
+    ],
+    "affected": [
+      {
+        "package": {
+          "name": "starlette",
+          "ecosystem": "PyPI",
+          "purl": "pkg:pypi/starlette"
+        },
+        "ranges": [
+          {
+            "type": "ECOSYSTEM",
+            "events": [
+              {
+                "introduced": "0"
+              },
+              {
+                "fixed": "0.40.0"
+              }
+            ]
+          }
+        ],
+        "versions": [
+          "0.1.0",
+          "0.1.1",
+          "0.1.10",
+          "0.1.11",
+          "0.1.12",
+          "0.1.13",
+          "0.1.14",
+          "0.1.15",
+          "0.1.16",
+          "0.1.17",
+          "0.1.2",
+          "0.1.3",
+          "0.1.4",
+          "0.1.5",
+          "0.1.6",
+          "0.1.7",
+          "0.1.8",
+          "0.1.9",
+          "0.10.0",
+          "0.10.1",
+          "0.10.2",
+          "0.10.3",
+          "0.10.4",
+          "0.10.5",
+          "0.10.6",
+          "0.10.7",
+          "0.11.0",
+          "0.11.1",
+          "0.11.2",
+          "0.11.3",
+          "0.11.4",
+          "0.12.0",
+          "0.12.0b1",
+          "0.12.0b2",
+          "0.12.0b3",
+          "0.12.1",
+          "0.12.10",
+          "0.12.11",
+          "0.12.12",
+          "0.12.13",
+          "0.12.2",
+          "0.12.3",
+          "0.12.4",
+          "0.12.5",
+          "0.12.6",
+          "0.12.7",
+          "0.12.8",
+          "0.12.9",
+          "0.13.0",
+          "0.13.1",
+          "0.13.2",
+          "0.13.3",
+          "0.13.4",
+          "0.13.5",
+          "0.13.6",
+          "0.13.7",
+          "0.13.8",
+          "0.14.0",
+          "0.14.1",
+          "0.14.2",
+          "0.15.0",
+          "0.16.0",
+          "0.17.0",
+          "0.17.1",
+          "0.18.0",
+          "0.19.0",
+          "0.19.1",
+          "0.2.0",
+          "0.2.1",
+          "0.2.2",
+          "0.2.3",
+          "0.20.0",
+          "0.20.1",
+          "0.20.2",
+          "0.20.3",
+          "0.20.4",
+          "0.21.0",
+          "0.22.0",
+          "0.23.0",
+          "0.23.1",
+          "0.24.0",
+          "0.25.0",
+          "0.26.0",
+          "0.26.0.post1",
+          "0.26.1",
+          "0.27.0",
+          "0.28.0",
+          "0.29.0",
+          "0.3.0",
+          "0.3.1",
+          "0.3.2",
+          "0.3.3",
+          "0.3.4",
+          "0.3.5",
+          "0.3.6",
+          "0.3.7",
+          "0.30.0",
+          "0.31.0",
+          "0.31.1",
+          "0.32.0",
+          "0.32.0.post1",
+          "0.33.0",
+          "0.34.0",
+          "0.35.0",
+          "0.35.1",
+          "0.36.0",
+          "0.36.1",
+          "0.36.2",
+          "0.36.3",
+          "0.37.0",
+          "0.37.1",
+          "0.37.2",
+          "0.38.0",
+          "0.38.1",
+          "0.38.2",
+          "0.38.3",
+          "0.38.4",
+          "0.38.5",
+          "0.38.6",
+          "0.39.0",
+          "0.39.1",
+          "0.39.2",
+          "0.4.0",
+          "0.4.1",
+          "0.4.2",
+          "0.5.0",
+          "0.5.1",
+          "0.5.2",
+          "0.5.3",
+          "0.5.4",
+          "0.5.5",
+          "0.6.0",
+          "0.6.1",
+          "0.6.2",
+          "0.6.3",
+          "0.7.0",
+          "0.7.1",
+          "0.7.2",
+          "0.7.3",
+          "0.7.4",
+          "0.8.0",
+          "0.8.1",
+          "0.8.2",
+          "0.8.3",
+          "0.8.4",
+          "0.8.5",
+          "0.8.6",
+          "0.8.7",
+          "0.8.8",
+          "0.9.0",
+          "0.9.1",
+          "0.9.10",
+          "0.9.11",
+          "0.9.2",
+          "0.9.3",
+          "0.9.4",
+          "0.9.5",
+          "0.9.6",
+          "0.9.7",
+          "0.9.8",
+          "0.9.9"
+        ],
+        "database_specific": {
+          "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/10/GHSA-f96h-pmfr-66vw/GHSA-f96h-pmfr-66vw.json"
+        }
+      }
+    ],
+    "schema_version": "1.9.0",
+    "severity": [
+      {
+        "type": "CVSS_V3",
+        "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N"
+      },
+      {
+        "type": "CVSS_V4",
+        "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2c2j-9gv5-cj73",
+    "summary": "Starlette has possible denial-of-service vector when parsing large files in multipart forms",
+    "details": "### Summary\nWhen parsing a multi-part form with large files (greater than the [default max spool size](https://github.com/encode/starlette/blob/fa5355442753f794965ae1af0f87f9fec1b9a3de/starlette/formparsers.py#L126)) `starlette` will block the main thread to roll the file over to disk. This blocks the event thread which means we can't accept new connections.\n\n### Details\nPlease see this discussion for details: https://github.com/encode/starlette/discussions/2927#discussioncomment-13721403. In summary the following UploadFile code (copied from [here](https://github.com/encode/starlette/blob/fa5355442753f794965ae1af0f87f9fec1b9a3de/starlette/datastructures.py#L436C5-L447C14)) has a minor bug. Instead of just checking for `self._in_memory` we should also check if the additional bytes will cause a rollover.\n\n```python\n\n    @property\n    def _in_memory(self) -> bool:\n        # check for SpooledTemporaryFile._rolled\n        rolled_to_disk = getattr(self.file, \"_rolled\", True)\n        return not rolled_to_disk\n\n    async def write(self, data: bytes) -> None:\n        if self.size is not None:\n            self.size += len(data)\n\n        if self._in_memory:\n            self.file.write(data)\n        else:\n            await run_in_threadpool(self.file.write, data)\n```\n\nI have already created a PR which fixes the problem: https://github.com/encode/starlette/pull/2962\n\n\n### PoC\nSee the discussion [here](https://github.com/encode/starlette/discussions/2927#discussioncomment-13721403) for steps on how to reproduce.\n\n### Impact\nTo be honest, very low and not many users will be impacted. Parsing large forms is already CPU intensive so the additional IO block doesn't slow down `starlette` that much on systems with modern HDDs/SSDs. If someone is running on tape they might see a greater impact.",
+    "aliases": [
+      "CVE-2025-54121",
+      "PYSEC-2026-1941"
+    ],
+    "modified": "2026-09-10T03:50:25.704876348Z",
+    "published": "2025-07-21T19:34:23Z",
+    "database_specific": {
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "severity": "MODERATE",
+      "github_reviewed": true,
+      "github_reviewed_at": "2025-07-21T19:34:23Z",
+      "nvd_published_at": "2025-07-21T20:15:41Z"
+    },
+    "references": [
+      {
+        "type": "WEB",
+        "url": "https://github.com/encode/starlette/security/advisories/GHSA-2c2j-9gv5-cj73"
+      },
+      {
+        "type": "ADVISORY",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54121"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/encode/starlette/commit/9f7ec2eb512fcc3fe90b43cb9dd9e1d08696bec1"
+      },
+      {
+        "type": "PACKAGE",
+        "url": "https://github.com/encode/starlette"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/encode/starlette/blob/fa5355442753f794965ae1af0f87f9fec1b9a3de/starlette/datastructures.py#L436C5-L447C14"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/encode/starlette/discussions/2927#discussioncomment-13721403"
+      }
+    ],
+    "affected": [
+      {
+        "package": {
+          "name": "starlette",
+          "ecosystem": "PyPI",
+          "purl": "pkg:pypi/starlette"
+        },
+        "ranges": [
+          {
+            "type": "ECOSYSTEM",
+            "events": [
+              {
+                "introduced": "0"
+              },
+              {
+                "fixed": "0.47.2"
+              }
+            ]
+          }
+        ],
+        "versions": [
+          "0.1.0",
+          "0.1.1",
+          "0.1.10",
+          "0.1.11",
+          "0.1.12",
+          "0.1.13",
+          "0.1.14",
+          "0.1.15",
+          "0.1.16",
+          "0.1.17",
+          "0.1.2",
+          "0.1.3",
+          "0.1.4",
+          "0.1.5",
+          "0.1.6",
+          "0.1.7",
+          "0.1.8",
+          "0.1.9",
+          "0.10.0",
+          "0.10.1",
+          "0.10.2",
+          "0.10.3",
+          "0.10.4",
+          "0.10.5",
+          "0.10.6",
+          "0.10.7",
+          "0.11.0",
+          "0.11.1",
+          "0.11.2",
+          "0.11.3",
+          "0.11.4",
+          "0.12.0",
+          "0.12.0b1",
+          "0.12.0b2",
+          "0.12.0b3",
+          "0.12.1",
+          "0.12.10",
+          "0.12.11",
+          "0.12.12",
+          "0.12.13",
+          "0.12.2",
+          "0.12.3",
+          "0.12.4",
+          "0.12.5",
+          "0.12.6",
+          "0.12.7",
+          "0.12.8",
+          "0.12.9",
+          "0.13.0",
+          "0.13.1",
+          "0.13.2",
+          "0.13.3",
+          "0.13.4",
+          "0.13.5",
+          "0.13.6",
+          "0.13.7",
+          "0.13.8",
+          "0.14.0",
+          "0.14.1",
+          "0.14.2",
+          "0.15.0",
+          "0.16.0",
+          "0.17.0",
+          "0.17.1",
+          "0.18.0",
+          "0.19.0",
+          "0.19.1",
+          "0.2.0",
+          "0.2.1",
+          "0.2.2",
+          "0.2.3",
+          "0.20.0",
+          "0.20.1",
+          "0.20.2",
+          "0.20.3",
+          "0.20.4",
+          "0.21.0",
+          "0.22.0",
+          "0.23.0",
+          "0.23.1",
+          "0.24.0",
+          "0.25.0",
+          "0.26.0",
+          "0.26.0.post1",
+          "0.26.1",
+          "0.27.0",
+          "0.28.0",
+          "0.29.0",
+          "0.3.0",
+          "0.3.1",
+          "0.3.2",
+          "0.3.3",
+          "0.3.4",
+          "0.3.5",
+          "0.3.6",
+          "0.3.7",
+          "0.30.0",
+          "0.31.0",
+          "0.31.1",
+          "0.32.0",
+          "0.32.0.post1",
+          "0.33.0",
+          "0.34.0",
+          "0.35.0",
+          "0.35.1",
+          "0.36.0",
+          "0.36.1",
+          "0.36.2",
+          "0.36.3",
+          "0.37.0",
+          "0.37.1",
+          "0.37.2",
+          "0.38.0",
+          "0.38.1",
+          "0.38.2",
+          "0.38.3",
+          "0.38.4",
+          "0.38.5",
+          "0.38.6",
+          "0.39.0",
+          "0.39.1",
+          "0.39.2",
+          "0.4.0",
+          "0.4.1",
+          "0.4.2",
+          "0.40.0",
+          "0.41.0",
+          "0.41.1",
+          "0.41.2",
+          "0.41.3",
+          "0.42.0",
+          "0.43.0",
+          "0.44.0",
+          "0.45.0",
+          "0.45.1",
+          "0.45.2",
+          "0.45.3",
+          "0.46.0",
+          "0.46.1",
+          "0.46.2",
+          "0.47.0",
+          "0.47.1",
+          "0.5.0",
+          "0.5.1",
+          "0.5.2",
+          "0.5.3",
+          "0.5.4",
+          "0.5.5",
+          "0.6.0",
+          "0.6.1",
+          "0.6.2",
+          "0.6.3",
+          "0.7.0",
+          "0.7.1",
+          "0.7.2",
+          "0.7.3",
+          "0.7.4",
+          "0.8.0",
+          "0.8.1",
+          "0.8.2",
+          "0.8.3",
+          "0.8.4",
+          "0.8.5",
+          "0.8.6",
+          "0.8.7",
+          "0.8.8",
+          "0.9.0",
+          "0.9.1",
+          "0.9.10",
+          "0.9.11",
+          "0.9.2",
+          "0.9.3",
+          "0.9.4",
+          "0.9.5",
+          "0.9.6",
+          "0.9.7",
+          "0.9.8",
+          "0.9.9"
+        ],
+        "database_specific": {
+          "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2025/07/GHSA-2c2j-9gv5-cj73/GHSA-2c2j-9gv5-cj73.json"
+        }
+      }
+    ],
+    "schema_version": "1.9.0",
+    "severity": [
+      {
+        "type": "CVSS_V3",
+        "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-m87m-mmvp-v9qm",
+    "summary": "PyMongo Out-of-bounds Read in the bson module ",
+    "details": "Versions of the package pymongo before 4.6.3 are vulnerable to Out-of-bounds Read in the bson module. Using the crafted payload the attacker could force the parser to deserialize unmanaged memory. The parser tries to interpret bytes next to buffer and throws an exception with string. If the following bytes are not printable UTF-8 the parser throws an exception with a single byte.",
+    "aliases": [
+      "CVE-2024-5629",
+      "PYSEC-2026-1826"
+    ],
+    "modified": "2026-09-10T03:50:15.663234621Z",
+    "published": "2024-06-05T15:30:39Z",
+    "database_specific": {
+      "cwe_ids": [
+        "CWE-125"
+      ],
+      "severity": "MODERATE",
+      "github_reviewed": true,
+      "github_reviewed_at": "2024-06-05T17:10:59Z",
+      "nvd_published_at": "2024-06-05T15:15:12Z"
+    },
+    "references": [
+      {
+        "type": "ADVISORY",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-5629"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/mongodb/mongo-python-driver/commit/56b6b6dbc267d365d97c037082369dabf37405d2"
+      },
+      {
+        "type": "WEB",
+        "url": "https://gist.github.com/keltecc/62a7c2bf74a997d0a7b48a0ff3853a03"
+      },
+      {
+        "type": "PACKAGE",
+        "url": "https://github.com/mongodb/mongo-python-driver"
+      },
+      {
+        "type": "WEB",
+        "url": "https://jira.mongodb.org/browse/PYTHON-4305"
+      },
+      {
+        "type": "WEB",
+        "url": "https://lists.debian.org/debian-lts-announce/2024/06/msg00007.html"
+      },
+      {
+        "type": "WEB",
+        "url": "https://security.snyk.io/vuln/SNYK-PYTHON-PYMONGO-6370597"
+      }
+    ],
+    "affected": [
+      {
+        "package": {
+          "name": "pymongo",
+          "ecosystem": "PyPI",
+          "purl": "pkg:pypi/pymongo"
+        },
+        "ranges": [
+          {
+            "type": "ECOSYSTEM",
+            "events": [
+              {
+                "introduced": "0"
+              },
+              {
+                "fixed": "4.6.3"
+              }
+            ]
+          }
+        ],
+        "versions": [
+          "0.1.1pre",
+          "0.1.2pre",
+          "0.10",
+          "0.10.1",
+          "0.10.2",
+          "0.10.3",
+          "0.11",
+          "0.11.1",
+          "0.11.2",
+          "0.11.3",
+          "0.12",
+          "0.13",
+          "0.14",
+          "0.14.1",
+          "0.14.2",
+          "0.15",
+          "0.15.1",
+          "0.15.2",
+          "0.16",
+          "0.1pre",
+          "0.2pre",
+          "0.3.1pre",
+          "0.3pre",
+          "0.4pre",
+          "0.5.1pre",
+          "0.5.2pre",
+          "0.5.3pre",
+          "0.5pre",
+          "0.6",
+          "0.7",
+          "0.7.1",
+          "0.7.2",
+          "0.8",
+          "0.8.1",
+          "0.9",
+          "0.9.1",
+          "0.9.2",
+          "0.9.3",
+          "0.9.4",
+          "0.9.5",
+          "0.9.6",
+          "0.9.7",
+          "1.0",
+          "1.1",
+          "1.1.1",
+          "1.1.2",
+          "1.10",
+          "1.10.1",
+          "1.11",
+          "1.2",
+          "1.2.1",
+          "1.3",
+          "1.4",
+          "1.5",
+          "1.5.1",
+          "1.5.2",
+          "1.6",
+          "1.7",
+          "1.8",
+          "1.8.1",
+          "1.9",
+          "2.0",
+          "2.0.1",
+          "2.1",
+          "2.1.1",
+          "2.2",
+          "2.2.1",
+          "2.3",
+          "2.4",
+          "2.4.1",
+          "2.4.2",
+          "2.5",
+          "2.5.1",
+          "2.5.2",
+          "2.6",
+          "2.6.1",
+          "2.6.2",
+          "2.6.3",
+          "2.7",
+          "2.7.1",
+          "2.7.2",
+          "2.8",
+          "2.8.1",
+          "2.9",
+          "2.9.1",
+          "2.9.2",
+          "2.9.3",
+          "2.9.4",
+          "2.9.5",
+          "3.0",
+          "3.0.1",
+          "3.0.2",
+          "3.0.3",
+          "3.1",
+          "3.1.1",
+          "3.10.0",
+          "3.10.1",
+          "3.11.0",
+          "3.11.1",
+          "3.11.2",
+          "3.11.3",
+          "3.11.4",
+          "3.12.0",
+          "3.12.1",
+          "3.12.2",
+          "3.12.3",
+          "3.13.0",
+          "3.2",
+          "3.2.1",
+          "3.2.2",
+          "3.3.0",
+          "3.3.1",
+          "3.4.0",
+          "3.5.0",
+          "3.5.1",
+          "3.6.0",
+          "3.6.1",
+          "3.7.0",
+          "3.7.1",
+          "3.7.2",
+          "3.8.0",
+          "3.9.0",
+          "4.0",
+          "4.0.1",
+          "4.0.2",
+          "4.1.0",
+          "4.1.1",
+          "4.2.0",
+          "4.3.2",
+          "4.3.3",
+          "4.4.0",
+          "4.4.0b0",
+          "4.4.1",
+          "4.5.0",
+          "4.6.0",
+          "4.6.1",
+          "4.6.2"
+        ],
+        "database_specific": {
+          "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/06/GHSA-m87m-mmvp-v9qm/GHSA-m87m-mmvp-v9qm.json"
+        }
+      }
+    ],
+    "schema_version": "1.9.0",
+    "severity": [
+      {
+        "type": "CVSS_V3",
+        "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:N/A:L"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-2gx3-rcp4-g85q",
+    "summary": "PyJWT: PyJWKClient still amplifies unauthenticated JWKS fetches on unknown kid values (incomplete fix of CVE-2026-48524)",
+    "details": "Summary\nCVE-2026-48524 (GHSA-fhv5-28vv-h8m8, \"PyJWKClient unbounded JWKS endpoint requests via attacker-controlled kid values (DoS)\") was fixed in 2.13.0 by stopping fetch_data() from clearing the cache on a fetch error. That closed one amplification path but did not add the mitigation the advisory's title implies: there is still no rate-limit, negative-cache, or minimum-refresh-interval for unknown kids.\n\nAt HEAD, get_signing_key(kid) (jwt/jwks_client.py:185-211), on any unknown kid, calls get_signing_keys(refresh=True), and refresh=True bypasses jwk_set_cache unconditionally and forces a fresh fetch_data(). The kid is read from the unverified token header (get_signing_key_from_jwt decodes with verify_signature=False), so no valid token and no authentication is required. lru_cache does not cache the raised exception, so even the same unknown kid repeated re-fetches on every call.\n\nAffected\npyjwt <= 2.13.0 (the latest release; the patched release for CVE-2026-48524). No fixed version yet.\n\nProof of concept (verified on 2.13.0, cache enabled = realistic prod config)\nimport threading, http.server, socketserver, json\nfrom jwt import PyJWKClient\nhits = {'n': 0}\nJWKS = json.dumps({\"keys\":[{\"kty\":\"oct\",\"kid\":\"real\",\"k\":\"AAAA\"}]}).encode()\nclass H(http.server.BaseHTTPRequestHandler):\n    def do_GET(self):\n        hits['n'] += 1\n        self.send_response(200); self.send_header('Content-Type','application/json'); self.end_headers()\n        self.wfile.write(JWKS)\n    def log_message(self,*a): pass\nsrv = socketserver.TCPServer(('[127.0.0.1](https://127.0.0.1/)',0), H); port = srv.server_address[1]\nthreading.Thread(target=srv.serve_forever, daemon=True).start()\nc = PyJWKClient(f'http://127.0.0.1/:{port}[/jwks](tg://bot_command?command=jwks).json', cache_keys=True, lifespan=3600)\nfor i in range(8):\n    try: c.get_signing_key(f'attacker-unknown-kid-{i}')\n    except Exception: pass\nbefore = hits['n']\nfor _ in range(5):\n    try: c.get_signing_key('same-unknown')\n    except Exception: pass\nprint('distinct unknown kids: 8 -> fetches:', hits['n'])\nprint('same unknown kid x5 -> extra fetches:', hits['n'] - before)\n\nOutput:\n  distinct unknown kids: 8 -> fetches: 9\n  same unknown kid x5 -> extra fetches: 5\nEach unknown kid forces a fresh JWKS fetch; a repeated identical unknown kid still re-fetches every time against an unexpired cache. No rate-limit or negative-cache.\n\nImpact\nOne unauthenticated request -> one outbound JWKS HTTP fetch + full JSON parse on the victim server. An attacker floods tokens carrying junk kids, so the victim hammers its own JWKS/IdP endpoint (amplification: attacker -> victim -> IdP), exhausting victim CPU/sockets and potentially tripping the JWKS provider's rate-limit, causing an application-wide auth outage. This is the unauthenticated DoS the parent advisory is named for, still reachable after the 2.13.0 fix.\n\nSuggested fix\nGuard the forced refresh on unknown kids: negative-cache unknown kids for a short TTL, or enforce a minimum interval between forced JWKS refreshes, so a repeated or unknown kid cannot force unbounded fetches.\n\nNote: the same-kid-repeated result (5 identical unknown kids producing 5 fetches against an unexpired cache) shows this is request amplification, not legitimate key-rotation handling, since that refresh can never succeed.\n\nReported by Babakizo (Securva).\n\n## Maintainer update \u2014 2026-09-10\n\nThe maintainer confirmed the reported behavior against PyJWT 2.13.0. With JWKS caching\nenabled, an unknown `kid` previously forced an unconditional JWKS refresh,\nincluding when the same unknown value was repeated while the cached key set was\nstill valid. This allowed unauthenticated token headers to cause unnecessary\noutbound JWKS requests and repeated parsing work.\n\nThe fix is now on `master` in commit `ba4853a`. `PyJWKClient` now applies a\n30-second cooldown after successful JWKS fetches before permitting another\nunknown-`kid` refresh, serializes concurrent refresh decisions per client, and\nallows callers to configure or disable the cooldown. Cache-disabled behavior\nand immediate retry after failed fetches remain unchanged.\n\nRegression tests cover repeated unknown kids, cooldown expiry, concurrent\nmisses, cache-disabled operation, and invalid cooldown values. The available\nfull tox matrix, Ruff, and mypy checks pass. The fix will be included in the\nnext released 2.x version.\n\n## Maintainer update \u2014 2026-09-11\n\nThe verified fix for this advisory is included in PyJWT 2.14.0, released on 2026-09-11 and available on PyPI. PyJWT 2.14.0 is the first release containing the fix. This advisory is now published with 2.14.0 recorded as the patched version.",
+    "aliases": [
+      "CVE-2026-101917",
+      "PYSEC-2026-4140"
+    ],
+    "modified": "2026-10-01T17:56:20.150726241Z",
+    "published": "2026-09-29T23:11:51Z",
+    "database_specific": {
+      "github_reviewed_at": "2026-09-29T23:11:51Z",
+      "nvd_published_at": "2026-09-28T21:17:13Z",
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "severity": "MODERATE",
+      "github_reviewed": true
+    },
+    "references": [
+      {
+        "type": "WEB",
+        "url": "https://github.com/jpadilla/pyjwt/security/advisories/GHSA-2gx3-rcp4-g85q"
+      },
+      {
+        "type": "ADVISORY",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-101917"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/jpadilla/pyjwt/commit/ba4853a75fb9676362da17f67d0f64bd18afd4e1"
+      },
+      {
+        "type": "PACKAGE",
+        "url": "https://github.com/jpadilla/pyjwt"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/jpadilla/pyjwt/releases/tag/2.14.0"
+      }
+    ],
+    "affected": [
+      {
+        "package": {
+          "name": "pyjwt",
+          "ecosystem": "PyPI",
+          "purl": "pkg:pypi/pyjwt"
+        },
+        "ranges": [
+          {
+            "type": "ECOSYSTEM",
+            "events": [
+              {
+                "introduced": "0"
+              },
+              {
+                "fixed": "2.14.0"
+              }
+            ]
+          }
+        ],
+        "versions": [
+          "0.1.1",
+          "0.1.2",
+          "0.1.3",
+          "0.1.4",
+          "0.1.5",
+          "0.1.6",
+          "0.1.7",
+          "0.1.8",
+          "0.1.9",
+          "0.2.0",
+          "0.2.1",
+          "0.2.3",
+          "0.3.0",
+          "0.3.1",
+          "0.3.2",
+          "0.4.0",
+          "0.4.1",
+          "0.4.2",
+          "0.4.3",
+          "1.0.0",
+          "1.0.1",
+          "1.1.0",
+          "1.3.0",
+          "1.4.0",
+          "1.4.1",
+          "1.4.2",
+          "1.5.0",
+          "1.5.1",
+          "1.5.2",
+          "1.5.3",
+          "1.6.0",
+          "1.6.1",
+          "1.6.3",
+          "1.6.4",
+          "1.7.0",
+          "1.7.1",
+          "2.0.0",
+          "2.0.0a1",
+          "2.0.0a2",
+          "2.0.1",
+          "2.1.0",
+          "2.10.0",
+          "2.10.1",
+          "2.11.0",
+          "2.12.0",
+          "2.12.1",
+          "2.13.0",
+          "2.2.0",
+          "2.3.0",
+          "2.4.0",
+          "2.5.0",
+          "2.6.0",
+          "2.7.0",
+          "2.8.0",
+          "2.9.0"
+        ],
+        "database_specific": {
+          "last_known_affected_version_range": "<= 2.13.0",
+          "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-2gx3-rcp4-g85q/GHSA-2gx3-rcp4-g85q.json"
+        }
+      }
+    ],
+    "schema_version": "1.9.0",
+    "severity": [
+      {
+        "type": "CVSS_V3",
+        "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+      }
+    ]
+  },
+  {
+    "id": "GHSA-3qf3-8w2g-rqmx",
+    "summary": "python-jose algorithm confusion guard bypassed by DER-encoded public keys",
+    "details": "python-jose through 3.5.0 fails to properly validate asymmetric keys in HMAC initialization, accepting DER-encoded public keys that lack PEM armor or SSH prefixes. Attackers holding the service's public key can forge HS256 tokens that pass verification when algorithms are not explicitly restricted. This is an incomplete fix for CVE-2024-33663.",
+    "aliases": [
+      "CVE-2024-33663",
+      "CVE-2026-85394",
+      "GHSA-6c5p-j8vq-pqhj",
+      "PYSEC-2024-232"
+    ],
+    "modified": "2026-10-05T23:25:45.615997593Z",
+    "published": "2026-09-03T21:31:15Z",
+    "database_specific": {
+      "github_reviewed": true,
+      "github_reviewed_at": "2026-10-05T22:55:01Z",
+      "nvd_published_at": "2026-09-03T19:17:31Z",
+      "cwe_ids": [
+        "CWE-347"
+      ],
+      "severity": "CRITICAL"
+    },
+    "references": [
+      {
+        "type": "ADVISORY",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85394"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/mpdavis/python-jose/issues/414"
+      },
+      {
+        "type": "ADVISORY",
+        "url": "https://github.com/advisories/GHSA-6c5p-j8vq-pqhj"
+      },
+      {
+        "type": "PACKAGE",
+        "url": "https://github.com/mpdavis/python-jose"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/mpdavis/python-jose/blob/018b310ddb8b50dcfd09a0c152117835a21dd656/jose/backends/native.py"
+      },
+      {
+        "type": "WEB",
+        "url": "https://github.com/mpdavis/python-jose/blob/018b310ddb8b50dcfd09a0c152117835a21dd656/jose/utils.py"
+      },
+      {
+        "type": "WEB",
+        "url": "https://www.vulncheck.com/advisories/python-jose-through-3.5.0-algorithm-confusion-via-der-encoded-public-key-as-hmac-secret"
+      }
+    ],
+    "affected": [
+      {
+        "package": {
+          "name": "python-jose",
+          "ecosystem": "PyPI",
+          "purl": "pkg:pypi/python-jose"
+        },
+        "ranges": [
+          {
+            "type": "ECOSYSTEM",
+            "events": [
+              {
+                "introduced": "0"
+              },
+              {
+                "last_affected": "3.5.0"
+              }
+            ]
+          }
+        ],
+        "versions": [
+          "0.1.0",
+          "0.1.1",
+          "0.1.2",
+          "0.1.3",
+          "0.1.4",
+          "0.1.5",
+          "0.1.6",
+          "0.1.7",
+          "0.1.8",
+          "0.2.0",
+          "0.3.0",
+          "0.4.0",
+          "0.5.0",
+          "0.5.1",
+          "0.5.2",
+          "0.5.3",
+          "0.5.4",
+          "0.5.5",
+          "0.5.6",
+          "0.6.1",
+          "0.6.2",
+          "0.7.0",
+          "1.0.0",
+          "1.1.0",
+          "1.2.0",
+          "1.3.0",
+          "1.3.1",
+          "1.3.2",
+          "1.4.0",
+          "2.0.0",
+          "2.0.1",
+          "2.0.2",
+          "3.0.0",
+          "3.0.1",
+          "3.1.0",
+          "3.2.0",
+          "3.3.0",
+          "3.4.0",
+          "3.5.0"
+        ],
+        "database_specific": {
+          "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/09/GHSA-3qf3-8w2g-rqmx/GHSA-3qf3-8w2g-rqmx.json"
+        }
+      }
+    ],
+    "schema_version": "1.9.0",
+    "severity": [
+      {
+        "type": "CVSS_V3",
+        "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N"
+      },
+      {
+        "type": "CVSS_V4",
+        "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N"
+      }
+    ]
+  }
+]

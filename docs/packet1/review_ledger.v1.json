@@ -1,0 +1,1877 @@
+{
+  "schema_version": "source-review-v1",
+  "requirements": [
+    {
+      "id": "SRC05-P003-B003-R01",
+      "obligation": "Use one shared workload model across architecture, testing and cost calculations",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B003-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B003-R02",
+      "obligation": "Treat the workload as a proposed planning model, not measured capacity",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B003-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B003-R03",
+      "obligation": "Record observed student behavior and revise the model before claiming capacity",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B003-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B003-R04",
+      "obligation": "Use 10800 seconds as the nominal planning exam duration",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B003-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B003-R05",
+      "obligation": "Keep actual exam duration configuration-driven",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B003-R05"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B006-R01",
+      "obligation": "Model 500000 commitments per30seconds as 16666.7 requests/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B006-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B006-R02",
+      "obligation": "Keep explicit commitments in the critical durable lane",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B006-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B007-R01",
+      "obligation": "Model20percent dirty drafts per10seconds as10000 requests/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B007-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B007-R02",
+      "obligation": "Classify drafts as recoverable writes, not grading commitments",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B007-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B008-R01",
+      "obligation": "Model independent leases for500000 sessions per60seconds as8333.3 requests/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B008-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B008-R02",
+      "obligation": "Reserve the critical control lane for lease work",
+      "packet": 2,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B008-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B009-R01",
+      "obligation": "Model35000 live requests/second before coalescing",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B009-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B010-R01",
+      "obligation": "Model500000 telemetry batches per30seconds as16666.7 batches/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B010-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B010-R02",
+      "obligation": "Isolate telemetry in a separate bounded lane",
+      "packet": 8,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B010-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B011-R01",
+      "obligation": "Model51666.7 normal combined requests/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B011-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B011-R02",
+      "obligation": "Account for CDN asset hits separately from baseline API traffic",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B011-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B012-R01",
+      "obligation": "Model all-dirty drafts every5seconds plus commits and leases as the125000-live-request pathological scenario",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B012-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B015-R01",
+      "obligation": "Qualify two-times normal live throughput of70000 requests/second",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B015-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B015-R02",
+      "obligation": "Qualify two-times telemetry throughput of33333.3 batches/second",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B015-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B015-R03",
+      "obligation": "Do not infer pathological workload success from two-times normal headroom",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B015-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B015-R04",
+      "obligation": "Test the pathological workload separately",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B015-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B015-R05",
+      "obligation": "Coalesce recoverable work while preserving eligible commitments",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B015-R05"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B015-R06",
+      "obligation": "Keep API requests, transactions, response rows, events and storage IOPS as distinct units",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B015-R06"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B016-R01",
+      "obligation": "Model500000 starts over120seconds as4166.7 starts/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B016-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B016-R02",
+      "obligation": "Model500000 submissions over30seconds as16666.7 submissions/second",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B016-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B016-R03",
+      "obligation": "Model2MB packages across500000students as1TB edge delivery and66.667Gbit/s over120seconds before overhead",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B016-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B016-R04",
+      "obligation": "State decimal byte and bandwidth units in capacity evidence",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B016-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B016-R05",
+      "obligation": "State cache assumptions in capacity evidence",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B016-R05"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B016-R06",
+      "obligation": "Disclose whether package assets are prefetched in the measured run",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B016-R06"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B018-R01",
+      "obligation": "Measure per-cell write amplification and index overhead rather than equating API RPS with DB TPS",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B018-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P003-B019-R01",
+      "obligation": "Treat20cells of25000activeattempts as a proposed partition, not measured capacity",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P003-B019-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B003-R01",
+      "obligation": "Qualify500000 concurrently active sessions for a full three-hour exam workload",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B003-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B003-R02",
+      "obligation": "Use distinct authenticated attempts exercising reading, changes, commits, leases and submit, not idle or registered users",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B003-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B003-R03",
+      "obligation": "Require measured evidence and operator signoff for proposed acceptance targets",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B003-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R01",
+      "obligation": "Use20proposed cells with at most25000admitted active attempts per qualified cell",
+      "packet": 2,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R02",
+      "obligation": "Freeze resource specification, database variant, pools, versions, route distribution and exam mix in the run manifest",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R03",
+      "obligation": "Qualify twice each cell baseline mix as proposed headroom",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R04",
+      "obligation": "Test the declared bursts and failure scenarios separately",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R05",
+      "obligation": "Never describe spare capacity, autoscaling limits or small-test success as guaranteed500000capacity",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R05"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R06",
+      "obligation": "Name the exact database deployment variant in evidence",
+      "packet": 2,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R06"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B005-R07",
+      "obligation": "Do not assign an unverified shared replication promise to distinct database deployment variants",
+      "packet": 2,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B005-R07"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B006-R01",
+      "obligation": "Protect admitted sessions while reducing new admissions",
+      "packet": 2,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B006-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B006-R02",
+      "obligation": "Identify which covered failures preserve acknowledged writes in capacity approval",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B006-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B006-R03",
+      "obligation": "Disclose regional disasters that can lose asynchronously replicated data",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B006-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B006-R04",
+      "obligation": "Display Saved only for a durable committed response, never draft/cache/queue acceptance alone",
+      "packet": 7,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B006-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B008-R01",
+      "obligation": "Measure valid commit in-region ingress-to-durable-ack p95 at most300ms",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B008-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B008-R02",
+      "obligation": "Measure valid commit ingress-to-durable-ack p99 at most1000ms including queueing and persistence",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B008-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B008-R03",
+      "obligation": "Separately measure client round-trip and rendered save feedback on representative Indian networks",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B008-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B008-R04",
+      "obligation": "Do not relabel server processing time as total student latency",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B008-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B008-R05",
+      "obligation": "Obtain operator approval of a separate client-experience budget before launch",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B008-R05"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R01",
+      "obligation": "Require durable submission receipt p99 at most2seconds under the declared submission burst",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R02",
+      "obligation": "Require receipt-to-correct-core-grade readiness p95 at most60seconds",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R03",
+      "obligation": "Require receipt-to-correct-core-grade readiness p99 at most120seconds; a visible pending grade is allowed meanwhile",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R04",
+      "obligation": "Require server errors at most0.1percent across the full run",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R05",
+      "obligation": "Require server errors at most0.1percent inside every predeclared critical window",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R05"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R06",
+      "obligation": "Allow zero wrong grades within the covered failure envelope",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R06"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R07",
+      "obligation": "Allow zero duplicate score effects within the covered failure envelope",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R07"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B009-R08",
+      "obligation": "Allow zero lost acknowledged commits within the covered failure envelope",
+      "packet": 6,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B009-R08"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B011-R01",
+      "obligation": "Distinguish correctness, API performance, browser behavior, connection capacity and disaster recovery evidence",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B011-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B011-R02",
+      "obligation": "Publish achieved load and shortfalls",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B011-R02"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B011-R03",
+      "obligation": "Never pass an interrupted, under-generated or reduced-activity run",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B011-R03"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B011-R04",
+      "obligation": "Use identical endpoint and timing definitions in generators, dashboards and release decisions",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B011-R04"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B013-R01",
+      "obligation": "Version the workload, SLO definitions and failure envelope",
+      "packet": 1,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B013-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B014-R01",
+      "obligation": "Require both qualified-cell and global-run approval decisions",
+      "packet": 10,
+      "owner_role": "performance_operator",
+      "boundaries": [
+        "workload-and-slo-contract"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B014-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    },
+    {
+      "id": "SRC05-P055-B015-R01",
+      "obligation": "Preserve admitted-session write capacity during admission throttling",
+      "packet": 2,
+      "owner_role": "application_lead",
+      "boundaries": [
+        "admission-or-exam-authority"
+      ],
+      "acceptance_cases": [
+        "planned:independent.source-clause.SRC05-P055-B015-R01"
+      ],
+      "evidence": [],
+      "semantic_review": "AGENT_REVIEWED_NOT_OPERATOR_APPROVED"
+    }
+  ],
+  "blocks": [
+    {
+      "block_id": "PDF05-P003-B000",
+      "original_text_sha256": "42db479871e06fd7e03e4686bc143cab8b0d40aeeadb3a91578a60900ad512a4",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 51,
+          "quote_sha256": "42db479871e06fd7e03e4686bc143cab8b0d40aeeadb3a91578a60900ad512a4",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B001",
+      "original_text_sha256": "4ff5c3c3f2bec70a0d896d2e8f41a5d6be333bb9a8fdc03f7dd26ed58dcf80a0",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 111,
+          "quote_sha256": "4ff5c3c3f2bec70a0d896d2e8f41a5d6be333bb9a8fdc03f7dd26ed58dcf80a0",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B002",
+      "original_text_sha256": "fcdb4399cc7ae11d5c08b774b499ba8c1a7f5f73d6c51a52427ae72135fe2ac8",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 54,
+          "quote_sha256": "fcdb4399cc7ae11d5c08b774b499ba8c1a7f5f73d6c51a52427ae72135fe2ac8",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B003",
+      "original_text_sha256": "4132d1c640e0079ac5fe8c4b88a9959a5f76e8cb9235df88a90f5ee19d4b5ad8",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 81,
+          "quote_sha256": "6c88514a372d829d8c4f79afc01a6015192d9cb5fa3d2cb88b6e8c6bd84e3258",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B003-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 81,
+          "end_codepoint": 114,
+          "quote_sha256": "44e10562f8b1660740f6fc0edd0f33844ce57c01b6a66d846784f8027e62f80b",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B003-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 114,
+          "end_codepoint": 206,
+          "quote_sha256": "4003b280abc2ba6bf312913f57ccecd3889877247a4ef39504d021f8ceeb055d",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B003-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 206,
+          "end_codepoint": 263,
+          "quote_sha256": "e97bf40a25d04b2d0451332f9fdf811964bef4cd4507b38f36fcf51a3dba7f2d",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B003-R04",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 263,
+          "end_codepoint": 314,
+          "quote_sha256": "01f3514bc51ec7d13435c99d62b34fbd8d1836c16922fb3193ad8722dfd10a46",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B003-R05",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B004",
+      "original_text_sha256": "904964bffd08b009aa9ea354ec45e3f172b4d4763d77f5191d07f29d6a6453e2",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 26,
+          "quote_sha256": "904964bffd08b009aa9ea354ec45e3f172b4d4763d77f5191d07f29d6a6453e2",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B005",
+      "original_text_sha256": "6597ad235efa0f0f550de26a373531c370b0e0233eb744bdd569683f39c1e59b",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 52,
+          "quote_sha256": "6597ad235efa0f0f550de26a373531c370b0e0233eb744bdd569683f39c1e59b",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B006",
+      "original_text_sha256": "b5572830f6f0a8dda612041f63090b83d9b700bf13878387778b69ebd1f331ef",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 62,
+          "quote_sha256": "5016b74f8e9bcde7e9858f9fafce0c890e4df071d90b75688ce1dd8d4a9f7902",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B006-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 62,
+          "end_codepoint": 80,
+          "quote_sha256": "f6ada3235f0ec73fbe49a153c39e2099f86a9d22081ef2f45aa4539ccc487384",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B006-R02",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B007",
+      "original_text_sha256": "bed04389ccdb0c85e8a6350a3f56cccc45d3b6e7e4ef1e289bbebfff33275846",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 48,
+          "quote_sha256": "8b8cbcdf505adf655adda2c7adf643b7def8ba608df30cb6b3ba42545126f2b4",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B007-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 48,
+          "end_codepoint": 73,
+          "quote_sha256": "cb36ebaa2cd2a5d639abbaa2ac8c21a0405f9d51d27e3a3ea9fb07d63d54b0d9",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B007-R02",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B008",
+      "original_text_sha256": "9e2f8be5214b52534940dfa3d257e0834d5328627db8f023b37008b6948d90c9",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 59,
+          "quote_sha256": "b7c85eb744da2ccd73880dd99be747ee97dbcf778e375bf0679dafffdb914760",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B008-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 59,
+          "end_codepoint": 76,
+          "quote_sha256": "32c5918f3be66c5aeae8486b92d6e0ee904cd20c4215ab336259d1e7d73d923b",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B008-R02",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B009",
+      "original_text_sha256": "56c1e98b0ed4e6eb32fff6a660a8985da26727bd6209558976af2a7acfe53def",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 59,
+          "quote_sha256": "56c1e98b0ed4e6eb32fff6a660a8985da26727bd6209558976af2a7acfe53def",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B009-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B010",
+      "original_text_sha256": "7a66ef663677d1121d6c3477c3bf0d8afb6ca4a6ca96ab2873cc3f1fe17075aa",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 59,
+          "quote_sha256": "1e4ab8383e5825ff14e7176adec27b8fe7b56614d87285be468fda4772cd44c8",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B010-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 59,
+          "end_codepoint": 81,
+          "quote_sha256": "767adc414e2b6c0c1de40ac6fa981007e2032b358dbb69e2bc544da2d286774e",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B010-R02",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B011",
+      "original_text_sha256": "273aed7db1ba2d9964a45e98f944d6011c16f22d47aa9b799178f5f3678eccaf",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 45,
+          "quote_sha256": "d301197e34ac4d6243a5afb918063ebde19ea2c672a04c3b46c4905ad2f38e5a",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B011-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 45,
+          "end_codepoint": 69,
+          "quote_sha256": "40ddb5da9e731fe2989307b576036b68b68adb279767448971d9fce49ff71a84",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B011-R02",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B012",
+      "original_text_sha256": "6bcf12e110c59086a7241677ef685bf3ce435dc7e172382fe4eb7329b5911fbf",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 52,
+          "quote_sha256": "6bcf12e110c59086a7241677ef685bf3ce435dc7e172382fe4eb7329b5911fbf",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B012-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B013",
+      "original_text_sha256": "4d45537bb1d78f0a3475eb047d0fdad132f589affcd9f98ed7e7896b111d58fc",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 46,
+          "quote_sha256": "4d45537bb1d78f0a3475eb047d0fdad132f589affcd9f98ed7e7896b111d58fc",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B012-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B014",
+      "original_text_sha256": "8cdb499d5a0ae899a2c5c9ff95cb2cdd47173ff30732f3c485c27c7ec0ba342e",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 29,
+          "quote_sha256": "8cdb499d5a0ae899a2c5c9ff95cb2cdd47173ff30732f3c485c27c7ec0ba342e",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B015",
+      "original_text_sha256": "36bc7ad62aa3de8b5accaf86ba689f2a6689ce4f353e8dae31382abd4baaacb1",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 78,
+          "quote_sha256": "4c112804bb0cf7460e6deb7be5552354863b0f5839cffdbb041b02c12a0ae304",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B015-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 78,
+          "end_codepoint": 112,
+          "quote_sha256": "75a915de040556896a8b78e0e6fcac5a4681835e199e042feb47aceb919e3539",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B015-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 112,
+          "end_codepoint": 199,
+          "quote_sha256": "fcfcd6c6711281fecec8bb5e6a6fe0b7793f28b6a3983c3e80d526b8a4c2301e",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B015-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 199,
+          "end_codepoint": 226,
+          "quote_sha256": "954771c39905a33267a29b036a277cdec17db5f4a580e6df15007177d583f9ce",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B015-R04",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 226,
+          "end_codepoint": 287,
+          "quote_sha256": "7b0d4e8d6e4e78a8fdf823a891558d6707eca22430d42a9e4750963be5aa5ccf",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B015-R05",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 287,
+          "end_codepoint": 387,
+          "quote_sha256": "15cf12f275dd1a0a0d8303759af732b11189ce5acbe50e818549ab04a2205518",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B015-R06",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B016",
+      "original_text_sha256": "4e49e9f72f18000ea7a23b1c9485f6aacd420b5cb563b4d6d136663a246cbc81",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 58,
+          "quote_sha256": "8ea5a4508379921ea45c5e3b86b32595ee7a297de98e1e80f249232ae8dff559",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B016-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 58,
+          "end_codepoint": 125,
+          "quote_sha256": "0f99eaac31152757939c0479637b52ff4866046183d1347e408a7f3f9da959b2",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B016-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 125,
+          "end_codepoint": 284,
+          "quote_sha256": "74c6a95ef1af32a0a16b9254475e74a2edf8ac80825d00d58d80cf804fb8d7c1",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B016-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 284,
+          "end_codepoint": 305,
+          "quote_sha256": "2933044c49be47394b24b3f0ccdb9e8cf7c3b1c6b870385208f57c8af3ddc395",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B016-R04",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 305,
+          "end_codepoint": 323,
+          "quote_sha256": "f08c1723748ebe1447c0738eaf960e4eeefdc3ac6a5082f632e94f732768398d",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B016-R05",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 323,
+          "end_codepoint": 366,
+          "quote_sha256": "feec9b8a68c88ea873d1c9b745b8de0256b8fdb879b11f29330ea2b45583eb86",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B016-R06",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B017",
+      "original_text_sha256": "289a7559a95be5c06f642de8d85da9bb3eccb40977568efbca70a6fcaaad9ea3",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 25,
+          "quote_sha256": "289a7559a95be5c06f642de8d85da9bb3eccb40977568efbca70a6fcaaad9ea3",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B018",
+      "original_text_sha256": "56b162d31b6435d6e6261c3d3a6430b279668ffdd2c2f30facb4912cab1f2978",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 107,
+          "quote_sha256": "56b162d31b6435d6e6261c3d3a6430b279668ffdd2c2f30facb4912cab1f2978",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B018-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B019",
+      "original_text_sha256": "a78920beb037176504221fd2a610ba75f098ade520f68ee6c339beac73fb3d59",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 96,
+          "quote_sha256": "a78920beb037176504221fd2a610ba75f098ade520f68ee6c339beac73fb3d59",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P003-B019-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P003-B020",
+      "original_text_sha256": "c4bb4831344f01cb799a69b936b9c215c357b450a562162d8faeea2fa498419f",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 75,
+          "quote_sha256": "c4bb4831344f01cb799a69b936b9c215c357b450a562162d8faeea2fa498419f",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B000",
+      "original_text_sha256": "42db479871e06fd7e03e4686bc143cab8b0d40aeeadb3a91578a60900ad512a4",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 51,
+          "quote_sha256": "42db479871e06fd7e03e4686bc143cab8b0d40aeeadb3a91578a60900ad512a4",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B001",
+      "original_text_sha256": "09b8718020d452c59c2480f90471d5a8a92cfd36578186b8a76389a8c1da2aec",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 118,
+          "quote_sha256": "09b8718020d452c59c2480f90471d5a8a92cfd36578186b8a76389a8c1da2aec",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B002",
+      "original_text_sha256": "0261ab1827399d0b3dbbb134be84b4186c252e422b897a297bafb5743e473807",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 55,
+          "quote_sha256": "0261ab1827399d0b3dbbb134be84b4186c252e422b897a297bafb5743e473807",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B003",
+      "original_text_sha256": "55094134cb14429b218bee192173c0405a40bfa3b1e0bc47a57fe75c9dd3dbe7",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 100,
+          "quote_sha256": "7740469ba3b387669d4e2e59baa95924cb536ac86a2b0bbb6002883ffbec78cf",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B003-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 100,
+          "end_codepoint": 298,
+          "quote_sha256": "2d0ec644e212e4bc4fd37486e8091c4a1dfee76a3f4ab8d6fd30184b7666dc3c",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B003-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 298,
+          "end_codepoint": 407,
+          "quote_sha256": "b216cb4f244954167e447990cfc58a9b3bdf92c03b1cceb7173b3b6c6909b619",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B003-R03",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B004",
+      "original_text_sha256": "b04b3402288813cce41cacd7e11e02d7ba9a846e3e6782258d20dd8aedb6d2fc",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 32,
+          "quote_sha256": "b04b3402288813cce41cacd7e11e02d7ba9a846e3e6782258d20dd8aedb6d2fc",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B005",
+      "original_text_sha256": "7030a8d1f83bcd7ddc9f0838bdc05abb4169b9e540b1a378ec676ea555d118d8",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 97,
+          "quote_sha256": "1dd448419674994fa4b0dcab299fa777b8d60960c7a1a1fa6325e109d3e7a9f7",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 97,
+          "end_codepoint": 245,
+          "quote_sha256": "4e6cdc2cd789405d517071d54eb8a07316b78642a1d32ea2b472a17c387ea193",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 245,
+          "end_codepoint": 329,
+          "quote_sha256": "fb715ad7bf76c49a4baff394b43e063bd963c730df850704bb71e84188071d0b",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 329,
+          "end_codepoint": 383,
+          "quote_sha256": "80cacddf0c13cb58bfd7141e6a2cc15c69afaf46c9f642cbd88ee7eafea1d823",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R04",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 383,
+          "end_codepoint": 501,
+          "quote_sha256": "28130e45d005854cf9a431e51a0f5e267a9da2d9a99017615f2462509616471c",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R05",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 501,
+          "end_codepoint": 545,
+          "quote_sha256": "c49a044ef6250bb6ea70d677a2f7745827de7c923d3acec7007b15ced71b6a1f",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R06",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 545,
+          "end_codepoint": 644,
+          "quote_sha256": "635db58c4cc71971de66dd8829bbe41bacfb0f6f9d642c6e77a7b8988655f206",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B005-R07",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B006",
+      "original_text_sha256": "a2cbd101fd6315b3fc55f71eadf8768e59370e16d394be1bd97f85871839801e",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 63,
+          "quote_sha256": "06d1b608011ed90e555a86411c2fff1d54ad5a99845219db63eaee5d851f7ded",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B006-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 63,
+          "end_codepoint": 141,
+          "quote_sha256": "2857648cc0627e1d4b7d2d6fa6b0c1bacdf55b15d1b86bde91b1e90ed2b96482",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B006-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 141,
+          "end_codepoint": 211,
+          "quote_sha256": "d78c9ed8723e24594399af580bd6e500861deb7d2ee0779cd140748544fd9431",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B006-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 211,
+          "end_codepoint": 368,
+          "quote_sha256": "b7e5666791a58455c0a18008616b8c6a844647fe783f2a7e3c1a9a759b39a924",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B006-R04",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B007",
+      "original_text_sha256": "a5e9ba882a2ccf1e0c50dba5711aecdd596a80e64f60ca3abc2a404e33ba71cd",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 29,
+          "quote_sha256": "a5e9ba882a2ccf1e0c50dba5711aecdd596a80e64f60ca3abc2a404e33ba71cd",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B008",
+      "original_text_sha256": "ec8d14637018e90de174f5a1afe965a67f0321f59b658cc08d793624f0984ab9",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 102,
+          "quote_sha256": "29d73f45addd83c5fc7132eeada5cb2cdd4a16c47ce9b64b8983384efd590a5f",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B008-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 102,
+          "end_codepoint": 168,
+          "quote_sha256": "ed1634210ee864fdf128baf23462c88888ac90a653491534e597292782feeacb",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B008-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 168,
+          "end_codepoint": 281,
+          "quote_sha256": "e25b7278be067c5f6fd313ab754a35fd4e5a1c1f3cfbfe77f0aa32deb2d1d181",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B008-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 281,
+          "end_codepoint": 364,
+          "quote_sha256": "5b98b08481a1414ec19306cf9994465031ee17fa1a05baa5cab13cbcef37cbf8",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B008-R04",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 364,
+          "end_codepoint": 440,
+          "quote_sha256": "32c53f916819b9a876b55de03416501fdc9a6bbe562f301d0ea057045ca0409b",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B008-R05",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B009",
+      "original_text_sha256": "5211e1793a09e9da9f3a9ed35683c0f57e0d4bc3e8eae5f08c915b6252560493",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 89,
+          "quote_sha256": "66331234475c27bc367339dba354a69f63bbc1e8ed2930d001ec30f43fb72905",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 89,
+          "end_codepoint": 158,
+          "quote_sha256": "7784fd60f585c23ded2ad635b3c4ac7829d537b672dc967898fc100a8f210e40",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 158,
+          "end_codepoint": 240,
+          "quote_sha256": "490b170537d40d0b67cd8671481f67480099d660af11fefaad6e7c2b25bae5aa",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 240,
+          "end_codepoint": 292,
+          "quote_sha256": "573a3d6771d8b3743e801dc0983476de9bd8d778f1aca4a56aec901960129da1",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R04",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 292,
+          "end_codepoint": 348,
+          "quote_sha256": "eabbba3926ef74c043374851028279b18a38665aa8eb4f2612f9f76c4afd49a2",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R05",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 348,
+          "end_codepoint": 409,
+          "quote_sha256": "2e0d08bdfdba2e76d8e168999fc73c8c53f257fa02d582e9bf8fb9c49104b1f8",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R06",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 409,
+          "end_codepoint": 433,
+          "quote_sha256": "dc19c25ba255dd3febc5e324b6652c998eebbaa9ffaecfdcd98b6b2fc31b0de7",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R07",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 433,
+          "end_codepoint": 499,
+          "quote_sha256": "0c2cd554a05eefabdeeebb4c81e78ba8ad8ec512cabfa96a7fdcaaf8d774455c",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B009-R08",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B010",
+      "original_text_sha256": "63c3209837f7d8e2d8a58c10c8cd164317e1d642fa0c77e48ad142db571d2f89",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 30,
+          "quote_sha256": "63c3209837f7d8e2d8a58c10c8cd164317e1d642fa0c77e48ad142db571d2f89",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B011",
+      "original_text_sha256": "6534c65eb3a77d38f22a79b5069588fc7872003c6487ad55ba744e1b15fbe7b0",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 110,
+          "quote_sha256": "81e5284a569151d390dc4353c1869c553e51fe74ffa7580397c2731cef227bd8",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B011-R01",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 110,
+          "end_codepoint": 155,
+          "quote_sha256": "3bd64251ced6397f9e96fdba993bc275fb03ebfd17863b4a22148b4afeda1578",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B011-R02",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 155,
+          "end_codepoint": 230,
+          "quote_sha256": "2411e612a750d7e5ea3512d8ef247f009fd32ebfdf5a26f5a686fde34e8a81fd",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B011-R03",
+          "rationale": ""
+        },
+        {
+          "start_codepoint": 230,
+          "end_codepoint": 350,
+          "quote_sha256": "25265fa19603cd1108d1fd523a3df4fb5c6e456db25105ab74d4c869c9f3f417",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B011-R04",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B012",
+      "original_text_sha256": "289a7559a95be5c06f642de8d85da9bb3eccb40977568efbca70a6fcaaad9ea3",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 25,
+          "quote_sha256": "289a7559a95be5c06f642de8d85da9bb3eccb40977568efbca70a6fcaaad9ea3",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B013",
+      "original_text_sha256": "657395cb77666ccd5b54c86956ca8d9147dcfa1e69d6020b25c6876a442d05c5",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 60,
+          "quote_sha256": "657395cb77666ccd5b54c86956ca8d9147dcfa1e69d6020b25c6876a442d05c5",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B013-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B014",
+      "original_text_sha256": "63639fd47c26ea56f0eda707b18a790ac0b37de277705e7633fadb6d1a4ebbd7",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 50,
+          "quote_sha256": "63639fd47c26ea56f0eda707b18a790ac0b37de277705e7633fadb6d1a4ebbd7",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B014-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B015",
+      "original_text_sha256": "44246840f314efd3aeb7b65ab5336b624b50066a4610de4734a70f912f3b4b6f",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 70,
+          "quote_sha256": "44246840f314efd3aeb7b65ab5336b624b50066a4610de4734a70f912f3b4b6f",
+          "kind": "requirement",
+          "requirement_id": "SRC05-P055-B015-R01",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "block_id": "PDF05-P055-B016",
+      "original_text_sha256": "78ba90037a7e7273a6b7c1a2933dd3528e29508f4f2f7f3ddb6a393ac37faa12",
+      "reviewed_at": "2026-10-12T17:47:29.447192Z",
+      "reviewer_role": "engineering_agent",
+      "spans": [
+        {
+          "start_codepoint": 0,
+          "end_codepoint": 75,
+          "quote_sha256": "78ba90037a7e7273a6b7c1a2933dd3528e29508f4f2f7f3ddb6a393ac37faa12",
+          "kind": "layout",
+          "requirement_id": null,
+          "rationale": "Reviewed repeated branding, section heading, table column labels or source footer; numerical obligations are bound in adjacent normative blocks."
+        }
+      ]
+    }
+  ]
+}

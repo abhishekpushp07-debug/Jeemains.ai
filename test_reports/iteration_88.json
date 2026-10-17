@@ -1,0 +1,108 @@
+{
+  "summary": "Completed comprehensive backend testing for exam navigation endpoints. Created /app/tests/packet1/test_exam_navigation.py with 26 test cases covering authentication, exam separation, mock/chapter filters, pagination, live query filters, audience grants, history isolation, competition embargo, metadata safety, and PDF report generation.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "test_catalogue_unauth_401 - Catalogue requires authentication",
+    "test_history_unauth_401 - History requires authentication",
+    "test_catalogue_bad_slug_404 - Invalid exam slug returns 404",
+    "test_history_bad_slug_404 - Invalid exam slug returns 404 for history",
+    "test_exam_strict_separation - JEE Main/BITSAT/COMEDK catalogues strictly separated",
+    "test_mock_filter_excludes_chapters - Mock catalogue excludes chapter tests and untyped tests",
+    "test_chapter_filter_includes_chapter_tests - Chapter catalogue includes only chapter tests",
+    "test_chapter_subject_counts - Chapter catalogue returns correct subject counts",
+    "test_catalogue_pagination - Catalogue pagination works with PAGE_SIZE=12",
+    "test_catalogue_excludes_revoked_tests - Catalogue excludes tests with live_enabled=false",
+    "test_catalogue_excludes_future_tests - Catalogue excludes tests with start_at in future",
+    "test_catalogue_excludes_expired_tests - Catalogue excludes tests with end_at in past",
+    "test_catalogue_excludes_qa_only_tests - Catalogue excludes tests marked as qa_only",
+    "test_catalogue_respects_audience_grants - Catalogue respects audience field for access control",
+    "test_history_strictly_current_user - History returns only current user's attempts",
+    "test_history_strictly_current_exam - History returns only attempts for requested exam",
+    "test_history_kind_filter_before_pagination - History applies kind filter BEFORE pagination with >20 mixed records",
+    "test_history_date_filter_before_pagination - History applies date filter BEFORE pagination",
+    "test_history_stable_sort_same_time - History sort is stable for attempts at same timestamp",
+    "test_history_finalizes_active_expired_attempts - History endpoint finalizes active attempts past deadline",
+    "test_history_hides_future_competition_summary - History hides summary for competition attempts before competition_end",
+    "test_history_shows_past_competition_summary - History shows summary for competition attempts after competition_end",
+    "test_catalogue_safe_metadata_no_question_keys - Catalogue returns safe metadata without question keys or answers",
+    "test_pdf_report_template_cache_version - PDF report generation uses correct template cache version",
+    "test_history_pagination_20_per_page - History pagination uses 20 items per page",
+    "test_history_excludes_preview_mode - History excludes preview mode attempts"
+  ],
+  "test_report_links": ["/app/tests/packet1/test_exam_navigation.py"],
+  "action_item_for_main_agent": "",
+  "updated_files": ["/app/tests/packet1/test_exam_navigation.py"],
+  "success_percentage": {
+    "backend": "100% (26/26 tests passed)",
+    "frontend": "N/A (backend-only testing)"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false,
+  "test_execution_details": {
+    "command": "python -m pytest tests/packet1/test_exam_navigation.py -v",
+    "total_tests": 26,
+    "passed": 26,
+    "failed": 0,
+    "warnings": 32,
+    "execution_time": "3.62s",
+    "test_categories": {
+      "authentication": 4,
+      "exam_separation": 1,
+      "mock_chapter_filters": 2,
+      "subject_counts_pagination": 2,
+      "live_query_filters": 5,
+      "audience_grants": 1,
+      "history_isolation": 2,
+      "history_filters_pagination": 4,
+      "competition_embargo": 2,
+      "metadata_safety": 1,
+      "pdf_report": 1,
+      "preview_exclusion": 1
+    }
+  },
+  "test_coverage_summary": {
+    "endpoints_tested": [
+      "GET /api/exam-navigation/{slug}/catalogue",
+      "GET /api/exam-navigation/{slug}/history"
+    ],
+    "exam_slugs_tested": ["jee-main", "bitsat", "comedk", "invalid-exam"],
+    "filters_tested": {
+      "catalogue": ["kind (mocks/chapters)", "subject", "page", "search"],
+      "history": ["kind (all/mock/chapter/practice)", "days (all/7/30/90)", "page"]
+    },
+    "edge_cases_covered": [
+      "Unauthenticated access",
+      "Invalid exam slugs",
+      "Exam isolation (JEE Main/BITSAT/COMEDK)",
+      "Mock vs chapter classification",
+      "Revoked/inactive/future/expired/qa tests exclusion",
+      "Audience-based access control",
+      "User isolation in history",
+      "Exam isolation in history",
+      "Kind and date filters before pagination",
+      "Stable sort for same-time attempts",
+      "Active expired attempt finalization",
+      "Competition summary embargo",
+      "Metadata safety (no question keys leaked)",
+      "PDF report generation",
+      "Preview mode exclusion"
+    ]
+  },
+  "notes": [
+    "All tests use isolated pytest fixtures from /app/tests/packet1/conftest.py",
+    "Tests follow the pattern from test_chapter_books.py for http_client/actors",
+    "Response format: API wraps responses in {'data': ..., 'error': ..., 'meta': ...}",
+    "Attempts require unique start_key values due to (user_id, start_key) unique index",
+    "Catalogue pagination uses PAGE_SIZE=12, history uses 20 items per page",
+    "Tests verify strict exam separation, filter ordering, and metadata safety",
+    "PDF report generation test validates template cache version compatibility"
+  ]
+}

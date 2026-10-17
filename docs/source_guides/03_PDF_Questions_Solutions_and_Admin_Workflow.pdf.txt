@@ -1,0 +1,1022 @@
+=== PAGE 1 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 01 / 23
+Build the complete content operations
+system
+COPY-PASTE BUILD PROMPT
+Build Volume 3 as the trusted content layer of the exam platform. A question PDF and a
+separate solutions PDF must become individually navigable, reviewed questions with faithful
+mathematics, verified answers and traceable source locations.
+Scope and first working slice
+Implement an administrator workspace with Uploads, Extraction Review, Item Bank, Paper Builder,
+Solutions, Tags, Approvals and Corrections. Start with one privately uploaded mixed PDF, one
+solutions PDF and one custom paper for Tejas. Complete the entire path from upload to a scored
+practice attempt before adding bulk automation. Use the visual system in Volume 1 and exam
+configuration contracts in Volume 2.
+Build two complementary representations: a faithful source crop for visual inspection and a structured
+question representation for accessible display, search and analysis. Never claim that an OCR
+confidence score proves mathematical correctness. Keep uncertain imports in review. Preserve the
+original source separately from the safe images displayed to students.
+Required implementation deliverables
+Create schemas, migrations, authenticated APIs, private object storage, an asynchronous ingestion
+worker and an administrator review interface. Seed intentionally damaged fixtures as well as a
+clean sample.
+Create a versioned extraction report showing detected questions, unmatched solutions, suspected
+numbering errors, missing assets, unresolved answer keys and publication blockers.
+Provide a reproducible import script, a paper validation command and role-based demonstrations.
+Separate suggested AI output from human-approved content in both database fields and interface
+labels.
+Return working routes, migration instructions, test evidence and a list of incomplete integrations. A
+successful animation or mock progress bar is not evidence of a processed PDF.
+Non-negotiable behavior
+Treat each published paper as an immutable manifest of item versions, solution versions, scoring
+configuration and release policy. Later edits create new versions. Existing attempts retain their
+original content and grading lineage. Content publication and solution release are separate
+server-side permissions.
+Use requirements in this volume as executable acceptance criteria. Ask for the actual question PDFs
+when needed for ingestion, but build and validate the pipeline with synthetic fixtures immediately. Do
+not fabricate Tejas paper content, official question counts or answer keys to fill gaps.
+ACCEPTANCE / PRECAUTIONS
+An authorized reviewer can upload, correct, approve and publish one real item without editing
+database records manually.
+A student attempt receives question assets but cannot retrieve hidden keys or unreleased solutions.
+A deliberate wrong exponent remains blocked until a reviewer resolves the discrepancy.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.01  /  23
+
+
+=== PAGE 2 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 02 / 23
+Define the upload manifest and intake
+contract
+INGEST-01 | SOURCE INTAKE
+Implement a manifest-first intake flow. Capture why a file exists, how it may be used, which
+paper it belongs to and what the uploader expects before processing begins.
+Intake fields and constraints
+Collect tenant_id, content_owner_id, original_filename, source_role, language_hint, paper_title,
+exam_config_version_id, expected_question_count, question_numbering_hint, rights_status and
+visibility. source_role must be questions, solutions, answer_key or supporting_material. Allow
+unknown counts during drafting; require a validated paper count before publishing an exam
+simulation.
+Provide a paired upload screen with separate Questions PDF and Solutions PDF slots. Permit
+questions-only drafts and later solution attachment. Display file sizes, checksum state and upload
+completion distinctly from extraction progress. Preserve user-entered metadata when a transfer
+retries. A file completing transfer does not imply that it passed security inspection.
+Concrete request and response
+POST /admin/uploads with Idempotency-Key and JSON
+{"source_role":"questions","paper_title":"Tejas Practice 01","exam_config_version_id":"cfg_custom
+_1","expected_question_count":75,"language_hint":"en","rights_status":"owner_asserted"}. Return 
+{"upload_id":"upl_01","state":"awaiting_bytes","expires_at":"2026-10-12T00:30:00Z","object_key":
+"private/tenant_a/upl_01"} plus a short-lived upload URL.
+After transfer, POST /admin/uploads/upl_01/complete with
+{"checksum_sha256":"...","byte_size":123456}. Verify actual stored bytes and ownership on the
+server before creating an ingestion job. Reject a declared checksum mismatch with
+checksum_mismatch and a restart option. Never accept an arbitrary object_key supplied by the
+browser.
+Intake errors and recovery
+Show distinct errors for unsupported extension, oversized file, incomplete transfer, encrypted
+PDF, invalid bytes and unauthorized tenant. Avoid one vague upload_failed message.
+Let an encrypted document stay in a restricted draft state; request an authorized unencrypted
+replacement. Do not store a password in analytics or job logs.
+Use generated storage identifiers. Keep the original filename as escaped display metadata,
+never as a filesystem path. A duplicate checksum can suggest reuse without exposing another
+tenant's file.
+ACCEPTANCE / PRECAUTIONS
+A retry returns the same logical upload when the idempotency key and request payload match.
+A changed payload with an already-used key returns an explicit conflict.
+The manifest survives a failed transfer and clearly identifies which file must be replaced.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.02  /  23
+
+
+=== PAGE 3 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 03 / 23
+Run durable, idempotent ingestion jobs
+INGEST-02 | ASYNCHRONOUS WORK
+Process PDFs outside request handlers. Make every stage restartable, observable and
+bounded so a large import cannot interrupt thousands of active exam attempts.
+State machine and durable checkpoints
+Use states queued, validating, quarantined, extracting, segmenting, matching_solutions,
+awaiting_review, failed and cancelled. Publish is a separate action after awaiting_review. Record
+stage_started_at, heartbeat_at, processed_pages, total_pages, attempt_count, error_code and
+worker_version. Checkpoint each page and every completed stage; do not restart a 300-page job
+from page one after a worker crash.
+Assign stable IDs to source pages and candidate items using job scope plus source anchors.
+Enforce database uniqueness for stage outputs. A worker may execute a task more than once; its
+result must not create duplicate questions or overwrite human edits. New parser settings create a
+new extraction run linked to the same source.
+Polling, retries and cancellation
+GET /admin/ingestion-jobs/job_01 returns
+{"state":"segmenting","pages_done":12,"pages_total":20,"warnings":3,"review_required":true}.
+Expose events with sequence numbers if using server-sent events. Reconnect from the last event;
+retain polling as a fallback. The progress percentage must derive from actual completed work, with
+stage weighting documented.
+Retry transient storage timeouts using bounded exponential backoff and jitter. Do not retry
+permanently malformed files indefinitely. Cancellation should stop future page work, revoke
+pending tasks and preserve already-created draft evidence. Display cancellation requested until a
+worker acknowledges it. Offer Resume as a new run rather than silently reviving a cancelled job.
+Queue isolation and operational controls
+Place heavy OCR in a separate queue and compute pool from attempt APIs. Set per-tenant
+concurrent job limits, total page quotas, worker memory ceilings and stage deadlines.
+Capture a sanitized diagnostic bundle with parser version, stage, page index and trace ID.
+Exclude original question text, user tokens and private object URLs from general logs.
+Create a dead-letter view with Retry stage, Replace source and Download diagnostic options. A
+privileged operator can inspect failures without granting publication rights.
+ACCEPTANCE / PRECAUTIONS
+Killing a worker halfway through extraction resumes from a recorded checkpoint without
+duplicated candidates.
+Cancelling an OCR job does not affect saving student answers.
+A permanently broken PDF becomes a visible failed job with a bounded attempt count.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.03  /  23
+
+
+=== PAGE 4 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 04 / 23
+Classify native, scanned and mixed
+pages
+INGEST-03 | EXTRACTION TRIAGE
+Choose extraction strategies per page and region. A PDF can contain selectable text, scanned
+pages, embedded images and unreliable hidden OCR in the same document.
+Page inventory before recognition
+Build a page inventory containing dimensions, rotation, text block count, approximate text
+coverage, image coverage and extraction warnings. Detect whether native text is usable rather
+than assuming any text layer is correct. Empty text, repeated replacement characters or wildly
+mispositioned glyphs should trigger review or OCR fallback. Treat decorative logos and diagrams
+differently from full-page scans.
+Use native extraction for reliable prose and preserve geometric positions. Use OCR only for pages
+or regions needing it. Official PyMuPDF documentation notes that extracted PDF text can arrive in
+an unexpected reading order and that OCR is a separate operation [S2, S3]. These facts justify
+triage; they do not certify any provider's accuracy.
+Preprocessing and comparison
+Render a safe page image, preserve the untouched original and record any deskew, rotation or
+contrast adjustment as derived transformations. Detect orientation before segmentation. Expose
+Original, Processed image, Native text and OCR text tabs to reviewers. Let reviewers compare
+alternatives where a faint minus sign or overwritten label changes meaning.
+Persist OCR engine, engine version, language pack, settings and region confidence. Mark high-risk
+tokens such as exponents, decimal points, charge signs, inequality direction, chemical subscripts
+and diagram labels for visual confirmation. Confidence values are provider-specific signals, not
+comparable correctness probabilities. Do not turn a confidence of 0.98 into an automatic
+publication decision.
+Fallback and cost controls
+When OCR cannot reliably read a question, retain a reviewed source crop and allow manual
+transcription. Mark semantic completeness separately from visual fidelity.
+Let reviewers rerun only selected pages or regions with a different strategy. Reprocessing must
+create candidates without destroying prior corrections.
+Estimate OCR workload from page count and region classification. Show an administrator the
+planned workload and support cancellation before expensive processing. Avoid fixed promises
+about seconds per page.
+ACCEPTANCE / PRECAUTIONS
+A mixed fixture applies native extraction to one page and OCR to a scanned page.
+A bogus hidden text layer produces a warning and a side-by-side review.
+The accepted source image remains available after a failed OCR rerun.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.04  /  23
+
+
+=== PAGE 5 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 05 / 23
+Segment columns, passages and
+multi-page questions
+INGEST-04 | GEOMETRIC SEGMENTATION
+Implement layout-aware grouping with editable regions. Question boundaries must follow the
+source structure instead of a naive split at every numbered line.
+Reading-order model
+Represent each page as regions with bounding boxes, type, confidence and explicit reading_order.
+Detect columns using geometry and whitespace, then let a reviewer correct the sequence. A
+two-column page commonly needs the complete left column before the right column. Preserve
+reading order as data rather than treating a parser's text sequence as authoritative.
+Allow one item to reference several regions and several pages. A stem can begin at the bottom of
+one page and continue on the next with its options and diagram. Define continuation_links and
+require a reviewer to confirm their direction. Display clipped boundaries visibly; never lose a line
+merely because it overlaps an automatically inferred margin.
+Shared stimuli and option structure
+Create stimulus entities for a common passage, case description, graph or data table. Link child
+items through stimulus_version_id. Show shared material with every relevant question in student
+view and preserve it during custom-paper selection. Selecting one child should include the
+stimulus once, while retaining independent answers and timing.
+Create option regions independently from the stem. Support lettered, numbered and unlabeled
+source options; assign stable internal option IDs only after ordering is verified. A label such as 1
+inside a formula must not become an option marker. If options are arranged horizontally or in a
+grid, keep their original geometry visible during review.
+Segmentation editor
+Provide draw, resize, split, merge and reorder controls with keyboard alternatives. Show
+neighboring questions and page thumbnails while the reviewer edits a boundary.
+Save region polygons or rectangles in a documented coordinate system; include transformation
+metadata when a page is rotated or deskewed.
+Flag overlaps, uncovered text between questions, orphan diagrams, duplicate region
+assignment and passages with no children. Some overlaps may be legitimate; allow a reasoned
+exception instead of silently hiding the warning.
+ACCEPTANCE / PRECAUTIONS
+A two-column fixture imports in the intended order without mixing stems and options.
+A question spanning two pages renders all lines and its diagram together.
+A shared graph appears once in paper export and stays linked to each dependent item.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.05  /  23
+
+
+=== PAGE 6 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 06 / 23
+Resolve numbering, headers and
+section identity
+INGEST-05 | IDENTITY RECONCILIATION
+Build an explicit reconciliation table. Source numbering is contextual metadata; it is not a
+globally unique question identifier or a reliable parsing boundary.
+Separate four identities
+Store item_id for the canonical bank entity, item_version_id for exact reviewed content,
+source_question_label for what the PDF prints, and paper_display_number for the student-facing
+position. Preserve labels such as 12(a), Q.07 and section-specific 1 without coercing all of them
+into the same integer. Use a stable source_local_key containing source file, section and
+occurrence.
+Detect page numbers, running headers, watermarks, document titles and repeated section names
+using their geometry and repetition. Keep excluded regions inspectable. Do not delete every
+repeated phrase: a repeated instruction may affect scoring or several questions. Exclude it from
+the question body only after classifying it as document-level or section-level instruction.
+Reconciliation dashboard
+Show expected count, detected count, confirmed count, duplicate printed labels, gaps, jumps and
+out-of-order candidates. Add a table with source page, section, printed label, proposed display
+number and reviewer status. Offer sort by source reading order, printed label or confirmed paper
+order; never silently renumber imported sources to hide gaps.
+When a solutions PDF restarts numbering for Physics and Chemistry, match within confirmed
+section identity. Require an explicit reviewer decision when two items share section and label. If a
+key references Q31 but the question source contains only Q30 and Q32, produce
+missing_question_for_key rather than creating a guessed item.
+Instruction capture and tests
+Extract source instructions into a separate reviewed record. Compare them with the selected
+configuration in Volume 2. A mismatch blocks simulation publication until the intended rule
+source is resolved.
+Allow intentional custom-paper numbering to differ from original labels. Display original labels in
+the review screen and provenance exports, without confusing students with two large
+competing numbers.
+Preserve Roman numerals and subsection boundaries. Treat a number in a chemical formula or
+list of statements as content unless layout and reviewer evidence identify a question boundary.
+ACCEPTANCE / PRECAUTIONS
+A footer numbered 12 does not create a twelfth question.
+Two section-specific Q1 items remain distinct and receive the correct solutions.
+An unexplained count mismatch prevents simulation publication with a readable reason.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.06  /  23
+
+
+=== PAGE 7 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 07 / 23
+Preserve visual fidelity with safe
+question assets
+INGEST-06 | CROP AND RENDER CONTRACT
+Use source crops as a fidelity safeguard, with sufficient resolution and controlled delivery. A
+crop must be readable, complete and associated with its exact source anchor.
+Asset generation and storage
+Generate reviewed question crops from safe page renders. Store original dimensions, crop
+coordinates, rendering scale, page rotation, image checksum and asset_version_id. Use a
+high-quality master plus responsive derivatives sized for real display widths. Avoid scaling every
+crop to a fixed tiny image that makes superscripts unreadable on a phone.
+For a multi-region item, compose crops in confirmed reading order with clear spacing and no
+duplicated line at a page join. Keep the full-page context accessible to reviewers. A cropped
+question containing an adjacent answer, handwritten solution or key annotation must be rejected
+or recropped before student delivery.
+Student delivery and accessibility
+Display crops at their natural aspect ratio with zoom and horizontal panning for wide diagrams.
+Keep answer controls outside the image so touch selection remains reliable. Offer a structured-text
+alternative where reviewed transcription exists. Crop-only items need reviewed descriptive text for
+important visual content; image-based content is not automatically accessible.
+Deliver assets through an authorization-aware gateway or time-limited URLs scoped to the
+permitted attempt. Build a question-only asset namespace separate from solutions and keys.
+Preload a small navigation window according to Volume 5 performance budgets. Show an
+asset_failed state and Retry image control while retaining the student's response and timer state.
+Fidelity review rules
+Compare each crop with its source at common desktop and mobile widths. Inspect clipped
+radicals, graph axes, dotted lines, thin minus signs and pale labels.
+When rasterizing vector graphs, choose reviewed resolution and contrast. Do not use image
+enhancement that invents labels or changes geometry.
+Cache by immutable asset version. A later corrected crop obtains a new key; purge obsolete
+delivery references when a paper is withdrawn, without mutating the original evidence.
+ACCEPTANCE / PRECAUTIONS
+A full radical, numerator and denominator remain legible at the supported mobile width.
+A failed asset fetch gives a recovery control without clearing the chosen answer.
+A student cannot guess a question asset URL and retrieve a solution crop.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.07  /  23
+
+
+=== PAGE 8 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 08 / 23
+Create structured mathematics,
+chemistry and diagrams
+INGEST-07 | SEMANTIC AUTHORING
+Build a structured authoring model that can preserve equations and diagrams while enabling
+accessible reading, search and reliable responsive layouts.
+Block model and supported notation
+Represent content as ordered blocks: paragraph, inline_math, display_math, figure, table, list and
+stimulus_reference. Store mathematical source separately from plain prose. Define a restricted
+rendering profile for reviewed LaTeX or MathML and record renderer_version. MathML is a web
+standard for mathematical notation [S4]; selecting it does not remove the need to test actual
+browsers and assistive technology.
+Support fractions, roots, matrices, piecewise expressions, vectors, limits, integrals and reaction
+notation required by the supplied papers. Validate syntax before saving and preview the exact
+student renderer. Disable dangerous extensions, embedded HTML and arbitrary macros. An
+equation that renders without an error can still contain a wrong exponent; retain source
+comparison.
+Chemistry and figure handling
+Keep chemical charges, isotopes, subscripts, reaction arrows and bond labels visually distinct.
+Accept reviewed SVG or raster diagrams; sanitize SVG and strip scripts, external references and
+event handlers before use. Preserve the original image as private evidence. Do not redraw a
+molecule using AI and assume it retains stereochemistry.
+For tables, store rows, columns, merged-cell metadata and meaningful headers. Provide captions
+and descriptions for graphs without revealing solutions. A diagram description should
+communicate labels and relationships needed to attempt the question, not announce the intended
+inference. Review alt text with the same academic care as the stem.
+Round-trip validation
+Provide a diff view between source crop, structured rendering and previous item version.
+Highlight changed mathematical tokens and replaced figure assets.
+Use plain text for search indexing, with mathematical tokens retained where possible. Do not
+render raw OCR output as HTML.
+Maintain render fallback: if the semantic renderer fails, display the already-approved fidelity
+asset and log the error. Publish only when the fallback and answer controls have been verified.
+ACCEPTANCE / PRECAUTIONS
+A fixture containing a matrix, chemical charge and labeled graph renders without missing symbols.
+Sanitized SVG cannot fetch an external URL or execute embedded script.
+A semantic rendering error falls back to a reviewed crop while preserving attempt state.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.08  /  23
+
+
+=== PAGE 9 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 09 / 23
+Establish the canonical item and
+provenance schema
+INGEST-08 | DATA CONTRACT
+Make provenance part of the database contract rather than a footnote. Every visible stem,
+option, figure and solution must be traceable to reviewed source evidence.
+Core entities and required fields
+Create SourceFile, ExtractionRun, SourceRegion, Item, ItemVersion, StimulusVersion,
+SolutionVersion, AnswerKeyVersion, Paper and PaperVersion entities. Item holds durable identity
+and ownership. ItemVersion holds content_hash, blocks, options, response_type, source_regions,
+editorial_status, approval_record and created_at. Use UUIDs or equivalent opaque identifiers;
+never derive authorization from sequential numbering.
+Example item version: {"item_id":"itm_42","item_version_id":"iv_3","response_type":"numeric","st
+em_blocks":[{"type":"paragraph","text":"Find the value."}],"source_regions":[{"source_file_id":"src
+_1","page_index":4,"box":[0.12,0.20,0.88,0.42],"coordinate_space":"normalized_top_left"}],"editori
+al_status":"review_required"}. Specify that page_index is zero-based; show human-facing page 5
+in the interface.
+Provenance and derived content
+For each source anchor retain checksum, page dimensions, rotation and transformation ID. For
+manual transcription, record who transcribed it, who verified it and the verification timestamp. For
+AI suggestions, retain provider, model identifier, prompt template version and acceptance decision
+without logging secrets. A provenance record should distinguish a source fact from an editorial
+improvement.
+Link explanations, corrected diagrams and tag assignments to their own versions. Do not attach an
+anonymous JSON answer field directly to a mutable question row. Keep academic evidence and
+presentation assets separable so changing a thumbnail does not unnecessarily change the grading
+key.
+Validation and confidentiality
+Validate fields by response type. An ordinary single-choice key has one approved correct option
+ID. Approved profile-specific anomaly policies may accept multiple valid alternatives, all options
+or a dropped-item branch while the UI stays single-select. Require a reviewer to verify each
+exception against its source and frozen configuration.
+Apply tenant ownership checks on every nested reference. A user must not attach another
+tenant's private source region or solution by supplying its ID.
+Create public question DTOs with an explicit allowlist. Source credentials, private notes, answer
+keys, approval comments and unreleased solution IDs must not enter attempt payloads.
+ACCEPTANCE / PRECAUTIONS
+A reviewer opens a stem block's source anchor and sees the correct page and region.
+A cross-tenant nested asset reference returns authorization failure.
+The public question response has no hidden grading fields, even before client filtering.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.09  /  23
+
+
+=== PAGE 10 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 10 / 23
+Match separate solutions without
+guessing
+INGEST-09 | SOLUTION RECONCILIATION
+Build solution matching as a reviewable mapping problem. Question numbering, section
+identity and source evidence must outweigh a model's confident narrative.
+Candidate matching and evidence
+Ingest the solutions PDF through the same security and layout pipeline, with
+source_role=solutions. Extract candidate explanation regions and key references. Generate
+proposed links using section identity, printed labels, stem phrases and known cross-references.
+Display the evidence for every proposal. Store match_method, supporting_anchors,
+reviewer_decision and ambiguity_reason; do not expose a fabricated probability as certainty.
+Allow one solution to cover a shared stimulus plus several items, several solution regions to
+explain one item, and alternative approved methods. Keep the answer key as its own record. A
+paragraph containing a worked calculation can suggest an answer, but must not automatically
+establish the grading key.
+Reconciliation interface
+Show Question, Proposed solution and Source context in three panes, with linked page navigation.
+Provide Accept link, Choose another, Split solution, Merge regions and Mark missing controls. Show
+unresolved and multiply matched items in dedicated queues. Keyboard shortcuts may speed
+review, but a bulk acceptance action must display how many ambiguous mappings it would affect.
+Example mapping: {"item_version_id":"iv_3","solution_version_id":"sv_8","source_label":"Q42","se
+ction_id":"physics","status":"proposed","evidence":["same_section","same_label"]}. Publication
+requires status=approved. A reviewer rejecting a mapping must leave a reason such as
+numbering_restart or neighboring_solution so later reruns do not keep repeating the same
+suggestion.
+Missing and inconsistent solutions
+Allow publication without explanations only when the configured product policy explicitly
+permits it and the approved key exists. Display Solution not yet available after permitted
+release.
+If the key says B and the explanation concludes C, open an academic conflict. Require resolution
+by a designated subject reviewer; do not silently select the longer explanation.
+Handle out-of-order pages, omitted question numbers and duplicate labels without overwriting
+links. Preserve original solutions and editorial supplements with clear provenance.
+ACCEPTANCE / PRECAUTIONS
+A solutions document with restarted section numbering maps to the correct subject items.
+An explanation-key conflict blocks the affected scored paper.
+A missing solution is reported explicitly and never replaced by an unreviewed AI explanation.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.10  /  23
+
+
+=== PAGE 11 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 11 / 23
+Validate typed answer keys against
+exam configuration
+INGEST-10 | GRADING INPUTS
+Define precise, typed key records and bind their validation to the versioned scoring
+configuration in Volume 2. Do not infer exam rules from a source PDF title.
+Typed answer contract
+Use key variants single_choice, multi_choice, integer, decimal, numeric_range and
+unscored_review. Store the accepted option IDs rather than letters, because paper assembly can
+change displayed option order. For numeric variants retain the authored exact value or accepted
+interval as a decimal string, together with units policy and normalization_profile_id.
+Example {"key_version_id":"kv_4","item_version_id":"iv_3","kind":"integer","accepted_values":["24
+"],"normalization_profile_id":"np_custom_integer_v1","review_status":"approved"}. Reject
+fractional accepted values under an integer response profile. Preserve negative values and zero
+where the chosen configuration allows them. Do not add tolerance, rounding or unit stripping
+because another exam previously used it.
+Validation beyond syntax
+Check that each approved item has an approved key compatible with the paper's response and
+scoring profiles. Require a subject reviewer to verify the value against both question and
+explanation. Record verification evidence and any dispute. Never assume OCR recognition of an
+answer-key table is reliable enough for direct production grading.
+Create boundary fixtures from the exact configured numeric policy: accepted answer, rejected
+nearby value, leading or trailing zeros, negative sign, locale separator, blank answer and forbidden
+characters. The server and client must use the same documented normalization behavior, but the
+server remains authoritative. Show raw submitted response beside normalized response during
+support investigations.
+Paper-level grading integrity
+Validate item points, section membership and key completeness before publication. If a custom
+question has no key, mark it unscored and exclude it transparently from the available-score
+denominator.
+Run a dry grading pass with known correct, wrong and blank answers for every response type in
+the paper. Compare totals with a reviewer-approved expected result.
+Retain answer_key_version_id in every grading run. A corrected key creates a new version and
+enters the correction workflow on page 20; it does not rewrite historical results invisibly.
+ACCEPTANCE / PRECAUTIONS
+An integer paper rejects an incompatible decimal key at validation time.
+Option reordering preserves grading correctness through stable option IDs.
+A dry-run report proves totals and denominator behavior for correct, wrong, blank and unscored
+items.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.11  /  23
+
+
+=== PAGE 12 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 12 / 23
+Separate the item bank from immutable
+paper versions
+INGEST-11 | CONTENT VERSIONING
+Allow reusable academic content while freezing everything a student actually attempted.
+Canonical bank edits and published paper changes must follow different rules.
+Bank entity versus delivery snapshot
+The bank Item points to its latest editorial version and may accumulate tags, alternate solutions
+and corrected assets. A PaperVersion references exact item_version_ids, exact key versions, exact
+stimulus versions and a frozen scoring_config_version_id. Add display order, option order, section
+boundaries, release policy and a content manifest hash. Never render an old attempt using the
+current Item row.
+Example paper manifest {"paper_version_id":"pv_7","exam_config_version_id":"cfg_9","items":[{"i
+tem_version_id":"iv_3","key_version_id":"kv_4","display_number":1,"section_id":"math","option_ord
+er":[]}],"publication_state":"scheduled","manifest_hash":"..."}. Validate the full manifest and sign
+or hash it before publishing. Keep version history visible to administrators.
+Safe updates and reuse
+Creating a new item version should show impacted draft papers and published papers. Drafts may
+explicitly adopt the update after validation. Published papers need a replacement version or a
+documented correction action. Editing a title or tag must not silently replace the stem that an
+active student sees. Distinguish display-only metadata from grading-affecting changes.
+When reusing an item in several papers, preserve independent paper context: allocated marks,
+response policy, display number and shared-stimulus placement. Verify compatibility with each
+exam configuration. Reuse must not imply that every exam supports the same response type or
+partial-credit rules.
+Concurrency and lifecycle
+Use optimistic locking with version or ETag on editorial updates. Return conflict with a
+side-by-side diff when two reviewers edit the same item; do not use silent last-write-wins.
+Support draft, approved, scheduled, published, withdrawn and archived paper states.
+Withdrawal prevents new attempts while defining what happens to already-started attempts
+through the operations policy.
+Keep content hashes on item and manifest versions. Use them for integrity checks and cache
+identity; do not use identical hashes as a reason to merge unrelated ownership records
+automatically.
+ACCEPTANCE / PRECAUTIONS
+A completed attempt displays its original stem after the bank item is corrected.
+A competing edit receives a conflict instead of overwriting the first reviewer.
+A manifest containing an incompatible response type cannot reach published state.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.12  /  23
+
+
+=== PAGE 13 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 13 / 23
+Build a verified, versioned tagging
+ontology
+INGEST-12 | QUESTION-WISE TAGS
+Design tags for reliable learning analysis and search. Tag suggestions are useful, but
+official-looking labels and difficulty values must have evidence and editorial status.
+Taxonomy and assignment contract
+Create hierarchical Subject, Chapter, Topic and Subtopic entities with stable IDs, aliases,
+syllabus_reference and taxonomy_version. Add non-hierarchical skills such as interpretation,
+calculation, conceptual reasoning, graph reading and multi-step synthesis. Permit multiple skill
+tags while keeping a clear primary chapter for supported analysis. Include prerequisite tags and
+source-specific labels without mixing them into the main taxonomy.
+Store tag assignments separately: {"item_version_id":"iv_3","tag_id":"topic_limits","status":"huma
+n_verified","assigned_by":"reviewer_2","taxonomy_version":"tax_1","evidence_note":"Uses a
+left-hand limit"}. Maintain statuses suggested, verified, rejected and deprecated. Reject a tag
+without losing the model suggestion history. Students should see only approved public tags.
+Difficulty and cognitive demand
+Keep editorial difficulty distinct from empirical difficulty. A subject reviewer can estimate easy,
+medium or hard with a brief rationale; the analytics system later computes response statistics for a
+specified cohort and exposure period. Do not call a question nationally top 1 percent difficult from
+a small local sample. Store the method and cohort beside every statistic.
+Tag common traps only when supported by the question: sign error, unit conversion, domain
+restriction, extraneous root or option misread. Do not label an individual student as careless from a
+single wrong response. Connect these tags to cautious explanations in Volume 4, where limitations
+and minimum sample thresholds govern analytics.
+Ontology operations
+Provide merge, rename, alias and deprecate operations with impact previews. A rename should
+not invalidate attempts; a chapter restructuring needs a new taxonomy version and explicit
+analytics migration.
+Allow reviewed bulk assignments from CSV or JSON with dry-run validation. Show unresolved
+aliases, cross-subject conflicts and missing prerequisites before committing.
+Offer a taxonomy coverage dashboard showing untagged items, single-review tags and
+conflicting assignments. Make academic review queues filterable by subject and reviewer
+expertise.
+ACCEPTANCE / PRECAUTIONS
+An AI-proposed chapter remains hidden until a reviewer approves it.
+Renaming a chapter keeps its stable identity and historical reports readable.
+Empirical difficulty displays its cohort and does not replace the editorial rating silently.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.13  /  23
+
+
+=== PAGE 14 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 14 / 23
+Design a fast, precise academic review
+workspace
+INGEST-13 | REVIEW INTERFACE
+Build a review screen that lets administrators correct difficult content accurately without
+returning to database tools or reconstructing evidence from memory.
+Layout and interaction
+Use a clear blue-themed workspace with a left candidate list, central student preview and right
+source evidence panel. Keep question status, current paper section and unresolved blocker count
+visible. Provide expandable tabs for source crop, structured text, options, key, explanation, tags
+and history. Remember panel sizes per reviewer without hiding critical warnings.
+Include keyboard navigation, undo within the current editing session, explicit Save draft and a
+visible unsaved-changes indicator. An autosave may persist a draft but must not imply approval.
+When a browser refresh occurs, recover the last server-saved draft and tell the reviewer whether
+any local edit was lost.
+Focused review tools
+Highlight tokens most likely to change meaning: minus signs, exponents, roots, inequality symbols,
+decimal points and diagram labels. Let reviewers mark each discrepancy resolved with a chosen
+source region. Display option ordering and key selection together, because a swapped option
+creates a grading error even when the stem is correct.
+Offer next unresolved item, previous item, open neighboring source page and compare previous
+version. Include a compact paper strip for count and numbering reconciliation. A reviewer should
+never need to approve a question while its solution or diagram is offscreen without an accessible
+evidence link.
+Quality gates and efficient collaboration
+Show blockers by category: source fidelity, response type, answer key, solution mapping, tag
+completeness, rights and release policy. Clicking a blocker focuses the exact field and explains
+the required resolution.
+Allow academic comments and assigned review tasks. Keep internal notes out of student
+payloads. Track resolved comments with the version they referred to so a later edit does not
+falsely inherit their resolution.
+Provide bulk operations only for safe metadata changes. Bulk approval of academic content
+requires explicit selection, an impact summary and recorded reviewer responsibility. Do not add
+a one-click approve-all button to bypass missing keys or conflicts.
+ACCEPTANCE / PRECAUTIONS
+A reviewer fixes a clipped graph, updates its key and verifies the resulting student preview in one
+workspace.
+A stale review comment stays associated with the version it reviewed.
+A save-draft action never changes a candidate to approved or published.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.14  /  23
+
+
+=== PAGE 15 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 15 / 23
+Implement editorial roles and approval
+accountability
+INGEST-14 | GOVERNED WORKFLOW
+Define capabilities by action and content scope. The person uploading a document should not
+automatically gain authority to publish it or release its solutions.
+Roles and action permissions
+Implement uploader, content_editor, subject_reviewer, publisher and operations_admin
+capabilities, with tenant and subject scope. An uploader submits sources and views their jobs. An
+editor repairs extraction and proposes tags. A subject reviewer approves academic content and
+keys. A publisher validates paper completeness and schedules release. An operations
+administrator manages queues and access without automatically passing academic review.
+For a small initial team, permit one user to hold several capabilities while preserving separate
+actions and audit records. The production policy should support independent review of
+scoring-affecting changes. Avoid hardcoding a single global admin=true flag that gives every
+support user access to all private papers and answer keys.
+Approval evidence
+Create approval records containing target_version_id, review_scope, decision, actor_id, timestamp,
+unresolved_exceptions and evidence_notes. Scope can be stem_fidelity, key_correctness,
+solution_correctness or publication_readiness. A paper is ready only when the configured required
+scopes are complete on the exact referenced versions.
+If an editor changes an approved key or stem, invalidate the affected approval scopes and return
+the new version to review. A harmless internal note should not reset academic approval. Encode
+which fields trigger which invalidations so the interface can explain the consequence before
+saving.
+Audit and delegated work
+Record upload completion, extraction run creation, candidate edits, mapping decisions,
+approvals, publications, withdrawals and key corrections in an append-only audit log.
+Provide reviewer assignment, workload queues and due dates. Reassignment must not delete
+the first reviewer's work or grant the new reviewer broader tenant permissions.
+Show publication errors by missing capability or unresolved academic gate. Enforce checks on
+the server, including scheduled background publication. Hiding a button in the interface is not
+sufficient authorization.
+ACCEPTANCE / PRECAUTIONS
+An uploader calling the publish endpoint receives a permission error.
+Editing an approved correct answer invalidates key approval on the new version.
+A scheduled publication job honors the same readiness checks as manual publication.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.15  /  23
+
+
+=== PAGE 16 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 16 / 23
+Create Tejas custom practice without
+mislabeling simulations
+INGEST-15 | CUSTOM PAPER BUILDER
+Build a custom-paper mode for chapter-limited practice and unusual response requirements.
+Keep its rules explicit so learners can distinguish personal practice from an exam-format
+simulation.
+Custom paper configuration
+Allow Tejas or an authorized teacher to select verified chapters, item count, response types,
+editorial difficulty mix, available time and solution-release timing. Provide a reusable preset for a
+chapters-only integer practice paper when suitable verified items exist. Do not hardcode Tejas's
+earlier syllabus as a permanent fact; collect the current chapter selection in the builder.
+Assign mode=custom_practice and show a clear label throughout the attempt and report. If the
+user selects only integer items or changes the total time, do not call the resulting paper an exact
+JEE Main simulation. The simulated exam modes in Volume 2 must pass their own complete
+configuration validation.
+Assembly algorithm and constraints
+Filter only approved, authorized and renderable item versions. Exclude withdrawn items,
+incompatible response types, unresolved keys and duplicated source occurrences. Handle shared
+passages as grouped constraints. Let the user choose whether previously attempted items may
+appear; explain that repeated exposure changes the meaning of percentile comparisons.
+Use a deterministic seed for reproducibility, store the selection algorithm version and show a
+preflight summary with subject counts, chapter coverage, estimated time and marks. If 75
+qualifying questions are requested but only 48 exist, present the shortage and available choices.
+Do not generate or relabel 27 unreviewed questions silently.
+Teacher and learner safeguards
+Allow a teacher to preview, save a draft and assign the frozen paper version. Keep answer keys
+unavailable to the learner until the selected release condition.
+Show where practice rules differ from the chosen exam configuration, including response format
+and duration. Preserve scoring policy in the manifest rather than reading the latest preset at
+attempt time.
+Prevent near-duplicate stems from flooding a paper where practical. Use similarity suggestions
+for review, then retain intentional variants when they test distinct learning goals.
+ACCEPTANCE / PRECAUTIONS
+A chapter-limited integer paper is labeled custom practice in its result.
+Insufficient inventory gives an honest shortage report instead of unreviewed filler.
+The same seed and manifest inputs reproduce the same ordered item selection.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.16  /  23
+
+
+=== PAGE 17 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 17 / 23
+Support multilingual content and
+accessibility review
+INGEST-16 | LANGUAGE VARIANTS
+Treat translated content as reviewed variants linked to the same academic item. Translation
+must preserve mathematics, option meaning and grading alignment.
+Language variant model
+Create localized item versions with locale, source_language, translation_method, reviewer_id and
+equivalence_status. Store language-independent option identities while allowing reviewed
+localized labels and text. A language switch must preserve the selected internal option ID. Link
+each variant to exact figure and stimulus versions; shared graphics can remain language-neutral
+only when their labels are understandable.
+For bilingual source PDFs, identify whether the source presents paired sentences, separate
+columns or repeated full questions. Do not import the two language presentations as two distinct
+academic questions. Provide a bilingual evidence view that reveals differences and missing clauses
+before approving equivalence.
+Translation and screen-reader behavior
+Use AI translation only as a draft suggestion. Require a competent language and subject reviewer
+for graded material. Preserve mathematical symbols, units, proper nouns and technical
+terminology; mark disputed terminology explicitly. Do not promise every language for every
+uploaded document. Display a missing_variant state and provide the available reviewed language
+choices.
+Supply headings, meaningful table headers, keyboard-accessible image zoom and reviewed
+descriptions for essential diagrams. Test source-order reading and focus movement in the attempt
+preview. Language changes should update document language metadata so assistive technology
+can select suitable pronunciation. Alternative text must preserve the question without giving away
+its solution.
+Version and scoring integrity
+If translated option text changes meaning, create a new localized version and reassess
+equivalence. A correction to the common numeric key may affect every language variant; show
+the impact explicitly.
+Keep original source wording and editorial translation distinguishable in internal provenance.
+Record translator and reviewer decisions without publishing their private contact information.
+Test long translated text and scripts with different line breaks. A neat English layout does not
+prove that another language will fit in the same question card.
+ACCEPTANCE / PRECAUTIONS
+Switching language retains the current response and maps it to the same option identity.
+A bilingual source creates one item with two reviewed variants.
+A missing or disputed translation prevents an unsupported language promise in paper publication.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.17  /  23
+
+
+=== PAGE 18 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 18 / 23
+Secure untrusted PDFs and AI-assisted
+extraction
+INGEST-17 | FILE AND MODEL SECURITY
+Place untrusted documents behind layered controls before any parser or model processes
+them. Keep academic extraction separate from privileged application actions.
+File processing boundary
+Validate allowed extension, detected type, signature, size and parser behavior; no single check
+proves safety. Store sources privately under generated keys, restrict access and use current
+hardened libraries. OWASP recommends layered upload checks and separate storage or storage
+outside the webroot [S1]. Treat these as baseline protections, then add the resource limits needed
+for this workload.
+Run PDF parsing, rendering and OCR in isolated workers with minimal permissions, no production
+database credentials and denied outbound network by default. Bound pages, pixels, decoded
+image dimensions, CPU time and memory. Reject or quarantine dangerous active features such as
+embedded scripts, attachments or unexpected external actions according to policy. Keep evidence
+of rejection without rendering active content in an administrator browser.
+Prompt injection and external requests
+Treat document text as untrusted data when sending it to an extraction model. A PDF instruction
+saying reveal the key, fetch this URL or ignore the schema must never become an application
+instruction. Use a strict output schema, bounded prompts and no privileged tools. Validate all
+model output before storing draft candidates, and require academic review before publication.
+Do not fetch hyperlinks, remote images or document-provided URLs during extraction. If a future
+URL-import feature is authorized, isolate it behind an allowlisted fetch service with redirect checks,
+private-address blocking, DNS validation and size limits. Never reuse the application's cloud
+credentials to retrieve a PDF-supplied location.
+Confidentiality and abuse controls
+Redact accidental personal information in sources through a reviewed workflow; keep the
+original under restricted access. Configure any external OCR or model provider to the agreed
+retention and confidentiality requirements.
+Use tenant quotas, rate limits and abuse reporting. Do not upload private papers to public
+scanning services without an explicit data-handling decision.
+Log security events using IDs and sanitized error codes. Never put presigned URLs, document
+passwords or full private source text in shared operational logs.
+ACCEPTANCE / PRECAUTIONS
+A PDF containing an instruction to expose secrets produces only inert extraction text.
+A malicious oversized image is stopped by resource limits before affecting the attempt service.
+A document hyperlink cannot trigger an internal-network request from a worker.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.18  /  23
+
+
+=== PAGE 19 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 19 / 23
+Gate publication, embargoes and
+content rights
+INGEST-18 | RELEASE CONTROL
+Enforce publication as a server-side content and rights decision. Make questions, keys,
+explanations and source downloads independently controlled resources.
+Rights and readiness metadata
+Require a recorded rights basis before public distribution: owned, licensed, permission_received or
+another reviewed basis applicable to the content. Keep evidence reference, permitted audience,
+expiry and restrictions. An uploader assertion can support a private draft, but the platform should
+not automatically treat every coaching PDF as authorized for hundreds of thousands of users.
+Create a readiness report containing manifest integrity, academic approval, verified count,
+compatible scoring profile, valid assets, rights status and language availability. The publisher sees
+blockers and documented exceptions. Publication time must use a stored UTC instant with a clear
+local display; avoid interpreting a timezone-free timestamp differently in browser and worker.
+Separate access and release policies
+Define question_access, key_access, explanation_access and source_download_access
+independently. Explanation release may occur after individual submission, after the scheduled test
+window, on a manual release date or never. A live competitive paper may require delaying
+explanations even after one student finishes; the policy must specify it explicitly.
+Evaluate access on the server for every resource request. Do not ship hidden keys in a JavaScript
+bundle, encrypted browser field or downloadable source PDF. For scheduled release, avoid caching
+a permitted solution response across students or time boundaries without including authorization
+context in the cache policy.
+Withdrawal and expiry
+Provide emergency withdraw controls with an affected-paper summary. Decide whether ongoing
+attempts finish, pause or end under the incident policy; record the decision instead of deleting
+content mid-attempt.
+When rights expire, prevent new access and stop new assignments according to the licensed
+terms. Preserve necessary historical records privately subject to the retention policy.
+Add content-report and rights-report workflows. A report opens a tracked case and may
+quarantine distribution while reviewers inspect evidence; it must not expose the complainant's
+private information to students.
+ACCEPTANCE / PRECAUTIONS
+A student finishing early cannot retrieve explanations before a test-wide embargo ends.
+An expired rights record blocks a new public publication.
+A raw source PDF containing answers is unavailable from student-facing paper routes.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.19  /  23
+
+
+=== PAGE 20 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 20 / 23
+Correct errors with transparent,
+reproducible rescoring
+INGEST-19 | POST-PUBLICATION CORRECTIONS
+Build a correction workflow that preserves original evidence while producing trustworthy
+revised results. Never overwrite completed marks without a visible grading lineage.
+Correction classification and impact
+Create a CorrectionCase with affected item versions, paper versions, reason, proposed change,
+academic evidence, severity and reviewer approval. Classify cosmetic, interpretation-affecting,
+key-affecting and paper-rule errors. A missing minus sign in the stem may invalidate the item
+rather than merely change the key; the correction reviewer must decide the fair treatment.
+Preview affected attempts, completed reports, cohort statistics and assigned future papers. Show
+whether live attempts encountered the defective version. Freeze the correction decision and
+resulting policy before batch processing. Do not automatically substitute the latest bank version
+into every old paper because it seems better.
+Rescoring contract
+Create grading_run records with original_or_revised, parent_grading_run_id,
+answer_key_version_id, scoring_config_version_id, correction_case_id and completed_at. Read the
+original submitted responses; never generate new responses from the revised stem. Use a
+documented policy for invalidated items, such as excluding their denominator or awarding
+configured credit, with its effect visible in the result.
+Example POST /admin/corrections/case_9/rescore-preview returns {"attempts_affected":1250,"tota
+l_changes":117,"max_delta":4,"cohort_recompute_required":true}. Commit creates a durable job
+using an idempotency key. Chunk work, checkpoint progress and let workers retry without
+duplicating revised runs. A preview is evidence, not the final committed result.
+Student and analytics communication
+Display Original result and Revised result with timestamp, reason and changed questions. Notify
+affected learners through authorized platform notifications; avoid publishing private student
+names in a correction notice.
+Recompute affected analytics using revised grading lineage and retain cohort snapshot
+versions. Percentiles cannot mix corrected and uncorrected marks silently.
+Preserve appeal records and evidence. Allow authorized reviewers to inspect exact historical
+question assets, key and response when a student disputes a correction.
+ACCEPTANCE / PRECAUTIONS
+Repeating a rescoring job creates no duplicate revised grading runs.
+A correction report identifies changed marks and denominator effects clearly.
+Historical original results remain reproducible after the revised result is issued.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.20  /  23
+
+
+=== PAGE 21 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 21 / 23
+Implement search, portable exports and
+safe migrations
+INGEST-20 | CONTENT OPERATIONS
+Make the content bank maintainable as it grows. Search and exports must respect visibility,
+preserve provenance and survive changes to schemas and taxonomy.
+Search and deduplication
+Provide filters for subject, verified chapter, topic, response type, editorial status, paper
+membership, source file, reviewer, language and rights status. Search indexed prose and
+normalized mathematical tokens while keeping structured originals intact. Enforce tenant and role
+permissions before returning results or counts; an autocomplete suggestion must not reveal a
+private paper title.
+Use exact hashes and similarity candidates to find duplicated content. Distinguish duplicate
+imports, near-duplicate variants and legitimately reused items. Present source anchors and
+differences to a reviewer before merging. Retain aliases from merged IDs and preserve historical
+paper references; deleting an item because two stems look similar can corrupt past attempts.
+Export contract and confidentiality
+Export a versioned content bundle with manifest.json, items.jsonl, stimuli.jsonl, approved tags,
+provenance.jsonl and permitted assets. Include schema_version, export timestamp, checksums
+and source licensing metadata. Separate a question-only export from an administrative archive
+containing keys and solutions. Require explicit capability for the latter and record the audit event.
+Provide CSV for reviewed metadata updates and JSON for full-fidelity content. Escape CSV cells
+that could be interpreted as spreadsheet formulas. Imports should support dry-run validation,
+row-level errors, duplicate-ID checks and optimistic concurrency. A portable archive must not
+include private object credentials or expired presigned URLs.
+Migration and retention
+Write migrations that preserve IDs and immutable versions. Test them on representative
+backups and compare item counts, manifests, keys and source-anchor hashes before and after.
+Keep storage retention rules by artifact type: original source, safe render, OCR draft, published
+asset and audit record. Remove orphaned derivatives only after confirming they are not
+referenced by a historical paper.
+Offer a restore drill for one paper and its assets. A database backup alone is insufficient if its
+manifest points to missing object-storage files.
+ACCEPTANCE / PRECAUTIONS
+An unauthorized search returns no private item counts or title suggestions.
+Exporting and reimporting a paper reproduces its manifest and grading behavior.
+A restore drill rebuilds both database references and required content assets.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.21  /  23
+
+
+=== PAGE 22 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 22 / 23
+Prove the pipeline with hostile and
+academic fixtures
+INGEST-21 | ACCEPTANCE AND IMPLEMENTATION PROMPT
+Finish this volume with observable end-to-end evidence. Deliver the functioning administrator
+workflow, not a collection of upload screens backed by fabricated extraction results.
+Acceptance corpus and release gates
+Create synthetic fixtures for native text, scanned pages, mixed sources, rotated pages, two columns,
+repeated numbering, shared passages, split-page stems, key tables, missing answers and
+out-of-order solutions. Add mathematical traps involving a faint minus sign, radical boundary,
+decimal point, chemical charge and diagram label. Include a bilingual fixture and an asset containing
+forbidden active content.
+For every fixture, record expected items, region mappings, permitted publication state and known
+failures. Test the actual parser and the administrator correction path. Measure precision and
+omission rates on the reviewed sample with clear definitions; do not quote a universal 99 percent
+ingestion accuracy from a handful of clean pages.
+Milestones and integration boundaries
+Milestone 1: secure upload, private source storage and durable job progress. Milestone 2: page
+triage, editable segmentation and faithful previews. Milestone 3: typed keys, matched solutions,
+verified tags and approvals. Milestone 4: immutable paper publication and release controls.
+Milestone 5: custom practice, correction jobs and portable exports. Each milestone must run against
+fixtures before the next expands the surface area.
+Integrate the exam runner through question-only DTOs in Volume 2, analysis through reviewed
+taxonomy and grading lineage in Volume 4, and scale/security through Volume 5. Ensure the
+ingestion system can fail or pause without making exam response saving unavailable. Document any
+OCR provider dependency and its replacement interface.
+Final copy-paste instruction to Emergent
+Implement these requirements with working persistent storage and permission checks. Show a
+recorded walkthrough importing paired PDFs, correcting one academic discrepancy, publishing a
+custom paper and retrieving a result.
+Return schema definitions, API examples, worker retry behavior, actual validation outputs and
+unresolved integration details. Clearly label any placeholder provider and do not portray sample
+JSON as extracted production content.
+Demonstrate a correction from an original result to a revised result and a blocked attempt to
+retrieve embargoed explanations. These are completion requirements, not optional future
+enhancements.
+ACCEPTANCE / PRECAUTIONS
+All 22 page requirements map to implemented behavior, a documented constraint or a named
+pending dependency.
+A non-developer reviewer completes the full content workflow using the interface.
+The acceptance report records actual outputs for clean, ambiguous and hostile fixtures.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.22  /  23
+
+
+=== PAGE 23 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 03  |  CONTENT OPERATIONS
+CHAPTER 23 / 23
+Source register and implementation
+handoff
+EVIDENCE AND SCOPE OF THIS SPECIFICATION
+Use these references to verify the stated baseline. Requirements and engineering thresholds
+in this volume are proposed product decisions unless a source explicitly establishes them.
+S1 | OWASP File Upload Cheat Sheet
+https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+Checked: 2026-10-11. Primary security guidance; supports layered upload validation, private
+storage, access control and bounded resource handling. Platform-specific policies in this volume
+are design requirements.
+S2 | PyMuPDF documentation: Text extraction
+https://pymupdf.readthedocs.io/en/latest/recipes-text.html
+Checked: 2026-10-11. Primary tool documentation; warns about reading order and exposes
+geometric extraction. Library selection is illustrative and must include a deployment license
+review.
+S3 | PyMuPDF documentation: OCR
+https://pymupdf.readthedocs.io/en/latest/recipes-ocr.html
+Checked: 2026-10-11. Primary tool documentation; describes OCR as a separate process. It does
+not establish mathematics recognition accuracy or authorize automatic publication.
+S4 | W3C MathML Core
+https://www.w3.org/TR/mathml-core/
+Checked: 2026-10-11. Primary web standard for mathematical presentation. Accessibility must be
+tested with actual renderer, browser and assistive-technology combinations.
+ACCEPTANCE / PRECAUTIONS
+Before release, retain the approved configuration, source document date, verification owner and
+test evidence. Re-check any rule that changes for a new exam year.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+3.23  /  23

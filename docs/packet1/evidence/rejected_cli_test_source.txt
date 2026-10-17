@@ -1,0 +1,460 @@
+"""Tests for the CLI tool /app/backend/tools/rotate_staff_credential.py.
+
+Tests dry-run mode, safety flags, and validation without real credential rotation.
+Focuses on CLI argument parsing, safety checks, and dry-run output format.
+"""
+import asyncio
+import json
+import subprocess
+import sys
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+import pytest
+import pytest_asyncio
+from dotenv import load_dotenv
+
+# Load test environment
+ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / 'backend/.env', override=False)
+
+# Import after env setup
+sys.path.insert(0, str(ROOT / 'backend'))
+from tejas.db import users, client
+from tejas.auth import hashpw
+
+pytestmark = pytest.mark.asyncio(loop_scope='session')
+
+CLI_TOOL = ROOT / 'backend/tools/rotate_staff_credential.py'
+
+
+@pytest_asyncio.fixture(loop_scope='session')
+async def test_staff_account():
+    """Create a test staff account for CLI testing."""
+    account_id = str(uuid.uuid4())
+    password = 'TestStaffPassword123!'
+    hashed = await asyncio.get_event_loop().run_in_executor(None, hashpw, password)
+    
+    await users.insert_one({
+        'id': account_id,
+        'email': f'cli-test-staff-{uuid.uuid4().hex[:8]}@isolated.invalid',
+        'name': 'CLI Test Staff',
+        'role': 'reviewer',
+        'exam': 'JEE Main',
+        'access_type': 'staff_password',
+        'password_hash': hashed,
+        'credential_generation': 0,
+        'created_at': datetime.now(timezone.utc),
+    })
+    
+    yield {'id': account_id, 'password': password, 'generation': 0}
+    
+    # Cleanup
+    await users.delete_one({'id': account_id})
+
+
+@pytest_asyncio.fixture(loop_scope='session')
+async def test_owner_account():
+    """Create a test owner account for CLI testing."""
+    account_id = str(uuid.uuid4())
+    password = 'TestOwnerPassword456!'
+    hashed = await asyncio.get_event_loop().run_in_executor(None, hashpw, password)
+    
+    await users.insert_one({
+        'id': account_id,
+        'email': f'cli-test-owner-{uuid.uuid4().hex[:8]}@isolated.invalid',
+        'name': 'CLI Test Owner',
+        'role': 'owner',
+        'exam': 'JEE Main',
+        'access_type': 'staff_password',
+        'password_hash': hashed,
+        'credential_generation': 0,
+        'created_at': datetime.now(timezone.utc),
+    })
+    
+    yield {'id': account_id, 'password': password, 'generation': 0}
+    
+    # Cleanup
+    await users.delete_one({'id': account_id})
+
+
+async def test_dry_run_default_mode(test_staff_account):
+    """Test that dry-run is the default mode and outputs correct JSON."""
+    account = test_staff_account
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation'])],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode == 0, f"CLI failed: {result.stderr}"
+    
+    # Parse output JSON
+    output = json.loads(result.stdout.strip())
+    
+    # Verify dry-run output structure
+    assert output['mode'] == 'DRY_RUN_NO_MUTATION'
+    assert output['account_id'] == account['id']
+    assert output['expected_generation'] == account['generation']
+    assert output['next_generation'] == account['generation'] + 1
+    assert 'warning' in output
+    assert 'approved protected terminal' in output['warning']
+    assert 'revokes prior staff sessions' in output['warning']
+    
+    # Verify no mutation occurred
+    user = await users.find_one({'id': account['id']})
+    assert user['credential_generation'] == account['generation']
+    
+    print(f"✓ Dry-run default mode outputs correct JSON without mutation")
+
+
+async def test_dry_run_with_owner_account(test_owner_account):
+    """Test dry-run mode works with owner accounts."""
+    account = test_owner_account
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation'])],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode == 0, f"CLI failed: {result.stderr}"
+    
+    output = json.loads(result.stdout.strip())
+    assert output['mode'] == 'DRY_RUN_NO_MUTATION'
+    assert output['account_id'] == account['id']
+    
+    print(f"✓ Dry-run mode works with owner accounts")
+
+
+async def test_apply_without_confirm_revoke_fails(test_staff_account):
+    """Test that --apply without --confirm-revoke fails."""
+    account = test_staff_account
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation']),
+         '--apply',
+         '--confirm-fenced-deployment'],
+        capture_output=True,
+        text=True,
+        input='\n'  # Provide empty stdin
+    )
+    
+    assert result.returncode != 0, "Should fail without --confirm-revoke"
+    # CLI tool hides error details for security - just verify it failed
+    assert 'Rotation did not complete cleanly' in result.stderr or result.returncode != 0
+    
+    # Verify no mutation
+    user = await users.find_one({'id': account['id']})
+    assert user['credential_generation'] == account['generation']
+    
+    print(f"✓ --apply without --confirm-revoke fails safely")
+
+
+async def test_apply_without_confirm_fenced_deployment_fails(test_staff_account):
+    """Test that --apply without --confirm-fenced-deployment fails."""
+    account = test_staff_account
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation']),
+         '--apply',
+         '--confirm-revoke'],
+        capture_output=True,
+        text=True,
+        input='\n'
+    )
+    
+    assert result.returncode != 0, "Should fail without --confirm-fenced-deployment"
+    # CLI tool hides error details for security - just verify it failed
+    assert 'Rotation did not complete cleanly' in result.stderr or result.returncode != 0
+    
+    # Verify no mutation
+    user = await users.find_one({'id': account['id']})
+    assert user['credential_generation'] == account['generation']
+    
+    print(f"✓ --apply without --confirm-fenced-deployment fails safely")
+
+
+async def test_apply_with_non_interactive_terminal_fails(test_staff_account):
+    """Test that --apply with non-interactive stdin fails."""
+    account = test_staff_account
+    
+    # Pipe input simulates non-interactive terminal
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation']),
+         '--apply',
+         '--confirm-revoke',
+         '--confirm-fenced-deployment'],
+        capture_output=True,
+        text=True,
+        input='TestPassword123!\nTestPassword123!\n'  # Piped input = non-interactive
+    )
+    
+    assert result.returncode != 0, "Should fail with non-interactive terminal"
+    # CLI tool hides error details for security - just verify it failed
+    assert 'Rotation did not complete cleanly' in result.stderr or result.returncode != 0
+    
+    # Verify no mutation
+    user = await users.find_one({'id': account['id']})
+    assert user['credential_generation'] == account['generation']
+    
+    print(f"✓ --apply with non-interactive terminal fails safely")
+
+
+async def test_invalid_account_id_fails(test_staff_account):
+    """Test that invalid account UUID is rejected."""
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', 'not-a-valid-uuid',
+         '--expected-generation', '0'],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode != 0, "Should fail with invalid UUID"
+    
+    print(f"✓ Invalid account UUID rejected")
+
+
+async def test_nonexistent_account_fails():
+    """Test that nonexistent account is rejected."""
+    fake_id = str(uuid.uuid4())
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', fake_id,
+         '--expected-generation', '0'],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode != 0, "Should fail with nonexistent account"
+    # CLI tool hides error details for security - just verify it failed
+    assert 'Rotation did not complete cleanly' in result.stderr or result.returncode != 0
+    
+    print(f"✓ Nonexistent account rejected")
+
+
+async def test_wrong_expected_generation_fails(test_staff_account):
+    """Test that wrong expected generation is rejected in dry-run."""
+    account = test_staff_account
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation'] + 1)],  # Wrong generation
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode != 0, "Should fail with wrong expected generation"
+    assert 'does not match' in result.stderr or 'generation' in result.stderr.lower()
+    
+    print(f"✓ Wrong expected generation rejected")
+
+
+async def test_student_account_not_eligible():
+    """Test that student accounts cannot be rotated."""
+    student_id = str(uuid.uuid4())
+    password = 'StudentPassword123!'
+    hashed = await asyncio.get_event_loop().run_in_executor(None, hashpw, password)
+    
+    await users.insert_one({
+        'id': student_id,
+        'email': f'student-{uuid.uuid4().hex[:8]}@isolated.invalid',
+        'name': 'Test Student',
+        'role': 'student',
+        'exam': 'JEE Main',
+        'access_type': 'staff_password',
+        'password_hash': hashed,
+        'credential_generation': 0,
+        'created_at': datetime.now(timezone.utc),
+    })
+    
+    try:
+        result = subprocess.run(
+            [sys.executable, str(CLI_TOOL),
+             '--account-id', student_id,
+             '--expected-generation', '0'],
+            capture_output=True,
+            text=True
+        )
+        
+        assert result.returncode != 0, "Should fail for student account"
+        # CLI tool hides error details for security - just verify it failed
+        assert 'Rotation did not complete cleanly' in result.stderr or result.returncode != 0
+        
+        print(f"✓ Student account not eligible for rotation")
+    finally:
+        await users.delete_one({'id': student_id})
+
+
+async def test_missing_required_arguments():
+    """Test that missing required arguments are rejected."""
+    # Missing --account-id
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--expected-generation', '0'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0, "Should fail without --account-id"
+    
+    # Missing --expected-generation
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', str(uuid.uuid4())],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0, "Should fail without --expected-generation"
+    
+    print(f"✓ Missing required arguments rejected")
+
+
+async def test_dry_run_output_no_secrets(test_staff_account):
+    """Test that dry-run output contains no secrets."""
+    account = test_staff_account
+    
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', str(account['generation'])],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode == 0
+    output = result.stdout.strip()
+    
+    # Verify no sensitive data in output
+    assert 'password' not in output.lower()
+    assert 'hash' not in output.lower()
+    assert 'token' not in output.lower()
+    assert 'email' not in output.lower()
+    assert account['password'] not in output
+    
+    print(f"✓ Dry-run output contains no secrets")
+
+
+async def test_generation_boundary_values(test_staff_account):
+    """Test generation boundary validation."""
+    account = test_staff_account
+    
+    # Negative generation
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL),
+         '--account-id', account['id'],
+         '--expected-generation', '-1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0, "Should reject negative generation"
+    
+    print(f"✓ Generation boundary values validated")
+
+
+async def test_multiple_accounts_different_generations():
+    """Test dry-run with accounts at different generations."""
+    # Create account at generation 0
+    account1_id = str(uuid.uuid4())
+    hashed = await asyncio.get_event_loop().run_in_executor(None, hashpw, 'Password123!')
+    
+    await users.insert_one({
+        'id': account1_id,
+        'email': f'multi-test-1-{uuid.uuid4().hex[:8]}@isolated.invalid',
+        'name': 'Multi Test 1',
+        'role': 'reviewer',
+        'exam': 'JEE Main',
+        'access_type': 'staff_password',
+        'password_hash': hashed,
+        'credential_generation': 0,
+        'created_at': datetime.now(timezone.utc),
+    })
+    
+    # Create account at generation 2
+    account2_id = str(uuid.uuid4())
+    await users.insert_one({
+        'id': account2_id,
+        'email': f'multi-test-2-{uuid.uuid4().hex[:8]}@isolated.invalid',
+        'name': 'Multi Test 2',
+        'role': 'owner',
+        'exam': 'JEE Main',
+        'access_type': 'staff_password',
+        'password_hash': hashed,
+        'credential_generation': 2,
+        'created_at': datetime.now(timezone.utc),
+    })
+    
+    try:
+        # Test account 1 at generation 0
+        result1 = subprocess.run(
+            [sys.executable, str(CLI_TOOL),
+             '--account-id', account1_id,
+             '--expected-generation', '0'],
+            capture_output=True,
+            text=True
+        )
+        assert result1.returncode == 0
+        output1 = json.loads(result1.stdout.strip())
+        assert output1['expected_generation'] == 0
+        assert output1['next_generation'] == 1
+        
+        # Test account 2 at generation 2
+        result2 = subprocess.run(
+            [sys.executable, str(CLI_TOOL),
+             '--account-id', account2_id,
+             '--expected-generation', '2'],
+            capture_output=True,
+            text=True
+        )
+        assert result2.returncode == 0
+        output2 = json.loads(result2.stdout.strip())
+        assert output2['expected_generation'] == 2
+        assert output2['next_generation'] == 3
+        
+        print(f"✓ Multiple accounts at different generations handled correctly")
+    finally:
+        await users.delete_many({'id': {'$in': [account1_id, account2_id]}})
+
+
+async def test_cli_help_output():
+    """Test that --help provides usage information."""
+    result = subprocess.run(
+        [sys.executable, str(CLI_TOOL), '--help'],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode == 0
+    assert '--account-id' in result.stdout
+    assert '--expected-generation' in result.stdout
+    assert '--apply' in result.stdout
+    assert '--confirm-revoke' in result.stdout
+    assert '--confirm-fenced-deployment' in result.stdout
+    assert 'dry-run' in result.stdout.lower()
+    
+    print(f"✓ CLI help output provides usage information")
+
+
+# Cleanup fixture
+@pytest.fixture(scope='session', autouse=True)
+def cleanup_db():
+    """Cleanup database connections after all tests."""
+    yield
+    client.close()
+
+
+if __name__ == '__main__':
+    pytest.main([__file__, '-v', '--tb=short'])

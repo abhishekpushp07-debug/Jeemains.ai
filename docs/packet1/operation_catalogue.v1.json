@@ -1,0 +1,1591 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "operation_id": "health_api_health_get",
+      "method": "GET",
+      "path": "/api/health",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "public_liveness_only",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "register_api_auth_register_post",
+      "method": "POST",
+      "path": "/api/auth/register",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "removed_endpoint",
+      "idempotency_mode": "gone",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "login_api_auth_login_post",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_password_session",
+      "idempotency_mode": "new_session",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "session_api_auth_session_get",
+      "method": "GET",
+      "path": "/api/auth/session",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "cookie_identity",
+      "idempotency_mode": "read_refresh_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "me_api_auth_me_get",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_identity",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "refresh_api_auth_refresh_post",
+      "method": "POST",
+      "path": "/api/auth/refresh",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_refresh_session",
+      "idempotency_mode": "session_refresh",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "logout_api_auth_logout_post",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_cookie_sessions_only",
+      "idempotency_mode": "repeatable_delete",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "preferences_api_auth_preferences_patch",
+      "method": "PATCH",
+      "path": "/api/auth/preferences",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_profile_only",
+      "idempotency_mode": "replace_field",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "access_api_auth_phone_post",
+      "method": "POST",
+      "path": "/api/auth/phone",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "unverified_phone_profile_only",
+      "idempotency_mode": "profile_upsert_new_session",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "catalogue_api_sets_get",
+      "method": "GET",
+      "path": "/api/sets",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "public_published_audience",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "set_detail_api_sets__id__get",
+      "method": "GET",
+      "path": "/api/sets/{id}",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "public_published_audience",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "studio_sets_api_studio_sets_get",
+      "method": "GET",
+      "path": "/api/studio/sets",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "create_set_api_studio_sets_post",
+      "method": "POST",
+      "path": "/api/studio/sets",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "not_idempotent",
+      "body_limit_bytes": 65536,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "studio_set_api_studio_sets__id__get",
+      "method": "GET",
+      "path": "/api/studio/sets/{id}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "update_set_api_studio_sets__id__put",
+      "method": "PUT",
+      "path": "/api/studio/sets/{id}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "legacy_unfenced_edit",
+      "body_limit_bytes": 65536,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "upload_api_studio_sets__id__files_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/files",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "authorized_private_source",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "source_page_api_studio_files__id__page__page__get",
+      "method": "GET",
+      "path": "/api/studio/files/{id}/page/{page}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "authorized_private_source",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "source_text_api_studio_files__id__text__page__get",
+      "method": "GET",
+      "path": "/api/studio/files/{id}/text/{page}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "authorized_private_source",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "source_download_api_studio_files__id__download_get",
+      "method": "GET",
+      "path": "/api/studio/files/{id}/download",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "authorized_private_source",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "extract_api_studio_sets__id__extract_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/extract",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "add_question_api_studio_sets__id__questions_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/questions",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "not_idempotent",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "edit_question_api_studio_sets__id__questions__qid__put",
+      "method": "PUT",
+      "path": "/api/studio/sets/{id}/questions/{qid}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "legacy_unfenced_edit",
+      "body_limit_bytes": 262144,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "approve_question_api_studio_sets__id__questions__qid__approve_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/questions/{qid}/approve",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "revision_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "publish_api_studio_sets__id__publish_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/publish",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_publication_rights",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "withdraw_api_studio_sets__id__withdraw_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/withdraw",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_publication_rights",
+      "idempotency_mode": "repeatable_state_change_audit_each_call",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "subset_api_studio_sets__id__subset_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/subset",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "not_idempotent",
+      "body_limit_bytes": 65536,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "preview_asset_api_studio_sets__id__questions__qid__asset__kind___index__get",
+      "method": "GET",
+      "path": "/api/studio/sets/{id}/questions/{qid}/asset/{kind}/{index}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "authorized_private_source",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "save_answer_api_attempts__id__answers__qid__put",
+      "method": "PUT",
+      "path": "/api/attempts/{id}/answers/{qid}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "live",
+      "owner_policy": "attempt_owner_active_deadline",
+      "idempotency_mode": "stored_request_receipt_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "my_sets_api_my_sets_get",
+      "method": "GET",
+      "path": "/api/my/sets",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_profile_audience",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "my_set_api_my_sets__id__get",
+      "method": "GET",
+      "path": "/api/my/sets/{id}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_profile_audience",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "preflight_api_sets__id__preflight_post",
+      "method": "POST",
+      "path": "/api/sets/{id}/preflight",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_profile_audience_or_staff_preview",
+      "idempotency_mode": "upsert_preflight",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "start_api_sets__id__start_post",
+      "method": "POST",
+      "path": "/api/sets/{id}/start",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "live",
+      "owner_policy": "current_profile_audience_or_staff_preview",
+      "idempotency_mode": "start_key_receipt_legacy",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "history_api_attempts_get",
+      "method": "GET",
+      "path": "/api/attempts",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner",
+      "idempotency_mode": "read_with_expiry_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "read_attempt_api_attempts__id__get",
+      "method": "GET",
+      "path": "/api/attempts/{id}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "live",
+      "owner_policy": "attempt_owner",
+      "idempotency_mode": "read_with_expiry_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "visit_question_api_attempts__id__visit_post",
+      "method": "POST",
+      "path": "/api/attempts/{id}/visit",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "live",
+      "owner_policy": "attempt_owner_active_deadline",
+      "idempotency_mode": "set_membership",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "submit_api_attempts__id__submit_post",
+      "method": "POST",
+      "path": "/api/attempts/{id}/submit",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "live",
+      "owner_policy": "attempt_owner",
+      "idempotency_mode": "atomic_seal_receipt",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "results_api_attempts__id__results_get",
+      "method": "GET",
+      "path": "/api/attempts/{id}/results",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_and_solution_release",
+      "idempotency_mode": "read_grade_enqueue_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "asset_api_attempts__id__questions__qid__asset__kind___index__get",
+      "method": "GET",
+      "path": "/api/attempts/{id}/questions/{qid}/asset/{kind}/{index}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_and_solution_release",
+      "idempotency_mode": "read_with_expiry_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "solution_consulted_api_attempts__id__questions__qid__solution_open_post",
+      "method": "POST",
+      "path": "/api/attempts/{id}/questions/{qid}/solution-open",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_released_solutions",
+      "idempotency_mode": "set_membership_idempotent",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "retry_api_attempts__id__retry_post",
+      "method": "POST",
+      "path": "/api/attempts/{id}/retry",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_frozen_grade",
+      "idempotency_mode": "KNOWN_A01_alias_gap",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "report_api_attempts__id__report_post",
+      "method": "POST",
+      "path": "/api/attempts/{id}/report",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "attempt_owner_and_report_rights",
+      "idempotency_mode": "versioned_report_job",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "status_api_jobs__id__get",
+      "method": "GET",
+      "path": "/api/jobs/{id}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "job_owner_or_staff_set_scope",
+      "idempotency_mode": "read_dispatch_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "retry_job_api_jobs__id__retry_post",
+      "method": "POST",
+      "path": "/api/jobs/{id}/retry",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "job_owner_or_staff_set_scope",
+      "idempotency_mode": "job_state_retry",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "download_api_jobs__id__download_get",
+      "method": "GET",
+      "path": "/api/jobs/{id}/download",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "job_owner_and_report_rights",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "cron_api_cron_maintenance_post",
+      "method": "POST",
+      "path": "/api/cron/maintenance",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "cron_secret_dependency",
+      "idempotency_mode": "maintenance_replay",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "update_access_api_studio_reviewers_post",
+      "method": "POST",
+      "path": "/api/studio/reviewers",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_reviewer_administration",
+      "idempotency_mode": "role_replace",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "profiles_api_studio_profiles_get",
+      "method": "GET",
+      "path": "/api/studio/profiles",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "authorized_editorial_workspace",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "regrade_api_studio_sets__id__regrade_post",
+      "method": "POST",
+      "path": "/api/studio/sets/{id}/regrade",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "owner_scoring_successor",
+      "idempotency_mode": "HELD",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "internal_capacity_profile_v1",
+      "method": "GET",
+      "path": "/api/internal/capacity/profile",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_engineering_only",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "internal_safety_status_v1",
+      "method": "GET",
+      "path": "/api/internal/safety/status",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_engineering_only",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "template_api_studio_imports_template_get",
+      "method": "GET",
+      "path": "/api/studio/imports/template",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_template",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "list_imports_api_studio_imports_get",
+      "method": "GET",
+      "path": "/api/studio/imports",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_imports",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "create_import_api_studio_imports_post",
+      "method": "POST",
+      "path": "/api/studio/imports",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "owner_private_sources",
+      "idempotency_mode": "request_uuid_fingerprint",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "202"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "read_import_api_studio_imports__id__get",
+      "method": "GET",
+      "path": "/api/studio/imports/{id}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_imports",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "retry_import_api_studio_imports__id__retry_post",
+      "method": "POST",
+      "path": "/api/studio/imports/{id}/retry",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "owner_imports",
+      "idempotency_mode": "lease_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "error_report_api_studio_imports__id__errors_get",
+      "method": "GET",
+      "path": "/api/studio/imports/{id}/errors",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_imports",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "import_asset_api_studio_imports__id__questions__qid__asset__kind___index__get",
+      "method": "GET",
+      "path": "/api/studio/imports/{id}/questions/{qid}/asset/{kind}/{index}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_imports",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "schedule_import_api_studio_imports__id__schedule_post",
+      "method": "POST",
+      "path": "/api/studio/imports/{id}/schedule",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_immutable_import_publication",
+      "idempotency_mode": "insert_or_revision_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "toggle_live_api_studio_imports__id__live_post",
+      "method": "POST",
+      "path": "/api/studio/imports/{id}/live",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_import_admission",
+      "idempotency_mode": "revision_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "catalogue_api_competitions_get",
+      "method": "GET",
+      "path": "/api/competitions",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "authenticated_competition_metadata",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "leaderboard_api_competitions__id__get",
+      "method": "GET",
+      "path": "/api/competitions/{id}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "anonymous_cohort_after_close",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "save_review_api_attempts__id__reviews__qid__put",
+      "method": "PUT",
+      "path": "/api/attempts/{id}/reviews/{qid}",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_private_post_release_notes",
+      "idempotency_mode": "question_version_revision_CAS_body_receipt",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "expected_value_api_attempts__id__expected_value_post",
+      "method": "POST",
+      "path": "/api/attempts/{id}/expected-value",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_released_rules_only",
+      "idempotency_mode": "stateless_hypothetical",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "list_books_api_studio_chapter_books_get",
+      "method": "GET",
+      "path": "/api/studio/chapter-books",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_chapter_metadata",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "upload_book_api_studio_chapter_books_post",
+      "method": "POST",
+      "path": "/api/studio/chapter-books",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "owner_private_chapter_source",
+      "idempotency_mode": "source_hash_and_request_receipt",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "202"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "read_book_api_studio_chapter_books__id__get",
+      "method": "GET",
+      "path": "/api/studio/chapter-books/{id}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_chapter_metadata",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "retry_book_api_studio_chapter_books__id__retry_post",
+      "method": "POST",
+      "path": "/api/studio/chapter-books/{id}/retry",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "batch",
+      "owner_policy": "owner_chapter_processing",
+      "idempotency_mode": "lease_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "preview_chapter_api_studio_chapter_books__id__chapters__sid__get",
+      "method": "GET",
+      "path": "/api/studio/chapter-books/{id}/chapters/{sid}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_chapter_content",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "chapter_asset_api_studio_chapter_books__id__chapters__sid__questions__qid__asset__kind___index__get",
+      "method": "GET",
+      "path": "/api/studio/chapter-books/{id}/chapters/{sid}/questions/{qid}/asset/{kind}/{index}",
+      "roles": [
+        "owner",
+        "reviewer"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "staff_private_chapter_source",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "publish_book_api_studio_chapter_books__id__publish_post",
+      "method": "POST",
+      "path": "/api/studio/chapter-books/{id}/publish",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_verified_chapter_publication",
+      "idempotency_mode": "per_set_once_same_validity",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "chapter_live_api_studio_chapter_books__id__chapters__sid__live_post",
+      "method": "POST",
+      "path": "/api/studio/chapter-books/{id}/chapters/{sid}/live",
+      "roles": [
+        "owner"
+      ],
+      "workload_tier": "control",
+      "owner_policy": "owner_chapter_admission",
+      "idempotency_mode": "revision_CAS",
+      "body_limit_bytes": 4096,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "public_exams_api_chapter_exams_get",
+      "method": "GET",
+      "path": "/api/chapter-exams",
+      "roles": [
+        "public_or_handler_checked"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "public_chapter_metadata",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "my_exams_api_my_chapter_exams_get",
+      "method": "GET",
+      "path": "/api/my/chapter-exams",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_profile_chapter_metadata",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Auth roles derive from actual dependencies; ownership and transaction correctness require independent tests."
+    },
+    {
+      "operation_id": "catalogue_api_exam_navigation__slug__catalogue_get",
+      "method": "GET",
+      "path": "/api/exam-navigation/{slug}/catalogue",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "current_profile_exam_metadata",
+      "idempotency_mode": "read",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Exam/type filters and ownership tested in isolated fixtures; this does not establish 500k capacity or cross-resource transaction proof."
+    },
+    {
+      "operation_id": "history_api_exam_navigation__slug__history_get",
+      "method": "GET",
+      "path": "/api/exam-navigation/{slug}/history",
+      "roles": [
+        "authenticated_profile"
+      ],
+      "workload_tier": "normal",
+      "owner_policy": "attempt_owner_exam_history",
+      "idempotency_mode": "read_with_expiry_side_effect",
+      "body_limit_bytes": 0,
+      "status": "IMPLEMENTED_PILOT_INGRESS_WITH_LIVE_CELL_GAPS",
+      "gaps": [
+        "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+      ],
+      "current_response_models": [
+        "200",
+        "422"
+      ],
+      "note": "Copied from mounted route contracts. Exam/type filters and ownership tested in isolated fixtures; this does not establish 500k capacity or cross-resource transaction proof."
+    }
+  ],
+  "complete_target_contract": false
+}

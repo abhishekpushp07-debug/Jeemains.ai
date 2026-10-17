@@ -1,0 +1,239 @@
+{
+  "schema_version": "dependency-triage-v1",
+  "recorded_at_utc": "2026-10-13T17:38:37.235722+00:00",
+  "status": "OPEN_FINDINGS_NOT_A_CLEAN_SCAN",
+  "release_allowed": false,
+  "signed_sbom": false,
+  "backend": {
+    "scanner": "pip-audit",
+    "dependency_rows": 157,
+    "affected_packages": [],
+    "advisory_records": 0,
+    "unscanned": []
+  },
+  "frontend": {
+    "scanner": "yarn audit --groups dependencies",
+    "unique_advisories": {
+      "1095141": {
+        "package": "nth-check",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
+        "patched_versions": ">=2.0.1",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1108429": {
+        "package": "webpack-dev-server",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-9jgg-88mc-972h",
+        "patched_versions": ">=5.2.1",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1108430": {
+        "package": "webpack-dev-server",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-4v9v-hfq4-rm2v",
+        "patched_versions": ">=5.2.1",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1119074": {
+        "package": "webpack-dev-server",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-79cf-xcqc-c78w",
+        "patched_versions": ">=5.2.4",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1121087": {
+        "package": "webpack-dev-server",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-mx8g-39q3-5c79",
+        "patched_versions": ">=5.2.5",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1123965": {
+        "package": "webpack-dev-server",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-f5vj-f2hx-8m93",
+        "patched_versions": ">=5.2.6",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1123966": {
+        "package": "webpack-dev-server",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-m28w-2pqf-7qgj",
+        "patched_versions": ">=5.2.6",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1109574": {
+        "package": "postcss",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-7fh5-64p2-3v2j",
+        "patched_versions": ">=8.4.31",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1117015": {
+        "package": "postcss",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-qx2v-qp2m-jg93",
+        "patched_versions": ">=8.5.10",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1124252": {
+        "package": "postcss",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-6g55-p6wh-862q",
+        "patched_versions": ">=8.5.12",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1130709": {
+        "package": "postcss",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+        "patched_versions": ">=8.5.23",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1139510": {
+        "package": "postcss",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849",
+        "patched_versions": ">=8.5.18",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1113686": {
+        "package": "serialize-javascript",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-5c6j-r48x-rmvq",
+        "patched_versions": ">=7.0.3",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1119440": {
+        "package": "serialize-javascript",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-qj8w-gfj5-8c6v",
+        "patched_versions": ">=7.0.5",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1117689": {
+        "package": "underscore",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-qpx9-hpmf-5gmw",
+        "patched_versions": ">=1.13.8",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1119438": {
+        "package": "@tootallnate/once",
+        "severity": "low",
+        "url": "https://github.com/advisories/GHSA-vpq2-c234-7xj6",
+        "patched_versions": ">=2.0.1",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1119441": {
+        "package": "uuid",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+        "patched_versions": ">=11.1.1",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1139520": {
+        "package": "svgo",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-2p49-hgcm-8545",
+        "patched_versions": ">=2.8.3",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1193737": {
+        "package": "svgo",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-w27v-7q3p-w38r",
+        "patched_versions": ">=2.8.4",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1193740": {
+        "package": "svgo",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-4vpr-x523-8j87",
+        "patched_versions": ">=2.8.4",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1240027": {
+        "package": "webpack-dev-middleware",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-g84c-rxfj-3j2c",
+        "patched_versions": ">=7.4.6",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1240912": {
+        "package": "node-forge",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
+        "patched_versions": "<0.0.0",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1240992": {
+        "package": "braces",
+        "severity": "high",
+        "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+        "patched_versions": "<0.0.0",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1241202": {
+        "package": "sprintf-js",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-hp3w-g68c-fv3c",
+        "patched_versions": "<0.0.0",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      },
+      "1241232": {
+        "package": "postcss-selector-parser",
+        "severity": "moderate",
+        "url": "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+        "patched_versions": ">=7.1.6",
+        "owning_packet": 7,
+        "triage": "OPEN_RUNTIME_VS_BUILD_REACHABILITY_AND_UPGRADE_REVIEW"
+      }
+    },
+    "severity_counts": {
+      "critical": 0,
+      "high": 10,
+      "moderate": 14,
+      "low": 1
+    },
+    "scanner_errors": []
+  },
+  "artifact_sha256": {
+    "docs/packet1/evidence/python-dependency-audit-current.json": "150fa7508f0bac3de6a1d76471a3f3d1c3e586253b143928ff4de2c1eac317b9",
+    "docs/packet1/evidence/frontend-dependency-audit-current.jsonl": "5760d36f869587b4f264c29676381cb56639ddd1240a331d3b00a6643a599e5a",
+    "backend/requirements.txt": "fda271b984bc3724b27d6ffd2cebc76c29ab2e0c2ca3b838a1167fb77892c626",
+    "frontend/yarn.lock": "309e9548d1354450e8aaa51a22b3f4d941b79d2ea4d19567c9d90790cffccb57"
+  },
+  "requirements": [
+    "All unresolved findings need a tested fix or explicit justified security disposition before release",
+    "Two skipped Python packages require separate analysis; never treat skip as safe",
+    "Upload holds mitigate a route, not a vulnerable package or all parsing call sites",
+    "Major FastAPI/Starlette/Motor/PyMongo upgrades require a compatible combination and full regressions",
+    "No vulnerability was silently suppressed, auto-fixed, or labelled non-exploitable by this summary"
+  ]
+}

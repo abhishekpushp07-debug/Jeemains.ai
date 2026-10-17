@@ -1,0 +1,49 @@
+{
+  "summary": "PHASE 1A CORE ISOLATION TEST completed successfully. All 43 tests passed for tejas_core.py and tejas_storage.py with actual source PDFs (questions.pdf and solutions.pdf).",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Storage roundtrip: Successfully uploaded and retrieved questions.pdf (226KB) and solutions.pdf (416KB) from private storage using EMERGENT_LLM_KEY",
+    "build_questions: Exactly 75 unique questions Q1-Q75 extracted",
+    "build_questions: Correct distribution of 60 MCQ and 15 integer questions",
+    "build_questions: Correct subject distribution (25 Mathematics, 25 Physics, 25 Chemistry)",
+    "build_questions: Verified correct answers Q22=13440 and Q23=10385",
+    "build_questions: No duplicate question numbers found",
+    "build_questions: All solutions matched by number (solution_number == question number)",
+    "Crop fidelity: All 10 specified questions (Q7, Q8, Q22, Q23, Q27, Q31, Q41, Q52, Q56, Q67) have valid PNG crops for both questions and solutions",
+    "score_attempt: All correct answers = 300 marks (75 questions × 4 marks)",
+    "score_attempt: All skipped = 0 marks with accuracy = null",
+    "score_attempt: Mixed scenario (25 correct, 25 wrong, 25 skipped) = 75 marks with correct penalty calculation",
+    "score_attempt: Normalized integer input correctly handles signs and leading zeros",
+    "public_question: No answer/solution/s_refs leakage in public API",
+    "public_question: Contains all expected fields (id, number, subject, type, text, options, q_refs, etc.)",
+    "generate_report: Created 77-page PDF report (9.7MB) with all 75 questions and solutions",
+    "generate_report: Report saved to /app/test_reports/core-report.pdf",
+    "generate_report: Report contains proper header, summary, and all question-solution pairs",
+    "validate_pdf: Accepts valid PDF files",
+    "validate_pdf: Rejects non-PDF data with appropriate error message",
+    "validate_pdf: Rejects oversized PDFs (>50MB) with appropriate error message",
+    "validate_pdf: Rejects empty data with appropriate error message"
+  ],
+  "test_report_links": [
+    "/app/backend/test_core.py",
+    "/app/test_reports/core-report.pdf"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/backend/test_core.py"
+  ],
+  "success_percentage": {
+    "backend": "100% (43/43 tests passed)",
+    "frontend": "N/A (frontend testing skipped as per instructions)"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false
+}

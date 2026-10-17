@@ -1,0 +1,25 @@
+{
+  "schema_version": "audit-reproduction-register-v1",
+  "rule": "An explicit unverified task is not passing evidence or closure. Permanent fixes stay with their owning packets.",
+  "chapter50_latest_checkpoint": {"backend_and_source_tests_passed":396,"failed":0,"evidence":"test_reports/chapter_final_full_regression.log","feature_release":"test_reports/chapter50_final_verified.json","live_tests":94,"verified_source_keys":4700,"validity_until":"2027-10-17","capacity_qualification":"UNQUALIFIED"},
+  "latest_verified_checkpoint": {"backend_passed":294,"backend_failed":0,"evidence":"test_reports/guide04_full_packet1.log","frontend_evidence":"test_reports/iteration_73_verified.json","note":"A01-A06 current isolated regressions pass with no xfails. This does not close wider packet production qualification or remaining explicitly unverified tasks. Prior assertions of live owner rotation pending are superseded by authorized owner update and read-only login verification."},
+  "entries": [
+    {"id":"A01","owner_packet":6,"status":"CURRENT_REGRESSION_PASS_TEST_SCOPE_ONLY","test":"tests/packet1/test_audit_regressions.py::test_a01_retry_alias_survives_completed_retry"},
+    {"id":"A02","owner_packet":5,"status":"CURRENT_REGRESSION_PASS_TEST_SCOPE_ONLY","test":"tests/packet1/test_audit_regressions.py::test_a02_publish_has_one_same_version_archive"},
+    {"id":"A03","owner_packet":5,"status":"CURRENT_REGRESSION_PASS_TEST_SCOPE_ONLY","test":"tests/packet1/test_audit_regressions.py::test_a03_concurrent_question_edits_preserve_both"},
+    {"id":"A04","owner_packet":5,"status":"CURRENT_REGRESSION_PASS_TEST_SCOPE_ONLY","test":"tests/packet1/test_audit_regressions.py::test_a04_unknown_audience_denied"},
+    {"id":"A05","owner_packet":4,"status":"CURRENT_REGRESSION_PASS_TEST_SCOPE_ONLY","test":"tests/packet1/test_audit_regressions.py::test_a05_waiting_grade_job_drains_without_second_trigger"},
+    {"id":"A06","owner_packet":4,"status":"CURRENT_REGRESSION_PASS_TEST_SCOPE_ONLY","test":"tests/packet1/test_audit_regressions.py::test_a06_extraction_stages_proposal_no_destination_write"},
+    {"id":"A04b","owner_packet":5,"status":"CURRENT_INGRESS_AND_UNKNOWN_AUDIENCE_REGRESSIONS_PASS","test":"tests/packet1/test_ingress_contracts.py::test_actual_studio_create_read_edit_settings_roundtrip","remaining":"Stored unknown audience predicate now fails closed per A04; broader edit/publication migration qualification is not inferred"},
+    {"id":"A05b","owner_packet":4,"status":"UNVERIFIED_IN_NEW_HARNESS","task":"Reproduce two report jobs competing for capacity and verify durable autonomous drain, isolated DB and explicitly labelled object-storage double only"},
+    {"id":"A07","owner_packet":5,"status":"UNVERIFIED_IN_NEW_HARNESS","task":"Prove event-loop starvation from source validation with a controlled parser delay and concurrent deadline-sensitive API work; never stress the preview"},
+    {"id":"A08","owner_packet":8,"status":"UNVERIFIED_IN_NEW_HARNESS","task":"Instrument repository calls to prove result analytics recompute from raw state instead of materialized immutable snapshots"},
+    {"id":"S01","owner_packet":4,"status":"CONTAINED_ORIGINAL_FAILURE_NOT_PORTED","test":"tests/packet1/test_audit_regressions.py::test_hold_rejects_without_receiving_body","task":"In an isolated parser process, reproduce original multipart pre-route resource-limit failures using bounded fixtures; upload hold is not a patched sandbox"},
+    {"id":"F01","owner_packet":7,"status":"UNVERIFIED_IN_NEW_HARNESS","task":"Browser recovery cases for malformed, oversized and incompatible persisted attempt state; do not overwrite real local drafts"},
+    {"id":"F02","owner_packet":7,"status":"UNVERIFIED_IN_NEW_HARNESS","task":"Create two synthetic profiles' pending drafts, sign out one, and prove the other profile's recovery remains intact"},
+    {"id":"F03","owner_packet":7,"status":"UNVERIFIED_IN_NEW_HARNESS","task":"Render actual typed MCQ option labels containing LaTeX and compare semantic math output, not only stem rendering"},
+    {"id":"STAFF-CREDENTIAL-INCIDENT","owner_packet":1,"status":"AUTHORIZED_OWNER_ROTATION_AND_LOGIN_VERIFIED","test":"tests/packet1/test_staff_rotation.py","remaining":"Original owner identity was rotated in prior authorized work, and new owner login was verified read-only in iteration73. Broader incident response and production identity qualification remain separate"}
+  ],
+  "original_authority":"docs/audit/AUDIT_REPORT.md",
+  "capacity_qualification":"UNQUALIFIED"
+}

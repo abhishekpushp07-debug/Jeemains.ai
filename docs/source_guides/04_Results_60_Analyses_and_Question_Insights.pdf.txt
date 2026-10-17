@@ -1,0 +1,1056 @@
+=== PAGE 1 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 01 / 23
+Copy-ready instruction: build the
+results engine
+VOLUME 4 / RESULTS AND LEARNING INTELLIGENCE
+Emergent, implement this volume as the authoritative specification for scoring explanations,
+results, question review, cohort comparisons and study recommendations. Deliver all 60
+numbered analyses, with graceful unavailable states when evidence is insufficient. Build
+working calculations and drill-through evidence before adding decorative charts. Connect this
+engine to the exam adapters, approved question bank and immutable attempts specified in
+the other volumes.
+Use facts before interpretations
+Provide an immediate score receipt after a submission has reached the server and the grading job
+has completed. Identify the attempt, paper, exam preset, scoring version, key version and
+submission reason. Show exact marks, full-correct, partial-credit, wrong, unanswered and excluded
+counts. Separate awards caused by invalid questions from ordinary earned marks. Keep results
+pending rather than fabricate a score while grading is unavailable.
+Organize analysis into Score, Subjects, Topics, Time, Strategy, Questions, Cohort and Next Steps.
+Every metric card must open its supporting question list. Each card must state its denominator,
+evidence count, observation period and calculation version. A personal count can exist after one
+attempt; an interpretation of ability requires broader evidence. Do not convert thin evidence into a
+precise-looking strength score.
+Deliver the complete review workflow
+Let Tejas review every question with his final server-committed response, scoring contribution,
+approved answer, source-linked solution, approved tags and time evidence. Display explanations
+only after their release condition. Preserve the original question numbering and stable identifiers
+even when options were shuffled. Make the same workflow available to hundreds of thousands of
+learners through access-controlled, asynchronously generated reports.
+Treat comparisons honestly
+Label all platform comparisons as platform cohort comparisons. Never label a practice percentile
+as an official NTA score, national rank, intelligence percentile or admission probability. Do not
+estimate a question-wise ability percentile from a binary correct or wrong outcome. Instead
+provide cohort response statistics and, where evidence supports them, a conditional
+correct-response time percentile. Use the explicit cohort rules and suppression gates in this
+volume.
+ACCEPTANCE / PRECAUTIONS
+Show a working report for every supported exam adapter.
+Reconcile the score receipt and every drill-through total.
+Leave unavailable metrics informative, with the missing evidence named.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.01  /  23
+
+
+=== PAGE 2 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 02 / 23
+One measurement contract and
+reproducible score ledger
+IMPLEMENTATION / DATA MODEL
+Create a typed analytics contract shared by grading, dashboards, exports and admin tools. Do
+not let chart components invent formulas or recalculate scores independently. Materialize a
+versioned report from the immutable attempt and an explicitly identified approved scoring policy.
+Reuse that report wherever the learner sees a result.
+Store the calculation inputs
+Store attempt_id, learner_id, paper_version_id, exam_adapter_version, scoring_policy_version,
+answer_key_version, started_at, deadline_at, submitted_at and submission_reason. For each delivered
+item store canonical_question_id, delivered_option_mapping, final_committed_response,
+commitment_sequence, evaluation_outcome, signed_score_contribution, maximum_contribution and
+award_reason. Keep browser-selected drafts distinct from server-committed responses. A draft shown
+in the browser is not evidence that an answer was accepted.
+Use ordinary eligible items E for skill and completion metrics. Partition evaluated nonempty responses
+into full-correct C, partial-credit P and incorrect W, so attempted A = C + P + W. Represent
+unanswered U separately. Exclude invalid or award-only items from these partitions and show their
+count X. Define ordinary positive marks G, penalty magnitude L and separate award adjustment B, so
+total S = G - L + B.
+Make context explicit
+Include approved subject, chapter, concept, prerequisite and editorial difficulty identifiers, along with
+tag version and reviewer status. Include original first-exposure status, practice or timed mode,
+accommodation preset, language, solution exposure and integrity review status. Never merge these
+contexts silently. Multi-tagged questions may appear in several filtered views, but an overall count
+must deduplicate canonical items.
+Attach a metric object with metric_id, value, unit, numerator, denominator, sample_count,
+eligibility_query_hash, evidence_state, unavailable_reason and calculation_version. Use null for
+undefined values. Do not serialize Infinity, NaN or a zero that really means unknown. Store raw
+precision and format only in the view layer; rounding must not affect grading. For sample medians,
+average the two middle sorted values when n is even. For quartiles, use zero-based position h =
+(n-1)*p and linearly interpolate its neighboring sorted values. Version this quantile method; keep
+percentile ranks on the separate inclusive-count convention.
+Revisions and reproducibility
+Keep the historical report and create a new revision when an approved key, item status or scoring
+policy changes. Explain every item-level delta and the total difference. Rebuild dependent cohort
+statistics using the revised version, then publish the report and cohort snapshot atomically. A cache
+containing an old key must not be mixed with a newly graded score.
+ACCEPTANCE / PRECAUTIONS
+Verify E = C + P + W + U for ordinary eligible items.
+Verify S equals the sum of all item ledger contributions.
+Expose report revision time and scoring policy identifiers.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.02  /  23
+
+
+=== PAGE 3 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 03 / 23
+Percentiles, ties, cohort size and
+comparability
+MATHEMATICS / PLATFORM COHORT POLICY
+Implement one documented platform percentile convention: P(s) = 100 * count(score <= s) /
+N. Include the learner in the cohort when their attempt satisfies its eligibility rules. Give tied
+scores identical percentiles. Use exact decimal or rational comparisons before display
+rounding. This remains a platform statistic.
+A testable numeric example
+Use this ten-person demonstration cohort only in tests: scores 10, 20, 20, 30, 40, 40, 40, 50, 60
+and 70. A score of 40 has seven scores at or below it, therefore platform percentile 70.00. A score
+of 20 has percentile 30.00. The highest score has 100.00. Do not display this tiny fixture as a
+production benchmark. The proposed production gate is at least 100 eligible distinct learners.
+Specify who is being compared
+Define a cohort by exact paper version, exam preset, effective key and scoring versions, mode,
+timer policy, solution-release exposure state and a declared date window. Use each learner's first
+valid attempt only when every ordinary eligible canonical item was unseen in recorded platform
+history before start. An encounter in another paper, any hint, or prior solution access counts as
+exposure and excludes the whole attempt from the primary paper cohort. Also enforce unexposed
+eligibility for each item benchmark. Honor declared external exposure; unreported off-platform
+exposure remains a limitation. Exclude unknown exposure histories; present exposed and repeat
+attempts separately. Do not select each learner's best result: that biases the comparison upward.
+Exclude staff preview accounts and confirmed invalid attempts; log every eligibility change.
+Snapshot eligible N, exclusions, date window, update time and cohort query hash. Keep a running
+cohort visibly provisional until its window closes. If N is below 100, show personal results and an
+insufficient-cohort message. More learners do not repair a nonrepresentative sample; never
+extrapolate platform results to all Indian examinees.
+Separate official results and question statistics
+Official JEE Main NTA percentiles use the relevant official shift population; the total percentile is not
+the mean of subject percentiles, and percentile is different from percentage marks [S4-01]. Do not
+recreate official normalization from this platform's participants. Do not merge different mock
+papers into a national percentile.
+For one binary-scored item show the proportion of eligible learners who answered fully correctly,
+including unanswered learners in the denominator. Call this a cohort response statistic. A correct
+learner belongs to a large tie group; that observation does not locate their individual ability. Keep
+conditional time comparisons separate and exclude partial-credit items from binary-only claims.
+ACCEPTANCE / PRECAUTIONS
+Test ties, all-equal scores, negative scores and zero eligible learners.
+Ensure total percentile is calculated directly from total scores.
+Show N and cohort identity beside every comparison.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.03  /  23
+
+
+=== PAGE 4 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 04 / 23
+Question review, approved solutions
+and release controls
+CONTENT / EXPLANATION UX
+Build a complete question review workspace that preserves source fidelity and supports both
+text and image-based questions. Students must understand the answer, their own response and
+the scoring outcome without opening a separate PDF for every question. Approved source PDF
+crops must remain available as a fidelity fallback.
+The review panel contract
+Display original question number, canonical identifier, subject and approved tags; the complete stem,
+figures, passages and options; the learner's final committed response; accepted answer or answer
+set; signed marks; and the grading explanation. Show partial credit, no credit, penalty, invalid item
+and special award as distinct states. For numerical questions explain the configured accepted values
+and precision rules rather than quietly rounding the student response.
+Use the canonical option identity when explaining a shuffled option. If the learner saw option B but the
+master PDF calls the same answer D, show both mappings clearly. Store original question PDF page
+and bounding box, original solution PDF page and mapping evidence. Offer a report-content-problem
+control attached to those identifiers, without changing the learner's saved response.
+Make solutions trustworthy
+Prefer the owner-provided approved solution. Permit an additional explanation only after subject
+review; label its origin and version. Do not let an AI silently replace the supplied answer key, invent a
+derivation or fix an ambiguous question. Offer step-by-step text, source images, accessible
+mathematics and an optional alternate method. Keep a distinct correction notice when a supplied
+solution has been reviewed and amended.
+Use approved error notes for common distractors and numerical traps. Explain exactly which
+assumption or step is wrong. A response alone seldom proves the student's reasoning, so phrase the
+note as a possible misconception and let the learner confirm or reject it. Do not call every wrong
+answer careless.
+Enforce release on the server
+Support immediate post-submission release, scheduled release after a test window, and
+teacher-controlled release. Before release, return no answer key, hidden solution text, distractor
+explanation or predictable asset URL in the API, page source, preload or export. Publish an explicit
+release timestamp and show a pending explanation state. Snapshot solution exposure so later
+attempts are correctly labeled as exposed practice.
+Keep marks available when scoring is complete even if explanations are embargoed, subject to the
+test owner's configured result-release policy. Never let cohort statistics leak a delayed answer
+through an option marked correct.
+ACCEPTANCE / PRECAUTIONS
+Test embargoed APIs and PDF downloads using a student account.
+Check every solution mapping against its canonical question.
+Preserve source accessibility and zoom on small screens.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.04  /  23
+
+
+=== PAGE 5 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 05 / 23
+A01-A05: score and response
+completeness
+ANALYSIS CATALOG / 01 OF 12
+Implement these five measurements from the authoritative item ledger. Permit exact
+personal facts after one completed attempt, while keeping teaching interpretations cautious.
+All counts refer to ordinary eligible items unless the card explicitly includes excluded or
+award-only items. Let every count open a filtered question list.
+A01 / Net awarded marks
+Inputs: signed contributions under the current approved key. Formula: S = sum(score_q), including
+explicitly identified awards. Evidence: a finalized grading revision; otherwise show grading
+pending. Action: inspect the largest lost-mark contributors and any adjustment notice. Limit: raw
+marks compare directly only within the same scoring context; they do not indicate national rank or
+percentile.
+A02 / Fully correct response count
+Inputs: final committed response and full-correct evaluation outcome. Formula: C =
+count(full_correct). Evidence: all relevant items graded; preserve a pending count if any remain
+unresolved. Action: revisit correct answers whose reasoning felt uncertain. Limit: an observed
+correct answer can result from guessing or prior exposure and does not establish concept mastery.
+A03 / Incorrect and partial outcomes
+Inputs: distinct evaluation outcomes. Formula: W = count(incorrect), P = count(partial_credit);
+display both separately within this analysis. Evidence: approved adapter classification. Action:
+open the wrong list first, then examine why partial answers failed full-credit criteria. Limit: a
+partially correct multiselect response is not equivalent to a wrong single-choice answer; do not
+flatten their explanations.
+A04 / Attempted-answer accuracy
+Inputs: C and A = C + P + W. Formula: 100 * C / A. Evidence: A > 0; show the exact fraction for any
+A, but suppress strength labels below 10 attempts. Action: inspect inaccurate attempted topics
+before increasing attempts blindly. Limit: excluding unanswered items can make selective
+students look stronger; pair this value with completion and partial-credit counts.
+A05 / Response completion rate
+Inputs: attempted A and eligible delivered E. Formula: 100 * A / E, with unanswered count E - A.
+Evidence: E > 0 and submission finalized. Action: distinguish unvisited questions from viewed but
+unanswered questions before planning coverage. Limit: completion rewards submitting a response,
+not correct reasoning; high completion can coexist with negative marks and poor accuracy.
+ACCEPTANCE / PRECAUTIONS
+Return null when A or E is zero.
+Never count an unsaved browser draft as an attempt.
+Keep excluded-item awards visible outside ordinary outcome counts.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.05  /  23
+
+
+=== PAGE 6 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 06 / 23
+A06-A10: marks earned, penalties and
+subject balance
+ANALYSIS CATALOG / 02 OF 12
+Implement score decomposition without inventing a single strategy score. Read the signed
+item contributions produced by each exam adapter; question categories may carry different
+rewards, penalties and partial-credit rules. Present values in marks first and make all ratios
+explicit about their denominator.
+A06 / Ordinary positive marks earned
+Inputs: ordinary item contributions s_q. Formula: G = sum(max(s_q, 0)), excluding separate
+award-only adjustments B. Evidence: finalized ordinary grading. Action: identify which subjects and
+question types generate the positive marks. Limit: G ignores penalties and is not the final result;
+partial-credit contributions remain positive marks rather than full-correct counts.
+A07 / Penalty marks lost
+Inputs: negative ordinary contributions. Formula: L = sum(max(-s_q, 0)). Evidence: finalized
+grading; zero is valid when the preset has no negative marking. Action: review the exact penalized
+responses and their stated confidence where available. Limit: a penalty does not prove an
+irresponsible guess; a student may have made a sincere reasoning error.
+A08 / Penalty-to-positive-marks ratio
+Inputs: L and G. Formula: 100 * L / G. Evidence: G > 0; otherwise show L with ratio unavailable.
+Action: compare the ratio across comparable first attempts and inspect preventable error
+categories. Limit: values may exceed 100 percent; do not clamp them. This is not penalty divided
+by final net marks, which becomes unstable near zero.
+A09 / Percentage of configured maximum marks
+Inputs: total S and current effective maximum M from the scoring policy. Formula: 100 * S / M.
+Evidence: M > 0 and all special awards resolved. Action: read alongside raw marks to understand
+the scale of this paper. Limit: allow negative percentages where rules permit negative scores; this
+percentage is not a cohort percentile or an official normalized score.
+A10 / Subject marks contribution
+Inputs: item-to-subject assignment and signed contributions. Formula: S_subject = sum(s_q within
+subject); show G_subject, L_subject and awards separately. Evidence: every item has one
+approved primary scoring subject. Action: choose a subject for detailed review based on its actual
+mark losses and coverage. Limit: subjects with different item counts or time demands cannot be
+judged solely by raw totals.
+ACCEPTANCE / PRECAUTIONS
+Reconcile subject sums exactly to the total score.
+Test zero gross marks with nonzero penalties.
+Display different marking categories rather than assuming one reward/penalty pair.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.06  /  23
+
+
+=== PAGE 7 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 07 / 23
+A11-A15: chapters, concepts, response
+types and exposure
+ANALYSIS CATALOG / 03 OF 12
+Implement academic breakdowns from reviewed tags. Display descriptive group counts whenever
+available, but require at least 10 eligible attempted items before showing performance-oriented
+recommendations for a group. Identify insufficient coverage instead of presenting one question as
+a reliable chapter judgment. All thresholds here are proposed product defaults, not validated ability
+cutoffs.
+A11 / Chapter mark contribution
+Inputs: approved chapter tags, item score and tag weights. Formula: sum(w_qg * s_q), where weights
+across a question's assigned chapters sum to one. Evidence: reviewed chapter mapping; show
+recommendations only for groups with at least 10 attempts. Action: locate chapters contributing losses.
+Limit: fractional attribution is an accounting convention, not a measurement of each chapter's causal
+role.
+A12 / Concept attempted accuracy
+Inputs: fully correct and attempted items matching one approved concept. Formula: 100 * C_concept /
+A_concept. Evidence: denominator positive; advice requires at least 10 distinct items across two
+sessions. Action: inspect repeated reasoning errors within the concept. Limit: overlapping tags make
+separate concept cards nonadditive, and unequal item difficulty can distort comparisons.
+A13 / Response-type performance
+Inputs: response type, signed marks and configured maxima. Formula: sum(s_q) / sum(max_q),
+separately for single-choice, numerical and supported multiselect categories. Evidence: positive
+maximum; recommend changes only above 10 items per type. Action: compare handling of input and
+selection tasks. Limit: response-type differences may reflect topic and marking differences rather than
+input skill.
+A14 / Editorial difficulty outcome matrix
+Inputs: human-approved difficulty labels and final outcomes. Formula: C/A and net marks within each
+editorial band, with unanswered counts. Evidence: at least 10 attempted items per band for
+interpretation; unknown labels remain a separate row. Action: identify easier-band errors worth checking
+first. Limit: editorial difficulty is a judgment and must not masquerade as nationally calibrated difficulty.
+A15 / First-exposure versus repeat performance
+Inputs: canonical item exposure history and solution access before the attempt. Formula: C/A separately
+for unseen, previously seen and solution-exposed items. Evidence: known exposure history and at least
+10 attempts per compared group. Action: favor fresh questions when checking transfer. Limit:
+remembered answers and self-selected repeats inflate performance; cross-group gaps do not estimate
+the effect of studying.
+ACCEPTANCE / PRECAUTIONS
+Deduplicate items within each filtered concept view.
+Display unknown tags and exposure status explicitly.
+Keep weighted chapter totals additive and concept totals clearly overlapping.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.07  /  23
+
+
+=== PAGE 8 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 08 / 23
+A16-A20: timer use and observable
+question time
+ANALYSIS CATALOG / 04 OF 12
+Collect low-cost visibility and visit events, then distinguish official timer consumption from
+observed on-screen activity. Reading can occur without interaction, and missing telemetry is
+not inactivity. Define a reconciled timing ledger before deriving time advice. Suppress
+question-time advice below 90 percent usable timing coverage for the relevant group.
+A16 / Timer time consumed
+Inputs: server start, effective deadline, authorized adjustments and submission receipt. Formula:
+min(submitted_at, deadline_at) - started_at, adjusted by documented timer rules. Evidence:
+complete server clock ledger. Action: examine whether substantial available time remained at
+submission. Limit: elapsed time includes offline or hidden-page periods in an unpaused timed exam;
+it does not measure active thinking.
+A17 / Observed visible question time
+Inputs: question-enter, question-leave, visibility and capped heartbeat intervals. Formula: union
+duration of valid visible intervals attributed to each question, summed without overlap. Evidence:
+valid timestamp order and coverage flags. Action: compare where observable attention was
+allocated. Limit: visibility does not establish mental focus, and a static visible page may still be
+actively read.
+A18 / Unobserved timer fraction
+Inputs: timer duration D, visible attributed T and recorded hidden duration H. Formula: 100 * max(D -
+T - H, 0) / D after interval reconciliation. Evidence: D > 0; distinguish known hidden time from
+missing events. Action: inspect connection or telemetry gaps before trusting timing advice. Limit:
+unobserved time must not be called laziness, cheating or distraction.
+A19 / Time on slow incorrect responses
+Inputs: wrong items, observed time and approved per-item correct-response median. Formula:
+sum(T_q where incorrect and T_q > 2 * benchmark_q). Evidence: five usable wrong items and at
+least 30 correct cohort times per benchmark. Action: review stopping and revisiting tactics. Limit:
+this descriptive threshold is configurable; slow errors may reflect legitimate effort, not wasted
+thought.
+A20 / Question budget overrun
+Inputs: a student-approved pretest time budget b_q and observed T_q. Formula: sum(max(T_q - b_q,
+0)); list individual overruns. Evidence: budget existed before the attempt and valid timing; otherwise
+unavailable. Action: adjust the next practice budget after reviewing difficulty. Limit: the overrun is
+measured against a plan, not an optimal schedule or guaranteed lost marks.
+ACCEPTANCE / PRECAUTIONS
+Do not double-count simultaneous tabs or duplicated heartbeats.
+Test reconnection, backgrounding and early submission.
+Keep the server deadline independent of the analytics heartbeat stream.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.08  /  23
+
+
+=== PAGE 9 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 09 / 23
+A21-A25: allocation, revisits and answer
+changes
+ANALYSIS CATALOG / 05 OF 12
+Implement these analyses from ordered visits and accepted response commitments. A
+navigation click is not an answer change, and a local selection may never become a saved
+response. Show the actual sequence and policy-scored contributions when explaining changes.
+Use observed time only where its coverage is adequate.
+A21 / Subject time allocation
+Inputs: valid question-visible time and primary subject. Formula: 100 * T_subject / sum(T_subject),
+alongside absolute minutes. Evidence: positive observed time and at least 90 percent usable item
+timing. Action: compare allocation with the student's pretest plan and mark contribution. Limit: equal
+subject time is not inherently desirable; different papers and personal strengths require different
+allocations.
+A22 / First-visit duration
+Inputs: each eligible item's first valid visible visit. Formula: median(first_visit_seconds), with a
+distribution by outcome. Evidence: at least five usable first visits per reported group. Action: identify
+where an initial scan became an extended attempt. Limit: first-visit time may include reading shared
+passages or diagrams; it is not pure solution time.
+A23 / Revisit time share
+Inputs: visible visits ordered per item. Formula: 100 * sum(duration of visits after the first) / total
+attributed time. Evidence: positive total and at least five visited items. Action: inspect whether
+revisits resolved uncertainty or repeated an unproductive approach. Limit: a high revisit share can be
+a sensible checking strategy; it is not automatically inefficient.
+A24 / Positive score difference after revisions
+Inputs: first committed response, final response and current scoring policy. Formula:
+sum(max(score(final_q) - score(first_commit_q), 0)). Evidence: complete commitments for revised
+items; show exact differences after one revision. Action: review the reasoning behind beneficial
+changes. Limit: this compares recorded endpoints and cannot prove that changing answers caused
+improvement or predict future gains.
+A25 / Negative score difference after revisions
+Inputs: the same committed endpoints. Formula: sum(max(score(first_commit_q) - score(final_q), 0)).
+Evidence: complete revision history; annotate clears and timeout acceptance rules. Action: study
+harmful changes and the evidence used to justify them. Limit: final correctness is hindsight; do not
+prescribe never changing answers from one outcome or count uncommitted drafts as lost marks.
+ACCEPTANCE / PRECAUTIONS
+Render first and final canonical option identities consistently.
+Use the current key for both revision endpoints.
+Show unknown revision history instead of silently assuming no changes.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.09  /  23
+
+
+=== PAGE 10 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 10 / 23
+A26-A30: late responses, review
+recovery and omissions
+ANALYSIS CATALOG / 06 OF 12
+Implement a descriptive view of how the attempt developed over time. Do not infer fatigue,
+stress, attention disorders or cheating from these observations. Divide the attempt using its
+authorized duration and keep the relevant timestamp definition visible. Tie every strategy
+suggestion to actual question evidence and the learner's stated experience.
+A26 / Late-window attempted accuracy
+Inputs: time of first accepted response commitment and final outcome. Formula: C/A for items first
+committed in the final 20 percent of authorized duration versus earlier items. Evidence: at least 10
+items in each group and valid timestamps. Action: review late errors and pace planning. Limit: late
+items may be harder or from another subject; the gap does not diagnose fatigue.
+A27 / Recovery of unanswered review items
+Inputs: items first marked for review while unanswered and their final outcomes. Formula: recovered
+full-correct items / initially unanswered review items. Evidence: at least five such items and ordered
+review events. Action: examine which revisit choices converted omissions into correct responses.
+Limit: a review flag is an interface state, and successful recovery does not reveal the optimal review
+order.
+A28 / Unvisited eligible-item rate
+Inputs: delivered ordinary items and successful question-render events. Formula: 100 * count(no
+render recorded) / E. Evidence: E > 0, reconciled navigation events and at least 95 percent timer
+duration accounted for by known visible or hidden intervals. Action: practice an initial scan if entire
+sections were missed. Limit: missing render events can mimic unvisited questions; show unavailable
+when navigation evidence is incomplete.
+A29 / Time spent on viewed omissions
+Inputs: final unanswered items with recorded visits and visible duration. Formula: sum(T_q for
+viewed and unanswered items), with count and question list. Evidence: valid item timings and at
+least 90 percent relevant coverage. Action: review whether a timely skip or an alternate method
+would help. Limit: unanswered effort may improve understanding; do not automatically classify
+these minutes as waste.
+A30 / Median time on fully correct items
+Inputs: visible attributed durations for fully correct responses. Formula: median(T_q), split by subject
+or response type. Evidence: at least five correct timed items per personal group. Action: identify
+unusually long correct solutions to compare with an approved shorter method. Limit: faster is not
+always better, and comparing unlike item mixtures can give a misleading speed conclusion.
+ACCEPTANCE / PRECAUTIONS
+Keep late-window definitions stable across report revisions.
+Exclude invalid items from omission measures.
+Provide descriptive wording instead of psychological labels.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.10  /  23
+
+
+=== PAGE 11 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 11 / 23
+A31-A35: honest cohort response
+comparisons
+ANALYSIS CATALOG / 07 OF 12
+Use the same frozen cohort specification for all five analyses on this page. The proposed
+primary gate is 100 eligible distinct learners on the exact paper and scoring context. Display
+eligibility, counts, snapshot time and whether the window is still open. Never convert these
+results into an official entrance-exam rank.
+A31 / Overall platform cohort percentile
+Inputs: the learner's net score s and eligible cohort scores. Formula: 100 * count(score <= s) / N.
+Evidence: N >= 100; otherwise suppress the percentile. Action: compare standing on this specific
+mock while reviewing subject gaps. Limit: this self-selected platform cohort is not the official exam
+population; an apparent rise can reflect cohort changes.
+A32 / Subject platform cohort percentile
+Inputs: approved subject net scores for the same cohort. Formula: 100 * count(subject_score <=
+learner_subject_score) / N. Evidence: N >= 100 and common subject scoring. Action: identify
+subjects with weaker relative standing on this paper. Limit: never average subject percentiles to
+produce total percentile; ties and differing distributions prevent that shortcut.
+A33 / Item full-correct cohort proportion
+Inputs: one binary-eligible item's full-correct outcomes and all eligible delivered attempts. Formula:
+p_q = C_q / N_q, including unanswered responses in N_q. Evidence: N_q >= 100. Action: check
+wrong answers on widely solved questions first. Limit: this is a cohort response statistic, not the
+student's question-wise ability percentile or a permanent intrinsic difficulty rating.
+A34 / Item accuracy among attempted responses
+Inputs: the same item's full-correct and nonempty committed responses. Formula: C_q / A_q.
+Evidence: cohort N_q >= 100 and A_q >= 30. Action: distinguish low success from low willingness
+to attempt. Limit: students select which questions to attempt, so this conditional rate is biased
+toward respondents and should always accompany the overall proportion.
+A35 / Committed option-selection distribution
+Inputs: canonical options chosen in a single-choice item. Formula: count(option_j) / A_q for every
+option, with unanswered displayed separately. Evidence: N_q >= 100 and A_q >= 30; suppress
+option cells below 10 learners in shared views. Action: examine common distractors after solution
+release. Limit: popularity alone cannot establish the underlying misconception, and shuffled option
+letters must be canonicalized.
+ACCEPTANCE / PRECAUTIONS
+Suppress correct-option disclosure while solutions are embargoed.
+Include unanswered learners in the overall item proportion.
+Do not show decimal precision unsupported by cohort size.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.11  /  23
+
+
+=== PAGE 12 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 12 / 23
+A36-A40: item timing and content
+quality signals
+ANALYSIS CATALOG / 08 OF 12
+Implement conditional timing comparisons only when the learner answered fully correctly and
+the benchmark has adequate usable times. Restrict comparison to matching timer policies and
+exposure states. Treat item quality signals as review triggers for teachers, not automatic
+decisions to delete content or accusations against learners.
+A36 / Correct-response time percentile
+Inputs: the learner's visible time t and valid correct cohort times. Formula: 100 * count(cohort_time
+>= t) / N_correct; higher means faster-or-equal within correct responses. Evidence: cohort >= 100,
+N_correct >= 30 and valid personal time. Action: consider a shorter approved method. Limit:
+correctness-conditioned selection and telemetry uncertainty prevent an ability-percentile
+interpretation.
+A37 / Cohort median correct-response time
+Inputs: valid times from fully correct, first-exposure cohort responses. Formula: median(times), with
+the interquartile range. Evidence: cohort >= 100 and at least 30 usable correct times. Action:
+compare expected practice pacing with this specific question's observed distribution. Limit: the
+median reflects this cohort and interface; it is not an official ideal time or universal time limit.
+A38 / Personal-to-benchmark time ratio
+Inputs: valid personal time t and positive A37 median m. Formula: t / m. Evidence: A37 available and
+learner fully correct; otherwise provide personal time only. Action: inspect ratios substantially above
+a configurable threshold without chasing speed indiscriminately. Limit: reading accommodations,
+language and solution style can affect timing; the ratio does not measure intelligence or
+concentration.
+A39 / Item omission cohort rate
+Inputs: eligible delivered item attempts and final unanswered outcomes. Formula: U_q / N_q.
+Evidence: N_q >= 100; distinguish known unvisited from viewed omissions only with usable
+telemetry. Action: recognize questions the cohort often postpones. Limit: omissions can reflect
+placement, section strategy or time pressure as well as difficulty; do not infer a single cause.
+A40 / Item upper-minus-lower response difference
+Inputs: binary outcomes and rest-of-test net scores excluding this item. Formula: p_upper - p_lower
+for highest and lowest rest-score quartiles. Evidence: N >= 200, at least 50 per group and
+nonconstant rest scores; resolve boundary ties with documented fractional weights. Action: flag
+negative or unusual values for content review. Limit: this descriptive discrimination signal is unstable
+under narrow score ranges and is not proof of a bad question.
+ACCEPTANCE / PRECAUTIONS
+State the reverse-time percentile convention in the tooltip.
+Suppress benchmark timing if correct-time evidence is thin.
+Route item quality flags through human review.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.12  /  23
+
+
+=== PAGE 13 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 13 / 23
+A41-A45: confidence, expected value
+and error attribution
+ANALYSIS CATALOG / 09 OF 12
+Collect confidence only in optional practice features or post-test reflection; never add
+compulsory controls to an official-format simulation. A recalled confidence rating must be
+labeled retrospective and excluded from pre-response calibration. Keep student assumptions
+distinct from measured outcomes and teacher-confirmed explanations. These analyses describe
+evidence rather than predicting admissions.
+A41 / Confidence calibration by bin
+Inputs: optional precommit probability ratings p and binary outcomes y. Formula: mean(p) and
+mean(y) within declared probability bins. Evidence: at least 20 rated items overall and 10 per
+displayed bin. Action: inspect confident errors and cautious successes. Limit: self-reported
+probabilities are noisy; observed calibration does not establish a stable personal trait or justify
+universal guessing rules.
+A42 / Binary Brier score
+Inputs: genuine precommit p in [0,1] and y equal to one for full correctness. Formula: mean((p -
+y)^2), with lower values indicating closer predictions. Evidence: at least 20 binary-rated distinct
+items; omit partial-credit items. Action: improve probability estimates using reviewed explanations.
+Limit: item mix affects the score, and this is calibration evidence, not an intelligence or mastery score.
+A43 / Low-confidence penalty exposure
+Inputs: precommit confidence, configurable threshold c and signed contributions. Formula:
+sum(max(-s_q,0) where p_q < c), plus the rated attempt count. Evidence: at least 10 genuinely rated
+attempts; default c = 0.20 is a product proposal. Action: review these choices against the marking
+policy. Limit: low confidence does not prove blind guessing, and retrospective confidence is excluded.
+A44 / Assumption-based expected marks
+Inputs: user-supplied correctness probability p, full reward a and wrong penalty magnitude b for a
+simple binary item. Formula: EV = p*a - (1-p)*b; break-even p = b/(a+b). Evidence: a+b > 0 and
+compatible marking rules. Action: explore practice decisions. Limit: this is a hypothetical model;
+unknown p and time opportunity cost prevent guaranteed gains.
+A45 / Confirmed error-cause distribution
+Inputs: learner-confirmed or teacher-reviewed causes for wrong items. Formula: count(cause) /
+number of labeled wrong items, with unknown and unlabeled counts separate. Evidence: at least five
+labeled errors before recommending a pattern. Action: select a targeted checking drill. Limit: a chosen
+distractor does not prove a cause; preserve multiple possible causes and allow labels to be corrected.
+ACCEPTANCE / PRECAUTIONS
+Exclude retrospective ratings from predictive calibration.
+Validate probabilities and marking compatibility.
+Never infer an error cause solely from an option letter.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.13  /  23
+
+
+=== PAGE 14 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 14 / 23
+A46-A50: progress, variability and
+practice backlog
+ANALYSIS CATALOG / 10 OF 12
+Provide longitudinal analyses only after enough comparable evidence exists. Different papers
+cannot be assumed equivalent just because they share an exam name. Show the blueprint,
+exposure mix, maximum marks and mode next to every comparison. Prefer new questions when
+checking learning and label repeated-question effects clearly.
+A46 / Comparable first-attempt score change
+Inputs: latest score percentage and the preceding three comparable first-attempt score percentages.
+Formula: latest minus median(previous three). Evidence: four approved blueprint-matched tests with
+matching mode and scoring context. Action: inspect which topic outcomes accompany the change.
+Limit: blueprint similarity does not guarantee equal difficulty; the difference is descriptive rather than
+a causal learning estimate.
+A47 / Fresh concept accuracy change
+Inputs: distinct new concept-tagged items in two chronological windows. Formula: 100 *
+(C_recent/A_recent - C_prior/A_prior). Evidence: at least 20 items in each window, reviewed tags and
+no solution exposure. Action: verify whether the concept needs another drill. Limit: changing difficulty
+and item selection can explain the gap; show counts and overlap checks.
+A48 / Comparable score variability
+Inputs: score percentages from comparable first attempts. Formula: sample standard deviation
+sqrt(sum((x-mean)^2)/(n-1)). Evidence: at least five tests; display the individual observations. Action:
+review large swings and the associated exam conditions. Limit: variability is not a personality, anxiety
+or attention diagnosis, and small test histories cannot establish a stable reliability profile.
+A49 / Repeated-item score difference
+Inputs: first and later score for the same canonical item under the same effective key. Formula:
+mean(later_score - first_score) across paired items. Evidence: at least 10 pairs and known exposure
+state. Action: use improvement as feedback, then test a fresh related item. Limit: remembered
+answers can drive the gain; do not mix repeated-item performance into first-exposure cohort
+percentiles.
+A50 / Unresolved review backlog
+Inputs: wrong or omitted first-exposure items and explicit review-task states. Formula: count(open
+review tasks), with age since the attempt and topic breakdown. Evidence: at least one qualifying task;
+no mastery label. Action: schedule a manageable next review block. Limit: closing a task records
+workflow completion, not concept mastery; automatic closure requires a clearly stated fresh-item
+check policy.
+ACCEPTANCE / PRECAUTIONS
+Show paper comparability details before a progress chart.
+Do not select each student's best attempt as the baseline.
+Keep completed workflow and demonstrated transfer separate.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.14  /  23
+
+
+=== PAGE 15 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 15 / 23
+A51-A55: recurring errors, transfer
+checks and review priorities
+ANALYSIS CATALOG / 11 OF 12
+Build these measures as evidence-linked study aids. Use reviewed concept and prerequisite tags,
+deduplicate repeated canonical items and retain uncertainty. A topic becomes a review priority
+because specific recent responses justify it, not because an opaque algorithm assigns a
+frightening weakness percentage. Let learners edit their priorities.
+A51 / Recurring concept error count
+Inputs: distinct incorrect first-exposure items sharing a reviewed concept across sessions. Formula:
+count(distinct wrong canonical items), with attempted denominator. Evidence: at least five attempted
+concept items over three sessions before a recurring-pattern flag. Action: revisit the underlying method
+rather than memorizing individual answers. Limit: related items and difficulty differences prevent
+treating the count as an independent diagnosis.
+A52 / Fresh review-check success rate
+Inputs: new, approved counterpart items attempted after a documented review task. Formula:
+full-correct checks / attempted fresh checks. Evidence: at least 10 checks; exclude the original item and
+solution-exposed items. Action: decide whether to continue the drill or expand to harder examples.
+Limit: selected checks can be easier than exams; success demonstrates these checks, not guaranteed
+transfer.
+A53 / Delayed fresh-check accuracy
+Inputs: fresh counterpart items taken 14 days after review, allowing a declared plus/minus seven-day
+window. Formula: C_delayed/A_delayed. Evidence: at least 10 fresh checks with valid review and
+attempt dates. Action: schedule spaced review if errors recur. Limit: this proposed schedule is
+configurable and later accuracy also reflects additional learning, item mix and missing follow-up
+participation.
+A54 / Assigned prerequisite coverage
+Inputs: teacher-approved prerequisite tags and qualifying attempted practice. Formula: covered
+assigned tags / total assigned prerequisite tags; define covered as at least one valid attempt. Evidence:
+an explicit assignment and a positive tag count. Action: identify prerequisites not yet practiced. Limit:
+coverage records exposure, not understanding; one attempt cannot certify readiness for a dependent
+concept.
+A55 / Error-category marks-at-stake ceiling
+Inputs: confirmed error-category items, current score s_q and item maximum m_q. Formula: sum(m_q -
+s_q) for those wrong items. Evidence: reviewed cause labels and valid maxima; exact count always
+visible. Action: prioritize categories with several concrete examples. Limit: this is a hindsight arithmetic
+ceiling, not predicted recoverable marks; fixing every error may require time and may not recur.
+ACCEPTANCE / PRECAUTIONS
+Use fresh counterpart items for transfer checks.
+Label coverage separately from mastery.
+Do not present arithmetic ceilings as expected future score gains.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.15  /  23
+
+
+=== PAGE 16 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 16 / 23
+A56-A60: solution engagement,
+revisions and evidence quality
+ANALYSIS CATALOG / 12 OF 12
+Implement these final measurements to explain what the platform knows about review activity
+and report reliability. Keep them visible in the evidence drawer as well as the study workflow.
+They must never be folded into a hidden ability score. Missing content or telemetry should
+reduce claims, not punish the learner.
+A56 / Released-solution consultation rate
+Inputs: eligible released review items and authorized solution-open events. Formula: distinct
+authorized opened solutions within the eligible review set / distinct released review items. Evidence:
+a positive released-item denominator and valid event access. Action: open relevant explanations for
+unreviewed errors. Limit: opening a solution does not prove reading or understanding; no
+engagement event should be collected before the solution becomes accessible.
+A57 / Observed solution review duration
+Inputs: visible solution-panel visits and capped heartbeat intervals. Formula: union of observed
+visible durations, with median duration per opened item. Evidence: at least five usable solution visits
+for a summary. Action: compare a review routine with its planned duration. Limit: time on screen is
+not learning time, and copying a method is not demonstrated transfer.
+A58 / Approved-key score revision impact
+Inputs: preserved historical report and newly approved grading revision. Formula: S_new - S_old, with
+every changed item contribution listed. Evidence: both reproducible ledgers and a published
+correction reason. Action: understand the corrected result and refreshed comparisons. Limit: score
+changes from a key revision are not improvement or deterioration in the learner's ability.
+A59 / Approved explanation availability
+Inputs: released delivered items and approved question-to-solution mappings. Formula: mapped
+approved explanations / released delivered items, with unavailable identifiers. Evidence: positive
+released-item denominator; count only approved mappings. Action: report missing explanations and
+revisit when corrected. Limit: an available mapping does not guarantee explanatory quality, so
+preserve source review status and student feedback.
+A60 / Usable timing evidence coverage
+Inputs: eligible items, reconciled visit events and timing quality flags. Formula: items with usable
+timing / eligible items; also show known timed duration / timer duration. Evidence: positive
+denominators and the declared quality policy. Action: understand why some speed suggestions are
+unavailable. Limit: high coverage does not prove precise thinking time; missing events and
+visible-but-unfocused periods remain possible.
+ACCEPTANCE / PRECAUTIONS
+Release-gate all solution activity and availability calculations.
+Exclude key revisions from student progress signals.
+Expose evidence-quality limitations beside derived advice.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.16  /  23
+
+
+=== PAGE 17 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 17 / 23
+Question-wise risks, precautions and
+expected-value reasoning
+INTERPRETATION / EXPLAINABLE STRATEGY
+Generate each question's risk and precaution notes from approved content plus recorded
+evidence. Separate a content trap, an input-format trap and a decision tradeoff. Give the
+learner a practical next check. Never replace a reviewed explanation with a generic warning
+or imply that a probability model knows what the student truly understood.
+Use a disciplined note template
+For every flagged question show: observation, supporting evidence, possible explanation, next
+precaution and limitation. Example: "Your final response has the wrong sign. The solution changes
+sign when the integration limits are reversed. Check the limit order before simplifying. This
+response alone cannot prove where your reasoning diverged." Attach the exact solution step or
+reviewed content note. Let the learner label their cause after reading.
+Support reviewed traps such as units, domain restrictions, extraneous roots, sign conventions,
+numerical formatting, option quantifiers and multiselect completeness. Display only notes relevant
+to the approved item and its adapter. A blank response gets a coverage or decision note, not an
+invented misconception. Correct but slow items may receive an alternate-method suggestion;
+correct but low-confidence items may receive a reasoning check.
+Explain the model rather than prescribing guesses
+For a simple +4/-1 item, EV = 4p - (1-p) = 5p - 1, so the arithmetic break-even probability is 0.20. A
+hypothetical 0.25 probability gives EV 0.25 marks per attempt. A +1/0 policy gives EV p when
+blank scores zero. These are examples of configured rules, not assumptions that all exams use
+them.
+Explain that p is generally unknown. Elimination of options improves a theoretical probability only
+if the eliminated options really cannot be correct. Time has an opportunity cost, and the remaining
+test may contain better uses of that time. Multiselect, partial-credit, bonus and numerical-response
+rules need their own outcome models; disable the binary calculator when those assumptions fail.
+Offer simulation as post-test reflection
+Permit students to try a transparent hindsight scenario, such as removing selected low-confidence
+penalized answers. List changed items and recompute with the exact adapter. Label the result
+"hypothetical score on this attempt." Do not call it a guaranteed attainable score. A hindsight
+scenario must not alter the saved attempt, published cohort or official-format result.
+ACCEPTANCE / PRECAUTIONS
+Require reviewed source evidence for each content trap.
+Keep hypothetical probabilities and observed accuracy distinct.
+Display scenario assumptions and preserve original results.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.17  /  23
+
+
+=== PAGE 18 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 18 / 23
+Tags, evidence summaries and an
+editable study plan
+LEARNING WORKFLOW / NO OPAQUE MASTERY SCORE
+Create a reviewed academic taxonomy that supports searching, analytics and study planning.
+Make topic conclusions explainable in ordinary language. Use evidence states such as insufficient
+evidence, mixed recent outcomes and consistently correct recent practice. Treat these as
+descriptive summaries of selected evidence, not precise estimates of a student's total
+knowledge.
+Build and review the taxonomy
+Use subject, chapter, concept, prerequisite, response type and editorial difficulty as separate
+dimensions. Attach syllabus version, owner, reviewer and review date to each academic tag. Let AI
+suggest tags during ingestion, but require approval before tags drive student recommendations. Keep
+uncertain tags out of automatic prerequisite chains. Preserve redirects when taxonomy names change
+so historical reports remain interpretable.
+Allow multiple concepts for one item and make the evidence traceable. Never sum overlapping
+concept counts to produce a total. Use the fractional chapter attribution rule only when additive totals
+are required, and explain it in the report. A learner's notes and confirmed error causes are personal
+annotations, distinct from the published question taxonomy.
+Use explicit recommendation rules
+Propose at most three study actions per report. Prioritize a concept when fresh incorrect items recur
+across sessions, the tags are reviewed and the sample gate is satisfied. If evidence is thin, suggest a
+short diagnostic practice set instead of assigning a weakness label. Explain the rule in the card: "Three
+sessions include errors on five distinct questions tagged with this concept." Link the exact questions.
+Combine a short source-linked review, an approved fresh-item check and a planned follow-up window.
+Let students choose available time and move tasks. Respect declared exam dates and workload
+without inventing a timetable from absent information. Do not claim that a fixed number of minutes
+guarantees a percentile gain.
+Track workflow and verify transfer
+Provide statuses planned, reviewed, fresh-check attempted and follow-up completed. Distinguish
+closing a task from demonstrating transfer. Use fresh counterpart items for a check, record solution
+exposure and retain an unresolved state when performance remains mixed. Ask for optional reflection
+on the cause of an error, with "not sure" always available.
+Keep teacher recommendations editable and reversible. A teacher may override a recommendation
+with a reason, but cannot silently rewrite past responses or label students with medical or
+psychological conditions. Make study priorities useful without public shame, streak punishment or
+frightening rankings.
+ACCEPTANCE / PRECAUTIONS
+Explain every recommended task with specific evidence.
+Keep AI-suggested tags in review until approved.
+Use fresh items before claiming improvement beyond memorization.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.18  /  23
+
+
+=== PAGE 19 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 19 / 23
+Dashboard composition, comparison
+views and exports
+PRODUCT / RESULTS INTERFACE
+Build a calm blue-themed results workspace with progressive disclosure. The first screen must
+answer what happened, where marks went and what to do next. Show five meaningful headline
+facts, then allow deeper inspection. Do not overwhelm students with 60 simultaneous cards or
+use decorative graphics that obscure the question evidence.
+A readable first screen
+Place net marks, configured maximum, attempted accuracy, completion and platform cohort
+percentile at the top. If the percentile is suppressed, replace its space with a clear cohort-status
+message. Show the grading revision and release status nearby. Use tabs or anchored sections for
+Score, Subjects, Topics, Time, Strategy, Questions and Next Steps; preserve filters when navigating.
+Use bar charts for subject marks and topic outcomes, a timeline for observed activity, and a sortable
+question table for detailed review. Pair every chart with a table and textual explanation. Use color
+plus labels and icons for outcomes. Ensure charts, mathematical explanations, tooltips and tables
+work with keyboard navigation and screen readers. Keep a compact phone view without hiding
+essential denominators.
+Support precise questions
+Let students filter by subject, chapter, concept, outcome, response type, confidence availability, time
+band, review status and source exposure. Enable sorting by marks lost, original order, observed time
+and approved topic. Keep the original order one click away. Compare two compatible attempts with
+side-by-side contexts and question lists; warn about differing blueprints before drawing a trend.
+Provide an evidence drawer for each metric with inputs, formula, denominator, sample gate and
+limitations. A visible unavailable value should explain how evidence can be obtained, such as taking
+more fresh concept questions or waiting for the cohort window to close. Do not imply that
+unavailable metrics are a premium upsell.
+Generate useful portable reports
+Offer an access-controlled PDF report, question-wise CSV and personal JSON export. Include the
+attempt receipt, selected charts, all available analysis summaries, unavailable reasons, next tasks
+and correction notices. A longer question review appendix may be optional. Use job queues, signed
+download links and an expiry policy. Never place a student's phone number or email in the filename.
+Include report revision, cohort snapshot and generation time in each export. Reuse the same
+calculation output as the dashboard. For delayed solutions, generate a result-only report first and
+regenerate the explanation appendix after release. Avoid embedding embargoed answer data even
+when visually hidden.
+ACCEPTANCE / PRECAUTIONS
+Verify mobile readability and keyboard drill-through.
+Reconcile exported values with the on-screen report.
+Test report downloads for authorization and embargo rules.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.19  /  23
+
+
+=== PAGE 20 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 20 / 23
+Teacher and administrator cohort
+insights
+OPERATIONS / PRIVACY-PRESERVING CONTENT REVIEW
+Create teacher and admin views that answer which content needs review, which assigned
+concepts need instruction and whether reports are current. Do not expose individual student
+records through broad aggregate permissions. Keep student access, teaching-group access,
+content-editor access and platform analytics access as separate roles.
+Aggregate questions and approved teaching groups
+Provide distributions of net marks, completion, subject contribution, item response rates and usable
+timing coverage. Show the same denominator and version metadata used in student reports. Let
+authorized teachers see their assigned learners and aggregate class evidence; platform-wide cohorts
+remain aggregate unless an explicit role grants individual access. Avoid sensitive demographic
+comparisons by default.
+Use the proposed shared-cell privacy minimum of 10 distinct learners. Suppress complementary cells
+when a visible total would reveal a small hidden count by subtraction. Do not allow arbitrary filters or
+downloadable raw tables to bypass suppression. Product statistical gates still apply: a privacy-safe
+cell of 10 is not enough for a published cohort percentile requiring 100.
+Review content signals before taking action
+Queue items with negative upper-minus-lower differences, unusual distractor patterns, frequent
+source complaints or missing solution mappings. Show item version, approved tags, source crops,
+effective answer key, cohort sizes and exposure mix. Let a reviewer record whether the signal
+reflects a content defect, cohort mix or legitimate difficulty. Never automatically change a key solely
+because many students chose another answer.
+Support a controlled correction workflow: proposal, subject review, approved revision, impact
+preview and publish. Show the count of affected attempts and the expected score changes before
+committing. Preserve the old report and issue an intelligible correction notice. Recompute item rates,
+cohort scores, percentiles and any study-plan facts derived from the old outcome.
+Operate large cohorts without stale comparisons
+Aggregate eligible first attempts asynchronously after grading. Partition by paper and cohort
+identity, update materialized snapshots and stamp every view with freshness. Make the scoring
+service authoritative and keep analytics refreshes idempotent. Monitor queue age, failed jobs,
+key-version mismatches and suppression counts. Use a report status that distinguishes score ready,
+cohort updating and explanations pending.
+Expose an internal audit view of calculation definitions and changes. Teachers may annotate
+interpretations but must not edit formulas ad hoc. A report should remain reproducible after a cohort
+closes, even when later repeat attempts arrive.
+ACCEPTANCE / PRECAUTIONS
+Test complementary suppression and filter abuse.
+Keep content corrections separate from statistical flags.
+Recompute every dependent metric after approved key changes.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.20  /  23
+
+
+=== PAGE 21 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 21 / 23
+Telemetry uncertainty, privacy and
+statistical safeguards
+QUALITY / RESPONSIBLE MEASUREMENT
+Collect the smallest event stream that supports the promised analyses. Explain what is observed
+and what remains unknown. Configure retention, deletion and access policies before launch, then
+verify them against applicable law and the platform's actual audience. Do not add camera
+surveillance, biometric inference or psychological profiling merely to enrich analytics.
+Bound the meaning of time evidence
+Record question entry and exit, accepted answer commitments, review-state changes, visibility changes
+and a modest capped heartbeat. Use monotonic client intervals and server-receipt validation; reconcile
+clock changes, offline batches and duplicate event identifiers. Do not record raw keystrokes, clipboard
+contents, microphone streams or unrelated browsing. A lost heartbeat should reduce confidence in
+timing advice, not invalidate an otherwise valid saved response.
+Flag implausible interval order, excessive overlap, missing closure and unknown visibility. Cap
+attributed intervals according to a documented policy, then retain an uncertainty flag rather than
+reconstructing precise unseen activity. Keep timing analytics separate from the authoritative deadline
+and submission logic. A student who loses connectivity may still have timer time consumed and
+incomplete analytics.
+Quantify uncertainty without pretending representativeness
+For binary cohort proportions, display counts and a Wilson 95 percent interval when the independence
+approximation is reasonable. With p = k/n and z = 1.96, center = (p + z^2/(2n))/(1 + z^2/n); half-width
+= z*sqrt(p*(1-p)/n + z^2/(4n^2))/(1 + z^2/n). Bounds are center plus or minus half-width [S4-02].
+Label this interval as conditional on the observed eligible sample. It does not correct self-selection,
+repeated exposure, shared coaching or correlated items. Do not show this formula as an ability interval
+for a single learner. Do not manufacture a percentile confidence band from arbitrary point adjustments.
+Keep all minimum sample gates configurable and versioned; they are product safeguards, not scientific
+guarantees.
+Protect the learner's evidence
+Keep personal responses, timing, confidence and error notes private by default. Provide an
+understandable explanation of optional event collection and a route to inspect personal records. Restrict
+sharing to authorized teachers or user-approved links. Minimize personally identifying fields in exports
+and aggregates. Apply deletion to source events, derived personal reports and cached downloads
+according to the retention policy.
+Use human review for integrity flags and show limitations. A tab switch, fast response or missing event
+is not proof of cheating. Keep adverse decisions outside the analytics engine unless a separately
+approved process provides evidence and appeal.
+ACCEPTANCE / PRECAUTIONS
+Verify deletion propagation into derived personal records.
+Check confidence intervals against known numerical fixtures.
+Keep missing-data states separate from zero-valued measurements.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.21  /  23
+
+
+=== PAGE 22 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 22 / 23
+Acceptance fixtures and final analytics
+release gate
+VALIDATION / MUST PASS BEFORE LAUNCH
+Emergent, deliver deterministic fixtures and automated checks for arithmetic, cohort eligibility,
+report revisions, release controls and incomplete evidence. Use the approved adapters from
+the exam-engine volume. A beautiful dashboard is incomplete until every displayed number is
+reproducible from the stored attempt and the same value appears in its export.
+Test arithmetic with explicit expected values
+Create a simple five-item +4/-1 fixture with three fully correct, one wrong and one unanswered
+response: G = 12, L = 1, S = 11, A = 4, accuracy = 75 percent, completion = 80 percent, maximum
+M = 20 and score percentage = 55 percent. Penalty-to-positive ratio must be 100/12 = 8.3333
+percent. Add a no-negative preset, a partial-credit preset and an invalid-item award case.
+Use the ten-score demonstration from the percentile page: score 40 gives 70.00 and score 20 gives
+30.00 under inclusive ties. Assert that the production sample gate suppresses both. Use a
+100-person binary item fixture with 40 correct, 20 wrong and 40 unanswered: overall correct
+proportion 40 percent, attempted accuracy 40/60 = 66.6667 percent, and omission rate 40 percent.
+Test an all-equal cohort and an empty cohort.
+Test event and version edge cases
+Test selected-but-uncommitted options, commits arriving after the deadline, clear-response events,
+shuffled options, duplicate messages, offline telemetry batches, hidden tabs and missing visit
+closures. Verify that analytics never decides which late response was accepted; the exam engine's
+committed final state does. Validate zero denominators, negative marks, no usable correct times and
+incomplete exposure histories.
+Change one approved key in a fixture and assert that historical and revised ledgers coexist, score
+deltas reconcile, dependent cohort statistics refresh and progress trends exclude correction-caused
+gains. Assert that a stale cache cannot combine a revised score with an old percentile.
+Test student-facing safety and completeness
+Attempt to obtain embargoed answers through report APIs, preloaded assets, exported CSV, cached
+PDF, option statistics and shared links. Verify role restrictions, privacy suppression and complement
+suppression. Check that every A01-A60 has an implemented formula, evidence gate, drill-through,
+explanation and unavailable state. Show at least 40 distinct substantive analysis types in a fully
+populated demonstration history, without duplicating labels to inflate the count.
+Finish with subject-review checks of question explanations and tags, accessibility checks of charts
+and tables, and export reconciliation. Publish the analytics calculation registry and the proposed
+product thresholds with their versions. Keep launch blocked on failed scoring, access-control or
+explanation-release checks.
+ACCEPTANCE / PRECAUTIONS
+Deliver fixture inputs, expected outputs and reproducible test commands.
+Check all 60 catalog entries against working screens.
+Provide a concise report of passed checks and unresolved limitations.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.22  /  23
+
+
+=== PAGE 23 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 04  |  RESULTS + ANALYTICS
+CHAPTER 23 / 23
+Source register and implementation
+handoff
+EVIDENCE AND SCOPE OF THIS SPECIFICATION
+Use these references to verify the stated baseline. Requirements and engineering thresholds
+in this volume are proposed product decisions unless a source explicitly establishes them.
+S4-01 | National Testing Agency: JEE Main 2026 Information Bulletin, Appendix VII
+https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2025/11/20251102
+1649722475.pdf
+Checked: 2026-10-11. Primary official source for the distinction between raw marks, official
+shift-based percentile normalization and subject-versus-total percentiles. This volume proposes
+separate platform cohort calculations; recheck the official bulletin for the actual target exam year.
+S4-02 | NIST/SEMATECH e-Handbook: 7.2.4.1 Confidence intervals for proportions
+https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm
+Checked: 2026-10-11. Primary statistical reference for the Wilson interval formula. The interval
+does not solve platform cohort selection bias or establish learner ability; sample gates in this
+volume are proposed product policy.
+ACCEPTANCE / PRECAUTIONS
+Before release, retain the approved configuration, source document date, verification owner and
+test evidence. Re-check any rule that changes for a new exam year.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+4.23  /  23

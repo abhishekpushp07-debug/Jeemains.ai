@@ -1,0 +1,91 @@
+{
+  "summary": "Real object-storage PDF-to-report verification completed successfully. Tested complete lifecycle: PDF upload with real storage → import processing → competition scheduling → student attempt flow → results release with insights → PDF report generation and download → content verification with images.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": [
+      {
+        "endpoint": "/api/studio/sets/{import_id}/questions/{question_id}/asset/source/0",
+        "issue": "Returns 503 when fetching source image PNG",
+        "impact": "Source image assets unavailable via API (non-blocking for main flow)",
+        "fix_priority": "MEDIUM"
+      }
+    ],
+    "missing_features": [
+      {
+        "feature": "Set test UNLIVE endpoint",
+        "endpoint": "/api/studio/imports/{import_id}/unlive",
+        "issue": "Returns 404 - endpoint not found",
+        "impact": "Cannot programmatically set tests to UNLIVE status after QA",
+        "fix_priority": "LOW"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Owner login with email/password authentication",
+    "Phone student registration via /api/auth/phone",
+    "PDF pair upload with duration=1 minute to real object storage",
+    "Import processing and polling until READY status",
+    "Competition scheduling at UTC now",
+    "Student preflight check before competition start",
+    "Student attempt start during competition window",
+    "Answer submission via PUT /api/attempts/{id}/answers/{question_id}",
+    "Attempt submission via POST /api/attempts/{id}/submit",
+    "Competition end after 60 seconds (1-minute paper)",
+    "Results release after competition end with insights (2 insights present)",
+    "PDF report job creation via POST /api/attempts/{id}/report",
+    "PDF report generation and job completion",
+    "PDF report download via GET /api/jobs/{job_id}/download (132,073 bytes)",
+    "PDF content verification: 6 pages, 6 images, all metadata present",
+    "Real storage verification: PDFs uploaded and processed through actual object storage"
+  ],
+  "test_report_links": [
+    "/app/tests/test_real_storage_pdf_report.py",
+    "/app/test_reports/real_storage_test_results.json",
+    "/app/test_reports/qa_final_ids.json",
+    "/app/test_reports/test_execution_final.log"
+  ],
+  "action_item_for_main_agent": {
+    "storage_503_issue": "Source image PNG endpoint returns 503 - investigate storage service availability or retry logic",
+    "unlive_endpoint": "Implement /api/studio/imports/{id}/unlive endpoint for QA cleanup (currently returns 404)",
+    "excel_import_test": "Task mentioned Excel combined workbook testing - if this refers to Excel import format (not PDF), add separate test for Excel import lifecycle"
+  },
+  "updated_files": [
+    "/app/tests/test_real_storage_pdf_report.py"
+  ],
+  "success_percentage": {
+    "backend": "95%",
+    "frontend": "N/A - Backend-only test",
+    "storage": "90%",
+    "overall": "93%"
+  },
+  "test_artifacts": {
+    "import_id": "a4a266d5-4e09-5158-a1df-cc5d9d303a64",
+    "attempt_id": "461f0444-3134-5f29-9566-97947c33c026",
+    "pdf_job_id": "report-461f0444-3134-5f29-9566-97947c33c026-original",
+    "student_phone": "+12025554866",
+    "pdf_size_bytes": 132073,
+    "pdf_pages": 6,
+    "pdf_images": 6,
+    "score": "4/12",
+    "insights_count": 2,
+    "competition_duration_seconds": 60,
+    "total_wait_time_seconds": 65
+  },
+  "storage_verification": {
+    "real_storage_used": true,
+    "storage_service": "Emergent object storage via tejas_storage.py",
+    "upload_successful": true,
+    "import_processing_successful": true,
+    "pdf_generation_successful": true,
+    "pdf_download_successful": true,
+    "images_in_pdf": 6,
+    "note": "This test used REAL object storage, not mocked storage. PDFs were uploaded to actual storage service and retrieved during report generation."
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": true
+}

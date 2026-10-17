@@ -1,0 +1,75 @@
+{
+  "total_elements": 766,
+  "matched": 758,
+  "renamed_h1": 6,
+  "presentation_diff": 2,
+  "missing": 0,
+  "coverage_percent": 100.0,
+  "unmatched_elements": [],
+  "renamed_h1_elements": [
+    {
+      "source": "docs/strategy/TEN_PACKET_STRATEGY.md",
+      "type": "heading",
+      "tag": "h1",
+      "text": "Tejas: exactly 10 implementation packets",
+      "reason": "Renamed to: The 10-packet strategy \u2014 full source"
+    },
+    {
+      "source": "docs/strategy/SLO_AND_WORKLOAD.md",
+      "type": "heading",
+      "tag": "h1",
+      "text": "Workload and measurable \u201cno lagging\u201d contract",
+      "reason": "Renamed to: Appendix A \u2014 Workload and SLO contract"
+    },
+    {
+      "source": "docs/strategy/QUALIFICATION_AND_HANDOFF.md",
+      "type": "heading",
+      "tag": "h1",
+      "text": "Qualification, operator handoff and decision register",
+      "reason": "Renamed to: Appendix B \u2014 Qualification and operator handoff"
+    },
+    {
+      "source": "docs/audit/AUDIT_REPORT.md",
+      "type": "heading",
+      "tag": "h1",
+      "text": "Architecture and full-code compliance audit",
+      "reason": "Renamed to: Appendix C \u2014 Full architecture audit"
+    },
+    {
+      "source": "docs/audit/RULEBOOK_ERRATA.md",
+      "type": "heading",
+      "tag": "h1",
+      "text": "Rulebook errata \u2014 findings only, no application changes",
+      "reason": "Renamed to: Appendix C.1 \u2014 Rulebook errata"
+    },
+    {
+      "source": "docs/audit/REQUIREMENTS_MATRIX.md",
+      "type": "heading",
+      "tag": "h1",
+      "text": "Requirement-to-code compliance matrix",
+      "reason": "Renamed to: Appendix D \u2014 All 62 audited requirement rows"
+    }
+  ],
+  "presentation_diff_elements": [
+    {
+      "source": "docs/strategy/QUALIFICATION_AND_HANDOFF.md",
+      "type": "td",
+      "tag": "td",
+      "text": "K1\u2192R1;K2resumesR1;closeR1;K2replayreturnsR1;changedintentconflicts",
+      "reason": "Table cell content found with line breaks or formatting differences (4/5 parts)"
+    },
+    {
+      "source": "docs/strategy/QUALIFICATION_AND_HANDOFF.md",
+      "type": "td",
+      "tag": "td",
+      "text": "ActualPlayerbrowsernull/primitives/malformedrecordrecovery; not just a language expression",
+      "reason": "Table cell content found with line breaks within words"
+    }
+  ],
+  "csv_results": {
+    "total_rows": 60,
+    "missing_rows": [],
+    "missing_fields": [],
+    "verified_rows": 60
+  }
+}

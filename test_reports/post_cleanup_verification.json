@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-10-12T10:01:28.137242+00:00",
+  "base_url": "https://campus-launch-2.preview.emergentagent.com",
+  "summary": {
+    "total": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "results": [
+    {
+      "test": "Public API shows NO QA sets",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "test": "/api/my/sets shows NO published QA sets",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "test": "Withdrawn set f565e4db... returns 404/409",
+      "passed": true,
+      "details": "Got status 404"
+    },
+    {
+      "test": "6th staff auth attempt returns 429",
+      "passed": true,
+      "details": "Got status 429"
+    },
+    {
+      "test": "429 includes Retry-After header",
+      "passed": true,
+      "details": "Retry-After: 813"
+    },
+    {
+      "test": "Retry-After shows remaining time in 900s window",
+      "passed": true,
+      "details": "Remaining: 813s"
+    },
+    {
+      "test": "Concurrent requests: max 5x401",
+      "passed": true,
+      "details": "Got 5 x 401"
+    },
+    {
+      "test": "Concurrent requests: remainder 429 (not 500)",
+      "passed": true,
+      "details": "Got 3 x 429, 0 x 500"
+    },
+    {
+      "test": "Phone auth endpoint accessible",
+      "passed": true,
+      "details": "Status 200"
+    },
+    {
+      "test": "JSON limits tests completed (6/6)",
+      "passed": true,
+      "details": "See /app/test_reports/v5_json_limits_final.log"
+    },
+    {
+      "test": "Huge answer revision handled gracefully",
+      "passed": true,
+      "details": "Status 422 (not 500)"
+    },
+    {
+      "test": "test_v5_faults.py has qa_only fixtures",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "test": "test_v5_faults.py has yield cleanup",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "test": "test_v5_faults.py compiles",
+      "passed": true,
+      "details": ""
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+/* BITSAT full mocks: bonus gate, Studio status panel, section-wise results */
+.bonus-gate { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:14px 0; padding:12px 14px; border:1px solid var(--line); border-radius:9px; background:var(--surface-alt); font-size:13px; line-height:1.55; color:var(--text-muted); }
+.bonus-gate > svg { flex-shrink:0; color:var(--brand-text); }
+.bonus-gate > span { flex:1 1 180px; min-width:0; }
+.bonus-gate strong { color:var(--text); }
+.bonus-gate.is-ready { border-color:var(--brand-text); background:var(--surface-card); }
+.bonus-gate.is-ready .btn { flex:1 1 100%; justify-content:center; }
+.bonus-gate.is-open { background:var(--warning-soft); border-color:var(--warning-line); color:var(--warning); }
+.bonus-gate.is-open > svg, .bonus-gate.is-open strong { color:var(--warning); }
+.bonus-gate-inline .bonus-gate { margin-top:0; }
+@media (min-width: 1024px) { .bonus-gate-inline .bonus-gate.is-waiting { display:none; } }
+.bonus-warning p { margin:0 0 10px; line-height:1.6; }
+.bonus-warning p:first-child { padding:10px 12px; border-radius:8px; background:var(--warning-soft); border:1px solid var(--warning-line); color:var(--warning); }
+
+.mock-book-panel { margin-top:var(--space-8, 2rem); }
+.mock-held-list h3, .mock-all-list summary { font-size:var(--text-base, 1rem); font-weight:600; margin:var(--space-4, 1rem) 0 var(--space-3, .75rem); cursor:pointer; }
+.mock-held-list ul, .mock-all-list ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+.mock-all-list ul { grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); }
+.mock-status-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; transition:border-color .2s ease; }
+.mock-status-row:hover { border-color:var(--brand-text); }
+.mock-status-main { display:flex; flex-direction:column; min-width:0; }
+.mock-status-reasons { flex-basis:100%; margin:4px 0 0; padding-left:18px !important; list-style:disc !important; display:block !important; font-size:12px; color:var(--warning); }
+
+.mock-section-scores { margin:var(--space-6, 1.5rem) 0; }
+.mock-section-table-wrap { overflow-x:auto; }
+.mock-section-table { width:100%; border-collapse:collapse; font-size:13px; min-width:420px; }
+.mock-section-table th, .mock-section-table td { text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); }
+.mock-section-table td { font-family:'Roboto Mono', monospace; }
+.mock-section-table tbody tr:nth-last-child(-n+2) th { font-weight:600; }
+.mock-section-table td svg { display:inline; vertical-align:-2px; margin-right:4px; }

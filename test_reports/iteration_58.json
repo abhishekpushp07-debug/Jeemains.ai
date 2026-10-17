@@ -1,0 +1,56 @@
+{
+  "summary": "Completed exact test corrections for test_old_worker_lease_rotation_fenced_by_cas and test_bounded_concurrent_profiles_start_and_answer. Both tests now pass with correct implementation. Full packet1 suite (232 tests) passes successfully.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "test_old_worker_lease_rotation_fenced_by_cas - Worker-inflight lease rotation correctly fenced by CAS",
+    "test_bounded_concurrent_profiles_start_and_answer - 20 concurrent profiles with 5 parallel starts + 3 parallel answers each",
+    "Full packet1 suite - All 232 tests passed in 71.67s"
+  ],
+  "test_report_links": [
+    "/tmp/test_lease_rotation.log",
+    "/tmp/test_concurrent_profiles.log",
+    "/tmp/test_packet1_full.log"
+  ],
+  "success_percentage": {
+    "test_old_worker_lease_rotation_fenced_by_cas": "100%",
+    "test_bounded_concurrent_profiles_start_and_answer": "100%",
+    "packet1_full_suite": "100% (232/232 tests passed)"
+  },
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/tests/packet1/test_audit_regressions.py"
+  ],
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  "test_details": {
+    "test_old_worker_lease_rotation_fenced_by_cas": {
+      "implementation": "Monkeypatched jobs.jobs.update_one to inject worker-inflight lease rotation during completion. When update sets status='done' with lease in query, first rotates lease (new token, status=running, lease_until=future), then executes original query. Verifies CAS failure: replacement lease preserved, job remains running, no proposal committed, academic content unchanged.",
+      "assertions_verified": [
+        "Replacement lease preserved after CAS failure",
+        "Job status remains 'running' (not 'done')",
+        "No proposal committed to job document",
+        "Academic content (questions) unchanged",
+        "Academic content (revision) unchanged"
+      ]
+    },
+    "test_bounded_concurrent_profiles_start_and_answer": {
+      "implementation": "20 independent httpx.AsyncClient instances (one per profile) with ASGITransport. Each profile: login independently, preflight once, 5 parallel start requests with same key (all assert status 200), 3 parallel duplicate answer commands (all assert status 200). Launched 20 inner coroutines with asyncio.gather. Completed in 1.00s.",
+      "assertions_verified": [
+        "20 attempts created exactly",
+        "All 100 start requests returned status 200",
+        "All start requests per profile bound to same attempt ID",
+        "All 60 answer requests returned status 200",
+        "All answer requests per profile acknowledged with revision 1",
+        "No 500 errors or exceptions"
+      ]
+    }
+  }
+}

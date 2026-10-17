@@ -1,0 +1,231 @@
+{
+  "summary": "Reproduced P0 user report: PDF organizer fails on real Tejas200 PDFs. Root cause identified: Solutions PDF contains 338 anchors (limit: 300) due to ANCHOR regex matching solution step numbers (1., 2., 3.) as question numbers. Parser works correctly but rejects legitimate PDFs due to overly permissive regex.",
+  
+  "user_report": "By the way pdf se nahi le pa rha direct questions. Ab",
+  
+  "reproduction_status": "CONFIRMED - Issue reproduced with actual supplied PDFs",
+  
+  "test_artifacts": {
+    "questions_pdf": {
+      "path": "/app/test_reports/fixtures/real_tejas200_questions.pdf",
+      "url": "https://customer-assets-agu9un31.emergentagent.net/job_campus-launch-2/artifacts/c44edb7ea0924065_Tejas200_Paper01_Questions.pdf",
+      "size_bytes": 225987,
+      "sha256": "6719a47cacdeb941431c9a33099bc1763d487955835d62820c818e288702b2a8",
+      "pages": 11,
+      "anchors_detected": 77,
+      "expected_questions": 75
+    },
+    "solutions_pdf": {
+      "path": "/app/test_reports/fixtures/real_tejas200_solutions.pdf",
+      "url": "https://customer-assets-agu9un31.emergentagent.net/job_campus-launch-2/artifacts/8c10e7774e825272_Tejas200_Paper01_Key_Solutions.pdf",
+      "size_bytes": 416394,
+      "sha256": "26f67b6d17b5fe4107d2fbf9ce084ca78c33708b9706f3409d0f786135b2607e",
+      "pages": 32,
+      "anchors_detected": 338,
+      "expected_solutions": 75,
+      "anchor_limit": 300
+    }
+  },
+  
+  "actual_result": {
+    "status": "FAILURE",
+    "processing_time_seconds": 0.49,
+    "error_message": "The PDFs could not be organised safely. No reliable numbered questions found. Upload a searchable PDF with numbered questions and solutions",
+    "failure_point": "segment() function in pdf_organiser_worker.py line 96",
+    "failure_condition": "len(anchors) > 300"
+  },
+  
+  "root_cause_analysis": {
+    "issue": "ANCHOR regex is overly permissive and matches solution step numbers",
+    "affected_file": "/app/backend/tejas/pdf_organiser_worker.py",
+    "affected_line": 22,
+    "current_regex": "r'^(?:(?:Q(?:uestion)?\\.?\\s*)(\\d{1,3})\\s*[.:)\\-]?\\s*|(\\d{1,3})\\s*[.)\\s+)(.*)$'",
+    "problem": "The second alternation (\\d{1,3})\\s*[.)\\s+ matches both question numbers AND solution step numbers",
+    "examples": {
+      "correct_matches": [
+        "Q1. Let the foci of a hyperbola... → Q1",
+        "Q8. For a natural number n... → Q8",
+        "Q20. Let T1 be the equilateral... → Q20"
+      ],
+      "incorrect_matches": [
+        "1. n-th term: Tn = ... → Q1 (solution step)",
+        "2. Last term ka denominator... → Q2 (solution step)",
+        "3. S = 1/4 ... → Q3 (solution step)",
+        "4. Check: P n(n + 1)/4 = ... → Q4 (solution step)"
+      ]
+    },
+    "anchor_breakdown": {
+      "questions_pdf": {
+        "total_anchors": 77,
+        "valid_questions": 75,
+        "false_positives": 2,
+        "false_positive_examples": [
+          "Page 2: '24. Then the local minimum...' (part of Q16 text)",
+          "Page 2: '4 . Then sin' (part of Q18 text)"
+        ]
+      },
+      "solutions_pdf": {
+        "total_anchors": 338,
+        "valid_solutions": 75,
+        "false_positives": 263,
+        "false_positive_pattern": "Solution steps numbered 1., 2., 3., 4., etc. in each solution"
+      }
+    }
+  },
+  
+  "first_10_issues": [
+    {
+      "issue_type": "Anchor count exceeded",
+      "description": "Solutions PDF has 338 anchors, exceeds limit of 300",
+      "impact": "Entire PDF processing fails",
+      "severity": "CRITICAL"
+    },
+    {
+      "issue_type": "False positive anchors",
+      "description": "Solution step numbers (1., 2., 3.) incorrectly detected as question numbers",
+      "count": 263,
+      "severity": "HIGH"
+    },
+    {
+      "issue_type": "Regex too permissive",
+      "description": "ANCHOR regex matches any line starting with digit followed by period",
+      "severity": "HIGH"
+    },
+    {
+      "issue_type": "No context awareness",
+      "description": "Parser cannot distinguish between question numbers and step numbers",
+      "severity": "MEDIUM"
+    },
+    {
+      "issue_type": "Hard limit too restrictive",
+      "description": "300 anchor limit may be too low for detailed solutions with many steps",
+      "severity": "MEDIUM"
+    }
+  ],
+  
+  "pdf_structure_analysis": {
+    "questions_pdf_format": {
+      "question_format": "Q1., Q2., Q3., etc.",
+      "sections": ["MATHEMATICS – SECTION A (Q1-Q20)", "MATHEMATICS – SECTION B (Q21-Q25)", "PHYSICS", "CHEMISTRY"],
+      "total_questions": 75,
+      "questions_per_subject": 25,
+      "text_extractable": true,
+      "encrypted": false
+    },
+    "solutions_pdf_format": {
+      "solution_format": "Q1. Answer: (2) followed by numbered steps",
+      "step_format": "1. First step\n2. Second step\n3. Third step\n4. Fourth step",
+      "answer_key_page": "Page 1 contains answer key table",
+      "detailed_solutions": "Pages 2-32 contain step-by-step solutions",
+      "text_extractable": true,
+      "encrypted": false
+    }
+  },
+  
+  "where_parser_breaks": {
+    "function": "segment()",
+    "file": "/app/backend/tejas/pdf_organiser_worker.py",
+    "line": 96,
+    "condition": "if not anchors or len(anchors)>300",
+    "trigger": "Solutions PDF has 338 anchors > 300 limit",
+    "processing_stage": "After text extraction, during anchor detection",
+    "sandbox_status": "Sandbox isolation working correctly",
+    "pdf_reading_status": "PDF reading working correctly",
+    "text_extraction_status": "Text extraction working correctly",
+    "failure_is_in": "Anchor detection logic - regex is too permissive"
+  },
+  
+  "timing_and_output": {
+    "processing_time_seconds": 0.49,
+    "output_size_bytes": 0,
+    "failure_stage": "Early failure during segmentation",
+    "sandbox_mode": "chroot_low_uid_seccomp_resource_limits",
+    "timeout_limit_seconds": 55,
+    "output_limit_bytes": 50331648
+  },
+  
+  "regression_test": {
+    "path": "/app/test_reports/regression_tejas200_pdf.py",
+    "description": "Isolated regression test that reproduces the failure with real Tejas200 PDFs",
+    "usage": "python /app/test_reports/regression_tejas200_pdf.py",
+    "expected_result": "Exit code 0 (failure reproduced)",
+    "reusable": true
+  },
+  
+  "supporting_analysis_files": {
+    "detailed_test_output": "/app/test_reports/real_tejas200_test_output.log",
+    "pdf_parsing_inspection": "/app/test_reports/pdf_parsing_inspection.log",
+    "worker_simulation": "/app/test_reports/worker_simulation.log"
+  },
+  
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "component": "pdf_organiser_worker.py",
+        "issue": "ANCHOR regex matches solution step numbers as question numbers",
+        "line": 22,
+        "impact": "Legitimate PDFs with detailed solutions are rejected",
+        "fix_priority": "CRITICAL",
+        "suggested_fix": "Make ANCHOR regex more strict: require 'Q' prefix for question numbers in solutions PDF, or add context-aware filtering to distinguish step numbers from question numbers"
+      }
+    ]
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": []
+  },
+  
+  "passed_tests": [
+    "PDF download successful (225KB questions, 407KB solutions)",
+    "PDF hash verification (SHA256 computed)",
+    "PDF opening successful (11 pages questions, 32 pages solutions)",
+    "PDF text extraction working (87,280 chars from solutions)",
+    "Sandbox isolation working correctly",
+    "ANCHOR regex matching working (finds Q1, Q2, etc.)",
+    "Column detection working (single/double column layout)",
+    "Parser logic working correctly up to anchor count validation"
+  ],
+  
+  "test_report_links": [
+    "/app/test_reports/regression_tejas200_pdf.py",
+    "/app/test_reports/test_real_tejas200_pdfs.py",
+    "/app/test_reports/inspect_pdf_parsing.py",
+    "/app/test_reports/simulate_worker.py"
+  ],
+  
+  "updated_files": [
+    "/app/test_reports/fixtures/real_tejas200_questions.pdf",
+    "/app/test_reports/fixtures/real_tejas200_solutions.pdf",
+    "/app/test_reports/regression_tejas200_pdf.py",
+    "/app/test_reports/test_real_tejas200_pdfs.py",
+    "/app/test_reports/inspect_pdf_parsing.py",
+    "/app/test_reports/simulate_worker.py"
+  ],
+  
+  "action_item_for_main_agent": {
+    "priority": "P0 - CRITICAL",
+    "issue": "PDF organizer rejects legitimate Tejas200 PDFs due to overly permissive ANCHOR regex",
+    "root_cause": "ANCHOR regex matches solution step numbers (1., 2., 3.) as question numbers, causing anchor count to exceed 300 limit",
+    "affected_file": "/app/backend/tejas/pdf_organiser_worker.py line 22",
+    "required_fix": "Modify ANCHOR regex or add filtering logic to distinguish question numbers from solution step numbers",
+    "suggested_approaches": [
+      "Option 1: Require 'Q' prefix for all question numbers (strict mode)",
+      "Option 2: Add context-aware filtering to exclude step numbers that appear after a valid question anchor",
+      "Option 3: Increase anchor limit and add deduplication logic",
+      "Option 4: Use different regex patterns for questions vs solutions PDFs"
+    ],
+    "verification": "Run regression test: python /app/test_reports/regression_tejas200_pdf.py (should succeed after fix)"
+  },
+  
+  "success_percentage": {
+    "backend": "0% - PDF processing fails completely",
+    "frontend": "N/A - Not tested (backend failure blocks all functionality)",
+    "overall": "0%"
+  },
+  
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  
+  "conclusion": "The user's report is VALID. The PDF organizer fails on real Tejas200 PDFs not because the PDFs are malformed or the parser is broken, but because the ANCHOR regex is too permissive and matches solution step numbers as question numbers. This causes the anchor count to exceed the safety limit of 300, triggering a false rejection. The parser itself works correctly - the issue is in the anchor detection logic. Main agent must fix the ANCHOR regex or add filtering logic to distinguish question numbers from step numbers."
+}

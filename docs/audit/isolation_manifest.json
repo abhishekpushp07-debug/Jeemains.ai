@@ -1,0 +1,23 @@
+{
+  "audit_harness": "/app/docs/audit/tests/test_corrected_audit_harness.py",
+  "isolation_method": "NamespaceProxy with failclosed collection mapping",
+  "namespace_pattern": "audit_{UUID}_tejas_{collection}",
+  "app_source_hashes": {
+    "/app/backend/tejas/db.py": "bdf0519c75b483abb320ae37dda4a21e3e38a619aaaaf4f0d7ccbc5e9b4d4c1f",
+    "/app/backend/tejas/packs.py": "9d4030c3ac01be3aa85a71544f9358fc734b76ede2d4ff66e03330b889868ebd",
+    "/app/backend/tejas/attempts.py": "5815007d594a06bd56c619093895816483180ddccd5349bf3cf6e77197965b76",
+    "/app/backend/tejas/content.py": "b2e668eecb2c01adfa00283580eff462308466c4584499daf6e6072b3a84e022",
+    "/app/backend/tejas/jobs.py": "715d98401218baf8e4b80afefa592dc3479d020dc29fd60f5dd225e5f1504510",
+    "/app/backend/tejas/corrections.py": "ffa98bf42373c9561653b59c8cb2e8dfbdce32e5e185341c902387c3fc5f67ca"
+  },
+  "verified_isolation": true,
+  "main_collections_unchanged": true,
+  "tests_confirmed": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "SUPPLIED_CHAPTER_BOOKS_LIVE_AND_VERIFIED",
+  "published": {"tests":94,"questions":4700,"physics":30,"chemistry":32,"mathematics":32,"valid_until":"2027-10-17","precise_validity_evidence":"test_reports/chapter50_publication.json"},
+  "rules": {"questions_per_test":50,"personal_timer_seconds":3600,"correct":3,"incorrect":-1,"unanswered":0,"maximum":150,"results":"immediately after submission","availability_days":365},
+  "independent_recheck": {"passed_tests":94,"matched_source_keys":4700,"report":"test_reports/chapter50_recheck.json","scope":"Source fidelity, chapter counts, key pairing and regions; not academic answer certification"},
+  "automated": {"passed":396,"failed":0,"evidence":"test_reports/chapter_final_full_regression.log","frontend_build":"test_reports/chapter_frontend_final_build.log"},
+  "browser_verified": ["Actual single-PDF upload and duplicate idempotency", "Owner Q1/Q50 question/key preview", "94-test catalog subject counts/search/12-card pagination", "Phone login and preflight start", "Personal3600-second deadline unaffected by reload", "Offline answer recovery and saved D/A selections", "Catalog Resume", "Active keyasset403 and no answer keys in attempt DTO", "Submit immediate2/150 for1correct1wrong48skipped", "Actual complete answer-key PDF download", "True100–500percent canvas zoom/pan", "Desktop1920x800 and mobile390x844 with no horizontal overflow", "Opaque owner dialog and light/dark readable controls"],
+  "pdf_evidence":"test_reports/chapter_pdf_verification.json",
+  "final_screenshot_logs": ["/root/.emergent/automation_output/20261017_110104/console_20261017_110104.log", "/root/.emergent/automation_output/20261017_110616/console_20261017_110616.log", "/root/.emergent/automation_output/20261017_111214/console_20261017_111214.log"],
+  "findings_disposition": {"75_test_harness":"Corrected QA field and storage mocking; full suite now passes", "77_incomplete_browser_run":"Superseded by actual main E2E and independent78/79 checks", "solution_kind_loss":"Fixed frozen-pack/public-DTo propagation and backwards-safe metadata; covered by4new tests", "mobile_zoom":"Replaced fit-only enlargement with true bounded zoom/pan", "transparent_dialog":"Fixed nonexistent surface token; actual opaque background verified", "dark_contrast":"Scoped theme tokens fixed; real populated dark-mode screenshots checked", "temporary_locator_timeouts":"Corrected test selectors after reading source; no product workaround"},
+  "no_mocked_application_apis":true,
+  "worked_solutions":"NOT_SUPPLIED_NOT_GENERATED",
+  "new_unreviewed_sources":"PRIVATE_PUBLICATION_BLOCKED_PENDING_INDEPENDENT_RECHECK",
+  "preserved":"Original owner identity and original75-questionreadyunscheduledimport",
+  "separate_release_gates":["500000-user capacity remainsUNQUALIFIED", "Previously documented CRA-chain security advisories remain"]
+}

@@ -1,0 +1,98 @@
+{
+  "summary": "Completed targeted backend regression tests for solution_kind metadata and frontend SourceDetailViewer.js canvas zoom/pan verification. All 396 backend tests pass (392 original + 4 new). Frontend zoom controls work correctly on mobile (200% default) and desktop (100% default) with no horizontal overflow.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend: test_solution_kind_survives_pack_seal_hydrate - solution_kind field preserved through pack seal->hydrate cycle",
+    "Backend: test_solution_kind_derived_from_explicit_text - Old packs derive solution_kind from explicit 'Supplied answer key' text without changing stored pack hash",
+    "Backend: test_solution_kind_does_not_affect_scoring - solution_kind metadata does not affect scoring logic",
+    "Backend: test_report_shows_answer_key_only_flag - Report generation detects answer_key_only and generates PDF with 'RESULTS & ANSWER KEYS' header",
+    "Frontend Mobile (390x844): Default zoom 200%, zoom in to 250%, zoom out, reset to 100% (Fit) - all working",
+    "Frontend Mobile: No horizontal overflow in source viewer modal",
+    "Frontend Mobile: Canvas element renders correctly, pan controls (left/right/up/down) present",
+    "Frontend Desktop (1920x800): Default zoom 100%, zoom in to 150%, zoom out - all working",
+    "Frontend Desktop: No horizontal overflow in source viewer modal",
+    "Frontend Desktop: Keyboard controls work (+/- for zoom, arrow keys for pan)",
+    "Frontend: ReportButton shows 'Download results & answer keys PDF' text",
+    "Frontend: Results page shows 'Supplied answer key' labels and 'no worked solution' indication",
+    "Full pytest suite: 396 tests passed (392 original + 4 new solution_kind tests)"
+  ],
+  "test_report_links": [
+    "/app/tests/packet1/test_chapter_books.py (lines 1122-1377 - new solution_kind regression tests)",
+    "/tmp/pytest_full_run.log",
+    "/root/.emergent/automation_output/20261017_105613/console_20261017_105613.log (mobile zoom test)",
+    "/root/.emergent/automation_output/20261017_105647/console_20261017_105647.log (desktop zoom test)",
+    "/root/.emergent/automation_output/20261017_105717/console_20261017_105717.log (report button labels test)"
+  ],
+  "success_percentage": {
+    "backend": "100% (396/396 tests passed)",
+    "frontend": "100% (all SourceDetailViewer zoom/pan controls working, no overflow issues)"
+  },
+  "updated_files": [
+    "/app/tests/packet1/test_chapter_books.py (added 4 new regression tests for solution_kind)"
+  ],
+  "action_item_for_main_agent": "",
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  "detailed_verification": {
+    "backend_regression_tests": {
+      "test_solution_kind_survives_pack_seal_hydrate": "PASS - Verified solution_kind field is preserved in pack allowlist and survives seal->unpack->hydrate cycle",
+      "test_solution_kind_derived_from_explicit_text": "PASS - Verified old immutable packs with explicit 'Supplied answer key: X. This book does not contain a worked solution.' text derive solution_kind='answer_key_only' without changing stored pack hash",
+      "test_solution_kind_does_not_affect_scoring": "PASS - Verified attempts with and without solution_kind field produce identical scores",
+      "test_report_shows_answer_key_only_flag": "PASS - Verified render_report() detects answer_key_only and generates PDF with 'RESULTS & ANSWER KEYS' header"
+    },
+    "frontend_source_viewer": {
+      "mobile_390x844": {
+        "default_zoom": "200% (PASS)",
+        "zoom_in": "250% (PASS)",
+        "zoom_out": "200% (PASS)",
+        "reset_fit": "100% (PASS)",
+        "horizontal_overflow": "None (PASS)",
+        "canvas_element": "Present and functional (PASS)",
+        "pan_controls": "All 4 directions present (PASS)"
+      },
+      "desktop_1920x800": {
+        "default_zoom": "100% (PASS)",
+        "zoom_in": "150% (PASS)",
+        "zoom_out": "100% (PASS)",
+        "horizontal_overflow": "None (PASS)",
+        "canvas_dimensions": "948x342 pixels (PASS)",
+        "pan_controls": "All 4 directions present (PASS)",
+        "keyboard_controls": "Arrow keys and +/- work (PASS)"
+      }
+    },
+    "report_button_labels": {
+      "button_text": "Download results & answer keys PDF (PASS)",
+      "supplied_answer_key_label": "Present in results (PASS)",
+      "no_worked_solution_indication": "Present in results (PASS)"
+    },
+    "existing_qa_attempt": {
+      "attempt_id": "5ad03739-f826-465c-a50f-318e3758a01b",
+      "phone": "+12025550198",
+      "results_page_accessible": "PASS",
+      "results_expand_button": "PASS (data-testid='results-expand-1')",
+      "source_image_zoom": "PASS (data-testid='source-image-zoom')",
+      "zoom_controls": "PASS (all testids present: source-zoom-in, source-zoom-out, source-zoom-reset, source-zoom-level)",
+      "canvas": "PASS (data-testid='source-zoom-canvas')",
+      "pan_controls": "PASS (data-testid='source-pan-left/right/up/down')"
+    }
+  },
+  "notes": [
+    "All 4 new backend regression tests for solution_kind metadata added to /app/tests/packet1/test_chapter_books.py",
+    "Tests verify: (1) solution_kind survives pack operations, (2) old packs derive flag from explicit text without mutation, (3) scoring unaffected, (4) PDF report header correct",
+    "Frontend SourceDetailViewer.js verified on both mobile (390x844) and desktop (1920x800) viewports",
+    "Mobile defaults to 200% zoom, desktop to 100% zoom as expected",
+    "No horizontal overflow issues found in any viewport or zoom level",
+    "Canvas zoom/pan controls work via buttons, keyboard, and drag",
+    "ReportButton correctly shows 'answer keys' text for answer_key_only content",
+    "Existing QA attempt 5ad03739-f826-465c-a50f-318e3758a01b verified with all required testids present",
+    "Full pytest suite maintains 100% pass rate with new tests included"
+  ]
+}

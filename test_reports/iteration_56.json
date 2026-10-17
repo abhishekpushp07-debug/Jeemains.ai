@@ -1,0 +1,134 @@
+{
+  "summary": "Analytics deep validation completed - all 29 oracle-based tests passing. Verified guide04 formulas independently against authoritative source, corrected A04/A05 misnumbering, validated A13 ratio (not percentage), A24/A25 revision deltas, A26 late-window 20% boundary, and A56/A58/A59 tracking.",
+  "test_iteration": 56,
+  "test_date": "2025-01-13",
+  "test_file": "/app/backend/tests/test_analytics_deep_validation.py",
+  "total_tests": 29,
+  "passed_tests": 29,
+  "failed_tests": 0,
+  "backend_issues": {
+    "critical_bugs": [],
+    "implementation_notes": [
+      {
+        "component": "analytics.py",
+        "note": "Implementation correctly follows guide04 formulas",
+        "verified_metrics": ["A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A13", "A24", "A25", "A26", "A56", "A58", "A59"],
+        "status": "CORRECT"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": []
+  },
+  "passed_tests_detail": [
+    "test_analytics_registry_structure - Verified 60 metrics A01-A60 with required fields",
+    "test_oracle_metric_names_match_guide - Verified metric IDs map to correct names per source guide",
+    "test_a01_net_marks_includes_bonus_excludes_dropped - A01: Net awarded marks = sum(score_q) including awards",
+    "test_a02_correct_count_not_percentage - A02: Fully correct response count (COUNT not percentage)",
+    "test_a03_incorrect_and_partial_separate - A03: W=count(incorrect), P=count(partial_credit) displayed separately",
+    "test_a04_accuracy_formula_c_over_a - A04: Attempted-answer accuracy = 100*C/A (CORRECTED from prior swap)",
+    "test_a05_completion_formula_a_over_e - A05: Response completion rate = 100*A/E (CORRECTED from prior swap)",
+    "test_a04_unavailable_when_no_attempts - A04: Unavailable when A=0",
+    "test_a05_unavailable_when_no_eligible - A05: Unavailable when E=0",
+    "test_a06_ordinary_positive_marks_g - A06: G = sum(max(s_q, 0))",
+    "test_a07_penalty_marks_l - A07: L = sum(max(-s_q, 0))",
+    "test_a08_penalty_ratio_gated_by_g_positive - A08: 100*L/G gated by G>0",
+    "test_a08_unavailable_when_g_zero - A08: Unavailable when G=0",
+    "test_a09_percentage_allows_negative - A09: 100*S/M allows negative percentages",
+    "test_a13_score_ratio_not_percentage - A13: score_ratio (NOT percentage) verified",
+    "test_a24_positive_delta_sum_exact - A24: sum(max(final-first, 0)) exact differences",
+    "test_a25_negative_delta_sum_exact - A25: sum(max(first-final, 0)) no arbitrary threshold",
+    "test_a24_a25_no_arbitrary_10_threshold - A24/A25: No arbitrary 10-item threshold",
+    "test_a26_late_window_20_percent_boundary - A26: C/A for final 20% vs earlier with 10-item gates",
+    "test_a26_requires_10_in_each_group - A26: Requires 10 items in EACH group",
+    "test_a56_opened_over_all_released - A56: opened/all released (includes correct/all outcomes)",
+    "test_a58_original_ledger_with_deltas - A58: original_ledger with changed item deltas",
+    "test_a59_approved_maps_vs_all_released - A59: approved maps vs all released",
+    "test_unavailable_metrics_return_none_not_zero - Unavailable metrics return None not zero",
+    "test_analytics_total_count_always_60 - Analysis.total_count always 60",
+    "test_solution_open_endpoint_authenticated_released_only - Solution consultation endpoint auth/release gating",
+    "test_solution_open_idempotent - Solution open idempotency verified",
+    "test_first_answer_capture_atomic - first_answers atomic capture verified",
+    "test_no_secrets_in_analytics_output - No secrets in analytics output"
+  ],
+  "test_coverage": {
+    "analytics_metrics_tested": {
+      "A01": "Net awarded marks - PASS",
+      "A02": "Fully correct response count - PASS",
+      "A03": "Incorrect and partial outcomes - PASS",
+      "A04": "Attempted-answer accuracy (CORRECTED) - PASS",
+      "A05": "Response completion rate (CORRECTED) - PASS",
+      "A06": "Ordinary positive marks earned - PASS",
+      "A07": "Penalty marks lost - PASS",
+      "A08": "Penalty-to-positive-marks ratio - PASS",
+      "A09": "Percentage of configured maximum marks - PASS",
+      "A13": "Response-type performance (ratio not percentage) - PASS",
+      "A24": "Positive score difference after revisions - PASS",
+      "A25": "Negative score difference after revisions - PASS",
+      "A26": "Late-window attempted accuracy - PASS",
+      "A56": "Released-solution consultation rate - PASS",
+      "A58": "Approved-key score revision impact - PASS",
+      "A59": "Approved explanation availability - PASS"
+    },
+    "oracle_validation": {
+      "registry_structure": "PASS - 60 metrics A01-A60 verified",
+      "metric_names": "PASS - All names match guide04",
+      "formulas": "PASS - Formulas match authoritative source",
+      "evidence_states": "PASS - unavailable/not_collected/insufficient_sample",
+      "no_secrets": "PASS - No sensitive data in output"
+    },
+    "endpoint_tests": {
+      "solution_consulted": "PASS - Auth and release gating verified",
+      "idempotency": "PASS - Multiple calls handled correctly"
+    },
+    "data_integrity": {
+      "first_answers_capture": "PASS - Atomic first nonempty capture",
+      "revision_tracking": "PASS - Change history preserved",
+      "correction_tracking": "PASS - Original ledger with deltas"
+    }
+  },
+  "not_covered": {
+    "metrics_not_tested": [
+      "A10-A12: Subject/chapter/concept breakdowns (require reviewed tags)",
+      "A14-A15: Difficulty/exposure analysis (require cohort data)",
+      "A16-A23: Timing metrics (require telemetry)",
+      "A27-A30: Review/omission metrics (require navigation events)",
+      "A31-A40: Cohort comparisons (require 100+ learner cohort)",
+      "A41-A45: Confidence/error attribution (require optional collection)",
+      "A46-A55: Progress/variability/backlog (require multi-attempt history)",
+      "A57: Solution review duration (require telemetry)",
+      "A60: Timing evidence coverage (require telemetry)"
+    ],
+    "infrastructure_tests_not_added": [
+      "A06 stale lease inject at completion (jobs system)",
+      "Archive outbox crash+maintenance replay (maintenance system)",
+      "Bounded concurrent start/save replay (concurrency system)"
+    ],
+    "reason": "Review request focused on analytics formula validation. Infrastructure tests (lease rotation, archive replay, concurrency) are separate concerns for jobs/maintenance modules, not analytics.py validation."
+  },
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/backend/tests/test_analytics_deep_validation.py",
+    "/app/backend/tests/conftest.py (symlink to packet1)"
+  ],
+  "success_percentage": {
+    "analytics_oracle_validation": "100% (29/29 tests passing)",
+    "core_metrics_A01-A09": "100% (all formulas verified against guide04)",
+    "revision_metrics_A24-A26": "100% (deltas and late-window verified)",
+    "tracking_metrics_A56-A59": "100% (solution/correction/approval verified)"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false,
+  "test_command": "cd /app/backend && python -m pytest tests/test_analytics_deep_validation.py -v",
+  "test_output_file": "/app/test_reports/iteration_56_full_output.txt",
+  "notes": [
+    "CRITICAL CORRECTION: Prior tests had A04/A05 swapped. A04 is ACCURACY (C/A), A05 is COMPLETION (A/E).",
+    "A13 verified as RATIO (0.0-1.0) not percentage (0-100).",
+    "A24/A25 verified with no arbitrary 10-item threshold.",
+    "A26 verified with 20% late boundary and 10-item gates in EACH group.",
+    "All tests use oracle SOURCE formulas from analytics_registry.json and guide04, not implementation assumptions.",
+    "No app code edits made - tests validate existing correct implementation.",
+    "Isolated database tests with clean_db fixture from packet1/conftest.py."
+  ]
+}

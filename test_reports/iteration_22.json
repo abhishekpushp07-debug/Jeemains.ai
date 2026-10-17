@@ -1,0 +1,207 @@
+{
+  "summary": "Completed iteration 22 FINAL NARROW REGRESSION testing. Verified: (1) ReportButton polling fix - component now explicitly calls POST /jobs/{id}/retry for failed jobs, (2) Pending grading UI with actual 202 responses and polling, (3) StudioEditor useCallback + selection ref fix for load hook, (4) Complete flow with confirm-accept button. All core functionality working correctly.",
+  
+  "backend_issues": {
+    "critical_bugs": [],
+    "minor_issues": []
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  
+  "passed_tests": [
+    "Complete flow: Login → Preflight → Start → Save → Submit → Results → Download PDF",
+    "Login with phone +12025550184 successful",
+    "Navigate to set f565e4db-19bb-45c2-95ef-75b74bd985b6",
+    "Device check with test answer '25' passed",
+    "Preflight acknowledgment works",
+    "Start button creates active attempt",
+    "player-option-1 selection works",
+    "player-submit-button triggers submit",
+    "confirm-accept button works (EXACT selector verified)",
+    "Results page loads with score display",
+    "PDF download successful",
+    "ReportButton fix: Failed job detection works",
+    "ReportButton fix: POST /jobs/{id}/retry called explicitly (line 65 in ReportButton.js)",
+    "ReportButton fix: Polling after retry works",
+    "ReportButton fix: PDF download after retry successful",
+    "ReportButton fix: No busy lock or error state",
+    "Pending grading UI: 202 response with grading status",
+    "Pending grading UI: results-grading-pending page displayed",
+    "Pending grading UI: Receipt displayed correctly",
+    "Pending grading UI: Grading status message shown",
+    "Pending grading UI: 'My practice' link present",
+    "Pending grading UI: Desktop screenshot (1920x800) captured",
+    "Pending grading UI: Mobile screenshot (390x844) captured",
+    "Pending grading UI: Real job grading completed",
+    "Pending grading UI: Final results displayed after grading",
+    "StudioEditor: Owner login successful",
+    "StudioEditor: Studio page loads",
+    "StudioEditor: Set editor opens",
+    "StudioEditor: Questions tab works",
+    "StudioEditor: Questions loaded (3 questions)",
+    "StudioEditor: useCallback + selection ref fix working (lines 71-82)",
+    "StudioEditor: First question selection works",
+    "StudioEditor: No unintended edit/publish",
+    "Retry endpoint guards: Code review confirms 409 (not 500) for cross-parent/cross-start-key (lines 410-421 in attempts.py)"
+  ],
+  
+  "test_report_links": [
+    "/app/.screenshots/test_report_Tejas-results-and-solutions.pdf",
+    "/app/.screenshots/test2_report_button_retry.jpeg",
+    "/app/.screenshots/test3_pending_desktop.jpeg",
+    "/app/.screenshots/test3_pending_mobile.jpeg",
+    "/app/.screenshots/test3_final_results.jpeg",
+    "/app/.screenshots/test4_studio_editor.jpeg",
+    "/root/.emergent/automation_output/20261012_093739/console_20261012_093739.log",
+    "/root/.emergent/automation_output/20261012_094130/console_20261012_094130.log",
+    "/root/.emergent/automation_output/20261012_094307/console_20261012_094307.log",
+    "/root/.emergent/automation_output/20261012_094457/console_20261012_094457.log"
+  ],
+  
+  "action_item_for_main_agent": "",
+  
+  "updated_files": [],
+  
+  "success_percentage": {
+    "backend": "100% (all endpoints working, retry logic verified)",
+    "frontend_ui": "100% (all UI elements working, pending grading UI verified)",
+    "frontend_integration": "100% (ReportButton retry fix working, StudioEditor load hook working)",
+    "regression_tests": "100% (all narrow regression tests passed)"
+  },
+  
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  
+  "detailed_test_results": {
+    "test_1_complete_flow": {
+      "status": "PASSED",
+      "description": "Complete flow from login to PDF download",
+      "evidence": "All steps completed successfully, PDF downloaded",
+      "test_ids_verified": [
+        "student-login-phone-input",
+        "student-login-continue-button",
+        "device-test-answer",
+        "preflight-run-check",
+        "preflight-check-success",
+        "preflight-acknowledge",
+        "set-preflight-start-button",
+        "player-option-1",
+        "player-submit-button",
+        "confirm-accept",
+        "results-score-total",
+        "results-download-report-button"
+      ],
+      "notes": [
+        "confirm-accept button selector verified (not confirm-action)",
+        "Score displayed: 3/12",
+        "PDF filename: Tejas-results-and-solutions.pdf"
+      ]
+    },
+    "test_2_report_button_fix": {
+      "status": "PASSED",
+      "description": "ReportButton explicitly calls POST /jobs/{id}/retry for failed jobs",
+      "evidence": "Network logs show POST /api/jobs/report-{id}/retry called",
+      "network_flow": [
+        "POST /api/attempts/{id}/report (200)",
+        "POST /api/jobs/{id}/retry (200) ← KEY FIX",
+        "GET /api/jobs/{id} (polling)",
+        "GET /api/jobs/{id}/download (200)"
+      ],
+      "notes": [
+        "Failed job injected with status=failed, attempts=3, no path",
+        "Component detected failed status and called retry endpoint",
+        "Report generated successfully after retry",
+        "No busy lock or error state",
+        "Fix verified in ReportButton.js line 65: if (next.status === 'failed') next = await post('/jobs/' + next.id + '/retry');"
+      ]
+    },
+    "test_3_pending_grading_ui": {
+      "status": "PASSED",
+      "description": "Pending grading UI with actual 202 responses and real job execution",
+      "evidence": "202 response, pending UI displayed, grading completed",
+      "ui_elements_verified": [
+        "results-grading-pending",
+        "submission-receipt",
+        "grading-status",
+        "grading-back-home"
+      ],
+      "screenshots": [
+        "Desktop 1920x800: /app/.screenshots/test3_pending_desktop.jpeg",
+        "Mobile 390x844: /app/.screenshots/test3_pending_mobile.jpeg",
+        "Final results: /app/.screenshots/test3_final_results.jpeg"
+      ],
+      "notes": [
+        "GET /api/attempts/{id}/results returned 202",
+        "Receipt displayed: 273f767b-efe3-47b2-9f0f-b14d7ed837be",
+        "Grading status: 'Preparing your results and matched solutions…'",
+        "'My practice' link present and working",
+        "Real grade job executed (not mocked)",
+        "Grading completed after 1 second",
+        "Final results displayed with score 3/12",
+        "Polling logic working correctly (lines 47-65 in Results.js)"
+      ]
+    },
+    "test_4_studio_editor_load_hook": {
+      "status": "PASSED",
+      "description": "StudioEditor useCallback + selection ref fix for load hook",
+      "evidence": "Questions loaded correctly, no errors",
+      "code_verified": [
+        "Line 71: const selection = useRef({ dirty, index: i });",
+        "Line 72: selection.current = { dirty, index: i };",
+        "Lines 73-82: const load = useCallback with selection.current.dirty check"
+      ],
+      "notes": [
+        "Owner login successful (owner@tejas-platform.com)",
+        "Studio page loaded",
+        "Set f565e4db-19bb-45c2-95ef-75b74bd985b6 opened",
+        "Questions tab loaded",
+        "3 questions found and displayed",
+        "First question selected successfully",
+        "No edit/publish performed (read-only verification)",
+        "useCallback + selection ref fix prevents unnecessary re-renders"
+      ]
+    },
+    "test_5_retry_endpoint_guards": {
+      "status": "VERIFIED_BY_CODE_REVIEW",
+      "description": "Retry endpoint guards for cross-parent/cross-start-key conflicts",
+      "code_verified": [
+        "Lines 410-415 in attempts.py: Check for cross-parent/cross-start-key conflicts",
+        "Lines 419-421 in attempts.py: Returns 409 (not 500) for conflicts"
+      ],
+      "notes": [
+        "Code review confirms gentle error handling",
+        "Returns 409 Conflict instead of 500 Internal Server Error",
+        "Error message: 'This retry identifier belongs to a different request.'",
+        "Prevents cross-parent attempt confusion",
+        "Prevents cross-start-key conflicts"
+      ]
+    }
+  },
+  
+  "test_credentials_used": {
+    "phone": "+12025550184",
+    "owner_email": "owner@tejas-platform.com",
+    "set_id": "f565e4db-19bb-45c2-95ef-75b74bd985b6",
+    "attempt_id": "273f767b-efe3-47b2-9f0f-b14d7ed837be"
+  },
+  
+  "regression_verification": {
+    "report_button_fix": "CONFIRMED - Component explicitly calls POST /jobs/{id}/retry for failed jobs (line 65)",
+    "pending_grading_ui": "CONFIRMED - Actual 202 responses with polling, real job execution, desktop + mobile screenshots",
+    "studio_editor_hook": "CONFIRMED - useCallback + selection ref fix working, questions load correctly",
+    "retry_endpoint_guards": "CONFIRMED - Code review shows 409 (not 500) for cross-parent/cross-start-key conflicts",
+    "confirm_accept_button": "CONFIRMED - Exact selector 'confirm-accept' working (not 'confirm-action')"
+  },
+  
+  "environment_verification": {
+    "public_url": "https://campus-launch-2.preview.emergentagent.com",
+    "backend_url": "https://campus-launch-2.preview.emergentagent.com/api",
+    "services_status": "All services running correctly",
+    "no_new_sets_created": "CONFIRMED - Used existing set f565e4db-19bb-45c2-95ef-75b74bd985b6",
+    "qa_only_flag": "Used for test attempts to scope fault injection"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "summary": "Verified PDF organizer regression fix (iteration 60 → 61). Fix successfully resolves issue where Solutions PDF with 338 anchors was rejected due to ANCHOR regex matching solution step numbers. All 75 questions now extracted correctly with math preserved as source (no guessed conversions).",
+  
+  "regression_issue": {
+    "iteration": 60,
+    "user_report": "By the way pdf se nahi le pa rha direct questions. Ab",
+    "root_cause": "Solutions PDF contains 338 anchors (limit: 300) because ANCHOR regex matched solution step numbers (1., 2., 3.) as question numbers",
+    "affected_file": "/app/backend/tejas/pdf_organiser_worker.py",
+    "affected_lines": [71, 81, 82, 86, 87, 93]
+  },
+  
+  "fix_applied": {
+    "approach": "Context-aware anchor detection: distinguish Q-prefixed headers from bare numerals",
+    "implementation": [
+      "Line 71: Added has_prefixed_headers flag (default: False)",
+      "Lines 81-82: Set has_prefixed_headers=True when Q-prefixed anchors found (match[1])",
+      "Lines 86-87: Added comment explaining logic",
+      "Line 93: Only accept bare numerals (m[2]) if has_prefixed_headers is False"
+    ],
+    "logic": "If document has Q-prefixed headers (Q1., Q2., etc.), only accept Q-prefixed anchors. This prevents solution step numbers (1., 2., 3.) from being matched as question anchors."
+  },
+  
+  "verification_results": {
+    "test_1_processing_success": "PASS - PDF processing succeeded (was failing with 'No reliable numbered questions found')",
+    "test_2_question_count": "PASS - Extracted exactly 75 questions (not 338 false positives)",
+    "test_3_no_issues": "PASS - No issues reported",
+    "test_4_math_preservation": "PASS - All 75 questions use render_mode='source' (no guessed conversions)",
+    "test_5_subject_distribution": "PASS - Mathematics: 25, Physics: 25, Chemistry: 25",
+    "test_6_type_distribution": "PASS - MCQ: 60, Integer: 15",
+    "test_7_answer_extraction": "PASS - All 75 questions have answers",
+    "test_8_asset_preservation": "PASS - Question assets: 85, Solution assets: 106, Total: 191",
+    "test_9_solution_matching": "PASS - All solutions matched (0 unmatched)",
+    "test_10_metadata": "PASS - Exam: JEE Main, Duration: 180 min, Sandbox: chroot_low_uid_seccomp_resource_limits"
+  },
+  
+  "test_artifacts": {
+    "questions_pdf": {
+      "path": "/app/test_reports/fixtures/real_tejas200_questions.pdf",
+      "size_bytes": 225987,
+      "pages": 11,
+      "anchors_detected_before_fix": 77,
+      "anchors_detected_after_fix": 75,
+      "false_positives_eliminated": 2
+    },
+    "solutions_pdf": {
+      "path": "/app/test_reports/fixtures/real_tejas200_solutions.pdf",
+      "size_bytes": 416394,
+      "pages": 32,
+      "anchors_detected_before_fix": 338,
+      "anchors_detected_after_fix": 75,
+      "false_positives_eliminated": 263
+    }
+  },
+  
+  "math_preservation_verification": {
+    "requirement": "OutputsrealMath should remain source, no guessed conversion",
+    "result": "VERIFIED",
+    "details": {
+      "total_questions": 75,
+      "render_mode_source": 75,
+      "render_mode_text": 0,
+      "render_reason": "Original PDF regions preserve mathematical layout, fonts, or figures.",
+      "total_assets": 191,
+      "question_assets": 85,
+      "solution_assets": 106
+    },
+    "conclusion": "All mathematical expressions preserved as PNG images from source PDF. No text conversion or guessing applied."
+  },
+  
+  "processing_metrics": {
+    "processing_time_seconds": 2.10,
+    "output_size_bytes": 10879859,
+    "output_size_mb": 10.38,
+    "sandbox_mode": "chroot_low_uid_seccomp_resource_limits",
+    "source_pages": {
+      "questions": 11,
+      "solutions": 32
+    }
+  },
+  
+  "backend_issues": {
+    "critical_bugs": []
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": []
+  },
+  
+  "passed_tests": [
+    "PDF processing succeeds (was failing)",
+    "Exactly 75 questions extracted (not 338 false positives)",
+    "All render_mode='source' (no guessed math conversions)",
+    "Correct subject distribution (25 per subject)",
+    "Correct type distribution (60 MCQ, 15 integer)",
+    "All 75 questions have answers extracted",
+    "Assets preserved (85 question, 106 solution)",
+    "All solutions matched (0 unmatched)",
+    "Metadata extracted correctly",
+    "Sandbox isolation working correctly"
+  ],
+  
+  "test_report_links": [
+    "/app/test_reports/iteration_61_regression_verification.py",
+    "/app/test_reports/regression_tejas200_pdf.py",
+    "/app/test_reports/test_real_tejas200_pdfs.py",
+    "/app/test_reports/tejas200_regression_verification.log",
+    "/app/test_reports/real_tejas200_detailed_results.json"
+  ],
+  
+  "updated_files": [
+    "/app/test_reports/iteration_61_regression_verification.py",
+    "/app/test_reports/tejas200_regression_verification.log"
+  ],
+  
+  "action_item_for_main_agent": "",
+  
+  "success_percentage": {
+    "backend": "100% - All PDF processing tests passed",
+    "frontend": "N/A - Backend-only fix, no frontend changes",
+    "overall": "100%"
+  },
+  
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "false",
+  
+  "conclusion": "✅ REGRESSION FIX VERIFIED - The PDF organizer now correctly processes Tejas200 PDFs with detailed solutions. The fix distinguishes Q-prefixed question headers from bare solution step numbers, preventing false positives. All 75 questions extracted correctly with math preserved as source (no guessed conversions). Processing time: 2.10s, output: 10.38 MB, 191 assets. No issues reported."
+}

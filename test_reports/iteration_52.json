@@ -1,0 +1,124 @@
+{
+  "summary": "Deep testing of backend hardening changes (A01-A06) completed successfully. All original invariants now pass. Updated test_audit_regressions.py removing strict xfails for A01-A05. Rewrote A06 test to reflect architectural change: extraction now ONLY stages proposal via completion lease CAS with NO academic destination writes. Added 9 deep concurrent test cases covering retry aliases, conflicting intents, stale revisions, archive recovery, job dispatch, auth, and publication outbox crash scenarios. All 21 audit regression tests pass. Verified dependency upgrades: Motor 3.7.1, PyMongo 4.18.3, PyJWT 2.15.1, Pillow 12.3.0, pytest 9.1.1, pytest-asyncio 1.4.0. Full packet1 suite: 198 tests passed.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "A01: Retry alias survives completed retry - durable binding works correctly",
+    "A02: Publish has one same-version archive - CAS prevents duplicates",
+    "A03: Concurrent question edits preserve both - revision CAS with optional expected_revision",
+    "A04: Unknown audience denied - validation rejects unknown/missing audience",
+    "A05: Waiting grade job drains without second trigger - finite lane draining on release",
+    "A06: Extraction stages proposal no destination write - safe extraction via completion lease CAS",
+    "Motor namespace guards - database boundary protection",
+    "Held jobs preserve exact intent before lease - safety holds work correctly",
+    "Hold rejects without receiving body - content safety middleware",
+    "Direct protected functions deny before lookup - capability checks",
+    "Command nested body is immutable - intent integrity",
+    "Phone practice save resume submit preserved - end-to-end flow",
+    "Concurrent retry aliases across routes - multiple keys bind to same retry",
+    "Conflicting retry intents rejected - different parent/score version denied",
+    "Stale client revision rejected - expected_revision parameter works",
+    "Archive failure recovery no duplicate - idempotent recovery",
+    "Late pending job dispatch - drain_lane finite dispatch works",
+    "Score/report auth unaffected - access control preserved",
+    "Publication outbox crash recovery - outbox survives process crash",
+    "Publication outbox idempotent archive - multiple calls safe",
+    "Concurrent publications one winner - CAS ensures single archive per version",
+    "Full packet1 suite: 198 tests passed (test_audit_regressions, test_baseline_evidence, test_command_contracts, test_competitions, test_engineering_endpoints, test_excel_worker_integration, test_golden_practice, test_import_api, test_ingress_contracts, test_pdf_organiser_sandbox, test_rotate_staff_credential, test_safety_holds, test_source_review, test_staff_rotation)"
+  ],
+  "test_report_links": [
+    "/app/tests/packet1/test_audit_regressions.py"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/tests/packet1/test_audit_regressions.py"
+  ],
+  "success_percentage": {
+    "audit_regressions": "100% (21/21 tests passed)",
+    "packet1_full_suite": "100% (198/198 tests passed)"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false,
+  "detailed_findings": {
+    "a01_retry_aliases": {
+      "status": "PASS",
+      "implementation": "bind_retry_alias in idempotency.py durably binds retry keys to retry_receipts map, survives completion",
+      "verification": "Retry alias persists after finalize, replay returns same retry ID"
+    },
+    "a02_publication_cas": {
+      "status": "PASS",
+      "implementation": "publish() uses CAS on revision, stores publication_pending outbox, archive_publication() is idempotent with $setOnInsert",
+      "verification": "Concurrent publications produce exactly one archive per version, no duplicates"
+    },
+    "a03_metadata_cas": {
+      "status": "PASS",
+      "implementation": "edit_question() supports optional expected_revision parameter, CAS on revision field",
+      "verification": "Concurrent edits either conflict (409) or preserve both changes, stale revision rejected"
+    },
+    "a04_audience_validation": {
+      "status": "PASS",
+      "implementation": "permitted() returns False for unknown audience (only 'all' or 'restricted' allowed)",
+      "verification": "Unknown audience values denied access"
+    },
+    "a05_lane_draining": {
+      "status": "PASS",
+      "implementation": "drain_lane() has finite 32-iteration loop, triggered on job completion",
+      "verification": "Queued job dispatches after lane slot releases without second trigger"
+    },
+    "a06_safe_extraction": {
+      "status": "PASS - ARCHITECTURE CHANGED",
+      "implementation": "Extraction stages proposal in job document output via completion lease CAS (line 132 jobs.py). NO sets.update_one call for extraction. Legacy route held.",
+      "verification": "Extraction completes with proposal in job doc, zero destination writes to sets collection, academic content unchanged",
+      "architectural_note": "Original regression (stale lease writing to destination) eliminated by removing direct destination path. Extraction now ONLY stages proposal, never mutates academic content. Unified importer is supported publication path."
+    },
+    "deep_concurrent_tests": {
+      "concurrent_retry_aliases": "PASS - 5 concurrent keys bind to same retry attempt",
+      "conflicting_intents": "PASS - Different parent/score version rejected with 409",
+      "stale_revision": "PASS - expected_revision mismatch rejected with 409",
+      "archive_recovery": "PASS - Idempotent recovery creates exactly one archive",
+      "late_dispatch": "PASS - Finite draining dispatches queued jobs after release",
+      "auth_unaffected": "PASS - Score/report access control preserved",
+      "outbox_crash": "PASS - publication_pending survives crash, recovery completes",
+      "outbox_idempotent": "PASS - Multiple archive calls safe, no duplicates",
+      "concurrent_publish": "PASS - CAS ensures one winner, one archive per version"
+    }
+  },
+  "dependency_verification": {
+    "motor": "3.7.1 (required 3.7) ✓",
+    "pymongo": "4.18.3 (required 4.18) ✓",
+    "pyjwt": "2.15.1 (required 2.15) ✓",
+    "pillow": "12.3.0 (required 12.3) ✓",
+    "pytest": "9.1.1 (required 9.1) ✓",
+    "pytest_asyncio": "1.4.0 (required 1.4) ✓"
+  },
+  "code_review_findings": {
+    "publication_outbox": {
+      "status": "SAFE",
+      "analysis": "archive_publication() is idempotent (uses $setOnInsert), handles missing publication_pending gracefully, CAS on publication_pending.id prevents race conditions",
+      "edge_cases_tested": "Crash recovery, concurrent archive calls, missing outbox, duplicate archive attempts"
+    },
+    "extraction_safety": {
+      "status": "SAFE",
+      "analysis": "Extraction path has NO sets.update_one call, proposal stored in job document via completion lease CAS, require_lease() checks prevent stale writes",
+      "architectural_improvement": "Direct destination write path eliminated, reducing race condition surface area"
+    },
+    "retry_idempotency": {
+      "status": "SAFE",
+      "analysis": "bind_retry_alias() uses CAS with retry_fingerprint check, prevents key collisions, strips inherited fields (competition_ranked, competition_end)",
+      "edge_cases_tested": "Concurrent aliases, conflicting intents, completion survival"
+    }
+  },
+  "test_isolation": {
+    "database": "Isolated test DB with UUID suffix, Motor namespace guards prevent cross-contamination",
+    "external_http": "Blocked via monkeypatch (requests, httpx, urllib)",
+    "storage": "Mocked in tests, no real S3/external storage access",
+    "credentials": "Synthetic test users, no real credentials used"
+  }
+}

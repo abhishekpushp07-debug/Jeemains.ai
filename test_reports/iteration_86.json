@@ -1,0 +1,58 @@
+{
+  "summary": "Corrected weak tests from iteration85 and validated load test scripts. Fixed test_catalog_history_per_set_not_truncated_200 (set2 started_at now-100), test_preflight_deduplicates_identical_refs (real repeated refs with spy on render_crop), test_preflight_validates_all_unique_refs_including_invalid (invalid ref last not first), test_book_view_full_vs_projected_equality (full ChapterView comparison). Fixed catalog_smoke.py and bson_bytes_benchmark.py parents path bug (parents[3]->parents[2]). All 48 packet1 tests pass. Load scripts execute successfully with proper guardrails. Verified ChapterBookStudio uses preview.chapter.id (not null) and Auth loads secrets from .env (no inline credentials).",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "All 48 tests in tests/packet1/test_chapter_books.py pass",
+    "test_catalog_history_per_set_not_truncated_200: Corrected set2 started_at to now-100 (older than all 250 set1 attempts)",
+    "test_preflight_deduplicates_identical_refs: Added real repeated refs (100 refs, 2 unique file_ids) with spy on render_crop, validates exactly 2 distinct refs per request",
+    "test_preflight_validates_all_unique_refs_including_invalid: Invalid ref now appears last (i==50) after good refs",
+    "test_book_view_full_vs_projected_equality: Full ChapterView comparison excluding only server_now",
+    "catalog_smoke.py: 40 requests, 100% success, p50=66.8ms, p95=76.25ms, p99=199.43ms, 5.04 rps",
+    "bson_bytes_benchmark.py: 95 chapter sets, 97.09% bytes saved (5.8MB -> 169KB) with BOOK_CHAPTER_PROJECT",
+    "ChapterBookStudio: Verified Dialog onOpenChange correctly sets selected=null, base URL uses preview.chapter.id (prevents /chapters/null)",
+    "Auth: Verified no inline secrets, credentials loaded from user input not hardcoded"
+  ],
+  "test_report_links": [
+    "/tmp/test_output.log",
+    "/tmp/catalog_smoke_output.log",
+    "/tmp/bson_benchmark_output.log",
+    "/app/test_reports/capacity_catalog_smoke.json",
+    "/app/test_reports/bson_bytes_benchmark.json"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/tests/packet1/test_chapter_books.py",
+    "/app/tests/load/catalog_smoke.py",
+    "/app/tests/load/bson_bytes_benchmark.py"
+  ],
+  "success_percentage": {
+    "packet1_tests": "100% (48/48)",
+    "load_tests": "100% (2/2)"
+  },
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true",
+  "test_corrections": {
+    "test_catalog_history_per_set_not_truncated_200": "Changed set2 started_at from now+300 to now-100 so it's older than all 250 set1 attempts (which start at now+i). This ensures the OLD implementation would FAIL, not PASS.",
+    "test_preflight_deduplicates_identical_refs": "Replaced empty refs with real repeated refs: 50 questions with 2 distinct file_ids (file_id_1 for q_refs, file_id_2 for s_refs) = 100 total refs but only 2 unique. Added spy on render_crop to assert exactly 2 distinct refs validated from 100 original refs, AND 2 again on second request (no cross-request caching).",
+    "test_preflight_validates_all_unique_refs_including_invalid": "Moved invalid_file_id from i==1 (first question) to i==50 (last question) so invalid unique ref appears LAST after good first refs and raises, not first.",
+    "test_book_view_full_vs_projected_equality": "Changed from checking only few fields (count, title) to actually comparing full ChapterView of full docs vs projected using chapter_view() function, excluding only server_now which varies."
+  },
+  "load_script_fixes": {
+    "catalog_smoke.py": "Fixed parents[3] -> parents[2] to correctly resolve /app root. Added try-catch for git HEAD retrieval. Script validates guardrails: 1..100 requests, 1..4 workers, finite 1..5 rps, 110sec wall limit, error RetryAfter, raw samples, versions, monotonic durations, nearest rank.",
+    "bson_bytes_benchmark.py": "Fixed parents[3] -> parents[2] in two locations to correctly resolve /app root."
+  },
+  "test_execution_summary": {
+    "packet1_full_suite": "48 passed in 5.68s",
+    "catalog_smoke": "40 requests, 0 failures, 7.93s duration, 5.04 actual rps",
+    "bson_benchmark": "95 documents, 97.09% savings",
+    "frontend_code_review": "ChapterBookStudio.js line 66: Dialog onOpenChange={v=>!v&&setSelected(null)} correctly nulls selected on close, base URL uses preview.chapter.id. Auth.js: No inline secrets found, credentials from user input."
+  }
+}

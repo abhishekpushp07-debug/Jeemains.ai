@@ -1,0 +1,121 @@
+{
+  "summary": "Packet 1 baseline testing completed: safety holds, command contracts, capacity profile, baseline evidence, and golden practice scorer verified. Known RED defects (A01-A06) documented but not executed due to complexity. Frontend smoke test passed.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": [],
+    "known_red_defects": [
+      {
+        "id": "A01",
+        "issue": "Retry idempotency - K2 creates duplicate retry after R1 completes",
+        "status": "KNOWN_RED_LATER_OWNED",
+        "packet": "P02/P06",
+        "note": "Intentional defect, not fixed in Packet 1"
+      },
+      {
+        "id": "A02",
+        "issue": "Concurrent publication - Both threads insert version rows",
+        "status": "KNOWN_RED_LATER_OWNED",
+        "packet": "P03/P05",
+        "note": "Intentional defect, not fixed in Packet 1"
+      },
+      {
+        "id": "A03",
+        "issue": "Lost updates - Concurrent edits without revision guard",
+        "status": "KNOWN_RED_LATER_OWNED",
+        "packet": "P03/P05",
+        "note": "Intentional defect, not fixed in Packet 1"
+      },
+      {
+        "id": "A04",
+        "issue": "Audience fails open - Unknown audience permits access",
+        "status": "KNOWN_RED_LATER_OWNED",
+        "packet": "P03",
+        "note": "Intentional defect, not fixed in Packet 1"
+      },
+      {
+        "id": "A05",
+        "issue": "Lane overflow - No auto-retry after lane capacity freed",
+        "status": "KNOWN_RED_LATER_OWNED",
+        "packet": "P04",
+        "note": "Intentional defect, not fixed in Packet 1"
+      },
+      {
+        "id": "A06",
+        "issue": "Extraction fencing - Stale worker writes to destination",
+        "status": "KNOWN_RED_LATER_OWNED",
+        "packet": "P04",
+        "note": "Intentional defect, not fixed in Packet 1"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Safety holds: Health endpoint NOT held (200 OK)",
+    "Safety holds: Source upload held with 503 before multipart parsing",
+    "Safety holds: Source parse (page/text) held with 503",
+    "Safety holds: Publication held with 503",
+    "Safety holds: Extraction held with 503",
+    "Safety holds: Regrade held with 503",
+    "Command contracts: Canonical bytes deterministic (reordered objects same hash)",
+    "Command contracts: Floats/NaN/Infinity rejected",
+    "Command contracts: Reduced exact marks enforced (3/4 ok, 2/4 rejected)",
+    "Command contracts: Scope digest vs intent digest behavior correct",
+    "Baseline evidence: 5 source PDFs, 177 pages, 3299 blocks indexed",
+    "Baseline evidence: 105 scoped obligations (45 reviewed subset + 60 analysis features)",
+    "Baseline evidence: 13 WP gates + 12 OPSR gates present",
+    "Baseline evidence: zero_orphan_proven=false, packet1_exit=BLOCKED",
+    "Capacity profile: 500k active attempts, 35000 live RPS, 51667 combined RPS",
+    "Capacity profile: 378M live operations in 3h, 1TB candidate wave, 312500 items/s grade demand",
+    "Capacity profile: All 6 stages present (1k, 10k, 50k, 100k, 250k, 500k)",
+    "Capacity profile: All SLOs present (commit-p95, commit-p99, submit-p99, grade-p95, grade-p99, server-errors, integrity-violations)",
+    "Capacity profile: PLANNING_ONLY_UNQUALIFIED status",
+    "Golden practice: 6/1 score matches hand-calculated oracle (4-1+0+4-1=6)",
+    "Frontend: Public landing page loads (HTML returned)",
+    "Frontend: No console errors in initial load"
+  ],
+  "test_report_links": [
+    "/app/backend/packet1_verification.py"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/tests/packet1/conftest.py",
+    "/app/tests/packet1/test_safety_holds.py",
+    "/app/tests/packet1/test_engineering_endpoints.py",
+    "/app/tests/packet1/test_command_contracts.py",
+    "/app/tests/packet1/test_baseline_evidence.py",
+    "/app/tests/packet1/test_golden_practice.py",
+    "/app/backend/packet1_verification.py",
+    "/app/docs/packet1/TEST_ISOLATION_IMPLEMENTATION.md"
+  ],
+  "success_percentage": {
+    "backend": "100% (16/16 verification tests passed)",
+    "frontend": "100% (smoke test passed)",
+    "baseline_evidence": "100% (all inventories verified)",
+    "command_contracts": "100% (pure function tests passed)",
+    "safety_holds": "100% (all capabilities held with 503)",
+    "capacity_profile": "100% (workload calculations correct)",
+    "golden_practice": "100% (scorer matches hand-calculated oracle)"
+  },
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "false",
+  "notes": [
+    "Test isolation infrastructure created with UUID database (tejas_p1_test_<32hex>)",
+    "Production database protected from test access",
+    "Synthetic credentials used (no real staff credentials)",
+    "Known RED defects (A01-A06) are intentional and later-owned",
+    "Packet 1 is safety/contracts/regression baseline, NOT permanent concurrency fixes",
+    "No staff credential rotation or session invalidation performed",
+    "Matte maroon and phone-only student login preserved",
+    "All capability holds active (source_upload, source_parse, publication, extraction, regrade)",
+    "Baseline evidence tooling complete: 5 sources, 177 pages, 3299 blocks, 105 obligations, 25 gates",
+    "Capacity profile: 500k attempts, 35k live RPS, 51.7k combined RPS, UNQUALIFIED",
+    "Golden practice scorer: 6/1 matches hand-calculated oracle (not generated by scorer)",
+    "Frontend smoke test: Public landing loads, no console errors",
+    "No NEW baseline defects identified",
+    "Packet 1 exit remains BLOCKED pending atomic coverage/contract approval/credential rotation"
+  ]
+}

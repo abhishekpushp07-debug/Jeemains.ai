@@ -1,0 +1,162 @@
+{
+  "summary": "Completed architecture audit of 6 candidates against RULEBOOK_ARCHITECTURE_V5.md. All tests executed in isolated environments with temporary collections. No production data modified.",
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "id": "A01",
+        "title": "Retry Resume Idempotency Violation",
+        "location": "attempts.py lines 411-415",
+        "issue": "retry() endpoint returns existing retry ID without persisting new start_key alias via bind_start_alias()",
+        "impact": "New start_key after retry completion creates duplicate retry instead of returning existing one",
+        "severity": "HIGH",
+        "reproduction": "Isolated test confirmed: K1 creates retry, retry completes, K2 creates new retry (should return K1's retry)",
+        "rule_violation": "V2 pp13-18: Identical retry returns original durable outcome. Changed body conflicts.",
+        "test_file": "/app/docs/audit/tests/a01_retry_idempotency.py"
+      },
+      {
+        "id": "A02",
+        "title": "Concurrent Publication Not Serialized",
+        "location": "content.py lines 612-614",
+        "issue": "publish() inserts tejas_versions row BEFORE CAS update on sets collection",
+        "impact": "Concurrent publishes create orphaned version rows when one CAS fails",
+        "severity": "MEDIUM",
+        "reproduction": "Isolated test confirmed: Both threads insert version rows, only one CAS succeeds, orphaned row persists",
+        "rule_violation": "V5 pp29-31: Atomic operations required. Version insertion should be after successful CAS.",
+        "test_file": "/app/docs/audit/tests/a02_concurrent_publication.py"
+      },
+      {
+        "id": "A03",
+        "title": "Lost Updates in Concurrent Editing",
+        "location": "content.py lines 473-516",
+        "issue": "edit_question() uses read-modify-write pattern without revision guard on read",
+        "impact": "Concurrent edits to different fields cause last-write-wins, losing earlier changes",
+        "severity": "MEDIUM",
+        "reproduction": "Isolated test confirmed: Editor 1 changes text, Editor 2 changes topic, final state loses Editor 1's text change",
+        "rule_violation": "V5 pp29-31: Mutations must scope to version/preconditions. No revision guard on read allows lost updates.",
+        "test_file": "/app/docs/audit/tests/a03_lost_updates.py"
+      },
+      {
+        "id": "A04",
+        "title": "Unknown Audience Fails Open",
+        "location": "content.py lines 29 (SetInput), 84-98 (permitted)",
+        "issue": "permitted() only checks audience=='restricted', returns True for all unknown values. SetInput accepts any string.",
+        "impact": "Invalid audience values (e.g., 'private-typo') pass validation and permit access",
+        "severity": "HIGH",
+        "reproduction": "Direct function test confirmed: audience='private-typo', 'internal', '' all return True",
+        "rule_violation": "V5 pp13-22: Security gates must fail closed. Unknown values should deny access, not permit.",
+        "test_file": "/app/docs/audit/tests/a04_audience_fails_open.py"
+      },
+      {
+        "id": "A05",
+        "title": "Jobs Admission Lane Has No Drain After Overflow",
+        "location": "jobs.py lines 59-60",
+        "issue": "run_job() returns immediately when lane is full. No automatic retry when capacity frees.",
+        "impact": "Overflowed jobs wait up to 15 minutes for maintenance() cron. Unbounded delay possible.",
+        "severity": "MEDIUM",
+        "reproduction": "Isolated test confirmed: Lane fills, 3rd job overflows, 1st job completes, overflow job not retried",
+        "rule_violation": "V5 pp46-52: Bounded attempts, visible failure. No unbounded application timer. Overflow creates unbounded delay.",
+        "test_file": "/app/docs/audit/tests/a05_lane_overflow.py"
+      },
+      {
+        "id": "A06",
+        "title": "Extraction Destination Fencing Gap",
+        "location": "jobs.py lines 89-91",
+        "issue": "require_lease() check at line 89 is not atomic with sets.update_one() at line 91",
+        "impact": "Stale worker can modify sets collection even if job CAS fails. Lease replacement between check and write.",
+        "severity": "HIGH",
+        "reproduction": "Isolated test confirmed: Worker 1 checks lease (valid), lease replaced, Worker 1 writes to sets (succeeds), Worker 1 job CAS fails",
+        "rule_violation": "V5 pp29-31: Fenced authority required. Destination write must be atomic with lease check or use fenced token.",
+        "test_file": "/app/docs/audit/tests/a06_extraction_fencing.py"
+      }
+    ],
+    "flaky_endpoints": [],
+    "architectural_gaps": [
+      {
+        "area": "Idempotency",
+        "gap": "Retry resume does not persist all start_key aliases during active state",
+        "reference": "V2 pp13-18, V5 pp29-31"
+      },
+      {
+        "area": "Concurrency Control",
+        "gap": "Version history insertion not atomic with publication CAS",
+        "reference": "V5 pp29-31"
+      },
+      {
+        "area": "Concurrency Control",
+        "gap": "Question editing lacks revision guard on read, causing lost updates",
+        "reference": "V5 pp29-31"
+      },
+      {
+        "area": "Security",
+        "gap": "Access control fails open for unknown audience values",
+        "reference": "V5 pp13-22"
+      },
+      {
+        "area": "Resource Management",
+        "gap": "Job lane overflow has no drain mechanism, relies on 15min cron",
+        "reference": "V5 pp46-52"
+      },
+      {
+        "area": "Distributed Coordination",
+        "gap": "Extraction destination write not fenced with lease token",
+        "reference": "V5 pp29-31"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "A01: Successfully reproduced retry idempotency violation in isolated environment",
+    "A02: Successfully reproduced concurrent publication race condition",
+    "A03: Successfully reproduced lost updates in concurrent editing",
+    "A04: Successfully confirmed audience validation fails open",
+    "A05: Successfully reproduced lane overflow without drain",
+    "A06: Successfully reproduced extraction fencing gap"
+  ],
+  "test_report_links": [
+    "/app/docs/audit/tests/a01_retry_idempotency.py",
+    "/app/docs/audit/tests/a02_concurrent_publication.py",
+    "/app/docs/audit/tests/a03_lost_updates.py",
+    "/app/docs/audit/tests/a04_audience_fails_open.py",
+    "/app/docs/audit/tests/a05_lane_overflow.py",
+    "/app/docs/audit/tests/a06_extraction_fencing.py"
+  ],
+  "action_item_for_main_agent": {
+    "priority": "AUDIT COMPLETE - NO FIXES REQUESTED",
+    "note": "User requested AUDIT ONLY. All 6 candidates confirmed. Detailed findings in test files and this report.",
+    "next_steps": [
+      "Review audit findings with user",
+      "User to decide which issues to address",
+      "Prioritize HIGH severity issues: A01, A04, A06",
+      "Consider architectural changes for concurrency control (A02, A03)",
+      "Implement drain mechanism for job lanes (A05)"
+    ]
+  },
+  "updated_files": [
+    "/app/docs/audit/tests/a01_retry_idempotency.py",
+    "/app/docs/audit/tests/a02_concurrent_publication.py",
+    "/app/docs/audit/tests/a03_lost_updates.py",
+    "/app/docs/audit/tests/a04_audience_fails_open.py",
+    "/app/docs/audit/tests/a05_lane_overflow.py",
+    "/app/docs/audit/tests/a06_extraction_fencing.py",
+    "/app/test_reports/iteration_24_audit.json"
+  ],
+  "success_percentage": {
+    "backend": "100% (6/6 audit candidates confirmed)",
+    "frontend": "N/A (backend-only audit)",
+    "isolation": "100% (all tests used temporary collections, no production data modified)"
+  },
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false,
+  "audit_metadata": {
+    "audit_date": "2026-10-12",
+    "source_baseline": "/app/docs/audit/source_baseline.json",
+    "rulebook_version": "RULEBOOK_ARCHITECTURE_V5.md",
+    "test_methodology": "Isolated reproduction with temporary collections",
+    "production_impact": "NONE - All tests isolated, temporary collections cleaned up",
+    "independent_reproduction": "YES - All findings independently reproduced, not based on earlier reports"
+  }
+}

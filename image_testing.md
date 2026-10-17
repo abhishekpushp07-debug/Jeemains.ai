@@ -1,0 +1,2 @@
+# AI vision integration testing
+Use base64 PNG/JPEG/WEBP images only, with actual question text/diagrams (not blank images). Detect real MIME after conversion; for animation use first frame; resize large images to reasonable bounds. Test exact gpt-6-astra via emergentintegrations; no fallback model. Validate generated JSON, step explanations, option mapping, two-pass disagreements and supplied-key conflict. Background JSON jobs intentionally use non-streaming completion so only validated outputs can publish. Never expose secrets, prompts or full provider exceptions in logs.

@@ -1,0 +1,1043 @@
+=== PAGE 1 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 01 / 25
+Master prompt: build the exam engine
+VOLUME 02 / BUILDER INSTRUCTION
+Emergent, implement a dependable exam engine for an independent practice platform
+serving Tejas and a growing student population. Treat the following pages as executable
+product requirements. Use the approved 2026 configurations as baselines; require a separate
+evidence review before advertising any later year as an official simulator.
+Build the shared core
+Create one reusable attempt service with exam-specific policies for content structure, answer
+types, navigation, timing, marking, and result release. Keep the scoring function independent of
+React components. The server owns the accepted answer ledger, attempt deadline, paper lock,
+and final score. The browser renders an accessible blue interface, stages edits, and sends explicit
+commands. Display an independent-practice label wherever a student might mistake the platform
+for an examination authority.
+Implement the smallest complete path first: publish a reviewed paper, start an attempt, save
+answers, recover a refresh, submit, calculate the score, and open the question-wise solutions.
+Make this path work with actual database persistence before adding advanced analytics. Reuse the
+approved content and solution contracts from Volume 03 and the measurement definitions from
+Volume 04.
+Preserve exam distinctions
+Support the JEE Main Paper 1 integer-entry contract, the BITSAT optional extra-question lock, the
+two WBJEE paper sessions with category scoring, and the COMEDK single-choice contract. WBJEE is
+an OMR examination; label its online experience a digital adaptation rather than an official CBT
+clone. Keep training conveniences, such as pause and hints, in a separate mode with a separate
+comparison cohort.
+Deliver concrete evidence
+Return the policy registry, schema migrations, attempt and answer command APIs, deterministic
+scoring fixtures, and runnable end-to-end checks. Provide an administrator preview that uses the
+exact released configuration. Add a visible readiness report listing verified source documents,
+unresolved rules, content review status, and failed checks. A paper with unresolved format or
+scoring requirements must remain unpublished as an official-style simulator. Label comparative
+scores Mock percentile within this paper's platform cohort. Never call them an NTA Score, official
+normalized percentile, or official admission rank; this platform does not observe the authority's full
+examination population.
+ACCEPTANCE / PRECAUTIONS
+Demonstrate a refresh with no loss of committed answers and no added time.
+Show the BITSAT base-paper lock and a WBJEE fractional-score example.
+Keep COMEDK duration provisional until the timing evidence gate is passed.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.01  /  25
+
+
+=== PAGE 2 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 02 / 25
+Rule registry and year-specific release
+gates
+POLICY GOVERNANCE
+Make examination behavior data-driven. A school paper may be educationally useful without
+matching an official examination format. Expose that distinction before the student starts,
+and store the selected policy version so the resulting score remains reproducible months
+later.
+Define the policy record
+Create ExamPolicy fields for examCode, variantCode, examYear, policyVersion, status, sourceIds,
+sourceDocumentHash, reviewedAt, reviewedBy, timingEvidenceStatus, and policyHash. Separate
+machine-readable behavior from student-facing instructions. Support statuses draft,
+evidence_pending, verified, approved, retired, and superseded. A verified source is not
+automatically an approved software configuration; a reviewer must confirm that the configured
+values correctly represent that source.
+Use a field-level evidence ledger. Record which source supports duration, section counts, marking,
+numeric input, navigation, review handling, accommodations, and disputed-question treatment.
+Mark a missing field unresolved instead of filling it from a familiar prior year. When a notice
+changes one field, preserve the old policy and create a new version with a precise diff.
+Separate three product modes
+Offer official-style simulation, digital adaptation, and custom training. Show a prominent mode
+badge and describe departures in plain language. A custom integer-only JEE practice paper must
+not silently inherit a full JEE Main claim. A compressed WBJEE session must not be presented as a
+full two-paper rehearsal. Allow administrators to configure educational variants while keeping their
+analytics cohorts distinct.
+Prevent stale release claims
+Do not infer 2027 rules from the retrieved 2026 bulletins. The release gate must require the
+relevant official document or approved instructions for the selected year. Display the verification
+date in the administrator report and a concise baseline year to students. For sources whose
+publication date is not explicit, identify the document year and retrieval date without inventing an
+issuance date. Treat active attempts as immutable consumers of their starting policy.
+ACCEPTANCE / PRECAUTIONS
+Changing a policy must never change an active attempt.
+A missing timing source prevents the verified-simulator badge.
+Reject publication if subject totals, question counts, or maximum marks disagree.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.02  /  25
+
+
+=== PAGE 3 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 03 / 25
+JEE Main Paper 1 configuration
+VERIFIED 2026 BASELINE
+Implement the engineering Paper 1 variant only in the initial JEE release. The NTA 2026
+bulletin linked from its official site is the source of this baseline; the source file is in its
+November 2025 upload path and was checked on 11 October 2026. [S2-01]
+Configure the published structure
+Set three subjects: Mathematics, Physics, and Chemistry. Each has 20 single-choice questions and
+five numerical-answer questions. The paper has 75 questions, maximum 300 marks, and a
+standard duration of three hours. For both question types, correct earns four, incorrect loses one,
+and unanswered earns zero. The numerical answer is entered as an integer rounded to the nearest
+integer. [S2-01]
+Express the structure through sections and item groups; do not calculate marking from the
+position of a question in an uploaded PDF. Each item must carry an approved type and scoring
+policy. If a PDF contains additional optional numerical questions from a different year, block the
+2026 template assignment until the administrator selects a matching historical or custom policy.
+Build the preflight validator
+Validate subject counts, item-group counts, available options, integer keys, supported language
+assets, complete solution mapping, and total maximum score. Show each mismatch with the
+affected question identifier and remediation. An administrator must choose either to fix the paper
+or publish it as custom practice. Do not quietly truncate, duplicate, or manufacture questions to
+meet a target count.
+Keep additional variants explicit
+Do not expose B.Arch or B.Planning tabs inside this Paper 1 implementation. Their content and
+assessment requirements require separate policies and acceptance criteria. If multilingual content
+is offered, retain an explicit source-language and translation-review status for every item. Provide
+the candidate's approved language assets consistently throughout the attempt, including diagrams
+and instructions. Log the language choice with the attempt snapshot.
+ACCEPTANCE / PRECAUTIONS
+A complete standard paper validates against the 2026 subject structure.
+An integer-only teacher paper appears as custom practice.
+A paper with a missing solution can be rehearsed only if the release policy explicitly allows delayed
+solutions.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.03  /  25
+
+
+=== PAGE 4 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 04 / 25
+JEE numerical input and key precision
+INTEGER ANSWERS
+Implement integer entry as a distinct answer component. A numerical response must not
+behave like a multiple-choice item or a calculator. Keep the student's raw input, validated
+canonical value, and final committed value separate for debugging and question-wise review.
+Build a deliberate input contract
+Use an on-screen numeric keypad and a keyboard-accessible equivalent. Permit the characters
+supported by the approved policy, including a leading minus sign when negative integer answers
+are valid. Reject decimals, exponent notation, unit strings, multiple signs, infinity, and empty
+sign-only values in the standard integer-entry variant. Make zero a valid value distinct from an
+unanswered field. Show an inline error near the input without erasing the student's draft.
+Normalize harmless formatting such as leading zeros only after preserving the original draft for
+diagnostic purposes. Store the accepted integer as an exact decimal string or a suitably bounded
+integer; never run arbitrary expressions supplied by the user. Avoid silently rounding a student's
+decimal input into a scoreable response. The candidate performs the calculation; the platform
+records the submitted integer.
+Review mathematical keys
+Keep an exact reviewed integer key and a separate authoring note containing the underlying
+computed value where useful. The source requires nearest-integer rounding but does not fully
+define a software tie-breaking function for every half-integer edge. Flag authoring keys that
+depend on an exact half-integer convention for a subject expert. Do not use JavaScript rounding as
+an unreviewed mathematical authority. [S2-01]
+Test response semantics
+Create fixtures for blank, zero, positive, negative, leading-zero, out-of-range, decimal, and
+invalid-character drafts. Ensure Clear Response empties the editing field, and explicit save
+commits the resulting blank under the selected navigation contract. In review, show the final
+committed response and the key, with discarded drafts confined to an optional technical history.
+Keep input length and domain constraints in the versioned policy so future variants can support
+decimal answers deliberately.
+ACCEPTANCE / PRECAUTIONS
+Blank and zero produce different answer states.
+A decimal draft cannot silently become an integer answer.
+A reviewer must resolve a half-integer ambiguity before publication.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.04  /  25
+
+
+=== PAGE 5 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 05 / 25
+JEE palette and review behavior
+SAVE SEMANTICS
+Reproduce the decision consequences of the published CBT instructions. The NTA appendix
+says a palette jump does not save the current answer; Save & Next and Mark for Review &
+Next save it. An answered-and-reviewed response is evaluated, while an empty reviewed
+item is not. [S2-01]
+Separate draft from committed response
+Store draftAnswer in the editing and optional durable recovery context, never in the grading
+ledger. A recovered draft is not a committed answer. Store committedAnswer in the accepted
+ledger. Add visited and markedForReview as independent fields. An option click changes the draft.
+Save & Next commits that draft, clears the review flag, and navigates. Mark for Review & Next
+commits the current draft, sets review, and navigates. A palette or section jump follows the
+policy's discard-draft navigation path. Preserve the previously committed answer when an unsaved
+replacement is discarded.
+Clear Response changes the editable draft to blank. The next explicit save commits blank. Verify
+the final Clear Response behavior against the approved interface evidence before claiming exact
+visual parity; include a visible unsaved-change indicator in the platform adaptation. Treat Save and
+Mark actions as acknowledged commands, not mere changes of button color.
+Render five understandable states
+Derive not visited, visited without answer, answered, reviewed without answer, and answered plus
+reviewed from accepted state. Pair each palette color with a shape or icon and readable legend.
+The current question highlight is a separate visual layer. A pending save badge must not
+masquerade as a confirmed answered state. Show consistent section counts derived from the
+same accepted ledger used by submission.
+Avoid accidental score changes
+Do not score the review flag itself or add a penalty for revisiting. Keep a candidate's navigation
+available within the permitted phase. In the submission summary, state which saved answers are
+counted and how an empty reviewed question is treated. An optional training mode may autosave
+on navigation, but it must declare that behavior and remain outside the official-style comparison
+cohort.
+ACCEPTANCE / PRECAUTIONS
+Changing an answer and jumping away preserves the earlier committed answer.
+An answered-and-reviewed correct response earns the same marks as a saved correct response.
+The submission summary and palette use the same authoritative counts.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.05  /  25
+
+
+=== PAGE 6 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 06 / 25
+BITSAT base-paper experience
+VERIFIED 2026 BASELINE
+Use the retrieved official BITSAT-2026 brochure for the engineering Mathematics variant. The
+brochure's document year is explicit; an original publication date is not asserted here. Record
+the retrieved document hash and verification date of 11 October 2026. [S2-02]
+Configure the base session
+Set 180 minutes without a break and 130 four-option, single-correct questions: Physics 30,
+Chemistry 30, English Proficiency 10, Logical Reasoning 20, and Mathematics 40. Correct earns
+three, incorrect loses one, and unanswered earns zero. There is no separate time limit for
+individual parts, and candidates may revisit the base questions before accepting the
+extra-question phase. Instructions and questions are in English. [S2-02]
+Create the subject navigation in this recognizable order, with English and Logical Reasoning
+distinct in both reports and counters. Do not merge them into a generic aptitude score. Show
+base-paper completion independently of correctness, since eligibility for extras depends on saved
+responses rather than the answer key. Keep correctness hidden during the running attempt.
+Derive maximums from this policy: 390 for the base, 36 for extras, and 426 combined when the
+extra phase is entered. For product score percentages, use 390 without entry and 426 after entry;
+show base and extra contributions separately. These are platform scoring percentages, not official
+percentiles.
+Prepare a complete paper
+Validate the uploaded question set against the approved subject allocation. Require all optional
+extra-question assets to be present and reviewed before enabling that facility. A paper that lacks
+extras may still be offered as base-only custom practice, but the start page must say so. Do not
+expose an extra-question button that leads to generated placeholders or randomly assembled
+unreviewed content.
+Keep mode variants isolated
+Treat a Biology path as a separately approved content variant with its own subject allocation and
+labels; do not switch Mathematics to Biology after the attempt begins. Keep the core engine
+capable of that future variant without expanding the launch scope by accident. The candidate's
+selected variant, extra-question availability, navigation policy, and solution release policy belong in
+the immutable attempt snapshot. Results must distinguish base score, extra score, and combined
+raw score.
+ACCEPTANCE / PRECAUTIONS
+Base completion counts accepted answers, including answered-and-reviewed items.
+English and Logical Reasoning have separate analysis identifiers.
+A missing extra-question set disables the feature before the student starts.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.06  /  25
+
+
+=== PAGE 7 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 07 / 25
+BITSAT extra-question transaction
+IRREVERSIBLE PHASE LOCK
+Implement the extra phase as a guarded server transaction. Under the 2026 brochure, it is
+optional only after all base questions are answered and time remains; accepting it prevents
+returning to correct the original answers. The extra set has three questions each from
+Physics, Chemistry, Mathematics, and Logical Reasoning. [S2-02]
+Show an honest decision dialog
+Offer a restrained button only when the server confirms eligibility. The dialog must say that the
+base answers will be locked, the existing timer continues, and the extra phase retains negative
+marking. Show accepted base completion and remaining server-derived time. Do not recommend
+entering merely because the button is available. This choice is a strategy decision with a risk of
+reducing the combined score.
+Require a clear confirmation label such as Lock base answers and enter extras. Place Cancel with
+equivalent readability. Disable repeated clicks while the request is pending. If the dialog is open at
+expiry, show the final submission state; it must not grant a new phase or extra time.
+Make the transition atomic
+Process ENTER_EXTRA with an idempotency key, expected attempt revision, and latest accepted
+command sequence. Lock the attempt, check every base item has a committed response, verify
+the phase and deadline, freeze the base ledger hash, and transition once. Fetch extra content only
+after authorization succeeds. Do not trust a browser-supplied completion count or unlock flag. A
+retry returns the same accepted transition rather than making a second extra phase.
+Preserve the locked contract
+Reject all later base-answer edits server-side, including old queued commands from another tab.
+Render locked base items read-only or remove their navigation during the phase. Keep the frozen
+base answers available in the final review. Extras do not reset the attempt deadline. A refreshed
+browser must recover the locked phase and remaining time. Track entry time and base snapshot
+hash for diagnostics and later strategy analysis without inventing official extra-phase percentiles.
+Preserve every untouched locked base contribution in the combined result, including its negative
+marks; entering extras does not replace the base score.
+ACCEPTANCE / PRECAUTIONS
+A missing base response makes entry fail even if the browser claims full completion.
+A queued base edit arriving after the lock is rejected.
+Entering extras, refreshing, and retrying entry never unlocks the original paper.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.07  /  25
+
+
+=== PAGE 8 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 08 / 25
+WBJEE two-paper scheduling
+VERIFIED 2026 BASELINE
+Model WBJEE as two related paper attempts rather than one interchangeable subject session.
+The official 2026 bulletin in the 10 March 2026 upload path describes an OMR examination
+and separate scheduled papers; it was verified on 11 October 2026. [S2-03]
+Represent the two papers accurately
+Paper I is Mathematics: 75 questions, maximum 100 marks, with a two-hour session. Paper II
+combines Physics and Chemistry: 40 questions and 50 maximum marks per subject, also two
+hours. The reviewed 2026 reference schedule is 11:00-13:00 for Mathematics and 14:00-16:00 for
+Physics-Chemistry, a one-hour interval in Asia/Kolkata. Keep the rehearsal date configurable.
+Together, the papers contain 155 questions and 200 maximum marks. An engineering rehearsal
+therefore needs both paper scores; completing one paper must not silently stand for the full
+examination. [S2-03]
+Create an ExamSeries record that links two independent attempts through a shared student and
+paper-package version. Store separate startedAt, deadlineAt, submission state, accommodations,
+responses, and scoring versions. One paper expiring must not close or reopen the other. A student
+can review scheduling instructions before starting either session without consuming answering
+time.
+Offer honest rehearsal choices
+Provide full-day rehearsal, two-paper flexible rehearsal, and individual-paper training. In full-day
+rehearsal, enforce the configured sequence and interval. In flexible rehearsal, allow the student to
+schedule the papers independently but clearly label that departure. Record mode in analytics so
+split rehearsal results are not mistaken for same-day performance. A shortened interval is a
+custom setting, not an official recommendation.
+Release results with correct scope
+For the product's engineering practice report, aggregate the two linked raw paper scores only after
+both are submitted. Show pending second paper instead of a fabricated full total. A paper-only
+report is still useful for topic feedback but should not display a full engineering mock rank. Keep a
+future pharmacy-report variant separate because the relevant official ranking basis differs from
+the engineering basis. Do not implement admission eligibility decisions in the exam engine.
+ACCEPTANCE / PRECAUTIONS
+The Mathematics timer is independent from the Physics-Chemistry timer.
+An incomplete series displays paper-only performance.
+Full-day and flexible-rehearsal results belong to separate comparable cohorts.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.08  /  25
+
+
+=== PAGE 9 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 09 / 25
+WBJEE categories and rational scoring
+PARTIAL CREDIT ENGINE
+Implement category-aware scoring from the official 2026 bulletin. Mathematics category
+counts are 50, 15, and 10; Physics and Chemistry each use 30, five, and five. Keep category
+on every item rather than deriving it from the display order. [S2-03]
+Encode the scoring policies
+Category 1 awards one for correct, minus 0.25 for incorrect; Category 2 awards two for correct,
+minus 0.5 for incorrect. Both are single-correct, with a multiple-option response treated as
+incorrect. Category 3 awards two for all correct options only; a proper correct subset receives two
+times selected-correct count divided by total-correct count. Any incorrect option makes that
+response worth zero; blank is zero. [S2-03]
+Represent Category 3 keys and answers as option-ID sets. Score by set inclusion and cardinality,
+not string equality of concatenated option letters. The same logical response must score identically
+after any approved display permutation. Preserve the published option identities in the review view
+so a source solution remains intelligible.
+Preserve exact fractional totals
+Use a rational numerator and denominator, or a documented high-precision decimal contract, for
+intermediate partial credits. Do not round every item to two decimals before summing. A
+two-thirds item and a four-thirds item must aggregate to two exactly. Define final display precision
+separately from the comparison value. Include a short marks explanation in each question-wise
+review, including the chosen set, correct set, and partial-credit calculation.
+Validate potentially invalid responses
+For the ordinary digital Category 1 and 2 view, use radio buttons and prevent multiple selection.
+For imported OMR responses or an explicitly configured bubble simulator, retain malformed or
+multiple-bubble responses and apply the appropriate category outcome. Category 3 uses
+checkboxes and a label saying one or more answers may be correct. Never apply a generic
+all-or-nothing checkbox score to a proper correct subset.
+ACCEPTANCE / PRECAUTIONS
+Key A,C with answer A earns one; answer A,B earns zero in Category 3.
+The answer and key sets remain stable if visible option order changes.
+Exact aggregate comparisons must not depend on two-decimal display rounding.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.09  /  25
+
+
+=== PAGE 10 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 10 / 25
+WBJEE digital adaptation and OMR
+rehearsal
+MODE HONESTY
+The official WBJEE bulletin describes OMR response marking that cannot be changed or
+erased. An editable browser interface is therefore an adaptation. Offer a useful digital
+experience while making its relationship to the real examination clear before any scored
+attempt begins. [S2-03]
+Design the standard digital adaptation
+Use an accessible question palette, paper timer, category badge, readable diagrams, and
+appropriate single-choice or multi-select controls. Permit response revision until submission in the
+standard learning adaptation. Show Digital WBJEE practice prominently and explain that the
+interface supports editable responses unlike the physical OMR sheet. Do not advertise this
+interface as an official WBJEE CBT replica.
+Keep category warnings near the options: the multi-select category has a different scoring rule,
+and including a wrong option destroys its partial credit. Provide a paper-wide answer summary
+without indicating correctness. For paper exercises, allow a downloadable blank response-sheet
+layout only if its format is approved and clearly branded as a practice sheet.
+Offer a separate irreversible-bubble mode
+Implement OMR rehearsal as an optional separate mode. Stage a choice, ask for a final fill action,
+then freeze the selected bubble set for that question. For a multi-select item, permit the student to
+build the full draft set before committing it. An irreversible commit needs clear explanation and
+keyboard-accessible confirmation. Do not erase an accepted bubble because the student changes
+a local checkbox.
+Compare like experiences
+Persist the editing policy and OMR rehearsal flag with the attempt. Show the policy in the result
+context and separate its analytics cohort from editable digital practice. Log changes and final fills
+as different events; an editable practice change is a learning signal, not evidence that the student
+can revise a real OMR response. Provide a concise rehearsal note about checking question
+numbering and avoiding rushed transfers, derived from observed errors rather than alarming
+generic warnings.
+ACCEPTANCE / PRECAUTIONS
+Editable practice and irreversible-bubble rehearsal have different mode badges.
+A committed bubble set cannot be changed by refresh or a second tab.
+Category 3 permits selecting the full intended set before the irreversible commit.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.10  /  25
+
+
+=== PAGE 11 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 11 / 25
+COMEDK configuration and evidence
+gap
+PARTLY VERIFIED 2026 BASELINE
+Use COMEDK's official Information Brochure 2026, notified on 3 February 2026, and its
+current examination page. The retrieved primary sources confirm structure and marking but
+do not explicitly state the 2026 duration. Treat that missing timing evidence as a real release
+gate. [S2-04] [S2-05]
+Configure verified behavior
+The published engineering pattern is 60 Physics, 60 Chemistry, and 60 Mathematics single-choice
+questions: 180 questions and 180 maximum marks. Each correct answer earns one, with no
+negative marking; the medium is English. The official CBT guidance includes a timer, palette,
+review, question-paper view, and movement between sections. [S2-04]
+Use the common single-choice component but select a COMEDK scoring policy explicitly. Wrong
+and unanswered responses have different attempt states even when both receive zero. That
+distinction matters for accuracy, unattempted opportunities, and question-wise analysis. Do not
+reuse JEE negative marking merely because the blue CBT shell looks similar.
+Handle duration responsibly
+Provide 180 minutes as a provisional custom-mock default only, with timingEvidenceStatus
+unresolved. Before publishing a verified 2026-style simulator, obtain and review official timing
+instructions or an appropriately redacted official Test Admission Ticket. The release report must
+identify the reviewer and supporting timing source. Do not use an old-year important-dates page
+as current evidence, and do not silently upgrade a provisional default to verified.
+Control unsupported facilities
+Keep any virtual calculator disabled unless current primary official instructions explicitly authorize
+one. Third-party mock claims are insufficient. Let students use approved rough-work conventions
+without supplying a calculation aid in the running interface. Keep review and save semantics
+documented in the platform instructions and verified against available official interface evidence
+before claiming exact parity. The real exam's rank or normalized percentile is not reproduced from
+this platform's independent practice cohort.
+ACCEPTANCE / PRECAUTIONS
+A COMEDK wrong response receives zero without becoming unanswered.
+A verified-simulator release is blocked while duration remains unresolved.
+No virtual calculator appears without an approved current primary source.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.11  /  25
+
+
+=== PAGE 12 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 12 / 25
+Configuration schema and validators
+MACHINE-READABLE CONTRACT
+Implement typed JSON policies with schema validation on both authoring and release.
+Configuration should describe the examination clearly enough that another developer can
+inspect it without searching application components for hidden duration, marking, or
+navigation constants.
+Define core fields
+Use examCode, variantCode, examYear, policyVersion, sourceIds, verificationStatus, deliveryMode,
+durationSeconds, timingEvidenceStatus, languages, sections, answerPolicies, scoringPolicies,
+navigationPolicy, reviewPolicy, submitPolicy, accommodationsPolicy, extraPhasePolicy, and
+releasePolicy. In each section, define subjectId, questionGroups, requiredCount, maximumMarks,
+orderPolicy, and scopeId. A group specifies answerType, category, scoringPolicyId, and count.
+For a scoring policy, store correctAward, incorrectPenalty, blankAward, partialRule,
+acceptedKeyRepresentation, invalidResponseRule, droppedItemRule, allOptionsCorrectRule, and
+roundingDisplayPolicy. Give every exceptional rule an explicit unset or requires_review value if the
+primary source does not establish it. Never interpret an absent field as a permissive default.
+Specify behavior rather than UI guesses
+Let navigationPolicy define whether palette navigation saves, whether section jumps save,
+whether drafts are discarded, and which phases permit revisiting. Let extraPhasePolicy define
+eligibility scope, remaining-time requirement, content allocation, base lock, and shared deadline.
+Let submitPolicy define early-submit availability, confirmation, draft handling, cut-off relation, retry
+idempotency, and release timing. Blue styling belongs in design tokens rather than policy logic.
+Enforce cross-field consistency
+Reject negative durations, noninteger group counts, duplicate section IDs, unknown policy
+references, unsupported answer types, illegal partial rules for single-choice groups, and
+inconsistent maximum marks. Verify an extra phase references a real reviewed item set. Ensure
+every required policy field has evidence or is openly marked a custom training decision. Store the
+canonical JSON hash at approval. Provide an administrator-readable validation report with field
+paths and actual versus expected values, then rerun it whenever the paper manifest changes.
+ACCEPTANCE / PRECAUTIONS
+A JSON policy can be validated without rendering the exam UI.
+Unknown or unresolved rules block the appropriate release claim.
+The published paper manifest and policy hash must be stored together.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.12  /  25
+
+
+=== PAGE 13 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 13 / 25
+Immutable attempt and content
+snapshots
+REPRODUCIBLE RESULTS
+Freeze the paper, policy, and presentation contract when an attempt starts. Every review
+screen must reconstruct what that student actually saw, even after an administrator corrects
+a solution, revises a tag, or publishes a new question version.
+Persist the starting snapshot
+Store attemptId, studentId, seriesId, examPolicyVersion, policyHash, paperVersion,
+paperManifestHash, itemVersionIds, sectionMapping, keyVersion, solutionVersion,
+languageVariant, displayPermutation, mode, accommodationsVersion, startedAt, deadlineAt, and
+releasePolicyVersion. Store stable internal option IDs separately from their visible letters. A
+student's visible choice B must always map to the same internal option used during scoring, even
+when another attempt displays a different order.
+Pin content assets by versioned object key or immutable checksum. Updating an image URL in an
+administrator editor must not replace the diagram in an active attempt. Include the approved
+original question crop or source reference in the review manifest. Make all published paper
+manifests readable to authorized maintainers and keep answer keys restricted to scoring and
+reviewed solution release paths.
+Snapshot answers at closure
+At submission, freeze the accepted response ledger, its hash, final sequence watermark,
+phase-lock state, and completion reason. Generate a ScoreRun record containing scorerVersion,
+policyVersion, keyVersion, responseSnapshotHash, scoreBreakdown, and createdAt. Treat the
+score as a versioned output. Do not overwrite it in place after correcting a key; create a new score
+run linked to the reason for rescoring.
+Handle corrections transparently
+If an approved correction affects completed attempts, calculate the affected population before
+applying the new run. Display the previous and revised raw scores with a concise explanation in
+the student's report. Rebuild comparable analytics cohorts consistently, and mark their calculation
+date. Keep active attempts on their starting paper contract unless a documented incident policy
+deliberately closes or replaces them. Do not make a teacher's late edit silently alter the student's
+answer history.
+ACCEPTANCE / PRECAUTIONS
+A historical review reconstructs the exact item and option order shown.
+Changing a solution creates a new version rather than mutating a completed score.
+Scoring reads a frozen accepted ledger, never the latest editable paper.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.13  /  25
+
+
+=== PAGE 14 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 14 / 25
+Attempt lifecycle as a state machine
+ALLOWED TRANSITIONS
+Implement one explicit lifecycle reducer on the server. Route guards and UI screens must
+consume its state instead of inferring progress from localStorage, the existence of a timer, or
+a client-side score value.
+Declare the states
+Use CREATED, PREFLIGHT, READY, RUNNING_BASE, RUNNING_EXTRA, SUBMITTING, SUBMITTED,
+SCORING, SCORED, RELEASED, and VOIDED. Allow CREATED to PREFLIGHT after authorization;
+PREFLIGHT to READY after requirements pass; READY to RUNNING_BASE only through START.
+START sets the authoritative start and deadline exactly once. RUNNING_BASE to RUNNING_EXTRA
+is available only under the approved extra-phase policy. Either running state may close through
+user submission or deadline expiry.
+SUBMITTING freezes the response cutoff and gathers accepted records through the required
+watermark. SUBMITTED contains the final immutable response snapshot. SCORING produces a
+versioned score; SCORED awaits the configured result condition; RELEASED means the result is
+eligible for display. Keep result_release_status and solution_release_status as independent server
+gates. A raw score may appear while explanations remain pending under a solution embargo.
+RELEASED never automatically grants solution access. VOIDED records a documented operational
+or integrity decision with a reason, reviewer, timestamp, and audit reference; it must not mean
+deleted.
+Keep connectivity orthogonal
+Do not make DISCONNECTED a lifecycle state that resets timing. Connectivity is an independent
+client status: online, degraded, offline, reconnecting. A running attempt remains running during a
+network loss. Likewise, focus, fullscreen status, current question, and writer-device ownership are
+separate attributes. The state machine should remain understandable when multiple symptoms
+occur at once.
+Constrain transitions precisely
+Require authorization, an idempotency key, expected revision, and policy guards for every
+transition. A second START returns the existing attempt contract; it cannot create a later deadline.
+A repeated SUBMIT returns the same final receipt. A request to reopen a submitted attempt fails
+unless an authorized incident process creates a separate replacement or documented adjustment.
+Recover a stuck SCORING operation with an idempotent retry; do not ask the student to retake the
+paper because an analytics worker crashed.
+ACCEPTANCE / PRECAUTIONS
+Test every allowed transition and each forbidden adjacent transition.
+Refresh never creates a new START or changes the deadline.
+A scoring retry cannot duplicate the attempt or its final receipt.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.14  /  25
+
+
+=== PAGE 15 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 15 / 25
+Question-state reducer and command
+semantics
+AUTHORITATIVE ANSWERS
+Implement a deterministic question reducer that derives status from data. Keep answer
+content, visit history, review intention, local edit state, and network acknowledgement as
+distinct concepts so the interface can explain every state accurately.
+Define the stored fields
+For each item, keep visited, committedAnswer, reviewFlag, questionRevision,
+lastAcceptedCommandId, committedAt, and phaseLock. Keep draftAnswer, dirty, saveStatus, and
+draftUpdatedAt in the editing context. Derive NOT_VISITED when never visited; VISITED_EMPTY
+when visited with blank committed answer and no review; ANSWERED when committed answer
+exists and no review; REVIEW_EMPTY when blank and reviewed; ANSWERED_REVIEW when
+answered and reviewed. Zero and a nonempty option set count as answers.
+VISIT marks visited without changing a response. SELECT replaces the draft for radio items or
+updates the draft set for checkboxes. TYPE edits a numeric draft. CLEAR empties the draft. SAVE
+commits the validated draft and removes review under the selected policy. MARK_REVIEW
+commits the draft and sets review. JUMP discards an unsaved draft when the selected exam policy
+requires that behavior. Explicitly define each event in code and documentation.
+Validate every answer command
+Check that the attempt is running, the writer lease is valid, the question belongs to this snapshot,
+the phase permits editing, and the answer conforms to the type. Reject unknown option IDs,
+duplicate IDs, out-of-domain numeric strings, and edits to locked base questions. Validation failure
+must preserve the draft with a useful correction message. A stale revision returns the latest
+accepted state and a conflict code rather than overwriting a newer answer.
+Project state consistently
+Derive palette icons, section counters, submission summaries, and review labels from the same
+accepted fields. Overlay a pending-save marker without falsifying committed status. Emit compact
+answer-history events for later change analysis, but score only the final accepted response.
+Serialize state predictably so replaying the accepted commands reproduces the snapshot hash.
+Avoid a separate UI-only answered boolean that can drift from the stored answer.
+ACCEPTANCE / PRECAUTIONS
+Replaying accepted commands reproduces the same final question state.
+A pending save is visibly distinct from a committed answer.
+A blank review state cannot accidentally become an attempted question.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.15  /  25
+
+
+=== PAGE 16 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 16 / 25
+Server clock, deadline, and timer
+display
+TIME IS A CONTRACT
+Use one authoritative time contract per paper attempt. A browser countdown is a display of
+that contract, not the mechanism that grants or removes time. The student must never gain
+minutes by changing the device clock, refreshing, sleeping the phone, or opening another
+tab.
+Establish time once
+At START, store serverStartedAt, approvedDurationSeconds, accommodationsAdjustmentSeconds,
+and deadlineAt. For scheduled tests, explicitly define whether a hard close truncates late starts or
+whether each admitted student receives the full duration. Show that rule before starting.
+Instruction-reading time should be outside the answering window unless the declared custom
+policy deliberately includes it. Starting an attempt must be a server transaction that returns the
+existing record on retry.
+Return serverNow and deadlineAt on start, resume, and heartbeat. Calculate an initial display
+offset, then use a monotonic browser timer for smooth countdown between synchronizations.
+Periodically reconcile with server time without letting the display jump backward into extra time.
+Clamp a visually expired timer at zero, while the server independently performs closure and rejects
+late edits.
+Do not pause on connectivity loss
+For strict exam practice, wall-clock time continues during offline periods. State this on the start
+page and offline banner. A pauseable training mode needs a separate elapsed-time model and a
+different analytics cohort. Operator incident extensions, if enabled, require an authorized recorded
+command with reason and new deadline; a client retry or support refresh is insufficient.
+Define expiry and boundary behavior
+Use a documented exclusive cutoff: a new answer command is eligible only when its trusted server
+receipt time is before deadlineAt. Commands at or after the deadline are rejected as late. Align the
+worker's closure query with the same inequality. Warn at configured thresholds through calm text
+and an accessible optional sound. A warning is a product convenience, not permission to change
+the examination duration.
+ACCEPTANCE / PRECAUTIONS
+Advance the client wall clock by a day; accepted remaining time stays unchanged.
+Suspend the browser past expiry; resume opens the final state.
+Test commands just before, exactly at, and just after the cutoff.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.16  /  25
+
+
+=== PAGE 17 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 17 / 25
+Save queue and reconnection protocol
+LOSS PREVENTION
+Build a small durable client journal for the student's own responses and commands. It is a
+recovery aid, not an authority that can override server deadlines or a substitute for
+acknowledging that an answer was saved.
+Specify the acknowledgement contract
+Assign each answer command a UUID idempotency key, deviceId, writer fencing token, questionId,
+expectedQuestionRevision, local sequence, and payload hash. Queue commands locally in order
+and send them promptly. Return acceptedCommandId, serverReceiptAt, newQuestionRevision,
+acceptedAnswer, reviewFlag, and attemptPhase. Display Saved only after this acknowledgement.
+Show Saving, Offline: pending, or Save rejected when those states actually apply.
+Use one authoritative writer lease per attempt. A second tab may observe state but must explicitly
+take over the lease before editing; takeover invalidates the old fencing token. After takeover, the
+old device's queued commands fail safely. Local sequence assists ordering within a device but
+does not authorize a stale device or turn a client timestamp into trusted evidence.
+Resume from the server snapshot
+On reconnect, request lifecycle, phase, deadline, question revisions, and accepted command
+identifiers. Deduplicate journal entries already acknowledged by the server. Replay remaining
+commands only when the attempt is still running, their lease is valid, their target is unlocked, and
+their revisions are compatible. Show an explicit conflict resolution screen when a later accepted
+edit exists; do not silently prefer whichever request arrived last.
+Handle practical network failures
+Use bounded exponential backoff with jitter and retry only safe idempotent operations. Keep
+pending response data across a refresh where storage is available, while clearing it after final
+reconciliation under the retention policy. If storage is unavailable, warn before the attempt and
+keep server saves frequent. Offline commands arriving after the strict cutoff are not scored, even if
+the client claims they were made earlier. Explain that consequence calmly and preserve a support
+trace without falsifying the result.
+ACCEPTANCE / PRECAUTIONS
+Lose the acknowledgement, retry, and receive the same accepted command result.
+A second device cannot overwrite answers using an expired writer token.
+Reconnecting after expiry shows rejected pending edits and the final receipt.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.17  /  25
+
+
+=== PAGE 18 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 18 / 25
+Submission and deadline race
+resolution
+EXACTLY ONE FINAL SNAPSHOT
+Make submission a convergent server process. A student clicking Submit at the same
+moment the deadline worker runs must produce one response snapshot, one completion
+reason, and one receipt, regardless of request order or transport retries.
+Define the ingress boundary
+Record command receipt durably at a trusted server boundary and bind that timestamp to the
+authenticated attempt. Do not use a client-supplied editedAt value for deadline eligibility. If
+workers process requests asynchronously, eligibility may depend on this trusted receipt
+timestamp, but finalization must wait for the pre-cutoff ingress watermark to drain. A command
+merely sitting in the browser is not received.
+For early submission, freeze a cutoff at the authorized submit transaction and ensure eligible
+commands preceding that cutoff are resolved before the final response hash is calculated. The UI
+should flush pending saves before asking for final confirmation. A user may choose to submit
+despite a displayed save failure, but the dialog must state that only accepted responses will count.
+Resolve competing closures
+Acquire an attempt-level lock or equivalent compare-and-swap. If already closing or closed, return
+its existing receipt. If time has expired, use deadline completion semantics even if the incoming
+request says user submission. If still running and the early-submit policy allows closure, freeze the
+user cutoff. Reject later answer mutations. Persist closure state and an outbox event atomically so
+a worker crash cannot strand an unannounced successful submission.
+Return an auditable receipt
+Include attemptId, completionReason, cutoffAt, acceptedAnswerCount, rejectedPendingCount
+where known, responseSnapshotHash, and resultStatus. Keep scoring separate from receipt
+issuance; show Result processing if the score is not ready. Poll or subscribe using the existing
+attempt, never create a new submission. The final score worker must use the frozen snapshot and
+be idempotent by snapshot hash plus scorer and key versions.
+ACCEPTANCE / PRECAUTIONS
+Run submit and expiry concurrently in both orders; final responses match the declared cutoff.
+A pre-cutoff acknowledged command cannot disappear from the score snapshot.
+Duplicate submit requests return one receipt and one score run.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.18  /  25
+
+
+=== PAGE 19 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 19 / 25
+Navigation, display, and
+working-memory safety
+EXAM SCREEN PARITY
+Build an exam screen that keeps the question readable, the answer action clear, and the
+student's location obvious. Use a restrained blue shell, with the exam's actual behavioral
+policy determining navigation rather than a generic quiz layout.
+Organize the desktop view
+Place subject or section tabs above the question area, remaining time and attempt identity in a
+stable header, and the question palette in a collapsible side panel. Keep Save & Next, Clear
+Response, and Mark for Review actions within reach without obscuring long options or diagrams.
+Preserve the candidate's position in the question area when opening a lightweight help legend,
+then restore focus when it closes.
+Show question number, subject, item category or answer type when relevant, and mark scheme in
+concise terms. Do not show chapter tags, difficulty hints, solutions, correctness, or cohort success
+rates while a strict attempt is running. Those details can influence answering strategy and belong
+in practice-mode scaffolding or after submission.
+Protect question fidelity
+Render reviewed text, mathematics, chemical notation, tables, and diagrams from approved
+assets. Preserve option labels and source numbering even if internal IDs differ. A shared passage
+needs stable access beside each linked item. A diagram zoom must not crop labels or reset the
+chosen answer. If an asset fails, retry from its immutable version and offer a report-issue control;
+do not invent a replacement question inside the running attempt.
+Plan responsive and accessible behavior
+On smaller screens, convert the palette to a drawer and keep a compact timer visible. Use
+full-width options and a touch-friendly keypad. Make the current question and save state available
+to screen readers. Use semantic radio and checkbox groups, visible focus, and text equivalents for
+icons. A full-question-paper view must remain read-only with respect to responses unless the
+policy explicitly permits embedded editing. Navigation should never unexpectedly scroll the
+student to a different item's answer field.
+ACCEPTANCE / PRECAUTIONS
+A long stem and four long options remain readable at 200 percent zoom.
+Opening the palette or image zoom preserves the draft and focused control.
+Strict mode reveals no tags, keys, hints, or live success percentages.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.19  /  25
+
+
+=== PAGE 20 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 20 / 25
+Accommodations and accessibility
+variants
+FAIR PRACTICE CONTRACTS
+Implement accessibility as a supported capability of the core exam screen. Timing
+accommodations are a separate approved policy choice. Never infer extra time or an official
+entitlement from a self-selected visual preference or an unverified medical description.
+Separate access features from time changes
+Provide larger text, keyboard navigation, high contrast, reduced motion, screen-reader labels,
+accessible mathematical presentation where supported, and sufficient target sizes in every mode.
+These presentation settings do not change score or duration. Where a diagram needs an
+alternative description, ensure it conveys the reviewed information without adding a solution hint.
+Flag an image-only question with no meaningful alternative as an accessibility content defect.
+Keep time accommodations as an explicit configuration with approval basis, scope, duration
+adjustment, policy version, and effective time. The NTA 2026 Paper 1 table includes four hours for
+the specified candidates eligible for a scribe; this is not a blanket extra-time rule for every person
+with a disability. [S2-01] Do not transfer that rule to BITSAT, WBJEE, or COMEDK without their own
+reviewed evidence.
+Offer a practical learning option
+Allow an extended-time training setting for students who want to practice comfortably, but label it
+custom practice and separate its percentile cohort. A student should not have to submit sensitive
+disability documents to select a private learning convenience. For a formally administered class
+test, store only the minimum approved accommodation record needed by the institution's
+workflow, following the platform's access and retention controls.
+Validate the actual journey
+Run start, answer, review, clear, navigate, reconnect, and submit with keyboard only and with a
+screen reader. Ensure the timer is not announced every second; provide milestone announcements
+and a manual remaining-time control. Do not require fullscreen or webcam permission in a way
+that blocks assistive tools. Persist the accommodation version in both linked WBJEE paper attempts
+and in every comparative report so timing context remains visible.
+ACCEPTANCE / PRECAUTIONS
+Font size changes do not extend the timer.
+Custom extra time appears in result context and cohort filters.
+A keyboard-only student can complete the entire attempt without a pointer.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.20  /  25
+
+
+=== PAGE 21 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 21 / 25
+Scoring fixtures, anomalies, and
+rescores
+DETERMINISTIC MARKS
+Implement scoring as a pure, versioned function of approved policy, frozen question keys,
+and accepted responses. Return item-level awards and reasons so every mark in the total can
+be explained to the student and reproduced by a reviewer.
+Create readable fixture cases
+For ordinary items, test correct, incorrect, blank, reviewed-correct, and reviewed-blank responses.
+Under the named JEE 2026 policy, two correct and one wrong yield seven; under BITSAT's named
+base policy the same pattern yields five; under COMEDK's published marking it yields two. These
+are derived test expectations, not promised student performance. Cite the source policy in the
+fixture metadata. [S2-01] [S2-02] [S2-04]
+For WBJEE Category 3, use key A,C: answer A,C earns two, A earns one, A,B earns zero, and blank
+earns zero. Add a three-correct-option case with one and two correct choices, verifying their exact
+fractions aggregate before display rounding. Test a Category 1 multiple-bubble imported response
+as incorrect even when it includes the correct bubble. [S2-03]
+Represent exceptional key statuses
+Use key statuses approved_single, approved_multi_valid_alternatives, all_options_correct,
+dropped, provisional, and disputed where appropriate. Encode the JEE 2026 branches explicitly: an
+MCQ with multiple valid alternatives awards four when the chosen option is among those
+alternatives; all options correct awards four only to attempted responses, with blank receiving
+zero; a dropped MCQ awards four to every participant in the relevant shift, including blank. A
+numerical item found invalid or dropped likewise awards four to every shift participant, including
+blank. [S2-01] Add fixtures proving the blank versus attempted distinction. A generic
+exclude-item-from-denominator remedy must not override these profile-specific awards. Do not
+transfer JEE remedies to another exam without reviewed evidence.
+Control corrections and explanation
+Block ordinary scoring on a provisional or disputed key unless an approved release policy explicitly
+permits a provisional report. Resolve corrections through subject review, publish a new key
+version, identify affected attempts, and create a rescore run. Keep the student's original accepted
+answers intact. Each award needs a reason code such as correct, incorrect, blank,
+partial_correct_subset, contaminated_subset, or dropped_credit, with its numeric contribution
+shown in the review. Check item sums against subject and total aggregates.
+ACCEPTANCE / PRECAUTIONS
+Review status alone never changes the marks awarded.
+Every total equals the sum of its item-level contributions.
+A rescore creates a new result version and an explanation of the change.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.21  /  25
+
+
+=== PAGE 22 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 22 / 25
+Integrity signals and the limits of
+browser controls
+INDEPENDENT PRACTICE
+Protect the answer key and preserve honest comparison without pretending a home browser
+can reproduce a supervised test center. Browser signals can support review, but they are
+incomplete observations and cannot establish cheating by themselves.
+Keep the server boundary firm
+Authorize every content and command request against the student's attempt and release state. Do
+not send keys, solutions, hidden explanations, difficulty tags, or scoring scripts containing answers
+in the running payload. Cache only approved question assets for the current attempt. Protect
+teacher and administrator APIs separately from student APIs, and test object-ID substitution
+attempts across users and papers.
+A signed asset URL can reduce casual sharing but cannot prevent screenshots or a student
+photographing the screen. Make that limitation explicit in the administrator product description.
+Avoid claims such as cheat-proof, guaranteed authentic score, or official test security. An
+independent practice result should primarily support learning.
+Use proportionate integrity observations
+If scheduled comparison tests require it, collect minimal events for visibility changes, repeated
+writer takeovers, implausible answer-rate bursts, and unusual response similarity. Record what
+was actually observed and its uncertainty. A tab switch may result from an assistive tool, network
+portal, incoming call, or normal device behavior. A fast answer may reflect prior familiarity. Do not
+auto-fail a student based on one such signal.
+Preserve due process in the product
+Keep suspected attempts scored but mark comparative eligibility pending when a documented
+policy requires review. Offer a human review trail and a student explanation route. Private practice
+should not require intrusive webcam surveillance. If institutional proctoring is added later, scope it
+as a separate reviewed product with explicit consent, data retention, accessibility exceptions, and
+operational ownership. Make fullscreen an optional rehearsal convenience unless an approved
+institution policy specifies otherwise, and keep all warnings calm and factual.
+ACCEPTANCE / PRECAUTIONS
+The running response payload contains no answer-key or solution data.
+An integrity flag cannot silently erase an accepted answer or score.
+Comparison exclusion has a documented reason and review path.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.22  /  25
+
+
+=== PAGE 23 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 23 / 25
+Acceptance matrix and adversarial
+rehearsal
+ENGINE RELEASE CHECKS
+Prove behavior with realistic journeys and boundary cases before scaling public access. The
+goal is not a large test count; it is evidence that the engine protects the answer ledger,
+applies the declared policies, and makes limitations visible to the student.
+Cover each examination journey
+Run a standard JEE paper with numeric zero and negative values, unsaved palette navigation, both
+review states, and expiry. Run BITSAT with one missing base answer, successful extra entry,
+double-click entry, a stale base edit, and refresh inside the locked phase. Run both WBJEE papers,
+a partial-credit set, an incorrect added option, a paper-only report, and irreversible-bubble mode.
+Run COMEDK with correct, wrong, and blank responses, verifying the timing evidence blocker.
+Keep each scenario's fixtures and expected outcomes in the repository. Test the source-policy
+configuration independently from UI rendering. Make a compact release report show scenario
+name, expected behavior, actual result, application version, and run date. A passing demo with
+placeholder scoring is not acceptable evidence.
+Exercise persistence and timing failures
+Inject a lost acknowledgement, delayed response, duplicate command, stale question revision,
+server restart after persisted save, unavailable local storage, and browser sleep past deadline.
+Race submit against expiry and extra-phase entry against expiry. Test whether a slow worker
+drains accepted ingress records before snapshot closure. Ensure retries reuse command IDs and
+final receipts. Observe failures in server logs without recording unnecessary sensitive content.
+Check accessibility and release boundaries
+Complete one full attempt with keyboard only, screen-reader navigation, 200 percent zoom, and a
+small mobile viewport. Verify answers survive layout changes, and warnings do not seize focus. Try
+reading another student's attempt, requesting solutions before release, editing a submitted
+response, and changing a locked BITSAT base answer. Require zero unexplained score differences,
+no lost acknowledged answers, and no silent extra time before approving release. Keep
+performance-load validation in Volume 05, using this same behavioral suite under load.
+ACCEPTANCE / PRECAUTIONS
+All four exam paths pass deterministic item and aggregate score checks.
+The attempt is recoverable after a server or browser restart.
+No unresolved release blocker is hidden behind a polished interface.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.23  /  25
+
+
+=== PAGE 24 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 24 / 25
+Sources, evidence boundaries, and
+builder handoff
+PRIMARY-SOURCE REGISTER
+Use these source IDs in the policy registry and reviewer report. The documents establish
+examination facts; the session architecture, persistence rules, and interface safeguards in
+this volume are proposed product requirements. They are not claims that the examination
+authorities use the same software implementation.
+Record the verified primary documents
+[S2-01] NTA, JEE Main Information Bulletin 2026, linked by the current official site and stored in a
+November 2025 upload path. Reviewed sections: Paper 1 scheme, numerical entries, marking
+anomalies, duration table, and CBT appendix. [S2-02] BITS Pilani, BITSAT-2026 brochure, retrieved
+from the official admissions domain. Reviewed format, marking, language, extra-question
+conditions, and the base-answer lock. The original issuance date is not asserted.
+[S2-03] WBJEEB, Information Bulletin WBJEE-2026, official 10 March 2026 upload. Reviewed paper
+schedule, category distribution, OMR restrictions, and scoring methodology. [S2-04] COMEDK UGET
+Information Brochure 2026, notified on 3 February 2026, version 1.0. [S2-05] COMEDK current
+About UGET and Notification 2026 page. Reviewed counts, marks, language, CBT controls, and FAQ
+response revision guidance. All five were checked on 11 October 2026.
+Carry unresolved evidence forward
+COMEDK's reviewed current primary documents do not explicitly establish a numeric 2026
+duration. Keep the proposed 180-minute custom-mock setting unresolved until reviewed official
+timing evidence is attached. Source navigation may lead to older schedules; inspect the document
+year, not merely the current page heading. Exact BITSAT and COMEDK save-control microbehavior
+should be reviewed against current official interface evidence before using an exact-parity claim.
+Return a reviewable handoff
+Deliver the implemented policy JSON, field-level source mapping, evidence gaps, deterministic
+scoring fixtures, transition diagram, API contracts, and acceptance report. Link sources from the
+administrator policy view. Preserve a source-document checksum where lawfully obtained so the
+reviewed edition can be identified. Recheck rules before a new examination-year release and
+create a new policy version for changes. Carry custom training decisions separately; a useful
+independent adaptation does not need a false claim of official endorsement.
+ACCEPTANCE / PRECAUTIONS
+Source IDs map to working primary URLs in the appended register.
+The selected examination year is visible before starting.
+Unresolved evidence remains a release blocker for the corresponding verified claim.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.24  /  25
+
+
+=== PAGE 25 ===
+TEJAS EXAM STUDIO  /  EMERGENT BUILD SPECIFICATION
+VOLUME 02  |  EXAM ENGINE
+CHAPTER 25 / 25
+Source register and implementation
+handoff
+EVIDENCE AND SCOPE OF THIS SPECIFICATION
+Use these references to verify the stated baseline. Requirements and engineering thresholds
+in this volume are proposed product decisions unless a source explicitly establishes them.
+S2-01 | NTA JEE Main Information Bulletin 2026
+https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2025/11/20251102
+1649722475.pdf
+Checked: 2026-10-11. Official current-site linked 2026 bulletin. Source upload path is November
+2025; original publication date not independently asserted. Printed pages 11-16 and 59-64 support
+relevant format, scoring, duration, and CBT rules.
+S2-02 | BITS Pilani BITSAT-2026 brochure
+https://www.bitsadmission.com/FD/downloads/BITSAT-2026_brochure.pdf
+Checked: 2026-10-11. Official admissions brochure, document year 2026. Original issuance date
+not asserted. PDF pages 6-8 describe format, extra questions, language, and score reporting.
+S2-03 | WBJEEB Information Bulletin WBJEE-2026
+https://cdnbbsr.s3waas.gov.in/s3d2a27e83d429f0dcae6b937cf440aeb1/uploads/2026/03/2026031
+01506582412.pdf
+Checked: 2026-10-11. Official upload path dated 10 March 2026. Printed pages 8-10 cover paper
+schedule, counts, categories, OMR restrictions, and scoring.
+S2-04 | COMEDK UGET 2026 Information Brochure, version 1.0
+https://www.comedk.org/uploads/Information-brochure-2026-version-1.0.pdf
+Checked: 2026-10-11. Notified 3 February 2026. Printed pages 22-23 and 29 establish counts,
+marking, language, CBT facilities, and response revision. Numeric 2026 duration not explicitly
+found; simulator release requires separate timing evidence.
+S2-05 | COMEDK About UGET and Notification 2026
+https://www.comedk.org/about-uget-and-notification-2026
+Checked: 2026-10-11. Current official exam page corroborates 2026 structure, marking, language,
+and response revision. Does not explicitly state numeric duration in retrieved text. Do not use
+older important-date destinations as 2026 duration evidence.
+ACCEPTANCE / PRECAUTIONS
+Before release, retain the approved configuration, source document date, verification owner and
+test evidence. Re-check any rule that changes for a new exam year.
+Builder requirements | Evidence checked 12 October 2026 | v1.0
+2.25  /  25

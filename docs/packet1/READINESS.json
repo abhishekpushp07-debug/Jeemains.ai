@@ -1,0 +1,19 @@
+{
+  "schema_version": "packet1-gates-v1",
+  "packet": 1,
+  "status": "IN_PROGRESS",
+  "capacity_status": "UNQUALIFIED",
+  "production_launch_allowed": false,
+  "gates": [
+    {"id": "P01-ATOMIC", "owner": "application_lead_and_source_reviewer", "status": "BLOCKED", "reason": "177 pages indexed; 2 pages/38 blocks/65 obligations exactly partitioned by agent review. Remaining 3261 blocks and independent semantic approval are incomplete"},
+    {"id": "P01-CONTRACT", "owner": "product_and_application_lead", "status": "PARTIAL_BLOCKED", "reason": "All49 mounted operations now have executable strict ingress contracts and derived role metadata; full target route families, response DTOs, SQL authority contracts and approval remain required"},
+    {"id": "P01-SLO", "owner": "product_and_performance_operator", "status": "BLOCKED", "reason": "Guide targets are explicit; exact client/device/failure/cost profiles need named approval and measured evidence"},
+    {"id": "P01-CREDENTIAL", "owner": "security_operator", "status": "BLOCKED", "reason": "Persisted staff credential rotation and race-safe session revocation not executed"},
+    {"id": "P01-REGRESSION", "owner": "qa", "status": "PARTIAL_BLOCKED", "reason": "Final corrected isolated suite repeated three times: 143 passed plus six strict OPEN A01-A06 invariants. Other original findings have explicit unverified tasks in REGRESSION_STATUS.json", "evidence": ["docs/packet1/evidence/packet1-final-run1.log", "docs/packet1/evidence/packet1-final-run2.log", "docs/packet1/evidence/packet1-final-run3.log", "tests/packet1", "docs/packet1/REGRESSION_STATUS.json"]},
+    {"id": "P01-DEPENDENCY", "owner": "security_operator_and_application_lead", "status": "BLOCKED", "reason": "Retained scans report unresolved Python and frontend advisories and two unscanned packages; no clean scan or attested release SBOM", "evidence": ["docs/packet1/dependency_triage.v1.json"]},
+    {"id": "P01-CONTAINMENT", "owner": "application_lead_and_qa", "status": "VERIFIED_SCOPED", "reason": "Upload body-read hold, protected direct calls and extraction/regrade dispatch holds verified; containment is not permanent parser/worker repair or credential revocation", "evidence": ["test_reports/iteration_37.json"]}
+  ],
+  "unresolved_decisions": ["D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08", "D09", "D10", "D11"],
+  "later_packet_defects": {"A01": 6, "A02": 5, "A03": 5, "A04": 5, "A04b": 5, "A05": 4, "A05b": 4, "A06": 4, "S01": 4, "F01": 7, "F02": 7, "F03": 7, "A07": 5, "A08": 8},
+  "note": "No open finding is closed by documentation, an expected-failure test, or containment"
+}

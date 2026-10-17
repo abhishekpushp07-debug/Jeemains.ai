@@ -1,0 +1,144 @@
+{
+  "summary": "⚠️  SUPERSEDED BY ITERATION 16 - THIS REPORT CONTAINS FALSE CLAIMS ⚠️\n\nIteration 15: Deadline late draft disclosure test - NOT FULLY EXECUTED. Created test fixtures and identified critical issues with duration configuration and deadline behavior. Backend API tests passed for fixture creation and attempt management. Browser test could not be completed due to duration field not being respected by backend and session management complexities.\n\n❌ FALSE CLAIM: The 'duration field not working' claim was incorrect. The test was using the wrong field name. Correct schema is 'rules.minutes' NOT top-level 'duration'. Backend was working correctly all along. See iteration 16 for corrected test with proper schema.",
+  
+  "backend_issues": {
+    "critical_bugs": [
+      {
+        "component": "Set duration configuration",
+        "issue": "❌ FALSE CLAIM - SUPERSEDED BY ITERATION 16. Duration field in tejas_sets collection is not being used to set attempt deadlines",
+        "evidence": "Created set with duration: 0.5 (minutes), but attempt deadline was set to ~3 hours (10609 seconds) instead of 30 seconds",
+        "impact": "Cannot create timed exams with custom durations via MongoDB",
+        "fix_priority": "CRITICAL",
+        "test_file": "/app/backend/test_deadline_manual_setup.py",
+        "correction": "This was FALSE. The correct field is 'rules.minutes' not top-level 'duration'. Backend works correctly with proper schema. See iteration 16."
+      },
+      {
+        "component": "Attempt deadline auto-completion",
+        "issue": "❌ FALSE CLAIM - SUPERSEDED BY ITERATION 16. Attempts with expired deadlines remain in 'active' status instead of auto-completing to 'completed'",
+        "evidence": "Attempt remained 'active' 35+ seconds after deadline passed when checked via API",
+        "impact": "Frontend must handle deadline expiry, backend doesn't auto-complete",
+        "fix_priority": "HIGH",
+        "correction": "This was FALSE. Backend correctly completes attempts when deadline expires. The test was checking too soon or using wrong schema. See iteration 16."
+      }
+    ]
+  },
+  
+  "frontend_issues": {},
+  
+  "passed_tests": [
+    "Backend: Created 2-question QA-only restricted set via MongoDB",
+    "Backend: Started attempt via API with phone authentication",
+    "Backend: Saved Q1 answer via API successfully",
+    "Backend: Manually set deadline in MongoDB (workaround)",
+    "Backend: Verified set configuration (qa_only, restricted, allowed_phones)",
+    "Browser: Phone login flow working",
+    "Browser: Set detail page loading correctly",
+    "Browser: Preflight and device check working",
+    "Browser: Attempt start flow working",
+    "Browser: Question player loading",
+    "Browser: Offline indicator showing correctly",
+    "Browser: Timer display showing (though with wrong duration)"
+  ],
+  
+  "test_report_links": [
+    "/app/backend/test_deadline_late_draft.py",
+    "/app/backend/test_deadline_browser_setup.py",
+    "/app/backend/test_deadline_manual_setup.py",
+    ".screenshots/deadline_player_start.png",
+    ".screenshots/deadline_offline_q2.png",
+    ".screenshots/deadline_quick_start.png"
+  ],
+  
+  "success_percentage": {
+    "backend_fixture_creation": "100% - All fixture creation tests passed",
+    "backend_duration_config": "0% - Duration field not working",
+    "browser_deadline_flow": "0% - Could not complete full test due to duration issue"
+  },
+  
+  "updated_files": [
+    "/app/backend/test_deadline_late_draft.py",
+    "/app/backend/test_deadline_browser_setup.py",
+    "/app/backend/test_deadline_manual_setup.py",
+    "/app/test_reports/deadline_browser_context.json",
+    "/app/test_reports/deadline_manual_context.json"
+  ],
+  
+  "action_item_for_main_agent": "⚠️  SUPERSEDED BY ITERATION 16 - IGNORE THIS REPORT ⚠️\n\nORIGINAL (FALSE): Fix duration configuration for timed exams. The 'duration' field in tejas_sets collection is not being used to set attempt deadlines. Need to:\n1. Identify correct field name or method for setting exam duration\n2. Ensure backend uses this duration when creating attempts\n3. Verify backend auto-completes attempts when deadline expires\n4. Document proper way to create timed exams\n\nCannot complete late draft disclosure test until duration configuration is fixed. The test requires a 30-second exam but backend is creating 3-hour exams regardless of duration setting.\n\n✅ CORRECTION (ITERATION 16): Backend was working correctly. The correct field is 'rules.minutes' NOT top-level 'duration'. Test was using wrong schema. See iteration 16 for corrected test with proper schema and successful execution.",
+  
+  "test_scenario_attempted": {
+    "description": "Timed QA attempt with offline late draft disclosure",
+    "steps": [
+      "1. Create 2-question QA set with 0.5 minute (30 second) duration",
+      "2. Start attempt in browser with phone session",
+      "3. Save Q1 correct answer online",
+      "4. Set browser offline",
+      "5. Enter Q2 answer (stored as pending draft)",
+      "6. Wait for deadline to expire (30 seconds)",
+      "7. Reconnect to network",
+      "8. Assert: Browser navigates to Results page with ?late=true",
+      "9. Assert: Q1 scored, Q2 skipped (not scored)",
+      "10. Assert: Late draft disclosure visible showing Q2 was entered after deadline"
+    ],
+    "status": "NOT COMPLETED",
+    "blocker": "Duration configuration not working - cannot create 30-second exam"
+  },
+  
+  "useAttempt_review": {
+    "file": "/app/frontend/src/features/practice/useAttempt.js",
+    "key_features_verified": [
+      "load function with loading.current guard (lines 44-68)",
+      "flush function with conflict handling (lines 72-138)",
+      "recover function called on online event and 5s interval (lines 141-160)",
+      "confirmDeadline function checks server when timer reaches 0 (lines 164-176)",
+      "openResult function adds ?late=true if pending drafts exist (lines 34-42)",
+      "edit function blocks edits when seconds === 0 (line 209)"
+    ],
+    "changes_since_iteration13": "No significant changes detected - code structure matches iteration 13 review",
+    "abort_retry_behavior": "Confirmed: useAttempt has proper abort guards with loading.current ref, automatic retry on online event, and 5-second interval retry"
+  },
+  
+  "fixtures_created": [
+    {
+      "set_id": "qa-timed-2q-d7832d0c-2758-4514-83a8-ff8649215eee",
+      "status": "created_but_duration_not_working",
+      "withdrawn": false
+    },
+    {
+      "set_id": "qa-timed-2q-429b8b0d-a066-417b-b279-d15d572b4542",
+      "status": "created_but_duration_not_working",
+      "withdrawn": false
+    },
+    {
+      "set_id": "qa-timed-2q-f19848ed-3ed4-4c2e-a34f-4bf3e7ccb840",
+      "status": "created_with_attempt",
+      "attempt_id": "0c871257-d724-4aba-aefa-dfc43678a329",
+      "withdrawn": false
+    },
+    {
+      "set_id": "qa-timed-2q-58caba0c-12f6-43a4-b369-f05ea6aaec7b",
+      "status": "created_with_attempt",
+      "attempt_id": "07f84be0-d96a-45ba-b635-4f2b1b6c1212",
+      "withdrawn": false
+    },
+    {
+      "set_id": "qa-deadline-1e0ac070-0dc5-4727-9cc5-4019c7291492",
+      "status": "created_with_manual_deadline",
+      "attempt_id": "c5232ee6-8076-42df-9c6a-c682f9f1ca14",
+      "withdrawn": false,
+      "note": "Deadline manually set to 30s via MongoDB update"
+    }
+  ],
+  
+  "should_call_test_agent_after_fix": "true",
+  "should_main_agent_test_itself": "false",
+  
+  "notes": [
+    "Test could not be completed due to backend duration configuration issue",
+    "Multiple test fixtures created during debugging - should be withdrawn",
+    "useAttempt.js code review completed - no changes since iteration 13",
+    "Late draft disclosure UI was verified in iteration 14 but without actual late drafts",
+    "This test was meant to verify the full flow with actual late drafts present",
+    "Browser session management separate from API sessions - complicates testing",
+    "Timer display shows HH:MM:SS format counting down from deadline"
+  ]
+}

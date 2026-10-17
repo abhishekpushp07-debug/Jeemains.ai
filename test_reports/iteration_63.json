@@ -1,0 +1,124 @@
+{
+  "summary": "Created focused regression test coverage for PDF numbering and text rendering (iteration 61). New test file /app/tests/packet1/test_pdf_numbering_and_text.py provides comprehensive validation of the ANCHOR regex fix and text quality standards.",
+  
+  "test_file_created": "/app/tests/packet1/test_pdf_numbering_and_text.py",
+  
+  "test_coverage": {
+    "numbering_regression_tests": [
+      "test_q_prefixed_headers_only_match_q_prefixed_anchors - Verifies solution step numbers NOT matched as anchors",
+      "test_bare_numerals_still_work_without_q_prefix - Backward compatibility for bare numerals",
+      "test_mixed_numbering_prefers_q_prefixed - Q-prefixed headers take precedence"
+    ],
+    "text_rendering_tests": [
+      "test_ascii_text_renders_as_typed - Pure ASCII uses render_mode='typed'",
+      "test_unicode_text_renders_as_source - Unicode triggers render_mode='source'",
+      "test_math_symbols_trigger_source_mode - Math symbols trigger source mode",
+      "test_no_service_ui_in_extracted_text - No HTML/debug/service UI in text",
+      "test_normal_styles_no_font_variations - Font variation detection",
+      "test_plain_text_faithfulness_validation - plain_text_is_faithful function validation"
+    ],
+    "edge_case_tests": [
+      "test_corrupt_pdf_fails_gracefully - Corrupt PDFs rejected with clear error",
+      "test_bare_minimal_pdf_works - Minimal valid PDF processes successfully"
+    ],
+    "validation_tests": [
+      "test_anchor_regex_matches_correctly - ANCHOR regex pattern validation",
+      "test_real_tejas200_pdfs_regression - Real Tejas200 PDFs from iteration 61"
+    ]
+  },
+  
+  "test_results": {
+    "total_tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "execution_time_seconds": 2.27
+  },
+  
+  "regression_coverage_verified": {
+    "iteration_61_fix": "VERIFIED - Q-prefixed headers only match Q-prefixed anchors, solution steps ignored",
+    "backward_compatibility": "VERIFIED - Bare numerals still work when no Q-prefixed headers exist",
+    "text_quality": "VERIFIED - ASCII-only text, no service UI, normal styles enforced",
+    "math_preservation": "VERIFIED - Unicode and math symbols trigger source mode",
+    "real_pdfs": "VERIFIED - Tejas200 PDFs (75 questions) process correctly"
+  },
+  
+  "test_fixtures_created": [
+    "/app/test_reports/fixtures/test_q_prefixed_with_steps.pdf",
+    "/app/test_reports/fixtures/test_bare_numerals.pdf",
+    "/app/test_reports/fixtures/test_mixed_numbering.pdf",
+    "/app/test_reports/fixtures/test_ascii_questions.pdf",
+    "/app/test_reports/fixtures/test_ascii_solutions.pdf",
+    "/app/test_reports/fixtures/test_unicode_questions.pdf",
+    "/app/test_reports/fixtures/test_unicode_solutions.pdf",
+    "/app/test_reports/fixtures/test_math_questions.pdf",
+    "/app/test_reports/fixtures/test_math_solutions.pdf",
+    "/app/test_reports/fixtures/test_corrupt.pdf",
+    "/app/test_reports/fixtures/test_minimal_questions.pdf",
+    "/app/test_reports/fixtures/test_minimal_solutions.pdf",
+    "/app/test_reports/fixtures/test_clean_text_questions.pdf",
+    "/app/test_reports/fixtures/test_clean_text_solutions.pdf",
+    "/app/test_reports/fixtures/test_faithful_questions.pdf",
+    "/app/test_reports/fixtures/test_font_variations.pdf"
+  ],
+  
+  "assertion_quality": {
+    "strict_assertions": "All assertions report actual failures with detailed error messages",
+    "no_weakening": "Assertions never weakened to pass tests - fail with actual details",
+    "clear_error_messages": "Each assertion includes context about what failed and why",
+    "regression_protection": "Tests will catch any regression in iteration 61 fix"
+  },
+  
+  "text_quality_validation": {
+    "ascii_only": "VERIFIED - Text contains only ASCII characters (ord <= 126)",
+    "no_service_ui": "VERIFIED - No HTML tags, debug info, URLs, or service UI elements",
+    "normal_styles": "VERIFIED - Font variations and math fonts trigger source mode",
+    "unicode_handling": "VERIFIED - Unicode characters properly trigger source mode"
+  },
+  
+  "backend_issues": {
+    "critical_bugs": []
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": []
+  },
+  
+  "passed_tests": [
+    "Q-prefixed headers only match Q-prefixed anchors (solution steps NOT matched)",
+    "Bare numerals work without Q-prefix (backward compatibility)",
+    "Mixed numbering prefers Q-prefixed headers",
+    "ASCII text renders as typed mode",
+    "Unicode text renders as source mode",
+    "Math symbols trigger source mode",
+    "Corrupt PDFs fail gracefully with clear error",
+    "Bare minimal PDFs process successfully",
+    "ANCHOR regex matches all expected patterns",
+    "Plain text faithfulness validation works",
+    "Real Tejas200 PDFs regression test (75 questions, all math preserved)",
+    "No service UI in extracted text",
+    "Font variations detected correctly"
+  ],
+  
+  "test_report_links": [
+    "/app/tests/packet1/test_pdf_numbering_and_text.py"
+  ],
+  
+  "updated_files": [
+    "/app/tests/packet1/test_pdf_numbering_and_text.py"
+  ],
+  
+  "action_item_for_main_agent": "",
+  
+  "success_percentage": {
+    "backend": "100% - All 13 PDF numbering and text rendering tests passed",
+    "frontend": "N/A - Backend-only testing",
+    "overall": "100%"
+  },
+  
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "false",
+  
+  "conclusion": "✅ REGRESSION TEST COVERAGE COMPLETE - Created comprehensive test file /app/tests/packet1/test_pdf_numbering_and_text.py with 13 tests covering PDF numbering (iteration 61 fix), text rendering quality (ASCII-only, no service UI, normal styles), and edge cases. All tests passed (13/13). Tests use strict assertions that never weaken and report actual failure details. Fixtures created for reuse in future tests."
+}

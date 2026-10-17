@@ -1,0 +1,120 @@
+{
+  "test_iteration": 23,
+  "timestamp": "2026-10-12T10:30:00Z",
+  "test_type": "post_cleanup_verification",
+  "summary": "Completed comprehensive post-cleanup verification of QA withdrawal, auth rate limiting, JSON limits, and fault injection tests. All critical requirements verified.",
+  
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": [],
+    "notes": "All backend endpoints functioning correctly. Auth rate limiting working as expected with atomic counters."
+  },
+  
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "notes": "Frontend not tested in this verification - focus was on backend API verification only."
+  },
+  
+  "passed_tests": [
+    "QA sets withdrawal: All 50 sets withdrawn and not visible in public APIs",
+    "Public /api/sets?exam=JEE%20Main shows NO QA sets",
+    "/api/my/sets shows NO published QA sets for owner",
+    "Withdrawn set f565e4db... returns 404/409 on preflight",
+    "Existing own result 273f767b... returns 200 for owner",
+    "PDF report download returns 200 for owner (66459 bytes)",
+    "PDF report download returns 404 for other student",
+    "Staff auth rate limiting: 5 bad attempts return 401, 6th returns 429",
+    "429 response includes Retry-After header with remaining time in 900s window",
+    "Concurrent staff auth: 8 requests result in max 5x401, remainder 429 (no 500s)",
+    "Phone auth endpoint accessible and has rate limiting",
+    "Owner phone +12025550184 NOT throttled (3 consecutive requests succeed)",
+    "JSON limits: All 6/6 tests passed (duplicate keys, NaN, >1MiB, >40 nesting, regular mutations, Retry-After headers)",
+    "Huge answer revision handled gracefully (no 500 errors)",
+    "test_v5_faults.py has qa_only fixtures with yield cleanup",
+    "test_v5_faults.py compiles successfully"
+  ],
+  
+  "test_report_links": [
+    "/app/test_reports/post_cleanup_verification.json",
+    "/app/test_reports/additional_verification.json",
+    "/app/test_reports/v5_json_limits_final.log",
+    "/app/test_reports/qa_withdrawal.json",
+    "/app/backend/tests/test_v5_faults.py"
+  ],
+  
+  "action_item_for_main_agent": "",
+  
+  "updated_files": [
+    "/app/backend/tests/test_post_cleanup_verification.py",
+    "/app/backend/tests/test_additional_verification.py"
+  ],
+  
+  "success_percentage": {
+    "backend": "100% (18/18 tests passed)",
+    "frontend": "Not tested (verification focused on backend APIs only)",
+    "overall": "100%"
+  },
+  
+  "detailed_verification_results": {
+    "qa_withdrawal": {
+      "total_withdrawn": 50,
+      "verified_not_in_public_api": true,
+      "verified_not_in_my_sets": true,
+      "withdrawn_set_returns_404": true,
+      "existing_attempt_accessible": true,
+      "pdf_report_accessible_to_owner": true,
+      "pdf_report_blocked_for_others": true
+    },
+    "auth_rate_limiting": {
+      "staff_atomic_counter": true,
+      "staff_5_attempts_then_429": true,
+      "staff_retry_after_header": true,
+      "staff_900s_window": true,
+      "concurrent_requests_handled": true,
+      "no_500_errors": true,
+      "phone_rate_limiting_exists": true,
+      "owner_phone_not_throttled": true
+    },
+    "json_limits": {
+      "duplicate_keys_rejected": true,
+      "nan_rejected": true,
+      "large_json_rejected": true,
+      "deep_nesting_rejected": true,
+      "regular_mutations_work": true,
+      "retry_after_headers": true
+    },
+    "fault_injection_tests": {
+      "test_file_exists": true,
+      "qa_only_fixtures": true,
+      "yield_cleanup": true,
+      "compiles_successfully": true
+    }
+  },
+  
+  "environment_verification": {
+    "base_url": "https://campus-launch-2.preview.emergentagent.com",
+    "mongo_url": "mongodb://localhost:27017",
+    "db_name": "test_database",
+    "services_running": true,
+    "data_integrity": "All existing data preserved, no modifications made"
+  },
+  
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": false,
+  
+  "notes": [
+    "This is a READ-ONLY verification - no new fixtures created or existing data modified",
+    "All 50 QA sets successfully withdrawn and verified not accessible",
+    "Original tejas-paper-01 review (75 questions) unchanged as per qa_withdrawal.json",
+    "Staff auth rate limiting uses atomic find_one_and_update BEFORE password verification",
+    "Phone rate limiting uses 600s window with 30 request limit",
+    "Staff rate limiting uses 900s window with 5 request limit",
+    "Concurrent requests properly handled with atomic counters (no race conditions)",
+    "PDF report download working correctly with proper access control",
+    "test_v5_faults.py ready for execution with proper qa_only fixtures and cleanup",
+    "JSON body limits properly enforced at middleware level",
+    "All verification requirements from request satisfied"
+  ]
+}
