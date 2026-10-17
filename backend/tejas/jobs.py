@@ -134,8 +134,8 @@ async def run_job(id, drain=True):
                 for fid in ids:
                     f = await get(files, fid)
                     sources[fid] = await run_in_threadpool(get_object, f['path'])
-                from .mock_solutions import for_questions
-                a['ai_solutions'] = {k: v['solution'] for k, v in (await for_questions(a['questions'])).items() if v.get('state') == 'ready'}
+                from .mock_solutions import for_attempt
+                a['ai_solutions'] = {k: v[1] for k, v in (await for_attempt(a)).items() if v[0] == 'ready'}
                 await jobs.update_one({'id': id, 'lease': lease}, {'$set': {'progress': 35}})
                 pdf = await run_in_threadpool(generate_report, a, lambda fid: sources[fid])
                 await require_lease(j)

@@ -12,6 +12,8 @@ SPEC = {
     'exam_navigation.catalogue': ('current_profile_exam_metadata', 'normal', 'read'),
     'mock_books.list_mock_books': ('staff_mock_metadata', 'normal', 'read'),
     'mock_solutions.attempt_solutions': ('attempt_owner_completed_released', 'normal', 'read'),
+    'mock_solutions.review_list': ('staff_ai_review_metadata', 'normal', 'read'),
+    'mock_solutions.review_action': ('staff_ai_review_tag', 'normal', 'tag_update_audited'),
     'attempts.unlock_bonus': ('attempt_owner_active_deadline_all_main_answered', 'live', 'set_once_server_seq_CAS'),
     'cohorts.read': ('attempt_owner_released_original_peer_comparison', 'normal', 'read_with_materialization'),
     'cohorts.air_scenario': ('attempt_owner_released_full_jee_scenario', 'normal', 'pure_calculation'),

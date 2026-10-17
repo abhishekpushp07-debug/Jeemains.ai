@@ -23,6 +23,7 @@ import {
 } from "../components/Shared";
 import { StudioImportHub } from './StudioImport';
 import { MockBookPanel } from '../components/studio/MockBookPanel';
+import { AiReviewPanel } from '../components/studio/AiReviewPanel';
 import { Button } from '../components/ui/button';
 import { toast } from "sonner";
 export default function Studio() {
@@ -88,6 +89,7 @@ export default function Studio() {
       />
       <StudioImportHub />
       <MockBookPanel />
+      <AiReviewPanel />
       <div className="flex flex-wrap items-center justify-between gap-4 mt-10 mb-6"><h2 data-testid="legacy-studio-heading">Advanced Studio sets</h2><Button variant="outline" data-testid="studio-new-set" onClick={() => setCreate(true)}><Plus size={16} /> Manual editor</Button></div>
       <div className="studio-stats">
         {[

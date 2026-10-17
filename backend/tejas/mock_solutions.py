@@ -1,21 +1,26 @@
-"""Pre-generated AI (gpt-6-astra) ten-mark solutions for every live full-mock question. Never changes keys or scores."""
-import asyncio, json, logging, uuid
+"""Owner-side AI (gpt-6-astra) ten-mark solutions. A backend worker solves every uploaded question (drafts, chapter tests,
+full mocks) and saves the result as an `ai_solution` tag on the question itself. Students only read saved tags; no AI
+call ever runs on a student request. Keys and scores are never changed by AI."""
+import asyncio, hashlib, json, logging, uuid
 from concurrent.futures import ThreadPoolExecutor
 from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from pymongo import UpdateOne, ReturnDocument
 from starlette.concurrency import run_in_threadpool
-from .db import db, sets, files, get, now
-from .auth import current
+from .db import db, sets, files, get, now, audit
+from .auth import current, staff
 from .attempts import owned
+from .request_contracts import AiReviewPayload
 from .astra import MODEL, StrictModel, SolutionStep, _call
 
 router = APIRouter(prefix='/api', tags=['AI solutions'])
 solutions = db.tejas_question_solutions
 PROMPT_VERSION = 'ten-mark-v1'
-CONCURRENCY = 8
+CONCURRENCY = 12
 LEASE = 300
+SCAN_EVERY = 30
+REVIEW_STATES = ('key_confirmed', 'key_wrong')
 _POOL = ThreadPoolExecutor(max_workers=CONCURRENCY, thread_name_prefix='ten-mark')
 log = logging.getLogger(__name__)
 
@@ -49,20 +54,60 @@ def solution_id(q):
     return str(uuid.uuid5(uuid.NAMESPACE_URL, f"{PROMPT_VERSION}:{q['id']}:{q.get('answer', '')}"))
 
 
-async def enqueue_live():
-    """Queue every question of live full mocks that has no solution yet (mock order, then question order)."""
+def refs_hash(q):
+    return hashlib.sha256(json.dumps([[r.get('file_id'), r.get('page'), r.get('rect')] for r in q.get('q_refs', [])]).encode()).hexdigest()[:16]
+
+
+def priority(s, t):
+    """New owner uploads first, then live full mocks, live chapter tests, everything else."""
+    live = s.get('status') == 'published' and s.get('live_enabled') and (s.get('end_at') or 0) > t
+    if (s.get('created_at') or 0) > t - 86400 and not s.get('mock_book_id') and not s.get('chapter_book_id'):
+        return 0
+    return 1 if live and s.get('full_length') else 2 if live else 3
+
+
+def make_tag(doc):
+    s = doc['solution']
+    return {'solution_id': doc['id'], 'refs_hash': doc.get('refs_hash'), 'key': doc['key'], 'model': doc.get('model', MODEL),
+            'label': 'AI generated', 'generated_at': doc.get('ready_at') or now(), 'agrees': bool(s['key_agrees']) and s['final_answer'] == doc['key'],
+            'solution': s, 'review': doc.get('review')}
+
+
+async def write_tag(set_id, question_id, tag):
+    await sets.update_one({'id': set_id}, {'$set': {'questions.$[q].ai_solution': tag}}, array_filters=[{'q.id': question_id}])
+
+
+async def enqueue_all():
+    """Every uploaded question gets solved once; region or key edits create a fresh solve; lost tags are restored."""
     t = now()
-    live = await sets.find({'full_length': True, 'status': 'published', 'live_enabled': True, 'end_at': {'$gt': t}},
-                           {'_id': 0, 'id': 1, 'mock_number': 1, 'questions.id': 1, 'questions.number': 1, 'questions.answer': 1}).to_list(500)
-    ops = []
-    for s in live:
+    rows = await sets.find({'status': {'$in': ['draft', 'review', 'published']}},
+        {'_id': 0, 'id': 1, 'status': 1, 'live_enabled': 1, 'end_at': 1, 'full_length': 1, 'created_at': 1, 'mock_book_id': 1, 'chapter_book_id': 1,
+         'mock_number': 1, 'chapter_number': 1, 'questions.id': 1, 'questions.number': 1, 'questions.answer': 1, 'questions.q_refs': 1,
+         'questions.ai_solution.solution_id': 1, 'questions.ai_solution.refs_hash': 1}).to_list(5000)
+    ops, wanted = [], {}
+    for s in rows:
+        p = priority(s, t)
         for q in s['questions']:
-            sid = solution_id(q)
+            if not q.get('q_refs') and not q.get('answer'):
+                continue
+            sid, rh = solution_id(q), refs_hash(q)
+            tag = q.get('ai_solution') or {}
+            if tag.get('solution_id') == sid and tag.get('refs_hash') in (None, rh):
+                continue
+            wanted[sid] = (s['id'], q['id'], rh)
             ops.append(UpdateOne({'id': sid}, {'$setOnInsert': {'id': sid, 'question_id': q['id'], 'set_id': s['id'], 'number': q['number'],
-                'order': (s.get('mock_number') or 999) * 1000 + q['number'], 'key': q.get('answer', ''), 'state': 'queued', 'tries': 0,
-                'model': MODEL, 'prompt_version': PROMPT_VERSION, 'created_at': t}}, upsert=True))
+                'order': p * 10_000_000 + (s.get('mock_number') or s.get('chapter_number') or 999) * 1000 + q['number'], 'key': q.get('answer', ''),
+                'refs_hash': rh, 'state': 'queued', 'tries': 0, 'model': MODEL, 'prompt_version': PROMPT_VERSION, 'created_at': t}}, upsert=True))
     for i in range(0, len(ops), 1000):
         await solutions.bulk_write(ops[i:i + 1000], ordered=False)
+    ids = list(wanted)
+    for i in range(0, len(ids), 1000):
+        async for doc in solutions.find({'id': {'$in': ids[i:i + 1000]}, 'state': 'ready'}, {'_id': 0}):
+            set_id, qid, rh = wanted[doc['id']]
+            if doc.get('refs_hash') in (None, rh):
+                await write_tag(set_id, qid, make_tag(doc))
+            else:
+                await solutions.update_one({'id': doc['id']}, {'$set': {'state': 'queued', 'refs_hash': rh, 'tries': 0}})
     return len(ops)
 
 
@@ -82,10 +127,14 @@ async def solve(doc):
     for ref in q['q_refs'][:4]:
         images.append(await run_in_threadpool(render_crop, await get(files, ref['file_id']), ref, 1.6))
     text = f"Question {q['number']} · {q.get('subject')}. Official answer key: {q.get('answer') or 'not supplied'}. Write the ten-mark solution."
+    if (doc.get('review') or {}).get('status') == 'key_confirmed':
+        text += (f" The owner has re-checked and VERIFIED that ({q.get('answer')}) is correct. A previous attempt disagreed; re-read the figure"
+                 " and every option carefully, find the step that leads to the verified answer, and explain it. Set key_agrees=true only if your working truly reaches it.")
     value, provenance = await asyncio.get_running_loop().run_in_executor(_POOL, _call, SYSTEM, text, images, TenMark, 4000, 180)
+    t = now()
     await solutions.update_one({'id': doc['id']}, {'$set': {'state': 'ready', 'solution': value, 'provenance': provenance,
-        'flag': None if value['key_agrees'] else 'AI result differs from the supplied key; the key and your score were not changed.',
-        'ready_at': now(), 'updated_at': now()}, '$unset': {'lease_until': ''}})
+        'ready_at': t, 'updated_at': t}, '$unset': {'lease_until': ''}})
+    await write_tag(doc['set_id'], doc['question_id'], make_tag({**doc, 'solution': value, 'ready_at': t}))
 
 
 async def lane():
@@ -107,10 +156,10 @@ async def worker():
         asyncio.create_task(lane())
     while True:
         try:
-            await enqueue_live()
+            await enqueue_all()
         except Exception as exc:
-            log.warning('Solution enqueue scan failed (%s)', type(exc).__name__)
-        await asyncio.sleep(120)
+            log.warning('Solution enqueue scan failed (%s: %s)', type(exc).__name__, str(exc)[:160])
+        await asyncio.sleep(SCAN_EVERY)
 
 
 def spawn():
@@ -123,10 +172,14 @@ def spawn():
 
 
 async def progress(set_ids=None):
-    match = {'set_id': {'$in': set_ids}} if set_ids else {}
-    rows = await solutions.aggregate([{'$match': match}, {'$group': {'_id': '$state', 'n': {'$sum': 1}}}]).to_list(10)
-    counts = {r['_id']: r['n'] for r in rows}
-    return {'ready': counts.get('ready', 0), 'total': sum(counts.values()), 'failed': counts.get('failed', 0)}
+    """Counts saved tags on the questions themselves (the source of truth students read)."""
+    match = {'id': {'$in': set_ids}} if set_ids else {'status': {'$in': ['draft', 'review', 'published']}}
+    rows = await sets.aggregate([{'$match': match}, {'$unwind': '$questions'},
+        {'$group': {'_id': None, 'total': {'$sum': 1}, 'ready': {'$sum': {'$cond': [{'$ifNull': ['$questions.ai_solution', False]}, 1, 0]}},
+                    'disagree': {'$sum': {'$cond': [{'$eq': ['$questions.ai_solution.agrees', False]}, 1, 0]}}}}]).to_list(1)
+    failed = await solutions.count_documents({'state': 'failed', **({'set_id': {'$in': set_ids}} if set_ids else {})})
+    r = rows[0] if rows else {'total': 0, 'ready': 0, 'disagree': 0}
+    return {'ready': r['ready'], 'total': r['total'], 'disagree': r['disagree'], 'failed': failed}
 
 
 class AiSolution(BaseModel):
@@ -145,10 +198,23 @@ class AiSolutionList(BaseModel):
     disclosure: str = 'AI generated by gpt-6-astra from the original question image and the supplied key. AI can make mistakes; the supplied key and your sealed score are never changed by it.'
 
 
-async def for_questions(questions):
-    ids = [solution_id(q) for q in questions]
-    rows = {r['question_id']: r for r in await solutions.find({'id': {'$in': ids}}, {'_id': 0, 'question_id': 1, 'state': 1, 'solution': 1, 'flag': 1}).to_list(len(ids) + 1)}
-    return rows
+def student_view(tag, key):
+    """What a student may see for one saved tag (a disagreeing solution waits for owner review or a verified re-solve)."""
+    if not tag or tag.get('key') != key:
+        return 'pending', None, None
+    review = (tag.get('review') or {}).get('status')
+    if tag['agrees']:
+        return 'ready', tag['solution'], None
+    if review == 'key_wrong':
+        return 'ready', tag['solution'], 'The owner has flagged the supplied key for correction. Your sealed score is unchanged until an official correction is published.'
+    return 'under_review', None, None
+
+
+async def for_attempt(a):
+    """question_id -> (state, solution, flag) from the tags saved on the paper's questions."""
+    paper = await sets.find_one({'id': a['set_id']}, {'_id': 0, 'questions.id': 1, 'questions.ai_solution': 1}) or {'questions': []}
+    tags = {q['id']: q.get('ai_solution') for q in paper['questions']}
+    return {q['id']: student_view(tags.get(q['id']), q.get('answer', '')) for q in a['questions']}
 
 
 @router.get('/attempts/{id}/ai-solutions', response_model=AiSolutionList)
@@ -158,8 +224,75 @@ async def attempt_solutions(id: str, u=Depends(current)):
         raise HTTPException(409, 'Solutions unlock after submission.')
     if a.get('competition_end', 0) > now():
         raise HTTPException(403, 'Solutions remain hidden until the competition ends.')
-    rows = await for_questions(a['questions'])
-    items = [AiSolution(question_id=q['id'], state=rows.get(q['id'], {}).get('state', 'not_queued'),
-                        solution=rows.get(q['id'], {}).get('solution') if rows.get(q['id'], {}).get('state') == 'ready' else None,
-                        flag=rows.get(q['id'], {}).get('flag')) for q in a['questions']]
+    rows = await for_attempt(a)
+    items = [AiSolution(question_id=qid, state=state, solution=solution, flag=flag) for qid, (state, solution, flag) in rows.items()]
     return AiSolutionList(items=items, ready=sum(x.state == 'ready' for x in items), total=len(items))
+
+
+class ReviewItem(BaseModel):
+    set_id: str
+    set_title: str
+    exam: str
+    kind: str
+    question_id: str
+    number: int
+    subject: str
+    key: str
+    ai_answer: str
+    insight: str
+    steps: list[dict]
+    review: dict | None = None
+    generated_at: float | None = None
+    image_count: int = 0
+
+
+class ReviewList(BaseModel):
+    items: list[ReviewItem]
+    counts: dict
+    progress: dict
+
+
+@router.get('/studio/ai-review', response_model=ReviewList)
+async def review_list(state: str = 'open', u=Depends(staff)):
+    """Questions where the saved AI solution disagrees with the supplied key."""
+    cur = sets.aggregate([{'$match': {'status': {'$in': ['draft', 'review', 'published']}}}, {'$unwind': '$questions'},
+        {'$match': {'questions.ai_solution.agrees': False}},
+        {'$project': {'_id': 0, 'id': 1, 'title': 1, 'exam': 1, 'full_length': 1, 'chapter_book_id': 1, 'mock_number': 1, 'chapter_number': 1, 'q': '$questions'}},
+        {'$sort': {'full_length': -1, 'mock_number': 1, 'chapter_number': 1, 'q.number': 1}}])
+    items, counts = [], {'open': 0, 'key_confirmed': 0, 'key_wrong': 0}
+    async for r in cur:
+        tag, q = r['q']['ai_solution'], r['q']
+        status = (tag.get('review') or {}).get('status') or 'open'
+        if tag.get('key') != q.get('answer'):
+            continue
+        counts[status] = counts.get(status, 0) + 1
+        if state != 'all' and status != state:
+            continue
+        items.append(ReviewItem(set_id=r['id'], set_title=r['title'], exam=r.get('exam', ''), question_id=q['id'], number=q['number'],
+            kind='Full mock' if r.get('full_length') else 'Chapter test' if r.get('chapter_book_id') else 'Uploaded paper',
+            subject=q.get('subject', ''), key=q.get('answer', ''), ai_answer=tag['solution']['final_answer'], insight=tag['solution']['insight'],
+            steps=tag['solution']['steps'], review=tag.get('review'), generated_at=tag.get('generated_at'), image_count=len(q.get('q_refs', []))))
+    return ReviewList(items=items[:300], counts=counts, progress=await progress())
+
+
+@router.post('/studio/ai-review/{set_id}/{question_id}', response_model=ReviewItem)
+async def review_action(set_id: str, question_id: str, data: AiReviewPayload, u=Depends(staff)):
+    paper = await sets.find_one({'id': set_id}, {'_id': 0, 'id': 1, 'title': 1, 'exam': 1, 'full_length': 1, 'chapter_book_id': 1,
+                                                 'questions': {'$elemMatch': {'id': question_id}}})
+    if not paper or not paper.get('questions') or not paper['questions'][0].get('ai_solution'):
+        raise HTTPException(404, 'AI solution not found for this question.')
+    q = paper['questions'][0]
+    tag = q['ai_solution']
+    review = {'status': data.action if data.action in REVIEW_STATES else 'open', 'note': data.note.strip(), 'by': u.get('email') or u['id'], 'at': now()}
+    if data.action == 'reopen':
+        review = None
+    await sets.update_one({'id': set_id}, {'$set': {'questions.$[q].ai_solution.review': review}}, array_filters=[{'q.id': question_id}])
+    if data.action == 'key_confirmed':
+        # Verified key: re-solve with that verification so students get a correct worked solution.
+        await solutions.update_one({'id': tag['solution_id']}, {'$set': {'state': 'queued', 'tries': 0, 'review': review, 'order': -1}})
+    await audit(u['id'], 'AI answer review', set_id, f"Q{q['number']}: {data.action}. {data.note.strip()}"[:300])
+    tag['review'] = review
+    return ReviewItem(set_id=set_id, set_title=paper['title'], exam=paper.get('exam', ''), question_id=question_id, number=q['number'],
+        kind='Full mock' if paper.get('full_length') else 'Chapter test' if paper.get('chapter_book_id') else 'Uploaded paper',
+        subject=q.get('subject', ''), key=q.get('answer', ''), ai_answer=tag['solution']['final_answer'], insight=tag['solution']['insight'],
+        steps=tag['solution']['steps'], review=review, generated_at=tag.get('generated_at'), image_count=len(q.get('q_refs', [])))

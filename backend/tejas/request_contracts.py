@@ -23,6 +23,11 @@ class EmptyPayload(Payload):
     pass
 
 
+class AiReviewPayload(Payload):
+    action: Literal['key_confirmed', 'key_wrong', 'reopen']
+    note: str = Field(default='', max_length=600)
+
+
 class PhonePayload(Payload):
     phone: str = Field(min_length=5, max_length=32)
 
@@ -217,6 +222,7 @@ from .cohorts import RankScenario
 from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
 MODELS = {
+    'mock_solutions.review_action': AiReviewPayload,
     'jobs.cron': CronEnvelope,
     'cohorts.air_scenario': RankScenario,
     'smart_imports.set_daily_budget': DailyBudget,

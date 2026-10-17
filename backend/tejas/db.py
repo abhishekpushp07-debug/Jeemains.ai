@@ -45,6 +45,8 @@ async def get(coll, id):
     projection = {"_id": 0}
     if coll.name == "tejas_attempts":
         projection.update({"command_receipts": 0, "response_schema": 0})
+    if coll.name == "tejas_sets":
+        projection["questions.ai_solution"] = 0  # owner-side AI tags are read only by the solutions/review routes
     d = await coll.find_one({"id": id}, projection)
     if not d:
         raise HTTPException(404, "This item is unavailable or does not exist.")

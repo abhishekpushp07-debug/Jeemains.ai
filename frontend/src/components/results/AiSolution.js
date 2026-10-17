@@ -3,12 +3,12 @@ import { Sparkles, Lightbulb, Zap, AlertTriangle, Timer, Target } from 'lucide-r
 import { MathText } from '../QuestionContent';
 
 const Pending = ({ state, number }) => <div className="ai-solution is-pending" data-testid={'ai-solution-pending-' + number}>
-  <Sparkles size={16} /> <span>{state === 'failed' ? 'The AI solution for this question is being retried.' : 'The AI step-by-step solution for this question is being written and will appear here shortly.'}</span>
+  <Sparkles size={16} /> <span>{state === 'under_review' ? 'The AI solution for this question is being double-checked against the answer key by our team.' : 'The AI step-by-step solution for this question is being prepared and will appear here soon.'}</span>
 </div>;
 
 export const AiSolution = ({ item, number }) => {
   if (!item) return null;
-  if (item.state !== 'ready' || !item.solution) return item.state === 'not_queued' ? null : <Pending state={item.state} number={number} />;
+  if (item.state !== 'ready' || !item.solution) return <Pending state={item.state} number={number} />;
   const s = item.solution;
   return <section className="ai-solution" data-testid={'ai-solution-' + number}>
     <header className="ai-solution-head">
