@@ -127,6 +127,8 @@ async def refresh(job):
     ordered=[x['score'] for x in scores for _ in range(x['count'])]
     median=(ordered[(len(ordered)-1)//2]+ordered[len(ordered)//2])/2 if ordered else None
     section_stats=[{'name':x['_id'],'average':round(x['avg'],2),'top':x['top']} for x in result['sections']]
+    order=['Physics','Chemistry','English Proficiency','Logical Reasoning','Mathematics']
+    section_stats.sort(key=lambda x:order.index(x['name']) if x['name'] in order else 99)
     await require_lease(job)
     await db.tejas_cohort_snapshots.update_one({'id':cid},{'$set':{'sample_size':n,'maximum':maximum,'scores':scores,'distribution':distribution,
         'average':round(stats['avg'],2) if stats else None,'top':stats.get('top'),'median':median,'sections':section_stats,

@@ -208,7 +208,7 @@ class TestStudio:
     def test_mock_book(self):
         s = requests.Session()
         s.headers.update(HDR)
-        r = s.post(API + '/auth/login', json={'email': 'abhishek@billpe.com', 'password': 'Jm-Owner-8_GbmDaWdx80254P'})
+        r = s.post(API + '/auth/login', json={'email': 'abhishek@billpe.com', 'password': '55241878'})
         if r.status_code != 200:
             pytest.skip('owner login ' + r.text)
         d = unwrap(s.get(API + '/studio/mock-books'))

@@ -82,5 +82,16 @@ export function deepInsights(r, c) {
   const potential = acc != null ? Math.round(skipped.length * (acc * plus - (1 - acc) * minus)) : null;
   add('potential', 'Unanswered potential', potential != null ? `${potential >= 0 ? '+' : ''}${potential} marks` : null, `If you answered the ${skipped.length} blank questions at your current accuracy.`, potential > 0 ? 'info' : 'warn');
   add('next', 'Next best step', `${wrong.length + skipped.length} to revise`, ranked.length > 1 ? `Read the AI solutions for your ${ranked[ranked.length - 1].name} mistakes first, then take an untimed retry.` : 'Read the AI solutions for every wrong answer, then take an untimed retry.', 'info');
+  // Always-available facts keep the list at 25 when peer or timing data is missing.
+  const fill = [
+    ['correct', 'Correct answers', `${right.length}`, `Earned +${right.length * plus} marks.`, 'good'],
+    ['wrongs', 'Wrong answers', `${wrong.length}`, wrong.length ? 'Revisit each one with the solution before your next test.' : 'No wrong answers. Excellent control.', wrong.length ? 'warn' : 'good'],
+    ['blank', 'Unanswered', `${skipped.length}`, 'Blank answers cost nothing, but each one is a missed chance at marks.'],
+    ['positive', 'Positive marks earned', `+${right.length * plus}`, `Before ${wrong.length * minus} negative marks were taken off.`, 'good'],
+    ['size', 'Paper size', `${main.length} questions`, `${sec.length} section${sec.length === 1 ? '' : 's'} · +${plus} / −${minus} / 0 marking.`],
+    ['firstten', 'Opening accuracy', `${main.slice(0, 10).filter((q) => q.outcome === 'correct').length} / 10`, 'Correct answers in the first ten questions. A strong start builds momentum.'],
+    ['lastten', 'Closing accuracy', `${main.slice(-10).filter((q) => q.outcome === 'correct').length} / 10`, 'Correct answers in the last ten questions of the paper.'],
+  ];
+  fill.forEach(([k, t, v, d, tone]) => { if (out.length < 25) add(k, t, v, d, tone); });
   return out.slice(0, 25);
 }

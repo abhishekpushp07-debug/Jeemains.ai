@@ -9,7 +9,7 @@ from starlette.concurrency import run_in_threadpool
 from .db import db, sets, files, get, now
 from .auth import current
 from .attempts import owned
-from .astra import MODEL, StrictModel, SolutionStep, AstraUnavailable, _call
+from .astra import MODEL, StrictModel, SolutionStep, _call
 
 router = APIRouter(prefix='/api', tags=['AI solutions'])
 solutions = db.tejas_question_solutions
@@ -40,7 +40,8 @@ SYSTEM = ('You are a senior Indian entrance-exam (BITSAT/JEE) teacher writing a 
     'Give one deep insight (why it works / what the examiner tests), a faster exam shortcut if one genuinely exists (else an empty string), '
     '2-4 common mistakes, a time tip, and difficulty. If your result disagrees with the official key, set key_agrees=false, '
     'set final_answer to your own result and explain the discrepancy in insight; never pretend agreement. '
-    'If the image is unreadable set final_answer to "" and key_agrees=false. Use $...$ for inline math and $$...$$ for display math. '
+    'If the image is unreadable set final_answer to "" and key_agrees=false. Use $...$ for inline math and $$...$$ for display math; '
+    'always brace fractions (\\frac{1}{2}) and avoid \\boxed, \\text, \\left and \\right. '
     'Return ONLY JSON matching this schema: ' + json.dumps(TenMark.model_json_schema()))
 
 
@@ -81,7 +82,7 @@ async def solve(doc):
     for ref in q['q_refs'][:4]:
         images.append(await run_in_threadpool(render_crop, await get(files, ref['file_id']), ref, 1.6))
     text = f"Question {q['number']} · {q.get('subject')}. Official answer key: {q.get('answer') or 'not supplied'}. Write the ten-mark solution."
-    value, provenance = await asyncio.get_running_loop().run_in_executor(_POOL, _call, SYSTEM, text, images, TenMark, 4000)
+    value, provenance = await asyncio.get_running_loop().run_in_executor(_POOL, _call, SYSTEM, text, images, TenMark, 4000, 180)
     await solutions.update_one({'id': doc['id']}, {'$set': {'state': 'ready', 'solution': value, 'provenance': provenance,
         'flag': None if value['key_agrees'] else 'AI result differs from the supplied key; the key and your score were not changed.',
         'ready_at': now(), 'updated_at': now()}, '$unset': {'lease_until': ''}})
@@ -95,14 +96,13 @@ async def lane():
             continue
         try:
             await solve(doc)
-        except (AstraUnavailable, Exception) as exc:
-            log.warning('Ten-mark solution failed safely (%s)', type(exc).__name__)
+        except Exception as exc:
+            log.warning('Ten-mark solution failed safely (%s: %s)', type(exc).__name__, str(exc)[:120])
             await solutions.update_one({'id': doc['id']}, {'$set': {'state': 'failed', 'retry_at': now() + 120 * doc.get('tries', 1), 'updated_at': now()}})
             await asyncio.sleep(3)
 
 
 async def worker():
-    await asyncio.sleep(5)
     for _ in range(CONCURRENCY):
         asyncio.create_task(lane())
     while True:
@@ -111,6 +111,15 @@ async def worker():
         except Exception as exc:
             log.warning('Solution enqueue scan failed (%s)', type(exc).__name__)
         await asyncio.sleep(120)
+
+
+def spawn():
+    """Run generation in its own process so the API event loop never competes with it; a file lock keeps one copy."""
+    import subprocess, sys
+    from pathlib import Path
+    script = Path(__file__).resolve().parents[1] / 'tools' / 'solution_worker.py'
+    subprocess.Popen([sys.executable, str(script)], start_new_session=True,
+                     stdout=open('/var/log/supervisor/solution_worker.log', 'a'), stderr=subprocess.STDOUT)
 
 
 async def progress(set_ids=None):

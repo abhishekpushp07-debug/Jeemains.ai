@@ -20,9 +20,10 @@ Free access; phone-only student login; exam hubs (Mock Tests / Chapter-wise / Re
 - 2026-10-17: Imported repo; app starts (env configured, deps installed, poppler/LibreOffice installed). Restored the 94 live BITSAT chapter tests (30/32/32, 4,700 Q, original IDs, end 17 Oct 2027).
 - 2026-10-17: 50 BITSAT full mocks imported — all 50 passed checks (130+12, sections P30/C30/E10/LR20/M40, 142/142 keys agreeing across two readings, A–D readable, no overlaps) → 50 live, 0 held, live until 17 Oct 2027. Bonus gate/lock (server-enforced), section-wise + bonus results and PDF, Studio mock status panel, results "Bonus section" filter. Testing agent iteration_93: backend 13/13, all requested UI flows pass.
 - New owner password set for this environment (see /app/memory/test_credentials.md).
+- 2026-10-17 (iteration 2): Owner password set to the user's choice (tools/set_owner_password.py; sessions ended). Result analysis: live rank/percentile/average/median/top among all students (cohorts.py MIN_SAMPLE=1, early-sample label under 100), score-distribution, section you-vs-avg-vs-top, outcome donut, 142-question heat map, per-question "X of Y who attempted solved it", 25-point deep insights (frontend lib/deepInsights.js, data-driven). AI ten-mark solutions: gpt-6-astra (Emergent key) pre-generates for every live full-mock question in a separate worker process (tools/solution_worker.py, spawned at backend start, file lock, 8 lanes, lease/retry, auto-queues any newly live full mock every 2 min); shown as "AI generated" on results + in the PDF (plain-text math). Testing agent iteration_94 found a PDF failure on AI LaTeX, which is now fixed (PDF tested: 289 pages).
 
 ## Prioritized backlog
-- P0 (Phase 2): owner password change UI; automatic PDF/Word/Excel upload-to-live with issue list; gpt-6-astra step-by-step solutions labelled "AI generated" (code skeleton exists in tejas/ai_solutions.py, astra.py, smart_imports.py — not exposed in UI).
+- P0 (Phase 2): automatic PDF/Word/Excel upload-to-live with issue list; Studio controls for the AI solution worker (pause/retry) and review of AI-vs-key disagreements.
 - P1 (Phase 3): cohort rank/percentile (≥100 comparable attempts), per-question right/wrong/skip and option split, score distribution & subject charts.
 - P2: JEE Main/COMEDK papers, mistake-practice mode, bookmarks, verified 2026 rank estimate.
 

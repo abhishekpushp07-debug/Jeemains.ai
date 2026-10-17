@@ -72,12 +72,12 @@ class _ObservedChat(LlmChat):
         return response
 
 
-def _call(system, text, images, schema, max_tokens):
+def _call(system, text, images, schema, max_tokens, timeout=80):
     key = os.environ.get('EMERGENT_LLM_KEY', '')
     if not key:
         raise AstraUnavailable('Astra access is not configured. Contact the owner.')
     chat = _ObservedChat(key, str(uuid.uuid4()), system).with_model('openai', MODEL).with_params(
-        max_tokens=max_tokens, response_format={'type': 'json_object'}, timeout=80, num_retries=0)
+        max_tokens=max_tokens, response_format={'type': 'json_object'}, timeout=timeout, num_retries=0)
     message = UserMessage(text=text, file_contents=[ImageContent(image_base64=base64.b64encode(x).decode()) for x in images])
     try:
         raw = asyncio.run(chat.send_message(message))

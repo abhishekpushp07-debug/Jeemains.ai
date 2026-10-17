@@ -78,10 +78,10 @@ class Report:
         if self.y + h > 780:
             self.page_for(self.context + " · continued")
 
-    def text(self, text, size=11, color="#294739"):
+    def text(self, text, size=11, color="#294739", need=125):
         # Conservative chunks avoid forcing a long paragraph into unreadable tiny type.
         for chunk in [str(text)[i : i + 1300] for i in range(0, len(str(text)), 1300)]:
-            self.ensure(125)
+            self.ensure(need)
             box = fitz.Rect(40, self.y, 555, 780)
             content = (
                 f'<div style="font-size:{size}pt;line-height:1.5;color:{color};overflow-wrap:anywhere">'
@@ -89,6 +89,10 @@ class Report:
                 + "</div>"
             )
             spare, scale = self.page.insert_htmlbox(box, content, scale_low=0.95)
+            if spare < 0:
+                # Break unusually long tokens (formulas, URLs) so they can wrap.
+                content = re.sub(r'(\S{40})', '\\1\u200b', content)
+                spare, scale = self.page.insert_htmlbox(box, content, scale_low=0.95)
             if spare < 0:
                 self.page_for(self.context + " · continued")
                 box = fitz.Rect(40, self.y, 555, 780)
@@ -110,14 +114,55 @@ class Report:
         self.page.insert_image(fitz.Rect(40, self.y, 40 + w, self.y + h), stream=png)
         self.y += h + 14
 
-    def rich(self, text):
+    def rich(self, text, lenient=False):
         for part in re.split(PATTERN, str(text)):
             if not part:
                 continue
-            if part.startswith("$"):
+            if part.startswith("$") and lenient:
+                # Untrusted AI LaTeX: render what mathtext supports, otherwise keep the formula as text.
+                try:
+                    self.image(math_png(mathtext_safe(part)))
+                except ValueError:
+                    self.text(part.strip("$"), 10)
+            elif part.startswith("$"):
                 self.image(math_png(part))
             else:
                 self.text(part)
+
+
+def mathtext_safe(formula):
+    f = formula.strip("$")
+    f = re.sub(r"\\[dt]frac", r"\\frac", f)
+    f = re.sub(r"\\frac\s*(\w)\s*(\w)", r"\\frac{\1}{\2}", f)
+    f = re.sub(r"\\(?:text|textrm|operatorname)\s*\{", r"\\mathrm{", f)
+    f = re.sub(r"\\(?:boxed|displaystyle)", "", f)
+    f = re.sub(r"\\(?:left|right|big|Big|bigg|Bigg)(?![a-zA-Z])", "", f)
+    f = re.sub(r"\\q?quad", r"\\ ", f)
+    return "$" + f.strip() + "$"
+
+
+GREEK = {'alpha': 'α', 'beta': 'β', 'gamma': 'γ', 'delta': 'δ', 'Delta': 'Δ', 'theta': 'θ', 'lambda': 'λ', 'mu': 'μ',
+         'pi': 'π', 'rho': 'ρ', 'sigma': 'σ', 'omega': 'ω', 'Omega': 'Ω', 'phi': 'φ', 'epsilon': 'ε', 'varepsilon': 'ε',
+         'times': '×', 'cdot': '·', 'pm': '±', 'le': '≤', 'leq': '≤', 'ge': '≥', 'geq': '≥', 'neq': '≠', 'approx': '≈',
+         'propto': '∝', 'infty': '∞', 'Rightarrow': '⇒', 'rightarrow': '→', 'to': '→', 'implies': '⇒', 'degree': '°', 'circ': '°',
+         'sum': 'Σ', 'int': '∫', 'partial': '∂', 'nabla': '∇', 'therefore': '∴', 'quad': ' ', 'qquad': ' ', 'ldots': '…', 'dots': '…',
+         'longrightarrow': '⟶', 'xrightarrow': '→', 'rightleftharpoons': '⇌', 'leftarrow': '←', 'Leftrightarrow': '⇔', 'sim': '~',
+         'eta': 'η', 'tau': 'τ', 'nu': 'ν', 'chi': 'χ', 'psi': 'ψ', 'kappa': 'κ', 'zeta': 'ζ', 'xi': 'ξ',
+         'in': '∈', 'subset': '⊂', 'cup': '∪', 'cap': '∩', 'perp': '⊥', 'parallel': '∥', 'angle': '∠', 'equiv': '≡', 'gg': '≫', 'll': '≪',
+         'sin': 'sin', 'cos': 'cos', 'tan': 'tan', 'cot': 'cot', 'sec': 'sec', 'log': 'log', 'ln': 'ln', 'lim': 'lim', 'max': 'max', 'min': 'min', 'det': 'det', 'exp': 'exp'}
+
+
+def latex_plain(text):
+    """Readable plain-text form of AI LaTeX for compact PDFs (the web app renders the full math)."""
+    t = str(text).replace('$$', '').replace('$', '')
+    t = re.sub(r'\\[dt]?frac\s*(\w)\s*(\w)', r'(\1)/(\2)', t)
+    for _ in range(4):
+        t = re.sub(r'\\[dt]?frac\{([^{}]*)\}\{([^{}]*)\}', r'(\1)/(\2)', t)
+        t = re.sub(r'\\sqrt\{([^{}]*)\}', '√(\\1)', t)
+        t = re.sub(r'\\(?:text|mathrm|mathbf|boxed|operatorname|vec|hat|bar|overline)\{([^{}]*)\}', r'\1', t)
+    t = re.sub(r'\\([A-Za-z]+)', lambda m: GREEK.get(m.group(1), ''), t)
+    t = t.replace('\\,', ' ').replace('\\;', ' ').replace('\\ ', ' ').replace('{', '').replace('}', '')
+    return re.sub(r'[ \t]{2,}', ' ', t)
 
 
 def render_report(a, loader):
@@ -189,7 +234,7 @@ def render_report(a, loader):
             parts = ["Concept: " + ai["concept"]]
             if ai["given"]:
                 parts.append("Given: " + "; ".join(ai["given"]))
-            parts += [f"Step {i}. {s['title']}: {s['explanation']}" for i, s in enumerate(ai["steps"], 1)]
+            parts += [f"Step {i}. {re.sub(r'^\d+[.)]\s*', '', s['title'])}: {s['explanation']}" for i, s in enumerate(ai["steps"], 1)]
             parts.append(f"Answer: ({ai['final_answer']})" + ("" if ai["key_agrees"] else " — AI differs from the supplied key; the key and score are unchanged."))
             parts.append("Insight: " + ai["insight"])
             if ai["shortcut"]:
@@ -197,7 +242,8 @@ def render_report(a, loader):
             if ai["common_mistakes"]:
                 parts.append("Common mistakes: " + "; ".join(ai["common_mistakes"]))
             parts.append("Time tip: " + ai["time_tip"])
-            report.rich("\n\n".join(parts))
+            for part in parts:
+                report.text(re.sub(r'\n\s*\n+', '\n', latex_plain(part)), 9.5, "#2B2B2B", 48)
     total = len(report.doc)
     for i, p in enumerate(report.doc):
         p.insert_text(

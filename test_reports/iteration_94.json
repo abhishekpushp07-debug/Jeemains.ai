@@ -1,0 +1,40 @@
+{
+  "summary": "Tested the owner password change, cohort result analysis (rank, charts, 25 insights, per-question peer stats), gpt-6-astra AI solutions (API and UI), the PDF report with AI text, mobile overflow at 390px, and a chapter-test regression. Everything passes except one critical failure: the PDF report for any Mock 01 attempt fails. Its job ends in 'failed' because matplotlib mathtext cannot parse the LaTeX that gpt-6-astra writes. Backend pytest: 8/9 passed. Frontend: all checked flows pass.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/attempts/{id}/report (job kind=report)", "issue": "The PDF job fails for every attempt on a mock that has ready AI solutions (all of Mock 01). In reports.py render_report, report.rich() on the AI parts calls math_png(). That raises ValueError ('This typed equation cannot be exported faithfully') on LaTeX that matplotlib mathtext does not support: \\frac12 without braces, \\boxed, \\text, \\left/\\right, \\quad\\Rightarrow and so on. I scanned the 184 ready solutions and 127 of them (69%) contain at least one formula that cannot be rendered. The job retries and ends 'failed'. Before this change the PDF worked (iteration_93, Mock 50, no AI).", "priority": "CRITICAL"}
+    ],
+    "minor": [
+      {"endpoint": "GET /api/attempts/{id}/cohort", "issue": "sections[] comes back in Mongo $group order (Mathematics, Chemistry, ...), not paper order. The frontend matches by name, so nothing breaks, but any consumer that relies on order would get it wrong."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Studio BITSAT mock panel", "issues": ["The copy still says 'No worked solutions are included.' and 'Every mock passed ...'. This now contradicts the AI solutions progress chip next to it."]},
+      {"screen": "Results analysis (mobile 390)", "issues": ["The 142-cell heatmap is about 21 rows tall at 7 cells per row, so it takes up a lot of scrolling. Consider smaller cells or grouping by section. Minor."]},
+      {"screen": "Deep insights", "issues": ["The insight count is not always 25. A chapter test showed '21-point deep insight' because cards with null values are dropped. Mock 01 shows exactly 25. If the user wants 25 every time, add fallback insights."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_result_analysis_ai.py", "/app/test_reports/pytest/result_analysis_ai.xml"],
+  "action_items": [
+    "CRITICAL: Make the PDF tolerate AI LaTeX. In reports.py, render the AI solution parts with a safe path: catch math_png ValueError per formula and fall back to plain text, or normalise the LaTeX first (\\frac12 -> \\frac{1}{2}, strip \\boxed{}/\\text{}/\\left/\\right, replace \\quad). Keep the strict validation only for owner-typed question math. The Report.rich() call at reports.py line ~200 is the failing call.",
+    "Optionally tell gpt-6-astra in the prompt to use only matplotlib-compatible LaTeX (braced \\frac, no \\boxed/\\text).",
+    "Update the stale 'No worked solutions are included' copy in MockBookPanel.",
+    "Optionally guarantee 25 insights with fallback cards, or keep the dynamic count."
+  ],
+  "critical_code_review_comments": [
+    "reports.py: one bad AI formula aborts the whole PDF. AI text is untrusted, so render it best-effort.",
+    "mock_solutions.lane(): `except (AstraUnavailable, Exception)` is redundant. It also hides programming errors behind a warning that logs only the class name.",
+    "mock_solutions.solution_id depends on q.get('answer'). If an attempt's question snapshot ever lacks 'answer', for_questions will silently return not_queued. It works today (142/142 matched).",
+    "cohorts.MIN_SAMPLE=1 means a lone student sees 'rank #1 of 1, percentile 100'. This is intended per the spec, and the early-sample note is shown."
+  ],
+  "updated_files": ["/app/backend/tests/test_result_analysis_ai.py (new)", "/app/backend/tests/test_bitsat_mocks.py (owner password updated)", "/app/memory/test_credentials.md (owner password updated to 55241878)"],
+  "success_rate": {"backend": "89% (8/9)", "frontend": "100% of tested flows"},
+  "seed_data_creation": "Created test phone profiles +919900000397/398/399, one Mock 01 attempt and one chapter attempt, plus their ledgers, cohort entries and jobs. All were deleted at the end, and the affected cohorts were marked dirty so they rebuild.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && REACT_APP_BACKEND_URL=... pytest tests/test_result_analysis_ai.py -n 0 -v. The test creates a Mock 01 attempt for phone 99000003xx; delete it afterwards. Owner login is limited to 5 attempts per 15 minutes. Seeded peer attempt: 845518e3-... (phone 9900000200), rank #3 of 8, 25 insights. Verified in UI: heat-q-37 opens Q37 and scrolls to it, peer-question-stat-37 reads '2 of 6 ... 8 took the test', ai-solution-37 has 6 steps and answer (C). Mobile 390: scrollWidth stays 390 after expanding AI solutions. Chapter test: results load with 21 insights, ai-solutions returns not_queued and nothing renders (expected). AI progress was about 224/7100 at test time.",
+  "rca of the issue": "PDF failure. Repro: complete any Mock 01 attempt and POST /api/attempts/{id}/report. The job ends 'failed'. Backend log: ParseSyntaxException 'Expected \\frac{num}{den}, found 12' on '$$K=\\frac12 mv^2\\quad\\Rightarrow ...$$', raised from reports.py math_png -> Report.rich (line 118) -> render_report (line 200). Cause: AI solution text uses KaTeX-style LaTeX, and matplotlib mathtext supports only a subset. The strict validator that blocks owner input is applied to untrusted AI text, so the exception propagates and kills the job. Fix: render AI formulas best-effort and fall back to text."
+}
