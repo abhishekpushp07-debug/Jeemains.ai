@@ -32,6 +32,9 @@ import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalytic
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
 import { ReportButton } from "../components/ReportButton";
 import { MockSectionScores } from '../components/results/MockSectionScores';
+import { ResultAnalysis } from '../components/results/ResultAnalysis';
+import { AiSolution, PeerQuestionStat } from '../components/results/AiSolution';
+import { useResultExtras } from '../components/results/useResultExtras';
 import { Button } from '../components/ui/button';
 export default function Results() {
   const { id } = useParams();
@@ -51,6 +54,7 @@ export default function Results() {
   const [focusQuestion,setFocusQuestion] = useState(null);
   const [solutionState,setSolutionState] = useState({});
   const [confidenceThreshold,setConfidenceThreshold] = useState(0.2);
+  const extras = useResultExtras(id, !!r);
   useEffect(()=>{
     if (!focusQuestion) return;
     const timer=setTimeout(()=>{document.getElementById('review-question-'+focusQuestion)?.scrollIntoView({block:'start',behavior:'instant'});setFocusQuestion(null)},220);
@@ -262,6 +266,7 @@ export default function Results() {
         </div>
       </div>
       <MockSectionScores s={s} />
+      <ResultAnalysis r={r} cohort={extras.cohort} peer={extras.peer} onOpen={openQuestion} />
       <div className="result-metrics">
         <div>
           <span>Attempt rate</span>
@@ -472,6 +477,7 @@ export default function Results() {
                     </Badge>
                   )}
                 </div>
+                <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />
                 <div className="ledger-meta">
                   Scoring reason: {q.reason_code} · Exact marks: {q.marks_exact}{" "}
                   · Key version: {q.key_version}
@@ -491,7 +497,7 @@ export default function Results() {
                   <div className="solution-title">
                     <FileIcon />
                     <h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':'Matched solution'} · Q{q.solution_number}</h3>
-                    {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>The source provides this key only. No worked solution was supplied or generated.</p>}
+                    {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
                     <Badge>Matched to this frozen version</Badge>
                   </div>
                   <QuestionContent
@@ -501,6 +507,7 @@ export default function Results() {
                     gradeVersion={scoreVersion}
                   />
                 </div>
+                <AiSolution item={extras.ai[q.id]} number={q.number} />
               </div>
             )}
           </article>

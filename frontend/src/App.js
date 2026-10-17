@@ -15,6 +15,7 @@ import "./App.css";
 import "./exam-refinement.css";
 import "./simple-navigation.css";
 import "./full-mocks.css";
+import "./result-analysis.css";
 const Auth = lazy(() => import("./features/Auth"));
 const Exams = lazy(() => import("./features/Exams"));
 const Home = lazy(() => import("./features/Home"));

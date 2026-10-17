@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 load_dotenv(Path(__file__).parent / ".env")
-import os, uuid, time
+import os, uuid, time, asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.exceptions import RequestValidationError
@@ -27,6 +27,7 @@ from tejas import (
     smart_imports,
     exam_navigation,
     mock_books,
+    mock_solutions,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -37,7 +38,13 @@ from tejas_storage import StorageError
 async def lifespan(app):
     await indexes()
     await auth.seed_owner()
+    from tejas.mock_solutions import worker, solutions
+    await solutions.create_index('id', unique=True)
+    await solutions.create_index([('state', 1), ('order', 1)])
+    await solutions.create_index('set_id')
+    solver = asyncio.create_task(worker())
     yield
+    solver.cancel()
     client.close()
 
 
@@ -155,6 +162,7 @@ for module in [
     smart_imports,
     exam_navigation,
     mock_books,
+    mock_solutions,
 ]:
     app.include_router(module.router)
 

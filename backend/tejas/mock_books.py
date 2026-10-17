@@ -31,6 +31,7 @@ class MockBookView(BaseModel):
     held: int
     end_at: float | None = None
     mocks: list[MockStatus]
+    ai_solutions: dict = {}
     server_now: float
 
 
@@ -40,6 +41,7 @@ class MockBookList(BaseModel):
 
 @router.get('/studio/mock-books', response_model=MockBookList)
 async def list_mock_books(u=Depends(staff)):
+    from .mock_solutions import progress
     rows = await mock_books.find({}, {'_id': 0}).sort('created_at', -1).limit(20).to_list(20)
-    return MockBookList(items=[MockBookView(**{k: r.get(k) for k in MockBookView.model_fields if k != 'server_now'},
-        server_now=now()) for r in rows])
+    return MockBookList(items=[MockBookView(**{k: r.get(k) for k in MockBookView.model_fields if k not in ('server_now', 'ai_solutions')},
+        ai_solutions=await progress([m['set_id'] for m in r['mocks']]), server_now=now()) for r in rows])

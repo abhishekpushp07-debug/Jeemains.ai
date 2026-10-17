@@ -181,6 +181,23 @@ def render_report(a, loader):
                         f"({k}) {v}" for k, v in q["options"].items()
                     )
                 report.rich(plain)
+        ai = (a.get("ai_solutions") or {}).get(q["id"])
+        if ai:
+            report.context = f"Question {q['number']} · AI generated solution"
+            report.ensure(70)
+            report.text("AI generated step-by-step solution (gpt-6-astra) · " + ai["difficulty"], 12, "#5C0025")
+            parts = ["Concept: " + ai["concept"]]
+            if ai["given"]:
+                parts.append("Given: " + "; ".join(ai["given"]))
+            parts += [f"Step {i}. {s['title']}: {s['explanation']}" for i, s in enumerate(ai["steps"], 1)]
+            parts.append(f"Answer: ({ai['final_answer']})" + ("" if ai["key_agrees"] else " — AI differs from the supplied key; the key and score are unchanged."))
+            parts.append("Insight: " + ai["insight"])
+            if ai["shortcut"]:
+                parts.append("Shortcut: " + ai["shortcut"])
+            if ai["common_mistakes"]:
+                parts.append("Common mistakes: " + "; ".join(ai["common_mistakes"]))
+            parts.append("Time tip: " + ai["time_tip"])
+            report.rich("\n\n".join(parts))
     total = len(report.doc)
     for i, p in enumerate(report.doc):
         p.insert_text(

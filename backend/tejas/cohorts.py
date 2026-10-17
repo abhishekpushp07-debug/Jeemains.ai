@@ -10,7 +10,8 @@ from .auth import current
 from .attempts import owned
 
 router=APIRouter(prefix='/api/attempts',tags=['Peer comparison'])
-MIN_SAMPLE=100
+MIN_SAMPLE=1
+STABLE_SAMPLE=100
 NTA_REFERENCE={'year':2026,'exam':'JEE Main Paper 1','unique_appeared':1538468,
  'notice_date':'2026-04-20','page':3,
  'url':'https://cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260420809492136.pdf',
@@ -33,6 +34,12 @@ class CohortResponse(BaseModel):
     computed_at:float|None=None
     distribution:list[dict]=Field(default_factory=list)
     questions:list[dict]=Field(default_factory=list)
+    average:float|None=None
+    median:float|None=None
+    top:float|None=None
+    maximum:float|None=None
+    sections:list[dict]=Field(default_factory=list)
+    stable_sample:int=STABLE_SAMPLE
 
 class RankScenario(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -60,6 +67,7 @@ async def record(a,ledger):
          'attempt_id':a['id'],'submitted_at':a['submitted_at'],'score':ledger['summary']['score'],
          'score_exact':ledger['summary'].get('score_exact',str(ledger['summary']['score'])),
          'maximum':ledger['summary']['maximum'],'updated_at':now(),
+         'sections':[{'name':x['name'],'score':x['score']} for x in ledger['summary'].get('sections') or []],
          'items':[{'id':r['id'],'number':qidmeta.get(r['id'],{}).get('number'),
                    'type':qidmeta.get(r['id'],{}).get('type','mcq'), 'outcome':r['outcome'],
                    'response':r.get('normalized_response','') if qidmeta.get(r['id'],{}).get('type')=='mcq' else '',
@@ -89,6 +97,8 @@ async def refresh(job):
     pipeline=[{'$match':{'cohort_id':cid}}, {'$facet':{
         'meta':[{'$group':{'_id':None,'n':{'$sum':1},'maximum':{'$max':'$maximum'}}}],
         'scores':[{'$group':{'_id':'$score_exact','count':{'$sum':1}}}],
+        'stats':[{'$group':{'_id':None,'avg':{'$avg':'$score'},'top':{'$max':'$score'}}}],
+        'sections':[{'$unwind':'$sections'},{'$group':{'_id':'$sections.name','avg':{'$avg':'$sections.score'},'top':{'$max':'$sections.score'}}}],
         'outcomes':[{'$unwind':'$items'},{'$group':{'_id':{'q':'$items.id','outcome':'$items.outcome'},'count':{'$sum':1},'number':{'$first':'$items.number'},'type':{'$first':'$items.type'},'options':{'$first':'$items.option_keys'}}}],
         'choices':[{'$unwind':'$items'},{'$match':{'items.type':'mcq','items.response':{'$ne':''}}},{'$group':{'_id':{'q':'$items.id','choice':'$items.response'},'count':{'$sum':1}}}],
     }}]
@@ -113,8 +123,13 @@ async def refresh(job):
             lower=lo+i*width;upper=lo+(i+1)*width
             count=sum(x['count'] for x in scores if lower<=x['score'] and (x['score']<upper or i==9 and x['score']<=upper))
             distribution.append({'lower':round(lower,2),'upper':round(upper,2),'label':f'{lower:g}–{upper:g}','count':count})
+    stats=result['stats'][0] if result['stats'] else {}
+    ordered=[x['score'] for x in scores for _ in range(x['count'])]
+    median=(ordered[(len(ordered)-1)//2]+ordered[len(ordered)//2])/2 if ordered else None
+    section_stats=[{'name':x['_id'],'average':round(x['avg'],2),'top':x['top']} for x in result['sections']]
     await require_lease(job)
     await db.tejas_cohort_snapshots.update_one({'id':cid},{'$set':{'sample_size':n,'maximum':maximum,'scores':scores,'distribution':distribution,
+        'average':round(stats['avg'],2) if stats else None,'top':stats.get('top'),'median':median,'sections':section_stats,
         'questions':sorted(question_map.values(),key=lambda x:x['number'] or 0),'computed_at':now(),'backfill_remaining':pending}},upsert=True)
     await db.tejas_cohorts.update_one({'id':cid,'generation':state.get('generation')},{'$set':{'dirty':bool(pending),'last_built_at':now()}})
     return f'Compared {n} eligible first-attempt profiles. Remaining legacy records: {pending}.'
@@ -149,6 +164,7 @@ async def read(id:str,bg:BackgroundTasks,score_version:str='original',u=Depends(
     closed=bool(paper.get('end_at') and paper['end_at']<=now())
     pending=await attempts.count_documents({'set_id':a['set_id'],'version':a['version'],'status':'completed','grading_status':{'$ne':'ready'}}) if closed else 0
     common['provisional']=not closed or pending>0 or bool(snap.get('backfill_remaining')) or bool(state.get('dirty'))
+    common.update(average=snap.get('average'),median=snap.get('median'),top=snap.get('top'),maximum=snap.get('maximum'),sections=snap.get('sections',[]))
     if n<MIN_SAMPLE:return CohortResponse(state='insufficient_sample',reason=f'Peer percentages and standings appear after {MIN_SAMPLE} comparable first-attempt profiles. Your own question review remains available.',**common)
     if not first or first.get('updated_at',0)>snap['computed_at']:return CohortResponse(state='preparing',reason='Updating your first-attempt comparison.',**common)
     score=Fraction(first['score_exact']);better=sum(x['count'] for x in snap['scores'] if Fraction(x['score_exact'])>score)
