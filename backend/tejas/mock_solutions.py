@@ -1,8 +1,9 @@
 """Owner-side AI (gpt-6-astra) ten-mark solutions. A backend worker solves every uploaded question (drafts, chapter tests,
 full mocks) and saves the result as an `ai_solution` tag on the question itself. Students only read saved tags; no AI
 call ever runs on a student request. Keys and scores are never changed by AI."""
-import asyncio, hashlib, json, logging, uuid
+import asyncio, hashlib, json, logging, os, threading, time, uuid
 from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
@@ -17,12 +18,25 @@ from .astra import MODEL, StrictModel, SolutionStep, _call
 router = APIRouter(prefix='/api', tags=['AI solutions'])
 solutions = db.tejas_question_solutions
 PROMPT_VERSION = 'ten-mark-v1'
-CONCURRENCY = 12
+CONCURRENCY = 16
 LEASE = 300
 SCAN_EVERY = 30
+CALL_TIMEOUT = 240
+STALL_LIMIT = 900
+MAX_RSS_MB = 1500
 REVIEW_STATES = ('key_confirmed', 'key_wrong')
-_POOL = ThreadPoolExecutor(max_workers=CONCURRENCY, thread_name_prefix='ten-mark')
+_POOL = ThreadPoolExecutor(max_workers=CONCURRENCY + 8, thread_name_prefix='ten-mark')
+_LOCAL = threading.local()
 log = logging.getLogger(__name__)
+_last_progress = [time.monotonic()]
+
+
+def _thread_loop(coro):
+    """One persistent event loop per worker thread: HTTP sessions are reused instead of leaking one per call."""
+    loop = getattr(_LOCAL, 'loop', None)
+    if loop is None or loop.is_closed():
+        loop = _LOCAL.loop = asyncio.new_event_loop()
+    return loop.run_until_complete(coro)
 
 
 class TenMark(StrictModel):
@@ -80,7 +94,7 @@ async def write_tag(set_id, question_id, tag):
 async def enqueue_all():
     """Every uploaded question gets solved once; region or key edits create a fresh solve; lost tags are restored."""
     t = now()
-    rows = await sets.find({'status': {'$in': ['draft', 'review', 'published']}},
+    rows = await sets.find({'status': {'$in': ['draft', 'review', 'published']}, 'full_length': True},
         {'_id': 0, 'id': 1, 'status': 1, 'live_enabled': 1, 'end_at': 1, 'full_length': 1, 'created_at': 1, 'mock_book_id': 1, 'chapter_book_id': 1,
          'mock_number': 1, 'chapter_number': 1, 'questions.id': 1, 'questions.number': 1, 'questions.answer': 1, 'questions.q_refs': 1,
          'questions.ai_solution.solution_id': 1, 'questions.ai_solution.refs_hash': 1}).to_list(5000)
@@ -130,7 +144,9 @@ async def solve(doc):
     if (doc.get('review') or {}).get('status') == 'key_confirmed':
         text += (f" The owner has re-checked and VERIFIED that ({q.get('answer')}) is correct. A previous attempt disagreed; re-read the figure"
                  " and every option carefully, find the step that leads to the verified answer, and explain it. Set key_agrees=true only if your working truly reaches it.")
-    value, provenance = await asyncio.get_running_loop().run_in_executor(_POOL, _call, SYSTEM, text, images, TenMark, 4000, 180)
+    call = asyncio.get_running_loop().run_in_executor(_POOL, partial(_call, SYSTEM, text, images, TenMark, 4000, 180, _thread_loop))
+    value, provenance = await asyncio.wait_for(call, CALL_TIMEOUT)
+    _last_progress[0] = time.monotonic()
     t = now()
     await solutions.update_one({'id': doc['id']}, {'$set': {'state': 'ready', 'solution': value, 'provenance': provenance,
         'ready_at': t, 'updated_at': t}, '$unset': {'lease_until': ''}})
@@ -151,9 +167,32 @@ async def lane():
             await asyncio.sleep(3)
 
 
+async def watchdog():
+    """Exit when stalled or bloated; the backend keeper respawns a fresh worker within a minute."""
+    import resource
+    while True:
+        await asyncio.sleep(60)
+        rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
+        queued = await solutions.count_documents({'state': {'$in': ['queued', 'solving']}})
+        if (queued and time.monotonic() - _last_progress[0] > STALL_LIMIT) or rss > MAX_RSS_MB:
+            log.warning('Worker restarting (stalled=%s rss=%.0fMB)', time.monotonic() - _last_progress[0] > STALL_LIMIT, rss)
+            os._exit(3)
+
+
+async def keeper():
+    """Backend-side: make sure one solution worker is always alive (no-op while the lock is held)."""
+    while True:
+        await asyncio.sleep(60)
+        try:
+            spawn()
+        except Exception as exc:
+            log.warning('Worker spawn failed (%s)', type(exc).__name__)
+
+
 async def worker():
     for _ in range(CONCURRENCY):
         asyncio.create_task(lane())
+    asyncio.create_task(watchdog())
     while True:
         try:
             await enqueue_all()
@@ -173,7 +212,7 @@ def spawn():
 
 async def progress(set_ids=None):
     """Counts saved tags on the questions themselves (the source of truth students read)."""
-    match = {'id': {'$in': set_ids}} if set_ids else {'status': {'$in': ['draft', 'review', 'published']}}
+    match = {'id': {'$in': set_ids}} if set_ids else {'status': {'$in': ['draft', 'review', 'published']}, 'full_length': True}
     rows = await sets.aggregate([{'$match': match}, {'$unwind': '$questions'},
         {'$group': {'_id': None, 'total': {'$sum': 1}, 'ready': {'$sum': {'$cond': [{'$ifNull': ['$questions.ai_solution', False]}, 1, 0]}},
                     'disagree': {'$sum': {'$cond': [{'$eq': ['$questions.ai_solution.agrees', False]}, 1, 0]}}}}]).to_list(1)

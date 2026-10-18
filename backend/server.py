@@ -39,12 +39,14 @@ from tejas_storage import StorageError
 async def lifespan(app):
     await indexes()
     await auth.seed_owner()
-    from tejas.mock_solutions import spawn, solutions
+    from tejas.mock_solutions import spawn, solutions, keeper
     await solutions.create_index('id', unique=True)
     await solutions.create_index([('state', 1), ('order', 1)])
     await solutions.create_index('set_id')
     spawn()
+    guard = asyncio.create_task(keeper())
     yield
+    guard.cancel()
     client.close()
 
 
