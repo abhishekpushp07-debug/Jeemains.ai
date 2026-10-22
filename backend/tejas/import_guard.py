@@ -17,7 +17,8 @@ class ImportGuard:
     async def __call__(self, scope, receive, send):
         if scope['type'] != 'http': return await self.app(scope, receive, send)
         path, method = scope.get('path',''), scope.get('method','')
-        if method in ('POST','PUT','PATCH','DELETE') and re.match(r'^/api/studio/sets/[^/]+(?:/|$)', path):
+        manual_solve = method == 'POST' and re.fullmatch(r'/api/studio/sets/[^/]+/solve', path)
+        if not manual_solve and method in ('POST','PUT','PATCH','DELETE') and re.match(r'^/api/studio/sets/[^/]+(?:/|$)', path):
             from .db import sets
             id=path.split('/')[4]
             record=await sets.find_one({'id':id,'$or':[{'import_id':{'$exists':True}},{'chapter_book_id':{'$exists':True}},{'auto_import_id':{'$exists':True}}]},{'_id':0,'id':1})

@@ -277,6 +277,8 @@ async def maintenance():
         ]}, {'id': 1}).sort('created_at', 1).limit(capacity).to_list(capacity)
         selected.extend(rows)
     await asyncio.gather(*(run_job(j['id']) for j in selected))
+    from .manual_solutions import dispatch_manual
+    await dispatch_manual()  # Recovery only: processes existing owner-click consent, never discovers content.
     await db.tejas_operations.update_one({'id': 'maintenance'}, {'$set': {'last_run': now(), 'expired': len(expired), 'outbox_checked': len(outbox), 'recovered_jobs': len(selected)}}, upsert=True)
 
 

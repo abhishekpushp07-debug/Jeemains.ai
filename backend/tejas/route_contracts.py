@@ -9,6 +9,13 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'manual_solutions.solve_tests': ('owner_test_selection_only', 'normal', 'read'),
+    'manual_solutions.solve_status': ('owner_test_solution_progress', 'normal', 'read_no_dispatch'),
+    'manual_solutions.request_solve': ('owner_explicit_selected_test_only', 'bulk', 'request_receipt_and_question_content_identity'),
+    'question_reports.my_reports': ('attempt_owner_private_report_receipts', 'normal', 'read'),
+    'question_reports.report_wrong': ('attempt_owner_available_question_only', 'normal', 'one_report_per_attempt_question'),
+    'question_reports.report_list': ('staff_editorial_issue_review', 'normal', 'read'),
+    'question_reports.review_report': ('staff_issue_triage_no_regrade', 'normal', 'idempotent_status_update_audited'),
     'exam_navigation.catalogue': ('current_profile_exam_metadata', 'normal', 'read'),
     'mock_books.list_mock_books': ('staff_mock_metadata', 'normal', 'read'),
     'mock_solutions.attempt_solutions': ('attempt_owner_completed_released', 'normal', 'read'),

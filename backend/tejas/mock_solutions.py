@@ -300,7 +300,10 @@ async def for_attempt(a):
     """question_id -> (state, solution, flag) from the tags saved on the paper's questions."""
     paper = await sets.find_one({'id': a['set_id']}, {'_id': 0, 'questions.id': 1, 'questions.ai_solution': 1}) or {'questions': []}
     tags = {q['id']: q.get('ai_solution') for q in paper['questions']}
-    return {q['id']: student_view(tags.get(q['id']), q.get('answer', '')) for q in a['questions']}
+    from .manual_solutions import fingerprint
+    return {q['id']: student_view(tags.get(q['id']), q.get('answer', ''))
+            if not (tags.get(q['id']) or {}).get('content_hash') or tags[q['id']]['content_hash'] == fingerprint(q)
+            else ('pending', None, None) for q in a['questions']}
 
 
 @router.get('/attempts/{id}/ai-solutions', response_model=AiSolutionList)

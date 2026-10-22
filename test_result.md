@@ -147,3 +147,16 @@ agent_communication:
 
   - agent: main
     message: "Iteration 96: 16/16 tests pass, hashes preserved, no worker after 75s, desktop/mobile Studio passes. Follow-up fixed progress label to 'Full mocks' and inline-flex icon alignment. Narrow retest needed for this label/layout only; source extraction is outside solving-pause scope and unchanged. Final report/PRD must keep this limitation."
+
+
+# Current feature implementation (supersedes the pause-only test focus above)
+user_problem_statement: "Owner selected one-click per-test Solve for missing explanations with owner/saved AI preservation. Also add small one-line Report as wrong on every question while attempting, after result and in solutions; simplify/focus tests/results/solutions navigation."
+current_features:
+  - "Owner POST /api/studio/sets/{id}/solve with request_id only; GET /solve progress and /studio/solve-tests selector. Separate tejas_manual_solves + tejas_solution_requests. Durable exact consent, content identity and request idempotency; worker --manual lock drains only owner-click jobs. Existing automatic pipeline remains paused. Maintenance recovers only existing manual consent. Daily quota, owner revocation, in-flight content/solution CAS and no score/key changes."
+  - "POST attempt question /report-wrong, GET attempt /question-reports; unique receipt per attempt/question; foreign ownership404, locked bonus404, active key/solution reporting403. Staff /studio/question-reports paginated list/review, no changes to keys/score."
+  - "Manual Solve selector in Studio and test editor/chapter inspection; Report as wrong provider/strip in Player + result question list + explanation; Analysis/Solutions tabs, direct question picker/prevnext, retained filters/selected query, preserved catalogue/history back state, explicit leave-test warning."
+current_testing_instructions:
+  - "Use current credentials memory/test_credentials.md, do not print/hardcode. Preview external URL from frontend/.env."
+  - "MAX ONE real model call, on a disposable tiny typed one-question test via explicit owner POST. Do NOT click Solve on an existing mock/chapter or generate bulk work. All concurrency/error/cancel/owner edit tests must MOCK model boundary in-process, no lasting mock API."
+  - "Full API auth matrix, repeated clicks/report dedupe, protected existing AI/text/image solutions, worker source-change race, no automatic enqueue, normal start/save/submit/result navigation/report flows. Use synthetic QA fixtures, clean only those fixtures. Existing144 sets11800Q/5939 ready AI and1161 paused automatic docs must be preserved."
+  - "Desktop1920x800/mobile390x844 screenshots of new meaningful states, no horizontal overflow. Feature reports /app/test_reports/iteration_98.json onward."

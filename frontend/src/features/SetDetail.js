@@ -1,6 +1,6 @@
-import { examPath } from '../lib/exams';
+import { examPath, safeExamReturn } from '../lib/exams';
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle2, Wifi, Clock3, ShieldCheck, Loader2, FileQuestion, Flag, Save, FileDown } from 'lucide-react';
 import { api, post } from '../lib/api';
 import { useAuth } from '../lib/auth';
@@ -17,6 +17,7 @@ export default function SetDetail() {
   const { user, checking } = useAuth();
   const userId = user?.id;
   const nav = useNavigate();
+  const location = useLocation();
   const [s, setS] = useState(null);
   const [error, setError] = useState('');
   const [checked, setChecked] = useState(false);
@@ -25,6 +26,7 @@ export default function SetDetail() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
+  const returnTo = safeExamReturn(location.state?.returnTo, s ? examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
     setS(null); setError(''); setChecked(false); setConfirmed(false);
@@ -54,7 +56,7 @@ export default function SetDetail() {
     try {
       const a = await post('/sets/' + id + '/start', { preview, device_checked: confirmed, start_key: key.current });
       sessionStorage.removeItem('tejas-start-' + id);
-      nav(a.status === 'completed' ? '/results/' + a.id : '/attempts/' + a.id);
+      nav(a.status === 'completed' ? '/results/' + a.id : '/attempts/' + a.id, {state:{returnTo}});
     } catch (e) { setError(e.message); setBusy(false); }
   }
   if (!s) return <div className="container page"><ErrorBox error={error} retry={() => setRetry(v => v + 1)} />{!error && <Loading />}</div>;
@@ -62,7 +64,7 @@ export default function SetDetail() {
   const minutes = s.rules.minutes;
   return (
     <div className="container page set-detail" data-testid="set-detail-page">
-      <Link className="breadcrumb" data-testid="set-back" to={preview ? '/studio/' + id : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):'/mocks')}><ArrowLeft size={15} /> {preview ? 'Back to Content Studio' : 'Back to '+s.exam+' tests'}</Link>
+      <Link className="breadcrumb" data-testid="set-back" to={preview ? '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? 'Back to Content Studio' : 'Back to '+s.exam+' tests'}</Link>
       <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.source} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
       <div className="preflight-grid">

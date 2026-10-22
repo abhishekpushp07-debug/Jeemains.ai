@@ -1,7 +1,7 @@
-import { examPath } from '../lib/exams';
+import { examPath, safeExamReturn } from '../lib/exams';
 import React, { useEffect, useState } from "react";
 import { ThemeToggle } from '../components/ThemeToggle';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -21,11 +21,16 @@ import { QuestionContent, MathText } from "../components/QuestionContent";
 import { useAttempt } from "./practice/useAttempt";
 import { PlayerConfidencePanel } from '../components/player/PlayerConfidencePanel';
 import { BonusGate, BonusConfirm } from '../components/player/BonusGate';
+import {QuestionReport, QuestionReportsProvider} from '../components/QuestionReport';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {Button} from '../components/ui/button';
 import {Input} from '../components/ui/input';
 
 export default function Player() {
   const { id } = useParams();
+  const nav = useNavigate();
+  const location = useLocation();
+  const [exitOpen, setExitOpen] = useState(false);
   const { user } = useAuth();
   const {
     attempt: a,
@@ -55,11 +60,14 @@ export default function Player() {
   const bonusRule = a?.rules?.bonus_rule;
   const bonusOpen = !!a?.bonus_unlocked_at;
   const qs = !a ? [] : bonusRule ? a.questions.filter((x) => !!x.bonus === bonusOpen) : a.questions;
-  const q = qs[index];
+  const q = qs[index] || qs[0];
   const questionId = q?.id;
   useEffect(() => {
-    setIndex(0);
-  }, [bonusOpen]);
+    if(!a)return;
+    try { setIndex(Math.max(0,Math.min(qs.length-1,Number(sessionStorage.getItem(`test-question-${id}-${bonusOpen}`))||0))); }
+    catch { setIndex(0); }
+  }, [a?.id, bonusOpen]);
+  useEffect(()=>{if(a&&qs.length)try{sessionStorage.setItem(`test-question-${id}-${bonusOpen}`,String(index))}catch{}},[id,a?.id,bonusOpen,index]);
   useEffect(() => {
     if (questionId) visit(questionId);
   }, [questionId, visit, online]);
@@ -143,9 +151,9 @@ export default function Player() {
     });
   }
   return (
-    <div className="player-layout">
+    <QuestionReportsProvider attemptId={id}><div className="player-layout">
       <header className="player-header">
-        <Logo />
+        <div onClick={e=>{e.preventDefault();setExitOpen(true)}}><Logo /></div>
         <div className="player-title">
           <strong>{a.title}</strong>
           <span>
@@ -169,9 +177,9 @@ export default function Player() {
         </div>
       </header>
       <div className="player-savebar">
-        <Link to={examPath(a.exam)} data-testid="player-home">
-          <ArrowLeft size={14} /> {a.exam} home
-        </Link>
+        <Button variant="link" onClick={()=>setExitOpen(true)} data-testid="player-home">
+          <ArrowLeft size={14} /> Leave test
+        </Button>
         <span
           data-testid="player-save-state-indicator"
           role="status"
@@ -415,6 +423,7 @@ export default function Player() {
             >
               <RotateCcw size={14} /> Clear response
             </Button>
+            <QuestionReport key={q.id} attemptId={id} questionId={q.id} number={q.number} context="attempt" />
             <PlayerConfidencePanel
               key={q.id}
               questionId={q.id}
@@ -504,7 +513,10 @@ export default function Player() {
         </p>
       </Confirm>
       {bonusRule && <BonusConfirm open={bonusConfirm} onClose={() => setBonusConfirm(false)} onConfirm={doEnterBonus} busy={enteringBonus} rule={bonusRule} />}
-    </div>
+      <Confirm open={exitOpen} onClose={()=>setExitOpen(false)} title="Leave this test for now?" button="Leave test" onConfirm={()=>nav(safeExamReturn(location.state?.returnTo,examPath(a.exam)+'/results'))}>
+        <p>Your original timer keeps running. Server-saved answers remain; {nPending} local draft(s) are not yet acknowledged. Resume this same attempt from My results.</p>
+      </Confirm>
+    </div></QuestionReportsProvider>
   );
 }
 

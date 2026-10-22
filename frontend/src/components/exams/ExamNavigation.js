@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link,NavLink} from 'react-router-dom';
 import {ArrowUpRight,Atom,Orbit,GraduationCap} from 'lucide-react';
 import {Card} from '../ui/card';
 import {Breadcrumb,BreadcrumbList,BreadcrumbItem,BreadcrumbLink,BreadcrumbPage,BreadcrumbSeparator} from '../ui/breadcrumb';
@@ -16,3 +16,6 @@ export const ExamHomeCards=()=>{
  const icons=[Atom,Orbit,GraduationCap];
  return <div className="exam-choice-grid" data-testid="exam-home-exam-card-grid">{EXAMS.map((exam,i)=><NavigationCard key={exam.slug} to={'/exams/'+exam.slug} title={exam.name} eyebrow={exam.eyebrow} description={exam.description} Icon={icons[i]} index={'0'+(i+1)} testId={'exam-home-exam-card-'+exam.slug}><div className="exam-choice-subjects" data-testid={'exam-home-subjects-'+exam.slug}>{exam.subjects.slice(0,3).join(' · ')}</div></NavigationCard>)}</div>;
 };
+
+
+export const ExamDestinations=({exam})=><nav className="exam-destinations" aria-label={`${exam.name} practice navigation`} data-testid="exam-destinations">{[['mocks','Mock tests'],['chapters','Chapter tests'],['results','My results']].map(([path,label])=><NavLink to={`/exams/${exam.slug}/${path}`} key={path} data-testid={'exam-destination-'+path}>{label}</NavLink>)}</nav>;

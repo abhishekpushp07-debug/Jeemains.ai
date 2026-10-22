@@ -23,6 +23,21 @@ class EmptyPayload(Payload):
     pass
 
 
+class SolvePayload(Payload):
+    request_id: RequestKey
+
+
+class QuestionReportPayload(Payload):
+    category: Literal['question', 'key', 'solution', 'display'] = 'question'
+    context: Literal['attempt', 'results', 'solutions']
+    note: str = Field(default='', max_length=600)
+
+
+class QuestionReportReviewPayload(Payload):
+    status: Literal['open', 'reviewing', 'resolved']
+    note: str = Field(default='', max_length=600)
+
+
 class AiReviewPayload(Payload):
     action: Literal['key_confirmed', 'key_wrong', 'reopen']
     note: str = Field(default='', max_length=600)
@@ -222,6 +237,9 @@ from .cohorts import RankScenario
 from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
 MODELS = {
+    'manual_solutions.request_solve': SolvePayload,
+    'question_reports.report_wrong': QuestionReportPayload,
+    'question_reports.review_report': QuestionReportReviewPayload,
     'mock_solutions.review_action': AiReviewPayload,
     'jobs.cron': CronEnvelope,
     'cohorts.air_scenario': RankScenario,

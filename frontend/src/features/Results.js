@@ -1,5 +1,5 @@
-import { examPath } from '../lib/exams';
-import React, { useEffect, useState } from "react";
+import { examPath, safeExamReturn } from '../lib/exams';
+import React, { useEffect, useRef, useState } from "react";
 import {
   Link,
   useParams,
@@ -35,16 +35,32 @@ import { MockSectionScores } from '../components/results/MockSectionScores';
 import { ResultAnalysis } from '../components/results/ResultAnalysis';
 import { AiSolution, PeerQuestionStat } from '../components/results/AiSolution';
 import { useResultExtras } from '../components/results/useResultExtras';
+import {QuestionReport, QuestionReportsProvider} from '../components/QuestionReport';
+import {Tabs, TabsList, TabsTrigger} from '../components/ui/tabs';
+import {Select, SelectTrigger, SelectValue, SelectContent, SelectItem} from '../components/ui/select';
+import {useLocation} from 'react-router-dom';
 import { Button } from '../components/ui/button';
 export default function Results() {
   const { id } = useParams();
   const { user } = useAuth();
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
+  const location = useLocation();
+  const view = params.get('view') === 'solutions' ? 'solutions' : 'analysis';
+  const scrollPositions = useRef({analysis:0, solutions:0});
+  function changeView(next, question) {
+    scrollPositions.current[view] = window.scrollY;
+    const nextParams = new URLSearchParams(params);
+    if (next === 'analysis') nextParams.delete('view'); else nextParams.set('view', next);
+    if (question) nextParams.set('question', question);
+    setParams(nextParams, {state:location.state});
+    requestAnimationFrame(()=>window.scrollTo(0, scrollPositions.current[next] || 0));
+  }
   const scoreVersion = params.get("score_version") || "original";
   const nav = useNavigate();
   const [r, setR] = useState(null);
   const [error, setError] = useState("");
-  const [filter, setFilter] = useState("all");
+  const filter = ['all','marked','bonus-section','incorrect','skipped','correct','dropped','bonus'].includes(params.get('filter')) ? params.get('filter') : 'all';
+  const setFilter = value => { const next = new URLSearchParams(params); next.set('filter',value); setParams(next,{state:location.state}); };
   const [retryOpen, setRetryOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [expanded, setExpanded] = useState({});
@@ -72,9 +88,23 @@ export default function Results() {
   }
   function openQuestion(qid) {
     if(!r)return;
-    setFilter('all');setPage(Math.ceil((r.questions.findIndex(q=>q.id===qid)+1)/10));setExpanded(old=>({...old,[qid]:true}));setFocusQuestion(qid);
+    const question=r.questions.find(q=>q.id===qid);
+    if(!question)return;
+    const matches=filter==='all'||(filter==='marked'?question.marked:filter==='bonus-section'?question.bonus:question.outcome===filter);
+    const next=new URLSearchParams(params);next.set('view','solutions');next.set('question',qid);
+    if(!matches)next.set('filter','all');
+    if(view==='analysis')scrollPositions.current.analysis=window.scrollY;
+    setParams(next,{state:location.state});
+    setPage(Math.ceil((r.questions.findIndex(q=>q.id===qid)+1)/10));setExpanded(old=>({...old,[qid]:true}));setFocusQuestion(qid);
     recordSolution(qid);
   }
+  const selectedQuestion=params.get('question');
+  useEffect(()=>{
+    if(!r||!selectedQuestion||view!=='solutions')return;
+    const index=r.questions.findIndex(q=>q.id===selectedQuestion);
+    if(index<0)return;
+    setPage(p=>Math.max(p,Math.ceil((index+1)/10)));setExpanded(old=>({...old,[selectedQuestion]:true}));setFocusQuestion(selectedQuestion);
+  },[r?.id,!!r,selectedQuestion,view]);
   useEffect(() => {
     const controller = new AbortController();
     let timer, polls = 0;
@@ -146,14 +176,14 @@ export default function Results() {
     late = JSON.parse(localStorage.getItem(lateKey) || "{}");
   } catch {}
   return (
-    <div className="container page results-page">
-      <Link className="breadcrumb" to={examPath(r.exam)+'/results'} data-testid="results-home">
-        <ArrowLeft size={14} /> All {r.exam} results
+    <QuestionReportsProvider attemptId={id}><div className="container page results-page">
+      <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,examPath(r.exam)+'/results')} data-testid="results-home">
+        <ArrowLeft size={14} /> Back to {r.exam} {location.state?.returnTo?.includes('/results')?'results':'tests & results'}
       </Link>
       <PageTitle
         eyebrow={`${r.exam} · ${r.mode === "preview" ? "UNAPPROVED PRIVATE PREVIEW" : "COMPLETED PRACTICE"}`}
-        title="Every answer has a next step."
-        description={r.title}
+        title={r.title}
+        description="Your score, analysis and saved explanations—in one place."
       />
       {r.mode === "preview" && (
         <div className="notice amber">
@@ -224,8 +254,8 @@ export default function Results() {
           </div>
         </section>
       )}
-      <div className="results-review-shortcuts" data-testid="results-review-shortcuts"><p data-testid="results-attempt-immutable-notice"><ShieldCheck size={16}/> Your submitted answers are sealed. Review notes won’t change your score.</p><Button variant="outline" data-testid="results-jump-review" onClick={()=>document.getElementById('results-review-heading')?.scrollIntoView({behavior:'instant'})}>Review answers <ArrowUpRight size={16}/></Button></div>
-      {r.questions.every(q=>q.solution_kind==='answer_key_only')&&<p className="results-key-notice" data-testid="results-answer-keys-only-disclosure">Answer keys only. Original questions and supplied keys are available below; worked solutions were not provided.</p>}
+      <div className="results-review-shortcuts" data-testid="results-review-shortcuts"><p data-testid="results-attempt-immutable-notice"><ShieldCheck size={16}/> Your submitted answers are sealed. Review notes won’t change your score.</p><Button variant="outline" data-testid="results-jump-review" onClick={()=>changeView('solutions')}>Solutions <ArrowUpRight size={16}/></Button></div>
+      {r.questions.every(q=>q.solution_kind==='answer_key_only')&&<p className="results-key-notice" data-testid="results-answer-keys-only-disclosure">The source supplies official keys, not worked solutions. Saved owner or AI explanations appear in Solutions where available.</p>}
       <div className="results-summary" data-testid="results-summary-tiles">
         <div className="score-card">
           <span>Your score</span>
@@ -265,6 +295,8 @@ export default function Results() {
           <small>Worth another look</small>
         </div>
       </div>
+      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList><TabsTrigger value="analysis" data-testid="result-view-analysis">Analysis</TabsTrigger><TabsTrigger value="solutions" data-testid="result-view-solutions">Solutions</TabsTrigger></TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
+      <section className="result-view-panel" hidden={view!=='analysis'} data-testid="result-analysis-panel" aria-label="Result analysis">
       <MockSectionScores s={s} />
       <ResultAnalysis r={r} cohort={extras.cohort} peer={extras.peer} onOpen={openQuestion} />
       <div className="result-metrics">
@@ -296,15 +328,6 @@ export default function Results() {
           </strong>
           <small>Includes time away; per-question timing unavailable</small>
         </div>
-      </div>
-      <div className="results-actionbar">
-        <div>
-          <h3>Your full attempt, yours to keep.</h3>
-          <p>
-            {r.questions.every(q=>q.solution_kind==='answer_key_only')?'The PDF includes every original question, your response and its supplied answer key. No worked solutions were provided.':'The PDF includes every question and solution—even if you filter the review below.'}
-          </p>
-        </div>
-        <ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} />
       </div>
       <p className="report-privacy">
         <ShieldCheck size={14} /> A downloaded copy is outside jeemains.ai access
@@ -359,6 +382,9 @@ export default function Results() {
       </div>
       {r.insights && <section className="import-card mb-8" data-testid="results-evidence-insights"><div className="import-section-label">YOUR NEXT STUDY SESSION</div><h2>Start where this attempt points.</h2><div className="insight-grid">{r.insights.priorities.length ? r.insights.priorities.map((g,i) => <article className="import-issue" data-testid={'results-priority-' + i} key={g.label}><strong>{g.label}</strong><p>{g.incorrect} incorrect · {g.skipped} skipped · {g.count} questions</p><p>Attempted accuracy: {g.accuracy === null ? 'Not available' : g.accuracy + '%'} ({g.correct}/{g.attempted})</p><p>{g.action}</p><small>{g.evidence} · Review Q{g.questions.join(', Q')}</small></article>) : <p data-testid="results-no-priorities">No incorrect or skipped eligible questions in this attempt. Use fresh questions to gather more evidence.</p>}</div><p className="import-fineprint mt-4" data-testid="results-insights-basis">{r.insights.basis}</p></section>}
       <ResultsAnalyticsWorkspace key={`${id}-${scoreVersion}`} analysis={r.analytics} questions={r.questions} userId={user.id} attemptId={id} onOpenQuestion={openQuestion} onRefresh={refreshAnalytics} confidenceThreshold={confidenceThreshold} review={r.review} />
+      </section>
+      <section className="result-view-panel" hidden={view!=='solutions'} data-testid="result-solutions-panel" aria-label="Question solutions">
+      <div className="result-question-jump" data-testid="solution-question-navigation"><Select value={qs.some(q=>q.id===selectedQuestion)?selectedQuestion:''} onValueChange={openQuestion}><SelectTrigger aria-label="Jump to a question" data-testid="solution-question-select" className="w-56"><SelectValue placeholder="Jump to a question"/></SelectTrigger><SelectContent>{qs.map(q=><SelectItem key={q.id} value={q.id} data-testid={'solution-select-'+q.number}>Q{q.number} · {q.subject}</SelectItem>)}</SelectContent></Select><Button variant="outline" data-testid="solution-previous" disabled={qs.findIndex(q=>q.id===selectedQuestion)<=0} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)-1].id)}>Previous</Button><Button variant="outline" data-testid="solution-next" disabled={!qs.length||qs.findIndex(q=>q.id===selectedQuestion)>=qs.length-1} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)+1].id)}>Next</Button></div>
       <div className="review-heading" id="results-review-heading">
         <div>
           <span className="eyebrow">UNDERSTAND THE WHY</span>
@@ -440,6 +466,7 @@ export default function Results() {
                 size={18}
               />
             </button>
+            <QuestionReport attemptId={id} questionId={q.id} number={q.number} context="results" />
             {expanded[q.id] && (
               <div className="review-expanded">
                 <QuestionContent
@@ -508,6 +535,7 @@ export default function Results() {
                   />
                 </div>
                 <AiSolution item={extras.ai[q.id]} number={q.number} />
+                <QuestionReport attemptId={id} questionId={q.id} number={q.number} context="solutions" />
               </div>
             )}
           </article>
@@ -526,6 +554,7 @@ export default function Results() {
           Show 10 more questions
         </button>
       )}
+      </section>
       <div className="receipt">
         <CheckCircle2 size={17} />
         <span>
@@ -555,7 +584,7 @@ export default function Results() {
           questions; it is not another full-paper simulation.
         </p>
       </Confirm>
-    </div>
+    </div></QuestionReportsProvider>
   );
 }
 function FileIcon() {

@@ -514,6 +514,9 @@ async def edit_question(id: str, qid: str, data: dict, u=Depends(staff)):
         "accepted_answers",
     ]
     q = {**old, **{k: v for k, v in data.items() if k in allowed}, "approved": False}
+    if any(k in data and data[k] != old.get(k) for k in ('solution', 's_refs', 'solution_accessible_text')):
+        if q.get('solution', '').strip() or q.get('s_refs') or q.get('solution_accessible_text', '').strip():
+            q['solution_kind'] = 'owner_provided'
     if (
         not isinstance(q["number"], int)
         or q["number"] < 1

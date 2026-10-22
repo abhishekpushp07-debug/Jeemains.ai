@@ -5,4 +5,5 @@ export const EXAMS = [
 ];
 export const examBySlug = slug => EXAMS.find(e=>e.slug===slug);
 export const examByName = name => EXAMS.find(e=>e.name===name);
+export const safeExamReturn = (path, fallback) => typeof path==='string' && /^\/exams\/(jee-main|bitsat|comedk)\/(mocks|chapters|results)(\?[^#]*)?$/.test(path) ? path : fallback;
 export const examPath = name => {const e=examByName(name);return e?'/exams/'+e.slug:'/home'};

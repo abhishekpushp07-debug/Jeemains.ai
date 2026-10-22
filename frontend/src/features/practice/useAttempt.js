@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { api, post, put } from "../../lib/api";
 const postpone = (state, error) => {
   state.current.failures = Math.min(6, state.current.failures + 1);
@@ -7,6 +7,8 @@ const postpone = (state, error) => {
 };
 export function useAttempt(id, user) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const navigationState = useRef(location.state);
   const [attempt, setAttempt] = useState(null);
   const [pending, setPending] = useState({});
   const [error, setError] = useState("");
@@ -58,7 +60,7 @@ export function useAttempt(id, user) {
         "/results/" +
           id +
           (Object.keys(drafts.current).length ? "?late=true" : ""),
-        { replace: true },
+        { replace: true, state: navigationState.current },
       ),
     [id, navigate],
   );
@@ -316,7 +318,7 @@ export function useAttempt(id, user) {
     localStorage.removeItem(storage);
     localStorage.removeItem(storage.replace('tejas-draft-', 'tejas-draft-meta-'));
     localStorage.removeItem(confidenceStorage);
-    navigate("/results/" + receipt.id);
+    navigate("/results/" + receipt.id, {state:navigationState.current});
   };
   const enterBonus = async () => {
     setError("");

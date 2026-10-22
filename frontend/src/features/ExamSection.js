@@ -3,7 +3,7 @@ import {Link,useParams,useSearchParams} from 'react-router-dom';
 import {ArrowLeft,ArrowRight,Atom,FlaskConical,Calculator,BookOpen,Search} from 'lucide-react';
 import {api} from '../lib/api';
 import {examBySlug} from '../lib/exams';
-import {ExamBreadcrumbs,NavigationCard} from '../components/exams/ExamNavigation';
+import {ExamBreadcrumbs,ExamDestinations,NavigationCard} from '../components/exams/ExamNavigation';
 import {SetCard,SetRow} from './Exams';
 import {Empty,ErrorBox} from '../components/Shared';
 import {Button} from '../components/ui/button';
@@ -30,6 +30,7 @@ export default function ExamSection({kind='chapters'}){
  return <div className="container page exam-section" data-testid={'exam-section-'+kind}>
   <ExamBreadcrumbs exam={exam} section={{label,to:base}} subject={subject}/>
   <header className="exam-simple-heading"><span className="eyebrow" data-testid="exam-section-exam">{exam.name}</span><h1 data-testid="exam-section-title">{pickingSubject?'Choose a subject.':subject?subject:label}</h1><p data-testid="exam-section-description">{pickingSubject?'Start with one subject. Find your next chapter.':chapters?'Pick a chapter. Check its rules, then begin.':'Only live full-length mock tests for this exam appear here.'}</p></header>
+  <ExamDestinations exam={exam}/>
   <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>
   {pickingSubject?<>
    {!data&&!error&&<div className="exam-choice-grid" data-testid="subjects-loading">{[1,2,3].map(n=><Skeleton key={n} className="h-56"/>)}</div>}

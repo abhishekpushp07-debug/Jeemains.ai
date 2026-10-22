@@ -23,6 +23,8 @@ import {
 } from "../components/Shared";
 import { StudioImportHub } from './StudioImport';
 import { MockBookPanel } from '../components/studio/MockBookPanel';
+import { ManualSolvePanel } from '../components/studio/ManualSolve';
+import { QuestionReportsPanel } from '../components/studio/QuestionReportsPanel';
 import { AiReviewPanel } from '../components/studio/AiReviewPanel';
 import { Button } from '../components/ui/button';
 import { toast } from "sonner";
@@ -87,6 +89,8 @@ export default function Studio() {
           </Button>
         }
       />
+      <ManualSolvePanel />
+      <QuestionReportsPanel />
       <StudioImportHub />
       <MockBookPanel />
       <AiReviewPanel />

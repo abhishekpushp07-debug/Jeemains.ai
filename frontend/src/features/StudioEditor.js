@@ -32,6 +32,8 @@ import {
   Empty,
 } from "../components/Shared";
 import { QuestionContent, MathText } from "../components/QuestionContent";
+import { ManualSolve } from '../components/studio/ManualSolve';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from "sonner";
 const tabs = [
   "Sources",
@@ -49,6 +51,8 @@ const tabLabels = {
 };
 export default function StudioEditor() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const requestedQuestion = searchParams.get('question');
   const nav = useNavigate();
   const { user } = useAuth();
   const [s, setS] = useState(null);
@@ -73,6 +77,10 @@ export default function StudioEditor() {
   selection.current = { dirty, index: i };
   const load = useCallback(async (keep = true) => {
     const d = await api("/studio/sets/" + id);
+    if (!keep && requestedQuestion) {
+      const target = d.questions.findIndex(q => q.id === requestedQuestion);
+      if (target >= 0) { selection.current.index = target; setI(target); }
+    }
     setS(d);
     setSettings(d);
     if (!keep || !selection.current.dirty)
@@ -80,7 +88,7 @@ export default function StudioEditor() {
         d.questions[Math.min(selection.current.index, Math.max(d.questions.length - 1, 0))] || null,
       );
     return d;
-  }, [id]);
+  }, [id, requestedQuestion]);
   useEffect(() => {
     if (tab === "Change history")
       api("/studio/profiles")
@@ -226,6 +234,7 @@ export default function StudioEditor() {
           </Link>
         }
       />
+      <ManualSolve setId={id}/>
       <div className="studio-stage">
         <span>
           <CheckCircle2 size={17} /> Prepare

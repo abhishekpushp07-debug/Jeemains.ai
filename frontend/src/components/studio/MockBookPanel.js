@@ -7,11 +7,15 @@ import {Badge} from '../ui/badge';
 
 const date=x=>x?new Date(x*1000).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—';
 
-const MockRow=({m})=><li className={'mock-status-row '+(m.status==='live'?'is-live':'is-held')} data-testid={'studio-mock-row-'+m.number}>
+import {Link} from 'react-router-dom';
+import {Button} from '../ui/button';
+import {useAuth} from '../../lib/auth';
+const MockRow=({m})=>{const {user}=useAuth();return <li className={'mock-status-row '+(m.status==='live'?'is-live':'is-held')} data-testid={'studio-mock-row-'+m.number}>
  <div className="mock-status-main"><strong>Mock {String(m.number).padStart(2,'0')}</strong><span className="import-fineprint">{m.main_count} main + {m.bonus_count} bonus · {m.keys} keys{m.pages?.length?` · PDF pages ${m.pages[0]}–${m.pages[1]}`:''}</span></div>
  <Badge variant={m.status==='live'?'default':'destructive'} data-testid={'studio-mock-status-'+m.number}>{m.status==='live'?'Live':'Held back'}</Badge>
  {m.reasons.length>0&&<ul className="mock-status-reasons" data-testid={'studio-mock-reasons-'+m.number}>{m.reasons.map((r,i)=><li key={i}>{r}</li>)}</ul>}
-</li>;
+ {user?.role==='owner'&&m.set_id&&<Button asChild variant="outline"><Link to={'/studio/'+m.set_id} data-testid={'mock-solve-open-'+m.number}>Open test & solve</Link></Button>}
+</li>};
 
 export const MockBookPanel=()=>{
  const [items,setItems]=useState(null),[error,setError]=useState('');

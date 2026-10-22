@@ -50,7 +50,7 @@ export const AiReviewPanel=()=>{
  return <section className="import-card ai-review-panel" data-testid="studio-ai-review-panel">
   <span className="import-section-label"><ScanSearch size={17}/> AI ANSWER REVIEW</span>
   <h2>Questions where the AI disagrees with the PDF key</h2>
-  <p className="import-muted" data-testid="studio-ai-pause-notice">Automatic AI solving is paused for mocks and chapter tests. Saved solutions are preserved; uploads, publishing and student activity do not start new solving. Solutions that disagree with the key remain hidden until reviewed.</p>
+  <p className="import-muted" data-testid="studio-ai-pause-notice">Automatic AI solving stays off for mocks and chapter tests. Only the owner’s explicit Solve action queues missing explanations. Uploads, publishing and student activity never start solving. Disagreements remain hidden until reviewed.</p>
   {p&&<div className="chapter-fixed-rules" data-testid="studio-ai-progress"><span className="inline-flex items-center gap-2" data-testid="studio-ai-full-mock-progress"><Sparkles size={15} aria-hidden="true"/> Full mocks: {p.ready} / {p.total} questions solved</span><span>{p.disagree} disagreements</span>{p.paused>0&&<span data-testid="studio-ai-paused-count">{p.paused} paused</span>}</div>}
   <div className="ai-review-filters" role="tablist">{FILTERS.map(([v,l])=><button key={v} type="button" role="tab" aria-selected={filter===v} className={filter===v?'active':''} onClick={()=>setFilter(v)} data-testid={'ai-review-filter-'+v}>{l}{data?.counts&&v!=='all'?` (${data.counts[v]||0})`:''}</button>)}</div>
   <ErrorBox error={error}/>

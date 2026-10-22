@@ -29,6 +29,8 @@ from tejas import (
     exam_navigation,
     mock_books,
     mock_solutions,
+    manual_solutions,
+    question_reports,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -162,6 +164,8 @@ for module in [
     exam_navigation,
     mock_books,
     mock_solutions,
+    manual_solutions,
+    question_reports,
 ]:
     app.include_router(module.router)
 
