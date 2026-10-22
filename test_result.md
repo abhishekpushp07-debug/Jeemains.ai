@@ -144,3 +144,6 @@ test_plan:
 agent_communication:
   - agent: main
     message: "Testing must make ZERO live LLM calls and no paid integrations. Use isolated fixture docs and mocked model boundary for trigger tests. Do not change real question keys/reviews or attempts. Keep baseline content hashes unchanged. Credentials exist in memory/test_credentials.md; never hardcode/print them. Do not run stale iteration95 test that expects automatic solving. Current baseline has no student attempts. Test startup with isolated client/index/seed mocks, not by launching an extra uvicorn. No scheduler edits."
+
+  - agent: main
+    message: "Iteration 96: 16/16 tests pass, hashes preserved, no worker after 75s, desktop/mobile Studio passes. Follow-up fixed progress label to 'Full mocks' and inline-flex icon alignment. Narrow retest needed for this label/layout only; source extraction is outside solving-pause scope and unchanged. Final report/PRD must keep this limitation."

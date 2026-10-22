@@ -1,0 +1,34 @@
+{
+  "summary": "Automatic AI solving pause verified end-to-end with ZERO LLM calls. Backend: 16/16 new pytest tests pass (12 synthetic/unit in-process with the LLM boundary _call/solve_and_check and subprocess.Popen hard-mocked to raise; 4 API/integration tests against the public URL using TEST_ fixtures). Covered: enqueue_all, claim, solve, worker/keeper/spawn, ensure/process, jobs enqueue/run_job/drain_lane/drain_for/retry_job, maintenance skips ai_solution but still dispatches report jobs, smart_imports reconcile stops at solving_paused (a complete import stays complete), pause_pending idempotent and keeping payload/paused_from (ready/verified/done and non-AI jobs left alone), CLI with no args (no generation, exit 0) and --pause-pending (idempotent), isolated lifespan with mocks (no create_task/keeper/spawn), review key_confirmed/key_wrong/reopen saves the review only (paused and ready docs never go back to queued), auth boundaries (anon 401, student 403), student saved-solution read (ready/under_review/pending), legacy GET not_requested and POST 410, with no queue docs created. Idle check: 75s with no solution_worker process and identical state; several real hot-reload lifespans also ran with no worker spawn. Baseline hashes for sets 144, attempts 0, files 53 and ready solutions 5939 matched the baseline before, during and after testing. DB: 50 full mocks + 94 chapter tests, 11800 questions, 5939 tags, 7100 solution docs (5939 ready, 1161 paused, all paused_from=failed). Frontend /studio at 1920x800 and 390x844: pause notice, 1161 paused, 5939/7100, honest review help and mock progress copy all render; no horizontal overflow; no Solve, Generate or Retry buttons.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "progress() / /api/studio/ai-review + mock-books", "issue": "Progress total (7100) counts only full_length sets. The 94 chapter tests (4700 questions, no tags) are left out, but the pause notice talks about 'mocks and chapter tests'. This is a labelling/scope gap only."},
+      {"endpoint": "POST /api/studio/auto-imports/{id}/retry, upload", "issue": "Retrying or uploading still re-queues and drains smart_prepare/smart_page extraction (LLM extraction, which can be billable). Solving is correctly blocked (the drain_lane('ai_solution') guard holds). This is outside the narrow solve-pause scope, but worth knowing if the user expects no automatic LLM use at all."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/studio AI Answer Review progress chips", "issues": ["The Sparkles icon wraps onto its own line above '5939 / 7100 questions solved', so this chip is taller than the 'disagreements'/'paused' chips and its text is misaligned with them. Cosmetic and existing before this change; not caused by the new copy."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_ai_pause.py", "/app/backend/tests/pause_baseline_check.py", "/app/test_reports/pytest/pytest_ai_pause.xml"],
+  "action_items": [
+    "Optional: retire or update the stale /app/backend/tests/test_ai_tags_review.py, which expects automatic generation and has a hardcoded credential. It will fail or mislead.",
+    "Optional: clarify that the progress total covers full mocks only, or include chapter tests."
+  ],
+  "critical_code_review_comments": [
+    "The pause is enforced in code (constant AI_SOLVING_PAUSED=True) at every entry point I checked: discovery, claim, solve, worker, keeper, spawn, ensure, process, enqueue, run_job, drain_lane, retry_job, maintenance and reconcile. Good defence in depth.",
+    "watchdog() and lane() are now dead code. They are harmless, but lane() would mark docs 'failed' on the 409 if anyone revived it. Remove both when the manual Solve workflow is built.",
+    "smart_imports reconcile's final 'solving' message ('Generating and independently rechecking...') can no longer be reached while paused, so it is fine for now. Re-check this copy when solving is re-enabled.",
+    "Run the tests with `-n0 -p no:asyncio`. They share one module event loop because motor binds to it, and need serial execution."
+  ],
+  "updated_files": ["/app/backend/tests/test_ai_pause.py", "/app/backend/tests/pause_baseline_check.py"],
+  "success_rate": {"backend": "100% (16/16)", "frontend": "100%"},
+  "seed_data_creation": "None persisted. TEST_PAUSE_<hex> synthetic docs are cleaned up at session end (verified). Phone student 9900000196 logged in (user/session docs only; no attempts left).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Baseline hash method: per collection, find(query, {_id:0}).sort('id', 1), then sha256 updated with json.dumps(doc, sort_keys=True, default=str, separators=(',',':')) for each doc. Solutions are filtered on state=ready. Run `python backend/tests/pause_baseline_check.py`. Run the suite with: cd /app/backend && python -m pytest tests/test_ai_pause.py -n0 -p no:asyncio -p no:cacheprovider. The results-page UI for a student was checked via API only, because a real attempt fixture would need a ledger and grading."
+}
