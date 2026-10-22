@@ -82,7 +82,7 @@ export default function SetDetail() {
           <h3 data-testid="set-before-start-heading">A few things to know</h3>
           <ul data-testid="set-instructions-list">
             <li>One correct option per question, or an integer entry where stated. Mark for review and return to any question.</li>
-            <li>{s.rules.numeric_rule}</li>
+            {s.rules.numeric_rule&&<li>{s.rules.numeric_rule}</li>}
             <li>{minutes ? 'The timer keeps running during a disconnect. Only answers received before the deadline are scored.' : 'This is untimed practice. Come back to your saved attempt whenever you need.'}</li>
             <li>{s.solution_kind==='answer_key_only'?'Submitting is final. Your score, supplied answer keys and PDF report become available immediately. This book has no worked solutions.':'Submitting is final. Your result, matched solutions and full PDF report become available afterward.'}</li>
           </ul>

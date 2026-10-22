@@ -1,0 +1,50 @@
+{
+  "summary": "Iteration 103 retest of the iteration-102 action items (backend + frontend). Backend: test_my_tests_journey.py 12/12 passed after the UI fixtures were cleaned up. While the TEST_JR_f8d69ed0 UI fixtures were still present on 9900000196, 4 journey tests failed only because the fixtures overlapped (test interference, not a product bug). test_manual_solve_reports.py 19/19 passed. New tests/test_iter103_regressions.py: 6/7 passed. The receipt fix works: a legacy completed attempt with no receipt now returns 202 with receipt=None instead of 500. Batched catalogue saved flags are per-user and isolated. The group-detail parser returns 404 for invalid version/shape/hash, treats missing or blank source_hash as legacy, and every priorities group_id round-trips. One failure: a report whose source_hash is explicitly null makes GET /studio/question-report-group return 500 (the Pydantic model field is `source_hash: str`). Frontend at 1920x800 and 390x844, using the seeded real attempts: the typography fix is verified (66% gauge Roboto Mono 700 40px, 165 / 250 and 90% at 26px desktop / 22px mobile, child spans inherit, captions Figtree 12px). SetDetail 75/180/300 are a uniform 32px desktop / 24px mobile. The progress chart shows 10 points with 'Mock attempt #', 'Score (marks)' and 'Accuracy (%)' labels plus the caveat. The real-rank view shows the 'Reliable rank estimate unavailable' heading in Figtree, score '175 / 300 on this mock' in mono, a distinct source caption, and the cohort as '—' with a reason (1 profile < 100). Home eyebrows are white at 0.85 opacity and the free pill is centre-aligned with the My Tests button. The Calendar+Popover date filters work: selection gives a URL like start=2026-10-10 and the API request carries start=; to<from shows 'Start date must be before the end date.'; clear works; the keyboard works; nothing overflows at 390. Comparison headings stack as eyebrow/title/date; different papers are rejected; selection clears on tab change. The catalogue page made 0 GET /my/tests/saved/{id} calls; save gives aria-pressed=true and the toast 'Saved to My Tests. No timer started.'; remove works. Studio shows groups 3/2/1 with singular '1 profile'. No horizontal overflow anywhere tested.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/studio/question-report-group (and the list endpoint that uses QuestionReport.from_mongo)", "issue": "A legacy report with explicit source_hash=null gets 500 (pydantic: 'source_hash Input should be a valid string'). The match predicate {'$in':['',None]} finds the doc, but QuestionReport.source_hash: str = '' rejects None. Production currently has 0 such docs, but the claim 'legacy null handled' does not hold. Reproduced by test_iter103_regressions.py::TestReportGroup::test_explicit_null_source_hash_legacy."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "SetDetail 'A few things to know'", "issue": "Renders an empty bullet <li>{s.rules.numeric_rule}</li> when rules.numeric_rule is missing (seen on the QA fixture sets at both widths). Render it only when present.", "selector": "[data-testid=set-before-start-heading] + ul li", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home/Landing exam cards", "issues": ["The corner copy '01 / CHOOSE YOUR EXAM' wraps onto 2 lines at both 1920 and 390 (max-width:120px in .bold-exam-top>span). It is readable but the brief asked for no wrap."]},
+      {"screen": "Results > Progress chart", "issues": ["The X-axis title 'Mock attempt #' sits 1-3px into the Legend's top edge (desktop label bottom 1274 vs legend top 1273; mobile 1630 vs 1627). Visually tight. Add legend paddingTop or raise the XAxis height."]},
+      {"screen": "My Tests date filter (390)", "issues": ["The 'To' popover touches the right viewport edge exactly (x 140 + w 250 = 390). Add collisionPadding of about 8.", "Day cells are 32x32px, below the 44px touch-target guideline.", "The invalid-range error offers only 'Retry', which re-sends the same invalid range. Offer 'Clear dates' or validate on the client."]},
+      {"screen": "My Tests cards vs comparison", "issues": ["A legacy/synthetic summary without an accuracy field shows 'Accuracy unavailable' on the card, while the comparison computes 62.5% for the same attempt. Real attempts carry accuracy, so this is legacy-only."]},
+      {"screen": "Copy", "issues": ["Cohort note 'cohort rank is shown from 100 profiles' reads awkwardly. Suggest 'shown once 100 comparable profiles exist'.", "Studio report rows use en-US dates (10/22/2026, 9:14:05 PM) while the rest of the app uses en-IN ('22 Sept 2026'). Intl en-IN renders 'Sept', not the 'Sep' of d MMM yyyy."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter103_regressions.py",
+    "/app/backend/tests/test_my_tests_journey.py",
+    "/app/backend/tests/test_manual_solve_reports.py",
+    "/app/test_reports/pytest/pytest_iter103_journey.xml",
+    "/app/test_reports/pytest/pytest_iter103_manual.xml",
+    "/app/test_reports/pytest/pytest_iter103_regressions.xml"
+  ],
+  "action_items": [
+    "Make QuestionReport.source_hash tolerate null (e.g. `source_hash: str | None = ''` plus a validator coercing None to ''), or coerce in from_mongo, so legacy null reports don't 500 in group detail or list.",
+    "Guard the SetDetail numeric_rule <li> so it renders only when present.",
+    "Optional polish: corner copy no-wrap/shorter; legend padding under the 'Mock attempt #' label; Popover collisionPadding plus larger day cells at 390; 'Clear dates' action on the invalid-range error; en-IN date in the Studio report rows.",
+    "seed_ui_journey.py cleanup leaves the kind='cohort' tejas_jobs created for TEST_JR_*-real* sets. I deleted 4 orphans manually; add {'set_id': regex TAG} job cleanup to _cleanup."
+  ],
+  "critical_code_review_comments": [
+    "question_reports.report_group: group_id is split on '|'. A set_id or question_id containing '|' would be unreachable (404). IDs are uuid/hex today, but consider encoding the components separately.",
+    "QuestionReportsPanel pagination testids use question_id ('report-detail-next-'+question_id), which is not unique when the same question has two source-hash groups. Use group_id.",
+    "SetDetail issues 2 identical GET /my/tests/saved/{id} requests on load (likely a StrictMode double effect in dev). Acceptable, but an abort/guard would avoid duplicates.",
+    "attempts.results grading branch now uses a.get('receipt'). Verified: no exception swallowing was added."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter103_regressions.py"],
+  "success_rate": {"backend": "97% (37/38: journey 12/12, manual 19/19, regressions 6/7)", "frontend": "~95% (all requested flows pass; only minor polish issues)"},
+  "seed_data_creation": "Reused the existing TEST_JR_f8d69ed0 UI fixtures and real attempts, then ran seed_ui_journey.py cleanup (26 attempts removed). Deleted 4 orphan TEST_JR cohort jobs. The regression tests use TEST_R103_* fixtures and clean up themselves. Verified 0 TEST_JR/R103 attempts, sets, saved, reports, jobs and ledgers remain. Baseline preserved: 144 sets, 11800 questions, ready 5939, paused 1161.",
+  "test_credentials": "Owner from memory/test_credentials.md (read in-script, not printed). Students are phone-only: 9900000196 and 9900000197.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run backend suites serially with -n0 -p no:asyncio, and only AFTER `cd backend/tests && python seed_ui_journey.py cleanup`. The UI fixtures on 9900000196 break 4 journey tests if left in place. test_iter103_regressions.py covers the receipt 202, catalogue saved flags and the group parser; the explicit-null source_hash test fails until the model fix. For UI: seed_ui_journey.py seed && seed_ui_real_attempts.py; the real attempt 0dd5c054-style (latest) shows 66% / 165 of 250 / 90%. Catalogue route: /api/exam-navigation/{jee-main|bitsat|comedk}/catalogue?kind=mocks.",
+  "rca of the issue": "Null source_hash 500: report_group builds {'source_hash': {'$in': ['', None]}}, which matches docs with null or missing values. Then QuestionReport.from_mongo validates `source_hash: str = ''`. A missing key falls back to the default, but an explicit None fails validation, raising ValidationError, which surfaces as 500. Repro: insert a report with source_hash=None, then GET /api/studio/question-report-group?group_id=<set>|1|<q>|. Fix: coerce None to '' in the model/validator."
+}

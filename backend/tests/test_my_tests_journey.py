@@ -42,6 +42,7 @@ async def _cleanup():
     await db.tejas_sets.delete_many({'id': {'$regex': '^' + TAG}})
     await db.tejas_saved_tests.delete_many({'set_id': {'$regex': '^' + TAG}})
     await db.tejas_question_reports.delete_many({'set_id': {'$regex': '^' + TAG}})
+    await db.tejas_jobs.delete_many({'set_id': {'$regex': '^' + TAG}})
     await db.tejas_preflight.delete_many({'set_id': {'$regex': '^' + TAG}})
     await db.tejas_ledgers.delete_many({'id': {'$regex': '^' + TAG}})
     cohort_ids = [c['id'] async for c in db.tejas_cohorts.find({'set_id': {'$regex': '^' + TAG}}, {'id': 1})]

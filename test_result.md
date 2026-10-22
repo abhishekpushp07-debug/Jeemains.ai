@@ -190,3 +190,8 @@ iteration102_followup:
   reproduced_typography: "Roboto Mono alreadyinstalled/imported. Browser: fonts.checktrue; gauge strong40px but nestedspan12px; confidence strong26px but nestedspan12px. Rootcause broadspan CSS on previewwrappers, notmissingfonts. Fixed captionclasses/inheritance; added700weight only."
   fixes: "Numericinheritance, brightcardeyebrows, freepillalignment, chooseexamlabel, namedchartaxes, rankbodyfont, cohortthreshold, comparisonheadings/dates, Calendar datefilters, singularcopy, clearcompare ontab/exam change, missingreceiptget, indexedgroupdetails, batchedsavedflags."
   fixtures: "ExistingQAseed /tmp/jr_ui_state.json prefixTEST_JR_f8d69ed0; realattempts72290088-a1b0-4c04-8e62-96c370647516,298ee986-0da3-4260-ac6d-2b9ea5e90b68,0dd5c054-8b7a-4f1c-93aa-5d6fbe05f2fd. Cleanup required via backend/tests/seed_ui_journey.py cleanup after retest."
+
+iteration103_followup:
+  verification: "37/38backendtests: journey12/12,manual19/19,regressions6/7. Allnewvisual/highpriority fixespassed desktop1920x800/mobile390x844 incl typographyrootcause, charts, genuinepopovers, savedbatch0N+1, indexedgroupdetails."
+  final_fixes: "Explicitnullsource_hash normalized toempty byfieldvalidator (previously500); numeric_ruleemptybulletguard; shorter examcorner; legendpadding;44pxcalendarday/navtargets+8pxcollisionpadding;Cleardateserroraction; legacyaccuracyderived fromsamecorrect/attemptedformula; nicer cohort copy/en-INreportdates; uniquegroupdetailtestids; QAcohortjobcleanup. Allpendingverification, nofinishuntiltestingagentpasses."
+

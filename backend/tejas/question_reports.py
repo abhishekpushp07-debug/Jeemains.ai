@@ -2,7 +2,7 @@
 from typing import Literal
 from uuid import uuid5, NAMESPACE_URL
 from fastapi import APIRouter, Depends, HTTPException, Query
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from pymongo.errors import DuplicateKeyError
 from .db import db, now, audit
 from .auth import current, staff
@@ -31,6 +31,11 @@ class QuestionReport(BaseDocument):
     review_note: str = ''
     source_hash: str = ''
     reviewed_at: float | None = None
+
+    @field_validator('source_hash', mode='before')
+    @classmethod
+    def legacy_source_hash(cls, value):
+        return '' if value is None else value
 
 
 class Receipt(BaseModel):
