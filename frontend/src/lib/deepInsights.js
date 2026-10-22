@@ -73,7 +73,7 @@ export function deepInsights(r, c) {
   add('letters', 'Option pattern', topLetter ? `Chose ${topLetter[0]} ${topLetter[1]}×` : null, `The key has ${keyLetters[topLetter?.[0]] || 0} × ${topLetter?.[0]}. Never pick by pattern; answers are spread across options.`);
   add('breakeven', 'Smart guessing rule', minus ? `${Math.round((100 * minus) / (plus + minus))}% break-even` : null, `With +${plus}/−${minus}, guess only when you can eliminate options and are more than ${Math.round((100 * minus) / (plus + minus))}% sure.`, 'info', minus > 0);
   add('bonus', 'Bonus decision', r.rules?.bonus_rule ? (r.bonus_unlocked_at ? `Entered · ${s.bonus_block?.score} marks` : 'Not entered') : null, r.bonus_unlocked_at ? `${s.bonus_block?.correct} correct, ${s.bonus_block?.incorrect} wrong in the bonus.` : 'Bonus opens only after all main questions are answered.', r.bonus_unlocked_at ? 'good' : 'info');
-  add('rank', 'Your rank', peerOK && c.rank ? `#${c.rank} of ${c.sample_size}` : null, c?.sample_size < (c?.stable_sample || 100) ? 'Live rank among students who took this paper so far (early sample).' : 'Live rank among students who took this paper.', 'good');
+  add('rank', 'App cohort rank', peerOK && c.rank ? `#${c.rank} of ${c.sample_size}` : null, c?.sample_size < (c?.stable_sample || 100) ? 'Live rank among students who took this paper so far (early sample).' : 'Live rank among students who took this paper.', 'good');
   add('percentile', 'Percentile', peerOK && c.percentile != null ? `${c.percentile}` : null, 'Share of students who scored at or below you on this paper.', 'good');
   add('avg', 'Versus average', peerOK && c.average != null ? `${Number(s.score) - c.average >= 0 ? '+' : ''}${fmt(Number(s.score) - c.average)}` : null, peerOK && `Average score is ${c.average}; median ${c.median}.`, peerOK && Number(s.score) >= c.average ? 'good' : 'warn');
   add('top', 'Gap to topper', peerOK && c.top != null ? `${fmt(c.top - Number(s.score))} marks` : null, peerOK && `Top score on this paper so far: ${c.top}.`);
@@ -83,14 +83,15 @@ export function deepInsights(r, c) {
   add('potential', 'Unanswered potential', potential != null ? `${potential >= 0 ? '+' : ''}${potential} marks` : null, `If you answered the ${skipped.length} blank questions at your current accuracy.`, potential > 0 ? 'info' : 'warn');
   add('next', 'Next best step', `${wrong.length + skipped.length} to revise`, ranked.length > 1 ? `Read the AI solutions for your ${ranked[ranked.length - 1].name} mistakes first, then take an untimed retry.` : 'Read the AI solutions for every wrong answer, then take an untimed retry.', 'info');
   // Always-available facts keep the list at 25 when peer or timing data is missing.
+  const openingCount=Math.min(10,main.length);
   const fill = [
     ['correct', 'Correct answers', `${right.length}`, `Earned +${right.length * plus} marks.`, 'good'],
     ['wrongs', 'Wrong answers', `${wrong.length}`, wrong.length ? 'Revisit each one with the solution before your next test.' : 'No wrong answers. Excellent control.', wrong.length ? 'warn' : 'good'],
     ['blank', 'Unanswered', `${skipped.length}`, 'Blank answers cost nothing, but each one is a missed chance at marks.'],
     ['positive', 'Positive marks earned', `+${right.length * plus}`, `Before ${wrong.length * minus} negative marks were taken off.`, 'good'],
     ['size', 'Paper size', `${main.length} questions`, `${sec.length} section${sec.length === 1 ? '' : 's'} · +${plus} / −${minus} / 0 marking.`],
-    ['firstten', 'Opening accuracy', `${main.slice(0, 10).filter((q) => q.outcome === 'correct').length} / 10`, 'Correct answers in the first ten questions. A strong start builds momentum.'],
-    ['lastten', 'Closing accuracy', `${main.slice(-10).filter((q) => q.outcome === 'correct').length} / 10`, 'Correct answers in the last ten questions of the paper.'],
+    ['firstten', 'Opening question group', `${main.slice(0, 10).filter((q) => q.outcome === 'correct').length} / ${openingCount}`, `Correct answers among the first ${openingCount} question numbers; this is not your actual solving order.`],
+    ['lastten', 'Closing question group', `${main.slice(-10).filter((q) => q.outcome === 'correct').length} / ${openingCount}`, `Correct answers among the final ${openingCount} question numbers.`],
   ];
   fill.forEach(([k, t, v, d, tone]) => { if (out.length < 25) add(k, t, v, d, tone); });
   return out.slice(0, 25);

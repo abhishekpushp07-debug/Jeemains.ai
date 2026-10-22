@@ -23,6 +23,11 @@ class EmptyPayload(Payload):
     pass
 
 
+class CompareAttemptsPayload(Payload):
+    left: Identity
+    right: Identity
+
+
 class SolvePayload(Payload):
     request_id: RequestKey
 
@@ -237,6 +242,8 @@ from .cohorts import RankScenario
 from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
 MODELS = {
+    'my_tests.save_paper': EmptyPayload,
+    'my_tests.compare': CompareAttemptsPayload,
     'manual_solutions.request_solve': SolvePayload,
     'question_reports.report_wrong': QuestionReportPayload,
     'question_reports.review_report': QuestionReportReviewPayload,

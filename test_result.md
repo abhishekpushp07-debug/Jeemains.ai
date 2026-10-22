@@ -167,3 +167,19 @@ final_verification:
   iteration_101: "Two final copy improvements (manualbuttonlabel and bonus singular/plural/minus) passed source-logic checks/compilation; no additional browser run. Iteration100 remains visual evidence."
   preservation: "All temporary fixtures/jobs/requests/reports/attemptpacks cleaned. Baseline hashes identical:144sets,11800questions,53files,5939savedAI,1161legacy paused. No user credentials changed; currentowner remains the previously explicitconfiguredaccount, not aplaceholder."
   remaining: "No current feature blocker. Source-gap baseline/fullMyTests/other roadmap checkpoints still require approval; do not proceed automatically or deploy. Initial providerfailurecause notconfirmed; laterexplicitretry succeeded unchangedmodel/keyconfiguration."
+
+
+# Latest feature batch (supersedes prior manual-solve testing scope)
+latest_user_choices:
+  - "5-colour beautiful segmented Results + direct Solutions navigation"
+  - "Verified historical rank range only; missing usable dataset => explicit unavailable, no fictional AIR/cutoff conversions"
+  - "Comparable full mocks journey; last5 mocks weighted accuracy as confidence"
+  - "Complete Profile MyTests with ongoing/saved/completed, private filters/history/reports, same-paper comparison"
+  - "Repeated question reports grouped/prioritised; colourful large direct examhome boxes"
+latest_test_instructions:
+  - "ZERO live LLM/provider calls. No credentialchanges or deployment. Audit findings remainunresolved; do not expose secrets in reports/tests."
+  - "Backend new modules learning_progress.py,my_tests.py,historical_rank.py; packs insertsprogress_family; reports grouping APIs; strict contracts registered."
+  - "Synthetic completed fullmock fixtures MUST have real count/shape (JEE75, BITS130+12, COMEDK180), compatible rules and original summary; toy5Q papers intentionally excluded. Use varied attempts to verify weighted last5, notmean percentages, as-of cutoff, otheruser exclusion, mixedformats rejected, missingdata/zeroanswers honest."
+  - "Saved paper add/repeat/remove causesnoattempt and requires currentallowedpublication; unavailablebookmarks retained; active originaltimer/answers preserved; expirednoresume; embargo hidesmarks; compareforeign404/mismatch409."
+  - "Groupingpriority distinctprofiles beforetotalreports; retakesoneprofilecountonce; version/sourcehashsplit; staff403boundaries; reviewaudit no keychange."
+  - "Browser views desktop1920x800/mobile390x844 with populated progress/profile/compare/reportgroups. Inspecthorizontaloverflow and fix anyregressions. Preserve144sets,5939savedAI,1161pausedauto. All testfixtures cleaned."

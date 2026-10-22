@@ -31,6 +31,9 @@ from tejas import (
     mock_solutions,
     manual_solutions,
     question_reports,
+    learning_progress,
+    my_tests,
+    historical_rank,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -166,6 +169,9 @@ for module in [
     mock_solutions,
     manual_solutions,
     question_reports,
+    learning_progress,
+    my_tests,
+    historical_rank,
 ]:
     app.include_router(module.router)
 

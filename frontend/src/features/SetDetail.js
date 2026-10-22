@@ -8,6 +8,7 @@ import { PageTitle, Badge, Loading, ErrorBox, Field } from '../components/Shared
 import { MathText } from '../components/QuestionContent';
 import { Button } from '../components/ui/button';
 import { Checkbox } from '../components/ui/checkbox';
+import {SavePaperButton} from '../components/SavePaperButton';
 import { Card } from '../components/ui/card';
 
 export default function SetDetail() {
@@ -65,7 +66,7 @@ export default function SetDetail() {
   return (
     <div className="container page set-detail" data-testid="set-detail-page">
       <Link className="breadcrumb" data-testid="set-back" to={preview ? '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? 'Back to Content Studio' : 'Back to '+s.exam+' tests'}</Link>
-      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.source} />
+      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
       <div className="preflight-grid">
         <Card className="card instructions" data-testid="set-instructions">

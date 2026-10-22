@@ -31,6 +31,8 @@ import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalytic
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
 import { ReportButton } from "../components/ReportButton";
 import { MockSectionScores } from '../components/results/MockSectionScores';
+import {useLearningMeters,MeterShortcuts,JourneyView,ConfidenceView,HistoricalRankView} from '../components/results/LearningMeters';
+import { BarChart3,TrendingUp,Target,Trophy,BookOpen } from 'lucide-react';
 import { ResultAnalysis } from '../components/results/ResultAnalysis';
 import { AiSolution, PeerQuestionStat } from '../components/results/AiSolution';
 import { useResultExtras } from '../components/results/useResultExtras';
@@ -44,8 +46,8 @@ export default function Results() {
   const { user } = useAuth();
   const [params, setParams] = useSearchParams();
   const location = useLocation();
-  const view = params.get('view') === 'solutions' ? 'solutions' : 'analysis';
-  const scrollPositions = useRef({analysis:0, solutions:0});
+  const view = ['analysis','progress','accuracy','rank','solutions'].includes(params.get('view')) ? params.get('view') : 'analysis';
+  const scrollPositions = useRef({analysis:0,progress:0,accuracy:0,rank:0,solutions:0});
   function changeView(next, question) {
     scrollPositions.current[view] = window.scrollY;
     const nextParams = new URLSearchParams(params);
@@ -70,6 +72,7 @@ export default function Results() {
   const [solutionState,setSolutionState] = useState({});
   const [confidenceThreshold,setConfidenceThreshold] = useState(0.2);
   const extras = useResultExtras(id, !!r);
+  const meters = useLearningMeters(id,scoreVersion,!!r);
   useEffect(()=>{
     if (!focusQuestion) return;
     const timer=setTimeout(()=>{document.getElementById('review-question-'+focusQuestion)?.scrollIntoView({block:'start',behavior:'instant'});setFocusQuestion(null)},220);
@@ -177,7 +180,7 @@ export default function Results() {
   return (
     <QuestionReportsProvider attemptId={id}><div className="container page results-page">
       <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,examPath(r.exam)+'/results')} data-testid="results-home">
-        <ArrowLeft size={14} /> Back to {r.exam} {location.state?.returnTo?.includes('/results')?'results':'tests & results'}
+        <ArrowLeft size={14} /> {location.state?.returnTo?.startsWith('/profile')?'Back to My Tests':`Back to ${r.exam} ${location.state?.returnTo?.includes('/results')?'results':'tests & results'}`}
       </Link>
       <PageTitle
         eyebrow={`${r.exam} · ${r.mode === "preview" ? "UNAPPROVED PRIVATE PREVIEW" : "COMPLETED PRACTICE"}`}
@@ -294,8 +297,9 @@ export default function Results() {
           <small>Worth another look</small>
         </div>
       </div>
-      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList><TabsTrigger value="analysis" data-testid="result-view-analysis">Analysis</TabsTrigger><TabsTrigger value="solutions" data-testid="result-view-solutions">Solutions</TabsTrigger></TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
+      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank','Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
       <section className="result-view-panel" hidden={view!=='analysis'} data-testid="result-analysis-panel" aria-label="Result analysis">
+      <MeterShortcuts journey={meters.journey} rank={meters.rank} onView={changeView}/>
       <MockSectionScores s={s} />
       <ResultAnalysis r={r} cohort={extras.cohort} peer={extras.peer} onOpen={openQuestion} />
       <div className="result-metrics">
@@ -380,8 +384,11 @@ export default function Results() {
         </section>
       </div>
       {r.insights && <section className="import-card mb-8" data-testid="results-evidence-insights"><div className="import-section-label">YOUR NEXT STUDY SESSION</div><h2>Start where this attempt points.</h2><div className="insight-grid">{r.insights.priorities.length ? r.insights.priorities.map((g,i) => <article className="import-issue" data-testid={'results-priority-' + i} key={g.label}><strong>{g.label}</strong><p>{g.incorrect} incorrect · {g.skipped} skipped · {g.count} questions</p><p>Attempted accuracy: {g.accuracy === null ? 'Not available' : g.accuracy + '%'} ({g.correct}/{g.attempted})</p><p>{g.action}</p><small>{g.evidence} · Review Q{g.questions.join(', Q')}</small></article>) : <p data-testid="results-no-priorities">No incorrect or skipped eligible questions in this attempt. Use fresh questions to gather more evidence.</p>}</div><p className="import-fineprint mt-4" data-testid="results-insights-basis">{r.insights.basis}</p></section>}
-      <ResultsAnalyticsWorkspace key={`${id}-${scoreVersion}`} analysis={r.analytics} questions={r.questions} userId={user.id} attemptId={id} onOpenQuestion={openQuestion} onRefresh={refreshAnalytics} confidenceThreshold={confidenceThreshold} review={r.review} />
+      <details className="advanced-analysis" data-testid="advanced-result-analysis"><summary data-testid="advanced-result-analysis-toggle">Deeper review tools · decisions, revision & study plan</summary><ResultsAnalyticsWorkspace key={`${id}-${scoreVersion}`} analysis={r.analytics} questions={r.questions} userId={user.id} attemptId={id} onOpenQuestion={openQuestion} onRefresh={refreshAnalytics} confidenceThreshold={confidenceThreshold} review={r.review} /></details>
       </section>
+      {view==='progress'&&<JourneyView data={meters.journey} retry={meters.retry}/>}
+      {view==='accuracy'&&<ConfidenceView data={meters.journey} retry={meters.retry} latestAccuracy={s.accuracy}/>}
+      {view==='rank'&&<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>}
       <section className="result-view-panel" hidden={view!=='solutions'} data-testid="result-solutions-panel" aria-label="Question solutions">
       <div className="result-question-jump" data-testid="solution-question-navigation"><Select value={qs.some(q=>q.id===selectedQuestion)?selectedQuestion:''} onValueChange={openQuestion}><SelectTrigger aria-label="Jump to a question" data-testid="solution-question-select" className="w-56"><SelectValue placeholder="Jump to a question"/></SelectTrigger><SelectContent>{qs.map(q=><SelectItem key={q.id} value={q.id} data-testid={'solution-select-'+q.number}>Q{q.number} · {q.subject}</SelectItem>)}</SelectContent></Select><Button variant="outline" data-testid="solution-previous" disabled={qs.findIndex(q=>q.id===selectedQuestion)<=0} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)-1].id)}>Previous</Button><Button variant="outline" data-testid="solution-next" disabled={!qs.length||qs.findIndex(q=>q.id===selectedQuestion)>=qs.length-1} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)+1].id)}>Next</Button></div>
       <div className="review-heading" id="results-review-heading">

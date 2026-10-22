@@ -9,6 +9,15 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'learning_progress.journey': ('attempt_owner_original_released_progress', 'normal', 'read'),
+    'historical_rank.historical_rank': ('attempt_owner_released_evidence_gate', 'normal', 'read_no_invented_rank'),
+    'my_tests.save_state': ('own_saved_paper_only', 'normal', 'read'),
+    'my_tests.save_paper': ('current_published_visible_test_own_bookmark', 'normal', 'unique_user_set_no_attempt'),
+    'my_tests.remove_saved': ('own_saved_paper_only', 'normal', 'idempotent_delete'),
+    'my_tests.my_tests': ('private_user_filtered_history_and_saves', 'normal', 'read_no_start'),
+    'my_tests.compare': ('both_attempts_owned_released_identical_paper_basis', 'normal', 'read'),
+    'question_reports.report_priorities': ('staff_distinct_profile_issue_priority', 'normal', 'read'),
+    'question_reports.report_group': ('staff_same_question_version_issue_details', 'normal', 'read'),
     'manual_solutions.solve_tests': ('owner_test_selection_only', 'normal', 'read'),
     'manual_solutions.solve_status': ('owner_test_solution_progress', 'normal', 'read_no_dispatch'),
     'manual_solutions.request_solve': ('owner_explicit_selected_test_only', 'bulk', 'request_receipt_and_question_content_identity'),

@@ -80,6 +80,10 @@ async def indexes():
                  'tejas_ai_daily', 'tejas_ai_limits', 'tejas_cohorts', 'tejas_cohort_snapshots',
                  'tejas_cohort_entries'):
         await db[name].create_index('id', unique=True)
+    await db.tejas_saved_tests.create_index([('user_id', 1), ('set_id', 1)], unique=True)
+    await db.tejas_saved_tests.create_index([('user_id', 1), ('saved_at', -1)])
+    await attempts.create_index([('user_id', 1), ('exam', 1), ('mode', 1), ('status', 1), ('submitted_at', -1)])
+    await db.tejas_question_reports.create_index([('set_id', 1), ('version', 1), ('question_id', 1), ('source_hash', 1)])
     await db.tejas_manual_solves.create_index([('trigger', 1), ('state', 1), ('lease_until', 1)])
     await db.tejas_manual_solves.create_index('set_id')
     await db.tejas_question_reports.create_index([('user_id', 1), ('attempt_id', 1)])

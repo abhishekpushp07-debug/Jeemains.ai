@@ -115,6 +115,8 @@ async def insert_attempt(a):
 
     a["pack_id"] = await seal(a["questions"])
     a["count"] = len(a["questions"])
+    from .learning_progress import family
+    a['progress_family'] = family(a)
     a["response_schema"] = {
         q["id"]: {"type": q["type"], "options": list(q.get("options", {})), **({"bonus": True} if q.get("bonus") else {})}
         for q in a["questions"]

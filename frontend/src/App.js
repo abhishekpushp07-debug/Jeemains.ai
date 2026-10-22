@@ -18,6 +18,8 @@ import "./full-mocks.css";
 import "./result-analysis.css";
 const Auth = lazy(() => import("./features/Auth"));
 const Exams = lazy(() => import("./features/Exams"));
+const Profile = lazy(() => import('./features/Profile'));
+import './learning-workspace.css';
 const Home = lazy(() => import("./features/Home"));
 const ExamHub = lazy(() => import("./features/ExamHub"));
 const ExamSection = lazy(() => import("./features/ExamSection"));
@@ -101,6 +103,8 @@ function Shell() {
             <Route path="/exams/:examSlug/mocks" element={<Protected><ExamSection kind="mocks" /></Protected>} />
             <Route path="/exams/:examSlug/chapters" element={<Protected><ExamSection kind="chapters" /></Protected>} />
             <Route path="/exams/:examSlug/results" element={<Protected><ExamHistory /></Protected>} />
+            <Route path="/profile" element={<Protected><Profile /></Protected>} />
+            <Route path="/my-tests" element={<Navigate to="/profile" replace />} />
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />
             <Route path="/login" element={<Auth />} />
             <Route path="/signup" element={<Auth />} />

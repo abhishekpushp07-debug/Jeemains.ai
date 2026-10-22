@@ -1,76 +1,134 @@
 {
-  "project_identity": {
-    "name": "jeemains.ai",
-    "theme": "hybrid_fullstack",
-    "brand_colors": {
-      "primary_maroon": "#5C0025",
-      "primary_maroon_hover": "#46001C",
-      "primary_maroon_light": "#FAF0F4",
-      "accent_amber": "#D97706",
-      "accent_green": "#059669",
-      "accent_red": "#DC2626",
-      "neutral_dark": "#18181B",
-      "neutral_surface": "#FAFAFA",
-      "neutral_border": "#E4E4E7"
+  "project_name": "Jeemains.ai - Ultimate 5-Color Segmented Analytics & Exam Portal",
+  "app_type": "hybrid_fullstack",
+  "brand": {
+    "primary_maroon": "#5C0025",
+    "primary_maroon_hover": "#42001A",
+    "primary_maroon_light": "#FDF2F5",
+    "font_family_heading": "Figtree, sans-serif",
+    "font_family_mono": "Roboto Mono, monospace",
+    "theme_archetype": "ARCHETYPE 4: SWISS & HIGH-CONTRAST + ARCHETYPE 2: THE PERFORMANCE PRO"
+  },
+  "palette_5_color_segmentation": {
+    "description": "5 distinct, high-contrast, APCA-compliant color segments used across Results, Navigation, and Meters",
+    "color_1_maroon": {
+      "hex": "#5C0025",
+      "label": "Brand Anchor / Total Score / Core Identity",
+      "usage": "Hero tiles, primary badges, main header accents, overall score ring",
+      "bg_light": "#FDF2F5",
+      "border": "#E5B8C6"
     },
-    "typography": {
-      "headings": "Figtree, sans-serif",
-      "body": "Figtree, sans-serif",
-      "mono": "'Roboto Mono', monospace"
+    "color_2_emerald": {
+      "hex": "#059669",
+      "label": "Accuracy / Correct / High Confidence Meter",
+      "usage": "Correct outcomes, last 5 mock accuracy meter, high mastery tags, positive trend indicators",
+      "bg_light": "#ECFDF5",
+      "border": "#A7F3D0"
+    },
+    "color_3_sapphire": {
+      "hex": "#2563EB",
+      "label": "Real World Expected Rank / Peer Benchmarks",
+      "usage": "Expected rank meter gauge, peer cohort rank, percentile badges, comparison overlays",
+      "bg_light": "#EFF6FF",
+      "border": "#BFDBFE"
+    },
+    "color_4_amber": {
+      "hex": "#D97706",
+      "label": "Improvement Growth / Review / Skipped Questions",
+      "usage": "Improvement trend curves, skipped items, pending reviews, moderate confidence warnings",
+      "bg_light": "#FFFBEB",
+      "border": "#FDE68A"
+    },
+    "color_5_crimson": {
+      "hex": "#DC2626",
+      "label": "Report Priorities / Incorrect / Flagged Issues",
+      "usage": "Top reported content issue alerts, incorrect outcomes, penalty marks, urgent fix items",
+      "bg_light": "#FEF2F2",
+      "border": "#FECACA"
     }
   },
-  "key_feature_designs": {
-    "owner_selective_solve": {
-      "location": "Studio -> MockBookPanel / Imported Test List",
-      "description": "Owner-only Solve button on selected tests to trigger AI solution generation only for missing explanations while preserving owner/existing solutions.",
-      "ui_pattern": "Compact pill button with Wand2/Sparkles icon in maroon tone, status indicator showing missing count, and idempotent trigger with toast notifications.",
-      "test_ids": [
-        "studio-selective-solve-btn",
-        "studio-solve-status-badge",
-        "studio-preserve-solutions-notice"
-      ]
+  "typography": {
+    "headings": {
+      "font_family": "Figtree, sans-serif",
+      "weights": ["600", "700", "800"],
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold tracking-tight",
+      "h4": "text-lg sm:text-xl font-semibold"
     },
-    "one_line_question_report": {
-      "description": "Small, single-line reporting strip on every question across attempt, results, and solutions views.",
-      "contexts": {
-        "active_attempt": {
-          "style": "Minimal distraction-free footer bar under question stem with a subtle 'Report issue' trigger.",
-          "behavior": "Non-modal / expandable 1-line drawer or prompt. Must NOT leak answer keys or interrupt timer.",
-          "data_testid": "player-report-issue-strip"
-        },
-        "after_result": {
-          "style": "Inline banner in question review header next to marks/status badge.",
-          "behavior": "Subtle 1-line link 'Report incorrect question/key' with categorical feedback.",
-          "data_testid": "results-report-issue-strip"
-        },
-        "solutions_view": {
-          "style": "Compact bar at bottom of matched solution / AI solution card.",
-          "behavior": "Quick 1-line flag for solution typo or math error.",
-          "data_testid": "solutions-report-issue-strip"
-        }
+    "body": {
+      "font_family": "Figtree, sans-serif",
+      "weights": ["400", "500"],
+      "sizes": {
+        "large": "text-lg leading-relaxed",
+        "default": "text-base leading-relaxed",
+        "small": "text-sm leading-normal",
+        "tiny": "text-xs leading-tight"
       }
     },
-    "simplified_navigation": {
-      "pattern": "Hierarchical back-context breadcrumbs (Test Hub -> Test Detail -> Active Attempt -> Results Summary -> Question Solutions) with sticky progress headers and clear step restoration.",
-      "test_ids": [
-        "nav-breadcrumb-back",
-        "nav-exam-hub-link",
-        "nav-results-solutions-toggle"
-      ]
+    "mono_numeric": {
+      "font_family": "Roboto Mono, monospace",
+      "usage": "Scores, ranks, percentages, timers, timestamps, receipts, formula outputs, data tables",
+      "class": "font-mono tracking-tight"
     }
   },
-  "component_path": "/app/frontend/src/components",
+  "layout_and_grids": {
+    "home_page": {
+      "structure": "Hero eyebrow + big 5-color high-impact exam bento grid + quick action strip + recent mock drawer",
+      "exam_boxes": {
+        "style": "Large direct-access bento cards with vibrant individual accent themes (JEE Main = Maroon/Sapphire, BITSAT = Emerald/Amber, COMEDK = Crimson/Purple)",
+        "grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8",
+        "card_padding": "p-8",
+        "card_height": "min-h-[260px] flex flex-col justify-between",
+        "features": "1-click direct buttons to Mocks, Chapter Practice, and Results History with badge counter"
+      }
+    },
+    "results_page": {
+      "segmentation": "5-color status bar at top + dual view switcher (Analysis / Solutions) + sticky quick-jump drawer",
+      "rank_meter": "Gauge & bell curve card comparing Real-World Expected Rank (e.g., #1,250 - #1,800 based on NTA historical scoring) vs App Cohort Rank (#14/2,400 students)",
+      "improvement_meter": "Dual-axis Recharts graph showing First Mock vs Latest Mock vs Rolling Trend with +% gain metrics",
+      "confidence_meter": "Rolling 5-mock weighted accuracy gauge with confidence threshold slider (default 0.20)",
+      "solutions_navigation": "Sticky top bar with select dropdown, prev/next arrows, 5-color filter tabs, and heat-map question matrix"
+    },
+    "profile_my_tests": {
+      "structure": "Complete 'My Tests' hub in Profile containing Saved Papers, Ongoing Drafts, and Completed Attempts",
+      "side_by_side": "Comparable attempts side-by-side comparison matrix showing score delta, accuracy diff, time taken, and question-by-question response breakdown"
+    },
+    "report_priorities": {
+      "structure": "Prioritized question report triage drawer & studio panel",
+      "grouping": "Grouped by Question ID / Published Version with distinct student counts (e.g., '14 students reported Q42 in Ver 2')",
+      "sorting": "Most reported questions floating to top with distinct Crimson highlight for urgent editorial review"
+    }
+  },
+  "components_and_ui_library": {
+    "buttons": "Shadcn Button heavily styled with rounded-xl, 1px subtle borders, and smooth transform hover effects",
+    "cards": "Card with 1px solid stroke (border-border/60), subtle ambient shadow, nested radii (child <= parent), p-6 or p-8 internal padding",
+    "tabs": "Shadcn Tabs with custom 5-color active indicators and full keyboard accessibility",
+    "select": "Shadcn Select for question jumps and filter selection",
+    "toasts": "Sonner toasts position top-center with custom maroon/emerald/crimson accents",
+    "charts": "Recharts with 5-color palette (#5C0025, #059669, #2563EB, #D97706, #DC2626)"
+  },
+  "image_urls": {
+    "exam_hero_banner": "https://images.unsplash.com/photo-1763718432504-7716caff6e99?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHxffGV4YW0lMjB0ZXN0JTIwc3R1ZGVudCUyMHZpY3RvcnklMjBlZHVjYXRpb24lMjBhbmFseXRpY3MlMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzkyNzAyNTUyfDA&ixlib=rb-4.1.0&q=85",
+    "student_studying": "https://images.unsplash.com/photo-1760420957123-08a562e52940?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHxffGV4YW0lMjB0ZXN0JTIwc3R1ZGVudCUyMHZpY3RvcnklMjBlZHVjYXRpb24lMjBhbmFseXRpY3MlMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzkyNzAyNTUyfDA&ixlib=rb-4.1.0&q=85",
+    "classroom_focus": "https://images.pexels.com/photos/31155018/pexels-photo-31155018.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "test_answer_sheet": "https://images.pexels.com/photos/31115182/pexels-photo-31115182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
   "instructions_to_main_agent": [
-    "Strictly preserve brand maroon (#5C0025) and typography (Figtree and Roboto Mono).",
-    "Ensure every interactive and key reporting element has kebab-case data-testid attributes.",
-    "Do not break or leak answer keys in active practice attempts during question reporting.",
-    "Owner solve button must only act on missing solutions, maintaining existing AI and human-edited solutions intact.",
-    "Keep navigation clear and focused with consistent breadcrumb anchors across Player, Results, and Studio."
+    "Strictly follow the 5-color palette (#5C0025, #059669, #2563EB, #D97706, #DC2626) for segmenting Results, Solution navigation, and Meters.",
+    "Ensure explicit distinction between Real-World Expected Rank (verified historical cutoff data) vs App Cohort Rank (live student sample).",
+    "Calculate Confidence Meter as the rolling weighted accuracy of the last 5 comparable full mocks.",
+    "Ensure Improvement Meter renders a clear Recharts graph comparing first attempt vs latest attempt with delta indicators.",
+    "Build the complete 'My Tests' section in Profile with Saved Papers, Ongoing Drafts, and side-by-side comparison for same-paper attempts.",
+    "Ensure Question Reports in Studio sort repeatedly reported questions to the top by distinct student count.",
+    "Make Home page exam cards large, colorful, direct-access bento boxes with high visual punch.",
+    "Every key interactive element MUST retain or include data-testid attributes for testing."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Never use generic centered layouts or unstyled default HTML select/inputs.",
-    "Layer cards with crisp 1px borders (border-zinc-200 or border-[#5C0025]/15) and subtle shadows.",
-    "Use specific element transitions rather than transition: all.",
-    "Maintain high APCA contrast for legibility across light and dark surfaces."
-  ]
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "data_testid_requirement": "All buttons, links, selects, tabs, inputs, and meter cards MUST include a descriptive data-testid attribute in kebab-case.",
+    "no_universal_transition": "Do not apply transition: all globally. Apply targeted transitions for color, border, and background.",
+    "contrast_and_accessibility": "Ensure text contrast meets APCA / WCAG AA standards. Always set hover text color explicitly when background changes.",
+    "spacing_and_collision": "All cards with borders must have internal padding (p-6 or p-8) to prevent text collision.",
+    "font_rules": "Use Figtree for main headings and UI text, and Roboto Mono for scores, metrics, ranks, and percentages."
+  }
 }

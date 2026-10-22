@@ -3,15 +3,15 @@ import { Trophy, Users, TrendingUp, Award, Sparkles, CheckCircle2, AlertTriangle
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, PieChart, Pie, Legend, CartesianGrid } from 'recharts';
 import { deepInsights } from '../../lib/deepInsights';
 
-const C = { brand: '#5C0025', soft: '#D9C6CE', gold: '#B7791F', good: '#2F7D5B', bad: '#B42318', mute: '#A8A29E' };
+const C = { brand: '#5C0025', soft: '#B9C9EE', gold: '#D97706', good: '#059669', bad: '#DC2626', mute: '#D97706' };
 
 const Stat = ({ icon: Icon, label, value, sub, testId }) => <div className="peer-stat" data-testid={testId}><Icon size={18} /><span>{label}</span><strong>{value}</strong>{sub && <small>{sub}</small>}</div>;
 
 const RankStrip = ({ c, score }) => {
   if (!c || c.state !== 'available') return <p className="import-fineprint" data-testid="peer-preparing">{c?.reason || 'Preparing live comparison with other students…'}</p>;
   return <div className="peer-stats" data-testid="peer-rank-strip">
-    <Stat icon={Trophy} label="Your rank" value={`#${c.rank}`} sub={`of ${c.sample_size} students`} testId="peer-rank" />
-    <Stat icon={TrendingUp} label="Percentile" value={c.percentile} sub="scored at or below you" testId="peer-percentile" />
+    <Stat icon={Trophy} label="App cohort rank" value={`#${c.rank}`} sub={`of ${c.sample_size} profiles · not national rank`} testId="peer-rank" />
+    <Stat icon={TrendingUp} label="App percentile" value={c.percentile} sub="within this platform cohort only" testId="peer-percentile" />
     <Stat icon={Users} label="Average score" value={c.average ?? '—'} sub={`median ${c.median ?? '—'}`} testId="peer-average" />
     <Stat icon={Award} label="Top score" value={c.top ?? '—'} sub={`you: ${score}`} testId="peer-top" />
   </div>;
@@ -44,21 +44,23 @@ const Outcomes = ({ s }) => {
 };
 
 const HeatMap = ({ r, peer, onOpen }) => {
-  if (!Object.keys(peer).length) return null;
-  return <div className="chart-card wide" data-testid="chart-question-heatmap"><h4>Every question · how many students solved it</h4>
+  return <div className="chart-card wide" data-testid="chart-question-heatmap"><h4>Every question · one tap to its solution</h4>
     <div className="q-heat">{r.questions.map((q) => {
       const p = peer[q.id], tried = p ? p.correct + p.incorrect : 0, rate = tried ? p.correct / tried : null;
       return <button key={q.id} type="button" className={'q-heat-cell o-' + q.outcome} style={{ '--rate': rate ?? 0, color: (rate ?? 0) > 0.45 ? '#fff' : '#4A0A22' }} title={`Q${q.number}: ${p ? `${p.correct} of ${tried} solved` : 'no data'} · you: ${q.outcome}`} onClick={() => onOpen(q.id)} data-testid={'heat-q-' + q.number}>{q.number}</button>;
     })}</div>
-    <p className="import-fineprint">Darker = more students solved it. Outline: green you were right, red wrong, grey unanswered. Tap a question to open it.</p></div>;
+    <p className="import-fineprint">Tap a question to open its solution. Fill intensity reflects peer correctness only when available. Your outcome is shown by the labelled question tooltip and outline.</p></div>;
 };
 
 const tones = { good: CheckCircle2, warn: AlertTriangle, info: Info };
-const Insights = ({ list }) => <div className="deep-insights" data-testid="deep-insights">
-  <h3><Sparkles size={18} /> {list.length}-point deep insight on your result</h3>
-  <ol>{list.map((x, i) => { const Icon = tones[x.tone] || Info; return <li key={x.key} className={'insight-card t-' + x.tone} style={{ animationDelay: `${i * 30}ms` }} data-testid={'insight-' + x.key}>
-    <span className="insight-no">{String(i + 1).padStart(2, '0')}</span><div><small><Icon size={13} /> {x.title}</small><strong>{x.value}</strong><p>{x.detail}</p></div></li>; })}</ol>
-</div>;
+const INSIGHT_GROUPS=[
+ ['Score & accuracy','maroon',['score','accuracy','attempt','penalty','noguess','yield','correct','wrongs','blank','positive','size']],
+ ['Subject strengths','emerald',['best','weak','skipsec','spread']],
+ ['Time & rhythm','amber',['time','pace','halves','late','cstreak','wstreak','firstten','lastten']],
+ ['Decisions & next steps','crimson',['marked','letters','breakeven','bonus','potential','next']],
+ ['Platform perspective','sapphire',['rank','percentile','avg','top','easy','hard']]
+];
+const Insights = ({ list }) => <div className="deep-insights" data-testid="deep-insights"><h3><Sparkles size={18}/>{list.length} insights, in clear chapters.</h3><div className="insight-groups">{INSIGHT_GROUPS.map(([title,tone,keys],group)=>{const rows=list.filter(x=>keys.includes(x.key));if(!rows.length)return null;return <details key={title} className={'insight-group tone-'+tone} open={group===0}><summary data-testid={'insight-group-'+group}>{title}<small>{rows.length} insights</small></summary><ol>{rows.map(x=>{const Icon=tones[x.tone]||Info;return <li key={x.key} className={'insight-card t-'+x.tone} data-testid={'insight-'+x.key}><span className="insight-no">{String(list.indexOf(x)+1).padStart(2,'0')}</span><div><small><Icon size={13}/>{x.title}</small><strong>{x.value}</strong><p>{x.detail}</p></div></li>})}</ol></details>})}</div></div>;
 
 export const ResultAnalysis = ({ r, cohort, peer, onOpen }) => {
   const list = useMemo(() => deepInsights(r, cohort), [r, cohort]);
