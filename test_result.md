@@ -106,11 +106,11 @@ user_problem_statement: "Latest explicit scope: Sirf remaining automatic work pa
 backend:
   - task: "Automatic AI pause and preservation"
     implemented: true
-    working: NA
+    working: true
     file: "backend/tejas/mock_solutions.py, ai_solutions.py, jobs.py, smart_imports.py; backend/server.py; tools/solution_worker.py"
     stuck_count: 0
     priority: high
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: NA
         agent: main
@@ -118,11 +118,11 @@ backend:
 frontend:
   - task: "Honest paused AI status copy"
     implemented: true
-    working: NA
+    working: true
     file: "frontend/src/components/studio/AiReviewPanel.js, MockBookPanel.js; components/results/AiSolution.js"
     stuck_count: 0
     priority: high
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: NA
         agent: main

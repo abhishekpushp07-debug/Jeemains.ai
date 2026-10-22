@@ -1,0 +1,19 @@
+{
+  "summary": "Narrow frontend-only follow-up to iteration_96 (automatic AI solve pause only; NOT full checkpoint01). Logged in as existing owner (creds read from /app/memory/test_credentials.md at runtime, not printed) on preview URL /studio. Verified AI review progress chip [data-testid=studio-ai-full-mock-progress] text is exactly 'Full mocks: 5939 / 7100 questions solved'; computed style display:flex(inline-flex), align-items:center, gap:8px; Sparkles svg aria-hidden=true and its vertical midpoint equals the span midpoint at both viewports (icon/text aligned, incl. 2-line wrap on mobile). [data-testid=studio-ai-paused-count] shows '1161 paused'. Pause notice [data-testid=studio-ai-pause-notice] states pause applies to mocks and chapter tests; total chip clearly labelled Full mocks. No Solve/Generate buttons in the AI review panel. Overflow: progress row/notice overflow list empty on desktop 1920x800 and mobile 390x844; no non-KaTeX element exceeds viewport; document horizontal scroll = 0. (A first broad probe listed KaTeX-internal spans in the review cards with scrollWidth>clientWidth - these are standard KaTeX layout internals, pre-existing and not visible overflow; filtered probe returned empty.) Only non-GET API call during the run was POST /api/auth/login - no solve/generate/model requests, no attempts, no content changes. No backend rerun per request.",
+  "tested_viewports": ["desktop 1920x800", "mobile 390x844"],
+  "screenshot_artifacts": [
+    "/root/.emergent/automation_output/20261022_184144/iter97_desktop_ai_progress.jpeg",
+    "/root/.emergent/automation_output/20261022_184144/iter97_mobile_ai_progress.jpeg"
+  ],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": ["AiReviewPanel line 54: change is minimal and correct (inline-flex items-center gap-2, aria-hidden icon, data-testid). Note: chip wraps to 2 lines on 390px mobile - acceptable, icon stays centered."],
+  "updated_files": [],
+  "success_rate": {"backend": "not run (out of scope)", "frontend": "100% (narrow scope)"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Automatic AI solve pause is complete (iter96 backend 16/16 + iter97 label/alignment). Remainder of checkpoint01 not implemented by user choice. Full student results UI still not UI-verified (only solution API in iter96)."
+}
