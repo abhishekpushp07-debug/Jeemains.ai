@@ -160,3 +160,10 @@ current_testing_instructions:
   - "MAX ONE real model call, on a disposable tiny typed one-question test via explicit owner POST. Do NOT click Solve on an existing mock/chapter or generate bulk work. All concurrency/error/cancel/owner edit tests must MOCK model boundary in-process, no lasting mock API."
   - "Full API auth matrix, repeated clicks/report dedupe, protected existing AI/text/image solutions, worker source-change race, no automatic enqueue, normal start/save/submit/result navigation/report flows. Use synthetic QA fixtures, clean only those fixtures. Existing144 sets11800Q/5939 ready AI and1161 paused automatic docs must be preserved."
   - "Desktop1920x800/mobile390x844 screenshots of new meaningful states, no horizontal overflow. Feature reports /app/test_reports/iteration_98.json onward."
+
+
+final_verification:
+  iteration_100: "19/19 manual/report +16/16 automatic-pause tests pass. Desktop1920x800/mobile390x844 all requested checks pass; zero overflow. Livegpt-6-astra success independently verified in99, no model calls in100/101."
+  iteration_101: "Two final copy improvements (manualbuttonlabel and bonus singular/plural/minus) passed source-logic checks/compilation; no additional browser run. Iteration100 remains visual evidence."
+  preservation: "All temporary fixtures/jobs/requests/reports/attemptpacks cleaned. Baseline hashes identical:144sets,11800questions,53files,5939savedAI,1161legacy paused. No user credentials changed; currentowner remains the previously explicitconfiguredaccount, not aplaceholder."
+  remaining: "No current feature blocker. Source-gap baseline/fullMyTests/other roadmap checkpoints still require approval; do not proceed automatically or deploy. Initial providerfailurecause notconfirmed; laterexplicitretry succeeded unchangedmodel/keyconfiguration."

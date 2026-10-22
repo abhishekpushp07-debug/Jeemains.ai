@@ -1,0 +1,14 @@
+{
+  "summary": "Copy-polish check only. Both changes are correct when the exact source expressions are checked. ManualSolve label: missing>0 and queued>0 gives 'Solve with AI' (enabled), or 'Retry missing solutions' if failed>0. missing===0 with queued/solving active gives 'Solving in background' (disabled). missing===0 with nothing active gives 'Nothing to solve' (disabled). BonusConfirm: main_count/bonus_count of 1 gives '1 main answer'/'1 bonus question' and 'it'; other counts get plurals and 'them'. Signed marks use a typographic minus (−0.25), and 0 and positive values are unchanged. The frontend compiles: only a pre-existing exhaustive-deps warning in Results.js. No browser run, no POST Solve, no DB fixtures and no model calls.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "skipped", "frontend": "100% (logic/static verification)"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 100 passed in full. Iteration 101 checked only the two copy tweaks by checking the logic against the exact source expressions. No visual/browser rerun was done."
+}

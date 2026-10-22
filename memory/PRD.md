@@ -30,13 +30,13 @@ There are exactly 25 owner-approved checkpoints in three major phases; one check
 
 **Latest authorised scope:** The owner now requested the remaining per-test Manual Solve feature and selected **“Ek click mein shuru karein”** (no confirmation modal). Additional explicit request: **“Every question in test while attempting , after result , and in solutions should have a small one line section of report as wrong. Also navigation of trsts , results, solutions should be simplified and focussed.”** Implement one-click owner-only missing-solution generation, question issue reporting with Studio triage, and focused existing Tests/Results/Analysis/Solutions navigation. Do not execute unrelated source-reconciliation, full My Tests/rank or capacity checkpoints, paid infrastructure or deployment.
 
-### Current work in progress — manual Solve, question reports, focused navigation
+### Completed and verified — manual Solve, question reports, focused navigation (2026-10-22)
 - New `tejas/manual_solutions.py`: separate durable explicit request/queue; existing auto pause remains True. Only owner POST materialises selected-test eligible jobs; GET/student/upload/publish paths never enqueue. Explicit request receipts, deterministic per-question content IDs, bounded single-process manual drain, owner/consent rechecks, CAS owner/source protection, quota enforcement and saved labelled tags. Existing maintenance only recovers previously owner-consented jobs, no library discovery.
 - New `tejas/question_reports.py`: private per-attempt/question idempotent receipts, no key/solution data returned, locked bonus/release checks; staff-only paginated triage, audited status changes, no regrade.
 - Frontend one-click Solve selector/panels; compact Report as wrong across attempt/results/solutions; Analysis/Solutions navigation with report download, filter/selected question query state, exam destination links, context-preserving return and explicit leave confirmation.
-- Verification in progress: iteration98 identified None guards/mobile styling; iteration99 confirmed live gpt-6-astra generation on one explicitly requested isolated question (1,249 tokens), saved tag and student AI-generated display. Initial live call had a generic provider failure; non-generative model catalogue returned200 and exact model present; retry succeeded with unchanged provider/model/key configuration. Cause of initial failure remains unconfirmed; no IP-allowlist claim. Safe error classification logs enums/status/parameter names only, never provider bodies or secrets.
+- Verification: iteration98 identified None guards/mobile styling; iteration99 confirmed live gpt-6-astra generation on one explicitly requested isolated question (1,249 tokens), saved tag and student AI-generated display. Initial live call had a generic provider failure; non-generative model catalogue returned200 and exact model present; retry succeeded with unchanged provider/model/key configuration. Cause of initial failure remains unconfirmed; no IP-allowlist claim. Safe error classification logs enums/status/parameter names only, never provider bodies or secrets.
 - Iteration100: **19/19 manual/report +16/16 automatic-pause regression tests passed** in separate serial pytest processes. Final UI verified at1920x800 and390x844, 0 horizontal overflow: working filter active pills, all144 long dropdown options fit, inline reporting acknowledgement, number-labelled supplied explanations and no empty card on AI-only questions, genuine disabled Nothing to solve button, and dynamic bonus rules. Report/AI/student access, idempotency, owner-source edit races, secure error redaction and unchanged source keys tested.
-- Existing144 tests/11,800 questions/53 source records/5,939 savedAI/1,161 pausedautomatic records unchanged by preservation hashes. Temporary test sets/attempts/reports/manual requests/jobs/cohorts/packs/ledgers cleaned, 0 manual pending jobs left. Tests use MOCKED model calls for race/error cases; application APIs are real and live gpt-6-astra success was separately verified in iteration99. No production release or paid infrastructure setup. Final optional label/plural copy polish awaits narrow verification.
+- Existing144 tests/11,800 questions/53 source records/5,939 savedAI/1,161 pausedautomatic records unchanged by preservation hashes. Temporary test sets/attempts/reports/manual requests/jobs/cohorts/packs/ledgers cleaned, 0 manual pending jobs left. Tests use MOCKED model calls for race/error cases; application APIs are real and live gpt-6-astra success was separately verified in iteration99. No production release or paid infrastructure setup. Final optional label/plural copy polish passed logic/compilation checks in iteration101 (no further browser run; iteration100 is visual evidence). No outstanding feature blocker.
 
 
 ## Current implementation — automatic AI pause (2026-10-22 preview run)
@@ -51,13 +51,13 @@ There are exactly 25 owner-approved checkpoints in three major phases; one check
 
 ## Prioritized roadmap — approval required
 ### P0 / Major Phase 1 — MVP, checkpoints 01–09
-01. Preservation, source baseline and owner AI control — pause slice delivered; source-traceability gaps/status summary and per-test explicit Solve (eligible missing solutions only, idempotent, owner-solution protection) remain pending approval
-02. Navigation foundation — discovery, My Tests/Profile entry points, context-preserving back and deliberate active-exam exit
+01. Preservation, source baseline and owner AI control — automatic pause and per-test one-click missing-only Solve COMPLETE; source-traceability gaps/status summary remain pending approval
+02. Navigation foundation — focused Tests/Results links, return-context and deliberate leave-test confirmation COMPLETE; dedicated My Tests/Profile entry and wider navigation remain pending
 03. Light-only exam workspace — entire workspace independent of account/device theme, readable original images, accessible mobile controls and save states
 04. JEE Main familiarity mode — verified NTA actions/legend/reference year; no invented 2027 parity
 05. BITSAT familiarity mode — verified guidance/adaptation, preserve 130+12 eligibility, warning/lock, shared 180 minutes and +3/−1/0
 06. COMEDK familiarity mode — verified familiarity reference distinguished from actual paper rules
-07. Results redesign — Analysis/Solutions/Real-exam Comparison, grouped 25 insights/charts, retained question/filter context, optional feedback immediately below analysis, full-attempt PDF unaffected
+07. Results redesign — Analysis/Solutions tabs, question navigation/filter context and wrong-report action COMPLETE; broader feedback placement, subject filters and Real-exam Comparison remain pending; existing charts/insights/PDF retained
 08. Complete My Tests — In progress/Saved/Completed; original-deadline resume, searchable history/reports, save without attempt, comparable-version attempt comparison
 09. Historical same-score comparison — usable approved sources and compatible scoring only; separate cohort rank; honest unavailable states until datasets verified
 
@@ -87,4 +87,4 @@ There are exactly 25 owner-approved checkpoints in three major phases; one check
 - No assertion that existing canonical mappings, source bytes, 25 insight quality, whole product regressions or 500,000-user capacity were independently reverified by the pause tests.
 
 ## Next action
-Pause verification is complete (iterations 96–97). Await explicit owner approval for the remaining checkpoint 01 work; do not start it automatically.
+The latest requested feature slice is complete and verified (iterations98–101). Stop for explicit approval before source-gap baseline, full My Tests, remaining roadmap checkpoints or deployment. The pause-only notes above are historical: a manual Solve button now exists, while legacy automatic generation remains disabled. No further code restructuring or broad cleanup is authorised.
