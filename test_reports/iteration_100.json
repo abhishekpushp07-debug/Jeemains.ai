@@ -1,0 +1,34 @@
+{
+  "summary": "Iteration 100 final focused retest. No real model calls were made: no Solve POST was sent (all /solve request traffic was captured and there were 0 POSTs), and there were no generation or credential changes. BACKEND: test_manual_solve_reports.py passes 19/19, including TestIter99::test_none_fields_safe (the eligible() None text/options fix is confirmed), and test_ai_pause.py passes 16/16. Both suites were run in separate processes with -p no:asyncio -n0. The pause suite ran before fixture restoration and again after cleanup; both runs passed. FRONTEND (preview build, 1920x800 and 390x844): (1) Filter pills are FIXED. On the Results filter tabs (7 pills) and on Studio student-question-reports (Open 2 / Reviewing 1 / Reviewed 0 / All 3), the computed style is border 1px and radius 999px. The active pill has background rgb(246,233,238) and colour rgb(92,0,37); inactive pills are transparent with colour rgb(11,31,42). The button's parent is still a SPAN (visual-edits wrapper), so the descendant selector works. Clicking another pill moves the active state. There is no horizontal overflow on either viewport. (2) The long solve-test dropdown stays within the viewport: 144 options with 0 overflowing; listbox width 788px equals the trigger on desktop and 300px (x 45 to 345 of 390) on mobile; document overflow is 0. (3) Results matched-solution: on the UI fixture attempt, only Q1 (owner_provided text, no solution_number) renders the card, headed 'Supplied solution · Q1' (the number fallback works); Q2-Q5 render no empty card. On the AI-only LIVE attempt there are 0 matched cards and the 'AI generated' AI solution is shown. (4) ManualSolve: on TEST_MS_LIVE-set (status '0 eligible missing · 0 supplied · 1 AI saved') the button reads 'Nothing to solve' and carries a real HTML disabled attribute (is_disabled True). On TEST_MS_UI-set (4 missing) it reads 'Solve with AI' and is enabled; it was not clicked. (5) BonusConfirm: on a temporary TEST_MS_BONUS-set (1 main + 1 bonus, real BITSAT rules) with the main question answered, the confirm dialog shows '+3 correct, -1 wrong, 0 unanswered'. With a Playwright route that rewrote only the GET attempt response's rules to 4/-2/-0.5 (UI only, no DB change), it shows '+4 correct, -2 wrong, -0.5 unanswered'. Counts are dynamic ('All 1 main', '1 bonus'). The bonus was never unlocked (bonus_unlocked_at was absent). CLEANUP: the TEST_MS_UI/LIVE sets were restored from fixtures_iter99_TEST_MS.json only for this run, and the BONUS set was created temporarily. I then deleted every document linked to these sets and attempts: 3 sets, 3 attempts, 3 reports, 1 ready manual job, 2 requests, 3 preflight, 4 jobs, 2 cohorts, 2 cohort entries, 2 ledgers, 1 owner_solve question_solution and the bonus attempt pack. A rescan shows 0 left and 0 TEST sets. The baseline check MATCHES on all four hashes (144 sets, 0 attempts, 53 files, 5939 ready question_solutions). States are ready 5939 / paused 1161. There are 0 manual jobs and 0 requests.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "BonusConfirm", "issues": ["Cosmetic: it shows an ASCII '-1' where the old copy used a typographic minus '−1'. It also says '1 bonus questions' (no singular form). Very low priority."]},
+      {"screen": "ManualSolve label", "issues": ["When some jobs are queued and others are still missing, the label shows 'Solving in background' but the button stays enabled, and a click would request the remaining missing questions. The behaviour is correct but the label is slightly misleading. When all are queued, missing is 0, so the button is correctly disabled. This was not exercised live because generation is not allowed."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_manual_solve_reports.py",
+    "/app/backend/tests/test_ai_pause.py",
+    "/app/test_reports/pytest/iter100_manual_solve.xml",
+    "/app/test_reports/pytest/iter100_ai_pause.xml"
+  ],
+  "action_items": [
+    "None blocking. Optional cosmetics: use the typographic minus and singular/plural wording in BonusConfirm, and only show the 'Solving in background' label when missing===0."
+  ],
+  "critical_code_review_comments": [
+    "The Results.js matched-solution conditional (solution_kind==='answer_key_only' || solution || s_refs?.length || solution_accessible_text) does NOT hide legitimate owner image solutions. packs.seal() keeps s_refs and the results endpoint passes them through (it only adds solution_asset_count), so an image-only owner solution still satisfies s_refs.length. The key-only path is also covered. Minor: smart-import questions with solution_kind 'ai_generated' and solution text would still be headed 'Supplied solution'. This is pre-existing and was not changed.",
+    "eligible() now uses (q.get('options') or {}) and (q.get('text') or '').strip(), and preserved() is None-safe. Verified by tests.",
+    "simple-navigation.css lines 274-275 use scoped descendant selectors, so they do not leak to other .filter-tabs usages. The App.css '.filter-tabs > button' rules still exist; they are harmless but now redundant for these two screens."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (19/19 manual/report + 16/16 pause)", "frontend": "100% of requested checks"},
+  "seed_data_creation": "Temporary, and all removed: TEST_MS_UI-set and TEST_MS_LIVE-set (plus their attempts, reports, the ready manual job, requests, preflight and the owner_solve question_solutions row) restored from /app/test_reports/fixtures_iter99_TEST_MS.json; a new TEST_MS_BONUS-set plus active practice attempt 1007f588-... for student 9900000196 (main answered, bonus never unlocked). Queued manual jobs were not restored (the only one was 'ready').",
+  "test_credentials": "Owner from /app/memory/test_credentials.md (read at runtime; 2 successful logins); student 9900000196. No changes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All TEST fixtures are cleaned up and the baseline guard matches. Re-seed from fixtures_iter99_TEST_MS.json if needed, using bson json_util and replace_one upsert; /tmp/restore100.py and /tmp/clean100.py did this, but they are temporary. Cleanup must also cover tejas_jobs, tejas_cohorts, tejas_cohort_entries, tejas_ledgers and tejas_packs, which are created when results are viewed or an attempt starts. Browser tool quirk: avoid f-strings, triple-quoted JS and str() in screenshot paths; load JS from /tmp files.",
+  "rca of the issue": "There were no new defects. The iteration 99 issues are resolved: the None-safe eligible() fix, the descendant filter-pill selectors that survive the visual-edits span wrapper, the conditional matched-solution card, disabled 'Nothing to solve', and BonusConfirm marking read from the rules."
+}

@@ -12,8 +12,8 @@ export const BonusGate=({rule,open,answered,pending,ended,online,onEnter,testId=
 
 export const BonusConfirm=({open,onClose,onConfirm,busy,rule,marking})=><Confirm open={open} onClose={onClose} title="Lock your main answers and open the bonus?" button="Lock answers & open bonus" busy={busy} onConfirm={onConfirm}>
  <div className="bonus-warning" data-testid="player-bonus-warning">
-  <p><strong>This cannot be undone.</strong> All {rule.main_count} main answers will be locked. You will not be able to change, clear or review-edit them again.</p>
-  <p>You then get {rule.bonus_count} bonus questions on the same timer, with the same marking: {marking.correct>0?'+':''}{marking.correct} correct, {marking.wrong} wrong, {marking.skipped} unanswered.</p>
+  <p><strong>This cannot be undone.</strong> Your {rule.main_count} main answer{rule.main_count===1?'':'s'} will be locked. You will not be able to change, clear or review-edit {rule.main_count===1?'it':'them'} again.</p>
+  <p>You then get {rule.bonus_count} bonus question{rule.bonus_count===1?'':'s'} on the same timer, with the same marking: {marking.correct>0?'+':''}{String(marking.correct).replace('-', '−')} correct, {String(marking.wrong).replace('-', '−')} wrong, {String(marking.skipped).replace('-', '−')} unanswered.</p>
   <p>If you are not sure about some main answers, cancel and review them first.</p>
  </div>
 </Confirm>;
