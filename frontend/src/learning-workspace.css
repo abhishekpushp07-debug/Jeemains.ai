@@ -13,7 +13,7 @@
 .exam-tone-comedk { --exam-colour:#1E40AF; }
 .bold-exam-top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
 .bold-exam-top>span { font:10px 'Roboto Mono',monospace; opacity:.8; max-width:120px; text-align:right; letter-spacing:1px; }
-.bold-exam-card small { font-size:10px; letter-spacing:1.3px; font-weight:700; opacity:.85; }
+.bold-exam-card small { color:#fff; font-size:10px; letter-spacing:1.3px; font-weight:700; opacity:.85; }
 .bold-exam-card h2 { font:800 44px/1.15 'Figtree',sans-serif; margin:10px 0 13px; letter-spacing:-1.5px; color:#fff; }
 .bold-exam-card h2 a { color:inherit; }
 .bold-exam-card p { font-size:13px; color:#ffffffd9; line-height:1.7; min-height:44px; }
@@ -73,21 +73,21 @@
 .accuracy-gauge { background:conic-gradient(#059669 var(--meter-percent),#d1fae5 0); width:240px; height:240px; flex-shrink:0; border-radius:50%; display:grid; place-items:center; padding:16px; }
 .accuracy-gauge>div { width:100%; height:100%; border-radius:50%; background:var(--surface-card); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; }
 .accuracy-gauge strong { font:700 40px 'Roboto Mono',monospace; letter-spacing:-2px; }
-.accuracy-gauge span { font-size:12px; color:var(--text-muted); }
+.accuracy-gauge .gauge-caption { font-size:12px; color:var(--text-muted); }
 .confidence-facts { flex:1; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
 .confidence-facts strong { display:block; font:600 26px 'Roboto Mono',monospace; margin-bottom:10px; }
-.confidence-facts span { font-size:12px; color:var(--text-muted); }
+.confidence-facts .metric-caption { font-size:12px; color:var(--text-muted); }
 .confidence-facts p { grid-column:1/-1; line-height:1.7; font-size:14px; max-width:620px; }
 .rank-evidence-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:20px; }
 .rank-unavailable,.rank-cohort-separate { padding:28px; border:1px solid var(--line); border-radius:12px; display:flex; flex-direction:column; gap:16px; align-items:flex-start; }
 .rank-unavailable { background:var(--segment-soft); color:#1e3a8a; border-style:dashed; }
 .rank-unavailable strong { font-size:24px; line-height:1.25; }
-.rank-unavailable span { font:500 16px 'Roboto Mono',monospace; }
-.rank-unavailable p,.rank-cohort-separate p { font-size:13px; line-height:1.8; }
+.rank-unavailable .rank-score { font:500 16px 'Roboto Mono',monospace; }
+.rank-unavailable p,.rank-cohort-separate p { font-family:var(--font-ui); font-size:13px; line-height:1.8; }
 .rank-cohort-separate>strong { font:600 48px 'Roboto Mono',monospace; }
 .rank-cohort-separate small { font-size:11px; color:var(--text-muted); line-height:1.7; }
 .rank-source { display:flex; justify-content:space-between; gap:24px; padding:22px 0; align-items:center; color:var(--brand-text); }
-.rank-source span { font-size:10px; font-weight:750; display:block; margin-bottom:6px; letter-spacing:1px; }
+.rank-source .rank-source-caption { font-size:10px; font-weight:750; display:block; margin-bottom:6px; letter-spacing:1px; }
 .rank-source strong { font-size:14px; }
 .rank-source p { font-size:12px; color:var(--text-muted); margin-top:6px; }
 .analysis-section-title { display:flex; align-items:center; justify-content:space-between; gap:18px; margin:35px 0 20px; }
@@ -155,12 +155,12 @@
 .library-error,.comparison-error { color:#991b1b; background:#fef2f2; padding:20px; border-radius:12px; margin:20px 0; }
 .attempt-comparison-dialog { max-width:760px!important; max-height:90dvh; overflow-y:auto; border-radius:18px; }
 .comparison-headings { display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:18px 0; }
-.comparison-headings>div { display:flex; flex-direction:column; gap:8px; padding:18px; border:1px solid var(--line); border-radius:10px; min-width:0; }
-.comparison-headings small { font-size:9px; letter-spacing:1px; color:var(--text-muted); }
-.comparison-headings strong { font-size:14px; overflow-wrap:anywhere; }
-.comparison-headings span { font-size:11px; color:var(--text-muted); }
+.comparison-headings .comparison-column { display:flex; flex-direction:column; gap:8px; padding:18px; border:1px solid var(--line); border-radius:10px; min-width:0; }
+.comparison-headings .comparison-eyebrow { display:block; font-size:9px; letter-spacing:1px; color:var(--text-muted); }
+.comparison-headings .comparison-title { display:block; font-size:14px; overflow-wrap:anywhere; }
+.comparison-headings .comparison-date { display:block; font-size:11px; color:var(--text-muted); }
 .comparison-row { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:10px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); font-size:13px; }
-.comparison-row span { color:var(--text-muted); overflow-wrap:anywhere; }
+.comparison-row .comparison-label { color:var(--text-muted); overflow-wrap:anywhere; }
 .comparison-row strong { font-family:'Roboto Mono',monospace; font-size:12px; overflow-wrap:anywhere; }
 .comparison-deltas { display:flex; flex-wrap:wrap; gap:20px; background:var(--brand-soft); padding:18px; border-radius:10px; margin:22px 0; color:var(--brand-text); font-size:12px; }
 .comparison-deltas strong { font:700 24px 'Roboto Mono',monospace; }
@@ -245,3 +245,16 @@
  .header-my-tests svg { display:none; }
 }
 @media(prefers-reduced-motion:reduce) { .bold-exam-card,.meter-shortcut,.exam-primary { transition:none; } }
+
+/* Use semantic classes, never broad span rules: preview wrappers must inherit numeral sizes. */
+.accuracy-gauge strong span,.confidence-facts strong span,.comparison-row strong span,.comparison-deltas strong span,.set-detail .instruction-facts strong span { font:inherit; color:inherit; letter-spacing:inherit; line-height:inherit; }
+.home-quick-actions { align-items:center; }
+.home-quick-actions .free-label { margin:0; align-self:center; }
+.library-date-filter { min-width:0; }
+.library-date-filter>label { display:block; font-size:11px; color:var(--text-muted); margin-bottom:5px; }
+.library-date-filter button { width:100%; gap:7px; justify-content:flex-start; padding:8px 10px; font-size:11px; }
+.library-calendar-popover { width:auto; max-width:calc(100vw - 24px); padding:0; }
+.report-priority-count small { display:block; margin-top:4px; }
+.comparison-row strong { font-size:14px; }
+@media(max-width:640px) { .comparison-headings .comparison-column { padding:12px; } .comparison-row strong { font-size:12px; } }
+

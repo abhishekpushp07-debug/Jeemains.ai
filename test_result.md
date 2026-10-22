@@ -183,3 +183,10 @@ latest_test_instructions:
   - "Saved paper add/repeat/remove causesnoattempt and requires currentallowedpublication; unavailablebookmarks retained; active originaltimer/answers preserved; expirednoresume; embargo hidesmarks; compareforeign404/mismatch409."
   - "Groupingpriority distinctprofiles beforetotalreports; retakesoneprofilecountonce; version/sourcehashsplit; staff403boundaries; reviewaudit no keychange."
   - "Browser views desktop1920x800/mobile390x844 with populated progress/profile/compare/reportgroups. Inspecthorizontaloverflow and fix anyregressions. Preserve144sets,5939savedAI,1161pausedauto. All testfixtures cleaned."
+
+
+iteration102_followup:
+  status: "12/12 new +19/19 regression passed; populated desktop/mobile functional flows pass; content preserved; zeroLLM calls."
+  reproduced_typography: "Roboto Mono alreadyinstalled/imported. Browser: fonts.checktrue; gauge strong40px but nestedspan12px; confidence strong26px but nestedspan12px. Rootcause broadspan CSS on previewwrappers, notmissingfonts. Fixed captionclasses/inheritance; added700weight only."
+  fixes: "Numericinheritance, brightcardeyebrows, freepillalignment, chooseexamlabel, namedchartaxes, rankbodyfont, cohortthreshold, comparisonheadings/dates, Calendar datefilters, singularcopy, clearcompare ontab/exam change, missingreceiptget, indexedgroupdetails, batchedsavedflags."
+  fixtures: "ExistingQAseed /tmp/jr_ui_state.json prefixTEST_JR_f8d69ed0; realattempts72290088-a1b0-4c04-8e62-96c370647516,298ee986-0da3-4260-ac6d-2b9ea5e90b68,0dd5c054-8b7a-4f1c-93aa-5d6fbe05f2fd. Cleanup required via backend/tests/seed_ui_journey.py cleanup after retest."

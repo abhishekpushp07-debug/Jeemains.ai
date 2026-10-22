@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from .auth import current
 from .catalog import available, PROJECT
 from .content import summary
-from .db import attempts, sets, now
+from .db import attempts, sets, now, db
 
 router = APIRouter(prefix='/api/exam-navigation', tags=['Exam navigation'])
 EXAMS = {'jee-main': 'JEE Main', 'bitsat': 'BITSAT', 'comedk': 'COMEDK'}
@@ -104,10 +104,11 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters',
             if value.get('deadline') and value['deadline'] <= now():
                 value['status'] = 'completed'
             latest[a['_id']] = value
+    saved_ids = {d['set_id'] async for d in db.tejas_saved_tests.find({'user_id': user['id'], 'set_id': {'$in': [s['id'] for s in rows]}}, {'_id': 0, 'set_id': 1})} if rows else set()
     return NavigationCatalogue(exam=exam, kind=kind, total=total, page=page,
         pages=max(1, (total + PAGE_SIZE - 1) // PAGE_SIZE),
         subject_counts={s['_id']: s['count'] for s in subjects if s['_id']},
-        items=[{**summary(s), 'test_kind': classify_set(s), 'attempt': latest.get(s['id'])} for s in rows])
+        items=[{**summary(s), 'test_kind': classify_set(s), 'attempt': latest.get(s['id']), 'saved': s['id'] in saved_ids} for s in rows])
 
 
 @router.get('/{slug}/history', response_model=NavigationHistory)

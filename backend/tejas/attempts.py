@@ -405,7 +405,7 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
     if a["status"] == "completed":
         if not a.get("ledger"):
             job = await ensure_grade(a, bg)
-            return EnvelopeResponse({"id": id, "receipt": a["receipt"], "status": "grading", "grading_status": (job or {}).get("status", "queued"), "job_id": (job or {}).get("id"), "retry_after_ms": 2000}, status_code=202, headers={"Retry-After": "2"})
+            return EnvelopeResponse({"id": id, "receipt": a.get("receipt"), "status": "grading", "grading_status": (job or {}).get("status", "queued"), "job_id": (job or {}).get("id"), "retry_after_ms": 2000}, status_code=202, headers={"Retry-After": "2"})
         a = await with_grade(a, score_version)
     if a["status"] != "completed":
         raise HTTPException(403, "Solutions are released only after submission.")

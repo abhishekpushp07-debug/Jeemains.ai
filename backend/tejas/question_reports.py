@@ -111,7 +111,15 @@ async def report_priorities(status: Literal['open', 'reviewing', 'resolved', 'al
 
 @router.get('/studio/question-report-group')
 async def report_group(group_id: str = Query(..., max_length=500), page: int = Query(1, ge=1, le=10000), u=Depends(staff)):
-    match = {'$expr': {'$eq': [group_expression(), {'$literal': group_id}]}}
+    parts = group_id.split('|')
+    try:
+        version = int(parts[1])
+        if len(parts) != 4 or not 0 <= version <= 2147483647:
+            raise ValueError()
+    except (ValueError, IndexError):
+        raise HTTPException(404, 'Report group not found.')
+    match = {'set_id': parts[0], 'version': version, 'question_id': parts[2],
+             'source_hash': parts[3] if parts[3] else {'$in': ['', None]}}
     total = await reports.count_documents(match)
     if not total:
         raise HTTPException(404, 'Report group not found.')
