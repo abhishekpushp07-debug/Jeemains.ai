@@ -101,3 +101,46 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Latest explicit scope: Sirf remaining automatic work pause karein. Pause automatic mock/chapter solving and legacy work without deleting saved AI/owner solutions. No new manual Solve controls, source baseline UI, checkpoint 02 or redesign authorised in this slice."
+backend:
+  - task: "Automatic AI pause and preservation"
+    implemented: true
+    working: NA
+    file: "backend/tejas/mock_solutions.py, ai_solutions.py, jobs.py, smart_imports.py; backend/server.py; tools/solution_worker.py"
+    stuck_count: 0
+    priority: high
+    needs_retesting: true
+    status_history:
+      - working: NA
+        agent: main
+        comment: "Removed lifecycle spawn/keeper; code-enforced pause guards discovery, claim, direct solve, worker, spawn, keeper, legacy ensure/process, queue creation/retry/drain. Maintenance excludes AI; imports do not solve/requeue; review confirmation only records review. Legacy worker terminated. CLI --pause-pending converted 1161 failed records to paused; 5939 ready retained. Pre-pause hashes in test_reports/automatic_ai_pause_baseline.json."
+frontend:
+  - task: "Honest paused AI status copy"
+    implemented: true
+    working: NA
+    file: "frontend/src/components/studio/AiReviewPanel.js, MockBookPanel.js; components/results/AiSolution.js"
+    stuck_count: 0
+    priority: high
+    needs_retesting: true
+    status_history:
+      - working: NA
+        agent: main
+        comment: "Existing panels show paused not retrying/auto-solving; review help no longer promises re-solve; missing solution does not promise forthcoming generation. No new controls/layout."
+metadata:
+  created_by: main_agent
+  version: "1.0"
+  test_sequence: 1
+  run_ui: true
+test_plan:
+  current_focus:
+    - "Zero automatic solving on legacy discovery, startup/restart, idle, import reconcile, review-confirm, student and cron/retry paths"
+    - "Pause is idempotent; jobs and payloads preserved; compare source/test and ready solution hashes to baseline"
+    - "Existing 50 mocks and 94 chapters; saved solution read path and auth boundaries"
+    - "Paused state copy in Studio/results at desktop and mobile"
+  stuck_tasks: []
+  test_all: false
+  test_priority: high_first
+agent_communication:
+  - agent: main
+    message: "Testing must make ZERO live LLM calls and no paid integrations. Use isolated fixture docs and mocked model boundary for trigger tests. Do not change real question keys/reviews or attempts. Keep baseline content hashes unchanged. Credentials exist in memory/test_credentials.md; never hardcode/print them. Do not run stale iteration95 test that expects automatic solving. Current baseline has no student attempts. Test startup with isolated client/index/seed mocks, not by launching an extra uvicorn. No scheduler edits."

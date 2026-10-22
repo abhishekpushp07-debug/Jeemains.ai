@@ -39,6 +39,8 @@ async def images_for(q):
     return output
 
 async def process(job):
+    from .mock_solutions import require_solving_enabled
+    require_solving_enabled()
     from .jobs import require_lease
     sid=job['payload']['solution_id']
     doc=await db.tejas_ai_solutions.find_one({'id':sid},{'_id':0})
@@ -58,6 +60,8 @@ async def process(job):
         raise
 
 async def ensure(q,user_id,set_id,auto_import_id=None):
+    from .mock_solutions import require_solving_enabled
+    require_solving_enabled()
     from .jobs import enqueue
     sid=fingerprint(q)
     await db.tejas_ai_solutions.update_one({'id':sid},{'$setOnInsert':{'id':sid,'question_id':q['id'],'question':q,'state':'queued','created_at':now(),
@@ -96,15 +100,5 @@ async def read(id:str,qid:str,u=Depends(current)):
 
 @router.post('/{id}/solutions/{qid}',response_model=SolutionResponse)
 async def request_solution(id:str,qid:str,bg:BackgroundTasks,u=Depends(current)):
-    # Students never trigger AI: solutions are pre-generated owner-side and saved on each question (mock_solutions.py).
-    raise HTTPException(410,'AI solutions are prepared in advance and appear automatically on your results.')
-    from .astra import student_budget
-    from .jobs import run_job
-    a,q=await released_question(id,qid,u)
-    await student_budget(u['id'])
-    if q.get('solution') and q.get('solution_kind') not in ('answer_key_only',None):
-        # The original supplied explanation remains visible separately; do not relabel it AI.
-        pass
-    doc=await ensure(q,u['id'],a['set_id'])
-    if doc.get('job_id') and doc['state'] in ('queued','solving'):bg.add_task(run_job,doc['job_id'])
-    return public(doc,qid)
+    # Students only read saved explanations; this route never starts solving.
+    raise HTTPException(410,'AI generation is paused. Only previously saved solutions are available.')

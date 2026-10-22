@@ -1,6 +1,6 @@
-"""Owner-side AI (gpt-6-astra) ten-mark solutions. A backend worker solves every uploaded question (drafts, chapter tests,
-full mocks) and saves the result as an `ai_solution` tag on the question itself. Students only read saved tags; no AI
-call ever runs on a student request. Keys and scores are never changed by AI."""
+"""Saved owner-side AI solutions and answer review. Automatic solving is paused.
+Students only read saved tags; keys and scores are never changed by AI.
+"""
 import asyncio, hashlib, json, logging, os, threading, time, uuid
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
@@ -29,6 +29,38 @@ _POOL = ThreadPoolExecutor(max_workers=CONCURRENCY + 8, thread_name_prefix='ten-
 _LOCAL = threading.local()
 log = logging.getLogger(__name__)
 _last_progress = [time.monotonic()]
+# Code-enforced pause: no browser/env switch may restart the legacy automatic pipeline.
+# A separately approved owner-click workflow is required before generation is enabled.
+AI_SOLVING_PAUSED = True
+PAUSE_MESSAGE = 'Automatic AI solving is paused. Saved solutions are preserved; no new solutions are being generated.'
+
+
+def require_solving_enabled():
+    if AI_SOLVING_PAUSED:
+        raise HTTPException(409, PAUSE_MESSAGE)
+
+
+async def pause_pending():
+    """Administrative, idempotent pause; never remove jobs or saved solution payloads."""
+    t = now()
+    counts = {}
+    for collection, field, states in (
+        (solutions, 'state', ['queued', 'solving', 'failed']),
+        (db.tejas_ai_solutions, 'state', ['queued', 'solving', 'failed']),
+        (db.tejas_jobs, 'status', ['queued', 'running', 'failed']),
+    ):
+        query = {field: {'$in': states}}
+        if collection.name == 'tejas_jobs':
+            query['kind'] = 'ai_solution'
+        result = await collection.update_many(query, [
+            {'$set': {'paused_from': '$' + field, field: 'paused', 'paused_at': t,
+                      'pause_reason': 'owner_requested_automatic_pause', 'resume_required': True, 'updated_at': t}},
+            {'$unset': ['lease', 'lease_until', 'retry_at', 'next_run_at']},
+        ])
+        counts[collection.name] = result.modified_count
+    if any(counts.values()):
+        await audit('system', 'Automatic AI solving paused', 'solution-generation', json.dumps(counts))
+    return counts
 
 
 def _thread_loop(coro):
@@ -92,7 +124,9 @@ async def write_tag(set_id, question_id, tag):
 
 
 async def enqueue_all():
-    """Every uploaded question gets solved once; region or key edits create a fresh solve; lost tags are restored."""
+    """Legacy discovery is disabled; upload/publication must not create solving work."""
+    if AI_SOLVING_PAUSED:
+        return 0
     t = now()
     rows = await sets.find({'status': {'$in': ['draft', 'review', 'published']}, 'full_length': True},
         {'_id': 0, 'id': 1, 'status': 1, 'live_enabled': 1, 'end_at': 1, 'full_length': 1, 'created_at': 1, 'mock_book_id': 1, 'chapter_book_id': 1,
@@ -126,6 +160,8 @@ async def enqueue_all():
 
 
 async def claim():
+    if AI_SOLVING_PAUSED:
+        return None
     t = now()
     return await solutions.find_one_and_update(
         {'$or': [{'state': 'queued'}, {'state': 'solving', 'lease_until': {'$lt': t}}, {'state': 'failed', 'tries': {'$lt': 3}, 'retry_at': {'$lt': t}}]},
@@ -134,6 +170,7 @@ async def claim():
 
 
 async def solve(doc):
+    require_solving_enabled()
     from .derivatives import render_crop
     paper = await sets.find_one({'id': doc['set_id']}, {'_id': 0, 'questions': {'$elemMatch': {'id': doc['question_id']}}})
     q = paper['questions'][0]
@@ -180,7 +217,9 @@ async def watchdog():
 
 
 async def keeper():
-    """Backend-side: make sure one solution worker is always alive (no-op while the lock is held)."""
+    """Legacy worker recovery is disabled while generation is paused."""
+    if AI_SOLVING_PAUSED:
+        return
     while True:
         await asyncio.sleep(60)
         try:
@@ -190,6 +229,9 @@ async def keeper():
 
 
 async def worker():
+    if AI_SOLVING_PAUSED:
+        log.warning(PAUSE_MESSAGE)
+        return
     for _ in range(CONCURRENCY):
         asyncio.create_task(lane())
     asyncio.create_task(watchdog())
@@ -202,7 +244,9 @@ async def worker():
 
 
 def spawn():
-    """Run generation in its own process so the API event loop never competes with it; a file lock keeps one copy."""
+    """Legacy worker launch; disabled until a separately approved manual workflow."""
+    if AI_SOLVING_PAUSED:
+        return
     import subprocess, sys
     from pathlib import Path
     script = Path(__file__).resolve().parents[1] / 'tools' / 'solution_worker.py'
@@ -216,9 +260,12 @@ async def progress(set_ids=None):
     rows = await sets.aggregate([{'$match': match}, {'$unwind': '$questions'},
         {'$group': {'_id': None, 'total': {'$sum': 1}, 'ready': {'$sum': {'$cond': [{'$ifNull': ['$questions.ai_solution', False]}, 1, 0]}},
                     'disagree': {'$sum': {'$cond': [{'$eq': ['$questions.ai_solution.agrees', False]}, 1, 0]}}}}]).to_list(1)
-    failed = await solutions.count_documents({'state': 'failed', **({'set_id': {'$in': set_ids}} if set_ids else {})})
+    scope = {'set_id': {'$in': set_ids}} if set_ids else {}
+    failed = await solutions.count_documents({'state': 'failed', **scope})
+    paused = await solutions.count_documents({'state': 'paused', **scope})
     r = rows[0] if rows else {'total': 0, 'ready': 0, 'disagree': 0}
-    return {'ready': r['ready'], 'total': r['total'], 'disagree': r['disagree'], 'failed': failed}
+    return {'ready': r['ready'], 'total': r['total'], 'disagree': r['disagree'], 'failed': failed,
+            'paused': paused, 'generation_paused': AI_SOLVING_PAUSED}
 
 
 class AiSolution(BaseModel):
@@ -340,9 +387,7 @@ async def review_action(set_id: str, question_id: str, data: AiReviewPayload, u=
         review = None
     await sets.update_one({'id': set_id}, {'$set': {'questions.$[q].ai_solution.review': review}}, array_filters=[{'q.id': question_id}])
     await solutions.update_one({'id': tag['solution_id']}, {'$set': {'review': review}})
-    if data.action == 'key_confirmed':
-        # Verified key: re-solve with that verification so students get a correct worked solution.
-        await solutions.update_one({'id': tag['solution_id']}, {'$set': {'state': 'queued', 'tries': 0, 'order': -1}})
+    # Review records the owner's decision only; it is not consent to run AI.
     await audit(u['id'], 'AI answer review', set_id, f"Q{q['number']}: {data.action}. {data.note.strip()}"[:300])
     tag['review'] = review
     return ReviewItem(set_id=set_id, set_title=paper['title'], exam=paper.get('exam', ''), question_id=question_id, number=q['number'],

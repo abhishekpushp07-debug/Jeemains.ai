@@ -25,6 +25,9 @@ def public_job(j):
 
 
 async def enqueue(kind, user_id, set_id, payload):
+    if kind == 'ai_solution':
+        from .mock_solutions import require_solving_enabled
+        require_solving_enabled()
     if kind in JOB_CAPABILITIES:
         require_capability(JOB_CAPABILITIES[kind])
     if kind == 'report':
@@ -62,6 +65,10 @@ async def run_job(id, drain=True):
     if not header or header['kind'] not in _active:
         return
     kind = header['kind']
+    if kind == 'ai_solution':
+        from .mock_solutions import AI_SOLVING_PAUSED
+        if AI_SOLVING_PAUSED:
+            return
     if job_held(kind):
         return  # Leave intent durable, without taking a lease or touching outputs.
     lane = _active[kind]
@@ -181,6 +188,10 @@ _draining = set()
 
 async def drain_lane(kind):
     """Bounded release-triggered dispatch; platform maintenance remains crash recovery."""
+    if kind == 'ai_solution':
+        from .mock_solutions import AI_SOLVING_PAUSED
+        if AI_SOLVING_PAUSED:
+            return
     if kind in _draining or job_held(kind) or not INLINE_JOBS:
         return
     _draining.add(kind)
@@ -214,6 +225,9 @@ async def retry_job(id: str, bg: BackgroundTasks, u=Depends(current)):
     j = await status(id, bg, u)
     if j['status'] == 'done':
         return j
+    if j['kind'] == 'ai_solution':
+        from .mock_solutions import require_solving_enabled
+        require_solving_enabled()
     if j['kind'] in JOB_CAPABILITIES:
         require_capability(JOB_CAPABILITIES[j['kind']])
     if j['status'] != 'failed':
@@ -252,9 +266,11 @@ async def maintenance():
     for a in outbox:
         await ensure_grade(a)
     # Exhausted crashed workers must become visibly failed, not running forever.
-    await jobs.update_many({'status': 'running', 'lease_until': {'$lt': now()}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
+    await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', 'lease_until': {'$lt': now()}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
     selected = []
     for kind, capacity in LANE_LIMITS.items():
+        if kind == 'ai_solution':
+            continue  # Maintenance must never discover or restart solution generation.
         rows = await jobs.find({'kind': kind, '$and': [
             {'$or': [{'status': 'queued'}, {'status': 'running', 'lease_until': {'$lt': now()}}]},
             {'$or': [{'next_run_at': {'$lte': now()}}, {'next_run_at': {'$exists': False}}]},

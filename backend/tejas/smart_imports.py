@@ -124,7 +124,7 @@ async def upload(bg:BackgroundTasks,file:UploadFile=File(...),rights_confirmed:b
 @router.get('/{id}',response_model=ImportView)
 async def read(id:str,bg:BackgroundTasks,u=Depends(owner)):
     record=await own_import(id,u)
-    if record['state'] not in ('complete','complete_with_issues','needs_clarification','budget_required'):
+    if record['state'] not in ('complete','complete_with_issues','needs_clarification','budget_required','solving_paused'):
         from .jobs import drain_for
         bg.add_task(drain_for,id)
     return await view(record)
@@ -201,8 +201,7 @@ async def budget(id:str,body:WorkBudget,bg:BackgroundTasks,u=Depends(owner)):
 @router.post('/{id}/retry',response_model=ImportView)
 async def retry(id:str,bg:BackgroundTasks,u=Depends(owner)):
     record=await own_import(id,u)
-    await db.tejas_jobs.update_many({'set_id':id,'kind':{'$in':['smart_prepare','smart_page','ai_solution']},'status':'failed'}, {'$set':{'status':'queued','attempts':0,'next_run_at':0,'error':''}})
-    await db.tejas_ai_solutions.update_many({'auto_import_id':id,'state':'failed'},{'$set':{'state':'queued','issues':[]}})
+    await db.tejas_jobs.update_many({'set_id':id,'kind':{'$in':['smart_prepare','smart_page']},'status':'failed'}, {'$set':{'status':'queued','attempts':0,'next_run_at':0,'error':''}})
     await db.tejas_smart_imports.update_one({'id':id},{'$set':{'state':'extracting' if record.get('processed_pages',0)<record.get('pages',1) else 'solving','message':'Retrying safely from saved progress.'}})
     await reconcile(id)
     from .jobs import drain_for
@@ -320,6 +319,11 @@ async def extract_page(job):
 async def reconcile(id):
     record=await db.tejas_smart_imports.find_one({'id':id},{'_id':0})
     if not record or record.get('processed_pages',0)<record.get('pages',1):return
+    from .mock_solutions import AI_SOLVING_PAUSED, PAUSE_MESSAGE
+    if AI_SOLVING_PAUSED:
+        if record.get('state') not in ('complete','complete_with_issues'):
+            await db.tejas_smart_imports.update_one({'id':id},{'$set':{'state':'solving_paused','message':PAUSE_MESSAGE}})
+        return
     if record.get('question_count',0)>record.get('max_ai_questions',300):
         await db.tejas_smart_imports.update_one({'id':id},{'$set':{'state':'budget_required','message':'All questions were extracted without truncation. Approve the detected AI workload before solving.'}});return
     papers=await db.tejas_smart_papers.find({'import_id':id},{'_id':0}).limit(100).to_list(100)
