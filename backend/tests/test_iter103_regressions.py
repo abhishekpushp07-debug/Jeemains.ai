@@ -50,6 +50,11 @@ async def _cleanup():
     await db.tejas_question_reports.delete_many({'set_id': {'$regex': '^' + TAG}})
     await db.tejas_ledgers.delete_many({'id': {'$regex': '^' + TAG}})
     await db.tejas_jobs.delete_many({'$or': [{'set_id': {'$regex': '^' + TAG}}, {'payload.attempt_id': {'$regex': '^' + TAG}}]})
+    # iter104: cohorts created by legacy-receipt submit were left orphaned
+    cohort_ids = [c['id'] async for c in db.tejas_cohorts.find({'set_id': {'$regex': '^' + TAG}}, {'id': 1})]
+    await db.tejas_cohort_entries.delete_many({'cohort_id': {'$in': cohort_ids}})
+    await db.tejas_cohort_snapshots.delete_many({'cohort_id': {'$in': cohort_ids}})
+    await db.tejas_cohorts.delete_many({'id': {'$in': cohort_ids}})
     if PACKS:
         await db.tejas_packs.delete_many({'_id': {'$in': list(PACKS)}})
 
@@ -182,3 +187,26 @@ class TestReportGroup:
 
     def test_student_forbidden(self, student):
         assert student.get(BASE_URL + self.G + 'a|1|b|c').status_code == 403
+
+
+    # iter104: explicit-null hash must also survive old list, priorities round-trip and review update
+    def test_explicit_null_list_priorities_review(self, owner):
+        S = f'{TAG}-rnull2'
+        rid = rep(S, 'qY', 'u1', source_hash=None)
+        lst = owner.get(f'{BASE_URL}/api/studio/question-reports?status=all')
+        assert lst.status_code == 200, lst.text[:200]
+        page, found = 1, None
+        while True:
+            d = body(owner.get(f'{BASE_URL}/api/studio/question-reports?status=open&page={page}'))
+            found = next((i for i in d['items'] if i['id'] == rid), None)
+            if found or page * 30 >= d['total']: break
+            page += 1
+        assert found and found['source_hash'] == '' and 'user_id' not in found
+        pr = body(owner.get(f'{BASE_URL}/api/studio/question-report-priorities?status=open'))
+        mine = [i for i in pr['items'] if i['set_id'] == S]
+        assert mine and mine[0]['group_id'] == f'{S}|1|qY|'
+        assert self.g(owner, mine[0]['group_id']).status_code == 200
+        rv = owner.post(f'{BASE_URL}/api/studio/question-reports/{rid}/review', json={'status': 'resolved', 'note': 'TEST'})
+        assert rv.status_code == 200 and body(rv)['status'] == 'resolved'
+        g = body(self.g(owner, mine[0]['group_id']))
+        assert g['items'][0]['status'] == 'resolved'

@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration 104 final retest of the iteration-103 batch. Backend, run serially with -n0 -p no:asyncio after fixture cleanup: test_iter103_regressions.py 8/8 passed (the 7 expected plus 1 new test I added), test_my_tests_journey.py 12/12, test_manual_solve_reports.py 19/19. The explicit source_hash=null fix works: group detail returns 200, the old /studio/question-reports list returns source_hash '' with no user_id, priorities gives group_id 'S|1|q|' and round-trips, and a review update persists. Student requests get 403 and foreign attempts get 404. Preservation holds: 144 sets, 11800 questions, solutions 5939 ready / 1161 paused, 3 tejas_jobs (all done), no TEST_* attempts/sets/jobs/reports/saved/cohorts left. No model or provider calls. UI, using seeded fixtures (since cleaned), at 1920x800 and 390x844: (1) SetDetail on a set with no numeric_rule shows 3 list items and no blank bullet. (2) The home corner reads '0N / CHOOSE EXAM', nowrap, one line 13px high, inside the card at both widths. (3) The progress chart legend has paddingTop 14px with an 11px gap below the 'Mock attempt #' label at both widths; 10 points. (4) Typography unchanged: 66% gauge Roboto Mono 700 40px; 165 / 250 and 90% at 26px desktop / 22px mobile. (5) MyTests calendar at 390, tested with real touch taps (hasTouch context): day and nav cells 44x44; popover x=35..369 / 48..382 and y=322..713, inside both edges. Tap select sets start=2026-10-20. Keyboard select (focus, ArrowRight, Enter) sets end=2026-10-06, which shows 'Start date must be before the end date.' with Retry and Clear dates. Clear dates removes start/end/page, keeps tab/exam=JEE Main/q=TEST_JR, the error disappears and the list reloads (17 attempts); both triggers reset to 'Choose date'. The per-popover Clear date also works. No horizontal overflow. (6) Card accuracy: retake 25/40 card shows 62.5% and the comparison dialog row shows 50% vs 62.5%, delta +12.5 accuracy points and +55 marks. The COMEDK 0/0 card shows 'Accuracy unavailable'. BITSAT 10/20 = 50% and 60/90 = 66.7%. (7) Studio groups: same question with hash A/B/null gives 3 separate groups. Pagination testids carry the full group_id and are unique; Next goes to 2/2 and Previous is enabled. The legacy group shows 'Legacy source identity not recorded'; singular '1 profile' / '1 report'. The Reviewing action moves the report (filter shows Reviewing 1, Reopen button appears). Dates use en-IN ('22 Oct 2026, 9:55 pm'). No overflow at 390.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tests/test_iter103_regressions.py _cleanup (test-only)", "issue": "Did not delete tejas_cohorts/cohort_entries created by the legacy-receipt submit test. 6 orphan TEST_R103_*-legacy cohorts plus 6 entries had built up from iteration 103 and this run. Fixed in the test file and purged; verified 0 remain after a rerun."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter103_regressions.py",
+    "/app/backend/tests/test_my_tests_journey.py",
+    "/app/backend/tests/test_manual_solve_reports.py",
+    "/app/test_reports/pytest/iter104_regressions.xml",
+    "/app/test_reports/pytest/iter104_journey.xml",
+    "/app/test_reports/pytest/iter104_reports.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "question_reports.report_group splits group_id on '|'. A set_id or question_id containing '|' would make the group unaddressable (404). Fine for current UUID-style ids; consider a separator-safe encoding if ids can ever carry '|'.",
+    "pause_baseline_check.py reports tejas_attempts MATCH=False because one genuine non-QA learner attempt exists (phone +91700418xxxx, created 2026-10-22 21:27 UTC, after the baseline). It is real preview usage, not a test fixture, and was left untouched. The baseline file needs refreshing if attempts are expected to be static."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter103_regressions.py (cleanup now deletes cohorts/entries/snapshots by TAG; added test_explicit_null_list_priorities_review)"
+  ],
+  "success_rate": {"backend": "100% (39/39)", "frontend": "100% of requested flows"},
+  "seed_data_creation": "Seeded seed_ui_journey.py seed plus seed_ui_real_attempts.py (TEST_JR_43f048cc) and 44 TEST_JR Studio reports for the pagination/hash-group UI. All removed with seed_ui_journey.py cleanup; verified 0 TEST_* rows in attempts/sets/jobs/reports/saved/cohorts.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run backend suites serially with -n0 -p no:asyncio, and only after `cd backend/tests && python seed_ui_journey.py cleanup`. Expected: iter103 8/8, journey 12/12, manual_solve_reports 19/19. For touch testing use page.context.browser.new_context(has_touch=True, is_mobile=True). The owner password is read from backend/.env ADMIN_PASSWORD inside scripts; never print it. Known limitations (unchanged, intentional): no verified marks-rank dataset (numeric rank unavailable by design), no production release, security audit remediation still pending. The one real learner attempt (+91700418xxxx) must not be deleted.",
+  "test_credentials": "memory/test_credentials.md: owner email + password (backend/.env ADMIN_PASSWORD); students 9900000196 / 9900000197, phone-only."
+}
