@@ -84,9 +84,9 @@ def eligible(q):
         return False
     if q.get('type') not in ('mcq', 'integer') or not q.get('answer'):
         return False
-    if q.get('type') == 'mcq' and q['answer'] not in q.get('options', {}):
+    if q.get('type') == 'mcq' and q['answer'] not in (q.get('options') or {}):
         return False
-    return bool(q.get('q_refs')) if q.get('render_mode') == 'source' else bool(q.get('text', '').strip())
+    return bool(q.get('q_refs')) if q.get('render_mode') == 'source' else bool((q.get('text') or '').strip())
 
 
 def job_id(set_id, q):

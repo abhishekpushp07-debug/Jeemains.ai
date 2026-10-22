@@ -19,7 +19,7 @@ export const ManualSolve = ({setId}) => {
   {data&&<p role="status" data-testid={'solve-status-'+setId}><b>{data.missing}</b> eligible missing · {data.owner_saved} supplied · {data.ai_saved} AI saved{data.queued+data.solving>0?` · ${data.queued} queued · ${data.solving} solving`:''}{data.blocked>0?` · ${data.blocked} need source/key checks`:''}</p>}
   {data?.errors.map((text,i)=><p className="warning-text" data-testid={`solve-failure-${setId}-${i}`} key={i}>{text}</p>)}
   {error&&<p role="alert" className="warning-text" data-testid={'solve-error-'+setId}>{error}</p>}</div>
-  <div className="manual-solve-actions"><Button data-testid={'solve-button-'+setId} disabled={busy||!data||data.missing===0} onClick={solve}>{busy?<Loader2 size={16} className="spin"/>:<Sparkles size={16}/>} {data?.failed?'Retry missing solutions':'Solve with AI'}</Button><Button variant="ghost" onClick={load} data-testid={'solve-refresh-'+setId} aria-label="Refresh solution status"><RefreshCw size={16}/></Button></div>
+  <div className="manual-solve-actions"><Button data-testid={'solve-button-'+setId} disabled={busy||!data||data.missing===0} onClick={solve}>{busy?<Loader2 size={16} className="spin"/>:<Sparkles size={16}/>} {data?.queued||data?.solving?'Solving in background':data?.missing===0?'Nothing to solve':data?.failed?'Retry missing solutions':'Solve with AI'}</Button><Button variant="ghost" onClick={load} data-testid={'solve-refresh-'+setId} aria-label="Refresh solution status"><RefreshCw size={16}/></Button></div>
   <small className="manual-solve-usage" data-testid={'solve-usage-'+setId}>Uses your AI balance and daily processing allowance. Automatic generation stays off; progress continues if you leave this page.</small>
  </section>;
 };

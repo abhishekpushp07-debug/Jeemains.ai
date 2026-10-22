@@ -358,3 +358,126 @@ class TestReportsApi:
         set_after = run(db.tejas_sets.find_one({'id': sid}))
         assert set_after['questions'][1]['answer'] == 'B'
         assert run(db.tejas_manual_solves.count_documents({'set_id': sid})) == 0
+
+
+# ---------- Iteration 99 additions: None-safety, 403 cleartext, source owner preservation, reviewer denial,
+# ---------- maintenance recovery only from durable consent, provider_failure safe classification ----------
+import logging
+from tejas import astra as A
+from tejas.auth import owner as owner_dep, staff as staff_dep
+
+
+class TestIter99:
+    def test_none_fields_safe(self):
+        for kw in ({'solution': None}, {'solution_accessible_text': None}, {'solution': None, 'solution_accessible_text': None},
+                   {'solution_kind': 'answer_key_only', 'solution': None, 'solution_accessible_text': None}):
+            q = mcq(1, **kw)
+            assert M.preserved(q) is None and M.eligible(q), kw
+        # None question text must not crash eligibility (text-mode)
+        try:
+            r = M.eligible(mcq(2, text=None))
+        except AttributeError as e:
+            pytest.fail(f'eligible() crashes on text=None: {e}')
+        assert r is False
+        assert M.eligible(mcq(3, options=None)) is False
+
+    def test_none_fields_via_status_endpoint(self, owner_user):
+        sid = put_set([mcq(1, solution=None, solution_accessible_text=None), mcq(2, solution_accessible_text=None, solution='typed')])
+        st = run(M.solve_status(sid, owner_user))
+        assert st['missing'] == 1 and st['owner_saved'] == 1
+
+    def test_source_image_owner_solution_preserved(self, owner_user, mocked):
+        src_owner = mcq(1, render_mode='source', q_refs=[{'file_id': 'f', 'page': 1}], s_refs=[{'file_id': 'f', 'page': 2}], text='')
+        src_key = mcq(2, render_mode='source', q_refs=[{'file_id': 'f'}], s_refs=[{'file_id': 'k'}], text='', solution_kind='answer_key_only',
+                      solution='Supplied answer key: B. This book does not contain a worked solution.')
+        assert M.preserved(src_owner) == 'owner' and not M.eligible(src_owner)
+        assert M.preserved(src_key) is None and M.eligible(src_key)
+        sid = put_set([src_owner])
+        with mock.patch.object(M, 'dispatch_manual', mock.AsyncMock()):
+            r = run(M.request_solve(sid, M.SolvePayload(request_id='TEST-src-' + uuid.uuid4().hex), BG(), owner_user))
+        assert r['owner_saved'] == 1 and r['queued'] == 0 and run(db.tejas_manual_solves.count_documents({'set_id': sid})) == 0
+        run(M.run_manual()); assert mocked.call_count == 0
+
+    def test_invalid_owner_cleartext(self, owner_user, mocked):
+        sid = put_set([mcq(1)])
+        with mock.patch.object(M, 'dispatch_manual', mock.AsyncMock()):
+            run(M.request_solve(sid, M.SolvePayload(request_id='TEST-clr-' + uuid.uuid4().hex), BG(), owner_user))
+        with mock.patch.object(M.users, 'find_one', mock.AsyncMock(return_value=dict(owner_user, role='reviewer'))):
+            run(M.run_manual())
+        j = run(db.tejas_manual_solves.find_one({'set_id': sid}))
+        assert mocked.call_count == 0 and j['state'] == 'failed'
+        assert 'no longer valid' in j['error'] and 'Click Solve to retry' not in j['error'], j['error']
+        st = run(M.overview(run(M.paper(sid))))
+        assert st['errors'] and 'no longer valid' in st['errors'][0]
+
+    def test_reviewer_role_denied(self, owner_user):
+        rev = dict(owner_user, id=TAG + '-rev', role='reviewer')
+        assert run(staff_dep(rev))['role'] == 'reviewer'
+        with pytest.raises(HTTPException) as e:
+            run(owner_dep(rev))
+        assert e.value.status_code == 403
+        stu = dict(owner_user, id=TAG + '-stu', role='student')
+        with pytest.raises(HTTPException) as e2:
+            run(staff_dep(stu))
+        assert e2.value.status_code == 403
+
+    def test_maintenance_dispatch_only_durable_consent(self):
+        sid = put_set([mcq(1)])
+        base = {'set_id': sid, 'question_id': 'x', 'number': 1, 'fingerprint': 'f', 'requested_by': 'u', 'request_id': 'r',
+                'requested_at': M.now(), 'tries': 0}
+        pre = run(db.tejas_manual_solves.count_documents({'trigger': 'owner_solve', '$or': [{'state': 'queued'}, {'state': 'solving', 'lease_until': {'$lt': M.now()}}]}))
+        if pre:
+            pytest.skip('real pending owner_solve rows exist; not safe to assert')
+        with mock.patch.object(M.subprocess, 'Popen') as P:
+            run(M.dispatch_manual()); assert P.call_count == 0, 'spawned without consent'
+            run(db.tejas_manual_solves.insert_one({'_id': TAG + '-auto', **base, 'trigger': 'auto', 'state': 'queued'}))
+            run(M.dispatch_manual()); assert P.call_count == 0, 'non-owner trigger dispatched'
+            run(db.tejas_manual_solves.insert_one({'_id': TAG + '-live', **base, 'trigger': 'owner_solve', 'state': 'solving', 'lease_until': M.now() + 300}))
+            run(M.dispatch_manual()); assert P.call_count == 0, 'live lease dispatched'
+            run(db.tejas_manual_solves.insert_one({'_id': TAG + '-q', **base, 'trigger': 'owner_solve', 'state': 'queued'}))
+            run(M.dispatch_manual()); assert P.call_count == 1
+            assert '--manual' in P.call_args[0][0]
+        # claim never picks non-owner triggers
+        run(db.tejas_manual_solves.delete_many({'_id': {'$in': [TAG + '-q', TAG + '-live']}}))
+        assert run(M.claim_manual()) is None
+        run(db.tejas_manual_solves.delete_many({'set_id': sid}))
+
+    def test_provider_failure_safe(self, caplog):
+        SECRET, SRC = 'sk-emergent-SECRETMARKER123', 'SOURCEQUESTIONMARKER'
+        class E(Exception):
+            def __init__(self, msg, status=None):
+                super().__init__(msg); self.status_code = status
+        cases = [(E(f'insufficient balance {SECRET} {SRC}', 400), 'provider_budget'),
+                 (E(f'denied {SECRET}', 401), 'provider_access'),
+                 (E(f'model_not_found {SRC}'), 'provider_model'),
+                 (E('slow down', 429), 'provider_rate_limit'),
+                 (E(f'boom {SRC}', 503), 'provider_connection'),
+                 (E(f'weird {SECRET} max_tokens unsupported param response_format'), 'provider_response')]
+        for exc, code in cases:
+            caplog.clear()
+            with caplog.at_level(logging.WARNING, logger=A.__name__):
+                try:
+                    raise RuntimeError('wrapper ChatError') from exc
+                except RuntimeError as outer:
+                    out = A.provider_failure(outer)
+            log = caplog.text
+            assert isinstance(out, A.AstraUnavailable)
+            assert f'category={code}' in log, (code, log)
+            assert SECRET not in log and SRC not in log and SECRET not in str(out) and SRC not in str(out)
+        assert "'max_tokens'" in log and "'response_format'" in log
+        # nested status discovered through __cause__
+        caplog.clear()
+        with caplog.at_level(logging.WARNING, logger=A.__name__):
+            try:
+                raise ValueError('outer') from E('inner', 403)
+            except ValueError as v:
+                A.provider_failure(v)
+        assert 'status=403' in caplog.text and 'provider_access' in caplog.text
+
+    def test_call_wraps_sdk_error_without_secret(self, caplog):
+        with mock.patch.dict(os.environ, {'EMERGENT_LLM_KEY': 'sk-fake-KEYMARK999'}), \
+             mock.patch.object(A._ObservedChat, 'send_message', side_effect=RuntimeError('ChatError sk-fake-KEYMARK999 SRCMARK')):
+            with caplog.at_level(logging.WARNING, logger=A.__name__):
+                with pytest.raises(A.AstraUnavailable):
+                    A._call('sys', 'SRCMARK text', [], None, 10, runner=lambda c: c if not asyncio.iscoroutine(c) else (c.close(), (_ for _ in ()).throw(RuntimeError('ChatError sk-fake-KEYMARK999 SRCMARK')))[1])
+        assert 'KEYMARK999' not in caplog.text and 'SRCMARK' not in caplog.text and 'category=' in caplog.text

@@ -512,7 +512,7 @@ export default function Player() {
           their saved response.
         </p>
       </Confirm>
-      {bonusRule && <BonusConfirm open={bonusConfirm} onClose={() => setBonusConfirm(false)} onConfirm={doEnterBonus} busy={enteringBonus} rule={bonusRule} />}
+      {bonusRule && <BonusConfirm open={bonusConfirm} onClose={() => setBonusConfirm(false)} onConfirm={doEnterBonus} busy={enteringBonus} rule={bonusRule} marking={a.rules} />}
       <Confirm open={exitOpen} onClose={()=>setExitOpen(false)} title="Leave this test for now?" button="Leave test" onConfirm={()=>nav(safeExamReturn(location.state?.returnTo,examPath(a.exam)+'/results'))}>
         <p>Your original timer keeps running. Server-saved answers remain; {nPending} local draft(s) are not yet acknowledged. Resume this same attempt from My results.</p>
       </Confirm>

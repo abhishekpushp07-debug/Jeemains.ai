@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="19" time="6.484" timestamp="2026-10-22T19:59:28.318971+00:00" hostname="agent-env-b5db9c85-491c-49ae-8045-4d4ad3e55f9b"><testcase classname="tests.test_manual_solve_reports.TestEligibility" name="test_rules" time="0.372" /><testcase classname="tests.test_manual_solve_reports.TestEligibility" name="test_none_solution_does_not_crash" time="0.000" /><testcase classname="tests.test_manual_solve_reports.TestManualWorker" name="test_request_idempotent_and_preserves" time="0.082" /><testcase classname="tests.test_manual_solve_reports.TestManualWorker" name="test_failed_requires_new_request" time="0.092" /><testcase classname="tests.test_manual_solve_reports.TestManualWorker" name="test_concurrent_owner_edit_wins" time="0.072" /><testcase classname="tests.test_manual_solve_reports.TestManualWorker" name="test_revoked_owner_and_forged_job_rejected" time="0.022" /><testcase classname="tests.test_manual_solve_reports.TestManualWorker" name="test_stale_lease_cannot_write" time="0.067" /><testcase classname="tests.test_manual_solve_reports.TestManualWorker" name="test_cli_default_noop" time="0.622" /><testcase classname="tests.test_manual_solve_reports.TestSolveApi" name="test_auth_and_contract" time="1.809" /><testcase classname="tests.test_manual_solve_reports.TestSolveApi" name="test_import_guard_exemption_exact" time="0.258" /><testcase classname="tests.test_manual_solve_reports.TestReportsApi" name="test_report_flows" time="2.116" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_none_fields_safe" time="0.000"><failure message="Failed: eligible() crashes on text=None: 'NoneType' object has no attribute 'strip'">self = &lt;test_manual_solve_reports.TestIter99 object at 0xffa7a1319b50&gt;
+
+    def test_none_fields_safe(self):
+        for kw in ({'solution': None}, {'solution_accessible_text': None}, {'solution': None, 'solution_accessible_text': None},
+                   {'solution_kind': 'answer_key_only', 'solution': None, 'solution_accessible_text': None}):
+            q = mcq(1, **kw)
+            assert M.preserved(q) is None and M.eligible(q), kw
+        # None question text must not crash eligibility (text-mode)
+        try:
+&gt;           r = M.eligible(mcq(2, text=None))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_manual_solve_reports.py:378: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+q = {'id': 'TEST_MS_92c063fe-q2-fe6c', 'number': 2, 'subject': 'Physics', 'type': 'mcq', ...}
+
+    def eligible(q):
+        if preserved(q):
+            return False
+        if q.get('type') not in ('mcq', 'integer') or not q.get('answer'):
+            return False
+        if q.get('type') == 'mcq' and q['answer'] not in q.get('options', {}):
+            return False
+&gt;       return bool(q.get('q_refs')) if q.get('render_mode') == 'source' else bool(q.get('text', '').strip())
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'strip'
+
+tejas/manual_solutions.py:89: AttributeError
+
+During handling of the above exception, another exception occurred:
+
+self = &lt;test_manual_solve_reports.TestIter99 object at 0xffa7a1319b50&gt;
+
+    def test_none_fields_safe(self):
+        for kw in ({'solution': None}, {'solution_accessible_text': None}, {'solution': None, 'solution_accessible_text': None},
+                   {'solution_kind': 'answer_key_only', 'solution': None, 'solution_accessible_text': None}):
+            q = mcq(1, **kw)
+            assert M.preserved(q) is None and M.eligible(q), kw
+        # None question text must not crash eligibility (text-mode)
+        try:
+            r = M.eligible(mcq(2, text=None))
+        except AttributeError as e:
+&gt;           pytest.fail(f'eligible() crashes on text=None: {e}')
+E           Failed: eligible() crashes on text=None: 'NoneType' object has no attribute 'strip'
+
+tests/test_manual_solve_reports.py:380: Failed</failure></testcase><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_none_fields_via_status_endpoint" time="0.003" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_source_image_owner_solution_preserved" time="0.009" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_invalid_owner_cleartext" time="0.013" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_reviewer_role_denied" time="0.000" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_maintenance_dispatch_only_durable_consent" time="0.010" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_provider_failure_safe" time="0.001" /><testcase classname="tests.test_manual_solve_reports.TestIter99" name="test_call_wraps_sdk_error_without_secret" time="0.373" /></testsuite></testsuites>

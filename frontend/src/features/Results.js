@@ -519,10 +519,10 @@ export default function Results() {
                   state={r.review?.states?.[q.id]} categories={r.review?.categories} assigned={r.review?.assigned?.includes(q.id)}
                   confidence={r.confidence_observations?.[q.id]?.probability} excluded={r.confidence_changed_questions?.includes(q.id)}
                   solutionPending={solutionState[q.id]!=='saved'} onSaved={refreshAnalytics}/>
-                <div className="matched-solution">
+                {(q.solution_kind==='answer_key_only'||q.solution||q.s_refs?.length||q.solution_accessible_text)&&<div className="matched-solution">
                   <div className="solution-title">
                     <FileIcon />
-                    <h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':'Matched solution'} · Q{q.solution_number}</h3>
+                    <h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':'Supplied solution'} · Q{q.solution_number??q.number}</h3>
                     {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
                     <Badge>Matched to this frozen version</Badge>
                   </div>
@@ -532,7 +532,7 @@ export default function Results() {
                     base={`/attempts/${id}/questions/${q.id}`}
                     gradeVersion={scoreVersion}
                   />
-                </div>
+                </div>}
                 <AiSolution item={extras.ai[q.id]} number={q.number} />
                 <QuestionReport key={"solution-report-"+q.id} attemptId={id} questionId={q.id} number={q.number} context="solutions" />
               </div>
