@@ -263,3 +263,13 @@
 .result-destinations [role='tablist'] { height:auto; background:transparent; }
 .result-destinations button { white-space:normal; }
 @media(max-width:640px) { .result-destinations { position:static; } .result-destinations [role='tablist'] { width:100%; display:flex; } .result-destinations>button { width:100%; } }
+
+
+.solve-test-options { width:var(--radix-select-trigger-width); max-width:calc(100vw - 24px); }
+.solve-test-options [role='option'] { white-space:normal; overflow-wrap:anywhere; min-width:0; }
+.solve-test-options [role='option']>span:last-child { min-width:0; white-space:normal; overflow-wrap:anywhere; }
+.question-report .question-report-ack { display:flex; align-items:center; gap:.4rem; min-height:36px; padding:0 .25rem; }
+.question-report-ack svg { flex-shrink:0; }
+.review-question>.question-report { padding:.35rem 1rem; margin:0; }
+.results-page .filter-tabs>button,[data-testid='student-question-reports'] .filter-tabs>button { border:1px solid var(--line); border-radius:999px; padding:.55rem .9rem; min-height:42px; }
+.results-page .filter-tabs>button.active,[data-testid='student-question-reports'] .filter-tabs>button.active { background:var(--brand-soft); color:var(--brand-text); border-color:var(--brand-text); }

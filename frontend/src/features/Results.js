@@ -15,7 +15,6 @@ import {
   Flag,
   ChevronDown,
   ShieldCheck,
-  ArrowUpRight,
 } from "lucide-react";
 import { api, post } from "../lib/api";
 import { useAuth } from "../lib/auth";
@@ -254,7 +253,7 @@ export default function Results() {
           </div>
         </section>
       )}
-      <div className="results-review-shortcuts" data-testid="results-review-shortcuts"><p data-testid="results-attempt-immutable-notice"><ShieldCheck size={16}/> Your submitted answers are sealed. Review notes won’t change your score.</p><Button variant="outline" data-testid="results-jump-review" onClick={()=>changeView('solutions')}>Solutions <ArrowUpRight size={16}/></Button></div>
+      <div className="results-review-shortcuts" data-testid="results-review-shortcuts"><p data-testid="results-attempt-immutable-notice"><ShieldCheck size={16}/> Your submitted answers are sealed. Review notes won’t change your score.</p></div>
       {r.questions.every(q=>q.solution_kind==='answer_key_only')&&<p className="results-key-notice" data-testid="results-answer-keys-only-disclosure">The source supplies official keys, not worked solutions. Saved owner or AI explanations appear in Solutions where available.</p>}
       <div className="results-summary" data-testid="results-summary-tiles">
         <div className="score-card">
@@ -535,7 +534,7 @@ export default function Results() {
                   />
                 </div>
                 <AiSolution item={extras.ai[q.id]} number={q.number} />
-                <QuestionReport attemptId={id} questionId={q.id} number={q.number} context="solutions" />
+                <QuestionReport key={"solution-report-"+q.id} attemptId={id} questionId={q.id} number={q.number} context="solutions" />
               </div>
             )}
           </article>

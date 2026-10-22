@@ -153,7 +153,7 @@ export default function Player() {
   return (
     <QuestionReportsProvider attemptId={id}><div className="player-layout">
       <header className="player-header">
-        <div onClick={e=>{e.preventDefault();setExitOpen(true)}}><Logo /></div>
+        <div onClickCapture={e=>{e.preventDefault();setExitOpen(true)}}><Logo testId="player-logo" /></div>
         <div className="player-title">
           <strong>{a.title}</strong>
           <span>
@@ -423,7 +423,7 @@ export default function Player() {
             >
               <RotateCcw size={14} /> Clear response
             </Button>
-            <QuestionReport key={q.id} attemptId={id} questionId={q.id} number={q.number} context="attempt" />
+            <QuestionReport key={"report-"+q.id} attemptId={id} questionId={q.id} number={q.number} context="attempt" />
             <PlayerConfidencePanel
               key={q.id}
               questionId={q.id}

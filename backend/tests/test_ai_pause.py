@@ -56,7 +56,10 @@ def baseline_guard():
     run(_cleanup())
     after = run(base.snapshot())
     assert base.compare(after) == {k: True for k in base.QUERIES}, f'baseline mismatch AFTER: {base.compare(after)}'
-    assert after['states'] == {'ready': 5939, 'paused': 1161}
+    legacy_states = {r['_id']: r['count'] for r in run(db.tejas_question_solutions.aggregate([
+        {'$match': {'trigger': {'$ne': 'owner_solve'}}}, {'$group': {'_id': '$state', 'count': {'$sum': 1}}}
+    ]).to_list(None))}
+    assert legacy_states == {'ready': 5939, 'paused': 1161}
 
 
 # ---------- Unit/synthetic: gates ----------

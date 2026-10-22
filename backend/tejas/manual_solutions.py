@@ -71,10 +71,10 @@ def preserved(q):
     if q.get('solution_kind') == 'answer_key_only':
         placeholder = f"Supplied answer key: {q.get('answer', '')}. This book does not contain a worked solution."
         accessible = f"Supplied key {q.get('answer', '')}; no worked solution provided."
-        if q.get('solution', '').strip() not in ('', placeholder) or q.get('solution_accessible_text', '').strip() not in ('', accessible):
+        if (q.get('solution') or '').strip() not in ('', placeholder) or (q.get('solution_accessible_text') or '').strip() not in ('', accessible):
             return 'owner'
         return None  # s_refs in these books are key crops, not worked explanations.
-    if q.get('solution', '').strip() or q.get('s_refs') or q.get('solution_accessible_text', '').strip():
+    if (q.get('solution') or '').strip() or q.get('s_refs') or (q.get('solution_accessible_text') or '').strip():
         return 'owner'
     return None
 
@@ -262,6 +262,9 @@ async def run_manual():
         try:
             await solve_manual(j)
         except Exception as exc:
-            message = str(exc) if isinstance(exc, (AstraUnavailable, ValueError)) else 'Processing could not finish. Click Solve to retry missing solutions.'
+            if isinstance(exc, HTTPException) and exc.status_code == 403:
+                message = 'Owner access or the original Solve request is no longer valid. No generation was permitted.'
+            else:
+                message = str(exc) if isinstance(exc, (AstraUnavailable, ValueError)) else 'Processing could not finish. Click Solve to retry missing solutions.'
             logging.getLogger(__name__).warning('Manual solution failed (%s)', type(exc).__name__)
             await finish_job(j, 'failed', error=message[:400])

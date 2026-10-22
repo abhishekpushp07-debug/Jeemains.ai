@@ -72,6 +72,33 @@ class _ObservedChat(LlmChat):
         return response
 
 
+def provider_failure(exc):
+    """Classify an upstream error without persisting provider text, prompts or secrets."""
+    chain, current = [], exc
+    for _ in range(4):
+        if current is None or any(current is x for x in chain):
+            break
+        chain.append(current)
+        current = current.__cause__ or current.__context__
+    status = next((getattr(e, 'status_code', None) for e in chain if isinstance(getattr(e, 'status_code', None), int)), None)
+    text = ' '.join(str(e).lower() for e in chain)
+    if status == 402 or any(x in text for x in ('insufficient_quota', 'insufficient balance', 'credit balance', 'budget exceeded')):
+        code, message = 'provider_budget', 'AI provider balance or spending allowance is unavailable. Existing solutions are safe; no automatic retry will run.'
+    elif status in (401, 403) or any(x in text for x in ('invalid api key', 'authenticationerror')):
+        code, message = 'provider_access', 'AI provider access was rejected. Access must be restored before retrying this test.'
+    elif any(x in text for x in ('model_not_found', 'model not found', 'model does not exist', 'unsupported model')):
+        code, message = 'provider_model', 'The selected gpt-6-astra model is unavailable. No substitute model or answer was used.'
+    elif status == 429:
+        code, message = 'provider_rate_limit', 'The AI provider is rate-limiting requests. No automatic retry will run.'
+    elif status and status >= 500 or any(x in text for x in ('timeout', 'timed out', 'connectionerror', 'fault filter abort')):
+        code, message = 'provider_connection', 'The AI provider could not be reached reliably. No solution was saved and no automatic retry will run.'
+    else:
+        code, message = 'provider_response', 'AI could not return a validated response. No explanation was saved; existing test content is unchanged.'
+    diagnostics = [name for name in ('max_tokens', 'max_completion_tokens', 'response_format', 'temperature', 'json_schema', 'unsupportedparams', 'validationerror') if name in text]
+    logging.getLogger(__name__).warning('Astra request failed: category=%s status=%s type=%s parameter_markers=%s', code, status, type(exc).__name__, diagnostics)
+    return AstraUnavailable(message)
+
+
 def _call(system, text, images, schema, max_tokens, timeout=80, runner=asyncio.run):
     key = os.environ.get('EMERGENT_LLM_KEY', '')
     if not key:
@@ -90,9 +117,7 @@ def _call(system, text, images, schema, max_tokens, timeout=80, runner=asyncio.r
     except AstraUnavailable:
         raise
     except Exception as exc:
-        # Provider bodies can contain credentials or source text. Retain neither.
-        logging.getLogger(__name__).warning('Astra request failed safely (%s)', type(exc).__name__)
-        raise AstraUnavailable('Astra could not return a validated response. The question remains private; retry is available.') from None
+        raise provider_failure(exc) from None
 
 
 async def ask(system, text, images=(), schema=None, max_tokens=6000):
