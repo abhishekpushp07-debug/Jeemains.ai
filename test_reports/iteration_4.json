@@ -1,0 +1,49 @@
+{
+  "summary": "Iteration 4 tested the AI Rival duel, coin shop, equip/avatar, daily quests and streak freeze, on both backend and frontend. Backend: 31/31 pytest passed, including 8 new tests in test_rf_shop_bot.py. Every feature in the request works from start to finish. Two real UI bugs hurt the features the user asked for: (1) the live duel scores at the top are almost always shrunk to 7-22% size, so they can't be read; (2) the RIGHT/WRONG verdict is often cut short to about 200 ms because the poll moves to the next card early. A third, cosmetic bug: the default avatar icon 'account-astronaut' doesn't exist, so a '?' shows wherever no avatar was picked.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/duels/{id}/bot + award()", "issue": "A duel against the AI rival is a guaranteed win: +50 coins, +60 XP, and it counts toward wins, the q_duel quest, the first_win/champion_10 badges, the leaderboard and the duel record. Coins and rank can be farmed without limit (one bot duel took about a minute and paid 72 coins). Consider smaller rewards for bot duels and not counting them as PvP wins."},
+      {"endpoint": "duels.simulate_bot", "issue": "The bot paces itself at 5.5-9 s per card, but students answer much faster, so the bot sits near 0 for most of the duel. When the human finishes, it jumps straight to human-1 (observed: 1 at card 16, then 10 at the end against the human's 11). The live race feels flat, and the final score is nearly always a 1-point loss."},
+      {"endpoint": "GET /api/rf/profile (public_profile)", "issue": "The streak shows 0 when last_day was 2 days ago, even when the user owns a freeze that would keep the streak on their next play. The freeze also covers only one missed day, even if the user owns several."},
+      {"endpoint": "shop.AVATARS[0]", "issue": "'account-astronaut' is not in the MaterialDesignIcons glyphmap, so it renders as '?'. It is the default avatar for every user who never picked one, and the bot can also be given it at random. Reference: /app/backend/shop.py:19, /app/frontend/src/components/Entry.tsx:28"}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "VersusRow live scores", "issue": "Side is a component declared inside VersusRow (duel.tsx:310), so React unmounts and remounts it on every render. The 250 ms clock tick re-renders the screen, and each remount restarts ZoomIn on the score. Measured: duel-my-score transform scale 0.07-0.23 nearly all the time, about 6 px tall instead of 41 px. The live scores the user asked for can't be read, and the Avatar pulse restarts too. Fix: move Side to module level, or call it as a function {Side({p: me})}. Reference: /app/frontend/app/rapid/duel.tsx:310-326", "testID": "duel-my-score / duel-opp-score", "priority": "HIGH"},
+      {"component": "Duel verdict cut short", "issue": "The effect at duel.tsx:98-100 sets idx to me.answered as soon as a poll (every ~1.5 s) returns the updated answered count. That skips the 1100 ms feedback timeout. Measured: card 1's verdict stayed about 200 ms, card 2's the full 1100 ms. Fix: skip the resume-sync while fb is set, e.g. `if (me && me.answered > idx && !fb) setIdx(me.answered)`. Reference: /app/frontend/app/rapid/duel.tsx:98", "testID": "duel-verdict", "priority": "HIGH"},
+      {"component": "Default avatar '?'", "issue": "The missing icon 'account-astronaut' shows as '?' in rf-open-avatar, the shop frames previews, the first avatar tile and the duel avatars. Swap it for a valid icon such as 'account-circle' or 'rocket', and migrate stored values.", "testID": "rf-open-avatar, shop-avatar-account-astronaut", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Daily quest claim", "issue": "The claim button's catch {} swallows errors silently; the user gets no feedback on a 409. Reference: /app/frontend/app/(tabs)/rapid.tsx:107", "affected_testIDs": ["rf-quest-claim-*"]},
+      {"flow": "Store back", "issue": "shop-back calls router.back(), which does nothing when the store was opened by deep link or refresh, because there is no history. Use canGoBack() with a fallback to /rapid.", "affected_testIDs": ["shop-back"]}
+    ],
+    "design_issues": [
+      {"screen": "Arena Store", "issues": ["The arena theme preview (shop-preview-theme_*) shows only the avatar on a plain dark box; the theme gradient isn't previewed", "Pluralization: '1 streak freezes'", "rf-open-avatar opens the store on the Entry Effects tab, not the Avatars tab"]},
+      {"screen": "Duel", "issues": ["The AI RIVAL tag uses 9 px text, which is hard to read", "The waiting screen says 'We never fake an opponent'. That is still accurate because the rival is labelled, but consider rewording now that an AI rival is offered"]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_shop_bot.py", "/app/test_reports/pytest/pytest_results.xml", "/app/test_reports/pytest/pytest_iter4.xml"],
+  "action_items": [
+    "HIGH: Move VersusRow's inner Side component to module level, or render it via a function call, so the live scores stop remounting and replaying ZoomIn (duel.tsx:310)",
+    "HIGH: Stop the poll-driven idx sync (duel.tsx:98-100) from skipping the RIGHT/WRONG verdict while feedback is showing",
+    "MEDIUM: Replace the invalid default avatar 'account-astronaut' (shop.py AVATARS[0] and the Entry.tsx fallback) with a valid MDI icon, and migrate stored profiles",
+    "MEDIUM: Rebalance AI-rival rewards so they aren't farmable: smaller coins/XP, and no PvP wins, quests, badges or leaderboard credit",
+    "LOW: Show quest-claim errors; add a fallback for shop-back; preview arena theme colors; fix 'freezes' pluralization; open the Avatars tab from rf-open-avatar; make the bot's live pace keep it close to the human"
+  ],
+  "critical_code_review_comments": [
+    "Buy is atomic: one find_one_and_update with a coins >= price guard and an owned != id guard. Quest claim is also atomic, using a day_stats.claimed guard. Both look good.",
+    "Equip checks ownership and slot; avatar is checked against a whitelist. Item, equip and avatar endpoints take raw dicts rather than Pydantic models; consider typed models.",
+    "The bot's ms is set to the maximum and its winner logic is special-cased; a forfeit vs the bot means the bot wins. That is correct.",
+    "simulate_bot runs on every poll; this is fine for load."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_shop_bot.py (new)"],
+  "success_rate": {"backend": "100% (31/31)", "frontend": "~80%: all flows work, but the live score readability and the verdict-duration bugs undercut the requested features"},
+  "seed_data_creation": "TEST- profiles from pytest were cleaned up (0 left). Real test user 9000000002 (uid 9e552909-...) was changed by UI tests: claimed the q_correct and q_duel quests, bought streak_freeze and frame_gold (now equipped), avatar set to ninja, played 1 full bot duel (won) and forfeited 2 bot duels; coins are now 0.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "New test file: test_rf_shop_bot.py. It uses a throwaway TEST- uid with a Mongo cleanup fixture, and earns coins through all-correct solo sessions (answers are in the /api/rf/sessions response). pytest runs under xdist by default; add -n0 to see prints. Duel option testIDs are duel-option-0..3. To check score readability, read the computed transform on duel-my-score's parent. 9000000002 now has 0 coins, so UI buy tests need earning first.",
+  "rca_of_issue": "Score shrinking: inline component identity changes on every render, so the subtree remounts and the reanimated entering animation replays every 250 ms tick. Verdict cut short: the useEffect on me.answered advances idx before the 1100 ms setTimeout, and polls land inside that window about 70% of the time."
+}

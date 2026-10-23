@@ -7,7 +7,7 @@ import { useCached } from "@/src/useCached";
 import { Icon, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 
-export type GameProfile = { xp: number; level: number; level_floor: number; next_level_xp: number; coins: number; streak: number; best_streak: number; played_today: boolean; sessions: number; duels: number; wins: number; cards_correct: number; badges: { id: string; title: string; body: string; earned: boolean }[] };
+export type GameProfile = { xp: number; level: number; level_floor: number; next_level_xp: number; coins: number; streak: number; best_streak: number; played_today: boolean; sessions: number; duels: number; wins: number; cards_correct: number; badges: { id: string; title: string; body: string; earned: boolean }[]; avatar?: string; equipped?: Record<string, string | null>; owned?: string[]; freezes?: number; quests?: any[] };
 export type Reward = { xp: number; coins: number; streak: number; level_before: number; level_after: number; level_up: boolean; new_badges: { id: string; title: string; body: string }[] };
 
 export const BADGE_ICON: Record<string, any> = { first_sprint: "flag-checkered", first_win: "sword", streak_3: "fire", streak_7: "fire-circle", streak_30: "crown", sharpshooter: "target", perfect: "star-shooting", duelist_10: "sword-cross", champion_10: "trophy-award" };

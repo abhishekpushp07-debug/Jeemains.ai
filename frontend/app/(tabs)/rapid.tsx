@@ -6,13 +6,16 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
-import { useCached } from "@/src/useCached";
+import { invalidate, useCached } from "@/src/useCached";
 import { ErrorBox, Icon, IconName, Press, Skeleton, T } from "@/src/components/ui";
 import { BADGE_ICON, GameHUD, useGameProfile } from "@/src/components/game";
+import { Avatar } from "@/src/components/Entry";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 
 const pick = { subject: "Physics", chapter: "" as string };
+// Purchased arena themes (fixed artwork colours, identical in light/dark).
+const THEME_BG: Record<string, string> = { theme_inferno: "#1F0707", theme_ocean: "#03202B", theme_gold: "#1F1704" };
 const SUBJECTS: [string, string, IconName][] = [["Physics", "Physics", "atom"], ["Chemistry", "Chemistry", "flask-outline"], ["Mathematics", "Maths", "function-variant"]];
 
 function GChip({ label, active, count, onPress, testID, tint }: { label: string; active: boolean; count?: number; onPress: () => void; testID: string; tint: string }) {
@@ -66,11 +69,11 @@ export default function RapidHome() {
   const first = useRef(true);
   useFocusEffect(useCallback(() => {
     if (first.current) { first.current = false; return; }
-    hist.reload(); duels.reload(); prof.reload(); board.reload();
+    hist.reload(); duels.reload(); prof.reload(); board.reload(); invalidate(`u.${user?.id}.rfshop`);
   }, [hist.reload, duels.reload, prof.reload, board.reload])); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <ScrollView testID="rapid-fire-home" style={{ flex: 1, backgroundColor: colors.custom_gameBg }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xl, paddingHorizontal: space.lg, gap: space.lg }}
+    <ScrollView testID="rapid-fire-home" style={{ flex: 1, backgroundColor: THEME_BG[p?.equipped?.theme || ""] || colors.custom_gameBg }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xl, paddingHorizontal: space.lg, gap: space.lg }}
       refreshControl={<RefreshControl refreshing={false} onRefresh={reload} tintColor={colors.custom_neonAmber} />}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
         <Icon name="lightning-bolt" size={26} color={colors.custom_neonAmber} />
@@ -78,8 +81,41 @@ export default function RapidHome() {
           <T w="heavy" size={11} color={colors.custom_neonAmber} style={{ letterSpacing: 2 }}>RAPID FIRE ARENA</T>
           <T w="heavy" size={24} color={colors.onSurfaceInverse}>Recall. Race. Rise.</T>
         </View>
+        <Press testID="rf-open-store" onPress={() => router.push("/rapid/shop")} accessibilityLabel="Arena store" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: space.md, height: 44, borderRadius: radius.pill, backgroundColor: colors.custom_neonAmber }}>
+          <Icon name="storefront" size={18} color={colors.custom_gameBg} />
+          <T w="heavy" size={13} color={colors.custom_gameBg}>Store</T>
+        </Press>
+        <Press testID="rf-open-avatar" onPress={() => router.push({ pathname: "/rapid/shop", params: { tab: "avatar" } })} accessibilityLabel="Change avatar">
+          <Avatar icon={p?.avatar} frame={p?.equipped?.frame} size={44} />
+        </Press>
       </View>
       <GameHUD p={p} />
+
+      {p?.quests ? (
+        <View testID="rf-daily-quests" style={{ gap: space.sm, padding: space.lg, borderRadius: radius.lg, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+            <Icon name="calendar-star" size={20} color={colors.custom_neonCyan} />
+            <T w="heavy" size={15} color={colors.onSurfaceInverse} style={{ flex: 1 }}>Daily Quests</T>
+            <T size={11} color={colors.custom_gameMuted}>Reset at midnight IST</T>
+          </View>
+          {p.quests.map((q: any) => (
+            <View key={q.id} testID={"rf-quest-" + q.id} style={{ gap: 4 }}>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+                <Icon name={q.claimed ? "check-decagram" : q.done ? "gift" : "checkbox-blank-circle-outline"} size={18} color={q.done ? colors.custom_neonGreen : colors.custom_gameMuted} />
+                <T w="bold" size={13} color={colors.onSurfaceInverse} style={{ flex: 1 }}>{q.title}</T>
+                {q.done && !q.claimed ? (
+                  <Press testID={"rf-quest-claim-" + q.id} onPress={async () => { try { await rf("/quests/claim", user!.id, { method: "POST", body: { id: q.id } }); prof.reload(); } catch {} }} style={{ paddingHorizontal: 10, height: 30, borderRadius: 15, backgroundColor: colors.custom_neonAmber, justifyContent: "center" }}>
+                    <T w="heavy" size={12} color={colors.custom_gameBg}>Claim +{q.coins}</T>
+                  </Press>
+                ) : <T w="bold" size={12} color={colors.custom_neonAmber}>{q.claimed ? "Claimed" : `${q.progress}/${q.goal} · +${q.coins}`}</T>}
+              </View>
+              <View style={{ height: 5, borderRadius: 3, backgroundColor: colors.custom_gameLine, overflow: "hidden" }}>
+                <View style={{ width: `${(q.progress / q.goal) * 100}%`, height: "100%", backgroundColor: q.done ? colors.custom_neonGreen : colors.custom_neonCyan }} />
+              </View>
+            </View>
+          ))}
+        </View>
+      ) : null}
 
       <Animated.View entering={FadeInDown.duration(350)}>
         <LinearGradient testID="rf-streak-card" colors={[colors.custom_examBitsatDeep, colors.custom_gameCard]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ borderRadius: radius.lg, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.custom_gameLine }}>
@@ -87,7 +123,7 @@ export default function RapidHome() {
             <Icon name="fire" size={44} color={p?.played_today ? colors.custom_neonAmber : colors.custom_gameMuted} />
             <View style={{ flex: 1 }}>
               <T w="heavy" size={20} color={colors.onSurfaceInverse}>{p?.streak ?? 0}-day streak</T>
-              <T size={12} color={colors.custom_whiteA70}>{p?.played_today ? "Today’s fire is lit. Come back tomorrow!" : "Finish one sprint or duel today to keep it burning."} Best: {p?.best_streak ?? 0}</T>
+              <T size={12} color={colors.custom_whiteA70}>{p?.played_today ? "Today’s fire is lit. Come back tomorrow!" : "Finish one sprint or duel today to keep it burning."} Best: {p?.best_streak ?? 0} · ❄ {p?.freezes ?? 0} freezes</T>
             </View>
           </View>
           <View style={{ flexDirection: "row", gap: 6 }}>

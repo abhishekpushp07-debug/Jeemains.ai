@@ -8,6 +8,7 @@ from typing import List, Literal, Optional
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
+from shop import rival_profile
 
 DUEL_CARDS = 30
 CARD_SECONDS = 20
@@ -40,10 +41,10 @@ class DuelAnswer(BaseModel):
 def make_router(db, rf_user, public_card, award):
     r = APIRouter(prefix="/rf/duels")
 
-    def player(uid, name):
-        import asyncio
-        asyncio.ensure_future(db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True))
-        return {"uid": uid, "name": name.strip()[:24], "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
+    async def player(uid, name):
+        prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True, return_document=True) or {}
+        eq = prof.get("equipped", {})
+        return {"uid": uid, "name": name.strip()[:24], "avatar": prof.get("avatar") or "robot-happy", "frame": eq.get("frame"), "entry": eq.get("entry"), "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
 
     def start_fields():
         start = time.time() + 5
@@ -61,6 +62,9 @@ def make_router(db, rf_user, public_card, award):
         if len(ps) < 2:
             return None
         a, b = ps
+        if a.get("bot") or b.get("bot"):
+            human, bot = (b, a) if a.get("bot") else (a, b)
+            return human["uid"] if not human.get("forfeit") and human["score"] > 0 else ("tie" if human["score"] == 0 and not human.get("forfeit") else bot["uid"])
         if a.get("forfeit") != b.get("forfeit"):  # a player who left can never win
             return b["uid"] if a.get("forfeit") else a["uid"]
         if a["score"] != b["score"]:
@@ -73,20 +77,39 @@ def make_router(db, rf_user, public_card, award):
         ps = d["players"]
         return len(ps) == 2 and not (ps[0].get("forfeit") or ps[1].get("forfeit")) and ps[0]["score"] == ps[1]["score"] and ps[0]["ms"] != ps[1]["ms"]
 
+    async def simulate_bot(d):
+        """AI Rival: clearly labelled, paces itself and always stays below the student's score."""
+        bot = next((p for p in d["players"] if p.get("bot")), None)
+        if not bot or d["status"] != "ready":
+            return d
+        me = next(p for p in d["players"] if not p.get("bot"))
+        total = len(d["card_ids"])
+        n = total if me["done"] else max(0, min(total, int((time.time() - d["start_at"]) / bot["pace"])))
+        score = max(0, min(round(n * bot["acc"]), me["score"] - 1))
+        score = max(score, bot["score"]) if bot["score"] <= max(0, me["score"] - 1) else max(0, me["score"] - 1)
+        if n != len(bot["answers"]) or score != bot["score"]:
+            answers = [{"i": i, "outcome": "bot"} for i in range(n)]
+            await db.rf_duels.update_one({"id": d["id"], "players.uid": bot["uid"]}, {"$set": {"players.$.answers": answers, "players.$.score": score, "players.$.done": n >= total}})
+            bot.update({"answers": answers, "score": score, "done": n >= total})
+        return d
+
     async def settle(d):
+        d = await simulate_bot(d)
         now = time.time()
         if d["status"] == "waiting" and now - d["created_ts"] > (WAIT_SECONDS if d["mode"] == "random" else 1800):
             d = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "waiting"}, {"$set": {"status": "expired"}}, return_document=ReturnDocument.AFTER) or d
         if d["status"] == "ready" and (now > d["ends_at"] or all(p["done"] for p in d["players"])):
             d = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "ready"}, {"$set": {"status": "finished", "winner": winner(d), "tie_break": tie_break(d), "finished_ts": now}},
                                                       return_document=ReturnDocument.AFTER) or await db.rf_duels.find_one({"id": d["id"]})
-            for p in d["players"]:  # reward both players at settle time, even if one never returns
+            for p in [x for x in d["players"] if not x.get("bot")]:  # reward both players at settle time, even if one never returns
                 await reward_for(d, p["uid"])
         return d
 
     async def reward_for(d, uid):
         me = next(p for p in d["players"] if p["uid"] == uid)
         answered = sum(a["outcome"] in ("correct", "incorrect") for a in me["answers"])
+        if d.get("vs_bot"):  # practice vs AI Rival: small reward, never counts as a PvP win
+            return await award(uid, "duel:" + d["id"], "bot", me["score"], len(d["card_ids"]), answered, None)
         return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid)
 
     async def view(d, uid):
@@ -113,7 +136,7 @@ def make_router(db, rf_user, public_card, award):
             "id": d["id"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
             "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS,
             "reward": reward, "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
-            "players": [{"you": p["uid"] == uid, "id": p["uid"][:6] if p["uid"] != uid else "you", "name": p["name"], "answered": len(p["answers"]), "score": p["score"],
+            "vs_bot": d.get("vs_bot", False), "players": [{"you": p["uid"] == uid, "bot": p.get("bot", False), "avatar": p.get("avatar"), "frame": p.get("frame"), "entry": p.get("entry"), "id": p["uid"][:6] if p["uid"] != uid else "you", "name": p["name"], "answered": len(p["answers"]), "score": p["score"],
                          "done": p["done"], **({"answers": p["answers"]} if reveal or p["uid"] == uid else {}), **({"uid": p["uid"]} if reveal else {})} for p in d["players"]],
         }
 
@@ -130,13 +153,13 @@ def make_router(db, rf_user, public_card, award):
             now = time.time()
             match = await db.rf_duels.find_one_and_update(
                 {"status": "waiting", "mode": "random", "subject": data.subject, "chapter": data.chapter, "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
-                {"$push": {"players": player(uid, data.name)}, "$set": start_fields()}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
+                {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
             if match:
                 await db.rf_duels.update_one({"id": match["id"]}, {"$addToSet": {"request_ids": data.request_id}})
                 return await view(match, uid)
         d = {"id": str(uuid.uuid4()), "code": "".join(random.choices(string.ascii_uppercase.replace("O", "").replace("I", "") + "23456789", k=6)),
              "mode": data.mode, "subject": data.subject, "chapter": data.chapter, "status": "waiting", "card_ids": await pick_cards(data.subject, data.chapter),
-             "players": [player(uid, data.name)], "created_ts": time.time(), "request_id": data.request_id, "request_ids": [data.request_id]}
+             "players": [await player(uid, data.name)], "created_ts": time.time(), "request_id": data.request_id, "request_ids": [data.request_id]}
         await db.rf_duels.insert_one(d)
         return await view(d, uid)
 
@@ -148,7 +171,7 @@ def make_router(db, rf_user, public_card, award):
         if existing:
             return await view(existing, uid)
         d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "players.uid": {"$ne": uid}},
-                                                  {"$push": {"players": player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
+                                                  {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
         return await view(d, uid)
@@ -166,6 +189,19 @@ def make_router(db, rf_user, public_card, award):
         uid = rf_user(x_rf_user)
         await db.rf_duels.update_one({"id": did, "status": "waiting", "players.0.uid": uid}, {"$set": {"status": "cancelled"}})
         return {"ok": True}
+
+    @r.post("/{did}/bot")
+    async def vs_bot(did: str, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        rival = rival_profile()
+        bot = {"uid": "bot-" + uuid.uuid4().hex[:10], "bot": True, "name": rival["name"], "avatar": rival["avatar"], "frame": rival["frame"], "entry": rival["entry"],
+               "answers": [], "score": 0, "ms": DUEL_CARDS * CARD_SECONDS * 1000, "done": False, "pace": random.uniform(4.0, 6.5), "acc": random.uniform(0.55, 0.8),
+               "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
+        d = await db.rf_duels.find_one_and_update({"id": did, "status": {"$in": ["waiting", "expired"]}, "players.0.uid": uid, "players": {"$size": 1}},
+                                                  {"$push": {"players": bot}, "$set": {**start_fields(), "vs_bot": True}}, return_document=ReturnDocument.AFTER)
+        if not d:
+            raise HTTPException(409, "This duel already has an opponent.")
+        return await view(d, uid)
 
     @r.post("/{did}/forfeit")
     async def forfeit(did: str, x_rf_user: Optional[str] = Header(None)):

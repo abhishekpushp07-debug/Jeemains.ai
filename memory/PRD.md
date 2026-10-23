@@ -46,6 +46,12 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Duels: forfeiting player can never win; rewards given to both players at settle; card ids/answers hidden until reveal.
 - Public bank API for the website: GET /api/rf/cards?subject&chapter&page&limit (4,100 cards).
 
+## Iteration 5 (2026-10-23)
+- AI Rival fallback (POST /api/rf/duels/{id}/bot): 1000 rotating names, avatars and cosmetics; always labelled "AI RIVAL"; paces itself and always stays below the student; small practice reward only (no PvP win, quest or leaderboard credit).
+- Duel UX: an on-card RIGHT +1 / WRONG verdict with a coloured border, a live scoreboard with avatars and lead text, an entry-effect intro with both avatars.
+- Coin Shop (backend/shop.py, app/rapid/shop.tsx): streak freezes (auto-save one missed day), 4 avatar frames, 4 animated entry effects, 3 arena themes, 12 free avatars; earned coins only, no payments.
+- Daily Quests (3/day, claim coins), freezes shown on the streak card, themed arena background.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

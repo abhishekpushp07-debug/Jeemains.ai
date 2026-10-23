@@ -10,6 +10,7 @@ import { invalidate } from "@/src/useCached";
 import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap } from "@/src/components/ui";
 import { Ring } from "@/src/components/Ring";
 import { RewardPanel } from "@/src/components/game";
+import { Avatar, EntryEffect, RivalTag } from "@/src/components/Entry";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -95,8 +96,9 @@ export default function Duel() {
   const card = d?.cards?.[idx];
 
   useEffect(() => {
-    if (me && me.answered > idx) setIdx(me.answered);
-  }, [me?.answered]); // eslint-disable-line react-hooks/exhaustive-deps
+    // Resync after reconnect, but never cut the visible RIGHT/WRONG verdict short.
+    if (me && me.answered > idx && !fb) setIdx(me.answered);
+  }, [me?.answered, fb]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!started || !card) return;
@@ -173,14 +175,24 @@ export default function Duel() {
         {!invite || d.status !== "waiting" ? (
           <Button testID="duel-invite-instead" kind="secondary" icon="whatsapp" label="Invite a WhatsApp friend instead" onPress={() => { leave(); router.push({ pathname: "/rapid/duel", params: { mode: "invite", subject: d.subject, chapter: d.chapter || "" } }); }} />
         ) : null}
+        <Button testID="duel-play-ai-rival" icon="robot-excited" label="Play an AI Rival now" color={colors.custom_neonCyan} onPress={async () => { try { apply(await rf(`/duels/${d.id}/bot`, uid, { method: "POST", body: {} })); } catch (e: any) { setError(e.message); } }} />
+        <T size={11} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>AI Rivals are practice opponents, always labelled — never a real student.</T>
         <Button testID="duel-play-solo" kind="ghost" label="Play solo instead" onPress={() => { leave(); router.push({ pathname: "/rapid/session", params: { subject: d.subject, chapter: d.chapter || "" } }); }} />
       </ScrollView>
     );
   } else if (d.status === "ready" && !started) {
     const c = Math.max(1, Math.ceil(d.start_at - now));
     body = (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.lg }} testID="duel-countdown">
-        <VersusRow me={me} opp={opp} tint={tint} total={total} />
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.lg, paddingHorizontal: space.lg }} testID="duel-countdown">
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", alignSelf: "stretch" }}>
+          <EntryEffect effect={me?.entry}>
+            <View style={{ alignItems: "center", gap: 6 }}><Avatar icon={me?.avatar} frame={me?.frame} size={84} /><T w="heavy" size={14} color={colors.onSurfaceInverse}>You</T></View>
+          </EntryEffect>
+          <T w="heavy" size={28} color={colors.custom_neonAmber}>VS</T>
+          <EntryEffect effect={opp?.entry} fromRight>
+            <View style={{ alignItems: "center", gap: 6 }}><Avatar icon={opp?.avatar} frame={opp?.frame} size={84} /><T w="heavy" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{opp?.name}</T>{opp?.bot ? <RivalTag /> : null}</View>
+          </EntryEffect>
+        </View>
         <Animated.View key={c} entering={ZoomIn.duration(250)}><T w="heavy" size={88} color={colors.custom_neonAmber}>{c}</T></Animated.View>
         <T size={13} color={colors.custom_gameMuted}>Same 30 cards for both · 20 s each · +1 per correct</T>
       </View>
@@ -194,8 +206,16 @@ export default function Duel() {
           <T w="heavy" size={15} color={colors.onSurfaceInverse} testID="duel-card-counter">Card {idx + 1} / {total}</T>
           <Ring light left={left} color={tint} />
         </View>
-        <Animated.View key={card.id} entering={FadeIn.duration(160)} testID="duel-card" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.1, shadowRadius: 16, elevation: 5 }}>
-          <T w="bold" size={11} color={tint}>{card.chapter}</T>
+        <Animated.View key={card.id} entering={FadeIn.duration(160)} testID="duel-card" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: fb ? 4 : 1, borderColor: fb ? (fb.outcome === "correct" ? colors.success : fb.outcome === "incorrect" ? colors.error : colors.warning) : colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.1, shadowRadius: 16, elevation: 5 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <T w="bold" size={11} color={tint}>{card.chapter}</T>
+            {fb ? (
+              <Animated.View entering={ZoomIn.duration(200)} testID="duel-verdict" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, height: 28, borderRadius: 14, backgroundColor: fb.outcome === "correct" ? colors.success : fb.outcome === "incorrect" ? colors.error : colors.warning }}>
+                <Icon name={fb.outcome === "correct" ? "check-bold" : fb.outcome === "incorrect" ? "close-thick" : "timer-sand-complete"} size={16} color={colors.onSuccess} />
+                <T w="heavy" size={13} color={colors.onSuccess}>{fb.outcome === "correct" ? "RIGHT +1" : fb.outcome === "incorrect" ? "WRONG" : "MISSED"}</T>
+              </Animated.View>
+            ) : null}
+          </View>
           <T w="heavy" size={18} color={colors.custom_onReading}>{card.prompt}</T>
           {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={19} color={colors.custom_series} style={{ textAlign: "center" }}>{card.formula}</T></View> : null}
           {card.options.map((o: string, k: number) => {
@@ -286,22 +306,42 @@ export default function Duel() {
   );
 }
 
-function VersusRow({ me, opp, tint, total }: { me: any; opp: any; tint: string; total: number }) {
-  const Side = ({ p, right }: { p: any; right?: boolean }) => (
+function Side({ p, right, total }: { p: any; right?: boolean; total: number }) {
+  return (
     <View style={{ flex: 1, gap: 4, alignItems: right ? "flex-end" : "flex-start" }}>
-      <T w="heavy" size={13} numberOfLines={1}>{p?.name || "Waiting…"}</T>
-      <T w="heavy" size={22} color={right ? colors.custom_examJee : tint}>{p?.score ?? 0}</T>
-      <View style={{ height: 5, width: "100%", borderRadius: 3, backgroundColor: colors.border, overflow: "hidden", alignItems: right ? "flex-end" : "flex-start" }}>
-        <View style={{ width: `${((p?.answered || 0) / total) * 100}%`, height: "100%", backgroundColor: right ? colors.custom_examJee : tint }} />
+      <View style={{ flexDirection: right ? "row-reverse" : "row", alignItems: "center", gap: 6 }}>
+        <Avatar icon={p?.avatar} frame={p?.frame} size={34} />
+        <View style={{ flexShrink: 1, alignItems: right ? "flex-end" : "flex-start" }}>
+          <T w="heavy" size={12} color={colors.onSurfaceInverse} numberOfLines={1}>{p?.you ? "You" : p?.name || "Waiting…"}</T>
+          {p?.bot ? <RivalTag /> : null}
+        </View>
       </View>
-      <T size={10} color={colors.muted}>{p?.answered || 0}/{total} cards</T>
+      <Animated.View key={p?.score ?? 0} entering={ZoomIn.duration(220)}>
+        <T w="heavy" size={30} color={right ? colors.custom_neonRed : colors.custom_neonCyan} testID={right ? "duel-opp-score" : "duel-my-score"}>{p?.score ?? 0}</T>
+      </Animated.View>
+      <View style={{ height: 6, width: "100%", borderRadius: 3, backgroundColor: colors.custom_gameLine, overflow: "hidden", alignItems: right ? "flex-end" : "flex-start" }}>
+        <View style={{ width: `${((p?.answered || 0) / total) * 100}%`, height: "100%", backgroundColor: right ? colors.custom_neonRed : colors.custom_neonCyan }} />
+      </View>
+      <T size={10} color={colors.custom_gameMuted}>{p?.answered || 0}/{total} cards</T>
     </View>
   );
+}
+
+function VersusRow({ me, opp, tint, total }: { me: any; opp: any; tint: string; total: number }) {
+  const lead = (me?.score ?? 0) - (opp?.score ?? 0);
+  void tint;
   return (
-    <View testID="duel-versus" style={{ flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, borderRadius: radius.lg, backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border, alignSelf: "stretch" }}>
-      <Side p={me} />
-      <T w="heavy" size={14} color={colors.custom_amber}>VS</T>
-      <Side p={opp} right />
+    <View testID="duel-versus" style={{ alignSelf: "stretch", gap: 6 }}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, padding: space.md, borderRadius: radius.lg, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
+        <Side p={me} total={total} />
+        <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: colors.custom_neonAmber, alignItems: "center", justifyContent: "center" }}>
+          <T w="heavy" size={14} color={colors.custom_gameBg}>VS</T>
+        </View>
+        <Side p={opp} right total={total} />
+      </View>
+      {opp ? <T w="heavy" size={12} testID="duel-lead" color={lead > 0 ? colors.custom_neonGreen : lead < 0 ? colors.custom_neonRed : colors.custom_neonAmber} style={{ textAlign: "center" }}>
+        {lead > 0 ? `🔥 You lead by ${lead}! Keep it up` : lead < 0 ? `Behind by ${-lead} — push harder!` : "Neck and neck!"}
+      </T> : null}
     </View>
   );
 }
