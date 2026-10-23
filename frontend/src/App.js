@@ -24,6 +24,7 @@ import './bitsat-branches.css';
 import './live-series.css';
 import './series-streak.css';
 import './exam-light.css';
+import './vibrant-ui.css';
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
 const ExamHub = lazy(() => import("./features/ExamHub"));

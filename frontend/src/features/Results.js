@@ -1,5 +1,5 @@
 import { examPath, safeExamReturn } from '../lib/exams';
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Link,
   useParams,
@@ -13,7 +13,6 @@ import {
   XCircle,
   MinusCircle,
   Flag,
-  ChevronDown,
   ShieldCheck,
 } from "lucide-react";
 import { api, post } from "../lib/api";
@@ -39,7 +38,7 @@ import { AiSolution, PeerQuestionStat } from '../components/results/AiSolution';
 import { useResultExtras } from '../components/results/useResultExtras';
 import {QuestionReport, QuestionReportsProvider} from '../components/QuestionReport';
 import {Tabs, TabsList, TabsTrigger} from '../components/ui/tabs';
-import {Select, SelectTrigger, SelectValue, SelectContent, SelectItem} from '../components/ui/select';
+import { SolutionNavigator, matchesOutcome } from '../components/results/SolutionNavigator';
 import {useLocation} from 'react-router-dom';
 import { Button } from '../components/ui/button';
 export default function Results() {
@@ -62,56 +61,76 @@ export default function Results() {
   const [r, setR] = useState(null);
   const [error, setError] = useState("");
   const filter = ['all','marked','bonus-section','incorrect','skipped','correct','dropped','bonus'].includes(params.get('filter')) ? params.get('filter') : 'all';
-  const setFilter = value => { const next = new URLSearchParams(params); next.set('filter',value); setParams(next,{state:location.state}); };
+  function setFilter(value) {
+    const next = new URLSearchParams(params); next.set('filter', value);
+    const matching = allQuestions.filter(q => q.subject === activeSubject && matchesOutcome(q, value));
+    const question = matching.find(q => q.id === selectedQuestion) || matching[0];
+    if (question) next.set('question', question.id); else next.delete('question');
+    setParams(next, {state:location.state});
+  }
   const [retryOpen, setRetryOpen] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [expanded, setExpanded] = useState({});
-  const [page, setPage] = useState(1);
   const [refresh, setRefresh] = useState(0);
   const [pending, setPending] = useState(null);
-  const [focusQuestion,setFocusQuestion] = useState(null);
+  const recordedSolutions = useRef(new Set());
   const [solutionState,setSolutionState] = useState({});
   const [confidenceThreshold,setConfidenceThreshold] = useState(0.2);
+  const recordSolution = useCallback(async (qid) => {
+    setSolutionState(old=>({...old,[qid]:'pending'}));
+    try { await post(`/attempts/${id}/questions/${qid}/solution-open`,{}); setSolutionState(old=>({...old,[qid]:'saved'})); }
+    catch { setSolutionState(old=>({...old,[qid]:'error'})); }
+  }, [id]);
   const extras = useResultExtras(id, !!r, !!r?.questions?.length && r.questions.every(q => q.solution_kind === 'supplied_worked'));
   const meters = useLearningMeters(id,scoreVersion,!!r);
-  useEffect(()=>{
-    if (!focusQuestion) return;
-    const timer=setTimeout(()=>{document.getElementById('review-question-'+focusQuestion)?.scrollIntoView({block:'start',behavior:'instant'});setFocusQuestion(null)},220);
-    return()=>clearTimeout(timer);
-  },[focusQuestion]);
+  const resultAttemptId = r?.id;
+  const allQuestions = r?.questions || [];
+  const selectedQuestion = params.get('question');
+  const subjects = [...new Set(allQuestions.map(q => q.subject))];
+  const requestedSubject = params.get('subject');
+  const activeSubject = subjects.includes(requestedSubject) ? requestedSubject : allQuestions.find(q => q.id === selectedQuestion)?.subject || subjects[0] || '';
+  const qs = allQuestions.filter(q => q.subject === activeSubject && matchesOutcome(q, filter));
+  const activeQuestion = qs.find(q => q.id === selectedQuestion) || qs[0];
+  useEffect(() => {
+    if (!r || view !== 'solutions' || !activeSubject) return;
+    const next = new URLSearchParams(params);
+    next.set('subject', activeSubject);
+    if (activeQuestion) next.set('question', activeQuestion.id); else next.delete('question');
+    if (next.toString() !== params.toString()) setParams(next, {replace:true, state:location.state});
+  }, [r, view, activeSubject, activeQuestion, params, setParams, location.state]);
+  useEffect(() => {
+    if (view !== 'solutions' || !activeQuestion || resultAttemptId !== id) return;
+    const key = id + ':' + activeQuestion.id;
+    if (!recordedSolutions.current.has(key)) {
+      recordedSolutions.current.add(key);
+      recordSolution(activeQuestion.id);
+    }
+  }, [id, view, activeQuestion, resultAttemptId, recordSolution]);
   async function refreshAnalytics(threshold = confidenceThreshold) {
     const result=await api('/attempts/'+id+'/results?score_version='+encodeURIComponent(scoreVersion)+'&confidence_threshold='+threshold);
     if(result.analytics) { setR(result); setConfidenceThreshold(threshold); }
     return result;
-  }
-  async function recordSolution(qid) {
-    setSolutionState(old=>({...old,[qid]:'pending'}));
-    try { await post(`/attempts/${id}/questions/${qid}/solution-open`,{}); setSolutionState(old=>({...old,[qid]:'saved'})); }
-    catch { setSolutionState(old=>({...old,[qid]:'error'})); }
   }
   function openQuestion(qid) {
     if(!r)return;
     const question=r.questions.find(q=>q.id===qid);
     if(!question)return;
     const matches=filter==='all'||(filter==='marked'?question.marked:filter==='bonus-section'?question.bonus:question.outcome===filter);
-    const next=new URLSearchParams(params);next.set('view','solutions');next.set('question',qid);
+    const next=new URLSearchParams(params);next.set('view','solutions');next.set('question',qid);next.set('subject',question.subject);
     if(!matches)next.set('filter','all');
     if(view==='analysis')scrollPositions.current.analysis=window.scrollY;
     setParams(next,{state:location.state});
-    setPage(Math.ceil((r.questions.findIndex(q=>q.id===qid)+1)/10));setExpanded(old=>({...old,[qid]:true}));setFocusQuestion(qid);
-    recordSolution(qid);
+    if (view !== 'solutions') requestAnimationFrame(() => document.querySelector('[data-testid="solution-question-navigation"]')?.scrollIntoView({block:'start',behavior:'instant'}));
   }
-  const selectedQuestion=params.get('question');
-  useEffect(()=>{
-    if(!r||!selectedQuestion||view!=='solutions')return;
-    const index=r.questions.findIndex(q=>q.id===selectedQuestion);
-    if(index<0)return;
-    setPage(p=>Math.max(p,Math.ceil((index+1)/10)));setExpanded(old=>({...old,[selectedQuestion]:true}));setFocusQuestion(selectedQuestion);
-  },[r?.id,!!r,selectedQuestion,view]);
+  function chooseSubject(subject) {
+    const next = new URLSearchParams(params); next.set('subject', subject);
+    const question = allQuestions.find(q => q.subject === subject && matchesOutcome(q, filter));
+    if (question) next.set('question', question.id); else next.delete('question');
+    setParams(next, {state:location.state});
+  }
   useEffect(() => {
     const controller = new AbortController();
     let timer, polls = 0;
-    setR(null); setPending(null); setError(''); setExpanded({}); setPage(1);
+    setR(null); setPending(null); setError('');
     const load = async () => {
       try {
         const result = await api('/attempts/' + id + '/results?score_version=' + encodeURIComponent(scoreVersion), { signal: controller.signal });
@@ -168,11 +187,6 @@ export default function Results() {
       </div>
     );
   const s = r.summary;
-  const qs = r.questions.filter(
-    (q) =>
-      filter === "all" ||
-      (filter === "marked" ? q.marked : filter === "bonus-section" ? q.bonus : q.outcome === filter),
-  );
   const lateKey = `tejas-draft-${user.id}-${id}`;
   let late = {};
   try {
@@ -386,14 +400,14 @@ export default function Results() {
       {view==='progress'&&<JourneyView data={meters.journey} retry={meters.retry}/>}
       {view==='accuracy'&&<ConfidenceView data={meters.journey} retry={meters.retry} latestAccuracy={s.accuracy}/>}
       {view==='rank'&&(r.exam==='BITSAT'?<BitsatBranchView key={`${id}-${scoreVersion}`} data={meters.rank} retry={meters.retry}/>:<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>)}
-      <section className="result-view-panel" hidden={view!=='solutions'} data-testid="result-solutions-panel" aria-label="Question solutions">
-      <div className="result-question-jump" data-testid="solution-question-navigation"><Select value={qs.some(q=>q.id===selectedQuestion)?selectedQuestion:''} onValueChange={openQuestion}><SelectTrigger aria-label="Jump to a question" data-testid="solution-question-select" className="w-56"><SelectValue placeholder="Jump to a question"/></SelectTrigger><SelectContent>{qs.map(q=><SelectItem key={q.id} value={q.id} data-testid={'solution-select-'+q.number}>Q{q.number} · {q.subject}</SelectItem>)}</SelectContent></Select><Button variant="outline" data-testid="solution-previous" disabled={qs.findIndex(q=>q.id===selectedQuestion)<=0} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)-1].id)}>Previous</Button><Button variant="outline" data-testid="solution-next" disabled={!qs.length||qs.findIndex(q=>q.id===selectedQuestion)>=qs.length-1} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)+1].id)}>Next</Button></div>
+      {view === 'solutions' && <section className="result-view-panel" data-testid="result-solutions-panel" aria-label="Question solutions">
+      <SolutionNavigator subjects={subjects} subject={activeSubject} questions={qs} allQuestions={allQuestions} filter={filter} selected={activeQuestion?.id} onSubject={chooseSubject} onQuestion={openQuestion}/>
       <div className="review-heading" id="results-review-heading">
         <div>
           <span className="eyebrow">UNDERSTAND THE WHY</span>
-          <h2>Your question-by-question review.</h2>
+          <h2 data-testid="solution-review-heading">One question. A clearer understanding.</h2>
         </div>
-        <span>{qs.length} questions</span>
+        <span data-testid="solution-current-question-label">{activeQuestion ? `${activeSubject} · Question ${activeQuestion.number}` : 'Choose another filter'}</span>
       </div>
       <div className="filter-tabs" data-testid="results-filter-tabs">
         {[
@@ -410,29 +424,22 @@ export default function Results() {
             data-testid={"results-filter-" + v}
             className={filter === v ? "active" : ""}
             key={v}
-            onClick={() => {
-              setFilter(v);
-              setPage(1);
-            }}
+            aria-pressed={filter === v}
+            onClick={() => setFilter(v)}
           >
             {l}
           </button>
         ))}
       </div>
-      {qs.length ? (
-        qs.slice(0, page * 10).map((q) => (
+      {activeQuestion ? (
+        [activeQuestion].map((q) => (
           <article
-            className="card review-question"
+            className="card review-question focused-solution-card"
             id={'review-question-'+q.id}
             data-testid="results-question-review-item"
             key={q.id}
           >
-            <button
-              className="review-question-toggle"
-              data-testid={"results-expand-" + q.number}
-              aria-expanded={!!expanded[q.id]}
-              onClick={() => expanded[q.id] ? setExpanded({...expanded,[q.id]:false}) : openQuestion(q.id)}
-            >
+            <div className="review-question-toggle" data-testid={'solution-question-heading-' + q.number}>
               <span className={"outcome-icon " + q.outcome}>
                 {q.outcome === "correct" ? (
                   <CheckCircle2 />
@@ -464,14 +471,8 @@ export default function Results() {
                 {q.marks > 0 ? "+" : ""}
                 {q.marks} marks
               </strong>
-              <ChevronDown
-                className={expanded[q.id] ? "rotate" : ""}
-                size={18}
-              />
-            </button>
-            {!expanded[q.id] && <QuestionReport attemptId={id} questionId={q.id} number={q.number} context="results" />}
-            {expanded[q.id] && (
-              <div className="review-expanded">
+            </div>
+              <div className="review-expanded" data-testid="selected-question-solution-panel" aria-label={'Question ' + q.number + ' and solution'}>
                 <QuestionContent
                   question={q}
                   base={`/attempts/${id}/questions/${q.id}`}
@@ -533,7 +534,6 @@ export default function Results() {
                   solutionPending={solutionState[q.id]!=='saved'} onSaved={refreshAnalytics}/>
                 <QuestionReport key={"solution-report-"+q.id} attemptId={id} questionId={q.id} number={q.number} context="solutions" />
               </div>
-            )}
           </article>
         ))
       ) : (
@@ -541,16 +541,7 @@ export default function Results() {
           Try another outcome to continue your review.
         </Empty>
       )}
-      {qs.length > page * 10 && (
-        <button
-          className="btn btn-secondary full-width"
-          data-testid="results-load-more"
-          onClick={() => setPage(page + 1)}
-        >
-          Show 10 more questions
-        </button>
-      )}
-      </section>
+      </section>}
       <div className="receipt">
         <CheckCircle2 size={17} />
         <span>

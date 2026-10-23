@@ -1,56 +1,121 @@
 {
-  "project": "JEELIVE.AI / Tejas Learning Platform",
-  "version": "2026.10",
+  "implementation_notes": {
+    "date": "2026-10-23",
+    "status": "Implemented, awaiting frontend QA",
+    "assets": "User original saved locally at /brand/jeelive-original.jpg. Whitespace-only crop optimized as /brand/jeelive-logo.webp; source icon /brand/jeelive-icon.png. Brand colours and supplied tagline preserved; no external hotlinks.",
+    "theme": "vibrant-ui.css shared saturated tabs/blue primary actions, neutral navy dark surfaces, stronger typography. Existing theme preference/default behavior NOT changed. Entire existing .exam-light reading routes remain light. Existing home exam colours/shines retained unchanged rather than replacing their approved palettes.",
+    "solutions": "SolutionNavigator.js + Results.js: subject tabs -> one horizontally scrollable 44px question-number rail -> one fully open selected question and supplied solution. Existing filters and score-version URL retained; no previous/next/dropdown/load-more/accordion. Status colours also have labelled icons. No new bookmark or AI generation feature."
+  },
+  "project": "JEELIVE.AI / Tejas Learning Platform - Design Refinement",
+  "version": "2026.10-refinement",
   "design_context": "MARKETING_AND_LEARNING_DASHBOARD",
+  "brand_identity": {
+    "logo_url": "https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/6a1feb9ab42bd8d4_IMG-20261023-WA8815.jpg",
+    "logo_usage": "Main navigation header (.simple-brand), mobile menu header, login page brand header, and simple-footer. Render with height 32px-40px, rounded-md, object-contain, and alt='JEELIVE.AI Logo'."
+  },
   "theme_strategy": {
-    "default_mode": "light",
+    "default_mode": "dark",
+    "exam_reading_surface_exception": {
+      "rule": "Force light background surface (bg-white text-slate-900 / .exam-light) specifically for question stems, original PDF question figures, diagrams, and solution explanation cards to ensure pristine legibility of formulas and images.",
+      "container_classes": "bg-white text-slate-900 rounded-xl p-5 shadow-sm border border-slate-200 dark:bg-white dark:text-slate-900"
+    },
     "exam_cards_palette_corrections": {
       "jee_main": {
         "slug": "jee-main",
+        "name": "JEE Main",
         "card_background": "linear-gradient(135deg, #7F1D1D 0%, #991B1B 50%, #B91C1C 100%)",
         "card_border": "#DC2626",
         "card_text": "#FFFFFF",
         "card_eyebrow": "#FECACA",
-        "card_description": "#FEE2E2",
         "badge_bg": "#450A0A",
         "badge_text": "#FCA5A5",
         "shine_effect": {
           "enabled": true,
           "mobile_always_visible": true,
           "mobile_animation": "sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite",
-          "gradient": "linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.35) 55%, transparent 80%)",
-          "pause_on_hover": true,
-          "respects_reduced_motion": true
+          "pause_on_hover": true
         }
       },
       "bitsat": {
         "slug": "bitsat",
+        "name": "BITSAT",
         "card_background": "linear-gradient(135deg, #C2410C 0%, #EA580C 50%, #FF9933 100%)",
         "card_border": "#F97316",
         "card_text": "#1E1B18",
         "card_eyebrow": "#431407",
-        "card_description": "#271105",
         "badge_bg": "#FFEDD5",
         "badge_text": "#7C2D12",
         "shine_effect": {
           "enabled": true,
           "mobile_always_visible": true,
           "mobile_animation": "sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.75s",
-          "gradient": "linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.45) 45%, rgba(255, 255, 255, 0.65) 50%, rgba(255, 255, 255, 0.45) 55%, transparent 80%)",
-          "pause_on_hover": true,
-          "respects_reduced_motion": true
+          "pause_on_hover": true
         }
       },
       "all_india": {
         "slug": "all-india",
+        "name": "All India Series",
         "card_background": "#1E3A8A",
+        "card_border": "#3B82F6",
+        "card_text": "#FFFFFF",
         "status": "APPROVED_PRESERVE"
       },
       "comedk": {
         "slug": "comedk",
+        "name": "COMEDK",
         "card_background": "#0F172A",
+        "card_border": "#475569",
+        "card_text": "#F8FAFC",
         "status": "APPROVED_PRESERVE"
       }
+    }
+  },
+  "solutions_view_refactoring": {
+    "architecture_goal": "Replace subject dropdown and Previous/Next pagination with a 3-tier focused navigation layout: 1) Vibrant Subject Small Tabs -> 2) Horizontal Question Number Navigation Row -> 3) Focused Single Selected Question & Solution Card.",
+    "subject_tabs_tier": {
+      "layout": "Flex horizontal row of compact subject pills (Physics, Chemistry, Mathematics / LR & English).",
+      "active_styles": {
+        "physics": "bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md shadow-blue-500/20 border-b-2 border-blue-300",
+        "chemistry": "bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold shadow-md shadow-teal-500/20 border-b-2 border-teal-300",
+        "mathematics": "bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-md shadow-rose-500/20 border-b-2 border-rose-300",
+        "default": "bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold shadow-md shadow-amber-500/20 border-b-2 border-amber-300"
+      },
+      "inactive_styles": "bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700 transition-all cursor-pointer font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg",
+      "data_testid_pattern": "subject-tab-{subject_id}"
+    },
+    "horizontal_question_navigation_tier": {
+      "layout": "Single horizontal scrolling row of compact question number buttons for the active subject.",
+      "mobile_390px_support": "overflow-x-auto whitespace-nowrap py-2 px-1 gap-2 flex items-center scrollbar-thin scrollbar-thumb-slate-700 touch-pan-x",
+      "button_size": "min-w-[38px] h-9 px-2 text-xs font-mono font-semibold rounded-md flex items-center justify-center transition-all",
+      "question_status_indicators": {
+        "correct": "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 hover:bg-emerald-500/30",
+        "incorrect": "bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500/30",
+        "unattempted": "bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700"
+      },
+      "selected_question_active_ring": "ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-900 bg-blue-600 text-white font-bold scale-105 shadow-lg shadow-blue-500/30",
+      "data_testid_pattern": "question-nav-btn-{question_number}"
+    },
+    "single_question_focused_workspace": {
+      "behavior": "Only renders the solution for the selected question number. Removes stacked scroll or multi-question confusion.",
+      "components": [
+        "Question Header: Subject badge, Question Index (e.g., 'Physics · Q4'), Status badge ('Correct +4' / 'Incorrect -1' / 'Unattempted')",
+        "Question Stem & Diagram Box: Forced light mode white canvas (.exam-light) for crystal clear math & PDF image legibility",
+        "Official Solution Step-by-Step Box: Highlighted correct option, detailed step reasoning, formula derivations",
+        "Footer Action Toolbar: 'Report Question' button, 'Bookmark', and 'Feedback' trigger"
+      ],
+      "data_testid_pattern": "selected-question-solution-panel"
+    }
+  },
+  "sitewide_tab_and_button_upgrade": {
+    "visual_direction": "Bold, colorful, tactile, and elegant tabs/buttons ('mast, elegant, loud na ho, dead na ho').",
+    "tabs": {
+      "style": "Rounded pill or segment tabs with distinct active background gradients, 1px top highlight, and subtle glow on active states.",
+      "hover": "Subtle brightness lift (+10%) and scale-102 transition."
+    },
+    "buttons": {
+      "primary": "bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-semibold shadow-md hover:shadow-blue-500/25 rounded-lg active:scale-95 transition-all min-h-[40px] px-4",
+      "secondary": "bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 rounded-lg min-h-[40px] px-4",
+      "destructive": "bg-rose-600/20 text-rose-300 border border-rose-500/40 hover:bg-rose-600 hover:text-white rounded-lg min-h-[40px] px-4"
     }
   },
   "typography": {
@@ -59,36 +124,42 @@
       "mono": "Roboto Mono, monospace"
     },
     "hierarchy": {
-      "h1": "text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight",
-      "h2": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight",
-      "h3": "text-xl sm:text-2xl font-semibold",
-      "h4": "text-lg sm:text-xl font-medium",
-      "body": "text-base leading-relaxed",
-      "small": "text-sm text-slate-500",
-      "micro": "text-xs font-mono uppercase tracking-wider"
+      "h1": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-100",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-100",
+      "h3": "text-xl sm:text-2xl font-semibold text-slate-200",
+      "h4": "text-lg sm:text-xl font-medium text-slate-200",
+      "body": "text-base leading-relaxed text-slate-300",
+      "small": "text-sm text-slate-400",
+      "micro": "text-xs font-mono uppercase tracking-wider text-slate-500"
     }
   },
-  "bitsat_branch_match_module": {
-    "location": "/app/frontend/src/components/results/LearningMeters.js (or new component embedded in Results 5-tab workspace under 'Real-exam rank')",
-    "behavior": "Converts BITSAT score input into top 3 distinct program/campus matches using official historical BITSAT cutoffs (Pilani, Goa, Hyderabad). Shows maximum score benchmark 390.",
-    "ui_specs": {
-      "score_input": "Numeric input 0-390 with clear validation and default score populate from attempt",
-      "match_cards": "Top 3 highest historical cutoff branches below candidate score, with clear campus badge (Pilani / Goa / Hyderabad), branch code, cutoff score, and margin",
-      "disclaimer": "Includes official cutoff source citation (2025-2027 official session cutoffs) and explicit 'No admission guarantee' disclaimer as required by regulations",
-      "distinct_branches_rule": "Ensures 3 distinct degree programs across campuses rather than duplicate branches"
+  "image_urls": [
+    {
+      "category": "branding",
+      "url": "https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/6a1feb9ab42bd8d4_IMG-20261023-WA8815.jpg",
+      "description": "Supplied official JEELIVE.AI brand logo to be integrated into header, mobile menu, login screen, and footer."
+    },
+    {
+      "category": "reference",
+      "url": "https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/5f48bcdf1b2b17f9_Screenshot_20261023_181305_Chrome.webp",
+      "description": "Current solutions view screenshot for layout refactoring baseline reference."
     }
-  },
+  ],
   "instructions_to_main_agent": [
-    "1. Update JEE Main exam choice cards in ExamNavigation.js / CSS to use authentic Blood Red styling (#7F1D1D to #B91C1C gradient) with dark red accents and high contrast white text.",
-    "2. Update BITSAT exam choice cards to actual Tricolour Saffron Orange (#FF9933 / #EA580C) with readable dark ink typography (#1E1B18) to avoid muted brown tones.",
-    "3. Apply periodic CSS shine sweep animations on both mobile and desktop viewports, pausing on hover and respecting prefers-reduced-motion.",
-    "4. In Results view ('rank' tab for BITSAT exam attempts), render the Top 3 Branch Matches Panel allowing student score input, showing top 3 distinct B.E. programs with campus badges, cutoffs out of 390, and legal disclaimer.",
-    "5. Ensure all interactive and key data elements carry kebab-case data-testid attributes."
+    "1. Replace subject dropdown select and Previous/Next buttons in the Solutions component with Subject Small Tabs (Physics, Chemistry, Mathematics, LR/English).",
+    "2. Under the selected subject tab, add a horizontal scrolling/wrapped row of question number buttons (1, 2, 3... N) with visual indicators for Correct (green), Incorrect (red), and Unattempted (slate).",
+    "3. Render ONLY the selected question's question stem and solution step in the solution panel when clicked.",
+    "4. Upgrade sitewide navigation tabs, buttons, and surfaces to be bold, colorful, and tactile while maintaining high elegance and readability.",
+    "5. Integrate the new JEELIVE.AI logo URL (https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/6a1feb9ab42bd8d4_IMG-20261023-WA8815.jpg) into the top brand header, footer, and login/mobile views.",
+    "6. Force light mode background specifically inside question/solution reading surfaces (.exam-light) for optimal PDF diagram and formula clarity.",
+    "7. Preserve existing features, exam card identities (JEE Main blood red, BITSAT saffron orange, All India deep blue, COMEDK black), auth, and student metrics.",
+    "8. Ensure all new interactive elements (subject tabs, question buttons, solution panel, logo) carry kebab-case data-testid attributes in .js component files."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Maintain high contrast APCA / WCAG AA standards across both dark red and saffron backgrounds.",
-    "Never rely solely on hover transforms for mobile feedback; use keyframe animations with touch-friendly controls.",
-    "Ensure direct parent-child grid containment and no universal transitions break animation transforms.",
-    "Include explicit testids on all new form inputs, branch cards, score meters, and exam cards."
+    "This codebase uses JavaScript (.js) files. Provide React guidelines, JSX, and CSS instructions for .js files.",
+    "Never use completely transparent backgrounds for dropdown menus or floating headers; use backdrop-blur with semi-opaque surfaces.",
+    "Ensure all touch targets on mobile (390px viewport) have minimum 40px height and width.",
+    "Maintain high APCA/WCAG AA contrast for text over dark or colorful gradient surfaces.",
+    "Ensure all interactive elements carry explicit role and kebab-case data-testid attributes for testing."
   ]
 }

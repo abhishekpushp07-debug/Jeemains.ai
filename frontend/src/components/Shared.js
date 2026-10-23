@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowUpRight,
   ArrowRight,
-  GraduationCap,
   UserRound,
   ChevronDown,
   Loader2,
@@ -37,7 +36,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from './ui/dropdown-menu';
 export const Logo = ({testId='brand-home'}) => {
   const {user}=useAuth();
-  return <Link to={user?'/home':'/'} className="logo simple-brand" aria-label="JEELIVE.AI home" data-testid={testId}><GraduationCap className="brand-cap" size={30} strokeWidth={1.7}/><span data-testid={testId+'-wordmark'}>JEELIVE<span className="brand-ai">.AI</span></span></Link>;
+  return <Link to={user?'/home':'/'} className="logo simple-brand official-brand" aria-label="JEELIVE.AI home" data-testid={testId}><img className="official-logo" src="/brand/jeelive-logo.webp" alt="JEELIVE.AI — Score 200+ with AI" width="490" height="202" decoding="async" data-testid={testId+'-image'}/></Link>;
 };
 export function Header() {
   const {user,logout}=useAuth();const nav=useNavigate();
