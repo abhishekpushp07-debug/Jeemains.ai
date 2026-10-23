@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -20,6 +20,9 @@ const Auth = lazy(() => import("./features/Auth"));
 const Exams = lazy(() => import("./features/Exams"));
 const Profile = lazy(() => import('./features/Profile'));
 import './learning-workspace.css';
+import './live-series.css';
+import './exam-light.css';
+const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
 const ExamHub = lazy(() => import("./features/ExamHub"));
 const ExamSection = lazy(() => import("./features/ExamSection"));
@@ -85,6 +88,11 @@ class Boundary extends React.Component {
 function Shell() {
   const loc = useLocation();
   const player = loc.pathname.startsWith("/attempts/");
+  const lightWorkspace = /^\/(attempts|results|sets)\//.test(loc.pathname);
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle('exam-light', lightWorkspace);
+    return () => { document.documentElement.classList.remove('exam-light'); };
+  }, [lightWorkspace]);
   useEffect(() => {
     if (!loc.hash) window.scrollTo(0, 0);
   }, [loc.pathname, loc.hash]);
@@ -98,6 +106,7 @@ function Shell() {
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Landing />} />
+            <Route path="/series/all-india-jee" element={<LiveSeries />} />
             <Route path="/exams" element={<Exams />} />
             <Route path="/exams/:examSlug" element={<Protected><ExamHub /></Protected>} />
             <Route path="/exams/:examSlug/mocks" element={<Protected><ExamSection kind="mocks" /></Protected>} />

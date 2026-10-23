@@ -142,7 +142,7 @@ export default function Results() {
       setBusy(false);
     }
   }
-  if (pending?.status === 'embargoed') return <div className="container page" data-testid="results-embargoed"><PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are sealed." description={pending.title} /><section className="import-card"><h2>A fair window for everyone.</h2><p className="import-muted" data-testid="results-release-time">Your results, solutions and PDF report unlock at {new Date(pending.release_at * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST, after the competition closes.</p><p className="import-fineprint mt-4" data-testid="results-embargo-receipt">Submission receipt: {pending.receipt}</p><div className="flex flex-wrap gap-3 mt-6"><Button data-testid="results-release-refresh" onClick={() => setRefresh(v => v + 1)}>Check results</Button><Button asChild variant="outline"><Link data-testid="results-competition-hub" to="/competitions">Competition hub</Link></Button></div></section></div>;
+  if (pending?.status === 'embargoed') return <div className="container page" data-testid="results-embargoed"><PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are sealed." description={pending.title} /><section className="import-card"><h2>A fair window for everyone.</h2><p className="import-muted" data-testid="results-release-time">Your results and solutions unlock at {new Date(pending.release_at * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST, after the competition closes.</p><p className="import-fineprint mt-4" data-testid="results-embargo-receipt">Submission receipt: {pending.receipt}</p><div className="flex flex-wrap gap-3 mt-6"><Button data-testid="results-release-refresh" onClick={() => setRefresh(v => v + 1)}>Check results</Button><Button asChild variant="outline"><Link data-testid="results-competition-hub" to={pending.series_id?'/series/all-india-jee?tab=results':'/competitions'}>{pending.series_id?'All India series hub':'Competition hub'}</Link></Button></div></section></div>;
   if (pending) return <div className="container page" data-testid="results-grading-pending">
     <PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are safely submitted." description="Your sealed answers are being graded in the background. You can leave this page and return from your exam’s Results section." />
     <div className="card">
@@ -179,11 +179,11 @@ export default function Results() {
   } catch {}
   return (
     <QuestionReportsProvider attemptId={id}><div className="container page results-page">
-      <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,examPath(r.exam)+'/results')} data-testid="results-home">
-        <ArrowLeft size={14} /> {location.state?.returnTo?.startsWith('/profile')?'Back to My Tests':`Back to ${r.exam} ${location.state?.returnTo?.includes('/results')?'results':'tests & results'}`}
+      <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,r.series_id?'/series/all-india-jee?tab=results':examPath(r.exam)+'/results')} data-testid="results-home">
+        <ArrowLeft size={14} /> {r.series_id?'Back to All India series':location.state?.returnTo?.startsWith('/profile')?'Back to My Tests':`Back to ${r.exam} ${location.state?.returnTo?.includes('/results')?'results':'tests & results'}`}
       </Link>
       <PageTitle
-        eyebrow={`${r.exam} · ${r.mode === "preview" ? "UNAPPROVED PRIVATE PREVIEW" : "COMPLETED PRACTICE"}`}
+        eyebrow={`${r.exam} · ${r.mode === "preview" ? "UNAPPROVED PRIVATE PREVIEW" : r.mode === 'series_live' ? 'ALL INDIA SERIES · LIVE ATTEMPT' : r.mode === 'series_practice' ? 'ALL INDIA SERIES · ARCHIVE PRACTICE' : "COMPLETED PRACTICE"}`}
         title={r.title}
         description="Your score, analysis and saved explanations—in one place."
       />
@@ -332,10 +332,6 @@ export default function Results() {
           <small>Includes time away; per-question timing unavailable</small>
         </div>
       </div>
-      <p className="report-privacy">
-        <ShieldCheck size={14} /> A downloaded copy is outside jeemains.ai access
-        controls. Use it for permitted personal study only.
-      </p>
       <div className="summary-tables">
         <section className="card">
           <h3>By subject</h3>
@@ -472,7 +468,7 @@ export default function Results() {
                 size={18}
               />
             </button>
-            <QuestionReport attemptId={id} questionId={q.id} number={q.number} context="results" />
+            {!expanded[q.id] && <QuestionReport attemptId={id} questionId={q.id} number={q.number} context="results" />}
             {expanded[q.id] && (
               <div className="review-expanded">
                 <QuestionContent
@@ -510,6 +506,14 @@ export default function Results() {
                     </Badge>
                   )}
                 </div>
+                <section data-testid={'solution-content-'+q.number} aria-label={'Solution for question '+q.number}>
+                {(q.solution_kind==='answer_key_only'||q.solution||q.s_refs?.length||q.solution_accessible_text)&&<div className="matched-solution">
+                  <div className="solution-title"><FileIcon/><h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':'Supplied solution'} · Q{q.solution_number??q.number}</h3><Badge>Matched to this frozen version</Badge></div>
+                  {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
+                  <QuestionContent question={q} solution base={`/attempts/${id}/questions/${q.id}`} gradeVersion={scoreVersion}/>
+                </div>}
+                <AiSolution item={extras.ai[q.id]} number={q.number}/>
+                </section>
                 <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />
                 <div className="ledger-meta">
                   Scoring reason: {q.reason_code} · Exact marks: {q.marks_exact}{" "}
@@ -526,21 +530,6 @@ export default function Results() {
                   state={r.review?.states?.[q.id]} categories={r.review?.categories} assigned={r.review?.assigned?.includes(q.id)}
                   confidence={r.confidence_observations?.[q.id]?.probability} excluded={r.confidence_changed_questions?.includes(q.id)}
                   solutionPending={solutionState[q.id]!=='saved'} onSaved={refreshAnalytics}/>
-                {(q.solution_kind==='answer_key_only'||q.solution||q.s_refs?.length||q.solution_accessible_text)&&<div className="matched-solution">
-                  <div className="solution-title">
-                    <FileIcon />
-                    <h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':'Supplied solution'} · Q{q.solution_number??q.number}</h3>
-                    {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
-                    <Badge>Matched to this frozen version</Badge>
-                  </div>
-                  <QuestionContent
-                    question={q}
-                    solution
-                    base={`/attempts/${id}/questions/${q.id}`}
-                    gradeVersion={scoreVersion}
-                  />
-                </div>}
-                <AiSolution item={extras.ai[q.id]} number={q.number} />
                 <QuestionReport key={"solution-report-"+q.id} attemptId={id} questionId={q.id} number={q.number} context="solutions" />
               </div>
             )}

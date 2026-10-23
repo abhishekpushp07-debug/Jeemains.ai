@@ -3,7 +3,7 @@ import { Trophy, Users, TrendingUp, Award, Sparkles, CheckCircle2, AlertTriangle
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, PieChart, Pie, Legend, CartesianGrid } from 'recharts';
 import { deepInsights } from '../../lib/deepInsights';
 
-const C = { brand: '#5C0025', soft: '#B9C9EE', gold: '#D97706', good: '#059669', bad: '#DC2626', mute: '#D97706' };
+const C = { brand: '#5C0025', soft: '#B9C9EE', gold: '#D97706', good: '#0284C7', bad: '#DC2626', mute: '#D97706' };
 
 const Stat = ({ icon: Icon, label, value, sub, testId }) => <div className="peer-stat" data-testid={testId}><Icon size={18} /><span>{label}</span><strong>{value}</strong>{sub && <small>{sub}</small>}</div>;
 

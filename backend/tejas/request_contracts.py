@@ -241,7 +241,10 @@ class CronEnvelope(BaseModel):
 from .cohorts import RankScenario
 from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
+from .live_series import Assignment
+
 MODELS = {
+    'live_series.assign': Assignment,
     'my_tests.save_paper': EmptyPayload,
     'my_tests.compare': CompareAttemptsPayload,
     'manual_solutions.request_solve': SolvePayload,

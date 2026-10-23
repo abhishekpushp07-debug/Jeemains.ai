@@ -13,7 +13,7 @@ EXAM_COUNTS = {'JEE Main': (75, 0), 'BITSAT': (130, 12), 'COMEDK': (180, 0)}
 
 
 def family(a):
-    if a.get('mode') != 'practice' or a.get('parent_attempt') or a.get('test_kind') != 'mock' or a.get('competition_end'):
+    if a.get('mode') not in ('practice', 'series_live', 'series_practice') or a.get('parent_attempt') or a.get('test_kind') != 'mock' or (a.get('competition_end') and not a.get('series_id')):
         return None
     rules = a.get('rules') or {}
     if not rules.get('minutes'):
@@ -33,6 +33,8 @@ def family(a):
     spec = {'exam': a['exam'], 'minutes': float(rules['minutes']), 'shape': sorted(shape.items()),
             'navigation': rules.get('navigation'), 'numeric_policy': rules.get('numeric_policy'),
             'bonus_rule': bonus}
+    if a.get('series_id'):
+        spec.update(series_id=a['series_id'], mode=a['mode'])
     return hashlib.sha256(json.dumps(spec, sort_keys=True).encode()).hexdigest()
 
 
@@ -71,10 +73,12 @@ async def journey(id: str, score_version: str = 'original', u=Depends(current)):
     key = family(a)
     if score_version != 'original' or not key:
         return {'state': 'unavailable', 'reason': 'Journey uses completed, timed, original-score full mocks with compatible section counts, marking and bonus rules. Chapter tests, retries, corrections and competitions stay separate.', 'series': []}
-    match = {'user_id': u['id'], 'exam': a['exam'], 'mode': 'practice', 'status': 'completed',
+    match = {'user_id': u['id'], 'exam': a['exam'], 'mode': a['mode'], 'status': 'completed',
+             'competition_end': {'$not': {'$gt': now()}},
              'summary': {'$ne': None}, 'test_kind': 'mock', 'rules.minutes': a['rules']['minutes'],
              '$and': [{'$or': [{'progress_family': key}, {'progress_family': {'$exists': False}}]},
                       {'$or': [{'submitted_at': {'$lt': a['submitted_at']}}, {'submitted_at': a['submitted_at'], 'id': {'$lte': a['id']}}]}]}
+    match['series_id'] = a['series_id'] if a.get('series_id') else {'$exists': False}
     fields = {'_id': 0, 'answers': 0, 'command_receipts': 0, 'response_schema': 0, 'first_answers': 0}
     recent, scanned, limited = [], 0, False
     async for candidate in attempts.find(match, fields).sort([('submitted_at', -1), ('id', -1)]).limit(501):
@@ -108,6 +112,6 @@ async def journey(id: str, score_version: str = 'original', u=Depends(current)):
             'first': baseline, 'delta': delta, 'series': series, 'limited': limited,
             'confidence': {'accuracy': round(100*correct/attempted, 1) if attempted else None, 'correct': correct,
                            'attempted': attempted, 'window_size': len(last5), 'attempt_ids': [x['id'] for x in last5]},
-            'basis': 'Original scores up to this attempt. Same exam, duration, full-paper sections, marking and bonus rules. Retakes included.',
+            'basis': ('All India series: live attempts and archive practice are tracked separately. ' if a.get('series_id') else '') + 'Original scores up to this attempt. Same exam, duration, full-paper sections, marking and bonus rules. Retakes included.',
             'limitation': 'Different papers can differ in difficulty; repeated exposure can improve scores. This is descriptive progress, not an equal-difficulty ability measure or a psychological confidence assessment.',
             'coverage': 'Latest 250 matching mocks plus earliest reconciled baseline; scan capped at 500 candidates per direction.' if limited else 'All matching attempts up to this result within the bounded history scan.'}

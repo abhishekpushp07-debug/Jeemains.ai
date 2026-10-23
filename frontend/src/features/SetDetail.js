@@ -27,7 +27,7 @@ export default function SetDetail() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
-  const returnTo = safeExamReturn(location.state?.returnTo, s ? examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):'/mocks') : '/home');
+  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? '/series/all-india-jee' : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
     setS(null); setError(''); setChecked(false); setConfirmed(false);
@@ -68,6 +68,7 @@ export default function SetDetail() {
       <Link className="breadcrumb" data-testid="set-back" to={preview ? '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? 'Back to Content Studio' : 'Back to '+s.exam+' tests'}</Link>
       <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
+      {s.series_id&&<div className="series-preflight-note" data-testid="series-preflight-rules"><strong>All India JEE Mains · {s.series_date} (IST)</strong><p>Live starts: 12:01 AM–8:59:00 PM. One live attempt; the original 180-minute deadline continues on resume. Live results and solutions release at 11:59 PM. From the following day, starts become separate archive-practice attempts.</p></div>}
       <div className="preflight-grid">
         <Card className="card instructions" data-testid="set-instructions">
           <div className="preflight-step-label" data-testid="preflight-rules-step"><span>01</span> Get familiar</div>
@@ -84,10 +85,10 @@ export default function SetDetail() {
             <li>One correct option per question, or an integer entry where stated. Mark for review and return to any question.</li>
             {s.rules.numeric_rule&&<li>{s.rules.numeric_rule}</li>}
             <li>{minutes ? 'The timer keeps running during a disconnect. Only answers received before the deadline are scored.' : 'This is untimed practice. Come back to your saved attempt whenever you need.'}</li>
-            <li>{s.solution_kind==='answer_key_only'?'Submitting is final. Your score, supplied answer keys and PDF report become available immediately. This book has no worked solutions.':'Submitting is final. Your result, matched solutions and full PDF report become available afterward.'}</li>
+            <li>{s.series_id?'Live results and solutions are sealed until 11:59 PM IST. Archive practice results unlock after submission.':s.solution_kind==='answer_key_only'?'Submitting is final. Your score and supplied answer keys become available after grading. This book has no worked solutions.':'Submitting is final. Your result and matched solutions become available afterward.'}</li>
           </ul>
           <div className="notice preflight-recovery" data-testid="preflight-offline-recovery-notice"><Save size={19} /><span><strong>Your drafts stay on this device.</strong> Offline edits remain pending until the server acknowledges them. Check the save status before submitting.</span></div>
-          <details className="profile-details"><summary data-testid="practice-profile-details">About this practice profile</summary><p>Free navigation · Original question order · Exact integers · Solutions after submission. This custom profile is not an official-year exam simulation. Your PDF includes every question, regardless of review filters.</p></details>
+          <details className="profile-details"><summary data-testid="practice-profile-details">About this practice profile</summary><p>Free navigation · Original question order · Exact integers · Solutions after submission. This custom profile is not an official-year exam simulation. Review includes every question, regardless of review filters.</p></details>
         </Card>
         <Card className="card device-check" data-testid="set-preflight-checklist">
           <div className="preflight-step-label" data-testid="preflight-device-step"><span>02</span> Check & begin</div>
@@ -111,7 +112,6 @@ export default function SetDetail() {
           <small data-testid="preflight-profile-notice"><ShieldCheck size={14} /> Saved to this number’s practice profile.</small>
         </Card>
       </div>
-      <div className="preflight-report-note" data-testid="preflight-report-note"><FileDown size={17} /> {s.solution_kind==='answer_key_only'?'One complete PDF. Every question, your response and the supplied answer key.':'One complete PDF. Every question, your response and its matched solution.'}</div>
     </div>
   );
 }

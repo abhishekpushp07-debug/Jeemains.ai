@@ -75,6 +75,8 @@ async def audit(actor, action, resource, detail=""):
 
 
 async def indexes():
+    await sets.create_index('series_date', unique=True, sparse=True)
+    await attempts.create_index([('user_id', 1), ('series_id', 1), ('started_at', -1)])
     for name in ('tejas_smart_imports', 'tejas_smart_papers', 'tejas_smart_questions',
                  'tejas_smart_keys', 'tejas_ai_solutions', 'tejas_ai_settings',
                  'tejas_ai_daily', 'tejas_ai_limits', 'tejas_cohorts', 'tejas_cohort_snapshots',

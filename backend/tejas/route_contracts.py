@@ -9,6 +9,11 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'live_series.catalogue': ('public_schedule_metadata_only', 'normal', 'read'),
+    'live_series.history': ('own_series_attempts_only', 'normal', 'read'),
+    'live_series.studio_schedule': ('owner_schedule_only', 'normal', 'read'),
+    'live_series.assign': ('owner_published_fresh_paper_future_day', 'control', 'revision_CAS_unique_date'),
+    'live_series.unassign': ('owner_future_day_only', 'control', 'revision_CAS'),
     'learning_progress.journey': ('attempt_owner_original_released_progress', 'normal', 'read'),
     'historical_rank.historical_rank': ('attempt_owner_released_evidence_gate', 'normal', 'read_no_invented_rank'),
     'my_tests.save_state': ('own_saved_paper_only', 'normal', 'read'),

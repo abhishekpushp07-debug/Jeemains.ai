@@ -196,6 +196,20 @@ iteration103_followup:
   final_fixes: "Explicitnullsource_hash normalized toempty byfieldvalidator (previously500); numeric_ruleemptybulletguard; shorter examcorner; legendpadding;44pxcalendarday/navtargets+8pxcollisionpadding;Cleardateserroraction; legacyaccuracyderived fromsamecorrect/attemptedformula; nicer cohort copy/en-INreportdates; uniquegroupdetailtestids; QAcohortjobcleanup. Allpendingverification, nofinishuntiltestingagentpasses."
 
 
+# Current delivery — 2026-10-23 (approved; pending QA)
+current_delivery:
+  requirements: "Hide result PDF buttons; solutions before feedback; light-only exams/results; sky-blue secondary accent; historical approximate rank ranges; All India JEE Mains flagship, 62 daily slots Dec1-Jan31 IST, cutoff20:59:00, archive and dedicated private results/analytics/solutions. Owner uploads using existing importer. No auto AI."
+  backend: "live_series.py schedule/owner assignment/history; attempts.py derives live/archive modes server-side, deterministic live id, cutoff, embargo and deadline; content/catalog schedule guards; learning_progress segregated series families; historical_rank exact cited secondary-table ranges, no formulas/scaling."
+  frontend: "LiveSeriesBanner, LiveSeries hub and owner SeriesSchedulePanel; Results reorder; ReportButton temporarily null for all callers; root exam-light tokens include portal controls and preserve user dark preference; blue theme."
+  mandatory_tests:
+    - "DO NOT write to the configured customer database. Use isolated in-memory/ASGI or dedicated test database via monkeypatched module handles, never change MONGO_URL/DB_NAME. Do not run old seed scripts on real data. Browser fixtures may bridge to isolated ASGI transport; clearly distinguish fixture testing from real API."
+    - "Date boundaries beforeDec1,00:00,00:01,20:59:00 accepted,20:59:01 denied new start,resume after cutoff,23:59 release,00:00 nextday archive,Jan31/Feb1,62 slots. Concurrent duplicate live start. Direct /sets/id/start cannot bypass. Future content hidden; withdrawn/unavailable fail closed."
+    - "Owner/reviewer/student/anonymous assignment matrix; duplicate date rejection, revision CAS, invalid paper/date/reassign after opening rejection; archive separated from live; private history pagination; no answers/keys in schedule."
+    - "Ranks exact source rows for JEE2026 and COMEDK2025; BITSAT unavailable; JEE source gaps269/270 and malformed20-29 unavailable, overlap291/292 enclosing range; incompatible duration/rules/subjects/type/max and retry/correction rejected; embargo/private ownership."
+    - "Desktop1920x800 and mobile390x844: banner/modal/hub all tabs/studio schedule; real populated Results with source crops and AI math under stored+OS dark; solutions above reflection; no PDF controls; theme preference restored after leaving; no overflow."
+    - "No model calls, no credentials changed, no production calls. Preserve 144 existing sets, source content and real learner attempts. Test existing mocks rules/navigation/bonus regression with isolated fixtures."
+  known_limits: "Owner must supply/publish/assign the62 papers; no invented JEE papers. 80-factor/60+ wording is explicitly a proposed approach/target, not verified prediction. Audit remediation and capacity testing remain separate. Source ranges are secondary estimates, not official observed ranks."
+
 final_iteration104:
   passed: "39/39 backend (12journey,19manual/report,8targeted), allrequesteddesktop/mobile/touch/keyboard flows. Sourcehashnull list/group/priorities/review bugverifiedfixed. No frontendissues, action_items empty."
   preservation: "144sets11800Q5939ready1161paused unchanged; QAfixtures/jobs/cohorts cleaned. Genuine non-QA learner attempt was preserved. Do NOT reset or delete realactivity to match oldzero-attemptbaseline."

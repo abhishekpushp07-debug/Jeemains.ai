@@ -34,6 +34,7 @@ from tejas import (
     learning_progress,
     my_tests,
     historical_rank,
+    live_series,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -172,6 +173,7 @@ for module in [
     learning_progress,
     my_tests,
     historical_rank,
+    live_series,
 ]:
     app.include_router(module.router)
 

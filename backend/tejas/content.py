@@ -83,7 +83,11 @@ def valid_rules(r):
     }
 
 
-def permitted(s, u=None):
+def permitted(s, u=None, series_schedule=False):
+    if s.get('series_date') and not series_schedule:
+        from .live_series import window
+        if now() < window(s['series_date'])['opens_at']:
+            return False
     if (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or now() < s.get('start_at', float('inf')) or now() >= s.get('end_at', 0)):
         return False
     if (
@@ -118,7 +122,7 @@ def summary(s):
                 "source",
                 "attribution",
                 "created_at",
-                "test_kind", "full_length", "mock_number",
+                "test_kind", "full_length", "mock_number", "series_id", "series_date",
                 "chapter_book_id", "chapter_number", "chapter_subject", "solution_kind", "start_at", "end_at", "live_enabled",
             ]
         },

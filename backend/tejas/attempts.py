@@ -110,6 +110,7 @@ def attempt_view(a):
         "visited",
         "test_kind",
         "bonus_unlocked_at",
+        "series_id", "series_date",
     ]
     return {
         **{k: a.get(k) for k in fields},
@@ -189,8 +190,10 @@ async def start(id: str, data: Start, u=Depends(current)):
         return attempt_view(await expire(existing))
     s = await get(sets, id)
     preview = data.preview and u["role"] in ["owner", "reviewer"]
-    mode = "preview" if preview else "practice"
-    competition_id = str(uuid.uuid5(uuid.NAMESPACE_URL, 'competition:' + id + ':' + u['id'])) if s.get('competition') and not preview else None
+    from .live_series import series_mode, guard_start, window, valid_paper
+    mode = "preview" if preview else (series_mode(s, now()) or "practice")
+    series_live = mode == 'series_live'
+    competition_id = str(uuid.uuid5(uuid.NAMESPACE_URL, 'competition:' + id + ':' + u['id'])) if (s.get('competition') or series_live) and not preview else None
     if competition_id:
         first = await attempts.find_one({'id': competition_id}, {'_id': 0, 'command_receipts': 0, 'response_schema': 0})
         if first:
@@ -206,6 +209,10 @@ async def start(id: str, data: Start, u=Depends(current)):
             return attempt_view(active)
     if not preview and (s["status"] != "published" or not permitted(s, u)):
         raise HTTPException(404, "This set is not available to start.")
+    if not preview:
+        guard_start(s, now())
+        if s.get('series_id') and not valid_paper(s):
+            raise HTTPException(409, 'This series paper needs owner review before new attempts can start.')
     if not data.device_checked:
         raise HTTPException(400, "Complete the device and content check first.")
     pf = await db.tejas_preflight.find_one(
@@ -254,6 +261,14 @@ async def start(id: str, data: Start, u=Depends(current)):
         "deadline": 0,
         "parent_attempt": None,
     }
+    if not preview and s.get('series_id'):
+        guard_start(s, a['started_at'])
+        if series_mode(s, a['started_at']) != mode:
+            raise HTTPException(409, 'The series day changed. Reload before starting.')
+        a.update(series_id=s['series_id'], series_date=s['series_date'], test_kind='mock')
+        if series_live:
+            a['competition_end'] = window(s['series_date'])['closes_at']
+            a['competition_ranked'] = False
     if s.get('competition') and not preview:
         a['competition_end'] = s['end_at']
         a['competition_ranked'] = u.get('role') == 'student' and u.get('access_type') == 'unverified_phone'
@@ -401,7 +416,7 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
 
     a = await expire(await owned(id, u))
     if a['status'] == 'completed' and a.get('competition_end', 0) > now():
-        return {'id': id, 'title': a['title'], 'status': 'embargoed', 'release_at': a['competition_end'], 'receipt': a.get('receipt'), 'server_now': now()}
+        return {'id': id, 'title': a['title'], 'status': 'embargoed', 'release_at': a['competition_end'], 'receipt': a.get('receipt'), 'server_now': now(), 'series_id': a.get('series_id')}
     if a["status"] == "completed":
         if not a.get("ledger"):
             job = await ensure_grade(a, bg)
@@ -575,6 +590,8 @@ async def retry(id: str, data: dict, u=Depends(current)):
         'competition_end',
         'competition_ranked',
         'bonus_unlocked_at',
+        'series_id',
+        'series_date',
     ]:
         a.pop(k, None)
     a['start_request_keys'] = [start_key]
