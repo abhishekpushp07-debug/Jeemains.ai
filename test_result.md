@@ -1,3 +1,11 @@
+# Active user-approved JEE chapter import — timers confirmed
+jee_chapter_import_active:
+  user_request: "Upload three supplied JEE Main Physics/Maths/Chemistry PDFs into JEE Main chapter practice; original supplied solutions only, no AI generation. User explicitly confirmed Physics90MINUTES (not hours), Mathematics120minutes, Chemistry70minutes per50questions. +4correct/-1wrong/0unanswered for MCQ and integer. Resume upload now."
+  sources: "Downloaded /tmp/jee_chapter_import/{physics,mathematics,chemistry}.pdf. 29Physics+26Mathematics+23Chemistry=78chapters,3900questions. Existing data144BITSATsets preserved. SourcePDFprintedtimers60/90/40mustnotbeusedforonlineexams; originalPDFkeptunchanged,online90/120/70overrides."
+  implementation: "jee_chapter_parser.py added, chapter_book_organiser_worker supports up to1000chapterpages within sealed subprocess; import_jee_chapters.py stages privately via existing private object storage and idempotent IDs. Updates ChapterBookStudio/source-specific rules, numeric MCQ types+worked crops. Currently codewritten; import execution and independent publication audit pending."
+  publication_gate: "Import tools/import_jee_chapters.py first (background); verify all50keytable/geometry/workedanswer pairs eachchapter, originalsourcecrops, scoring+timers in isolation. Testingagent writes independent report; main runs --publish-report ONLY afterPASS. Do notwriteQAfixtures into customerDB. User authorised actualcontentimport/publication. No AIjobs/auth changes. Job requester abhishekpushp07@gmail.com is recorded as requested_by_email. Existing configured app-owner account is reused for publication identity; no auth/credentials/email migration or reseed is authorised."
+
+
 # Current delivery — 2026-10-23 BITSAT branches / visible mobile shine (verified113–114)
 bitsat_branch_delivery:
   user: "Blood-red JEEchoicecard; tricoloursaffronorangeBITSAT; visibleshineonmobile. BITSATinstead ofrank:top3branchesforparticularmarksusinguploadedofficialscreenshots. KeepAllIndiablueCOMEDKblack."

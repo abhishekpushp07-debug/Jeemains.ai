@@ -513,7 +513,7 @@ export default function Results() {
                   {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
                   <QuestionContent question={q} solution base={`/attempts/${id}/questions/${q.id}`} gradeVersion={scoreVersion}/>
                 </div>}
-                {(q.solution_kind!=='ai_generated'||!q.solution||extras.ai[q.id]?.state==='ready')&&<AiSolution item={extras.ai[q.id]} number={q.number}/>}
+                {(!['ai_generated','supplied_worked'].includes(q.solution_kind)||(!q.solution&&!q.s_refs?.length)||extras.ai[q.id]?.state==='ready')&&<AiSolution item={extras.ai[q.id]} number={q.number}/>}
                 </section>
                 <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />
                 <div className="ledger-meta">

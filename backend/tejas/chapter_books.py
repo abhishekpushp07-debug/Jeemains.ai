@@ -45,11 +45,16 @@ class ChapterView(BaseModel):
     start_at:float|None=None
     end_at:float|None=None
     live_enabled:bool=False
+    rules:dict=Field(default_factory=dict)
+    solution_kind:str='answer_key_only'
 
 class BookView(BaseModel):
     id:str
     title:str
     subject:str=''
+    exam:str='BITSAT'
+    minutes:int=60
+    solution_kind:str='answer_key_only'
     status:str
     message:str=''
     revision:int=0
@@ -79,14 +84,15 @@ def chapter_view(s):
     return ChapterView(id=s['id'],title=s['title'],chapter_number=s['chapter_number'],subject=s['chapter_subject'],
         count=len(s['questions']),status=state,start_page=s['start_page'],end_page=s['end_page'],key_page=s['key_page'],
         verification=s['verification'],independent_check=s.get('independent_check'),revision=s['revision'],
-        start_at=s.get('start_at'),end_at=s.get('end_at'),live_enabled=s.get('live_enabled',False))
+        start_at=s.get('start_at'),end_at=s.get('end_at'),live_enabled=s.get('live_enabled',False),
+        rules=s.get('rules',{}),solution_kind=s.get('solution_kind','answer_key_only'))
 
 
 # Metadata-only read: polling must not deserialize every question, key and crop.
 BOOK_CHAPTER_PROJECT = {key: 1 for key in (
     'id', 'title', 'chapter_number', 'chapter_subject', 'questions.number',
     'start_page', 'end_page', 'key_page', 'verification', 'independent_check',
-    'revision', 'start_at', 'end_at', 'live_enabled',
+    'revision', 'start_at', 'end_at', 'live_enabled', 'rules', 'solution_kind',
 )}
 BOOK_CHAPTER_PROJECT['_id'] = 0
 
@@ -95,6 +101,7 @@ async def book_view(r):
     status=r['status']
     if status=='organising' and r.get('lease_until',0)<now():status='interrupted'
     return BookView(id=r['id'],title=r['title'],subject=r.get('subject',''),status=status,message=r.get('message',''),
+        exam=r.get('exam','BITSAT'),minutes=r.get('minutes',60),solution_kind=r.get('solution_kind','answer_key_only'),
         revision=r.get('revision',0),count=sum(len(s['questions']) for s in children),pages=r.get('pages',0),
         chapters=[chapter_view(s) for s in children],source_sha256=r['source']['sha256'],server_now=now())
 
@@ -158,6 +165,10 @@ async def process_book(identity):
             with tempfile.TemporaryDirectory() as directory:
                 p=Path(directory)/'book.pdf';p.write_bytes(raw)
                 result=await organise_pdfs(p,chapter_book=True)
+            if result.get('exam')=='JEE Main':
+                result['source_minutes']=result['minutes']
+                result['minutes']={'Physics':90,'Mathematics':120,'Chemistry':70}[result['subject']]
+                for chapter in result['chapters']: chapter['minutes']=result['minutes']
             parsed_sha=hashlib.sha256(json.dumps(result).encode()).hexdigest()
             for c in result['chapters']:
                 if not await books.find_one(fence,{'id':1}):return
@@ -166,19 +177,22 @@ async def process_book(identity):
                     q['id']=str(uuid.uuid5(uuid.UUID(sid),str(q['number'])))
                     for key in ('q_refs','s_refs'):
                         for ref in q[key]:ref['file_id']=r['source']['id']
-                rules=valid_rules({'minutes':60,'correct':3,'wrong':-1,'skipped':0})
-                rules['numeric_rule']='Single-correct MCQ: select A, B, C or D. No numeric-entry questions.'
+                exam=result.get('exam','BITSAT')
+                worked=result.get('solution_kind')=='supplied_worked'
+                rules=valid_rules({'minutes':result.get('minutes',60),'correct':4 if exam=='JEE Main' else 3,'wrong':-1,'skipped':0})
+                rules['numeric_rule']='MCQ and integer responses both score +4 correct, −1 wrong and 0 unanswered. Teaching-rubric marks do not affect test scores.' if exam=='JEE Main' else 'Single-correct MCQ: select A, B, C or D. No numeric-entry questions.'
                 evidence=independent_evidence(r['source']['sha256'],parsed_sha,c,result['subject'])
                 s={'id':sid,'chapter_book_id':identity,'chapter_number':c['number'],'chapter_subject':result['subject'],
-                   'title':c['title'],'exam':'BITSAT','year':'','source':'TEJAS200 chapter-wise original practice. Answer keys supplied; no worked solutions.',
+                   'title':c['title'],'exam':exam,'test_kind':'chapter','year':'','source':'TEJAS200 chapter-wise original practice. '+('Original worked solutions supplied.' if worked else 'Answer keys supplied; no worked solutions.'),
                    'attribution':'TEJAS200 · Owner-supplied original practice material','questions':c['questions'],'file_ids':[r['source']['id']],
                    'rules':rules,'status':'draft','version':1,'revision':1,'created_at':r['created_at'],'profile_mode':'practice','audience':'all',
                    'rights_upload':True,'rights_publish':True,'rights_report':True,'rights_attested_by':r['created_by'],
-                   'competition':False,'live_enabled':False,'solution_kind':'answer_key_only','verification':c['verification'],
+                   'competition':False,'live_enabled':False,'solution_kind':'supplied_worked' if worked else 'answer_key_only','verification':c['verification'],
                    'independent_check':evidence,'start_page':c['start_page'],'end_page':c['end_page'],'key_page':c['key_page']}
                 await sets.update_one({'id':sid},{'$setOnInsert':s},upsert=True)
             await books.update_one(fence,{'$set':{'status':'ready','subject':result['subject'],'pages':result['pages'],'parsed_sha256':parsed_sha,
-                'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve formulas; worked solutions are not supplied.'},'$inc':{'revision':1}})
+                'exam':result.get('exam','BITSAT'),'minutes':result.get('minutes',60),'solution_kind':result.get('solution_kind','answer_key_only'),
+                'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve notation. '+('Original worked solutions supplied; no AI generation.' if result.get('solution_kind')=='supplied_worked' else 'Worked solutions are not supplied.')},'$inc':{'revision':1}})
         except Exception as exc:
             message=str(exc)[:450] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry the saved source.'
             await books.update_one(fence,{'$set':{'status':'failed','message':message}})
@@ -231,7 +245,7 @@ async def publish_book(id:str,data:ChapterAction,u=Depends(owner)):
         await sets.update_one({'id':s['id'],'start_at':{'$exists':False}},
             {'$set':{'status':'published','start_at':start,'end_at':start+365*86400,'published_at':start,'live_enabled':True,
                      'expires':datetime.fromtimestamp(start+365*86400,timezone.utc).date().isoformat()},'$inc':{'revision':1}})
-    await audit(u['id'],'Chapter book published',id,f'{len(children)} independently source-rechecked tests;365-day access;60min personal timers')
+    await audit(u['id'],'Chapter book published',id,f'{len(children)} independently source-rechecked tests;365-day access; source-specific personal timers and marking')
     return await book_view(await get(books,id))
 
 

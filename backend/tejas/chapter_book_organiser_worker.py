@@ -6,6 +6,7 @@ import re
 import sys
 import fitz
 from pdf_organiser_worker import seal, open_pdf, LIMIT
+from jee_chapter_parser import parse_jee_book
 
 
 def page_lines(page):
@@ -27,6 +28,8 @@ def whitespace_boundary(page, pix, y):
 
 def parse_book(doc):
     cover='\n'.join(doc[i].get_text() for i in range(min(2,len(doc))))
+    if 'JEE Main Chapter Tests' in cover:
+        return parse_jee_book(doc)
     subjects=[s for s in ('Physics','Chemistry','Mathematics') if re.search(r'(?m)^'+s+r'\s*$',cover)]
     if len(subjects)!=1 or 'BITSAT' not in cover:
         raise ValueError('Use a searchable BITSAT subject chapter book with explicit Chapter headings and answer-key tables.')
@@ -111,7 +114,11 @@ def main():
         with open(os.path.join(directory,'questions.pdf'),'rb') as f: raw=f.read(LIMIT+1)
         codecs.lookup('raw_unicode_escape');codecs.lookup('unicode_escape');json.dumps({'x':'अ'}).encode()
         seal(directory)
-        result=parse_book(open_pdf(raw))
+        if not raw.startswith(b'%PDF-') or len(raw)>LIMIT: raise ValueError('Use a valid chapter PDF under50MB.')
+        doc=fitz.open(stream=raw,filetype='pdf')
+        if doc.is_encrypted or not 1<=len(doc)<=1000 or any(p.rect.width>2000 or p.rect.height>2000 for p in doc):
+            raise ValueError('Use an unlocked chapter book of at most1000standard-size pages.')
+        result=parse_book(doc)
         encoded=json.dumps(result,ensure_ascii=False,separators=(',',':')).encode()
         if len(encoded)>12*1024*1024: raise ValueError('Book output exceeds safe bounds. Split the source.')
         sys.stdout.buffer.write(encoded)
