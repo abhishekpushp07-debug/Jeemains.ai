@@ -48,6 +48,6 @@ export const JeeTransferPanel = () => {
       {busy && <Button variant="outline" data-testid="jee-transfer-pause" onClick={() => { running.current = false; }}>Pause after current step</Button>}
       {!data && error && <Button variant="outline" data-testid="jee-transfer-retry" onClick={() => { setError(''); api('/studio/jee-transfer').then(setData).catch(e => setError(e.message)); }}>Retry connection</Button>}
     </div>
-    <p className="import-fineprint mt-3" data-testid="jee-transfer-safety">Closing this page pauses after the current step. Resume safely from this panel; no duplicate chapters are created. A conflicting record or inaccessible source blocks the import.</p>
+    <p className="import-fineprint mt-3" data-testid="jee-transfer-safety">Closing this page pauses after the current step. Chapters appear in verified batches, so a pause can leave a partial catalogue until you resume. No duplicate chapters are created. A conflicting record or inaccessible source blocks further import.</p>
   </section>;
 };

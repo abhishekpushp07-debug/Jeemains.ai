@@ -2,11 +2,12 @@ import asyncio
 import copy
 import gzip
 import hashlib
+import threading
 from functools import lru_cache
 from pathlib import Path
 from bson import json_util
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from .auth import owner
@@ -21,6 +22,7 @@ BUNDLE_PATH = Path(__file__).resolve().parents[1] / 'resources' / 'jee_chapters.
 COLLECTIONS = ('tejas_files', 'tejas_chapter_books', 'tejas_sets')
 COUNTS = {'tejas_files': 81, 'tejas_chapter_books': 3, 'tejas_sets': 78}
 TIMINGS = {'Physics': 90, 'Mathematics': 120, 'Chemistry': 70}
+SOURCE_SLOT = threading.Lock()
 
 
 class ContentRecord(BaseDocument):
@@ -64,7 +66,10 @@ def digest(value):
 
 
 def content(raw):
-    return ContentRecord.from_mongo(raw).model_dump(by_alias=True, exclude={'id'})
+    try:
+        return ContentRecord.from_mongo(raw).model_dump(by_alias=True, exclude={'id'})
+    except ValidationError:
+        raise HTTPException(409, 'An existing content record has an invalid identity. Import is blocked rather than changing that record.')
 
 
 @lru_cache(maxsize=1)
@@ -138,6 +143,13 @@ def verify_pdf(f):
         raise HTTPException(409, 'A private source PDF failed its size or hash check. No chapter will be imported until all sources pass.')
 
 
+def guarded_pdf_check(f):
+    try:
+        verify_pdf(f)
+    finally:
+        SOURCE_SLOT.release()
+
+
 async def status_view(principal):
     raw = await db.tejas_content_transfers.find_one({'_id': TRANSFER_ID})
     state = TransferReceipt.from_mongo(raw) if raw else None
@@ -155,6 +167,8 @@ async def transfer_status(u=Depends(owner)):
 async def claim(principal, records):
     receipts = db.tejas_content_transfers
     raw = await receipts.find_one({'_id': TRANSFER_ID})
+    if raw and raw.get('owner_id') != principal['id']:
+        raise HTTPException(409, 'This transfer was started by a different owner account. Continue with that original owner; no records have been overwritten.')
     if not raw:
         await inventory(records)
         baseline, counts = await baseline_snapshot(records)
@@ -199,8 +213,12 @@ async def advance(state, records):
         return
     if state.phase == 'verifying':
         f = records['tejas_files'][state.verified_files]
+        if not SOURCE_SLOT.acquire(blocking=False):
+            raise HTTPException(429, 'The previous PDF check is still finishing. Wait before resuming.', headers={'Retry-After': '30'})
+        task = asyncio.create_task(asyncio.to_thread(guarded_pdf_check, f))
+        task.add_done_callback(lambda completed: completed.exception() if not completed.cancelled() else None)
         try:
-            await asyncio.wait_for(asyncio.to_thread(verify_pdf, f), timeout=45)
+            await asyncio.wait_for(asyncio.shield(task), timeout=45)
         except TimeoutError:
             raise HTTPException(503, 'Source verification timed out. Resume to retry this PDF; no chapters were written.')
         state.verified_files += 1
