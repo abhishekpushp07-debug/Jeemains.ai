@@ -1,6 +1,6 @@
 # JEELIVE.AI — Native Android Agent Handoff
 
-Prepared: 2026-10-23. Type: **implementation handoff, not an APK or a finished Android project**.
+Prepared: 2026-10-23. Revision: **1.1 — completeness cross-check update**. Type: **implementation handoff, not an APK or a finished Android project**.
 
 ## Android agent ko kya dena hai
 Poora ZIP upload karo, phir `AGENT_PROMPT.md` ka text paste karo. Agent ko existing backend reuse karna hai; naya database, copied question bank ya website WebView wrapper nahi banana.
@@ -19,7 +19,8 @@ Poora ZIP upload karo, phir `AGENT_PROMPT.md` ka text paste karo. Agent ko exist
 5. `05_BUILD_PLAN_AND_ACCEPTANCE.md`: small independently testable implementation stages.
 6. `06_KNOWN_GAPS_AND_RELEASE.md`: honest release blockers and work not done.
 7. `api/ENDPOINTS.md`, `api/student-openapi.json`, `api/postman_collection.json`, `api/command-examples.json`.
-8. `reference/`: selected current web files for behavior/design reference, not a complete runnable web project.
+8. `07_COVERAGE_CHECK.md`: feature-to-endpoint reconciliation, added guest/job routes and paused-route warning.
+9. `reference/`: selected current web files for behavior/design reference, not a complete runnable web project.
 
 ## Important boundaries
 - Current learner phone access is **unverified phone-only convenience access**, not OTP. Do not describe it as secure ownership verification. Resolve verified identity before a high-trust public launch.

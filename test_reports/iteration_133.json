@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-23",
+  "type": "handoff_completeness_review_and_artifact_check",
+  "status": "passed",
+  "revision": "1.1",
+  "download_url": "https://campus-search-debug.preview.emergentagent.com/downloads/JEELIVE_AI_Native_Android_Handoff_v1_1.zip",
+  "bytes": 440082,
+  "sha256": "b5d1dbb20ee7b40596d0eaca05135543c1c2d77b28d8891f112ba211f9dbca2a",
+  "files": 36,
+  "api_paths": 51,
+  "api_operations": 54,
+  "schemas": 37,
+  "corrections": [
+    "Added GET /api/sets and /api/sets/{id} for guest catalogue/detail parity.",
+    "Added GET /api/jobs/{id}, POST /api/jobs/{id}/retry and GET /api/jobs/{id}/download, with ownership, retry/state, background-dispatch and optional-report restrictions.",
+    "Marked authenticated legacy POST /api/attempts/{id}/solutions/{qid} unavailable_http_410; no generation entitlement.",
+    "Added feature-to-endpoint reconciliation and updated build/test instructions."
+  ],
+  "checks": {
+    "actual_download_http": 200,
+    "download_equals_local": true,
+    "old_link_alias_updated": true,
+    "zip_crc_and_file_hashes_passed": true,
+    "schema_refs_resolve": true,
+    "all_five_new_route_methods_present": true,
+    "postman_request_json_valid": true,
+    "legacy_route_availability_marker_present": true,
+    "admin_cron_transfer_and_private_artifacts_excluded": true
+  },
+  "customer_database_writes": false,
+  "live_job_or_login_requests": false,
+  "backend_code_changes": false,
+  "native_device_testing": false,
+  "remaining_scope": "Native APK/device integration, verified phone ownership and store/release inputs are documented future work, not completed by this handoff.",
+  "artifact_issues": []
+}

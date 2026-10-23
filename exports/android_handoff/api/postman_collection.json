@@ -37,7 +37,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/health",
         "header": [],
-        "description": "Health\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Health\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -51,7 +51,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Login\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Login\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"email\": \"[AUTHORIZED_STAFF_EMAIL]\",\n  \"password\": \"[SECURELY_ENTERED_PASSWORD]\"\n}",
@@ -69,7 +69,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/auth/session",
         "header": [],
-        "description": "Session\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Session\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -78,7 +78,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/auth/me",
         "header": [],
-        "description": "Me\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Me\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -92,7 +92,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Refresh\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Refresh\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -115,7 +115,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Logout\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Logout\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -138,7 +138,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Preferences\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Preferences\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"exam\": \"JEE Main\"\n}",
@@ -161,7 +161,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Access\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Access\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"phone\": \"[USER_ENTERED_PHONE]\"\n}",
@@ -171,6 +171,50 @@
             }
           }
         }
+      }
+    },
+    {
+      "name": "GET /api/sets",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/sets",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "sets"
+          ],
+          "query": [
+            {
+              "key": "exam",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Catalogue\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/sets/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/sets/{{id}}",
+        "header": [],
+        "description": "Set Detail\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -184,7 +228,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Save Answer\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Save Answer\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"value\": \"A\",\n  \"marked\": false,\n  \"revision\": 1,\n  \"request_id\": \"[UUID_FOR_THIS_EDIT]\"\n}",
@@ -229,7 +273,7 @@
           ]
         },
         "header": [],
-        "description": "My Sets\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "My Sets\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -238,7 +282,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/my/sets/{{id}}",
         "header": [],
-        "description": "My Set\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "My Set\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -252,7 +296,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Preflight\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Preflight\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"preview\": false,\n  \"test_response\": \"[LOCAL_DEVICE_CHECK]\"\n}",
@@ -275,7 +319,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Start\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Start\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"start_key\": \"[UUID_FOR_THIS_START_INTENT]\",\n  \"device_checked\": true,\n  \"preview\": false\n}",
@@ -309,7 +353,7 @@
           ]
         },
         "header": [],
-        "description": "History\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "History\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -318,7 +362,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/attempts/{{id}}",
         "header": [],
-        "description": "Read Attempt\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Read Attempt\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -332,7 +376,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Visit Question\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Visit Question\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"question_id\": \"[QUESTION_UUID_FROM_ATTEMPT]\"\n}",
@@ -355,7 +399,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Unlock Bonus\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Unlock Bonus\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -378,7 +422,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Submit\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Submit\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -419,7 +463,7 @@
           ]
         },
         "header": [],
-        "description": "Results\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Results\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -450,7 +494,7 @@
           ]
         },
         "header": [],
-        "description": "Asset\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Asset\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -464,7 +508,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Solution Consulted\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Solution Consulted\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -487,7 +531,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Retry\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Retry\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"start_key\": \"[NEW_UUID_FOR_RETRY_INTENT]\",\n  \"score_version\": \"original\"\n}",
@@ -510,7 +554,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Report\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Report\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"score_version\": \"original\"\n}",
@@ -523,12 +567,53 @@
       }
     },
     {
+      "name": "GET /api/jobs/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/jobs/{{id}}",
+        "header": [],
+        "description": "Status\n\nUse only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/jobs/{id}/retry",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/jobs/{{id}}/retry",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Retry Job\n\nUse only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start_key\": \"[NEW_UUID_FOR_RETRY_INTENT]\",\n  \"score_version\": \"original\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/jobs/{id}/download",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/jobs/{{id}}/download",
+        "header": [],
+        "description": "Download\n\nUse only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
       "name": "GET /api/competitions",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/api/competitions",
         "header": [],
-        "description": "Catalogue\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Catalogue\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -537,7 +622,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/competitions/{{id}}",
         "header": [],
-        "description": "Leaderboard\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Leaderboard\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -551,7 +636,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Save Review\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Save Review\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"request_id\": \"[NEW_UUID_FOR_REVIEW_EDIT]\",\n  \"revision\": 1,\n  \"score_version\": \"original\",\n  \"category\": \"calculation\",\n  \"note\": \"[USER_WRITTEN_NOTE_MAX_500]\",\n  \"identified_error\": true,\n  \"wrote_note\": true,\n  \"reviewed_solution\": false,\n  \"retry_planned\": false\n}",
@@ -574,7 +659,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Expected Value\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Expected Value\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"probability\": 0.5\n}",
@@ -618,7 +703,7 @@
           ]
         },
         "header": [],
-        "description": "Public Exams\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Public Exams\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -654,7 +739,7 @@
           ]
         },
         "header": [],
-        "description": "My Exams\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "My Exams\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -663,7 +748,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/attempts/{{id}}/solutions/{{qid}}",
         "header": [],
-        "description": "Read\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Read\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -677,7 +762,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Request Solution\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Request Solution\nPAUSED LEGACY OPERATION: authenticated calls currently return HTTP410. Do not expose AI generation, retry this operation or substitute generated content for supplied solutions. GET remains subject to release/ownership checks.\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -713,7 +798,7 @@
           ]
         },
         "header": [],
-        "description": "Read\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Read\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -727,7 +812,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Air Scenario\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Air Scenario\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"percentile_low\": 90.0,\n  \"percentile_high\": 95.0\n}",
@@ -778,7 +863,7 @@
           ]
         },
         "header": [],
-        "description": "Catalogue\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Catalogue\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -815,7 +900,7 @@
           ]
         },
         "header": [],
-        "description": "History\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "History\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -824,7 +909,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/attempts/{{id}}/ai-solutions",
         "header": [],
-        "description": "Attempt Solutions\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Attempt Solutions\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -833,7 +918,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/attempts/{{id}}/question-reports",
         "header": [],
-        "description": "My Reports\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "My Reports\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -847,7 +932,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Report Wrong\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Report Wrong\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"category\": \"solution\",\n  \"context\": \"solutions\",\n  \"note\": \"[USER_WRITTEN_NOTE_MAX_600]\"\n}",
@@ -883,7 +968,7 @@
           ]
         },
         "header": [],
-        "description": "Journey\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Journey\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -892,7 +977,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/my/tests/saved/{{id}}",
         "header": [],
-        "description": "Save State\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Save State\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -906,7 +991,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Save Paper\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Save Paper\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -929,7 +1014,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Remove Saved\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Remove Saved\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{}",
@@ -994,7 +1079,7 @@
           ]
         },
         "header": [],
-        "description": "My Tests\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "My Tests\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -1008,7 +1093,7 @@
             "value": "application/json"
           }
         ],
-        "description": "Compare\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "description": "Compare\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"left\": \"[OWN_COMPLETED_ATTEMPT_ID]\",\n  \"right\": \"[OWN_OTHER_COMPLETED_ATTEMPT_ID]\"\n}",
@@ -1044,7 +1129,7 @@
           ]
         },
         "header": [],
-        "description": "Historical Rank\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Historical Rank\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -1080,7 +1165,7 @@
           ]
         },
         "header": [],
-        "description": "Branch Matches\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Branch Matches\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -1089,7 +1174,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/series/all-india-jee",
         "header": [],
-        "description": "Catalogue\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Catalogue\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -1116,7 +1201,7 @@
           ]
         },
         "header": [],
-        "description": "History\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "History\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     },
     {
@@ -1125,7 +1210,7 @@
         "method": "GET",
         "url": "{{baseUrl}}/api/series/all-india-jee/streak",
         "header": [],
-        "description": "Progress\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+        "description": "Progress\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
       }
     }
   ]

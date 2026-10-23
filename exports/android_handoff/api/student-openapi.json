@@ -328,6 +328,129 @@
         ]
       }
     },
+    "/api/sets": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Catalogue",
+        "operationId": "catalogue_api_sets_get",
+        "parameters": [
+          {
+            "name": "exam",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Exam"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "public_published_audience",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
+    "/api/sets/{id}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Set Detail",
+        "operationId": "set_detail_api_sets__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "public_published_audience",
+        "x-role-scope": [
+          "public_or_handler_checked"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ]
+      }
+    },
     "/api/attempts/{id}/answers/{qid}": {
       "put": {
         "tags": [
@@ -1288,6 +1411,172 @@
         ]
       }
     },
+    "/api/jobs/{id}": {
+      "get": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Status",
+        "operationId": "status_api_jobs__id__get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "job_owner_or_staff_set_scope",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read_dispatch_side_effect",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ],
+        "x-native-note": "Use only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release."
+      }
+    },
+    "/api/jobs/{id}/retry": {
+      "post": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Retry Job",
+        "operationId": "retry_job_api_jobs__id__retry_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "job_owner_or_staff_set_scope",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "batch",
+        "x-idempotency-mode": "job_state_retry",
+        "x-body-limit-bytes": 4096,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmptyPayload"
+              }
+            }
+          }
+        },
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ],
+        "x-native-note": "Use only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release."
+      }
+    },
+    "/api/jobs/{id}/download": {
+      "get": {
+        "tags": [
+          "Processing"
+        ],
+        "summary": "Download",
+        "operationId": "download_api_jobs__id__download_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-owner-policy": "job_owner_and_report_rights",
+        "x-role-scope": [
+          "authenticated_profile"
+        ],
+        "x-workload-tier": "normal",
+        "x-idempotency-mode": "read",
+        "x-body-limit-bytes": 0,
+        "x-contract-stage": "pilot_ingress_not_qualified_live_cell",
+        "x-known-gaps": [
+          "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
+        ],
+        "x-native-note": "Use only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release."
+      }
+    },
     "/api/competitions": {
       "get": {
         "tags": [
@@ -1785,7 +2074,9 @@
         },
         "x-known-gaps": [
           "Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements"
-        ]
+        ],
+        "x-native-availability": "unavailable_http_410",
+        "description": "PAUSED LEGACY OPERATION: authenticated calls currently return HTTP410. Do not expose AI generation, retry this operation or substitute generated content for supplied solutions. GET remains subject to release/ownership checks."
       }
     },
     "/api/attempts/{id}/cohort": {

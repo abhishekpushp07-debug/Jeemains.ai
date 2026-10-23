@@ -42,6 +42,14 @@ GET `/api/attempts/{id}/results?score_version=original`:
 - 403 while active: solutions are not released.
 On a lost submit response, reload attempt/results. Do not create a new attempt or declare zero score.
 
+### Failed grading and job recovery
+A results202 payload can contain job_id and grading_status. GET `/api/jobs/{job_id}` returns this user's permitted job state; this GET can dispatch queued/running background work, so it is NOT a harmless production test. Use only an ID supplied by the server, never synthesize grade IDs.
+
+If grading_status/job status is failed, offer Retry grading: POST `/api/jobs/{job_id}/retry` with `{}`. The server returns done unchanged, retries a failed allowed job, or409 if already processing/a competing retry won. Then poll results with bounded backoff. Never retry an AI or safety-held content job to bypass a pause. Saved/sealed answers do not change when grading is retried.
+
+### Optional existing report contract, not a new UI requirement
+POST `/api/attempts/{id}/report` with score_version can return a report job only when source redistribution rights and release allow it. GET `/api/jobs/{job_id}/download` serves authenticated application/pdf only for an owned completed report after release. The current web result Download control is intentionally hidden; including these API contracts is not permission to restore that button or add a native export feature without approval.
+
 ## 6. Private source images and solutions
 For each `asset_count`, fetch authenticated PNG bytes:
 `GET /api/attempts/{id}/questions/{qid}/asset/question/{zero_based_index}`.
@@ -50,6 +58,8 @@ For released result rows, use `solution_asset_count` and `/asset/solution/{index
 Source-image content may intentionally have empty text to avoid inaccurate extraction. Show original image with zoom and accessible text if supplied; do not replace it with generated OCR/AI text. Keep a white reading surface. Use account-scoped private caching, no public external-storage copies, and clear decoded assets on signout. Do not prefetch forbidden solution routes while exam is active.
 
 On showing a released solution call POST `/api/attempts/{id}/questions/{qid}/solution-open` with `{}`. This tracks consultation; it does NOT generate an AI solution. Preserve error/retry state before confirming reflection's reviewed_solution flag.
+
+Do not confuse consultation with legacy POST `/api/attempts/{id}/solutions/{qid}`: the latter currently returns410 for authenticated requests (AI generation paused). It appears in the route inventory for honesty, marked unavailable_http_410; Android must not offer a Generate button or repeatedly call it. GET of that legacy route can read an already-saved supplement after ownership/release checks. `/attempts/{id}/ai-solutions` exposes existing saved metadata, not a generation entitlement.
 
 ## 7. Reflection and reports
 PUT `/api/attempts/{id}/reviews/{qid}` is a private, revisioned study record, separate from answers/ledger. Use a new immutable request_id for each intended change; score_version scopes review state. Categories: concept_gap, calculation, silly_mistake, time_pressure, misread, guess, other. Note <=500 characters. identified_error requires category; wrote_note requires text; reviewed_solution requires successful consultation; retry_planned is explicit. “Completed” means actions recorded, not demonstrated mastery.

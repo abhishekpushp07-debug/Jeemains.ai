@@ -13,7 +13,7 @@ ROOT = Path('/app')
 KIT = ROOT / 'exports/android_handoff'
 PREFIXES = ('/api/attempts', '/api/exam-navigation', '/api/my/tests', '/api/my/sets', '/api/series/all-india-jee', '/api/bitsat', '/api/competitions')
 AUTH = {'/api/auth/session', '/api/auth/me', '/api/auth/phone', '/api/auth/login', '/api/auth/refresh', '/api/auth/logout', '/api/auth/preferences'}
-EXACT = AUTH | {'/api/health', '/api/chapter-exams', '/api/my/chapter-exams'}
+EXACT = AUTH | {'/api/health', '/api/chapter-exams', '/api/my/chapter-exams', '/api/sets'}
 REFERENCES = [
     'features/Home.js', 'features/ExamHub.js', 'features/ExamSection.js', 'features/Profile.js',
     'features/Player.js', 'features/Results.js', 'features/LiveSeries.js', 'features/SetDetail.js',
@@ -35,7 +35,7 @@ def refs(value):
 
 
 def allowed(path):
-    return path in EXACT or any(path == p or path.startswith(p + '/') for p in PREFIXES) or bool(re.fullmatch(r'/api/sets/\{[^}]+\}/(start|preflight)', path))
+    return path in EXACT or any(path == p or path.startswith(p + '/') for p in PREFIXES) or bool(re.fullmatch(r'/api/sets/\{[^}]+\}(?:/(start|preflight))?', path)) or bool(re.fullmatch(r'/api/jobs/\{[^}]+\}(?:/(retry|download))?', path))
 
 
 def main():
@@ -46,6 +46,13 @@ def main():
     response.raise_for_status()
     raw = response.json()
     spec = {'openapi': raw['openapi'], 'info': {'title': 'JEELIVE.AI learner API snapshot', 'version': raw['info']['version'], 'description': 'Preview schema filtered to learner-facing APIs. Inner response DTOs need the runtime JSON envelope. Not Android device validation.'}, 'servers': [{'url': 'https://jeelive.ai'}], 'paths': {p: copy.deepcopy(v) for p, v in raw['paths'].items() if allowed(p)}, 'components': {'schemas': {}}}
+    for path, operations in spec['paths'].items():
+        if re.fullmatch(r'/api/attempts/\{[^}]+\}/solutions/\{[^}]+\}', path) and 'post' in operations:
+            operations['post']['x-native-availability'] = 'unavailable_http_410'
+            operations['post']['description'] = 'PAUSED LEGACY OPERATION: authenticated calls currently return HTTP410. Do not expose AI generation, retry this operation or substitute generated content for supplied solutions. GET remains subject to release/ownership checks.'
+        if path.startswith('/api/jobs/'):
+            for operation in operations.values():
+                operation['x-native-note'] = 'Use only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.'
     needed = list(refs(spec['paths']))
     seen = set()
     while needed:
@@ -74,7 +81,7 @@ def main():
             request_model = reqschema.get('$ref', '').rsplit('/', 1)[-1]
             lines.append('| ' + ' | '.join([method.upper(), '`' + path + '`', ', '.join(op.get('x-role-scope', [])) or 'See auth guide', request_model or '—']) + ' |')
             url = '{{baseUrl}}' + re.sub(r'\{([^}]+)\}', r'{{\1}}', path)
-            request = {'method': method.upper(), 'url': url, 'header': [], 'description': op.get('summary', '') + '\nScope: ' + ', '.join(op.get('x-role-scope', [])) + '. Cookie session required where protected. Body below is a template; consult schema.'}
+            request = {'method': method.upper(), 'url': url, 'header': [], 'description': op.get('summary', '') + '\n' + op.get('description', '') + '\n' + op.get('x-native-note', '') + '\nScope: ' + ', '.join(op.get('x-role-scope', [])) + '. Cookie session required where protected. Body below is a template; consult schema.'}
             query = []
             for parameter in op.get('parameters', []):
                 if parameter.get('in') == 'query':
@@ -126,13 +133,14 @@ def main():
             if re.search(r'mongodb(?:\+srv)?://|-----BEGIN [A-Z ]*PRIVATE KEY-----|\bsk_(?:live|test)_[A-Za-z0-9]{12,}|\beyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.', text):
                 raise ValueError('Possible credential material in package: ' + rel)
         files.append({'path': rel, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
-    manifest = {'prepared_at': datetime.now(timezone.utc).isoformat(), 'kind': 'native_android_agent_handoff_not_apk', 'api_schema_source': args.schema_url, 'api_schema_source_sha256': hashlib.sha256(response.content).hexdigest(), 'live_api_root': 'https://jeelive.ai/api', 'path_count': len(spec['paths']), 'operation_count': operations, 'schema_count': len(spec['components']['schemas']), 'credentials_or_customer_records_included': False, 'android_build_tested': False, 'known_identity_gap': 'Student phone entry is unverified, not OTP.', 'files': files}
+    manifest = {'handoff_revision': '1.1', 'prepared_at': datetime.now(timezone.utc).isoformat(), 'kind': 'native_android_agent_handoff_not_apk', 'api_schema_source': args.schema_url, 'api_schema_source_sha256': hashlib.sha256(response.content).hexdigest(), 'live_api_root': 'https://jeelive.ai/api', 'path_count': len(spec['paths']), 'operation_count': operations, 'schema_count': len(spec['components']['schemas']), 'credentials_or_customer_records_included': False, 'android_build_tested': False, 'known_identity_gap': 'Student phone entry is unverified, not OTP.', 'files': files}
     (KIT / 'MANIFEST.json').write_text(json.dumps(manifest, indent=2))
-    archive = ROOT / 'frontend/public/downloads/JEELIVE_AI_Native_Android_Handoff.zip'
+    archive = ROOT / 'frontend/public/downloads/JEELIVE_AI_Native_Android_Handoff_v1_1.zip'
     with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(KIT.rglob('*')):
             if f.is_file():
                 z.write(f, 'JEELIVE_AI_Android_Handoff/' + f.relative_to(KIT).as_posix())
+    shutil.copy2(archive, ROOT / 'frontend/public/downloads/JEELIVE_AI_Native_Android_Handoff.zip')
     print(json.dumps({'archive': str(archive), 'bytes': archive.stat().st_size, 'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(), 'files': len(files)+1, 'api_paths': len(spec['paths']), 'api_operations': operations, 'schemas': len(spec['components']['schemas'])}, indent=2))
 
 

@@ -14,6 +14,8 @@ Read 01_BACKEND_AND_AUTH.md and 03_TEST_ENGINE_AND_SYNC.md first. OpenAPI respon
 | POST | `/api/auth/logout` | public_or_handler_checked | EmptyPayload |
 | PATCH | `/api/auth/preferences` | authenticated_profile | PreferencePayload |
 | POST | `/api/auth/phone` | public_or_handler_checked | PhonePayload |
+| GET | `/api/sets` | public_or_handler_checked | — |
+| GET | `/api/sets/{id}` | public_or_handler_checked | — |
 | PUT | `/api/attempts/{id}/answers/{qid}` | authenticated_profile | AnswerPayload |
 | GET | `/api/my/sets` | authenticated_profile | — |
 | GET | `/api/my/sets/{id}` | authenticated_profile | — |
@@ -29,6 +31,9 @@ Read 01_BACKEND_AND_AUTH.md and 03_TEST_ENGINE_AND_SYNC.md first. OpenAPI respon
 | POST | `/api/attempts/{id}/questions/{qid}/solution-open` | authenticated_profile | EmptyPayload |
 | POST | `/api/attempts/{id}/retry` | authenticated_profile | RetryPayload |
 | POST | `/api/attempts/{id}/report` | authenticated_profile | ReportPayload |
+| GET | `/api/jobs/{id}` | authenticated_profile | — |
+| POST | `/api/jobs/{id}/retry` | authenticated_profile | EmptyPayload |
+| GET | `/api/jobs/{id}/download` | authenticated_profile | — |
 | GET | `/api/competitions` | authenticated_profile | — |
 | GET | `/api/competitions/{id}` | authenticated_profile | — |
 | PUT | `/api/attempts/{id}/reviews/{qid}` | authenticated_profile | ReviewWrite |

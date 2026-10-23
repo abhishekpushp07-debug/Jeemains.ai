@@ -2,6 +2,8 @@ Build JEELIVE.AI as a proper native Android app, NOT a WebView wrapper. Read eve
 
 Reuse the existing API at https://jeelive.ai/api. Do not recreate, replace, seed or migrate its database. Never ask for MongoDB credentials or embed backend secrets in the app. The learner app must use authorized HTTPS APIs for questions, saves, attempts, results, private question/solution images and progress.
 
+Read `07_COVERAGE_CHECK.md` for the revision1.1 corrections: public set details, failed-grading job recovery, optional rights-gated report download contract, and the explicitly unavailable legacy AI-generation route.
+
 First implement the difficult parts in isolated tests: secure cookie/session refresh, per-user acknowledged answer queue, server-authoritative timer, idempotent start/save and resumable submission/grading. Do not misread API v1 as URL /v1; the actual prefix is /api. Do not invent a bearer-token, OAuth, WebSocket, bulk-sync or push API. The included OpenAPI snapshot describes the preview learner routes, not a guarantee that every operation is available for every role or that the live deployment has the same image.
 
 Then compose the native screens: Home; JEE Main/BITSAT/COMEDK hubs; mocks and subject/chapter catalogue; test instructions/preflight; player; My Tests with saved/in-progress/completed; analysis/progress/confidence/rank/solutions; All India series and streak; settings/account. Keep student data per account. Preserve source questions and supplied solutions. BITSAT gets sourced branch guidance, not an invented AIR. JEE/COMEDK rank estimates are approximate and only shown when the server permits them.

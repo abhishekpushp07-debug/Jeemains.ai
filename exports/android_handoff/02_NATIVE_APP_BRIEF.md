@@ -7,11 +7,13 @@ Keep existing data and backend behavior. All test counts, availability, dates an
 | Entry/account | Guest browsing where public; honest phone convenience entry; staff access only if separately approved; remember current session | `/auth/session`, `/auth/phone`, `/auth/me`, `/auth/refresh`, `/auth/logout` |
 | Home | JEELIVE.AI logo, existing exam choices, compact AI Astra series banner; meaningful loading/empty/error states | `/exam-navigation/...`, `/series/all-india-jee` |
 | Exam hub | JEE Main, BITSAT, COMEDK; mocks, chapter practice, results destinations | slugs `jee-main`, `bitsat`, `comedk` |
+| Guest catalogue/details | Only publicly permitted published summaries; sign in before private/start flows | `/sets`, `/sets/{id}` |
 | Catalogue | Paged mocks/chapters, subject, search; original title/count/rules/availability; no fake published papers | `/{slug}/catalogue`, `/my/sets/{id}` |
 | Instructions | Read returned rules, marks, duration, source availability; preflight/device check before start | `/sets/{id}/preflight`, `/sets/{id}/start` |
 | Player | Typed or source-image question, MCQ/integer controls, optional confidence, mark/clear/next, subject palette, reliable save state, timer, submit confirmation | `/attempts/{id}`, `/answers/{qid}`, `/visit`, `/submit`, `/bonus` |
 | My Tests | Saved, in progress, completed, filters, continue exact attempt, meaningful comparison | `/my/tests`, `/my/tests/saved/{id}`, `/my/tests/compare` |
 | Results | Analysis, Progress, Confidence, Rank, Solutions; server score version selection; grading/embargo states | `/attempts/{id}/results`, `/journey`, `/cohort`, `/historical-rank` |
+| Grading recovery | Retain sealed receipt, fetch own job status, retry a failed grading job on deliberate user action | `/jobs/{id}`, `/jobs/{id}/retry` |
 | Focused Solutions | Subject tabs; horizontal question rail; one question and released supplied solution; filters; report wrong content; reflection after solution | `/asset/{kind}/{index}`, `/solution-open`, `/reviews/{qid}`, `/report-wrong` |
 | All India series | Existing schedule, today's availability/start cutoff, archive, results, analysis; creator branding and accurate disclaimers | `/series/all-india-jee`, `/history`, `/streak` |
 | Account/drafts | Keep/discard pending drafts on signout; draft recovery for same account; no cross-account leakage | local per-account store + existing session APIs |

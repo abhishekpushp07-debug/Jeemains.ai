@@ -37,6 +37,7 @@ Use exact JSON types; many writes forbid unknown keys and coercion. Most learner
 - 401: one refresh attempt, then reauthenticate.
 - 403/404: unavailable/forbidden; do not bypass by changing roles or identifiers.
 - 409: conflict, closed attempt, embargo/state or stale revision. Preserve drafts, reload authoritative state and explain; do not blindly increment revision and overwrite newer work.
+- 410: deliberately unavailable legacy AI-generation route; do not retry or expose a Generate action.
 - 413/415: request budget/media error.
 - 429/503: bounded retry with `Retry-After` and jitter, preserving the exact immutable save command. `capability_held` must NOT become a rapid retry loop.
 
