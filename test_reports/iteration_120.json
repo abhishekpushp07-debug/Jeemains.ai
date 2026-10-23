@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-23",
+  "type": "targeted_read_only_live_verification",
+  "url": "https://jeelive.ai",
+  "scope": "Verify the previously reproduced production origin-denial blocker after the user saved LIVE FRONTEND_URL and authorised re-publication",
+  "checks": {
+    "canonical_student_login_invalid_number": {"status": 422, "seconds": 0.608452, "result": "Expected phone validation; previous origin_denied 403 is gone"},
+    "canonical_staff_login_empty_body": {"status": 422, "seconds": 0.355651, "result": "Expected request-contract validation; previous origin_denied 403 is gone"},
+    "untrusted_origin_invalid_number": {"status": 403, "error": "origin_denied", "result": "Untrusted cross-origin writes remain blocked"},
+    "www_redirect": {"status": 308, "location": "https://jeelive.ai/", "seconds": 0.402657},
+    "desktop_login": {"viewport": "1920x800", "rendered": true},
+    "mobile_login": {"viewport": "390x844", "rendered": true, "horizontal_overflow": []}
+  },
+  "limitations": [
+    "No valid production account sign-in was attempted; production sessions, users and student data were not modified",
+    "Full isolated authentication/cookie/role regression was previously verified in iterations118–119; no application code changed after those checks",
+    "This verifies the live canonical-origin blocker is resolved, not every production login credential or formal deployment pipeline completion",
+    "www redirects quickly at the tested edge; last authoritative hostname verification remained pending, not independently confirmed active here",
+    "78 uploaded JEE chapter tests remain preview-only pending a separately authorised safe production import"
+  ],
+  "credentials_changed": false,
+  "customer_records_written": false,
+  "core_origin_blocker": "resolved_on_live_canonical_domain"
+}
