@@ -176,6 +176,13 @@ def rf_user(x_rf_user: Optional[str]) -> str:
     return x_rf_user
 
 
+def _game():
+    from gamify import make_router
+    return make_router(db, rf_user)
+
+
+game_router, award = _game()
+
 CARD_MTIMES: dict[str, float] = {}
 
 
@@ -259,7 +266,8 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
     if not s:
         raise HTTPException(404, "Session not found.")
     if s.status == "completed":
-        return s.model_dump(exclude={"mongo_id", "user_id"})
+        sm = s.summary or {}
+        return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": await award(uid, "solo:" + sid, "solo", sm.get("correct", 0), sm.get("total", 0), sm.get("answered", 0))}
     cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)}
     seen, rows = set(), []
     for r in data.results:
@@ -288,7 +296,8 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
     await db.rf_sessions.update_one({"id": sid, "status": "active"}, {"$set": {"status": "completed", "results": rows,
                                     "summary": summary, "completed_at": now_iso()}})
     s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid}))
-    return s.model_dump(exclude={"mongo_id", "user_id"})
+    reward = await award(uid, "solo:" + sid, "solo", correct, len(rows), answered)
+    return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": reward}
 
 
 @api.get("/rf/history")
@@ -316,7 +325,8 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
 
 
 from duels import make_router as make_duels  # noqa: E402
-api.include_router(make_duels(db, rf_user, public_card))
+api.include_router(make_duels(db, rf_user, public_card, award))
+api.include_router(game_router)
 app.include_router(api)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
@@ -339,6 +349,9 @@ async def startup():
     await db.rf_duels.create_index("code")
     await db.rf_duels.create_index([("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])
     await db.rf_duels.create_index("players.uid")
+    await db.rf_awards.create_index([("uid", 1), ("ref", 1)], unique=True)
+    await db.rf_profiles.create_index("uid", unique=True)
+    await db.rf_profiles.create_index([("xp", -1)])
     asyncio.create_task(card_sync_loop())
 
 

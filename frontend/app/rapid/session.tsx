@@ -3,8 +3,9 @@ import { AppState, ScrollView, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, { FadeIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { FadeIn, ZoomIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { Ring } from "@/src/components/Ring";
+import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
 import { rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
@@ -23,6 +24,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
   const missed = (s.results || []).filter((r: any) => r.outcome !== "correct");
   return (
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
+      <RewardPanel reward={s.reward} title={sum.accuracy >= 80 ? "Blazing run! Loot unlocked" : sum.correct > 0 ? "Sprint complete! Loot earned" : "Sprint complete"} />
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
         <T w="heavy" size={44} color={colors.onSurfaceInverse} testID="rf-summary-score">{sum.score}<T w="semibold" size={22} color={colors.custom_whiteA70}> / {sum.total}</T></T>
@@ -83,6 +85,7 @@ export default function RapidSession() {
   const [exit, setExit] = useState(false);
   const [n, setN] = useState(0);
   const results = useRef<Res[]>([]);
+  const [combo, setCombo] = useState(0);
   const startedAt = useRef(0);
   const reqId = useRef(uuid());
   const x = useSharedValue(0);
@@ -141,7 +144,15 @@ export default function RapidSession() {
     return () => { clearInterval(iv); sub.remove(); };
   }, [card?.id, locked, done]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Auto-advance shortly after an answer locks (Next / swipe stay available).
   useEffect(() => {
+    if (choice === null || timedOut || done) return;
+    const t = setTimeout(() => fly(1), 1100);
+    return () => clearTimeout(t);
+  }, [choice, card?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (timedOut) setCombo(0);
     if (!timedOut) return;
     const t = setTimeout(advance, 1400);
     return () => clearTimeout(t);
@@ -151,11 +162,13 @@ export default function RapidSession() {
     if (locked || !card) return;
     tap("medium");
     setChoice(k);
+    setCombo((c) => (k === card.answer ? c + 1 : 0));
     record({ card_id: card.id, outcome: k === card.answer ? "correct" : "incorrect", choice: k, ms: Math.min(LIMIT, Math.round(mono() - startedAt.current)) });
   }
   function skip() {
     if (locked || !card) return;
     tap();
+    setCombo(0);
     record({ card_id: card.id, outcome: "skipped", choice: null, ms: Math.min(LIMIT, Math.round(mono() - startedAt.current)) });
     fly(-1);
   }
@@ -180,20 +193,30 @@ export default function RapidSession() {
   const onAgain = () => router.replace({ pathname: "/rapid/session", params: { subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", r: uuid() } });
 
   return (
-    <View testID="rf-session-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
+    <View testID="rf-session-screen" style={{ flex: 1, backgroundColor: colors.custom_gameBg, paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: space.lg, gap: space.md, minHeight: 56 }}>
         <Press testID="rf-exit-button" onPress={() => (done || empty || error && !session ? router.back() : setExit(true))} accessibilityLabel="Exit session" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
           <T w="heavy" size={12} color={tint} numberOfLines={1}>{card ? `${card.subject} · ${card.chapter}` : "Rapid Fire"}</T>
-          {card && !done ? <T w="heavy" size={16} testID="rf-card-counter">Card {i + 1} of {cards.length}</T> : <T w="heavy" size={16}>{done ? "Session complete" : "Loading cards…"}</T>}
+          {card && !done ? (
+            <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
+              <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter">Card {i + 1} of {cards.length}</T>
+              {combo >= 2 ? (
+                <Animated.View key={combo} entering={reduced ? undefined : ZoomIn.duration(200)} testID="rf-combo" style={{ flexDirection: "row", alignItems: "center", gap: 2, paddingHorizontal: 8, height: 24, borderRadius: radius.pill, backgroundColor: colors.custom_neonAmber }}>
+                  <Icon name="fire" size={14} color={colors.custom_gameBg} />
+                  <T w="heavy" size={12} color={colors.custom_gameBg}>COMBO x{combo}</T>
+                </Animated.View>
+              ) : null}
+            </View>
+          ) : <T w="heavy" size={16} color={colors.onSurfaceInverse}>{done ? "Session complete" : "Loading cards…"}</T>}
         </View>
-        {card && !done ? <Ring left={locked ? (timedOut ? 0 : left) : left} color={tint} /> : null}
+        {card && !done ? <Ring light left={locked ? (timedOut ? 0 : left) : left} color={tint} /> : null}
       </View>
       {card && !done ? (
         <View style={{ flexDirection: "row", gap: 2, paddingHorizontal: space.lg, marginBottom: space.md }}>
-          {cards.map((c, k) => <View key={c.id} style={{ flex: 1, height: 4, borderRadius: 1, backgroundColor: k < i ? tint : k === i ? colors.onSurface : colors.border }} />)}
+          {cards.map((c, k) => <View key={c.id} style={{ flex: 1, height: 4, borderRadius: 1, backgroundColor: k < i ? tint : k === i ? colors.onSurfaceInverse : colors.custom_gameLine }} />)}
         </View>
       ) : null}
 

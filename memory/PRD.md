@@ -39,6 +39,13 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Rapid Fire Duels (backend/duels.py, app/rapid/duel.tsx): random matchmaking (only recently-active hosts), WhatsApp invite code + join, same 30 cards, answers hidden until finish, server-measured tie-break time, forfeit, invite expiry 30 min, history/record.
 - Speed: network fetch starts in parallel with cache read; Home prefetches likely next screens; player prefetches next question image.
 
+## Iteration 4 (2026-10-23)
+- Bottom bar: Home · JEE Main · center diamond = RAPID FIRE arena · My Tests · Mission. Live series moved to /live (Home tile + banner).
+- Auto-advance on option select (test player: only first answer of a question; Rapid Fire solo & duel); Next/Back kept.
+- Rapid Fire game layer (backend/gamify.py): XP/levels, coins, daily IST streak, 9 badges, leaderboard, idempotent atomic rewards; reward panel with one-shot burst; combo counter; dark arena UI.
+- Duels: forfeiting player can never win; rewards given to both players at settle; card ids/answers hidden until reveal.
+- Public bank API for the website: GET /api/rf/cards?subject&chapter&page&limit (4,100 cards).
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

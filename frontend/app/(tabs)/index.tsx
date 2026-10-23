@@ -17,7 +17,7 @@ import { fmtClock, usesNativeTabs } from "@/src/navigation";
 type Tile = { id: string; kind: TileKind; title: string; sub: string; grad: [string, string]; to: string; badge?: string };
 const TILES: Tile[] = [
   { id: "jee-main", kind: "jee", badge: "HOT", title: "JEE Main", sub: "Mocks · Chapters", grad: [colors.custom_examJee, colors.custom_examJeeDeep], to: "/exam/jee-main" },
-  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", grad: [colors.custom_seriesBright, colors.custom_series], to: "/(tabs)/live" },
+  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", grad: [colors.custom_seriesBright, colors.custom_series], to: "/live" },
   { id: "bitsat", kind: "bitsat", title: "BITSAT", sub: "Practice · Branches", grad: [colors.custom_examBitsat, colors.custom_examBitsatDeep], to: "/exam/bitsat" },
   { id: "comedk", kind: "comedk", title: "COMEDK", sub: "Practice · History", grad: [colors.custom_darkCard, colors.custom_examComedk], to: "/exam/comedk" },
 ];

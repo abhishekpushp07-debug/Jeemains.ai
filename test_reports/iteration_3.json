@@ -1,0 +1,49 @@
+{
+  "summary": "Iteration 3 (gamified Rapid Fire, new tab order, /live route, auto-advance, public cards API). Backend: 23/23 pytest pass (9 new in test_rf_gamify.py + 14 regression). GET /api/rf/cards total=4100, 50/page, 82 pages, subject/chapter filters, paging and validation all work. /rf/profile, /rf/leaderboard, the solo complete reward (idempotent, no double XP) and the duel reward (only after finish, idempotent) all work. Frontend at 375x667: the tab order is Home, JEE Main, raised diamond RAPID, My Tests, Mission. tab-jee shows the JEE Main exam hub. home-tile-live opens /live (series-hub) and header-back-button returns. Every Rapid home element is present: game-hud, streak card, subjects, horizontal chapter chips, all 4 game modes, join code, the 9-badge trophy cabinet and the leaderboard. In a solo session, picking an option auto-advances in about 1 s. 'COMBO x2' shows after 2 correct answers and resets after a wrong one. Exit -> Finish shows the reward panel (+30 XP, +6 coins, 1-day streak, First Sprint badge), which matches the API. The invite + join duel works across two browser contexts and auto-advances in about 0.75 s. After B left (duel-exit-confirm), A got duel-result with duel-reward. Two bugs found: (1) a player who FORFEITS can WIN the duel on the time tie-break; (2) the Rapid home HUD, streak and history are stale when you return from a session. The test player auto-advance was NOT tested live because there are 0 in-progress attempts (code reviewed only). No deprecated Expo packages detected.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "duels.py winner()/settle (POST /api/rf/duels/{id}/forfeit)", "issue": "Forfeit is ignored when choosing the winner. Reproduced live: A stayed and played all 30 cards (0 correct, 29.9 s total), B answered 1 card and then left (forfeit=True, 1.36 s). Both scored 0, so the time tie-break made B, the player who left, the winner (tie_break=True). The player who stayed saw 'Good fight!'. A forfeiter with a higher score also wins. Reference: /app/backend/duels.py:59-72", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "GET /api/rf/cards", "issue": "The public API returns the 'answer' key for every card by id. The duel payload hides answers but still includes card ids, so a player can look up live duel answers (the test test_forfeit_player_cannot_win does exactly this). Consider leaving answers out by default or guarding them, or hiding card ids before the duel is revealed."},
+      {"endpoint": "gamify.award()", "issue": "Race window: the award marker is inserted before the reward is stored, so a concurrent replay during the first award returns reward {}. The profile is also written read-modify-write with a whole-doc $set, so a solo session and a duel finishing at the same time can lose XP or coins. Use $inc and $addToSet. Reference: /app/backend/gamify.py:51-83"},
+      {"endpoint": "GET /api/rf/duels/{id}", "issue": "Duel rewards and the wins/duels counters are only granted when a player GETs the finished duel. A player who never reopens it (for example the forfeiter, TEST_B profile = 0 XP) never gets XP, wins or badges. Consider awarding both players inside settle()."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Rapid home HUD, streak and history (stale cache)", "issue": "After finishing a solo session (+30 XP) and returning to the Rapid tab, game-hud still showed 'Level 1 · 0 / 100 XP · 0 coins · 0 streak'. The API already had xp=30. A full reload shows the right values. useCached only fetches on mount or key change; there is no refetch on focus. Reference: /app/frontend/src/components/game.tsx:15, /app/frontend/app/(tabs)/rapid.tsx", "testID": "game-hud", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Duel forfeit result", "issue": "The opponent who stays sees 'Good fight!' (a loss) when the leaver wins the time tie-break. The backend root cause is above.", "affected_testIDs": ["duel-result", "duel-outcome", "duel-reward"]}
+    ],
+    "design_issues": [
+      {"screen": "Test player", "issues": ["Auto-advance also fires when you change an already-answered question to a different option (only the tapped option's selected state is checked, at attempt/[id].tsx:177). This can feel jumpy when correcting an answer. Consider advancing only when the question was previously unanswered."]}
+    ],
+    "react_native_issues": [
+      {"component": "NativeTabs import", "issue": "Still imported from 'expo-router/unstable-native-tabs' (flagged in iteration 2). Reference: /app/frontend/app/(tabs)/_layout.tsx:4"}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_gamify.py", "/app/backend/tests/test_rf_duels.py", "/app/backend/tests/test_rf_and_proxy.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "HIGH: In duels.py winner(), treat forfeit as a loss: if exactly one player has forfeit=True, the other player wins regardless of score or ms. Also review tie_break() so a leaver's small ms can never win.",
+    "Refetch the rf profile, history and leaderboard when the Rapid tab regains focus (useFocusEffect -> refresh in useCached) so the HUD, streak and badges update after a session or duel.",
+    "Make award() atomic: store the reward in the same insert or poll until it exists on DuplicateKey, and update the profile with $inc/$max/$addToSet instead of a whole-doc $set.",
+    "Consider awarding duel rewards to both players at settle time, not lazily on GET.",
+    "Consider leaving 'answer' out of the public /api/rf/cards response, or not exposing duel card ids before the reveal, to prevent duel cheating.",
+    "Change the NativeTabs import to the stable expo-router native-tabs path."
+  ],
+  "critical_code_review_comments": [
+    "duels.py:59-72 winner()/tie_break() never read players[].forfeit.",
+    "gamify.py:51-55 an empty reward {} can be returned to concurrent replays.",
+    "gamify.py:79 the whole-profile $set loses updates when awards run at the same time.",
+    "The duel create/join payload 'name' overwrites the leaderboard name on every duel (duels.py:45). The regression test used 'TEST_A'/'TEST_B' on real users and polluted leaderboard names. The test is fixed and the names are reset."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_gamify.py (new)", "/app/backend/tests/test_rf_duels.py (player names changed from TEST_A/TEST_B to 'Player ··0001/0002' to stop renaming real leaderboard entries)"],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "~85% (all requested flows render and work; forfeit winner logic and stale HUD fail)"},
+  "seed_data_creation": "Created rf sessions and duels for 9000000001/9000000002 plus TESTUSER* profiles. TESTUSER* profiles and awards were deleted. Real profile names were reset to 'Player ··0001' and 'Player ··0002'. UID_A now has about 545 XP from regression runs.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Rapid option testIDs are numeric (rf-option-0..3, duel-option-0..3); test player options are letters (player-option-A). Read correct answers from the POST /api/rf/sessions response. CountUp animates reward numbers, so wait about 2 s before reading reward-xp. Scroll on Rapid home with scroll_into_view_if_needed (mouse.wheel does not scroll). My Tests had 0 in-progress attempts, so the player auto-advance test was skipped. Create a duel second user with browser.new_context().",
+  "rca_of_issue": "Forfeit win: forfeit() sets done=True and forfeit=True. settle() then calls winner(), which compares score and then total ms only. The leaver stops accumulating ms, so on equal scores the leaver always wins. Fix: check forfeit flags first in winner()."
+}

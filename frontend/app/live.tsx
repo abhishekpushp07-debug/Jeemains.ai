@@ -5,10 +5,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { api } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
-import { Button, Card, Chip, Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
+import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { SeriesBanner, Series, Slot, SeriesExplainer } from "@/src/components/SeriesBanner";
 import { colors, radius, space } from "@/src/theme";
-import { istDate, usesNativeTabs } from "@/src/navigation";
+import { istDate } from "@/src/navigation";
 
 const stateLabel = (s: Slot) =>
   s.state === "live" ? (s.ready ? "LIVE TODAY" : "AWAITING PAPER") : s.state === "archive" ? "PRACTICE ARCHIVE" : s.state === "start_closed" ? "STARTS CLOSED" : s.state === "ended" ? "DAY ENDED" : "UPCOMING";
@@ -89,8 +89,9 @@ export default function Live() {
   const archive = d?.slots.filter((s) => s.state === "archive").reverse() ?? [];
 
   return (
-    <ScrollView testID="series-hub" style={{ flex: 1, backgroundColor: colors.surface }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xl, paddingHorizontal: space.lg, gap: space.lg }}
+    <ScrollView testID="series-hub" style={{ flex: 1, backgroundColor: colors.surface }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom + space.xl, paddingHorizontal: space.lg, gap: space.lg }}
       refreshControl={<RefreshControl refreshing={false} onRefresh={() => { series.reload(); history.reload(); }} />}>
+      <View style={{ marginHorizontal: -space.lg }}><Header title="Live JEE Series" eyebrow="All India · 62 days" color={colors.custom_series} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))} /></View>
       <SeriesBanner series={d} error={series.error} compact />
       {user ? <Streak uid={user.id} /> : null}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }} style={{ flexGrow: 0 }}>

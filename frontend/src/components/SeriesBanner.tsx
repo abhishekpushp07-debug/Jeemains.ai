@@ -50,7 +50,7 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
         </View>
         {error ? <T size={11} color={colors.custom_whiteA70}>Live status unavailable. Open the hub to retry.</T> : null}
         <View style={{ flexDirection: "row", gap: space.sm }}>
-          <Press testID="series-open-hub-button" onPress={() => router.push("/(tabs)/live")} style={{ flex: 1, minHeight: 46, borderRadius: radius.md, backgroundColor: colors.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 }}>
+          <Press testID="series-open-hub-button" onPress={() => router.push("/live")} style={{ flex: 1, minHeight: 46, borderRadius: radius.md, backgroundColor: colors.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 }}>
             <T w="heavy" size={14} color={colors.custom_series}>Open series hub</T>
             <Icon name="arrow-top-right" size={16} color={colors.custom_series} />
           </Press>

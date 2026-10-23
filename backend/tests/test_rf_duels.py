@@ -51,16 +51,16 @@ def test_session_default_30_and_complete_30(s):
 
 # ---------- duels ----------
 def test_duel_auth_and_validation(s):
-    body = {"subject": "Physics", "chapter": None, "mode": "invite", "name": "TEST_A", "request_id": "TEST_" + uuid.uuid4().hex}
+    body = {"subject": "Physics", "chapter": None, "mode": "invite", "name": "Player ··0001", "request_id": "TEST_" + uuid.uuid4().hex}
     assert s.post(f"{BASE_URL}/api/rf/duels", json=body).status_code == 401
     assert s.post(f"{BASE_URL}/api/rf/duels", json={**body, "mode": "bogus"}, headers=H(UID_A)).status_code == 422
     assert s.post(f"{BASE_URL}/api/rf/duels", json={**body, "subject": "Biology"}, headers=H(UID_A)).status_code == 422
-    assert s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": "ZZZZZZ", "name": "TEST_B"}, headers=H(UID_A)).status_code == 404
+    assert s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": "ZZZZZZ", "name": "Player ··0002"}, headers=H(UID_A)).status_code == 404
     assert s.get(f"{BASE_URL}/api/rf/duels/nope", headers=H(UID_A)).status_code == 404
 
 
 def test_random_match(s, uid_b):
-    ra = s.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Chemistry", "chapter": None, "mode": "random", "name": "TEST_A",
+    ra = s.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Chemistry", "chapter": None, "mode": "random", "name": "Player ··0001",
                                                   "request_id": "TEST_" + uuid.uuid4().hex}, headers=H(UID_A))
     assert ra.status_code == 200, ra.text
     a = ra.json()
@@ -68,7 +68,7 @@ def test_random_match(s, uid_b):
     if a["status"] == "ready":
         pytest.skip("A matched a pre-existing waiting duel")
     assert a["status"] == "waiting" and a["cards"] == []
-    rb = s.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Chemistry", "chapter": None, "mode": "random", "name": "TEST_B",
+    rb = s.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Chemistry", "chapter": None, "mode": "random", "name": "Player ··0002",
                                                   "request_id": "TEST_" + uuid.uuid4().hex}, headers=H(uid_b))
     assert rb.status_code == 200, rb.text
     b = rb.json()
@@ -81,17 +81,17 @@ def test_random_match(s, uid_b):
 
 def test_invite_full_flow(s, uid_b):
     rid = "TEST_" + uuid.uuid4().hex
-    body = {"subject": "Physics", "chapter": None, "mode": "invite", "name": "TEST_A", "request_id": rid}
+    body = {"subject": "Physics", "chapter": None, "mode": "invite", "name": "Player ··0001", "request_id": rid}
     a = s.post(f"{BASE_URL}/api/rf/duels", json=body, headers=H(UID_A)).json()
     assert a["status"] == "waiting" and len(a["code"]) == 6
     # idempotent create
     assert s.post(f"{BASE_URL}/api/rf/duels", json=body, headers=H(UID_A)).json()["id"] == a["id"]
     # creator joining own code returns same duel without adding self
-    selfj = s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": a["code"], "name": "TEST_A"}, headers=H(UID_A)).json()
+    selfj = s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": a["code"], "name": "Player ··0001"}, headers=H(UID_A)).json()
     assert selfj["status"] == "waiting" and len(selfj["players"]) == 1
     # stranger cannot view
     assert s.get(f"{BASE_URL}/api/rf/duels/{a['id']}", headers=H(uid_b)).status_code == 404
-    jb = s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": a["code"].lower(), "name": "TEST_B"}, headers=H(uid_b))
+    jb = s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": a["code"].lower(), "name": "Player ··0002"}, headers=H(uid_b))
     assert jb.status_code == 200, jb.text
     b = jb.json()
     assert b["status"] == "ready" and len(b["cards"]) == 30 and all("answer" not in c for c in b["cards"])
@@ -139,10 +139,10 @@ def test_invite_full_flow(s, uid_b):
 
 
 def test_cancel(s, uid_b):
-    a = s.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Mathematics", "chapter": None, "mode": "invite", "name": "TEST_A",
+    a = s.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Mathematics", "chapter": None, "mode": "invite", "name": "Player ··0001",
                                                  "request_id": "TEST_" + uuid.uuid4().hex}, headers=H(UID_A)).json()
     # non-owner cancel is no-op
     s.post(f"{BASE_URL}/api/rf/duels/{a['id']}/cancel", headers=H(uid_b))
     assert s.post(f"{BASE_URL}/api/rf/duels/{a['id']}/cancel", headers=H(UID_A)).json()["ok"] is True
     assert s.get(f"{BASE_URL}/api/rf/duels/{a['id']}", headers=H(UID_A)).json()["status"] == "cancelled"
-    assert s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": a["code"], "name": "TEST_B"}, headers=H(uid_b)).status_code == 404
+    assert s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": a["code"], "name": "Player ··0002"}, headers=H(uid_b)).status_code == 404

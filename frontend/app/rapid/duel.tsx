@@ -9,6 +9,7 @@ import { rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
 import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap } from "@/src/components/ui";
 import { Ring } from "@/src/components/Ring";
+import { RewardPanel } from "@/src/components/game";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -151,7 +152,7 @@ export default function Duel() {
   let body: React.ReactNode = null;
   if (!d) {
     body = error ? <View style={{ padding: space.lg, gap: space.md }}><ErrorBox error={error} retry={() => setN((x) => x + 1)} testID="duel-error" /><Button testID="duel-back" kind="secondary" label="Back" onPress={() => router.back()} /></View>
-      : <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.md }}><ActivityIndicator color={tint} size="large" /><T w="bold">{p.mode === "join" ? "Joining duel…" : "Setting up your duel…"}</T></View>;
+      : <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.md }}><ActivityIndicator color={tint} size="large" /><T w="bold" color={colors.onSurfaceInverse}>{p.mode === "join" ? "Joining duel…" : "Setting up your duel…"}</T></View>;
   } else if (d.status === "waiting" || d.status === "expired" || d.status === "cancelled") {
     const invite = d.mode === "invite";
     body = (
@@ -180,8 +181,8 @@ export default function Duel() {
     body = (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.lg }} testID="duel-countdown">
         <VersusRow me={me} opp={opp} tint={tint} total={total} />
-        <Animated.View key={c} entering={ZoomIn.duration(250)}><T w="heavy" size={72} color={tint}>{c}</T></Animated.View>
-        <T size={13} color={colors.muted}>Same 30 cards for both · 20 s each · +1 per correct</T>
+        <Animated.View key={c} entering={ZoomIn.duration(250)}><T w="heavy" size={88} color={colors.custom_neonAmber}>{c}</T></Animated.View>
+        <T size={13} color={colors.custom_gameMuted}>Same 30 cards for both · 20 s each · +1 per correct</T>
       </View>
     );
   } else if (d.status === "ready" && card) {
@@ -190,8 +191,8 @@ export default function Duel() {
       <View style={{ flex: 1, paddingHorizontal: space.lg }} testID="duel-play">
         <VersusRow me={me} opp={opp} tint={tint} total={total} />
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginVertical: space.sm }}>
-          <T w="heavy" size={15} testID="duel-card-counter">Card {idx + 1} / {total}</T>
-          <Ring left={locked ? (fb ? left : left) : left} color={tint} />
+          <T w="heavy" size={15} color={colors.onSurfaceInverse} testID="duel-card-counter">Card {idx + 1} / {total}</T>
+          <Ring light left={left} color={tint} />
         </View>
         <Animated.View key={card.id} entering={FadeIn.duration(160)} testID="duel-card" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.1, shadowRadius: 16, elevation: 5 }}>
           <T w="bold" size={11} color={tint}>{card.chapter}</T>
@@ -223,7 +224,7 @@ export default function Duel() {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.md, padding: space.lg }} testID="duel-wait-opponent">
         <VersusRow me={me} opp={opp} tint={tint} total={total} />
         <ActivityIndicator color={tint} />
-        <T w="bold" style={{ textAlign: "center" }}>You’re done! Waiting for {opp?.name || "your opponent"} to finish…</T>
+        <T w="bold" color={colors.onSurfaceInverse} style={{ textAlign: "center" }}>You’re done! Waiting for {opp?.name || "your opponent"} to finish…</T>
       </View>
     );
   } else if (d.status === "finished") {
@@ -240,7 +241,8 @@ export default function Duel() {
             <T size={11} color={colors.custom_whiteA70}>Practice duel · doesn’t change marks, ranks or the series streak</T>
           </Card>
         </Animated.View>
-        <T w="heavy" size={16}>Review your misses</T>
+        <RewardPanel reward={d.reward} title={won ? "Victory! Champion’s prize" : tie ? "Draw! Shared spoils" : "Battle reward earned"} testID="duel-reward" />
+        <T w="heavy" size={16} color={colors.onSurfaceInverse}>Review your misses</T>
         {d.cards.map((c: any, k: number) => {
           const a = mine[k];
           if (a && a.outcome === "correct") return null;
@@ -262,14 +264,14 @@ export default function Duel() {
   }
 
   return (
-    <View testID="duel-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
+    <View testID="duel-screen" style={{ flex: 1, backgroundColor: colors.custom_gameBg, paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: space.md, paddingHorizontal: space.lg, minHeight: 52 }}>
         <Press testID="duel-exit-button" onPress={() => (d?.status === "ready" && started ? setExit(true) : leave())} accessibilityLabel="Leave duel" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
           <T w="heavy" size={12} color={tint}>RAPID FIRE DUEL · {(d?.subject || p.subject || "").toUpperCase()}</T>
-          <T w="heavy" size={16}>{d?.chapter || "Mixed chapters"}</T>
+          <T w="heavy" size={16} color={colors.onSurfaceInverse}>{d?.chapter || "Mixed chapters"}</T>
         </View>
         <Icon name="sword-cross" size={24} color={colors.custom_amber} />
       </View>

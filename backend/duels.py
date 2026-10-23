@@ -37,10 +37,12 @@ class DuelAnswer(BaseModel):
     ms: int = Field(default=0, ge=0, le=CARD_SECONDS * 1000 + 1000)
 
 
-def make_router(db, rf_user, public_card):
+def make_router(db, rf_user, public_card, award):
     r = APIRouter(prefix="/rf/duels")
 
     def player(uid, name):
+        import asyncio
+        asyncio.ensure_future(db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True))
         return {"uid": uid, "name": name.strip()[:24], "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
 
     def start_fields():
@@ -59,6 +61,8 @@ def make_router(db, rf_user, public_card):
         if len(ps) < 2:
             return None
         a, b = ps
+        if a.get("forfeit") != b.get("forfeit"):  # a player who left can never win
+            return b["uid"] if a.get("forfeit") else a["uid"]
         if a["score"] != b["score"]:
             return a["uid"] if a["score"] > b["score"] else b["uid"]
         if a["ms"] != b["ms"]:
@@ -67,7 +71,7 @@ def make_router(db, rf_user, public_card):
 
     def tie_break(d):
         ps = d["players"]
-        return len(ps) == 2 and ps[0]["score"] == ps[1]["score"] and ps[0]["ms"] != ps[1]["ms"]
+        return len(ps) == 2 and not (ps[0].get("forfeit") or ps[1].get("forfeit")) and ps[0]["score"] == ps[1]["score"] and ps[0]["ms"] != ps[1]["ms"]
 
     async def settle(d):
         now = time.time()
@@ -76,7 +80,14 @@ def make_router(db, rf_user, public_card):
         if d["status"] == "ready" and (now > d["ends_at"] or all(p["done"] for p in d["players"])):
             d = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "ready"}, {"$set": {"status": "finished", "winner": winner(d), "tie_break": tie_break(d), "finished_ts": now}},
                                                       return_document=ReturnDocument.AFTER) or await db.rf_duels.find_one({"id": d["id"]})
+            for p in d["players"]:  # reward both players at settle time, even if one never returns
+                await reward_for(d, p["uid"])
         return d
+
+    async def reward_for(d, uid):
+        me = next(p for p in d["players"] if p["uid"] == uid)
+        answered = sum(a["outcome"] in ("correct", "incorrect") for a in me["answers"])
+        return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid)
 
     async def view(d, uid):
         await db.rf_duels.update_one({"id": d["id"], "players.uid": uid}, {"$set": {"players.$.seen_ts": time.time()}})
@@ -84,20 +95,24 @@ def make_router(db, rf_user, public_card):
         if uid not in [p["uid"] for p in d["players"]]:
             raise HTTPException(404, "Duel not found.")
         reveal = d["status"] == "finished"
+        reward = None
+        if reveal:
+            reward = await reward_for(d, uid)
         cards = []
         if d["status"] in ("ready", "finished"):
             docs = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": d["card_ids"]}}, {"_id": 0}).to_list(DUEL_CARDS)}
-            for cid in d["card_ids"]:
+            for k, cid in enumerate(d["card_ids"]):
                 if cid in docs:
                     c = public_card_dict(docs[cid])
-                    if not reveal:
+                    if not reveal:  # hide key and bank id so answers can't be looked up mid-duel
                         c.pop("answer", None)
                         c.pop("explain", None)
+                        c["id"] = f"{d['id'][:8]}-{k}"
                     cards.append(c)
         return {
             "id": d["id"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
             "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS,
-            "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
+            "reward": reward, "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
             "players": [{"you": p["uid"] == uid, "id": p["uid"][:6] if p["uid"] != uid else "you", "name": p["name"], "answered": len(p["answers"]), "score": p["score"],
                          "done": p["done"], **({"answers": p["answers"]} if reveal or p["uid"] == uid else {}), **({"uid": p["uid"]} if reveal else {})} for p in d["players"]],
         }

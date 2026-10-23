@@ -171,7 +171,11 @@ export default function Player() {
             {Object.entries(q.options || {}).map(([k, label]) => {
               const sel = cur.value === k;
               return (
-                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) })} accessibilityLabel={`Option ${k}${sel ? ", selected" : ""}`}
+                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => {
+                    A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) });
+                    // Auto-advance after choosing (Next/Back remain); never past the last question.
+                    if (!sel && !String(cur.value || "").trim() && idx < questions.length - 1) setTimeout(() => setQid((cur) => (cur === q.id ? questions[idx + 1].id : cur)), 450);
+                  }} accessibilityLabel={`Option ${k}${sel ? ", selected" : ""}`}
                   style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingHorizontal: space.md, borderRadius: radius.md, borderWidth: 2, borderColor: sel ? colors.brandPrimary : colors.border, backgroundColor: sel ? colors.custom_infoSoft : colors.custom_reading }}>
                   <View style={{ width: 34, height: 34, borderRadius: 17, alignItems: "center", justifyContent: "center", backgroundColor: sel ? colors.brandPrimary : colors.surface }}>
                     <T w="heavy" size={15} color={sel ? colors.onBrandPrimary : colors.onSurface}>{k}</T>
