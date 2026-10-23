@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 122: narrow follow-up QA of tejas/jee_transfer.py (SOURCE_SLOT lock + guarded_pdf_check + shielded task), the explicit 409 for a different owner, the 409 for a malformed legacy id, and the new partial-catalogue safety copy in JeeTransferPanel. Everything ran on the isolated DB tejas_isolated_iter105_test with MOCKED auth (X-Test-User) and MOCKED storage plus the TEST-ONLY hash shim. Real storage was blocked by a guard. There were no production calls and no customer-DB writes; env files are unchanged. The isolated DB was dropped, the bridge killed and the /tmp files removed. BACKEND: the new test_iter122_jee_transfer_isolated.py passed 39/39 on two runs with no flakes, and no 'Task exception was never retrieved' warnings. That is the 33 tests from iteration 121, with the timeout test rewritten, plus 6 new tests. The timeout test uses real threads, a threading.Event gate inside the mock storage GET, and a proxy of the real asyncio module where only wait_for's timeout is shortened to 0.2s. The real create_task, shield and to_thread are kept, so the coroutine is not simply closed. Results: (1) The first step returns 503 'timed out' with verified_files=0 and the lease released. SOURCE_SLOT stays locked and exactly 1 mock GET thread is still active. (2) Four more resumes each return 429 with Retry-After: 30 and 'still finishing'. Storage calls stay at 1, at most 1 GET runs at once (no stacked threads), the lease is released each time and verified_files stays 0. (3) After the gate is released, the slot frees for both a success and an error (StorageError) outcome, and the orphaned result is never counted. (4) The next normal step returns 200, verified_files=1, with exactly 1 fresh GET. The 4 storage-failure cases (size, header, hash, storage_error) now also assert that the slot is released. A different owner gets 409 'started by a different owner account. Continue with that original owner'. It does not get the old 'Another owner import step is running' message. The receipt is byte-identical (no takeover or lease grab, no storage call), owner2 can still read GET status, and the original owner continues. Malformed legacy records with a missing id (tejas_sets), id=None (tejas_files) or an integer id (tejas_chapter_books) on a fresh start return 409 'invalid identity'. They do not return 500, and nothing is written: no receipt, no storage call, 0 target inserts, full DB snapshot equal. GET status stays 200, and a fresh start works once the bad record is removed. All regressions still pass: 81/81 verified before any insert, interrupt/resume, concurrent 200/409, stale lease, baseline-change block, crash/dedupe, mid-run conflict 409 with no overwrite, completion at 81/3/78 with exact digests and null fields preserved, unrelated data untouched, the repeat no-op, the 29/26/23 catalogue at 90/120/70, and the pre-existing conflict 409. The unchanged 121 file now fails 12/33 as expected: its old SimpleNamespace(asyncio) patch lacks create_task. Because that error happens after SOURCE_SLOT.acquire, the slot is never released and every later step returns 429 (see code review). A read-only probe of the preview DB shows it unchanged: 222 sets, 6 books, 134 files, 1 user, 1 attempt, 0 docs without an id, no receipt, and 162/162 targets digest-identical. FRONTEND (real /studio page, /api routed via Playwright route.fetch to the TEST-ONLY bridge iso_bridge_iter122.py on 127.0.0.1:8768, session mocked): the safety copy 'Chapters appear in verified batches, so a pause can leave a partial catalogue until you resume…' renders in full at 1920x800 and at 390x844. Document, panel and safety-text overflow are all 0 and no child overflows the panel. Text is 12px in rgb(75,100,118) on white, with adequate contrast. There were 0 step calls on mount. Start → pause stopped at 6/81 and the button shows 'Resume verified import'. A 429 response shows the message 'The previous PDF check is still finishing. Wait before resuming.' in jee-transfer-error, and the Resume button stays enabled.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/studio/jee-transfer/step", "issue": "advance() calls SOURCE_SLOT.acquire(blocking=False) and then asyncio.create_task(asyncio.to_thread(...)) with no try/except around them. If anything raises between the acquire and the thread starting (for example a RuntimeError from a shut-down executor, or the test patch that showed it), the lock is never released and every later step returns 429 until the process restarts. Suggested fix: wrap the create_task in try/except BaseException and call SOURCE_SLOT.release() before re-raising. Low probability in production."},
+      {"endpoint": "POST /api/studio/jee-transfer/step", "issue": "SOURCE_SLOT is a per-process threading.Lock. With --workers 1 (current supervisor config) it bounds verifiers globally, but with multiple workers or replicas the timeout path could still run one orphan thread per worker. The lease still prevents concurrent steps. Informational only."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Studio JeeTransferPanel", "issues": ["Unchanged from iteration 121 (accepted): native <progress> styling, and static 'Preview imports do not update your live site' wording. No new issues."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter122_jee_transfer_isolated.py",
+    "/app/backend/tests/iso_bridge_iter122.py",
+    "/app/backend/tests/iter121_realdb_readonly_probe.py",
+    "/app/test_reports/pytest/iter122.xml"
+  ],
+  "action_items": [
+    "Optional hardening: release SOURCE_SLOT if create_task/to_thread raises after the acquire, so the slot cannot leak permanently",
+    "Operational: the production import still needs a real owner run after deployment (real 81-PDF storage GETs are not covered by QA)"
+  ],
+  "critical_code_review_comments": [
+    "The bounded-verifier design is correct. The thread releases the lock in finally, so the slot is held until the real thread ends. shield() keeps the task alive through the wait_for timeout and request cancellation. The done-callback retrieves exceptions (no unretrieved-exception warnings were seen). The 429 path still releases the lease through transfer_step's finally.",
+    "A timed-out verification is never credited (the next step re-GETs the same PDF). This is safe but repeats one storage read; acceptable.",
+    "The different-owner check now runs before inventory/claim, so it makes no reads of target content and no lease write.",
+    "content() maps ValidationError to 409 in inventory, baseline_snapshot, verify_baseline and append_record. Mid-run legacy docs without an id are not in the baseline $in query, so they cannot cause a 500 either.",
+    "The iteration 121 test file is now obsolete for the timeout case; use the iteration 122 file as the regression suite."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter122_jee_transfer_isolated.py",
+    "/app/backend/tests/iso_bridge_iter122.py"
+  ],
+  "success_rate": {"backend": "100% (39/39, run twice)", "frontend": "100% (safety-copy render and overflow at 1920x800 and 390x844, pause/resume, 429 message)"},
+  "test_credentials": "Read /app/memory/test_credentials.md. Real credentials and owner login were NOT used. Only synthetic X-Test-User users in the isolated DB.",
+  "seed_data_creation": "Only TEST_ fixtures in tejas_isolated_iter105_test (dropped). No customer-DB writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend regression: cd /app/backend/tests && python -m pytest test_iter122_jee_transfer_isolated.py -p no:asyncio -n0 (~20s; isolated DB; drops itself). The timeout test uses the MODE['gate'] threading.Event and the _ShortWait asyncio proxy. UI: python iso_bridge_iter122.py & (port 8768; controls /tmp/iter122_fail|delay). In Playwright, fulfil /api/auth/session with {data:{user},meta:{api_version:'1'}} and route.fetch the rest to the bridge with the x-test-user: owner header. Afterwards kill the bridge, drop tejas_isolated_iter105_test and rm /tmp/iter122_*. Read-only customer baseline: python iter121_realdb_readonly_probe.py. Production import has NOT been run."
+}

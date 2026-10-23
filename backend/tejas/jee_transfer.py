@@ -143,9 +143,9 @@ def verify_pdf(f):
         raise HTTPException(409, 'A private source PDF failed its size or hash check. No chapter will be imported until all sources pass.')
 
 
-def guarded_pdf_check(f):
+async def guarded_pdf_check(f):
     try:
-        verify_pdf(f)
+        await asyncio.to_thread(verify_pdf, f)
     finally:
         SOURCE_SLOT.release()
 
@@ -215,7 +215,13 @@ async def advance(state, records):
         f = records['tejas_files'][state.verified_files]
         if not SOURCE_SLOT.acquire(blocking=False):
             raise HTTPException(429, 'The previous PDF check is still finishing. Wait before resuming.', headers={'Retry-After': '30'})
-        task = asyncio.create_task(asyncio.to_thread(guarded_pdf_check, f))
+        work = guarded_pdf_check(f)
+        try:
+            task = asyncio.create_task(work)
+        except BaseException:
+            work.close()
+            SOURCE_SLOT.release()
+            raise
         task.add_done_callback(lambda completed: completed.exception() if not completed.cancelled() else None)
         try:
             await asyncio.wait_for(asyncio.shield(task), timeout=45)
