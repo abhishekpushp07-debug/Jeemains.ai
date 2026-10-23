@@ -1,0 +1,55 @@
+{
+  "summary": "Iteration 118 – origin/CORS auth fix (tejas/origins.py + server.py L72-94). The CODE fix is verified; the LIVE fix is still pending (production config and redeploy). (1) Unit tests: 70/70 passed for normalise_origin/configured_origins/origin_allowed. These cover whitespace, trailing /, case, default ports, de-duplication, explicit non-default ports and IPv6. They also cover rejection of null, empty values, paths, queries, fragments, userinfo, wildcard hosts, bad or out-of-range ports, control characters, hostile suffixes/substrings, and invalid configs failing closed without echoing values. (2) In-process ASGI tests with REAL auth (X-Test-User override cleared) on the isolated DB tejas_isolated_iter105_test, with config supplied only through the subprocess env. FIXED config (FRONTEND_URL=https://jeelive.ai/, CORS_ORIGINS=' * ,https://www.jeelive.ai, <preview>/ ,https://jeelive.ai:443'): 77 passed, 2 skipped (unused parametrised slots). .env preview config (preview FRONTEND_URL, CORS_ORIGINS='*'): 75 passed, 4 skipped. MISCONFIG reproduction (FRONTEND_URL=https://www.jeelive.ai, CORS '*'): 6/6 passed. In that run Origin https://jeelive.ai got 403 origin_denied for phone 0000000000 and staff {} before credentials were checked, the www origin got 422, invalid explicit configs raised RuntimeError at import without leaking the secret, and a legacy '*' alone did not crash the app. (3) Browser tests through a TEST-ONLY real-auth bridge on 127.0.0.1:8766 (playwright route.fetch). Misconfigured bridge: the UI showed 'Cross-origin write rejected.' for phone and staff, with no JS errors. Fixed bridge, desktop 1920x800 and mobile 390x844: invalid phone showed a readable message (no [object Object]); valid phone went to /home; cookies were HttpOnly, Secure, SameSite=Lax, Path=/; the session survived a reload. Staff wrong password showed 'incorrect'; the correct password went to /studio and survived a reload. Logout went to /owner-login?next=/studio and /login?next=/home. A student opening /studio was redirected to owner-login. No pageerrors. (4) Public preview probes: preview origin gave 422 (phone and staff) and preflight 200 with exact ACAO + credentials; evil origin gave 403 and preflight 400 with no ACAO. (5) Read-only production probes: https://jeelive.ai with Origin jeelive.ai AND with Origin www.jeelive.ai both return 403 origin_denied for invalid phone and staff {}. www returns 308 to the apex. This is expected and not a regression: production still runs the old config/code. Customer DB unchanged: 222 sets, 15700 questions, 206 sessions, 1 attempt, 1 user, 3 phone profiles, 0 limit rows. Snapshot compare = SAME.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tejas/origins.normalise_origin", "issue": "Malformed ports are accepted leniently. 'https://jeelive.ai:' (empty port) and 'https://jeelive.ai:0443' (leading zeros) both normalise to https://jeelive.ai. On Python 3.11, urlsplit.port also accepts non-ASCII digits. No new host becomes trusted, but the review request said malformed ports must be rejected. Fix: validate the port text with re.fullmatch(r'[0-9]{1,5}') and require it to be non-empty, with no leading zero unless the port is exactly 0 (port 0 is then rejected anyway)."},
+      {"endpoint": "server.protections (403 origin_denied)", "issue": "The early return skips the security headers (X-Content-Type-Options, X-Frame-Options, Cache-Control no-store, X-Request-ID). This behaviour existed before the fix, but the 403 envelope now carries a request_id that has no matching header."},
+      {"endpoint": "POST /api/auth/phone (phone shorter than 5 chars) and POST /api/auth/login {}", "issue": "Returns the generic 'Request fields or values do not match this operation’s contract.' instead of a phone-specific hint. The UI shows it readably (no crash), but it is unhelpful for students. Pre-existing UX issue, not caused by this fix."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter118_origins_unit.py",
+    "/app/backend/tests/test_iter118_auth_cors_isolated.py",
+    "/app/backend/tests/test_iter118_misconfig_repro.py",
+    "/app/backend/tests/iso_auth_harness_iter118.py",
+    "/app/backend/tests/iso_auth_bridge_iter118.py",
+    "/app/backend/tests/iter118_realdb_snapshot.py",
+    "/app/test_reports/pytest/iter118_fixed.xml",
+    "/app/test_reports/pytest/iter118_preview_env.xml",
+    "/app/test_reports/pytest/iter118_misconfig.xml"
+  ],
+  "action_items": [
+    "LIVE FIX PENDING: production still returns 403 origin_denied for both the https://jeelive.ai and https://www.jeelive.ai origins. Set FRONTEND_URL=https://jeelive.ai and CORS_ORIGINS=https://www.jeelive.ai (the CSV may also include other explicit origins) in the production deployment env, then publish and redeploy. Afterwards re-probe read-only: invalid phone 0000000000 and staff {} with Origin https://jeelive.ai should return 422, not 403.",
+    "Optional hardening: reject malformed port text (empty, leading zeros, non-ASCII digits) in normalise_origin.",
+    "Optional: replace CORS_ORIGINS=\"*\" in preview/production env with explicit origins (or remove it); '*' is now dead config and logs a warning at every boot.",
+    "Optional: add the security headers to the early 403 origin_denied response."
+  ],
+  "critical_code_review_comments": [
+    "The CORS middleware (ExplicitOriginCORS.is_allowed_origin) and the unsafe-write fence (origin_allowed(origin, origins)) share the same list and the same normalisation. No regex, Host, X-Forwarded-Host, Forwarded or Referer trust exists; spoofing tests confirmed this.",
+    "protections is registered after add_middleware, so it is the outermost layer: disallowed unsafe writes get 403 before CORS or auth runs. OPTIONS preflight is not fenced and is handled by CORS, which returns 400 for unrelated origins. Order is correct.",
+    "The request side tolerates a trailing '/' and surrounding whitespace in the Origin header. This is harmless (exact host/port match is still required), but it is more lenient than the spec Origin syntax.",
+    "configured_origins raises RuntimeError chained from a ValueError whose message is generic, so configured values or secrets do not appear in tracebacks (verified).",
+    "Auth logic, roles, cookies, generation fencing, staff_auth_held, the 5-attempt lockout (6th attempt returns 429 + Retry-After, even with the correct password) and register 410 are all unchanged and verified with real auth."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter118_origins_unit.py (new)",
+    "/app/backend/tests/test_iter118_auth_cors_isolated.py (new)",
+    "/app/backend/tests/test_iter118_misconfig_repro.py (new)",
+    "/app/backend/tests/iso_auth_harness_iter118.py (new)",
+    "/app/backend/tests/iso_auth_bridge_iter118.py (new)",
+    "/app/backend/tests/iter118_realdb_snapshot.py (new)"
+  ],
+  "success_rate": {"backend": "100% (70 unit + 77 fixed-config + 75 preview-config + 6 misconfig tests passed). Production live fix pending (config/redeploy).", "frontend": "100% of tested auth flows via the isolated bridge (desktop + mobile)"},
+  "test_credentials": "Read /app/memory/test_credentials.md; real owner credentials were NOT used. The isolated DB used synthetic users only: test-owner-118@example.com and test-reviewer-118@example.com (owner and reviewer). Their random per-process passwords were written to /tmp/iter118_bridge_creds.json, which has been deleted. Phones 9900000101 and 9900000102 were used only in the isolated DB. Note: the email validator rejects the .invalid TLD, so use example.com for synthetic staff.",
+  "seed_data_creation": "None in the customer DB. The isolated DB tejas_isolated_iter105_test was dropped and the bridge on 8766 was killed. The real DB snapshot (/tmp/iter118_realdb_snapshot.json) compares SAME.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Real-auth isolated tests: cd /app/backend/tests && ITER118_EXPECTED='<csv of expected normalised origins>' FRONTEND_URL=... CORS_ORIGINS=... python -m pytest test_iter118_auth_cors_isolated.py -p no:asyncio -n0. Misconfig repro: FRONTEND_URL=https://www.jeelive.ai CORS_ORIGINS='*' python -m pytest test_iter118_misconfig_repro.py -p no:asyncio -n0. Browser: start the bridge with (FRONTEND_URL=https://jeelive.ai CORS_ORIGINS='https://www.jeelive.ai,<preview>' python iso_auth_bridge_iter118.py &). Then route **/api/** with route.fetch to http://127.0.0.1:8766 (cookies flow automatically). Use logout via app-header-profile-menu then logout. Run iter118_realdb_snapshot.py save before and compare after. Kill the bridge, drop tejas_isolated_iter105_test and delete /tmp/iter118_bridge_creds.json afterwards. After the production redeploy, re-run only the read-only invalid probes against https://jeelive.ai.",
+  "rca of the issue": "Production rejects every unsafe write from the canonical origin (403 origin_denied happens before credentials are checked) because the production FRONTEND_URL matches neither https://jeelive.ai nor https://www.jeelive.ai, and the old code did not honour CORS_ORIGINS='*'. I reproduced this in-process and in the browser with FRONTEND_URL=https://www.jeelive.ai. The new code normalises FRONTEND_URL plus an explicit CSV and ignores '*'. With FRONTEND_URL=https://jeelive.ai and CORS_ORIGINS=https://www.jeelive.ai, the flows work (verified). Mitigation: update the production env and redeploy. The slow first load from www SSL is out of scope; www currently returns 308 to the apex in about 0.2s and the TLS verify result was 0."
+}

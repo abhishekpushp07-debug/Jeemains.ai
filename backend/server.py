@@ -91,8 +91,9 @@ async def protections(request: Request, call_next):
             and origin is not None
             and not origin_allowed(origin, origins)
         ):
-            return error_response("Cross-origin write rejected.", 403, "origin_denied")
-        response = await call_next(request)
+            response = error_response("Cross-origin write rejected.", 403, "origin_denied")
+        else:
+            response = await call_next(request)
         response.headers.update(
             {
                 "X-Content-Type-Options": "nosniff",

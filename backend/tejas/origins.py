@@ -1,4 +1,5 @@
 import logging
+import re
 from urllib.parse import urlsplit
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -14,6 +15,15 @@ def normalise_origin(value):
     parsed = urlsplit(raw)
     if parsed.scheme not in ('http', 'https') or not parsed.hostname or parsed.username is not None or parsed.password is not None or parsed.path not in ('', '/'):
         raise ValueError('Origin must contain only a scheme, hostname and optional port.')
+    if parsed.netloc.startswith('['):
+        suffix = parsed.netloc[parsed.netloc.index(']')+1:]
+        if suffix and not suffix.startswith(':'):
+            raise ValueError('Invalid origin port.')
+        port_text = suffix[1:] if suffix else None
+    else:
+        port_text = parsed.netloc.partition(':')[2] if ':' in parsed.netloc else None
+    if port_text is not None and not re.fullmatch(r'[1-9][0-9]{0,4}', port_text):
+        raise ValueError('Invalid origin port.')
     port = parsed.port
     if port is not None and not 1 <= port <= 65535:
         raise ValueError('Invalid origin port.')
