@@ -54,8 +54,8 @@ async def seed106():
     q = next(x for x in p1['questions'] if x['number'] == 3)  # supplied-solution MCQ (even index)
     tag = {'key': q['answer'], 'agrees': True, 'content_hash': fingerprint(q), 'solution': {
         'concept': 'TEST concept: kinetic energy $K=\\frac{1}{2}mv^2$', 'given': ['$m=2\\,\\text{kg}$', '$v=3\\,\\text{m/s}$'],
-        'steps': [{'title': '1. Substitute', 'explanation': '$K=\\frac{1}{2}(2)(3)^2$'}, {'title': '2. Evaluate', 'explanation': '$K=9\\,\\text{J}$'}],
-        'final_answer': q['answer'], 'insight': 'TEST insight', 'shortcut': 'TEST shortcut', 'common_mistakes': ['Forgetting the $\\frac{1}{2}$'], 'time_tip': 'TEST time tip'}}
+        'steps': [{'title': '1. Substitute', 'explanation': '$K=\\frac{1}{2}(2)(3)^2$'}, {'title': '2. Evaluate', 'explanation': '$K=9\\,\\text{J}$'}, {'title': '3. Match option', 'explanation': 'Option matches $9\\,\\text{J}$'}],
+        'final_answer': q['answer'], 'insight': 'TEST insight', 'shortcut': 'TEST shortcut', 'common_mistakes': ['Forgetting the $\\frac{1}{2}$'], 'time_tip': 'TEST time tip', 'key_agrees': True, 'difficulty': 'Easy'}}  # iter107: full TenMark shape (difficulty required)
     await H.TDB.tejas_sets.update_one({'id': p1['id'], 'questions.id': q['id']}, {'$set': {'questions.$.ai_solution': tag}})
     iid = str(uuid.uuid4()); qs = []
     for x in _orig_jq():

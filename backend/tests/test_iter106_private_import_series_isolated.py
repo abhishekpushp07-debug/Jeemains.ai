@@ -342,3 +342,20 @@ def test_report_import_view_status_after_day():
     # informational: importer view label for a series import after its day closed (archive)
     print('IMPORT_VIEW_STATUS_AFTER_DAY', S.get('view_status_after_day'))
     assert S.get('view_status_after_day') in ('live', 'scheduled', 'unlive', 'ended', 'archive')
+
+
+# iter107 narrow: importer view maps series phase -> 'archive' after the day (not 'live')
+def test_iter107_import_view_archive_after_day():
+    assert S.get('view_status_after_day') == 'archive', S.get('view_status_after_day')
+
+
+# iter107 narrow: future public slot hides readiness (ready False) while owner schedule keeps ready True
+def test_iter107_future_public_ready_false_owner_true():
+    at('2026-11-20', 10)
+    f = imp(); assert assign(f['id'], '2026-12-20').status_code == 200
+    pub, own = slot('2026-12-20'), slot('2026-12-20', 'owner')
+    assert pub['state'] == 'upcoming' and pub['ready'] is False and pub['set_id'] is None and not pub['can_start']
+    assert 'publication_status' not in pub and 'live_enabled' not in pub
+    assert own['ready'] is True and own['set_id'] == f['id']
+    v = data(req('GET', f"/api/studio/imports/{f['id']}", 'owner'))
+    assert v['status'] == 'scheduled'
