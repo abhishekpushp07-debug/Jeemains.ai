@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only QA of the premium card reskin and JEELIVE.AI branding on the preview URL. Pages checked: public landing, the authenticated /home page and /series/all-india-jee, using the isolated iter109 streak bridge (synthetic users seven and pre). Sizes: desktop 1920x800 and mobile 390x844, in light and dark themes, plus reduced motion. All checks passed.",
+  "verified": [
+    "Computed colours: flagship #0B2D80, JEE card #102F79, BITSAT card #A63C10, COMEDK card #101115, compact streak #0B2454, full streak surface #0B1B3C (public and authenticated pages, desktop and mobile).",
+    "No 'teal' or 'jeemains' in the rendered DOM. A grep of the frontend source found no jeemains strings.",
+    "Brand: document title is 'JEELIVE.AI — 100% Free Exam Practice'. The public header, app header and footer logo all have aria-label 'JEELIVE.AI home' and text JEELIVE.AI. Footer reads '© 2026 JEELIVE.AI'. The logo stays readable in dark mode and when the exam-light class is added.",
+    "Flagship ::before shine has pointer-events none and the flagship-shine animation. A hit test at the centre of the series-explore-button lands on the button itself, so the shine does not block it. Clicking the button opens the explainer dialog.",
+    "Links: series-banner-hub goes to /series/all-india-jee and streak-mini-link to /series/all-india-jee#my-streak. All 9 exam-direct mocks/chapters/results links point to the correct /exams/{slug}/... routes. Keyboard focus and Enter on exam-direct-mocks-bitsat navigate to /exams/bitsat/mocks.",
+    "Keyboard focus shows a visible 3px ring and the card sheen moves on focus-within.",
+    "Horizontal overflow is 0 and no cropped text was found at either size.",
+    "Reduced motion: flagship ::before has display none and no animation, card sheen is hidden, card hover lift is none, there are 0 animated elements inside streak-journey and confetti is hidden.",
+    "Streak: the Bronze cup celebration appears for user seven, streak-cup-7 opens its dialog, Escape closes it, and streak-motion-toggle changes aria-pressed from false to true. User pre sees 'Your 62-day run starts 1 Dec, 0 / 62'."
+  ],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Exam cards (cosmetic)", "issues": ["The focus ring on the BITSAT orange card is dark maroon. It is visible, but a lighter or white ring would stand out more on #A63C10."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/iso_bridge_streak_iter109.py"],
+  "action_items": [],
+  "critical_code_review_comments": ["SeriesStreak.js still uses the class name 'on-teal' for compact load and error states. Only the name is stale; the colours are blue. An optional rename would help future maintainers."],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped as requested)", "frontend": "100%"},
+  "seed_data_creation": "Only the isolated DB tejas_isolated_iter105_test was seeded through the iter109 bridge (81 synthetic attempts). The bridge was stopped and the DB dropped afterwards. No customer data, ENV or real DB was touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bridge workflow is unchanged from iter109/110: start iso_bridge_streak_iter109.py on 127.0.0.1:8765, answer /api/auth/session in Playwright routes, forward other /api calls with x-test-user. Screenshots are in /app/test_reports/iter111_shots. Not tested: download filenames (checked by code review only: jeelive-ai-* in StudioImport, DraftRecoveryPanel and ReportButton) and the full exam player."
+}
