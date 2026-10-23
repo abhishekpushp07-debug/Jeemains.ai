@@ -1,0 +1,31 @@
+{
+  "summary": "I tested only the frontend AI Astra branding on the series banner, hub header and explainer. Guest checks used the real public schedule GET. Logged-in checks used Playwright route mocks: a fake session, a minimal streak and empty history. Schedule states (prelaunch, live, start_closed, ended) were changed only in the browser. There was no real login, no database or env change, and every non-GET request was blocked (0 attempted). Results: the banner works at 1920x800 and 390x844 for both guest and logged-in users. The 100% AI badge sits top right with no overlap (47px/23px from the right edge). The 'Score 200+ with AI' plate is burgundy #991B1B on #FFF5F3. 'AI analysed PYQ based test series.' is bold white (850 weight). 'Created by AI Astra' shows in the top row. The blue #0B2D80, dates, 62 tests, 3 hours, counter, buttons and compact streak are unchanged. The live badge text is correct for all four states, the compact streak fits inside the banner, and there is no page overflow (scrollWidth equals viewport) in light, dark or reduced-motion mode. Reduced motion turns off the shine and the pulse. The explainer opens from both Explore and the live badge, has the AI Astra identity, the PYQ headline, 5 rules and the qualifying disclaimer (world best is an aspiration, 200+ is not a guarantee). It closes with Escape and the X button, and the hub link goes to /series/all-india-jee and closes the modal. On mobile the modal is 366px wide with no horizontal scroll. The hub header shows exactly 1 AI Astra identity, the burgundy score tagline and the PYQ headline on all 5 tabs, without repeating the full banner or the 100% AI badge. The 'How the series works' modal works. The header '100% free' pill is still there. One real bug: in the hub header, 'Created by AI Astra' runs into the 'YOUR DAILY JEE CHALLENGE' eyebrow on the same line with 0px gap, at both widths and in both themes.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "LiveSeries hub header (SeriesIdentity context=hub + series-hub-eyebrow)", "issue": "SeriesIdentity is inline-flex and the eyebrow is an inline span, so both render on one line with 0px gap ('...AI AstraYOUR DAILY JEE CHALLENGE'). Measured: identity right edge = eyebrow left edge (503/503 at 1920, 193/193 at 390). The eyebrow also sits lower than the identity baseline. Happens in light and dark mode. Fix: make .astra-on-hub display:flex with width:fit-content, or make the hub .series-kicker display:block.", "selector": "[data-testid='series-astra-identity-hub'] + [data-testid='series-hub-eyebrow']", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Explainer modal on mobile (390)", "issues": ["The DialogHeader centres its text on mobile, but SeriesIdentity stays left-aligned above the centred eyebrow and title. Small alignment mismatch, cosmetic only."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix the hub header layout so 'Created by AI Astra' and 'YOUR DAILY JEE CHALLENGE' sit on separate lines or have a gap (live-series.css .astra-on-hub, e.g. display:flex; width:fit-content)"
+  ],
+  "critical_code_review_comments": [
+    "SeriesIdentity has no layout rule outside the banner (the banner is a flex row). In the hub it sits inline next to sibling inline text, which causes the bug above. The explainer is fine only because DialogHeader is flex-col.",
+    "The testids are context-specific and not duplicated (banner/hub/explainer); the hub has 1 identity and no banner or 100% AI badge.",
+    "The disclaimer copy correctly says world best / most analysed is an ambition and 200+ is a practice goal. No unproven claims were found in the new copy.",
+    "No new API, auth, generation or write calls in the 3 edited files (0 non-GET requests seen)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped as requested)", "frontend": "96% (1 header layout bug in the hub)"},
+  "test_credentials": "No real credentials used. Read memory/test_credentials.md per protocol (not disclosed). Logged-in state came from a browser route mock of /api/auth/session.",
+  "seed_data_creation": "None. The mocks were browser-only routes (session, streak, history, and a changed schedule state). The temporary /tmp fixture file was deleted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "For logged-in series checks, mock /api/auth/session as {data:{user:{id,role:'student'}},meta:{api_version:'1'}}, plus /series/all-india-jee/streak (user_id must match), /history and the schedule. Keep mocked milestones unearned, or pre-set localStorage series-streak-seen:<uid>:<series_id>; otherwise the cup celebration dialog opens on the hub and blocks clicks. The browser tool breaks on f-strings and JS template literals in scripts, so use string concatenation. The real server today is 2026-10-23 (prelaunch).",
+  "rca of the issue": "Hub header bug: LiveSeries.js puts <SeriesIdentity context='hub'/> (div.inline-flex) directly before <span class='series-kicker'> (inline) in the same block. CSS gives .astra-on-hub only color and margin-bottom, no display:block or flex. The inline formatting context puts them side by side with no spacing. Reproduce: open /series/all-india-jee at any width. Fix: give .astra-on-hub display:flex and width:fit-content, or make the hub .series-kicker display:block."
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-23",
+  "type": "targeted_frontend_layout_fix_verification",
+  "prior_report": "/app/test_reports/iteration_129.json",
+  "status": "passed",
+  "target": "https://campus-search-debug.preview.emergentagent.com/series/all-india-jee",
+  "fixes": [
+    "Hub identity now display:flex, width:fit-content, so AI Astra and the existing eyebrow are on separate lines.",
+    "Explainer DialogHeader explicitly left-aligned for consistent mobile typography."
+  ],
+  "checks": {
+    "desktop_1920x800_identity_eyebrow_vertical_gap_px": 21,
+    "mobile_390x844_identity_eyebrow_vertical_gap_px": 22,
+    "desktop_overflow": [],
+    "mobile_overflow": [],
+    "mobile_explainer_title_alignment": "left",
+    "explainer_opens_and_escape_closes": true,
+    "latest_code_rendered_after_edit": true
+  },
+  "evidence": "/root/.emergent/automation_output/20261023_135452/console_20261023_135452.log",
+  "isolation": "This final check used unauthenticated real read-only preview GET requests only. Previous129 logged-in and schedule-state checks used browser-only MOCKED responses. No customer DB, auth, question, score, AI or attempt writes.",
+  "functional_issues": [],
+  "deployment": "User initiated deployment before this banner change. Latest banner inclusion in live image not verified; no redundant deployment requested."
+}
