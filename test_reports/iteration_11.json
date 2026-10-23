@@ -1,0 +1,33 @@
+{
+  "summary": "Iteration 11 retested the 3 fixes from iteration 10 and ran a smoke test. All 3 fixes are verified. (1) Backend: gamify.award counters. A new file, test_rf_iter11.py, has 5 tests; together with test_rf_iter10.py, 11 of 11 pass. An all-skip solo run changes none of sessions, duels, wins or rival_games, and 3 all-skip runs give duels=0 with no duelist_10 badge. A solo run with answers adds 1 to sessions only. An AI Rival duel adds 1 to rival_games only. A human invite duel between two TEST users adds 1 to duels for both players and 1 to wins for the winner. (2) Attempt player, tested on a 375x667 viewport. Picking option B on Q4 sent PUT {value:'B', revision:1}. Tapping the 'Guess' chip then sent PUT {value:'B', confidence:0.25, revision:2}, and the status showed 'All saved'. After a reload, GET /api/jl/attempts/{id} returned answers[Q4].confidence=0.25. (3) Rapid hub, using a mocked 409 on /quests/claim. Inline red text (rgb 251,113,133) appeared with testID rf-quest-claim-error, showing the server detail. The real claim then returned 200 {coins:40}. The error cleared, the row shows 'Claimed', and coins went from 1715 to 1755. Smoke tests: a solo Physics sprint (3 answered, then Finish) showed 'Sprint complete! Loot earned' with correct counts. The AI Rival duel ended 'You won!' 3-2, with live lead banners and a reward of +40 XP and +3 coins. On the real user, sessions went 42→43, rival_games went up by 1, and duels stayed at 20. No console errors.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "data (rf_profiles)", "issue": "The real test user db0c62b8 still has duels=20 although wins=0. These were inflated by all-skip runs before the fix. Old counts were not corrected, and any duelist_10 badge already granted stays."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Attempt confidence saved after the answer", "issue": "Minor, comes from the upstream jeelive API. The late confidence is stored on answers[qid].confidence=0.25. However, confidence_observations[qid] was written by the first PUT and still shows probability=None. Calibration analytics that read confidence_observations will not see the late confidence. In the same session the chips also stay visible after saving; they hide only after a reload.", "affected_testIDs": ["player-confidence", "confidence-0.25"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter11.py", "/app/backend/tests/test_rf_iter10.py", "/app/test_reports/pytest/pytest_results_iter11.xml"],
+  "action_items": [
+    "Optional: run a one-off script to recompute rf_profiles.duels from rf_duels (non-bot, finished) for users inflated by all-skip runs, such as db0c62b8 with duels=20.",
+    "Optional: check whether the jeelive API updates confidence_observations when confidence is added in a later PUT. If it does not, consider sending the observation again, or note that calibration uses only the first answer."
+  ],
+  "critical_code_review_comments": [
+    "gamify.py:97-103: the counter branch is now correctly split into solo / bot / human; a solo run never falls through to duels.",
+    "attempt/[id].tsx:194-198: the chip onPress now calls A.edit with the current value and the confidence when an answer exists. Tapping the same chip again (nv undefined) only clears the local state, so a confidence that was already sent cannot be cleared."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter11.py (new)"],
+  "success_rate": {"backend": "100% (11/11)", "frontend": "100% (3 fixes + 2 smoke flows)"},
+  "seed_data_creation": "TEST- profiles, sessions and duels were created and cleaned up. On real user db0c62b8: Q4 of attempt e689d751 answered B with confidence 0.25, q_correct quest claimed (+40), 1 solo Physics sprint (1/30) and 1 AI Rival duel (won 3-2).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run pytest with -n0 -p no:randomly. A human duel can be run with two TEST- uids via invite code then /duels/join. On the duel result screen, duel-my-score and duel-opp-score are not rendered; read duel-outcome instead. Network capture of PUT /api/jl/attempts/{id}/answers/{qid} shows the confidence field.",
+  "rca_of_issue": "All 3 iteration-10 bugs are fixed: the gamify counter if/elif/else now nests the played check under the solo branch; the confidence chip now calls A.edit when an answer exists; the quest claim shows inline claimErr text instead of Alert.alert."
+}

@@ -117,7 +117,17 @@ class TestEntryEffects:
 
 # ---------- Duel timing + AI rival entry ----------
 class TestDuelStart:
-    def test_bot_duel_start_at_4s_and_entry(self, s, uid):
+    def test_bot_duel_start_at_4s_and_entry(self, s):
+        # self-contained: seed own profile with owned + equipped entry_blackhole (no dependency on TestEntryEffects)
+        uid = "TEST-" + uuid.uuid4().hex[:16]
+        DB.rf_profiles.update_one({"uid": uid}, {"$set": {"coins": 0, "avatar": "av_robo", "owned": ["entry_blackhole"], "equipped": {"entry": "entry_blackhole"}}}, upsert=True)
+        try:
+            self._run(s, uid)
+        finally:
+            DB.rf_profiles.delete_many({"uid": uid})
+            DB.rf_duels.delete_many({"players.uid": uid})
+
+    def _run(self, s, uid):
         r = s.post(f"{API}/duels", json={"subject": "Physics", "mode": "invite", "name": "TEST_Av", "request_id": uuid.uuid4().hex}, headers=H(uid))
         assert r.status_code == 200, r.text
         did = r.json()["id"]

@@ -123,6 +123,7 @@ export default function SetDetail() {
               <Icon name={agree ? "checkbox-marked" : "checkbox-blank-outline"} size={24} color={colors.brandPrimary} />
               <T size={13} style={{ flex: 1 }}>I can read the content and understand the rules and offline saving policy.</T>
             </Press>
+            {!checked || !agree ? <T testID="set-start-hint" size={12} color={colors.muted} style={{ textAlign: "center" }}>{!checked ? "Run the device check, then tick the box to start." : "Tick the box above to start."}</T> : null}
             <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy && checked} disabled={!checked || !agree} onPress={start} color={colors.surfaceInverse} />
             <T size={11} color={colors.muted} style={{ textAlign: "center" }}>The clock starts only when your attempt opens.</T>
           </>

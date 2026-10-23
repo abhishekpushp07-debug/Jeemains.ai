@@ -9,7 +9,8 @@ import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
 import { rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
-import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, tap } from "@/src/components/ui";
+import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap } from "@/src/components/ui";
+import { playSfx } from "@/src/sfx";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 
 const LIMIT = 20000;
@@ -24,7 +25,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
   const missed = (s.results || []).filter((r: any) => r.outcome !== "correct");
   return (
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
-      <RewardPanel reward={s.reward} title={sum.accuracy >= 80 ? "Blazing run! Loot unlocked" : sum.correct > 0 ? "Sprint complete! Loot earned" : "Sprint complete"} />
+      <RewardPanel reward={s.reward} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "Blazing run! Loot unlocked" : sum.correct > 0 ? "Sprint complete! Loot earned" : "Sprint complete"} />
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
         <T w="heavy" size={44} color={colors.onSurfaceInverse} testID="rf-summary-score">{sum.score}<T w="semibold" size={22} color={colors.custom_whiteA70}> / {sum.total}</T></T>
@@ -87,6 +88,7 @@ export default function RapidSession() {
   const results = useRef<Res[]>([]);
   const [combo, setCombo] = useState(0);
   const startedAt = useRef(0);
+  const lastTick = useRef(0);
   const reqId = useRef(uuid());
   const x = useSharedValue(0);
   const uid = user?.id || "";
@@ -95,6 +97,7 @@ export default function RapidSession() {
 
   useEffect(() => {
     let alive = true;
+    if (!uid) return; // wait for auth hydration (avoids a 401 POST on cold deep-link)
     setError("");
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
@@ -134,6 +137,8 @@ export default function RapidSession() {
     const iv = setInterval(() => {
       const l = LIMIT - (mono() - startedAt.current);
       setLeft(Math.max(0, l));
+      const sec = Math.ceil(l / 1000);
+      if (l > 0 && sec <= 5 && sec !== lastTick.current) { lastTick.current = sec; playSfx("tick", 0.6); }
       if (l <= 0) {
         // Only the current visible card expires; future cards are never consumed in background.
         record({ card_id: card.id, outcome: "timed_out", choice: null, ms: LIMIT });
@@ -147,12 +152,13 @@ export default function RapidSession() {
   // Auto-advance shortly after an answer locks (Next / swipe stay available).
   useEffect(() => {
     if (choice === null || timedOut || done) return;
-    const t = setTimeout(() => fly(1), 1100);
+    // Wrong answers stay longer so the explanation can actually be read.
+    const t = setTimeout(() => fly(1), card && choice !== card.answer ? 2400 : 1000);
     return () => clearTimeout(t);
   }, [choice, card?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (timedOut) setCombo(0);
+    if (timedOut) { setCombo(0); playSfx("wrong", 0.6); buzz("warning"); }
     if (!timedOut) return;
     const t = setTimeout(advance, 1400);
     return () => clearTimeout(t);
@@ -160,9 +166,14 @@ export default function RapidSession() {
 
   function answer(k: number) {
     if (locked || !card) return;
-    tap("medium");
     setChoice(k);
-    setCombo((c) => (k === card.answer ? c + 1 : 0));
+    const ok = k === card.answer;
+    buzz(ok ? "success" : "error");
+    setCombo((c) => {
+      const n = ok ? c + 1 : 0;
+      playSfx(ok ? (n >= 3 && n % 3 === 0 ? "combo" : "correct") : "wrong", 0.8);
+      return n;
+    });
     record({ card_id: card.id, outcome: k === card.answer ? "correct" : "incorrect", choice: k, ms: Math.min(LIMIT, Math.round(mono() - startedAt.current)) });
   }
   function skip() {
@@ -199,7 +210,7 @@ export default function RapidSession() {
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
-          <T w="heavy" size={12} color={tint} numberOfLines={1}>{card ? `${card.subject} · ${card.chapter}` : "Rapid Fire"}</T>
+          <T w="heavy" size={12} color={tint} numberOfLines={1}>{card ? `${card.subject} · ${done ? (done.chapter || (done.mode === "repeat_missed" ? "Missed cards" : "Mixed chapters")) : card.chapter}` : "Rapid Fire"}</T>
           {card && !done ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
               <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter">Card {i + 1} of {cards.length}</T>
@@ -227,7 +238,7 @@ export default function RapidSession() {
       {done ? <Summary s={done} cards={cards} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
         <View style={{ flex: 1, paddingHorizontal: space.lg }}>
           <View style={{ flex: 1, justifyContent: "center" }}>
-            {cards[i + 1] ? <View pointerEvents="none" style={{ position: "absolute", left: 14, right: 14, top: 30, bottom: 6, borderRadius: radius.lg, backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border, transform: [{ scale: 0.95 }], opacity: 0.8 }} /> : null}
+            {cards[i + 1] ? <View pointerEvents="none" style={{ position: "absolute", left: 14, right: 14, top: 30, bottom: 6, borderRadius: radius.lg, backgroundColor: tint + "33", borderWidth: 1, borderColor: tint + "88", transform: [{ scale: 0.95 }] }} /> : null}
             <GestureDetector gesture={pan}>
               <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 6 }, cardStyle]}>
                 <View style={{ height: 4, width: 48, borderRadius: 2, backgroundColor: tint }} />
@@ -252,7 +263,7 @@ export default function RapidSession() {
                 {locked ? (
                   <View testID="rf-feedback" accessibilityLiveRegion="polite" style={{ gap: 2 }}>
                     <T w="heavy" size={15} color={timedOut ? colors.warning : choice === card.answer ? colors.success : colors.error}>{timedOut ? "⏱ Timed out" : choice === card.answer ? "✓ Correct" : "✗ Incorrect"}</T>
-                    {card.explain ? <T size={13} color={colors.muted} numberOfLines={2}>{card.explain}</T> : null}
+                    {card.explain ? <T size={13} color={colors.custom_onReading}>{card.explain}</T> : null}
                   </View>
                 ) : null}
               </Animated.View>

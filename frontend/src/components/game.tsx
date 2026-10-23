@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Modal, Pressable, View } from "react-native";
+import { useRouter } from "expo-router";
+import { playSfx } from "@/src/sfx";
 import Animated, { Easing, FadeInDown, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withTiming, ZoomIn } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import { rf } from "@/src/api/client";
@@ -8,7 +10,8 @@ import { Icon, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 
 export type GameProfile = { xp: number; level: number; level_floor: number; next_level_xp: number; coins: number; streak: number; best_streak: number; played_today: boolean; sessions: number; duels: number; wins: number; cards_correct: number; badges: { id: string; title: string; body: string; earned: boolean }[]; avatar?: string; equipped?: Record<string, string | null>; owned?: string[]; freezes?: number; quests?: any[] };
-export type Reward = { xp: number; coins: number; streak: number; level_before: number; level_after: number; level_up: boolean; new_badges: { id: string; title: string; body: string }[] };
+export type Reward = { xp: number; coins: number; streak: number; level_before: number; level_after: number; level_up: boolean; new_badges: { id: string; title: string; body: string }[];
+  xp_total?: number; coins_total?: number; level_floor?: number; next_level_xp?: number; played?: boolean; quest_ready?: boolean };
 
 export const BADGE_ICON: Record<string, any> = { first_sprint: "flag-checkered", first_win: "sword", streak_3: "fire", streak_7: "fire-circle", streak_30: "crown", sharpshooter: "target", perfect: "star-shooting", duelist_10: "sword-cross", champion_10: "trophy-award" };
 
@@ -89,8 +92,64 @@ function CountUp({ to, color, size = 26, prefix = "+" }: { to: number; color: st
   return <T w="heavy" size={size} color={color}>{prefix}{v}</T>;
 }
 
+function XpBar({ r }: { r: Reward }) {
+  const reduced = useReducedMotion();
+  const span = Math.max(1, (r.next_level_xp ?? 1) - (r.level_floor ?? 0));
+  const to = Math.min(1, ((r.xp_total ?? 0) - (r.level_floor ?? 0)) / span);
+  const from = r.level_up ? 0 : Math.max(0, to - r.xp / span);
+  const w = useSharedValue(from);
+  useEffect(() => { w.value = reduced ? to : withDelay(400, withTiming(to, { duration: 900, easing: Easing.out(Easing.cubic) })); }, [to]); // eslint-disable-line react-hooks/exhaustive-deps
+  const st = useAnimatedStyle(() => ({ width: `${w.value * 100}%` }));
+  return (
+    <View style={{ alignSelf: "stretch", gap: 6 }} testID="reward-xp-bar">
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <T w="heavy" size={12} color={colors.onSurfaceInverse}>Level {r.level_after}</T>
+        <T w="bold" size={12} color={colors.custom_gameMuted}>{(r.next_level_xp ?? 0) - (r.xp_total ?? 0)} XP to Level {r.level_after + 1}</T>
+      </View>
+      <View style={{ height: 10, borderRadius: 5, backgroundColor: colors.custom_gameLine, overflow: "hidden" }}>
+        <Animated.View style={[{ height: "100%", borderRadius: 5, overflow: "hidden" }, st]}>
+          <LinearGradient colors={[colors.custom_neonCyan, colors.custom_neonGreen]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ flex: 1 }} />
+        </Animated.View>
+      </View>
+    </View>
+  );
+}
+
+// Full-screen level-up moment (tap anywhere to continue).
+function LevelUpOverlay({ level, onClose }: { level: number; onClose: () => void }) {
+  useEffect(() => { playSfx("levelup"); const t = setTimeout(onClose, 2600); return () => clearTimeout(t); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  return (
+    <Modal transparent animationType="fade" visible onRequestClose={onClose}>
+      <Pressable testID="level-up-overlay" onPress={onClose} style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_gameBg + "F2", gap: space.lg }}>
+        <Burst />
+        <Animated.View entering={ZoomIn.springify().damping(8)}><LevelGem level={level} size={150} /></Animated.View>
+        <Animated.View entering={FadeInDown.delay(250)} style={{ alignItems: "center", gap: 4 }}>
+          <T w="heavy" size={40} color={colors.custom_neonAmber} style={{ letterSpacing: 3 }}>LEVEL UP!</T>
+          <T w="bold" size={16} color={colors.onSurfaceInverse}>You reached Level {level}</T>
+          <T size={12} color={colors.custom_gameMuted}>Tap to continue</T>
+        </Animated.View>
+      </Pressable>
+    </Modal>
+  );
+}
+
 export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward?: Reward | null; title: string; testID?: string }) {
+  const router = useRouter();
+  const [closed, setClosed] = useState<number | null>(null);
+  const lvl = !!reward?.level_up && closed !== reward.level_after;
+  useEffect(() => {
+    if (reward && !reward.level_up && reward.coins > 0) playSfx("coin", 0.7);
+  }, [reward?.level_after, reward?.coins]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!reward) return null;
+  if (reward.played === false) {
+    return (
+      <View testID={testID} style={{ borderRadius: radius.lg, padding: space.lg, gap: space.sm, alignItems: "center", backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
+        <Icon name="treasure-chest" size={40} color={colors.custom_gameMuted} />
+        <T w="heavy" size={17} color={colors.onSurfaceInverse}>{title}</T>
+        <T size={13} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>Answer at least one card to earn XP, coins and keep your streak alive.</T>
+      </View>
+    );
+  }
   return (
     <View testID={testID} style={{ borderRadius: radius.lg, overflow: "hidden" }}>
       <LinearGradient colors={[colors.custom_gameCardHi, colors.custom_gameBg]} style={{ padding: space.lg, gap: space.md, alignItems: "center" }}>
@@ -117,6 +176,21 @@ export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward
             <T w="heavy" size={14} color={colors.custom_gameBg}>LEVEL UP! You reached Level {reward.level_after}</T>
           </Animated.View>
         ) : null}
+        <XpBar r={reward} />
+        {reward.coins_total != null ? (
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }} testID="reward-coin-balance">
+            <Icon name="hexagon-multiple" size={16} color={colors.custom_neonAmber} />
+            <T w="bold" size={13} color={colors.custom_gameMuted}>Balance <T w="heavy" size={13} color={colors.custom_neonAmber}>{reward.coins_total}</T> coins</T>
+          </View>
+        ) : null}
+        {reward.quest_ready ? (
+          <Pressable testID="reward-quest-ready" onPress={() => router.push("/(tabs)/rapid")} style={{ flexDirection: "row", alignItems: "center", gap: space.sm, alignSelf: "stretch", minHeight: 44, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: colors.custom_neonGreen }}>
+            <Icon name="gift" size={20} color={colors.custom_gameBg} />
+            <T w="heavy" size={13} color={colors.custom_gameBg} style={{ flex: 1 }}>Daily quest complete — claim your coins!</T>
+            <Icon name="chevron-right" size={20} color={colors.custom_gameBg} />
+          </Pressable>
+        ) : null}
+        {lvl ? <LevelUpOverlay level={reward.level_after} onClose={() => setClosed(reward.level_after)} /> : null}
         {reward.new_badges.map((b, i) => (
           <Animated.View key={b.id} entering={FadeInDown.delay(450 + i * 150)} testID={"reward-badge-" + b.id} style={{ flexDirection: "row", alignItems: "center", gap: space.md, alignSelf: "stretch", padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_neonAmber }}>
             <Icon name={BADGE_ICON[b.id] || "medal"} size={28} color={colors.custom_neonAmber} />

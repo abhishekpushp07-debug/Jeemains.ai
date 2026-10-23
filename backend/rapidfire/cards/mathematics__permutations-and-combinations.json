@@ -15,25 +15,8 @@
   "answer": 1,
   "explain": "Linear arrangement of n distinct objects = n! (fundamental counting principle).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "8be45b19-405e-4dc0-9214-91476f7a7b41",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations",
-  "prompt": "ⁿPᵣ equals",
-  "formula": "ⁿPᵣ = n!/(n−r)!",
-  "options": [
-   "n!/(n−r)!",
-   "r!·ⁿCᵣ",
-   "n!/r!",
-   "n!/(r!(n−r)!)"
-  ],
-  "answer": 0,
-  "explain": "ⁿPᵣ counts ordered selections of r from n: n!/(n−r)!.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "208a76bd-28b2-47a2-9d3c-59d526e43493",
@@ -51,7 +34,8 @@
   "answer": 3,
   "explain": "ⁿCᵣ counts unordered selections; divides ⁿPᵣ by r! to remove order.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "38ae5b12-2377-4245-b0e0-4bd42443b7ab",
@@ -69,7 +53,8 @@
   "answer": 1,
   "explain": "Arranging a combination of r objects gives r! permutations, so ⁿPᵣ = r!·ⁿCᵣ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "bd8a386a-dd47-4cd2-95ae-f7a475b5d9ac",
@@ -87,7 +72,8 @@
   "answer": 1,
   "explain": "Sum of all binomial coefficients = 2ⁿ (set (1+1)ⁿ in binomial theorem).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "1715462e-3d55-4216-969d-37d819e432a4",
@@ -105,7 +91,8 @@
   "answer": 0,
   "explain": "ⁿCᵣ = ⁿC_{n−r}, so if r ≠ s and ⁿCᵣ = ⁿCₛ then r + s = n.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c507be89-b508-4255-9351-2e3563054e93",
@@ -123,7 +110,8 @@
   "answer": 3,
   "explain": "One object fixed to remove rotational equivalence; remaining (n−1) arranged in (n−1)!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7c180c2a-5b0a-4dc8-9f64-30d97ce53764",
@@ -141,7 +129,8 @@
   "answer": 0,
   "explain": "Necklace: clockwise and anticlockwise identical, so divide circular perms by 2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ad4f8fea-a5cc-46cc-8feb-956f026b9522",
@@ -159,7 +148,8 @@
   "answer": 1,
   "explain": "Repeated objects reduce arrangements: divide n! by factorials of each repetition count.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "cdab69da-900a-476a-8bda-ae3bc85ce81d",
@@ -177,7 +167,8 @@
   "answer": 3,
   "explain": "Each object included or not → 2ⁿ subsets; exclude empty set → 2ⁿ − 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f67695b5-2c02-49a1-b4a4-566d1202f55c",
@@ -195,7 +186,8 @@
   "answer": 2,
   "explain": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ, fundamental in combinatorics.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ada3cd16-2f6b-4e37-9398-370b6daad526",
@@ -213,7 +205,8 @@
   "answer": 3,
   "explain": "Total lines from n vertices = ⁿC₂; subtract n sides → ⁿC₂ − n = n(n−3)/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "e9174276-0571-4dab-a33b-1a149a68e6d1",
@@ -231,7 +224,8 @@
   "answer": 2,
   "explain": "Any 3 non-collinear points form a unique triangle, so answer = ⁿC₃.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f2b744b8-9ca7-479f-b9cf-77ca4a2396a8",
@@ -249,7 +243,8 @@
   "answer": 2,
   "explain": "Each of the n objects can go into any of the r groups independently → rⁿ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d9c7eb5b-296b-42b3-8272-d7439fed7969",
@@ -267,7 +262,8 @@
   "answer": 2,
   "explain": "Each position has n choices independently when repetition allowed → nʳ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "03b77cb5-1bf3-4540-b056-63701acff2f2",
@@ -285,7 +281,8 @@
   "answer": 3,
   "explain": "Dₙ = n!(1−1/1!+1/2!−...+(−1)ⁿ/n!): no object in its original place.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "90340f3c-4063-469c-a71a-6f7ae9bab112",
@@ -303,7 +300,8 @@
   "answer": 1,
   "explain": "Stars and bars: distributing n identical into r distinct bins = ⁿ⁺ʳ⁻¹Cᵣ₋₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f4d9a76d-2261-4bfe-8bf7-ec4c3b296da7",
@@ -321,7 +319,8 @@
   "answer": 2,
   "explain": "Substitute yᵢ = xᵢ−1 (yᵢ≥0), reduces to non-negative with sum n−r → ⁿ⁻¹Cᵣ₋₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "22afb679-056a-4c48-81f0-6a6106db6204",
@@ -339,7 +338,8 @@
   "answer": 0,
   "explain": "Binomial coefficients are symmetric and peak at middle: r = n/2 for even n.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "441f44cb-1a6a-4797-8210-2f039f15bb98",
@@ -357,7 +357,8 @@
   "answer": 3,
   "explain": "²ⁿCₙ divided by 2! since the two groups are indistinguishable = (2n)!/(2·(n!)²).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "712fef9b-c597-45e8-9190-f8fffe2d963e",
@@ -375,7 +376,8 @@
   "answer": 0,
   "explain": "Replace ᵐC₂ collinear pairs (give 1 line, not ᵐC₂ lines) → ⁿC₂ − ᵐC₂ + 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "1249876f-a76b-4d90-b2ef-226d4cb31053",
@@ -390,10 +392,11 @@
    "ⁿ⁺²Cᵣ",
    "ⁿ⁺¹Cᵣ"
   ],
-  "answer": 2,
+  "answer": 1,
   "explain": "Apply Pascal twice: ⁿCᵣ₋₁+ⁿCᵣ=ⁿ⁺¹Cᵣ, then ⁿ⁺¹Cᵣ+ⁿCᵣ+ⁿCᵣ₊₁=ⁿ⁺²Cᵣ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "eca07788-f6d2-42ab-8d02-f4ea8961cb55",
@@ -411,7 +414,8 @@
   "answer": 1,
   "explain": "Dictionary rank uses lexicographic (alphabetical) ordering of all permutations.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5df4ad05-9403-45aa-ae5c-b668f00e577e",
@@ -429,7 +433,8 @@
   "answer": 3,
   "explain": "Fix the specific object; choose remaining r−1 from n−1 → ⁿ⁻¹Cᵣ₋₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "e7484bf3-6651-4504-8d75-f2aca54f7f88",
@@ -447,7 +452,8 @@
   "answer": 2,
   "explain": "Legendre: power of prime p in n! = ⌊n/p⌋+⌊n/p²⌋+⌊n/p³⌋+… (finite sum).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7446ca5e-ee05-46eb-b9de-77908b5c69b3",
@@ -465,7 +471,8 @@
   "answer": 2,
   "explain": "Stars and bars: identical objects into distinct bins with zero allowed uses C(n+r-1,r-1).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "36461da7-95ec-4945-a521-f338aebb2389",
@@ -483,7 +490,8 @@
   "answer": 0,
   "explain": "Stars and bars with each bin ≥1: place dividers among n-1 gaps, giving C(n-1,r-1).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3666e8c3-930b-44bf-ac3d-9e804f92f395",
@@ -501,7 +509,8 @@
   "answer": 2,
   "explain": "Selection with repetition (combination with repetition) equals C(n+r-1, r).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "94cbe0a7-bc68-4eff-a1c5-dd8644062312",
@@ -519,7 +528,8 @@
   "answer": 1,
   "explain": "Each digit appears (n-1)P(r-1) times in each position; multiply by repunit R_r.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "74212630-fbeb-451c-b99f-9918c09c1919",
@@ -537,7 +547,8 @@
   "answer": 3,
   "explain": "Each element is either included or not, giving 2ⁿ total subsets including the empty set.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c1034206-6349-47c1-b26f-7c4a10bc04b3",
@@ -555,7 +566,8 @@
   "answer": 0,
   "explain": "Divide by 3! since the three groups are identical (unlabelled); labelled groups omit the 3!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "0e61729c-00a2-492d-b2b0-1e48c50c5ebf",
@@ -573,7 +585,8 @@
   "answer": 1,
   "explain": "Fix the 2 specific persons; choose remaining r-2 from the other n-2 persons.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "878e1c9f-7b4f-460c-8e2c-2e462af62340",
@@ -591,7 +604,8 @@
   "answer": 2,
   "explain": "Total committees minus those containing both specific persons: C(n,r) - C(n-2,r-2).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "07067307-11ac-42f1-af91-f5dd97a10ad9",
@@ -609,7 +623,8 @@
   "answer": 1,
   "explain": "Treat the pair as one unit: (n-1)! arrangements × 2 internal arrangements.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "11ce622d-8c8c-4609-8216-6847f1b57d76",
@@ -627,7 +642,8 @@
   "answer": 3,
   "explain": "Total arrangements minus those with the two persons adjacent: n! - 2·(n-1)!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "6b50c335-5e8b-4695-ab48-689aa5b95c40",
@@ -645,7 +661,8 @@
   "answer": 1,
   "explain": "Choose 2 horizontal lines and 2 vertical lines from m and n lines respectively.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "96fa476e-0b52-4cfd-aeb4-0528b0945358",
@@ -663,7 +680,8 @@
   "answer": 2,
   "explain": "Squares of size k×k: (n-k+1)² each; summing gives n(n+1)(2n+1)/6.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "6db0632a-53a1-40c8-8258-64a17b490989",
@@ -681,7 +699,8 @@
   "answer": 3,
   "explain": "Identify repeated letters, choose which repeats, then count valid 3-letter arrangements.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "67cb91dd-e368-426f-b05f-ae7e4649ecaf",
@@ -699,7 +718,8 @@
   "answer": 3,
   "explain": "Boys start or girls start (×2); arrange n boys in n! ways and n girls in n! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3eab0bd7-58c7-4b2c-ad8d-ef1523627daf",
@@ -717,7 +737,8 @@
   "answer": 0,
   "explain": "Fix boys in circle: (n-1)! ways; arrange n girls in the n gaps: n! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "0e6ee529-1e90-424a-8b4e-3727990739b5",
@@ -735,7 +756,8 @@
   "answer": 1,
   "explain": "Setting x = -1 in (1+x)ⁿ gives alternating sum of binomial coefficients = 0.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "51ceb738-2894-4719-a72f-5ce5c05b5b9c",
@@ -753,7 +775,8 @@
   "answer": 3,
   "explain": "Coefficient of xⁿ in (1+x)ⁿ·(1+x)ⁿ = (1+x)²ⁿ gives sum of squares = ²ⁿCₙ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "96117007-a102-4d7a-a586-3a21969771f4",
@@ -771,7 +794,8 @@
   "answer": 0,
   "explain": "r·C(n,r) = r·n!/(r!(n-r)!) = n·(n-1)!/((r-1)!(n-r)!) = n·C(n-1,r-1).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "04d5251d-8a3d-401d-be58-7eb05794f77b",
@@ -789,7 +813,8 @@
   "answer": 2,
   "explain": "Captain is fixed; choose remaining 10 from the other 14 players: C(14,10).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "6c487052-bc9f-4efe-aabe-9700ee2e74bf",
@@ -807,7 +832,8 @@
   "answer": 0,
   "explain": "Each type has (type+1) choices (0 to max); subtract the all-zero (none selected) case.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "22953af2-3dba-4545-9fea-63e11498c6bf",
@@ -825,25 +851,8 @@
   "answer": 1,
   "explain": "MISSISSIPPI: 1M, 4I, 4S, 2P → 11!/(4!·4!·2!) arrangements.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "7e8eefab-7a41-4c53-84b5-05e004f7398a",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of ways to paint n objects with k colours if each colour used at least once?",
-  "formula": "Σ(-1)ʲ C(k,j)(k-j)ⁿ  (inclusion-exclusion)",
-  "options": [
-   "C(n,k)·k!",
-   "k!·S(n,k)",
-   "kⁿ - k",
-   "Inclusion-exclusion: Σ(-1)ʲC(k,j)(k-j)ⁿ"
-  ],
-  "answer": 3,
-  "explain": "By inclusion-exclusion, surjective functions from n objects to k colours formula applies.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "42205230-9793-469a-bde6-fd1928a691dd",
@@ -861,7 +870,8 @@
   "answer": 3,
   "explain": "ⁿPₙ = n!/(n-n)! = n!/0! = n! since 0! = 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "a4713977-ccb8-4d71-922e-edaced9472eb",
@@ -879,7 +889,8 @@
   "answer": 1,
   "explain": "Circular: (n-1)!; garland can be flipped (mirror = same), so divide by 2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "1f8156b9-7f39-4e18-a64f-4d5189259db3",
@@ -897,7 +908,8 @@
   "answer": 0,
   "explain": "Any 3 points on a circle form a unique triangle; total = C(n,3).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "1eb2a22f-d8dc-4d11-8beb-d2165a3227bd",
@@ -915,7 +927,8 @@
   "answer": 1,
   "explain": "Exclude that person; choose r from remaining n−1 persons.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "73f01986-57b5-40ed-91d6-29593a76b1e3",
@@ -928,12 +941,13 @@
    "(n−1)!·3!",
    "(n−3)!·3!",
    "(n−2)!·3!",
-   "(n−2)!·6"
+   "(n−2)!·(n−3)!"
   ],
   "answer": 2,
   "explain": "Treat 3 books as one block → (n−2)! arrangements × 3! internal arrangements.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d4843347-2255-489b-a148-1a53f52d59c5",
@@ -951,7 +965,8 @@
   "answer": 0,
   "explain": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₊₁ = ⁿ⁺¹Cᵣ₊₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "6eac3342-f7c4-4739-8b9b-a08b4e18ad0f",
@@ -969,7 +984,8 @@
   "answer": 2,
   "explain": "Order matters, no repetition: ⁹P₄ = 9×8×7×6 = 3024.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "b10e840a-c03e-43c0-8dab-784490c8802e",
@@ -987,7 +1003,8 @@
   "answer": 2,
   "explain": "Multinomial coefficient n!/(p!q!r!) counts divisions into labelled groups of sizes p,q,r.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "6ad1a6bb-856a-4fd5-b600-94bc55264278",
@@ -1005,7 +1022,8 @@
   "answer": 3,
   "explain": "Specific object can be at either end (2 ways); remaining n−1 arranged in (n−1)! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3d221d38-206f-4d31-9fc4-7ea90c68da90",
@@ -1023,7 +1041,8 @@
   "answer": 0,
   "explain": "Total subsets minus empty set = 2ⁿ − 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "6c80d9a2-f065-4927-abff-34ce8b60fc0e",
@@ -1041,7 +1060,8 @@
   "answer": 1,
   "explain": "r! = ⁿPᵣ/ⁿCᵣ = 720/120 = 6 = 3!, so r = 3.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "2355285b-e277-4779-a96d-73e89964c6e8",
@@ -1059,7 +1079,8 @@
   "answer": 1,
   "explain": "With unlimited repetition, each of r positions has n choices → nʳ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5b40a306-4d97-47cc-9626-ef7f618e2192",
@@ -1077,7 +1098,8 @@
   "answer": 2,
   "explain": "3 distinct roles, no repetition → ⁿP₃ = n(n−1)(n−2).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "deff686e-70ea-49f4-af6c-c52b42908bcf",
@@ -1095,7 +1117,8 @@
   "answer": 0,
   "explain": "Each prime contributes exponent choices 0 to its max; multiply counts.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "52123f6b-e437-4e87-83ae-587e374f1f24",
@@ -1113,7 +1136,8 @@
   "answer": 0,
   "explain": "Fixing one object removes rotational symmetry; remaining n−1 arranged in (n−1)! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c2b1ed24-41e2-42ad-9ed5-a1a355ca9c74",
@@ -1131,7 +1155,8 @@
   "answer": 2,
   "explain": "Using r·ⁿCᵣ = n·ⁿ⁻¹Cᵣ₋₁ and summing gives n·2ⁿ⁻¹.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "96b20f47-0049-411f-aa34-9c2e631dd137",
@@ -1149,7 +1174,8 @@
   "answer": 0,
   "explain": "Leading digit: 4 choices (not 0); remaining 4 positions: 4! = 24; total 4×24 = 96.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d3508ba0-2a31-49a9-a7a1-0b3a4b004f1b",
@@ -1167,7 +1193,8 @@
   "answer": 3,
   "explain": "Symmetry property: choosing r is same as leaving out n−r; ⁿCᵣ = ⁿCₙ₋ᵣ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d7dc20be-7ca5-416c-affa-503b995e8c50",
@@ -1185,7 +1212,8 @@
   "answer": 3,
   "explain": "Order doesn't matter in a handshake; answer is ⁿC₂ = n(n−1)/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8a0d6af5-1b86-420f-b104-4d131a7a4233",
@@ -1203,7 +1231,8 @@
   "answer": 0,
   "explain": "Either both included (ⁿ⁻²Cᵣ₋₂) or both excluded (ⁿ⁻²Cᵣ); sum gives the count.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "87b57830-d68a-48b6-948f-cef784fb1000",
@@ -1221,7 +1250,8 @@
   "answer": 0,
   "explain": "Odd divisors ignore factor 2; from 3²·5: (2+1)(1+1) = 6.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "75b54c40-654f-43dd-8cb2-799922a50862",
@@ -1239,7 +1269,8 @@
   "answer": 1,
   "explain": "7 letters with A repeated twice and R repeated twice: 7!/(2!·2!) = 1260.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "720f5615-6281-4ba8-84c6-7f10456d021c",
@@ -1257,25 +1288,8 @@
   "answer": 3,
   "explain": "Each question has 2 independent choices; total = 2ⁿ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "7c611c20-0743-4d24-92c4-e6726cde3ea7",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Rank of word 'RANK' if all arrangements are listed alphabetically?",
-  "formula": "Lexicographic ordering",
-  "options": [
-   "12",
-   "15",
-   "14",
-   "13"
-  ],
-  "answer": 2,
-  "explain": "Letters A,K,N,R in order. A__:6, K__:6, NA_:2=14th. Count systematically gives 14.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "1b2b7e5e-9d56-4028-b09c-9d0770544ca3",
@@ -1293,7 +1307,8 @@
   "answer": 3,
   "explain": "Total 3ⁿ minus cases where box 1 is empty (2ⁿ arrangements in other 2 boxes).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f36b0211-d253-4ee9-ba00-f23f99a36014",
@@ -1311,7 +1326,8 @@
   "answer": 1,
   "explain": "A block of r consecutive items can start at positions 1, 2, …, n−r+1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ef2e95ab-2f92-4f55-9ac6-fc98bb6e2bf5",
@@ -1329,7 +1345,8 @@
   "answer": 3,
   "explain": "12+8=20 → n=20; ²⁰C₁₇ = ²⁰C₃ = 1140.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "175b4414-5804-45b0-b527-bfed590cf583",
@@ -1347,7 +1364,8 @@
   "answer": 3,
   "explain": "Even numbers are {2,4,6,8,10}, 5 elements; non-empty subsets = 2⁵ − 1 = 31.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "05861407-3d6d-45d1-958b-9213907db7ef",
@@ -1365,7 +1383,8 @@
   "answer": 0,
   "explain": "Total 2ⁿ functions minus 2 constant (non-onto) functions gives 2ⁿ−2 surjections.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "a8941569-821b-44ea-90ba-eef0a7d83f79",
@@ -1383,7 +1402,8 @@
   "answer": 2,
   "explain": "Choose k identical (0≤k≤min(r,p)) and (r−k) distinct from q: sum ᑫC_{r−k}, k=0 to min(r,p).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f1184468-d55f-44ea-a52d-41d1287fc72e",
@@ -1401,7 +1421,8 @@
   "answer": 0,
   "explain": "ⁿPᵣ = n!/(n−r)! = ⁿCᵣ · r!, relating combinations and permutations.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "113e2ee9-f336-4053-99b2-e6cfb4408ecd",
@@ -1419,25 +1440,8 @@
   "answer": 3,
   "explain": "Partitioning n distinct objects into r non-empty identical groups = Stirling number S(n,r).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "7f3ac506-3f4b-49ff-931a-a49ea0870f08",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Value of ⁿC₀ + ⁿC₂ + ⁿC₄ + ... (sum of even-indexed binomial coefficients)?",
-  "formula": "2ⁿ⁻¹",
-  "options": [
-   "2ⁿ⁻¹",
-   "2ⁿ",
-   "2ⁿ⁻¹ − 1",
-   "2ⁿ / 2"
-  ],
-  "answer": 0,
-  "explain": "Sum of even-indexed terms = sum of odd-indexed terms = 2ⁿ⁻¹ (from (1+1)ⁿ+(1−1)ⁿ)/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "cc03aaf8-b97a-4d82-ab23-2b56c55eaea9",
@@ -1455,7 +1459,8 @@
   "answer": 2,
   "explain": "Selection (order irrelevant) of 3 from 52 = ⁵²C₃ = 52!/(3!·49!) = 22100.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ed1e3046-30f7-4c39-96ea-443085843afa",
@@ -1473,7 +1478,8 @@
   "answer": 3,
   "explain": "Arrangements where no element appears in its original position are counted by derangements Dₙ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "fec03e3a-5074-406d-a0e7-7891a77f6461",
@@ -1491,7 +1497,8 @@
   "answer": 0,
   "explain": "Proper subsets exclude empty set AND the full set: 2ⁿ − 2 (or 2ⁿ−1 if empty allowed by some defs).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8b5a3312-7bb1-4eec-afda-59024f535cab",
@@ -1509,7 +1516,8 @@
   "answer": 0,
   "explain": "One prize per student, all distinct: bijection count = n! permutations.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "69425c07-0bab-46c6-8a37-2ce2aaab3cbf",
@@ -1527,7 +1535,8 @@
   "answer": 2,
   "explain": "Pairs (a,b) with a<b, a+b=n: a ranges 1 to ⌊(n−1)/2⌋, giving ⌊(n−1)/2⌋ partitions.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "306cbf7b-402d-4178-aa7e-4e5d72365c0b",
@@ -1545,7 +1554,8 @@
   "answer": 3,
   "explain": "By Vandermonde: ²ⁿCₙ = Σₖ ⁿCₖ · ⁿCₙ₋ₖ = ΣₖL(ⁿCₖ)² since ⁿCₖ=ⁿCₙ₋ₖ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "006c7bb8-ea26-4840-8e99-6ffa88be5543",
@@ -1563,7 +1573,8 @@
   "answer": 1,
   "explain": "Fix the specific object, choose & arrange remaining r−1 from n−1, then place fixed in r positions.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "08823357-a3e1-4df5-a9e2-80a197ed9c3f",
@@ -1581,7 +1592,8 @@
   "answer": 1,
   "explain": "Stars & bars: choosing r from n types with repetition = ⁿ⁺ʳ⁻¹Cᵣ = ⁿ⁺ʳ⁻¹Cₙ₋₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "bf2197bc-bf05-4a4a-bbd5-e5778e6746f0",
@@ -1599,7 +1611,8 @@
   "answer": 1,
   "explain": "No restriction on adjacency: each of n beads independently takes any of k colours = kⁿ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "efa96ebf-a205-4357-b2cd-ef8dca903e25",
@@ -1617,7 +1630,8 @@
   "answer": 3,
   "explain": "For odd n, ⁿCᵣ is maximum at two middle values r=(n−1)/2 and r=(n+1)/2 (both equal).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f527591f-d885-4087-b0b2-60284a69266a",
@@ -1635,7 +1649,8 @@
   "answer": 0,
   "explain": "ⁿP₂ = n!/(n−2)! = n(n−1); ordered selection of 2 distinct items.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ed174321-02ae-48df-86d7-c5c3fa83918b",
@@ -1653,7 +1668,8 @@
   "answer": 3,
   "explain": "Arrange (n−m) others first: (n−m)! ways; place m objects in (n−m+1) gaps: ⁿ⁻ᵐ⁺¹Pₘ ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c8eec607-1d0a-4534-b952-4f439e5dba53",
@@ -1671,7 +1687,8 @@
   "answer": 2,
   "explain": "ⁿCᵣ/ⁿCᵣ₋₁ = [n!/(r!(n−r)!)] / [n!/((r−1)!(n−r+1)!)] = (n−r+1)/r.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7f60bdbd-4724-4a91-9eee-0a4b6a3ea16a",
@@ -1689,7 +1706,8 @@
   "answer": 2,
   "explain": "Units digit: 2 or 4 (2 choices); remaining 3 places from 4 digits: ⁴P₃=24; total=2×24=48.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7f63fea9-3b98-4b0d-b3d5-41df40bdcda6",
@@ -1704,10 +1722,11 @@
    "11",
    "10"
   ],
-  "answer": 3,
+  "answer": 1,
   "explain": "Letters in order: A,E,L,T. Words before LATE: starting A(6),E(6),LA(before T: LE..no)=9 words; rank=10.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "b32e2151-a63b-4bb4-a08a-cac415826aeb",
@@ -1725,7 +1744,8 @@
   "answer": 2,
   "explain": "Treat the pair as one unit: (n−1) units in circle = (n−2)! ways; pair arranges in 2! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "92b9c858-01dc-44f9-8a2e-c3fe1de57f8e",
@@ -1743,7 +1763,8 @@
   "answer": 3,
   "explain": "EQUATION has 8 distinct letters; arranging 5 from 8 = ⁸P₅ = 8×7×6×5×4 = 6720.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "2724aba0-983a-4e0d-9bb8-5c6b277fa74d",
@@ -1761,7 +1782,8 @@
   "answer": 3,
   "explain": "Subtract cases where both A and B are included (ⁿ⁻²Cᵣ₋₂) from total ⁿCᵣ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c249300a-8154-42de-a30f-2bb7b071b0ba",
@@ -1779,7 +1801,8 @@
   "answer": 3,
   "explain": "Each question has 4 independent choices; total = 4×4×...×4 (n times) = 4ⁿ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3a5281ef-38dd-4fd3-846d-98d14ccd7572",
@@ -1797,7 +1820,8 @@
   "answer": 3,
   "explain": "Total subsets = 2ⁿ; subtract empty set: 2ⁿ−1 non-empty subsets (selections of at least 1).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3d458133-e257-4845-a13b-ba18ee137172",
@@ -1815,7 +1839,8 @@
   "answer": 1,
   "explain": "Fix the specific person in; choose remaining r−1 from remaining n−1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7548c3d8-c1ef-4c20-b71f-3f339919edbc",
@@ -1833,7 +1858,8 @@
   "answer": 0,
   "explain": "Only 1 out of m! arrangements of those m objects is valid, so divide n! by m!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "416fa884-0f1f-44c4-814b-83efa6e42ffe",
@@ -1851,25 +1877,8 @@
   "answer": 1,
   "explain": "Total subsets 2ⁿ minus empty set (1) minus all singletons (n).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "3842861f-1a91-4ca3-8eb6-d27aea777064",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of 3-digit numbers using digits 1–9 with exactly one digit repeated?",
-  "formula": "",
-  "options": [
-   "9·8·3",
-   "9·8·C(3,2)",
-   "C(9,1)·C(8,1)·3",
-   "Both A and C"
-  ],
-  "answer": 3,
-  "explain": "Choose repeated digit (9), other digit (8), arrange 3 with one pair: ×3!/2! = ×3; total 216.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7d6e98cf-94a9-4ba9-8368-9495dd6fc580",
@@ -1887,25 +1896,8 @@
   "answer": 3,
   "explain": "Treat 3 as one block → (n−2) objects in circle: (n−3)!, arrange 3 within block: 3!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "de0fe0e9-29a3-4eb6-8700-d3c4a7a5425d",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Sum 1·¹C₁ + 2·²C₁ + 3·³C₁ + ... + n·ⁿC₁ equals?",
-  "formula": "n(n+1)/2",
-  "options": [
-   "n(n−1)/2",
-   "n(n+1)/2",
-   "2ⁿ − 1",
-   "n²"
-  ],
-  "answer": 1,
-  "explain": "r·ʳC₁ = r², and Σr from 1 to n = n(n+1)/2. Each term r·ʳC₁=r·r=r²? No: ʳC₁=r so sum=Σr².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "02afe215-f5da-41f3-b04d-dfa63c63af0f",
@@ -1923,7 +1915,8 @@
   "answer": 1,
   "explain": "Fix element 1; remaining n−1 elements each independently in or out: 2ⁿ⁻¹ subsets.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "748fad0f-713a-409b-96da-d59ee9cfc99f",
@@ -1941,7 +1934,8 @@
   "answer": 3,
   "explain": "Choose repeated digit (6), 2 other distinct digits (C(5,2)), arrange 4 letters with one pair: 4!/2!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c299108b-6fcb-4056-96e7-99077ad3053b",
@@ -1959,25 +1953,8 @@
   "answer": 0,
   "explain": "Vowels E,I as one block + 4 consonants = 5 units: 5! ways; vowels arrange in 2! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "c6dccb05-58fe-4580-9a30-cd0ef9257e95",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of ways to choose a CAPTAIN and VICE-CAPTAIN from n players?",
-  "formula": "n(n−1)",
-  "options": [
-   "2·ⁿC₂",
-   "ⁿC₂",
-   "n(n−1)",
-   "n!/(n−2)!"
-  ],
-  "answer": 2,
-  "explain": "ⁿP₂ = n(n−1); order matters since roles are distinct.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "490e94b9-4cce-4e21-821a-7ffc89ca2877",
@@ -1995,25 +1972,8 @@
   "answer": 0,
   "explain": "Cases: all distinct, one pair, two pairs; total = 18·4! + 3·4!/2! + 3·4!/2!·1 = 2454.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "074a6f12-a051-44ee-a02a-d635dbbcdb79",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of ways to arrange 5 books so a specific pair of books is NEVER adjacent?",
-  "formula": "",
-  "options": [
-   "5! − 2·4!",
-   "3·4!",
-   "5! − 4!·2",
-   "72"
-  ],
-  "answer": 0,
-  "explain": "Total arrangements minus those where the pair IS adjacent: 5! − 2!·4! = 120 − 48 = 72.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d573c3f2-c1fd-4051-ab9d-5b8fc301b926",
@@ -2031,7 +1991,8 @@
   "answer": 3,
   "explain": "Choose which r bins get the 1 object each from n identical objects: ⁿCᵣ ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3a14d340-9d8a-4697-8f9e-6b73bf63ca63",
@@ -2049,7 +2010,8 @@
   "answer": 0,
   "explain": "ⁿCᵣ·ʳCₖ = n!/[k!(r−k)!(n−r)!] = ⁿCₖ·⁽ⁿ⁻ᵏ⁾Cᵣ₋ₖ (committee selection identity).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "a914d3c0-dcdc-41bf-8ee6-28780a7ea02a",
@@ -2067,7 +2029,8 @@
   "answer": 1,
   "explain": "Remove the specific object; choose r from remaining n−1: ⁽ⁿ⁻¹⁾Cᵣ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "21bd4a64-2d31-43f3-bb47-694656d4e78f",
@@ -2085,7 +2048,8 @@
   "answer": 3,
   "explain": "Both specific items in group: choose 1 more from remaining n−2 → ⁽ⁿ⁻²⁾C₁ = n−2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d46ee5ba-36fc-4403-861e-c43df0f71953",
@@ -2103,7 +2067,8 @@
   "answer": 0,
   "explain": "BANANA has B×1, A×3, N×2; arrangements = 6!/(3!×2!) = 60.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f67e6ef3-4940-472e-ab4e-23903d4ea4f8",
@@ -2121,7 +2086,8 @@
   "answer": 0,
   "explain": "From one vertex: n−1 connections minus 2 adjacent sides = n−3 diagonals.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7c6bbd2c-852a-4a98-84ed-e0170e08a6d0",
@@ -2139,7 +2105,8 @@
   "answer": 2,
   "explain": "Count size-1 subsets (n) plus size-2 subsets (ⁿC₂) = n + n(n−1)/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "915e3062-9991-485b-9ab5-314b2e6702cf",
@@ -2157,25 +2124,8 @@
   "answer": 1,
   "explain": "Fix specific person at middle position; arrange remaining n−1 in (n−1)! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "e20cae09-f06e-40df-9f8e-8712bf158583",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of ways to choose 2 from n objects when ORDER DOES NOT matter and repetition IS allowed?",
-  "formula": "ⁿ⁺¹C₂",
-  "options": [
-   "ⁿ⁺¹C₂",
-   "n²",
-   "ⁿC₂",
-   "n(n+1)/2"
-  ],
-  "answer": 3,
-  "explain": "Multiset coefficient: C(n+2−1,2)=C(n+1,2)=n(n+1)/2; options A and D are same expression.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "a7aba6bf-a8db-47e3-b403-ce82c984ab7b",
@@ -2193,7 +2143,8 @@
   "answer": 1,
   "explain": "Divide 4n objects into 4 equal groups: (4n)!/[(n!)⁴] for labelled, divide by 4! for unlabelled.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "65b6ae70-09e2-4f26-bfc1-328da0c6c52d",
@@ -2211,7 +2162,8 @@
   "answer": 3,
   "explain": "Each pair of lines meets at exactly one point; ⁿC₂ pairs → ⁿC₂ intersections.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "c304949b-3754-4598-8780-7eea7eac568f",
@@ -2229,7 +2181,8 @@
   "answer": 0,
   "explain": "Exclude both A and B; choose r from remaining n−2 persons: ⁽ⁿ⁻²⁾Cᵣ.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "accaddb7-ab43-46a5-ae35-af1823b06210",
@@ -2247,7 +2200,8 @@
   "answer": 0,
   "explain": "LEVEL: L×2, E×2, V×1; arrangements = 5!/(2!·2!) = 30.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "a56e659f-27ff-401b-b53b-6c85776345c5",
@@ -2265,7 +2219,8 @@
   "answer": 1,
   "explain": "A k-element subset is an unordered selection: ⁿCₖ ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8c708261-b1a0-4448-b675-2151fd0e39f7",
@@ -2283,7 +2238,8 @@
   "answer": 0,
   "explain": "It is a bijection from n objects to n boxes: n! arrangements.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "4cbe465e-fac2-4a72-8a72-cd8193b70d0e",
@@ -2301,7 +2257,8 @@
   "answer": 1,
   "explain": "Sum of all binomial coefficients equals 2ⁿ (set x=1 in (1+x)ⁿ).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5d68578a-e41a-487b-95cd-df5383700fbd",
@@ -2319,7 +2276,8 @@
   "answer": 0,
   "explain": "All n! orderings of n distinct objects are valid linear permutations.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "e5c4903d-d124-4218-949a-ccf53e4ddf3e",
@@ -2337,7 +2295,8 @@
   "answer": 2,
   "explain": "(1+x)²ⁿ has 2n+1 terms; middle term is (n+1)th, so r = n.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "0f77e6c8-853e-421e-a39e-4bcee96cb3a8",
@@ -2355,7 +2314,8 @@
   "answer": 1,
   "explain": "Fix the specific object; choose remaining r−1 from n−1: ⁿ⁻¹Cᵣ₋₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "84786195-d870-445e-99f8-3586e88d9aca",
@@ -2373,7 +2333,8 @@
   "answer": 3,
   "explain": "Fix one object at centre; arrange remaining n−1 in (n−1)! ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "db716abc-534d-44de-83da-1cf952bf795e",
@@ -2391,7 +2352,8 @@
   "answer": 2,
   "explain": "First digit: 9 choices (1–9); remaining 3 positions: 9,8,7 choices → 4536.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "7723e8d4-2b21-4770-ac86-518ee997ff45",
@@ -2409,7 +2371,8 @@
   "answer": 3,
   "explain": "Each vowel is in or out: 2⁵ subsets minus empty set = 31.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f8897fd9-d9a6-439a-b1d8-31548a4a8431",
@@ -2427,7 +2390,8 @@
   "answer": 3,
   "explain": "ⁿCᵣ = n!/(r!(n−r)!) = ⁿCₙ₋ᵣ — symmetry property of binomial coefficients.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "262a5667-afc6-4161-9ea7-586e8690500b",
@@ -2445,25 +2409,8 @@
   "answer": 2,
   "explain": "Each of the r positions has n independent choices → nʳ ordered selections.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "d7fcf78d-e6dc-413f-8a77-b35695337664",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of ways to split n distinct objects into 2 unlabelled equal groups of n/2 each (n even)?",
-  "formula": "ⁿCₙ/₂ / 2",
-  "options": [
-   "n! / (2·((n/2)!)²)",
-   "ⁿCₙ/₂ / 2",
-   "ⁿCₙ/₂",
-   "(n/2)!·2"
-  ],
-  "answer": 0,
-  "explain": "n!/((n/2)!·(n/2)!·2) = ⁿCₙ/₂/2; divide by 2 as groups are unlabelled.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f965e11d-775a-4c66-ad10-9505a8729e37",
@@ -2481,7 +2428,8 @@
   "answer": 1,
   "explain": "COMMITTEE has M,T,E each repeated twice; arrangements = 9!/(2!·2!·2!) = 45360.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "63593ef9-38b1-48a3-81d7-397748fdcfc8",
@@ -2499,7 +2447,8 @@
   "answer": 0,
   "explain": "Rook placement = permutation of columns across rows = n!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5882fd76-2ec4-42a2-bb44-2f8e3c8166a5",
@@ -2517,7 +2466,8 @@
   "answer": 2,
   "explain": "Include A (fix), exclude B (remove), choose r−1 from remaining n−2: ⁿ⁻²Cᵣ₋₁.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8ec8c842-b019-474b-ad39-88de5f07f8be",
@@ -2535,7 +2485,8 @@
   "answer": 3,
   "explain": "Cases: 2W+3M=6C2·6C3+3W+2M=4C3·6C2+4W+1M=4C4·6C1 = 60+60+6+... =186? Sum=6·20+4·15+1·6=120+60+6=186.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "db6fcce0-d382-4313-ab19-3fd7275fb7da",
@@ -2553,7 +2504,8 @@
   "answer": 1,
   "explain": "ⁿPₙ₋₁ = n!/(n−(n−1))! = n!/1! = n!.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8aa76386-d46d-4a78-b354-e0464f39095c",
@@ -2571,7 +2523,8 @@
   "answer": 0,
   "explain": "Strictly increasing digits: choose 3 from 1–9 (only one arrangement possible) = ⁹C₃ = 84.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "b744959d-22b6-4ac9-b8f7-c71d2d221624",
@@ -2589,25 +2542,8 @@
   "answer": 0,
   "explain": "Each handshake is an unordered pair of persons: ⁿC₂ = n(n−1)/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "22a07a9d-afae-4aa4-8a37-c1fd8a7c6244",
-  "subject": "Mathematics",
-  "chapter": "Permutations and Combinations",
-  "topic": "Permutations and Combinations",
-  "prompt": "Number of ways to choose r items from n (r ≤ n), then arrange those r items?",
-  "formula": "ⁿPᵣ",
-  "options": [
-   "ⁿPᵣ",
-   "ⁿCᵣ",
-   "r!·ⁿCᵣ = ⁿPᵣ",
-   "Both A and C"
-  ],
-  "answer": 3,
-  "explain": "ⁿCᵣ·r! = ⁿPᵣ; choosing then arranging equals permutation — A and C express the same value.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ca4cbea3-a222-481a-a774-cadadfc99874",
@@ -2625,7 +2561,8 @@
   "answer": 2,
   "explain": "Can select 0,1,2,...,n items from n identical; total = n+1 ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "cdb0f613-d971-45ec-bb56-f928d0b3bf7a",
@@ -2643,7 +2580,8 @@
   "answer": 1,
   "explain": "By symmetry, exactly half of n! arrangements have the 2 objects in the required fixed order.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "1b2cf120-f006-4cf6-bd76-5521a505578c",
@@ -2661,7 +2599,8 @@
   "answer": 1,
   "explain": "Surjective functions from n objects to r groups = r!·S(n,r) where S(n,r) is Stirling number.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "610cd7df-1f2b-4e24-aeb6-cb0491d213d9",
@@ -2679,7 +2618,8 @@
   "answer": 3,
   "explain": "Ordered selection of 3 from 5 distinct people: ⁵P₃ = 5·4·3 = 60.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5c21ae1f-67b8-4b09-95ae-6ea75d31dcf3",
@@ -2697,6 +2637,7 @@
   "answer": 1,
   "explain": "Each of n objects independently gets one of 2 colours: 2×2×...×2 = 2ⁿ ways.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  }
 ]

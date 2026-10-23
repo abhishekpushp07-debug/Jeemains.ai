@@ -15,7 +15,8 @@
   "answer": 3,
   "explain": "[-cos x]₀^π = -cos π + cos 0 = 1 + 1 = 2",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "bb137735-3229-4b0d-88e0-9ebd69649c21",
@@ -33,7 +34,8 @@
   "answer": 1,
   "explain": "For even functions, integral over symmetric interval equals twice integral from 0 to a.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "9dc6cf16-bf1d-409b-9541-00f6c98cbf68",
@@ -51,7 +53,8 @@
   "answer": 0,
   "explain": "For odd functions, contributions from -a to 0 and 0 to a cancel, giving 0.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "4235fb49-57af-43a3-89dd-265b5516cc4f",
@@ -69,7 +72,8 @@
   "answer": 1,
   "explain": "Reversing limits changes the sign: ∫ₐ^b f(x)dx = -∫ᵦ^a f(x)dx.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "d880c198-c154-4df2-8e84-5abc97060dcf",
@@ -87,7 +91,8 @@
   "answer": 1,
   "explain": "Substitution x → a-x leaves the integral unchanged; very frequently used property.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "06ad6834-374f-42a1-9a53-78e3aa71643d",
@@ -105,7 +110,8 @@
   "answer": 1,
   "explain": "Using King's property with a=π: ∫₀^π x f(sin x)dx = (π/2)∫₀^π f(sin x)dx.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "f53fae63-4fdd-4fcc-9817-c0f34bb6c99e",
@@ -123,7 +129,8 @@
   "answer": 3,
   "explain": "Standard result: ∫₀^(π/2) log(sin x)dx = -(π/2)log 2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "4600d402-58d5-4e57-ae7b-1bdce9d49b48",
@@ -141,7 +148,8 @@
   "answer": 3,
   "explain": "log(tan x) is odd about π/4 on [0,π/2]; by King's property the integral = 0.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "2bf9b5d7-deca-47f9-a137-4ac5d2d45c1b",
@@ -159,7 +167,8 @@
   "answer": 2,
   "explain": "Differentiate integral with variable upper limit using chain rule: f(g(x))·g'(x).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "adee8d2a-4a63-4c6c-ae6c-40062a28875d",
@@ -177,25 +186,8 @@
   "answer": 3,
   "explain": "If f(2a-x)=f(x), then ∫₀^(2a)f(x)dx = 2∫₀^a f(x)dx by splitting and substitution.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "9e5a22fe-a94e-45bf-92f4-186c6744a318",
-  "subject": "Mathematics",
-  "chapter": "Definite Integration",
-  "topic": "Properties of Definite Integrals",
-  "prompt": "∫₀^(2a) f(x)dx when f(2a-x)= -f(x)",
-  "formula": "",
-  "options": [
-   "-∫₀^a f(x)dx",
-   "2∫₀^a f(x)dx",
-   "∫₀^a f(x)dx",
-   "0"
-  ],
-  "answer": 3,
-  "explain": "If f(2a-x)=-f(x), the two halves cancel: ∫₀^(2a)f(x)dx = 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "63616fcc-9328-4350-9f88-a612f0cb3ee5",
@@ -213,7 +205,8 @@
   "answer": 3,
   "explain": "Integral over n complete periods = n times integral over one period.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "fa412897-9d5c-4d87-a1b1-a043b4d66e2c",
@@ -226,12 +219,13 @@
    "Integration by parts",
    "sin and cos are equal",
    "King's property with a=π/2",
-   "Both are 0"
+   "Walli's formula symmetry"
   ],
   "answer": 2,
   "explain": "Substituting x→π/2-x converts sinⁿx to cosⁿx, proving equality by King's property.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8ad1a831-79cc-4c34-b638-133905b87c30",
@@ -249,7 +243,8 @@
   "answer": 1,
   "explain": "Using reduction: ∫₀^(π/2) sin²x dx = (1/2)(π/2) = π/4.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "77ce8822-a3f1-444b-af0f-df7f1a276b14",
@@ -267,7 +262,8 @@
   "answer": 3,
   "explain": "Walli's reduction for odd n=3: (2/3)·1 = 2/3.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "538529fb-38ca-42b1-b43f-dd04250e5187",
@@ -285,7 +281,8 @@
   "answer": 3,
   "explain": "|x| is even, so 2∫₀^1 x dx = 2·[x²/2]₀^1 = 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "75798355-5021-43f9-94fe-2b6a14aecfb3",
@@ -303,7 +300,8 @@
   "answer": 0,
   "explain": "Split at x=1: ∫₀^1(1-x)dx + ∫₁^2(x-1)dx = 1/2 + 1/2 = 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "fc696f64-52cd-4f29-bf81-29653c94f347",
@@ -321,7 +319,8 @@
   "answer": 1,
   "explain": "The derivative of the integral with upper limit x equals the integrand at x.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "8b2b9caa-8a17-40cf-832a-59d4e56a36ff",
@@ -339,7 +338,8 @@
   "answer": 1,
   "explain": "Using Beta function or repeated integration by parts: B(2,n+1)=1/[(n+1)(n+2)].",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "fa63f36d-f8cb-4021-9110-00b01a8864a2",
@@ -357,7 +357,8 @@
   "answer": 1,
   "explain": "Beta function B(m+1,n+1)=m!n!/(m+n+1)! for non-negative integers m,n.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5a28fecc-f7da-4b91-a66c-5b2af3ace9cb",
@@ -375,7 +376,8 @@
   "answer": 2,
   "explain": "Substitution x→a+b-x leaves limits unchanged; known as King's property.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "16ea1d61-ff8d-49fb-8b32-bc5b1ecf56c5",
@@ -393,7 +395,8 @@
   "answer": 1,
   "explain": "Since sin(π-x)=sin x, splitting and using substitution gives 2∫₀^(π/2)f(sin x)dx.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "fc3fd3e9-017b-4ed8-8ea0-6de2a91331a0",
@@ -411,7 +414,8 @@
   "answer": 0,
   "explain": "By King's property, I = ∫₀^(π/2) dx/(1+cot x); adding 2I = π/2, so I = π/4.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ad902934-cae5-49cd-8446-fc0bb24b17b0",
@@ -429,7 +433,8 @@
   "answer": 0,
   "explain": "-∫₀^1 log x dx; by parts: -[x log x - x]₀^1 = -(0-1-0) = 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "08daad67-bc00-4d58-bba1-a85e6cc500ad",
@@ -447,7 +452,8 @@
   "answer": 3,
   "explain": "Definite integral can be split at any interior (or exterior) point c; called additivity property.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "cafa8780-4319-4880-9c00-dab2b105112b",
@@ -465,7 +471,8 @@
   "answer": 1,
   "explain": "Walli's: (n-1)(n-3)…/n(n-2)… × π/2 for even n. = (3·1)/(4·2)·(π/2) = 3π/16.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "964f2d05-1b47-4820-8ae3-0c53884c7dbd",
@@ -483,7 +490,8 @@
   "answer": 1,
   "explain": "Walli's for odd n=5: (4·2)/(5·3·1) = 8/15 (no π/2 factor for odd n).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "bd7a5044-f11f-4804-83bc-630681b2fea3",
@@ -501,7 +509,8 @@
   "answer": 3,
   "explain": "[−e^(−x)]₀^∞ = 0 − (−1) = 1; fundamental improper integral result.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "5b328c7d-51bc-4bf8-858c-1ba0bc11b3e3",
@@ -519,7 +528,8 @@
   "answer": 3,
   "explain": "[arctan x]₀^1 = π/4 − 0 = π/4.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "0e93f536-c960-47bb-a38c-9b5d6fadce4a",
@@ -537,7 +547,8 @@
   "answer": 2,
   "explain": "Let u=ln x; ∫₀^1 u du = 1/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "65511a09-07bf-4a99-9078-aee8135fe5a9",
@@ -555,7 +566,8 @@
   "answer": 3,
   "explain": "= (1/2)∫₀^(π/2) sin 2x dx = (1/2)[−cos2x/2]₀^(π/2) = 1/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "346a27af-9ef1-4a68-9e05-179f38e01477",
@@ -573,7 +585,8 @@
   "answer": 3,
   "explain": "∫₀^π (1−cos2x)/2 dx = π/2 − 0 = π/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "552ecaea-a5a3-4728-b545-fa0ce9640917",
@@ -591,7 +604,8 @@
   "answer": 1,
   "explain": "Integral over any full period equals integral over [0,T]; translation invariance.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "9d2d3d6f-8fd3-4841-9aeb-624f197bde26",
@@ -609,7 +623,8 @@
   "answer": 2,
   "explain": "[x³/3]₀^1 = 1/3; basic power rule for definite integral.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ba8f7d70-1cf9-4337-9074-243391301910",
@@ -627,7 +642,8 @@
   "answer": 1,
   "explain": "Riemann sum definition: (1/n)Σf(k/n) → ∫₀^1 f(x)dx as n→∞.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "a7100e11-8347-4912-8fba-ee7673477610",
@@ -645,7 +661,8 @@
   "answer": 2,
   "explain": "[−ln|cos x|]₀^(π/4) = −ln(1/√2) = (1/2)ln 2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3a1784f6-dfba-4cdd-8cf3-8e0f7a43998d",
@@ -663,7 +680,8 @@
   "answer": 3,
   "explain": "sin x is odd; integral of odd function over symmetric interval [−a,a] is 0.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "cf5cb49a-fe8d-4392-b13d-abb4df5f30b7",
@@ -681,7 +699,8 @@
   "answer": 1,
   "explain": "[sin x]₋π^π = sin π − sin(−π) = 0; cos x integrates to sin x.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "0550fad9-e7fc-45ff-8f79-5fcd5f3e1def",
@@ -699,7 +718,8 @@
   "answer": 0,
   "explain": "Γ(2) = 1! = 1; or integrate by parts: [−xe^(−x)]₀^∞ + ∫₀^∞ e^(−x)dx = 1.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "e873f627-6fa7-47b9-8309-bdb3b3370d03",
@@ -717,25 +737,8 @@
   "answer": 1,
   "explain": "By King's rule I = ∫₀^(π/2) cosx/(sinx+cosx)dx; adding gives 2I=π/2, so I=π/4.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "cee449d7-6760-4432-b330-0986a2799e07",
-  "subject": "Mathematics",
-  "chapter": "Definite Integration",
-  "topic": "Definite Integration",
-  "prompt": "∫₀^1 (1/√(1−x²)) dx = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "π/4",
-   "π/2",
-   "π"
-  ],
-  "answer": 2,
-  "explain": "[arcsin x]₀^1 = π/2 − 0 = π/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "129d1bbe-8d53-4b38-989e-207d27e7d2a6",
@@ -753,7 +756,8 @@
   "answer": 3,
   "explain": "Monotonicity of integration: non-negative integrand gives non-negative integral.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3b9984a9-4a10-4252-bcd1-132e1408ac2e",
@@ -1818,24 +1822,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "7d560d59-7f3a-4b84-9c2a-9436ca9009ef",
-  "subject": "Mathematics",
-  "chapter": "Definite Integration",
-  "topic": "Definite Integration",
-  "prompt": "∫₀^(π/2) sin x/(sin x + cos x) dx = ?",
-  "formula": "King's property",
-  "options": [
-   "π/8",
-   "π/4",
-   "π/2",
-   "1/2"
-  ],
-  "answer": 1,
-  "explain": "By King's property, I = π/4 - I, so 2I = π/2, giving I = π/4.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "406dd7c7-99d4-457a-9f7f-b623f123d9d1",
   "subject": "Mathematics",
   "chapter": "Definite Integration",
@@ -2589,7 +2575,8 @@
   "answer": 1,
   "explain": "Walli's n=6 (even): (5·3·1)/(6·4·2) · π/2 = 15π/96 = 5π/32.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ab9f385b-2527-45c3-b031-69a7e3a1e134",
@@ -2607,7 +2594,8 @@
   "answer": 2,
   "explain": "Monotonicity property of definite integrals: f≤g ⟹ ∫f ≤ ∫g on [a,b].",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3ba8e79b-a726-4e5c-beaa-9edaf1e227b8",
@@ -2625,7 +2613,8 @@
   "answer": 0,
   "explain": "Modulus inequality: |∫ₐ^b f dx| ≤ ∫ₐ^b |f| dx (triangle inequality for integrals).",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "bec5e4fc-35aa-401f-9e86-61ce3bc6949a",
@@ -2643,7 +2632,8 @@
   "answer": 1,
   "explain": "Equals (1/n)Σ(k/n)→∫₀^1 x dx = 1/2.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "10d3f5a4-3fb2-4c81-bd73-e37f37d625ed",
@@ -2661,7 +2651,8 @@
   "answer": 2,
   "explain": "By King's property x→π−x: ∫₀^π x f(cosx)dx = (π/2)∫₀^π f(cosx)dx.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "3990c19e-ada6-4d31-9767-5f21bbf5901a",
@@ -2679,7 +2670,8 @@
   "answer": 3,
   "explain": "This is a standard result: ∫₀^1 (ln x)/(1+x²)dx = −π²/16.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  },
  {
   "id": "ee7449aa-14da-4f83-b26f-08f1d46da1a6",
@@ -2697,6 +2689,7 @@
   "answer": 3,
   "explain": "King's extension: ∫₀^{2a}f dx splits into two; halves add iff f(2a−x)=f(x), else cancel to 0.",
   "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
+  "syllabus": "JEE Main",
+  "verified": 1
  }
 ]

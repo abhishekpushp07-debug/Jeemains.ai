@@ -201,6 +201,8 @@ async def sync_cards():
         ops = [UpdateOne({"id": c.id}, {"$set": c.to_mongo()}, upsert=True) for c in cards]
         if ops:
             await db.rf_cards.bulk_write(ops, ordered=False)
+            # cards removed by the verifier must disappear from the live bank too
+            await db.rf_cards.delete_many({"subject": cards[0].subject, "chapter": cards[0].chapter, "id": {"$nin": [c.id for c in cards]}})
         CARD_MTIMES[f.name] = m
     CATALOG_CACHE.clear()
 
@@ -211,7 +213,7 @@ async def card_sync_loop():
             await sync_cards()
         except Exception as e:  # noqa: BLE001
             logger.warning("card sync failed: %s", e)
-        await asyncio.sleep(90)
+        await asyncio.sleep(60)
 
 
 CATALOG_CACHE: dict = {}
@@ -287,7 +289,7 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
     answered = correct + incorrect
     weak = {}
     for r in rows:
-        if r["outcome"] != "correct":
+        if r["outcome"] in ("incorrect", "timed_out"):  # only cards actually attempted
             weak[r["topic"] or r["chapter"]] = weak.get(r["topic"] or r["chapter"], 0) + 1
     summary = {"total": len(rows), "correct": correct, "incorrect": incorrect, "skipped": count("skipped"),
                "timed_out": count("timed_out"), "answered": answered, "score": correct,
@@ -346,6 +348,7 @@ async def startup():
     await db.rf_cards.create_index([("subject", 1), ("chapter", 1)])
     await db.rf_sessions.create_index([("user_id", 1), ("request_id", 1)], unique=True)
     await db.rf_sessions.create_index("id", unique=True)
+    await db.rf_sessions.create_index([("user_id", 1), ("status", 1), ("completed_at", -1)])
     await db.jl_jars.create_index("sid", unique=True)
     await db.rf_duels.create_index("id", unique=True)
     await db.rf_duels.create_index("code")

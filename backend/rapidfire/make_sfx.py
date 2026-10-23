@@ -101,6 +101,14 @@ SFX = {
     "entry_tornado": lambda: whoosh(1.5, 30, 3) * (0.6 + 0.4 * np.sin(2 * np.pi * 6 * t(1.5))),
     "vs": lambda: boom(0.9, 160, 40) + 0.5 * noise(0.9) * np.exp(-t(0.9) * 25),
     "go": lambda: chime(0.6, (988, 1319)),
+    "correct": lambda: chime(0.45, (1047, 1568)),
+    "wrong": lambda: (np.sign(np.sin(2 * np.pi * 150 * t(0.35))) * 0.4 + np.sin(2 * np.pi * 110 * t(0.35))) * np.exp(-t(0.35) * 7),
+    "combo": lambda: chime(0.7, (1047, 1319, 1568, 2093, 2637)),
+    "tick": lambda: np.sin(2 * np.pi * 1800 * t(0.05)) * np.exp(-t(0.05) * 90),
+    "win": lambda: chime(1.6, (523, 659, 784, 1047, 1319, 1568)) + 0.4 * boom(1.6, 200, 90),
+    "lose": lambda: sum(np.sin(2 * np.pi * f * t(1.0)) for f in (392, 370, 349)) * np.exp(-t(1.0) * 2.2),
+    "levelup": lambda: np.concatenate([rise(0.6) * 0.5, chime(1.0, (1047, 1319, 1568, 2093))]),
+    "coin": lambda: chime(0.5, (1976, 2637)),
 }
 
 for name, fn in SFX.items():

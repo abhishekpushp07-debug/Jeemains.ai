@@ -1,0 +1,49 @@
+{
+  "summary": "Iteration 9 verified the fixes from the iteration 8 audit. Backend: 57 of 58 pytest tests pass. That is the existing 52 plus a new file, test_rf_iter9.py, and the TestDuelStart test, which no longer depends on test order. The one failure is a small bug: a session where every card is skipped still awards the 'First Sprint' badge. The UI was tested on a 375x667 viewport against the public URL. These all work: correct answer advances after about 1.2 s; wrong answer stays about 2.6 s with the full explanation shown (no line clamp); the ghost card is tinted by subject (green for Chemistry); RewardPanel shows the XP bar ('N XP to Level X'), the coin balance and the quest-ready button; an all-skip session shows the 'No cards answered' card with no XP bar; the level-up overlay appears and closes by itself after about 2.8 s; Rapid hub score badges are green or red with dark text and quest Claim buttons are 44 px tall; 'Victory vs AI Rival!' appears after beating the rival, with live score and lead banner; the entry show and the shop load; the test player no longer jumps to the next question when an option is tapped; confidence chips are 44 px and can be tapped; the set-start-hint text changes correctly at each step; /catalogue makes no 'undefined' request. I fixed one bug myself: opening /rapid/session or /rapid/duel directly by link sent a request without the user id and got a 401. Remaining small issues: hub chapter chips are 36 px tall; confidence chips disappear as soon as an answer is picked; the set page says 'Start attempt' for an attempt already in progress.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/sessions/{sid}/complete (gamify.award)", "issue": "All-skip sessions still add 1 to profile.sessions, so 'first_sprint' (First Sprint) is in new_badges for a skip-only session. XP, coins, streak, last_day and the sprints count are all correctly left alone. Cause: gamify.py:97-98 sets inc['sessions']=1 whether or not played. Fix: only add to sessions when played (or require played for the first_sprint rule)."},
+      {"endpoint": "POST /api/rf/sessions (anti-cheat)", "issue": "/rf/cards now hides answers and duel cards hide the bank id. But anyone can call POST /rf/sessions many times (30 random cards each, with answer and explain) to collect the whole bank and look up a duel prompt by its text. Known limitation; consider rate-limiting session creation or hiding answers until the client reports each card."},
+      {"endpoint": "card sync (server.py:189-207)", "issue": "Deletion works: a stray card in a chapter was removed within about 60 s once the file changed. Gaps: (1) if a cards/*.json file is deleted entirely, or (2) emptied to [], its cards stay in Mongo, because ops is empty so delete_many is skipped and deleted files are never seen. Also a duplicated http.cookies.jar.set_policy line and a duplicated DefaultCookiePolicy import in startup."},
+      {"endpoint": "POST /api/rf/sessions/{sid}/complete (summary)", "issue": "For an all-skip session, revise_topics lists every skipped topic, so the summary shows 'Worth revising' with topics the learner never tried. Consider leaving skipped cards out of revise_topics when answered == 0."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Set detail start button", "issue": "Re-opening /set/{id} while that attempt is in progress (timer still counting down, same attempt opens) still shows 'Start attempt' and asks for the device check and checkbox again. s.attempt?.status is never 'active', most likely because the upstream set payload uses a different key for the attempt.", "testID": "set-start-button", "priority": "low"},
+      {"component": "Test player confidence", "issue": "player-confidence only shows while the question has no answer (attempt/[id].tsx:190). Once an option is picked the chips vanish, so a learner who answers first can never rate confidence. You must choose confidence before answering.", "testID": "player-confidence", "priority": "medium"}
+    ],
+    "integration_issues": [
+      {"flow": "Opening a solo or duel screen directly by link (e.g. a WhatsApp invite)", "issue": "FIXED by testing agent: session.tsx and duel.tsx sent POST /rf/sessions or /rf/duels before the user loaded (no X-RF-User header), which got a 401, then retried. Added an `if (!uid) return;` guard; after the fix both screens load with no 4xx responses.", "affected_testIDs": ["rf-session-screen", "duel-screen"]},
+      {"flow": "Quest claim", "issue": "The rf-quest-claim onPress uses `catch {}`, so a 409 or network failure is silently ignored and the learner gets no feedback.", "affected_testIDs": ["rf-quest-claim-*"]}
+    ],
+    "design_issues": [
+      {"screen": "Rapid hub", "issues": ["The hub's own chapter chip (GameChip, (tabs)/rapid.tsx:23) is 36 px tall, below the 44 px touch target. The shared ui Chip is 44 px, but this chip is separate. Measured rf-chapter-* = 36 px."]},
+      {"screen": "Solo summary", "issues": ["After 1 of 30 answered (1 correct), the title reads 'Blazing run! Loot unlocked', which oversells a mostly skipped run. Base the title on answered/total, not just accuracy."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter9.py", "/app/backend/tests/test_rf_avatars_entries.py", "/app/test_reports/pytest/pytest_iter9_full.xml"],
+  "action_items": [
+    "gamify.award: do not add to sessions or award first_sprint when played is False (all-skip).",
+    "attempt/[id].tsx:190: keep the confidence chips visible after an option is selected (or show them after answering) so confidence can be recorded either way.",
+    "set/[id].tsx:127: work out where the in-progress attempt comes from in the set payload so 'Resume attempt' shows; consider skipping the device check when resuming.",
+    "(tabs)/rapid.tsx:23 GameChip: change height 36 to 44 (or use minHeight 44).",
+    "sync_cards: remove cards whose source file was deleted or emptied (e.g. delete_many by chapter when the list is empty; reconcile all ids against every file).",
+    "Quest claim: show an error or toast instead of `catch {}`.",
+    "Optional: leave skipped cards out of revise_topics when answered == 0; base the summary title on answered/total."
+  ],
+  "critical_code_review_comments": [
+    "server.py startup sets the cookie policy twice and imports DefaultCookiePolicy twice (lines 11 and 343) — needless duplication.",
+    "Answers are still exposed through solo sessions, so the hidden-answer change on /rf/cards does not stop someone who harvests the bank with many sessions.",
+    "Deprecated packages: none found (no expo-av, expo-barcode-scanner or expo-background-fetch)."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_avatars_entries.py (TestDuelStart now seeds its own profile)", "/app/backend/tests/test_rf_iter9.py (new)", "/app/frontend/app/rapid/session.tsx (uid guard before creating the session)", "/app/frontend/app/rapid/duel.tsx (uid guard before creating or joining the duel)"],
+  "success_rate": {"backend": "98% (57/58)", "frontend": "95% (all requested fixes verified; 3 minor UX issues)"},
+  "seed_data_creation": "Test profiles and sessions use TEST- uids and are cleaned up. Real test user db0c62b8 (9000000001): xp was set to 8095 to trigger level-up, then 225 was taken back off (now 8385, which includes XP earned from test sprints and duels). Two duels vs AI Rival and about 5 sprints were created for this user, and one chapter-practice attempt was left active (Laws of Motion, set 47d77206-c5db-52d8-8d80-6b4cd1d3e54b).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use the public URL as the page origin. localhost:3000 fails on CORS for /api/jl/auth (credentials include + wildcard origin). Run pytest with -n0 -p no:randomly (pytest.ini adds xdist). Answer keys for UI tests: capture the POST /api/rf/sessions response, which has cards[].answer. Duel option testIDs are duel-option-{0..3}; player option testIDs use letters (player-option-A..D). Duel vs AI Rival: answer every card quickly with a polling loop (duel-option-0 whenever enabled and no duel-verdict); about 43 s total. Confidence chips only show before answering.",
+  "rca_of_issue": "Cold link 401: the screen's create effect ran with uid='' before auth loaded; uid is in the effect deps, so it retried once the user arrived. The first request was a wasted 401 and, in the duel, could briefly show duel-error. Fixed with an early return when uid is empty; _layout already sends signed-out users to /entry, so no endless spinner."
+}

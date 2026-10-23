@@ -79,8 +79,9 @@ export default function Catalogue() {
   const path = kind === "history"
     ? `/exam-navigation/${slug}/history?page=${page}`
     : `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind: kind!, subject: kind === "chapters" ? subject : "", q: query, page: String(page) })}`;
-  const res = useCached<any>(user ? `u.${user.id}.${path}` : null, (signal) => api(path, { signal }));
-  const fullKey = user ? `u.${user.id}.${path}` : null;
+  const valid = !!slug && (kind === "history" || kind === "mocks" || kind === "chapters");
+  const res = useCached<any>(user && valid ? `u.${user.id}.${path}` : null, (signal) => api(path, { signal }));
+  const fullKey = user && valid ? `u.${user.id}.${path}` : null;
   const items: any[] = res.data && res.dataKey === fullKey ? res.data.items : [];
   const subjects = Object.keys(res.data?.subject_counts || {}).sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
   const subjectList = subjects.length ? subjects : ORDER;

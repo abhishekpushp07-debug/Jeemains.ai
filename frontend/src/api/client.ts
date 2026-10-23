@@ -130,15 +130,20 @@ export async function assetDataUri(path: string, retry = true): Promise<string> 
 // Rapid Fire (JEELIVE companion service)
 export async function rf<T = any>(path: string, userId: string, opts: { method?: string; body?: unknown } = {}): Promise<T> {
   let res: Response;
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 15000);
   try {
     res = await fetch(RF_BASE + path, {
+      signal: ctl.signal,
       method: opts.method || "GET",
       headers: { "Content-Type": "application/json", "X-RF-User": userId },
       body: opts.body === undefined ? undefined : JSON.stringify(opts.body),
     });
   } catch {
-    throw new ApiError("You're offline. Rapid Fire needs a connection to load cards.", 0);
+    clearTimeout(timer);
+    throw new ApiError(ctl.signal.aborted ? "Rapid Fire is taking too long. Check your connection and retry." : "You're offline. Rapid Fire needs a connection to load cards.", 0);
   }
+  clearTimeout(timer);
   const data = await res.json().catch(() => null);
   if (!res.ok) throw new ApiError(typeof data?.detail === "string" ? data.detail : "Rapid Fire is unavailable right now. Retry.", res.status);
   return data as T;

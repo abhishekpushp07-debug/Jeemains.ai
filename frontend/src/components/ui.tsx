@@ -17,6 +17,10 @@ export function T({ w = "regular", size = 14, color, style, ...p }: TextProps & 
 export const tap = (style: "light" | "medium" = "light") => {
   Haptics.impactAsync(style === "light" ? Haptics.ImpactFeedbackStyle.Light : Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
 };
+// Distinct buzz for right / wrong / big moments.
+export const buzz = (kind: "success" | "error" | "warning") => {
+  Haptics.notificationAsync(kind === "success" ? Haptics.NotificationFeedbackType.Success : kind === "error" ? Haptics.NotificationFeedbackType.Error : Haptics.NotificationFeedbackType.Warning).catch(() => {});
+};
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -63,7 +67,7 @@ export function Button({ label, onPress, kind = "primary", icon, busy, disabled,
 const useBoxStyles = makeStyles((c) => ({
   card: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: c.border, shadowColor: c.surfaceInverse, shadowOpacity: 0.06, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
   notice: { flexDirection: "row", gap: space.sm, padding: space.md, borderRadius: radius.md, alignItems: "flex-start" },
-  chip: { height: 36, paddingHorizontal: space.md, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, borderWidth: 1, flexShrink: 0 },
+  chip: { height: 44, paddingHorizontal: space.md, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, borderWidth: 1, flexShrink: 0 },
   empty: { alignItems: "center", padding: space.xl, gap: space.sm },
 }));
 

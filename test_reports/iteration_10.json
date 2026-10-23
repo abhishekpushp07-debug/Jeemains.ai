@@ -1,0 +1,39 @@
+{
+  "summary": "Iteration 10 checked the remaining fixes from iteration 9. Backend: 63 of 64 pytest tests pass. That is the full suite plus a new file, test_rf_iter10.py, with 6 tests. An all-skip solo run no longer awards first_sprint and no longer adds to 'sessions'. revise_topics only lists incorrect or timed-out cards; an all-skip run gives []. NEW REGRESSION: in gamify.award, an all-skip solo run now falls into the else-branch and adds 1 to 'duels'. UI was tested on a 375x667 viewport against the public URL. Hub chapter chips are now 44 px tall. A successful quest claim works: the button disappears and coins go from 1652 to 1682. A failed claim (mocked 409) shows nothing on web, because react-native-web's Alert.alert does nothing; native should show the Alert. Summary titles are correct: all-skip shows 'No cards answered', 5/5 shows 'Sprint complete! Loot earned', and 10/10 shows 'Blazing run! Loot unlocked'. Player confidence chips stay visible after an option is picked. BUT a confidence chosen after the answer is never sent to the server. The duel vs AI Rival ended 3-2: the human won, the AI scored lower, and live lead banners showed. The shop loads (balance 1715, avatars shown).",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/rf/sessions/{id}/complete (gamify.award)", "issue": "Regression: an all-skip solo run (kind='solo', played=False) skips 'if kind == \"solo\" and played' and lands in the final else-branch, so it adds 1 to duels and adds 0 to wins. Players can farm the duelist_10 badge with 10 all-skip runs, and profile.duels is inflated (real test user: duels=19). Reference: /app/backend/gamify.py:97-103", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/rf/quests/claim", "issue": "Body is an untyped dict (data: dict) instead of a Pydantic model. Reference: gamify.py:198"},
+      {"endpoint": "duels.simulate_bot", "issue": "When the human scores 0 the AI is held at 0, so the duel ties instead of the AI scoring below. This is unavoidable, but the UI copy should handle it."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Rapid hub quest claim", "issue": "A failed claim (409/500) gives no feedback on the web preview, because Alert.alert from react-native-web does nothing. Native is fine. Use an inline error or toast instead, or fall back to window.alert on web. Reference: app/(tabs)/rapid.tsx:113", "testID": "rf-quest-claim-*", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "Attempt player confidence", "issue": "Chips now stay visible after an option is picked, but tapping a chip after answering only sets local state. No PUT /answers is sent; checked by network capture, and none was sent even after Next/Prev. Confidence is only saved if it is chosen BEFORE the option. Fix: in the chip onPress, when cur.value is non-empty, call A.edit(q.id, { confidence: v }). Reference: app/attempt/[id].tsx:194", "affected_testIDs": ["confidence-0.25", "player-confidence", "player-option-B"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter10.py", "/app/test_reports/pytest/pytest_results_iter10.xml"],
+  "action_items": [
+    "gamify.py:97-103: change the counter branch to `if kind == 'solo': if played: inc['sessions'] = 1` / `elif kind == 'bot': ...` / `else: duels/wins`, so a solo run never falls through to duels. Optionally correct inflated duels counts for affected users.",
+    "attempt/[id].tsx:194: when confidence is tapped and the question already has an answer, save it through A.edit(q.id, { confidence: v }). Hide the chips once confidence_observations has the question.",
+    "rapid.tsx:113: show the claim failure in a way that also works on web (inline Notice or toast), not only Alert.alert."
+  ],
+  "critical_code_review_comments": [
+    "gamify.award: the if/elif/else counter chain does not cover kind='solo' with played=False; the gating was added to the solo condition without handling the other case.",
+    "Confidence chip state (conf) is local to the screen and only sent when an option is tapped, so the order of actions decides whether confidence is saved."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter10.py (new)"],
+  "success_rate": {"backend": "98% (63/64; 1 fail = duels regression)", "frontend": "90% (all requested checks pass except confidence persistence; claim failure has no feedback on web)"},
+  "seed_data_creation": "Test profiles use TEST- uids and are cleaned up. On real user db0c62b8 (9000000001): 3 extra solo sprints (all-skip, 5/5, 10/10 Chemistry), 1 AI Rival duel (won 3-2) and 1 quest claimed (q_sprint, +30). One answer was picked and then cleared on the active Laws of Motion attempt e689d751 (Q3).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run pytest with -n0 -p no:randomly. For solo UI tests, match the on-screen rf-card-prompt text to cards[].prompt from the POST /api/rf/sessions response; card order is not reliable by index. Answers are int indices 0-3; option testIDs are rf-option-{0..3}. Attempt via home-continue-attempt goes to /attempt/e689d751-... Use the exit sheet (rf-exit-button then rf-exit-finish) to end sessions early. Failed quest claims can be mocked with page.route on **/api/rf/quests/claim.",
+  "rca_of_issue": "duels regression: gamify.py:97 `if kind == 'solo' and played` is False for an all-skip solo run, and kind != 'bot', so the else-branch (`inc['duels'] = 1`) runs. Reproduce: new uid, start a session, complete it with all cards 'skipped', then check the profile: duels == 1. Confidence: the chip onPress (line 194) calls setConf only; A.edit (which sends confidence) runs only from the option onPress (line 176)."
+}

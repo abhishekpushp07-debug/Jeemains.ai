@@ -14,6 +14,14 @@ const FILES: Record<string, number> = {
   entry_tornado: require("../assets/sfx/entry_tornado.wav"),
   vs: require("../assets/sfx/vs.wav"),
   go: require("../assets/sfx/go.wav"),
+  correct: require("../assets/sfx/correct.wav"),
+  wrong: require("../assets/sfx/wrong.wav"),
+  combo: require("../assets/sfx/combo.wav"),
+  tick: require("../assets/sfx/tick.wav"),
+  win: require("../assets/sfx/win.wav"),
+  lose: require("../assets/sfx/lose.wav"),
+  levelup: require("../assets/sfx/levelup.wav"),
+  coin: require("../assets/sfx/coin.wav"),
 };
 
 const players: Record<string, AudioPlayer> = {};

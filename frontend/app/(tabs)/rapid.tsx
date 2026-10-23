@@ -10,6 +10,7 @@ import { invalidate, useCached } from "@/src/useCached";
 import { ErrorBox, Icon, IconName, Press, Skeleton, T } from "@/src/components/ui";
 import { BADGE_ICON, GameHUD, useGameProfile } from "@/src/components/game";
 import { Avatar } from "@/src/components/Entry";
+import { playSfx } from "@/src/sfx";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 
@@ -20,7 +21,7 @@ const SUBJECTS: [string, string, IconName][] = [["Physics", "Physics", "atom"], 
 
 function GChip({ label, active, count, onPress, testID, tint }: { label: string; active: boolean; count?: number; onPress: () => void; testID: string; tint: string }) {
   return (
-    <Press testID={testID} onPress={onPress} style={{ height: 36, flexShrink: 0, paddingHorizontal: space.md, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, borderWidth: 1, borderColor: active ? tint : colors.custom_gameLine, backgroundColor: active ? tint : colors.custom_gameCard }}>
+    <Press testID={testID} onPress={onPress} style={{ height: 44, flexShrink: 0, paddingHorizontal: space.md, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, borderWidth: 1, borderColor: active ? tint : colors.custom_gameLine, backgroundColor: active ? tint : colors.custom_gameCard }}>
       <T w="bold" size={13} color={colors.onSurfaceInverse}>{label}</T>
       {count !== undefined ? <T w="bold" size={11} color={active ? colors.onSurfaceInverse : colors.custom_gameMuted}>{count}</T> : null}
     </Press>
@@ -45,6 +46,11 @@ function Mode({ testID, icon, title, sub, grad, onPress, disabled, tag }: { test
   );
 }
 
+const scoreColor = (m: any) => {
+  const r = m?.total ? m.score / m.total : 0;
+  return r >= 0.8 ? colors.custom_neonGreen : r >= 0.5 ? colors.custom_neonAmber : colors.custom_neonRed;
+};
+
 export default function RapidHome() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
@@ -56,6 +62,7 @@ export default function RapidHome() {
   const hist = useCached<any>(user ? `u.${user.id}.rfhist` : null, () => rf("/history", user!.id));
   const duels = useCached<any>(user ? `u.${user.id}.duels` : null, () => rf("/duels", user!.id));
   const prof = useGameProfile(user?.id);
+  const [claimErr, setClaimErr] = useState("");
   const board = useCached<any>(user ? `u.${user.id}.rfboard` : null, () => rf("/leaderboard", user!.id));
   const [code, setCode] = useState("");
   const sub = cat.data?.subjects?.find((s: any) => s.name === subject);
@@ -104,7 +111,7 @@ export default function RapidHome() {
                 <Icon name={q.claimed ? "check-decagram" : q.done ? "gift" : "checkbox-blank-circle-outline"} size={18} color={q.done ? colors.custom_neonGreen : colors.custom_gameMuted} />
                 <T w="bold" size={13} color={colors.onSurfaceInverse} style={{ flex: 1 }}>{q.title}</T>
                 {q.done && !q.claimed ? (
-                  <Press testID={"rf-quest-claim-" + q.id} onPress={async () => { try { await rf("/quests/claim", user!.id, { method: "POST", body: { id: q.id } }); prof.reload(); } catch {} }} style={{ paddingHorizontal: 10, height: 30, borderRadius: 15, backgroundColor: colors.custom_neonAmber, justifyContent: "center" }}>
+                  <Press testID={"rf-quest-claim-" + q.id} onPress={async () => { setClaimErr(""); try { await rf("/quests/claim", user!.id, { method: "POST", body: { id: q.id } }); playSfx("coin"); prof.reload(); } catch (e: any) { setClaimErr(e?.message || "Couldn't claim. Please retry in a moment."); } }} style={{ paddingHorizontal: 14, height: 44, borderRadius: 22, backgroundColor: colors.custom_neonAmber, justifyContent: "center" }}>
                     <T w="heavy" size={12} color={colors.custom_gameBg}>Claim +{q.coins}</T>
                   </Press>
                 ) : <T w="bold" size={12} color={colors.custom_neonAmber}>{q.claimed ? "Claimed" : `${q.progress}/${q.goal} · +${q.coins}`}</T>}
@@ -114,6 +121,7 @@ export default function RapidHome() {
               </View>
             </View>
           ))}
+          {claimErr ? <T testID="rf-quest-claim-error" size={12} w="bold" color={colors.custom_neonRed}>{claimErr}</T> : null}
         </View>
       ) : null}
 
@@ -212,8 +220,8 @@ export default function RapidHome() {
           <T w="heavy" size={13} color={colors.custom_gameMuted} style={{ letterSpacing: 1.5 }}>RECENT SPRINTS · {hist.data.totals.sessions} played</T>
           {hist.data.items.slice(0, 5).map((s: any) => (
             <Press key={s.id} testID={"rf-history-" + s.id} onPress={() => router.push({ pathname: "/rapid/session", params: { review: s.id } })} style={{ flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
-              <View style={{ width: 46, height: 46, borderRadius: 12, backgroundColor: subjectColor(s.subject), alignItems: "center", justifyContent: "center" }}>
-                <T w="heavy" size={14} color={colors.onSurfaceInverse}>{s.summary?.score}/{s.summary?.total}</T>
+              <View style={{ width: 46, height: 46, borderRadius: 12, backgroundColor: scoreColor(s.summary), alignItems: "center", justifyContent: "center" }}>
+                <T w="heavy" size={14} color={colors.custom_gameBg}>{s.summary?.score}/{s.summary?.total}</T>
               </View>
               <View style={{ flex: 1 }}>
                 <T w="bold" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{s.chapter || "Mixed " + s.subject}{s.mode === "repeat_missed" ? " · missed repeat" : ""}</T>

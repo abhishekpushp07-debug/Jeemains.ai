@@ -172,9 +172,8 @@ export default function Player() {
               const sel = cur.value === k;
               return (
                 <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => {
+                    // Exam mode: the student moves on with Next (lets them review, mark confidence, change answer).
                     A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) });
-                    // Auto-advance after choosing (Next/Back remain); never past the last question.
-                    if (!sel && !String(cur.value || "").trim() && idx < questions.length - 1) setTimeout(() => setQid((cur) => (cur === q.id ? questions[idx + 1].id : cur)), 450);
                   }} accessibilityLabel={`Option ${k}${sel ? ", selected" : ""}`}
                   style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingHorizontal: space.md, borderRadius: radius.md, borderWidth: 2, borderColor: sel ? colors.brandPrimary : colors.border, backgroundColor: sel ? colors.custom_infoSoft : colors.custom_reading }}>
                   <View style={{ width: 34, height: 34, borderRadius: 17, alignItems: "center", justifyContent: "center", backgroundColor: sel ? colors.brandPrimary : colors.surface }}>
@@ -188,11 +187,16 @@ export default function Player() {
           </View>
         ) : null}
 
-        {q && !String(cur.value || "").trim() && !a.confidence_observations?.[q.id] ? (
+        {q && !a.confidence_observations?.[q.id] ? (
           <View testID="player-confidence" style={{ gap: 6 }}>
             <T size={11} w="bold" color={colors.muted}>OPTIONAL · HOW SURE ARE YOU?</T>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
-              {CONF.map(([v, l]) => <Chip key={l} testID={"confidence-" + v} label={l} active={conf[q.id] === v} onPress={() => setConf((c) => ({ ...c, [q.id]: c[q.id] === v ? undefined : v }))} />)}
+              {CONF.map(([v, l]) => <Chip key={l} testID={"confidence-" + v} label={l} active={conf[q.id] === v} onPress={() => {
+                const nv = conf[q.id] === v ? undefined : v;
+                setConf((c) => ({ ...c, [q.id]: nv }));
+                // Already answered: save confidence right away with the existing answer.
+                if (nv != null && String(cur.value || "").trim()) A.edit(q.id, { value: cur.value, confidence: nv });
+              }} />)}
             </ScrollView>
           </View>
         ) : null}

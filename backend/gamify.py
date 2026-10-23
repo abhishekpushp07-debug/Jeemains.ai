@@ -77,7 +77,10 @@ def make_router(db, rf_user):
         today, yday = ist_day(), ist_day(time.time() - 86400)
         streak = p.get("streak", 0)
         used_freeze = False
-        if p.get("last_day") != today:
+        played = answered > 0  # an all-skip run earns nothing and never keeps a streak alive
+        if not played:
+            streak = streak if p.get("last_day") in (today, yday) else 0
+        elif p.get("last_day") != today:
             if p.get("last_day") == yday:
                 streak += 1
             elif p.get("last_day") == ist_day(time.time() - 2 * 86400) and p.get("freezes", 0) > 0:
@@ -88,18 +91,19 @@ def make_router(db, rf_user):
         ds = p.get("day_stats") or {}
         if ds.get("day") != today:
             ds = {"day": today, "sprints": 0, "correct": 0, "wins": 0, "claimed": []}
-        ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0)}
+        ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" and played else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0)}
         before = level_of(p.get("xp", 0))
         inc = {"xp": xp, "coins": coins, "cards_correct": correct}
         if kind == "solo":
-            inc["sessions"] = 1
+            if played:
+                inc["sessions"] = 1
         elif kind == "bot":
             inc["rival_games"] = 1
         else:
             inc["duels"] = 1
             inc["wins"] = 1 if won else 0
         # Atomic counters so concurrent sprint + duel never lose XP/coins.
-        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "last_day": today, "day_stats": ds}, "$max": {"best_streak": streak}},
+        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak}},
                                                      upsert=True, return_document=True)
         have = set(p.get("badges", []))
         rules = {"first_sprint": p.get("sessions", 0) >= 1, "first_win": p.get("wins", 0) >= 1, "streak_3": streak >= 3, "streak_7": streak >= 7, "streak_30": streak >= 30,
@@ -109,6 +113,8 @@ def make_router(db, rf_user):
             await db.rf_profiles.update_one({"uid": uid}, {"$addToSet": {"badges": {"$each": new}}})
         after = level_of(p["xp"])
         reward = {"xp": xp, "coins": coins, "streak": streak, "freeze_used": used_freeze, "level_before": before, "level_after": after, "level_up": after > before,
+                  "xp_total": p["xp"], "coins_total": p["coins"], "level_floor": level_floor(after), "next_level_xp": level_floor(after + 1), "played": played,
+                  "quest_ready": any(q["done"] and not q["claimed"] for q in quests_of(p)),
                   "new_badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1]} for b in new]}
         await db.rf_awards.update_one({"uid": uid, "ref": ref}, {"$set": {"reward": reward}})
         return reward
@@ -121,8 +127,8 @@ def make_router(db, rf_user):
     @r.get("/leaderboard")
     async def leaderboard(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        top = await db.rf_profiles.find({}, {"_id": 0, "uid": 1, "xp": 1, "name": 1, "wins": 1}).sort("xp", -1).limit(20).to_list(20)
-        return {"items": [{"rank": i + 1, "name": t.get("name") or "Player", "you": t["uid"] == uid, "xp": t.get("xp", 0), "level": level_of(t.get("xp", 0)), "wins": t.get("wins", 0)} for i, t in enumerate(top)]}
+        top = await db.rf_profiles.find({"name": {"$not": {"$regex": "^TEST_"}}}, {"_id": 0, "uid": 1, "xp": 1, "name": 1, "wins": 1}).sort("xp", -1).limit(20).to_list(20)
+        return {"items": [{"rank": i + 1, "name": t.get("name") or "JEE Aspirant", "you": t["uid"] == uid, "xp": t.get("xp", 0), "level": level_of(t.get("xp", 0)), "wins": t.get("wins", 0)} for i, t in enumerate(top)]}
 
     @r.post("/profile/name")
     async def set_name(data: dict, x_rf_user: Optional[str] = Header(None)):
@@ -138,7 +144,8 @@ def make_router(db, rf_user):
     async def cards(subject: Optional[str] = None, chapter: Optional[str] = None, page: int = Query(1, ge=1), limit: int = Query(50, ge=1, le=200)):
         q = {k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}
         total = await db.rf_cards.count_documents(q)
-        items = await db.rf_cards.find(q, {"_id": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
+        # answers/explanations are never exposed publicly (they could be looked up mid-duel)
+        items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
         return {"items": items, "total": total, "page": page, "pages": max(1, math.ceil(total / limit)), "review_status": "pilot_review_pending"}
 
     @r.get("/shop")

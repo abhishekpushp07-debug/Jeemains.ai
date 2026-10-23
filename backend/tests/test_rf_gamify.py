@@ -39,7 +39,7 @@ def test_cards_public_total(s):
     assert d["total"] >= 4100  # bank grows via background generation
     assert d["page"] == 1 and len(d["items"]) == 50 and d["pages"] == -(-d["total"] // 50)
     assert "_id" not in d["items"][0]
-    for k in ("id", "subject", "chapter", "prompt", "options", "answer"):
+    for k in ("id", "subject", "chapter", "prompt", "options"):
         assert k in d["items"][0]
 
 

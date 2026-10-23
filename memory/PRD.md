@@ -64,6 +64,13 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Full-screen 3 s duel intro (EntryShow): you fly in, rival flies in, VS slam + flash + shake, FIGHT!; duel starts 4 s after match. Shop "Watch full duel intro" preview.
 - Sound effects (expo-audio, offline-synthesised WAVs in frontend/assets/sfx; backend/rapidfire/make_sfx.py); respects silent switch, mixes with music.
 
+## Iteration 8-11 deep audit (2026-06)
+- Card bank second-pass AI verification (backend/rapidfire/verify_cards.py, idempotent): wrong keys fixed, "Both/All of these" cards rewritten/dropped, ambiguous cards + duplicates removed; sync deletes removed cards.
+- All-skip runs earn nothing (no XP/coins/streak/quest/badge/counters). Reward has XP bar, coin balance, quest-ready nudge, full-screen level-up.
+- Sounds + distinct haptics: correct, wrong, combo, tick (last 5 s), win, lose, level-up, coin.
+- Wrong answers stay 2.4 s with full explanation; test player no auto-advance; confidence saveable after answering; set page start hint; 44 px targets; inline quest-claim errors; public /rf/cards hides answers; leaderboard hides TEST_; 15 s client timeout.
+- Known gaps: Redis fan-out for multi-server WS, server-side anti-farm timing, resume label on set page, answer harvesting via many solo sessions.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

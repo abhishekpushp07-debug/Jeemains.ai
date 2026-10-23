@@ -7,7 +7,8 @@ import Animated, { FadeIn, ZoomIn } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { RF_BASE, rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
-import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap } from "@/src/components/ui";
+import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap, buzz } from "@/src/components/ui";
+import { playSfx } from "@/src/sfx";
 import { Ring } from "@/src/components/Ring";
 import { RewardPanel } from "@/src/components/game";
 import { Avatar, EntryShow, RivalTag } from "@/src/components/Entry";
@@ -68,6 +69,7 @@ export default function Duel() {
   // Create / join once per intent (request_id makes retries idempotent).
   useEffect(() => {
     let alive = true;
+    if (!uid) return; // wait for auth hydration (cold deep-link from an invite would 401)
     setError("");
     const run = p.mode === "join"
       ? rf("/duels/join", uid, { method: "POST", body: { code: p.code || "", name } })
@@ -128,6 +130,7 @@ export default function Duel() {
     try {
       const r = await rf(`/duels/${d.id}/answer`, uid, { method: "POST", body: { index: idx, choice: c, outcome, ms } });
       setFb(r);
+      if (outcome === "answer") { const ok = r.outcome === "correct"; playSfx(ok ? "correct" : "wrong", 0.8); buzz(ok ? "success" : "error"); }
       setTimeout(() => { setChoice(null); setFb(null); setIdx((i) => Math.max(i, r.index + 1)); }, outcome === "answer" ? 1100 : 600);
     } catch (e: any) {
       // Unlock the card so the student can retry (or the timer can still expire).
@@ -153,8 +156,13 @@ export default function Duel() {
   }, [started, card?.id, choice, fb, send]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (d?.status === "finished") invalidate(`u.${uid}.duels`);
-  }, [d?.status, uid]);
+    if (d?.status !== "finished") return;
+    invalidate(`u.${uid}.duels`);
+    invalidate(`u.${uid}.rfprofile`);
+    const won = d.winner === d.you;
+    playSfx(won ? "win" : d.winner === "tie" ? "go" : "lose");
+    buzz(won ? "success" : "warning");
+  }, [d?.status, uid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function leave() {
     if (d?.status === "waiting") rf(`/duels/${d.id}/cancel`, uid, { method: "POST", body: {} }).catch(() => {});
@@ -264,7 +272,7 @@ export default function Duel() {
             <T size={11} color={colors.custom_whiteA70}>Practice duel · doesn’t change marks, ranks or the series streak</T>
           </Card>
         </Animated.View>
-        <RewardPanel reward={d.reward} title={won ? "Victory! Champion’s prize" : tie ? "Draw! Shared spoils" : "Battle reward earned"} testID="duel-reward" />
+        <RewardPanel reward={d.reward} title={won ? (opp?.bot ? "Victory vs AI Rival!" : "Victory! Champion’s prize") : tie ? "Draw! Shared spoils" : "Battle reward earned"} testID="duel-reward" />
         <T w="heavy" size={16} color={colors.onSurfaceInverse}>Review your misses</T>
         {d.cards.map((c: any, k: number) => {
           const a = mine[k];
