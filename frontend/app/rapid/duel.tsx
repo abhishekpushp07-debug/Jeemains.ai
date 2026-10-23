@@ -10,7 +10,7 @@ import { invalidate } from "@/src/useCached";
 import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap } from "@/src/components/ui";
 import { Ring } from "@/src/components/Ring";
 import { RewardPanel } from "@/src/components/game";
-import { Avatar, EntryEffect, RivalTag } from "@/src/components/Entry";
+import { Avatar, EntryShow, RivalTag } from "@/src/components/Entry";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -54,6 +54,7 @@ export default function Duel() {
   const [exit, setExit] = useState(false);
   const [copied, setCopied] = useState(false);
   const [n, setN] = useState(0);
+  const [intro, setIntro] = useState("");
   const reqId = useRef(uuid());
   const anchor = useRef({ server: 0, mono: 0 });
   const startedAt = useRef(0);
@@ -194,15 +195,7 @@ export default function Duel() {
     const c = Math.min(5, Math.max(1, Math.ceil(d.start_at - now)));
     body = (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.lg, paddingHorizontal: space.lg }} testID="duel-countdown">
-        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", alignSelf: "stretch" }}>
-          <EntryEffect effect={me?.entry}>
-            <View style={{ alignItems: "center", gap: 6 }}><Avatar icon={me?.avatar} frame={me?.frame} size={84} /><T w="heavy" size={14} color={colors.onSurfaceInverse}>You</T></View>
-          </EntryEffect>
-          <T w="heavy" size={28} color={colors.custom_neonAmber}>VS</T>
-          <EntryEffect effect={opp?.entry} fromRight>
-            <View style={{ alignItems: "center", gap: 6 }}><Avatar icon={opp?.avatar} frame={opp?.frame} size={84} /><T w="heavy" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{opp?.name}</T>{opp?.bot ? <RivalTag /> : null}</View>
-          </EntryEffect>
-        </View>
+        <VersusRow me={me} opp={opp} tint={tint} total={total} />
         <Animated.View key={c} entering={ZoomIn.duration(250)}><T w="heavy" size={88} color={colors.custom_neonAmber}>{c}</T></Animated.View>
         <T size={13} color={colors.custom_gameMuted}>Same 30 cards for both · 20 s each · +1 per correct</T>
       </View>
@@ -306,6 +299,7 @@ export default function Duel() {
         <Icon name="sword-cross" size={24} color={colors.custom_amber} />
       </View>
       {body}
+      {d?.status === "ready" && !started && intro !== d.id ? <EntryShow me={me} opp={opp} onDone={() => setIntro(d.id)} testID="duel-entry-show" /> : null}
       <Sheet visible={exit} onClose={() => setExit(false)} testID="duel-exit-sheet">
         <T w="heavy" size={19}>Leave the duel?</T>
         <T size={13} color={colors.muted}>Cards you don’t answer score 0. Your opponent keeps playing.</T>

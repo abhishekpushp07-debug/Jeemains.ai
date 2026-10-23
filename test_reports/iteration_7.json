@@ -1,0 +1,32 @@
+{
+  "summary": "Iteration 7 covered the 3D avatar shop, the 10 entry effects, the full-screen duel intro and the 4 s duel start, testing both backend and frontend. Backend: 52 of 52 pytest tests pass, including 12 new tests in test_rf_avatars_entries.py. Frontend, run on a 390x844 mobile viewport as phone 9000000001: the shop opens on the Avatars tab with 16 cards. Each card shows a rarity pill and a 3D webp portrait (naturalWidth 320, HTTP 200). Buying av_photon took the balance from 1274 to 974, the card switched to Use, and tapping Use changed it to Selected and updated the home avatar. The Entry Effects tab shows all 10 effects. The galaxy preview sheet animates. 'Watch full duel intro' shows shop-entry-show with You vs Rival, the VS slam and FIGHT! (fully visible at 2.4 s), and it closes on its own at 3.06 s. AI Rival duel: duel-entry-show appeared 0.19 s after the tap and showed both 3D avatars (av_photon vs av_einstein), the rival's CROWN ENTRY label, VS and FIGHT!. It closed at 3.2 s and duel-play appeared at 4.25 s. duel-versus shows the 3D images. Regression checks pass: correct and incorrect verdicts appear on each card, the live score updates (You 1) and WS frames are received. No console errors. Deprecated packages: none (expo-audio is used, no expo-av).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "EntryShow (reduced motion)", "issue": "When useReducedMotion() is true, a, b and vs are set to 1 but fight is never set, so FIGHT! never appears. Users with reduced motion see a static screen for 3 s with no FIGHT text. Reference: /app/frontend/src/components/Entry.tsx:133-136", "testID": "entry-fight", "priority": "LOW"},
+      {"component": "Avatar frame pulse", "issue": "The withRepeat pulse is never cancelled when the frame changes from neon/fire/diamond to none or gold, so the avatar keeps pulsing (for example on shop cards after you select a different avatar). Reference: /app/frontend/src/components/Entry.tsx:25-27", "testID": "", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/rapid/shop Avatars", "issues": ["The 'Selected ✓' button is disabled at 50% opacity: amber text rgb(158,85,10) on a faded white button over a dark card. Contrast is low (about 2.5:1). Use a solid 'Selected' pill with high contrast instead of the disabled style.", "The shop tab pills are 38 px tall, below the 44 px touch target."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_avatars_entries.py", "/app/test_reports/pytest/pytest_results_iter7.xml"],
+  "action_items": [
+    "LOW: In EntryShow's reduced-motion branch, also set fight.value = 1 so FIGHT! is shown.",
+    "LOW: In Avatar, call cancelAnimation(pulse) and reset pulse.value = 1 when the frame is not an animated frame.",
+    "LOW (design): Give the Selected avatar button a high-contrast style instead of the 50%-opacity disabled look, and raise the shop tab pills to at least 44 px."
+  ],
+  "critical_code_review_comments": [
+    "backend: BUYABLE excludes free avatars, so buying a free avatar returns 404. That is acceptable, but a clearer message would be 400 'Already free'.",
+    "backend: shop/equip only accepts frame/entry/theme slots. Avatars go through /profile/avatar, which checks ownership. Both are correct.",
+    "Entry.tsx: on web, the left player's own swirlOut/radial burst particles go off-screen to the left because the burst width is the full screen width W and the player is anchored on the left. This is cosmetic only."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_avatars_entries.py"],
+  "success_rate": {"backend": "100% (52/52)", "frontend": "100% of requested flows"},
+  "seed_data_creation": "Test profile 9000000001 bought av_photon (300 coins; balance is now 974) and its avatar was reset to av_robo. Pytest TEST- uids are cleaned up.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Avatar images on web are lazy-loaded; wait about 3-5 s before taking screenshots or the circles look empty. To time the intro, poll [data-testid=duel-entry-show] count every 80 ms after clicking duel-play-ai-rival. Use invite mode for bot duels in pytest (to avoid xdist cross-matching). The 9000000001 profile now owns av_photon."
+}

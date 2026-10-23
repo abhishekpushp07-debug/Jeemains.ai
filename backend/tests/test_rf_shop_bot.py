@@ -158,8 +158,9 @@ class TestShop:
         _ = r_f
 
     def test_avatar(self, s, uid):
-        assert s.post(f"{API}/profile/avatar", json={"avatar": "ninja"}, headers=H(uid)).status_code == 200
-        assert s.get(f"{API}/profile", headers=H(uid)).json()["avatar"] == "ninja"
+        assert s.post(f"{API}/profile/avatar", json={"avatar": "av_panda"}, headers=H(uid)).status_code == 200  # free starter
+        assert s.get(f"{API}/profile", headers=H(uid)).json()["avatar"] == "av_panda"
+        assert s.post(f"{API}/profile/avatar", json={"avatar": "av_galaxy"}, headers=H(uid)).status_code == 403  # paid, not owned
         assert s.post(f"{API}/profile/avatar", json={"avatar": "hacker"}, headers=H(uid)).status_code == 400
 
     def test_claim_not_done(self, s):

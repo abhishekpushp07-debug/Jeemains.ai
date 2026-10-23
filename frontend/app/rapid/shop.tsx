@@ -7,11 +7,12 @@ import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
 import { invalidate, useCached } from "@/src/useCached";
 import { Button, ErrorBox, Icon, Press, Sheet, Skeleton, T } from "@/src/components/ui";
-import { Avatar, EntryEffect } from "@/src/components/Entry";
+import { Avatar, EntryEffect, EntryShow } from "@/src/components/Entry";
+import { RARITY } from "@/src/avatars";
 import { colors, radius, space } from "@/src/theme";
 
 type Tab = "entry" | "frame" | "theme" | "powerup" | "avatar";
-const TABS: [Tab, string][] = [["entry", "Entry Effects"], ["frame", "Frames"], ["theme", "Arenas"], ["powerup", "Power-ups"], ["avatar", "Avatars"]];
+const TABS: [Tab, string][] = [["avatar", "Avatars"], ["entry", "Entry Effects"], ["frame", "Frames"], ["theme", "Arenas"], ["powerup", "Power-ups"]];
 
 export default function Shop() {
   const insets = useSafeAreaInsets();
@@ -20,12 +21,13 @@ export default function Shop() {
   const uid = user?.id || "";
   const shop = useCached<any>(uid ? `u.${uid}.rfshop` : null, () => rf("/shop", uid), false);
   const params = useLocalSearchParams<{ tab?: Tab }>();
-  const [tab, setTab] = useState<Tab>(params.tab || "entry");
+  const [tab, setTab] = useState<Tab>(params.tab || "avatar");
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [preview, setPreview] = useState<any>(null);
   const [play, setPlay] = useState(0);
   const [info, setInfo] = useState(false);
+  const [show, setShow] = useState("");
   const d = shop.data;
   const refresh = () => { invalidate(`u.${uid}.rfprofile`); shop.reload(); };
 
@@ -59,7 +61,7 @@ export default function Shop() {
         </Press>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flexGrow: 0, marginHorizontal: -space.lg }} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg }}>
           {TABS.map(([v, l]) => (
-            <Press key={v} testID={"shop-tab-" + v} onPress={() => setTab(v)} style={{ height: 38, paddingHorizontal: space.lg, borderRadius: radius.pill, justifyContent: "center", flexShrink: 0, backgroundColor: tab === v ? colors.custom_neonAmber : colors.custom_gameCard }}>
+            <Press key={v} testID={"shop-tab-" + v} onPress={() => setTab(v)} style={{ height: 44, paddingHorizontal: space.lg, borderRadius: radius.pill, justifyContent: "center", flexShrink: 0, backgroundColor: tab === v ? colors.custom_neonAmber : colors.custom_gameCard }}>
               <T w="heavy" size={13} color={tab === v ? colors.custom_gameBg : colors.onSurfaceInverse}>{l}</T>
             </Press>
           ))}
@@ -67,13 +69,29 @@ export default function Shop() {
         <ErrorBox error={error} testID="shop-error" />
         {!d ? <Skeleton h={200} /> : null}
         {d && tab === "avatar" ? (
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.md }}>
-            {d.avatars.map((a: string) => (
-              <Press key={a} testID={"shop-avatar-" + a} onPress={() => act("/profile/avatar", { avatar: a }, a)} style={{ width: "22%", alignItems: "center", gap: 4 }}>
-                <Avatar icon={a} frame={d.avatar === a ? d.equipped?.frame || "frame_gold" : null} size={62} />
-                <T size={10} w="bold" color={d.avatar === a ? colors.custom_neonAmber : colors.custom_gameMuted}>{d.avatar === a ? "Selected" : "Free"}</T>
-              </Press>
-            ))}
+          <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.md }}>
+            {d.avatars.map((a: any) => {
+              const owned = !a.price || d.owned.includes(a.id);
+              const selected = d.avatar === a.id;
+              const rar = RARITY[a.rarity] || RARITY.common;
+              return (
+                <View key={a.id} testID={"shop-avatar-" + a.id} style={{ width: "48%", borderRadius: radius.lg, padding: space.md, gap: 6, alignItems: "center", backgroundColor: colors.custom_gameCard, borderWidth: selected ? 2 : 1, borderColor: selected ? colors.custom_neonAmber : rar.color + "66" }}>
+                  <LinearGradient colors={[rar.color + "55", colors.custom_gameBg]} style={{ position: "absolute", left: 0, right: 0, top: 0, height: 110, borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg }} />
+                  <View style={{ alignSelf: "flex-start", paddingHorizontal: 8, height: 20, borderRadius: 10, justifyContent: "center", backgroundColor: rar.color }}>
+                    <T w="heavy" size={10} color={colors.custom_gameBg}>{rar.label}</T>
+                  </View>
+                  <Avatar icon={a.id} frame={selected ? d.equipped?.frame : null} size={92} />
+                  <T w="heavy" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{a.title}</T>
+                  {owned ? (
+                    <Button testID={"shop-avatar-use-" + a.id} kind={selected ? "secondary" : "primary"} label={selected ? "Selected ✓" : a.price ? "Use" : "Use · Free"} color={colors.custom_amber} busy={busy === a.id} onPress={() => !selected && act("/profile/avatar", { avatar: a.id }, a.id)}
+                      style={{ alignSelf: "stretch", minHeight: 40 }} />
+                  ) : (
+                    <Button testID={"shop-avatar-buy-" + a.id} label={d.coins >= a.price ? `Buy · ${a.price}` : `${a.price} coins`} icon="hexagon-multiple" disabled={d.coins < a.price} color={colors.custom_examJee} busy={busy === a.id}
+                      style={{ alignSelf: "stretch", minHeight: 40 }} onPress={() => act("/shop/buy", { item_id: a.id }, a.id)} />
+                  )}
+                </View>
+              );
+            })}
           </View>
         ) : null}
         {d && tab !== "avatar" ? (
@@ -111,12 +129,14 @@ export default function Shop() {
       <Sheet visible={!!preview} onClose={() => setPreview(null)} testID="shop-preview-sheet">
         <T w="heavy" size={18}>{preview?.title}</T>
         <View style={{ height: 180, borderRadius: radius.lg, backgroundColor: colors.custom_gameBg, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-          <EntryEffect effect={preview?.slot === "entry" ? preview.id : null} play={play}>
+          <EntryEffect effect={preview?.slot === "entry" ? preview.id : null} play={play} sound>
             <Avatar icon={d?.avatar} frame={preview?.slot === "frame" ? preview.id : d?.equipped?.frame} size={72} />
           </EntryEffect>
         </View>
         <Button testID="shop-preview-replay" kind="secondary" icon="replay" label="Replay preview" onPress={() => setPlay((n) => n + 1)} />
+        {preview?.slot === "entry" ? <Button testID="shop-preview-full" icon="fullscreen" label="Watch full duel intro" color={colors.custom_amber} onPress={() => { setShow(preview.id); setPreview(null); }} /> : null}
       </Sheet>
+      {show ? <EntryShow me={{ avatar: d?.avatar, frame: d?.equipped?.frame, entry: show }} opp={{ name: "Rival", avatar: "av_dragon", frame: "frame_fire", entry: "entry_lightning", bot: true }} onDone={() => setShow("")} testID="shop-entry-show" /> : null}
       <Sheet visible={info} onClose={() => setInfo(false)} testID="shop-info-sheet">
         <T w="heavy" size={18}>How do I earn coins?</T>
         {["2 coins per correct card in sprints and duels", "+50 coins for every duel win", "+30 coins for a flawless session", "Daily quests pay 30–50 coins each", "Coins are earned only — no real money, no purchases"].map((x) => (

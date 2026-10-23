@@ -11,7 +11,7 @@ from typing import List, Literal, Optional
 from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
-from shop import rival_profile
+from shop import rival_profile, safe_avatar
 
 DUEL_CARDS = 30
 CARD_SECONDS = 20
@@ -90,10 +90,10 @@ def make_router(db, rf_user, public_card, award):
     async def player(uid, name):
         prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True, return_document=True) or {}
         eq = prof.get("equipped", {})
-        return {"uid": uid, "name": name.strip()[:24], "avatar": prof.get("avatar") or "robot-happy", "frame": eq.get("frame"), "entry": eq.get("entry"), "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
+        return {"uid": uid, "name": name.strip()[:24], "avatar": safe_avatar(prof.get("avatar")), "frame": eq.get("frame"), "entry": eq.get("entry"), "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
 
     def start_fields():
-        start = time.time() + 5
+        start = time.time() + 4  # 3 s entry show + network margin, then card 1
         return {"status": "ready", "start_at": start, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
 
     async def pick_cards(subject, chapter):

@@ -58,6 +58,12 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Card bank expanded to ~11,500 JEE Main cards (150 per chapter, 100 for the 4 inorganic chapters), still review pending.
 - Scale note: multi-server WebSocket fan-out needs Redis pub/sub (not added yet).
 
+## Iteration 7 (2026-06)
+- 16 3D game-style hero avatars (Nano Banana, bundled webp in frontend/assets/avatars; generator backend/rapidfire/generate_avatars.py): 4 free, 12 paid by rarity (Rare 300-400, Epic 700-800, Legendary 1500-2000).
+- 10 entry effects (added Cyclone, Meteor, Dragon, Phoenix, Galaxy, Black Hole) with particle bursts.
+- Full-screen 3 s duel intro (EntryShow): you fly in, rival flies in, VS slam + flash + shake, FIGHT!; duel starts 4 s after match. Shop "Watch full duel intro" preview.
+- Sound effects (expo-audio, offline-synthesised WAVs in frontend/assets/sfx; backend/rapidfire/make_sfx.py); respects silent switch, mixes with music.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

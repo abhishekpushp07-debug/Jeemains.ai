@@ -6,7 +6,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Header, HTTPException, Query
 from pymongo.errors import DuplicateKeyError
-from shop import AVATARS, QUESTS, SHOP, SHOP_BY_ID
+from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, safe_avatar
 
 IST = timezone(timedelta(hours=5, minutes=30))
 BADGES = {
@@ -42,7 +42,7 @@ def public_profile(p: dict) -> dict:
             "streak": current, "best_streak": p.get("best_streak", 0), "played_today": p.get("last_day") == today,
             "sessions": p.get("sessions", 0), "duels": p.get("duels", 0), "wins": p.get("wins", 0), "cards_correct": p.get("cards_correct", 0),
             "badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1], "earned": b in p.get("badges", [])} for b in BADGES],
-            "avatar": p.get("avatar") or AVATARS[0], "equipped": p.get("equipped", {}), "owned": p.get("owned", []), "freezes": p.get("freezes", 0),
+            "avatar": safe_avatar(p.get("avatar")), "equipped": p.get("equipped", {}), "owned": p.get("owned", []), "freezes": p.get("freezes", 0),
             "quests": quests_of(p)}
 
 
@@ -145,12 +145,12 @@ def make_router(db, rf_user):
     async def shop(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         p = await db.rf_profiles.find_one({"uid": uid}) or {}
-        return {"items": SHOP, "avatars": AVATARS, "coins": p.get("coins", 0), "owned": p.get("owned", []), "equipped": p.get("equipped", {}), "freezes": p.get("freezes", 0), "avatar": p.get("avatar") or AVATARS[0]}
+        return {"items": SHOP, "avatars": [{k: a[k] for k in ("id", "title", "rarity", "price")} for a in AVATAR_ITEMS], "coins": p.get("coins", 0), "owned": p.get("owned", []), "equipped": p.get("equipped", {}), "freezes": p.get("freezes", 0), "avatar": safe_avatar(p.get("avatar"))}
 
     @r.post("/shop/buy")
     async def buy(data: dict, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        item = SHOP_BY_ID.get(str(data.get("item_id")))
+        item = BUYABLE.get(str(data.get("item_id")))
         if not item:
             raise HTTPException(404, "Item not found.")
         q = {"uid": uid, "coins": {"$gte": item["price"]}}
@@ -180,8 +180,11 @@ def make_router(db, rf_user):
     @r.post("/profile/avatar")
     async def avatar(data: dict, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        if data.get("avatar") not in AVATARS:
+        a = AVATAR_BY_ID.get(data.get("avatar"))
+        if not a:
             raise HTTPException(400, "Unknown avatar.")
+        if a["price"] and a["id"] not in ((await db.rf_profiles.find_one({"uid": uid}) or {}).get("owned", [])):
+            raise HTTPException(403, "Buy this avatar first.")
         await db.rf_profiles.update_one({"uid": uid}, {"$set": {"avatar": data["avatar"]}}, upsert=True)
         return {"ok": True}
 
