@@ -2239,7 +2239,7 @@ code {
   grid-template-columns: repeat(5, 1fr);
   gap: 7px;
 }
-.number-grid > button {
+.number-grid button {
   background: var(--surface-card);
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -2248,23 +2248,23 @@ code {
   position: relative;
   color: var(--text-muted);
 }
-.number-grid > button.answered {
+.number-grid button.answered {
   background: var(--success-soft);
   border-color: var(--success-line);
   color: var(--success);
 }
-.number-grid > button.marked {
+.number-grid button.marked {
   border-color: var(--review);
   color: var(--review);
   background: var(--review-soft);
 }
-.number-grid > button.current {
+.number-grid button.current {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
   color: var(--brand-text);
   font-weight: 700;
 }
-.number-grid > button.pending-answer {
+.number-grid button.pending-answer {
   border-style: dashed;
   border-color: var(--warning);
 }
@@ -3134,7 +3134,7 @@ code {
   overflow-y: auto;
   padding: 4px;
 }
-.editor-number-grid > button {
+.editor-number-grid button {
   font-size: 9px;
   border: 1px solid var(--line);
   border-radius: 5px;
@@ -3143,7 +3143,7 @@ code {
   background: var(--surface-card);
   color: var(--text-muted);
 }
-.editor-number-grid > button.current {
+.editor-number-grid button.current {
   border-color: var(--brand-text);
   background: var(--brand-soft);
   color: var(--brand-text);
@@ -3151,12 +3151,12 @@ code {
   outline-offset: 1px;
   font-weight: 600;
 }
-.editor-number-grid > button.approved {
+.editor-number-grid button.approved {
   background: var(--success-soft);
   color: var(--success);
   border-color: var(--success-line);
 }
-.editor-number-grid > button > svg {
+.editor-number-grid button > svg {
   position: absolute;
   right: 1px;
   top: 1px;
@@ -4852,7 +4852,7 @@ code {
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
   }
-  .number-grid > button {
+  .number-grid button {
     height: 35px;
     font-size: 10px;
   }
@@ -5301,7 +5301,7 @@ code {
     margin: 17px 0;
     padding: 3px;
   }
-  .editor-number-grid > button {
+  .editor-number-grid button {
     height: 28px;
     font-size: 9px;
   }
@@ -5605,7 +5605,7 @@ code {
 .nav-subject h4 {
   font-size: 12px;
 }
-.number-grid > button {
+.number-grid button {
   font-size: 12px;
   min-height: 36px;
 }
@@ -5708,7 +5708,7 @@ code {
   .question-navigator .btn {
     font-size: 12px;
   }
-  .number-grid > button {
+  .number-grid button {
     font-size: 11px;
   }
   .result-stat small {
@@ -5899,7 +5899,7 @@ code {
 .score-card strong small {
   color: var(--line);
 }
-.editor-number-grid > button.current {
+.editor-number-grid button.current {
   background: var(--brand-soft);
   border-color: var(--brand-text);
   color: var(--brand-text);
@@ -5994,12 +5994,12 @@ code {
 .compact-practice-note {
   display: none;
 }
-.number-grid > button.visited:not(.answered):not(.marked) {
+.number-grid button.visited:not(.answered):not(.marked) {
   background: var(--warning-soft);
   border-color: var(--warning-line);
   color: var(--warning);
 }
-.number-grid > button.marked.answered {
+.number-grid button.marked.answered {
   background: var(--review-soft);
   border-color: var(--review);
   box-shadow: inset 0 -3px var(--success);
@@ -6184,7 +6184,7 @@ code {
 }
 
 .player-header{position:sticky;top:0;z-index:30}.player-savebar{position:sticky;top:80px;z-index:29}
-@media(max-width:640px){.player-savebar{top:72px}.number-grid>button{min-height:44px}.navigator-content{max-height:58dvh;overflow-y:auto}.menu-button{min-width:44px;min-height:44px}}
+@media(max-width:640px){.player-savebar{top:72px}.number-grid button{min-height:44px}.navigator-content{max-height:58dvh;overflow-y:auto}.menu-button{min-width:44px;min-height:44px}}
 
 :root.dark {
   --page: #0E0A0C;

@@ -248,8 +248,9 @@ export default function Results() {
           </p>
           <div className="button-row">
             <button
-              className="btn btn-secondary"
+              className="btn btn-secondary score-version-button"
               data-testid="score-version-original"
+              aria-pressed={scoreVersion === 'original'}
               disabled={scoreVersion === "original"}
               onClick={() => changeScoreVersion('original')}
             >
@@ -258,8 +259,9 @@ export default function Results() {
             {r.grade_versions.map((g) => (
               <button
                 key={g.id}
-                className="btn btn-secondary"
+                className="btn btn-secondary score-version-button"
                 data-testid={"score-version-" + g.key_version}
+                aria-pressed={scoreVersion === g.id}
                 disabled={scoreVersion === g.id}
                 onClick={() => changeScoreVersion(g.id)}
               >
