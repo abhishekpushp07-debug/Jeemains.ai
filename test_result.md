@@ -1,3 +1,11 @@
+# Active production login repair — 2026-10-23
+production_origin_repair:
+  reproduction: "Actual https://www.jeelive.ai redirectshttps://jeelive.ai. Bothphone/staffPOSTwithOriginhttps://jeelive.ai403origin_denied beforevalidation/DB. ProductionFRONTEND_URL != canonicalconfirmedbydeployerRCA; GETsessionhealthfast. Noactualaccountloginperformed/customerDBwrites."
+  code: "Newtejas/origins.py buildsrequiredFRONTEND_URL plusoptionalexplicitcomma-separatedCORS_ORIGINS; sharednormalization/membershipforCORSandunsafe-methodfence. LegacyCORS'*'isignoredwithwarning,notexpanded. Invalidexplicitconfigfailsclosed. Defaultports/whitespace/trailingslashnormalize;path/query/fragment/userinfo/wildcardhost/null/hostileoriginsdenied. NoHost/referrer/regexreflection. MissingOriginCLIpolicyunchanged. Cookies/roles/credentialsunchanged."
+  pending: "Needisolatedauthenticationregressionandrendercheck. SecureFRONTEND_URLcardrequested:LIVEvaluehttps://jeelive.ai,TESTpreviewunchanged;nosavedconfirmationyet. CorrectLIVEconfig+publishneededbeforelivefixclaim. wwwSSLstillinitializingverifiedfalseplatformside(apexSSLactive). New78JEEchaptersarePREVIEWONLY; productionstill144oldsets(codepublishdoesnotmigratedata). DoNOTmigrate/overwriteprodDBorrotatecredentialswithoutapproval."
+  source: "/app/deployer-agent-docs/RCA_bca6a71e-cb7f-4495-9f08-406e9ab69282.MD"
+
+
 # Completed JEE chapter import — uploaded/published/verified115–117
 jee_chapter_import_active:
   user_request: "Upload three supplied JEE Main Physics/Maths/Chemistry PDFs into JEE Main chapter practice; original supplied solutions only, no AI generation. User explicitly confirmed Physics90MINUTES (not hours), Mathematics120minutes, Chemistry70minutes per50questions. +4correct/-1wrong/0unanswered for MCQ and integer. Resume upload now."

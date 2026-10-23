@@ -7,7 +7,7 @@ import tejas.reports  # noqa: F401  fail fast on report syntax errors (it is oth
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.exceptions import RequestValidationError
-from fastapi.middleware.cors import CORSMiddleware
+from tejas.origins import ExplicitOriginCORS, configured_origins, origin_allowed
 from tejas import (
     auth,
     content,
@@ -69,9 +69,9 @@ app.add_middleware(JsonBodyLimits, contracts_owner=app)
 app.add_middleware(ContentSafetyHold)
 from tejas.import_guard import ImportGuard
 app.add_middleware(ImportGuard)
-origins = [os.environ["FRONTEND_URL"].rstrip("/")]
+origins = configured_origins(os.environ['FRONTEND_URL'], os.environ.get('CORS_ORIGINS'))
 app.add_middleware(
-    CORSMiddleware,
+    ExplicitOriginCORS,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
@@ -88,8 +88,8 @@ async def protections(request: Request, call_next):
         origin = request.headers.get("origin")
         if (
             request.method in ["POST", "PUT", "PATCH", "DELETE"]
-            and origin
-            and origin not in origins
+            and origin is not None
+            and not origin_allowed(origin, origins)
         ):
             return error_response("Cross-origin write rejected.", 403, "origin_denied")
         response = await call_next(request)
