@@ -37,6 +37,7 @@ from tejas import (
     bitsat_branches,
     live_series,
     series_streak,
+    jee_transfer,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -179,6 +180,7 @@ for module in [
     bitsat_branches,
     live_series,
     series_streak,
+    jee_transfer,
 ]:
     app.include_router(module.router)
 

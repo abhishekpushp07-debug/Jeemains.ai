@@ -24,6 +24,7 @@ import {
 import { StudioImportHub } from './StudioImport';
 import { MockBookPanel } from '../components/studio/MockBookPanel';
 import {SeriesSchedulePanel} from '../components/studio/SeriesSchedulePanel';
+import { JeeTransferPanel } from '../components/studio/JeeTransferPanel';
 import { ManualSolvePanel } from '../components/studio/ManualSolve';
 import { QuestionReportsPanel } from '../components/studio/QuestionReportsPanel';
 import { AiReviewPanel } from '../components/studio/AiReviewPanel';
@@ -90,6 +91,7 @@ export default function Studio() {
           </Button>
         }
       />
+      {user.role === 'owner' && <JeeTransferPanel/>}
       {user.role === 'owner' && <SeriesSchedulePanel/>}
       <ManualSolvePanel />
       <QuestionReportsPanel />

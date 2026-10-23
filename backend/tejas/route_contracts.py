@@ -9,6 +9,8 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'jee_transfer.transfer_status': ('owner_scoped_transfer_counts_only', 'normal', 'read'),
+    'jee_transfer.transfer_step': ('owner_fixed_verified_bundle_only', 'batch', 'insert_only_hash_conflict_stop_durable_lease'),
     'series_streak.progress': ('own_live_series_streak_only', 'normal', 'read'),
     'live_series.catalogue': ('public_schedule_metadata_only', 'normal', 'read'),
     'live_series.history': ('own_series_attempts_only', 'normal', 'read'),
