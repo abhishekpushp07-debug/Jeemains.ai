@@ -43,32 +43,35 @@
 .jeelive-button[data-ui-variant='outline'] { background:var(--surface-card); border-color:var(--brand-line); color:var(--ink); }
 .jeelive-button[data-ui-variant='outline']:hover { background:var(--brand-soft); border-color:var(--brand-text); }
 .jeelive-tabs { max-width:100%; height:auto; min-width:0; flex-wrap:wrap; gap:7px; padding:7px; background:var(--surface-card); border:1px solid var(--line); border-radius:15px; }
-.jeelive-tabs .jeelive-tab, .exam-destinations>a, .filter-tabs>button, .studio-tabs>button, .segmented>button, .ai-review-filters>button { --tab-accent:var(--ui-blue); }
-.jeelive-tabs .jeelive-tab:nth-child(2),.exam-destinations>a:nth-child(2),.studio-tabs>button:nth-child(2) { --tab-accent:var(--ui-amber); }
-.jeelive-tabs .jeelive-tab:nth-child(3),.exam-destinations>a:nth-child(3),.studio-tabs>button:nth-child(3) { --tab-accent:var(--ui-green); }
-.jeelive-tabs .jeelive-tab:nth-child(4),.studio-tabs>button:nth-child(4) { --tab-accent:var(--ui-cyan); }
-.jeelive-tabs .jeelive-tab:nth-child(5),.studio-tabs>button:nth-child(5) { --tab-accent:var(--ui-red); }
-.jeelive-tabs [role='tab'].jeelive-tab,.exam-destinations>a,.filter-tabs>button,.studio-tabs>button,.segmented>button,.ai-review-filters>button {
+.jeelive-tabs .jeelive-tab, .exam-destinations a, .filter-tabs button, .studio-tabs button, .segmented button, .ai-review-filters button { --tab-accent:var(--ui-blue); }
+.jeelive-tabs .jeelive-tab:is([data-tab-value='progress'],[data-tab-value='saved'],[data-tab-value='archive'],[data-tab-value='upcoming']),.exam-destinations a[data-testid='exam-destination-chapters'] { --tab-accent:var(--ui-amber); }
+.jeelive-tabs .jeelive-tab:is([data-tab-value='accuracy'],[data-tab-value='completed'],[data-tab-value='live'],[data-tab-value='preview']) { --tab-accent:var(--ui-green); }
+.jeelive-tabs .jeelive-tab:is([data-tab-value='rank'],[data-tab-value='analytics'],[data-tab-value='results'],[data-tab-value='offline']),.exam-destinations a[data-testid='exam-destination-results'] { --tab-accent:var(--ui-cyan); }
+.jeelive-tabs .jeelive-tab:is([data-tab-value='solutions'],[data-tab-value='ended'],[data-tab-value='errors']) { --tab-accent:var(--ui-red); }
+.studio-tabs button[data-testid='studio-tab-questions'],.ai-review-filters button[data-testid$='approved'] { --tab-accent:var(--ui-green); }
+.studio-tabs button[data-testid='studio-tab-validation'],.studio-tabs button[data-testid='studio-tab-rules-rights'] { --tab-accent:var(--ui-amber); }
+.studio-tabs button[data-testid='studio-tab-change-history'],.ai-review-filters button[data-testid$='failed'] { --tab-accent:var(--ui-red); }
+.jeelive-tabs [role='tab'].jeelive-tab,.exam-destinations a,.filter-tabs button,.studio-tabs button,.segmented button,.ai-review-filters button {
  border:1px solid color-mix(in srgb,var(--tab-accent) 24%,var(--surface-card)); border-radius:10px;
  background:color-mix(in srgb,var(--tab-accent) 7%,var(--surface-card)); color:var(--tab-accent);
  font-weight:750; min-height:44px; gap:7px; transition:background-color 180ms,box-shadow 180ms,border-color 180ms,transform 180ms;
 }
-.jeelive-tabs [role='tab'].jeelive-tab:hover:not(:disabled),.exam-destinations>a:hover,.filter-tabs>button:hover,.studio-tabs>button:hover,.segmented>button:hover { background:color-mix(in srgb,var(--tab-accent) 13%,var(--surface-card)); border-color:var(--tab-accent); }
-.jeelive-tabs [role='tab'].jeelive-tab[data-state='active'],.exam-destinations>a[aria-current='page'],.filter-tabs>button.active,.studio-tabs>button.active,.segmented>button.active,.ai-review-filters>button[aria-selected='true'] {
+.jeelive-tabs [role='tab'].jeelive-tab:hover:not(:disabled),.exam-destinations a:hover,.filter-tabs button:hover,.studio-tabs button:hover,.segmented button:hover { background:color-mix(in srgb,var(--tab-accent) 13%,var(--surface-card)); border-color:var(--tab-accent); }
+.jeelive-tabs [role='tab'].jeelive-tab[data-state='active'],.exam-destinations a[aria-current='page'],.filter-tabs button.active,.studio-tabs button.active,.segmented button.active,.ai-review-filters button[aria-selected='true'] {
  background:var(--tab-accent); color:#fff; border-color:var(--tab-accent); box-shadow:inset 0 1px #ffffff50,0 4px 10px color-mix(in srgb,var(--tab-accent) 22%,transparent);
 }
-.dark:not(.exam-light) .jeelive-tabs [role='tab'].jeelive-tab:not([data-state='active']),.dark:not(.exam-light) .exam-destinations>a:not([aria-current='page']),.dark:not(.exam-light) .filter-tabs>button:not(.active),.dark:not(.exam-light) .studio-tabs>button:not(.active),.dark:not(.exam-light) .segmented>button:not(.active),.dark:not(.exam-light) .ai-review-filters>button:not([aria-selected='true']) { color:color-mix(in srgb,var(--tab-accent) 40%,#fff); border-color:color-mix(in srgb,var(--tab-accent) 38%,var(--surface-card)); background:color-mix(in srgb,var(--tab-accent) 15%,var(--surface-card)); }
+.dark:not(.exam-light) .jeelive-tabs [role='tab'].jeelive-tab:not([data-state='active']),.dark:not(.exam-light) .exam-destinations a:not([aria-current='page']),.dark:not(.exam-light) .filter-tabs button:not(.active),.dark:not(.exam-light) .studio-tabs button:not(.active),.dark:not(.exam-light) .segmented button:not(.active),.dark:not(.exam-light) .ai-review-filters button:not([aria-selected='true']) { color:color-mix(in srgb,var(--tab-accent) 40%,#fff); border-color:color-mix(in srgb,var(--tab-accent) 38%,var(--surface-card)); background:color-mix(in srgb,var(--tab-accent) 15%,var(--surface-card)); }
 .library-tabs .jeelive-tab>span,.subject-tab-count { background:#ffffffbc; color:var(--tab-accent); border-radius:6px; padding:2px 6px; font-size:11px; line-height:1.3; }
 .dark:not(.exam-light) .library-tabs .jeelive-tab:not([data-state='active'])>span { background:#ffffff16; color:inherit; }
-.filter-tabs>button { font-size:12px; padding:8px 13px; }
-.filter-tabs>button[data-testid='results-filter-incorrect'] { --tab-accent:var(--ui-red); }
-.filter-tabs>button[data-testid='results-filter-correct'] { --tab-accent:var(--ui-green); }
-.filter-tabs>button[data-testid='results-filter-skipped'],.filter-tabs>button[data-testid='results-filter-marked'] { --tab-accent:var(--ui-amber); }
-.filter-tabs>button[data-testid='results-filter-dropped'],.filter-tabs>button[data-testid='results-filter-bonus'] { --tab-accent:#53627D; }
+.filter-tabs button { font-size:12px; padding:8px 13px; }
+.filter-tabs button[data-testid='results-filter-incorrect'] { --tab-accent:var(--ui-red); }
+.filter-tabs button[data-testid='results-filter-correct'] { --tab-accent:var(--ui-green); }
+.filter-tabs button[data-testid='results-filter-skipped'],.filter-tabs button[data-testid='results-filter-marked'] { --tab-accent:var(--ui-amber); }
+.filter-tabs button[data-testid='results-filter-dropped'],.filter-tabs button[data-testid='results-filter-bonus'] { --tab-accent:#53627D; }
 .exam-choice-card,.test-library-card,.exam-history-row,.auth-card,.set-card,.exam-library-row,.import-card,.chart-card { border-radius:var(--ui-radius); box-shadow:var(--ui-shadow); }
 .exam-choice-link { --choice-accent:var(--ui-blue); }
-.exam-choice-link:nth-child(2) { --choice-accent:var(--ui-green); }
-.exam-choice-link:nth-child(3) { --choice-accent:var(--ui-red); }
+.exam-choice-link[data-nav-tone='green'] { --choice-accent:var(--ui-green); }
+.exam-choice-link[data-nav-tone='red'] { --choice-accent:var(--ui-red); }
 .exam-choice-card { border-top:3px solid var(--choice-accent); background:var(--surface-card); }
 .exam-choice-icon { color:#fff; background:var(--choice-accent); border-color:var(--choice-accent); box-shadow:inset 0 1px #ffffff55,0 5px 12px color-mix(in srgb,var(--choice-accent) 20%,transparent); }
 .exam-choice-card h2 { font-weight:800; }
@@ -77,7 +80,7 @@
 .exam-choice-link:hover .exam-choice-card { border-color:var(--choice-accent); }
 .exam-choice-grid { gap:24px; }
 .exam-destinations { padding:8px; gap:8px; border-radius:15px; }
-.exam-destinations>a { display:flex; align-items:center; justify-content:center; padding:12px 22px; }
+.exam-destinations a { display:flex; align-items:center; justify-content:center; padding:12px 22px; }
 .results-page .results-summary { box-shadow:var(--ui-shadow); }
 .results-page .score-card { background:#173C99; box-shadow:inset 0 1px #ffffff30; }
 .results-page .result-stat { background:var(--surface-card); }
@@ -125,6 +128,7 @@
 .focused-solution-card .matched-solution { border:1px solid #BDDFD2; border-left:4px solid #087B68; border-radius:12px; background:#F7FCFA; }
 .focused-solution-card .solution-title { color:#075F50; }
 .focused-solution-card .solution-title h3 { font-size:16px; font-weight:800; letter-spacing:-.3px; }
+.focused-solution-card .solution-title .badge { font-size:11px; line-height:1.45; text-transform:none; padding:5px 8px; background:#E9F6EF; color:#075F50; border-color:#BDDFD2; }
 .focused-solution-card .source-image img,.focused-solution-card .source-canvas-frame { background:#fff; }
 @media (max-width:640px) {
  .simple-header .header-inner { height:76px; gap:8px; }
@@ -141,7 +145,7 @@
  .exam-choice-card { padding:20px; }
  .exam-choice-grid { gap:16px; }
  .exam-destinations { gap:6px; padding:6px; }
- .exam-destinations>a { padding:10px 7px; font-size:12px; }
+ .exam-destinations a { padding:10px 7px; font-size:12px; }
  .results-page .result-destinations { position:static; padding:7px; }
  .result-destinations .jeelive-tabs { gap:6px; }
  .result-destinations .jeelive-tab { min-height:54px; font-size:11px; }
@@ -152,7 +156,7 @@
  .solution-rail-label>span { font-size:10px; }
  .solution-legend { gap:10px; }
  .results-page .filter-tabs { gap:6px; }
- .results-page .filter-tabs>button { font-size:11px; padding:8px 11px; min-height:40px; }
+ .results-page .filter-tabs button { font-size:11px; padding:8px 11px; min-height:40px; }
  .results-page .review-heading { flex-wrap:wrap; gap:8px; }
  .results-page .review-heading h2 { font-size:16px; }
  .focused-solution-card .review-question-toggle { padding:18px 14px; gap:10px; flex-wrap:wrap; }

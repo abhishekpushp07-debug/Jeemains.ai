@@ -56,6 +56,11 @@ export default function Results() {
     setParams(nextParams, {state:location.state});
     requestAnimationFrame(()=>window.scrollTo(0, scrollPositions.current[next] || 0));
   }
+  function changeScoreVersion(version) {
+    const next = new URLSearchParams(params);
+    if (version === 'original') next.delete('score_version'); else next.set('score_version', version);
+    setParams(next, {state:location.state});
+  }
   const scoreVersion = params.get("score_version") || "original";
   const nav = useNavigate();
   const [r, setR] = useState(null);
@@ -87,16 +92,17 @@ export default function Results() {
   const selectedQuestion = params.get('question');
   const subjects = [...new Set(allQuestions.map(q => q.subject))];
   const requestedSubject = params.get('subject');
-  const activeSubject = subjects.includes(requestedSubject) ? requestedSubject : allQuestions.find(q => q.id === selectedQuestion)?.subject || subjects[0] || '';
+  const activeSubject = allQuestions.find(q => q.id === selectedQuestion)?.subject || (subjects.includes(requestedSubject) ? requestedSubject : subjects[0]) || '';
   const qs = allQuestions.filter(q => q.subject === activeSubject && matchesOutcome(q, filter));
   const activeQuestion = qs.find(q => q.id === selectedQuestion) || qs[0];
   useEffect(() => {
     if (!r || view !== 'solutions' || !activeSubject) return;
     const next = new URLSearchParams(params);
     next.set('subject', activeSubject);
+    if (params.has('filter')) next.set('filter', filter);
     if (activeQuestion) next.set('question', activeQuestion.id); else next.delete('question');
     if (next.toString() !== params.toString()) setParams(next, {replace:true, state:location.state});
-  }, [r, view, activeSubject, activeQuestion, params, setParams, location.state]);
+  }, [r, view, activeSubject, activeQuestion, filter, params, setParams, location.state]);
   useEffect(() => {
     if (view !== 'solutions' || !activeQuestion || resultAttemptId !== id) return;
     const key = id + ':' + activeQuestion.id;
@@ -114,7 +120,7 @@ export default function Results() {
     if(!r)return;
     const question=r.questions.find(q=>q.id===qid);
     if(!question)return;
-    const matches=filter==='all'||(filter==='marked'?question.marked:filter==='bonus-section'?question.bonus:question.outcome===filter);
+    const matches = matchesOutcome(question, filter);
     const next=new URLSearchParams(params);next.set('view','solutions');next.set('question',qid);next.set('subject',question.subject);
     if(!matches)next.set('filter','all');
     if(view==='analysis')scrollPositions.current.analysis=window.scrollY;
@@ -245,7 +251,7 @@ export default function Results() {
               className="btn btn-secondary"
               data-testid="score-version-original"
               disabled={scoreVersion === "original"}
-              onClick={() => nav("/results/" + id)}
+              onClick={() => changeScoreVersion('original')}
             >
               Original score
             </button>
@@ -255,14 +261,7 @@ export default function Results() {
                 className="btn btn-secondary"
                 data-testid={"score-version-" + g.key_version}
                 disabled={scoreVersion === g.id}
-                onClick={() =>
-                  nav(
-                    "/results/" +
-                      id +
-                      "?score_version=" +
-                      encodeURIComponent(g.id),
-                  )
-                }
+                onClick={() => changeScoreVersion(g.id)}
               >
                 Key version {g.key_version} ·{" "}
                 {new Date(g.created_at * 1000).toLocaleDateString()}
