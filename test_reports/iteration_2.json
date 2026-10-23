@@ -1,0 +1,50 @@
+{
+  "summary": "Iteration 2: I tested the 30-card Rapid Fire sessions, the Rapid Fire Duel backend (create random/invite, join, get, answer, cancel, history, winner, answer hiding) and the frontend (Home artwork tiles and badges, Rapid tab duel card, solo 'Card 1 of 30', full invite duel with two browser contexts for 9000000001 and 9000000002 through to the result screen, random match, the leave sheet and the auto timeout). Backend: 14/14 pytest pass. Frontend: all requested flows work end to end. One requested change is missing: the chapter chips still wrap and are not a horizontal scroller. There are also two duel robustness gaps (a player who leaves, or a ghost random match, leaves the opponent stuck for about 11 minutes, and a failed answer POST locks the card).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/duels/{id}/answer", "issue": "The tiebreak uses the client-supplied 'ms' value with no server-side per-card timing. A client can send ms=0 to always win ties. Consider measuring time on the server (server time at the previous answer or at start_at, compared with now)."},
+      {"endpoint": "Duel lifecycle", "issue": "There is no forfeit or abandon endpoint. If one player leaves mid-duel (duel-exit-confirm only calls router.back()), the duel stays 'ready' until ends_at = start + 30*22 + 30 s (about 11.5 min). The remaining player sits on duel-wait-opponent for that long."},
+      {"endpoint": "POST /api/rf/duels (random)", "issue": "No presence check. A waiting random duel whose creator closed or killed the app without cancelling (e.g. hardware back or app kill skips leave()) can still be matched for up to 120 s, which pairs a real student with an opponent who is gone. Add last_seen (updated on GET poll) and only match when last_seen is under ~5 s old."},
+      {"endpoint": "POST /api/rf/duels", "issue": "The same user can create several 'waiting' random duels with different request_ids. Invite-mode duels never expire, because WAIT_SECONDS only applies to random. The 'code' index is not unique (collisions are unlikely but not guarded)."},
+      {"endpoint": "POST /api/rf/duels/{id}/answer", "issue": "An idempotent replay after the duel has finished returns 409 instead of the stored outcome, because the status check runs before the replay check. A retried last-card POST that races the finish gets an error."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Rapid tab chapter chips", "issue": "The chips are NOT a horizontal scroller. The container is still View flexDirection row + flexWrap 'wrap' (app/(tabs)/rapid.tsx:60). The Physics list wraps across many rows, which pushes rf-start-button to y≈1162 and rf-duel-card to y≈1368 on a 390x844 viewport.", "testID": "rf-chapter-mixed", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Duel answer network failure", "issue": "The option onPress calls setChoice(k) and then send(). If send() throws, only the error is shown: choice stays set, so the options and skip stay disabled and the timer interval stops (choice !== null). The card is stuck with no retry. Reset the choice or retry on failure. Reference: app/rapid/duel.tsx:108-121,203", "affected_testIDs": ["duel-option-0", "duel-skip"]},
+      {"flow": "Leave duel", "issue": "duel-exit-confirm only does router.back(). The opponent is never told and waits about 11 minutes. The rapid tab has no way to resume an in-progress duel. Reference: app/rapid/duel.tsx:277", "affected_testIDs": ["duel-exit-confirm", "duel-wait-opponent"]}
+    ],
+    "design_issues": [
+      {"screen": "Duel result", "issues": ["When scores are equal and the winner is decided on time (e.g. 5 · 5), the screen says 'You won!' / 'Good fight!' with no 'won on speed' hint, which is confusing.", "The score line 'Player ··0001 5 · 5 Player ··0002' is hard to scan. Consider stacked name and score."]}
+    ],
+    "react_native_issues": [
+      {"component": "expo-router/unstable-native-tabs", "issue": "Metro warns that `expo-router/unstable-native-tabs` is deprecated; use `expo-router/native-tabs`. Reference: /app/frontend/app/(tabs)/_layout.tsx:4"}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_duels.py", "/app/backend/tests/test_rf_and_proxy.py", "/app/test_reports/pytest/pytest_results_iter2.xml"],
+  "action_items": [
+    "Make the chapter chips a horizontal ScrollView (horizontal, showsHorizontalScrollIndicator={false}) in app/(tabs)/rapid.tsx:60, as requested",
+    "In duel.tsx send(): on failure reset choice to null (or retry automatically) so the card is not stuck",
+    "Add a forfeit endpoint (POST /rf/duels/{id}/leave marks the player done) and call it from duel-exit-confirm. Optionally settle a duel when the opponent's last_seen is over 30 s old",
+    "Add presence (last_seen) to waiting random duels and only match fresh ones",
+    "Measure duel answer time on the server instead of trusting client ms for the tiebreak",
+    "Show a 'won on speed' hint on the result screen when scores are tied",
+    "Change the import to expo-router/native-tabs"
+  ],
+  "critical_code_review_comments": [
+    "Answers and explanations are correctly hidden from clients until the duel finishes. The opponent's answers array is hidden and uid is only revealed after finish. Verified.",
+    "Answers are sequential with an atomic $size guard. Out-of-order answers return 409 and replay is idempotent. Verified.",
+    "duel.tsx line 146-147 computes waitedS and never uses it (dead code)."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_duels.py"],
+  "success_rate": {"backend": "100% (14/14 pytest)", "frontend": "~92% (all flows pass; chapter chip scroller not implemented)"},
+  "seed_data_creation": "Created TEST_ duels and rf sessions for both test users (uid A db0c62b8-..., uid B 9e552909-8b3a-4337-a176-aa00fe068a50). No jeelive attempts created.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login 9000000002 -> uid 9e552909-8b3a-4337-a176-aa00fe068a50 (the /api/jl/auth/me response is under 'data'). Two-context Playwright works via page.context.browser.new_context(). Screenshots must be .jpg when quality is set. The pytest.ini uses xdist. Verified in UI: invite duel (code 6 chars), join, countdown, play, versus updates, result for both; random match pairs the two users; 20 s auto-timeout advances the card; leave sheet returns to /rapid.",
+  "rca_of_issue": "Chapter chips: rapid.tsx still uses a flexWrap View instead of a horizontal ScrollView. Stuck duel after leave: there is no server-side forfeit, and settle() only finishes when all players are done or ends_at has passed."
+}

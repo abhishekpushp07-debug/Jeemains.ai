@@ -23,22 +23,21 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
     setDataKey(key);
     setLoading(!memory.has(key));
     (async () => {
+      // Network starts immediately; the persisted copy only paints if the network hasn't answered yet.
+      let fresh = false;
       if (!memory.has(key) && persist) {
-        const raw = await storage.getItem<string | null>("cache." + key, null);
-        if (raw && alive) {
+        storage.getItem<string | null>("cache." + key, null).then((raw) => {
+          if (!raw || !alive || fresh) return;
           try {
             const v = JSON.parse(raw);
-            memory.set(key, v);
             setData(v);
             setLoading(false);
           } catch {}
-        }
-      } else if (memory.has(key)) {
-        setData(memory.get(key));
-        setLoading(false);
+        });
       }
       try {
         const v = await fetchRef.current(controller.signal);
+        fresh = true;
         if (!alive) return;
         memory.set(key, v);
         setData(v);
@@ -63,3 +62,9 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
 export const invalidate = (prefix: string) => {
   for (const k of [...memory.keys()]) if (k.startsWith(prefix)) memory.delete(k);
 };
+
+// Warm the in-memory cache before the user navigates (no UI state involved).
+export function prefetch<T>(key: string, fetcher: () => Promise<T>) {
+  if (memory.has(key)) return;
+  fetcher().then((v) => { memory.set(key, v); storage.setItem("cache." + key, JSON.stringify(v)); }).catch(() => {});
+}

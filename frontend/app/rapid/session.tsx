@@ -4,7 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { FadeIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
-import Svg, { Circle } from "react-native-svg";
+import { Ring } from "@/src/components/Ring";
 import { useAuth } from "@/src/auth";
 import { rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
@@ -15,20 +15,6 @@ const LIMIT = 20000;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
 type RCard = { id: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string };
 type Res = { card_id: string; outcome: "correct" | "incorrect" | "skipped" | "timed_out"; choice: number | null; ms: number };
-
-function Ring({ left, color }: { left: number; color: string }) {
-  const r = 22, c = 2 * Math.PI * r, frac = Math.max(0, left / LIMIT);
-  const urgent = left < 5000;
-  return (
-    <View testID="rf-timer" accessibilityLabel={`${Math.ceil(left / 1000)} seconds left`} style={{ width: 56, height: 56, alignItems: "center", justifyContent: "center" }}>
-      <Svg width={56} height={56} style={{ position: "absolute", transform: [{ rotate: "-90deg" }] }}>
-        <Circle cx={28} cy={28} r={r} stroke={colors.border} strokeWidth={5} fill="none" />
-        <Circle cx={28} cy={28} r={r} stroke={urgent ? colors.error : color} strokeWidth={5} fill="none" strokeDasharray={`${c}`} strokeDashoffset={c * (1 - frac)} strokeLinecap="round" />
-      </Svg>
-      <T w="heavy" size={16} color={urgent ? colors.error : colors.onSurface}>{Math.ceil(left / 1000)}</T>
-    </View>
-  );
-}
 
 function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard[]; onRepeat: (ids: string[]) => void; onAgain: () => void; onExit: () => void }) {
   const [review, setReview] = useState(false);
@@ -109,7 +95,7 @@ export default function RapidSession() {
     setError("");
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
-      : rf("/sessions", uid, { method: "POST", body: { subject: p.subject || "Physics", chapter: p.chapter || null, count: 10, request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
+      : rf("/sessions", uid, { method: "POST", body: { subject: p.subject || "Physics", chapter: p.chapter || null, count: 30, request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
     run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else setError(e.message); });
     return () => { alive = false; };
@@ -206,8 +192,8 @@ export default function RapidSession() {
         {card && !done ? <Ring left={locked ? (timedOut ? 0 : left) : left} color={tint} /> : null}
       </View>
       {card && !done ? (
-        <View style={{ flexDirection: "row", gap: 4, paddingHorizontal: space.lg, marginBottom: space.md }}>
-          {cards.map((c, k) => <View key={c.id} style={{ flex: 1, height: 4, borderRadius: 2, backgroundColor: k < i ? tint : k === i ? colors.onSurface : colors.border }} />)}
+        <View style={{ flexDirection: "row", gap: 2, paddingHorizontal: space.lg, marginBottom: space.md }}>
+          {cards.map((c, k) => <View key={c.id} style={{ flex: 1, height: 4, borderRadius: 1, backgroundColor: k < i ? tint : k === i ? colors.onSurface : colors.border }} />)}
         </View>
       ) : null}
 

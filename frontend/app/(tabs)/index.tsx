@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Image } from "expo-image";
@@ -6,8 +6,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
-import { api } from "@/src/api/client";
-import { useCached } from "@/src/useCached";
+import { api, rf } from "@/src/api/client";
+import { prefetch, useCached } from "@/src/useCached";
 import { Card, Icon, Notice, Press, T } from "@/src/components/ui";
 import { SeriesBanner, Series } from "@/src/components/SeriesBanner";
 import { ExamTile, TileKind } from "@/src/components/ExamTile";
@@ -29,6 +29,19 @@ export default function Home() {
   const series = useCached<Series>("series", (signal) => api("/series/all-india-jee", { signal }));
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
   const current = progress.data?.items?.[0];
+  useEffect(() => {
+    if (!user) return;
+    // Warm the next likely screens so they open instantly.
+    const t = setTimeout(() => {
+      for (const slug of ["jee-main", "bitsat"]) {
+        const path = `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind: "chapters", subject: "Physics", q: "", page: "1" })}`;
+        prefetch(`u.${user.id}.${path}`, () => api(path));
+      }
+      prefetch("rf.catalog", () => rf("/catalog", user.id));
+      prefetch(`u.${user.id}.streak`, () => api("/series/all-india-jee/streak"));
+    }, 400);
+    return () => clearTimeout(t);
+  }, [user]);
   const bottom = usesNativeTabs ? insets.bottom : 0;
 
   return (
@@ -89,8 +102,8 @@ export default function Home() {
             <Icon name="lightning-bolt" size={28} color={colors.onBrandPrimary} />
           </View>
           <View style={{ flex: 1 }}>
-            <T w="heavy" size={16}>Rapid Fire · 3-minute burst</T>
-            <T size={12} color={colors.muted}>10 formula & concept cards · 20 seconds each</T>
+            <T w="heavy" size={16}>Rapid Fire · Solo or Duel</T>
+            <T size={12} color={colors.muted}>30 formula cards · 20 s each · challenge a friend</T>
           </View>
           <Icon name="chevron-right" size={24} color={colors.onSurface} />
         </LinearGradient>

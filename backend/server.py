@@ -138,8 +138,8 @@ class SessionCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     subject: Literal["Physics", "Chemistry", "Mathematics"]
     chapter: Optional[str] = Field(default=None, max_length=80)
-    count: int = Field(default=10, ge=1, le=10)
-    card_ids: Optional[List[str]] = Field(default=None, max_length=10)
+    count: int = Field(default=30, ge=1, le=30)
+    card_ids: Optional[List[str]] = Field(default=None, max_length=30)
     request_id: str = Field(min_length=8, max_length=64)
 
 
@@ -152,7 +152,7 @@ class CardResult(BaseModel):
 
 class SessionComplete(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    results: List[CardResult] = Field(max_length=10)
+    results: List[CardResult] = Field(max_length=30)
 
 
 class RfSession(BaseDocument):
@@ -232,10 +232,10 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
     uid = rf_user(x_rf_user)
     existing = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
     if existing:
-        cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(10)]
+        cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(30)]
     else:
         if data.card_ids:
-            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "subject": data.subject}).to_list(10)
+            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "subject": data.subject}).to_list(30)
             mode = "repeat_missed"
         else:
             match = {"subject": data.subject, **({"chapter": data.chapter} if data.chapter else {})}
@@ -260,7 +260,7 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
         raise HTTPException(404, "Session not found.")
     if s.status == "completed":
         return s.model_dump(exclude={"mongo_id", "user_id"})
-    cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(10)}
+    cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)}
     seen, rows = set(), []
     for r in data.results:
         if r.card_id not in cards or r.card_id in seen:
@@ -310,11 +310,13 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
     s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid, "user_id": uid}))
     if not s:
         raise HTTPException(404, "Session not found.")
-    cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": s.card_ids}}).to_list(10)]
+    cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": s.card_ids}}).to_list(30)]
     by_id = {c.id: c for c in cards}
     return {**s.model_dump(exclude={"mongo_id", "user_id"}), "cards": [public_card(by_id[i]) for i in s.card_ids if i in by_id]}
 
 
+from duels import make_router as make_duels  # noqa: E402
+api.include_router(make_duels(db, rf_user, public_card))
 app.include_router(api)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
@@ -333,6 +335,10 @@ async def startup():
     await db.rf_sessions.create_index([("user_id", 1), ("request_id", 1)], unique=True)
     await db.rf_sessions.create_index("id", unique=True)
     await db.jl_jars.create_index("sid", unique=True)
+    await db.rf_duels.create_index("id", unique=True)
+    await db.rf_duels.create_index("code")
+    await db.rf_duels.create_index([("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])
+    await db.rf_duels.create_index("players.uid")
     asyncio.create_task(card_sync_loop())
 
 

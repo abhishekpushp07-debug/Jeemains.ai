@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { useAttempt } from "@/src/useAttempt";
+import { assetDataUri } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
 import { AssetImage } from "@/src/components/AssetImage";
 import { Button, Chip, ErrorBox, Icon, IconName, Notice, Press, Sheet, Skeleton, T, tap } from "@/src/components/ui";
@@ -44,6 +45,12 @@ export default function Player() {
   const q = questions.find((x: any) => x.id === qid) || questions[0];
   useEffect(() => { if (q && !qid) setQid(q.id); }, [q, qid]);
   useEffect(() => { if (q) { A.visit(q.id); setSubject(q.subject || "General"); } }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // Prefetch the next question's original image so Next feels instant.
+    const i = questions.findIndex((x: any) => x.id === q?.id);
+    const nq = questions[i + 1];
+    if (nq?.asset_count) assetDataUri(`/attempts/${id}/questions/${nq.id}/asset/question/0`).catch(() => {});
+  }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => { setSheet("exit"); return true; });
     return () => sub.remove();

@@ -33,6 +33,12 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
   - End: summary, missed-card review, repeat-missed, history.
 - Mission page with Share.
 
+## Iteration 3 (2026-10-23)
+- Home tiles: exact supplied 3D artwork (upscaled crops) + HOT / 100% AI pills top-right, 24px radius, shadow, press scale.
+- Rapid Fire: 30-card sessions (default); horizontal chapter chips.
+- Rapid Fire Duels (backend/duels.py, app/rapid/duel.tsx): random matchmaking (only recently-active hosts), WhatsApp invite code + join, same 30 cards, answers hidden until finish, server-measured tie-break time, forfeit, invite expiry 30 min, history/record.
+- Speed: network fetch starts in parallel with cache read; Home prefetches likely next screens; player prefetches next question image.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.
