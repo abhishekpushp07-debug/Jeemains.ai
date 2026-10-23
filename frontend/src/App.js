@@ -20,6 +20,7 @@ const Auth = lazy(() => import("./features/Auth"));
 const Exams = lazy(() => import("./features/Exams"));
 const Profile = lazy(() => import('./features/Profile'));
 import './learning-workspace.css';
+import './bitsat-branches.css';
 import './live-series.css';
 import './series-streak.css';
 import './exam-light.css';

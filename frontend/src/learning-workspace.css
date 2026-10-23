@@ -12,11 +12,20 @@
 .bold-exam-card:after { content:''; border:1px solid var(--exam-line); border-radius:50%; width:260px; height:260px; position:absolute; top:-140px; right:-95px; z-index:0; pointer-events:none; box-shadow:0 0 0 36px #ffffff04,0 0 0 72px #ffffff03; }
 .bold-exam-card:hover { transform:translateY(-5px); border-color:var(--exam-accent); box-shadow:inset 0 1px 0 #ffffff45,0 22px 42px #0C183532; }
 .bold-exam-card:hover:before,.bold-exam-card:focus-within:before { transform:translateX(55%); }
-.exam-tone-jee-main { --exam-colour:#991B1B; --exam-accent:#FFE0E0; --exam-muted:#FFE8E8; --exam-line:#FCA5A580; --exam-button:#FFF1F2; --exam-button-ink:#7F1D1D; }
-.exam-tone-bitsat { --exam-colour:#C2410C; --exam-accent:#FFEDD5; --exam-muted:#FFF4E6; --exam-line:#FDBA7490; --exam-button:#FFEDD5; --exam-button-ink:#7C2D12; }
-.exam-tone-jee-main,.exam-tone-bitsat { background-image:linear-gradient(135deg,#FFFFFF1D 0%,#FFFFFF06 36%,transparent 37%),linear-gradient(0deg,#00000020 0%,transparent 60%); }
-.exam-tone-jee-main:before,.exam-tone-bitsat:before { background:linear-gradient(110deg,transparent 42%,#FFFFFF15 48%,#FFFFFF38 50%,#FFFFFF15 52%,transparent 58%); }
-.exam-tone-jee-main a:focus-visible,.exam-tone-bitsat a:focus-visible { outline:3px solid #FFFFFF; outline-offset:4px; }
+.exam-tone-jee-main { --exam-colour:#B00000; --exam-accent:#FFE4E4; --exam-muted:#FFEAEA; --exam-line:#FF9494A0; --exam-button:#FFFFFF; --exam-button-ink:#8A0000; }
+.exam-tone-bitsat { --exam-colour:#FF9933; --exam-accent:#542600; --exam-muted:#4A230B; --exam-line:#9E4D1770; --exam-button:#3D1D0A; --exam-button-ink:#FFF7ED; color:#2B1600; }
+.bold-exam-card.exam-tone-bitsat h2,.bold-exam-card.exam-tone-bitsat h2 a { color:#2B1600; }
+.bold-exam-card.exam-tone-bitsat .exam-primary:hover { background:#2A1406; color:#FFFFFF; }
+.exam-tone-jee-main,.exam-tone-bitsat { background-image:linear-gradient(140deg,#FFFFFF20 0%,#FFFFFF05 34%,transparent 35%),linear-gradient(0deg,#0000000A 0%,transparent 60%); }
+.exam-tone-jee-main:before,.exam-tone-bitsat:before { background:linear-gradient(110deg,transparent 40%,#FFFFFF16 46%,#FFFFFF78 50%,#FFFFFF16 54%,transparent 60%); animation:exam-mobile-shine 4.8s ease-in-out infinite; transition:none; }
+.shine-paused .exam-tone-jee-main:before,.shine-paused .exam-tone-bitsat:before { animation-play-state:paused; }
+.exam-tone-jee-main a:focus-visible { outline:3px solid #FFFFFF; outline-offset:4px; }
+.exam-tone-bitsat a:focus-visible { outline:3px solid #3D1D0A; outline-offset:4px; }
+.exam-card-finish-control { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:30px; }
+.exam-card-finish-control>span { display:flex; align-items:center; gap:7px; font:11px 'Roboto Mono',monospace; color:var(--text-muted); letter-spacing:.5px; }
+.exam-shine-toggle { display:flex; align-items:center; gap:5px; min-height:36px; padding:8px 10px; border:1px solid var(--line); border-radius:20px; font-size:11px; color:var(--ink); background:var(--surface-card); flex-shrink:0; }
+.exam-cards-wrap .bold-exam-grid { margin-top:14px; }
+@keyframes exam-mobile-shine { 0% { transform:translateX(-55%); opacity:0; } 8% { transform:translateX(-55%); opacity:1; } 42% { transform:translateX(55%); opacity:1; } 50%,100% { transform:translateX(55%); opacity:0; } }
 .exam-tone-comedk { --exam-colour:#101115; --exam-accent:#E5D5AF; --exam-muted:#CDD0DA; --exam-line:#DDE3EE40; --exam-button:#ECEEF2; --exam-button-ink:#101115; }
 .bold-exam-top { display:flex; justify-content:space-between; gap:12px; align-items:center; color:var(--exam-accent); }
 .bold-exam-top>svg { width:56px; height:56px; padding:11px; background:#ffffff09; border:1px solid var(--exam-line); border-radius:16px; box-shadow:inset 0 1px 0 #ffffff1a; }
@@ -252,7 +261,7 @@
  .header-my-tests { padding:7px!important; font-size:11px!important; gap:4px!important; }
  .header-my-tests svg { display:none; }
 }
-@media(prefers-reduced-motion:reduce) { .bold-exam-card,.bold-exam-card:before,.meter-shortcut,.exam-primary { transition:none; }.bold-exam-card:before { display:none; }.bold-exam-card:hover,.bold-exam-card .exam-primary:hover { transform:none; } }
+@media(prefers-reduced-motion:reduce) { .bold-exam-card,.bold-exam-card:before,.meter-shortcut,.exam-primary { transition:none; }.bold-exam-card:before { display:none; animation:none; }.exam-shine-toggle { display:none; }.bold-exam-card:hover,.bold-exam-card .exam-primary:hover { transform:none; } }
 
 /* Use semantic classes, never broad span rules: preview wrappers must inherit numeral sizes. */
 .accuracy-gauge strong span,.confidence-facts strong span,.comparison-row strong span,.comparison-deltas strong span,.set-detail .instruction-facts strong span { font:inherit; color:inherit; letter-spacing:inherit; line-height:inherit; }

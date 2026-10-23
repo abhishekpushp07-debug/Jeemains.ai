@@ -70,6 +70,9 @@ def compatible_paper(a):
 @router.get('/{id}/historical-rank')
 async def historical_rank(id: str, score_version: str = 'original', u=Depends(current)):
     a = await released(id, u)
+    if a['exam'] == 'BITSAT':
+        from .bitsat_branches import attempt_matches
+        return attempt_matches(a, score_version)
     reference = REFERENCES.get(a['exam'])
     dataset = DATASETS.get(a['exam'])
     compatible = score_version == 'original' and compatible_paper(a)

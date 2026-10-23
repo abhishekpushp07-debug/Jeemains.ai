@@ -1,104 +1,94 @@
 {
-  "project_title": "JEELIVE.AI Learning Dashboard - Specific Exam Card Glossy Red & Glossy Orange Refinement",
-  "brand_identity": {
-    "brand_name": "JEELIVE.AI",
-    "positioning": "High-Performance Competitive Exam Preparation Platform for JEE Main, BITSAT, & COMEDK",
-    "archetype": "Performance Pro & Old Money Tech Fusion",
-    "emotional_tone": "Precision, Elite Academic Confidence, High-Contrast Energy"
-  },
-  "scope": {
-    "target_files": [
-      "/app/frontend/src/learning-workspace.css"
-    ],
-    "strictly_modified_classes": [
-      ".exam-tone-jee-main",
-      ".exam-tone-bitsat"
-    ],
-    "strictly_untouched_classes": [
-      ".exam-tone-comedk",
-      "flagship All India card (#0B2D80)",
-      "streak tracker components"
-    ]
-  },
-  "color_palette_system": {
-    "flagship_card_all_india": {
-      "theme_name": "All India Flagship Blue (Unchanged)",
-      "primary_color": "#0B2D80",
-      "background_gradient": "linear-gradient(135deg, #070F1E 0%, #0B1B36 40%, #102A56 80%, #0F172A 100%)",
-      "status": "APPROVED_UNCHANGED"
-    },
-    "jee_main_exam_choice_card": {
-      "selector": ".exam-tone-jee-main",
-      "theme_name": "Glossy Red (Ruby Crimson Gloss)",
-      "background_gradient": "linear-gradient(135deg, #450A0A 0%, #7F1D1D 45%, #991B1B 80%, #360707 100%)",
-      "surface_base": "#7F1D1D",
-      "border_stroke": "1px solid rgba(248, 113, 113, 0.4)",
-      "border_glow": "0 0 24px rgba(239, 68, 68, 0.35)",
-      "shine_sweep_gradient": "linear-gradient(115deg, transparent 25%, rgba(254, 202, 202, 0.35) 48%, rgba(255, 255, 255, 0.6) 52%, rgba(239, 68, 68, 0.35) 75%)",
-      "accent_primary": "#EF4444",
-      "accent_secondary": "#DC2626",
-      "text_primary": "#FEF2F2",
-      "text_secondary": "#FCA5A5",
-      "badge_background": "rgba(220, 38, 38, 0.2)",
-      "badge_text": "#FEE2E2"
-    },
-    "bitsat_exam_choice_card": {
-      "selector": ".exam-tone-bitsat",
-      "theme_name": "Glossy Orange (Radiant Amber Blaze)",
-      "background_gradient": "linear-gradient(135deg, #431407 0%, #7C2D12 45%, #C2410C 85%, #270B04 100%)",
-      "surface_base": "#7C2D12",
-      "border_stroke": "1px solid rgba(251, 146, 60, 0.45)",
-      "border_glow": "0 0 24px rgba(249, 115, 22, 0.38)",
-      "shine_sweep_gradient": "linear-gradient(115deg, transparent 25%, rgba(253, 186, 116, 0.35) 48%, rgba(255, 237, 213, 0.6) 52%, rgba(249, 115, 22, 0.35) 75%)",
-      "accent_primary": "#F97316",
-      "accent_secondary": "#EA580C",
-      "text_primary": "#FFF7ED",
-      "text_secondary": "#FDBA74",
-      "badge_background": "rgba(234, 88, 12, 0.2)",
-      "badge_text": "#FFEDD5"
-    },
-    "comedk_exam_choice_card": {
-      "selector": ".exam-tone-comedk",
-      "theme_name": "Premium Black (Obsidian Platinum - Unchanged)",
-      "background_gradient": "linear-gradient(145deg, #090A0F 0%, #12141C 50%, #050608 100%)",
-      "status": "APPROVED_UNCHANGED"
+  "project": "JEELIVE.AI / Tejas Learning Platform",
+  "version": "2026.10",
+  "design_context": "MARKETING_AND_LEARNING_DASHBOARD",
+  "theme_strategy": {
+    "default_mode": "light",
+    "exam_cards_palette_corrections": {
+      "jee_main": {
+        "slug": "jee-main",
+        "card_background": "linear-gradient(135deg, #7F1D1D 0%, #991B1B 50%, #B91C1C 100%)",
+        "card_border": "#DC2626",
+        "card_text": "#FFFFFF",
+        "card_eyebrow": "#FECACA",
+        "card_description": "#FEE2E2",
+        "badge_bg": "#450A0A",
+        "badge_text": "#FCA5A5",
+        "shine_effect": {
+          "enabled": true,
+          "mobile_always_visible": true,
+          "mobile_animation": "sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite",
+          "gradient": "linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.35) 55%, transparent 80%)",
+          "pause_on_hover": true,
+          "respects_reduced_motion": true
+        }
+      },
+      "bitsat": {
+        "slug": "bitsat",
+        "card_background": "linear-gradient(135deg, #C2410C 0%, #EA580C 50%, #FF9933 100%)",
+        "card_border": "#F97316",
+        "card_text": "#1E1B18",
+        "card_eyebrow": "#431407",
+        "card_description": "#271105",
+        "badge_bg": "#FFEDD5",
+        "badge_text": "#7C2D12",
+        "shine_effect": {
+          "enabled": true,
+          "mobile_always_visible": true,
+          "mobile_animation": "sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.75s",
+          "gradient": "linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.45) 45%, rgba(255, 255, 255, 0.65) 50%, rgba(255, 255, 255, 0.45) 55%, transparent 80%)",
+          "pause_on_hover": true,
+          "respects_reduced_motion": true
+        }
+      },
+      "all_india": {
+        "slug": "all-india",
+        "card_background": "#1E3A8A",
+        "status": "APPROVED_PRESERVE"
+      },
+      "comedk": {
+        "slug": "comedk",
+        "card_background": "#0F172A",
+        "status": "APPROVED_PRESERVE"
+      }
     }
   },
   "typography": {
-    "heading_font_family": "'Plus Jakarta Sans', 'Outfit', 'Cabinet Grotesk', sans-serif",
-    "body_font_family": "'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-    "rules": {
-      "forbid_inter_for_headings": true,
-      "h1_max_size": "text-4xl sm:text-5xl lg:text-6xl",
-      "h2_section_size": "text-2xl sm:text-3xl lg:text-4xl",
-      "h3_card_header_size": "text-xl sm:text-2xl",
-      "letter_spacing_headers": "tracking-tight (-0.025em)",
-      "letter_spacing_labels": "tracking-widest (0.15em) uppercase"
+    "font_families": {
+      "ui": "Figtree, sans-serif",
+      "mono": "Roboto Mono, monospace"
+    },
+    "hierarchy": {
+      "h1": "text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm text-slate-500",
+      "micro": "text-xs font-mono uppercase tracking-wider"
     }
   },
-  "visual_enhancers": {
-    "glossy_card_reflection": {
-      "css_keyframes": "@keyframes shiningSweep { 0% { transform: translateX(-150%) rotate(25deg); } 100% { transform: translateX(150%) rotate(25deg); } }",
-      "sweep_duration": "4s linear infinite",
-      "glassmorphism": "backdrop-blur-xl (16px - 24px) with backdrop-saturate-150"
+  "bitsat_branch_match_module": {
+    "location": "/app/frontend/src/components/results/LearningMeters.js (or new component embedded in Results 5-tab workspace under 'Real-exam rank')",
+    "behavior": "Converts BITSAT score input into top 3 distinct program/campus matches using official historical BITSAT cutoffs (Pilani, Goa, Hyderabad). Shows maximum score benchmark 390.",
+    "ui_specs": {
+      "score_input": "Numeric input 0-390 with clear validation and default score populate from attempt",
+      "match_cards": "Top 3 highest historical cutoff branches below candidate score, with clear campus badge (Pilani / Goa / Hyderabad), branch code, cutoff score, and margin",
+      "disclaimer": "Includes official cutoff source citation (2025-2027 official session cutoffs) and explicit 'No admission guarantee' disclaimer as required by regulations",
+      "distinct_branches_rule": "Ensures 3 distinct degree programs across campuses rather than duplicate branches"
     }
-  },
-  "accessibility_and_contrast": {
-    "wcag_level": "WCAG AA (minimum 4.5:1 ratio for text over glossy red and glossy orange backgrounds)",
-    "focus_states": "ring-2 ring-red-400 ring-offset-2 on JEE Main card; ring-2 ring-orange-400 ring-offset-2 on BITSAT card",
-    "reduced_motion": "Respect @media (prefers-reduced-motion: reduce) by disabling animated shine translation"
   },
   "instructions_to_main_agent": [
-    "1. In /app/frontend/src/learning-workspace.css, refine .exam-tone-jee-main to use a rich Glossy Red palette (#991B1B / #7F1D1D) with high-contrast readable white text (#FEF2F2) and ruby glowing borders.",
-    "2. Refine .exam-tone-bitsat to use Glossy Orange palette (#EA580C / #C2410C) with warm radiant amber glow and orange-tinted contrast text (#FFF7ED).",
-    "3. Keep .exam-tone-comedk (Obsidian Black) and Flagship All India Blue (#0B2D80) completely untouched as requested by the user.",
-    "4. Ensure layout, links, exam rules, and streak trackers remain 100% intact.",
-    "5. Ensure all interactive card elements have appropriate data-testid attributes."
+    "1. Update JEE Main exam choice cards in ExamNavigation.js / CSS to use authentic Blood Red styling (#7F1D1D to #B91C1C gradient) with dark red accents and high contrast white text.",
+    "2. Update BITSAT exam choice cards to actual Tricolour Saffron Orange (#FF9933 / #EA580C) with readable dark ink typography (#1E1B18) to avoid muted brown tones.",
+    "3. Apply periodic CSS shine sweep animations on both mobile and desktop viewports, pausing on hover and respecting prefers-reduced-motion.",
+    "4. In Results view ('rank' tab for BITSAT exam attempts), render the Top 3 Branch Matches Panel allowing student score input, showing top 3 distinct B.E. programs with campus badges, cutoffs out of 390, and legal disclaimer.",
+    "5. Ensure all interactive and key data elements carry kebab-case data-testid attributes."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
-    "no_ai_slop": "Avoid generic centered layouts and cheap gradients. Use crisp borders, layered z-indices, and optical alignment.",
-    "no_universal_transition": "Never use transition: all. Use targeted CSS properties like transition-transform or transition-colors.",
-    "testing_attributes": "All interactive and key informational elements MUST include data-testid attributes in kebab-case.",
-    "no_transparent_overlays": "Never use pure transparent backgrounds for headers or cards where content scrolls underneath; use backdrop-blur and glassmorphism styling."
-  }
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Maintain high contrast APCA / WCAG AA standards across both dark red and saffron backgrounds.",
+    "Never rely solely on hover transforms for mobile feedback; use keyframe animations with touch-friendly controls.",
+    "Ensure direct parent-child grid containment and no universal transitions break animation transforms.",
+    "Include explicit testids on all new form inputs, branch cards, score meters, and exam cards."
+  ]
 }

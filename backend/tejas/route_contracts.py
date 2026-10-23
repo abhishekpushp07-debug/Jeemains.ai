@@ -16,6 +16,7 @@ SPEC = {
     'live_series.assign': ('owner_published_fresh_paper_future_day', 'control', 'revision_CAS_unique_date'),
     'live_series.unassign': ('owner_future_day_only', 'control', 'revision_CAS'),
     'learning_progress.journey': ('attempt_owner_original_released_progress', 'normal', 'read'),
+    'bitsat_branches.branch_matches': ('authenticated_score_lookup_no_private_record', 'normal', 'read_official_cutoff_snapshot'),
     'historical_rank.historical_rank': ('attempt_owner_released_evidence_gate', 'normal', 'read_no_invented_rank'),
     'my_tests.save_state': ('own_saved_paper_only', 'normal', 'read'),
     'my_tests.save_paper': ('current_published_visible_test_own_bookmark', 'normal', 'unique_user_set_no_attempt'),

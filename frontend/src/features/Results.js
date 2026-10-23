@@ -31,6 +31,7 @@ import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalytic
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
 import { ReportButton } from "../components/ReportButton";
 import { MockSectionScores } from '../components/results/MockSectionScores';
+import {BitsatBranchView} from '../components/results/BitsatBranchView';
 import {useLearningMeters,MeterShortcuts,JourneyView,ConfidenceView,HistoricalRankView} from '../components/results/LearningMeters';
 import { BarChart3,TrendingUp,Target,Trophy,BookOpen } from 'lucide-react';
 import { ResultAnalysis } from '../components/results/ResultAnalysis';
@@ -297,9 +298,9 @@ export default function Results() {
           <small>Worth another look</small>
         </div>
       </div>
-      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank','Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
+      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank',r.exam==='BITSAT'?'Branch matches':'Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
       <section className="result-view-panel" hidden={view!=='analysis'} data-testid="result-analysis-panel" aria-label="Result analysis">
-      <MeterShortcuts journey={meters.journey} rank={meters.rank} onView={changeView}/>
+      <MeterShortcuts exam={r.exam} journey={meters.journey} rank={meters.rank} onView={changeView}/>
       <MockSectionScores s={s} />
       <ResultAnalysis r={r} cohort={extras.cohort} peer={extras.peer} onOpen={openQuestion} />
       <div className="result-metrics">
@@ -384,7 +385,7 @@ export default function Results() {
       </section>
       {view==='progress'&&<JourneyView data={meters.journey} retry={meters.retry}/>}
       {view==='accuracy'&&<ConfidenceView data={meters.journey} retry={meters.retry} latestAccuracy={s.accuracy}/>}
-      {view==='rank'&&<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>}
+      {view==='rank'&&(r.exam==='BITSAT'?<BitsatBranchView key={`${id}-${scoreVersion}`} data={meters.rank} retry={meters.retry}/>:<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>)}
       <section className="result-view-panel" hidden={view!=='solutions'} data-testid="result-solutions-panel" aria-label="Question solutions">
       <div className="result-question-jump" data-testid="solution-question-navigation"><Select value={qs.some(q=>q.id===selectedQuestion)?selectedQuestion:''} onValueChange={openQuestion}><SelectTrigger aria-label="Jump to a question" data-testid="solution-question-select" className="w-56"><SelectValue placeholder="Jump to a question"/></SelectTrigger><SelectContent>{qs.map(q=><SelectItem key={q.id} value={q.id} data-testid={'solution-select-'+q.number}>Q{q.number} · {q.subject}</SelectItem>)}</SelectContent></Select><Button variant="outline" data-testid="solution-previous" disabled={qs.findIndex(q=>q.id===selectedQuestion)<=0} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)-1].id)}>Previous</Button><Button variant="outline" data-testid="solution-next" disabled={!qs.length||qs.findIndex(q=>q.id===selectedQuestion)>=qs.length-1} onClick={()=>openQuestion(qs[qs.findIndex(q=>q.id===selectedQuestion)+1].id)}>Next</Button></div>
       <div className="review-heading" id="results-review-heading">

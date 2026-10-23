@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
-import {TrendingUp,Target,ShieldQuestion,ArrowUpRight,RefreshCw,Info} from 'lucide-react';
+import {TrendingUp,Target,ShieldQuestion,ArrowUpRight,RefreshCw,Info,GraduationCap} from 'lucide-react';
 import {ResponsiveContainer,LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,Legend} from 'recharts';
 import {api} from '../../lib/api';
 import {Button} from '../ui/button';
@@ -11,10 +11,10 @@ export function useLearningMeters(id,scoreVersion,enabled){
  return {...data,retry:()=>setRefresh(x=>x+1)};
 }
 export const AccuracyGauge=({value,label,testId})=><div className="accuracy-gauge" data-testid={testId} style={{'--meter-percent':`${Math.max(0,Math.min(100,value??0))*3.6}deg`}} role="img" aria-label={`${label}: ${value==null?'unavailable':value+' percent'}`}><div><strong>{value==null?'—':value+'%'}</strong><span className="gauge-caption">{label}</span></div></div>;
-export const MeterShortcuts=({journey,rank,onView})=><div className="meter-shortcuts" data-testid="learning-meter-shortcuts">{[
+export const MeterShortcuts=({exam,journey,rank,onView})=><div className="meter-shortcuts" data-testid="learning-meter-shortcuts">{[
  ['progress','amber',TrendingUp,'Improvement',journey?.delta?signed(journey.delta.score)+' marks':'Your mock journey','First to latest comparable mock'],
  ['accuracy','emerald',Target,'Confidence',journey?.confidence?.accuracy==null?'Building your baseline':journey.confidence.accuracy+'% accuracy',`Combined accuracy · last ${journey?.confidence?.window_size||'up to 5'} mocks`],
- ['rank','sapphire',ShieldQuestion,'Real-exam rank',rank?.state==='available'?`${rank.rank_low.toLocaleString('en-IN')}–${rank.rank_high.toLocaleString('en-IN')}`:'Evidence first',rank?.state==='available'?`Non-official · ${rank.reference.year} source`:rank?.state==='unavailable'?'Reliable estimate unavailable':'Check historical evidence']
+ exam==='BITSAT'?['rank','amber',GraduationCap,'Branch matches',rank?.state==='available'?`${rank.matches?.length||0} branch matches`:'Score-based options','Official 2026–27 campus cutoffs']:['rank','sapphire',ShieldQuestion,'Real-exam rank',rank?.state==='available'?`${rank.rank_low.toLocaleString('en-IN')}–${rank.rank_high.toLocaleString('en-IN')}`:'Evidence first',rank?.state==='available'?`Non-official · ${rank.reference.year} source`:rank?.state==='unavailable'?'Reliable estimate unavailable':'Check historical evidence']
  ].map(([view,tone,Icon,title,value,note])=><button key={view} className={'meter-shortcut tone-'+tone} onClick={()=>onView(view)} data-testid={'meter-shortcut-'+view}><span><Icon size={19}/>{title}<ArrowUpRight size={16}/></span><strong>{value}</strong><small>{note}</small></button>)}</div>;
 const MeterState=({value,retry})=><div className="meter-state" data-testid="meter-state"><Info size={24}/><h2>{value?'Not enough compatible evidence yet.':'Loading your saved results…'}</h2><p>{value?.reason||'No AI is called; these meters use your completed attempts.'}</p>{value?.state==='error'&&<Button variant="outline" onClick={retry} data-testid="meter-retry"><RefreshCw size={15}/>Retry</Button>}</div>;
 export const JourneyView=({data,retry})=>{

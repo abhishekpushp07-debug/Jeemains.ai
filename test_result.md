@@ -1,3 +1,12 @@
+# Current delivery — 2026-10-23 BITSAT branches / visible mobile shine (pending QA)
+bitsat_branch_delivery:
+  user: "Blood-red JEEchoicecard; tricoloursaffronorangeBITSAT; visibleshineonmobile. BITSATinstead ofrank:top3branchesforparticularmarksusinguploadedofficialscreenshots. KeepAllIndiablueCOMEDKblack."
+  evidence: "Official https://admissions.bits-pilani.ac.in/FD/BITSAT_cutOffs.html crawledand2026-2027finaltablesmatchall3uploadedimages.50programme/campusrowsstored(18Pilani15Goa17Hyd),source390max. NoAI/externalAPIruntime."
+  backend: "bitsat_branches.py readonlyauthenticatedGET/bitsat/branch-matches scoreinteger-130..390,campusall/pilani/goa/hyderabad,programmebe/msc/bpharm/all. Highestcutoff<=score,distinctprogramme,alternatematchingcampuses,top3;lowerscoregraceful0/1/2matchesandnexttargetsnotmatches. historical-rank delegatesBITSATtoattempt_matches;compatibleoriginalfull180minute130base(+0or12bonus)+3/-1/0mcqsstandard counts; uses stored390main_block explicitlyexcludesbonus; savedscoreunaltered. Invalid/corrected/chapter canusemanualcalculator,notautofilled."
+  frontend: "BitsatBranchView replacesBITSAtranktabcontents+label; manualscore,filters,resetmock,sourceyear/method/limits,norank/chances. JEEandCOMEDKunchanged. NewshinepausecontrolinExamHomeCards; bloodred#B00000andsaffron#FF9933movingnonhovershineimplementedwithdarkorangeink. AllIndiaandCOMEDKunchanged."
+  required_tests: "IsolatedDBonly,currentenvunchanged.50sourcevaluesand308/299/289at308,300MNC299ECE289CSGoa274;equality/ties/dedup/campus/programme/negativelow/highinvalidscore/fewer3;auto390mainblockbonusnotcountedandtotalnotmutated;private/embargo/auth/corrected;JEE/COMEDKrankregression. Desktop1920x800/mobile390x844nonhovermovinggloss,pause/reducedmotion;AllIndiablueCOMEDKblackunchanged;BITSATresultcardnoRealexamranklabel;scoreforms/filter/error/raceinvalid/restoremock/source;nooverflow."
+
+
 #====================================================================================================
 # START - Testing Protocol - DO NOT EDIT OR REMOVE THIS SECTION
 #====================================================================================================

@@ -34,6 +34,7 @@ from tejas import (
     learning_progress,
     my_tests,
     historical_rank,
+    bitsat_branches,
     live_series,
     series_streak,
 )
@@ -174,6 +175,7 @@ for module in [
     learning_progress,
     my_tests,
     historical_rank,
+    bitsat_branches,
     live_series,
     series_streak,
 ]:
