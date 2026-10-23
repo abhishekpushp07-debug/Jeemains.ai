@@ -8,17 +8,18 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { api } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
-import { Card, Icon, IconName, Notice, Press, T } from "@/src/components/ui";
+import { Card, Icon, Notice, Press, T } from "@/src/components/ui";
 import { SeriesBanner, Series } from "@/src/components/SeriesBanner";
+import { ExamTile, TileKind } from "@/src/components/ExamTile";
 import { colors, radius, space } from "@/src/theme";
 import { fmtClock, usesNativeTabs } from "@/src/navigation";
 
-type Tile = { id: string; title: string; sub: string; icon: IconName; grad: [string, string]; to: string; art: number };
+type Tile = { id: string; kind: TileKind; title: string; sub: string; grad: [string, string]; to: string; badge?: string };
 const TILES: Tile[] = [
-  { id: "jee-main", title: "JEE Main", sub: "Mocks · Chapters", icon: "atom-variant", grad: [colors.custom_examJee, colors.custom_examJeeDeep], to: "/exam/jee-main", art: require("../../assets/images/tile-jee.jpg") },
-  { id: "live", title: "Live JEE Series", sub: "62-day All India", icon: "diamond-stone", grad: [colors.custom_seriesBright, colors.custom_series], to: "/(tabs)/live", art: require("../../assets/images/tile-live.jpg") },
-  { id: "bitsat", title: "BITSAT", sub: "Practice · Branches", icon: "rocket-launch", grad: [colors.custom_examBitsat, colors.custom_examBitsatDeep], to: "/exam/bitsat", art: require("../../assets/images/tile-bitsat.jpg") },
-  { id: "comedk", title: "COMEDK", sub: "Practice · History", icon: "crown", grad: [colors.custom_darkCard, colors.custom_examComedk], to: "/exam/comedk", art: require("../../assets/images/tile-comedk.jpg") },
+  { id: "jee-main", kind: "jee", badge: "HOT", title: "JEE Main", sub: "Mocks · Chapters", grad: [colors.custom_examJee, colors.custom_examJeeDeep], to: "/exam/jee-main" },
+  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", grad: [colors.custom_seriesBright, colors.custom_series], to: "/(tabs)/live" },
+  { id: "bitsat", kind: "bitsat", title: "BITSAT", sub: "Practice · Branches", grad: [colors.custom_examBitsat, colors.custom_examBitsatDeep], to: "/exam/bitsat" },
+  { id: "comedk", kind: "comedk", title: "COMEDK", sub: "Practice · History", grad: [colors.custom_darkCard, colors.custom_examComedk], to: "/exam/comedk" },
 ];
 
 export default function Home() {
@@ -74,24 +75,10 @@ export default function Home() {
         <T size={13} color={colors.muted}>Start new practice or pick up where you stopped.</T>
       </View>
 
-      <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.md }}>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.lg }}>
         {TILES.map((t, i) => (
           <Animated.View key={t.id} entering={FadeInDown.delay(60 * i).duration(380)} style={{ width: "48%" }}>
-            <Press testID={"home-tile-" + t.id} onPress={() => router.push(t.to as any)} accessibilityLabel={t.title}>
-              <Card style={{ padding: 0, overflow: "hidden" }}>
-                <Image source={t.art} style={{ width: "100%", height: 112, backgroundColor: t.grad[0] }} contentFit="cover" contentPosition="center" accessibilityLabel={t.title + " artwork"} transition={0} />
-                {t.id === "jee-main" || t.id === "live" ? (
-                  <View style={{ position: "absolute", top: 8, ...(t.id === "live" ? { left: 8 } : { right: 8 }), flexDirection: "row", alignItems: "center", gap: 2, backgroundColor: t.id === "live" ? colors.custom_seriesBright : colors.custom_burgundy, borderRadius: radius.sm, paddingHorizontal: 6, paddingVertical: 2, borderWidth: 1, borderColor: colors.custom_whiteA15 }}>
-                    <T w="heavy" size={10} color={colors.onBrandPrimary}>{t.id === "live" ? "100% AI" : "HOT"}</T>
-                    <Icon name="star-four-points" size={9} color={colors.onBrandPrimary} />
-                  </View>
-                ) : null}
-                <View style={{ padding: space.md, gap: 2 }}>
-                  <T w="heavy" size={16} numberOfLines={1}>{t.title}</T>
-                  <T size={12} color={colors.muted} numberOfLines={1}>{t.sub}</T>
-                </View>
-              </Card>
-            </Press>
+            <ExamTile testID={"home-tile-" + t.id} kind={t.kind} title={t.title} sub={t.sub} grad={t.grad} badge={t.badge} onPress={() => router.push(t.to as any)} />
           </Animated.View>
         ))}
       </View>

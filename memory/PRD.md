@@ -13,7 +13,7 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 
 ## Implemented (2026-10-23)
 - Entry with private-pilot and unverified-phone notices; signout offers Keep drafts / Discard drafts / Stay signed in.
-- Home: 2×2 tiles using the exact supplied artwork, Continue-attempt card, Rapid Fire entry, compact series banner (true 45° 100% AI ribbon, AI Astra credit, pale Score 200+ block), My Tests summary.
+- Home: 2×2 premium code-built tiles (src/components/ExamTile.tsx: glass 3D SVG icons, orbs/dots/tech-line patterns, HOT / 100% AI pills, 24px radius, shadow, press scale), Continue-attempt card, Rapid Fire entry, compact series banner (true 45° 100% AI ribbon, AI Astra credit, pale Score 200+ block), My Tests summary.
 - Exam hub → catalogue: subject chips, search, pagination, Start/Resume/Result actions, honest empty states.
 - Set detail: rules, marking, preflight, acknowledgement, idempotent start_key, save/unsave.
 - Test player:
