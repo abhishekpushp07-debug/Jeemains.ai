@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-23",
+  "type": "final_targeted_frontend_verification",
+  "preview": "https://campus-search-debug.preview.emergentagent.com",
+  "status": "passed",
+  "prior_reports": [125, 126, 127],
+  "resolved_latest_issue": "Raised active score-version specificity to override old grade-history disabled styling. Original and Key version 2 now both solid rgb(36,89,216), white text, opacity1, aria-pressed=true while selected. Switching preserves Solutions, subject and question.",
+  "checks": {
+    "score_version_original_selected": "passed",
+    "score_version_key2_selected": "passed",
+    "score_version_switch_context": "passed",
+    "only_one_focused_solution": true,
+    "last_question_75_visible_on_mobile_load": true,
+    "desktop_1920x800_overflow": [],
+    "mobile_390x844_overflow": [],
+    "latest_app_code_rendered_after_edit": true
+  },
+  "evidence": [
+    "/root/.emergent/automation_output/20261023_133310/console_20261023_133310.log",
+    "/root/.emergent/automation_output/20261023_133335/console_20261023_133335.log",
+    "/app/test_reports/iter127_shots/solutions_desktop_1920x800.jpeg",
+    "/app/test_reports/iter127_shots/solutions_mobile_390x844.jpeg"
+  ],
+  "test_isolation": "All API responses and auth were MOCKED by browser routes using test-only fixtures. No production/preview customer DB writes, real login, accounts, attempts, or AI requests. Application has no newly mocked integrations.",
+  "fixture_corrections": "Earlier interim Player self-checks wrongly assumed current must change background and used an invalid visit response. Corrected fixture127 returns visited list; all actual Player state styling passed127. A later self-check hit transient loading DOM null; stable locator waits passed. No extra app changes for these fixture issues.",
+  "limitations": [
+    "All India schedule/history contents and backend were not re-tested in this frontend-only increment.",
+    "Production build passed126 with pre-existing hooks warnings; final changes afterwards were scoped CSS and presentation attributes.",
+    "Existing cosmetic legend differences are non-blocking: Solutions10px vs Player11px, lighter marked swatch border."
+  ],
+  "functional_issues": [],
+  "deployment": "Not requested or performed for this UI refresh"
+}

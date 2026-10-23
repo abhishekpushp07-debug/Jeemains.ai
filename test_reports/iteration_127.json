@@ -1,0 +1,25 @@
+{
+  "summary": "Iter127 narrow frontend-only check. Every /api/** call was mocked: the iter126 fixture plus a new iter127 wrapper that fixes the visited model. No real DB, auth or AI. ROOT CAUSE of the 126 'visited' failure was the FIXTURE, not the app: useAttempt.visit() sets data.current.visited = r.visited from POST /attempts/:id/visit, and the 126 fixture answered {ok:true}, which wiped visited to undefined. With the corrected fixture, every Player number state renders distinctly and correctly at 1920x800 and 390x844. Not visited: white bg, slate text. Visited-blank: amber #FFF7E9 bg, #905515 text. Answered: sky #F0F9FF bg, #0284C7 text, check icon. Marked: burgundy tint, #6B1B3A border, flag. Answered+marked: burgundy with an inset 3px blue bottom bar. Pending: dashed #905515 border. Current: 2px solid #2156D4 outline with offset 2, aria-current=step. The current ring is present and visible. Solutions: outcome badge is 11px capitalize. Subject tabs are Physics blue, Chemistry green, Mathematics crimson; selected is solid. Subject and question switching update the label and URL. No horizontal overflow on Player or Solutions at either viewport. My Tests: Progress amber, Saved blue, Completed green. Series analytics tab is green. ONE REAL BUG: the active score-version button is NOT solid blue.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Results score-version buttons (grade-history)", "issue": "The active/disabled version (aria-pressed=true, disabled) renders light brand-soft bg rgb(237,243,255) with text #214DB7, not solid #2459D8 with white text. Cause: App.css:6145 '.grade-history .btn:disabled' (specificity 0,3,0) beats vibrant-ui.css:129 '.score-version-button[aria-pressed=true]' (0,2,0). Opacity is 1 and aria-pressed/disabled toggle correctly between Original and Key version 2. Fix: raise specificity, e.g. '.grade-history .score-version-button[aria-pressed=true], .grade-history .score-version-button[aria-pressed=true]:disabled {background:#2459D8;border-color:#2459D8;color:#fff;opacity:1}'.", "selector": "[data-testid='score-version-original'], [data-testid='score-version-2']", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Solutions navigator legend", "issues": [".solution-legend spans compute to 10px at both 1920 and 390. Only the Player .nav-legend is 11px. If the 'nav legend 11px' polish was meant for Solutions too, it is not applied."]},
+      {"screen": "Player navigator legend", "issues": ["The 'For review' legend swatch border is light #D9B8C6, but the real marked button border is dark #6B1B3A. This is a small legend/state mismatch (cosmetic)."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/frontend_iter127_fixture.py", "/app/tests/frontend_iter126_fixture.py"],
+  "screenshots_local": ["/app/test_reports/iter127_shots/player_desktop_1920x800.jpeg", "/app/test_reports/iter127_shots/player_mobile_390x844.jpeg", "/app/test_reports/iter127_shots/solutions_desktop_1920x800.jpeg", "/app/test_reports/iter127_shots/solutions_card_desktop_1920x800.jpeg", "/app/test_reports/iter127_shots/solutions_mobile_390x844.jpeg", "/app/test_reports/iter127_shots/solutions_card_mobile_390x844.jpeg"],
+  "action_items": ["Fix score-version active button specificity so the current version is solid blue #2459D8 with white text (App.css:6145 overrides vibrant-ui.css:129).", "Optional: set .solution-legend to 11px if intended, and align the legend-marked swatch border with the real marked state."],
+  "critical_code_review_comments": ["Player grid descendant selectors work with the shadcn Button inside .number-grid. Every state class is applied with the expected computed style. Do not judge 'current' by background: it is an outline-only contract by design."],
+  "updated_files": ["/app/tests/frontend_iter127_fixture.py (new, test-only)"],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "90% (1 of 10 targeted checks failed: score-version solid blue)"},
+  "seed_data_creation": "None. All data was mocked via page.route.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use /app/tests/frontend_iter127_fixture.py (install127). It returns {visited:[...]} for POST /visit, seeds answers p2 answered, p4 marked, p5 answered+marked, visited p1-p5, and delays PUT answers so the pending state is visible. Unmocked endpoints that only produce 404 panels: /attempts/att1/cohort|journey|historical-rank and /series/all-india-jee*.",
+  "rca of the issue": "Visited state 'missing' in 126 and in main's self-test: the fixture returned {ok:true} for POST /attempts/play1/visit. useAttempt.js:294 assigns r.visited, which made visited undefined, so no 'visited' class. This was a fixture bug, not an app bug. Score-version not solid: a CSS specificity conflict as described above."
+}
