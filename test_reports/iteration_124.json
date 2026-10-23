@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-23",
+  "type": "authorized_production_content_operation_and_live_verification",
+  "target": "https://jeelive.ai",
+  "status": "complete_verified",
+  "source_report": "/app/data/private_transfers/jee_chapters/live_import_report.json",
+  "deployment": "3fc3ce16-b447-441f-9d84-712d7f9f2886",
+  "checks": {
+    "private_pdf_actual_production_reads_sha256_size_verified": 81,
+    "scoped_content_records_processed": 162,
+    "published_chapter_tests": 78,
+    "questions": 3900,
+    "original_supplied_solutions": 3900,
+    "catalogue_pages": 7,
+    "subjects": {"Physics": 29, "Mathematics": 26, "Chemistry": 23},
+    "minutes": {"Physics": 90, "Mathematics": 120, "Chemistry": 70},
+    "marking": {"correct": 4, "wrong": -1, "skipped": 0},
+    "preexisting_content_baseline_hashes_unchanged": true,
+    "all_target_record_hashes_matched": true,
+    "sample_previews_equal_original_questions_and_solutions": ["Physics", "Mathematics", "Chemistry"],
+    "live_sample_question_and_solution_pngs": 6,
+    "operational_session_closed": true
+  },
+  "mocked_live_integrations": [],
+  "ai_generation_calls": 0,
+  "test_fixtures_created_in_production": false,
+  "student_or_attempt_records_written": false,
+  "auth_credentials_changed": false,
+  "notes": [
+    "This is the actual user-authorized append-only production content import, not a test-fixture write into customer data.",
+    "Existing owner credentials were read only from environment; the operational session was logged out after import. No account or role was changed.",
+    "No fresh learner attempt was created; scoring and resume mechanics were covered by earlier isolated QA. Live rules, content hashes, catalogue and actual source images were verified here.",
+    "Independent deployer post-import global counts have been requested; actual importer/API completion is already established."
+  ],
+  "functional_issues": []
+}
