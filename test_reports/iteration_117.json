@@ -1,0 +1,25 @@
+{
+  "summary": "Narrow final check of the two refinements made after iteration 116, run only against the TEST-ONLY isolated bridge (iso_bridge_jee_iter116.py, which seeds 78 sets/3 books/78 files into tejas_isolated_iter105_test). Auth was the X-Test-User header with a mocked /api/auth/session. Storage was GET-only. Before the UI checks I re-ran the iter116 isolated flow suite to create completed attempts: 7/7 passed. (1) ChapterBookStudio inspect dialog, Chemistry book, chapter 1, Q1 and Q2, supplied_worked: .chapter-key-preview has the has-worked-solution class and the solution .source-image computes max-width 100%. At 1920x800 the solution image width is 846px, exactly the dialog content width (894 minus 48px padding) and equal to the question crop width. At 390x844 it is 308px, exactly the content width (356 minus 48). There is no dialog or document horizontal overflow, the images load (naturalWidth 1011), and the real copied source question and solution are legible. Enlarge opens the Source detail zoom dialog at both viewports, and Escape returns to the inspect dialog. The answer_key_only rule .chapter-key-preview .source-image {max-width: var(--space-24) = 6rem = 96px} is unchanged (static check). (2) Results page for completed isolated JEE attempts (Chemistry and Physics), supplied_worked: 0 /ai-solutions GETs and 0 generation POSTs at 1920 and 390. The cohort request still fires. The supplied solution image for Q31 loads (/asset/solution/0 returned 200, naturalWidth>0, no overflow) and the solution card contains no AI wording. The only non-GET is POST /solution-open, an existing review-tracking $addToSet (not AI) that ran in the isolated DB only. TEST-ONLY response fixtures that changed /results solution_kind to mixed (1 of 50 answer_key_only) or all answer_key_only each produced exactly 1 /ai-solutions GET, which was mocked, plus 0 generate calls, so the hook does not skip for legacy or mixed data. Cleanup: the bridge was killed and the test DB dropped. The real DB has 78 JEE sets with 0 attempts and no TEST_U116 rows. The iter116 read-only snapshot comparison still passes 7/7, so the 144 BITSAT sets and the counts are unchanged.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Source detail zoom dialog (390x844), optional cosmetic", "issues": ["At the default 'Fit' zoom the solution text is small on mobile and the viewport has empty space below it. 'Readable' and zoom-in fix this, so it is not a blocker."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/iso_bridge_jee_iter116.py", "/app/backend/tests/test_iter116_jee_attempt_flow_isolated.py", "/app/backend/tests/test_iter116_jee_chapters_readonly.py"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Results.js decides suppliedOnly from r.questions.every(kind==='supplied_worked'). This is correct. An empty questions array falls back to the AI read, which is safe.",
+    "useResultExtras resets solutions to an empty object when suppliedOnly, so nothing that depends on the ai map renders."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not in scope (iter116 isolated flow re-run 7/7 as setup only; read-only snapshot 7/7)", "frontend": "100% (owner preview width/zoom at 2 viewports, results network instrumentation real + 2 fixtures)"},
+  "test_credentials": "Read /app/memory/test_credentials.md but did not use it. No real login; TEST-ONLY X-Test-User principals owner/student.",
+  "seed_data_creation": "Isolated only: bridge seed plus ~3 test attempts in tejas_isolated_iter105_test, now dropped. No customer-DB writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Same harness as iter116. Bridge: cd /app/backend/tests && python iso_bridge_jee_iter116.py & then run the iter116 isolated pytest to create attempts (/tmp/iter116_attempts.json). Playwright: route **/api/** via route.fetch to 127.0.0.1:8765 with x-test-user and mock /api/auth/session. Owner dialog: /studio/chapter-books/<bookId> then chapter-verify-1. Results: /results/<attemptId>, then result-view-solutions, then solution-question-select, then solution-select-31, then solution-content-31. Afterwards kill the bridge and drop tejas_isolated_iter105_test.",
+  "rca of the issue": "Both post-116 refinements are verified fixed. No defects found."
+}
