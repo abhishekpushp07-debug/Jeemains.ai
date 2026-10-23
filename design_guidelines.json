@@ -1,121 +1,83 @@
 {
   "implementation_notes": {
     "date": "2026-10-23",
-    "status": "Complete in preview; frontend QA125–127 plus final targeted128 passed; not deployed",
-    "assets": "User original saved locally at /brand/jeelive-original.jpg. Whitespace-only crop optimized as /brand/jeelive-logo.webp; source icon /brand/jeelive-icon.png. Brand colours and supplied tagline preserved; no external hotlinks.",
-    "theme": "vibrant-ui.css shared saturated tabs/blue primary actions, neutral navy dark surfaces, stronger typography. Existing theme preference/default behavior NOT changed. Entire existing .exam-light reading routes remain light. Existing home exam colours/shines retained unchanged rather than replacing their approved palettes.",
-    "solutions": "SolutionNavigator.js + Results.js: subject tabs -> one horizontally scrollable 44px question-number rail -> one fully open selected question and supplied solution. Existing filters and score-version URL retained; no previous/next/dropdown/load-more/accordion. Status colours also have labelled icons. No new bookmark or AI generation feature."
+    "status": "Targeted refinement for All India Blue Series Banner & AI Astra attribution",
+    "assets": "User original saved locally at /brand/jeelive-original.jpg, whitespace-only crop /brand/jeelive-logo.webp, icon /brand/jeelive-icon.png.",
+    "theme": "Blue flagship banner (#0B2D80) preserved with targeted red/burgundy tagline accents and top-right 100% AI badge.",
+    "banner_refinement_goal": "Incorporate 'Score 200+ with AI' in supplied logo's red/burgundy tagline color, clear deep bold 'AI analysed PYQ based test series', top-right corner '100% AI' badge, and clear bold 'AI Astra' attribution prominently while keeping dates/timing/streak/buttons unchanged.",
+    "claims": "User-supplied AI Astra attribution and 100%AI series-design branding, not an independent audit or actual AI-generation call. Worldbest/mostanalysed are creatoraspirations only, notverifiedranking. Score200+isagoalnotguarantee. Existingsuppliedsolutionsremainunchanged; clearqualificationretainedinexplainer.",
+    "source_of_truth": "Actual implemented CSS in live-series.css and JSX in LiveSeriesBanner.js/LiveSeries.js supersede earlier suggested class snippets below."
   },
-  "project": "JEELIVE.AI / Tejas Learning Platform - Design Refinement",
-  "version": "2026.10-refinement",
+  "project": "JEELIVE.AI / Tejas Learning Platform - Banner Refinement",
+  "version": "2026.10-banner-refinement",
   "design_context": "MARKETING_AND_LEARNING_DASHBOARD",
   "brand_identity": {
-    "logo_url": "https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/6a1feb9ab42bd8d4_IMG-20261023-WA8815.jpg",
+    "logo_url": "/brand/jeelive-logo.webp",
     "logo_usage": "Main navigation header (.simple-brand), mobile menu header, login page brand header, and simple-footer. Render with height 32px-40px, rounded-md, object-contain, and alt='JEELIVE.AI Logo'."
   },
-  "theme_strategy": {
-    "default_mode": "dark",
-    "exam_reading_surface_exception": {
-      "rule": "Force light background surface (bg-white text-slate-900 / .exam-light) specifically for question stems, original PDF question figures, diagrams, and solution explanation cards to ensure pristine legibility of formulas and images.",
-      "container_classes": "bg-white text-slate-900 rounded-xl p-5 shadow-sm border border-slate-200 dark:bg-white dark:text-slate-900"
+  "all_india_series_banner_refinement": {
+    "banner_container": {
+      "base_bg": "#0B2D80",
+      "border": "1px solid #5984DD80",
+      "border_radius": "24px (18px on mobile)",
+      "positioning": "relative isolation overflow-hidden",
+      "style_tone": "elegant, attractive, loud na ho lekin dead na ho"
     },
+    "key_visual_elements": {
+      "top_right_100_percent_ai_badge": {
+        "text": "100% AI",
+        "position": "Top-right in a dedicated full-width flex brand row; preserves flow and prevents overlap on mobile",
+        "styling": "Solid #991B1B burgundy, white 850-weight text, fine warm border and subtle inset shine; no loud gradient",
+        "data_testid": "series-100ai-badge"
+      },
+      "score_200_tagline": {
+        "text": "Score 200+ with AI",
+        "color": "#991B1B (Burgundy/Red from supplied logo tagline)",
+        "bg_style": "Pale #FFF5F3 plate with burgundy #991B1B text, 23px desktop/20px mobile, score 200+ at weight900; nearby goal-not-guarantee note",
+        "data_testid": "series-score-200-tagline"
+      },
+      "ai_analysed_pyq_descriptor": {
+        "text": "AI analysed PYQ based test series",
+        "font_weight": "800 (Deep Bold)",
+        "color": "#E2E8F0 (High-contrast bold text)",
+        "data_testid": "series-pyq-descriptor"
+      },
+      "ai_astra_attribution": {
+        "text": "Created by AI Astra · World-class ambition. PYQ-focused preparation.",
+        "style": "Clear bold attribution pill or kicker in kicker area",
+        "color": "#93C5FD (Bright Ice Blue) with font-weight 700",
+        "data_testid": "series-ai-astra-attribution"
+      }
+    },
+    "layout_rules": {
+      "desktop_1920x800": "grid grid-cols-[1fr_240px] gap-10 padding 40px 46px",
+      "mobile_390x844": "grid grid-cols-1 padding 24px 20px gap-4",
+      "preserved_elements": [
+        "1 Dec 2026 – 31 Jan 2027 date badge",
+        "3 hours · daily timing badge",
+        "62 scheduled tests count badge",
+        "SeriesStreak compact widget",
+        "Explore the series button and Your series hub link"
+      ]
+    },
+    "css_classes_to_add_in_live_series_css": [
+      ".series-100ai-badge { position: absolute; top: 16px; right: 20px; z-index: 2; background: linear-gradient(135deg, #be123c, #991b1b); color: #ffffff; padding: 5px 12px; border-radius: 9999px; font-weight: 800; font-size: 11px; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 2px 10px rgba(0,0,0,0.2); }",
+      ".series-score-200-tag { display: inline-flex; align-items: center; gap: 6px; background: #800020; color: #ffffff; font-weight: 800; font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 1px solid #b91c1c; }",
+      ".series-pyq-bold { font-weight: 800; color: #ffffff; display: block; margin-top: 6px; font-size: 14px; letter-spacing: -0.2px; }",
+      ".series-astra-attribution { color: #93c5fd; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }"
+    ]
+  },
+  "theme_strategy": {
+    "default_mode": "Existing preference/default unchanged",
     "exam_cards_palette_corrections": {
-      "jee_main": {
-        "slug": "jee-main",
-        "name": "JEE Main",
-        "card_background": "linear-gradient(135deg, #7F1D1D 0%, #991B1B 50%, #B91C1C 100%)",
-        "card_border": "#DC2626",
-        "card_text": "#FFFFFF",
-        "card_eyebrow": "#FECACA",
-        "badge_bg": "#450A0A",
-        "badge_text": "#FCA5A5",
-        "shine_effect": {
-          "enabled": true,
-          "mobile_always_visible": true,
-          "mobile_animation": "sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite",
-          "pause_on_hover": true
-        }
-      },
-      "bitsat": {
-        "slug": "bitsat",
-        "name": "BITSAT",
-        "card_background": "linear-gradient(135deg, #C2410C 0%, #EA580C 50%, #FF9933 100%)",
-        "card_border": "#F97316",
-        "card_text": "#1E1B18",
-        "card_eyebrow": "#431407",
-        "badge_bg": "#FFEDD5",
-        "badge_text": "#7C2D12",
-        "shine_effect": {
-          "enabled": true,
-          "mobile_always_visible": true,
-          "mobile_animation": "sweep 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.75s",
-          "pause_on_hover": true
-        }
-      },
       "all_india": {
         "slug": "all-india",
         "name": "All India Series",
-        "card_background": "#1E3A8A",
-        "card_border": "#3B82F6",
+        "card_background": "#0B2D80",
+        "card_border": "#5984DD80",
         "card_text": "#FFFFFF",
         "status": "APPROVED_PRESERVE"
-      },
-      "comedk": {
-        "slug": "comedk",
-        "name": "COMEDK",
-        "card_background": "#0F172A",
-        "card_border": "#475569",
-        "card_text": "#F8FAFC",
-        "status": "APPROVED_PRESERVE"
       }
-    }
-  },
-  "solutions_view_refactoring": {
-    "architecture_goal": "Replace subject dropdown and Previous/Next pagination with a 3-tier focused navigation layout: 1) Vibrant Subject Small Tabs -> 2) Horizontal Question Number Navigation Row -> 3) Focused Single Selected Question & Solution Card.",
-    "subject_tabs_tier": {
-      "layout": "Flex horizontal row of compact subject pills (Physics, Chemistry, Mathematics / LR & English).",
-      "active_styles": {
-        "physics": "bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md shadow-blue-500/20 border-b-2 border-blue-300",
-        "chemistry": "bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold shadow-md shadow-teal-500/20 border-b-2 border-teal-300",
-        "mathematics": "bg-gradient-to-r from-rose-600 to-red-600 text-white font-bold shadow-md shadow-rose-500/20 border-b-2 border-rose-300",
-        "default": "bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold shadow-md shadow-amber-500/20 border-b-2 border-amber-300"
-      },
-      "inactive_styles": "bg-slate-800/80 text-slate-300 hover:bg-slate-700 hover:text-white border border-slate-700 transition-all cursor-pointer font-medium text-xs sm:text-sm px-3 py-1.5 rounded-lg",
-      "data_testid_pattern": "subject-tab-{subject_id}"
-    },
-    "horizontal_question_navigation_tier": {
-      "layout": "Single horizontal scrolling row of compact question number buttons for the active subject.",
-      "mobile_390px_support": "overflow-x-auto whitespace-nowrap py-2 px-1 gap-2 flex items-center scrollbar-thin scrollbar-thumb-slate-700 touch-pan-x",
-      "button_size": "min-w-[38px] h-9 px-2 text-xs font-mono font-semibold rounded-md flex items-center justify-center transition-all",
-      "question_status_indicators": {
-        "correct": "bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 hover:bg-emerald-500/30",
-        "incorrect": "bg-rose-500/20 text-rose-400 border border-rose-500/50 hover:bg-rose-500/30",
-        "unattempted": "bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700"
-      },
-      "selected_question_active_ring": "ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-900 bg-blue-600 text-white font-bold scale-105 shadow-lg shadow-blue-500/30",
-      "data_testid_pattern": "question-nav-btn-{question_number}"
-    },
-    "single_question_focused_workspace": {
-      "behavior": "Only renders the solution for the selected question number. Removes stacked scroll or multi-question confusion.",
-      "components": [
-        "Question Header: Subject badge, Question Index (e.g., 'Physics · Q4'), Status badge ('Correct +4' / 'Incorrect -1' / 'Unattempted')",
-        "Question Stem & Diagram Box: Forced light mode white canvas (.exam-light) for crystal clear math & PDF image legibility",
-        "Official Solution Step-by-Step Box: Highlighted correct option, detailed step reasoning, formula derivations",
-        "Footer Action Toolbar: 'Report Question' button, 'Bookmark', and 'Feedback' trigger"
-      ],
-      "data_testid_pattern": "selected-question-solution-panel"
-    }
-  },
-  "sitewide_tab_and_button_upgrade": {
-    "visual_direction": "Bold, colorful, tactile, and elegant tabs/buttons ('mast, elegant, loud na ho, dead na ho').",
-    "tabs": {
-      "style": "Rounded pill or segment tabs with distinct active background gradients, 1px top highlight, and subtle glow on active states.",
-      "hover": "Subtle brightness lift (+10%) and scale-102 transition."
-    },
-    "buttons": {
-      "primary": "bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-semibold shadow-md hover:shadow-blue-500/25 rounded-lg active:scale-95 transition-all min-h-[40px] px-4",
-      "secondary": "bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 rounded-lg min-h-[40px] px-4",
-      "destructive": "bg-rose-600/20 text-rose-300 border border-rose-500/40 hover:bg-rose-600 hover:text-white rounded-lg min-h-[40px] px-4"
     }
   },
   "typography": {
@@ -124,42 +86,24 @@
       "mono": "Roboto Mono, monospace"
     },
     "hierarchy": {
-      "h1": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-100",
       "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-100",
-      "h3": "text-xl sm:text-2xl font-semibold text-slate-200",
-      "h4": "text-lg sm:text-xl font-medium text-slate-200",
-      "body": "text-base leading-relaxed text-slate-300",
-      "small": "text-sm text-slate-400",
-      "micro": "text-xs font-mono uppercase tracking-wider text-slate-500"
+      "body": "text-base leading-relaxed text-slate-300"
     }
   },
-  "image_urls": [
-    {
-      "category": "branding",
-      "url": "https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/6a1feb9ab42bd8d4_IMG-20261023-WA8815.jpg",
-      "description": "Supplied official JEELIVE.AI brand logo to be integrated into header, mobile menu, login screen, and footer."
-    },
-    {
-      "category": "reference",
-      "url": "https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/5f48bcdf1b2b17f9_Screenshot_20261023_181305_Chrome.webp",
-      "description": "Current solutions view screenshot for layout refactoring baseline reference."
-    }
-  ],
   "instructions_to_main_agent": [
-    "1. Replace subject dropdown select and Previous/Next buttons in the Solutions component with Subject Small Tabs (Physics, Chemistry, Mathematics, LR/English).",
-    "2. Under the selected subject tab, add a horizontal scrolling/wrapped row of question number buttons (1, 2, 3... N) with visual indicators for Correct (green), Incorrect (red), and Unattempted (slate).",
-    "3. Render ONLY the selected question's question stem and solution step in the solution panel when clicked.",
-    "4. Upgrade sitewide navigation tabs, buttons, and surfaces to be bold, colorful, and tactile while maintaining high elegance and readability.",
-    "5. Integrate the new JEELIVE.AI logo URL (https://customer-assets-rejwkqb3.emergentagent.net/job_campus-search-debug/artifacts/6a1feb9ab42bd8d4_IMG-20261023-WA8815.jpg) into the top brand header, footer, and login/mobile views.",
-    "6. Force light mode background specifically inside question/solution reading surfaces (.exam-light) for optimal PDF diagram and formula clarity.",
-    "7. Preserve existing features, exam card identities (JEE Main blood red, BITSAT saffron orange, All India deep blue, COMEDK black), auth, and student metrics.",
-    "8. Ensure all new interactive elements (subject tabs, question buttons, solution panel, logo) carry kebab-case data-testid attributes in .js component files."
+    "1. Update LiveSeriesBanner.js to include '100% AI' badge in the top-right corner of the banner container with data-testid='series-100ai-badge'.",
+    "2. Add the 'Score 200+ with AI' tagline using the supplied logo's burgundy/red tagline color (#991B1B / #800020) with high visual clarity.",
+    "3. Add clear, deep bold text for 'AI analysed PYQ based test series' in the banner body/copy section.",
+    "4. Prominently feature the bold 'AI Astra' attribution in the kicker/topline area ('Created by AI Astra').",
+    "5. Repeat the AI Astra attribution and score/PYQ positioning in the existing hub header and explainer; do not duplicate the full flagship banner into the hub.",
+    "6. Do not modify dates, timings, streak counters, or action buttons.",
+    "7. Ensure full responsive layout compatibility on mobile (390x844) and desktop (1920x800).",
+    "8. Add proper kebab-case data-testid attributes for all new banner elements."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
     "This codebase uses JavaScript (.js) files. Provide React guidelines, JSX, and CSS instructions for .js files.",
-    "Never use completely transparent backgrounds for dropdown menus or floating headers; use backdrop-blur with semi-opaque surfaces.",
-    "Ensure all touch targets on mobile (390px viewport) have minimum 40px height and width.",
     "Maintain high APCA/WCAG AA contrast for text over dark or colorful gradient surfaces.",
-    "Ensure all interactive elements carry explicit role and kebab-case data-testid attributes for testing."
+    "Ensure all interactive elements carry explicit role and kebab-case data-testid attributes for testing.",
+    "Do not introduce fake awards, rankings, or unverified claims."
   ]
 }

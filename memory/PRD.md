@@ -1,6 +1,11 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
 
+## Approved AI Astra banner refinement — 2026-10-23 (in progress)
+- User verbatim: “Is banner me kahi pr do na score 200+ with AI tagline wala colour me hi. Kahi clear clear deep bold me dikhe - AI analysed pyq based test series. And top corner me 100% AI Sab sundar ho.” Confirmed100%AIbadge BANNERtop-right,notglobalheader. Added: “Clear har jagah lage ki AI Astra ne banaya hai world best most analaysed pyq based series.”
+- Approvedimplementationbanner+serieshub+explainerconsistentCreatedbyAIAstra,Score200+withAIinlogo-burgundyfamilyonpaleplate,PYQheadlineboldwhitebanner/inkhub,toprightburgundy100%AIbadge. Bluebackgroundanddates/rules/buttons/streakunchanged. Copyidentifiesuser-statedAI-leddesign,NOTactuallyrunningnewAI;existing suppliedsolutionsuntouched. Worldbest/mostanalysedtreatedcreatorambition,notverifiedranking;score200+goalnotguarantee. Explainermodalkeepsdisclaimeraboutowner-suppliedsolutionsandunverifiedperformanceclaims.
+- Separate UIdeploymentalreadyinitiatedbyplatformbeforethisrequest;doNOTstartredundantdeploymentorclaimnewbannerisdeployedwithoutimageevidence. Finishlocalimplementationandsmallfrontendtest,reportpreviewstatus.
+
 ## Completed visual/navigation refresh — 2026-10-23 (preview; not deployed)
 - **Completed + verified125–128:** Solutionssubjecttabs→horizontalquestionrail→onefocusedquestion/suppliedsolution;75QJEE,130QBITSAT+bonus,50QMathfixtures,filters/empty/deeplinks/keyboard/touchscroll/scoreversioncontext/report/reflection/trackingPASSED. Sitewidereusablecolourtabs/buttons+headerlogo+strongtypographyanddepth;definedsemantictonesworkinpreviewANDproduction. Exactuserlogoallwordmark/taglinepreservedlocally;userapprovedexamcardcoloursunchanged. No backend/auth/scoringdatachangesorAIgeneration.
 - QA125/126/127usedbrowserONLYMOCKEDAPIfixtures;realcustomerDBneverwritten,noauthcredentialscreated/changed. PopulatedPlayeranswer/mark/nav/timer/logo,chapterchooser/listStartResumeResults,MyTestsprogresssavedcompletedverified; homepage/examhubs/series/studio/loginlayoutstestedlight/darkboth1920x800/390x844. AllIndiaactualschedule/historybackendNOTretestedthisincrement;unchanged. Productioncompilepassed126withpreexistinghookwarningsonly.
