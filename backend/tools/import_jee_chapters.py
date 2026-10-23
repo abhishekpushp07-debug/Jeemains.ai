@@ -115,10 +115,12 @@ async def publish(report, principal):
                 raise ValueError('Independent evidence belongs to different immutable bytes.')
         for c in book['chapters']:
             row = next(r for r in rows if r['set_id'] == c['set_id'])
-            await sets.update_one({'id': c['set_id'], 'source_book_sha256': book['source_sha256'], 'parsed_sha256': book['parsed_sha256'], 'independent_check': None},
-                {'$set': {'independent_check': {'method': 'Independent source/region audit', 'scope': '50 source keys and supplied solution pairings; not academic certification',
+            checked = await sets.update_one({'id': c['set_id'], 'source_book_sha256': book['source_sha256'], 'parsed_sha256': book['parsed_sha256']},
+                {'$set': {'questions.$[].approved': True, 'independent_check': {'method': 'Independent source/region audit', 'scope': '50 source keys and supplied solution pairings; not academic certification',
                     'source_sha256': book['source_sha256'], 'parsed_sha256': book['parsed_sha256'], 'chapter_source_sha256': c['source_sha256'],
                     'checked_at': now(), 'report': str(report), 'keys_checked': 50, 'solutions_checked': 50}}})
+            if checked.matched_count != 1:
+                raise ValueError('The audited chapter version changed; publication stopped.')
         r = await books.find_one({'id': book['id']}, {'_id': 0})
         await publish_book(book['id'], ChapterAction(revision=r['revision']), principal)
         await books.update_one({'id': book['id']}, {'$set': {'message': f'{len(book["chapters"])} JEE Main chapter tests published with independently checked supplied questions and solutions. No AI generation.'}})

@@ -1,0 +1,34 @@
+{
+  "summary": "Phase A independent source audit of the 3 user-supplied JEE Main chapter PDFs after tools/import_jee_chapters.py finished ('STAGED 78 chapters; no tests published yet'). The audit was READ-ONLY: no login, no writes to the customer DB, no AI calls and no publish. The auditor (backend/tests/jee_chapter_source_audit.py) re-reads each PDF with poppler pdftotext (bbox + layout), a different engine from the PyMuPDF importer. Per book it checks: the source sha256 against the manifest and the DB book; the parsed.json sha against the manifest and DB (recomputed); cover counts (29/26/23 chapters, x50); and chapter starts detected independently. Per chapter it checks: page range, title and printed timer (60/90/40); the printed +4/-1/0 statement; that there is exactly one key page; a two-way key-table read (word geometry and layout tokens agree, 1-50); the Q1-Q50 anchors on question and solution pages; each DB answer against the source key; each worked 'Answer: X / 10-mark solution' against the key; rubric marks summing to 10, plus Insight, Trap and Quick check; that each question and solution crop contains exactly its own Qn label; the response-type label, the A-D options for MCQ and a numeric key for integer; mcq/integer counts against the printed instruction; full word-coverage (every body word lies in exactly one crop: 0 lost, 0 duplicated); that the stored chapter PDF bytes (via read-only get_object) match the sha and size and that their page text equals the book page range; and the DB rules. RESULT: 78/78 chapters PASS, 3900/3900 keys and 3900/3900 worked solutions agree. MCQ 3398, integer 502 (17 negative integer keys, max 9960). Online timers are Physics 90, Mathematics 120 and Chemistry 70 minutes, overriding the printed 60/90/40, with +4/-1/0 for both MCQ and integer. All 78 sets are status=draft with independent_check=null, 0 published, and the 3 books are status=ready. A negative control (in-memory mutation of a key, a crop rect and a timer) was correctly flagged as FAIL. Figure check (PyMuPDF images and vector drawings): 42,711 objects; the 7 'outside crop' hits were hatch-pattern tile coordinates, and the rendered crops (Physics ch24 Q43 prism, Maths ch14 Q1 graph and solution) are visually complete. No item spans pages. In-memory scoring simulation with tejas.scoring.score on all 78 chapters gave all-correct=200/200, all-wrong=-50 and blank=0. Unicode minus and leading-zero integer answers also score correctly. Preservation: 144 old sets and 11,800 old questions unchanged; 3900 new unique question IDs with 0 collisions; 0 new jobs, solution_requests, manual_solves or ai_solutions referencing new sets; tejas_question_solutions still 7100. Academic spot checks (not certification) of 8 questions all match the keys: Physics ch1 Q1-3; Chemistry ch1 Q31-34; Maths ch14 Q1. The PASS evidence file is /app/test_reports/jee_chapter_source_audit.json. It passed a dry replica of publish()'s gate checks, but publish was NOT executed.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "tejas/corrections.py:178", "issue": "Corrections refuse sets where any question has approved=False. All 3900 new questions (and the existing BITSAT chapter questions) are approved=False, so a later key correction on these chapters would be blocked until approval. This is pre-existing behaviour and does not block publication."}
+  ]},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/jee_chapter_source_audit.py",
+    "/app/backend/tests/jee_chapter_figure_crop_check.py",
+    "/app/backend/tests/jee_chapter_audit_negative_control.py",
+    "/app/test_reports/jee_chapter_source_audit.json"
+  ],
+  "action_items": [
+    "Source audit PASSED. Main agent may run: cd /app/backend && python tools/import_jee_chapters.py --publish-report /app/test_reports/jee_chapter_source_audit.json",
+    "After publishing, verify (read-only) 78 JEE Main chapter sets are status=published/live_enabled with start_at/end_at and appear under /exams/jee-main/chapters for Physics 29 / Mathematics 26 / Chemistry 23. The catalogue endpoint requires a student session, so this was not checked here."
+  ],
+  "critical_code_review_comments": [
+    "import_jee_chapters.publish() re-reads the manifest. If the stage is ever re-run on changed bytes, the manifest parsed_sha changes but the existing sets keep their old parsed_sha256 ($setOnInsert). The update filter then silently matches 0 sets, and publish_book would 409. That is safe but confusing, so consider checking update_one.matched_count == 1 and failing loudly.",
+    "publish_book makes the whole book live at once with 365-day validity. Confirm this is the intended access window for chapter practice.",
+    "Questions carry options 'See original option A..D'. Students rely entirely on the source crop images, so the accessibility text is honest but not a transcription."
+  ],
+  "updated_files": [
+    "/app/backend/tests/jee_chapter_source_audit.py",
+    "/app/backend/tests/jee_chapter_figure_crop_check.py",
+    "/app/backend/tests/jee_chapter_audit_negative_control.py",
+    "/app/test_reports/jee_chapter_source_audit.json"
+  ],
+  "success_rate": {"backend": "100% (78/78 chapters, 3900/3900 keys+solutions, 78/78 scoring sims)", "frontend": "not tested (source audit only)"},
+  "test_credentials": "Read /app/memory/test_credentials.md; no login performed per instruction.",
+  "seed_data_creation": "None. No DB writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Import manifest: /app/data/jee_chapters/import_manifest.json. Book ids: Chemistry 5e075b40-..., Mathematics 9609869b-..., Physics ea3b47ba-.... Source PDFs and parsed.json are in /tmp/jee_chapter_import (tmp, may vanish on restart). Running the auditor takes about 50s: python3 tests/jee_chapter_source_audit.py <out.json>. Note that older BITSAT chapter sets also have chapter_number/chapter_subject, so always select new sets by manifest set_id. Post-publish UI check of JEE Main chapter practice is still pending."
+}
