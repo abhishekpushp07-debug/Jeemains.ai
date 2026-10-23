@@ -1,340 +1,546 @@
-# jeemains.ai / Witcircle — Familiar Exams, Clear Results aur 5-Lakh Capacity Roadmap
+# JEELIVE.AI Native Android App — Detailed Product Mission
 
-Existing learning platform mein light-only, exam-specific test screens, clear navigation, segmented results aur useful My Tests banana—original content aur working exam rules preserve karke.
-Canonical sources, fast high-clarity images aur Android-ready APIs ke saath backend ko 5 lakh simultaneous active examinations ki measurable capacity tak strengthen karna.
+JEELIVE.AI ka proper native Android app JEE Main, BITSAT aur COMEDK students ko structured practice, reliable exam attempts, clear solutions aur useful progress guidance dega.
+Pehla version existing website ke saare student features aur naya 20-second Rapid Fire card mode lekar aayega; distribution sirf private pilot tak limited rahegi.
 
 ## Who it's for
 
-- JEE Main, BITSAT aur COMEDK students, including mobile users on inconsistent networks.
-- Owner aur authorised Content Studio users jo questions, official keys, apne solutions aur optional AI solutions manage karte hain.
-- Future Android users, jinke attempts, results aur content web ke saath consistent rahenge.
+### Primary users
+- JEE Main aspirants jo full mocks aur chapter-wise practice dono karte hain.
+- BITSAT aspirants jinhe exam practice ke saath applicable branch guidance chahiye.
+- COMEDK aspirants jinhe practice, result history aur eligible approximate rank guidance chahiye.
+- Students jo har din chhota revision session karna chahte hain, lekin har baar full-length test dene ka time nahi hota.
+- Students jo sirf score dekhne ke bajay galti ka reason samajhna, original solution padhna aur weak concepts revise karna chahte hain.
+
+### First-version audience
+- Pehla version approved private-pilot participants ke liye hoga.
+- Existing unverified phone-entry flow hi rahega; ise OTP-verified ya secure proof of phone ownership nahi kaha jayega.
+- Pilot mein real private student records, actual personal phone identities aur sensitive learner information use nahi hogi.
+- Private distribution ko verified authentication ka substitute nahi maana jayega.
+- Owner/reviewer ka protected Content Studio student app ka part nahi hoga. Content-management access students ko nahi milega.
+
+### Product mission
+App ka objective website ko phone ke andar khol dena nahi hai. Objective ek focused mobile learning experience dena hai jahan student:
+1. Apne goal ke hisaab se relevant practice choose kare.
+2. Bina answers lose hone ke test complete kare.
+3. Result se turant samjhe ki kya sahi hua aur kya revise karna hai.
+4. Desired subject aur question ki solution tak minimum taps mein pahunch sake.
+5. Formulae aur short concepts ko Rapid Fire ke through frequently recall kare.
+6. Apni progress samjhe, bina fake ranks, guaranteed scores ya misleading AI claims ke.
 
 ## Core features and experience
 
-### 1. Source of truth: original source, approved content aur delivered image alag hain
+### 1. Entry, account aur pilot boundary
 
-Cropped image ek delivery copy hai; use akela source of truth nahi maana jayega. Canonical content ka matlab hoga ek authoritative, traceable record:
+**Entry experience**
+- Opening screen par JEELIVE.AI identity aur clear learning purpose dikhna chahiye.
+- Returning participant ko unnecessarily har launch par sign in nahi karna pade.
+- Existing phone-entry experience par clear indication rahe ki phone ownership verify nahi hui hai.
+- Publicly available information aur personal activity ke beech clear distinction rahe.
+- Sign-in expire hone par saved work lost hone ka impression nahi diya jayega. Re-entry ke baad same profile ka work recover ho sakega.
 
-- Original PDF/source master preserved rahega. Har published question aur option ko uske source document, page aur question se trace kiya ja sakega.
-- Question appearance, option order, official answer key aur published test version ka verified relationship rahega.
-- Owner-provided solution aur AI-generated solution alag pehchaan ke saath rahenge. AI output official answer key ko replace nahi karega.
-- Ek approved question se hi Studio preview, student display, result review aur PDF report ki matching content identity niklegi.
-- Published material ko silently overwrite nahi kiya jayega. Correction ek visible revision hogi; already-running exam ka paper beech mein nahi badlega.
-- Existing records ko bina verification reliable canonical records declare nahi kiya jayega. Missing source links owner ko visible honge.
+**Account separation**
+- Ek participant ke drafts, saved tests, results, reflections aur Rapid Fire history doosre profile mein nahi dikhne chahiye.
+- Account switch aur signout par unsynced work ho toh Keep drafts, Discard drafts aur Stay signed in ke clear choices rahenge.
+- Local pending work ko submitted ya officially saved result nahi dikhaya jayega.
+- APK ya app screen mein owner credentials, server secrets ya private source access expose nahi hoga.
 
-### 2. Original PDF look, small downloads, sharp symbols
+**Release boundary**
+- Phase 1 mein public launch nahi hoga.
+- Existing number-only entry ko silently OTP login mein convert nahi kiya jayega.
+- Verified identity aur real private student data ka use baad ke separately approved release phase ka part hoga.
 
-User ka selected experience **Original PDF look everywhere** hai. OCR/text recreation ko default display nahi banaya jayega.
+### 2. Home: next useful action clear hona chahiye
 
-- Questions, options, diagrams aur mathematical notation source jaise hi rahenge; unnecessary white margins reduce kiye ja sakenge, content nahi.
-- Normal reading ke liye lightweight image aur zoom ke liye sharper copy milegi. Larger copy sirf zarurat par download hogi.
-- Ordinary question-plus-options ke initial readable view ka provisional budget **25–60 KB** hai. Yeh target hai, hard cap nahi: complex diagrams, long questions ya tiny symbols ke liye larger files allowed hongi.
-- Subscripts, fractions, minus signs, vectors, graph labels aur option letters ko byte reduction se zyada priority milegi.
-- Same device par recently opened question dobara unnecessarily download nahi hoga, browser/app cache limits ke andar.
-- Image unavailable ho toh blank question ya invisible failure ke badle visible loading/retry state milegi.
-- Exam traffic ke dauran PDF cropping, image conversion ya AI generation student request ka part nahi honge.
+Home screen ka kaam sirf promotional text dikhana nahi, student ko next action tak pahunchana hai.
 
-### 3. Image delivery aur exam transactions ke alag capacity goals
+**Primary destinations**
+- JEE Main.
+- BITSAT.
+- COMEDK.
+- Rapid Fire.
+- My Tests.
+- All India JEE Main Test Series.
 
-Proposed delivery service **private Amazon S3 storage + Amazon CloudFront CDN** hai. Paid setup, account access aur spending separate approval ke bina start nahi honge.
+**Home priorities**
+- In-progress attempt ho toh usse continue karne ka clear action.
+- New practice start karne ka clear action.
+- Short revision ke liye Rapid Fire ka distinct entry point.
+- Series availability aur streak sirf applicable state mein dikhna.
+- Same banner mein multiple repeated marketing paragraphs nahi honge.
+- Content unavailable ho toh honest empty state; fake active papers ya fabricated student activity nahi.
 
-- Student image bytes directly nearby CDN delivery servers se aayenge; ordinary image views exam application se stream nahi hongi.
-- Image access check cached copies par bhi apply hoga. Same image authorised students ke liye shared CDN cache se serve ho sakegi, bina har student ki separate image copy banaye.
-- Source PDFs, answer keys, unreleased content aur owner-only files student-delivery paths mein expose nahi honge.
-- Protected, short-lived image links web aur Android dono ko support karenge. Link renewal student ka timer, selected answer ya current question reset nahi karega.
-- Published image copies immutable hongi. Naya approved version purani cached image ko galti se current paper mein nahi laayega.
-- CDN speed login, answer saving, submissions aur results ki capacity ka proof nahi hai; unke capacity outcomes alag report honge.
+**Brand identity**
+- Platform name JEELIVE.AI hi rahega.
+- Supplied logo aur uski identity preserve hogi.
+- AI Astra creator attribution requested series surfaces par clear hogi, lekin har screen ko repeated slogans se fill nahi kiya jayega.
 
-Available managed-storage integration backend-proxied downloads document karta hai, direct presigned downloads nahi. Isliye usse akela 5 lakh concurrent image delivery ka established solution nahi maana gaya hai. Proposed external CDN ki account limits aur spending launch approval ka part hongi.
+### 3. Exam hubs aur practice discovery
 
-### 4. Light-only test screens aur exam-specific familiarity
+Har exam ke andar clear destinations rahenge:
+- Mock tests.
+- Chapter-wise practice.
+- Previous results/history.
 
-**Entire test-taking screen light mode mein rahegi**, account theme ya device dark-mode setting kuch bhi ho. No dark question canvas, dark palette panel ya dark-mode toggle inside an exam. Original PDF images light surfaces par clear rahengi.
+**Catalogue experience**
+- Relevant subject choose karna.
+- Chapter ya test search karna.
+- Available papers ko manageable list mein browse karna.
+- Title, subject, question count, duration, availability aur attempt state samajhna.
+- In-progress test par Resume, completed attempt par Result aur available new paper par Start jaisa context-specific action.
+- Unavailable ya restricted paper ko clickable working test ki tarah present nahi karna.
+- Back jaane par selected exam, subject, search aur list position unnecessarily reset nahi honi chahiye.
 
-BITSAT, JEE Main aur COMEDK ke liye ek generic navigation shell ko sirf rename nahi kiya jayega. Har exam ki verified instructions ke hisaab se section access, question palette, review states, save/clear actions, previous/next behaviour, timer aur submission summary align honge.
+**Rule visibility**
+- Attempt start karne se pehle marks, negative marking, duration aur special section rules clear rahenge.
+- Existing JEE chapter content ke liye Physics 90 minutes, Mathematics 120 minutes aur Chemistry 70 minutes; marking +4, −1, 0 preserve rahegi.
+- Ye timings har future paper par blindly apply nahi hongi. Har selected paper ke actual rules authoritative rahenge.
+- Student ko practice chapter aur full exam simulation mein difference samajh aana chahiye.
 
-**Reference policy selected by user: 2027 screens, release hone par.** Tab tak latest verified official reference use hoga, with visible reference-year/verification information. Existing papers ke marking, duration, section rules aur bonus rules UI redesign se silently change nahi honge.
+### 4. Test instructions aur start experience
 
-Research findings and boundaries:
-- **JEE Main:** NTA ka official CBT familiarity portal available hai. NTA instructions question status, saved response aur marked-for-review distinctions document karti hain. Abhyas mobile instructions ko desktop JEE interface ka exact screenshot proof nahi maana jayega.
-- **COMEDK:** official mock-test page seven familiarity demos link karta hai. The linked demo login page is publicly reachable; active exam screen was not verified during this research. Official page khud kehta hai ki demo actual syllabus/pattern ka proof nahi hai.
-- **BITSAT:** official brochure-based navigation and bonus rules provide a reference; current active public exam screen was not verified. FAQ mein model question paper unavailable hona interface demo ki permanent absence ka proof nahi hai.
-- **2027:** kisi exam ki official active 2027 screen is research mein verify nahi hui. Unreleased/unseen layouts ko invent karke exact official replica nahi kaha jayega.
+Start screen par student ko ye clear hona chahiye:
+- Kaunsa paper start hone wala hai.
+- Kitne questions hain.
+- Kitna time milega.
+- Marking aur negative marking kya hai.
+- Special bonus/section restrictions kya hain.
+- Internet interruption mein kya safe rahega aur kya pending reh sakta hai.
+- Start karne ke baad timer kab se count karega.
 
-Desktop par verified screen familiarity target hogi. Mobile par same action names and meanings ke saath readable adaptation hogi; tiny desktop screenshot ko squeeze karke unusable replica nahi banaya jayega. No official logos, endorsement or affiliation claim.
+Repeated tap, slow response ya temporary connection interruption se duplicate attempts create hone ka experience nahi hona chahiye. Existing resumable attempt ho toh usi attempt par wapas aana chahiye.
 
-### 5. Clear navigation across the product
+### 5. Reliable native test player
 
-- Normal study pages par predictable destinations: exam/practice discovery, **My Tests**, results through attempts, and Profile. Owner Studio stays separate and authorised.
-- **Profile → My Tests** required entry point hoga; main student navigation se bhi direct access milega.
-- Page heading, current exam/test identity, selected destination aur back destination obvious honge. Browser back, return from a result, and direct result links context preserve karenge.
-- Active exam distraction-free hoga: global navigation reduced, current exam controls prominent, and accidental exit par meaningful warning. Exit/resume rules existing timer policy follow karenge.
-- Empty, loading, failed and unavailable screens clear next action batayengi; broken-looking blank panels nahi honge.
+**Question presentation**
+- Ek main question reading area.
+- Typed questions aur original source-image questions dono supported.
+- Supplied diagrams, equations aur source images readable rahenge; zoom available hoga jahan needed ho.
+- Source image ko inaccurate extracted text ya invented AI wording se replace nahi kiya jayega.
+- MCQ options aur integer response fields question type ke hisaab se dikhengi.
+- Optional confidence control answer dene mein obstruction nahi banega.
 
-### 6. Segmented, colourful results and solutions
+**Navigation**
+- Subject navigation.
+- Question-number palette.
+- Current, visited, answered, marked, answered-and-marked aur pending-save states mein clear difference.
+- Colour ke saath icon, outline ya label bhi rahega.
+- Mark for review, clear response aur normal next-question navigation available rahenge.
+- Back action accidental submission nahi karega.
 
-Result hierarchy: **score summary → Analysis / Solutions / Real-exam Comparison navigation**. Default Analysis open hoga; tabs/sections active state aur position preserve karenge.
+**Saving experience**
+- Answer select hona aur server par acknowledged save hona alag states hain.
+- Pending, Saving, Saved, Offline aur Conflict states understandable language mein dikhengi.
+- Network loss par local work quietly discard nahi hoga.
+- Purana acknowledgement naye answer ko erase nahi karega.
+- Do devices par conflicting edits hon toh latest work ko silently overwrite nahi kiya jayega.
+- Student ko clear choice milegi: authoritative saved answer dekhna, apna pending draft inspect karna, ya deliberately discard karna.
 
-- **Analysis:** score and accuracy, subject performance, time and pacing where recorded, question outcomes, and 25 deep insights grouped into short, clearly named categories. Evidence unavailable ho toh diagnosis invent nahi hogi.
-- **Feedback form:** Analysis ke graphs aur insights ke immediately baad, usi Analysis view mein. It will not precede analysis, interrupt as a popup, or require traversing all solutions first. Submission gets a visible acknowledgement and repeat taps do not create duplicate feedback.
-- **Solutions:** question-number navigation, subject and correct/incorrect/skipped/review filters, previous/next, student's answer versus official key, then the matching explanation. Source question image aur selected question context visible rahenge.
-- Owner-provided and **AI generated** explanations distinctly labelled; missing solutions show an honest state, not a generate-on-student-view action.
-- A chart or question row can open the matching solution and return to the same analysis context. Filters and selected question are retained when moving between these views.
-- Colour is meaningful: correct/incorrect/skipped/review statuses use consistent accessible colour plus labels/icons, not colour alone. Results can be colourful without making the exam screen visually busy.
-- Existing PDF download remains discoverable and retains its full-attempt content; on-screen filter does not silently narrow the exported report.
+**Timer**
+- Exam timer app background, phone rotation ya device clock change se extra time nahi dega.
+- Screen par remaining time readable rahega.
+- Deadline ke baad late draft ko accepted scored answer nahi dikhaya jayega.
+- App reopen hone par actual attempt state restore hogi, fresh timer nahi.
 
-### 7. My Tests inside Profile
+**Submission**
+- Submit se pehle answer/save status clear hoga.
+- Unsynced answers ko hide karke success receipt nahi dikhayi jayegi.
+- Submission accepted aur result prepared hone ko separate states maana jayega.
+- Grading pending ho toh student ko receipt aur safe return path milega.
+- Grading fail ho toh permitted Retry grading action ho; submitted answers ko change ya re-submit-as-new nahi kiya jayega.
 
-User selected all four capabilities:
+### 6. BITSAT-specific behavior
 
-1. **Resume unfinished tests:** show eligible ongoing attempts, last saved state and remaining/deadline status. Resume original attempt, never restart the timer. Expired/submitted attempts cannot be falsely presented as resumable.
-2. **Attempt history and reports:** completed attempts with exam, test, attempt date, score, status, result entry and available PDF download. Search and exam/date/status filters; retakes remain separate.
-3. **Saved tests for later:** save/remove available tests without creating an attempt. Unpublished, withdrawn or expired tests show honest availability rather than broken Start buttons.
-4. **Compare my attempts:** side-by-side score, accuracy, completion/time where recorded and subject changes, only for meaningfully comparable paper versions and marking rules. Cross-exam/chapter-to-full-paper comparisons do not imply equivalence.
+- Applicable paper mein main questions aur bonus section ka difference clear hoga.
+- Bonus entry sirf eligibility complete hone par offer hogi.
+- Entry se pehle main answers lock hone ki consequence explicit hogi.
+- Bonus enter karne ke baad main answers edit karne ka misleading control nahi rahega.
+- BITSAT result par fabricated AIR nahi dikhaya jayega.
+- Applicable result par top distinct branch matches aur available campus/programme context diya jayega.
+- Guidance ke saath score basis, eligibility aur admission-not-guaranteed qualification preserve rahegi.
 
-Organisation: **In progress / Saved / Completed**, with comparison reachable from selected completed attempts. Each item has one obvious primary action and concise secondary actions; existing history is retained rather than rebuilt as empty lists.
+### 7. Results: score ke baad useful next step
 
-### 8. Same-score real-exam rank comparison
+Existing student result sections phase 1 mein rahenge:
+- Analysis.
+- Progress.
+- Confidence.
+- Rank/guidance.
+- Solutions.
 
-Result ka **Real-exam Comparison** view user ke question ko address karega: “Agar ye marks reference real exam mein aate, toh standing kya ho sakti thi?” It is a historical scenario, not an official result or guarantee that mock performance will repeat in a real paper.
+**Result states**
+- Submitted and grading.
+- Grading needs retry.
+- Submitted but results embargoed.
+- Released result.
+- Revised score version available.
 
-- **Platform rank** among comparable app attempts and **estimated real-exam rank** are separate, clearly named measures. App participants ko total national candidates nahi maana jayega.
-- Every numeric comparison shows reference exam/year, compatible total marks and rules, source, shift/session where relevant, method limits and a range where precision is not supported.
-- **JEE Main:** raw marks alone unique AIR nahi dete. Shift-wise normalization, percentile, candidate pool and ranking rules matter. Supported reference data se percentile/rank range milega; unknown shift ko silently guess nahi kiya jayega.
-- **COMEDK:** same marks can map to different ranks by year, participant distribution and tie rules. Historical evidence supports a range, not an exact personal rank from total marks alone.
-- **BITSAT:** merit/score practice JEE AIR ke barabar nahi hai. Published, usable rank evidence absent ho toh numeric rank unavailable rahega; any available score/cutoff context separately labelled hoga, rank ke naam par nahi.
-- Chapter tests, incomplete papers, incompatible maximum marks, or different bonus rules do not get a fake national-rank conversion. Marks ko percentage se scale karke full-exam rank invent nahi hoga.
-- Primary published sources preferred. A vetted nonofficial historical dataset may be used only with visible provenance, limitations and appropriate permission; coaching estimates never labelled official.
-- Research confirms why normalization matters but **a complete usable marks-to-rank dataset has not yet been verified**. Until reliable evidence is approved, comparison view says “Reliable comparison unavailable” with reason; no hardcoded or AI-invented ranks.
-- 2027 screen availability and 2027 ranking-data availability are separate. Earlier-year evidence remains explicitly labelled until usable 2027 data exists.
+**Analysis**
+- Correct, incorrect, skipped aur other applicable outcomes.
+- Subject-wise performance.
+- Meaningful accuracy/progress context.
+- Current attempt aur comparable previous performance ka useful comparison.
+- Score, maximum aur rules ke context ke bina raw number ko official rank mein convert nahi karna.
 
-### 9. Reliable attempts, APIs aur 5 lakh concurrent examinations
+**Score versions**
+- Original aur available revised versions clearly distinguishable rahengi.
+- Version change par selected subject, question aur result section retain rahega jahan possible ho.
+- Revised result ko silently original result replace karne ki tarah present nahi kiya jayega.
 
-- Web aur future Android app ke liye common, documented, versioned APIs: catalogue, saved tests, attempt history, start/resume, answer save, submit, results, feedback aur permitted solution viewing.
-- Android ko direct database access, website scraping ya embedded cloud credentials ki zarurat nahi hogi.
-- Connection drop, refresh aur repeated requests se duplicate attempts, double submission ya newer answer ka older answer se replacement nahi hoga.
-- Student ko saved, saving aur offline/unsaved states clearly dikhengi. Device par pending answer ko server-saved bataya nahi jayega. Exam-specific Save/Review button meaning aur recovery drafts confusing tarah se mix nahi honge.
-- Exam clock aur submission rules authoritative rahenge; device clock badalna extra exam time nahi dega.
-- Database, application capacity, memory, connections, caches and report/AI workloads ke explicit capacity boundaries rahenge. “More RAM” ya “CDN added” alone scale proof nahi hai.
-- Student answers durable acknowledgement ke bina saved nahi dikhengi. A cache eviction or service restart must not become the only cause of losing acknowledged work.
-- Reports, analytics, historical rank comparisons and AI processing exam answers save karne ki capacity se compete nahi karenge.
-- Target **500,000 simultaneously active examinations** hai, including start, navigation, saves, reconnects and finish—not idle logged-in users. Current capability ko evidence ke bina is target ke barabar present nahi kiya jayega.
+**Guidance**
+- JEE Main aur COMEDK rank ranges approximate aur non-official rahengi.
+- Sirf eligible full-paper context mein available guidance dikhayi jayegi.
+- Chapter score ko full-exam score scale karke guessed AIR nahi banega.
+- BITSAT ke liye branch guidance, invented rank nahi.
+- Insufficient evidence par clear Unavailable state; made-up confidence nahi.
 
-### 10. Existing product commitments remain protected
+### 8. Focused Solutions — agreed navigation
 
-- Existing brand identity: matte maroon `#5C0025`, Figtree aur Roboto Mono. Latest request authorises navigation/result redesign and mandates light-only tests; it supersedes the earlier no-redesign limitation, not the content-preservation commitment.
-- Existing student phone login aur owner Content Studio access remain; replacement login system is not part of this proposal.
-- Existing 94 BITSAT chapter tests ke content, marking aur duration unchanged.
-- Existing 50 BITSAT full mocks: 130 main + 12 conditional bonus questions, 180-minute common timer, +3/−1/0 marking.
-- Bonus sirf all 130 main answers select hone par unlock; warning ke baad main answers locked.
-- Full mocks ki current visibility commitment 17 October 2027 tak retained; invalid material private aur reason Studio mein visible.
-- Retakes separate attempts rahenge. Existing results, graphs, ranks where comparable data exists, 25 deep insights, AI Answer Review aur PDF reports retained and better organised.
-- Official PDF key scoring authority rahegi. AI disagreement automatic correction nahi banega.
-- AI **sirf owner ke explicit Solve action** par chalega, mocks aur chapterwise dono ke liye. Upload, publish, login, exam, result view, startup ya scheduled discovery se naya solving work start nahi hoga.
-- Owner solutions overwrite nahi hongi. Already-saved AI solutions preserve hongi; legacy automatic work stop/pause hoga, delete nahi.
+Required layout:
+1. Small subject tabs.
+2. Selected subject ke question numbers ki ek horizontal scroll row.
+3. Sirf selected question aur uski released solution.
+
+**Behavior**
+- Subject tap karne par usi subject ka question navigation dikhna chahiye.
+- Question number tap karne par wahi question open ho.
+- Original paper question numbers preserve honge; filtering ke baad renumber nahi honge.
+- Long question rows mein last question easily reachable rahega.
+- Selected question visible aur clearly highlighted rahega.
+- Incorrect, correct, skipped, marked aur other relevant filters preserve rahenge.
+- Empty filter result par honest empty state aur alternate filter action.
+- Dropdown, Previous/Next strip aur saari solutions ki expanded long list wapas nahi aayegi.
+
+**Solution integrity**
+- Original supplied solution primary source hogi.
+- Active test ya embargo period mein hidden solutions expose nahi hongi.
+- Existing saved supplementary explanation ho toh uski nature clear rahegi.
+- Paused AI generation ko working Generate solution button ki tarah present nahi karna.
+- Solution open karne aur AI se solution generate karne ko same operation nahi maana jayega.
+
+**Reflection and reporting**
+- Student apni mistake category aur short note record kar sakega.
+- Review steps explicitly complete kiye ja sakenge.
+- Review completed ka matlab actions recorded hai, mastery proved nahi.
+- Question, answer key, solution ya display problem report ki ja sakegi.
+- Report submit hona instant key correction ya score change ka promise nahi hoga.
+
+### 9. My Tests aur continuation
+
+Three main views:
+- In progress.
+- Saved.
+- Completed.
+
+**Required actions**
+- Exact in-progress attempt resume karna.
+- Test save/unsave karna.
+- Past result open karna.
+- Applicable filters/search/date context retain karna.
+- Eligible attempts compare karna.
+- Unavailable saved paper ko honest unavailable state mein show karna.
+- Completed, expired, grading aur embargoed attempts ko distinguish karna.
+
+Student ko paper browse karte waqt progress lose hone ya back jaane par starting screen se dobara search karne ki zarurat nahi honi chahiye.
+
+### 10. All India series aur consistency
+
+**Series experience**
+- Existing 62-day series ka clear hub.
+- Today's availability.
+- Upcoming/scheduled papers.
+- Archive/practice access jahan applicable ho.
+- Series results aur analysis.
+- Server-confirmed daily completion streak.
+
+**Availability**
+- Prelaunch, live, start-window closed aur ended/archive states clearly distinguish honge.
+- Countdown, start eligibility aur result release actual series rules follow karenge.
+- Missing paper ke slot mein fake Start action nahi hoga.
+- Historical dates aur future schedules ko promotional copy se override nahi kiya jayega.
+
+**Streak**
+- Current streak, best streak aur relevant completion milestones.
+- Cup/trophy/running animation restrained aur optional-motion friendly hogi.
+- Sirf eligible confirmed series completion streak advance karegi.
+- Rapid Fire session complete karna automatically All India daily test complete nahi maana jayega.
+
+**Compact banner**
+- Deep blue visual identity.
+- Created by AI Astra credit.
+- Main All India / JEE Mains Test Series title.
+- Proper diagonal 45-degree top-right 100% AI ribbon, horizontal pill nahi.
+- Ek pale block mein burgundy Score 200+ with AI aur compact bold AI analysed PYQ based test series descriptor.
+- Compact dates, duration/test-count context, availability aur actions.
+- Repeated aspiration paragraphs aur separate promotional lines se clutter nahi hoga.
+- AI claims, world-best aspiration aur score-goal qualifications explainer mein clear rahengi; verified superiority ya guaranteed score imply nahi hoga.
+
+### 11. New feature: Rapid Fire formula/concept cards
+
+#### Purpose
+Rapid Fire fast recall aur recognition ke liye hoga, full mock ka chhota version nahi.
+
+Student ko short card par formula, rule, definition, relationship ya single concept identify karna hoga. Time-consuming numerical solving, long reasoning chains aur lengthy reading passages is mode ka part nahi honge.
+
+#### Entry and session setup
+- Home par distinct Rapid Fire entry.
+- MVP focus: Physics, Chemistry aur Mathematics.
+- Student subject choose kar sakega.
+- Available content ke hisaab se chapter-specific ya selected subject ka mixed session choose ho sakega.
+- Default session: 10 eligible cards.
+- Har card ke liye maximum 20 seconds.
+- Iska maximum active-question time approximately 3 minutes 20 seconds hoga; feedback aur end-review time is limit mein include nahi hoga.
+- Approved cards kam hon toh actual available count dikhaya jayega; same session fill karne ke liye repeated questions nahi thope jayenge.
+- Cards unavailable hon toh clear empty state. Numerical questions ko force-fit karke mode populate nahi kiya jayega.
+
+#### Card design
+- Center mein ek prominent card.
+- Peechhe next-card ka subtle stack indication, Tinder-inspired feel.
+- One short prompt, readable formula if needed, aur short answer choices.
+- Preferably one or two short lines of prompt; no long paragraphs.
+- Clear subject/chapter label, current card number aur 20-second indicator.
+- Answer choices text-heavy ya multi-step nahi hongi.
+- Correctness sirf colour se communicate nahi hogi.
+
+#### Allowed content
+- Formula recognition.
+- Law/principle identification.
+- Meaning of a short symbol or relationship.
+- Unit/dimension recognition where no calculation is required.
+- Direct conceptual distinction.
+- One-step true/false recognition with clearly written options where appropriate.
+
+#### Excluded content
+- Numerical substitution.
+- Arithmetic calculations.
+- Multi-step algebra or derivations.
+- Long logical puzzles.
+- Large passages.
+- Dense diagrams requiring prolonged analysis.
+- Ambiguous trick wording jiska main challenge reading confusion ho.
+- Unreviewed automatically generated cards.
+
+Short symbolic formula dikhana allowed hai; values substitute karke answer calculate karwana allowed nahi.
+
+#### Answer and gesture rules
+- Answer select karne ka authoritative action option tap hoga.
+- Swipe ko guess/correctness ka implicit signal nahi maana jayega.
+- Answer tap hote hi lock hoga; double tap se score change nahi hoga.
+- Answer ke baad short Correct/Incorrect feedback aur ek-line concept explanation dikh sakti hai.
+- Answer ke baad right swipe ya Next button next card par le jayega.
+- Answer se pehle left swipe ya Skip button current card skip karega.
+- Gesture ke equivalent visible buttons rahenge, taaki swipe difficult hone par bhi feature usable ho.
+- Previous card par jaakar locked answer change nahi kiya ja sakega; full review session ke end par milega.
+
+#### 20-second behavior
+- Timer tab start hoga jab card readable form mein saamne aa jaye.
+- Earlier answer dene par remaining 20 seconds wait karna compulsory nahi hoga.
+- Answer lock hone ke baad us card ka answer timer stop hoga.
+- Bina answer ke 20 seconds complete hone par card Timed out record hoga aur next card par transition hoga.
+- Timeout ko answered ya correct nahi maana jayega.
+- App background hone se active card ko extra answer time nahi milega.
+- Background mein session ke baaki cards silently consume nahi honge. Return par expired current card reconcile hoga; next card ka timer uske visible hone par start hoga.
+- Session se bahar nikalne par accidental loss avoid karne ke liye clear exit choice hogi.
+
+#### Rapid Fire scoring
+- Correct: 1 point.
+- Incorrect: 0 points.
+- Skipped: 0 points.
+- Timed out: 0 points, separate count.
+- No negative marking in Rapid Fire.
+- Answered accuracy = correct / answered cards; skipped aur timed-out cards separately visible rahenge.
+- Session score total correct out of total session cards ke context mein dikhaya jayega.
+- Rapid Fire score ko JEE marks, official AIR, BITSAT branch eligibility ya full-test performance equivalent nahi banaya jayega.
+
+#### Session completion
+End screen par:
+- Cards completed.
+- Correct, incorrect, skipped aur timed-out counts.
+- Answered accuracy.
+- Total correct score.
+- Topics needing revision based on this session, without claiming a definitive ability diagnosis.
+- Review missed cards.
+- Repeat missed cards as a fresh practice session.
+- Start another session.
+
+Missed-card review mein original prompt, student's selection or timeout state, correct answer aur short approved explanation milegi. Review untimed hoga.
+
+#### Content and progress separation
+- Rapid Fire ek naya dedicated mode hai; existing full-length numerical paper ko 20-second timer dekar rename nahi kiya jayega.
+- Is mode ke liye reviewed formula/concept cards chahiye.
+- Existing source questions ya supplied solutions ko silently rewrite nahi kiya jayega.
+- New paid AI generation service is feature ka part nahi hai.
+- Rapid Fire activity same pilot profile ke under separately recognizable rahegi.
+- Existing mock-test marks, sealed attempts, series ranking aur 62-day streak rules par iska effect nahi hoga.
+
+### 12. Resilience and honest states
+
+Har important journey mein appropriate Loading, Empty, Offline, Pending, Error, Retry aur Unavailable states honge.
+
+- Loading ko fake progress percentage se fill nahi karna.
+- Error ko blank screen mein hide nahi karna.
+- Network recover hone par duplicate submission ya duplicate session create nahi karna.
+- Long list ya horizontal rail ke last items reachable rahenge.
+- Account/session problem aur content unavailable problem ko distinguish karna.
+- App ko repeatedly open karne par selected context aur safe pending work preserve rehna chahiye.
+- Existing protected content restrictions aur deliberate safety holds bypass nahi hongi.
 
 ## User flow
 
-### Owner
+### Flow A — first private-pilot visit
+1. App opens with JEELIVE.AI branding.
+2. Private-pilot boundary aur unverified phone-entry limitation clear hoti hai.
+3. Participant existing permitted pilot entry complete karta hai.
+4. Home par exams, Rapid Fire, My Tests aur series destinations milte hain.
+5. Selected profile ka hi progress/context dikhaya jata hai.
 
-1. Source upload/open → original source aur question/option preview available.
-2. Source mapping, crop readability aur official key completeness visible; unresolved new content publish nahi hota.
-3. Owner apna solution retain/provide karta hai, ya selected test par **Solve with AI** explicitly click karta hai.
-4. Solve action eligible missing solutions, existing owner solutions aur expected AI usage clearly batata hai; repeated clicks duplicate work nahi banate.
-5. Approved content ek complete version ke roop mein live hota hai; half-published paper students ko nahi dikhta.
-6. AI/PDF disagreements review list mein jaate hain; scoring key unchanged rehti hai jab tak existing authorised correction process se verified decision na ho.
-7. Owner delivery health, feedback, content readiness aur costs dekhta hai; supported official interface references and historical-comparison evidence remain identifiable.
+### Flow B — chapter practice
+1. Exam select.
+2. Chapter practice select.
+3. Subject/chapter choose.
+4. Paper details aur rules read.
+5. Readiness confirmation.
+6. Start or resume the appropriate attempt.
+7. Answer, mark, navigate and monitor saving state.
+8. Pending saves resolve karke submit.
+9. Receipt/grading state.
+10. Result and focused Solutions.
+11. Mistake reflection or relevant next practice.
 
-### Student — web aur future Android
+### Flow C — interrupted full mock
+1. Ongoing attempt mein connection/app interruption hoti hai.
+2. Pending work safely distinguished rehta hai; timer ko extra time nahi milta.
+3. App reopen/reconnect par same attempt recover hota hai.
+4. Accepted answers aur pending drafts reconcile hote hain.
+5. Conflict/deadline ho toh clear explanation milti hai.
+6. Student allowed state se continue karta hai ya sealed result par jata hai.
 
-1. Exam discover kare, test save kare, ya **Profile → My Tests** se continue/history open kare.
-2. Exam instructions, source/reference year and paper rules dekhe; light-only test start/resume kare.
-3. Exam-specific familiar actions se questions navigate, answers save, mark/review or clear kare. Original PDF images readable rahein.
-4. Weak network par pending versus acknowledged state clear rahe; resume original timer aur existing answers retain kare.
-5. Existing bonus and submission rules follow karke durable submission confirmation mile.
-6. Result score summary dekhe → Analysis explore kare → uske neeche optional feedback de.
-7. Solutions mein selected question review kare; Real-exam Comparison mein available evidence-backed scenario dekhe, clearly separated from app cohort rank.
-8. My Tests se report download, eligible retake or comparable previous attempts open kare; context lose na ho.
+### Flow D — focused solution revision
+1. Completed result open.
+2. Solutions tab select.
+3. Subject tab choose.
+4. Horizontal row se desired original question number select.
+5. One question and released solution read.
+6. Mistake category/note or content report record.
+7. Filter/subject/question change without losing result context.
+
+### Flow E — 3-minute Rapid Fire burst
+1. Home → Rapid Fire.
+2. Physics/Chemistry/Mathematics choose.
+3. Chapter-specific or available mixed set choose.
+4. Session count and 20-second rule visible.
+5. First card appears; timer begins.
+6. Option tap locks answer; short feedback appears.
+7. Right swipe/Next advances; unanswered left swipe/Skip records skip.
+8. Timeout automatically records timed-out card and advances.
+9. End summary shows correct, incorrect, skipped and timed-out separately.
+10. Student reviews missed concepts or starts another session.
+
+### Flow F — daily series
+1. Series banner/hub open.
+2. Current availability and start eligibility visible.
+3. Eligible paper start/resume.
+4. Complete and submit under its existing rules.
+5. Eligible confirmed completion updates series streak.
+6. Results become available only when release rules allow.
+7. Archive and personal series history remain accessible where permitted.
 
 ## UI/UX feel
 
-The latest request is a usability redesign, not just cosmetic recolouring. Familiar destinations, clear page hierarchy, fewer competing actions and predictable back/next behaviour are the priorities.
+### Overall personality
+- Elegant, attractive, energetic and trustworthy.
+- Not dead/minimal to the point that every action looks the same.
+- Not loud, cluttered or full of competing gradients, slogans and animations.
+- Native navigation and gestures; website wrapper nahi.
+- Clear hierarchy: main action, supporting information, optional details.
 
-- Exam workspace strictly light-only with white/light-neutral surfaces and strong text/diagram contrast. Existing source images and zoom/pan remain readable without inverted colours.
-- BITSAT, JEE Main and COMEDK controls derive from verified references, not decorative branding. Status colours and action semantics follow each verified exam; lack of 2027 evidence stays visible.
-- Outside active exams, retain the maroon brand while using restrained colour-coded analysis sections, clear headings, accessible legends and well-spaced charts.
-- Desktop exam familiarity and mobile usability have separate presentation needs. Mobile uses reachable controls and an accessible question navigator without covering the question or creating horizontal scrolling.
-- Result analysis, solution reading and rank comparison have distinct destinations; all preserve current test identity and a clear route back to My Tests.
-- Keyboard access, visible focus, touch targets, loading/retry states and non-colour status labels apply throughout. Feedback stays below Analysis; no interruption or compulsory form before solutions.
-- No fabricated testimonials, official affiliation, rank guarantees or proven-capacity badges.
+### Existing colours to preserve
+- JEE Main: glossy blood red identity.
+- BITSAT: saffron/orange identity.
+- COMEDK: premium black identity.
+- All India series: deep shining blue identity.
+- Score tagline and diagonal AI ribbon: supplied logo ke burgundy-red colour family.
+- Subject tabs: distinct but coordinated accents.
+
+### Reading and accessibility
+- Question and solution reading surfaces white/light aur high contrast rahengi, including original source images.
+- Dark/light shell choice reading clarity ko harm nahi karegi.
+- Comfortable touch targets, scalable text aur readable formulas.
+- Selected tabs, active question, chosen answer aur save state clearly visible rahenge.
+- Accessibility labels and non-colour status cues.
+- Reduced motion preference respected.
+- Card swipe, trophy and ribbon styling useful hierarchy support karegi; exam reading distract nahi karegi.
+
+### Rapid Fire feel
+- Strong single-card focus.
+- Smooth but brief swipe transition.
+- Visible countdown without aggressive flashing.
+- Correct/incorrect feedback concise.
+- No loud casino-style rewards, penalty lives, distracting confetti loops or public racing leaderboard in the MVP.
+- Small-card experience aesthetically distinct hoga, lekin JEELIVE.AI branding se disconnected nahi lagega.
 
 ## Implementation phases
 
-### Approval model: 3 major delivery phases, 25 owner-approved checkpoints
+### Phase 1 — Complete student-feature private pilot: MVP
 
-Roadmap ke 25 numbered checkpoints hi user ke requested **25 working phases** hain; unhe neeche 3 major delivery phases mein group kiya gaya hai.
+**Sirf ye phase ab approve hone ke baad build hoga.**
 
-**Sirf major Phase 1, MVP, current build scope hai. Uske andar bhi ek numbered checkpoint complete hone ke baad stop hoga, completion evidence aur limitations share hongi, aur next checkpoint ke liye explicit approval li jayegi.** Major Phases 2–3 future roadmap hain, current implementation permission nahi. Plan approval saare 25 checkpoints, paid services ya capacity expenses ko ek saath authorise nahi karta. Current action planning only hai.
+Included:
+- Proper native Android student experience.
+- Existing phone entry with explicit unverified/private-pilot limitation.
+- All current website student features: exam discovery, mocks, chapters, test player, save/resume, My Tests, comparisons, results, focused solutions, reflection/reports, applicable rank/branch guidance, All India series and streak.
+- New Rapid Fire mode with 10-card default sessions, maximum 20 seconds per card, formula/concept-only content, native card gestures, simple scoring and missed-card review.
+- Supplied branding and the latest compact diagonal-ribbon banner treatment.
+- Clear pending/offline/error/empty/release states.
+- Existing content, scoring, timing and source-solution integrity preserved.
 
-### Major Phase 1 — MVP: familiar exams, clear navigation aur useful results
+Not included:
+- Public release.
+- OTP upgrade.
+- Real private student data.
+- Native owner/reviewer administration.
+- New AI generation, social feed, subscriptions, payments, push campaigns or proctoring.
+- Full offline download library or unrestricted copying of private PDFs.
+- Restoring a result-PDF download control that is intentionally hidden in the current student experience.
 
-**01. Preservation, source baseline aur owner AI control**
-- Outcome: existing content/attempts protected; source-traceability gaps visible; automatic mock/chapter AI solving band and legacy automatic work paused/cancelled without deleting saved solutions. Per-test explicit Solve control protects owner solutions.
-- Completion evidence: no student/upload/publish action starts AI; owner-requested jobs alone can proceed; existing tests and source gaps have a clear status summary.
+### Phase 2 — Verified learner identity and wider-use readiness
 
-**02. Product navigation foundation**
-- Outcome: consistent discovery, My Tests and Profile destinations, clear page identity and context-preserving back navigation. Profile includes the requested My Tests entry.
-- Completion evidence: students can reach and return from tests/results without dead ends, losing filters or being sent to an unrelated page. Active-exam exit is deliberate.
+This phase is not part of the current build approval.
 
-**03. Light-only exam workspace**
-- Outcome: test screen, question surface, palette and navigation remain light under all account/device theme settings; original PDF appearance and zoom remain readable.
-- Completion evidence: no dark exam view, no hidden action or covered question on mobile, and a clear save-state display. Existing answers and timer behaviour are preserved.
+- Verified student identity and appropriate account recovery.
+- Clear account privacy and deletion experience before wider real-user use.
+- Refinement of confusing journeys identified during the private pilot.
+- Expansion of reviewed Rapid Fire formula/concept coverage.
+- Clear separation of real learner information from pilot-only activity.
 
-**04. JEE Main familiarity mode**
-- Outcome: section/question navigation, response-save/review meaning, palette legend, numerical entry where applicable and submission flow follow verified NTA/JEE references.
-- Completion evidence: reference source/year and any adaptations are visible; mobile Abhyas is not treated as proof of desktop parity. 2027 mode is labelled pending until its actual reference can be verified and approved.
+All core student features and the initial Rapid Fire experience already belong in phase 1; phase 2 is not a reason to postpone them.
 
-**05. BITSAT familiarity mode**
-- Outcome: BITSAT navigation follows verified references; all-main-answer bonus eligibility, warning and main-question locking remain unchanged.
-- Completion evidence: BITSAT is not merely the JEE screen renamed. Unverified visual details are labelled as a practice adaptation; no exact 2027-screen claim without evidence.
+### Phase 3 — Controlled public Android release
 
-**06. COMEDK familiarity mode**
-- Outcome: verified COMEDK controls, palette, section movement and submission instructions inform the dedicated exam experience, respecting each published paper's rules.
-- Completion evidence: official familiarity demo and actual paper rules are distinguished. Active-screen parity requires an actual screen reference, not the publicly visible login page alone.
+This phase is not part of the current build approval.
 
-**07. Analysis, solutions aur feedback redesign**
-- Outcome: score summary plus distinct Analysis, Solutions and Real-exam Comparison destinations; colourful labelled charts, grouped deep insights, question filters and linked solution navigation. Feedback sits directly below Analysis.
-- Completion evidence: a student can move from an analysis question to its explanation and back without losing context; feedback never obstructs reading or downloading; AI labels and missing-data states remain honest.
+- Public availability only after verified identity and privacy requirements are resolved.
+- Clear store-facing descriptions, support path and release expectations.
+- Gradual wider availability rather than a claim of unlimited capacity.
+- Existing student progress/content integrity maintained during the transition.
+- Additional integrations or feature families require their own explicit scope; they are not silently bundled into public release.
 
-**08. Complete My Tests experience**
-- Outcome: In progress, Saved and Completed views include original-attempt resume, searchable/filterable history, reports, saved-for-later tests and comparable-attempt comparison.
-- Completion evidence: expired attempts are not resumable, saving a test does not start it, retakes remain separate, and comparison does not mix incompatible exams or scoring rules.
+## Assumptions: choices made without further questions
 
-**09. Same-score real-exam comparison**
-- Outcome: a dedicated historical scenario view separates app cohort rank from source-backed real-exam percentile/rank estimates, using ranges and reference-year/shift context as appropriate.
-- Completion evidence: eligible same-score comparisons are explainable from approved evidence; incompatible tests and missing datasets show explicit reasons. A numeric comparison is not declared ready without usable data, and 2027 estimates are never fabricated from older-year labels.
-
-### Major Phase 2 — canonical content, efficient delivery aur exam integrity
-
-**10. Complete canonical source and version records**
-- Outcome: original source, verified question/options, official key and approved solution origins are traceable; each published paper version is consistent across Studio, exam and report.
-- Completion evidence: source reconciliation exposes gaps; old attempts remain explainable from their original paper and scoring basis; no silent live-content overwrite.
-
-**11. Crop quality and lightweight image variants**
-- Outcome: clipped notation/options and answer leakage are resolved against original sources; lightweight reading and sharper zoom copies preserve PDF appearance.
-- Completion evidence: actual complete-question image-size distribution and readable mobile/desktop samples are available. The 25–60 KB ordinary-view target never overrides mathematical clarity; larger exceptions are documented.
-
-**12. Durable private storage and protected CDN delivery**
-- Outcome: original sources and image copies no longer depend exclusively on runtime files; authorised students receive image bytes directly from shared CDN delivery, not through the exam application on every view.
-- Completion evidence: approved asset completeness, protected origins, authorised cache access and smooth expired-link renewal; bounded prefetch and on-demand zoom avoid whole-paper download storms. Paid infrastructure requires separate prior approval.
-
-**13. Shared web and Android API contract**
-- Outcome: documented, versioned interfaces cover catalogue, My Tests, saved tests, start/resume, answers, submission, results, feedback and protected assets.
-- Completion evidence: a future Android client does not need website scraping, direct database access or embedded storage credentials; existing web flows remain compatible. Building the Android app is excluded.
-
-**14. Durable saving and weak-network recovery**
-- Outcome: delayed/repeated saves cannot silently overwrite newer accepted responses; pending device drafts remain distinct from server-confirmed answers and from each exam's saved/evaluable state.
-- Completion evidence: refresh/reconnect recover the correct acknowledged state; conflicting device changes are not silently accepted; cache loss does not erase the only copy of accepted work.
-
-**15. Deadline, bonus and final-submit integrity**
-- Outcome: authoritative timer, existing bonus rules, expiry and repeat-safe submission stay consistent across clients and new exam layouts.
-- Completion evidence: one final outcome per attempt, no extra time through device-clock changes/reconnect, and recoverable durable submission acknowledgement even if the confirmation screen is interrupted.
-
-**16. Complete publication and audited corrections**
-- Outcome: only complete approved paper versions become available; held content has a reason; verified owner corrections and any resulting regrades are explicit.
-- Completion evidence: no half-published/mixed-version exam, no AI-driven key replacement, and no unannounced scoring-basis change for a running attempt.
-
-**17. Results integrity and heavy-work isolation**
-- Outcome: PDF reports, analytics, rank comparisons, imports and manual AI jobs do not exhaust exam-saving resources; displayed marks, bonus totals and permitted report content remain consistent.
-- Completion evidence: delayed report/AI work has visible status without stalling exams; cohort figures are real and comparable, rank estimates remain separately labelled, and source-matched explanations stay attached to the right questions.
-
-### Major Phase 3 — measured 5-lakh capacity and operational safety
-
-**18. Database, memory and connection capacity**
-- Outcome: active attempt writes, history reads and analytics have explicit capacity limits; memory and connection use remain bounded as concurrency grows. Caches speed up reusable content without becoming the only durable answer store.
-- Completion evidence: peak and sustained workload reports identify read/write headroom, memory growth, connection pressure and bottlenecks; accepted answers reconcile after service interruption. Database replacement or unlimited RAM is not assumed necessary.
-
-**19. Independent scaling and start/finish rushes**
-- Outcome: image delivery, exam APIs, answer storage and background workloads can expand independently; exam-start, reconnect and final-submit bursts receive dedicated capacity planning.
-- Completion evidence: busy/failed components have bounded impact, delivery cache misses do not overwhelm exam services, and demonstrated capacity includes active work rather than idle sessions.
-
-**20. Privacy and abuse protection**
-- Outcome: private results, owner controls, signing credentials and answer keys stay protected; abusive traffic control does not reject legitimate shared-network exam traffic.
-- Completion evidence: access boundaries hold across web/Android-compatible APIs, protected images and My Tests; no promise of screenshot-proof downloaded content. These protections apply from the MVP, not only when this deeper scale checkpoint is reached.
-
-**21. Live exam health view**
-- Outcome: owner can see active attempts, image failures, save/submission failures, capacity pressure and incident status without inspecting technical internals.
-- Completion evidence: image-delivery problems, exam-service problems and delayed analytics are distinguishable, with actionable alerts rather than silent failure.
-
-**22. Recovery and preservation commitments**
-- Outcome: source/content recovery and attempt-data restoration have explicit, evidence-backed commitments; repair does not require wiping students' saved work.
-- Completion evidence: recovery coverage and remaining time/data-loss limitations are documented. Absolute zero-loss or instant recovery is not claimed without evidence.
-
-**23. Exam cost and quota guardrails**
-- Outcome: per-event delivery, database, memory/compute and background-processing costs, provider quotas and approved capacity envelope are understandable.
-- Completion evidence: owner can see expected 5-lakh-event cost and headroom. Budget alerts do not abruptly terminate a running exam; commitments and costly new workloads are controlled in advance. Earlier paid checkpoints still require prior approval.
-
-**24. 500,000 active-exam capacity evidence**
-- Outcome: a written capacity report covers 500,000 simultaneous examinees with same-paper start rush, image navigation, saving, reconnect, expiry and finish bursts.
-- Completion evidence: declared device/network/geography, actual image sizes, latency, failures, data integrity, memory stability, service headroom and cost are reported. Any shortfall is explicit; successful CDN delivery alone is not a pass for the full examination system.
-
-**25. Controlled production release and handover**
-- Outcome: owner-approved release stays within demonstrated capacity; supported screen-reference versions, source integrity, Android API handover and incident/recovery ownership are documented.
-- Completion evidence: actual capacity and remaining limitations are published honestly; 2027 interface adoption requires verified references and owner approval without changing ongoing attempts. No automatic jump to 5 lakh real students.
-
-### Success targets — commitments to measure, not present-day claims
-
-- **Fidelity:** approved crop mein no missing question/option content, no answer-key leakage, readable mathematical notation.
-- **Image budget:** ordinary initial reading image 25–60 KB target; clarity-based exceptions permitted. Size measured per complete question-plus-options view, not a misleading single tiny sub-image.
-- **Reading speed:** prefetched/cached next question near-instant; provisional p95 target under 300 ms to display on the agreed device profile. Uncached normal question provisional p95 target within 2 seconds on the agreed healthy mobile-network profile. Poor/no connectivity ke liye universal instant-load promise nahi.
-- **Answer safety:** no acknowledged answer lost, no accepted older save replacing a newer answer, no duplicate final submission under the agreed workload.
-- **Responsiveness:** provisional healthy-network p95 save acknowledgement under 1 second and durable submission acknowledgement under 2 seconds; full analytics/report generation can finish separately.
-- **Peak service:** provisional critical-request failure rate below 0.1% under declared target conditions; expected permission/validation rejections reported separately.
-- **Capacity:** 500,000 concurrent active examinees is the target. Smaller verified capacity ko 5 lakh-ready label nahi diya jayega.
-
-A bandwidth illustration: average 50 KB per complete question view × 130 main questions × 500,000 students is approximately **3.25 TB delivered**, excluding zoom, bonus, retries and other traffic. CDN original server load reduce karta hai; student bandwidth aur delivery bill zero nahi karta. Aur 500,000 active students ka sirf ek periodic save per 30 seconds bhi about **16,667 requests/second average** hai, before answer-change and submission bursts. Yeh illustrative assumptions hain, measured product traffic nahi.
-
-## Assumptions
-
-1. The latest manual-only AI instruction supersedes all earlier automatic-on-upload/live requirements. Paused legacy automatic jobs will not resume without an explicit owner request. Existing saved solutions remain intact; infrastructure recovery may resume only already owner-requested unfinished work.
-2. Manual solving defaults to one selected test at a time, generating only eligible missing solutions. It does not silently solve the entire library or replace owner-provided content. Existing individual-question controls, if present, remain compatible.
-3. The 5 lakh target means simultaneously active exam takers, including a conservative same-paper peak—not total registered accounts. Initial delivery planning assumes India-heavy traffic because these exams primarily serve that audience; this is a planning assumption, not a claim about current users or a data-residency commitment.
-4. Original PDF appearance remains authoritative for question display. No OCR replacement, retypesetting or reconstruction is introduced as the student default. Compression can change encoding, not question meaning or layout relationships.
-5. The latest request explicitly permits UI/UX and navigation redesign. Existing test content, login, attempts, marking, results/report capabilities and maroon brand remain protected, but their current navigation/layout is not frozen. This is not a wholesale backend rewrite. The handoff is historical context, not independent proof of present production health.
-6. Private S3 + CloudFront remains the proposed delivery integration. Research supports protected direct CDN delivery, not this application's 5 lakh capacity. Account access, final region/residency approval and spending consent are required at the relevant checkpoint; no paid setup is authorised by this plan alone.
-7. Image variants are prepared before delivery. Exact encoding and target-size exceptions follow source clarity rather than choosing the smallest file at any cost.
-8. Image-access links expire and renew; expiry cannot revoke bytes already downloaded by a student. Browser/device caches and screenshots prevent an absolute anti-copy guarantee.
-9. Existing privacy boundaries remain. Student access does not grant source PDFs, official keys during an attempt, unreleased bonus assets or another student's private records. My Tests and comparisons are private to the authorised account.
-10. An attempt remains tied to its published paper and scoring basis. Verified correction/regrading is an explicit, auditable owner action, not an AI side effect or a side effect of changing the exam-screen template.
-11. Future Android API compatibility is included; building/publishing the Android app is not. Existing authentication credentials/providers are not replaced by default.
-12. Full offline exams, new proctoring rules, payments, additional test libraries and new AI providers are outside scope. Existing content rights, numerical-answer support, downloads and previously approved working functionality remain protected.
-13. There remain exactly 25 numbered approval checkpoints within 3 major phases. MVP is checkpoints 01–09; later phases remain roadmap only. Each numbered checkpoint ends with evidence/limitations and an explicit stop for owner approval. Approval of the plan is not permission to execute all checkpoints, launch paid capacity work or deploy automatically.
-14. No application code, queue, database, running deployment or infrastructure changes during planning. The manual-only AI request and new UI changes are not represented as already implemented.
-15. Light-only applies to the entire test-taking workspace irrespective of browser/device/account theme. Other product areas keep their existing theme policy unless the agreed result/navigation redesign requires light surfaces for clarity.
-16. User selected 2027 exam references when released. Until verified references exist, latest verified official guidance is the baseline, labelled with its actual version and any practice adaptations. No automatic source-watching or silent update of ongoing exams is included. Mobile familiarity preserves meanings and reachability rather than claiming identical desktop geometry.
-17. User selected all four My Tests features: resume, history/reports, saved tests and attempt comparison. Comparison defaults to the same paper/version and marking basis; unsupported comparisons explain why rather than fabricate improvement.
-18. Feedback is optional and lives below the completed Analysis content, not at the top of results, in a blocking popup or behind solution reading. Existing feedback data is retained. Public testimonials or external messaging are not added.
-19. Same-score real-exam standing is an evidence-backed historical scenario. Default reference is the latest suitable verified historical dataset, with its real year visible. Official primary data is preferred; vetted nonofficial evidence is explicitly labelled. No usable dataset means a clear unavailable state, not mocked ranks, extrapolated chapter scores or an invented 2027 prediction.
-20. Exact real-exam AIR is not inferable from total mock marks alone. Reference shifts, participant distribution, tie rules, score scale and bonus treatment matter. JEE percentile, COMEDK rank range, BITSAT score/merit context and platform cohort rank are not interchangeable.
-21. The latest dissatisfaction with navigation is addressed through structural changes, not just colours: consistent destinations, context-preserving back links, exam-specific controls, result segmentation and actionable My Tests entries. Existing strengths such as original content, bonus handling and formula zoom are retained.
-
-### Research basis and verified limitations
-
-**Exam screens and same-score comparisons**
-
-- NTA official CBT familiarity portal: https://nta.ac.in/Quiz — JEE Main familiarity resources are present; this does not establish an official 2027 active screen.
-- NTA CBT instructions: https://nta.ac.in/Download/AboutCBT.pdf — primary instruction reference identified for navigation and saved/review status behaviour; exact screen parity still needs the applicable active interface reference.
-- NTA Abhyas mobile instructions: https://nta.ac.in/Abhyas/test — Save & Next, Clear, Review Later and status meanings are documented; this is not a substitute for desktop JEE screenshots.
-- COMEDK official mock page: https://www.comedk.org/mock-test — seven familiarity demos are linked and the page says they do not establish actual syllabus/pattern or show a score.
-- Official-linked COMEDK demo: https://www.digialm.com/OnlineAssessment/index.html?1022@@M47 — public login was retrieved, but active test-screen layout was not verified in this planning session.
-- BITS official FAQ: https://www.bitsadmission.com/FD/BITSAT_FAQs.html — does not provide model question papers; this is not evidence that no interface demo can ever exist. A current active public BITSAT screen was not verified.
-- NTA normalization reference: https://jeemain.nta.nic.in/document/national-testing-agencyntaprocedure-to-be-adopted-for-compilation-of-nta-scoresfor-multi-sessionpapersnormalization-procedure-based-on-percentilescore/ — raw marks alone are not a unique AIR mapping across shifts.
-- No official active 2027 exam-screen reference or complete usable historical marks-to-rank dataset was verified during this planning research. These limits remain visible rather than being filled with invented facts.
-
-**Protected image delivery**
-
-- CloudFront signed URLs validate access policy before serving cached/origin content: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-signed-urls.html
-- Private S3 origin protection: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
-- Shared delivery cache controls: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html
-- Reducing repeated origin requests: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html
-- Service quotas are not an application concurrency guarantee: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+1. Native means an actual Android app experience, not a website opened inside a wrapper.
+2. The existing JEELIVE.AI platform and approved content remain the source of truth; there is no replacement student platform or production data migration.
+3. Phase 1 includes all current student features, as selected, not merely tests and solutions.
+4. Existing unverified phone entry is retained only for the selected private-pilot use. No public release or real private learner information is allowed in that phase.
+5. Native staff/admin tooling is excluded; existing protected web staff workflows remain separate.
+6. Rapid Fire starts with Physics, Chemistry and Mathematics. Other subject families are not promised for this new mode in MVP, while their existing normal-test support remains intact.
+7. A default Rapid Fire session contains 10 eligible cards; fewer available cards are shown honestly.
+8. Twenty seconds is a maximum answer window per card, not a forced wait after an early answer.
+9. Option tapping selects an answer; right swipe after answering advances, left swipe before answering skips. Equivalent buttons are always available.
+10. Rapid Fire awards 1 point for correct, 0 for incorrect/skipped/timeout, with no negative marking. This never changes the JEE/BITSAT/COMEDK normal-test scoring rules.
+11. Rapid Fire timeout advances the active card, but backgrounding the app does not silently consume unseen future cards.
+12. Rapid Fire uses reviewed, short formula/concept content. Automatic paid AI generation and converting lengthy numericals into timed cards are excluded.
+13. Rapid Fire has separate practice history/summary and does not advance the official series streak or create an official rank.
+14. Rank/branch guidance remains approximate, evidence-dependent and unavailable where the current result is not eligible.
+15. Score200+ is a preparation goal; AI Astra/100%AI are the creator's stated series branding. Neither becomes a guaranteed result, proof of AI authorship for every supplied solution, or verified world-best claim.
+16. Existing paused generation and protected content restrictions remain respected.
+17. Only phase 1 is the current proposal for building. Verified identity and public release are later phases, not assumed completed capabilities.
