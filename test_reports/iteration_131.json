@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-23",
+  "type": "small_component_visual_correction",
+  "status": "passed",
+  "target": "https://campus-search-debug.preview.emergentagent.com/home",
+  "request": "100% AI diagonal top-right corner ribbon; reduce banner clutter",
+  "scope": ["LiveSeriesBanner.js", "live-series.css"],
+  "reproduction": "Previous badge computed transform:none and position:static; mobile screenshot confirmed redundant standalone copy.",
+  "checks": {
+    "ribbon_transform": "matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)",
+    "ribbon_position": "absolute",
+    "ribbon_radius": "0px",
+    "score_and_pyq_combined": true,
+    "redundant_banner_copy_removed": true,
+    "claims_qualification_still_in_explainer": true,
+    "desktop_1920x800_overflow": [],
+    "mobile_390x844_overflow": [],
+    "mobile_banner_height_with_streak": 630.59375,
+    "explore_and_live_badge_modal_actions": "passed",
+    "escape_closes_modal": true
+  },
+  "evidence": "/root/.emergent/automation_output/20261023_140546/console_20261023_140546.log",
+  "isolation": "Read-only public schedule GET; browser auth and compact streak MOCKED, all non-GETs blocked. No real login/customer DB writes or AI calls. App contains no newly mocked integration.",
+  "functional_issues": [],
+  "deployment": "Not requested; latest correction verified in preview only"
+}

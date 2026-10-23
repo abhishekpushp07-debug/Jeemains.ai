@@ -1,7 +1,8 @@
 .exam-home>.flagship-banner { margin-bottom:32px; }
 .flagship-home { padding-top:32px; }
-.flagship-brand-row { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:16px; min-width:0; position:relative; z-index:1; }
-.flagship-banner:has(.flagship-brand-row) { row-gap:24px; }
+.flagship-brand-row { grid-column:1/-1; display:flex; align-items:center; min-width:0; position:relative; z-index:1; padding-right:95px; }
+.flagship-banner:has(.flagship-brand-row) { row-gap:10px; }
+.flagship-banner:has(.flagship-brand-row) h2 { margin-top:14px; }
 .series-astra-identity { display:inline-flex; align-items:center; gap:9px; font-size:13px; line-height:1.3; font-weight:550; letter-spacing:.1px; }
 .series-astra-identity svg { flex-shrink:0; }
 .series-astra-identity strong { display:inline-block; font-size:20px; font-weight:850; letter-spacing:-.7px; margin-left:3px; }
@@ -10,25 +11,28 @@
 .astra-on-banner svg { color:#D8AE72; }
 .astra-on-hub,.astra-on-explainer { color:var(--brand-text); margin-bottom:14px; }
 .astra-on-hub { display:flex; width:fit-content; }
-.series-100ai-badge { display:inline-flex; align-items:center; justify-content:center; gap:7px; flex-shrink:0; background:#991B1B; color:#fff; border:1px solid #F4B8B3; border-radius:10px; padding:10px 13px; font-size:13px; font-weight:850; letter-spacing:.5px; box-shadow:inset 0 1px #ffffff40,0 6px 18px #00000024; }
-.series-score-aim { display:flex; flex-direction:column; align-items:flex-start; gap:8px; margin:20px 0 18px; }
+.series-100ai-badge { position:absolute; top:26px; right:-18px; z-index:3; display:flex; align-items:center; justify-content:center; width:154px; height:30px; transform:rotate(45deg); background:#991B1B; color:#fff; border-block:1px solid #F4B8B3; border-radius:0; font-size:11px; font-weight:850; letter-spacing:1.3px; white-space:nowrap; box-shadow:0 4px 12px #00000024; pointer-events:none; }
+.series-score-aim { display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin:20px 0; padding:14px 18px; width:fit-content; max-width:100%; background:#FFF5F3; border-left:4px solid #991B1B; border-radius:12px; box-shadow:inset 0 1px #fff; }
+.series-score-aim .series-score-tagline { padding:0; background:none; border:0; box-shadow:none; }
+.flagship-banner .series-score-aim p.flagship-pyq-headline { color:#15366E; font-size:14px; line-height:1.5; font-weight:750; letter-spacing:0; }
+.flagship-banner .series-banner-facts { align-items:center; gap:12px 20px; margin:22px 0; }
+.flagship-banner .series-banner-facts .series-live-badge { font-size:10px; padding:6px 9px; }
 .series-score-tagline { display:inline-block; padding:9px 16px; border-radius:10px; border:1px solid #F5D3D0; background:#FFF5F3; color:#991B1B; font-size:23px; font-weight:750; letter-spacing:-.65px; line-height:1.3; box-shadow:inset 0 1px #fff; }
 .series-score-tagline strong { font-size:1.18em; font-weight:900; letter-spacing:-1px; }
-.series-score-aim small { color:#C6D9FA; font-size:10px; line-height:1.5; }
 .flagship-banner p.flagship-pyq-headline { color:#fff; font-size:22px; line-height:1.35; font-weight:850; letter-spacing:-.45px; max-width:590px; }
-.flagship-banner p.flagship-astra-ambition { color:#C9DDFF; font-size:12px; line-height:1.65; margin-top:8px; }
 .series-hub-header p.series-hub-ai-headline,.series-explainer-ai-headline { color:var(--ink); font-size:18px; line-height:1.4; font-weight:800; }
 .hub-score-tagline { font-size:17px; margin:14px 0; padding:7px 12px; }
 @media(max-width:640px) {
- .flagship-brand-row { gap:10px; align-items:flex-start; }
- .flagship-brand-row .series-astra-identity { gap:7px; font-size:10px; align-items:flex-start; }
- .flagship-brand-row .series-astra-identity svg { width:16px; height:16px; margin-top:3px; }
- .flagship-brand-row .series-astra-identity strong { display:block; font-size:19px; margin:2px 0 0; }
- .series-100ai-badge { padding:9px 10px; font-size:11px; gap:5px; border-radius:8px; }
- .flagship-banner:has(.flagship-brand-row) { row-gap:22px; }
+ .flagship-brand-row { padding-right:80px; }
+ .flagship-brand-row .series-astra-identity { gap:6px; font-size:11px; }
+ .flagship-brand-row .series-astra-identity svg { width:14px; height:14px; }
+ .flagship-brand-row .series-astra-identity strong { display:inline; font-size:17px; margin-left:2px; }
+ .flagship-banner:has(.flagship-brand-row) { row-gap:10px; }
+ .flagship-banner .series-banner-facts { align-items:flex-start; gap:10px; }
+ .series-score-aim { padding:12px 13px; gap:5px; }
+ .flagship-banner .series-score-aim p.flagship-pyq-headline { font-size:12px; }
  .series-score-tagline { font-size:20px; padding:9px 12px; max-width:100%; }
  .flagship-banner p.flagship-pyq-headline { font-size:18px; }
- .flagship-banner p.flagship-astra-ambition { font-size:11px; }
  .series-hub-header p.series-hub-ai-headline,.series-explainer-ai-headline { font-size:16px; }
  .hub-score-tagline { font-size:17px; }
 }
