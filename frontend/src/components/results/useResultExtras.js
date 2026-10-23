@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../lib/api';
 
 // Live peer statistics and pre-generated AI solutions for one completed attempt.
-export function useResultExtras(id, enabled) {
+export function useResultExtras(id, enabled, suppliedOnly = false) {
   const [cohort, setCohort] = useState(null);
   const [solutions, setSolutions] = useState(null);
   useEffect(() => {
@@ -17,9 +17,13 @@ export function useResultExtras(id, enabled) {
       } catch (e) { if (!stop) setCohort({ state: 'error', reason: e.message }); }
     };
     loadCohort();
-    api('/attempts/' + id + '/ai-solutions').then((d) => { if (!stop) setSolutions(d); }).catch(() => { if (!stop) setSolutions({ items: [], ready: 0, total: 0 }); });
+    if (suppliedOnly) {
+      setSolutions({ items: [], ready: 0, total: 0 });
+    } else {
+      api('/attempts/' + id + '/ai-solutions').then((d) => { if (!stop) setSolutions(d); }).catch(() => { if (!stop) setSolutions({ items: [], ready: 0, total: 0 }); });
+    }
     return () => { stop = true; clearTimeout(timer); };
-  }, [id, enabled]);
+  }, [id, enabled, suppliedOnly]);
   const peer = {};
   (cohort?.questions || []).forEach((q) => { peer[q.id] = q; });
   const ai = {};

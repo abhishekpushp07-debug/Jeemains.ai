@@ -1,0 +1,44 @@
+{
+  "summary": "Post-publication end-to-end verification of the 78 JEE Main chapter sets. (A) READ-ONLY customer-DB checks (find/count/aggregate only, plus the actual exam_navigation.catalogue and chapter_books.exam_catalogue functions invoked in-process with a synthetic read-only principal; no login, no session, no writes). Results: 78 published/live sets: Physics 29 (1450q, 90 min), Mathematics 26 (1300q, 120 min), Chemistry 23 (1150q, 70 min). 3900 questions, all approved=True with no issues, all with q_refs/s_refs, rules +4/-1/0, test_kind=chapter, supplied_worked, independent_check 50/50, 365-day window. Manifest titles, sha256 and file ids match the DB. Requester abhishekpushp07@gmail.com is recorded. Catalogue: subject totals 29/23/26, 78 unique across 7 pages and search works. The new sets do not appear in JEE mocks, BITSAT chapters/mocks or legacy /api/chapter-exams, and catalogue payloads contain no keys or solutions. 144 BITSAT sets are unchanged (hash taken before and after the whole run is identical; attempts/sessions/users/files/question_solutions counts are identical too). There are 0 real attempts, jobs, ai_solutions, solution_requests or manual_solves for the new sets. (B) ISOLATED bridge (iso_bridge_jee_iter116.py, dedicated DB tejas_isolated_iter105_test, which has now been dropped). It copied only the 78 sets, 3 books and 78 file records. put_object was mocked in memory and object storage was GET-only, so real PDFs were only read. Auth was a TEST-ONLY X-Test-User header. API flow, one chapter per subject: preflight; start with deadline = start + 90/120/70 min; same-key and new-key resume keep the same attempt and deadline; no answer, s_refs or solution in the active attempt; results and solution asset return 403 before submit; the question asset is a PNG (200); another user gets 404; studio APIs return 403 for a student. Chem ch1 scoring: Q1-3 correct, Q4 wrong, Q31 integer correct (80), Q32 integer wrong, 44 blank = 14/200 (correct 4, incorrect 2, skipped 44). Physics and Maths: 1 correct + 1 wrong = 3. A negative integer key (-6000) entered with a Unicode minus scored correctly, as did a leading-zero integer. POST AI solution returns 410. Isolated jobs were only grade/cohort, with 0 ai_solutions. (C) UI on the real preview frontend, with /api routed to the bridge. JEE hub, then Chapter-wise card, then 3 subject cards (29/23/26), then Physics with 3 pages, Chem 2, Maths 3, and search 'Matri' finds Matrices and Determinants. Mocks page shows empty, and BITSAT chapters do not include the JEE sets. Set detail: 50 / 70 / 200 / +4 -1 0. Preflight, then start, then the Player timer shows 01:10:00 and counts down. MCQ click and integer entry (Q31=80, Q32 wrong) both work, 'All responses saved'. After reload the deadline is unchanged and the Q31 value is kept. Review & submit gives Results 6/200 (2 correct, 2 incorrect, 46 skipped). Solutions tab: Q31 shows the supplied solution crop 'Q31. Answer: 80 / 10-mark solution' with readable math, the original question crop, response 80 / accepted 80 / +4, and no AI prompt. Download PDF is absent. Player and Results stay light (exam-light) with stored dark theme and OS dark. 390 mobile: Results for chem Q32/Q2, phys Q1 and math Q2 show correct marks and crop images, with no overflow. The Player for Maths ch14 Q1 (triangle/curve diagram) is readable, the timer reads 01:59:58, no overflow. Owner ChapterBookStudio (isolated owner): 'JEE Main · CHAPTER TEST ORGANISER', '50 questions · 70 min · +4/−1/0', 23 chapters · 1150 questions · 23 live, 23/23 independently rechecked, Open student Exams links to /exams/jee-main/chapters, Publish button is disabled, worked-supplied notice is shown, and ManualSolve is hidden (code: rendered only when solution_kind!=='supplied_worked'). The inspect dialog shows the original question, 'Supplied key: D' and the supplied solution. No core bug found.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "GET /api/attempts/{id}/ai-solutions", "issue": "The Results page still issues this read-only GET for supplied_worked attempts. It creates nothing (0 ai_solutions/jobs) but is unnecessary for supplied_worked sets."}
+  ]},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "ChapterBookStudio inspect dialog (chapter-verification-dialog)", "issues": ["The supplied worked-solution crop renders as a ~80px thumbnail and is unreadable without Enlarge, while the question crop is full width. Render the solution at full dialog width."]},
+      {"screen": "ChapterBookStudio header", "issues": ["chapter-book-title shows only the subject ('Chemistry') rather than the book/exam title. The exam appears only in the small eyebrow (minor)."]},
+      {"screen": "Results solution card (390px)", "issues": ["Solution and question crops scale to ~240-270px wide, so the text is very small. Enlarge works; consider defaulting to the 'Readable' zoom on mobile.", "The 'Matched To This Frozen Version' badge uses awkward Title Case."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter116_jee_chapters_readonly.py",
+    "/app/backend/tests/test_iter116_jee_attempt_flow_isolated.py",
+    "/app/backend/tests/iso_bridge_jee_iter116.py",
+    "/app/test_reports/pytest/iter116_readonly.xml",
+    "/app/test_reports/pytest/iter116_flow.xml"
+  ],
+  "action_items": [
+    "Optional: render the supplied solution crop at full width in the ChapterBookStudio inspect dialog",
+    "Optional: skip the /ai-solutions GET on Results when solution_kind is supplied_worked"
+  ],
+  "critical_code_review_comments": [
+    "chapter_books.process_book hard-codes the JEE online timers {'Physics':90,'Mathematics':120,'Chemistry':70}. This is acceptable, but a book whose subject is outside these three would raise KeyError and be reported as the generic 'Processing interrupted' message.",
+    "chapter_books.exam_catalogue (legacy /api/chapter-exams) hard-codes exam 'BITSAT'. This is correct for exclusion (verified), but the route name is ambiguous now that JEE chapters exist.",
+    "independent_evidence() only reads /app/test_reports/chapter50_recheck.json. Future JEE uploads through the UI will stay 'needs_review' until an equivalent audit is provided. This is by design, but document it for owners.",
+    "Out of scope and pre-existing (not fixed): the 94 BITSAT chapter sets are still live in the BITSAT chapter catalogue even though they are approvedFalse."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter116_jee_chapters_readonly.py (new)",
+    "/app/backend/tests/test_iter116_jee_attempt_flow_isolated.py (new)",
+    "/app/backend/tests/iso_bridge_jee_iter116.py (new)"
+  ],
+  "success_rate": {"backend": "100% (7/7 read-only + 7/7 isolated flow + negative/unicode-minus/auth probes)", "frontend": "100% of tested flows (catalogue, player, submit, results, solutions, owner studio; desktop 1920 + mobile 390)"},
+  "seed_data_creation": "Isolated only: 78 sets, 3 books and 78 file records copied into tejas_isolated_iter105_test, plus synthetic users TEST_U116_student/other/owner and ~9 test attempts. The DB was dropped and the bridge killed. No customer-DB writes; the before/after snapshot hash is identical.",
+  "test_credentials": "Read /app/memory/test_credentials.md; not used (no real login). TEST-ONLY X-Test-User principals: student, other, owner.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Read-only: cd /app/backend && python -m pytest tests/test_iter116_jee_chapters_readonly.py -p no:asyncio -n0 (writes /tmp/iter116_realdb_snapshot.json; the second run compares the hashes). Isolated: cd /app/backend/tests && python iso_bridge_jee_iter116.py & (prints SEED116 78 3 78), then python -m pytest tests/test_iter116_jee_attempt_flow_isolated.py -p no:asyncio -n0. Playwright: route **/api/** to 127.0.0.1:8765 with x-test-user, and mock /api/auth/session as {data:{user},meta:{api_version:'1'}}. Submit = player-submit-button, then the button 'Submit & see results'. Solutions: result-view-solutions, then the solution-question-select combobox, then solution-select-N, then solution-content-N. The harness clock is frozen, so server_now is constant (the client timer still ticks). Afterwards kill the bridge and drop tejas_isolated_iter105_test.",
+  "rca of the issue": "No core defects found."
+}

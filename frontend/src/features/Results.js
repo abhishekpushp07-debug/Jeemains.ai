@@ -72,7 +72,7 @@ export default function Results() {
   const [focusQuestion,setFocusQuestion] = useState(null);
   const [solutionState,setSolutionState] = useState({});
   const [confidenceThreshold,setConfidenceThreshold] = useState(0.2);
-  const extras = useResultExtras(id, !!r);
+  const extras = useResultExtras(id, !!r, !!r?.questions?.length && r.questions.every(q => q.solution_kind === 'supplied_worked'));
   const meters = useLearningMeters(id,scoreVersion,!!r);
   useEffect(()=>{
     if (!focusQuestion) return;
