@@ -397,7 +397,8 @@ def test_comedk_and_bitsat():
     _, d = rank(_completed('COMEDK', 175, 180))
     assert (d['state'], d['rank_low'], d['rank_high']) == ('available', 1, 10) and 'Physics Wallah' in d['reference']['title']
     _, d = rank(_completed('COMEDK', 25, 180)); assert d['state'] == 'unavailable'
-    _, d = rank(_completed('BITSAT', 300, 390)); assert d['state'] == 'unavailable' and d['evidence_type'] == 'guidance_only_no_rank_mapping'
+    # iter113: BITSAT now delegates to branch matches; this JEE-shaped fixture is incompatible -> unavailable, no rank
+    _, d = rank(_completed('BITSAT', 300, 390)); assert d['state'] == 'unavailable' and d['kind'] == 'branch_matches' and 'rank_low' not in d
 
 
 @pytest.mark.parametrize('variant', ['retry', 'preview', 'corrected', 'minutes', 'maximum', 'type', 'chapter'])

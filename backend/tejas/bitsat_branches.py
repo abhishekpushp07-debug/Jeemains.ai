@@ -72,6 +72,10 @@ def matches_for_score(score, campus='all', programme='be'):
             'score_note': 'An entered score on the published 390-mark reference scale. This does not change any saved mock result.'}
 
 
+def block_score_ok(s):
+    return isinstance(s, int) and not isinstance(s, bool) and -130 <= s <= 390
+
+
 def attempt_matches(a, score_version):
     r, qs = a.get('rules', {}), a.get('questions', [])
     base = [q for q in qs if not q.get('bonus')]
@@ -87,7 +91,8 @@ def attempt_matches(a, score_version):
                      and (q.get('scoring') or r).get('skipped') == 0 for q in qs))
     summary = a.get('summary') or {}
     block = summary.get('main_block') if len(qs) > 130 else summary
-    if not valid or not block or block.get('maximum') != 390 or not -130 <= block.get('score', -999) <= 390:
+    block_score = block.get('score') if isinstance(block, dict) else None
+    if (not valid or not block_score_ok(block_score) or block.get('maximum') != 390):
         return {'kind': 'branch_matches', 'state': 'unavailable', 'exam': 'BITSAT', 'score': None, 'maximum': 390,
                 'matches': [], 'reference': REFERENCE, 'methodology': METHOD, 'limitation': LIMIT,
                 'reason': 'Automatic comparison needs an original, standard 180-minute BITSAT full mock with 130 main questions and a saved 390-mark main-block score. No chapter, retry, corrected or scaled scores are used. You can enter a separate reference score below.'}
