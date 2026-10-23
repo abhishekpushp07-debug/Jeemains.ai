@@ -1,3 +1,11 @@
+# Current approved task — production JEE content transfer (2026-10-23)
+production_jee_transfer:
+  request: "Live database me question transfer kro"
+  scope: "Only78verifiedJEEchaptersets+3900questions+3900suppliedsolutions,3chapterbooks,81original/subsetPDFfiles; Physics90/Math120/Chem70,+4/-1/0,50questions200marks. Preserveproductionexisting144sets/allusers/sessions/attempts/auth/settings. No AI,no full DB restore,no overwrite."
+  handoff: "Productiondeployerdebugtaskqueuedwithexplicituserapproval and privatebundleREADY. Persistent/app/data/private_transfers/jee_chapters/jee-chapters-transfer.tar.gz(47,152,260bytes,SHA355fa49b23a03533ad56d9b709ccb1eeb77bbcec02a8cd100aad68042e499bc4). Metadata+81hashverifiedPDFs,only78sets/3books/81files,no secretsoruserdata.0700directory/0600files/gitignored. SourceDBreadonly/unchanged. Needappend-onlytargetmetadata/privatefiles,conflictstop,snapshotoldrecords,verifyliveobjecthashesbeforepublish. ActualtargetwriteNOTconfirmed;donotclaimmigrationcomplete."
+  verify: "Sourceaudits115–117alreadyPASS; currentexportsourcesmuststillmatchaudit/manifesthashes. Aftertransferdeployerreadonlytargetcounts/timers/rules/refs/storagedigest,catalogue(subjectfilters/pagecounts)viafunctionswithoutloginwrites. FreshQAisolatedonly; no studenttestrecords inproduction. Needrealproductionaccessbeforecallingdone."
+
+
 # Active production login repair — 2026-10-23
 production_origin_repair:
   reproduction: "Actual https://www.jeelive.ai redirectshttps://jeelive.ai. Bothphone/staffPOSTwithOriginhttps://jeelive.ai403origin_denied beforevalidation/DB. ProductionFRONTEND_URL != canonicalconfirmedbydeployerRCA; GETsessionhealthfast. Noactualaccountloginperformed/customerDBwrites."

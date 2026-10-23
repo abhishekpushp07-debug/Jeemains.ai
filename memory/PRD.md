@@ -1,6 +1,12 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
 
+## Active authorised production content transfer — 2026-10-23
+- User explicitly requested: “Live database me question transfer kro”. ApprovedscopeONLY78previouslyauditedJEEchaptersets/3900questions+3900suppliedsolutions andtheir3book/81PDFsourcefilemetadata, no existingdataoverwrite/reset. Physics29chapters90min;Math26chapters120min;Chem23chapters70min;50q/200max/+4−1zeroMCQinteger. Preserveoriginalsolutions,NOAI.
+- Production-side deployerdebughandoffsubmitted (queued) with3bookIDs,manifest+independentauditproof and strictappend-only/conflictchecks. No fullredeploy or databaseclone; no user/session/attempt/auth/key/DNS migration. Stageprivate thenverifyhashes/sourceaccess/timers beforeexposingnewsets. Copy/regenerateonlyrequiredcompiledcontent; avoidencryptedpreviewvault records or unrelatedcachedata.
+- Main completed immutable scopedexport in persistentprivate directory `/app/data/private_transfers/jee_chapters/` (0700;files0600;gitignored). `jee-chapters-transfer.tar.gz`:47,152,260bytes,SHA256`355fa49b23a03533ad56d9b709ccb1eeb77bbcec02a8cd100aad68042e499bc4`.82members=metadata+81PDFs,54,575,888PDFbytes. Only78sets+3books+81files,all81sourcehashescheckedagainstmanifest,audit/sourcefieldschecked,re-readunchangedafterexport. Noauth/attempt/AI/secretsdataexported. Bundle+canonicalrecordhasheshandoffsenttodeployer(debugqueued). Actualtargetwrite/productionvisibilityNOTyetconfirmed. Existingprod144sets must remainunchanged; expected222setsafteraddition. No realstudenttestwrites; awaitproductionmigrationreportbeforecallingdone.
+
+
 ## Production login-origin incident — live blocker cleared (2026-10-23)
 - **Latest live evidence11:31–11:32UTC:** canonicalhttps://jeelive.ai Origin nowgets422(expectedvalidation),notprevious403, forbothinvalidphoneandstaffemptybody. Times0.608s/0.356s. Untrusted-originPOSTstill403. www308→apex~0.403s; desktop1920×800/mobile390×844loginformrenders,zerooverflow. Seeiteration120targetedread-onlyreport. No realaccountsigninperformedorcustomerrecordsmodified. Formaldeploymentcompletion/newcodeartifactstatusstillawaitingplatformnotification; do NOTre-dispatchexistingdeployment. 78JEEchaptersremainpreview-only; separate safeprodimportpending.
 
