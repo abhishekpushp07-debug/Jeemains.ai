@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-23",
+  "type": "non_app_handoff_artifact_validation",
+  "status": "passed",
+  "download_url": "https://campus-search-debug.preview.emergentagent.com/downloads/JEELIVE_AI_Native_Android_Handoff.zip",
+  "bytes": 436192,
+  "sha256": "1be55a622f0ad03953d7090c08c72318e3a6820862b14f35c2b655d3f0b342fa",
+  "checks": {
+    "download_http": 200,
+    "content_type": "application/zip",
+    "download_equal_local_archive": true,
+    "zip_crc": "passed",
+    "files": 35,
+    "manifest_file_hashes_match": true,
+    "api_paths": 46,
+    "api_operations": 49,
+    "schemas": 37,
+    "schema_refs_resolve": true,
+    "json_files_and_postman_bodies_parse": true,
+    "admin_and_transfer_routes_excluded": true,
+    "env_private_keys_pdfs_customer_records_excluded": true,
+    "required_brief_prompt_brand_assets_reference_hook_present": true
+  },
+  "scope": "Documentation and native-agent handoff only. Backend compatibility reviewed from mounted routes and cookie-session source; schema obtained by read-only preview GET.",
+  "backend_or_auth_modified": false,
+  "customer_database_writes": false,
+  "credentials_created_or_changed": false,
+  "android_project_or_apk_created": false,
+  "android_device_end_to_end_tested": false,
+  "known_gap": "Student phone convenience entry is NOT OTP verified. Native device/session/image integration and release qualification remain to be implemented and tested by Android agent.",
+  "artifact_issues": []
+}
