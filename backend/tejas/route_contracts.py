@@ -9,6 +9,7 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'series_streak.progress': ('own_live_series_streak_only', 'normal', 'read'),
     'live_series.catalogue': ('public_schedule_metadata_only', 'normal', 'read'),
     'live_series.history': ('own_series_attempts_only', 'normal', 'read'),
     'live_series.studio_schedule': ('owner_schedule_only', 'normal', 'read'),

@@ -21,6 +21,7 @@ const Exams = lazy(() => import("./features/Exams"));
 const Profile = lazy(() => import('./features/Profile'));
 import './learning-workspace.css';
 import './live-series.css';
+import './series-streak.css';
 import './exam-light.css';
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));

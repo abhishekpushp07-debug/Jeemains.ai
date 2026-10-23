@@ -1,14 +1,19 @@
 {
-  "project_title": "All India JEE Mains Flagship Test Series & Exam Platform Refinement",
+  "project_title": "All India JEE Mains Flagship 62-Day Daily Completion Streak & Gamified Progress System",
   "theme": {
     "mode": "hybrid_adaptive",
-    "primary_brand": "#5C0025",
+    "primary_brand": "#0D9488",
+    "primary_brand_dark": "#0F766E",
+    "primary_brand_light": "#2DD4BF",
     "secondary_brand": "#0284C7",
-    "flagship_teal": "#0D9488",
-    "flagship_teal_dark": "#0F766E",
-    "flagship_teal_light": "#2DD4BF",
     "sky_blue_accent": "#38BDF8",
     "sky_blue_hover": "#0284C7",
+    "amber_gold_trophy": "#F59E0B",
+    "amber_gold_bright": "#FBBF24",
+    "bronze_cup": "#CD7F32",
+    "silver_cup": "#94A3B8",
+    "diamond_trophy": "#38BDF8",
+    "streak_fire_orange": "#F97316",
     "background_light": "#FAFAFA",
     "background_dark": "#090D16",
     "surface_light": "#FFFFFF",
@@ -32,59 +37,129 @@
   },
   "visual_enhancers": {
     "glassmorphism": "backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border border-slate-200/60 dark:border-slate-800/60",
-    "flagship_card_gradient": "bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 text-white border-2 border-teal-500/30 shadow-2xl rounded-2xl p-6 md:p-8 relative overflow-hidden",
-    "live_blinking_badge": "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-400 border border-rose-500/40 animate-pulse",
+    "streak_track_bg": "bg-gradient-to-r from-teal-950 via-slate-900 to-sky-950 text-white border-2 border-teal-500/30 shadow-2xl rounded-2xl p-6 md:p-8 relative overflow-hidden",
+    "runner_pulse_glow": "shadow-[0_0_20px_rgba(56,189,248,0.5)] border-2 border-sky-400 rounded-full",
+    "trophy_milestone_badge": "inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 animate-bounce",
     "sky_blue_pill": "bg-sky-500 hover:bg-sky-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all duration-200"
+  },
+  "streak_feature_specification": {
+    "total_duration": "62 Days (1 Dec 2026 - 31 Jan 2027 IST)",
+    "core_metrics": [
+      {
+        "key": "current_streak",
+        "label": "Current Streak",
+        "format": "{N} Days",
+        "icon": "Fire Flame / Runner Icon",
+        "hinglish_tagline": "Continuity tootne mat dena! 🔥"
+      },
+      {
+        "key": "best_streak",
+        "label": "Best Streak",
+        "format": "{N} Days Record",
+        "icon": "Trophy Crown",
+        "hinglish_tagline": "Aapka highest consistency record!"
+      },
+      {
+        "key": "completion_count",
+        "label": "Completed Tests",
+        "format": "{X} / 62 Days",
+        "icon": "Check Circle",
+        "hinglish_tagline": "62 Din Target JEE Mains!"
+      }
+    ],
+    "animated_runner_and_track_design": {
+      "runner_mascot": "Animated SVG Running Sprint Silhouette with Sky-Blue (#38BDF8) dynamic stride motion & particle speed trails.",
+      "track_layout": "Responsive horizontal scrollable / curved 62-step progression track with glowing teal node markers, milestone checkpoints, and real-time runner position pin.",
+      "running_animation_behavior": "Smooth CSS @keyframes sprint bobbing + SVG legs movement along track percentage: (Completed_Days / 62) * 100%.",
+      "reduced_motion_fallback": "Replaces continuous running animation with a crisp, static high-contrast location marker icon and instant progress bar fill for reduced motion preference (`prefers-reduced-motion: reduce`)."
+    },
+    "trophy_milestones": [
+      {
+        "day": 7,
+        "title": "7-Day Warmup Cup",
+        "cup_tier": "Bronze Cup 🥉",
+        "hinglish_note": "Pehla Hafta Conquered! Base Ready!"
+      },
+      {
+        "day": 15,
+        "title": "15-Day Momentum Trophy",
+        "cup_tier": "Silver Cup 🥈",
+        "hinglish_note": "Half-month Consistency Master!"
+      },
+      {
+        "day": 30,
+        "title": "30-Day Halfway Shield",
+        "cup_tier": "Gold Cup 🏆",
+        "hinglish_note": "Halfway Mark Done! 30 Mocks Completed!"
+      },
+      {
+        "day": 45,
+        "title": "45-Day Supercharged Elite",
+        "cup_tier": "Diamond Cup 💎",
+        "hinglish_note": "Day 45 Streak Supercharged 🔥 - Rank Booster Mode!"
+      },
+      {
+        "day": 62,
+        "title": "62-Day JEE Legend Crown",
+        "cup_tier": "Grand Champion Trophy 👑🏆",
+        "hinglish_note": "62/62 Days Completed! JEE Mains Champion!"
+      }
+    ],
+    "states_and_handling": {
+      "prelaunch_state": "Countdown to Dec 1, 2026 with unlocked warm-up streak pledge button.",
+      "active_daily_state": "Today's Live Test status highlight: 'Aaj Ka Test Completed! Streak Safe! 🏆' or 'Aaj Ka Test Pending - 3 Hours Mock Baaki Hai! ⏳'",
+      "missed_day_state": "Honest non-fabricated completion tracking. Displays streak broken notice with 'Streak Freeze / Buffer Attempt' options without falsifying historical test submission logs.",
+      "completed_state": "Confetti celebration modal with shareable report card card layout."
+    },
+    "integration_points": [
+      {
+        "location": "Home Dashboard Banner (`LiveSeriesBanner.js`)",
+        "type": "Compact 62-Day Streak Widget with mini runner progress, current streak counter, and direct 'Continue Streak' CTA button."
+      },
+      {
+        "location": "All India Series Hub (`LiveSeries.js`)",
+        "type": "Full-width Interactive 62-Day Sprint Hub featuring dynamic track visualization, Cup Milestones gallery, detailed streak statistics, and day-by-day test selector grid."
+      }
+    ]
   },
   "key_user_requirements": [
     {
       "requirement_id": "REQ-01",
-      "summary": "Download result PDF deactivated in result section",
-      "action": "Hide / remove the PDF download button in frontend result workspace. Set inactive flag so users do not attempt downloading PDF result files."
+      "summary": "62-Day Completion Streak System",
+      "action": "Incorporate a 62-day completion streak (1 Dec 2026 - 31 Jan 2027) with running runner mascot animation and animated progress track."
     },
     {
       "requirement_id": "REQ-02",
-      "summary": "Solutions panel layout re-ordering",
-      "action": "In the solutions view, render full solutions & step-by-step answer key FIRST at the top, followed by user feedback/comments section below."
+      "summary": "Beautiful Trophy & Cup Milestones",
+      "action": "Render animated trophy milestones (Day 7 Bronze, Day 15 Silver, Day 30 Gold, Day 45 Diamond, Day 62 Grand Champion) with honest celebration modal upon milestone unlock."
     },
     {
       "requirement_id": "REQ-03",
-      "summary": "Dark mode solution visibility & exact exam player interface",
-      "action": "Fix dark mode text colors in solutions (ensure high contrast slate-100 text, proper background, visible math symbols/images). Keep official test-taking screen in Light Mode NTA-style player for authentic exam familiarity."
+      "summary": "Personal Metrics & Hinglish Progress Notes",
+      "action": "Display Personal Current Streak, Best Streak, and Completed Tests out of 62 with Hinglish motivational copy (e.g., '62 Din Target JEE Mains!')."
     },
     {
       "requirement_id": "REQ-04",
-      "summary": "Real exam approximate rank estimator",
-      "action": "Display vetted non-official percentile & AIR rank ranges based on historical NTA data with explicit disclaimers, methodology limits, and source year labels."
+      "summary": "Accessible Reduced Motion & Prelaunch/Missed States",
+      "action": "Provide reduced-motion support, prelaunch countdown state, and accurate non-fabricated missed day state handling."
     },
     {
       "requirement_id": "REQ-05",
-      "summary": "Sky Blue color migration",
-      "action": "Replace brand green everywhere with Sky Blue (#0284C7 / #38BDF8 / #0EA5E9) as 2nd primary accent across buttons, progress bars, highlights, and active tabs."
-    },
-    {
-      "requirement_id": "REQ-06",
-      "summary": "Flagship All India JEE Mains Live Test Series Card & Modal",
-      "action": "Build prominent horizontal Teal card (#0D9488) positioned above the 3 exam cards with live blinking red badge. 62 full-syllabus daily 3hr tests (1 Dec 2026 - 31 Jan 2027, 12:01 AM - 23:59 IST, 1 test/day). Flagship modal on click presenting 80 PYQ factor analysis, 60+ expected concept/DNA match predictions, and Start Test trigger active from day 1."
-    },
-    {
-      "requirement_id": "REQ-07",
-      "summary": "Dedicated All India Live Series Hub & Archive",
-      "action": "Provide dedicated hub with Today's Live Test, Past Days Live Tests practice archive, detailed solutions, confidence matrix, and AI result analytics."
+      "summary": "Home Banner & Series Hub Integration",
+      "action": "Integrate compact streak progress into Home dashboard banner and full interactive sprint hub in `/series/all-india-jee`."
     }
   ],
   "image_urls": {
+    "trophy_illustration": "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "runner_athlete": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?crop=entropy&cs=srgb&fm=jpg&q=85",
     "student_exam_1": "https://images.unsplash.com/photo-1534644107580-3a4dbd494a95?crop=entropy&cs=srgb&fm=jpg&q=85",
-    "student_exam_2": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?crop=entropy&cs=srgb&fm=jpg&q=85",
-    "student_exam_3": "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?crop=entropy&cs=srgb&fm=jpg&q=85",
     "classroom_test": "https://images.pexels.com/photos/31115182/pexels-photo-31115182.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
   },
   "instructions_to_main_agent": [
-    "Use Sky Blue (#0284C7 / #0EA5E9) in place of green across all interactive states and secondary primary accents.",
-    "Ensure the Flagship Teal All India JEE Main card is the visual highlight at top of Exam Cards with a pulsing red live badge.",
-    "Ensure the PDF download button in results is hidden or deactivated as requested.",
-    "Reorder the Solutions section to render step-by-step solutions first, with comments/feedback below.",
-    "Ensure all interactive elements have data-testid attributes for E2E testing."
+    "Use Flagship Teal (#0D9488) and Sky-Blue (#0284C7 / #38BDF8) as the primary brand palette with Amber Gold (#F59E0B) for trophy milestones.",
+    "Ensure all interactive buttons, streak nodes, trophy cards, and toggle switches contain explicit data-testid attributes.",
+    "Support prefers-reduced-motion in CSS animation keyframes and React motion logic.",
+    "Do not fake or fabricate completion dates; maintain honest history tracking."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
     "Always include data-testid on interactive and key status components using kebab-case.",
