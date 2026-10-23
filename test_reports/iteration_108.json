@@ -1,0 +1,24 @@
+{
+  "summary": "Iteration 108: narrow frontend-only check of the 2 fixes from iteration 107. Both pass. Setup: the real preview frontend, with /api/** routed by Playwright to the TEST-ONLY isolated ASGI bridge (iso_bridge_server_iter106.py, port 8765, DB tejas_isolated_iter105_test). Auth used the x-test-user 'student' header. /api/auth/session was rewritten to /api/auth/me, returned as a plain {user} object. Asset requests got a synthetic PNG (/tmp/iter107_fixture.png). (1) HOME BANNER GAP: on /home at 1920x800 and 390x844, the gap from the banner bottom to .exam-simple-heading is exactly 32px. The banner's computed margin-bottom is 32px, so the `.exam-home>.flagship-banner` rule now applies. Page horizontal overflow is 0 at both sizes. (2) AiSolution SAFETY: on the Results page (SEED live attempt, ?view=solutions, Q3 expanded), the real saved tag from the isolated /ai-solutions endpoint was changed per case by a response intercept. The test DB was not touched. (a) Valid full tag: difficulty 'Easy', Given, 3 steps, Answer (B), insight, shortcut, mistakes and time tip, with 7 KaTeX nodes. (b) Legacy tag without difficulty, given and common_mistakes: the card renders with a visible 'Not rated' badge. The Given and Common-mistakes blocks are hidden, the 3 steps and other cards stay, and 4 KaTeX nodes render. (c) Steps list [null, step without a title, step with title null, 'junk', '2. Keep $x^2$']: the null and 'junk' entries are filtered out and 3 steps render. Titleless steps show only their explanation, and the numbered title has its prefix stripped ('Keep x^2'). (d) steps key missing: the card renders with 0 steps and everything else intact. In every case at both viewports: no error boundary, 0 page errors, and the result tabs and other questions still render. Text is rgb(11,31,42), card overflow and page overflow are both 0. The footer reads 'AI-generated study explanation. AI can make mistakes; ...'. No gpt, claude, gemini or astra model name appears in the card. Cleanup: bridge killed (0 processes), test DB dropped by exact name and confirmed absent. Customer DB unchanged: 144 sets, 11800 questions, 0 TEST_ sets.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "GET /api/attempts/{id}/ai-solutions", "issue": "Not in scope and not retested. The response still carries an item.model field ('gpt-6-astra'). The UI does not display it, but it reaches the client. The iter107 note about normalising legacy tags on the server still applies."}
+  ]},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Results AI card (cosmetic)", "issues": ["When difficulty falls back to 'Not rated', the className becomes 'ai-difficulty d-not rated', which adds a stray class 'rated'. The rendering is fine (neutral badge, visible). Optionally slugify it, e.g. difficulty.toLowerCase().replace(/\\s+/g,'-')."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/iso_bridge_server_iter106.py", "/app/backend/tests/iso_harness.py"],
+  "action_items": ["None required. Optional: slugify the difficulty class name in AiSolution.js."],
+  "critical_code_review_comments": [
+    "AiSolution.js normalisation is correct. If concept, insight or time_tip is null, MathText's default param does not apply to null, so String(null) would show 'null'. Consider `text={s.concept || ''}` for the scalar fields. Not exercised in this run because only the requested fields were removed."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped as requested)", "frontend": "100% (10/10 checks: 2 home and 8 results cases across 2 viewports)"},
+  "seed_data_creation": "Only the bridge seed106 in the dedicated test DB tejas_isolated_iter105_test, which was dropped afterwards. Legacy shapes were simulated only by browser response interception.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "For the bridge, the session intercept must return a plain {user: u} object. Wrapping it in {data:{...}} without meta.api_version does not unwrap, and the app redirects to /login. Results URL: /results/{SEED.live}?view=solutions, then click results-expand-3. Kill the bridge and drop tejas_isolated_iter105_test after use."
+}
