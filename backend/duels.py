@@ -1,11 +1,14 @@
-"""Rapid Fire Duels: two students, same 30 cards, live score race (polling based)."""
+"""Rapid Fire Duels: two students, same 30 cards, live score race (WebSocket push, polling fallback)."""
+import asyncio
+import hashlib
+import json
 import random
 import string
 import time
 import uuid
 from typing import List, Literal, Optional
 
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 from shop import rival_profile
@@ -40,6 +43,49 @@ class DuelAnswer(BaseModel):
 
 def make_router(db, rf_user, public_card, award):
     r = APIRouter(prefix="/rf/duels")
+    card_cache: dict = {}  # cards are immutable during play: cache to skip a DB read per view
+    sockets: dict = {}  # did -> {ws: {"uid": str, "sig": str}}
+    tickers: dict = {}
+
+    async def get_cards(ids):
+        miss = [i for i in ids if i not in card_cache]
+        if miss:
+            for c in await db.rf_cards.find({"id": {"$in": miss}}, {"_id": 0}).to_list(len(miss)):
+                card_cache[c["id"]] = c
+            if len(card_cache) > 50000:
+                card_cache.clear()
+        return {i: card_cache[i] for i in ids if i in card_cache}
+
+    async def push(did):
+        """Send the latest per-player view to every open socket of this duel (only if it changed)."""
+        conns = sockets.get(did)
+        if not conns:
+            return
+        d = await db.rf_duels.find_one({"id": did})
+        if not d:
+            return
+        for ws, meta in list(conns.items()):
+            try:
+                v = await view(d, meta["uid"])
+                sig = hashlib.md5(json.dumps({k: x for k, x in v.items() if k != "server_now"}, sort_keys=True, default=str).encode()).hexdigest()
+                if sig != meta["sig"]:
+                    meta["sig"] = sig
+                    await ws.send_json(v)
+            except Exception:  # noqa: BLE001
+                conns.pop(ws, None)
+
+    async def ticker(did):
+        """One server-side loop per live duel (not per phone): bot progress, expiry, presence."""
+        try:
+            while sockets.get(did):
+                d = await db.rf_duels.find_one({"id": did}, {"status": 1, "vs_bot": 1})
+                if not d or d["status"] in ("finished", "cancelled", "expired"):
+                    await push(did)
+                    break
+                await asyncio.sleep(1 if d.get("vs_bot") else 2)
+                await push(did)
+        finally:
+            tickers.pop(did, None)
 
     async def player(uid, name):
         prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True, return_document=True) or {}
@@ -113,7 +159,9 @@ def make_router(db, rf_user, public_card, award):
         return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid)
 
     async def view(d, uid):
-        await db.rf_duels.update_one({"id": d["id"], "players.uid": uid}, {"$set": {"players.$.seen_ts": time.time()}})
+        mine_p = next((p for p in d["players"] if p["uid"] == uid), None)
+        if mine_p and time.time() - mine_p.get("seen_ts", 0) > 3:  # presence write at most every 3 s per player
+            await db.rf_duels.update_one({"id": d["id"], "players.uid": uid}, {"$set": {"players.$.seen_ts": time.time()}})
         d = await settle(d)
         if uid not in [p["uid"] for p in d["players"]]:
             raise HTTPException(404, "Duel not found.")
@@ -123,7 +171,7 @@ def make_router(db, rf_user, public_card, award):
             reward = await reward_for(d, uid)
         cards = []
         if d["status"] in ("ready", "finished"):
-            docs = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": d["card_ids"]}}, {"_id": 0}).to_list(DUEL_CARDS)}
+            docs = await get_cards(d["card_ids"])
             for k, cid in enumerate(d["card_ids"]):
                 if cid in docs:
                     c = public_card_dict(docs[cid])
@@ -156,6 +204,7 @@ def make_router(db, rf_user, public_card, award):
                 {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
             if match:
                 await db.rf_duels.update_one({"id": match["id"]}, {"$addToSet": {"request_ids": data.request_id}})
+                asyncio.create_task(push(match["id"]))
                 return await view(match, uid)
         d = {"id": str(uuid.uuid4()), "code": "".join(random.choices(string.ascii_uppercase.replace("O", "").replace("I", "") + "23456789", k=6)),
              "mode": data.mode, "subject": data.subject, "chapter": data.chapter, "status": "waiting", "card_ids": await pick_cards(data.subject, data.chapter),
@@ -174,6 +223,7 @@ def make_router(db, rf_user, public_card, award):
                                                   {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
+        asyncio.create_task(push(d["id"]))
         return await view(d, uid)
 
     @r.get("/{did}")
@@ -201,6 +251,7 @@ def make_router(db, rf_user, public_card, award):
                                                   {"$push": {"players": bot}, "$set": {**start_fields(), "vs_bot": True}}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(409, "This duel already has an opponent.")
+        asyncio.create_task(push(did))
         return await view(d, uid)
 
     @r.post("/{did}/forfeit")
@@ -210,6 +261,7 @@ def make_router(db, rf_user, public_card, award):
         d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
         if d:
             await settle(d)
+            asyncio.create_task(push(did))
         return {"ok": True}
 
     @r.post("/{did}/answer")
@@ -219,7 +271,7 @@ def make_router(db, rf_user, public_card, award):
         if not d:
             raise HTTPException(404, "Duel not found.")
         me = next(p for p in d["players"] if p["uid"] == uid)
-        card = await db.rf_cards.find_one({"id": d["card_ids"][data.index]}, {"_id": 0}) if data.index < len(d["card_ids"]) else None
+        card = (await get_cards([d["card_ids"][data.index]])).get(d["card_ids"][data.index]) if data.index < len(d["card_ids"]) else None
         if not card:
             raise HTTPException(400, "Unknown card.")
         if data.index < len(me["answers"]):  # idempotent replay: never re-score a locked card
@@ -242,12 +294,39 @@ def make_router(db, rf_user, public_card, award):
         if not res.modified_count:
             raise HTTPException(409, "Answer already recorded.")
         await settle(await db.rf_duels.find_one({"id": did}))
+        asyncio.create_task(push(did))
         return {"index": data.index, "outcome": outcome, "answer": card["answer"], "explain": card.get("explain", ""), "score": me["score"] + inc}
+
+    @r.websocket("/{did}/ws")
+    async def live(ws: WebSocket, did: str, u: str = ""):
+        await ws.accept()
+        try:
+            uid = rf_user(u)
+            d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
+        except HTTPException:
+            d = None
+        if not d:
+            await ws.close(code=4404)
+            return
+        sockets.setdefault(did, {})[ws] = {"uid": uid, "sig": ""}
+        await push(did)
+        if did not in tickers:
+            tickers[did] = asyncio.create_task(ticker(did))
+        try:
+            while True:
+                await ws.receive_text()  # client pings keep the socket alive; state flows server -> phone
+        except (WebSocketDisconnect, RuntimeError):
+            pass
+        finally:
+            conns = sockets.get(did, {})
+            conns.pop(ws, None)
+            if not conns:
+                sockets.pop(did, None)
 
     @r.get("")
     async def mine(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished"}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
+        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished", "vs_bot": {"$ne": True}}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
         return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"]} for p in d["players"]]} for d in docs]}
 

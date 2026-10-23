@@ -898,5 +898,1805 @@
   "explain": "Standard result: derivative of tan x is sec²x.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main"
+ },
+ {
+  "id": "5752a6d9-d508-4a9c-82f3-0df64cc06f32",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[sinh x] = ?",
+  "formula": "d/dx[sinh x] = cosh x",
+  "options": [
+   "sinh x",
+   "cosh x",
+   "−cosh x",
+   "sech²x"
+  ],
+  "answer": 1,
+  "explain": "Derivative of hyperbolic sine is hyperbolic cosine.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f2edc826-a06b-4f72-9bcf-cb9bf97f409a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f is differentiable at x=a, the value of lim[f(a+h)−f(a)]/h as h→0 is:",
+  "formula": "",
+  "options": [
+   "f(a)",
+   "0",
+   "f′(a)",
+   "Does not exist"
+  ],
+  "answer": 2,
+  "explain": "The limit defining the derivative at x=a equals f′(a) by definition.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "76f8f03d-2785-4b4c-b3e2-21cfedc33971",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[x^(1/x)] = ?",
+  "formula": "x^(1/x)·(1−ln x)/x²",
+  "options": [
+   "x^(1/x)(1−ln x)/x²",
+   "x^(1/x)·ln x/x²",
+   "(1/x)x^(1/x−1)",
+   "x^(1/x)/x²"
+  ],
+  "answer": 0,
+  "explain": "Use logarithmic diff: ln y=(1/x)ln x, then differentiate both sides.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "84d0977a-7521-4a5b-9225-06ebf188730a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=ln(sin x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "−cot x",
+   "tan x",
+   "cot x",
+   "cosec x"
+  ],
+  "answer": 2,
+  "explain": "dy/dx = (1/sin x)·cos x = cot x by chain rule.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a60aae86-87cb-41e0-bcfd-e1ef5ab3700b",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=sin⁻¹(x)+cos⁻¹(x), dy/dx = ?",
+  "formula": "sin⁻¹x + cos⁻¹x = π/2",
+  "options": [
+   "1/√(1−x²)",
+   "0",
+   "−1",
+   "2/√(1−x²)"
+  ],
+  "answer": 1,
+  "explain": "sin⁻¹x+cos⁻¹x=π/2 (constant), so derivative is 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "30c71c0f-7c4e-40a5-ac25-90c3f3ea1435",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tan⁻¹x + cot⁻¹x] = ?",
+  "formula": "tan⁻¹x + cot⁻¹x = π/2",
+  "options": [
+   "1/(1+x²)",
+   "0",
+   "−1/(1+x²)",
+   "2/(1+x²)"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹x+cot⁻¹x=π/2 is constant, so its derivative is 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e531588d-2d9c-4897-8d2f-4ba5835c15c7",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=|sin x|, f is NOT differentiable at x =",
+  "formula": "",
+  "options": [
+   "Everywhere differentiable",
+   "π/2+nπ",
+   "nπ/2, n odd",
+   "nπ, n∈ℤ"
+  ],
+  "answer": 3,
+  "explain": "|sin x| has corners where sin x=0, i.e., x=nπ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "df666b27-73d6-4ded-9c0b-96202d5f4b8b",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "For LMVT on [a,b], which condition is essential?",
+  "formula": "",
+  "options": [
+   "f(a)=f(b)",
+   "f continuous on [a,b], differentiable on (a,b)",
+   "f strictly increasing",
+   "f twice differentiable"
+  ],
+  "answer": 1,
+  "explain": "LMVT requires continuity on [a,b] and differentiability on open (a,b).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f705bbd0-94b3-42ff-b44d-4c2c9ea364e5",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[ln(x + √(x²+1))] = ?",
+  "formula": "",
+  "options": [
+   "1/(x+√(x²+1))",
+   "x/√(x²+1)",
+   "1/(2√(x²+1))",
+   "1/√(x²+1)"
+  ],
+  "answer": 3,
+  "explain": "ln(x+√(x²+1))=sinh⁻¹x whose derivative is 1/√(x²+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "beb7cb1d-465b-4674-ae66-6bd7960e3a4a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=x^n, then f⁽ⁿ⁾(x) (nth derivative) = ?",
+  "formula": "",
+  "options": [
+   "n!·x",
+   "n!",
+   "nˣ",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Differentiating xⁿ n-times gives n! (a constant).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f5657fde-ae41-44ac-a9bb-b1efaeb6f624",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y = ln(x²+1), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "1/(x²+1)",
+   "x/(x²+1)",
+   "2x/(x²+1)",
+   "2/(x²+1)"
+  ],
+  "answer": 2,
+  "explain": "Chain rule: dy/dx = (1/(x²+1))·2x = 2x/(x²+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d017a6c1-a7d7-4ef6-91bc-49c7800185a4",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=e^(x²), f′(x) = ?",
+  "formula": "",
+  "options": [
+   "2e^(x²)",
+   "e^(x²)",
+   "x·e^(x²)",
+   "2x·e^(x²)"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: d/dx[e^(x²)] = e^(x²)·2x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6fe11776-a5c5-418c-b5fa-ccd305388d25",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y = tan⁻¹(1/x) for x>0, dy/dx = ?",
+  "formula": "",
+  "options": [
+   "1/(x√(x²−1))",
+   "−1/(1+x²)",
+   "1/(1+x²)",
+   "−1/(x²+1)·(−1/x²)"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹(1/x)=π/2−tan⁻¹x for x>0, so dy/dx=−1/(1+x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fc6102ea-e708-4cf6-8cac-469962b2e4d8",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "A function f is said to be an even function if:",
+  "formula": "f(−x) = f(x)",
+  "options": [
+   "f(−x)=−f(x) for all x",
+   "f(x+T)=f(x)",
+   "f(−x)=f(x) for all x",
+   "f(0)=0"
+  ],
+  "answer": 2,
+  "explain": "Even functions satisfy f(−x)=f(x); their graphs are symmetric about y-axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91a40592-686d-434a-9686-98b9da6014fb",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f is even and differentiable, f′ is:",
+  "formula": "",
+  "options": [
+   "Even",
+   "Odd",
+   "Constant",
+   "Neither"
+  ],
+  "answer": 1,
+  "explain": "Differentiating f(−x)=f(x) gives −f′(−x)=f′(x), so f′ is odd.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3dde6838-5e9a-416b-bbee-14be508f9d3b",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f is odd and differentiable, f′ is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Even",
+   "Odd",
+   "Periodic"
+  ],
+  "answer": 1,
+  "explain": "Differentiating f(−x)=−f(x) gives f′(−x)=f′(x), so f′ is even.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "273dc55b-deb9-4ab0-89cf-eafe1731270a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[cos(x²)] = ?",
+  "formula": "",
+  "options": [
+   "−2x sin(x²)",
+   "−2x cos(x²)",
+   "−sin(x²)",
+   "2x cos(x²)"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: −sin(x²)·2x = −2x sin(x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "752dbe35-f05d-4b9e-859e-9006b6074d85",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y = x·eˣ, then y″ = ?",
+  "formula": "",
+  "options": [
+   "2eˣ",
+   "eˣ(x+2)",
+   "eˣ(x+1)",
+   "xeˣ"
+  ],
+  "answer": 1,
+  "explain": "y′=eˣ(x+1), y″=eˣ(x+1)+eˣ=eˣ(x+2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "597f14c3-9ffc-4b02-9a87-29fc08a0fa20",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "Continuity of f at x=a requires:",
+  "formula": "",
+  "options": [
+   "LHL=RHL=f(a)",
+   "f′(a) exists",
+   "LHL=RHL only",
+   "f(a) defined only"
+  ],
+  "answer": 0,
+  "explain": "All three: LHL, RHL must equal each other and equal f(a).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a4fcf541-9ccf-4dea-9d18-e3f2d1344fdd",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If x=at², y=2at, then dy/dx = ?",
+  "formula": "dy/dx = (dy/dt)/(dx/dt)",
+  "options": [
+   "1/(2t)",
+   "1/t",
+   "t",
+   "2a/t"
+  ],
+  "answer": 1,
+  "explain": "dx/dt=2at, dy/dt=2a, so dy/dx=2a/(2at)=1/t.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "282b4018-2e01-4f41-b58f-9476507e2d7c",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[cos⁻¹(1−2x²)] simplifies to (for 0<x<1):",
+  "formula": "",
+  "options": [
+   "2x/√(1−x²)",
+   "2/√(1−x²)",
+   "−2/√(1−x²)",
+   "1/√(1−x²)"
+  ],
+  "answer": 1,
+  "explain": "cos⁻¹(1−2x²)=2sin⁻¹x for 0<x<1, so derivative=2/√(1−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dae353c8-1526-4805-80c4-d2870d3e6e5a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tan⁻¹((1+x)/(1−x))] = ?",
+  "formula": "",
+  "options": [
+   "−1/(1+x²)",
+   "1/(1+x²)",
+   "1/(1+x)",
+   "2/(1+x²)"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹((1+x)/(1−x))=π/4+tan⁻¹x, derivative=1/(1+x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "39311e26-26f8-481a-a84c-73f00a334da2",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "At a jump discontinuity, LHL and RHL are:",
+  "formula": "",
+  "options": [
+   "Both undefined",
+   "Both infinite",
+   "Finite but unequal",
+   "Equal but ≠ f(a)"
+  ],
+  "answer": 2,
+  "explain": "Jump discontinuity: both one-sided limits exist and are finite but differ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c5f69807-b908-4e0a-b44e-a5bf06ecf2b8",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=sin(ln x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "sin(ln x)/x",
+   "cos(ln x)",
+   "−cos(ln x)/x",
+   "cos(ln x)/x"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: cos(ln x)·(1/x) = cos(ln x)/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2c807730-9120-4ef7-8241-e9acc842d309",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "An infinite discontinuity at x=a means:",
+  "formula": "",
+  "options": [
+   "LHL≠RHL (finite)",
+   "f(a) is undefined only",
+   "f is not defined near a",
+   "At least one one-sided limit is ∞"
+  ],
+  "answer": 3,
+  "explain": "Infinite discontinuity occurs when one or both one-sided limits tend to infinity.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "659480c9-7c99-4801-b52c-752ed921da30",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[cosh x] = ?",
+  "formula": "d/dx[cosh x] = sinh x",
+  "options": [
+   "−cosh x",
+   "sinh x",
+   "−sinh x",
+   "cosh x"
+  ],
+  "answer": 1,
+  "explain": "Derivative of hyperbolic cosine is hyperbolic sine (positive).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bb2f3ec6-6919-4a3f-b1a0-6f610b5432c9",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=|cos x|, f is NOT differentiable at x =",
+  "formula": "",
+  "options": [
+   "π/4, 3π/4, …",
+   "π/2, 3π/2, …",
+   "0, π, 2π, …",
+   "Differentiable everywhere"
+  ],
+  "answer": 1,
+  "explain": "|cos x| has corners where cos x=0, i.e., x=(2n+1)π/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "72f692f5-ef50-489f-b780-6b1d362b3abd",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=ln(cos x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "tan x",
+   "−cot x",
+   "cot x",
+   "−tan x"
+  ],
+  "answer": 3,
+  "explain": "d/dx[ln(cos x)] = (−sin x)/cos x = −tan x by chain rule.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "89753e52-6f4a-4f1a-8b85-1dd7a1ecf949",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=e^(ax)·cos(bx), y′ = ?",
+  "formula": "",
+  "options": [
+   "e^(ax)[a·cos bx − b·sin bx]",
+   "e^(ax)[−a·cos bx − b·sin bx]",
+   "ae^(ax)·cos bx",
+   "e^(ax)[a·cos bx + b·sin bx]"
+  ],
+  "answer": 0,
+  "explain": "Product rule: derivative of e^(ax) is ae^(ax), derivative of cos(bx) is −b sin(bx).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b902903e-e7d2-4515-b482-883a573d724f",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tan⁻¹(√x)] = ?",
+  "formula": "",
+  "options": [
+   "1/(2√x·(1+x))",
+   "1/(1+x)",
+   "1/(2(1+x))",
+   "1/(√x·(1+x))"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: [1/(1+x)]·[1/(2√x)] = 1/[2√x(1+x)].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "48aade26-9a04-4f30-a4e5-e77f2756eabb",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x) has f(a⁺)=f(a⁻)≠f(a), discontinuity type is:",
+  "formula": "",
+  "options": [
+   "Removable discontinuity",
+   "Oscillatory discontinuity",
+   "Infinite discontinuity",
+   "Jump discontinuity"
+  ],
+  "answer": 0,
+  "explain": "Limit exists but ≠ f(a); redefining f(a) removes the discontinuity.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b57e1a54-95ed-4e8f-8d09-07e551a4a91d",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=x^(sin x), d/dx by log diff gives dy/dx = ?",
+  "formula": "ln y = sin x · ln x",
+  "options": [
+   "x^(sin x)[sin x/x]",
+   "x^(sin x)[cos x·ln x + sin x/x]",
+   "x^(sin x)·cos x",
+   "x^(sin x)[cos x·ln x]"
+  ],
+  "answer": 1,
+  "explain": "Differentiating ln y = sin x·ln x gives (1/y)y′ = cos x·ln x + sin x/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bfcedf13-1ef0-4c6c-a92d-66d522e8aea5",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tanh x] = ?",
+  "formula": "d/dx[tanh x] = sech²x",
+  "options": [
+   "−sech²x",
+   "1/(1+x²)",
+   "sech²x",
+   "cosech²x"
+  ],
+  "answer": 2,
+  "explain": "Derivative of hyperbolic tangent is sech²x, analogous to sec²x for tan x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "146973cb-a7ee-48de-bc91-1b67b0f46de6",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=sin⁻¹(x/a), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "1/(a√(1−x²/a²))",
+   "1/√(1−x²)",
+   "a/√(a²−x²)",
+   "1/√(a²−x²)"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: [1/√(1−x²/a²)]·(1/a) = 1/√(a²−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "549b8fb7-5334-424e-976b-a8cd1219c6e5",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If x=a cosθ, y=b sinθ, then dy/dx = ?",
+  "formula": "dy/dx = (dy/dθ)/(dx/dθ)",
+  "options": [
+   "(b/a)tan θ",
+   "−(b/a)tan θ",
+   "(b/a)cot θ",
+   "−(b/a)cot θ"
+  ],
+  "answer": 3,
+  "explain": "dy/dθ = b cosθ, dx/dθ = −a sinθ; ratio = −(b cosθ)/(a sinθ) = −(b/a)cot θ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "849b0a2f-353f-47aa-80ed-f3d64665e106",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[sin⁻¹(1−2x²)] for 0<x<1 equals:",
+  "formula": "",
+  "options": [
+   "−1/√(1−x²)",
+   "1/√(1−x²)",
+   "2/√(1−x²)",
+   "−2/√(1−x²)"
+  ],
+  "answer": 3,
+  "explain": "sin⁻¹(1−2x²)= π/2−2sin⁻¹x for 0<x<1; derivative = −2/√(1−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "261829d5-73bb-4fed-9620-f543309c7b54",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=ln(ln x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "1/x",
+   "1/(x ln x)",
+   "1/ln x",
+   "ln x / x"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: d/dx[ln(ln x)] = (1/ln x)·(1/x) = 1/(x ln x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "049c1d4c-79ef-4d98-a7a2-362b1013993f",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "f(x) is continuous on closed [a,b] & differentiable on open (a,b): this is condition for?",
+  "formula": "",
+  "options": [
+   "LMVT / Rolle's theorem",
+   "IVT only",
+   "Taylor's theorem only",
+   "Extreme value theorem only"
+  ],
+  "answer": 0,
+  "explain": "Both LMVT and Rolle's theorem require continuity on [a,b] and differentiability on (a,b).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fd257f77-6ba7-4d02-9654-2dfff79f14d3",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f′(x)=0 for all x in (a,b), then f is:",
+  "formula": "",
+  "options": [
+   "Strictly decreasing",
+   "Constant on (a,b)",
+   "Oscillatory",
+   "Strictly increasing"
+  ],
+  "answer": 1,
+  "explain": "Zero derivative everywhere on an interval implies f is constant on that interval.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dafca122-85a8-43ff-b49b-9515f5b4650d",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[x^x²] = ?",
+  "formula": "ln y = x²ln x",
+  "options": [
+   "x^x²·2x",
+   "x^x²·2x ln x",
+   "x^x²·x(2ln x+1)",
+   "x^x²·(1+ln x)"
+  ],
+  "answer": 2,
+  "explain": "Differentiate ln y=x²ln x: y′/y = 2x ln x + x²·(1/x) = x(2ln x+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c93e8d6b-e0b2-49b0-9f2a-47d965374ae6",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[sin(x²+1)] = ?",
+  "formula": "",
+  "options": [
+   "cos(x²+1)",
+   "2x·sin(x²+1)",
+   "2x·cos(x²+1)",
+   "−2x·cos(x²+1)"
+  ],
+  "answer": 2,
+  "explain": "Chain rule: outer derivative cos(x²+1), inner derivative 2x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ff002fa8-12f6-4d40-b6a6-e9db121abab7",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=sec(tan⁻¹x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "sec x·tan x/(1+x²)",
+   "x/√(1+x²)",
+   "x/(1+x²)",
+   "1/√(1+x²)"
+  ],
+  "answer": 1,
+  "explain": "Let θ=tan⁻¹x; y=sec θ=√(1+x²). Then dy/dx = x/√(1+x²) by chain rule.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ec2e6582-2d71-44da-ac78-629e6bd491ee",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "Which is true about f(x)=x·sin(1/x), x≠0 and f(0)=0?",
+  "formula": "",
+  "options": [
+   "Continuous at 0, not differentiable at 0",
+   "Differentiable at 0",
+   "Continuous & differentiable at 0",
+   "Discontinuous at 0"
+  ],
+  "answer": 0,
+  "explain": "x·sin(1/x)→0 as x→0, so continuous; but f′(0) limit does not exist (oscillates).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a9406b31-8149-43f9-9708-58d7c2dded78",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=x^(1/3), then f is differentiable at x=0?",
+  "formula": "",
+  "options": [
+   "Yes, f′(0)=1",
+   "Not continuous at 0",
+   "Yes, f′(0)=0",
+   "No, f′(0) is infinite"
+  ],
+  "answer": 3,
+  "explain": "f′(x)=(1/3)x^(−2/3)→∞ as x→0; vertical tangent, not differentiable at 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "198dbd8a-bb5f-48c2-bdd5-422d51e3673a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[e^(ln x)] = ?",
+  "formula": "e^(ln x)=x",
+  "options": [
+   "e^(ln x)·(1/x)",
+   "1",
+   "1/x",
+   "ln x"
+  ],
+  "answer": 1,
+  "explain": "e^(ln x)=x for x>0, so its derivative is simply 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4de5ea7d-3faa-44a6-9f97-cf06f24ac9d3",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=2x³−3x on [1,2], LMVT guarantees f′(c)=?",
+  "formula": "f′(c)=[f(b)−f(a)]/(b−a)",
+  "options": [
+   "[f(2)−f(1)]/1",
+   "f′(1)+f′(2)",
+   "[f(2)+f(1)]/2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "LMVT: f′(c) equals the average rate of change [f(b)−f(a)]/(b−a).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b31598e6-b894-4847-87da-0c2a2894426a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=e^x·sin x, then y″ = ?",
+  "formula": "",
+  "options": [
+   "eˣ(sin x + cos x)",
+   "2eˣ sin x",
+   "2eˣ cos x",
+   "eˣ(cos x − sin x)"
+  ],
+  "answer": 2,
+  "explain": "y′=eˣ(sin x+cos x); y″=eˣ(sin x+cos x)+eˣ(cos x−sin x)=2eˣ cos x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "590662c7-d791-4077-8180-a858c72385b1",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tan(eˣ)] = ?",
+  "formula": "",
+  "options": [
+   "sec²(eˣ)",
+   "sec²(eˣ)/eˣ",
+   "eˣ sec(eˣ)tan(eˣ)",
+   "eˣ sec²(eˣ)"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: outer derivative sec²(eˣ), inner derivative eˣ; product is eˣ sec²(eˣ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8996acd7-8398-41fa-bba0-28c43cee806e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=ln(x+√(x²−1)), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "1/√(x²−1)",
+   "1/√(x²+1)",
+   "1/(x+√(x²−1))",
+   "x/√(x²−1)"
+  ],
+  "answer": 0,
+  "explain": "This is cosh⁻¹x; its derivative is 1/√(x²−1) for |x|>1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "26dfd399-bcf8-450f-aac7-ba009e0945dd",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f is differentiable at x=a, which option about f′(a) is correct?",
+  "formula": "f′(a)=lim[h→0][f(a+h)−f(a)]/h",
+  "options": [
+   "LHD·RHD=1 at x=a",
+   "LHD > RHD at x=a",
+   "LHD < RHD at x=a",
+   "LHD = RHD at x=a"
+  ],
+  "answer": 3,
+  "explain": "Differentiability requires left-hand derivative equals right-hand derivative at that point.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f9df81a7-488a-4a03-92d6-c82d36723a13",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Inverse Trig Differentiation",
+  "prompt": "d/dx[cos⁻¹(2x²−1)] for 0<x<1 equals?",
+  "formula": "",
+  "options": [
+   "−2/√(1−x²)",
+   "1/√(1−x²)",
+   "−1/√(1−x²)",
+   "2/√(1−x²)"
+  ],
+  "answer": 0,
+  "explain": "cos⁻¹(2x²−1)=2cos⁻¹x, so derivative=−2/√(1−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9f937f04-17ad-419c-805c-c408a1172f65",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Inverse Trig Simplification",
+  "prompt": "If y=tan⁻¹(sin x/(1+cos x)), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "−1/2",
+   "cos x",
+   "1/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "sin x/(1+cos x)=tan(x/2), so y=x/2, dy/dx=1/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "65960878-23a8-4783-9980-86af1d185bfc",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Logarithmic Differentiation",
+  "prompt": "d/dx[x^(cos x)] using log diff equals?",
+  "formula": "",
+  "options": [
+   "x^(cos x)·cos x/x",
+   "x^(cos x)·(−sin x)",
+   "cos x·x^(cos x−1)",
+   "x^(cos x)[cos x/x − sin x·ln x]"
+  ],
+  "answer": 3,
+  "explain": "ln y=cos x·ln x; y′/y = cos x/x − sin x·ln x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "78fbe069-55e1-41f5-8ccd-a2c06dbcc1a3",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Non-Differentiability of Absolute Value",
+  "prompt": "If f(x)=|x²−1|, f is NOT differentiable at x =",
+  "formula": "",
+  "options": [
+   "x=1 only",
+   "x=−1 only",
+   "x=±1",
+   "x=0"
+  ],
+  "answer": 2,
+  "explain": "|x²−1| has corners where x²−1=0, i.e., x=±1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9a054f26-3726-4f38-b8da-d2261fb1b988",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Differentiability",
+  "prompt": "For f(x)=√x, the derivative at x=0 is?",
+  "formula": "",
+  "options": [
+   "Does not exist (→∞)",
+   "1/2",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "f′(x)=1/(2√x)→∞ as x→0⁺; vertical tangent, not differentiable.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "daffb496-3a93-4c6f-97ff-a1f3e6ed15dd",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Standard Inverse Trig Identity",
+  "prompt": "d/dx[sin⁻¹(x) + cos⁻¹(x)] is?",
+  "formula": "",
+  "options": [
+   "2/√(1−x²)",
+   "1/√(1−x²)",
+   "π/2",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "sin⁻¹x+cos⁻¹x=π/2 (constant), so derivative=0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2b29d684-a2ef-4d2e-9a23-8d2758ee0763",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Standard Derivatives",
+  "prompt": "If y=ln(sec x + tan x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "sec x",
+   "1/cos x·tan x",
+   "sec x·tan x",
+   "tan x"
+  ],
+  "answer": 0,
+  "explain": "d/dx[ln(sec x+tan x)] = sec x. This is the standard result.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f1b7124f-35ea-4f7b-ad56-34c989879b2f",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Definition of Derivative",
+  "prompt": "If f is differentiable at x=a, then lim[h→0] [f(a−h)−f(a)]/(−h) equals?",
+  "formula": "",
+  "options": [
+   "Does not exist",
+   "−f′(a)",
+   "0",
+   "f′(a)"
+  ],
+  "answer": 3,
+  "explain": "Substituting −h→h, limit equals f′(a); left and right derivatives are equal.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f74055bc-8bce-4c33-b25d-e079844c1934",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Chain Rule",
+  "prompt": "d/dx[ln(tan x)] = ?",
+  "formula": "",
+  "options": [
+   "2/sin(2x)",
+   "sec²x/tan x",
+   "cosec x",
+   "Both A and B"
+  ],
+  "answer": 3,
+  "explain": "d/dx=sec²x/tan x = 2/(2sin x cos x)=2/sin 2x; A and B are both equal.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "223ee06a-fe74-4632-92f3-fc45b0b58f6e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Chain Rule",
+  "prompt": "If y=e^(x²+1), then dy/dx = ?",
+  "formula": "",
+  "options": [
+   "e^(x²+1)",
+   "2x·e^(x²+1)",
+   "(x²+1)eˣ",
+   "2x·eˣ²"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: derivative of e^u is e^u·(du/dx); du/dx=2x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4103ee48-dd21-471d-bbec-d70e905ba05a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Inverse Trig Differentiation",
+  "prompt": "If y=tan⁻¹(a/x) for x>0, dy/dx = ?",
+  "formula": "",
+  "options": [
+   "a/(x²+a²)",
+   "−1/(1+x²)",
+   "1/(1+a²/x²)",
+   "−a/(x²+a²)"
+  ],
+  "answer": 3,
+  "explain": "d/dx[tan⁻¹(a/x)]=1/(1+(a/x)²)·(−a/x²)=−a/(x²+a²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1e932f6a-fe91-43c4-94c7-c3c2489876de",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Differentiability",
+  "prompt": "If f(x)=x^(2/3), then at x=0, f is?",
+  "formula": "",
+  "options": [
+   "Continuous but NOT differentiable",
+   "Discontinuous",
+   "Differentiable",
+   "Neither continuous nor differentiable"
+  ],
+  "answer": 0,
+  "explain": "f′(x)=(2/3)x^(−1/3)→∞ at x=0; vertical tangent means not differentiable.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "282bb7d8-9428-4c4e-a4c9-2ba32d189d22",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Chain Rule",
+  "prompt": "d/dx[sin(cos x)] = ?",
+  "formula": "",
+  "options": [
+   "−cos(cos x)·sin x",
+   "sin(cos x)·cos x",
+   "−sin x·cos(cos x)",
+   "cos(cos x)"
+  ],
+  "answer": 2,
+  "explain": "Chain rule: cos(cos x)·d/dx(cos x)=cos(cos x)·(−sin x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cd3364b4-6bf2-43c1-839d-1ea843cb7c74",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Chain Rule",
+  "prompt": "If y=√(sin x), dy/dx = ?",
+  "formula": "",
+  "options": [
+   "cos x·√sin x",
+   "√cos x",
+   "1/(2√sin x)",
+   "cos x/(2√sin x)"
+  ],
+  "answer": 3,
+  "explain": "y=(sin x)^(1/2); dy/dx=(1/2)(sin x)^(−1/2)·cos x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4453a3e6-ef1a-4c17-a247-bb91b3ad6a6a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Geometric Meaning of Derivative",
+  "prompt": "For y=f(x), the condition for a vertical tangent at x=a is?",
+  "formula": "",
+  "options": [
+   "dy/dx is undefined everywhere",
+   "f(a)=0",
+   "dy/dx = 0 at x=a",
+   "dy/dx → ∞ at x=a"
+  ],
+  "answer": 3,
+  "explain": "Vertical tangent means slope is infinite, i.e., dy/dx→∞ at that point.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8e138656-1f05-405c-a273-49b833ced4c3",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Chain Rule",
+  "prompt": "If y=cos(eˣ), then dy/dx = ?",
+  "formula": "",
+  "options": [
+   "−cos(eˣ)·eˣ",
+   "−eˣ·sin(eˣ)",
+   "−sin(eˣ)",
+   "eˣ·sin(eˣ)"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: −sin(eˣ)·d/dx(eˣ)=−eˣ sin(eˣ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d2979256-1470-4f71-98c5-a0557f8b6702",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Inverse Trig Simplification",
+  "prompt": "d/dx[tan⁻¹(x/√(1−x²))] = ?",
+  "formula": "",
+  "options": [
+   "1/√(1−x²)",
+   "x/√(1−x²)",
+   "1/(1+x²)",
+   "√(1−x²)"
+  ],
+  "answer": 0,
+  "explain": "tan⁻¹(x/√(1−x²))=sin⁻¹x, whose derivative is 1/√(1−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "307fa747-255c-4196-a10b-77eaeb9d17be",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Chain Rule",
+  "prompt": "If y=e^(sin⁻¹x), then dy/dx = ?",
+  "formula": "",
+  "options": [
+   "e^(sin⁻¹x)",
+   "e^(sin⁻¹x)·cos x",
+   "sin⁻¹x·e^(sin⁻¹x−1)",
+   "e^(sin⁻¹x)/√(1−x²)"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: e^(sin⁻¹x)·d/dx(sin⁻¹x)=e^(sin⁻¹x)/√(1−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4de6166c-5c2d-4d90-a1fc-2a29ec12301c",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Composite Function Differentiability",
+  "prompt": "If f(x)=sin x and g(x)=|x|, then f∘g is differentiable at x=0?",
+  "formula": "",
+  "options": [
+   "Only from left",
+   "Yes",
+   "Only from right",
+   "No"
+  ],
+  "answer": 1,
+  "explain": "f(g(x))=sin|x|; left & right derivatives both equal cos(0)=1, so differentiable.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8bdbfa7f-cf25-491f-978c-1233fc8d622d",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Logarithmic Differentiation",
+  "prompt": "d/dx[log₁₀(sin x)] = ?",
+  "formula": "",
+  "options": [
+   "cos x/ln 10",
+   "cot x",
+   "1/(sin x·ln 10)",
+   "cot x/ln 10"
+  ],
+  "answer": 3,
+  "explain": "d/dx[log_a u]=1/(u·ln a)·du/dx = cos x/(sin x·ln 10)=cot x/ln 10.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3ffdb08a-efa5-4b96-af7c-f0e792deaa3e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Parametric Differentiation",
+  "prompt": "If x=e^t, y=e^(2t), then dy/dx = ?",
+  "formula": "",
+  "options": [
+   "2e^t",
+   "2y/x",
+   "e^t",
+   "2x"
+  ],
+  "answer": 1,
+  "explain": "dy/dx=(dy/dt)/(dx/dt)=2e^(2t)/e^t=2e^t=2y/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "112437d7-840b-4f2c-9f7e-fe72f8c7451a",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Differentiability Condition",
+  "prompt": "At x=a, if LHD ≠ RHD, the function is?",
+  "formula": "",
+  "options": [
+   "Not differentiable at x=a",
+   "Discontinuous at x=a",
+   "Differentiable but not continuous",
+   "Not defined at x=a"
+  ],
+  "answer": 0,
+  "explain": "Differentiability requires LHD=RHD; if unequal, derivative doesn't exist.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "25f63041-9b0e-4886-9eb6-3f6859578f17",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Logarithmic Differentiation",
+  "prompt": "d/dx[(sin x)^(tan x)] equals?",
+  "formula": "",
+  "options": [
+   "(sin x)^(tan x)[sec²x·ln(sin x)+tan²x/1]",
+   "tan x·(sin x)^(tan x−1)·cos x",
+   "(sin x)^(tan x)[sec²x·ln(sin x)+tan x·cot x]",
+   "(sin x)^(tan x)·sec²x·ln(sin x)+cos x"
+  ],
+  "answer": 2,
+  "explain": "ln y=tan x·ln(sin x); y′/y=sec²x·ln(sin x)+tan x·(cos x/sin x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "12001b3f-83f2-4adf-a1e5-723881fb3e11",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Implicit Differentiation",
+  "prompt": "If y=sin(x+y), then dy/dx = ?",
+  "formula": "",
+  "options": [
+   "1/(1−cos(x+y))",
+   "sin(x+y)/(1+sin(x+y))",
+   "cos(x+y)",
+   "cos(x+y)/(1−cos(x+y))"
+  ],
+  "answer": 3,
+  "explain": "Implicit: dy/dx=cos(x+y)·(1+dy/dx); solve: dy/dx=cos(x+y)/(1−cos(x+y)).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c3aaeeb0-eed3-4054-bb0d-e1a2d2e3263f",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Piecewise Differentiability",
+  "prompt": "If f(x)=x²for x≤1, ax+b for x>1 is differentiable at x=1, then?",
+  "formula": "",
+  "options": [
+   "a=2, b=−1",
+   "a=2, b=1",
+   "a=1, b=0",
+   "a=−2, b=3"
+  ],
+  "answer": 0,
+  "explain": "Continuity: 1=a+b; differentiability: 2=a; so a=2, b=−1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "023958e4-6139-457e-a292-7e87c98b1845",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[sin⁻¹(√x)] = ?",
+  "formula": "1/(2√(x(1−x)))",
+  "options": [
+   "1/(2√(x(1−x)))",
+   "1/(√x·√(1−x))",
+   "1/(2√x)",
+   "1/√(1−x)"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: d/dx[sin⁻¹u]·(1/(2√x)), u=√x gives 1/(2√(x(1−x))).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "80cd6167-bc72-4765-9022-b3aad5a79cab",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=cot(ln x), dy/dx = ?",
+  "formula": "−cosec²(ln x)/x",
+  "options": [
+   "−cot(ln x)/x",
+   "−cosec²(ln x)/x",
+   "−cosec(ln x)·cot(ln x)/x",
+   "cosec²(ln x)/x"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: d/dx[cot u]= −cosec²u, u=ln x, du/dx=1/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "84d5ecf1-bf7b-4dcc-ab40-1a7ca3e501ee",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=tan⁻¹((a−x)/(1+ax)), dy/dx = ?",
+  "formula": "−1/(1+x²)",
+  "options": [
+   "−1/(1+(a−x)²)",
+   "−1/(1+x²)",
+   "1/(1+a²)",
+   "1/(1+x²)"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹a − tan⁻¹x identity; derivative of constant − tan⁻¹x is −1/(1+x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d88ce974-4d7b-43f3-a18a-6a267cc8efda",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "f(x)=x^(2/3) at x=0: the derivative is?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "Does not exist (∞)",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "f′(x)=(2/3)x^(−1/3)→∞ as x→0; vertical tangent, so derivative doesn't exist.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b39d996d-563e-4abe-9cac-c18cf1b8a8bb",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[ln(x²+x+1)] = ?",
+  "formula": "(2x+1)/(x²+x+1)",
+  "options": [
+   "(x+1)/(x²+x+1)",
+   "(2x+1)/(x²+x+1)",
+   "1/(x²+x+1)",
+   "2x/(x²+x+1)"
+  ],
+  "answer": 1,
+  "explain": "d/dx[ln f(x)] = f′(x)/f(x); f′(x)=2x+1 here.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8ebcc0df-0db0-4475-bc05-003d098a6e49",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=e^(tan x), then dy/dx = ?",
+  "formula": "e^(tan x)·sec²x",
+  "options": [
+   "sec²x·eˣ",
+   "e^(tan x)·sec x·tan x",
+   "e^(tan x)·tan x",
+   "e^(tan x)·sec²x"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: derivative of e^u is e^u·(du/dx); u=tan x, du/dx=sec²x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7187b032-da01-4fc5-afe4-eadb637626d6",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[sin⁻¹(cos x)] = ?",
+  "formula": "−1",
+  "options": [
+   "1",
+   "−sin x",
+   "−1",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "sin⁻¹(cos x)=π/2−x for x∈[0,π]; derivative = −1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7e41db95-8a89-4aeb-8f9f-5fa3d8c3f7d4",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=e^x·ln x, then dy/dx = ?",
+  "formula": "eˣ(ln x + 1/x)",
+  "options": [
+   "eˣ·ln x + eˣ",
+   "eˣ(ln x + 1/x)",
+   "eˣ/x",
+   "eˣ(ln x − 1/x)"
+  ],
+  "answer": 1,
+  "explain": "Product rule: d/dx[eˣ]·ln x + eˣ·(1/x) = eˣ ln x + eˣ/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e1407fa1-5974-4d98-892a-d28202ccd76e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If x=t², y=t³, then d²y/dx² = ?",
+  "formula": "3/(4t)",
+  "options": [
+   "3/4",
+   "3t/2",
+   "3/(2t)",
+   "3/(4t)"
+  ],
+  "answer": 3,
+  "explain": "dy/dx=(3t/2)/1; d²y/dx²=(d/dt[dy/dx])/(dx/dt)=(3/2)/(2t)=3/(4t).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4cffc11c-6511-464b-9ac5-5c9d001243d1",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "f is continuous at every point but f′(a) doesn't exist: f is called?",
+  "formula": "",
+  "options": [
+   "Differentiable everywhere",
+   "Discontinuous",
+   "Continuous but not differentiable",
+   "Nowhere differentiable"
+  ],
+  "answer": 2,
+  "explain": "Continuity doesn't imply differentiability; f can be continuous yet fail differentiability at a point.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0ef6c567-0efa-4b2c-baec-96c99ba095fe",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tan⁻¹(x²)] = ?",
+  "formula": "2x/(1+x⁴)",
+  "options": [
+   "1/(1+x²)",
+   "2x/(1+x⁴)",
+   "2x/(1+x²)²",
+   "1/(1+x⁴)"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: 1/(1+u²)·du/dx with u=x², du/dx=2x gives 2x/(1+x⁴).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e1aa4409-e956-4227-99a9-21df3e21d71e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=sin⁻¹(2x/(1+x²)), dy/dx for |x|<1 = ?",
+  "formula": "2/(1+x²)",
+  "options": [
+   "1/√(1−x²)",
+   "2/(1+x²)",
+   "2/(1−x²)",
+   "1/(1+x²)"
+  ],
+  "answer": 1,
+  "explain": "sin⁻¹(2x/(1+x²))=2tan⁻¹x for |x|<1; d/dx[2tan⁻¹x]=2/(1+x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9080fd25-0ce1-4736-b47a-644b374a2a2b",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[cos⁻¹(x²)] = ?",
+  "formula": "−2x/√(1−x⁴)",
+  "options": [
+   "−1/√(1−x⁴)",
+   "−2x/√(1−x⁴)",
+   "−2x/√(1−x²)",
+   "2x/√(1−x⁴)"
+  ],
+  "answer": 1,
+  "explain": "Chain rule on cos⁻¹u: −1/√(1−u²)·du/dx; u=x², du/dx=2x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4016408b-ae4f-4066-813a-be4ed11b57df",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=x·|x|, then f′(0) = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "Does not exist",
+   "−1",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "f(x)=x² for x≥0, −x² for x<0; LHD=RHD=0 at x=0, so f′(0)=0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91c1808b-2a3d-48b4-8875-298debcff40e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[tan⁻¹(e^x)] = ?",
+  "formula": "eˣ/(1+e²ˣ)",
+  "options": [
+   "eˣ/(1+e²ˣ)",
+   "eˣ/(1+eˣ)²",
+   "1/(1+e²ˣ)",
+   "1/(1+eˣ)"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: 1/(1+u²)·du/dx; u=eˣ, du/dx=eˣ, 1+u²=1+e²ˣ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ab20eb42-14cf-4011-9430-301c7e5af4c5",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y = (sin x)^x, log diff gives dy/dx = ?",
+  "formula": "(sin x)^x[ln(sin x)+x·cot x]",
+  "options": [
+   "(sinx)^x·ln(sinx)",
+   "(sinx)^x·x·cotx",
+   "(sinx)^x[ln(sinx)+x cotx]",
+   "x·(sinx)^(x−1)·cosx"
+  ],
+  "answer": 2,
+  "explain": "ln y = x ln(sin x); differentiate: dy/dx = y[ln(sin x)+x·(cos x/sin x)].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "923662ef-efb2-4783-8842-8122b078e36c",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[e^(cos x)] = ?",
+  "formula": "−sin x · e^(cos x)",
+  "options": [
+   "−sin x · e^(cos x)",
+   "sin x · e^(cos x)",
+   "cos x · e^(cos x)",
+   "−cos x · e^(cos x)"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: e^u·du/dx; u=cos x, du/dx=−sin x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ab39a9cf-2783-48da-9a5e-9431877eabac",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=sec⁻¹(x), dy/dx = ?",
+  "formula": "1/(|x|√(x²−1))",
+  "options": [
+   "1/(|x|√(x²−1))",
+   "−1/(|x|√(x²−1))",
+   "1/√(x²−1)",
+   "1/(x√(x²−1))"
+  ],
+  "answer": 0,
+  "explain": "Standard result: d/dx[sec⁻¹x]=1/(|x|√(x²−1)) for |x|>1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d07ffca9-31cd-46a7-91b4-e0407662e9d6",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=x²+2x and x=sin t, dy/dt = ?",
+  "formula": "(2x+2)cos t",
+  "options": [
+   "(2x+2)cos t",
+   "2x+2",
+   "cos t",
+   "(2x+2)sin t"
+  ],
+  "answer": 0,
+  "explain": "dy/dt = (dy/dx)·(dx/dt) = (2x+2)·cos t.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b74f1567-4702-4af2-8738-d5593a11db6e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y=ln(tan(x/2)), dy/dx = ?",
+  "formula": "cosec x",
+  "options": [
+   "cosec x",
+   "cot x",
+   "sec x",
+   "tan x"
+  ],
+  "answer": 0,
+  "explain": "d/dx[ln(tan(x/2))]= (1/2·sec²(x/2))/tan(x/2) = 1/sin x = cosec x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "195c17ee-68bf-4b4c-b5c8-4ac7858cf4f2",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[sin(x+y)=x] gives dy/dx = ?",
+  "formula": "(1−cos(x+y))/cos(x+y)",
+  "options": [
+   "(1−cos(x+y))/cos(x+y)",
+   "cos(x+y)−1",
+   "−1",
+   "1/cos(x+y)"
+  ],
+  "answer": 0,
+  "explain": "Differentiate: cos(x+y)(1+dy/dx)=1; so 1+dy/dx=1/cos(x+y); dy/dx=(1−cos(x+y))/cos(x+y).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "28172caa-f0d2-4556-a316-3f1cbff4f8fa",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=|x|³, then f′′(0) = ?",
+  "formula": "",
+  "options": [
+   "6",
+   "Does not exist",
+   "1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "f′(x)=3x|x|; f′′(x)=6|x|; at x=0, f′′(0)=0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "72ee234f-9277-4252-ba5c-f6d9e6bf2d5e",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "d/dx[ln(sec x)] = ?",
+  "formula": "tan x",
+  "options": [
+   "tan x",
+   "sec x·tan x",
+   "cot x",
+   "sec x"
+  ],
+  "answer": 0,
+  "explain": "d/dx[ln(sec x)] = sec x·tan x / sec x = tan x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3b8f4b3f-3ab6-4613-a44f-9695847329a4",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If y = tan⁻¹((3x−x³)/(1−3x²)), dy/dx = ?",
+  "formula": "3/(1+x²)",
+  "options": [
+   "1/(1+x²)",
+   "3/(1+9x²)",
+   "3/(1+x²)",
+   "1/(1+3x²)"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹((3x−x³)/(1−3x²))=3tan⁻¹x; d/dx[3tan⁻¹x]=3/(1+x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9cf705a3-bfb0-4c85-97f1-36d6078fe669",
+  "subject": "Mathematics",
+  "chapter": "Continuity & Differentiability",
+  "topic": "Continuity & Differentiability",
+  "prompt": "If f(x)=x²for x<1 and f(x)=x for x≥1, f is differentiable at x=1?",
+  "formula": "",
+  "options": [
+   "No, LHD=2 ≠ RHD=1",
+   "Yes, both derivatives equal 2",
+   "No, f is discontinuous at 1",
+   "Yes, both derivatives equal 1"
+  ],
+  "answer": 0,
+  "explain": "LHD=2(1)=2, RHD=1; since LHD≠RHD, f is not differentiable at x=1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
  }
 ]

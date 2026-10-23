@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 5 tested the duel WebSocket and GZip on the backend, and the AI Rival duel UI at 390x844. Backend: 40/40 pytest passed, including 9 new WebSocket/GZip tests in test_rf_duels_ws.py. Close code 4404 is returned for a non-member, a bad uid, a missing uid and an unknown duel. State is pushed after /bot, /join, /answer and /forfeit. Bot progress is pushed about every 1 s. GZip works on /api/rf/cards, and the /api/jl proxy still works. Frontend: the hub loads, the waiting screen works, the countdown shows both avatars and the play screen versus row is clean. Both scores are readable at 30px. My score and the AI Rival's score update live over the WebSocket with no reload and no HTTP polling (opponent score went 0 to 3). One HIGH regression: when the WebSocket push arrives before the POST /answer response (about half the time, seen in the traces), the RIGHT/WRONG verdict is skipped entirely, or the previous card's verdict sticks on the next card. No deprecated Expo packages were detected.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "WS /api/rf/duels/{id}/ws (scale)", "issue": "The sockets and tickers dicts live in one process. With several workers or pods, a push from /answer only reaches sockets on the same worker. Other workers only see the change on their next ticker read (up to 2 s for PvP). For 5 lakh scale this needs a shared bus (Redis pub/sub or Mongo change streams)."},
+      {"endpoint": "WS ticker (duels.py:77-88, 161-163)", "issue": "Every 1-2 s, each live duel does a find_one, and then view() per socket. view() does an update_one(seen_ts), settle() and an md5 of the full 30-card view. That is roughly one DB write per connected player per second, so it is still server-side polling. Throttle the seen_ts writes, run the ticker only for bot duels or presence, and push on events instead."},
+      {"endpoint": "GET /api/rf/cards", "issue": "The public endpoint returns every card with its answer and explanation, and duels draw from the same bank. A player can look up answers mid-duel, which is a PvP fairness risk (the test harness did exactly this to score)."},
+      {"endpoint": "GET /api/rf/duels (record)", "issue": "AI-Rival practice duels count toward 'Duel record (last 10)': the hub showed 0W 0T 10L, all from bot duels. Bot wins never count as PvP wins, but bot losses and forfeits do. Filter vs_bot from the record or show it separately."},
+      {"endpoint": "duels.py push()", "issue": "If one send fails, the exception is swallowed and the socket is dropped from the dict without being closed. The ticker and the create_task(push) can also call send_json concurrently on the same socket."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Duel play: verdict / card advance race", "issue": "When the WS push (me.answered += 1) arrives before the POST /answer response, the resync effect at duel.tsx:109-112 runs setIdx(me.answered) while fb is still null. The card-change effect (114-120) then clears fb. Then send() sets fb from the OLD card onto the NEW card. Seen in traces: card2 went 2- 2- 3- 3- 3- with no verdict ever shown. On card3/card4, card 4 showed card 3's verdict the whole time ('4V 4V 4V ...'), with the old answer index highlighted green. The timer effect also bails while fb is set (line 141), so the new card's timer freezes. Fix: skip the resync while sending.current is true or fb is shown, store fb.index, and only render the verdict when fb.index === idx.", "testID": "duel-verdict", "priority": "HIGH"},
+      {"component": "Duel countdown", "issue": "For the first tick right after /bot, the countdown briefly shows '6' (the 250 ms `now` state is stale when the new anchor is applied). In one run it went 3 then 5 then 4 (seen once, not reproduced in the next trace). Recompute `now` in apply().", "testID": "duel-countdown", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Duel countdown", "issues": ["The opponent's EntryEffect (fromRight) halo, a dark red circle with streaks about 180px wide, spills past the right screen edge during the entry animation and sits behind and over the opponent name and the AI RIVAL tag. It is short-lived, but it looks like overlap. The two avatars themselves never overlap."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_duels_ws.py", "/app/backend/tests/test_rf_gamify.py", "/app/test_reports/pytest/pytest_results_it5.xml"],
+  "action_items": [
+    "HIGH: Fix the verdict race in duel.tsx:109-112. Do not run setIdx from the socket resync while an answer is in flight (sending.current) or while fb is showing. Store the card index in fb and only show the verdict/highlight when fb.index === idx, so the old card's verdict never lands on a new card and the timer never freezes.",
+    "MEDIUM (scale): Replace the in-process sockets dict with Redis pub/sub or Mongo change streams to fan out across workers. Cut the per-socket per-second view(), seen_ts write and md5 in the ticker.",
+    "MEDIUM: Leave AI-Rival duels out of the 'Duel record (last 10)' W/T/L, or label them separately.",
+    "LOW: Hide answers from public /api/rf/cards, or keep a separate duel-only bank, to prevent mid-duel lookup.",
+    "LOW: Clip the EntryEffect halo on the countdown screen (overflow hidden or a smaller radius). Refresh `now` inside apply() to avoid the stale '6' tick. Remove dead code (waitedS, void tint)."
+  ],
+  "critical_code_review_comments": [
+    "duel.tsx:109-112 resync effect races the HTTP answer response now that WS pushes arrive first; this is a regression of the iteration-4 verdict bug.",
+    "duels.py ticker plus view() writes seen_ts on every push tick for every socket, which is heavy at scale.",
+    "The WS polling fallback is coded correctly (it polls only while !live). It could not be exercised through Playwright: page.route_web_socket did not intercept, so the fallback is untested in the UI."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_duels_ws.py (new)", "/app/backend/tests/test_rf_gamify.py (card total assertion now >= 4100 because the bank grows)"],
+  "success_rate": {"backend": "100% (40/40)", "frontend": "~85% (live scores, avatars and WS work; the verdict race breaks feedback on about half the cards)"},
+  "seed_data_creation": "TEST-ws-* uid duels created by pytest; several bot duels for user db0c62b8-... created via UI",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Use invite mode when creating bot duels in tests: random-mode duels on the same subject get matched to each other under xdist. Playwright can score correctly by fetching /api/rf/cards?subject=Physics&limit=200 (all pages) and matching prompt+options. pymongo is not available in the browser_automation sandbox. To catch the verdict race, sample duel-card-counter and duel-verdict every 60 ms after each tap.",
+  "rca_of_issue": "Verdict race: /answer schedules asyncio.create_task(push) before returning, so the WS frame often reaches the phone 10-30 ms before the HTTP response (seen in the logs: WS 19.33 s vs HTTP 19.34 s, WS 21.90 s vs HTTP 21.93 s). The resync effect sees me.answered > idx with fb null and advances the card, the card-change effect resets fb, and then setFb(r) attaches the old card's result to the new card. Repro: AI Rival duel, tap any option, sample duel-verdict every 60 ms. Mitigation: guard the resync with sending.current/fb, and tie fb to its index."
+}

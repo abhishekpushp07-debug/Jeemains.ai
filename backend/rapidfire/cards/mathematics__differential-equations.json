@@ -898,5 +898,1805 @@
   "explain": "Differentiate x²+y²=a² w.r.t. x: 2x+2y(dy/dx)=0 → x+y(dy/dx)=0.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main"
+ },
+ {
+  "id": "5a6bac21-c7ee-4d27-a84b-e02b94e0265e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE / Integrating Factor",
+  "prompt": "IF for dy/dx + (2/x)y = x² is?",
+  "formula": "e^(∫P dx)",
+  "options": [
+   "x²",
+   "e^x",
+   "x³",
+   "1/x²"
+  ],
+  "answer": 0,
+  "explain": "∫(2/x)dx = 2ln x, so IF = e^(2ln x) = x².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "06bd0319-0f1a-4b53-8c3a-5a7faac14eeb",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Substitution Method",
+  "prompt": "Solution of (dy/dx) = (x+y)² with substitution v = x+y gives?",
+  "formula": "v = x+y",
+  "options": [
+   "tan(x+c) = x+y",
+   "tan⁻¹(x+y) = x+c",
+   "x+y = sec(x+c)",
+   "x+y = e^(x+c)"
+  ],
+  "answer": 1,
+  "explain": "dv/dx = 1+v², separating: ∫dv/(1+v²)=∫dx gives tan⁻¹v = x+c.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3c7d3559-e5a0-4f12-b586-d1ea7691a10a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Homogeneous DE",
+  "prompt": "DE y' = (y/x) + tan(y/x) is solved by substitution?",
+  "formula": "v = y/x",
+  "options": [
+   "v = xy",
+   "v = x/y",
+   "v = x−y",
+   "v = y/x"
+  ],
+  "answer": 3,
+  "explain": "RHS depends only on y/x, so it is homogeneous; use v = y/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9ef23f4e-5e2a-4ffa-8817-5745440c8f07",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of DE",
+  "prompt": "Degree of (dy/dx)^(1/3) = x is?",
+  "formula": "",
+  "options": [
+   "3",
+   "Not defined",
+   "1/3",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Cubing both sides: (dy/dx) = x³; degree of resulting polynomial DE is 1... wait—power of dy/dx after clearing = 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "32d6dbfc-dbc4-4e19-8e6a-13064f007281",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable Separable",
+  "prompt": "The general solution of dy/dx = f(x)/g(y) is obtained by?",
+  "formula": "∫g(y)dy = ∫f(x)dx + C",
+  "options": [
+   "y·g = x·f+C",
+   "∫g(y)dy = ∫f(x)dx+C",
+   "∫f(y)dy = ∫g(x)dx+C",
+   "g(y)=f(x)+C"
+  ],
+  "answer": 1,
+  "explain": "Variable separable form: separate g(y)dy = f(x)dx and integrate both sides.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "69559a5b-ed57-460f-8342-8bbacbb353ef",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of DE from family",
+  "prompt": "DE of family y = e^x(A cos x + B sin x) has order?",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Two arbitrary constants A and B, so the DE has order 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "946af03e-835a-4ccf-a1d6-cc20a3a1384d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE",
+  "prompt": "Solution of dy/dx + y tan x = sec x is?",
+  "formula": "",
+  "options": [
+   "y = sin x+C cos x",
+   "y sec x = tan x+C",
+   "y tan x = sec x+C",
+   "y cos x = sin x+C"
+  ],
+  "answer": 1,
+  "explain": "IF = e^(∫tan x dx) = sec x; d(y sec x)/dx = sec²x; y sec x = tan x+C.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "aa19d882-7cfb-4c5d-80dc-0e02a1167afa",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear vs Nonlinear DE",
+  "prompt": "Which of the following is NOT a linear DE?",
+  "formula": "",
+  "options": [
+   "dy/dx + y = x²",
+   "x dy/dx + y = ln x",
+   "dy/dx + y² = x",
+   "dy/dx − 2y = e^x"
+  ],
+  "answer": 2,
+  "explain": "Presence of y² makes the equation nonlinear in the dependent variable y.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d7056979-de40-46ec-b5ab-ca966a38d3d3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General Theory of DE",
+  "prompt": "Wronskian W(y₁,y₂) ≠ 0 implies y₁, y₂ are?",
+  "formula": "W = y₁y₂'−y₂y₁'",
+  "options": [
+   "Complementary",
+   "Linearly independent",
+   "Orthogonal",
+   "Linearly dependent"
+  ],
+  "answer": 1,
+  "explain": "Non-zero Wronskian is the standard test for linear independence of solutions.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9dae9681-8610-4e09-a011-ab251fe53f83",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact DE / Exact Differentials",
+  "prompt": "The equation xdy + ydx = 0 can be written as?",
+  "formula": "d(xy) = 0",
+  "options": [
+   "d(x²y) = 0",
+   "d(xy) = 0",
+   "d(x/y) = 0",
+   "d(x+y) = 0"
+  ],
+  "answer": 1,
+  "explain": "By product rule d(xy) = x dy + y dx = 0, so xy = C.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7f0b7e53-0df3-42b8-94c1-6771111bdc53",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable Separable",
+  "prompt": "The equation (y/x)dx − dy = 0 represents?",
+  "formula": "",
+  "options": [
+   "y = Cx",
+   "x+y = C",
+   "xy = C",
+   "x = Cy"
+  ],
+  "answer": 0,
+  "explain": "dy/y = dx/x → ln y = ln x + ln C → y = Cx (straight lines through origin).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1a4eeba0-1031-44a8-810d-d2021c7b0ce3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Orthogonal Trajectories",
+  "prompt": "Family of curves xy = c has orthogonal trajectories?",
+  "formula": "",
+  "options": [
+   "x = ky²",
+   "x²−y² = k",
+   "y = mx",
+   "x²+y² = k"
+  ],
+  "answer": 1,
+  "explain": "DE of xy=c is y+xy'=0 → y'=−y/x; replacing by −dx/dy gives x²−y²=k.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0d802522-c945-47f8-a62d-6d08af199c89",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Clairaut's DE",
+  "prompt": "In Clairaut's DE y = px + f(p), the singular solution is obtained by?",
+  "formula": "p = dp/dx",
+  "options": [
+   "Setting p=0",
+   "Differentiating f(p) only",
+   "Eliminating p between y=px+f(p) and x+f'(p)=0",
+   "Setting x=0"
+  ],
+  "answer": 2,
+  "explain": "Differentiating and using dp/dx≠0 gives x+f'(p)=0; eliminate p for singular solution.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "16eb8d8d-db19-4b04-b519-a9b501497eb5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Homogeneous DE",
+  "prompt": "Solution of dy/dx = (y−x)/(y+x) uses substitution?",
+  "formula": "y = vx",
+  "options": [
+   "x = vy",
+   "v = x+y",
+   "y = vx",
+   "v = x−y"
+  ],
+  "answer": 2,
+  "explain": "RHS = (y/x−1)/(y/x+1) depends only on y/x; homogeneous DE, use y = vx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5e2c4fb2-9346-4333-b86b-c90b17083f30",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of DE from family",
+  "prompt": "Order of DE of family: y = a + b·eˣ (a, b arbitrary)?",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Two arbitrary constants a and b → order 2 DE.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e649f80d-c34c-4e65-a5ec-78d45de0e6ab",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Bernoulli DE",
+  "prompt": "Solution of (dy/dx) + y = y² (Bernoulli) using v = y⁻¹ gives?",
+  "formula": "dv/dx − v = −1",
+  "options": [
+   "dv/dx + v = 1",
+   "dv/dx + v = −1",
+   "dv/dx − v = 1",
+   "dv/dx − v = −1"
+  ],
+  "answer": 3,
+  "explain": "v=y⁻¹ → dv/dx = −y⁻²dy/dx; dividing by y²: dv/dx−v = −1 (linear in v).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e5ca70d4-2b67-4c4f-b103-c4dd430fff90",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Substitution Method",
+  "prompt": "Solution of dy/dx = cos(x+y) uses substitution?",
+  "formula": "v = x+y",
+  "options": [
+   "v = x/y",
+   "v = x−y",
+   "v = x+y",
+   "v = y/x"
+  ],
+  "answer": 2,
+  "explain": "dv/dx = 1+dy/dx = 1+cos v; separable in v and x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a4742fb8-40de-4a83-a2ee-7748cc45e6b8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE (x as function of y)",
+  "prompt": "The integrating factor of (x²y−x³)dy = y dx is found from which form?",
+  "formula": "",
+  "options": [
+   "dx/dy + Px = Q form",
+   "dy/dx + Py = Q form",
+   "Bernoulli in y",
+   "Exact DE"
+  ],
+  "answer": 0,
+  "explain": "Rearranging gives a linear equation in x as function of y: dx/dy + Px = Q.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cce6dc23-bf24-4d20-b6d1-27e2aa469c46",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact DE",
+  "prompt": "For exact DE M dx + N dy = 0, solution is obtained as?",
+  "formula": "∫M dx + ∫(N−∂/∂y∫M dx)dy = C",
+  "options": [
+   "∫M dx+∫(N−∂(∫Mdx)/∂y)dy=C",
+   "M/N = C",
+   "∫M·N dx = C",
+   "∫N dy+∫M dx=C always"
+  ],
+  "answer": 0,
+  "explain": "Standard formula for exact DE: integrate M w.r.t x, add terms from N not covered.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "36fd06b6-539d-4e61-a8ec-cd86fc621c93",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact Differentials",
+  "prompt": "d(x/y) in exact differential form equals?",
+  "formula": "(y dx − x dy)/y²",
+  "options": [
+   "(y dx+x dy)/y²",
+   "(y dx−x dy)/y²",
+   "(dx−dy)/y",
+   "(x dy−y dx)/y²"
+  ],
+  "answer": 1,
+  "explain": "By quotient rule: d(x/y) = (y·dx − x·dy)/y². Used to identify exact groupings.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b9486e12-7d93-4305-ba8c-725d9f6bf09c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact Differentials",
+  "prompt": "d(tan⁻¹(y/x)) equals?",
+  "formula": "(x dy − y dx)/(x²+y²)",
+  "options": [
+   "(x dy−y dx)/(x²+y²)",
+   "(x dy+y dx)/(x²+y²)",
+   "(y dx−x dy)/(x²+y²)",
+   "(dy−dx)/(x²+y²)"
+  ],
+  "answer": 0,
+  "explain": "Standard result: d(tan⁻¹(y/x)) = (x dy − y dx)/(x²+y²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8e6afcd0-d09e-470a-9cad-069ff7184e4d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Formation of DE",
+  "prompt": "Number of arbitrary constants eliminated to form DE of y = ax² + bx + c?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "2",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "Three arbitrary constants a, b, c → DE of order 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d6d5d79a-58aa-48ca-bd76-edf771b12556",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable Separable / Linear DE",
+  "prompt": "Solution of dy/dx + 2y = 0 is?",
+  "formula": "y = Ce^(−2x)",
+  "options": [
+   "y = C e^x",
+   "y = Ce^(2x)",
+   "y = Ce^(−2x)",
+   "y = Ce^(−x/2)"
+  ],
+  "answer": 2,
+  "explain": "Separating: dy/y = −2dx → ln y = −2x+ln C → y = Ce^(−2x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7839e725-369d-4a4f-8bcb-62d895b6fad0",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General Solution",
+  "prompt": "A first-order first-degree DE has its general solution with how many constants?",
+  "formula": "",
+  "options": [
+   "2",
+   "Depends on type",
+   "1",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "General solution of order-1 DE contains exactly 1 arbitrary constant.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3063b9fa-a0d1-43c6-a8ca-0ab16b91d19f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE (x as function of y)",
+  "prompt": "The DE (1+y²)dx = (tan⁻¹y − x)dy is linear in?",
+  "formula": "dx/dy + x/(1+y²) = tan⁻¹y/(1+y²)",
+  "options": [
+   "x (as function of y)",
+   "Both x and y",
+   "Neither",
+   "y (as function of x)"
+  ],
+  "answer": 0,
+  "explain": "Rearranging gives dx/dy + P(y)·x = Q(y): linear DE with x as dependent variable.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf1fd615-75f1-495b-a207-0729d063e6c8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE / Integrating Factor",
+  "prompt": "IF for dy/dx + (cot x)y = cos x is?",
+  "formula": "e^(∫cot x dx)",
+  "options": [
+   "sin x",
+   "tan x",
+   "cos x",
+   "ln(sin x)"
+  ],
+  "answer": 0,
+  "explain": "∫cot x dx = ln|sin x|, so IF = e^(ln sin x) = sin x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fa27b567-f6e4-4df2-9b29-a9683400cdff",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Formation of DE",
+  "prompt": "Order of DE of family y = (c₁+c₂x)eˣ is?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Two arbitrary constants c₁, c₂ → order 2 DE.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "785d8243-1773-4dae-a54e-c9c0ee270b3c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Clairaut's Equation",
+  "prompt": "DE of family y = cx + 1/c (Clairaut form): singular solution is?",
+  "formula": "y = px + 1/p",
+  "options": [
+   "y² = x",
+   "xy = 1",
+   "y² = 4x",
+   "y = 4x²"
+  ],
+  "answer": 2,
+  "explain": "Eliminate p: p-discriminant gives y² = 4x as singular solution.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d872620d-b0b1-43c5-b248-7094b1bc2ac1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Homogeneous DE",
+  "prompt": "Which substitution solves dy/dx = (y/x)·f(y/x)?",
+  "formula": "y = vx",
+  "options": [
+   "x = vy",
+   "y = v/x",
+   "y = vx",
+   "y = vx²"
+  ],
+  "answer": 2,
+  "explain": "Homogeneous DEs of form dy/dx = f(y/x) are solved by y = vx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "21071eab-0551-46e2-9361-c35eeb03bc21",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact / Linear DE",
+  "prompt": "Solution of xdy − ydx = x²dx is?",
+  "formula": "",
+  "options": [
+   "y = x²/2 + cx",
+   "y/x = x + c",
+   "y = x²+ c",
+   "y = x + cx²"
+  ],
+  "answer": 0,
+  "explain": "Rewrite as d(y/x)=x; integrate: y/x = x²/2 + c → y = x²/2 + cx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c301b48c-2d95-4487-b64c-0ba79f8fb9f2",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of DE",
+  "prompt": "Degree of DE: (y''')² + (y'')³ + y' = 0 is?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "1",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Highest order derivative y''' appears with power 2, so degree = 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8de3c118-b8ed-4f48-a796-fd222580a05c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact Differentials",
+  "prompt": "d(xy) in exact differential form equals?",
+  "formula": "",
+  "options": [
+   "x dx + y dy",
+   "y dy + x dx",
+   "x dy + y dx",
+   "x dy − y dx"
+  ],
+  "answer": 2,
+  "explain": "By product rule, d(xy) = x dy + y dx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c5f84d39-84fb-44e9-a6dd-ba6f514c11e1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Substitution in DE",
+  "prompt": "Solution of dy/dx = (x+y+1)² using v = x+y+1 is?",
+  "formula": "",
+  "options": [
+   "x+y = tan x+c",
+   "tan(x+y+1) = c",
+   "tan⁻¹(x+y+1) = x+c",
+   "x+y+1 = eˣ+c"
+  ],
+  "answer": 2,
+  "explain": "v = x+y+1 → dv/dx = 1+v², separate: tan⁻¹v = x+c.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e6ea534a-8f15-4ae8-8524-a644534e3e42",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Orthogonal Trajectories",
+  "prompt": "The family of curves x² + y² = c² has orthogonal trajectories?",
+  "formula": "",
+  "options": [
+   "y = mx",
+   "x² + y² = c² (itself)",
+   "x² − y² = c",
+   "xy = c"
+  ],
+  "answer": 0,
+  "explain": "Circles centred at origin; orthogonal trajectories are lines through origin y = mx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5dbc1647-cb38-4723-8e67-3625cb0d7657",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Formation of DE",
+  "prompt": "DE of family y = a·eˣ + b·e²ˣ + c·e³ˣ has order?",
+  "formula": "",
+  "options": [
+   "2",
+   "6",
+   "3",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Three arbitrary constants a, b, c → order 3 DE.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a14706ec-12c1-45c9-86a5-7e9dd876d67a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE / Integrating Factor",
+  "prompt": "IF of linear DE dy/dx + (1/x)y = x is?",
+  "formula": "e^(∫1/x dx)",
+  "options": [
+   "x",
+   "ln x",
+   "1/x",
+   "x²"
+  ],
+  "answer": 0,
+  "explain": "∫(1/x)dx = ln x, so IF = eˡⁿˣ = x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2062a1b5-5cbc-4511-8235-bdccb30d6787",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE",
+  "prompt": "Solution of x(dy/dx) + 2y = x² is?",
+  "formula": "",
+  "options": [
+   "y = x²/4 + cx²",
+   "y = x²/4 + c/x²",
+   "y = x/4 + c",
+   "y = x² + c/x"
+  ],
+  "answer": 1,
+  "explain": "Rewrite: dy/dx + (2/x)y = x; IF = x². Solve: x²y = x⁴/4 + c.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c85f063b-e12e-4c07-a292-243cc7987630",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Bernoulli DE",
+  "prompt": "For Bernoulli DE dy/dx + Py = Qy², substitution is v = ?",
+  "formula": "v = y^(1−2) = y⁻¹",
+  "options": [
+   "y²",
+   "y^(1/2)",
+   "y⁻¹",
+   "ln y"
+  ],
+  "answer": 2,
+  "explain": "For n=2, Bernoulli substitution v = y^(1−n) = y⁻¹ linearises the DE.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "da1133d8-f471-4a8b-88de-ebcae43418f3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact Differentials",
+  "prompt": "The equation d(y/x) = 0 has general solution?",
+  "formula": "",
+  "options": [
+   "xy = c",
+   "y = c",
+   "y = c/x",
+   "y = cx"
+  ],
+  "answer": 3,
+  "explain": "d(y/x) = 0 → y/x = c → y = cx (family of lines through origin).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bde6161b-ef89-41d4-a8ba-a2751271078f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of DE",
+  "prompt": "Which DE has degree NOT defined (undefined)?",
+  "formula": "",
+  "options": [
+   "sin(y'') = x",
+   "y'' + y = 0",
+   "(y'')² = y'",
+   "y''' = y²"
+  ],
+  "answer": 0,
+  "explain": "When DE involves transcendental function of derivative, degree is undefined.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6344ccf7-2803-4898-98f4-94cdfa6cbc7b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable Separable DE",
+  "prompt": "Solution of dy/dx = (1+y²)/(1+x²) is?",
+  "formula": "",
+  "options": [
+   "tan y = x + c",
+   "y² = x² + c",
+   "y = x + c",
+   "tan⁻¹y = tan⁻¹x + c"
+  ],
+  "answer": 3,
+  "explain": "Separate: dy/(1+y²) = dx/(1+x²); integrate both sides: tan⁻¹y = tan⁻¹x + c.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "be4fa3fb-82a6-40d9-b062-89972ad24ed0",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Formation of DE",
+  "prompt": "Order of DE for family y = a·sin x + b·cos x + c (a,b,c arbitrary)?",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "Three parameters a, b, c → need 3 differentiations → order 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5a3ee4ee-123e-4204-a9f0-6901d32ff034",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact Differentials",
+  "prompt": "d(x² + y²) = 0 represents family of?",
+  "formula": "",
+  "options": [
+   "Hyperbolas",
+   "Parabolas",
+   "Concentric circles",
+   "Parallel lines"
+  ],
+  "answer": 2,
+  "explain": "d(x²+y²) = 0 → x²+y² = c, which are concentric circles centred at origin.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "764b44b5-5bc5-4e73-a98c-a3de0385c15e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact DE / Integrating Factor",
+  "prompt": "For exact DE M dx + N dy = 0, if ∂M/∂y ≠ ∂N/∂x, IF = f(x) only if?",
+  "formula": "(∂M/∂y − ∂N/∂x)/N = φ(x)",
+  "options": [
+   "(Nₓ−Mᵧ)/N = constant",
+   "Mᵧ = Nₓ",
+   "(Mᵧ−Nₓ)/M is function of y only",
+   "(Mᵧ−Nₓ)/N is function of x only"
+  ],
+  "answer": 3,
+  "explain": "IF = e^∫φ(x)dx exists when (∂M/∂y − ∂N/∂x)/N depends only on x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "223be0d6-2859-43ba-9952-52317ee55066",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE",
+  "prompt": "Solution of (x²+1)dy/dx = 2xy+4x³ with IF (x²+1)?",
+  "formula": "",
+  "options": [
+   "y = x⁴+c",
+   "y(x²+1) = x⁴ + c",
+   "y(x²+1) = x² + c",
+   "y(x²+1) = 2x²+c"
+  ],
+  "answer": 1,
+  "explain": "Rewrite as linear; IF = x²+1. Multiply and integrate: y(x²+1) = x⁴+c.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a294dd3-50b6-4761-9f9f-d2054654f779",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Homogeneous DE",
+  "prompt": "The DE dy/dx = y/x + sec(y/x) is solved by substitution?",
+  "formula": "y = vx",
+  "options": [
+   "y = v/x",
+   "x = vy",
+   "y = vx",
+   "v = xy"
+  ],
+  "answer": 2,
+  "explain": "Function of y/x → homogeneous type; use y = vx to separate variables.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b657dbd1-4880-4d2f-b31c-439e0521e013",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact Differentials",
+  "prompt": "d(ln x) in differential form equals?",
+  "formula": "",
+  "options": [
+   "x dx",
+   "1/x²dx",
+   "dx/x",
+   "ln x dx"
+  ],
+  "answer": 2,
+  "explain": "By standard calculus, d(ln x) = (1/x)dx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "58e262e6-db97-4df6-9d0d-007c9f6255f4",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Formation of DE",
+  "prompt": "Family y² = 4a(x+a): eliminating 'a' gives DE of order?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "3",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "One parameter 'a' → eliminated by one differentiation → order 1 DE.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "211d0de8-b41a-4924-94e6-881aed3972c3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE / Particular Solution",
+  "prompt": "Solution of dy/dx + y = x, y(0) = 1 (particular solution at x=0)?",
+  "formula": "",
+  "options": [
+   "y = x−1 + 2e⁻ˣ",
+   "y = x+1 + e⁻ˣ",
+   "y = xe⁻ˣ+1",
+   "y = x−1+eˣ"
+  ],
+  "answer": 0,
+  "explain": "General solution y=(x−1)+ceˣ; y(0)=1→c=2; y=x−1+2e⁻ˣ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "98ae2081-d360-4b34-8603-d92bc0df28aa",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of DE",
+  "prompt": "If a DE has order m and degree n, total power of highest derivative in degree is?",
+  "formula": "",
+  "options": [
+   "m+n",
+   "n",
+   "m",
+   "mn"
+  ],
+  "answer": 1,
+  "explain": "Degree = power of the highest order derivative after removing radicals/fractions.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "39c5092f-eda4-43d9-9d6b-898bb349318a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "IF of dy/dx + (sec x)y = tan x is?",
+  "formula": "e^(∫sec x dx)",
+  "options": [
+   "e^(sin x)",
+   "e^(sec x + tan x)",
+   "e^(tan x)",
+   "e^(ln|sec x+tan x|)"
+  ],
+  "answer": 3,
+  "explain": "∫sec x dx = ln|sec x + tan x|, so IF = e^(ln|sec x+tan x|) = |sec x+tan x|.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "79645de9-f2dc-46ec-9b48-2ba1d5763961",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE xdy + ydx = d(xy) implies d(xy) = 0 gives?",
+  "formula": "xy = c",
+  "options": [
+   "x² + y² = c",
+   "x + y = c",
+   "x/y = c",
+   "xy = c"
+  ],
+  "answer": 3,
+  "explain": "d(xy) = xdy + ydx; setting this to zero and integrating gives xy = constant.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "27ccccd9-8090-4765-8af8-4f807a261904",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Family y = (c₁+c₂x+c₃x²)eˣ has order?",
+  "formula": "",
+  "options": [
+   "4",
+   "3",
+   "2",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Three parameters c₁,c₂,c₃ but c₁eˣ and c₂xeˣ and c₃x²eˣ give order 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1283f73f-ce05-4ab8-ae19-4ed1d77e26de",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "DE dy/dx = (y+x)/(y−x) is which type?",
+  "formula": "",
+  "options": [
+   "Exact only",
+   "Bernoulli",
+   "Homogeneous",
+   "Linear first order"
+  ],
+  "answer": 2,
+  "explain": "RHS = f(y/x) homogeneous of degree 0; use substitution y = vx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "95eb1c85-d99a-42e8-b61c-e73b866959c5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The condition for the DE Mdx + Ndy = 0 to be exact is?",
+  "formula": "∂M/∂y = ∂N/∂x",
+  "options": [
+   "MN = constant",
+   "M + N = 0",
+   "∂M/∂x = ∂N/∂y",
+   "∂M/∂y = ∂N/∂x"
+  ],
+  "answer": 3,
+  "explain": "Exactness requires the cross-partial derivatives to be equal: ∂M/∂y = ∂N/∂x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3d7e733c-4c1d-4bf5-9c55-e17e31f1da59",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of dy/dx = x/y (variable separable) is?",
+  "formula": "y² − x² = c",
+  "options": [
+   "y = x + c",
+   "y² = x² + c",
+   "y² + x² = c",
+   "y = cx"
+  ],
+  "answer": 1,
+  "explain": "y dy = x dx → y²/2 = x²/2 + c₁ → y² = x² + c.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "54f8c2f2-45ff-4043-9013-6cd5602b57a5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Order of DE from y = a·eˣ + b·xe^x (a, b arbitrary) is?",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Two arbitrary constants a and b → the order of the DE formed is 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ebce0ec5-e2e8-4c92-9279-1a6f5f10e436",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE of family of parabolas x² = 4ay (a: parameter) is?",
+  "formula": "2y·y' = x",
+  "options": [
+   "x = 2yy'",
+   "xy' = 2y",
+   "xy' = y",
+   "y' = 2x/y"
+  ],
+  "answer": 1,
+  "explain": "From x²=4ay → a=x²/4y; differentiate x²=4ay: 2x=4ay', so xy'=2y after eliminating a.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "98bc53e7-ca41-44d7-934d-171fa99a6709",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "IF of x(dy/dx) − y = x² is (rewrite as linear)?",
+  "formula": "1/x",
+  "options": [
+   "e^x",
+   "ln x",
+   "1/x",
+   "x"
+  ],
+  "answer": 2,
+  "explain": "dy/dx − y/x = x; P = −1/x; IF = e^(∫−1/x dx) = e^(−ln x) = 1/x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d34c84c0-3333-49ad-ba61-bd6699d3b8e8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of x(dy/dx) − y = x² after using IF = 1/x is?",
+  "formula": "y = x²+ cx",
+  "options": [
+   "y = cx − x²",
+   "y = x + cx²",
+   "y = x² + cx",
+   "y/x = x + c"
+  ],
+  "answer": 2,
+  "explain": "d(y/x)/dx = 1; integrate: y/x = x + c → y = x² + cx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "70bba7df-9326-4f4e-bc8e-0d142adee082",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "For homogeneous DE, if y = vx then dy/dx equals?",
+  "formula": "v + x(dv/dx)",
+  "options": [
+   "v·dv/dx",
+   "v + x·dv/dx",
+   "x + v·dx/dv",
+   "x·dv/dx"
+  ],
+  "answer": 1,
+  "explain": "y = vx → dy/dx = v + x·(dv/dx) by product rule; standard substitution step.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e11fa220-08e8-4302-b08c-53a552ce8725",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "DE of all circles passing through origin with centre on x-axis is?",
+  "formula": "",
+  "options": [
+   "y' = y/x",
+   "yy' = x",
+   "y' = 2xy/(x²−y²)",
+   "y' = (x²−y²)/(2xy)"
+  ],
+  "answer": 3,
+  "explain": "Circle: x²+y²=2ax; eliminating a: 2x+2yy'=2a·1 and a=(x²+y²)/2x → y'=(x²−y²)/(2xy).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0855b05c-7298-466c-a702-d9e21dc20378",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of (1+x²)(dy/dx) + 2xy = 0 is?",
+  "formula": "y(1+x²) = c",
+  "options": [
+   "y(1+x²) = c",
+   "y = c(1+x²)",
+   "y·e^(x²) = c",
+   "y = c/(1+x²)"
+  ],
+  "answer": 3,
+  "explain": "Variable separable: dy/y = −2x dx/(1+x²); integrate: ln y = −ln(1+x²)+c → y=c/(1+x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "97ac4536-fcf3-4606-bb18-48b8878b967c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "For Bernoulli DE dy/dx + Py = Qy³, substitution v = y⁻² gives?",
+  "formula": "dv/dx − 2Pv = −2Q",
+  "options": [
+   "dv/dx − 3Pv = −3Q",
+   "dv/dx + Pv = Q",
+   "dv/dx + 2Pv = 2Q",
+   "dv/dx − 2Pv = −2Q"
+  ],
+  "answer": 3,
+  "explain": "n=3; v=y^(1−3)=y⁻²; dv/dx = −2y⁻³dy/dx; substituting yields dv/dx − 2Pv = −2Q.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "56b62530-4e18-490c-ba8d-5a7fc8e90ed8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Degree of DE y = x(dy/dx) + a√(1+(dy/dx)²) is?",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "Not defined",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Rearrange: (y−xp)²= a²(1+p²); this is polynomial degree 2 in p = dy/dx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "33771f02-dd56-4e1a-92be-8901240f2198",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The orthogonal trajectories of x² + y² = c·x (family) are?",
+  "formula": "",
+  "options": [
+   "x² − y² = k",
+   "xy = k",
+   "x² + y² = ky",
+   "y = kx²"
+  ],
+  "answer": 2,
+  "explain": "Slope of family: dy/dx found, replace with −dx/dy; OT of circles through origin on x-axis is x²+y²=ky.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1f373bd4-88c1-4aa4-a229-b41749722887",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE d²y/dx² + y = 0 has general solution?",
+  "formula": "y = A cos x + B sin x",
+  "options": [
+   "y = A cos x + B sin x",
+   "y = (A+Bx)eˣ",
+   "y = A cosh x + B sinh x",
+   "y = Ae^x + Be^−x"
+  ],
+  "answer": 0,
+  "explain": "Characteristic roots ±i (imaginary) give oscillatory solution A cos x + B sin x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1f5c6825-6411-4263-b7ec-ce3d48d72a21",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The equation dy/dx + P(x)y = 0 is called?",
+  "formula": "",
+  "options": [
+   "Variable separable only",
+   "Homogeneous linear DE",
+   "Exact DE",
+   "Bernoulli DE"
+  ],
+  "answer": 1,
+  "explain": "Q(x)=0 makes it a homogeneous linear (first-order) DE, solvable by separating variables.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cb44786b-b343-4902-9529-1edeb48dba5b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of dy/dx = y·tan x is?",
+  "formula": "y = c·sec x",
+  "options": [
+   "y = c·tan x",
+   "y = c·sec x",
+   "y = c·sin x",
+   "y = c·cos x"
+  ],
+  "answer": 1,
+  "explain": "dy/y = tan x dx; ln|y| = ln|sec x| + c → y = c·sec x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "22cd73be-a5eb-4d49-8d71-4ff20a2b47c4",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "IF of dy/dx − y·tan x = e^x·cos x is?",
+  "formula": "cos x",
+  "options": [
+   "cos x",
+   "e^(−tan x)",
+   "sec x",
+   "sin x"
+  ],
+  "answer": 0,
+  "explain": "P = −tan x; IF = e^(∫−tan x dx) = e^(ln cos x) = cos x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e01c5446-5e09-493f-acd2-026f13640882",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The general solution of dy/dx = f(x)·g(y) is obtained by?",
+  "formula": "∫dy/g(y) = ∫f(x)dx",
+  "options": [
+   "∫dy/g(y) = ∫f(x)dx",
+   "g(y)=f(x)+c",
+   "∫dy/f(x) = ∫g(y)dx",
+   "∫g(y)dy = ∫f(x)dx"
+  ],
+  "answer": 0,
+  "explain": "Separate: dy/g(y) = f(x)dx, then integrate both sides independently.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dafb3ee0-8664-48df-92c6-edc3f5856c8f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "A Clairaut DE y = px + f(p) has its general solution as?",
+  "formula": "y = cx + f(c)",
+  "options": [
+   "y = f(c)/x + c",
+   "y = cx + f(c)",
+   "y = cx + cf(c)",
+   "y = cx²+f(c)"
+  ],
+  "answer": 1,
+  "explain": "In Clairaut's DE, replace p with arbitrary constant c to get general solution y = cx + f(c).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a3d4803c-9e01-42c8-999b-de08f2028c06",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of (dy/dx) = (x−y+1)/(x+y−1): correct substitution is?",
+  "formula": "",
+  "options": [
+   "v = x+y",
+   "y = vx",
+   "x = X+h, y = Y+k (shift origin)",
+   "v = xy"
+  ],
+  "answer": 2,
+  "explain": "Non-homogeneous DE; shift origin to intersection point of x−y+1=0 & x+y−1=0 to make it homogeneous.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3460089e-9f7d-4d76-a5b5-04cf3b5887a8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "For the family y² = c(x−c), eliminating c gives DE of order?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "3",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "One parameter c → eliminate c from two equations (y²=c(x−c) and differentiation) → order 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c490abff-e6e2-44ad-9876-73461ebccd83",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The equation (x+y)dy + (x−y)dx = 0 is?",
+  "formula": "",
+  "options": [
+   "Homogeneous but not exact",
+   "Exact but not homogeneous",
+   "Neither exact nor homogeneous",
+   "Exact and homogeneous"
+  ],
+  "answer": 3,
+  "explain": "M=x−y, N=x+y; ∂M/∂y=−1, ∂N/∂x=1 → not exact. But f(λx,λy)=f(x,y) → homogeneous only.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "58d0af85-46e4-43ba-8d9b-c3e0e9a1551f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of dy/dx = x·y (variable separable)?",
+  "formula": "y = Ce^(x²/2)",
+  "options": [
+   "y = Ce^(x²/2)",
+   "y = Ce^x",
+   "y = Cx²",
+   "y = Ce^(x/2)"
+  ],
+  "answer": 0,
+  "explain": "Separate: dy/y = x dx → ln|y| = x²/2 + C → y = Ce^(x²/2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "363c0a5c-0996-4ab7-b1ae-4f3842258fa4",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Degree of DE: (d²y/dx²)³ + dy/dx = sin x?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "Not defined",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "Highest derivative is d²y/dx² appearing with power 3; degree = 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "918174fd-ae69-483c-b8f7-7cc152e67ed9",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Order of DE formed from y = c₁e^x + c₂e^(−x) + c₃e^(2x)?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "2",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Three arbitrary constants → order 3 DE needed to eliminate all three.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f8f66313-ab8a-456b-86d7-a4552454085b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "IF for dy/dx + (2x/(1+x²))y = 1 is?",
+  "formula": "IF = e^(∫P dx)",
+  "options": [
+   "ln(1+x²)",
+   "1 + x²",
+   "√(1+x²)",
+   "e^(x²)"
+  ],
+  "answer": 1,
+  "explain": "∫2x/(1+x²)dx = ln(1+x²) → IF = e^(ln(1+x²)) = 1+x².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf4a3749-111a-4206-9803-5d82f41db9d2",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE xdy − ydx = √(x²+y²) dx represents which type?",
+  "formula": "",
+  "options": [
+   "Homogeneous DE",
+   "Linear DE",
+   "Bernoulli DE",
+   "Exact DE"
+  ],
+  "answer": 0,
+  "explain": "Rewrite as dy/dx = (y+√(x²+y²))/x = f(y/x); it is homogeneous.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "aa5510b9-fa99-444e-a4fe-c7b72b3b7f90",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of (x+y)dx + (y−x)dy = 0 after checking: is it exact?",
+  "formula": "∂M/∂y vs ∂N/∂x",
+  "options": [
+   "Exact; ∂M/∂y = ∂N/∂x",
+   "Bernoulli type",
+   "Linear in y",
+   "Not exact; ∂M/∂y ≠ ∂N/∂x"
+  ],
+  "answer": 3,
+  "explain": "∂M/∂y = 1, ∂N/∂x = −1; since 1 ≠ −1, the DE is NOT exact.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "10a4092d-dfa0-4072-8694-5b4b66efcecb",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of dy/dx = (x²+1)/(y²+1) is?",
+  "formula": "",
+  "options": [
+   "y² = x² + C",
+   "y³ = x³ + C",
+   "y³/3 + y = x³/3 + x + C",
+   "y = x + C"
+  ],
+  "answer": 2,
+  "explain": "Separate: (y²+1)dy = (x²+1)dx → integrate both sides.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fbc314e3-419f-4094-bcf0-3e59a05f5749",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Which condition makes dy/dx + P(x)y = Q(x) a homogeneous linear DE?",
+  "formula": "",
+  "options": [
+   "P = Q",
+   "Q(x) = 0",
+   "P(x) = 0",
+   "P and Q are constants"
+  ],
+  "answer": 1,
+  "explain": "Linear DE is homogeneous when Q(x) = 0 (RHS = 0).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e1abaed0-4b6c-486a-b9b4-f40efa1b5b52",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "d(x·eʸ) equals?",
+  "formula": "",
+  "options": [
+   "eʸ dx − x·eʸ dy",
+   "x·eʸ dx + eʸ dy",
+   "eʸ dx + x·eʸ dy",
+   "eˣ dy + y·eˣ dx"
+  ],
+  "answer": 2,
+  "explain": "By product rule: d(x·eʸ) = eʸ dx + x·eʸ dy.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c2fae45b-51b4-40e3-9913-8d7753ca1706",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of dy/dx + 2xy = 2x (linear) is?",
+  "formula": "",
+  "options": [
+   "y = 1 + Ce^(x²)",
+   "y = x + Ce^(−x²)",
+   "y = 1 + Ce^(−x²)",
+   "y = Ce^(−x²)"
+  ],
+  "answer": 2,
+  "explain": "IF = e^(x²); solution: y·e^(x²) = ∫2x·e^(x²)dx = e^(x²)+C → y = 1+Ce^(−x²).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "27e4277a-4ce1-406a-93b0-2d863b0eade8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE of family y = a·x² (a: parameter) is?",
+  "formula": "",
+  "options": [
+   "y' = 2y/x²",
+   "y = x·y'",
+   "2y = x·y'",
+   "y'' = 2a"
+  ],
+  "answer": 2,
+  "explain": "y' = 2ax; y = ax² → a = y/x²; substitute: y' = 2y/x → xy' = 2y.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e60038ac-07d2-4790-9a2c-dc7d8c56283b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "For the DE y'' + 4y = 0, general solution is?",
+  "formula": "",
+  "options": [
+   "c₁cos2x + c₂sin2x",
+   "c₁cos x + c₂sin x",
+   "c₁e^(2x) + c₂e^(−2x)",
+   "(c₁+c₂x)e^(2x)"
+  ],
+  "answer": 0,
+  "explain": "Characteristic equation r²+4 = 0 → r = ±2i → y = c₁cos2x+c₂sin2x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2e6c9bc2-aec7-4794-8713-e602d7ea7a45",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The IF of dy/dx − (2/x)y = x² is?",
+  "formula": "IF = e^(∫P dx)",
+  "options": [
+   "x²",
+   "1/x²",
+   "x",
+   "1/x"
+  ],
+  "answer": 1,
+  "explain": "P = −2/x; ∫P dx = −2ln x = ln(x⁻²); IF = e^(ln x⁻²) = 1/x².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3fb29705-2e77-4e41-962e-48a57d8e3438",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "A family of curves orthogonal to y = kx² (parabolas through origin) are?",
+  "formula": "",
+  "options": [
+   "Lines y = mx",
+   "Ellipses x² + 2y² = C",
+   "Circles x² + y² = C",
+   "Hyperbolas x²−y² = C"
+  ],
+  "answer": 1,
+  "explain": "Slope of y=kx² is 2y/x; orthogonal slope = −x/2y → x²+2y² = C.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "41a3931a-19d4-4f90-9475-42671a29cfa7",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "d(eˣ/x) in exact differential form equals?",
+  "formula": "",
+  "options": [
+   "eˣ(x−1)/x² dx",
+   "eˣ/x dx",
+   "eˣ dx − eˣ/x² dx",
+   "eˣ(1+x)/x² dx"
+  ],
+  "answer": 0,
+  "explain": "d(eˣ/x) = (x·eˣ − eˣ)/x² dx = eˣ(x−1)/x² dx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d3d86159-0422-4fe4-8c09-1a64b65a908b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of dy/dx = (y/x)² (variable separable) is?",
+  "formula": "",
+  "options": [
+   "1/y = 1/x + C",
+   "y = x + C",
+   "y = Cx²",
+   "−1/y = −1/x + C"
+  ],
+  "answer": 0,
+  "explain": "dy/y² = dx/x² → −1/y = −1/x + C → 1/y = 1/x + C.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7eda3a76-48d7-45d4-8638-264c8c959827",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Which of the following is a second-order linear DE?",
+  "formula": "",
+  "options": [
+   "y'' = y·y'",
+   "y'' + yy' = 0",
+   "y'' + xy' + y = 0",
+   "(y'')² + y = 0"
+  ],
+  "answer": 2,
+  "explain": "y''+xy'+y=0 is linear (coefficients of y'',y',y are functions of x only).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "47298af6-1772-418b-af92-c9a51a5585e5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE formed by y = c₁cos(nx) + c₂sin(nx) is?",
+  "formula": "",
+  "options": [
+   "y' + ny = 0",
+   "y'' + ny' = 0",
+   "y'' + n²y = 0",
+   "y'' − n²y = 0"
+  ],
+  "answer": 2,
+  "explain": "Differentiating twice and eliminating c₁,c₂ gives y''+n²y = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c8261968-f5e4-4410-a155-a866e27e598b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "For the family y = c(x−c)² (one parameter), the DE has order?",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "One arbitrary constant → one differentiation needed → order 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f0bcdce8-ba8e-4550-a9a9-37a4c0bcb2e9",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The substitution to solve dy/dx + P(x)y = Q(x)yⁿ (Bernoulli, n≠0,1) is?",
+  "formula": "v = y^(1−n)",
+  "options": [
+   "v = yⁿ",
+   "v = y/x",
+   "v = 1/y",
+   "v = y^(1−n)"
+  ],
+  "answer": 3,
+  "explain": "Dividing by yⁿ and putting v = y^(1−n) linearizes the Bernoulli DE.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3dc1856a-ec14-4382-8658-021bb200c17f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The general solution of dy/dx = cos²x·cos²y is?",
+  "formula": "",
+  "options": [
+   "y = sin x + C",
+   "tan y = sin x + C",
+   "tan y = x + C",
+   "tan y = (x + sin2x/2)/2 + C"
+  ],
+  "answer": 3,
+  "explain": "Separate: sec²y dy = cos²x dx; integrate: tan y = (x+sin2x/2)/2+C.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6fc4561c-5181-403a-92f7-c9cf93a9abf8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "For y = vx substitution in homogeneous DE, x(dv/dx) equals?",
+  "formula": "x dv/dx = f(v) − v",
+  "options": [
+   "f(v) − v",
+   "v − f(v)",
+   "f(v)",
+   "f(v) + v"
+  ],
+  "answer": 0,
+  "explain": "dy/dx = v + x(dv/dx) = f(v) → x(dv/dx) = f(v)−v; then separate variables.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5edebb62-3cf8-46a7-af7e-3cea9f1108cc",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "Solution of the DE dy/dx = y·f'(x)/f(x) is?",
+  "formula": "",
+  "options": [
+   "y = C/f(x)",
+   "y = C·f'(x)",
+   "y = C·e^(f(x))",
+   "y = C·f(x)"
+  ],
+  "answer": 3,
+  "explain": "Separate: dy/y = f'(x)/f(x)dx → ln|y| = ln|f(x)|+C → y = C·f(x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "164652a7-a146-4c2a-89a8-a91b4e0c0e99",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE x(dy/dx) + y = x·logx has solution (IF = x)?",
+  "formula": "",
+  "options": [
+   "xy = x²(2logx−1)/4 + C",
+   "y = logx + C/x",
+   "y = x·logx + C",
+   "xy = x·logx + C"
+  ],
+  "answer": 0,
+  "explain": "IF=x; x·y = ∫x·logx dx = x²logx/2−x²/4+C → xy = x²(2logx−1)/4+C.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4ce933e1-88eb-4b55-8b43-7299d10a0fa5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Differential Equations",
+  "prompt": "The DE of all circles with fixed radius r (centre anywhere in plane) has order?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "0",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Circle (x−a)²+(y−b)²=r²; two parameters a,b → eliminate both → order 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
  }
 ]

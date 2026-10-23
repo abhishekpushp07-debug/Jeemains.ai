@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Clipboard from "expo-clipboard";
 import Animated, { FadeIn, ZoomIn } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
-import { rf, uuid } from "@/src/api/client";
+import { RF_BASE, rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
 import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap } from "@/src/components/ui";
 import { Ring } from "@/src/components/Ring";
@@ -75,14 +75,25 @@ export default function Duel() {
     return () => { alive = false; };
   }, [p.mode, p.code, p.subject, p.chapter, uid, name, apply, n]);
 
-  // Poll for opponent / progress (light: one small GET every 1.5 s, stops when finished).
+  // Live connection: the server pushes opponent joins and score changes instantly.
+  // If the socket drops, a slow poll keeps the duel going while we reconnect.
+  const over = !d?.id || d.status === "finished" || d.status === "cancelled" || d.status === "expired";
   useEffect(() => {
-    if (!d?.id || d.status === "finished" || d.status === "cancelled" || d.status === "expired") return;
-    const iv = setInterval(() => {
-      rf(`/duels/${d.id}`, uid).then(apply).catch(() => {});
-    }, 1500 + Math.random() * 300);
-    return () => clearInterval(iv);
-  }, [d?.id, d?.status, uid, apply]);
+    if (over) return;
+    let ws: WebSocket | null = null, live = false, stop = false;
+    let retry: ReturnType<typeof setTimeout> | undefined;
+    const connect = () => {
+      ws = new WebSocket(`${RF_BASE.replace(/^http/, "ws")}/duels/${d.id}/ws?u=${encodeURIComponent(uid)}`);
+      ws.onopen = () => { live = true; };
+      ws.onmessage = (e) => { try { apply(JSON.parse(e.data)); } catch {} };
+      ws.onclose = () => { live = false; if (!stop) retry = setTimeout(connect, 2000); };
+      ws.onerror = () => ws?.close();
+    };
+    connect();
+    const ping = setInterval(() => { if (live) ws?.send("p"); }, 20000);
+    const poll = setInterval(() => { if (!live) rf(`/duels/${d.id}`, uid).then(apply).catch(() => {}); }, 3000);
+    return () => { stop = true; clearTimeout(retry); clearInterval(ping); clearInterval(poll); ws?.close(); };
+  }, [d?.id, over, uid, apply]);
 
   useEffect(() => {
     const iv = setInterval(() => setNow(serverNow()), 250);
@@ -94,11 +105,12 @@ export default function Duel() {
   const started = d?.status === "ready" && d.start_at && now >= d.start_at;
   const total = d?.total || 30;
   const card = d?.cards?.[idx];
+  const verdict = fb && fb.index === idx ? fb : null;
 
   useEffect(() => {
     // Resync after reconnect, but never cut the visible RIGHT/WRONG verdict short.
-    if (me && me.answered > idx && !fb) setIdx(me.answered);
-  }, [me?.answered, fb]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (me && me.answered > idx && !fb && choice === null && !sending.current) setIdx(me.answered);
+  }, [me?.answered, fb, choice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!started || !card) return;
@@ -115,7 +127,7 @@ export default function Duel() {
     try {
       const r = await rf(`/duels/${d.id}/answer`, uid, { method: "POST", body: { index: idx, choice: c, outcome, ms } });
       setFb(r);
-      setTimeout(() => setIdx((i) => Math.max(i, r.index + 1)), outcome === "answer" ? 1100 : 600);
+      setTimeout(() => { setChoice(null); setFb(null); setIdx((i) => Math.max(i, r.index + 1)); }, outcome === "answer" ? 1100 : 600);
     } catch (e: any) {
       // Unlock the card so the student can retry (or the timer can still expire).
       setChoice(null);
@@ -148,8 +160,6 @@ export default function Duel() {
     router.back();
   }
   const tint = subjectColor(d?.subject || p.subject);
-  const waitedS = d?.status === "waiting" ? Math.max(0, Math.floor(now - (d.server_now - 0))) : 0;
-  void waitedS;
 
   let body: React.ReactNode = null;
   if (!d) {
@@ -181,7 +191,7 @@ export default function Duel() {
       </ScrollView>
     );
   } else if (d.status === "ready" && !started) {
-    const c = Math.max(1, Math.ceil(d.start_at - now));
+    const c = Math.min(5, Math.max(1, Math.ceil(d.start_at - now)));
     body = (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: space.lg, paddingHorizontal: space.lg }} testID="duel-countdown">
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", alignSelf: "stretch" }}>
@@ -206,32 +216,32 @@ export default function Duel() {
           <T w="heavy" size={15} color={colors.onSurfaceInverse} testID="duel-card-counter">Card {idx + 1} / {total}</T>
           <Ring light left={left} color={tint} />
         </View>
-        <Animated.View key={card.id} entering={FadeIn.duration(160)} testID="duel-card" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: fb ? 4 : 1, borderColor: fb ? (fb.outcome === "correct" ? colors.success : fb.outcome === "incorrect" ? colors.error : colors.warning) : colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.1, shadowRadius: 16, elevation: 5 }}>
+        <Animated.View key={card.id} entering={FadeIn.duration(160)} testID="duel-card" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: verdict ? 4 : 1, borderColor: verdict ? (verdict.outcome === "correct" ? colors.success : verdict.outcome === "incorrect" ? colors.error : colors.warning) : colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.1, shadowRadius: 16, elevation: 5 }}>
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
             <T w="bold" size={11} color={tint}>{card.chapter}</T>
-            {fb ? (
-              <Animated.View entering={ZoomIn.duration(200)} testID="duel-verdict" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, height: 28, borderRadius: 14, backgroundColor: fb.outcome === "correct" ? colors.success : fb.outcome === "incorrect" ? colors.error : colors.warning }}>
-                <Icon name={fb.outcome === "correct" ? "check-bold" : fb.outcome === "incorrect" ? "close-thick" : "timer-sand-complete"} size={16} color={colors.onSuccess} />
-                <T w="heavy" size={13} color={colors.onSuccess}>{fb.outcome === "correct" ? "RIGHT +1" : fb.outcome === "incorrect" ? "WRONG" : "MISSED"}</T>
+            {verdict ? (
+              <Animated.View entering={ZoomIn.duration(200)} testID="duel-verdict" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, height: 28, borderRadius: 14, backgroundColor: verdict.outcome === "correct" ? colors.success : verdict.outcome === "incorrect" ? colors.error : colors.warning }}>
+                <Icon name={verdict.outcome === "correct" ? "check-bold" : verdict.outcome === "incorrect" ? "close-thick" : "timer-sand-complete"} size={16} color={colors.onSuccess} />
+                <T w="heavy" size={13} color={colors.onSuccess}>{verdict.outcome === "correct" ? "RIGHT +1" : verdict.outcome === "incorrect" ? "WRONG" : "MISSED"}</T>
               </Animated.View>
             ) : null}
           </View>
           <T w="heavy" size={18} color={colors.custom_onReading}>{card.prompt}</T>
           {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={19} color={colors.custom_series} style={{ textAlign: "center" }}>{card.formula}</T></View> : null}
           {card.options.map((o: string, k: number) => {
-            const isAns = fb && k === fb.answer, picked = k === choice;
-            const bg = isAns ? colors.custom_successSoft : fb && picked ? colors.custom_errorSoft : picked ? colors.custom_infoSoft : colors.surfaceSecondary;
-            const bd = isAns ? colors.success : fb && picked ? colors.error : picked ? colors.brandPrimary : colors.border;
+            const isAns = verdict && k === verdict.answer, picked = k === choice;
+            const bg = isAns ? colors.custom_successSoft : verdict && picked ? colors.custom_errorSoft : picked ? colors.custom_infoSoft : colors.surfaceSecondary;
+            const bd = isAns ? colors.success : verdict && picked ? colors.error : picked ? colors.brandPrimary : colors.border;
             return (
               <Press key={k} testID={"duel-option-" + k} disabled={locked} haptic={false} onPress={() => { tap("medium"); setChoice(k); send("answer", k); }} accessibilityLabel={o}
                 style={{ minHeight: 50, borderRadius: radius.md, borderWidth: 2, borderColor: bd, backgroundColor: bg, flexDirection: "row", alignItems: "center", paddingHorizontal: space.md, gap: space.sm }}>
                 <T w="heavy" size={13} color={colors.muted}>{"ABCD"[k]}</T>
                 <T w="bold" size={15} style={{ flex: 1 }} color={colors.custom_onReading}>{o}</T>
-                {isAns ? <Icon name="check-circle" size={20} color={colors.success} /> : fb && picked ? <Icon name="close-circle" size={20} color={colors.error} /> : null}
+                {isAns ? <Icon name="check-circle" size={20} color={colors.success} /> : verdict && picked ? <Icon name="close-circle" size={20} color={colors.error} /> : null}
               </Press>
             );
           })}
-          {fb ? <T w="heavy" size={14} testID="duel-feedback" color={fb.outcome === "correct" ? colors.success : fb.outcome === "incorrect" ? colors.error : colors.warning}>{fb.outcome === "correct" ? "✓ Correct +1" : fb.outcome === "incorrect" ? "✗ Incorrect" : fb.outcome === "timed_out" ? "⏱ Timed out" : "↷ Skipped"}{fb.explain ? " · " + fb.explain : ""}</T> : null}
+          {verdict ? <T w="heavy" size={14} testID="duel-feedback" color={verdict.outcome === "correct" ? colors.success : verdict.outcome === "incorrect" ? colors.error : colors.warning}>{verdict.outcome === "correct" ? "✓ Correct +1" : verdict.outcome === "incorrect" ? "✗ Incorrect" : verdict.outcome === "timed_out" ? "⏱ Timed out" : "↷ Skipped"}{verdict.explain ? " · " + verdict.explain : ""}</T> : null}
         </Animated.View>
         <View style={{ flexDirection: "row", gap: space.sm, paddingVertical: space.md }}>
           <Button testID="duel-skip" kind="secondary" icon="skip-next-outline" label="Skip" disabled={locked} onPress={() => { setChoice(-1); send("skipped", null); }} style={{ flex: 1 }} />
@@ -329,7 +339,6 @@ function Side({ p, right, total }: { p: any; right?: boolean; total: number }) {
 
 function VersusRow({ me, opp, tint, total }: { me: any; opp: any; tint: string; total: number }) {
   const lead = (me?.score ?? 0) - (opp?.score ?? 0);
-  void tint;
   return (
     <View testID="duel-versus" style={{ alignSelf: "stretch", gap: 6 }}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, padding: space.md, borderRadius: radius.lg, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>

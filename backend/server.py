@@ -328,6 +328,8 @@ from duels import make_router as make_duels  # noqa: E402
 api.include_router(make_duels(db, rf_user, public_card, award))
 api.include_router(game_router)
 app.include_router(api)
+from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 

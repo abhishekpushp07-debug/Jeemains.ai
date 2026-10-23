@@ -52,6 +52,12 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Coin Shop (backend/shop.py, app/rapid/shop.tsx): streak freezes (auto-save one missed day), 4 avatar frames, 4 animated entry effects, 3 arena themes, 12 free avatars; earned coins only, no payments.
 - Daily Quests (3/day, claim coins), freezes shown on the streak card, themed arena background.
 
+## Iteration 6 (2026-06)
+- Duels on a live WebSocket connection (/api/rf/duels/{id}/ws?u=uid): server pushes state after join/bot/answer/forfeit; one server-side ticker per duel (not per phone); 3 s polling fallback only while the socket is down. Card cache in memory; presence writes throttled to 3 s; GZip on API responses.
+- Duel verdict fix (verdict tied to card index; no skip on early push); countdown clamped 5..1; AI Rival duels excluded from duel record.
+- Card bank expanded to ~11,500 JEE Main cards (150 per chapter, 100 for the 4 inorganic chapters), still review pending.
+- Scale note: multi-server WebSocket fan-out needs Redis pub/sub (not added yet).
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

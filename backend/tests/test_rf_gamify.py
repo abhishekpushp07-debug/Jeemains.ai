@@ -36,8 +36,8 @@ def test_cards_public_total(s):
     assert r.status_code == 200, r.text
     d = r.json()
     print("total", d["total"], "pages", d["pages"])
-    assert d["total"] == 4100
-    assert d["page"] == 1 and len(d["items"]) == 50 and d["pages"] == 82
+    assert d["total"] >= 4100  # bank grows via background generation
+    assert d["page"] == 1 and len(d["items"]) == 50 and d["pages"] == -(-d["total"] // 50)
     assert "_id" not in d["items"][0]
     for k in ("id", "subject", "chapter", "prompt", "options", "answer"):
         assert k in d["items"][0]

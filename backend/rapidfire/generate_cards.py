@@ -50,7 +50,7 @@ async def author(sem, subject, chapter, target):
     path = OUT / f"{slug(subject)}__{slug(chapter)}.json"
     cards = json.loads(path.read_text()) if path.exists() else []
     tries = 0
-    while len(cards) < target and tries < 8:
+    while len(cards) < target and tries < 14:
         tries += 1
         need = min(BATCH, target - len(cards))
         seen = "\n".join(f"- {c['prompt']}" for c in cards[-120:])
@@ -100,7 +100,7 @@ async def main():
         if only and subject != only:
             continue
         for ch in chapters:
-            jobs.append(author(sem, subject, ch, 100 if ch in INORGANIC else 50))
+            jobs.append(author(sem, subject, ch, 100 if ch in INORGANIC else 150))
     await asyncio.gather(*jobs)
 
 

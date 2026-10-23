@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only retest of the iteration-5 HIGH verdict race at 390x844, on 2 AI Rival duels started from invite, then 'Play an AI Rival now'. Fixed. Normal-paced run: 9 of 9 tapped cards each showed their own verdict (RIGHT +1 or WRONG) on the same card for about 970-1040 ms, then advanced. No card ever showed a stale verdict, sampled every 60 ms in the browser. The final score of 4 matched the 4 RIGHT verdicts. Rapid run (tapping the moment a new card renders): verdicts were still tied to their card. Timeout: the card showed MISSED for about 500 ms, then advanced, and the next card's timer ran (19 to 17 s, and the ring counted down after the timeout). Countdown sequence: 5, 4, 3, 2, 1, PLAY. 6 never appeared. Duel record: the hub shows 'last 10: 0W 0T 10L' and GET /api/rf/duels returns only PvP duels (opponent Player ··0002). The record did not change after forfeiting an AI Rival duel. No deprecated Expo packages were detected in duel.tsx.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "duels.py simulate_bot (line 134-135)", "issue": "The bot score is capped at me.score - 1, so the AI Rival can never win or tie unless the human scores 0 or forfeits. This may be intentional for encouragement, but it makes the rival feel scripted, since the lead banner always says 'You lead by 1'. Product decision."}
+  ]},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Duel play: first frame of a new card", "issue": "For one render after idx advances, choice is still set until the card-change useEffect resets it, so the options are disabled. A tap in that single frame (about 16-40 ms) is dropped. The rapid-tap script hit this once. Real users will almost never notice. Optional fix: reset choice/fb in the same setState as setIdx, or use useLayoutEffect.", "testID": "duel-option-*", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "LOW (optional): Reset choice and fb together with the idx advance (in the setTimeout callback in send()) so the new card is never briefly locked.",
+    "PRODUCT: Decide whether the AI Rival should be able to win. Currently the bot is capped at the human's score minus 1."
+  ],
+  "critical_code_review_comments": [
+    "duel.tsx:112 resync guard (!fb && choice === null && !sending.current) and line 108 (verdict only when fb.index === idx) fix the race correctly.",
+    "duel.tsx:196 countdown is clamped to 1..5.",
+    "duels.py:329 GET /duels filters out vs_bot duels.",
+    "Dead code remains: waitedS (duel.tsx:163-164) and void tint (line 344)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (frontend-only request)", "frontend": "100% of requested checks (verdict per card, no stale verdict, timer runs, countdown clamp, record excludes bots)"},
+  "seed_data_creation": "Two AI Rival duels for user db0c62b8-... (one played 9 cards and was left, one forfeited)",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Sample duel-card-counter and duel-verdict inside page.evaluate every 40-60 ms after a DOM .click() on duel-option-N. Right after a card change, wait about 100 ms before tapping, because the first frame has the options disabled.",
+  "rca_of_issue": "Iteration-5 race verified fixed: WS push now arrives while choice !== null / sending, so resync is skipped; verdict bound to fb.index."
+}

@@ -898,5 +898,1805 @@
   "explain": "A set and its complement together cover the entire universal set U.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main"
+ },
+ {
+  "id": "3274f086-cf58-4542-b984-243979c437b9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of symmetric relations on a set with n elements?",
+  "formula": "2^(n(n+1)/2)",
+  "options": [
+   "n!",
+   "2^(n²)",
+   "2^(n(n-1)/2)",
+   "2^(n(n+1)/2)"
+  ],
+  "answer": 3,
+  "explain": "Diagonal (n) + upper triangle n(n-1)/2 entries can be freely chosen; total = 2^(n(n+1)/2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7bbc4368-f8c8-4b42-bb24-52e126b0556a",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A relation R on A is transitive if:",
+  "formula": "",
+  "options": [
+   "aRb ⇒ bRa",
+   "aRb & aRc ⇒ bRc",
+   "aRb & bRc ⇒ aRc",
+   "aRa for all a∈A"
+  ],
+  "answer": 2,
+  "explain": "Transitivity: whenever aRb and bRc hold, aRc must also hold.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0beb3659-5931-485e-b363-b09a323b5e37",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of functions from set A (m elements) to set B (n elements)?",
+  "formula": "nᵐ",
+  "options": [
+   "2^(mn)",
+   "nᵐ",
+   "mⁿ",
+   "m·n"
+  ],
+  "answer": 1,
+  "explain": "Each of the m elements of A can be mapped to any of the n elements of B; total = nᵐ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0f30c93e-7796-4e6b-beb0-4f3faefbfa8c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of one-one functions from A (m elements) to B (n elements), m≤n?",
+  "formula": "P(n,m) = n!/(n−m)!",
+  "options": [
+   "C(n,m)",
+   "n!/(n−m)!",
+   "n!/m!",
+   "nᵐ"
+  ],
+  "answer": 1,
+  "explain": "Injective functions correspond to permutations: n choices for first, n−1 for second, …",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "60e7a979-efe1-4d4a-a29d-e0f479c419ba",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "For f: A→B to have an inverse, f must be:",
+  "formula": "",
+  "options": [
+   "Many-one onto",
+   "Only one-one",
+   "Bijective",
+   "Only onto"
+  ],
+  "answer": 2,
+  "explain": "Inverse exists iff f is both injective and surjective, i.e., bijective.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e105a2d3-ec4a-4aa8-8a55-6000fe0a85ea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = x/(1+|x|) is:",
+  "formula": "",
+  "options": [
+   "(−1, 1)",
+   "[−1, 1]",
+   "(0, 1)",
+   "ℝ"
+  ],
+  "answer": 0,
+  "explain": "As x→±∞, f→±1 but never reaches ±1; so range is open interval (−1,1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3279c63d-32a6-4e8e-915c-65cc86ebe739",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The period of f(x) = |sin x| is:",
+  "formula": "",
+  "options": [
+   "π",
+   "4π",
+   "2π",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "|sin x| repeats every π because the negative half-cycles are reflected up.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3b5bc998-0487-4c9e-b0e5-e89dd49e5f50",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = 1/(1+x²) for x∈ℝ is:",
+  "formula": "",
+  "options": [
+   "(0,1]",
+   "(−1,1)",
+   "[0,1)",
+   "(0,1)"
+  ],
+  "answer": 0,
+  "explain": "At x=0 f=1 (max); as |x|→∞, f→0⁺ but never 0; so range is (0,1].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9a489334-aaaa-4e22-ad55-6355893f42f7",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "f(x) = x + 1/x for x > 0 has minimum value:",
+  "formula": "",
+  "options": [
+   "1/2",
+   "2",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "By AM–GM, x + 1/x ≥ 2√(x·1/x) = 2; equality at x=1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6efbfea1-40cd-45e9-a8e0-82bdbef7bb89",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A ∪ U (U = universal set) equals:",
+  "formula": "",
+  "options": [
+   "Aᶜ",
+   "A",
+   "∅",
+   "U"
+  ],
+  "answer": 3,
+  "explain": "Union with universal set always gives the universal set U.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fa3ee03a-dd88-4661-b45e-feb8dcca20b4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A ∩ ∅ equals:",
+  "formula": "",
+  "options": [
+   "U",
+   "Aᶜ",
+   "∅",
+   "A"
+  ],
+  "answer": 2,
+  "explain": "Intersection with empty set is always the empty set.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "74ebc601-862c-4ae8-addf-7628c18f495b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Which of these is NOT a function from ℝ to ℝ?",
+  "formula": "",
+  "options": [
+   "f(x)=√x",
+   "f(x)=x²",
+   "f(x)=x³",
+   "f(x)=|x|"
+  ],
+  "answer": 0,
+  "explain": "√x is not defined for x<0 in ℝ, so its domain is not all of ℝ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c30e4a7b-0a33-459d-b6bf-f254d82b7476",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If A ⊆ B, then A ∪ B equals:",
+  "formula": "",
+  "options": [
+   "∅",
+   "A",
+   "B",
+   "A∩B"
+  ],
+  "answer": 2,
+  "explain": "When A is a subset of B, every element of A is already in B, so A∪B = B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cb85d5bf-f932-4c19-a5d4-59812e283c3f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x) = f(−x) and f(x) = −f(−x) both hold, then f(x) is:",
+  "formula": "",
+  "options": [
+   "Odd only",
+   "Both even and odd (zero fn)",
+   "Even only",
+   "Neither"
+  ],
+  "answer": 1,
+  "explain": "f even and odd simultaneously ⟹ f(x)=0 for all x; the zero function.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f06423b3-7e28-4e71-b82b-8a904f94beea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "n(A×B) when n(A)=p and n(B)=q is:",
+  "formula": "p·q",
+  "options": [
+   "2^(p+q)",
+   "p+q",
+   "p·q",
+   "pq²"
+  ],
+  "answer": 2,
+  "explain": "Cartesian product A×B has p×q ordered pairs.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3940bcee-10ad-41fc-93dd-c550e23554cf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Domain of f(x) = √(4 − x²) is:",
+  "formula": "",
+  "options": [
+   "(−∞,2]",
+   "[−2,2]",
+   "(−2,2)",
+   "[2,∞)"
+  ],
+  "answer": 1,
+  "explain": "4−x²≥0 ⟹ x²≤4 ⟹ −2≤x≤2, i.e., [−2,2].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "725bf326-badf-486a-a1f9-e322470e8358",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The relation 'is parallel to' on lines in a plane is:",
+  "formula": "",
+  "options": [
+   "Partial order",
+   "Only transitive",
+   "Only symmetric",
+   "Equivalence relation"
+  ],
+  "answer": 3,
+  "explain": "Parallelism is reflexive (l∥l), symmetric, and transitive — an equivalence relation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f350b884-b5a3-4035-8180-0269ac14ab2b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of elements in A×B×C where n(A)=2,n(B)=3,n(C)=4?",
+  "formula": "",
+  "options": [
+   "14",
+   "9",
+   "12",
+   "24"
+  ],
+  "answer": 3,
+  "explain": "n(A×B×C) = n(A)·n(B)·n(C) = 2×3×4 = 24.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "eb79076b-3788-4238-afa1-aeff8e514914",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "f: ℝ→ℝ, f(x)=c (constant). f is classified as:",
+  "formula": "",
+  "options": [
+   "Onto",
+   "Bijective",
+   "Many-one into",
+   "One-one"
+  ],
+  "answer": 2,
+  "explain": "Constant function maps all inputs to one value: many-one and not onto (into).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5654a5d5-9055-400a-bcdb-0780f7650a77",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f and g are odd functions, then f+g is:",
+  "formula": "",
+  "options": [
+   "Depends on f,g",
+   "Even",
+   "Neither",
+   "Odd"
+  ],
+  "answer": 3,
+  "explain": "(f+g)(−x)=f(−x)+g(−x)=−f(x)−g(x)=−(f+g)(x); so f+g is odd.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "538e7409-57a7-423d-8a90-ada37e92561e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f is even and g is odd, then f·g is:",
+  "formula": "",
+  "options": [
+   "Odd",
+   "Neither",
+   "Constant",
+   "Even"
+  ],
+  "answer": 0,
+  "explain": "(fg)(−x)=f(−x)g(−x)=f(x)·[−g(x)]=−(fg)(x); product is odd.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0c3df63c-7e09-4ab2-9751-34114c0f5a3e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = sin²x + cos²x is:",
+  "formula": "",
+  "options": [
+   "[−1,1]",
+   "[0,1]",
+   "{1}",
+   "ℝ"
+  ],
+  "answer": 2,
+  "explain": "sin²x+cos²x = 1 identically; range is the singleton {1}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7a7ee224-49e8-4dc3-ae48-24cdb8058c00",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Relation R = {(a,a):a∈A} on A is called:",
+  "formula": "",
+  "options": [
+   "Identity relation",
+   "Void relation",
+   "Symmetric relation",
+   "Universal relation"
+  ],
+  "answer": 0,
+  "explain": "The identity relation consists exactly of all diagonal pairs (a,a).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "30587b14-3e29-4a77-bb2c-3e9397d89a2c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x+y) = f(x)+f(y) for all x,y∈ℝ and f is continuous, then f(x) is:",
+  "formula": "f(x)=kx",
+  "options": [
+   "f(x)=k",
+   "f(x)=kx²",
+   "f(x)=eˣ",
+   "f(x)=kx"
+  ],
+  "answer": 3,
+  "explain": "Cauchy's functional equation with continuity gives only linear solutions f(x)=kx.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e037dd45-4fd6-436e-bc7a-64db4f0b480e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A ∩ Aᶜ equals",
+  "formula": "A ∩ Aᶜ = ∅",
+  "options": [
+   "A",
+   "∅",
+   "U",
+   "Aᶜ"
+  ],
+  "answer": 1,
+  "explain": "A set and its complement share no elements; their intersection is the empty set.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "19885473-2489-4bf8-a978-91439da4333f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of onto functions from A (m elements) to B (2 elements), m≥2?",
+  "formula": "2ᵐ − 2",
+  "options": [
+   "2ᵐ − 1",
+   "2ᵐ − 2",
+   "2ᵐ",
+   "m²"
+  ],
+  "answer": 1,
+  "explain": "By inclusion-exclusion, onto functions to 2-element set = 2ᵐ − 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "19a0db52-5285-422e-97c3-8dc66de0c83a",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = tan x (principal branch, x∈(−π/2, π/2)) is",
+  "formula": "",
+  "options": [
+   "ℝ (all reals)",
+   "(0, ∞)",
+   "[−1, 1]",
+   "[0, ∞)"
+  ],
+  "answer": 0,
+  "explain": "tan x takes all real values on its principal domain (−π/2, π/2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f21e7c12-f3fc-4716-b909-6fd634b03ce4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f: A→B is one-one and n(A)=n(B), then f is",
+  "formula": "",
+  "options": [
+   "Only injective",
+   "Many-one",
+   "Bijective",
+   "Only surjective"
+  ],
+  "answer": 2,
+  "explain": "A one-one function between finite sets of equal size is automatically onto, hence bijective.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "37a9e7cb-835a-488d-861b-a9b4c8aff2ea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Domain of f(x) = √(log x) is",
+  "formula": "",
+  "options": [
+   "(0, ∞)",
+   "(1, ∞)",
+   "[1, ∞)",
+   "(0, 1]"
+  ],
+  "answer": 2,
+  "explain": "Need log x ≥ 0, i.e., x ≥ 1, and x > 0 for log; domain is [1, ∞).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f54a1c71-7e88-467c-b0cb-5a24695a15ef",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A ∪ ∅ equals",
+  "formula": "A ∪ ∅ = A",
+  "options": [
+   "∅",
+   "U",
+   "Aᶜ",
+   "A"
+  ],
+  "answer": 3,
+  "explain": "∅ is identity element for union; uniting any set with empty set returns the set.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "79d368ef-b46f-45f2-ae30-b335d39d2cdb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f is odd and g is even, then f∘g is",
+  "formula": "",
+  "options": [
+   "Both",
+   "Neither",
+   "Odd",
+   "Even"
+  ],
+  "answer": 3,
+  "explain": "f(g(−x))=f(g(x)) since g is even, so f∘g is even.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "499b8b7e-340a-4485-a932-9c37013b4559",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The period of f(x) = |cos x| is",
+  "formula": "T = π",
+  "options": [
+   "π",
+   "2π",
+   "2",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "|cos x| repeats every π because the negative half is folded up.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "78bb32b8-15e5-4e17-b075-166073655372",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of reflexive AND symmetric relations on a set with n elements?",
+  "formula": "2^(n(n−1)/2)",
+  "options": [
+   "2^n",
+   "2^(n(n−1)/2)",
+   "2^(n²−n)",
+   "2^(n²)"
+  ],
+  "answer": 1,
+  "explain": "Diagonal fixed (reflexive); each of n(n−1)/2 off-diagonal pairs freely chosen symmetrically.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b2f0d414-56e7-48c5-bdf7-f7fe7eede563",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If A ⊆ B, then A ∩ B equals",
+  "formula": "",
+  "options": [
+   "A ∪ B",
+   "∅",
+   "B",
+   "A"
+  ],
+  "answer": 3,
+  "explain": "When A is a subset of B, every element of A is in B, so A ∩ B = A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "20fa2262-0ce3-4ae3-9d8e-8f543c511c40",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = sgn(x) (signum function) is",
+  "formula": "",
+  "options": [
+   "ℝ",
+   "{0, 1}",
+   "{−1, 1}",
+   "{−1, 0, 1}"
+  ],
+  "answer": 3,
+  "explain": "Signum outputs −1 for x<0, 0 for x=0, and 1 for x>0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "aa443076-6e11-47ce-bf46-778533e131d9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "For A×B, the element (a,b) ∈ A×B means",
+  "formula": "",
+  "options": [
+   "a∈A∩B",
+   "a∈A or b∈B",
+   "a∈B and b∈A",
+   "a∈A and b∈B"
+  ],
+  "answer": 3,
+  "explain": "Cartesian product A×B contains ordered pairs with first element from A, second from B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e5391542-03d0-4b49-ad6d-ac2343971a2a",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x) = x² and g(x) = √x (x≥0), then g∘f(x) equals",
+  "formula": "",
+  "options": [
+   "x",
+   "|x|",
+   "√x",
+   "x²"
+  ],
+  "answer": 1,
+  "explain": "g(f(x)) = √(x²) = |x| for all real x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "82a38d99-ca92-4227-8699-88ee74501f39",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The relation 'is perpendicular to' on lines in a plane is",
+  "formula": "",
+  "options": [
+   "Equivalence relation",
+   "Symmetric only",
+   "Transitive only",
+   "Reflexive only"
+  ],
+  "answer": 1,
+  "explain": "l⊥m ⟹ m⊥l (symmetric), but not reflexive (l not ⊥ l) and not transitive.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fa696985-00e1-4ea8-9022-74c81be29118",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Domain of f(x) = sin⁻¹(2x) is",
+  "formula": "",
+  "options": [
+   "[0, 1/2]",
+   "[−1, 1]",
+   "(−1/2, 1/2)",
+   "[−1/2, 1/2]"
+  ],
+  "answer": 3,
+  "explain": "Need −1 ≤ 2x ≤ 1, giving x ∈ [−1/2, 1/2].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9181c3d7-4948-4bac-a089-2688be29e1e5",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f: A→B is onto and g: B→C is one-one, then g∘f is",
+  "formula": "",
+  "options": [
+   "Always onto",
+   "Cannot determine without more info",
+   "Always bijective",
+   "Always one-one"
+  ],
+  "answer": 1,
+  "explain": "g∘f need not be onto or one-one independently; properties don't fully transfer here.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "64d794fa-94b4-4415-9b7a-2a2123c16aa0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "f(x) = log x is defined for",
+  "formula": "",
+  "options": [
+   "x > 0",
+   "x ≥ 0",
+   "all x∈ℝ",
+   "x ≠ 0"
+  ],
+  "answer": 0,
+  "explain": "Logarithm is defined only for strictly positive real numbers.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2411b982-1a18-4001-8944-eb430de046a2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If n(A−B)=3, n(B−A)=2, n(A∩B)=4, then n(A∪B) is",
+  "formula": "n(A∪B)=n(A−B)+n(B−A)+n(A∩B)",
+  "options": [
+   "9",
+   "11",
+   "6",
+   "7"
+  ],
+  "answer": 0,
+  "explain": "n(A∪B) = 3 + 2 + 4 = 9 using the disjoint partition of A∪B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "172c2b9b-b234-4dd3-a0d7-7620dc833798",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Which set operation is associative?",
+  "formula": "",
+  "options": [
+   "Neither",
+   "Only ∩",
+   "Only ∪",
+   "Both ∪ and ∩"
+  ],
+  "answer": 3,
+  "explain": "Both union and intersection are associative: (A∪B)∪C=A∪(B∪C) and similarly for ∩.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5570ede6-9fbd-4c23-838b-546321e8b25f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = e^x for x∈ℝ is",
+  "formula": "",
+  "options": [
+   "(1, ∞)",
+   "[0, ∞)",
+   "ℝ",
+   "(0, ∞)"
+  ],
+  "answer": 3,
+  "explain": "Exponential function is always positive but never zero; range is (0, ∞).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d444ee19-ff3c-498c-8674-49e64a33c3c1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x) is periodic with period T, then f(ax) has period",
+  "formula": "T/|a|",
+  "options": [
+   "aT",
+   "T",
+   "T/a²",
+   "T/|a|"
+  ],
+  "answer": 3,
+  "explain": "Horizontal scaling by factor a compresses period by |a|, giving new period T/|a|.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bc6012ae-5174-4104-a404-42a849b7ffb9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The inverse of f(x) = (x−1)/(x+1) is",
+  "formula": "",
+  "options": [
+   "(1+x)/(1−x)",
+   "(x+1)/(x−1)",
+   "1/f(x)",
+   "(1−x)/(1+x)"
+  ],
+  "answer": 0,
+  "explain": "Solve y=(x−1)/(x+1) for x: x=(1+y)/(1−y), so f⁻¹(x)=(1+x)/(1−x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83b5d292-45bc-476d-878d-2cb44b962b63",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A ∩ (Aᶜ ∪ B) equals",
+  "formula": "",
+  "options": [
+   "A ∪ B",
+   "A ∩ B",
+   "∅",
+   "B"
+  ],
+  "answer": 1,
+  "explain": "Distribute: (A∩Aᶜ)∪(A∩B) = ∅∪(A∩B) = A∩B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3e670fe0-938f-469d-859d-ebb694d3c01a",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of elements in P(P(∅)) (power set of power set of empty set)?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "0",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "P(∅)={∅} has 1 element, so P(P(∅))={∅,{∅}} has 2 elements.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "68df5217-7c65-4d29-9a6c-52e83eedffd5",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x+1/x) = x²+1/x², what is f(3)?",
+  "formula": "",
+  "options": [
+   "7",
+   "9",
+   "6",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "x+1/x=3 ⟹ (x+1/x)²=9 ⟹ x²+1/x²=9−2=7, so f(3)=7.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9924259a-9fc4-46be-915a-c03884d91bc3",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A ∩ U (U = universal set) equals?",
+  "formula": "",
+  "options": [
+   "U",
+   "A",
+   "Aᶜ",
+   "∅"
+  ],
+  "answer": 1,
+  "explain": "Intersection with universal set gives the set itself: A ∩ U = A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ee017f7c-9ddb-4dc3-a992-7d7a22edef65",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "If A and B are sets, A ⊆ B iff A ∩ Bᶜ equals?",
+  "formula": "",
+  "options": [
+   "Aᶜ",
+   "B",
+   "∅",
+   "A"
+  ],
+  "answer": 2,
+  "explain": "A ⊆ B means no element of A is outside B, so A ∩ Bᶜ = ∅.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c0b3da2a-5f6d-4f16-a020-3ca72d37371f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Number of elements in P(A) if A = ∅?",
+  "formula": "2⁰ = 1",
+  "options": [
+   "1",
+   "∅",
+   "2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "P(∅) = {∅}, which has exactly 1 element.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1ce7c635-54af-4dad-aeea-7e45690e2b8b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "If n(A)=3, n(B)=3, minimum value of n(A∪B) is?",
+  "formula": "",
+  "options": [
+   "0",
+   "6",
+   "3",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Minimum of |A∪B| occurs when A=B, giving n(A∪B) = max(n(A),n(B)) = 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dea77e78-b774-4b95-8744-f1c9fa57fd40",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Which property does A Δ B satisfy: A Δ B = ?",
+  "formula": "A Δ B = B Δ A",
+  "options": [
+   "None",
+   "Commutative",
+   "Distributive over ∩",
+   "Only Associative"
+  ],
+  "answer": 1,
+  "explain": "Symmetric difference is commutative: A Δ B = B Δ A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5921ac9d-de2d-45f6-9eb5-e0ff40dda58d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A Δ A (symmetric difference of A with itself) equals?",
+  "formula": "",
+  "options": [
+   "U",
+   "∅",
+   "A",
+   "2A"
+  ],
+  "answer": 1,
+  "explain": "A Δ A = (A−A) ∪ (A−A) = ∅.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "de595d0b-01b8-459f-8b01-1e1a1721076d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A Δ ∅ (symmetric difference with empty set) equals?",
+  "formula": "",
+  "options": [
+   "Aᶜ",
+   "U",
+   "A",
+   "∅"
+  ],
+  "answer": 2,
+  "explain": "A Δ ∅ = A, since no elements are in ∅ to create differences.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "227629ee-d73f-490c-a791-a49e51373182",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets & Relations",
+  "prompt": "If n(A)=4, number of elements in A×A is?",
+  "formula": "n(A×A) = n(A)²",
+  "options": [
+   "16",
+   "24",
+   "4",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "n(A×A) = n(A)² = 4² = 16.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "453b492b-eb81-44c0-b781-bdfd64c26f63",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Number of relations on a set A with n elements is?",
+  "formula": "2^(n²)",
+  "options": [
+   "2^(n²)",
+   "n!",
+   "n²",
+   "2^n"
+  ],
+  "answer": 0,
+  "explain": "Relations on A are subsets of A×A which has n² elements, so 2^(n²) relations.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "44f4377e-e2e9-4425-b471-4a64670fbd62",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "A relation R is reflexive on A if?",
+  "formula": "",
+  "options": [
+   "(a,b)∈R⇒(b,a)∈R",
+   "(a,b),(b,c)∈R⇒(a,c)∈R",
+   "R = A×A",
+   "(a,a)∈R ∀a∈A"
+  ],
+  "answer": 3,
+  "explain": "Reflexivity requires every element to be related to itself.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a90d3418-b0ec-4ca4-bde1-b8380233672f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Number of reflexive relations on set with n elements?",
+  "formula": "2^(n²−n)",
+  "options": [
+   "2^n",
+   "2^(n²)",
+   "n²",
+   "2^(n²−n)"
+  ],
+  "answer": 3,
+  "explain": "n diagonal pairs are fixed; remaining n²−n pairs are free, giving 2^(n²−n).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "48983f60-294d-4aa5-85f1-c40bd10b3434",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Which of these relations on ℤ is an equivalence relation?",
+  "formula": "",
+  "options": [
+   "a R b iff a > b",
+   "a R b iff a divides b",
+   "a R b iff a−b is even",
+   "a R b iff a≠b"
+  ],
+  "answer": 2,
+  "explain": "Difference being even is reflexive, symmetric and transitive — an equivalence relation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "78e99173-7896-4554-92cf-e1ec339b6320",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Domain",
+  "prompt": "For f(x) = √(x² − 4x + 3), domain is?",
+  "formula": "",
+  "options": [
+   "[1,3]",
+   "(1,3)",
+   "ℝ",
+   "(−∞,1]∪[3,∞)"
+  ],
+  "answer": 3,
+  "explain": "x²−4x+3 = (x−1)(x−3) ≥ 0 gives x≤1 or x≥3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5ddb545b-2575-4516-9ab2-3efa686692f1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Domain",
+  "prompt": "Domain of f(x) = log₂(log₃(x)) is?",
+  "formula": "",
+  "options": [
+   "(−∞,3)",
+   "(3,∞)",
+   "(0,∞)",
+   "(1,∞)"
+  ],
+  "answer": 1,
+  "explain": "Need log₃(x) > 0, so x > 3¹ = 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d20f6050-9647-49b8-8e4e-fa3e77169ef3",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Range",
+  "prompt": "Range of f(x) = sin x + cos x for x∈ℝ is?",
+  "formula": "f(x) = √2 sin(x+π/4)",
+  "options": [
+   "[−√2, √2]",
+   "[−1, 1]",
+   "[−2, 2]",
+   "(−√2, √2)"
+  ],
+  "answer": 0,
+  "explain": "f(x) = √2 sin(x+π/4), so range = [−√2, √2].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d84fdc45-2376-4e7b-b020-c85132874e85",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f(x) = x² + 1, then f⁻¹ does NOT exist because f is?",
+  "formula": "",
+  "options": [
+   "Unbounded",
+   "Many-one",
+   "Not onto",
+   "Odd function"
+  ],
+  "answer": 1,
+  "explain": "f(1)=f(−1)=2, so f is many-one; inverse requires bijection.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "011a3a83-4de8-493c-9b29-73289a46c3bb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f: A→B and |A| < |B|, then f CANNOT be?",
+  "formula": "",
+  "options": [
+   "One-one",
+   "Into",
+   "Onto",
+   "A function"
+  ],
+  "answer": 2,
+  "explain": "Onto (surjective) requires every element of B to be mapped to; impossible if |A| < |B|.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c51123b6-17a8-409b-93be-0d6f42e09112",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "f(x) = x² − x + 1 restricted to [1/2, ∞) is?",
+  "formula": "",
+  "options": [
+   "Constant",
+   "Periodic",
+   "One-one and onto its range",
+   "Many-one"
+  ],
+  "answer": 2,
+  "explain": "On [1/2,∞), f is strictly increasing (vertex at x=1/2), making it one-one.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c9c41fb2-441a-4f27-aa8f-26f8faabfcc6",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Period",
+  "prompt": "Period of f(x) = sin(2x) + cos(3x) is?",
+  "formula": "T = LCM(T₁,T₂)",
+  "options": [
+   "2π",
+   "π/2",
+   "3π",
+   "π"
+  ],
+  "answer": 0,
+  "explain": "T₁=π, T₂=2π/3; LCM(π, 2π/3) = 2π.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "65c821c9-1d17-46b9-a5f5-8e061e325d6f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Even/Odd",
+  "prompt": "If f is even, then the graph of f is symmetric about?",
+  "formula": "",
+  "options": [
+   "x-axis",
+   "y-axis",
+   "y = x",
+   "origin"
+  ],
+  "answer": 1,
+  "explain": "f(−x)=f(x) means left and right of y-axis are mirror images.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "74d493a8-a155-4050-86ae-2d46a4e56a1b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Even/Odd",
+  "prompt": "If f is odd, then the graph of f is symmetric about?",
+  "formula": "",
+  "options": [
+   "x-axis",
+   "y = x",
+   "y-axis",
+   "Origin"
+  ],
+  "answer": 3,
+  "explain": "f(−x)=−f(x) implies rotational symmetry of 180° about origin.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "123037b8-1893-4b5d-9b26-d33c097c50df",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f: A→B is bijective, then n(A) relates to n(B) as?",
+  "formula": "",
+  "options": [
+   "n(A) ≥ n(B)",
+   "n(A) = n(B)",
+   "n(A) > n(B)",
+   "n(A) < n(B)"
+  ],
+  "answer": 1,
+  "explain": "Bijection is one-one and onto, requiring equal cardinality of domain and codomain.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ad68f6b9-72ad-4717-b1aa-010314ac9077",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "The number of bijections from set A to itself (n elements) is?",
+  "formula": "n!",
+  "options": [
+   "nⁿ",
+   "n!",
+   "n²",
+   "2ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Bijections from A to A are permutations, counted by n!.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2821eed8-8624-40dc-9684-0163cad7d918",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Composition",
+  "prompt": "If f(x) = 2x and g(x) = x+3, then (f∘g)(x) is?",
+  "formula": "",
+  "options": [
+   "2x²+6x",
+   "x+6",
+   "2x+3",
+   "2x+6"
+  ],
+  "answer": 3,
+  "explain": "f∘g(x) = f(g(x)) = f(x+3) = 2(x+3) = 2x+6.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ca0e20c8-1412-4511-a41b-187b4f673d55",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions - Composition",
+  "prompt": "If f(x) = (x+1)/(x−1), then f(f(x)) equals?",
+  "formula": "",
+  "options": [
+   "f(x)",
+   "1/x",
+   "x",
+   "−x"
+  ],
+  "answer": 2,
+  "explain": "f(f(x)) = f((x+1)/(x−1)) = x; f is its own inverse (involution).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c9d9d50a-c03d-43dc-9ed5-13ae7d93172d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A ∪ Aᶜ equals (within universal set U)?",
+  "formula": "A ∪ Aᶜ = U",
+  "options": [
+   "U",
+   "A",
+   "∅",
+   "Aᶜ"
+  ],
+  "answer": 0,
+  "explain": "A union its complement always gives the universal set U.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c90a95a3-a06e-47fe-b548-1fc524abe66c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If A ⊆ B, then A ∩ Bᶜ equals?",
+  "formula": "",
+  "options": [
+   "B",
+   "Bᶜ",
+   "A",
+   "∅"
+  ],
+  "answer": 3,
+  "explain": "If A ⊆ B, no element of A lies outside B, so A ∩ Bᶜ = ∅.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "64f2928a-9168-42a0-8b70-4f71eb301816",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Relation 'less than' (<) on ℝ is which type?",
+  "formula": "",
+  "options": [
+   "Equivalence",
+   "Symmetric",
+   "Reflexive",
+   "Only transitive"
+  ],
+  "answer": 3,
+  "explain": "< is transitive but neither reflexive (a<a false) nor symmetric; not equivalence.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a497ed3a-2e2e-467a-a1a5-4316909112c1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "f(x) = x·sin x is classified as?",
+  "formula": "",
+  "options": [
+   "Odd",
+   "Neither",
+   "Even",
+   "Both even and odd"
+  ],
+  "answer": 2,
+  "explain": "f(−x)=(−x)sin(−x)=(−x)(−sinx)=x sinx=f(x), so even.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ba1b9ef6-c364-4663-8419-791b86ec5fea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f is odd, then f(0) equals?",
+  "formula": "f(−x)=−f(x) ⟹ f(0)=?",
+  "options": [
+   "Undefined",
+   "1",
+   "−1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Setting x=0: f(0)=−f(0) ⟹ 2f(0)=0 ⟹ f(0)=0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fcfecf96-fe41-47ed-bdcb-37372865f2ce",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Domain of f(x) = √(sin x) is?",
+  "formula": "sin x ≥ 0",
+  "options": [
+   "[0,π]",
+   "[2kπ,(2k+1)π], k∈ℤ",
+   "[−π/2, π/2]",
+   "(−π,π)"
+  ],
+  "answer": 1,
+  "explain": "sin x ≥ 0 when x ∈ [2kπ, (2k+1)π] for integer k.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ad578694-2119-44f2-a206-0d47da6c8a2c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of subsets of a set with n elements is?",
+  "formula": "2ⁿ",
+  "options": [
+   "2ⁿ−1",
+   "n²",
+   "n!",
+   "2ⁿ"
+  ],
+  "answer": 3,
+  "explain": "Each element is either in or out of a subset, giving 2ⁿ total subsets.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dd30ff75-42ed-4fb7-a453-841675b4e101",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f: A→B, g: B→A and g∘f = Iₐ, then f is?",
+  "formula": "",
+  "options": [
+   "Onto",
+   "Not a function",
+   "Constant",
+   "One-one"
+  ],
+  "answer": 3,
+  "explain": "g∘f = identity on A implies f is injective (one-one).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fb095e30-5f54-4181-af5c-b6a8a95d6c09",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = x²/(1+x²) for x∈ℝ is?",
+  "formula": "",
+  "options": [
+   "[0,1)",
+   "(−1,1)",
+   "(0,1]",
+   "[0,1]"
+  ],
+  "answer": 0,
+  "explain": "x²/(1+x²) ≥ 0 always and <1 (never reaches 1); range is [0,1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "230df9be-873e-4761-a436-e2879348a60d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x)=x² and g(x)=x+1, then f∘g(x) equals?",
+  "formula": "f(g(x))",
+  "options": [
+   "x+1",
+   "x²+2x",
+   "x²+1",
+   "(x+1)²"
+  ],
+  "answer": 3,
+  "explain": "f(g(x)) = f(x+1) = (x+1)².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fd27410f-b02d-419a-b1a9-6db95a1f3604",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "A relation from A to B is a subset of?",
+  "formula": "",
+  "options": [
+   "B×B",
+   "A×A",
+   "A×B",
+   "B×A"
+  ],
+  "answer": 2,
+  "explain": "A relation from A to B is defined as any subset of the Cartesian product A×B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "14f7ef2f-6f32-4de7-911e-136a27555882",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "f(x) = log|x| has domain?",
+  "formula": "",
+  "options": [
+   "ℝ−{0}",
+   "[0,∞)",
+   "(0,∞)",
+   "ℝ"
+  ],
+  "answer": 0,
+  "explain": "|x| > 0 for all x ≠ 0, so domain is ℝ − {0}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ca6c3590-09ba-4c66-b474-e557af285578",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The range of f(x) = [x] (floor) restricted to [1,3) is?",
+  "formula": "",
+  "options": [
+   "{1,2,3}",
+   "[1,3)",
+   "{1,2}",
+   "ℤ"
+  ],
+  "answer": 2,
+  "explain": "On [1,3): ⌊x⌋=1 for x∈[1,2) and 2 for x∈[2,3); range={1,2}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b6fcd7c7-da66-4b39-a7c2-8f3ff5e8aec0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Number of into functions possible from A(2 elements) to B(2 elements)?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "2",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Total functions=4; bijections(onto)=2; into functions=4−2=2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9afffaa3-9ec0-44c3-ac24-4adaa29e9d6e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x) = sin x, then f is NOT one-one on which interval?",
+  "formula": "",
+  "options": [
+   "[0, π/2]",
+   "[−π/2, π/2]",
+   "[0, π]",
+   "[−π/2, 0]"
+  ],
+  "answer": 2,
+  "explain": "On [0,π] sin is not one-one as sin(π/6)=sin(5π/6); on [−π/2,π/2] it is.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "43f84d7e-ace1-4b87-adad-9ae1b7259ce4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If n(A)=5, n(B)=3, maximum number of one-one functions A→B is?",
+  "formula": "",
+  "options": [
+   "³P₅",
+   "5³",
+   "5!",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "m=5 > n=3, so no one-one function is possible; answer is 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "247e56ba-374c-4579-b2ff-3245384f5cab",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Period of f(x) = sin(πx) is?",
+  "formula": "T = 2π/|b|",
+  "options": [
+   "π",
+   "1",
+   "2",
+   "2π"
+  ],
+  "answer": 2,
+  "explain": "Period = 2π/π = 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d7deadd8-5ba0-4c91-bafb-b167b80af0ee",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Domain of f(x) = cos⁻¹(x²−1) is?",
+  "formula": "−1 ≤ x²−1 ≤ 1",
+  "options": [
+   "[−√2, √2]",
+   "[0,√2]",
+   "[−1,1]",
+   "ℝ"
+  ],
+  "answer": 0,
+  "explain": "0 ≤ x² ≤ 2 ⟹ x ∈ [−√2, √2].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "70404f6c-1c5d-4167-8ae8-6ff704d16c18",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f: ℝ→ℝ, f(x)=3x−2, then f⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "3x+2",
+   "x/3+2",
+   "(x+2)/3",
+   "(x−2)/3"
+  ],
+  "answer": 2,
+  "explain": "y=3x−2 ⟹ x=(y+2)/3; so f⁻¹(x)=(x+2)/3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f78e4707-10be-4270-bcf0-7c180f204183",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If A = {1,2} and B = {3,4}, then A ∩ B equals?",
+  "formula": "",
+  "options": [
+   "∅",
+   "{1}",
+   "{1,2,3,4}",
+   "{3,4}"
+  ],
+  "answer": 0,
+  "explain": "Disjoint sets have no common element, so A ∩ B = ∅.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9ef0393b-3e49-4f0f-9394-d25cb13a554a",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "The function f(x) = 1/x is its own inverse because?",
+  "formula": "f(f(x))=x",
+  "options": [
+   "f is even",
+   "f is onto only",
+   "f∘f = Identity",
+   "f is constant"
+  ],
+  "answer": 2,
+  "explain": "f(f(x))=1/(1/x)=x, so f is its own inverse (involution).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b9034b44-4c1f-4795-9c6f-29833b6277e9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x) = |sin x|, its period is?",
+  "formula": "",
+  "options": [
+   "4π",
+   "2π",
+   "π/2",
+   "π"
+  ],
+  "answer": 3,
+  "explain": "|sin x| repeats every π since |sin(x+π)| = |−sin x| = |sin x|.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "40fcf4fc-ea82-4aba-9544-4cb81dfe8246",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Range of f(x) = 3 + 2sin x for x∈ℝ is?",
+  "formula": "",
+  "options": [
+   "[−1,1]",
+   "[2,4]",
+   "[1,5]",
+   "[3,5]"
+  ],
+  "answer": 2,
+  "explain": "sin x ∈ [−1,1] so 3+2sinx ∈ [3−2, 3+2] = [1,5].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5bcd4068-9a02-416a-9fcc-5ba8f92bb6a0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "Which of these is an equivalence relation on ℕ?",
+  "formula": "",
+  "options": [
+   "a R b iff a≤b",
+   "a R b iff a−b divisible by n",
+   "a R b iff a<b",
+   "a R b iff a+b even only if a≠b"
+  ],
+  "answer": 1,
+  "explain": "Congruence mod n is reflexive, symmetric, transitive — an equivalence relation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c6b652f3-5a07-4dc3-bbf2-98b143ab555f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If A = {a,b,c}, the number of proper subsets of A is?",
+  "formula": "2ⁿ − 1",
+  "options": [
+   "4",
+   "7",
+   "8",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Proper subsets exclude A itself: 2³ − 1 = 7.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7356d027-0141-46d1-94f8-fabcda6b0937",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets Relations & Functions",
+  "prompt": "If f(x)=sin x + sin(x+π/3) + sin(x+2π/3), f(x) simplifies to?",
+  "formula": "",
+  "options": [
+   "3 sin x",
+   "sin 3x",
+   "0",
+   "sin x"
+  ],
+  "answer": 2,
+  "explain": "Sum of sin x, sin(x+120°), sin(x+240°) = 0; vectors cancel symmetrically.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
  }
 ]

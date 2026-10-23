@@ -53,10 +53,10 @@ export default function RapidHome() {
   const [chapter, setChapter] = useState(pick.chapter);
   Object.assign(pick, { subject, chapter });
   const cat = useCached<any>("rf.catalog", () => rf("/catalog", user?.id || "guest-viewer"));
-  const hist = useCached<any>(user ? `u.${user.id}.rfhist` : null, () => rf("/history", user!.id), false);
-  const duels = useCached<any>(user ? `u.${user.id}.duels` : null, () => rf("/duels", user!.id), false);
+  const hist = useCached<any>(user ? `u.${user.id}.rfhist` : null, () => rf("/history", user!.id));
+  const duels = useCached<any>(user ? `u.${user.id}.duels` : null, () => rf("/duels", user!.id));
   const prof = useGameProfile(user?.id);
-  const board = useCached<any>(user ? `u.${user.id}.rfboard` : null, () => rf("/leaderboard", user!.id), false);
+  const board = useCached<any>(user ? `u.${user.id}.rfboard` : null, () => rf("/leaderboard", user!.id));
   const [code, setCode] = useState("");
   const sub = cat.data?.subjects?.find((s: any) => s.name === subject);
   const chosen = chapter ? sub?.chapters.find((c: any) => c.name === chapter) : null;
