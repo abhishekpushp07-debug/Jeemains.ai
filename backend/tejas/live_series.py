@@ -67,7 +67,7 @@ async def schedule_data(studio=False):
         state = phase(day, t)
         visible = ready and state != 'upcoming'
         slots.append({'day': i + 1, 'date': day, **window(day), 'state': state,
-                      'ready': ready, 'set_id': s['id'] if s and (studio or visible) else None,
+                      'ready': ready if studio or state != 'upcoming' else False, 'set_id': s['id'] if s and (studio or visible) else None,
                       'title': s['title'] if s and (studio or visible) else f'All India JEE Mains · Test {i + 1:02d}',
                       'can_start': ready and state in ('live', 'archive'),
                       **({'revision': s['revision'], 'publication_status': s['status'], 'series_import': s.get('series_import', False), 'live_enabled': s.get('live_enabled', False)} if studio and s else {})})

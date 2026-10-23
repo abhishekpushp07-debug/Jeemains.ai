@@ -34,7 +34,9 @@ def view(record, s=None, detail=True):
     status = record['status']
     if status == 'organising' and record.get('lease_until', 0) < now(): status = 'interrupted'
     if s.get('series_import'):
-        status = 'unlive' if not s.get('live_enabled') or not s.get('series_date') else 'scheduled' if now() < s['start_at'] else 'live'
+        from .live_series import phase
+        state = phase(s['series_date'], now()) if s.get('series_date') else None
+        status = 'unlive' if not s.get('live_enabled') or not state else 'scheduled' if state == 'upcoming' else 'live' if state in ('live', 'start_closed') else 'archive' if state == 'archive' else 'ended'
     elif s.get('start_at'):
         status = 'ended' if now() >= s['end_at'] else 'unlive' if not s.get('live_enabled') else 'scheduled' if now() < s['start_at'] else 'live'
     return ImportView(id=record['id'], title=record['title'], format=record['format'], status=status,
