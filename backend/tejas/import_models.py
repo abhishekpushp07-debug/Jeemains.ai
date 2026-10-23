@@ -6,6 +6,7 @@ class ScheduleInput(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
     start_at: str = Field(min_length=20, max_length=40)
     revision: int = Field(ge=0)
+    series_date: str | None = Field(default=None, min_length=10, max_length=10)
 
 class LiveInput(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True)
@@ -48,6 +49,8 @@ class ImportView(BaseModel):
     exam: str = 'JEE Main'
     duration_minutes: int = 180
     set_id: str | None = None
+    series_import: bool = False
+    series_date: str | None = None
     start_at: float | None = None
     end_at: float | None = None
     live_enabled: bool = False

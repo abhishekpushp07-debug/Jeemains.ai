@@ -33,13 +33,15 @@ def view(record, s=None, detail=True):
     s = s or {}
     status = record['status']
     if status == 'organising' and record.get('lease_until', 0) < now(): status = 'interrupted'
-    if s.get('start_at'):
+    if s.get('series_import'):
+        status = 'unlive' if not s.get('live_enabled') or not s.get('series_date') else 'scheduled' if now() < s['start_at'] else 'live'
+    elif s.get('start_at'):
         status = 'ended' if now() >= s['end_at'] else 'unlive' if not s.get('live_enabled') else 'scheduled' if now() < s['start_at'] else 'live'
     return ImportView(id=record['id'], title=record['title'], format=record['format'], status=status,
         message=record.get('message', ''), questions=record.get('questions', []) if detail else [],
         issues=record.get('issues', []) if detail else [], count=len(record.get('questions', [])),
         exam=record.get('exam', 'JEE Main'), duration_minutes=record.get('duration_minutes', 180),
-        set_id=s.get('id'), start_at=s.get('start_at'), end_at=s.get('end_at'),
+        set_id=s.get('id'), series_import=s.get('series_import', False), series_date=s.get('series_date'), start_at=s.get('start_at'), end_at=s.get('end_at'),
         live_enabled=s.get('live_enabled', False), revision=s.get('revision', 0), server_now=now())
 
 
@@ -77,7 +79,7 @@ async def template(variant: str = 'combined', u=Depends(staff)):
 @router.get('', response_model=ImportList)
 async def list_imports(u=Depends(staff)):
     records=await imports.find({'qa_only': {'$ne': True}}, {'_id':0}).sort('created_at',-1).limit(50).to_list(50)
-    linked=await sets.find({'id':{'$in':[r['id'] for r in records]}}, {'_id':0,'id':1,'start_at':1,'end_at':1,'revision':1,'live_enabled':1}).to_list(50)
+    linked=await sets.find({'id':{'$in':[r['id'] for r in records]}}, {'_id':0,'id':1,'start_at':1,'end_at':1,'revision':1,'live_enabled':1,'series_date':1,'series_import':1}).to_list(50)
     by_id={s['id']:s for s in linked}
     return ImportList(items=[view(r,by_id.get(r['id']),False) for r in records])
 
@@ -219,6 +221,20 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
     except ValueError: raise HTTPException(422,'Choose a start time from now to one year ahead, including timezone.')
     existing=await sets.find_one({'id':id},{'_id':0})
     end=start+r['duration_minutes']*60
+    series = None
+    if data.series_date:
+        from .live_series import FIRST, LAST, SERIES_ID, window, valid_paper
+        from datetime import date as day_type
+        try:
+            day = day_type.fromisoformat(data.series_date)
+            series = window(data.series_date)
+            if not FIRST <= day <= LAST or now() >= series['opens_at'] or start != series['opens_at']:
+                raise ValueError()
+        except ValueError:
+            raise HTTPException(422, 'Choose an unopened series day, starting at 12:01 AM IST.')
+        end = series['closes_at']
+    if existing and (existing.get('series_import') or existing.get('series_id') or data.series_date):
+        raise HTTPException(409, 'Manage series dates in the All India owner schedule panel. Existing regular competitions cannot be converted.')
     if existing:
         if existing.get('start_at',0)<=now(): raise HTTPException(409,'A started test cannot be rescheduled. Upload a new test for another competition.')
         res=await sets.update_one({'id':id,'revision':data.revision,'start_at':{'$gt':now()}},{'$set':{'start_at':start,'end_at':end,'live_enabled':True,'status':'published'},'$inc':{'revision':1}})
@@ -232,6 +248,10 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
            'profile_mode':'practice','audience':'all','allowed_phones':[],'allowed_emails':[],'expires':'',
            'rights_upload':True,'rights_publish':True,'rights_report':True,'rights_attested_by':r['rights_attested_by'],
            'start_at':start,'end_at':end,'live_enabled':True,'competition':True}
+        if series:
+            if r.get('qa_only') or not valid_paper(s):
+                raise HTTPException(409, 'Series requires a reviewed public JEE Main full paper: 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')
+            s.update(series_id=SERIES_ID, series_date=data.series_date, series_import=True, competition=False, test_kind='mock', full_length=True)
         # One immutable content version in one insert; no archive-before-CAS race.
         try: await sets.insert_one(s)
         except DuplicateKeyError: raise HTTPException(409,'Another schedule was saved. Reload to see it.')
@@ -244,7 +264,7 @@ async def toggle_live(id:str,data:LiveInput,u=Depends(owner)):
     if r['status']!='ready': raise HTTPException(409,'Only a ready test can be enabled.')
     s=await sets.find_one({'id':id},{'_id':0})
     if not s: raise HTTPException(409,'Choose the attempt start date/time first.')
-    if data.live and now()>=s['end_at']: raise HTTPException(409,'This test window has ended. Create a new test for a new competition.')
+    if data.live and not s.get('series_import') and now()>=s['end_at']: raise HTTPException(409,'This test window has ended. Create a new test for a new competition.')
     changed=await sets.update_one({'id':id,'revision':data.revision},{'$set':{'live_enabled':data.live,'status':'published' if data.live else 'withdrawn'},'$inc':{'revision':1}})
     if not changed.modified_count: raise HTTPException(409,'Another change was saved. Reload before retrying.')
     return view(r,await sets.find_one({'id':id},{'_id':0}))

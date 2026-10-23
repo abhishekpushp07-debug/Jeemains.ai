@@ -508,11 +508,11 @@ export default function Results() {
                 </div>
                 <section data-testid={'solution-content-'+q.number} aria-label={'Solution for question '+q.number}>
                 {(q.solution_kind==='answer_key_only'||q.solution||q.s_refs?.length||q.solution_accessible_text)&&<div className="matched-solution">
-                  <div className="solution-title"><FileIcon/><h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':'Supplied solution'} · Q{q.solution_number??q.number}</h3><Badge>Matched to this frozen version</Badge></div>
+                  <div className="solution-title"><FileIcon/><h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':q.solution_kind==='ai_generated'?'AI-generated explanation':'Supplied solution'} · Q{q.solution_number??q.number}</h3><Badge>Matched to this frozen version</Badge></div>
                   {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
                   <QuestionContent question={q} solution base={`/attempts/${id}/questions/${q.id}`} gradeVersion={scoreVersion}/>
                 </div>}
-                <AiSolution item={extras.ai[q.id]} number={q.number}/>
+                {(q.solution_kind!=='ai_generated'||!q.solution||extras.ai[q.id]?.state==='ready')&&<AiSolution item={extras.ai[q.id]} number={q.number}/>}
                 </section>
                 <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />
                 <div className="ledger-meta">

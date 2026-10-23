@@ -1,0 +1,71 @@
+{
+  "summary": "Iteration 105: All India JEE live series, owner assignment, private series history, historical rank lookup, light-only exam/results and hidden PDF controls. Backend: 53 isolated pytest cases (52 pass, 1 fail) run against the REAL FastAPI app with every tejas Mongo handle re-bound to dedicated DB 'tejas_isolated_iter105_test'. Env was not changed. Clock was mocked for IST boundaries. Auth dependency was overridden by a TEST-ONLY header. No lifespan and no AI. Frontend: Playwright on the real preview frontend, with /api/* bridged to the same isolated ASGI app (TEST-ONLY MOCKED/ISOLATED, not production integration evidence). Clock was frozen at 2 Dec 2026 10:00 IST. Covered desktop 1920x800 and mobile 390x844 with system dark plus saved 'tejas-theme=dark'. External smoke was read-only: preview GET /api/series/all-india-jee returned 62 slots (2026-12-01 to 2027-01-31, 0 assigned); history and studio return 401 when anonymous. Customer DB preserved: 144 sets, 11800 questions, 0 TEST_ docs, 0 series assignments or attempts. Isolated DB dropped by exact name.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/series/all-india-jee", "issue": "The public schedule shows the real title of an assigned paper before its day opens (before 00:01 IST), and ready=true reveals that it is assigned. Cause: live_series.py schedule_data line 71 uses `s['title'] if s and (studio or ready)`. It should use `(studio or visible)` so the generic 'All India JEE Mains · Test NN' title stays until opening. Failing test: test_future_title_not_leaked."},
+      {"endpoint": "POST /api/studio/all-india-jee/assign (workflow gap)", "issue": "Assignment requires status=published and audience=all. Until the owner assigns it, a paper published through the existing importer sits in the ordinary public catalogue (/api/sets, My Tests), where any student can view or attempt it. Its content is exposed before the live day, and a single student attempt permanently blocks assignment ('Use a fresh paper'). There is no way to publish a paper directly into the series while keeping it hidden."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "LiveSeriesBanner counter (light theme)", "issue": "The small timing text '12:01 AM – 11:59 PM IST / Last start · 8:59 PM' is rgb(75,100,118) on the teal banner rgb(11,89,85). Contrast is about 1.3:1, so it is truly unreadable on the light landing and home pages. In dark theme it is readable (rgb(199,205,214)). It is hidden on mobile. Set an explicit color on `.flagship-counter>small`, for example rgba(255,255,255,.8).", "selector": ".flagship-counter>small", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home (/home), desktop and mobile", "issues": ["The 'YOUR AMBITION. YOUR NEXT STEP.' eyebrow sits about 6px under the bottom of the flagship banner, which looks cramped. Add margin-top or a section gap."]},
+      {"screen": "Studio SeriesSchedulePanel", "issues": ["The paper dropdown lists papers whose day has already opened (Day 1 and Day 2 when today is Day 2), and papers that may already have attempts. Selecting one only fails with a 409 after saving. Filter these out or disable them with a reason."]},
+      {"screen": "Results > Solutions", "issues": ["A question with solution_kind='ai_generated' (the smart-import AI explanation) is headed 'Supplied solution · Qn' and sits directly above 'No saved AI solution is available'. The label is misleading for AI-generated explanations (Results.js line 511). Observed with a fixture question."]},
+      {"screen": "LiveSeriesBanner", "issues": ["The badge still says 'Live' (blinking) in the start_closed state after 8:59 PM. Consider 'Live · starts closed' for clarity. Minor."]}
+    ]
+  },
+  "passed_checks": [
+    "Five new routes are present in OpenAPI with SPEC contracts. The app imports with install_contracts, so startup contract validation passes.",
+    "62 slots; windows open 00:01, last start 20:59:00, close 23:59, archive at 00:00 next day (IST).",
+    "Before 1 Dec all slots are upcoming. At 00:00:00 starts are denied (404, not permitted). At 00:01 the day is live. At 20:59:00 a start is allowed, with the deadline capped at 23:59. At 20:59:01 /sets/id/start returns 409, even after a valid preflight. Resume at 21:30 returns the same attempt with the original deadline.",
+    "23:59:30 is 'ended' (start 409). 00:00 the next day is archive: the start is series_practice, gets a new id, has no embargo and runs a full 180 min. History holds the live and archive attempts separately.",
+    "Jan 31 live and Feb 1 archive both work, and today_slot is None after the series ends.",
+    "6 concurrent starts with different keys produce 1 deterministic live attempt.",
+    "Embargo: results return status=embargoed with no questions or summary until 23:59, historical-rank returns 403, history shows embargoed with summary None. At 23:59 there are full results with 75 questions and supplied solutions, and latest_result_id is set.",
+    "Assignment role matrix: anonymous 401, student 403, reviewer 403. Owner gets 200 and the revision becomes 2. Stale CAS 409, duplicate date 409 (unique index), out-of-range date 422, extra field 422.",
+    "Assignment is blocked with 409 for: withdrawn, restricted, qa_only, competition, 74Q, 170 min, wrong 0, wrong subject/type shape, bonus question, used paper, permissions expiring before the day, import window not covering the day, non-JEE exam.",
+    "A future assigned paper returns 404 on /sets/id, is absent from /sets and My Tests, preflight and start return 404, and the slot set_id is null. The public schedule contains no answers, questions or solutions. Reassign or unassign after opening returns 409. Unassigning a future day works, and a student gets 403.",
+    "If an assigned paper is withdrawn, the slot is not ready and start returns 404 (fails closed).",
+    "Series history: pagination at 20 per page, current user only, non-series attempts excluded, anonymous 401, page=0 returns 422.",
+    "Historical ranks match the exact source rows. JEE: 291 and 292 give 1-56 (overlap union), 300 gives 1-15, 150 gives 22156-28132, 268 gives 142-341, 0 gives 1222184-1390805. Unavailable for 269, 270, 20, 25, 29, -4 and 301. COMEDK 175 gives 1-10, 25 is unavailable. BITSAT is unavailable (guidance_only). Responses carry the Careers360 and PW secondary-estimate labelling.",
+    "Rank is rejected (unavailable) for retry, preview, corrected score_version, 120 min, maximum 240, changed question type, and chapter attempts. Foreign attempts return 403/404 and anonymous returns 401.",
+    "Regressions: a standard practice JEE paper is still in the catalogue and gets mode=practice with a 180 min deadline. Synthetic BITSAT 130+12 bonus unlock returns 409 before all main answers are in and 200 after.",
+    "UI with saved and system dark: the home banner shows a red 'Live' badge with a blinking svg icon. The explainer modal after its 1s animation is opaque (opacity 1, solid background) on desktop, mobile and light theme, and scrolls on mobile (overflow-y auto). The modal start link goes to the set page, which shows the series preflight rules.",
+    "Hub: all 5 tabs render with no horizontal overflow on desktop or mobile. Today shows the Day 2 start or resume. Archive shows Day 1 practice. Results and Solutions show the live attempt with a score of 100/300 and links. Analytics shows the journey and confidence views.",
+    "Results route gets html 'dark exam-light' with a light surface. Supplied and AI solution text is dark-on-light (rgb(11,31,42)) with KaTeX rendered. The solution appears before the reflection strip. There are no low-contrast nodes in the solutions panel. The Select dropdown portal is light (white background, dark text). Real-exam rank 74,236–91,426 is shown for 100 marks. No PDF or download controls on Results or My Tests (/profile). Leaving the route restores html 'dark'.",
+    "Player (mobile): exam-light applied, body rgb(248,250,252), dark heading, 3 KaTeX elements, timer 02:59:58, no overflow.",
+    "Studio panel (owner, dark): paper and date selects open with readable portals. 60 upcoming dates. Assigning Day 10 succeeds with a toast and appears in the assigned list. Remove assignment works."
+  ],
+  "not_covered": [
+    "Source-image (q_refs crop) rendering in Player and Results. It needs vault storage, and storage calls were forbidden, so only text and math were verified. The no-inversion check was not performed.",
+    "Saved AI-solution records (tejas_ai_solutions) rendering. The fixture used inline solution_kind=ai_generated only.",
+    "Owner edits or withdrawals of an assigned paper while its day is live (revision change mid-day)."
+  ],
+  "test_report_links": ["/app/backend/tests/test_iter105_live_series_isolated.py", "/app/backend/tests/iso_harness.py", "/app/backend/tests/iso_bridge_server.py", "/app/test_reports/pytest/iter105_live_series.xml"],
+  "action_items": [
+    "live_series.py schedule_data: hide the future paper title until the slot opens (use `visible` instead of `ready` for the title). Also consider hiding `ready` before opening.",
+    "Provide a hidden publish-to-series path, or exclude papers marked for the series from the ordinary catalogue before assignment, so live papers are not publicly exposed or attempted before their day.",
+    "Fix the light-theme contrast of `.flagship-counter>small` on the teal banner.",
+    "Add spacing between the flagship banner and the home exam heading.",
+    "Studio series paper dropdown: filter out or disable papers that are already opened or used.",
+    "Results: label solution_kind='ai_generated' as an AI-generated explanation, not 'Supplied solution'."
+  ],
+  "critical_code_review_comments": [
+    "finalize() uses Mongo $$NOW for submitted_at and expiry while start/guard use app now(). This is consistent in production, but cutoff-sensitive logic depends on clock agreement between the app and Mongo.",
+    "schedule_data limits to 62 sets by series_id. That is fine given the unique sparse series_date index and the date-range validation in assign.",
+    "The banner treats start_closed as live. The hub correctly labels it 'STARTS CLOSED'.",
+    "The backend err log contains an old QuestionReport source_hash=None ValidationError traceback (iteration 103 issue, reported fixed in 104). No new errors from this feature."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter105_live_series_isolated.py (new)", "/app/backend/tests/iso_harness.py (new)", "/app/backend/tests/iso_bridge_server.py (new, TEST-ONLY bridge)"],
+  "success_rate": {"backend": "98% (52/53)", "frontend": "~92% (all flows work; 1 contrast bug + design nits)"},
+  "seed_data_creation": "Only in dedicated DB tejas_isolated_iter105_test (synthetic TEST_ users, papers and attempts), dropped after the pytest run and after the bridge session. Verified afterwards: customer DB still has 144 sets and 11800 questions, 0 TEST_ sets, 0 TEST_ attempts, 0 series assignments; the isolated DB no longer exists.",
+  "test_credentials": "No real credentials used. Owner, reviewer and student were synthetic fixture users via a TEST-ONLY auth override in the isolated app.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && python -m pytest tests/test_iter105_live_series_isolated.py -p no:asyncio -n0 -v. The harness asserts no leftover real-DB handles and compares real-DB counts at teardown. Browser bridge: cd /app/backend/tests && python iso_bridge_server.py & (port 8765, clock 2 Dec 2026 10:00 IST). In Playwright, route **/api/** to http://127.0.0.1:8765 via page.request.fetch with header x-test-user (student or owner), and rewrite /api/auth/session to /api/auth/me wrapped as {user}. Kill the bridge and drop tejas_isolated_iter105_test afterwards."
+}

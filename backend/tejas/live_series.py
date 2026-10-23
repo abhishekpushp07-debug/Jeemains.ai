@@ -68,9 +68,9 @@ async def schedule_data(studio=False):
         visible = ready and state != 'upcoming'
         slots.append({'day': i + 1, 'date': day, **window(day), 'state': state,
                       'ready': ready, 'set_id': s['id'] if s and (studio or visible) else None,
-                      'title': s['title'] if s and (studio or ready) else f'All India JEE Mains · Test {i + 1:02d}',
+                      'title': s['title'] if s and (studio or visible) else f'All India JEE Mains · Test {i + 1:02d}',
                       'can_start': ready and state in ('live', 'archive'),
-                      **({'revision': s['revision'], 'publication_status': s['status']} if studio and s else {})})
+                      **({'revision': s['revision'], 'publication_status': s['status'], 'series_import': s.get('series_import', False), 'live_enabled': s.get('live_enabled', False)} if studio and s else {})})
     today = datetime.fromtimestamp(t, IST).date().isoformat()
     return {'id': SERIES_ID, 'title': 'All India JEE Mains Test Series', 'first_date': FIRST.isoformat(),
             'last_date': LAST.isoformat(), 'total': 62, 'timezone': 'Asia/Kolkata', 'server_now': t,
@@ -96,9 +96,15 @@ async def history(page: int = Query(1, ge=1, le=10000), u=Depends(current)):
 
 @router.get('/studio/all-india-jee')
 async def studio_schedule(u=Depends(owner)):
+    from .imports import imports
     data = await schedule_data(studio=True)
-    rows = await sets.find({'exam': 'JEE Main', 'status': 'published', 'audience': 'all', 'qa_only': {'$ne': True}, 'competition': {'$ne': True}}, {'_id': 0, 'questions.ai_solution': 0}).limit(500).to_list(500)
-    data['papers'] = [{'id': s['id'], 'title': s['title'], 'revision': s['revision'], 'series_date': s.get('series_date')} for s in rows if valid_paper(s)]
+    t = now()
+    rows = await sets.find({'exam': 'JEE Main', '$or': [{'status': 'published'}, {'series_import': True}], 'audience': 'all', 'qa_only': {'$ne': True}, 'competition': {'$ne': True}}, {'_id': 0, 'questions.ai_solution': 0}).limit(500).to_list(500)
+    used = set(await attempts.distinct('set_id', {'set_id': {'$in': [s['id'] for s in rows]}, 'mode': {'$ne': 'preview'}}))
+    data['papers'] = [{'id': s['id'], 'title': s['title'], 'revision': s['revision'], 'series_date': s.get('series_date'), 'kind': 'paper'} for s in rows if valid_paper(s) and s['id'] not in used and (not s.get('series_date') or t < window(s['series_date'])['opens_at'])]
+    ready = await imports.find({'status': 'ready', 'exam': 'JEE Main', 'qa_only': {'$ne': True}}, {'_id': 0}).limit(500).to_list(500)
+    existing = set(await sets.distinct('id', {'id': {'$in': [r['id'] for r in ready]}}))
+    data['papers'] = [{'id': r['id'], 'title': r['title'], 'revision': 0, 'kind': 'private_import'} for r in ready if r['id'] not in existing and not r.get('issues') and valid_paper({'exam': r['exam'], 'questions': r.get('questions', []), 'rules': {'minutes': r.get('duration_minutes'), 'correct': 4, 'wrong': -1, 'skipped': 0}})] + data['papers']
     return data
 
 
@@ -106,17 +112,23 @@ class Assignment(BaseModel):
     model_config = ConfigDict(extra='forbid')
     set_id: str = Field(min_length=1, max_length=100)
     date: date
-    expected_revision: int = Field(ge=1)
+    expected_revision: int = Field(ge=0)
 
 
 @router.post('/studio/all-india-jee/assign')
 async def assign(data: Assignment, u=Depends(owner)):
     if not FIRST <= data.date <= LAST:
         raise HTTPException(422, 'Choose a date from 1 December 2026 to 31 January 2027.')
-    s = await get(sets, data.set_id)
+    s = await sets.find_one({'id': data.set_id}, {'_id': 0})
+    if s is None:
+        from .imports import schedule_import
+        from .import_models import ScheduleInput
+        await schedule_import(data.set_id, ScheduleInput(start_at=data.date.isoformat()+'T00:01:00+05:30', revision=data.expected_revision, series_date=data.date.isoformat()), u)
+        await audit(u['id'], 'Private import published directly to All India series', data.set_id, data.date.isoformat())
+        return {'ok': True}
     if s['revision'] != data.expected_revision:
         raise HTTPException(409, 'The paper changed. Reload before assigning it.')
-    if s['status'] != 'published' or s.get('audience') != 'all' or s.get('qa_only') or s.get('competition') or not valid_paper(s):
+    if (s['status'] != 'published' and not s.get('series_import')) or s.get('audience') != 'all' or s.get('qa_only') or s.get('competition') or not valid_paper(s):
         raise HTTPException(409, 'Select a published public JEE Main paper: 75 questions, 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')
     day = data.date.isoformat()
     if now() >= window(day)['opens_at'] or (s.get('series_date') and now() >= window(s['series_date'])['opens_at']):
@@ -125,10 +137,13 @@ async def assign(data: Assignment, u=Depends(owner)):
         raise HTTPException(409, 'Use a fresh paper without student attempts for a fair live series.')
     if s.get('expires') and s['expires'] < day:
         raise HTTPException(409, 'The paper permissions expire before its scheduled date.')
-    if (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or s.get('start_at', float('inf')) > window(day)['opens_at'] or s.get('end_at', 0) < window(day)['closes_at']):
+    if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or s.get('start_at', float('inf')) > window(day)['opens_at'] or s.get('end_at', 0) < window(day)['closes_at']):
         raise HTTPException(409, 'Enable publication and extend its availability to cover the full scheduled day first.')
+    update = {'series_id': SERIES_ID, 'series_date': day, 'test_kind': 'mock'}
+    if s.get('series_import'):
+        update.update(start_at=window(day)['opens_at'], end_at=window(day)['closes_at'], live_enabled=True, status='published')
     try:
-        changed = await sets.update_one({'id': s['id'], 'revision': data.expected_revision}, {'$set': {'series_id': SERIES_ID, 'series_date': day, 'test_kind': 'mock'}, '$inc': {'revision': 1}})
+        changed = await sets.update_one({'id': s['id'], 'revision': data.expected_revision}, {'$set': update, '$inc': {'revision': 1}})
     except DuplicateKeyError:
         raise HTTPException(409, 'This date already has a paper. Remove its assignment before replacing it.')
     if not changed.modified_count: raise HTTPException(409, 'The paper changed. Reload before assigning it.')
@@ -142,7 +157,10 @@ async def unassign(set_id: str, u=Depends(owner)):
     if not s.get('series_date'): return {'ok': True}
     if now() >= window(s['series_date'])['opens_at']:
         raise HTTPException(409, 'An opened series day cannot be removed.')
-    changed = await sets.update_one({'id': set_id, 'revision': s['revision']}, {'$unset': {'series_id': '', 'series_date': ''}, '$inc': {'revision': 1}})
+    update = {'$unset': {'series_id': '', 'series_date': ''}, '$inc': {'revision': 1}}
+    if s.get('series_import'):
+        update['$set'] = {'status': 'withdrawn', 'live_enabled': False}
+    changed = await sets.update_one({'id': set_id, 'revision': s['revision']}, update)
     if not changed.modified_count: raise HTTPException(409, 'The paper changed. Reload before removing the assignment.')
     await audit(u['id'], 'All India series date removed', set_id, s['series_date'])
     return {'ok': True}
