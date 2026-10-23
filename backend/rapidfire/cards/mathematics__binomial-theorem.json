@@ -1,0 +1,902 @@
+[
+ {
+  "id": "694427fc-f08c-4230-9595-6714755a20ae",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General Term",
+  "prompt": "General term in expansion of (a+b)ⁿ is Tᵣ₊₁ =",
+  "formula": "T_{r+1} = ⁿCᵣ · aⁿ⁻ʳ · bʳ",
+  "options": [
+   "ⁿCᵣ · aⁿ⁻ʳ · bʳ",
+   "ⁿCᵣ₋₁ · aⁿ⁻ʳ · bʳ",
+   "ⁿCᵣ · aⁿ · bʳ",
+   "ⁿCᵣ · aʳ · bⁿ⁻ʳ"
+  ],
+  "answer": 0,
+  "explain": "General term is T_{r+1} = ⁿCᵣ aⁿ⁻ʳ bʳ where r = 0,1,2,...,n.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "18d50e6b-a418-40f4-9190-c36b34869943",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of Terms",
+  "prompt": "Number of terms in expansion of (a+b)ⁿ (n ∈ ℕ) is",
+  "formula": "",
+  "options": [
+   "n+1",
+   "n",
+   "n-1",
+   "2n"
+  ],
+  "answer": 0,
+  "explain": "Expansion of (a+b)ⁿ has (n+1) terms for non-negative integer n.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6284795c-50f3-4177-8424-bd2f02610597",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of Coefficients",
+  "prompt": "Sum of all binomial coefficients in (1+x)ⁿ equals",
+  "formula": "∑ ⁿCᵣ = 2ⁿ",
+  "options": [
+   "2ⁿ",
+   "2ⁿ⁻¹",
+   "n!",
+   "n·2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Putting x=1 in (1+x)ⁿ gives sum of all binomial coefficients = 2ⁿ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9345c8e4-50b6-41d0-adf6-8fbac835f72f",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle Term",
+  "prompt": "Middle term of (a+b)ⁿ when n is even is",
+  "formula": "T_{n/2 + 1}",
+  "options": [
+   "T_{n/2+1}",
+   "T_{n/2}",
+   "T_{(n+1)/2}",
+   "T_{n+1}"
+  ],
+  "answer": 0,
+  "explain": "For even n, there is one middle term: T_{n/2+1}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "966aa82c-43bd-45df-8221-9216b7cee9d5",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle Term",
+  "prompt": "When n is odd, number of middle terms in (a+b)ⁿ is",
+  "formula": "",
+  "options": [
+   "n",
+   "3",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "For odd n, two middle terms exist: T_{(n+1)/2} and T_{(n+3)/2}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fd7d9bc4-92e0-474b-8ee1-9eddfd115ba1",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Coefficient Identities",
+  "prompt": "Sum of odd-position binomial coefficients C₀+C₂+C₄+... =",
+  "formula": "2ⁿ⁻¹",
+  "options": [
+   "2ⁿ",
+   "2ⁿ⁺¹",
+   "n·2ⁿ⁻²",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Putting x=1 and x=-1 in (1+x)ⁿ and adding gives C₀+C₂+...= 2ⁿ⁻¹.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "161edaa7-99f8-4187-99c4-97ca6c975523",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term from End",
+  "prompt": "Binomial coefficient of rth term from end in (a+b)ⁿ is",
+  "formula": "ⁿC_{n-r+1}",
+  "options": [
+   "ⁿC_{r-1}",
+   "ⁿCᵣ",
+   "ⁿC_{n-r}",
+   "ⁿC_{n-r+1}"
+  ],
+  "answer": 3,
+  "explain": "rth term from end = (n-r+2)th term from start, so coeff = ⁿC_{n-r+1}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0d41e6c6-5ba9-4391-b591-fc17afc49c07",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of Binomial Coefficients",
+  "prompt": "Value of ⁿC₀ + ⁿC₁ + ... + ⁿCₙ is",
+  "formula": "2ⁿ",
+  "options": [
+   "n!",
+   "n·2ⁿ",
+   "2ⁿ",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Sum of all binomial coefficients = 2ⁿ (put x=1 in binomial expansion).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c83bcd80-e95b-45e3-a0f2-30caa6ddd127",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest Binomial Coefficient",
+  "prompt": "Greatest binomial coefficient in (1+x)ⁿ for even n is",
+  "formula": "ⁿC_{n/2}",
+  "options": [
+   "ⁿC_{n/2}",
+   "ⁿC_{(n+1)/2}",
+   "ⁿC₀",
+   "ⁿC_{n-1}"
+  ],
+  "answer": 0,
+  "explain": "For even n, the greatest binomial coefficient is the middle one: ⁿC_{n/2}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f396f7d2-8ef1-47c0-b189-a7da9e14f260",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's Identity",
+  "prompt": "Pascal's triangle identity: ⁿCᵣ + ⁿCᵣ₋₁ =",
+  "formula": "ⁿ⁺¹Cᵣ",
+  "options": [
+   "ⁿ⁺¹Cᵣ",
+   "2·ⁿCᵣ",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿCᵣ₊₁"
+  ],
+  "answer": 0,
+  "explain": "Pascal's rule: ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ, fundamental combinatorial identity.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "31012a0a-0015-4b55-933c-21dd57afe505",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Coefficient Identities",
+  "prompt": "C₀² + C₁² + C₂² + ... + Cₙ² equals",
+  "formula": "²ⁿCₙ",
+  "options": [
+   "²ⁿCₙ₋₁",
+   "4ⁿ",
+   "2ⁿ",
+   "²ⁿCₙ"
+  ],
+  "answer": 3,
+  "explain": "Sum of squares of binomial coefficients = ²ⁿCₙ (coefficient of xⁿ in (1+x)²ⁿ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e4c0f29c-aba1-483c-b966-b16dc168fab2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term Independent of x",
+  "prompt": "In (x + a)ⁿ, term independent of x is found when power of x is",
+  "formula": "",
+  "options": [
+   "n",
+   "Zero",
+   "One",
+   "r"
+  ],
+  "answer": 1,
+  "explain": "Term independent of x means the exponent of x in Tᵣ₊₁ must be zero.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fd108f46-5bd3-4429-b547-9b12bc4facaa",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Validity",
+  "prompt": "Expansion (1+x)ⁿ is valid for all x when n is",
+  "formula": "",
+  "options": [
+   "Fraction",
+   "Any real number",
+   "Negative integer",
+   "Positive integer"
+  ],
+  "answer": 3,
+  "explain": "Binomial theorem for finite terms holds when n is a positive integer (JEE Main scope).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7857cd4e-a73b-4723-b3cc-185254b04fdf",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Symmetry of Binomial Coefficients",
+  "prompt": "ⁿCᵣ = ⁿCₛ implies",
+  "formula": "r = s or r + s = n",
+  "options": [
+   "r=s or r+s=n",
+   "r·s=n",
+   "r=s only",
+   "r+s=n only"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ = ⁿCₛ iff r = s or r + s = n (symmetry of binomial coefficients).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "65c838e4-bb40-42d4-8a8b-d63857a5bdd4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Coefficient Identities",
+  "prompt": "C₁ + 2C₂ + 3C₃ + ... + nCₙ =",
+  "formula": "n·2ⁿ⁻¹",
+  "options": [
+   "n·2ⁿ⁻¹",
+   "n·2ⁿ",
+   "2ⁿ⁻¹",
+   "2ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Differentiating (1+x)ⁿ and putting x=1 gives Σ r·ⁿCᵣ = n·2ⁿ⁻¹.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2dcd1c58-8be3-447a-9840-d93231c82f15",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Comparison of Coefficients",
+  "prompt": "Coefficient of xⁿ in (1+x)²ⁿ vs (1+x)²ⁿ⁻¹: which is greater?",
+  "formula": "",
+  "options": [
+   "(1+x)²ⁿ⁻¹ gives larger",
+   "(1+x)²ⁿ gives ²ⁿCₙ, larger",
+   "They are equal",
+   "Depends on n"
+  ],
+  "answer": 1,
+  "explain": "²ⁿCₙ > ²ⁿ⁻¹Cₙ since ²ⁿCₙ = 2·²ⁿ⁻¹Cₙ₋₁ + ... always larger.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ea04c8c1-207b-483e-99e3-8e5fe3d9ea51",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term Containing Specific Power",
+  "prompt": "The term containing xᵖ in (x + 1/x)ⁿ exists only if (n–p) is",
+  "formula": "",
+  "options": [
+   "Prime",
+   "Even",
+   "Odd",
+   "Any integer"
+  ],
+  "answer": 1,
+  "explain": "Power of x in T_{r+1} is n-2r = p, so r=(n-p)/2; valid only if (n-p) is even.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b3e5bfc1-90bb-4830-ba17-bc87fe41bc70",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Alternating Sum",
+  "prompt": "C₀ - C₁ + C₂ - C₃ + ... + (-1)ⁿCₙ =",
+  "formula": "0",
+  "options": [
+   "2ⁿ",
+   "0",
+   "1",
+   "(-1)ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Put x = -1 in (1+x)ⁿ: alternating sum of binomial coefficients = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c0adc2d7-98cf-4e50-8eac-62f8f7112ae3",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Multinomial Expansion",
+  "prompt": "Multinomial: number of terms in (a+b+c)ⁿ expansion is",
+  "formula": "ⁿ⁺²C₂",
+  "options": [
+   "3ⁿ",
+   "3n+1",
+   "ⁿ⁺²C₂",
+   "ⁿ⁺¹C₂"
+  ],
+  "answer": 2,
+  "explain": "Number of terms in (a+b+c)ⁿ = ⁿ⁺²C₂ = (n+1)(n+2)/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "024add8b-8baa-411a-a936-b001f9f0eba0",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Ratio of Consecutive Terms",
+  "prompt": "In binomial expansion, ⁿCᵣ/ⁿCᵣ₋₁ simplifies to",
+  "formula": "(n-r+1)/r",
+  "options": [
+   "(n-r+1)/r",
+   "(n+r)/r",
+   "(n-r)/r",
+   "n/(r-1)"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ/ⁿCᵣ₋₁ = (n-r+1)/r; used to find greatest term condition.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d8c23412-5242-4ee4-9fbf-8a7c8b126fe2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Integral and Fractional Parts",
+  "prompt": "Integral part of (√2 + 1)²ⁿ is found using conjugate (√2 - 1)²ⁿ because",
+  "formula": "(√2+1)²ⁿ + (√2-1)²ⁿ = integer",
+  "options": [
+   "Both are integers",
+   "Their product is 1",
+   "Their sum is an integer",
+   "Their difference is 0"
+  ],
+  "answer": 2,
+  "explain": "Irrational parts cancel in (√2+1)²ⁿ + (√2-1)²ⁿ giving an even integer.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ba2b9a0e-b89c-4711-a677-a676b1655b38",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Coefficient Identities",
+  "prompt": "C₀ + C₁/2 + C₂/3 + ... + Cₙ/(n+1) =",
+  "formula": "(2ⁿ⁺¹ - 1)/(n+1)",
+  "options": [
+   "2ⁿ/(n+1)",
+   "2ⁿ⁺¹/(n+1)",
+   "(2ⁿ⁺¹-1)/(n+1)",
+   "2ⁿ-1"
+  ],
+  "answer": 2,
+  "explain": "Integrate (1+x)ⁿ from 0 to 1: gives Σ Cᵣ/(r+1) = (2ⁿ⁺¹-1)/(n+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2ca2c05a-572f-47d6-b757-a714539cdeb9",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General Term (a-b)ⁿ",
+  "prompt": "Binomial theorem: (a-b)ⁿ general term Tᵣ₊₁ has sign determined by",
+  "formula": "(-1)ʳ",
+  "options": [
+   "(-1)ʳ",
+   "Always positive",
+   "(-1)ʳ⁺¹",
+   "(-1)ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁ = ⁿCᵣ aⁿ⁻ʳ(-b)ʳ = (-1)ʳ ⁿCᵣ aⁿ⁻ʳ bʳ; sign is (-1)ʳ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c5486502-8bd1-40b7-9ebf-a3f08d0598ba",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Rational Terms",
+  "prompt": "If n is a positive integer, (1+x)ⁿ has how many rational terms when x=√2?",
+  "formula": "",
+  "options": [
+   "⌊n/2⌋+1",
+   "⌊n/2⌋",
+   "n",
+   "n+1"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁ = ⁿCᵣ (√2)ʳ is rational when r is even; so ⌊n/2⌋+1 rational terms.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4711bfef-770b-4a4b-a89b-271bd306841d",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Coefficient Identities",
+  "prompt": "C₁ - C₂/2 + C₃/3 - ... + (-1)ⁿ⁻¹ Cₙ/n =",
+  "formula": "1 + 1/2 + 1/3 + ... + 1/n = Hₙ",
+  "options": [
+   "2ⁿ/n",
+   "ln 2",
+   "0",
+   "1+1/2+1/3+...+1/n"
+  ],
+  "answer": 3,
+  "explain": "Integrate (1+x)ⁿ expansion from 0 to 1 gives this harmonic-series result.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "92cd9a78-9e11-4c30-aef1-f904e055afcd",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Greatest term in (1+x)ⁿ: which index r satisfies Tᵣ₊₁ ≥ Tᵣ?",
+  "formula": "r ≤ (n+1)|x|/(1+|x|)",
+  "options": [
+   "r ≤ n|x|/(1+|x|)",
+   "r ≤ (n+1)/(1+|x|)",
+   "r ≤ (n+1)|x|/(1+|x|)",
+   "r ≤ n/(1+|x|)"
+  ],
+  "answer": 2,
+  "explain": "Tᵣ₊₁/Tᵣ ≥ 1 gives r ≤ (n+1)|x|/(1+|x|); greatest term index found from this.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fa76c456-7cbe-47ea-8eff-7ff8ce223a95",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Value of C₀·C₁ + C₁·C₂ + ... + Cₙ₋₁·Cₙ equals",
+  "formula": "(2n)!/((n+1)!(n-1)!)",
+  "options": [
+   "(2n)!/((n+2)!(n-2)!)",
+   "2ⁿ/(n+1)",
+   "(2n)!/(n!·n!)",
+   "(2n)!/((n+1)!(n-1)!)"
+  ],
+  "answer": 3,
+  "explain": "Sum ΣCᵣCᵣ₊₁ = C(2n, n-1) = (2n)!/((n+1)!(n-1)!) by Vandermonde-type identity.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e02fd35f-4830-490d-82f5-cc605f7d1205",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "In (x² + 1/x)ⁿ, power of x in Tᵣ₊₁ is",
+  "formula": "2n − 3r",
+  "options": [
+   "2n − 3r",
+   "2n + 3r",
+   "2n − r",
+   "n − 3r"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁ has x^(2(n-r)) · x^(-r) = x^(2n-3r); set = 0 for term independent of x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "db7cae33-f317-4af0-9fe9-aafa37ca2d41",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Number of rational terms in (∜2 + ∜3)¹⁰⁰ is",
+  "formula": "",
+  "options": [
+   "26",
+   "6",
+   "25",
+   "51"
+  ],
+  "answer": 2,
+  "explain": "Both r/4 integers in [0,100]: r = 0,4,8,...,100 → 26 terms; rational when both powers integer.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5beedd80-9d33-409a-a222-95ec8687bd93",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Sum 1·C₀ + 2·C₁ + 3·C₂ + ... + (n+1)Cₙ equals",
+  "formula": "(n+2)·2ⁿ⁻¹",
+  "options": [
+   "n·2ⁿ⁻¹",
+   "(n+2)·2ⁿ⁻¹",
+   "(n+1)·2ⁿ",
+   "(n+2)·2ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Split into Σ(r+1)Cᵣ = ΣrCᵣ + ΣCᵣ = n·2ⁿ⁻¹ + 2ⁿ = (n+2)2ⁿ⁻¹.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "637ae21f-230c-4612-98c4-f7f3f7941b12",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Which relation holds: ⁿCᵣ = ?",
+  "formula": "n/r · ⁽ⁿ⁻¹⁾Cᵣ₋₁",
+  "options": [
+   "n/r · ⁽ⁿ⁻¹⁾Cᵣ₋₁",
+   "r/n · ⁽ⁿ⁻¹⁾Cᵣ₋₁",
+   "n/(n−r) · ⁽ⁿ⁻¹⁾Cᵣ",
+   "(n−r)/r · ⁽ⁿ⁻¹⁾Cᵣ"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ = n!/(r!(n-r)!) = (n/r)·(n-1)!/((r-1)!(n-r)!) = n/r · ⁽ⁿ⁻¹⁾Cᵣ₋₁.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ab3a493d-c7f5-47bb-a52d-698dd8e94405",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "C₀² - C₁² + C₂² - ... + (-1)ⁿCₙ² for even n equals",
+  "formula": "(-1)^(n/2) · ⁿC_(n/2)",
+  "options": [
+   "2ⁿ",
+   "(-1)ⁿ · ⁿCₙ",
+   "0",
+   "(-1)^(n/2) · ⁿC_(n/2)"
+  ],
+  "answer": 3,
+  "explain": "Coefficient of xⁿ in (1+x)ⁿ(1-x)ⁿ = (1-x²)ⁿ gives (-1)^(n/2)·ⁿC_(n/2) for even n.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1f884e46-f06f-44bf-856d-64e7d7aefa91",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "C₀² - C₁² + C₂² - ... + (-1)ⁿCₙ² for odd n equals",
+  "formula": "0",
+  "options": [
+   "2ⁿ⁻¹",
+   "(-1)ⁿ",
+   "0",
+   "(-1)^((n-1)/2)·ⁿC_((n-1)/2)"
+  ],
+  "answer": 2,
+  "explain": "For odd n, (1-x²)ⁿ has no xⁿ term (n is odd power of x²), so the sum = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d67494b1-cca7-43fa-9f49-cfaf6c939993",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "In (1+x)ⁿ, C₀ + C₁x + ... + Cₙxⁿ differentiated at x=1 gives",
+  "formula": "n·2ⁿ⁻¹",
+  "options": [
+   "2ⁿ⁻¹",
+   "n·2ⁿ",
+   "n·2ⁿ⁻¹",
+   "(n+1)·2ⁿ"
+  ],
+  "answer": 2,
+  "explain": "Differentiating (1+x)ⁿ gives n(1+x)ⁿ⁻¹; at x=1 → n·2ⁿ⁻¹ = C₁+2C₂+3C₃+...+nCₙ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b4bf4594-c8c1-4a53-82bc-600236fe02b4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Largest coefficient in the expansion of (1+x)ⁿ for odd n is",
+  "formula": "ⁿC_((n+1)/2) = ⁿC_((n-1)/2)",
+  "options": [
+   "ⁿC_((n±1)/2)",
+   "ⁿC_1",
+   "ⁿC_(n-1)",
+   "ⁿC_(n/2)"
+  ],
+  "answer": 0,
+  "explain": "For odd n, two equal middle terms at r=(n-1)/2 and r=(n+1)/2 are the greatest coefficients.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "705ab75b-258e-4cf2-a574-7e3e8c99c724",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Coefficient of xᵐ in (1+x+x²)ⁿ for 0 ≤ m ≤ n is",
+  "formula": "Σ ⁿCⱼ · ⁽ⁿ⁻ʲ⁾C_(m-2j)",
+  "options": [
+   "Σⱼ ⁿCⱼ·ⁿ⁻ʲC_(m-2j)",
+   "ⁿCₘ",
+   "2ⁿ/m",
+   "ⁿCₘ + ⁿCₘ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Write (1+x+x²)ⁿ = (1+x)ⁿ expanded with x² grouping; coeff involves double sum over j.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a624cb96-b3bb-4388-af9c-b33cd442d22e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Sum of coefficients in (x + y)ⁿ is obtained by setting",
+  "formula": "x = y = 1",
+  "options": [
+   "x = y = 0",
+   "x = 1, y = 0",
+   "x = y = 1",
+   "x = 0, y = 1"
+  ],
+  "answer": 2,
+  "explain": "Putting x = y = 1 in (x+y)ⁿ gives 2ⁿ, the sum of all coefficients.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5ea1f878-d76f-4498-95b4-c03d4f6c5352",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "In binomial expansion, Tᵣ₊₁/Tᵣ for (1+x)ⁿ equals",
+  "formula": "((n−r+1)/r)·x",
+  "options": [
+   "((n−r)/r)x",
+   "((n−r+1)/r)x",
+   "((n+1)/r)x",
+   "(n/(r+1))x"
+  ],
+  "answer": 1,
+  "explain": "Tᵣ₊₁/Tᵣ = [ⁿCᵣ/ⁿCᵣ₋₁]·x = [(n-r+1)/r]·x; used to find greatest term.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "365a1dce-d189-4131-b51c-de92363298dc",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "The number of terms in expansion of (a+b+c+d)ⁿ is",
+  "formula": "ⁿ⁺³C₃",
+  "options": [
+   "ⁿ⁺⁴C₄",
+   "4ⁿ",
+   "ⁿ⁺²C₂",
+   "ⁿ⁺³C₃"
+  ],
+  "answer": 3,
+  "explain": "Number of non-negative integer solutions of a+b+c+d=n is C(n+3,3) = ⁿ⁺³C₃.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bbd44a71-7223-4398-a8c9-a36d6810e73f",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "ⁿC₀ + ⁿC₂ + ⁿC₄ + ... (even-indexed) equals",
+  "formula": "2ⁿ⁻¹",
+  "options": [
+   "2ⁿ⁻²",
+   "2ⁿ⁻¹",
+   "2ⁿ",
+   "2ⁿ⁺¹"
+  ],
+  "answer": 1,
+  "explain": "Adding (1+1)ⁿ and (1-1)ⁿ: 2ⁿ + 0 = 2(C₀+C₂+...), so even-indexed sum = 2ⁿ⁻¹.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a221ecb9-148d-4f40-854a-a2ef24fd5acb",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "If Tᵣ₊₁ is the term independent of x in (x + k/x²)ⁿ, then r =",
+  "formula": "n/3",
+  "options": [
+   "n/2",
+   "n/3",
+   "n",
+   "2n/3"
+  ],
+  "answer": 1,
+  "explain": "Power of x: (n-r) - 2r = 0 ⟹ n = 3r ⟹ r = n/3; valid when n is multiple of 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "95101e75-5888-43c6-8164-b1876657627a",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "C₀Cₙ + C₁Cₙ₋₁ + C₂Cₙ₋₂ + ... + CₙC₀ equals",
+  "formula": "²ⁿCₙ",
+  "options": [
+   "²ⁿCₙ₊₁",
+   "²ⁿCₙ",
+   "2ⁿ",
+   "²ⁿCₙ₋₁"
+  ],
+  "answer": 1,
+  "explain": "ΣCᵣCₙ₋ᵣ = coefficient of xⁿ in (1+x)²ⁿ = ²ⁿCₙ (Vandermonde identity).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b6923a7b-cb67-4ef4-9c28-dd84cbb7a1cc",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "In (a + b)ⁿ, rth term from END is same as which term from beginning?",
+  "formula": "T_(n−r+2)",
+  "options": [
+   "T_(n−r)",
+   "T_(n−r+2)",
+   "T_(n−r+1)",
+   "T_(r+1)"
+  ],
+  "answer": 1,
+  "explain": "rth from end = (n+2-r)th from beginning, i.e., T_(n-r+2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "36f7f14c-8cd7-4fef-bd93-ab7a7ee8f398",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "Middle term of (x + 1/x)¹⁰ contains which power of x?",
+  "formula": "x⁰",
+  "options": [
+   "x²",
+   "x⁵",
+   "x⁰ (independent)",
+   "x⁻²"
+  ],
+  "answer": 2,
+  "explain": "n=10 (even), middle term T₆: power of x = 10-2×5 = 0, so it's independent of x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fe09a323-1a17-4846-8439-a7461e361fef",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "C₁ + 2²·C₂/2 + 2³·C₃/3 + ... + 2ⁿ·Cₙ/n evaluates to",
+  "formula": "(3ⁿ−1)/n",
+  "options": [
+   "(2ⁿ−1)/n",
+   "3ⁿ/n",
+   "(3ⁿ+1)/n",
+   "(3ⁿ−1)/n"
+  ],
+  "answer": 3,
+  "explain": "Integrate (1+x)ⁿ from 0 to 2: [3ⁿ-1]/(n+1)·(n+1)... simplifies via ∫₀²(1+x)ⁿdx identity.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "370f2ac1-8924-4983-b877-e01b9a7c3925",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "ⁿC₁ − 2·ⁿC₂ + 3·ⁿC₃ − ... + (-1)ⁿ⁻¹·n·ⁿCₙ equals",
+  "formula": "0 for n ≥ 2",
+  "options": [
+   "1",
+   "0 for n ≥ 2",
+   "n·2ⁿ⁻¹",
+   "(−1)ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Differentiating (1-x)ⁿ and setting x=1: n(1-1)ⁿ⁻¹ = 0; so the alternating sum = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9920d7d6-76fb-4987-b776-ca42981852a8",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "In (√x + ∛x)ⁿ, term independent of x exists only if n is multiple of",
+  "formula": "6",
+  "options": [
+   "5",
+   "2",
+   "3",
+   "6"
+  ],
+  "answer": 3,
+  "explain": "Power of x in Tᵣ₊₁: (n-r)/2 + r/3 = set to 0 → r = 3n/5… check: need (n-r)/2+r/3=0 → n/6 integer → n multiple of 6.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "48add595-05db-43cc-bdae-c4356a7049a1",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "The sum C₀ + C₁ + C₂ + ... + Cₙ using integration of (1+x)ⁿ from 0 to 1 gives",
+  "formula": "(2ⁿ⁺¹−1)/(n+1)",
+  "options": [
+   "(2ⁿ−1)/(n+1)",
+   "2ⁿ",
+   "(2ⁿ⁺¹−1)/(n+1)",
+   "2ⁿ/(n+1)"
+  ],
+  "answer": 2,
+  "explain": "∫₀¹(1+x)ⁿdx = [2ⁿ⁺¹-1]/(n+1) = C₀ + C₁/2 + ... Cₙ/(n+1); this is C₀+C₁/(2)+... not direct sum.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cf77e30d-5189-4cdf-9eac-c17c4039d77e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "If (1+x)ⁿ = Σ Cᵣxʳ, then Σ Cᵣ/(r+1) from r=0 to n equals",
+  "formula": "(2ⁿ⁺¹−1)/(n+1)",
+  "options": [
+   "2ⁿ/(n+1)",
+   "(2ⁿ−1)/n",
+   "2ⁿ⁺¹/(n+1)",
+   "(2ⁿ⁺¹−1)/(n+1)"
+  ],
+  "answer": 3,
+  "explain": "∫₀¹(1+x)ⁿdx = [(1+x)ⁿ⁺¹/(n+1)]₀¹ = (2ⁿ⁺¹−1)/(n+1) = ΣCᵣ/(r+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "466b0571-025e-474c-827e-976bd3003823",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial Theorem",
+  "prompt": "In (1+x)ⁿ, C₀·C₂ + C₁·C₃ + C₂·C₄ + ... + Cₙ₋₂·Cₙ equals",
+  "formula": "²ⁿCₙ₋₂",
+  "options": [
+   "²ⁿCₙ₋₂",
+   "²ⁿCₙ",
+   "²ⁿCₙ₊₂",
+   "²ⁿ⁻¹Cₙ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Vandermonde-type: C₀Cₙ₋₂+C₁Cₙ₋₃+...= coeff of xⁿ⁻² in (1+x)²ⁿ = ²ⁿCₙ₋₂.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

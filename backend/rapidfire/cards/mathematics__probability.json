@@ -1,0 +1,902 @@
+[
+ {
+  "id": "3e705bb1-81fe-4598-b71b-418ac907efb3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition Theorem",
+  "prompt": "P(A∪B) equals?",
+  "formula": "P(A∪B) = P(A)+P(B)−P(A∩B)",
+  "options": [
+   "P(A)+P(B)",
+   "P(A)·P(B)",
+   "P(A)+P(B)+P(A∩B)",
+   "P(A)+P(B)−P(A∩B)"
+  ],
+  "answer": 3,
+  "explain": "Addition theorem of probability; subtract intersection to avoid double counting.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "80fc7826-1cdd-43bf-a082-9fb0585c9ffd",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence",
+  "prompt": "For independent events A and B, P(A∩B) =?",
+  "formula": "P(A∩B) = P(A)·P(B)",
+  "options": [
+   "P(A)+P(B)",
+   "P(A)·P(B|A)",
+   "P(A)·P(B)",
+   "P(A|B)"
+  ],
+  "answer": 2,
+  "explain": "Independence means joint probability equals product of individual probabilities.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e7c5631f-3a99-46dd-943c-b660f5f6372a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional Probability",
+  "prompt": "Conditional probability P(A|B) =?",
+  "formula": "P(A|B) = P(A∩B)/P(B)",
+  "options": [
+   "P(B)/P(A∩B)",
+   "P(A∩B)/P(B)",
+   "P(A)/P(B)",
+   "P(A∩B)/P(A)"
+  ],
+  "answer": 1,
+  "explain": "Conditional probability restricts sample space to event B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1d3ef3d8-7858-4756-ae83-6841f051da21",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' Theorem",
+  "prompt": "Bayes' theorem: P(Aᵢ|B) =?",
+  "formula": "P(Aᵢ|B) = P(Aᵢ)P(B|Aᵢ)/ΣP(Aⱼ)P(B|Aⱼ)",
+  "options": [
+   "P(Aᵢ)P(B)/ΣP(Aⱼ)",
+   "P(B|Aᵢ)/ΣP(B|Aⱼ)",
+   "P(B|Aᵢ)/P(Aᵢ)",
+   "P(Aᵢ)P(B|Aᵢ)/ΣP(Aⱼ)P(B|Aⱼ)"
+  ],
+  "answer": 3,
+  "explain": "Bayes' theorem uses prior probabilities and likelihoods to find posterior.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "368af061-4fc7-4eda-8db4-a3d4185eed31",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Mean of Binomial distribution B(n,p) is?",
+  "formula": "μ = np",
+  "options": [
+   "√(npq)",
+   "np",
+   "npq",
+   "n/p"
+  ],
+  "answer": 1,
+  "explain": "Expected value of binomial random variable is np.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6e09e4fe-33d4-41a2-8776-ae51c14bf2ba",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Variance of Binomial distribution B(n,p) is?",
+  "formula": "σ² = npq, q=1−p",
+  "options": [
+   "npq",
+   "nq",
+   "np²",
+   "np"
+  ],
+  "answer": 0,
+  "explain": "Variance of B(n,p) is npq where q = 1−p.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bccfa1e0-a859-4e64-b689-066bf1061826",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "P(exactly r successes) in B(n,p) is?",
+  "formula": "P(X=r) = ⁿCᵣ pʳ qⁿ⁻ʳ",
+  "options": [
+   "ⁿCᵣ pʳ",
+   "ⁿCᵣ pⁿ⁻ʳ qʳ",
+   "pʳ qⁿ⁻ʳ",
+   "ⁿCᵣ pʳ qⁿ⁻ʳ"
+  ],
+  "answer": 3,
+  "explain": "Binomial PMF chooses r positions then multiplies success and failure probabilities.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "12be31d4-f46e-48e0-8046-fabf1d96ee8f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually Exclusive Events",
+  "prompt": "For mutually exclusive events, P(A∩B) =?",
+  "formula": "P(A∩B) = 0",
+  "options": [
+   "1",
+   "P(A)·P(B)",
+   "0",
+   "P(A)+P(B)"
+  ],
+  "answer": 2,
+  "explain": "Mutually exclusive events cannot occur simultaneously, so their intersection is empty.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1282f96c-bc59-4a1d-9742-f8f9b8100013",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Complement Rule",
+  "prompt": "P(A') (complement of A) equals?",
+  "formula": "P(A') = 1 − P(A)",
+  "options": [
+   "P(A)/P(S)",
+   "P(A)−1",
+   "1 − P(A)",
+   "1/P(A)"
+  ],
+  "answer": 2,
+  "explain": "Total probability is 1; complement covers all outcomes not in A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "30df4f00-dc24-4117-88ae-17899b441e45",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Total Probability",
+  "prompt": "Total Probability theorem: P(B) =?",
+  "formula": "P(B) = ΣP(Aᵢ)·P(B|Aᵢ)",
+  "options": [
+   "P(A)·P(B)",
+   "ΣP(Aᵢ)·P(B|Aᵢ)",
+   "P(B|A)·P(A)+P(B)",
+   "ΣP(B|Aᵢ)"
+  ],
+  "answer": 1,
+  "explain": "Partition sample space into exhaustive mutually exclusive events Aᵢ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fb7c7d53-0de2-4ed1-901f-17251317c0a8",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence",
+  "prompt": "If A and B are independent, P(A'∩B') =?",
+  "formula": "P(A')·P(B') = (1−p)(1−q)",
+  "options": [
+   "1−P(A)−P(B)",
+   "(1−P(A))(1−P(B))",
+   "1−P(A∪B)",
+   "P(A)P(B)"
+  ],
+  "answer": 1,
+  "explain": "Complements of independent events are also independent.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1b4cd243-d490-4e02-a85f-ad0eed181be6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Odds",
+  "prompt": "Odds in favour of event A are?",
+  "formula": "P(A) : P(A')",
+  "options": [
+   "P(A') : P(A)",
+   "1 : P(A)",
+   "P(A) : 1",
+   "P(A) : P(A')"
+  ],
+  "answer": 3,
+  "explain": "Odds in favour = ratio of probability of occurrence to non-occurrence.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "63381cf5-494d-4efe-b1fa-ddc36d071dee",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition Theorem",
+  "prompt": "P(A∪B∪C) for mutually exclusive A,B,C =?",
+  "formula": "P(A)+P(B)+P(C)",
+  "options": [
+   "P(A)P(B)P(C)",
+   "1−P(A')P(B')P(C')",
+   "P(A)+P(B)+P(C)−1",
+   "P(A)+P(B)+P(C)"
+  ],
+  "answer": 3,
+  "explain": "Mutually exclusive: all pairwise and triple intersections are empty.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f4ee2b60-4f2e-4365-87b0-5021f1353d48",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Exhaustive Events",
+  "prompt": "For exhaustive events covering sample space S, ΣP(Aᵢ) =?",
+  "formula": "ΣP(Aᵢ) = 1",
+  "options": [
+   "n (number of events)",
+   ">1 always",
+   "1",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Exhaustive mutually exclusive events partition S, so probabilities sum to 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fba058d1-9ebb-4d67-9043-bf2e928ede0b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Standard deviation of B(n,p) is?",
+  "formula": "σ = √(npq)",
+  "options": [
+   "npq",
+   "√(npq)",
+   "np/q",
+   "√(np)"
+  ],
+  "answer": 1,
+  "explain": "Standard deviation is square root of variance npq.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ddde887e-af37-4e20-aa7c-48c0deb153ff",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "P(at least one success) in n independent trials =?",
+  "formula": "1 − qⁿ",
+  "options": [
+   "1 − pⁿ",
+   "1 − qⁿ",
+   "1 − (1−q)ⁿ",
+   "pⁿ"
+  ],
+  "answer": 1,
+  "explain": "Complement of at least one success is zero successes = qⁿ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f4437507-01bb-44dc-8505-0d41d0de6c0f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence",
+  "prompt": "If P(A)=P(B) and A,B are independent, P(A∩B)=0.09 ⇒ P(A)=?",
+  "formula": "P(A)² = 0.09",
+  "options": [
+   "0.09",
+   "0.3",
+   "0.9",
+   "0.81"
+  ],
+  "answer": 1,
+  "explain": "P(A)·P(A)=0.09 ⇒ P(A)=0.3; tests independence condition directly.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fff47130-78ce-4d07-ac10-b51a363d552a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence vs Mutual Exclusivity",
+  "prompt": "Which condition makes A and B both independent AND mutually exclusive?",
+  "formula": "",
+  "options": [
+   "P(A∩B)=P(A)P(B)≠0",
+   "P(A)=P(B)",
+   "P(A)+P(B)=1",
+   "P(A)=0 or P(B)=0"
+  ],
+  "answer": 3,
+  "explain": "Independent+mutually exclusive ⇒ P(A)P(B)=0, so at least one probability is 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "45ede65e-a5b6-4641-9f68-4bc4373d3a60",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Axioms of Probability",
+  "prompt": "Probability of sample space S equals?",
+  "formula": "P(S) = 1",
+  "options": [
+   "∞",
+   "n (total outcomes)",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Axiom of probability: certain event (sample space) has probability 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ca7bc07a-4726-448b-ac71-0a5db1e0671e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Axioms of Probability",
+  "prompt": "P(∅) for impossible event equals?",
+  "formula": "P(∅) = 0",
+  "options": [
+   "−1",
+   "0",
+   "1",
+   "Undefined"
+  ],
+  "answer": 1,
+  "explain": "Impossible event has no outcomes, so its probability is 0 by axiom.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a70d550-bc02-472c-9f5e-3d4d787d2a81",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Axioms of Probability",
+  "prompt": "Range of probability P(A) is?",
+  "formula": "0 ≤ P(A) ≤ 1",
+  "options": [
+   "0 < P(A) < 1",
+   "0 ≤ P(A) ≤ 1",
+   "0 ≤ P(A) < ∞",
+   "−1 ≤ P(A) ≤ 1"
+  ],
+  "answer": 1,
+  "explain": "Non-negativity and normalization axioms restrict probability to [0,1].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1fcad788-e9d3-4bd4-82e5-8b0c6ac8618b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Binomial distribution is applicable when trials are?",
+  "formula": "",
+  "options": [
+   "Independent with constant p",
+   "Continuous outcomes",
+   "Trials with variable p",
+   "Dependent trials"
+  ],
+  "answer": 0,
+  "explain": "Binomial requires fixed n, two outcomes, constant p, independent trials.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0659bb77-ab45-4b6b-82da-56b948e6dd24",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "For binomial B(n,p), mode is the value of r where?",
+  "formula": "(n+1)p−1 ≤ r ≤ (n+1)p",
+  "options": [
+   "r = np+1 always",
+   "r = n/2 always",
+   "(n+1)p is an integer: two modes",
+   "r = np always"
+  ],
+  "answer": 2,
+  "explain": "If (n+1)p is integer, two modes exist at (n+1)p and (n+1)p−1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5fe3555b-6034-4065-a2a8-f9a28828b215",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence",
+  "prompt": "P(A|B) = P(A) implies?",
+  "formula": "",
+  "options": [
+   "A ⊂ B",
+   "P(B)=0",
+   "A and B are independent",
+   "A and B are mutually exclusive"
+  ],
+  "answer": 2,
+  "explain": "If occurrence of B doesn't affect P(A), the events are independent.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0e6bd815-6f89-42cd-9d08-a585b9b4ab4a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Classical Probability",
+  "prompt": "Classical probability: equally likely outcomes, P(A) =?",
+  "formula": "P(A) = n(A)/n(S)",
+  "options": [
+   "n(A)·n(S)",
+   "n(A)/n(S)",
+   "n(S)/n(A)",
+   "1/n(A)"
+  ],
+  "answer": 1,
+  "explain": "Classical definition: favourable outcomes divided by total equally likely outcomes.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1109673a-9cf8-44ad-891c-e4bc6e6c1afe",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "For independent events A,B: P(A|B') =?",
+  "formula": "P(A|B') = P(A)",
+  "options": [
+   "P(A)",
+   "P(A)·P(B')",
+   "P(A)/P(B')",
+   "P(A∩B')"
+  ],
+  "answer": 0,
+  "explain": "Independence means occurrence of B' doesn't affect A; P(A|B')=P(A).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3fafba35-5388-4900-a4f6-efda404f605c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "If A⊂B, then P(A∩B) =?",
+  "formula": "",
+  "options": [
+   "P(A)",
+   "P(A)·P(B)",
+   "P(B)",
+   "P(A)+P(B)"
+  ],
+  "answer": 0,
+  "explain": "If A is subset of B, every outcome of A is in B, so A∩B = A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "afe91769-6b53-42e9-979f-bfaf58549d48",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "If A⊂B, then P(A∪B) =?",
+  "formula": "",
+  "options": [
+   "1",
+   "P(A)+P(B)",
+   "P(A)",
+   "P(B)"
+  ],
+  "answer": 3,
+  "explain": "A⊂B implies A∪B = B, so P(A∪B) = P(B).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ca79e5ba-c522-44d6-80c7-561fd9dba1f5",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(B|A) in terms of P(A|B), P(A), P(B) by Bayes is?",
+  "formula": "P(B|A)=P(A|B)·P(B)/P(A)",
+  "options": [
+   "P(A)·P(B)/P(A|B)",
+   "P(A|B)·P(A)/P(B)",
+   "P(A|B)·P(B)/P(A)",
+   "P(A|B)/P(B)"
+  ],
+  "answer": 2,
+  "explain": "Direct application of Bayes' theorem with two events.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "976eb1d8-4113-4317-add7-d364411af256",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "For B(n,p), what is E(X²)?",
+  "formula": "E(X²)=npq+n²p²",
+  "options": [
+   "n²p²",
+   "np(1−p)",
+   "npq + n²p²",
+   "np + n²p²"
+  ],
+  "answer": 2,
+  "explain": "E(X²)=Var(X)+[E(X)]²= npq + n²p².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f5941780-5207-4251-b6d4-7371506e1307",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "Geometric distribution: P(first success on rth trial) =?",
+  "formula": "P(X=r)=q^(r−1)·p",
+  "options": [
+   "C(r,1)p·q^(r−1)",
+   "q^(r−1)·p",
+   "p^(r−1)·q",
+   "p^r·q"
+  ],
+  "answer": 1,
+  "explain": "First (r−1) trials fail (prob q each), rth succeeds (prob p).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7d011d7a-a3c1-42f9-831c-fd1261393a1f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(A∩B) in terms of P(A), P(B|A) =?",
+  "formula": "P(A∩B)=P(A)·P(B|A)",
+  "options": [
+   "P(A)/P(B|A)",
+   "P(B)·P(A|B)+P(A)",
+   "P(A)·P(B|A)",
+   "P(A)+P(B|A)"
+  ],
+  "answer": 2,
+  "explain": "Multiplication theorem of probability: P(A∩B)=P(A)·P(B|A).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b268631d-89f0-4095-9b37-65828aec7b06",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "If A and B are mutually exclusive, P(A|B) =?",
+  "formula": "",
+  "options": [
+   "P(B)",
+   "1",
+   "0",
+   "P(A)"
+  ],
+  "answer": 2,
+  "explain": "Mutually exclusive ⟹ A∩B=∅, so P(A|B)=P(A∩B)/P(B)=0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8a693bae-aba0-4d54-9c2a-1d2e0682a4ae",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "Odds against event A with P(A)=p are?",
+  "formula": "q:p where q=1−p",
+  "options": [
+   "p : (1−p)",
+   "1 : p",
+   "(1−p) : p",
+   "p : 1"
+  ],
+  "answer": 2,
+  "explain": "Odds against = unfavourable : favourable = (1−p) : p.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ef83e0ab-c9c5-4ae8-9034-5cb4ad1977d9",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(A∩B) when P(A)=0.4, P(B)=0.5, P(A∪B)=0.7 is?",
+  "formula": "P(A∩B)=P(A)+P(B)−P(A∪B)",
+  "options": [
+   "0.2",
+   "0.5",
+   "0.3",
+   "0.1"
+  ],
+  "answer": 0,
+  "explain": "P(A∩B)=0.4+0.5−0.7=0.2 by addition theorem.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "99eee275-fb2c-4e1e-8878-15acbb034c1d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "For B(n,p) with np = integer, mode equals?",
+  "formula": "",
+  "options": [
+   "np and np−1 both",
+   "np only",
+   "np+1",
+   "⌊np⌋"
+  ],
+  "answer": 0,
+  "explain": "When np is integer, B(n,p) has two modes: np and np−1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ccc9a795-5a78-47fc-8218-02bcf15a408e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(exactly 0 successes) in B(n,p) =?",
+  "formula": "P(X=0)=qⁿ",
+  "options": [
+   "(1−p)ⁿ⁻¹·p",
+   "1−pⁿ",
+   "pⁿ",
+   "qⁿ"
+  ],
+  "answer": 3,
+  "explain": "P(X=0)=C(n,0)·p⁰·qⁿ = qⁿ where q=1−p.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "97978b26-d185-4733-948a-c3139c062260",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "If P(A∪B)=1 and A,B mutually exclusive, then P(A)+P(B)=?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "1",
+   "P(A)·P(B)"
+  ],
+  "answer": 2,
+  "explain": "Mutually exclusive ⟹ P(A∪B)=P(A)+P(B)=1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bff0f885-52d3-4ec6-a070-f6a39f4016aa",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(A'∪B') equals (De Morgan's law)?",
+  "formula": "P(A'∪B')=1−P(A∩B)",
+  "options": [
+   "P(A∩B)",
+   "1−P(A∩B)",
+   "P(A')+P(B')",
+   "1−P(A∪B)"
+  ],
+  "answer": 1,
+  "explain": "By De Morgan: A'∪B'=(A∩B)', so probability = 1−P(A∩B).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "82acb62f-98a5-456a-a224-07a600e80bcd",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(A'∩B') equals (De Morgan's law)?",
+  "formula": "P(A'∩B')=1−P(A∪B)",
+  "options": [
+   "1−P(A∪B)",
+   "P(A')·P(B')",
+   "P(A∪B)",
+   "1−P(A∩B)"
+  ],
+  "answer": 0,
+  "explain": "De Morgan: A'∩B'=(A∪B)', so P(A'∩B')=1−P(A∪B).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0f1e798a-1264-452b-b03b-e5fb7c6bf59d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "For B(n,p), relation between mean (μ) and variance (σ²) is?",
+  "formula": "σ²=μ·q = μ(1−p)",
+  "options": [
+   "σ²= μ(1−p)",
+   "σ²= μ·p",
+   "σ²= μ/p",
+   "σ²= μ²(1−p)"
+  ],
+  "answer": 0,
+  "explain": "Mean=np, Variance=npq=np·(1−p)=μ·q, so variance < mean always.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f78988df-cd3d-4a72-a7c1-b5642b6e8e30",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "In a random experiment, sample space S has n(S)=52 (cards). P(king or queen)?",
+  "formula": "",
+  "options": [
+   "8/52",
+   "12/52",
+   "2/52",
+   "4/52"
+  ],
+  "answer": 0,
+  "explain": "4 kings + 4 queens = 8 mutually exclusive outcomes; P = 8/52.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1ad62d25-e60a-4497-8dfe-60b9c1515db0",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "If events A₁,A₂,…,Aₙ are equally likely and exhaustive, P(Aᵢ) =?",
+  "formula": "P(Aᵢ)=1/n",
+  "options": [
+   "n",
+   "1/(n−1)",
+   "1/n",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Equal probability + ΣP(Aᵢ)=1 gives each P(Aᵢ)=1/n.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f6073a88-6065-4acd-b185-6a6089ae7f25",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(A only, not B) among A and B =?",
+  "formula": "P(A∩B')",
+  "options": [
+   "P(A)+P(B)−1",
+   "P(A∪B)−P(B)",
+   "P(A)−P(A∩B)",
+   "P(A)·P(B')"
+  ],
+  "answer": 2,
+  "explain": "P(A∩B')=P(A)−P(A∩B) represents A occurring without B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "21097625-8b05-4cc7-91a2-b6ad80f5ef47",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "Which inequality always holds for P(A∩B)?",
+  "formula": "P(A∩B) ≥ P(A)+P(B)−1",
+  "options": [
+   "P(A∩B) ≤ P(A)−P(B)",
+   "P(A∩B) = P(A)·P(B)",
+   "P(A∩B) ≥ P(A)+P(B)−1",
+   "P(A∩B) ≥ P(A∪B)"
+  ],
+  "answer": 2,
+  "explain": "Bonferroni inequality: P(A∩B)≥P(A)+P(B)−1 (since P(A∪B)≤1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ec386a62-f7c2-47d5-84eb-90bc85956635",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(B|A) > P(B) implies which relationship between A and B?",
+  "formula": "",
+  "options": [
+   "P(A|B) < P(A)",
+   "A favours B (positive correlation)",
+   "A and B are mutually exclusive",
+   "A and B are independent"
+  ],
+  "answer": 1,
+  "explain": "P(B|A)>P(B) means A's occurrence increases B's probability; positively correlated.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91a811cf-c9d2-44bc-9f45-d1f16efa968c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "For B(n,p): P(X=r+1)/P(X=r) =?",
+  "formula": "(n−r)p / [(r+1)q]",
+  "options": [
+   "np/q",
+   "p/q",
+   "(r+1)q/[(n−r)p]",
+   "(n−r)p/[(r+1)q]"
+  ],
+  "answer": 3,
+  "explain": "Recurrence relation for binomial: ratio of consecutive terms = (n−r)p/[(r+1)(1−p)].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "eb7b533b-4b90-46a9-8449-a421d0337344",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "P(A∪B) is maximum when?",
+  "formula": "",
+  "options": [
+   "A⊂B",
+   "A and B are independent",
+   "A and B are mutually exclusive",
+   "P(A)=P(B)"
+  ],
+  "answer": 2,
+  "explain": "P(A∪B)=P(A)+P(B)−P(A∩B); maximised when P(A∩B)=0, i.e., mutually exclusive.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b6ebe224-3176-4b26-8994-dc9b42822b35",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "In Binomial B(n,p), what is P(X≥1) when n=3, p=1/2?",
+  "formula": "P(X≥1)=1−qⁿ",
+  "options": [
+   "1/2",
+   "7/8",
+   "1/8",
+   "3/8"
+  ],
+  "answer": 1,
+  "explain": "P(X≥1)=1−P(X=0)=1−(1/2)³=1−1/8=7/8.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "10eff888-63e0-4602-bfdb-31d6a9dcbd3d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability",
+  "prompt": "If P(A)=0.6, P(B|A)=0.5, P(A|B)=0.3, then P(B)=?",
+  "formula": "P(B)=P(A)·P(B|A)/P(A|B)",
+  "options": [
+   "1.0",
+   "0.9",
+   "0.8",
+   "0.5"
+  ],
+  "answer": 0,
+  "explain": "P(A∩B)=P(A)·P(B|A)=0.3; P(B)=P(A∩B)/P(A|B)=0.3/0.3=1.0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

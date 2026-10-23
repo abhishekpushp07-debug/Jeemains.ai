@@ -1,0 +1,902 @@
+[
+ {
+  "id": "01caa3ab-3e26-49c7-9aca-ea1449875790",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Speed of a transverse wave on a string under tension T, mass/length μ?",
+  "formula": "v = √(T/μ)",
+  "options": [
+   "√(Tμ)",
+   "T/μ",
+   "√(μ/T)",
+   "√(T/μ)"
+  ],
+  "answer": 3,
+  "explain": "Wave speed on string depends on restoring force (T) and inertia (μ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6ca62e78-1db7-4a6d-95b6-d017ecbb7b90",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Speed of sound in an ideal gas is proportional to which power of absolute temp T?",
+  "formula": "v ∝ T^(1/2)",
+  "options": [
+   "T^(3/2)",
+   "T^(1)",
+   "T^(1/2)",
+   "T^(-1/2)"
+  ],
+  "answer": 2,
+  "explain": "v = √(γRT/M), so v ∝ √T.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bd0c09fd-9ed1-4b46-ab77-66f3597694b3",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For a standing wave on a string fixed at both ends, allowed wavelengths (L = length)?",
+  "formula": "λₙ = 2L/n",
+  "options": [
+   "L/n",
+   "4L/n",
+   "2L/n",
+   "4L/(2n-1)"
+  ],
+  "answer": 2,
+  "explain": "Both ends are nodes; condition gives λₙ = 2L/n, n = 1,2,3…",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ac1a8765-fe15-4303-b341-67246b2ac050",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Fundamental frequency of a string of length L, tension T, linear density μ?",
+  "formula": "f₁ = (1/2L)√(T/μ)",
+  "options": [
+   "(1/2L)√(μ/T)",
+   "(2/L)√(T/μ)",
+   "(1/2L)√(T/μ)",
+   "(1/L)√(T/μ)"
+  ],
+  "answer": 2,
+  "explain": "First harmonic has one antinode; f₁ = v/2L where v = √(T/μ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "51f3a6d6-b1f2-4a9a-815e-dfe5ec692736",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For an open pipe of length L, fundamental frequency is?",
+  "formula": "f = v/2L",
+  "options": [
+   "v/2L",
+   "v/4L",
+   "v/L",
+   "2v/L"
+  ],
+  "answer": 0,
+  "explain": "Open pipe has antinodes at both ends; smallest resonant length = λ/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "64af1865-a4b3-4f61-b026-e01f7c662d7a",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For a closed pipe (one end closed), fundamental frequency is?",
+  "formula": "f = v/4L",
+  "options": [
+   "v/4L",
+   "v/2L",
+   "3v/4L",
+   "v/L"
+  ],
+  "answer": 0,
+  "explain": "Closed end = node, open end = antinode; L = λ/4 for fundamental.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4011ed8c-e914-4ed5-a9b0-5863973535ef",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "A closed pipe supports only which harmonics?",
+  "formula": "",
+  "options": [
+   "All harmonics",
+   "Odd harmonics only",
+   "Even harmonics only above 2nd",
+   "Even harmonics only"
+  ],
+  "answer": 1,
+  "explain": "Closed pipe: fn = (2n-1)v/4L, so only odd multiples of fundamental.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7de5ad4b-546c-4066-88dc-76eb3b196c52",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Beats frequency between two sources of frequencies f₁ and f₂ (f₁ > f₂)?",
+  "formula": "f_beat = f₁ - f₂",
+  "options": [
+   "f₁ + f₂",
+   "|f₁² - f₂²|",
+   "(f₁+f₂)/2",
+   "f₁ - f₂"
+  ],
+  "answer": 3,
+  "explain": "Beats arise from periodic constructive/destructive interference; rate = |f₁−f₂|.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d125c596-54db-490b-a223-86db34633abb",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Doppler effect: source moves toward stationary observer (v_s = source speed)?",
+  "formula": "f' = f·v/(v−vₛ)",
+  "options": [
+   "f·(v−vₛ)/v",
+   "f·v/(v−vₛ)",
+   "f·(v+vₛ)/v",
+   "f·v/(v+vₛ)"
+  ],
+  "answer": 1,
+  "explain": "Source approaching compresses wavefronts; denominator decreases → higher freq.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d876807f-d71c-4ae2-9404-780d36f4dfe4",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Doppler effect: observer moves toward stationary source (v_o = observer speed)?",
+  "formula": "f' = f·(v+v_o)/v",
+  "options": [
+   "f·v/(v−v_o)",
+   "f·v/(v+v_o)",
+   "f·(v−v_o)/v",
+   "f·(v+v_o)/v"
+  ],
+  "answer": 3,
+  "explain": "Observer moving toward source intercepts more wavefronts per second.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8b07556e-82c5-4b38-8bd2-02c75a6f08b6",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Relation between wave speed v, frequency f, and wavelength λ?",
+  "formula": "v = fλ",
+  "options": [
+   "v = fλ",
+   "v = f/λ",
+   "v = f²λ",
+   "v = λ/f"
+  ],
+  "answer": 0,
+  "explain": "Fundamental wave relation; holds for all mechanical and EM waves.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0bcef663-61f3-4c8a-9c45-78f9e11dbe74",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "In a stationary wave, the distance between two consecutive nodes is?",
+  "formula": "λ/2",
+  "options": [
+   "2λ",
+   "λ",
+   "λ/4",
+   "λ/2"
+  ],
+  "answer": 3,
+  "explain": "Adjacent nodes are separated by half a wavelength in a standing wave.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c09dd1c7-1bf2-4282-a16b-ce6f261224c9",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Distance between a node and the nearest antinode in a standing wave?",
+  "formula": "λ/4",
+  "options": [
+   "λ/2",
+   "λ/8",
+   "λ/4",
+   "λ"
+  ],
+  "answer": 2,
+  "explain": "Node and adjacent antinode are quarter-wavelength apart.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3a231ec8-19dc-417a-8f68-810e4cbf0456",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Newton's formula for speed of sound gives γ = 1 (isothermal). Laplace corrected it to?",
+  "formula": "v = √(γP/ρ)",
+  "options": [
+   "P/γρ under square root",
+   "γP/ρ under square root",
+   "γρ/P under square root",
+   "P/ρ under square root"
+  ],
+  "answer": 1,
+  "explain": "Laplace: sound propagation is adiabatic, so v = √(γP/ρ), not √(P/ρ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9e2b5844-555f-46b6-b175-79c9a2640a94",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Intensity I of a wave is proportional to which power of amplitude A?",
+  "formula": "I ∝ A²",
+  "options": [
+   "A³",
+   "A^(1/2)",
+   "A",
+   "A²"
+  ],
+  "answer": 3,
+  "explain": "Energy carried by a wave is proportional to the square of its amplitude.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c735766f-9d2d-474d-8bc0-4d2b86f9b10c",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Sound level in decibels when intensity is I and reference I₀?",
+  "formula": "β = 10 log(I/I₀)",
+  "options": [
+   "10 ln(I/I₀)",
+   "20 log(I/I₀)",
+   "log(I/I₀)",
+   "10 log(I/I₀)"
+  ],
+  "answer": 3,
+  "explain": "Decibel scale: β = 10 log₁₀(I/I₀); I₀ = 10⁻¹² W/m².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d57c3945-5e79-444d-8b34-5aca5db58ca1",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Principle of superposition states that resultant displacement is?",
+  "formula": "y = y₁ + y₂",
+  "options": [
+   "Algebraic sum of individual displacements",
+   "Larger of the two displacements",
+   "RMS of displacements",
+   "Product of individual displacements"
+  ],
+  "answer": 0,
+  "explain": "Superposition: net displacement = vector (algebraic for 1-D) sum of each wave.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "15319b45-1ada-4655-a373-b835ad8a85f1",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Two waves y₁ = A sin(ωt) and y₂ = A sin(ωt+φ). Resultant amplitude?",
+  "formula": "2A cos(φ/2)",
+  "options": [
+   "A cos(φ/2)",
+   "A√2 cos(φ)",
+   "2A cos(φ/2)",
+   "2A sin(φ/2)"
+  ],
+  "answer": 2,
+  "explain": "Using phasor addition: resultant amplitude = 2A cos(φ/2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ef2e9904-4933-4051-86dc-46c114116123",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For constructive interference, path difference Δ must satisfy?",
+  "formula": "Δ = nλ",
+  "options": [
+   "nλ/2",
+   "(2n+1)λ/2",
+   "nλ (n = 0,1,2…)",
+   "(2n-1)λ/4"
+  ],
+  "answer": 2,
+  "explain": "Path difference = whole number of wavelengths → crests meet → constructive.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "138f9be6-7cb3-47e1-972a-dd4272c3dec2",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For destructive interference, path difference Δ must satisfy?",
+  "formula": "Δ = (2n+1)λ/2",
+  "options": [
+   "nλ/2",
+   "(2n+1)λ/2",
+   "nλ",
+   "(2n+1)λ"
+  ],
+  "answer": 1,
+  "explain": "Path difference = odd multiple of λ/2 → crest meets trough → cancellation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7745fa5c-3234-46f4-94ac-4ce4960b50af",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "End correction for a closed pipe (radius r) makes effective length?",
+  "formula": "L_eff = L + 0.3d",
+  "options": [
+   "L + r",
+   "L + 0.3d (d = diameter)",
+   "L + d",
+   "L + 0.6d"
+  ],
+  "answer": 1,
+  "explain": "End correction ≈ 0.3d for closed end (one open end); accounts for antinode outside pipe.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "481c88b3-2794-4810-b3be-b6b0335a2f83",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Speed of longitudinal waves in a solid of Young's modulus Y, density ρ?",
+  "formula": "v = √(Y/ρ)",
+  "options": [
+   "√(ρ/Y)",
+   "√(Yρ)",
+   "Y/ρ",
+   "√(Y/ρ)"
+  ],
+  "answer": 3,
+  "explain": "Longitudinal wave speed in solids: v = √(Y/ρ), Y = Young's modulus.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "18d363e5-5192-4ad1-b95f-96bfe9d32d48",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "In a standing wave, which points always have zero displacement?",
+  "formula": "",
+  "options": [
+   "Antinodes",
+   "Nodes",
+   "All points simultaneously",
+   "Points at λ/4 from ends"
+  ],
+  "answer": 1,
+  "explain": "Nodes are fixed points of zero displacement; antinodes have maximum amplitude.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a2c662fc-3db8-43e0-a269-eca81cd182cf",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "General equation of a harmonic progressive wave moving in +x direction?",
+  "formula": "y = A sin(ωt − kx)",
+  "options": [
+   "A sin(ωt − kx)",
+   "A sin(ωt + kx)",
+   "A cos(kx)sin(ωt)",
+   "A sin(kx+ωt+π)"
+  ],
+  "answer": 0,
+  "explain": "Wave travelling in +x: phase decreases with x → y = A sin(ωt − kx).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5afd9e06-47cf-4f07-8a55-a8d1bca61b2a",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Angular wave number k is related to wavelength λ by?",
+  "formula": "k = 2π/λ",
+  "options": [
+   "λ/2π",
+   "2π/λ",
+   "2λ/π",
+   "π/λ"
+  ],
+  "answer": 1,
+  "explain": "k = 2π/λ; it represents spatial frequency (rad per metre).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "103780b5-0cf0-415d-ae35-9e454dd6f506",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Speed of sound in a liquid of bulk modulus B, density ρ?",
+  "formula": "v = √(B/ρ)",
+  "options": [
+   "B/ρ",
+   "√(Bρ)",
+   "√(B/ρ)",
+   "√(ρ/B)"
+  ],
+  "answer": 2,
+  "explain": "Bulk modulus is the elastic property for liquids; v = √(B/ρ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cf87839f-1a02-45e9-ad90-fe2ba64ac661",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Phase difference φ and path difference Δ are related by?",
+  "formula": "φ = (2π/λ)Δ",
+  "options": [
+   "φ = πΔ/λ",
+   "φ = λΔ",
+   "φ = (2π/λ)Δ",
+   "φ = (λ/2π)Δ"
+  ],
+  "answer": 2,
+  "explain": "One full wavelength corresponds to 2π phase; φ = (2π/λ)Δ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7bcaca49-4ce2-47ad-8e25-dd65ec6d14c5",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Laplace correction: speed of sound in gas uses which modulus?",
+  "formula": "v = √(γP/ρ)",
+  "options": [
+   "Isothermal bulk modulus P",
+   "Adiabatic bulk modulus γP",
+   "Shear modulus G",
+   "Young's modulus Y"
+  ],
+  "answer": 1,
+  "explain": "Sound propagation is adiabatic; effective modulus = γP, not P.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dedeaaa2-5a9e-4dd0-a109-4ac499a9b26f",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "An open pipe of length L: which harmonics are present?",
+  "formula": "fₙ = nv/2L",
+  "options": [
+   "Only fundamental",
+   "Only odd harmonics",
+   "Only even harmonics",
+   "All harmonics (n=1,2,3…)"
+  ],
+  "answer": 3,
+  "explain": "Open pipe has antinodes at both ends; all integer multiples of fundamental exist.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d870e105-0c31-4dbb-8863-a8b927d3c98b",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Second overtone of a closed pipe equals which harmonic?",
+  "formula": "",
+  "options": [
+   "5th harmonic",
+   "6th harmonic",
+   "3rd harmonic",
+   "4th harmonic"
+  ],
+  "answer": 0,
+  "explain": "Closed pipe: overtones are 3rd, 5th, 7th… harmonics; 2nd overtone = 5th harmonic.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5155cb29-6ad4-4473-be91-86447e358a63",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Second overtone frequency of an open pipe of length L?",
+  "formula": "f = 3v/2L",
+  "options": [
+   "4v/2L",
+   "2v/2L",
+   "3v/2L",
+   "5v/2L"
+  ],
+  "answer": 2,
+  "explain": "Open pipe 2nd overtone is 3rd harmonic: f₃ = 3v/2L.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a70d69c-51c6-40ab-a7df-98769b79958d",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For resonance in a closed pipe, successive resonating lengths differ by?",
+  "formula": "",
+  "options": [
+   "λ/4",
+   "λ/2",
+   "λ",
+   "2λ"
+  ],
+  "answer": 1,
+  "explain": "Consecutive resonance lengths in a closed pipe differ by half a wavelength.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6fcc98b5-c129-4f2f-8718-07189ff70a44",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "If string tension is quadrupled, fundamental frequency changes by factor?",
+  "formula": "f ∝ √T",
+  "options": [
+   "1/2",
+   "4",
+   "2",
+   "√2"
+  ],
+  "answer": 2,
+  "explain": "f ∝ √T; quadrupling T doubles f.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4eca7746-17ed-463f-9148-2dfbd320473e",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "A wave y = A sin(ωt − kx): particle velocity at any point is?",
+  "formula": "vₚ = −(ω/k)(∂y/∂x)",
+  "options": [
+   "(ω/k)(∂y/∂x)",
+   "−(ω/k)(∂y/∂x)",
+   "ω·A cos(ωt−kx)·k",
+   "k/ω·∂y/∂x"
+  ],
+  "answer": 1,
+  "explain": "Particle velocity vₚ = ∂y/∂t = −(wave speed)×(∂y/∂x) for +x wave.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "93bd01c6-d1cf-4805-972b-7f47a165bac8",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Power transmitted by a transverse wave on string: P ∝?",
+  "formula": "P = ½μω²A²v",
+  "options": [
+   "μω²Av",
+   "μω²A²/v",
+   "μωA²v",
+   "μω²A²v"
+  ],
+  "answer": 3,
+  "explain": "Average power P = ½μω²A²v; proportional to ω², A², and wave speed v.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a7d620d8-5781-4435-816b-08aa5b4b8aec",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Intensity of sound is inversely proportional to which power of distance r?",
+  "formula": "I ∝ 1/r²",
+  "options": [
+   "r^(1/2)",
+   "r²",
+   "r",
+   "r³"
+  ],
+  "answer": 1,
+  "explain": "For a point source radiating uniformly, I = P/4πr²; I ∝ 1/r².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "311a77d1-9cc4-44a8-9cc7-e0d15832c5b0",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "The ratio of speed of sound in H₂ to O₂ at same temperature? (γ same)",
+  "formula": "v ∝ 1/√M",
+  "options": [
+   "8",
+   "4",
+   "1/4",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "v ∝ √(γRT/M); M(O₂)/M(H₂)=16, so v(H₂)/v(O₂)=√16=4.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9084fac0-ef99-4e82-9a30-d3dc25064a0e",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Doppler: source moves away from stationary observer at speed vₛ, observed freq?",
+  "formula": "f' = f·v/(v+vₛ)",
+  "options": [
+   "f·(v−vₛ)/v",
+   "f·v/(v−vₛ)",
+   "f·(v+vₛ)/v",
+   "f·v/(v+vₛ)"
+  ],
+  "answer": 3,
+  "explain": "Source receding: denominator increases → f' < f; f' = fv/(v+vₛ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "50694640-79f1-42ca-91a4-065ce6ad4fca",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Doppler: observer moves away from stationary source at speed v_o, observed freq?",
+  "formula": "f' = f(v−v_o)/v",
+  "options": [
+   "fv/(v+v_o)",
+   "fv/(v−v_o)",
+   "f(v−v_o)/v",
+   "f(v+v_o)/v"
+  ],
+  "answer": 2,
+  "explain": "Observer receding: fewer wavefronts per second; f' = f(v−v_o)/v.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf5ae107-8e28-467b-b5bf-ba2f1f9da648",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Equation of standing wave formed by superposition of two opposite waves?",
+  "formula": "y = 2A sin(kx)cos(ωt)",
+  "options": [
+   "A sin(2kx)cos(ωt)",
+   "2A sin(kx)cos(ωt)",
+   "2A cos(kx)sin(ωt)",
+   "A sin(kx−ωt)+A sin(kx+ωt) only"
+  ],
+  "answer": 1,
+  "explain": "Superposing y=A sin(ωt−kx) and y=A sin(ωt+kx) gives 2A sin(kx)cos(ωt).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8d817b64-f473-454a-b436-048950b9277c",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "In a standing wave, antinodes occur where amplitude is?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "A",
+   "Maximum (= 2A)",
+   "Depends on time"
+  ],
+  "answer": 2,
+  "explain": "Antinodes are positions of maximum displacement amplitude = 2A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "730b2c04-d133-42ae-a1ea-c7a4ce1d82bc",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "For string fixed at one end, free at other: allowed modes have L = ?",
+  "formula": "L = (2n−1)λ/4",
+  "options": [
+   "nλ/2",
+   "(2n−1)λ/2",
+   "nλ/4",
+   "(2n−1)λ/4"
+  ],
+  "answer": 3,
+  "explain": "Fixed-free string: node at fixed end, antinode at free end; L=(2n−1)λ/4.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "243224c6-217a-4986-b798-d2d7f55c2b4f",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Pitch of a sound is determined primarily by its?",
+  "formula": "",
+  "options": [
+   "Speed",
+   "Intensity",
+   "Amplitude",
+   "Frequency"
+  ],
+  "answer": 3,
+  "explain": "Pitch is the subjective perception corresponding to frequency of sound.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c9938a81-af2e-4114-882f-61b531b1d55a",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Loudness of sound is determined primarily by its?",
+  "formula": "",
+  "options": [
+   "Intensity (amplitude)",
+   "Frequency",
+   "Wavelength",
+   "Speed"
+  ],
+  "answer": 0,
+  "explain": "Loudness depends on intensity which depends on amplitude squared.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "824ccb56-fdcb-4603-8ffd-1ec718cee271",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "If two sound waves have intensity ratio 100:1, their dB difference is?",
+  "formula": "ΔdB = 10 log(I₁/I₂)",
+  "options": [
+   "100 dB",
+   "2 dB",
+   "20 dB",
+   "10 dB"
+  ],
+  "answer": 2,
+  "explain": "ΔdB = 10 log(100) = 10×2 = 20 dB.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e3499833-e31e-46d8-8cfc-5a5c849df8ee",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Quality (timbre) of sound depends on?",
+  "formula": "",
+  "options": [
+   "Waveform / harmonics present",
+   "Frequency only",
+   "Amplitude only",
+   "Speed of sound"
+  ],
+  "answer": 0,
+  "explain": "Timbre distinguishes sounds of same pitch/loudness via their harmonic content.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "49e10710-5107-4f37-beea-d199ae9c9e18",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Velocity of sound is maximum in which medium?",
+  "formula": "",
+  "options": [
+   "Vacuum",
+   "Gases",
+   "Solids",
+   "Liquids"
+  ],
+  "answer": 2,
+  "explain": "Solids have highest elasticity; v_solid > v_liquid > v_gas.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4549127a-c5e8-4a50-ab92-c4c83b620d09",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Frequency of beats does NOT depend on?",
+  "formula": "f_beat = |f₁−f₂|",
+  "options": [
+   "Amplitude of either wave",
+   "None of these",
+   "Speed of sound",
+   "Frequency of either wave"
+  ],
+  "answer": 0,
+  "explain": "Beat frequency = |f₁−f₂|; amplitudes affect loudness of beats, not frequency.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dddb82a7-6d7c-4e9e-ae71-c485d1d941a1",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "A string has n loops in resonance. Number of nodes (including endpoints)?",
+  "formula": "",
+  "options": [
+   "n+1",
+   "n",
+   "n−1",
+   "2n"
+  ],
+  "answer": 0,
+  "explain": "n loops → n antinodes and (n+1) nodes (endpoints are nodes).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6de30374-6678-4cfe-b9c4-4afa0aadd7e0",
+  "subject": "Physics",
+  "chapter": "Waves",
+  "topic": "Waves",
+  "prompt": "Group velocity equals phase velocity when dispersion is?",
+  "formula": "v_g = v_p − λ(dv_p/dλ)",
+  "options": [
+   "Maximum",
+   "Minimum",
+   "Negative",
+   "Zero (non-dispersive medium)"
+  ],
+  "answer": 3,
+  "explain": "No dispersion means dv_p/dλ = 0, so group velocity = phase velocity.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

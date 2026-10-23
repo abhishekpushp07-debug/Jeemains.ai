@@ -1,0 +1,20 @@
+{
+  "notice": "ILLUSTRATIVE request bodies only. Replace bracket placeholders with authorized server-issued IDs and local UUIDs; do not run against customer production as tests. No passwords, phone numbers or tokens are provided.",
+  "phone_entry": {"phone": "[USER_ENTERED_PHONE]"},
+  "staff_login": {"email": "[AUTHORIZED_STAFF_EMAIL]", "password": "[SECURELY_ENTERED_PASSWORD]"},
+  "preflight": {"preview": false, "test_response": "[LOCAL_DEVICE_CHECK]"},
+  "start": {"start_key": "[UUID_FOR_THIS_START_INTENT]", "device_checked": true, "preview": false},
+  "visit": {"question_id": "[QUESTION_UUID_FROM_ATTEMPT]"},
+  "first_answer": {"value": "A", "marked": false, "revision": 1, "request_id": "[UUID_FOR_THIS_EDIT]"},
+  "clear_after_first_ack": {"value": "", "marked": false, "revision": 2, "request_id": "[NEW_UUID_FOR_CLEAR]"},
+  "answer_with_confidence": {"value": "A", "marked": true, "confidence": 0.7, "revision": 1, "request_id": "[NEW_UUID_FOR_THIS_EDIT]"},
+  "submit_refresh_logout_bonus_solution_open": {},
+  "retry_attempt": {"start_key": "[NEW_UUID_FOR_RETRY_INTENT]", "score_version": "original"},
+  "compare": {"left": "[OWN_COMPLETED_ATTEMPT_ID]", "right": "[OWN_OTHER_COMPLETED_ATTEMPT_ID]"},
+  "report_wrong": {"category": "solution", "context": "solutions", "note": "[USER_WRITTEN_NOTE_MAX_600]"},
+  "reflection": {"request_id": "[NEW_UUID_FOR_REVIEW_EDIT]", "revision": 1, "score_version": "original", "category": "calculation", "note": "[USER_WRITTEN_NOTE_MAX_500]", "identified_error": true, "wrote_note": true, "reviewed_solution": false, "retry_planned": false},
+  "expected_value": {"probability": 0.5},
+  "rank_scenario": {"percentile_low": 90.0, "percentile_high": 95.0},
+  "report_request": {"score_version": "original"},
+  "preference": {"exam": "JEE Main"}
+}

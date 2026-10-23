@@ -1,0 +1,48 @@
+{
+  "summary": "First full run on the live jeelive.ai pilot (phone 9000000001, exactly ONE attempt created and submitted: 385dc381-b394-441e-89db-b281f9f081f2). Backend: 9 pytest tests for Rapid Fire and the /api/jl proxy. Found and FIXED a CRITICAL cross-user session leak in the proxy (shared httpx client cookie jar). After the fix all 9 pass. Frontend (390x844): entry/login, Home tiles/banner/explainer, exam hubs, catalogue, set detail, player (image, option, All saved, mark, next, palette, exit, resume, submit), result tabs, Solutions (filters/rail/card/reflection/report sheet opened, NOT sent), My Tests tabs/search, Live series hub (62 calendar days), Rapid Fire full flow (timer 20s, lock+feedback, skip, timeout auto-advance, summary 5/3/1/1, review, repeat-missed with 5 cards), Mission share, Account signout all PASS. One real frontend bug: catalogue pagination/search shows stale and duplicate rows. Minor: signed-out deep links show skeletons forever. No deprecated Expo packages found (no expo-av/expo-barcode-scanner/expo-background-fetch).",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "/api/jl/* (proxy)", "issue": "FIXED BY T1. The shared httpx.AsyncClient kept upstream Set-Cookie in its own client-level jar. Any new X-JL-Sid with an empty per-sid jar then sent the last logged-in user's cookies, so a brand-new sid got GET /auth/me = pilot user. That is a cross-user session leak: every new web visitor was signed in as the previous user. Fix: http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[])) at startup (server.py, startup()). Verified that a fresh sid no longer returns the user.", "priority": "CRITICAL"}
+    ],
+    "minor": [
+      {"endpoint": "/api/rf/*", "issue": "X-RF-User is a client-asserted id with no server verification, so anyone can read or write another user's Rapid Fire history by sending their uuid. Acceptable for the private pilot; it should be bound to the jeelive session (for example via proxy /auth/me) before a wider launch."},
+      {"endpoint": "POST /api/rf/sessions (card_ids mode)", "issue": "card_ids are not checked against the user's own missed cards (any card ids of the subject are accepted). Low risk."},
+      {"endpoint": "POST /api/rf/sessions", "issue": "public_card returns the `answer` index to the client, needed for instant feedback, but the key is visible in the network tab. The server re-derives correctness, so the score is safe."},
+      {"endpoint": "/api/jl/* without X-JL-Sid", "issue": "Returns 422 (FastAPI Header(...)) rather than 400 like the invalid-sid case. Cosmetic."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Catalogue list (app/catalogue.tsx)", "issue": "Stale and duplicate rows after search or subject change. Repro: JEE Main > Chapter-wise > type 'Units' gives count '1 live chapter tests' but 12 rows still listed. Clearing the search gives count 29 but only 12 rows. Switching to Chemistry gives count 23 but 24 rows, plus 64-163 'Encountered two children with the same key' warnings. The upstream API returns correct data (q=Units gives 1 item). RCA: useCached (src/useCached.ts:8) does not reset `data` when `key` changes, so the effect at catalogue.tsx:85-88 writes the previous key's res.data into pages[page-1] after the reset at line 79. onEndReached (line 119) also bumps `page` using the stale res.data.pages. Fix: key `pages` by the base query (subject+query), and only write res.data when it belongs to the current key. Alternatively, reset data to memory.get(key) ?? null in useCached on key change, and dedupe items by id.", "testID": "set-row-*, catalogue-count, catalogue-search-input", "priority": "HIGH"},
+      {"component": "Auth gating for deep links", "issue": "Opening /catalogue?slug=jee-main&kind=chapters (or other inner routes) while signed out shows skeleton loaders forever. Only app/index.tsx redirects to /entry. useCached with key=null keeps loading=true. Add an auth guard in the root layout (redirect to /entry when there is no user), or show a sign-in CTA.", "testID": "catalogue-jee-main-chapters", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Player", "issues": ["Question source image renders only ~84px tall at 390px width, so the text is very small. Readable only via Zoom. Consider a larger default height or fit-to-width with a min height."]},
+      {"screen": "Home", "issues": ["home-account-button is 40px tall (<44 min touch target).", "The 'compact' series banner is still 268px tall; the raised LIVE diamond overlaps banner text while scrolling (expected for a floating tab, just noting)."]},
+      {"screen": "Solutions / web", "issues": ["Web console warns '<button> cannot contain a nested <button>' (nested Pressables). Web-only, but it can swallow taps on web. Low priority."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_and_proxy.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "HIGH: Fix catalogue stale/duplicate rows (app/catalogue.tsx pages state + src/useCached.ts stale data on key change). Dedupe by id.",
+    "MEDIUM: Add an auth guard for inner routes so signed-out deep links redirect to /entry instead of infinite skeletons.",
+    "Review T1's proxy cookie fix in backend/server.py startup() (DefaultCookiePolicy(allowed_domains=[])) and keep it. Consider also purging any stale jl_jars created during the leak window.",
+    "Pilot hardening (later): bind X-RF-User to the verified jeelive session server-side.",
+    "Minor: account button height 44; larger default question image in player."
+  ],
+  "critical_code_review_comments": [
+    "server.py: the shared httpx client must never hold cookies when multiplexing users. Now fixed.",
+    "server.py rf_complete: correct server-side re-derivation, dedupe and skip fill. Idempotent via the status check (verified).",
+    "useAttempt.ts submit: settle() blocks submit while drafts are pending (good). Submit has no idempotency key, so on a network drop after the server accepts, a retry relies on the 409/completed path.",
+    "rapid/session.tsx: the timer only consumes the visible card (good). The AppState listener is a no-op placeholder."
+  ],
+  "updated_files": ["/app/backend/server.py", "/app/backend/tests/test_rf_and_proxy.py"],
+  "success_rate": {"backend": "100% (9/9 after fix; 8/9 before)", "frontend": "~92% (all requested flows work; catalogue list bug + deep-link gating)"},
+  "seed_data_creation": "Live server: 1 attempt (Units & Measurements, 385dc381-b394-441e-89db-b281f9f081f2) created and submitted. No report sent. Local Mongo: several TEST_ Rapid Fire sessions for user db0c62b8-... (request_id prefix TEST_) and a few jl_jars with sid prefix TESTSID.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: phone 9000000001 (web stores jl_sid in storage; each Playwright run needs a fresh login via entry-phone-input). Wait for exam-destination-* before clicking (the hub renders after the push animation). The pilot already has ONE completed attempt for Units & Measurements; do not create more unless needed (use My Tests > Completed > attempt-card-385dc381... for the result/solutions UI). The solution-question-rail id also matches the 'solution-question-' prefix (count-1).",
+  "rca_of_issue": "Proxy session leak: httpx.AsyncClient persists response cookies in client.cookies by default and merges them into requests that have no explicit Cookie header (empty per-sid jar). Repro (before fix): POST /api/jl/auth/phone with sid A, then GET /api/jl/auth/me with a brand-new sid B returned the user. Mitigation applied: reject all cookie storage on the shared client."
+}

@@ -1,0 +1,902 @@
+[
+ {
+  "id": "6a446ee2-55ae-48f6-81e1-afe66b29dd33",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Number of subsets of a set with n elements",
+  "formula": "2ⁿ",
+  "options": [
+   "n²",
+   "n!",
+   "2ⁿ⁻¹",
+   "2ⁿ"
+  ],
+  "answer": 3,
+  "explain": "A set with n elements has exactly 2ⁿ subsets, including empty set and itself.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fa33c513-5cc5-4244-af10-35444b6e8f19",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Number of proper subsets of a set with n elements",
+  "formula": "2ⁿ − 1",
+  "options": [
+   "2ⁿ",
+   "n − 1",
+   "2ⁿ⁻¹ − 1",
+   "2ⁿ − 1"
+  ],
+  "answer": 3,
+  "explain": "Proper subsets exclude the set itself, so count = 2ⁿ − 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f815e148-5b3c-4242-a190-6e479c460325",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "|A ∪ B| when A and B are disjoint sets",
+  "formula": "|A| + |B|",
+  "options": [
+   "|A| · |B|",
+   "|A| + |B|",
+   "|A| − |B|",
+   "|A| + |B| − |A∩B|"
+  ],
+  "answer": 1,
+  "explain": "Disjoint sets have |A∩B| = 0, so |A∪B| = |A| + |B|.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "291ad910-470e-40e1-8fca-321695f5e487",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Formula for |A ∪ B ∪ C|",
+  "formula": "|A|+|B|+|C|−|A∩B|−|B∩C|−|A∩C|+|A∩B∩C|",
+  "options": [
+   "|A|+|B|+|C|+|A∩B∩C|",
+   "|A|+|B|+|C|",
+   "|A|+|B|+|C|−|A∩B|−|B∩C|−|A∩C|+|A∩B∩C|",
+   "|A|+|B|+|C|−|A∩B∩C|"
+  ],
+  "answer": 2,
+  "explain": "Inclusion-exclusion principle for three sets.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fad63525-2090-4964-8315-669a129e0cdd",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A − B (set difference) equals",
+  "formula": "A ∩ Bᶜ",
+  "options": [
+   "A ∩ Bᶜ",
+   "Aᶜ ∩ B",
+   "A ∪ Bᶜ",
+   "Aᶜ ∪ Bᶜ"
+  ],
+  "answer": 0,
+  "explain": "A − B contains elements in A but not in B, i.e., A ∩ Bᶜ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d67871e4-d881-4c52-b5af-828d114b3574",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "De Morgan's law: (A ∪ B)ᶜ =",
+  "formula": "Aᶜ ∩ Bᶜ",
+  "options": [
+   "A ∪ B",
+   "Aᶜ ∩ Bᶜ",
+   "A ∩ B",
+   "Aᶜ ∪ Bᶜ"
+  ],
+  "answer": 1,
+  "explain": "De Morgan's first law: complement of union = intersection of complements.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ce32e1a9-1a10-4ff2-9e39-d33ed9ed6b69",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "De Morgan's law: (A ∩ B)ᶜ =",
+  "formula": "Aᶜ ∪ Bᶜ",
+  "options": [
+   "Aᶜ ∩ Bᶜ",
+   "Aᶜ ∪ Bᶜ",
+   "A ∩ B",
+   "A ∪ B"
+  ],
+  "answer": 1,
+  "explain": "De Morgan's second law: complement of intersection = union of complements.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "549c3e68-10f6-4846-8e46-783842fa62e9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Symmetric difference A Δ B equals",
+  "formula": "(A−B) ∪ (B−A)",
+  "options": [
+   "(A∪B) − (A∩B)",
+   "(A−B) ∪ (B−A)",
+   "A ∩ Bᶜ",
+   "Both A & B are correct"
+  ],
+  "answer": 3,
+  "explain": "A Δ B = (A−B)∪(B−A) = (A∪B)−(A∩B); both expressions are equivalent.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fe2dc2e3-0b61-4dcc-b976-e73a5f5cc3b6",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Number of relations from set A (m elements) to set B (n elements)",
+  "formula": "2^(mn)",
+  "options": [
+   "m·n",
+   "2^(mn)",
+   "mn",
+   "2^(m+n)"
+  ],
+  "answer": 1,
+  "explain": "Relations are subsets of A×B which has mn elements, so 2^(mn) relations.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c845abae-4c05-42bb-a47f-bc4fbf2bf8ed",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "A relation R is symmetric if",
+  "formula": "(a,b)∈R ⇒ (b,a)∈R",
+  "options": [
+   "(a,b),(b,c)∈R ⇒ (a,c)∈R",
+   "(a,a)∈R for all a",
+   "(a,b)∈R ⇒ (b,a)∈R",
+   "(a,b)∈R ⇒ a=b"
+  ],
+  "answer": 2,
+  "explain": "Symmetry requires that if (a,b) is in R then (b,a) must also be in R.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f08bb21d-9bf5-454a-90e9-c7fc0a78bb99",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "An equivalence relation must satisfy",
+  "formula": "",
+  "options": [
+   "Symmetric, Transitive only",
+   "Reflexive, Symmetric, Transitive",
+   "Reflexive, Symmetric only",
+   "Reflexive, Transitive only"
+  ],
+  "answer": 1,
+  "explain": "Equivalence relation = reflexive + symmetric + transitive.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9ddd20c4-d9a0-4f24-8d42-09825ed56d74",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "The identity relation on set A is",
+  "formula": "I = {(a,a) : a∈A}",
+  "options": [
+   "A × A",
+   "Empty set",
+   "{(a,a) : a∈A}",
+   "{(a,b): a≠b}"
+  ],
+  "answer": 2,
+  "explain": "Identity relation contains only diagonal pairs (a,a) for each element a∈A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cbfadd45-9ecc-4fd5-9729-cae576842423",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Which relation on ℝ is NOT an equivalence relation?",
+  "formula": "",
+  "options": [
+   "a−b ∈ ℤ",
+   "a≡b (mod n)",
+   "a = b",
+   "a < b (strictly less than)"
+  ],
+  "answer": 3,
+  "explain": "< is not reflexive (a < a is false), so it cannot be an equivalence relation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5ca6f5c9-bfd6-4083-a086-610f0ee4e6e7",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "A function f: A→B is one-one (injective) if",
+  "formula": "f(a₁)=f(a₂) ⇒ a₁=a₂",
+  "options": [
+   "f(a₁)≠f(a₂) always",
+   "Every b∈B has a preimage",
+   "Range = Codomain",
+   "f(a₁)=f(a₂) ⇒ a₁=a₂"
+  ],
+  "answer": 3,
+  "explain": "Injective means distinct inputs give distinct outputs.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bc0d0906-8051-4f4a-8f5e-00937dc481fe",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "f: A→B is onto (surjective) if",
+  "formula": "Range(f) = B",
+  "options": [
+   "Range(f) = B",
+   "|A| = |B|",
+   "Range(f) ⊂ B",
+   "f is one-one"
+  ],
+  "answer": 0,
+  "explain": "Surjective means every element of codomain B is the image of some element of A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f29fc338-76e2-4e0c-b212-e93c36e275d4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "For f∘g to exist, which condition must hold?",
+  "formula": "",
+  "options": [
+   "Domain(f) = Domain(g)",
+   "f and g same domain",
+   "Range(f) ⊆ Domain(g)",
+   "Range(g) ⊆ Domain(f)"
+  ],
+  "answer": 3,
+  "explain": "f∘g(x)=f(g(x)) is defined when output of g lies within domain of f.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f3ff061d-2a6a-456b-9340-029d19905cc9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f: A→B is bijective, then f⁻¹: B→A exists and is",
+  "formula": "",
+  "options": [
+   "Only surjective",
+   "Only injective",
+   "Also bijective",
+   "Not a function"
+  ],
+  "answer": 2,
+  "explain": "The inverse of a bijection is itself a bijection.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5c23dc03-ae73-4074-9bd3-4c96e30b0c73",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Domain of f(x) = √(x² − 9)",
+  "formula": "",
+  "options": [
+   "(−3,3)",
+   "ℝ",
+   "(−∞,−3]∪[3,∞)",
+   "[−3,3]"
+  ],
+  "answer": 2,
+  "explain": "x²−9 ≥ 0 ⟹ |x| ≥ 3, so x ≤ −3 or x ≥ 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c94eb09f-9d08-4542-a1ab-b1bccacc4022",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Domain of f(x) = log(x² − x − 6)",
+  "formula": "",
+  "options": [
+   "(−2,3)",
+   "(−∞,−2)∪(3,∞)",
+   "[−2,3]",
+   "ℝ−{−2,3}"
+  ],
+  "answer": 1,
+  "explain": "x²−x−6 > 0 ⟹ (x−3)(x+2) > 0 ⟹ x < −2 or x > 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "47d74361-8a20-4b71-9c95-6a4660eaa966",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "An even function satisfies",
+  "formula": "f(−x) = f(x)",
+  "options": [
+   "f(−x) = −f(x)",
+   "f(x+T) = f(x)",
+   "f(x)·f(−x) = 1",
+   "f(−x) = f(x)"
+  ],
+  "answer": 3,
+  "explain": "Even functions are symmetric about the y-axis: f(−x) = f(x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "afa6023c-5826-4bd3-84b8-a5b632b77c3b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "An odd function satisfies",
+  "formula": "f(−x) = −f(x)",
+  "options": [
+   "f(0) = 1",
+   "f(−x) = f(x)",
+   "f(x) ≥ 0",
+   "f(−x) = −f(x)"
+  ],
+  "answer": 3,
+  "explain": "Odd functions are symmetric about origin: f(−x) = −f(x).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2b0e269e-aa83-4987-b0aa-6549dbd584d1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Range of f(x) = sin x is",
+  "formula": "",
+  "options": [
+   "[0, 1]",
+   "[−1, 1]",
+   "ℝ",
+   "(−1, 1)"
+  ],
+  "answer": 1,
+  "explain": "sin x always lies between −1 and 1 inclusive for all real x.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "eaee402a-9743-4810-a361-ef95125cba4c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "f(x) = |x| is",
+  "formula": "",
+  "options": [
+   "Both even and odd",
+   "Odd, not even",
+   "Neither even nor odd",
+   "Even, not odd"
+  ],
+  "answer": 3,
+  "explain": "|−x| = |x|, so f(−x) = f(x); |x| is an even function.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9c85e940-129c-4894-8826-f8f61f5794a5",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "f(x) = x³ is",
+  "formula": "",
+  "options": [
+   "Odd function",
+   "Both",
+   "Neither",
+   "Even function"
+  ],
+  "answer": 0,
+  "explain": "f(−x) = (−x)³ = −x³ = −f(x), so x³ is an odd function.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1b919afa-672f-4568-8e2d-a87794973d6b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Power set P(A) of a set with 3 elements has how many elements?",
+  "formula": "2³ = 8",
+  "options": [
+   "6",
+   "3",
+   "9",
+   "8"
+  ],
+  "answer": 3,
+  "explain": "P(A) has 2ⁿ elements; for n = 3, that is 2³ = 8.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5bc83ac3-33bf-45d4-bcfc-f29a388070df",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A ∩ (B ∪ C) equals",
+  "formula": "(A∩B) ∪ (A∩C)",
+  "options": [
+   "(A∪B) ∩ (A∪C)",
+   "(A∪B) ∪ (A∪C)",
+   "(A∩B) ∪ (A∩C)",
+   "(A∩B) ∩ (A∩C)"
+  ],
+  "answer": 2,
+  "explain": "Distributive law: intersection distributes over union.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b8398a3a-f018-4064-b75d-fa7d69a36ddf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A ∪ (B ∩ C) equals",
+  "formula": "(A∪B) ∩ (A∪C)",
+  "options": [
+   "(A∩B) ∩ (A∩C)",
+   "(A∩B) ∪ (A∩C)",
+   "(A∪B) ∩ (A∪C)",
+   "(A∪B) ∪ (A∪C)"
+  ],
+  "answer": 2,
+  "explain": "Distributive law: union distributes over intersection.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e7520b0b-0eaf-488f-9d29-fb55d674d2d1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "For sets A and B, |A ∩ B| when A ⊆ B equals",
+  "formula": "|A∩B| = |A|",
+  "options": [
+   "|B|",
+   "|A|",
+   "|A| + |B|",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "If A ⊆ B every element of A is in B, so A∩B = A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5b6551cc-7292-4025-81b1-0964c2970b3c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Aᶜ ∩ Bᶜ equals (De Morgan extended)",
+  "formula": "(A∪B)ᶜ",
+  "options": [
+   "(A∩B)ᶜ",
+   "A∩B",
+   "A∪B",
+   "(A∪B)ᶜ"
+  ],
+  "answer": 3,
+  "explain": "De Morgan: complement of union = intersection of complements.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9a7bbe16-ea76-497e-94b4-a4363a7d43cf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Number of non-empty subsets of a set with n elements",
+  "formula": "2ⁿ − 1",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ",
+   "2ⁿ − 1",
+   "n²"
+  ],
+  "answer": 2,
+  "explain": "Total subsets = 2ⁿ; exclude the empty set → 2ⁿ−1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a5e711d5-8a2b-44c9-a60a-9b24fd32abb8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "If n(A)=3, n(B)=2, maximum value of n(A∪B) is",
+  "formula": "n(A∪B) ≤ n(A)+n(B)",
+  "options": [
+   "3",
+   "2",
+   "5",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Max union occurs when A∩B = ∅, giving n(A)+n(B) = 5.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fb1116af-77fd-4cc3-91f5-c062c5425690",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A − B in terms of complement equals",
+  "formula": "A ∩ Bᶜ",
+  "options": [
+   "Aᶜ ∪ B",
+   "A ∪ Bᶜ",
+   "A ∩ Bᶜ",
+   "Aᶜ ∩ B"
+  ],
+  "answer": 2,
+  "explain": "Set difference A−B contains elements in A but not in B.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f094dc9c-3714-491e-94cf-4a0658693230",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "A Δ B (symmetric difference) equals A∪B − ?",
+  "formula": "AΔB=(A∪B)−(A∩B)",
+  "options": [
+   "A∩B",
+   "AᶜΔBᶜ",
+   "B−A",
+   "A−B"
+  ],
+  "answer": 0,
+  "explain": "Symmetric difference removes the common part from the union.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8d986ffa-066a-4e24-8774-7eccb58950cf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Number of equivalence relations on a 2-element set {a,b}",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Either identity relation or full relation; exactly 2 equivalence relations.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8722107a-757a-49fb-b061-ab601d5af087",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "A relation R on A is antisymmetric if",
+  "formula": "aRb ∧ bRa ⇒ a=b",
+  "options": [
+   "aRb ⇒ bRa",
+   "aRb ∧ bRa ⇒ a=b",
+   "aRb ⇒ NOT bRa",
+   "aRa for all a"
+  ],
+  "answer": 1,
+  "explain": "Antisymmetric: both aRb and bRa can hold only when a equals b.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a9483d3-d930-4d06-baed-ce0e92a01e1c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "The void (empty) relation on set A is",
+  "formula": "R = ∅",
+  "options": [
+   "Symmetric but not reflexive",
+   "Both reflexive and transitive",
+   "Reflexive and symmetric",
+   "An equivalence relation"
+  ],
+  "answer": 0,
+  "explain": "Empty relation is symmetric & transitive vacuously, but NOT reflexive.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "554918a7-ac74-423a-8bd3-559e16da663e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Relations",
+  "prompt": "Number of reflexive relations on a set with n elements",
+  "formula": "2^(n²−n)",
+  "options": [
+   "2^(n²−n)",
+   "n²",
+   "2^(n²)",
+   "2^n"
+  ],
+  "answer": 0,
+  "explain": "Diagonal n pairs must be in R; remaining n²−n pairs are free.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "be9e57a5-69b8-4c08-bd69-9d8f13f2d9c4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "A function f: ℝ→ℝ, f(x)=x² is",
+  "formula": "",
+  "options": [
+   "Bijective",
+   "Neither injective nor surjective",
+   "Surjective but not injective",
+   "Injective but not surjective"
+  ],
+  "answer": 1,
+  "explain": "f(1)=f(−1) so not injective; negative reals have no preimage so not surjective.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dae0db93-4a14-4477-93c8-af1cd6da7a72",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f: A→B and g: B→C are both onto, then g∘f is",
+  "formula": "",
+  "options": [
+   "Not necessarily onto",
+   "Onto",
+   "One-one",
+   "Bijective"
+  ],
+  "answer": 1,
+  "explain": "Composition of two surjections is surjective.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9aa110f0-9765-447b-9468-1cb317933466",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f: A→B and g: B→C are both one-one, then g∘f is",
+  "formula": "",
+  "options": [
+   "Onto",
+   "One-one",
+   "Neither",
+   "Bijective"
+  ],
+  "answer": 1,
+  "explain": "Composition of two injections is injective.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a7090f51-160e-4f8c-94e1-2cc97fb98758",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Range of f(x) = cos x is",
+  "formula": "[-1, 1]",
+  "options": [
+   "[0, 1]",
+   "[−1, 1]",
+   "(−1, 1)",
+   "ℝ"
+  ],
+  "answer": 1,
+  "explain": "Cosine function achieves all values between −1 and 1 inclusive.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "93e1cd13-7389-4a7c-95b2-d9c7f5c0fcf1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Domain of f(x) = 1/√(x − 3) is",
+  "formula": "x > 3",
+  "options": [
+   "ℝ − {3}",
+   "(3, ∞)",
+   "[3, ∞)",
+   "(−∞, 3)"
+  ],
+  "answer": 1,
+  "explain": "Denominator must be real & non-zero: x−3 > 0 gives x > 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "438abac5-2275-44b8-91f3-97878a5fb209",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "f(x) = eˣ is classified as",
+  "formula": "",
+  "options": [
+   "Even",
+   "Odd",
+   "Neither even nor odd",
+   "Both even and odd"
+  ],
+  "answer": 2,
+  "explain": "eˣ ≠ e⁻ˣ and eˣ ≠ −e⁻ˣ, so it is neither even nor odd.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5352d5df-48a4-4d83-bc2d-63d473c92632",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "The period of f(x) = tan x is",
+  "formula": "T = π",
+  "options": [
+   "π/2",
+   "2π",
+   "2π/3",
+   "π"
+  ],
+  "answer": 3,
+  "explain": "tan(x+π) = tan x for all x in its domain; period is π.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e6b2545a-6acd-4ab6-9cb3-e9218845dc11",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Range of f(x) = [x] (greatest integer function) is",
+  "formula": "",
+  "options": [
+   "ℝ",
+   "ℤ (all integers)",
+   "(0,∞)",
+   "[0,∞)"
+  ],
+  "answer": 1,
+  "explain": "Floor function outputs only integers for any real input.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9bed8a85-24a8-4e17-8fe1-df223cf4536b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "f(x) = x|x| is",
+  "formula": "",
+  "options": [
+   "Even function",
+   "Neither",
+   "Odd function",
+   "Constant function"
+  ],
+  "answer": 2,
+  "explain": "f(−x)=−x|−x|=−x|x|=−f(x), so f is odd.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4d4e7f3d-cb22-47e0-aa6f-c47a08c532bb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "For bijection f: A→B, n(A) and n(B) satisfy",
+  "formula": "n(A) = n(B)",
+  "options": [
+   "n(A) ≥ n(B)",
+   "n(A) > n(B)",
+   "n(A) = n(B)",
+   "n(A) < n(B)"
+  ],
+  "answer": 2,
+  "explain": "A bijection is a one-one correspondence, requiring equal cardinalities.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "90ff99ff-25ff-48ba-b416-5d0c28e48041",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "Domain of f(x) = log(sin x) in [0, 2π] is",
+  "formula": "sin x > 0",
+  "options": [
+   "[0, π]",
+   "(0, 2π)",
+   "(π, 2π)",
+   "(0, π)"
+  ],
+  "answer": 3,
+  "explain": "log requires sin x > 0, which holds for x ∈ (0, π) in [0, 2π].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "55a2e712-4ad0-434a-9eda-91e161f56ac8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Functions",
+  "prompt": "If f(x)=2x+3 and g(x)=x−1, then f∘g(x) equals",
+  "formula": "f(g(x))",
+  "options": [
+   "x+2",
+   "2x+1",
+   "2x+3",
+   "2x−1"
+  ],
+  "answer": 1,
+  "explain": "f(g(x))=f(x−1)=2(x−1)+3=2x+1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c70c0406-2848-4782-a96d-9156b886f5fb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets",
+  "prompt": "Universal set U and any set A: A ∪ Aᶜ equals",
+  "formula": "A ∪ Aᶜ = U",
+  "options": [
+   "U",
+   "∅",
+   "A",
+   "Aᶜ"
+  ],
+  "answer": 0,
+  "explain": "A set and its complement together cover the entire universal set U.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

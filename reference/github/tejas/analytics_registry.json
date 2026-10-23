@@ -1,0 +1,546 @@
+{
+  "registry_version": "guide04-v1.0",
+  "source_sha256": "7364b6e6160fed327869c73bdbb887aa2c9f7207563a876213b345aac899d576",
+  "metrics": [
+    {
+      "metric_id": "A01",
+      "name": "Net awarded marks",
+      "inputs": "signed contributions under the current approved key.",
+      "formula": "S = sum(score_q), including explicitly identified awards.",
+      "evidence": "a finalized grading revision; otherwise show grading pending.",
+      "action": "inspect the largest lost-mark contributors and any adjustment notice.",
+      "limitation": "raw marks compare directly only within the same scoring context; they do not indicate national rank or percentile."
+    },
+    {
+      "metric_id": "A02",
+      "name": "Fully correct response count",
+      "inputs": "final committed response and full-correct evaluation outcome.",
+      "formula": "C = count(full_correct).",
+      "evidence": "all relevant items graded; preserve a pending count if any remain unresolved.",
+      "action": "revisit correct answers whose reasoning felt uncertain.",
+      "limitation": "an observed correct answer can result from guessing or prior exposure and does not establish concept mastery."
+    },
+    {
+      "metric_id": "A03",
+      "name": "Incorrect and partial outcomes",
+      "inputs": "distinct evaluation outcomes.",
+      "formula": "W = count(incorrect), P = count(partial_credit); display both separately within this analysis.",
+      "evidence": "approved adapter classification.",
+      "action": "open the wrong list first, then examine why partial answers failed full-credit criteria.",
+      "limitation": "a partially correct multiselect response is not equivalent to a wrong single-choice answer; do not flatten their explanations."
+    },
+    {
+      "metric_id": "A04",
+      "name": "Attempted-answer accuracy",
+      "inputs": "C and A = C + P + W.",
+      "formula": "100 * C / A.",
+      "evidence": "A > 0; show the exact fraction for any A, but suppress strength labels below 10 attempts.",
+      "action": "inspect inaccurate attempted topics before increasing attempts blindly.",
+      "limitation": "excluding unanswered items can make selective students look stronger; pair this value with completion and partial-credit counts."
+    },
+    {
+      "metric_id": "A05",
+      "name": "Response completion rate",
+      "inputs": "attempted A and eligible delivered E.",
+      "formula": "100 * A / E, with unanswered count E - A.",
+      "evidence": "E > 0 and submission finalized.",
+      "action": "distinguish unvisited questions from viewed but unanswered questions before planning coverage.",
+      "limitation": "completion rewards submitting a response, not correct reasoning; high completion can coexist with negative marks and poor accuracy."
+    },
+    {
+      "metric_id": "A06",
+      "name": "Ordinary positive marks earned",
+      "inputs": "ordinary item contributions s_q.",
+      "formula": "G = sum(max(s_q, 0)), excluding separate award-only adjustments B.",
+      "evidence": "finalized ordinary grading.",
+      "action": "identify which subjects and question types generate the positive marks.",
+      "limitation": "G ignores penalties and is not the final result; partial-credit contributions remain positive marks rather than full-correct counts."
+    },
+    {
+      "metric_id": "A07",
+      "name": "Penalty marks lost",
+      "inputs": "negative ordinary contributions.",
+      "formula": "L = sum(max(-s_q, 0)).",
+      "evidence": "finalized grading; zero is valid when the preset has no negative marking.",
+      "action": "review the exact penalized responses and their stated confidence where available.",
+      "limitation": "a penalty does not prove an irresponsible guess; a student may have made a sincere reasoning error."
+    },
+    {
+      "metric_id": "A08",
+      "name": "Penalty-to-positive-marks ratio",
+      "inputs": "L and G.",
+      "formula": "100 * L / G.",
+      "evidence": "G > 0; otherwise show L with ratio unavailable.",
+      "action": "compare the ratio across comparable first attempts and inspect preventable error categories.",
+      "limitation": "values may exceed 100 percent; do not clamp them. This is not penalty divided by final net marks, which becomes unstable near zero."
+    },
+    {
+      "metric_id": "A09",
+      "name": "Percentage of configured maximum marks",
+      "inputs": "total S and current effective maximum M from the scoring policy.",
+      "formula": "100 * S / M.",
+      "evidence": "M > 0 and all special awards resolved.",
+      "action": "read alongside raw marks to understand the scale of this paper.",
+      "limitation": "allow negative percentages where rules permit negative scores; this percentage is not a cohort percentile or an official normalized score."
+    },
+    {
+      "metric_id": "A10",
+      "name": "Subject marks contribution",
+      "inputs": "item-to-subject assignment and signed contributions.",
+      "formula": "S_subject = sum(s_q within subject); show G_subject, L_subject and awards separately.",
+      "evidence": "every item has one approved primary scoring subject.",
+      "action": "choose a subject for detailed review based on its actual mark losses and coverage.",
+      "limitation": "subjects with different item counts or time demands cannot be judged solely by raw totals."
+    },
+    {
+      "metric_id": "A11",
+      "name": "Chapter mark contribution",
+      "inputs": "approved chapter tags, item score and tag weights.",
+      "formula": "sum(w_qg * s_q), where weights across a question's assigned chapters sum to one.",
+      "evidence": "reviewed chapter mapping; show recommendations only for groups with at least 10 attempts.",
+      "action": "locate chapters contributing losses.",
+      "limitation": "fractional attribution is an accounting convention, not a measurement of each chapter's causal role."
+    },
+    {
+      "metric_id": "A12",
+      "name": "Concept attempted accuracy",
+      "inputs": "fully correct and attempted items matching one approved concept.",
+      "formula": "100 * C_concept / A_concept.",
+      "evidence": "denominator positive; advice requires at least 10 distinct items across two sessions.",
+      "action": "inspect repeated reasoning errors within the concept.",
+      "limitation": "overlapping tags make separate concept cards nonadditive, and unequal item difficulty can distort comparisons."
+    },
+    {
+      "metric_id": "A13",
+      "name": "Response-type performance",
+      "inputs": "response type, signed marks and configured maxima.",
+      "formula": "sum(s_q) / sum(max_q), separately for single-choice, numerical and supported multiselect categories.",
+      "evidence": "positive maximum; recommend changes only above 10 items per type.",
+      "action": "compare handling of input and selection tasks.",
+      "limitation": "response-type differences may reflect topic and marking differences rather than input skill."
+    },
+    {
+      "metric_id": "A14",
+      "name": "Editorial difficulty outcome matrix",
+      "inputs": "human-approved difficulty labels and final outcomes.",
+      "formula": "C/A and net marks within each editorial band, with unanswered counts.",
+      "evidence": "at least 10 attempted items per band for interpretation; unknown labels remain a separate row.",
+      "action": "identify easier-band errors worth checking first.",
+      "limitation": "editorial difficulty is a judgment and must not masquerade as nationally calibrated difficulty."
+    },
+    {
+      "metric_id": "A15",
+      "name": "First-exposure versus repeat performance",
+      "inputs": "canonical item exposure history and solution access before the attempt.",
+      "formula": "C/A separately for unseen, previously seen and solution-exposed items.",
+      "evidence": "known exposure history and at least 10 attempts per compared group.",
+      "action": "favor fresh questions when checking transfer.",
+      "limitation": "remembered answers and self-selected repeats inflate performance; cross-group gaps do not estimate the effect of studying."
+    },
+    {
+      "metric_id": "A16",
+      "name": "Timer time consumed",
+      "inputs": "server start, effective deadline, authorized adjustments and submission receipt.",
+      "formula": "min(submitted_at, deadline_at) - started_at, adjusted by documented timer rules.",
+      "evidence": "complete server clock ledger.",
+      "action": "examine whether substantial available time remained at submission.",
+      "limitation": "elapsed time includes offline or hidden-page periods in an unpaused timed exam; it does not measure active thinking."
+    },
+    {
+      "metric_id": "A17",
+      "name": "Observed visible question time",
+      "inputs": "question-enter, question-leave, visibility and capped heartbeat intervals.",
+      "formula": "union duration of valid visible intervals attributed to each question, summed without overlap.",
+      "evidence": "valid timestamp order and coverage flags.",
+      "action": "compare where observable attention was allocated.",
+      "limitation": "visibility does not establish mental focus, and a static visible page may still be actively read."
+    },
+    {
+      "metric_id": "A18",
+      "name": "Unobserved timer fraction",
+      "inputs": "timer duration D, visible attributed T and recorded hidden duration H.",
+      "formula": "100 * max(D - T - H, 0) / D after interval reconciliation.",
+      "evidence": "D > 0; distinguish known hidden time from missing events.",
+      "action": "inspect connection or telemetry gaps before trusting timing advice.",
+      "limitation": "unobserved time must not be called laziness, cheating or distraction."
+    },
+    {
+      "metric_id": "A19",
+      "name": "Time on slow incorrect responses",
+      "inputs": "wrong items, observed time and approved per-item correct-response median.",
+      "formula": "sum(T_q where incorrect and T_q > 2 * benchmark_q).",
+      "evidence": "five usable wrong items and at least 30 correct cohort times per benchmark.",
+      "action": "review stopping and revisiting tactics.",
+      "limitation": "this descriptive threshold is configurable; slow errors may reflect legitimate effort, not wasted thought."
+    },
+    {
+      "metric_id": "A20",
+      "name": "Question budget overrun",
+      "inputs": "a student-approved pretest time budget b_q and observed T_q.",
+      "formula": "sum(max(T_q - b_q, 0)); list individual overruns.",
+      "evidence": "budget existed before the attempt and valid timing; otherwise unavailable.",
+      "action": "adjust the next practice budget after reviewing difficulty.",
+      "limitation": "the overrun is measured against a plan, not an optimal schedule or guaranteed lost marks."
+    },
+    {
+      "metric_id": "A21",
+      "name": "Subject time allocation",
+      "inputs": "valid question-visible time and primary subject.",
+      "formula": "100 * T_subject / sum(T_subject), alongside absolute minutes.",
+      "evidence": "positive observed time and at least 90 percent usable item timing.",
+      "action": "compare allocation with the student's pretest plan and mark contribution.",
+      "limitation": "equal subject time is not inherently desirable; different papers and personal strengths require different allocations."
+    },
+    {
+      "metric_id": "A22",
+      "name": "First-visit duration",
+      "inputs": "each eligible item's first valid visible visit.",
+      "formula": "median(first_visit_seconds), with a distribution by outcome.",
+      "evidence": "at least five usable first visits per reported group.",
+      "action": "identify where an initial scan became an extended attempt.",
+      "limitation": "first-visit time may include reading shared passages or diagrams; it is not pure solution time."
+    },
+    {
+      "metric_id": "A23",
+      "name": "Revisit time share",
+      "inputs": "visible visits ordered per item.",
+      "formula": "100 * sum(duration of visits after the first) / total attributed time.",
+      "evidence": "positive total and at least five visited items.",
+      "action": "inspect whether revisits resolved uncertainty or repeated an unproductive approach.",
+      "limitation": "a high revisit share can be a sensible checking strategy; it is not automatically inefficient."
+    },
+    {
+      "metric_id": "A24",
+      "name": "Positive score difference after revisions",
+      "inputs": "first committed response, final response and current scoring policy.",
+      "formula": "sum(max(score(final_q) - score(first_commit_q), 0)).",
+      "evidence": "complete commitments for revised items; show exact differences after one revision.",
+      "action": "review the reasoning behind beneficial changes.",
+      "limitation": "this compares recorded endpoints and cannot prove that changing answers caused improvement or predict future gains."
+    },
+    {
+      "metric_id": "A25",
+      "name": "Negative score difference after revisions",
+      "inputs": "the same committed endpoints.",
+      "formula": "sum(max(score(first_commit_q) - score(final_q), 0)).",
+      "evidence": "complete revision history; annotate clears and timeout acceptance rules.",
+      "action": "study harmful changes and the evidence used to justify them.",
+      "limitation": "final correctness is hindsight; do not prescribe never changing answers from one outcome or count uncommitted drafts as lost marks."
+    },
+    {
+      "metric_id": "A26",
+      "name": "Late-window attempted accuracy",
+      "inputs": "time of first accepted response commitment and final outcome.",
+      "formula": "C/A for items first committed in the final 20 percent of authorized duration versus earlier items.",
+      "evidence": "at least 10 items in each group and valid timestamps.",
+      "action": "review late errors and pace planning.",
+      "limitation": "late items may be harder or from another subject; the gap does not diagnose fatigue."
+    },
+    {
+      "metric_id": "A27",
+      "name": "Recovery of unanswered review items",
+      "inputs": "items first marked for review while unanswered and their final outcomes.",
+      "formula": "recovered full-correct items / initially unanswered review items.",
+      "evidence": "at least five such items and ordered review events.",
+      "action": "examine which revisit choices converted omissions into correct responses.",
+      "limitation": "a review flag is an interface state, and successful recovery does not reveal the optimal review order."
+    },
+    {
+      "metric_id": "A28",
+      "name": "Unvisited eligible-item rate",
+      "inputs": "delivered ordinary items and successful question-render events.",
+      "formula": "100 * count(no render recorded) / E.",
+      "evidence": "E > 0, reconciled navigation events and at least 95 percent timer duration accounted for by known visible or hidden intervals.",
+      "action": "practice an initial scan if entire sections were missed.",
+      "limitation": "missing render events can mimic unvisited questions; show unavailable when navigation evidence is incomplete."
+    },
+    {
+      "metric_id": "A29",
+      "name": "Time spent on viewed omissions",
+      "inputs": "final unanswered items with recorded visits and visible duration.",
+      "formula": "sum(T_q for viewed and unanswered items), with count and question list.",
+      "evidence": "valid item timings and at least 90 percent relevant coverage.",
+      "action": "review whether a timely skip or an alternate method would help.",
+      "limitation": "unanswered effort may improve understanding; do not automatically classify these minutes as waste."
+    },
+    {
+      "metric_id": "A30",
+      "name": "Median time on fully correct items",
+      "inputs": "visible attributed durations for fully correct responses.",
+      "formula": "median(T_q), split by subject or response type.",
+      "evidence": "at least five correct timed items per personal group.",
+      "action": "identify unusually long correct solutions to compare with an approved shorter method.",
+      "limitation": "faster is not always better, and comparing unlike item mixtures can give a misleading speed conclusion."
+    },
+    {
+      "metric_id": "A31",
+      "name": "Overall platform cohort percentile",
+      "inputs": "the learner's net score s and eligible cohort scores.",
+      "formula": "100 * count(score <= s) / N.",
+      "evidence": "N >= 100; otherwise suppress the percentile.",
+      "action": "compare standing on this specific mock while reviewing subject gaps.",
+      "limitation": "this self-selected platform cohort is not the official exam population; an apparent rise can reflect cohort changes."
+    },
+    {
+      "metric_id": "A32",
+      "name": "Subject platform cohort percentile",
+      "inputs": "approved subject net scores for the same cohort.",
+      "formula": "100 * count(subject_score <= learner_subject_score) / N.",
+      "evidence": "N >= 100 and common subject scoring.",
+      "action": "identify subjects with weaker relative standing on this paper.",
+      "limitation": "never average subject percentiles to produce total percentile; ties and differing distributions prevent that shortcut."
+    },
+    {
+      "metric_id": "A33",
+      "name": "Item full-correct cohort proportion",
+      "inputs": "one binary-eligible item's full-correct outcomes and all eligible delivered attempts.",
+      "formula": "p_q = C_q / N_q, including unanswered responses in N_q.",
+      "evidence": "N_q >= 100.",
+      "action": "check wrong answers on widely solved questions first.",
+      "limitation": "this is a cohort response statistic, not the student's question-wise ability percentile or a permanent intrinsic difficulty rating."
+    },
+    {
+      "metric_id": "A34",
+      "name": "Item accuracy among attempted responses",
+      "inputs": "the same item's full-correct and nonempty committed responses.",
+      "formula": "C_q / A_q.",
+      "evidence": "cohort N_q >= 100 and A_q >= 30.",
+      "action": "distinguish low success from low willingness to attempt.",
+      "limitation": "students select which questions to attempt, so this conditional rate is biased toward respondents and should always accompany the overall proportion."
+    },
+    {
+      "metric_id": "A35",
+      "name": "Committed option-selection distribution",
+      "inputs": "canonical options chosen in a single-choice item.",
+      "formula": "count(option_j) / A_q for every option, with unanswered displayed separately.",
+      "evidence": "N_q >= 100 and A_q >= 30; suppress option cells below 10 learners in shared views.",
+      "action": "examine common distractors after solution release.",
+      "limitation": "popularity alone cannot establish the underlying misconception, and shuffled option letters must be canonicalized."
+    },
+    {
+      "metric_id": "A36",
+      "name": "Correct-response time percentile",
+      "inputs": "the learner's visible time t and valid correct cohort times.",
+      "formula": "100 * count(cohort_time >= t) / N_correct; higher means faster-or-equal within correct responses.",
+      "evidence": "cohort >= 100, N_correct >= 30 and valid personal time.",
+      "action": "consider a shorter approved method.",
+      "limitation": "correctness-conditioned selection and telemetry uncertainty prevent an ability-percentile interpretation."
+    },
+    {
+      "metric_id": "A37",
+      "name": "Cohort median correct-response time",
+      "inputs": "valid times from fully correct, first-exposure cohort responses.",
+      "formula": "median(times), with the interquartile range.",
+      "evidence": "cohort >= 100 and at least 30 usable correct times.",
+      "action": "compare expected practice pacing with this specific question's observed distribution.",
+      "limitation": "the median reflects this cohort and interface; it is not an official ideal time or universal time limit."
+    },
+    {
+      "metric_id": "A38",
+      "name": "Personal-to-benchmark time ratio",
+      "inputs": "valid personal time t and positive A37 median m.",
+      "formula": "t / m.",
+      "evidence": "A37 available and learner fully correct; otherwise provide personal time only.",
+      "action": "inspect ratios substantially above a configurable threshold without chasing speed indiscriminately.",
+      "limitation": "reading accommodations, language and solution style can affect timing; the ratio does not measure intelligence or concentration."
+    },
+    {
+      "metric_id": "A39",
+      "name": "Item omission cohort rate",
+      "inputs": "eligible delivered item attempts and final unanswered outcomes.",
+      "formula": "U_q / N_q.",
+      "evidence": "N_q >= 100; distinguish known unvisited from viewed omissions only with usable telemetry.",
+      "action": "recognize questions the cohort often postpones.",
+      "limitation": "omissions can reflect placement, section strategy or time pressure as well as difficulty; do not infer a single cause."
+    },
+    {
+      "metric_id": "A40",
+      "name": "Item upper-minus-lower response difference",
+      "inputs": "binary outcomes and rest-of-test net scores excluding this item.",
+      "formula": "p_upper - p_lower for highest and lowest rest-score quartiles.",
+      "evidence": "N >= 200, at least 50 per group and nonconstant rest scores; resolve boundary ties with documented fractional weights.",
+      "action": "flag negative or unusual values for content review.",
+      "limitation": "this descriptive discrimination signal is unstable under narrow score ranges and is not proof of a bad question."
+    },
+    {
+      "metric_id": "A41",
+      "name": "Confidence calibration by bin",
+      "inputs": "optional precommit probability ratings p and binary outcomes y.",
+      "formula": "mean(p) and mean(y) within declared probability bins.",
+      "evidence": "at least 20 rated items overall and 10 per displayed bin.",
+      "action": "inspect confident errors and cautious successes.",
+      "limitation": "self-reported probabilities are noisy; observed calibration does not establish a stable personal trait or justify universal guessing rules."
+    },
+    {
+      "metric_id": "A42",
+      "name": "Binary Brier score",
+      "inputs": "genuine precommit p in [0,1] and y equal to one for full correctness.",
+      "formula": "mean((p - y)^2), with lower values indicating closer predictions.",
+      "evidence": "at least 20 binary-rated distinct items; omit partial-credit items.",
+      "action": "improve probability estimates using reviewed explanations.",
+      "limitation": "item mix affects the score, and this is calibration evidence, not an intelligence or mastery score."
+    },
+    {
+      "metric_id": "A43",
+      "name": "Low-confidence penalty exposure",
+      "inputs": "precommit confidence, configurable threshold c and signed contributions.",
+      "formula": "sum(max(-s_q,0) where p_q < c), plus the rated attempt count.",
+      "evidence": "at least 10 genuinely rated attempts; default c = 0.20 is a product proposal.",
+      "action": "review these choices against the marking policy.",
+      "limitation": "low confidence does not prove blind guessing, and retrospective confidence is excluded."
+    },
+    {
+      "metric_id": "A44",
+      "name": "Assumption-based expected marks",
+      "inputs": "user-supplied correctness probability p, full reward a and wrong penalty magnitude b for a simple binary item.",
+      "formula": "EV = p*a - (1-p)*b; break-even p = b/(a+b).",
+      "evidence": "a+b > 0 and compatible marking rules.",
+      "action": "explore practice decisions.",
+      "limitation": "this is a hypothetical model; unknown p and time opportunity cost prevent guaranteed gains."
+    },
+    {
+      "metric_id": "A45",
+      "name": "Confirmed error-cause distribution",
+      "inputs": "learner-confirmed or teacher-reviewed causes for wrong items.",
+      "formula": "count(cause) / number of labeled wrong items, with unknown and unlabeled counts separate.",
+      "evidence": "at least five labeled errors before recommending a pattern.",
+      "action": "select a targeted checking drill.",
+      "limitation": "a chosen distractor does not prove a cause; preserve multiple possible causes and allow labels to be corrected."
+    },
+    {
+      "metric_id": "A46",
+      "name": "Comparable first-attempt score change",
+      "inputs": "latest score percentage and the preceding three comparable first-attempt score percentages.",
+      "formula": "latest minus median(previous three).",
+      "evidence": "four approved blueprint-matched tests with matching mode and scoring context.",
+      "action": "inspect which topic outcomes accompany the change.",
+      "limitation": "blueprint similarity does not guarantee equal difficulty; the difference is descriptive rather than a causal learning estimate."
+    },
+    {
+      "metric_id": "A47",
+      "name": "Fresh concept accuracy change",
+      "inputs": "distinct new concept-tagged items in two chronological windows.",
+      "formula": "100 * (C_recent/A_recent - C_prior/A_prior).",
+      "evidence": "at least 20 items in each window, reviewed tags and no solution exposure.",
+      "action": "verify whether the concept needs another drill.",
+      "limitation": "changing difficulty and item selection can explain the gap; show counts and overlap checks."
+    },
+    {
+      "metric_id": "A48",
+      "name": "Comparable score variability",
+      "inputs": "score percentages from comparable first attempts.",
+      "formula": "sample standard deviation sqrt(sum((x-mean)^2)/(n-1)).",
+      "evidence": "at least five tests; display the individual observations.",
+      "action": "review large swings and the associated exam conditions.",
+      "limitation": "variability is not a personality, anxiety or attention diagnosis, and small test histories cannot establish a stable reliability profile."
+    },
+    {
+      "metric_id": "A49",
+      "name": "Repeated-item score difference",
+      "inputs": "first and later score for the same canonical item under the same effective key.",
+      "formula": "mean(later_score - first_score) across paired items.",
+      "evidence": "at least 10 pairs and known exposure state.",
+      "action": "use improvement as feedback, then test a fresh related item.",
+      "limitation": "remembered answers can drive the gain; do not mix repeated-item performance into first-exposure cohort percentiles."
+    },
+    {
+      "metric_id": "A50",
+      "name": "Unresolved review backlog",
+      "inputs": "wrong or omitted first-exposure items and explicit review-task states.",
+      "formula": "count(open review tasks), with age since the attempt and topic breakdown.",
+      "evidence": "at least one qualifying task; no mastery label.",
+      "action": "schedule a manageable next review block.",
+      "limitation": "closing a task records workflow completion, not concept mastery; automatic closure requires a clearly stated fresh-item check policy."
+    },
+    {
+      "metric_id": "A51",
+      "name": "Recurring concept error count",
+      "inputs": "distinct incorrect first-exposure items sharing a reviewed concept across sessions.",
+      "formula": "count(distinct wrong canonical items), with attempted denominator.",
+      "evidence": "at least five attempted concept items over three sessions before a recurring-pattern flag.",
+      "action": "revisit the underlying method rather than memorizing individual answers.",
+      "limitation": "related items and difficulty differences prevent treating the count as an independent diagnosis."
+    },
+    {
+      "metric_id": "A52",
+      "name": "Fresh review-check success rate",
+      "inputs": "new, approved counterpart items attempted after a documented review task.",
+      "formula": "full-correct checks / attempted fresh checks.",
+      "evidence": "at least 10 checks; exclude the original item and solution-exposed items.",
+      "action": "decide whether to continue the drill or expand to harder examples.",
+      "limitation": "selected checks can be easier than exams; success demonstrates these checks, not guaranteed transfer."
+    },
+    {
+      "metric_id": "A53",
+      "name": "Delayed fresh-check accuracy",
+      "inputs": "fresh counterpart items taken 14 days after review, allowing a declared plus/minus seven-day window.",
+      "formula": "C_delayed/A_delayed.",
+      "evidence": "at least 10 fresh checks with valid review and attempt dates.",
+      "action": "schedule spaced review if errors recur.",
+      "limitation": "this proposed schedule is configurable and later accuracy also reflects additional learning, item mix and missing follow-up participation."
+    },
+    {
+      "metric_id": "A54",
+      "name": "Assigned prerequisite coverage",
+      "inputs": "teacher-approved prerequisite tags and qualifying attempted practice.",
+      "formula": "covered assigned tags / total assigned prerequisite tags; define covered as at least one valid attempt.",
+      "evidence": "an explicit assignment and a positive tag count.",
+      "action": "identify prerequisites not yet practiced.",
+      "limitation": "coverage records exposure, not understanding; one attempt cannot certify readiness for a dependent concept."
+    },
+    {
+      "metric_id": "A55",
+      "name": "Error-category marks-at-stake ceiling",
+      "inputs": "confirmed error-category items, current score s_q and item maximum m_q.",
+      "formula": "sum(m_q - s_q) for those wrong items.",
+      "evidence": "reviewed cause labels and valid maxima; exact count always visible.",
+      "action": "prioritize categories with several concrete examples.",
+      "limitation": "this is a hindsight arithmetic ceiling, not predicted recoverable marks; fixing every error may require time and may not recur."
+    },
+    {
+      "metric_id": "A56",
+      "name": "Released-solution consultation rate",
+      "inputs": "eligible released review items and authorized solution-open events.",
+      "formula": "distinct authorized opened solutions within the eligible review set / distinct released review items.",
+      "evidence": "a positive released-item denominator and valid event access.",
+      "action": "open relevant explanations for unreviewed errors.",
+      "limitation": "opening a solution does not prove reading or understanding; no engagement event should be collected before the solution becomes accessible."
+    },
+    {
+      "metric_id": "A57",
+      "name": "Observed solution review duration",
+      "inputs": "visible solution-panel visits and capped heartbeat intervals.",
+      "formula": "union of observed visible durations, with median duration per opened item.",
+      "evidence": "at least five usable solution visits for a summary.",
+      "action": "compare a review routine with its planned duration.",
+      "limitation": "time on screen is not learning time, and copying a method is not demonstrated transfer."
+    },
+    {
+      "metric_id": "A58",
+      "name": "Approved-key score revision impact",
+      "inputs": "preserved historical report and newly approved grading revision.",
+      "formula": "S_new - S_old, with every changed item contribution listed.",
+      "evidence": "both reproducible ledgers and a published correction reason.",
+      "action": "understand the corrected result and refreshed comparisons.",
+      "limitation": "score changes from a key revision are not improvement or deterioration in the learner's ability."
+    },
+    {
+      "metric_id": "A59",
+      "name": "Approved explanation availability",
+      "inputs": "released delivered items and approved question-to-solution mappings.",
+      "formula": "mapped approved explanations / released delivered items, with unavailable identifiers.",
+      "evidence": "positive released-item denominator; count only approved mappings.",
+      "action": "report missing explanations and revisit when corrected.",
+      "limitation": "an available mapping does not guarantee explanatory quality, so preserve source review status and student feedback."
+    },
+    {
+      "metric_id": "A60",
+      "name": "Usable timing evidence coverage",
+      "inputs": "eligible items, reconciled visit events and timing quality flags.",
+      "formula": "items with usable timing / eligible items; also show known timed duration / timer duration.",
+      "evidence": "positive denominators and the declared quality policy.",
+      "action": "understand why some speed suggestions are unavailable.",
+      "limitation": "high coverage does not prove precise thinking time; missing events and visible-but-unfocused periods remain possible."
+    }
+  ]
+}

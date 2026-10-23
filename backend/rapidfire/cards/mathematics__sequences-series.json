@@ -1,0 +1,902 @@
+[
+ {
+  "id": "d59402ed-e5ac-4e79-aa66-606113934677",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of first n natural numbers",
+  "formula": "Sₙ = n(n+1)/2",
+  "options": [
+   "n²/2",
+   "n(n+1)/2",
+   "n(n+2)/2",
+   "n(n-1)/2"
+  ],
+  "answer": 1,
+  "explain": "Sum 1+2+…+n = n(n+1)/2 is the fundamental AP sum formula.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "96f05175-7ecf-40ca-b385-539c494058bf",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "nth term of an AP with first term a and common difference d",
+  "formula": "aₙ = a + (n−1)d",
+  "options": [
+   "a·d^(n−1)",
+   "a − (n−1)d",
+   "a + nd",
+   "a + (n−1)d"
+  ],
+  "answer": 3,
+  "explain": "General term of AP: aₙ = a + (n−1)d.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f8b8fdbd-0a7e-4895-99f8-2b0b6abc761d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of first n terms of a GP with ratio r ≠ 1",
+  "formula": "Sₙ = a(rⁿ−1)/(r−1)",
+  "options": [
+   "a(rⁿ−1)/(r−1)",
+   "a(1−rⁿ)/(r+1)",
+   "a(rⁿ+1)/(r+1)",
+   "a·rⁿ/(r−1)"
+  ],
+  "answer": 0,
+  "explain": "GP sum formula: Sₙ = a(rⁿ−1)/(r−1) for r ≠ 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c43ef836-840a-47bb-a544-e33762f25de2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of infinite GP converges when",
+  "formula": "S∞ = a/(1−r), |r|<1",
+  "options": [
+   "r = 1",
+   "|r| > 1",
+   "|r| < 1",
+   "|r| ≤ 1"
+  ],
+  "answer": 2,
+  "explain": "Infinite GP S∞ = a/(1−r) exists only when |r| < 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "63a97015-4e56-40a2-8b89-5b14940d498d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "AM of two positive numbers a and b",
+  "formula": "AM = (a+b)/2",
+  "options": [
+   "∛(a²b)",
+   "2ab/(a+b)",
+   "√(ab)",
+   "(a+b)/2"
+  ],
+  "answer": 3,
+  "explain": "Arithmetic Mean of a, b is (a+b)/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7324dfb8-22dd-43ad-a167-809da5c57236",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "GM of two positive numbers a and b",
+  "formula": "GM = √(ab)",
+  "options": [
+   "√(ab)",
+   "2ab/(a+b)",
+   "(ab)^(1/3)",
+   "(a+b)/2"
+  ],
+  "answer": 0,
+  "explain": "Geometric Mean of a, b is √(ab).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ac48ec34-c53e-42fa-a0db-fb02abf2f0da",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "HM of two positive numbers a and b",
+  "formula": "HM = 2ab/(a+b)",
+  "options": [
+   "ab/(a+b)",
+   "2ab/(a+b)",
+   "(a+b)/2",
+   "√(ab)"
+  ],
+  "answer": 1,
+  "explain": "Harmonic Mean of a, b is 2ab/(a+b).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3a417ca6-c70e-400f-8250-5167d92975f6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Inequality relating AM, GM, HM for positive reals",
+  "formula": "AM ≥ GM ≥ HM",
+  "options": [
+   "HM ≥ GM ≥ AM",
+   "AM ≤ GM ≤ HM",
+   "AM ≥ GM ≥ HM",
+   "GM ≥ AM ≥ HM"
+  ],
+  "answer": 2,
+  "explain": "For positive reals, AM ≥ GM ≥ HM, equality when all numbers are equal.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "63e695a3-c63a-433a-ab34-0ba818be4c71",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Relation between AM, GM, HM",
+  "formula": "GM² = AM × HM",
+  "options": [
+   "GM = AM + HM",
+   "GM² = AM × HM",
+   "HM² = AM × GM",
+   "AM² = GM × HM"
+  ],
+  "answer": 1,
+  "explain": "For two positive numbers, GM² = AM × HM always holds.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "06fb7d3a-dea1-4bf4-be43-dd0ed87e0e59",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of squares of first n natural numbers",
+  "formula": "Σn² = n(n+1)(2n+1)/6",
+  "options": [
+   "n(n+1)/2",
+   "n²(n+1)²/4",
+   "n(n+1)(2n+1)/6",
+   "n(2n+1)(2n−1)/6"
+  ],
+  "answer": 2,
+  "explain": "1²+2²+…+n² = n(n+1)(2n+1)/6.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fe996395-aa31-4455-80c0-787a99709b5d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of cubes of first n natural numbers",
+  "formula": "Σn³ = [n(n+1)/2]²",
+  "options": [
+   "n³(n+1)/4",
+   "n²(n+1)/2",
+   "[n(n+1)/2]²",
+   "n(n+1)(2n+1)/6"
+  ],
+  "answer": 2,
+  "explain": "1³+2³+…+n³ = [n(n+1)/2]² = (Σn)².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1b003b24-7151-491a-bc7a-b333b3f0538b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If a, b, c are in AP, then b equals",
+  "formula": "b = (a+c)/2",
+  "options": [
+   "(a+c+2b)/3",
+   "2ac/(a+c)",
+   "√(ac)",
+   "(a+c)/2"
+  ],
+  "answer": 3,
+  "explain": "In AP, middle term b = AM of a and c, i.e., b = (a+c)/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cdc53b81-47a1-45a0-b712-68f21589448c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If a, b, c are in GP, then b equals",
+  "formula": "b² = ac",
+  "options": [
+   "b² = ac",
+   "b = (a+c)/2",
+   "2b = a+c",
+   "b³ = a²c"
+  ],
+  "answer": 0,
+  "explain": "In GP, middle term satisfies b² = ac (b is GM of a and c).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4dbbd2ab-cd09-4ea4-9fd8-245ca34803aa",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If a, b, c are in HP, then b equals",
+  "formula": "b = 2ac/(a+c)",
+  "options": [
+   "√(ac)",
+   "2ac/(a+c)",
+   "(a+c)/2",
+   "ac/(a+c)"
+  ],
+  "answer": 1,
+  "explain": "In HP, middle term b is HM of a and c: b = 2ac/(a+c).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "82492c30-5519-467b-9712-274fdc75953d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of AP: Sₙ in terms of first (a) and last (l) term",
+  "formula": "Sₙ = n(a+l)/2",
+  "options": [
+   "n(a+l)",
+   "n(l−a)/2",
+   "n(a+l)/2",
+   "(n−1)(a+l)/2"
+  ],
+  "answer": 2,
+  "explain": "Sₙ = n/2 × (first + last) = n(a+l)/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf37303c-bde3-49bb-9c26-b98e04dd9532",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Number of terms in AP: a, a+d, …, l",
+  "formula": "n = (l−a)/d + 1",
+  "options": [
+   "(l−a)/d",
+   "(l−a)/d + 1",
+   "(l+a)/d",
+   "(l−a)/d − 1"
+  ],
+  "answer": 1,
+  "explain": "n = (l − a)/d + 1 gives total terms in a finite AP.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fd1a0620-5b23-4e25-97ce-8fa9e9b6a3b6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If a₁, a₂,… is HP, then 1/a₁, 1/a₂,… is",
+  "formula": "",
+  "options": [
+   "AGP",
+   "GP",
+   "AP",
+   "HP"
+  ],
+  "answer": 2,
+  "explain": "By definition, reciprocals of HP terms form an AP.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0418b56e-e9fd-4fc5-acc6-782a0f2e5c4b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of n terms of an Arithmetico-Geometric series",
+  "formula": "Sₙ = a·Gₙ + d·r(Gₙ₋₁)/(1−r)",
+  "options": [
+   "Direct GP formula",
+   "Use Sₙ − r·Sₙ method",
+   "Direct AP formula",
+   "Telescoping only"
+  ],
+  "answer": 1,
+  "explain": "AGP sum is found by multiplying by r and subtracting (shift method).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3b8e59eb-c1dd-4c5e-90f1-1ce7d9d9e989",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Geometric mean of n positive numbers a₁…aₙ",
+  "formula": "GM = (a₁a₂…aₙ)^(1/n)",
+  "options": [
+   "(a₁a₂…aₙ)^(1/n)",
+   "(a₁+…+aₙ)/n",
+   "(a₁aₙ)^(1/2)",
+   "n/(1/a₁+…+1/aₙ)"
+  ],
+  "answer": 0,
+  "explain": "GM of n numbers is the nth root of their product.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2a478430-a9aa-4f45-87d0-dfd4be2fe10b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If S₁, S₂, S₃ are sums of n, 2n, 3n AP terms, then S₃ =",
+  "formula": "S₃ = 3(S₂ − S₁)",
+  "options": [
+   "2S₂ − S₁",
+   "3S₂ − S₁",
+   "3(S₂ − S₁)",
+   "S₁ + S₂"
+  ],
+  "answer": 2,
+  "explain": "Standard AP result: S₃ = 3(S₂ − S₁).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f0998886-adf8-445e-aafa-5a706d5efcac",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Common ratio r of GP if aₙ is known",
+  "formula": "r = aₙ₊₁/aₙ",
+  "options": [
+   "aₙ₊₁/aₙ",
+   "aₙ₊₁ − aₙ",
+   "aₙ − aₙ₋₁",
+   "aₙ/aₙ₊₂"
+  ],
+  "answer": 0,
+  "explain": "In GP the ratio of consecutive terms r = aₙ₊₁/aₙ is constant.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c88f3dba-5d8a-4ee9-b49a-546922953560",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If pth term of AP is q and qth term is p, then (p+q)th term is",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "p+q",
+   "p−q"
+  ],
+  "answer": 0,
+  "explain": "Classic AP result: if Tₚ = q, Tq = p then T_{p+q} = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "74c6c980-c30d-4d12-9c58-d1577093ec24",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of n terms of series: 1 + (1+d) + (1+2d) +… starting with a=1",
+  "formula": "Sₙ = n + d·n(n−1)/2",
+  "options": [
+   "n + d·n(n+1)/2",
+   "n + d·n(n−1)/2",
+   "n(1+d)/2",
+   "nd(n+1)/2"
+  ],
+  "answer": 1,
+  "explain": "Sₙ = na + d·n(n−1)/2; with a=1 gives n + dn(n−1)/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "16a893b5-8e10-4f38-af0d-aaffc98267eb",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "n geometric means between a and b: common ratio r =",
+  "formula": "r = (b/a)^{1/(n+1)}",
+  "options": [
+   "(b/a)^{1/n}",
+   "(b/a)^n",
+   "(b/a)^{1/(n+1)}",
+   "(b−a)/(n+1)"
+  ],
+  "answer": 2,
+  "explain": "Inserting n GMs between a, b gives GP with n+2 terms; r = (b/a)^{1/(n+1)}.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f6e500d7-efab-4be1-a46e-4e00ff30ff5d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "For an AP, if sum of n terms Sₙ = An² + Bn, the common difference is",
+  "formula": "d = 2A",
+  "options": [
+   "2A",
+   "A",
+   "2B",
+   "A + B"
+  ],
+  "answer": 0,
+  "explain": "aₙ = Sₙ − Sₙ₋₁ = 2An + (B−A); so d = coefficient of n difference = 2A.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "87e38ae5-3833-4b4f-939b-4449c344eb0c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "nth term of a GP with first term a and ratio r?",
+  "formula": "aₙ = a·rⁿ⁻¹",
+  "options": [
+   "a·rⁿ",
+   "a·rⁿ⁻¹",
+   "a+(n-1)r",
+   "a/rⁿ⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Each term is multiplied by r once more than the previous; aₙ = a·rⁿ⁻¹.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ffe54292-a266-422e-b903-041fac450253",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of first n terms of AP with first term a, last term l?",
+  "formula": "Sₙ = n(a+l)/2",
+  "options": [
+   "n(a+l)",
+   "n(2a+l)/2",
+   "(n-1)(a+l)/2",
+   "n(a+l)/2"
+  ],
+  "answer": 3,
+  "explain": "Average of first and last term multiplied by number of terms gives AP sum.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8c2bfff4-fced-41b6-8200-6e06be475eb7",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If Sₙ = 3n² + 2n for an AP, what is the 1st term a₁?",
+  "formula": "a₁ = S₁",
+  "options": [
+   "5",
+   "2",
+   "3",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "a₁ = S₁ = 3(1)² + 2(1) = 5; general aₙ = Sₙ − Sₙ₋₁.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6f970240-53df-4cc2-903f-b39fe35ee6ab",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of infinite series 1 + 2x + 3x² + … for |x|<1?",
+  "formula": "1/(1−x)²",
+  "options": [
+   "1/(1−x)²",
+   "1/(1+x)²",
+   "1/(1−x)",
+   "x/(1−x)²"
+  ],
+  "answer": 0,
+  "explain": "Differentiate sum of GP: d/dx[1/(1−x)] = 1/(1−x)² gives this AGP sum.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3d78356a-d6d8-42b8-8b25-04e2cf244739",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "For three numbers in HP, their reciprocals are in?",
+  "formula": "",
+  "options": [
+   "GP",
+   "AP",
+   "Neither",
+   "HP"
+  ],
+  "answer": 1,
+  "explain": "By definition, a,b,c in HP ⟺ 1/a, 1/b, 1/c in AP.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c742e540-0580-4b12-944e-b28d6c6bade6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "AM between two numbers a and b minus their GM equals?",
+  "formula": "AM−GM = (√a−√b)²/2",
+  "options": [
+   "(a−b)²/2",
+   "(√a+√b)²/2",
+   "(√a−√b)²/2",
+   "(a−b)/2"
+  ],
+  "answer": 2,
+  "explain": "AM−GM = (a+b)/2 − √(ab) = (√a−√b)²/2 ≥ 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c90c7203-42d2-4f0f-b247-044b0cb2c761",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If a, b, c are in GP and x, y, z in AP, then aˣ·bʸ·cᶻ simplifies when?",
+  "formula": "",
+  "options": [
+   "x+z=2y makes it a perfect square",
+   "x=y=z only",
+   "Never simplifies",
+   "Always 1"
+  ],
+  "answer": 0,
+  "explain": "Since b²=ac and x+z=2y (AP), aˣ·bʸ·cᶻ = (ac)^(x+z)/2·bʸ = b^(x+z)·bʸ = b^(x+2y+z).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "44c9f8ab-22cd-4c99-8e0b-ead635489f62",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "The sum 1·2 + 2·3 + 3·4 +…+ n(n+1) equals?",
+  "formula": "n(n+1)(n+2)/3",
+  "options": [
+   "n(n+1)(2n+1)/6",
+   "n(n+1)/2",
+   "n(n+1)(n+2)/3",
+   "n²(n+1)/2"
+  ],
+  "answer": 2,
+  "explain": "Σk(k+1) = Σk² + Σk = n(n+1)(2n+1)/6 + n(n+1)/2 = n(n+1)(n+2)/3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a088809b-ccb8-48ba-b201-f38ce3416431",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If the sum of n terms of a GP is Sₙ and S₂ₙ is given, S₂ₙ/Sₙ equals?",
+  "formula": "S₂ₙ/Sₙ = 1 + rⁿ",
+  "options": [
+   "1 + rⁿ",
+   "1 + r²ⁿ",
+   "rⁿ",
+   "2rⁿ"
+  ],
+  "answer": 0,
+  "explain": "S₂ₙ = Sₙ + rⁿ·Sₙ, so S₂ₙ/Sₙ = 1 + rⁿ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "81d3409f-a531-47c5-8257-c9bb2ed8e17b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "For AP: aₙ = 3n − 1. What is the common difference?",
+  "formula": "d = aₙ₊₁ − aₙ",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "−1"
+  ],
+  "answer": 0,
+  "explain": "If aₙ = 3n−1, then d = 3(n+1)−1−(3n−1) = 3; coefficient of n is d.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c1233df7-39f4-4e7d-9af3-97406c903562",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Harmonic mean H of two numbers a and b is?",
+  "formula": "H = 2ab/(a+b)",
+  "options": [
+   "√(ab)",
+   "2ab/(a+b)",
+   "(a+b)/2",
+   "ab/(a+b)"
+  ],
+  "answer": 1,
+  "explain": "H is defined as reciprocal of AM of reciprocals: H = 2/(1/a+1/b) = 2ab/(a+b).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "492dcc98-2ed0-423b-b881-0c67fad3c4a8",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of n terms of series: 1² + 3² + 5² +…(odd squares)?",
+  "formula": "n(2n−1)(2n+1)/3",
+  "options": [
+   "n(n+1)(2n+1)/6",
+   "n(2n+1)(2n+3)/3",
+   "n(2n−1)(2n+1)/3",
+   "n²(2n+1)/3"
+  ],
+  "answer": 2,
+  "explain": "Σ(2k−1)² for k=1 to n = n(2n−1)(2n+1)/3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9fa5af03-343c-4a47-8a8a-c8204dd375fd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If A, G are AM and GM of two positive reals, then the numbers are roots of?",
+  "formula": "x² − 2Ax + G² = 0",
+  "options": [
+   "x² − 2Ax + G² = 0",
+   "x² + 2Ax + G² = 0",
+   "x² − Ax + G = 0",
+   "x² − 2Gx + A² = 0"
+  ],
+  "answer": 0,
+  "explain": "Two numbers have sum = 2A and product = G², so quadratic is x²−2Ax+G²=0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "49754fbb-8205-43dc-8317-707086e09e5b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If n AMs are inserted between a and b, the common difference of resulting AP is?",
+  "formula": "d = (b−a)/(n+1)",
+  "options": [
+   "(b−a)/(n+1)",
+   "(b+a)/(n+1)",
+   "(b−a)/(n−1)",
+   "(b−a)/n"
+  ],
+  "answer": 0,
+  "explain": "Total (n+2) terms from a to b, so d = (b−a)/(n+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5fcf7fcf-dbde-4f7e-a3ae-d3fd5b86e9b1",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Product of n geometric means between a and b equals?",
+  "formula": "(√ab)ⁿ",
+  "options": [
+   "(ab)^(n/2)",
+   "(√ab)ⁿ",
+   "aⁿ·bⁿ",
+   "(ab)ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Each GM pair from ends multiplies to ab; product of n GMs = (ab)^(n/2) = (√ab)ⁿ.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2d8c50ca-889a-41ad-9bdb-7d7319b6579b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of series: 1/1·2 + 1/2·3 + 1/3·4 +…+ 1/n(n+1)?",
+  "formula": "n/(n+1)",
+  "options": [
+   "1/(n+1)",
+   "n/(n+1)",
+   "1 − 1/n",
+   "n/(n+2)"
+  ],
+  "answer": 1,
+  "explain": "Telescoping: each term = 1/k − 1/(k+1); sum = 1 − 1/(n+1) = n/(n+1).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "88de7e87-3fde-4954-9305-ace081a201ac",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "For a GP, if the product of first n terms is P and first term a, last aₙ, then P =?",
+  "formula": "P = (a·aₙ)^(n/2)",
+  "options": [
+   "(aₙ/a)^(n/2)",
+   "(a·aₙ)^(n/2)",
+   "a^n·r^(n²)",
+   "(a·aₙ)ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Terms pair symmetrically; product of each pair = a·aₙ, so P = (a·aₙ)^(n/2).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "430852c2-34f8-49a9-a1aa-d58aca83ffd9",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "The series 1 + 1/2 + 1/4 + 1/8 +… ∞ has sum?",
+  "formula": "S = a/(1−r)",
+  "options": [
+   "4",
+   "2",
+   "Diverges",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Infinite GP with a=1, r=1/2; S = 1/(1−1/2) = 2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a7d27f29-4541-4445-9033-043968e24671",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If the mth term of an AP is 1/n and nth term is 1/m, the (mn)th term is?",
+  "formula": "",
+  "options": [
+   "1/mn",
+   "1",
+   "0",
+   "m+n"
+  ],
+  "answer": 1,
+  "explain": "Using AP conditions: a=d=1/mn, so a_(mn) = 1/mn + (mn−1)/mn = 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a6e87717-801e-4309-9e5b-93b2e9d34b46",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Sum of series 1·1! + 2·2! + 3·3! +…+ n·n! equals?",
+  "formula": "(n+1)! − 1",
+  "options": [
+   "n·n!",
+   "(n+1)!",
+   "n! − 1",
+   "(n+1)! − 1"
+  ],
+  "answer": 3,
+  "explain": "k·k! = (k+1)! − k!; telescoping gives (n+1)! − 1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "90100d42-60be-4377-a721-6fde79cf21cd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If a₁, a₂,…aₙ are in AP, then 1/(a₁a₂) + 1/(a₂a₃) +…equals?",
+  "formula": "n/[d·a₁·aₙ₊₁]",
+  "options": [
+   "n/(a₁·aₙ)",
+   "1/(d·a₁·aₙ)",
+   "n/(d·a₁·aₙ₊₁)",
+   "1/(a₁·aₙ₊₁)"
+  ],
+  "answer": 2,
+  "explain": "Each term telescopes as (1/d)(1/aₖ − 1/aₖ₊₁); total sum = n/(d·a₁·aₙ₊₁).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "feb7a3e8-b0f5-44eb-97cb-ce7710bf1064",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "GM² = AM × HM holds for which numbers?",
+  "formula": "G² = A·H",
+  "options": [
+   "Only a,b>1",
+   "Only equal numbers",
+   "Only integers",
+   "Any two positive reals"
+  ],
+  "answer": 3,
+  "explain": "For any two positive reals a,b: G²=ab, A=(a+b)/2, H=2ab/(a+b); G²=AH always.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "82a3a3fe-bb5c-49d2-870c-e20b303b72c5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "If sum of first n terms of a series is n(n+2), the nth term aₙ is?",
+  "formula": "aₙ = Sₙ − Sₙ₋₁",
+  "options": [
+   "2n−1",
+   "n+2",
+   "n²+2",
+   "2n+1"
+  ],
+  "answer": 3,
+  "explain": "aₙ = n(n+2)−(n−1)(n+1) = n²+2n−n²+1 = 2n+1 for n≥2; verified for n=1.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "34987a1f-c059-4aef-b601-a4fbf403e65b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "For GP with first term a and ratio r, product of (2n+1) terms equals?",
+  "formula": "a^(2n+1) · r^(n(2n+1))",
+  "options": [
+   "a^n·r^(n²)",
+   "a^(2n+1)·rⁿ⁽²ⁿ⁺¹⁾",
+   "a·rⁿ raised to (2n+1)",
+   "(a·aₙ)^(2n+1)"
+  ],
+  "answer": 1,
+  "explain": "Middle term is a·rⁿ; product = (middle term)^(2n+1) = a^(2n+1)·r^(n(2n+1)).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f43420d1-57d1-4d27-a30b-18aa98c2f602",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sequences & Series",
+  "prompt": "Σk³ from k=1 to n equals (Σk)², i.e.?",
+  "formula": "[n(n+1)/2]²",
+  "options": [
+   "n(n+1)(2n+1)/6",
+   "n²(n+1)²/3",
+   "[n(n+1)]²/4",
+   "[n(n+1)/2]²"
+  ],
+  "answer": 3,
+  "explain": "The famous identity: 1³+2³+…+n³ = [n(n+1)/2]² = (Σk)².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

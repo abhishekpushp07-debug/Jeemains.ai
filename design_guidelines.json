@@ -1,0 +1,176 @@
+{
+  "app_name": "JEELIVE.AI",
+  "personality": "4 Tactile / Playful LIGHT fused with 1 iOS-Native Clean",
+  "personality_one_liner": "An energetic, trustworthy, and fast exam-prep experience that balances playful, tactile navigation with high-focus, clinical testing environments.",
+  "color": {
+    "surface": "#F5F7FC",
+    "onSurface": "#0B1F2A",
+    "surfaceSecondary": "#FFFFFF",
+    "onSurfaceSecondary": "#0B1F2A",
+    "surfaceTertiary": "#FFF5F3",
+    "onSurfaceTertiary": "#991B1B",
+    "surfaceInverse": "#0C1220",
+    "onSurfaceInverse": "#FFFFFF",
+    "brand": "#2459D8",
+    "onBrand": "#FFFFFF",
+    "brandPrimary": "#2459D8",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#0B2D80",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#FFF5F3",
+    "onBrandTertiary": "#991B1B",
+    "success": "#22C55E",
+    "onSuccess": "#FFFFFF",
+    "warning": "#F59E0B",
+    "onWarning": "#FFFFFF",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#3B82F6",
+    "onInfo": "#FFFFFF",
+    "border": "#E2E8F0",
+    "borderStrong": "#CBD5E1",
+    "divider": "#E2E8F0",
+    "muted": "#64748B",
+    "custom_examJee": "#D92525",
+    "custom_examBitsat": "#F97316",
+    "custom_examComedk": "#000000",
+    "custom_subjectPhysics": "#2459D8",
+    "custom_subjectChemistry": "#087B68",
+    "custom_subjectMaths": "#B92B45",
+    "custom_darkCard": "#141D2D"
+  },
+  "typography": {
+    "displayFontFamily": "Figtree",
+    "textFontFamily": "Figtree",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous tactile padding on home/hubs, strict functional padding in test player. Avoid unneeded nesting margins.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "2",
+  "navigation": "bottom_tabs",
+  "icon_set": "Phosphor",
+  "glassmorphism": {
+    "enabled": "true",
+    "do's": [
+      "Bottom tab bar behind floating diamond",
+      "Sticky header in hubs"
+    ],
+    "dont's": [
+      "Test player area (needs zero distraction)",
+      "Dense stat lists"
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Home",
+      "purpose": "Primary landing showing 2x2 exam tile grid and the All India Series banner.",
+      "states": {
+        "loading": "Skeleton of 2x2 grid and banner",
+        "empty": "N/A - Data driven",
+        "error": "Failed to load dashboard, Retry"
+      },
+      "layout": "Top-aligned content. 2x2 grid (flexWrap: 'wrap', justifyContent: 'space-between', width roughly 48% per tile) of large white rounded tiles. Below it, the All India JEE Mains Test Series banner in deep shining blue (#0B2D80). The banner contains an absolutely positioned 45-degree ribbon '100% AI' top-right (burgundy), and an inner pale block (#FFF5F3) for the tagline. Bottom bar must support a custom center half-out diamond for LIVE."
+    },
+    {
+      "name": "Rapid Fire",
+      "purpose": "Tinder-like swipable flashcard quiz for fast-paced practice.",
+      "states": {
+        "loading": "Center spinner",
+        "empty": "Illustration with 'All caught up!'",
+        "error": "Connection lost, retry"
+      },
+      "layout": "Full-screen experience. A single prominent card in the center (Reanimated + GestureHandler). User taps one of 4 short options to lock, then swipes right for next or left to skip. Includes a 20-second timer ring at the top. Background can be a subtle gradient to add depth."
+    },
+    {
+      "name": "Test Player",
+      "purpose": "High-focus, clinically clean interface for taking the actual exam.",
+      "states": {
+        "loading": "Loading exam engine...",
+        "empty": "N/A",
+        "error": "Failed to sync question."
+      },
+      "layout": "Strictly functional. White reading surface. Subject tabs (Physics, Chemistry, Math) using their specific colors. Question palette (grid of small numbered squares with states). Action bar fixed at bottom (Save & Next, Clear). Server timer top right."
+    },
+    {
+      "name": "Results & Solutions",
+      "purpose": "Post-exam analytics and question-by-question review.",
+      "states": {
+        "loading": "Analyzing performance...",
+        "empty": "No results found.",
+        "error": "Failed to load report."
+      },
+      "layout": "Tabbed view (Analysis, Progress, Confidence, Rank, Solutions). Solutions tab uses a horizontal question number rail below subject tabs. Content area shows one question and its detailed AI-generated solution."
+    },
+    {
+      "name": "Mission",
+      "purpose": "Share the app's vision and encourage sharing among students.",
+      "states": {
+        "loading": "Spinner",
+        "empty": "N/A",
+        "error": "Error loading mission."
+      },
+      "layout": "Editorial-style scroll. Full-width banner explaining the AI PYQ analysis (80 parameters), followed by a primary call-to-action to share the app."
+    }
+  ],
+  "images": {
+    "tile_jee": {
+      "url": "https://images.unsplash.com/photo-1725347740942-c5306e3c970f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGNvbG9yZnVsJTIwM2QlMjBzaGFwZXMlMjBzdHVkZW50JTIwZXhhbSUyMGVkdWNhdGlvbnxlbnwwfHx8fDE3OTI3NzU4OTR8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract colorful 3d shape for JEE Main"
+    },
+    "tile_live": {
+      "url": "https://images.unsplash.com/photo-1682846134047-3e0ea26c70d8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMGNvbG9yZnVsJTIwM2QlMjBzaGFwZXMlMjBzdHVkZW50JTIwZXhhbSUyMGVkdWNhdGlvbnxlbnwwfHx8fDE3OTI3NzU4OTR8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract colorful 3d shape for Live Series"
+    },
+    "rapid_fire_icon": {
+      "url": "https://images.unsplash.com/photo-1718162145034-7a7d7606c723?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxyYXBpZCUyMGZpcmUlMjBsaWdodG5pbmclMjBib2x0JTIwM2QlMjBpbGx1c3RyYXRpb258ZW58MHx8fHwxNzkyNzc1ODk0fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "3D lightning bolt for rapid fire"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Strictly apply the user-requested custom colors (JEE Main glossy blood red #D92525, BITSAT orange #F97316, COMEDK black #000000, All India Series #0B2D80, Burgundy #991B1B) overriding any standard rules, as the user explicitly provided these hexes/names.",
+    "Implement the Home screen with a 2x2 grid (using flexWrap and ~48% width). Tiles must be large, white (surfaceSecondary), with rounded corners (lg/xl).",
+    "Build the All India Series banner on Home exactly as requested: background #0B2D80, a 45-degree ribbon top-right (use absolute positioning and transform: rotate(45deg) and overflow hidden on parent), and an inner pale block #FFF5F3.",
+    "The Bottom Tab Bar requires a custom diamond-shaped center button for 'LIVE' that is half-raised out of the bar. You will need to build a custom tab bar component (or highly customize the bottom-tabs standard one) utilizing absolute positioning and z-index for the diamond.",
+    "For the Rapid Fire screen, implement Tinder-like swipe physics using react-native-reanimated and react-native-gesture-handler. A single active card at a time that supports swipe right (next) and swipe left (skip).",
+    "The Test Player must be hyper-functional with a stark white background for high readability, using the specific subject colors (#2459D8, #087B68, #B92B45) for their respective tabs."
+  ],
+  "haptics": {
+    "tab_press": "light",
+    "rapid_fire_lock_answer": "medium",
+    "rapid_fire_swipe": "light",
+    "test_player_option_select": "light",
+    "test_player_save_next": "medium"
+  }
+}

@@ -1,0 +1,902 @@
+[
+ {
+  "id": "23f296e8-ffb5-4c79-9516-f34d99c21738",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Stress",
+  "prompt": "SI unit of stress is?",
+  "formula": "stress = F/A",
+  "options": [
+   "Newton",
+   "Newton·m",
+   "Joule",
+   "Pascal"
+  ],
+  "answer": 3,
+  "explain": "Stress = Force/Area; unit is Pa (N/m²), same as pressure.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4c7f111b-b18a-4c1c-a8ee-6042ba168094",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Young's Modulus",
+  "prompt": "Young's modulus Y is defined as?",
+  "formula": "Y = (F/A)/(ΔL/L)",
+  "options": [
+   "Volume stress/Volume strain",
+   "Lateral stress/Longitudinal strain",
+   "Shear stress/Shear strain",
+   "Longitudinal stress/Longitudinal strain"
+  ],
+  "answer": 3,
+  "explain": "Y relates longitudinal (tensile/compressive) stress to longitudinal strain.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2855fa83-ab8d-40ef-b2bc-879286bd7bba",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Bulk Modulus",
+  "prompt": "Bulk modulus B is defined as?",
+  "formula": "B = -P/(ΔV/V)",
+  "options": [
+   "Shear stress/shear strain",
+   "P·V/ΔV",
+   "F/(A·ΔL/L)",
+   "−P/(ΔV/V)"
+  ],
+  "answer": 3,
+  "explain": "Bulk modulus = volumetric stress / volumetric strain; negative sign since ΔV is negative.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f23bf83c-41f6-4441-8147-13d9a0a04119",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Shear Modulus",
+  "prompt": "Modulus of rigidity (shear modulus) η relates?",
+  "formula": "η = τ/φ",
+  "options": [
+   "Tensile stress to lateral strain",
+   "Volume stress to volume strain",
+   "Shear stress to shear strain",
+   "Normal stress to linear strain"
+  ],
+  "answer": 2,
+  "explain": "η = shear stress / shear strain; relevant for shape changes at constant volume.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "11eb7caf-f9b0-4fa5-9ee4-c96acd83857d",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Poisson's Ratio",
+  "prompt": "Poisson's ratio σ is defined as?",
+  "formula": "σ = −(ΔD/D)/(ΔL/L)",
+  "options": [
+   "Lateral strain / Longitudinal strain",
+   "Longitudinal strain / Lateral strain",
+   "Shear strain / Linear strain",
+   "Volume strain / Linear strain"
+  ],
+  "answer": 0,
+  "explain": "Poisson's ratio = lateral contraction strain / longitudinal extension strain (magnitude).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9d576a80-1574-45e7-b124-c01c841a7cda",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Poisson's Ratio",
+  "prompt": "Theoretical range of Poisson's ratio σ for isotropic material?",
+  "formula": "",
+  "options": [
+   "−0.5 ≤ σ ≤ 1",
+   "−1 ≤ σ ≤ 0.5",
+   "0 ≤ σ ≤ 0.5",
+   "0 ≤ σ ≤ 1"
+  ],
+  "answer": 1,
+  "explain": "Thermodynamic stability requires −1 ≤ σ ≤ 0.5; most materials have 0 < σ < 0.5.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2c6f88a4-dd1e-4038-a26b-2fbb4363fbd1",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elastic Energy",
+  "prompt": "Elastic potential energy stored per unit volume?",
+  "formula": "u = ½·stress·strain",
+  "options": [
+   "stress²/Y",
+   "½ × Y × strain",
+   "½ × stress × strain",
+   "stress × strain"
+  ],
+  "answer": 2,
+  "explain": "Energy density u = ½σε = stress²/(2Y) = ½Yε².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4fc4d92f-dec4-41d8-9f55-467d8f0cf9fb",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elastic Energy",
+  "prompt": "Total elastic PE stored in a wire of length L, area A?",
+  "formula": "U = ½·F·ΔL",
+  "options": [
+   "½ Y A ΔL²/L",
+   "F·L/A",
+   "F ΔL",
+   "½ F ΔL"
+  ],
+  "answer": 3,
+  "explain": "U = ½ × load × extension; also equals ½ F ΔL for linear elastic deformation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ae331576-0491-4c8e-b904-fdc8ffbb8800",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elastic Moduli Relations",
+  "prompt": "Relation connecting Y, B, and σ?",
+  "formula": "Y = 3B(1−2σ)",
+  "options": [
+   "Y = 9Bη/(3B+η)",
+   "Y = 2η(1+σ)",
+   "Y = 3B(1−2σ)",
+   "Y = B(1+2σ)"
+  ],
+  "answer": 2,
+  "explain": "Y = 3B(1−2σ) relates Young's modulus, bulk modulus, and Poisson's ratio.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5da279a4-399f-41ae-879a-3ad44444ab23",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elastic Moduli Relations",
+  "prompt": "Relation connecting Y, η, and σ?",
+  "formula": "Y = 2η(1+σ)",
+  "options": [
+   "Y = 2η(1+σ)",
+   "Y = 3η(1−2σ)",
+   "Y = 2η(1−σ)",
+   "Y = η(2+σ)"
+  ],
+  "answer": 0,
+  "explain": "Y = 2η(1+σ) connects Young's modulus, shear modulus, and Poisson's ratio.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "18d5444b-dde9-4773-8ef9-c5a64ece2dc2",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elastic Moduli Relations",
+  "prompt": "Relation between Y, B, and η?",
+  "formula": "9/Y = 1/B + 3/η",
+  "options": [
+   "3/Y = 1/B + 1/η",
+   "1/Y = 1/B + 1/η",
+   "Y = B + η",
+   "9/Y = 1/B + 3/η"
+  ],
+  "answer": 3,
+  "explain": "The standard relation: 9/Y = 3/η + 1/B linking all three elastic moduli.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f070f1d7-a902-4fab-8a0e-4ec709de9fd7",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Young's Modulus",
+  "prompt": "For a perfectly rigid body, Young's modulus Y is?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Infinity",
+   "Undefined",
+   "One"
+  ],
+  "answer": 1,
+  "explain": "Rigid body has zero strain for any stress → Y = stress/strain → ∞.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4caa51ff-7c3a-4c51-b99d-dfa0aa6c388a",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Hooke's Law",
+  "prompt": "Hooke's law is valid up to which point on stress-strain curve?",
+  "formula": "",
+  "options": [
+   "Elastic limit",
+   "Proportionality limit",
+   "Yield point",
+   "Breaking point"
+  ],
+  "answer": 1,
+  "explain": "Hooke's law (stress ∝ strain) holds strictly only up to the proportionality limit.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a842c5dd-b2f8-44e3-a68e-83a47af51ca6",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Stress-Strain Curve",
+  "prompt": "Beyond elastic limit, the material shows?",
+  "formula": "",
+  "options": [
+   "Plastic deformation",
+   "Elastic recovery",
+   "Increased stiffness",
+   "Brittle fracture only"
+  ],
+  "answer": 0,
+  "explain": "Beyond elastic limit, permanent (plastic) deformation occurs; material doesn't recover fully.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a1e017a7-1afc-4f30-90e3-23a47cf9a2a2",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Young's Modulus",
+  "prompt": "Which has the highest Young's modulus among common materials?",
+  "formula": "",
+  "options": [
+   "Steel",
+   "Copper",
+   "Aluminium",
+   "Rubber"
+  ],
+  "answer": 0,
+  "explain": "Steel has Y ≈ 2×10¹¹ Pa, highest among common structural materials in JEE context.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5137528c-a72b-4fad-be90-48d3f58b50e8",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Poisson's Ratio",
+  "prompt": "For an incompressible material, Poisson's ratio σ = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "−1",
+   "0.5"
+  ],
+  "answer": 3,
+  "explain": "Incompressible → ΔV = 0 → 1−2σ = 0 → σ = 0.5.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8cb28df8-b053-4e0f-81d7-5b33e2bea762",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Bulk Modulus",
+  "prompt": "Compressibility is defined as?",
+  "formula": "K = 1/B",
+  "options": [
+   "Reciprocal of Young's modulus",
+   "Reciprocal of shear modulus",
+   "Reciprocal of Poisson's ratio",
+   "Reciprocal of bulk modulus"
+  ],
+  "answer": 3,
+  "explain": "Compressibility K = 1/B; unit is Pa⁻¹. Fluids have finite compressibility.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ddf5b623-4e37-4a11-94f5-6a5e4b16f934",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Bulk Modulus",
+  "prompt": "Bulk modulus of an ideal gas at pressure P (isothermal)?",
+  "formula": "B = P",
+  "options": [
+   "P/γ",
+   "RT/M",
+   "P",
+   "γP"
+  ],
+  "answer": 2,
+  "explain": "Isothermal: PV = const → B = P. Adiabatic B = γP.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83a80998-fa0f-4c2f-ba90-65c9dac160fe",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Dimensions",
+  "prompt": "Dimensional formula of Young's modulus?",
+  "formula": "",
+  "options": [
+   "ML²T⁻²",
+   "ML⁻²T⁻²",
+   "MLT⁻²",
+   "ML⁻¹T⁻²"
+  ],
+  "answer": 3,
+  "explain": "Y = stress = Force/Area → [MLT⁻²/L²] = ML⁻¹T⁻².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "34633eba-f31e-4bae-a542-843595b2534b",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Young's Modulus",
+  "prompt": "Elongation ΔL of a wire of length L, area A, Young's modulus Y under load F?",
+  "formula": "ΔL = FL/(AY)",
+  "options": [
+   "FY/AL",
+   "FL/AY",
+   "FAY/L",
+   "AL/FY"
+  ],
+  "answer": 1,
+  "explain": "From Y = (F/A)/(ΔL/L) → ΔL = FL/(AY).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e16578f8-5af8-4efd-8f9f-31d7f71e977a",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Thermal Stress",
+  "prompt": "Stress in a wire due to temperature change ΔT (ends fixed)?",
+  "formula": "σ = YαΔT",
+  "options": [
+   "αY/ΔT",
+   "YΔT/α",
+   "YαΔT",
+   "αΔT/Y"
+  ],
+  "answer": 2,
+  "explain": "Thermal strain = αΔT; since ends are fixed, stress = Y × αΔT (thermal stress).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4bc35078-73fd-42e9-b6db-8f1d67350398",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Stress-Strain Curve",
+  "prompt": "Which point on stress-strain curve represents permanent set?",
+  "formula": "",
+  "options": [
+   "Ultimate strength",
+   "Proportionality limit",
+   "Breaking point",
+   "Yield point"
+  ],
+  "answer": 3,
+  "explain": "At yield point, plastic deformation begins; permanent set (residual strain) first appears.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "29a59cd3-5398-4004-b229-a1f9559038da",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Shear Modulus",
+  "prompt": "For shear deformation, shear strain φ is defined as?",
+  "formula": "φ = x/h",
+  "options": [
+   "ΔV / V",
+   "ΔL / L",
+   "Force / area",
+   "Lateral displacement / height"
+  ],
+  "answer": 3,
+  "explain": "Shear strain = tangential displacement x divided by perpendicular height h (= tan φ ≈ φ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cca0969d-47ae-408e-ae78-dccacca7054a",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Young's Modulus",
+  "prompt": "Rubber has very small Young's modulus because?",
+  "formula": "",
+  "options": [
+   "Small strain for large stress",
+   "No elastic behaviour",
+   "Large strain for small stress",
+   "Infinite bulk modulus"
+  ],
+  "answer": 2,
+  "explain": "Rubber is highly flexible; it undergoes large deformation for small applied stress → small Y.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7cb7e39e-bb5f-48cc-baf0-58a9d9c05714",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Breaking Stress",
+  "prompt": "Breaking stress depends on?",
+  "formula": "",
+  "options": [
+   "Both length and area",
+   "Area of cross-section",
+   "Material only",
+   "Length of wire"
+  ],
+  "answer": 2,
+  "explain": "Breaking stress is an intrinsic material property (stress = F/A at fracture), independent of dimensions.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9d555138-0fd6-4f19-8f9b-22838b787309",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Proportional limit on stress-strain curve is where?",
+  "formula": "",
+  "options": [
+   "Material starts to fracture",
+   "Wire returns slowly to original",
+   "Plastic deformation begins",
+   "Stress α strain ceases"
+  ],
+  "answer": 3,
+  "explain": "Proportional limit is the point up to which stress is directly proportional to strain (Hooke's law holds).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0a3aae55-802e-40a1-9a9c-05db9af8a01b",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Elastic limit is the point beyond which?",
+  "formula": "",
+  "options": [
+   "Stress-strain becomes non-linear",
+   "Material doesn't return to original shape",
+   "Young's modulus changes sign",
+   "Wire breaks immediately"
+  ],
+  "answer": 1,
+  "explain": "Beyond elastic limit, permanent (plastic) deformation occurs; material won't fully recover on unloading.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "42950955-7bfc-4be7-9055-324618af9eeb",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Yield point on stress-strain curve is characterised by?",
+  "formula": "",
+  "options": [
+   "Zero strain at high stress",
+   "Maximum stress before fracture",
+   "Large strain with little/no stress increase",
+   "End of proportional region"
+  ],
+  "answer": 2,
+  "explain": "At yield point, material elongates considerably without significant increase in stress (plastic flow starts).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83a738ec-2530-448f-af35-d360dbd76469",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Ultimate tensile strength (UTS) on stress-strain curve represents?",
+  "formula": "",
+  "options": [
+   "Maximum stress wire can withstand",
+   "Stress at elastic limit",
+   "Stress at fracture point",
+   "Stress at proportional limit"
+  ],
+  "answer": 0,
+  "explain": "UTS is the maximum engineering stress on the stress-strain curve, after which necking begins.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "640ad9d2-6df8-4838-92ca-5c9ca68cbd40",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Lateral strain for a wire stretched along its length is?",
+  "formula": "ε_lat = −ΔD/D",
+  "options": [
+   "Fractional change in volume",
+   "Fractional increase in diameter",
+   "Fractional decrease in diameter",
+   "Fractional increase in length"
+  ],
+  "answer": 2,
+  "explain": "Lateral strain = –(change in diameter)/(original diameter); negative because diameter decreases on stretching.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2f400991-be4a-4d30-a8fa-2e3bde828ac8",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "For a wire, if longitudinal strain is ε, lateral strain is –σε; volume strain is?",
+  "formula": "ΔV/V = ε(1−2σ)",
+  "options": [
+   "ε(1 − 2σ)",
+   "2εσ",
+   "ε(2σ − 1)",
+   "ε(1 + 2σ)"
+  ],
+  "answer": 0,
+  "explain": "Volume strain = longitudinal + 2×lateral = ε − 2σε = ε(1−2σ) for a stretched wire.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dc942da7-a547-408f-aa3a-4e96352c184d",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Which material is more elastic: steel or rubber?",
+  "formula": "",
+  "options": [
+   "Both are equally elastic",
+   "Rubber (stretches more easily)",
+   "Steel (higher Y, less strain per stress)",
+   "Depends on cross-section area"
+  ],
+  "answer": 2,
+  "explain": "Elasticity means tendency to restore; steel has higher Y so resists deformation more — it is more elastic.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e3d0fd4b-779f-4c2f-a2be-cb62113737c9",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Elongation of a wire under its own weight (density ρ, length L, Y)?",
+  "formula": "ΔL = ρgL²/2Y",
+  "options": [
+   "ρgL²/2Y",
+   "ρgL/2Y",
+   "2ρgL²/Y",
+   "ρgL²/Y"
+  ],
+  "answer": 0,
+  "explain": "Self-weight acts at CG; effective load = Mg/2, giving ΔL = ρgL²/(2Y) for uniform wire.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "15ca15e6-0676-4e7e-9ff5-acd61b8d6cd9",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Two wires series (same F): effective spring constant k_eff?",
+  "formula": "1/k_eff = 1/k₁ + 1/k₂",
+  "options": [
+   "k_eff = k₁ + k₂",
+   "k_eff = k₁k₂",
+   "k_eff = (k₁+k₂)/2",
+   "1/k_eff = 1/k₁ + 1/k₂"
+  ],
+  "answer": 3,
+  "explain": "Wires in series add extensions, so spring constants combine reciprocally like resistors in series.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "10ea7086-2c36-440e-9f0f-47a46bd35a06",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Two wires parallel (same ΔL): effective spring constant k_eff?",
+  "formula": "k_eff = k₁ + k₂",
+  "options": [
+   "k_eff = k₁k₂/(k₁+k₂)",
+   "k_eff = k₁ + k₂",
+   "k_eff = (k₁k₂)½",
+   "1/k_eff = 1/k₁ + 1/k₂"
+  ],
+  "answer": 1,
+  "explain": "Parallel wires share load at same extension; spring constants add directly.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0e867576-732d-41d7-95ae-400ca53696ce",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Spring constant of a wire (Y, A, L) is?",
+  "formula": "k = YA/L",
+  "options": [
+   "Y/AL",
+   "YL/A",
+   "YA/L",
+   "AL/Y"
+  ],
+  "answer": 2,
+  "explain": "From F = YA(ΔL)/L, comparing with F = kΔL gives k = YA/L.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5bd200c4-af71-4c2c-a280-c4174a8a6810",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "If wire length doubles (same material, same radius), its spring constant?",
+  "formula": "k = YA/L",
+  "options": [
+   "Quadruples",
+   "Remains same",
+   "Doubles",
+   "Halves"
+  ],
+  "answer": 3,
+  "explain": "k = YA/L; doubling L halves k, since Y and A are unchanged.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "926fda93-232a-4004-b1a1-946f2ccd9599",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "If wire radius doubles (same L, material), spring constant changes by factor?",
+  "formula": "k ∝ A ∝ r²",
+  "options": [
+   "2 (increases 2 times)",
+   "4 (increases 4 times)",
+   "1/4 (decreases)",
+   "1/2 (decreases)"
+  ],
+  "answer": 1,
+  "explain": "k = YA/L ∝ r²; doubling r makes r² four times, so k becomes 4 times.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d94bfa6c-2ab0-449e-8659-01b09547fe42",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Elastic potential energy per unit volume in terms of stress S and strain e?",
+  "formula": "u = ½ S·e",
+  "options": [
+   "stress × strain",
+   "½ × stress²",
+   "½ × stress × strain",
+   "½ × strain²"
+  ],
+  "answer": 2,
+  "explain": "Energy density u = ½ × stress × strain = S²/(2Y) = ½Ye² — all equivalent forms.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91117abc-ce9a-4bb8-8aa3-e63fdb1b8bc0",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Bulk modulus of an ideal gas under adiabatic process is?",
+  "formula": "B_ad = γP",
+  "options": [
+   "γ/P",
+   "P",
+   "γP",
+   "P/γ"
+  ],
+  "answer": 2,
+  "explain": "Adiabatic bulk modulus = γP (ratio of specific heats × pressure); isothermal B = P.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "837d30f4-0e99-4e48-97ab-c2cf0c4a3526",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Ratio B_adiabatic / B_isothermal for an ideal gas equals?",
+  "formula": "",
+  "options": [
+   "1/γ",
+   "γ (ratio of specific heats)",
+   "√γ",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "B_ad = γP and B_iso = P, so their ratio = γ. This is why speed of sound uses γP.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e45aa641-2ce4-4bc1-b45d-2cd98db60217",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Thermal stress in a rod of Y, α when heated by ΔT (ends fixed)?",
+  "formula": "σ = YαΔT",
+  "options": [
+   "YαΔT (tensile)",
+   "YΔT/α",
+   "αΔT/Y",
+   "YαΔT (compressive)"
+  ],
+  "answer": 3,
+  "explain": "Fixed ends prevent expansion; compressive thermal stress = YαΔT develops in the rod.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "519d2ab9-fd34-456f-9e3b-4f6576ec3683",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "A ductile material compared to brittle on stress-strain graph shows?",
+  "formula": "",
+  "options": [
+   "No elastic region at all",
+   "Fracture immediately after elastic limit",
+   "Higher Young's modulus always",
+   "Large plastic region before fracture"
+  ],
+  "answer": 3,
+  "explain": "Ductile materials have a large plastic region (e.g., copper); brittle materials fracture just after elastic limit.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "289a14b0-b331-4a6c-b0fa-17a308814e5e",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Brittleness means a material fractures?",
+  "formula": "",
+  "options": [
+   "With little or no plastic deformation",
+   "After large elongation",
+   "Only at very high temperatures",
+   "Only under compressive forces"
+  ],
+  "answer": 0,
+  "explain": "Brittle materials (glass, cast iron) break suddenly with negligible plastic deformation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3af40ca3-df6f-4306-a195-7e286a7be8f9",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Resilience is defined as elastic energy stored per unit volume up to?",
+  "formula": "",
+  "options": [
+   "Ultimate tensile strength",
+   "Fracture point",
+   "Elastic limit",
+   "Yield point"
+  ],
+  "answer": 2,
+  "explain": "Modulus of resilience = area under stress-strain curve up to elastic limit; energy stored without permanent set.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3f58280a-9cf0-40e3-9ba0-71ff68c72896",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Toughness of a material is represented by area under stress-strain curve up to?",
+  "formula": "",
+  "options": [
+   "Yield point",
+   "Elastic limit",
+   "Fracture point",
+   "Proportional limit"
+  ],
+  "answer": 2,
+  "explain": "Toughness = total energy absorbed per unit volume up to fracture; area under entire stress-strain curve.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "17292c31-da08-4521-a6c2-fac2136ad958",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "For a wire, work done in stretching by ΔL under force F is?",
+  "formula": "W = ½FΔL",
+  "options": [
+   "2F ΔL",
+   "½ F ΔL",
+   "F ΔL / Y",
+   "F ΔL"
+  ],
+  "answer": 1,
+  "explain": "Force increases linearly from 0 to F; work = area under F-ΔL graph = ½FΔL.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7e4e14f7-e75f-4cd3-b0e4-fd007acacbd8",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Inter-atomic force is conservative, so elastic restoring force is?",
+  "formula": "",
+  "options": [
+   "Dissipative (like friction)",
+   "Proportional to velocity",
+   "Always zero at equilibrium",
+   "Conservative (path independent)"
+  ],
+  "answer": 3,
+  "explain": "Elastic restoring forces arise from conservative interatomic potentials; energy stored is fully recoverable.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "944d7cd9-d345-4875-80a9-f0e5efbb78e9",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "Relation between Y, B, η (shear modulus) is?",
+  "formula": "9/Y = 1/B + 3/η",
+  "options": [
+   "Y = B + η",
+   "9/Y = 3/η + 1/B",
+   "1/Y = 1/B + 1/η",
+   "3/Y = 1/η + 1/B"
+  ],
+  "answer": 1,
+  "explain": "Standard elasticity relation: 9/Y = 3/η + 1/B, connecting all three moduli for isotropic solids.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "64c0057b-da78-4b3a-97dc-a8832e0218a4",
+  "subject": "Physics",
+  "chapter": "Elasticity",
+  "topic": "Elasticity",
+  "prompt": "If σ = 0.5 (incompressible), what happens to volume strain ε(1−2σ)?",
+  "formula": "ΔV/V = ε(1−2σ)",
+  "options": [
+   "Volume strain = −ε",
+   "Volume strain = 0 (no volume change)",
+   "Volume strain = 2ε",
+   "Volume strain = ε"
+  ],
+  "answer": 1,
+  "explain": "At σ = 0.5: ΔV/V = ε(1−1) = 0; material deforms without any change in volume — incompressible.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

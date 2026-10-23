@@ -1,0 +1,902 @@
+[
+ {
+  "id": "b4e13e3f-8c5c-4e2a-ae2c-57bf9e62912a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of Grouped Data",
+  "prompt": "Formula for mean of grouped data (direct method)",
+  "formula": "x̄ = Σfᵢxᵢ / Σfᵢ",
+  "options": [
+   "Σfᵢxᵢ / n",
+   "Σfᵢ / Σxᵢ",
+   "Σfᵢxᵢ / Σfᵢ",
+   "Σxᵢ / n"
+  ],
+  "answer": 2,
+  "explain": "Mean of grouped data = sum of (frequency × midpoint) divided by total frequency.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "39bb430f-0c87-4e45-b20c-cd9fe0b0da16",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance",
+  "prompt": "Variance of n observations x₁…xₙ",
+  "formula": "σ² = Σ(xᵢ−x̄)²/n",
+  "options": [
+   "Σxᵢ²/n",
+   "Σ(xᵢ−x̄)/n",
+   "√[Σ(xᵢ−x̄)²/n]",
+   "Σ(xᵢ−x̄)²/n"
+  ],
+  "answer": 3,
+  "explain": "Variance is the mean of squared deviations from the mean.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4acbb161-c2c1-4be9-876a-4b6fc0151f40",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Standard Deviation",
+  "prompt": "Standard deviation is related to variance by",
+  "formula": "σ = √σ²",
+  "options": [
+   "σ = variance/n",
+   "σ = √(variance)",
+   "σ = variance²",
+   "σ = 2·variance"
+  ],
+  "answer": 1,
+  "explain": "Standard deviation is the positive square root of variance.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7ac71959-e787-4e81-bd59-9fcdd2ded31b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Coefficient of Variation",
+  "prompt": "Coefficient of variation (CV) formula",
+  "formula": "CV = (σ/x̄)×100",
+  "options": [
+   "(σ/x̄²)×100",
+   "(x̄/σ)×100",
+   "(σ²/x̄)×100",
+   "(σ/x̄)×100"
+  ],
+  "answer": 3,
+  "explain": "CV compares variability of two series; lower CV means more consistent data.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "84a46ec5-bee0-4654-8984-0b65ae1b5ee9",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of Scaling on Variance",
+  "prompt": "If each observation is multiplied by k, new variance is",
+  "formula": "σ²_new = k²σ²",
+  "options": [
+   "kσ²",
+   "σ²",
+   "k²σ",
+   "k²σ²"
+  ],
+  "answer": 3,
+  "explain": "Scaling all observations by k scales variance by k².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e2a0b282-34fa-49de-a78f-9965f0b4df1f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of Shift on Variance",
+  "prompt": "If a constant c is added to each observation, variance",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Decreases by c",
+   "Increases by c²",
+   "Increases by c"
+  ],
+  "answer": 0,
+  "explain": "Adding a constant shifts data but does not change spread, so variance is unchanged.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bffe2c1f-5a86-4136-9673-8cb83aa587ad",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean Deviation",
+  "prompt": "Mean deviation about mean for ungrouped data",
+  "formula": "MD = Σ|xᵢ−x̄|/n",
+  "options": [
+   "Σ|xᵢ−x̄|/n",
+   "Σ|xᵢ|/n",
+   "Σ(xᵢ−x̄)²/n",
+   "Σ(xᵢ−x̄)/n"
+  ],
+  "answer": 0,
+  "explain": "Mean deviation about mean uses absolute deviations, not squared.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bb4991cc-96ca-4522-a97a-772dc3a96ac7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean Deviation",
+  "prompt": "Mean deviation is minimum when measured about",
+  "formula": "",
+  "options": [
+   "Median",
+   "Mid-range",
+   "Mode",
+   "Mean"
+  ],
+  "answer": 0,
+  "explain": "Sum of absolute deviations is minimised at the median.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5d2f98fe-dc5c-4c43-be64-4839a553537e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance Shortcut",
+  "prompt": "Variance formula using raw moments (shortcut)",
+  "formula": "σ² = Σxᵢ²/n − x̄²",
+  "options": [
+   "Σxᵢ²/n + x̄²",
+   "(Σxᵢ/n)² − x̄²",
+   "Σxᵢ²/n − (Σxᵢ)²",
+   "Σxᵢ²/n − x̄²"
+  ],
+  "answer": 3,
+  "explain": "σ² = mean of squares minus square of mean — standard shortcut formula.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "adfb1411-2927-437d-ab80-9676895f241c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined Mean",
+  "prompt": "For two groups of n₁,n₂ with means x̄₁,x̄₂, combined mean is",
+  "formula": "x̄ = (n₁x̄₁+n₂x̄₂)/(n₁+n₂)",
+  "options": [
+   "(x̄₁+x̄₂)/(n₁+n₂)",
+   "(n₁x̄₁+n₂x̄₂)/2",
+   "(n₁x̄₁+n₂x̄₂)/(n₁+n₂)",
+   "(x̄₁+x̄₂)/2"
+  ],
+  "answer": 2,
+  "explain": "Combined mean is weighted average of group means with group sizes as weights.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "56c056df-7d79-41f9-b700-14d91f995d4d",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Range",
+  "prompt": "Range of a data set is defined as",
+  "formula": "R = x_max − x_min",
+  "options": [
+   "Mean − Median",
+   "Q3 − Q1",
+   "Maximum − Minimum",
+   "Σxᵢ/n"
+  ],
+  "answer": 2,
+  "explain": "Range is the simplest measure of dispersion: difference of extreme values.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "825b4712-070a-4d87-a686-76652e7b86f8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median vs Mean",
+  "prompt": "Which measure of central tendency is not affected by extreme values?",
+  "formula": "",
+  "options": [
+   "Median",
+   "Mid-range",
+   "Weighted mean",
+   "Mean"
+  ],
+  "answer": 0,
+  "explain": "Median is a positional average, unaffected by outliers unlike mean.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "71f2f949-a331-45e3-97aa-320158666653",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode",
+  "prompt": "Mode is the value that",
+  "formula": "",
+  "options": [
+   "Equals the mean",
+   "Occurs most frequently",
+   "Has least frequency",
+   "Is the middle value"
+  ],
+  "answer": 1,
+  "explain": "Mode = observation with highest frequency in the data set.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c8b99dc2-614f-4251-a1bd-1afba3bb3603",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Empirical Relation",
+  "prompt": "Empirical relation among mean, median, mode",
+  "formula": "Mode = 3·Median − 2·Mean",
+  "options": [
+   "3 Median − 2 Mean",
+   "3 Mean − 2 Median",
+   "2 Median − 3 Mean",
+   "Mean + Median − Mode"
+  ],
+  "answer": 0,
+  "explain": "Karl Pearson's empirical formula: Mode ≈ 3 Median − 2 Mean.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "baa00647-cf5a-48d4-b7cc-dee58ebf898d",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Symmetric Distribution",
+  "prompt": "For a symmetric distribution, which relation holds?",
+  "formula": "",
+  "options": [
+   "Mean = Median = Mode",
+   "Mean ≠ Median",
+   "Mode > Median > Mean",
+   "Mean > Median > Mode"
+  ],
+  "answer": 0,
+  "explain": "In a perfectly symmetric distribution all three central measures coincide.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1e211a01-f403-4d25-aa18-702e7a3d7e18",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Skewness",
+  "prompt": "For a positively skewed distribution",
+  "formula": "",
+  "options": [
+   "Median > Mean > Mode",
+   "Mode > Median > Mean",
+   "Mean = Median = Mode",
+   "Mean > Median > Mode"
+  ],
+  "answer": 3,
+  "explain": "Positive skew: long right tail pulls mean highest, mode lowest.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d94c5df0-bc53-4c8b-b79a-357ca6537479",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of Natural Numbers",
+  "prompt": "Variance of first n natural numbers",
+  "formula": "σ² = (n²−1)/12",
+  "options": [
+   "n(n+1)/12",
+   "(n²+1)/12",
+   "(n²−1)/12",
+   "(n+1)/12"
+  ],
+  "answer": 2,
+  "explain": "Standard result: Var(1,2,…,n) = (n²−1)/12.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0626f81f-d584-49b8-a7e7-95dcebe8339a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of Natural Numbers",
+  "prompt": "Mean of first n natural numbers",
+  "formula": "x̄ = (n+1)/2",
+  "options": [
+   "(n−1)/2",
+   "n/2",
+   "(2n+1)/6",
+   "(n+1)/2"
+  ],
+  "answer": 3,
+  "explain": "Sum of 1 to n is n(n+1)/2; divide by n gives (n+1)/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4e5ed6d7-ebbd-49e5-8fdb-18edea5e3b34",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance under Linear Transform",
+  "prompt": "If variance of x₁…xₙ is σ², variance of axi+b is",
+  "formula": "a²σ²",
+  "options": [
+   "aσ²+b",
+   "a²σ²+b",
+   "a²σ²",
+   "(a+b)²σ²"
+  ],
+  "answer": 2,
+  "explain": "Linear transformation y=ax+b: variance scales by a², constant b has no effect.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c03779af-daaf-4562-a037-8f5a3bcef2dc",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Measures of Dispersion",
+  "prompt": "Which measure of dispersion uses all observations?",
+  "formula": "",
+  "options": [
+   "Standard deviation",
+   "Quartile deviation",
+   "Mid-range",
+   "Range"
+  ],
+  "answer": 0,
+  "explain": "SD uses every observation in its computation; range uses only two extreme values.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5e76fd4b-f0b6-43b4-ad9d-57aa2de0907c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean Deviation Grouped Data",
+  "prompt": "Mean deviation about mean for grouped data",
+  "formula": "MD = Σfᵢ|xᵢ−x̄| / Σfᵢ",
+  "options": [
+   "Σfᵢ|xᵢ−x̄|/Σfᵢ",
+   "Σfᵢ(xᵢ−x̄)/Σfᵢ",
+   "Σfᵢ|xᵢ|/Σfᵢ",
+   "Σ|xᵢ−x̄|/n"
+  ],
+  "answer": 0,
+  "explain": "For grouped data, absolute deviations are weighted by frequencies.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3bbb390c-de3c-44a5-afc2-0b83a4f641d2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined Variance",
+  "prompt": "Combined variance of two groups (equal size n) with means x̄₁,x̄₂ & variances σ₁²,σ₂²",
+  "formula": "σ² = (σ₁²+σ₂²)/2 + (x̄₁−x̄₂)²/4",
+  "options": [
+   "(σ₁²+σ₂²+x̄₁+x̄₂)/4",
+   "(σ₁+σ₂)²/4",
+   "(σ₁²+σ₂²)/2+(x̄₁−x̄₂)²/4",
+   "(σ₁²+σ₂²)/2"
+  ],
+  "answer": 2,
+  "explain": "Combined variance includes within-group variance plus between-group variance term.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6d721c04-490a-4279-9052-3573de4e9cb8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Standard Deviation Calculation",
+  "prompt": "For data 2,4,6,8,10 — standard deviation equals",
+  "formula": "",
+  "options": [
+   "2√5",
+   "√5",
+   "2√2",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "x̄=6, Σ(xᵢ−x̄)²=40, σ²=8, σ=2√2. AP with d=2: σ=d√[(n²−1)/12]=2√2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "750390c9-6a19-465f-9b7e-e6fcfb5f0423",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of AP",
+  "prompt": "Variance of an AP with common difference d and n terms",
+  "formula": "σ² = d²(n²−1)/12",
+  "options": [
+   "d²(n²−1)/12",
+   "d(n²−1)/12",
+   "d²n²/12",
+   "d²(n+1)/12"
+  ],
+  "answer": 0,
+  "explain": "AP variance formula: equivalent to d² times variance of first n natural numbers.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8b381e02-d06e-4c85-8187-f2f7d0e4ba80",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Classification of Measures",
+  "prompt": "Which is NOT a measure of central tendency?",
+  "formula": "",
+  "options": [
+   "Median",
+   "Mean",
+   "Mode",
+   "Standard deviation"
+  ],
+  "answer": 3,
+  "explain": "Standard deviation measures dispersion (spread), not central tendency.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "25c57e78-cc5d-4dd9-8281-1ca334b059f2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Median of ungrouped data: if n is even, median is",
+  "formula": "M = [(n/2)th + (n/2+1)th] / 2",
+  "options": [
+   "Mean of (n/2)th & (n/2+1)th terms",
+   "The (n+1)/2 th term",
+   "Mean of (n/2−1)th & (n/2)th terms",
+   "The (n/2)th term"
+  ],
+  "answer": 0,
+  "explain": "For even n, median = average of middle two ordered observations.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "21852911-3b89-4ddb-ad9a-dd42660e9b87",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Median class in grouped data is the class containing cumulative frequency ≥",
+  "formula": "n/2",
+  "options": [
+   "n/2",
+   "2n/3",
+   "n/4",
+   "3n/4"
+  ],
+  "answer": 0,
+  "explain": "The class whose cumulative frequency first reaches or exceeds n/2 is the median class.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6014c160-2321-46d2-99be-1433a31cfee5",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Formula for median in a grouped frequency distribution",
+  "formula": "M = l + [(n/2 − cf)/f]·h",
+  "options": [
+   "l + [(cf − n/2)/f]·h",
+   "l + [f/(n/2 − cf)]·h",
+   "l + [(n/2 − cf)/f]·h",
+   "l + [(n/4 − cf)/f]·h"
+  ],
+  "answer": 2,
+  "explain": "l = lower boundary, cf = preceding cumulative freq, f = median class freq, h = width.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cbaec506-8756-4b5b-9f16-54aa8e02a1f7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Mode formula for grouped frequency distribution",
+  "formula": "Z = l + [(f₁−f₀)/(2f₁−f₀−f₂)]·h",
+  "options": [
+   "l + [(f₁+f₀)/(2f₁−f₀−f₂)]·h",
+   "l + [(f₁−f₂)/(2f₁−f₀−f₂)]·h",
+   "l + [(f₀−f₁)/(2f₁−f₀−f₂)]·h",
+   "l + [(f₁−f₀)/(2f₁−f₀−f₂)]·h"
+  ],
+  "answer": 3,
+  "explain": "f₁ = modal class freq, f₀ = preceding, f₂ = succeeding, l = lower boundary, h = width.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "700e9ccb-d839-43fc-8a8f-10c47b42034c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Mean by step-deviation method uses uᵢ =",
+  "formula": "uᵢ = (xᵢ − A)/h",
+  "options": [
+   "(xᵢ − A)/h",
+   "(xᵢ − A)·h",
+   "(xᵢ + A)/h",
+   "xᵢ/h"
+  ],
+  "answer": 0,
+  "explain": "Step-deviation shifts and scales observations; mean = A + (Σfᵢuᵢ/Σfᵢ)·h.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e3b708d4-732d-4836-a8d2-01595251e814",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Variance by step-deviation method: σ² =",
+  "formula": "h²·[Σfᵢuᵢ²/N − (Σfᵢuᵢ/N)²]",
+  "options": [
+   "h²[Σfᵢuᵢ²/N − (Σfᵢuᵢ/N)²]",
+   "h[Σfᵢuᵢ²/N − (Σfᵢuᵢ/N)²]",
+   "[Σfᵢuᵢ²/N − (Σfᵢuᵢ/N)²]/h²",
+   "h²[Σfᵢuᵢ²/N + (Σfᵢuᵢ/N)²]"
+  ],
+  "answer": 0,
+  "explain": "Variance scales by h² when using step-deviation transformation uᵢ=(xᵢ−A)/h.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "20e91c7b-c71f-4884-a0f9-5ebe2ff8615a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "If each observation is multiplied by k, the standard deviation is multiplied by",
+  "formula": "σ_new = |k|·σ",
+  "options": [
+   "k",
+   "|k|",
+   "k²",
+   "1/|k|"
+  ],
+  "answer": 1,
+  "explain": "SD scales by |k| under multiplication; variance scales by k².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ee366ebe-3b6f-424a-9568-10d3b3d1fb88",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Mean deviation about median for data 3,5,7,9,11 equals",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "1.6",
+   "2.4"
+  ],
+  "answer": 3,
+  "explain": "Median=7; deviations: 4,2,0,2,4; MD = 12/5 = 2.4.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "971fdd53-f55e-4b6f-b140-10267e02f720",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Quartile deviation (semi-interquartile range) is defined as",
+  "formula": "QD = (Q₃ − Q₁)/2",
+  "options": [
+   "(Q₃ + Q₁)/2",
+   "(Q₃ − Q₁)/4",
+   "(Q₃ − Q₁)/2",
+   "Q₃ − Q₁"
+  ],
+  "answer": 2,
+  "explain": "QD = half the interquartile range; it is a measure of dispersion.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "350eab45-6086-4b94-aa48-54dd80856f46",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Which measure of dispersion is independent of origin but NOT of scale?",
+  "formula": "",
+  "options": [
+   "Range",
+   "Mean deviation about median",
+   "Standard deviation",
+   "Coefficient of variation"
+  ],
+  "answer": 2,
+  "explain": "SD changes when data is scaled (multiplied) but not when shifted (origin change).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cf6efbb2-7aa7-448e-aedf-b6e23f7d85ea",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Coefficient of variation is used to compare",
+  "formula": "CV = (σ/x̄)×100",
+  "options": [
+   "Central tendency only",
+   "Variability of two datasets",
+   "Median of two datasets",
+   "Skewness of data"
+  ],
+  "answer": 1,
+  "explain": "CV is a relative measure; smaller CV means more consistent/less variable data.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "39d14770-1c70-42bd-b0de-fc85be5e8cce",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "For a distribution with mean 10 and SD 2, the CV is",
+  "formula": "CV = (σ/x̄)×100",
+  "options": [
+   "5%",
+   "20%",
+   "200%",
+   "2%"
+  ],
+  "answer": 1,
+  "explain": "CV = (2/10)×100 = 20%.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "795dc4e1-7a3c-42d1-95cb-fb5bd2ddb449",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "If variance of data is 9, then standard deviation is",
+  "formula": "σ = √(variance)",
+  "options": [
+   "3",
+   "9",
+   "4.5",
+   "81"
+  ],
+  "answer": 0,
+  "explain": "Standard deviation = √9 = 3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "826aba2f-bc9e-43a5-8dfe-7ef0e7ed229a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Variance is always",
+  "formula": "σ² ≥ 0",
+  "options": [
+   "Greater than SD",
+   "Less than mean",
+   "Non-negative",
+   "Positive"
+  ],
+  "answer": 2,
+  "explain": "Variance = 0 only when all observations are equal; otherwise σ² > 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "78630f7e-36f4-4205-a290-08916d01846b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Mean of squared deviations from mean equals",
+  "formula": "σ² = Σ(xᵢ−x̄)²/n",
+  "options": [
+   "Mean deviation",
+   "Coefficient of variation",
+   "Variance",
+   "Standard deviation"
+  ],
+  "answer": 2,
+  "explain": "Variance is the arithmetic mean of squared deviations from the mean.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a0f368e-f4da-4f0c-9ced-1ed9af63c748",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Sum of deviations of observations from their mean is always",
+  "formula": "Σ(xᵢ − x̄) = 0",
+  "options": [
+   "Zero",
+   "Negative",
+   "Positive",
+   "Equal to variance"
+  ],
+  "answer": 0,
+  "explain": "Algebraic sum of deviations from mean is always zero — fundamental property.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3d99a88e-6de8-4489-8a16-1cc4da79e3eb",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "For data with mean x̄, Σ(xᵢ − x̄)² is minimised when taken about",
+  "formula": "",
+  "options": [
+   "Mean",
+   "Median",
+   "Any value",
+   "Mode"
+  ],
+  "answer": 0,
+  "explain": "Sum of squared deviations is minimum about the mean (not median).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "29b36f18-5157-4bd5-80d7-1d44fa5c3ff9",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "The most stable measure of central tendency is",
+  "formula": "",
+  "options": [
+   "Geometric mean",
+   "Mean",
+   "Median",
+   "Mode"
+  ],
+  "answer": 1,
+  "explain": "Mean uses all observations and has the least sampling variability; most reliable.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2e8830aa-e292-493d-a154-b079c447fc38",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "If all observations are equal (say c), then standard deviation is",
+  "formula": "",
+  "options": [
+   "1",
+   "c",
+   "0",
+   "c/n"
+  ],
+  "answer": 2,
+  "explain": "No variability exists; every deviation from mean is 0, so σ = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "64629b88-87bd-4103-b6a7-8c3ecadf53d0",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Variance of observations −3,−1,1,3 equals",
+  "formula": "σ² = Σxᵢ²/n − x̄²",
+  "options": [
+   "2.5",
+   "√5",
+   "4",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "Mean=0; σ²=(9+1+1+9)/4=20/4=5.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b811f589-781c-4ad5-839b-a51b9c301fa9",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Weighted mean is given by",
+  "formula": "x̄_w = Σwᵢxᵢ / Σwᵢ",
+  "options": [
+   "Σwᵢxᵢ / n",
+   "Σwᵢxᵢ / Σwᵢ",
+   "Σwᵢ / Σxᵢ",
+   "Σxᵢ / Σwᵢ"
+  ],
+  "answer": 1,
+  "explain": "Weighted mean gives more importance to observations with higher weights.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cb0f8b3d-0d4f-453e-bc39-fad0dc249cf8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "For negatively skewed distribution, the correct order is",
+  "formula": "",
+  "options": [
+   "Mean < Median < Mode",
+   "Median < Mean < Mode",
+   "Mode < Median < Mean",
+   "Mean = Median = Mode"
+  ],
+  "answer": 0,
+  "explain": "Negative skew: tail on left; mean pulled left most, so Mean < Median < Mode.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "37984b13-ff06-4748-87c0-786929cd2cc6",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "The sum Σfᵢ in frequency distribution equals",
+  "formula": "Σfᵢ = N (total freq.)",
+  "options": [
+   "Number of classes",
+   "Mean of data",
+   "Total number of observations N",
+   "Range of data"
+  ],
+  "answer": 2,
+  "explain": "Σfᵢ = N, the total frequency; used as denominator in mean/variance formulas.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0e4cf1f3-47c2-4068-97d6-9dc71844e8ef",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Which measure of central tendency can have more than one value for a dataset?",
+  "formula": "",
+  "options": [
+   "Weighted mean",
+   "Median",
+   "Mode",
+   "Mean"
+  ],
+  "answer": 2,
+  "explain": "A dataset can be bimodal or multimodal; mean and median are always unique.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f554884e-9430-404a-9a14-1b21e9a6e278",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Statistics",
+  "prompt": "Standard deviation of 100 observations each equal to 5 is",
+  "formula": "",
+  "options": [
+   "0",
+   "50",
+   "25",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "All observations identical → no deviation from mean → SD = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

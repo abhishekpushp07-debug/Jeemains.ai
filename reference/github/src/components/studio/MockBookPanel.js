@@ -1,0 +1,34 @@
+import React,{useEffect,useState} from 'react';
+import {ClipboardList,CheckCircle2,AlertTriangle} from 'lucide-react';
+import {api} from '../../lib/api';
+import {ErrorBox} from '../Shared';
+import {Skeleton} from '../ui/skeleton';
+import {Badge} from '../ui/badge';
+
+const date=x=>x?new Date(x*1000).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—';
+
+import {Link} from 'react-router-dom';
+import {Button} from '../ui/button';
+import {useAuth} from '../../lib/auth';
+const MockRow=({m})=>{const {user}=useAuth();return <li className={'mock-status-row '+(m.status==='live'?'is-live':'is-held')} data-testid={'studio-mock-row-'+m.number}>
+ <div className="mock-status-main"><strong>Mock {String(m.number).padStart(2,'0')}</strong><span className="import-fineprint">{m.main_count} main + {m.bonus_count} bonus · {m.keys} keys{m.pages?.length?` · PDF pages ${m.pages[0]}–${m.pages[1]}`:''}</span></div>
+ <Badge variant={m.status==='live'?'default':'destructive'} data-testid={'studio-mock-status-'+m.number}>{m.status==='live'?'Live':'Held back'}</Badge>
+ {m.reasons.length>0&&<ul className="mock-status-reasons" data-testid={'studio-mock-reasons-'+m.number}>{m.reasons.map((r,i)=><li key={i}>{r}</li>)}</ul>}
+ {user?.role==='owner'&&m.set_id&&<Button asChild variant="outline"><Link to={'/studio/'+m.set_id} data-testid={'mock-solve-open-'+m.number}>Open test & solve</Link></Button>}
+</li>};
+
+export const MockBookPanel=()=>{
+ const [items,setItems]=useState(null),[error,setError]=useState('');
+ useEffect(()=>{api('/studio/mock-books').then(d=>setItems(d.items)).catch(e=>setError(e.message))},[]);
+ if(error)return <ErrorBox error={error}/>;
+ if(!items)return <Skeleton className="h-40 mt-8"/>;
+ return items.map(b=>{const held=b.mocks.filter(m=>m.status!=='live');return <section className="import-card mock-book-panel" key={b.id} data-testid="studio-mock-book-panel">
+  <span className="import-section-label"><ClipboardList size={17}/> BITSAT · FULL MOCK TESTS</span>
+  <h2 data-testid="studio-mock-book-title">{b.title}</h2>
+  <p className="import-muted" data-testid="studio-mock-book-source">{b.source_name} · {b.pages} pages · live until {date(b.end_at)}</p>
+  <div className="chapter-fixed-rules"><span data-testid="studio-mock-live-count"><CheckCircle2 size={15}/> {b.live} live</span><span data-testid="studio-mock-held-count"><AlertTriangle size={15}/> {b.held} held back</span><span>130 + 12 bonus · 180 min · +3 / −1 / 0</span><span data-testid="studio-mock-ai-progress">AI solutions (gpt-6-astra): {b.ai_solutions?.ready||0} / {b.ai_solutions?.total||0} ready{b.ai_solutions?.paused?` · ${b.ai_solutions.paused} paused`:''} · automatic solving paused</span></div>
+  {held.length>0?<div className="mock-held-list" data-testid="studio-mock-held-list"><h3>Held back and why</h3><ul>{held.map(m=><MockRow key={m.number} m={m}/>)}</ul></div>:<p className="import-fineprint" data-testid="studio-mock-none-held">All mocks passed the structure, region and two-way answer-key checks. None are held back.</p>}
+  <details className="mock-all-list"><summary data-testid="studio-mock-all-toggle">All {b.mocks.length} mocks</summary><ul>{b.mocks.map(m=><MockRow key={m.number} m={m}/>)}</ul></details>
+  <p className="import-fineprint" data-testid="studio-mock-scope">Checks cover question count and order, section headings, readable A–D regions, and two independent readings of the printed answer key. They do not certify academic correctness of supplied answers. The PDF has no worked solutions. Previously saved AI explanations remain labelled “AI generated” for students; automatic generation is paused.</p>
+ </section>});
+};

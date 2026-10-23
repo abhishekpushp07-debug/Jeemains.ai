@@ -1,0 +1,902 @@
+[
+ {
+  "id": "cbd5f158-4fd4-4d3d-b681-fbfa4bec6d7f",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "Moment of inertia of solid sphere about diameter?",
+  "formula": "I = 2/5 MR²",
+  "options": [
+   "2MR²/5",
+   "2MR²/3",
+   "MR²/2",
+   "7MR²/5"
+  ],
+  "answer": 0,
+  "explain": "Standard result: solid sphere about diameter I = 2MR²/5.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dddd13d5-843a-4c09-bd72-50d69cc47426",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "Moment of inertia of thin ring about its axis?",
+  "formula": "I = MR²",
+  "options": [
+   "2MR²/3",
+   "3MR²/4",
+   "MR²",
+   "MR²/2"
+  ],
+  "answer": 2,
+  "explain": "All mass at distance R, so I = MR² for a ring about its own axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a32cdc6e-eaeb-4037-8bbb-98df19247e6f",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "Moment of inertia of disc about its central axis?",
+  "formula": "I = MR²/2",
+  "options": [
+   "2MR²/5",
+   "MR²",
+   "MR²/4",
+   "MR²/2"
+  ],
+  "answer": 3,
+  "explain": "Disc about central axis perpendicular to plane: I = MR²/2.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e8166ad7-bd89-43b8-86ed-86b7b1689fa3",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Parallel Axis Theorem",
+  "prompt": "Parallel axis theorem: I about parallel axis?",
+  "formula": "I = Icm + Md²",
+  "options": [
+   "Icm − Md²",
+   "Icm·Md²",
+   "Icm + 2Md²",
+   "Icm + Md²"
+  ],
+  "answer": 3,
+  "explain": "Parallel axis theorem adds Md² to the CM moment of inertia.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7b897bbe-cf09-4552-8238-4b4de93cdb8f",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Perpendicular Axis Theorem",
+  "prompt": "Perpendicular axis theorem applies to which bodies?",
+  "formula": "Iz = Ix + Iy",
+  "options": [
+   "All 3D solids",
+   "Spheres only",
+   "Planar (2D) laminas only",
+   "Rods only"
+  ],
+  "answer": 2,
+  "explain": "Iz = Ix + Iy holds only for planar (flat) laminas lying in xy-plane.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d41db66f-635e-4c64-b99c-efff4e64fe32",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Torque",
+  "prompt": "Torque in vector form?",
+  "formula": "τ = r × F",
+  "options": [
+   "F × r",
+   "r · F",
+   "r + F",
+   "r × F"
+  ],
+  "answer": 3,
+  "explain": "Torque τ = r × F; order matters — it's not F × r.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "84b113ef-d8db-4798-85fa-3e7dabef0a9d",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Momentum",
+  "prompt": "Angular momentum L of a particle?",
+  "formula": "L = r × p",
+  "options": [
+   "p × r",
+   "m·r²·ω",
+   "r · p",
+   "r × p"
+  ],
+  "answer": 3,
+  "explain": "L = r × p is the definition; for rigid body L = Iω along same axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8b037669-b846-4836-9764-bc12108801d0",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Conservation of Angular Momentum",
+  "prompt": "Condition for conservation of angular momentum?",
+  "formula": "τ_net = 0 ⟹ L = const",
+  "options": [
+   "KE = constant",
+   "Net external torque = 0",
+   "Net external force = 0",
+   "Linear momentum = 0"
+  ],
+  "answer": 1,
+  "explain": "dL/dt = τ_net; if τ_net = 0, angular momentum is conserved.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e0f90446-9c08-4bf9-8d33-1347ec0fce46",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rotational Kinetic Energy",
+  "prompt": "Rotational KE of a rigid body?",
+  "formula": "KE = Iω²/2",
+  "options": [
+   "Iω²/2",
+   "Iα/2",
+   "mω²R²",
+   "Iω²"
+  ],
+  "answer": 0,
+  "explain": "Rotational KE = (1/2)Iω², analogous to (1/2)mv² in translation.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "db42f91a-9653-43fc-8041-e8395fac8ee8",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "For pure rolling, relation between v and ω?",
+  "formula": "v = Rω",
+  "options": [
+   "v = Rω",
+   "v = 2Rω",
+   "v = Rα",
+   "v = R/ω"
+  ],
+  "answer": 0,
+  "explain": "No slipping ⟹ contact point velocity = 0, giving v_cm = Rω.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "caa71a0f-ea96-4050-bb31-0bede6dda633",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Total KE of a body rolling without slipping?",
+  "formula": "KE = ½mv² + ½Iω²",
+  "options": [
+   "½mv² only",
+   "½Iω² only",
+   "mv² + Iω²",
+   "½mv² + ½Iω²"
+  ],
+  "answer": 3,
+  "explain": "Rolling KE = translational KE + rotational KE = ½mv² + ½Iω².",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d484d352-c726-4464-937b-c1f503899073",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Radius of Gyration",
+  "prompt": "Radius of gyration K is defined as?",
+  "formula": "I = MK²",
+  "options": [
+   "√(M/I)",
+   "I·M",
+   "I/M",
+   "√(I/M)"
+  ],
+  "answer": 3,
+  "explain": "K = √(I/M); it's the RMS distance of mass from the rotation axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83847ac6-3929-402b-98a4-9667eb3ebb77",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rotational Dynamics",
+  "prompt": "Newton's 2nd law for rotation?",
+  "formula": "τ = Iα",
+  "options": [
+   "τ = Iα",
+   "F = Iα",
+   "τ = Iω",
+   "τ = mα"
+  ],
+  "answer": 0,
+  "explain": "Rotational analogue of F = ma is τ_net = Iα.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1c44b0d9-32ae-4ed6-88c2-62e0fef6a200",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Work and Power in Rotation",
+  "prompt": "Work done by torque through angle θ?",
+  "formula": "W = τ·θ",
+  "options": [
+   "τ·α",
+   "τ/θ",
+   "τ·θ",
+   "τ·ω"
+  ],
+  "answer": 2,
+  "explain": "Analogous to W = F·d, rotational work W = τθ (for constant τ).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f21a9e9c-1944-4261-a451-c549f22aefa3",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Work and Power in Rotation",
+  "prompt": "Power delivered by a torque?",
+  "formula": "P = τω",
+  "options": [
+   "τ/ω",
+   "τ·θ/t",
+   "τω",
+   "τα"
+  ],
+  "answer": 2,
+  "explain": "P = dW/dt = τ·dθ/dt = τω, analogous to P = Fv.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5782d8ea-118e-439b-923b-66880fffa941",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of thin rod about one end (perpendicular axis)?",
+  "formula": "I = ML²/3",
+  "options": [
+   "ML²/12",
+   "ML²/6",
+   "ML²/4",
+   "ML²/3"
+  ],
+  "answer": 3,
+  "explain": "Rod about one end: I = ML²/3; about centre: I = ML²/12.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "055fe153-682e-41ef-88fa-9659f4b44a80",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of thin rod about its centre (perpendicular axis)?",
+  "formula": "I = ML²/12",
+  "options": [
+   "ML²/3",
+   "ML²/12",
+   "ML²/4",
+   "ML²/6"
+  ],
+  "answer": 1,
+  "explain": "Rod about centre: I = ML²/12, which is Icm used in parallel axis theorem.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "172dd171-dd17-4cfd-ba74-2dbb9dcaf5c7",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "A solid sphere rolls down incline; fraction of KE that is rotational?",
+  "formula": "KE_rot/KE_total = 2/7",
+  "options": [
+   "1/2",
+   "2/7",
+   "2/5",
+   "5/7"
+  ],
+  "answer": 1,
+  "explain": "For solid sphere I=2mR²/5; rotational fraction = (2/5)/(1+2/5) = 2/7.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "711c409c-bef5-406c-9b7c-ff89b92bfbb0",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "For a disc rolling without slipping, rotational KE fraction?",
+  "formula": "KE_rot/KE_total = 1/3",
+  "options": [
+   "2/7",
+   "1/2",
+   "2/5",
+   "1/3"
+  ],
+  "answer": 3,
+  "explain": "Disc I = mR²/2; fraction = (1/2)/(1+1/2) = 1/3.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "af0909d0-22cb-4bbe-bf82-a6d656f5607c",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Acceleration of CM of body rolling down incline (angle θ)?",
+  "formula": "a = g sinθ/(1 + I/mR²)",
+  "options": [
+   "g cosθ/(1+I/mR²)",
+   "g sinθ·(1+I/mR²)",
+   "g sinθ",
+   "g sinθ/(1+I/mR²)"
+  ],
+  "answer": 3,
+  "explain": "Rolling down incline: a_cm = g sinθ / (1 + K²/R²) where K² = I/m.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e7ab313d-488e-4bbf-b7fb-6bfbaa06a6a6",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Impulse",
+  "prompt": "Angular impulse equals?",
+  "formula": "J_ang = ΔL = τ·Δt",
+  "options": [
+   "Force × time",
+   "Change in angular momentum",
+   "Torque × angle",
+   "Change in linear momentum"
+  ],
+  "answer": 1,
+  "explain": "Angular impulse = τ·Δt = ΔL, analogous to linear impulse = FΔt = Δp.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c8e0f10b-7d41-4161-9808-f56063cc7d23",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of hollow sphere (shell) about diameter?",
+  "formula": "I = 2MR²/3",
+  "options": [
+   "MR²",
+   "3MR²/5",
+   "2MR²/3",
+   "2MR²/5"
+  ],
+  "answer": 2,
+  "explain": "Hollow spherical shell about diameter: I = 2MR²/3 (greater than solid sphere).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fe1fa882-c579-4b8c-80a9-47a25db86ac5",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Conservation of Angular Momentum",
+  "prompt": "Torque on a body is zero. Which quantity is conserved?",
+  "formula": "",
+  "options": [
+   "Angular velocity",
+   "Linear momentum",
+   "Angular momentum",
+   "Kinetic energy"
+  ],
+  "answer": 2,
+  "explain": "τ = dL/dt; τ = 0 ⟹ L = constant (angular momentum conserved).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5f16403f-79ea-40f1-9436-7f3551ac9ec1",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Instantaneous axis of rotation for pure rolling passes through?",
+  "formula": "",
+  "options": [
+   "Topmost point",
+   "Contact point with ground",
+   "Centre of mass",
+   "Geometric centre"
+  ],
+  "answer": 1,
+  "explain": "In pure rolling the contact point has zero velocity; it's the instantaneous axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ef24690c-9d65-4b17-a9cd-1c45f8f61455",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Speed of topmost point of a purely rolling body (v_cm = v)?",
+  "formula": "v_top = 2v",
+  "options": [
+   "√2 v",
+   "2v",
+   "v/2",
+   "v"
+  ],
+  "answer": 1,
+  "explain": "Top point velocity = v_cm + Rω = v + v = 2v in pure rolling.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83d38146-956f-4480-b3a2-e9116332b55d",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of solid cylinder about its central (symmetry) axis?",
+  "formula": "I = ½MR²",
+  "options": [
+   "½MR²",
+   "⅔MR²",
+   "MR²",
+   "¼MR²"
+  ],
+  "answer": 0,
+  "explain": "Solid cylinder about its own axis: I = ½MR², same as disc.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a2daba3-a0da-4eb4-9328-680758c95ee5",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of hollow cylinder (thin-walled) about its symmetry axis?",
+  "formula": "I = MR²",
+  "options": [
+   "¾MR²",
+   "MR²",
+   "½MR²",
+   "⅔MR²"
+  ],
+  "answer": 1,
+  "explain": "All mass at radius R, so I = MR², same as thin ring.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "59179cce-9577-4b3f-a1da-c8403861c730",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of solid cylinder about an axis through its centre, perpendicular to symmetry axis?",
+  "formula": "I = M(R²/4 + L²/12)",
+  "options": [
+   "M(R²/2+L²/12)",
+   "MR²/2",
+   "M(R²/4+L²/6)",
+   "M(R²/4+L²/12)"
+  ],
+  "answer": 3,
+  "explain": "For solid cylinder: I = M(R²/4 + L²/12) about transverse central axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4834884c-072d-473e-a3e8-f8d8be17b723",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Theorems of MI",
+  "prompt": "Perpendicular axis theorem: Iz = Ix + Iy. Which axis is z?",
+  "formula": "Iz = Ix + Iy",
+  "options": [
+   "Axis in the plane along width",
+   "Axis in the plane along length",
+   "Axis perpendicular to the plane",
+   "Any axis through CM"
+  ],
+  "answer": 2,
+  "explain": "z is the axis perpendicular to the lamina's plane; x and y lie in the plane.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ca2925fa-b097-4a2c-b9f3-24d1dd7b5c35",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of disc about a diameter (in-plane axis through centre)?",
+  "formula": "I = MR²/4",
+  "options": [
+   "MR²",
+   "MR²/3",
+   "MR²/2",
+   "MR²/4"
+  ],
+  "answer": 3,
+  "explain": "By perpendicular axis theorem: I_diameter = (MR²/2)/2 = MR²/4.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f9cf3f17-bff3-46f4-b5a9-a889171bf0d1",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "MI of thin ring about a diameter?",
+  "formula": "I = MR²/2",
+  "options": [
+   "MR²/4",
+   "3MR²/2",
+   "MR²",
+   "MR²/2"
+  ],
+  "answer": 3,
+  "explain": "Perpendicular axis: I_axis = MR²; each diameter I = MR²/2 by symmetry.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cfef37ad-688c-4dd5-b392-8d5f6ede8e28",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Momentum",
+  "prompt": "Relation between angular momentum L and torque τ?",
+  "formula": "τ = dL/dt",
+  "options": [
+   "τ = L×t",
+   "τ = L/t",
+   "τ = d²L/dt²",
+   "τ = dL/dt"
+  ],
+  "answer": 3,
+  "explain": "Torque equals rate of change of angular momentum, analogous to F = dp/dt.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e7ff0768-1ee1-4ea5-89dc-6a3c79c8792b",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Conservation of Angular Momentum",
+  "prompt": "A dancer pulls arms in; moment of inertia decreases. Angular velocity?",
+  "formula": "L = Iω = const",
+  "options": [
+   "Becomes zero",
+   "Remains same",
+   "Increases",
+   "Decreases"
+  ],
+  "answer": 2,
+  "explain": "No external torque ⇒ L = Iω = const; I↓ ⇒ ω↑.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "85bf47e5-cff8-4ae2-8a27-366ba9a56250",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Momentum",
+  "prompt": "For a rigid body, L = Iω holds when ω is measured about?",
+  "formula": "L = Iω",
+  "options": [
+   "Fixed point only",
+   "Any axis",
+   "CM only",
+   "The same axis used for I"
+  ],
+  "answer": 3,
+  "explain": "L = Iω is valid only when both I and ω refer to the same axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c76f69e7-9714-4560-bef5-b481273ea7fd",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Rolling without slipping condition for acceleration: a_cm and α?",
+  "formula": "a = Rα",
+  "options": [
+   "a_cm = Rα",
+   "a_cm = α/R",
+   "a_cm = 2Rα",
+   "a_cm = R²α"
+  ],
+  "answer": 0,
+  "explain": "Differentiating v = Rω with respect to time gives a_cm = Rα.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1814ba14-f89d-4817-a20b-bd27b4b1a946",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Friction acts on a rolling body on a rough incline. Nature of friction?",
+  "formula": "",
+  "options": [
+   "Static friction",
+   "Kinetic friction",
+   "Rolling friction only",
+   "Zero friction"
+  ],
+  "answer": 0,
+  "explain": "No slipping means contact point has zero relative velocity; friction is static.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "89f352f6-3e30-4136-b8e3-263326722beb",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "For hollow sphere rolling without slipping, rotational KE fraction of total KE?",
+  "formula": "KE_rot/KE_total = 2/5",
+  "options": [
+   "1/2",
+   "2/5",
+   "1/3",
+   "2/7"
+  ],
+  "answer": 1,
+  "explain": "Hollow sphere I = 2MR²/3; KE_rot/(KE_rot+KE_trans) = (2/3)/[(2/3)+1] = 2/5.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a35696e9-d17f-494c-92e3-5229ec5b6fd3",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Speed of CM when hollow sphere rolls down height h from rest?",
+  "formula": "v = √(6gh/5)",
+  "options": [
+   "√(6gh/5)",
+   "√(4gh/3)",
+   "√(10gh/7)",
+   "√(2gh)"
+  ],
+  "answer": 0,
+  "explain": "Energy: Mgh = ½Mv²(1+2/3) = 5Mv²/6, so v = √(6gh/5).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b066e399-5ca4-4cb0-905e-85b4c60e0251",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Speed of CM when solid cylinder rolls down height h from rest?",
+  "formula": "v = √(4gh/3)",
+  "options": [
+   "√(2gh)",
+   "√(6gh/5)",
+   "√(10gh/7)",
+   "√(4gh/3)"
+  ],
+  "answer": 3,
+  "explain": "Mgh = ½Mv²(1+½) = 3Mv²/4, giving v = √(4gh/3).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d2f5a8c2-a070-4b33-b818-e69ef191ed63",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Which body reaches bottom of incline first when all roll without slipping?",
+  "formula": "",
+  "options": [
+   "Hollow cylinder",
+   "Hollow sphere",
+   "Solid sphere",
+   "Solid cylinder"
+  ],
+  "answer": 2,
+  "explain": "Smaller I/MR² (= 2/5 for solid sphere) gives largest acceleration down incline.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "58563b29-0e00-4302-bb9e-9594b648ae1f",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "Dimensional formula of moment of inertia?",
+  "formula": "I = MR²",
+  "options": [
+   "[M¹L²T⁰]",
+   "[M²L²T⁰]",
+   "[M¹L²T⁻²]",
+   "[M¹L¹T⁰]"
+  ],
+  "answer": 0,
+  "explain": "I = MR² has dimensions of mass × length², i.e., [ML²].",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e3b22b87-bbe2-49ed-9cb6-c2c72af1505b",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Momentum",
+  "prompt": "SI unit of angular momentum?",
+  "formula": "L = mvr",
+  "options": [
+   "kg·m²/s²",
+   "N·m·s²",
+   "kg·m²/s",
+   "kg·m/s²"
+  ],
+  "answer": 2,
+  "explain": "L = Iω → kg·m²·s⁻¹, equivalently J·s.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e302e881-393f-43b4-8493-2a3b14f070bf",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Momentum",
+  "prompt": "Torque τ and angular momentum L are related as τ = dL/dt. If τ=0 and L≠0, body?",
+  "formula": "",
+  "options": [
+   "Stops rotating",
+   "Accelerates",
+   "Rotates at constant angular velocity",
+   "Decelerates"
+  ],
+  "answer": 2,
+  "explain": "Zero torque ⇒ L = const ⇒ Iω = const; for rigid body I is fixed, so ω is constant.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "071602fc-15c9-4522-a483-a9ca5ba89936",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Moment of Inertia",
+  "prompt": "Moment of inertia of rectangular plate (sides a, b) about axis through centre, perpendicular to plate?",
+  "formula": "I = M(a²+b²)/12",
+  "options": [
+   "Ma²/12",
+   "M(a²+b²)/6",
+   "M(a²+b²)/4",
+   "M(a²+b²)/12"
+  ],
+  "answer": 3,
+  "explain": "I_x = Mb²/12, I_y = Ma²/12; by perp. axis thm I_z = M(a²+b²)/12.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "94a24bb1-169b-446c-84f4-18279f050f76",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "For pure rolling on a surface, the contact point has what velocity?",
+  "formula": "",
+  "options": [
+   "v_cm upward",
+   "v_cm horizontal",
+   "2v_cm",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Rolling without slipping: contact point is instantaneous rest; velocity = 0.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2931da42-4bf1-4feb-9031-d562902d9aa5",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rolling Motion",
+  "prompt": "Velocity of centre of mass of a body rolling with ω on a surface (radius R)?",
+  "formula": "v_cm = ωR",
+  "options": [
+   "ω²R",
+   "ω/R",
+   "ωR²",
+   "ωR"
+  ],
+  "answer": 3,
+  "explain": "Pure rolling condition: v_cm = Rω (no slipping at contact).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f668ac7e-30ff-4cca-8276-627f359e828a",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Equilibrium",
+  "prompt": "For rotational equilibrium of a rigid body, net torque about any point must be?",
+  "formula": "Στ = 0",
+  "options": [
+   "Constant non-zero",
+   "Equal to moment of inertia",
+   "Zero",
+   "Equal to angular momentum"
+  ],
+  "answer": 2,
+  "explain": "Rotational equilibrium requires Στ = 0 (no angular acceleration).",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2c8a5eed-9f4a-4cb0-a0af-61456a9e9628",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Rotational Dynamics",
+  "prompt": "Analogue of mass in rotational motion is?",
+  "formula": "",
+  "options": [
+   "Torque",
+   "Angular momentum",
+   "Moment of inertia",
+   "Radius of gyration"
+  ],
+  "answer": 2,
+  "explain": "I plays role of mass in τ = Iα, just as F = ma in linear motion.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "37ba9c20-45e3-414e-b166-8d17c11ecc76",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Angular Momentum",
+  "prompt": "For a system, angular momentum about CM + angular momentum of CM about origin equals?",
+  "formula": "L_total = L_spin + L_orbital",
+  "options": [
+   "Translational KE",
+   "Zero",
+   "Total angular momentum about origin",
+   "Linear momentum"
+  ],
+  "answer": 2,
+  "explain": "L_total = r_cm×Mv_cm + I_cm·ω; spin + orbital = total angular momentum.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7fbeffcd-4dd9-4473-bfa0-73c0b7c13b4c",
+  "subject": "Physics",
+  "chapter": "Rotational Motion",
+  "topic": "Radius of Gyration",
+  "prompt": "If radius of gyration of a disc about its axis is K, then K equals?",
+  "formula": "K = R/√2",
+  "options": [
+   "R√2",
+   "R",
+   "R/√2",
+   "R/2"
+  ],
+  "answer": 2,
+  "explain": "I = MK² = MR²/2 ⇒ K = R/√2 for disc about central axis.",
+  "review_status": "pilot_review_pending",
+  "syllabus": "JEE Main"
+ }
+]

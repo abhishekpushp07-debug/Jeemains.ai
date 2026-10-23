@@ -1,0 +1,1217 @@
+{
+  "info": {
+    "name": "JEELIVE.AI Android handoff \u2014 do not run against production as tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Reference requests, no credentials or auth token scripts. Cookie jar is required. Replace placeholders only in an authorized QA environment; do not run the collection against live customer data."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://jeelive.ai"
+    },
+    {
+      "key": "id",
+      "value": "[RESOURCE_ID]"
+    },
+    {
+      "key": "qid",
+      "value": "[QUESTION_UUID]"
+    },
+    {
+      "key": "slug",
+      "value": "jee-main"
+    },
+    {
+      "key": "kind",
+      "value": "question"
+    },
+    {
+      "key": "index",
+      "value": "0"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /api/health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health",
+        "header": [],
+        "description": "Health\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/auth/login",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/auth/login",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Login\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"[AUTHORIZED_STAFF_EMAIL]\",\n  \"password\": \"[SECURELY_ENTERED_PASSWORD]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/auth/session",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/auth/session",
+        "header": [],
+        "description": "Session\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/auth/me",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/auth/me",
+        "header": [],
+        "description": "Me\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/auth/refresh",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/auth/refresh",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Refresh\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/auth/logout",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/auth/logout",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Logout\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "PATCH /api/auth/preferences",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/auth/preferences",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Preferences\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"exam\": \"JEE Main\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/auth/phone",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/auth/phone",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Access\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"[USER_ENTERED_PHONE]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/sets",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/sets",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "sets"
+          ],
+          "query": [
+            {
+              "key": "exam",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Catalogue\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/sets/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/sets/{{id}}",
+        "header": [],
+        "description": "Set Detail\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "PUT /api/attempts/{id}/answers/{qid}",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/answers/{{qid}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Save Answer\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"value\": \"A\",\n  \"marked\": false,\n  \"revision\": 1,\n  \"request_id\": \"[UUID_FOR_THIS_EDIT]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/my/sets",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/my/sets",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "my",
+            "sets"
+          ],
+          "query": [
+            {
+              "key": "exam",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "My Sets\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/my/sets/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/my/sets/{{id}}",
+        "header": [],
+        "description": "My Set\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/sets/{id}/preflight",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/sets/{{id}}/preflight",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Preflight\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"preview\": false,\n  \"test_response\": \"[LOCAL_DEVICE_CHECK]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/sets/{id}/start",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/sets/{{id}}/start",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Start\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start_key\": \"[UUID_FOR_THIS_START_INTENT]\",\n  \"device_checked\": true,\n  \"preview\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/attempts",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/attempts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "attempts"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "History\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/attempts/{{id}}",
+        "header": [],
+        "description": "Read Attempt\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/visit",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/visit",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Visit Question\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question_id\": \"[QUESTION_UUID_FROM_ATTEMPT]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/bonus",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/bonus",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Unlock Bonus\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/submit",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/submit",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Submit\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/results",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/attempts/{{id}}/results",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "attempts",
+            "{{id}}",
+            "results"
+          ],
+          "query": [
+            {
+              "key": "score_version",
+              "value": "original",
+              "disabled": true
+            },
+            {
+              "key": "confidence_threshold",
+              "value": "0.2",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Results\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/questions/{qid}/asset/{kind}/{index}",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/attempts/{{id}}/questions/{{qid}}/asset/{{kind}}/{{index}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "attempts",
+            "{{id}}",
+            "questions",
+            "{{qid}}",
+            "asset",
+            "{{kind}}",
+            "{{index}}"
+          ],
+          "query": [
+            {
+              "key": "score_version",
+              "value": "original",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Asset\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/questions/{qid}/solution-open",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/questions/{{qid}}/solution-open",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Solution Consulted\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/retry",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/retry",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Retry\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start_key\": \"[NEW_UUID_FOR_RETRY_INTENT]\",\n  \"score_version\": \"original\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/report",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/report",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Report\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"score_version\": \"original\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/jobs/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/jobs/{{id}}",
+        "header": [],
+        "description": "Status\n\nUse only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/jobs/{id}/retry",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/jobs/{{id}}/retry",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Retry Job\n\nUse only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start_key\": \"[NEW_UUID_FOR_RETRY_INTENT]\",\n  \"score_version\": \"original\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/jobs/{id}/download",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/jobs/{{id}}/download",
+        "header": [],
+        "description": "Download\n\nUse only server-issued job IDs owned by the current user. GET status may dispatch queued work; not a read-only production test. Retry only failed allowed jobs. Report downloads require ownership, ready status and release.\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/competitions",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/competitions",
+        "header": [],
+        "description": "Catalogue\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/competitions/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/competitions/{{id}}",
+        "header": [],
+        "description": "Leaderboard\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "PUT /api/attempts/{id}/reviews/{qid}",
+      "request": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/reviews/{{qid}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Save Review\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"request_id\": \"[NEW_UUID_FOR_REVIEW_EDIT]\",\n  \"revision\": 1,\n  \"score_version\": \"original\",\n  \"category\": \"calculation\",\n  \"note\": \"[USER_WRITTEN_NOTE_MAX_500]\",\n  \"identified_error\": true,\n  \"wrote_note\": true,\n  \"reviewed_solution\": false,\n  \"retry_planned\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/expected-value",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/expected-value",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Expected Value\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"probability\": 0.5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/chapter-exams",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/chapter-exams",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "chapter-exams"
+          ],
+          "query": [
+            {
+              "key": "subject",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Public Exams\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/my/chapter-exams",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/my/chapter-exams",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "my",
+            "chapter-exams"
+          ],
+          "query": [
+            {
+              "key": "subject",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "My Exams\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/solutions/{qid}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/solutions/{{qid}}",
+        "header": [],
+        "description": "Read\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/solutions/{qid}",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/solutions/{{qid}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Request Solution\nPAUSED LEGACY OPERATION: authenticated calls currently return HTTP410. Do not expose AI generation, retry this operation or substitute generated content for supplied solutions. GET remains subject to release/ownership checks.\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/cohort",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/attempts/{{id}}/cohort",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "attempts",
+            "{{id}}",
+            "cohort"
+          ],
+          "query": [
+            {
+              "key": "score_version",
+              "value": "original",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Read\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/air-scenario",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/air-scenario",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Air Scenario\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"percentile_low\": 90.0,\n  \"percentile_high\": 95.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/exam-navigation/{slug}/catalogue",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/exam-navigation/{{slug}}/catalogue",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "exam-navigation",
+            "{{slug}}",
+            "catalogue"
+          ],
+          "query": [
+            {
+              "key": "kind",
+              "value": "chapters",
+              "disabled": true
+            },
+            {
+              "key": "subject",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Catalogue\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/exam-navigation/{slug}/history",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/exam-navigation/{{slug}}/history",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "exam-navigation",
+            "{{slug}}",
+            "history"
+          ],
+          "query": [
+            {
+              "key": "kind",
+              "value": "all",
+              "disabled": true
+            },
+            {
+              "key": "days",
+              "value": "all",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "History\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/ai-solutions",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/ai-solutions",
+        "header": [],
+        "description": "Attempt Solutions\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/question-reports",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/question-reports",
+        "header": [],
+        "description": "My Reports\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/attempts/{id}/questions/{qid}/report-wrong",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/attempts/{{id}}/questions/{{qid}}/report-wrong",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Report Wrong\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category\": \"solution\",\n  \"context\": \"solutions\",\n  \"note\": \"[USER_WRITTEN_NOTE_MAX_600]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/journey",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/attempts/{{id}}/journey",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "attempts",
+            "{{id}}",
+            "journey"
+          ],
+          "query": [
+            {
+              "key": "score_version",
+              "value": "original",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Journey\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/my/tests/saved/{id}",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/my/tests/saved/{{id}}",
+        "header": [],
+        "description": "Save State\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/my/tests/saved/{id}",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/my/tests/saved/{{id}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Save Paper\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "DELETE /api/my/tests/saved/{id}",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/my/tests/saved/{{id}}",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Remove Saved\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/my/tests",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/my/tests",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "my",
+            "tests"
+          ],
+          "query": [
+            {
+              "key": "tab",
+              "value": "progress",
+              "disabled": true
+            },
+            {
+              "key": "exam",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "q",
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "status",
+              "value": "all",
+              "disabled": true
+            },
+            {
+              "key": "start",
+              "value": "[QUERY_START]",
+              "disabled": true
+            },
+            {
+              "key": "end",
+              "value": "[QUERY_END]",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "My Tests\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "POST /api/my/tests/compare",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/my/tests/compare",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Compare\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"left\": \"[OWN_COMPLETED_ATTEMPT_ID]\",\n  \"right\": \"[OWN_OTHER_COMPLETED_ATTEMPT_ID]\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GET /api/attempts/{id}/historical-rank",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/attempts/{{id}}/historical-rank",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "attempts",
+            "{{id}}",
+            "historical-rank"
+          ],
+          "query": [
+            {
+              "key": "score_version",
+              "value": "original",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Historical Rank\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/bitsat/branch-matches",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/bitsat/branch-matches?score=[QUERY_SCORE]",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "bitsat",
+            "branch-matches"
+          ],
+          "query": [
+            {
+              "key": "score",
+              "value": "[QUERY_SCORE]",
+              "disabled": false
+            },
+            {
+              "key": "campus",
+              "value": "all",
+              "disabled": true
+            },
+            {
+              "key": "programme",
+              "value": "be",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "Branch Matches\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/series/all-india-jee",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/series/all-india-jee",
+        "header": [],
+        "description": "Catalogue\n\n\nScope: public_or_handler_checked. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/series/all-india-jee/history",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/series/all-india-jee/history",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "series",
+            "all-india-jee",
+            "history"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ]
+        },
+        "header": [],
+        "description": "History\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    },
+    {
+      "name": "GET /api/series/all-india-jee/streak",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/series/all-india-jee/streak",
+        "header": [],
+        "description": "Progress\n\n\nScope: authenticated_profile. Cookie session required where protected. Body below is a template; consult schema."
+      }
+    }
+  ]
+}
