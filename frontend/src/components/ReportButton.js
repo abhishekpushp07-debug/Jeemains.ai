@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 export const ReportButton = () => null;
 
 const ReportDownload = ({ id, compact = false, scoreVersion = 'original', answerKeyOnly = false }) => {
-  const filename = answerKeyOnly ? 'jeemains-ai-results-and-answer-keys.pdf' : 'jeemains-ai-results-and-solutions.pdf';
+  const filename = answerKeyOnly ? 'jeelive-ai-results-and-answer-keys.pdf' : 'jeelive-ai-results-and-solutions.pdf';
   const [job, setJob] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');

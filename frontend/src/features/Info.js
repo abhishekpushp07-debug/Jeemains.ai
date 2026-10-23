@@ -6,7 +6,7 @@ export default function Info() {
   return (
     <div className="container page reading-page">
       <PageTitle
-        eyebrow="THE TEJAS STANDARD"
+        eyebrow="THE JEELIVE.AI STANDARD"
         title={
           accessibility
             ? "A place for different ways of learning."
@@ -22,7 +22,7 @@ export default function Info() {
         <article className="card reading-content">
           <h2>Reading and interaction</h2>
           <p>
-            jeemains.ai supports keyboard navigation, visible focus, labelled inputs,
+            JEELIVE.AI supports keyboard navigation, visible focus, labelled inputs,
             touch-friendly controls and meaningful status labels—not colour
             alone. The interface respects reduced motion. Mobile is a compact
             practice adaptation, not a claim of faithful official exam

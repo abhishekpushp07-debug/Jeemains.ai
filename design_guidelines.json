@@ -1,170 +1,151 @@
 {
-  "project_title": "All India JEE Mains Flagship 62-Day Daily Completion Streak & Gamified Progress System",
-  "theme": {
-    "mode": "hybrid_adaptive",
-    "primary_brand": "#0D9488",
-    "primary_brand_dark": "#0F766E",
-    "primary_brand_light": "#2DD4BF",
-    "secondary_brand": "#0284C7",
-    "sky_blue_accent": "#38BDF8",
-    "sky_blue_hover": "#0284C7",
-    "amber_gold_trophy": "#F59E0B",
-    "amber_gold_bright": "#FBBF24",
-    "bronze_cup": "#CD7F32",
-    "silver_cup": "#94A3B8",
-    "diamond_trophy": "#38BDF8",
-    "streak_fire_orange": "#F97316",
-    "background_light": "#FAFAFA",
-    "background_dark": "#090D16",
-    "surface_light": "#FFFFFF",
-    "surface_dark": "#111827",
-    "border_light": "#E2E8F0",
-    "border_dark": "#1E293B",
-    "text_light_primary": "#0F172A",
-    "text_dark_primary": "#F8FAFC",
-    "text_muted_light": "#64748B",
-    "text_muted_dark": "#94A3B8"
+  "project_title": "JEELIVE.AI Premium Learning Dashboard Refinement",
+  "brand_identity": {
+    "brand_name": "JEELIVE.AI",
+    "previous_brand_name": "jeemains.ai",
+    "positioning": "High-Performance Competitive Exam Preparation Platform for JEE Main, BITSAT, & COMEDK",
+    "archetype": "Performance Pro & Old Money Tech Fusion",
+    "emotional_tone": "Precision, Elite Confidence, High-Voltage Academic Drive, Luxury Craftsmanship"
+  },
+  "color_palette_system": {
+    "flagship_card_jee_main": {
+      "theme_name": "Deep Shining Blue (Sapphire Cyber Gloss)",
+      "background_gradient": "linear-gradient(135deg, #070F1E 0%, #0B1B36 40%, #102A56 80%, #0F172A 100%)",
+      "surface_base": "#0B1B36",
+      "border_stroke": "1px solid rgba(56, 189, 248, 0.35)",
+      "border_glow": "0 0 25px rgba(14, 165, 233, 0.28)",
+      "shine_sweep_gradient": "linear-gradient(115deg, transparent 20%, rgba(56, 189, 248, 0.25) 45%, rgba(255, 255, 255, 0.45) 50%, rgba(56, 189, 248, 0.25) 55%, transparent 80%)",
+      "accent_primary": "#38BDF8",
+      "accent_secondary": "#0066FF",
+      "text_primary": "#F0F9FF",
+      "text_secondary": "#93C5FD",
+      "badge_background": "rgba(14, 165, 233, 0.15)",
+      "badge_text": "#7DD3FC",
+      "forbidden_color": "#1B93A4 (Teal completely eliminated)"
+    },
+    "comedk_card": {
+      "theme_name": "Premium Black (Obsidian & Platinum Luxury)",
+      "background_gradient": "linear-gradient(145deg, #090A0F 0%, #12141C 50%, #050608 100%)",
+      "surface_base": "#0C0D12",
+      "border_stroke": "1px solid rgba(255, 255, 255, 0.14)",
+      "border_glow": "0 0 20px rgba(212, 175, 55, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+      "shine_sweep_gradient": "linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%)",
+      "accent_primary": "#E2E8F0",
+      "accent_luxury_gold": "#D4AF37",
+      "text_primary": "#FFFFFF",
+      "text_secondary": "#94A3B8",
+      "badge_background": "rgba(255, 255, 255, 0.08)",
+      "badge_text": "#F1F5F9"
+    },
+    "bitsat_card": {
+      "theme_name": "Premium Orange (Radiant Copper & Blaze)",
+      "background_gradient": "linear-gradient(135deg, #1A0B04 0%, #2A1206 45%, #3D1A08 85%, #180903 100%)",
+      "surface_base": "#240F05",
+      "border_stroke": "1px solid rgba(249, 115, 22, 0.4)",
+      "border_glow": "0 0 22px rgba(234, 88, 12, 0.35)",
+      "shine_sweep_gradient": "linear-gradient(115deg, transparent 25%, rgba(251, 146, 60, 0.3) 48%, rgba(255, 237, 213, 0.5) 52%, rgba(249, 115, 22, 0.3) 75%)",
+      "accent_primary": "#FF6B00",
+      "accent_secondary": "#EA580C",
+      "text_primary": "#FFF7ED",
+      "text_secondary": "#FDBA74",
+      "badge_background": "rgba(234, 88, 12, 0.18)",
+      "badge_text": "#FFEDD5"
+    },
+    "global_dashboard_neutrals": {
+      "app_bg_dark": "#06080E",
+      "app_bg_light": "#F8FAFC",
+      "card_container_bg_dark": "#0D111A",
+      "card_container_bg_light": "#FFFFFF",
+      "text_main_dark": "#F8FAFC",
+      "text_muted_dark": "#94A3B8",
+      "text_main_light": "#0F172A",
+      "text_muted_light": "#64748B"
+    }
   },
   "typography": {
-    "heading_font": "Figtree, sans-serif",
-    "mono_font": "Roboto Mono, monospace",
-    "body_font": "Figtree, sans-serif",
-    "h1": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight",
-    "h2": "text-2xl sm:text-3xl font-bold tracking-tight",
-    "h3": "text-xl sm:text-2xl font-semibold tracking-normal",
-    "body": "text-base leading-relaxed",
-    "caption": "text-xs font-mono uppercase tracking-widest"
+    "heading_font_family": "'Plus Jakarta Sans', 'Outfit', 'Cabinet Grotesk', sans-serif",
+    "body_font_family": "'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+    "mono_font_family": "'JetBrains Mono', monospace",
+    "rules": {
+      "forbid_inter_for_headings": true,
+      "h1_max_size": "text-4xl sm:text-5xl lg:text-6xl",
+      "h2_section_size": "text-2xl sm:text-3xl lg:text-4xl",
+      "h3_card_header_size": "text-xl sm:text-2xl",
+      "letter_spacing_headers": "tracking-tight (-0.025em)",
+      "letter_spacing_labels": "tracking-widest (0.15em) uppercase"
+    }
   },
   "visual_enhancers": {
-    "glassmorphism": "backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border border-slate-200/60 dark:border-slate-800/60",
-    "streak_track_bg": "bg-gradient-to-r from-teal-950 via-slate-900 to-sky-950 text-white border-2 border-teal-500/30 shadow-2xl rounded-2xl p-6 md:p-8 relative overflow-hidden",
-    "runner_pulse_glow": "shadow-[0_0_20px_rgba(56,189,248,0.5)] border-2 border-sky-400 rounded-full",
-    "trophy_milestone_badge": "inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 animate-bounce",
-    "sky_blue_pill": "bg-sky-500 hover:bg-sky-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md transition-all duration-200"
+    "glassmorphism": {
+      "backdrop_blur": "backdrop-blur-xl (16px - 24px)",
+      "saturation_boost": "backdrop-saturate-150",
+      "border": "1px solid rgba(255, 255, 255, 0.12)"
+    },
+    "shine_animation_effect": {
+      "css_keyframes": "@keyframes shiningSweep { 0% { transform: translateX(-150%) rotate(25deg); } 100% { transform: translateX(150%) rotate(25deg); } }",
+      "sweep_duration": "4s linear infinite",
+      "sweep_overlay": "absolute inset-0 pointer-events-none overflow-hidden"
+    },
+    "noise_texture": "subtle SVG grain overlay at 3% opacity for tactile realism"
   },
-  "streak_feature_specification": {
-    "total_duration": "62 Days (1 Dec 2026 - 31 Jan 2027 IST)",
-    "core_metrics": [
-      {
-        "key": "current_streak",
-        "label": "Current Streak",
-        "format": "{N} Days",
-        "icon": "Fire Flame / Runner Icon",
-        "hinglish_tagline": "Continuity tootne mat dena! 🔥"
-      },
-      {
-        "key": "best_streak",
-        "label": "Best Streak",
-        "format": "{N} Days Record",
-        "icon": "Trophy Crown",
-        "hinglish_tagline": "Aapka highest consistency record!"
-      },
-      {
-        "key": "completion_count",
-        "label": "Completed Tests",
-        "format": "{X} / 62 Days",
-        "icon": "Check Circle",
-        "hinglish_tagline": "62 Din Target JEE Mains!"
-      }
-    ],
-    "animated_runner_and_track_design": {
-      "runner_mascot": "Animated SVG Running Sprint Silhouette with Sky-Blue (#38BDF8) dynamic stride motion & particle speed trails.",
-      "track_layout": "Responsive horizontal scrollable / curved 62-step progression track with glowing teal node markers, milestone checkpoints, and real-time runner position pin.",
-      "running_animation_behavior": "Smooth CSS @keyframes sprint bobbing + SVG legs movement along track percentage: (Completed_Days / 62) * 100%.",
-      "reduced_motion_fallback": "Replaces continuous running animation with a crisp, static high-contrast location marker icon and instant progress bar fill for reduced motion preference (`prefers-reduced-motion: reduce`)."
+  "component_guidelines": {
+    "flagship_jee_main_card": {
+      "container_class": "relative overflow-hidden rounded-2xl p-6 sm:p-8 transition-all duration-300 transform hover:-translate-y-1",
+      "background_style": "Deep shining sapphire blue gradient with reactive edge beam",
+      "badge_elements": "All India Rank Predictor & Live Mock Series tags",
+      "cta_button": "Pill-shaped vibrant cyan-blue glowing button with arrow icon micro-interaction"
     },
-    "trophy_milestones": [
-      {
-        "day": 7,
-        "title": "7-Day Warmup Cup",
-        "cup_tier": "Bronze Cup 🥉",
-        "hinglish_note": "Pehla Hafta Conquered! Base Ready!"
-      },
-      {
-        "day": 15,
-        "title": "15-Day Momentum Trophy",
-        "cup_tier": "Silver Cup 🥈",
-        "hinglish_note": "Half-month Consistency Master!"
-      },
-      {
-        "day": 30,
-        "title": "30-Day Halfway Shield",
-        "cup_tier": "Gold Cup 🏆",
-        "hinglish_note": "Halfway Mark Done! 30 Mocks Completed!"
-      },
-      {
-        "day": 45,
-        "title": "45-Day Supercharged Elite",
-        "cup_tier": "Diamond Cup 💎",
-        "hinglish_note": "Day 45 Streak Supercharged 🔥 - Rank Booster Mode!"
-      },
-      {
-        "day": 62,
-        "title": "62-Day JEE Legend Crown",
-        "cup_tier": "Grand Champion Trophy 👑🏆",
-        "hinglish_note": "62/62 Days Completed! JEE Mains Champion!"
-      }
-    ],
-    "states_and_handling": {
-      "prelaunch_state": "Countdown to Dec 1, 2026 with unlocked warm-up streak pledge button.",
-      "active_daily_state": "Today's Live Test status highlight: 'Aaj Ka Test Completed! Streak Safe! 🏆' or 'Aaj Ka Test Pending - 3 Hours Mock Baaki Hai! ⏳'",
-      "missed_day_state": "Honest non-fabricated completion tracking. Displays streak broken notice with 'Streak Freeze / Buffer Attempt' options without falsifying historical test submission logs.",
-      "completed_state": "Confetti celebration modal with shareable report card card layout."
+    "comedk_card": {
+      "container_class": "relative overflow-hidden rounded-2xl p-6 sm:p-8 transition-all duration-300 transform hover:-translate-y-1",
+      "background_style": "Obsidian deep black with platinum/gold hairline borders",
+      "cta_button": "Sleek monochrome metallic button with hover glow"
     },
-    "integration_points": [
-      {
-        "location": "Home Dashboard Banner (`LiveSeriesBanner.js`)",
-        "type": "Compact 62-Day Streak Widget with mini runner progress, current streak counter, and direct 'Continue Streak' CTA button."
-      },
-      {
-        "location": "All India Series Hub (`LiveSeries.js`)",
-        "type": "Full-width Interactive 62-Day Sprint Hub featuring dynamic track visualization, Cup Milestones gallery, detailed streak statistics, and day-by-day test selector grid."
-      }
+    "bitsat_card": {
+      "container_class": "relative overflow-hidden rounded-2xl p-6 sm:p-8 transition-all duration-300 transform hover:-translate-y-1",
+      "background_style": "Rich burnt copper & warm fiery orange gradient",
+      "cta_button": "High-contrast copper blaze button with micro-bounce on hover"
+    },
+    "animations_to_preserve": {
+      "streak_running_athlete": "Retain animated running avatar and progress indicators on streak tracker",
+      "trophy_celebration": "Retain trophy animations for milestones, badges, and completed test goals",
+      "timer_countdown": "Keep high-contrast animated timers for live exam countdowns"
+    }
+  },
+  "grids_and_layouts": {
+    "dashboard_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 p-4 sm:p-6 lg:p-8",
+    "card_ratios": {
+      "flagship_hero": "lg:col-span-8 row-span-2",
+      "comedk_bitsat_cards": "lg:col-span-4 row-span-1",
+      "streak_journey": "lg:col-span-12 row-span-1"
+    },
+    "spacing_scale": "Use p-6 / p-8 internal padding for card containers to prevent text collision"
+  },
+  "image_urls": {
+    "hero_backgrounds": [
+      "https://images.unsplash.com/photo-1579548122080-c35fd6820ecb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBkZWVwJTIwYmx1ZSUyMGN5YmVyJTIwdGVjaCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzkyNzQwNjgyfDA&ixlib=rb-4.1.0&q=85",
+      "https://images.unsplash.com/photo-1684503830679-302965124d97?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBkZWVwJTIwYmx1ZSUyMGN5YmVyJTIwdGVjaCUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzkyNzQwNjgyfDA&ixlib=rb-4.1.0&q=85"
     ]
   },
-  "key_user_requirements": [
-    {
-      "requirement_id": "REQ-01",
-      "summary": "62-Day Completion Streak System",
-      "action": "Incorporate a 62-day completion streak (1 Dec 2026 - 31 Jan 2027) with running runner mascot animation and animated progress track."
-    },
-    {
-      "requirement_id": "REQ-02",
-      "summary": "Beautiful Trophy & Cup Milestones",
-      "action": "Render animated trophy milestones (Day 7 Bronze, Day 15 Silver, Day 30 Gold, Day 45 Diamond, Day 62 Grand Champion) with honest celebration modal upon milestone unlock."
-    },
-    {
-      "requirement_id": "REQ-03",
-      "summary": "Personal Metrics & Hinglish Progress Notes",
-      "action": "Display Personal Current Streak, Best Streak, and Completed Tests out of 62 with Hinglish motivational copy (e.g., '62 Din Target JEE Mains!')."
-    },
-    {
-      "requirement_id": "REQ-04",
-      "summary": "Accessible Reduced Motion & Prelaunch/Missed States",
-      "action": "Provide reduced-motion support, prelaunch countdown state, and accurate non-fabricated missed day state handling."
-    },
-    {
-      "requirement_id": "REQ-05",
-      "summary": "Home Banner & Series Hub Integration",
-      "action": "Integrate compact streak progress into Home dashboard banner and full interactive sprint hub in `/series/all-india-jee`."
-    }
-  ],
-  "image_urls": {
-    "trophy_illustration": "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?crop=entropy&cs=srgb&fm=jpg&q=85",
-    "runner_athlete": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?crop=entropy&cs=srgb&fm=jpg&q=85",
-    "student_exam_1": "https://images.unsplash.com/photo-1534644107580-3a4dbd494a95?crop=entropy&cs=srgb&fm=jpg&q=85",
-    "classroom_test": "https://images.pexels.com/photos/31115182/pexels-photo-31115182.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+  "accessibility_and_contrast": {
+    "wcag_level": "WCAG AA (4.5:1 for standard text, 3:1 for large text and buttons)",
+    "apca_contrast": "High contrast maintained against dark obsidian, deep blue, and copper orange surfaces",
+    "focus_states": "ring-2 ring-sky-400 ring-offset-2 ring-offset-slate-950 on key elements",
+    "reduced_motion": "Respect prefers-reduced-motion CSS query to disable heavy continuous sweeps for sensitive users"
   },
   "instructions_to_main_agent": [
-    "Use Flagship Teal (#0D9488) and Sky-Blue (#0284C7 / #38BDF8) as the primary brand palette with Amber Gold (#F59E0B) for trophy milestones.",
-    "Ensure all interactive buttons, streak nodes, trophy cards, and toggle switches contain explicit data-testid attributes.",
-    "Support prefers-reduced-motion in CSS animation keyframes and React motion logic.",
-    "Do not fake or fabricate completion dates; maintain honest history tracking."
+    "1. Replace all visible instances of brand name 'jeemains.ai' with 'JEELIVE.AI' across headers, footers, titles, and wordmarks.",
+    "2. Eliminate all teal color usage (#1B93A4 / bg-teal-*) from the dashboard cards.",
+    "3. Apply Deep Shining Blue theme to the flagship All India / JEE Main card with high-end sapphire glow and active shining sweep overlay.",
+    "4. Apply Premium Black (Obsidian & Platinum Luxury) theme to the COMEDK cards with subtle metallic borders.",
+    "5. Apply Premium Orange (Radiant Copper & Blaze) theme to the BITSAT cards with glowing amber edges.",
+    "6. Ensure all interactive buttons, card anchors, and tabs have proper data-testid attributes (e.g., data-testid='flagship-jee-card', data-testid='comedk-card', data-testid='bitsat-card').",
+    "7. Retain all existing streak journey logic, running athlete animations, trophy celebrations, timers, and 62-day rules without breaking functionality.",
+    "8. Maintain clean light/dark toggle accessibility and mobile responsive layouts."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Always include data-testid on interactive and key status components using kebab-case.",
-    "Do not center-align the main App container text globally.",
-    "Maintain contrast accessibility in both light and dark themes.",
-    "Use Sonner for user toast notifications."
-  ]
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "no_ai_slop": "Avoid generic centered layouts and cheap gradients. Use crisp borders, layered z-indices, and optical alignment.",
+    "no_universal_transition": "Never use transition: all. Use targeted CSS properties like transition-transform or transition-colors.",
+    "testing_attributes": "All interactive and key informational elements MUST include data-testid attributes in kebab-case.",
+    "no_transparent_overlays": "Never use pure transparent backgrounds for headers or cards where content scrolls underneath; use backdrop-blur and glassmorphism styling."
+  }
 }

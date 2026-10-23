@@ -1,5 +1,4 @@
-/* jeemains.ai · simple navigation / free campaign.
-   Existing matte-maroon identity, Figtree type and semantic light/dark surfaces. */
+/* JEELIVE.AI · navigation and free practice. */
 :root {
  --brand-primary:var(--blue); --brand-on-dark-line:color-mix(in srgb,var(--on-brand) 25%,transparent);
  --font-body:var(--font-ui); --leading-normal:1.6; --tracking-label:.075em; --text-2xs:.75rem;
@@ -19,8 +18,10 @@
 }
 .simple-header { background:var(--surface-card); }
 .simple-header .header-inner { justify-content:space-between; }
-.simple-brand { display:inline-flex; align-items:center; gap:var(--space-2); color:var(--ink); font-size:1.5rem; letter-spacing:var(--tracking-tight); flex-shrink:0; }
-.simple-brand .brand-cap,.brand-ai { color:var(--brand-text); }
+.simple-brand { display:inline-flex; align-items:center; gap:var(--space-2); color:var(--ink); font-size:1.5rem; font-weight:850; letter-spacing:-.065em; flex-shrink:0; }
+.simple-brand>span { white-space:nowrap; }
+.simple-brand .brand-cap,.simple-brand .brand-ai { color:#1D4ED8; }
+.dark:not(.exam-light) .simple-brand .brand-cap,.dark:not(.exam-light) .simple-brand .brand-ai { color:#93C5FD; }
 .simple-header-actions { display:flex; align-items:center; gap:var(--space-3); }
 .header-free-label { color:var(--brand-text); font-size:var(--text-xs); font-weight:600; border:1px solid var(--brand-line); padding:var(--space-1) var(--space-2); border-radius:var(--radius-pill); }
 .simple-header .header-actions button,.simple-header .header-actions a { min-height:var(--touch-target); }

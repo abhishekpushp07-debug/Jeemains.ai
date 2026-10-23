@@ -67,7 +67,7 @@ export const StudioImportHub = () => {
     finally { setBusy(false); }
   }
   if (format === 'chapter') return <div data-testid="studio-import-hub"><Tabs value={format} onValueChange={mode} className="chapter-import-modes"><TabsList><TabsTrigger value="chapter" data-testid="studio-create-test-import-mode-chapter">Chapter book · 1 PDF</TabsTrigger><TabsTrigger value="pdf" data-testid="studio-create-test-import-mode-pdf">PDF question + solution files</TabsTrigger><TabsTrigger value="xlsx" data-testid="studio-create-test-import-mode-excel">Excel · direct text</TabsTrigger></TabsList></Tabs><ChapterBookUploader/></div>;
-  const download = variant => downloadFile('/studio/imports/template?variant=' + variant, `jeemains-ai-${variant}-template.xlsx`).catch(e => toast.error(e.message));
+  const download = variant => downloadFile('/studio/imports/template?variant=' + variant, `jeelive-ai-${variant}-template.xlsx`).catch(e => toast.error(e.message));
   return <div className="import-hub" data-testid="studio-import-hub">
     <section className="import-card">
       <div className="import-section-label"><Upload size={16} /> FROM YOUR CONTENT TO THEIR NEXT ATTEMPT</div>

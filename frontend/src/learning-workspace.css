@@ -6,21 +6,25 @@
 .tone-amber { --segment:#D97706; --segment-soft:#FFFBEB; --segment-ink:#92400E; }
 .tone-crimson { --segment:#DC2626; --segment-soft:#FEF2F2; --segment-ink:#991B1B; }
 .bold-exam-grid { display:grid; grid-template-columns:1.06fr 1fr 1fr; gap:22px; margin:30px 0 48px; }
-.bold-exam-card { --exam-colour:#5C0025; background:var(--exam-colour); color:#fff; padding:30px; border-radius:22px; display:flex; flex-direction:column; gap:28px; min-width:0; min-height:350px; position:relative; isolation:isolate; overflow:hidden; box-shadow:0 12px 28px #1b112312; transition:transform .2s,box-shadow .2s; }
-.bold-exam-card:after { content:''; border:1px solid #ffffff1f; border-radius:50%; width:220px; height:220px; position:absolute; top:-95px; right:-75px; z-index:-1; }
-.bold-exam-card:hover { transform:translateY(-4px); box-shadow:0 16px 32px #1b112324; }
-.exam-tone-bitsat { --exam-colour:#0284C7; }
-.exam-tone-comedk { --exam-colour:#1E40AF; }
-.bold-exam-top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
-.bold-exam-top>span { font:10px 'Roboto Mono',monospace; opacity:.8; max-width:120px; text-align:right; letter-spacing:1px; }
-.bold-exam-card small { color:#fff; font-size:10px; letter-spacing:1.3px; font-weight:700; opacity:.85; }
+.bold-exam-card { --exam-colour:#102F79; --exam-accent:#99C7FF; --exam-muted:#D4E4FF; --exam-line:#6EA2FF55; --exam-button:#EFF6FF; --exam-button-ink:#123785; background:var(--exam-colour); color:#fff; padding:30px; border:1px solid var(--exam-line); border-radius:22px; display:flex; flex-direction:column; gap:28px; min-width:0; min-height:350px; position:relative; isolation:isolate; overflow:hidden; box-shadow:inset 0 1px 0 #ffffff35,0 14px 28px #0C183524; transition:transform .25s,box-shadow .25s,border-color .25s; }
+.bold-exam-card>* { position:relative; z-index:1; }
+.bold-exam-card:before { content:''; position:absolute; inset:-60% -80%; pointer-events:none; z-index:0; background:linear-gradient(110deg,transparent 44%,#ffffff12 49%,#ffffff20 50%,transparent 56%); transform:translateX(-55%); transition:transform .9s ease; }
+.bold-exam-card:after { content:''; border:1px solid var(--exam-line); border-radius:50%; width:260px; height:260px; position:absolute; top:-140px; right:-95px; z-index:0; pointer-events:none; box-shadow:0 0 0 36px #ffffff04,0 0 0 72px #ffffff03; }
+.bold-exam-card:hover { transform:translateY(-5px); border-color:var(--exam-accent); box-shadow:inset 0 1px 0 #ffffff45,0 22px 42px #0C183532; }
+.bold-exam-card:hover:before,.bold-exam-card:focus-within:before { transform:translateX(55%); }
+.exam-tone-bitsat { --exam-colour:#A63C10; --exam-accent:#FFD1A1; --exam-muted:#FFE5CC; --exam-line:#FFB16B70; --exam-button:#FFEDD5; --exam-button-ink:#7C2D12; }
+.exam-tone-comedk { --exam-colour:#101115; --exam-accent:#E5D5AF; --exam-muted:#CDD0DA; --exam-line:#DDE3EE40; --exam-button:#ECEEF2; --exam-button-ink:#101115; }
+.bold-exam-top { display:flex; justify-content:space-between; gap:12px; align-items:center; color:var(--exam-accent); }
+.bold-exam-top>svg { width:56px; height:56px; padding:11px; background:#ffffff09; border:1px solid var(--exam-line); border-radius:16px; box-shadow:inset 0 1px 0 #ffffff1a; }
+.bold-exam-top>span { font:11px 'Roboto Mono',monospace; opacity:1; max-width:120px; text-align:right; letter-spacing:1px; }
+.bold-exam-card small { color:var(--exam-accent); font-size:11px; letter-spacing:1.3px; font-weight:700; }
 .bold-exam-card h2 { font:800 44px/1.15 'Figtree',sans-serif; margin:10px 0 13px; letter-spacing:-1.5px; color:#fff; }
 .bold-exam-card h2 a { color:inherit; }
-.bold-exam-card p { font-size:13px; color:#ffffffd9; line-height:1.7; min-height:44px; }
-.bold-exam-card .exam-primary { background:#fff; color:var(--exam-colour); padding:14px 16px; border-radius:10px; display:flex; align-items:center; justify-content:space-between; font-size:14px; font-weight:750; margin-top:auto; min-height:48px; transition:background-color .18s,transform .18s; }
-.bold-exam-card .exam-primary:hover { background:#fff9e9; color:var(--exam-colour); transform:translateX(2px); }
+.bold-exam-card p { font-size:13px; color:var(--exam-muted); line-height:1.7; min-height:44px; }
+.bold-exam-card .exam-primary { background:var(--exam-button); color:var(--exam-button-ink); border:1px solid #ffffff70; box-shadow:inset 0 1px 0 #fff9,0 6px 12px #00000014; padding:14px 16px; border-radius:10px; display:flex; align-items:center; justify-content:space-between; font-size:14px; font-weight:750; margin-top:auto; min-height:48px; transition:background-color .18s,transform .18s; }
+.bold-exam-card .exam-primary:hover { background:#fff; color:var(--exam-button-ink); transform:translateY(-2px); }
 .bold-exam-card nav { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:-14px; }
-.bold-exam-card nav a { color:#fff; font-size:12px; display:flex; gap:4px; align-items:center; text-decoration:underline; text-underline-offset:4px; min-height:30px; }
+.bold-exam-card nav a { color:var(--exam-muted); font-size:12px; display:flex; gap:4px; align-items:center; text-decoration:underline; text-underline-offset:4px; min-height:30px; }
 .home-quick-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
 .direct-home-hero { padding-top:52px; }
 .direct-home-hero h1 { max-width:850px; font-size:clamp(38px,4.5vw,64px); line-height:1.08; letter-spacing:-2px; font-weight:800; margin:18px 0; }
@@ -244,7 +248,7 @@
  .header-my-tests { padding:7px!important; font-size:11px!important; gap:4px!important; }
  .header-my-tests svg { display:none; }
 }
-@media(prefers-reduced-motion:reduce) { .bold-exam-card,.meter-shortcut,.exam-primary { transition:none; } }
+@media(prefers-reduced-motion:reduce) { .bold-exam-card,.bold-exam-card:before,.meter-shortcut,.exam-primary { transition:none; }.bold-exam-card:before { display:none; }.bold-exam-card:hover,.bold-exam-card .exam-primary:hover { transform:none; } }
 
 /* Use semantic classes, never broad span rules: preview wrappers must inherit numeral sizes. */
 .accuracy-gauge strong span,.confidence-facts strong span,.comparison-row strong span,.comparison-deltas strong span,.set-detail .instruction-facts strong span { font:inherit; color:inherit; letter-spacing:inherit; line-height:inherit; }

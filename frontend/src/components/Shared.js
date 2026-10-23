@@ -37,7 +37,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from './ui/dropdown-menu';
 export const Logo = ({testId='brand-home'}) => {
   const {user}=useAuth();
-  return <Link to={user?'/home':'/'} className="logo simple-brand" data-testid={testId}><GraduationCap className="brand-cap" size={30} strokeWidth={1.7}/><span>jeemains<span className="brand-ai">.ai</span></span></Link>;
+  return <Link to={user?'/home':'/'} className="logo simple-brand" aria-label="JEELIVE.AI home" data-testid={testId}><GraduationCap className="brand-cap" size={30} strokeWidth={1.7}/><span data-testid={testId+'-wordmark'}>JEELIVE<span className="brand-ai">.AI</span></span></Link>;
 };
 export function Header() {
   const {user,logout}=useAuth();const nav=useNavigate();
@@ -46,7 +46,7 @@ export function Header() {
 }
 export const Footer = () => {
  const {user}=useAuth();
- return <footer className={'simple-footer '+(!user?'simple-footer-public':'')} data-testid="site-footer"><div className="container">{!user&&<div className="simple-footer-top"><Logo testId="footer-brand-home"/><p data-testid="footer-free-description">Big ambitions. Zero fees.<br/>100% free for all students.</p><Button asChild variant="ghost"><Link to="/owner-login" data-testid="footer-studio">Content Studio<ArrowUpRight size={15}/></Link></Button></div>}<div className="simple-footer-bottom"><span data-testid="footer-copyright">© {new Date().getFullYear()} jeemains.ai</span><nav aria-label="Legal information"><Link to="/privacy" data-testid="footer-privacy">Privacy</Link><Link to="/accessibility" data-testid="footer-accessibility">Accessibility</Link></nav></div>{!user&&<p className="simple-footer-disclosure" data-testid="footer-independent-notice">Independent practice. Not affiliated with NTA, BITS Pilani or COMEDK. Preparation targets are not prediction guarantees.</p>}</div></footer>;
+ return <footer className={'simple-footer '+(!user?'simple-footer-public':'')} data-testid="site-footer"><div className="container">{!user&&<div className="simple-footer-top"><Logo testId="footer-brand-home"/><p data-testid="footer-free-description">Big ambitions. Zero fees.<br/>100% free for all students.</p><Button asChild variant="ghost"><Link to="/owner-login" data-testid="footer-studio">Content Studio<ArrowUpRight size={15}/></Link></Button></div>}<div className="simple-footer-bottom"><span data-testid="footer-copyright">© {new Date().getFullYear()} JEELIVE.AI</span><nav aria-label="Legal information"><Link to="/privacy" data-testid="footer-privacy">Privacy</Link><Link to="/accessibility" data-testid="footer-accessibility">Accessibility</Link></nav></div>{!user&&<p className="simple-footer-disclosure" data-testid="footer-independent-notice">Independent practice. Not affiliated with NTA, BITS Pilani or COMEDK. Preparation targets are not prediction guarantees.</p>}</div></footer>;
 };
 export const Loading = ({ text = "Loading your workspace…" }) => (
   <div className="loading" role="status" data-testid="workspace-loading">
