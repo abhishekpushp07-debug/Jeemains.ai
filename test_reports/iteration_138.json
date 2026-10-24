@@ -1,0 +1,14 @@
+{
+  "summary": "Iteration 138 narrow follow-up, backend only. Reran test_iter137_db_window_matrix_isolated.py by itself in the isolated harness (iso_harness_iter134: all Motor handles rebound, no lifespan, synthetic X-Test-User actors). Result: 28/28 passed in 3.85s. The 4 iter137 failures are fixed: plain competition sets with a future or expired DB window no longer appear in GET /api/sets, GET /api/my/sets or exam navigation, at +7200 and -7200 app skew. catalog.available() now has optional start_at/end_at clauses evaluated against Mongo $$NOW via EPOCH_NOW. Behaviour that should be unchanged is unchanged: unscheduled (standard) sets, open competition, import and chapter sets are still listed and startable. Date-based expiry still works (yesterday is hidden; today and tomorrow are listed). Lists contain only sets whose detail, my_set, save, preflight and start return 200, so there are no dead-end links. Denied sets return 404 on every route, create no attempt or preflight rows, and show no question or solution text. Question text appears only in the authorized start response of an open set, which is expected. The isolated DB was dropped. The real DB has no TEST_S137 rows. Release verdict: PASS for this narrow catalog fix. Iter137 already passed the other suites (backend 73/73, series 71/71, browser A/B/C) and they were not rerun because that code did not change. No capacity, 500k or security-complete claim is made.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_iter137_db_window_matrix_isolated.py", "/app/test_reports/pytest/iter138_results.xml", "/app/test_reports/iter137_evidence.json"],
+  "action_items": [],
+  "critical_code_review_comments": ["catalog.available: the start_at/end_at $expr clauses match the exam-navigation and MyTests semantics (start <= now < end, missing field = unbounded). The import/chapter clause still requires live_enabled and both bounds. No issues found.", "Non-blocking: in the cron auth test, RuntimeWarning 'coroutine sleep was never awaited' is a test-harness artifact only."],
+  "updated_files": ["/app/test_reports/iteration_138.json"],
+  "success_rate": {"backend": "100% (28/28)", "frontend": "not tested (out of scope)"},
+  "seed_data_creation": "None persistent; synthetic TEST_S137_* sets only in the isolated DB, which was dropped",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iter138 confirms the catalog.available DB-window fix: 28/28 in the iter137 matrix. Run command: cd /app/backend/tests && python -m pytest test_iter137_db_window_matrix_isolated.py -n0 -p no:cacheprovider -q. For full regression, see the iter137 report (iter135/135-hardening/136 suites plus the series plugin). The dedicated /competitions schedule list was intentionally left untouched."
+}

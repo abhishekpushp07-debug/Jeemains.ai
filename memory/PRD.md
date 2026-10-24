@@ -1,5 +1,28 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
+## Latest approved request and delivery — 2026-10-24
+Original latest customer request (verbatim): “Younare 50% of what you can be in terms of data architecture, api call and sent  , servers , databases tables , database , canonincal truth ,packaging and best lrwctices of backend which can support 5 lakh concurrent students. Do a deepest audit and Make this the world best backend .i am going to sleep . Just build me the worlds best.” Approval: “b. Also deploy compatible fixes after testing”. Continue without reconfirmation; no paid infrastructure, live load generation, Mongo replacement or customer-data overwrites.
+
+### Backend hardening completed and verified; redeploy requested
+- Architecture unchanged: React + FastAPI + existing MongoDB canonical truth, immutable private content packs and isolated attempt/ledger authorization. No SQL migration/shadow truth/Redis dependency. Auth/owner identity unchanged; do not print identifiers or secrets.
+- Database-time start/preflight/deadline/seal/release/history/catalogue rules prevent clock drift from prematurely closing exams or revealing scheduled questions/results. `/api/attempts/{id}/status` is additive, user-scoped, header-only; web deadline confirmation no longer downloads the full attempt.
+- Atomic answers/revision/body-bound receipts, duplicate replay, save/seal races retained and verified. New frozen ledgers bind to attempt/user/pack/answers/rules/profile/version/sequence; source drift fails closed, legacy ledgers stay untouched.
+- Decoded bounded pack LRU with coalesced cold loads, per-question lookup, defensive copies, compression/hash/shape checks and PDF hash validation. Measured isolated32coldrequests→1DBfetch/decode versus32before; status303B versus full90192B in100-questionfixture, NOTfleetcapacityevidence. Warmfullcopytrade-offdocumented.
+- Separate per-process admission lanes503+Retry-After preserve live traffic during expensive reads; bounded staff-only runtime/cache/job metrics and readiness/liveness. DB-clock job leases/retry,16jobdrainquantum, failed-outbox isolation and additive nonuniquejob_lane_fifo index. Realisolatedexplain showsno blockingSORT. Cronauthfirst401, malformed400, durable run-id dedupe;15minplatformrecoveryunchanged.
+- Concurrentauthcounterinitialization duplicate-keysafe; currentplaintextcredentialnotes and identifiedlegacytest literals removed; unsafe live-data test retired. Actualcredentials/sessionsNOTrotated; historicalexposure remainsoperatorgate. Publicphoneownership stillunverified.
+- Browserdeadlineerrorseparatefromsaveconflicts; truependingiconandlongreceiptwrapping fixed. No unrequested visual redesign.
+- Capacityprofile retainsV5referencefields explicitlyUNMOUNTED and adds mountedanswer/visit/asset/burst equations. 500000activeconcurrency remainsUNQUALIFIED; no infrastructure purchased orlive loadtest performed.
+- Tests:134baseline faults reproduced;137allprior73/73+series71/71passed,138finalwindowmatrix28/28passed=172cases across finalruns. Auth/CORS regressionspassed135. Browser1920x800and390x844 tests confirmclockresync503retry/errorarrivalorders/pendingdraft/late=true andnooverflow; finalpublicsmoke138pass. SyntheticDBs/bridgesremoved; no customerDBwrites. No application API mocked; browserauth/storageboundaries were TEST-ONLYfixtures.
+- Documents: `/app/docs/audit/BACKEND_HARDENING_2026_10_24.md`, `/app/docs/CAPACITY_AND_OPERATIONS.md`, reports134–138; backendtests135/136/137 + isolatedharness134. CurrentcustomerDBneverusedforregression.
+- Deployment state: existing-app code-only redeploy QUEUED/RUNNING, job `bcd75d41-4661-4f5a-bead-654e0ffe34d2`, accepted after tests. Preserve all live secrets/binding/data. Do NOT re-dispatch or poll/wait; deployment panel/system notification reports outcome. Production completion/read-only smoke is not yet confirmed, so do not claim live complete. This latest approval supersedes older no-auto-deployment notes below.
+
+### Prioritized remaining work after this increment
+P0: independent infrastructure/budget approval and production-equivalent isolated ramp/soak/failover campaign before claiming500k; verifiedphoneownership integration and controlled exposedcredentialrotation/sessioninvalidation remain explicit launchgates, not silently enabled. No live load authorization.
+P1: dedicateddurableworkerfleet/continuousdrain/fleetmetrics requireoperator infrastructure choices; cron15min recovery cannotpromise120s massgrading. ConfirmwwwSSL via deployer read-only, no DNS changes.
+P2: studio-onlyclocklabels andminorfooter/conflictbuttoncosmetics deferred(outsidebackendrequest); nativeAPK/deviceintegration remainsunperformed; suppliedAndroidhandoffalreadycomplete. Keepowner-suppliedAllIndia62paperbacklog separate; no moreJEEchaptertransferneeded.
+
+
+
 
 ## Active approved deep backend hardening — 2026-10-24
 - Userverbatim:“Younare 50% of what you can be in terms of data architecture, api call and sent , servers , databases tables , database , canonincal truth ,packaging and best lrwctices of backend which can support 5 lakh concurrent students. Do a deepest audit and Make this the world best backend .i am going to sleep . Just build me the worlds best.” Intakeapproved“Also deploy compatible fixes after testing”. Targetassumed500000simultaneouslyACTIVEexamstudents; no paidinfra/prodDBmigration/live-loadtestauthorized. PreserveexistingDB/secrets/data/API/suppliedsolutions;onlytestedcompatibleexistingdeploymentredeployauthorized. DoNOTreask.
