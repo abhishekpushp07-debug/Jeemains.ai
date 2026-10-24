@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ActivityIndicator, Pressable, StyleProp, Text as RNText, TextProps, TextStyle, View, ViewStyle } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming, withSpring } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
 import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
 import * as Haptics from "expo-haptics";
 import { fonts, makeStyles, radius, space, useTheme } from "@/src/theme";
@@ -36,8 +36,8 @@ export function Press({ onPress, style, children, disabled, testID, accessibilit
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ disabled: !!disabled }}
       disabled={disabled}
-      onPressIn={() => (s.value = withSpring(scaleTo, { damping: 18, stiffness: 400 }))}
-      onPressOut={() => (s.value = withSpring(1, { damping: 18, stiffness: 400 }))}
+      onPressIn={() => (s.value = withTiming(scaleTo, { duration: 90 }))}
+      onPressOut={() => (s.value = withTiming(1, { duration: 140 }))}
       onPress={() => {
         if (haptic) tap();
         onPress?.();

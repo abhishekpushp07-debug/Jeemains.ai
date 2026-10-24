@@ -80,6 +80,12 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Multi-server duels: shared live channel = capped MongoDB collection rf_events tailed by every server process (no Redis needed). Any mutation calls notify(did): local push + event; other servers push to their sockets. Verified two uvicorn processes: cross-server update in ~6 ms.
 - User declined: AI Doubt, Revision Notebook.
 
+## Iteration 17-18 (2026-06)
+- Rapid Fire hub redesigned (elegant): identity bar, streak + quests tiles (quests in a sheet), one hero Play card (subject segmented control, chapter picker sheet, START SOLO SPRINT), Duel tiles + join-code sheet, Leaderboard/Recent/Trophies switcher.
+- Duel intro is now 4 s (timing-based, no springs); server start_at = now + 4.6 s; first card waits for the intro; opponent-left banner (view() exposes forfeit).
+- Set page: one-tap Start (preflight runs silently; checkbox removed).
+- Leaderboard cached 15 s (single-flight). Load: one preview worker ≈ 1.2–1.5k req/s on cached endpoints.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

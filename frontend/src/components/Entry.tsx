@@ -3,7 +3,7 @@ import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import Animated, {
   Easing, SharedValue, cancelAnimation, interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue,
-  withDelay, withRepeat, withSequence, withSpring, withTiming,
+  withDelay, withRepeat, withSequence, withTiming,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, T } from "@/src/components/ui";
@@ -104,7 +104,7 @@ export function EntryEffect({ effect, fromRight = false, children, play = 0, sou
     s.value = 0.4;
     p.value = 0;
     x.value = withTiming(0, { duration: 650, easing: Easing.out(Easing.back(1.4)) });
-    s.value = withDelay(150, withSpring(1, { damping: 9 }));
+    s.value = withDelay(150, withTiming(1, { duration: 450, easing: Easing.out(Easing.back(1.6)) }));
     p.value = effect ? withTiming(1, { duration: 1400, easing: Easing.out(Easing.quad) }) : 0;
   }, [effect, fromRight, reduced, play]); // eslint-disable-line react-hooks/exhaustive-deps
   const body = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { scale: s.value }] }));
@@ -128,33 +128,33 @@ export function EntryShow({ me, opp, onDone, testID = "entry-show" }: { me?: P; 
     const ease = Easing.out(Easing.back(1.3));
     const timers = [
       setTimeout(() => playSfx(me?.entry || "entry_rocket"), 0),
-      setTimeout(() => playSfx(opp?.entry || "entry_lightning", 0.85), 750),
-      setTimeout(() => playSfx("vs"), 1500),
-      setTimeout(() => playSfx("go", 0.8), 2250),
+      setTimeout(() => playSfx(opp?.entry || "entry_lightning", 0.85), 1000),
+      setTimeout(() => playSfx("vs"), 2000),
+      setTimeout(() => playSfx("go", 0.8), 3000),
     ];
     if (reduced) {
       a.value = 1; b.value = 1; vs.value = 1; fight.value = 1;
-      const t = setTimeout(() => onDone?.(), 3000);
+      const t = setTimeout(() => onDone?.(), 4000);
       return () => { clearTimeout(t); timers.forEach(clearTimeout); };
     }
-    a.value = withTiming(1, { duration: 700, easing: ease });
-    pa.value = withTiming(1, { duration: 1300, easing: Easing.out(Easing.quad) });
-    b.value = withDelay(750, withTiming(1, { duration: 700, easing: ease }));
-    pb.value = withDelay(750, withTiming(1, { duration: 1300, easing: Easing.out(Easing.quad) }));
-    vs.value = withDelay(1500, withSpring(1, { damping: 7, stiffness: 180 }));
-    flash.value = withDelay(1500, withSequence(withTiming(0.85, { duration: 70 }), withTiming(0, { duration: 380 })));
-    shake.value = withDelay(1500, withSequence(withTiming(10, { duration: 50 }), withTiming(-10, { duration: 50 }), withTiming(6, { duration: 50 }), withTiming(0, { duration: 60 })));
-    fight.value = withDelay(2250, withSpring(1, { damping: 8 }));
-    out.value = withDelay(2700, withTiming(0, { duration: 300 }, (f) => { if (f && onDone) runOnJS(onDone)(); }));
+    a.value = withTiming(1, { duration: 900, easing: ease });
+    pa.value = withTiming(1, { duration: 1700, easing: Easing.out(Easing.quad) });
+    b.value = withDelay(1000, withTiming(1, { duration: 900, easing: ease }));
+    pb.value = withDelay(1000, withTiming(1, { duration: 1700, easing: Easing.out(Easing.quad) }));
+    vs.value = withDelay(2000, withTiming(1, { duration: 420, easing: Easing.out(Easing.back(2)) }));
+    flash.value = withDelay(2000, withSequence(withTiming(0.85, { duration: 70 }), withTiming(0, { duration: 380 })));
+    shake.value = withDelay(2000, withSequence(withTiming(10, { duration: 50 }), withTiming(-10, { duration: 50 }), withTiming(6, { duration: 50 }), withTiming(0, { duration: 60 })));
+    fight.value = withDelay(3000, withTiming(1, { duration: 380, easing: Easing.out(Easing.back(1.8)) }));
+    out.value = withDelay(3650, withTiming(0, { duration: 350 }, (f) => { if (f && onDone) runOnJS(onDone)(); }));
     return () => timers.forEach(clearTimeout);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const root = useAnimatedStyle(() => ({ opacity: out.value, transform: [{ translateX: shake.value }] }));
   const left = useAnimatedStyle(() => ({ transform: [{ translateX: interpolate(a.value, [0, 1], [-W, 0]) }, { scale: interpolate(a.value, [0, 1], [0.4, 1]) }] }));
   const right = useAnimatedStyle(() => ({ transform: [{ translateX: interpolate(b.value, [0, 1], [W, 0]) }, { scale: interpolate(b.value, [0, 1], [0.4, 1]) }] }));
-  const vsS = useAnimatedStyle(() => ({ opacity: vs.value > 0.05 ? 1 : 0, transform: [{ scale: interpolate(vs.value, [0, 1], [4, 1]) }, { rotate: `${interpolate(vs.value, [0, 1], [-25, 0])}deg` }] }));
+  const vsS = useAnimatedStyle(() => ({ opacity: vs.value > 0.05 ? 1 : 0, transform: [{ scale: Math.max(0.6, interpolate(vs.value, [0, 1], [3, 1])) }, { rotate: `${interpolate(vs.value, [0, 1], [-25, 0])}deg` }] }));
   const flashS = useAnimatedStyle(() => ({ opacity: flash.value }));
-  const fightS = useAnimatedStyle(() => ({ opacity: fight.value, transform: [{ scale: interpolate(fight.value, [0, 1], [0.3, 1]) }] }));
+  const fightS = useAnimatedStyle(() => ({ opacity: Math.min(1, fight.value), transform: [{ scale: Math.max(0.3, interpolate(fight.value, [0, 1], [0.3, 1])) }] }));
   const size = Math.min(132, W * 0.32);
 
   const player = (p: P | undefined, mine: boolean) => (

@@ -56,6 +56,7 @@ def quests_of(p: dict) -> list:
 
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf")
+    board_cache = {"ts": 0.0, "rows": [], "busy": False}
 
     async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None) -> dict:
         """Idempotent per (uid, ref): replays return the original reward."""
@@ -127,7 +128,15 @@ def make_router(db, rf_user):
     @r.get("/leaderboard")
     async def leaderboard(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        top = await db.rf_profiles.find({"name": {"$not": {"$regex": "^TEST_"}}}, {"_id": 0, "uid": 1, "xp": 1, "name": 1, "wins": 1}).sort("xp", -1).limit(20).to_list(20)
+        # Top-20 is the same for everyone: cache it for 15 s; one refresh at a time (no stampede on expiry).
+        if (time.time() - board_cache["ts"] > 15 and (not board_cache["busy"] or not board_cache["rows"])):
+            board_cache["busy"] = True
+            try:
+                board_cache["rows"] = await db.rf_profiles.find({"name": {"$not": {"$regex": "^TEST_"}}}, {"_id": 0, "uid": 1, "xp": 1, "name": 1, "wins": 1}).sort("xp", -1).limit(20).to_list(20)
+                board_cache["ts"] = time.time()
+            finally:
+                board_cache["busy"] = False
+        top = board_cache["rows"]
         return {"items": [{"rank": i + 1, "name": t.get("name") or "JEE Aspirant", "you": t["uid"] == uid, "xp": t.get("xp", 0), "level": level_of(t.get("xp", 0)), "wins": t.get("wins", 0)} for i, t in enumerate(top)]}
 
     @r.post("/profile/name")

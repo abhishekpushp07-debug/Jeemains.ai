@@ -1,0 +1,55 @@
+{
+  "summary": "Iteration 17. Backend: regression suites test_rf_duels, test_rf_shop_bot and test_rf_duels_ws pass 22/22 on the public URL. The new test_rf_iter17.py passes 3/3: invite+join start_at - server_now = 5.498 s; an answer before start_at-1 is rejected with 409; the leaderboard is ranked, sorted and has no TEST_ rows. Rapid Fire hub at 390x844: every element listed in the request renders. No overlapping sibling pairs and no horizontal overflow. Subject switch resets the chapter. The chapter sheet (25 rows) closes on pick and updates the label and summary. Mixed resets. The quests sheet lists 3 quests (no claim was available to test). The join sheet autofocuses the input and sanitises it (ab-c1 -> ABC1, button disabled below 6 chars). A bad code shows 'This code is invalid, already used, or expired.' The Recent, Trophies and Board panes all switch. Duel entry timing was measured in the browser at 20 ms resolution. Quick match -> AI Rival: entry show 4046 ms, first card 1591 ms after the show ends. Invite + API join: WS push 168 ms, entry show 4039 ms, card 1623 ms later. The 4 s intro works, but sampling found the VS badge oscillating wildly (see ui_bugs). Set page one-tap start: no device-check UI remains. A simulated preflight 503 shows the error in set-error, stays on the page and sends no /start. The real single tap sent preflight then start and opened /attempt/c6a1ae88. Revisiting and tapping again resumed the same attempt, but the label still reads 'Start attempt'. AI solutions: the BITSAT result 8501cf9c shows the AI step-by-step solution as clean maths with no raw LaTeX. The JEE chapter result 385dc381 shows 'The AI solution for this question is being prepared. Check back soon.' plus the supplied solution. Deprecated packages: none (expo-audio is used, no expo-av). Reanimated 4 spring-default regression detected: see react_native_issues.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/rf/leaderboard", "issue": "15 s cache has no single-flight lock. When the cache expires, every concurrent request runs the same sort query (cache stampede). Locally at 50 concurrent, a cold-cache run gave p95 896 ms against 14 ms warm. Use an asyncio.Lock or serve stale rows while one task refreshes. The cache is also per-process, so N workers make N queries every 15 s (fine)."},
+      {"endpoint": "POST /api/rf/duels/{id}/answer", "issue": "Card-1 server_ms is measured from start_at, but the client now shows card 1 only after the intro ends AND start_at passes. If a client sees 'ready' late (WS down, 3 s poll fallback, slow phone), the intro ends after start_at. Card 1's server time then includes that delay, which affects the tie-break and can hit the CARD_SECONDS+1 clamp. Consider a per-player first-card timestamp, or start_at = ready + max margin."},
+      {"endpoint": "upstream GET /my/sets/{id}", "issue": "The response has no 'attempt' or 'saved' fields (keys: id, title, exam, ... count, maximum). So set/[id].tsx never shows 'Resume attempt' (verified: an active attempt c6a1ae88 exists and the label still says 'Start attempt'; the tap still resumes thanks to server idempotency). The bookmark also always starts as unsaved, so tapping it on an already-saved paper POSTs again instead of DELETEing. The catalogue items do carry attempt {id, status, deadline}; use that or /my/tests?tab=progress."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "EntryShow VS badge (src/components/Entry.tsx:144,155)", "issue": "Sampled every 250 ms after VS starts at 2.0 s, the VS badge width went 425, 12, 54, 201, 187, 28, 56, 152 px (expected to settle at 92 px). It flickers between huge and almost invisible right through FIGHT and the fade-out. Screenshots confirm it: about 200 px covering the 'You' label at 2.9 s, about 24 px at 3.45 s. Root cause: Reanimated 4 changed the withSpring defaults to mass 4, stiffness 900, damping 120. { damping: 7, stiffness: 180 } now means mass 4, giving zeta about 0.13, so the spring is barely damped and settles in more than 4 s. interpolate(vs,[0,1],[4,1]) is not clamped, so an overshoot of 1.3 or more drives the scale to 0 or below (mirrored). FIGHT ({damping: 8}, zeta about 0.07) also bounces (text height 19 to 80 to 43 px).", "testID": "duel-entry-show", "priority": "HIGH"},
+      {"component": "Duel post-intro countdown (app/rapid/duel.tsx:203)", "issue": "Measured ready to first card is about 5.8 s: a 4.0 s intro, then a 1.6 s '2/1' countdown flash. The user asked for a 4 s entry. The leftover countdown after FIGHT feels like a stutter. Either set start_at to about now+4.3 s, or keep the FIGHT frame on screen until start_at instead of switching to the countdown view.", "testID": "duel-countdown", "priority": "MEDIUM"},
+      {"component": "Opponent forfeit mid-duel", "issue": "After the invited opponent forfeited (POST /forfeit), A stayed on card 1 with no notice (duel-result never appears). A must finish all 30 cards, or wait for ends_at, before seeing the win. Show an 'Opponent left, you win' banner or settle immediately when the only opponent forfeits.", "testID": "duel-versus", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Set page resume", "issue": "The 'Resume attempt' label never appears because /my/sets/{id} has no attempt field (see backend minor). The one-tap start itself works.", "affected_testIDs": ["set-start-button", "set-save-toggle"]}
+    ],
+    "design_issues": [
+      {"screen": "Rapid Fire hub", "issues": [
+        "Overall the layout is clean and uncluttered: identity bar, 2 tiles, hero play card, duel tiles, tab switcher. All tap targets are at least 44 px.",
+        "Quick match subtitle 'Live student, +50 to winner' over-promises, because the flow commonly falls back to an AI Rival.",
+        "Sheets (chapters, quests, join) use the light surfaceSecondary on the dark arena. The bottom tab bar stays undimmed and tappable while a sheet is open. Consider dark game-styled sheets and covering the tab bar.",
+        "The Entry.tsx:121 comment still says '3-second' intro."
+      ]}
+    ],
+    "react_native_issues": [
+      {"component": "withSpring configs written for Reanimated 3", "issue": "Reanimated 4.7.1 defaults (mass 4, stiffness 900, damping 120) make damping-only or damping+stiffness configs heavily under-damped. References: src/components/Entry.tsx:107 ({damping:9}), :144 ({damping:7, stiffness:180}), :147 ({damping:8}); src/components/ui.tsx:39-40 Press ({damping:18, stiffness:400}, zeta about 0.22, bouncy press)."},
+      {"component": "Join sheet keyboard handling", "issue": "rf-duel-code-input autoFocuses inside a bottom Sheet with no KeyboardAvoidingView or keyboard inset. On iOS/Android the keyboard will probably cover the input and the JOIN DUEL button (not verifiable on web). Reference: app/(tabs)/rapid.tsx:276-284, src/components/ui.tsx:173."}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter17.py", "/app/backend/tests/test_rf_duels.py", "/app/backend/tests/test_rf_shop_bot.py", "/app/backend/tests/test_rf_duels_ws.py", "/app/backend/tests/load_probe_rf.py", "/app/test_reports/pytest/iter17_rf.xml", "/app/test_reports/pytest/iter17_new.xml"],
+  "action_items": [
+    "HIGH: Fix the EntryShow springs for Reanimated 4. Use duration-based springs (e.g. withSpring(1,{duration:450,dampingRatio:0.6})) or add mass:1. Add Extrapolation.CLAMP to the VS scale/rotate interpolate. Apply the same fix to Entry.tsx:107 and :147 and to ui.tsx Press.",
+    "MEDIUM: Remove the 1.6 s dead countdown after FIGHT: start_at about now+4.3 s, or hold the FIGHT frame until start_at.",
+    "MEDIUM: Handle opponent forfeit in a live duel: notify the remaining player and settle or award.",
+    "MEDIUM: Set page: get the active attempt and saved state from a source that has them (catalogue item attempt, or /my/tests?tab=progress and saved), so 'Resume attempt' and the bookmark are correct.",
+    "LOW: Add a single-flight lock to the leaderboard cache refresh.",
+    "LOW: Add a keyboard inset or KeyboardAvoidingView to Sheet (join code input).",
+    "LOW: Copy tweak: Quick match subtitle; Entry.tsx '3-second' comment."
+  ],
+  "critical_code_review_comments": [
+    "Scale question (5 lakh users): this cannot be validated in preview. Supervisor runs uvicorn with --workers 1 --reload. Through the preview ingress, 50 concurrent new connections already caused ConnectTimeouts (an ingress or preview limit, not the app). Locally, one worker served cached endpoints at about 340-1500 rps. Production needs multiple workers and pods without --reload, plus sized MongoDB (Atlas). The capped rf_events bus already fans out across servers. In-process caches (leaderboard, card cache) are per worker. The main load also hits the upstream jeelive.ai API through the /api/jl proxy, which must scale independently.",
+    "Indexes exist for every hot rf_* query (rf_duels code/status/players.uid, rf_profiles xp, rf_sessions). The rf_duels 'code' index is non-unique. Fine, since join filters by status too.",
+    "The duel screen replays the 4 s EntryShow on any remount while the duel is ready (the intro state is per mount). A user who reloads or deep-links back mid-duel loses about 4 s of card time."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter17.py", "/app/backend/tests/load_probe_rf.py"],
+  "success_rate": {"backend": "100% (25/25 pytest)", "frontend": "about 85% (all flows work; VS spring glitch, post-intro countdown, resume label)"},
+  "seed_data_creation": "1 JEE practice attempt c6a1ae88-13b0-4d92-b765-1ede2544f4c7 on set 9b03fb74 (Circular Motion), left active (only one, as allowed). 3 duels for 9000000001: 1 AI-Rival (forfeited), 2 invites joined by TESTUSER uids (both sides forfeited). 1 more duel left ready, then forfeited.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "To measure the entry show, inject a 20 ms setInterval poller via page.evaluate. It records when duel-entry-show appears and disappears and when duel-card appears. For VS scale, sample getBoundingClientRect of the div whose innerText==='VS'. Invite+join without a 2nd browser: read duel-code, then fetch('/api/rf/duels/join',{headers:{'X-RF-User':'TESTUSER..'}}) in page; clean up with /forfeit for both uids. Running load_probe_rf.py against 127.0.0.1 exhausts ephemeral ports for about 30 s ('Cannot assign requested address'). Editing files under /app/backend triggers a WatchFiles reload. Set to retest: 9b03fb74 already has an active attempt c6a1ae88 (tapping start resumes it).",
+  "rca_of_issue": "VS/FIGHT flicker: Reanimated 4.0 changed the withSpring defaults to mass 4, stiffness 900, damping 120 (confirmed via docs, migration-from-3.x). Entry.tsx passes R3-style partial configs, so the effective damping ratio is about 0.07-0.13. An unclamped interpolate turns the overshoot into scale of 0 or below."
+}

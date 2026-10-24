@@ -17,7 +17,6 @@ export default function SetDetail() {
   const [s, setS] = useState<any>(null);
   const [error, setError] = useState("");
   const [checked, setChecked] = useState(false);
-  const [agree, setAgree] = useState(false);
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
   const [reload, setReload] = useState(0);
@@ -35,24 +34,17 @@ export default function SetDetail() {
     return () => { alive = false; };
   }, [id, user, reload, startKeyName]);
 
-  async function check() {
-    setBusy(true);
-    setError("");
-    try {
-      const ok = await storage.setItem("device_check", "ok");
-      if (!ok) throw new Error("Phone storage is unavailable, so pending drafts cannot be protected.");
-      await post(`/sets/${id}/preflight`, { preview: false, test_response: "25" });
-      setChecked(true);
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
-      setBusy(false);
-    }
-  }
+  // One tap: the device/connection check the server needs runs silently, then the attempt opens.
   async function start() {
     setBusy(true);
     setError("");
     try {
+      if (!checked) {
+        const ok = await storage.setItem("device_check", "ok");
+        if (!ok) throw new Error("Phone storage is unavailable, so offline answers cannot be protected. Free some space and retry.");
+        await post(`/sets/${id}/preflight`, { preview: false, test_response: "25" });
+        setChecked(true);
+      }
       // Same start_key on every retry of this intent → no duplicate attempts.
       const a = await post(`/sets/${id}/start`, { start_key: key.current, device_checked: true, preview: false });
       await storage.removeItem(startKeyName);
@@ -118,14 +110,8 @@ export default function SetDetail() {
         <ErrorBox error={error} testID="set-error" />
         {user ? (
           <>
-            <Button testID="set-preflight-check-button" kind="secondary" icon={checked ? "check-circle" : "wifi"} label={checked ? "Device check passed" : "Check my device & connection"} busy={busy && !checked} onPress={check} disabled={checked} />
-            <Press testID="set-acknowledge-checkbox" onPress={() => setAgree(!agree)} style={{ flexDirection: "row", gap: space.sm, alignItems: "center", minHeight: 44 }}>
-              <Icon name={agree ? "checkbox-marked" : "checkbox-blank-outline"} size={24} color={colors.brandPrimary} />
-              <T size={13} style={{ flex: 1 }}>I can read the content and understand the rules and offline saving policy.</T>
-            </Press>
-            {!checked || !agree ? <T testID="set-start-hint" size={12} color={colors.muted} style={{ textAlign: "center" }}>{!checked ? "Run the device check, then tick the box to start." : "Tick the box above to start."}</T> : null}
-            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy && checked} disabled={!checked || !agree} onPress={start} color={colors.surfaceInverse} />
-            <T size={11} color={colors.muted} style={{ textAlign: "center" }}>The clock starts only when your attempt opens.</T>
+            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={start} color={colors.surfaceInverse} />
+            <T size={11} color={colors.muted} style={{ textAlign: "center" }}>By starting you accept the rules above. Your connection is checked automatically, and the clock starts only when the attempt opens.</T>
           </>
         ) : <Button testID="set-signin-button" label="Sign in to start" onPress={() => router.push("/entry")} />}
       </ScrollView>

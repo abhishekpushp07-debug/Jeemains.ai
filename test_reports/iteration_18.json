@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration 18 retest of the iteration 17 fixes. Backend: 29/29 pass on the public URL after one fix (new test_rf_iter18.py plus the iter17, duels, shop_bot and duels_ws regression suites). That fix was the forfeit banner bug: view() in backend/duels.py did not serialise players[].forfeit, so opp.forfeit was always undefined and duel-opponent-left could never render. I added the one-line field and re-verified. Frontend at 390x844 sampled at 20 ms. (1) Quick match to AI Rival: the intro lasted 4035 ms. The VS badge drops in from 367 px, dips once to 72 px at about 2.22 s and settles at 92 px by 2.42 s. From 2.5 s to 4.0 s the only width seen was 92 px, so there is no flicker. FIGHT! fades in from 3.0 s (opacity 0 to 1 by 3.17 s), peaks once at 67 px and then holds at 62 px. (2) Dead countdown after FIGHT: 632 ms (AI Rival) and 674 ms (invite + join). Server start_at minus server_now is 4.598 s for both paths. Invite + join, from join to card 1: 4902 ms. (3) Opponent forfeit: after the fix, the green banner 'TEST_B left the duel. Finish your cards to claim the win!' appeared 86 ms after B's POST /forfeit (WS push). A stays on card 1, and the result appears once A also leaves. (4) Quick match subtitle reads 'Live student or AI Rival'. (5) The join sheet (now in a KeyboardAvoidingView) opens with the input focused and the button disabled when empty. 'xxx-xxx' in lower case is cleaned to 3HZ3PT, and JOIN goes to /rapid/duel?mode=join, then the entry show, then card 1. (6) Leaderboard: ranked, sorted, no TEST_ rows. A burst of 20 concurrent requests after the cache expired returned the same non-empty boards. (7) Press uses withTiming (90/140 ms), and no withSpring remains in Entry.tsx or ui.tsx. (8) Regression: the hub renders cleanly; solo sprint starts on Card 1 of 30 and was discarded. The set page single tap sent preflight then start and resumed /attempt/c6a1ae88 (no new attempt). Deprecated packages: none.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/rf/duels/{id} + WS push (view())", "issue": "FIXED BY TESTING AGENT: players[] lacked 'forfeit', so the frontend duel-opponent-left banner (duel.tsx:217, opp?.forfeit) never rendered. Added \"forfeit\": bool(p.get(\"forfeit\")) to the player dict in view() (backend/duels.py, about line 255). The main agent should keep this change."},
+      {"endpoint": "GET /api/rf/leaderboard", "issue": "Single-flight works, but on a cold process start (board_cache rows=[] and busy=True during the first query) concurrent callers get an empty items list. Consider making them await the in-flight refresh (asyncio.Lock or a shared Future) when rows is empty. Low impact."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Duel play (opponent left)", "issues": ["Once the opponent has forfeited, the 'Neck and neck!' taunt still shows directly above the green 'left the duel' banner, which contradicts it. Hide or replace the taunt when opp.forfeit is true."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter18.py", "/app/backend/tests/test_rf_iter17.py", "/app/backend/tests/test_rf_duels.py", "/app/backend/tests/test_rf_shop_bot.py", "/app/backend/tests/test_rf_duels_ws.py", "/app/test_reports/pytest/iter18_rf.xml"],
+  "action_items": [
+    "Keep the testing-agent fix in backend/duels.py view(): \"forfeit\": bool(p.get(\"forfeit\")) in each player dict. Without it the forfeit banner never shows.",
+    "Optional: hide the 'Neck and neck!' taunt when opp.forfeit is true.",
+    "Optional: on a cold leaderboard cache, have concurrent requests await the in-flight refresh instead of returning an empty list."
+  ],
+  "critical_code_review_comments": [
+    "Entry.tsx VS uses Easing.out(Easing.back(2)): the overshoot to about 1.13 maps to a minimum scale of about 0.74, so the clamp at 0.6 is never hit. FIGHT back(1.8) peaks at a scale of about 1.08. Both are timing-based and bounded.",
+    "The join sheet KeyboardAvoidingView is an absolute-fill wrapper that mounts and unmounts with sheet==='join', so the Sheet close animation is skipped (it unmounts instantly). This is cosmetic.",
+    "Older backend.err.log tracebacks (TypeError in notify/create_task, RecursionError) come from before the current server start. None appeared during this run."
+  ],
+  "updated_files": ["/app/backend/duels.py (added forfeit to view() player dict)", "/app/backend/tests/test_rf_iter18.py (new)", "/app/backend/tests/test_rf_iter17.py (start_at range updated to 4.3-4.7 s)"],
+  "success_rate": {"backend": "100% (29/29) after the forfeit serialisation fix; 96.4% before it", "frontend": "100% of the requested retest items pass (forfeit banner only after the fix)"},
+  "seed_data_creation": "No seed data. Temporary duels used TESTUSER* uids and TEST_ names and were forfeited for cleanup. The learner played 2-3 forfeited practice duels plus one discarded solo sprint (small XP changes).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Measure the entry show with a 20 ms setInterval poller injected via page.evaluate: duel-entry-show appear and disappear, duel-countdown frames, duel-card. The VS element is the div whose innerText==='VS'. AI Rival button testID: duel-play-ai-rival. Invite+join without a 2nd browser: read duel-code, then fetch('/api/rf/duels/join') in the page with X-RF-User 'TESTUSER..'. For the join-sheet test, create the invite via API as a TEST host and type its code into rf-duel-code-input. Set to retest: 9b03fb74-00e3-54af-bd65-faca1d571b7a resumes attempt c6a1ae88-13b0-4d92-b765-1ede2544f4c7. Use goto with wait_until='domcontentloaded' right after a router navigation, or the goto aborts.",
+  "rca_of_issue": "Forfeit banner: duel.tsx:217 renders duel-opponent-left when opp?.forfeit is set. The backend sets players.$.forfeit=true on /forfeit, but view() builds each public player dict from an explicit key list that omitted 'forfeit'. Reproduced with test_opponent_forfeit_visible_to_a (opp.forfeit None). Fixed by adding the key. After the fix the banner shows 86 ms after the forfeit via WS."
+}

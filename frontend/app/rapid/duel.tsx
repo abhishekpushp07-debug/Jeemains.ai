@@ -105,7 +105,8 @@ export default function Duel() {
 
   const me = d?.players?.find((x: any) => x.you);
   const opp = d?.players?.find((x: any) => !x.you);
-  const started = d?.status === "ready" && d.start_at && now >= d.start_at;
+  // First card waits for both the server start time and the full 4 s entry show.
+  const started = d?.status === "ready" && d.start_at && now >= d.start_at && intro === d.id;
   const total = d?.total || 30;
   const card = d?.cards?.[idx];
   const verdict = fb && fb.index === idx ? fb : null;
@@ -213,6 +214,7 @@ export default function Duel() {
     body = (
       <View style={{ flex: 1, paddingHorizontal: space.lg }} testID="duel-play">
         <VersusRow me={me} opp={opp} tint={tint} total={total} />
+        {opp?.forfeit ? <View testID="duel-opponent-left" style={{ padding: space.sm, borderRadius: radius.md, backgroundColor: colors.custom_neonGreen }}><T w="heavy" size={13} color={colors.custom_gameBg} style={{ textAlign: "center" }}>{opp.name || "Your rival"} left the duel. Finish your cards to claim the win!</T></View> : null}
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginVertical: space.sm }}>
           <T w="heavy" size={15} color={colors.onSurfaceInverse} testID="duel-card-counter">Card {idx + 1} / {total}</T>
           <Ring light left={left} color={tint} />
@@ -350,7 +352,7 @@ function VersusRow({ me, opp, tint, total }: { me: any; opp: any; tint: string; 
         </View>
         <Side p={opp} right total={total} />
       </View>
-      {opp ? <T w="heavy" size={12} testID="duel-lead" color={lead > 0 ? colors.custom_neonGreen : lead < 0 ? colors.custom_neonRed : colors.custom_neonAmber} style={{ textAlign: "center" }}>
+      {opp && !opp.forfeit ? <T w="heavy" size={12} testID="duel-lead" color={lead > 0 ? colors.custom_neonGreen : lead < 0 ? colors.custom_neonRed : colors.custom_neonAmber} style={{ textAlign: "center" }}>
         {lead > 0 ? `🔥 You lead by ${lead}! Keep it up` : lead < 0 ? `Behind by ${-lead} — push harder!` : "Neck and neck!"}
       </T> : null}
     </View>
