@@ -40,6 +40,14 @@ User requested the deepest backend/data/API/canonical-truth audit and implementa
 
 Status: IMPLEMENTED, AWAITING REGRESSION AND COMPATIBLE REDEPLOY.
 
+## First regression evidence and follow-up
+Iteration135:49/50 new isolated tests passed, with one reproduced remaining early-score release in exam-navigation history under app-clock skew. Additional isolated auth/CORS and content-transfer/streak regressions passed. Corrective changes cover all identified sibling score/solution/history gates with database time, including My Tests, series history, saved AI, review/report and competition leaderboard. This is a correctness/privacy fix, not a visual redesign. Remaining harmless schedule metadata timestamps are not represented as timer authority.
+
+Measured local fixtures:32 concurrent cold100-question pack loads now1DB read/1decode (30ms) versus32/32 (43ms) before. Warm full defensive copies were19.9ms versus prior9ms JSON copies: not a universal speedup; selected-question reads avoid copying a full pack. A status reply was303bytes versus90192bytes full attempt;32status calls took32.1ms. Full-read concurrency deliberately rejected16/32 with503 at lane limit16; overload rejection is not capacity success. Only a small local fixture, not500000users.
+
+Nonunique `job_lane_fifo(kind,status,created_at)` index added after isolated explain showed blocking queue-sort under the old delayed-job index; no existing index dropped. Job output message is literal, not a pipeline expression. Cron malformed envelope returns400 and header-only run-id follows the documented contract. Grade read already excludes command_receipts/response_schema; a tester suggestion claiming otherwise was source-checked and ruled out.
+
+
 
 Credential hygiene: removed historical plaintext staff-password literals from the identified legacy test and current credential notes; that unsafe live-data test is now retired/skipped. Active accounts/secrets/sessions were not changed. Repository history and other archived artifacts are not certified clean; controlled rotation/session invalidation remains mandatory.
 

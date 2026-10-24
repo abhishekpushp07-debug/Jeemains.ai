@@ -10,7 +10,7 @@ from .db import jobs, sets, files, attempts, db, uid, now, get, audit
 from .auth import current
 from .safety import JOB_CAPABILITIES, HOLD_MESSAGE, job_held, require_capability
 from .runtime import LANE_LIMITS, JOB_ATTEMPTS, JOB_LEASE_SECONDS, INLINE_JOBS, JOB_DRAIN_QUANTUM
-from .canonical import EPOCH_NOW
+from .canonical import EPOCH_NOW, clocked_one
 from tejas_core import build_questions, generate_report
 from tejas_storage import get_object, put_object
 
@@ -157,7 +157,7 @@ async def run_job(id, drain=True):
             else:
                 raise ValueError('Unknown job type')
             await require_lease(j)
-            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': message, 'finished_at': EPOCH_NOW, 'error': '', **{k: {'$literal': v} for k, v in output.items()}}}])
+            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', **{k: {'$literal': v} for k, v in output.items()}}}])
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
         except Exception:
@@ -247,8 +247,10 @@ async def download(id: str, u=Depends(current)):
     j = await get(jobs, id)
     if j['kind'] != 'report' or j['user_id'] != u['id']:
         raise HTTPException(404, 'Report not found.')
-    attempt = await attempts.find_one({'id': j['payload']['attempt_id']}, {'_id':0, 'competition_end':1})
-    if attempt and attempt.get('competition_end', 0) > now():
+    attempt = await clocked_one(attempts, {'id': j['payload']['attempt_id'], 'user_id': u['id']}, {'_id':0, 'competition_end':1})
+    if not attempt:
+        raise HTTPException(404, 'Attempt not found.')
+    if attempt.get('competition_end', 0) > attempt['_database_now']:
         raise HTTPException(403, 'Reports unlock when the competition window closes.')
     if j['status'] != 'done':
         raise HTTPException(409, 'The report is not ready yet.', headers={'Retry-After': '3'})

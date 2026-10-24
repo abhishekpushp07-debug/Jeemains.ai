@@ -168,12 +168,12 @@ export default function Results() {
       setBusy(false);
     }
   }
-  if (pending?.status === 'embargoed') return <div className="container page" data-testid="results-embargoed"><PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are sealed." description={pending.title} /><section className="import-card"><h2>A fair window for everyone.</h2><p className="import-muted" data-testid="results-release-time">Your results and solutions unlock at {new Date(pending.release_at * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST, after the competition closes.</p><p className="import-fineprint mt-4" data-testid="results-embargo-receipt">Submission receipt: {pending.receipt}</p><div className="flex flex-wrap gap-3 mt-6"><Button data-testid="results-release-refresh" onClick={() => setRefresh(v => v + 1)}>Check results</Button><Button asChild variant="outline"><Link data-testid="results-competition-hub" to={pending.series_id?'/series/all-india-jee?tab=results':'/competitions'}>{pending.series_id?'All India series hub':'Competition hub'}</Link></Button></div></section></div>;
+  if (pending?.status === 'embargoed') return <div className="container page" data-testid="results-embargoed"><PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are sealed." description={pending.title} /><section className="import-card"><h2>A fair window for everyone.</h2><p className="import-muted" data-testid="results-release-time">Your results and solutions unlock at {new Date(pending.release_at * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST, after the competition closes.</p><p className="import-fineprint mt-4 [overflow-wrap:anywhere]" data-testid="results-embargo-receipt">Submission receipt: {pending.receipt}</p><div className="flex flex-wrap gap-3 mt-6"><Button data-testid="results-release-refresh" onClick={() => setRefresh(v => v + 1)}>Check results</Button><Button asChild variant="outline"><Link data-testid="results-competition-hub" to={pending.series_id?'/series/all-india-jee?tab=results':'/competitions'}>{pending.series_id?'All India series hub':'Competition hub'}</Link></Button></div></section></div>;
   if (pending) return <div className="container page" data-testid="results-grading-pending">
     <PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are safely submitted." description="Your sealed answers are being graded in the background. You can leave this page and return from your exam’s Results section." />
     <div className="card">
       <p data-testid="grading-status" role="status">{pending.grading_status === 'failed' ? 'Grading needs another try. Your submitted answers have not changed.' : 'Preparing your results and review…'}</p>
-      <p data-testid="submission-receipt">Receipt: {pending.receipt}</p>
+      <p className="[overflow-wrap:anywhere]" data-testid="submission-receipt">Receipt: {pending.receipt}</p>
       <ErrorBox error={error} />
       <div className="form-actions">
         <Button className="btn btn-primary" data-testid="grading-retry" disabled={busy} onClick={async () => {
@@ -543,9 +543,9 @@ export default function Results() {
         </Empty>
       )}
       </section>}
-      <div className="receipt">
+      <div className="receipt" data-testid="result-receipt">
         <CheckCircle2 size={17} />
-        <span>
+        <span className="min-w-0 [overflow-wrap:anywhere]">
           Submission receipt: <code>{r.receipt}</code>
           <br />
           {new Date(r.submitted_at * 1000).toLocaleString()} ·{" "}

@@ -7,6 +7,7 @@ from .auth import current
 from .attempts import owned
 from .db import attempts, now
 from .packs import hydrate
+from .canonical import EPOCH_NOW
 
 router = APIRouter(prefix='/api/attempts', tags=['Personal mock progress'])
 EXAM_COUNTS = {'JEE Main': (75, 0), 'BITSAT': (130, 12), 'COMEDK': (180, 0)}
@@ -50,7 +51,7 @@ async def released(id, u):
     a = await owned(id, u)
     if a.get('status') != 'completed':
         raise HTTPException(409, 'Complete this attempt before viewing its progress.')
-    if a.get('competition_end', 0) > now():
+    if a.get('competition_end', 0) > a['_database_now']:
         raise HTTPException(403, 'Results remain sealed until release.')
     if not a.get('summary'):
         raise HTTPException(409, 'The original score is still being prepared.')
@@ -74,7 +75,7 @@ async def journey(id: str, score_version: str = 'original', u=Depends(current)):
     if score_version != 'original' or not key:
         return {'state': 'unavailable', 'reason': 'Journey uses completed, timed, original-score full mocks with compatible section counts, marking and bonus rules. Chapter tests, retries, corrections and competitions stay separate.', 'series': []}
     match = {'user_id': u['id'], 'exam': a['exam'], 'mode': a['mode'], 'status': 'completed',
-             'competition_end': {'$not': {'$gt': now()}},
+             '$expr': {'$lte': [{'$ifNull': ['$competition_end', 0]}, EPOCH_NOW]},
              'summary': {'$ne': None}, 'test_kind': 'mock', 'rules.minutes': a['rules']['minutes'],
              '$and': [{'$or': [{'progress_family': key}, {'progress_family': {'$exists': False}}]},
                       {'$or': [{'submitted_at': {'$lt': a['submitted_at']}}, {'submitted_at': a['submitted_at'], 'id': {'$lte': a['id']}}]}]}

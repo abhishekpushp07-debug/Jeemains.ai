@@ -20,6 +20,13 @@ async def clocked_one(collection, query, projection):
     return rows[0] if rows else None
 
 
+async def database_now():
+    from .db import db
+    result = await db.command('hello')
+    return result['localTime'].timestamp()
+
+
+
 def source_commitment(attempt):
     return fingerprint({
         'schema': 1, 'attempt_id': attempt['id'], 'user_id': attempt['user_id'],

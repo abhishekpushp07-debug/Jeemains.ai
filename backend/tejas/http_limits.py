@@ -125,7 +125,7 @@ class JsonBodyLimits:
                 contract.model.model_validate(value)
             except ValidationError:
                 # No input values, keys or credential echoes in errors/logs.
-                return await reject('Request fields or values do not match this operation’s contract.', 422, 'validation_error')
+                return await reject('Request fields or values do not match this operation’s contract.', 400 if contract.key == 'jobs.cron' else 422, 'validation_error')
         if not media:
             scope = {**scope, 'headers': [*raw_headers, (b'content-type', b'application/json')]}
         delivered = False

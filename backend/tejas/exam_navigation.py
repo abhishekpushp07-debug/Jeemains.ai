@@ -6,6 +6,7 @@ from .auth import current
 from .catalog import available, PROJECT
 from .content import summary
 from .db import attempts, sets, now, db
+from .canonical import EPOCH_NOW
 
 router = APIRouter(prefix='/api/exam-navigation', tags=['Exam navigation'])
 EXAMS = {'jee-main': 'JEE Main', 'bitsat': 'BITSAT', 'comedk': 'COMEDK'}
@@ -96,12 +97,13 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters',
             {'$match': {'user_id': user['id'], 'set_id': {'$in': [s['id'] for s in rows]}, 'mode': 'practice'}},
             {'$sort': {'set_id': 1, 'started_at': -1, 'id': -1}},
             {'$group': {'_id': '$set_id', 'item': {'$first': {
-                'id': '$id', 'status': '$status', 'deadline': '$deadline',
+                'id': '$id', 'status': '$status', 'deadline': '$deadline', '_database_now': EPOCH_NOW,
             }}}},
         ]).to_list(PAGE_SIZE)
         for a in history:
             value = a['item']
-            if value.get('deadline') and value['deadline'] <= now():
+            t = value.pop('_database_now')
+            if value.get('deadline') and value['deadline'] <= t:
                 value['status'] = 'completed'
             latest[a['_id']] = value
     saved_ids = {d['set_id'] async for d in db.tejas_saved_tests.find({'user_id': user['id'], 'set_id': {'$in': [s['id'] for s in rows]}}, {'_id': 0, 'set_id': 1})} if rows else set()
@@ -146,17 +148,18 @@ async def history(slug: str, kind: Literal['all', 'mock', 'chapter', 'practice']
     if kind != 'all':
         pipeline.append({'$match': {'test_kind': kind}})
     pipeline.append({'$facet': {
-        'items': [{'$skip': (page - 1) * 20}, {'$limit': 20}, {'$project': fields}],
+        'items': [{'$skip': (page - 1) * 20}, {'$limit': 20}, {'$project': {**fields, '_database_now': EPOCH_NOW}}],
         'meta': [{'$count': 'total'}],
     }})
     result = (await attempts.aggregate(pipeline).to_list(1))[0]
     rows = result['items']
     for a in rows:
-        if a['status'] == 'active' and a.get('deadline') and a['deadline'] <= now():
-            closed = await finalize(a['id'], 'time_limit')
+        t = a.pop('_database_now')
+        if a['status'] == 'active' and a.get('deadline') and a['deadline'] <= t:
+            closed = await finalize(a['id'], 'time_limit', projection={'_id': 0, **fields})
             a.update({k: v for k, v in closed.items() if k in fields})
-        if a.get('competition_end', 0) > now():
+        if a.get('competition_end', 0) > t:
             a['summary'] = None
-        a['server_now'] = now()
+        a['server_now'] = t
     total = result['meta'][0]['total'] if result['meta'] else 0
     return NavigationHistory(exam=exam, items=rows, total=total, page=page, pages=max(1, (total + 19) // 20))

@@ -311,7 +311,7 @@ async def attempt_solutions(id: str, u=Depends(current)):
     a = await owned(id, u)
     if a['status'] != 'completed':
         raise HTTPException(409, 'Solutions unlock after submission.')
-    if a.get('competition_end', 0) > now():
+    if a.get('competition_end', 0) > a['_database_now']:
         raise HTTPException(403, 'Solutions remain hidden until the competition ends.')
     rows = await for_attempt(a)
     items = [AiSolution(question_id=qid, state=state, solution=solution, flag=flag) for qid, (state, solution, flag) in rows.items()]

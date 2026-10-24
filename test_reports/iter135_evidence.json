@@ -1,0 +1,331 @@
+{
+  "isolation": {
+    "test_db": "tejas_isolated_iter134",
+    "patched_handles": 87,
+    "clock_patched": [
+      "tejas.db.now",
+      "tejas.auth.now",
+      "tejas.content.now",
+      "tejas.packs.now",
+      "tejas.profiles.now",
+      "tejas.attempts.now",
+      "tejas.jobs.now",
+      "tejas.reviewers.now",
+      "tejas.phone.now",
+      "tejas.corrections.now",
+      "tejas.answers.now",
+      "tejas.imports.now",
+      "tejas.competitions.now",
+      "tejas.reviews.now",
+      "tejas.chapter_books.now",
+      "tejas.ai_solutions.now",
+      "tejas.cohorts.now",
+      "tejas.smart_imports.now",
+      "tejas.exam_navigation.now",
+      "tejas.mock_books.now",
+      "tejas.live_series.now",
+      "tejas.mock_solutions.now",
+      "tejas.manual_solutions.now",
+      "tejas.question_reports.now",
+      "tejas.learning_progress.now",
+      "tejas.my_tests.now",
+      "tejas.series_streak.now",
+      "tejas.jee_transfer.now"
+    ]
+  },
+  "owned_before_hydrate": {
+    "foreign_codes": [
+      404,
+      404,
+      404,
+      404,
+      404,
+      404
+    ],
+    "hydrate_calls_for_foreign": 0,
+    "own_read": 200
+  },
+  "clock_ahead_3600s_deadline_future_600s": [
+    {
+      "op": "answer",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "visit",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "bonus",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 599.9,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "read_expire",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "history",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    }
+  ],
+  "clock_behind_3600s_deadline_future": [
+    {
+      "op": "answer",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "visit",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "read_expire",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    }
+  ],
+  "clock_behind_deadline_passed": {
+    "answer": 409,
+    "visit": 409,
+    "read_status_reported": "completed",
+    "db_status": "completed",
+    "answers": {}
+  },
+  "finalize_direct": {
+    "future": [
+      "submitted",
+      600.0
+    ],
+    "expired": [
+      "time_limit",
+      true
+    ]
+  },
+  "finalize_time_limit_on_future": {
+    "status": "active",
+    "reason": null,
+    "submitted_at": null
+  },
+  "pdf_sha_mismatch": {
+    "expected": "ValueError integrity failure, no crop_png call",
+    "raised": "Frozen source PDF integrity check failed",
+    "crop_png_calls": 0,
+    "rendered_from_sha": [],
+    "declared_sha": "b6833d7e6772aea91839553480fd0a94b2eb6fea496287a0b00066040bf45311",
+    "returned": false
+  },
+  "unpack_32x100q": {
+    "entry_size": 187186,
+    "cold": {
+      "find_one": 1,
+      "loads": 1,
+      "decompressobj": 1
+    },
+    "cold_ms": 29.9,
+    "warm": {
+      "find_one": 0,
+      "loads": 0,
+      "decompressobj": 0
+    },
+    "warm_ms": 17.2,
+    "baseline_iter134": {
+      "cold_find_one": 32,
+      "cold_decompress": 32,
+      "cold_ms": 43
+    },
+    "mutation_isolated": true,
+    "selected_ok": true,
+    "stats": {
+      "hits": 39,
+      "misses": 15,
+      "coalesced": 31,
+      "loads": 15,
+      "evictions": 0,
+      "bytes": 187186,
+      "limit_bytes": 33554432,
+      "entries": 1,
+      "loading": 0
+    }
+  },
+  "limiter_dupkey": {
+    "phone_winnerTrue": {
+      "http": 200,
+      "fake_calls": 2,
+      "counters": [
+        {
+          "count": 2
+        }
+      ],
+      "retry_after": null
+    },
+    "phone_winnerFalse": {
+      "http": 503,
+      "fake_calls": 2,
+      "counters": [],
+      "retry_after": "3"
+    },
+    "login_winnerTrue": {
+      "http": 401,
+      "fake_calls": 2,
+      "counters": [
+        {
+          "count": 2
+        }
+      ],
+      "retry_after": null
+    },
+    "login_winnerFalse": {
+      "http": 503,
+      "fake_calls": 2,
+      "counters": [],
+      "retry_after": "3"
+    }
+  },
+  "limiter_real_concurrent": {
+    "results_sorted": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "errors": [],
+    "final": 32
+  },
+  "replay_25": {
+    "codes": [
+      200
+    ],
+    "applied": 1,
+    "distinct_seq": [
+      1
+    ],
+    "db_seq": 1,
+    "db_command_count": 1,
+    "receipts": 1,
+    "changed_body": 409,
+    "stale_new_rid": 409,
+    "foreign": 404
+  },
+  "late_write": {
+    "submit": 202,
+    "late_new": 409,
+    "old_replay": 200,
+    "old_replay_duplicate": true,
+    "sealed_seq": 1
+  },
+  "save_vs_seal": [
+    {
+      "delay_s": 0.0,
+      "acked": 2,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 18,
+      "sealed_seq": 2,
+      "max_acked_seq": 2
+    },
+    {
+      "delay_s": 0.002,
+      "acked": 0,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 20,
+      "sealed_seq": 0,
+      "max_acked_seq": 0
+    },
+    {
+      "delay_s": 0.004,
+      "acked": 20,
+      "rejected_codes": [],
+      "rejected": 0,
+      "sealed_seq": 20,
+      "max_acked_seq": 20
+    },
+    {
+      "delay_s": 0.008,
+      "acked": 12,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 8,
+      "sealed_seq": 12,
+      "max_acked_seq": 12
+    },
+    {
+      "delay_s": 0.012,
+      "acked": 19,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 1,
+      "sealed_seq": 19,
+      "max_acked_seq": 19
+    }
+  ]
+}

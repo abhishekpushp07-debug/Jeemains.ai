@@ -79,7 +79,7 @@ async def ensure(q,user_id,set_id,auto_import_id=None):
 async def released_question(id,qid,u):
     a=await owned(id,u)
     if a['status']!='completed':raise HTTPException(409,'Worked solutions unlock after submission.')
-    if a.get('competition_end',0)>now():raise HTTPException(403,'Worked solutions remain hidden until the competition ends.')
+    if a.get('competition_end',0)>a['_database_now']:raise HTTPException(403,'Worked solutions remain hidden until the competition ends.')
     q=next((q for q in a['questions'] if q['id']==qid),None)
     if not q:raise HTTPException(404,'Question not in this attempt.')
     return a,q

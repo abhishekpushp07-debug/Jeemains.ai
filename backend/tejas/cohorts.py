@@ -8,6 +8,7 @@ from pymongo.errors import DuplicateKeyError
 from .db import db,attempts,sets,now
 from .auth import current
 from .attempts import owned
+from .canonical import clocked_one
 
 router=APIRouter(prefix='/api/attempts',tags=['Peer comparison'])
 MIN_SAMPLE=1
@@ -61,7 +62,9 @@ def identity(a):
 
 async def record(a,ledger):
     if a.get('mode')!='practice' or a.get('status')!='completed' or not ledger:return False
-    if a.get('competition_end',0)>now():return False
+    if a.get('competition_end'):
+        stamp = await clocked_one(attempts, {'id': a['id'], 'user_id': a['user_id']}, {'_id': 0, 'competition_end': 1})
+        if not stamp or stamp.get('competition_end', 0) > stamp['_database_now']: return False
     cohort=identity(a);qidmeta={q['id']:q for q in a.get('questions',[])}
     doc={'id':str(uuid.uuid5(uuid.NAMESPACE_URL,cohort+':'+a['user_id'])), 'cohort_id':cohort,'user_id':a['user_id'],
          'attempt_id':a['id'],'submitted_at':a['submitted_at'],'score':ledger['summary']['score'],
@@ -139,7 +142,7 @@ async def refresh(job):
 async def _released(id,u):
     a=await owned(id,u)
     if a['status']!='completed':raise HTTPException(409,'Comparison becomes available after submission.')
-    if a.get('competition_end',0)>now():raise HTTPException(403,'Results are under embargo until the competition ends.')
+    if a.get('competition_end',0)>a['_database_now']:raise HTTPException(403,'Results are under embargo until the competition ends.')
     return a
 
 @router.get('/{id}/cohort',response_model=CohortResponse)

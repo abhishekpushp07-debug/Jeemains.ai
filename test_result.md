@@ -1,3 +1,10 @@
+# Backend hardening follow-up — 2026-10-24
+hardening136:
+  tested135: "49/50 new isolated cases; critical fixes pass.1newfailure earlyembargoscore inexamnavigation withappclockahead. Auth168checks+earlier130regressionspass; statusbrowserflows/buildpass. Exactreportiteration135."
+  fixed: "All sensitive siblingreleasepaths useDBtime:exam/chapterhistory,cohorts,worked/savedAI,reviews/reports,journey,MyTests,serieshistory/schedule,competitionleaderboard. db.getattemptsclocked too. Added nonuniquejob_lane_fifo index;jobmessage$literal. Cron malformedcontract400andheader-onlyrun-id accepted. Deadline-success clearsONLYitsownpriorerror;pendingiconclock;receiptlongtextwraps."
+  retest: "Mustretargetallchangedreleasegateswithahead/behindclock,parseactual$literal/FIFOexplain,realstatusbrowserrecovery&receiptwrap1920/390. No codeclaimuntilpass. Existingget(attempts)ALREADYexcludescommand_receipts/response_schema;135commentaboutgradingloadingreceiptsisincorrect,verifyprojection ratherthanchangeagain."
+
+
 # Active backend hardening — 2026-10-24
 backend_hardening135:
   status: "Implemented; regression pending. User approved deep audit and compatible code-only redeploy AFTER tests. No capacity certification or paid provisioning."

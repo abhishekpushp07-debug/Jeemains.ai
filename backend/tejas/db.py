@@ -47,7 +47,11 @@ async def get(coll, id):
         projection.update({"command_receipts": 0, "response_schema": 0})
     if coll.name == "tejas_sets":
         projection["questions.ai_solution"] = 0  # owner-side AI tags are read only by the solutions/review routes
-    d = await coll.find_one({"id": id}, projection)
+    if coll.name == 'tejas_attempts':
+        from .canonical import clocked_one
+        d = await clocked_one(coll, {'id': id}, projection)
+    else:
+        d = await coll.find_one({"id": id}, projection)
     if not d:
         raise HTTPException(404, "This item is unavailable or does not exist.")
     if coll.name == "tejas_attempts" and d.get("pack_id"):
@@ -156,4 +160,5 @@ async def indexes():
     await files.create_index([("set_id", 1), ("created_at", -1)])
 
     await attempts.create_index([("status", 1), ("grading_status", 1), ("submitted_at", 1)])
+    await jobs.create_index([('kind', 1), ('status', 1), ('created_at', 1)], name='job_lane_fifo')
     await jobs.create_index([("kind", 1), ("status", 1), ("next_run_at", 1), ("created_at", 1)])

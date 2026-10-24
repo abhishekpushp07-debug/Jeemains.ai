@@ -188,6 +188,8 @@ export default function Player() {
             <CloudOff size={16} />
           ) : saving ? (
             <Loader2 size={16} className="spin" />
+          ) : nPending ? (
+            <Clock3 size={16} data-testid="player-save-pending-icon" />
           ) : (
             <CheckCircle2 size={16} />
           )}{" "}

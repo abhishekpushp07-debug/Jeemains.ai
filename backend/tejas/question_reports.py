@@ -62,7 +62,7 @@ async def report_wrong(id: str, qid: str, data: QuestionReportPayload, u=Depends
     q = next((q for q in a['questions'] if q['id'] == qid), None)
     if not q or (q.get('bonus') and not a.get('bonus_unlocked_at')):
         raise HTTPException(404, 'Question not available in this attempt.')
-    released = a['status'] == 'completed' and a.get('competition_end', 0) <= now()
+    released = a['status'] == 'completed' and a.get('competition_end', 0) <= a['_database_now']
     if not released and (data.context != 'attempt' or data.category in ('key', 'solution')):
         raise HTTPException(403, 'Only question or display issues can be reported before results are released.')
     rid = str(uuid5(NAMESPACE_URL, f"question-report:{u['id']}:{id}:{qid}"))

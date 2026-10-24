@@ -235,7 +235,7 @@ from .chapter_books import ChapterAction, ChapterLive
 class CronEnvelope(BaseModel):
     model_config = ConfigDict(extra='allow')
     event: Literal['schedule.triggered']
-    run_id: str = Field(min_length=1, max_length=200)
+    run_id: str | None = Field(default=None, min_length=1, max_length=200)
 
 
 from .cohorts import RankScenario

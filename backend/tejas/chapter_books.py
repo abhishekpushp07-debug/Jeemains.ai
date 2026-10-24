@@ -16,6 +16,7 @@ from .sandbox import organise_pdfs
 from .content import valid_rules, summary
 from .catalog import available, PROJECT
 from .derivatives import render_crop
+from .canonical import EPOCH_NOW
 from tejas_storage import put_object, get_object, StorageError
 
 router=APIRouter(prefix='/api',tags=['Chapter exams'])
@@ -276,11 +277,12 @@ async def exam_catalogue(subject,q,page,user=None):
         history=await attempts.aggregate([
             {'$match': {'user_id': user['id'], 'set_id': {'$in': [s['id'] for s in rows]}, 'mode': 'practice'}},
             {'$sort': {'set_id': 1, 'started_at': -1, 'id': -1}},
-            {'$group': {'_id': '$set_id', 'attempt': {'$first': {'id': '$id', 'set_id': '$set_id', 'status': '$status', 'deadline': '$deadline'}}}},
+            {'$group': {'_id': '$set_id', 'attempt': {'$first': {'id': '$id', 'set_id': '$set_id', 'status': '$status', 'deadline': '$deadline', '_database_now': EPOCH_NOW}}}},
             {'$replaceRoot': {'newRoot': '$attempt'}},
         ]).to_list(12)
         for a in history:
-            if a.get('deadline') and a['deadline']<=now():a['status']='completed'
+            t = a.pop('_database_now')
+            if a.get('deadline') and a['deadline']<=t:a['status']='completed'
             latest.setdefault(a['set_id'],a)
     return ExamList(items=[{**summary(s),'attempt':latest.get(s['id'])} for s in rows],total=total,page=page,pages=max(1,(total+11)//12),subject_counts={r['_id']:r['count'] for r in grouped})
 

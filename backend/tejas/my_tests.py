@@ -14,6 +14,7 @@ from .catalog import available, PROJECT
 from .content import summary
 from .request_contracts import EmptyPayload, CompareAttemptsPayload
 from .learning_progress import released, paper_basis, point
+from .canonical import database_now
 
 router = APIRouter(prefix='/api/my/tests', tags=['My Tests'])
 saved = db.tejas_saved_tests
@@ -154,7 +155,7 @@ async def my_tests(tab: Literal['progress', 'saved', 'completed'] = 'progress', 
                    start: date | None = None, end: date | None = None, page: int = Query(1, ge=1, le=10000), u=Depends(current)):
     if status not in ({'all', 'active'} if tab == 'progress' else {'all', 'available', 'unavailable'} if tab == 'saved' else {'all', 'completed', 'expired', 'grading', 'embargoed'}):
         raise HTTPException(422, 'This status does not apply to the selected My Tests tab.')
-    t = now()
+    t = await database_now()
     active = {'status': 'active', '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}
     expired = {'status': 'active', 'deadline': {'$gt': 0, '$lte': t}}
     base = {'user_id': u['id'], 'mode': {'$ne': 'preview'}}

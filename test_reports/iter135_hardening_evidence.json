@@ -1,0 +1,388 @@
+{
+  "status_header": {
+    "keys": [
+      "deadline",
+      "grading_status",
+      "id",
+      "receipt",
+      "sealed_seq",
+      "server_now",
+      "status",
+      "submitted_at"
+    ],
+    "bytes": 303,
+    "foreign": 404,
+    "anon": 401,
+    "ahead_status": "active",
+    "server_now_minus_real": -0.0,
+    "pack_loads": 0
+  },
+  "status_expired": {
+    "status": "completed",
+    "submitted_eq_deadline": true,
+    "status_bytes": 360,
+    "full_bytes": 4345
+  },
+  "submit_contract_keys": [
+    "command_state",
+    "grading_status",
+    "id",
+    "receipt",
+    "sealed_seq",
+    "status",
+    "submitted_at"
+  ],
+  "history_item_keys": [
+    "count",
+    "deadline",
+    "exam",
+    "grading_status",
+    "id",
+    "mode",
+    "profile",
+    "reason",
+    "receipt",
+    "rules",
+    "server_now",
+    "set_id",
+    "started_at",
+    "status",
+    "submitted_at",
+    "title",
+    "version"
+  ],
+  "pack_corruption": {
+    "trailing": [
+      503,
+      {
+        "code": "integrity_unavailable",
+        "message": "This content could not be verified. Saved answers are unchanged; contact support."
+      },
+      200
+    ],
+    "missing": [
+      503,
+      {
+        "code": "integrity_unavailable",
+        "message": "This content could not be verified. Saved answers are unchanged; contact support."
+      },
+      200
+    ],
+    "oversize": [
+      503,
+      {
+        "code": "integrity_unavailable",
+        "message": "This content could not be verified. Saved answers are unchanged; contact support."
+      },
+      200
+    ],
+    "wrong_hash": [
+      503,
+      {
+        "code": "integrity_unavailable",
+        "message": "This content could not be verified. Saved answers are unchanged; contact support."
+      },
+      200
+    ],
+    "truncated": [
+      503,
+      {
+        "code": "integrity_unavailable",
+        "message": "This content could not be verified. Saved answers are unchanged; contact support."
+      },
+      200
+    ]
+  },
+  "pack_cancel_evict": {
+    "cancelled": true,
+    "other_waiter_len": 30,
+    "bytes_limit_entries": [
+      179216,
+      200000,
+      4
+    ]
+  },
+  "assets": {
+    "own_q": 200,
+    "foreign_user": 404,
+    "foreign_qid": 404,
+    "solution_active": 403,
+    "bonus_locked": 404,
+    "pdf_hash_mismatch": 503,
+    "crop_calls_on_mismatch": 0,
+    "png_hash_mismatch": 503,
+    "legacy_nohash": 200,
+    "solution_embargo_skew": 403,
+    "solution_released": 200,
+    "foreign_score_version": 404
+  },
+  "ledger": {
+    "docs": 1,
+    "fields": [
+      "_id",
+      "attempt_id",
+      "created_at",
+      "engine_version",
+      "id",
+      "sealed_seq",
+      "source_commitment",
+      "source_pack_id",
+      "summary",
+      "user_id"
+    ],
+    "_id_eq_id": true,
+    "distinct_created": 1,
+    "results": 200,
+    "answers_tampered": 503,
+    "rules_tampered": 503,
+    "score": 4
+  },
+  "legacy_ledger": {
+    "results": 200,
+    "unchanged": true
+  },
+  "admission": {
+    "over": 503,
+    "retry_after": "2",
+    "no_downstream": true,
+    "live": 200,
+    "in_flight_after_final_body": [
+      [
+        "live",
+        0
+      ],
+      [
+        "asset",
+        1
+      ],
+      [
+        "asset",
+        0
+      ]
+    ],
+    "lanes": {
+      "live": {
+        "in_flight": 0,
+        "peak": 1,
+        "rejected": 0,
+        "failed": 0
+      },
+      "read": {
+        "in_flight": 0,
+        "peak": 1,
+        "rejected": 0,
+        "failed": 1
+      },
+      "asset": {
+        "in_flight": 0,
+        "peak": 2,
+        "rejected": 1,
+        "failed": 1
+      },
+      "auth": {
+        "in_flight": 0,
+        "peak": 0,
+        "rejected": 0,
+        "failed": 0
+      },
+      "control": {
+        "in_flight": 0,
+        "peak": 0,
+        "rejected": 0,
+        "failed": 0
+      },
+      "probe": {
+        "in_flight": 0,
+        "peak": 0,
+        "rejected": 0,
+        "failed": 0
+      }
+    }
+  },
+  "real_gate": {
+    "overload": 503,
+    "body": {
+      "data": null,
+      "error": {
+        "code": "capacity_busy",
+        "message": "This service is busy. Your saved work is safe; retry shortly."
+      },
+      "meta": {
+        "api_version": "1",
+        "request_id": "15b6187f-4be3-4624-b20b-f8b51adfb093"
+      }
+    },
+    "headers": {
+      "retry-after": "2",
+      "x-content-type-options": "nosniff",
+      "x-request-id": "15b6187f-4be3-4624-b20b-f8b51adfb093",
+      "access-control-allow-origin": "https://campus-search-debug.preview.emergentagent.com",
+      "access-control-allow-credentials": "true"
+    },
+    "health": 200,
+    "ready": 200,
+    "ready_fail": 503,
+    "runtime_status": {
+      "": 401,
+      "s": 403,
+      "w": 200
+    },
+    "runtime_bytes": 1803
+  },
+  "jobs": {
+    "dup_same_id": true,
+    "grade": [
+      "done",
+      1,
+      "ready",
+      1
+    ],
+    "stale_refused": true,
+    "fail_sequence": [
+      "queued",
+      "queued",
+      "failed"
+    ],
+    "crashed_after_maint": "failed",
+    "recovered_outbox": [
+      "done",
+      "ready"
+    ]
+  },
+  "drain": {
+    "claimed": 16,
+    "quantum": 16,
+    "ai_paused": true
+  },
+  "cron": [
+    401,
+    401,
+    422,
+    200,
+    {
+      "accepted": true,
+      "duplicate": true
+    },
+    1
+  ],
+  "index_plans": {
+    "own_attempt": {
+      "stages": [
+        "FETCH",
+        "IXSCAN"
+      ],
+      "index": "id_1"
+    },
+    "user_history": {
+      "stages": [
+        "LIMIT",
+        "FETCH",
+        "IXSCAN"
+      ],
+      "index": "user_id_1_started_at_-1"
+    },
+    "expiry_sweep": {
+      "stages": [
+        "LIMIT",
+        "FETCH",
+        "IXSCAN"
+      ],
+      "index": "status_1_deadline_1"
+    },
+    "grade_outbox": {
+      "stages": [
+        "LIMIT",
+        "FETCH",
+        "IXSCAN"
+      ],
+      "index": "status_1_grading_status_1_submitted_at_1"
+    },
+    "job_drain": {
+      "stages": [
+        "FETCH",
+        "SORT",
+        "IXSCAN"
+      ],
+      "index": "kind_1_status_1_next_run_at_1_created_at_1"
+    },
+    "job_drain_actual": {
+      "stages": [
+        "PROJECTION_SIMPLE",
+        "SORT",
+        "FETCH",
+        "IXSCAN"
+      ],
+      "index": "kind_1_status_1_next_run_at_1_created_at_1"
+    },
+    "job_by_id": {
+      "stages": [
+        "FETCH",
+        "IXSCAN"
+      ],
+      "index": "id_1"
+    }
+  },
+  "capacity": {
+    "status": 200,
+    "student": 403,
+    "keys": [
+      "evidence_status",
+      "mounted_runtime",
+      "qualified_active_attempts",
+      "rates",
+      "reference_model",
+      "schema_version",
+      "slos",
+      "stages",
+      "volumes",
+      "warnings",
+      "workload"
+    ],
+    "reference_model": "UNMOUNTED_V5_DESIGN",
+    "qualified_active_attempts": null,
+    "mounted_runtime_keys": [
+      "assumptions",
+      "notes",
+      "protocol",
+      "rates",
+      "status"
+    ]
+  },
+  "contracts": {
+    "count": 123,
+    "status_route": true,
+    "runtime": true
+  },
+  "exam_nav_skew": {
+    "http": 200,
+    "active_reported": "active",
+    "db_status": "active",
+    "embargoed_summary_leaked": {
+      "score": 4,
+      "TEST": "embargoed"
+    }
+  },
+  "perf_status_vs_full_100q": {
+    "status": {
+      "ms_32_concurrent": 32.1,
+      "bytes": 303,
+      "codes": [
+        200
+      ],
+      "n503": 0,
+      "retry_after": []
+    },
+    "full": {
+      "ms_32_concurrent": 78.2,
+      "bytes": 90192,
+      "codes": [
+        200,
+        503
+      ],
+      "n503": 16,
+      "retry_after": [
+        "2"
+      ]
+    }
+  }
+}

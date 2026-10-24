@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from .auth import current
 from .db import sets, attempts, now
+from .canonical import clocked_one, database_now
 
 router=APIRouter(prefix='/api/competitions',tags=['Competitions'])
 
@@ -42,8 +43,8 @@ class Leaderboard(BaseModel):
     policy:str='First competition attempt per phone profile. Equal scores share rank (1, 1, 3). Practice retries and previews excluded. Phone ownership is not verified; this is a practice cohort, not an official percentile.'
 
 
-def item(s,a=None):
-    a=a or {}; t=now()
+def item(s,a=None,t=None):
+    a=a or {}; t=now() if t is None else t
     return Competition(id=s['id'],title=s['title'],exam=s['exam'],count=len(s.get('questions',[])),minutes=s['rules']['minutes'],
         start_at=s['start_at'],end_at=s['end_at'],status='ended' if t>=s['end_at'] else 'unlive' if not s['live_enabled'] else 'scheduled' if t<s['start_at'] else 'live',
         attempt_id=a.get('id'),attempt_status=a.get('status'))
@@ -54,19 +55,21 @@ async def catalogue(u=Depends(current)):
     docs=await sets.find({'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'live_enabled':1}).sort('start_at',-1).limit(50).to_list(50)
     own=await attempts.find({'user_id':u['id'],'set_id':{'$in':[s['id'] for s in docs]},'mode':'practice','competition_end':{'$exists':True}},{'_id':0,'id':1,'set_id':1,'status':1}).to_list(50)
     own={a['set_id']:a for a in own}
-    return CompetitionList(items=[item(s,own.get(s['id'])) for s in docs],server_now=now())
+    t = await database_now()
+    return CompetitionList(items=[item(s,own.get(s['id']),t) for s in docs],server_now=t)
 
 
 @router.get('/{id}',response_model=Leaderboard)
 async def leaderboard(id:str,u=Depends(current)):
-    s=await sets.find_one({'id':id,'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'live_enabled':1})
+    s=await clocked_one(sets, {'id':id,'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'live_enabled':1})
     if not s: raise HTTPException(404,'Competition not found.')
     own=await attempts.find_one({'set_id':id,'user_id':u['id'],'mode':'practice','competition_end':{'$exists':True}},{'_id':0,'id':1,'status':1})
     base={'set_id':id,'mode':'practice','competition_ranked':True}
     participants=await attempts.count_documents(base)
     count=await attempts.count_documents({**base,'status':'completed','grading_status':'ready','summary.score':{'$exists':True}})
-    common=dict(competition=item(s,own),participants=participants,graded=count,pending=participants-count,server_now=now())
-    if now()<s['end_at']: return Leaderboard(status='embargoed',**common)
+    t = s['_database_now']
+    common=dict(competition=item(s,own,t),participants=participants,graded=count,pending=participants-count,server_now=t)
+    if t<s['end_at']: return Leaderboard(status='embargoed',**common)
     # Rank only frozen original ledgers. $rank deliberately does not use elapsed time.
     rows=await attempts.aggregate([
         {'$match':{**base,'status':'completed','grading_status':'ready','summary.score':{'$exists':True}}},

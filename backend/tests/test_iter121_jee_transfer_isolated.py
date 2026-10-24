@@ -251,7 +251,7 @@ def test_storage_failures_block_without_inserts(fail, code):
 
 def test_timeout_blocks(monkeypatch):
     real_wait = asyncio.wait_for
-    monkeypatch.setattr(J, 'asyncio', types.SimpleNamespace(wait_for=lambda c, timeout: real_wait(c, 0.2), to_thread=asyncio.to_thread))
+    monkeypatch.setattr(J, 'asyncio', types.SimpleNamespace(wait_for=lambda c, timeout: real_wait(c, 0.2), to_thread=asyncio.to_thread, create_task=asyncio.create_task, shield=asyncio.shield))
     MODE['delay'] = 0.6
     try:
         r = step()

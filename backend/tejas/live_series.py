@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
 from .auth import current, owner
 from .db import sets, attempts, get, now, audit
+from .canonical import database_now
 
 router = APIRouter(prefix='/api', tags=['All India series'])
 SERIES_ID = 'all-india-jee-2026-27'
@@ -55,7 +56,7 @@ def valid_paper(s):
 
 async def schedule_data(studio=False):
     from .content import permitted
-    t = now()
+    t = await database_now()
     projection = {'_id': 0, 'questions': 0, 'allowed_emails': 0, 'allowed_phones': 0}
     rows = await sets.find({'series_id': SERIES_ID}, projection).limit(62).to_list(62)
     by_day = {s['series_date']: s for s in rows}
@@ -85,7 +86,7 @@ async def catalogue():
 @router.get('/series/all-india-jee/history')
 async def history(page: int = Query(1, ge=1, le=10000), u=Depends(current)):
     from .my_tests import history_item
-    t = now()
+    t = await database_now()
     match = {'user_id': u['id'], 'series_id': SERIES_ID, 'mode': {'$in': ['series_live', 'series_practice']}}
     fields = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'mode', 'version', 'started_at', 'submitted_at', 'deadline', 'status', 'count', 'summary', 'answers', 'competition_end', 'series_date')}
     rows = await attempts.find(match, {'_id': 0, **fields}).sort('started_at', -1).skip((page-1)*20).limit(20).to_list(20)
@@ -98,7 +99,7 @@ async def history(page: int = Query(1, ge=1, le=10000), u=Depends(current)):
 async def studio_schedule(u=Depends(owner)):
     from .imports import imports
     data = await schedule_data(studio=True)
-    t = now()
+    t = await database_now()
     rows = await sets.find({'exam': 'JEE Main', '$or': [{'status': 'published'}, {'series_import': True}], 'audience': 'all', 'qa_only': {'$ne': True}, 'competition': {'$ne': True}}, {'_id': 0, 'questions.ai_solution': 0}).limit(500).to_list(500)
     used = set(await attempts.distinct('set_id', {'set_id': {'$in': [s['id'] for s in rows]}, 'mode': {'$ne': 'preview'}}))
     data['papers'] = [{'id': s['id'], 'title': s['title'], 'revision': s['revision'], 'series_date': s.get('series_date'), 'kind': 'paper'} for s in rows if valid_paper(s) and s['id'] not in used and (not s.get('series_date') or t < window(s['series_date'])['opens_at'])]
