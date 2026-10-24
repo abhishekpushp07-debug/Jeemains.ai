@@ -70,7 +70,7 @@
       "detail": null,
       "db_status": "active",
       "db_reason": null,
-      "real_seconds_left_at_check": 599.9,
+      "real_seconds_left_at_check": 600.0,
       "submitted_before_deadline_by_s": null
     },
     {
@@ -158,13 +158,13 @@
       "loads": 1,
       "decompressobj": 1
     },
-    "cold_ms": 36.6,
+    "cold_ms": 30.8,
     "warm": {
       "find_one": 0,
       "loads": 0,
       "decompressobj": 0
     },
-    "warm_ms": 43.4,
+    "warm_ms": 50.9,
     "baseline_iter134": {
       "cold_find_one": 32,
       "cold_decompress": 32,
@@ -281,53 +281,53 @@
   "save_vs_seal": [
     {
       "delay_s": 0.0,
-      "acked": 0,
+      "acked": 10,
       "rejected_codes": [
         409
       ],
-      "rejected": 20,
-      "sealed_seq": 0,
-      "max_acked_seq": 0
+      "rejected": 10,
+      "sealed_seq": 10,
+      "max_acked_seq": 10
     },
     {
       "delay_s": 0.002,
-      "acked": 0,
+      "acked": 3,
       "rejected_codes": [
         409
       ],
-      "rejected": 20,
-      "sealed_seq": 0,
-      "max_acked_seq": 0
+      "rejected": 17,
+      "sealed_seq": 3,
+      "max_acked_seq": 3
     },
     {
       "delay_s": 0.004,
-      "acked": 16,
+      "acked": 17,
       "rejected_codes": [
         409
       ],
-      "rejected": 4,
-      "sealed_seq": 16,
-      "max_acked_seq": 16
+      "rejected": 3,
+      "sealed_seq": 17,
+      "max_acked_seq": 17
     },
     {
       "delay_s": 0.008,
-      "acked": 19,
+      "acked": 17,
       "rejected_codes": [
         409
       ],
-      "rejected": 1,
-      "sealed_seq": 19,
-      "max_acked_seq": 19
+      "rejected": 3,
+      "sealed_seq": 17,
+      "max_acked_seq": 17
     },
     {
       "delay_s": 0.012,
-      "acked": 12,
+      "acked": 18,
       "rejected_codes": [
         409
       ],
-      "rejected": 8,
-      "sealed_seq": 12,
-      "max_acked_seq": 12
+      "rejected": 2,
+      "sealed_seq": 18,
+      "max_acked_seq": 18
     }
   ]
 }

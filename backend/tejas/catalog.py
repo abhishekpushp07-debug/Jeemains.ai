@@ -49,6 +49,8 @@ def available(user=None, exam="", search=""):
         "series_id": {"$exists": False},
         "series_import": {"$ne": True},
         "$and": [
+            {'$or': [{'start_at': {'$exists': False}}, {'$expr': {'$lte': ['$start_at', EPOCH_NOW]}}]},
+            {'$or': [{'end_at': {'$exists': False}}, {'$expr': {'$gt': ['$end_at', EPOCH_NOW]}}]},
             {'$or': [{'$and':[{'import_id': {'$exists': False}}, {'chapter_book_id': {'$exists': False}}]}, {'live_enabled': True, '$expr': {'$and': [{'$lte': ['$start_at', EPOCH_NOW]}, {'$gt': ['$end_at', EPOCH_NOW]}]}}]},
             {"$or": audiences},
             {

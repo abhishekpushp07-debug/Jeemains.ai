@@ -1,0 +1,74 @@
+{
+  "summary": "Iteration 137 final release gate (isolated, synthetic actors, no customer DB writes, no deploy). The iter136 critical bug is FIXED: test_scheduled_import_start_window_db_clock[7200] passes, and the iter135, iter135-hardening and iter136 suites pass 73/73. A new suite, test_iter137_db_window_matrix_isolated.py, ran 28 cases: 24 passed, 4 failed. All four failures are the same issue. A plain competition set (no import_id or chapter_book_id) whose DB window is future or expired still appears in public GET /api/sets and GET /api/my/sets, at both +7200 and -7200 app skew. Only metadata is exposed (title, count, subjects, start_at/end_at). Detail, my_set, save, preflight and start all return 404, no attempt or preflight row is created, and no question text leaks. This is not caused by app-clock skew and predates this change: catalog.available() has only ever time-gated import and chapter sets. All four suites together: 97/101 passed. Series 105/106 with the iso_dbclock_override_iter136 plugin: 71/71. Cron is auth-first: unauthenticated requests get 401 on the actual app and on the preview URL. Browser useAttempt scenarios A, B, C and the pending/late=true case pass at exactly 1920x800 and 390x844. Production build succeeded with warnings only (output in /tmp, removed). No 500k, capacity or security-complete claim is made.",
+  "evidence_numbers": {
+    "rerun_135_136": "73 passed / 0 failed in 8.1s (-n0). Includes test_scheduled_import_start_window_db_clock[7200], [-7200] and [0]",
+    "iter137_matrix": "import, chapter and plain competition x DB future/open/expired x app +7200/-7200 = 18 cases. Future and expired: preflight, start, /sets/{id}, /my/sets/{id} and save all 404, with 0 attempts, 0 preflight rows and no private text in any response. Open: preflight 200 and start 200 (active), started_at within 30s of real time (DB clock), deadline > 0, competition_end == end_at. Lists checked: /sets, /my/sets, exam-nav catalogue, plus /chapter-exams and /my/chapter-exams for chapter sets. Import and chapter future/expired: absent from every list. Competition future/expired: absent from exam-nav, but PRESENT in /sets and /my/sets (4 failures)",
+    "standard_unscheduled": "app +/-7200: preflight, start, detail, my_set and save all 200, and the set is listed in /sets, /my/sets and exam-nav (unchanged)",
+    "expires_date": "expires=yesterday with app -2 days: everything 404 and not listed. expires=tomorrow with app +2 days, and expires=today with app -2 days: everything 200 and listed. Both the $$NOW dateToString filter and permitted(at) use the DB date",
+    "saved_view": "Saved an open import, then closed its window in the DB with app -7200: it moved from saved status=available to unavailable, with paper=None and no private text",
+    "start_key_resume": "import and competition: retrying the same key at app +7200, and again after end_at was shortened, returns the same id and an identical deadline. A new key while active resumes the same attempt; still 1 attempt in the DB",
+    "cron_actual_app": "No auth with valid, malformed, non-JSON, 2MB oversize or text/plain body: 401. Wrong bearer: 401. Duplicate Authorization header: 401. Document counts in every collection unchanged across these rejections. Authenticated malformed and non-JSON bodies: 400. Header-only X-Webhook-Id: 200 accepted; same header again: duplicate=true; maintenance ran exactly once. Preview URL: no-auth malformed, non-JSON, valid and oversize all 401",
+    "http_limits": "On the JSON route /api/sets/x/preflight: text/plain 415, gzip encoding 415, 3MB body 413, bad content-length 400 (unchanged)",
+    "series_105_106": "71 passed with -p iso_dbclock_override_iter136",
+    "browser": "Bridge iso_bridge_iter135 (isolated DB, now stopped and dropped). The client clock was skewed by adding to server_now on GET /attempts/{id}. A (1920 and 390): /status 503 shows 'TEST simulated busy'; the next 200 clears it to empty and the timer resyncs to about 00:00:46. B (1920 and 390): the save-conflict text from the 409 stays the only displayed error through the deadline 503 and the following 200. C (1920 and 390): deadline 503 displayed first, then the held PUT released as a 409 conflict, then a 200; the final error is the conflict text and the timer resynced. Pending case (390 and 1920): PUT forced to 503 shows '1 pending · not yet acknowledged' with one Clock3 icon, then navigates to /results/{id}?late=true. scrollWidth equals the viewport in every state"
+  },
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "GET /api/sets, GET /api/my/sets (tejas/catalog.py available())",
+        "issue": "MEDIUM, not caused by skew, predates this change: plain competition sets (competition=True, start_at/end_at, no import_id or chapter_book_id) whose DB window is future or expired are still listed. Only summary metadata is shown (title, count, subjects, start_at/end_at). Detail and start return 404 and there is no question leak. This is inconsistent with exam-navigation live_query and my_tests.visible_set, which filter start_at/end_at by EPOCH_NOW. Users can see and click a paper that then returns 404."
+      },
+      {
+        "endpoint": "tejas/chapter_books.py:84 chapter_view state",
+        "issue": "The studio-only expired/live label still uses app now(). This is a label only, with no gate impact."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Previously reported cosmetics (non-blocking, unchanged)",
+        "issues": [
+          "At 390 the 'Use server-saved answers' button wraps to 3 lines",
+          "A grey band shows below the footer on short Results pages"
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter137_db_window_matrix_isolated.py",
+    "/app/backend/tests/test_iter136_db_clock_release_isolated.py",
+    "/app/backend/tests/test_iter135_canonical_regression_isolated.py",
+    "/app/backend/tests/test_iter135_hardening_isolated.py",
+    "/app/backend/tests/iso_dbclock_override_iter136.py",
+    "/app/test_reports/pytest/iter137_rerun.xml",
+    "/app/test_reports/pytest/iter137_all.xml",
+    "/app/test_reports/pytest/iter137_series105_106.xml",
+    "/app/test_reports/iter137_evidence.json"
+  ],
+  "action_items": [
+    "Decide whether plain competitions should appear in /api/sets and /api/my/sets outside their DB window. If not, add the same start_at/end_at EPOCH_NOW $expr clauses used in exam_navigation.live_query to catalog.available() for docs that have those fields. test_db_window_matrix[competition-*] will then pass."
+  ],
+  "critical_code_review_comments": [
+    "content.permitted() now requires keyword-only at=, and every caller passes a DB authority: set_detail and my_set use database_now(), preflight uses database_now(), start uses the clocked_one started_at, and live_series uses the scheduler's database_now. grep finds no test or legacy direct call that omits at.",
+    "attempts.py still has a.get('_database_now', now()) fallbacks (lines 135, 140, 443, 444, 527, 543, 668). They are harmless today but would silently hide a future unclocked load.",
+    "Cron 401 is now decided in http_limits before body parsing, using a contract.key == 'jobs.cron' special case. It works; a per-contract auth hook would be cleaner."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter137_db_window_matrix_isolated.py (new, test-only)",
+    "/app/test_reports/iter135_evidence.json, iter136_evidence.json, iter137_evidence.json (regenerated or new)"
+  ],
+  "success_rate": {
+    "backend": "168/172 = 97.7% (73/73 rerun; 24/28 new iter137 suite; 71/71 series 105/106). All 4 failures are the plain-competition catalogue listing, which predates this change",
+    "frontend": "100% (7/7 scenario runs: A, B and C at 1920x800 and 390x844, plus pending/late at both widths)"
+  },
+  "test_credentials": "No real credentials were used and none were printed. Only synthetic X-Test-User actors in tejas_isolated_iter134, which was dropped. No accounts were created or migrated.",
+  "seed_data_creation": "Only TEST_ documents in the isolated DB, now dropped. list_database_names = admin, config, local, test_database. The bridge on port 8790 is stopped. /tmp build output and logs were removed.",
+  "release_verdict": "All app-clock-skew functional blockers reported in iter136 are fixed and verified. Imports and chapters cannot open early or late under +/-7200 skew. Open windows start under either skew. Expiry dates use the DB date. Start-key resume is unchanged. Cron is auth-first. The useAttempt error separation works. A backward-compatible, code-only redeploy is appropriate. The one remaining finding is the plain-competition catalogue listing: metadata only, predates this change, and start is denied. It is an operator/product decision, not a data leak. Operator gates that remain open and are NOT claimed: 500k capacity is unqualified, OTP/phone ownership is unverified, and rotation of previously exposed credentials is still pending.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend/tests && python -m pytest test_iter135_canonical_regression_isolated.py test_iter135_hardening_isolated.py test_iter136_db_clock_release_isolated.py test_iter137_db_window_matrix_isolated.py -n0 -p no:cacheprovider -q. Series: cd /app/backend && PYTHONPATH=tests python -m pytest -p iso_dbclock_override_iter136 tests/test_iter105_live_series_isolated.py tests/test_iter106_private_import_series_isolated.py -p no:asyncio -n0. Browser: start python iso_bridge_iter135.py (port 8790, stop with SIGINT so it drops its DB); route **/api/** through it with x-test-user:s; fulfill /api/auth/session as {data:{user}}. For Scenario C, hold the PUT until bridge status_503 rises above the baseline taken before the scenario, then fulfill a 409."
+}

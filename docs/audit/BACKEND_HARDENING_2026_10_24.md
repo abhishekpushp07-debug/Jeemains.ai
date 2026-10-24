@@ -40,6 +40,9 @@ User requested the deepest backend/data/API/canonical-truth audit and implementa
 
 Status: IMPLEMENTED, AWAITING REGRESSION AND COMPATIBLE REDEPLOY.
 
+Iteration137: all73prior fault/regression cases and71series cases passed; browser error arrival-order and pending drafts passed at desktop/mobile. Added28window cases exposed only four ordinary-competition catalogue metadata inconsistencies (future/expired papers listed but every detail/start correctly denied); no question leak. Catalogue now applies the same optional start/end database-time clauses for all scheduled papers, preventing dead-end links; the dedicated competition schedule endpoint is unchanged. No changes to cosmetic footer/button wrapping or studio-only time labels.
+
+
 Iteration136 follow-up: all135regressions passed,22/23new cases passed plus71series tests; final new fault reproduced early non-series private-paper starts under app-clock skew. `permitted` now requires explicit authoritative time, with all callers updated; preflight timestamps and list/detail/window/date-expiry filters agree with database time. Cron rejects unauthenticated calls before parsing their body. Deadline-check failures use a separate browser error state so save conflicts survive either arrival order. Awaiting final targeted verification.
 
 
