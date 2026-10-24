@@ -9,6 +9,7 @@ from .auth import current
 from .db import attempts, get, now
 from .idempotency import fingerprint
 from .runtime import MAX_ANSWER_COMMANDS
+from .canonical import EPOCH_NOW, clocked_one
 from tejas_core import normalize_answer
 
 router = APIRouter(prefix='/api/attempts', tags=['Acknowledged answers'])
@@ -37,10 +38,10 @@ class AnswerReceipt(BaseModel):
     command_state: str = 'applied'
 
 
-def receipt_result(receipt, body_hash, current_revision):
+def receipt_result(receipt, body_hash, current_revision, server_now=None):
     if receipt['payload_hash'] != body_hash:
         raise HTTPException(409, 'This save identifier was already used for different content or revision.')
-    return {'accepted': receipt['accepted'], 'server_now': now(), 'duplicate': True, 'current_revision': current_revision}
+    return {'accepted': receipt['accepted'], 'server_now': now() if server_now is None else server_now, 'duplicate': True, 'current_revision': current_revision}
 
 
 @router.put('/{id}/answers/{qid}', response_model=AnswerReceipt)
@@ -52,30 +53,34 @@ async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
     key = fingerprint({'qid': qid, 'request_id': data.request_id})
     body = data.model_dump(exclude_none=True)
     body_hash = fingerprint(body)
-    projection = {'_id': 0, 'id': 1, 'user_id': 1, 'status': 1, 'deadline': 1,
+    projection = {'_id': 0, 'id': 1, 'user_id': 1, 'status': 1, 'deadline': 1, 'pack_id': 1,
                   f'answers.{qid}': 1, f'response_schema.{qid}': 1,
                   f'command_receipts.{key}': 1, 'command_count': 1, 'rules.bonus_rule': 1, 'bonus_unlocked_at': 1}
-    a = await attempts.find_one({'id': id, 'user_id': u['id']}, projection)
+    a = await clocked_one(attempts, {'id': id, 'user_id': u['id']}, projection)
     if not a:
         raise HTTPException(404, 'Attempt not found.')
     old = a.get('answers', {}).get(qid, {})
     existing = a.get('command_receipts', {}).get(key)
     if existing:
-        return receipt_result(existing, body_hash, old.get('revision', 0))
+        return receipt_result(existing, body_hash, old.get('revision', 0), a['_database_now'])
     # Compatibility: historical attempts may have only their latest acknowledged response.
     if old.get('request_id') == data.request_id:
         if any(old.get(k) != v for k, v in body.items()):
             raise HTTPException(409, 'This save identifier was already used for different content or revision.')
-        return {'accepted': old, 'server_now': now(), 'duplicate': True, 'current_revision': old['revision']}
-    if a['status'] != 'active' or (a['deadline'] and now() >= a['deadline']):
+        return {'accepted': old, 'server_now': a['_database_now'], 'duplicate': True, 'current_revision': old['revision']}
+    if a['status'] != 'active' or (a['deadline'] and a['_database_now'] >= a['deadline']):
         if a['status'] == 'active':
             from .attempts import finalize
             await finalize(id, 'time_limit')
         raise HTTPException(409, 'The attempt has ended. Late drafts are not accepted or scored.')
     q = a.get('response_schema', {}).get(qid)
     if not q:
-        full = await get(attempts, id)
-        q = next((x for x in full['questions'] if x['id'] == qid), None)
+        if a.get('pack_id'):
+            from .packs import question
+            q = await question(a['pack_id'], qid)
+        else:
+            full = await get(attempts, id)
+            q = next((x for x in full['questions'] if x['id'] == qid), None)
     if not q:
         raise HTTPException(404, 'Question does not belong to this attempt.')
     bonus_gate = {}
@@ -96,7 +101,7 @@ async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
         raise HTTPException(409, 'Another tab or device changed this answer. Reload the saved response before editing.')
     if a.get('command_count', 0) >= MAX_ANSWER_COMMANDS:
         raise HTTPException(409, 'This practice attempt reached its save-history limit. Existing saved answers are safe; submit or contact support.')
-    epoch = {'$divide': [{'$toLong': '$$NOW'}, 1000]}
+    epoch = EPOCH_NOW
     guard = {'id': id, 'user_id': u['id'], 'status': 'active', **bonus_gate,
              f'command_receipts.{key}': {'$exists': False},
              '$expr': {'$and': [
@@ -122,9 +127,9 @@ async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
     ], projection={'_id': 0, f'answers.{qid}': 1}, return_document=ReturnDocument.AFTER)
     if not updated:
         # Concurrent identical delivery may have won the CAS; recover its original receipt.
-        latest = await attempts.find_one({'id': id, 'user_id': u['id']}, {f'command_receipts.{key}': 1, f'answers.{qid}.revision': 1})
+        latest = await clocked_one(attempts, {'id': id, 'user_id': u['id']}, {'_id': 0, f'command_receipts.{key}': 1, f'answers.{qid}.revision': 1})
         existing = (latest or {}).get('command_receipts', {}).get(key)
         if existing:
-            return receipt_result(existing, body_hash, latest.get('answers', {}).get(qid, {}).get('revision', 0))
+            return receipt_result(existing, body_hash, latest.get('answers', {}).get(qid, {}).get('revision', 0), latest['_database_now'])
         raise HTTPException(409, 'Save conflict or deadline reached. Reconnect to check the accepted response.')
-    return {'accepted': updated['answers'][qid], 'server_now': now(), 'current_revision': data.revision}
+    return {'accepted': updated['answers'][qid], 'server_now': updated['answers'][qid]['accepted_at'], 'current_revision': data.revision}

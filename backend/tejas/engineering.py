@@ -1,6 +1,6 @@
 """Authenticated read-only baseline; no runtime readiness or capacity claims."""
 from typing import Literal
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from .auth import staff
 from .capacity import CapacityProfile, calculate
 from .command_contracts import StrictContract
@@ -26,6 +26,18 @@ class SafetyStatus(StrictContract):
 @router.get('/capacity/profile', response_model=CapacityProfile, operation_id='internal_capacity_profile_v1')
 async def capacity_profile(u=Depends(staff)):
     return calculate()
+
+
+@router.get('/runtime/status')
+async def runtime_status(request: Request, u=Depends(staff)):
+    from .packs import cache_stats
+    from .jobs import _active, _draining
+    from .runtime import DB_POOL, DB_WAIT_MS, LANE_LIMITS, JOB_DRAIN_QUANTUM
+    return {'capacity_status': 'UNQUALIFIED', 'admission': request.app.state.admission.snapshot(),
+            'pack_cache': cache_stats(), 'database': {'max_pool_per_process': DB_POOL, 'wait_ms': DB_WAIT_MS},
+            'jobs': {'active': {k: len(v) for k, v in _active.items()}, 'limits': LANE_LIMITS,
+                     'draining_lanes': sorted(_draining), 'drain_quantum': JOB_DRAIN_QUANTUM},
+            'note': 'Bounded process-local counters, not fleet metrics or a load-test certificate.'}
 
 
 @router.get('/safety/status', response_model=SafetyStatus, operation_id='internal_safety_status_v1')

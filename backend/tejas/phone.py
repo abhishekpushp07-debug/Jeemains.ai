@@ -35,18 +35,9 @@ async def access(data: PhoneInput, response: Response):
     phone = normalize_phone(data.phone)
     window = int(now() // 600)
     key = hashlib.sha256(f"phone:{phone}:{window}".encode()).hexdigest()
-    limit = await db.tejas_phone_limits.find_one_and_update(
-        {"_id": key},
-        {
-            "$inc": {"count": 1},
-            "$setOnInsert": {
-                "expires_at": datetime.now(timezone.utc) + timedelta(minutes=20)
-            },
-        },
-        upsert=True,
-        return_document=ReturnDocument.AFTER,
-    )
-    if limit["count"] > 30:
+    from .rate_limits import increment
+    count = await increment(db.tejas_phone_limits, key, datetime.now(timezone.utc) + timedelta(minutes=20))
+    if count > 30:
         raise HTTPException(
             429, "Too many requests for this number. Please try again in a few minutes.",
             headers={"Retry-After": str(max(1, int((window + 1) * 600 - now()) + 1))},

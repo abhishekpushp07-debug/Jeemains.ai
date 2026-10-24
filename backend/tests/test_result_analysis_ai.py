@@ -5,6 +5,8 @@ import uuid
 import pytest
 import requests
 
+pytest.skip('Retired customer-database fixture: use the isolated auth and exam harnesses.', allow_module_level=True)
+
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL').rstrip('/')
 API = BASE_URL + '/api'
 HDR = {'Origin': BASE_URL, 'Content-Type': 'application/json'}
@@ -52,7 +54,7 @@ def put(s, aid, qid, val='A', rev=1):
 class TestOwner:
     def test_new_password_works(self):
         s = requests.Session(); s.headers.update(HDR)
-        r = s.post(API + '/auth/login', json={'email': 'abhishek@billpe.com', 'password': '55241878'})
+        r = s.post(API + '/auth/login', json={'email': os.environ['ADMIN_EMAIL'], 'password': os.environ['ADMIN_PASSWORD']})
         assert r.status_code == 200, r.text
         d = unwrap(s.get(API + '/studio/mock-books'))
         p = d['items'][0]['ai_solutions']
@@ -60,7 +62,7 @@ class TestOwner:
         assert p['total'] == 7100 and p['ready'] >= 142
 
     def test_old_password_rejected(self):
-        r = requests.post(API + '/auth/login', headers=HDR, json={'email': 'abhishek@billpe.com', 'password': 'Jm-Owner-8_GbmDaWdx80254P'})
+        r = requests.post(API + '/auth/login', headers=HDR, json={'email': os.environ['ADMIN_EMAIL'], 'password': uuid.uuid4().hex})
         assert r.status_code == 401, r.text
 
 

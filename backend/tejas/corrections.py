@@ -6,6 +6,8 @@ from .db import db, sets, attempts, get, now, audit
 from .auth import owner
 from .safety import Capability, require_capability
 from .packs import seal, unpack, hydrate
+from pymongo.errors import DuplicateKeyError
+from .canonical import FrozenLedger, source_commitment, verify_ledger
 from tejas_core import score_attempt
 
 router = APIRouter(prefix="/api", tags=["Score corrections"])
@@ -13,6 +15,11 @@ router = APIRouter(prefix="/api", tags=["Score corrections"])
 
 async def freeze_ledger(a):
     from starlette.concurrency import run_in_threadpool
+    if a['status'] != 'completed':
+        raise ValueError('Only sealed attempts may have a frozen ledger')
+    verify_ledger(a)
+    if a.get('ledger'):
+        return a['ledger']
     result = await run_in_threadpool(score_attempt, a)
     fields = [
         "id",
@@ -31,18 +38,19 @@ async def freeze_ledger(a):
         "solution_release",
         "marked",
     ]
-    ledger = {
-        "id": a["id"],
-        "attempt_id": a["id"],
-        "summary": result["summary"],
-        "rows": [{k: q.get(k) for k in fields} for q in result["questions"]],
-        "engine_version": 1,
-        "created_at": now(),
-    }
-    await db.tejas_ledgers.update_one(
-        {"id": a["id"]}, {"$setOnInsert": ledger}, upsert=True
+    ledger = FrozenLedger(
+        _id=a['id'], id=a['id'], attempt_id=a['id'], user_id=a['user_id'],
+        summary=result['summary'], rows=[{k: q.get(k) for k in fields} for q in result['questions']],
+        engine_version=1, created_at=now(), source_commitment=source_commitment(a),
+        source_pack_id=a.get('pack_id'), sealed_seq=a.get('sealed_seq', 0),
     )
-    return await db.tejas_ledgers.find_one({"id": a["id"]}, {"_id": 0})
+    try:
+        await db.tejas_ledgers.update_one({'id': a['id']}, {'$setOnInsert': ledger.to_mongo()}, upsert=True)
+    except DuplicateKeyError:
+        pass
+    stored = await db.tejas_ledgers.find_one({'id': a['id']}, {'_id': 0})
+    verify_ledger({**a, 'ledger': stored})
+    return stored
 
 
 async def with_grade(a, version=None):

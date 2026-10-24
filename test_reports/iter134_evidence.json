@@ -1,0 +1,271 @@
+{
+  "isolation": {
+    "test_db": "tejas_isolated_iter134",
+    "patched_handles": 86,
+    "clock_patched": [
+      "tejas.db.now",
+      "tejas.auth.now",
+      "tejas.content.now",
+      "tejas.packs.now",
+      "tejas.profiles.now",
+      "tejas.attempts.now",
+      "tejas.jobs.now",
+      "tejas.reviewers.now",
+      "tejas.phone.now",
+      "tejas.corrections.now",
+      "tejas.answers.now",
+      "tejas.imports.now",
+      "tejas.competitions.now",
+      "tejas.reviews.now",
+      "tejas.chapter_books.now",
+      "tejas.ai_solutions.now",
+      "tejas.cohorts.now",
+      "tejas.smart_imports.now",
+      "tejas.exam_navigation.now",
+      "tejas.mock_books.now",
+      "tejas.live_series.now",
+      "tejas.mock_solutions.now",
+      "tejas.manual_solutions.now",
+      "tejas.question_reports.now",
+      "tejas.learning_progress.now",
+      "tejas.my_tests.now",
+      "tejas.series_streak.now",
+      "tejas.jee_transfer.now"
+    ]
+  },
+  "owned_before_hydrate": {
+    "foreign_codes": [
+      404,
+      404,
+      404,
+      404,
+      404,
+      404
+    ],
+    "hydrate_calls_for_foreign": 0,
+    "own_read": 200
+  },
+  "clock_ahead_3600s_deadline_future_600s": [
+    {
+      "op": "answer",
+      "http": 409,
+      "detail": {
+        "code": "http_409",
+        "message": "The attempt has ended. Late drafts are not accepted or scored."
+      },
+      "db_status": "completed",
+      "db_reason": "time_limit",
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": 600.0
+    },
+    {
+      "op": "visit",
+      "http": 409,
+      "detail": {
+        "code": "http_409",
+        "message": "The attempt has ended."
+      },
+      "db_status": "completed",
+      "db_reason": "time_limit",
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": 600.0
+    },
+    {
+      "op": "bonus",
+      "http": 409,
+      "detail": {
+        "code": "http_409",
+        "message": "The attempt has ended."
+      },
+      "db_status": "completed",
+      "db_reason": "time_limit",
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": 600.0
+    },
+    {
+      "op": "read_expire",
+      "http": 200,
+      "detail": null,
+      "db_status": "completed",
+      "db_reason": "time_limit",
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": 600.0
+    },
+    {
+      "op": "history",
+      "http": 200,
+      "detail": null,
+      "db_status": "completed",
+      "db_reason": "time_limit",
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": 600.0
+    }
+  ],
+  "clock_behind_3600s_deadline_future": [
+    {
+      "op": "answer",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "visit",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    },
+    {
+      "op": "read_expire",
+      "http": 200,
+      "detail": null,
+      "db_status": "active",
+      "db_reason": null,
+      "real_seconds_left_at_check": 600.0,
+      "submitted_before_deadline_by_s": null
+    }
+  ],
+  "clock_behind_deadline_passed": {
+    "answer": 409,
+    "visit": 409,
+    "read_status_reported": "active",
+    "db_status": "active",
+    "answers": {}
+  },
+  "finalize_direct": {
+    "future": [
+      "submitted",
+      600.0
+    ],
+    "expired": [
+      "time_limit",
+      true
+    ]
+  },
+  "finalize_time_limit_on_future": {
+    "status": "completed",
+    "reason": "time_limit",
+    "seconds_early": 600.0
+  },
+  "pdf_sha_mismatch": {
+    "expected": "ValueError integrity failure, no crop_png call",
+    "raised": null,
+    "crop_png_calls": 1,
+    "rendered_from_sha": [
+      "91f3e116ddabe4a834d9f82e6309f5f24f34388e20dbbcf6bae4ea9dd3fe9f9d"
+    ],
+    "declared_sha": "b6833d7e6772aea91839553480fd0a94b2eb6fea496287a0b00066040bf45311",
+    "returned": true
+  },
+  "unpack_baseline_32x100q": {
+    "raw_bytes": 123083,
+    "cold": {
+      "find_one": 32,
+      "loads": 32,
+      "decompress": 32
+    },
+    "cold_ms": 44.8,
+    "warm": {
+      "find_one": 0,
+      "loads": 32,
+      "decompress": 0
+    },
+    "warm_ms": 8.7,
+    "json_decode_ms_per_call": 0.206,
+    "mutation_isolated": true,
+    "cache_type": "raw bytes only (OrderedDict, 32MiB byte bound); every hit re-decodes JSON",
+    "db": "real isolated Mongo tejas_isolated_iter134 (not fake)"
+  },
+  "limiter_dupkey": {
+    "phone": {
+      "http": 500,
+      "fake_calls": 1
+    },
+    "login": {
+      "http": 500,
+      "fake_calls": 1
+    }
+  },
+  "limiter_real_concurrent": {
+    "dup_errors": 0,
+    "final_count": 32,
+    "note": "real isolated Mongo; dup errors here would surface as 500 in route"
+  },
+  "replay_25": {
+    "codes": [
+      200
+    ],
+    "applied": 1,
+    "distinct_seq": [
+      1
+    ],
+    "db_seq": 1,
+    "db_command_count": 1,
+    "receipts": 1,
+    "changed_body": 409,
+    "stale_new_rid": 409,
+    "foreign": 404
+  },
+  "late_write": {
+    "submit": 202,
+    "late_new": 409,
+    "old_replay": 200,
+    "old_replay_duplicate": true,
+    "sealed_seq": 1
+  },
+  "save_vs_seal": [
+    {
+      "delay_s": 0.0,
+      "acked": 4,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 16,
+      "sealed_seq": 4,
+      "max_acked_seq": 4
+    },
+    {
+      "delay_s": 0.002,
+      "acked": 0,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 20,
+      "sealed_seq": 0,
+      "max_acked_seq": 0
+    },
+    {
+      "delay_s": 0.004,
+      "acked": 17,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 3,
+      "sealed_seq": 17,
+      "max_acked_seq": 17
+    },
+    {
+      "delay_s": 0.008,
+      "acked": 14,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 6,
+      "sealed_seq": 14,
+      "max_acked_seq": 14
+    },
+    {
+      "delay_s": 0.012,
+      "acked": 20,
+      "rejected_codes": [],
+      "rejected": 0,
+      "sealed_seq": 20,
+      "max_acked_seq": 20
+    }
+  ]
+}

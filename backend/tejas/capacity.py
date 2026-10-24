@@ -56,7 +56,35 @@ class CapacityProfile(StrictContract):
     stages: list[Stage]
     slos: list[Slo]
     qualified_active_attempts: int | None = None
+    mounted_runtime: dict = Field(default_factory=dict)
+    reference_model: Literal['UNMOUNTED_V5_DESIGN'] = 'UNMOUNTED_V5_DESIGN'
     warnings: list[str]
+
+
+def mounted_workload(w):
+    c = w.active_attempts
+    saves = Fraction(c, w.commit_interval_seconds)
+    visits = Fraction(c * w.items_per_attempt, w.steady_seconds)
+    crops = visits * 2
+    retries = saves / 10
+    rates = {'answer_save': saves, 'question_visit': visits, 'question_asset': crops,
+             'answer_retry_allowance': retries, 'steady_total': saves + visits + crops + retries,
+             'deadline_confirmation_burst': Fraction(c, 6),
+             'start_burst': Fraction(c, w.start_window_seconds),
+             'submit_burst': Fraction(c, w.submit_window_seconds)}
+    return {'status': 'PLANNING_ONLY_UNQUALIFIED',
+            'protocol': 'Mounted PUT answers with revision and body-bound request receipt; no remote draft/lease/telemetry heartbeat',
+            'assumptions': {'answer_interval_seconds': w.commit_interval_seconds,
+                            'visits_per_student': w.items_per_attempt, 'crop_requests_per_visit': 2,
+                            'answer_retry_percentage': 10, 'deadline_retry_seconds': 6,
+                            'asset_bytes_and_database_amplification': 'MUST_BE_MEASURED'},
+            'rates': {key: quantity(value, 'requests/second').model_dump() for key, value in rates.items()},
+            'notes': ['Dirty answers debounce around 350ms; 30s average edits is an assumption, not an enforced interval.',
+                      'Each dirty question is a separate request; navigation, revisits, auth, results and storage misses add load.',
+                      'Deadline checks are small and conditional, not a steady full-attempt poll.',
+                      'All caches, pools and admission budgets multiply by process/pod count; no fleet size is certified.',
+                      'The 15-minute repair cron and in-process grade lanes cannot guarantee a 120-second mass grading SLA.']}
+
 
 
 def calculate(w: Workload | None = None) -> CapacityProfile:
@@ -87,7 +115,7 @@ def calculate(w: Workload | None = None) -> CapacityProfile:
         'commits': commit, 'drafts': draft, 'leases': lease, 'live': live, 'telemetry': telemetry,
     }.items()}
     volumes['candidate_wave'] = quantity(c * w.candidate_package_bytes, 'bytes')
-    return CapacityProfile(workload=w, rates=rates, volumes=volumes,
+    return CapacityProfile(workload=w, rates=rates, volumes=volumes, mounted_runtime=mounted_workload(w),
         stages=[Stage(actors=a, steady_minutes=m) for a, m in [(1000, 15), (10000, 30), (50000, 45), (100000, 60), (250000, 90), (500000, 180)]],
         slos=[
             Slo(id='commit-p95', unit='milliseconds', limit=300, percentile='p95', measurement='Server ingress through durable acknowledgement, including queueing and database commit'),
@@ -98,6 +126,7 @@ def calculate(w: Workload | None = None) -> CapacityProfile:
             Slo(id='server-errors', unit='parts-per-million', limit=1000, percentile='maximum', measurement='Overall AND every predeclared critical window; admitted overload failures count'),
             Slo(id='integrity-violations', unit='violations', limit=0, percentile='maximum', measurement='Covered failures: lost acknowledged commits, wrong grades, duplicate effects, key leakage'),
         ], warnings=[
+            'Top-level commit/draft/lease/telemetry rates describe the UNMOUNTED V5 reference, not current app traffic; see mounted_runtime.',
             'These are exact planning equations and proposed guide SLOs, NOT load-test results.',
             'Independent database cells, operator-approved budgets and failure tests are not provisioned here.',
             'Retries, reads, auth, exports, asset requests and connection demand must be added explicitly.',

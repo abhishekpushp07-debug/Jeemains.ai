@@ -5,7 +5,7 @@ User requested the deepest backend/data/API/canonical-truth audit and implementa
 
 ## Execution plan and independently testable gates
 1. Inspect mounted API/data flow, immutable packs, single-document answer commands, seal/grade recovery, authorization, bounded resources and existing deployment assumptions. Reproduce suspected correctness/performance faults with isolated fakes or a separate test DB only. Do not execute legacy tests that seed the configured customer DB.
-2. Fix canonical-time and ownership-before-hydration paths, preserve retries/receipts and rule/bonus boundaries. Verify skewed app clocks, concurrent saves/submit, old replay/new late commands, foreign IDs and legacy attempts.
+2. Fix canonical-time paths and preserve already-correct ownership-before-hydration, retries/receipts and rule/bonus boundaries. Verify skewed app clocks, concurrent saves/submit, old replay/new late commands, foreign IDs and legacy attempts.
 3. Improve immutable content reads/caching and integrity verification without caching authorization. Verify hash corruption fails, cold-load coalescing, eviction/mutation isolation, selected-question lookup, no answer-key leakage and unchanged source bytes.
 4. Add per-worker workload admission and bounded telemetry, safe transient-DB error mapping, and bounded worker recovery. Verify overload rejection before DB access, separate live/asset/control lanes, counter cleanup on disconnect/error, no PII metrics, poison job/backlog behavior and existing cron protection.
 5. Add frozen-ledger source commitment and deterministic validation for new ledgers only; preserve old immutable ledgers. Verify same snapshot/same proof, input drift detection, exact score/marking, repeated grading and ambiguous retry.
@@ -22,7 +22,7 @@ User requested the deepest backend/data/API/canonical-truth audit and implementa
 - Global capacity calculator describes hypothetical commit/draft/lease traffic not fully mounted runtime behavior; it is explicitly unqualified and must remain so.
 
 ## Risks requiring reproduction / fixes
-- Some ownership checks happen after expensive pack hydration.
+- Ownership-before-hydration hypothesis RULED OUT by iteration134: user-scoped queries already precede pack reads. Preserve this invariant on the new lightweight routes.
 - App-clock early expiry/finalization checks can disagree with database-clock save admission; validate with skew injection.
 - PDF crop path does not compare source bytes with a declared source SHA, unlike rendered-PNG path.
 - Pack JSON is decoded in full for each hydrated request; potential cold-start amplification/cache mutation hazards must be measured.
@@ -38,4 +38,24 @@ User requested the deepest backend/data/API/canonical-truth audit and implementa
 - Replica/shard topology, independent failure domains, actual worker/CDN capacity, network quotas, edge trusted-client-IP policy and500k distributed load/failover tests remain unprovisioned/unverified.
 - No claim of world-best, multi-AZ durability or measured500k service until objective SLO and integrity evidence exists.
 
-Status: AUDIT AND IMPLEMENTATION IN PROGRESS. Subsequent evidence/results will be appended after testing.
+Status: IMPLEMENTED, AWAITING REGRESSION AND COMPATIBLE REDEPLOY.
+
+
+Credential hygiene: removed historical plaintext staff-password literals from the identified legacy test and current credential notes; that unsafe live-data test is now retired/skipped. Active accounts/secrets/sessions were not changed. Repository history and other archived artifacts are not certified clean; controlled rotation/session invalidation remains mandatory.
+
+## Implementation and explicit boundaries — 2026-10-24
+- Fault baseline134 reproduced premature expiry on five paths when the application clock led MongoDB by3600seconds; `finalize(time_limit)` itself now requires database expiry. Answer/visit/bonus/owned/history use MongoDB time; new starts derive timer time from a database read. Old stored deadlines are never rewritten.
+- Additive owner-scoped `/api/attempts/{id}/status` returns only timer/seal metadata. The browser uses it for deadline confirmation instead of loading an entire exam. No extra periodic poll was introduced.
+- Bounded decoded pack LRU, coalesced cold loads, decompression bound, digest/schema/count checks, per-question lookup and defensive copies. Assets retain user/question/score-version scope, embargo, and locked-bonus denial. PDFs with declared hashes are verified before first rendering; legacy missing hashes remain explicitly unqualified.
+- New ledgers record sealed source commitments (attempt/user/pack/sequence/answers/rules/profile/version); source drift fails closed. Historical ledgers without commitments remain byte-for-byte unchanged and are not retroactively certified. This detects source drift, not a malicious operator able to rewrite both source and proof.
+- Separate process-local live/read/asset/auth/control/probe admission budgets return503+Retry-After before expensive work. Bounded no-PII counters and cache/job metrics are staff-only. Readiness pings MongoDB; liveness stays lightweight. None measures fleet capacity.
+- Job claim/lease/retry decisions use database time; release-triggered drains are bounded to16jobs by default. Terminal failed grading no longer blocks every subsequent outbox scan. Existing15minute platform recovery stays unchanged; no new scheduler or paid queue.
+- Concurrent auth limit initialization retries DuplicateKeyError once without upsert, fail-closed if no counter exists. Cookie/phone identity and configured owner are unchanged; no plaintext password is needed in new tests.
+- Capacity profile preserves the old reference fields for compatibility, explicitly labels them UNMOUNTED_V5_DESIGN, and adds equations for current answer/visit/asset/deadline traffic. No fake remote-draft/lease heartbeat is described as mounted.
+
+## Data/query/packaging audit
+MongoDB remains canonical; no SQL/Redis migration or shadow write store was added. Existing unique id/user-start/active-attempt indexes enforce identities and replay aliases; user/time history, job kind/status, expiry/status, ledgers and score-version indexes already exist. Validate query plans on isolated data. Every additive route is in the executable startup contract catalogue and OpenAPI. Do not run legacy tests against customer DBs. Index/pool tuning and shard keys require production volume, topology and explain evidence, not guesses.
+
+## Required qualification evidence (not obtained by code changes)
+Ramped isolated load campaign1k/10k/50k/100k/250k/500k with approved budget and production-equivalent data/replication; three-hour soak, simultaneous starts/deadlines/submits, offline retries, cold assets, DB stall/failover, kill-after-seal-before-enqueue, stale worker, restore drill, exact ack/ledger reconciliation, p95/p99 and saturation/queue-age/egress. Proposed SLOs remain targets until measured. No live load generation is authorized.
+

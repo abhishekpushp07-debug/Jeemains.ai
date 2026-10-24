@@ -222,7 +222,7 @@ export function useAttempt(id, user) {
       checking = true;
       deadlineRetry.current.after = Date.now() + 5000 + Math.random() * 1500;
       try {
-        const latest = await api("/attempts/" + id);
+        const latest = await api("/attempts/" + id + "/status");
         deadlineRetry.current.failures = 0;
         syncClock(latest.server_now);
         if (latest.status === "completed") openResult();

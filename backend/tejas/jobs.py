@@ -9,7 +9,8 @@ from starlette.concurrency import run_in_threadpool
 from .db import jobs, sets, files, attempts, db, uid, now, get, audit
 from .auth import current
 from .safety import JOB_CAPABILITIES, HOLD_MESSAGE, job_held, require_capability
-from .runtime import LANE_LIMITS, JOB_ATTEMPTS, JOB_LEASE_SECONDS, INLINE_JOBS
+from .runtime import LANE_LIMITS, JOB_ATTEMPTS, JOB_LEASE_SECONDS, INLINE_JOBS, JOB_DRAIN_QUANTUM
+from .canonical import EPOCH_NOW
 from tejas_core import build_questions, generate_report
 from tejas_storage import get_object, put_object
 
@@ -54,7 +55,7 @@ async def enqueue(kind, user_id, set_id, payload):
 
 
 async def require_lease(j):
-    if not await jobs.find_one({'id': j['id'], 'lease': j['lease'], 'status': 'running', 'lease_until': {'$gt': now()}}, {'_id': 1}):
+    if not await jobs.find_one({'id': j['id'], 'lease': j['lease'], 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, {'_id': 1}):
         raise RuntimeError('Worker lease lost; output must not be published')
 
 
@@ -80,10 +81,12 @@ async def run_job(id, drain=True):
     try:
         j = await jobs.find_one_and_update({
             'id': id, '$and': [
-                {'$or': [{'status': 'queued'}, {'status': 'running', 'lease_until': {'$lt': now()}}]},
+                {'$or': [{'status': 'queued'}, {'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}}]},
                 {'$or': [{'attempts': {'$lt': JOB_ATTEMPTS}}, {'attempts': {'$exists': False}}]},
-                {'$or': [{'next_run_at': {'$lte': now()}}, {'next_run_at': {'$exists': False}}]},
-            ]}, {'$set': {'status': 'running', 'progress': 10, 'lease': lease, 'lease_until': now() + JOB_LEASE_SECONDS}, '$inc': {'attempts': 1}}, return_document=ReturnDocument.AFTER)
+                {'$expr': {'$lte': [{'$ifNull': ['$next_run_at', 0]}, EPOCH_NOW]}},
+            ]}, [{'$set': {'status': 'running', 'progress': 10, 'lease': lease,
+                           'lease_until': {'$add': [EPOCH_NOW, JOB_LEASE_SECONDS]},
+                           'attempts': {'$add': [{'$ifNull': ['$attempts', 0]}, 1]}}}], return_document=ReturnDocument.AFTER)
         if not j:
             return
         try:
@@ -149,22 +152,22 @@ async def run_job(id, drain=True):
                 # Never overwrite another lease's report bytes. Only the fenced DB pointer wins.
                 path = await run_in_threadpool(put_object, f"tejas/reports/{a['user_id']}/{id}/{lease}.pdf", pdf)
                 await require_lease(j)
-                await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', 'lease_until': {'$gt': now()}}, {'$set': {'path': path, 'progress': 80}})
+                await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, {'$set': {'path': path, 'progress': 80}})
                 message = 'Your complete results and matched solutions are ready.'
             else:
                 raise ValueError('Unknown job type')
             await require_lease(j)
-            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', 'lease_until': {'$gt': now()}}, {'$set': {'status': 'done', 'progress': 100, 'message': message, 'finished_at': now(), 'error': '', **output}})
+            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': message, 'finished_at': EPOCH_NOW, 'error': '', **{k: {'$literal': v} for k, v in output.items()}}}])
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
         except Exception:
             logging.getLogger(__name__).exception('Background job failed (kind=%s)', kind)
             retryable = j.get('attempts', 1) < JOB_ATTEMPTS
-            await jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, {'$set': {
+            await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {
                 'status': 'queued' if retryable else 'failed', 'progress': 0,
-                'next_run_at': now() + min(60, 2 ** j.get('attempts', 1)),
+                'next_run_at': {'$add': [EPOCH_NOW, min(60, 2 ** j.get('attempts', 1))]},
                 'error': 'Processing could not finish. Your originals and saved answers are safe.' + (' Retrying shortly.' if retryable else ' Retry after the cause is resolved.'),
-            }})
+            }}])
     finally:
         lane.discard(id)
         if drain:
@@ -196,11 +199,11 @@ async def drain_lane(kind):
         return
     _draining.add(kind)
     try:
-        for _ in range(4096):
+        for _ in range(JOB_DRAIN_QUANTUM):
             if len(_active[kind]) >= LANE_LIMITS[kind]:
                 break
             next_job = await jobs.find_one({'kind': kind, 'status': 'queued',
-                '$and': [{'$or': [{'next_run_at': {'$lte': now()}}, {'next_run_at': {'$exists': False}}]},
+                '$and': [{'$expr': {'$lte': [{'$ifNull': ['$next_run_at', 0]}, EPOCH_NOW]}},
                          {'$or': [{'attempts': {'$lt': JOB_ATTEMPTS}}, {'attempts': {'$exists': False}}]}]},
                 {'id': 1}, sort=[('created_at', 1)])
             if not next_job:
@@ -258,22 +261,22 @@ async def maintenance():
     pending = await sets.find({'publication_pending': {'$exists': True}}, {'id': 1, 'publication_pending': 1}).limit(50).to_list(50)
     for s in pending:
         await archive_publication(s)
-    expired = await attempts.find({'status': 'active', 'deadline': {'$gt': 0, '$lte': now()}}, {'id': 1}).limit(1000).to_list(1000)
+    expired = await attempts.find({'status': 'active', 'deadline': {'$gt': 0}, '$expr': {'$lte': ['$deadline', EPOCH_NOW]}}, {'id': 1}).sort('deadline', 1).limit(1000).to_list(1000)
     for a in expired:
-        await finalize(a['id'], 'time_limit')
+        await finalize(a['id'], 'time_limit', projection={'_id': 0, 'id': 1})
     # Recover a crash after durable close but before enqueue, including pre-upgrade submissions.
-    outbox = await attempts.find({'status': 'completed', 'grading_status': {'$nin': ['ready']}}, {'id': 1, 'user_id': 1, 'set_id': 1, 'status': 1}).limit(1000).to_list(1000)
+    outbox = await attempts.find({'status': 'completed', 'grading_status': {'$nin': ['ready', 'failed']}}, {'id': 1, 'user_id': 1, 'set_id': 1, 'status': 1}).limit(1000).to_list(1000)
     for a in outbox:
         await ensure_grade(a)
     # Exhausted crashed workers must become visibly failed, not running forever.
-    await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', 'lease_until': {'$lt': now()}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
+    await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
     selected = []
     for kind, capacity in LANE_LIMITS.items():
         if kind == 'ai_solution':
             continue  # Maintenance must never discover or restart solution generation.
         rows = await jobs.find({'kind': kind, '$and': [
-            {'$or': [{'status': 'queued'}, {'status': 'running', 'lease_until': {'$lt': now()}}]},
-            {'$or': [{'next_run_at': {'$lte': now()}}, {'next_run_at': {'$exists': False}}]},
+            {'$or': [{'status': 'queued'}, {'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}}]},
+            {'$expr': {'$lte': [{'$ifNull': ['$next_run_at', 0]}, EPOCH_NOW]}},
         ]}, {'id': 1}).sort('created_at', 1).limit(capacity).to_list(capacity)
         selected.extend(rows)
     await asyncio.gather(*(run_job(j['id']) for j in selected))

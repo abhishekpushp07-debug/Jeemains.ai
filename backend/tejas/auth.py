@@ -170,11 +170,9 @@ async def login(data: Credentials, response: Response):
     email = str(data.email).lower()
     window = int(now() // 900)
     key = hashlib.sha256(f"staff:{email}:{window}".encode()).hexdigest()
-    limit = await db.tejas_login_limits.find_one_and_update(
-        {"_id": key}, {"$inc": {"count": 1}, "$setOnInsert": {"expires_at": datetime.now(timezone.utc) + timedelta(minutes=30)}},
-        upsert=True, return_document=ReturnDocument.AFTER,
-    )
-    if limit["count"] > 5:
+    from .rate_limits import increment
+    count = await increment(db.tejas_login_limits, key, datetime.now(timezone.utc) + timedelta(minutes=30))
+    if count > 5:
         raise HTTPException(429, "Too many sign-in attempts. Please wait before trying again.", headers={"Retry-After": str(max(1, int((window + 1) * 900 - now()) + 1))})
     u = await users.find_one({"email": email})
     if (

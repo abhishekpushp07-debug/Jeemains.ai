@@ -18,6 +18,11 @@ DB_WAIT_MS = budget('TEJAS_DB_WAIT_MS', 2000, 100, 10000)
 MAX_ANSWER_COMMANDS = budget('TEJAS_MAX_ANSWER_COMMANDS', 10000, 1000, 12000)
 JOB_ATTEMPTS = budget('TEJAS_JOB_ATTEMPTS', 3, 1, 5)
 JOB_LEASE_SECONDS = budget('TEJAS_JOB_LEASE_SECONDS', 900, 60, 3600)
+JOB_DRAIN_QUANTUM = budget('TEJAS_JOB_DRAIN_QUANTUM', 16, 1, 64)
+PACK_CACHE_BYTES = budget('TEJAS_PACK_CACHE_BYTES', 32 * 1024 * 1024, 1024 * 1024, 128 * 1024 * 1024)
+PACK_MAX_BYTES = budget('TEJAS_PACK_MAX_BYTES', 16 * 1024 * 1024, 1024 * 1024, 32 * 1024 * 1024)
+INFLIGHT_LIMITS = {name: budget('TEJAS_INFLIGHT_' + name.upper(), default, 1, 256)
+                   for name, default in [('live', 32), ('read', 16), ('asset', 8), ('auth', 4), ('control', 4), ('probe', 2)]}
 INLINE_JOBS = os.environ.get('TEJAS_INLINE_JOBS', 'true').lower() == 'true'
 LANE_LIMITS = {
     'grade': budget('TEJAS_GRADE_CONCURRENCY', 2, 1, 8),

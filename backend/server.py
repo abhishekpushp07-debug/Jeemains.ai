@@ -38,6 +38,7 @@ from tejas import (
     live_series,
     series_streak,
     jee_transfer,
+    attempt_status,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -70,6 +71,8 @@ app.add_middleware(JsonBodyLimits, contracts_owner=app)
 app.add_middleware(ContentSafetyHold)
 from tejas.import_guard import ImportGuard
 app.add_middleware(ImportGuard)
+from tejas.admission import AdmissionGate
+app.add_middleware(AdmissionGate, owner=app)
 origins = configured_origins(os.environ['FRONTEND_URL'], os.environ.get('CORS_ORIGINS'))
 app.add_middleware(
     ExplicitOriginCORS,
@@ -146,6 +149,22 @@ for failure in (ConnectionFailure, ExecutionTimeout, WTimeoutError):
     app.add_exception_handler(failure, database_busy)
 
 
+from tejas.canonical import CanonicalIntegrityError
+
+
+@app.exception_handler(CanonicalIntegrityError)
+async def integrity_error(request, exc):
+    import logging
+    logging.getLogger(__name__).error('Canonical content check failed request_id=%s', request_id.get())
+    return error_response('This content could not be verified. Saved answers are unchanged; contact support.', 503, 'integrity_unavailable')
+
+
+@app.get('/api/ready')
+async def ready():
+    await client.admin.command('ping', maxTimeMS=1000)
+    return {'status': 'ready', 'capacity_qualified': False}
+
+
 @app.get("/api/health")
 async def health():
     return {"status": "ok", "service": "jeemains.ai", "version": "1.0.0"}
@@ -181,6 +200,7 @@ for module in [
     live_series,
     series_streak,
     jee_transfer,
+    attempt_status,
 ]:
     app.include_router(module.router)
 

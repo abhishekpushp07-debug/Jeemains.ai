@@ -58,6 +58,8 @@ async def get(coll, id):
         ledger = await db.tejas_ledgers.find_one({"id": id}, {"_id": 0})
         if ledger:
             d["ledger"] = ledger
+            from .canonical import verify_ledger
+            verify_ledger(d)
     return d
 
 

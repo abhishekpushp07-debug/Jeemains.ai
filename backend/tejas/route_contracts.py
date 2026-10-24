@@ -9,6 +9,9 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'attempt_status.status_attempt': ('attempt_owner_header_only', 'live', 'read_conditional_database_time_expiry'),
+    'engineering.runtime_status': ('staff_bounded_process_metrics_no_identifiers', 'normal', 'read'),
+    'server.ready': ('public_database_readiness_only', 'normal', 'read'),
     'jee_transfer.transfer_status': ('owner_scoped_transfer_counts_only', 'normal', 'read'),
     'jee_transfer.transfer_step': ('owner_fixed_verified_bundle_only', 'batch', 'insert_only_hash_conflict_stop_durable_lease'),
     'series_streak.progress': ('own_live_series_streak_only', 'normal', 'read'),
@@ -111,14 +114,14 @@ SPEC = {
     'attempts.my_sets': ('current_profile_audience', 'normal', 'read'),
     'attempts.my_set': ('current_profile_audience', 'normal', 'read'),
     'attempts.preflight': ('current_profile_audience_or_staff_preview', 'normal', 'upsert_preflight'),
-    'attempts.start': ('current_profile_audience_or_staff_preview', 'live', 'start_key_receipt_legacy'),
+    'attempts.start': ('current_profile_audience_or_staff_preview', 'live', 'start_key_and_body_receipt_resume_alias'),
     'attempts.history': ('attempt_owner', 'normal', 'read_with_expiry_side_effect'),
     'attempts.read_attempt': ('attempt_owner', 'live', 'read_with_expiry_side_effect'),
     'attempts.visit_question': ('attempt_owner_active_deadline', 'live', 'set_membership'),
     'attempts.submit': ('attempt_owner', 'live', 'atomic_seal_receipt'),
     'attempts.results': ('attempt_owner_and_solution_release', 'normal', 'read_grade_enqueue_side_effect'),
     'attempts.asset': ('attempt_owner_and_solution_release', 'normal', 'read_with_expiry_side_effect'),
-    'attempts.retry': ('attempt_owner_frozen_grade', 'normal', 'KNOWN_A01_alias_gap'),
+    'attempts.retry': ('attempt_owner_frozen_grade', 'normal', 'retry_body_receipt_resume_alias'),
     'attempts.report': ('attempt_owner_and_report_rights', 'batch', 'versioned_report_job'),
     'jobs.status': ('job_owner_or_staff_set_scope', 'normal', 'read_dispatch_side_effect'),
     'jobs.retry_job': ('job_owner_or_staff_set_scope', 'batch', 'job_state_retry'),
@@ -201,7 +204,7 @@ def install_contracts(app):
                     components[c.model.__name__] = schema
                     operation['requestBody'] = {'required': bool(c.route.body_field and getattr(c.route.body_field, 'required', True)),
                         'content': {'application/json': {'schema': {'$ref': '#/components/schemas/' + c.model.__name__}}}}
-                operation['x-known-gaps'] = ['Target SQL authority, field-level response DTOs and cross-resource transaction proof are separate qualification requirements']
+                operation['x-known-gaps'] = ['MongoDB is canonical; replica/failover/load evidence and remaining legacy response DTO coverage are unqualified']
         return spec
     app.openapi = openapi
     return tuple(registry)

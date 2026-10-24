@@ -1,5 +1,19 @@
 # Capacity and operations — reference design, not provisioning
 
+## Mounted runtime clarification — 2026-10-24
+The worksheet below is the UNMOUNTED V5 reference design, retained for source traceability. It is not the current protocol. Current `/api/internal/capacity/profile` adds `mounted_runtime` without removing legacy fields.
+
+Current web saves use one PUT per dirty question after debounce, durable revision/body-bound receipts, and server-side deadline checks. There are no separate remote draft, lease or telemetry heartbeat endpoints. A planning example with500000 active students, one save/30s,75visits/10800s,2crop requests/visit and10%save retries produces:16666.67save/s +3472.22visit/s +6944.44crop/s +1666.67retry/s =28750requests/s. These are assumptions, NOT measurements. Extra revisits, session reads, results, source misses and bursts must be added. An expiry wave retrying the small status endpoint every6s can demand83333.33requests/s; synchronized submission over30s adds16666.67submit/s. Real clients jitter/retry and the gate rejects excess503; rejection is not successful exam service.
+
+Operational per-process defaults: Mongo pool32, pool wait2000ms, decoded pack cache32MiB, rendered crop cache48MiB, decoded pack ceiling16MiB; in-flight live32/read16/asset8/auth4/control4/probe2. Configure with existing TEJAS_* knobs only after measurement. These are not per-fleet quotas: multiply by workers and pods. Mongo client defaults retain majority+journal acknowledgements; production replica quorum/backups/failover still need verification.
+
+`GET /api/health` is liveness; `GET /api/ready` checks database connectivity only. Staff-only `GET /api/internal/runtime/status` exposes bounded per-process admission/latency buckets/bytes/cache/job counters, without account/attempt/session identifiers. Polling different pods is NOT an aggregate metric; fleet telemetry requires an operator-owned collector.
+
+Each grade drain handles at most16jobs by default; repeated events/15minute platform cron recover durable work. New terminal failed jobs do not permanently starve newer outbox entries. This does not establish continuous large-volume grading or a120second worst-case recovery guarantee. An independent durable worker fleet and measured drain capacity are prerequisites for the stated target.
+
+Safe release: code-only redeploy existing binding; no preview DB clone, seed overwrite, content import or credential changes. New endpoint/ledger metadata are additive, legacy ledgers unchanged. Stop on any lost acknowledgement, grade mismatch, key leakage, incompatible source record or rising503/timeouts. Restore previous code using platform checkpoint controls, never rewrite students' truth to make tests pass.
+
+
 Authoritative workload: PDF05 pp3,46. No load certification is inferred from this preview.
 
 ## Editable worksheet
