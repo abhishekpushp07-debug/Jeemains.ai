@@ -357,6 +357,14 @@ async def startup():
     await db.rf_awards.create_index([("uid", 1), ("ref", 1)], unique=True)
     await db.rf_profiles.create_index("uid", unique=True)
     await db.rf_profiles.create_index([("xp", -1)])
+    # Duel live channel must be a capped collection before any event is written (see duels.py tail()).
+    if "rf_events" not in await db.list_collection_names():
+        try:
+            await db.create_collection("rf_events", capped=True, size=32 * 1024 * 1024, max=200000)
+        except Exception:  # noqa: BLE001
+            pass
+    elif not (await db.rf_events.options()).get("capped"):
+        await db.command("convertToCapped", "rf_events", size=32 * 1024 * 1024)
     asyncio.create_task(card_sync_loop())
 
 

@@ -1,5 +1,6 @@
 """Rapid Fire Duels: two students, same 30 cards, live score race (WebSocket push, polling fallback)."""
 import asyncio
+import logging
 import hashlib
 import json
 import random
@@ -10,7 +11,7 @@ from typing import List, Literal, Optional
 
 from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, ConfigDict, Field
-from pymongo import ReturnDocument
+from pymongo import CursorType, ReturnDocument
 from shop import rival_profile, safe_avatar
 
 DUEL_CARDS = 30
@@ -41,11 +42,78 @@ class DuelAnswer(BaseModel):
     ms: int = Field(default=0, ge=0, le=CARD_SECONDS * 1000 + 1000)
 
 
+log = logging.getLogger("duels")
+
+
 def make_router(db, rf_user, public_card, award):
     r = APIRouter(prefix="/rf/duels")
     card_cache: dict = {}  # cards are immutable during play: cache to skip a DB read per view
     sockets: dict = {}  # did -> {ws: {"uid": str, "sig": str}}
     tickers: dict = {}
+    node = uuid.uuid4().hex  # this server process
+    bus = {"task": None}
+
+    # Shared live channel across every server: a capped MongoDB collection tailed by each process.
+    # Any server that changes a duel publishes {did}; every server holding a socket for it pushes fresh state.
+    async def ensure_bus():
+        if bus["task"]:
+            return
+        bus["task"] = asyncio.create_task(tail())
+
+    async def ensure_capped():
+        if "rf_events" not in await db.list_collection_names():
+            try:
+                await db.create_collection("rf_events", capped=True, size=32 * 1024 * 1024, max=200000)
+            except Exception:  # noqa: BLE001  (another server created it first)
+                pass
+        if not (await db.rf_events.options()).get("capped"):
+            try:  # created as a plain collection by an early insert: convert it
+                await db.command("convertToCapped", "rf_events", size=32 * 1024 * 1024)
+            except Exception as e:  # noqa: BLE001
+                log.warning("rf_events convertToCapped failed: %s", e)
+        if not await db.rf_events.find_one():
+            await db.rf_events.insert_one({"did": "", "node": node, "ts": time.time()})
+
+    async def tail():
+        from collections import deque
+        last_ts = None
+        seen, order = set(), deque(maxlen=5000)  # ids are made per server, so filter by time and de-dupe instead
+        while True:
+            try:
+                await ensure_capped()
+                if last_ts is None:
+                    last_ts = time.time()
+                cur = db.rf_events.find({"ts": {"$gt": last_ts - 5}}, cursor_type=CursorType.TAILABLE_AWAIT).max_await_time_ms(300)
+                while cur.alive:
+                    async for ev in cur:
+                        if ev["_id"] in seen:
+                            continue
+                        if len(order) == order.maxlen:
+                            seen.discard(order[0])
+                        order.append(ev["_id"])
+                        seen.add(ev["_id"])
+                        last_ts = max(last_ts, ev.get("ts", 0))
+                        if ev.get("node") != node and ev.get("did") in sockets:
+                            asyncio.create_task(push(ev["did"]))
+                    await asyncio.sleep(0.05)
+                await asyncio.sleep(0.2)
+            except asyncio.CancelledError:
+                raise
+            except Exception as e:  # noqa: BLE001
+                log.warning("duel live channel error: %s", e)
+                await asyncio.sleep(1)
+
+    async def publish(did):
+        try:
+            await db.rf_events.insert_one({"did": did, "node": node, "ts": time.time()})
+        except Exception as e:  # noqa: BLE001
+            log.warning("duel live channel publish failed: %s", e)
+
+    def notify(did):
+        """Push locally right away and tell the other servers."""
+        asyncio.create_task(push(did))
+        asyncio.create_task(publish(did))
+        asyncio.create_task(ensure_bus())
 
     async def get_cards(ids):
         miss = [i for i in ids if i not in card_cache]
@@ -204,7 +272,7 @@ def make_router(db, rf_user, public_card, award):
                 {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
             if match:
                 await db.rf_duels.update_one({"id": match["id"]}, {"$addToSet": {"request_ids": data.request_id}})
-                asyncio.create_task(push(match["id"]))
+                notify(match["id"])
                 return await view(match, uid)
         d = {"id": str(uuid.uuid4()), "code": "".join(random.choices(string.ascii_uppercase.replace("O", "").replace("I", "") + "23456789", k=6)),
              "mode": data.mode, "subject": data.subject, "chapter": data.chapter, "status": "waiting", "card_ids": await pick_cards(data.subject, data.chapter),
@@ -223,7 +291,7 @@ def make_router(db, rf_user, public_card, award):
                                                   {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
-        asyncio.create_task(push(d["id"]))
+        notify(d["id"])
         return await view(d, uid)
 
     @r.get("/{did}")
@@ -251,7 +319,7 @@ def make_router(db, rf_user, public_card, award):
                                                   {"$push": {"players": bot}, "$set": {**start_fields(), "vs_bot": True}}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(409, "This duel already has an opponent.")
-        asyncio.create_task(push(did))
+        notify(did)
         return await view(d, uid)
 
     @r.post("/{did}/forfeit")
@@ -261,7 +329,7 @@ def make_router(db, rf_user, public_card, award):
         d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
         if d:
             await settle(d)
-            asyncio.create_task(push(did))
+            notify(did)
         return {"ok": True}
 
     @r.post("/{did}/answer")
@@ -294,7 +362,7 @@ def make_router(db, rf_user, public_card, award):
         if not res.modified_count:
             raise HTTPException(409, "Answer already recorded.")
         await settle(await db.rf_duels.find_one({"id": did}))
-        asyncio.create_task(push(did))
+        notify(did)
         return {"index": data.index, "outcome": outcome, "answer": card["answer"], "explain": card.get("explain", ""), "score": me["score"] + inc}
 
     @r.websocket("/{did}/ws")
@@ -308,6 +376,7 @@ def make_router(db, rf_user, public_card, award):
         if not d:
             await ws.close(code=4404)
             return
+        await ensure_bus()
         sockets.setdefault(did, {})[ws] = {"uid": uid, "sig": ""}
         await push(did)
         if did not in tickers:

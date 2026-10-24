@@ -1,0 +1,53 @@
+{
+  "summary": "Tested Offline Maths and Multi-Server Duels. Offline maths: the real tex()/html() from AiSolution.tsx was run in node with the bundled katex 0.19.1 over all 142 live AI solutions of attempt 8501cf9c. Results: 142/142 rendered, 0 throws, 131 contain katex spans (4771 in total; the other 11 have no delimited maths), 0 http(s) URLs in the HTML, KATEX_CSS has 20 @font-face rules all using woff2 data: URIs and no external url(). $..$, $$..$$, \\(..\\) and \\[..\\] all render. The one katex-error span (q 049a1ade) comes from NUL (\\u0000) characters in the upstream data ('2\\!-\\u00003\\!-...'), not from \\! parsing; that body renders fine in strict mode once the NULs are removed. throwOnError:false keeps it from crashing. Web regression: login 9000000001, then /result/8501cf9c, then the Solutions tab shows the AI block (ai-solution-1) as plain-text maths with no $ or \\, no katex/CDN network requests, no console errors. Multi-server: started a 2nd uvicorn on :8002. Cross-server push, measured from the HTTP response to arrival on the other server's socket: join B→A 0.6 ms, answer A→B 0.9-1.3 ms, answer B→A 0.9-1.0 ms (3.5-5.5 ms from request start), forfeit B→A 1.1 ms. All far under 200 ms. The finished state matched on both sockets (same winner, rewards set, key revealed), and GET from the other server agreed. No errors in backend.err.log or the 8002 log, and the 8002 process was killed. Regression: test_rf_duels.py, test_rf_shop_bot.py and test_rf_duels_ws.py, 22/22 pass on the external URL (includes AI Rival over WSS). Found 1 real robustness bug: if rf_events is first created by notify()'s insert, it is not capped and the bus dies silently.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "duels.py shared bus (tail/notify)", "issue": "Confirmed on a temp DB: on a fresh DB (e.g. production), if notify() runs before any WebSocket has started tail(), for example a join/answer/bot/forfeit while the client is on polling fallback, insert_one auto-creates rf_events as a normal, uncapped collection. tail() then sees the name exists and skips create_collection. The TAILABLE_AWAIT cursor fails with 'tailable cursor requested on non capped collection'. The except block sleeps 1 s and retries forever, and nothing is logged. Cross-server push silently falls back to the 1-2 s ticker, and rf_events grows without limit.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "duels.py tail()", "issue": "The cursor filter {_id: {$gt: last._id}} applies to every tailed document, not just the start position. ObjectIds from other processes made in the same second as `last` but with a lower random/process part are silently skipped at each cursor (re)open. Use a ts-based start or skip by natural order instead."},
+      {"endpoint": "duels.py notify()", "issue": "asyncio.ensure_future(insert_one) has no error handling. A Mongo hiccup gives 'Task exception was never retrieved' and silently drops the cross-server event."},
+      {"endpoint": "duels.py tail()", "issue": "The broad except sleeps without logging, so a dead bus is invisible in logs. Add logger.warning."},
+      {"endpoint": "upstream data /attempts/8501cf9c.../ai-solutions", "issue": "q 049a1ade step 1 has NUL chars ('2\\!-\\u00003\\!-\\u00001\\!-\\u00006'). On native, KaTeX shows it as a red katex-error source span. Stripping \\u0000 in tex() before rendering makes it typeset correctly."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "expo-router/unstable-native-tabs", "issue": "Metro warns that `expo-router/unstable-native-tabs` is deprecated; use `expo-router/native-tabs`. Reference: /var/log/supervisor/expo.out.log (tabs layout under /app/frontend/app/(tabs))"},
+      {"component": "AiSolution web bundle", "issue": "katex (~270 KB) and KATEX_CSS (369 KB string) are imported at module level, so they also ship in the web bundle where only the plainMath fallback is used. Consider a Platform-specific file (AiSolution.native.tsx / .web.tsx). Reference: /app/frontend/src/components/AiSolution.tsx:4-5"}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rf_duels_multiserver.py",
+    "/app/backend/tests/katex_offline_check.js",
+    "/app/backend/tests/fetch_ai_items.py",
+    "/app/test_reports/pytest/iter15_multiserver.xml",
+    "/app/test_reports/pytest/iter15_regression.xml"
+  ],
+  "action_items": [
+    "HIGH: Create rf_events as capped at app startup (server.py startup, before any notify can run), not lazily in tail(). If it exists but options().capped is false, run convertToCapped (or drop and recreate). Log failures in tail().",
+    "Minor: in tail(), don't keep the `_id > last._id` filter for the cursor's lifetime; start from a ts field or natural order so events from other processes in the same second aren't skipped.",
+    "Minor: wrap the notify() insert in a task with exception logging.",
+    "Minor: strip \\u0000 (and other control chars) in tex()/plainMath before KaTeX rendering.",
+    "Optional: split AiSolution into .native/.web so katex and the 369 KB CSS aren't in the web bundle; migrate unstable-native-tabs to expo-router/native-tabs."
+  ],
+  "critical_code_review_comments": [
+    "Behaviour note, not a bug: in PvP, forfeit only marks the leaver done; the duel stays 'ready' until the other player finishes or ends_at passes. The forfeiter can never win. Verified cross-server.",
+    "Every process receives every rf_events doc and filters in Python (did in sockets). That's fine now, but at lakhs of concurrent duels each server handles the global event rate. A change-stream with $match or sharding by did may be needed later.",
+    "html() escapes non-maths text and KaTeX runs with trust:false, so there are no injection concerns. The native WebView can't be exercised on web; only the HTML generation was verified."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_rf_duels_multiserver.py (new)",
+    "/app/backend/tests/katex_offline_check.js (new)",
+    "/app/backend/tests/fetch_ai_items.py (new)"
+  ],
+  "success_rate": {"backend": "100% (26/26 tests; 1 HIGH robustness bug found by code review + repro)", "frontend": "100% (web regression)"},
+  "seed_data_creation": "TEST-ms-* duel players and TEST-ws-* uids created by tests in rf_duels/rf_profiles; no live jeelive attempts submitted",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Multi-server test: start `cd /app/backend && nohup uvicorn server:app --host 127.0.0.1 --port 8002 &`, then `RF_NODE_A=http://127.0.0.1:8001 RF_NODE_B=http://127.0.0.1:8002 python -m pytest test_rf_duels_multiserver.py -s -p no:xdist -o addopts=''`, then kill 8002. KaTeX check: `python fetch_ai_items.py && node katex_offline_check.js` (needs EXPO_PUBLIC_BACKEND_URL exported). To verify the capped fix: drop rf_events, insert a doc via a join before any WS opens, then confirm options().capped is true and cross-server latency stays under 200 ms.",
+  "rca_of_issue": "Uncapped bus: tail() only creates the capped collection when it isn't listed, and tail() starts lazily on the first WS connect. Meanwhile notify() does insert_one from any HTTP handler. MongoDB auto-creates a missing collection on insert as uncapped. Reproduced with /tmp/capped_check.py on DB tmp_rf_bus_check: capped False, tail error 'tailable cursor requested on non capped collection'. Fix: create it as capped (and check it is capped) at startup."
+}

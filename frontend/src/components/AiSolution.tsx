@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { Platform, View } from "react-native";
 import { WebView } from "react-native-webview";
+import katex from "katex";
+import { KATEX_CSS } from "@/src/katexCss";
 import { Icon, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 
@@ -88,17 +90,31 @@ function conv(s: string): string {
   return out;
 }
 export function plainMath(s: string) {
-  return conv(String(s ?? "")).replace(/[ \t]{2,}/g, " ").trim();
+  return conv(String(s ?? "").replace(/\u0000/g, "")).replace(/[ \t]{2,}/g, " ").trim();
+}
+
+// Typeset maths in JS with the bundled KaTeX (no network); text around it is HTML-escaped.
+const MATH = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\$([^$]+?)\$|\\\(([\s\S]+?)\\\)/g;
+function tex(src: any) {
+  const s = String(src ?? "").replace(/\u0000/g, ""); // upstream text sometimes carries NUL bytes
+  let out = "", last = 0;
+  for (const m of s.matchAll(MATH)) {
+    out += esc(s.slice(last, m.index));
+    const display = m[1] != null || m[2] != null;
+    const body = m[1] ?? m[2] ?? m[3] ?? m[4] ?? "";
+    try { out += katex.renderToString(body, { displayMode: display, throwOnError: false, output: "html", strict: "ignore", trust: false }); }
+    catch { out += esc(m[0]); }
+    last = (m.index ?? 0) + m[0].length;
+  }
+  return out + esc(s.slice(last));
 }
 
 function html(sol: any, label: string) {
   const sec = (title: string, body: string, tone = "") => body ? `<section class="${tone}"><h4>${title}</h4>${body}</section>` : "";
-  const list = (xs: any[]) => (xs?.length ? `<ul>${xs.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
-  const steps = (sol.steps || []).map((s: any, i: number) => `<div class="step"><div class="n">${i + 1}</div><div><b>${esc(String(s.title || "").replace(/^\d+\.\s*/, ""))}</b><p>${esc(s.explanation)}</p></div></div>`).join("");
+  const list = (xs: any[]) => (xs?.length ? `<ul>${xs.map((x) => `<li>${tex(x)}</li>`).join("")}</ul>` : "");
+  const steps = (sol.steps || []).map((s: any, i: number) => `<div class="step"><div class="n">${i + 1}</div><div><b>${tex(String(s.title || "").replace(/^\d+\.\s*/, ""))}</b><p>${tex(s.explanation)}</p></div></div>`).join("");
   return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="go()"></script>
+<style>${KATEX_CSS}</style>
 <style>
 body{margin:0;font-family:-apple-system,Roboto,sans-serif;font-size:15px;line-height:1.55;color:${colors.custom_onReading};background:transparent}
 h4{margin:0 0 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${colors.muted}}
@@ -111,19 +127,19 @@ p{margin:4px 0 0}ul{margin:0;padding-left:18px}li{margin:3px 0}
 .final{font-size:17px;font-weight:800;color:${colors.success}}
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}.katex{font-size:1.05em}
 </style></head><body><div id="c">
-${sec("Concept", `<p>${esc(sol.concept)}</p>`, "info")}
+${sec("Concept", `<p>${tex(sol.concept)}</p>`, "info")}
 ${sec("Given", list(sol.given))}
 ${sec("Step-by-step", steps)}
 ${sec("Final answer", `<div class="final">Option ${esc(sol.final_answer)} ${sol.key_agrees ? "✓ matches the official key" : ""}</div>`, "good")}
-${sec("Shortcut", sol.shortcut ? `<p>${esc(sol.shortcut)}</p>` : "", "info")}
+${sec("Shortcut", sol.shortcut ? `<p>${tex(sol.shortcut)}</p>` : "", "info")}
 ${sec("Common mistakes", list(sol.common_mistakes), "warn")}
-${sec("Time tip", sol.time_tip ? `<p>${esc(sol.time_tip)}</p>` : "")}
-${sec("Examiner insight", sol.insight ? `<p>${esc(sol.insight)}</p>` : "")}
+${sec("Time tip", sol.time_tip ? `<p>${tex(sol.time_tip)}</p>` : "")}
+${sec("Examiner insight", sol.insight ? `<p>${tex(sol.insight)}</p>` : "")}
 <p style="font-size:11px;color:${colors.muted}">${esc(label)}</p></div>
 <script>
 function size(){window.ReactNativeWebView&&window.ReactNativeWebView.postMessage(String(document.getElementById('c').scrollHeight+8))}
-function go(){try{renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}],throwOnError:false})}catch(e){}size();setTimeout(size,300);setTimeout(size,1200)}
-window.addEventListener('load',size);setTimeout(size,2500);
+window.addEventListener('load',size);setTimeout(size,200);setTimeout(size,1000);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
 </script></body></html>`;
 }
 

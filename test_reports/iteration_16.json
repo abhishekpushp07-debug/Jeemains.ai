@@ -1,0 +1,48 @@
+{
+  "summary": "Retested the iteration-15 fixes. HIGH fix (rf_events capped) is VERIFIED. (1) I dropped rf_events in the real DB, inserted a plain doc and restarted the backend. Startup only creates the collection when it is missing, so it stayed uncapped. The first notify() (invite create + join over HTTP, no WebSocket) started the bus, and tail() ran ensure_capped(), which converted it to capped (maxSize 32 MB). (2) I dropped it again while 8001 was running and inserted a plain doc. The running tail() loop recreated and converted it within seconds. (3) I started a 2nd uvicorn on :8002. test_rf_duels_multiserver.py passed 4/4: join B->A 0.6 ms, answer A->B 1.2-2.1 ms, B->A 1.2-1.7 ms, forfeit 1.3-1.4 ms, all well under 200 ms. (4) I killed all 8 rf_events tail cursors with killCursors. The bus recovered and the multiserver suite passed 4/4 again at the same latencies. (5) In a repro with interleaved answers (X's own answer, then Y's answer right after) the push arrived in about 44 ms in both directions. No events were lost. The 'resume from last _id' change is in the code, but the _id > last_id filter is still applied to every event for the cursor's lifetime. A temp-DB check proves that a tailable cursor drops a later-inserted event whose ObjectId sorts lower (another process in the same second, or a lagging clock). The window is small in practice (see minor issue). KaTeX: katex_offline_check.js gives 142/142 rendered, 0 throws, katexErrSpans 0 (was 1). The 049a1ade data still carries 3 NUL bytes upstream and now typesets cleanly; 0 http URLs; 20/20 woff2 data-URI fonts. Regression: test_rf_duels.py + test_rf_shop_bot.py + test_rf_duels_ws.py 22/22 pass on the external URL. Web, at 390x844: login 9000000001, then /result/8501cf9c, then the Solutions tab (result-tab-solutions). It shows ai-solution-1 as plain maths with no $, backslash or NUL, 0 console errors, and no katex/CDN requests (only Cloudflare cdn-cgi rum). Cleanup: 8002 killed, backend restarted, rf_events confirmed capped, temp DB dropped.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "duels.py tail() line 85", "issue": "Not fully fixed from iteration 15. The cursor filter {_id: {$gt: last_id}} is evaluated against every new event for the cursor's whole lifetime. Each process generates its own ObjectIds (timestamp + per-process random + counter), so an event from another server whose _id sorts below the open-time last_id is silently skipped. This happens in the same second as a cursor (re)open, or for as long as that server's clock lags. Proven with backend/tests/check_rf_events_tail_order.py: the 'same second, lower _id' event is DROPPED. Impact is limited because the 2 s ticker poll still delivers the state, but it can be up to 2 s late."},
+      {"endpoint": "server.py startup (lines 360-365)", "issue": "Startup only creates rf_events when missing. An existing plain collection stays uncapped until the first WS or notify() starts tail(). This works (verified), but publish() inserts can run against the plain collection before conversion. Consider running the same convertToCapped check at startup."},
+      {"endpoint": "duels.py bus lifecycle", "issue": "The bus task and its tailable cursor are never cancelled on shutdown. After WatchFiles reloads I found 8 idle rf_events tail cursors for 2 live processes; they stay server-side until the cursor timeout. Low impact."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "plainMath NUL", "issue": "tex() strips \\u0000, but plainMath()/conv() (the plain-text path used by <P/>) does not. The 049a1ade explanation still has 3 NULs in that path. Not visible on web in this test, but it is inconsistent. Reference: /app/frontend/src/components/AiSolution.tsx:93"}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rf_duels_multiserver.py",
+    "/app/backend/tests/check_rf_events_tail_order.py",
+    "/app/backend/tests/repro_rf_same_second_drop.py",
+    "/app/backend/tests/trigger_rf_notify.py",
+    "/app/backend/tests/katex_offline_check.js",
+    "/app/test_reports/pytest/iteration_16.xml"
+  ],
+  "action_items": [
+    "Minor: stop relying on the _id > last_id filter for the live cursor. For example, on (re)open use {ts: {$gt: last_ts - 5}} with a small dedupe set of recent _ids, and run one catch-up push(did) for every local socket after a reopen.",
+    "Minor: in the startup block, also convertToCapped when rf_events exists but options().capped is false.",
+    "Low: cancel bus['task'] on shutdown so tail cursors are closed.",
+    "Low: strip \\u0000 in plainMath() too (AiSolution.tsx:93)."
+  ],
+  "critical_code_review_comments": [
+    "ensure_capped(), publish() logging, tail() error logging and notify() -> ensure_bus() are all present and work.",
+    "After the cursors were killed the loop recovered silently (no warning logged). That is fine; the multiserver suite passed afterwards."
+  ],
+  "updated_files": [
+    "/app/backend/tests/check_rf_events_tail_order.py (new)",
+    "/app/backend/tests/repro_rf_same_second_drop.py (new)",
+    "/app/backend/tests/trigger_rf_notify.py (new)"
+  ],
+  "success_rate": {"backend": "100% (26/26 suites + capped recovery scenarios); 1 minor residual issue (_id filter)", "frontend": "100% (Solutions tab regression)"},
+  "seed_data_creation": "TEST- prefixed duel users/duels created by the test suites (about 103 TEST duels in rf_duels, all forfeited or finished). Temp DB TEST_rf_events_order_tmp was created and dropped.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Creating files under /app/backend triggers a WatchFiles reload of :8001 (new ObjectId random part, old tail cursors linger). For the multiserver tests run: cd /app/backend && nohup uvicorn server:app --host 127.0.0.1 --port 8002 > /tmp/b8002.log 2>&1 &, then RF_NODE_A=http://127.0.0.1:8001 RF_NODE_B=http://127.0.0.1:8002 python -m pytest test_rf_duels_multiserver.py -s -p no:xdist -o addopts='', then pkill the 8002 process. KaTeX: export EXPO_PUBLIC_BACKEND_URL, run python fetch_ai_items.py, then node katex_offline_check.js.",
+  "rca_of_issue": "Iteration-15 HIGH bug is resolved: tail() -> ensure_capped() converts a plain rf_events (convertToCapped), and startup creates it capped when it is missing. Residual minor issue: MongoDB evaluates a tailable cursor's query predicate on every newly inserted doc. ObjectIds are generated client-side per process, so they are not globally monotonic across servers, and an _id > X filter can skip events from other servers. Reproduced deterministically on a temp DB."
+}

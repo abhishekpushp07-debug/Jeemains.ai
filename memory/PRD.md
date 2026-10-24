@@ -75,6 +75,11 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Result > Solutions now fetches AI step-by-step solutions from the live backend (GET /attempts/{id}/ai-solutions): concept, given, steps, final answer + key check, shortcut, common mistakes, time tip, insight, difficulty. Native renders maths with KaTeX in a WebView (CDN); web preview uses a plain-text maths converter (plainMath). Pending items show "being prepared"; newly generated solutions appear automatically on next open.
 - AssetImage clears stale images on question switch.
 
+## Iteration 15 (2026-06)
+- Offline maths: KaTeX bundled (katex npm, CSS + woff2 fonts inlined in src/katexCss.ts); AI solutions are typeset in JS (katex.renderToString) and shown in a WebView with no network.
+- Multi-server duels: shared live channel = capped MongoDB collection rf_events tailed by every server process (no Redis needed). Any mutation calls notify(did): local push + event; other servers push to their sockets. Verified two uvicorn processes: cross-server update in ~6 ms.
+- User declined: AI Doubt, Revision Notebook.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.
