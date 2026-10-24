@@ -151,7 +151,7 @@ def make_router(db, rf_user):
     # Public read API so the JEELIVE.AI website (or any client) can use the same Rapid Fire bank.
     @r.get("/cards")
     async def cards(subject: Optional[str] = None, chapter: Optional[str] = None, page: int = Query(1, ge=1), limit: int = Query(50, ge=1, le=200)):
-        q = {k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}
+        q = {**{k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}, "retired": {"$ne": True}}
         total = await db.rf_cards.count_documents(q)
         # answers/explanations are never exposed publicly (they could be looked up mid-duel)
         items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)

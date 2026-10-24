@@ -1,0 +1,33 @@
+{
+  "summary": "Iteration 19 focused on the soft-retire change and the dependency pin. Backend: 12/12 pass in the new test_rf_iter19_soft_retire.py, run on the public URL. (1) No delete_many, delete_one or drop on rf_cards remains in server.py, duels.py, gamify.py or shop.py. (2) httpx 0.28.1, httpcore, anyio, certifi, idna, sniffio and h11 are pinned and match the installed versions. 'pip install -r requirements.txt --dry-run' resolves and httpx imports. (3) The catalog total of 11086 (Physics 4204, Chemistry 3158, Maths 3724) equals the non-retired count in the DB. (4) A solo sprint returns 30 unique non-retired cards. (5) A card in Chemistry/p-Block (94 cards) was set to retired=True in MongoDB. It was absent from 15 fresh chapter sessions and 10 chapter duels. Repeat-missed with [X, Y] returned only Y, and with [X] alone it returned 404. GET /api/rf/cards total dropped by one and excluded it. The catalog count dropped by one after the 60 s cache clear. The older session containing it still loads (30 cards, X included) and completes. (6) sync_cards() was run in-process against a temp CARDS_DIR with one card removed from the p-Block file. That card became retired=True and the total document count was unchanged, so nothing was deleted. Restoring the file set it back to retired=False. (7) Duel quick match to AI Rival returns ready with vs_bot, 30 cards and start_at - server_now within 4.3-4.7 s; card 1 accepts an answer. The backend restarts cleanly, the DB ends with 11086 cards and 0 retired. Frontend at 390x844: logged in with phone 9000000001; the Rapid Fire hub renders; START SOLO SPRINT opens 'Card 1 of 30' (then discarded). In the UI, Quick match to AI Rival showed the entry show at 0.26 s and card 1 at 5.06 s. No page errors. Deprecated packages: none found in this scope.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "sync_cards (server.py:189-207)", "issue": "Retirement only happens per file that still has cards. If the verifier removes a chapter file or leaves it empty (ops == []), its cards are never retired and keep being served. This gap existed before the change too."},
+      {"endpoint": "sync_cards (server.py:201)", "issue": "Every restart re-upserts all cards with retired=False, because CARD_MTIMES starts empty. A manual retirement in the DB (owner pulling a bad card) is silently undone on the next restart. Only removal from the JSON file is durable."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter19_soft_retire.py", "/app/test_reports/pytest/pytest_iter19.xml"],
+  "action_items": [
+    "Optional: in sync_cards, retire cards of chapters whose file is missing or empty (e.g. update_many on {subject, chapter} not present in any file).",
+    "Optional: if owners must be able to pull cards by hand, use a separate flag (e.g. blocked=True) that sync never overwrites, or document that a card is retired only by removing it from the JSON file.",
+    "Nit: startup() in server.py sets http.cookies.jar.set_policy twice (lines 344 and 346). Also, @app.on_event is deprecated in favour of lifespan."
+  ],
+  "critical_code_review_comments": [
+    "Every card-selection path excludes retired cards: solo fresh $sample, repeat-missed find, duel pick_cards, /rf/cards and the catalog aggregate. Lookups of existing sessions and duels by id (rf_get, rf_complete, idempotent rf_create, duels get_cards) deliberately include retired cards, so old sessions keep working. This is correct.",
+    "Card files map one-to-one to (subject, chapter): no multi-chapter files, no chapter spread across files and no duplicate ids. So the per-file update_many on cards[0].subject/chapter with $nin cannot retire another file's cards."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter19_soft_retire.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "TEST_ request_id sessions and duels for X-RF-User db0c62b8-eeaf-41be-b8b1-05f5f34ac1d8; test duels were cancelled or forfeited. The retired flag was restored (0 retired cards at the end).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "A card retired by hand in MongoDB stays retired until the next backend restart; sync re-upserts with retired=False. So for catalog checks, wait for the 60 s sync loop (it clears CATALOG_CACHE) instead of restarting. test_sync_cards_soft_retire_roundtrip imports server and calls sync_cards with a temp CARDS_DIR, and it restores the state itself.",
+  "rca_of_issue": ""
+}

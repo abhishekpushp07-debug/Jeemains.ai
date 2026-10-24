@@ -198,11 +198,11 @@ async def sync_cards():
         except Exception:
             continue  # file mid-write; retry next cycle
         from pymongo import UpdateOne
-        ops = [UpdateOne({"id": c.id}, {"$set": c.to_mongo()}, upsert=True) for c in cards]
+        ops = [UpdateOne({"id": c.id}, {"$set": {**c.to_mongo(), "retired": False}}, upsert=True) for c in cards]
         if ops:
             await db.rf_cards.bulk_write(ops, ordered=False)
-            # cards removed by the verifier must disappear from the live bank too
-            await db.rf_cards.delete_many({"subject": cards[0].subject, "chapter": cards[0].chapter, "id": {"$nin": [c.id for c in cards]}})
+            # cards removed by the verifier are retired (soft), never deleted: old sessions keep their cards
+            await db.rf_cards.update_many({"subject": cards[0].subject, "chapter": cards[0].chapter, "id": {"$nin": [c.id for c in cards]}}, {"$set": {"retired": True}})
         CARD_MTIMES[f.name] = m
     CATALOG_CACHE.clear()
 
@@ -222,7 +222,7 @@ CATALOG_CACHE: dict = {}
 @api.get("/rf/catalog")
 async def rf_catalog():
     if "v" not in CATALOG_CACHE:
-        rows = await db.rf_cards.aggregate([{"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}}}]).to_list(1000)
+        rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}}}]).to_list(1000)
         order = json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text())
         counts = {(r["_id"]["s"], r["_id"]["c"]): r["n"] for r in rows}
         CATALOG_CACHE["v"] = {"subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
@@ -244,10 +244,10 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
         cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(30)]
     else:
         if data.card_ids:
-            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "subject": data.subject}).to_list(30)
+            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "subject": data.subject, "retired": {"$ne": True}}).to_list(30)
             mode = "repeat_missed"
         else:
-            match = {"subject": data.subject, **({"chapter": data.chapter} if data.chapter else {})}
+            match = {"subject": data.subject, "retired": {"$ne": True}, **({"chapter": data.chapter} if data.chapter else {})}
             docs = await db.rf_cards.aggregate([{"$match": match}, {"$sample": {"size": data.count}}]).to_list(data.count)
             mode = "fresh"
         if not docs:

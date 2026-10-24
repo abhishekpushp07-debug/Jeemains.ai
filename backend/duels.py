@@ -165,7 +165,7 @@ def make_router(db, rf_user, public_card, award):
         return {"status": "ready", "start_at": start, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
 
     async def pick_cards(subject, chapter):
-        match = {"subject": subject, **({"chapter": chapter} if chapter else {})}
+        match = {"subject": subject, "retired": {"$ne": True}, **({"chapter": chapter} if chapter else {})}
         docs = await db.rf_cards.aggregate([{"$match": match}, {"$sample": {"size": DUEL_CARDS}}, {"$project": {"id": 1}}]).to_list(DUEL_CARDS)
         if not docs:
             raise HTTPException(404, "No reviewed cards available for this selection yet.")
