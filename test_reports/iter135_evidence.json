@@ -158,13 +158,13 @@
       "loads": 1,
       "decompressobj": 1
     },
-    "cold_ms": 29.9,
+    "cold_ms": 36.6,
     "warm": {
       "find_one": 0,
       "loads": 0,
       "decompressobj": 0
     },
-    "warm_ms": 17.2,
+    "warm_ms": 43.4,
     "baseline_iter134": {
       "cold_find_one": 32,
       "cold_decompress": 32,
@@ -281,13 +281,13 @@
   "save_vs_seal": [
     {
       "delay_s": 0.0,
-      "acked": 2,
+      "acked": 0,
       "rejected_codes": [
         409
       ],
-      "rejected": 18,
-      "sealed_seq": 2,
-      "max_acked_seq": 2
+      "rejected": 20,
+      "sealed_seq": 0,
+      "max_acked_seq": 0
     },
     {
       "delay_s": 0.002,
@@ -301,24 +301,16 @@
     },
     {
       "delay_s": 0.004,
-      "acked": 20,
-      "rejected_codes": [],
-      "rejected": 0,
-      "sealed_seq": 20,
-      "max_acked_seq": 20
-    },
-    {
-      "delay_s": 0.008,
-      "acked": 12,
+      "acked": 16,
       "rejected_codes": [
         409
       ],
-      "rejected": 8,
-      "sealed_seq": 12,
-      "max_acked_seq": 12
+      "rejected": 4,
+      "sealed_seq": 16,
+      "max_acked_seq": 16
     },
     {
-      "delay_s": 0.012,
+      "delay_s": 0.008,
       "acked": 19,
       "rejected_codes": [
         409
@@ -326,6 +318,16 @@
       "rejected": 1,
       "sealed_seq": 19,
       "max_acked_seq": 19
+    },
+    {
+      "delay_s": 0.012,
+      "acked": 12,
+      "rejected_codes": [
+        409
+      ],
+      "rejected": 8,
+      "sealed_seq": 12,
+      "max_acked_seq": 12
     }
   ]
 }

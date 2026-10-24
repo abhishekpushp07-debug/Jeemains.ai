@@ -15,6 +15,7 @@ from starlette.concurrency import run_in_threadpool
 from .db import db, sets, files, audits, jobs, uid, now, get, clean, audit
 from .auth import staff, owner
 from .safety import Capability, require_capability
+from .canonical import database_now
 from tejas_core import validate_pdf, crop_png, normalize_answer
 from tejas_storage import put_object, get_object
 
@@ -83,18 +84,20 @@ def valid_rules(r):
     }
 
 
-def permitted(s, u=None, series_schedule=False):
+def permitted(s, u=None, series_schedule=False, *, at):
     if s.get('series_import') and (not s.get('series_date') or not s.get('live_enabled')):
         return False
     if s.get('series_date') and not series_schedule:
         from .live_series import window
-        if now() < window(s['series_date'])['opens_at']:
+        if at < window(s['series_date'])['opens_at']:
             return False
-    if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or now() < s.get('start_at', float('inf')) or now() >= s.get('end_at', 0)):
+    if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or at < s.get('start_at', float('inf')) or at >= s.get('end_at', 0)):
+        return False
+    if not s.get('series_id') and ((s.get('start_at') is not None and at < s['start_at']) or (s.get('end_at') is not None and at >= s['end_at'])):
         return False
     if (
         s.get("expires")
-        and s["expires"] < datetime.now(timezone.utc).date().isoformat()
+        and s["expires"] < datetime.fromtimestamp(at, timezone.utc).date().isoformat()
     ):
         return False
     if s.get("audience") == "restricted":
@@ -152,7 +155,7 @@ async def catalogue(exam: str = "", q: str = "", page: int = 1):
 @router.get("/sets/{id}")
 async def set_detail(id: str):
     s = await get(sets, id)
-    if s["status"] != "published" or not permitted(s):
+    if s["status"] != "published" or not permitted(s, at=await database_now()):
         raise HTTPException(
             404, "This practice set is not available for public practice yet."
         )

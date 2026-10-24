@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 import re
 from .db import sets
+from .canonical import EPOCH_NOW
 
 PROJECT = {
     "_id": 0,
@@ -48,16 +49,14 @@ def available(user=None, exam="", search=""):
         "series_id": {"$exists": False},
         "series_import": {"$ne": True},
         "$and": [
-            {'$or': [{'$and':[{'import_id': {'$exists': False}}, {'chapter_book_id': {'$exists': False}}]}, {'live_enabled': True, 'start_at': {'$lte': datetime.now(timezone.utc).timestamp()}, 'end_at': {'$gt': datetime.now(timezone.utc).timestamp()}}]},
+            {'$or': [{'$and':[{'import_id': {'$exists': False}}, {'chapter_book_id': {'$exists': False}}]}, {'live_enabled': True, '$expr': {'$and': [{'$lte': ['$start_at', EPOCH_NOW]}, {'$gt': ['$end_at', EPOCH_NOW]}]}}]},
             {"$or": audiences},
             {
                 "$or": [
                     {"expires": {"$exists": False}},
                     {"expires": ""},
                     {
-                        "expires": {
-                            "$gte": datetime.now(timezone.utc).date().isoformat()
-                        }
+                        '$expr': {'$gte': ['$expires', {'$dateToString': {'format': '%Y-%m-%d', 'date': '$$NOW', 'timezone': 'UTC'}}]}
                     },
                 ]
             },

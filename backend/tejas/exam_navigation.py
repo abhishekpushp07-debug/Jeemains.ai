@@ -57,12 +57,11 @@ class NavigationHistory(BaseModel):
 def live_query(user, exam, kind, search=''):
     q = available(user, exam, search)
     q['qa_only'] = {'$ne': True}
-    t = now()
     q['$and'].extend([
         CHAPTER_FILTER if kind == 'chapters' else MOCK_FILTER,
         {'$or': [{'live_enabled': {'$exists': False}}, {'live_enabled': True}]},
-        {'$or': [{'start_at': {'$exists': False}}, {'start_at': {'$lte': t}}]},
-        {'$or': [{'end_at': {'$exists': False}}, {'end_at': {'$gt': t}}]},
+        {'$or': [{'start_at': {'$exists': False}}, {'$expr': {'$lte': ['$start_at', EPOCH_NOW]}}]},
+        {'$or': [{'end_at': {'$exists': False}}, {'$expr': {'$gt': ['$end_at', EPOCH_NOW]}}]},
     ])
     return q
 

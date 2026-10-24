@@ -64,7 +64,7 @@ async def schedule_data(studio=False):
     for i in range(62):
         day = (FIRST + timedelta(days=i)).isoformat()
         s = by_day.get(day)
-        ready = bool(s and s['status'] == 'published' and permitted(s, series_schedule=True))
+        ready = bool(s and s['status'] == 'published' and permitted(s, series_schedule=True, at=t))
         state = phase(day, t)
         visible = ready and state != 'upcoming'
         slots.append({'day': i + 1, 'date': day, **window(day), 'state': state,

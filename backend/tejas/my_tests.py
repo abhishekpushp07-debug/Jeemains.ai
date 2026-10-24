@@ -14,7 +14,7 @@ from .catalog import available, PROJECT
 from .content import summary
 from .request_contracts import EmptyPayload, CompareAttemptsPayload
 from .learning_progress import released, paper_basis, point
-from .canonical import database_now
+from .canonical import database_now, EPOCH_NOW
 
 router = APIRouter(prefix='/api/my/tests', tags=['My Tests'])
 saved = db.tejas_saved_tests
@@ -59,10 +59,9 @@ def save_id(user_id, set_id):
 
 def visible_set(u):
     match = available(u)
-    t = now()
     match['$and'].extend([{'$or': [{'live_enabled': {'$exists': False}}, {'live_enabled': True}]},
-                         {'$or': [{'start_at': {'$exists': False}}, {'start_at': {'$lte': t}}]},
-                         {'$or': [{'end_at': {'$exists': False}}, {'end_at': {'$gt': t}}]}])
+                         {'$or': [{'start_at': {'$exists': False}}, {'$expr': {'$lte': ['$start_at', EPOCH_NOW]}}]},
+                         {'$or': [{'end_at': {'$exists': False}}, {'$expr': {'$gt': ['$end_at', EPOCH_NOW]}}]}])
     return match
 
 

@@ -3,6 +3,8 @@
 Missing/mislabelled media types cannot bypass budgets. Protected multipart paths
 remain held by ContentSafetyHold; this module is not the future upload sandbox.
 """
+import os
+import secrets
 import asyncio
 import json
 import math
@@ -67,6 +69,11 @@ class JsonBodyLimits:
             return await self.app(scope, receive, send)
         contract = next((c for c in self.contracts if method in c.route.methods and c.route.path_regex.fullmatch(path)), None)
         raw_headers = scope.get('headers', [])
+        if contract and contract.key == 'jobs.cron':
+            expected = os.environ.get('WEBHOOK_CRON_SECRET', '')
+            credentials = [v.decode('latin-1') for k, v in raw_headers if k.lower() == b'authorization']
+            if not expected or len(credentials) != 1 or not secrets.compare_digest(credentials[0], 'Bearer ' + expected):
+                return await reject('Unauthorized', 401, 'http_401')
         media = [v.decode('latin-1').lower().split(';', 1)[0].strip() for k, v in raw_headers if k.lower() == b'content-type']
         lengths = [v for k, v in raw_headers if k.lower() == b'content-length']
         encodings = [v.lower() for k, v in raw_headers if k.lower() == b'content-encoding']

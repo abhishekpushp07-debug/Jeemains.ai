@@ -12,6 +12,7 @@ export function useAttempt(id, user) {
   const [attempt, setAttempt] = useState(null);
   const [pending, setPending] = useState({});
   const [error, setError] = useState("");
+  const [deadlineError, setDeadlineError] = useState("");
   const [saving, setSaving] = useState(false);
   const [online, setOnline] = useState(navigator.onLine);
   const [seconds, setSeconds] = useState(null);
@@ -22,7 +23,6 @@ export function useAttempt(id, user) {
     loading = useRef(false),
     retryState = useRef({ failures: 0, after: 0 }),
     deadlineRetry = useRef({ failures: 0, after: 0 }),
-    deadlineError = useRef(null),
     anchor = useRef({ server: 0, mono: 0 }),
     timer = useRef(null),
     conflictRef = useRef(false);
@@ -225,15 +225,12 @@ export function useAttempt(id, user) {
       try {
         const latest = await api("/attempts/" + id + "/status");
         deadlineRetry.current.failures = 0;
-        const recoveredError = deadlineError.current;
-        if (recoveredError) setError(current => current === recoveredError ? "" : current);
-        deadlineError.current = null;
+        setDeadlineError("");
         syncClock(latest.server_now);
         if (latest.status === "completed") openResult();
       } catch (e) {
         postpone(deadlineRetry, e);
-        deadlineError.current = e.message;
-        setError(e.message);
+        setDeadlineError(e.message);
       } finally {
         checking = false;
       }
@@ -337,7 +334,7 @@ export function useAttempt(id, user) {
   return {
     attempt,
     pending,
-    error,
+    error: error || deadlineError,
     setError,
     saving,
     online,

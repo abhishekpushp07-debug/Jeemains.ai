@@ -17,7 +17,7 @@ from tejas_storage import get_object
 from .idempotency import fingerprint, verify_start, bind_start_alias
 from .contracts import EnvelopeResponse
 from .derivatives import render_crop
-from .canonical import EPOCH_NOW, clocked_one, verify_ledger
+from .canonical import EPOCH_NOW, clocked_one, verify_ledger, database_now
 from pydantic import ConfigDict
 
 router = APIRouter(prefix="/api", tags=["Practice"])
@@ -153,7 +153,7 @@ async def my_sets(exam: str = "", q: str = "", page: int = 1, u=Depends(current)
 @router.get("/my/sets/{id}")
 async def my_set(id: str, u=Depends(current)):
     s = await get(sets, id)
-    if s["status"] != "published" or not permitted(s, u):
+    if s["status"] != "published" or not permitted(s, u, at=await database_now()):
         raise HTTPException(404, "This set is not available to your account.")
     return summary(s)
 
@@ -162,7 +162,8 @@ async def my_set(id: str, u=Depends(current)):
 async def preflight(id: str, data: dict, u=Depends(current)):
     s = await get(sets, id)
     preview = data.get("preview") and u["role"] in ["owner", "reviewer"]
-    if not preview and (s["status"] != "published" or not permitted(s, u)):
+    t = await database_now()
+    if not preview and (s["status"] != "published" or not permitted(s, u, at=t)):
         raise HTTPException(404, "This set is not available.")
     if not s["questions"]:
         raise HTTPException(400, "This set has no questions yet.")
@@ -185,7 +186,7 @@ async def preflight(id: str, data: dict, u=Depends(current)):
         {
             "$set": {
                 "revision": s["revision"],
-                "at": now(),
+                "at": t,
                 "test_response": str(data.get("test_response", ""))[:30],
             }
         },
@@ -194,7 +195,7 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     return {
         "ok": True,
         "message": "Connection, source assets and test response verified. No attempt or timer has started.",
-        "server_now": now(),
+        "server_now": t,
     }
 
 
@@ -228,7 +229,7 @@ async def start(id: str, data: Start, u=Depends(current)):
         if active["status"] == "active":
             await bind_start_alias(active, id, data)
             return attempt_view(active)
-    if not preview and (s["status"] != "published" or not permitted(s, u)):
+    if not preview and (s["status"] != "published" or not permitted(s, u, at=started_at)):
         raise HTTPException(404, "This set is not available to start.")
     if not preview:
         guard_start(s, started_at)

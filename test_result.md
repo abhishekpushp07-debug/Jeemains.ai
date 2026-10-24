@@ -1,3 +1,10 @@
+# Backend hardening137 final window correction — 2026-10-24
+hardening137:
+  evidence136: "135suites50/50nowpass; new13622/23; series71/71withseparateDBauthorityplugin;UIrecovery/longreceipt/pendingclockpass. Newfailurefutureprivateimport/chapterstartpermittedbyappclockahead."
+  changes: "content.permitted now REQUIRES explicitdatabase timestamp at; allapplicationcallers updated. Start passesclockedstarted_at,preflight+detailsreadDBtime;preflightatandserver_nowDBtime. Catalogue/visible/live_queryfiltersuse$$NOW/EPOCH_NOW/dateToString. CohortprovisionalclosedDBtime. Cronauthbeforebodyparse(401forunauthmalformed). Deadlineerrorseparatestatepreservessaveconflictregardlessofarrivalorder."
+  finaltest: "Targetrepro+allchangedcataloguepaths/futureandexpiredimports,legacyactive resume,seriesfuture/open/archive,saveconflictoverlap,cron401. No newbroadloadaudit. Allisolateddataonly;MONGO_URL/DB_NAMEunchanged. Existingcosmeticfooterband/buttonwrappingnotwithinbackendrequest. No releaseuntilthisfinalgatepasses."
+
+
 # Backend hardening follow-up — 2026-10-24
 hardening136:
   tested135: "49/50 new isolated cases; critical fixes pass.1newfailure earlyembargoscore inexamnavigation withappclockahead. Auth168checks+earlier130regressionspass; statusbrowserflows/buildpass. Exactreportiteration135."

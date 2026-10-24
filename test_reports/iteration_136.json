@@ -1,0 +1,77 @@
+{
+  "summary": "Iteration 136 release-candidate check of the iter135 follow-up fixes. All backend tests ran against the isolated real-Mongo DB tejas_isolated_iter134: every Motor handle was rebound (leftover check empty), no lifespan ran, and the DB was dropped after each run (none left). Results: (1) Rerun of the two iter135 suites passed 50/50 with no xfail. That includes test_exam_navigation_history_embargo_and_status_use_db_clock (summary not leaked, still active in DB) plus the replay-25, save/seal race, ledger, pack cache, admission and status tests. (2) The new suite test_iter136_db_clock_release_isolated.py passed 22 of 23 tests. All three files together: 72 passed, 1 failed. (3) The iter105 and iter106 series suites passed 71/71 using a new test-only plugin that overrides the separate DB-clock authority (database_now and clocked_one) to the suite's fixed calendar clock. Without the plugin, 16 tests fail as expected, because the code now reads the Mongo clock. (4) Browser tests ran at exactly 1920x800 and 390x844 against the preview frontend, with /api routed to the iter135 isolated bridge and the session mocked. They passed. (5) The production build (BUILD_PATH=/tmp, then removed) compiled with lint warnings only. NEW FUNCTIONAL FAULT: scheduled private import or chapter-book tests can be started early when the app clock is ahead. content.permitted() still uses the app clock now(); with app +7200 a student started a test whose DB start_at is 1h in the future, and got 200 with the question text. Verdict: not release-ready until that gate uses the DB clock, unless the operator accepts the NTP-skew risk. No 500k, capacity or security-complete claim is made.",
+  "evidence_numbers": {
+    "rerun_iter135": "50/50 passed in 5.1s (-n0, shared loop). NAVSKEW: http 200, active stays active, db_status active, embargoed_summary_leaked=None",
+    "satellite_embargo_matrix (app +7200/-7200 x embargoed/released)": "Embargoed (DB competition_end = real+3600): exam-nav history summary None; MyTests status embargoed, summary None; /results status embargoed with no summary or questions. ai-solutions, worked solution, cohort, air-scenario, journey, expected-value, report-wrong(key/results), solution asset and job report download all 403, and no solution text anywhere. Released (real-3600): history and MyTests score 3; results 200 with score 3; all of the above not 403; download 200; report-key 200; EV 200; journey 200. Foreign actor gets 404 on results/cohort/journey/ai-solutions/download. No '_database_now' key in any response",
+    "series_history_and_leaderboard": "Both offsets: series embargoed attempt shows status embargoed with summary None; released shows completed with score 3. Competition leaderboard end_at future: embargoed/live; past: ready/ended",
+    "active_labels": "+7200 with DB deadline future: exam-nav catalogue label active, BITSAT chapter catalogue active, MyTests progress active, DB still active with no submitted_at. -7200 with DB deadline passed: both catalogues completed, MyTests completed tab shows expired",
+    "scheduled_import_start_window": "app 0: preflight 404, start 404 (correct). app +7200 with DB start_at = real+3600: preflight 200, start 200 and question text returned (FAULT). app -7200 with DB end_at = real-600: preflight 200, but start is blocked incidentally with 400 'Run the connection and content check again'",
+    "job_message_literal": "cohort job with message '$danger' is stored literally (status done)",
+    "fifo_index": "Indexes after indexes(): _id_, id_1, job_lane_fifo, kind_1_status_1_next_run_at_1_created_at_1, set_id_1_created_at_-1, status_1_lease_until_1. Nothing dropped. Actual drain_lane query over 3300 mixed jobs: LIMIT > PROJECTION_SIMPLE > FETCH > IXSCAN job_lane_fifo, with no SORT stage. It returns the oldest eligible created_at (6708, as expected). Maintenance recovery query ($or queued/running): SORT_MERGE over job_lane_fifo, which is non-blocking (no in-memory SORT)",
+    "outbox_starvation": "1200 completed attempts with grading_status failed plus 1 new queued: maintenance calls ensure_grade for the new one and for 0 failed rows",
+    "grade_load": "db.get(attempts) excludes command_receipts and response_schema and includes _database_now. The exclusion was already in db.get before iter135; the earlier report comment was wrong, as main said",
+    "cron": "With auth: malformed event 400, missing run_id and header 400, non-object 400. Header-only X-Webhook-Id with body {event} 200 accepted; same header again 200 duplicate=true; extra field 200; maintenance ran 2 times. No auth with valid body 401 (preview URL also 401). No auth with malformed body 400, because contract validation runs before auth",
+    "assets": "Original own asset 200. Corrected score_version: question from the alternate pack 200; original qid not in that pack 404; foreign or missing score_version 404; original pack unchanged. Legacy embedded attempt (no pack): own 200, foreign user 404, foreign qid 404, solution while active 403",
+    "source_commitment": "Mutating pack_id, sealed_seq, profile, answers or rules after the ledger gives 503 on /results with no solution text. Ledger document unchanged",
+    "marking": "JEE +4/-1 (1 correct, 1 wrong) = 3; BITSAT +3/-1 = 2",
+    "series_105_106": "71 passed with the -p iso_dbclock_override_iter136 plugin. Without it: 16 failed (fixed-calendar tests vs the real Mongo clock), which is expected",
+    "browser_1920x800": "Client skewed +50s. /status 503 shows 'TEST simulated busy'; the next /status 200 clears it (fix works) and the timer resyncs to 00:00:43. A save conflict that arises after the 503 survives the 200 recovery. Saves are deferred while the timer is at 0, so a conflict cannot naturally land between the 503 and the 200",
+    "browser_390x844": "Player has no horizontal overflow (scrollWidth 390). PUT forced to 503 shows '1 pending · not yet acknowledged' with player-save-pending-icon (Clock3, one svg, no check). At the real deadline it navigated to /results/{id}?late=true. Results embargoed receipt and grading receipt with a 43-character unbroken id wrap within the card (300px and 302px boxes); no document overflow at 390 or 1920"
+  },
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/sets/{id}/preflight and /start (tejas/content.py permitted() lines 91,93; also catalog.available datetime.now and exam_navigation.live_query now() lines 60-65)", "issue": "The non-series private import and chapter-book live window (start_at/end_at) is still compared with the app clock. With the app clock +7200 and DB start_at = real+3600, a student's start returned 200 with the full question text before the Mongo release time. The series path is safe, because guard_start uses the DB-clocked started_at. Test test_scheduled_import_start_window_db_clock[7200] fails as a strict fault probe.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/cron/maintenance", "issue": "An unauthenticated malformed body gets 400 (JsonBodyLimits contract validation) before the handler's 401 auth check. Nothing leaks, but the auth-first ordering is not strict."},
+      {"endpoint": "tejas/cohorts.py:169 read(); chapter_books.py:84 state; imports.py:41 status", "issue": "Display or provisional labels still use the app clock: cohort 'provisional/closed' and the studio expired/live labels. Not a data leak."},
+      {"endpoint": "canonical.database_now", "issue": "Adds an extra hello round trip per MyTests, series or competition request. hello.localTime and the $$NOW of a later query can come from different members if read preference changes. Acceptable but worth noting."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "useAttempt confirmDeadline / single error slot", "issue": "If a save conflict message is shown first, a later /status 503 overwrites the error slot, and the 200 recovery then clears it to empty. The conflict explanation text is lost, though the separate 'Another saved version exists / Use server-saved answers' banner remains. Low impact.", "selector": "[data-testid=request-error]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Player conflict banner at 390", "issues": ["The 'Use server-saved answers' button wraps to 3 lines next to the banner text; consider stacking it full-width on mobile."]},
+      {"screen": "Results embargoed at 390", "issues": ["The page is shorter than the viewport, so a grey band shows below the footer (no sticky footer or min-height)."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter136_db_clock_release_isolated.py",
+    "/app/backend/tests/iso_dbclock_override_iter136.py",
+    "/app/backend/tests/test_iter135_canonical_regression_isolated.py",
+    "/app/backend/tests/test_iter135_hardening_isolated.py",
+    "/app/test_reports/pytest/iter136_results.xml",
+    "/app/test_reports/pytest/iter136_rerun135.xml",
+    "/app/test_reports/pytest/iter136_series105_106.xml",
+    "/app/test_reports/iter136_evidence.json"
+  ],
+  "action_items": [
+    "HIGH: make the content.permitted() import/chapter window (start_at/end_at, series opens_at), exam_navigation.live_query and catalog.available use the DB clock (pass started_at/_database_now from clocked_one or database_now). Then test_scheduled_import_start_window_db_clock[7200] must pass. Consider checking s.start_at/end_at against started_at inside start() as defence in depth.",
+    "Optional: check cron auth before the contract validation (401 before 400).",
+    "Optional: keep the save-conflict message separate from the deadline error slot, or restore it after deadline recovery.",
+    "Optional: move cohorts.py:169 'closed' to the DB clock."
+  ],
+  "critical_code_review_comments": [
+    "Satellite embargo gates (reviews, ai_solutions, mock_solutions, cohorts, learning_progress, question_reports, jobs.download, exam_navigation, chapter_books, my_tests, live_series, competitions) now use _database_now, EPOCH_NOW or database_now, and were verified via the API at +/-7200.",
+    "jobs.download now scopes the attempt lookup by user_id and returns 404 when the attempt is missing. This is good.",
+    "attempts.py still has a.get('_database_now', now()) fallbacks. They are harmless now, because owned and db.get always clock, but they hide future regressions; prefer a['_database_now'].",
+    "http_limits special-cases the 'jobs.cron' key for 400. That works, but a per-contract status attribute would be cleaner.",
+    "attempts.py is about 690 lines, close to the 700-line split guideline."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter136_db_clock_release_isolated.py (new)",
+    "/app/backend/tests/iso_dbclock_override_iter136.py (new test-only pytest plugin)",
+    "/app/test_reports/iter135_evidence.json and iter135_hardening_evidence.json (regenerated by the rerun)"
+  ],
+  "success_rate": {"backend": "98.6% (143/144: 72/73 for iter135+136 isolated, 71/71 for series 105/106)", "frontend": "100% of targeted flows (with 1 low-priority UX observation)"},
+  "test_credentials": "No real credentials were used. Synthetic X-Test-User actors only, in the isolated DB. No accounts were created or changed. No /tmp credential files remain.",
+  "seed_data_creation": "Only TEST_ synthetic docs in tejas_isolated_iter134, which was dropped (list_database_names shows no isolated DB). Bridge stopped. /tmp build removed.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "not_run": "test_my_tests_journey.py: it uses the public URL with phone/owner login against the customer DB, which this request forbids. MyTests and journey were covered in isolation instead. The iter118/119 auth suites were not rerun (unchanged, as instructed). No load test. No AI, storage or production calls.",
+  "remaining_gates_not_claimed": "500k capacity is unqualified (admission lanes are per process; read lane 16 returns 503 by design). OTP/phone ownership is unverified. Historical credential rotation is still pending. NTP-skew safety is incomplete until the import start window is fixed.",
+  "context_for_next_testing_agent": "Run: cd /app/backend/tests && python -m pytest test_iter135_canonical_regression_isolated.py test_iter135_hardening_isolated.py test_iter136_db_clock_release_isolated.py -n0 -p no:cacheprovider -q. Series: cd /app/backend && PYTHONPATH=tests python -m pytest -p iso_dbclock_override_iter136 tests/test_iter105_live_series_isolated.py tests/test_iter106_private_import_series_isolated.py -p no:asyncio -n0. Browser: python iso_bridge_iter135.py (port 8790); route **/api/** to it with x-test-user:s; fulfill /api/auth/session; click label.answer-option, not the hidden radio. To skew the client, add an offset to server_now in the GET /api/attempts/{id} response."
+}

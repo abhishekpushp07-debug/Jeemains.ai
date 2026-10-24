@@ -20,8 +20,8 @@
   "status_expired": {
     "status": "completed",
     "submitted_eq_deadline": true,
-    "status_bytes": 360,
-    "full_bytes": 4345
+    "status_bytes": 359,
+    "full_bytes": 4343
   },
   "submit_contract_keys": [
     "command_state",
@@ -209,13 +209,13 @@
       },
       "meta": {
         "api_version": "1",
-        "request_id": "15b6187f-4be3-4624-b20b-f8b51adfb093"
+        "request_id": "fc0cef65-5b2b-4626-83f7-9388ea825dfe"
       }
     },
     "headers": {
       "retry-after": "2",
       "x-content-type-options": "nosniff",
-      "x-request-id": "15b6187f-4be3-4624-b20b-f8b51adfb093",
+      "x-request-id": "fc0cef65-5b2b-4626-83f7-9388ea825dfe",
       "access-control-allow-origin": "https://campus-search-debug.preview.emergentagent.com",
       "access-control-allow-credentials": "true"
     },
@@ -257,7 +257,7 @@
   "cron": [
     401,
     401,
-    422,
+    400,
     200,
     {
       "accepted": true,
@@ -299,20 +299,20 @@
     },
     "job_drain": {
       "stages": [
+        "LIMIT",
         "FETCH",
-        "SORT",
         "IXSCAN"
       ],
-      "index": "kind_1_status_1_next_run_at_1_created_at_1"
+      "index": "job_lane_fifo"
     },
     "job_drain_actual": {
       "stages": [
+        "LIMIT",
         "PROJECTION_SIMPLE",
-        "SORT",
         "FETCH",
         "IXSCAN"
       ],
-      "index": "kind_1_status_1_next_run_at_1_created_at_1"
+      "index": "job_lane_fifo"
     },
     "job_by_id": {
       "stages": [
@@ -357,14 +357,11 @@
     "http": 200,
     "active_reported": "active",
     "db_status": "active",
-    "embargoed_summary_leaked": {
-      "score": 4,
-      "TEST": "embargoed"
-    }
+    "embargoed_summary_leaked": null
   },
   "perf_status_vs_full_100q": {
     "status": {
-      "ms_32_concurrent": 32.1,
+      "ms_32_concurrent": 30.5,
       "bytes": 303,
       "codes": [
         200
@@ -373,7 +370,7 @@
       "retry_after": []
     },
     "full": {
-      "ms_32_concurrent": 78.2,
+      "ms_32_concurrent": 79.6,
       "bytes": 90192,
       "codes": [
         200,

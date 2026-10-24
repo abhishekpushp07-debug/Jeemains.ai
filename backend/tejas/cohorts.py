@@ -166,7 +166,7 @@ async def read(id:str,bg:BackgroundTasks,score_version:str='original',u=Depends(
     n=snap['sample_size'];common={'sample_size':n,'computed_at':snap['computed_at'],'viewing_retry':retry,
         'compared_attempt_id':first.get('attempt_id') if first else None,'compared_score':first.get('score') if first else None}
     paper=await sets.find_one({'id':a['set_id']},{'end_at':1}) or {}
-    closed=bool(paper.get('end_at') and paper['end_at']<=now())
+    closed=bool(paper.get('end_at') and paper['end_at']<=a['_database_now'])
     pending=await attempts.count_documents({'set_id':a['set_id'],'version':a['version'],'status':'completed','grading_status':{'$ne':'ready'}}) if closed else 0
     common['provisional']=not closed or pending>0 or bool(snap.get('backfill_remaining')) or bool(state.get('dirty'))
     common.update(average=snap.get('average'),median=snap.get('median'),top=snap.get('top'),maximum=snap.get('maximum'),sections=snap.get('sections',[]))

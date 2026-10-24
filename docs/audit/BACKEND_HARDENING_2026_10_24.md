@@ -40,6 +40,9 @@ User requested the deepest backend/data/API/canonical-truth audit and implementa
 
 Status: IMPLEMENTED, AWAITING REGRESSION AND COMPATIBLE REDEPLOY.
 
+Iteration136 follow-up: all135regressions passed,22/23new cases passed plus71series tests; final new fault reproduced early non-series private-paper starts under app-clock skew. `permitted` now requires explicit authoritative time, with all callers updated; preflight timestamps and list/detail/window/date-expiry filters agree with database time. Cron rejects unauthenticated calls before parsing their body. Deadline-check failures use a separate browser error state so save conflicts survive either arrival order. Awaiting final targeted verification.
+
+
 ## First regression evidence and follow-up
 Iteration135:49/50 new isolated tests passed, with one reproduced remaining early-score release in exam-navigation history under app-clock skew. Additional isolated auth/CORS and content-transfer/streak regressions passed. Corrective changes cover all identified sibling score/solution/history gates with database time, including My Tests, series history, saved AI, review/report and competition leaderboard. This is a correctness/privacy fix, not a visual redesign. Remaining harmless schedule metadata timestamps are not represented as timer authority.
 
