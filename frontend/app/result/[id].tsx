@@ -4,6 +4,8 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, apiRaw, post, put, uuid } from "@/src/api/client";
 import { AssetImage } from "@/src/components/AssetImage";
+import { AiSolution } from "@/src/components/AiSolution";
+import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, Stat, T } from "@/src/components/ui";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
@@ -59,7 +61,7 @@ function Analysis({ r }: { r: any }) {
         <Stat label="Attempt rate" value={s.attempt_rate != null ? s.attempt_rate + "%" : "—"} />
         <Stat label="Penalty" value={s.penalties ?? 0} color={colors.error} />
       </View>
-      {s.main_block ? <Notice tone="info">Main {s.main_block.score}/{s.main_block.maximum} · Bonus {s.bonus_block?.entered ? `${s.bonus_block.score}/${s.bonus_block.maximum}` : "not entered"}</Notice> : null}
+      {s.main_block ? <Notice tone="info">{`Main ${s.main_block.score}/${s.main_block.maximum} · Bonus ${s.bonus_block?.entered ? `${s.bonus_block.score}/${s.bonus_block.maximum}` : "not entered"}`}</Notice> : null}
       <Card style={{ gap: space.md }}>
         <T w="heavy" size={16}>Subject-wise</T>
         {Object.entries(s.subjects || {}).map(([name, g]: any) => (
@@ -113,6 +115,9 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
   const rail = useRef<FlatList>(null);
   const [opened, setOpened] = useState<Record<string, "ok" | "err">>({});
   const [report, setReport] = useState(false);
+  // AI step-by-step solutions generated on the JEELIVE backend (more arrive over time; refetched on open).
+  const ai = useCached<any>(`ai.${id}`, (signal) => api(`/attempts/${id}/ai-solutions`, { signal }), false);
+  const aiBy = useMemo(() => Object.fromEntries((ai.data?.items || []).map((x: any) => [x.question_id, x])), [ai.data]);
 
   useEffect(() => {
     const i = list.findIndex((x) => x.id === q?.id);
@@ -162,14 +167,19 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
             {q.marked ? <Icon name="flag" size={16} color={colors.custom_amber} /> : null}
           </View>
           {q.render_mode !== "source" && q.text ? <T size={15} color={colors.custom_onReading}>{q.text}</T> : null}
-          {Array.from({ length: q.asset_count || 0 }, (_, i) => <AssetImage key={"q" + i} testID={`solution-qimage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number}`} />)}
+          {Array.from({ length: q.asset_count || 0 }, (_, i) => <AssetImage key={q.id + "q" + i} testID={`solution-qimage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
             <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response || "—"}</T></View>
             <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).join(" / ")}</T></View>
           </View>
-          <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>SUPPLIED SOLUTION</T>
-          {q.solution ? <T size={14} color={colors.custom_onReading} testID="solution-text">{q.solution}</T> : null}
-          {Array.from({ length: q.solution_asset_count || 0 }, (_, i) => <AssetImage key={"s" + i} testID={`solution-simage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/solution/${i}`} label={`Solution ${q.number}`} />)}
+          <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>{q.solution_kind === "answer_key_only" ? "SUPPLIED ANSWER KEY" : "SUPPLIED SOLUTION"}</T>
+          {q.solution_kind === "answer_key_only" ? (
+            <T size={13} color={colors.custom_onReading} testID={"no-worked-solution-" + q.number}>{aiBy[q.id]?.state === "ready" ? "The source provides this key only. An AI generated step-by-step solution is shown below." : ai.error && !ai.data ? "The source provides this key only." : "The source provides this key only. No worked solution was supplied."}</T>
+          ) : q.solution ? <T size={14} color={colors.custom_onReading} testID="solution-text">{q.solution}</T> : null}
+          {Array.from({ length: q.solution_asset_count || 0 }, (_, i) => <AssetImage key={q.id + "s" + i} testID={`solution-simage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/solution/${i}`} label={`Solution ${q.number}`} />)}
+          {ai.loading && !ai.data ? <Skeleton h={120} /> : ai.error && !ai.data ? (
+            <Press testID="ai-solution-error" onPress={ai.reload} style={{ minHeight: 44, justifyContent: "center" }}><T size={12} w="bold" color={colors.brandPrimary}>Couldn’t load AI solutions. Tap to retry</T></Press>
+          ) : <AiSolution item={aiBy[q.id]} number={q.number} disclosure={ai.data?.disclosure} />}
           {opened[q.id] === "err" ? <Press testID="solution-consult-retry" onPress={() => consult(q)}><T size={12} w="bold" color={colors.brandPrimary}>Couldn’t record that you viewed this solution. Retry</T></Press> : null}
           <Reflection id={id} q={q} version={version} state={r.review?.states?.[q.id] || r.review_states?.[q.id]} consulted={opened[q.id] === "ok"} />
           <Button testID="solution-report-button" kind="ghost" icon="flag-outline" label="Report a problem with this question" onPress={() => setReport(true)} color={colors.muted} />

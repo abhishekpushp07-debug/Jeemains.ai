@@ -17,6 +17,7 @@ export function AssetImage({ path, label, testID }: { path: string; label: strin
   useEffect(() => {
     let alive = true;
     setErr("");
+    setUri(null);
     assetDataUri(path).then((u) => alive && setUri(u)).catch((e) => alive && setErr(e.message));
     return () => { alive = false; };
   }, [path, n]);
@@ -24,7 +25,7 @@ export function AssetImage({ path, label, testID }: { path: string; label: strin
     return (
       <View testID={testID + "-error"} style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_errorSoft, gap: 4 }}>
         <T size={13} w="medium" color={colors.error}>Original image didn’t load. Answering this question needs it.</T>
-        <Press testID={testID + "-retry"} onPress={() => setN((x) => x + 1)}><T w="bold" size={13} color={colors.brandPrimary}>Retry image</T></Press>
+        <Press testID={testID + "-retry"} onPress={() => setN((x) => x + 1)} style={{ minHeight: 44, justifyContent: "center" }}><T w="bold" size={13} color={colors.brandPrimary}>Retry image</T></Press>
       </View>
     );
   if (!uri) return <View style={{ height: 120, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_reading }}><ActivityIndicator color={colors.brandPrimary} /></View>;

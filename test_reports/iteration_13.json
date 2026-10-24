@@ -1,0 +1,33 @@
+{
+  "summary": "Iteration 13 was a frontend-only retest at a 375x667 viewport, logged in as 9000000001. The rewritten plainMath web fallback is fixed. I ran the real plainMath (transpiled straight from AiSolution.tsx) over all 3156 strings of the 142 live AI solutions for attempt 8501cf9c. Results: 0 backslashes, 0 crashes, no $ signs, and 0 leftover LaTeX command words. The only 2 hits were prose 'times' ('-2 times the sum'), which are false positives. Before the rewrite, 332 strings (10.5%) had leftovers. Checked examples render correctly: 'K=1/2 mv² ⇒ v=√(2K/m)', '4/7', 'C(9,3)=(9·8·7)/(3·2·1)=84', '(C(4,2)C(5,1))/(C(9,3)-C(4,3))', 'ArNO₂ →[Sn/HCl] ArNH₃⁺', '20%', '90°', '{0°,120°,240°}', '³√(x+1)' and 'a²/(b₁)'. In the UI I checked 40 questions across all 5 subjects (the first 8 of each). The rendered ai-solution-N text had no leftovers, and every AI block matched the selected question; there was exactly one ai-solution-N, and its number equalled the selected question. Over the API, all 142 question ids have an AI item, and every final_answer equals the key. The new error state works. Aborting **/ai-solutions in Playwright shows ai-solution-error with 'Couldn’t load AI solutions. Tap to retry'. After restoring the network, one tap makes exactly 1 new request, loads ai-solution-1, and the no-worked-solution copy changes to 'An AI generated step-by-step solution is shown below'. Regression on JEE Main 385dc381: solution-text is still shown, ai-solution-pending-1 and pending-3 say 'being prepared', and switching questions swaps them correctly. Neither attempt logged console errors on the Analysis tab; the only error was the ERR_FAILED from my intentional abort. I also found a stale question image when switching questions: the previous question's image stays visible under the new header until the new image loads. This affects AssetImage, not AiSolution.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "AssetImage (Solutions question image)", "issue": "The previous question's image shows under the new question header while the new image loads. AssetImage is keyed 'q'+i, so it is reused across questions, and its effect on [path] never resets uri to null. I reproduced this by going Q91 → Q98: Q98's header showed Q91's 'box of 4 red/5 blue balls' image for about 0.2s while warm, and longer during fast switching. On a slow network the user sees the wrong question next to the AI solution. Fix: call setUri(null) at the start of the effect (src/components/AssetImage.tsx:17-22), or key the AssetImage by q.id (app/result/[id].tsx:170).", "testID": "solution-qimage-N-0", "priority": "MEDIUM"},
+      {"component": "plainMath readability (web only)", "issue": "Small spacing issues only, with no leftovers. (a) When a fraction is followed directly by a variable it reads ambiguously, e.g. 'K_i=1/2m₁u₁²', which looks like 1/(2m₁). (b) A function name stuck to the preceding letter, e.g. 'v_x=ucosθ' (about 33 strings). (c) wrap() adds needless parens when the content has subscript digits or a prime, e.g. 'a²/(b₁)' and '(r')/r'. (d) pmatrix flattens to '4 1 / 1 4' with no brackets. (e) An underbrace label leaks as '_sucrose'. Reference: src/components/AiSolution.tsx:36,50,74", "testID": "ai-solution-N", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Result > Solutions", "issues": ["The ai-solution-error retry link is a text-only Press about 16px high (measured 309x16), well below the 44pt minimum touch target. Add paddingVertical of about 12 or use a small secondary Button.", "In the error state, no-worked-solution-N still says 'No worked solution was supplied.' next to 'Couldn’t load AI solutions'. This is slightly contradictory; consider neutral copy while ai.error is set."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/check_ai_solutions_math.py", "/app/backend/tests/run_plainmath.js", "/app/backend/tests/check_ai_solutions_mapping.py"],
+  "action_items": [
+    "MEDIUM: In AssetImage, reset uri (setUri(null)) when path changes, or key AssetImage by question id, so a stale image from the previous question is never shown under the new question.",
+    "LOW: Make the ai-solution-error retry link at least 44pt tall.",
+    "LOW (optional): Polish plainMath spacing. Add a space after a fraction when it is followed by a letter or backslash. Add a leading space before function names (sin/cos/log) when the previous char is a letter. Add subscript digits and ′ to the wrap() regex."
+  ],
+  "critical_code_review_comments": [
+    "AiSolution.tsx conv(): the brace-aware arg() handles nested braces and escaped \\{ \\}. A \\sqrt[ with no closing ']' would make indexOf return -1 and set i=0, an infinite-loop risk. The same applies to \\xrightarrow[. No live data hits this, but guard with e<0 ? s.length : e.",
+    "AiSolution.tsx:65-69: the KEEP branch checks name==='vec', but 'vec' isn't in KEEP. This is dead code, but it is harmless because the separate vec branch handles it.",
+    "result/[id].tsx:180-182: the loading, error and data branches are correct. Cached data wins over error (ai.error && !ai.data), so a failed refetch does not hide existing solutions."
+  ],
+  "updated_files": ["/app/backend/tests/run_plainmath.js (new: runs the real plainMath over /tmp/ai_items.json)", "/app/backend/tests/check_ai_solutions_mapping.py (new: maps question id/number to the AI item and checks final_answer vs key)"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "97% – all requested flows pass; one MEDIUM pre-existing stale-image issue and minor polish items"},
+  "seed_data_creation": "None. No attempts were submitted. Viewing questions triggered solution-open POSTs for 8501cf9c (Q1-8, 31-38, 61-68, 71-78, 91-98) and for 385dc381 (Q1 and Q3).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run `EXPO_PUBLIC_BACKEND_URL=https://jeelive-mobile.preview.emergentagent.com python /app/backend/tests/check_ai_solutions_math.py` first; it dumps /tmp/ai_items.json. Then run `node /app/backend/tests/run_plainmath.js [samples]`. The full JEE pending attempt id is 385dc381-b394-441e-89db-b281f9f081f2. The Solutions rail is per subject; select a solution-subject-<slug> chip before clicking solution-question-N. Question images use testID solution-qimage-N-0.",
+  "rca_of_issue": "Stale image: AssetImage's useEffect([path, n]) clears err but not uri. React reuses the component across questions because the key is 'q0'. So until assetDataUri(newPath) resolves, the old data URI keeps rendering under the new question number."
+}

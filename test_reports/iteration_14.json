@@ -1,0 +1,30 @@
+{
+  "summary": "Iteration 14 was a frontend-only retest of the iteration 13 findings, at a 375x667 viewport, logged in as 9000000001. All requested fixes pass. (1) MEDIUM stale image is FIXED. I delayed every /asset/question/* request by 2s and polled the DOM every 100ms. Going from Q91 to Q98, only the loader (role=progressbar) showed for about 2.4s, then solution-qimage-98-0 appeared with a new image hash. The Q91 image was never present (0 stale frames). Rapidly tapping 98→92→93→94 left only solution-qimage-94-0 with its own image (0 stale frames). Going back to Q91 showed Q91's image hash again. Physics Q1 to Q2: 0 stale frames and 22 loader frames. ai-solution-N always matched the selected question (91, 98, 94, 91, 1, 2). (2) LOW retry link is FIXED. With **/ai-solutions aborted, ai-solution-error measures 309x44, and one tap after restoring the network made exactly 1 request and loaded ai-solution-1. (3) LOW plainMath is FIXED. '\\sqrt[', '\\sqrt[3', '\\xrightarrow[', '\\xrightarrow[abc' and 'A \\xrightarrow[ B' all return in under 1ms. 'K_i=\\frac{1}{2}m_1u_1^2' gives 'K_i=1/2·m₁u₁²' and '\\frac{a}{b}(x+1)' gives 'a/b·(x+1)'. run_plainmath.js over 3156 live strings found 0 backslashes, 0 crashes and 2 leftovers, both prose 'times' false positives, the same as iteration 13. (4) I could NOT test live that attempt player images still load. User 9000000001 has 0 in-progress attempts, both /attempt/<id> URLs redirect to /result, and I did not start a new attempt. The code review shows the player uses the same AssetImage, keyed q.id+i (attempt/[id].tsx:160), and AssetImage loads correctly on Solutions.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "plainMath (web only)", "issue": "Cosmetic only. (a) A fraction followed by a space then a letter gets '·' plus the space, e.g. '\\frac12 mv^2' gives '1/2· mv²'. (b) A fraction directly followed by a command gets no separator, e.g. '\\frac{1}{2}\\sqrt{x}' gives '1/2√x' and '\\frac12\\pi r' gives '1/2π r'. About 8 live strings have a fraction followed by \\sqrt or a Greek letter. (c) A subscript with a letter stays raw, e.g. 'K_i'. Reference: src/components/AiSolution.tsx:51", "testID": "ai-solution-N", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Result > Solutions / Player (AssetImage error)", "issues": ["The AssetImage 'Retry image' Press (testID <id>-retry) is text-only with no minHeight, so it is about 16-18px tall, below the 44pt minimum. Reference: src/components/AssetImage.tsx:28", "Carried over: in the ai-solution-error state, no-worked-solution-N still says 'No worked solution was supplied.' next to 'Couldn’t load AI solutions'."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/run_plainmath.js", "/app/backend/tests/plainmath_edge.js", "/app/backend/tests/check_ai_solutions_math.py"],
+  "action_items": [
+    "LOW: Add minHeight 44 / justifyContent center to the AssetImage 'Retry image' Press (AssetImage.tsx:28).",
+    "LOW (optional): In plainMath, skip the space after the '·' when the next char is a space, and add '·' when a fraction is followed by a backslash command such as \\sqrt or a Greek letter."
+  ],
+  "critical_code_review_comments": [
+    "AssetImage.tsx:17-23: setUri(null) plus the alive guard prevents both the stale image and out-of-order resolution, and keying by q.id+'q'+i remounts per question. Verified live.",
+    "AiSolution.tsx:54,61: unclosed '[' now advances i by 1 (no indexOf -1 → i=0 loop). Verified no hang.",
+    "AiSolution.tsx:68: dead 'vec' check in the KEEP branch is still present (harmless)."
+  ],
+  "updated_files": ["/app/backend/tests/plainmath_edge.js (new: edge cases for unclosed [ and fraction·letter)"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100% of the requested retests pass (player image regression not testable live: no in-progress attempt)"},
+  "seed_data_creation": "None. No attempts were started or submitted. Viewing Solutions questions may have triggered solution-open POSTs for 8501cf9c (Q1, Q2, Q91-98).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "User 9000000001 has 0 in-progress attempts, so /attempt/<id> redirects to /result. Testing the player needs a new attempt to be started. For stale-image checks, use page.route('**/asset/question/**') with a 2s delay and compare md5 hashes of the img src inside [data-testid^=solution-qimage-]."
+}

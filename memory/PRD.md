@@ -71,6 +71,10 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Wrong answers stay 2.4 s with full explanation; test player no auto-advance; confidence saveable after answering; set page start hint; 44 px targets; inline quest-claim errors; public /rf/cards hides answers; leaderboard hides TEST_; 15 s client timeout.
 - Known gaps: Redis fan-out for multi-server WS, server-side anti-farm timing, resume label on set page, answer harvesting via many solo sessions.
 
+## Iteration 12-14 (2026-06)
+- Result > Solutions now fetches AI step-by-step solutions from the live backend (GET /attempts/{id}/ai-solutions): concept, given, steps, final answer + key check, shortcut, common mistakes, time tip, insight, difficulty. Native renders maths with KaTeX in a WebView (CDN); web preview uses a plain-text maths converter (plainMath). Pending items show "being prepared"; newly generated solutions appear automatically on next open.
+- AssetImage clears stale images on question switch.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.
