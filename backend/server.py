@@ -12,6 +12,7 @@ from http.cookiejar import DefaultCookiePolicy
 from pymongo.errors import DuplicateKeyError
 from exam_groups import Exam, NEET_ROOT, SUBJECTS, resolve_exam
 from revision import record_learning, weak_chapters, make_router as make_revision
+from owner_downloads import make_router as make_owner_downloads
 import asyncio, json, logging, os, re, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
@@ -377,6 +378,7 @@ from duels import make_router as make_duels  # noqa: E402
 api.include_router(make_duels(db, rf_user, public_card, award))
 api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
+api.include_router(make_owner_downloads(db))
 app.include_router(api)
 from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
 app.add_middleware(GZipMiddleware, minimum_size=1024)

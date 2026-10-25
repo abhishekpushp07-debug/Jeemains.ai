@@ -155,3 +155,11 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - P0: no known blocking defects in tested feature scope; user verification pending.
 - P1: owner/subject-expert review of diagrams and independently forked NEET PC syllabus; physical-device QA; verified identity/OTP (separate future integration).
 - P2: future standalone NEETLIVE app/site using this bundle; expand original Biology diagrams only after owner feedback; additional shop/avatar refinements.
+
+## Iteration31 — owner-requested downloadable NEET ZIP
+- User requested a clickable ZIP and asked how to copy the app/backend for a later separate NEET app/website.
+- `backend/owner_downloads.py` adds GET `/api/owner-downloads/{token}`; only a256-bit trusted-workspace-generated grant can retrieve the fixed content ZIP. There is NO HTTP mint route and no use of unverified learner IDs for owner access.
+- Operator CLI: `python backend/tools/owner_download.py issue` (24h max, configured backend URL), revoke by nonsecret `--grant-id`. Only token SHA256 stored in Mongo, TTL expiry plus explicit access-time expiry, revoked/type/hash checks; returns verified exact ZIP bytes as attachment. Changed ZIP bytes invalidate old grants.
+- Application access logs redact bearer paths. No-store/nosniff/no-referrer headers applied. Upstream infrastructure logs cannot be controlled here; link possession grants download, so owner must not share it publicly. Raw bearer URLs must NOT be stored in PRD/source/test reports.
+- `test_owner_download_iter31.py`: final10/10 passed; valid byte/hash/headers, denial cases, no public mint, CLI revoke, hash-only storage, TTL, logs, NEETcatalog unchanged. Initial exact header test was corrected because ingress's no-store/no-cache/must-revalidate still prohibits ALL cache storage.
+- Download ZIP remains content+integration references, not a complete independent app/backend. Owned backend/frontend source can be copied separately; the external jeelive.ai exam/mock/attempt service source and live DB are not in this repo. Future NEET website and full standalone backend still need implementation.
