@@ -6,7 +6,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Header, HTTPException, Query
 from pymongo.errors import DuplicateKeyError
-from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, safe_avatar
+from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
 
 IST = timezone(timedelta(hours=5, minutes=30))
 BADGES = {
@@ -42,7 +42,7 @@ def public_profile(p: dict) -> dict:
             "streak": current, "best_streak": p.get("best_streak", 0), "played_today": p.get("last_day") == today,
             "sessions": p.get("sessions", 0), "duels": p.get("duels", 0), "wins": p.get("wins", 0), "cards_correct": p.get("cards_correct", 0),
             "badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1], "earned": b in p.get("badges", [])} for b in BADGES],
-            "avatar": safe_avatar(p.get("avatar")), "equipped": p.get("equipped", {}), "owned": p.get("owned", []), "freezes": p.get("freezes", 0),
+            "avatar": safe_avatar(p.get("avatar")), "equipped": equipped_of(p), "owned": owned_of(p), "freezes": p.get("freezes", 0),
             "quests": quests_of(p)}
 
 
@@ -73,7 +73,10 @@ def make_router(db, rf_user):
         p = await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid, "xp": 0, "coins": 0, "streak": 0, "best_streak": 0, "badges": []}
         acc = correct / answered if answered else 0
         perfect = total >= 10 and correct == total
-        xp = correct * 10 + (25 if acc >= 0.8 and answered >= 10 else 0) + (50 if perfect else 0) + (60 if won else 20 if kind == "duel" else 10 if kind == "bot" else 0)
+        # A win only pays (and counts) with real effort: at least 5 correct answers. Skip/tap-farming earns nothing extra.
+        if won and correct < 5:
+            won = False
+        xp = correct * 10 + (25 if acc >= 0.8 and answered >= 10 else 0) + (50 if perfect else 0) + (60 if won else 20 if kind == "duel" and answered else 10 if kind == "bot" else 0)
         coins = (correct * 2 if kind != "bot" else correct) + (50 if won else 0) + (30 if perfect else 0)
         today, yday = ist_day(), ist_day(time.time() - 86400)
         streak = p.get("streak", 0)
@@ -101,14 +104,15 @@ def make_router(db, rf_user):
         elif kind == "bot":
             inc["rival_games"] = 1
         else:
-            inc["duels"] = 1
+            if played:
+                inc["duels"] = 1
             inc["wins"] = 1 if won else 0
         # Atomic counters so concurrent sprint + duel never lose XP/coins.
         p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak}},
                                                      upsert=True, return_document=True)
         have = set(p.get("badges", []))
         rules = {"first_sprint": p.get("sessions", 0) >= 1, "first_win": p.get("wins", 0) >= 1, "streak_3": streak >= 3, "streak_7": streak >= 7, "streak_30": streak >= 30,
-                 "sharpshooter": total >= 30 and acc >= 0.9, "perfect": perfect, "duelist_10": p.get("duels", 0) >= 10, "champion_10": p.get("wins", 0) >= 10}
+                 "sharpshooter": answered >= 25 and acc >= 0.9, "perfect": perfect, "duelist_10": p.get("duels", 0) >= 10, "champion_10": p.get("wins", 0) >= 10}
         new = [b for b, ok in rules.items() if ok and b not in have]
         if new:
             await db.rf_profiles.update_one({"uid": uid}, {"$addToSet": {"badges": {"$each": new}}})
@@ -161,7 +165,7 @@ def make_router(db, rf_user):
     async def shop(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         p = await db.rf_profiles.find_one({"uid": uid}) or {}
-        return {"items": SHOP, "avatars": [{k: a[k] for k in ("id", "title", "rarity", "price")} for a in AVATAR_ITEMS], "coins": p.get("coins", 0), "owned": p.get("owned", []), "equipped": p.get("equipped", {}), "freezes": p.get("freezes", 0), "avatar": safe_avatar(p.get("avatar"))}
+        return {"items": SHOP, "avatars": [{k: a[k] for k in ("id", "title", "rarity", "price")} for a in AVATAR_ITEMS], "coins": p.get("coins", 0), "owned": owned_of(p), "equipped": equipped_of(p), "freezes": p.get("freezes", 0), "avatar": safe_avatar(p.get("avatar"))}
 
     @r.post("/shop/buy")
     async def buy(data: dict, x_rf_user: Optional[str] = Header(None)):
@@ -169,6 +173,8 @@ def make_router(db, rf_user):
         item = BUYABLE.get(str(data.get("item_id")))
         if not item:
             raise HTTPException(404, "Item not found.")
+        if not item["price"]:
+            raise HTTPException(409, "You already own this. It is free for everyone.")
         q = {"uid": uid, "coins": {"$gte": item["price"]}}
         upd = {"$inc": {"coins": -item["price"], **({"freezes": 1} if item.get("consumable") else {})}}
         if not item.get("consumable"):
@@ -188,7 +194,7 @@ def make_router(db, rf_user):
             raise HTTPException(400, "Unknown slot.")
         if item_id is not None:
             p = await db.rf_profiles.find_one({"uid": uid}) or {}
-            if item_id not in p.get("owned", []) or SHOP_BY_ID.get(item_id, {}).get("slot") != slot:
+            if item_id not in owned_of(p) or SHOP_BY_ID.get(item_id, {}).get("slot") != slot:
                 raise HTTPException(403, "Buy this item first.")
         await db.rf_profiles.update_one({"uid": uid}, {"$set": {f"equipped.{slot}": item_id}}, upsert=True)
         return {"ok": True}

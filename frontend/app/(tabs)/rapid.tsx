@@ -10,6 +10,8 @@ import { invalidate, useCached } from "@/src/useCached";
 import { ErrorBox, Icon, IconName, Press, Sheet, Skeleton, T } from "@/src/components/ui";
 import { BADGE_ICON, useGameProfile } from "@/src/components/game";
 import { Avatar } from "@/src/components/Entry";
+import { BattleHero, OutlineAction, PlayButton } from "@/src/components/BattleHero";
+import { ChapterSheet } from "@/src/components/ChapterSheet";
 import { playSfx } from "@/src/sfx";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
@@ -19,29 +21,12 @@ const pick = { subject: "Physics", chapter: "" as string };
 const THEME_BG: Record<string, string> = { theme_inferno: "#1F0707", theme_ocean: "#03202B", theme_gold: "#1F1704" };
 const SUBJECTS: [string, string, IconName][] = [["Physics", "Physics", "atom"], ["Chemistry", "Chemistry", "flask-outline"], ["Mathematics", "Maths", "function-variant"]];
 type Pane = "board" | "recent" | "trophies";
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 const scoreColor = (m: any) => {
   const r = m?.total ? m.score / m.total : 0;
   return r >= 0.8 ? colors.custom_neonGreen : r >= 0.5 ? colors.custom_neonAmber : colors.custom_neonRed;
 };
 
-function Label({ children }: { children: React.ReactNode }) {
-  return <T w="heavy" size={11} color={colors.custom_gameMuted} style={{ letterSpacing: 1.5 }}>{children}</T>;
-}
-
-// Small square tile used for the two duel modes.
-function ModeTile({ testID, icon, title, sub, tint, onPress, disabled }: { testID: string; icon: IconName; title: string; sub: string; tint: string; onPress: () => void; disabled?: boolean }) {
-  return (
-    <Press testID={testID} onPress={onPress} disabled={disabled} scaleTo={0.96} style={{ flex: 1, minHeight: 104, padding: space.md, gap: 6, borderRadius: radius.lg, backgroundColor: colors.custom_gameCardHi, borderWidth: 1, borderColor: colors.custom_gameLine, opacity: disabled ? 0.5 : 1 }}>
-      <View style={{ width: 40, height: 40, borderRadius: 12, alignItems: "center", justifyContent: "center", backgroundColor: tint + "26" }}>
-        <Icon name={icon} size={22} color={tint} />
-      </View>
-      <T w="heavy" size={15} color={colors.onSurfaceInverse}>{title}</T>
-      <T size={11} color={colors.custom_gameMuted} numberOfLines={1}>{sub}</T>
-    </Press>
-  );
-}
 
 export default function RapidHome() {
   const insets = useSafeAreaInsets();
@@ -76,6 +61,7 @@ export default function RapidHome() {
     hist.reload(); duels.reload(); prof.reload(); board.reload(); invalidate(`u.${user?.id}.rfshop`);
   }, [hist.reload, duels.reload, prof.reload, board.reload])); // eslint-disable-line react-hooks/exhaustive-deps
   const pct = p ? Math.min(1, (p.xp - p.level_floor) / Math.max(1, p.next_level_xp - p.level_floor)) : 0;
+  const recent = Array.from(new Map((hist.data?.items || []).filter((x: any) => x.chapter).map((x: any) => [x.subject + x.chapter, { subject: x.subject, chapter: x.chapter }])).values()).slice(0, 6) as { subject: string; chapter: string }[];
   const record = duels.data?.items?.length ? `${duels.data.items.filter((x: any) => x.won).length}W · ${duels.data.items.filter((x: any) => x.tie).length}T · ${duels.data.items.filter((x: any) => !x.won && !x.tie).length}L` : "";
 
   return (
@@ -90,8 +76,8 @@ export default function RapidHome() {
           </Press>
           <View style={{ flex: 1, gap: 6 }}>
             <View style={{ flexDirection: "row", alignItems: "baseline", gap: space.sm }}>
-              <T w="heavy" size={18} color={colors.onSurfaceInverse}>Level {p?.level ?? 1}</T>
-              <T w="bold" size={11} color={colors.custom_gameMuted} testID="game-hud-xp">{p ? `${p.xp} / ${p.next_level_xp} XP` : "— XP"}</T>
+              <T w="heavy" size={17} color={colors.onSurfaceInverse} numberOfLines={1}>Lv {p?.level ?? 1}</T>
+              <T w="bold" size={11} color={colors.custom_gameMuted} testID="game-hud-xp" numberOfLines={1} style={{ flexShrink: 1 }}>{p ? `${p.xp} / ${p.next_level_xp} XP` : "— XP"}</T>
             </View>
             <View style={{ height: 6, borderRadius: 3, backgroundColor: colors.custom_gameLine, overflow: "hidden" }}>
               <LinearGradient colors={[colors.custom_neonCyan, colors.custom_neonGreen]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: `${pct * 100}%`, height: "100%" }} />
@@ -103,6 +89,53 @@ export default function RapidHome() {
             <Icon name="storefront-outline" size={16} color={colors.custom_neonAmber} />
           </Press>
         </View>
+
+        {/* 2 · The lobby stage + PLAY: the main event */}
+        <Animated.View entering={FadeInDown.duration(350)} style={{ gap: space.lg }}>
+          <BattleHero me={{ avatar: p?.avatar, frame: p?.equipped?.frame, entry: p?.equipped?.entry }} record={record}
+            subjects={
+              <View style={{ flexDirection: "row", padding: 4, gap: 4, borderRadius: radius.pill, backgroundColor: colors.custom_gameBg + "D9", borderWidth: 1, borderColor: colors.custom_gameLine }}>
+                {SUBJECTS.map(([s, l, ic]) => {
+                  const on = subject === s;
+                  return (
+                    <Press key={s} testID={"rf-subject-" + s.toLowerCase()} onPress={() => { setSubject(s); setChapter(""); }} style={{ flex: 1, height: 44, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, backgroundColor: on ? subjectColor(s) : "transparent", shadowColor: colors.custom_neonCyan, shadowOpacity: on ? 0.6 : 0, shadowRadius: 10 }}>
+                      <Icon name={ic} size={16} color={on ? colors.onSurfaceInverse : colors.custom_gameMuted} />
+                      <T w="heavy" size={13} color={on ? colors.onSurfaceInverse : colors.custom_gameMuted} numberOfLines={1}>{l}</T>
+                    </Press>
+                  );
+                })}
+              </View>
+            }
+            chapterPill={!cat.data && !cat.error ? <Skeleton h={52} /> : (
+              <Press testID="rf-chapter-picker" onPress={() => setSheet("chapters")} scaleTo={0.97} style={{ flexDirection: "row", alignItems: "center", gap: space.sm, height: 52, paddingHorizontal: space.md, borderRadius: radius.pill, backgroundColor: colors.custom_gameCardHi, borderWidth: 1.5, borderColor: tint, shadowColor: tint, shadowOpacity: 0.5, shadowRadius: 12, elevation: 8 }}>
+                <View style={{ width: 32, height: 32, borderRadius: 16, alignItems: "center", justifyContent: "center", backgroundColor: tint + "33" }}><Icon name="map-marker-radius" size={18} color={tint} /></View>
+                <View style={{ flex: 1 }}>
+                  <T w="heavy" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{chapter || `Mixed ${subject === "Mathematics" ? "Maths" : subject}`}</T>
+                  <T size={11} color={colors.custom_gameMuted} testID="rf-session-summary" numberOfLines={1}>{available ? `${available} cards · tap to change` : "No cards yet"}</T>
+                </View>
+                <Icon name="chevron-down" size={22} color={colors.onSurfaceInverse} />
+              </Press>
+            )} />
+          <ErrorBox error={cat.error && !cat.data ? cat.error : ""} retry={cat.reload} testID="rf-catalog-error" />
+          <PlayButton disabled={!can} sub="Live 1v1 · same 30 cards · winner takes the coins" onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "random", subject, chapter } })} />
+          <View style={{ flexDirection: "row", gap: space.md }}>
+            <OutlineAction testID="rf-duel-invite" icon="account-multiple-plus" label="Challenge friend" tint={colors.custom_neonViolet} disabled={!can} onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "invite", subject, chapter } })} />
+            <OutlineAction testID="rf-open-join" icon="ticket-confirmation-outline" label="Join code" tint={colors.custom_neonCyan} onPress={() => setSheet("join")} />
+          </View>
+        </Animated.View>
+
+        {/* 3 · Solo practice: a calm secondary row */}
+        <Press testID="rf-start-button" onPress={() => router.push({ pathname: "/rapid/session", params: { subject, chapter } })} disabled={!can} scaleTo={0.97}
+          style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 68, paddingHorizontal: space.md, borderRadius: radius.lg, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_neonAmber + "55", opacity: can ? 1 : 0.5 }}>
+          <LinearGradient colors={[colors.custom_neonAmber, colors.custom_examBitsat]} style={{ width: 44, height: 44, borderRadius: 14, alignItems: "center", justifyContent: "center" }}>
+            <Icon name="lightning-bolt" size={24} color={colors.custom_gameBg} />
+          </LinearGradient>
+          <View style={{ flex: 1 }}>
+            <T w="heavy" size={15} color={colors.onSurfaceInverse}>Solo Sprint</T>
+            <T size={12} color={colors.custom_gameMuted}>Practise alone · 30 cards · 20 s each</T>
+          </View>
+          <Icon name="play-circle" size={30} color={colors.custom_neonAmber} />
+        </Press>
 
         {/* 2 · Today: streak + quests as two calm tiles */}
         <View style={{ flexDirection: "row", gap: space.md }}>
@@ -127,56 +160,6 @@ export default function RapidHome() {
               <View style={{ width: `${quests.length ? (questsDone / quests.length) * 100 : 0}%`, height: "100%", backgroundColor: colors.custom_neonCyan }} />
             </View>
             <T w={claimable ? "heavy" : "regular"} size={11} color={claimable ? colors.custom_neonGreen : colors.custom_gameMuted} numberOfLines={1}>{claimable ? `${claimable} reward ready · Claim` : "Resets at midnight"}</T>
-          </Press>
-        </View>
-
-        {/* 3 · Play: one focused hero card */}
-        <Animated.View entering={FadeInDown.duration(300)} style={{ borderRadius: radius.lg + 4, padding: space.lg, gap: space.md, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: tint + "55" }}>
-          <View style={{ flexDirection: "row", padding: 4, gap: 4, borderRadius: radius.pill, backgroundColor: colors.custom_gameBg }}>
-            {SUBJECTS.map(([s, l, ic]) => {
-              const on = subject === s;
-              return (
-                <Press key={s} testID={"rf-subject-" + s.toLowerCase()} onPress={() => { setSubject(s); setChapter(""); }} style={{ flex: 1, height: 44, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, backgroundColor: on ? subjectColor(s) : "transparent" }}>
-                  <Icon name={ic} size={18} color={on ? colors.onSurfaceInverse : colors.custom_gameMuted} />
-                  <T w="heavy" size={13} color={on ? colors.onSurfaceInverse : colors.custom_gameMuted}>{l}</T>
-                </Press>
-              );
-            })}
-          </View>
-          <ErrorBox error={cat.error && !cat.data ? cat.error : ""} retry={cat.reload} testID="rf-catalog-error" />
-          {!cat.data && !cat.error ? <Skeleton h={52} /> : (
-            <Press testID="rf-chapter-picker" onPress={() => setSheet("chapters")} style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCardHi }}>
-              <Icon name="book-open-page-variant-outline" size={20} color={tint} />
-              <View style={{ flex: 1 }}>
-                <T size={11} color={colors.custom_gameMuted}>Chapter</T>
-                <T w="heavy" size={15} color={colors.onSurfaceInverse} numberOfLines={1}>{chapter || `Mixed ${subject === "Mathematics" ? "Maths" : subject}`}</T>
-              </View>
-              <T w="bold" size={12} color={colors.custom_gameMuted}>Change</T>
-              <Icon name="chevron-down" size={20} color={colors.custom_gameMuted} />
-            </Press>
-          )}
-          <Press testID="rf-start-button" onPress={() => router.push({ pathname: "/rapid/session", params: { subject, chapter } })} disabled={!can} scaleTo={0.97} style={{ borderRadius: radius.md, overflow: "hidden", opacity: can ? 1 : 0.5 }}>
-            <LinearGradient colors={[colors.custom_neonAmber, colors.custom_examBitsat]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ height: 60, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.sm }}>
-              <Icon name="lightning-bolt" size={24} color={colors.custom_gameBg} />
-              <T w="heavy" size={18} color={colors.custom_gameBg} style={{ letterSpacing: 1 }}>START SOLO SPRINT</T>
-            </LinearGradient>
-          </Press>
-          <T size={12} color={colors.custom_gameMuted} testID="rf-session-summary" style={{ textAlign: "center" }}>{available ? `${Math.min(30, available)} cards · 20 s each · auto-next` : "No cards here yet"}</T>
-        </Animated.View>
-
-        {/* 4 · Duel */}
-        <View style={{ gap: space.sm }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{ flex: 1 }}><Label>DUEL</Label></View>
-            {record ? <T size={11} w="bold" color={colors.custom_gameMuted} testID="rf-duel-record">{record}</T> : null}
-          </View>
-          <View style={{ flexDirection: "row", gap: space.md }}>
-            <ModeTile testID="rf-duel-random" icon="sword-cross" title="Quick match" sub="Live student or AI Rival" tint={colors.custom_neonCyan} disabled={!can} onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "random", subject, chapter } })} />
-            <ModeTile testID="rf-duel-invite" icon="account-multiple-plus" title="Challenge friend" sub="Share a code on WhatsApp" tint={colors.custom_neonGreen} disabled={!can} onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "invite", subject, chapter } })} />
-          </View>
-          <Press testID="rf-open-join" onPress={() => setSheet("join")} style={{ minHeight: 44, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6 }}>
-            <Icon name="ticket-confirmation-outline" size={18} color={colors.custom_neonAmber} />
-            <T w="bold" size={13} color={colors.custom_neonAmber}>Have a duel code? Join</T>
           </Press>
         </View>
 
@@ -234,22 +217,8 @@ export default function RapidHome() {
         <T size={10} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>Practice XP only. Never changes mock marks, ranks or the series streak.</T>
       </ScrollView>
 
-      <Sheet visible={sheet === "chapters"} onClose={() => setSheet("")} testID="rf-chapter-sheet">
-        <T w="heavy" size={18}>{subject} chapters</T>
-        <ScrollView style={{ maxHeight: 460 }} contentContainerStyle={{ gap: 4 }}>
-          {[{ name: "", count: sub?.total ?? 0 }, ...(sub?.chapters || [])].map((c: any) => {
-            const on = chapter === c.name;
-            return (
-              <Press key={c.name || "mixed"} testID={c.name ? "rf-chapter-" + slug(c.name) : "rf-chapter-mixed"} disabled={!c.count} onPress={() => { setChapter(c.name); setSheet(""); }}
-                style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 48, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: on ? tint + "22" : "transparent", opacity: c.count ? 1 : 0.4 }}>
-                <T w={on ? "heavy" : "bold"} size={15} style={{ flex: 1 }}>{c.name || `Mixed ${subject}`}</T>
-                <T size={12} color={colors.muted}>{c.count} cards</T>
-                {on ? <Icon name="check" size={18} color={tint} /> : null}
-              </Press>
-            );
-          })}
-        </ScrollView>
-      </Sheet>
+      <ChapterSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={cat.data?.subjects || []} subject={subject} chapter={chapter}
+        recent={recent} onPick={(sb, ch) => { setSubject(sb); setChapter(ch); setSheet(""); }} />
 
       <Sheet visible={sheet === "quests"} onClose={() => setSheet("")} testID="rf-quests-sheet">
         <T w="heavy" size={18}>Daily quests</T>

@@ -1,0 +1,38 @@
+{
+  "summary": "Retest of the iteration 22 findings. Anti-farming in gamify.award() works as specified. 1 correct + 29 skips pays +2 coins / +30 XP with no win bonus, wins stay the same and first_win is not awarded. All skips leaves duels and wins unchanged (played=False, 0 coins). 10 correct pays +70 coins (20+50) and +185 XP, with wins+1 and duels+1. Backend: 43/43 pass (the 5 requested suites + new test_rf_iter23_anti_farming.py). Hub '?' silhouette: NOT fixed. The tint is now #94A3C7 (feFlood confirmed), but av_thunder.webp is fully opaque (0% transparent pixels, 320x320). Tinting it fills the whole circle with flat grey-lavender, so there is still no hero shape. New gaps: the anti-farming rule leaves the UI and the record inconsistent, and 1 correct + 9 wrong taps still farms the full win.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "gamify.award / duels.reward_for (economy)", "issue": "Loophole: 'answered' counts wrong answers, so 1 correct + 9 random wrong taps is still a paid win (+52 coins, +70 XP, wins+1). Verified in the API. Farming now costs about 10 taps instead of 1. If the goal is real effort, gate on correct >= N, or on margin/accuracy. Reference: gamify.py:77, duels.py:224"},
+      {"endpoint": "GET /api/rf/duels (list) + duel view winner", "issue": "Inconsistency: with fewer than 10 answered, award() sets won=False, but d.winner is still the student. GET /duels returns won=true, and the hub record (rapid.tsx:65) counts it as a W while profile.wins is unchanged. The result screen shows 'You won!' and 'Victory! Champion's prize' with only +2 coins. Fix: apply the same rule in winner() for seated games, e.g. a tie or a loss below the threshold, or add an 'unrated' flag to the list and result. Reference: duels.py:181, duels.py:398, app/rapid/duel.tsx:279-292"},
+      {"endpoint": "gamify.award", "issue": "An all-skip duel still pays +20 XP (participation) even with played=False. Small, but XP drives the leaderboard. Reference: gamify.py:79"}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "BattleHero Mystery silhouette", "issue": "Still no visible silhouette. tintColor=custom_gameMuted (#94A3C7) is applied (feFlood #94A3C7), but av_thunder.webp has no transparent pixels, so the tint turns the whole circle into a flat grey-lavender disc with a red '?'. There is no hero outline. Fix: use an avatar asset with a transparent background, or show the untinted av_thunder at about 0.2-0.3 opacity / dark overlay, or use a grey 'account' icon. Reference: src/components/BattleHero.tsx:28", "testID": "rf-battle-hero", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "PLAY result with fewer than 10 answered", "issue": "The UI says 'You won!' / 'Victory! Champion's prize' and the hub record adds a W, but there is no win bonus and profile.wins is unchanged (see backend minor #2).", "affected_testIDs": ["duel-outcome", "duel-reward", "rf-duel-record"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter23_anti_farming.py", "/app/test_reports/pytest/iter23.xml"],
+  "action_items": [
+    "BattleHero.tsx:28: av_thunder.webp is opaque, so tintColor fills the whole circle. Use a transparent-bg silhouette asset, or show the untinted image at low opacity, or a grey account icon.",
+    "Make the outcome match the reward when fewer than 10 are answered vs the seated opponent: winner() / GET /duels won flag / result-screen copy should not say 'You won!' and the record should not add a W when award() denies the win.",
+    "Optional: gate the win bonus on correct answers (or accuracy) rather than answered, since 1 correct + 9 wrong still farms +52 coins."
+  ],
+  "critical_code_review_comments": [
+    "The anti-farming rule also applies to human-vs-human duels (fewer than 10 answered = no win bonus). That's probably fine, but it's a product decision.",
+    "duels.py:195 docstring still says 'AI Rival: clearly labelled'."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter23_anti_farming.py (new)"],
+  "success_rate": {"backend": "100% (43/43)", "frontend": "Silhouette still not visible (1 of 1 UI item failed)"},
+  "seed_data_creation": "None. TEST- users are created and cleaned up by the tests. Pilot user 9000000001 was only used to view /rapid (no duels played).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Duel answer body: {index, choice:int, outcome:'answer'|'skipped', ms}. A wrong choice is (answer+1)%len(options). Run the backend suites in the foreground with -n 6 (~150 s). Background nohup runs get killed. Login: /entry, click entry-phone-input + keyboard.type, then press Enter.",
+  "rca_of_issue": "Silhouette: av_thunder.webp is a 320x320 fully opaque image. expo-image tintColor recolours every non-transparent pixel, so the result is a solid #94A3C7 square clipped to the circle."
+}

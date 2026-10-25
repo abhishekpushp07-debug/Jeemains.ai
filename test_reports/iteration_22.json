@@ -1,0 +1,39 @@
+{
+  "summary": "Retest of the iteration 21 fixes at 360x800 (Expo web, pilot user 9000000001). HIGH-1 fixed: hub -> Challenge friend -> 'Quick match instead' lands on /rapid/duel?mode=random with 'Finding a Physics opponent…'. The exit X returns to the hub (no duel screen left, no GO_BACK errors). 'Invite instead' -> X and 'Play solo instead' -> back also return to the hub. HIGH-2 fixed: a UI PLAY win (3-2) showed 'You won!', +90 XP, +56 coins (3x2 + 50 win bonus), the First Blood badge and the daily quest. The hub record went 0W·5T·5L -> 1W·4T·5L and coins went 2819 -> 2875. In the API, a 30/30 win pays 140 coins (60 + 50 + 30), wins and duels each go up by 1, and GET /duels lists the duel with won=true. Sharpshooter is not awarded after 1 correct + forfeit, but is awarded at 25/30. The waiting screen redesign (arena stage, LIVE 1v1 ARENA badge, You vs '?', VS, spinner, text) is readable at 360 px with no overlap, and the invite code card shows below it. Regression OK: hub layout, chapter sheet (search, subject tabs, Mixed, Jump back in), PLAY auto-seat at 7.5 s, 4 s entry show (card 1 at 12.4 s), Neon Spark shows FREE / Equipped, and no AI/bot/Rival wording in the UI. Backend: 39/39 pass (4 requested suites + new test_rf_iter22_bot_rewards.py). Not fixed: the hub '?' silhouette is still invisible. Its tint is custom_gameLine #26325E on custom_gameCardHi #1A2450, not grey. New concern: seated-opponent wins now pay full rewards, so they can be farmed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "duels.py winner()/reward_for + gamify.award (economy)", "issue": "Side effect of HIGH-2, needs a product decision. The seated opponent is capped at me.score-1, so 1 correct + 29 skips is a guaranteed win paying +52 coins, +70 XP and wins+1, with no daily cap. Verified in the API: 3 correct + 27 skips = win, 56 coins. A student can farm coins and XP, and therefore leaderboard rank and the champion_10 badge, every ~15 s. An all-skip game is a tie but still adds duels+1 and +20 XP, so duelist_10 can be farmed too. Suggest: no win bonus below a minimum score (e.g. 10 correct), a daily cap on seated-opponent win bonuses, or letting the opponent win sometimes. Reference: duels.py:181,202-203,226; gamify.py:76-77,104-105"},
+      {"endpoint": "duels.py tie_break()", "issue": "Still there (known): a 0-score game against the seated opponent returns winner='tie' with tie_break=True, so the result shows 'It's a tie' plus 'decided on total answer time'. Reference: duels.py:190-192"},
+      {"endpoint": "GET /api/rf/duels/{id}", "issue": "Still there (known): players[].bot, vs_bot and the 'bot-' winner uid are exposed."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "BattleHero Mystery silhouette", "issue": "Not fixed. expo-image tintColor is colors.custom_gameLine (#26325E) on a custom_gameCardHi (#1A2450) circle, about 1.2:1 contrast. In the DOM the av_thunder image loads (feFlood #26325E), but in screenshots the seat is a flat navy circle with '?', with no visible silhouette and no grey tint. Use a lighter tint, e.g. custom_gameMuted #94A3C7 at ~35-50% opacity. Reference: src/components/BattleHero.tsx:28", "testID": "rf-battle-hero", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Duel waiting (random/invite)", "issues": ["The 'Entry effect ready' chip from the hub also shows on the waiting stage. Not wrong, but it is extra clutter under 'Finding…'. Optional: hide it with a prop."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter22_bot_rewards.py", "/app/backend/tests/test_rf_shop_bot.py", "/app/test_reports/pytest/iter22.xml"],
+  "action_items": [
+    "Make the hub '?' silhouette visible: BattleHero.tsx:28 still uses tintColor=custom_gameLine (#26325E). Use a lighter grey, e.g. custom_gameMuted with opacity.",
+    "Decide on anti-farming for seated-opponent wins: 1 correct = guaranteed +50 coins / +60 XP / wins+1. Add a minimum score for the win bonus, a daily cap, or occasional opponent wins.",
+    "Optional (still open from iter21): tie_break False on a 0-0 tie, hide the bot flags in view(), forfeit when leaving during the entry show."
+  ],
+  "critical_code_review_comments": [
+    "duels.py:195 docstring still says 'AI Rival: clearly labelled', which no longer matches the product.",
+    "duel.tsx:77-80 mode=ai branch is dead code.",
+    "Invite-instead / Play-solo still use leave() (router.back) + router.push. They work on web now (verified), but chaining back+push is fragile. router.replace would be cleaner."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter22_bot_rewards.py (new)", "/app/backend/tests/test_rf_shop_bot.py (bot-win reward assertion updated to coins >= my*2+50)"],
+  "success_rate": {"backend": "100% (39/39)", "frontend": "~95% (all requested flows pass; hub silhouette still invisible)"},
+  "seed_data_creation": "None. TEST- users are created and deleted by the tests. On pilot user 9000000001: 1 PLAY duel played to the result screen (won 3-2, +56 coins), plus a few invite/random duels opened and cancelled.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: /entry, click entry-phone-input and keyboard.type the phone (page.fill doesn't register), then wait for the URL to leave /entry before going to /rapid. Store entry tab: /rapid/shop?tab=entry. The profile badges list has an {id, earned} shape. Filter on earned. Run pytest with -n 0 -s to see prints.",
+  "rca_of_issue": "Silhouette: BattleHero.tsx:28 tintColor=colors.custom_gameLine (#26325E) is almost the same as the circle background #1A2450 (custom_gameCardHi), so the tinted image can't be seen."
+}

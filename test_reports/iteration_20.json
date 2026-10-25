@@ -1,0 +1,43 @@
+{
+  "summary": "Iteration 20 tested the Rapid Fire hub redesign, PLAY vs AI (mode=ai), and the free auto-applied Neon Spark entry. Backend: 16/16 pass in the new test_rf_iter20_free_entry.py on the public URL. Regression: test_rf_avatars_entries, shop_bot, gamify and duels give 34/34 after 3 stale assertions in test_rf_avatars_entries.py were updated (entry_spark is now in the entry set; start_at gap is 4.6 s). Frontend at 390x844 with phone 9000000001: the hub order is identity bar, BATTLE ARENA hero, Solo Sprint, streak and quests tiles, then the switcher. Measured vertical gaps are 16-20 px and nothing overlaps. Both big buttons are 157x93 with single-line labels. The ENTRY ON pill is visible. The rival reel changes image every ~1.1 s (thunder, crystal, ninja, samurai). The subject switch works. The chapter sheet lists 25 options (mixed plus chapters), and both picking a chapter and going back to mixed work. The quests sheet shows 3 quests. The join sheet uppercases and filters input to 6 characters, the button is disabled under 6 characters, and an invalid code shows a clear error. Leaderboard, Recent (5 rows) and Trophies (9 badges) all render. PLAY vs AI skips the queue: the entry show appears at 0.27 s, full screen 390x844, showing 'You · SPARK ENTRY' and the rival's entry. Card 1 appears at 4.82 s and answering moves to card 2. Exiting forfeits, and the DB shows the duel finished with vs_bot. PLAY vs FRIEND shows a 6-character code, Send on WhatsApp, Copy code and an AI Rival fallback. Quick match shows the random waiting screen, and leaving cancels it. In the Store Entry Effects tab, Neon Spark is first and shows 'Equipped ✓' with no Buy button. No page errors. One design issue: at 360 px width (a common Android size) the PLAY vs FRIEND label and its subtitle get cut off with an ellipsis, and the 'Level 12' and XP text in the HUD wrap. Deprecated packages: none found in this scope.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/duels (PLAY vs AI)", "issue": "There is no server-side mode 'ai'. The frontend sends mode=invite and then calls /duels/{id}/bot, which is 2 round-trips. The stored duel has mode='invite' plus vs_bot=True, so analytics and views see AI duels as invites. For a moment before /bot, the duel is waiting and could be joined by its code. The risk is low but real."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rapid Fire hub at 360 px width (common Android)", "issues": [
+        "The rf-duel-invite label 'PLAY vs FRIEND' gets cut off as 'PLAY vs FRIE…'. The text is 122 px wide and the box is 118 px. The subtitle 'Share code on WhatsApp' gets cut off as 'Share code on Whats…'. adjustsFontSizeToFit does nothing on web. Suggested fixes: use a smaller font, the shorter label 'vs FRIEND', or stack icon and label to leave more room.",
+        "In the identity bar, 'Level 12' wraps onto 2 lines and '13415 / 14400 XP' wraps as well. Add numberOfLines={1} or shrink the font."
+      ]},
+      {"screen": "Arena Store > Entry Effects", "issues": ["The Neon Spark card shows a coin icon with price '0'. A 'FREE' label would read better."]},
+      {"screen": "Hub bottom sheets (chapters, join)", "issues": ["The bottom tab bar (with its raised RAPID button) is drawn on top of the bottom of the sheet. On the chapter list, the last visible row sits under the tab bar until you scroll."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter20_free_entry.py", "/app/backend/tests/test_rf_avatars_entries.py", "/app/test_reports/pytest/iter20.xml"],
+  "action_items": [
+    "Stop the PLAY vs FRIEND label and subtitle being cut off at 360 px width (BattleHero.tsx BigButton): shrink the font or shorten the label. adjustsFontSizeToFit does not work on web.",
+    "Identity bar in rapid.tsx: add numberOfLines={1} to the Level and XP text, or reduce the font, so it does not wrap at 360 px.",
+    "Optional: show 'FREE' instead of '0' on the Neon Spark store card (shop.tsx:114).",
+    "Optional: add a server-side mode 'ai' (or an atomic create-with-bot) so AI duels are stored as mode=ai and are never briefly joinable by code.",
+    "Optional: draw Sheet above the bottom tab bar, or pad the sheet by the tab bar height."
+  ],
+  "critical_code_review_comments": [
+    "shop.py: owned_of/equipped_of apply entry_spark only when the profile is read, nothing is written to the DB. They are used consistently in public_profile, /shop, equip validation and duel player(). equip(item_id=None) falls back to spark, which is the intended behaviour.",
+    "rival_profile() can now pick entry_spark for bots too. This is fine.",
+    "duel.tsx mode=ai flow: request_id makes it idempotent. If it is retried after the bot has joined, the create call returns the ready duel and /bot is skipped. Good.",
+    "rapid.tsx section comments are numbered inconsistently ('2 · Today' after '3 · Solo', then '5'). Cosmetic only."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter20_free_entry.py (new)", "/app/backend/tests/test_rf_avatars_entries.py (stale expectations updated: entry_spark in ENTRIES, start gap <= 4.8 s)"],
+  "success_rate": {"backend": "100%", "frontend": "95% (all flows work; 360 px label cut-off is a design issue)"},
+  "seed_data_creation": "TEST- uuid profiles and duels are created and removed by the iter20 test fixture. On learner 9000000001, one AI duel (forfeited), one invite and one random duel (both cancelled) were created through the UI.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "PLAY vs AI has no backend mode. The frontend posts mode=invite and then /duels/{id}/bot, and the backend rejects mode='ai' with 422. The free entry entry_spark is applied when the profile is read (owned_of/equipped_of in shop.py) and is never written to Mongo. With Playwright, the hub panes at the bottom can sit under the tab bar. Set rapid-fire-home scrollTop first, then click without force. 169 old TEST- rf_profiles from previous iterations are still in the DB.",
+  "rca_of_issue": ""
+}

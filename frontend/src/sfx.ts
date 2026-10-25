@@ -2,6 +2,7 @@ import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from "expo-aud
 
 // Short arena sound effects (synthesised offline, see backend/rapidfire/make_sfx.py).
 const FILES: Record<string, number> = {
+  entry_spark: require("../assets/sfx/entry_crown.wav"),
   entry_rocket: require("../assets/sfx/entry_rocket.wav"),
   entry_lightning: require("../assets/sfx/entry_lightning.wav"),
   entry_supercar: require("../assets/sfx/entry_supercar.wav"),

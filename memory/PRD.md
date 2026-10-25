@@ -86,6 +86,16 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Set page: one-tap Start (preflight runs silently; checkbox removed).
 - Leaderboard cached 15 s (single-flight). Load: one preview worker ≈ 1.2–1.5k req/s on cached endpoints.
 
+## Iteration 21 (2026-06)
+- Rapid Fire hub = game lobby: arena-image stage (you vs bobbing "?" opponent, magenta VS pulse, LIVE 1v1 badge, subject switch, glowing chapter pill on the edge), huge PLAY (random match, rf-duel-random) with light sweep, Challenge friend + Join code outline buttons, then Solo Sprint row, streak/quests, tabs.
+- ChapterSheet (full-height Modal): search across all subjects, subject tabs, Mixed hero card, "Jump back in" recent chapters, chapter rows with card counts.
+- Quick match auto-seats an arena player after 5-7.5 s if no human joins; all "AI Rival" labels/buttons/copy removed per user ("student should never feel they are playing alone or AI"). API still has bot flag.
+- Free "Neon Spark" entry (entry_spark, price 0) owned + auto-equipped for everyone (shop.owned_of/equipped_of). Store shows FREE.
+
+## Iteration 22-25 (2026-06)
+- Seated-opponent duels pay/count like normal duels; winner decided by score (forfeit = loss). Win bonus only with >=5 correct; all-skip duels give nothing. Opponent score is monotonic: natural pace when the student isn't really playing; when the student has >=5 correct it holds until overtaken, then ends 1-3 behind (per-match gap).
+- Waiting screen reuses the arena stage (BattleHero); "Quick match instead" fixed (cancel + replace).
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.

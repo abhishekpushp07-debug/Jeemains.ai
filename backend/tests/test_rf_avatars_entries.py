@@ -12,7 +12,7 @@ BASE_URL = os.environ.get("EXPO_PUBLIC_BACKEND_URL").rstrip("/")
 API = f"{BASE_URL}/api/rf"
 DB = MongoClient(os.environ["MONGO_URL"])[os.environ["DB_NAME"]]
 FREE = {"av_topper", "av_scholar", "av_robo", "av_panda"}
-ENTRIES = {"entry_rocket", "entry_lightning", "entry_supercar", "entry_crown", "entry_tornado", "entry_meteor", "entry_dragon", "entry_phoenix", "entry_galaxy", "entry_blackhole"}
+ENTRIES = {"entry_spark", "entry_rocket", "entry_lightning", "entry_supercar", "entry_crown", "entry_tornado", "entry_meteor", "entry_dragon", "entry_phoenix", "entry_galaxy", "entry_blackhole"}
 
 
 def H(u):
@@ -135,7 +135,7 @@ class TestDuelStart:
         assert r.status_code == 200, r.text
         d = r.json()
         gap = d["start_at"] - d["server_now"]
-        assert 3.0 <= gap <= 4.05, gap
+        assert 3.0 <= gap <= 4.8, gap  # iter16+: start_at = now + 4.6 s
         me = [p for p in d["players"] if p["you"]][0]
         bot = [p for p in d["players"] if p["bot"]][0]
         assert me["avatar"] in ("av_photon", "av_robo") and me["entry"] == "entry_blackhole"

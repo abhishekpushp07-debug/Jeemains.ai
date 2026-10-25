@@ -1,0 +1,52 @@
+{
+  "summary": "I tested the game-lobby redesign of Rapid Fire at 360x800 and 390x844. Working: the hub (HUD, battle hero, subject switch, chapter pill on the hero edge, PLAY, Challenge friend, Join code, Solo Sprint, tiles, panes; no truncation or overlap at either size); the chapter sheet (drawn above the tab bar, search across subjects with the subject label, empty-search message, subject tabs, Mixed, Jump back in, picking a chapter updates the hub, X and backdrop close it); PLAY random (shows 'Finding a Chemistry opponent…', an opponent is seated at about 7 s with no tap, then the 4 s entry show and card 1 at about 11.9 s); invite mode (code, WhatsApp, Copy -> 'Copied', Quick match instead; no auto-seat after 11 s); the Join sheet (input cleaned to uppercase alphanumerics, JOIN disabled when empty, invalid code shows an error); Store Neon Spark ('FREE', Equipped). No 'AI', 'AI Rival', 'bot' or robot wording or tag appeared on the hub, waiting screen, entry show, duel or result screens. Backend: 34/34 pass (iter20 free entry, the new iter21 random auto-seat, test_rf_duels, test_rf_shop_bot). Bugs: (1) 'Quick match instead' removes the hub from the navigation stack, so the exit X stops working; (2) PLAY matches against a seated opponent are silently treated as practice: no +50 win coins, they are left out of the W/T/L record and they don't count toward wins or duels, while the UI says 'You won! Victory! Champion's prize' and 'winner takes the coins'; (3) when both players score 0 the result shows 'It's a tie' together with 'decided on total answer time'.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/rf/duels/{id}/bot + GET /api/rf/duels + gamify award", "issue": "Every PLAY match now goes through /bot (vs_bot=True). reward_for gives kind='bot' (1 coin per correct, no +50 win bonus). GET /duels skips vs_bot duels ({vs_bot: {$ne: True}}), so the hub W/T/L record (rf-duel-record) never changes after PLAY. Profile wins and duels stay 0, so the first_win, duelist_10 and champion_10 badges can't be earned. Repro: 30/30 correct vs opponent 23 gives winner=me but coins=60 (30 + 30 flawless, no +50), and wins/duels go 0->0. This contradicts the 'never feel it's an AI' goal and the hub copy 'winner takes the coins'. Reference: /app/backend/duels.py:225, 398; gamify.py:76-77", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "duels.py winner() vs tie_break()", "issue": "In bot duels where the human scores 0, winner() returns 'tie', but tie_break() still returns True because ms differ. The result card then shows 'It's a tie' and 'Equal score — decided on total answer time' together (seen in the UI). Fix: tie_break should return False when winner == 'tie' or the duel is vs_bot. Reference: duels.py:181,190-192"},
+      {"endpoint": "duels.py simulate_bot", "issue": "The opponent's score is capped at me.score-1, so a student with 1+ correct always wins and a 0 score always ties. The seated opponent never wins unless the student forfeits, which feels fake over time. The duel history (8T) also shows mostly ties. Reference: duels.py:202-203"},
+      {"endpoint": "gamify badges sharpshooter", "issue": "'90%+ accuracy in a 30-card run' is awarded after answering 1 card correctly and then forfeiting a duel. total=30 but acc=correct/answered. Rule should use correct/total or require answered>=27. Reference: gamify.py:111"},
+      {"endpoint": "GET /api/rf/duels/{id} payload", "issue": "The payload exposes players[].bot=true, vs_bot=true and winner='bot-xxxx' uid to the client. No UI shows it, but anyone inspecting traffic sees it's a bot. Consider hiding these fields in view()."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "duel.tsx 'Quick match instead' (invite waiting)", "issue": "The onPress runs leave() (router.back()) and then router.replace(random). The back pops the invite screen and replace then overwrites the HUB route. The hub is gone from the stack (verified: hub count=0). On the new random duel the exit X calls router.back() and nothing happens; console shows \"The action 'GO_BACK' was not handled by any navigator\", so the student is stuck in the duel. Fix: for Quick match, cancel the duel then router.replace without back(). For invite-instead and play-solo use cancel + router.replace. Reference: app/rapid/duel.tsx:179-181, 209", "testID": "duel-quick-match-instead", "priority": "HIGH"},
+      {"component": "duel.tsx exit during entry show", "issue": "The exit X during status 'ready' before the first card (entry show / countdown) calls leave(): router.back() with no cancel or forfeit. The server duel keeps running with the opponent. Reference: duel.tsx:313", "testID": "duel-exit-button", "priority": "LOW"},
+      {"component": "Join with invalid code header", "issue": "The header reads 'RAPID FIRE DUEL · ' with an empty subject when the join fails.", "testID": "duel-screen", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "PLAY result -> hub record/rewards", "issue": "After a PLAY win the result says 'You won! / Victory! Champion's prize', but the reward has no win bonus and the hub record (rf-duel-record) does not change, because vs_bot duels are excluded from /duels.", "affected_testIDs": ["duel-outcome", "duel-reward", "rf-duel-record", "rf-duel-random"]}
+    ],
+    "design_issues": [
+      {"screen": "Duel waiting ('Finding a <subject> opponent…')", "issues": ["Still a plain white card with a small spinner on a black screen, which clashes with the new neon lobby. It's the 'mechanical' feel the user complained about. Suggest reusing the BattleHero stage (your avatar vs a pulsing '?' with a search/scan animation and a countdown-like 'searching…')."]},
+      {"screen": "Hub BattleHero", "issues": ["The opponent silhouette image (tinted gameBg on gameCardHi) is practically invisible; the seat reads as an empty dark circle with '?'."]},
+      {"screen": "ChapterSheet", "issues": ["The search TextInput shows the browser focus outline (white rectangle) inside the search box on web. Add outlineStyle:'none' for web.", "The clear-search button is 32x32 (<44) and has no testID."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter21_random_autoseat.py", "/app/backend/tests/test_rf_iter20_free_entry.py", "/app/backend/tests/repro_rf_iter21_bot_win_reward.py", "/app/test_reports/pytest/iter21.xml"],
+  "action_items": [
+    "HIGH: Fix 'Quick match instead' navigation in duel.tsx:209. Don't call router.back() before router.replace; cancel the waiting duel and replace only. Do the same for invite-instead/play-solo (back+push) for consistency. Verify the exit X returns to the hub.",
+    "HIGH: Decide on rewards and record for PLAY matches with a seated opponent. Either give normal duel rewards (+50 win) and include them in /duels W/T/L and the wins/duels counters, or change the 'winner takes the coins' / 'Champion's prize' copy. Today the UI promises PvP rewards that the backend doesn't pay.",
+    "Fix tie_break so it's False when winner=='tie' (vs-bot 0-0) to avoid 'It's a tie' + 'decided on total answer time'.",
+    "Consider letting the seated opponent occasionally win (the cap at me.score-1 makes the student always win or tie).",
+    "Fix the sharpshooter badge rule (gamify.py:111) to require 27+ answered or use correct/total.",
+    "Restyle the duel waiting screen into the neon lobby style (avatar vs searching silhouette).",
+    "Optionally hide bot/vs_bot fields and the 'bot-' winner uid from the API view."
+  ],
+  "critical_code_review_comments": [
+    "duel.tsx leave() always calls router.back(). Combining it with replace/push in the same handler is fragile: back is async on web, and the replace hits the hub route.",
+    "The comments in duels.py still say 'AI Rival: clearly labelled' while the product now hides it; the reward logic still treats these matches as practice.",
+    "The mode=ai branch in duel.tsx:76-79 is dead code now (no link). Consider removing it."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter21_random_autoseat.py", "/app/backend/tests/repro_rf_iter21_bot_win_reward.py"],
+  "success_rate": {"backend": "100% (34/34 tests); 1 HIGH logic gap on rewards/record", "frontend": "~88% (requested flows work; Quick match instead navigation broken)"},
+  "seed_data_creation": "None. TEST- users are created and deleted by the tests. Several duels were played on the pilot user 9000000001 via the UI (random PLAY skip-through, invites cancelled).",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Log in at /entry with phone 9000000001, then go to /rapid. PLAY auto-seats an opponent client-side after 5-7.5 s (POST /duels/{id}/bot). The entry show is 4 s, then card 1. To reach the result fast, click duel-skip 30 times with about 1 s gaps. vs_bot duels are excluded from GET /duels. The repro script backend/tests/repro_rf_iter21_bot_win_reward.py shows the win reward and record gap. Run pytest with -n 0 to see prints (xdist is on by default).",
+  "rca_of_issue": "Quick match stuck: duel.tsx:209 onPress = leave() [router.back()] + router.replace(random). On web, back pops the invite screen and the replace then overwrites the hub, leaving the random duel as the only route. The exit X's router.back() then fails with 'GO_BACK was not handled by any navigator'. Repro: hub -> Challenge friend -> Quick match instead -> X (nothing happens)."
+}

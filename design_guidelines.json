@@ -1,59 +1,90 @@
 {
-  "app_name": "JEELIVE.AI Rapid Fire",
-  "personality": "7 Dark-First Utility DARK",
-  "personality_one_liner": "A high-octane, gamified dark-mode arena optimized for quick matchmaking, competitive recall, and zero friction.",
+  "app_name": "JEELIVE.AI",
+  "personality": "7 Dark-First Utility DARK with 4 Tactile/Playful shapes (Gaming Lobby Fusion)",
+  "personality_one_liner": "A high-stakes, vibrant game lobby that makes exam prep feel like an esports tournament.",
   "color": {
-    "surface": "#0D0E12",
-    "onSurface": "#F8F9FA",
-    "surfaceSecondary": "#171920",
-    "onSurfaceSecondary": "#E9ECEF",
-    "surfaceTertiary": "#22252F",
-    "onSurfaceTertiary": "#CED4DA",
+    "surface": "#0B0F19",
+    "onSurface": "#FFFFFF",
+    "surfaceSecondary": "#151B2B",
+    "onSurfaceSecondary": "#FFFFFF",
+    "surfaceTertiary": "#1F293D",
+    "onSurfaceTertiary": "#E2E8F0",
     "surfaceInverse": "#FFFFFF",
-    "onSurfaceInverse": "#0D0E12",
+    "onSurfaceInverse": "#0B0F19",
     "brand": "#00E5FF",
-    "brandPrimary": "#00E5FF",
-    "onBrandPrimary": "#000000",
-    "brandSecondary": "#FFB800",
-    "onBrandSecondary": "#000000",
-    "brandTertiary": "#8A2BE2",
-    "onBrandTertiary": "#FFFFFF",
+    "onBrand": "#0B0F19",
+    "brandPrimary": "#FFC107",
+    "onBrandPrimary": "#452000",
+    "brandSecondary": "#B026FF",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#00FF66",
+    "onBrandTertiary": "#002B12",
     "success": "#00FF66",
-    "onSuccess": "#000000",
-    "warning": "#FFB800",
-    "onWarning": "#000000",
-    "error": "#FF003C",
+    "onSuccess": "#002B12",
+    "warning": "#FFC107",
+    "onWarning": "#452000",
+    "error": "#FF3366",
     "onError": "#FFFFFF",
     "info": "#00E5FF",
-    "onInfo": "#000000",
-    "border": "#22252F",
-    "borderStrong": "#343A40",
-    "divider": "#1A1D24",
-    "muted": "#868E96",
-    "onBrand": "#000000"
+    "onInfo": "#0B0F19",
+    "border": "#2D3748",
+    "borderStrong": "#4A5568",
+    "divider": "#2D3748",
+    "muted": "#718096",
+    "custom_gameBg": "#0B0F19",
+    "custom_gameCard": "#151B2B",
+    "custom_gameCardHi": "#1F293D",
+    "custom_gameLine": "#2D3748",
+    "custom_gameMuted": "#718096",
+    "custom_neonAmber": "#FFC107",
+    "custom_neonCyan": "#00E5FF",
+    "custom_neonGreen": "#00FF66",
+    "custom_neonRed": "#FF3366",
+    "custom_neonViolet": "#B026FF",
+    "custom_neonMagenta": "#FF00FF",
+    "custom_examJeeDeep": "#0A0D14"
   },
   "typography": {
     "displayFontFamily": "Rajdhani",
     "textFontFamily": "Satoshi",
-    "scale": { "sm": 12, "base": 14, "lg": 16, "xl": 20, "2xl": 24 }
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24,
+      "3xl": 32,
+      "4xl": 48
+    }
   },
-  "spacing": { 
-    "rule": "Generous spacing around core game actions, tight grouping for stats. No floating/orphaned chips.", 
-    "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 24, "2xl": 32, "3xl": 48 
+  "spacing": {
+    "rule": "Maintain tight gaming rhythm. Large touch targets (48pt) but compact vertical stacking to prevent scrolling. Safe areas are non-negotiable.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
   },
-  "radius_tokens": { "sm": 6, "md": 12, "lg": 20, "pill": 999 },
-  "shadow_tier": "0",
-  "navigation": "stack_only",
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": 2,
+  "navigation": "bottom_tabs",
   "icon_set": "Phosphor",
   "glassmorphism": {
     "enabled": true,
     "do's": [
-      "Use heavy glass with a dark translucent tint (80% opacity) behind the top stats header",
-      "Apply glassmorphism to bottom-sheets when they overlap the dark neon background"
+      "Use heavy tint + blur on the battle arena overlay so foreground elements pop.",
+      "Bottom sheet (chapter picker) gets heavy frosted glass."
     ],
     "dont's": [
-      "Don't use blur on standard data cards or lists to avoid frame drops",
-      "Don't stack glass over glass"
+      "Do not blur primary buttons (PLAY button must be solid and tactile).",
+      "Do not blur dense lists."
     ]
   },
   "platform_libraries": {
@@ -69,48 +100,51 @@
     "gesture": "react-native-gesture-handler"
   },
   "screens": [
-    { 
-      "name": "Rapid Fire Hub", 
-      "purpose": "A competitive lobby where users check stats, select their battle parameters, and jump directly into gameplay.", 
-      "states": { 
-        "loading": "Centered neon-cyan loading spinner on surface", 
-        "empty": "N/A - Hub always has actions available", 
-        "error": "Standard error prompt with a Retry button in brandPrimary" 
+    {
+      "name": "Rapid Fire Hub",
+      "purpose": "A thrilling esports-style game lobby where students challenge random peers or friends in live subject duels.",
+      "states": {
+        "loading": "Full screen pulsing arena skeleton with glowing neon accents.",
+        "empty": "Not applicable; hub is always populated with modes.",
+        "error": "Card showing 'Connection lost to Arena' with a neon red retry button."
       },
-      "layout": "1. **Sticky Top HUD**: Level/XP bar, Coins, Avatar (rf-open-avatar), and Store pill (rf-open-store) arranged in a glassmorphic sticky header.\n2. **Horizontal Gamification Row**: Directly below the header, present Daily Quests (rf-daily-quests) and the Streak block (rf-streak-card) side-by-side in a horizontal ScrollView or grid, reducing vertical bloat.\n3. **Arena Setup (Mid-Screen)**: Subject tiles (rf-subject-physics/chemistry/mathematics) horizontally aligned. Replace the 29 chapter chips with a single 'Select Chapter' button (rf-chapter-mixed) that opens a `@gorhom/bottom-sheet` containing the chapter list.\n4. **Primary Actions (Thumb Zone)**: Large 'Solo Sprint' hero button (rf-start-button), sitting above a two-column layout for 'Random Duel' (rf-duel-random) and 'Challenge Friend' (rf-duel-invite). The Code Input (rf-duel-code-input) should be moved inside a bottom-sheet triggered by 'Challenge Friend' to reclaim screen space.\n5. **Compact Footers**: Trophies (rf-badges), Leaderboard (rf-leaderboard), and History (rf-history) should be reduced to half-height summary cards or a tabbed widget at the bottom of the scroll view, rather than full-length lists."
+      "layout": "Root: Full-screen `custom_gameBg` SafeAreaView. NO SCROLLVIEW for the top section (it acts as a persistent lobby UI). ScrollView only for the bottom modules.\n\n1. Header (Identity Bar): Row layout. Left: User Avatar (`rf-open-avatar`) inside a `custom_gameCardHi` rounded pill. Center: Dynamic XP bar with Level Badge (glow `custom_neonCyan`). Right: Coin/Store pill (`rf-open-store`) with an animated glowing icon.\n\n2. BATTLE ARENA HERO (`rf-battle-hero`): Large 4:3 ratio card. Background uses the `arena_bg` image with a dark radial gradient scrim (transparent in center to 80% `surface` at edges). Layout: \n- Top center: 'Live 1v1 Arena' glowing badge.\n- Middle: Left side shows user's 3D avatar (local). Right side shows a mystery silhouette bouncing/pulsing. Center shows 'VS' in `custom_neonMagenta` with Reanimated pulse effect.\n- Bottom: Subject segmented control (`rf-subject-physics/chemistry/mathematics`). Pill style, active state gets a `custom_neonCyan` glow.\n- Overlapping the bottom edge of the hero card: Chapter Picker pill (`rf-chapter-picker`). A tactile `surfaceTertiary` bar showing selected chapter with a chevron. Tapping opens bottom sheet.\n\n3. Primary Actions: Absolute gaming focal point.\n- Big PLAY Button (`rf-duel-random`): Full width (minus margins), highly tactile shape (pill or heavy rounded), glowing `custom_neonAmber` linear gradient. Text: 'PLAY' (Rajdhani bold, 24pt, black text). NO MENTION OF AI. Reanimated scale on press (0.95).\n- Secondary Row (2-col grid): Left -> 'Challenge Friend' (`rf-duel-invite`, neon violet outline). Right -> 'Join Code' (`rf-open-join`/`rf-duel-code-input`/`rf-duel-join`, neon cyan outline). Plus icons.\n\n4. Scrollable Lower Half (Tertiary):\n- Solo Sprint (`rf-start-button`): Sleek dark card (`custom_gameCard`), lightning icon.\n- Quests & Streaks: 2-col horizontal tiles. (`rf-daily-quests`, `rf-streak-card`). Use subtle neon borders.\n- Bottom Pane Tabs (`rf-pane-board/recent/trophies`): Glassmorphic tabs switching between Leaderboards (`rf-leaderboard`, `rf-badges`), Recent (`rf-history-<id>`), and Trophies."
+    },
+    {
+      "name": "Chapter Picker Sheet",
+      "purpose": "A lightning-fast, gamified menu for selecting what to fight over.",
+      "states": {
+        "loading": "Skeleton list with glowing rows.",
+        "empty": "No chapters found matching search.",
+        "error": "Failed to load syllabus."
+      },
+      "layout": "Using `@gorhom/bottom-sheet`. Starts at 80% snap point. Background is `surfaceSecondary` with `expo-blur`.\n\n1. Header: Huge search box (Search chapters...), neon focus ring.\n2. Hero Option: 'Mixed Bag' (`rf-chapter-mixed`) at the top. Golden/Neon gradient card with multiple subject icons. The 'premium' choice.\n3. Content Scroll: \n- Horizontal row for 'Recent / Weak Chapters' (Quick picks).\n- Vertical list grouped by Subject. Each subject header is sticky. Each chapter row (`rf-chapter-<slug>`) shows chapter name, question count pill, and a mastery bar."
     }
   ],
   "images": {
-    "avatar_3d": { 
-      "url": "https://images.unsplash.com/photo-1740252117013-4fb21771e7ca?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHwzZCUyMGdhbWUlMjBhdmF0YXIlMjBjaGFyYWN0ZXJ8ZW58MHx8fHwxNzkyODU3MDY5fDA&ixlib=rb-4.1.0&q=85", 
-      "alt": "3D Avatar Character" 
+    "arena_bg": {
+      "url": "https://images.unsplash.com/photo-1644878796127-5c4029129f61?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHxkYXJrJTIwZXNwb3J0cyUyMHN0YWdlJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3OTI5MTUyNjV8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Dark esports arena stage with vibrant neon lighting and a central focal point"
     },
-    "hero_bg": { 
-      "url": "https://images.unsplash.com/photo-1665186096425-45134ba4ddda?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwzfHxuZW9uJTIwZ2FtaW5nJTIwcGF0dGVybiUyMGRhcmslMjB0ZXh0dXJlfGVufDB8fHx8MTc5Mjg1NzA2OXww&ixlib=rb-4.1.0&q=85",
-      "dark": "https://images.unsplash.com/photo-1665186096425-45134ba4ddda?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwzfHxuZW9uJTIwZ2FtaW5nJTIwcGF0dGVybiUyMGRhcmslMjB0ZXh0dXJlfGVufDB8fHx8MTc5Mjg1NzA2OXww&ixlib=rb-4.1.0&q=85", 
-      "alt": "Neon gaming texture pattern" 
-    },
-    "badge_icon": { 
-      "url": "https://images.unsplash.com/photo-1790553589409-b3b321b9c0e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxnb2xkJTIwYmFkZ2UlMjAzZCUyMGljb258ZW58MHx8fHwxNzkyODU3MDY5fDA&ixlib=rb-4.1.0&q=85", 
-      "alt": "3D Gold Badge" 
+    "trophies_empty": {
+      "url": "https://images.unsplash.com/photo-1790553589409-b3b321b9c0e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHwxfHxnbG93aW5nJTIwZ29sZGVuJTIwdHJvcGh5JTIwM2R8ZW58MHx8fHwxNzkyOTE1MjY1fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "3D glowing golden trophy for the empty state of the trophies tab"
     }
   },
   "haptics": {
-    "rf-start-button": "heavy",
-    "rf-duel-random": "medium",
-    "rf-subject-*": "light",
-    "rf-chapter-mixed": "light",
-    "rf-open-store": "medium",
-    "rf-quest-claim-*": "success"
+    "rf-duel-random": "impactHeavy",
+    "rf-chapter-picker": "impactLight",
+    "rf-subject-selection": "selection",
+    "rf-duel-invite": "impactMedium",
+    "rf-open-store": "impactLight"
   },
   "instructions_to_main_agent": [
-    "Retain ALL specified testIDs strictly as they are tied to existing app tests and analytics.",
-    "Implement the Chapter selector using @gorhom/bottom-sheet. DO NOT render the 29 chips inline anymore.",
-    "Move the 'Code Input' (rf-duel-code-input) inside a bottom-sheet triggered by 'Challenge Friend' (rf-duel-invite). It should not be visible on the main scroll view.",
-    "Use 'Rajdhani' for numeric stats, HUD, and large buttons. Use 'Satoshi' for body text, subtitles, and descriptions.",
-    "Ensure 'Solo Sprint' and other Game Mode buttons have a gradient-to-dark scrim if you use the neon texture as their background image.",
-    "Gamification row (quests and streak) should be horizontally scrollable or arranged in a tight 2-column grid to save vertical space.",
-    "Leaderboard and Trophies should display only a summary (e.g., top 3 badges, top 3 players) with a 'View All' chevron.",
-    "Set the header to sticky using standard React Native ScrollView stickyHeaderIndices or a fixed absolute view with glassmorphism."
+    "Execute all layout as pure native React Native elements. Follow the 'Gaming Lobby Fusion' personality: dark esports vibe, high tactile contrast for buttons, glowing neon accents, and condensed tech typography (Rajdhani) for metrics/CTAs.",
+    "BATTLE ARENA HERO must feel like a premium Clash Royale / Brawl Stars lobby. The user avatar (left) and random silhouette (right) face off over a glowing VS. Overlap the chapter picker pill on the bottom edge of this arena card to connect the stage with the selection.",
+    "The primary PLAY button (`rf-duel-random`) MUST be the visual anchor of the screen. Make it highly tactile (shadows, gradient, scale animation on press). The text must just say 'PLAY' - do not mention AI anywhere, random matchmaking is implied.",
+    "All colors must strictly use the custom_game* and custom_neon* palette mapped in the design guidelines.",
+    "Ensure the chapter picker bottom sheet uses @gorhom/bottom-sheet. It should feature a 'Mixed' premium option at the top and a search box. It needs to work at 360px without text truncation.",
+    "Implement Reanimated 3 for the VS pulsing effect and button scale interactions. This is a game lobby, it must feel alive.",
+    "Include a gradient scrim over the `arena_bg` image to guarantee text readability for the overlaid UI. Use expo-linear-gradient."
   ]
 }

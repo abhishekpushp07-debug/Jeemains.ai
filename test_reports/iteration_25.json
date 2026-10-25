@@ -1,0 +1,49 @@
+{
+  "summary": "Retest of the iteration 24 findings. Both fixes are verified. (1) HIGH, duels.winner() for seated games is now score-based. 1 correct vs 19: winner is the opponent, won=false, no bonus. All skips is now a loss, not a tie. 4 correct is a loss with no bonus. 5 correct with a 5-4 lead is a win with the +50 bonus, wins+1 and won=true. 10 correct is a win paying 185 XP / 70 coins. Forfeit is a loss. A 5-5 tie gives winner='tie', tie=true and no bonus. (2) MINOR, the opponent's score is monotonic. API series: the opponent held at 5 while the student went from 5 to 29, then finished at 17. UI series at 360x800: 2,2,3,3,3,4,4,4,4,5,5,6, with no drop. UI at 360x800 (PLAY, seated opponent): 1 correct vs Ishita M. 23 shows 'Good fight!' and 'Battle reward earned' +30 XP / +2 coins, list won=false and hub record 0W·0T·1L. 11 correct vs 10 shows 'You won!' and 'Victory! Champion's prize' +195 XP / +72 coins, list won=true, profile wins=1 and hub 1W·0T·0L. Result, reward and record agree in every case tested. Backend: the anti-farming suite passes 7/7. The new iter25 score/outcome suite passes 3/3. The regression suites (iter22 bot rewards, rf_duels, rf_shop_bot) pass 18/18 after fixing one outdated assertion in test_zero_score_is_not_a_win, which still expected tie=True for all-skip.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "human-vs-human duels (known, left as-is per E1)", "issue": "A 3-2 human win still shows 'You won!' and counts as a W, but pays no bonus and leaves profile.wins unchanged (correct < 5). The hub PLAY subtitle 'winner takes the coins' is also not true for wins with fewer than 5 correct."},
+      {"endpoint": "duels.simulate_bot (realism, design note)", "issue": "When the student finishes all cards, n jumps to total, so the opponent's final score jumps in one step (6 -> 10 = me-1 in the UI run, 5 -> 17 in the API run). It never goes down. Also, whenever the student has 5 or more correct and the opponent's natural score is at least the student's, the game always ends with the opponent exactly one behind (or level, a tie, if it was held at the student's score). Over many games, 'always lose by 1' may look scripted. Consider randomly ending 1-3 behind (still below the student). Reference: duels.py:207-209"}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rf_iter23_anti_farming.py",
+    "/app/backend/tests/test_rf_iter25_score_outcome.py",
+    "/app/backend/tests/test_rf_iter22_bot_rewards.py",
+    "/app/test_reports/pytest/iter25_anti_farming.xml",
+    "/app/test_reports/pytest/iter25_regression.xml",
+    "/app/test_reports/pytest/iter25_score_outcome.xml",
+    "/app/.screenshots/iter25_result.jpeg",
+    "/app/.screenshots/iter25_hub.jpeg",
+    "/app/.screenshots/iter25_win_play.jpeg",
+    "/app/.screenshots/iter25_win_result.jpeg"
+  ],
+  "action_items": [
+    "Optional: update the duels.py:199 docstring ('AI Rival: clearly labelled ... always stays below the student's score'). It is now inaccurate: the opponent is not labelled as AI and plays its natural score when the student has fewer than 5 correct.",
+    "Optional (product decision, already known): human-vs-human wins with fewer than 5 correct show 'You won!' / W with no bonus, and the PLAY subtitle says 'winner takes the coins'.",
+    "Optional realism: vary the final margin (for example 1-3 behind) instead of always me-1 when the student has 5 or more correct."
+  ],
+  "critical_code_review_comments": [
+    "duels.py:183-185: the seated winner() is correct (forfeit -> opponent wins, otherwise higher score wins, equal -> tie, no ms tie-break). This is consistent with award(), which pays the bonus only when won and correct >= 5. A seated win always needs correct >= 5 in practice, because the opponent's natural score below 5 is near 16-24 by the end.",
+    "duels.py:206-209: the score is monotonic because natural = max(bot.score, ...) and the clamp branch never goes below bot.score.",
+    "131 old TEST- duel docs remain in rf_duels from earlier iterations' suites. They don't affect anything, but should be cleaned up some time."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_rf_iter22_bot_rewards.py (line 83: all-skip is now asserted as won=False and tie=False instead of tie=True)",
+    "/app/backend/tests/test_rf_iter25_score_outcome.py (new: hold-then-overtake win and monotonic check, 5 correct while behind -> loss or tie, forfeit -> loss)",
+    "/app/backend/tests/_iter25_key_watcher.py, /app/backend/tests/_iter25_cleanup.py (UI probe helpers, not collected by pytest)"
+  ],
+  "success_rate": {"backend": "100% (anti-farming 7/7, iter25 3/3, regression 18/18 after the test fix)", "frontend": "100% (loss path and win path: result screen, reward panel and hub record consistent at 360x800)"},
+  "seed_data_creation": "None. TEST- users were cleaned up by fixtures. The UI ran as 9000000001 with X-RF-User rewritten to TEST-ui- uids via page.route. Those duel/profile/award docs were deleted. The pilot profile now shows duels 53 / wins 1. It was not touched by this run, so the change from 51 happened between iterations.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "pytest.ini forces -n 2. Use -n 1 or -n 0 for the serial random-queue suites, not -p no:xdist. The browser sandbox has no pymongo. To answer correctly in the UI, run tests/_iter25_key_watcher.py detached (setsid nohup ... &), which dumps answer keys for TEST-ui duels to /tmp/iter25_keys.json, then read that file in the playwright script. Then run tests/_iter25_cleanup.py.",
+  "rca_of_issue": "The iteration 24 HIGH bug (winner() ignored the opponent's score) is fixed at duels.py:183-185. The non-monotonic clamp is fixed at duels.py:206-209 (hold while the opponent is ahead, otherwise max(bot.score, me-1))."
+}

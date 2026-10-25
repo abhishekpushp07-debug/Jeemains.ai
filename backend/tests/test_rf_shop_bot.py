@@ -85,7 +85,7 @@ class TestBotDuel:
         print("final my", my, "winner", g["winner"], "reward", g["reward"])
         if my > 0:
             assert g["winner"] == uid
-            assert g["reward"]["coins"] >= 1  # AI-rival wins pay a small practice reward (anti-farming)
+            assert g["reward"]["coins"] >= my * 2 + 50  # iter22: seated-opponent wins pay like a normal duel (+50 win bonus)
         b = next(p for p in g["players"] if p["bot"])
         assert b["score"] < my or my == 0
 

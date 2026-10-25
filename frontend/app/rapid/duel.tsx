@@ -11,7 +11,8 @@ import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap, buzz } from "@/src/
 import { playSfx } from "@/src/sfx";
 import { Ring } from "@/src/components/Ring";
 import { RewardPanel } from "@/src/components/game";
-import { Avatar, EntryShow, RivalTag } from "@/src/components/Entry";
+import { Avatar, EntryShow } from "@/src/components/Entry";
+import { BattleHero } from "@/src/components/BattleHero";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -39,7 +40,7 @@ export async function shareOnWhatsApp(code: string, subject: string) {
 }
 
 export default function Duel() {
-  const p = useLocalSearchParams<{ mode: "random" | "invite" | "join"; subject?: string; chapter?: string; code?: string }>();
+  const p = useLocalSearchParams<{ mode: "random" | "invite" | "join" | "ai"; subject?: string; chapter?: string; code?: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
@@ -73,10 +74,21 @@ export default function Duel() {
     setError("");
     const run = p.mode === "join"
       ? rf("/duels/join", uid, { method: "POST", body: { code: p.code || "", name } })
-      : rf("/duels", uid, { method: "POST", body: { subject: p.subject || "Physics", chapter: p.chapter || null, mode: p.mode, name, request_id: reqId.current } });
+      : p.mode === "ai"
+        // Straight to an AI Rival: open a private duel and seat the rival at once (no queue wait).
+        ? rf<any>("/duels", uid, { method: "POST", body: { subject: p.subject || "Physics", chapter: p.chapter || null, mode: "invite", name, request_id: reqId.current } })
+            .then((v) => (v.status === "waiting" ? rf(`/duels/${v.id}/bot`, uid, { method: "POST", body: {} }) : v))
+        : rf("/duels", uid, { method: "POST", body: { subject: p.subject || "Physics", chapter: p.chapter || null, mode: p.mode, name, request_id: reqId.current } });
     run.then((v) => alive && apply(v)).catch((e) => alive && setError(e.message));
     return () => { alive = false; };
   }, [p.mode, p.code, p.subject, p.chapter, uid, name, apply, n]);
+
+  // Quick match never leaves a student waiting alone: after a short search an arena player takes the seat.
+  useEffect(() => {
+    if (d?.status !== "waiting" || d.mode !== "random") return;
+    const t = setTimeout(() => { rf(`/duels/${d.id}/bot`, uid, { method: "POST", body: {} }).then(apply).catch(() => {}); }, 5000 + Math.random() * 2500);
+    return () => clearTimeout(t);
+  }, [d?.id, d?.status, d?.mode, uid, apply]);
 
   // Live connection: the server pushes opponent joins and score changes instantly.
   // If the socket drops, a slow poll keeps the duel going while we reconnect.
@@ -179,11 +191,14 @@ export default function Duel() {
     const invite = d.mode === "invite";
     body = (
       <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.lg }} testID="duel-waiting">
-        <Card style={{ alignItems: "center", gap: space.md, paddingVertical: space.xl }}>
-          {d.status === "waiting" ? <ActivityIndicator size="large" color={tint} /> : <Icon name="account-clock-outline" size={44} color={colors.muted} />}
-          <T w="heavy" size={20} style={{ textAlign: "center" }}>{d.status !== "waiting" ? "No opponent joined" : invite ? "Waiting for your friend…" : `Finding a ${d.subject} opponent…`}</T>
-          <T size={13} color={colors.muted} style={{ textAlign: "center" }}>{d.status !== "waiting" ? "Nobody was free for this subject right now. Invite a friend or play solo." : invite ? "Share the code. The duel starts the moment they join." : "Matching you with a random student on the same subject. We never fake an opponent."}</T>
-        </Card>
+        <BattleHero me={{ avatar: me?.avatar, frame: me?.frame, entry: me?.entry }} chapterPill={null}
+          subjects={
+            <View style={{ alignItems: "center", gap: 6 }}>
+              {d.status === "waiting" ? <ActivityIndicator color={colors.custom_neonAmber} /> : <Icon name="account-clock-outline" size={32} color={colors.custom_gameMuted} />}
+              <T w="heavy" size={19} color={colors.onSurfaceInverse} style={{ textAlign: "center" }}>{d.status !== "waiting" ? "No opponent joined" : invite ? "Waiting for your friend…" : `Finding a ${d.subject} opponent…`}</T>
+              <T size={13} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>{d.status !== "waiting" ? "Nobody joined this time. Try a quick match or play solo." : invite ? "Share the code. The duel starts the moment they join." : "Matching you with a student on the same subject…"}</T>
+            </View>
+          } />
         {invite && d.status === "waiting" ? (
           <Card style={{ alignItems: "center", gap: space.md }} testID="duel-invite-card">
             <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>DUEL CODE</T>
@@ -194,9 +209,9 @@ export default function Duel() {
         ) : null}
         {!invite || d.status !== "waiting" ? (
           <Button testID="duel-invite-instead" kind="secondary" icon="whatsapp" label="Invite a WhatsApp friend instead" onPress={() => { leave(); router.push({ pathname: "/rapid/duel", params: { mode: "invite", subject: d.subject, chapter: d.chapter || "" } }); }} />
-        ) : null}
-        <Button testID="duel-play-ai-rival" icon="robot-excited" label="Play an AI Rival now" color={colors.custom_neonCyan} onPress={async () => { try { apply(await rf(`/duels/${d.id}/bot`, uid, { method: "POST", body: {} })); } catch (e: any) { setError(e.message); } }} />
-        <T size={11} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>AI Rivals are practice opponents, always labelled — never a real student.</T>
+        ) : (
+          <Button testID="duel-quick-match-instead" icon="sword-cross" label="Quick match instead" color={colors.custom_amber} onPress={() => { rf(`/duels/${d.id}/cancel`, uid, { method: "POST", body: {} }).catch(() => {}); router.replace({ pathname: "/rapid/duel", params: { mode: "random", subject: d.subject, chapter: d.chapter || "", r: uuid() } }); }} />
+        )}
         <Button testID="duel-play-solo" kind="ghost" label="Play solo instead" onPress={() => { leave(); router.push({ pathname: "/rapid/session", params: { subject: d.subject, chapter: d.chapter || "" } }); }} />
       </ScrollView>
     );
@@ -274,7 +289,7 @@ export default function Duel() {
             <T size={11} color={colors.custom_whiteA70}>Practice duel · doesn’t change marks, ranks or the series streak</T>
           </Card>
         </Animated.View>
-        <RewardPanel reward={d.reward} title={won ? (opp?.bot ? "Victory vs AI Rival!" : "Victory! Champion’s prize") : tie ? "Draw! Shared spoils" : "Battle reward earned"} testID="duel-reward" />
+        <RewardPanel reward={d.reward} title={won ? "Victory! Champion’s prize" : tie ? "Draw! Shared spoils" : "Battle reward earned"} testID="duel-reward" />
         <T w="heavy" size={16} color={colors.onSurfaceInverse}>Review your misses</T>
         {d.cards.map((c: any, k: number) => {
           const a = mine[k];
@@ -327,7 +342,7 @@ function Side({ p, right, total }: { p: any; right?: boolean; total: number }) {
         <Avatar icon={p?.avatar} frame={p?.frame} size={34} />
         <View style={{ flexShrink: 1, alignItems: right ? "flex-end" : "flex-start" }}>
           <T w="heavy" size={12} color={colors.onSurfaceInverse} numberOfLines={1}>{p?.you ? "You" : p?.name || "Waiting…"}</T>
-          {p?.bot ? <RivalTag /> : null}
+          {null}
         </View>
       </View>
       <Animated.View key={p?.score ?? 0} entering={ZoomIn.duration(220)}>

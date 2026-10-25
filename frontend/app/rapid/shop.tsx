@@ -110,8 +110,8 @@ export default function Shop() {
                   <T w="heavy" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{it.title}</T>
                   <T size={11} color={colors.custom_gameMuted} numberOfLines={2} style={{ textAlign: "center", minHeight: 28 }}>{it.body}</T>
                   <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-                    <Icon name="hexagon-multiple" size={14} color={colors.custom_neonAmber} />
-                    <T w="heavy" size={15} color={colors.custom_neonAmber}>{it.price}</T>
+                    {it.price ? <Icon name="hexagon-multiple" size={14} color={colors.custom_neonAmber} /> : null}
+                    <T w="heavy" size={15} color={it.price ? colors.custom_neonAmber : colors.custom_neonGreen}>{it.price || "FREE"}</T>
                   </View>
                   {owned && it.slot !== "powerup" ? (
                     <Button testID={"shop-equip-" + it.id} kind={equipped ? "secondary" : "primary"} label={equipped ? "Equipped ✓" : "Equip"} color={colors.custom_amber} busy={busy === it.id} style={{ alignSelf: "stretch", minHeight: 40 }}

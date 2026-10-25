@@ -7,6 +7,7 @@ SHOP = [
     {"id": "frame_neon", "slot": "frame", "title": "Neon Pulse", "body": "Cyan neon ring that pulses in duels.", "price": 400, "icon": "circle-double", "color": "cyan"},
     {"id": "frame_fire", "slot": "frame", "title": "Inferno Frame", "body": "Blazing orange fire ring.", "price": 650, "icon": "fire-circle", "color": "fire"},
     {"id": "frame_diamond", "slot": "frame", "title": "Diamond Crown", "body": "The rarest frame in the arena.", "price": 1200, "icon": "diamond-stone", "color": "diamond"},
+    {"id": "entry_spark", "slot": "entry", "title": "Neon Spark", "body": "Free for every student. Burst in with neon sparks.", "price": 0, "icon": "star-four-points"},
     {"id": "entry_rocket", "slot": "entry", "title": "Rocket Launch", "body": "Blast into the duel on a rocket trail.", "price": 300, "icon": "rocket-launch"},
     {"id": "entry_lightning", "slot": "entry", "title": "Thunder Strike", "body": "Arrive with a lightning storm.", "price": 500, "icon": "lightning-bolt"},
     {"id": "entry_supercar", "slot": "entry", "title": "Supercar Drift", "body": "Drift in with speed lines and smoke.", "price": 800, "icon": "car-sports"},
@@ -22,6 +23,18 @@ SHOP = [
     {"id": "theme_gold", "slot": "theme", "title": "Royal Gold", "body": "Champion’s gold arena.", "price": 900, "icon": "trophy", "colors": ["#3A2A05", "#070B18"]},
 ]
 SHOP_BY_ID = {i["id"]: i for i in SHOP}
+FREE_ENTRY = "entry_spark"  # everyone owns it; auto-equipped until the student picks another
+
+
+def owned_of(p: dict) -> list:
+    return list(dict.fromkeys([FREE_ENTRY, *(p.get("owned") or [])]))
+
+
+def equipped_of(p: dict) -> dict:
+    eq = dict(p.get("equipped") or {})
+    if not eq.get("entry"):
+        eq["entry"] = FREE_ENTRY
+    return eq
 # 3D game-style hero avatars: 4 free starters, the rest bought with coins by rarity.
 _AV = [
     ("av_topper", "Neon Topper", "common", 0, "a cheerful Indian teen boy student with headphones and a glowing cyan hoodie"),

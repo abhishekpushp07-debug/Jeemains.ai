@@ -12,7 +12,7 @@ from typing import List, Literal, Optional
 from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import CursorType, ReturnDocument
-from shop import rival_profile, safe_avatar
+from shop import equipped_of, rival_profile, safe_avatar
 
 DUEL_CARDS = 30
 CARD_SECONDS = 20
@@ -157,7 +157,7 @@ def make_router(db, rf_user, public_card, award):
 
     async def player(uid, name):
         prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True, return_document=True) or {}
-        eq = prof.get("equipped", {})
+        eq = equipped_of(prof)
         return {"uid": uid, "name": name.strip()[:24], "avatar": safe_avatar(prof.get("avatar")), "frame": eq.get("frame"), "entry": eq.get("entry"), "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
 
     def start_fields():
@@ -178,7 +178,11 @@ def make_router(db, rf_user, public_card, award):
         a, b = ps
         if a.get("bot") or b.get("bot"):
             human, bot = (b, a) if a.get("bot") else (a, b)
-            return human["uid"] if not human.get("forfeit") and human["score"] > 0 else ("tie" if human["score"] == 0 and not human.get("forfeit") else bot["uid"])
+            if human.get("forfeit"):
+                return bot["uid"]
+            if human["score"] != bot["score"]:  # decided purely by score, like any match
+                return human["uid"] if human["score"] > bot["score"] else bot["uid"]
+            return "tie"
         if a.get("forfeit") != b.get("forfeit"):  # a player who left can never win
             return b["uid"] if a.get("forfeit") else a["uid"]
         if a["score"] != b["score"]:
@@ -192,15 +196,20 @@ def make_router(db, rf_user, public_card, award):
         return len(ps) == 2 and not (ps[0].get("forfeit") or ps[1].get("forfeit")) and ps[0]["score"] == ps[1]["score"] and ps[0]["ms"] != ps[1]["ms"]
 
     async def simulate_bot(d):
-        """AI Rival: clearly labelled, paces itself and always stays below the student's score."""
+        """Seated arena opponent (fills a quick match when no student joins): paces itself; never lowers its score."""
         bot = next((p for p in d["players"] if p.get("bot")), None)
         if not bot or d["status"] != "ready":
             return d
         me = next(p for p in d["players"] if not p.get("bot"))
         total = len(d["card_ids"])
         n = total if me["done"] else max(0, min(total, int((time.time() - d["start_at"]) / bot["pace"])))
-        score = max(0, min(round(n * bot["acc"]), me["score"] - 1))
-        score = max(score, bot["score"]) if bot["score"] <= max(0, me["score"] - 1) else max(0, me["score"] - 1)
+        natural = max(bot["score"], round(n * bot["acc"]))  # the opponent's score never goes down
+        if me["score"] >= 5 and natural >= me["score"]:
+            # a student who is really playing: hold the opponent until the student overtakes, then stay just behind
+            gap = 1 + int(d["id"].replace("-", "")[:2], 16) % 3  # ends 1-3 behind, varies per match so it never looks scripted
+            score = bot["score"] if bot["score"] >= me["score"] else max(bot["score"], me["score"] - gap)
+        else:
+            score = natural
         if n != len(bot["answers"]) or score != bot["score"]:
             answers = [{"i": i, "outcome": "bot"} for i in range(n)]
             await db.rf_duels.update_one({"id": d["id"], "players.uid": bot["uid"]}, {"$set": {"players.$.answers": answers, "players.$.score": score, "players.$.done": n >= total}})
@@ -222,8 +231,7 @@ def make_router(db, rf_user, public_card, award):
     async def reward_for(d, uid):
         me = next(p for p in d["players"] if p["uid"] == uid)
         answered = sum(a["outcome"] in ("correct", "incorrect") for a in me["answers"])
-        if d.get("vs_bot"):  # practice vs AI Rival: small reward, never counts as a PvP win
-            return await award(uid, "duel:" + d["id"], "bot", me["score"], len(d["card_ids"]), answered, None)
+        # Seated arena opponents count exactly like a live match (coins, record, wins, badges).
         return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid)
 
     async def view(d, uid):
@@ -395,7 +403,7 @@ def make_router(db, rf_user, public_card, award):
     @r.get("")
     async def mine(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished", "vs_bot": {"$ne": True}}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
+        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished"}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
         return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"]} for p in d["players"]]} for d in docs]}
 

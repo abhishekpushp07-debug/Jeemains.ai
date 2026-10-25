@@ -1,0 +1,37 @@
+{
+  "summary": "Retest of the iteration 23 findings. (1) The effort rule in gamify.award works. 1 correct + 29 skips pays 30 XP / 2 coins. 1 correct + 9 wrong pays 30 / 2. 4 correct pays 60 / 8 with no bonus. 5 correct pays 110 / 60 with wins+1. 10 correct pays 185 / 70. All skips pays 0 XP, 0 coins, played=False, and duels/wins are unchanged. (2) The seated opponent's score is correct: below 5 it plays its natural score (for example 19), and at 5 or more it stays at student-1. But the outcome still does NOT match. winner() (duels.py:181) still makes the student the winner whenever their score is above 0 and never compares against the opponent. 1 correct vs Tara N. 19 still shows 'You won!' / 'Victory! Champion's prize' (+12 XP, +1 coin) in the UI, GET /duels returns won=true, and the hub record shows 1W, while profile.wins stays 0. All skips gives 'tie' even though the opponent scored above 0. (3) New: the opponent's score visibly drops when the student reaches 5 correct (9 -> 4). (4) The hub '?' silhouette is fixed: a faint av_thunder outline is visible behind the red '?' at 360x800. Backend: the regression suites pass 23/23. Four of them failed only in the parallel run because two xdist workers' TEST students got matched with each other; they pass when run serially. The updated anti-farming suite passes 2/7, and the 5 failures are real bugs.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "duels.winner() for seated (bot) games -> GET /api/rf/duels/{id} winner, GET /api/rf/duels won flag", "issue": "winner() still returns the student whenever human.score > 0 and never compares it to the bot's score. Verified: 1 correct + 29 skips vs a bot on 19 gives winner == you and won=true in GET /duels. 1 correct + 9 wrong and 4 correct are the same. All skips (0 vs natural > 0) gives 'tie' instead of a loss. award() correctly pays no win bonus, so the reward and the outcome disagree. Reference: duels.py:179-181", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "duels.simulate_bot", "issue": "The opponent's score is not monotonic when the student crosses the 5-correct threshold. While the student is below 5 the bot runs its natural score (it reached 9 after about 60 s). When the student's 5th correct lands, the bot is clamped to me-1 = 4, so the live opponent score visibly drops from 9 to 4. That makes it obvious the opponent is not a real player. Reference: duels.py:203-207"},
+      {"endpoint": "human-vs-human duels", "issue": "The same mismatch exists in human duels. A 3-2 human win has d.winner = you (shows 'You won!' and counts as a W in the record), but award() pays no bonus and leaves wins unchanged because correct < 5. This needs a product decision, but the UI and record should match the reward."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "PLAY -> seated opponent -> 1 correct + rest skipped", "issue": "The result screen shows 'You won!' over a '1 · 19 Tara N.' scoreline, with 'Victory! Champion's prize' paying +12 XP / +1 coin, and the hub record shows 1W · 0T · 0L. profile.wins = 0. The root cause is backend winner() (see critical). The frontend uses d.winner === d.you (app/rapid/duel.tsx:175,279) and GET /duels won (app/rapid.tsx:65).", "affected_testIDs": ["duel-outcome", "duel-reward", "rf-duel-record"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter23_anti_farming.py", "/app/test_reports/pytest/iter24_anti_farming.xml", "/app/test_reports/pytest/iter24_regression.xml", "/app/.screenshots/iter24_result.jpeg", "/app/.screenshots/iter24_hero.jpeg"],
+  "action_items": [
+    "duels.py:181: for seated games, decide the winner by score: the student forfeits -> bot wins; human.score > bot.score -> human wins; equal -> tie; otherwise bot wins. simulate_bot already keeps the bot at me-1 when me >= 5, so this gives exactly the intended rule: at 5 or more the student wins, below 5 the student usually loses, and all-skip loses.",
+    "duels.py:203-207: avoid the visible score drop when the student reaches 5. For example, freeze the bot's score (never lower it) until the student overtakes it, and only cap new increments at me-1. Alternatively, keep the bot paced below the student from the start, but limited to the natural score.",
+    "Optional (product decision): human-vs-human wins with fewer than 5 correct still show 'You won!' and count as a W in the record, with no bonus. Either mark these games 'unrated' in the list and result copy, or accept the mismatch."
+  ],
+  "critical_code_review_comments": [
+    "duels.py:195 docstring still says 'AI Rival: clearly labelled', which contradicts the requirement that the opponent should never feel like an AI.",
+    "Parallel test runs (-n 6) of the random-mode suites can match two TEST students with each other, because random matchmaking is shared. Run test_rf_iter22_bot_rewards.py and test_rf_iter21_random_autoseat.py with -n 1, or give each test a unique chapter."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter23_anti_farming.py (rewritten for the correct>=5 rule plus outcome-consistency and monotonic probes)"],
+  "success_rate": {"backend": "Regression 23/23 (when run serially). Anti-farming suite 2/7: the 5 failures are real bugs (4 from winner(), 1 non-monotonic bot score)", "frontend": "Silhouette fixed (1/1). Result screen/record consistency failed (0/1)"},
+  "seed_data_creation": "None. TEST- users were created and cleaned up. The UI test logged in as 9000000001 but rewrote X-RF-User to a TEST-ui- uid through page.route, so the pilot profile was not touched (duels 51, wins 1). The TEST-ui duel/profile/award docs were deleted afterwards.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "UI trick: log in at /entry (click entry-phone-input, keyboard.type 9000000001, Enter), then page.route('**/api/rf/**') to override the x-rf-user header with a TEST uid. Capture the duel id from the POST /api/rf/duels response and answer through page.request (choice 0 until the first correct, then skip). The answer response reveals the correct answer. Run the random-mode suites with -n 1 to avoid cross-worker matchmaking.",
+  "rca_of_issue": "winner() for vs_bot games has the form `human if score > 0 else tie/bot`. It was written for the old 'bot always stays below the student' behaviour. Now that simulate_bot lets the bot play its natural score when the student has fewer than 5, winner() has to compare scores. Repro: PLAY, get seated, answer 1 correct and skip the rest. GET /duels/{id} returns winner == you with players 1 vs 19, and the UI shows 'You won!'."
+}

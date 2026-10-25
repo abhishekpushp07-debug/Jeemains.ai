@@ -44,6 +44,7 @@ export function Avatar({ icon, frame, size = 56, testID }: { icon?: string | nul
 
 type Motion = "radial" | "rise" | "fall" | "swirlIn" | "swirlOut" | "streak" | "spiral";
 export const EFFECTS: Record<string, { icon: string; c1: string; c2: string; motion: Motion }> = {
+  entry_spark: { icon: "star-four-points", c1: colors.custom_neonCyan, c2: colors.custom_neonMagenta, motion: "radial" },
   entry_rocket: { icon: "rocket-launch", c1: colors.custom_examBitsat, c2: colors.custom_neonAmber, motion: "rise" },
   entry_lightning: { icon: "lightning-bolt", c1: colors.custom_neonCyan, c2: colors.onSurfaceInverse, motion: "radial" },
   entry_supercar: { icon: "car-sports", c1: colors.custom_examBitsat, c2: colors.custom_neonRed, motion: "streak" },
@@ -161,7 +162,7 @@ export function EntryShow({ me, opp, onDone, testID = "entry-show" }: { me?: P; 
     <View style={{ alignItems: "center", gap: 8, width: W * 0.42 }}>
       <Avatar icon={p?.avatar} frame={p?.frame} size={size} />
       <T w="heavy" size={17} color={colors.onSurfaceInverse} numberOfLines={1}>{mine ? "You" : p?.name || "Rival"}</T>
-      {p?.bot ? <RivalTag /> : null}
+      {null}
       {p?.entry ? <T w="bold" size={11} color={EFFECTS[p.entry]?.c1 || colors.custom_gameMuted} numberOfLines={1}>{EFFECTS[p.entry] ? p.entry.replace("entry_", "").toUpperCase() + " ENTRY" : ""}</T> : null}
     </View>
   );
@@ -189,14 +190,5 @@ export function EntryShow({ me, opp, onDone, testID = "entry-show" }: { me?: P; 
       </View>
       <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: colors.onSurfaceInverse }, flashS]} />
     </Animated.View>
-  );
-}
-
-export function RivalTag() {
-  return (
-    <View testID="duel-ai-rival-tag" style={{ flexDirection: "row", alignItems: "center", gap: 3, paddingHorizontal: 6, height: 20, borderRadius: 10, backgroundColor: colors.custom_neonCyan }}>
-      <Icon name="robot" size={11} color={colors.custom_gameBg} />
-      <T w="heavy" size={11} color={colors.custom_gameBg}>AI RIVAL</T>
-    </View>
   );
 }
