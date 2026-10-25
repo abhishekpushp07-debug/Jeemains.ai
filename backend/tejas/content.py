@@ -389,11 +389,12 @@ def question_issues(q, exam):
         issues.append("Subject is required")
     if not q.get("solution", "").strip():
         issues.append("Matched solution is required")
-    if not q.get("answer", "").strip():
+    keyless = q.get('disposition') in ('dropped', 'bonus_all')
+    if not q.get("answer", "").strip() and not keyless:
         issues.append("Verified answer is required")
-    elif q.get("type") == "mcq" and q["answer"] not in q.get("options", {}):
+    elif not keyless and q.get("type") == "mcq" and q["answer"] not in q.get("options", {}):
         issues.append("Answer must identify an existing option")
-    elif q.get("type") == "integer":
+    elif not keyless and q.get("type") == "integer":
         try:
             normalize_answer(q["answer"], "integer")
         except ValueError:

@@ -1,6 +1,6 @@
 """Source-aware, review-only PDF segmentation, deterministic scoring and complete reports."""
 
-import re, uuid
+import re, uuid, math
 import fitz
 import numpy as np
 
@@ -266,11 +266,18 @@ def _render_crop_png(data, ref, scale=2):
     rect = fitz.Rect(ref["rect"])
     if rect.is_empty or not doc[p].rect.contains(rect):
         raise ValueError("Source region is outside the page.")
-    return (
-        doc[p]
-        .get_pixmap(matrix=fitz.Matrix(scale, scale), clip=rect, alpha=False)
-        .tobytes("png")
-    )
+    pix = doc[p].get_pixmap(matrix=fitz.Matrix(scale, scale), clip=rect, alpha=False)
+    if ref.get('omit_rects'):
+        pixels = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n).copy()
+        for coordinates in ref['omit_rects']:
+            omitted = fitz.Rect(coordinates)
+            if omitted.is_empty or not rect.contains(omitted):
+                raise ValueError('Omitted source region must be within its crop.')
+            left, top = max(0, math.floor(omitted.x0 * scale) - pix.x), max(0, math.floor(omitted.y0 * scale) - pix.y)
+            right, bottom = math.ceil(omitted.x1 * scale) - pix.x, math.ceil(omitted.y1 * scale) - pix.y
+            pixels[top:bottom, left:right] = 255
+        pix = fitz.Pixmap(fitz.csRGB, pix.width, pix.height, pixels.tobytes(), False)
+    return pix.tobytes('png')
 
 
 from tejas.cache import ByteCache
@@ -281,7 +288,7 @@ _crop_cache = ByteCache(32 * 1024 * 1024)
 def crop_png(data, ref, scale=2):
     import hashlib
 
-    key = (hashlib.sha256(data).digest(), ref["page"], tuple(ref["rect"]), scale)
+    key = (hashlib.sha256(data).digest(), ref["page"], tuple(ref["rect"]), scale, tuple(tuple(r) for r in ref.get('omit_rects', [])))
     cached = _crop_cache.get(key)
     if cached is not None:
         return cached

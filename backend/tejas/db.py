@@ -160,5 +160,6 @@ async def indexes():
     await files.create_index([("set_id", 1), ("created_at", -1)])
 
     await attempts.create_index([("status", 1), ("grading_status", 1), ("submitted_at", 1)])
+    await sets.create_index([('test_kind', 1), ('status', 1), ('pyq_date', -1), ('pyq_shift', 1)], name='pyq_date_catalogue')
     await jobs.create_index([('kind', 1), ('status', 1), ('created_at', 1)], name='job_lane_fifo')
     await jobs.create_index([("kind", 1), ("status", 1), ("next_run_at", 1), ("created_at", 1)])

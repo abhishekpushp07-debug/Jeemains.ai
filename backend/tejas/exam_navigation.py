@@ -18,7 +18,7 @@ CHAPTER_FILTER = {'$or': [
 MOCK_FILTER = {'$and': [
     {'$or': [{'chapter_book_id': {'$exists': False}}, {'chapter_book_id': None}, {'chapter_book_id': ''}]},
     {'$or': [{'test_kind': 'mock'}, {'full_length': True}]},
-    {'test_kind': {'$ne': 'chapter'}},
+    {'test_kind': {'$nin': ['chapter', 'pyq']}},
 ]}
 
 
@@ -29,6 +29,8 @@ def exam_name(slug):
 
 
 def classify_set(s):
+    if s.get('test_kind') == 'pyq':
+        return 'pyq'
     if s.get('chapter_book_id') or s.get('test_kind') == 'chapter':
         return 'chapter'
     if s.get('test_kind') == 'mock' or s.get('full_length') is True:
@@ -113,7 +115,7 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters',
 
 
 @router.get('/{slug}/history', response_model=NavigationHistory)
-async def history(slug: str, kind: Literal['all', 'mock', 'chapter', 'practice'] = 'all',
+async def history(slug: str, kind: Literal['all', 'mock', 'pyq', 'chapter', 'practice'] = 'all',
                   days: Literal['all', '7', '30', '90'] = 'all',
                   page: int = Query(1, ge=1, le=10000), user=Depends(current)):
     from .attempts import finalize
@@ -134,15 +136,11 @@ async def history(slug: str, kind: Literal['all', 'mock', 'chapter', 'practice']
             {'$limit': 1},
         ], 'as': '_sources'}},
         {'$set': {'_source': {'$arrayElemAt': ['$_sources', 0]}}},
-        {'$set': {'test_kind': {'$ifNull': ['$test_kind', {'$cond': [
-            {'$or': [
-                {'$ne': [{'$ifNull': ['$_source.chapter_book_id', '']}, '']},
-                {'$eq': ['$_source.test_kind', 'chapter']},
-            ]}, 'chapter', {'$cond': [
-                {'$or': [{'$eq': ['$_source.test_kind', 'mock']}, {'$eq': ['$_source.full_length', True]}]},
-                'mock', 'practice',
-            ]},
-        ]}]}}},
+        {'$set': {'test_kind': {'$ifNull': ['$test_kind', {'$switch': {'branches': [
+            {'case': {'$eq': ['$_source.test_kind', 'pyq']}, 'then': 'pyq'},
+            {'case': {'$or': [{'$ne': [{'$ifNull': ['$_source.chapter_book_id', '']}, '']}, {'$eq': ['$_source.test_kind', 'chapter']}]}, 'then': 'chapter'},
+            {'case': {'$or': [{'$eq': ['$_source.test_kind', 'mock']}, {'$eq': ['$_source.full_length', True]}]}, 'then': 'mock'},
+        ], 'default': 'practice'}}]}}},
     ]
     if kind != 'all':
         pipeline.append({'$match': {'test_kind': kind}})

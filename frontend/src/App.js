@@ -25,6 +25,8 @@ import './live-series.css';
 import './series-streak.css';
 import './exam-light.css';
 import './vibrant-ui.css';
+import './pyq.css';
+const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
 const ExamHub = lazy(() => import("./features/ExamHub"));
@@ -112,6 +114,8 @@ function Shell() {
             <Route path="/series/all-india-jee" element={<LiveSeries />} />
             <Route path="/exams" element={<Exams />} />
             <Route path="/exams/:examSlug" element={<Protected><ExamHub /></Protected>} />
+            <Route path="/exams/jee-main/pyq" element={<Protected><PyqCatalogue /></Protected>} />
+            <Route path="/exams/jee-main/mocks" element={<Navigate to="/exams/jee-main/pyq" replace />} />
             <Route path="/exams/:examSlug/mocks" element={<Protected><ExamSection kind="mocks" /></Protected>} />
             <Route path="/exams/:examSlug/chapters" element={<Protected><ExamSection kind="chapters" /></Protected>} />
             <Route path="/exams/:examSlug/results" element={<Protected><ExamHistory /></Protected>} />

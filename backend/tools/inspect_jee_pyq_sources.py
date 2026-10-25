@@ -1,3 +1,4 @@
+import argparse
 import concurrent.futures
 import hashlib
 import json
@@ -64,11 +65,14 @@ def inspect(item):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--all', action='store_true')
+    args = parser.parse_args()
     ROOT.mkdir(parents=True, exist_ok=True)
     items = inventory()
     (ROOT / 'inventory.json').write_text(json.dumps({'folder_url': FOLDER, 'files': items}, indent=2))
     print(json.dumps({'listed_pdf_count': len(items), 'files': items}), flush=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-        results = list(pool.map(inspect, [item for item in items if item['filename'] in SAMPLES]))
-    (ROOT / 'sample_results.json').write_text(json.dumps(results, indent=2))
+        results = list(pool.map(inspect, [item for item in items if args.all or item['filename'] in SAMPLES]))
+    (ROOT / ('all_results.json' if args.all else 'sample_results.json')).write_text(json.dumps(results, indent=2))
     print(json.dumps(results, indent=2), flush=True)

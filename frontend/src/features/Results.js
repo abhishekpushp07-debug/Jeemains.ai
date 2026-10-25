@@ -491,12 +491,12 @@ export default function Results() {
                 <div className="response-comparison">
                   <div>
                     <span>Your response</span>
-                    <strong>{q.response || "Unanswered"}</strong>
+                    <strong data-testid={'result-response-' + q.number}>{q.source_option_labels?.[q.response] || q.response || "Unanswered"}</strong>
                   </div>
                   <div>
                     <span>Accepted answer(s)</span>
                     <strong>
-                      {(q.accepted_answers || [q.answer]).join(", ")}
+                      {q.disposition === 'bonus_all' ? 'Full credit — source question withdrawn' : (q.accepted_answers || [q.answer]).map(value => q.source_option_labels?.[value] || value).join(", ")}
                     </strong>
                   </div>
                   <div>
@@ -510,12 +510,14 @@ export default function Results() {
                   )}
                 </div>
                 <section data-testid={'solution-content-'+q.number} aria-label={'Solution for question '+q.number}>
-                {(q.solution_kind==='answer_key_only'||q.solution||q.s_refs?.length||q.solution_accessible_text)&&<div className="matched-solution">
-                  <div className="solution-title"><FileIcon/><h3>{q.solution_kind==='answer_key_only'?'Supplied answer key':q.solution_kind==='ai_generated'?'AI-generated explanation':'Supplied solution'} · Q{q.solution_number??q.number}</h3><Badge>Matched to this frozen version</Badge></div>
+                {(q.solution_kind==='answer_key_only'||q.solution_kind==='supplied_key_only'||q.solution||q.s_refs?.length||q.solution_accessible_text)&&<div className="matched-solution">
+                  <div className="solution-title"><FileIcon/><h3>{q.solution_kind==='answer_key_only'||q.solution_kind==='supplied_key_only'?'Supplied answer key':q.solution_kind==='ai_generated'?'AI-generated explanation':'Supplied solution'} · Q{q.solution_number??q.number}</h3><Badge>Matched to this frozen version</Badge></div>
                   {q.solution_kind==='answer_key_only'&&<p className="import-fineprint" data-testid={'no-worked-solution-'+q.number}>{extras.ai[q.id]?.state==='ready'?'The source provides this key only. An AI generated step-by-step solution is shown below.':'The source provides this key only. No worked solution was supplied.'}</p>}
+                  {q.solution_kind==='supplied_key_only'&&<p className="import-fineprint" data-testid={'pyq-key-only-'+q.number}>The supplied PDF contains this answer or scoring note, but no worked explanation for this question.</p>}
+                  {q.source_warning&&<p className="import-fineprint" role="note" data-testid={'pyq-source-warning-'+q.number}>{q.source_warning}</p>}
                   <QuestionContent question={q} solution base={`/attempts/${id}/questions/${q.id}`} gradeVersion={scoreVersion}/>
                 </div>}
-                {(!['ai_generated','supplied_worked'].includes(q.solution_kind)||(!q.solution&&!q.s_refs?.length)||extras.ai[q.id]?.state==='ready')&&<AiSolution item={extras.ai[q.id]} number={q.number}/>}
+                {(!['ai_generated','supplied_worked','supplied_key_only'].includes(q.solution_kind)||(!q.solution&&!q.s_refs?.length)||extras.ai[q.id]?.state==='ready')&&<AiSolution item={extras.ai[q.id]} number={q.number}/>}
                 </section>
                 <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />
                 <div className="ledger-meta">

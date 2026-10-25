@@ -9,6 +9,9 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    'pyq.catalogue': ('authenticated_pyq_metadata_own_attempts_only', 'normal', 'read'),
+    'pyq_import.import_status': ('owner_only_pyq_import_status', 'normal', 'read'),
+    'pyq_import.import_step': ('owner_only_verified_insert_only_pyq_import', 'heavy', 'leased_resumable_content_append'),
     'attempt_status.status_attempt': ('attempt_owner_header_only', 'live', 'read_conditional_database_time_expiry'),
     'engineering.runtime_status': ('staff_bounded_process_metrics_no_identifiers', 'normal', 'read'),
     'server.ready': ('public_database_readiness_only', 'normal', 'read'),

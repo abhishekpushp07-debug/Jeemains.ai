@@ -27,7 +27,7 @@ export default function SetDetail() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
-  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? '/series/all-india-jee' : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):'/mocks') : '/home');
+  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? '/series/all-india-jee' : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
     setS(null); setError(''); setChecked(false); setConfirmed(false);
@@ -82,7 +82,7 @@ export default function SetDetail() {
           <div className="marks-rule" data-testid="set-marking-rule"><span>+{s.rules.correct} correct</span><span>{s.rules.wrong} incorrect</span><span>0 unanswered</span></div>
           <h3 data-testid="set-before-start-heading">A few things to know</h3>
           <ul data-testid="set-instructions-list">
-            <li>One correct option per question, or an integer entry where stated. Mark for review and return to any question.</li>
+            <li data-testid="set-response-format">{s.test_kind === 'pyq' ? 'Select one listed option, or enter an integer where stated. Source-marked multiple accepted answers and withdrawn questions retain their supplied scoring treatment.' : 'One correct option per question, or an integer entry where stated.'} Mark for review and return to any question.</li>
             {s.rules.numeric_rule&&<li>{s.rules.numeric_rule}</li>}
             <li>{minutes ? 'The timer keeps running during a disconnect. Only answers received before the deadline are scored.' : 'This is untimed practice. Come back to your saved attempt whenever you need.'}</li>
             <li>{s.series_id?'Live results and solutions are sealed until 11:59 PM IST. Archive practice results unlock after submission.':s.solution_kind==='answer_key_only'?'Submitting is final. Your score and supplied answer keys become available after grading. This book has no worked solutions.':'Submitting is final. Your result and matched solutions become available afterward.'}</li>

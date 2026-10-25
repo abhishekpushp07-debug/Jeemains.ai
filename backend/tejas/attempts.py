@@ -32,6 +32,8 @@ class Start(BaseModel):
 
 def delivered(q):
     p = public_question(q)
+    if q.get('source_option_labels'):
+        p['source_option_labels'] = q['source_option_labels']
     p["asset_count"] = len(q.get("q_refs", []))
     p.pop("q_refs", None)
     # Native extracted text can be inaccurate. Only reviewed source alt text is exposed in image mode.

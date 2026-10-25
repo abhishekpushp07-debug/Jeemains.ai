@@ -1,3 +1,13 @@
+# Current PYQ implementation — 2026-10-25 (pending isolated QA)
+pyq_delivery:
+  needs_retesting: true
+  scope: "30 full75 source-backed JEE Main PYQ papers, original dates/shifts, 2250keys checked. 31st Jan23 2025S1 missing48–50 excluded. Date catalogue/JEE-only Mock replacement/Start Resume Results AttemptAgain; supplied cropped explanations only, two key-only exceptions honestly disclosed."
+  source: "Source audit completed30 entries0edgeflags/2250keyagreements. All90subject-startsamples viewed. Apr7Q1 numerator corrected. Apr4 2026S2Q67 source vertical overlap fixed via precise crop-contained omit_rects preserving all diagram subscripts and removing neighboring answer; actual application PNGs viewed. No synthetic content/AI."
+  code: "pyq.py,pyq_import.py,resources/jee_pyq.json.gz+manifest; tools/build_jee_pyq_bundle.py; packs.seal source labels/provenance retention; tejas_core crop omission+cache identity; PyqCatalogue/Player/Results/SetDetail/navigation."
+  mandatory: "Use iso_harness_iter134 style all Motor handles rebound to dedicated DB, never protected environment changes/customerDBwrites/realownerlogin. No AI calls. Storage may be mapped to local original PDFs in tests, no live uploads. Real UI via isolated bridge at1920x800+390x844 with actual sourcePNG. Assert cleanup. Validate full bundle import all90records/replay/conflict/lease/roles, shape/scoring75+4/-1/0/180min, startUUID answer flows and frozen labels/warnings, private solution gate, retake oldattempt preserved, otherexams/chapter unaffected, catalogue restriction/expiry/private attempts."
+  status: "Implementation complete pending QA; no content imported into customer preview yet, no student reset or deployment. Earlier138 tests are not coverage for PYQ."
+
+
 # Backend hardening verified, release requested — 2026-10-24
 hardening138:
   status: "PASS28/28finalcatalogwindowmatrix; previous13773/73faultregression+71/71series unchangedpass.172isolatedcasesacrossfinalruns. Browserdesktop/mobileerror-order/timer/pendingdraft/receiptflowverified137;finalpublicsmoke138zerooverflow."

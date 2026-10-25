@@ -245,6 +245,7 @@ from .live_series import Assignment
 
 MODELS = {
     'live_series.assign': Assignment,
+    'pyq_import.import_step': EmptyPayload,
     'my_tests.save_paper': EmptyPayload,
     'my_tests.compare': CompareAttemptsPayload,
     'manual_solutions.request_solve': SolvePayload,

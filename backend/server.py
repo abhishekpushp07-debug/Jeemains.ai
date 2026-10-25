@@ -39,6 +39,8 @@ from tejas import (
     series_streak,
     jee_transfer,
     attempt_status,
+    pyq,
+    pyq_import,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -201,6 +203,8 @@ for module in [
     series_streak,
     jee_transfer,
     attempt_status,
+    pyq,
+    pyq_import,
 ]:
     app.include_router(module.router)
 

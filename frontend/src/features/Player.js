@@ -382,10 +382,10 @@ export default function Player() {
                         onChange={() => edit(q.id, { value: key })}
                         data-testid={"player-option-" + key}
                       />
-                      <span className="option-index">{key}</span>
+                      <span className="option-index" data-testid={'player-option-label-' + key}>{q.source_option_labels?.[key] || key}</span>
                       <div className="option-copy" data-testid={'player-option-math-' + key}>
                         {q.render_mode === 'source'
-                          ? `Option ${key} (as shown above)`
+                          ? `Option ${q.source_option_labels?.[key] || key} (as shown above)`
                           : <MathText text={value} />}
                       </div>
                       {current.value === key && (
