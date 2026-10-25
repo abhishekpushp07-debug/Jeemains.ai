@@ -123,7 +123,7 @@ section.good{background:${colors.custom_successSoft};border-color:${colors.succe
 section.warn{background:${colors.custom_warningSoft};border-color:${colors.custom_amber}55}
 section.info{background:${colors.custom_infoSoft};border-color:${colors.brandPrimary}44}
 p{margin:4px 0 0}ul{margin:0;padding-left:18px}li{margin:3px 0}
-.step{display:flex;gap:10px;margin:10px 0}.step .n{flex:0 0 24px;height:24px;border-radius:12px;background:${colors.brandPrimary};color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.step{display:flex;gap:10px;margin:10px 0}.step .n{flex:0 0 24px;height:24px;border-radius:12px;background:${colors.brandPrimary};color:${colors.onBrandPrimary};font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}
 .final{font-size:17px;font-weight:800;color:${colors.success}}
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}.katex{font-size:1.05em}
 </style></head><body><div id="c">
@@ -190,9 +190,9 @@ export function AiSolution({ item, number, disclosure }: { item?: AiItem; number
   if (!item) return null;
   const head = (
     <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, flexWrap: "wrap" }}>
-      <Icon name="robot-happy-outline" size={18} color={colors.brandPrimary} />
+      <Icon name="robot-happy-outline" size={18} color={colors.brandText} />
       <T w="heavy" size={15} style={{ flex: 1 }}>AI step-by-step solution</T>
-      {item.solution?.difficulty ? <View style={{ paddingHorizontal: 8, paddingVertical: 2, borderRadius: radius.pill, backgroundColor: colors.custom_infoSoft }}><T w="bold" size={11} color={colors.brandPrimary}>{item.solution.difficulty}</T></View> : null}
+      {item.solution?.difficulty ? <View style={{ paddingHorizontal: 8, paddingVertical: 2, borderRadius: radius.pill, backgroundColor: colors.custom_infoSoft }}><T w="bold" size={11} color={colors.brandText}>{item.solution.difficulty}</T></View> : null}
     </View>
   );
   if (item.state !== "ready" || !item.solution) {

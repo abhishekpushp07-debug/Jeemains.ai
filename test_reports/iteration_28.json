@@ -1,0 +1,28 @@
+{
+  "summary": "Quick visual retest at 360x800 of the iteration-27 items after the black and blood-red theme change. All 5 requested items pass. (1) Palette tiles are 44x44. Column 6 (Q6, Q12) ends at x=328 inside the 336px content edge at a 360px viewport, so nothing is clipped, and all 7 states render. (2) The English Proficiency and Logical Reasoning chips are #8A0F24 with white text (about 9:1) and Maths is #74747F with white text (about 4.6:1), both legible on the result Solutions tab. The Maths chip in the catalogue is legible. The chapter attempt has only 1 subject, so the attempt subject chips are hidden; the Q-pill uses the same subjectColor. (3) custom_amber #7D5F1E with white text is about 6:1, and 'Use · Free' and Rapid 'Next' are legible. (4) The import is now expo-router/native-tabs. After the restart the Metro log has no deprecation warning, the bundle compiles, and the web tab bar navigates Home, JEE, Tests, Mission and Rapid. (5) Smoke check passed: login → Home (continue-attempt banner) → Rapid lobby → store → solo session (cards load) → result Solutions, with no console errors. New minor regression: because amber is darker, amber used as TEXT on black is now about 3.1-3.4:1.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Amber used as small text on dark", "issue": "custom_amber #7D5F1E as foreground text on #070707 or #121214 is about 3.1-3.4:1, below 4.5:1. Seen on the store 'Selected ✓' and 'Equipped ✓' secondary buttons (shop.tsx:86, :117), the focused 'RAPID' tab label at 11px ((tabs)/_layout.tsx:40), the quest progress text in rapid.tsx:235, the catalogue 'Saved' badge at 11px (catalogue.tsx:37), and the live.tsx trophy text and icons. Use custom_neonAmber #E8C46A for amber text and icons, and keep #7D5F1E only for fills.", "testID": "shop-avatar-use-av_robo / tab-rapid", "priority": "LOW"},
+      {"component": "Chemistry chip", "issue": "Not changed in this pass: white text on custom_subjectChemistry #A8812F is about 3.6:1 (12-13px bold labels on the result Solutions tab and the catalogue). Darken it to about #8A6A22 or use dark text.", "testID": "solution-subject-chemistry", "priority": "LOW"},
+      {"component": "Outcome badge", "issue": "Still open from iteration 27: 'SKIPPED · 0' is white text on muted #9A938C (about 2.9:1). Reference: result/[id].tsx:16/165.", "testID": "solution-card", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/tmp/s_pal.png", "/tmp/s_home.png", "/tmp/s_rapid.png", "/tmp/s_solution-subject-english-proficiency.png", "/tmp/s_solution-subject-mathematics.png", "/tmp/s_shop.png", "/tmp/s_cat.png", "/tmp/s_sess.png"],
+  "action_items": [
+    "LOW: Replace custom_amber with custom_neonAmber wherever amber is a text or icon colour on dark backgrounds (shop selected/equipped labels, RAPID tab label, rapid quest progress, catalogue 'Saved', live.tsx).",
+    "LOW: Make Chemistry #A8812F darker, or give its chips dark text.",
+    "LOW (carry-over): Outcome badges should use on* text colours; fix the store Buy label wrap and the nested <button> on My Tests (not retested)."
+  ],
+  "critical_code_review_comments": ["A theme-level pair such as amberFill/amberText (and the onSubjectColor idea from iteration 27) would stop one token being used both as a fill and as a foreground."],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "5/5 requested items pass; 1 new LOW regression (amber as text)"},
+  "seed_data_creation": "Opened 1 more Rapid solo session (answered card 1, left mid-way). Attempt 50fa2a17 was viewed only, not submitted. No JEELIVE attempts were submitted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: entry-phone-input 9000000001 -> entry-continue-button. Palette: /attempt/50fa2a17-f8d2-4a92-9fbd-a8219906d934 -> player-palette-button (single subject, so no player-subject chips). Result with 5 subjects: /result/8501cf9c-6ade-4d3c-b06c-75c6b488a1c0 -> 'Solutions' -> solution-subject-*. Store: /rapid/shop. Solo: /rapid -> rf-start-button.",
+  "rca_of_issue": "When custom_amber was darkened to #7D5F1E for white-on-fill contrast, the places that use it as a text colour on black became low contrast."
+}

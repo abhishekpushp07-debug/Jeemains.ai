@@ -1,0 +1,49 @@
+{
+  "summary": "Visual retest of the iteration-26 theme findings at 360x800, with the palette also checked at 390x844. Fixed and verified: (1) The attempt palette shows 6 of 7 states live on attempt 50fa2a17 (Current ivory, Answered & marked gold, Marked red, Answered green, Visited graphite with an eye icon, Not visited dark). Pending save only appears in the legend because saves complete too fast to catch. The legend swatches now have borders and are all visible. (2) The logo sits on a white plate with a gold border on entry and Home, with no black gaps, and the Mission icon has a gold border. (3) brandText #FF5266 is used for Sign out, Keep working, Retry and Try chapter-wise. (4) The Maths result text #80808C is readable (about 4.8:1). (5) Store rarities are silver, ruby, gold and stone. (6) NativeTabs tintColor is set; tsc shows only the 3 existing StyleSheet.NamedStyles type errors in theme.ts. I fixed 2 things myself: the history score in catalogue.tsx:56 was still brandPrimary, and the active result tab chips were white text on #FF5266 (3.2:1). New problems found: the 6-column palette grid is clipped at 360px; white text sits on gold or green or grey in the subject chips and outcome badges; Buy labels wrap in the store; React's nested <button> warning appears on My Tests; and the deprecated unstable-native-tabs import is still used.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Attempt palette grid at 360px", "issue": "The grid uses numColumns=6 with 48px tiles and 8px gaps, which needs 328px. Inside the sheet's 24px padding there is only 312px at a 360px width, so column 6 (Q6, Q12, Q18…) is cut off at the right edge. It fits at 390. Reference: app/attempt/[id].tsx:239-244. Suggest computing the tile size from useWindowDimensions (e.g. (width-48-40)/6) or using flex:1 with aspectRatio:1.", "testID": "palette-q-6", "priority": "MEDIUM"},
+      {"component": "White text on light subject colours", "issue": "subjectColor() falls back to custom_cyan #D9B45A (gold) for English Proficiency and Logical Reasoning, and Maths is #80808C. Active chips and pills draw onBrandPrimary (white) text on these colours: about 2:1 on gold and about 3.9:1 on Maths grey. Seen on the result Solutions subject tabs ('English Proficiency · 10' is barely legible). The same pattern exists in the attempt subject chips (attempt/[id].tsx:131, :153), the catalogue chips (catalogue.tsx:106) and the Rapid subject pills. Reference: app/result/[id].tsx:139. Suggest an onSubjectColor(s) helper that returns onWarning or gameBg for gold and grey, and white for Physics and Chemistry.", "testID": "solution-subject-english-proficiency", "priority": "MEDIUM"},
+      {"component": "Outcome badge white text", "issue": "The result Solutions outcome badge (e.g. 'SKIPPED · 0', 'CORRECT · +3') is always white text on its OUT colour. That gives about 2.3:1 on success #34C185, about 2.9:1 on muted #9A938C and about 3.4:1 on custom_amber. Reference: app/result/[id].tsx:16, :165. Use onSuccess, onWarning or surface for the text instead.", "testID": "solution-question", "priority": "LOW"},
+      {"component": "Store amber buttons", "issue": "This was open in iteration 26 and is still open. 'Use · Free' and 'Use' are white text on custom_amber #A8812F (about 3.6:1). Reference: app/rapid/shop.tsx:86, :117; rapid/session.tsx:64, :274, :283. Suggest a custom_neonAmber fill with onWarning text.", "testID": "shop-avatar-use-", "priority": "LOW"},
+      {"component": "Store Buy label wrap", "issue": "At 360px, 'Buy · 1500' and 'Buy · 2000' wrap onto 2 lines inside the half-width avatar cards because the icon and label are too wide. Reference: app/rapid/shop.tsx:89. Use numberOfLines={1}, a smaller font, or drop the icon on narrow widths.", "testID": "shop-avatar-buy-", "priority": "LOW"},
+      {"component": "Nested <button> warning (web)", "issue": "On My Tests > Completed, the dev overlay shows 2 errors: '<button> cannot contain a nested <button>'. This is likely the compare-select Press nested inside the attempt-card Press. Reference: app/(tabs)/tests.tsx:77, :94.", "testID": "compare-select-", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Attempt player", "issues": ["The Mark button and the submit-sheet 'Marked' stat use amber/gold (custom_amber), but the palette's 'Marked' state is blood red and gold means 'Answered & marked'. Align these: either make the Mark button red, or swap the palette colours for marked and answered_marked.", "The legend swatches for Pending save (#E0A526) and Answered & marked (#E8C46A) are both yellow-gold and look alike at 14px. The tile icons tell them apart, but consider an outline style for pending.", "Visited (#36363A) and Not visited (#242426) differ only slightly; the 10px eye icon is the main cue."]},
+      {"screen": "Duel play", "issues": ["Still open: both the 'You' and opponent scores are red, so there is no visual ownership."]},
+      {"screen": "Duel result / Session summary", "issues": ["Still open: the 'DAY STREAK' label wraps to 2 lines at 360.", "The hero line reads 'Player ··0001 1 · 20 Varun R.' because the name and score run together. Add separators or bold the scores (duel.tsx:287)."]},
+      {"screen": "Home", "issues": ["The BITSAT tile art (orange rocket) and the Live tile (blue diamond) are still off-palette.", "The series banner shows 'Checking…' and then 'Live status unavailable. Open the hub to retry.' I didn't investigate this because the retest was visual only."]}
+    ],
+    "react_native_issues": [
+      {"component": "expo-router unstable-native-tabs", "issue": "The Metro log warns that `expo-router/unstable-native-tabs` is deprecated and should be replaced with `expo-router/native-tabs`. Reference: app/(tabs)/_layout.tsx (NativeTabs import). tintColor={colors.brandText} is set at line 62 and the bundle compiles."},
+      {"component": "AiSolution WebView font", "issue": "Not retested. It was open in iteration 26: the WebView uses the system font. Reference: src/components/AiSolution.tsx:121."}
+    ]
+  },
+  "test_report_links": ["/tmp/r_pal_all.png", "/tmp/r_pal390.png", "/tmp/r_entry.png", "/tmp/r_home.png", "/tmp/r_sol_eng.png", "/tmp/r_shop1.png", "/tmp/r_shop3.png", "/tmp/r_duel_play.png", "/tmp/r_duel_res.png", "/tmp/r_res_fix.png", "/tmp/r_hist.png", "/tmp/r_account.png", "/tmp/r_submit_sheet.png"],
+  "action_items": [
+    "MEDIUM: Make the attempt palette grid responsive so 6 columns fit at 360px (attempt/[id].tsx:239-244).",
+    "MEDIUM: Add an onSubjectColor helper so active subject chips and pills use dark text on gold (English and Logical Reasoning fallback) and on Maths grey (result/[id].tsx:139, attempt/[id].tsx:131/153, catalogue.tsx:106, rapid.tsx:101).",
+    "LOW: Outcome badges in result/[id].tsx:165 should use matching on* text colours, not white.",
+    "LOW: Use custom_neonAmber with onWarning text for the amber buttons (shop Use/Equip, Rapid Next/Finish/Repeat).",
+    "LOW: Stop the store 'Buy · 1500/2000' labels wrapping; fix the nested Press in the My Tests attempt card.",
+    "LOW: Switch the import to expo-router/native-tabs (the unstable path is deprecated).",
+    "Polish: make the Mark button colour consistent with the palette 'Marked' state; give the duel 'You' score its own colour; fix the DAY STREAK wrap; re-skin the BITSAT and Live tile art."
+  ],
+  "critical_code_review_comments": [
+    "When a Chip or Button is given a 'color' prop, that colour becomes the fill behind onBrandPrimary (white) text. Any light colour (brandText, gold, grey, green) therefore fails contrast. Chip and Button could pick the text colour from the fill's luminance, or the theme could provide paired on* tokens.",
+    "subjectColor() returns custom_cyan, which is now gold, for any subject that isn't Physics, Chemistry or Maths. Bright gold works as text on black but fails as a fill under white text."
+  ],
+  "updated_files": [
+    "/app/frontend/app/catalogue.tsx (L56: history score/resume text colors.brandPrimary -> colors.brandText. This was listed as fixed but hadn't been changed.)",
+    "/app/frontend/app/result/[id].tsx (L294: result tab Chip color brandText -> brandPrimary. With brandText the active chip was white on #FF5266 at 3.2:1 and looked pink; inactive icons in #C8102E are 3.2:1, which meets the 3:1 non-text rule.)"
+  ],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "All 6 retest items render as intended. 2 incomplete colour fixes were finished by me. 2 MEDIUM and 4 LOW new or remaining legibility and layout issues"},
+  "seed_data_creation": "Attempt 50fa2a17 (BITSAT Units & Measurements, still in progress, NOT submitted) now has Q1 answered and marked, Q4 marked, Q5/Q7/Q8 answered, Q6 answered and marked, and Q2/Q3/Q9 visited. Played 1 Rapid Fire duel (random, Physics, mostly skipped) and opened 1 solo session (left mid-way). No JEELIVE live attempts were submitted.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: entry-phone-input 9000000001 -> entry-continue-button. Palette: /attempt/50fa2a17-f8d2-4a92-9fbd-a8219906d934 -> player-palette-button (aria-label on palette-q-N gives the state). Result with all 5 BITSAT subjects: /result/8501cf9c-6ade-4d3c-b06c-75c6b488a1c0. Duel: /rapid/duel?mode=random&subject=Physics (rf-start-button is the solo sprint). History: /catalogue?slug=bitsat&kind=history.",
+  "rca_of_issue": "The remaining contrast problems come from the same source: components put onBrandPrimary (white) text on whatever 'color' prop they receive. Once the theme brought in light accents (gold, brandText, Maths grey, green), those fills need dark foreground text."
+}

@@ -54,7 +54,7 @@ def test_duel_auth_and_validation(s):
     body = {"subject": "Physics", "chapter": None, "mode": "invite", "name": "Player ··0001", "request_id": "TEST_" + uuid.uuid4().hex}
     assert s.post(f"{BASE_URL}/api/rf/duels", json=body).status_code == 401
     assert s.post(f"{BASE_URL}/api/rf/duels", json={**body, "mode": "bogus"}, headers=H(UID_A)).status_code == 422
-    assert s.post(f"{BASE_URL}/api/rf/duels", json={**body, "subject": "Biology"}, headers=H(UID_A)).status_code == 422
+    assert s.post(f"{BASE_URL}/api/rf/duels", json={**body, "subject": "Zoology"}, headers=H(UID_A)).status_code == 422
     assert s.post(f"{BASE_URL}/api/rf/duels/join", json={"code": "ZZZZZZ", "name": "Player ··0002"}, headers=H(UID_A)).status_code == 404
     assert s.get(f"{BASE_URL}/api/rf/duels/nope", headers=H(UID_A)).status_code == 404
 

@@ -247,25 +247,6 @@
   "verified": 1
  },
  {
-  "id": "1c6d5aeb-7aed-4d3d-8976-f8c094fcf921",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Refrigerator",
-  "prompt": "Relation: COP of refrigerator and Carnot efficiency η:",
-  "formula": "COP = (1−η)/η",
-  "options": [
-   "η/(1−η)",
-   "1/η",
-   "(1−η)/η",
-   "1−η"
-  ],
-  "answer": 2,
-  "explain": "COP = T₂/(T₁−T₂) = (1−η)/η where η = 1−T₂/T₁.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "4c663196-55a3-4102-abab-3caebf793674",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -475,25 +456,6 @@
   "verified": 1
  },
  {
-  "id": "8f0d3201-9a8c-436a-b4aa-1e06f64bd029",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "In an adiabatic process, TV^(γ−1) = const. If V doubles, T:",
-  "formula": "TV^(γ−1) = const",
-  "options": [
-   "Increases",
-   "Decreases",
-   "Becomes zero",
-   "Remains same"
-  ],
-  "answer": 1,
-  "explain": "Expansion increases V, so T must decrease to keep TV^(γ−1) constant.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "db15a315-329c-45f4-b78d-3337487f357f",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -527,25 +489,6 @@
   ],
   "answer": 2,
   "explain": "η = W/Q_H = (Q_H−Q_L)/Q_H = 1 − Q_L/Q_H by definition.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4449a4fc-5d46-410b-bc0b-4f8da98c39b0",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Entropy change ΔS when n mol ideal gas heated isobarically by ΔT:",
-  "formula": "ΔS = nCₚ ln(T₂/T₁)",
-  "options": [
-   "nR ln(T₂/T₁)",
-   "nCᵥ ln(T₂/T₁)",
-   "nCₚ ln(T₂/T₁)",
-   "nCₚ(T₂−T₁)"
-  ],
-  "answer": 2,
-  "explain": "At constant pressure dQ = nCₚdT, so ΔS = ∫dQ/T = nCₚ ln(T₂/T₁).",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -665,25 +608,6 @@
   "verified": 1
  },
  {
-  "id": "960fbd3d-b662-4cf9-aa1d-f653cf33f4e0",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Thermodynamic process where enthalpy change equals heat exchanged:",
-  "formula": "Q = ΔH (isobaric)",
-  "options": [
-   "Isochoric",
-   "Isothermal",
-   "Isobaric",
-   "Adiabatic"
-  ],
-  "answer": 2,
-  "explain": "At constant pressure Q = ΔU + PΔV = ΔH (enthalpy), so Q = ΔH.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "26d89cca-2774-463f-8b85-de55e603bc82",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -717,25 +641,6 @@
   ],
   "answer": 2,
   "explain": "η = 1 − 300/600 = 1 − 0.5 = 0.5 = 50%.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "89c99fae-d016-4b20-a89c-82e0242fa383",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For which process is Cₚ = Cᵥ (effective molar specific heat equal)?",
-  "formula": "",
-  "options": [
-   "Isothermal",
-   "Isochoric",
-   "No real process; Cₚ always > Cᵥ",
-   "Adiabatic"
-  ],
-  "answer": 2,
-  "explain": "Mayer's relation Cₚ = Cᵥ + R; since R > 0, Cₚ > Cᵥ always for ideal gas.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -988,63 +893,6 @@
   "verified": 1
  },
  {
-  "id": "356dd5a2-6ea0-4590-8319-3aa944793a50",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Work done by gas in polytropic process PVⁿ=const?",
-  "formula": "W = (P₁V₁−P₂V₂)/(n−1)",
-  "options": [
-   "(P₁V₁−P₂V₂)/(n−1)",
-   "(P₁V₁+P₂V₂)/(n−1)",
-   "nR(T₁−T₂)",
-   "(P₂V₂−P₁V₁)/(n−1)"
-  ],
-  "answer": 0,
-  "explain": "For polytropic process, W = (P₁V₁ − P₂V₂)/(n − 1), valid for n ≠ 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5b66620f-6b49-46e3-8635-1c1a0e725377",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Molar specific heat for polytropic process PVⁿ = const?",
-  "formula": "C = Cᵥ(γ−n)/(1−n)",
-  "options": [
-   "Cᵥ(1−n)/(γ−n)",
-   "Cₚ(γ−n)/(1−n)",
-   "R(γ−n)/(1−n)",
-   "Cᵥ(γ−n)/(1−n)"
-  ],
-  "answer": 3,
-  "explain": "Molar heat capacity in polytropic process: C = Cᵥ(γ − n)/(1 − n).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8f1773da-c59e-4821-a6f4-ee46d53d19d6",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which process has maximum work done by gas between same two isotherms?",
-  "formula": "",
-  "options": [
-   "Isochoric",
-   "Isothermal",
-   "Isobaric",
-   "Adiabatic"
-  ],
-  "answer": 2,
-  "explain": "Isothermal expansion gives maximum work between two given states on a P-V diagram.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "87c7307a-b3d9-47df-9afb-f9940b665b15",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -1078,25 +926,6 @@
   ],
   "answer": 0,
   "explain": "Since Q = 0 adiabatically, first law gives ΔU = −W (work done by gas).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "07eaad74-805f-4fc5-95d4-ad836a28d4c6",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "TP^(−γ/(γ−1)) = const applies to which process?",
-  "formula": "TP^{−γ/(γ−1)} = const",
-  "options": [
-   "Isochoric",
-   "Adiabatic",
-   "Isobaric",
-   "Isothermal"
-  ],
-  "answer": 1,
-  "explain": "This T-P relation is derived from PVᵞ = const for an adiabatic process.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1216,25 +1045,6 @@
   "verified": 1
  },
  {
-  "id": "81e63240-e3a1-409a-a335-5b8e5265ed18",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "If a heat engine has efficiency η, its COP as refrigerator (reversed) is?",
-  "formula": "COP = (1−η)/η",
-  "options": [
-   "(1−η)/η",
-   "1/(η−1)",
-   "η/(1−η)",
-   "1/η"
-  ],
-  "answer": 0,
-  "explain": "Reversing Carnot engine: COP = Q_L/W = T_L/(T_H−T_L) = (1−η)/η.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "70ba1fa1-c500-4512-972d-2d1d7bea2b61",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -1249,44 +1059,6 @@
   ],
   "answer": 2,
   "explain": "No work done (vacuum), no heat exchange; so ΔU = 0 and ΔT = 0 for ideal gas.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "82f67d35-1bad-4075-af91-15e29971f59f",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "The work done BY gas when it is compressed adiabatically is?",
-  "formula": "W < 0",
-  "options": [
-   "Positive",
-   "Zero",
-   "Equal to Q",
-   "Negative"
-  ],
-  "answer": 3,
-  "explain": "Compression means volume decreases; work done BY the gas is negative (work done ON it).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6788faa0-623c-4038-bda4-a858ce6068c5",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Enthalpy H of a system is defined as?",
-  "formula": "H = U + PV",
-  "options": [
-   "U − TV",
-   "U + PV",
-   "U − PV",
-   "U + TV"
-  ],
-  "answer": 1,
-  "explain": "Enthalpy H = U + PV; at constant pressure ΔH = Q_p (heat absorbed isobarically).",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1325,25 +1097,6 @@
   ],
   "answer": 3,
   "explain": "η = 1 − T_L/T_H ⟹ T_L/T_H = 1 − η.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f3243605-a88d-45f2-b046-e2216e7c4f58",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "In a cyclic process, the net change in enthalpy ΔH is?",
-  "formula": "ΔH = 0",
-  "options": [
-   "= 0",
-   "= Q_net",
-   "= ΔU",
-   "= W_net"
-  ],
-  "answer": 0,
-  "explain": "Enthalpy H = U + PV is a state function; ΔH = 0 for any complete cycle.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1520,44 +1273,6 @@
   "verified": 1
  },
  {
-  "id": "be196acc-c819-4212-8ef3-239cd08dfac5",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "In a P-T diagram, an isochoric (constant V) process appears as:",
-  "formula": "",
-  "options": [
-   "Vertical line",
-   "Straight line through origin",
-   "Hyperbola",
-   "Horizontal line"
-  ],
-  "answer": 1,
-  "explain": "At constant V: P/T = nR/V = const, so P vs T is a straight line through origin.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "61b50b80-ac7c-4c9c-a343-6e42db9e1738",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "In a P-T diagram, an isobaric process appears as:",
-  "formula": "",
-  "options": [
-   "Horizontal straight line",
-   "Line through origin",
-   "Vertical straight line",
-   "Hyperbola"
-  ],
-  "answer": 0,
-  "explain": "Isobaric means constant P, so on a P-T diagram it is a horizontal line.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "dce63697-9d19-4716-839c-974b5c11725c",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -1572,25 +1287,6 @@
   ],
   "answer": 0,
   "explain": "By first law for a cycle ΔU=0, so W = Q_net = Q_H − Q_L.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2b7f7aab-9f39-4ecf-8138-248b8665773d",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which process on a P-V diagram has zero enclosed area?",
-  "formula": "",
-  "options": [
-   "Carnot cycle",
-   "Any cyclic process",
-   "Isothermal expansion",
-   "Any single reversible process (not a cycle)"
-  ],
-  "answer": 3,
-  "explain": "A single path (non-cyclic) has no enclosed area; enclosed area = net work only for cycles.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1615,25 +1311,6 @@
   "verified": 1
  },
  {
-  "id": "c046c9d5-c24c-4d3d-ba05-9839c888c68b",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Relation between COP of heat pump and COP of refrigerator:",
-  "formula": "COP_HP = COP_ref + 1",
-  "options": [
-   "COP_HP = COP_ref + 1",
-   "COP_HP = COP_ref − 1",
-   "COP_HP = COP_ref × η",
-   "COP_HP = 1/COP_ref"
-  ],
-  "answer": 0,
-  "explain": "Q_H = Q_L + W, so Q_H/W = Q_L/W + 1, giving COP_HP = COP_ref + 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "ed42b4fa-066a-4a2e-b997-ef9de2f8c091",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -1653,25 +1330,6 @@
   "verified": 1
  },
  {
-  "id": "666c18a8-780f-40e0-922e-af14e3a51452",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For an ideal gas, Joule-Thomson coefficient μ_JT equals:",
-  "formula": "μ_JT = (∂T/∂P)_H",
-  "options": [
-   "Positive",
-   "Negative",
-   "γ − 1",
-   "Zero"
-  ],
-  "answer": 3,
-  "explain": "Ideal gas has no intermolecular forces, so temperature doesn't change on throttling: μ_JT = 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "cd9748cc-0638-4991-ae78-5b66c3e51065",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -1686,44 +1344,6 @@
   ],
   "answer": 1,
   "explain": "Cᵥ = R/(γ−1) = R/0.4 = 5R/2 for diatomic gas.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "52e0e66c-e7c7-44a8-9c48-658034890378",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Work done by gas in polytropic process PVⁿ=C when n=0:",
-  "formula": "",
-  "options": [
-   "Zero",
-   "nRT ln(V₂/V₁)",
-   "(P₁V₁ − P₂V₂)/(n−1)",
-   "P(V₂ − V₁) — isobaric work"
-  ],
-  "answer": 3,
-  "explain": "n=0 means P=const (isobaric), so W = P·ΔV = P(V₂−V₁).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "10f9124d-9969-48e2-9b7e-8569e57207f6",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Entropy is a _____ function of state.",
-  "formula": "",
-  "options": [
-   "Process (depends on reversibility)",
-   "State (path-independent)",
-   "Path (path-dependent)",
-   "Cyclic (always zero)"
-  ],
-  "answer": 1,
-  "explain": "Entropy S is a state function; ΔS depends only on initial and final states.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1843,25 +1463,6 @@
   "verified": 1
  },
  {
-  "id": "2ab2e87b-1b9f-4e62-8806-50c1eb0629a6",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Clausius inequality for any cyclic process states ∮dQ/T is:",
-  "formula": "∮dQ/T ≤ 0",
-  "options": [
-   "> 0",
-   "≤ 0",
-   "≥ 0",
-   "= 0 always"
-  ],
-  "answer": 1,
-  "explain": "Clausius inequality: ∮dQ/T ≤ 0; equality holds for reversible cycle.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "69dd7641-b8ce-45ea-a721-e1d93a5cab04",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -1895,25 +1496,6 @@
   ],
   "answer": 3,
   "explain": "Isochoric: W=0, so all heat added goes to increasing internal energy.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "72430475-33a2-4e5a-bed2-c29780d8292c",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a Carnot refrigerator, heat extracted from cold reservoir Q_L = ?",
-  "formula": "Q_L = W · T_L/(T_H−T_L)",
-  "options": [
-   "W·T_H/T_L",
-   "W·(T_H−T_L)/T_L",
-   "W·T_H/(T_H−T_L)",
-   "W·T_L/(T_H−T_L)"
-  ],
-  "answer": 3,
-  "explain": "COP = T_L/(T_H−T_L) = Q_L/W, so Q_L = W·T_L/(T_H−T_L).",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1995,82 +1577,6 @@
   "verified": 1
  },
  {
-  "id": "24b13b7c-4e90-4cba-868d-278102ea95ce",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Third law of thermodynamics states entropy of a perfect crystal at 0 K is:",
-  "formula": "S → 0 as T → 0",
-  "options": [
-   "Zero",
-   "Infinite",
-   "Minimum but nonzero",
-   "Undefined"
-  ],
-  "answer": 0,
-  "explain": "Third law: entropy of a perfect crystal approaches zero at absolute zero.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f48dad75-5a94-47eb-a54e-7a199bd95ebd",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For polytropic index n, molar specific heat C = Cᵥ(γ−n)/(1−n). When n=1, C→:",
-  "formula": "C → ∞",
-  "options": [
-   "Cₚ",
-   "Cᵥ",
-   "Zero",
-   "Infinity"
-  ],
-  "answer": 3,
-  "explain": "At n=1 (isothermal), denominator →0, so molar specific heat → ∞.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fb893587-fbde-4c55-9ae7-56855779c627",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which process on P-V diagram gives maximum work for expansion between same end pressures?",
-  "formula": "",
-  "options": [
-   "Isothermal",
-   "Adiabatic",
-   "Isobaric",
-   "Isochoric"
-  ],
-  "answer": 2,
-  "explain": "Isobaric expansion gives most work (highest constant pressure) between same end pressures.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "49c84da5-65ff-46a5-94b9-e68e0dee7a1f",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "In a Carnot cycle, which two processes are isothermal?",
-  "formula": "",
-  "options": [
-   "1→2 and 2→3",
-   "3→4 and 4→1",
-   "2→3 and 4→1",
-   "1→2 and 3→4"
-  ],
-  "answer": 3,
-  "explain": "Processes 1→2 (isothermal expansion) and 3→4 (isothermal compression) are isothermal.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "790af1cc-9c9e-4a88-a4f9-a2d0c0de8c3d",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -2085,25 +1591,6 @@
   ],
   "answer": 2,
   "explain": "Slope of adiabat = −γP/V; slope of isotherm = −P/V; ratio = γ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "63f5a60c-2c3b-432f-982a-a02a1ecf3ad7",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which statement defines a quasi-static process?",
-  "formula": "",
-  "options": [
-   "Infinitely slow, system always near equilibrium",
-   "Very fast process",
-   "Adiabatic process",
-   "Irreversible process"
-  ],
-  "answer": 0,
-  "explain": "Quasi-static: process proceeds so slowly the system is always in near-equilibrium.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -2147,25 +1634,6 @@
   "verified": 1
  },
  {
-  "id": "5bcc1948-42ca-463a-8576-97f56ed8e28f",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For same initial state, which process results in lowest final temperature after expansion?",
-  "formula": "",
-  "options": [
-   "Adiabatic",
-   "Isobaric",
-   "Isochoric",
-   "Isothermal"
-  ],
-  "answer": 0,
-  "explain": "Adiabatic expansion: no heat input, all work done at expense of internal energy → lowest T.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "40bfcbcf-d00a-49e6-b66f-64fe1d71f0de",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -2180,25 +1648,6 @@
   ],
   "answer": 0,
   "explain": "At constant pressure, heat exchanged is Q = nCₚΔT by definition of Cₚ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1bc3bf3b-f027-4905-9c53-cafdc4b2a7f2",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a Carnot engine, heat absorbed Q_H is related to work W and Q_L by:",
-  "formula": "Q_H = W + Q_L",
-  "options": [
-   "Q_H = Q_L − W",
-   "Q_H = W·Q_L",
-   "Q_H = W − Q_L",
-   "Q_H = W + Q_L"
-  ],
-  "answer": 3,
-  "explain": "By energy conservation: Q_H = net work done + heat rejected = W + Q_L.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -2223,158 +1672,6 @@
   "verified": 1
  },
  {
-  "id": "dda573e9-3f4f-43df-a6a3-110be92be9fd",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For n mol ideal gas, work done against constant external pressure Pₑₓₜ in expansion:",
-  "formula": "W = Pₑₓₜ(V₂−V₁)",
-  "options": [
-   "Pₑₓₜ(V₂−V₁)",
-   "nRT ln(V₂/V₁)",
-   "nCᵥΔT",
-   "Zero"
-  ],
-  "answer": 0,
-  "explain": "Irreversible expansion against constant external pressure: W = Pₑₓₜ·ΔV.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "03ab4a77-cdf3-46b2-90b0-1c92154bb10b",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Entropy change of universe when a reversible engine operates is:",
-  "formula": "ΔS_univ = 0",
-  "options": [
-   "Zero",
-   "Negative",
-   "Indeterminate",
-   "Positive"
-  ],
-  "answer": 0,
-  "explain": "Reversible (Carnot) engine: ΔS_system + ΔS_surroundings = 0; universe entropy unchanged.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1d4db61e-130b-4647-9e88-e14b07c5b68f",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which process has maximum heat exchange for same ΔT between same two states?",
-  "formula": "",
-  "options": [
-   "Isochoric",
-   "Isothermal",
-   "Isobaric",
-   "Adiabatic"
-  ],
-  "answer": 2,
-  "explain": "Isobaric has Q = nCₚΔT; isochoric Q = nCᵥΔT; Cₚ > Cᵥ so isobaric exchanges more heat.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8821bad7-5909-49ab-9030-439cb07858ee",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a non-linear triatomic molecule (e.g., H₂O), degrees of freedom at room temp = ?",
-  "formula": "",
-  "options": [
-   "7",
-   "3",
-   "6",
-   "5"
-  ],
-  "answer": 2,
-  "explain": "Non-linear triatomic: 3 translational + 3 rotational = 6 degrees of freedom (classical).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "81c840ca-b3fe-4040-a55a-dd0e9a0c9241",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For diatomic gas, γ = Cₚ/Cᵥ at high temp (vibrational active)?",
-  "formula": "γ = 9/7",
-  "options": [
-   "9/7 ≈ 1.286",
-   "5/3 ≈ 1.67",
-   "4/3 ≈ 1.33",
-   "7/5 = 1.4"
-  ],
-  "answer": 0,
-  "explain": "At high T, diatomic has f=7 (3 trans+2 rot+2 vib), so γ=9/7.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "48929f90-28bb-4257-a448-a1f7252619c2",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For linear triatomic molecule at high T (vib active), degrees of freedom?",
-  "formula": "f = 3+2+2×4 = ?",
-  "options": [
-   "6",
-   "5",
-   "7",
-   "14"
-  ],
-  "answer": 3,
-  "explain": "Linear triatomic: 3 trans + 2 rot + 4 vib modes (each gives 2 DOF) = 9.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "623708ac-4e2d-4417-827a-7ae7943d67ef",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a gas mixture, Cᵥ of mixture per mole is determined by:",
-  "formula": "",
-  "options": [
-   "Always 3R/2",
-   "Weighted avg by mole fraction",
-   "Simple arithmetic mean",
-   "Weighted avg by mass fraction"
-  ],
-  "answer": 1,
-  "explain": "Mixture Cᵥ = (n₁Cᵥ₁ + n₂Cᵥ₂)/(n₁+n₂), weighted by moles.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "543a60cd-5eff-44db-8731-1cc4f130866c",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Work done on gas = W. First law: ΔU = Q + W or ΔU = Q − W? (IUPAC sign)",
-  "formula": "ΔU = Q + W",
-  "options": [
-   "ΔU = Q only",
-   "ΔU = Q + W (W = work ON gas)",
-   "ΔU = Q − W (W = work ON gas)",
-   "ΔU = W only"
-  ],
-  "answer": 1,
-  "explain": "IUPAC: ΔU = Q + W where W is work done ON the system.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "81c0c98f-39f9-476f-bb6c-2aa0fb0757e2",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -2394,158 +1691,6 @@
   "verified": 1
  },
  {
-  "id": "ee73cb35-736e-400e-a44b-dddb11853c17",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a reversible process, entropy change of universe ΔS_univ is:",
-  "formula": "ΔS_univ = 0",
-  "options": [
-   "Depends on process",
-   "Negative",
-   "Zero",
-   "Positive"
-  ],
-  "answer": 2,
-  "explain": "Reversible processes have ΔS_universe = 0; irreversible have ΔS_universe > 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b487a83c-4469-408b-9351-8adf793f17ff",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For n mol ideal gas at temp T, mean kinetic energy per molecule is:",
-  "formula": "KE = (f/2)kT",
-  "options": [
-   "fkT",
-   "(3/2)RT",
-   "(f/2)RT",
-   "(f/2)kT"
-  ],
-  "answer": 3,
-  "explain": "By equipartition, each molecule has (f/2)kT total KE, where k is Boltzmann constant.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e32bf2ba-9a64-4ce2-bf37-e15e71bc47d6",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For adiabatic process, relation between P and T is T^γ · P^(1−γ) = const. This is equivalent to:",
-  "formula": "T^γ ∝ P^(γ−1)",
-  "options": [
-   "T ∝ P",
-   "T ∝ P^γ",
-   "T^γ ∝ P^(γ−1)",
-   "T ∝ P^(1/γ)"
-  ],
-  "answer": 2,
-  "explain": "From PVᵞ=C and PV=nRT, eliminating V gives T^γ ∝ P^(γ−1).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "407ee640-622f-401e-9101-eb18656cff66",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which process on a P-V diagram is represented by a horizontal straight line?",
-  "formula": "",
-  "options": [
-   "Isothermal",
-   "Isochoric",
-   "Isobaric",
-   "Adiabatic"
-  ],
-  "answer": 2,
-  "explain": "Isobaric = constant pressure, so P is constant → horizontal line on P-V diagram.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3eb89a36-4d13-48c4-8402-8a9362f6e5cb",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Which process on a P-V diagram is a vertical straight line?",
-  "formula": "",
-  "options": [
-   "Isochoric",
-   "Adiabatic",
-   "Isobaric",
-   "Isothermal"
-  ],
-  "answer": 0,
-  "explain": "Isochoric = constant volume → vertical line on P-V diagram.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2e2e4670-7b69-4708-b536-0b1cc81ce40f",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "The efficiency η of a Carnot engine equals 1 only if T_L equals:",
-  "formula": "η = 1 − T_L/T_H",
-  "options": [
-   "T_H",
-   "Negative temperature",
-   "273 K",
-   "0 K (absolute zero)"
-  ],
-  "answer": 3,
-  "explain": "η=1 requires T_L=0 K, which is unattainable by third law; so η<1 always.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "67170331-7db3-47f8-a78c-e6e3d097eae8",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "In a Carnot cycle, during isothermal compression at T_L, heat is:",
-  "formula": "",
-  "options": [
-   "Equal to work done",
-   "Rejected to cold reservoir",
-   "Zero",
-   "Absorbed from cold reservoir"
-  ],
-  "answer": 1,
-  "explain": "Isothermal compression at T_L: gas is compressed, heat Q_L is rejected to cold reservoir.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c5f3171d-3ba4-4893-963c-86032e23367c",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For an ideal gas, internal energy change ΔU during free expansion into vacuum is:",
-  "formula": "ΔU = 0",
-  "options": [
-   "Positive",
-   "Zero",
-   "Negative",
-   "nCᵥΔT"
-  ],
-  "answer": 1,
-  "explain": "Free expansion: W=0, Q=0 (adiabatic), so ΔU=0 for ideal gas; temperature unchanged.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "be84e665-64a8-4af9-a8ef-5d3842331f33",
   "subject": "Physics",
   "chapter": "Thermodynamics",
@@ -2560,158 +1705,6 @@
   ],
   "answer": 0,
   "explain": "Adiabatic process: Q=0 by definition; all energy exchange is via work only.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ae8d1aa0-1b1d-4e32-8d18-976cd3cdfad4",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a monoatomic gas, ratio of work done to heat supplied in isobaric process is:",
-  "formula": "W/Q = R/Cₚ",
-  "options": [
-   "2/5",
-   "3/5",
-   "1/2",
-   "2/3"
-  ],
-  "answer": 0,
-  "explain": "W=nRΔT, Q=nCₚΔT=(5R/2)nΔT, so W/Q=R/(5R/2)=2/5 for monoatomic gas.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b2dcad7f-1cdf-4b6b-82e1-ae96cbff8ce8",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a diatomic gas, ratio ΔU/Q in an isobaric process equals:",
-  "formula": "ΔU/Q = Cᵥ/Cₚ",
-  "options": [
-   "3/5",
-   "5/7",
-   "5/9",
-   "2/5"
-  ],
-  "answer": 1,
-  "explain": "ΔU=nCᵥΔT, Q=nCₚΔT; ratio=Cᵥ/Cₚ=1/γ=(5/2R)/(7/2R)=5/7 for diatomic.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7aad4490-9583-40ef-af6b-68e890a3db1f",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "COP of a heat pump working between T_L and T_H is:",
-  "formula": "COP_HP = T_H/(T_H − T_L)",
-  "options": [
-   "T_L/(T_H−T_L)",
-   "T_H/T_L",
-   "(T_H−T_L)/T_H",
-   "T_H/(T_H−T_L)"
-  ],
-  "answer": 3,
-  "explain": "Heat pump delivers Q_H at cost of W; COP_HP = Q_H/W = T_H/(T_H−T_L) for Carnot.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f386b1e4-22ff-41ea-806b-886d62103a1d",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "Relation between COP of heat pump (COP_HP) and Carnot efficiency η is:",
-  "formula": "COP_HP = 1/η",
-  "options": [
-   "COP_HP = 1/η",
-   "COP_HP = 1+η",
-   "COP_HP = η",
-   "COP_HP = 1/(1−η)"
-  ],
-  "answer": 0,
-  "explain": "COP_HP = T_H/(T_H−T_L) = 1/η where η=1−T_L/T_H.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "22d3bf53-3ea5-4154-b57a-5cfbeab95cdb",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For a polytropic process PVⁿ=C, work done is nR(T₁−T₂)/(n−1). For n→∞, process is:",
-  "formula": "",
-  "options": [
-   "Adiabatic",
-   "Isochoric (V=const)",
-   "Isobaric (P=const)",
-   "Isothermal"
-  ],
-  "answer": 1,
-  "explain": "As n→∞, PVⁿ=C forces V=constant (isochoric), and work done → 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "879c4f1a-a7a3-4f32-8532-5d46571141bd",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "The work done by surroundings on gas in isothermal reversible compression at T when V halves:",
-  "formula": "W = nRT ln2",
-  "options": [
-   "Zero",
-   "nRT ln2 (positive, done ON gas)",
-   "−nRT ln2",
-   "nRT ln(1/2)"
-  ],
-  "answer": 1,
-  "explain": "Compression: V₂<V₁, so W_by gas = nRT ln(V₂/V₁) < 0; work ON gas = nRT ln2 > 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fbf379f7-aad0-4bfb-8058-d80067e80f45",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For n mol gas at constant pressure, if temperature doubles from T to 2T, volume becomes:",
-  "formula": "V ∝ T (isobaric)",
-  "options": [
-   "V/2",
-   "2V",
-   "4V",
-   "√2 V"
-  ],
-  "answer": 1,
-  "explain": "Charles's law: at constant P, V/T = const, so doubling T doubles V.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d6abd669-b992-4db3-be95-13cb10cca75b",
-  "subject": "Physics",
-  "chapter": "Thermodynamics",
-  "topic": "Thermodynamics",
-  "prompt": "For an ideal gas undergoing adiabatic expansion, temperature:",
-  "formula": "TV^(γ−1) = const",
-  "options": [
-   "First increases then decreases",
-   "Stays constant",
-   "Increases",
-   "Decreases"
-  ],
-  "answer": 3,
-  "explain": "Adiabatic expansion: V increases, so T must decrease (TV^(γ−1)=const, γ−1>0).",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1

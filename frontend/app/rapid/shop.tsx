@@ -140,7 +140,7 @@ export default function Shop() {
       <Sheet visible={info} onClose={() => setInfo(false)} testID="shop-info-sheet">
         <T w="heavy" size={18}>How do I earn coins?</T>
         {["2 coins per correct card in sprints and duels", "+50 coins for every duel win", "+30 coins for a flawless session", "Daily quests pay 30–50 coins each", "Coins are earned only — no real money, no purchases"].map((x) => (
-          <View key={x} style={{ flexDirection: "row", gap: 8 }}><Icon name="star-four-points" size={16} color={colors.custom_amber} /><T size={13} style={{ flex: 1 }}>{x}</T></View>
+          <View key={x} style={{ flexDirection: "row", gap: 8 }}><Icon name="star-four-points" size={16} color={colors.custom_neonAmber} /><T size={13} style={{ flex: 1 }}>{x}</T></View>
         ))}
         <Button testID="shop-info-close" label="Got it" onPress={() => setInfo(false)} />
       </Sheet>

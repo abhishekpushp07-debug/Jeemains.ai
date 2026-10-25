@@ -23,7 +23,7 @@ def test_catalog(s):
     assert r.status_code == 200
     d = r.json()
     names = [x["name"] for x in d["subjects"]]
-    assert names == ["Physics", "Chemistry", "Mathematics"] or set(names) == {"Physics", "Chemistry", "Mathematics"}
+    assert names == ["Physics", "Chemistry", "Mathematics", "Biology"]  # iter29: NEET adds Biology
     total = sum(x["total"] for x in d["subjects"])
     print("catalog total", total, [(x["name"], x["total"], len(x["chapters"])) for x in d["subjects"]])
     assert total >= 4000
@@ -92,7 +92,7 @@ def test_empty_selection_404(s):
 
 
 def test_validation(s):
-    assert s.post(f"{BASE_URL}/api/rf/sessions", json={"subject": "Biology", "request_id": "TEST_abcdefgh"}, headers=H).status_code == 422
+    assert s.post(f"{BASE_URL}/api/rf/sessions", json={"subject": "Zoology", "request_id": "TEST_abcdefgh"}, headers=H).status_code == 422
     assert s.post(f"{BASE_URL}/api/rf/sessions", json={"subject": "Physics", "count": 50, "request_id": "TEST_abcdefgh"}, headers=H).status_code == 422
     assert s.post(f"{BASE_URL}/api/rf/sessions/nope/complete", json={"results": []}, headers=H).status_code == 404
 

@@ -30,7 +30,7 @@ export default function Account() {
       <Header title="Account" eyebrow="Pilot profile" onBack={() => router.back()} />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.lg }}>
         <Card testID="account-profile" style={{ flexDirection: "row", gap: space.md, alignItems: "center" }}>
-          <Icon name="account-circle" size={44} color={colors.custom_series} />
+          <Icon name="account-circle" size={44} color={colors.brandText} />
           <View style={{ flex: 1 }}>
             <T w="heavy" size={17}>{user?.name || "Practice profile"}</T>
             <T size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Not signed in"}</T>

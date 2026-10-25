@@ -162,9 +162,9 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
             <T w="heavy" size={16}>Q{q.number}</T>
             <View style={{ paddingHorizontal: 8, paddingVertical: 2, borderRadius: radius.pill, backgroundColor: (OUT[q.outcome] || OUT.skipped)[0] }}>
-              <T w="heavy" size={11} color={colors.onBrandPrimary}>{q.outcome.toUpperCase()} · {q.marks > 0 ? "+" : ""}{q.marks}</T>
+              <T w="heavy" size={11} color={q.outcome === "correct" ? colors.onSuccess : q.outcome === "incorrect" ? colors.onError : colors.surface}>{q.outcome.toUpperCase()} · {q.marks > 0 ? "+" : ""}{q.marks}</T>
             </View>
-            {q.marked ? <Icon name="flag" size={16} color={colors.custom_amber} /> : null}
+            {q.marked ? <Icon name="flag" size={16} color={colors.custom_neonAmber} /> : null}
           </View>
           {q.render_mode !== "source" && q.text ? <T size={15} color={colors.custom_onReading}>{q.text}</T> : null}
           {Array.from({ length: q.asset_count || 0 }, (_, i) => <AssetImage key={q.id + "q" + i} testID={`solution-qimage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number}`} />)}
@@ -178,9 +178,9 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
           ) : q.solution ? <T size={14} color={colors.custom_onReading} testID="solution-text">{q.solution}</T> : null}
           {Array.from({ length: q.solution_asset_count || 0 }, (_, i) => <AssetImage key={q.id + "s" + i} testID={`solution-simage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/solution/${i}`} label={`Solution ${q.number}`} />)}
           {ai.loading && !ai.data ? <Skeleton h={120} /> : ai.error && !ai.data ? (
-            <Press testID="ai-solution-error" onPress={ai.reload} style={{ minHeight: 44, justifyContent: "center" }}><T size={12} w="bold" color={colors.brandPrimary}>Couldn’t load AI solutions. Tap to retry</T></Press>
+            <Press testID="ai-solution-error" onPress={ai.reload} style={{ minHeight: 44, justifyContent: "center" }}><T size={12} w="bold" color={colors.brandText}>Couldn’t load AI solutions. Tap to retry</T></Press>
           ) : <AiSolution item={aiBy[q.id]} number={q.number} disclosure={ai.data?.disclosure} />}
-          {opened[q.id] === "err" ? <Press testID="solution-consult-retry" onPress={() => consult(q)}><T size={12} w="bold" color={colors.brandPrimary}>Couldn’t record that you viewed this solution. Retry</T></Press> : null}
+          {opened[q.id] === "err" ? <Press testID="solution-consult-retry" onPress={() => consult(q)}><T size={12} w="bold" color={colors.brandText}>Couldn’t record that you viewed this solution. Retry</T></Press> : null}
           <Reflection id={id} q={q} version={version} state={r.review?.states?.[q.id] || r.review_states?.[q.id]} consulted={opened[q.id] === "ok"} />
           <Button testID="solution-report-button" kind="ghost" icon="flag-outline" label="Report a problem with this question" onPress={() => setReport(true)} color={colors.muted} />
         </View>
@@ -291,7 +291,7 @@ export default function Result() {
       {ready ? (
         <View style={{ height: 56, justifyContent: "center" }}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
-            {TABS.map(([v, l, ic]) => <Chip key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} color={colors.surfaceInverse} />)}
+            {TABS.map(([v, l, ic]) => <Chip key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} color={colors.brandPrimary} />)}
           </ScrollView>
         </View>
       ) : null}

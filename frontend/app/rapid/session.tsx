@@ -52,9 +52,9 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
         if (!c) return null;
         return (
           <Card key={m.card_id} testID={"rf-review-" + m.card_id} style={{ gap: 6 }}>
-            <T w="bold" size={11} color={subjectColor(c.subject)}>{c.chapter}</T>
+            <T w="bold" size={11} color={colors.muted}>{c.chapter}</T>
             <T w="bold" size={15}>{c.prompt}</T>
-            {c.formula ? <T w="heavy" size={16} color={colors.custom_series}>{c.formula}</T> : null}
+            {c.formula ? <T w="heavy" size={16} color={colors.custom_neonAmber}>{c.formula}</T> : null}
             <T size={13} color={colors.error}>{m.outcome === "timed_out" ? "⏱ Timed out" : m.outcome === "skipped" ? "↷ Skipped" : `✗ You chose: ${c.options[m.choice]}`}</T>
             <T size={13} w="bold" color={colors.success}>✓ Correct: {c.options[c.answer]}</T>
             {c.explain ? <T size={12} color={colors.muted}>{c.explain}</T> : null}
@@ -210,7 +210,7 @@ export default function RapidSession() {
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
-          <T w="heavy" size={12} color={tint} numberOfLines={1}>{card ? `${card.subject} · ${done ? (done.chapter || (done.mode === "repeat_missed" ? "Missed cards" : "Mixed chapters")) : card.chapter}` : "Rapid Fire"}</T>
+          <T w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? `${card.subject} · ${done ? (done.chapter || (done.mode === "repeat_missed" ? "Missed cards" : "Mixed chapters")) : card.chapter}` : "Rapid Fire"}</T>
           {card && !done ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
               <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter">Card {i + 1} of {cards.length}</T>
@@ -243,7 +243,7 @@ export default function RapidSession() {
               <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 6 }, cardStyle]}>
                 <View style={{ height: 4, width: 48, borderRadius: 2, backgroundColor: tint }} />
                 <T w="heavy" size={19} color={colors.custom_onReading} testID="rf-card-prompt">{card.prompt}</T>
-                {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={20} color={colors.custom_series} style={{ textAlign: "center" }} testID="rf-card-formula">{card.formula}</T></View> : null}
+                {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={20} color={colors.custom_neonAmber} style={{ textAlign: "center" }} testID="rf-card-formula">{card.formula}</T></View> : null}
                 <View style={{ gap: space.sm }}>
                   {card.options.map((o, k) => {
                     const isAns = k === card.answer, picked = k === choice;

@@ -54,7 +54,7 @@ export function Button({ label, onPress, kind = "primary", icon, busy, disabled,
 }) {
   const { colors } = useTheme();
   const bg = kind === "primary" ? color ?? colors.brandPrimary : kind === "danger" ? colors.error : kind === "secondary" ? colors.surfaceSecondary : "transparent";
-  const fg = kind === "primary" || kind === "danger" ? colors.onBrandPrimary : color ?? colors.brandPrimary;
+  const fg = kind === "primary" || kind === "danger" ? colors.onBrandPrimary : color === colors.custom_amber ? colors.custom_neonAmber : color ?? colors.brandText;
   return (
     <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={label}
       style={[{ minHeight: 50, borderRadius: radius.md, backgroundColor: bg, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.sm, paddingHorizontal: space.lg, borderWidth: kind === "secondary" ? 1 : 0, borderColor: colors.border }, style]}>
@@ -108,7 +108,7 @@ export function Empty({ icon = "book-open-page-variant-outline", title, body, ac
   return (
     <View testID={testID} style={st.empty}>
       <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: colors.custom_infoSoft, alignItems: "center", justifyContent: "center" }}>
-        <Icon name={icon} size={30} color={colors.brandPrimary} />
+        <Icon name={icon} size={30} color={colors.brandText} />
       </View>
       <T w="bold" size={17} style={{ textAlign: "center" }}>{title}</T>
       {body ? <T size={13} color={colors.muted} style={{ textAlign: "center" }}>{body}</T> : null}
@@ -125,7 +125,7 @@ export function ErrorBox({ error, retry, testID = "error-box" }: { error?: strin
       <T size={13} w="medium" color={colors.error}>{error}</T>
       {retry ? (
         <Press testID={testID + "-retry"} onPress={retry} style={{ marginTop: 6, alignSelf: "flex-start" }}>
-          <T w="bold" size={13} color={colors.brandPrimary}>Retry</T>
+          <T w="bold" size={13} color={colors.brandText}>Retry</T>
         </Press>
       ) : null}
     </Notice>

@@ -78,7 +78,7 @@ export default function SetDetail() {
   return (
     <View testID="set-detail-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <Header title={s.title} eyebrow={`${s.exam} · ${s.series_id ? "All India series" : s.test_kind === "chapter" ? "Chapter practice" : "Full mock"}`} color={subjectColor(subj)} onBack={() => router.back()}
-        right={<Press testID="set-save-toggle" onPress={toggleSave} accessibilityLabel={saved ? "Unsave paper" : "Save paper"} style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}><Icon name={saved ? "bookmark" : "bookmark-outline"} size={22} color={colors.custom_amber} /></Press>} />
+        right={<Press testID="set-save-toggle" onPress={toggleSave} accessibilityLabel={saved ? "Unsave paper" : "Save paper"} style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}><Icon name={saved ? "bookmark" : "bookmark-outline"} size={22} color={colors.custom_neonAmber} /></Press>} />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: 0, paddingBottom: insets.bottom + space.xl, gap: space.md }}>
         <Card testID="set-facts" style={{ gap: space.md }}>
           <View style={{ flexDirection: "row", gap: space.sm }}>

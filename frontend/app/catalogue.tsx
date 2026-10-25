@@ -34,7 +34,7 @@ function SetRow({ s }: { s: any }) {
         <View style={{ flex: 1, gap: 2 }}>
           <T w="heavy" size={15} numberOfLines={2}>{s.title}</T>
           <T size={12} color={colors.muted}>{s.count} Q · {s.rules?.minutes ? s.rules.minutes + " min" : "Untimed"} · +{s.rules?.correct}/{s.rules?.wrong} · {s.maximum} marks</T>
-          {s.saved ? <T size={11} w="bold" color={colors.custom_amber}>Saved</T> : null}
+          {s.saved ? <T size={11} w="bold" color={colors.custom_neonAmber}>Saved</T> : null}
         </View>
         {available ? (
           <View style={{ paddingHorizontal: 12, height: 34, borderRadius: radius.pill, backgroundColor: act.tone, alignItems: "center", justifyContent: "center" }}>
@@ -53,7 +53,7 @@ function HistoryRow({ a }: { a: any }) {
       <Card style={{ gap: 4 }}>
         <T w="bold" size={11} color={colors.muted}>{unixDate(a.started_at)} · {a.status}</T>
         <T w="heavy" size={15}>{a.title}</T>
-        <T size={13} color={colors.brandPrimary} w="bold">{a.summary ? `${a.summary.score} / ${a.summary.maximum}` : a.resumable ? `Resume${a.remaining_seconds ? " · " + fmtClock(Math.round(a.remaining_seconds)) + " left" : ""}` : a.status === "embargoed" ? "Result sealed until release" : "Preparing result"}</T>
+        <T size={13} color={colors.brandText} w="bold">{a.summary ? `${a.summary.score} / ${a.summary.maximum}` : a.resumable ? `Resume${a.remaining_seconds ? " · " + fmtClock(Math.round(a.remaining_seconds)) + " left" : ""}` : a.status === "embargoed" ? "Result sealed until release" : "Preparing result"}</T>
       </Card>
     </Press>
   );

@@ -513,63 +513,6 @@
   "verified": 1
  },
  {
-  "id": "d76c56b3-903b-4e5f-9aa1-66dfcae077ed",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Standard Integrals",
-  "prompt": "∫√(x²+a²) dx equals?",
-  "formula": "",
-  "options": [
-   "(1/2)√(x²+a²)+C",
-   "x√(x²+a²)+C",
-   "(x/2)√(x²+a²)+(a²/2)ln|x+√(x²+a²)|+C",
-   "(x/2)√(x²+a²)−(a²/2)ln|x+√(x²+a²)|+C"
-  ],
-  "answer": 2,
-  "explain": "Standard result for ∫√(x²+a²)dx involves x/2 term plus a²/2·ln term.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "89e24851-6103-4b0c-bed2-706d45b57ac1",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Trigonometric Integrals",
-  "prompt": "For ∫sin^m x·cos^n x dx, if both m,n even, which substitution helps?",
-  "formula": "",
-  "options": [
-   "t = sin x",
-   "Use half-angle/double angle identities",
-   "t = tan x",
-   "t = cos x"
-  ],
-  "answer": 1,
-  "explain": "When both powers are even, reduce using cos2x = 1−2sin²x type identities.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "45add072-5918-4a58-a087-13f411742d1c",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Trigonometric Integrals",
-  "prompt": "∫sin³x dx equals?",
-  "formula": "",
-  "options": [
-   "−cos x − cos³x/3 + C",
-   "cos x − cos³x/3 + C",
-   "−cos x + cos³x/3 + C",
-   "sin³x/3 + C"
-  ],
-  "answer": 2,
-  "explain": "sin³x = sinx(1−cos²x); put t=cosx; integral = −cosx + cos³x/3 + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "fb95a935-6437-4b89-ad83-a8b6bf4e6225",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -608,44 +551,6 @@
   "verified": 1
  },
  {
-  "id": "50782d3d-834a-48ea-8295-f8669081acf6",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Integration by Parts",
-  "prompt": "∫sin⁻¹x dx equals?",
-  "formula": "",
-  "options": [
-   "sin⁻¹x/x + C",
-   "x·sin⁻¹x + C",
-   "x·sin⁻¹x + √(1−x²) + C",
-   "x·sin⁻¹x − √(1−x²) + C"
-  ],
-  "answer": 2,
-  "explain": "By parts: u=sin⁻¹x, dv=dx; result is x·sin⁻¹x + √(1−x²) + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c87d2e6e-e575-46e2-bc9c-78dfc5edff49",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Integration by Parts",
-  "prompt": "∫tan⁻¹x dx equals?",
-  "formula": "",
-  "options": [
-   "x·tan⁻¹x + C",
-   "x·tan⁻¹x − (1/2)ln(1+x²) + C",
-   "tan⁻¹x/x + C",
-   "x·tan⁻¹x + (1/2)ln(1+x²) + C"
-  ],
-  "answer": 1,
-  "explain": "By parts: u=tan⁻¹x, dv=dx; ∫x/(1+x²)dx = (1/2)ln(1+x²) is subtracted.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "06a6c7ae-350d-403c-935a-3bc28fb4496f",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -679,101 +584,6 @@
   ],
   "answer": 0,
   "explain": "f(x)=cosx, f'(x)=−sinx; so ∫eˣ(cosx−sinx)dx = eˣ cosx + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2c13f300-c577-4b86-b56d-76c2bb455870",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Integration Techniques",
-  "prompt": "For ∫(px+q)/√(ax²+bx+c) dx, which strategy is used?",
-  "formula": "",
-  "options": [
-   "Substitute x=1/t",
-   "Integration by parts directly",
-   "Partial fractions only",
-   "Write px+q = A·d/dx(ax²+bx+c)+B"
-  ],
-  "answer": 3,
-  "explain": "Express numerator as A·(2ax+b)+B, split into two manageable integrals.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "dfea899f-5ad1-4e25-970c-5a318f242154",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Trigonometric Integrals",
-  "prompt": "∫dx/(sin x·cos x) equals? [Hint: divide num & denom by cos²x]",
-  "formula": "",
-  "options": [
-   "2ln|tan x| + C",
-   "ln|sec x·cosec x| + C",
-   "ln|tan x| + C",
-   "ln|sin x·cos x| + C"
-  ],
-  "answer": 2,
-  "explain": "1/(sinx·cosx)=2/sin2x; ∫cosec2x·2dx = ln|tan x| + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0ee18a8a-8737-4f4f-8a0d-7d0cc344dec3",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Integration Techniques",
-  "prompt": "To integrate √(ax²+bx+c), first step is?",
-  "formula": "",
-  "options": [
-   "Multiply by conjugate",
-   "Complete the square in x",
-   "Partial fractions",
-   "Differentiate the integrand"
-  ],
-  "answer": 1,
-  "explain": "Completing the square converts to √(X²±k²) form, allowing standard formula use.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f64447d6-1662-44d8-8786-08f4e440990b",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫sinh x dx equals?",
-  "formula": "",
-  "options": [
-   "−cosh x + C",
-   "−sinh x + C",
-   "sinh x + C",
-   "cosh x + C"
-  ],
-  "answer": 3,
-  "explain": "Derivative of cosh x is sinh x, so ∫sinh x dx = cosh x + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "355fcac5-42a9-4775-a39e-b73fceebd84f",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫cosh x dx equals?",
-  "formula": "",
-  "options": [
-   "tanh x + C",
-   "sinh x + C",
-   "cosh x + C",
-   "−sinh x + C"
-  ],
-  "answer": 1,
-  "explain": "Derivative of sinh x is cosh x, so ∫cosh x dx = sinh x + C.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -836,25 +646,6 @@
   "verified": 1
  },
  {
-  "id": "caebcda1-8fa8-4925-993d-9c6749ad5fa5",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫cos⁻¹x dx equals?",
-  "formula": "",
-  "options": [
-   "x·cos⁻¹x − √(1−x²)+C",
-   "x·cos⁻¹x + √(1−x²)+C",
-   "cos⁻¹x·√(1−x²)+C",
-   "−x/√(1−x²)+C"
-  ],
-  "answer": 0,
-  "explain": "IBP: u=cos⁻¹x, dv=dx ⟹ x·cos⁻¹x − √(1−x²) + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "2c994ddf-f84d-4023-a830-eed2aa4d8875",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -912,25 +703,6 @@
   "verified": 1
  },
  {
-  "id": "a45564f4-cf9d-498a-afe0-b61c3c2527a0",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "For ∫(px+q)/(ax²+bx+c) dx, express px+q as?",
-  "formula": "",
-  "options": [
-   "A·d/dx(ax²+bx+c)+B",
-   "A/(ax²+bx+c)+B",
-   "A·(ax²+bx+c)+B",
-   "A·(2ax+b)²+B"
-  ],
-  "answer": 0,
-  "explain": "Write px+q = A(2ax+b)+B; split into log and arctan integrals.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "030b3c4e-37bb-4ef4-9f9e-3cfa6691b510",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -950,63 +722,6 @@
   "verified": 1
  },
  {
-  "id": "10c3e5fd-8853-4a89-b623-e105242550c7",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫tan³x dx equals?",
-  "formula": "",
-  "options": [
-   "tan²x/2 + ln|cos x|+C",
-   "tan²x + ln|sec x|+C",
-   "sec²x/2 + ln|cos x|+C",
-   "tan²x/2 − ln|cos x|+C"
-  ],
-  "answer": 0,
-  "explain": "∫tan³x dx = ∫tan x·sec²x dx − ∫tan x dx = tan²x/2 + ln|cos x| + C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b08c2880-ac4d-477f-8649-1e7f76fd48d4",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "For ∫R(sin x, cos x)dx, Weierstrass substitution is?",
-  "formula": "t = tan(x/2)",
-  "options": [
-   "t = sin x",
-   "t = tan(x/2)",
-   "t = cos x",
-   "t = tan x"
-  ],
-  "answer": 1,
-  "explain": "t=tan(x/2) converts sin x, cos x to rational functions in t.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "af0d4dff-bb6c-4ec8-b358-412e053c94c7",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫1/(a+b cos x) dx is solved by substitution?",
-  "formula": "t = tan(x/2)",
-  "options": [
-   "t = sec x",
-   "t = cos(x/2)",
-   "t = sin x",
-   "t = tan(x/2)"
-  ],
-  "answer": 3,
-  "explain": "Weierstrass t=tan(x/2) converts the integrand to a rational form in t.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "25c9d4b0-2a9f-40e8-9d0f-3322d77884dd",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -1021,63 +736,6 @@
   ],
   "answer": 2,
   "explain": "Substitute t=x²+a², dt=2x dx ⟹ ½ln(x²+a²)+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "dc95c693-37c1-4bba-af61-541afd6b9164",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x/√(a²−x²) dx equals?",
-  "formula": "",
-  "options": [
-   "x·sin⁻¹(x/a)+C",
-   "−√(a²−x²)+C",
-   "√(a²−x²)+C",
-   "sin⁻¹(x/a)+C"
-  ],
-  "answer": 1,
-  "explain": "Substitute t=a²−x², dt=−2x dx ⟹ −√(a²−x²)+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3f556e2b-b17f-4664-8820-cd776469b666",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫sec³x dx equals?",
-  "formula": "",
-  "options": [
-   "sec x tan x + ln|sec x|+C",
-   "½ sec x tan x+C",
-   "½[sec x tan x+ln|sec x+tan x|]+C",
-   "sec²x tan x/2+C"
-  ],
-  "answer": 2,
-  "explain": "Reduction formula for ∫sec³x dx = ½[sec x tan x + ln|sec x+tan x|]+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "665d526f-4c7b-4475-a27c-ff75916674a9",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x/(x+1) dx equals?",
-  "formula": "",
-  "options": [
-   "1/(x+1)+C",
-   "x − ln|x+1|+C",
-   "ln|x+1|+C",
-   "x + ln|x+1|+C"
-  ],
-  "answer": 1,
-  "explain": "Write x/(x+1) = 1 − 1/(x+1); integrate term by term.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1197,139 +855,6 @@
   "verified": 1
  },
  {
-  "id": "b96cd605-0e85-4a42-a555-785979bf4914",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x³·eˣ dx equals?",
-  "formula": "",
-  "options": [
-   "eˣ(x³+3x²+6x+6)+C",
-   "eˣ(x³−3x²−6x+6)+C",
-   "eˣ(x³+3x²−6x−6)+C",
-   "eˣ(x³−3x²+6x−6)+C"
-  ],
-  "answer": 3,
-  "explain": "Repeated IBP with u=x³: eˣ(x³−3x²+6x−6)+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "56fd211e-e567-46e4-830f-e98dbd40ac01",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫sin⁴x dx equals?",
-  "formula": "",
-  "options": [
-   "3x/4 − sin2x/2 + sin4x/16 + C",
-   "3x/8 + sin2x/4 − sin4x/32 + C",
-   "x/2 − sin2x/4 + C",
-   "3x/8 − sin2x/4 + sin4x/32 + C"
-  ],
-  "answer": 3,
-  "explain": "Use sin⁴x=[(1−cos2x)/2]²; expand and integrate term by term.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "55a583b8-e59c-403a-a73f-3639ad681e60",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫cos⁴x dx equals?",
-  "formula": "",
-  "options": [
-   "3x/8 + sin2x/4 + sin4x/32 + C",
-   "3x/8 − sin2x/4 + sin4x/32 + C",
-   "x/2 + sin2x/4 + C",
-   "3x/4 + sin2x/2 − sin4x/16 + C"
-  ],
-  "answer": 0,
-  "explain": "cos⁴x=[(1+cos2x)/2]²; expand and integrate to get 3x/8+sin2x/4+sin4x/32+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7bbbbbba-dca6-4bc9-8311-a12d0184b074",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫1/(x·ln x) dx equals?",
-  "formula": "",
-  "options": [
-   "ln|x|·ln|ln x|+C",
-   "ln|x|+C",
-   "1/ln x+C",
-   "ln|ln x|+C"
-  ],
-  "answer": 3,
-  "explain": "Substitute t=ln x, dt=dx/x; integral becomes ∫dt/t = ln|t|+C = ln|ln x|+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e224a424-0409-4e55-b2ba-d8bd28ec1496",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫(x²+1)/(x⁴+1) dx — best approach?",
-  "formula": "",
-  "options": [
-   "Substitute x²=t",
-   "Divide num & denom by x², then substitute t=x−1/x",
-   "Partial fractions directly on x⁴+1",
-   "Substitute x=tan θ"
-  ],
-  "answer": 1,
-  "explain": "Dividing by x² gives (1+1/x²)/(x²+1/x²); let t=x−1/x so dt=(1+1/x²)dx.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "08bbff9e-c3eb-49a6-b9e9-c14deaaea94e",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫(x²−1)/(x⁴+1) dx — correct substitution?",
-  "formula": "",
-  "options": [
-   "t = 1/x²",
-   "t = x²",
-   "t = x + 1/x",
-   "t = x − 1/x"
-  ],
-  "answer": 2,
-  "explain": "Divide by x²; numerator becomes (1−1/x²)dx and denominator x²+1/x²; set t=x+1/x.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6b10b4aa-9d2f-4f30-9d0a-2b87246895ab",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫dx/(x²(x+1)) — method used?",
-  "formula": "",
-  "options": [
-   "Partial fractions: A/x + B/x² + C/(x+1)",
-   "Substitution x+1=t",
-   "Substitution x=tan θ",
-   "Integration by parts"
-  ],
-  "answer": 0,
-  "explain": "Proper partial fraction decomposition for repeated linear factor x² gives three terms.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "fba58173-1e29-49a1-b649-e07802aa15f6",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -1387,25 +912,6 @@
   "verified": 1
  },
  {
-  "id": "ccb97f2e-a8d7-48f4-89a7-fa26eae65a0b",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫tan⁴x dx equals?",
-  "formula": "",
-  "options": [
-   "tan³x/3 − tan x + x + C",
-   "tan³x/3 + tan x + x + C",
-   "tan³x/3 + tan x − x + C",
-   "tan³x/3 − tan x − x + C"
-  ],
-  "answer": 0,
-  "explain": "tan⁴x=tan²x(sec²x−1); split, use ∫tan²x sec²x dx=tan³x/3 and ∫tan²x dx=tan x−x.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "85ea8d3f-66e7-45a1-9e87-92dd826b8ef4",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -1425,44 +931,6 @@
   "verified": 1
  },
  {
-  "id": "4e25d6f5-e294-41f1-ab97-df18631f8feb",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫(ln x)² dx equals?",
-  "formula": "",
-  "options": [
-   "x(ln x)²−2x ln x−2x+C",
-   "x(ln x)²+2x ln x−2x+C",
-   "2x ln x−2x+C",
-   "x(ln x)²−2x ln x+2x+C"
-  ],
-  "answer": 3,
-  "explain": "IBP twice with u=(ln x)²; gives x(ln x)²−2x ln x+2x+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fb69598e-062f-44f4-911c-863480eeb0c0",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫dx/(1+√x) equals?",
-  "formula": "",
-  "options": [
-   "2√x+2ln|1+√x|+C",
-   "2√x−2ln|1+√x|+C",
-   "2ln|1+√x|+C",
-   "√x−ln|1+√x|+C"
-  ],
-  "answer": 1,
-  "explain": "Substitute t=√x, x=t², dx=2t dt; ∫2t/(1+t)dt=2∫[1−1/(1+t)]dt=2t−2ln|1+t|+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "33648d99-7a8e-4510-8a20-688612e9ac48",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -1477,25 +945,6 @@
   ],
   "answer": 2,
   "explain": "IBP: u=tan⁻¹x, dv=x dx; ∫x·tan⁻¹x dx = x²/2·tan⁻¹x−½∫x²/(1+x²)dx = (x²+1)/2·tan⁻¹x−x/2+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "66318e51-a445-49db-baea-196be87052ad",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x·ln(1+x) dx equals?",
-  "formula": "",
-  "options": [
-   "(x²−1)/2·ln(1+x)−x²/4+x/2+C",
-   "x²/2·ln(1+x)−x²/4+x/2+C",
-   "x²/2·ln(1+x)+x/2−ln(1+x)+C",
-   "(x²+1)/2·ln(1+x)−x/2+C"
-  ],
-  "answer": 0,
-  "explain": "IBP: u=ln(1+x), dv=x dx; then simplify ∫x²/(2(1+x))dx by long division.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1577,25 +1026,6 @@
   "verified": 1
  },
  {
-  "id": "ed51aaf2-6351-4429-98ff-e03b6a4524c1",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫sin x·sin 2x dx — first step?",
-  "formula": "",
-  "options": [
-   "Use sin 2x = 2sin x cos x directly then IBP",
-   "Use product-to-sum: sin A sin B = ½[cos(A−B)−cos(A+B)]",
-   "Weierstrass substitution t=tan(x/2)",
-   "Substitute t = cos x"
-  ],
-  "answer": 1,
-  "explain": "Product-to-sum converts sin x·sin 2x into sum of cosines, each directly integrable.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "e910030f-1f88-4793-ba25-78e18c904ddf",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -1610,25 +1040,6 @@
   ],
   "answer": 0,
   "explain": "Irreducible quadratic x²+1 gets linear numerator Bx+C; linear (x+1) gets constant A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9536a943-426a-4f2d-971f-6f0290527b2c",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫cos x/(1+cos x) dx equals?",
-  "formula": "",
-  "options": [
-   "tan(x/2) + C",
-   "ln|1+cos x| + C",
-   "x − tan(x/2) + C",
-   "x + tan(x/2) + C"
-  ],
-  "answer": 2,
-  "explain": "Write cos x/(1+cos x)=1−1/(1+cos x)=1−½sec²(x/2); integrate to get x−tan(x/2)+C.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1667,44 +1078,6 @@
   ],
   "answer": 1,
   "explain": "√(1+cos2x)=√(2cos²x)=√2|cosx|; integrating for 0<x<π/2 gives √2 sinx+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "33c36122-f503-4186-b666-dd3d0f92b68d",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫dx/√(1−cos 2x) equals?",
-  "formula": "1−cos2x = 2sin²x",
-  "options": [
-   "−(1/√2)ln|cosecx+cotx|+C",
-   "(1/√2)ln|sinx|+C",
-   "(1/√2)cosecx+C",
-   "−(1/√2)cotx+C"
-  ],
-  "answer": 0,
-  "explain": "√(1−cos2x)=√2|sinx|; ∫cosecx dx = −ln|cosecx+cotx|+C, scaled by 1/√2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cc345432-959c-4b92-9f12-162063eb542b",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x³ dx equals?",
-  "formula": "",
-  "options": [
-   "x³/3 + C",
-   "x⁴ + C",
-   "3x² + C",
-   "x⁴/4 + C"
-  ],
-  "answer": 3,
-  "explain": "Power rule: ∫xⁿdx = xⁿ⁺¹/(n+1)+C; here n=3 gives x⁴/4+C.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1803,42 +1176,6 @@
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
- },
- {
-  "id": "39168891-3650-48f8-bc12-e4a9c1519fcc",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫dx/(sin x + cos x) — Weierstrass sub t=tan(x/2) gives denominator?",
-  "formula": "",
-  "options": [
-   "t + (1−t²)",
-   "2t/(1+t²) + (1−t²)/(1+t²)",
-   "2(1+t)/(1+t²)",
-   "(1+t)²/(1+t²)"
-  ],
-  "answer": 1,
-  "explain": "sinx=2t/(1+t²), cosx=(1−t²)/(1+t²); denominator = (2t+1−t²)/(1+t²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "db872377-409b-4795-9a44-963d650d8192",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x·eˣ²·(1+x²) dx cannot be split; correct rewrite of integrand uses?",
-  "formula": "",
-  "options": [
-   "Integration by parts directly",
-   "d/dx[x·eˣ²/2] recognition",
-   "Partial fractions",
-   "Weierstrass substitution"
-  ],
-  "answer": 1,
-  "explain": "Recognise: d(eˣ²/2·x) combines terms; observing eˣ²[f+f'] pattern simplifies evaluation.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
  },
  {
   "id": "41160d86-5131-4bda-832b-97b094406fe9",
@@ -1949,24 +1286,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "865f1e17-b4de-40f6-9f41-46a6eb12d0f7",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫e^(3x)·cos 2x dx — result involves which denominator?",
-  "formula": "∫eᵃˣcosбx dx = eᵃˣ(acosbx+bsinbx)/(a²+b²)",
-  "options": [
-   "a²+b² = 9",
-   "a²+b² = 4",
-   "a²+b² = 5",
-   "a²+b² = 13"
-  ],
-  "answer": 3,
-  "explain": "a=3, b=2; denominator = 3²+2² = 13 in the standard formula for ∫eᵃˣcosbx dx.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "9eaccfa5-9038-48d1-8bb8-f655295a2b02",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -2071,24 +1390,6 @@
   ],
   "answer": 3,
   "explain": "Complete square: (x+2)²+1; ∫dt/√(t²+1) = ln|t+√(t²+1)|+C with t=x+2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "809b4eab-4ad3-4612-aa93-5b051ec67818",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x·cot⁻¹x dx equals?",
-  "formula": "",
-  "options": [
-   "(x²−1)/2·cot⁻¹x + x/2 + C",
-   "x²/2·cot⁻¹x + x/2 + C",
-   "(x²+1)/2·cot⁻¹x − x/2 + C",
-   "(x²+1)/2·cot⁻¹x + x/2 + C"
-  ],
-  "answer": 3,
-  "explain": "IBP: u=cot⁻¹x, dv=x dx; ∫x/(1+x²)dx gives ½ln(1+x²), combine to get (x²+1)/2·cot⁻¹x+x/2+C.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main"
  },
@@ -2237,78 +1538,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "784aaa94-190c-40a7-be34-7061aa3e0685",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫ln(x+1)/(x+1)² dx — substitution used?",
-  "formula": "",
-  "options": [
-   "(x+1)² = t",
-   "x+1 = t",
-   "ln(x+1) = t",
-   "x = tan t"
-  ],
-  "answer": 1,
-  "explain": "Let x+1 = t; ∫(ln t)/t² dt then use IBP with u = ln t, dv = t⁻²dt.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "bed9b7b6-17a6-4834-90bc-5cc4a1d140f6",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫cos⁵x dx equals?",
-  "formula": "",
-  "options": [
-   "sin x − 2sin³x/3 + sin⁵x/5 + C",
-   "sin x + 2sin³x/3 + sin⁵x/5 + C",
-   "cos⁵x/5 + C",
-   "5cos⁴x·sin x + C"
-  ],
-  "answer": 0,
-  "explain": "Write cos⁵x = (1−sin²x)²cos x; let t=sin x; expand (1−t²)²=1−2t²+t⁴; integrate.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "888c737e-545c-4c37-85b6-f43a70755b19",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫1/(sin x(2+cos x)) dx — method used?",
-  "formula": "",
-  "options": [
-   "Multiply by sin x/sin x",
-   "Integration by parts",
-   "Partial fractions after Weierstrass t=tan(x/2)",
-   "Direct substitution cos x = t"
-  ],
-  "answer": 2,
-  "explain": "Weierstrass t=tan(x/2) converts to rational function; then use partial fractions.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "420a6179-90b8-4402-bac0-305f866110ae",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x/(x+1)² dx — partial fraction form is?",
-  "formula": "",
-  "options": [
-   "1/(x+1) − 1/(x+1)²",
-   "A/(x+1)² only",
-   "x/(x+1) − 1/(x+1)²",
-   "1/(x+1) + 1/(x+1)²"
-  ],
-  "answer": 0,
-  "explain": "x/(x+1)² = (x+1−1)/(x+1)² = 1/(x+1) − 1/(x+1)²; integrate each term separately.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "5b43a1b6-8aba-42a2-a729-8a618c01bd2e",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -2381,24 +1610,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "d9bbe5c6-8bd1-4a3a-b673-0a2e29fc3381",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫(x²+1)/(x(x²+4)) dx — partial fraction form?",
-  "formula": "",
-  "options": [
-   "A/x + (Bx+C)/(x²+4)",
-   "(Ax+B)/(x²+4) only",
-   "A/x + B/(x²+4)",
-   "A/x + B/x² + C/(x²+4)"
-  ],
-  "answer": 0,
-  "explain": "Denominator has linear factor x and irreducible quadratic x²+4; form is A/x+(Bx+C)/(x²+4).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "8c379f6f-e61a-4a37-a9af-12fb3f55c85a",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -2435,24 +1646,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "68dda93d-b85a-4a3a-8669-9e945121cb21",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫x/(√(x+1)) dx — result equals?",
-  "formula": "",
-  "options": [
-   "2(x+1)^(3/2)/3 + 2√(x+1) + C",
-   "2√(x+1)(x−1)/3 + C",
-   "(x+1)^(3/2) − √(x+1) + C",
-   "2(x+1)^(3/2)/3 − 2√(x+1) + C"
-  ],
-  "answer": 3,
-  "explain": "Let t=√(x+1); x=t²−1, dx=2t dt; ∫(t²−1)/t·2t dt=2∫(t²−1)dt=2t³/3−2t+C.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "ab0a4504-8089-45eb-a0a3-b11e4ce75a88",
   "subject": "Mathematics",
   "chapter": "Indefinite Integration",
@@ -2467,24 +1660,6 @@
   ],
   "answer": 2,
   "explain": "d/dx(x²+4x+5)=2x+4; write 2x+3=(2x+4)−1 to separate two standard integral types.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "7c1ec0a6-3379-4d60-b0e3-36ffa02d8eda",
-  "subject": "Mathematics",
-  "chapter": "Indefinite Integration",
-  "topic": "Indefinite Integration",
-  "prompt": "∫cot³x dx equals?",
-  "formula": "",
-  "options": [
-   "cot²x/2 + ln|sin x| + C",
-   "−cot²x/2 + ln|sin x| + C",
-   "−cot²x/2 − ln|sin x| + C",
-   "−cosec²x/2 − ln|sin x| + C"
-  ],
-  "answer": 2,
-  "explain": "cot³x = cot x·cot²x = cot x(cosec²x−1); ∫cot x·cosec²x dx − ∫cot x dx.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main"
  },

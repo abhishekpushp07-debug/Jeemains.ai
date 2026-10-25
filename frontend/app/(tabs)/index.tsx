@@ -52,7 +52,7 @@ export default function Home() {
       refreshControl={<RefreshControl refreshing={false} onRefresh={() => { series.reload(); progress.reload(); }} />}
     >
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-        <Image source={require("../../assets/images/jeelive-logo.webp")} style={{ width: 150, height: 48 }} contentFit="contain" accessibilityLabel="JEELIVE.AI" />
+        <View style={{ borderRadius: 12, padding: 4, backgroundColor: "#FFFFFF", borderWidth: 1.5, borderColor: colors.custom_neonAmber }}><Image source={require("../../assets/images/jeelive-logo.webp")} style={{ width: 132, height: 40 }} contentFit="contain" accessibilityLabel="JEELIVE.AI" /></View>
         <Press testID="home-account-button" onPress={() => router.push("/account")} accessibilityLabel="Account" style={{ flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.md, height: 44, borderRadius: radius.pill, backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="account-circle-outline" size={20} color={colors.onSurface} />
           <T w="bold" size={12}>{user?.phone ? "··" + user.phone.slice(-4) : "Account"}</T>
@@ -113,7 +113,7 @@ export default function Home() {
 
       <Press testID="home-my-tests-entry" onPress={() => router.push("/(tabs)/tests")}>
         <Card style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
-          <Icon name="clipboard-text-clock-outline" size={26} color={colors.brandPrimary} />
+          <Icon name="clipboard-text-clock-outline" size={26} color={colors.brandText} />
           <View style={{ flex: 1 }}>
             <T w="bold" size={15}>My Tests</T>
             <T size={12} color={colors.muted}>{progress.data ? `${progress.data.counts.progress} in progress · ${progress.data.counts.saved} saved · ${progress.data.counts.completed} completed` : "In progress · Saved · Completed"}</T>

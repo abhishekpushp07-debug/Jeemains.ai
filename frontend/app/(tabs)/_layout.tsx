@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, View } from "react-native";
 import { Tabs } from "expo-router";
-import { NativeTabs } from "expo-router/unstable-native-tabs";
+import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, IconName, Press, T } from "@/src/components/ui";
@@ -37,12 +37,12 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
                     style={{ position: "absolute", width: 50, height: 50, borderRadius: 12, transform: [{ rotate: "45deg" }], borderWidth: 3, borderColor: colors.surfaceSecondary, shadowColor: colors.custom_series, shadowOpacity: 0.4, shadowRadius: 10, shadowOffset: { width: 0, height: 6 }, elevation: 8 }} />
                   <Icon name="diamond-stone" size={26} color={colors.onBrandSecondary} />
                 </View>
-                <T w="heavy" size={11} color={focused ? colors.custom_amber : colors.muted} style={{ marginTop: 2, letterSpacing: 1 }}>RAPID</T>
+                <T w="heavy" size={11} color={focused ? colors.custom_neonAmber : colors.muted} style={{ marginTop: 2, letterSpacing: 1 }}>RAPID</T>
               </Press>
             </View>
           );
         }
-        const tint = focused ? colors.custom_series : colors.muted;
+        const tint = focused ? colors.custom_seriesBright : colors.muted;
         return (
           <Press key={route.key} testID={"tab-" + route.name} onPress={onPress} accessibilityLabel={item.label} style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 2, paddingTop: space.xs }}>
             <View style={{ paddingHorizontal: 14, paddingVertical: 3, borderRadius: 14, backgroundColor: focused ? colors.custom_infoSoft : "transparent" }}>
@@ -59,7 +59,7 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
 export default function TabsLayout() {
   if (usesNativeTabs) {
     return (
-      <NativeTabs>
+      <NativeTabs tintColor={colors.brandText}>
         <NativeTabs.Trigger name="index"><NativeTabs.Trigger.Icon sf="house.fill" /><NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label></NativeTabs.Trigger>
         <NativeTabs.Trigger name="jee"><NativeTabs.Trigger.Icon sf="atom" /><NativeTabs.Trigger.Label>JEE</NativeTabs.Trigger.Label></NativeTabs.Trigger>
         <NativeTabs.Trigger name="rapid"><NativeTabs.Trigger.Icon sf="diamond.fill" /><NativeTabs.Trigger.Label>Rapid</NativeTabs.Trigger.Label></NativeTabs.Trigger>

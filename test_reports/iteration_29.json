@@ -1,0 +1,35 @@
+{
+  "summary": "Iteration 29: Rapid Fire NEET + Biology, pool audit caps, theme contrast. Backend: new suite test_rf_iter29_neet_catalog.py 13/13 PASS; regression test_rf_duels.py + test_rf_and_proxy.py 14/14 PASS (after updating 3 stale assertions that still expected Biology=422 / 3-subject catalog). Catalog returns Physics/Chemistry/Mathematics/Biology + exams map; Biology has 32 chapters x 90 = 2880; every chapter <=90 (inorganic <=120); totals equal DB active pool (9925) and the card JSON files on disk. Biology sessions (mixed + chapter) return 30 Biology cards; 12 random sessions across all subjects served 0 retired cards (4521 retired in DB); repeat-missed with a retired id -> 404. Biology random duel -> AI fallback seated with 30 Biology non-retired cards; invite+cancel works. Frontend (390x844): JEE MAIN/NEET UG toggle works; NEET shows Physics/Chemistry/Biology, JEE shows Maths; Maths -> NEET auto-selects Mixed Biology (2880 cards); NEET -> JEE from Biology selects Maths; chapter sheet lists only current exam subjects (search also limited); Solo sprint Biology/Human Reproduction played 4 cards with feedback, skip, finish summary; Physics solo regression OK; random Biology duel matched AI opponent 'Keerthi R.'; Result Solutions SKIPPED badge = rgb(7,7,7) on rgb(154,147,140) (~7:1, readable). No page errors. No deprecated Expo packages found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "sync_cards (server.py:189-207)", "issue": "CATALOG_CACHE.clear() runs every 60s cycle even when no file changed; and if a whole chapter JSON file is deleted, its cards are never retired (retire query only runs per existing file)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rapid session header / review list", "issues": ["Subject-tinted small text (11-12px) on black is below 4.5:1: Biology #1F7A55 ~4.0:1, Chemistry #8A6A22 ~4.2:1, Physics #D7263D ~4.2:1 (rapid/session.tsx:213, :55). Consider a lighter text variant of subject colours for text use."]},
+      {"screen": "ChapterSheet 'JUMP BACK IN'", "issues": ["Recent chips are not filtered by exam: in NEET a Maths recent chip would appear and tapping it silently flips exam to JEE (rapid.tsx:240). Consider filtering recent to current exam subjects."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_iter29_neet_catalog.py", "/app/test_reports/pytest/iter29.xml"],
+  "action_items": [
+    "Optional: lighten subject colours when used as small text on the black game background (Biology/Chemistry/Physics < 4.5:1).",
+    "Optional: filter ChapterSheet recent chips to the current exam's subjects.",
+    "Optional: only clear CATALOG_CACHE when a card file actually changed."
+  ],
+  "critical_code_review_comments": [
+    "Exam choice lives in module-level `pick` (rapid.tsx:19) - persists only for app lifetime, resets to JEE on restart (acceptable, noting).",
+    "Spot-check of 9925 prompts: 128 contain 'how many/calculate'-type wording; sampled ones are mental recall (e.g. ions of [Co(NH3)3Cl3], 5P3) - no pen/paper cards observed."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter29_neet_catalog.py (new)", "/app/backend/tests/test_rf_and_proxy.py (stale Biology assertions -> Zoology / 4-subject catalog)", "/app/backend/tests/test_rf_duels.py (stale Biology=422 -> Zoology)"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "TEST_ request_ids sessions for real user; TEST- prefixed uids for duels (one invite cancelled, one bot duel left to settle). One Biology solo sprint finished via UI for test user.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: set -a; . frontend/.env; . backend/.env; set +a; pytest backend/tests/test_rf_iter29_neet_catalog.py. Login 9000000001 -> /rapid -> rf-exam-neet / rf-subject-biology / rf-chapter-picker -> rf-chapter-human-reproduction -> rf-start-button. Do not run card generation/audit scripts.",
+  "rca_of_issue": ""
+}

@@ -13,13 +13,13 @@ import { fmtClock } from "@/src/navigation";
 
 type QState = "current" | "answered_marked" | "marked" | "answered" | "pending" | "visited" | "fresh";
 const QSTYLE: Record<QState, { bg: string; fg: string; icon?: IconName; label: string }> = {
-  current: { bg: colors.surfaceInverse, fg: colors.onSurfaceInverse, label: "Current" },
-  answered_marked: { bg: colors.custom_series, fg: colors.onBrandSecondary, icon: "flag-checkered", label: "Answered & marked" },
-  marked: { bg: colors.custom_amber, fg: colors.onBrandPrimary, icon: "flag", label: "Marked" },
+  current: { bg: colors.onSurface, fg: colors.surface, label: "Current" },
+  answered_marked: { bg: colors.custom_neonAmber, fg: colors.custom_gameBg, icon: "flag-checkered", label: "Answered & marked" },
+  marked: { bg: colors.brandPrimary, fg: colors.onBrandPrimary, icon: "flag", label: "Marked" },
   answered: { bg: colors.success, fg: colors.onSuccess, icon: "check", label: "Answered (saved)" },
-  pending: { bg: colors.custom_warningSoft, fg: colors.warning, icon: "cloud-upload-outline", label: "Pending save" },
-  visited: { bg: colors.custom_errorSoft, fg: colors.error, icon: "eye-outline", label: "Visited" },
-  fresh: { bg: colors.surfaceSecondary, fg: colors.onSurface, label: "Not visited" },
+  pending: { bg: colors.warning, fg: colors.onWarning, icon: "cloud-upload-outline", label: "Pending save" },
+  visited: { bg: colors.borderStrong, fg: colors.onSurface, icon: "eye-outline", label: "Visited" },
+  fresh: { bg: colors.border, fg: colors.muted, label: "Not visited" },
 };
 const CONF = [[0.25, "Guess"], [0.5, "Unsure"], [0.75, "Fairly sure"], [1, "Certain"]] as const;
 
@@ -139,7 +139,7 @@ export default function Player() {
           <Notice tone="error" testID="player-conflict">
             <T size={13} w="medium" color={colors.error}>A newer answer exists on the server (another device or session). Your pending drafts are kept, not overwritten.</T>
             <View style={{ flexDirection: "row", gap: space.sm, marginTop: 6 }}>
-              <Press testID="conflict-reload" onPress={A.load}><T w="bold" size={13} color={colors.brandPrimary}>View server version</T></Press>
+              <Press testID="conflict-reload" onPress={A.load}><T w="bold" size={13} color={colors.brandText}>View server version</T></Press>
               <Press testID="conflict-discard" onPress={A.discard}><T w="bold" size={13} color={colors.error}>Discard my drafts</T></Press>
             </View>
           </Notice>
@@ -180,7 +180,7 @@ export default function Player() {
                     <T w="heavy" size={15} color={sel ? colors.onBrandPrimary : colors.onSurface}>{k}</T>
                   </View>
                   <T size={14} w={sel ? "bold" : "medium"} style={{ flex: 1 }} color={colors.custom_onReading}>{String(label).startsWith("See original") ? `Option ${k} (see image)` : String(label)}</T>
-                  {sel ? <Icon name="check-circle" size={22} color={colors.brandPrimary} /> : null}
+                  {sel ? <Icon name="check-circle" size={22} color={colors.brandText} /> : null}
                 </Press>
               );
             })}
@@ -207,7 +207,7 @@ export default function Player() {
           <Icon name="chevron-left" size={26} color={colors.onSurface} />
         </Press>
         <Press testID="player-mark-button" disabled={disabled} onPress={() => A.edit(q.id, { marked: !cur.marked })} accessibilityLabel={cur.marked ? "Unmark review" : "Mark for review"} style={{ flex: 1, height: 50, borderRadius: radius.md, borderWidth: 1, borderColor: cur.marked ? colors.custom_amber : colors.border, backgroundColor: cur.marked ? colors.custom_warningSoft : colors.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 4 }}>
-          <Icon name={cur.marked ? "flag" : "flag-outline"} size={18} color={colors.custom_amber} />
+          <Icon name={cur.marked ? "flag" : "flag-outline"} size={18} color={colors.custom_neonAmber} />
           <T w="bold" size={12}>{cur.marked ? "Marked" : "Mark"}</T>
         </Press>
         <Press testID="player-clear-button" disabled={disabled || !String(cur.value || "").trim()} onPress={() => A.edit(q.id, { value: "" })} accessibilityLabel="Clear response" style={{ flex: 1, height: 50, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 4 }}>
@@ -241,7 +241,7 @@ export default function Player() {
             const st = QSTYLE[stateOf(item)];
             return (
               <Press testID={"palette-q-" + item.number} onPress={() => { setQid(item.id); setSheet(null); }} accessibilityLabel={`Question ${item.number}, ${item.subject}, ${st.label}`}
-                style={{ width: 48, height: 48, borderRadius: 10, backgroundColor: st.bg, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: colors.borderStrong }}>
+                style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: st.bg, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: colors.borderStrong }}>
                 <T w="heavy" size={14} color={st.fg}>{item.number}</T>
                 {st.icon ? <Icon name={st.icon} size={10} color={st.fg} style={{ position: "absolute", top: 3, right: 3 }} /> : null}
               </Press>

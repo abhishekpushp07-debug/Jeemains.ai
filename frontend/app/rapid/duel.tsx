@@ -245,7 +245,7 @@ export default function Duel() {
             ) : null}
           </View>
           <T w="heavy" size={18} color={colors.custom_onReading}>{card.prompt}</T>
-          {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={19} color={colors.custom_series} style={{ textAlign: "center" }}>{card.formula}</T></View> : null}
+          {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={19} color={colors.custom_neonAmber} style={{ textAlign: "center" }}>{card.formula}</T></View> : null}
           {card.options.map((o: string, k: number) => {
             const isAns = verdict && k === verdict.answer, picked = k === choice;
             const bg = isAns ? colors.custom_successSoft : verdict && picked ? colors.custom_errorSoft : picked ? colors.custom_infoSoft : colors.surfaceSecondary;
@@ -297,7 +297,7 @@ export default function Duel() {
           return (
             <Card key={c.id} style={{ gap: 4 }} testID={"duel-review-" + k}>
               <T w="bold" size={12}>{k + 1}. {c.prompt}</T>
-              {c.formula ? <T w="heavy" size={14} color={colors.custom_series}>{c.formula}</T> : null}
+              {c.formula ? <T w="heavy" size={14} color={colors.custom_neonAmber}>{c.formula}</T> : null}
               <T size={12} color={colors.error}>{!a ? "Not reached" : a.outcome === "incorrect" ? `You chose: ${c.options[a.choice]}` : a.outcome === "timed_out" ? "Timed out" : "Skipped"}</T>
               <T size={12} w="bold" color={colors.success}>Correct: {c.options[c.answer]}</T>
               {c.explain ? <T size={11} color={colors.muted}>{c.explain}</T> : null}
@@ -321,7 +321,7 @@ export default function Duel() {
           <T w="heavy" size={12} color={tint}>RAPID FIRE DUEL · {(d?.subject || p.subject || "").toUpperCase()}</T>
           <T w="heavy" size={16} color={colors.onSurfaceInverse}>{d?.chapter || "Mixed chapters"}</T>
         </View>
-        <Icon name="sword-cross" size={24} color={colors.custom_amber} />
+        <Icon name="sword-cross" size={24} color={colors.custom_neonAmber} />
       </View>
       {body}
       {d?.status === "ready" && !started && intro !== d.id ? <EntryShow me={me} opp={opp} onDone={() => setIntro(d.id)} testID="duel-entry-show" /> : null}

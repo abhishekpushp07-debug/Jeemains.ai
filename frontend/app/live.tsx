@@ -19,7 +19,7 @@ function SlotCard({ slot, attempt }: { slot: Slot; attempt?: any }) {
   return (
     <Card testID={"series-day-" + slot.day} style={{ gap: space.sm, borderColor: live ? colors.custom_series : colors.border }}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <T w="heavy" size={11} color={colors.custom_series}>TEST {String(slot.day).padStart(2, "0")}</T>
+        <T w="heavy" size={11} color={colors.custom_seriesBright}>TEST {String(slot.day).padStart(2, "0")}</T>
         <T w="heavy" size={11} color={live ? colors.success : colors.muted}>{stateLabel(slot)}</T>
       </View>
       <T w="heavy" size={16}>{slot.title}</T>
@@ -27,7 +27,7 @@ function SlotCard({ slot, attempt }: { slot: Slot; attempt?: any }) {
       <T size={12} color={colors.muted}>
         {!slot.ready ? "Paper not available yet. Only published papers can be started." : slot.state === "upcoming" ? "Opens 12:01 AM on its day." : slot.state === "start_closed" ? "New starts closed at 8:59 PM. Existing attempts keep their timer." : slot.state === "ended" ? "Results released. Archive opens at midnight." : "75 questions · 180 minutes · +4 / −1"}
       </T>
-      {attempt ? <Button testID={"series-resume-" + slot.day} kind="secondary" label={attempt.resumable ? "Resume live attempt" : "Open live result"} color={colors.custom_series} onPress={() => router.push((attempt.resumable ? "/attempt/" : "/result/") + attempt.id as any)} /> : null}
+      {attempt ? <Button testID={"series-resume-" + slot.day} kind="secondary" label={attempt.resumable ? "Resume live attempt" : "Open live result"} color={colors.custom_seriesBright} onPress={() => router.push((attempt.resumable ? "/attempt/" : "/result/") + attempt.id as any)} /> : null}
       {slot.can_start && slot.set_id && (!attempt || slot.state === "archive") ? (
         <Button testID={"series-start-" + slot.day} label={slot.state === "archive" ? "Practise this paper" : "Check device & start"} color={colors.custom_series} onPress={() => router.push(`/set/${slot.set_id}`)} />
       ) : null}
@@ -45,7 +45,7 @@ function Streak({ uid }: { uid: string }) {
     <Card testID="streak-card" style={{ gap: space.md }}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
         <View style={{ width: 52, height: 52, borderRadius: 26, backgroundColor: colors.custom_warningSoft, alignItems: "center", justifyContent: "center" }}>
-          <Icon name="trophy" size={28} color={colors.custom_amber} />
+          <Icon name="trophy" size={28} color={colors.custom_neonAmber} />
         </View>
         <View style={{ flex: 1 }}>
           <T w="heavy" size={17}>Your 62-day run</T>
@@ -55,7 +55,7 @@ function Streak({ uid }: { uid: string }) {
       <View style={{ flexDirection: "row", gap: space.sm }}>
         {[["Current", d.current_streak, "fire"], ["Best", d.best_streak, "trophy-outline"], ["Done", `${d.completed_count}/62`, "check-circle-outline"]].map(([l, v, ic]) => (
           <View key={String(l)} testID={"streak-" + String(l).toLowerCase()} style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface, gap: 2 }}>
-            <Icon name={ic as any} size={16} color={colors.custom_amber} />
+            <Icon name={ic as any} size={16} color={colors.custom_neonAmber} />
             <T w="heavy" size={20}>{String(v)}</T>
             <T size={11} color={colors.muted}>{String(l)}</T>
           </View>
@@ -67,7 +67,7 @@ function Streak({ uid }: { uid: string }) {
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 4 }}>
         {(d.milestones || []).map((m: any) => (
           <View key={m.days} testID={"streak-cup-" + m.days} style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 8, height: 28, borderRadius: radius.pill, backgroundColor: m.earned ? colors.custom_warningSoft : colors.surface, borderWidth: 1, borderColor: colors.border }}>
-            <Icon name={m.earned ? "trophy" : "lock-outline"} size={13} color={m.earned ? colors.custom_amber : colors.muted} />
+            <Icon name={m.earned ? "trophy" : "lock-outline"} size={13} color={m.earned ? colors.custom_neonAmber : colors.muted} />
             <T w="bold" size={11}>{m.title} · {m.days}d</T>
           </View>
         ))}
@@ -91,13 +91,13 @@ export default function Live() {
   return (
     <ScrollView testID="series-hub" style={{ flex: 1, backgroundColor: colors.surface }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom + space.xl, paddingHorizontal: space.lg, gap: space.lg }}
       refreshControl={<RefreshControl refreshing={false} onRefresh={() => { series.reload(); history.reload(); }} />}>
-      <View style={{ marginHorizontal: -space.lg }}><Header title="Live JEE Series" eyebrow="All India · 62 days" color={colors.custom_series} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))} /></View>
+      <View style={{ marginHorizontal: -space.lg }}><Header title="Live JEE Series" eyebrow="All India · 62 days" color={colors.custom_seriesBright} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))} /></View>
       <SeriesBanner series={d} error={series.error} compact />
       {user ? <Streak uid={user.id} /> : null}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }} style={{ flexGrow: 0 }}>
-        <Chip testID="series-tab-today" label="Live & schedule" icon="access-point" active={tab === "today"} color={colors.custom_series} onPress={() => setTab("today")} />
-        <Chip testID="series-tab-archive" label="Archive" icon="archive-outline" active={tab === "archive"} color={colors.custom_series} onPress={() => setTab("archive")} />
-        <Chip testID="series-tab-results" label="My results" icon="chart-bar" active={tab === "results"} color={colors.custom_series} onPress={() => setTab("results")} />
+        <Chip testID="series-tab-today" label="Live & schedule" icon="access-point" active={tab === "today"} color={colors.custom_seriesBright} onPress={() => setTab("today")} />
+        <Chip testID="series-tab-archive" label="Archive" icon="archive-outline" active={tab === "archive"} color={colors.custom_seriesBright} onPress={() => setTab("archive")} />
+        <Chip testID="series-tab-results" label="My results" icon="chart-bar" active={tab === "results"} color={colors.custom_seriesBright} onPress={() => setTab("results")} />
         <Chip testID="series-tab-about" label="How it works" icon="information-outline" onPress={() => setOpen(true)} />
       </ScrollView>
       <ErrorBox error={series.error && !d ? series.error : ""} retry={series.reload} />
@@ -130,7 +130,7 @@ export default function Live() {
           {history.data?.items?.map((a: any) => (
             <Press key={a.id} testID={"series-result-" + a.id} onPress={() => router.push(((a.resumable ? "/attempt/" : "/result/") + a.id) as any)}>
               <Card style={{ gap: 4 }}>
-                <T w="bold" size={11} color={colors.custom_series}>{a.mode === "series_live" ? "LIVE ATTEMPT" : "ARCHIVE PRACTICE"} · {a.series_date ? istDate(a.series_date) : ""}</T>
+                <T w="bold" size={11} color={colors.custom_seriesBright}>{a.mode === "series_live" ? "LIVE ATTEMPT" : "ARCHIVE PRACTICE"} · {a.series_date ? istDate(a.series_date) : ""}</T>
                 <T w="heavy" size={15}>{a.title}</T>
                 <T size={13} color={colors.muted}>{a.summary ? `${a.summary.score} / ${a.summary.maximum} marks` : a.status === "embargoed" ? "Results release at 11:59 PM IST" : a.resumable ? "Attempt in progress" : "Preparing result"}</T>
               </Card>

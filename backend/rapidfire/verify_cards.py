@@ -30,7 +30,7 @@ async def check(sem, batch):
     for _ in range(3):
         async with sem:
             try:
-                chat = LlmChat(api_key=os.environ["EMERGENT_LLM_KEY"], session_id=str(uuid.uuid4()), system_message=SYSTEM).with_model("anthropic", "claude-sonnet-4-6")
+                chat = LlmChat(api_key=os.environ["EMERGENT_LLM_KEY"], session_id=str(uuid.uuid4()), system_message=SYSTEM.replace("JEE Main", batch[0].get("syllabus", "JEE Main"))).with_model("anthropic", "claude-sonnet-4-6")
                 text = await chat.send_message(UserMessage(text=f"Subject: {batch[0]['subject']} / {batch[0]['chapter']}\n\n{listing}"))
                 k = text.find("[")
                 rows = json.JSONDecoder().raw_decode(text[k:])[0] if k >= 0 else None
@@ -85,7 +85,9 @@ async def run_file(sem, path, stats):
 async def main():
     sem = asyncio.Semaphore(10)
     stats = {"dup": 0, "fix": 0, "drop": 0}
-    await asyncio.gather(*[run_file(sem, p, stats) for p in sorted(CARDS.glob("*.json"))])
+    import sys
+    prefixes = tuple(a.lower() for a in sys.argv[1:])
+    await asyncio.gather(*[run_file(sem, p, stats) for p in sorted(CARDS.glob("*.json")) if not prefixes or p.name.startswith(prefixes)])
     print("TOTAL", stats, flush=True)
 
 

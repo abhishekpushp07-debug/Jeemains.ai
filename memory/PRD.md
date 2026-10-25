@@ -96,8 +96,18 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Seated-opponent duels pay/count like normal duels; winner decided by score (forfeit = loss). Win bonus only with >=5 correct; all-skip duels give nothing. Opponent score is monotonic: natural pace when the student isn't really playing; when the student has >=5 correct it holds until overtaken, then ends 1-3 behind (per-match gap).
 - Waiting screen reuses the arena stage (BattleHero); "Quick match instead" fixed (cancel + replace).
 
+## Iteration 26-27 (2026-06)
+- Whole app = luxury black + blood red (CRED vibe): theme.ts palette swapped (near-black surfaces, ivory text, blood-red brand, champagne-gold accents, graphite cards), new key brandText #FF5266 for red text/icons, always-dark scheme, StatusBar light, app.json userInterfaceStyle dark.
+- Font: Plus Jakarta Sans 400-800 (assets/fonts/PlusJakartaSans-*.ttf, names Jakarta-*).
+- Question palette: current ivory, answered green, marked red, answered+marked gold, pending amber, visited graphite, fresh dark. Logo on white plate with gold border. Rarity colours silver/ruby/gold.
+
 ## Backlog
 - P1: Owner review of Rapid Fire cards; verify the user id on Rapid Fire endpoints server-side; native device QA (cookies, images, Expo Go).
 - P1: Phase 2 — verified identity/OTP, account deletion, privacy.
 - P2: Larger question images, richer confidence/progress charts, reduced-motion trophy animation.
 - P2: Phase 3 — controlled public release.
+
+## Iteration 16 (2026-06)
+- Contrast polish: outcome badges use on* text colours (SKIPPED readable), trophy icons use neonAmber.
+- Rapid Fire pool audit (backend/rapidfire/audit_cards.py, judge-only, no rewriting, cached in audit_cache.json): removed cards needing pen/paper; kept the most important 90 per chapter (120 cap for inorganic). JEE pool 11,086 → 7,045 (Physics 2610, Chemistry 2095, Maths 2340). Rejected cards in rapidfire/rejected/ (server retires them softly).
+- NEET UG in Rapid Fire: JEE MAIN / NEET UG toggle on the arena; NEET = Physics + Chemistry (shared pool) + Biology (32 NCERT chapters × 90 = 2,880 new cards, generated → verified → audited). Biology allowed in solo sessions and duels; catalog returns `exams` map.

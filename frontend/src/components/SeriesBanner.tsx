@@ -38,7 +38,7 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
           <T w="heavy" size={compact ? 21 : 24} color={colors.onBrandSecondary} testID="series-banner-title">JEE Mains Test Series</T>
         </View>
         <View style={{ backgroundColor: colors.brandTertiary, borderRadius: radius.md, paddingVertical: space.sm, paddingHorizontal: space.md, gap: 2 }}>
-          <T w="heavy" size={17} color={colors.custom_burgundy} testID="series-score-200-tagline">Score 200+ with AI</T>
+          <T w="heavy" size={17} color={colors.custom_seriesBright} testID="series-score-200-tagline">Score 200+ with AI</T>
           <T w="bold" size={12} color={colors.onSurface}>AI analysed PYQ based test series</T>
         </View>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm, alignItems: "center" }}>
@@ -51,8 +51,8 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
         {error ? <T size={11} color={colors.custom_whiteA70}>Live status unavailable. Open the hub to retry.</T> : null}
         <View style={{ flexDirection: "row", gap: space.sm }}>
           <Press testID="series-open-hub-button" onPress={() => router.push("/live")} style={{ flex: 1, minHeight: 46, borderRadius: radius.md, backgroundColor: colors.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 }}>
-            <T w="heavy" size={14} color={colors.custom_series}>Open series hub</T>
-            <Icon name="arrow-top-right" size={16} color={colors.custom_series} />
+            <T w="heavy" size={14} color={colors.onSurface}>Open series hub</T>
+            <Icon name="arrow-top-right" size={16} color={colors.onSurface} />
           </Press>
           <Press testID="series-explainer-button" onPress={() => setOpen(true)} accessibilityLabel="How the series works" style={{ width: 46, minHeight: 46, borderRadius: radius.md, borderWidth: 1, borderColor: colors.custom_whiteA70, alignItems: "center", justifyContent: "center" }}>
             <Icon name="information-outline" size={20} color={colors.onBrandSecondary} />
@@ -67,7 +67,7 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
 export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
     <Sheet visible={open} onClose={onClose} testID="series-explainer">
-      <T w="bold" size={11} color={colors.custom_series} style={{ letterSpacing: 1 }}>THE DAILY FULL-SYLLABUS CHALLENGE</T>
+      <T w="bold" size={11} color={colors.custom_seriesBright} style={{ letterSpacing: 1 }}>THE DAILY FULL-SYLLABUS CHALLENGE</T>
       <T w="heavy" size={22}>62 days. One focused mission.</T>
       <T w="bold" size={14}>AI analysed PYQ based test series</T>
       {[
@@ -78,7 +78,7 @@ export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () 
         "Previous days open in the practice archive at midnight.",
       ].map((x) => (
         <View key={x} style={{ flexDirection: "row", gap: 8 }}>
-          <Icon name="check-circle" size={16} color={colors.custom_series} />
+          <Icon name="check-circle" size={16} color={colors.custom_seriesBright} />
           <T size={13} style={{ flex: 1 }}>{x}</T>
         </View>
       ))}

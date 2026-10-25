@@ -6,7 +6,7 @@ import { Icon, IconName, Press, T } from "@/src/components/ui";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant" };
+const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", Biology: "dna" };
 const short = (s: string) => (s === "Mathematics" ? "Maths" : s);
 
 type Sub = { name: string; total: number; chapters: { name: string; count: number }[] };

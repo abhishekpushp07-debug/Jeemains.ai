@@ -190,25 +190,6 @@
   "verified": 1
  },
  {
-  "id": "4fe28807-92ff-4718-88b1-14a57822ee9a",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "L'Hôpital's Rule",
-  "prompt": "L'Hôpital's rule applies to which indeterminate forms?",
-  "formula": "",
-  "options": [
-   "0/0 and ∞/∞",
-   "1^∞ only",
-   "Only 0/0",
-   "All forms directly"
-  ],
-  "answer": 0,
-  "explain": "L'Hôpital applies directly to 0/0 and ∞/∞ forms.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "b3fd3724-d6ce-4ce3-807e-4b3dd9492c56",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -323,25 +304,6 @@
   "verified": 1
  },
  {
-  "id": "34e98ce9-e92a-4768-bcd0-b4bbee869b0c",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Squeeze Theorem",
-  "prompt": "Sandwich theorem: if g≤f≤h and lim g=lim h=L, then lim f=?",
-  "formula": "",
-  "options": [
-   "Between g and h",
-   "0",
-   "Undefined",
-   "L"
-  ],
-  "answer": 3,
-  "explain": "By Squeeze (Sandwich) theorem, f is forced to L.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "f3cbaac9-64cf-4972-9c0e-4bbf6223f435",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -432,25 +394,6 @@
   ],
   "answer": 3,
   "explain": "tan⁻¹x ≈ x near 0, so (tan⁻¹x)/x → 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2b0e0623-7d8e-4828-8ddc-5431def43f6a",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Properties of Limits",
-  "prompt": "If lim(x→a) f(x)=L, then lim(x→a) |f(x)| = ?",
-  "formula": "",
-  "options": [
-   "−L",
-   "|L|",
-   "Does not exist",
-   "L"
-  ],
-  "answer": 1,
-  "explain": "Modulus is continuous, so limit passes inside: |L|.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -795,24 +738,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "cdae4c99-4253-4143-89e5-3b0df8d68043",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→4) (x²−16)/(√x − 2) = ?",
-  "formula": "",
-  "options": [
-   "8",
-   "16",
-   "32",
-   "4"
-  ],
-  "answer": 2,
-  "explain": "x²−16=(x−4)(x+4); √x−2=(√x−2); rationalise to get 32.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "0aa9acdb-33f6-49d3-b76f-cde9b9b2106d",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -827,24 +752,6 @@
   ],
   "answer": 0,
   "explain": "Let t=x²→0; sin t/t → 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "5c529938-aaff-4293-a0cf-9e0ca0bbf37b",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (x·cot x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "π",
-   "0",
-   "∞"
-  ],
-  "answer": 0,
-  "explain": "x·cot x = x·cos x/sin x = (x/sin x)·cos x → 1·1 = 1.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main"
  },
@@ -1083,24 +990,6 @@
   "syllabus": "JEE Main"
  },
  {
-  "id": "544d8311-b189-4735-a5b4-17f70661c4a9",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0⁺) (ln x)/x = ?",
-  "formula": "",
-  "options": [
-   "∞",
-   "−∞",
-   "0",
-   "1"
-  ],
-  "answer": 1,
-  "explain": "As x→0⁺, ln x→−∞ while x→0⁺, so (ln x)/x→−∞.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
   "id": "07543f10-f18b-4aaf-9eaf-80870c3ca47f",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -1215,25 +1104,6 @@
   "verified": 1
  },
  {
-  "id": "2bb13bf1-0bae-4dac-b242-a442f407f8e8",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin x)^(tan x) = ?",
-  "formula": "",
-  "options": [
-   "∞",
-   "0",
-   "1",
-   "e"
-  ],
-  "answer": 2,
-  "explain": "0⁰ form: ln L = tan x·ln(sin x)→0·(−∞)→0; so L=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "61f91885-ce0f-42b4-8406-0e6d2404ba82",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -1329,25 +1199,6 @@
   "verified": 1
  },
  {
-  "id": "79c08442-9aab-4190-b2ee-ca91766ba779",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin(x²) + x²)/(x² cos x²) = ?",
-  "formula": "",
-  "options": [
-   "2",
-   "1",
-   "1/2",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "As x→0, sin(x²)/x²→1 and cos x²→1; (1+1)/1=2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "bd92dc3f-6475-441a-be6b-ce99e300f060",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -1367,63 +1218,6 @@
   "verified": 1
  },
  {
-  "id": "9797b805-2c2e-44bc-b838-15f776fa26ab",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (cosh x − 1)/x² = ?",
-  "formula": "cosh x = (eˣ+e⁻ˣ)/2",
-  "options": [
-   "0",
-   "1",
-   "1/2",
-   "2"
-  ],
-  "answer": 2,
-  "explain": "(cosh x−1)/x² → (x²/2)/x² = 1/2 using Taylor series of cosh x.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1ebef912-61ed-4d44-b6ff-9fab4f7528a4",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sinh x)/x = ?",
-  "formula": "sinh x = (eˣ−e⁻ˣ)/2",
-  "options": [
-   "2",
-   "0",
-   "1/2",
-   "1"
-  ],
-  "answer": 3,
-  "explain": "sinh x = x + x³/6 + …, so sinh x / x → 1 as x→0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8c4c2293-3a07-4abf-8104-5b67444db679",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (log(1+x) − x + x²/2)/x³ = ?",
-  "formula": "",
-  "options": [
-   "-1/3",
-   "1/6",
-   "1/3",
-   "-1/2"
-  ],
-  "answer": 2,
-  "explain": "Taylor: ln(1+x)=x−x²/2+x³/3−…, so numerator=x³/3+… giving −1/3 after sign check.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "e2ff040e-0c3e-4e5f-85a3-d6fa2eda4f88",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -1438,63 +1232,6 @@
   ],
   "answer": 3,
   "explain": "1−cos(1/x) ≈ 1/(2x²), so x²·1/(2x²) = 1/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a2738211-1e53-46c7-8f85-ffea431822bc",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (e^(tan x) − eˣ)/x² = ?",
-  "formula": "",
-  "options": [
-   "-1/2",
-   "0",
-   "1/2",
-   "1"
-  ],
-  "answer": 1,
-  "explain": "eˣ(e^(tan x−x)−1)/x²; tan x−x≈x³/3, e^(tan x−x)−1≈tan x−x, leading to 1/2 via careful expansion.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9c2f348a-1269-4890-bbcd-a03de7989732",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin(tan x) − tan(sin x))/x⁷ = ?",
-  "formula": "",
-  "options": [
-   "-1/30",
-   "1/6",
-   "1/30",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "Classic result: leading difference term gives −1/30 after Taylor expansion to 7th order.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "36df45c5-9692-465f-be7c-3d8891bb74fc",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "For lim(x→0) f(x)/g(x): if f→0 and g→0, which rule applies?",
-  "formula": "",
-  "options": [
-   "L'Hôpital (0/0 form)",
-   "Sandwich theorem",
-   "Continuity extension",
-   "AM-GM inequality"
-  ],
-  "answer": 0,
-  "explain": "0/0 is a standard indeterminate form resolved by L'Hôpital or series expansion.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1552,25 +1289,6 @@
   ],
   "answer": 0,
   "explain": "Using xᵏ−1=(x−1)(1+x+…+x^(k−1)), ratio of degrees gives m/n.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c2cc54da-061f-4e84-8cdd-2645334578e1",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0⁺) x^(sin x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "∞",
-   "e",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "sin x · ln x → 0 as x→0⁺ (same as x ln x→0), so limit = e⁰ = 1.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1647,25 +1365,6 @@
   ],
   "answer": 2,
   "explain": "x·ln(1+1/x) ≈ x·(1/x) = 1 as x→∞.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "32092fc6-cd90-42fd-8712-875839f0ad7c",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (tan x)/x · (1/cos x) = ?",
-  "formula": "",
-  "options": [
-   "∞",
-   "1/2",
-   "0",
-   "1"
-  ],
-  "answer": 3,
-  "explain": "tan x/x → 1 and 1/cos 0 = 1, so product → 1.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1804,44 +1503,6 @@
   "verified": 1
  },
  {
-  "id": "10ad08b4-f25e-42b5-9003-14c72611098b",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (2sin x − sin 2x)/(x(1 − cos x)) = ?",
-  "formula": "",
-  "options": [
-   "2",
-   "1",
-   "4",
-   "3"
-  ],
-  "answer": 0,
-  "explain": "Numerator≈2x−2x=0 to first order; expanding to x³: 2x−(2x−4x³/3)=4x³/3; denom x·x²/2=x³/2; ratio=8/3… use series carefully: answer is 2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9e5b056c-09cf-421b-a53b-ecd502ed4228",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (e^x − 1 − x − x²/2 − x³/6)/x⁴ = ?",
-  "formula": "",
-  "options": [
-   "1/12",
-   "0",
-   "1/24",
-   "1/6"
-  ],
-  "answer": 2,
-  "explain": "Taylor: eˣ = 1+x+x²/2+x³/6+x⁴/24+…, so leading remainder term gives 1/24.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "98cb3f00-8130-47d8-9b4d-4fe15f5a0efb",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -1856,25 +1517,6 @@
   ],
   "answer": 1,
   "explain": "1−cosx ~ x²/2 for small x, so x²/(x²/2) = 2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a243782b-9684-42c7-b281-4ef9b543ea8a",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin 2x + sin 6x)/(sin 5x + sin 3x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "3/4",
-   "2",
-   "8/8"
-  ],
-  "answer": 0,
-  "explain": "Divide numerator & denominator by x; sin(kx)/x→k, giving (2+6)/(5+3)=8/8=1.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -1899,63 +1541,6 @@
   "verified": 1
  },
  {
-  "id": "09c86f73-a74a-484c-9d38-82fe14fcde1b",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) x^(2/x) = ?",
-  "formula": "",
-  "options": [
-   "∞",
-   "1",
-   "0",
-   "e²"
-  ],
-  "answer": 1,
-  "explain": "(2/x)·ln x → 0 as x→∞, so limit = e⁰ = 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "09641349-ef51-47b5-b3cb-a5002596aef1",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin x − x)/x² = ?",
-  "formula": "",
-  "options": [
-   "−1/6",
-   "0",
-   "1/2",
-   "1/6"
-  ],
-  "answer": 1,
-  "explain": "sinx−x ~ −x³/6; dividing by x² gives −x/6 → 0 as x→0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7587fdc2-b1ad-4d84-9436-beeda107788a",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) cos(1/x) exists? Answer:",
-  "formula": "",
-  "options": [
-   "0",
-   "Does not exist",
-   "1",
-   "−1"
-  ],
-  "answer": 1,
-  "explain": "cos(1/x) oscillates between −1 and 1 as x→0; limit does not exist.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "e022f746-f842-4cf5-898d-2fe9ff4ad747",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -1970,44 +1555,6 @@
   ],
   "answer": 3,
   "explain": "Both → kx/x as x→0; (tan⁻¹3x)/x→3 and (sin⁻¹2x)/x→2, ratio = 3/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "501aa161-50e4-4f96-8c8b-e0ad8b71ac98",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) (x³ + x)^(1/3) − x = ?",
-  "formula": "",
-  "options": [
-   "0",
-   "1",
-   "∞",
-   "1/3"
-  ],
-  "answer": 0,
-  "explain": "(x³+x)^(1/3)=x(1+1/x²)^(1/3)≈x(1+1/(3x²))→x+1/(3x)→ difference→0; exact:1/3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0af150bc-15de-40d7-8e6d-4a28f8ff19d8",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (e^(x sin x) − 1)/x² = ?",
-  "formula": "",
-  "options": [
-   "0",
-   "1",
-   "1/2",
-   "2"
-  ],
-  "answer": 1,
-  "explain": "e^(xsinx)−1 ~ xsinx ~ x² for small x, so limit = x²/x² = 1.",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -2070,101 +1617,6 @@
   "verified": 1
  },
  {
-  "id": "176e9560-47ab-4d96-bc60-ae41474dcb60",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin⁻¹ x − tan⁻¹ x)/x³ = ?",
-  "formula": "",
-  "options": [
-   "0",
-   "1",
-   "1/6",
-   "1/2"
-  ],
-  "answer": 3,
-  "explain": "sin⁻¹x=x+x³/6+…, tan⁻¹x=x−x³/3+…; difference=x³/2, limit=1/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0dc7e425-5ced-41a1-98ef-23f992a5ba44",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (ln(sec x))/x² = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "−1/2",
-   "1/2",
-   "0"
-  ],
-  "answer": 2,
-  "explain": "ln(secx)=−ln(cosx)~x²/2 for small x, so limit = 1/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a9f11892-899c-468c-ac66-5559877cfbee",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (x − ln(1+x))/x² = ?",
-  "formula": "",
-  "options": [
-   "1/2",
-   "0",
-   "−1/2",
-   "1"
-  ],
-  "answer": 0,
-  "explain": "ln(1+x)=x−x²/2+…; x−ln(1+x)=x²/2+…; divide by x² → 1/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "90a72c7d-4565-48b9-94d3-ca76a0ef98e5",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) (2x − 1)^(1/x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "2",
-   "0",
-   "e"
-  ],
-  "answer": 0,
-  "explain": "(1/x)·ln(2x−1)→0 as x→∞, so limit = e⁰ = 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2e81fc57-7766-426f-ba32-3c98865c6aae",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) x·[1/x] = ? ([·] = floor function)",
-  "formula": "",
-  "options": [
-   "0",
-   "∞",
-   "1",
-   "Does not exist"
-  ],
-  "answer": 2,
-  "explain": "[1/x]/(1/x)→1 as x→0⁺ and x·[1/x]→1 since [t]/t→1 as t→+∞.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "9ea54cbc-b926-4b6d-abf4-e327400b9d8e",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -2179,177 +1631,6 @@
   ],
   "answer": 3,
   "explain": "1^∞ form: exponent (1/x)·2x=2 as x→0, so limit = e².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2dc7ca0e-bbd8-40e4-82b3-bf1366916955",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(n→∞) n·sin(π/n) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "π",
-   "0",
-   "∞"
-  ],
-  "answer": 1,
-  "explain": "sin(π/n)/(π/n)→1 as n→∞, so n·sin(π/n)→π.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "08f1ca5c-66aa-4607-8fe1-082b8849c8f2",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) (ln x)^(1/x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "e",
-   "∞",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "(1/x)·ln(lnx)→0 as x→∞ (log grows slower than any power), so limit = 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "329fce3d-8e65-418e-85a9-108bb7e92a36",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin x + cos x − 1)/x = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "−1",
-   "0",
-   "2"
-  ],
-  "answer": 0,
-  "explain": "sinx/x→1, (cosx−1)/x→0 as x→0, so sum → 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6eb2e001-5256-4b4f-a21f-d7f6bd4c8afb",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (cos 3x − cos 5x)/x² = ?",
-  "formula": "(b²−a²)/2 form",
-  "options": [
-   "16",
-   "−8",
-   "8",
-   "4"
-  ],
-  "answer": 2,
-  "explain": "(cos ax−cos bx)/x²→(b²−a²)/2=(25−9)/2=8",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "39e6c0cc-eeb0-4bb6-b956-24cc7d1bfe09",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (e^(3x) − 1 − 3x)/x² = ?",
-  "formula": "",
-  "options": [
-   "9",
-   "3",
-   "9/2",
-   "3/2"
-  ],
-  "answer": 2,
-  "explain": "Taylor: e^(3x)=1+3x+9x²/2+…, so limit=9/2",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "acd90e6d-b6c4-42c2-ab68-f30c28a40961",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→2) (x³ − 8)/(x² − 4) = ?",
-  "formula": "",
-  "options": [
-   "3",
-   "2",
-   "4",
-   "3/2"
-  ],
-  "answer": 0,
-  "explain": "Factor: (x³−8)/(x²−4)=(x²+2x+4)/(x+2)→12/4=3",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "30622182-c55f-4b1b-8166-d07318980416",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin 5x − sin 3x)/x = ?",
-  "formula": "",
-  "options": [
-   "5",
-   "8",
-   "2",
-   "−2"
-  ],
-  "answer": 2,
-  "explain": "lim sin(kx)/x=k, so limit=5−3=2",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "15da9ae6-f203-4834-9698-130c5a8038b0",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) (1 − 1/x²)^(x²) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "e",
-   "e⁻²",
-   "e⁻¹"
-  ],
-  "answer": 3,
-  "explain": "lim(1+u)^(1/u)=e with u=−1/x²→0, so limit=e⁻¹",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5b331fb3-dbe3-46d8-858d-7bf6dc0642c5",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (1 − cos 4x)/(1 − cos 3x) = ?",
-  "formula": "",
-  "options": [
-   "8/3",
-   "9/16",
-   "4/3",
-   "16/9"
-  ],
-  "answer": 3,
-  "explain": "(1−cos nx)/x²→n²/2; ratio=4²/3²=16/9",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1
@@ -2374,82 +1655,6 @@
   "verified": 1
  },
  {
-  "id": "2752f239-813d-488f-9322-ffff22b5135d",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→1) (ln x)/(x − 1) = ?",
-  "formula": "",
-  "options": [
-   "1/e",
-   "e",
-   "0",
-   "1"
-  ],
-  "answer": 3,
-  "explain": "Standard limit: lim(x→1) ln x/(x−1)=1 (derivative of ln x at x=1)",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "74d3eb44-1ada-4a4b-ab92-c4c1e2840845",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0⁺) x^(x²) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "∞",
-   "e",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "ln L=x²·ln x→0 as x→0⁺, so L=e⁰=1",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c37156ba-1398-4bc8-8213-81157b11e6a9",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) (x + sin x)/x = ?",
-  "formula": "",
-  "options": [
-   "∞",
-   "0",
-   "1",
-   "does not exist"
-  ],
-  "answer": 2,
-  "explain": "=1+(sin x)/x→1+0=1 since |sin x|≤1",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "729ccbfc-a84c-4815-930b-001dbb7b08fb",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin x · ln(1+x))/x² = ?",
-  "formula": "",
-  "options": [
-   "2",
-   "1",
-   "1/2",
-   "0"
-  ],
-  "answer": 1,
-  "explain": "(sin x/x)·(ln(1+x)/x)→1·1=1",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "815401e6-84fb-4467-9984-a0dd033cbd74",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -2469,120 +1674,6 @@
   "verified": 1
  },
  {
-  "id": "36adaa2b-0a83-4384-9fab-ea9d3f0e5945",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (cos x)^(1/sin²x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "e^(−1/2)",
-   "e⁻¹",
-   "e^(1/2)"
-  ],
-  "answer": 1,
-  "explain": "ln L=(ln cos x)/sin²x→(−x²/2)/x²=−1/2, so L=e^(−1/2)",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "72ef64d2-723d-4550-b2a1-0607964ba265",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) x·ln(1 + 3/x) = ?",
-  "formula": "",
-  "options": [
-   "1/3",
-   "∞",
-   "3",
-   "0"
-  ],
-  "answer": 2,
-  "explain": "x·ln(1+3/x)→x·(3/x)=3 using ln(1+u)/u→1",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1a070895-308e-4206-a52c-f0f93a7d8b59",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (1 − cos x)/x·sin x = ?",
-  "formula": "",
-  "options": [
-   "0",
-   "2",
-   "1/2",
-   "1"
-  ],
-  "answer": 2,
-  "explain": "(1−cos x)/x²·(x/sin x)→(1/2)·1=1/2",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e4333c08-6cd3-4d8e-9135-62e8e910e1ae",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) sin(x + a)/sin a (a ≠ nπ) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "sin a",
-   "cos a",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "Direct substitution: sin(0+a)/sin a=sin a/sin a=1",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2f3480c3-281b-41be-a6ee-45265255a2cc",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) x·(1 − cos(2/x)) = ?",
-  "formula": "",
-  "options": [
-   "0",
-   "4",
-   "∞",
-   "2"
-  ],
-  "answer": 0,
-  "explain": "1−cos(2/x)≈2/x²; x·(2/x²)=2/x→0",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6d608ee0-ab9a-45f9-8127-d4cef986ce29",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin 2x)(1 − cos x)/x³ = ?",
-  "formula": "",
-  "options": [
-   "2",
-   "1/2",
-   "1",
-   "0"
-  ],
-  "answer": 2,
-  "explain": "(sin2x/x)·((1−cosx)/x²)→2·(1/2)=1",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
   "id": "1467987e-e436-4234-abdf-1c126a1bd7dd",
   "subject": "Mathematics",
   "chapter": "Limits",
@@ -2597,120 +1688,6 @@
   ],
   "answer": 0,
   "explain": "ln L=(b/x)·ln(1+ax)→(b/x)·ax=ab, so L=e^(ab)",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "633d92eb-0eb2-4b5f-975e-26b3f797ba4a",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (tan x − sin x)/(x² tan x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "0",
-   "2",
-   "1/2"
-  ],
-  "answer": 3,
-  "explain": "tan x−sin x=sin x(sec x−1)≈x·(x²/2); divide by x²·x→1/2",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4ae45b74-0876-46d6-b7ad-962e85afa22b",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (eˣ − 1)/x^(1/2) = ?",
-  "formula": "",
-  "options": [
-   "e",
-   "1",
-   "∞",
-   "0"
-  ],
-  "answer": 3,
-  "explain": "(eˣ−1)≈x→0 and x^(1/2)→0 faster? No: x/√x=√x→0",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9c2fbaf1-5218-436f-8659-54752cfee64e",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (2 − √(4 − x))/x = ?",
-  "formula": "",
-  "options": [
-   "1/2",
-   "1",
-   "1/4",
-   "4"
-  ],
-  "answer": 2,
-  "explain": "Rationalise: multiply by (2+√(4−x)); limit=1/(2+2)=1/4",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7a147fbc-0966-45e5-80fc-cfc8fd0debbc",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→∞) (x² − x + 1)/(2x² + 3) = ?",
-  "formula": "",
-  "options": [
-   "0",
-   "1/2",
-   "1",
-   "2"
-  ],
-  "answer": 1,
-  "explain": "Divide by x²: (1−1/x+1/x²)/(2+3/x²)→1/2",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a78380fa-86e2-4093-a8ea-a8909b72e3d2",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (sin x)/(x + tan x) = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "2",
-   "1/2",
-   "0"
-  ],
-  "answer": 2,
-  "explain": "Divide num/denom by x: (sinx/x)/(1+tanx/x)→1/(1+1)=1/2",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "06bc0f64-3747-4f1f-81bc-10078ab814df",
-  "subject": "Mathematics",
-  "chapter": "Limits",
-  "topic": "Limits",
-  "prompt": "lim(x→0) (1+sin x)^(2/x) = ?",
-  "formula": "",
-  "options": [
-   "e^(1/2)",
-   "e",
-   "1",
-   "e²"
-  ],
-  "answer": 3,
-  "explain": "ln L=(2/x)·ln(1+sin x)→(2/x)·x=2, so L=e²",
   "review_status": "pilot_review_pending",
   "syllabus": "JEE Main",
   "verified": 1

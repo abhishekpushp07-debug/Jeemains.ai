@@ -47,7 +47,7 @@ export default function Mission() {
         <Animated.View key={s.title} entering={FadeInDown.delay(80 * (i + 1)).duration(380)}>
           <Card style={{ flexDirection: "row", gap: space.md }}>
             <View style={{ width: 46, height: 46, borderRadius: 14, backgroundColor: colors.custom_infoSoft, alignItems: "center", justifyContent: "center" }}>
-              <Icon name={s.icon} size={26} color={colors.custom_series} />
+              <Icon name={s.icon} size={26} color={colors.custom_seriesBright} />
             </View>
             <View style={{ flex: 1, gap: 2 }}>
               <T w="heavy" size={16}>{s.title}</T>
@@ -58,8 +58,8 @@ export default function Mission() {
       ))}
 
       <Card style={{ alignItems: "center", gap: space.md, backgroundColor: colors.brandTertiary, borderColor: colors.brandTertiary }}>
-        <Image source={require("../../assets/images/jeelive-icon.png")} style={{ width: 56, height: 56, borderRadius: 14 }} />
-        <T w="heavy" size={20} color={colors.custom_burgundy} style={{ textAlign: "center" }}>It’s free. Pass it on.</T>
+        <Image source={require("../../assets/images/jeelive-icon.png")} style={{ width: 56, height: 56, borderRadius: 14, borderWidth: 1.5, borderColor: colors.custom_neonAmber }} />
+        <T w="heavy" size={20} color={colors.custom_seriesBright} style={{ textAlign: "center" }}>It’s free. Pass it on.</T>
         <T size={13} style={{ textAlign: "center" }}>Share JEELIVE.AI with your friends, batchmates and juniors. One share can change someone’s preparation.</T>
         <Button testID="mission-share-button" label="Share with friends" icon="share-variant" onPress={share} color={colors.custom_burgundy} style={{ alignSelf: "stretch" }} />
       </Card>

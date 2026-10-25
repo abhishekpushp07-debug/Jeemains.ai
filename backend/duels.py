@@ -21,7 +21,7 @@ WAIT_SECONDS = 120
 
 class DuelCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics"]
+    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"]
     chapter: Optional[str] = Field(default=None, max_length=80)
     mode: Literal["random", "invite"]
     name: str = Field(min_length=1, max_length=24)

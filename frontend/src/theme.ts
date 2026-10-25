@@ -5,105 +5,107 @@ import { Appearance, StyleSheet, useColorScheme } from "react-native";
 export type ColorScheme = "light" | "dark";
 
 const light = {
-  surface: "#F5F7FC",
-  onSurface: "#0B1F2A",
-  surfaceSecondary: "#FFFFFF",
-  onSurfaceSecondary: "#0B1F2A",
-  surfaceTertiary: "#FFF5F3",
-  onSurfaceTertiary: "#991B1B",
-  surfaceInverse: "#0C1220",
+  surface: "#070707",
+  onSurface: "#F4EFEA",
+  surfaceSecondary: "#121214",
+  onSurfaceSecondary: "#F4EFEA",
+  surfaceTertiary: "#1E0A0E",
+  onSurfaceTertiary: "#FF5266",
+  surfaceInverse: "#B0001E",
   onSurfaceInverse: "#FFFFFF",
-  muted: "#64748B",
+  muted: "#9A938C",
+  brandText: "#FF5266", // readable blood red for text/icons on black (AA)
 
-  brand: "#2459D8",
+  brand: "#C8102E",
   onBrand: "#FFFFFF",
-  brandPrimary: "#2459D8",
+  brandPrimary: "#C8102E",
   onBrandPrimary: "#FFFFFF",
-  brandSecondary: "#0B2D80",
+  brandSecondary: "#6E0014",
   onBrandSecondary: "#FFFFFF",
-  brandTertiary: "#FFF5F3",
-  onBrandTertiary: "#991B1B",
+  brandTertiary: "#1E0A0E",
+  onBrandTertiary: "#FF5266",
 
-  success: "#15803D",
-  onSuccess: "#FFFFFF",
-  warning: "#B45309",
-  onWarning: "#FFFFFF",
-  error: "#B91C1C",
+  success: "#34C185",
+  onSuccess: "#04140C",
+  warning: "#E0A526",
+  onWarning: "#1A1204",
+  error: "#FF3D55",
   onError: "#FFFFFF",
-  info: "#1D4ED8",
-  onInfo: "#FFFFFF",
+  info: "#D9B45A",
+  onInfo: "#120C02",
 
-  border: "#E2E8F0",
-  borderStrong: "#CBD5E1",
-  divider: "#E2E8F0",
+  border: "#242426",
+  borderStrong: "#36363A",
+  divider: "#1C1C1E",
 
   // Exam & subject identities (user supplied)
   custom_examJee: "#C8102E",
-  custom_examJeeDeep: "#7A0A1C",
-  custom_examBitsat: "#F97316",
-  custom_examBitsatDeep: "#B4470B",
-  custom_examComedk: "#0A0A0A",
-  custom_examComedkGold: "#D4AF37",
-  custom_series: "#0B2D80",
-  custom_seriesBright: "#2F6BFF",
-  custom_burgundy: "#991B1B",
-  custom_subjectPhysics: "#2459D8",
-  custom_subjectChemistry: "#087B68",
-  custom_subjectMaths: "#B92B45",
-  custom_darkCard: "#141D2D",
-  custom_amber: "#9E550A",
-  custom_cyan: "#087DA2",
-  custom_reading: "#FFFFFF",
-  custom_onReading: "#0B1F2A",
-  custom_successSoft: "#DCFCE7",
-  custom_errorSoft: "#FEE2E2",
-  custom_warningSoft: "#FEF3C7",
-  custom_infoSoft: "#E0EAFF",
-  custom_gameBg: "#070B18",
-  custom_gameCard: "#111833",
-  custom_gameCardHi: "#1A2450",
-  custom_gameLine: "#26325E",
-  custom_neonAmber: "#FBBF24",
-  custom_neonCyan: "#22D3EE",
-  custom_neonGreen: "#34D399",
-  custom_neonViolet: "#A78BFA",
-  custom_neonMagenta: "#E879F9",
-  custom_rarityRare: "#38BDF8",
-  custom_rarityEpic: "#C084FC",
-  custom_rarityLegendary: "#FBBF24",
-  custom_rarityCommon: "#94A3B8",
-  custom_neonRed: "#FB7185",
-  custom_gameMuted: "#94A3C7",
-  custom_overlay: "rgba(12,18,32,0.55)",
+  custom_examJeeDeep: "#4A0010",
+  custom_examBitsat: "#E0452B",
+  custom_examBitsatDeep: "#7A1A0C",
+  custom_examComedk: "#16161A",
+  custom_examComedkGold: "#D9B45A",
+  custom_series: "#6E0014",
+  custom_seriesBright: "#E23A4B",
+  custom_burgundy: "#8A0F24",
+  custom_subjectPhysics: "#D7263D",
+  custom_subjectChemistry: "#8A6A22",
+  custom_subjectMaths: "#74747F",
+  custom_subjectBiology: "#1F7A55",
+  custom_darkCard: "#121214",
+  custom_amber: "#7D5F1E",
+  custom_cyan: "#D9B45A",
+  custom_reading: "#121214",
+  custom_onReading: "#F4EFEA",
+  custom_successSoft: "#0E2219",
+  custom_errorSoft: "#2A0A10",
+  custom_warningSoft: "#261D08",
+  custom_infoSoft: "#1E0A0E",
+  custom_gameBg: "#000000",
+  custom_gameCard: "#111113",
+  custom_gameCardHi: "#1A1A1D",
+  custom_gameLine: "#2A2A2E",
+  custom_neonAmber: "#E8C46A",
+  custom_neonCyan: "#FF4D5E",
+  custom_neonGreen: "#3DDC97",
+  custom_neonViolet: "#B0001E",
+  custom_neonMagenta: "#FF2E4D",
+  custom_rarityRare: "#C0C6CF",
+  custom_rarityEpic: "#E23A4B",
+  custom_rarityLegendary: "#E8C46A",
+  custom_rarityCommon: "#8E8A86",
+  custom_neonRed: "#FF3D55",
+  custom_gameMuted: "#9A938C",
+  custom_overlay: "rgba(0,0,0,0.72)",
   custom_whiteA70: "rgba(255,255,255,0.72)",
   custom_whiteA15: "rgba(255,255,255,0.15)",
 };
 
 export type ThemeColors = typeof light;
 
-export const defaultScheme = "light" satisfies ColorScheme;
-export const themes: { light: ThemeColors; dark?: ThemeColors } = { light };
+export const defaultScheme = "dark" satisfies ColorScheme;
+export const themes: { light: ThemeColors; dark?: ThemeColors } = { light, dark: light };
 
 export function setColorScheme(scheme: ColorScheme | null) {
   Appearance.setColorScheme?.(scheme ?? "unspecified");
 }
-setColorScheme?.(themes.dark ? null : defaultScheme);
+setColorScheme?.(defaultScheme); // the luxury theme is always dark
 
 export const colors = light;
 
 export const fonts = {
-  regular: "Figtree-400",
-  medium: "Figtree-500",
-  semibold: "Figtree-600",
-  bold: "Figtree-700",
-  heavy: "Figtree-800",
+  regular: "Jakarta-400",
+  medium: "Jakarta-500",
+  semibold: "Jakarta-600",
+  bold: "Jakarta-700",
+  heavy: "Jakarta-800",
 };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
 export const radius = { sm: 6, md: 12, lg: 20, pill: 999 };
 
 export const subjectColor = (s?: string) =>
-  s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : light.custom_cyan;
+  s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;
 
 export function useTheme(): { scheme: ColorScheme; colors: ThemeColors } {
   const system = useColorScheme();

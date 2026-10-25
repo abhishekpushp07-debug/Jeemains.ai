@@ -86,13 +86,13 @@ export default function MyTests() {
             Started {unixDate(item.started_at)} · {item.saved_answers}/{item.count} saved
             {item.remaining_seconds ? " · " + fmtClock(Math.round(item.remaining_seconds)) + " left" : ""}
           </T>
-          {item.summary ? <T w="heavy" size={15} color={colors.brandPrimary}>{item.summary.score} / {item.summary.maximum} marks{item.summary.accuracy != null ? ` · ${item.summary.accuracy}% accuracy` : ""}</T> : null}
+          {item.summary ? <T w="heavy" size={15} color={colors.brandText}>{item.summary.score} / {item.summary.maximum} marks{item.summary.accuracy != null ? ` · ${item.summary.accuracy}% accuracy` : ""}</T> : null}
           <View style={{ flexDirection: "row", gap: space.sm, alignItems: "center" }}>
-            <T w="bold" size={13} color={colors.brandPrimary}>{item.resumable ? "Resume exact attempt →" : "Open result →"}</T>
+            <T w="bold" size={13} color={colors.brandText}>{item.resumable ? "Resume exact attempt →" : "Open result →"}</T>
             <View style={{ flex: 1 }} />
             {item.compare_eligible ? (
               <Press testID={"compare-select-" + item.id} onPress={() => choose(item)} accessibilityLabel="Select for comparison" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, height: 36, borderRadius: radius.pill, borderWidth: 1, borderColor: picked ? colors.brandPrimary : colors.border, backgroundColor: picked ? colors.custom_infoSoft : colors.surfaceSecondary }}>
-                <Icon name={picked ? "checkbox-marked" : "checkbox-blank-outline"} size={16} color={colors.brandPrimary} />
+                <Icon name={picked ? "checkbox-marked" : "checkbox-blank-outline"} size={16} color={colors.brandText} />
                 <T w="bold" size={12}>Compare</T>
               </Press>
             ) : null}
@@ -123,7 +123,7 @@ export default function MyTests() {
         <FlatList horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
           data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), ...["", "JEE Main", "BITSAT", "COMEDK"].map((e) => ({ k: "e" + e, v: e, l: e || "All exams", kind: "exam" }))]}
           keyExtractor={(x) => x.k}
-          renderItem={({ item }) => <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} color={item.kind === "exam" ? colors.custom_series : colors.brandPrimary} onPress={() => (item.kind === "status" ? setStatus(item.v) : setExam(item.v))} />}
+          renderItem={({ item }) => <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} color={item.kind === "exam" ? colors.custom_seriesBright : colors.brandPrimary} onPress={() => (item.kind === "status" ? setStatus(item.v) : setExam(item.v))} />}
         />
       </View>
       {selected.length > 0 ? (

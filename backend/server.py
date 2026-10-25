@@ -136,7 +136,7 @@ class Card(BaseDocument):
 
 class SessionCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics"]
+    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"]
     chapter: Optional[str] = Field(default=None, max_length=80)
     count: int = Field(default=30, ge=1, le=30)
     card_ids: Optional[List[str]] = Field(default=None, max_length=30)
@@ -223,12 +223,14 @@ CATALOG_CACHE: dict = {}
 async def rf_catalog():
     if "v" not in CATALOG_CACHE:
         rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}}}]).to_list(1000)
-        order = json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text())
+        order = {**json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text()),
+                 **json.loads((ROOT_DIR / "rapidfire" / "neet_chapters.json").read_text())}
         counts = {(r["_id"]["s"], r["_id"]["c"]): r["n"] for r in rows}
         CATALOG_CACHE["v"] = {"subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
                               "chapters": [{"name": c, "count": counts.get((s, c), 0)} for c in chs]} for s, chs in order.items()],
+                              "exams": {"JEE": ["Physics", "Chemistry", "Mathematics"], "NEET": ["Physics", "Chemistry", "Biology"]},
                               "review_status": "pilot_review_pending",
-                              "note": "Formula/concept cards authored for the JEE Main syllabus. Pending owner review during the private pilot."}
+                              "note": "Formula/concept cards for JEE Main and NEET (UG). Pending owner review during the private pilot."}
     return CATALOG_CACHE["v"]
 
 

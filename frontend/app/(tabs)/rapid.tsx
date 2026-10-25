@@ -16,10 +16,13 @@ import { playSfx } from "@/src/sfx";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 
-const pick = { subject: "Physics", chapter: "" as string };
+const pick = { exam: "JEE" as "JEE" | "NEET", subject: "Physics", chapter: "" as string };
 // Purchased arena themes (fixed artwork colours, identical in light/dark).
 const THEME_BG: Record<string, string> = { theme_inferno: "#1F0707", theme_ocean: "#03202B", theme_gold: "#1F1704" };
-const SUBJECTS: [string, string, IconName][] = [["Physics", "Physics", "atom"], ["Chemistry", "Chemistry", "flask-outline"], ["Mathematics", "Maths", "function-variant"]];
+const EXAM_SUBJECTS: Record<"JEE" | "NEET", [string, string, IconName][]> = {
+  JEE: [["Physics", "Physics", "atom"], ["Chemistry", "Chemistry", "flask-outline"], ["Mathematics", "Maths", "function-variant"]],
+  NEET: [["Physics", "Physics", "atom"], ["Chemistry", "Chemistry", "flask-outline"], ["Biology", "Biology", "dna"]],
+};
 type Pane = "board" | "recent" | "trophies";
 
 const scoreColor = (m: any) => {
@@ -32,9 +35,15 @@ export default function RapidHome() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
+  const [exam, setExam] = useState(pick.exam);
   const [subject, setSubject] = useState(pick.subject);
   const [chapter, setChapter] = useState(pick.chapter);
-  Object.assign(pick, { subject, chapter });
+  Object.assign(pick, { exam, subject, chapter });
+  const SUBJECTS = EXAM_SUBJECTS[exam];
+  const switchExam = (e: "JEE" | "NEET") => {
+    setExam(e);
+    if (!EXAM_SUBJECTS[e].some(([s]) => s === subject)) { setSubject(e === "NEET" ? "Biology" : "Mathematics"); setChapter(""); }
+  };
   const cat = useCached<any>("rf.catalog", () => rf("/catalog", user?.id || "guest-viewer"));
   const hist = useCached<any>(user ? `u.${user.id}.rfhist` : null, () => rf("/history", user!.id));
   const duels = useCached<any>(user ? `u.${user.id}.duels` : null, () => rf("/duels", user!.id));
@@ -94,6 +103,15 @@ export default function RapidHome() {
         <Animated.View entering={FadeInDown.duration(350)} style={{ gap: space.lg }}>
           <BattleHero me={{ avatar: p?.avatar, frame: p?.equipped?.frame, entry: p?.equipped?.entry }} record={record}
             subjects={
+              <View style={{ gap: space.sm }}>
+              <View testID="rf-exam-toggle" style={{ flexDirection: "row", alignSelf: "center", gap: space.lg }}>
+                {(["JEE", "NEET"] as const).map((e) => (
+                  <Press key={e} testID={"rf-exam-" + e.toLowerCase()} onPress={() => switchExam(e)} accessibilityLabel={e === "JEE" ? "JEE Main" : "NEET UG"}
+                    style={{ minHeight: 44, minWidth: 64, alignItems: "center", justifyContent: "center", borderBottomWidth: 2, borderBottomColor: exam === e ? colors.custom_neonAmber : "transparent" }}>
+                    <T w="heavy" size={13} color={exam === e ? colors.custom_neonAmber : colors.custom_gameMuted} style={{ letterSpacing: 2 }}>{e === "JEE" ? "JEE MAIN" : "NEET UG"}</T>
+                  </Press>
+                ))}
+              </View>
               <View style={{ flexDirection: "row", padding: 4, gap: 4, borderRadius: radius.pill, backgroundColor: colors.custom_gameBg + "D9", borderWidth: 1, borderColor: colors.custom_gameLine }}>
                 {SUBJECTS.map(([s, l, ic]) => {
                   const on = subject === s;
@@ -104,6 +122,7 @@ export default function RapidHome() {
                     </Press>
                   );
                 })}
+              </View>
               </View>
             }
             chapterPill={!cat.data && !cat.error ? <Skeleton h={52} /> : (
@@ -217,8 +236,8 @@ export default function RapidHome() {
         <T size={10} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>Practice XP only. Never changes mock marks, ranks or the series streak.</T>
       </ScrollView>
 
-      <ChapterSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={cat.data?.subjects || []} subject={subject} chapter={chapter}
-        recent={recent} onPick={(sb, ch) => { setSubject(sb); setChapter(ch); setSheet(""); }} />
+      <ChapterSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={(cat.data?.subjects || []).filter((s: any) => SUBJECTS.some(([n]) => n === s.name))} subject={subject} chapter={chapter}
+        recent={recent.filter((r) => SUBJECTS.some(([n]) => n === r.subject))} onPick={(sb, ch) => { if (!SUBJECTS.some(([n]) => n === sb)) setExam(sb === "Biology" ? "NEET" : "JEE"); setSubject(sb); setChapter(ch); setSheet(""); }} />
 
       <Sheet visible={sheet === "quests"} onClose={() => setSheet("")} testID="rf-quests-sheet">
         <T w="heavy" size={18}>Daily quests</T>
@@ -232,7 +251,7 @@ export default function RapidHome() {
                 <Press testID={"rf-quest-claim-" + q.id} onPress={async () => { setClaimErr(""); try { await rf("/quests/claim", user!.id, { method: "POST", body: { id: q.id } }); playSfx("coin"); prof.reload(); } catch (e: any) { setClaimErr(e?.message || "Couldn't claim. Please retry in a moment."); } }} style={{ paddingHorizontal: 16, height: 44, borderRadius: 22, backgroundColor: colors.custom_neonAmber, justifyContent: "center" }}>
                   <T w="heavy" size={13} color={colors.custom_gameBg}>Claim +{q.coins}</T>
                 </Press>
-              ) : <T w="bold" size={12} color={colors.custom_amber}>{q.claimed ? "Claimed" : `${q.progress}/${q.goal} · +${q.coins}`}</T>}
+              ) : <T w="bold" size={12} color={colors.custom_neonAmber}>{q.claimed ? "Claimed" : `${q.progress}/${q.goal} · +${q.coins}`}</T>}
             </View>
             <View style={{ height: 4, borderRadius: 2, backgroundColor: colors.border, overflow: "hidden" }}>
               <View style={{ width: `${(q.progress / q.goal) * 100}%`, height: "100%", backgroundColor: q.done ? colors.success : colors.brandPrimary }} />

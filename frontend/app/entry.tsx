@@ -36,7 +36,9 @@ export default function Entry() {
     <View style={{ flex: 1, backgroundColor: colors.surface }}>
       <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" contentContainerStyle={{ paddingTop: insets.top + space.xl, paddingBottom: insets.bottom + space.xl, paddingHorizontal: space.xl, gap: space.lg }}>
         <Animated.View entering={FadeInDown.duration(400)} style={{ alignItems: "center", gap: space.md }}>
-          <Image source={require("../assets/images/jeelive-logo.webp")} style={{ width: 240, height: 90 }} contentFit="contain" accessibilityLabel="JEELIVE.AI logo" />
+          <View style={{ borderRadius: 16, padding: 6, backgroundColor: "#FFFFFF", borderWidth: 1.5, borderColor: colors.custom_neonAmber }}>
+            <Image source={require("../assets/images/jeelive-logo.webp")} style={{ width: 240, height: 90 }} contentFit="contain" accessibilityLabel="JEELIVE.AI logo" />
+          </View>
           <T w="heavy" size={26} style={{ textAlign: "center" }}>Practice with purpose.</T>
           <T size={15} color={colors.muted} style={{ textAlign: "center" }}>JEE Main · BITSAT · COMEDK — mocks, chapter tests, clear solutions and 20-second Rapid Fire recall.</T>
         </Animated.View>

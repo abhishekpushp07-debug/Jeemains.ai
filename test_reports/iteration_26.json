@@ -1,0 +1,59 @@
+{
+  "summary": "Visual audit of the black + blood-red luxury theme at 390x844 and 360x800. Covered: entry, Home (tiles, series banner, tab bar), exam hubs, catalogue (chapters, mocks, history), set detail, attempt player (options, confidence, palette sheet, submit sheet), result (Analysis, Progress, Confidence, Rank, Solutions with AI solution on BITSAT Full Mock 01), My Tests, Mission, Live, Account, Rapid Fire lobby, chapter sheet, solo session (play, exit sheet, summary), duel (waiting, intro, play, feedback, result, review) and store. Plus Jakarta Sans loads, and every RN text node renders in Jakarta-400..800 (DOM check found no fallback font and no clipping, apart from expected ellipses). I fixed 8 dark-on-dark colour-key problems where custom_series #6E0014 or custom_burgundy #8A0F24 was used as a text or icon colour. Some issues remain: the logo is a white box, the question palette uses several shades of red that look alike, brandPrimary text is below AA, the Maths subject grey is low-contrast, white text sits on amber, the AI-solution WebView uses a system font, and the iOS 26 NativeTabs keep the default blue tint. Overall luxury feel: 7/10. No deprecated Expo packages found (no expo-av, expo-barcode-scanner or expo-background-fetch).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Attempt palette status colours", "issue": "Current (#B0001E), Answered & marked (custom_series #6E0014) and Visited (errorSoft #2A0A10 with error text) are all red or maroon. On a 50-question grid they look the same. The legend swatches for Not visited (surfaceSecondary on surfaceSecondary) and Pending (warningSoft #261D08) are almost invisible. Reference: app/attempt/[id].tsx:16-22. Suggest: current = onSurface ivory fill with surface text (or a gold ring); answered_marked = custom_neonAmber fill with onWarning text plus a check icon; visited = borderStrong outline on surface; give each legend swatch a 1px borderStrong border.", "testID": "player-palette-button", "priority": "HIGH"},
+      {"component": "Logo white box", "issue": "jeelive-logo.webp is a white rectangle with blue and purple artwork. On Home it sits unframed in the top-left (app/(tabs)/index.tsx:55). On entry, contentFit=contain leaves black gutters to the left and right of the white plate inside the frame (app/entry.tsx frame). The frame border custom_neonAmber+'55' (33% alpha) looks grey, not gold. The Mission share icon jeelive-icon.png is also a white tile. Suggest a transparent or ivory-on-black version of the logo, or put it on a padded ivory plate with a solid custom_neonAmber 1px border.", "testID": "entry-phone-input", "priority": "HIGH"},
+      {"component": "Brand red as text colour", "issue": "brandPrimary #C8102E on #121214 or #070707 is about 3.2:1, which fails AA for body-size text. This affects every secondary or ghost Button label (ui.tsx:57 fg = color ?? brandPrimary), the ErrorBox Retry link (ui.tsx:128), Sign out, Keep working, 'Try chapter-wise practice', the history score '0 / 426', and the Empty icon. Suggest adding a theme key brandText '#FF5266' (about 5.9:1) and using it for Button fg when kind is secondary or ghost, and for text links.", "testID": "player-confirm-submit", "priority": "MEDIUM"},
+      {"component": "Maths subject colour as text", "issue": "custom_subjectMaths #5E5E66 used as text ('Mathematics' in the result subject breakdown) is about 2.9:1 on #121214. Reference: app/result/[id].tsx:70. Inactive Maths chip icons (attempt/[id].tsx:131, catalogue.tsx:106) have the same problem. The key is also used as a background behind white text, so don't brighten it globally. Add custom_subjectMathsText '#B8B8C2' and use it for text and icons.", "testID": "result-subject-Mathematics", "priority": "MEDIUM"},
+      {"component": "Result tab chips inactive icon", "issue": "Chip color=surfaceInverse #B0001E, so inactive icons are #B0001E on #121214 (about 2.4:1). Reference: app/result/[id].tsx:294. Use brandPrimary or custom_seriesBright.", "testID": "result-tab-solutions", "priority": "LOW"},
+      {"component": "White text on custom_amber", "issue": "custom_amber #A8812F with white text is about 3.4:1. This affects the 'Marked' palette state (attempt/[id].tsx:18, fg onBrandPrimary), the 'Finish & see summary' button in the Rapid Fire exit sheet, and the store 'Use · Free' buttons. Suggest custom_neonAmber fill with onWarning #1A1204 text, which matches the gold PLAY button.", "testID": "rf-exit-finish", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home", "issues": ["Live JEE Series tile art (tile-live.jpg, blue diamond) and BITSAT tile (bright orange rocket) are off the black, red and gold palette. Regenerate them in a ruby or gold glass style.", "Continue-attempt card uses a green play circle (success). Gold (custom_neonAmber) would fit the luxury palette better."]},
+      {"screen": "Exam hub BITSAT", "issues": ["The header gradient is custom_examBitsat #E0452B, which reads orange. Consider a ruby #8A0F24 to #2A0A10 gradient with a gold eyebrow."]},
+      {"screen": "Rapid Fire store", "issues": ["Rarity sky blue (#38BDF8) and violet (#C084FC) card washes clash with the red and gold theme. Consider tinting rarities silver, gold and ruby."]},
+      {"screen": "Duel play", "issues": ["Both the 'You' and opponent scores are red, so there is no visual ownership. Use ivory or gold for You and red for the opponent."]},
+      {"screen": "Session summary / Duel result", "issues": ["The 'DAY STREAK' stat label wraps onto 2 lines at 390 and 360 (wider Jakarta metrics). Reduce letterSpacing or use 'STREAK'."]},
+      {"screen": "Web only", "issues": ["TextInputs show the browser's white focus outline on web (entry phone, chapter search). Add outlineStyle:'none' on web if desired."]}
+    ],
+    "react_native_issues": [
+      {"component": "NativeTabs (iOS 26)", "issue": "The NativeTabs branch sets no tintColor, so iOS 26 devices will show the system blue active tint instead of brand red. Reference: app/(tabs)/_layout.tsx:62. Add tintColor={colors.brandPrimary} (and optionally iconColor / labelStyle)."},
+      {"component": "AiSolution WebView font", "issue": "The WebView HTML uses font-family -apple-system, Roboto, so native AI solutions render in the system font, not Plus Jakarta Sans. Reference: src/components/AiSolution.tsx:121. Embed the Jakarta TTF via a base64 @font-face, or accept and document the exception. The step badge colour is also hard-coded #fff (line 126); use colors.onBrandPrimary."}
+    ]
+  },
+  "test_report_links": ["/tmp/k_home_banner.png", "/tmp/f_palette.png", "/tmp/j_entry360.png", "/tmp/i_result.png"],
+  "action_items": [
+    "HIGH: Redesign the attempt palette QSTYLE (app/attempt/[id].tsx:16-22) so Current, Answered & marked and Visited are clearly different, and give legend swatches a borderStrong border.",
+    "HIGH: Replace the white-box jeelive-logo.webp and jeelive-icon.png with a dark or transparent version, or put them on a padded ivory plate with a solid gold border (entry.tsx, (tabs)/index.tsx:55, mission.tsx).",
+    "MEDIUM: Add theme key brandText '#FF5266' and use it for secondary and ghost Button labels and links in ui.tsx:57 and :128.",
+    "MEDIUM: Add custom_subjectMathsText for Maths text and icons (result/[id].tsx:70, chip icons).",
+    "LOW: result/[id].tsx:294 chip colour should be brandPrimary, not surfaceInverse.",
+    "LOW: Amber buttons and the Marked state should use custom_neonAmber with dark onWarning text, not white text on custom_amber.",
+    "LOW: Set tintColor on NativeTabs (iOS 26) and embed the Jakarta font in the AiSolution WebView.",
+    "Polish: re-skin the Live and BITSAT tile art and the BITSAT hub gradient to ruby or gold, and fix the 'DAY STREAK' label wrap."
+  ],
+  "critical_code_review_comments": [
+    "custom_series (#6E0014) and custom_burgundy (#8A0F24) are background tokens but were used as text or icon colours in about 15 places. After the swap these became dark-on-dark. Text-on-dark should use custom_seriesBright, brandText or custom_neonAmber. A lint rule or a separate *Text token family would stop this happening again.",
+    "Button secondary and ghost derive fg from the bg colour prop (ui.tsx:57). Any dark brand colour passed in makes the label invisible, so fg needs a contrast-safe fallback.",
+    "theme.ts sets dark = light (the same object). That's fine, but the name 'light' is misleading now that the palette is dark."
+  ],
+  "updated_files": [
+    "/app/frontend/src/components/SeriesBanner.tsx (L41 'Score 200+' burgundy->custom_seriesBright; L54-55 'Open series hub' label and icon custom_series->onSurface; L70, L81 explainer eyebrow and check icons ->custom_seriesBright)",
+    "/app/frontend/app/live.tsx (L22, L133 text; L30 secondary resume button; L94 header eyebrow; L98-100 tab chips: custom_series->custom_seriesBright)",
+    "/app/frontend/app/rapid/session.tsx (L57, L246 formula text custom_series->custom_neonAmber; was invisible on black)",
+    "/app/frontend/app/rapid/duel.tsx (L248, L300 formula text custom_series->custom_neonAmber)",
+    "/app/frontend/app/account.tsx (L33 avatar icon ->brandPrimary)",
+    "/app/frontend/app/(tabs)/mission.tsx (L50 icons, L62 heading ->custom_seriesBright)",
+    "/app/frontend/app/(tabs)/tests.tsx (L126 exam chip colour ->custom_seriesBright)",
+    "/app/frontend/app/(tabs)/_layout.tsx (L45 active tab icon tint custom_series->custom_seriesBright; was almost invisible)"
+  ],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "All screens render and the font loads everywhere. 8 contrast bugs fixed; 6 open contrast or legibility issues plus design polish remain"},
+  "seed_data_creation": "As learner 9000000001: started and left in progress a BITSAT chapter attempt 50fa2a17-f8d2-4a92-9fbd-a8219906d934 (Units & Measurements, Q1 answered B and marked, not submitted). Played 1 Rapid Fire solo session (finished early) and 1 quick-match duel (mostly skipped, a loss). No JEELIVE live attempts were submitted.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Theme is in src/theme.ts (dark-only). Contrast check method: grep color={colors.custom_series|custom_burgundy|surfaceInverse} for text or icon uses. Font check JS: every leaf div's computed fontFamily should start with 'Jakarta' (passes on all screens). The palette sheet opens via player-palette-button; the legend is in the sheet. Result 8501cf9c Solutions tab shows a white JPEG question strip and the AI solution.",
+  "rca_of_issue": "The palette swap kept the old token roles. custom_series and custom_burgundy used to be bright accents that also served as text colours; now they are deep backgrounds, so every text or icon usage went dark-on-dark. surfaceInverse changed from a dark ink to red, so it now collides with the error and visited reds in the palette."
+}
