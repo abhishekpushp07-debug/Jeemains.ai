@@ -1,0 +1,822 @@
+{
+  "dispositions": {
+    "standard": 2245,
+    "multiple_accepted": 2,
+    "bonus_all": 3
+  },
+  "roles": {
+    "anon": [
+      401,
+      401
+    ],
+    "student": [
+      403,
+      403
+    ],
+    "reviewer": [
+      403,
+      403
+    ],
+    "owner_status": [
+      200,
+      {
+        "phase": "ready",
+        "verified_files": 0,
+        "total_files": 30,
+        "inserted_records": 0,
+        "total_records": 90,
+        "published_papers": 0,
+        "total_papers": 30,
+        "questions": 2250,
+        "blocked_sources": [
+          {
+            "filename": "23 jan shift 1 of 2025.pdf",
+            "issues": [
+              {
+                "actual": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33,
+                  34,
+                  35,
+                  36,
+                  37,
+                  38,
+                  39,
+                  40,
+                  41,
+                  42,
+                  43,
+                  44,
+                  45,
+                  46,
+                  47,
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60,
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70,
+                  71,
+                  72,
+                  73,
+                  74,
+                  75
+                ],
+                "duplicate": {},
+                "issue": "question_sequence",
+                "missing": [
+                  48,
+                  49,
+                  50
+                ]
+              }
+            ],
+            "reason": "Original source is incomplete or has unresolved mapping issues; not published."
+          }
+        ]
+      }
+    ],
+    "transfers": 0
+  },
+  "import_verify": {
+    "tamper": [
+      409,
+      {
+        "data": null,
+        "error": {
+          "code": "http_409",
+          "message": "A private source PDF differs from its reviewed original. No papers were published."
+        },
+        "meta": {
+          "api_version": "1",
+          "request_id": "ebe02cf3-3086-41d8-a261-0140733d1011"
+        }
+      }
+    ],
+    "after_tamper": {
+      "verified_files": 0,
+      "phase": "verifying",
+      "lease_until": 0
+    },
+    "c0": {
+      "tejas_files": 0,
+      "tejas_versions": 0,
+      "tejas_sets": 0
+    },
+    "concurrent": [
+      200,
+      409
+    ],
+    "other_owner": 409,
+    "held": 409,
+    "takeover": 200,
+    "mid_counts": {
+      "tejas_files": 0,
+      "tejas_versions": 0,
+      "tejas_sets": 0
+    },
+    "phase_after_verify": {
+      "phase": "importing",
+      "verified_files": 30,
+      "total_files": 30,
+      "inserted_records": 0,
+      "total_records": 90,
+      "published_papers": 0,
+      "total_papers": 30,
+      "questions": 2250,
+      "blocked_sources": [
+        {
+          "filename": "23 jan shift 1 of 2025.pdf",
+          "issues": [
+            {
+              "actual": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75
+              ],
+              "duplicate": {},
+              "issue": "question_sequence",
+              "missing": [
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "reason": "Original source is incomplete or has unresolved mapping issues; not published."
+        }
+      ]
+    },
+    "c1": {
+      "tejas_files": 0,
+      "tejas_versions": 0,
+      "tejas_sets": 0
+    }
+  },
+  "import_append": {
+    "cursor0": 0,
+    "conflict": [
+      409,
+      {
+        "data": null,
+        "error": {
+          "code": "http_409",
+          "message": "Existing content differs; it will not be overwritten."
+        },
+        "meta": {
+          "api_version": "1",
+          "request_id": "15d14c0c-b93d-4896-97a3-bd2124186e03"
+        }
+      }
+    ],
+    "conflict_doc_kept": "TEST different",
+    "cursor_after_conflict": 0,
+    "replays": [
+      [
+        8,
+        200,
+        ""
+      ],
+      [
+        36,
+        200,
+        ""
+      ],
+      [
+        64,
+        200,
+        ""
+      ]
+    ],
+    "final": {
+      "phase": "complete",
+      "verified_files": 30,
+      "total_files": 30,
+      "inserted_records": 90,
+      "total_records": 90,
+      "published_papers": 30,
+      "total_papers": 30,
+      "questions": 2250,
+      "blocked_sources": [
+        {
+          "filename": "23 jan shift 1 of 2025.pdf",
+          "issues": [
+            {
+              "actual": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75
+              ],
+              "duplicate": {},
+              "issue": "question_sequence",
+              "missing": [
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "reason": "Original source is incomplete or has unresolved mapping issues; not published."
+        }
+      ]
+    },
+    "c": {
+      "tejas_files": 30,
+      "tejas_versions": 30,
+      "tejas_sets": 30
+    },
+    "c_again": {
+      "tejas_files": 30,
+      "tejas_versions": 30,
+      "tejas_sets": 30
+    },
+    "status": {
+      "phase": "complete",
+      "verified_files": 30,
+      "total_files": 30,
+      "inserted_records": 90,
+      "total_records": 90,
+      "published_papers": 30,
+      "total_papers": 30,
+      "questions": 2250,
+      "blocked_sources": [
+        {
+          "filename": "23 jan shift 1 of 2025.pdf",
+          "issues": [
+            {
+              "actual": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75
+              ],
+              "duplicate": {},
+              "issue": "question_sequence",
+              "missing": [
+                48,
+                49,
+                50
+              ]
+            }
+          ],
+          "reason": "Original source is incomplete or has unresolved mapping issues; not published."
+        }
+      ]
+    },
+    "stored_equals": true,
+    "pre_unchanged": true
+  },
+  "catalogue": {
+    "total": 30,
+    "years": [
+      2026,
+      2025
+    ],
+    "first": [
+      {
+        "id": "jee-main-pyq-2026-04-08-s2",
+        "title": "JEE Main PYQ \u00b7 08 Apr 2026 \u00b7 Shift 2",
+        "exam_date": "2026-04-08",
+        "year": 2026,
+        "shift": 2,
+        "count": 75,
+        "minutes": 180.0,
+        "maximum": 300.0,
+        "attempt": null,
+        "latest_result_id": null,
+        "attempt_count": 0
+      },
+      {
+        "id": "jee-main-pyq-2026-04-06-s1",
+        "title": "JEE Main PYQ \u00b7 06 Apr 2026 \u00b7 Shift 1",
+        "exam_date": "2026-04-06",
+        "year": 2026,
+        "shift": 1,
+        "count": 75,
+        "minutes": 180.0,
+        "maximum": 300.0,
+        "attempt": null,
+        "latest_result_id": null,
+        "attempt_count": 0
+      }
+    ],
+    "other_ids_extra": [
+      "TEST_pyq_restricted"
+    ]
+  },
+  "mocks_catalogue_keys": [
+    "exam",
+    "kind",
+    "items",
+    "subject_counts",
+    "total",
+    "page",
+    "pages"
+  ],
+  "flow": {
+    "start_without_preflight": 400,
+    "leaks": [],
+    "leak_context": [],
+    "visit": 200,
+    "visit_bad": 422,
+    "saves": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "bad_qid": 404,
+    "foreign_get": 404,
+    "foreign_save": 404,
+    "foreign_asset": 404,
+    "active_solution_asset": 403,
+    "active_results": 403,
+    "q67_q": [
+      200,
+      "image/png",
+      45769
+    ],
+    "resume_same_deadline": true,
+    "resume_answers": 19,
+    "restart_same_attempt": true,
+    "cat_active": {
+      "id": "jee-main-pyq-2026-04-04-s2",
+      "title": "JEE Main PYQ \u00b7 04 Apr 2026 \u00b7 Shift 2",
+      "exam_date": "2026-04-04",
+      "year": 2026,
+      "shift": 2,
+      "count": 75,
+      "minutes": 180.0,
+      "maximum": 300.0,
+      "attempt": {
+        "id": "007a64d4-db97-4dba-8039-059dd3cbc7ac",
+        "status": "active",
+        "started_at": 1792970539.043,
+        "deadline": 1792981339.043,
+        "score": null
+      },
+      "latest_result_id": null,
+      "attempt_count": 1
+    },
+    "submit": 202,
+    "score": 46,
+    "r_q67": {
+      "source_option_labels": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "source_warning": "",
+      "source_evidence": {
+        "kind": "owner_supplied_pyq",
+        "pdf_sha256": "1b1bcb337c16c3e2d28655a2bc76d4ee573467ae6baf6a5f4926717dda530c14",
+        "printed_answer_normalization": null,
+        "printed_key": [
+          "Ans. (3)"
+        ],
+        "source_status": "normal"
+      },
+      "asset_count": 1,
+      "solution_asset_count": 2,
+      "outcome": "skipped"
+    },
+    "q67_s": [
+      [
+        200,
+        44215
+      ],
+      [
+        200,
+        96620
+      ]
+    ],
+    "foreign_results": 404,
+    "retake": {
+      "new_id": true,
+      "blank": true,
+      "n": 75,
+      "uuid": true
+    },
+    "old_result_kept": 200,
+    "cat_after_retake": {
+      "id": "jee-main-pyq-2026-04-04-s2",
+      "title": "JEE Main PYQ \u00b7 04 Apr 2026 \u00b7 Shift 2",
+      "exam_date": "2026-04-04",
+      "year": 2026,
+      "shift": 2,
+      "count": 75,
+      "minutes": 180.0,
+      "maximum": 300.0,
+      "attempt": {
+        "id": "53992b1a-eaa2-4e47-ac3c-2b0bc23e1b88",
+        "status": "active",
+        "started_at": 1792970539.734,
+        "deadline": 1792981339.734,
+        "score": null
+      },
+      "latest_result_id": "007a64d4-db97-4dba-8039-059dd3cbc7ac",
+      "attempt_count": 2
+    },
+    "cat_expired": {
+      "id": "jee-main-pyq-2026-04-04-s2",
+      "title": "JEE Main PYQ \u00b7 04 Apr 2026 \u00b7 Shift 2",
+      "exam_date": "2026-04-04",
+      "year": 2026,
+      "shift": 2,
+      "count": 75,
+      "minutes": 180.0,
+      "maximum": 300.0,
+      "attempt": {
+        "id": "53992b1a-eaa2-4e47-ac3c-2b0bc23e1b88",
+        "status": "completed",
+        "started_at": 1792970539.734,
+        "deadline": 1792970534.7816768,
+        "score": null
+      },
+      "latest_result_id": "53992b1a-eaa2-4e47-ac3c-2b0bc23e1b88",
+      "attempt_count": 2
+    },
+    "expired_unmutated": true,
+    "expired_result": [
+      "completed",
+      "time_limit",
+      0
+    ],
+    "other_sees": [],
+    "history": [
+      200,
+      [
+        [
+          "53992b1a-eaa2-4e47-ac3c-2b0bc23e1b88",
+          "pyq"
+        ],
+        [
+          "007a64d4-db97-4dba-8039-059dd3cbc7ac",
+          "pyq"
+        ]
+      ]
+    ]
+  },
+  "jan2026_preflight": {
+    "jee-main-pyq-2026-01-21-s1": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"f8829f0b-1093"
+    ],
+    "jee-main-pyq-2026-01-21-s2": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"e7956c63-634f"
+    ],
+    "jee-main-pyq-2026-01-22-s1": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"d73fd6e2-e0a5"
+    ],
+    "jee-main-pyq-2026-01-22-s2": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"cf1c00c0-4008"
+    ],
+    "jee-main-pyq-2026-01-23-s1": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"77167c8f-cce3"
+    ],
+    "jee-main-pyq-2026-01-23-s2": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"56772f8d-0e58"
+    ],
+    "jee-main-pyq-2026-01-24-s2": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"57940f73-d087"
+    ],
+    "jee-main-pyq-2026-01-24-s1": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"f0776e55-c6e5"
+    ],
+    "jee-main-pyq-2026-01-28-s1": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"571ad703-3c2d"
+    ],
+    "jee-main-pyq-2026-01-28-s2": [
+      400,
+      "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordinates.\"},\"meta\":{\"api_version\":\"1\",\"request_id\":\"ce9e4601-62dc"
+    ]
+  },
+  "dispositions_results": {
+    "jee-main-pyq-2026-01-22-s1": {
+      "score": 4,
+      "rows": [
+        {
+          "n": 39,
+          "disp": "bonus_all",
+          "outcome": "bonus",
+          "marks": 4,
+          "source_warning": "This source question is withdrawn. Full credit is awarded under the published scoring policy; it is not an ordinary wrong-answer penalty.",
+          "solution_kind": "supplied_key_only",
+          "solution_asset_count": 2
+        }
+      ]
+    },
+    "jee-main-pyq-2026-04-02-s2": {
+      "score": 4,
+      "rows": [
+        {
+          "n": 61,
+          "disp": "multiple_accepted",
+          "outcome": "correct",
+          "marks": 4,
+          "source_warning": "",
+          "solution_kind": "supplied_worked",
+          "solution_asset_count": 2
+        }
+      ]
+    },
+    "jee-main-pyq-2025-01-22-s1": {
+      "score": 0,
+      "rows": [
+        {
+          "n": 43,
+          "disp": "standard",
+          "outcome": "skipped",
+          "marks": 0,
+          "source_warning": "The supplied PDF prints the answer key but no worked explanation for this question.",
+          "solution_kind": "supplied_key_only",
+          "solution_asset_count": 2
+        }
+      ]
+    }
+  },
+  "q67_mask_diff_rows": [
+    276,
+    287,
+    54,
+    134
+  ],
+  "db_dropped": true,
+  "storage_puts": [],
+  "distinct_storage_gets": 30
+}

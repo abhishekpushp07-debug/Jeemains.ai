@@ -81,7 +81,8 @@ export default function Player() {
       }
       if (seconds===0 || conflict || Object.keys(blocked).some(k=>k.startsWith(q.id+':'))) return;
       const response=pending[q.id]||a.answers[q.id]||{};
-      if (q.type==='mcq' && Object.hasOwn(q.options||{},key)) {e.preventDefault();edit(q.id,{value:key});}
+      const optionKey = Object.entries(q.source_option_labels || {}).find(([, label]) => label === key)?.[0] || key;
+      if (q.type==='mcq' && Object.hasOwn(q.options||{},optionKey)) {e.preventDefault();edit(q.id,{value:optionKey});}
       if (key==='M') {e.preventDefault();edit(q.id,{marked:!response.marked});}
     }
     document.addEventListener('keydown',shortcut);
@@ -357,7 +358,7 @@ export default function Player() {
                 answering; do not guess missing content.
               </div>
             )}
-            {q.type==='mcq'&&q.render_mode==='source'&&<p className="source-options-hint" data-testid="player-source-options-hint">Read options A–D in the original image above, then select the matching letter.</p>}
+            {q.type==='mcq'&&q.render_mode==='source'&&<p className="source-options-hint" data-testid="player-source-options-hint">{q.source_option_labels ? 'Read options 1–4 in the original image above, then select the matching number.' : 'Read options A–D in the original image above, then select the matching letter.'}</p>}
             <fieldset disabled={locked} className="answer-fieldset">
               <legend>
                 {q.type === "mcq"
@@ -467,7 +468,7 @@ export default function Player() {
                 </Button>
               )}
             </div>
-            <div className="player-shortcuts" data-testid="player-shortcuts-help"><span><kbd>←</kbd> <kbd>→</kbd> Navigate</span><span><kbd>A–D</kbd> Answer</span><span><kbd>M</kbd> Mark for review</span><span>Shortcuts pause while a control has focus.</span></div>
+            <div className="player-shortcuts" data-testid="player-shortcuts-help"><span><kbd>←</kbd> <kbd>→</kbd> Navigate</span><span><kbd>{q.source_option_labels ? '1–4' : 'A–D'}</kbd> Answer</span><span><kbd>M</kbd> Mark for review</span><span>Shortcuts pause while a control has focus.</span></div>
           </article>
           <p className="practice-note">
             Focus on the question. This is home practice, not a proctored

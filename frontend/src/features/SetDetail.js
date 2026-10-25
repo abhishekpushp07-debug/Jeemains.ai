@@ -66,7 +66,7 @@ export default function SetDetail() {
   return (
     <div className="container page set-detail" data-testid="set-detail-page">
       <Link className="breadcrumb" data-testid="set-back" to={preview ? '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? 'Back to Content Studio' : 'Back to '+s.exam+' tests'}</Link>
-      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
+      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Review the rules, check your device and begin; original supplied solutions unlock after submission.' : s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
       {s.series_id&&<div className="series-preflight-note" data-testid="series-preflight-rules"><strong>All India JEE Mains · {s.series_date} (IST)</strong><p>Live starts: 12:01 AM–8:59:00 PM. One live attempt; the original 180-minute deadline continues on resume. Live results and solutions release at 11:59 PM. From the following day, starts become separate archive-practice attempts.</p></div>}
       <div className="preflight-grid">

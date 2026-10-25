@@ -16,7 +16,7 @@ RULES = {
 }
 
 
-def validate_pdf(data):
+def validate_pdf(data, *, reviewed_large_pages=False):
     if len(data) > 50 * 1024 * 1024:
         raise ValueError("PDF exceeds 50 MB. Split it into smaller documents.")
     if not data.startswith(b"%PDF-"):
@@ -33,7 +33,8 @@ def validate_pdf(data):
         )
     if not 1 <= len(doc) <= 300:
         raise ValueError("PDF must contain 1–300 pages. Split larger documents.")
-    if any(p.rect.width > 3000 or p.rect.height > 3000 for p in doc):
+    limit = 4000 if reviewed_large_pages else 3000
+    if any(p.rect.width > limit or p.rect.height > limit for p in doc):
         raise ValueError(
             "PDF page dimensions are too large. Export standard-size pages."
         )
@@ -258,14 +259,16 @@ def score_attempt(attempt):
     return score(attempt)
 
 
-def _render_crop_png(data, ref, scale=2):
-    doc = validate_pdf(data)
+def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False):
+    doc = validate_pdf(data, reviewed_large_pages=reviewed_large_pages)
     p = ref["page"] - 1
     if p < 0 or p >= len(doc):
         raise ValueError("Source page is out of range.")
     rect = fitz.Rect(ref["rect"])
     if rect.is_empty or not doc[p].rect.contains(rect):
         raise ValueError("Source region is outside the page.")
+    if reviewed_large_pages:
+        scale = min(scale, 1600 / rect.width, 2400 / rect.height)
     pix = doc[p].get_pixmap(matrix=fitz.Matrix(scale, scale), clip=rect, alpha=False)
     if ref.get('omit_rects'):
         pixels = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n).copy()
@@ -285,14 +288,14 @@ from tejas.cache import ByteCache
 _crop_cache = ByteCache(32 * 1024 * 1024)
 
 
-def crop_png(data, ref, scale=2):
+def crop_png(data, ref, scale=2, *, reviewed_large_pages=False):
     import hashlib
 
-    key = (hashlib.sha256(data).digest(), ref["page"], tuple(ref["rect"]), scale, tuple(tuple(r) for r in ref.get('omit_rects', [])))
+    key = (hashlib.sha256(data).digest(), ref["page"], tuple(ref["rect"]), scale, reviewed_large_pages, tuple(tuple(r) for r in ref.get('omit_rects', [])))
     cached = _crop_cache.get(key)
     if cached is not None:
         return cached
-    return _crop_cache.put(key, _render_crop_png(data, ref, scale))
+    return _crop_cache.put(key, _render_crop_png(data, ref, scale, reviewed_large_pages=reviewed_large_pages))
 
 
 def generate_report(attempt, file_loader):

@@ -1,3 +1,10 @@
+# PYQ follow-up140 — 2026-10-25
+pyq139_fix:
+  report: "139 10/11 plusAprilUIpasses; largeJanPDF3000ptguardcriticalreproduced. Bridgecleaned/isolatedDBabsentconfirmed."
+  change: "Onlyhash-matched source_collectionjee-pyq-written derivative path allows4000ptpages; defaultupload3000ptunchanged, renderedPNGbounded1600x2400,cacheidentityincludespolicy. OriginalPDFs/coordinatesunaltered. Player1–4hint/shortcutsandnumericmapping; SetDetailhumanpyqdescription; dateletterspacingnormal."
+  retest: "Remove oldtestlenientvalidationbypass (mainremoved). Run139suite+all10Jan2026preflight andactualstart/question/solutionassets; maxrasterbound/untrustedpageguard/tamperedhash; JanuaryUI desktopmobile numericshortcut/focuspause/keyonly/bonus. OtherexamsactualsupportedBITSAT/COMEDKandJEEchapter. No needrepeatallpreviousUIcases. KeepcustomerDBuntouchedandcleanupbridgeDBBEFOREreturn; writeiteration140report."
+
+
 # Current PYQ implementation — 2026-10-25 (pending isolated QA)
 pyq_delivery:
   needs_retesting: true

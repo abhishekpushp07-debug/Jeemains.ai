@@ -1,0 +1,14 @@
+{
+  "status": "failed",
+  "summary": "Testing-agent forced summary: 10/11 isolated backend cases passed; April PYQ full frontend flows passed desktop/mobile. All10 January2026 PDFs blocked by existing3000pt page-size limit. Report synthesized from returned QA summary; independent retest needed.",
+  "backend_issues": {"critical": [{"issue": "1959 crops across10 January2026 papers fail validate_pdf max3000pt. Preflight400 preventsstart; images alsofail.", "file": "backend/tejas_core.py"}], "minor": []},
+  "frontend_issues": {"ui_bugs": ["Player source hint and keyboard bar say A–D although source buttons show1–4"], "design_issues": ["SetDetail shows internal source provenance instead of usefuldescription", "Mobile date heading tight letterspacing (cosmetic)"], "integration_issues": []},
+  "observations": ["Own completed results expose cropgeometry/provenance, consistent with existingsource-page review contract; no rawobjectpaths", "Otherexam UI nottested: testagent usedNEET which is notsupported; useBITSAT/COMEDK inretarget"],
+  "success_rate": {"backend": "10/11", "frontend": "Aprilflows pass; Januaryfails preflight"},
+  "test_report_links": ["/app/backend/tests/test_iter139_pyq_isolated.py", "/app/test_reports/pytest/iter139_pyq.xml", "/app/test_reports/iter139_pyq_evidence.json"],
+  "mocked_api": "TESTONLYauth/current-sessionandstorageGET mapped tooriginallocalPDFbytes. OtherAPIreal isolatedFastAPIroutes. NoapplicationmockedAPI/noAI/no customerDBwrites.",
+  "cleanup": "PytesttestDBdroppedtrue. Browserbridgecleanupwaslefttomainagent; stopbridgeandverifyDBabsentbeforeimport.",
+  "retest_needed": true,
+  "updated_files": ["backend/tests/test_iter139_pyq_isolated.py", "backend/tests/iso_bridge_pyq_iter139.py"],
+  "app_code_changes_by_tester": false
+}

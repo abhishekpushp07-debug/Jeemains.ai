@@ -20,7 +20,8 @@ def render_crop(source, ref, scale=2):
         if sha256(raw).hexdigest() != source['sha256']:
             raise CanonicalIntegrityError('Frozen image integrity check failed')
         return raw
-    identity = json.dumps({'source': source.get('sha256') or source['path'], 'ref': ref, 'scale': scale, 'render': 1}, sort_keys=True, separators=(',', ':'))
+    reviewed = source.get('source_collection') == 'jee-pyq-written' and bool(source.get('sha256'))
+    identity = json.dumps({'source': source.get('sha256') or source['path'], 'ref': ref, 'scale': scale, 'reviewed_large_pages': reviewed, 'render': 2}, sort_keys=True, separators=(',', ':'))
     key = sha256(identity.encode()).hexdigest()
     found = _cache.get(key)
     if found is not None:
@@ -32,4 +33,4 @@ def render_crop(source, ref, scale=2):
         raw = get_object(source['path'])
         if source.get('sha256') and sha256(raw).hexdigest() != source['sha256']:
             raise CanonicalIntegrityError('Frozen source PDF integrity check failed')
-        return _cache.put(key, crop_png(raw, ref, scale))
+        return _cache.put(key, crop_png(raw, ref, scale, reviewed_large_pages=reviewed))
