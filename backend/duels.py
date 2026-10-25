@@ -8,11 +8,14 @@ import string
 import time
 import uuid
 from typing import List, Literal, Optional
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import CursorType, ReturnDocument
 from shop import equipped_of, rival_profile, safe_avatar
+from exam_groups import Exam, resolve_exam
+from revision import record_learning
 
 DUEL_CARDS = 30
 CARD_SECONDS = 20
@@ -26,12 +29,14 @@ class DuelCreate(BaseModel):
     mode: Literal["random", "invite"]
     name: str = Field(min_length=1, max_length=24)
     request_id: str = Field(min_length=8, max_length=64)
+    exam: Optional[Exam] = None
 
 
 class DuelJoin(BaseModel):
     model_config = ConfigDict(extra="forbid")
     code: str = Field(min_length=4, max_length=8)
     name: str = Field(min_length=1, max_length=24)
+    exam: Optional[Exam] = None
 
 
 class DuelAnswer(BaseModel):
@@ -164,8 +169,8 @@ def make_router(db, rf_user, public_card, award):
         start = time.time() + 4.6  # 4 s entry show + network margin, then card 1
         return {"status": "ready", "start_at": start, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
 
-    async def pick_cards(subject, chapter):
-        match = {"subject": subject, "retired": {"$ne": True}, **({"chapter": chapter} if chapter else {})}
+    async def pick_cards(subject, chapter, exam):
+        match = {"exam": exam, "subject": subject, "retired": {"$ne": True}, **({"chapter": chapter} if chapter else {})}
         docs = await db.rf_cards.aggregate([{"$match": match}, {"$sample": {"size": DUEL_CARDS}}, {"$project": {"id": 1}}]).to_list(DUEL_CARDS)
         if not docs:
             raise HTTPException(404, "No reviewed cards available for this selection yet.")
@@ -231,8 +236,12 @@ def make_router(db, rf_user, public_card, award):
     async def reward_for(d, uid):
         me = next(p for p in d["players"] if p["uid"] == uid)
         answered = sum(a["outcome"] in ("correct", "incorrect") for a in me["answers"])
+        docs = await get_cards(d["card_ids"])
+        rows = [{**a, "card_id": d["card_ids"][a["i"]]} for a in me["answers"] if a["i"] < len(d["card_ids"])]
+        await record_learning(db, uid, "duel:" + d["id"], d["exam"], rows, list(docs.values()),
+                              datetime.fromtimestamp(d["finished_ts"], timezone.utc).isoformat())
         # Seated arena opponents count exactly like a live match (coins, record, wins, badges).
-        return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid)
+        return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid, exam=d["exam"])
 
     async def view(d, uid):
         mine_p = next((p for p in d["players"] if p["uid"] == uid), None)
@@ -257,7 +266,7 @@ def make_router(db, rf_user, public_card, award):
                         c["id"] = f"{d['id'][:8]}-{k}"
                     cards.append(c)
         return {
-            "id": d["id"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
+            "id": d["id"], "exam": d["exam"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
             "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS,
             "reward": reward, "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
             "vs_bot": d.get("vs_bot", False), "players": [{"you": p["uid"] == uid, "bot": p.get("bot", False), "avatar": p.get("avatar"), "frame": p.get("frame"), "entry": p.get("entry"), "id": p["uid"][:6] if p["uid"] != uid else "you", "name": p["name"], "answered": len(p["answers"]), "score": p["score"],
@@ -265,25 +274,26 @@ def make_router(db, rf_user, public_card, award):
         }
 
     def public_card_dict(c):
-        return {k: c.get(k) for k in ("id", "subject", "chapter", "topic", "prompt", "formula", "options", "answer", "explain")}
+        return {k: c.get(k) for k in ("id", "exam", "subject", "chapter", "topic", "prompt", "formula", "options", "answer", "explain", "diagram")}
 
     @r.post("")
     async def create(data: DuelCreate, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
+        exam = resolve_exam(data.exam, data.subject)
         mine = await db.rf_duels.find_one({"request_id": data.request_id, "players.uid": uid})
         if mine:
             return await view(mine, uid)
         if data.mode == "random":
             now = time.time()
             match = await db.rf_duels.find_one_and_update(
-                {"status": "waiting", "mode": "random", "subject": data.subject, "chapter": data.chapter, "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
+                {"exam": exam, "status": "waiting", "mode": "random", "subject": data.subject, "chapter": data.chapter, "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
                 {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
             if match:
                 await db.rf_duels.update_one({"id": match["id"]}, {"$addToSet": {"request_ids": data.request_id}})
                 notify(match["id"])
                 return await view(match, uid)
         d = {"id": str(uuid.uuid4()), "code": "".join(random.choices(string.ascii_uppercase.replace("O", "").replace("I", "") + "23456789", k=6)),
-             "mode": data.mode, "subject": data.subject, "chapter": data.chapter, "status": "waiting", "card_ids": await pick_cards(data.subject, data.chapter),
+             "exam": exam, "mode": data.mode, "subject": data.subject, "chapter": data.chapter, "status": "waiting", "card_ids": await pick_cards(data.subject, data.chapter, exam),
              "players": [await player(uid, data.name)], "created_ts": time.time(), "request_id": data.request_id, "request_ids": [data.request_id]}
         await db.rf_duels.insert_one(d)
         return await view(d, uid)
@@ -294,8 +304,13 @@ def make_router(db, rf_user, public_card, award):
         code = data.code.strip().upper()
         existing = await db.rf_duels.find_one({"code": code, "players.uid": uid})
         if existing:
+            if data.exam and existing["exam"] != data.exam:
+                raise HTTPException(409, f"This is a {existing['exam']} duel. Switch your arena exam to join.")
             return await view(existing, uid)
-        d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "players.uid": {"$ne": uid}},
+        invitation = await db.rf_duels.find_one({"code": code, "status": "waiting"}, {"_id": 0, "exam": 1, "created_ts": 1})
+        if invitation and data.exam and invitation["exam"] != data.exam:
+            raise HTTPException(409, f"This is a {invitation['exam']} duel. Switch your arena exam to join.")
+        d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "created_ts": {"$gt": time.time() - 1800}, "players.uid": {"$ne": uid}, **({"exam": data.exam} if data.exam else {})},
                                                   {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
@@ -401,10 +416,10 @@ def make_router(db, rf_user, public_card, award):
                 sockets.pop(did, None)
 
     @r.get("")
-    async def mine(x_rf_user: Optional[str] = Header(None)):
+    async def mine(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished"}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
-        return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
+        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished", **({"exam": exam} if exam else {})}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
+        return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"]} for p in d["players"]]} for d in docs]}
 
     return r

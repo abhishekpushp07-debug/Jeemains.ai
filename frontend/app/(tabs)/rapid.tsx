@@ -12,6 +12,8 @@ import { BADGE_ICON, useGameProfile } from "@/src/components/game";
 import { Avatar } from "@/src/components/Entry";
 import { BattleHero, OutlineAction, PlayButton } from "@/src/components/BattleHero";
 import { ChapterSheet } from "@/src/components/ChapterSheet";
+import { DiagramShortcut, WeakRevision } from "@/src/components/ArenaLearning";
+import { ExamLeaderboard } from "@/src/components/ExamLeaderboard";
 import { playSfx } from "@/src/sfx";
 import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
@@ -44,11 +46,12 @@ export default function RapidHome() {
     setExam(e);
     if (!EXAM_SUBJECTS[e].some(([s]) => s === subject)) { setSubject(e === "NEET" ? "Biology" : "Mathematics"); setChapter(""); }
   };
-  const cat = useCached<any>("rf.catalog", () => rf("/catalog", user?.id || "guest-viewer"));
-  const hist = useCached<any>(user ? `u.${user.id}.rfhist` : null, () => rf("/history", user!.id));
-  const duels = useCached<any>(user ? `u.${user.id}.duels` : null, () => rf("/duels", user!.id));
+  const cat = useCached<any>(`rf.catalog.${exam}`, () => rf(`/catalog?exam=${exam}`, user?.id || "guest-viewer"));
+  const hist = useCached<any>(user ? `u.${user.id}.rfhist.${exam}` : null, () => rf(`/history?exam=${exam}`, user!.id));
+  const duels = useCached<any>(user ? `u.${user.id}.duels.${exam}` : null, () => rf(`/duels?exam=${exam}`, user!.id));
   const prof = useGameProfile(user?.id);
-  const board = useCached<any>(user ? `u.${user.id}.rfboard` : null, () => rf("/leaderboard", user!.id));
+  const board = useCached<any>(user ? `u.${user.id}.rfboard.${exam}` : null, () => rf(`/leaderboard?exam=${exam}`, user!.id), false);
+  const [revisionRefresh, setRevisionRefresh] = useState(0);
   const [claimErr, setClaimErr] = useState("");
   const [code, setCode] = useState("");
   const [sheet, setSheet] = useState<"" | "chapters" | "quests" | "join">("");
@@ -62,7 +65,7 @@ export default function RapidHome() {
   const quests = p?.quests || [];
   const questsDone = quests.filter((q: any) => q.done).length;
   const claimable = quests.filter((q: any) => q.done && !q.claimed).length;
-  const reload = () => { cat.reload(); hist.reload(); duels.reload(); prof.reload(); board.reload(); };
+  const reload = () => { cat.reload(); hist.reload(); duels.reload(); prof.reload(); board.reload(); setRevisionRefresh((v) => v + 1); };
   // Refresh XP / streak / history whenever the arena regains focus (e.g. after a sprint or duel).
   const first = useRef(true);
   useFocusEffect(useCallback(() => {
@@ -136,15 +139,15 @@ export default function RapidHome() {
               </Press>
             )} />
           <ErrorBox error={cat.error && !cat.data ? cat.error : ""} retry={cat.reload} testID="rf-catalog-error" />
-          <PlayButton disabled={!can} sub="Live 1v1 · same 30 cards · winner takes the coins" onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "random", subject, chapter } })} />
+          <PlayButton disabled={!can} sub={`${exam} 1v1 · same 30 cards · winner takes the coins`} onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "random", exam, subject, chapter } })} />
           <View style={{ flexDirection: "row", gap: space.md }}>
-            <OutlineAction testID="rf-duel-invite" icon="account-multiple-plus" label="Challenge friend" tint={colors.custom_neonViolet} disabled={!can} onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "invite", subject, chapter } })} />
+            <OutlineAction testID="rf-duel-invite" icon="account-multiple-plus" label="Challenge friend" tint={colors.custom_neonViolet} disabled={!can} onPress={() => router.push({ pathname: "/rapid/duel", params: { mode: "invite", exam, subject, chapter } })} />
             <OutlineAction testID="rf-open-join" icon="ticket-confirmation-outline" label="Join code" tint={colors.custom_neonCyan} onPress={() => setSheet("join")} />
           </View>
         </Animated.View>
 
         {/* 3 · Solo practice: a calm secondary row */}
-        <Press testID="rf-start-button" onPress={() => router.push({ pathname: "/rapid/session", params: { subject, chapter } })} disabled={!can} scaleTo={0.97}
+        <Press testID="rf-start-button" onPress={() => router.push({ pathname: "/rapid/session", params: { exam, subject, chapter } })} disabled={!can} scaleTo={0.97}
           style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 68, paddingHorizontal: space.md, borderRadius: radius.lg, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_neonAmber + "55", opacity: can ? 1 : 0.5 }}>
           <LinearGradient colors={[colors.custom_neonAmber, colors.custom_examBitsat]} style={{ width: 44, height: 44, borderRadius: 14, alignItems: "center", justifyContent: "center" }}>
             <Icon name="lightning-bolt" size={24} color={colors.custom_gameBg} />
@@ -155,6 +158,9 @@ export default function RapidHome() {
           </View>
           <Icon name="play-circle" size={30} color={colors.custom_neonAmber} />
         </Press>
+
+        {exam === "NEET" ? <DiagramShortcut count={cat.data?.diagram_count || 0} /> : null}
+        {user ? <WeakRevision key={`${user.id}.${exam}.${revisionRefresh}`} uid={user.id} exam={exam} /> : null}
 
         {/* 2 · Today: streak + quests as two calm tiles */}
         <View style={{ flexDirection: "row", gap: space.md }}>
@@ -193,15 +199,7 @@ export default function RapidHome() {
           </View>
 
           {pane === "board" ? (
-            <View style={{ gap: space.sm }} testID="rf-leaderboard">
-              {board.data?.items?.length ? board.data.items.slice(0, 5).map((r: any) => (
-                <View key={r.rank} style={{ flexDirection: "row", alignItems: "center", gap: space.md, paddingVertical: space.sm, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: r.you ? colors.custom_gameCardHi : "transparent" }}>
-                  <T w="heavy" size={15} color={r.rank === 1 ? colors.custom_neonAmber : colors.custom_gameMuted} style={{ width: 28 }}>#{r.rank}</T>
-                  <T w="bold" size={14} color={colors.onSurfaceInverse} style={{ flex: 1 }} numberOfLines={1}>{r.name}{r.you ? " (you)" : ""}</T>
-                  <T w="bold" size={12} color={colors.custom_neonCyan}>Lv {r.level} · {r.xp} XP</T>
-                </View>
-              )) : <T size={13} color={colors.custom_gameMuted}>Play a sprint to join the board.</T>}
-            </View>
+            <ExamLeaderboard exam={exam} data={board.data} error={board.error} loading={board.loading} retry={board.reload} />
           ) : null}
 
           {pane === "recent" ? (
@@ -267,7 +265,7 @@ export default function RapidHome() {
         <T size={13} color={colors.muted}>Enter the 6-character code your friend shared.</T>
         <TextInput testID="rf-duel-code-input" value={code} onChangeText={(t) => setCode(t.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6))} placeholder="ABC123" placeholderTextColor={colors.muted} autoCapitalize="characters" autoFocus
           style={{ height: 56, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, paddingHorizontal: space.md, fontFamily: fonts.heavy, fontSize: 22, letterSpacing: 6, textAlign: "center", color: colors.onSurface, backgroundColor: colors.surface }} />
-        <Press testID="rf-duel-join" disabled={code.length < 6 || !user} onPress={() => { setSheet(""); router.push({ pathname: "/rapid/duel", params: { mode: "join", code } }); }} style={{ height: 52, borderRadius: radius.md, backgroundColor: colors.custom_neonAmber, alignItems: "center", justifyContent: "center", opacity: code.length < 6 ? 0.5 : 1 }}>
+        <Press testID="rf-duel-join" disabled={code.length < 6 || !user} onPress={() => { setSheet(""); router.push({ pathname: "/rapid/duel", params: { mode: "join", exam, code } }); }} style={{ height: 52, borderRadius: radius.md, backgroundColor: colors.custom_neonAmber, alignItems: "center", justifyContent: "center", opacity: code.length < 6 ? 0.5 : 1 }}>
           <T w="heavy" size={16} color={colors.custom_gameBg}>JOIN DUEL</T>
         </Press>
       </Sheet>

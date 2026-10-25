@@ -9,6 +9,9 @@ from pathlib import Path
 from datetime import datetime, timezone
 from bson import ObjectId
 from http.cookiejar import DefaultCookiePolicy
+from pymongo.errors import DuplicateKeyError
+from exam_groups import Exam, NEET_ROOT, SUBJECTS, resolve_exam
+from revision import record_learning, weak_chapters, make_router as make_revision
 import asyncio, json, logging, os, re, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
@@ -132,6 +135,10 @@ class Card(BaseDocument):
     explain: str = ""
     review_status: str = "pilot_review_pending"
     syllabus: str = "JEE Main"
+    exam: Optional[Exam] = None
+    diagram: Optional[dict] = None
+    source_card_id: Optional[str] = None
+    provenance: str = ""
 
 
 class SessionCreate(BaseModel):
@@ -141,6 +148,9 @@ class SessionCreate(BaseModel):
     count: int = Field(default=30, ge=1, le=30)
     card_ids: Optional[List[str]] = Field(default=None, max_length=30)
     request_id: str = Field(min_length=8, max_length=64)
+    exam: Optional[Exam] = None
+    diagram_only: bool = False
+    revision: bool = False
 
 
 class CardResult(BaseModel):
@@ -168,6 +178,7 @@ class RfSession(BaseDocument):
     summary: Optional[dict] = None
     created_at: str = Field(default_factory=now_iso)
     completed_at: Optional[str] = None
+    exam: Optional[Exam] = None
 
 
 def rf_user(x_rf_user: Optional[str]) -> str:
@@ -187,24 +198,35 @@ CARD_MTIMES: dict[str, float] = {}
 
 
 async def sync_cards():
-    if not CARDS_DIR.exists():
-        return
-    for f in CARDS_DIR.glob("*.json"):
-        m = f.stat().st_mtime
-        if CARD_MTIMES.get(f.name) == m:
+    from pymongo import UpdateOne
+    changed = False
+    for exam, directory in (("JEE", CARDS_DIR), ("NEET", NEET_ROOT / "content" / "cards")):
+        if not directory.exists():
             continue
-        try:
-            cards = [Card(**c) for c in json.loads(f.read_text())]
-        except Exception:
-            continue  # file mid-write; retry next cycle
-        from pymongo import UpdateOne
-        ops = [UpdateOne({"id": c.id}, {"$set": {**c.to_mongo(), "retired": False}}, upsert=True) for c in cards]
-        if ops:
-            await db.rf_cards.bulk_write(ops, ordered=False)
-            # cards removed by the verifier are retired (soft), never deleted: old sessions keep their cards
-            await db.rf_cards.update_many({"subject": cards[0].subject, "chapter": cards[0].chapter, "id": {"$nin": [c.id for c in cards]}}, {"$set": {"retired": True}})
-        CARD_MTIMES[f.name] = m
-    CATALOG_CACHE.clear()
+        keys = [exam + ":" + f.name for f in directory.glob("*.json")]
+        for f in directory.glob("*.json"):
+            key, m = exam + ":" + f.name, f.stat().st_mtime
+            if CARD_MTIMES.get(key) == m:
+                continue
+            try:
+                cards = [Card(**{**c, "exam": exam}) for c in json.loads(f.read_text()) if c["subject"] in SUBJECTS[exam]]
+            except Exception:
+                logger.warning("Skipping invalid or mid-write card file: %s", f.name)
+                continue
+            ops = [UpdateOne({"id": c.id}, {"$set": {**c.to_mongo(), "retired": False, "source_file": key}}, upsert=True) for c in cards]
+            if ops:
+                await db.rf_cards.bulk_write(ops, ordered=False)
+                await db.rf_cards.update_many({"exam": exam, "subject": cards[0].subject, "chapter": cards[0].chapter,
+                                               "id": {"$nin": [c.id for c in cards]}}, {"$set": {"retired": True}})
+                changed = True
+            else:
+                result = await db.rf_cards.update_many({"source_file": key, "retired": {"$ne": True}}, {"$set": {"retired": True}})
+                changed |= bool(result.modified_count)
+            CARD_MTIMES[key] = m
+        result = await db.rf_cards.update_many({"source_file": {"$regex": "^" + exam + ":", "$nin": keys}, "retired": {"$ne": True}}, {"$set": {"retired": True}})
+        changed |= bool(result.modified_count)
+    if changed:
+        CATALOG_CACHE.clear()
 
 
 async def card_sync_loop():
@@ -220,18 +242,21 @@ CATALOG_CACHE: dict = {}
 
 
 @api.get("/rf/catalog")
-async def rf_catalog():
-    if "v" not in CATALOG_CACHE:
-        rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}}}]).to_list(1000)
-        order = {**json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text()),
-                 **json.loads((ROOT_DIR / "rapidfire" / "neet_chapters.json").read_text())}
+async def rf_catalog(exam: Optional[Exam] = None):
+    key = exam or "legacy"
+    if key not in CATALOG_CACHE:
+        scope = {"exam": exam} if exam else {"$or": [{"exam": "JEE"}, {"exam": "NEET", "subject": "Biology"}]}
+        rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}, **scope}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}, "diagrams": {"$sum": {"$cond": [{"$ifNull": ["$diagram", False]}, 1, 0]}}}}]).to_list(1000)
+        order = json.loads((NEET_ROOT / "content" / "chapters.json").read_text()) if exam == "NEET" else json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text())
+        if not exam:
+            order.update(json.loads((ROOT_DIR / "rapidfire" / "neet_chapters.json").read_text()))
         counts = {(r["_id"]["s"], r["_id"]["c"]): r["n"] for r in rows}
-        CATALOG_CACHE["v"] = {"subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
+        CATALOG_CACHE[key] = {"exam": exam, "diagram_count": sum(r["diagrams"] for r in rows), "subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
                               "chapters": [{"name": c, "count": counts.get((s, c), 0)} for c in chs]} for s, chs in order.items()],
                               "exams": {"JEE": ["Physics", "Chemistry", "Mathematics"], "NEET": ["Physics", "Chemistry", "Biology"]},
                               "review_status": "pilot_review_pending",
                               "note": "Formula/concept cards for JEE Main and NEET (UG). Pending owner review during the private pilot."}
-    return CATALOG_CACHE["v"]
+    return CATALOG_CACHE[key]
 
 
 def public_card(c: Card) -> dict:
@@ -241,23 +266,39 @@ def public_card(c: Card) -> dict:
 @api.post("/rf/sessions")
 async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
+    exam = resolve_exam(data.exam, data.subject)
+    if data.diagram_only and (exam != "NEET" or data.subject != "Biology"):
+        raise HTTPException(422, "Diagram sprints are available for NEET Biology.")
     existing = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
     if existing:
         cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(30)]
     else:
-        if data.card_ids:
-            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "subject": data.subject, "retired": {"$ne": True}}).to_list(30)
+        if data.revision:
+            weak = await weak_chapters(db, uid, exam)
+            selected = next((row for row in weak if row["subject"] == data.subject and (not data.chapter or row["chapter"] == data.chapter)), None)
+            if not selected:
+                raise HTTPException(404, "No missed cards left here. Play a sprint to build your revision list.")
+            docs = await db.rf_cards.find({"id": {"$in": selected["card_ids"]}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0}).to_list(30)
+            docs.sort(key=lambda c: selected["card_ids"].index(c["id"]))
+            docs = docs[:data.count]
+            data.chapter = selected["chapter"]
+            mode = "weak_revision"
+        elif data.card_ids:
+            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "exam": exam, "subject": data.subject, "retired": {"$ne": True}}, {"_id": 0}).to_list(30)
             mode = "repeat_missed"
         else:
-            match = {"subject": data.subject, "retired": {"$ne": True}, **({"chapter": data.chapter} if data.chapter else {})}
+            match = {"exam": exam, "subject": data.subject, "retired": {"$ne": True}, **({"chapter": data.chapter} if data.chapter else {}), **({"diagram": {"$ne": None}} if data.diagram_only else {})}
             docs = await db.rf_cards.aggregate([{"$match": match}, {"$sample": {"size": data.count}}]).to_list(data.count)
-            mode = "fresh"
+            mode = "diagrams" if data.diagram_only else "fresh"
         if not docs:
             raise HTTPException(404, "No reviewed cards are available for this selection yet.")
         cards = [Card.from_mongo(d) for d in docs]
         existing = RfSession(id=str(uuid.uuid4()), user_id=uid, request_id=data.request_id, subject=data.subject,
-                             chapter=data.chapter, mode=mode, card_ids=[c.id for c in cards])
-        await db.rf_sessions.insert_one(existing.to_mongo())
+                             chapter=data.chapter, exam=exam, mode=mode, card_ids=[c.id for c in cards])
+        try:
+            await db.rf_sessions.insert_one(existing.to_mongo())
+        except DuplicateKeyError:
+            return await rf_create(data, x_rf_user)
     by_id = {c.id: c for c in cards}
     return {**existing.model_dump(exclude={"mongo_id", "user_id"}),
             "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": 20}
@@ -271,7 +312,9 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
         raise HTTPException(404, "Session not found.")
     if s.status == "completed":
         sm = s.summary or {}
-        return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": await award(uid, "solo:" + sid, "solo", sm.get("correct", 0), sm.get("total", 0), sm.get("answered", 0))}
+        docs = await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)
+        await record_learning(db, uid, "solo:" + sid, s.exam, s.results, docs, s.completed_at)
+        return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": await award(uid, "solo:" + sid, "solo", sm.get("correct", 0), sm.get("total", 0), sm.get("answered", 0), exam=s.exam)}
     cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)}
     seen, rows = set(), []
     for r in data.results:
@@ -300,16 +343,18 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
     await db.rf_sessions.update_one({"id": sid, "status": "active"}, {"$set": {"status": "completed", "results": rows,
                                     "summary": summary, "completed_at": now_iso()}})
     s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid}))
-    reward = await award(uid, "solo:" + sid, "solo", correct, len(rows), answered)
+    await record_learning(db, uid, "solo:" + sid, s.exam, s.results, list(cards.values()), s.completed_at)
+    reward = await award(uid, "solo:" + sid, "solo", s.summary["correct"], s.summary["total"], s.summary["answered"], exam=s.exam)
     return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": reward}
 
 
 @api.get("/rf/history")
-async def rf_history(x_rf_user: Optional[str] = Header(None)):
+async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
-    docs = await db.rf_sessions.find({"user_id": uid, "status": "completed"}, {"_id": 0, "user_id": 0, "results": 0}) \
+    query = {"user_id": uid, "status": "completed", **({"exam": exam} if exam else {})}
+    docs = await db.rf_sessions.find(query, {"_id": 0, "user_id": 0, "results": 0}) \
         .sort("completed_at", -1).limit(20).to_list(20)
-    agg = await db.rf_sessions.aggregate([{"$match": {"user_id": uid, "status": "completed"}},
+    agg = await db.rf_sessions.aggregate([{"$match": query},
                                           {"$group": {"_id": None, "sessions": {"$sum": 1}, "correct": {"$sum": "$summary.correct"},
                                                       "cards": {"$sum": "$summary.total"}}}]).to_list(1)
     totals = agg[0] if agg else {"sessions": 0, "correct": 0, "cards": 0}
@@ -331,6 +376,7 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
 from duels import make_router as make_duels  # noqa: E402
 api.include_router(make_duels(db, rf_user, public_card, award))
 api.include_router(game_router)
+api.include_router(make_revision(db, rf_user))
 app.include_router(api)
 from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
 app.add_middleware(GZipMiddleware, minimum_size=1024)
@@ -341,9 +387,6 @@ app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=["*"], 
 async def startup():
     global http
     http = httpx.AsyncClient(timeout=httpx.Timeout(30.0, connect=10.0), limits=httpx.Limits(max_connections=200, max_keepalive_connections=50))
-    # The shared upstream client must NEVER keep cookies: each learner's jar is per-sid only.
-    from http.cookiejar import DefaultCookiePolicy
-    http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[]))
     # Never persist upstream cookies on the shared client; each sid has its own jar (prevents cross-user session leak)
     http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[]))
     await db.rf_cards.create_index("id", unique=True)
@@ -359,6 +402,18 @@ async def startup():
     await db.rf_awards.create_index([("uid", 1), ("ref", 1)], unique=True)
     await db.rf_profiles.create_index("uid", unique=True)
     await db.rf_profiles.create_index([("xp", -1)])
+    await db.rf_cards.create_index([("exam", 1), ("subject", 1), ("chapter", 1), ("retired", 1)])
+    await db.rf_sessions.create_index([("user_id", 1), ("exam", 1), ("status", 1), ("completed_at", -1)])
+    await db.rf_duels.create_index([("exam", 1), ("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])
+    await db.rf_learning_events.create_index([("uid", 1), ("ref", 1)], unique=True)
+    await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])
+    for exam in SUBJECTS:
+        await db.rf_profiles.create_index([(f"exam_stats.{exam}.xp", -1), ("uid", 1)])
+    await db.rf_cards.update_many({"exam": {"$exists": False}, "subject": "Biology"}, {"$set": {"exam": "NEET"}})
+    await db.rf_cards.update_many({"exam": {"$exists": False}, "subject": {"$ne": "Biology"}}, {"$set": {"exam": "JEE"}})
+    await sync_cards()
+    from exam_migration import migrate_exam_data
+    await migrate_exam_data(db)
     # Duel live channel must be a capped collection before any event is written (see duels.py tail()).
     if "rf_events" not in await db.list_collection_names():
         try:

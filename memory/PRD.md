@@ -111,3 +111,47 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Contrast polish: outcome badges use on* text colours (SKIPPED readable), trophy icons use neonAmber.
 - Rapid Fire pool audit (backend/rapidfire/audit_cards.py, judge-only, no rewriting, cached in audit_cache.json): removed cards needing pen/paper; kept the most important 90 per chapter (120 cap for inorganic). JEE pool 11,086 → 7,045 (Physics 2610, Chemistry 2095, Maths 2340). Rejected cards in rapidfire/rejected/ (server retires them softly).
 - NEET UG in Rapid Fire: JEE MAIN / NEET UG toggle on the arena; NEET = Physics + Chemistry (shared pool) + Biology (32 NCERT chapters × 90 = 2,880 new cards, generated → verified → audited). Biology allowed in solo sessions and duels; catalog returns `exams` map.
+
+## Iteration 30 — exam leaderboards, Biology diagrams, weak revision, NEETLIVE handoff
+
+### User requests / decisions
+- Separate JEE and NEET leaderboards; grouping follows **the exam selected in the arena**, not a locked profile exam.
+- Quick picture-based Biology cards for heart, nephron and flower parts, still 20 seconds and no pen.
+- One-tap replay of most-missed chapter cards from the arena.
+- Preserve all existing NEET content independently for a future NEETLIVE.AI native app and website; tell the owner the exact transfer location. No separate app/website requested to be built in this iteration.
+
+### Implemented architecture (supersedes shared-pool notes above)
+- NEET live source: **`/app/neetlive/content/cards/`** and `content/chapters.json`. Independent Physics/Chemistry copies have `neet-` IDs and provenance; existing Biology IDs stay compatible with saved sessions. The old `backend/rapidfire/cards/biology__*.json` files are legacy copies, no longer synced. JEE still reads non-Biology files in that directory.
+- NEET bank: **7,585 active cards** — Physics 2,610; Chemistry 2,095; Biology 2,880. PC copies are from the curated shared bank, not a claim of a new expert-certified NEET syllabus. Future subjects can be added to the independent NEET catalogue; none were invented.
+- 18 original, NCERT-concept-aligned vector diagram cards (6 heart, 6 nephron, 6 flower), replacing 6 text cards in each relevant Biology chapter to preserve the 90-card cap. Replaced text and rejected Biology content retained in `neetlive/archive/`. Original schematics, not official NCERT scans; owner/expert review still pending.
+- Diagram definitions are self-contained JSON primitives rendered by native `react-native-svg` in `BiologyDiagram.tsx` (no external image dependency). Displayed in solo play, summary review, duels and duel review. NEET arena shortcut starts an 18-card picture sprint; normal Biology play can also sample these cards. Player content scrolls on small devices without hiding options.
+- `exam` pinned at session/duel creation. Rewards atomically increment `rf_profiles.exam_stats.JEE` / `.NEET` alongside existing shared wallet/overall XP. Leaderboards are exam-scoped, cached with per-exam single-flight locks, stable UID tie-break, personal rank and top20. Shared coins/streak/overall level are explicitly labelled, not falsely split.
+- Exam-specific random matchmaking, invite mismatch rejection, history and rematch/solo fallback. Existing capped `rf_events` WebSocket transport was NOT changed.
+- `exam_migration.py`: restart-safe legacy activity classification (Biology→NEET, other old activity→JEE because original PC play did not record exam), legacy ranking rebuilt from saved reward ledger rather than guessing combined profile XP; learning history backfilled once.
+- `revision.py`: unique `(uid,ref)` immutable learning events from completed sprints/duels, learner+exam index. Wrong/timeouts count; skips and unseen cards do not. Latest correct answer clears a card; cards retired from the bank are excluded. Chapters ordered by accumulated unresolved misses. One-tap replay loads <=30 hardest missed cards in the selected chapter; counts refresh on arena focus/manual refresh.
+- Cache key rendering hardened to prevent briefly showing the previous exam/account on key changes. New UI uses established black/burgundy/gold theme and current Jakarta fonts; no theme migration.
+- Card sync only clears catalog cache when data changes, and soft-retires cards from deleted/empty source files while retaining historical review data.
+
+### APIs
+- `GET /api/rf/catalog?exam=JEE|NEET`, `/cards?exam=...`, `/leaderboard?exam=...`, `/history?exam=...`, `/duels?exam=...`.
+- `POST /api/rf/sessions`: optional `exam`, `diagram_only`, `revision`; subject/exam combinations validated. Completion derives correctness server-side and records learning idempotently.
+- `GET /api/rf/revision?exam=...`: unresolved chapter counts and misses, no answer keys.
+- Duel create/join carries exam; responses preserve exam. No-exam old clients retain backward-compatible defaults/canonical catalog.
+
+### NEETLIVE handoff location / privacy
+- Give future builder **`/app/neetlive/`** or **`/app/neetlive/exports/neetlive-content.zip`** (~1 MB). Includes 7,585 cards with keys/explanations, chapter list, diagrams, archives, SHA-256 manifest, READMEs and integration-reference snapshots.
+- Refresh owner bundle: `python neetlive/tools/export_bundle.py`. The frontend/backend reference files are not a standalone runnable app.
+- **Private learner progress remains in MongoDB**, scoped by `exam: "NEET"`; profiles expose NEET counters under `exam_stats.NEET`. It is NOT silently included in the content ZIP. Optional explicit owner-only `--private-output /secure/neet-transfer` exports NEET progress to a protected path OUTSIDE the repository. Cookies, phone numbers, auth tokens and shared wallet entitlements are excluded. This optional private migration command has not been exercised on a live transfer.
+- No authentication changes. Existing private-pilot unverified phone access remains; verified identity is still a P1 requirement before public use.
+
+### Verification
+- Testing report `/app/test_reports/iteration_30.json`: new suite 10/10 plus prior NEET catalogue regression 13/13 passed. One stale DB-count assertion was corrected for intentional independent NEET PC copies.
+- Follow-up: new suite rerun + 6 existing WebSocket membership/join/push/forfeit cases **16/16 passed** (`test_reports/pytest/iter30_final.xml`). **29 distinct backend cases verified in total**.
+- Mobile preview at 390×844 and narrow320: exam switching without stale board data, all three diagram types, diagram feedback/completion/review, one-tap weak revision, no horizontal overflow. Follow-up UI: NEET invite→quick match→complete→fresh invite rematch→solo→start another, all preserving NEET.
+- TypeScript `tsc --noEmit` and modified Python/JS lint pass. Duplicate cookie-policy invocation removed without changing behavior. Pilot-mutating UI seed helper now opt-in, not part of routine regressions.
+- Not verified here: physical Android/iOS device QA; 500,000-concurrent-user capacity. No such scale claim is made.
+
+### Current priorities
+- P0: no known blocking defects in tested feature scope; user verification pending.
+- P1: owner/subject-expert review of diagrams and independently forked NEET PC syllabus; physical-device QA; verified identity/OTP (separate future integration).
+- P2: future standalone NEETLIVE app/site using this bundle; expand original Biology diagrams only after owner feedback; additional shop/avatar refinements.

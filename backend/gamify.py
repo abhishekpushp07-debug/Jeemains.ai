@@ -1,12 +1,14 @@
 """Rapid Fire game layer: XP, levels, coins, daily streak and badges (practice only — never touches exam marks)."""
 import math
 import time
+import asyncio
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Header, HTTPException, Query
 from pymongo.errors import DuplicateKeyError
 from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
+from exam_groups import Exam
 
 IST = timezone(timedelta(hours=5, minutes=30))
 BADGES = {
@@ -56,12 +58,13 @@ def quests_of(p: dict) -> list:
 
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf")
-    board_cache = {"ts": 0.0, "rows": [], "busy": False}
+    board_cache = {}
+    board_locks = {exam: asyncio.Lock() for exam in ("JEE", "NEET")}
 
-    async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None) -> dict:
+    async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE") -> dict:
         """Idempotent per (uid, ref): replays return the original reward."""
         try:
-            await db.rf_awards.insert_one({"uid": uid, "ref": ref, "ts": time.time()})
+            await db.rf_awards.insert_one({"uid": uid, "ref": ref, "exam": exam, "ts": time.time()})
         except DuplicateKeyError:
             import asyncio
             for _ in range(20):  # first call may still be writing the reward
@@ -98,6 +101,9 @@ def make_router(db, rf_user):
         ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" and played else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0)}
         before = level_of(p.get("xp", 0))
         inc = {"xp": xp, "coins": coins, "cards_correct": correct}
+        inc[f"exam_stats.{exam}.xp"] = xp
+        inc[f"exam_stats.{exam}.wins"] = 1 if won else 0
+        inc[f"exam_stats.{exam}.cards_correct"] = correct
         if kind == "solo":
             if played:
                 inc["sessions"] = 1
@@ -117,11 +123,12 @@ def make_router(db, rf_user):
         if new:
             await db.rf_profiles.update_one({"uid": uid}, {"$addToSet": {"badges": {"$each": new}}})
         after = level_of(p["xp"])
-        reward = {"xp": xp, "coins": coins, "streak": streak, "freeze_used": used_freeze, "level_before": before, "level_after": after, "level_up": after > before,
+        reward = {"exam": exam, "exam_xp_total": p.get("exam_stats", {}).get(exam, {}).get("xp", 0), "xp": xp, "coins": coins, "streak": streak, "freeze_used": used_freeze, "level_before": before, "level_after": after, "level_up": after > before,
                   "xp_total": p["xp"], "coins_total": p["coins"], "level_floor": level_floor(after), "next_level_xp": level_floor(after + 1), "played": played,
                   "quest_ready": any(q["done"] and not q["claimed"] for q in quests_of(p)),
                   "new_badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1]} for b in new]}
         await db.rf_awards.update_one({"uid": uid, "ref": ref}, {"$set": {"reward": reward}})
+        board_cache.pop(exam, None)
         return reward
 
     @r.get("/profile")
@@ -130,18 +137,28 @@ def make_router(db, rf_user):
         return public_profile(await db.rf_profiles.find_one({"uid": uid}) or {})
 
     @r.get("/leaderboard")
-    async def leaderboard(x_rf_user: Optional[str] = Header(None)):
+    async def leaderboard(exam: Exam = "JEE", x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        # Top-20 is the same for everyone: cache it for 15 s; one refresh at a time (no stampede on expiry).
-        if (time.time() - board_cache["ts"] > 15 and (not board_cache["busy"] or not board_cache["rows"])):
-            board_cache["busy"] = True
-            try:
-                board_cache["rows"] = await db.rf_profiles.find({"name": {"$not": {"$regex": "^TEST_"}}}, {"_id": 0, "uid": 1, "xp": 1, "name": 1, "wins": 1}).sort("xp", -1).limit(20).to_list(20)
-                board_cache["ts"] = time.time()
-            finally:
-                board_cache["busy"] = False
-        top = board_cache["rows"]
-        return {"items": [{"rank": i + 1, "name": t.get("name") or "JEE Aspirant", "you": t["uid"] == uid, "xp": t.get("xp", 0), "level": level_of(t.get("xp", 0)), "wins": t.get("wins", 0)} for i, t in enumerate(top)]}
+        field = f"exam_stats.{exam}.xp"
+        query = {field: {"$gt": 0}, "name": {"$not": {"$regex": "^TEST"}}, "uid": {"$not": {"$regex": "^TEST"}}}
+        async with board_locks[exam]:
+            cached = board_cache.get(exam, {})
+            if time.time() - cached.get("ts", 0) > 15:
+                rows = await db.rf_profiles.find(query, {"_id": 0, "uid": 1, "name": 1, "exam_stats": 1}).sort([(field, -1), ("uid", 1)]).limit(20).to_list(20)
+                cached = {"ts": time.time(), "rows": rows}
+                board_cache[exam] = cached
+        items = []
+        for i, row in enumerate(cached["rows"]):
+            stats = row.get("exam_stats", {}).get(exam, {})
+            items.append({"rank": i + 1, "name": row.get("name") or f"{exam} Aspirant", "you": row["uid"] == uid,
+                          "xp": stats.get("xp", 0), "level": level_of(stats.get("xp", 0)), "wins": stats.get("wins", 0)})
+        mine = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "exam_stats": 1, "name": 1}) or {}
+        xp = mine.get("exam_stats", {}).get(exam, {}).get("xp", 0)
+        rank = None
+        if xp > 0 and not uid.startswith("TEST") and not mine.get("name", "").startswith("TEST"):
+            rank = 1 + await db.rf_profiles.count_documents({**query, "$or": [{field: {"$gt": xp}}, {field: xp, "uid": {"$lt": uid}}]})
+        return {"exam": exam, "items": items, "you": {"rank": rank, "xp": xp, "level": level_of(xp)},
+                "note": "Exam-only practice XP. Wallet, streak and overall level remain shared."}
 
     @r.post("/profile/name")
     async def set_name(data: dict, x_rf_user: Optional[str] = Header(None)):
@@ -150,12 +167,14 @@ def make_router(db, rf_user):
         if not name:
             raise HTTPException(400, "Name required.")
         await db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": name}}, upsert=True)
+        board_cache.clear()
         return {"ok": True}
 
     # Public read API so the JEELIVE.AI website (or any client) can use the same Rapid Fire bank.
     @r.get("/cards")
-    async def cards(subject: Optional[str] = None, chapter: Optional[str] = None, page: int = Query(1, ge=1), limit: int = Query(50, ge=1, le=200)):
-        q = {**{k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}, "retired": {"$ne": True}}
+    async def cards(subject: Optional[str] = None, chapter: Optional[str] = None, exam: Optional[Exam] = None, page: int = Query(1, ge=1), limit: int = Query(50, ge=1, le=200)):
+        scope = {"exam": exam} if exam else {"$or": [{"exam": "JEE"}, {"exam": "NEET", "subject": "Biology"}]}
+        q = {**scope, **{k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}, "retired": {"$ne": True}}
         total = await db.rf_cards.count_documents(q)
         # answers/explanations are never exposed publicly (they could be looked up mid-duel)
         items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)

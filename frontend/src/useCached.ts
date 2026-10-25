@@ -4,7 +4,7 @@ import { storage } from "@/src/utils/storage";
 // Stale-while-revalidate: paint last known data instantly, refresh in background.
 const memory = new Map<string, any>();
 
-export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) => Promise<T>, persist = true) {
+export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) => Promise<T>, persist = true): { data: T | null; error: string; loading: boolean; reload: () => void; dataKey: string | null } {
   const [data, setData] = useState<T | null>(key ? memory.get(key) ?? null : null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(!data);
@@ -56,7 +56,8 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
   }, [key, tick, persist]);
 
   const reload = useCallback(() => setTick((t) => t + 1), []);
-  return { data, error, loading, reload, dataKey };
+  // A key change renders before the effect runs; never flash another exam/account's data.
+  return { data: dataKey === key ? data : (key ? memory.get(key) ?? null : null), error: dataKey === key ? error : "", loading: dataKey === key ? loading : true, reload, dataKey };
 }
 
 export const invalidate = (prefix: string) => {

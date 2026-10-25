@@ -48,7 +48,8 @@ class TestCatalog:
 
     def test_totals_match_db(self, cat):
         for s in cat["subjects"]:
-            n = DB.rf_cards.count_documents({"subject": s["name"], "retired": {"$ne": True}})
+            exam = "NEET" if s["name"] == "Biology" else "JEE"
+            n = DB.rf_cards.count_documents({"subject": s["name"], "exam": exam, "retired": {"$ne": True}})
             assert s["total"] == n, (s["name"], s["total"], n)
 
     # card JSON files on disk agree with the active pool (sync)

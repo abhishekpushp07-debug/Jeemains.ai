@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AppState, ScrollView, View } from "react-native";
+import { AppState, ScrollView, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { FadeIn, ZoomIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { Ring } from "@/src/components/Ring";
+import { BiologyDiagram, Diagram } from "@/src/components/BiologyDiagram";
 import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
 import { rf, uuid } from "@/src/api/client";
@@ -15,7 +16,7 @@ import { colors, radius, space, subjectColor } from "@/src/theme";
 
 const LIMIT = 20000;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
-type RCard = { id: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string };
+type RCard = { id: string; exam?: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string; diagram?: Diagram };
 type Res = { card_id: string; outcome: "correct" | "incorrect" | "skipped" | "timed_out"; choice: number | null; ms: number };
 
 function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard[]; onRepeat: (ids: string[]) => void; onAgain: () => void; onExit: () => void }) {
@@ -26,6 +27,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
   return (
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
       <RewardPanel reward={s.reward} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "Blazing run! Loot unlocked" : sum.correct > 0 ? "Sprint complete! Loot earned" : "Sprint complete"} />
+      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonAmber}>{s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : s.mode === "diagrams" ? "Biology diagram sprint" : "Solo Sprint"}</T>
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
         <T w="heavy" size={44} color={colors.onSurfaceInverse} testID="rf-summary-score">{sum.score}<T w="semibold" size={22} color={colors.custom_whiteA70}> / {sum.total}</T></T>
@@ -54,6 +56,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
           <Card key={m.card_id} testID={"rf-review-" + m.card_id} style={{ gap: 6 }}>
             <T w="bold" size={11} color={colors.muted}>{c.chapter}</T>
             <T w="bold" size={15}>{c.prompt}</T>
+            <BiologyDiagram diagram={c.diagram} testID={`rf-review-diagram-${c.id}`} />
             {c.formula ? <T w="heavy" size={16} color={colors.custom_neonAmber}>{c.formula}</T> : null}
             <T size={13} color={colors.error}>{m.outcome === "timed_out" ? "⏱ Timed out" : m.outcome === "skipped" ? "↷ Skipped" : `✗ You chose: ${c.options[m.choice]}`}</T>
             <T size={13} w="bold" color={colors.success}>✓ Correct: {c.options[c.answer]}</T>
@@ -69,7 +72,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
 }
 
 export default function RapidSession() {
-  const p = useLocalSearchParams<{ subject?: string; chapter?: string; ids?: string; review?: string }>();
+  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; ids?: string; review?: string; diagrams?: string; revision?: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
@@ -90,6 +93,7 @@ export default function RapidSession() {
   const startedAt = useRef(0);
   const lastTick = useRef(0);
   const reqId = useRef(uuid());
+  const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const x = useSharedValue(0);
   const uid = user?.id || "";
   const card = cards[i];
@@ -101,11 +105,11 @@ export default function RapidSession() {
     setError("");
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
-      : rf("/sessions", uid, { method: "POST", body: { subject: p.subject || "Physics", chapter: p.chapter || null, count: 30, request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
+      : rf("/sessions", uid, { method: "POST", body: { exam: p.exam || (p.subject === "Biology" ? "NEET" : "JEE"), subject: p.subject || "Physics", chapter: p.chapter || null, count: 30, diagram_only: p.diagrams === "1", revision: p.revision === "1", request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
     run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else setError(e.message); });
     return () => { alive = false; };
-  }, [p.review, p.subject, p.chapter, p.ids, uid, n]);
+  }, [p.review, p.subject, p.chapter, p.ids, p.exam, p.diagrams, p.revision, uid, n]);
 
   // Timer starts only when the card is visible; resets per card.
   useEffect(() => {
@@ -114,6 +118,7 @@ export default function RapidSession() {
     setLeft(LIMIT);
     setChoice(null);
     setTimedOut(false);
+    scrollRef.current?.scrollTo({ y: 0, animated: false });
     x.value = 0;
   }, [card?.id, done]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -121,6 +126,8 @@ export default function RapidSession() {
     try {
       const s = await rf(`/sessions/${session.id}/complete`, uid, { method: "POST", body: { results: results.current } });
       invalidate(`u.${uid}.rfhist`);
+      invalidate(`u.${uid}.revision`);
+      invalidate(`u.${uid}.rfboard`);
       setDone(s);
     } catch (e: any) { setError(e.message + " Your answers are kept — tap Retry."); }
   }, [session, uid]);
@@ -201,7 +208,7 @@ export default function RapidSession() {
   const cardStyle = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { rotate: `${x.value / 25}deg` }] }));
 
   const tint = subjectColor(card?.subject || p.subject);
-  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", r: uuid() } });
+  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", diagrams: p.diagrams || "", r: uuid() } });
 
   return (
     <View testID="rf-session-screen" style={{ flex: 1, backgroundColor: colors.custom_gameBg, paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
@@ -210,7 +217,7 @@ export default function RapidSession() {
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
-          <T w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? `${card.subject} · ${done ? (done.chapter || (done.mode === "repeat_missed" ? "Missed cards" : "Mixed chapters")) : card.chapter}` : "Rapid Fire"}</T>
+          <T testID="rf-session-exam" w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? `${session?.exam || done?.exam || p.exam || ""} · ${card.subject} · ${done ? (done.chapter || "Mixed chapters") : card.chapter}` : "Rapid Fire"}</T>
           {card && !done ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
               <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter">Card {i + 1} of {cards.length}</T>
@@ -232,17 +239,18 @@ export default function RapidSession() {
       ) : null}
 
       {error ? <View style={{ padding: space.lg }}><ErrorBox error={error} retry={() => (session ? finish() : setN((v) => v + 1))} testID="rf-error" /></View> : null}
-      {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title="No reviewed cards here yet" body="Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter." action={<Button testID="rf-empty-back" kind="secondary" label="Choose again" onPress={() => router.back()} />} /></Card></View> : null}
+      {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={() => router.back()} />} /></Card></View> : null}
       {!card && !error && !empty && !done ? <View style={{ padding: space.lg }}><Skeleton h={380} /></View> : null}
 
-      {done ? <Summary s={done} cards={cards} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
+      {done ? <Summary s={done} cards={cards} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
         <View style={{ flex: 1, paddingHorizontal: space.lg }}>
-          <View style={{ flex: 1, justifyContent: "center" }}>
+          <ScrollView ref={scrollRef} testID="rf-card-scroll" style={styles.scroll} contentContainerStyle={styles.cardArea} showsVerticalScrollIndicator={false}>
             {cards[i + 1] ? <View pointerEvents="none" style={{ position: "absolute", left: 14, right: 14, top: 30, bottom: 6, borderRadius: radius.lg, backgroundColor: tint + "33", borderWidth: 1, borderColor: tint + "88", transform: [{ scale: 0.95 }] }} /> : null}
             <GestureDetector gesture={pan}>
-              <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.xl, gap: space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 6 }, cardStyle]}>
+              <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: card.diagram ? space.md : space.xl, gap: card.diagram ? space.sm : space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 6 }, cardStyle]}>
                 <View style={{ height: 4, width: 48, borderRadius: 2, backgroundColor: tint }} />
                 <T w="heavy" size={19} color={colors.custom_onReading} testID="rf-card-prompt">{card.prompt}</T>
+                <BiologyDiagram diagram={card.diagram} testID="rf-card-diagram" />
                 {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={20} color={colors.custom_neonAmber} style={{ textAlign: "center" }} testID="rf-card-formula">{card.formula}</T></View> : null}
                 <View style={{ gap: space.sm }}>
                   {card.options.map((o, k) => {
@@ -268,7 +276,7 @@ export default function RapidSession() {
                 ) : null}
               </Animated.View>
             </GestureDetector>
-          </View>
+          </ScrollView>
           <View style={{ flexDirection: "row", gap: space.sm, paddingVertical: space.md }}>
             <Button testID="rf-skip-button" kind="secondary" icon="skip-next-outline" label="Skip" disabled={locked} onPress={skip} style={{ flex: 1 }} />
             <Button testID="rf-next-button" icon="arrow-right" label={i + 1 >= cards.length ? "Finish" : "Next"} disabled={choice === null} onPress={next} color={colors.custom_amber} style={{ flex: 1.4 }} />
@@ -287,3 +295,8 @@ export default function RapidSession() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  scroll: { flex: 1 },
+  cardArea: { flexGrow: 1, justifyContent: "center", paddingVertical: space.sm },
+});

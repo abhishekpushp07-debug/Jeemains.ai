@@ -101,3 +101,57 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+## Iteration 30 — exam isolation, diagrams, weak revision, NEET portable bank
+user_problem_statement: "Separate JEE/NEET leaderboards using arena exam selection; quick Biology diagram cards; one-tap most-missed chapter revision; save all existing NEET content independently for future NEETLIVE.AI."
+backend:
+  - task: "Exam-scoped content, rewards, ranking, history and matchmaking"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/gamify.py, backend/duels.py, backend/exam_groups.py, backend/exam_migration.py"
+    needs_retesting: false
+    priority: high
+    status_history:
+      - agent: main
+        working: NA
+        comment: "Exam pinned at play creation; separate indexed profile XP counters; backward-compatible defaults Biology=NEET, other old play=JEE. Legacy awarded XP reconstructed. Existing WS/capped event transport unchanged."
+  - task: "Idempotent missed-card events and revision"
+    implemented: true
+    working: true
+    file: "backend/revision.py"
+    needs_retesting: false
+    priority: high
+    status_history:
+      - agent: main
+        working: NA
+        comment: "Completed solo/duel incorrect+timeouts count, skips/unseen excluded. Most-missed unresolved active cards grouped by chapter; correct replay clears. Repeat completion does not duplicate misses. Legacy activity backfilled."
+  - task: "Independent NEET source and export bundle"
+    implemented: true
+    working: true
+    file: "neetlive/content, neetlive/tools/export_bundle.py, neetlive/README.md"
+    needs_retesting: false
+    priority: high
+    status_history:
+      - agent: main
+        working: NA
+        comment: "7585 cards = Physics 2610, Chemistry 2095, Biology 2880; 18 original diagrams replace text within 90-card caps. Independent IDs for NEET PC, stable old Biology IDs. ZIP manifest/checksums; no personal data/secrets in default content bundle. Optional explicit owner private export only outside repository."
+frontend:
+  - task: "Exam leaderboard, Biology diagrams, one-tap revision"
+    implemented: true
+    working: true
+    file: "frontend/app/(tabs)/rapid.tsx, frontend/app/rapid/session.tsx, frontend/app/rapid/duel.tsx, frontend/src/components/ArenaLearning.tsx, frontend/src/components/ExamLeaderboard.tsx, frontend/src/components/BiologyDiagram.tsx"
+    needs_retesting: false
+    priority: high
+    status_history:
+      - agent: main
+        working: true
+        comment: "Self-smoke at 390x844: pilot login, NEET toggle, diagram sprint 18 cards, SVG prompt, option feedback, return and NEET leaderboard PASS. Need complete play/revision, exam-switch cache isolation, 320px overflow, all 3 drawings and duel regression. tsc --noEmit passes."
+test_plan:
+  current_focus: ["Exam scoring/match isolation", "Revision idempotency and clearing", "Diagram correctness/rendering", "Portable NEET export", "Existing sprints/duels/WS regression"]
+  stuck_tasks: []
+  test_all: false
+agent_communication:
+  - agent: main
+    message: "Read test_credentials.md. Main browser smoke passed; external URL from frontend env. Legacy unscoped catalog/cards returns canonical JEE + Biology, scoped exam=NEET includes independent PC copies; old raw DB total assertions must now filter exam. Please write iteration_30 tests/report. Do not invoke generation/audit scripts or reset DB."
+  - agent: main
+    message: "Iteration30 passed 10 new +13 regression cases. Follow-up16/16 includes rerun10 new +6 WS checks; 29 unique backend cases total. Mobile320/390 diagram+revision passed; main verified NEET invite/quick-match/complete/rematch/solo/start-another. See iteration_30_followup.md. User verification pending; no known blockers. Private data migration and physical-device/capacity tests not performed."
