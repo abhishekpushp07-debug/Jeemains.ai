@@ -6,7 +6,7 @@ import { useAuth } from "@/src/auth";
 import { api, del, post } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Icon, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
-import { colors, fonts, learningTones, radius, space } from "@/src/theme";
+import { academicStyles, colors, fonts, learningTones, radius, space } from "@/src/theme";
 import { LearningBadge, learningStatusTone } from "@/src/components/LearningTheme";
 import { fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
 
@@ -110,8 +110,8 @@ export default function MyTests() {
         {user?.access_type === "unverified_phone" ? <T size={11} color={colors.muted} testID="my-tests-identity-notice">This number’s profile is not a verified identity.</T> : null}
         <View style={styles.tabs}>
           {(["progress", "saved", "completed"] as Tab[]).map((t) => (
-            <Press key={t} testID={"my-tests-tab-" + t} accessibilityRole="tab" accessibilityState={{ selected: tab === t }} onPress={() => { setTab(t); setStatus("all"); }} style={[styles.tab, { backgroundColor: tab === t ? colors.brandTertiary : colors.surfaceSecondary }]}>
-              <T testID={`my-tests-tab-label-${t}`} w="bold" size={12} color={tab === t ? colors.brandText : colors.onSurface}>{t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed"}</T>
+            <Press key={t} testID={"my-tests-tab-" + t} accessibilityRole="tab" accessibilityState={{ selected: tab === t }} onPress={() => { setTab(t); setStatus("all"); }} style={[styles.tab, { backgroundColor: tab === t ? academicStyles.selectedTab.backgroundColor : academicStyles.tab.backgroundColor }]}>
+              <T testID={`my-tests-tab-label-${t}`} w="bold" size={12} color={tab === t ? academicStyles.selectedTab.color : academicStyles.tab.color}>{t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed"}</T>
               {list.data?.counts ? <T testID={`my-tests-count-${t}`} w="bold" size={11} color={colors.muted} style={styles.count}>{list.data.counts[t]}</T> : null}
             </Press>
           ))}

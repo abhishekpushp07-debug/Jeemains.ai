@@ -1,0 +1,54 @@
+{
+  "summary": "Iteration36 complete with main follow-up: original4 artworks restored/verified, JEELIVE global theme preserved, read-only canonical30paper/2250question and old-record checks passed FIRST, then exactlyONE previously approved fresh pilot completed through real UI. Autosave/independent session/same-ID Continue/result/source-solution hashes pass; old result and active answers unchanged.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter36_canonical_readonly_and_safe_optin.py",
+    "/app/backend/tests/test_iter36_brand_assets_parity.py",
+    "/app/backend/tests/test_iter36_existing_records_readonly.py",
+    "/app/test_reports/pytest/iter36_t1_full.xml",
+    "/app/test_reports/pytest/iter36_brand_assets.xml",
+    "/app/test_reports/pytest/iter36_existing_records.xml",
+    "/app/test_reports/artifacts_iter36/t1_ui_flow/home_cards_375.jpeg",
+    "/app/test_reports/artifacts_iter36/t1_ui_flow/home_reduced_motion_375.jpeg"
+  ],
+  "action_items": [
+    "User visual review of restored target/diamond/rocket/crown artwork.",
+    "Physical Android/iOS QA remains separate; PIN support/cutover remains intentionally pending."
+  ],
+  "critical_code_review_comments": [
+    "RESOLVED new branding configuration warning: service endpoint is now explicit BRANDING_STORAGE_URL in backend environment, no hardcoded host fallback in module. Missing configuration gives503 for publicbranding only; does not block academics/RF. Restarted backend and all5brand hash checks passed.",
+    "PRE-EXISTING/OUTSIDE THIS VISUAL TASK: wildcard credentialed CORS configuration should be addressed in coordinated auth hardening, not silently altered in this artwork fix.",
+    "PRE-EXISTING/EXPLICITLY OUT OF SCOPE: RF header-trust identity backlog. User repeatedly requiresRF untouched; no RF authentication/data changes performed here."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter36_brand_assets_parity.py",
+    "/app/backend/tests/test_iter36_existing_records_readonly.py",
+    "/app/test_reports/iteration_36.json"
+  ],
+  "success_rate": {
+    "backend": "Initial11/12 passed (opt-in partialwrite test skipped); main final5/5branding env tests passed. Main real UI approved fresh-pilot scenario completed instead of running partial opt-in script.",
+    "frontend": "Passed original4artwork/source checks, all destinations,30PYQs,390/320main+375agent, reduced motion and banner-only shine. Main ONE new pilot: Start/sourcecrop/autosave acknowledged/independent canonical session confirms answer/pre-submit solutionlock/same-ID Continue/submit/results/solutionzoom/hashes/old-record preservation."
+  },
+  "seed_data_creation": "No seeds. Main created exactlyONE new canonical pilot attempt with prior explicit user approval; minimal record in memory/test_credentials.md. No newRF sessions, accounts, migrations or resets.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Read-only parity and artwork checks are stable. Existing canonical IDs verified: completed a1a9bc7f-1d51-48f1-aef5-cbc4d4388e78 and active 185b73e3-b7a7-438d-92e1-e39dc1d7a2f2 via GET-only routes. Avoid opening old active attempt in player. Keep sequential auth usage to avoid 429.",
+  "rca_of_issue": "Actual visual regression: applying website ZIP symbols was wrongly interpreted as permission to replace user's original artwork. Restored exact JPGs and documented immutable artwork preference. Harness issues: read nestedimg, not expo-image wrapper src; nonexistent evidence filename was test-context typo (real owner evidence/canonical-pyq.json exists, matched30 IDs/2250 counts). First main fresh-pilot browser launch transient SIGSEGV BEFORE any app action; troubleshooter confirmed recovery, retry completed successfully.",
+  "main_followup": {
+    "fresh_pilot_status": "completed, one new attempt only",
+    "old_records_unchanged": true,
+    "canonical_question_solution_hash_match": true,
+    "native_device_qa": "not performed; these are Expo browser checks",
+    "pin_cutover": "not performed",
+    "rf_changes": "none"
+  }
+}

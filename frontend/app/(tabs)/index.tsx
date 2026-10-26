@@ -18,7 +18,7 @@ import { fmtClock, usesNativeTabs } from "@/src/navigation";
 type Tile = { id: string; kind: TileKind; title: string; sub: string; to: string; badge?: string };
 const TILES: Tile[] = [
   { id: "jee-main", kind: "jee", badge: "PYQ", title: "JEE Main", sub: "PYQs · Chapters", to: "/exam/jee-main" },
-  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", to: "/live" },
+  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "All India series", to: "/live" },
   { id: "bitsat", kind: "bitsat", title: "BITSAT", sub: "Practice · Branches", to: "/exam/bitsat" },
   { id: "comedk", kind: "comedk", title: "COMEDK", sub: "Practice · History", to: "/exam/comedk" },
 ];
@@ -70,7 +70,7 @@ export default function Home() {
       ) : null}
 
       {current ? (
-        <Animated.View entering={FadeInDown.duration(350)}>
+        <Animated.View entering={reducedMotion ? undefined : FadeInDown.duration(350)}>
           <Press testID="home-continue-attempt" onPress={() => router.push(`/attempt/${current.id}`)} style={{ borderRadius: radius.lg, overflow: "hidden" }}>
             <LinearGradient colors={[colors.custom_darkCard, colors.surfaceInverse]} style={{ padding: space.lg, flexDirection: "row", alignItems: "center", gap: space.md }}>
               <View style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: colors.success, alignItems: "center", justifyContent: "center" }}>
@@ -94,16 +94,10 @@ export default function Home() {
         <T testID="home-description" size={13} color={colors.muted}>Real papers, focused practice. Pick up where you stopped.</T>
       </View>
 
-      <View style={styles.finishControls}>
-        <T testID="home-exam-section-label" size={11} w="bold" color={colors.muted} style={styles.eyebrow}>CHOOSE YOUR EXAM</T>
-        {!reducedMotion ? <Press testID="home-exam-shine-toggle" accessibilityRole="switch" accessibilityState={{ checked: shine }} accessibilityLabel="Animated exam-card finish" onPress={() => setShine((value) => !value)} style={styles.shineToggle}>
-          <Icon name={shine ? "pause-circle-outline" : "play-circle-outline"} size={16} color={colors.muted} />
-          <T testID="home-exam-shine-label" size={11} color={colors.muted}>{shine ? "Pause shine" : "Play shine"}</T>
-        </Press> : null}
-      </View>
+      <T testID="home-exam-section-label" size={11} w="bold" color={colors.muted} style={styles.eyebrow}>CHOOSE YOUR EXAM</T>
       <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.lg }}>
         {TILES.map((t, i) => (
-          <Animated.View key={t.id} entering={FadeInDown.delay(60 * i).duration(380)} style={{ width: "48%" }}>
+          <Animated.View key={t.id} entering={reducedMotion ? undefined : FadeInDown.delay(60 * i).duration(380)} style={{ width: "48%" }}>
             <ExamTile testID={"home-tile-" + t.id} kind={t.kind} title={t.title} sub={t.sub} shine={shine} badge={t.badge} onPress={() => router.push(t.to as any)} />
           </Animated.View>
         ))}
@@ -122,7 +116,14 @@ export default function Home() {
         </LinearGradient>
       </Press>
 
-      <SeriesBanner series={series.data} error={series.error} />
+      <View style={styles.finishControls}>
+        <T testID="home-series-section-label" size={11} w="bold" color={colors.muted} style={styles.eyebrow}>ALL INDIA SERIES</T>
+        {!reducedMotion ? <Press testID="home-series-shine-toggle" accessibilityRole="switch" accessibilityState={{ checked: shine }} accessibilityLabel="Animated live-series banner finish" onPress={() => setShine((value) => !value)} style={styles.shineToggle}>
+          <Icon name={shine ? "pause-circle-outline" : "play-circle-outline"} size={16} color={colors.muted} />
+          <T testID="home-series-shine-label" size={11} color={colors.muted}>{shine ? "Pause shine" : "Play shine"}</T>
+        </Press> : null}
+      </View>
+      <SeriesBanner series={series.data} error={series.error} home shine={shine} />
 
       <Press testID="home-my-tests-entry" onPress={() => router.push("/(tabs)/tests")}>
         <Card style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>

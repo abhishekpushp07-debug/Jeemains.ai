@@ -1,6 +1,7 @@
 // Design tokens for JEELIVE.AI. Keys match the "color" block of /app/design_guidelines.json.
 import { useMemo } from "react";
 import { Appearance, StyleSheet, useColorScheme, ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { componentStyle, homeDesign, websiteDesign } from "./websiteDesign";
 
 export type ColorScheme = "light" | "dark";
 
@@ -150,6 +151,7 @@ export const fonts = {
   bold: "Figtree-700",
   heavy: "Figtree-800",
 };
+export const monoFonts = { regular: "RobotoMono-400", medium: "RobotoMono-500", semibold: "RobotoMono-600", bold: "RobotoMono-700" };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
 export const radius = { sm: 6, md: 12, lg: 20, pill: 999 };
@@ -157,31 +159,32 @@ export const radius = { sm: 6, md: 12, lg: 20, pill: 999 };
 // Website learning-workspace.css segment tokens, scoped to academic screens.
 // Labels accompany these colours; Rapid Fire keeps its existing semantic palette.
 export const learningTones = {
-  maroon: { line: colors.custom_webLearningMaroon, soft: colors.custom_webMaroonSoft, ink: colors.custom_webLearningMaroon },
-  completed: { line: colors.custom_webLearningCompleted, soft: colors.custom_webCompletedSoft, ink: colors.custom_webCompletedInk },
-  saved: { line: colors.custom_webLearningSaved, soft: colors.custom_webSavedSoft, ink: colors.custom_webSavedInk },
-  active: { line: colors.custom_webLearningActive, soft: colors.custom_webActiveSoft, ink: colors.custom_webActiveInk },
-  error: { line: colors.custom_webLearningError, soft: colors.custom_webErrorSoft, ink: colors.custom_webErrorInk },
+  maroon: { line: colors.brandPrimary, soft: colors.brandTertiary, ink: colors.error },
+  completed: { line: componentStyle("library.completed").borderTopColor, soft: colors.custom_successSoft, ink: colors.success },
+  saved: { line: componentStyle("library.saved").borderTopColor, soft: colors.brandTertiary, ink: colors.brandText },
+  active: { line: componentStyle("library.active").borderTopColor, soft: colors.custom_warningSoft, ink: colors.warning },
+  error: { line: colors.error, soft: colors.custom_errorSoft, ink: colors.error },
 };
 export type LearningTone = keyof typeof learningTones;
 
 export type ExamCardKind = "jee" | "live" | "bitsat" | "comedk";
 export function examCardColors(kind: ExamCardKind) {
-  const shared = { iconBackground: colors.custom_webGlass, ink: colors.custom_webWhite };
-  if (kind === "jee") return { ...shared, background: colors.custom_webJeeBackground,
-    accent: colors.custom_webJeeAccent, muted: colors.custom_webJeeMuted, line: colors.custom_webJeeLine,
-    button: colors.custom_webWhite, buttonInk: colors.custom_webJeeButtonInk };
-  if (kind === "bitsat") return { ...shared, background: colors.custom_webBitsatBackground,
-    ink: colors.custom_webBitsatInk, accent: colors.custom_webBitsatAccent, muted: colors.custom_webBitsatMuted,
-    line: colors.custom_webBitsatLine, button: colors.custom_webBitsatButton, buttonInk: colors.custom_webBitsatButtonInk };
-  if (kind === "comedk") return { ...shared, background: colors.custom_webComedkBackground,
-    accent: colors.custom_webComedkAccent, muted: colors.custom_webComedkMuted, line: colors.custom_webComedkLine,
-    button: colors.custom_webComedkButton, buttonInk: colors.custom_webComedkBackground };
-  // No new live-series reference was supplied: preserve its established palette.
-  return { ...shared, background: colors.surfaceSecondary, accent: colors.brandText,
-    muted: colors.muted, line: colors.brandLine, iconBackground: colors.brandTertiary,
-    button: colors.brandPrimary, buttonInk: colors.onBrandPrimary };
+  const { card, cta } = homeDesign(kind === "jee" ? "jee-main" : kind === "live" ? "all-india" : kind);
+  return { background: card.default.backgroundColor, layers: card.default.backgroundImage,
+    ink: card.h2.color, accent: card.small.color, muted: card.p.color, line: card.default.borderTopColor,
+    button: cta.backgroundColor, buttonInk: cta.color, buttonLayers: cta.backgroundImage,
+    iconBackground: colors.custom_webGlass, shadow: card.default.boxShadow,
+    innerLine: card.after.borderTopColor, shine: card.before.backgroundImage,
+  };
 }
+
+// Selector-scoped states from the export; these never recolour the RF palette.
+export const academicStyles = {
+  pyq: componentStyle("pyq.default"), score: componentStyle("result.score"),
+  tab: componentStyle("tab.default"), selectedTab: componentStyle("tab.selected"),
+  source: componentStyle("solution.source"), original: componentStyle("solution.original"),
+};
+export const seriesHome = websiteDesign.home_cards["all-india"];
 
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;

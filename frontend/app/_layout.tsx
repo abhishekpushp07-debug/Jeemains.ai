@@ -15,11 +15,15 @@ LogBox.ignoreAllLogs(true);
 export default function RootLayout() {
   // Prewarm brand + icon fonts so icons render on first paint (Expo Go Android).
   const [loaded, failed] = useFonts({
-    "Figtree-400": require("../assets/fonts/Figtree-400.ttf"),
-    "Figtree-500": require("../assets/fonts/Figtree-500.ttf"),
-    "Figtree-600": require("../assets/fonts/Figtree-600.ttf"),
-    "Figtree-700": require("../assets/fonts/Figtree-700.ttf"),
-    "Figtree-800": require("../assets/fonts/Figtree-800.ttf"),
+    "Figtree-400": require("../assets/website-2026-10-26/figtree-latin-400-normal.ttf"),
+    "Figtree-500": require("../assets/website-2026-10-26/figtree-latin-500-normal.ttf"),
+    "Figtree-600": require("../assets/website-2026-10-26/figtree-latin-600-normal.ttf"),
+    "Figtree-700": require("../assets/website-2026-10-26/figtree-latin-700-normal.ttf"),
+    "Figtree-800": require("../assets/website-2026-10-26/figtree-latin-800-normal.ttf"),
+    "RobotoMono-400": require("../assets/website-2026-10-26/roboto-mono-latin-400-normal.ttf"),
+    "RobotoMono-500": require("../assets/website-2026-10-26/roboto-mono-latin-500-normal.ttf"),
+    "RobotoMono-600": require("../assets/website-2026-10-26/roboto-mono-latin-600-normal.ttf"),
+    "RobotoMono-700": require("../assets/website-2026-10-26/roboto-mono-latin-700-normal.ttf"),
     MaterialDesignIcons: require("@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf"),
   });
   if (!loaded && !failed) return null;

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { paperDate, paperState, PyqPaper, resultId } from "@/src/api/pyq";
-import { colors, learningTones, space } from "@/src/theme";
+import { academicStyles, colors, learningTones, space } from "@/src/theme";
 import { Button, ErrorBox, Icon, T } from "./ui";
 import { LearningBadge, learningStatusTone } from "./LearningTheme";
 
@@ -42,7 +42,7 @@ export function PyqPaperCard({ paper: p, busy, locked, error, onOpen, onResult }
 }
 
 const styles = StyleSheet.create({
-  card: { padding: 20, backgroundColor: colors.surfaceSecondary, borderRadius: 16, borderWidth: 1, borderColor: colors.border, gap: space.sm },
+  card: { padding: 20, backgroundColor: academicStyles.pyq.backgroundColor, borderRadius: parseFloat(academicStyles.pyq.borderRadius), borderWidth: 1, borderColor: academicStyles.pyq.borderTopColor, gap: space.sm },
   title: { marginTop: space.md, marginBottom: space.xs, letterSpacing: 0 },
   row: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: space.sm },
   shift: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: colors.brandTertiary, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 6 },

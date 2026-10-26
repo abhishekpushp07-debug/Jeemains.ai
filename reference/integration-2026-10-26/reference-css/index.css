@@ -1,0 +1,102 @@
+@import '@fontsource/figtree/400.css';
+@import '@fontsource/figtree/500.css';
+@import '@fontsource/figtree/600.css';
+@import '@fontsource/figtree/700.css';
+@import '@fontsource/figtree/800.css';
+@import '@fontsource/roboto-mono/400.css';
+@import '@fontsource/roboto-mono/500.css';
+@import '@fontsource/roboto-mono/600.css';
+@import '@fontsource/roboto-mono/700.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: 210 40% 98%;
+    --foreground: 205 45% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 205 45% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 205 45% 12%;
+    --primary: 338 100% 18%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 204 100% 97%;
+    --secondary-foreground: 205 45% 12%;
+    --muted: 210 25% 95%;
+    --muted-foreground: 205 18% 38%;
+    --accent: 340 25% 95%;
+    --accent-foreground: 205 45% 12%;
+    --destructive: 354 68% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 345 65% 33%;
+    --radius: 0.875rem;
+    --font-ui: 'Figtree', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-title: clamp(1.75rem, 3vw, 2.5rem);
+    --text-3xl: 2.5rem;
+    --text-4xl: 3.25rem;
+    --leading-tight: 1.08;
+    --tracking-tight: -0.035em;
+    --measure: 42rem;
+    --chapter-preview-width: 56rem;
+    --dialog-max-height: 90dvh;
+    --opacity-muted: 0.8;
+    --source-pan-height: clamp(12rem, 43dvh, 28rem);
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+    --touch-target: 2.75rem;
+    --radius-sm: 0.5rem;
+    --radius-card: 1rem;
+    --z-header: 30;
+    --z-dropdown: 100;
+    --z-modal: 200;
+    --z-toast: 300;
+    --motion-fast: 180ms;
+  }
+  :root.dark {
+    color-scheme: dark;
+    --background: 330 10% 5%;
+    --foreground: 210 20% 98%;
+    --card: 330 12% 8%;
+    --card-foreground: 210 20% 98%;
+    --popover: 330 12% 8%;
+    --popover-foreground: 210 20% 98%;
+    --secondary: 202 60% 14%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 330 10% 12%;
+    --muted-foreground: 215 12% 78%;
+    --accent: 330 10% 16%;
+    --accent-foreground: 210 20% 98%;
+    --border: 330 10% 16%;
+    --input: 330 10% 16%;
+    --ring: 345 35% 78%;
+  }
+  * { @apply border-border; }
+  body {
+    margin: 0;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-ui); }
+}

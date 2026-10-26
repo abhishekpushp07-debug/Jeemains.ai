@@ -9,7 +9,7 @@ import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
 import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
-import { colors, fonts, foregroundOn, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
+import { academicStyles, colors, fonts, foregroundOn, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
@@ -345,7 +345,7 @@ export default function Result() {
 }
 
 const learningStyles = StyleSheet.create({
-  score: { gap: space.md, borderRadius: 18, backgroundColor: colors.custom_webLearningMaroon, borderColor: colors.custom_webLearningMaroon },
+  score: { gap: space.md, borderRadius: 18, backgroundColor: academicStyles.score.backgroundColor, borderColor: academicStyles.score.backgroundColor },
   navigation: { minHeight: 66, paddingVertical: space.sm, justifyContent: "center" },
   section: { gap: space.sm, borderTopWidth: 5, borderRadius: 13, paddingVertical: 20 },
 });

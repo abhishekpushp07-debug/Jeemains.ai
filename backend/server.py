@@ -13,6 +13,7 @@ from pymongo.errors import DuplicateKeyError
 from exam_groups import Exam, NEET_ROOT, SUBJECTS, resolve_exam
 from revision import record_learning, weak_chapters, make_router as make_revision
 from owner_downloads import make_router as make_owner_downloads
+from branding import router as branding_router
 import asyncio, json, logging, os, re, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
@@ -379,6 +380,7 @@ api.include_router(make_duels(db, rf_user, public_card, award))
 api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))
+api.include_router(branding_router)
 app.include_router(api)
 from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
 app.add_middleware(GZipMiddleware, minimum_size=1024)

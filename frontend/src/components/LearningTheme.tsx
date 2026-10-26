@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { colors, LearningTone, learningTones, space } from "@/src/theme";
+import { academicStyles, colors, LearningTone, learningTones, space } from "@/src/theme";
 import { Icon, IconName, Press, T } from "./ui";
 
 export function learningStatusTone(status: string): LearningTone | undefined {
@@ -18,13 +18,13 @@ export function LearningBadge({ label, tone, testID }: { label: string; tone?: L
   </View>;
 }
 
-export function LearningTab({ label, tone, icon, active, onPress, testID }: {
+export function LearningTab({ label, icon, active, onPress, testID }: {
   label: string; tone: LearningTone; icon: IconName; active: boolean; onPress: () => void; testID: string;
 }) {
-  const palette = learningTones[tone];
-  const ink = active ? palette.ink : colors.onSurface;
+  const state = active ? academicStyles.selectedTab : academicStyles.tab;
+  const ink = state.color;
   return <Press testID={testID} accessibilityRole="tab" accessibilityState={{ selected: active }} onPress={onPress}
-    style={[styles.tab, { backgroundColor: active ? palette.soft : colors.surfaceSecondary, borderBottomColor: active ? palette.line : colors.border }]}>
+    style={[styles.tab, { backgroundColor: state.backgroundColor, borderBottomColor: state.borderTopColor }]}>
     <Icon name={icon} size={16} color={ink} />
     <T testID={`${testID}-label`} size={13} w="bold" color={ink}>{label}</T>
   </Press>;

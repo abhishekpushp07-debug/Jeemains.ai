@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Share, View } from "react-native";
+import { Share, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Icon, Press, Sheet, T, Button } from "@/src/components/ui";
-import { colors, radius, space } from "@/src/theme";
+import { colors, examCardColors, radius, seriesHome, space } from "@/src/theme";
 import { istDate } from "@/src/navigation";
+import { ExamCardFinish } from "./ExamCardFinish";
+import { WebsiteGradient } from "./WebsiteGradient";
 
 export type Slot = { day: number; date: string; state: string; ready: boolean; set_id: string | null; title: string; can_start: boolean; opens_at: number; last_start_at: number; closes_at: number };
 export type Series = { id: string; title: string; first_date: string; last_date: string; total: number; today: string; server_now: number; slots: Slot[]; today_slot?: Slot | null };
@@ -18,16 +20,19 @@ export function availability(s?: Series | null) {
   return { label: t && !t.ready ? "Awaiting paper" : "Scheduled", live: false };
 }
 
-export function SeriesBanner({ series, error, compact = false }: { series?: Series | null; error?: string; compact?: boolean }) {
+export function SeriesBanner({ series, error, compact = false, home = false, shine = true }: { series?: Series | null; error?: string; compact?: boolean; home?: boolean; shine?: boolean }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const av = availability(series);
+  const palette = examCardColors("live");
   return (
     <>
-      <View testID="all-india-series-banner" style={{ backgroundColor: colors.custom_series, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.brandLine, overflow: "hidden", padding: space.lg, paddingTop: space.md, gap: space.md }}>
+      <View testID="all-india-series-banner" style={[styles.banner, home && { backgroundColor: palette.background, borderColor: palette.line }]}>
+        {home ? <ExamCardFinish kind="live" enabled={shine} testID="series-home-finish" /> : null}
         {/* True 45° top-right corner ribbon, clipped by the card */}
-        <View pointerEvents="none" style={{ position: "absolute", top: 18, right: -38, width: 150, transform: [{ rotate: "45deg" }], backgroundColor: colors.custom_burgundy, paddingVertical: 5, alignItems: "center", shadowColor: colors.surfaceInverse, shadowOpacity: 0.3, shadowRadius: 4, elevation: 4 }}>
-          <T testID="series-100ai-ribbon" w="heavy" size={12} color={colors.onBrandSecondary} style={{ letterSpacing: 1 }} accessibilityLabel="100% AI — series design branding">100% AI</T>
+        <View pointerEvents="none" style={styles.ribbon}>
+          {home ? <WebsiteGradient value={seriesHome[".series-100ai-badge"].backgroundImage} /> : null}
+          <T testID="series-100ai-ribbon" w="heavy" size={12} color={home ? seriesHome[".series-100ai-badge"].color : colors.onBrandSecondary} style={{ letterSpacing: 1 }} accessibilityLabel="100% AI — series design branding">100% AI</T>
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
           <Icon name="creation" size={14} color={colors.custom_whiteA70} />
@@ -35,14 +40,14 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
         </View>
         <View style={{ paddingRight: 72 }}>
           <T w="semibold" size={15} color={colors.custom_whiteA70}>All India</T>
-          <T w="heavy" size={compact ? 21 : 24} color={colors.brandText} testID="series-banner-title">JEE Mains Test Series</T>
+          <T w="heavy" size={compact ? 21 : 24} color={home ? palette.ink : colors.brandText} testID="series-banner-title">JEE Mains Test Series</T>
         </View>
         <View style={{ backgroundColor: colors.brandTertiary, borderRadius: radius.md, paddingVertical: space.sm, paddingHorizontal: space.md, gap: 2 }}>
           <T w="heavy" size={17} color={colors.custom_seriesBright} testID="series-score-200-tagline">Score 200+ with AI</T>
           <T w="bold" size={12} color={colors.onSurface}>AI analysed PYQ based test series</T>
         </View>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.sm, alignItems: "center" }}>
-          <T size={12} w="medium" color={colors.custom_whiteA70}>{series ? `${istDate(series.first_date)} – ${istDate(series.last_date)}` : "1 Dec – 31 Jan"} · {series?.total ?? 62} tests · 3 hrs</T>
+          <T testID="series-schedule-facts" size={12} w="medium" color={colors.custom_whiteA70}>{series ? `${istDate(series.first_date)} – ${istDate(series.last_date)} · ${series.total} tests` : error ? "Schedule unavailable" : "Loading schedule…"}</T>
           <View testID="series-availability-badge" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 8, paddingVertical: 3, borderRadius: radius.pill, backgroundColor: av.live ? colors.success : colors.custom_whiteA15 }}>
             <Icon name={av.live ? "access-point" : "calendar-clock"} size={12} color={colors.onBrandSecondary} />
             <T w="bold" size={11} color={colors.onBrandSecondary}>{av.label}</T>
@@ -50,9 +55,10 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
         </View>
         {error ? <T size={11} color={colors.custom_whiteA70}>Live status unavailable. Open the hub to retry.</T> : null}
         <View style={{ flexDirection: "row", gap: space.sm }}>
-          <Press testID="series-open-hub-button" onPress={() => router.push("/live")} style={{ flex: 1, minHeight: 46, borderRadius: radius.md, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 }}>
-            <T w="heavy" size={14} color={colors.onBrandPrimary}>Open series hub</T>
-            <Icon name="arrow-top-right" size={16} color={colors.onBrandPrimary} />
+          <Press testID="series-open-hub-button" onPress={() => router.push("/live")} style={[styles.primary, home && { backgroundColor: palette.button, borderColor: seriesHome[".flagship-primary"].borderTopColor, borderWidth: 1 }]}>
+            {home ? <WebsiteGradient value={palette.buttonLayers} /> : null}
+            <T testID="series-open-hub-label" w="heavy" size={14} color={home ? palette.buttonInk : colors.onBrandPrimary}>Open series hub</T>
+            <Icon name="arrow-top-right" size={16} color={home ? palette.buttonInk : colors.onBrandPrimary} />
           </Press>
           <Press testID="series-explainer-button" onPress={() => setOpen(true)} accessibilityLabel="How the series works" style={{ width: 46, minHeight: 46, borderRadius: radius.md, borderWidth: 1, borderColor: colors.custom_whiteA70, alignItems: "center", justifyContent: "center" }}>
             <Icon name="information-outline" size={20} color={colors.onBrandSecondary} />
@@ -63,6 +69,12 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  banner: { backgroundColor: colors.custom_series, borderRadius: 18, borderWidth: 1, borderColor: colors.brandLine, overflow: "hidden", padding: 22, paddingVertical: 26, gap: space.md },
+  ribbon: { position: "absolute", top: 18, right: -38, width: 150, transform: [{ rotate: "45deg" }], backgroundColor: colors.custom_burgundy, paddingVertical: 5, alignItems: "center", shadowColor: colors.surfaceInverse, shadowOpacity: .3, shadowRadius: 4, elevation: 4 },
+  primary: { overflow: "hidden", flex: 1, minHeight: 48, borderRadius: 10, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 },
+});
 
 export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (

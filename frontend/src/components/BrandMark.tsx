@@ -1,23 +1,40 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import Svg, { Path } from "react-native-svg";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { SvgXml } from "react-native-svg";
+import Constants from "expo-constants";
 import { colors } from "@/src/theme";
-import { T } from "./ui";
+import { Press, T } from "./ui";
+
+const backend = Constants.expoConfig?.extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL;
+const logoUri = `${backend}/api/brand/logo.svg`;
+let publicLogo: string | null = null;
 
 export function BrandMark({ testID = "brand-mark" }: { testID?: string }) {
-  return <View testID={testID} style={styles.row} accessibilityLabel="Jeelive.ai — Score 200+ with AI">
-    <Svg width={36} height={44} viewBox="0 0 36 44">
-      <Path d="M18 3 L32 7 L30 29 L18 40 L6 31 L3 20 L9 16 L10 10 Z" fill={colors.brandTertiary} stroke={colors.brandText} strokeWidth={2} />
-      <Path d="M12 14 L25 10 L24 28 L18 33 L11 27" fill="none" stroke={colors.brandPrimary} strokeWidth={4} strokeLinejoin="round" />
-    </Svg>
-    <View><T testID={`${testID}-name`} w="heavy" size={24} style={styles.name}>Jeelive.ai</T>
-      <T testID={`${testID}-tagline`} w="heavy" size={8} color={colors.brandText} style={styles.tagline}>SCORE 200+ WITH AI</T>
-    </View>
+  const [state, setState] = useState<"loading" | "ready" | "error">("loading");
+  const [retry, setRetry] = useState(0);
+  const [xml, setXml] = useState<string | null>(publicLogo);
+  useEffect(() => {
+    const controller = new AbortController();
+    if (publicLogo) { setXml(publicLogo); setState("ready"); return; }
+    fetch(logoUri, { signal: controller.signal }).then(async response => {
+      if (!response.ok) throw new Error("Original logo unavailable");
+      // Accessibility belongs to the native wrapper. SvgXml otherwise turns this
+      // browser-only aria-labelledby into an invalid React ariaLabelledby prop.
+      // No path, gradient, viewBox or source pixel is changed.
+      const source = (await response.text()).replace(/\s(?:role|aria-labelledby)="[^"]*"/g, "");
+      if (controller.signal.aborted) return;
+      publicLogo = source;
+      setXml(source);
+      setState("ready");
+    }).catch(() => { if (!controller.signal.aborted) setState("error"); });
+    return () => controller.abort();
+  }, [retry]);
+  return <View testID={testID} style={styles.logo} accessibilityLabel="Jeelive.ai — Score 200+ with AI" accessibilityRole="image">
+    {xml && state === "ready" ? <View testID={`${testID}-original-loaded`} style={StyleSheet.absoluteFill}><SvgXml xml={xml} width="100%" height="100%" onError={() => setState("error")} /></View> : null}
+    {state === "loading" ? <ActivityIndicator testID={`${testID}-loading`} style={StyleSheet.absoluteFill} color={colors.brandText} /> : null}
+    {state === "error" ? <Press testID={`${testID}-retry`} accessibilityLabel="Retry original logo" style={styles.fallback} onPress={() => { setState("loading"); setRetry(n => n + 1); }}>
+      <T size={20} w="heavy">Jeelive.ai</T><T size={10} color={colors.muted}>Tap to reload logo</T>
+    </Press> : null}
   </View>;
 }
-
-const styles = StyleSheet.create({
-  row: { flexDirection: "row", alignItems: "center", gap: 6 },
-  name: { letterSpacing: -0.8, lineHeight: 27 },
-  tagline: { letterSpacing: 0.8, lineHeight: 12 },
-});
+const styles = StyleSheet.create({ logo: { width: 180, height: 72, flexShrink: 1 }, fallback: { position: "absolute", top: 0, bottom: 0, left: 0, right: 0, backgroundColor: colors.surface, justifyContent: "center", minHeight: 44 } });

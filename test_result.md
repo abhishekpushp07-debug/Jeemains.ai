@@ -218,3 +218,31 @@ iteration35_final:
   artifacts: "test_reports/artifacts_iter35/followup/"
   live_state: "PYQ30 available; BITSAT50 mocks; COMEDK0 mocks in canonical website and app alike. No local replacements. RF separate by explicit scope."
   limitations: "Physical-device QA pending. Source equality verified for listed endpoint samples and75 question signatures, not a claim of every asset/device/signup path tested."
+
+## Iteration36 — owner ZIP authoritative adoption
+user_request: "ZIP integration source, canonical https://jeelive.ai/api only; preview URL download-only; RF untouched; preserve existing IDs/history; no PIN cutover. Existing pilot records compare karo, uske baad pilot test bi."
+status: "Implemented; main smoke PASS; extended testing pending."
+source: "reference/integration-2026-10-26/APP_INTEGRATION.md + design-tokens.json; adoption details NATIVE_ADOPTION.md."
+changes: "Source-driven layered home blue/platinum,amber,teal,ruby/onyx; original managed-storage logo; exact font files/licences/icon paths; academic dark status states; black/crimson hubs; real-only series schedule placeholders. Root RF tokens, auth, API routing unchanged."
+verification_so_far: "Before pilot writes,9/9 current canonical parity checks passed(-n0). Original logo GET200, bytes/hash match supplied SVG. tsc/lints passed. Real existing learner home/PYQ30, mobile390/320, all4gradients, pause switch, other-page dark hub passed. No new pilot writes yet."
+test_next:
+  - "First read-only compare existing identity/history/result/resume to canonical;30 packaged paperIDs & sum2250. Do not open old attempt in player (visit writes); readAPI only."
+  - "Then user-approved fresh pilot UI scenario on untouched paper; at most2 new attempts including full reattempt. Old7completed + existing active attempt must stay unchanged. Two independent canonical sessions compare saved state/results/source assets; test stale revision rejection only on NEW test."
+  - "Compare token layers/source fonts/logo; selected/disabled/reducedmotion;320/390; private source white/unfiltered; original-source assets order; RF read-only smoke."
+  - "Use phone9000000001 approved existing pilot from memory/test_credentials.md, never source-project account. Login once per session, run-n0, stop on429/Retry-After. Never seed RF, create new accounts, call PIN endpoints, swap envs or log cookie/identity/answer dumps."
+
+iteration36_user_correction:
+  priority: "P0: restore original card artwork. User explicitly rejected replacing target/diamond/rocket/crown with website SVG symbols. Keep JEELIVE theme elsewhere."
+  implemented: true
+  main_verified: "Exact4 original JPG files hosted via public managed storage and byte-compared. Restored image-top2×2 layout/dark text panels; no colour filters. Removed ExamGlyph. tsc/JS+Python lints PASS. Screenshots390/320 show correct4 artworks; JEE->PYQ30 navigation passes."
+  testing_agent_scope: "Verify correction first, all4 destinations and320/390, then existing-record read-only comparison and previously authorized ONE fresh pilot. Do NOT change original icons again even if ZIP tokens differ. Live banner keeps source ruby/onyx."
+
+iteration36_final:
+  working: true
+  needs_retesting: false
+  result: "PASS: original4artworks, byte/hash identity, managed logo, all4destinations,30paper/2250questions, reducedmotion/banner-only switch. Tests11read-only passed; partial optin script intentionally not used. Main fulfilled user's earlier fresh-pilot approval via ONE actual UI flow (notanotheraccount), full result/solution and existing record preservation checks passed."
+  assets_configuration: "Backendbranding endpoint now uses explicit BRANDING_STORAGE_URL only; no module fallbackhost. Backend restarted; final5/5 publicassets hash tests pass. No academic auth/RF changes."
+  fresh_pilot: "Completed. Minimal ID stored memory/test_credentials.md, no newpublicidentity/answer dumps. Source sample75questions/results equal; sampled originalquestion+solution imagehashes equal direct/proxy."
+  transient_harness_issue: "Chromium SIGSEGV before first launch script did not create anattempt; troubleshoot confirmed transient, one retry succeeded."
+  context_correction: "Owner evidence filename is evidence/canonical-pyq.json, not pyq-live-index.json. It exists and30IDs/sum2250 match."
+  remaining_scope: "PhysicaldeviceQA and previewPIN rollout/authhardening are separate backlog, no cutover. User must never again have original4cardartworks replaced during globaltheme work."
