@@ -1,3 +1,10 @@
+# 146 reset follow-up (145 load already passed) — 2026-10-26
+reset146:
+  fixed: "Actualput_objectadapterprivateowner/uuidpath;orphanattemptbranchesexcludeprotecteduserIDs;originalBSONfieldorderbackupandrecorddigests;manifestcollections[name]{options,type,indexes,records,sha256}includingemptycollections,receiptparts_hash+orderpreservingcollections_hash;verifyeveryplannedid/digestcoveredexactonceandallstreamcounts/hashes. DB-clock5minuteleasepreparedANDapplyingresume/beforeeachbatch;handledfailurefinallyreleases. No realresetyet."
+  retest: "Remove4strictxfails144;indexassertmustreadm.collections[name].indexes notoldtestm.indexes;rawBSONrestoreexactfieldorderandactualindex/emptycollectionrestoreinshadow. TestCLIput_objectadapterpath/return/noauthDBwrite,coverageindependentchecks,protectedstaffsharingorphan,simultaneousresumerlease+expiry+finallyrelease,old40cases. Noappcodeedit,ONLYtestfiles."
+  safety: "144mongodFD1024churncaused2restarts,fixturesnowdelete_manyNOTdropbetween tests. MAINraisedactualpreviewmongodsoftnofile65536hard1048576WITHOUTrestart. Run146aloneNOparallelMongoDDL;onlyinitial/finaldrop. DBsONLYtejas_isolated_reset144andtejas_isolated_restore144. CurrentcustomerlearnersactivetestsoNOopssnapshotuntilwritersquiesced. 145load5/5x3runsPASS beforedeletion."
+
+
 # Maintenance144 + explicit load request — 2026-10-26
 student_reset144:
   approved: "Userexplicitlyapprovedunlinkedrecords: Backthemupandremovethem. Additional: Data sab delete kr skte ho load test and logic.test and speed test ke baad. Abhi testing hi chal rha. Preserveowner/admin/papersaspreviouslyconfirmed;donotdropDB."

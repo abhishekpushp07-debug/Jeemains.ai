@@ -1,0 +1,57 @@
+{
+  "summary": "Iteration 145: a bounded load, logic and speed exercise, backend only, against the real ASGI app (server.app with AdmissionGate and all middleware, no lifespan) through in-process httpx ASGITransport. It used only the exclusive DB tejas_isolated_load145, via my own harness copy iso_harness_load145.py, which rebinds 89 Motor handles; leftover non-test handles = []. MONGO_URL/DB_NAME and app code were not changed, and the 144 DBs were not touched. Fixture: the approved 30-paper bundle (30 files, 30 sets, 30 versions) inserted directly. 100 synthetic header users (TEST ONLY), at most 30 concurrent client flows, plus one mixed 100-request burst and one raw 100-request read burst. Storage GET maps to the original local PDFs; storage PUTs = [] and LLM calls = []. RESULT: 5/5 tests passed and were stable over 3 consecutive full runs (about 40s per run, foreground). All 100 flows completed: catalogue, preflight, two concurrent same-key starts, a new-key resume, attempt GET, question PNG, 12-13 saves, same-save replay, concurrent identical save, out-of-order and reused-request_id saves. 60 users submitted (with a repeat submit) and read results. Totals: 0 HTTP 500s, 0 non-admission 503s, 0 wrong grades, 0 duplicate attempts/ledgers/grade jobs, 0 missing ACKed saves, 0 cross-user leaks. Every 503 was an intentional capacity_busy with Retry-After: 2, and every lane had in_flight 0 after the burst. NOT a capacity or SLO claim: one process, co-located Mongo, synthetic auth, no network.",
+  "metrics": {
+    "cold_preflight_s": {"jan_2026_01_22_s1_large_pdf": 4.30, "apr_2026_04_02_s2": 8.6, "source_gets_each": 1},
+    "warm_preflight_other_user_ms": [6.0, 8.6],
+    "steady_phase": {"users": 100, "client_concurrency": 30, "wall_s": "15.0-16.9", "cpu_s": "13.5-14.1", "completed_flows": 100, "flows_per_s": "5.9-6.5", "lane_peaks": {"live": "32/32", "read": "16/16", "asset": "8/8"}, "intentional_503_first_try": "read 14-15, asset 1-19, live 0-17 (varies by run)"},
+    "endpoint_first_try_ms_p50_p95_p99_max": {
+      "catalogue": [55, 151, 177, 188], "preflight_warm_under_load": [88, 187, 239, 239], "start": [294, 422, 439, 456], "start_resume": [160, 239, 296, 396],
+      "attempt_get": [59, 142, 152, 153], "asset_question_png": [53, 589, 595, 700], "save(1250)": [43, 142, 208, 445], "save_concurrent_same(200)": [52, 189, 290, 316],
+      "submit": [72, 462, 1657, 1692], "results": [115, 515, 1506, 3590], "history": [11, 20, 24, 29], "foreign_reads_404": [10, 25, 39, 55]
+    },
+    "experienced_with_retry_ms_p95": {"catalogue": 2123, "asset_question": 2134, "burst_results": 6394, "burst_save": 2152},
+    "results_ready_wait_after_submit_p95_ms": "5600-6600 (202 + Retry-After 2 polling; grade lane concurrency 2)",
+    "burst_mixed_100": {"wall_s": 6.35, "first_try": "saves 32x200/8x503; results 16x200/44x503; retry wave 40 more 503s", "final": "40/40 saves 200, 60/60 results 200 with unchanged scores"},
+    "burst_raw_read_100_no_retry": {"200": 16, "503": 84, "wall_s": 0.13, "retry_after": "2"},
+    "post_burst": "in_flight all 0; catalogue + attempt GET both 200 first try in 12ms",
+    "process": {"cpu_total_s": 29.8, "rss_start_mb": 185.6, "rss_end_mb": 588.5},
+    "storage_gets": {"total": 12, "distinct_objects": 2}
+  },
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "All admission lanes (AdmissionGate)", "issue": "Retry-After is a fixed '2' with no jitter, so clients rejected together retry together. In the mixed burst, 44 results 503s retried at the same moment and 40 got 503 again, which pushed experienced p95 to 6.4s. Consider a jittered or lane-depth-based Retry-After."},
+      {"endpoint": "POST /api/attempts/{id}/submit -> GET results", "issue": "Results become ready only after p95 of about 5.6-6.6s at 60 submits (grade lane concurrency 2 plus 2s polls). Submit p99 is 1.66s because inline background grading runs in the same process. This is a latency note, not a bug."},
+      {"endpoint": "GET /api/attempts/{id}/questions/{qid}/asset/question/0", "issue": "Rendering 20 distinct crops cold did 10 extra source-PDF GETs beyond the 2 preflight proofs, and process RSS grew from 186MB to 589MB. Behaviour is bounded, but memory per pod should be watched before any scale claim."},
+      {"endpoint": "Owner studio (from 142, not retested)", "issue": "The control lane limit of 4 is below the studio page's 7 parallel GETs, which still leads to 503s."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "logic_verification_passed": [
+    "100 distinct attempts, exactly 1 per user, user_id/set_id ownership correct",
+    "Concurrent same start_key returns the same attempt id; a new start_key while active resumes the same attempt with the same deadline",
+    "Same-save replay returns 200 with duplicate=True; concurrent identical saves give 200/200 with exactly one duplicate; out-of-order revision returns 409; a reused request_id with a different body returns 409",
+    "Persisted answers match the ACKed (revision, value) map for all 100 users, read through a fresh pymongo client; command_count equals applied commands",
+    "Score and per-question marks for 60 submitted users match independently computed expected values (+4/-1/0, bonus_all +4, multiple_accepted D=+4 / C=-1); the ledger summary equals the results; repeat reads are equal",
+    "60 grade jobs, all done, one per attempt; 60 ledgers; repeat, concurrent and triple submit gave one receipt and one ledger",
+    "Timer: deadline - started_at = 10800 and unchanged; after a TEST-only deadline move, late saves return 409 and results are released with reason time_limit, scoring only ACKed answers",
+    "Privacy: foreign GET, results, save and solution asset return 404 (100/100 each); own active results and solution return 403; the active attempt payload has no accepted_answers/s_refs/solution; history page=1 shows only own attempts (1 item); page=99999999 returns 200 with an empty list; the catalogue attempt marker is shown only on the user's own paper"
+  ],
+  "test_report_links": ["/app/backend/tests/test_iter145_load.py", "/app/backend/tests/iso_harness_load145.py", "/app/test_reports/pytest/iter145_load.xml", "/app/test_reports/iter145_load_evidence.json"],
+  "action_items": [
+    "Optional: add jitter to Retry-After for capacity_busy so rejected clients do not retry in lockstep, and confirm the frontend retry client also jitters",
+    "Optional: raise the control lane limit or serialize the studio page's 7 parallel GETs (from 142)",
+    "Do NOT treat these numbers as production capacity: one process, ASGI transport with no network/TLS, co-located Mongo, synthetic auth"
+  ],
+  "critical_code_review_comments": [
+    "admission.py: lane counters are per process and not locked; this is safe under a single asyncio loop but means nothing across workers (snapshot already says THIS_PROCESS_ONLY)",
+    "attempts.py is 708 lines (over the 700-line guideline)"
+  ],
+  "updated_files": ["/app/backend/tests/test_iter145_load.py (new)", "/app/backend/tests/iso_harness_load145.py (new)", "/app/test_reports/iteration_145.json", "/app/test_reports/iter145_load_evidence.json"],
+  "success_rate": {"backend": "100% (5/5 load/logic tests, 3 consecutive runs)", "frontend": "not tested (backend only)"},
+  "seed_data_creation": "Only in tejas_isolated_load145 (30-paper bundle plus 100 TEST_U145_* attempts). The DB was dropped in teardown and db_dropped=True is verified. No customer DB writes, no storage writes, no LLM calls, no background processes left.",
+  "test_credentials": "None. Synthetic in-memory header users only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run in the foreground: cd /app/backend/tests && timeout 118 python -m pytest test_iter145_load.py -n0 -p no:cacheprovider -s -q (about 40s). It uses the exclusive DB tejas_isolated_load145 through iso_harness_load145.py; do NOT import iso_harness_iter134 in the same process. Papers used: P1 jee-main-pyq-2026-01-22-s1 (Jan large PDF, bonus_all) and P2 jee-main-pyq-2026-04-02-s2 (multiple_accepted). Evidence is in iter145_load_evidence.json. Student/unlinked data reset is agent 144's / main's job and was not done here."
+}
