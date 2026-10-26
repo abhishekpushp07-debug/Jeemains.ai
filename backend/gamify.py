@@ -8,7 +8,7 @@ from typing import Optional
 from fastapi import APIRouter, Header, HTTPException, Query
 from pymongo.errors import DuplicateKeyError
 from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
-from exam_groups import Exam
+from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
 
 IST = timezone(timedelta(hours=5, minutes=30))
 BADGES = {
@@ -59,10 +59,11 @@ def quests_of(p: dict) -> list:
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf")
     board_cache = {}
-    board_locks = {exam: asyncio.Lock() for exam in ("JEE", "NEET")}
+    board_locks = {exam: asyncio.Lock() for exam in ACTIVE_EXAMS}
 
     async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE") -> dict:
         """Idempotent per (uid, ref): replays return the original reward."""
+        require_active_exam(exam)
         try:
             await db.rf_awards.insert_one({"uid": uid, "ref": ref, "exam": exam, "ts": time.time()})
         except DuplicateKeyError:
@@ -139,6 +140,7 @@ def make_router(db, rf_user):
     @r.get("/leaderboard")
     async def leaderboard(exam: Exam = "JEE", x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
+        exam = require_active_exam(exam)
         field = f"exam_stats.{exam}.xp"
         query = {field: {"$gt": 0}, "name": {"$not": {"$regex": "^TEST"}}, "uid": {"$not": {"$regex": "^TEST"}}}
         async with board_locks[exam]:
@@ -173,7 +175,8 @@ def make_router(db, rf_user):
     # Public read API so the JEELIVE.AI website (or any client) can use the same Rapid Fire bank.
     @r.get("/cards")
     async def cards(subject: Optional[str] = None, chapter: Optional[str] = None, exam: Optional[Exam] = None, page: int = Query(1, ge=1), limit: int = Query(50, ge=1, le=200)):
-        scope = {"exam": exam} if exam else {"$or": [{"exam": "JEE"}, {"exam": "NEET", "subject": "Biology"}]}
+        exam = require_active_exam(exam or ("NEET" if subject == "Biology" else "JEE"))
+        scope = {"exam": exam}
         q = {**scope, **{k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}, "retired": {"$ne": True}}
         total = await db.rf_cards.count_documents(q)
         # answers/explanations are never exposed publicly (they could be looked up mid-duel)

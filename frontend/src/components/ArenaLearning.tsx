@@ -6,21 +6,7 @@ import { useCached } from "@/src/useCached";
 import { colors, radius, space } from "@/src/theme";
 import { ErrorBox, Icon, Press, T } from "./ui";
 
-export function DiagramShortcut({ count }: { count: number }) {
-  const router = useRouter();
-  return <Press testID="rf-diagram-sprint" accessibilityLabel={`Play ${count} Biology diagram cards`} disabled={!count}
-    onPress={() => router.push({ pathname: "/rapid/session", params: { exam: "NEET", subject: "Biology", diagrams: "1" } })} style={styles.diagram}>
-    <View style={styles.icon}><Icon name="flower-outline" size={25} color={colors.custom_neonAmber} /></View>
-    <View style={styles.copy}>
-      <T testID="rf-diagram-title" size={16} w="heavy">Biology, at a glance</T>
-      <T testID="rf-diagram-description" size={12} color={colors.muted}>Heart · nephron · flower</T>
-      <T testID="rf-diagram-count" size={11} w="bold" color={colors.custom_neonAmber}>{count} picture cards · 20 s each</T>
-    </View>
-    <Icon name="arrow-top-right" size={22} color={colors.custom_neonAmber} />
-  </Press>;
-}
-
-export function WeakRevision({ uid, exam }: { uid: string; exam: "JEE" | "NEET" }) {
+export function WeakRevision({ uid, exam }: { uid: string; exam: "JEE" }) {
   const router = useRouter();
   const query = useCached<any>(`u.${uid}.revision.${exam}`, () => rf(`/revision?exam=${exam}`, uid), false);
   const reload = query.reload;
@@ -50,8 +36,6 @@ export function WeakRevision({ uid, exam }: { uid: string; exam: "JEE" | "NEET" 
 }
 
 const styles = StyleSheet.create({
-  diagram: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.lg, borderRadius: radius.lg, backgroundColor: colors.custom_warningSoft, borderWidth: 1, borderColor: colors.custom_amber },
-  icon: { width: 42, height: 48, alignItems: "center", justifyContent: "center" },
   copy: { flex: 1, gap: 3 },
   row: { flexDirection: "row", alignItems: "center", gap: space.sm },
   revision: { padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.custom_gameLine, backgroundColor: colors.custom_gameCard, borderRadius: radius.lg },

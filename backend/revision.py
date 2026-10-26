@@ -3,7 +3,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Header
 
-from exam_groups import Exam
+from exam_groups import Exam, require_active_exam
 
 
 async def record_learning(db, uid, ref, exam, rows, cards, completed_at):
@@ -45,6 +45,7 @@ def make_router(db, rf_user):
 
     @router.get("/revision")
     async def revision(exam: Exam = "JEE", x_rf_user: Optional[str] = Header(None)):
+        exam = require_active_exam(exam)
         rows = await weak_chapters(db, rf_user(x_rf_user), exam)
         return {"exam": exam, "items": [{k: v for k, v in row.items() if k != "card_ids"} for row in rows],
                 "remaining": sum(row["remaining"] for row in rows),

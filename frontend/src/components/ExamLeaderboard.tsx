@@ -9,7 +9,7 @@ export function ExamLeaderboard({ exam, data, error, loading, retry }: { exam: s
     <View style={styles.header}><Icon name="podium-gold" size={21} color={colors.custom_neonAmber} />
       <T testID="rf-leaderboard-title" size={17} w="heavy">{exam} leaderboard</T>
     </View>
-    <T testID="rf-leaderboard-scope" size={12} color={colors.muted}>Only {exam} play counts here. A separate race, a fairer rank.</T>
+    <T testID="rf-leaderboard-scope" size={12} color={colors.muted}>Ranked by your JEE Main practice XP.</T>
     <ErrorBox testID="rf-board-error" error={error} retry={retry} />
     {!board && loading ? <ActivityIndicator testID="rf-board-loading" color={colors.custom_neonAmber} /> : null}
     {board?.you ? <View testID="rf-board-your-stats" style={styles.mine}>
@@ -22,7 +22,7 @@ export function ExamLeaderboard({ exam, data, error, loading, retry }: { exam: s
       <T testID={`rf-board-xp-${row.rank}`} w="bold" size={12} color={colors.brandText}>{row.xp} XP</T>
     </View>)}
     {board && !board.items.length ? <T testID="rf-board-empty" size={13} color={colors.muted}>Be the first to earn {exam} XP. Play a sprint!</T> : null}
-    <T testID="rf-board-wallet-note" size={10} color={colors.muted}>Wallet, streak and overall level stay shared across the arena.</T>
+    <T testID="rf-board-wallet-note" size={10} color={colors.muted}>Your earned coins, streak and overall level stay preserved.</T>
   </View>;
 }
 

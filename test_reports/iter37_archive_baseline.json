@@ -1,0 +1,13 @@
+{
+  "scope": "Read-only fingerprints before NEET availability removal; no records moved/deleted",
+  "document_fingerprint": "Find exam=NEET excluding _id; sha256 of json.dumps(doc,sort_keys=True,default=str); sort per-document hashes; sha256 of joined hashes",
+  "collections": {
+    "rf_cards": {"count": 8083, "sha256": "30ae75ede15032c09277918d67ddc89c71ab2454bbfb4576378a2f79106e2143"},
+    "rf_sessions": {"count": 32, "sha256": "78a7727b455d62cb5e283f14e970b30213626461f4595fa9b895e91dd10bf58e"},
+    "rf_duels": {"count": 11, "sha256": "2a643c56fb9459c267963323cba7e1e9bdd75e1913954bf6db84d1a5d4c350d2"},
+    "rf_awards": {"count": 10, "sha256": "4c2c0aadf238c6e2fcc1dc42a39b226a4522d3d09a725f6a3bbe390a96864deb"},
+    "rf_learning_events": {"count": 8, "sha256": "ce3a7fa07766ce45ab768ba722a31a2e4749ffbd30833a4c1e1c73f294fea86d"}
+  },
+  "neet_profile_segments": {"count": 1, "sha256": "9232fa18540e6aa8615f1565ff8c6e7e32a9764c1e70178a084e23005811aed6", "method": "find exam_stats.NEET exists, projection _id:0,uid:1,exam_stats.NEET:1; sort by uid; json.dumps(sort_keys=True,default=str); sha256"},
+  "zip": {"path": "/app/neetlive/exports/neetlive-content.zip", "bytes": 1055634, "sha256": "9b51ca14f7f8e41fc81e3b56d1dcf4bb1a9d7df0db4438425335e39683143396", "zip_test": "pass"}
+}

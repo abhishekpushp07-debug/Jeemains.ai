@@ -74,13 +74,17 @@ export default function Duel() {
     let alive = true;
     if (!uid) return; // wait for auth hydration (cold deep-link from an invite would 401)
     setError("");
+    if ((p.exam && p.exam !== "JEE") || p.subject === "Biology") {
+      setError("This practice is archived. Return to JEE Main Rapid Fire.");
+      return;
+    }
     const run = p.mode === "join"
-      ? rf("/duels/join", uid, { method: "POST", body: { code: p.code || "", name, exam: p.exam } })
+      ? rf("/duels/join", uid, { method: "POST", body: { code: p.code || "", name, exam: "JEE" } })
       : p.mode === "ai"
         // Straight to an AI Rival: open a private duel and seat the rival at once (no queue wait).
-        ? rf<any>("/duels", uid, { method: "POST", body: { exam: p.exam, subject: p.subject || "Physics", chapter: p.chapter || null, mode: "invite", name, request_id: reqId.current } })
+        ? rf<any>("/duels", uid, { method: "POST", body: { exam: "JEE", subject: p.subject || "Physics", chapter: p.chapter || null, mode: "invite", name, request_id: reqId.current } })
             .then((v) => (v.status === "waiting" ? rf(`/duels/${v.id}/bot`, uid, { method: "POST", body: {} }) : v))
-        : rf("/duels", uid, { method: "POST", body: { exam: p.exam, subject: p.subject || "Physics", chapter: p.chapter || null, mode: p.mode, name, request_id: reqId.current } });
+        : rf("/duels", uid, { method: "POST", body: { exam: "JEE", subject: p.subject || "Physics", chapter: p.chapter || null, mode: p.mode, name, request_id: reqId.current } });
     run.then((v) => alive && apply(v)).catch((e) => alive && setError(e.message));
     return () => { alive = false; };
   }, [p.mode, p.code, p.subject, p.chapter, p.exam, uid, name, apply, n]);

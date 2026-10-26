@@ -246,3 +246,30 @@ iteration36_final:
   transient_harness_issue: "Chromium SIGSEGV before first launch script did not create anattempt; troubleshoot confirmed transient, one retry succeeded."
   context_correction: "Owner evidence filename is evidence/canonical-pyq.json, not pyq-live-index.json. It exists and30IDs/sum2250 match."
   remaining_scope: "PhysicaldeviceQA and previewPIN rollout/authhardening are separate backlog, no cutover. User must never again have original4cardartworks replaced during globaltheme work."
+
+## Iteration37 — remove NEET from this Rapid Fire app, preserve archive
+user_request: "Neet ug hata do bhai rapid se wo toh tumne alag zip rkha na bna kr"; choice: "Archive mein safe rakho".
+implemented:
+  - "JEE-only lobby (Physics,Chemistry,Maths), no NEET toggle/Biology shortcut; leaderboard/recent/revision scopedJEE. Shared coins/XP/streak not reset. Home original4artworks and globaltheme unchanged."
+  - "Backend central active-exam boundary: default lists areJEE-only; explicitNEET gets410. Guards block NEET creation, repeat-request reuse, review/completion, invitation joining, duelmutations/settlement andWebSocket access before writes. Oldrecords retain original schemas/data."
+  - "NEET bank excluded from live periodic sync; files/ZIP/records not deleted, retired or moved. Logicalarchive: inaccessible in current learner APIs, preserved forowner."
+preservation_baseline: "test_reports/iter37_archive_baseline.json includes NEET rf_cards8083(allinclretired),sessions32,duels11,awards10,learning_events8,oneprofileNEETsegment and ZIPhash9b51ca14..."
+main_checks: "tsc and changedJS/Pythonlints pass. RFcatalog default JEE/7045cards/3subjects; NEET410. ZIP exists1055634bytes and ziptestpasses beforeedits. Need AFTERhash equality and JEEregression tests."
+external_auth_blocker:
+  - "Canonical POST/auth/phone was200at18:08; nowphone-only422at18:39. Public /api/openapi.json nowrequiresphone+pin, verified byintegrationexpert+troubleshooter. This is externalPINcutover, notourRFchanges."
+  - "No usable approvedexisting session among8newest nonemptyjl_jars checked withGETauth/me. Never guessPIN, reset/createaccount or fakeauth. No auth/canonicalURL changes made."
+  - "Main screenshot loads entry but cannotfreshlogin. Authenticated frontendlive verification currentlyBLOCKED. BackendRF X-RF-User testcontract remains operational; isolatedtests notequivalenttoliveUI."
+test_scope:
+  - "Verify exactarchive baselinecounts/hashes using actualbackend.env MONGO_URL+DB_NAME; doNOTinfer0NEETdocs from APIavailability. They MUST remain8083."
+  - "TestJEEcatalog/cards/history/revision/leaderboard, transientQA-onlysolo/duel flows. No canonicalacademic writes, no realpilotwallet changes."
+  - "AttemptNEETquery/create/legacyBiology/archivedrepeat/get/complete/dueljoin/get/actions/websocket; assertreject andnoarchivechanges. Never deleteorreset existingNEETrecords."
+  - "Frontend noNEETtoggle/Biology shortcut; archiveddeeplinkstops beforePOST; checkTypeScript and isolatedcomponent/staticproof ifcannotauthenticate. ReportliveUIblocked honestly."
+
+iteration37_final:
+  implemented: true
+  backend_working: true
+  backend_tests: "Final17/17PASS/no skips, pytest/iter37_neet_archive_final.xml. Initialagent14/14; main tightenedJEEduelanswer to200 and added explicitNEETcreation/default-history/finalpost-testhash checks."
+  archive_preserved: "Exactall5NEETcollection counts/hashes, NEETprofilestats segment andZIP bytes/hash unchanged aftereveryrequest. No archiveretire/delete/move; original schema retained andliveNEETsyncdisabled."
+  frontend_status: "JEE-only source/typechecking passes; noNEETselector/Biologyshortcut, archiveddeep-link guard. LiveauthenticatedUI retestpending: canonicalPINnowrequired, appphone-only422, no validapprovedsession. No claim ofliveUIpass."
+  needs_retesting: true
+  next_scope: "Owner-coordinatednativePINclient/recovery; onceauthenticationworks, verifyliveRapidUI. Do notmodifyauthorresetaccounts justtofinishNEETremoval."

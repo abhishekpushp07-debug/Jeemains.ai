@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from bson import ObjectId
 from http.cookiejar import DefaultCookiePolicy
 from pymongo.errors import DuplicateKeyError
-from exam_groups import Exam, NEET_ROOT, SUBJECTS, resolve_exam
+from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resolve_exam
 from revision import record_learning, weak_chapters, make_router as make_revision
 from owner_downloads import make_router as make_owner_downloads
 from branding import router as branding_router
@@ -202,7 +202,8 @@ CARD_MTIMES: dict[str, float] = {}
 async def sync_cards():
     from pymongo import UpdateOne
     changed = False
-    for exam, directory in (("JEE", CARDS_DIR), ("NEET", NEET_ROOT / "content" / "cards")):
+    # NEET is a preserved archive, not an actively synced/live bank in this app.
+    for exam, directory in (("JEE", CARDS_DIR),):
         if not directory.exists():
             continue
         keys = [exam + ":" + f.name for f in directory.glob("*.json")]
@@ -245,19 +246,18 @@ CATALOG_CACHE: dict = {}
 
 @api.get("/rf/catalog")
 async def rf_catalog(exam: Optional[Exam] = None):
-    key = exam or "legacy"
+    exam = require_active_exam(exam)
+    key = exam
     if key not in CATALOG_CACHE:
-        scope = {"exam": exam} if exam else {"$or": [{"exam": "JEE"}, {"exam": "NEET", "subject": "Biology"}]}
+        scope = {"exam": exam}
         rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}, **scope}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}, "diagrams": {"$sum": {"$cond": [{"$ifNull": ["$diagram", False]}, 1, 0]}}}}]).to_list(1000)
-        order = json.loads((NEET_ROOT / "content" / "chapters.json").read_text()) if exam == "NEET" else json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text())
-        if not exam:
-            order.update(json.loads((ROOT_DIR / "rapidfire" / "neet_chapters.json").read_text()))
+        order = {subject: chapters for subject, chapters in json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text()).items() if subject in SUBJECTS[exam]}
         counts = {(r["_id"]["s"], r["_id"]["c"]): r["n"] for r in rows}
         CATALOG_CACHE[key] = {"exam": exam, "diagram_count": sum(r["diagrams"] for r in rows), "subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
                               "chapters": [{"name": c, "count": counts.get((s, c), 0)} for c in chs]} for s, chs in order.items()],
-                              "exams": {"JEE": ["Physics", "Chemistry", "Mathematics"], "NEET": ["Physics", "Chemistry", "Biology"]},
+                              "exams": {active: SUBJECTS[active] for active in ACTIVE_EXAMS},
                               "review_status": "pilot_review_pending",
-                              "note": "Formula/concept cards for JEE Main and NEET (UG). Pending owner review during the private pilot."}
+                              "note": "Formula/concept cards for JEE Main. Pending owner review during the private pilot."}
     return CATALOG_CACHE[key]
 
 
@@ -269,10 +269,11 @@ def public_card(c: Card) -> dict:
 async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
     exam = resolve_exam(data.exam, data.subject)
-    if data.diagram_only and (exam != "NEET" or data.subject != "Biology"):
-        raise HTTPException(422, "Diagram sprints are available for NEET Biology.")
+    if data.diagram_only:
+        raise HTTPException(410, "Diagram sprints are archived in this app.")
     existing = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
     if existing:
+        resolve_exam(existing.exam, existing.subject)
         cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(30)]
     else:
         if data.revision:
@@ -312,6 +313,7 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
     s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid, "user_id": uid}))
     if not s:
         raise HTTPException(404, "Session not found.")
+    resolve_exam(s.exam, s.subject)
     if s.status == "completed":
         sm = s.summary or {}
         docs = await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)
@@ -353,7 +355,8 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
 @api.get("/rf/history")
 async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
-    query = {"user_id": uid, "status": "completed", **({"exam": exam} if exam else {})}
+    exam = require_active_exam(exam)
+    query = {"user_id": uid, "status": "completed", "exam": exam}
     docs = await db.rf_sessions.find(query, {"_id": 0, "user_id": 0, "results": 0}) \
         .sort("completed_at", -1).limit(20).to_list(20)
     agg = await db.rf_sessions.aggregate([{"$match": query},
@@ -370,6 +373,7 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
     s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid, "user_id": uid}))
     if not s:
         raise HTTPException(404, "Session not found.")
+    resolve_exam(s.exam, s.subject)
     cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": s.card_ids}}).to_list(30)]
     by_id = {c.id: c for c in cards}
     return {**s.model_dump(exclude={"mongo_id", "user_id"}), "cards": [public_card(by_id[i]) for i in s.card_ids if i in by_id]}

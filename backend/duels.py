@@ -14,7 +14,7 @@ from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDiscon
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import CursorType, ReturnDocument
 from shop import equipped_of, rival_profile, safe_avatar
-from exam_groups import Exam, resolve_exam
+from exam_groups import Exam, require_active_exam, resolve_exam
 from revision import record_learning
 
 DUEL_CARDS = 30
@@ -165,6 +165,13 @@ def make_router(db, rf_user, public_card, award):
         eq = equipped_of(prof)
         return {"uid": uid, "name": name.strip()[:24], "avatar": safe_avatar(prof.get("avatar")), "frame": eq.get("frame"), "entry": eq.get("entry"), "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
 
+    async def active_owned_duel(did, uid):
+        d = await db.rf_duels.find_one({"id": did, "players.uid": uid}, {"_id": 0})
+        if not d:
+            raise HTTPException(404, "Duel not found.")
+        resolve_exam(d.get("exam"), d["subject"])
+        return d
+
     def start_fields():
         start = time.time() + 4.6  # 4 s entry show + network margin, then card 1
         return {"status": "ready", "start_at": start, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
@@ -222,6 +229,7 @@ def make_router(db, rf_user, public_card, award):
         return d
 
     async def settle(d):
+        resolve_exam(d.get("exam"), d["subject"])
         d = await simulate_bot(d)
         now = time.time()
         if d["status"] == "waiting" and now - d["created_ts"] > (WAIT_SECONDS if d["mode"] == "random" else 1800):
@@ -244,6 +252,8 @@ def make_router(db, rf_user, public_card, award):
         return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid, exam=d["exam"])
 
     async def view(d, uid):
+        # Reject archived matches before presence, bot, settlement or reward writes.
+        resolve_exam(d.get("exam"), d["subject"])
         mine_p = next((p for p in d["players"] if p["uid"] == uid), None)
         if mine_p and time.time() - mine_p.get("seen_ts", 0) > 3:  # presence write at most every 3 s per player
             await db.rf_duels.update_one({"id": d["id"], "players.uid": uid}, {"$set": {"players.$.seen_ts": time.time()}})
@@ -301,16 +311,22 @@ def make_router(db, rf_user, public_card, award):
     @r.post("/join")
     async def join(data: DuelJoin, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
+        exam = require_active_exam(data.exam)
         code = data.code.strip().upper()
         existing = await db.rf_duels.find_one({"code": code, "players.uid": uid})
         if existing:
+            resolve_exam(existing.get("exam"), existing["subject"])
             if data.exam and existing["exam"] != data.exam:
                 raise HTTPException(409, f"This is a {existing['exam']} duel. Switch your arena exam to join.")
             return await view(existing, uid)
-        invitation = await db.rf_duels.find_one({"code": code, "status": "waiting"}, {"_id": 0, "exam": 1, "created_ts": 1})
+        invitation = await db.rf_duels.find_one({"code": code}, {"_id": 0, "exam": 1, "subject": 1, "status": 1, "created_ts": 1})
+        if invitation:
+            resolve_exam(invitation.get("exam"), invitation["subject"])
+        if not invitation or invitation["status"] != "waiting" or invitation["created_ts"] <= time.time() - 1800:
+            raise HTTPException(404, "This code is invalid, already used, or expired.")
         if invitation and data.exam and invitation["exam"] != data.exam:
             raise HTTPException(409, f"This is a {invitation['exam']} duel. Switch your arena exam to join.")
-        d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "created_ts": {"$gt": time.time() - 1800}, "players.uid": {"$ne": uid}, **({"exam": data.exam} if data.exam else {})},
+        d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "created_ts": {"$gt": time.time() - 1800}, "players.uid": {"$ne": uid}, "exam": exam},
                                                   {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
@@ -320,20 +336,20 @@ def make_router(db, rf_user, public_card, award):
     @r.get("/{did}")
     async def get(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
-        if not d:
-            raise HTTPException(404, "Duel not found.")
+        d = await active_owned_duel(did, uid)
         return await view(d, uid)
 
     @r.post("/{did}/cancel")
     async def cancel(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
+        await active_owned_duel(did, uid)
         await db.rf_duels.update_one({"id": did, "status": "waiting", "players.0.uid": uid}, {"$set": {"status": "cancelled"}})
         return {"ok": True}
 
     @r.post("/{did}/bot")
     async def vs_bot(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
+        await active_owned_duel(did, uid)
         rival = rival_profile()
         bot = {"uid": "bot-" + uuid.uuid4().hex[:10], "bot": True, "name": rival["name"], "avatar": rival["avatar"], "frame": rival["frame"], "entry": rival["entry"],
                "answers": [], "score": 0, "ms": DUEL_CARDS * CARD_SECONDS * 1000, "done": False, "pace": random.uniform(4.0, 6.5), "acc": random.uniform(0.55, 0.8),
@@ -348,6 +364,7 @@ def make_router(db, rf_user, public_card, award):
     @r.post("/{did}/forfeit")
     async def forfeit(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
+        await active_owned_duel(did, uid)
         await db.rf_duels.update_one({"id": did, "status": "ready", "players.uid": uid}, {"$set": {"players.$.done": True, "players.$.forfeit": True}})
         d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
         if d:
@@ -358,9 +375,7 @@ def make_router(db, rf_user, public_card, award):
     @r.post("/{did}/answer")
     async def answer(did: str, data: DuelAnswer, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
-        if not d:
-            raise HTTPException(404, "Duel not found.")
+        d = await active_owned_duel(did, uid)
         me = next(p for p in d["players"] if p["uid"] == uid)
         card = (await get_cards([d["card_ids"][data.index]])).get(d["card_ids"][data.index]) if data.index < len(d["card_ids"]) else None
         if not card:
@@ -394,6 +409,8 @@ def make_router(db, rf_user, public_card, award):
         try:
             uid = rf_user(u)
             d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
+            if d:
+                resolve_exam(d.get("exam"), d["subject"])
         except HTTPException:
             d = None
         if not d:
@@ -418,7 +435,8 @@ def make_router(db, rf_user, public_card, award):
     @r.get("")
     async def mine(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished", **({"exam": exam} if exam else {})}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
+        exam = require_active_exam(exam)
+        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished", "exam": exam}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
         return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"]} for p in d["players"]]} for d in docs]}
 

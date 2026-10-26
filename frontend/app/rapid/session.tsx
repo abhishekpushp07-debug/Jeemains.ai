@@ -103,9 +103,13 @@ export default function RapidSession() {
     let alive = true;
     if (!uid) return; // wait for auth hydration (avoids a 401 POST on cold deep-link)
     setError("");
+    if ((p.exam && p.exam !== "JEE") || p.subject === "Biology" || p.diagrams === "1") {
+      setError("This practice is archived. Return to JEE Main Rapid Fire.");
+      return;
+    }
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
-      : rf("/sessions", uid, { method: "POST", body: { exam: p.exam || (p.subject === "Biology" ? "NEET" : "JEE"), subject: p.subject || "Physics", chapter: p.chapter || null, count: 30, diagram_only: p.diagrams === "1", revision: p.revision === "1", request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
+      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: p.subject || "Physics", chapter: p.chapter || null, count: 30, revision: p.revision === "1", request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
     run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else setError(e.message); });
     return () => { alive = false; };
