@@ -1,5 +1,23 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
+## PYQ159/160 release accepted — 2026-10-26
+Deployer acceptedcode-onlypublish, queued/running dispatcherhandlebcd75d41-4661-4f5a-bead-654e0ffe34d2. DoNOTpollorredispatch. Previewcorrect+testscomplete; LIVEupdatedyear-onlycardsNOTconfirmeduntilnotification/actualservedcheck. Customerfinalmustexplicitlydistinguishpreviewdonefromlivepublishing. No new app edits after160render, no data/credentials changed.
+
+
+
+## PYQ stacked dark catalogue complete in preview — 2026-10-26
+159frontendQA100%functional:2026=19/2025=11allfullwidthverticalcards,yearonly,no dates/pagination,legacydatequeryremoved,backforward/invalidyearfallback,allmetadata/states/actionsreturnTo,contrast>=4.5,keyboard,errorretryempty,reducedmotion,0overflowat1920/390. Browser-onlyMOCKEDauth/cataloguefixturesrealpublicmetadata, NOrealDBwrites. QAminorpolishfixed: ViewResultdirectchildselector missedpreviewinstrumentationconditionalspan[display:contents]; scopeddescendantselectors +exact44pxheight+mobile13px/12pxpadding+nowrap nowBOTHbuttons44px/mobileequal149.015625w with0textoverflow. Descriptionpickapaper. Finaltargeted160screensbothwidthsPASS/0overflow/19cards. Noauth/backend/content/PDFchanges; home/otherexamcoloursunchanged.
+Sendingcode-onlyliveupdateaftertests perongoingreleaseapproval; noimport/reset/ownercredentialchanges. AwaitactualdeploymentconfirmationthenrealservedUI+stylecheckbeforeliveclaim. LatestpreviousPINLIVEZIPisdatedsnapshotandDOESNOTinclude159/160PYQstyling; doNOTpresentitaslatestPYQdesignfornative. Updateitsnextversionifcustomerrequestsnewhandoff; rootdocsmaintainnewyear-onlycontract. ExistingAPIstill/pyq/jee-main returnsall30, nativeagentfiltersyearONLYandpreservesdate/shiftmetadata.
+
+
+
+## PYQ year-only stacked cards implementation — 2026-10-26
+LatestEXACTuser: “Jee mains Pyq me ek baar be ek hi card dikhta hai ek ke niche ek dikhna chiye and bas year filters ho na ki dates”. Intakeapproved“a. Sab cards ek list mein”; additional“Beautiful and different dark colours cards but in dark theme”. OnlyPYQpage, noBackend/auth/contentchange. Reproducedbrowserfixturesactual30paperIDs:2026has19butrenderedonly1becauseauto-selectedlatestdate;2025has11. Currentdatefilter+2columndesktopcausedcomplaint.
+Implementedfeatures/PyqCatalogue.js: year-onlyrole=groupbuttonsaria-pressed, countselectedyear, allpapersmap(singleverticalstackCSS), removelegacydatequeryviareplaceeffect, preservedate/shiftmetadata, existingstart/resume/results/again/returnTo states. Fourrichdarkcardtintsruby/navy/plum/forest, scopingoverridesvibrantglobalhovertoavoidflattenedcolour; responsivefullwidthbuttons+desktopsideactions, reducedmotion. Data/attempts/sourceassets/IDsunchanged. designagentwrotedesign_guidelines.jsondespiteread-onlyrequest, inspectedfitsrequirements. Only2appfileschanged.
+Posteditpreviewsmokefixture1920x800/390x844renders19cards0overflow. Frontend-onlytesting159running full30actualsafeIDs+allattemptstates+yearURLhistory/error/empty/contrast. Noactualaccount/DBwrites. ThisUIrevisionNOTyetpublished; latestPINLIVEpublication/handoff158unchanged. Needread159fixissuesbeforeclaim. No newZIPrequestedforthisUIyet; oldexportreferenceCSSdoesnotincludethislatestPYQcolour/listchange.
+
+
+
 ## Authoritative production confirmation received — 2026-10-26
 Deployer confirms latest active PIN run8e1369d0 SUCCESS/promoted18:24:07Z, image sha256:bc3b54fa, authoritativejob e368a418. LiveOpenAPI+servedAuth/ChangePinchunksconfirmPINcontracts/UI anditeration157hourguard+503handling; matches main158realUI/APIverification. Earlierdispatcherhandlebcd75d41notrunhistorybinding; no duplicatepublishneeded. LatestPINLIVEZIPalreadydelivered. Deployer mentionedpossiblecachebutnotproven; DO NOT prescribehardrefresh/incognito asauthfix. www domainunverifiedSSLinitializing; canonicalapexhttps://jeelive.ai verifiedSSLactive. NoDNSchangesrequested/performed.
 

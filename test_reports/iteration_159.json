@@ -1,0 +1,42 @@
+{
+  "summary": "Frontend-only read-only validation of the JEE Main PYQ catalogue (/exams/jee-main/pyq). Used browser-only mocked auth/session and a catalogue built from the real exported 30 papers in canonical-pyq.json, with minutes=180 and maximum=300 added. Writes were blocked by the route handler, and none were attempted. All requested features work. Every paper for the selected year is listed one below another (2026 = 19 cards, 2025 = 11 cards) in server order, on desktop 1920x800 and mobile 390x844. There are no date filters, pagination or load-more controls. The last card renders, and there is no horizontal overflow at either width. Only 2 minor visual issues were found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "PYQ card actions (mobile 390)", "issues": ["On mobile, the 'Attempt Again' label wraps onto 2 lines inside the primary button, which looks cramped next to 'View Result'. Consider allowing the action row to wrap, or using a shorter label or icon.", "Height mismatch between paired buttons: the outline 'View Result' button measures 36px while the primary button measures 42px. The `.pyq-paper-actions>a { min-height:42px }` rule does not take effect on the outline variant, so the 2 buttons are misaligned (desktop and mobile)."]},
+      {"screen": "PYQ header copy", "issues": ["The description says 'pick a date and shift to begin', but there is no date picker any more. Dates are only shown on the cards. Optional wording change: 'pick a paper to begin'."]}
+    ]
+  },
+  "verified": [
+    "A legacy link to ?year=2025&date=2025-04-02 becomes ?year=2025 via a URL replace (history.length grows only by the goto itself). The 2025 button is selected (aria-pressed=true) and 11 cards render, and no automatic date selection comes back.",
+    "Clicking a year updates aria-pressed, the year count ('19 papers · 2026'), the URL (?year=2026) and the list: all 19 cards in server order with the same x position and increasing y. The /api/pyq/jee-main call count does not change on a year switch. On load there are 2 calls, which is React StrictMode in dev (the first call is aborted).",
+    "Browser back returns to 2025 with 11 cards, and forward returns to 2026 with 19 cards, with no refetch. An invalid year (1999 or 'abc') falls back to 2026 with 19 cards and also removes the date param.",
+    "Every card keeps its metadata: the date in UTC en-IN format (e.g. '8 April 2026', last card '21 January 2026'), matching shifts, '75 questions · 180 min · 300 marks'.",
+    "Fixture states render correctly. Active attempt with an older result shows Resume Test (/attempts/att-fixture-active-1) plus View Result (/results/res-fixture-old-1) with '2 full-paper attempts'. Completed shows Attempt Again (/sets/{id}) plus View Result with '1 full-paper attempt' (singular). Unattempted shows Start Test only.",
+    "location.state.returnTo is '/exams/jee-main/pyq?year=2026' (or year=2025) with no date param, for the Result, Start and Attempt Again links.",
+    "The 4 card tones (ruby #1A090D, navy #0D182B, plum #20132C, forest #0C211C) have distinct gradients and accent borders, and the 5th card cycles back to ruby. On hover, the card keeps its own tone gradient and is not flattened to #19191F; the transform is translateY(-2px). With reduced motion there is no transform and the transition is ~0.",
+    "Contrast: text in the cards, year count and year buttons all measured at least 4.5:1, measured against each tone's surface colour.",
+    "The year buttons are a role=group with aria-pressed and no tab/tablist roles. Tab and Enter work, the focus outline is solid #F9DAE1, and Tab moves on to the first card's CTA. There are no duplicate data-testids.",
+    "Loading shows 'Loading your workspace…'. An error (500) shows the ErrorBox, and Try again (data-testid=retry-error) refetches once, then renders 19 cards. An empty catalogue shows 'PYQ papers are being verified' with no year buttons.",
+    "Mobile 390: no element extends past 390px, cards are 350px wide, and the active card's 2 actions fit.",
+    "The git diff is limited to PyqCatalogue.js, pyq.css, design_guidelines.json and test_result.md, so home/BITSAT/COMEDK/series code was not modified."
+  ],
+  "test_report_links": ["/app/tests/ui_fixture_pyq159.py"],
+  "action_items": [
+    "Optional polish: make the 'View Result' outline button the same 42px height as the primary CTA.",
+    "Optional polish: stop 'Attempt Again' from wrapping on 390px mobile.",
+    "Optional: update the header copy that still mentions picking a date."
+  ],
+  "critical_code_review_comments": [
+    "PyqCatalogue.js: a non-matching ?year (e.g. 1999) silently falls back to the newest year, but the invalid value stays in the URL. This is harmless; optionally normalise it with a replace.",
+    "Line 42: `data?.years.includes` will throw if the API ever omits years. The backend model guarantees years, so this is low risk."
+  ],
+  "updated_files": ["/app/tests/ui_fixture_pyq159.py"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100% functional; 2 minor visual polish notes"},
+  "seed_data_creation": "None. Browser-only fixtures only; no DB writes and no real login.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "PYQ catalogue UI was verified with /app/tests/ui_fixture_pyq159.py, which reads the real 30 papers from the public canonical-pyq.json, adds minutes and maximum, and fakes the session. Destination pages (/sets, /attempts, /results) crash under the empty {} fixtures (Player/SetDetail/Results TypeErrors); this is a fixture artifact and out of scope. Do not repeat the PIN, PDF or backend tests."
+}

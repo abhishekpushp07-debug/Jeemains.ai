@@ -113,6 +113,8 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 
 The website's route `/exams/jee-main/pyq` corresponds to the dedicated catalogue. An app route can be named differently; paper, learner and attempt identities must not differ.
 
+Latest PYQ UI revision (2026-10-26): only a year selector; render EVERY paper of that year in one vertical list (current reviewed metadata:2026 has19,2025 has11). No date filter, pagination or load-more. Dates/shifts remain on each card. Ignore/remove legacy `date` query parameters while retaining `year`. Cards alternate ruby/navy/plum/forest dark surfaces and keep Start/Resume/View Result/Attempt Again actions. This UI revision is newer than the previously delivered PIN LIVE ZIP's design snapshot; use the updated source `pyq.css`/`PyqCatalogue.js` or request a refreshed visual handoff before asserting native pixel parity.
+
 ## 7. Start, autosave and two-device consistency
 
 1. Fetch the summary and server rules; preserve official question/order/options/marking.

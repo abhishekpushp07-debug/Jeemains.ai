@@ -1,0 +1,25 @@
+{
+  "iteration": 160,
+  "date": "2026-10-26",
+  "status": "passed",
+  "scope": "Targeted final PYQ UI polish after frontend QA159",
+  "initial_findings": "QA159 passed all year-only/all-paper/links/history/error/contrast tests; noted paired-button height mismatch, mobile Attempt Again wrapping and obsolete pick-a-date wording.",
+  "root_cause": "Preview instrumentation adds a display:contents span around conditional View Result links. Direct-child .pyq-paper-actions>a styling missed the outline link; descendant selectors cover both instrumented preview and ordinary DOM.",
+  "fixes": ["Scoped descendant button selectors", "Both buttons44px high with equal flexible mobile widths and nowrap text", "Mobile13px text/12px horizontal padding", "Header says pick a paper, not a date"],
+  "final_checks": {
+    "desktop_viewport": {"width":1920,"height":800},
+    "mobile_viewport": {"width":390,"height":844},
+    "completed_result_button_height":44,
+    "completed_attempt_again_height":44,
+    "mobile_paired_widths":[149.015625,149.015625],
+    "button_text_overflow":false,
+    "horizontal_page_overflow":false,
+    "selected_2026_cards":19,
+    "post_edit_render": "Both desktop/mobile screenshots inspected, full stacked list intact"
+  },
+  "prior_coverage": "159: 2026=19/2025=11; all papers server order one column; year-only filter; legacy date query stripped; back/forward, states/actions/returnTo, keyboard, contrast, error/retry/empty and reduced motion passed",
+  "mocked": "Browser-only auth/catalogue fixtures with real exported non-personal paper metadata; application APIs are not mocked",
+  "customer_database_writes":0,
+  "app_files_changed":["frontend/src/features/PyqCatalogue.js","frontend/src/pyq.css"],
+  "deployment": "Queued separately after verification; not yet confirmed live"
+}

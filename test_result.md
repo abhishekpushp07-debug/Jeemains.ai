@@ -1,3 +1,27 @@
+# PYQ159/160 verified, publishing — 2026-10-26
+pyq_year_stack_complete:
+  tests: "159allfunctionalPASS,160pairedCTApolishPASS44pxboth/equalmobilewidths/nooverflow/nowrap; no appeditsafterfinalrender"
+  visual: "19cards2026/11cards2025 singlecolumn,4darktints ruby/navy/plum/forest, year-onlybuttonfilter/dateandshiftstillmetadata"
+  scope: "OnlyPyqCatalogue.js+pyq.css, no realauth/DBwrites; browserfixturesonly"
+  deployment: "Code-onlyrequestsent aftertests; liveconfirmationpending, doNOTclaimliveyet"
+  native: "OldPINLIVEZIPsnapshotdoesnotincludeTHISnewPYQstyle; futurehandoffmustregeneratewhenrequested"
+  needs_retesting: false
+
+
+#159polishrootcausefound
+pyq_button_wrapper:
+  diagnostic: "Previewvisual-editinstrumentationwrapsconditionalViewResultlink inspan[data-ve-dynamic]display:contents, unlikeunconditionalprimarylink. Direct-childCSS >a missesoutline; alsoexplainsfailingmetricselector."
+  fix: "Scoped .pyq-paper-actions a descendantselectors forheight/mobileflex/outline/focus acrosspyq.css; no platformpluginchanges. Bothpreview/instrumentedandnormalproductionDOMsupported."
+  next: "OnefinaltargetedpairedCTAheightnowrap+overflowdesktopmobilecheck thenfinish."
+
+
+# QA159 result — 2026-10-26
+pyq159_review:
+  result: "100%functionalPASS19/11allstackedcards,yearonly,legacydatecleanup,backforward,actionlinksreturnTo,errorretryempty,4distincthoverretainedtones,contrast>=4.5,0overflowat1920/390. BrowserMOCKEDfixturesonly,noDBwrites."
+  polish: "Userrequestedbeautifulcards, so minor159notesaddressed: scoped44pxminheightbothCTA+outline,nowrap +mobile13pxfont12pxpadding, descriptionnowpickapaper(nodatepickerwording). Finaltargetedrender/pairedCTAs pending; no needfullQA rerun."
+  unchanged: "InvalidyearfallbackURLnormalizationnotexpanded;backendguaranteesyearsso no defensiveextraAPIshim. No auth/backendchanges."
+
+
 # PYQ year-only stacked dark cards — 2026-10-26 (QA159 pending)
 pyq_year_stack159:
   exact_request: "Jee mains Pyq me ek baar be ek hi card dikhta hai ek ke niche ek dikhna chiye and bas year filters ho na ki dates"

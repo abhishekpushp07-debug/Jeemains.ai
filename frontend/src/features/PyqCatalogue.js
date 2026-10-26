@@ -51,7 +51,7 @@ export default function PyqCatalogue() {
   function chooseYear(value) { setParams({ year: String(value) }); }
   return <div className="container page pyq-page" data-testid="pyq-page">
     <ExamBreadcrumbs exam={examBySlug('jee-main')} section={{label:'PYQ papers'}}/><ExamDestinations exam={examBySlug('jee-main')}/>
-    <header className="page-title"><div><span className="eyebrow" data-testid="pyq-eyebrow">JEE MAIN · PREVIOUS YEAR PAPERS</span><h1 data-testid="pyq-title">Real papers. Your next attempt.</h1><p data-testid="pyq-description">Choose a year. Every paper is listed below—pick a date and shift to begin.</p></div>{data && <span className="badge" data-testid="pyq-total">{data.total} papers available</span>}</header>
+    <header className="page-title"><div><span className="eyebrow" data-testid="pyq-eyebrow">JEE MAIN · PREVIOUS YEAR PAPERS</span><h1 data-testid="pyq-title">Real papers. Your next attempt.</h1><p data-testid="pyq-description">Choose a year. All its papers are listed below—pick a paper to begin.</p></div>{data && <span className="badge" data-testid="pyq-total">{data.total} papers available</span>}</header>
     <ErrorBox error={error} retry={() => setReload(x => x + 1)}/>
     {!data && !error && <Loading/>}
     {data?.total === 0 && <Empty title="PYQ papers are being verified">Only papers with checked dates, answer keys and solution mapping appear here.</Empty>}
