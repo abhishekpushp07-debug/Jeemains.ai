@@ -1,91 +1,53 @@
 {
-  "project_name": "JEELIVE.AI",
-  "project_type": "saas_app_jee_mains_pyq_platform",
-  "selected_home_cards_option": "Wine cards + ivory text (Beautiful and elegant)",
-  "theme_architecture": "Global Obsidian Black (#08080A) & Blood Premium Red (#D91222) with HOME-ONLY Deep Wine Red (#2A080C) Cards + Ivory Text (#FAF4ED) + Obsidian Black Buttons (#08080A)",
-  "design_archetype": "LUXURY_DEEP_WINE_ACCENT_TACTICAL",
-  "emotional_tone": "Beautiful, elegant, high-contrast rich wine red surfaces with pristine ivory typography and sharp obsidian buttons for home exam selection",
-  "tech_stack": {
-    "framework": "React JS (.js / .jsx files)",
-    "styling": "Tailwind CSS + Custom CSS in vibrant-ui.css & index.css",
-    "primary_font": "Figtree (sans-serif)",
-    "mono_font": "Roboto Mono / JetBrains Mono"
-  },
-  "home_card_design_specs": {
-    "scope": "Home exam selection cards ONLY (JEE Main / BITSAT / COMEDK in ExamHomeCards / Home.js / vibrant-ui.css). All other pages, global background, header, logo, and results remain untouched.",
-    "card_surface": {
-      "bg_color": "Deep Wine Red gradient: linear-gradient(155deg, #2E0911 0%, #20050A 55%, #150306 100%)",
-      "solid_fallback": "#2A080C",
-      "border": "1px solid #581622",
-      "hover_border": "1px solid #8B2032",
-      "inner_glow": "inset 0 1px 0 rgba(255, 235, 225, 0.12)",
-      "box_shadow": "0 18px 40px rgba(18, 2, 5, 0.70)",
-      "hover_shadow": "0 22px 50px rgba(139, 32, 50, 0.25), 0 18px 40px rgba(18, 2, 5, 0.85)"
-    },
-    "card_typography": {
-      "heading": {
-        "color": "#FAF4ED",
-        "font_weight": "800",
-        "letter_spacing": "-0.02em",
-        "description": "Ivory / Champagne heading for pure elegance and high contrast against rich wine background"
-      },
-      "subtext_and_body": {
-        "color": "#D8C7C1",
-        "font_weight": "500",
-        "description": "Warm rose-tinted ivory for secondary text and stats"
-      },
-      "eyebrow_badge": {
-        "bg": "#421019",
-        "color": "#F3E5E1",
-        "border": "1px solid #6D1B2A",
-        "font_weight": "750"
-      },
-      "highlight_text": {
-        "color": "#F8E7D8",
-        "font_weight": "700"
-      }
-    },
-    "card_buttons": {
-      "bg_color": "#08080A",
-      "text_color": "#FAF4ED",
-      "border": "1px solid #4A1520",
-      "font_weight": "750",
-      "hover_bg": "#14141A",
-      "hover_border": "#782030",
-      "hover_text": "#FFFFFF",
-      "hover_shadow": "0 8px 20px rgba(0, 0, 0, 0.60)",
-      "active_transform": "scale(0.98)"
+  "selected_theme": "Glossy Onyx with Royal Blue Platinum Hero & Distinct Metallic Exam Cards",
+  "global_background": "#08080A",
+  "brand_primary": "#E63946",
+  "hero_override": {
+    "target": ".exam-home .flagship-banner",
+    "theme": "Royal Blue + Platinum Polished Shining",
+    "palette": {
+      "base_bg": "linear-gradient(135deg, #06112E 0%, #0B1D4F 40%, #173273 75%, #0A1435 100%)",
+      "platinum_sheen": "linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(226,232,240,0.15) 25%, rgba(255,255,255,0.0) 50%, rgba(203,213,225,0.2) 80%, rgba(255,255,255,0.4) 100%)",
+      "border_stroke": "linear-gradient(135deg, rgba(226,232,240,0.8), rgba(59,130,246,0.6), rgba(255,255,255,0.9))",
+      "box_shadow": "0 20px 50px rgba(11, 29, 79, 0.6), 0 0 30px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5)",
+      "badge_bg": "linear-gradient(90deg, #1E40AF, #3B82F6)",
+      "text_contrast": "#FFFFFF",
+      "subtext_color": "#CBD5E1"
     }
   },
-  "global_color_tokens": {
-    "theme_mode": "Pure Dark Mode Sitewide",
-    "bg_page": "#08080A",
-    "bg_surface_alt": "#0F0F14",
-    "bg_card": "#14141C",
-    "home_wine_card_bg": "#2A080C",
-    "home_wine_card_border": "#581622",
-    "home_card_heading_ivory": "#FAF4ED",
-    "home_card_subtext_ivory": "#D8C7C1",
-    "home_card_button_black": "#08080A",
-    "border_subtle": "#22222E",
-    "blood_red_primary": "#D91222",
-    "text_primary": "#F8FAFC",
-    "text_secondary": "#CBD5E1"
+  "exam_cards": {
+    "target": ".exam-home .bold-exam-card",
+    "base_cohesion": "Glossy Onyx polished surface with 3D specular reflection highlight overlays and reflective borders",
+    "cards_tint_blueprint": {
+      "jee_main": {
+        "card_selector": ".exam-home .bold-exam-card[data-exam='jee-main'], .exam-home .bold-exam-card:nth-child(1)",
+        "identity_name": "Royal Ruby Platinum Onyx",
+        "bg_surface": "linear-gradient(145deg, #160709 0%, #0D0C10 50%, #20090D 100%)",
+        "tint_sheen": "linear-gradient(125deg, rgba(230,57,70,0.22) 0%, rgba(255,255,255,0.18) 30%, rgba(0,0,0,0) 60%, rgba(220,38,38,0.15) 100%)",
+        "border_color": "linear-gradient(135deg, rgba(230,57,70,0.7), rgba(255,255,255,0.4), rgba(153,27,27,0.8))",
+        "box_shadow": "0 12px 32px rgba(0,0,0,0.7), 0 0 20px rgba(230,57,70,0.25), inset 0 1px 1px rgba(255,255,255,0.3)",
+        "accent_badge": "#EF4444"
+      },
+      "bitsat": {
+        "card_selector": ".exam-home .bold-exam-card[data-exam='bitsat'], .exam-home .bold-exam-card:nth-child(2)",
+        "identity_name": "Royal Cobalt Platinum Onyx",
+        "bg_surface": "linear-gradient(145deg, #07101D 0%, #0C0D13 50%, #0B1930 100%)",
+        "tint_sheen": "linear-gradient(125deg, rgba(56,189,248,0.20) 0%, rgba(255,255,255,0.22) 30%, rgba(0,0,0,0) 60%, rgba(37,99,235,0.18) 100%)",
+        "border_color": "linear-gradient(135deg, rgba(56,189,248,0.7), rgba(255,255,255,0.4), rgba(29,78,216,0.8))",
+        "box_shadow": "0 12px 32px rgba(0,0,0,0.7), 0 0 20px rgba(56,189,248,0.25), inset 0 1px 1px rgba(255,255,255,0.3)",
+        "accent_badge": "#38BDF8"
+      },
+      "comedk": {
+        "card_selector": ".exam-home .bold-exam-card[data-exam='comedk'], .exam-home .bold-exam-card:nth-child(3)",
+        "identity_name": "Emerald Gold Titanium Onyx",
+        "bg_surface": "linear-gradient(145deg, #061712 0%, #0C0D11 50%, #0B241B 100%)",
+        "tint_sheen": "linear-gradient(125deg, rgba(52,211,153,0.20) 0%, rgba(254,240,138,0.22) 35%, rgba(0,0,0,0) 65%, rgba(16,185,129,0.18) 100%)",
+        "border_color": "linear-gradient(135deg, rgba(52,211,153,0.7), rgba(253,224,71,0.5), rgba(6,95,70,0.8))",
+        "box_shadow": "0 12px 32px rgba(0,0,0,0.7), 0 0 20px rgba(52,211,153,0.25), inset 0 1px 1px rgba(255,255,255,0.3)",
+        "accent_badge": "#34D399"
+      }
+    }
   },
-  "css_override_blueprint_for_vibrant_ui_css": {
-    "selector": ".bold-exam-card, .bold-exam-card.exam-tone-jee-main, .bold-exam-card.exam-tone-bitsat, .bold-exam-card.exam-tone-comedk",
-    "css_rules": "\n/* Home Exam Cards - Wine + Ivory + Black Buttons Override */\n.bold-exam-card,\n.bold-exam-card.exam-tone-jee-main,\n.bold-exam-card.exam-tone-bitsat,\n.bold-exam-card.exam-tone-comedk {\n  background: linear-gradient(155deg, #2E0911 0%, #20050A 55%, #150306 100%) !important;\n  border: 1px solid #581622 !important;\n  box-shadow: inset 0 1px 0 rgba(255, 235, 225, 0.12), 0 18px 40px rgba(18, 2, 5, 0.70) !important;\n  color: #FAF4ED !important;\n  border-radius: 18px !important;\n  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease !important;\n}\n\n.bold-exam-card:hover,\n.bold-exam-card.exam-tone-jee-main:hover,\n.bold-exam-card.exam-tone-bitsat:hover,\n.bold-exam-card.exam-tone-comedk:hover {\n  border-color: #8B2032 !important;\n  box-shadow: inset 0 1px 0 rgba(255, 235, 225, 0.18), 0 22px 50px rgba(139, 32, 50, 0.25), 0 18px 40px rgba(18, 2, 5, 0.85) !important;\n  transform: translateY(-2px) !important;\n}\n\n/* Card Headings & Typography */\n.bold-exam-card h2,\n.bold-exam-card h2 a,\n.bold-exam-card.exam-tone-bitsat h2,\n.bold-exam-card.exam-tone-bitsat h2 a {\n  color: #FAF4ED !important;\n  font-weight: 800 !important;\n}\n\n.bold-exam-card p,\n.bold-exam-card .exam-meta,\n.bold-exam-card .exam-subtitle {\n  color: #D8C7C1 !important;\n}\n\n/* Card Eyebrows & Badges */\n.bold-exam-card .exam-badge,\n.bold-exam-card .eyebrow {\n  background: #421019 !important;\n  color: #F3E5E1 !important;\n  border: 1px solid #6D1B2A !important;\n}\n\n/* Black Buttons inside Wine Cards */\n.bold-exam-card .exam-primary,\n.bold-exam-card.exam-tone-bitsat .exam-primary,\n.bold-exam-card .jeelive-button {\n  background: #08080A !important;\n  color: #FAF4ED !important;\n  border: 1px solid #4A1520 !important;\n  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.50) !important;\n  font-weight: 750 !important;\n}\n\n.bold-exam-card .exam-primary:hover,\n.bold-exam-card.exam-tone-bitsat .exam-primary:hover,\n.bold-exam-card .jeelive-button:hover {\n  background: #14141A !important;\n  color: #FFFFFF !important;\n  border-color: #782030 !important;\n  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.70), 0 0 12px rgba(120, 32, 48, 0.30) !important;\n}\n"
-  },
-  "instructions_to_main_agent": [
-    "1. Keep global website dark theme (#08080A) and blood red accents intact for all other pages and components.",
-    "2. Apply the wine-red card override scoped exclusively to HOME exam cards (.bold-exam-card) in frontend/src/vibrant-ui.css.",
-    "3. Use #FAF4ED for card headings and #D8C7C1 for subtext/meta.",
-    "4. Ensure buttons inside Home exam cards use obsidian black (#08080A) background with crisp wine-red border (#4A1520) and ivory text.",
-    "5. Preserve all data-testid attributes and original logo / student results."
-  ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Do not modify global navigation, logo, or student results pages.",
-    "Maintain strict APCA/WCAG contrast for ivory text on wine red cards (> 7:1 ratio).",
-    "Keep test attributes intact for automated testing."
-  ]
+  "practical_css_blueprint": "/* ROYAL BLUE + PLATINUM FLAGSHIP BANNER OVERRIDE */\n.exam-home .flagship-banner {\n  background: linear-gradient(135deg, #06112E 0%, #0B1D4F 42%, #18357A 78%, #091333 100%) !important;\n  border: 1px solid rgba(226, 232, 240, 0.4) !important;\n  box-shadow: 0 20px 50px rgba(11, 29, 79, 0.65), 0 0 35px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.45) !important;\n  position: relative;\n  overflow: hidden;\n}\n.exam-home .flagship-banner::before {\n  content: '';\n  position: absolute;\n  inset: 0;\n  background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, rgba(226,232,240,0.12) 30%, transparent 60%, rgba(191,219,254,0.25) 100%);\n  pointer-events: none;\n}\n\n/* DISTINCT POLISHED METALLIC FACES FOR EACH EXAM CARD */\n.exam-home .bold-exam-card {\n  position: relative;\n  overflow: hidden;\n  border-radius: 16px;\n  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;\n}\n\n/* JEE Main Card - Royal Ruby Platinum */\n.exam-home .bold-exam-card[data-exam='jee-main'],\n.exam-home .bold-exam-card:nth-child(1) {\n  background: linear-gradient(145deg, #1A070A 0%, #0D0C10 50%, #24090E 100%) !important;\n  border: 1px solid rgba(230, 57, 70, 0.5) !important;\n  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8), 0 0 22px rgba(230, 57, 70, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;\n}\n.exam-home .bold-exam-card[data-exam='jee-main']::before,\n.exam-home .bold-exam-card:nth-child(1)::before {\n  content: ''; position: absolute; inset: 0;\n  background: linear-gradient(125deg, rgba(230,57,70,0.25) 0%, rgba(255,255,255,0.20) 25%, transparent 55%, rgba(220,38,38,0.15) 100%);\n  pointer-events: none;\n}\n\n/* BITSAT Card - Royal Cobalt Platinum */\n.exam-home .bold-exam-card[data-exam='bitsat'],\n.exam-home .bold-exam-card:nth-child(2) {\n  background: linear-gradient(145deg, #071224 0%, #0C0D13 50%, #0A1C38 100%) !important;\n  border: 1px solid rgba(56, 189, 248, 0.5) !important;\n  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8), 0 0 22px rgba(56, 189, 248, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;\n}\n.exam-home .bold-exam-card[data-exam='bitsat']::before,\n.exam-home .bold-exam-card:nth-child(2)::before {\n  content: ''; position: absolute; inset: 0;\n  background: linear-gradient(125deg, rgba(56,189,248,0.25) 0%, rgba(255,255,255,0.22) 25%, transparent 55%, rgba(37,99,235,0.18) 100%);\n  pointer-events: none;\n}\n\n/* COMEDK Card - Emerald Gold Titanium */\n.exam-home .bold-exam-card[data-exam='comedk'],\n.exam-home .bold-exam-card:nth-child(3) {\n  background: linear-gradient(145deg, #061B14 0%, #0C0D11 50%, #092B1E 100%) !important;\n  border: 1px solid rgba(52, 211, 153, 0.5) !important;\n  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8), 0 0 22px rgba(52, 211, 153, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;\n}\n.exam-home .bold-exam-card[data-exam='comedk']::before,\n.exam-home .bold-exam-card:nth-child(3)::before {\n  content: ''; position: absolute; inset: 0;\n  background: linear-gradient(125deg, rgba(52,211,153,0.22) 0%, rgba(254,240,138,0.20) 30%, transparent 60%, rgba(16,185,129,0.18) 100%);\n  pointer-events: none;\n}\n\n/* PAUSE SHINE & REDUCED MOTION SUPPORT */\n.pause-shine .bold-exam-card::before,\n.pause-shine .flagship-banner::before {\n  animation: none !important;\n  opacity: 0.6;\n}",
+  "instructions_to_main_agent": "Ensure design_guidelines.json contains full CSS blueprint for .exam-home .flagship-banner in Royal Blue + Platinum shining finish, and distinct metallic faces for JEE Main (Ruby Crimson), BITSAT (Cobalt Sapphire), and COMEDK (Emerald Gold) on top of cohesive Glossy Onyx base. Maintain all data-testids and contrast compliance."
 }
