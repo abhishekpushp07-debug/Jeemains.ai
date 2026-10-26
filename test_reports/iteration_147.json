@@ -1,0 +1,36 @@
+{
+  "summary": "Final maintenance-gate check of backend/tools/reset_student_data.py (CLI only, backend only). The suite ran serially (-n 0) on the isolated DBs tejas_isolated_reset144 and tejas_isolated_restore144, using the FakeStore and the synthetic qa144 owner. There was no real storage PUT or GET, no auth login, and no customer DB writes. First run: the original 64 cases on their own, 64/64 passing, 0 xfail. Second run: the file extended to 81 cases (17 new), 81/81 passing in 13.1s. JUnit XML is from this second run. Fixes verified: (1) apply() rejects a foreign phase before any storage GET, CAS or delete. This was tested for aborted, restored, cancelled, qa-arbitrary, 'Complete' (case variant), 'applying ' (trailing space) and '' (empty), each with and without a valid protected_sha256. All 14 raise 'not in a phase that permits deletion' with 0 fetch calls, 0 find_one_and_update calls and 0 delete_many calls. The receipt's raw BSON is byte-identical afterwards (phase, hash and lease untouched) and all documents are unchanged. (2) Replaying a receipt in phase 'complete' twice returns 'complete' with 0 GET, 0 CAS and 0 delete. A wrong approval hash on a complete receipt is still rejected, and the receipt and data stay byte-identical. A prepared receipt still applies normally (1 CAS, deletes, GETs). (3) The tejas_jobs kind filter works. These shared jobs survive byte-identical: ai_solution/content jobs whose payload.attempt_id points at a student attempt or an orphan attempt, with user_id unknown, a student, an old unlinked user, or absent. Personal report/grade/cohort jobs referencing those attempts (unknown user, no user, student) are deleted. Staff grade/report jobs referencing student or orphan attempts are protected, and staff users/phone profiles are byte-identical. The original 64 cases all still pass: guards, plan scope, e2e restore (RAW_BSON_MISMATCH_DOCS 0 of 322, 160 stress docs), indexes/options/empty validated collection, 8 MiB chunk boundary, tamper and missing-part cases, drift, partial crash and resume, the lease, 4 threaded resumers with exactly one writer, and the CLI storage-path and adapter guards. Mutation check, run in a /tmp copy only: with the phase whitelist removed and the kind filter dropped, 15 of the 17 new tests fail. The 2 that pass (complete replay, prepared apply) check behaviour that should not change. So the new tests do detect the regression.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "tools/reset_student_data.py scope_queries tejas_jobs",
+        "issue": "Observation, not a defect. Both job branches now require kind in (report, grade, cohort). A legacy job with no kind field, or a new personal kind (e.g. 'export'), belonging to a student is therefore retained, not deleted. This fails safe (data is kept), but such rows will remain after the reset."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter144_student_reset.py",
+    "/app/test_reports/pytest/iter147_reset.xml"
+  ],
+  "action_items": [
+    "No blocking defects. Proceed with the planned operator sequence: pause the preview backend, prepare a fresh receipt, apply with the exact approval SHA, and restart only after PASS.",
+    "Optional: decide whether student jobs with a missing or unknown kind should be cleaned up. They are currently retained, which fails safe."
+  ],
+  "critical_code_review_comments": [
+    "The phase whitelist sits before verified_manifest, and the CAS pins the exact phase that was read (prepared or applying). A foreign phase can no longer become 'applying'.",
+    "The 'complete' short-circuit happens after the binding, owner and approval-hash checks, so a replay with a wrong hash still fails.",
+    "The lease is still never refreshed (300s on the DB clock). A very large apply must be resumed; tell the operator.",
+    "Writer quiescence is still only an operator flag (--writers-paused). The tests prove behaviour on the isolated DB, not that live writers are actually paused."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter144_student_reset.py (test-only: appended TestPhaseWhitelist147 with 14 parametrized cases plus the complete-replay and prepared-apply tests, and TestJobsKindFilter147 with 1 case; 64 -> 81 cases)"
+  ],
+  "success_rate": {"backend": "81/81 (100%) with the extended file; the original 64/64 also passed on their own first", "frontend": "not tested (backend only, as requested)"},
+  "seed_data_creation": "Synthetic qa144-* data only, in tejas_isolated_reset144 and tejas_isolated_restore144. Each DB is dropped once at session start and once at end; between tests data is wiped with delete_many. After the runs: no isolated DBs remain, the customer DB has 0 tejas_student_resets receipts and 0 qa144 rows, REAL_DB_COUNTS_UNCHANGED True, and mongod ping ok. mongod FD limit is soft 65536 / hard 1048576, with no crashes. The mutation copy in /tmp/mut147 was deleted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run: cd /app/backend && python -m pytest tests/test_iter144_student_reset.py -q -n 0 (serial only; about 13s; 81 cases). The counting() helper wraps store.fetch and DBProxy so tests can prove 0 GET, 0 CAS and 0 delete. restore_shadow requires a fresh shadow DB, and only the e2e test creates shadow collections. Application code was not modified.",
+  "rca of the issue": "The iteration-146 defect (a foreign phase being re-applied) is fixed by an explicit whitelist: phase must be in ('prepared', 'applying') before verified_manifest and the CAS. Verified with 14 parametrized cases plus a mutation check."
+}

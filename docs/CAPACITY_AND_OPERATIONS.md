@@ -18,6 +18,12 @@ Isolated141 measured real21Jan2026S1 original18.3MB/197uniqueq+solutionrefs: old
 
 
 
+
+## Bounded load evidence — 2026-10-26
+Iteration145 used100logicalstudentprofiles,30clientflowsconcurrent and100requestbursts ononeASGIprocess/co-locatedisolatedMongo; TESTONLYsyntheticauthandlocaloriginalPDFstorage,notnetwork/TLSorproductionfleet. All100flows,1250saves,60submissionscompleted;zeroHTTP500/nonadmission503/wronggrades/duplicateattempts/ledgers/lostACKedsaves/privacyfailures. Savep95=142ms,startp95=422ms; retryexperiencedburstresultsp95=6.4s,gradingready5.6–6.6sp95. Raw100readburst16x200/84xintentional503Retry-After2,alllanesdrainedandnormalread200~12msafter;retriesrecoveredallmixedburst40saves+60results. RSS186→589MiB,notmemory/fleetcapacityproof. Report `/app/test_reports/iteration_145.json`.
+Studio7/16mountGETburstwasfixedwithfrontendGET-onlyqueue3,143confirmedall200/no503capacity_busy;145'scarried-forward142Studiooverloadnoteisstale. Unknownsimultaneousmulti-browserownerloadstillserverbudgeted,notcapacitypromise.
+PreviewQA144DDLchurntriggeredWiredTigerEMFILEatthemongodsoftNOFILE1024,2autorestarts. Fixturesnowdelete_manybetween tests;mainraisedpreviewprocesssoft65536withsamehard1048576withoutrestart;146/14781safetycasesstable. Thisruntimeadjustmentisnotpersistentprodconfiguration. ProductionAtlas/fleetfilelimits/HA/loadqualificationremainseparateoperatorresponsibility;neveradvertise500kconcurrentusersfromthesechecks.
+
 Authoritative workload: PDF05 pp3,46. No load certification is inferred from this preview.
 
 ## Editable worksheet

@@ -958,3 +958,90 @@ class TestApplyLease:
         with pytest.raises(RuntimeError):
             do_apply(DBProxy(db, hooks), store, receipt)
         assert canon_all(db) == before
+
+
+# ---------------------------------------------------------------- iter147: explicit phase whitelist + jobs kind filter
+def counting(store, db):
+    """Wrap fetch (storage GET) and CAS/delete via DBProxy so we can prove 0 side effects."""
+    gets, real = [], store.fetch
+    store.fetch = lambda path: (gets.append(path), real(path))[1]
+    ops = {'cas': [], 'delete': []}
+    proxy = DBProxy(db, {'cas': lambda: ops['cas'].append(1), 'delete': ops['delete'].append})
+    return gets, ops, proxy
+
+
+class TestPhaseWhitelist147:
+    @pytest.mark.parametrize('with_hash', [True, False], ids=['valid_hash', 'no_hash'])
+    @pytest.mark.parametrize('phase', ['aborted', 'restored', 'cancelled', 'qa-arbitrary', 'Complete', 'applying ', ''])
+    def test_foreign_phase_rejected_before_get_cas_delete(self, db, phase, with_hash):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        extra = {'phase': phase}
+        if with_hash:
+            extra['protected_sha256'] = R.protected_fingerprint(db, R.build_plan(db, True))
+        db[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': extra})
+        row_before = raw_rows(db, R.RECEIPTS, {'_id': receipt['_id']})
+        before = canon_all(db)
+        gets, ops, proxy = counting(store, db)
+        with pytest.raises(RuntimeError, match='not in a phase that permits deletion'):
+            R.apply(proxy, BINDING, OWNER_EMAIL, receipt['_id'], receipt['manifest']['sha256'], store.fetch, writers_paused=True)
+        assert gets == [] and ops == {'cas': [], 'delete': []}
+        assert raw_rows(db, R.RECEIPTS, {'_id': receipt['_id']}) == row_before  # phase/hash/lease untouched
+        assert canon_all(db) == before
+
+    def test_complete_replay_idempotent_no_side_effects(self, db):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        assert do_apply(db, store, receipt)['phase'] == 'complete'
+        row_before = raw_rows(db, R.RECEIPTS, {'_id': receipt['_id']}); before = canon_all(db)
+        gets, ops, proxy = counting(store, db)
+        for _ in range(2):
+            out = R.apply(proxy, BINDING, OWNER_EMAIL, receipt['_id'], receipt['manifest']['sha256'], store.fetch, writers_paused=True)
+            assert out['phase'] == 'complete'
+        with pytest.raises(RuntimeError, match='approval hash'):
+            R.apply(proxy, BINDING, OWNER_EMAIL, receipt['_id'], '0' * 64, store.fetch, writers_paused=True)
+        assert gets == [] and ops == {'cas': [], 'delete': []}
+        assert raw_rows(db, R.RECEIPTS, {'_id': receipt['_id']}) == row_before and canon_all(db) == before
+
+    def test_prepared_still_applies_after_whitelist(self, db):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        gets, ops, proxy = counting(store, db)
+        out = R.apply(proxy, BINDING, OWNER_EMAIL, receipt['_id'], receipt['manifest']['sha256'], store.fetch, writers_paused=True)
+        assert out['phase'] == 'complete' and len(ops['cas']) == 1 and ops['delete'] and gets
+        assert db.tejas_users.count_documents({'role': 'student'}) == 0
+
+
+class TestJobsKindFilter147:
+    def test_shared_jobs_referencing_student_or_orphan_attempt_survive(self, db):
+        seed(db)
+        stu, orph = 'qa144-att-su1', 'qa144-gone-attempt'
+        keep = [
+            {'id': 'sj-ai-stu-unknown', 'kind': 'ai_solution', 'user_id': 'qa144-unknown-x', 'payload': {'attempt_id': stu}},
+            {'id': 'sj-ai-orph-unknown', 'kind': 'ai_solution', 'user_id': 'qa144-unknown-y', 'payload': {'attempt_id': orph}},
+            {'id': 'sj-content-stu-student', 'kind': 'content', 'user_id': 'qa144-p1', 'payload': {'attempt_id': stu}},
+            {'id': 'sj-content-orph-nouser', 'kind': 'content', 'payload': {'attempt_id': orph}},
+            {'id': 'sj-ai-orph-old', 'kind': 'ai_solution', 'user_id': OLD[2], 'payload': {'attempt_id': orph}},
+            # staff personal kinds are protected regardless of attempt reference
+            {'id': 'sj-staff-grade', 'kind': 'grade', 'user_id': 'qa144-admin', 'payload': {'attempt_id': stu}},
+            {'id': 'sj-staff-report', 'kind': 'report', 'user_id': OWNER, 'payload': {'attempt_id': orph}},
+        ]
+        gone = [
+            {'id': 'pj-report-stu-unknown', 'kind': 'report', 'user_id': 'qa144-unknown-z', 'payload': {'attempt_id': stu}},
+            {'id': 'pj-grade-orph-nouser', 'kind': 'grade', 'payload': {'attempt_id': orph}},
+            {'id': 'pj-cohort-orph-student', 'kind': 'cohort', 'user_id': 'qa144-p2', 'payload': {'attempt_id': orph}},
+            {'id': 'pj-report-student-noattempt', 'kind': 'report', 'user_id': 'qa144-p3', 'payload': {}},
+        ]
+        db.tejas_jobs.insert_many([{**r, '_keep': 1} for r in keep] + [dict(r) for r in gone])
+        plan = R.build_plan(db, True)
+        assert stu in plan['attempt_ids'] and orph in plan['attempt_ids']
+        assert 'qa144-unknown-x' not in plan['user_ids'] and 'qa144-unknown-y' not in plan['user_ids']
+        planned = {r['_id'] for r in plan['records']['tejas_jobs']}
+        ids = {r['_id']: r['id'] for r in db.tejas_jobs.find({}, {'id': 1})}
+        planned_ids = {ids[o] for o in planned}
+        assert not planned_ids & {r['id'] for r in keep}
+        assert {r['id'] for r in gone} <= planned_ids
+        before_keep = raw_rows(db, 'tejas_jobs', {'_keep': 1})
+        staff_before = {n: raw_rows(db, n, {'role': {'$ne': 'student'}}) for n in ('tejas_users', 'tejas_phone_profiles')}
+        store = FakeStore(); assert do_apply(db, store, do_prepare(db, store))['phase'] == 'complete'
+        assert raw_rows(db, 'tejas_jobs', {'_keep': 1}) == before_keep
+        assert db.tejas_jobs.count_documents({'id': {'$in': [r['id'] for r in gone]}}) == 0
+        assert {n: raw_rows(db, n, {'role': {'$ne': 'student'}}) for n in staff_before} == staff_before
+        assert db.tejas_jobs.count_documents({'id': {'$in': ['j-anon-ai', 'j-su1-ai', 'j-own', 'j-own-cohort']}}) == 4
