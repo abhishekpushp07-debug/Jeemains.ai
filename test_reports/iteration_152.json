@@ -1,0 +1,25 @@
+{
+  "summary": "Frontend-only check of the Home colour swap at exactly 1920x800 and 390x844, using read-only browser route fixtures. Computed styles confirm the swap. JEE Main card: royal-blue surface (#06112E→#18357A), platinum CTA (#FBFCFF→#CAD5E5) with ink #122952, no ruby tokens left. Home All India banner: ruby/onyx surface (#1A070A/#0D0C10/#24090E), border #984755, ruby CTA #B6112A with ink #FFF7F8, no old royal-blue #0B2D80. BITSAT is still amber (#FFC15B, ink #281806) and COMEDK is still teal (#04181A, CTA ink #063733). Lossless PNG pixel contrast was measured for every visible text run in the JEE card and the banner: settled scroll, visible bboxes below the sticky header, CSS-to-image scaling (1.0), foreground hidden while sampling. States covered: glare off, forced glare at 15 offsets from -55% to +55%, card hover, CTA/nav/primary/hub hover plus glare. Every target meets its threshold (small text 4.5:1, large bold 3:1). Lowest values: mobile banner 'Created by' 4.52 (p1 5.24) at forced glare -25%; banner 'Explore the series' hover 5.05; banner facts 5.13; JEE 'My results' 5.78; JEE CTA 10.88. The only flagged item is '100% AI' on the rotated ribbon. That is a measurement artifact: the axis-aligned bbox of rotated text samples the banner behind the ribbon. Computed on the ribbon itself, dark #3A0B17 ink on the #FFF7F8→#E8CBD1 gradient is about 11:1. Regressions all pass: no horizontal overflow, all 13 Home links target the correct routes, the series explainer modal opens and closes with Escape, Pause/Play shine pauses and resumes all 3 cards, and reduced motion hides the ::before glare on all cards and the banner. Styling stays scoped to Home: the guest landing banner still uses the global #160B10 with CTA #D91222 and is not inside .exam-home, and the Series hub has no .exam-home. 0 mutation requests were attempted.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home 390x844 All India banner", "issues": ["Not a failure: 'Created by' (series-astra-identity-banner) drops to 4.52:1 at the forced full-opacity glare peak (-25%), only just above 4.5. Optional: nudge #DED0D5 slightly lighter or lower the banner glare's white stop if you want more margin."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/ui_swap_check152.py", "/app/tests/ui_swap_contrast152.py", "/app/tests/ui_fixture_home149.py", "/app/tests/ui_contrast_measure150.py"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "The swap is done through tokens in vibrant-ui.css lines 218-288. JEE now inherits the base .exam-home .bold-exam-card tokens (royal blue). No CSS loaded later (pyq.css) overrides these rules.",
+    "ExamHub.js also uses the .exam-home class, but it renders no .bold-exam-card or .flagship-banner, so the scoped rules do not leak there.",
+    "Line 213 (.bold-exam-card.exam-tone-jee-main background #1C0E13) is now dead on Home because the .exam-home rule overrides it. Harmless."
+  ],
+  "updated_files": ["/app/tests/ui_swap_check152.py", "/app/tests/ui_swap_contrast152.py"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100%"},
+  "seed_data_creation": "None. Read-only browser route fixtures only; no auth sessions, DB writes or AI calls.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Use wait_until='domcontentloaded' because the preview never reaches networkidle. ui_swap_contrast152.py is a generic text-node pixel sampler: give it any container via data-qa-scope. The rotated '100% AI' ribbon always reads as a false failure (bbox artifact), so check it analytically. No app code was changed.",
+  "rca of the issue": "No defects found."
+}
