@@ -1,89 +1,60 @@
 {
-  "task": "JEE Main PYQ Catalogue Layout & Dark Theme Distinct Cards Blueprint",
-  "scope": "JEE Main PYQ Catalogue component (/app/frontend/src/features/PyqCatalogue.js) and stylesheet (/app/frontend/src/pyq.css, /app/frontend/src/vibrant-ui.css)",
-  "app_type": "education_saas_app",
-  "tech_stack": "React JS (.js files), Tailwind CSS, Custom CSS (pyq.css, vibrant-ui.css)",
-  "problem_summary": {
-    "issue": "Previously, PYQ catalogue required selecting both Year and Date tabs, showing only a single date's papers at a time in a grid.",
-    "approved_solution": "Remove date tabs/filters completely. When a year is selected, stack ALL papers for that entire year in one continuous vertical list (one below another). Retain shift/date metadata on each card, as well as attempt states (Start, Resume, View Result, Attempt Again)."
-  },
-  "design_decisions": {
-    "theme": "Dark Theme with Rich Distinct Dark Card Surfaces",
-    "year_selector": {
-      "style": "Segmented tab row with high-contrast active states, subtle borders, and glow on active selection.",
-      "active_state": "Blood Red (#D91222) or Crimson accent with subtle inner glow and high-contrast white bold text.",
-      "inactive_state": "Dark surface (#14141C or #1A1A24) with muted text (#B0B0BF) and 1px border (#2A2A38)."
-    },
-    "paper_cards_layout": {
-      "container": "Single-column flex vertical stack (.pyq-paper-list { display: flex; flex-direction: column; gap: 1rem; })",
-      "card_style": "Distinct dark color surfaces for each paper card to create visual depth and variety while maintaining legibility in dark mode.",
-      "card_variants": [
-        {
-          "name": "Obsidian Crimson Tint",
-          "background": "linear-gradient(135deg, #1A090D 0%, #14141C 100%)",
-          "border": "1px solid #521C26"
-        },
-        {
-          "name": "Midnight Slate Navy Tint",
-          "background": "linear-gradient(135deg, #0D1322 0%, #14141C 100%)",
-          "border": "1px solid #23364F"
-        },
-        {
-          "name": "Deep Charcoal Violet Tint",
-          "background": "linear-gradient(135deg, #150F21 0%, #14141C 100%)",
-          "border": "1px solid #372852"
-        },
-        {
-          "name": "Dark Emerald Forest Tint",
-          "background": "linear-gradient(135deg, #091A15 0%, #14141C 100%)",
-          "border": "1px solid #1E4738"
-        }
-      ],
-      "card_typography": {
-        "title": "Date label (e.g. '24 January 2025') as main H2 heading, font-size 1.25rem, weight 800, color #F8FAFC",
-        "meta": "Shift badge, question count, duration, total marks in high contrast with icons",
-        "actions": "View Result (Outline button with ArrowUpRight) and Start/Resume/Attempt Again (Primary Crimson button with ArrowRight/RotateCcw)"
-      }
+  "project_type": "education_saas_app",
+  "archetype": "ARCHETYPE 4: SWISS & HIGH-CONTRAST / ATHLETIC PRECISION",
+  "file_type_convention": "JS (.js React files - NOT TypeScript/TSX)",
+  "scope": "Scoped UI guidelines for 4 home cards clickability & preflight device check box styling",
+  "colors": {
+    "theme": "Existing black/blood-red dark theme, unchanged home card palettes",
+    "primary_brand": "#D91222",
+    "primary_brand_hover": "#8A0000",
+    "bitsat_accent": "#FF9933",
+    "comedk_accent": "#101115",
+    "series_accent": "#2563EB",
+    "surface_card": "var(--surface-card, #14141C)",
+    "surface_page": "var(--surface-page, #08080A)",
+    "border_line": "var(--line, #2C2C36)",
+    "text_dark": "var(--ink, #F8FAFC)",
+    "text_muted": "var(--text-muted, #A4A4B5)",
+    "preflight_box": {
+      "background": "#1D1117",
+      "border": "#713648",
+      "text": "#D8C9D2",
+      "cta_button": "var(--brand)",
+      "cta_button_hover": "var(--brand-dark)"
     }
   },
-  "css_blueprint": {
-    "pyq_paper_list": ".pyq-paper-list { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0; width: 100%; }",
-    "pyq_dates_removal": ".pyq-dates { display: none !important; } /* Date filter bar removed completely */",
-    "pyq_paper_card": ".pyq-paper-card { width: 100%; padding: 1.75rem; border-radius: 16px; background: var(--card-bg, #14141C); border: 1px solid var(--card-border, #2A2A38); transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }",
-    "pyq_card_hover": ".pyq-paper-card:hover { transform: translateY(-2px); border-color: var(--brand-text, #FF6974); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }",
-    "pyq_year_tabs": ".pyq-years { display: flex; gap: 0.65rem; flex-wrap: wrap; margin: 1.25rem 0; padding-bottom: 1.25rem; border-bottom: 1px solid var(--line, #2A2A38); }"
+  "typography": {
+    "heading_font": "Figtree, sans-serif",
+    "mono_font": "Roboto Mono, monospace",
+    "body_font": "Figtree, sans-serif",
+    "h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold",
+    "h2": "text-base md:text-lg font-bold",
+    "h3": "text-base font-semibold"
   },
-  "testing_and_contracts": {
-    "required_data_testids": [
-      "pyq-page",
-      "pyq-eyebrow",
-      "pyq-title",
-      "pyq-description",
-      "pyq-total",
-      "pyq-year-tabs",
-      "pyq-year-{year}",
-      "pyq-paper-list",
-      "pyq-paper-{paper_id}",
-      "pyq-shift-{paper_id}",
-      "pyq-status-{paper_id}",
-      "pyq-paper-title-{paper_id}",
-      "pyq-paper-meta-{paper_id}",
-      "pyq-paper-rules-{paper_id}",
-      "pyq-attempt-count-{paper_id}",
-      "pyq-result-{paper_id}",
-      "pyq-start-{paper_id}",
-      "pyq-source-note"
-    ]
+  "layout_and_interactions": {
+    "home_cards": {
+      "requirement": "Make all 4 home screen cards (3 exam cards + 1 All India series banner) clickable so clicking anywhere on the card container navigates to the respective main exam page (/exams/jee-main, /exams/bitsat, /exams/comedk, /series/all-india-jee).",
+      "event_isolation": "Ensure inner buttons, links, toggles, and modals stop propagation (e.g. e.stopPropagation()) so secondary actions (like 'Pause shine', shortcut links, or modal triggers) remain independently interactive without triggering the parent card click.",
+      "hover_effect": "Maintain smooth hover lift (transform: translateY(-4px)) and border highlight."
+    },
+    "preflight_device_check_box": {
+      "requirement": "In SetDetail.js preflight step 02 (Check & begin), enclose the 'Check my device' section inside a clear, distinct visual container box.",
+      "cta_guidance": "Provide a prominent 'Click here' CTA text/badge or button wrapper on the Check My Device action, preserving the underlying check + consent start gate logic and data-testid attributes.",
+      "styling": "Background: #1D1117; Border: 1px solid #713648; Padding: 20px (16px mobile); Border-radius: 14px; preserve the existing dark theme."
+    }
   },
   "instructions_to_main_agent": [
-    "Remove date tab filter (.pyq-dates) in PyqCatalogue.js and render all papers for the selected year in a vertical flex stack.",
-    "Apply distinct rich dark gradient variants to consecutive cards in pyq.css / vibrant-ui.css to make stacked cards visually appealing.",
-    "Maintain all existing testids, action links, attempt status indicators, and paper metadata intact.",
-    "Do NOT add new features, pagination, or alter other pages."
+    "Use standard JavaScript React syntax (.js files) - DO NOT use TypeScript types or .tsx extensions.",
+    "For the 3 exam cards in ExamNavigation.js, wrap or attach an onClick handler to the main <article> / <Card> container that navigates to the primary exam page using react-router useNavigate or absolute card link overlay, while calling e.stopPropagation() on inner shortcuts (<nav> links) and controls.",
+    "For LiveSeriesBanner.js, make the flagship banner card clickable to navigate to SERIES_PATH ('/series/all-india-jee'), keeping the 'Explore the series' button and live badge modal triggers functioning via stopPropagation.",
+    "In SetDetail.js, enclose the existing check action, help and progress in a dark bordered device-check-callout with Click here. Keep the sample/input and actual preflight/consent/start logic unchanged.",
+    "Preserve all existing data-testid attributes (e.g., data-testid='preflight-run-check', data-testid='exam-home-exam-card-jee-main', etc.).",
+    "Do NOT add new imagery, claims, or overhaul the global visual redesign."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "All interactive and key informational elements MUST include data-testid attributes.",
-    "Never use fully transparent backgrounds on overlays, headers, or cards.",
-    "Keep component extension to .js / .jsx formats."
-  ]
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "testing_attributes": "All interactive and key informational elements MUST include a data-testid attribute in kebab-case.",
+    "file_type": "JavaScript React (.js files only)",
+    "accessibility": "Ensure focus rings (focus-visible) and contrast ratios pass APCA / WCAG standards.",
+    "motion": "Respect prefers-reduced-motion in CSS/JS transitions."
+  }
 }

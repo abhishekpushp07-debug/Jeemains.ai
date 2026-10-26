@@ -12,11 +12,13 @@ router = APIRouter(prefix='/api/admin', tags=['Owner student directory'])
 class StudentRecord(BaseDocument):
     profile_id: str = Field(alias='id')
     phone: str
+    pin_version: int = Field(default=0, ge=0)
 
 
 class StudentView(BaseModel):
     id: str
     phone: str
+    pin_version: int
 
 
 class StudentList(BaseModel):
@@ -33,10 +35,10 @@ async def list_students(response: Response, page: int = Query(1, ge=1, le=10000)
     digits = re.sub(r'[^+0-9]', '', q)
     query = {'phone': {'$regex': re.escape(digits)}} if digits else {}
     total = await db.tejas_phone_profiles.count_documents(query)
-    records = await db.tejas_phone_profiles.find(query, {'id': 1, 'phone': 1}).sort([('phone', 1), ('id', 1)]).skip((page - 1) * 50).limit(50).to_list(50)
+    records = await db.tejas_phone_profiles.find(query, {'id': 1, 'phone': 1, 'pin_version': 1}).sort([('phone', 1), ('id', 1)]).skip((page - 1) * 50).limit(50).to_list(50)
     items = []
     for raw in records:
         record = StudentRecord.from_mongo(raw)
-        items.append(StudentView(id=record.profile_id, phone=record.phone))
+        items.append(StudentView(id=record.profile_id, phone=record.phone, pin_version=record.pin_version))
     await audit(u['id'], 'student_directory_read', 'student_directory')
     return StudentList(items=items, total=total, page=page, pages=max(1, math.ceil(total / 50)))

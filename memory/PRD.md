@@ -1,5 +1,17 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
+## Added Home/preflight requests — 2026-10-26
+EXACTuser: “Home screen pr 4 card hai 3 exams ek all india wo pura card clickable hona chiye. Also test start se phle samay check my device ko ek box me dalo aur bolo click here .” Chose“a. Exam ka main page”. ImplementednativeabsoluteLinkbackgrounds4cards insharedHome+Landing,mainexam/titlehub/exams/{slug},banner/SERIES_PATH; preservedinnerExplorePYQ/mock/chapters/results/modal/streaklinkdestinations. Pointer-eventscontentpassthrough/interactivereenable, nativekeyboard/newtablinks,nounnestedrolehacks. Boxdevice-check-callout +Clickherebutton, pending/successstates; storage/preflight/consent/startcodeUNCHANGED. CSSusesthecurrentdarkbrand, no homepalettechanges. Designagentoverwrotelightguidelinesincorrectly; correctedtoexistinguser-approveddarkthemeandselectedhubroutes. These2featuresbatchwithownerresetQA161; nocustomerdatawrites; actualtargetPINstillUNCHANGEDpendingtest+publish+privilegedreset.
+
+
+
+## Owner-only reset implementation in progress — 2026-10-26
+UserrequestedPINchangeforaspecificrealstudent,thenselected“b. Login nahi hoon, owner reset chahiye”. Keepactualphone/PINONLYinprivateconversation/runtimeinput; DO NOTpersistindocs/source/tests/publicZIP. Owner-authorisedread-onlyLIVEGET/admin/studentsconfirmedexacttargetexistsuniquely,operationalsessionclosed; credentialNOTchangedyet. No newowneraccount/owneremailmigrationauthorised.
+Approvednewprotectedflow POST/api/auth/owner/student-pin-reset usingexistingownerDepends; strictphone,newpin,confirmpin,expectedversion; role/accessstudentplane+CASexistingonly; hasheswithbcrypt,version++/atomicactor-timeaudit, optionalcentralauditandoldstudentrowcleanup; NOstudenttokenforowner/nonewaccount/historychange. Actor10/15,target5/15limits. DirectoryDTOaddsONLYpin_versionforCAS; ownerUI ResetPINdialog eachrow. Auth+Infohelpmentionownerrecoverybutpublicresetstillclosed. ExistingownPINflowuntouched. Integrationplaybook+authzskillconsulted.
+QA161neededisolatedrealJWTallrole/ownership/concurrency/audit/oldsessionrevocation/recordpreservationcases+mobileUI. ActualtargetneverusedforQA. Thenpublishprotectedendpoint, waitactualcompletion, useexistingoperationalownercredentials toexecuteexactuser-requestedtargetresetONCE viaendpoint. Needconfirmationresponse+GETdirectoryversion/IDpreserved; don'tloginasstudent/impersonate. NoPINinlogs/docs; currentcredentialrecordshouldsayuser-providedprivatePINnotvalue. Iftargetmissing/conflict/blockedSTOP,noclaimingcreation/no retryblindly. Actualresetnotyetdone; neverfinishsayingPINchangedbeforecommit+verify.
+
+
+
 ## PYQ159/160 release accepted — 2026-10-26
 Deployer acceptedcode-onlypublish, queued/running dispatcherhandlebcd75d41-4661-4f5a-bead-654e0ffe34d2. DoNOTpollorredispatch. Previewcorrect+testscomplete; LIVEupdatedyear-onlycardsNOTconfirmeduntilnotification/actualservedcheck. Customerfinalmustexplicitlydistinguishpreviewdonefromlivepublishing. No new app edits after160render, no data/credentials changed.
 

@@ -187,7 +187,7 @@ export default function Auth({ staff = false }) {
         ) : (
           <>
             <p className="auth-switch"><Link data-testid="student-auth-switch" to={(signup ? '/login' : '/signup') + (params.toString() ? '?' + params.toString() : '')} onClick={()=>{setError('');setPin('');setConfirmPin('');}}>{signup ? 'Already have an account? Sign in' : 'New student? Create an account'}</Link></p>
-            {!signup && <p className="phone-disclosure" data-testid="pin-recovery-note">PIN changes are available only inside your signed-in Profile. There is no public PIN reset.</p>}
+            {!signup && <p className="phone-disclosure" data-testid="pin-recovery-note">Change your PIN inside your signed-in Profile. If you cannot sign in, request a reset from the owner. There is no public PIN reset.</p>}
             <p className="phone-consent">
               By continuing, you agree to store this number and your practice
               records as described in our{" "}

@@ -89,7 +89,8 @@ export default function Info() {
             Changing your PIN requires your existing signed-in session and signs
             out other sessions. Older phone-only profiles can set their first PIN
             from an existing session; signup cannot claim an existing profile.
-            There is no public PIN reset.
+            There is no public PIN reset. The authorised owner can reset an existing
+            student's PIN after confirming the request, without changing saved results.
           </p>
           <h2>Staff and answer-key protection</h2>
           <p>

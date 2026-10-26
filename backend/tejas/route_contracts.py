@@ -97,6 +97,7 @@ SPEC = {
     'phone.access': ('student_phone_pin_credentials', 'normal', 'verified_pin_new_session'),
     'phone.signup': ('new_student_phone_pin_only', 'normal', 'unique_phone_no_existing_profile_claim'),
     'phone.change_pin': ('authenticated_own_student_only', 'normal', 'pin_version_CAS_session_revocation'),
+    'phone.owner_reset_pin': ('owner_only_existing_student_pin_reset', 'normal', 'pin_version_CAS_audited_no_student_session'),
     'students.list_students': ('owner_only_student_phone_projection', 'normal', 'read'),
     'content.catalogue': ('public_published_audience', 'normal', 'read'),
     'content.set_detail': ('public_published_audience', 'normal', 'read'),

@@ -10,7 +10,7 @@ def workload(path, method):
         return None
     if path == '/api/ready':
         return 'probe'
-    if path in ('/api/auth/login', '/api/auth/phone', '/api/auth/phone/signup', '/api/auth/pin', '/api/auth/register'):
+    if path in ('/api/auth/login', '/api/auth/phone', '/api/auth/phone/signup', '/api/auth/pin', '/api/auth/owner/student-pin-reset', '/api/auth/register'):
         return 'auth'
     if '/asset/' in path or path.endswith('/download') or '/source/' in path:
         return 'asset'

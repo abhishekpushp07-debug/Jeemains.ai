@@ -1,4 +1,15 @@
 # Authentication testing contract
+
+## Owner reset QA161 — 2026-10-26
+User approved owner-only reset for a real existing student; NEVER use that actual number or requested PIN in tests/files/screenshots. Only random isolated identities/PINs. Current live target has NOT yet been reset; this is implementation QA, operational reset follows publication.
+- Auth matrix for POST /api/auth/owner/student-pin-reset: authenticated owner allowed, reviewer/student403, anonymous401, revokedowner/currentrolechange403, cross-origin denied. Owner's cookies/identity must stay owner; no studenttoken/SetCookie minted.
+- Strict body phone,new_pin,confirm_pin,expected_pin_version; 4ASCII digits incl leadingzero, mismatch/unknownrole/booleans rejected; no input PIN echoed in errors. Match existing phone-profile student plane only; no upsert/newprofiles, staffrecords untouched. Owner-only directory now allowlists id,phone,pin_version (not hashes/PIN/resetactor metadata).
+- CAS exactlyone concurrent reset wins; staleversion409, legacy absentpin_version=0 resettable; student ownPINchange race can't overwrite. Reset onlyhashedPIN/version+auditactor/time; existingstudentID/history/answers/results/papers unchanged byteforbyte. Logicalgenerationrevocation current+refresh; best-effortdeletiononlyoldstudentversions, not fresh/currentowner sessions.
+- New PIN login works with sameID; oldPIN fails. Account maystillhonourexistingfailed-loginlockout (resetdoesNOTdisablebruteforcelimits). Actor10/15min andtarget5/15min includeRetryAfter. Absenttarget409, no creation.
+- Audit uses actorID/studentID/version/time only, noPIN/hash/phone. Embedded actor/time inatomicprofilecommit means central-auditfailure doesn'tmakeunauditedreset; optionalcleanupfailurecan'trestoreoldsession. TransientlimiterDBfailure503nofailopen; mutationDBfailurecannotissuecredentials.
+- Real isolated ownerUI list→resetdialog: read-onlyphone,empty/mismatch/PINvalidation,disabledsubmitduringrequest,successclearsinputs/closes/refreshes,errors/cancel/noreusedPIN,nonownerdenial. Desktop1920x800/mobile390x844 nooverflow. NO screenshots of actualtarget/credential.
+
+
 Use /app/memory/test_credentials.md, never log secrets. This app uses custom owner/reviewer password login and student mobile+four-digit PIN login. Phone ownership is still unverified. Preserve the existing staff identity plane.
 
 ## Current production login/slow-loading investigation

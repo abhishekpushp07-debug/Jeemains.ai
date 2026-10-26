@@ -1,3 +1,21 @@
+# Added approved Home/preflight scope — 2026-10-26
+home_preflight161:
+  exact: "Home screen pr 4 card hai 3 exams ek all india wo pura card clickable hona chiye. Also test start se phle samay check my device ko ek box me dalo aur bolo click here ."
+  choice: "a. Exam ka main page"
+  implementation: "NativefullcardLink to/exams/{slug} for3examcards, /series/all-india-jee forbanner. Titlelinksmatchhub. ExistingExplorePYQ/Mock, chapters,results,modal/streaklinkskeepindependentdestinations. SharedHome+Landingcomponents. PreflightbuttonnowinsideclearCheckmydeviceboxlabelClickhere; actualcheck/preflightbody/consent/startgate unchanged."
+  qa: "Batchwithownerreset161afterallCSSdone. Testblank/icon/textareas4cardsnavigatehubs keyboard/nativeanchorwithnonnestedanchors; shortcuts/modals/shinetoggle nothijacked; guestredirect+returnlogin; mobile/desktop. Preflightclickherepending/failure/success andstartdisableduntilchecked+consent, nocustomerattemptwrites."
+
+
+# Owner-only student PIN reset — 2026-10-26 (QA161 pending)
+owner_pin_reset161:
+  approval: "User explicitly requested a PIN reset for their supplied student number and chose 'Login nahi hoon, owner reset chahiye'. Target and requestedPIN are NOT in code/docs/screenshots."
+  current_live: "Owner-authorisedread-onlydirectoryverifiedtargetexistsuniquely; closedonlyoperationalsession. TargetcredentialNOTchangedyet."
+  implementation: "POST/api/auth/owner/student-pin-reset Depends(owner), strictphone/newPIN/confirm/expected_pin_version. Resetexistingstudentonly, no upsert/newaccount/stafftouch; CASpin_versionincrement+hashedPIN+embeddedactor/timeaudit, centralredactedaudit, logicalrevocation+oldstudentrowscleanup, NOstudentcookieforowner. Actor10/15min+target5/15minsharedlimits."
+  ui: "SuperAdminexistinglistrowResetPINdialog, read-onlyphone,newPINconfirm, historypreservation/signoutdisclosure, buttonsbusy/errorstates. Directoryaddsowner-onlypin_versionforCAS; oldschema idphone-onlytestsneedupdatedallowlist."
+  test_plan: "Authskillmatrix+realJWTisolatedDB: anon401/studentreviewer403,revokedowner,strictvalidationroleinjection,wrongtargets/legacyv0,staleCAS/concurrentresets,ownPINraces,oldsessioncurrent+refreshinvalid,owneridentityunchanged/noSetCookie,correctnewlogin,sameIDhistory,redactedaudit/logs,responseprojection,limits,DBfailure. Browserownerresetdialogmobile390/desktop1920onisolatedAPIorreadonlyfixtures. NEVERuseactualtarget/PIN/customerDB forQA."
+  next: "Fixatomicphone.pyeditiffailed; thenonesmoke+testing161. PublishONLYtestedcode andthenperformexplicitrealresetviaownerauth endpoint afterconfirmeddeployment; no studentimpersonation."
+
+
 # PYQ159/160 verified, publishing — 2026-10-26
 pyq_year_stack_complete:
   tests: "159allfunctionalPASS,160pairedCTApolishPASS44pxboth/equalmobilewidths/nooverflow/nowrap; no appeditsafterfinalrender"

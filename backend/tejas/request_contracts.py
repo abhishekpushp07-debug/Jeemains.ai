@@ -75,6 +75,10 @@ class PinChangePayload(Payload):
         return self
 
 
+class OwnerPinResetPayload(PinChangePayload):
+    expected_pin_version: int = Field(ge=0, le=2**63 - 2)
+
+
 class LoginPayload(Payload):
     email: EmailStr
     password: str = Field(min_length=8, max_length=64)
@@ -287,6 +291,7 @@ MODELS = {
     'imports.schedule_import': ScheduleInput, 'imports.toggle_live': LiveInput,
     'auth.login': LoginPayload, 'phone.access': PhonePayload, 'auth.preferences': PreferencePayload,
     'phone.signup': PhoneSignupPayload, 'phone.change_pin': PinChangePayload,
+    'phone.owner_reset_pin': OwnerPinResetPayload,
     'content.create_set': SetPayload, 'content.update_set': SetPayload,
     'content.edit_question': QuestionPayload, 'content.extract': ExtractPayload,
     'content.publish': PublishPayload, 'content.withdraw': WithdrawalPayload, 'content.subset': SubsetPayload,
