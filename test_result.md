@@ -1,3 +1,12 @@
+# Opening-page palette mismatch repair — 2026-10-26
+landing_palette153:
+  request: "Preview me bi nahi hua colour swap na deploy krne ke baad jeelive.ai pr"
+  reproduced: "Real guest browser GETs of preview / and https://jeelive.ai/ both show old JEE solid rgb(28,14,19), banner rgb(22,11,16), no .exam-home ancestor. All prior polished palettes were incorrectly restricted to signed-in /home; test152 wrongly required landing to remain unchanged. No real login/database writes."
+  implementation: "Shared .polished-home style scope replaces .exam-home prefix ONLY in vibrant-ui.css palette block218-288. Applied this class to existing Home and Landing roots. Same approved palettes on public / and private /home: JEE blue/platinum, All India ruby/onyx, BITSAT amber, COMEDK teal. No content/routes/layout/business logic changed."
+  needs_retesting: true
+  test_plan: "Real public preview opening page, no API fixtures for first verification, desktop1920x800/mobile390x844: exact gradients/CTAs, banners/3cards, zero overflow, modal and pause/reducedmotion. Compare /home using browser-only auth fixture/no real login or writes. Regression same previously tested palette, not new redesign. Check contrast at landing widths. Deployment correction requires newest tested snapshot; no resets/imports/secrets changes."
+
+
 # Home palette swap — 2026-10-26
 home_palette_swap152:
   request: "Jo jee main ka colour hai wo all india ko do and all india ka colour jee main ko"

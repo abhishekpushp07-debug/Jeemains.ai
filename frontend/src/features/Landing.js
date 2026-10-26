@@ -18,7 +18,7 @@ const faqs=[
 
 export default function Landing(){
  const {user}=useAuth();const entry=user?'/home':'/login';
- return <div className="free-landing" data-testid="free-landing-page">
+ return <div className="free-landing polished-home" data-testid="free-landing-page">
   <div className="container flagship-home"><LiveSeriesBanner/></div>
   <section className="container direct-home-hero" data-testid="poster-free"><span className="free-label" data-testid="landing-free-label"><GraduationCap size={17}/>100% FREE FOR ALL STUDENTS</span><h1 data-testid="landing-hero-heading">Your exam.<br/><span>Your next big step.</span></h1><p data-testid="landing-hero-description">Go straight to your practice. Full mocks, chapter tests and clear results—one colourful, focused space.</p><ExamHomeCards/></section>
   <section className="free-feature-ribbon" aria-label="Practice features"><div className="container">{[[ClipboardList,'Full mock tests'],[BookOpen,'Chapter-wise practice'],[ChartNoAxesCombined,'Results & answer review'],[Target,'Personal progress']].map(([Icon,label],i)=><span key={label} data-testid={'landing-feature-'+i}><Icon size={19}/>{label}</span>)}</div></section>
