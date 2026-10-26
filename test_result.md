@@ -1,3 +1,10 @@
+# Authoritative deployment result — 2026-10-26
+pin_authoritative_deploy:
+  status: "SUCCESS active8e1369d0 promoted18:24:07Z imagebc3b54fa jobe368a418"
+  evidence: "DeployerconfirmedactualOpenAPI+servedAuth/ChangePinJS; matches main158UI/APIproof"
+  next: "No website redeploy needed. NEW PIN LIVE ZIP alreadydelivered; nativeagentimplementsappupdate. Usecanonicalapexjeelive.ai; wwwunverifiedoutsidecurrentscope."
+
+
 # PIN live + post-deploy ZIP verified — 2026-10-26
 pin_live_handoff_complete:
   report: "/app/test_reports/iteration_158.json"
