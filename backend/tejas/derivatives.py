@@ -37,6 +37,7 @@ def render_crop(source, ref, scale=2):
 
 
 _validation_cache = ByteCache(8 * 1024)
+_validation_locks = [Lock() for _ in range(32)]
 
 
 def validate_source_crops(source, refs):
@@ -48,7 +49,7 @@ def validate_source_crops(source, refs):
     identity = json.dumps({'source': source.get('sha256') or source['path'], 'refs': sorted(unique), 'reviewed': reviewed, 'validation': 1}, sort_keys=True)
     key = sha256(identity.encode()).hexdigest()
     cacheable = bool(source.get('sha256'))
-    with _locks[int(key[:8], 16) % len(_locks)]:
+    with _validation_locks[int(key[:8], 16) % len(_validation_locks)]:
         if cacheable and _validation_cache.get(key) is not None:
             return
         raw = get_object(source['path'])

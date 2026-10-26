@@ -1,133 +1,148 @@
 {
-  "project_type": "jee_mains_pyq_platform_and_premium_theme",
-  "theme": "premium_obsidian_black_and_blood_red",
-  "archetype": "THE_PERFORMANCE_PRO_TACTICAL_MINIMALISM",
-  "emotional_tone": "Elite, focused, authoritative, highly responsive, high-contrast dark elegance",
-  "design_freedom": "HIGH - Transform JEE Mock into Date-Wise PYQ Catalogue with blood-red premium aesthetics",
-  "global_theme_tokens": {
-    "color_palette": {
-      "bg_main": "#09090B",
-      "bg_card": "#121216",
-      "bg_card_hover": "#1A1A22",
-      "bg_glass_header": "rgba(9, 9, 11, 0.85)",
-      "border_subtle": "rgba(255, 255, 255, 0.08)",
-      "border_accent": "rgba(225, 29, 72, 0.3)",
-      "border_active": "#E11D48",
-      "blood_red_primary": "#E11D48",
-      "blood_red_hover": "#F43F5E",
-      "blood_red_dark": "#991B1B",
-      "blood_red_glow": "rgba(225, 29, 72, 0.25)",
-      "crimson_badge_bg": "rgba(153, 27, 27, 0.2)",
-      "crimson_badge_text": "#FFD1D1",
-      "text_primary": "#F8FAFC",
-      "text_secondary": "#CBD5E1",
-      "text_muted": "#71717A",
-      "accent_gold_attempted": "#F59E0B",
-      "accent_green_score": "#22C55E"
-    },
-    "contrast_rules": {
-      "min_contrast_ratio": "4.5:1 for standard text, 3:1 for large display elements",
-      "hover_text_color_rule": "MUST explicitly set hover text color (e.g. hover:bg-rose-600 hover:text-white)",
-      "header_overlay_rule": "DO NOT use 100% transparent backgrounds. MUST use backdrop-blur-xl with bg-black/85 or bg-slate-950/90",
-      "focus_state": "focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-black"
-    }
+  "project_name": "JEELIVE.AI",
+  "project_type": "jee_mains_pyq_platform_and_premium_reskin",
+  "theme_architecture": "Obsidian Black (#08080A / #0C0C10) & Blood Premium Red (#D91222 / #DC2626 / #880808) - Pure Dark Luxury & High-Performance Tactical Minimalism (ZERO Blue)",
+  "design_archetype": "THE_PERFORMANCE_PRO_TACTICAL_MINIMALISM",
+  "emotional_tone": "Elite, focused, authoritative, zero-latency dark elegance for competitive exam aspirants",
+  "tech_stack": {
+    "framework": "React JS (.js / .jsx files)",
+    "styling": "Tailwind CSS + Custom CSS Variables in index.css & App.css",
+    "primary_font": "Figtree (sans-serif)",
+    "mono_font": "Roboto Mono / JetBrains Mono"
   },
-  "typography": {
-    "font_files_type": ".js/.jsx React environment",
-    "font_families": {
-      "headings": "Outfit, Barlow Condensed, sans-serif",
-      "body": "Inter, Figtree, sans-serif",
-      "mono": "JetBrains Mono, monospace"
-    },
-    "size_hierarchy": {
-      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white",
-      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white",
-      "h3_card_heading": "text-xl sm:text-2xl font-semibold text-slate-100",
-      "h4_subheading": "text-lg font-medium text-slate-200",
-      "body_text": "text-base leading-relaxed text-slate-300",
-      "caption_label": "text-xs font-semibold tracking-wider uppercase text-rose-400"
-    }
+  "global_color_tokens": {
+    "theme_mode": "Pure Dark Mode Sitewide (Light background stripped out in favor of deep obsidian)",
+    "bg_page": "#08080A",
+    "bg_surface_alt": "#0F0F14",
+    "bg_card": "#14141C",
+    "bg_card_hover": "#1D1D28",
+    "bg_header_glass": "rgba(8, 8, 10, 0.88)",
+    "border_subtle": "#22222E",
+    "border_muted": "#2A2A3C",
+    "border_blood": "#DC2626",
+    "border_blood_glow": "rgba(220, 38, 38, 0.35)",
+    "blood_red_primary": "#D91222",
+    "blood_red_bright": "#EF4444",
+    "blood_red_hover": "#B91C1C",
+    "blood_red_dark": "#450A0A",
+    "blood_red_soft": "rgba(217, 18, 34, 0.12)",
+    "text_primary": "#F8FAFC",
+    "text_secondary": "#CBD5E1",
+    "text_muted": "#8A8A9E",
+    "text_dim": "#525266",
+    "success_green": "#22C55E",
+    "success_soft": "rgba(34, 197, 94, 0.12)",
+    "warning_amber": "#F59E0B",
+    "warning_soft": "rgba(245, 158, 11, 0.12)",
+    "review_purple": "#A855F7",
+    "review_soft": "rgba(168, 85, 247, 0.12)"
   },
   "logo_recreation_blueprint": {
-    "status": "SVG vector recreation matching blood-red dark theme (NO cropped image)",
-    "concept": "Recreated vector SVG with crisp geometry, blood-red laser gradient glow, and bold metallic white/crimson lettering",
-    "style": "Modern dark gaming/edtech logo with linear red outline glow, dark surface backdrop, high contrast",
-    "notes": "Pending user attachment review if custom vector changes arrive; currently render sharp inline react SVG logo"
+    "concept": "Vector SVG emblem matching the supplied asset brand reference, redesigned natively with blood-red crimson gradient and obsidian backdrop. NO crop-pasted raster images.",
+    "svg_markup_blueprint": "<svg viewBox='0 0 240 48' fill='none' xmlns='http://www.w3.org/2000/svg' class='h-10 w-auto'><defs><linearGradient id='bloodGlow' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#FF2E3B'/><stop offset='100%' stop-color='#99000D'/></linearGradient><filter id='glow' x='-20%' y='-20%' width='140%' height='140%'><feGaussianBlur stdDeviation='3' result='blur'/><feComposite in='SourceGraphic' in2='blur' operator='over'/></filter></defs><path d='M12 8 L28 8 L36 24 L28 40 L12 40 L20 24 Z' fill='url(#bloodGlow)' filter='url(#glow)'/><path d='M22 14 L30 24 L22 34 L16 34 L22 24 L16 14 Z' fill='#FFFFFF'/><text x='46' y='32' fill='#FFFFFF' font-family='Figtree, sans-serif' font-weight='900' font-size='22' letter-spacing='-0.8'>JEE<tspan fill='#FF2E3B'>LIVE</tspan></text><rect x='152' y='14' width='38' height='18' rx='4' fill='#280509' stroke='#FF2E3B' stroke-width='1.2'/><text x='157' y='27' fill='#FF858E' font-family='Figtree, sans-serif' font-weight='800' font-size='10' letter-spacing='0.5'>.AI</text></svg>",
+    "style_rules": "Always render in responsive flex container with high contrast legibility over sticky header backdrop-blur-xl bg-[#08080A]/90"
   },
-  "pyq_screen_blueprint": {
-    "core_transformation": "Replace generic JEE Mock section with Date & Shift-Wise JEE Mains PYQ Catalogue (25+ authentic papers extracted from Tejas 200)",
+  "css_custom_properties_override": {
+    "variables_mapping": {
+      "--page": "#08080A",
+      "--surface-alt": "#0F0F14",
+      "--surface-card": "#14141C",
+      "--card-alt": "#1A1A24",
+      "--ink": "#F8FAFC",
+      "--text-muted": "#8A8A9E",
+      "--text-muted-2": "#62627A",
+      "--line": "#22222E",
+      "--blue": "#D91222",
+      "--brand-hover": "#B91C1C",
+      "--brand-active": "#880808",
+      "--brand-soft": "rgba(217, 18, 34, 0.14)",
+      "--brand-line": "rgba(217, 18, 34, 0.35)",
+      "--on-brand": "#FFFFFF",
+      "--focus-ring": "#EF4444",
+      "--brand-text": "#EF4444",
+      "--brand-blue": "#D91222",
+      "--navy": "#F8FAFC",
+      "--hero-dark": "#0A0507",
+      "--shadow-tint": "rgba(217, 18, 34, 0.08)"
+    },
+    "accessibility_fixes": {
+      "hover_contrast_fix": "Results and Solution tabs must NOT use low contrast hover. Set `hover:bg-[#28080E] hover:text-[#FFFFFF] data-[state=active]:bg-[#D91222] data-[state=active]:text-[#FFFFFF]` to guarantee APCA ratio > 8:1.",
+      "sticky_nav_obscure_fix": "Add `scroll-margin-top: 120px` (or `scroll-mt-28` class) to all anchor headings (.review-question, section headings) and set sticky subnav z-index to `z-20` below sticky header `z-30` so header/subnav never overlaps section title text."
+    }
+  },
+  "source_pdf_images_rule": {
+    "CRITICAL": "DO NOT invert colors on source PDF images or figures! Scanned JEE Math equations, graphs, and circuit diagrams inside PDFs/images must retain their original white background and dark text inside a clean high-contrast container.",
+    "container_style": "bg-white p-3 rounded-lg border border-zinc-200 shadow-md inline-block max-w-full overflow-x-auto my-2"
+  },
+  "pyq_and_player_blueprints": {
     "catalogue_navigation": {
-      "view_modes": ["Year Tabs (2024, 2023, 2022)", "Date/Shift Pills (e.g. 27 Jan Shift 1, 27 Jan Shift 2, 29 Jan Shift 1)", "Search & Topic Filter"],
-      "tab_style": "High-contrast tactical pills with active blood-red underline indicator (`border-b-2 border-rose-600 bg-rose-950/40 text-white`)"
+      "header_title": "JEE Main Date-Wise & Shift-Wise PYQs",
+      "year_tabs": ["2024", "2023", "2022", "2021", "Chapter Practice"],
+      "shift_pills": ["27 Jan Shift 1", "27 Jan Shift 2", "29 Jan Shift 1", "29 Jan Shift 2", "30 Jan Shift 1", "30 Jan Shift 2", "31 Jan Shift 1", "31 Jan Shift 2", "01 Feb Shift 1", "01 Feb Shift 2"],
+      "tab_active_style": "bg-[#D91222] text-white shadow-[0_0_12px_rgba(217,18,34,0.4)] font-bold rounded-lg border border-rose-500"
     },
     "test_card_states": {
       "unattempted": {
-        "status_badge": "NOT ATTEMPTED (Slate gray pill)",
-        "cta": "Start Test (Blood-Red Solid Button with subtle crimson glow: `bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-950/50`)",
-        "action": "Opens full-timed exam player for that specific paper date & shift"
+        "badge": "UNATTEMPTED (bg-zinc-800 text-zinc-300 border border-zinc-700)",
+        "cta_button": "Start Test (bg-[#D91222] hover:bg-[#B91C1C] text-white font-semibold shadow-lg shadow-rose-950/50)"
       },
-      "attempted": {
-        "status_badge": "COMPLETED (Emerald green or gold badge with score summary)",
-        "cta_1": "View Result (Blood-Red Outline Button: `border border-rose-600 text-rose-400 hover:bg-rose-600 hover:text-white`)",
-        "cta_2": "Attempt Again (Ghost Dark Pill: `bg-zinc-800 hover:bg-zinc-700 text-slate-200`)",
-        "action": "View Result loads detailed analytics + cropped solution viewer; Attempt Again resets response draft and launches player"
+      "completed": {
+        "badge": "COMPLETED (bg-emerald-950/60 text-emerald-400 border border-emerald-800)",
+        "cta_view_result": "View Result (border border-[#D91222] text-rose-400 hover:bg-[#D91222] hover:text-white)",
+        "cta_reattempt": "Attempt Again (bg-zinc-800 hover:bg-zinc-700 text-zinc-200)"
       }
     },
-    "solution_mapping": {
-      "strategy": "Precision cropped solution images mapped 1-to-1 per question with step-by-step math rendering (KaTeX/MathJax) and explanatory text",
-      "viewing_experience": "Split-screen or drawer viewer in Results screen; clean high-contrast black background with high DPI cropped solution images"
+    "exam_player_layout": {
+      "timer_bar": "bg-[#18080C] border border-rose-900/60 text-rose-400 font-mono font-bold text-lg px-4 py-2 rounded-lg flex items-center gap-2",
+      "question_palette": {
+        "answered": "bg-emerald-950 border border-emerald-600 text-emerald-300 font-bold",
+        "marked_for_review": "bg-purple-950 border border-purple-600 text-purple-300 font-bold",
+        "current_question": "ring-2 ring-[#D91222] ring-offset-2 ring-offset-[#08080A]",
+        "unvisited": "bg-[#14141C] border border-[#22222E] text-zinc-400"
+      }
     }
   },
   "high_concurrency_architecture": {
-    "concurrency_target": "500,000 concurrent students",
-    "backend_best_practices": [
-      "Stateless API endpoints with Redis cached paper metadata and JSON schema payloads",
-      "Optimistic UI updates for live timer state and local indexedDB draft recovery during test execution",
-      "CDN edge caching for static scanned PYQ cropped solution images",
-      "Canonical data models for Questions, Papers, Attempts, and Solutions with database indexing on (year, date, shift, subject, chapter)"
+    "concurrency_target": "500,000 concurrent student capability",
+    "frontend_optimizations": [
+      "Local response caching in IndexedDB / localStorage for instant state restore during network micro-outages",
+      "Optimistic submit queue with background retry and toast confirmation",
+      "Debounced auto-save on numerical and option selection (250ms debounce)",
+      "Lazy loading and WebP/DPI optimization for cropped solution figures"
     ]
   },
   "component_guidelines": {
     "HeaderNav": {
-      "style": "Sticky top bar with backdrop-blur-xl bg-black/85 border-b border-zinc-800 z-50",
-      "elements": ["Recreated Vector Logo (Blood Red theme)", "Nav links (PYQs, Chapter Practice, Analytics, Studio)", "User Profile / Quick Stats"],
-      "data_testids": ["header-nav", "header-logo", "nav-pyq-tab", "nav-analytics-tab"]
+      "style": "sticky top-0 z-30 bg-[#08080A]/90 backdrop-blur-xl border-b border-[#22222E] h-16 px-6 flex items-center justify-between",
+      "data_testids": ["header-nav", "header-logo", "nav-pyq-link", "nav-chapter-link", "nav-testseries-link", "user-profile-menu"]
     },
     "PyqCatalogueHeader": {
-      "style": "Hero header with blood-red background ambient spotlight, text-4xl title 'JEE Mains Past Year Papers', paper stats pill (25+ Papers Available)",
-      "data_testids": ["pyq-catalogue-header", "pyq-title", "pyq-stats-badge"]
-    },
-    "PyqDateTabs": {
-      "style": "Horizontal scrollable date/shift tab bar with active blood-red glow slider",
-      "data_testids": ["pyq-date-tabs", "pyq-tab-2024", "pyq-tab-shift-select"]
+      "style": "relative py-12 px-6 bg-gradient-to-b from-[#180508] to-[#08080A] border-b border-[#22222E] overflow-hidden",
+      "data_testids": ["pyq-catalogue-header", "pyq-main-title", "pyq-filter-search"]
     },
     "PyqTestCard": {
-      "style": "Card container with bg-zinc-900/90 border border-zinc-800 hover:border-rose-600/50 transition-all rounded-xl p-6 shadow-xl",
-      "elements": ["Paper Title (e.g. JEE Main 2024 - 27 Jan Shift 1)", "Meta info (300 Marks | 3 Hours | 75 Questions)", "Status Badge", "Action Buttons"],
+      "style": "bg-[#14141C] hover:bg-[#1D1D28] border border-[#22222E] hover:border-rose-900/60 transition-all rounded-2xl p-6 flex flex-col justify-between shadow-xl",
       "data_testids": ["pyq-test-card", "pyq-card-title", "pyq-start-test-button", "pyq-view-result-button", "pyq-reattempt-button"]
     },
-    "SolutionNavigator": {
-      "style": "Dark modal or panel with step-by-step solution viewer, cropped image showcase, and AI review options",
-      "data_testids": ["solution-navigator", "solution-cropped-image", "solution-text-container"]
+    "ExamPlayer": {
+      "style": "min-h-screen bg-[#08080A] text-slate-100 flex flex-col",
+      "data_testids": ["exam-player-container", "question-timer", "question-palette", "option-radio", "save-next-button", "submit-test-button"]
+    },
+    "ResultsSolutions": {
+      "style": "py-10 px-6 max-w-7xl mx-auto space-y-8",
+      "data_testids": ["results-summary-card", "solution-tabs-header", "solution-item-card", "solution-cropped-image"]
     }
   },
-  "accessibility_and_testing": {
-    "data_testid_requirement": "MANDATORY on all buttons, tabs, input fields, test cards, and header links",
-    "keyboard_navigation": "Full focus states with rose ring indicators (focus:ring-rose-500)",
-    "screen_readers": "aria-label on test action buttons and tabs"
-  },
   "instructions_to_main_agent": [
-    "1. Replace generic mock test UI with the Date & Shift-wise PYQ Catalogue based on 25+ papers in Tejas 200.",
-    "2. Standardize global theme to Obsidian Black (#09090B) and Blood Red (#E11D48 / #991B1B) across all components.",
-    "3. Recreate the logo natively using SVG and Tailwind blood-red accents (avoid blurry or cropped image paste).",
-    "4. Ensure test cards dynamically display 'Start Test' for new papers, and 'View Result' + 'Attempt Again' for completed attempts.",
-    "5. Precision-map cropped solution images into the result solution navigator.",
-    "6. Ensure all interactive components include explicit data-testid attributes for E2E automated testing."
+    "1. Enforce sitewide Obsidian Black and Blood Red styling across index.css and App.css.",
+    "2. Render recreated Vector SVG Logo (JEELIVE.AI) matching the supplied asset aesthetics with zero blurred image crops.",
+    "3. Keep white/light background for source PDF math figures/images; NEVER color-invert them.",
+    "4. Fix selected Results/solution tabs hover contrast to APCA > 8:1 and add scroll-margin-top: 120px on review questions to prevent sticky nav overlap.",
+    "5. Ensure all data-testid attributes are preserved for automated test validation."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
     "Do not break existing exam player state machine, timing mechanisms, or score calculation engines.",
-    "Do not create unrequested features or rapid fire games unless already backed by existing backend APIs.",
-    "Always maintain strict high contrast text legibility (slate-100 on dark backgrounds) with APCA adherence.",
-    "Use proper React JS (.js / .jsx) components and ensure all tool modifications pass standard validation."
+    "Maintain strict text contrast and clean dark mode hierarchy across all routes.",
+    "Pass all tests and preserve existing data selectors."
   ]
 }

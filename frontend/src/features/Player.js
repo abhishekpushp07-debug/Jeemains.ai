@@ -165,7 +165,7 @@ export default function Player() {
                 : "Nonofficial practice"}
           </span>
         </div>
-        <span className="player-light-label" data-testid="player-light-mode">Light exam view</span>
+        <span className="player-light-label" data-testid="player-light-mode">Original source pages</span>
         <div
           className={
             "player-timer " +

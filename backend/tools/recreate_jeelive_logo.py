@@ -20,7 +20,7 @@ def trace(image, name, bounds):
     subprocess.run(['potrace', str(pbm), '-s', '-o', str(svg), '--turdsize', '4', '--alphamax', '1', '--opttolerance', '0.15'], check=True)
     root = ET.parse(svg).getroot()
     group = root.find('{http://www.w3.org/2000/svg}g')
-    group.set('fill', 'url(#emblem)' if name == 'symbol' else '#FAF7F5' if name == 'wordmark' else '#D0162D')
+    group.set('fill', '#EF3445' if name == 'symbol' else '#FAF7F5' if name == 'wordmark' else '#FF6974')
     fragment = ET.tostring(group, encoding='unicode')
     fragment = re.sub(r'ns\d+:', '', fragment)
     fragment = re.sub(r' xmlns:ns\d+="[^"]+"', '', fragment)

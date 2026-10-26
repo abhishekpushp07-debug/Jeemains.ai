@@ -1,0 +1,126 @@
+{
+  "api_cold_s": 4.473,
+  "api_warm_other_user_s": 0.009,
+  "gets_cold": 1,
+  "gets_warm": 0,
+  "api_concurrent4": {
+    "codes": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "wall_s": 4.505,
+    "gets": 1
+  },
+  "authz": [
+    404,
+    200,
+    404,
+    true,
+    null,
+    404,
+    404
+  ],
+  "revision": [
+    400,
+    "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Run the connection and content check again before starting.\"},\"meta\":",
+    200,
+    2,
+    200,
+    0.006
+  ],
+  "negatives": {
+    "foreign_file": [
+      [
+        400,
+        0,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region must belong to this set.\"},\"meta\":{"
+      ],
+      [
+        400,
+        0,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region must belong to this set.\"},\"meta\":{"
+      ]
+    ],
+    "bad_coords": [
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ],
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ]
+    ],
+    "invalid_page": [
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ],
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ]
+    ],
+    "bad_omit": [
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ],
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ]
+    ],
+    "missing_page_key": [
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ],
+      [
+        400,
+        1,
+        "{\"data\":null,\"error\":{\"code\":\"http_400\",\"message\":\"Source region is invalid. Check page and coordina"
+      ]
+    ]
+  },
+  "hash_mismatch": [
+    400,
+    {
+      "code": "http_400",
+      "message": "Source region is invalid. Check page and coordinates."
+    },
+    400,
+    400,
+    null,
+    null
+  ],
+  "missing_file": [
+    404,
+    404,
+    {
+      "code": "http_404",
+      "message": "This item is unavailable or does not exist."
+    },
+    {
+      "code": "http_404",
+      "message": "This item is unavailable or does not exist."
+    },
+    null
+  ],
+  "non_pyq": [
+    200,
+    197,
+    9.325
+  ],
+  "db_dropped": true,
+  "puts": []
+}

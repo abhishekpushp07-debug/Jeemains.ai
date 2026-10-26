@@ -13,6 +13,10 @@ Each grade drain handles at most16jobs by default; repeated events/15minute plat
 
 Safe release: code-only redeploy existing binding; no preview DB clone, seed overwrite, content import or credential changes. New endpoint/ledger metadata are additive, legacy ledgers unchanged. Stop on any lost acknowledgement, grade mismatch, key leakage, incompatible source record or rising503/timeouts. Restore previous code using platform checkpoint controls, never rewrite students' truth to make tests pass.
 
+## Measured PYQ device-check improvement — 2026-10-26
+Isolated141 measured real21Jan2026S1 original18.3MB/197uniqueq+solutionrefs: old8.62scold/197sourceGETcalls/197PDFopens; batch4.45scold/1GET/1PDFopen withall197regionsrendered andbyte-identicalPNG. WarmAPIseconduser0.009s; fourconcurrentcoldusers4.51swall/onevalidation/fourseparateuserreceipts. Across10Janpapers4.11–4.63scold. StorageGETboundaryusedlocaloriginalbytes, so theseareCPU/applicationmeasurementsNOTproductionnetwork/FleetSLOs. Cacheholds256content-addressedvalidationproofs, neveraccountpermission orpreflightrevision. Auth,availability,filemembership and per-userreceipts still enforced. Failuresnotcached; hashes/refs/policychangesmiss. Post141validationlocksseparatedfromassetlocks; pendingtargetedretestwiththemeQA. No capacityqualification implied.
+
+
 
 Authoritative workload: PDF05 pp3,46. No load certification is inferred from this preview.
 

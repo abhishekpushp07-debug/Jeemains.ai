@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 141: PYQ preflight batch validation (derivatives.validate_source_crops) perf + guard retest. All 46 backend cases passed in the isolated DB / no-DB harness, run in the foreground with no bridge running: 139 suite 12/12 (79s), 140 guards 7/7 (34s), NEW perf/guard 15/15, NEW API isolated 12/12. MEASURED on real 21 Jan 2026 S1 original PDF (18.3MB, 197 unique q+s refs, storage GET mocked to local bytes): OLD validate_refs loop cold 8.62s with get_object=197 fitz.open=197 renders=197 pixmaps=197; NEW cold 4.45s with get=1 open=1 renders=197 pixmaps=197 (every region rendered, about 1.94x faster); warm old 0.002s, new 0.001s with 0 calls. 4 concurrent cold: new 4.46s wall get=1 open=1 renders=197 (coalesced); old 8.57s get=197. All 10 Jan papers new cold 4.11-4.63s each, each get=1/open=1/renders=unique refs (191-201). API: cold preflight 4.47s with 1 GET; a second user reusing the proof took 0.009s with 0 GETs; 4 concurrent users 4.51s wall with 1 GET and 4 separate records. Shared-document render bytes are identical to independent renders. Frontend smoke via isolated bridge 8791 at 1920x800 and 390x844: the pyq-preflight-progress copy shows while pending, passes (4.97s / 4.43s cold, 0.16s warm), Start opens the real 75-question player with the source PNG drawn, no horizontal overflow (sw==cw), no blank page. Option behaviour unchanged (key 2 selects B, clicking D selects D, hint says 1-4). Numeric -05 saves; abc shows the pre-existing inline integer error. Cleanup: bridge stopped (DROPPED True), tejas_isolated_iter134 absent, storage PUTs [].",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/sets/{id}/preflight", "issue": "A source hash mismatch at preflight returns 400 'Source region is invalid. Check page and coordinates.' because CanonicalIntegrityError subclasses ValueError and preflight catches ValueError. Same status as the old validate_refs path (both 400, verified), so this is not a regression. The message is misleading compared with the 503 integrity_unavailable that asset routes return."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter141_preflight_perf.py",
+    "/app/backend/tests/test_iter141_preflight_api_isolated.py",
+    "/app/backend/tests/test_iter139_pyq_isolated.py",
+    "/app/backend/tests/test_iter140_reviewed_large_pages.py",
+    "/app/test_reports/pytest/iter141_perf.xml",
+    "/app/test_reports/pytest/iter141_api.xml",
+    "/app/test_reports/pytest/iter141_pyq139.xml",
+    "/app/test_reports/pytest/iter141_guards140.xml",
+    "/app/test_reports/iter141_preflight_perf_evidence.json",
+    "/app/test_reports/iter141_preflight_api_evidence.json"
+  ],
+  "action_items": [
+    "Optional: give validate_source_crops its own lock stripes, or a separate lock array. It currently holds one of the 32 locks shared with render_crop for about 4.4s on a cold validation, so roughly 1 in 32 cold student asset renders can wait behind it.",
+    "Optional: map CanonicalIntegrityError at preflight to the existing 503 integrity message instead of the coordinates message. This is pre-existing behaviour; keep it if parity is preferred.",
+    "Cold preflight is still about 4.4s and is dominated by 197 get_pixmap renders at .3 on 2479x3508pt pages. Further gains would need parallel rendering or an import-time proof. The UI waiting copy covers this today."
+  ],
+  "critical_code_review_comments": [
+    "The proof key is sha + sorted complete JSON refs + reviewed flag + version. Verified: any mutated rect, a subset, a new sha (integrity error), dropping source_collection or changing it to another value (3000pt guard ValueError), or a missing sha (not cacheable) all force a fresh validation. Ref order is irrelevant, which is correct.",
+    "The proof is content-addressed by the recorded sha. After a success in the process, storage bytes are not re-read at preflight (recorded as 'served from proof'). This matches the old render_crop cache, and asset renders at scale 2 still re-check the hash when cold.",
+    "Per-user permitted/status/expiry runs before any proof use. With the proof warm: a restricted non-allowed user gets 404 and their existing record is unchanged, a new user gets 404 with no record, draft gives 404, expired gives 404.",
+    "Set-file membership is checked for all refs before any storage GET: a foreign LAST ref gives 400 with 0 GETs and no write.",
+    "Minor nits: 'import json' inside the handler; the ByteCache 8KiB bound counts value bytes only (the key overhead is not counted, but the 256-entry bound was verified)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter141_preflight_perf.py",
+    "/app/backend/tests/test_iter141_preflight_api_isolated.py"
+  ],
+  "success_rate": {"backend": "100% (46/46)", "frontend": "100% (targeted smoke, 2 viewports)"},
+  "seed_data_creation": "None in customer DB. Isolated tejas_isolated_iter134 only (139 suite import, iter141 API fixture inserting the 21 Jan S1 set/file plus a TEST_mock141 copy, and the bridge's real step import). All dropped; verified absent at end. No storage PUTs, no AI, no owner login.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run in the foreground in /app/backend/tests with -n0 -p no:cacheprovider: test_iter139_pyq_isolated.py (~80s), test_iter140_reviewed_large_pages.py (~34s), test_iter141_preflight_perf.py (~158s, no DB; counts get_object/fitz.open/_render_crop_png/get_pixmap), test_iter141_preflight_api_isolated.py (~56s, isolated DB, imports the 139 harness). Never run them while iso_bridge_pyq_iter139.py is running. The preflight hash-mismatch status is 400 on both the PYQ and non-PYQ paths (CanonicalIntegrityError is a ValueError). Missing file gives 404 on both paths with the same error body. The bridge takes about 20s to import 30 papers; stop it with pkill -INT so it prints DROPPED True.",
+  "rca of the issue": "The old cold preflight (about 8.6s) re-read, re-hashed and re-opened the 18MB PDF for each of the 197 unique refs (197 GETs and 197 fitz.open). The new batch does one GET, one sha check and one fitz Document, then renders all 197 regions, measured at 4.45s. The remaining cost is pixmap rendering."
+}

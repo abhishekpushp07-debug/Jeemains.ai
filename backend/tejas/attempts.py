@@ -183,6 +183,7 @@ async def preflight(id: str, data: dict, u=Depends(current)):
                     unique_refs.append(ref)
     if s.get('test_kind') == 'pyq':
         from .derivatives import validate_source_crops
+        from .canonical import CanonicalIntegrityError
         grouped = {}
         for ref in unique_refs:
             fid = ref.get('file_id')
@@ -193,6 +194,8 @@ async def preflight(id: str, data: dict, u=Depends(current)):
             source = await get(files, fid)
             try:
                 await run_in_threadpool(validate_source_crops, source, refs)
+            except CanonicalIntegrityError:
+                raise HTTPException(503, 'The original source could not be verified. Please try again later; the timer has not started.')
             except (ValueError, KeyError, TypeError):
                 raise HTTPException(400, 'Source region is invalid. Check page and coordinates.')
     else:

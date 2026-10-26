@@ -93,11 +93,10 @@ class Boundary extends React.Component {
 function Shell() {
   const loc = useLocation();
   const player = loc.pathname.startsWith("/attempts/");
-  const lightWorkspace = /^\/(attempts|results|sets)\//.test(loc.pathname);
   useLayoutEffect(() => {
-    document.documentElement.classList.toggle('exam-light', lightWorkspace);
-    return () => { document.documentElement.classList.remove('exam-light'); };
-  }, [lightWorkspace]);
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('exam-light');
+  }, []);
   useEffect(() => {
     if (!loc.hash) window.scrollTo(0, 0);
   }, [loc.pathname, loc.hash]);

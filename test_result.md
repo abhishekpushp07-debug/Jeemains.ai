@@ -1,3 +1,11 @@
+# Theme142 final QA pending — 2026-10-26
+premium_theme142:
+  scope: "Userapprovedlastphase: sitewideblack/bloodred notblue. Existingvibrant-ui.cssfinaloverridescoverShadcnhslvars,pagecards/menus/login/hero/Homeexamcards/flagship/seriesstreak/PYQ/player/results/analytics/studiowithsemanticgreenamberstatus. SourcePDFimgsandcanvasoriginalwhiteNOTinverted. Reference-basedSVGvectorpathsnoembeddedbitmapreplacesSharedLogo,newfavicon;rootHTMLdarkandShellnoexam-light,ThemeToggleUIremoved(blacksite) butnoauthlogicchanges."
+  check: "Both1920x800+390x844 login/landing/home/JEECatalogue/BITSAT/COMEDKmocks/chapters/preflightrealimageplayer/resultalltabs/solution&enlarge/profile/series/studio/menus/dialogs. Inspectcomputedbluehardcodes/whitecards/darktextunreadable; finalCSSmustwinlegacyspecificity. SelectedResults/subjecttabhoverfixedwhiteonbloodred,solutionheading scrollmargin190desktop90mobile. SVGcircuitJshape/wordmark/taglinesameprovidedreference(notdesignagentgenericchevron); actualgeneratedassetsmustload. FontFigtreepreserved. No gameplay/newbackend."
+  backend_followups: "Since141twoverysmallchanges: separate_validation_locks fromasset_locks(predictable4shead-of-lineavoidance); PYQhashmismatchnow503honestoriginalcouldnotbeverified/timernotstarted ratherthan400coordinateerror. Updateexpectationin141APItests+testfailclosed/nowrite; testindependentassetdoesnotwaitonvalidationstripe. Baseline14146casespassed. Noactualtestsrunafterthese2changesyet."
+  safety: "OperationalpreviewNOW30PYQ2250Q90recordsrealimportcomplete, NOQAoncustomerDB. Onlyisolatedbridgeanddb. NoAIcalls. Pendingdatareset/privatebackup/livepublicationAFTERfinalQA. Referencefilesget_assetsOct26logo+appshots. Remaining650nearblanksourcecontinuationsareoptionalprecisioncleanupnotnewregression;don'tblinddrop."
+
+
 # PYQ performance141 — 2026-10-25
 pyq141:
   baseline: "140 allfunctionalpassed; Janpreflightcold~9secondswith195repeatedPDFopens. OperationalPREVIEWimportnowCOMPLETE30papers2250Q90records; DONOTusecustomerDBfortests."
