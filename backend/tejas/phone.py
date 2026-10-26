@@ -1,11 +1,13 @@
 import hashlib
+import ipaddress
+import logging
 from datetime import datetime, timezone, timedelta
 import phonenumbers
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import Field
 from starlette.concurrency import run_in_threadpool
 from pymongo import ReturnDocument
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, PyMongoError
 from .db import db, uid, now
 from .auth import current, hashpw, new_session, verify
 from .documents import BaseDocument
@@ -45,24 +47,34 @@ def normalize_phone(raw):
 async def limit_pin(phone, request, action):
     stamp = now()
     window = int(stamp // 900)
-    ip = request.client.host if request.client else 'unknown'
-    for identity, maximum in [(f'{action}:number:{phone}', 5), (f'pin:ip:{ip}', 60)]:
+    checks = [(f'{action}:number:{phone}', 5)]
+    try:
+        peer = ipaddress.ip_address(request.client.host) if request.client else None
+    except ValueError:
+        peer = None
+    if peer and peer.is_global:
+        checks.append((f'pin:ip:{peer.compressed}', 60))
+    account_key = hashlib.sha256(f'{checks[0][0]}:{window}'.encode()).hexdigest()
+    for identity, maximum in checks:
         key = hashlib.sha256(f'{identity}:{window}'.encode()).hexdigest()
         count = await increment(db.tejas_phone_limits, key, datetime.now(timezone.utc) + timedelta(minutes=30))
         if count > maximum:
             raise HTTPException(429, 'Too many attempts. Please wait before trying again.',
                                 headers={'Retry-After': str(max(1, int((window + 1) * 900 - stamp) + 1))})
+    return account_key
 
 
 @router.post('/phone')
 async def access(data: PhonePayload, request: Request, response: Response):
     phone = normalize_phone(data.phone)
-    await limit_pin(phone, request, 'login')
+    limit_key = await limit_pin(phone, request, 'login')
     u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0})
     if not u or not u.get('pin_hash') or not await run_in_threadpool(verify, data.pin, u['pin_hash']):
         raise HTTPException(401, 'Mobile number or PIN is incorrect. Older profiles must set a PIN from their existing signed-in session.')
     await db.tejas_phone_profiles.update_one({'id': u['id']}, {'$set': {'last_seen_at': now()}})
-    return await new_session(u, response)
+    result = await new_session({**u, 'role': 'student', 'access_type': 'unverified_phone'}, response)
+    await db.tejas_phone_limits.delete_one({'_id': limit_key})
+    return result
 
 
 @router.post('/phone/signup')
@@ -98,4 +110,10 @@ async def change_pin(data: PinChangePayload, request: Request, response: Respons
         raise HTTPException(409, 'Your account changed. Sign in again before changing the PIN.')
     from .db import audit
     await audit(u['id'], 'student_pin_changed', u['id'])
-    return await new_session(updated, response)
+    result = await new_session({**updated, 'role': 'student', 'access_type': 'unverified_phone'}, response)
+    try:
+        await db.tejas_sessions.delete_many({'user_id': u['id'], 'access_type': 'unverified_phone', '$or': [
+            {'pin_version': {'$lt': updated['pin_version']}}, {'pin_version': {'$exists': False}}]})
+    except PyMongoError:
+        logging.getLogger(__name__).warning('Stale PIN sessions remain fenced; physical cleanup deferred to expiry.')
+    return result

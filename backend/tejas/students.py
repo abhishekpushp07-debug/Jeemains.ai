@@ -33,7 +33,7 @@ async def list_students(response: Response, page: int = Query(1, ge=1, le=10000)
     digits = re.sub(r'[^+0-9]', '', q)
     query = {'phone': {'$regex': re.escape(digits)}} if digits else {}
     total = await db.tejas_phone_profiles.count_documents(query)
-    records = await db.tejas_phone_profiles.find(query, {'id': 1, 'phone': 1}).sort('id', 1).skip((page - 1) * 50).limit(50).to_list(50)
+    records = await db.tejas_phone_profiles.find(query, {'id': 1, 'phone': 1}).sort([('phone', 1), ('id', 1)]).skip((page - 1) * 50).limit(50).to_list(50)
     items = []
     for raw in records:
         record = StudentRecord.from_mongo(raw)

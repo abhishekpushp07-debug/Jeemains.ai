@@ -29,6 +29,7 @@ export default function Auth({ staff = false }) {
   const [busy, setBusy] = useState(false);
   async function submit(e) {
     e.preventDefault();
+    if (signup && pin !== confirmPin) { setError('PINs must match.'); return; }
     setBusy(true);
     setError("");
     try {

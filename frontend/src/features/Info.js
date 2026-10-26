@@ -78,7 +78,8 @@ export default function Info() {
             The normalized phone number, a securely hashed PIN, entry acknowledgement, essential
             session records, exam preference, answers, attempt deadlines,
             results and report-processing records. Staff accounts separately
-            store email and a securely hashed password. We do not collect
+            store email and a securely hashed password. The owner can view registered
+            student mobile numbers in a private directory. We do not collect
             payment details, send OTPs or use advertising trackers.
           </p>
           <h2>Session boundaries</h2>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="27" time="12.017" timestamp="2026-10-26T16:09:31.129504+00:00" hostname="agent-env-b5db9c85-491c-49ae-8045-4d4ad3e55f9b"><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_normalizes_bcrypt_no_leak_and_cookies" time="1.517" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload0-422]" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload1-422]" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload2-422]" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload3-422]" time="0.001" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload4-422]" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload5-422]" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload6-422]" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload7-422]" time="0.001" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload8-422]" time="0.001" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_signup_invalid_inputs_rejected[payload9-422]" time="0.001" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_leading_zero_pin_and_duplicate_and_legacy_not_claimable" time="0.473" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_login_wrong_pin_and_correct_pin" time="0.458" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_account_rate_limit_429_retry_after" time="0.022" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_successful_logins_count_toward_account_limit" time="1.191" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_ip_rate_limit_60" time="0.211" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_pin_change_permissions" time="0.921" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_pin_change_revokes_old_sessions_and_new_cookie_works" time="1.160" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_concurrent_pin_changes_cas" time="0.787" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_delayed_old_login_session_rejected" time="0.011" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_legacy_session_enrolls_pin_without_id_change" time="0.470" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_student_role_forced_even_if_profile_field_tampered" time="0.473" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_legacy_profile_without_access_type_field_can_set_pin" time="0.470"><failure message="assert (401 == 200)&#10; +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code">def test_legacy_profile_without_access_type_field_can_set_pin():
+        async def go():
+            fresh_window()
+            from datetime import datetime, timezone, timedelta
+            legacy = num(); lid = str(uuid.uuid4())
+            await TDB.tejas_phone_profiles.insert_one({'_id': lid, 'id': lid, 'phone': '+91' + legacy, 'name': 'Learner', 'created_at': 0})
+            old_sid = str(uuid.uuid4())
+            await TDB.tejas_sessions.insert_one({'id': old_sid, 'user_id': lid, 'access_type': 'unverified_phone',
+                                                 'expires_at': datetime.now(timezone.utc) + timedelta(days=1)})
+            async with client() as c:
+                u = {'id': lid, 'access_type': 'unverified_phone'}
+                c.cookies.set('access_token', auth.token(u, old_sid, 'access', 600), domain='api.test.example')
+                assert (await c.get('/api/auth/me')).status_code == 200
+                r = await c.post('/api/auth/pin', json={'phone': legacy, 'new_pin': '0660', 'confirm_pin': '0660'})
+                doc = await TDB.tejas_phone_profiles.find_one({'id': lid})
+                print('legacy-no-access_type change -&gt;', r.status_code, r.text[:160], 'db pin_version', doc.get('pin_version'))
+                CTX['legacy_noat'] = r.status_code
+            async with client() as c:
+                r2 = await c.post('/api/auth/phone', json={'phone': legacy, 'pin': '0660'})
+                print('legacy-no-access_type login -&gt;', r2.status_code, r2.text[:160])
+            assert r.status_code == 200 and r2.status_code == 200
+&gt;       run(go())
+
+test_iter154_pin_auth_isolated.py:345: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.11/asyncio/base_events.py:654: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def go():
+        fresh_window()
+        from datetime import datetime, timezone, timedelta
+        legacy = num(); lid = str(uuid.uuid4())
+        await TDB.tejas_phone_profiles.insert_one({'_id': lid, 'id': lid, 'phone': '+91' + legacy, 'name': 'Learner', 'created_at': 0})
+        old_sid = str(uuid.uuid4())
+        await TDB.tejas_sessions.insert_one({'id': old_sid, 'user_id': lid, 'access_type': 'unverified_phone',
+                                             'expires_at': datetime.now(timezone.utc) + timedelta(days=1)})
+        async with client() as c:
+            u = {'id': lid, 'access_type': 'unverified_phone'}
+            c.cookies.set('access_token', auth.token(u, old_sid, 'access', 600), domain='api.test.example')
+            assert (await c.get('/api/auth/me')).status_code == 200
+            r = await c.post('/api/auth/pin', json={'phone': legacy, 'new_pin': '0660', 'confirm_pin': '0660'})
+            doc = await TDB.tejas_phone_profiles.find_one({'id': lid})
+            print('legacy-no-access_type change -&gt;', r.status_code, r.text[:160], 'db pin_version', doc.get('pin_version'))
+            CTX['legacy_noat'] = r.status_code
+        async with client() as c:
+            r2 = await c.post('/api/auth/phone', json={'phone': legacy, 'pin': '0660'})
+            print('legacy-no-access_type login -&gt;', r2.status_code, r2.text[:160])
+&gt;       assert r.status_code == 200 and r2.status_code == 200
+E       assert (401 == 200)
+E        +  where 401 = &lt;Response [401 Unauthorized]&gt;.status_code
+
+test_iter154_pin_auth_isolated.py:344: AssertionError</failure></testcase><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_admin_students_access_matrix_and_allowlist" time="0.791" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_staff_login_cors_and_contracts" time="0.649" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_zz_no_real_handles_and_no_puts" time="0.002" /><testcase classname="tests.test_iter154_pin_auth_isolated" name="test_staff_rotation_gate_still_works_and_student_unaffected" time="1.157" /></testsuite></testsuites>
