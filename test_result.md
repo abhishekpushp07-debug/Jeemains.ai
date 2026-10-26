@@ -1,3 +1,12 @@
+# QA162 complete — publishing protected reset + UI — 2026-10-26
+owner_home_preflight162:
+  result: "AllfunctionalPASS;14backend+realisolatedownerUI;full4cardhitnavigation/shortcuts/keyboard/newtab;boxedpreflightrecheckfailureblocksstart;0overflow1920/390"
+  limits: "Optionalexistingserieshubduplicatevisiblelinkand18pxstreak-errorretryretained. TargetactualPINnotchangedyet; productioncredentialoperationonlyafterliveendpointconfirmed."
+  cleanup: "AlltestDBs+temporarycredentialsdeleted; noactualtargetsecretusedinQA."
+  publish: "Sendingonecode-onlydeployment latest162snapshot; waitnotification no poll/duplicate."
+  next: "ActualowneroperationalPOST/api/auth/owner/student-pin-reset foruserrequestedtarget,strictCASdirectoryexpectedversion; neverprintPIN/userdump. Verifyreceipt+version+sameID thenlogoutonlyoperationalowner."
+
+
 # QA161 follow-up fixes — 2026-10-26
 qa161_followup:
   passed: "11ownerreset+27auth154+15limit156+11auth155 allpass, actualisolatedownerUI fullreset oldPINrejectnewsamelogin, fullhomehit/keyboard/newtab/shortcuts andpreflightgating/PYQregressionpassed"

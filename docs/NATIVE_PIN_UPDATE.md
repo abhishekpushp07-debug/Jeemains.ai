@@ -1,5 +1,12 @@
 # Native app PIN update — publication handoff
 
+## Owner-reset update — 2026-10-26
+New protected POST /auth/owner/student-pin-reset is for an existing authorised owner only, never a student/public recovery route. Request fields: phone,new_pin,confirm_pin,expected_pin_version. The owner-only /admin/students projection now includes pin_version alongside id and phone for stale-write protection. Successful reset preserves studentID/history, increments PINversion and revokes old student sessions, without creating a student session for the owner. 409 means refresh directory and confirm the request again; never blindly retry. No OTP or payment integration. This code passed isolated QA161/162 and is being published; confirm the live schema before using it. Older ZIPs remain dated snapshots.
+
+Home UI update: whole-card links go to /exams/jee-main,/exams/bitsat,/exams/comedk and /series/all-india-jee; inner PYQ/mock/chapter/result links retain their own destinations. Preflight Check my device now has a boxed Click here action; the actual device-check/consent/start contracts are unchanged.
+
+
+
 Use this guide with the confirmed post-deployment PIN ZIP, not the older phone-only handoff.
 
 Canonical API remains https://jeelive.ai/api. Keep all current user IDs, profiles, attempts, answers and results. Rapid Fire remains separate. Do not create a new database or re-register existing users to solve login failures. No payments or OTP are part of this update.
