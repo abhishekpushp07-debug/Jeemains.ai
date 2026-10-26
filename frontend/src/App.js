@@ -174,9 +174,9 @@ function Shell() {
             <Route
               path="*"
               element={
-                <Empty title="This page isn’t here">
+                <div className="container page" data-testid="not-found-page"><Empty title="This page isn’t here">
                   Use Explore exams to find an available practice set.
-                </Empty>
+                </Empty></div>
               }
             />
           </Routes>

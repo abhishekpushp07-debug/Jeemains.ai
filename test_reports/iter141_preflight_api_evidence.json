@@ -1,6 +1,6 @@
 {
-  "api_cold_s": 4.473,
-  "api_warm_other_user_s": 0.009,
+  "api_cold_s": 4.461,
+  "api_warm_other_user_s": 0.008,
   "gets_cold": 1,
   "gets_warm": 0,
   "api_concurrent4": {
@@ -10,7 +10,7 @@
       200,
       200
     ],
-    "wall_s": 4.505,
+    "wall_s": 4.49,
     "gets": 1
   },
   "authz": [
@@ -28,7 +28,7 @@
     200,
     2,
     200,
-    0.006
+    0.009
   ],
   "negatives": {
     "foreign_file": [
@@ -93,16 +93,17 @@
     ]
   },
   "hash_mismatch": [
-    400,
-    {
-      "code": "http_400",
-      "message": "Source region is invalid. Check page and coordinates."
-    },
-    400,
+    503,
+    "{'code': 'http_503', 'message': 'The original source could not be verified. Please try again later; the timer has not started.'}",
+    503,
     400,
     null,
-    null
+    1,
+    1,
+    true,
+    200
   ],
+  "lock_split": true,
   "missing_file": [
     404,
     404,
@@ -119,7 +120,7 @@
   "non_pyq": [
     200,
     197,
-    9.325
+    9.248
   ],
   "db_dropped": true,
   "puts": []

@@ -297,3 +297,13 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--focus-ring); outl
  .matched-solution,[data-testid^='solution-content-'] { scroll-margin-top:90px; }
 }
 
+
+.dark:not(.exam-light) .jeelive-tabs [role='tab'].jeelive-tab:not([data-state='active']):hover:not(:disabled),.dark:not(.exam-light) .exam-destinations a:not([aria-current='page']):hover,.dark:not(.exam-light) .filter-tabs button:not(.active):hover,.dark:not(.exam-light) .studio-tabs button:not(.active):hover,.dark:not(.exam-light) .segmented button:not(.active):hover { background:#28131A; color:#FFF; border-color:#94303E; }
+.recharts-legend-item-text { color:var(--text-muted)!important; }
+.import-state button,.library-error button,.text-link,.text-button { color:var(--brand-text); }
+@media(max-width:640px) { .player-question-area { padding-bottom:96px; }.player-question-area input[type='text'] { scroll-margin-bottom:140px; } }
+
+.jeelive-button[data-ui-variant='link'] { color:var(--brand-text); }
+.jeelive-button[data-ui-variant='link']:hover { color:#FFA0A8; }
+
+

@@ -148,6 +148,7 @@ export function Confirm({
         </DialogDescription>
         <div className="button-row">
           <Button
+            variant="outline"
             className="btn btn-secondary"
             data-testid="confirm-cancel"
             onClick={onClose}

@@ -1,5 +1,17 @@
 export const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 let refreshing;
+let studioActive = 0;
+const studioWaiters = [];
+async function fetchStudioRead(url, options) {
+  if (studioActive >= 3) await new Promise(resolve => studioWaiters.push(resolve));
+  else studioActive += 1;
+  try {
+    return await fetch(url, options);
+  } finally {
+    if (studioWaiters.length) studioWaiters.shift()();
+    else studioActive -= 1;
+  }
+}
 export async function api(path, options = {}, retry = true) {
   const headers =
     options.body instanceof FormData
@@ -7,7 +19,8 @@ export async function api(path, options = {}, retry = true) {
       : { "Content-Type": "application/json" };
   let res;
   try {
-    res = await fetch(API + path, {
+    const request = path.startsWith('/studio/') && (!options.method || options.method === 'GET') ? fetchStudioRead : fetch;
+    res = await request(API + path, {
       ...options,
       headers: { ...headers, ...options.headers },
       credentials: "include",

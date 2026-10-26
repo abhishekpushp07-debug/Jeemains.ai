@@ -405,6 +405,7 @@ export default function Player() {
                     inputMode="text"
                     aria-label="Integer answer"
                     data-testid="player-numerical-input"
+                    onFocus={e => { const input = e.currentTarget; if (window.innerWidth <= 640) window.setTimeout(() => { if (document.activeElement === input) input.scrollIntoView({block:'center', behavior:'auto'}); }, 250); }}
                     placeholder="e.g. 13440"
                     maxLength={30}
                     value={current.value || ""}

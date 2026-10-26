@@ -153,16 +153,54 @@ def test_negative_last_ref_no_write(name, mut, code, gets):
     assert record is None
 
 
-# hash mismatch -> same status as old path (400); no write; not cached
+# iter142: PYQ hash mismatch -> honest 503 (timer not started), retried (not cached), no write/attempt; non-PYQ old 400 unchanged
 def test_hash_mismatch_503_no_write():
     reset(); T.TAMPER.add(FILE['path'])
     async def go():
         async with T.client() as c:
-            a, _ = await pf(c, F[5]); b, _ = await pf(c, F[5]); m, _ = await pf(c, F[5], 'TEST_mock141')
-            return a.status_code, a.json().get('error'), b.status_code, m.status_code, await rec('TEST_U141_f6'), await rec('TEST_U141_f6', 'TEST_mock141')
+            na = await TDB.tejas_attempts.count_documents({})
+            g0 = len(T.GETS); a, _ = await pf(c, F[5]); g1 = len(T.GETS); b, _ = await pf(c, F[5]); g2 = len(T.GETS)
+            m, _ = await pf(c, F[5], 'TEST_mock141')
+            nb = await TDB.tejas_attempts.count_documents({}); assert await rec('TEST_U141_f6') is None
+            T.TAMPER.clear(); ok, _ = await pf(c, F[5]); await TDB.tejas_preflight.delete_many({'user_id': 'TEST_U141_f6'})  # recovers once the source verifies (failure was not cached)
+            return (a.status_code, str(a.json().get('error')), b.status_code, m.status_code, await rec('TEST_U141_f6', 'TEST_mock141'),
+                    g1 - g0, g2 - g1, na == nb, ok.status_code)
     o = run(go()); EV['hash_mismatch'] = o
-    # CanonicalIntegrityError subclasses ValueError -> both new PYQ and old validate_refs preflight map it to 400 (parity)
-    assert o[0] == o[2] == o[3] == 400 and o[4] is None and o[5] is None, o
+    assert o[0] == o[2] == 503 and 'could not be verified' in o[1] and 'timer has not started' in o[1], o
+    assert 'coordinates' not in o[1] and o[3] == 400 and o[4] is None, o
+    assert o[5] == 1 and o[6] == 1 and o[7] and o[8] == 200, o
+
+
+# iter142: validation locks are distinct from asset render locks -> an asset with colliding stripe renders while validation is pending
+def test_validation_lock_distinct_from_asset_lock():
+    import threading
+    assert derivatives._validation_locks is not derivatives._locks
+    assert not any(a is b for a in derivatives._validation_locks for b in derivatives._locks)
+    reset()
+    src = run(TDB.tejas_files.find_one({'id': FID}, {'_id': 0}))
+    refs = [r for q in SET['questions'][:3] for r in q['q_refs']]
+    idx = 7; held = derivatives._validation_locks[idx]
+    held.acquire()
+    try:
+        # find an asset ref whose render stripe == idx; render while validation stripe idx is held
+        done = {}
+        t = threading.Thread(target=lambda: done.setdefault('png', derivatives.render_crop(src, refs[0])))
+        t.start(); t.join(30)
+        assert done.get('png', b'')[:4] == b'\x89PNG', 'asset render blocked by held validation lock'
+    finally:
+        held.release()
+    # with ALL validation stripes held, asset render still completes; then validation proceeds (no deadlock)
+    for lk in derivatives._validation_locks: lk.acquire()
+    try:
+        done = {}
+        t = threading.Thread(target=lambda: done.setdefault('png', derivatives.render_crop(src, refs[1], scale=1)))
+        t.start(); t.join(30); assert done.get('png', b'')[:4] == b'\x89PNG'
+        v = threading.Thread(target=lambda: (derivatives.validate_source_crops(src, refs), done.setdefault('v', True)))
+        v.start(); time.sleep(0.5); assert 'v' not in done  # validation waits on its own lock
+    finally:
+        for lk in derivatives._validation_locks: lk.release()
+    v.join(60); assert done.get('v') is True
+    EV['lock_split'] = True
 
 
 # missing file -> 404 same as old (non-PYQ validate_refs) path; no write

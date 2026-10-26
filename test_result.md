@@ -1,3 +1,9 @@
+# Theme143 targeted retest — 2026-10-26
+fixes142:
+  pending: "Strongdarkprefixedinactivehover/#28131Awhite;canceloutline;legendmutedtext(linklegendredswatchretained),Retrylinkbrandtext;404container;mobileinputfocuscenterandbottomspace;api.jsGETonly/studioqueue3perbrowserprevent7parallelcontrol4overload. No auth/session/refreshlogicchanged."
+  retest: "Studio withouttesterSemaphore7initialGET200zero503newqueue<=3active;failureandabortqueuegatedreadsdrain,nonstudio/mutationunaffected. Targetdesktopmobileinactivehoverselectedhover/confirmhierarchy/legendRetrycontrast404gutters/numericinputfullyabovebarafterfocus andrealPNG. Previous14245backend+wholeUIpassedexceptthese. ExistingStudioassetcapabilityhold503retaineddeliberately, nofailasnewbug."
+
+
 # Theme142 final QA pending — 2026-10-26
 premium_theme142:
   scope: "Userapprovedlastphase: sitewideblack/bloodred notblue. Existingvibrant-ui.cssfinaloverridescoverShadcnhslvars,pagecards/menus/login/hero/Homeexamcards/flagship/seriesstreak/PYQ/player/results/analytics/studiowithsemanticgreenamberstatus. SourcePDFimgsandcanvasoriginalwhiteNOTinverted. Reference-basedSVGvectorpathsnoembeddedbitmapreplacesSharedLogo,newfavicon;rootHTMLdarkandShellnoexam-light,ThemeToggleUIremoved(blacksite) butnoauthlogicchanges."
