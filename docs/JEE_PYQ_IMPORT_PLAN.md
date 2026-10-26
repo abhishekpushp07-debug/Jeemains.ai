@@ -9,7 +9,7 @@ Replace only the JEE Main Mock section/entry labels with date-wise PYQ. Preserve
 - These samples are predominantly image-only. Ordinary PDF text extraction returns106/0/0 characters respectively, so existing text-anchor parser alone is insufficient.
 - Viewed headers state180minutes,75questions,25perPCM,300marks,20single-choice+5integer per subject, +4correct/-1wrong for both types. Need reconcile actual question coverage rather than assume all75 exist.
 - Two-column reading flow: left column then right, questions followed inline by Ans./Sol.; some questions/solutions span columns/pages. Do NOT assume leftcolumn=question/rightcolumn=solution. Crop originalmath/diagrams, never expose answerline in questionasset.
-- Remaining28files not yet downloaded; no question bank imported/published and no appUI changes yet. AI analysis summaries gave inconsistent numbering, so they are NOT canonical evidence.
+- Updated2026-10-25: all31originals downloaded;30completepapers mapped/source-reviewed, Jan23 2025S1missing48–50blocked. Approved30paper/2250questionprivatebundle built; isolatedQA140 passed. Authorizedoperationalpreviewimport inprogress; productionnotyetupdated. The chronologicalplan below is retained.
 
 ## Implementation sequence and acceptance gates
 

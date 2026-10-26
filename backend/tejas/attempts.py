@@ -170,8 +170,7 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     if not s["questions"]:
         raise HTTPException(400, "This set has no questions yet.")
     source_map = {}
-    # The same supplied key crop may be referenced by all 50 questions. Validate
-    # each exact source region once per request, never cache across users/releases.
+    # Per-user availability is checked before any immutable source validation reuse.
     unique_refs = []
     seen_refs = set()
     import json
@@ -182,7 +181,22 @@ async def preflight(id: str, data: dict, u=Depends(current)):
                 if identity not in seen_refs:
                     seen_refs.add(identity)
                     unique_refs.append(ref)
-    await validate_refs(s, {'q_refs': unique_refs, 's_refs': []}, source_map)
+    if s.get('test_kind') == 'pyq':
+        from .derivatives import validate_source_crops
+        grouped = {}
+        for ref in unique_refs:
+            fid = ref.get('file_id')
+            if fid not in s.get('file_ids', []):
+                raise HTTPException(400, 'Source region must belong to this set.')
+            grouped.setdefault(fid, []).append(ref)
+        for fid, refs in grouped.items():
+            source = await get(files, fid)
+            try:
+                await run_in_threadpool(validate_source_crops, source, refs)
+            except (ValueError, KeyError, TypeError):
+                raise HTTPException(400, 'Source region is invalid. Check page and coordinates.')
+    else:
+        await validate_refs(s, {'q_refs': unique_refs, 's_refs': []}, source_map)
     await db.tejas_preflight.update_one(
         {"user_id": u["id"], "set_id": id},
         {

@@ -259,8 +259,8 @@ def score_attempt(attempt):
     return score(attempt)
 
 
-def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False):
-    doc = validate_pdf(data, reviewed_large_pages=reviewed_large_pages)
+def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _document=None):
+    doc = _document if _document is not None else validate_pdf(data, reviewed_large_pages=reviewed_large_pages)
     p = ref["page"] - 1
     if p < 0 or p >= len(doc):
         raise ValueError("Source page is out of range.")

@@ -396,6 +396,30 @@ def test_jan2026_large_page_papers_preflight_and_assets():
     assert all(v[0] == 200 for v in o.values()), o
 
 
+def test_jan2026_start_render_question_and_solution_api():
+    # iteration 140: real API start -> question PNG -> submit -> results -> solution PNG for a large-page Jan paper
+    import fitz
+    pid = 'jee-main-pyq-2026-01-24-s1'
+    async def go():
+        async with client() as c:
+            a = await start(c, pid); res = {'n': len(a['questions'])}
+            q = a['questions'][25]
+            qa = await c.get(f"/api/attempts/{a['id']}/questions/{q['id']}/asset/question/0", headers=S)
+            res['q'] = (qa.status_code, qa.headers.get('content-type'))
+            if qa.status_code == 200:
+                pm = fitz.Pixmap(qa.content); res['q_dims'] = (pm.width, pm.height); (OUT / 'jan_q26.png').write_bytes(qa.content)
+            await c.post(f"/api/attempts/{a['id']}/submit", headers=S)
+            r = await results(c, a['id'])
+            sa = await c.get(f"/api/attempts/{a['id']}/questions/{q['id']}/asset/solution/0", headers=S)
+            res['s'] = (sa.status_code, sa.headers.get('content-type'))
+            if sa.status_code == 200:
+                pm = fitz.Pixmap(sa.content); res['s_dims'] = (pm.width, pm.height); (OUT / 'jan_q26_sol.png').write_bytes(sa.content)
+            return res
+    o = run(go()); EV['jan2026_render'] = o
+    assert o['n'] == 75 and o['q'] == (200, 'image/png') and o['s'] == (200, 'image/png'), o
+    assert o['q_dims'][0] <= 1601 and o['q_dims'][1] <= 2401 and o['s_dims'][0] <= 1601 and o['s_dims'][1] <= 2401, o
+
+
 def test_bonus_multikey_keyonly_dispositions():
     bonus_pid = 'jee-main-pyq-2026-01-22-s1'; multi_pid = next(s['id'] for s in SETS if any(q['disposition'] == 'multiple_accepted' for q in s['questions']))
     keyonly_pid = 'jee-main-pyq-2025-01-22-s1'

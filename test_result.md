@@ -1,3 +1,10 @@
+# PYQ performance141 — 2026-10-25
+pyq141:
+  baseline: "140 allfunctionalpassed; Janpreflightcold~9secondswith195repeatedPDFopens. OperationalPREVIEWimportnowCOMPLETE30papers2250Q90records; DONOTusecustomerDBfortests."
+  implementation: "attempts.preflight PYQ-only groupsunique refs byfile AFTERpermitted checks andfilemembership, fetchesfile once andcalls derivatives.validate_source_crops inthreadpool. Validateshashonce/openPDFonce/rendersEVERYunique q+solutioncrop .3 viaexisting_renderer with optional_document. Successfulimmutableproof keyedSHA+complete sortedrefset+policy,8KiB32bytevalues=256entriesmax,stripedlock coalescing. Noauth/permissions/session/callerpreflight/revision cached. Failedvalidationnotcached. Ordinarytests useunchangedvalidate_refs. SetDetailhonestfirstcheckwaitingnotice."
+  tests_needed: "Isolated141 measuredoldrepeatPDF-render vs newbatch cold/warm/singleflight small4parallel, exactcountsallrefsincludinginvalidLAST/foreignfile/keytamper/omission/pagegeometry; distinctrefs/sourcepolicy/hashcachemiss; revisedpublication&2usersstillpassauth,writeownpreflight,notcrossuserproof. Run139flowcases+140guards once, noheavyload. FrontendonePYQpreflight/playerdesktopmobile+waitingnotice, nofullrepeatedallUI. CustomerDBuntouched."
+
+
 # PYQ follow-up140 — 2026-10-25
 pyq139_fix:
   report: "139 10/11 plusAprilUIpasses; largeJanPDF3000ptguardcriticalreproduced. Bridgecleaned/isolatedDBabsentconfirmed."

@@ -1,0 +1,48 @@
+{
+  "summary": "Retested the iteration-139 blocker: large January 2026 pages (2479x3508pt) are now accepted only for reviewed sources, and the fix works. Backend: the 139 suite now has 12 cases (11 existing plus 1 new January start/render/solution API case) and all 12 passed in 146s. A new 7-case guard suite passed in 34s (iter140_reviewed_large_pages). All 10 January papers return 200 at preflight. A real January paper (24 Jan S1) starts with 75 questions, returns the Q26 question PNG (1601x1207), submits, and returns the solution PNG (1491x2401). The guards work: ordinary uploads still stop at 3000pt; pages over 4000pt are rejected even for reviewed sources; large PDFs without the reviewed label or sha are rejected; a hash mismatch raises CanonicalIntegrityError; reusing a cached render does not let an untrusted source through (both caches tested). I rendered every cropped region type at preflight scale and a sample at full scale for all 10 papers (1959 unique regions). The largest output was 1601x2401, inside the allowed 1px rounding. I looked at Q26 question and solution images: readable. Frontend, through the isolated bridge on port 8791 using routing that is for testing only: desktop 1920x800 and mobile 390x844 both passed. I selected the 2026 tab and a January date (card date letter-spacing normal), preflight passed, the real 75-question player opened with readable source images, the hint and shortcut label say 1–4, option labels are 1/2/3/4, key '2' selects B, the old 'c' shortcut still selects C, clicking option 4 selects D, keys are ignored while the Next button or the numeric input has focus, saves succeeded, resume kept answers, and submit led to results. On 22 Jan S1, Q39 (withdrawn, key only) shows the key-only notice and the withdrawn warning, and its solution PNGs load. Score was 2 (bonus +4, two wrong -2). The mobile results show printed labels (response 1, accepted 3) and a real solution image with 0 horizontal overflow. The SetDetail description is the new PYQ text. BITSAT and COMEDK home cards and hubs still say 'Mock Tests' and their /mocks routes work. The JEE hub says PYQ Papers, /exams/jee-main/chapters is unchanged, and /exams/jee-main/mocks redirects to /pyq. No API call returned 400 or higher, and no storage writes happened.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/sets/{id}/preflight (Jan2026 papers)", "issue": "About 9s per January paper on a cold cache in the isolated run, because it renders about 195 regions from the large pages at scale 0.3. The derivative cache (48MB) makes repeat runs fast, but the first student for each paper will wait. Worth warming the cache after import or showing a progress message."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Results tabs (result-view-*) and solution subject tabs (solution-subject-*)", "issues": ["Hovering a selected tab shows white text (rgb 255,255,255) on a pale background (e.g. rgb(246,227,231) on Solutions). Contrast is about 1.2:1 and the label almost disappears. The non-hover selected state is fine (white on solid colour)."]},
+      {"screen": "Results selected-question solution panel", "issues": ["After scrolling the solution into view, the sticky result-destinations bar (top:76px) covers the 'Supplied answer key · QN' heading. Add scroll-margin-top to the solution section."]},
+      {"screen": "Source crops (content quality, not a regression)", "issues": ["About 650 cropped regions across all 30 papers are near-blank slivers under 40pt tall with less than 1% ink. They are mostly page-top continuation crops in solutions (2026-01: 219 solution and 11 question crops; 2026-04: 171+8; 2025-04: 194+12; 2025-01: 36+1). Example: 22 Jan S1 Q39 solution/1 is 1601x24 px and shows only a '-'. Each one appears as an empty 'Enlarge' image card in results, and question crops can appear in the player. Consider dropping or merging crops with no ink at import time."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter139_pyq_isolated.py",
+    "/app/backend/tests/test_iter140_reviewed_large_pages.py",
+    "/app/test_reports/pytest/iter140_pyq139.xml",
+    "/app/test_reports/pytest/iter140_guards.xml",
+    "/app/test_reports/iter139_pyq_evidence.json"
+  ],
+  "action_items": [
+    "Optional: fix hover contrast on selected Tabs in .result-destinations and the solution subject tabs (keep text colour readable on hover).",
+    "Optional: add scroll-margin-top to solution-content sections so the sticky result bar does not cover the heading.",
+    "Optional: filter out near-blank sliver crops (ink < 1%, height < 40pt) from q_refs/s_refs in the PYQ bundle.",
+    "Optional: warm the derivative cache for the January papers after the operational import, or show a progress message during preflight (about 9s cold)."
+  ],
+  "critical_code_review_comments": [
+    "derivatives.render_crop treats a source as reviewed when source_collection == 'jee-pyq-written' and a sha256 is present. Hash verification happens before rendering, and the cache identity includes reviewed_large_pages and render version 2. Only tools/upload_jee_pyq_sources.py and the hash-verified PYQ bundle set source_collection; content.py, chapter_books.py and imports.py file records never accept it from users, so there is no path for a user to self-label. For extra safety, the reviewed check could also require the sha to appear in the bundle manifest.",
+    "validate_pdf default (3000pt) is unchanged for content uploads and segment_pdf; the 4000pt limit is only used when the caller passes reviewed_large_pages explicitly.",
+    "Numeric input is type=text with no client-side filter: typing 'm' or '2' into the focused input adds characters ('12m2'). Shortcuts correctly pause there; whether the server accepts or normalizes non-integer drafts was not tested this iteration."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter139_pyq_isolated.py (added test_jan2026_start_render_question_and_solution_api)",
+    "/app/backend/tests/test_iter140_reviewed_large_pages.py (new, 7 guard cases)"
+  ],
+  "app_code_changes_by_tester": false,
+  "success_rate": {"backend": "100% (12/12 iter139 suite + 7/7 guard suite)", "frontend": "100% functional (desktop and mobile January flows, BITSAT/COMEDK/JEE route labels); 3 minor design/content notes"},
+  "mocked_api": "Test-only: X-Test-User auth bridge, plus storage GET mapped to the original local PDFs in /app/data/jee_pyq/source_audit (PUT forbidden; recorded PUTs = []). All other calls hit real FastAPI routes against the isolated DB tejas_isolated_iter134. No AI, no customer DB, no real credentials.",
+  "seed_data_creation": "Only in the isolated DB tejas_isolated_iter134: reviewed bundle imported through the real owner /api/studio/pyq-import/step, plus synthetic attempts. Pytest fixture dropped DB (db_dropped True); bridge stopped with SIGINT and printed DROPPED True; list_database_names shows no isolated or iter DB remaining. No bridge process running.",
+  "cleanup": "Bridge port 8791 stopped; isolated DB absent (verified). /tmp/iter139 and /tmp/iter140 hold rendered PNG evidence only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run suites in the foreground: `cd /app/backend/tests && python -m pytest test_iter139_pyq_isolated.py -n0 -p no:cacheprovider` (about 150s) and `test_iter140_reviewed_large_pages.py` (about 35s). Never run them while iso_bridge_pyq_iter139.py is running (same DB). UI bridging: page.route(BASE+'/api/**') -> route.fetch to http://127.0.0.1:8791 with header x-test-user: s. Selectors: pyq-year-2026, pyq-date-YYYY-MM-DD, pyq-start-<id>, preflight-run-check, preflight-acknowledge, set-preflight-start-button, player-option-<A-D> (click the input, not the label span), player-question-nav-N, player-navigator-toggle (mobile, needed before player-submit-button), result-view-solutions, solution-subject-physics, solution-question-N, solution-content-N, pyq-key-only-N, pyq-source-warning-N. 22 Jan S1 Q39 is the withdrawn key-only case. Full accuracy of all 2250 answers and accessibility text was not claimed or checked."
+}

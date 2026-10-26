@@ -102,6 +102,7 @@ export default function SetDetail() {
           <Field id="device-test-answer" label="Try entering an integer" placeholder="For example, 25" value={value} onChange={e => setValue(e.target.value)} />
           {user ? <>
             <Button variant="outline" className="btn btn-secondary full-width" data-testid="preflight-run-check" disabled={busy} onClick={check}>{busy ? <Loader2 className="spin" size={17} /> : checked ? <CheckCircle2 size={17} /> : <Wifi size={17} />}{checked ? 'Device check passed' : 'Check my device'}</Button>
+            {busy && !checked && s.test_kind === 'pyq' && <p className="muted" role="status" data-testid="pyq-preflight-progress">Checking the original question and solution pages. The first check may take a few seconds.</p>}
             {checked && <p className="device-check-success" role="status" data-testid="preflight-check-success">Connection check passed and browser storage is available. You can enlarge original source images during the attempt.</p>}
             <label className="checkbox-label" htmlFor="preflight-consent"><Checkbox id="preflight-consent" className="preflight-checkbox" data-testid="preflight-acknowledge" checked={confirmed} onCheckedChange={v => setConfirmed(v === true)} /><span>I can read the content and understand the rules and offline saving policy.</span></label>
             <ErrorBox error={error} />
