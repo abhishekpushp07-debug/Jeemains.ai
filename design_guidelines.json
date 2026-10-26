@@ -1,18 +1,23 @@
 {
-  "selected_theme": "Glossy Onyx with Royal Blue Platinum Hero & Distinct Metallic Exam Cards",
+  "selected_theme": "Glossy Onyx with Royal Blue Platinum Hero & Refined Distinct Metallic Exam Cards",
+  "user_choices": {
+    "bitsat": "BITSAT Bright Amber (FULL FACE orangish / black ink CTA)",
+    "comedk": "COMEDK Teal (Polished Onyx with Platinum Teal Button)",
+    "jee_main": "JEE Ruby Card UNCHANGED",
+    "hero_banner": "Royal Blue / Platinum Hero UNCHANGED",
+    "quality": "Polished, beautiful, professional SaaS app"
+  },
   "global_background": "#08080A",
-  "brand_primary": "#E63946",
   "hero_override": {
     "target": ".exam-home .flagship-banner",
     "theme": "Royal Blue + Platinum Polished Shining",
     "palette": {
       "base_bg": "linear-gradient(135deg, #06112E 0%, #0B1D4F 40%, #173273 75%, #0A1435 100%)",
       "platinum_sheen": "linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(226,232,240,0.15) 25%, rgba(255,255,255,0.0) 50%, rgba(203,213,225,0.2) 80%, rgba(255,255,255,0.4) 100%)",
-      "border_stroke": "linear-gradient(135deg, rgba(226,232,240,0.8), rgba(59,130,246,0.6), rgba(255,255,255,0.9))",
-      "box_shadow": "0 20px 50px rgba(11, 29, 79, 0.6), 0 0 30px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5)",
-      "badge_bg": "linear-gradient(90deg, #1E40AF, #3B82F6)",
-      "text_contrast": "#FFFFFF",
-      "subtext_color": "#CBD5E1"
+      "border_stroke": "1px solid rgba(132, 152, 192, 0.5)",
+      "box_shadow": "0 20px 50px rgba(11, 29, 79, 0.65), 0 0 35px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5)",
+      "text_contrast": "#F7FAFF",
+      "subtext_color": "#D7E2F3"
     }
   },
   "exam_cards": {
@@ -20,34 +25,65 @@
     "base_cohesion": "Glossy Onyx polished surface with 3D specular reflection highlight overlays and reflective borders",
     "cards_tint_blueprint": {
       "jee_main": {
-        "card_selector": ".exam-home .bold-exam-card[data-exam='jee-main'], .exam-home .bold-exam-card:nth-child(1)",
-        "identity_name": "Royal Ruby Platinum Onyx",
-        "bg_surface": "linear-gradient(145deg, #160709 0%, #0D0C10 50%, #20090D 100%)",
-        "tint_sheen": "linear-gradient(125deg, rgba(230,57,70,0.22) 0%, rgba(255,255,255,0.18) 30%, rgba(0,0,0,0) 60%, rgba(220,38,38,0.15) 100%)",
-        "border_color": "linear-gradient(135deg, rgba(230,57,70,0.7), rgba(255,255,255,0.4), rgba(153,27,27,0.8))",
-        "box_shadow": "0 12px 32px rgba(0,0,0,0.7), 0 0 20px rgba(230,57,70,0.25), inset 0 1px 1px rgba(255,255,255,0.3)",
-        "accent_badge": "#EF4444"
+        "identity_name": "Royal Ruby Platinum Onyx (UNCHANGED)",
+        "hex_palette": {
+          "surface_start": "#1A070A",
+          "surface_mid": "#0D0C10",
+          "surface_end": "#24090E",
+          "accent": "#FFC6CC",
+          "muted": "#DED0D5",
+          "line": "#984755",
+          "button_bg": "#B6112A",
+          "button_ink": "#FFF7F8",
+          "halo_rgb": "230 57 70"
+        },
+        "bg_surface_formula": "linear-gradient(145deg, #1A070A 0%, #0D0C10 50%, #24090E 100%)",
+        "tint_sheen_formula": "linear-gradient(125deg, rgba(230,57,70,0.25) 0%, rgba(255,255,255,0.20) 25%, transparent 55%, rgba(220,38,38,0.15) 100%)",
+        "border_formula": "1px solid #984755",
+        "box_shadow_formula": "0 14px 36px rgba(0,0,0,0.8), 0 0 22px rgba(230,57,70,0.22), inset 0 1px 1px rgba(255,255,255,0.35)"
       },
       "bitsat": {
-        "card_selector": ".exam-home .bold-exam-card[data-exam='bitsat'], .exam-home .bold-exam-card:nth-child(2)",
-        "identity_name": "Royal Cobalt Platinum Onyx",
-        "bg_surface": "linear-gradient(145deg, #07101D 0%, #0C0D13 50%, #0B1930 100%)",
-        "tint_sheen": "linear-gradient(125deg, rgba(56,189,248,0.20) 0%, rgba(255,255,255,0.22) 30%, rgba(0,0,0,0) 60%, rgba(37,99,235,0.18) 100%)",
-        "border_color": "linear-gradient(135deg, rgba(56,189,248,0.7), rgba(255,255,255,0.4), rgba(29,78,216,0.8))",
-        "box_shadow": "0 12px 32px rgba(0,0,0,0.7), 0 0 20px rgba(56,189,248,0.25), inset 0 1px 1px rgba(255,255,255,0.3)",
-        "accent_badge": "#38BDF8"
+        "identity_name": "Bright Amber Polish Onyx (FULL FACE Orangish & Black Ink CTA)",
+        "hex_palette": {
+          "surface_start": "#261204",
+          "surface_mid": "#0D0C10",
+          "surface_end": "#3B1B05",
+          "accent": "#FBBF24",
+          "muted": "#FDE68A",
+          "line": "#B45309",
+          "button_bg": "linear-gradient(180deg, #FDE68A, #F59E0B)",
+          "button_ink": "#0F0903",
+          "halo_rgb": "245 158 11"
+        },
+        "bg_surface_formula": "linear-gradient(145deg, #261204 0%, #0D0C10 50%, #3B1B05 100%)",
+        "tint_sheen_formula": "linear-gradient(125deg, rgba(245,158,11,0.28) 0%, rgba(254,243,199,0.24) 28%, transparent 58%, rgba(217,119,6,0.20) 100%)",
+        "border_formula": "1px solid #B45309",
+        "box_shadow_formula": "0 14px 36px rgba(0,0,0,0.8), 0 0 22px rgba(245,158,11,0.25), inset 0 1px 1px rgba(255,255,255,0.4)"
       },
       "comedk": {
-        "card_selector": ".exam-home .bold-exam-card[data-exam='comedk'], .exam-home .bold-exam-card:nth-child(3)",
-        "identity_name": "Emerald Gold Titanium Onyx",
-        "bg_surface": "linear-gradient(145deg, #061712 0%, #0C0D11 50%, #0B241B 100%)",
-        "tint_sheen": "linear-gradient(125deg, rgba(52,211,153,0.20) 0%, rgba(254,240,138,0.22) 35%, rgba(0,0,0,0) 65%, rgba(16,185,129,0.18) 100%)",
-        "border_color": "linear-gradient(135deg, rgba(52,211,153,0.7), rgba(253,224,71,0.5), rgba(6,95,70,0.8))",
-        "box_shadow": "0 12px 32px rgba(0,0,0,0.7), 0 0 20px rgba(52,211,153,0.25), inset 0 1px 1px rgba(255,255,255,0.3)",
-        "accent_badge": "#34D399"
+        "identity_name": "Teal Polished Onyx with Platinum Teal Button",
+        "hex_palette": {
+          "surface_start": "#04181A",
+          "surface_mid": "#0C0D11",
+          "surface_end": "#06282B",
+          "accent": "#2DD4BF",
+          "muted": "#CCFBF1",
+          "line": "#0F766E",
+          "button_bg": "linear-gradient(180deg, #CCFBF1, #2DD4BF)",
+          "button_ink": "#042222",
+          "halo_rgb": "20 184 166"
+        },
+        "bg_surface_formula": "linear-gradient(145deg, #04181A 0%, #0C0D11 50%, #06282B 100%)",
+        "tint_sheen_formula": "linear-gradient(125deg, rgba(20,184,166,0.26) 0%, rgba(204,251,241,0.22) 30%, transparent 60%, rgba(13,148,136,0.18) 100%)",
+        "border_formula": "1px solid #0F766E",
+        "box_shadow_formula": "0 14px 36px rgba(0,0,0,0.8), 0 0 22px rgba(20,184,166,0.25), inset 0 1px 1px rgba(255,255,255,0.4)"
       }
     }
   },
-  "practical_css_blueprint": "/* ROYAL BLUE + PLATINUM FLAGSHIP BANNER OVERRIDE */\n.exam-home .flagship-banner {\n  background: linear-gradient(135deg, #06112E 0%, #0B1D4F 42%, #18357A 78%, #091333 100%) !important;\n  border: 1px solid rgba(226, 232, 240, 0.4) !important;\n  box-shadow: 0 20px 50px rgba(11, 29, 79, 0.65), 0 0 35px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.45) !important;\n  position: relative;\n  overflow: hidden;\n}\n.exam-home .flagship-banner::before {\n  content: '';\n  position: absolute;\n  inset: 0;\n  background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, rgba(226,232,240,0.12) 30%, transparent 60%, rgba(191,219,254,0.25) 100%);\n  pointer-events: none;\n}\n\n/* DISTINCT POLISHED METALLIC FACES FOR EACH EXAM CARD */\n.exam-home .bold-exam-card {\n  position: relative;\n  overflow: hidden;\n  border-radius: 16px;\n  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;\n}\n\n/* JEE Main Card - Royal Ruby Platinum */\n.exam-home .bold-exam-card[data-exam='jee-main'],\n.exam-home .bold-exam-card:nth-child(1) {\n  background: linear-gradient(145deg, #1A070A 0%, #0D0C10 50%, #24090E 100%) !important;\n  border: 1px solid rgba(230, 57, 70, 0.5) !important;\n  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8), 0 0 22px rgba(230, 57, 70, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;\n}\n.exam-home .bold-exam-card[data-exam='jee-main']::before,\n.exam-home .bold-exam-card:nth-child(1)::before {\n  content: ''; position: absolute; inset: 0;\n  background: linear-gradient(125deg, rgba(230,57,70,0.25) 0%, rgba(255,255,255,0.20) 25%, transparent 55%, rgba(220,38,38,0.15) 100%);\n  pointer-events: none;\n}\n\n/* BITSAT Card - Royal Cobalt Platinum */\n.exam-home .bold-exam-card[data-exam='bitsat'],\n.exam-home .bold-exam-card:nth-child(2) {\n  background: linear-gradient(145deg, #071224 0%, #0C0D13 50%, #0A1C38 100%) !important;\n  border: 1px solid rgba(56, 189, 248, 0.5) !important;\n  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8), 0 0 22px rgba(56, 189, 248, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;\n}\n.exam-home .bold-exam-card[data-exam='bitsat']::before,\n.exam-home .bold-exam-card:nth-child(2)::before {\n  content: ''; position: absolute; inset: 0;\n  background: linear-gradient(125deg, rgba(56,189,248,0.25) 0%, rgba(255,255,255,0.22) 25%, transparent 55%, rgba(37,99,235,0.18) 100%);\n  pointer-events: none;\n}\n\n/* COMEDK Card - Emerald Gold Titanium */\n.exam-home .bold-exam-card[data-exam='comedk'],\n.exam-home .bold-exam-card:nth-child(3) {\n  background: linear-gradient(145deg, #061B14 0%, #0C0D11 50%, #092B1E 100%) !important;\n  border: 1px solid rgba(52, 211, 153, 0.5) !important;\n  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.8), 0 0 22px rgba(52, 211, 153, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;\n}\n.exam-home .bold-exam-card[data-exam='comedk']::before,\n.exam-home .bold-exam-card:nth-child(3)::before {\n  content: ''; position: absolute; inset: 0;\n  background: linear-gradient(125deg, rgba(52,211,153,0.22) 0%, rgba(254,240,138,0.20) 30%, transparent 60%, rgba(16,185,129,0.18) 100%);\n  pointer-events: none;\n}\n\n/* PAUSE SHINE & REDUCED MOTION SUPPORT */\n.pause-shine .bold-exam-card::before,\n.pause-shine .flagship-banner::before {\n  animation: none !important;\n  opacity: 0.6;\n}",
-  "instructions_to_main_agent": "Ensure design_guidelines.json contains full CSS blueprint for .exam-home .flagship-banner in Royal Blue + Platinum shining finish, and distinct metallic faces for JEE Main (Ruby Crimson), BITSAT (Cobalt Sapphire), and COMEDK (Emerald Gold) on top of cohesive Glossy Onyx base. Maintain all data-testids and contrast compliance."
+  "css_refinement_formula": "/* BITSAT Bright Amber FULL FACE */\n.exam-home .bold-exam-card.exam-tone-bitsat {\n  --exam-surface: linear-gradient(145deg, #261204 0%, #0D0C10 50%, #3B1B05 100%);\n  --exam-polish: linear-gradient(125deg, rgba(245,158,11,0.28) 0%, rgba(254,243,199,0.24) 28%, transparent 58%, rgba(217,119,6,0.20) 100%);\n  --exam-accent: #FBBF24;\n  --exam-muted: #FDE68A;\n  --exam-line: #B45309;\n  --exam-button: linear-gradient(180deg, #FDE68A, #F59E0B);\n  --exam-button-ink: #0F0903;\n  --exam-halo: 245 158 11;\n  --shine-delay: 1.7s;\n}\n\n/* COMEDK Teal Polished Onyx with Platinum Teal Button */\n.exam-home .bold-exam-card.exam-tone-comedk {\n  --exam-surface: linear-gradient(145deg, #04181A 0%, #0C0D11 50%, #06282B 100%);\n  --exam-polish: linear-gradient(125deg, rgba(20,184,166,0.26) 0%, rgba(204,251,241,0.22) 30%, transparent 60%, rgba(13,148,136,0.18) 100%);\n  --exam-accent: #2DD4BF;\n  --exam-muted: #CCFBF1;\n  --exam-line: #0F766E;\n  --exam-button: linear-gradient(180deg, #CCFBF1, #2DD4BF);\n  --exam-button-ink: #042222;\n  --exam-halo: 20 184 166;\n  --shine-delay: 3.4s;\n}",
+  "general_ui_ux_guidelines": {
+    "reduced_motion": "Respect prefers-reduced-motion with pause-shine support",
+    "accessibility_contrast": "Maintain peak shine contrast with dark ink (#0F0903 and #042222) on bright buttons",
+    "testing_attributes": "All interactive elements and card CTAs MUST retain data-testid attributes"
+  }
 }

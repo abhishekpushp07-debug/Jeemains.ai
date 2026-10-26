@@ -223,14 +223,18 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--focus-ring); outl
  box-shadow:inset 0 1px 1px rgb(255 255 255 / .4),inset 0 -1px 1px rgb(0 0 0 / .65),0 16px 38px rgb(0 0 0 / .45),0 0 22px rgb(var(--exam-halo) / .11);
 }
 .exam-home .bold-exam-card.exam-tone-bitsat {
- --exam-surface:linear-gradient(145deg,#071224 0%,#0C0D13 50%,#0A1C38 100%);
- --exam-polish:linear-gradient(125deg,rgba(56,189,248,.25) 0%,rgba(255,255,255,.22) 25%,transparent 55%,rgba(37,99,235,.18) 100%);
- --exam-accent:#C2E9FF; --exam-muted:#CEDCED; --exam-line:#4E81A7; --exam-button:#E2EAF5; --exam-button-ink:#142C4E; --exam-halo:56 189 248; --shine-delay:1.7s;
+ --exam-surface:linear-gradient(145deg,#FFC15B 0%,#EF9B25 52%,#D88015 100%);
+ --exam-polish:linear-gradient(125deg,rgba(255,244,210,.3) 0%,rgba(255,255,255,.2) 25%,transparent 57%,rgba(173,87,7,.08) 100%);
+ --exam-accent:#482C08; --exam-muted:#493013; --exam-line:#BA7825; --exam-button:#291A0A; --exam-button-ink:#FFF5DE; --exam-halo:245 158 11; --shine-delay:1.7s;
+ color:#281806;
 }
+.exam-home .bold-exam-card.exam-tone-bitsat h2,.exam-home .bold-exam-card.exam-tone-bitsat h2 a { color:#281806; }
+.exam-home .bold-exam-card.exam-tone-bitsat nav a:hover { color:#1F1203; }
+.exam-home .bold-exam-card.exam-tone-bitsat a:focus-visible { outline-color:#281806; }
 .exam-home .bold-exam-card.exam-tone-comedk {
- --exam-surface:linear-gradient(145deg,#061B14 0%,#0C0D11 50%,#092B1E 100%);
- --exam-polish:linear-gradient(125deg,rgba(52,211,153,.22) 0%,rgba(254,240,138,.2) 30%,transparent 60%,rgba(16,185,129,.18) 100%);
- --exam-accent:#E9E1B5; --exam-muted:#D1DFD6; --exam-line:#648B73; --exam-button:#E7D4A3; --exam-button-ink:#14291F; --exam-halo:52 211 153; --shine-delay:3.4s;
+ --exam-surface:linear-gradient(145deg,#04181A 0%,#0A2025 50%,#063A3E 100%);
+ --exam-polish:linear-gradient(125deg,rgba(20,184,166,.26) 0%,rgba(204,251,241,.22) 30%,transparent 60%,rgba(13,148,136,.18) 100%);
+ --exam-accent:#A7F3E8; --exam-muted:#CCEBE7; --exam-line:#378C89; --exam-button:linear-gradient(180deg,#DFF9F3,#9CDCD5); --exam-button-ink:#063733; --exam-halo:20 184 166; --shine-delay:3.4s;
 }
 .exam-home .bold-exam-card:hover,.exam-home .bold-exam-card:focus-within { border-color:var(--exam-accent); box-shadow:inset 0 1px 2px rgb(255 255 255 / .5),0 22px 44px rgb(0 0 0 / .5),0 0 26px rgb(var(--exam-halo) / .16); }
 .exam-home .bold-exam-card h2,.exam-home .bold-exam-card h2 a { color:#F8F6F3; }
