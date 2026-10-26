@@ -4,9 +4,12 @@ private object store. Never touches MONGO_URL/DB_NAME customer DB; both DBs drop
 import asyncio
 import gzip
 import hashlib
+import json
 import os
 import re
 import sys
+import threading
+import types
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -32,6 +35,8 @@ OWNER_EMAIL = 'qa144-owner@example.test'
 BINDING = hashlib.sha256(b'qa144-isolated-binding').hexdigest()
 OLD = [f'qa144-old-{i:02d}' for i in range(1, 14)]
 DEL, DELU = 'del', 'del_unlinked'
+JOBONLY = 'qa144-jobonly'
+EMPTY = 'tejas_qa_empty_validated'
 
 
 # ---------------------------------------------------------------- infrastructure
@@ -83,6 +88,24 @@ class FakeStore:
     def fetch(self, path):
         data = self.objects[path]
         return data[:-1] + bytes([data[-1] ^ 1]) if self.corrupt_readback else data
+
+
+def restore_shadow(shadow, manifest, store):
+    """Operator-style restore from the private backup: recreate options, then indexes, then raw rows."""
+    assert shadow.name == SHADOW_DB
+    existing = set(shadow.list_collection_names())
+    for name, meta in manifest['collections'].items():
+        assert meta['type'] == 'collection'
+        assert name not in existing, 'shadow must be fresh (dropped once at session start)'
+        shadow.create_collection(name, **dict(meta['options']))
+        for idx in meta['indexes']:
+            if idx['name'] == '_id_':
+                continue
+            opts = {k: v for k, v in idx.items() if k not in ('key', 'v', 'ns')}
+            shadow[name].create_index(list(idx['key'].items()), **opts)
+    for p in manifest['parts']:
+        rows = [json_util.loads(line) for line in gzip.decompress(store.objects[p['path']]).splitlines()]
+        shadow[p['collection']].insert_many(rows)
 
 
 def canon_all(d):
@@ -188,6 +211,32 @@ def seed(d, big=False):
     d.tejas_typecheck.insert_one({'_id': 'string-id', 'v': 1})
     d.tejas_typecheck.insert_one({'_id': {'compound': 1, 'k': 'v'}, 'v': 2})
     d.tejas_users.create_index('email', unique=True)
+    # iter146: unlinked user with ONLY a personal report job (captured) + unlinked shared AI job (retained)
+    ins('tejas_jobs', {'id': 'j-jobonly-report', 'kind': 'report', 'user_id': JOBONLY, 'payload': {}, '_qa': DELU},
+        {'id': 'j-anon-ai', 'kind': 'ai_solution', 'user_id': 'qa144-unknown-ai', 'payload': {'question_id': 'q1'}})
+    # iter146: compound unique (key ORDER matters) + TTL (far future so the TTL monitor never fires) indexes
+    d.tejas_sessions.create_index([('user_id', 1), ('id', -1)], unique=True, name='uid_id_desc')
+    d.tejas_sessions.create_index('expires_at', expireAfterSeconds=10 * 365 * 86400, name='ttl_exp')
+    d.tejas_attempts.create_index([('status', -1), ('user_id', 1), ('id', 1)], name='att_cmp')
+    # iter146: EMPTY collection with options + compound unique index must be restorable from manifest
+    if EMPTY not in d.list_collection_names():
+        d.create_collection(EMPTY, validator={'$jsonSchema': {'bsonType': 'object', 'required': ['k']}},
+                            validationLevel='moderate', collation={'locale': 'en', 'strength': 2})
+    d[EMPTY].create_index([('k', -1), ('a', 1)], unique=True, name='empty_cmp')
+    # iter146: 160 docs of typed BSON with varied (non-sorted) field order and nested order
+    rng = __import__('random').Random(146)
+    vals = [lambda i: ObjectId(), lambda i: t, lambda i: datetime(1950 + i % 70, 1 + i % 12, 1 + i % 28, i % 24, 0, 0, (i % 1000) * 1000),
+            lambda i: Binary(bytes([i % 256]) * (i % 9)), lambda i: Binary(uuid.UUID(int=i).bytes, 4), lambda i: Binary(b'\x01' * 16, 3),
+            lambda i: Decimal128(f'{i}.{i:03d}E-{i % 30}'), lambda i: Int64(i * 2 ** 33), lambda i: -i, lambda i: float(i) / 7, lambda i: -0.0,
+            lambda i: float('-inf'), lambda i: Regex(f'^x{i}', 'i'), lambda i: Timestamp(i + 1, i), lambda i: MinKey(), lambda i: MaxKey(),
+            lambda i: Code(f'f{i}'), lambda i: Code('g', {'s': i}), lambda i: DBRef('c', i), lambda i: None, lambda i: bool(i % 2),
+            lambda i: 'ü' * (i % 5), lambda i: [i, {'zz': i, 'aa': [None, {'y': 1, 'b': 2}]}], lambda i: {'zeta': {'k2': i, 'k1': -i}, 'alpha': []}]
+    stress = []
+    for i in range(160):
+        keys = [f'f{k:02d}' for k in range(rng.randint(4, 12))]
+        rng.shuffle(keys)
+        stress.append({'_id': i if i % 3 else f's{i}', **{k: vals[rng.randrange(len(vals))](i) for k in keys}})
+    d.tejas_typestress.insert_many(stress)
     if big:  # force 8 MiB chunk boundary with incompressible original-file bytes
         d.tejas_files.insert_many([{'id': f'qa144-big-{i}', 'blob': Binary(os.urandom(900_000))} for i in range(11)])
 
@@ -269,6 +318,7 @@ class TestPlanScope:
         assert plan['account_ids'] == sorted(['qa144-su1', 'qa144-p1', 'qa144-p2', 'qa144-p3'])
         assert set(OLD).issubset(plan['user_ids']) == include_unlinked
         assert OWNER not in plan['user_ids'] and 'qa144-admin' not in plan['user_ids']
+        assert (JOBONLY in plan['user_ids']) == include_unlinked and 'qa144-unknown-ai' not in plan['user_ids']
 
 
 # ---------------------------------------------------------------- full flow + restore proof
@@ -281,7 +331,7 @@ class TestFullFlowAndRestore:
                         for n in db.list_collection_names()}
         exp = expected_ids(db, True)
         receipt = do_prepare(db, store, include_unlinked=True)
-        assert receipt['phase'] == 'prepared' and receipt['students'] == 4 and receipt['unlinked_profile_ids'] == 13
+        assert receipt['phase'] == 'prepared' and receipt['students'] == 4 and receipt['unlinked_profile_ids'] == 14
         assert canon_all(db) == original, 'prepare must not modify data'
         manifest = R.verified_manifest(receipt, store.fetch)
         assert manifest['database'] == TEST_DB and manifest['binding'] == BINDING and manifest['owner_id'] == OWNER
@@ -291,26 +341,40 @@ class TestFullFlowAndRestore:
         for p in fparts[:-1]:
             assert len(gzip.decompress(store.objects[p['path']])) >= 8 * 1024 * 1024
         assert sum(p['records'] for p in fparts) == db.tejas_files.count_documents({})
-        # restore every part into shadow DB, compare canonical fingerprints
-        shadow = client[SHADOW_DB]; wipe(shadow)
-        for p in manifest['parts']:
-            rows = [json_util.loads(line) for line in gzip.decompress(store.objects[p['path']]).splitlines()]
-            shadow[p['collection']].insert_many(rows)
+        # restore every part into a FRESH shadow DB: options + indexes (key order) + typed raw BSON rows
+        shadow = client[SHADOW_DB]
+        restore_shadow(shadow, manifest, store)
         restored = canon_all(shadow)
         assert restored == original
+        assert EMPTY in shadow.list_collection_names() and shadow[EMPTY].count_documents({}) == 0
+        for name, meta in manifest['collections'].items():
+            info = next(c for c in shadow.list_collections() if c['name'] == name)
+            assert R.backup_encoded(info.get('options', {})) == R.backup_encoded(meta['options']), name
+            got = {i['name']: i for i in shadow[name].list_indexes()}
+            want = {i['name']: i for i in meta['indexes']}
+            assert set(got) == set(want), name
+            for iname, idx in want.items():
+                assert list(got[iname]['key'].items()) == list(idx['key'].items()), (name, iname)
+                assert R.backup_encoded(got[iname]) == R.backup_encoded(idx), (name, iname)
+        sidx = {i['name']: i for i in shadow.tejas_sessions.list_indexes()}
+        assert list(sidx['uid_id_desc']['key'].items()) == [('user_id', 1), ('id', -1)] and sidx['uid_id_desc']['unique'] is True
+        assert sidx['ttl_exp']['expireAfterSeconds'] == 10 * 365 * 86400
+        assert shadow.tejas_users.index_information()['email_1']['unique'] is True
+        einfo = next(c for c in shadow.list_collections() if c['name'] == EMPTY)
+        assert einfo['options']['validationLevel'] == 'moderate' and einfo['options']['collation']['strength'] == 2
         tc = shadow.tejas_typecheck.find_one({'oid': {'$exists': True}})
         assert isinstance(tc['oid'], ObjectId) and isinstance(tc['dt'], datetime) and isinstance(tc['dec'], Decimal128)
         assert isinstance(tc['i64'], Int64) and isinstance(tc['ts'], Timestamp) and isinstance(tc['code'], Code)
         assert isinstance(tc['ref'], DBRef) and isinstance(tc['mn'], MinKey) and isinstance(tc['bin0'], bytes) and isinstance(tc['md5'], Binary) and tc['md5'].subtype == 5
         assert tc['uuid4'] == db.tejas_typecheck.find_one({'_id': tc['_id']})['uuid4']
         assert shadow.tejas_typecheck.count_documents({'_id': {'compound': 1, 'k': 'v'}}) == 1
-        # raw BSON field-order fidelity (recorded separately)
+        # raw BSON byte fidelity (field order + types) for EVERY doc incl. 160 type-stress docs
         raw_shadow = {n: {R.encoded(r['_id']): r.raw for r in shadow.get_collection(n, codec_options=shadow.codec_options.with_options(document_class=RawBSONDocument)).find({})}
                       for n in shadow.list_collection_names()}
         order_lost = sum(1 for n, m in raw_original.items() for k, raw in m.items() if raw_shadow.get(n, {}).get(k) != raw)
-        print('RAW_BSON_ORDER_MISMATCH_DOCS', order_lost, 'of', sum(len(m) for m in raw_original.values()))
-        shadow_idx = sorted(shadow.tejas_users.index_information())
-        print('SHADOW_USER_INDEXES', shadow_idx)
+        total = sum(len(m) for m in raw_original.values())
+        print('RAW_BSON_MISMATCH_DOCS', order_lost, 'of', total, 'stress', len(raw_original['tejas_typestress']))
+        assert len(raw_original['tejas_typestress']) == 160 and order_lost == 0
         wipe(shadow)
 
         # apply
@@ -355,27 +419,33 @@ class TestFullFlowAndRestore:
             assert auth.db.name == REAL_DB
         asyncio.run(check_identity())
 
-    @pytest.mark.xfail(strict=True, reason='KNOWN DEFECT: backup uses sort_keys=True, so restored BSON field order differs from original')
     def test_backup_preserves_raw_bson_field_order(self, client, db):
         db.tejas_typecheck.insert_one({'_id': 1, 'z': 1, 'a': {'y': 1, 'b': 2}})
-        line = R.encoded(db.tejas_typecheck.find_one({'_id': 1}))
-        wipe(client[SHADOW_DB])
+        line = R.backup_encoded(db.tejas_typecheck.find_one({'_id': 1}))
+        assert R.encoded({'z': 1, 'a': 2}) == R.encoded({'a': 2, 'z': 1})  # canonical plan hash is order-insensitive
+        assert R.backup_encoded({'z': 1, 'a': 2}) != R.backup_encoded({'a': 2, 'z': 1})  # backup keeps order
+        client[SHADOW_DB].t.delete_many({})
         client[SHADOW_DB].t.insert_one(json_util.loads(line))
         raw = lambda d, c: d.get_collection(c, codec_options=d.codec_options.with_options(document_class=RawBSONDocument)).find_one({'_id': 1}).raw
         try:
             assert raw(client[SHADOW_DB], 't') == raw(db, 'tejas_typecheck')
         finally:
-            wipe(client[SHADOW_DB])
+            client[SHADOW_DB].t.delete_many({})
 
 
 # ---------------------------------------------------------------- tamper / fail-closed
-def rewrite_manifest(d, store, receipt, mutate):
+def rewrite_manifest(d, store, receipt, mutate, rehash_receipt=False):
+    """Simulates an attacker/operator re-approving a tampered manifest. rehash_receipt=True additionally
+    rewrites the receipt's plan/parts/collections hashes so the deeper coverage checks are exercised."""
     m = json_util.loads(gzip.decompress(store.objects[receipt['manifest']['path']]))
     mutate(m)
-    blob = gzip.compress(R.encoded(m), mtime=0)
+    blob = gzip.compress(R.backup_encoded(m), mtime=0)
     store.objects[receipt['manifest']['path']] = blob
     sha = hashlib.sha256(blob).hexdigest()
-    d[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': {'manifest.sha256': sha}})
+    upd = {'manifest.sha256': sha}
+    if rehash_receipt:
+        upd.update({'plan_hash': R.digest(m['plan']), 'parts_hash': R.digest(m['parts']), 'collections_hash': R.record_digest(m['collections'])})
+    d[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': upd})
     return sha
 
 
@@ -539,47 +609,352 @@ class TestApplyConcurrency:
         assert canon_all(db) == before
 
 
-# ---------------------------------------------------------------- CLI operational wiring (static, no storage call)
-def test_cli_storage_imports_exist():
+# ---------------------------------------------------------------- CLI operational wiring (fake tejas_storage + fake client -> isolated DB)
+def test_cli_storage_imports_match_real_signatures():
+    import inspect
+    import tejas_storage
     src = (BACKEND / 'tools' / 'reset_student_data.py').read_text()
     names = re.search(r'from tejas_storage import ([\w, ]+)', src).group(1).replace(' ', '').split(',')
-    import tejas_storage
-    missing = [n for n in names if not hasattr(tejas_storage, n)]
-    assert not missing, f'CLI imports missing from tejas_storage: {missing}'
+    assert sorted(names) == ['put_object', 'request'], names  # no upload(), no cached get_object()
+    assert all(hasattr(tejas_storage, n) for n in names)
+    assert list(inspect.signature(tejas_storage.put_object).parameters)[:3] == ['path', 'data', 'content_type']
+    assert list(inspect.signature(tejas_storage.request).parameters)[:2] == ['method', 'path']
+    assert 'get_object' not in src
 
 
-# ---------------------------------------------------------------- documented gaps (strict xfail => flips when fixed)
-class TestDocumentedGaps:
-    @pytest.mark.xfail(strict=True, reason='DEFECT: orphan attempt_id discovered from a non-staff row makes the OWNED '
-                       'scope delete a staff/owner row that shares that orphan attempt_id')
+class _CliClient:
+    def __init__(self, real):
+        self.real, self.names, self.closed = real, [], 0
+
+    def __getitem__(self, name):
+        self.names.append(name)
+        return self.real[TEST_DB]
+
+    def close(self):
+        self.closed += 1
+
+
+def test_cli_adapter_wiring_prepare_and_apply(client, db, monkeypatch, capsys):
+    seed(db)
+    objects, calls, missing = {}, [], set()
+    fake = types.ModuleType('tejas_storage')
+
+    def put_object(path, data, content_type='application/pdf'):
+        calls.append(('PUT', path, content_type)); objects[path] = bytes(data)
+        return path  # real put_object returns the stored path STRING
+
+    class Resp:
+        def __init__(self, content):
+            self.content = content
+
+    def request(method, path, data=None, content_type=None):
+        calls.append((method, path, content_type))
+        if path in missing:
+            raise RuntimeError('Private storage unavailable (404).')  # real StorageError analogue
+        return Resp(objects[path])
+    fake.put_object, fake.request = put_object, request
+    monkeypatch.setitem(sys.modules, 'tejas_storage', fake)
+    cc, urls = _CliClient(client), []
+    monkeypatch.setattr(R, 'MongoClient', lambda url, *a, **k: (urls.append(url), cc)[1])
+    monkeypatch.setenv('ADMIN_EMAIL', OWNER_EMAIL)
+    monkeypatch.setattr(sys, 'argv', ['reset_student_data.py', 'prepare', '--writers-paused', '--include-unlinked'])
+    R.main()
+    out = capsys.readouterr().out.strip().splitlines()[-1]
+    pub = json.loads(out)
+    assert urls == [os.environ['MONGO_URL']] and cc.names == [os.environ['DB_NAME']] and cc.closed == 1
+    assert pub['phase'] == 'prepared' and pub['private_backup_verified'] is True and pub['students'] == 4
+    assert '@' not in out and '+91' not in out and 'student-reset-backups' not in out and 'path' not in pub
+    puts = [c for c in calls if c[0] == 'PUT']
+    assert puts and all(c[2] == 'application/gzip' for c in puts)
+    pat = re.compile(r'^tejas/student-reset-backups/' + re.escape(OWNER) + r'/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}\.jsonl\.gz$')
+    assert all(pat.match(c[1]) for c in puts) and len({c[1] for c in puts}) == len(puts)
+    for i, c in enumerate(calls):  # every PUT is immediately read back via uncached GET of the same path
+        if c[0] == 'PUT':
+            assert calls[i + 1][:2] == ('GET', c[1])
+    receipt = db[R.RECEIPTS].find_one({'_id': pub['reset_id']})
+    assert receipt['binding'] == hashlib.sha256((os.environ['MONGO_URL'] + '\0' + os.environ['DB_NAME']).encode()).hexdigest()
+    assert receipt['manifest']['path'] in objects and not receipt['manifest']['path'].startswith('http')
+    manifest = R.verified_manifest(receipt, lambda p: objects[p])
+    # a 404 on any private part during apply fails closed (nothing deleted)
+    before = canon_all(db)
+    missing.add(manifest['parts'][0]['path'])
+    monkeypatch.setattr(sys, 'argv', ['reset_student_data.py', 'apply', '--writers-paused', '--reset-id', pub['reset_id'], '--approval-hash', pub['approval_hash']])
+    with pytest.raises(RuntimeError, match='404'):
+        R.main()
+    assert_nothing_deleted(db, before, 'prepared', pub['reset_id'])
+    missing.clear(); calls.clear()
+    R.main()
+    done = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+    assert done['phase'] == 'complete' and done['owner_and_papers_retained'] is True
+    assert [c for c in calls if c[0] == 'PUT'] == []  # apply never writes storage
+    got = {c[1] for c in calls if c[0] == 'GET'}
+    assert receipt['manifest']['path'] in got and {p['path'] for p in manifest['parts']} <= got
+    assert db.tejas_users.count_documents({'role': 'student'}) == 0 and db.tejas_users.count_documents({'id': OWNER}) == 1
+    assert db.tejas_sets.count_documents({'id': 'qa144-set'}) == 1 and cc.closed == 3
+
+
+# ---------------------------------------------------------------- ex-gaps (now ordinary tests)
+def raw_rows(d, name, query):
+    coll = d.get_collection(name, codec_options=d.codec_options.with_options(document_class=RawBSONDocument))
+    return sorted(r.raw for r in coll.find(query))
+
+
+class TestScopeProtection:
     def test_owner_row_sharing_orphan_attempt_id_is_protected(self, db):
         seed(db)
         db.tejas_reviews.insert_one({'id': 'own-review-gone', 'user_id': OWNER, 'attempt_id': 'qa144-shared-gone'})
         db.tejas_score_versions.insert_one({'id': 'anon-sv-gone', 'attempt_id': 'qa144-shared-gone'})
         store = FakeStore(); do_apply(db, store, do_prepare(db, store))
         assert db.tejas_reviews.count_documents({'id': 'own-review-gone'}) == 1
+        assert db.tejas_score_versions.count_documents({'id': 'anon-sv-gone'}) == 0
 
-    @pytest.mark.xfail(strict=True, reason='GAP: apply does not verify the backup actually contains every planned '
-                       'target _id / per-collection totals; a manifest with a dropped part (re-approved) still deletes')
-    def test_manifest_missing_part_for_targets_blocks(self, db):
-        seed(db); store = FakeStore(); receipt = do_prepare(db, store); before = canon_all(db)
-        approval = rewrite_manifest(db, store, receipt, lambda m: m.__setitem__('parts', [p for p in m['parts'] if p['collection'] != 'tejas_attempts']))
-        try:
-            do_apply(db, store, receipt, approval)
-        except RuntimeError:
-            pass
-        assert canon_all(db) == before
+    def test_all_staff_and_phone_staff_rows_sharing_orphan_id_byte_identical(self, db):
+        seed(db)
+        db.tejas_phone_profiles.insert_one({'id': 'qa144-ph-staff', 'role': 'reviewer', 'phone': '+910000144555'})
+        sh = 'qa144-shared-gone'
+        keep = {'tejas_reviews': [{'id': 'kr1', 'user_id': OWNER, 'attempt_id': sh, 'z': 1, 'a': 2}],
+                'tejas_ledgers': [{'id': sh, 'user_id': OWNER, 'rows': [{'id': 'q1'}]}, {'id': 'kl2', 'user_id': 'qa144-admin', 'attempt_id': sh}],
+                'tejas_jobs': [{'id': 'kj1', 'kind': 'grade', 'user_id': OWNER, 'payload': {'attempt_id': sh}},
+                               {'id': 'kj2', 'kind': 'report', 'user_id': 'qa144-reviewer', 'payload': {'attempt_id': sh}},
+                               {'id': 'kj3', 'kind': 'cohort', 'user_id': 'qa144-ph-staff', 'payload': {'attempt_id': sh}}],
+                'tejas_cohort_entries': [{'cohort_id': 'C9', 'user_id': OWNER, 'attempt_id': sh}],
+                'tejas_question_reports': [{'id': 'kq1', 'user_id': 'qa144-ph-staff', 'attempt_id': sh}],
+                'tejas_score_versions': [{'id': 'ks1', 'user_id': 'qa144-ph-staff', 'attempt_id': sh}],
+                'tejas_sessions': [{'id': 'kss', 'user_id': 'qa144-ph-staff', 'attempt_id': sh}]}
+        for n, rows in keep.items():
+            db[n].insert_many([{**r, '_keep': 1} for r in rows])
+        db.tejas_score_versions.insert_one({'id': 'anon-sv', 'attempt_id': sh})
+        db.tejas_jobs.insert_one({'id': 'anon-job', 'kind': 'grade', 'payload': {'attempt_id': sh}})
+        before = {n: raw_rows(db, n, {'_keep': 1}) for n in keep}
+        staff_before = {n: raw_rows(db, n, {'role': {'$ne': 'student'}}) for n in ('tejas_users', 'tejas_phone_profiles')}
+        plan = R.build_plan(db, True)
+        assert sh in plan['attempt_ids'] and 'qa144-ph-staff' not in plan['user_ids']
+        store = FakeStore(); assert do_apply(db, store, do_prepare(db, store))['phase'] == 'complete'
+        assert {n: raw_rows(db, n, {'_keep': 1}) for n in keep} == before
+        assert {n: raw_rows(db, n, {'role': {'$ne': 'student'}}) for n in staff_before} == staff_before
+        assert db.tejas_score_versions.count_documents({'id': 'anon-sv'}) == 0 and db.tejas_jobs.count_documents({'id': 'anon-job'}) == 0
 
-    @pytest.mark.xfail(strict=True, reason='GAP: index definitions (e.g. unique email) are not part of the backup manifest')
-    def test_manifest_records_indexes(self, db):
-        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
-        m = R.verified_manifest(receipt, store.fetch)
-        assert 'indexes' in m or any('indexes' in p for p in m['parts'])
+    def test_unlinked_personal_jobs_captured_shared_ai_retained(self, db):
+        seed(db)
+        store = FakeStore(); do_apply(db, store, do_prepare(db, store))
+        assert db.tejas_jobs.count_documents({'id': {'$in': ['j-jobonly-report', 'j-old-grade']}}) == 0
+        assert db.tejas_jobs.count_documents({'id': {'$in': ['j-anon-ai', 'j-su1-ai', 'j-own', 'j-own-cohort']}}) == 4
 
     def test_legacy_phone_profile_without_role_is_not_targeted(self, db):
-        # fail-safe observation: profiles missing 'role' are neither deleted nor treated as unlinked
         seed(db); db.tejas_phone_profiles.insert_one({'id': 'qa144-legacy', 'phone': '+910000144077'})
         db.tejas_sessions.insert_one({'id': 'legacy-sess', 'user_id': 'qa144-legacy'})
         store = FakeStore(); do_apply(db, store, do_prepare(db, store))
         assert db.tejas_phone_profiles.count_documents({'id': 'qa144-legacy'}) == 1
         assert db.tejas_sessions.count_documents({'id': 'legacy-sess'}) == 1
+
+
+class TestManifestIntegrity:
+    def test_manifest_records_indexes(self, db):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        m = R.verified_manifest(receipt, store.fetch)
+        assert 'indexes' not in m and all('indexes' not in p for p in m['parts'])
+        names = {n for n in db.list_collection_names() if n != R.RECEIPTS and not n.startswith('system.')}
+        assert set(m['collections']) == names and EMPTY in names
+        for n, meta in m['collections'].items():
+            assert set(meta) == {'options', 'type', 'indexes', 'records', 'sha256'}, n
+            assert meta['type'] == 'collection' and meta['records'] == db[n].count_documents({})
+            h = hashlib.sha256()
+            for row in db[n].find({}).sort('_id', 1):
+                h.update(R.backup_encoded(row) + b'\n')
+            assert meta['sha256'] == h.hexdigest(), n
+            assert sum(p['records'] for p in m['parts'] if p['collection'] == n) == meta['records']
+            assert [i['name'] for i in meta['indexes']] == [i['name'] for i in db[n].list_indexes()]
+        e = m['collections'][EMPTY]
+        assert e['records'] == 0 and e['sha256'] == hashlib.sha256(b'').hexdigest()
+        assert e['options']['validationLevel'] == 'moderate' and 'validator' in e['options']
+        ix = {i['name']: i for i in e['indexes']}
+        assert list(ix['empty_cmp']['key'].items()) == [('k', -1), ('a', 1)] and ix['empty_cmp']['unique'] is True
+        sx = {i['name']: i for i in m['collections']['tejas_sessions']['indexes']}
+        assert list(sx['uid_id_desc']['key'].items()) == [('user_id', 1), ('id', -1)] and sx['ttl_exp']['expireAfterSeconds'] == 10 * 365 * 86400
+        assert {i['name']: i for i in m['collections']['tejas_users']['indexes']}['email_1']['unique'] is True
+        assert receipt['parts_hash'] == R.digest(m['parts']) and receipt['collections_hash'] == R.record_digest(m['collections'])
+        assert receipt['plan_hash'] == R.digest(m['plan']) and receipt['counts'] == {n: len(r) for n, r in m['plan']['records'].items()}
+        for p in m['parts']:
+            assert hashlib.sha256(store.objects[p['path']]).hexdigest() == p['sha256'] and p['bytes'] == len(store.objects[p['path']])
+
+    @pytest.mark.parametrize('case', ['drop_part_reapproved', 'drop_part_rehashed', 'drop_part_and_meta_rehashed', 'target_digest_wrong',
+                                      'target_missing_from_part', 'duplicate_part', 'collection_count_wrong', 'collection_sha_wrong'])
+    def test_manifest_missing_part_for_targets_blocks(self, db, case):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store); before = canon_all(db)
+        A = 'tejas_attempts'
+
+        def mut(m):
+            ap = [p for p in m['parts'] if p['collection'] == A]
+            if case.startswith('drop_part'):
+                m['parts'] = [p for p in m['parts'] if p['collection'] != A]
+                if case == 'drop_part_and_meta_rehashed':
+                    del m['collections'][A]
+            elif case == 'target_digest_wrong':
+                m['plan']['records'][A][0]['sha256'] = '0' * 64
+            elif case == 'target_missing_from_part':
+                target = R.backup_encoded(m['plan']['records'][A][0]['_id'])
+                lines = [ln for ln in gzip.decompress(store.objects[ap[0]['path']]).splitlines()
+                         if R.backup_encoded(json_util.loads(ln)['_id']) != target]
+                body = b''.join(ln + b'\n' for ln in lines); blob = gzip.compress(body, mtime=0)
+                path = f'qa144/forged/{uuid.uuid4()}'; store.objects[path] = blob
+                ap[0].update({'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'bytes': len(blob), 'records': len(lines)})
+                m['collections'][A].update({'records': len(lines), 'sha256': hashlib.sha256(body).hexdigest()})
+            elif case == 'duplicate_part':
+                m['parts'].append(dict(ap[0]))
+            elif case == 'collection_count_wrong':
+                m['collections'][A]['records'] += 1
+            elif case == 'collection_sha_wrong':
+                m['collections'][A]['sha256'] = '0' * 64
+        approval = rewrite_manifest(db, store, receipt, mut, rehash_receipt=case != 'drop_part_reapproved')
+        with pytest.raises(RuntimeError):
+            do_apply(db, store, receipt, approval)
+        assert_nothing_deleted(db, before, 'prepared', receipt['_id'])
+
+
+# ---------------------------------------------------------------- DB-clock 300s lease
+def set_lease(d, rid, offset, token='dead-token', **extra):
+    clock = {'$divide': [{'$toLong': '$$NOW'}, 1000]}
+    d[R.RECEIPTS].update_one({'_id': rid}, [{'$set': {'lease': token, 'lease_until': {'$add': [clock, offset]}, **extra}}])
+
+
+def crash_to_applying(db, store, receipt, at=2):
+    calls = []
+
+    def crash(name):
+        calls.append(name)
+        if len(calls) == at:
+            raise ConnectionError('simulated crash')
+    with pytest.raises(ConnectionError):
+        do_apply(DBProxy(db, {'delete': crash}), store, receipt)
+    assert db[R.RECEIPTS].find_one({'_id': receipt['_id']})['phase'] == 'applying'
+
+
+def expected_after(db_original, exp):
+    return {n: {k: v for k, v in docs.items() if k not in exp.get(n, set())} for n, docs in db_original.items() if n != 'tejas_cohorts'}
+
+
+class TestApplyLease:
+    def test_handled_failure_releases_lease_immediate_resume(self, db):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        crash_to_applying(db, store, receipt)
+        row = db[R.RECEIPTS].find_one({'_id': receipt['_id']})
+        assert row['lease_until'] == 0 and 'lease' not in row
+        assert do_apply(db, store, receipt)['phase'] == 'complete'
+
+    @pytest.mark.parametrize('phase', ['prepared', 'applying'])
+    def test_crashed_future_lease_blocks_until_expiry(self, db, phase):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        if phase == 'applying':
+            crash_to_applying(db, store, receipt)
+        set_lease(db, receipt['_id'], 300)
+        before = canon_all(db)
+        with pytest.raises(RuntimeError, match='Another reset process'):
+            do_apply(db, store, receipt)
+        assert_nothing_deleted(db, before, phase, receipt['_id'])
+        assert db[R.RECEIPTS].find_one({'_id': receipt['_id']})['lease'] == 'dead-token'
+        set_lease(db, receipt['_id'], 290)  # still in future -> still blocked
+        with pytest.raises(RuntimeError, match='Another reset process'):
+            do_apply(db, store, receipt)
+        assert canon_all(db) == before
+        set_lease(db, receipt['_id'], -1)  # expired on DB clock
+        assert do_apply(db, store, receipt)['phase'] == 'complete'
+        row = db[R.RECEIPTS].find_one({'_id': receipt['_id']})
+        assert 'lease' not in row and row['lease_until'] == 0
+
+    @pytest.mark.parametrize('phase', ['prepared', 'applying'])
+    def test_nested_rival_resumer_blocked_and_lease_not_refreshed(self, db, phase):
+        seed(db); store = FakeStore(); exp = expected_ids(db, True); original = canon_all(db)
+        receipt = do_prepare(db, store)
+        if phase == 'applying':
+            crash_to_applying(db, store, receipt)
+        rival_errors, rival_deletes, leases = [], [], []
+
+        def hook(name):
+            row = db[R.RECEIPTS].find_one({'_id': receipt['_id']})
+            leases.append((row['lease'], row['lease_until']))
+            if len(leases) == 1:
+                try:
+                    do_apply(DBProxy(db, {'delete': rival_deletes.append}), store, receipt)
+                except RuntimeError as e:
+                    rival_errors.append(str(e))
+        done = do_apply(DBProxy(db, {'delete': hook}), store, receipt)
+        assert done['phase'] == 'complete' and rival_deletes == [] and len(rival_errors) == 1 and 'Another reset process' in rival_errors[0]
+        assert len(leases) > 1 and len(set(leases)) == 1  # same token, same deadline: never refreshed
+        after = canon_all(db)
+        assert {n: after.get(n, {}) for n in expected_after(original, exp)} == expected_after(original, exp)
+
+    @pytest.mark.parametrize('phase', ['prepared', 'applying'])
+    def test_threaded_parallel_resumers_single_writer(self, db, phase):
+        seed(db); store = FakeStore(); exp = expected_ids(db, True); original = canon_all(db)
+        receipt = do_prepare(db, store)
+        if phase == 'applying':
+            crash_to_applying(db, store, receipt)
+        barrier, results = threading.Barrier(4), []
+
+        def worker(i):
+            dels = []
+            barrier.wait()
+            try:
+                r = do_apply(DBProxy(db, {'delete': dels.append}), store, receipt)
+                results.append(('ok', r['phase'], len(dels)))
+            except RuntimeError as e:
+                results.append(('err', str(e), len(dels)))
+        ts = [threading.Thread(target=worker, args=(i,)) for i in range(4)]
+        [t.start() for t in ts]; [t.join(60) for t in ts]
+        assert len(results) == 4
+        writers = [r for r in results if r[2] > 0]
+        assert len(writers) == 1 and writers[0][:2] == ('ok', 'complete'), results
+        for r in results:
+            if r is not writers[0]:
+                assert r == ('ok', 'complete', 0) or (r[0] == 'err' and 'Another reset process' in r[1] and r[2] == 0), results
+        after = canon_all(db)
+        assert {n: after.get(n, {}) for n in expected_after(original, exp)} == expected_after(original, exp)
+
+    @pytest.mark.parametrize('how', ['expire', 'steal'])
+    def test_lease_lost_mid_apply_stops_next_batch(self, db, how):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store); calls = []
+
+        def hook(name):
+            calls.append(name)
+            if len(calls) == 1:
+                if how == 'expire':
+                    db[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': {'lease_until': 0}})
+                else:
+                    set_lease(db, receipt['_id'], 300, token='thief')
+        with pytest.raises(RuntimeError, match='lease expired'):
+            do_apply(DBProxy(db, {'delete': hook}), store, receipt)
+        assert len(calls) == 1
+        row = db[R.RECEIPTS].find_one({'_id': receipt['_id']})
+        assert row['phase'] == 'applying'
+        if how == 'steal':  # foreign holder's lease untouched by our finally
+            assert row['lease'] == 'thief' and row['lease_until'] > 0
+            set_lease(db, receipt['_id'], -1, token='thief')
+        assert do_apply(db, store, receipt)['phase'] == 'complete'
+
+    def test_lease_expired_before_final_check(self, db):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        total = sum(1 for v in receipt['counts'].values() if v); calls = []
+
+        def hook(name):
+            calls.append(name)
+            if len(calls) == total:
+                db[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': {'lease_until': 0}})
+        with pytest.raises(RuntimeError, match='before final verification'):
+            do_apply(DBProxy(db, {'delete': hook}), store, receipt)
+        assert len(calls) == total
+        assert db.tejas_cohorts.count_documents({'dirty': True}) == 0  # finalization not performed
+        assert do_apply(db, store, receipt)['phase'] == 'complete'
+
+    @pytest.mark.parametrize('case', ['cancelled_no_hash', 'restored_with_valid_hash', 'aborted_with_valid_hash', 'cas_rival_lease'])
+    def test_foreign_phase_or_lost_cas_fails_before_deletion(self, db, case):
+        seed(db); store = FakeStore(); receipt = do_prepare(db, store)
+        good = R.protected_fingerprint(db, R.build_plan(db, True)); before = canon_all(db); hooks = {}
+        if case == 'cancelled_no_hash':
+            db[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': {'phase': 'cancelled'}})
+        elif case in ('restored_with_valid_hash', 'aborted_with_valid_hash'):
+            db[R.RECEIPTS].update_one({'_id': receipt['_id']}, {'$set': {'phase': case.split('_')[0], 'protected_sha256': good}})
+        else:
+            hooks['cas'] = lambda: set_lease(db, receipt['_id'], 300, token='rival', phase='applying')
+        with pytest.raises(RuntimeError):
+            do_apply(DBProxy(db, hooks), store, receipt)
+        assert canon_all(db) == before

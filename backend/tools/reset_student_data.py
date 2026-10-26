@@ -52,7 +52,7 @@ def scope_queries(db, users, attempts, cohorts):
         'tejas_users': {'id': {'$in': users}, 'role': 'student'},
         'tejas_phone_profiles': {'id': {'$in': users}, 'role': 'student'},
         'tejas_attempts': {'user_id': {'$in': users}},
-        'tejas_jobs': {'$or': [{'payload.attempt_id': {'$in': attempts}, 'user_id': {'$nin': protected}},
+        'tejas_jobs': {'$or': [{'payload.attempt_id': {'$in': attempts}, 'user_id': {'$nin': protected}, 'kind': {'$in': ['report', 'grade', 'cohort']}},
                                {'user_id': {'$in': users}, 'kind': {'$in': ['report', 'grade', 'cohort']}}]},
         'tejas_audits': {'actor': {'$in': users}},
         'tejas_cohort_snapshots': {'id': {'$in': cohorts}},
@@ -208,6 +208,8 @@ def apply(db, binding, owner_email, reset_id, approval_hash, fetch, *, writers_p
         raise RuntimeError('Exact verified snapshot approval hash is required.')
     if receipt['phase'] == 'complete':
         return receipt
+    if receipt['phase'] not in ('prepared', 'applying'):
+        raise RuntimeError('This reset snapshot is not in a phase that permits deletion.')
     manifest = verified_manifest(receipt, fetch)
     plan = manifest['plan']
     if manifest['binding'] != binding or manifest['database'] != db.name:
