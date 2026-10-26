@@ -35,8 +35,8 @@ def fresh_window():
     H.OFFSET[0] += 1800  # move app clock into an unused 15-minute limiter window
 
 
-def client():
-    return httpx.AsyncClient(transport=httpx.ASGITransport(app=H.app, raise_app_exceptions=False),
+def client(peer=('127.0.0.1', 123)):
+    return httpx.AsyncClient(transport=httpx.ASGITransport(app=H.app, raise_app_exceptions=False, client=peer),
                              base_url='https://api.test.example', headers={'Origin': H.ORIGIN}, timeout=60)
 
 
@@ -153,8 +153,8 @@ def test_account_rate_limit_429_retry_after():
     run(go())
 
 
-def test_successful_logins_count_toward_account_limit():
-    """Documents behaviour: limiter increments before verification and never resets on success."""
+def test_successful_logins_reset_account_limit():
+    """iter155: success resets the per-number key, so repeated successful logins are never 429."""
     phone, p, _ = CTX['s1']
     async def go():
         fresh_window()
@@ -162,13 +162,15 @@ def test_successful_logins_count_toward_account_limit():
             codes = [(await c.post('/api/auth/phone', json={'phone': phone, 'pin': p})).status_code for _ in range(6)]
             CTX['success_limit_codes'] = codes
             print('6 successful logins ->', codes)
+            assert codes == [200] * 6, codes
     run(go())
 
 
 def test_ip_rate_limit_60():
+    """iter155: IP guard applies only to a direct GLOBAL ASGI peer (1.1.1.1); private/loopback peers are not IP-bucketed."""
     async def go():
         fresh_window()
-        async with client() as c:
+        async with client(('1.1.1.1', 4444)) as c:
             codes = []
             for i in range(61):
                 codes.append((await c.post('/api/auth/phone', json={'phone': num(), 'pin': '1234'})).status_code)
