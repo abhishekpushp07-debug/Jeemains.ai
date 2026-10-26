@@ -76,6 +76,7 @@ class PinChangePayload(Payload):
 
 
 class OwnerPinResetPayload(PinChangePayload):
+    phone: str = Field(min_length=5, max_length=32, pattern=r'^[+0-9 ()-]+$')
     expected_pin_version: int = Field(ge=0, le=2**63 - 2)
 
 

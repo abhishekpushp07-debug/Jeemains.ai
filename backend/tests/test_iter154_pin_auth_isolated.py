@@ -374,7 +374,8 @@ def test_admin_students_access_matrix_and_allowlist():
             assert r.status_code == 200 and 'no-store' in r.headers.get('cache-control', '')
             d = J(r)
             assert d['total'] == total and d['pages'] == -(-total // 50) and len(d['items']) == 50
-            assert all(set(x) == {'id', 'phone'} for x in d['items'])
+            # iter161: projection intentionally widened to id, phone, pin_version (owner reset CAS token)
+            assert all(set(x) == {'id', 'phone', 'pin_version'} for x in d['items'])
             for leak in ('SECRET', 'secret@', '$2b$', 'pin_hash', '"_id"', 'name', 'email'):
                 assert leak not in r.text
             p2 = J(await c.get('/api/admin/students?page=2'))

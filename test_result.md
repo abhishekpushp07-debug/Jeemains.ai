@@ -1,3 +1,11 @@
+# QA161 follow-up fixes — 2026-10-26
+qa161_followup:
+  passed: "11ownerreset+27auth154+15limit156+11auth155 allpass, actualisolatedownerUI fullreset oldPINrejectnewsamelogin, fullhomehit/keyboard/newtab/shortcuts andpreflightgating/PYQregressionpassed"
+  fixes: "Owner-resetphoneASCII-onlyvalidationlocal(newpayloadpattern), nochangeoldphoneownsignupnormalization. Errorboxinsidecheckcalloutwhencheckedfalse;checkedresetatstartofnewcheckpreventsfailedrecheckleavingoldsuccessstartenabled. Progressfont13px. Ownerdialogmobile16pxmargin+44pxbuttons/X +toastdismissonopen. Examtitle nowtextwithh2legacytestid (fullnativeoverlaysolehubanchor) removesduplicatelink; nav/livebadge44pxtap."
+  intentional: "DoNOTadd guard forimpossibleincrementNone: realsharedhelperalwaysintorraises503, brokenmockcontractonly. That'snotruntimebug; tests161proveactualhelperfailclosed."
+  next: "Narrow162verifylocalASCII422+preflightfailedrecheckgating+errorplacement+ownerUI/44px/nooverlapandtitleclicknativeoverlay. No actualtargetPINchanged/publishedyet."
+
+
 # Added approved Home/preflight scope — 2026-10-26
 home_preflight161:
   exact: "Home screen pr 4 card hai 3 exams ek all india wo pura card clickable hona chiye. Also test start se phle samay check my device ko ek box me dalo aur bolo click here ."

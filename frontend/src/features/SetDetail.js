@@ -42,7 +42,7 @@ export default function SetDetail() {
     return () => controller.abort();
   }, [id, preview, userId, checking, retry]);
   async function check() {
-    setBusy(true); setError('');
+    setBusy(true); setError(''); setChecked(false);
     try {
       localStorage.setItem('tejas-device-check', 'ok');
       if (localStorage.getItem('tejas-device-check') !== 'ok') throw new Error('Enable browser storage to protect pending answer drafts.');
@@ -106,10 +106,11 @@ export default function SetDetail() {
               <p id="preflight-check-box-description" data-testid="preflight-check-box-description">Check your connection and browser storage before starting. This will not start the timer.</p>
               <Button variant="outline" className="btn btn-secondary full-width device-check-callout-button" data-testid="preflight-run-check" aria-describedby="preflight-check-box-description" aria-label={checked?'Device check passed':busy?'Checking your device':'Click here to check my device'} disabled={busy} onClick={check}>{busy ? <Loader2 className="spin" size={17} /> : checked ? <CheckCircle2 size={17} /> : <Wifi size={17} />}{checked ? 'Device check passed' : busy ? 'Checking…' : 'Click here'}{!checked&&!busy&&<ArrowRight size={17}/>}</Button>
               {busy && !checked && s.test_kind === 'pyq' && <p className="muted" role="status" data-testid="pyq-preflight-progress">Checking the original question and solution pages. The first check may take a few seconds.</p>}
+              {!checked && <ErrorBox error={error} />}
               {checked && <p className="device-check-success" role="status" data-testid="preflight-check-success">Connection check passed and browser storage is available. You can enlarge original source images during the attempt.</p>}
             </section>
             <label className="checkbox-label" htmlFor="preflight-consent"><Checkbox id="preflight-consent" className="preflight-checkbox" data-testid="preflight-acknowledge" checked={confirmed} onCheckedChange={v => setConfirmed(v === true)} /><span>I can read the content and understand the rules and offline saving policy.</span></label>
-            <ErrorBox error={error} />
+            {checked && <ErrorBox error={error} />}
             <p className="import-fineprint" data-testid="preflight-source-image-disclosure">If a required source image fails to load during the attempt, answering pauses until it loads. This check does not certify every formula’s readability.</p>
             <div className={checked&&confirmed?'preflight-start-ready':''} data-testid="preflight-start-actionbar"><Button className="btn btn-primary full-width" data-testid="set-preflight-start-button" disabled={!checked || !confirmed || busy} onClick={start}>{busy ? <Loader2 className="spin" size={18} /> : null}Start {preview ? 'private preview' : 'attempt'}<ArrowRight size={18} /></Button></div>
           </> : <Button asChild className="btn btn-primary full-width"><Link data-testid="preflight-login" to={'/login?next=' + encodeURIComponent('/sets/' + id)}>Sign in to start<ArrowRight size={17} /></Link></Button>}

@@ -381,7 +381,7 @@ def test_pin_change_denials_and_directory_scope():
         async with client() as o:
             assert (await o.post('/api/auth/login', json={'email': OWNER['email'], 'password': OWNER_PW})).status_code == 200
             d = J(await o.get('/api/admin/students'))
-            assert d['items'] and all(set(x) <= {'id', 'phone'} for x in d['items']), d['items'][:2]
+            assert d['items'] and all(set(x) <= {'id', 'phone', 'pin_version'} for x in d['items']), d['items'][:2]
             assert '$2b$' not in str(d)
     run(go())
 

@@ -1,0 +1,56 @@
+{
+  "summary": "QA161 tested three things: the owner-only student PIN reset backend, its Super Admin UI, the whole-card home links, and the Check-my-device box. Backend ran against the REAL FastAPI app over httpx ASGITransport with real JWT cookies/sessions, no dependency overrides, and a random isolated Mongo DB (iso_harness_iter161, tejas_isolated_iter161_<hex>), dropped before and after; no real handles leaked. New suite test_iter161_owner_pin_reset_isolated.py: 11/11 pass. (a) Authz: anonymous 401; student 403; reviewer 403; cross-origin with a valid owner cookie blocked; owner demoted in the DB to reviewer gets 403 and to an unknown role is rejected; a role flag in the body gives 422. (b) Strict payload: role/token extra fields, bool/str/float/negative version, Arabic-Indic PIN, alphanumeric or 5-digit PIN, mismatch, missing version and non-string phone/pin all give 422. (c) v1 reset: receipt has exactly ok/student_id/pin_version/old_sessions_revoked, no Set-Cookie, Cache-Control no-store, no phone/PIN/hash in the response or logs. Owner remains owner. Both old student sessions get 401 on /me and /refresh and are physically deleted. The other student's and the owner's sessions are kept. Old PIN 401, new PIN 200 with the same ID. The hash is $2b$, and pin_reset_by/pin_reset_at are stored on the profile. Non-auth profile fields and synthetic attempts/results are unchanged. The central audit has actor/resource and no secrets. The directory returns exactly id/phone/pin_version. Stale version gives 409. (d) Legacy v0 profile (no pin_version/access_type/role) resets with expected 0 to v1. The phone forms 0x, 91x and '+91 xxxxx xxxxx' target the same account, and no duplicate is created. (e) A nonexistent target, or a phone profile with role=owner, gives 409 and creates no profile. (f) 5 concurrent resets: exactly 1x200 + 4x409. 3 rounds of the student's own change racing an owner reset: exactly one wins and the winner's PIN logs in. (g) Cleanup deletes only old or missing-version student sessions; a new-version session and a staff-shaped session are kept. (h) An existing hourly failed-PIN lockout stays in place after a reset (new PIN still 429). (i) Target 5 per 15 min then 429, and actor 10 then 429, both with Retry-After. The second owner is not affected by the first owner's bucket. (j) If the central audit write fails: 200, the receipt embedded on the profile is kept, and the warning is generic. If session cleanup fails: 200 and the old cookie is still 401 on access and refresh. If the limiter fails: fails closed with no mutation. If the mutation fails: 5xx, no change, old PIN still works. Regression: iter154 27/27 and iter156 15/15 (both after the intended directory projection update), iter155 11/11 (PYQ two-cookie test deselected). UI: Owner Reset PIN ran through a real isolated uvicorn bridge (iso_bridge_iter161.py, port 8796) with synthetic owner/reviewer/students and a manual cookie jar. Dialog: opacity 1 after settling, focus on the PIN field, read-only phone, non-digits filtered. A mismatch shows 'PINs must match.' with 0 POSTs, and a short PIN is blocked by native validation. Cancel and Escape clear the values. Submitting shows busy 'Resetting…'; success closes the dialog, shows the toast and refetches the list, and the version increments in the DB. A stale dialog shows the 409 'Refresh the student list' message; after refreshing, the retry succeeds. A legacy v0 student resets from the UI. Afterwards the old PIN gives 401 and the new one 200, and the owner session is still owner. Reviewer sees the denied page with no reset buttons, and direct API 403. Anonymous and student users are redirected to /owner-login. Home cards on the public / page and signed-in /home (browser stubs, MOCKED read-only data): hit-tests at the corners, center, icon, eyebrow, subtitle and counter all resolve to the whole-card link. Every inner control (title link, Explore PYQ/mock, Chapter practice, My results, live badge, Explore the series, series hub, streak-mini link) hit-tests to itself, not to the overlay. There are no nested anchors. Navigation: card to /exams/{slug} and banner to /series/all-india-jee. Guest clicks go to /login?next=<correct path> (/exams/{slug}, /pyq, /mocks, /chapters, /results). Explore the series and the live badge open the explainer without navigating. The shine toggle works. Keyboard focus-visible shows a 3px outline, Enter navigates, Ctrl+click opens a new tab, and page overflow is 0 at both 1920 and 390. SetDetail device check (real public set GET plus stubbed preflight/start POSTs, MOCKED): the guest sees the Sign-in link with the correct next. 'Check my device' box with title, description and a 'Click here' button. Start stays disabled for the checkbox alone and for a passed device check alone; it needs both. Checking… and the PYQ progress message appear inside the box. A failure lets you retry, and the success message is inside the box. Captured bodies: preflight {preview:false,test_response:''} and start {preview:false,device_checked:true,start_key}. Overflow is 0 at 390. PYQ regression: 2026=19 and 2025=11, single-column stack, 0 overflow at 1920 and 390.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/auth/owner/student-pin-reset (shared normalize_phone)", "issue": "Phone numbers written in non-ASCII Devanagari digits ('९९१६१...') are accepted: phonenumbers converts them to the SAME E164 account and the reset gets 200. The requirement listed non-ASCII as rejected. This is not a different-account bypass, but it is not strict. Suggested fix: add pattern ^[+0-9 ()-]+$ (ASCII) to the phone field in PinChangePayload/OwnerPinResetPayload, or check phone.isascii() before parsing."},
+      {"endpoint": "POST /api/auth/owner/student-pin-reset", "issue": "If increment() returns None (a broken limiter contract), the handler raises a TypeError, which gives a generic 500 rather than 503 Retry-After. It still fails closed with no mutation. The real increment raises instead, which gives 503."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "SetDetail device check", "issue": "A failed check renders its error (data-testid=request-error) BELOW the consent checkbox, outside preflight-check-box. The requirement asked for the failure/retry inside the box. The retry itself works.", "selector": "[data-testid=preflight-check-box]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "SetDetail Check my device box (1920)", "issues": ["The PYQ progress text 'Checking the original question and solution pages…' inside the box renders larger (~16px) than the 13px description/12px success text, so the type sizes are inconsistent"]},
+      {"screen": "Super Admin Reset PIN dialog", "issues": ["The Sonner toast (top-center) overlaps the dialog title when the dialog is open, e.g. a success toast followed by opening the next dialog or a 409", "At 390 the dialog is edge-to-edge (0-390px) with no side margin; the Cancel/Submit buttons are 36px and the close X target is about 16px (below 44px)"]},
+      {"screen": "Home cards mobile 390", "issues": ["The Chapter practice/My results links (30px) and the live badge (29px) are below the 44px tap target (likely pre-existing)", "Each exam card has two links to the same hub (whole-card overlay + title link), so screen readers announce it twice (minor a11y redundancy)"]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter161_owner_pin_reset_isolated.py",
+    "/app/backend/tests/iso_harness_iter161.py",
+    "/app/backend/tests/iso_bridge_iter161.py",
+    "/app/test_reports/pytest/iter161_owner_reset.xml",
+    "/app/test_reports/pytest/iter161_regression_154.xml",
+    "/app/test_reports/pytest/iter161_regression_156.xml"
+  ],
+  "action_items": [
+    "Optional hardening: reject non-ASCII phone digits in owner reset (and the shared phone payloads) with an ASCII pattern",
+    "Move the device-check failure ErrorBox (or a copy of it) inside .device-check-callout so failure/retry shows in the box",
+    "Use the same small font size for pyq-preflight-progress inside the box",
+    "Move the toast or add a top offset so it does not cover the open Reset PIN dialog; add a mobile side margin and 44px buttons in the dialog"
+  ],
+  "critical_code_review_comments": [
+    "phone.py owner_reset_pin: the CAS filter on phone + role/access_type in [student, None] + $ifNull(pin_version,0) is correct. Staff live in tejas_users, so they cannot be touched. No upsert. The projection returns only id/pin_version.",
+    "The limiter consumes target/actor budget even on 409, so 5 stale attempts block that target for 15 min. This is acceptable fail-safe behaviour, but owners may need to wait after mistakes.",
+    "The central audit detail 'pin_version=N' has no secrets. pin_reset_by/at are written atomically with the CAS.",
+    "OwnerPinReset.js: toggle() is ignored while busy, which is good. A 409 does not auto-refresh the list; the user must press refresh (the message tells them)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter154_pin_auth_isolated.py (directory projection now {id,phone,pin_version})",
+    "/app/backend/tests/test_iter156_pin_hour_budget_isolated.py (directory projection subset now includes pin_version)",
+    "/app/backend/tests/test_iter161_owner_pin_reset_isolated.py (new)",
+    "/app/backend/tests/iso_harness_iter161.py (new, copy of 156 harness with iter161 DB prefix)",
+    "/app/backend/tests/iso_bridge_iter161.py (new UI bridge, port 8796)"
+  ],
+  "success_rate": {"backend": "100% (11/11 new; 27/27 iter154, 15/15 iter156, 11/11 iter155 regressions)", "frontend": "~95% (all flows pass; 1 low-priority placement issue + design nits)"},
+  "test_credentials": "Only random ephemeral synthetic owner/reviewer/student credentials inside isolated DBs (/tmp/iter161_creds.json deleted). No real owner credentials, customer DB cookies or target phone/PIN used. No actual reset or publish performed.",
+  "seed_data_creation": "None persistent. All isolated DBs dropped (verified DROPPED True, no iter15x/161 DBs remain).",
+  "mocked": "Browser route stubs (MOCKED TEST DATA, not app APIs) for home/session/series/PYQ catalogue and SetDetail preflight/start POSTs; Owner UI used the real API via the isolated bridge.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run the backend suites in the foreground with -n0 (xdist breaks module-level loops), and run each file in its own process: a combined harness run errors. The bridge needs a manual cookie jar in the playwright handler. Home hit-tests need scroll-behavior:auto and evaluation after scrolling; elementFromPoint returns null offscreen. Playwright locator.click on inner text inside cards is intercepted by the overlay by design, so use mouse.click at coordinates.",
+  "rca of the issue": "Non-ASCII phone: phonenumbers.parse normalises Unicode decimal digits to ASCII, and the PinChangePayload phone field has only a length constraint. Device-check error: SetDetail renders the shared ErrorBox after the consent label rather than inside .device-check-callout."
+}
