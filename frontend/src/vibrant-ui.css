@@ -215,6 +215,19 @@ a:focus-visible,button:focus-visible { outline:2px solid var(--focus-ring); outl
 .bold-exam-card .exam-primary { border-color:var(--blue); box-shadow:none; }
 .bold-exam-card .exam-primary:hover,.bold-exam-card.exam-tone-bitsat .exam-primary:hover { color:#FFF; background:var(--brand-hover); }
 .bold-exam-card a:focus-visible { outline-color:var(--focus-ring); }
+.exam-home .bold-exam-card {
+ --exam-colour:#2A080C; --exam-accent:#E9C9BC; --exam-muted:#D8C7C1; --exam-line:#581622; --exam-button:#08080A; --exam-button-ink:#FAF4ED;
+ background:var(--exam-colour); color:#FAF4ED; border-color:var(--exam-line);
+ box-shadow:inset 0 1px 0 rgb(255 235 225 / .12),0 18px 38px rgb(0 0 0 / .24);
+}
+.exam-home .bold-exam-card:hover,.exam-home .bold-exam-card:focus-within { border-color:#8B2032; box-shadow:inset 0 1px 0 rgb(255 235 225 / .18),0 22px 42px rgb(0 0 0 / .3); }
+.exam-home .bold-exam-card h2,.exam-home .bold-exam-card h2 a { color:#FAF4ED; }
+.exam-home .bold-exam-card .bold-exam-top { color:#E9C9BC; }
+.exam-home .bold-exam-card:after { border-color:rgb(233 201 188 / .15); box-shadow:0 0 0 36px rgb(233 201 188 / .025),0 0 0 72px rgb(233 201 188 / .015); }
+.exam-home .bold-exam-card .exam-primary { background:#08080A; color:#FAF4ED; border-color:#4A1520; box-shadow:inset 0 1px 0 rgb(255 244 237 / .05); }
+.exam-home .bold-exam-card .exam-primary:hover { background:#14141A; color:#FAF4ED; border-color:#9A5260; box-shadow:0 5px 14px rgb(0 0 0 / .2); }
+.exam-home .bold-exam-card nav a:hover { color:#FAF4ED; }
+.exam-home .bold-exam-card a:focus-visible { outline-color:#FAF4ED; outline-offset:4px; }
 .flagship-banner { background:#160B10; border-color:#6C2734; box-shadow:inset 0 1px rgb(255 255 255 / .06),0 20px 42px rgb(0 0 0 / .24); }
 .flagship-banner:after { border-color:#A6374833; box-shadow:0 0 0 70px #A6374808,0 0 0 140px #A6374804; }
 .flagship-banner .series-kicker,.astra-on-banner,.flagship-counter,.flagship-counter>small,.flagship-banner p,.series-banner-facts { color:#C9B8BD; }

@@ -1,5 +1,10 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
+## Home wine-card refinement COMPLETE (preview) — 2026-10-26
+Latestuserrequest EXACT: 'Theme acha lag rha lekin cards bi usi me rkh diye thoda cards ko alag colour do na lekin soch ke isiliye mujhe 4 options do home ke cards ko alag design me fir batata'. Offered4looks;userselected 'Wine cards + ivory text', additional 'Beautiful and elegant'. Selecteddescriptiondeepwinecards/ivoryheadings/blackbuttons. Designagentblueprintfollowedsolidwinefallback(no sitewidechanges):ONLY scoped .exam-home .bold-exam-card inexistingvibrant-ui.css, #2A080Csurface,#FAF4EDivory,#D8C7C1supporting,#08080AblackCTA,#581622border/subtlewarmedge/ivoryfocus/charcoalhover. ExistingthreeJEE/BITSAT/COMEDKcards/layout/content/shinetoggle/routesretained. Logo/header/seriesbanner/otherpages/API/database/authUNCHANGED. No new features.
+TargetedSELFbrowsercomponentcheck—notfullbackendregression—passed actualpreviewURL1920x800+390x844allthreecardsvisible,RGBcomputedmatchescolorsabove,blackCTAhover#14141Aivory,correcthrefsJEEpyq/BITSATmocks/COMEDKmocks,shinetoggletrue,0overflowboth,body#08080Aunchanged. Read-onlybrowserAPIfixturesONLY(norealaccount/session/DBwrites);noappmockedAPI. Firstvisualfixturewrappedwithoutmeta.api_versionwronglyredirectedlogin; correctedfixtureplainbodyandrerunPASS, noauthappfixneeded. Screenshots/root/.emergent/automation_output/20261026_072346_fcbe84ee5d01. Reportiteration148targetedselfwritten. AllchangesrenderedafterlastCSSedit. ThisincrementNOTseparatelyrepublished;previousreleasejob bcd75d41-4661-4f5a-bead-654e0ffe34d2 remainsawaitingplatformnotification—doNOTredispatch/poll orclaimproductioncardsupdatedwithoutproof.
+
+
 ## Customer-facing checkpoint — 2026-10-26
 Closing current active work with PREVIEW completion and LIVE QUEUED status only, not claiming production success. Actualdeployerjob bcd75d41-4661-4f5a-bead-654e0ffe34d2 alreadyrunning; no redispatch/poll. Normalplatformnotificationmusttriggerremainingproductionoutcomeverification/anyblockerhandling. No new feature suggestions while release is in progress.
 

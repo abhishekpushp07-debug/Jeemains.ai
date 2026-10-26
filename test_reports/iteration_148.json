@@ -1,0 +1,15 @@
+{
+  "iteration": 148,
+  "date": "2026-10-26",
+  "status": "passed",
+  "testing_type": "targeted self browser check, single CSS component",
+  "scope": "Home JEE Main, BITSAT and COMEDK cards only: wine surfaces, ivory type, black buttons",
+  "files_changed": ["frontend/src/vibrant-ui.css", "design_guidelines.json"],
+  "viewport_checks": [{"width":1920,"height":800,"overflow":[]}, {"width":390,"height":844,"overflow":[]}],
+  "verified": ["All three cards render wine rgb(42,8,12)", "Headings ivory rgb(250,244,237)", "CTA black rgb(8,8,10); hover rgb(20,20,26) with ivory text", "Existing JEE PYQ, BITSAT mock and COMEDK mock hrefs unchanged", "Pause shine toggle still changes aria-pressed", "Global page background rgb(8,8,10) unchanged", "All three cards visually inspected at both sizes"],
+  "evidence": "/root/.emergent/automation_output/20261026_072346_fcbe84ee5d01",
+  "test_fixture": "Browser-only read-only session/series data. No real auth sessions, accounts, DB reads/writes, LLM or storage requests. First fixture omitted API envelope metadata and redirected to login; fixed fixture (not app) and reran successfully.",
+  "mocked_application_apis": false,
+  "not_tested": ["Full backend regression (CSS-only change)", "Production publication of this refinement"],
+  "open_issues": []
+}

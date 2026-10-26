@@ -1,148 +1,91 @@
 {
   "project_name": "JEELIVE.AI",
-  "project_type": "jee_mains_pyq_platform_and_premium_reskin",
-  "theme_architecture": "Obsidian Black (#08080A / #0C0C10) & Blood Premium Red (#D91222 / #DC2626 / #880808) - Pure Dark Luxury & High-Performance Tactical Minimalism (ZERO Blue)",
-  "design_archetype": "THE_PERFORMANCE_PRO_TACTICAL_MINIMALISM",
-  "emotional_tone": "Elite, focused, authoritative, zero-latency dark elegance for competitive exam aspirants",
+  "project_type": "saas_app_jee_mains_pyq_platform",
+  "selected_home_cards_option": "Wine cards + ivory text (Beautiful and elegant)",
+  "theme_architecture": "Global Obsidian Black (#08080A) & Blood Premium Red (#D91222) with HOME-ONLY Deep Wine Red (#2A080C) Cards + Ivory Text (#FAF4ED) + Obsidian Black Buttons (#08080A)",
+  "design_archetype": "LUXURY_DEEP_WINE_ACCENT_TACTICAL",
+  "emotional_tone": "Beautiful, elegant, high-contrast rich wine red surfaces with pristine ivory typography and sharp obsidian buttons for home exam selection",
   "tech_stack": {
     "framework": "React JS (.js / .jsx files)",
-    "styling": "Tailwind CSS + Custom CSS Variables in index.css & App.css",
+    "styling": "Tailwind CSS + Custom CSS in vibrant-ui.css & index.css",
     "primary_font": "Figtree (sans-serif)",
     "mono_font": "Roboto Mono / JetBrains Mono"
   },
+  "home_card_design_specs": {
+    "scope": "Home exam selection cards ONLY (JEE Main / BITSAT / COMEDK in ExamHomeCards / Home.js / vibrant-ui.css). All other pages, global background, header, logo, and results remain untouched.",
+    "card_surface": {
+      "bg_color": "Deep Wine Red gradient: linear-gradient(155deg, #2E0911 0%, #20050A 55%, #150306 100%)",
+      "solid_fallback": "#2A080C",
+      "border": "1px solid #581622",
+      "hover_border": "1px solid #8B2032",
+      "inner_glow": "inset 0 1px 0 rgba(255, 235, 225, 0.12)",
+      "box_shadow": "0 18px 40px rgba(18, 2, 5, 0.70)",
+      "hover_shadow": "0 22px 50px rgba(139, 32, 50, 0.25), 0 18px 40px rgba(18, 2, 5, 0.85)"
+    },
+    "card_typography": {
+      "heading": {
+        "color": "#FAF4ED",
+        "font_weight": "800",
+        "letter_spacing": "-0.02em",
+        "description": "Ivory / Champagne heading for pure elegance and high contrast against rich wine background"
+      },
+      "subtext_and_body": {
+        "color": "#D8C7C1",
+        "font_weight": "500",
+        "description": "Warm rose-tinted ivory for secondary text and stats"
+      },
+      "eyebrow_badge": {
+        "bg": "#421019",
+        "color": "#F3E5E1",
+        "border": "1px solid #6D1B2A",
+        "font_weight": "750"
+      },
+      "highlight_text": {
+        "color": "#F8E7D8",
+        "font_weight": "700"
+      }
+    },
+    "card_buttons": {
+      "bg_color": "#08080A",
+      "text_color": "#FAF4ED",
+      "border": "1px solid #4A1520",
+      "font_weight": "750",
+      "hover_bg": "#14141A",
+      "hover_border": "#782030",
+      "hover_text": "#FFFFFF",
+      "hover_shadow": "0 8px 20px rgba(0, 0, 0, 0.60)",
+      "active_transform": "scale(0.98)"
+    }
+  },
   "global_color_tokens": {
-    "theme_mode": "Pure Dark Mode Sitewide (Light background stripped out in favor of deep obsidian)",
+    "theme_mode": "Pure Dark Mode Sitewide",
     "bg_page": "#08080A",
     "bg_surface_alt": "#0F0F14",
     "bg_card": "#14141C",
-    "bg_card_hover": "#1D1D28",
-    "bg_header_glass": "rgba(8, 8, 10, 0.88)",
+    "home_wine_card_bg": "#2A080C",
+    "home_wine_card_border": "#581622",
+    "home_card_heading_ivory": "#FAF4ED",
+    "home_card_subtext_ivory": "#D8C7C1",
+    "home_card_button_black": "#08080A",
     "border_subtle": "#22222E",
-    "border_muted": "#2A2A3C",
-    "border_blood": "#DC2626",
-    "border_blood_glow": "rgba(220, 38, 38, 0.35)",
     "blood_red_primary": "#D91222",
-    "blood_red_bright": "#EF4444",
-    "blood_red_hover": "#B91C1C",
-    "blood_red_dark": "#450A0A",
-    "blood_red_soft": "rgba(217, 18, 34, 0.12)",
     "text_primary": "#F8FAFC",
-    "text_secondary": "#CBD5E1",
-    "text_muted": "#8A8A9E",
-    "text_dim": "#525266",
-    "success_green": "#22C55E",
-    "success_soft": "rgba(34, 197, 94, 0.12)",
-    "warning_amber": "#F59E0B",
-    "warning_soft": "rgba(245, 158, 11, 0.12)",
-    "review_purple": "#A855F7",
-    "review_soft": "rgba(168, 85, 247, 0.12)"
+    "text_secondary": "#CBD5E1"
   },
-  "logo_recreation_blueprint": {
-    "concept": "Vector SVG emblem matching the supplied asset brand reference, redesigned natively with blood-red crimson gradient and obsidian backdrop. NO crop-pasted raster images.",
-    "svg_markup_blueprint": "<svg viewBox='0 0 240 48' fill='none' xmlns='http://www.w3.org/2000/svg' class='h-10 w-auto'><defs><linearGradient id='bloodGlow' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#FF2E3B'/><stop offset='100%' stop-color='#99000D'/></linearGradient><filter id='glow' x='-20%' y='-20%' width='140%' height='140%'><feGaussianBlur stdDeviation='3' result='blur'/><feComposite in='SourceGraphic' in2='blur' operator='over'/></filter></defs><path d='M12 8 L28 8 L36 24 L28 40 L12 40 L20 24 Z' fill='url(#bloodGlow)' filter='url(#glow)'/><path d='M22 14 L30 24 L22 34 L16 34 L22 24 L16 14 Z' fill='#FFFFFF'/><text x='46' y='32' fill='#FFFFFF' font-family='Figtree, sans-serif' font-weight='900' font-size='22' letter-spacing='-0.8'>JEE<tspan fill='#FF2E3B'>LIVE</tspan></text><rect x='152' y='14' width='38' height='18' rx='4' fill='#280509' stroke='#FF2E3B' stroke-width='1.2'/><text x='157' y='27' fill='#FF858E' font-family='Figtree, sans-serif' font-weight='800' font-size='10' letter-spacing='0.5'>.AI</text></svg>",
-    "style_rules": "Always render in responsive flex container with high contrast legibility over sticky header backdrop-blur-xl bg-[#08080A]/90"
-  },
-  "css_custom_properties_override": {
-    "variables_mapping": {
-      "--page": "#08080A",
-      "--surface-alt": "#0F0F14",
-      "--surface-card": "#14141C",
-      "--card-alt": "#1A1A24",
-      "--ink": "#F8FAFC",
-      "--text-muted": "#8A8A9E",
-      "--text-muted-2": "#62627A",
-      "--line": "#22222E",
-      "--blue": "#D91222",
-      "--brand-hover": "#B91C1C",
-      "--brand-active": "#880808",
-      "--brand-soft": "rgba(217, 18, 34, 0.14)",
-      "--brand-line": "rgba(217, 18, 34, 0.35)",
-      "--on-brand": "#FFFFFF",
-      "--focus-ring": "#EF4444",
-      "--brand-text": "#EF4444",
-      "--brand-blue": "#D91222",
-      "--navy": "#F8FAFC",
-      "--hero-dark": "#0A0507",
-      "--shadow-tint": "rgba(217, 18, 34, 0.08)"
-    },
-    "accessibility_fixes": {
-      "hover_contrast_fix": "Results and Solution tabs must NOT use low contrast hover. Set `hover:bg-[#28080E] hover:text-[#FFFFFF] data-[state=active]:bg-[#D91222] data-[state=active]:text-[#FFFFFF]` to guarantee APCA ratio > 8:1.",
-      "sticky_nav_obscure_fix": "Add `scroll-margin-top: 120px` (or `scroll-mt-28` class) to all anchor headings (.review-question, section headings) and set sticky subnav z-index to `z-20` below sticky header `z-30` so header/subnav never overlaps section title text."
-    }
-  },
-  "source_pdf_images_rule": {
-    "CRITICAL": "DO NOT invert colors on source PDF images or figures! Scanned JEE Math equations, graphs, and circuit diagrams inside PDFs/images must retain their original white background and dark text inside a clean high-contrast container.",
-    "container_style": "bg-white p-3 rounded-lg border border-zinc-200 shadow-md inline-block max-w-full overflow-x-auto my-2"
-  },
-  "pyq_and_player_blueprints": {
-    "catalogue_navigation": {
-      "header_title": "JEE Main Date-Wise & Shift-Wise PYQs",
-      "year_tabs": ["2024", "2023", "2022", "2021", "Chapter Practice"],
-      "shift_pills": ["27 Jan Shift 1", "27 Jan Shift 2", "29 Jan Shift 1", "29 Jan Shift 2", "30 Jan Shift 1", "30 Jan Shift 2", "31 Jan Shift 1", "31 Jan Shift 2", "01 Feb Shift 1", "01 Feb Shift 2"],
-      "tab_active_style": "bg-[#D91222] text-white shadow-[0_0_12px_rgba(217,18,34,0.4)] font-bold rounded-lg border border-rose-500"
-    },
-    "test_card_states": {
-      "unattempted": {
-        "badge": "UNATTEMPTED (bg-zinc-800 text-zinc-300 border border-zinc-700)",
-        "cta_button": "Start Test (bg-[#D91222] hover:bg-[#B91C1C] text-white font-semibold shadow-lg shadow-rose-950/50)"
-      },
-      "completed": {
-        "badge": "COMPLETED (bg-emerald-950/60 text-emerald-400 border border-emerald-800)",
-        "cta_view_result": "View Result (border border-[#D91222] text-rose-400 hover:bg-[#D91222] hover:text-white)",
-        "cta_reattempt": "Attempt Again (bg-zinc-800 hover:bg-zinc-700 text-zinc-200)"
-      }
-    },
-    "exam_player_layout": {
-      "timer_bar": "bg-[#18080C] border border-rose-900/60 text-rose-400 font-mono font-bold text-lg px-4 py-2 rounded-lg flex items-center gap-2",
-      "question_palette": {
-        "answered": "bg-emerald-950 border border-emerald-600 text-emerald-300 font-bold",
-        "marked_for_review": "bg-purple-950 border border-purple-600 text-purple-300 font-bold",
-        "current_question": "ring-2 ring-[#D91222] ring-offset-2 ring-offset-[#08080A]",
-        "unvisited": "bg-[#14141C] border border-[#22222E] text-zinc-400"
-      }
-    }
-  },
-  "high_concurrency_architecture": {
-    "concurrency_target": "500,000 concurrent student capability",
-    "frontend_optimizations": [
-      "Local response caching in IndexedDB / localStorage for instant state restore during network micro-outages",
-      "Optimistic submit queue with background retry and toast confirmation",
-      "Debounced auto-save on numerical and option selection (250ms debounce)",
-      "Lazy loading and WebP/DPI optimization for cropped solution figures"
-    ]
-  },
-  "component_guidelines": {
-    "HeaderNav": {
-      "style": "sticky top-0 z-30 bg-[#08080A]/90 backdrop-blur-xl border-b border-[#22222E] h-16 px-6 flex items-center justify-between",
-      "data_testids": ["header-nav", "header-logo", "nav-pyq-link", "nav-chapter-link", "nav-testseries-link", "user-profile-menu"]
-    },
-    "PyqCatalogueHeader": {
-      "style": "relative py-12 px-6 bg-gradient-to-b from-[#180508] to-[#08080A] border-b border-[#22222E] overflow-hidden",
-      "data_testids": ["pyq-catalogue-header", "pyq-main-title", "pyq-filter-search"]
-    },
-    "PyqTestCard": {
-      "style": "bg-[#14141C] hover:bg-[#1D1D28] border border-[#22222E] hover:border-rose-900/60 transition-all rounded-2xl p-6 flex flex-col justify-between shadow-xl",
-      "data_testids": ["pyq-test-card", "pyq-card-title", "pyq-start-test-button", "pyq-view-result-button", "pyq-reattempt-button"]
-    },
-    "ExamPlayer": {
-      "style": "min-h-screen bg-[#08080A] text-slate-100 flex flex-col",
-      "data_testids": ["exam-player-container", "question-timer", "question-palette", "option-radio", "save-next-button", "submit-test-button"]
-    },
-    "ResultsSolutions": {
-      "style": "py-10 px-6 max-w-7xl mx-auto space-y-8",
-      "data_testids": ["results-summary-card", "solution-tabs-header", "solution-item-card", "solution-cropped-image"]
-    }
+  "css_override_blueprint_for_vibrant_ui_css": {
+    "selector": ".bold-exam-card, .bold-exam-card.exam-tone-jee-main, .bold-exam-card.exam-tone-bitsat, .bold-exam-card.exam-tone-comedk",
+    "css_rules": "\n/* Home Exam Cards - Wine + Ivory + Black Buttons Override */\n.bold-exam-card,\n.bold-exam-card.exam-tone-jee-main,\n.bold-exam-card.exam-tone-bitsat,\n.bold-exam-card.exam-tone-comedk {\n  background: linear-gradient(155deg, #2E0911 0%, #20050A 55%, #150306 100%) !important;\n  border: 1px solid #581622 !important;\n  box-shadow: inset 0 1px 0 rgba(255, 235, 225, 0.12), 0 18px 40px rgba(18, 2, 5, 0.70) !important;\n  color: #FAF4ED !important;\n  border-radius: 18px !important;\n  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease !important;\n}\n\n.bold-exam-card:hover,\n.bold-exam-card.exam-tone-jee-main:hover,\n.bold-exam-card.exam-tone-bitsat:hover,\n.bold-exam-card.exam-tone-comedk:hover {\n  border-color: #8B2032 !important;\n  box-shadow: inset 0 1px 0 rgba(255, 235, 225, 0.18), 0 22px 50px rgba(139, 32, 50, 0.25), 0 18px 40px rgba(18, 2, 5, 0.85) !important;\n  transform: translateY(-2px) !important;\n}\n\n/* Card Headings & Typography */\n.bold-exam-card h2,\n.bold-exam-card h2 a,\n.bold-exam-card.exam-tone-bitsat h2,\n.bold-exam-card.exam-tone-bitsat h2 a {\n  color: #FAF4ED !important;\n  font-weight: 800 !important;\n}\n\n.bold-exam-card p,\n.bold-exam-card .exam-meta,\n.bold-exam-card .exam-subtitle {\n  color: #D8C7C1 !important;\n}\n\n/* Card Eyebrows & Badges */\n.bold-exam-card .exam-badge,\n.bold-exam-card .eyebrow {\n  background: #421019 !important;\n  color: #F3E5E1 !important;\n  border: 1px solid #6D1B2A !important;\n}\n\n/* Black Buttons inside Wine Cards */\n.bold-exam-card .exam-primary,\n.bold-exam-card.exam-tone-bitsat .exam-primary,\n.bold-exam-card .jeelive-button {\n  background: #08080A !important;\n  color: #FAF4ED !important;\n  border: 1px solid #4A1520 !important;\n  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.50) !important;\n  font-weight: 750 !important;\n}\n\n.bold-exam-card .exam-primary:hover,\n.bold-exam-card.exam-tone-bitsat .exam-primary:hover,\n.bold-exam-card .jeelive-button:hover {\n  background: #14141A !important;\n  color: #FFFFFF !important;\n  border-color: #782030 !important;\n  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.70), 0 0 12px rgba(120, 32, 48, 0.30) !important;\n}\n"
   },
   "instructions_to_main_agent": [
-    "1. Enforce sitewide Obsidian Black and Blood Red styling across index.css and App.css.",
-    "2. Render recreated Vector SVG Logo (JEELIVE.AI) matching the supplied asset aesthetics with zero blurred image crops.",
-    "3. Keep white/light background for source PDF math figures/images; NEVER color-invert them.",
-    "4. Fix selected Results/solution tabs hover contrast to APCA > 8:1 and add scroll-margin-top: 120px on review questions to prevent sticky nav overlap.",
-    "5. Ensure all data-testid attributes are preserved for automated test validation."
+    "1. Keep global website dark theme (#08080A) and blood red accents intact for all other pages and components.",
+    "2. Apply the wine-red card override scoped exclusively to HOME exam cards (.bold-exam-card) in frontend/src/vibrant-ui.css.",
+    "3. Use #FAF4ED for card headings and #D8C7C1 for subtext/meta.",
+    "4. Ensure buttons inside Home exam cards use obsidian black (#08080A) background with crisp wine-red border (#4A1520) and ivory text.",
+    "5. Preserve all data-testid attributes and original logo / student results."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Do not break existing exam player state machine, timing mechanisms, or score calculation engines.",
-    "Maintain strict text contrast and clean dark mode hierarchy across all routes.",
-    "Pass all tests and preserve existing data selectors."
+    "Do not modify global navigation, logo, or student results pages.",
+    "Maintain strict APCA/WCAG contrast for ivory text on wine red cards (> 7:1 ratio).",
+    "Keep test attributes intact for automated testing."
   ]
 }
