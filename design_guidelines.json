@@ -1,80 +1,85 @@
 {
-  "task": "Home Palette Swap: JEE Main Card <-> All India Flagship Hero Banner",
-  "scope": "Home page only (.exam-home .bold-exam-card default JEE Main and .exam-home .flagship-banner)",
-  "app_type": "saas_app",
-  "tech_stack": "React JS (.js files), Tailwind CSS, Custom CSS (vibrant-ui.css)",
-  "unchanged_elements": [
-    "BITSAT bright amber card (.exam-home .bold-exam-card.exam-tone-bitsat)",
-    "COMEDK teal card (.exam-home .bold-exam-card.exam-tone-comedk)",
-    "Official Brand Logo",
-    "Global theme variables (:root)",
-    "Landing page & navbar/footer",
-    "Series Hub page"
-  ],
-  "associated_local_tokens_swap_checklist": {
-    "jee_main_card_receiving_royal_blue_platinum": {
-      "target": ".exam-home .bold-exam-card (default / JEE Main)",
-      "surface_gradient": "linear-gradient(135deg, #06112E 0%, #0B1D4F 42%, #18357A 78%, #091333 100%)",
-      "polish_gradient": "linear-gradient(120deg, rgba(255, 255, 255, 0.16) 0%, rgba(226, 232, 240, 0.035) 29%, transparent 45%, rgba(191, 219, 254, 0.055) 80%, rgba(255, 255, 255, 0.12) 100%)",
-      "exam_accent": "#9ABEFF",
-      "exam_muted": "#D7E2F3",
-      "exam_line": "#8498C0",
-      "exam_button_bg": "linear-gradient(180deg, #FBFCFF, #CAD5E5)",
-      "exam_button_ink": "#122952",
-      "exam_button_border": "#EFF4FF",
-      "exam_halo": "59 130 246",
-      "card_text": "#F7FAFF",
-      "card_border": "#8498C0"
+  "task": "JEE Main PYQ Catalogue Layout & Dark Theme Distinct Cards Blueprint",
+  "scope": "JEE Main PYQ Catalogue component (/app/frontend/src/features/PyqCatalogue.js) and stylesheet (/app/frontend/src/pyq.css, /app/frontend/src/vibrant-ui.css)",
+  "app_type": "education_saas_app",
+  "tech_stack": "React JS (.js files), Tailwind CSS, Custom CSS (pyq.css, vibrant-ui.css)",
+  "problem_summary": {
+    "issue": "Previously, PYQ catalogue required selecting both Year and Date tabs, showing only a single date's papers at a time in a grid.",
+    "approved_solution": "Remove date tabs/filters completely. When a year is selected, stack ALL papers for that entire year in one continuous vertical list (one below another). Retain shift/date metadata on each card, as well as attempt states (Start, Resume, View Result, Attempt Again)."
+  },
+  "design_decisions": {
+    "theme": "Dark Theme with Rich Distinct Dark Card Surfaces",
+    "year_selector": {
+      "style": "Segmented tab row with high-contrast active states, subtle borders, and glow on active selection.",
+      "active_state": "Blood Red (#D91222) or Crimson accent with subtle inner glow and high-contrast white bold text.",
+      "inactive_state": "Dark surface (#14141C or #1A1A24) with muted text (#B0B0BF) and 1px border (#2A2A38)."
     },
-    "all_india_hero_banner_receiving_ruby_polished_onyx": {
-      "target": ".exam-home .flagship-banner",
-      "surface_gradient": "linear-gradient(135deg, #1A070A 0%, #0D0C10 50%, #24090E 100%)",
-      "polish_gradient": "linear-gradient(125deg, rgba(230, 57, 70, 0.25) 0%, rgba(255, 255, 255, 0.2) 25%, transparent 55%, rgba(220, 38, 38, 0.15) 100%)",
-      "banner_border": "#984755",
-      "heading_color": "#FFC6CC",
-      "subtext_muted": "#DED0D5",
-      "flagship_primary_cta": {
-        "bg": "#B6112A",
-        "ink": "#FFF7F8",
-        "border": "color-mix(in srgb, #FFC6CC 48%, transparent)",
-        "hover_bg": "#D91222"
-      },
-      "ribbon_100_ai": {
-        "text": "#FFF7F8",
-        "bg": "linear-gradient(180deg, #38111A, #1C0A10)",
-        "border": "#984755"
-      },
-      "counter_tokens": {
-        "text": "#FFC6CC",
-        "strong_text_shadow": "0 1px 0 #FFF, 0 4px 0 rgba(230, 57, 70, 0.23), 0 8px 22px rgba(0, 0, 0, 0.3)",
-        "border": "rgba(230, 57, 70, 0.35)"
-      },
-      "live_badge": {
-        "bg": "#2A1018",
-        "text": "#FF8992",
-        "border": "#783040",
-        "is_live_bg": "#B6112A",
-        "is_live_text": "#FFF7F8"
-      },
-      "mini_streak": {
-        "text": "#F8F6F3",
-        "border": "#984755",
-        "bg": "linear-gradient(130deg, rgba(230, 57, 70, 0.12), rgba(13, 12, 16, 0.35))",
-        "hover_bg": "#28131A",
-        "small_text": "#DED0D5",
-        "icon": "#FFC6CC",
-        "rail_bg": "#57232D",
-        "rail_fill": "#FFC6CC"
+    "paper_cards_layout": {
+      "container": "Single-column flex vertical stack (.pyq-paper-list { display: flex; flex-direction: column; gap: 1rem; })",
+      "card_style": "Distinct dark color surfaces for each paper card to create visual depth and variety while maintaining legibility in dark mode.",
+      "card_variants": [
+        {
+          "name": "Obsidian Crimson Tint",
+          "background": "linear-gradient(135deg, #1A090D 0%, #14141C 100%)",
+          "border": "1px solid #521C26"
+        },
+        {
+          "name": "Midnight Slate Navy Tint",
+          "background": "linear-gradient(135deg, #0D1322 0%, #14141C 100%)",
+          "border": "1px solid #23364F"
+        },
+        {
+          "name": "Deep Charcoal Violet Tint",
+          "background": "linear-gradient(135deg, #150F21 0%, #14141C 100%)",
+          "border": "1px solid #372852"
+        },
+        {
+          "name": "Dark Emerald Forest Tint",
+          "background": "linear-gradient(135deg, #091A15 0%, #14141C 100%)",
+          "border": "1px solid #1E4738"
+        }
+      ],
+      "card_typography": {
+        "title": "Date label (e.g. '24 January 2025') as main H2 heading, font-size 1.25rem, weight 800, color #F8FAFC",
+        "meta": "Shift badge, question count, duration, total marks in high contrast with icons",
+        "actions": "View Result (Outline button with ArrowUpRight) and Start/Resume/Attempt Again (Primary Crimson button with ArrowRight/RotateCcw)"
       }
     }
   },
+  "css_blueprint": {
+    "pyq_paper_list": ".pyq-paper-list { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.5rem 0; width: 100%; }",
+    "pyq_dates_removal": ".pyq-dates { display: none !important; } /* Date filter bar removed completely */",
+    "pyq_paper_card": ".pyq-paper-card { width: 100%; padding: 1.75rem; border-radius: 16px; background: var(--card-bg, #14141C); border: 1px solid var(--card-border, #2A2A38); transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }",
+    "pyq_card_hover": ".pyq-paper-card:hover { transform: translateY(-2px); border-color: var(--brand-text, #FF6974); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }",
+    "pyq_year_tabs": ".pyq-years { display: flex; gap: 0.65rem; flex-wrap: wrap; margin: 1.25rem 0; padding-bottom: 1.25rem; border-bottom: 1px solid var(--line, #2A2A38); }"
+  },
+  "testing_and_contracts": {
+    "required_data_testids": [
+      "pyq-page",
+      "pyq-eyebrow",
+      "pyq-title",
+      "pyq-description",
+      "pyq-total",
+      "pyq-year-tabs",
+      "pyq-year-{year}",
+      "pyq-paper-list",
+      "pyq-paper-{paper_id}",
+      "pyq-shift-{paper_id}",
+      "pyq-status-{paper_id}",
+      "pyq-paper-title-{paper_id}",
+      "pyq-paper-meta-{paper_id}",
+      "pyq-paper-rules-{paper_id}",
+      "pyq-attempt-count-{paper_id}",
+      "pyq-result-{paper_id}",
+      "pyq-start-{paper_id}",
+      "pyq-source-note"
+    ]
+  },
   "instructions_to_main_agent": [
-    "Perform exact palette mapping swap between JEE Main Home Card and All India Home Banner in frontend/src/vibrant-ui.css.",
-    "Ensure BITSAT bright amber and COMEDK teal card tokens remain untouched.",
-    "Keep changes localized strictly to .exam-home component selectors.",
-    "Do NOT edit logo, global theme (:root), landing pages, or Series Hub page styles.",
-    "Ensure all interactive elements on Home page maintain or add data-testid attributes for testing.",
-    "Confirm contrast compliance (APCA/WCAG AA) for all button text, labels, and badges after swap."
+    "Remove date tab filter (.pyq-dates) in PyqCatalogue.js and render all papers for the selected year in a vertical flex stack.",
+    "Apply distinct rich dark gradient variants to consecutive cards in pyq.css / vibrant-ui.css to make stacked cards visually appealing.",
+    "Maintain all existing testids, action links, attempt status indicators, and paper metadata intact.",
+    "Do NOT add new features, pagination, or alter other pages."
   ],
   "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
     "All interactive and key informational elements MUST include data-testid attributes.",

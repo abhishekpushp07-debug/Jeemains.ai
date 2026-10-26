@@ -1,3 +1,13 @@
+# PYQ year-only stacked dark cards — 2026-10-26 (QA159 pending)
+pyq_year_stack159:
+  exact_request: "Jee mains Pyq me ek baar be ek hi card dikhta hai ek ke niche ek dikhna chiye and bas year filters ho na ki dates"
+  user_choice: "a. Sab cards ek list mein; Beautiful and different dark colours cards but in dark theme"
+  reproduced: "Browserfixturewithactualexported30paperIDs: selected2026has19papersbutonly1renderedbecauseautomaticlatestdatefilter. Desktop2columngrid; mobiledatefilterstackpushes1cardoffscreen. No realauth/DBwrites."
+  implemented: "OnlyPyqCatalogue.js+pyq.css: deleteall datefilters/chooseDate state, normalizelegacydatequeryoutwithreplace; selectedyearpapersallrenderinonesinglecolumn. Yearbuttons+dynamiccount. Fourdarktints ruby/navy/plum/forest, scopedhovertocolourretained. Date/shift/rules/allStartResumeViewResultAttemptAgain preserved. NoPDF/backend/API/auth/othercardchanges."
+  test_plan: "Frontendonly159 withread-onlybrowserfixturesandactualsafeexportIDs. Year2026=19,2025=11,allcardsstackedfullwidthat1920x800and390x844; no datecontrols/pagination. old?year&date removedbutyeartargetpreserved; browserback+invalidyear; all4tones+hover/reducedmotion/textcontrast; active/completed/priorresultlinks+returnTo state. Error/retry/empty. No customerlogin/account/datawrites."
+  needs_retesting: true
+
+
 # Authoritative deployment result — 2026-10-26
 pin_authoritative_deploy:
   status: "SUCCESS active8e1369d0 promoted18:24:07Z imagebc3b54fa jobe368a418"
