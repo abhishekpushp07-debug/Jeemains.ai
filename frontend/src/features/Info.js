@@ -59,24 +59,23 @@ export default function Info() {
         </article>
       ) : (
         <article className="card reading-content">
-          <h2>Phone number only—not verified identity</h2>
+          <h2>Mobile number and PIN—not verified identity</h2>
           <p>
-            Students enter a mobile number with no OTP, password, email or name.
+            Students register with a mobile number and a 4-digit PIN. No OTP is sent.
             India is the default country; international numbers can include a +
             country code. We normalize the number so different spacing formats
             reopen the same profile.
           </p>
           <div className="notice">
             <strong>
-              Anyone entering the same phone number can access that profile’s
-              saved attempts, answers, results and downloadable personal
-              reports, from any device. This is convenience access, not secure
-              or verified identity.
+              Your PIN protects saved practice. A short PIN is not strong identity
+              verification, and phone ownership has not been verified. Keep your
+              PIN private and sign out of shared devices.
             </strong>
           </div>
           <h2>What we store</h2>
           <p>
-            The normalized phone number, entry acknowledgement, essential
+            The normalized phone number, a securely hashed PIN, entry acknowledgement, essential
             session records, exam preference, answers, attempt deadlines,
             results and report-processing records. Staff accounts separately
             store email and a securely hashed password. We do not collect
@@ -86,14 +85,15 @@ export default function Info() {
           <p>
             HttpOnly cookies maintain a session after entry. A session cannot
             fetch a different profile’s records by changing an attempt URL.
-            However, re-entering another known number intentionally opens that
-            number’s profile. Do not use this flow for confidential or
-            identity-sensitive assessment.
+            Changing your PIN requires your existing signed-in session and signs
+            out other sessions. Older phone-only profiles can set their first PIN
+            from an existing session; signup cannot claim an existing profile.
+            There is no public PIN reset.
           </p>
           <h2>Staff and answer-key protection</h2>
           <p>
             Content Studio uses separate authorized staff credentials. A
-            phone-only session cannot upload papers, change keys or publish
+            student session cannot upload papers, change keys or publish
             content. Raw question papers, keys and solution PDFs remain in
             private application-controlled storage. Unreleased keys are excluded
             from the active player.
@@ -117,9 +117,9 @@ export default function Info() {
           <h2>Your device</h2>
           <p>
             Local storage holds pending drafts across recoverable connection
-            interruptions. Signing out removes these local drafts and revokes
-            the current session. Submit or reconnect before signing out if you
-            have unsaved responses.
+            interruptions. Signing out revokes the current session; when unsynced
+            drafts exist, you can choose whether to keep or discard them.
+            Submit or reconnect before signing out if you have unsaved responses.
           </p>
           <h2>Consent and younger learners</h2>
           <p>

@@ -27,11 +27,10 @@ class Credentials(BaseModel):
 
 
 def view(u):
-    return {
-        k: u[k]
-        for k in ["id", "name", "email", "phone", "role", "exam", "access_type"]
-        if k in u
-    }
+    result = {k: u[k] for k in ["id", "name", "email", "phone", "role", "exam", "access_type"] if k in u}
+    if u.get('access_type') == 'unverified_phone':
+        result['pin_configured'] = u.get('pin_version', 0) > 0
+    return result
 
 
 def hashpw(p):
@@ -77,7 +76,9 @@ async def new_session(u, response):
         'access_type': u.get('access_type', 'staff_password'),
         'expires_at': datetime.now(timezone.utc) + timedelta(days=7),
     }
-    if record['access_type'] != 'unverified_phone':
+    if record['access_type'] == 'unverified_phone':
+        record['pin_version'] = u.get('pin_version', 0)
+    else:
         try:
             record['credential_generation'] = generation(u)
             if u.get('staff_auth_held') is True:
@@ -85,7 +86,17 @@ async def new_session(u, response):
         except ValueError:
             raise HTTPException(401, 'Staff sign-in is unavailable. Use the protected operator recovery channel.')
     await sessions.insert_one(record)
-    if record['access_type'] != 'unverified_phone':
+    if record['access_type'] == 'unverified_phone':
+        latest = await db.tejas_phone_profiles.find_one({'id': u['id']}, {'_id': 0, 'pin_hash': 0})
+        try:
+            if not latest:
+                raise ValueError()
+            check_session_generation(record, latest, 'unverified_phone')
+        except ValueError:
+            await sessions.delete_one({'id': sid})
+            raise HTTPException(401, 'Your PIN changed during sign-in. Sign in with your current PIN.')
+        u = {**latest, 'role': 'student', 'access_type': 'unverified_phone'}
+    else:
         latest = await users.find_one({'id': u['id']}, {'_id': 0, 'password_hash': 0})
         try:
             if not latest or latest.get('role') not in ('owner', 'reviewer'):
@@ -103,7 +114,7 @@ async def identity(p):
     coll = (
         db.tejas_phone_profiles if p.get("access_type") == "unverified_phone" else users
     )
-    u = await coll.find_one({"id": p["sub"]}, {"_id": 0, "password_hash": 0})
+    u = await coll.find_one({"id": p["sub"]}, {"_id": 0, "password_hash": 0, "pin_hash": 0})
     if not u:
         raise ValueError()
     if p.get("access_type") == "unverified_phone":
@@ -136,7 +147,7 @@ async def current(request: Request):
         return u
     except (jwt.PyJWTError, ValueError, KeyError, TypeError):
         raise HTTPException(
-            401, "Enter your number again to continue. Saved work is retained."
+            401, "Sign in again with your current credentials. Saved work is retained."
         )
 
 
@@ -161,7 +172,7 @@ async def owner(u=Depends(staff)):
 async def register():
     raise HTTPException(
         410,
-        "Student entry now uses only a mobile number at /api/auth/phone. Staff accounts are issued by the owner.",
+        "Students register at /api/auth/phone/signup and sign in with a mobile number and PIN. Staff accounts are issued by the owner.",
     )
 
 
@@ -182,7 +193,7 @@ async def login(data: Credentials, response: Response):
     ):
         raise HTTPException(
             401,
-            "Staff email or password is incorrect. Students can enter with their mobile number.",
+            "Staff email or password is incorrect. Students sign in with a mobile number and PIN.",
         )
     await db.tejas_login_limits.delete_one({"_id": key})
     return await new_session(u, response)

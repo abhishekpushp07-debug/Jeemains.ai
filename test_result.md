@@ -1,3 +1,13 @@
+# PYQ visibility + minimal Super Admin + own PIN — 2026-10-26 (implementation ready for QA)
+student_pin154:
+  requirements: "User confirms issueURL https://jeelive.ai/exams/jee-main/pyq and selects logged-in student only for noOTP PIN change. Payments removed from planned scope. SuperAdmin simple student mobile-number directory, existing owner-only login reused."
+  pyq_root_cause: "Prod0PYQ vs preview30 confirmeddeployer. Approved additive existing verified importer handed off forproduction ONLY, no reset or code deploy. Separate frontend bug reproduced: guest PYQ next ignored afterlogin; now safely retained for students and staff."
+  auth: "phone/signup creates fresh number+4digitPIN+confirm. phone requiresPIN and never passwordlessupserts. auth/pin currentonly matchingownphone +newPINconfirm, incrementsCASpin_version; allstalesessionsrefusedcurrent+refresh. Existing noPINprofiles retain active sessions tosetfirstPIN, cannotbeclaimedpublicly. Staffauthunchanged. NoOTP/provider/paymentkeychanges."
+  ui: "Auth login/signup+safe localnext; Profile Set/ChangePIN dialog; /super-admin owner-onlymobilelist/search/pagination+headermenu. Backend /api/admin/students ownergate,projectionidphone, no-store. Landingprivacycopy updatedtruthfully."
+  test_plan: "Read auth_testing.md. Real APIs isolated DB, actual authcookies no customerDBwrites. Full signup/login/validation/bruteforce/PINversionraces/foreigndenial/legacysetup/ownerseparation/sensitiveprojection/adminrole matrix; browserreal isolatedloginPYQnext andprofilePIN/admin390&1920. PYQapprovedbundlecatalogue andexistingattemptstate sourcegate regression. NoAI/payment/mail/SMS."
+  needs_retesting: true
+
+
 # Opening-page palette mismatch repair — 2026-10-26
 landing_palette153:
   request: "Preview me bi nahi hua colour swap na deploy krne ke baad jeelive.ai pr"

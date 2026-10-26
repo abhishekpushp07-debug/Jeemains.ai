@@ -12,8 +12,8 @@ const faqs=[
  ['Is it really 100% free?','Yes. Student access to published practice tests, results and saved solutions is free. No subscription or payment details are required.'],
  ['Do you predict my real-exam rank?','Only an approved, compatible historical dataset can support a range. If evidence is unavailable, we say so. Platform rank, admission cutoffs and national rank are different measures.'],
  ['Are AI solutions available?','Where the owner has explicitly generated and saved an AI explanation, it is labelled AI generated. Owner-provided solutions are kept separately. Student activity never starts AI generation.'],
- ['How do I get started?','Enter your mobile number, choose JEE Main, BITSAT or COMEDK, then open Mock Tests, Chapter-wise Tests or Results. Only published content appears; some exam sections may not have live papers yet.'],
- ['How is my practice saved?','No OTP or password is required. Anyone entering the same number can reopen that profile. Pending answers stay on your device during a disconnect; only server-acknowledged answers before the deadline count.'],
+ ['How do I get started?','Create an account with your mobile number and a 4-digit PIN, then choose JEE Main, BITSAT or COMEDK. Open PYQ papers, Mock Tests, Chapter-wise Tests or Results. Only published content appears.'],
+ ['How is my practice saved?','Sign in with your mobile number and PIN to reopen saved practice. You can change your PIN from your signed-in Profile without OTP. Pending answers stay on your device during a disconnect; only server-acknowledged answers before the deadline count.'],
 ];
 
 export default function Landing(){

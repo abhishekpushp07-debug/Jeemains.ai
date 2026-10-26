@@ -41,6 +41,7 @@ from tejas import (
     attempt_status,
     pyq,
     pyq_import,
+    students,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -205,6 +206,7 @@ for module in [
     attempt_status,
     pyq,
     pyq_import,
+    students,
 ]:
     app.include_router(module.router)
 

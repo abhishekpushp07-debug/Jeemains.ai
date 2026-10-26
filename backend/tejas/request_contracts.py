@@ -50,6 +50,29 @@ class AiReviewPayload(Payload):
 
 class PhonePayload(Payload):
     phone: str = Field(min_length=5, max_length=32)
+    pin: str = Field(pattern=r'^[0-9]{4}$')
+
+
+class PhoneSignupPayload(PhonePayload):
+    confirm_pin: str = Field(pattern=r'^[0-9]{4}$')
+
+    @model_validator(mode='after')
+    def matching_pins(self):
+        if self.pin != self.confirm_pin:
+            raise ValueError('PINs must match.')
+        return self
+
+
+class PinChangePayload(Payload):
+    phone: str = Field(min_length=5, max_length=32)
+    new_pin: str = Field(pattern=r'^[0-9]{4}$')
+    confirm_pin: str = Field(pattern=r'^[0-9]{4}$')
+
+    @model_validator(mode='after')
+    def matching_pins(self):
+        if self.new_pin != self.confirm_pin:
+            raise ValueError('PINs must match.')
+        return self
 
 
 class LoginPayload(Payload):
@@ -263,6 +286,7 @@ MODELS = {
     'attempts.solution_consulted': EmptyPayload,
     'imports.schedule_import': ScheduleInput, 'imports.toggle_live': LiveInput,
     'auth.login': LoginPayload, 'phone.access': PhonePayload, 'auth.preferences': PreferencePayload,
+    'phone.signup': PhoneSignupPayload, 'phone.change_pin': PinChangePayload,
     'content.create_set': SetPayload, 'content.update_set': SetPayload,
     'content.edit_question': QuestionPayload, 'content.extract': ExtractPayload,
     'content.publish': PublishPayload, 'content.withdraw': WithdrawalPayload, 'content.subset': SubsetPayload,

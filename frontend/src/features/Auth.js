@@ -1,7 +1,7 @@
 import {Button} from '../components/ui/button';
 import {Input} from '../components/ui/input';
 import React, { useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowRight,
   BookOpen,
@@ -16,6 +16,10 @@ import { useAuth } from "../lib/auth";
 import { Field, ErrorBox } from "../components/Shared";
 export default function Auth({ staff = false }) {
   const { setUser } = useAuth();
+  const location = useLocation();
+  const signup = !staff && location.pathname === '/signup';
+  const [pin, setPin] = useState('');
+  const [confirmPin, setConfirmPin] = useState('');
   const nav = useNavigate();
   const [params] = useSearchParams();
   const [phone, setPhone] = useState("");
@@ -29,8 +33,8 @@ export default function Auth({ staff = false }) {
     setError("");
     try {
       const u = await post(
-        staff ? "/auth/login" : "/auth/phone",
-        staff ? { email, password } : { phone },
+        staff ? '/auth/login' : signup ? '/auth/phone/signup' : '/auth/phone',
+        staff ? { email, password } : signup ? { phone, pin, confirm_pin: confirmPin } : { phone, pin },
       );
       if (staff && !["owner", "reviewer"].includes(u.role))
         throw new Error(
@@ -39,7 +43,7 @@ export default function Auth({ staff = false }) {
       setUser(u);
       const next = params.get("next");
       nav(
-        staff && next?.startsWith("/") && !next.startsWith("//")
+        next?.startsWith('/') && !next.startsWith('//') && !next.includes('\\') && !/[\u0000-\u001f]/.test(next)
           ? next
           : staff
             ? "/studio"
@@ -59,16 +63,16 @@ export default function Auth({ staff = false }) {
         <h1>
           Your next step.
           <br />
-          Just one number
+          Your number.
           <br />
-          away.
+          Your PIN.
         </h1>
         <p>
           Practice, understand your results, and return to your learning—all in
           one place.
         </p>
         {[
-          [BookOpen, "One number. Straight into practice."],
+          [BookOpen, "One number. Your private practice."],
           [FileCheck2, "Original questions. Clear answer review."],
           [RotateCcw, "Come back and pick up where you left off."],
         ].map(([Icon, t]) => (
@@ -85,11 +89,11 @@ export default function Auth({ staff = false }) {
         <span className="auth-icon">
           {staff ? <ShieldCheck size={25} /> : <Phone size={24} />}
         </span>
-        <h2>{staff ? "Content Studio." : "Let’s get you started."}</h2>
+        <h2 data-testid="auth-title">{staff ? 'Content Studio.' : signup ? 'Create your student account.' : 'Welcome back.'}</h2>
         <p>
           {staff
             ? "Authorized owners and reviewers only."
-            : "Your mobile number is all you need."}
+            : signup ? 'Your mobile number and a 4-digit PIN. No OTP.' : 'Sign in with your mobile number and 4-digit PIN.'}
         </p>
         <ErrorBox error={error} />
         <form onSubmit={submit}>
@@ -143,13 +147,15 @@ export default function Auth({ staff = false }) {
                   Outside India? Include your country code, starting with +.
                 </small>
               </label>
+              <Field id="student-pin-input" label={signup ? 'Create 4-digit PIN' : '4-digit PIN'} type="password" inputMode="numeric" autoComplete={signup ? 'new-password' : 'current-password'} pattern="[0-9]{4}" minLength={4} maxLength={4} required value={pin} onChange={e=>setPin(e.target.value.replace(/[^0-9]/g,''))}/>
+              {signup && <Field id="student-confirm-pin-input" label="Confirm PIN" type="password" inputMode="numeric" autoComplete="new-password" pattern="[0-9]{4}" minLength={4} maxLength={4} required value={confirmPin} onChange={e=>setConfirmPin(e.target.value.replace(/[^0-9]/g,''))}/>}
               <p
                 className="phone-disclosure"
                 id="phone-access-note"
                 data-testid="student-login-no-otp-notice"
               >
-                No OTP or password. Anyone entering this number can access its
-                saved practice and results.
+                PIN protects access to your saved practice; it does not verify phone ownership. No OTP is sent.
+                {!signup && ' Older profile without a PIN? Set it in Profile from your existing signed-in session.'}
               </p>
             </>
           )}
@@ -166,7 +172,7 @@ export default function Auth({ staff = false }) {
               ? "Opening your space…"
               : staff
                 ? "Open Content Studio"
-                : "Continue"}
+                : signup ? 'Create account' : 'Sign in'}
             <ArrowRight size={18} />
           </Button>
         </form>
@@ -179,6 +185,8 @@ export default function Auth({ staff = false }) {
           </p>
         ) : (
           <>
+            <p className="auth-switch"><Link data-testid="student-auth-switch" to={(signup ? '/login' : '/signup') + (params.toString() ? '?' + params.toString() : '')} onClick={()=>{setError('');setPin('');setConfirmPin('');}}>{signup ? 'Already have an account? Sign in' : 'New student? Create an account'}</Link></p>
+            {!signup && <p className="phone-disclosure" data-testid="pin-recovery-note">PIN changes are available only inside your signed-in Profile. There is no public PIN reset.</p>}
             <p className="phone-consent">
               By continuing, you agree to store this number and your practice
               records as described in our{" "}

@@ -27,6 +27,9 @@ def check_session_generation(session, user, token_access_type=None):
     if token_access_type == 'unverified_phone':
         if session.get('access_type') != 'unverified_phone':
             raise ValueError('Identity plane mismatch')
+        user_version, session_version = user.get('pin_version', 0), session.get('pin_version', 0)
+        if type(user_version) is not int or type(session_version) is not int or user_version != session_version:
+            raise ValueError('Student session predates PIN change')
         return
     if session.get('access_type') == 'unverified_phone' or user.get('staff_auth_held') is True:
         raise ValueError('Staff session is unavailable')
