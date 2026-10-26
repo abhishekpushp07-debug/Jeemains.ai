@@ -1,89 +1,84 @@
 {
-  "selected_theme": "Glossy Onyx with Royal Blue Platinum Hero & Refined Distinct Metallic Exam Cards",
-  "user_choices": {
-    "bitsat": "BITSAT Bright Amber (FULL FACE orangish / black ink CTA)",
-    "comedk": "COMEDK Teal (Polished Onyx with Platinum Teal Button)",
-    "jee_main": "JEE Ruby Card UNCHANGED",
-    "hero_banner": "Royal Blue / Platinum Hero UNCHANGED",
-    "quality": "Polished, beautiful, professional SaaS app"
-  },
-  "global_background": "#08080A",
-  "hero_override": {
-    "target": ".exam-home .flagship-banner",
-    "theme": "Royal Blue + Platinum Polished Shining",
-    "palette": {
-      "base_bg": "linear-gradient(135deg, #06112E 0%, #0B1D4F 40%, #173273 75%, #0A1435 100%)",
-      "platinum_sheen": "linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(226,232,240,0.15) 25%, rgba(255,255,255,0.0) 50%, rgba(203,213,225,0.2) 80%, rgba(255,255,255,0.4) 100%)",
-      "border_stroke": "1px solid rgba(132, 152, 192, 0.5)",
-      "box_shadow": "0 20px 50px rgba(11, 29, 79, 0.65), 0 0 35px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5)",
-      "text_contrast": "#F7FAFF",
-      "subtext_color": "#D7E2F3"
-    }
-  },
-  "exam_cards": {
-    "target": ".exam-home .bold-exam-card",
-    "base_cohesion": "Glossy Onyx polished surface with 3D specular reflection highlight overlays and reflective borders",
-    "cards_tint_blueprint": {
-      "jee_main": {
-        "identity_name": "Royal Ruby Platinum Onyx (UNCHANGED)",
-        "hex_palette": {
-          "surface_start": "#1A070A",
-          "surface_mid": "#0D0C10",
-          "surface_end": "#24090E",
-          "accent": "#FFC6CC",
-          "muted": "#DED0D5",
-          "line": "#984755",
-          "button_bg": "#B6112A",
-          "button_ink": "#FFF7F8",
-          "halo_rgb": "230 57 70"
-        },
-        "bg_surface_formula": "linear-gradient(145deg, #1A070A 0%, #0D0C10 50%, #24090E 100%)",
-        "tint_sheen_formula": "linear-gradient(125deg, rgba(230,57,70,0.25) 0%, rgba(255,255,255,0.20) 25%, transparent 55%, rgba(220,38,38,0.15) 100%)",
-        "border_formula": "1px solid #984755",
-        "box_shadow_formula": "0 14px 36px rgba(0,0,0,0.8), 0 0 22px rgba(230,57,70,0.22), inset 0 1px 1px rgba(255,255,255,0.35)"
+  "task": "Home Palette Swap: JEE Main Card <-> All India Flagship Hero Banner",
+  "scope": "Home page only (.exam-home .bold-exam-card default JEE Main and .exam-home .flagship-banner)",
+  "app_type": "saas_app",
+  "tech_stack": "React JS (.js files), Tailwind CSS, Custom CSS (vibrant-ui.css)",
+  "unchanged_elements": [
+    "BITSAT bright amber card (.exam-home .bold-exam-card.exam-tone-bitsat)",
+    "COMEDK teal card (.exam-home .bold-exam-card.exam-tone-comedk)",
+    "Official Brand Logo",
+    "Global theme variables (:root)",
+    "Landing page & navbar/footer",
+    "Series Hub page"
+  ],
+  "associated_local_tokens_swap_checklist": {
+    "jee_main_card_receiving_royal_blue_platinum": {
+      "target": ".exam-home .bold-exam-card (default / JEE Main)",
+      "surface_gradient": "linear-gradient(135deg, #06112E 0%, #0B1D4F 42%, #18357A 78%, #091333 100%)",
+      "polish_gradient": "linear-gradient(120deg, rgba(255, 255, 255, 0.16) 0%, rgba(226, 232, 240, 0.035) 29%, transparent 45%, rgba(191, 219, 254, 0.055) 80%, rgba(255, 255, 255, 0.12) 100%)",
+      "exam_accent": "#9ABEFF",
+      "exam_muted": "#D7E2F3",
+      "exam_line": "#8498C0",
+      "exam_button_bg": "linear-gradient(180deg, #FBFCFF, #CAD5E5)",
+      "exam_button_ink": "#122952",
+      "exam_button_border": "#EFF4FF",
+      "exam_halo": "59 130 246",
+      "card_text": "#F7FAFF",
+      "card_border": "#8498C0"
+    },
+    "all_india_hero_banner_receiving_ruby_polished_onyx": {
+      "target": ".exam-home .flagship-banner",
+      "surface_gradient": "linear-gradient(135deg, #1A070A 0%, #0D0C10 50%, #24090E 100%)",
+      "polish_gradient": "linear-gradient(125deg, rgba(230, 57, 70, 0.25) 0%, rgba(255, 255, 255, 0.2) 25%, transparent 55%, rgba(220, 38, 38, 0.15) 100%)",
+      "banner_border": "#984755",
+      "heading_color": "#FFC6CC",
+      "subtext_muted": "#DED0D5",
+      "flagship_primary_cta": {
+        "bg": "#B6112A",
+        "ink": "#FFF7F8",
+        "border": "color-mix(in srgb, #FFC6CC 48%, transparent)",
+        "hover_bg": "#D91222"
       },
-      "bitsat": {
-        "identity_name": "Bright Amber Polish Onyx (FULL FACE Orangish & Black Ink CTA)",
-        "hex_palette": {
-          "surface_start": "#261204",
-          "surface_mid": "#0D0C10",
-          "surface_end": "#3B1B05",
-          "accent": "#FBBF24",
-          "muted": "#FDE68A",
-          "line": "#B45309",
-          "button_bg": "linear-gradient(180deg, #FDE68A, #F59E0B)",
-          "button_ink": "#0F0903",
-          "halo_rgb": "245 158 11"
-        },
-        "bg_surface_formula": "linear-gradient(145deg, #261204 0%, #0D0C10 50%, #3B1B05 100%)",
-        "tint_sheen_formula": "linear-gradient(125deg, rgba(245,158,11,0.28) 0%, rgba(254,243,199,0.24) 28%, transparent 58%, rgba(217,119,6,0.20) 100%)",
-        "border_formula": "1px solid #B45309",
-        "box_shadow_formula": "0 14px 36px rgba(0,0,0,0.8), 0 0 22px rgba(245,158,11,0.25), inset 0 1px 1px rgba(255,255,255,0.4)"
+      "ribbon_100_ai": {
+        "text": "#FFF7F8",
+        "bg": "linear-gradient(180deg, #38111A, #1C0A10)",
+        "border": "#984755"
       },
-      "comedk": {
-        "identity_name": "Teal Polished Onyx with Platinum Teal Button",
-        "hex_palette": {
-          "surface_start": "#04181A",
-          "surface_mid": "#0C0D11",
-          "surface_end": "#06282B",
-          "accent": "#2DD4BF",
-          "muted": "#CCFBF1",
-          "line": "#0F766E",
-          "button_bg": "linear-gradient(180deg, #CCFBF1, #2DD4BF)",
-          "button_ink": "#042222",
-          "halo_rgb": "20 184 166"
-        },
-        "bg_surface_formula": "linear-gradient(145deg, #04181A 0%, #0C0D11 50%, #06282B 100%)",
-        "tint_sheen_formula": "linear-gradient(125deg, rgba(20,184,166,0.26) 0%, rgba(204,251,241,0.22) 30%, transparent 60%, rgba(13,148,136,0.18) 100%)",
-        "border_formula": "1px solid #0F766E",
-        "box_shadow_formula": "0 14px 36px rgba(0,0,0,0.8), 0 0 22px rgba(20,184,166,0.25), inset 0 1px 1px rgba(255,255,255,0.4)"
+      "counter_tokens": {
+        "text": "#FFC6CC",
+        "strong_text_shadow": "0 1px 0 #FFF, 0 4px 0 rgba(230, 57, 70, 0.23), 0 8px 22px rgba(0, 0, 0, 0.3)",
+        "border": "rgba(230, 57, 70, 0.35)"
+      },
+      "live_badge": {
+        "bg": "#2A1018",
+        "text": "#FF8992",
+        "border": "#783040",
+        "is_live_bg": "#B6112A",
+        "is_live_text": "#FFF7F8"
+      },
+      "mini_streak": {
+        "text": "#F8F6F3",
+        "border": "#984755",
+        "bg": "linear-gradient(130deg, rgba(230, 57, 70, 0.12), rgba(13, 12, 16, 0.35))",
+        "hover_bg": "#28131A",
+        "small_text": "#DED0D5",
+        "icon": "#FFC6CC",
+        "rail_bg": "#57232D",
+        "rail_fill": "#FFC6CC"
       }
     }
   },
-  "css_refinement_formula": "/* BITSAT Bright Amber FULL FACE */\n.exam-home .bold-exam-card.exam-tone-bitsat {\n  --exam-surface: linear-gradient(145deg, #261204 0%, #0D0C10 50%, #3B1B05 100%);\n  --exam-polish: linear-gradient(125deg, rgba(245,158,11,0.28) 0%, rgba(254,243,199,0.24) 28%, transparent 58%, rgba(217,119,6,0.20) 100%);\n  --exam-accent: #FBBF24;\n  --exam-muted: #FDE68A;\n  --exam-line: #B45309;\n  --exam-button: linear-gradient(180deg, #FDE68A, #F59E0B);\n  --exam-button-ink: #0F0903;\n  --exam-halo: 245 158 11;\n  --shine-delay: 1.7s;\n}\n\n/* COMEDK Teal Polished Onyx with Platinum Teal Button */\n.exam-home .bold-exam-card.exam-tone-comedk {\n  --exam-surface: linear-gradient(145deg, #04181A 0%, #0C0D11 50%, #06282B 100%);\n  --exam-polish: linear-gradient(125deg, rgba(20,184,166,0.26) 0%, rgba(204,251,241,0.22) 30%, transparent 60%, rgba(13,148,136,0.18) 100%);\n  --exam-accent: #2DD4BF;\n  --exam-muted: #CCFBF1;\n  --exam-line: #0F766E;\n  --exam-button: linear-gradient(180deg, #CCFBF1, #2DD4BF);\n  --exam-button-ink: #042222;\n  --exam-halo: 20 184 166;\n  --shine-delay: 3.4s;\n}",
-  "general_ui_ux_guidelines": {
-    "reduced_motion": "Respect prefers-reduced-motion with pause-shine support",
-    "accessibility_contrast": "Maintain peak shine contrast with dark ink (#0F0903 and #042222) on bright buttons",
-    "testing_attributes": "All interactive elements and card CTAs MUST retain data-testid attributes"
-  }
+  "instructions_to_main_agent": [
+    "Perform exact palette mapping swap between JEE Main Home Card and All India Home Banner in frontend/src/vibrant-ui.css.",
+    "Ensure BITSAT bright amber and COMEDK teal card tokens remain untouched.",
+    "Keep changes localized strictly to .exam-home component selectors.",
+    "Do NOT edit logo, global theme (:root), landing pages, or Series Hub page styles.",
+    "Ensure all interactive elements on Home page maintain or add data-testid attributes for testing.",
+    "Confirm contrast compliance (APCA/WCAG AA) for all button text, labels, and badges after swap."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "All interactive and key informational elements MUST include data-testid attributes.",
+    "Never use fully transparent backgrounds on overlays, headers, or cards.",
+    "Keep component extension to .js / .jsx formats."
+  ]
 }
