@@ -1,3 +1,13 @@
+# Resume complete in preview — 2026-10-26
+student_pin156_verified:
+  hourly_budget: "20failedchecks/fixedhourpernormalizednumber, atomicreservebeforeverify, validPINreleasesonlyownslot; successcannotresetaccumulatedfailures"
+  verification: "15615new+11authregressionsPASS; aftergenericMongoerrorfix157focused3casesPASS503RetryAfter3noauth; finaldesktop/mobileloginrender0overflow"
+  cleanup: "RandomisolatedDBdroppedandasserted; norealaccounts/credentials modified; noproductiontests"
+  limitations: "privateingressclientIPrequiresoperatortrustconfig; knownnumbercanbetemporarilylockedbywrongPIN; failedverificationmayconservativelyretainreservation. Docsdisclose. Noauthdeployuntilnativecoordinated."
+  handoff_addendum: "/downloads/app-integration/PIN_ROLLOUT_ADDENDUM.md; olddatedZIPunchanged"
+  needs_retesting: false
+
+
 # Resume PIN hardening — 2026-10-26 (QA156 pending)
 student_pin156:
   user_request: "Kaam resume kro . Jo kr rhe the"

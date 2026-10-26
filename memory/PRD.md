@@ -1,5 +1,20 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
 
+## Resumed PIN hardening complete in preview — 2026-10-26
+QA15615new+11dependentregressionsPASS. Follow-up sharedincrementgenericPyMongoError normalized503RetryAfter3; strictsame targetedtestfunction3cases PASS2.89s (report157). Noauthgranted/noverifywhenlimiterfails; unexpectedverification/releasefailurekeepsreservationconservativelyuntilTTL. Finalpreview/loginrender1920x800+390x8440overflowafterlastbackendedit. TemporaryisolatedDBdeletedbyassertedfixture; noactualcustomeraccount/credentials/datachanged.
+Public app-integration/PIN_ROLLOUT_ADDENDUM.md created; supersedes oldZIPpendinglongwindowguardstatement withoutrewritingoldversionedZIP. RootdocsAPP_INTEGRATION.md updated20fail/hour/lockouttradeoff. OlddownloadZIP retained datedsnapshot; newaddendum independentlyavailableunder/downloads/app-integration/PIN_ROLLOUT_ADDENDUM.md. No changes to nativeAPIshapes, existingIDs, payments/OTP/RapidFire/UI. Testingagentonlynew156harness/tests inspected.
+Outstanding RELEASE notimplementation: nativeclientPINreadiness+legacynonsessionrecoverypolicy beforePINpublish; no covertpublicreset/duplicateaccount. Privateingress trustedclientIPoperatorconfigstillpending (doNOTclaims500k/fullybruteforceproof). Existingownerreal-emailalignmentneedsconsequentialmigrationapproval; no email exposed/changedornewownergranted. Minimalownerstudentdirectoryremainsimplemented/permissiontested. Do not implynewauthlive; no productioncalls/deployment thisturn.
+
+
+
+## Resume PIN login hardening — 2026-10-26
+User: “Kaam resume kro . Jo kr rhe the”. Continued remaining155PIN security limitation only; noOTP/payments/UIredesign/extraadminscope. phone.py adds pernormalizednumber20failedPINchecks/fixedclockhour independentofsuccess, sharedMongoatomicreservationbeforebcrypt, validPINreleasesonlyownreservation, excess429reservationsrollback, RetryAftertohourend. Short5/15limit stillresets on success. PublicIPlimitnowbeforeaccountpreventingIPblockedrequestsfromdrainingvictimallowance. Privateingress perclientIPlimitstilloperatorgap; no trustingXFF. No activeaccount/owner/studentIDsmodified, no newtestdata in customerDB.
+QA15615new+11regressionPASS isolatedrealJWT: interleavedfail/success20cap, concurrentremaining1, validloginsbudget0, normalization, rollover, distinctnumbers, IPbeforeaccount, authdenials/legacy/version. Mobile+desktoploginrender0overflow. OptionalgenericMongoOperationFailure500 noted; fixing sharedrate_limits.incrementto503RetryAfter3withoutweakeningfailclosed; onefocusedverificationpending. Unexpectedverification/releasefailureskeepreservedslotuntilTTL (conservative, documented), notunsafeauthbypass. Noauthdeployment, nativecoordinationholdpreserved.
+Read-only owneridentitycheck: oneexistingowner; providedplatformsigned-inemail currentlyhasNOownerrecord anddoesNOTmatchconfiguredADMIN_EMAIL. No silentrotation/migration/secondownergrantperformed; preserveexistingownerID/accessuntilcustomerconfirmsconsequentialownerloginchange. Do notexposecurrentowneremail. Needresolveforreal-emailadminreminderwithoutremovingexistinguser/history.
+APP_INTEGRATION.md updatedhourbudgetpolicy; refreshpublicguide/archive afterverification, preserveoriginalhand-offZIPasdatedsnapshot orversionnewsecurityaddendum. No new native tests/productioncalls thisincrement. OldlivePYQcompletionpreviouslyverified30/2250, not reverifiedthisturn.
+
+
+
 ## Customer handoff ready — 2026-10-26
 Share tested preview download URL https://campus-search-debug.preview.emergentagent.com/downloads/JEELIVE_App_Integration_2026-10-26.zip; direct APP_INTEGRATION.md/design-tokens.json under /downloads/app-integration/. Preview is artifact hosting ONLY; native academic API remains https://jeelive.ai/api. No GitHub push claimed/performed. App agent must confirm count30 usingitsownexistingstudentcookie and actualnative userID/result/visualparity; no credentialsrequested/exported. PIN/admin functionalchecks155passed, notpublished toavoidnativebreak; rate-limitlongwindow/trustedproxyhardening explicitlypendingin guide. Current requestedwebhandoffincrementcomplete, furthernativeimplementationrequiresappagentnotavailableinthisrepo.
 

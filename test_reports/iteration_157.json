@@ -1,0 +1,21 @@
+{
+  "iteration": 157,
+  "date": "2026-10-26",
+  "type": "targeted post-156 error-handling verification",
+  "status": "passed",
+  "change": "rate_limits.increment now converts any PyMongoError, including a failure during DuplicateKey retry, to HTTP503 with Retry-After3. No authentication is granted on limiter failure.",
+  "command": "python -m pytest test_iter156_pin_hour_budget_isolated.py::test_fail_closed_on_increment_failure -p no:cacheprovider -q -s -n0",
+  "result": "3 passed in 2.89s: absent limiter record, ConnectionFailure, OperationFailure each503/Retry-After3; no bcrypt verification or auth cookies",
+  "prior_verification": "iteration156: 15 hourly-budget/concurrency checks +11 dependent auth regressions passed before this narrow error-normalisation change",
+  "render": "Final post-edit actual preview /login at1920x800 and390x844 rendered, both zero horizontal overflow; no real login",
+  "data_safety": "Disposable randomly named isolated DB, all handles rebound, fixture teardown asserts database dropped. No real owner credential use or production/customer test records.",
+  "remaining_limitations": [
+    "Per-client IP throttling behind private ingress still requires operator-configured trusted proxy headers; raw forwarded headers not trusted",
+    "An attacker knowing a phone number can cause temporary lockout;20 failed checks per fixed hour is an explicit short-PIN trade-off",
+    "A failed/incomplete verification or budget release can conservatively retain its reserved slot until expiry; no session is issued on failure",
+    "PIN revision remains preview-only until native client compatibility and legacy enrollment are coordinated",
+    "Existing owner identity was not migrated or granted to another email; avoid changing existing owner login without consequential-action confirmation"
+  ],
+  "production_calls": 0,
+  "deployment_performed": false
+}

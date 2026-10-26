@@ -1,0 +1,37 @@
+{
+  "summary": "Iteration 156: targeted backend-only regression of the new per-number hourly failed-PIN budget in tejas/phone.py access, the change that moves the IP check before the account check, and fail-closed limiter behaviour. Ran against the REAL FastAPI app over httpx ASGITransport with explicit client peer tuples, real JWT cookies and no auth.current override. Used a new random isolated DB (tejas_isolated_iter156_<hex>) via iso_harness_iter156.py, a copy of the 155 harness with a randomized DB name. The clock was controlled with H.OFFSET; there were no real sleeps. New suite test_iter156_pin_hour_budget_isolated.py: 15/15 pass. The iter155 regression suite minus the heavy PYQ/PDF two-cookie test: 11/11 pass. Results: (1) 5 cycles of 4 wrong + 1 correct gave 4 successes; the 20 failures were retained (budget doc count=20) and the 21st check, here the CORRECT PIN, got 429 'Too many incorrect PIN attempts' before bcrypt verify (verify-call counter unchanged). It set no cookie and its Retry-After matched the end of the clock hour within 3s. In the next 15-min window of the same hour, a wrong PIN is still hourly-429. Excess 429s leave the count at 20, and the next clock hour gives a fresh budget (correct PIN 200). (2) 25 successful sign-ins consume 0 budget. (3) Concurrency at remaining capacity 1 (count=19), with 5 parallel requests over 8 runs: at most one PIN verification each time and no negative counter. The final count is 20 after a 401 and 19 after a 200. With the default auth admission lane (4), one request gets 503 capacity_busy; with the lane raised to 64, exactly 1 verify and 4x 429. (4) Unknown, never-registered numbers are guarded too. Five failures in each of the four 15-min windows give 5x401 + 429 per window, with a short-window Retry-After of about 898s. The hourly 429 has Retry-After to the end of the hour, and the boundary resets at the new hour. The budget doc has expires_at and a TTL index. (5) The normalized forms 99xxxxxxxx, +91..., 0..., '+91 xxxxx xxxxx' and 91... share one bucket, and another phone is unaffected. (6) The IP check is now first: public peer 8.8.8.8 is blocked after 60 requests and the victim's short and hour counters stay at 0, even with spoofed XFF/CF/X-Real-IP/Forwarded headers. The victim can still sign in from another public peer. Private ingress peers get no global 60 block (70 requests, all 401). (7) Fail closed: increment returning None gives 503 Retry-After 3; ConnectionFailure gives 503 database_busy Retry-After 3; a generic OperationFailure gives 500 (still no session, no verify). (8) Denials: anonymous PIN change and directory 401; another student's phone 403; student directory 403; owner directory items contain only id+phone, with no hashes. The iter155 regression covers legacy first-PIN ID retention with forced student role, old-session revocation after a PIN change, and the private/public IP behaviour. No 429/401 body leaked $2b$, pin_hash or tokens. Isolated DBs dropped (none remain), no leftover real Motor handles, 0 storage PUTs, 0 test records in the configured DB. No frontend testing, production calls, owner login or deployment. A trusted-proxy client IP is still missing behind the shared private ingress (known operator limitation). This is NOT a claim of full brute-force resistance for a 4-digit PIN or 500k capacity.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/auth/phone (limiter increment)", "issue": "A generic pymongo OperationFailure (non-ConnectionFailure) raised from rate_limits.increment returns 500 without Retry-After, unlike the documented 503 + Retry-After for limiter unavailability. This is still fail-closed: no verify, no cookie. Wrapping PyMongoError in increment() would give a consistent 503."},
+      {"endpoint": "POST /api/auth/phone", "issue": "If verify/new_session/the release update raises after the hour reservation, the reservation is kept as a failure, and a valid user then gets a 5xx. This is conservative, not exploitable. Noted only."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_iter156_pin_hour_budget_isolated.py",
+    "/app/backend/tests/iso_harness_iter156.py",
+    "/app/test_reports/pytest/iter156.xml",
+    "/app/test_reports/pytest/iter155_regress_in156.xml"
+  ],
+  "action_items": [
+    "Optional: catch PyMongoError in rate_limits.increment (and the rollback/release update_one) and convert it to 503 + Retry-After for consistent fail-closed semantics.",
+    "Documented policy trade-off: anyone who knows a number can lock the real owner out for up to 1 clock hour with 20 wrong PINs. Behind the shared private ingress there is no IP limit, because there is no trusted client IP yet. Keep this disclosed; the operator needs trusted proxy config."
+  ],
+  "critical_code_review_comments": [
+    "The 5/15-min windows align to clock hours (4 per hour), so without successes an attacker is capped at 20 failures per hour anyway. The new hourly budget correctly closes the success-reset replenish gap; verified.",
+    "Concurrent correct-PIN requests racing with wrong-PIN ones at remaining capacity 1 may get a transient 429 (reservation semantics). This matches the documented policy.",
+    "expires_at uses the real wall clock +2h (not tejas.db.now). This is harmless, and the TTL index on tejas_phone_limits.expires_at exists."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter156_pin_hour_budget_isolated.py",
+    "/app/backend/tests/iso_harness_iter156.py"
+  ],
+  "success_rate": {"backend": "100% (15/15 new + 11/11 iter155 regression subset)", "frontend": "not tested (backend only requested)"},
+  "test_credentials": "Only random synthetic phones 99026xxxxx, 99025xxxxx and random PINs, plus a random owner password for test156-owner@example.com inside the isolated DB. All dropped. No real credentials used.",
+  "seed_data_creation": "None persistent. Isolated DBs dropped before and after.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend/tests && python -m pytest test_iter156_pin_hour_budget_isolated.py -p no:cacheprovider -q -s -n0 (about 28s; pytest.ini adds xdist, so -n0 is required). For the iter155 regression use -k 'not two_cookie' to skip the heavy PYQ import. Do not run the 155 and 156 harnesses in the same pytest process; both patch the same modules. The auth admission lane is 4 in-flight per process: parallel auth tests will see 503 capacity_busy unless H.app.state.admission.lanes['auth']['limit'] is raised. Hour budget key is sha256('pin:failed-hour:{E164}:{hour}'); short key is sha256('login:number:{E164}:{t//900}').",
+  "rca of the issue": "No functional bug in the requested scope. The minor 500-on-OperationFailure happens because server.py maps only ConnectionFailure, ExecutionTimeout and WTimeoutError to 503, and rate_limits.increment converts only a None result to 503."
+}
