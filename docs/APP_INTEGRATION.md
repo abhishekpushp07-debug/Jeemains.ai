@@ -20,17 +20,19 @@ The existing owner-authorized, insert-only/resumable importer has now completed 
 
 `evidence/isolated-two-session-proof.json` is a real-backend, real-JWT, original-PDF test using a disposable database. It is explicitly **NOT production/native-device proof**. Two separate sessions for one learner passed preflight → start → save → resume same attempt → second save → submit → identical results → original solution PNG → fresh reattempt with old result retained. No customer test records were created. Native Expo was not available here; its parity must be verified by the app agent.
 
-## 3. Deployment boundary: LIVE auth vs prepared PIN auth
+## 3. PIN cutover requested; confirm deployed evidence before client switch
 
-Read `evidence/canonical-api-contract.json` for the live route/schema snapshot. **Do not assume the current repository auth changes are deployed.**
+The owner has now explicitly requested publishing PIN first and receiving this handoff afterward. The earlier native-readiness deployment hold is lifted. This source guide is being prepared during the asynchronous deployment; **only the new post-deployment PIN ZIP and its live evidence confirm completion**. Older ZIPs remain dated snapshots of the former phone-only contract.
 
-### Current live student login
+Read `evidence/canonical-api-contract.json` for the live route/schema snapshot. In the post-deployment PIN ZIP, both `pin_signup_route_live` and `pin_change_route_live` must be `true`. Do not silently downgrade to the old phone-only login.
 
-The deployed app currently accepts `POST /auth/phone` with `{ "phone": "<student-entered-number>" }`, using the existing phone profile. This legacy flow is unverified phone-only access, not proof of phone ownership. The frontend must not silently create a second account when a request fails.
+### Previous live student login (before this cutover)
 
-### Prepared, tested, NOT yet published PIN update
+The previous deployed app accepted `POST /auth/phone` with `{ "phone": "<student-entered-number>" }`, using the existing phone profile. That legacy flow was unverified phone-only access, not proof of phone ownership. Once the PIN revision is live, a phone-only request is rejected; the frontend must not create a second account when a request fails.
 
-The website preview implements the following, but the live cutover is held until the native client is ready:
+### Tested PIN update requested for publication
+
+Implement these contracts in the native client; the final ZIP's evidence confirms when they are live:
 
 | Action | Method/path (relative to API base) | Body |
 |---|---|---|
@@ -40,7 +42,7 @@ The website preview implements the following, but the live cutover is held until
 
 PIN fields are **strings of exactly four ASCII digits**; preserve leading zeroes. Signup never claims an existing phone-only profile. PIN change requires the current authenticated student and matching normalized phone; no OTP, old PIN or public reset is used. Other sessions become invalid after changing the PIN, but saved work and the account ID remain unchanged. Owner/reviewer password access is separate and never granted from a phone number.
 
-Existing legacy students can set their first PIN from an existing signed-in session. A legacy user without an active session must not be given an insecure public claim/reset flow. Coordinate that recovery policy with the owner before rollout; do not reset or duplicate the account. The new login intentionally rejects phone-only requests after cutover. **Update native signup/login/PIN UI before publishing this backend revision.** Do not add an automatic phone-only fallback after any PIN failure.
+Existing legacy students can set their first PIN from an existing signed-in session. A legacy user without an active session must not be given an insecure public claim/reset flow. Coordinate that recovery policy with the owner before rollout; do not reset or duplicate the account. The new login intentionally rejects phone-only requests after cutover. **The owner requested publishing the backend before updating native. Until the app update is installed, old native new-sign-in requests will fail; existing still-valid sessions remain usable. Implement native signup/login/PIN UI immediately from the confirmed live contract.** Do not add an automatic phone-only fallback after any PIN failure.
 
 PIN rate-limiting: a five-attempt/15-minute per-number guard resets after successful sign-in; a separate **20 failed PIN checks per fixed hour per number** budget does not reset on success. Concurrent checks reserve slots before PIN verification; a valid PIN releases only its own reservation, never previous failures. At the hourly limit even the correct PIN waits until the next hour; honour `Retry-After`. Someone who knows a number can trigger this temporary account lockout by submitting wrong PINs; this is the explicit availability trade-off of the chosen short-PIN flow. Rejected excess reservations do not extend the hour. A trusted/public ASGI peer also has an IP limit, checked first so blocked traffic cannot consume another number's allowance. The shared private ingress does NOT provide a trusted client IP yet; per-number protection plus existing auth concurrency applies there. Raw forwarded headers are not trusted. Operator-managed trusted proxy configuration remains pending; this is not claimed as complete brute-force resistance or 500,000-user capacity.
 
@@ -174,7 +176,7 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 4. Compare an existing saved result ID/score privately on both. Do not manipulate anyone else's attempts.
 5. Use a disposable isolated environment for new tests, or obtain explicit approval for a dedicated production test learner before creating attempts. Run one supplied full paper start/save/resume/submit/solution scenario. Verify same attempt ID across devices, old result retained on reattempt, asset ordering and no active-attempt solution leakage.
 6. Compare all card styles at 390px with supplied references, including selected/disabled and reduced-motion states. Keep Rapid Fire untouched.
-7. Coordinate PIN client rollout, legacy-profile enrollment and website/backend release together. Re-run the existing same-ID/history checks after cutover. Until then, leave live auth unchanged.
+7. Update native PIN signup/login/change now that the owner has requested the backend cutover first. Preserve valid sessions for first-PIN enrollment. Re-run the existing same-ID/history checks after installing the app update; reject old phone-only sign-in instead of falling back.
 
 ## 11. Evidence boundaries and current status
 
@@ -183,5 +185,5 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 - Shared backend two-session full-paper flow and PIN/admin regression: test155 passed in isolation (12 new + 27 regression tests). Not a native-device test or production-load proof.
 - Native existing-history/ID checks described by the app agent were reported by that agent, not independently reproduced here.
 - Full native visual parity and actual native cookie persistence: app-agent/device verification pending.
-- PIN + simple owner student directory: built/tested in preview; publication held for coordinated native compatibility. No payment/OTP service enabled.
+- PIN + simple owner student directory: built/tested, owner requested publication. The new PIN ZIP must include successful live route/schema/validation evidence before treating this deployment as complete. No payment/OTP service enabled.
 - No passwords, cookies, signing keys, private source PDFs, answer-key dumps or private student exports are included in this package.

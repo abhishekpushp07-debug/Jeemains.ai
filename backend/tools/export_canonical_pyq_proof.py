@@ -13,6 +13,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--url', required=True)
     p.add_argument('--output', required=True)
+    p.add_argument('--require-pin', action='store_true')
     args = p.parse_args()
     base = args.url.rstrip('/')
     if urlparse(base).scheme != 'https':
@@ -75,6 +76,18 @@ def main():
         else:
             contract = {'checked_at': meta['checked_at'], 'api_base': base + '/api', 'openapi_status': r.status_code,
                         'pin_routes_live': 'Not confirmed by schema; prepared revision is not deployed'}
+        if args.require_pin:
+            assert contract.get('pin_signup_route_live') and contract.get('pin_change_route_live'), 'PIN deployment is not yet confirmed'
+            anonymous = requests.Session()
+            anonymous.headers['Origin'] = base
+            try:
+                invalid = anonymous.post(base + '/api/auth/phone', json={'phone': '0000000000'}, timeout=30)
+                denied = anonymous.get(base + '/api/admin/students', timeout=30)
+                assert invalid.status_code == 422 and not invalid.cookies, 'Old phone-only contract is still accepted or validation is unexpected'
+                assert denied.status_code == 401, 'Student directory does not enforce authentication'
+                contract['live_nonmutating_checks'] = {'phone_without_pin': invalid.status_code, 'anonymous_student_directory': denied.status_code, 'test_accounts_created': 0, 'test_attempts_created': 0}
+            finally:
+                anonymous.close()
         (out / 'canonical-api-contract.json').write_text(json.dumps(contract, indent=2) + '\n')
         print(json.dumps({'live_catalogue_total': meta['total'], 'questions': meta['questions'], 'import_phase': meta['import_status'].get('phase'), 'public_counts': public.get('counts'), 'student_session_check': 'pending native session'}))
     finally:
