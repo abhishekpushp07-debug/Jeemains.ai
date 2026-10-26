@@ -32,3 +32,11 @@ No fabricated papers are shipped. Real new PYQ attempt/solution mapping cannot b
 - `frontend/src/components/PyqPaperCard.tsx`: row actions and status.
 - `frontend/src/components/MathText.tsx`: supplied text maths, offline native KaTeX; native preview text fallback on web.
 - Backend proxy already forwards this route; no new backend/auth code or env changes were needed.
+
+## Follow-up: real source-contract bug and two verified data sources
+- User supplied public source `abhishekpushp07-debug/Jeemains.ai`, inspected at commit `2e0c883da0c5c6ddfe7b008bfbfdeb7f5dbbc442`.
+- `backend/resources/jee_pyq.json.gz` contains30 papers/2250 questions, each published/audienceall, and source-backed solution mapping. Manifest SHA256 `7ecfd145c0a8b2d8203c57778e8f8d41198b525174c8c2335a88b035b1803493`.
+- **Confirmed frontend bug:** `live_enabled:false` is normal for regular PYQ practice. Upstream `catalog.available()` gates this flag only for import/chapter events, not normal PYQs. Removed both blanket false-flag rejections in local `paperState()` and `begin()`; still rely on authoritative detail/preflight/start authorization. Do NOT reintroduce this frontend restriction.
+- Source-project API `https://campus-search-debug.preview.emergentagent.com/api/pyq/jee-main` returns30 genuine papers for the approved pilot. Current `https://jeelive.ai/api/pyq/jee-main` returns0 for its own pilot; two known package IDs also return404 on `/my/sets/{id}`. The phone has different learner UIDs on these sources (see protected test-credentials notes).
+- These are different account/data environments. App env remains unchanged, no remote import/reset was invoked, and no source bank was duplicated into app MongoDB. Changing the app base would change which learner histories it displays and requires a conscious owner decision.
+- Web browser checks must login AND navigate within one screenshot-tool call; calls use fresh contexts. Website login goes to homepage instead of following the `next` query. Authenticated home uses dynamic controls; inspect actual DOM rather than assuming landing-page anchor selectors.

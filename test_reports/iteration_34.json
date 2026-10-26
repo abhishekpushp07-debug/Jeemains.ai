@@ -1,0 +1,51 @@
+{
+  "summary": "Executed backend-only read-only parity verification for canonical jeelive.ai direct API vs app /api/jl proxy using approved phone 9000000001. Verified same canonical UID, PYQ catalogue parity, JEE chapter catalogue parity, completed My Tests parity, and one completed result identity/score/question-reference signature parity. Confirmed known remaining gaps: canonical RF /rf/catalog still 404 while companion /api/rf/catalog exists, and protected PYQ import status remains access-controlled.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "GET https://jeelive.ai/api/rf/catalog",
+        "issue": "Returns 404 on canonical backend; Rapid Fire catalogue is not yet available on canonical website backend while companion RF endpoint exists.",
+        "priority": "CRITICAL"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "GET https://jeelive.ai/api/studio/pyq-import/status",
+        "issue": "401 anonymous and 403 learner are expected protected-owner behaviors; not an app connectivity defect."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter34_canonical_parity_readonly.py",
+    "/app/test_reports/pytest/iter34_canonical_parity.xml"
+  ],
+  "action_items": [
+    "Main agent: do not mark full 100% shared backend complete until canonical website-side RF migration/integration is delivered (current canonical /rf/catalog is 404).",
+    "Main agent: owner-authorized canonical PYQ sync remains pending by design; protected studio route lock is expected without owner session.",
+    "Main agent: continue using canonical env sources (EXPO_PUBLIC_JEELIVE_API=https://jeelive.ai/api, app proxy to same host) and keep parity tests as regression after owner sync/migration work."
+  ],
+  "critical_code_review_comments": [
+    "backend/server.py Rapid Fire auth still authorizes by caller-supplied X-RF-User header (rf_user), not canonical authenticated learner identity binding.",
+    "backend/server.py CORS uses allow_credentials=True with allow_origins=['*']; this is a security/standards concern for credentialed cross-origin usage.",
+    "Frontend env sources remain canonical and consistent with owner decision: EXPO_PUBLIC_JEELIVE_API points to jeelive.ai and web proxy forwards to JEELIVE_API."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter34_canonical_parity_readonly.py",
+    "/app/test_reports/iteration_34.json"
+  ],
+  "success_rate": {
+    "backend": "100% (5/5 passed)",
+    "frontend": "Not run (backend-only request)"
+  },
+  "seed_data_creation": "None. Read-only verification only, except idempotent existing-phone auth login.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use independent sessions for direct canonical API and app /api/jl proxy; do not mix cookie jars or introduce source-project hosts. Iteration 34 validates parity without asserting PYQ total fixed value (0 or 30): compare equality across paths. Completed result parity validated via stable signatures only (attempt id, summary score/maximum, hashed question/solution reference signatures) without dumping full question/answer content.",
+  "rca_of_issue": "Root cause of remaining non-100%-sync status is architectural/data migration incompleteness, not current proxy/account mismatch: canonical RF endpoints are not yet present (404), while companion RF service still serves app RF data; owner-protected PYQ import route is intentionally restricted to owner role (401/403 for anon/learner)."
+}

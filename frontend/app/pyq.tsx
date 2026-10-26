@@ -82,8 +82,8 @@ export default function PyqPapers() {
         <PyqPaperCard paper={item} busy={busy === item.id} locked={!!busy} error={failedPaper === item.id ? error : ""} onOpen={() => open(item)} onResult={(id) => router.push(`/result/${encodeURIComponent(id)}`)} />
       </View>}
       ListEmptyComponent={!papers.data && !papers.error ? <View testID="pyq-loading" style={styles.loading}><Skeleton h={200} /><Skeleton h={200} /></View> : !papers.error ?
-        <View testID="pyq-empty" style={styles.empty}><Empty icon="file-document-outline" title={items.length ? "No papers match these filters" : "PYQ papers aren't live yet"}
-          body={items.length ? "Try all years and shifts to see the available papers." : "Published papers and their matched solutions will appear here automatically. Your existing tests are safe."}
+        <View testID="pyq-empty" style={styles.empty}><Empty icon="file-document-outline" title={items.length ? "No papers match these filters" : "No PYQs returned for this account"}
+          body={items.length ? "Try all years and shifts to see the available papers." : "The connected website hasn't returned any papers for this account. Refresh to check again. Your existing tests are safe."}
           action={<Button testID="pyq-empty-refresh" label={items.length ? "Reset filters" : "Refresh papers"} kind="secondary" icon="refresh" onPress={() => { setYear(null); setShift(""); refresh(); }} />} /></View> : undefined}
       ListFooterComponent={papers.data ? <View style={styles.footer}>
         {papers.data.source_note ? <T testID="pyq-source-note" size={11} color={colors.mutedSecondary}>{papers.data.source_note}</T> : null}

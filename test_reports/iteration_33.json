@@ -1,0 +1,49 @@
+{
+  "summary": "Ran Iteration 33 backend+frontend verification against real public environments. Confirmed split environments with separate UIDs/cookie jars, live jeelive.ai account-scoped PYQ total=0, source-project total=30 (years 2026/2025), and completed one real source paper flow: preflight/start(idempotent same key)/75-question attempt/source image access/pre-submit solution lock/submit/results/re-attempt new id.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "GET https://jeelive.ai/api/pyq/jee-main",
+        "issue": "Returns HTTP 200 with total=0 for approved pilot account while source-project environment returns 30. This is publication/visibility environment divergence, not a proxy/auth failure.",
+        "priority": "CRITICAL"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter33_pyq_real_source.py",
+    "/app/test_reports/pytest/iter33_pyq_real_source.xml",
+    "/app/test_reports/artifacts_iter33/pyq_live_390.jpeg",
+    "/app/test_reports/artifacts_iter33/pyq_live_320.jpeg",
+    "/app/test_reports/artifacts_iter33/jeelive_login_trace.jpeg"
+  ],
+  "action_items": [
+    "Main agent: keep frontend live_enabled=false fix in pyq state/start path (do not reintroduce blanket rejection).",
+    "Owner decision required if app should point at source-project data environment; current app env intentionally unchanged to preserve existing history/UID scope.",
+    "Main follow-up real HTTP forwarding test now passed: app rendered30 actualpapers, false-live-flag Start, save/resume, submit,75question result, original solution images200, Re-attempt newID and oldresultpreservation. Transport was removed and test signed out; no app env changed."
+  ],
+  "critical_code_review_comments": [
+    "frontend/src/api/pyq.ts now correctly treats live_enabled as non-authoritative for ordinary PYQ availability; availability remains controlled by /my/sets + preflight + start.",
+    "No frontend permission bypass seen: begin() still enforces detail/preflight/start server contract and propagates API errors.",
+    "Backend proxy keeps per-session cookie jars via X-JL-Sid and does not mix upstream cookies globally."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter33_pyq_real_source.py",
+    "/app/test_reports/iteration_33.json"
+  ],
+  "success_rate": {
+    "backend": "100% (3/3 pytest + 1 targeted rerun pass)",
+    "frontend": "PASS: current-source0state smoke; follow-up isolated browser forwarding to REALsourceAPI rendered30papers and completed Start/save/Continue/submit/originalsolutions/Re-attempt flows at390/320. No fake responses and no persistent source switch."
+  },
+  "seed_data_creation": "Created source-project pilot attempts only (authorized): attempt/result id b7145808-8141-4e9b-b401-2f7ee43d5b95; re-attempt id e70cf796-dc3a-48f7-b411-1cd71800a404. No admin import/reset/publish writes.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use separate sessions for both sources. Main app stillpointsjeelive.ai (0), sourceproject30. Main tested REAL30row UI by forwarding /api/jl onlyinsideisolatedbrowser tosourceAPI preservingactualheaders/body/auth inowncookiejar, notbyfakefixturedata. Result payload usesquestions notrows (an initial testassertion waswrong; app alreadycorrect). CompletedUItestid167f8257-971f-41dc-a875-b8e57623188f; reattempt2d68b2bb-5ab7-4505-a2d6-6fb6027db43a. Originalsolutionasset200 andviewedinsideapp. Testbrowserlogout/transportcleanupdone. Historical live-source pytestnowoptin; do not keep asserting0 after dataalignment.",
+  "rca_of_issue": "Root cause is environment/data publication split, not app auth/proxy failure. Reproduction: same approved phone logs into both hosts with isolated cookie jars -> different UIDs, different PYQ catalogue totals (0 vs 30), and source IDs return 404 on live /my/sets. Mitigation: keep current app env untouched until owner confirms desired shared backend/history strategy; if switching/testing, use explicit isolated transport to avoid silently changing user history scope."
+}

@@ -23,7 +23,9 @@ export async function getPyqCatalogue(signal?: AbortSignal): Promise<PyqCatalogu
 }
 
 export function paperState(p: PyqPaper): PaperState {
-  if (p.live_enabled === false || p.count <= 0) return "unavailable";
+  // live_enabled gates scheduled import/chapter events upstream, NOT ordinary PYQs.
+  // A paper returned by the student catalogue is available subject to server checks.
+  if (p.count <= 0) return "unavailable";
   if (!p.attempt) return p.latest_result_id ? "completed" : "new";
   if (!p.attempt.id) return "unavailable";
   if (p.attempt.status === "active" || p.attempt.resumable) return "active";
@@ -60,8 +62,9 @@ export async function resumePyq(paper: PyqPaper): Promise<OpenedAttempt> {
 async function begin(uid: string, paper: PyqPaper): Promise<OpenedAttempt> {
   const storageKey = `pyq.start.${uid}.${paper.id}`;
   // Recheck authoritative status before a cached card can start a duplicate attempt.
-  const detail = await api<{ attempt?: PyqAttempt; live_enabled?: boolean }>(`/my/sets/${encodeURIComponent(paper.id)}`);
-  if (detail.live_enabled === false) throw new Error("This paper is no longer available. Refresh the list.");
+  const detail = await api<{ attempt?: PyqAttempt }>(`/my/sets/${encodeURIComponent(paper.id)}`);
+  // GET details + preflight/start enforce the backend's actual permission contract.
+  // Do not infer availability from unrelated live-event metadata.
   if (detail.attempt?.id && (detail.attempt.status === "active" || detail.attempt.resumable)) {
     await storage.removeItem(storageKey);
     return detail.attempt;
