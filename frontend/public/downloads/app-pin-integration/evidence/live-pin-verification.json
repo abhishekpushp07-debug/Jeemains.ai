@@ -1,0 +1,74 @@
+{
+  "checked_at": "2026-10-26T19:47:02.133425+00:00",
+  "api_base": "https://jeelive.ai/api",
+  "status": "LIVE_PIN_CONTRACT_AND_GUEST_UI_VERIFIED",
+  "live_schema_checks": {
+    "pin_signup_route_live": true,
+    "pin_change_route_live": true,
+    "student_directory_route_live": false
+  },
+  "live_nonmutating_checks": {
+    "phone_without_pin": 422,
+    "anonymous_student_directory": 401,
+    "test_accounts_created": 0,
+    "test_attempts_created": 0
+  },
+  "live_forms": [
+    {
+      "url": "https://jeelive.ai/login",
+      "viewport": {
+        "width": 1920,
+        "height": 800
+      },
+      "pin_field_visible": true,
+      "confirm_pin_field_present": false,
+      "horizontal_overflow": [],
+      "screenshot": "references/pin-live/login-1920.jpeg"
+    },
+    {
+      "url": "https://jeelive.ai/login",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pin_field_visible": true,
+      "confirm_pin_field_present": false,
+      "horizontal_overflow": [],
+      "screenshot": "references/pin-live/login-390.jpeg"
+    },
+    {
+      "url": "https://jeelive.ai/signup",
+      "viewport": {
+        "width": 1920,
+        "height": 800
+      },
+      "pin_field_visible": true,
+      "confirm_pin_field_present": true,
+      "horizontal_overflow": [],
+      "screenshot": "references/pin-live/signup-1920.jpeg"
+    },
+    {
+      "url": "https://jeelive.ai/signup",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pin_field_visible": true,
+      "confirm_pin_field_present": true,
+      "horizontal_overflow": [],
+      "screenshot": "references/pin-live/signup-390.jpeg"
+    }
+  ],
+  "live_pyq_count": 30,
+  "live_pyq_question_count": 2250,
+  "live_pyq_verification_role": "authorised owner on same canonical catalogue endpoint",
+  "test_accounts_created": 0,
+  "test_attempts_created": 0,
+  "private_data_exported": false,
+  "limitations": [
+    "No production student signup/PIN change was performed for QA; functional real-auth flows passed in disposable isolated databases.",
+    "Actual Expo device login/cookie persistence and cross-device identity/result comparison remain for the native agent.",
+    "Existing account without a valid session and without a PIN has no public claim/reset flow.",
+    "Private ingress client-IP protection still requires trusted proxy configuration; per-number limits and auth concurrency are active."
+  ]
+}

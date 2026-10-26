@@ -1,0 +1,49 @@
+{
+  "iteration": 158,
+  "date": "2026-10-26",
+  "type": "actual production PIN deployment and post-deployment handoff verification",
+  "status": "passed_with_explicit_scope",
+  "live_url": "https://jeelive.ai",
+  "api_base": "https://jeelive.ai/api",
+  "live_checks": {
+    "health": 200,
+    "openapi": 200,
+    "pin_signup_route_present": true,
+    "pin_change_route_present": true,
+    "owner_student_directory_route_present": true,
+    "phone_only_login_missing_pin": 422,
+    "anonymous_student_directory": 401,
+    "guest_login_pin_field": true,
+    "guest_signup_pin_and_confirm_fields": true,
+    "screenshots": "Actual public login and signup at1920x800 and390x844; zero horizontal overflow",
+    "canonical_pyq_total": 30,
+    "canonical_pyq_questions": 2250,
+    "pyq_verification_role": "authorised owner, same canonical catalogue endpoint",
+    "existing_public_set_counts": {"BITSAT": 144, "JEE Main": 108}
+  },
+  "new_archive": {
+    "path": "/app/frontend/public/downloads/JEELIVE_PIN_LIVE_App_Integration_2026-10-26.zip",
+    "files": 86,
+    "bytes": 764252,
+    "sha256": "ae10123098321c858f544737f2d6832f0a89f948572dc2a6a06e90d94afa6de8",
+    "crc_check": "PASS",
+    "per_file_sha256_manifest": "PASS",
+    "downloaded_from_actual_preview_host_identical_to_generated_archive": true,
+    "contains": ["updated APP_INTEGRATION.md", "NATIVE_PIN_UPDATE.md", "dated live route/validation/UI evidence", "safe PYQ paper IDs", "exact design-tokens.json", "original logo/font/icon assets and licences", "reference CSS and mobile/desktop screenshots", "clearly labelled isolated two-session proof"],
+    "excluded": ["passwords", "PIN values", "cookies", "signing keys", "private student dumps", "private source PDFs", "answer-key dumps"]
+  },
+  "data_safety": {
+    "production_student_test_accounts_created": 0,
+    "production_test_attempts_created": 0,
+    "student_or_owner_credentials_modified": false,
+    "deletions_or_resets": false,
+    "operational_owner_verification_session_closed": true
+  },
+  "limitations": [
+    "Production real-student signup/PIN change not executed for QA; end-to-end auth/session protections passed in isolated tests155/156/157",
+    "Actual Expo native app login/cookie persistence and cross-device matching still require the native agent update and device verification",
+    "Existing profile without PIN and without a valid session has no insecure public takeover/reset path",
+    "Private ingress trusted client-IP infrastructure remains an operator task; short-PIN lockout trade-off documented"
+  ],
+  "app_source_changes_this_turn": false
+}

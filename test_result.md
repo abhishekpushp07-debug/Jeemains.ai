@@ -1,3 +1,13 @@
+# PIN live + post-deploy ZIP verified — 2026-10-26
+pin_live_handoff_complete:
+  report: "/app/test_reports/iteration_158.json"
+  live: "Actualjeelive.ai/login/signupPINfields1920x800390x8440overflow; OpenAPI3routesTRUE; missingPIN422, anonadmin401, health200. NOTsource-onlyproof."
+  content: "canonicalownerreadGET30PYQ2250Qs, public144BITSAT108JEE, no productionteststudents/attempts; operationalsessionclosed"
+  archive: "/downloads/JEELIVE_PIN_LIVE_App_Integration_2026-10-26.zip86files764252bytes SHAae10123098321c858f544737f2d6832f0a89f948572dc2a6a06e90d94afa6de8;CRC/manifest/HTTPbyteidenticalPASS"
+  limits: "Nativeappactualdeviceparitypendingappagent; realstudentPINflowisolatedQA155156157notprodtest; no publiclegacyclaim/reset."
+  needs_retesting: false
+
+
 # PIN live publication requested — 2026-10-26
 pin_live_handoff_pending:
   user: "Pin flow daal do aur dalne ke baad zip do mujhe jo mai app agent ko du"

@@ -20,19 +20,19 @@ The existing owner-authorized, insert-only/resumable importer has now completed 
 
 `evidence/isolated-two-session-proof.json` is a real-backend, real-JWT, original-PDF test using a disposable database. It is explicitly **NOT production/native-device proof**. Two separate sessions for one learner passed preflight → start → save → resume same attempt → second save → submit → identical results → original solution PNG → fresh reattempt with old result retained. No customer test records were created. Native Expo was not available here; its parity must be verified by the app agent.
 
-## 3. PIN cutover requested; confirm deployed evidence before client switch
+## 3. PIN cutover LIVE — verified on 2026-10-26
 
-The owner has now explicitly requested publishing PIN first and receiving this handoff afterward. The earlier native-readiness deployment hold is lifted. This source guide is being prepared during the asynchronous deployment; **only the new post-deployment PIN ZIP and its live evidence confirm completion**. Older ZIPs remain dated snapshots of the former phone-only contract.
+The owner explicitly requested publishing PIN first and receiving this handoff afterward. **The canonical website PIN login UI and live PIN API routes have now been verified.** This post-deployment PIN ZIP supersedes older ZIPs describing a phone-only login or a pending native-readiness hold.
 
-Read `evidence/canonical-api-contract.json` for the live route/schema snapshot. In the post-deployment PIN ZIP, both `pin_signup_route_live` and `pin_change_route_live` must be `true`. Do not silently downgrade to the old phone-only login.
+Read `evidence/canonical-api-contract.json` and `evidence/live-pin-verification.json` for dated verification. Both `pin_signup_route_live` and `pin_change_route_live` are `true`; a phone-only login request is rejected with422. Do not silently downgrade to old phone-only login.
 
 ### Previous live student login (before this cutover)
 
 The previous deployed app accepted `POST /auth/phone` with `{ "phone": "<student-entered-number>" }`, using the existing phone profile. That legacy flow was unverified phone-only access, not proof of phone ownership. Once the PIN revision is live, a phone-only request is rejected; the frontend must not create a second account when a request fails.
 
-### Tested PIN update requested for publication
+### Current live PIN API
 
-Implement these contracts in the native client; the final ZIP's evidence confirms when they are live:
+Implement these verified live contracts in the native client:
 
 | Action | Method/path (relative to API base) | Body |
 |---|---|---|
@@ -185,5 +185,5 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 - Shared backend two-session full-paper flow and PIN/admin regression: test155 passed in isolation (12 new + 27 regression tests). Not a native-device test or production-load proof.
 - Native existing-history/ID checks described by the app agent were reported by that agent, not independently reproduced here.
 - Full native visual parity and actual native cookie persistence: app-agent/device verification pending.
-- PIN + simple owner student directory: built/tested, owner requested publication. The new PIN ZIP must include successful live route/schema/validation evidence before treating this deployment as complete. No payment/OTP service enabled.
+- PIN + simple owner student directory: deployed; live route/schema/validation and public login/signup forms verified without creating production students or attempts. Full real-auth signup/change/permissions tests were run in isolated databases. No payment/OTP service enabled.
 - No passwords, cookies, signing keys, private source PDFs, answer-key dumps or private student exports are included in this package.
