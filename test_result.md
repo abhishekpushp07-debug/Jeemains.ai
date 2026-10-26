@@ -1,3 +1,14 @@
+# Home palette swap — 2026-10-26
+home_palette_swap152:
+  request: "Jo jee main ka colour hai wo all india ko do and all india ka colour jee main ko"
+  implemented: true
+  needs_retesting: true
+  scope: "Only vibrant-ui.css Home selectors: JEE Main now receives previous royal-blue/platinum banner palette; All India banner receives previous ruby/onyx JEE palette including coordinated text/CTA/badges/streak. BITSAT amber and COMEDK teal remain unchanged. No routes, content, backend, auth or database changes."
+  smoke: "Already rendered 1920x800 and 390x844 with browser-only API fixtures; both zero overflow. Screenshots /root/.emergent/automation_output/20261026_083315_0efbba03e97d. Previous empty testing_agent call failed to dispatch, no QA report152 yet."
+  test_plan: "Narrow frontend-only palette/contrast normal+hover+moving glare; links/modal/shine pause and reduced motion; home-only scope. Read-only browser fixtures, no real account sessions or database writes. Reuse ui_fixture_home149.py and contrast helper150 as appropriate. Existing 149-151 are prior amber/teal tests, not this swap."
+  deployment: "Background deployment already initiated; await normal notification. No redispatch, no claim this edit is live."
+
+
 # 146 reset follow-up (145 load already passed) — 2026-10-26
 reset146:
   fixed: "Actualput_objectadapterprivateowner/uuidpath;orphanattemptbranchesexcludeprotecteduserIDs;originalBSONfieldorderbackupandrecorddigests;manifestcollections[name]{options,type,indexes,records,sha256}includingemptycollections,receiptparts_hash+orderpreservingcollections_hash;verifyeveryplannedid/digestcoveredexactonceandallstreamcounts/hashes. DB-clock5minuteleasepreparedANDapplyingresume/beforeeachbatch;handledfailurefinallyreleases. No realresetyet."
