@@ -1,3 +1,11 @@
+# Maintenance144 + explicit load request — 2026-10-26
+student_reset144:
+  approved: "Userexplicitlyapprovedunlinkedrecords: Backthemupandremovethem. Additional: Data sab delete kr skte ho load test and logic.test and speed test ke baad. Abhi testing hi chal rha. Preserveowner/admin/papersaspreviouslyconfirmed;donotdropDB."
+  new_code: "backend/tools/reset_student_data.py CLIonly, no appAPI;requireswriterspausedguard,envbinding+existingADMIN_EMAILowner,fullprivateBSONjsonlgzipchunkbackupuploadrealGETreadbackallparts+manifest,exactSHAapproval,protectedallnon-targetfingerprintbeforeafter. Preparedsnapshotcountsstudentrootsandoptionallyunlinkedactivity/orphanresults,childattemptlinks,id-onlylegacyledger,affectedcohortcacheinvalidateonly. Schema/supportnewaccountssnapshotIDs,rolepromotionstops,tamperblocks,bindingguard,partialresume. Nooperationalrunyet."
+  tests_needed: "DedicatedisolatedDBonlywithfakestoragepurememory,testprepare/applyfidelityObjectIddatetimebinary/index? backupdataonlyrestoretestintonewishisolatedshadow;allprivatebackupchunksvalid;owner/contentbyteidentical;newstudentsafterpreparekept;targetmutation/unexpectedchild/rolepromotion/privatebackupbitflip/ownerbinding/offlinefalseblocks;partialcrashresume/replay;allstudent+unlinkedknownshapescovered,sharedAIacademiccontentpreserved. No actualstoragePUT orcustomerDBwriterstopduringtests. Actualauth.identityofdeletedstudentfails,ownerworks(noJWTchange)."
+  load_request: "BoundedisolatedAPIload/speed:100logicalstudentprofiles withsamepublished75Qpaper,30clientparallel limit+burst100 tocheckintentional503/429admission(not500errors),respectretryAfter. Preflightcoldwarm,saves/replays/outoforder/submit/resultsummary/solutiongate/latestretake/catalogue/ownerisolation;reportlatencyp50p95p99/statuscounts/durablecommands/finishedjobs/peakconcurrency andallfixturecleanup. Two-minuteforegroundbatches max. No500kcapacitycertification;localruntimeinfrastructureonly. Userrequiresload+logic+speedbeforedeletion."
+
+
 # Theme143 targeted retest — 2026-10-26
 fixes142:
   pending: "Strongdarkprefixedinactivehover/#28131Awhite;canceloutline;legendmutedtext(linklegendredswatchretained),Retrylinkbrandtext;404container;mobileinputfocuscenterandbottomspace;api.jsGETonly/studioqueue3perbrowserprevent7parallelcontrol4overload. No auth/session/refreshlogicchanged."
