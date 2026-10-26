@@ -1,6 +1,7 @@
 import { api, post, uuid } from "./client";
 import { storage } from "@/src/utils/storage";
 import { invalidate } from "@/src/useCached";
+import { checkReadiness } from "./readiness";
 
 export type PyqAttempt = { id: string; status: string; resumable?: boolean; result_available?: boolean };
 export type PyqPaper = {
@@ -59,7 +60,7 @@ export async function resumePyq(paper: PyqPaper): Promise<OpenedAttempt> {
   return attempt; // Expired/sealed attempts go to their result; never POST a new start.
 }
 
-async function begin(uid: string, paper: PyqPaper): Promise<OpenedAttempt> {
+async function begin(uid: string, paper: PyqPaper, checkedAt = 0): Promise<OpenedAttempt> {
   const storageKey = `pyq.start.${uid}.${paper.id}`;
   // Recheck authoritative status before a cached card can start a duplicate attempt.
   const detail = await api<{ attempt?: PyqAttempt }>(`/my/sets/${encodeURIComponent(paper.id)}`);
@@ -75,8 +76,7 @@ async function begin(uid: string, paper: PyqPaper): Promise<OpenedAttempt> {
   const priorResult = paper.latest_result_id || (paper.attempt?.status === "completed" ? paper.attempt.id : null);
   const intent = previous?.key && previous.priorResult === priorResult ? previous : { key: uuid(), priorResult };
   if (!await storage.setItem(storageKey, JSON.stringify(intent))) throw new Error("Phone storage is unavailable. Free some space and retry so your start can be recovered safely.");
-  if (!await storage.setItem("device_check", "ok")) throw new Error("Phone storage is unavailable. Please retry before starting.");
-  await post(`/sets/${encodeURIComponent(paper.id)}/preflight`, { preview: false, test_response: "25" });
+  if (!checkedAt || Date.now() - checkedAt > 60000) await checkReadiness(paper.id);
   const attempt = await post<OpenedAttempt>(`/sets/${encodeURIComponent(paper.id)}/start`, {
     start_key: intent.key, device_checked: true, preview: false,
   });
@@ -86,11 +86,11 @@ async function begin(uid: string, paper: PyqPaper): Promise<OpenedAttempt> {
   return attempt;
 }
 
-export function openPyq(uid: string, paper: PyqPaper): Promise<OpenedAttempt> {
+export function openPyq(uid: string, paper: PyqPaper, checkedAt = 0): Promise<OpenedAttempt> {
   const key = `${uid}.${paper.id}`;
   const existing = pending.get(key);
   if (existing) return existing;
-  const operation = begin(uid, paper).finally(() => pending.delete(key));
+  const operation = begin(uid, paper, checkedAt).finally(() => pending.delete(key));
   pending.set(key, operation);
   return operation;
 }

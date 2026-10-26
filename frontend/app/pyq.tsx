@@ -8,6 +8,7 @@ import { useCached } from "@/src/useCached";
 import { PyqPaperCard } from "@/src/components/PyqPaperCard";
 import { Button, Chip, Empty, ErrorBox, Header, Icon, Skeleton, T } from "@/src/components/ui";
 import { colors, space } from "@/src/theme";
+import { ReadyToStart } from "@/src/components/player/ReadyToStart";
 
 export default function PyqPapers() {
   const { user } = useAuth();
@@ -19,11 +20,12 @@ export default function PyqPapers() {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [failedPaper, setFailedPaper] = useState("");
+  const [readyPaper, setReadyPaper] = useState<PyqPaper | null>(null);
   const first = useRef(true);
   const alive = useRef(true);
   const locked = useRef(false);
   const uid = useRef(user?.id);
-  uid.current = user?.id;
+  useEffect(() => { uid.current = user?.id; }, [user?.id]);
   const refresh = papers.reload;
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useFocusEffect(useCallback(() => { if (first.current) first.current = false; else refresh(); }, [refresh]));
@@ -36,7 +38,7 @@ export default function PyqPapers() {
   const selectedShift = shifts.includes(shift) ? shift : "";
   const visible = items.filter((p) => (!selectedYear || p.year === selectedYear) && (!selectedShift || String(p.shift) === selectedShift));
 
-  async function open(paper: PyqPaper) {
+  async function open(paper: PyqPaper, checkedAt = 0) {
     if (!user || locked.current) return;
     const owner = user.id;
     locked.current = true;
@@ -44,8 +46,9 @@ export default function PyqPapers() {
     setError("");
     setFailedPaper("");
     try {
-      const attempt = paperState(paper) === "active" ? await resumePyq(paper) : await openPyq(owner, paper);
+      const attempt = paperState(paper) === "active" ? await resumePyq(paper) : await openPyq(owner, paper, checkedAt);
       if (!alive.current || uid.current !== owner) return;
+      setReadyPaper(null);
       router.push(((attempt.status === "active" ? "/attempt/" : "/result/") + encodeURIComponent(attempt.id)) as any);
     } catch (e: any) {
       if (alive.current && uid.current === owner) { setFailedPaper(paper.id); setError(e.message || "Could not open this paper. Please retry."); }
@@ -79,7 +82,7 @@ export default function PyqPapers() {
       </View>}
       renderItem={({ item, index }) => <View style={styles.item}>
         {index === 0 || visible[index - 1].year !== item.year ? <T testID={`pyq-section-${item.year}`} size={11} color={colors.muted} w="heavy" style={styles.section}>{item.year} PAPERS</T> : null}
-        <PyqPaperCard paper={item} busy={busy === item.id} locked={!!busy} error={failedPaper === item.id ? error : ""} onOpen={() => open(item)} onResult={(id) => router.push(`/result/${encodeURIComponent(id)}`)} />
+        <PyqPaperCard paper={item} busy={busy === item.id} locked={!!busy} error={failedPaper === item.id ? error : ""} onOpen={() => { if (paperState(item) === "active") void open(item); else { setError(""); setReadyPaper(item); } }} onResult={(id) => router.push(`/result/${encodeURIComponent(id)}`)} />
       </View>}
       ListEmptyComponent={!papers.data && !papers.error ? <View testID="pyq-loading" style={styles.loading}><Skeleton h={200} /><Skeleton h={200} /></View> : !papers.error ?
         <View testID="pyq-empty" style={styles.empty}><Empty icon="file-document-outline" title={items.length ? "No papers match these filters" : "No PYQs returned for this account"}
@@ -87,8 +90,9 @@ export default function PyqPapers() {
           action={<Button testID="pyq-empty-refresh" label={items.length ? "Reset filters" : "Refresh papers"} kind="secondary" icon="refresh" onPress={() => { setYear(null); setShift(""); refresh(); }} />} /></View> : undefined}
       ListFooterComponent={papers.data ? <View style={styles.footer}>
         {papers.data.source_note ? <T testID="pyq-source-note" size={11} color={colors.mutedSecondary}>{papers.data.source_note}</T> : null}
-        {items.length ? <T testID="pyq-start-rules" size={11} color={colors.mutedSecondary}>Each paper follows its own timing and marking rules. Start opens the paper after a quick automatic connection check. Re-attempt never replaces previous results.</T> : null}
+        {items.length ? <T testID="pyq-start-rules" size={11} color={colors.mutedSecondary}>Each paper follows its own timing and marking rules. Check readiness, then start without a countdown. Re-attempt never replaces previous results.</T> : null}
       </View> : undefined} />
+    {readyPaper ? <ReadyToStart key={readyPaper.id} setId={readyPaper.id} title={readyPaper.title || "JEE Main PYQ"} busy={!!busy} error={error} onClose={() => setReadyPaper(null)} onStart={time => void open(readyPaper, time)} /> : null}
   </View>;
 }
 

@@ -1,11 +1,17 @@
 import { Platform } from "react-native";
 import * as Crypto from "expo-crypto";
+import Constants from "expo-constants";
 import { storage } from "@/src/utils/storage";
+import { AssetValue, PrivateAssetQueue } from "@/src/assets/PrivateAssetQueue";
+import { Image as ExpoImage } from "expo-image";
 
 // Native talks to jeelive.ai directly (cookie session, no extra hop).
 // Web preview cannot carry jeelive.ai cookies cross-origin, so it uses a thin pass-through proxy.
 const WEB = Platform.OS === "web";
-const BASE = WEB ? `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/jl` : (process.env.EXPO_PUBLIC_JEELIVE_API as string);
+const extra = Constants.expoConfig?.extra;
+const CANONICAL_API = (extra?.jeeliveApi || process.env.EXPO_PUBLIC_JEELIVE_API) as string;
+const BASE = WEB ? `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/jl` : CANONICAL_API;
+export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
 export const RF_BASE = `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/rf`;
 
 export const uuid = () => Crypto.randomUUID();
@@ -23,15 +29,16 @@ export class ApiError extends Error {
 }
 
 let sid: string | null = null;
+let sidFlight: Promise<string> | null = null;
 async function sessionHandle() {
   if (!WEB) return null;
   if (sid) return sid;
-  sid = await storage.getItem<string | null>("jl_sid", null);
-  if (!sid) {
-    sid = uuid();
-    await storage.setItem("jl_sid", sid);
-  }
-  return sid;
+  if (!sidFlight) sidFlight = (async () => {
+    sid = await storage.getItem<string | null>("jl_sid", null);
+    if (!sid) { sid = uuid(); await storage.setItem("jl_sid", sid); }
+    return sid;
+  })().finally(() => { sidFlight = null; });
+  return sidFlight;
 }
 export async function resetSessionHandle() {
   sid = null;
@@ -48,7 +55,7 @@ async function headers(json: boolean) {
 
 let refreshing: Promise<boolean> | null = null;
 let onAuthLost: (() => void) | null = null;
-export const setAuthLostHandler = (fn: () => void) => (onAuthLost = fn);
+export const setAuthLostHandler = (fn: (() => void) | null) => (onAuthLost = fn);
 
 function refresh(): Promise<boolean> {
   if (!refreshing) {
@@ -68,7 +75,8 @@ const retryAfter = (r: Response) => {
   const hint = r.headers.get("Retry-After");
   if (!hint) return 0;
   const n = Number(hint);
-  return Number.isFinite(n) ? n * 1000 : Math.max(0, Date.parse(hint) - Date.now());
+  const ms = Number.isFinite(n) ? n * 1000 : Date.parse(hint) - Date.now();
+  return Number.isFinite(ms) ? Math.max(0, ms) : 0;
 };
 
 export type RawResult<T> = { status: number; data: T; retryAfterMs: number };
@@ -83,8 +91,10 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
     if (e?.name === "AbortError") throw e;
     throw new ApiError("Connection interrupted. Your last saved work is safe. Please try again.", 0);
   }
-  if (res.status === 401 && retry && !path.startsWith("/auth/")) {
-    if (await refresh()) return apiRaw<T>(path, opts, false);
+  const credentialSubmission = ["/auth/phone", "/auth/phone/signup", "/auth/login"].includes(path);
+  const refreshable = !credentialSubmission && !["/auth/refresh", "/auth/logout", "/auth/session"].includes(path);
+  if (res.status === 401 && refreshable) {
+    if (retry && await refresh()) return apiRaw<T>(path, opts, false);
     onAuthLost?.();
   }
   let payload: any = null;
@@ -105,27 +115,54 @@ export const post = <T = any>(path: string, body: unknown = {}) => api<T>(path, 
 export const put = <T = any>(path: string, body: unknown) => api<T>(path, { method: "PUT", body });
 export const del = <T = any>(path: string) => api<T>(path, { method: "DELETE", body: {} });
 
-// Authenticated binary (question / solution source image) → data URI, account-scoped memory cache.
-const assetCache = new Map<string, string>();
-export const clearAssetCache = () => assetCache.clear();
-export async function assetDataUri(path: string, retry = true): Promise<string> {
-  const hit = assetCache.get(path);
-  if (hit) return hit;
+// Protected original bytes: bounded memory-only cache + priority/dedup queue.
+// On web use Blob URLs to avoid base64 conversion/copies; native stays in RAM.
+async function fetchPrivateAsset(path: string, signal: AbortSignal, retry = true): Promise<AssetValue> {
+  if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution)\/\d+(\?score_version=[^&]+)?$/.test(path)) throw new ApiError("Unsupported private image path.");
   const h = await headers(false);
   h.Accept = "image/png,image/*";
-  const res = await fetch(BASE + path, { credentials: "include", headers: h });
-  if (res.status === 401 && retry && (await refresh())) return assetDataUri(path, false);
-  if (!res.ok) throw new ApiError("The original image could not load. Retry.", res.status);
-  const blob = await res.blob();
-  const uri: string = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(String(reader.result));
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-  assetCache.set(path, uri);
-  return uri;
+  const ctl = new AbortController();
+  const stop = () => ctl.abort();
+  signal.addEventListener("abort", stop, { once: true });
+  if (signal.aborted) ctl.abort();
+  const timer = setTimeout(stop, 25000);
+  try {
+    const res = await fetch(BASE + path, { credentials: "include", headers: h, signal: ctl.signal });
+    if (res.status === 401) {
+      if (retry && await refresh()) return fetchPrivateAsset(path, signal, false);
+      onAuthLost?.();
+    }
+    if (!res.ok) throw new ApiError(res.status === 429 ? "Image service is busy. Wait a moment and retry." : "The original image could not load. Retry.", res.status, retryAfter(res));
+    const blob = await res.blob();
+    if (!blob.type.startsWith("image/")) throw new ApiError("The source returned an invalid image. Please retry.");
+    if (signal.aborted || ctl.signal.aborted) throw Object.assign(new Error("Image loading stopped."), { name: "AbortError" });
+    if (WEB && typeof URL.createObjectURL === "function") {
+      const uri = URL.createObjectURL(blob);
+      return { uri, bytes: blob.size, dispose: () => URL.revokeObjectURL(uri) };
+    }
+    const uri: string = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      const abort = () => { reader.abort(); reject(Object.assign(new Error("Image loading stopped."), { name: "AbortError" })); };
+      ctl.signal.addEventListener("abort", abort, { once: true });
+      reader.onloadend = () => { ctl.signal.removeEventListener("abort", abort); if (typeof reader.result === "string") resolve(reader.result); else reject(new Error("The image could not be decoded.")); };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+    return { uri, bytes: uri.length * 2 };
+  } catch (e) {
+    if (signal.aborted || e instanceof ApiError) throw e;
+    throw new ApiError("Image connection interrupted. Tap retry when online.", 0);
+  } finally { clearTimeout(timer); signal.removeEventListener("abort", stop); }
 }
+export const privateAssets = new PrivateAssetQueue(fetchPrivateAsset);
+let assetOwner: string | null = null;
+privateAssets.pause();
+export const clearAssetCache = () => { assetOwner = null; privateAssets.pause(); void ExpoImage.clearMemoryCache().catch(() => {}); };
+export const setAssetAccount = (uid: string) => {
+  if (assetOwner !== uid) clearAssetCache();
+  assetOwner = uid; privateAssets.resume();
+};
+export const assetDataUri = (path: string) => privateAssets.get(path, 100);
 
 // Rapid Fire (JEELIVE companion service)
 export async function rf<T = any>(path: string, userId: string, opts: { method?: string; body?: unknown } = {}): Promise<T> {

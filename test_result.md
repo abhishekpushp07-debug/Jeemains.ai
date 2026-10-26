@@ -273,3 +273,39 @@ iteration37_final:
   frontend_status: "JEE-only source/typechecking passes; noNEETselector/Biologyshortcut, archiveddeep-link guard. LiveauthenticatedUI retestpending: canonicalPINnowrequired, appphone-only422, no validapprovedsession. No claim ofliveUIpass."
   needs_retesting: true
   next_scope: "Owner-coordinatednativePINclient/recovery; onceauthenticationworks, verifyliveRapidUI. Do notmodifyauthorresetaccounts justtofinishNEETremoval."
+
+## Iteration38 — live PIN auth client implementation (testing)
+user_scope: "Live PIN pushed; update app login/signupConfirmPIN/PINchange/ForgotPIN. CanonicalAPIonly,existingaccounts/resultspreserved,RFuntouched. User suppliedsecuretestPHONE/PIN then 'Keys added, please continue.'"
+implementation:
+  - "PINlogin and explicitsignup tabs,4ASCII-digit stringvalidation, leadingzeroes preserved, confirm mismatchbeforePOST; maskedPIN/visibilitytoggle; noPINstorage/logging. Real canonical endpoints, nophonefallback."
+  - "New signed-in change-pin route confirms ownmobile,newPIN/confirm; respects other-sessionrevocation, verifies sameauth/meID aftersuccessfulchange; no accountreset. Account buttons, new PINhelp route."
+  - "ForgotPIN is honest guidance: liveOpenAPIonly/auth/pin, noforgot/reset/OTP. Existing signed-insession→ChangePIN; otherwise existingofficialadmincontact. Noinventedrecoveryendpoint/contact ormessage-send."
+  - "Authbootstrap only trusts canonical/session, no cached-profileauth. Expired401 clearprivateuser/cache, preserveaccountdrafts; logout guardpreventsofflinecookieauto-login; refreshsingleflight+oneretry, explicit429countdown, noautomaticPINretries."
+  - "Same nativecanonicalcookie transport and webper-SIDproxy, Constantsconfigfallback; no serverauth/RFcode, brand/cardicons or DBedits. Physicalnativecookiepersistence stillunverified."
+main_checks: "tsc+JSbatchlints pass.390login/signup mismatch andForgot guidance screenshotspass; foundrepeatedentry stack onhelpreturn, fixedtodismissTo; no livePINsubmitted yet bymain."
+testing_scope:
+  - "Use securebackendJEELIVE_TEST_PHONE/PIN withoutprinting. Loginoncepersession, readonlycompare directcanonical vs appproxyID/history/PYQ30/sourceimages ifexistingresult. No guessedPIN, noreset/signup/changePIN on approvedaccount. Stopifcredentialsrejected."
+  - "Validate webUIlogin→home→reloadpersist→AccountChangePINform+localmismatch/noPOST→help→logout→privatedeep-linkblocked→relogin. TestpreviousiterationJEEonlyRFUIreadonly (NEETabsent). DoNOTstartRFsession/changeavatarwallet."
+  - "Isolatedunit/contracttests fornew-signup+PINchangerequestshapes/malformed4digits/leading0; don'tlabelisolatedpositiveasliveproduction. Signupsuccess/PINchangeidentity-revocation NOTauthorizedonrealaccount."
+  - "Rate/offline/refreshprivate-cache behaviour canbeisolatedtransportharness; nofakeprodAPIorappdemo. Reportactual vsisolated scopeandany untestedpositivewrites honestly."
+
+iteration38_current_status:
+  implementation: "PINscreens and canonicalrequest wiring ready; authenticatedverificationBLOCKED."
+  verification: "Public390/320Login/SignupPINmask/leading0/localconfirmation/Forgotguidance/oneentrybackroute/privateauthgate PASS. Changedauthfiles strictprojecteslint andtsc PASS aftermainfixed6lintissues."
+  blocker: "Suppliedsecurephone/PIN got401directcanonical andproxy, oneattemptperchannel. No retryguessing/reset/registration.7dependentbackendcases correctlySKIPPED, NOTpassed. Runtimeenvmatches savedsecrets. RequestsecureworkingLIVEcredentials."
+  report: "test_reports/iteration_38.json"
+  risks: "No publicForgotPINresetAPI; guidanceonly. Positive signup/PINchangewrites notauthorizedoncurrentaccount. Nativephysicalcookiepersistencenottested."
+
+## Iteration39 — subjectnavigation + aggressive private image preload (implemented, verificationpending)
+user_choices: "Subject tabs + question grid; Ready hote hi start. Questions download ho jane chiye background me as soon as possible taki navigation butter smooth ho."
+changes: "Priority4-slotdedupqueue/48MiBmemorybudget; all permitted crops backgroundload,current/subject priority; no disk/publiccache; blobURLsforweb/nativeRAMdataURI; activeaccountscope,cancel+purge/logout,retry429respect. Player subjecttabs/subjectgrid/lastquestionmemory/Nextsubject, visibleimagegatesanswers. Results allreleasedquestion+solutionpreloadduringAnalysis, versionedsourcepaths,responsivegrid. ReusedpreflightReadySheet(no30s), no/startuntilStartnow, ContinueexistingID."
+source_truth: "reference/PLAYER_LOADING_CONTRACT.md. NO pre-startimage endpoint exists;preflightnotdownload. Can'tpromiseallpaperbeforeclockwithoutcanonicalprepare/activate. Start_keyremainsUUIDnotPIN. Noauthfallback/staffassetuse/RFchanges."
+checks_so_far: "Latest tsc+fullESLint overchangedfiles PASS; generallintPASS. Needunit/isolatedtests. LivePINstoredpairpreviously401,userpausedkeyupdate; DONOTretrybadcredentials. SecurecorrectPINneededforlivepaint/networktimings andJEEUI."
+
+iteration39_verification:
+  implementation: "ReadyforliveQA; noAPI/content/timer/RFbackendchange."
+  tested: "Final17/17isolatedunit/contracttests PASS; actualqueueclassandnavhook testedwithsyntheticloader/statefixtures. Includes75/150normalimages simulated,dedup,reservedslot,48MiBbound,pinnedLRU,abort/latecomplete/pause/groupcancel,429retry,croporder,subjectmemory/fiveunevengroups/gridfit,bonus/release/versiongates,readinesspreflight/startUUID."
+  live_smoke: "Hosted390main/375agent appentryrenders,noerrors. No authenticatedfixtureoroldcredentialretry."
+  static: "Strictprojecteslint allchangedfiles + tsc PASS afterfinalfollow-up."
+  pending: "UpdatedsecureworkingLIVEphone/PIN needed. Liveplayernavigation/sourcequestionmetadata/actuallatency/solutionwarmup E2E unverified. Localhostcross-originCORS isexistingnonrequiredtestorigin issue,hostedworks."
+  user_action: "User skipped securecredentialupdate afteriteration39 implementation. No more credential attempts; safehandoffwithliveverificationpending."

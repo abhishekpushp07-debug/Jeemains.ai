@@ -1,83 +1,71 @@
-import React, { useState } from "react";
-import { ScrollView, TextInput, View } from "react-native";
-import { useRouter } from "expo-router";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
-import { Button, Icon, Notice, T, ErrorBox } from "@/src/components/ui";
+import { cleanPhone, pinFormError, useAuthSubmit, validPhone, validPin } from "@/src/authPin";
+import { Button, ErrorBox, Notice, Press, T } from "@/src/components/ui";
 import { BrandMark } from "@/src/components/BrandMark";
-import { colors, fonts, radius, space } from "@/src/theme";
+import { PhoneField, PinField } from "@/src/components/auth/Fields";
+import { AuthShell } from "@/src/components/auth/AuthShell";
+import { colors, radius, space } from "@/src/theme";
 
 export default function Entry() {
-  const insets = useSafeAreaInsets();
-  const { signIn } = useAuth();
+  const { signIn, signUp, user, ready, sessionError, checkSession, expired, signOutWarning } = useAuth();
   const router = useRouter();
+  const params = useLocalSearchParams<{ mode?: string }>();
+  const reduced = useReducedMotion();
+  const [mode, setMode] = useState<"login" | "signup">(params.mode === "signup" ? "signup" : "login");
   const [phone, setPhone] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-  const digits = phone.replace(/[^0-9+]/g, "");
-
-  async function go() {
-    setBusy(true);
-    setError("");
-    try {
-      await signIn(digits);
-      router.replace("/(tabs)");
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <View style={{ flex: 1, backgroundColor: colors.surface }}>
-      <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" contentContainerStyle={{ paddingTop: insets.top + space.xl, paddingBottom: insets.bottom + space.xl, paddingHorizontal: space.xl, gap: space.lg }}>
-        <Animated.View entering={FadeInDown.duration(400)} style={{ alignItems: "center", gap: space.md }}>
-          <BrandMark testID="entry-brand" />
-          <T w="heavy" size={26} style={{ textAlign: "center" }}>Practice with purpose.</T>
-          <T size={15} color={colors.muted} style={{ textAlign: "center" }}>JEE Main PYQs · BITSAT · COMEDK — exam practice, supplied solutions and 20-second Rapid Fire recall.</T>
-        </Animated.View>
-
-        <Animated.View entering={FadeInDown.delay(120).duration(400)}>
-          <View style={{ borderRadius: radius.lg, padding: space.lg, gap: space.sm, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine }}>
-            <View style={{ flexDirection: "row", gap: space.sm, alignItems: "center" }}>
-              <Icon name="flask-outline" size={18} color={colors.onBrandSecondary} />
-              <T w="bold" size={12} color={colors.onBrandSecondary} style={{ letterSpacing: 1 }}>PRIVATE PILOT</T>
-            </View>
-            <T size={13} color={colors.custom_whiteA70}>This version is for approved pilot participants only. Please don’t use real private student records.</T>
-          </View>
-        </Animated.View>
-
-        <Animated.View entering={FadeInDown.delay(200).duration(400)} style={{ gap: space.sm }}>
-          <T w="bold" size={14}>Phone number</T>
-          <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.surfaceSecondary, borderRadius: radius.md, borderWidth: 1.5, borderColor: colors.borderStrong, paddingHorizontal: space.md, minHeight: 56 }}>
-            <Icon name="phone-outline" size={20} color={colors.muted} />
-            <TextInput
-              testID="entry-phone-input"
-              value={phone}
-              onChangeText={setPhone}
-              placeholder="e.g. 98765 43210"
-              placeholderTextColor={colors.muted}
-              keyboardType="phone-pad"
-              maxLength={20}
-              returnKeyType="go"
-              onSubmitEditing={() => digits.length >= 10 && go()}
-              style={{ flex: 1, fontFamily: fonts.semibold, fontSize: 17, color: colors.onSurface, paddingHorizontal: space.sm, paddingVertical: space.md }}
-              accessibilityLabel="Phone number"
-            />
-          </View>
-          <Notice tone="warning" icon="shield-alert-outline" testID="entry-unverified-notice">
-            <T size={13} w="medium" color={colors.warning}>No OTP — this number is not verified. Anyone who enters the same number can open its practice profile. Your saved work returns when you re-enter it.</T>
-          </Notice>
-          <ErrorBox error={error} testID="entry-error" />
-          <Button testID="entry-continue-button" label="Continue" icon="arrow-right" onPress={go} busy={busy} disabled={digits.length < 10} />
-          <T size={12} color={colors.muted} style={{ textAlign: "center" }}>Public test lists are visible to everyone. Your attempts, results and Rapid Fire history stay with this profile.</T>
-        </Animated.View>
-      </KeyboardAwareScrollView>
+  const [pin, setPin] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const submit = useAuthSubmit();
+  const signup = mode === "signup";
+  useEffect(() => { if (ready && user) router.replace("/(tabs)"); }, [ready, user, router]);
+  function switchMode(next: typeof mode) { setMode(next); setPin(""); setConfirm(""); submit.setError(""); }
+  const go = () => submit.run(() => pinFormError(phone, pin, signup ? confirm : undefined), async () => {
+    if (signup) await signUp(cleanPhone(phone), pin, confirm);
+    else await signIn(cleanPhone(phone), pin);
+    setPin(""); setConfirm("");
+    if (router.canDismiss()) router.dismissAll();
+    router.replace("/(tabs)");
+  });
+  const invalid = !validPhone(phone) || !validPin(pin) || (signup && !validPin(confirm));
+  return <AuthShell testID="entry-screen">
+    <Animated.View entering={reduced ? undefined : FadeInDown.duration(300)} style={styles.intro}>
+      <BrandMark testID="entry-brand" />
+      <T testID="entry-eyebrow" size={11} w="bold" color={colors.brandText} style={styles.eyebrow}>YOUR PRACTICE. ONE ACCOUNT.</T>
+      <T testID="entry-title" size={30} w="heavy">{signup ? "Start your next chapter." : "Welcome back."}</T>
+      <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEELIVE account." : "Sign in with the same mobile number and PIN you use on jeelive.ai."}</T>
+    </Animated.View>
+    {expired ? <Notice testID="entry-session-expired" tone="warning">Your session ended. Sign in again. Saved results and account-scoped drafts are preserved.</Notice> : null}
+    {signOutWarning ? <Notice testID="entry-signout-warning" tone="warning">{signOutWarning}</Notice> : null}
+    {sessionError ? <ErrorBox testID="entry-session-error" error={sessionError} retry={checkSession} /> : null}
+    <View style={styles.tabs}>
+      {(["login", "signup"] as const).map(tab => <Press testID={`entry-tab-${tab}`} key={tab} accessibilityRole="tab" accessibilityState={{ selected: mode === tab }} disabled={submit.busy} onPress={() => switchMode(tab)} style={[styles.tab, mode === tab && styles.selected]}>
+        <T testID={`entry-tab-${tab}-label`} size={14} w="bold" color={mode === tab ? colors.onBrandPrimary : colors.muted}>{tab === "login" ? "Sign in" : "Create account"}</T>
+      </Press>)}
     </View>
-  );
+    <View style={styles.form}>
+      <PhoneField value={phone} onChange={setPhone} disabled={submit.busy} />
+      <PinField testID="entry-pin-input" value={pin} onChange={setPin} disabled={submit.busy} onSubmit={go} />
+      {signup ? <PinField testID="entry-confirm-pin-input" label="Confirm PIN" value={confirm} onChange={setConfirm} disabled={submit.busy} onSubmit={go} /> : <Press testID="entry-forgot-pin" onPress={() => { setPin(""); router.push("/forgot-pin"); }} disabled={submit.busy} style={styles.forgot}>
+        <T testID="entry-forgot-pin-label" size={13} w="bold" color={colors.brandText}>Forgot PIN?</T>
+      </Press>}
+      <ErrorBox error={submit.error} testID="entry-error" />
+      {submit.retrySeconds > 0 ? <T testID="entry-rate-limit" size={13} color={colors.warning}>Please wait {submit.retrySeconds}s before trying again.</T> : null}
+      <Button testID="entry-continue-button" label={signup ? "Create account" : "Sign in"} icon="arrow-right" onPress={go} busy={submit.busy || !ready} disabled={invalid || submit.retrySeconds > 0} />
+    </View>
+    <View style={styles.footer}>
+      <T testID="entry-sync-note" size={12} w="medium" color={colors.muted} style={styles.center}>{signup ? "Already have an account? Sign in instead—your history stays with your existing account." : "Your tests, progress and original solutions stay in sync with the website."}</T>
+      <T testID="entry-pin-notice" size={11} color={colors.muted} style={styles.center}>Your PIN protects sign-in. No OTP is sent; phone ownership is not verified.</T>
+    </View>
+  </AuthShell>;
 }
-// ScrollView import kept for type parity on web
-void ScrollView;
+const styles = StyleSheet.create({
+  intro: { gap: space.sm }, eyebrow: { letterSpacing: 1.5, marginTop: space.sm },
+  tabs: { flexDirection: "row", padding: 4, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surfaceSecondary },
+  tab: { flex: 1, minHeight: 44, alignItems: "center", justifyContent: "center", borderRadius: 8 }, selected: { backgroundColor: colors.brandPrimary },
+  form: { gap: space.md }, forgot: { alignSelf: "flex-end", minHeight: 44, justifyContent: "center", paddingHorizontal: space.sm, marginTop: -space.sm },
+  footer: { gap: space.md, paddingBottom: space.sm }, center: { textAlign: "center" },
+});

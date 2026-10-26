@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { FlatList, ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, Modal, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, apiRaw, post, put, uuid } from "@/src/api/client";
@@ -9,8 +9,11 @@ import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
 import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
-import { academicStyles, colors, fonts, foregroundOn, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
+import { academicStyles, colors, fonts, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
+import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
+import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
+import { AssetProgress } from "@/src/components/player/AssetProgress";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -92,11 +95,14 @@ function Analysis({ r }: { r: any }) {
 }
 
 function Remote({ path, render }: { path: string; render: (d: any) => React.ReactNode }) {
+  return <RemoteRequest key={path} path={path} render={render} />;
+}
+function RemoteRequest({ path, render }: { path: string; render: (d: any) => React.ReactNode }) {
   const [d, setD] = useState<any>(null);
   const [e, setE] = useState("");
   const [n, setN] = useState(0);
-  useEffect(() => { setD(null); setE(""); api(path).then(setD).catch((x) => setE(x.message)); }, [path, n]);
-  if (e) return <ErrorBox error={e} retry={() => setN((x) => x + 1)} />;
+  useEffect(() => { const ctl = new AbortController(); api(path, { signal: ctl.signal }).then(d => { if (!ctl.signal.aborted) setD(d); }).catch(x => { if (!ctl.signal.aborted) setE(x.message); }); return () => ctl.abort(); }, [path, n]);
+  if (e) return <ErrorBox error={e} retry={() => { setD(null); setE(""); setN(x => x + 1); }} />;
   if (!d) return <Skeleton h={140} />;
   return <>{render(d)}</>;
 }
@@ -107,14 +113,18 @@ function Unavailable({ title, reason, testID }: { title: string; reason?: string
 
 function Solutions({ r, id, version }: { r: any; id: string; version: string }) {
   const rows: any[] = useMemo(() => r.questions || [], [r.questions]);
-  const subjects = useMemo(() => [...new Set(rows.map((q) => q.subject || "General"))] as string[], [rows]);
+  const subjects = useMemo(() => [...new Set(rows.map(subjectOf))], [rows]);
   const [filter, setFilter] = useState(view.filter);
   const initial = rows.find((q) => q.id === view.qid);
-  const [subject, setSubject] = useState(initial?.subject || (subjects.includes(view.subject) ? view.subject : subjects[0]));
-  const list = rows.filter((q) => (q.subject || "General") === subject && matches(q, filter));
+  const [subject, setSubject] = useState(initial ? subjectOf(initial) : (subjects.includes(view.subject) ? view.subject : subjects[0]));
+  const list = rows.filter((q) => subjectOf(q) === subject && matches(q, filter));
   const [qid, setQid] = useState(initial?.id || list[0]?.id || "");
-  const q = rows.find((x) => x.id === qid && (x.subject || "General") === subject && matches(x, filter)) || list[0];
-  Object.assign(view, { filter, subject, qid: q?.id || "" });
+  const q = rows.find((x) => x.id === qid && subjectOf(x) === subject && matches(x, filter)) || list[0];
+  const [remembered, setRemembered] = useState<Record<string, string>>({});
+  const [grid, setGrid] = useState(false);
+  const preload = usePaperAssets(id, rows, q?.id, true, version);
+  function chooseSubject(s: string) { if (q) setRemembered(old => ({ ...old, [subject]: q.id })); setSubject(s); setQid(remembered[s] || ""); }
+  useEffect(() => { Object.assign(view, { filter, subject, qid: q?.id || "" }); }, [filter, subject, q?.id]);
   const rail = useRef<FlatList>(null);
   const [opened, setOpened] = useState<Record<string, "ok" | "err">>({});
   const [report, setReport] = useState(false);
@@ -129,20 +139,19 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
   const consult = useCallback(async (x: any) => {
     try { await post(`/attempts/${id}/questions/${x.id}/solution-open`, {}); setOpened((o) => ({ ...o, [x.id]: "ok" })); } catch { setOpened((o) => ({ ...o, [x.id]: "err" })); }
   }, [id]);
-  useEffect(() => { if (q && !opened[q.id]) consult(q); }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { let live = true; Promise.resolve().then(() => { if (live && q && !opened[q.id]) void consult(q); }); return () => { live = false; }; }, [q, opened, consult]);
 
   return (
     <View style={{ gap: space.md }} testID="solution-navigator">
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
         {FILTERS.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.surfaceInverse} />)}
       </ScrollView>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 6 }}>
-        {subjects.map((s) => (
-          <Press key={s} testID={"solution-subject-" + s.toLowerCase().replace(/\s+/g, "-")} onPress={() => { setSubject(s); setQid(""); }} style={{ minHeight: 44, paddingHorizontal: 12, borderRadius: radius.sm, justifyContent: "center", backgroundColor: subject === s ? subjectColor(s) : colors.surfaceSecondary, borderWidth: 1, borderColor: subject === s ? subjectColor(s) : colors.border }}>
-            <T w="heavy" size={12} color={subject === s ? foregroundOn(subjectColor(s)) : colors.onSurface}>{s} · {rows.filter((x) => (x.subject || "General") === s && matches(x, filter)).length}</T>
-          </Press>
-        ))}
-      </ScrollView>
+      <SubjectTabs prefix="solution-subject" questions={rows} subject={subject} onSelect={chooseSubject} />
+      <View style={learningStyles.solutionTools}>
+        <T testID="solution-subject-position" size={12} color={colors.muted} style={learningStyles.solutionPosition}>{subject} · {q ? list.findIndex(item => item.id === q.id) + 1 : 0} of {list.length}</T>
+        <Press testID="solution-grid-open" onPress={() => setGrid(true)} style={learningStyles.gridButton}><Icon name="view-grid-outline" size={18} color={colors.brandText} /><T size={12} w="bold">Question grid</T></Press>
+      </View>
+      <AssetProgress prefix="solution" progress={preload} solutions />
       {list.length ? (
         <FlatList ref={rail} testID="solution-question-rail" horizontal showsHorizontalScrollIndicator={false} data={list} keyExtractor={(x) => x.id} contentContainerStyle={{ gap: 8, paddingRight: space.xl }}
           getItemLayout={(_, i) => ({ length: 52, offset: 52 * i, index: i })} onScrollToIndexFailed={() => {}}
@@ -170,7 +179,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
             {q.marked ? <Icon name="flag" size={16} color={colors.custom_neonAmber} /> : null}
           </View>
           {q.render_mode !== "source" && q.text ? <MathText testID="solution-question-text" text={q.text} /> : null}
-          {Array.from({ length: q.asset_count || 0 }, (_, i) => <AssetImage key={q.id + "q" + i} testID={`solution-qimage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number}`} />)}
+          {imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
             <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response || "—"}</T></View>
             <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).join(" / ")}</T></View>
@@ -180,16 +189,23 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
             <T size={13} color={colors.custom_onReading} testID={"no-worked-solution-" + q.number}>{aiBy[q.id]?.state === "ready" ? "The source provides this key only. An AI generated step-by-step solution is shown below." : ai.error && !ai.data ? "The source provides this key only." : "The source provides this key only. No worked solution was supplied."}</T>
           ) : q.solution ? <MathText size={14} testID="solution-text" text={q.solution} /> : null}
           {q.solution_kind !== "answer_key_only" && !q.solution && !q.solution_asset_count ? <T testID="solution-not-supplied" size={13} color={colors.muted}>A worked solution is not available for this question yet. The supplied answer key is shown above.</T> : null}
-          {Array.from({ length: q.solution_asset_count || 0 }, (_, i) => <AssetImage key={q.id + "s" + i} testID={`solution-simage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/solution/${i}`} label={`Solution ${q.number}`} />)}
+          {imagePaths(id, q, "solution", version).map((path, i) => <AssetImage key={path} testID={`solution-simage-${q.number}-${i}`} path={path} label={`Solution ${q.number}`} />)}
           {ai.loading && !ai.data ? <Skeleton h={120} /> : ai.error && !ai.data ? (
             <Press testID="ai-solution-error" onPress={ai.reload} style={{ minHeight: 44, justifyContent: "center" }}><T size={12} w="bold" color={colors.brandText}>Couldn’t load AI solutions. Tap to retry</T></Press>
           ) : <AiSolution item={aiBy[q.id]} number={q.number} disclosure={ai.data?.disclosure} />}
           {opened[q.id] === "err" ? <Press testID="solution-consult-retry" onPress={() => consult(q)}><T size={12} w="bold" color={colors.brandText}>Couldn’t record that you viewed this solution. Retry</T></Press> : null}
-          <Reflection id={id} q={q} version={version} state={r.review?.states?.[q.id] || r.review_states?.[q.id]} consulted={opened[q.id] === "ok"} />
+          <Reflection key={`${q.id}.${version}`} id={id} q={q} version={version} state={r.review?.states?.[q.id] || r.review_states?.[q.id]} consulted={opened[q.id] === "ok"} />
           <Button testID="solution-report-button" kind="ghost" icon="flag-outline" label="Report a problem with this question" onPress={() => setReport(true)} color={colors.muted} />
         </View>
       ) : null}
-      <ReportSheet visible={report} onClose={() => setReport(false)} id={id} q={q} />
+      {report && q ? <ReportSheet visible onClose={() => setReport(false)} id={id} q={q} /> : null}
+      <Modal visible={grid} transparent animationType="slide" onRequestClose={() => setGrid(false)}><View style={learningStyles.modal}><Sheet visible onClose={() => setGrid(false)} testID="solution-grid-sheet">
+        <T testID="solution-grid-title" size={18} w="heavy">Solution question grid</T>
+        <SubjectTabs prefix="solution-grid-subject" questions={rows} subject={subject} onSelect={chooseSubject} />
+        <T testID="solution-grid-filter" size={12} color={colors.muted}>{subject} · {filter} · {list.length} questions</T>
+        <QuestionGrid prefix="solution-grid-q" questions={list} onSelect={id => { setQid(id); setGrid(false); }} appearance={row => ({ bg: row.id === q?.id ? colors.surfaceInverse : colors.surfaceSecondary, fg: row.id === q?.id ? colors.onSurfaceInverse : (OUT[row.outcome] || OUT.skipped)[0], icon: (OUT[row.outcome] || OUT.skipped)[1], label: row.outcome })} />
+        <Button testID="solution-grid-close" kind="secondary" label="Close grid" onPress={() => setGrid(false)} />
+      </Sheet></View></Modal>
     </View>
   );
 }
@@ -198,7 +214,6 @@ function Reflection({ id, q, version, state, consulted }: { id: string; q: any; 
   const [s, setS] = useState<any>(state || { revision: 0, category: null, note: "", identified_error: false, wrote_note: false, reviewed_solution: false, retry_planned: false });
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
-  useEffect(() => setS(state || { revision: 0, category: null, note: "", identified_error: false, wrote_note: false, reviewed_solution: false, retry_planned: false }), [q.id]); // eslint-disable-line react-hooks/exhaustive-deps
   async function save(patch: any) {
     const next = { ...s, ...patch };
     setBusy(true);
@@ -235,12 +250,11 @@ function ReportSheet({ visible, onClose, id, q }: { visible: boolean; onClose: (
   const [note, setNote] = useState("");
   const [receipt, setReceipt] = useState<any>(null);
   const [err, setErr] = useState("");
-  useEffect(() => { if (visible) { setReceipt(null); setErr(""); setNote(""); } }, [visible]);
   async function send() {
     try { setReceipt(await post(`/attempts/${id}/questions/${q.id}/report-wrong`, { category: cat, context: "solutions", note: note.slice(0, 600) })); } catch (e: any) { setErr(e.message); }
   }
   return (
-    <Sheet visible={visible} onClose={onClose} testID="report-sheet">
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}><View style={learningStyles.modal}><Sheet visible onClose={onClose} testID="report-sheet">
       <T w="heavy" size={18}>Report Q{q?.number}</T>
       {receipt ? <Notice tone="success" testID="report-receipt">Report received ({receipt.status}). It will be reviewed — this does not instantly change the key or your score.</Notice> : (
         <>
@@ -254,7 +268,7 @@ function ReportSheet({ visible, onClose, id, q }: { visible: boolean; onClose: (
         </>
       )}
       <Button testID="report-close" kind="secondary" label="Close" onPress={onClose} />
-    </Sheet>
+    </Sheet></View></Modal>
   );
 }
 
@@ -263,21 +277,23 @@ export default function Result() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [version, setVersion] = useState("original");
-  const [r, setR] = useState<any>(null);
+  const [received, setR] = useState<any>(null);
+  const [receivedKey, setReceivedKey] = useState("");
+  const r = receivedKey === `${id}|${version}` ? received : null;
   const [status, setStatus] = useState(0);
   const [err, setErr] = useState("");
   const [tab, setTab] = useState<Tab>(view.tab);
   const [n, setN] = useState(0);
   const polls = useRef(0);
-  view.tab = tab;
+  useEffect(() => { view.tab = tab; }, [tab]);
   const reload = useCallback(() => { polls.current = 0; setN((x) => x + 1); }, []);
 
   useEffect(() => {
     let alive = true;
     let t: any;
-    setErr("");
     apiRaw(`/attempts/${id}/results?score_version=${encodeURIComponent(version)}`).then((res) => {
       if (!alive) return;
+      setErr(""); setReceivedKey(`${id}|${version}`);
       setR(res.data);
       setStatus(res.status);
       if (res.status === 202 && res.data?.grading_status !== "failed" && polls.current < 12) {
@@ -288,7 +304,9 @@ export default function Result() {
     return () => { alive = false; clearTimeout(t); };
   }, [id, version, n]);
 
-  const ready = status === 200 && r?.summary && r?.status !== "embargoed";
+  const ready = resultIsReleased(status, r);
+  const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
+  const prepared = usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready);
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <Header testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
@@ -297,6 +315,7 @@ export default function Result() {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
             {TABS.map(([v, l, ic]) => <LearningTab key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} tone={TAB_TONE[v]} />)}
           </ScrollView>
+          {tab !== "solutions" ? <View style={learningStyles.progress}><AssetProgress prefix="result" progress={prepared} solutions /></View> : null}
         </View>
       ) : null}
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.sm, paddingBottom: insets.bottom + space.xl, gap: space.md }}>
@@ -348,4 +367,8 @@ const learningStyles = StyleSheet.create({
   score: { gap: space.md, borderRadius: 18, backgroundColor: academicStyles.score.backgroundColor, borderColor: academicStyles.score.backgroundColor },
   navigation: { minHeight: 66, paddingVertical: space.sm, justifyContent: "center" },
   section: { gap: space.sm, borderTopWidth: 5, borderRadius: 13, paddingVertical: 20 },
+  solutionTools: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: space.sm, justifyContent: "space-between" },
+  solutionPosition: { flexShrink: 1 }, gridButton: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.sm },
+  progress: { paddingHorizontal: space.lg, paddingTop: space.sm },
+  modal: { flex: 1 },
 });

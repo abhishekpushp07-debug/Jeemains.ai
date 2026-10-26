@@ -8,6 +8,8 @@ import { storage } from "@/src/utils/storage";
 import { invalidate } from "@/src/useCached";
 import { Button, Card, ErrorBox, Header, Icon, Notice, Press, Skeleton, Stat, T } from "@/src/components/ui";
 import { colors, radius, space, subjectColor } from "@/src/theme";
+import { ReadyToStart } from "@/src/components/player/ReadyToStart";
+import { checkReadiness } from "@/src/api/readiness";
 
 export default function SetDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -16,7 +18,7 @@ export default function SetDetail() {
   const { user } = useAuth();
   const [s, setS] = useState<any>(null);
   const [error, setError] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [readyOpen, setReadyOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
   const [reload, setReload] = useState(0);
@@ -25,8 +27,7 @@ export default function SetDetail() {
 
   useEffect(() => {
     let alive = true;
-    setError("");
-    api(`${user ? "/my/sets/" : "/sets/"}${id}`).then((d) => { if (alive) { setS(d); setSaved(!!d.saved); } }).catch((e) => alive && setError(e.message));
+    api(`${user ? "/my/sets/" : "/sets/"}${id}`).then((d) => { if (alive) { setError(""); setS(d); setSaved(!!d.saved); } }).catch((e) => alive && setError(e.message));
     storage.getItem<string | null>(startKeyName, null).then(async (k) => {
       key.current = k || uuid();
       if (!k) await storage.setItem(startKeyName, key.current);
@@ -35,20 +36,19 @@ export default function SetDetail() {
   }, [id, user, reload, startKeyName]);
 
   // One tap: the device/connection check the server needs runs silently, then the attempt opens.
-  async function start() {
+  async function start(checkedAt = 0) {
     setBusy(true);
     setError("");
     try {
-      if (!checked) {
-        const ok = await storage.setItem("device_check", "ok");
-        if (!ok) throw new Error("Phone storage is unavailable, so offline answers cannot be protected. Free some space and retry.");
-        await post(`/sets/${id}/preflight`, { preview: false, test_response: "25" });
-        setChecked(true);
-      }
+      if (!checkedAt || Date.now() - checkedAt > 60000) await checkReadiness(id!);
+      key.current ||= uuid();
+      if (!await storage.setItem(startKeyName, key.current)) throw new Error("Device storage is unavailable. Please retry before starting.");
       // Same start_key on every retry of this intent → no duplicate attempts.
       const a = await post(`/sets/${id}/start`, { start_key: key.current, device_checked: true, preview: false });
+      if (!a?.id) throw new Error("The start could not be confirmed. Your retry key is preserved.");
       await storage.removeItem(startKeyName);
       invalidate(`u.${user?.id}.`);
+      setReadyOpen(false);
       router.replace((a.status === "completed" ? "/result/" : "/attempt/") + a.id as any);
     } catch (e: any) {
       setError(e.message);
@@ -110,11 +110,12 @@ export default function SetDetail() {
         <ErrorBox error={error} testID="set-error" />
         {user ? (
           <>
-            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={start} color={colors.surfaceInverse} />
-            <T size={11} color={colors.muted} style={{ textAlign: "center" }}>By starting you accept the rules above. Your connection is checked automatically, and the clock starts only when the attempt opens.</T>
+            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={() => { if (s.attempt?.status === "active") router.replace(`/attempt/${s.attempt.id}`); else { setError(""); setReadyOpen(true); } }} color={colors.surfaceInverse} />
+            <T testID="set-start-note" size={11} color={colors.muted} style={{ textAlign: "center" }}>Check your device, then start when ready. Original images load in the background as soon as the attempt opens. The server controls your deadline.</T>
           </>
         ) : <Button testID="set-signin-button" label="Sign in to start" onPress={() => router.push("/entry")} />}
       </ScrollView>
+      {readyOpen ? <ReadyToStart setId={id!} title={s.title} busy={busy} error={error} onClose={() => setReadyOpen(false)} onStart={time => void start(time)} /> : null}
     </View>
   );
 }

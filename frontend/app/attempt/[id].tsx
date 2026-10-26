@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { BackHandler, FlatList, ScrollView, TextInput, View } from "react-native";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { BackHandler, ScrollView, TextInput, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { useAttempt } from "@/src/useAttempt";
-import { assetDataUri } from "@/src/api/client";
+import { availableQuestions, imagePaths, usePaperAssets } from "@/src/assets/paperAssets";
+import { SubjectTabs, QuestionGrid, useSubjectNavigation } from "@/src/components/player/SubjectNavigation";
+import { AssetProgress } from "@/src/components/player/AssetProgress";
 import { invalidate } from "@/src/useCached";
 import { AssetImage } from "@/src/components/AssetImage";
 import { MathText } from "@/src/components/MathText";
@@ -32,35 +34,33 @@ export default function Player() {
   const toResult = () => { invalidate(`u.${user?.id}.`); router.replace(`/result/${id}`); };
   const A = useAttempt(id!, user?.id || "anon", toResult);
   const a = A.attempt;
-  const [qid, setQid] = useState<string | null>(null);
   const [sheet, setSheet] = useState<null | "palette" | "submit" | "exit" | "bonus">(null);
   const [busy, setBusy] = useState(false);
-  const [subject, setSubject] = useState<string>("");
   const [conf, setConf] = useState<Record<string, number | undefined>>({});
-  const paletteRef = useRef<FlatList>(null);
+  const reading = useRef<React.ElementRef<typeof ScrollView>>(null);
+  const [painted, setPainted] = useState<Record<string, boolean>>({});
+  const imageLoaded = useCallback((path: string) => setPainted(old => old[path] ? old : { ...old, [path]: true }), []);
+  const imageFailed = useCallback((path: string) => setPainted(old => old[path] === false ? old : { ...old, [path]: false }), []);
 
   const bonusRule = a?.rules?.bonus_rule;
   const bonusOpen = !!a?.bonus_unlocked_at;
-  const questions = useMemo(() => (a?.questions || []).filter((q: any) => !q.bonus || bonusOpen), [a?.questions, bonusOpen]);
-  const subjects = useMemo(() => [...new Set(questions.map((q: any) => q.subject || "General"))] as string[], [questions]);
-  const q = questions.find((x: any) => x.id === qid) || questions[0];
-  useEffect(() => { if (q && !qid) setQid(q.id); }, [q, qid]);
-  useEffect(() => { if (q) { A.visit(q.id); setSubject(q.subject || "General"); } }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  const questions = useMemo(() => availableQuestions<any>(a?.questions || [], bonusOpen), [a?.questions, bonusOpen]);
+  const nav = useSubjectNavigation<any>(questions);
+  const q = nav.question;
+  const images = usePaperAssets(id!, questions, q?.id, false);
+  useEffect(() => { if (q) A.visit(q.id); }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    // Prefetch the next question's original image so Next feels instant.
-    const i = questions.findIndex((x: any) => x.id === q?.id);
-    const nq = questions[i + 1];
-    if (nq?.asset_count) assetDataUri(`/attempts/${id}/questions/${nq.id}/asset/question/0`).catch(() => {});
-  }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+    reading.current?.scrollTo({ y: 0, animated: false });
+  }, [q?.id]);
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => { setSheet("exit"); return true; });
     return () => sub.remove();
   }, []);
 
-  if (!a) return (
+  if (!a || !q) return (
     <View style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.lg, padding: space.lg, gap: space.md }}>
       <T w="heavy" size={18}>Opening your attempt…</T>
-      <ErrorBox error={A.error} retry={A.load} testID="player-load-error" />
+      <ErrorBox error={A.error || (a ? "No available questions were returned for this attempt." : "")} retry={A.load} testID="player-load-error" />
       {!A.error ? <><Skeleton h={60} /><Skeleton h={260} /></> : <Button testID="player-back-button" kind="secondary" label="Back" onPress={() => router.back()} />}
     </View>
   );
@@ -80,10 +80,12 @@ export default function Player() {
   const cur = answer(q) || { value: "", marked: false };
   const lockedMain = bonusOpen && !q?.bonus;
   const timeUp = A.seconds === 0;
-  const disabled = timeUp || A.conflict || lockedMain;
+  const missingImage = q ? imagePaths(id!, q, "question").some(path => !painted[path]) : false;
+  const disabled = timeUp || A.conflict || lockedMain || missingImage;
   const saveState = A.conflict ? ["Conflict", colors.error, "alert-octagon-outline"] : !A.online ? ["Offline", colors.error, "wifi-off"] : A.inflight ? ["Saving…", colors.info, "cloud-sync-outline"] : Object.keys(A.pending).length ? [`${Object.keys(A.pending).length} pending`, colors.warning, "cloud-upload-outline"] : ["All saved", colors.success, "cloud-check-outline"];
-  const idx = questions.findIndex((x: any) => x.id === q?.id);
-  const go = (d: number) => { const n = questions[idx + d]; if (n) { tap(); setQid(n.id); } };
+  const idx = nav.index;
+  const go = (d: number) => { const n = nav.rows[idx + d]; if (n) { tap(); nav.select(n.id); } };
+  const nextSubject = nav.subjects[nav.subjects.indexOf(nav.subject) + 1];
   const counts = { answered: questions.filter((x: any) => String(answer(x)?.value || "").trim()).length, marked: questions.filter((x: any) => answer(x)?.marked).length, pending: Object.keys(A.pending).length };
   const bonusEligible = bonusRule && !bonusOpen && (a.questions || []).filter((x: any) => !x.bonus).every((x: any) => String(answer(x)?.value || "").trim());
 
@@ -127,14 +129,12 @@ export default function Player() {
             <Icon name="view-grid-outline" size={24} color={colors.onSurface} />
           </Press>
         </View>
-        {subjects.length > 1 ? (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
-            {subjects.map((s) => <Chip key={s} testID={"player-subject-" + s.toLowerCase().replace(/\s+/g, "-")} label={s} color={subjectColor(s)} active={subject === s} onPress={() => { const f = questions.find((x: any) => (x.subject || "General") === s); if (f) setQid(f.id); }} />)}
-          </ScrollView>
-        ) : null}
+        <SubjectTabs prefix="player-subject" questions={questions} subject={nav.subject} onSelect={nav.selectSubject} />
+        <T testID="player-subject-position" size={11} color={colors.muted}>{nav.subject} · {idx + 1} of {nav.rows.length} · Q{q?.number}</T>
+        <AssetProgress prefix="player" progress={images} />
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: space.md, gap: space.md, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled">
+      <ScrollView ref={reading} contentContainerStyle={{ padding: space.md, gap: space.md, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled">
         {timeUp ? <Notice tone="error" testID="player-time-up">Time’s up. Editing is closed; confirming the sealed attempt with the server. Late drafts are not scored.</Notice> : null}
         {A.conflict ? (
           <Notice tone="error" testID="player-conflict">
@@ -147,6 +147,7 @@ export default function Player() {
         ) : null}
         {A.error && !A.conflict ? <ErrorBox error={A.error} testID="player-error" /> : null}
         {lockedMain ? <Notice tone="info">Main answers are locked after entering the bonus section.</Notice> : null}
+        {missingImage ? <Notice testID="player-image-wait" tone="info">Loading this question’s original images. You can navigate freely; answering unlocks when they display.</Notice> : null}
 
         {q ? (
           <View testID="question-reading-surface" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.border }}>
@@ -157,8 +158,8 @@ export default function Player() {
               <T size={12} w="bold" color={colors.muted}>{q.type === "integer" ? "Integer answer" : "Single correct"}{q.bonus ? " · Bonus" : ""}</T>
             </View>
             {q.render_mode !== "source" && q.text ? <MathText testID="player-question-text" size={16} text={q.text} /> : null}
-            {Array.from({ length: q.asset_count || 0 }, (_, i) => (
-              <AssetImage key={q.id + i} testID={`question-image-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number} original image`} />
+            {imagePaths(id!, q, "question").map((path, i) => (
+              <AssetImage key={path} testID={`question-image-${q.number}-${i}`} path={path} label={`Question ${q.number} original image`} onLoaded={imageLoaded} onFailed={imageFailed} />
             ))}
             {q.render_mode === "source" && q.text ? <T size={11} color={colors.muted}>{q.text}</T> : null}
           </View>
@@ -215,10 +216,14 @@ export default function Player() {
           <Icon name="eraser" size={18} color={colors.muted} />
           <T w="bold" size={12}>Clear</T>
         </Press>
-        {idx < questions.length - 1 ? (
+        {idx < nav.rows.length - 1 ? (
           <Press testID="player-next-button" onPress={() => go(1)} style={{ flex: 1.4, height: 50, borderRadius: radius.md, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 4 }}>
             <T w="heavy" size={14} color={colors.onBrandPrimary}>Next</T>
             <Icon name="chevron-right" size={20} color={colors.onBrandPrimary} />
+          </Press>
+        ) : nextSubject ? (
+          <Press testID="player-next-subject" onPress={() => nav.selectSubject(nextSubject)} accessibilityLabel={`Continue to ${nextSubject}`} style={{ flex: 1.4, minHeight: 50, borderRadius: radius.md, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center" }}>
+            <T w="heavy" size={12} color={colors.onBrandPrimary}>Next subject</T>
           </Press>
         ) : (
           <Press testID="player-open-submit" onPress={() => setSheet("submit")} style={{ flex: 1.4, height: 50, borderRadius: radius.md, backgroundColor: colors.surfaceInverse, alignItems: "center", justifyContent: "center" }}>
@@ -229,6 +234,8 @@ export default function Player() {
 
       <Sheet visible={sheet === "palette"} onClose={() => setSheet(null)} testID="player-palette-sheet">
         <T w="heavy" size={18}>Questions</T>
+        <SubjectTabs prefix="palette-subject" questions={questions} subject={nav.subject} onSelect={nav.selectSubject} />
+        <T testID="palette-subject-label" size={12} w="bold">{nav.subject} · {nav.rows.length} questions</T>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
           {(Object.keys(QSTYLE) as QState[]).map((k) => (
             <View key={k} style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
@@ -237,17 +244,7 @@ export default function Player() {
             </View>
           ))}
         </View>
-        <FlatList ref={paletteRef} data={questions} numColumns={6} keyExtractor={(x: any) => x.id} style={{ maxHeight: 320 }} columnWrapperStyle={{ gap: 8 }} contentContainerStyle={{ gap: 8 }}
-          renderItem={({ item }: any) => {
-            const st = QSTYLE[stateOf(item)];
-            return (
-              <Press testID={"palette-q-" + item.number} onPress={() => { setQid(item.id); setSheet(null); }} accessibilityLabel={`Question ${item.number}, ${item.subject}, ${st.label}`}
-                style={{ width: 44, height: 44, borderRadius: 10, backgroundColor: st.bg, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: colors.borderStrong }}>
-                <T w="heavy" size={14} color={st.fg}>{item.number}</T>
-                {st.icon ? <Icon name={st.icon} size={10} color={st.fg} style={{ position: "absolute", top: 3, right: 3 }} /> : null}
-              </Press>
-            );
-          }} />
+        <QuestionGrid prefix="palette-q" questions={nav.rows} appearance={item => QSTYLE[stateOf(item)]} onSelect={qid => { nav.select(qid); setSheet(null); }} />
         {bonusEligible ? <Button testID="player-bonus-open" kind="secondary" label="Enter bonus section" icon="star-plus-outline" onPress={() => setSheet("bonus")} /> : null}
         <Button testID="player-palette-submit" label="Review & submit" color={colors.surfaceInverse} onPress={() => setSheet("submit")} />
       </Sheet>
