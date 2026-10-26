@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only visual + functional QA of the Home increment (BITSAT bright amber, COMEDK teal, JEE ruby kept, royal-blue/platinum All India hero). Every check used real DOM/computed CSS in the browser with page.route('**/api/**') read-only fixtures. All POST/PUT/PATCH/DELETE were blocked and 0 were attempted. Viewports: 1920x800 and 390x844. PASS on everything except one minor contrast point: BITSAT 12px nav links on the darker amber corner measure 4.0-4.1:1.",
+  "verified": {
+    "cards_palette": "JEE ruby is unchanged (#1A070A->#24090E face, #B6112A CTA). BITSAT face is the gradient #FFC15B/#EF9B25/#D88015, with the title rgb(40,24,6)=#281806 and an obsidian CTA #291A0A with ink #FFF5DE. COMEDK face is the teal gradient #04181A/#0A2025/#063A3E with a platinum-teal CTA gradient #DFF9F3->#9CDCD5 and ink #063733. No cobalt BITSAT, no emerald/gold COMEDK, no flat wine.",
+    "contrast_pixel_sampled": "Text was set to transparent, the shine ::before was forced to 10 translateX positions (-45%..45%, opacity 1), and the actual background pixels under each text box were sampled. Worst case 1920/390: JEE title 6.16, eyebrow 4.49, body 4.59, nav 7.2. BITSAT title 8.35, eyebrow 6.88, top label 5.98, body 4.68, nav 4.04 (fails). COMEDK title 5.23, eyebrow 4.58, body 4.26 (only at the peak glare pixel; static is about 6.9), nav 5.86. CTAs: BITSAT 15.5, COMEDK 8.5-11.9, JEE 6.4, hero silver CTA 9.67, 100% AI badge 10.27.",
+    "states": "Hover: card lifts -5px, the border changes to the accent colour and the CTA gets a sheen. BITSAT nav hover goes darker (#1F1203). Focus-visible: BITSAT has a 3px #281806 outline, COMEDK/JEE a white outline. Every card link, the title link and the shine toggle pass a hit test (elementFromPoint returns the link) with cursor pointer. The ::before/::after layers have pointer-events none.",
+    "shine_toggle": "[data-testid=exam-shine-toggle] adds .shine-paused to the grid. All 3 ::before animations go to paused, aria-pressed becomes true and the label reads 'Play shine'. Clicking again sets all 3 back to running.",
+    "reduced_motion": "With prefers-reduced-motion: reduce, the ::before on all 3 cards becomes animation none / display none, and the hero ::before animation is none.",
+    "hero": "Royal-blue gradient #06112E->#18357A with a platinum sheen and #8498C0 border, silver CTA, silver 100% AI badge, 62 DAYS counter and mini-streak are all present. 'Explore the series' opens [data-testid=series-explainer]; Escape closes it. The series-modal-hub href is /series/all-india-jee. series-modal-start is correctly absent because today_slot is null. The mini-streak href is /series/all-india-jee#my-streak and navigation works.",
+    "links": "Navigation reached /exams/jee-main/pyq, /exams/bitsat/mocks, /exams/comedk/mocks, /exams/comedk/chapters, /exams/jee-main/results and /exams/bitsat/results. All chapters/results hrefs are per exam.",
+    "layout": "Document horizontal overflow is 0 at 1920 and at 390. Mobile cards span 20->370px. No clipped text inside the cards or hero.",
+    "scope_regression": "Guest landing (/): body #08080A. The flagship banner is not inside .exam-home and stays black/red (#160B10 face, #D91222 CTA). Landing exam cards keep the old #14141C (no amber/teal). Header shows Log in / Start free, and the footer is present. Series hub: streak-journey is still #131116 / #54303C and the h1 span is red. No regression from Home-only selectors."
+  },
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home BITSAT card", "issues": ["The 12px/400 'Chapter practice' / 'My results' links (#493013) sit on the darker bottom-right amber (#D88015 zone) and measure 4.04-4.13:1, which is below WCAG AA 4.5 for small text. Fix: darken the nav link colour to about #3A2508 (or #281806), or use font-weight 600. Body text (#493013, 13px) is borderline at 4.68."]},
+      {"screen": "Home COMEDK card (minor, transient)", "issues": ["The 13px body #CCEBE7 drops to about 4.3:1 only for the instant the peak white glare passes over it. Static it is about 6.9. Optional: lower the glare peak alpha, or brighten the body to #DDF5F1."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/ui_fixture_home149.py"],
+  "action_items": [
+    "Optional/minor: raise BITSAT nav-link contrast on the amber face (e.g. .exam-home .bold-exam-card.exam-tone-bitsat nav a { color:#2E1C06 })."
+  ],
+  "critical_code_review_comments": [
+    "The review request names data-testids that do not exist: series-information-dialog / series-information-start. The real ones are series-explainer / series-modal-hub / series-modal-start (start only renders when today_slot.can_start). Not an app bug.",
+    "LiveSeries.js line 28 uses history?.items.find(...). If /history returns a body without items, the page crashes into the error boundary (this was reproduced with a {} fixture). Use history?.items?.find for robustness. With a correctly shaped fixture {items:[]} it renders fine.",
+    "When JEE's shine is mid-sweep, its card reports scrollWidth > clientWidth (138px) from the translated ::before. It is clipped by overflow:hidden, so nothing is visible, but programmatic scrollIntoView on inner links can scroll the card's content internally. This was seen only via a test-script artifact; normal user interaction is not affected."
+  ],
+  "updated_files": ["/app/tests/ui_fixture_home149.py (test helper only; no app code changed)"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "97% (1 minor contrast finding)"},
+  "seed_data_creation": "None. Browser-only route fixtures; 0 network writes; no DB or auth touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Home is at /home, wrapped in .exam-home. Cards: exam-home-exam-card-{jee-main,bitsat,comedk}. Fixtures needed: /auth/session {user:{...}}, /series/all-india-jee {server_now,today,last_date,today_slot:null,slots:[]}, /series/all-india-jee/streak (prelaunch shape), and /series/all-india-jee/history {items:[]} (otherwise LiveSeries crashes). Use wait_until='domcontentloaded' (networkidle never settles). To get deterministic glare, use ::before{animation:none;transform:translateX(x%);opacity:1}; negative animation-delay did not render the stripe."
+}
