@@ -1,0 +1,52 @@
+{
+  "summary": "Executed backend+frontend validation for Iteration 32. Real live flow (pilot login -> home tile -> JEE hub -> PYQ) and proxy/API parity checks passed. Upstream student PYQ catalogue remains empty (total=0), which is an external live data blocker, not an app routing/auth/proxy failure.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "GET /api/jl/pyq/jee-main (and direct https://jeelive.ai/api/pyq/jee-main)",
+        "issue": "Authenticated live response is 200 with items=[], years=[], total=0. Real published PYQ rows unavailable to student scope, so real start/submit/solution mapping cannot be verified against live papers.",
+        "priority": "CRITICAL"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter32_pyq_live.py",
+    "/app/test_reports/pytest/iter32_backend.xml",
+    "/app/test_reports/artifacts_iter32/quick_load_mobile.jpeg",
+    "/app/test_reports/artifacts_iter32/hub_390.jpeg",
+    "/app/test_reports/artifacts_iter32/pyq_390.jpeg",
+    "/app/test_reports/artifacts_iter32/pyq_320.jpeg",
+    "/app/test_reports/artifacts_iter32/fixture_invalid_schema.jpeg",
+    "/app/test_reports/artifacts_iter32/rapid_smoke_390.jpeg"
+  ],
+  "action_items": [
+    "Owner/backend publishing team must publish PYQ rows to student-visible scope; current live data is empty despite successful auth+proxy.",
+    "After live rows appear, retest real PYQ start/continue/result/re-attempt and supplied solution asset mapping end-to-end.",
+    "Grading-row UX fixed and self-tested: waiting hint always shown; no unreleased Result or new Start unless an explicitly released earlier result exists."
+  ],
+  "critical_code_review_comments": [
+    "Frontend redirect logic is correct: /catalogue?slug=jee-main&kind=mocks and kind=pyq route to /pyq; chapters remain unaffected.",
+    "Backend proxy session isolation and direct parity are working: /api/jl/pyq/jee-main matched direct upstream structure/values during this run.",
+    "No hardcoded fake PYQ data found in app flow; empty state messaging remains honest for live zero-catalogue response."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter32_pyq_live.py",
+    "/app/test_reports/iteration_32.json"
+  ],
+  "success_rate": {
+    "backend": "100% (4/4 in iter32 backend suite)",
+    "frontend": "Implemented navigation/action contract checks passed including grading follow-up; real PYQ E2E remains blocked by empty upstream data."
+  },
+  "seed_data_creation": "No real seed data created. MOCKED browser network fixtures were used only in isolated UI-contract tests and were not persisted/shipped.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Keep real and MOCKED outcomes separate. Real endpoint currently returns total=0. Fixture-based checks validated one-tap start sequencing, continue non-start behavior, redirects, error rendering for invalid schema, and no 320/390 horizontal overflow. Main follow-up confirmed new acknowledged reattempt uses a different key, grading hint/no premature Result, and single-line Re-attempt at320px. Test-only fixtures were removed. New Back IDs: pyq-back-button and exam-hub-back-{slug}.",
+  "rca_of_issue": "RCA (live blocker): Reproduced with both proxy and direct JEELIVE API using authenticated pilot account; both returned HTTP 200 with empty catalogue. Since auth/session and proxy parity are healthy, root cause is upstream publication/visibility state for student PYQ catalogue. Mitigation: backend owner must publish/associate rows correctly; then rerun real end-to-end PYQ attempt/result validation."
+}

@@ -5,9 +5,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, apiRaw, post, put, uuid } from "@/src/api/client";
 import { AssetImage } from "@/src/components/AssetImage";
 import { AiSolution } from "@/src/components/AiSolution";
+import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, Stat, T } from "@/src/components/ui";
-import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
@@ -135,8 +136,8 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
       </ScrollView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 6 }}>
         {subjects.map((s) => (
-          <Press key={s} testID={"solution-subject-" + s.toLowerCase().replace(/\s+/g, "-")} onPress={() => { setSubject(s); setQid(""); }} style={{ height: 34, paddingHorizontal: 12, borderRadius: radius.sm, justifyContent: "center", backgroundColor: subject === s ? subjectColor(s) : colors.surfaceSecondary, borderWidth: 1, borderColor: subject === s ? subjectColor(s) : colors.border }}>
-            <T w="heavy" size={12} color={subject === s ? colors.onBrandPrimary : colors.onSurface}>{s} · {rows.filter((x) => (x.subject || "General") === s && matches(x, filter)).length}</T>
+          <Press key={s} testID={"solution-subject-" + s.toLowerCase().replace(/\s+/g, "-")} onPress={() => { setSubject(s); setQid(""); }} style={{ minHeight: 44, paddingHorizontal: 12, borderRadius: radius.sm, justifyContent: "center", backgroundColor: subject === s ? subjectColor(s) : colors.surfaceSecondary, borderWidth: 1, borderColor: subject === s ? subjectColor(s) : colors.border }}>
+            <T w="heavy" size={12} color={subject === s ? foregroundOn(subjectColor(s)) : colors.onSurface}>{s} · {rows.filter((x) => (x.subject || "General") === s && matches(x, filter)).length}</T>
           </Press>
         ))}
       </ScrollView>
@@ -166,7 +167,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
             </View>
             {q.marked ? <Icon name="flag" size={16} color={colors.custom_neonAmber} /> : null}
           </View>
-          {q.render_mode !== "source" && q.text ? <T size={15} color={colors.custom_onReading}>{q.text}</T> : null}
+          {q.render_mode !== "source" && q.text ? <MathText testID="solution-question-text" text={q.text} /> : null}
           {Array.from({ length: q.asset_count || 0 }, (_, i) => <AssetImage key={q.id + "q" + i} testID={`solution-qimage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
             <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response || "—"}</T></View>
@@ -175,7 +176,8 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
           <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>{q.solution_kind === "answer_key_only" ? "SUPPLIED ANSWER KEY" : "SUPPLIED SOLUTION"}</T>
           {q.solution_kind === "answer_key_only" ? (
             <T size={13} color={colors.custom_onReading} testID={"no-worked-solution-" + q.number}>{aiBy[q.id]?.state === "ready" ? "The source provides this key only. An AI generated step-by-step solution is shown below." : ai.error && !ai.data ? "The source provides this key only." : "The source provides this key only. No worked solution was supplied."}</T>
-          ) : q.solution ? <T size={14} color={colors.custom_onReading} testID="solution-text">{q.solution}</T> : null}
+          ) : q.solution ? <MathText size={14} testID="solution-text" text={q.solution} /> : null}
+          {q.solution_kind !== "answer_key_only" && !q.solution && !q.solution_asset_count ? <T testID="solution-not-supplied" size={13} color={colors.muted}>A worked solution is not available for this question yet. The supplied answer key is shown above.</T> : null}
           {Array.from({ length: q.solution_asset_count || 0 }, (_, i) => <AssetImage key={q.id + "s" + i} testID={`solution-simage-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/solution/${i}`} label={`Solution ${q.number}`} />)}
           {ai.loading && !ai.data ? <Skeleton h={120} /> : ai.error && !ai.data ? (
             <Press testID="ai-solution-error" onPress={ai.reload} style={{ minHeight: 44, justifyContent: "center" }}><T size={12} w="bold" color={colors.brandText}>Couldn’t load AI solutions. Tap to retry</T></Press>

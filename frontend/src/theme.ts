@@ -5,80 +5,84 @@ import { Appearance, StyleSheet, useColorScheme, ViewStyle, TextStyle, ImageStyl
 export type ColorScheme = "light" | "dark";
 
 const light = {
-  surface: "#070707",
-  onSurface: "#F4EFEA",
-  surfaceSecondary: "#121214",
-  onSurfaceSecondary: "#F4EFEA",
-  surfaceTertiary: "#1E0A0E",
-  onSurfaceTertiary: "#FF5266",
-  surfaceInverse: "#B0001E",
+  surface: "#08080A",
+  onSurface: "#F8FAFC",
+  surfaceSecondary: "#14141C",
+  onSurfaceSecondary: "#F8FAFC",
+  surfaceAlt: "#0F0F14",
+  surfaceTertiary: "#280D13",
+  onSurfaceTertiary: "#FF6974",
+  surfaceInverse: "#D91222",
   onSurfaceInverse: "#FFFFFF",
-  muted: "#9A938C",
-  brandText: "#FF5266", // readable blood red for text/icons on black (AA)
+  muted: "#B0B0BF",
+  mutedSecondary: "#9292A5",
+  brandText: "#FF6974", // live jeelive.ai text/icon red, distinct from button fill
+  brandLine: "#67202C",
+  focusRing: "#FF7883",
 
-  brand: "#C8102E",
+  brand: "#D91222",
   onBrand: "#FFFFFF",
-  brandPrimary: "#C8102E",
+  brandPrimary: "#D91222",
   onBrandPrimary: "#FFFFFF",
-  brandSecondary: "#6E0014",
+  brandSecondary: "#B91020",
   onBrandSecondary: "#FFFFFF",
-  brandTertiary: "#1E0A0E",
-  onBrandTertiary: "#FF5266",
+  brandTertiary: "#280D13",
+  onBrandTertiary: "#FF6974",
 
-  success: "#34C185",
-  onSuccess: "#04140C",
-  warning: "#E0A526",
-  onWarning: "#1A1204",
-  error: "#FF3D55",
-  onError: "#FFFFFF",
-  info: "#D9B45A",
-  onInfo: "#120C02",
+  success: "#56D99A",
+  onSuccess: "#10231C",
+  warning: "#F1BC63",
+  onWarning: "#2A2113",
+  error: "#FF7883",
+  onError: "#2F1118",
+  info: "#FF6974",
+  onInfo: "#280D13",
 
-  border: "#242426",
-  borderStrong: "#36363A",
-  divider: "#1C1C1E",
+  border: "#2A2A38",
+  borderStrong: "#454557",
+  divider: "#2A2A38",
 
-  // Exam & subject identities (user supplied)
-  custom_examJee: "#C8102E",
-  custom_examJeeDeep: "#4A0010",
-  custom_examBitsat: "#E0452B",
-  custom_examBitsatDeep: "#7A1A0C",
-  custom_examComedk: "#16161A",
-  custom_examComedkGold: "#D9B45A",
-  custom_series: "#6E0014",
-  custom_seriesBright: "#E23A4B",
-  custom_burgundy: "#8A0F24",
-  custom_subjectPhysics: "#D7263D",
-  custom_subjectChemistry: "#8A6A22",
-  custom_subjectMaths: "#74747F",
-  custom_subjectBiology: "#1F7A55",
-  custom_darkCard: "#121214",
-  custom_amber: "#7D5F1E",
-  custom_cyan: "#D9B45A",
-  custom_reading: "#121214",
-  custom_onReading: "#F4EFEA",
-  custom_successSoft: "#0E2219",
-  custom_errorSoft: "#2A0A10",
-  custom_warningSoft: "#261D08",
-  custom_infoSoft: "#1E0A0E",
-  custom_gameBg: "#000000",
-  custom_gameCard: "#111113",
-  custom_gameCardHi: "#1A1A1D",
-  custom_gameLine: "#2A2A2E",
-  custom_neonAmber: "#E8C46A",
-  custom_neonCyan: "#FF4D5E",
-  custom_neonGreen: "#3DDC97",
-  custom_neonViolet: "#B0001E",
-  custom_neonMagenta: "#FF2E4D",
+  // Current website uses a unified red identity; semantic study/game colours remain distinct.
+  custom_examJee: "#D91222",
+  custom_examJeeDeep: "#280D13",
+  custom_examBitsat: "#D91222",
+  custom_examBitsatDeep: "#280D13",
+  custom_examComedk: "#14141C",
+  custom_examComedkGold: "#FF6974",
+  custom_series: "#160B10",
+  custom_seriesBright: "#FF7883",
+  custom_burgundy: "#67202C",
+  custom_subjectPhysics: "#FF6974",
+  custom_subjectChemistry: "#F1BC63",
+  custom_subjectMaths: "#D9B1E9",
+  custom_subjectBiology: "#56D99A",
+  custom_darkCard: "#14141C",
+  custom_amber: "#906224",
+  custom_cyan: "#FF6974",
+  custom_reading: "#14141C",
+  custom_onReading: "#F8FAFC",
+  custom_successSoft: "#10231C",
+  custom_errorSoft: "#2F1118",
+  custom_warningSoft: "#2A2113",
+  custom_infoSoft: "#280D13",
+  custom_gameBg: "#08080A",
+  custom_gameCard: "#14141C",
+  custom_gameCardHi: "#1A1A24",
+  custom_gameLine: "#2A2A38",
+  custom_neonAmber: "#F1BC63",
+  custom_neonCyan: "#FF6974",
+  custom_neonGreen: "#56D99A",
+  custom_neonViolet: "#D9B1E9",
+  custom_neonMagenta: "#FF6974",
   custom_rarityRare: "#C0C6CF",
-  custom_rarityEpic: "#E23A4B",
-  custom_rarityLegendary: "#E8C46A",
-  custom_rarityCommon: "#8E8A86",
-  custom_neonRed: "#FF3D55",
-  custom_gameMuted: "#9A938C",
-  custom_overlay: "rgba(0,0,0,0.72)",
-  custom_whiteA70: "rgba(255,255,255,0.72)",
-  custom_whiteA15: "rgba(255,255,255,0.15)",
+  custom_rarityEpic: "#D9B1E9",
+  custom_rarityLegendary: "#F1BC63",
+  custom_rarityCommon: "#B0B0BF",
+  custom_neonRed: "#FF7883",
+  custom_gameMuted: "#B0B0BF",
+  custom_overlay: "rgba(8,8,10,0.85)",
+  custom_whiteA70: "rgba(248,250,252,0.72)",
+  custom_whiteA15: "rgba(248,250,252,0.15)",
 };
 
 export type ThemeColors = typeof light;
@@ -94,11 +98,11 @@ setColorScheme?.(defaultScheme); // the luxury theme is always dark
 export const colors = light;
 
 export const fonts = {
-  regular: "Jakarta-400",
-  medium: "Jakarta-500",
-  semibold: "Jakarta-600",
-  bold: "Jakarta-700",
-  heavy: "Jakarta-800",
+  regular: "Figtree-400",
+  medium: "Figtree-500",
+  semibold: "Figtree-600",
+  bold: "Figtree-700",
+  heavy: "Figtree-800",
 };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
@@ -106,6 +110,15 @@ export const radius = { sm: 6, md: 12, lg: 20, pill: 999 };
 
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;
+
+// Readable labels on both bright semantic colours and the dark primary button.
+export function foregroundOn(background: string): string {
+  if (!/^#[0-9a-f]{6}$/i.test(background)) return light.onBrandPrimary;
+  const channels = [1, 3, 5].map((i) => parseInt(background.slice(i, i + 2), 16) / 255)
+    .map((c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  const luminance = channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  return luminance > 0.179 ? light.surface : light.onBrandPrimary;
+}
 
 export function useTheme(): { scheme: ColorScheme; colors: ThemeColors } {
   const system = useColorScheme();

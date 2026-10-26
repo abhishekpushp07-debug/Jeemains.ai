@@ -163,3 +163,38 @@ A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Mai
 - Application access logs redact bearer paths. No-store/nosniff/no-referrer headers applied. Upstream infrastructure logs cannot be controlled here; link possession grants download, so owner must not share it publicly. Raw bearer URLs must NOT be stored in PRD/source/test reports.
 - `test_owner_download_iter31.py`: final10/10 passed; valid byte/hash/headers, denial cases, no public mint, CLI revoke, hash-only storage, TTL, logs, NEETcatalog unchanged. Initial exact header test was corrected because ingress's no-store/no-cache/must-revalidate still prohibits ALL cache storage.
 - Download ZIP remains content+integration references, not a complete independent app/backend. Owned backend/frontend source can be copied separately; the external jeelive.ai exam/mock/attempt service source and live DB are not in this repo. Future NEET website and full standalone backend still need implementation.
+
+## Iteration32 — current website theme + minimal-click JEE Main PYQ
+
+### Explicit request / chosen flow
+User: match the changed jeelive.ai theme, replace JEE mocks with PYQs and use uploaded solutions. Confirmed **year/shift listing**, specifically **Mains card -> PYQ -> immediate paper list** with Start for new, Continue for unfinished, Result+Re-attempt for completed. No intermediate set-detail or mandatory year/date drilldown.
+
+### Implemented
+- Verified public current website CSS and JS rather than guessing branding/contracts. Theme now uses Figtree400–800, surface#08080A, card#14141C, primary#D91222, readable accent#FF6974, brandSoft#280D13, brandLine#67202C, foreground#F8FAFC, muted#B0B0BF. Global semantic foreground selection fixes white-on-bright-subject/amber contrast.
+- Native vector brand, matching red/charcoal home exam cards, refreshed exam hub/series and entry decoration; authentication logic unchanged. BITSAT/COMEDK mocks, chapters, existing history, live series, RF/NEET remain available.
+- `frontend/app/pyq.tsx` + `src/api/pyq.ts` + `components/PyqPaperCard.tsx`: actual GET `/pyq/jee-main`, validated response, date/year/shift metadata from API, dynamic optional inline filters, no fabricated rows. Live/authenticated cache scoped to UID, focus/pull-to-refresh.
+- JEE hub's Mock tests replaced by PYQ. Old `/catalogue?slug=jee-main&kind=mocks|pyq` links redirect to `/pyq`; other exam mock routes and chapter routes unchanged.
+- New/re-attempt one-tap pipeline: recheck `/my/sets/{id}` active state, existing preflight, idempotent `/sets/{id}/start`, then player. Per-user/set single-flight and persisted JSON start intent keep the same key for uncertain retries; new acknowledged reattempt gets a new key. No history deletion.
+- Continue reads the exact existing attempt and routes active to player, sealed/expired to result; never POSTs a new start. Results use latest_result_id/finished attempt only. Grading shows an explicit waiting hint and no premature new-start action; previous released result may remain available.
+- Per-row errors/loading/disabled controls and 320px single-line Re-attempt button. New hub/PYQ Back testIDs unique to avoid hidden-stack selector collisions.
+- Existing supplied solution/question image mapping remains keyed by question ID with authenticated asset fetching and zoom. New `MathText.tsx` uses bundled native KaTeX for supplied typed maths; web preview uses readable plain-math fallback. Answer-key-only and missing-worked-solution disclosures remain honest. No AI regeneration/replacement of uploaded solutions introduced.
+- **Backend proxy and auth code were not changed**: the existing generic proxy already forwards the new endpoint. No env changes or new credentials.
+
+### Critical external live-data blocker (P0)
+As of2026-10-26, authenticated live **`https://jeelive.ai/api/pyq/jee-main` returns HTTP200 `{items:[],years:[],total:0}`**, both direct and through this app's proxy. Existing login and chapter histories work; correct API base confirmed in website JS and app config. Independent troubleshooting confirmed student catalogue emptiness.
+
+This does NOT prove uploads failed or that no draft data exists. Admin/studio/database publication is not visible with the learner session. The jeelive.ai backend owner must check publication/association/student visibility of the intended full-length year/date/shift rows. Do NOT substitute chapter tests from `/sets?kind=pyq`; that undocumented filter may be ignored. No admin/studio data was changed.
+
+**Real new PYQ start -> solve -> submit -> supplied-solution mapping cannot be called verified until live published rows exist.** The app is wired to display them on refresh/focus as soon as the student endpoint returns them.
+
+### Verification
+- `/app/test_reports/iteration_32.json`; new `/app/backend/tests/test_iter32_pyq_live.py`:4/4 live auth/proxy-contract/parity/RF-exam sanity checks passed.
+- Real preview390/320: current theme, home->Mains->PYQ two taps, honest empty/refresh, BITSAT mocks, legacy redirects, chapters and RF regression passed.
+- Isolated **test-only** network fixtures (NOT app/demo data) validated row actions, optional filters, Start request ordering, tap-spam suppression, same-key failed-start retry, Continue withoutPOST, schema errors. Main follow-up verified genuine Re-attempt creates a different key/new attempt, grading waiting hint, and narrow action labels. Fixtures removed; real catalogue returned0 afterward.
+- TypeScript and modified JS/Python lint pass. Physical Android/iOS rendering of newly reused native maths wrapper has not been verified on-device.
+- Source/contract notes: `/app/reference/PYQ_INTEGRATION.md`. Current website reference supersedes older Jakarta/black-burgundy-only styling notes.
+
+### Current priorities
+- P0: upstream student-visible year/shift PYQ publication/visibility, then real-paper end-to-end solution matching test.
+- P1: physical-device maths/asset QA; existing verified-identity/OTP backlog remains separate.
+- P2: future NEETLIVE independent app/site using `/app/neetlive/`; further changes only after owner feedback.

@@ -7,8 +7,9 @@ import { useAttempt } from "@/src/useAttempt";
 import { assetDataUri } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
 import { AssetImage } from "@/src/components/AssetImage";
+import { MathText } from "@/src/components/MathText";
 import { Button, Chip, ErrorBox, Icon, IconName, Notice, Press, Sheet, Skeleton, T, tap } from "@/src/components/ui";
-import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock } from "@/src/navigation";
 
 type QState = "current" | "answered_marked" | "marked" | "answered" | "pending" | "visited" | "fresh";
@@ -151,11 +152,11 @@ export default function Player() {
           <View testID="question-reading-surface" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.border }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
               <View style={{ paddingHorizontal: 10, height: 28, borderRadius: radius.pill, backgroundColor: subjectColor(q.subject), justifyContent: "center" }}>
-                <T w="heavy" size={13} color={colors.onBrandPrimary}>Q{q.number}</T>
+                <T w="heavy" size={13} color={foregroundOn(subjectColor(q.subject))}>Q{q.number}</T>
               </View>
               <T size={12} w="bold" color={colors.muted}>{q.type === "integer" ? "Integer answer" : "Single correct"}{q.bonus ? " · Bonus" : ""}</T>
             </View>
-            {q.render_mode !== "source" && q.text ? <T size={16} color={colors.custom_onReading} style={{ lineHeight: 24 }}>{q.text}</T> : null}
+            {q.render_mode !== "source" && q.text ? <MathText testID="player-question-text" size={16} text={q.text} /> : null}
             {Array.from({ length: q.asset_count || 0 }, (_, i) => (
               <AssetImage key={q.id + i} testID={`question-image-${q.number}-${i}`} path={`/attempts/${id}/questions/${q.id}/asset/question/${i}`} label={`Question ${q.number} original image`} />
             ))}

@@ -15,7 +15,7 @@ import { ChapterSheet } from "@/src/components/ChapterSheet";
 import { DiagramShortcut, WeakRevision } from "@/src/components/ArenaLearning";
 import { ExamLeaderboard } from "@/src/components/ExamLeaderboard";
 import { playSfx } from "@/src/sfx";
-import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 
 const pick = { exam: "JEE" as "JEE" | "NEET", subject: "Physics", chapter: "" as string };
@@ -120,8 +120,8 @@ export default function RapidHome() {
                   const on = subject === s;
                   return (
                     <Press key={s} testID={"rf-subject-" + s.toLowerCase()} onPress={() => { setSubject(s); setChapter(""); }} style={{ flex: 1, height: 44, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, backgroundColor: on ? subjectColor(s) : "transparent", shadowColor: colors.custom_neonCyan, shadowOpacity: on ? 0.6 : 0, shadowRadius: 10 }}>
-                      <Icon name={ic} size={16} color={on ? colors.onSurfaceInverse : colors.custom_gameMuted} />
-                      <T w="heavy" size={13} color={on ? colors.onSurfaceInverse : colors.custom_gameMuted} numberOfLines={1}>{l}</T>
+                      <Icon name={ic} size={16} color={on ? foregroundOn(subjectColor(s)) : colors.custom_gameMuted} />
+                      <T w="heavy" size={13} color={on ? foregroundOn(subjectColor(s)) : colors.custom_gameMuted} numberOfLines={1}>{l}</T>
                     </Press>
                   );
                 })}

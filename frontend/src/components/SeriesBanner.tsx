@@ -24,7 +24,7 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
   const av = availability(series);
   return (
     <>
-      <View testID="all-india-series-banner" style={{ backgroundColor: colors.custom_series, borderRadius: radius.lg, overflow: "hidden", padding: space.lg, paddingTop: space.md, gap: space.md }}>
+      <View testID="all-india-series-banner" style={{ backgroundColor: colors.custom_series, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.brandLine, overflow: "hidden", padding: space.lg, paddingTop: space.md, gap: space.md }}>
         {/* True 45° top-right corner ribbon, clipped by the card */}
         <View pointerEvents="none" style={{ position: "absolute", top: 18, right: -38, width: 150, transform: [{ rotate: "45deg" }], backgroundColor: colors.custom_burgundy, paddingVertical: 5, alignItems: "center", shadowColor: colors.surfaceInverse, shadowOpacity: 0.3, shadowRadius: 4, elevation: 4 }}>
           <T testID="series-100ai-ribbon" w="heavy" size={12} color={colors.onBrandSecondary} style={{ letterSpacing: 1 }} accessibilityLabel="100% AI — series design branding">100% AI</T>
@@ -35,7 +35,7 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
         </View>
         <View style={{ paddingRight: 72 }}>
           <T w="semibold" size={15} color={colors.custom_whiteA70}>All India</T>
-          <T w="heavy" size={compact ? 21 : 24} color={colors.onBrandSecondary} testID="series-banner-title">JEE Mains Test Series</T>
+          <T w="heavy" size={compact ? 21 : 24} color={colors.brandText} testID="series-banner-title">JEE Mains Test Series</T>
         </View>
         <View style={{ backgroundColor: colors.brandTertiary, borderRadius: radius.md, paddingVertical: space.sm, paddingHorizontal: space.md, gap: 2 }}>
           <T w="heavy" size={17} color={colors.custom_seriesBright} testID="series-score-200-tagline">Score 200+ with AI</T>
@@ -50,9 +50,9 @@ export function SeriesBanner({ series, error, compact = false }: { series?: Seri
         </View>
         {error ? <T size={11} color={colors.custom_whiteA70}>Live status unavailable. Open the hub to retry.</T> : null}
         <View style={{ flexDirection: "row", gap: space.sm }}>
-          <Press testID="series-open-hub-button" onPress={() => router.push("/live")} style={{ flex: 1, minHeight: 46, borderRadius: radius.md, backgroundColor: colors.surfaceSecondary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 }}>
-            <T w="heavy" size={14} color={colors.onSurface}>Open series hub</T>
-            <Icon name="arrow-top-right" size={16} color={colors.onSurface} />
+          <Press testID="series-open-hub-button" onPress={() => router.push("/live")} style={{ flex: 1, minHeight: 46, borderRadius: radius.md, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 6 }}>
+            <T w="heavy" size={14} color={colors.onBrandPrimary}>Open series hub</T>
+            <Icon name="arrow-top-right" size={16} color={colors.onBrandPrimary} />
           </Press>
           <Press testID="series-explainer-button" onPress={() => setOpen(true)} accessibilityLabel="How the series works" style={{ width: 46, minHeight: 46, borderRadius: radius.md, borderWidth: 1, borderColor: colors.custom_whiteA70, alignItems: "center", justifyContent: "center" }}>
             <Icon name="information-outline" size={20} color={colors.onBrandSecondary} />

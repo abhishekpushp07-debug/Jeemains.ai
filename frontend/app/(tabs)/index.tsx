@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { RefreshControl, ScrollView, View } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -11,12 +10,14 @@ import { prefetch, useCached } from "@/src/useCached";
 import { Card, Icon, Notice, Press, T } from "@/src/components/ui";
 import { SeriesBanner, Series } from "@/src/components/SeriesBanner";
 import { ExamTile, TileKind } from "@/src/components/ExamTile";
+import { BrandMark } from "@/src/components/BrandMark";
+import { getPyqCatalogue } from "@/src/api/pyq";
 import { colors, radius, space } from "@/src/theme";
 import { fmtClock, usesNativeTabs } from "@/src/navigation";
 
 type Tile = { id: string; kind: TileKind; title: string; sub: string; grad: [string, string]; to: string; badge?: string };
 const TILES: Tile[] = [
-  { id: "jee-main", kind: "jee", badge: "HOT", title: "JEE Main", sub: "Mocks · Chapters", grad: [colors.custom_examJee, colors.custom_examJeeDeep], to: "/exam/jee-main" },
+  { id: "jee-main", kind: "jee", badge: "PYQ", title: "JEE Main", sub: "PYQs · Chapters", grad: [colors.custom_examJee, colors.custom_examJeeDeep], to: "/exam/jee-main" },
   { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", grad: [colors.custom_seriesBright, colors.custom_series], to: "/live" },
   { id: "bitsat", kind: "bitsat", title: "BITSAT", sub: "Practice · Branches", grad: [colors.custom_examBitsat, colors.custom_examBitsatDeep], to: "/exam/bitsat" },
   { id: "comedk", kind: "comedk", title: "COMEDK", sub: "Practice · History", grad: [colors.custom_darkCard, colors.custom_examComedk], to: "/exam/comedk" },
@@ -38,6 +39,7 @@ export default function Home() {
         prefetch(`u.${user.id}.${path}`, () => api(path));
       }
       prefetch("rf.catalog", () => rf("/catalog", user.id));
+      prefetch(`u.${user.id}.pyq.jee-main`, getPyqCatalogue);
       prefetch(`u.${user.id}.streak`, () => api("/series/all-india-jee/streak"));
     }, 400);
     return () => clearTimeout(t);
@@ -52,7 +54,7 @@ export default function Home() {
       refreshControl={<RefreshControl refreshing={false} onRefresh={() => { series.reload(); progress.reload(); }} />}
     >
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-        <View style={{ borderRadius: 12, padding: 4, backgroundColor: "#FFFFFF", borderWidth: 1.5, borderColor: colors.custom_neonAmber }}><Image source={require("../../assets/images/jeelive-logo.webp")} style={{ width: 132, height: 40 }} contentFit="contain" accessibilityLabel="JEELIVE.AI" /></View>
+        <BrandMark testID="home-brand" />
         <Press testID="home-account-button" onPress={() => router.push("/account")} accessibilityLabel="Account" style={{ flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.md, height: 44, borderRadius: radius.pill, backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="account-circle-outline" size={20} color={colors.onSurface} />
           <T w="bold" size={12}>{user?.phone ? "··" + user.phone.slice(-4) : "Account"}</T>
@@ -83,9 +85,11 @@ export default function Home() {
         </Animated.View>
       ) : null}
 
-      <View>
-        <T w="heavy" size={20}>Choose your exam</T>
-        <T size={13} color={colors.muted}>Start new practice or pick up where you stopped.</T>
+      <View style={styles.headline}>
+        <T testID="home-free-eyebrow" w="heavy" size={10} color={colors.brandText} style={styles.eyebrow}>100% FREE · BUILT FOR YOUR NEXT STEP</T>
+        <T testID="home-title" w="heavy" size={30} style={styles.title}>Your exam.</T>
+        <T testID="home-title-accent" w="heavy" size={30} color={colors.brandText} style={styles.title}>Your next big step.</T>
+        <T testID="home-description" size={13} color={colors.muted}>Real papers, focused practice. Pick up where you stopped.</T>
       </View>
 
       <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.lg }}>
@@ -124,3 +128,9 @@ export default function Home() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  headline: { gap: 3, paddingTop: space.sm, paddingBottom: space.xs },
+  eyebrow: { letterSpacing: 1.2, marginBottom: space.sm },
+  title: { lineHeight: 34, letterSpacing: -0.6 },
+});

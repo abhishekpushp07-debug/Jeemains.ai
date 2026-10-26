@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, TextInput, View } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Redirect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { api } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, Press, Skeleton, T } from "@/src/components/ui";
-import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
 import { examBySlug, fmtClock, unixDate } from "@/src/navigation";
 
 const ORDER = ["Physics", "Chemistry", "Mathematics"];
@@ -29,7 +29,7 @@ function SetRow({ s }: { s: any }) {
     <Press testID={"set-row-" + s.id} disabled={!available} onPress={() => router.push(act.to as any)}>
       <Card style={{ flexDirection: "row", gap: space.md, alignItems: "center", padding: space.md }}>
         <View style={{ width: 46, height: 46, borderRadius: 14, backgroundColor: subjectColor(subj), alignItems: "center", justifyContent: "center" }}>
-          <T w="heavy" size={16} color={colors.onBrandPrimary}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
+          <T w="heavy" size={16} color={foregroundOn(subjectColor(subj))}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
         </View>
         <View style={{ flex: 1, gap: 2 }}>
           <T w="heavy" size={15} numberOfLines={2}>{s.title}</T>
@@ -59,7 +59,13 @@ function HistoryRow({ a }: { a: any }) {
   );
 }
 
-export default function Catalogue() {
+export default function CatalogueRoute() {
+  const { slug, kind } = useLocalSearchParams<{ slug: string; kind: string }>();
+  if (slug === "jee-main" && (kind === "mocks" || kind === "pyq")) return <Redirect href="/pyq" />;
+  return <Catalogue />;
+}
+
+function Catalogue() {
   const { slug, kind } = useLocalSearchParams<{ slug: string; kind: "mocks" | "chapters" | "history" }>();
   const exam = examBySlug(slug);
   const insets = useSafeAreaInsets();

@@ -1,10 +1,9 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { Card, Empty, Header, Icon, IconName, Press, T } from "@/src/components/ui";
+import { Empty, Header, Icon, IconName, Press, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 import { examBySlug } from "@/src/navigation";
 
@@ -15,42 +14,41 @@ export function ExamHub({ slug, inTab = false }: { slug: string; inTab?: boolean
   const exam = examBySlug(slug);
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  if (!exam) return <View style={{ flex: 1, paddingTop: insets.top }}><Empty title="Exam not found." /></View>;
-  const grad = examGrad(slug);
+  if (!exam) return <View style={styles.screen}><Empty title="Exam not found." /></View>;
+  const jee = slug === "jee-main";
   const items: { id: string; title: string; body: string; icon: IconName; to: string }[] = [
-    { id: "mocks", title: "Mock tests", body: "Full-length exam simulations with the paper’s own rules.", icon: "file-document-multiple-outline", to: `/catalogue?slug=${slug}&kind=mocks` },
-    { id: "chapters", title: "Chapter-wise practice", body: "Pick a subject and chapter. Focused, timed practice.", icon: "book-open-page-variant-outline", to: `/catalogue?slug=${slug}&kind=chapters` },
-    { id: "history", title: "Results & history", body: "Every attempt for this exam, with released results.", icon: "history", to: `/catalogue?slug=${slug}&kind=history` },
+    jee ? { id: "pyq", title: "PYQ papers", body: "Original papers by year & shift. Start, continue or see your result.", icon: "file-document-check-outline", to: "/pyq" }
+      : { id: "mocks", title: "Mock tests", body: "Full-length exam practice with each paper’s own rules.", icon: "file-document-multiple-outline", to: `/catalogue?slug=${slug}&kind=mocks` },
+    { id: "chapters", title: "Chapter-wise practice", body: "One subject. One chapter. A stronger foundation.", icon: "book-open-page-variant-outline", to: `/catalogue?slug=${slug}&kind=chapters` },
+    { id: "history", title: "Results & history", body: "Every attempt, saved answers and released solutions.", icon: "chart-box-outline", to: `/catalogue?slug=${slug}&kind=history` },
   ];
-  return (
-    <View testID={"exam-hub-" + slug} style={{ flex: 1, backgroundColor: colors.surface }}>
-      <LinearGradient colors={grad} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ paddingTop: insets.top + space.sm, paddingBottom: space.xl, borderBottomLeftRadius: radius.lg, borderBottomRightRadius: radius.lg }}>
-        {inTab ? <View style={{ height: space.md }} /> : <Header title="" onBack={() => router.back()} />}
-        <View style={{ paddingHorizontal: space.xl, gap: 4 }}>
-          <T w="bold" size={12} color={colors.custom_whiteA70} style={{ letterSpacing: 1.2 }}>EXAM HUB</T>
-          <T w="heavy" size={32} color={exam.slug === "comedk" ? colors.custom_examComedkGold : colors.onBrandPrimary}>{exam.name}</T>
-          <T size={14} color={colors.custom_whiteA70}>Choose how you want to practise today.</T>
-        </View>
-      </LinearGradient>
-      <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: (inTab ? 0 : insets.bottom) + space.xl, gap: space.md }}>
-        {items.map((it, i) => (
-          <Animated.View key={it.id} entering={FadeInDown.delay(70 * i).duration(350)}>
-            <Press testID={`exam-destination-${it.id}`} onPress={() => router.push(it.to as any)}>
-              <Card style={{ flexDirection: "row", alignItems: "center", gap: space.md }}>
-                <View style={{ width: 52, height: 52, borderRadius: 16, backgroundColor: grad[0], alignItems: "center", justifyContent: "center" }}>
-                  <Icon name={it.icon} size={26} color={exam.slug === "comedk" ? colors.custom_examComedkGold : colors.onBrandPrimary} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <T w="heavy" size={17}>{it.title}</T>
-                  <T size={13} color={colors.muted}>{it.body}</T>
-                </View>
-                <Icon name="chevron-right" size={24} color={colors.muted} />
-              </Card>
-            </Press>
-          </Animated.View>
-        ))}
-        <T size={11} color={colors.muted}>Chapter practice is focused topic work; mocks simulate the full exam. Every paper shows its own marking, timing and rules before you start.</T>
-      </ScrollView>
-    </View>
-  );
+  return <View testID={`exam-hub-${slug}`} style={[styles.screen, { paddingTop: insets.top + space.sm }]}>
+    <Header title={exam.name} eyebrow="YOUR EXAM. YOUR NEXT STEP." testID={`exam-hub-heading-${slug}`} backTestID={`exam-hub-back-${slug}`} onBack={inTab ? undefined : () => router.back()} />
+    <ScrollView contentContainerStyle={[styles.content, { paddingBottom: (inTab ? 0 : insets.bottom) + space.xl }]}>
+      <View style={styles.intro}>
+        <View style={styles.heroIcon}><Icon name={jee ? "atom-variant" : "school-outline"} size={40} color={colors.brandText} /></View>
+        <T testID="exam-hub-title" size={28} w="heavy">{jee ? "Real papers.\nBetter preparation." : "Make your\nnext attempt count."}</T>
+        <T testID="exam-hub-description" size={14} color={colors.muted}>Choose your practice. Get straight to the questions.</T>
+      </View>
+      {items.map((item, index) => <Animated.View key={item.id} entering={FadeInDown.delay(index * 45).duration(240)}>
+        <Press testID={`exam-destination-${item.id}`} onPress={() => router.push(item.to as any)} style={[styles.card, index === 0 && styles.primaryCard]}>
+          <View style={styles.icon}><Icon name={item.icon} size={26} color={colors.brandText} /></View>
+          <View style={styles.copy}><T testID={`exam-${item.id}-title`} size={18} w="heavy">{item.title}</T><T testID={`exam-${item.id}-description`} size={13} color={colors.muted}>{item.body}</T></View>
+          <Icon name="arrow-top-right" size={20} color={index === 0 ? colors.brandText : colors.muted} />
+        </Press>
+      </Animated.View>)}
+      <T testID="exam-hub-rules-note" size={11} color={colors.mutedSecondary}>{jee ? "PYQs are previous-year full papers. Chapter practice builds individual concepts. Your attempts stay saved." : "Each paper follows its own timing and marking rules. Your progress stays saved when you leave."}</T>
+    </ScrollView>
+  </View>;
 }
+
+const styles = StyleSheet.create({
+  screen: { flex: 1, backgroundColor: colors.surface },
+  content: { padding: space.lg, gap: space.lg },
+  intro: { gap: space.sm, paddingBottom: space.md },
+  heroIcon: { width: 70, height: 70, borderRadius: 22, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine, justifyContent: "center", alignItems: "center", marginBottom: space.sm },
+  card: { padding: space.lg, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surfaceSecondary, flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 100 },
+  primaryCard: { borderColor: colors.brandLine },
+  icon: { width: 44, height: 48, alignItems: "center", justifyContent: "center" },
+  copy: { flex: 1, gap: 4 },
+});

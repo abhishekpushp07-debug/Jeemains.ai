@@ -1,38 +1,32 @@
 import React from "react";
-import { View } from "react-native";
-import { Image } from "expo-image";
-import { Card, Icon, Press, T } from "@/src/components/ui";
+import { StyleSheet, View } from "react-native";
+import { Icon, IconName, Press, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 
 export type TileKind = "jee" | "live" | "bitsat" | "comedk";
+const SYMBOL: Record<TileKind, IconName> = { jee: "atom-variant", live: "trophy-outline", bitsat: "flask-outline", comedk: "school-outline" };
 
-// Supplied premium artwork (3D glass icons, orbs, dots, tech lines) — kept exactly as designed.
-const ART: Record<TileKind, number> = {
-  jee: require("../../assets/images/tile-jee.jpg"),
-  live: require("../../assets/images/tile-live.jpg"),
-  bitsat: require("../../assets/images/tile-bitsat.jpg"),
-  comedk: require("../../assets/images/tile-comedk.jpg"),
-};
-
-export function ExamTile({ kind, title, sub, grad, badge, onPress, testID }: { kind: TileKind; title: string; sub: string; grad: [string, string]; badge?: string; onPress: () => void; testID: string }) {
-  return (
-    <Press testID={testID} onPress={onPress} accessibilityLabel={`${title}. ${sub}`} scaleTo={0.95}
-      style={{ borderRadius: 24, backgroundColor: colors.surfaceSecondary, shadowColor: grad[1], shadowOpacity: 0.2, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 6 }}>
-      <Card style={{ padding: 0, overflow: "hidden", borderRadius: 24, borderWidth: 0 }}>
-        <View style={{ height: 136, backgroundColor: grad[0] }}>
-          <Image source={ART[kind]} style={{ width: "100%", height: "100%" }} contentFit="cover" contentPosition="center" transition={0} accessibilityLabel={title + " artwork"} />
-          {badge ? (
-            <View testID={testID + "-badge"} style={{ position: "absolute", top: 10, right: 10, flexDirection: "row", alignItems: "center", gap: 3, paddingHorizontal: 8, height: 22, borderRadius: radius.pill, backgroundColor: kind === "jee" ? colors.custom_burgundy : colors.custom_seriesBright, borderWidth: 1, borderColor: colors.custom_whiteA70 }}>
-              <T w="heavy" size={10} color={colors.onBrandPrimary} style={{ letterSpacing: 0.4 }}>{badge}</T>
-              <Icon name="star-four-points" size={9} color={colors.onBrandPrimary} />
-            </View>
-          ) : null}
-        </View>
-        <View style={{ paddingHorizontal: space.lg, paddingVertical: space.md, gap: 2 }}>
-          <T w="heavy" size={16} numberOfLines={1}>{title}</T>
-          <T size={12} color={colors.muted} numberOfLines={1}>{sub}</T>
-        </View>
-      </Card>
-    </Press>
-  );
+export function ExamTile({ kind, title, sub, badge, onPress, testID }: { kind: TileKind; title: string; sub: string; grad: [string, string]; badge?: string; onPress: () => void; testID: string }) {
+  return <Press testID={testID} onPress={onPress} accessibilityLabel={`${title}. ${sub}`} scaleTo={0.97} style={styles.card}>
+    <View style={styles.art}>
+      <View pointerEvents="none" style={styles.orbit} />
+      <View style={styles.symbol}><Icon name={SYMBOL[kind]} size={33} color={colors.brandText} /></View>
+      {badge ? <View testID={`${testID}-badge`} style={styles.badge}><T w="heavy" size={9} color={colors.brandText}>{badge}</T></View> : null}
+      <Icon name="arrow-top-right" size={17} color={colors.mutedSecondary} style={styles.arrow} />
+    </View>
+    <View style={styles.copy}>
+      <T testID={`${testID}-title`} w="heavy" size={18} numberOfLines={1}>{title}</T>
+      <T testID={`${testID}-description`} size={12} color={colors.muted} numberOfLines={1}>{sub}</T>
+    </View>
+  </Press>;
 }
+
+const styles = StyleSheet.create({
+  card: { borderRadius: radius.lg, backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.brandLine, overflow: "hidden", minHeight: 163 },
+  art: { height: 94, padding: space.lg, justifyContent: "flex-end", overflow: "hidden" },
+  orbit: { position: "absolute", width: 132, height: 132, borderRadius: 66, borderWidth: 1, borderColor: colors.brandLine, top: -48, right: -48 },
+  symbol: { width: 54, height: 54, borderRadius: 18, backgroundColor: colors.brandTertiary, alignItems: "center", justifyContent: "center" },
+  badge: { position: "absolute", top: 12, right: 12, paddingHorizontal: 7, paddingVertical: 4, borderRadius: radius.pill, backgroundColor: colors.brandTertiary },
+  arrow: { position: "absolute", right: 14, bottom: 12 },
+  copy: { paddingHorizontal: space.lg, paddingBottom: space.lg, gap: 3 },
+});

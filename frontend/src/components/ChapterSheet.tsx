@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, TextInput
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, IconName, Press, T } from "@/src/components/ui";
-import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", Biology: "dna" };
@@ -22,7 +22,6 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
   const [lastSubject, setLastSubject] = useState(subject);
   if (lastSubject !== subject) { setLastSubject(subject); setTab(subject); }
   const cur = subjects.find((s) => s.name === tab);
-  const tint = subjectColor(tab);
   const query = q.trim().toLowerCase();
   const hits = useMemo(() => (query ? subjects.flatMap((s) => s.chapters.filter((c) => c.name.toLowerCase().includes(query)).map((c) => ({ ...c, subject: s.name }))) : []), [query, subjects]);
   const pick = (s: string, c: string) => { setQ(""); onPick(s, c); };
@@ -64,9 +63,9 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
             {!query ? (
               <View style={{ flexDirection: "row", gap: 6 }}>
                 {subjects.map((s) => (
-                  <Press key={s.name} testID={"rf-sheet-subject-" + s.name.toLowerCase()} onPress={() => setTab(s.name)} style={{ flex: 1, height: 40, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: tab === s.name ? subjectColor(s.name) : colors.custom_gameCardHi }}>
-                    <Icon name={ICON[s.name] || "book"} size={15} color={tab === s.name ? colors.onSurfaceInverse : colors.custom_gameMuted} />
-                    <T w="heavy" size={12} color={tab === s.name ? colors.onSurfaceInverse : colors.custom_gameMuted}>{short(s.name)}</T>
+                  <Press key={s.name} testID={"rf-sheet-subject-" + s.name.toLowerCase()} onPress={() => setTab(s.name)} style={{ flex: 1, height: 44, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: tab === s.name ? subjectColor(s.name) : colors.custom_gameCardHi }}>
+                    <Icon name={ICON[s.name] || "book"} size={15} color={tab === s.name ? foregroundOn(subjectColor(s.name)) : colors.custom_gameMuted} />
+                    <T w="heavy" size={12} color={tab === s.name ? foregroundOn(subjectColor(s.name)) : colors.custom_gameMuted}>{short(s.name)}</T>
                   </Press>
                 ))}
               </View>
@@ -76,7 +75,7 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
             {query ? (hits.length ? hits.map((c) => row(c.subject, c)) : <T size={14} color={colors.custom_gameMuted} style={{ textAlign: "center", marginTop: space.xl }}>No chapter matches “{q}”.</T>) : (
               <>
                 <Press testID="rf-chapter-mixed" onPress={() => pick(tab, "")} scaleTo={0.97} style={{ borderRadius: radius.lg, overflow: "hidden", borderWidth: subject === tab && !chapter ? 2 : 0, borderColor: colors.onSurfaceInverse }}>
-                  <LinearGradient colors={[tint, colors.custom_neonViolet]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, minHeight: 72 }}>
+                  <LinearGradient colors={[colors.brandPrimary, colors.brandSecondary]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, minHeight: 72 }}>
                     <View style={{ width: 44, height: 44, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: colors.onSurfaceInverse + "33" }}><Icon name="shuffle-variant" size={24} color={colors.onSurfaceInverse} /></View>
                     <View style={{ flex: 1 }}>
                       <T w="heavy" size={16} color={colors.onSurfaceInverse}>Mixed {short(tab)}</T>

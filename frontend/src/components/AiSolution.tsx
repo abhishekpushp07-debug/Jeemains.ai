@@ -95,7 +95,7 @@ export function plainMath(s: string) {
 
 // Typeset maths in JS with the bundled KaTeX (no network); text around it is HTML-escaped.
 const MATH = /\$\$([\s\S]+?)\$\$|\\\[([\s\S]+?)\\\]|\$([^$]+?)\$|\\\(([\s\S]+?)\\\)/g;
-function tex(src: any) {
+export function tex(src: any) {
   const s = String(src ?? "").replace(/\u0000/g, ""); // upstream text sometimes carries NUL bytes
   let out = "", last = 0;
   for (const m of s.matchAll(MATH)) {

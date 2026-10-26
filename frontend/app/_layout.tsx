@@ -15,11 +15,11 @@ LogBox.ignoreAllLogs(true);
 export default function RootLayout() {
   // Prewarm brand + icon fonts so icons render on first paint (Expo Go Android).
   const [loaded, failed] = useFonts({
-    "Jakarta-400": require("../assets/fonts/PlusJakartaSans-400.ttf"),
-    "Jakarta-500": require("../assets/fonts/PlusJakartaSans-500.ttf"),
-    "Jakarta-600": require("../assets/fonts/PlusJakartaSans-600.ttf"),
-    "Jakarta-700": require("../assets/fonts/PlusJakartaSans-700.ttf"),
-    "Jakarta-800": require("../assets/fonts/PlusJakartaSans-800.ttf"),
+    "Figtree-400": require("../assets/fonts/Figtree-400.ttf"),
+    "Figtree-500": require("../assets/fonts/Figtree-500.ttf"),
+    "Figtree-600": require("../assets/fonts/Figtree-600.ttf"),
+    "Figtree-700": require("../assets/fonts/Figtree-700.ttf"),
+    "Figtree-800": require("../assets/fonts/Figtree-800.ttf"),
     MaterialDesignIcons: require("@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf"),
   });
   if (!loaded && !failed) return null;

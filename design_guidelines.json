@@ -1,150 +1,214 @@
 {
-  "app_name": "JEELIVE.AI",
-  "personality": "7 Dark-First Utility DARK with 4 Tactile/Playful shapes (Gaming Lobby Fusion)",
-  "personality_one_liner": "A high-stakes, vibrant game lobby that makes exam prep feel like an esports tournament.",
-  "color": {
-    "surface": "#0B0F19",
-    "onSurface": "#FFFFFF",
-    "surfaceSecondary": "#151B2B",
-    "onSurfaceSecondary": "#FFFFFF",
-    "surfaceTertiary": "#1F293D",
-    "onSurfaceTertiary": "#E2E8F0",
-    "surfaceInverse": "#FFFFFF",
-    "onSurfaceInverse": "#0B0F19",
-    "brand": "#00E5FF",
-    "onBrand": "#0B0F19",
-    "brandPrimary": "#FFC107",
-    "onBrandPrimary": "#452000",
-    "brandSecondary": "#B026FF",
+  "theme_identity": {
+    "name": "JEELIVE.AI Deep Blood Dark Theme",
+    "reference_url": "https://jeelive.ai",
+    "css_source": "https://jeelive.ai/static/css/main.cecdf12b.css",
+    "description": "Official JEELIVE.AI visual identity matching the public live site. Deep dark surface (#08080A), high-contrast blood red accents (#D91222 / #FF6974), dark maroon soft badges (#280D13), and refined card surfaces (#14141C / #0F0F14)."
+  },
+  "colors": {
+    "surface": "#08080A",
+    "onSurface": "#F8FAFC",
+    "surfaceSecondary": "#14141C",
+    "onSurfaceSecondary": "#F8FAFC",
+    "surfaceAlt": "#0F0F14",
+    "surfaceTertiary": "#280D13",
+    "onSurfaceTertiary": "#FF6974",
+    "surfaceInverse": "#D91222",
+    "onSurfaceInverse": "#FFFFFF",
+    "muted": "#B0B0BF",
+    "mutedSecondary": "#9292A5",
+    "brandText": "#FF6974",
+    "brand": "#D91222",
+    "onBrand": "#FFFFFF",
+    "brandPrimary": "#D91222",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#B91020",
     "onBrandSecondary": "#FFFFFF",
-    "brandTertiary": "#00FF66",
-    "onBrandTertiary": "#002B12",
-    "success": "#00FF66",
-    "onSuccess": "#002B12",
-    "warning": "#FFC107",
-    "onWarning": "#452000",
-    "error": "#FF3366",
-    "onError": "#FFFFFF",
-    "info": "#00E5FF",
-    "onInfo": "#0B0F19",
-    "border": "#2D3748",
-    "borderStrong": "#4A5568",
-    "divider": "#2D3748",
-    "muted": "#718096",
-    "custom_gameBg": "#0B0F19",
-    "custom_gameCard": "#151B2B",
-    "custom_gameCardHi": "#1F293D",
-    "custom_gameLine": "#2D3748",
-    "custom_gameMuted": "#718096",
-    "custom_neonAmber": "#FFC107",
-    "custom_neonCyan": "#00E5FF",
-    "custom_neonGreen": "#00FF66",
-    "custom_neonRed": "#FF3366",
-    "custom_neonViolet": "#B026FF",
-    "custom_neonMagenta": "#FF00FF",
-    "custom_examJeeDeep": "#0A0D14"
+    "brandTertiary": "#280D13",
+    "onBrandTertiary": "#FF6974",
+    "brandSoft": "#280D13",
+    "brandLine": "#67202C",
+    "focusRing": "#FF7883",
+    "success": "#56D99A",
+    "onSuccess": "#10231C",
+    "successSoft": "#10231C",
+    "successLine": "#22533E",
+    "warning": "#F1BC63",
+    "onWarning": "#2A2113",
+    "warningSoft": "#2A2113",
+    "warningLine": "#62502A",
+    "error": "#FF7883",
+    "onError": "#2F1118",
+    "errorSoft": "#2F1118",
+    "errorLine": "#793240",
+    "border": "#2A2A38",
+    "borderStrong": "#67202C",
+    "divider": "#2A2A38",
+    "custom_examJee": "#D91222",
+    "custom_examJeeDeep": "#280D13",
+    "custom_examBitsat": "#EF9B25",
+    "custom_examBitsatDeep": "#7A1A0C",
+    "custom_examComedk": "#0A2025",
+    "custom_examComedkGold": "#A7F3E8",
+    "custom_series": "#24090E",
+    "custom_seriesBright": "#D91222",
+    "custom_burgundy": "#67202C",
+    "custom_subjectPhysics": "#D91222",
+    "custom_subjectChemistry": "#56D99A",
+    "custom_subjectMaths": "#FF7883",
+    "custom_subjectBiology": "#56D99A",
+    "custom_darkCard": "#14141C",
+    "custom_amber": "#F1BC63",
+    "custom_cyan": "#D91222",
+    "custom_gameBg": "#08080A",
+    "custom_gameCard": "#14141C",
+    "custom_gameCardHi": "#1A1A24",
+    "custom_gameLine": "#2A2A38",
+    "custom_neonAmber": "#F1BC63",
+    "custom_neonCyan": "#FF6974",
+    "custom_neonGreen": "#56D99A",
+    "custom_neonRed": "#FF7883",
+    "custom_gameMuted": "#B0B0BF",
+    "custom_overlay": "rgba(8, 8, 10, 0.85)",
+    "custom_whiteA70": "rgba(248, 250, 252, 0.72)",
+    "custom_whiteA15": "rgba(248, 250, 252, 0.15)"
   },
   "typography": {
-    "displayFontFamily": "Rajdhani",
-    "textFontFamily": "Satoshi",
-    "scale": {
-      "sm": 12,
-      "base": 14,
-      "lg": 16,
-      "xl": 20,
-      "2xl": 24,
-      "3xl": 32,
-      "4xl": 48
+    "font_families": {
+      "display": "Figtree, sans-serif",
+      "body": "Figtree, sans-serif",
+      "mono": "Roboto Mono, monospace"
+    },
+    "font_files": {
+      "figtree": [
+        "assets/fonts/Figtree-400.ttf",
+        "assets/fonts/Figtree-500.ttf",
+        "assets/fonts/Figtree-600.ttf",
+        "assets/fonts/Figtree-700.ttf",
+        "assets/fonts/Figtree-800.ttf"
+      ],
+      "jakarta": [
+        "assets/fonts/PlusJakartaSans-400.ttf",
+        "assets/fonts/PlusJakartaSans-500.ttf",
+        "assets/fonts/PlusJakartaSans-600.ttf",
+        "assets/fonts/PlusJakartaSans-700.ttf",
+        "assets/fonts/PlusJakartaSans-800.ttf"
+      ]
+    },
+    "hierarchy": {
+      "h1": {
+        "size": 32,
+        "weight": "800",
+        "lineHeight": 38,
+        "letterSpacing": -0.5
+      },
+      "h2": {
+        "size": 24,
+        "weight": "800",
+        "lineHeight": 30,
+        "letterSpacing": -0.3
+      },
+      "h3": {
+        "size": 18,
+        "weight": "700",
+        "lineHeight": 24
+      },
+      "body": {
+        "size": 14,
+        "weight": "400",
+        "lineHeight": 20
+      },
+      "caption": {
+        "size": 12,
+        "weight": "500",
+        "lineHeight": 16,
+        "color": "#B0B0BF"
+      },
+      "eyebrow": {
+        "size": 10,
+        "weight": "800",
+        "letterSpacing": 1.4,
+        "color": "#FF6974"
+      }
     }
   },
-  "spacing": {
-    "rule": "Maintain tight gaming rhythm. Large touch targets (48pt) but compact vertical stacking to prevent scrolling. Safe areas are non-negotiable.",
-    "xs": 4,
-    "sm": 8,
-    "md": 12,
-    "lg": 16,
-    "xl": 24,
-    "2xl": 32,
-    "3xl": 48
+  "layouts": {
+    "spacing_scale": {
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "lg": 16,
+      "xl": 24,
+      "xxl": 32
+    },
+    "border_radius": {
+      "sm": 6,
+      "md": 10,
+      "lg": 16,
+      "pill": 999
+    },
+    "pyq_minimal_click_flow": {
+      "entry_point": "JEE Main Hub card -> Direct click to PYQ papers list",
+      "paper_list_header": "Header with title 'JEE Main PYQs' and inline Year filter chips (All, 2026, 2025, 2024, 2023) and Shift filter chips (All, Jan Shift 1, Jan Shift 2, Apr Shift 1, Apr Shift 2)",
+      "row_card_structure": {
+        "left": "Icon / Year badge in #280D13 container with #FF6974 text",
+        "middle": "Paper Title (e.g., JEE Main 2026 24 Jan Shift 1), metadata count (75 Q, 180 min, 300 marks)",
+        "actions": {
+          "unattempted": "Single 'Start' button (#D91222 background, white text)",
+          "in_progress": "Single 'Continue' button (#F1BC63 amber background, dark text)",
+          "completed": "Two distinct buttons: 'Result' (#280D13 border button) and 'Re-attempt' (#D91222 background button)"
+        }
+      },
+      "empty_and_error_states": "Honest status display if backend returns 0 published papers: 'No PYQ papers live yet' with clear message and retry action."
+    }
   },
-  "radius_tokens": {
-    "sm": 6,
-    "md": 12,
-    "lg": 20,
-    "pill": 999
+  "components": {
+    "ExamTile": "Card with 136px height image banner, rounded 24px container, deep dark background #14141C",
+    "ExamHub": "JEE Main replaced Mock entry with direct 'PYQ papers' option (Explore PYQ papers / Start PYQ)",
+    "SeriesBanner": "Flagship 100% AI banner in deep blood maroon (#160B10) with radiant glow and 200+ tagline",
+    "SetRow": "Minimal-click paper row with dynamic Start / Continue / Result + Re-attempt action triggers",
+    "SolutionNavigator": "Horizontal scrollable question pill bar with green (correct), red (incorrect), yellow (skipped) states and uploaded solution viewer"
   },
-  "shadow_tier": 2,
-  "navigation": "bottom_tabs",
-  "icon_set": "Phosphor",
-  "glassmorphism": {
-    "enabled": true,
-    "do's": [
-      "Use heavy tint + blur on the battle arena overlay so foreground elements pop.",
-      "Bottom sheet (chapter picker) gets heavy frosted glass."
-    ],
-    "dont's": [
-      "Do not blur primary buttons (PLAY button must be solid and tactile).",
-      "Do not blur dense lists."
+  "motion": {
+    "preset": "Framer motion / Reanimated FadeInDown",
+    "duration_fast": 180,
+    "duration_normal": 350,
+    "touch_active_scale": 0.96
+  },
+  "accessibility": {
+    "min_contrast_ratio": "4.5:1",
+    "data_testid_required": true,
+    "test_id_examples": [
+      "exam-direct-mocks-jee-main",
+      "exam-destination-pyq",
+      "pyq-year-filter-2026",
+      "pyq-shift-filter-jan1",
+      "pyq-start-button-id",
+      "pyq-continue-button-id",
+      "pyq-result-button-id",
+      "pyq-reattempt-button-id"
     ]
   },
-  "platform_libraries": {
-    "glass": {
-      "ios": "expo-glass-effect",
-      "android": "expo-blur",
-      "low_end_android_fallback": "solid surfaceSecondary"
-    },
-    "image": "expo-image",
-    "blur": "expo-blur",
-    "bottom_sheet": "@gorhom/bottom-sheet",
-    "animation": "react-native-reanimated",
-    "gesture": "react-native-gesture-handler"
-  },
-  "screens": [
-    {
-      "name": "Rapid Fire Hub",
-      "purpose": "A thrilling esports-style game lobby where students challenge random peers or friends in live subject duels.",
-      "states": {
-        "loading": "Full screen pulsing arena skeleton with glowing neon accents.",
-        "empty": "Not applicable; hub is always populated with modes.",
-        "error": "Card showing 'Connection lost to Arena' with a neon red retry button."
-      },
-      "layout": "Root: Full-screen `custom_gameBg` SafeAreaView. NO SCROLLVIEW for the top section (it acts as a persistent lobby UI). ScrollView only for the bottom modules.\n\n1. Header (Identity Bar): Row layout. Left: User Avatar (`rf-open-avatar`) inside a `custom_gameCardHi` rounded pill. Center: Dynamic XP bar with Level Badge (glow `custom_neonCyan`). Right: Coin/Store pill (`rf-open-store`) with an animated glowing icon.\n\n2. BATTLE ARENA HERO (`rf-battle-hero`): Large 4:3 ratio card. Background uses the `arena_bg` image with a dark radial gradient scrim (transparent in center to 80% `surface` at edges). Layout: \n- Top center: 'Live 1v1 Arena' glowing badge.\n- Middle: Left side shows user's 3D avatar (local). Right side shows a mystery silhouette bouncing/pulsing. Center shows 'VS' in `custom_neonMagenta` with Reanimated pulse effect.\n- Bottom: Subject segmented control (`rf-subject-physics/chemistry/mathematics`). Pill style, active state gets a `custom_neonCyan` glow.\n- Overlapping the bottom edge of the hero card: Chapter Picker pill (`rf-chapter-picker`). A tactile `surfaceTertiary` bar showing selected chapter with a chevron. Tapping opens bottom sheet.\n\n3. Primary Actions: Absolute gaming focal point.\n- Big PLAY Button (`rf-duel-random`): Full width (minus margins), highly tactile shape (pill or heavy rounded), glowing `custom_neonAmber` linear gradient. Text: 'PLAY' (Rajdhani bold, 24pt, black text). NO MENTION OF AI. Reanimated scale on press (0.95).\n- Secondary Row (2-col grid): Left -> 'Challenge Friend' (`rf-duel-invite`, neon violet outline). Right -> 'Join Code' (`rf-open-join`/`rf-duel-code-input`/`rf-duel-join`, neon cyan outline). Plus icons.\n\n4. Scrollable Lower Half (Tertiary):\n- Solo Sprint (`rf-start-button`): Sleek dark card (`custom_gameCard`), lightning icon.\n- Quests & Streaks: 2-col horizontal tiles. (`rf-daily-quests`, `rf-streak-card`). Use subtle neon borders.\n- Bottom Pane Tabs (`rf-pane-board/recent/trophies`): Glassmorphic tabs switching between Leaderboards (`rf-leaderboard`, `rf-badges`), Recent (`rf-history-<id>`), and Trophies."
-    },
-    {
-      "name": "Chapter Picker Sheet",
-      "purpose": "A lightning-fast, gamified menu for selecting what to fight over.",
-      "states": {
-        "loading": "Skeleton list with glowing rows.",
-        "empty": "No chapters found matching search.",
-        "error": "Failed to load syllabus."
-      },
-      "layout": "Using `@gorhom/bottom-sheet`. Starts at 80% snap point. Background is `surfaceSecondary` with `expo-blur`.\n\n1. Header: Huge search box (Search chapters...), neon focus ring.\n2. Hero Option: 'Mixed Bag' (`rf-chapter-mixed`) at the top. Golden/Neon gradient card with multiple subject icons. The 'premium' choice.\n3. Content Scroll: \n- Horizontal row for 'Recent / Weak Chapters' (Quick picks).\n- Vertical list grouped by Subject. Each subject header is sticky. Each chapter row (`rf-chapter-<slug>`) shows chapter name, question count pill, and a mastery bar."
-    }
-  ],
-  "images": {
-    "arena_bg": {
-      "url": "https://images.unsplash.com/photo-1644878796127-5c4029129f61?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHxkYXJrJTIwZXNwb3J0cyUyMHN0YWdlJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3OTI5MTUyNjV8MA&ixlib=rb-4.1.0&q=85",
-      "alt": "Dark esports arena stage with vibrant neon lighting and a central focal point"
-    },
-    "trophies_empty": {
-      "url": "https://images.unsplash.com/photo-1790553589409-b3b321b9c0e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHwxfHxnbG93aW5nJTIwZ29sZGVuJTIwdHJvcGh5JTIwM2R8ZW58MHx8fHwxNzkyOTE1MjY1fDA&ixlib=rb-4.1.0&q=85",
-      "alt": "3D glowing golden trophy for the empty state of the trophies tab"
-    }
-  },
-  "haptics": {
-    "rf-duel-random": "impactHeavy",
-    "rf-chapter-picker": "impactLight",
-    "rf-subject-selection": "selection",
-    "rf-duel-invite": "impactMedium",
-    "rf-open-store": "impactLight"
+  "image_urls": {
+    "jeelive_logo": "assets/images/jeelive-logo.webp",
+    "tile_jee": "assets/images/tile-jee.jpg",
+    "tile_bitsat": "assets/images/tile-bitsat.jpg",
+    "tile_comedk": "assets/images/tile-comedk.jpg",
+    "tile_live": "assets/images/tile-live.jpg"
   },
   "instructions_to_main_agent": [
-    "Execute all layout as pure native React Native elements. Follow the 'Gaming Lobby Fusion' personality: dark esports vibe, high tactile contrast for buttons, glowing neon accents, and condensed tech typography (Rajdhani) for metrics/CTAs.",
-    "BATTLE ARENA HERO must feel like a premium Clash Royale / Brawl Stars lobby. The user avatar (left) and random silhouette (right) face off over a glowing VS. Overlap the chapter picker pill on the bottom edge of this arena card to connect the stage with the selection.",
-    "The primary PLAY button (`rf-duel-random`) MUST be the visual anchor of the screen. Make it highly tactile (shadows, gradient, scale animation on press). The text must just say 'PLAY' - do not mention AI anywhere, random matchmaking is implied.",
-    "All colors must strictly use the custom_game* and custom_neon* palette mapped in the design guidelines.",
-    "Ensure the chapter picker bottom sheet uses @gorhom/bottom-sheet. It should feature a 'Mixed' premium option at the top and a search box. It needs to work at 360px without text truncation.",
-    "Implement Reanimated 3 for the VS pulsing effect and button scale interactions. This is a game lobby, it must feel alive.",
-    "Include a gradient scrim over the `arena_bg` image to guarantee text readability for the overlaid UI. Use expo-linear-gradient."
+    "Update frontend theme tokens in /app/frontend/src/theme.ts to match jeelive.ai public live site colors exactly (#08080A background, #D91222 primary, #FF6974 brandText, #280D13 brandSoft, #67202C brandLine).",
+    "Ensure JEE Main hub route replaces Mock tests entry with PYQ papers entry.",
+    "Implement the minimal-click PYQ flow: directly displaying paper list with inline Year and Shift filters.",
+    "Provide immediate action buttons on paper rows: 'Start' for unattempted, 'Continue' for in-progress, and twin buttons 'Result' & 'Re-attempt' for completed tests.",
+    "Handle empty states gracefully when zero published PYQ papers are returned from API, showing an honest status without fabricated data.",
+    "Preserve all existing functionality for BITSAT, COMEDK, Chapter practice, Live series, and Rapid Fire.",
+    "Include data-testid on all interactive PYQ elements for test automation."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Never use dark gradients over dark backgrounds — use solid deep dark #08080A background with crisp 1px #2A2A38 / #67202C borders.",
+    "Always set explicit text color on hover and active states.",
+    "Keep layout spacing clean and responsive with 2x padding.",
+    "All interactive components MUST contain kebab-case data-testid attributes."
   ]
 }

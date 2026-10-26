@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { ScrollView, TextInput, View } from "react-native";
 import { useRouter } from "expo-router";
-import { Image } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { Button, Icon, Notice, T, ErrorBox } from "@/src/components/ui";
+import { BrandMark } from "@/src/components/BrandMark";
 import { colors, fonts, radius, space } from "@/src/theme";
 
 export default function Entry() {
@@ -36,21 +35,19 @@ export default function Entry() {
     <View style={{ flex: 1, backgroundColor: colors.surface }}>
       <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" contentContainerStyle={{ paddingTop: insets.top + space.xl, paddingBottom: insets.bottom + space.xl, paddingHorizontal: space.xl, gap: space.lg }}>
         <Animated.View entering={FadeInDown.duration(400)} style={{ alignItems: "center", gap: space.md }}>
-          <View style={{ borderRadius: 16, padding: 6, backgroundColor: "#FFFFFF", borderWidth: 1.5, borderColor: colors.custom_neonAmber }}>
-            <Image source={require("../assets/images/jeelive-logo.webp")} style={{ width: 240, height: 90 }} contentFit="contain" accessibilityLabel="JEELIVE.AI logo" />
-          </View>
+          <BrandMark testID="entry-brand" />
           <T w="heavy" size={26} style={{ textAlign: "center" }}>Practice with purpose.</T>
-          <T size={15} color={colors.muted} style={{ textAlign: "center" }}>JEE Main · BITSAT · COMEDK — mocks, chapter tests, clear solutions and 20-second Rapid Fire recall.</T>
+          <T size={15} color={colors.muted} style={{ textAlign: "center" }}>JEE Main PYQs · BITSAT · COMEDK — exam practice, supplied solutions and 20-second Rapid Fire recall.</T>
         </Animated.View>
 
         <Animated.View entering={FadeInDown.delay(120).duration(400)}>
-          <LinearGradient colors={[colors.custom_series, colors.custom_seriesBright]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ borderRadius: radius.lg, padding: space.lg, gap: space.sm }}>
+          <View style={{ borderRadius: radius.lg, padding: space.lg, gap: space.sm, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine }}>
             <View style={{ flexDirection: "row", gap: space.sm, alignItems: "center" }}>
               <Icon name="flask-outline" size={18} color={colors.onBrandSecondary} />
               <T w="bold" size={12} color={colors.onBrandSecondary} style={{ letterSpacing: 1 }}>PRIVATE PILOT</T>
             </View>
             <T size={13} color={colors.custom_whiteA70}>This version is for approved pilot participants only. Please don’t use real private student records.</T>
-          </LinearGradient>
+          </View>
         </Animated.View>
 
         <Animated.View entering={FadeInDown.delay(200).duration(400)} style={{ gap: space.sm }}>

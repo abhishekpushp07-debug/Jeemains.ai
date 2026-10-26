@@ -3,7 +3,7 @@ import { ActivityIndicator, Pressable, StyleProp, Text as RNText, TextProps, Tex
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
 import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
 import * as Haptics from "expo-haptics";
-import { fonts, makeStyles, radius, space, useTheme } from "@/src/theme";
+import { fonts, foregroundOn, makeStyles, radius, space, useTheme } from "@/src/theme";
 
 export const Icon = MaterialDesignIcons;
 export type IconName = React.ComponentProps<typeof MaterialDesignIcons>["name"];
@@ -54,7 +54,7 @@ export function Button({ label, onPress, kind = "primary", icon, busy, disabled,
 }) {
   const { colors } = useTheme();
   const bg = kind === "primary" ? color ?? colors.brandPrimary : kind === "danger" ? colors.error : kind === "secondary" ? colors.surfaceSecondary : "transparent";
-  const fg = kind === "primary" || kind === "danger" ? colors.onBrandPrimary : color === colors.custom_amber ? colors.custom_neonAmber : color ?? colors.brandText;
+  const fg = kind === "primary" || kind === "danger" ? foregroundOn(bg) : color === colors.custom_amber ? colors.custom_neonAmber : color ?? colors.brandText;
   return (
     <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={label}
       style={[{ minHeight: 50, borderRadius: radius.md, backgroundColor: bg, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.sm, paddingHorizontal: space.lg, borderWidth: kind === "secondary" ? 1 : 0, borderColor: colors.border }, style]}>
@@ -93,11 +93,12 @@ export function Chip({ label, active, onPress, color, testID, icon, count }: { l
   const { colors } = useTheme();
   const st = useBoxStyles();
   const c = color ?? colors.brandPrimary;
+  const activeInk = foregroundOn(c);
   return (
     <Press testID={testID} onPress={onPress} accessibilityLabel={label} style={[st.chip, { backgroundColor: active ? c : colors.surfaceSecondary, borderColor: active ? c : colors.border }]}>
-      {icon ? <Icon name={icon} size={15} color={active ? colors.onBrandPrimary : c} /> : null}
-      <T w="bold" size={13} color={active ? colors.onBrandPrimary : colors.onSurface}>{label}</T>
-      {count !== undefined ? <T w="bold" size={11} color={active ? colors.onBrandPrimary : colors.muted}>{count}</T> : null}
+      {icon ? <Icon name={icon} size={15} color={active ? activeInk : c} /> : null}
+      <T w="bold" size={13} color={active ? activeInk : colors.onSurface}>{label}</T>
+      {count !== undefined ? <T w="bold" size={11} color={active ? activeInk : colors.muted}>{count}</T> : null}
     </Press>
   );
 }
@@ -142,12 +143,12 @@ export function Skeleton({ h = 80, style }: { h?: number; style?: StyleProp<View
   return <Animated.View style={[{ height: h, borderRadius: radius.lg, backgroundColor: colors.border }, a, style]} />;
 }
 
-export function Header({ title, eyebrow, onBack, right, color, testID }: { title: string; eyebrow?: string; onBack?: () => void; right?: React.ReactNode; color?: string; testID?: string }) {
+export function Header({ title, eyebrow, onBack, right, color, testID, backTestID }: { title: string; eyebrow?: string; onBack?: () => void; right?: React.ReactNode; color?: string; testID?: string; backTestID?: string }) {
   const { colors } = useTheme();
   return (
     <View testID={testID} style={{ flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.lg, paddingBottom: space.md }}>
       {onBack ? (
-        <Press testID="header-back-button" onPress={onBack} accessibilityLabel="Back" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
+        <Press testID={backTestID || "header-back-button"} onPress={onBack} accessibilityLabel="Back" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="arrow-left" size={22} color={colors.onSurface} />
         </Press>
       ) : null}
