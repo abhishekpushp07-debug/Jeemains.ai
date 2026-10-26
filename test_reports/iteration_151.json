@@ -1,0 +1,17 @@
+{
+  "iteration": 151,
+  "date": "2026-10-26",
+  "status": "passed",
+  "scope": "Final targeted contrast and render verification after reducing Home card moving-glare peak alpha from 0.17 to 0.13; requested BITSAT bright amber / COMEDK teal palettes unchanged",
+  "prior_coverage": ["iteration149: full Home functionality, card links, series modal, all-card shine pause, reduced motion, Home-only styling scope, desktop/mobile overflow", "iteration150: BITSAT nav 5.85:1 and body 6.82+, COMEDK body peak 4.84:1 pass after text colour corrections"],
+  "targeted_checks": {
+    "1920x800": {"jee_eyebrow_min":5.01,"jee_body_min":4.97,"comedk_eyebrow_min":4.96,"overflow":[]},
+    "390x844": {"jee_eyebrow_min":5.10,"jee_body_min":5.20,"comedk_eyebrow_min":4.96,"overflow":[]},
+    "method": "Instant settled outer-window scroll, explicit viewport size, visible target bboxes, mouse outside cards, foreground hidden for background pixel sampling, actual screenshot pixel/CSS coordinate scaling. Forced glare offsets -16/-14/-12/-10 percent. Every target had 1580–15036 real samples, never zero. JPEG40 targeted sanity confirmation after independent lossless pipeline found the prior problem."
+  },
+  "final_render": "Desktop and mobile rendered after the last CSS edit; amber BITSAT, teal COMEDK, JEE ruby surface and existing royal-blue/platinum Home banner retained",
+  "evidence": "/root/.emergent/automation_output/20261026_080701_9324fda59c0c",
+  "open_issues": [],
+  "test_mode": "Browser-only read-only fixtures; no real network mutations, users, auth sessions or DB writes. No application API mocked.",
+  "deployment": "Preview only; no separate republication was requested for this colour revision"
+}

@@ -1,0 +1,44 @@
+{
+  "summary": "Targeted pixel-contrast check and final render check of the Home exam cards after 2 token edits (BITSAT --exam-muted #281806, COMEDK --exam-muted #DDF5F1). Done only in the browser with read-only page.route('**/api/**') fixtures: 0 writes attempted, no backend/DB/auth/AI used. Method: html scroll-behavior forced to auto, window.scrollTo with behavior 'instant', then waited until scrollY was stable for 3 consecutive rAF checks. The bbox was read again after the scroll settled. Every card was fully visible below the sticky header: header bottom 87px on desktop and 77px on mobile; card tops 169 (desktop) and 89/89/250 (mobile). The mouse was parked off the cards (:hover=false). Only the card text, underline and link/CTA svg were made transparent. Screenshots were lossless PNG clipped to the card(s), decoded on a canvas with no JPEG, and the scale was taken from image px / CSS clip px (DPR=1, scale about 0.999-1.0). Every text-node rect was sampled pixel by pixel; sample counts are in the thousands to hundreds of thousands, never 0. 3 phases: static (::before opacity 0); forced peak glare (::before animation none, translateX -58%..+58% in 2% steps = 59 positions, opacity 1); and live real keyframe frames (31 on desktop, 65-71 per card on mobile, over a full 7s cycle). Results: BITSAT nav and COMEDK body now pass. JEE eyebrow, COMEDK eyebrow and JEE body (desktop) are still just under 4.5 at the exact peak-glare pixels.",
+  "measurements_worst_case": {
+    "BITSAT_nav_results (dark bottom corner)": "desktop 5.85 (static = forced = live; the white glare only lightens amber, so it never lowers dark-ink contrast), mobile 5.85. Chapter practice link: 7.02 / 6.82. PASS (previous 4.04).",
+    "BITSAT_body": "6.82 desktop / 6.89 mobile. PASS. Title 8.23-8.38, eyebrow 6.69-6.79, top label 5.81-5.88, CTA 14.02.",
+    "BITSAT_hover": "Computed colour of nav a:hover is rgb(31,18,3) = #1F1203, which is darker than the default, so contrast is at least the 5.85 above.",
+    "COMEDK_body": "Static 7.64/7.63. Forced peak-glare min is 4.84 at translateX -14% (p1 4.97) on both viewports. Live min is 6.87 desktop / 5.48 mobile. PASS (previous 4.26).",
+    "COMEDK_eyebrow (accent #A7F3E8, unchanged)": "Static 7.0. Forced peak min 4.44 at -12% (p1 4.53 desktop / 4.57 mobile). Live min 4.91 desktop / 4.72 mobile. FAILS 4.5 only at the exact peak-glare pixels (<1% of pixels). The old 10-position sampling missed this and reported 4.58.",
+    "JEE_eyebrow (accent #FFC6CC, unchanged)": "Static 7.34. Forced peak min 4.42 desktop / 4.41 mobile at -14% (p1 4.49/4.50). Live min 5.75 desktop / 4.51 mobile. This is a real value below 4.5, not JPEG noise or rounding: it was measured on lossless PNG and the worst background pixel is about rgb(99,92,94).",
+    "JEE_body (#DED0D5)": "Forced peak min 4.47 desktop (p1 4.61) and 4.63 mobile. Live min 6.61 / 4.69. Desktop is marginally below 4.5 at the exact peak pixel only.",
+    "all_other_text": "JEE: title >= 6.02, top label >= 5.86, nav >= 6.22, CTA 6.09. COMEDK: title >= 5.12, top label >= 5.28, nav >= 5.88, CTA 9.45. All pass."
+  },
+  "final_render": {
+    "overflow": "documentElement and body horizontal overflow are 0 at both 1920x800 and 390x844. Mobile cards span 20->370px.",
+    "palette": "BITSAT is the bright amber gradient #FFC15B/#EF9B25/#D88015 with ink #281806 and an obsidian CTA with ink #FFF5DE. COMEDK is the teal gradient #04181A/#0A2025/#063A3E with body #DDF5F1, a #DFF9F3->#9CDCD5 CTA and ink #063733. JEE ruby is unchanged (#1A070A/#0D0C10/#24090E, CTA #B6112A, body #DED0D5). The hero is still royal blue (#06112E->#0B1D4F->#18357A->#091333, border #8498C0) with the silver CTA and 100% AI ribbon. These were checked visually in the final viewport screenshots and through computed CSS.",
+    "note": "The desktop JEE card is 421px wide and BITSAT/COMEDK are 397px. This is intentional from grid-template-columns 1.06fr 1fr 1fr and is not a bug."
+  },
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home exam cards, during peak shine glare", "issues": [
+        "JEE eyebrow (11px, #FFC6CC): worst 4.41-4.42:1 at shine translateX about -14% (p1 4.49). Below AA by a small margin.",
+        "COMEDK eyebrow (11px, #A7F3E8): worst 4.44:1 at about -12% (p1 4.53). New precise finding.",
+        "JEE body (13px, #DED0D5): desktop worst 4.47:1 at -16% (p1 4.61). Mobile passes at 4.63."
+      ]}
+    ]
+  },
+  "test_report_links": ["/app/tests/ui_contrast_measure150.py"],
+  "action_items": [
+    "Optional (the user did not ask for JEE palette changes): to clear AA during peak glare, either lower the Home shine stripe peak alpha in '.exam-home .bold-exam-card:before' from rgb(255 255 255 / .17) to about .13, or lighten only the eyebrow inks slightly (COMEDK --exam-accent toward #BDF7EE, JEE --exam-accent toward #FFD3D8, JEE --exam-muted toward #E6DADE). Static contrast is already 7+:1 for all of these.",
+    "No action is needed for BITSAT nav/body or COMEDK body. Both token edits are verified by pixel measurement."
+  ],
+  "critical_code_review_comments": [
+    "The main agent's earlier measurement artifact (BITSAT 100:1, COMEDK 3901:1) was caused by stale or offscreen bboxes. This run re-reads the bbox after an instant, settled scroll and asserts full visibility and sample count > 0. Reuse /app/tests/ui_contrast_measure150.py."
+  ],
+  "updated_files": ["/app/tests/ui_contrast_measure150.py (new read-only measurement helper; no app code changed)"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "Requested targets: BITSAT nav/body PASS, COMEDK body PASS, final render PASS. JEE eyebrow confirmed real <4.5 (4.41-4.42). Extra finding: COMEDK eyebrow 4.44."},
+  "seed_data_creation": "None. Browser-only route fixtures; 0 write requests.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use /app/tests/ui_contrast_measure150.py. Paste it plus the main loop from the iteration-150 run. It needs the fixtures for /auth/session, /series/all-india-jee, /series/all-india-jee/streak and /series/all-india-jee/history. Load with wait_until='domcontentloaded'. Forced glare: html.qa-shine sets ::before{animation:none;transform:translateX(var(--qa-x));opacity:1}. Worst glare is around -16..-10%. Use 2% steps; 10 coarse positions miss the peak."
+}
