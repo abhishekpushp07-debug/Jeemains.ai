@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="1" tests="9" time="3.151" timestamp="2026-10-26T17:04:42.555187+00:00" hostname="agent-env-2a161864-6556-461a-840f-e57ce19b1d42"><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_identity_direct_and_proxy_same_uid" time="0.620"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;4e58d825-7823-4700-8f18-4d760054ff03&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:117: in test_identity_direct_and_proxy_same_uid
+    direct_me = _login_direct(direct_session)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"4e58d825-7823-4700-8f18-4d760054ff03"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_pyq_catalogue_parity_full_30_metadata" time="0.317"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;5850a52a-cbbd-4057-9a93-9bea50f25ebf&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:128: in test_pyq_catalogue_parity_full_30_metadata
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"5850a52a-cbbd-4057-9a93-9bea50f25ebf"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_jee_chapter_catalogue_parity" time="0.299"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;8cb08c60-8771-4953-aba6-c886d5d72120&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:155: in test_jee_chapter_catalogue_parity
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"8cb08c60-8771-4953-aba6-c886d5d72120"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_bitsat_comedk_and_live_series_parity[/exam-navigation/bitsat/catalogue?kind=mocks&amp;subject=&amp;q=&amp;page=1]" time="0.249"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;3867dcd7-6368-434e-99ec-53050bf953cb&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:194: in test_bitsat_comedk_and_live_series_parity
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"3867dcd7-6368-434e-99ec-53050bf953cb"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_bitsat_comedk_and_live_series_parity[/exam-navigation/bitsat/catalogue?kind=chapters&amp;subject=Physics&amp;q=&amp;page=1]" time="0.444"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;5977d579-2a36-4d57-810a-59e1e60e78a2&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:194: in test_bitsat_comedk_and_live_series_parity
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"5977d579-2a36-4d57-810a-59e1e60e78a2"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_bitsat_comedk_and_live_series_parity[/exam-navigation/comedk/catalogue?kind=mocks&amp;subject=&amp;q=&amp;page=1]" time="0.249"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;fb362a33-4b18-4df6-8eca-1ff077450bc1&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:194: in test_bitsat_comedk_and_live_series_parity
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"fb362a33-4b18-4df6-8eca-1ff077450bc1"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_bitsat_comedk_and_live_series_parity[/exam-navigation/comedk/catalogue?kind=chapters&amp;subject=Physics&amp;q=&amp;page=1]" time="0.320"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;462765ea-3f57-476f-b588-185de6716f9f&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:194: in test_bitsat_comedk_and_live_series_parity
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"462765ea-3f57-476f-b588-185de6716f9f"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_bitsat_comedk_and_live_series_parity[/series/all-india-jee]" time="0.256"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;http_401&quot;,&quot;message&quot;:&quot;Enter your number again to continue. Saved work is retained.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;9e644a75-ef98-4fbf-ae75-8acb51277779&quot;}}&#10;assert 401 == 200&#10; +  where 401 = &lt;Response [401]&gt;.status_code">backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:194: in test_bitsat_comedk_and_live_series_parity
+    _login_direct(direct_session)
+backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:96: in _login_direct
+    assert me.status_code == 200, me.text[:400]
+E   AssertionError: {"data":null,"error":{"code":"http_401","message":"Enter your number again to continue. Saved work is retained."},"meta":{"api_version":"1","request_id":"9e644a75-ef98-4fbf-ae75-8acb51277779"}}
+E   assert 401 == 200
+E    +  where 401 = &lt;Response [401]&gt;.status_code</failure></testcase><testcase classname="tests.test_iter35_canonical_parity_and_pyq_e2e" name="test_completed_pyq_result_signature_and_asset_hash_parity" time="0.000"><skipped type="pytest.skip" message="Set ITER35_COMPLETED_ATTEMPT_ID to the newly completed canonical PYQ attempt id.">/app/backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py:212: Set ITER35_COMPLETED_ATTEMPT_ID to the newly completed canonical PYQ attempt id.</skipped></testcase></testsuite></testsuites>

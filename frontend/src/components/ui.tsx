@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, Pressable, StyleProp, Text as RNText, TextProps, TextStyle, View, ViewStyle } from "react-native";
+import { ActivityIndicator, Pressable, PressableProps, StyleProp, Text as RNText, TextProps, TextStyle, View, ViewStyle } from "react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
 import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
 import * as Haptics from "expo-haptics";
@@ -24,17 +24,23 @@ export const buzz = (kind: "success" | "error" | "warning") => {
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-export function Press({ onPress, style, children, disabled, testID, accessibilityLabel, haptic = true, scaleTo = 0.97 }: {
+export function Press({ onPress, style, children, disabled, testID, accessibilityLabel, accessibilityRole = "button", accessibilityState, haptic = true, scaleTo = 0.97 }: {
   onPress?: () => void; style?: StyleProp<ViewStyle>; children: React.ReactNode; disabled?: boolean; testID?: string; accessibilityLabel?: string; haptic?: boolean; scaleTo?: number;
+  accessibilityRole?: PressableProps["accessibilityRole"]; accessibilityState?: PressableProps["accessibilityState"];
 }) {
   const s = useSharedValue(1);
   const a = useAnimatedStyle(() => ({ transform: [{ scale: s.value }] }));
   return (
     <AnimatedPressable
       testID={testID}
-      accessibilityRole="button"
+      accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
-      accessibilityState={{ disabled: !!disabled }}
+      accessibilityState={{ ...accessibilityState, disabled: !!disabled }}
+      aria-selected={accessibilityState?.selected}
+      aria-checked={accessibilityState?.checked}
+      aria-busy={accessibilityState?.busy}
+      aria-expanded={accessibilityState?.expanded}
+      aria-disabled={!!disabled}
       disabled={disabled}
       onPressIn={() => (s.value = withTiming(scaleTo, { duration: 90 }))}
       onPressOut={() => (s.value = withTiming(1, { duration: 140 }))}

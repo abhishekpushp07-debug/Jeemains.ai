@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { paperDate, paperState, PyqPaper, resultId } from "@/src/api/pyq";
-import { colors, radius, space } from "@/src/theme";
+import { colors, learningTones, space } from "@/src/theme";
 import { Button, ErrorBox, Icon, T } from "./ui";
+import { LearningBadge, learningStatusTone } from "./LearningTheme";
 
 const STATUS = { new: "Not attempted", active: "In progress", completed: "Completed", grading: "Result preparing", expired: "Time ended", unavailable: "Unavailable" };
 
@@ -13,17 +14,17 @@ export function PyqPaperCard({ paper: p, busy, locked, error, onOpen, onResult }
   const result = resultId(p);
   const active = state === "active";
   const replay = state === "completed" || state === "expired";
-  const tint = active ? colors.warning : state === "completed" ? colors.success : colors.muted;
+  const tone = learningStatusTone(state);
   const label = active ? "Continue" : replay ? "Re-attempt" : "Start";
   const action = active ? "continue" : replay ? "reattempt" : "start";
-  return <View testID={`pyq-paper-${p.id}`} style={[styles.card, active && styles.active]}>
+  return <View testID={`pyq-paper-${p.id}`} style={[styles.card, tone && { borderTopWidth: 4, borderTopColor: learningTones[tone].line }]}>
     <View style={styles.row}>
       <View style={styles.shift}><Icon name="clock-outline" size={13} color={colors.brandText} />
         <T testID={`pyq-shift-${p.id}`} size={11} w="bold" color={colors.brandText}>SHIFT {p.shift}</T>
       </View>
-      <T testID={`pyq-status-${p.id}`} size={11} w="bold" color={tint}>{STATUS[state]}</T>
+      <LearningBadge testID={`pyq-status-${p.id}`} label={STATUS[state]} tone={tone} />
     </View>
-    <T testID={`pyq-paper-title-${p.id}`} size={22} w="heavy">{paperDate(p.exam_date)}</T>
+    <T testID={`pyq-paper-title-${p.id}`} size={18} w="heavy" style={styles.title}>{paperDate(p.exam_date)}</T>
     <T testID={`pyq-paper-meta-${p.id}`} size={13} color={colors.muted}>{p.count} questions  ·  {p.minutes ? `${p.minutes} min` : "Untimed"}  ·  {p.maximum} marks</T>
     <View style={styles.rule}>
       <Icon name="book-check-outline" size={15} color={colors.brandText} />
@@ -35,18 +36,18 @@ export function PyqPaperCard({ paper: p, busy, locked, error, onOpen, onResult }
     <View style={styles.actions}>
       {result ? <Button testID={`pyq-result-button-${p.id}`} label="Result" icon="chart-box-outline" kind="secondary" disabled={locked} style={styles.button} onPress={() => onResult(result)} /> : null}
       {state !== "grading" && state !== "unavailable" ? <Button testID={`pyq-${action}-button-${p.id}`} label={label} icon={active ? "play" : replay ? undefined : "arrow-right"}
-        busy={busy} disabled={locked && !busy} color={active ? colors.warning : colors.brandPrimary} onPress={onOpen} style={styles.button} /> : null}
+        busy={busy} disabled={locked && !busy} color={colors.brandPrimary} onPress={onOpen} style={styles.button} /> : null}
     </View>
   </View>;
 }
 
 const styles = StyleSheet.create({
-  card: { padding: space.lg, backgroundColor: colors.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border, gap: space.sm },
-  active: { borderColor: colors.warning },
+  card: { padding: 20, backgroundColor: colors.surfaceSecondary, borderRadius: 16, borderWidth: 1, borderColor: colors.border, gap: space.sm },
+  title: { marginTop: space.md, marginBottom: space.xs, letterSpacing: 0 },
   row: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: space.sm },
-  shift: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: colors.brandTertiary, paddingHorizontal: 10, paddingVertical: 6, borderRadius: radius.pill },
+  shift: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: colors.brandTertiary, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 6 },
   rule: { flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 6, marginTop: 2 },
   ruleText: { flex: 1 },
-  actions: { flexDirection: "row", gap: space.sm, marginTop: space.sm },
+  actions: { flexDirection: "row", flexWrap: "wrap", gap: space.sm, marginTop: space.xl },
   button: { flex: 1, paddingHorizontal: space.sm },
 });

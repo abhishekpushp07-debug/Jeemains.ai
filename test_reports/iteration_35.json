@@ -1,0 +1,54 @@
+{
+  "summary": "Iteration35 completed with main-agent follow-up: academic native theme mapping and real canonical PYQ flow verified. Canonical jeelive.ai now returns30 papers; direct-vs-proxy parity9/9 passed. Real UI Start/save/Continue sameID/submit/result/supplied solution zoom/Re-attempt newID/old result preservation passed. Rapid Fire remains separate and unchanged.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": [], "react_native_issues": []},
+  "initial_run_history": [
+    "Initial tester run was partial: test helpers logged in for each parameter, triggering canonical phone429. Fixed test-only session setup to authenticate once per module/session and reuse identity. Upstream policy/auth/app configuration unchanged. Cooldown elapsed; later single browser logins returned200 and final backend suite passed.",
+    "Initial parity compared volatile server_now; test normalization fixed. No app content changed.",
+    "Main follow-up found missing web aria-selected/checked despite native accessibilityState; added corresponding RN-supported aria props to shared Press, then verified tabs/switch.",
+    "Main follow-up found existing nested Press buttons in My Tests compare cards. Split main open action and comparison selection into siblings. Verified compare does not navigate, no nested button elements, final console clean apart from expected canceled read on navigation."
+  ],
+  "success_rate": {
+    "backend": "9/9 passed, 0 failures, 0 skips: final pytest XML",
+    "frontend": "Main follow-up passed at390/320 phone-sized Expo web preview; physical devices not tested"
+  },
+  "verified": [
+    "Exact academic home background tokens JEE#B00000/BITSAT#FF9933/COMEDK#101115; all3 native hubs; responsive wrapping, Figtree theme",
+    "Pause/Play sheen with correct accessible switch state; static decoration retained; code respects reduced-motion and foreground/focus",
+    "30 canonical PYQ rows, year filter, direct action states; new native card spacing and labelled status borders",
+    "Real canonical pilot UI started untouched21Jan2026 shift1, loaded original question image, saved optionA, left and Continued same attempt, submitted and received score-1/300",
+    "All5 result tabs, maroon score, learning segment highlights, actual supplied question/solution image and settled zoom; canonical unavailable progress/rank reasons preserved",
+    "Re-attempt created distinctID, original completed result remained200; My Tests shows completed result and fresh in-progress attempt",
+    "My Tests completed/progress/saved tabs, accessible selection, nonnested comparison action without accidental navigation",
+    "Canonical direct vs preview proxy: approved identity, all30 PYQ metadata, JEE chapters, BITSAT mocks/chapters, COMEDK mocks/chapters, live-series payloads excluding volatile timestamps",
+    "New completed result summary and75 question/answer/solution signatures match; sampled original question AND supplied solution binary SHA256 match direct/proxy",
+    "Read-only standalone Rapid Fire JEE/NEET leaderboard switch and chapter picker smoke; no RF sessions, duels or migrations performed"
+  ],
+  "canonical_test_records": {
+    "paper_id": "jee-main-pyq-2026-01-21-s1",
+    "completed_attempt_id": "a1a9bc7f-1d51-48f1-aef5-cbc4d4388e78",
+    "reattempt_id": "185b73e3-b7a7-438d-92e1-e39dc1d7a2f2"
+  },
+  "test_report_links": [
+    "/app/test_reports/pytest/iter35_parity_final.xml",
+    "/app/test_reports/artifacts_iter35/followup/",
+    "/app/reference/NATIVE_THEME_MAPPING.md",
+    "/app/backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py",
+    "/app/backend/tests/test_iter35_pyq_canonical_e2e_optin.py"
+  ],
+  "test_scope_notes": [
+    "Opt-in backend write script was authored but NOT run; equivalent canonical write flow was tested through real app UI, creating only the two recorded pilot attempts.",
+    "No fixture responses, source-project redirects, admin imports or academic data replication. Existing learner history unchanged except explicitly created pilot QA attempts.",
+    "COMEDK canonical mock catalogue currently returns0 in BOTH clients. App preserves true empty state; no substitute content added.",
+    "No claim of pixel-identical desktop/native layouts, exhaustive every-question asset comparison, new-account signup testing, physical-device QA or concurrent-scale validation. Existing unverified-phone/OTP backlog remains separate.",
+    "Avoid repeated auth test runs. Run this live parity suite sequentially with -n0 to minimize upstream phone logins."
+  ],
+  "action_items": ["Owner visual verification", "Physical Android/iOS device QA for native cookies, maths, source-image zoom and safe areas", "Coordinate verified identity/OTP separately with canonical backend"],
+  "updated_files": [
+    "frontend/src/theme.ts", "frontend/src/components/ui.tsx", "frontend/src/components/ExamCardFinish.tsx", "frontend/src/components/ExamTile.tsx", "frontend/src/components/ExamHub.tsx", "frontend/src/components/LearningTheme.tsx", "frontend/src/components/PyqPaperCard.tsx", "frontend/app/(tabs)/index.tsx", "frontend/app/(tabs)/tests.tsx", "frontend/app/result/[id].tsx", "backend/tests/test_iter35_canonical_parity_and_pyq_e2e.py", "backend/tests/test_iter35_pyq_canonical_e2e_optin.py"
+  ],
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "mocked_apis": [],
+  "seed_data_creation": "No seeds. Two real academic QA attempts on approved existing pilot via UI; IDs above. No RF data writes."
+}

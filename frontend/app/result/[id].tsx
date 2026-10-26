@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { FlatList, ScrollView, TextInput, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, apiRaw, post, put, uuid } from "@/src/api/client";
@@ -7,12 +7,14 @@ import { AssetImage } from "@/src/components/AssetImage";
 import { AiSolution } from "@/src/components/AiSolution";
 import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
-import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, Stat, T } from "@/src/components/ui";
-import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
+import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
+import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
+import { colors, fonts, foregroundOn, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
+const TAB_TONE: Record<Tab, LearningTone> = { analysis: "maroon", progress: "active", confidence: "completed", rank: "saved", solutions: "error" };
 const FILTERS = [["all", "All"], ["incorrect", "Incorrect"], ["correct", "Correct"], ["skipped", "Skipped"], ["marked", "Marked"]] as const;
 const OUT: Record<string, [string, IconName]> = { correct: [colors.success, "check"], incorrect: [colors.error, "close"], skipped: [colors.muted, "minus"], dropped: [colors.muted, "cancel"], bonus: [colors.custom_amber, "star"] };
 const CATS = [["concept_gap", "Concept gap"], ["calculation", "Calculation"], ["silly_mistake", "Silly mistake"], ["time_pressure", "Time pressure"], ["misread", "Misread"], ["guess", "Guess"], ["other", "Other"]];
@@ -47,20 +49,20 @@ function Analysis({ r }: { r: any }) {
   const s = r.summary;
   return (
     <View style={{ gap: space.md }}>
-      <Card testID="result-score-card" style={{ gap: space.md, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
-        <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>YOUR SCORE · {r.score_version === "original" ? "ORIGINAL" : "REVISED"}</T>
+      <Card testID="result-score-card" style={learningStyles.score}>
+        <T testID="result-score-version-label" w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>YOUR SCORE · {r.score_version === "original" ? "ORIGINAL" : "REVISED"}</T>
         <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
-        <T size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtClock(s.total_seconds)} used` : ""}</T>
+        <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtClock(s.total_seconds)} used` : ""}</T>
       </Card>
       <View style={{ flexDirection: "row", gap: space.sm }}>
-        <Stat testID="result-correct" label="Correct" value={s.correct} color={colors.success} />
-        <Stat testID="result-incorrect" label="Incorrect" value={s.incorrect} color={colors.error} />
-        <Stat testID="result-skipped" label="Skipped" value={s.skipped} />
+        <LearningStat testID="result-correct" label="Correct" value={s.correct} tone="completed" />
+        <LearningStat testID="result-incorrect" label="Incorrect" value={s.incorrect} tone="error" />
+        <LearningStat testID="result-skipped" label="Skipped" value={s.skipped} tone="active" />
       </View>
       <View style={{ flexDirection: "row", gap: space.sm }}>
-        <Stat label="Accuracy" value={s.accuracy != null ? s.accuracy + "%" : "—"} />
-        <Stat label="Attempt rate" value={s.attempt_rate != null ? s.attempt_rate + "%" : "—"} />
-        <Stat label="Penalty" value={s.penalties ?? 0} color={colors.error} />
+        <LearningStat testID="result-accuracy" label="Accuracy" value={s.accuracy != null ? s.accuracy + "%" : "—"} />
+        <LearningStat testID="result-attempt-rate" label="Attempt rate" value={s.attempt_rate != null ? s.attempt_rate + "%" : "—"} />
+        <LearningStat testID="result-penalty" label="Penalty" value={s.penalties ?? 0} />
       </View>
       {s.main_block ? <Notice tone="info">{`Main ${s.main_block.score}/${s.main_block.maximum} · Bonus ${s.bonus_block?.entered ? `${s.bonus_block.score}/${s.bonus_block.maximum}` : "not entered"}`}</Notice> : null}
       <Card style={{ gap: space.md }}>
@@ -289,11 +291,11 @@ export default function Result() {
   const ready = status === 200 && r?.summary && r?.status !== "embargoed";
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
+      <Header testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
       {ready ? (
-        <View style={{ height: 56, justifyContent: "center" }}>
+        <View style={learningStyles.navigation}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
-            {TABS.map(([v, l, ic]) => <Chip key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} color={colors.brandPrimary} />)}
+            {TABS.map(([v, l, ic]) => <LearningTab key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} tone={TAB_TONE[v]} />)}
           </ScrollView>
         </View>
       ) : null}
@@ -311,25 +313,25 @@ export default function Result() {
         {ready && version !== "original" ? <Notice tone="warning" testID="score-version-note">{r.change_note || "Revised scoring version. The original result is preserved."}</Notice> : null}
         {ready && tab === "analysis" ? <Analysis r={r} /> : null}
         {ready && tab === "progress" ? <Remote path={`/attempts/${id}/journey`} render={(d) => d.state !== "available" ? <Unavailable testID="progress-unavailable" title="Progress journey unavailable" reason={d.reason} /> : (
-          <Card testID="progress-journey" style={{ gap: space.sm }}>
+          <Card testID="progress-journey" style={[learningStyles.section, { borderTopColor: learningTones.active.line }]}>
             <T w="heavy" size={16}>Your full-mock journey</T>
             {(d.series || []).map((p: any) => <T key={p.id} size={13}>{unixDate(p.submitted_at)} · {p.title}: {p.score}/{p.maximum}</T>)}
           </Card>)} /> : null}
         {ready && tab === "confidence" ? (r.analytics?.confidence ? (
-          <Card testID="confidence-card" style={{ gap: space.sm }}>
+          <Card testID="confidence-card" style={[learningStyles.section, { borderTopColor: learningTones.completed.line }]}>
             <T w="heavy" size={16}>Confidence vs correctness</T>
             {Object.entries(r.analytics.confidence).filter(([, v]) => typeof v !== "object").slice(0, 8).map(([k, v]: any) => <T key={k} size={13}>{k.replace(/_/g, " ")}: {String(v)}</T>)}
           </Card>
         ) : <Unavailable testID="confidence-unavailable" title="No confidence recorded" reason="Confidence is optional. Pick “How sure are you?” before answering next time to see calibration here." />) : null}
         {ready && tab === "rank" ? <Remote path={`/attempts/${id}/historical-rank?score_version=${version}`} render={(d) => d.kind === "branch_matches" ? (
           d.state !== "available" ? <Unavailable testID="rank-unavailable" title="Branch guidance unavailable" reason={d.reason || d.limitation} /> : (
-            <Card testID="bitsat-branches" style={{ gap: space.sm }}>
+            <Card testID="bitsat-branches" style={[learningStyles.section, { borderTopColor: learningTones.saved.line }]}>
               <T w="heavy" size={16}>Top branch matches</T>
               {d.matches.map((m: any) => <T key={m.programme + m.campus} size={13}>• {m.programme} — {m.campus} (cutoff {m.cutoff}, margin {m.margin})</T>)}
               <T size={11} color={colors.muted}>{d.limitation} Admission is not guaranteed.</T>
             </Card>)
         ) : d.state !== "available" ? <Unavailable testID="rank-unavailable" title={d.label || "Reliable rank estimate unavailable"} reason={d.reason} /> : (
-          <Card testID="rank-card" style={{ gap: space.sm }}>
+          <Card testID="rank-card" style={[learningStyles.section, { borderTopColor: learningTones.saved.line }]}>
             <T w="bold" size={11} color={colors.muted}>{d.label?.toUpperCase()}</T>
             <T w="heavy" size={26}>{d.rank_low?.toLocaleString("en-IN")} – {d.rank_high?.toLocaleString("en-IN")}</T>
             {d.percentile_low != null ? <T size={13}>Percentile ≈ {d.percentile_low.toFixed(2)} – {d.percentile_high.toFixed(2)}</T> : null}
@@ -341,3 +343,9 @@ export default function Result() {
     </View>
   );
 }
+
+const learningStyles = StyleSheet.create({
+  score: { gap: space.md, borderRadius: 18, backgroundColor: colors.custom_webLearningMaroon, borderColor: colors.custom_webLearningMaroon },
+  navigation: { minHeight: 66, paddingVertical: space.sm, justifyContent: "center" },
+  section: { gap: space.sm, borderTopWidth: 5, borderRadius: 13, paddingVertical: 20 },
+});

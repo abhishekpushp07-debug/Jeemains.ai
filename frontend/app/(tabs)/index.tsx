@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { api, rf } from "@/src/api/client";
 import { prefetch, useCached } from "@/src/useCached";
@@ -15,18 +15,20 @@ import { getPyqCatalogue } from "@/src/api/pyq";
 import { colors, radius, space } from "@/src/theme";
 import { fmtClock, usesNativeTabs } from "@/src/navigation";
 
-type Tile = { id: string; kind: TileKind; title: string; sub: string; grad: [string, string]; to: string; badge?: string };
+type Tile = { id: string; kind: TileKind; title: string; sub: string; to: string; badge?: string };
 const TILES: Tile[] = [
-  { id: "jee-main", kind: "jee", badge: "PYQ", title: "JEE Main", sub: "PYQs · Chapters", grad: [colors.custom_examJee, colors.custom_examJeeDeep], to: "/exam/jee-main" },
-  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", grad: [colors.custom_seriesBright, colors.custom_series], to: "/live" },
-  { id: "bitsat", kind: "bitsat", title: "BITSAT", sub: "Practice · Branches", grad: [colors.custom_examBitsat, colors.custom_examBitsatDeep], to: "/exam/bitsat" },
-  { id: "comedk", kind: "comedk", title: "COMEDK", sub: "Practice · History", grad: [colors.custom_darkCard, colors.custom_examComedk], to: "/exam/comedk" },
+  { id: "jee-main", kind: "jee", badge: "PYQ", title: "JEE Main", sub: "PYQs · Chapters", to: "/exam/jee-main" },
+  { id: "live", kind: "live", badge: "100% AI", title: "Live JEE Series", sub: "62-day All India", to: "/live" },
+  { id: "bitsat", kind: "bitsat", title: "BITSAT", sub: "Practice · Branches", to: "/exam/bitsat" },
+  { id: "comedk", kind: "comedk", title: "COMEDK", sub: "Practice · History", to: "/exam/comedk" },
 ];
 
 export default function Home() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user, expired } = useAuth();
+  const [shine, setShine] = useState(true);
+  const reducedMotion = useReducedMotion();
   const series = useCached<Series>("series", (signal) => api("/series/all-india-jee", { signal }));
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
   const current = progress.data?.items?.[0];
@@ -92,10 +94,17 @@ export default function Home() {
         <T testID="home-description" size={13} color={colors.muted}>Real papers, focused practice. Pick up where you stopped.</T>
       </View>
 
+      <View style={styles.finishControls}>
+        <T testID="home-exam-section-label" size={11} w="bold" color={colors.muted} style={styles.eyebrow}>CHOOSE YOUR EXAM</T>
+        {!reducedMotion ? <Press testID="home-exam-shine-toggle" accessibilityRole="switch" accessibilityState={{ checked: shine }} accessibilityLabel="Animated exam-card finish" onPress={() => setShine((value) => !value)} style={styles.shineToggle}>
+          <Icon name={shine ? "pause-circle-outline" : "play-circle-outline"} size={16} color={colors.muted} />
+          <T testID="home-exam-shine-label" size={11} color={colors.muted}>{shine ? "Pause shine" : "Play shine"}</T>
+        </Press> : null}
+      </View>
       <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.lg }}>
         {TILES.map((t, i) => (
           <Animated.View key={t.id} entering={FadeInDown.delay(60 * i).duration(380)} style={{ width: "48%" }}>
-            <ExamTile testID={"home-tile-" + t.id} kind={t.kind} title={t.title} sub={t.sub} grad={t.grad} badge={t.badge} onPress={() => router.push(t.to as any)} />
+            <ExamTile testID={"home-tile-" + t.id} kind={t.kind} title={t.title} sub={t.sub} shine={shine} badge={t.badge} onPress={() => router.push(t.to as any)} />
           </Animated.View>
         ))}
       </View>
@@ -133,4 +142,6 @@ const styles = StyleSheet.create({
   headline: { gap: 3, paddingTop: space.sm, paddingBottom: space.xs },
   eyebrow: { letterSpacing: 1.2, marginBottom: space.sm },
   title: { lineHeight: 34, letterSpacing: -0.6 },
+  finishControls: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: space.sm },
+  shineToggle: { minHeight: 44, paddingHorizontal: space.md, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.border, flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: colors.surfaceSecondary },
 });

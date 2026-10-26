@@ -186,3 +186,35 @@ agent_communication:
 - Codefix verified. Remainingcriticaldecision: retainjeelive.ai'sexistingidentity/history andsyncmissingpaperswithwebsite-owneraccess, or explicitlypointappatworking30-paperproject'sdifferentidentity/history. Never switchorimportsilently. Awaiting ownerconfirmation.
 - Owner confirmed keeping currentjeelive.ai history and requested100%sharedbackend. NO preview switch. Live protected-import probe: anonymous401/learner403; currentPYQ0; websiteRFcatalog404. No writes performed. Secure owner credential collection needed for canonical PYQ sync; fullRFsharing requires website-side integration/migration and is not already complete.
 - LATEST USER SCOPE OVERRIDE: shared backend is required EXCEPT Rapid Fire. Keep RF separate and do not treat RF404 on canonical website as a blocker. User asks for website-project handoff covering academiccontent/solutions, authidentity/history/results and exact design/card-theme parity. Handoffdocument updated accordingly.
+
+## Iteration35 — complete native theme mapping + newly available canonical PYQs
+user_confirmation: "Theme aur UI checks; Pehle PYQ availability check. Abhi confirm nahi. 100% same content except rapid fire."
+frontend_theme:
+  implemented: true
+  working: NA
+  needs_retesting: true
+  files: ["frontend/src/theme.ts", "frontend/src/components/ExamTile.tsx", "frontend/src/components/ExamCardFinish.tsx", "frontend/src/components/ExamHub.tsx", "frontend/src/components/LearningTheme.tsx", "frontend/src/components/PyqPaperCard.tsx", "frontend/src/components/ui.tsx", "frontend/app/(tabs)/index.tsx", "frontend/app/(tabs)/tests.tsx", "frontend/app/result/[id].tsx"]
+  status: "Owner CSS exam colours, native sheen/pause/reduced motion, responsive title wrapping, PYQ spacing, learning badges/top borders, maroon score, 5-colour result tabs. Fixed two pre-existing unfinished compile errors (Press accessibility props, unavailable navigation import). Academic/auth/RF data code unchanged. tsc + modified JS lint pass."
+main_smoke:
+  result: "PASS: real canonical pilot login, home exam colours, pause switch, JEE hub -> PYQ, 30 real papers, year filter, 390/320 preview."
+  artifacts: ["theme-home-390.jpeg", "theme-jee-hub-390.jpeg", "theme-pyq-390.jpeg", "theme-pyq-320.jpeg"]
+live_data:
+  result: "Canonical GET /pyq/jee-main now returns30 real papers/[2026,2025]. Old external empty-list blocker no longer reproduced. NO source-project switch, import, fake responses or seed. Need real canonical E2E now."
+test_plan_iter35:
+  current_focus:
+    - "Theme switch/animation, all3 exam hubs, responsive320/390; no clipped labels/overflow; My Tests library and all5 Results tabs"
+    - "Canonical direct vs app proxy existing identity, all PYQ metadata, chapters/mocks/live catalogue parity, history/result/question/solution consistency"
+    - "One actual new canonical PYQ on approved pilot: Start -> answer saved -> leave -> Continue same ID -> submit -> Result -> supplied solution images -> Re-attempt newID, old result preserved"
+    - "Read-only Rapid Fire JEE/NEET catalogue/leaderboard and arena smoke; do NOT change RF data or migrate it"
+  special_instructions: "Run first4 iteration34 parity tests; fifth has obsolete RF migration assertions, DO NOT treat missing canonicalRF as blocker. Existing pilot9000000001 in memory/test_credentials.md; keep canonical UID. New academic test attempts allowed ONLY on this approved pilot for E2E, log their IDs, never modify old attempts. No mocks/interception/source-environment redirects. No auth changes/OTP. Do not run opt-in RF mutation seed or external-source iteration33 tests."
+
+iteration35_final:
+  working: true
+  needs_retesting: false
+  backend: "9/9 parity tests passed, no skipped cases. See pytest/iter35_parity_final.xml. Includes new75-question result signatures and original question+solution image hashes."
+  frontend: "Main real UI E2E passed: Start->source image->saved response->leave->Continue sameID->submit->result->supplied solution/zoom->Re-attempt newID->old result preserved->My Tests. Theme/3hubs/320+390/pause/accessible states and read-onlyRF NEET/JEE board/chapter checks passed."
+  followup_fixes: "Test-only repeated logins fixed to session reuse;429 cooldown recovered with no auth policy changes. Corrected actual accessibility selected/checked forwarding and nested My Tests compare buttons. Follow-up verified no nested buttons or accidental compare navigation; final console only expected canceled request on navigation."
+  final_report: "test_reports/iteration_35.json"
+  artifacts: "test_reports/artifacts_iter35/followup/"
+  live_state: "PYQ30 available; BITSAT50 mocks; COMEDK0 mocks in canonical website and app alike. No local replacements. RF separate by explicit scope."
+  limitations: "Physical-device QA pending. Source equality verified for listed endpoint samples and75 question signatures, not a claim of every asset/device/signup path tested."

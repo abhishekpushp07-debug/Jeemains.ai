@@ -42,7 +42,7 @@ const light = {
   borderStrong: "#454557",
   divider: "#2A2A38",
 
-  // Current website uses a unified red identity; semantic study/game colours remain distinct.
+  // Legacy exam/brand aliases remain stable for existing screens and game UI.
   custom_examJee: "#D91222",
   custom_examJeeDeep: "#280D13",
   custom_examBitsat: "#D91222",
@@ -83,6 +83,52 @@ const light = {
   custom_overlay: "rgba(8,8,10,0.85)",
   custom_whiteA70: "rgba(248,250,252,0.72)",
   custom_whiteA15: "rgba(248,250,252,0.15)",
+
+  // Exact academic-card colours from the owner's learning-workspace.css handoff.
+  // Scoped tokens: changing these must not recolour Rapid Fire.
+  custom_webJeeBackground: "#B00000",
+  custom_webJeeAccent: "#FFE4E4",
+  custom_webJeeMuted: "#FFEAEA",
+  custom_webJeeLine: "#FF9494A0",
+  custom_webJeeButtonInk: "#8A0000",
+  custom_webBitsatBackground: "#FF9933",
+  custom_webBitsatInk: "#2B1600",
+  custom_webBitsatAccent: "#542600",
+  custom_webBitsatMuted: "#4A230B",
+  custom_webBitsatLine: "#9E4D1770",
+  custom_webBitsatButton: "#3D1D0A",
+  custom_webBitsatButtonInk: "#FFF7ED",
+  custom_webComedkBackground: "#101115",
+  custom_webComedkAccent: "#E5D5AF",
+  custom_webComedkMuted: "#CDD0DA",
+  custom_webComedkLine: "#DDE3EE40",
+  custom_webComedkButton: "#ECEEF2",
+  custom_webWhite: "#FFFFFF",
+  custom_webGlass: "#FFFFFF09",
+  custom_webGlassLine: "#FFFFFF1A",
+  custom_webFinishStrong: "#FFFFFF20",
+  custom_webFinishSoft: "#FFFFFF05",
+  custom_webJeeFinish: "#FFFFFF08",
+  custom_webJeeShine: "#FFFFFF40",
+  custom_webBitsatShine: "#FFFFFF78",
+  custom_webTransparent: "#FFFFFF00",
+  custom_webShadowClear: "#00000000",
+  custom_webBottomShade: "#0000000A",
+  custom_webExamShadow: "#0C1835",
+  custom_webLearningMaroon: "#5C0025",
+  custom_webLearningCompleted: "#0284C7",
+  custom_webLearningSaved: "#2563EB",
+  custom_webLearningActive: "#D97706",
+  custom_webLearningError: "#DC2626",
+  custom_webMaroonSoft: "#FDF2F5",
+  custom_webCompletedSoft: "#F0F9FF",
+  custom_webCompletedInk: "#075985",
+  custom_webSavedSoft: "#EFF6FF",
+  custom_webSavedInk: "#1E40AF",
+  custom_webActiveSoft: "#FFFBEB",
+  custom_webActiveInk: "#92400E",
+  custom_webErrorSoft: "#FEF2F2",
+  custom_webErrorInk: "#991B1B",
 };
 
 export type ThemeColors = typeof light;
@@ -107,6 +153,35 @@ export const fonts = {
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
 export const radius = { sm: 6, md: 12, lg: 20, pill: 999 };
+
+// Website learning-workspace.css segment tokens, scoped to academic screens.
+// Labels accompany these colours; Rapid Fire keeps its existing semantic palette.
+export const learningTones = {
+  maroon: { line: colors.custom_webLearningMaroon, soft: colors.custom_webMaroonSoft, ink: colors.custom_webLearningMaroon },
+  completed: { line: colors.custom_webLearningCompleted, soft: colors.custom_webCompletedSoft, ink: colors.custom_webCompletedInk },
+  saved: { line: colors.custom_webLearningSaved, soft: colors.custom_webSavedSoft, ink: colors.custom_webSavedInk },
+  active: { line: colors.custom_webLearningActive, soft: colors.custom_webActiveSoft, ink: colors.custom_webActiveInk },
+  error: { line: colors.custom_webLearningError, soft: colors.custom_webErrorSoft, ink: colors.custom_webErrorInk },
+};
+export type LearningTone = keyof typeof learningTones;
+
+export type ExamCardKind = "jee" | "live" | "bitsat" | "comedk";
+export function examCardColors(kind: ExamCardKind) {
+  const shared = { iconBackground: colors.custom_webGlass, ink: colors.custom_webWhite };
+  if (kind === "jee") return { ...shared, background: colors.custom_webJeeBackground,
+    accent: colors.custom_webJeeAccent, muted: colors.custom_webJeeMuted, line: colors.custom_webJeeLine,
+    button: colors.custom_webWhite, buttonInk: colors.custom_webJeeButtonInk };
+  if (kind === "bitsat") return { ...shared, background: colors.custom_webBitsatBackground,
+    ink: colors.custom_webBitsatInk, accent: colors.custom_webBitsatAccent, muted: colors.custom_webBitsatMuted,
+    line: colors.custom_webBitsatLine, button: colors.custom_webBitsatButton, buttonInk: colors.custom_webBitsatButtonInk };
+  if (kind === "comedk") return { ...shared, background: colors.custom_webComedkBackground,
+    accent: colors.custom_webComedkAccent, muted: colors.custom_webComedkMuted, line: colors.custom_webComedkLine,
+    button: colors.custom_webComedkButton, buttonInk: colors.custom_webComedkBackground };
+  // No new live-series reference was supplied: preserve its established palette.
+  return { ...shared, background: colors.surfaceSecondary, accent: colors.brandText,
+    muted: colors.muted, line: colors.brandLine, iconBackground: colors.brandTertiary,
+    button: colors.brandPrimary, buttonInk: colors.onBrandPrimary };
+}
 
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;

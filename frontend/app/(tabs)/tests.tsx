@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, RefreshControl, TextInput, View } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, TextInput, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { api, del, post } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { Button, Card, Chip, Empty, ErrorBox, Icon, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
-import { colors, fonts, radius, space } from "@/src/theme";
+import { colors, fonts, learningTones, radius, space } from "@/src/theme";
+import { LearningBadge, learningStatusTone } from "@/src/components/LearningTheme";
 import { fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
 
 type Tab = "progress" | "saved" | "completed";
@@ -15,8 +16,8 @@ const STATUS: Record<Tab, [string, string][]> = {
   saved: [["all", "All"], ["available", "Available"], ["unavailable", "Unavailable"]],
   completed: [["all", "All outcomes"], ["completed", "Scored"], ["expired", "Time expired"], ["grading", "Preparing"], ["embargoed", "Sealed"]],
 };
-const STATUS_LABEL: Record<string, [string, string]> = {
-  active: ["In progress", colors.success], expired: ["Time expired · finish grading", colors.warning], embargoed: ["Result sealed", colors.custom_series], completed: ["Scored", colors.brandPrimary], grading: ["Preparing result", colors.custom_amber],
+const STATUS_LABEL: Record<string, string> = {
+  active: "In progress", expired: "Time expired · finish grading", embargoed: "Result sealed", completed: "Scored", grading: "Preparing result",
 };
 // Kept at module level so returning to this tab restores the same view.
 const memo = { tab: "progress" as Tab, q: "", status: "all", exam: "" };
@@ -60,9 +61,10 @@ export default function MyTests() {
   const renderItem = ({ item }: { item: any }) => {
     if (tab === "saved") {
       return (
-        <Card testID={"saved-paper-" + item.set_id} style={{ gap: 6, opacity: item.available ? 1 : 0.75 }}>
-          <T w="bold" size={11} color={colors.muted}>{item.exam} · saved {unixDate(item.saved_at)}</T>
-          <T w="heavy" size={16}>{item.title}</T>
+        <Card testID={"saved-paper-" + item.set_id} style={[styles.paper, { borderTopColor: learningTones.saved.line, opacity: item.available ? 1 : 0.75 }]}>
+          <LearningBadge testID={`saved-paper-status-${item.set_id}`} label="Saved" tone="saved" />
+          <T testID={`saved-paper-meta-${item.set_id}`} w="bold" size={11} color={colors.muted}>{item.exam} · saved {unixDate(item.saved_at)}</T>
+          <T testID={`saved-paper-title-${item.set_id}`} w="heavy" size={18}>{item.title}</T>
           {!item.available ? <Notice tone="warning">{item.reason || "Unavailable right now."}</Notice> : null}
           <View style={{ flexDirection: "row", gap: space.sm }}>
             {item.available ? <Button testID={"saved-open-" + item.set_id} label="Open" style={{ flex: 1 }} onPress={() => router.push(`/set/${item.set_id}`)} /> : null}
@@ -71,46 +73,46 @@ export default function MyTests() {
         </Card>
       );
     }
-    const [label, tone] = STATUS_LABEL[item.status] || [item.status, colors.muted];
+    const label = STATUS_LABEL[item.status] || item.status;
+    const tone = learningStatusTone(item.status);
     const picked = selected.some((x) => x.id === item.id);
     return (
-      <Press testID={"attempt-card-" + item.id} onPress={() => router.push(((item.resumable ? "/attempt/" : "/result/") + item.id) as any)}>
-        <Card style={{ gap: 6, borderColor: picked ? colors.brandPrimary : colors.border }}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
-            <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: tone }} />
-            <T w="bold" size={12} color={tone}>{label}</T>
-            <T size={12} color={colors.muted}>· {item.exam}</T>
+      <Card testID={`attempt-container-${item.id}`} style={[styles.paper, { borderColor: picked ? colors.brandPrimary : colors.border, borderTopColor: tone ? learningTones[tone].line : colors.border }]}>
+        <Press testID={"attempt-card-" + item.id} onPress={() => router.push(((item.resumable ? "/attempt/" : "/result/") + item.id) as any)} style={styles.attemptContent}>
+          <View style={styles.statusRow}>
+            <LearningBadge testID={`attempt-status-${item.id}`} label={label} tone={tone} />
+            <T testID={`attempt-exam-${item.id}`} size={12} color={colors.muted}>{item.exam}</T>
           </View>
-          <T w="heavy" size={16}>{item.title}</T>
-          <T size={12} color={colors.muted}>
+          <T testID={`attempt-title-${item.id}`} w="heavy" size={18}>{item.title}</T>
+          <T testID={`attempt-meta-${item.id}`} size={12} color={colors.muted}>
             Started {unixDate(item.started_at)} · {item.saved_answers}/{item.count} saved
             {item.remaining_seconds ? " · " + fmtClock(Math.round(item.remaining_seconds)) + " left" : ""}
           </T>
-          {item.summary ? <T w="heavy" size={15} color={colors.brandText}>{item.summary.score} / {item.summary.maximum} marks{item.summary.accuracy != null ? ` · ${item.summary.accuracy}% accuracy` : ""}</T> : null}
-          <View style={{ flexDirection: "row", gap: space.sm, alignItems: "center" }}>
-            <T w="bold" size={13} color={colors.brandText}>{item.resumable ? "Resume exact attempt →" : "Open result →"}</T>
-            <View style={{ flex: 1 }} />
+          {item.summary ? <T testID={`attempt-score-${item.id}`} w="heavy" size={15} color={colors.brandText}>{item.summary.score} / {item.summary.maximum} marks{item.summary.accuracy != null ? ` · ${item.summary.accuracy}% accuracy` : ""}</T> : null}
+          <T testID={`attempt-action-label-${item.id}`} w="bold" size={13} color={colors.brandText}>{item.resumable ? "Resume exact attempt →" : "Open result →"}</T>
+        </Press>
+          <View style={styles.actions}>
             {item.compare_eligible ? (
-              <Press testID={"compare-select-" + item.id} onPress={() => choose(item)} accessibilityLabel="Select for comparison" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, height: 36, borderRadius: radius.pill, borderWidth: 1, borderColor: picked ? colors.brandPrimary : colors.border, backgroundColor: picked ? colors.custom_infoSoft : colors.surfaceSecondary }}>
+              <Press testID={"compare-select-" + item.id} onPress={() => choose(item)} accessibilityLabel="Select for comparison" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, minHeight: 44, borderRadius: radius.pill, borderWidth: 1, borderColor: picked ? colors.brandPrimary : colors.border, backgroundColor: picked ? colors.custom_infoSoft : colors.surfaceSecondary }}>
                 <Icon name={picked ? "checkbox-marked" : "checkbox-blank-outline"} size={16} color={colors.brandText} />
                 <T w="bold" size={12}>Compare</T>
               </Press>
             ) : null}
           </View>
-        </Card>
-      </Press>
+      </Card>
     );
   };
 
   return (
     <View testID="my-tests-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <View style={{ paddingHorizontal: space.lg, gap: space.sm }}>
-        <T w="heavy" size={26}>My Tests</T>
+        <T testID="my-tests-title" w="heavy" size={30}>My Tests</T>
         {user?.access_type === "unverified_phone" ? <T size={11} color={colors.muted} testID="my-tests-identity-notice">This number’s profile is not a verified identity.</T> : null}
-        <View style={{ flexDirection: "row", gap: space.sm }}>
+        <View style={styles.tabs}>
           {(["progress", "saved", "completed"] as Tab[]).map((t) => (
-            <Press key={t} testID={"my-tests-tab-" + t} onPress={() => { setTab(t); setStatus("all"); }} style={{ flex: 1, height: 44, borderRadius: radius.md, alignItems: "center", justifyContent: "center", backgroundColor: tab === t ? colors.surfaceInverse : colors.surfaceSecondary, borderWidth: 1, borderColor: tab === t ? colors.surfaceInverse : colors.border }}>
-              <T w="heavy" size={13} color={tab === t ? colors.onSurfaceInverse : colors.onSurface}>{t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed"} {list.data?.counts ? `· ${list.data.counts[t]}` : ""}</T>
+            <Press key={t} testID={"my-tests-tab-" + t} accessibilityRole="tab" accessibilityState={{ selected: tab === t }} onPress={() => { setTab(t); setStatus("all"); }} style={[styles.tab, { backgroundColor: tab === t ? colors.brandTertiary : colors.surfaceSecondary }]}>
+              <T testID={`my-tests-tab-label-${t}`} w="bold" size={12} color={tab === t ? colors.brandText : colors.onSurface}>{t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed"}</T>
+              {list.data?.counts ? <T testID={`my-tests-count-${t}`} w="bold" size={11} color={colors.muted} style={styles.count}>{list.data.counts[t]}</T> : null}
             </Press>
           ))}
         </View>
@@ -166,3 +168,13 @@ export default function MyTests() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  paper: { padding: 20, borderRadius: 16, gap: space.md, borderTopWidth: 4 },
+  statusRow: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: space.sm },
+  attemptContent: { gap: space.md },
+  actions: { flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-end", gap: space.sm, alignItems: "center" },
+  tabs: { flexDirection: "row", gap: 3, padding: 4, borderRadius: 12, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surfaceSecondary },
+  tab: { flex: 1, minWidth: 0, minHeight: 64, paddingVertical: space.sm, borderRadius: 8, alignItems: "center", justifyContent: "center", gap: 5 },
+  count: { paddingHorizontal: 8, paddingVertical: 2, borderRadius: 20, backgroundColor: colors.surface },
+});
