@@ -1,3 +1,15 @@
+# Iteration155 + native handoff final checkpoint — 2026-10-26
+student_pin155_final:
+  backend: "PASS12new+27regressionrealcookieauthisolated; all154functionalissuesfixed"
+  frontend: "PASS realisolatedAPI signup/mismatch/PINfocus/change/ownerlist/privacy at1920x800/390x8440overflow"
+  cross_session: "RealreviewedPYQtwo-cookie samelearner start/save/resume/submit/originalPNG +newreattemptoldresultpreserved, NOTactualExpo/prodproof"
+  production: "OPERATIONAL approvedinsert-onlyimportCOMPLETE30PDFhashes90records30papers2250Q; ownerauthenticatedsharedcanonicalGET30confirmed,publicsets252(222+30). No productiontestattempts/students. Actualnativestudentsessioncheckpendingappagent."
+  auth_deploy: "HOLDnativeclientcoordination; canonicalOpenAPIstillnoPINsignup/change, legacyphoneonlyremainslive"
+  limitations: "OptionallongwindowPINfailurecounterpending; privateingressperclientIPlimitnotclaimedwithoutoperatortrustedproxyconfig. Per-number+authconcurrencyworks; no functionalissuesopen155."
+  handoff: "/app/frontend/public/downloads/JEELIVE_App_Integration_2026-10-26.zip checkedHTTPdownloadidentical; actuallivecomputedtokens+assets9fonts28icons13CSS9refs+APP_INTEGRATION.md+safeevidence. No secrets/studentdumps/PDFs."
+  needs_retesting: false
+
+
 # PYQ visibility + minimal Super Admin + own PIN — 2026-10-26 (implementation ready for QA)
 student_pin154:
   requirements: "User confirms issueURL https://jeelive.ai/exams/jee-main/pyq and selects logged-in student only for noOTP PIN change. Payments removed from planned scope. SuperAdmin simple student mobile-number directory, existing owner-only login reused."

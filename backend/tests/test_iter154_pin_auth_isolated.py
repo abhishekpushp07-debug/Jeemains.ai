@@ -387,7 +387,7 @@ def test_admin_students_access_matrix_and_allowlist():
             for bad in ['0', '-1', 'x', '10001']:
                 assert (await c.get('/api/admin/students', params={'page': bad})).status_code == 422, bad
             assert (await c.get('/api/admin/students?page=999')).status_code == 200
-            assert await TDB.tejas_audit.count_documents({'action': 'student_directory_read'}) >= 1 or True
+            assert await TDB.tejas_audits.count_documents({'action': 'student_directory_read'}) >= 1
             # immediate role revocation
             await TDB.tejas_users.update_one({'id': OWNER['id']}, {'$set': {'role': 'reviewer'}})
             assert (await c.get('/api/admin/students')).status_code == 403
