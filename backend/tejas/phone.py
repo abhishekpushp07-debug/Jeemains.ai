@@ -47,14 +47,15 @@ def normalize_phone(raw):
 async def limit_pin(phone, request, action):
     stamp = now()
     window = int(stamp // 900)
-    checks = [(f'{action}:number:{phone}', 5)]
+    checks = []
     try:
         peer = ipaddress.ip_address(request.client.host) if request.client else None
     except ValueError:
         peer = None
     if peer and peer.is_global:
         checks.append((f'pin:ip:{peer.compressed}', 60))
-    account_key = hashlib.sha256(f'{checks[0][0]}:{window}'.encode()).hexdigest()
+    checks.append((f'{action}:number:{phone}', 5))
+    account_key = hashlib.sha256(f'{action}:number:{phone}:{window}'.encode()).hexdigest()
     for identity, maximum in checks:
         key = hashlib.sha256(f'{identity}:{window}'.encode()).hexdigest()
         count = await increment(db.tejas_phone_limits, key, datetime.now(timezone.utc) + timedelta(minutes=30))
@@ -69,8 +70,17 @@ async def access(data: PhonePayload, request: Request, response: Response):
     phone = normalize_phone(data.phone)
     limit_key = await limit_pin(phone, request, 'login')
     u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0})
+    stamp = now()
+    hour = int(stamp // 3600)
+    budget_key = hashlib.sha256(f'pin:failed-hour:{phone}:{hour}'.encode()).hexdigest()
+    reserved = await increment(db.tejas_phone_limits, budget_key, datetime.now(timezone.utc) + timedelta(hours=2))
+    if reserved > 20:
+        await db.tejas_phone_limits.update_one({'_id': budget_key, 'count': {'$gt': 0}}, {'$inc': {'count': -1}})
+        raise HTTPException(429, 'Too many incorrect PIN attempts. Please wait before signing in again.',
+                            headers={'Retry-After': str(max(1, int((hour + 1) * 3600 - stamp) + 1))})
     if not u or not u.get('pin_hash') or not await run_in_threadpool(verify, data.pin, u['pin_hash']):
         raise HTTPException(401, 'Mobile number or PIN is incorrect. Older profiles must set a PIN from their existing signed-in session.')
+    await db.tejas_phone_limits.update_one({'_id': budget_key, 'count': {'$gt': 0}}, {'$inc': {'count': -1}})
     await db.tejas_phone_profiles.update_one({'id': u['id']}, {'$set': {'last_seen_at': now()}})
     result = await new_session({**u, 'role': 'student', 'access_type': 'unverified_phone'}, response)
     await db.tejas_phone_limits.delete_one({'_id': limit_key})

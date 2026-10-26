@@ -1,3 +1,12 @@
+# Resume PIN hardening — 2026-10-26 (QA156 pending)
+student_pin156:
+  user_request: "Kaam resume kro . Jo kr rhe the"
+  implementation: "Only remaining154/155PINlimiterfindings: addsharedMongo20failedchecks/fixedhourpernumberbudget independentofsuccess, atomicreservationbeforebcrypt/releaseonvalidPIN, excessrejectedreservationreleased; short5/15 unchanged. PublicpeerIPlimitnowBEFOREaccountsoIPblockedtrafficdoesnotburnvictimquota. No trustforwardedheaders."
+  unchanged: "Owner/reviewercredentials, PINversionrevocation, legacyenrollment, studentdirectory/search/pagination, schemas/APIpaths, UI,payments/OTPdisabled. No newaccounts/DBwritesduringcoding. Nativecoordinationholdonpublishing remains."
+  verification: "Read auth_testing.md. Narrowisolated156realAPI/limiterconcurrency/rollover+dependentauthregression required. 155alreadycoveredfulloriginalPYQtwo-sessionflow, don'trepeatPDFimport."
+  needs_retesting: true
+
+
 # Iteration155 + native handoff final checkpoint — 2026-10-26
 student_pin155_final:
   backend: "PASS12new+27regressionrealcookieauthisolated; all154functionalissuesfixed"
