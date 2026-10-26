@@ -1,0 +1,25 @@
+{
+  "summary": "Frontend-only QA of the colour-swap fix on the REAL public root / (guest, no API mocks or route interception) at exactly 1920x800 and 390x844, then a comparison against signed-in /home using a read-only browser fixture. Computed styles on / now show the approved palettes. JEE Main is royal blue (#06112E→#18357A) with a platinum CTA (#FBFCFF→#CAD5E5, ink #122952). The All India banner is ruby/onyx (#1A070A/#0D0C10/#24090E, border #984755, CTA #B6112A, ink #FFF7F8). BITSAT is bright amber (#FFC15B, dark ink #281806 on h2/p/nav). COMEDK is teal (#04181A, CTA ink #063733). All 9 checks pass on both viewports, and there is no horizontal overflow (scrollWidth equals clientWidth: 1920/1920 and 390/390). The landing root class is 'free-landing polished-home' with no .exam-home, so layout is unchanged: hero, 5 FAQ items, the same header and body theme, FAQ accordion opens. The landing and /home computed styles match exactly for all 3 cards and the banner (0 field diffs); each page keeps its own layout and content. On both routes and both viewports, the explainer modal opens and closes with Escape, and Pause/Play shine pauses and resumes all 3 cards (aria-pressed toggles). Reduced motion gives ::before display:none on the 3 cards and the banner on both routes. Guest card links redirect to /login?next=<target> for JEE mocks, BITSAT chapters, COMEDK results and the COMEDK title. All 14 landing hrefs are correct and the final CTA goes to /login. The Series hub has no .polished-home, so there is no leak. 0 mutation requests were seen as a guest, and 0 writes were blocked on /home. Lossless pixel contrast was measured on the real guest landing for the banner and all 3 cards: glare off, forced glare at 11 offsets, plus card/CTA/nav/primary/hub hover with glare. Every text run passes (small text 4.5:1, large text 3:1). Lowest values: COMEDK 'YOUR ENGINEERING PATHWAY' 4.95 (hover + glare -12%), banner 'Created by' 5.03 (390px, glare -25%), banner 'Explore the series' hover 5.05, banner facts 5.07, BITSAT 'My results' 5.66, BITSAT small text at least 5.85, JEE 'My results' 5.78. The only flagged item is the rotated '100% AI' ribbon, a known bbox-measurement artifact (about 11:1 analytically).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Landing/Home COMEDK card", "issues": ["Not a failure: the 'YOUR ENGINEERING PATHWAY' eyebrow (#A7F3E8) reaches 4.95:1 under hover plus forced glare. This is the smallest margin among the cards. Optional: slightly lighten it or reduce the COMEDK polish white stop for glare headroom."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/ui_landing_swap153.py", "/app/tests/ui_landing_contrast153.py", "/app/tests/ui_swap_check152.py", "/app/tests/ui_swap_contrast152.py"],
+  "action_items": ["None blocking. Redeploy to production (jeelive.ai) so the fix goes live, then spot-check https://jeelive.ai/ for the JEE royal-blue card (#06112E) and the ruby/onyx banner."],
+  "critical_code_review_comments": [
+    "Root cause confirmed and fixed: the palette block was scoped to .exam-home, which exists only on /home. It is now scoped to .polished-home, which is added to both the Landing and Home roots. No token values changed, and the landing and home computed styles are identical.",
+    "live-series.css '.exam-home>.flagship-banner {margin-bottom}' and simple-navigation.css '.exam-home' padding remain Home-only. Correctly, they were not added to landing.",
+    "ui_swap_check152.py had a wrong expectation (landing keeps the old #160B10 banner) and used '.exam-home .bold-exam-card' selectors. It is superseded by ui_landing_swap153.py, which uses '.polished-home'. Do not reuse the 152 landing assertion."
+  ],
+  "updated_files": ["/app/tests/ui_landing_swap153.py", "/app/tests/ui_landing_contrast153.py"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100%"},
+  "seed_data_creation": "None. The guest phase used real APIs with read-only observation. /home used a read-only browser route fixture that blocks mutations. No logins, sessions, DB writes or AI calls.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Use wait_until='domcontentloaded'. ui_landing_swap153.py covers the guest-root palette, regressions and the landing-vs-home diff. ui_landing_contrast153.py is the guest-root pixel contrast sweep (no mocks). The rotated '100% AI' ribbon always reads as a false FAIL. Production jeelive.ai was not tested in this iteration; it is pre-redeploy.",
+  "rca of the issue": "The palette selectors used the .exam-home ancestor, which only exists on the /home root. Guests on / (Landing) never matched, so they saw the old cards and banner. The cause was CSS scope, not caching. Fix: a shared visual-only .polished-home class on both roots. Verified on the real preview root."
+}
