@@ -1,0 +1,18 @@
+{
+  "case": "Native Play Store readiness fixes plus public legal/support access",
+  "doctor": "20/20 pass (latest recheck)",
+  "typescript_and_changed_eslint": "pass",
+  "python_lint_changed_runtime_files": "pass",
+  "frontend_existing_isolated_regressions": {"passed":24,"suites":[40,48,49]},
+  "rf_backend_regression": {"passed":9,"skipped":1,"skip_reason":"No sparse chapter present","xml":"/app/test_reports/pytest/iter50_rf_recheck.xml"},
+  "legal_brand_backend_suite": {"passed":15,"failed":1,"xml":"/app/test_reports/pytest/iter50_legal_recheck.xml","remaining_assertion":"Delivered privacy HTML contains platform CDN challenge script. Origin HTML has no scripts; strict CSP blocks edge scripts; no-transform was added but does not suppress this preview edge injection."},
+  "live_login_followup": {"result":"pass","credential_post_count":1,"http_status":200,"home_visible":true,"account_to_privacy":"pass","note":"Original testing-agent script force-clicked before readiness and waited5s; backend logs show no PIN POST for that step. Main waited until enabled and then verified actual POST200/home, without auth bypass or credential retry."},
+  "public_auth_gate_ui": ["Public legal/entry routes accessible while bootstrap pending","Private routes guarded until ready and user","Keyboard cannot submit PIN while bootstrap pending","Privacy navigation clears form PIN/confirm and is not hijacked by late session resolution","No PIN collection or false deletion action on unavailable deletion page"],
+  "branding": {"managed_assets":5,"bytes":196525,"source":"Original approved JEELIVE SVG, SHA verified","public_launch_asset_sha_and_dimensions":"pass","native_display_name":"JEELIVE.AI","package_scheme_slug":"unchanged","original_four_home_artworks":"unchanged"},
+  "preservation": {"original_profiles":344,"original_coins_total":10257,"wallet_ownership_and_neet_archive_fingerprints":"baseline guard unchanged","canonical_academic_writes":"none","credential_or_real_account_changes":"none"},
+  "actual_blocker": "Fresh live canonical OpenAPI121paths has no account deletion operation. User selected PIN-confirmed direct deletion; cannot complete it without the website backend source/verified contract. No companion-only deletion or fake success implemented.",
+  "edge_note": "Script-free deliveredHTML was a stricter local test expectation. Official Google Play policy reviewed requires a public accessible non-geofenced non-editable policy URL, not a categorical ban on all JavaScript. Do not repeat unsupported claims that any CDN script automatically causes Play rejection. Page remains200/readable, strict CSP unchanged. Edge-specific exclusion unavailable from app code; platform support's answer was explicitly unverified. Assertion is recorded as still failing, not silently skipped.",
+  "not_verified": ["SignedAndroidAAB/APK and actualunder20MB size","TargetSDK/ABI/16KBalignment in a built artifact","PhysicalnativeAndroidE2E and performance","PlayConsoleforms/revieweraccount/conditionalclosedtesting","Canonicaldeletion and all linkeddata cleanup","Long-termexternalcanonical503/520 reliability"],
+  "production_mocked_apis": false,
+  "next_required_input": "Website backend project/repository/source URL or an actual verified deletionAPI contract"
+}

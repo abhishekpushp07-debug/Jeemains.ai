@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { cleanPhone, pinFormError, useAuthSubmit, validPhone, validPin } from "@/src/authPin";
@@ -20,16 +20,22 @@ export default function Entry() {
   const [pin, setPin] = useState("");
   const [confirm, setConfirm] = useState("");
   const submit = useAuthSubmit();
+  const entryFocused = useRef(false);
   const signup = mode === "signup";
-  useEffect(() => { if (ready && user) router.replace("/(tabs)"); }, [ready, user, router]);
+  useFocusEffect(useCallback(() => { entryFocused.current = true; return () => { entryFocused.current = false; }; }, []));
+  useFocusEffect(useCallback(() => { if (ready && user) router.replace("/(tabs)"); }, [ready, user, router]));
   function switchMode(next: typeof mode) { setMode(next); setPin(""); setConfirm(""); submit.setError(""); }
-  const go = () => submit.run(() => pinFormError(phone, pin, signup ? confirm : undefined), async () => {
-    if (signup) await signUp(cleanPhone(phone), pin, confirm);
-    else await signIn(cleanPhone(phone), pin);
-    setPin(""); setConfirm("");
-    if (router.canDismiss()) router.dismissAll();
-    router.replace("/(tabs)");
-  });
+  const go = () => {
+    if (!ready) return; // Keyboard submit must also respect session bootstrap.
+    return submit.run(() => pinFormError(phone, pin, signup ? confirm : undefined), async () => {
+      if (signup) await signUp(cleanPhone(phone), pin, confirm);
+      else await signIn(cleanPhone(phone), pin);
+      setPin(""); setConfirm("");
+      if (!entryFocused.current) return; // A late login must not hijack policy reading.
+      if (router.canDismiss()) router.dismissAll();
+      router.replace("/(tabs)");
+    });
+  };
   const invalid = !validPhone(phone) || !validPin(pin) || (signup && !validPin(confirm));
   return <AuthShell testID="entry-screen">
     <Animated.View entering={reduced ? undefined : FadeInDown.duration(300)} style={styles.intro}>
@@ -55,6 +61,7 @@ export default function Entry() {
       <ErrorBox error={submit.error} testID="entry-error" />
       {submit.retrySeconds > 0 ? <T testID="entry-rate-limit" size={13} color={colors.warning}>Please wait {submit.retrySeconds}s before trying again.</T> : null}
       <Button testID="entry-continue-button" label={signup ? "Create account" : "Sign in"} icon="arrow-right" onPress={go} busy={submit.busy || !ready} disabled={invalid || submit.retrySeconds > 0} />
+      <Press testID="entry-privacy-link" onPress={() => { setPin(""); setConfirm(""); router.push("/privacy"); }} style={{ minHeight: 44, alignItems: "center", justifyContent: "center" }}><T testID="entry-privacy-label" size={13} color={colors.muted}>Privacy policy & account deletion</T></Press>
     </View>
     <View style={styles.footer}>
       <T testID="entry-sync-note" size={12} w="medium" color={colors.muted} style={styles.center}>{signup ? "Already have an account? Sign in instead—your history stays with your existing account." : "Your tests, progress and original solutions stay in sync with the website."}</T>

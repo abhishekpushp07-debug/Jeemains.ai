@@ -41,6 +41,8 @@ export default function Account() {
         {user?.role === "student" ? <Button testID="account-change-pin-button" label="Change PIN" icon="lock-reset" onPress={() => router.push("/change-pin")} /> : null}
         <Button testID="account-pin-help-button" label="PIN & account access help" kind="secondary" icon="help-circle-outline" onPress={() => router.push("/forgot-pin")} />
         <Button testID="account-loading-performance" label="Loading performance" kind="secondary" icon="speedometer" onPress={() => router.push("/performance")} />
+        <Button testID="account-privacy" label="Privacy policy & support" kind="secondary" icon="shield-check-outline" onPress={() => router.push("/privacy")} />
+        <Button testID="account-deletion" label="Account deletion information" kind="ghost" icon="account-remove-outline" onPress={() => router.push("/delete-account")} />
         {expired ? (
           <Button testID="account-reenter-button" label="Sign in again" icon="login" onPress={() => finish("keep")} />
         ) : null}

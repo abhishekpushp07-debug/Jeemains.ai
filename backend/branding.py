@@ -24,6 +24,10 @@ ASSETS = {
     "comedk": ("jeelive-ai/uploads/brand/08fb078a-2e15-4af7-b928-a19a3ad5254e.jpg", "e24682ea5a92814c9b01fbe5a704614ba542004fc0ca1a70a2d16d8338e50028", "image/jpeg"),
 }
 _rf_manifest = Path(__file__).parent / 'rapidfire' / 'art_manifest.json'
+_native_manifest = Path(__file__).with_name('native_brand_manifest.json')
+if _native_manifest.exists():
+    ASSETS.update({f'native-{name}': (row['path'], row['sha256'], 'image/png')
+                   for name, row in json.loads(_native_manifest.read_text()).get('assets', {}).items()})
 if _rf_manifest.exists():
     ASSETS.update({f'rf-{name}': (row['path'], row['sha256'], 'image/webp')
                    for name, row in json.loads(_rf_manifest.read_text()).items()})
@@ -85,6 +89,14 @@ async def rapid_art(kind: str):
     name = 'rf-' + kind
     if name not in ASSETS:
         raise HTTPException(404, 'Unknown game artwork')
+    return await public_asset_response(name)
+
+
+@router.get('/launch/{kind}.png')
+async def native_launch_image(kind: str):
+    name = f'native-{kind}'
+    if kind not in ('icon', 'adaptive', 'monochrome', 'splash', 'favicon') or name not in ASSETS:
+        raise HTTPException(404, 'Unknown launch asset')
     return await public_asset_response(name)
 
 

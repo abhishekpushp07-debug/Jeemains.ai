@@ -10,6 +10,8 @@ import { ErrorBoundary } from "@/src/components/error-boundary";
 import { AuthProvider, useAuth } from "@/src/auth";
 import { colors } from "@/src/theme";
 
+const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account"];
+
 LogBox.ignoreAllLogs(true);
 
 export default function RootLayout() {
@@ -49,7 +51,7 @@ function AuthGate() {
   const router = useRouter();
   useEffect(() => {
     const first = segments[0] as string | undefined;
-    if (ready && !user && first && !["entry", "forgot-pin"].includes(first)) router.replace("/entry");
+    if (ready && !user && first && !PUBLIC_ROUTES.includes(first)) router.replace("/entry");
   }, [ready, user, segments, router]);
   return null;
 }
@@ -57,8 +59,11 @@ function AuthGate() {
 function SessionBoundary({ children }: { children: React.ReactNode }) {
   const { ready, user } = useAuth();
   const segments = useSegments();
-  const publicScreen = ["entry", "forgot-pin"].includes(segments[0] as string);
-  const blocked = !ready || (!user && !publicScreen);
+  const first = segments[0] as string;
+  const publicScreen = PUBLIC_ROUTES.includes(first);
+  // Public help/entry/policy must stay usable while the account server connects.
+  // Private routes remain covered until a verified session has settled.
+  const blocked = !publicScreen && (!ready || !user);
   // Keep the root navigator mounted (required for Expo deep links), but never
   // expose a private route while validating or redirecting an expired session.
   return <View style={styles.root}>

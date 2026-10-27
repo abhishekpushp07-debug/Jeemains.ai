@@ -42,8 +42,8 @@ export function Press({ onPress, style, children, disabled, testID, accessibilit
       aria-expanded={accessibilityState?.expanded}
       aria-disabled={!!disabled}
       disabled={disabled}
-      onPressIn={() => (s.value = withTiming(scaleTo, { duration: 90 }))}
-      onPressOut={() => (s.value = withTiming(1, { duration: 140 }))}
+      onPressIn={() => s.set(withTiming(scaleTo, { duration: 90 }))}
+      onPressOut={() => s.set(withTiming(1, { duration: 140 }))}
       onPress={() => {
         if (haptic) tap();
         onPress?.();
@@ -65,7 +65,7 @@ export function Button({ label, onPress, kind = "primary", icon, busy, disabled,
     <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={label}
       style={[{ minHeight: 50, borderRadius: radius.md, backgroundColor: bg, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.sm, paddingHorizontal: space.lg, borderWidth: kind === "secondary" ? 1 : 0, borderColor: colors.border }, style]}>
       {busy ? <ActivityIndicator color={fg} /> : icon ? <Icon name={icon} size={19} color={fg} /> : null}
-      <T w="bold" size={15} color={fg}>{label}</T>
+      <T testID={testID ? `${testID}-label` : undefined} w="bold" size={15} color={fg}>{label}</T>
     </Press>
   );
 }
@@ -160,7 +160,7 @@ export function Header({ title, eyebrow, onBack, right, color, testID, backTestI
       ) : null}
       <View style={{ flex: 1 }}>
         {eyebrow ? <T w="bold" size={11} color={color ?? colors.muted} style={{ letterSpacing: 1.2 }}>{eyebrow.toUpperCase()}</T> : null}
-        <T w="heavy" size={22} numberOfLines={2}>{title}</T>
+        <T testID={testID ? `${testID}-title` : undefined} w="heavy" size={22} numberOfLines={2}>{title}</T>
       </View>
       {right}
     </View>

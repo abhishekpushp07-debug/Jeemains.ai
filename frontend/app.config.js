@@ -3,6 +3,11 @@ module.exports = ({ config }) => {
   const arm64 = process.env.JEELIVE_ANDROID_ARM64_ONLY === "1";
   return {
     ...config,
+    extra: {
+      ...config.extra,
+      backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
+      jeeliveApi: process.env.EXPO_PUBLIC_JEELIVE_API,
+    },
     plugins: (config.plugins || []).map(plugin => {
       const name = Array.isArray(plugin) ? plugin[0] : plugin;
       if (name !== "expo-build-properties") return plugin;
