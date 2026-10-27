@@ -1,4 +1,4 @@
-export type AssetValue = { uri: string; bytes: number; dispose?: () => void };
+export type AssetValue = { uri: string; bytes: number; width?: number; height?: number; cacheKey?: string; dispose?: () => void };
 type Job = { path: string; priority: number; generation: number; ctl: AbortController; promise: Promise<string>; resolve: (uri: string) => void; reject: (e: unknown) => void; running: boolean };
 export type AssetProgress = { total: number; ready: number; failed: number; queued: number; limited: boolean };
 const cancelled = () => Object.assign(new Error("Private image loading stopped."), { name: "AbortError" });
@@ -9,6 +9,8 @@ export class PrivateAssetQueue {
   private jobs = new Map<string, Job>();
   private failures = new Map<string, { error: unknown; after: number }>();
   private listeners = new Set<() => void>();
+  private pathListeners = new Map<string, Set<() => void>>();
+  private changedPaths = new Set<string>();
   private generation = 0;
   private active = 0;
   private bytes = 0;
@@ -18,20 +20,34 @@ export class PrivateAssetQueue {
   private group = "";
   private enabled = true;
   private pinned = new Set<string>();
+  private preferred = new Set<string>();
   constructor(private load: (path: string, signal: AbortSignal) => Promise<AssetValue>, readonly concurrency = 6, readonly maxBytes = 48 * 1024 * 1024, private permitted = (_path: string) => true) {}
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   snapshot = () => this.revision;
-  private notify() {
+  subscribePath = (path: string, listener: () => void) => {
+    let listeners = this.pathListeners.get(path);
+    if (!listeners) { listeners = new Set(); this.pathListeners.set(path, listeners); }
+    listeners.add(listener);
+    return () => { listeners.delete(listener); if (!listeners.size) this.pathListeners.delete(path); };
+  };
+  value(path: string) { return this.cache.get(path); }
+  private notify(path?: string) {
+    if (path) this.changedPaths.add(path);
     this.revision++;
-    if (!this.notification) this.notification = setTimeout(() => { this.notification = undefined; this.listeners.forEach(fn => fn()); }, 0);
+    if (!this.notification) this.notification = setTimeout(() => {
+      this.notification = undefined;
+      const paths = [...this.changedPaths]; this.changedPaths.clear();
+      this.listeners.forEach(fn => fn());
+      paths.forEach(p => this.pathListeners.get(p)?.forEach(fn => fn()));
+    }, 0);
   }
   peek(path: string) { return this.cache.get(path)?.uri; }
   isGroup(group: string) { return group === this.group; }
-  pin(paths: string[]) { this.pinned = new Set(paths); }
+  pin(paths: string[], neighbours: string[] = []) { this.pinned = new Set(paths); this.preferred = new Set(neighbours); }
   invalidate(path: string) {
     const old = this.cache.get(path); if (old) { old.dispose?.(); this.bytes -= old.bytes; this.cache.delete(path); }
     const job = this.jobs.get(path); if (job) { job.ctl.abort(); this.jobs.delete(path); job.reject(cancelled()); }
-    this.failures.delete(path); this.admitted.delete(path); this.notify();
+    this.failures.delete(path); this.admitted.delete(path); this.notify(path);
   }
   status(path: string) { return this.cache.has(path) ? "ready" : this.failures.has(path) ? "failed" : this.jobs.has(path) ? "loading" : "idle"; }
   progress(paths: string[]): AssetProgress {
@@ -42,7 +58,7 @@ export class PrivateAssetQueue {
   }
   selectGroup(group: string) {
     if (group === this.group) return;
-    this.group = group; this.admitted.clear(); this.pinned.clear();
+    this.group = group; this.admitted.clear(); this.pinned.clear(); this.preferred.clear();
     for (const job of [...this.jobs.values()]) {
       if (job.priority < 100) { job.ctl.abort(); this.jobs.delete(job.path); job.reject(cancelled()); }
     }
@@ -52,11 +68,14 @@ export class PrivateAssetQueue {
     if (!this.enabled) return;
     // Jobs contain paths only. Encrypted disk persistence lets the entire paper
     // finish downloading even when older decoded images leave the RAM window.
+    // Reorder queued work on a subject/grid jump, not just on the first preload.
+    paths.forEach((path, i) => { const job = this.jobs.get(path); if (job && !job.running && job.priority < 100) job.priority = 10 + (paths.length - i) / Math.max(1, paths.length); });
     for (const path of paths) {
       if (this.admitted.has(path) || this.cache.has(path)) continue;
       this.admitted.add(path);
       void this.get(path, 10).catch(() => {});
     }
+    this.pump();
   }
   retry(paths: string[]) {
     for (const path of paths) { const fail = this.failures.get(path); if (fail && Date.now() >= fail.after) { this.failures.delete(path); this.admitted.delete(path); } }
@@ -74,7 +93,7 @@ export class PrivateAssetQueue {
     let resolve!: (uri: string) => void, reject!: (e: unknown) => void;
     const promise = new Promise<string>((yes, no) => { resolve = yes; reject = no; });
     this.jobs.set(path, { path, priority, generation: this.generation, ctl: new AbortController(), promise, resolve, reject, running: false });
-    this.notify(); this.pump(); return promise;
+    this.notify(path); this.pump(); return promise;
   }
   private pump() {
     while (this.active < this.concurrency) {
@@ -87,9 +106,10 @@ export class PrivateAssetQueue {
         if (job.generation !== this.generation || job.ctl.signal.aborted) { value.dispose?.(); throw cancelled(); }
         // Account for URI memory, and release browser object URLs upon eviction.
         while (this.bytes + value.bytes > this.maxBytes && this.cache.size) {
-          const oldest = [...this.cache.entries()].find(([path]) => !this.pinned.has(path));
+          const entries = [...this.cache.entries()];
+          const oldest = entries.find(([path]) => !this.pinned.has(path) && !this.preferred.has(path)) || entries.find(([path]) => !this.pinned.has(path));
           if (!oldest) break;
-          this.cache.delete(oldest[0]); this.bytes -= oldest[1].bytes; oldest[1].dispose?.();
+          this.cache.delete(oldest[0]); this.bytes -= oldest[1].bytes; oldest[1].dispose?.(); this.notify(oldest[0]);
         }
         if (this.bytes + value.bytes > this.maxBytes) { value.dispose?.(); throw new Error("This source image exceeds safe image memory. Close other papers and retry."); }
         this.cache.set(job.path, value); this.bytes += value.bytes;
@@ -100,16 +120,17 @@ export class PrivateAssetQueue {
       }).finally(() => {
         this.active--;
         if (this.jobs.get(job.path) === job) this.jobs.delete(job.path);
-        this.notify(); this.pump();
+        this.notify(job.path); this.pump();
       });
     }
   }
   clear() {
     this.generation++;
+    for (const path of this.pathListeners.keys()) this.changedPaths.add(path);
     for (const job of this.jobs.values()) { job.ctl.abort(); job.reject(cancelled()); }
     this.jobs.clear();
     for (const value of this.cache.values()) value.dispose?.();
-    this.cache.clear(); this.failures.clear(); this.admitted.clear(); this.pinned.clear(); this.bytes = 0; this.group = "";
+    this.cache.clear(); this.failures.clear(); this.admitted.clear(); this.pinned.clear(); this.preferred.clear(); this.bytes = 0; this.group = "";
     this.notify();
   }
   pause() { this.enabled = false; this.clear(); }

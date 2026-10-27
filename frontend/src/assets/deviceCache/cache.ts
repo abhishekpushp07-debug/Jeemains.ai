@@ -5,13 +5,20 @@ import { packImage, SavedImage, unpackImage } from "./types";
 let scope = "", generation = 0;
 let ready: Promise<void> = Promise.resolve();
 const writing = new Map<string, Promise<void>>();
+const hashes = new Map<string, Promise<string>>();
 const hash = (text: string) => digestStringAsync(CryptoDigestAlgorithm.SHA256, text);
+function imageId(text: string) {
+  let result = hashes.get(text);
+  if (!result) { result = hash(text); hashes.set(text, result); if (hashes.size > 512) hashes.delete(hashes.keys().next().value!); void result.catch(() => hashes.delete(text)); }
+  return result;
+}
 export function configureImageDisk(account: string, origin: string) {
   const epoch = ++generation;
+  scope = ""; hashes.clear();
   ready = (async () => { const next = await hash(`${origin}|${account}`); if (epoch !== generation) return; scope = next; await deviceStore.open(next); })().catch(() => { if (epoch === generation) scope = ""; });
 }
 export function purgeImageDisk() {
-  generation++; scope = ""; writing.clear();
+  generation++; scope = ""; writing.clear(); hashes.clear();
   ready = deviceStore.clear().catch(() => {});
 }
 export async function readSavedImage(contentKey: string): Promise<SavedImage | null> {
@@ -20,7 +27,8 @@ export async function readSavedImage(contentKey: string): Promise<SavedImage | n
     if (!scope || epoch !== generation) return null;
     await writing.get(contentKey);
     if (epoch !== generation) return null;
-    const owner = scope, id = await hash(contentKey);
+    const owner = scope, id = await imageId(contentKey);
+    if (epoch !== generation) return null;
     const data = await deviceStore.read(owner, id);
     if (!data || epoch !== generation) return null;
     try { return unpackImage(data); } catch { await deviceStore.remove(owner, id); return null; }
@@ -29,7 +37,7 @@ export async function readSavedImage(contentKey: string): Promise<SavedImage | n
 async function persistImage(contentKey: string, image: SavedImage) {
   const epoch = generation; await ready;
   if (!scope || epoch !== generation) return;
-  const owner = scope, id = await hash(contentKey);
+  const owner = scope, id = await imageId(contentKey);
   if (epoch !== generation) return;
   try { await deviceStore.write(owner, id, packImage(image)); } catch { /* optional cache cannot block original paper */ }
 }

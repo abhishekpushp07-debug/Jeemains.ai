@@ -40,6 +40,7 @@ export default function Account() {
         <Notice testID="account-pin-notice">Sign in with your mobile number and 4-digit PIN. A PIN does not verify phone ownership; no OTP is sent.</Notice>
         {user?.role === "student" ? <Button testID="account-change-pin-button" label="Change PIN" icon="lock-reset" onPress={() => router.push("/change-pin")} /> : null}
         <Button testID="account-pin-help-button" label="PIN & account access help" kind="secondary" icon="help-circle-outline" onPress={() => router.push("/forgot-pin")} />
+        <Button testID="account-loading-performance" label="Loading performance" kind="secondary" icon="speedometer" onPress={() => router.push("/performance")} />
         {expired ? (
           <Button testID="account-reenter-button" label="Sign in again" icon="login" onPress={() => finish("keep")} />
         ) : null}

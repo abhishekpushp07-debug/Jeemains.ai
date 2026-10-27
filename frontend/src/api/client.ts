@@ -8,6 +8,7 @@ import { clearImageGrants, imageGrant, registerImageGrants } from "@/src/assets/
 import { configureImageDisk, purgeImageDisk } from "@/src/assets/deviceCache/cache";
 import { ImageResponse, loadOriginalImage } from "@/src/assets/imageDownload";
 import { resources } from "@/src/resourceCache";
+import { requestDeadline, RequestDeadlineError } from "./requestDeadline";
 
 // Native talks to jeelive.ai directly (cookie session, no extra hop).
 // Web preview cannot carry jeelive.ai cookies cross-origin, so it uses a thin pass-through proxy.
@@ -108,16 +109,23 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
   const method = opts.method || "GET";
   const body = opts.body === undefined ? (method === "GET" ? undefined : "{}") : JSON.stringify(opts.body);
   let res: Response;
+  let payload: any = null;
   try {
     // Account-scoped JSON freshness is controlled by our explicit cache, never
     // a browser HTTP cache shared across different X-JL-Sid sessions.
     const options = { method, body, credentials: "include" as const, headers: await headers(body !== undefined), signal: opts.signal,
       ...(WEB ? { cache: "no-store" as const } : {}) };
-    res = !opts.signal && (path.startsWith("/auth/") || method === "GET")
-      ? await boundedAuthFetch(BASE + path, options, 32000, path.startsWith("/auth/") ? undefined : "The server is taking longer than usual. Please try again.")
-      : await fetch(BASE + path, options);
+    // Supplying a cancellation signal must not disable the request deadline.
+    // Keep it active through JSON consumption, including slow/chunked bodies.
+    const received = await requestDeadline(async signal => {
+      const response = await fetch(BASE + path, { ...options, signal });
+      const data = await response.json().catch(() => null);
+      return { response, data };
+    }, 32000, opts.signal);
+    res = received.response; payload = received.data;
   } catch (e: any) {
     if (e?.name === "AbortError") throw e;
+    if (e instanceof RequestDeadlineError) throw new ApiError("The server is taking longer than usual. Please try again. Your last saved work is safe.", 503);
     if (e instanceof ApiError) throw e;
     throw new ApiError("Connection interrupted. Your last saved work is safe. Please try again.", 0);
   }
@@ -128,10 +136,6 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
     if (retry && await refresh()) return apiRaw<T>(path, opts, false);
     onAuthLost?.();
   }
-  let payload: any = null;
-  try {
-    payload = await res.json();
-  } catch {}
   if (!res.ok) {
     const d = payload?.error?.message || payload?.detail;
     const msg = typeof d === "string" ? d : Array.isArray(d) ? d.map((x: any) => x.msg).join(". ") : "This request could not finish. Please try again.";

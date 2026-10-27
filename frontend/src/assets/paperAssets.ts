@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useSyncExternalStore } from "react";
+import { useCallback, useLayoutEffect, useMemo } from "react";
 import { useFocusEffect } from "expo-router";
 import { privateAssets, registerAssetManifest } from "@/src/api/client";
 
@@ -22,22 +22,26 @@ export function prioritizedPaths(id: string, rows: PaperQuestion[], selected: st
 }
 export function usePaperAssets(id: string, rows: PaperQuestion[], selected?: string, solutions = false, version = "original", enabled = true) {
   const paths = useMemo(() => prioritizedPaths(id, rows, selected, solutions, version), [id, rows, selected, solutions, version]);
-  const revision = useSyncExternalStore(privateAssets.subscribe, privateAssets.snapshot, privateAssets.snapshot);
+  const window = useMemo(() => {
+    const current = rows.find(q => q.id === selected) || rows[0];
+    const subject = rows.filter(q => subjectOf(q) === subjectOf(current));
+    const i = subject.indexOf(current);
+    const around = [subject[i + 1], subject[i + 2], subject[i - 1]].filter(Boolean);
+    return around.flatMap(q => [...imagePaths(id, q, "question", version), ...(solutions ? imagePaths(id, q, "solution", version) : [])]).slice(0, 6);
+  }, [id, rows, selected, solutions, version]);
   useLayoutEffect(() => { if (enabled && rows.length) registerAssetManifest(id, rows, solutions, version); }, [id, rows, solutions, version, enabled]);
-  useFocusEffect(useCallback(() => { if (enabled) privateAssets.selectGroup(id); }, [id, enabled]));
-  useEffect(() => {
-    if (!enabled || !rows.length || !privateAssets.isGroup(id)) return;
-    privateAssets.preload(paths);
-  }, [id, rows.length, paths, enabled, revision]);
-  useEffect(() => {
-    if (!enabled || !rows.length || !privateAssets.isGroup(id)) return;
+  useFocusEffect(useCallback(() => {
+    if (!enabled || !rows.length) return;
+    privateAssets.selectGroup(id);
     // Promote every current crop above the background queue. No solution access
     // exists here until the caller has a released200 result payload.
     const current = rows.find(q => q.id === selected) || rows[0];
     const focus = [...imagePaths(id, current, "question", version), ...(solutions ? imagePaths(id, current, "solution", version) : [])];
-    privateAssets.pin(focus);
+    privateAssets.pin(focus, window);
     focus.forEach(path => { void privateAssets.get(path, 100).catch(() => {}); });
-  }, [id, rows, selected, solutions, version, enabled]);
-  const retry = useCallback(() => privateAssets.retry(paths), [paths]);
-  return { ...privateAssets.progress(enabled ? paths : []), retry };
+    window.forEach(path => { void privateAssets.get(path, 80).catch(() => {}); });
+    privateAssets.preload(paths);
+  }, [id, rows, selected, solutions, version, enabled, paths, window]));
+  // No global progress subscription: downloading Q75 must not render Q1 again.
+  return enabled ? window : [];
 }

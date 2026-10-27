@@ -1,11 +1,12 @@
 import { Directory, File, Paths } from "expo-file-system";
 import * as SecureStore from "expo-secure-store";
 import { AESEncryptionKey, AESSealedData, aesEncryptAsync, aesDecryptAsync } from "expo-crypto";
-import { DeviceStore, DISK_BUDGET, MAX_IMAGE, serialOperations } from "./types";
+import { DeviceStore, DISK_BUDGET, MAX_IMAGE } from "./types";
+import { priorityOperations } from "./priorityOperations";
 
 const KEY = "jeelive.private-images.v1";
 const root = () => new Directory(Paths.cache, "jeelive-private-images-v1");
-const serial = serialOperations();
+const serial = priorityOperations();
 let scope = "", key: AESEncryptionKey | null = null;
 let index: Record<string, { size: number; used: number }> = {};
 const aad = (owner: string, id: string) => new TextEncoder().encode(`jeelive-images-v1|${owner}|${id}`);
@@ -42,7 +43,7 @@ export const deviceStore: DeviceStore = {
     // No source URLs, private text or unencrypted image bytes are ever written.
     const keep = new Set(Object.keys(index).filter(id => /^[a-f0-9]{64}$/.test(id)));
     for (const item of root().list()) if (item instanceof File && (item.name.endsWith(".tmp") || (item.name.endsWith(".bin") && !keep.has(item.name.slice(0, -4))))) await item.delete();
-  }),
+  }, 0, true),
   read: (owner, id) => serial(async () => {
     if (owner !== scope || !key || !/^[a-f0-9]{64}$/.test(id) || !index[id]) return null;
     const file = new File(root(), `${id}.bin`);
@@ -51,7 +52,7 @@ export const deviceStore: DeviceStore = {
       const plain = await aesDecryptAsync(AESSealedData.fromCombined(await file.bytes()), key, { additionalData: aad(owner, id) });
       index[id].used = Date.now(); return plain;
     } catch { await remove(id); await saveIndex(); return null; }
-  }),
+  }, 100),
   write: (owner, id, bytes) => serial(async () => {
     if (scope !== owner || !key || bytes.length > MAX_IMAGE + 4096 || !/^[a-f0-9]{64}$/.test(id)) return;
     const sealed = await aesEncryptAsync(bytes, key, { additionalData: aad(owner, id) });
@@ -66,5 +67,5 @@ export const deviceStore: DeviceStore = {
     index[id] = { size: encrypted.length, used: Date.now() }; await saveIndex();
   }),
   remove: (owner, id) => serial(async () => { if (owner === scope) { await remove(id); await saveIndex(); } }),
-  clear: () => serial(reset),
+  clear: () => serial(reset, 0, true),
 };

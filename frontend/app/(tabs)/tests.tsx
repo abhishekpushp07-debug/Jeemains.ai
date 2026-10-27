@@ -38,7 +38,6 @@ export default function MyTests() {
     const t = setTimeout(() => setQuery(q.trim()), 300);
     return () => clearTimeout(t);
   }, [q]);
-  useEffect(() => setSelected([]), [tab, exam]);
   const params = new URLSearchParams({ tab, page: "1", q: query, status, exam }).toString();
   const list = useCached<any>(user ? `u.${user.id}.tests.${params}` : null, (signal) => api("/my/tests?" + params, { signal }));
 
@@ -110,7 +109,7 @@ export default function MyTests() {
         {user?.access_type === "unverified_phone" ? <T size={11} color={colors.muted} testID="my-tests-identity-notice">This number’s profile is not a verified identity.</T> : null}
         <View style={styles.tabs}>
           {(["progress", "saved", "completed"] as Tab[]).map((t) => (
-            <Press key={t} testID={"my-tests-tab-" + t} accessibilityRole="tab" accessibilityState={{ selected: tab === t }} onPress={() => { setTab(t); setStatus("all"); }} style={[styles.tab, { backgroundColor: tab === t ? academicStyles.selectedTab.backgroundColor : academicStyles.tab.backgroundColor }]}>
+            <Press key={t} testID={"my-tests-tab-" + t} accessibilityRole="tab" accessibilityState={{ selected: tab === t }} onPress={() => { if (t !== tab) setSelected([]); setTab(t); setStatus("all"); }} style={[styles.tab, { backgroundColor: tab === t ? academicStyles.selectedTab.backgroundColor : academicStyles.tab.backgroundColor }]}>
               <T testID={`my-tests-tab-label-${t}`} w="bold" size={12} color={tab === t ? academicStyles.selectedTab.color : academicStyles.tab.color}>{t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed"}</T>
               {list.data?.counts ? <T testID={`my-tests-count-${t}`} w="bold" size={11} color={colors.muted} style={styles.count}>{list.data.counts[t]}</T> : null}
             </Press>
@@ -125,7 +124,7 @@ export default function MyTests() {
         <FlatList horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
           data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), ...["", "JEE Main", "BITSAT", "COMEDK"].map((e) => ({ k: "e" + e, v: e, l: e || "All exams", kind: "exam" }))]}
           keyExtractor={(x) => x.k}
-          renderItem={({ item }) => <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} color={item.kind === "exam" ? colors.custom_seriesBright : colors.brandPrimary} onPress={() => (item.kind === "status" ? setStatus(item.v) : setExam(item.v))} />}
+          renderItem={({ item }) => <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} color={item.kind === "exam" ? colors.custom_seriesBright : colors.brandPrimary} onPress={() => { if (item.kind === "status") setStatus(item.v); else { if (item.v !== exam) setSelected([]); setExam(item.v); } }} />}
         />
       </View>
       {selected.length > 0 ? (
@@ -143,7 +142,7 @@ export default function MyTests() {
           <ErrorBox error={list.error} retry={list.reload} testID="my-tests-error" />
           {tab === "completed" ? <T size={11} color={colors.muted} testID="my-tests-comparison-help">Select two attempts of the same paper and version to compare.</T> : null}
         </>}
-        ListEmptyComponent={list.loading ? <View style={{ gap: space.md }}><Skeleton h={110} /><Skeleton h={110} /></View> : (
+        ListEmptyComponent={list.loading ? <View style={{ gap: space.md }}><Skeleton h={110} /><Skeleton h={110} /></View> : list.error ? <T testID="my-tests-unavailable" size={13} color={colors.muted}>Your tests could not be loaded. Your saved attempts have not been changed. Use Retry above.</T> : (
           <Card testID="my-tests-empty"><Empty icon="bookmark-outline" title={query || exam || status !== "all" ? "No tests match these filters." : tab === "saved" ? "Your next tests, kept here." : tab === "progress" ? "Ready for a fresh start?" : "Your journey starts with one attempt."} body={tab === "saved" ? "Tap Save on any paper. It won’t start an attempt." : "Existing attempts appear here automatically."} action={<Button testID="my-tests-discover" label="Explore exams" onPress={() => router.push("/(tabs)")} />} /></Card>
         )}
       />

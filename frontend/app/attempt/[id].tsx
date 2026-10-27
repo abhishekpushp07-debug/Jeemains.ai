@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BackHandler, ScrollView, TextInput, View } from "react-native";
+import { BackHandler, ScrollView, TextInput, View, useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
@@ -8,6 +8,7 @@ import { availableQuestions, imagePaths, usePaperAssets } from "@/src/assets/pap
 import { SubjectTabs, QuestionGrid, useSubjectNavigation } from "@/src/components/player/SubjectNavigation";
 import { invalidate } from "@/src/useCached";
 import { AssetImage } from "@/src/components/AssetImage";
+import { ImageWarmup } from "@/src/components/player/ImageWarmup";
 import { MathText } from "@/src/components/MathText";
 import { Button, Chip, ErrorBox, Icon, IconName, Notice, Press, Sheet, Skeleton, T, tap } from "@/src/components/ui";
 import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
@@ -30,6 +31,7 @@ export default function Player() {
   const { user } = useAuth();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const toResult = () => { invalidate(`u.${user?.id}.`); router.replace(`/result/${id}`); };
   const A = useAttempt(id!, user?.id || "anon", toResult);
   const a = A.attempt;
@@ -46,7 +48,7 @@ export default function Player() {
   const questions = useMemo(() => availableQuestions<any>(a?.questions || [], bonusOpen), [a?.questions, bonusOpen]);
   const nav = useSubjectNavigation<any>(questions);
   const q = nav.question;
-  usePaperAssets(id!, questions, q?.id, false);
+  const warmPaths = usePaperAssets(id!, questions, q?.id, false);
   useEffect(() => { if (q) A.visit(q.id); }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     reading.current?.scrollTo({ y: 0, animated: false });
@@ -106,6 +108,7 @@ export default function Player() {
 
   return (
     <View testID="player-screen" style={{ flex: 1, backgroundColor: colors.surface }}>
+      <ImageWarmup paths={warmPaths} width={Math.max(1, width - 2 * space.md - 2 * space.lg - 2)} />
       <View style={{ paddingTop: insets.top + space.xs, paddingHorizontal: space.md, paddingBottom: space.sm, backgroundColor: colors.surfaceSecondary, borderBottomWidth: 1, borderBottomColor: colors.border, gap: space.sm }}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
           <Press testID="player-exit-button" onPress={() => setSheet("exit")} accessibilityLabel="Leave attempt" style={{ width: 44, height: 44, alignItems: "center", justifyContent: "center" }}>

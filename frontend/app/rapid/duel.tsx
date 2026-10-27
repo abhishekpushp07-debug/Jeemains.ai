@@ -56,7 +56,7 @@ function DuelRound() {
   const uid = user?.id || "";
   const name = playerName(user?.phone);
   const [d, setD] = useState<any>(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(() => (p.exam && p.exam !== "JEE") || p.subject === "Biology" ? "This practice is archived. Return to JEE Main Rapid Fire." : "");
   const [idx, setIdx] = useState(0);
   const [choice, setChoice] = useState<number | null>(null);
   const [fb, setFb] = useState<any>(null);
@@ -82,9 +82,7 @@ function DuelRound() {
   useEffect(() => {
     let alive = true;
     if (!uid) return; // wait for auth hydration (cold deep-link from an invite would 401)
-    setError("");
     if ((p.exam && p.exam !== "JEE") || p.subject === "Biology") {
-      setError("This practice is archived. Return to JEE Main Rapid Fire.");
       return;
     }
     const run = p.review ? rf(`/duels/${p.review}`, uid)
@@ -126,15 +124,15 @@ function DuelRound() {
     return () => { stop = true; clearTimeout(retry); clearInterval(ping); clearInterval(poll); ws?.close(); };
   }, [d?.id, over, uid, apply]);
 
-  useEffect(() => {
-    const iv = setInterval(() => setNow(serverNow()), 250);
-    return () => clearInterval(iv);
-  }, []);
-
   const me = d?.players?.find((x: any) => x.you);
   const opp = d?.players?.find((x: any) => !x.you);
   // First card waits for both the server start time and the full 4 s entry show.
   const started = d?.status === "ready" && d.start_at && now >= d.start_at && intro === d.id;
+  useEffect(() => {
+    if (started || over) return;
+    const iv = setInterval(() => setNow(serverNow()), 250);
+    return () => clearInterval(iv);
+  }, [started, over]);
   const total = d?.total || 30;
   const card = d?.cards?.[idx];
   const verdict = fb && fb.index === idx ? fb : null;
@@ -147,6 +145,8 @@ function DuelRound() {
   useEffect(() => {
     if (!started || !card) return;
     startedAt.current = mono();
+    // Reset card controls once without remounting offline maths views.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setChoice(null);
     setFb(null);
     setLeft(LIMIT);
@@ -176,7 +176,7 @@ function DuelRound() {
     if (!started || !card || choice !== null || fb) return;
     const iv = setInterval(() => {
       const l = LIMIT - (mono() - startedAt.current);
-      setLeft(Math.max(0, l));
+      setLeft(previous => Math.ceil(previous / 1000) === Math.ceil(Math.max(0, l) / 1000) ? previous : Math.max(0, l));
       if (l <= 0) {
         setChoice(-1);
         send("timed_out", null);
@@ -253,7 +253,7 @@ function DuelRound() {
           <T w="heavy" size={15} color={colors.onSurfaceInverse} testID="duel-card-counter">Card {idx + 1} / {total}</T>
           <Ring light left={left} color={tint} />
         </View>
-        <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(160)} testID="duel-card" style={[styles.questionCard, { borderColor: verdict ? (verdict.outcome === "correct" ? colors.success : verdict.outcome === "incorrect" ? colors.error : colors.warning) : tint + "66" }]}>
+        <Animated.View entering={reduced ? undefined : FadeIn.duration(160)} testID="duel-card" style={[styles.questionCard, { borderColor: verdict ? (verdict.outcome === "correct" ? colors.success : verdict.outcome === "incorrect" ? colors.error : colors.warning) : tint + "66" }]}>
           <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
             <T w="bold" size={11} color={colors.muted}>{card.chapter}</T>
             {verdict ? (

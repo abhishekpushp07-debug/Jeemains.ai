@@ -345,3 +345,49 @@ api_speed_redis_current:
   validation: "Final25backendpassed1skip1canonicaldeselected; frontendcacheunits/TSC/lintpassed. Redisstopfailopen/privatepermissions/noauthdata/protectedartworkschecked. CORSnowexactconfiguredorigins, trusted200/foreign400."
   preservation: "ExactQAfixturesremoved.344profiles/10257Coins/399awardrecords; fullprotectedfingerprintsunchanged.2non-QA-taggedJEEduels(cancelled/ready)foundinfinalinspectionanddeliberatelyretained; donotresetnewplayhistory."
   caveats: "PhysicalAndroidandAPKsizemeasurementpending; canonicalupstream502/503notfixedbyRedis; no worldfastest/under20MBguarantee. Fixtureauthonlyinharness, no productionmockedAPIs."
+
+## Iteration48 — native image/render pipeline deep optimization (verification pending)
+user_confirmation: "Haan, investigate → fix → test. Mera xareer k baat hai deep me jao world best banao."
+frontend_loading_current:
+  implemented: true
+  working: NA
+  needs_retesting: true
+  stuck_count: 2
+  priority: high
+  status: "User still finds physicalAndroid questions/solutions/cards sluggish after Redis. Native canonical transport does NOT use proxyRedis. Address actual image, encrypted disk and React rendering pipeline; do not claim phone performance from web."
+  changes:
+    - "Path-specific queue subscriptions + memo AssetImage; no global download-progress subscription on Player/Result. Queue reprioritizes subject jumps, current crops reserved, neighbour soft-LRU retention, independent Result/Solutions focus scheduling."
+    - "Encrypted native/web reads overtake queued background writes via barrier-aware scheduler; SHA IDs coalesced; scope generations preserved. Native FileReader/Blob roundtrip replaced with bounded48KiB yielding base64; PNG/JPEG/WebP/GIF dimensions parsed before paint, bytes unmodified."
+    - "Native-only decoded-memory warmup for next2/previous images (max6 crops,4MiB estimated decodeeach); memory-only expoImage with opaque per-value cachekeys. NO Image.loadAsync/writeToCacheAsync because plaintextdisk controls unsuitable."
+    - "Stable offlineMath WebView shell + revision-checked RAM DOM updates; bundledCSS/fonts no longer resent/reparsed perquestion. memoRapidText, remove card-key WebView remount, RF100ms expiry checks retained but second-only UI updates; SVG native animation."
+    - "Account->Loadingperformance: boundeddeviceRAM stagep50/p95 counts, reset/shareaggregateonly. No private text,IDs,URLs,PINs or automaticupload."
+  main_checks: "TypeScript + strictESLint all touchedfiles PASS. Main390 entry screenshot PASS. No backendcode/auth/APIcontract/db/content/attemptwrites; no new dependencies."
+test_plan_iter48:
+  current_focus:
+    - "Queue path notifications/75-image renderfanout vs baseline63241ad, reservedslot/dedup/reprioritization/softpins/budgets/abort/logouts"
+    - "priorityOperations read-aheadwrite and open/clear barriers inclerror; nativeStore stubs/read+write encryption paths and realwebIndexedDB accountisolation"
+    - "Exact nativebase64binary roundtrip/chunkboundaries/abort/yield; headerdimensions variants/corrupt; no staleURIafterinvalidate; original unchanged/grant/version/429guard"
+    - "OfflineMath actualHTMLshell in browser harness (nativebridge simulatedonly), ready/update/fastswitch/staleACK/ResizeObserver/fonts/no source reload/HTMLescape+CSP/externalURLblock. RapidText no nonmathTeXwork; timer still20s/no answer/scoring changes"
+    - "Read-only real canonical PINlogin/catalog/available sourceimage hash parity; NO academicstart/visit/answer/submit/solution-open/PINchange. IsolatedUIfixtures for player/releasedsolutions if necessary; labelseparately. ActualRF tests can use exact-cleaned localTESTfixtures periter43, no userwallet mutations."
+    - "Preview390/320 homeoriginalartworks/playernavigation/solutiongrid+zoom/imageanswerblock/retry/failure/RF30cards+timeout+advancing/diagnosticsreset & boundedredactedshare. Capture measures, neverpresent browser asAndroidperformance."
+  limitations: "PhysicalAndroid unavailable; APK/AAB not built here (<20MB unverified). Upstream503/520 remains externalP1; existing readonlyretry timings are22sasset/28sJSON vs25sasset/32sJSONclient, NOT RF15s (separateAPI). Do not increase alltimeouts based on incorrectRCA."
+agent_communication_iter48:
+  - agent: main
+    message: "Please create iteration48 tests/report; existingtests import stub dependencies may need added newlyintroduced imports/stubmethods (testharness only, do not weakenassertions). Verify realproduction no mockedAPIs; syntheticfixtures tests only. Read memorytestcredentials latest first (approvedlivePIN works sinceiter42); reuse1login,stop401/429. Preserve academicrecords and NEET/walletdata. Native lack of hardware honest; validate platform-code using spies+realbrowser document. Compare beforecode from gitshow63241ad, no reset."
+
+iteration48_followup_for_iter49:
+  superseded_by: "iteration49_main_final below; earlier remaining_tests are historical requests, not a claim of completed coverage."
+  findings: "Report48 isolated5/5 + iter40 12/12 PASS; backend4PASS1SKIP; home390/320/performance UIpass. Directcanonicalauth timedout, parity3SKIP. Claimed infinitespinner not established: troubleshoot verified GETauth/session may rotatecookies per reference/handoff/01_BACKEND_AND_AUTH.md, correctnoretry; frontendalreadyfinallyreadytrue anderror UI. Rootintermittent24sreadtimeout isupstream, notRedis. Keepbackendpolicyunchanged."
+  critical_fix: "NEW requestDeadline.ts wraps full JSON fetch+body with32sbudget evenwhen callerAbortSignal supplied. Races explicitabort tosettle evenifbodyreaderignores signal. Preserved401refresh/credentialnoautoretry/sessionexception andallURLs. Fixes unbounded stalledJSONbody onauth/attempt/result. No credentials modified. Integrationplaybookconsultedbeforepatch. TSC/strictESLintPASS; mainentry390checkPASS."
+  remaining_tests: "Need actualbrowserexerciseof OfflineMathHTML andRF/player/solution fixtures beyondpreviousstatics; prioritytestmustactuallyplace a highpriorityreadAFTERabarrier; nativeStore/APIspies+realwebIndexedDBtest, imagebase64deepEqual allbytes(not17samples). Criticalrequestdeadlinehelper+apiRaw same bodydeadline withcallerSignal/slowbody/32stimeout/error/cleanup/no PINPOSTretry tests. Forced503bootstrap showsentryerrornotendlessspinner. ActualPINsuccessseen inreport48; additionalparitymustdiscover OWN completedIDs viamy/tests, removehistorical9000000001 andsourceprojectIDs from test48 (differentaccount). No academicwrites. Synthetic testfixturesexplicitonly; no mockedproductionAPI."
+
+## Iteration49 main final verification — local optimization verified; native/upstream gates remain
+iteration49_main_final:
+  frontend_automated: "24PASS (iter40:12,iter48:5,iter49:7). StrictTSC/ESLint touchedfiles PASS. Bodydeadline actualapiRaw/callerabort/PINnoretry tests executed; priorityreadAFTERbarrier andallbytebase64SHA added. OfflineMath browserdocumentbridge verificationpass, notnativeWebViewhardware."
+  backend_gameplay: "Existingiter43 realRF API regression re-run:9PASS,1SKIP(no sparsechapter). XMLtest_reports/pytest/iter49_rf_gameplay_recheck.xml. ExactTEST-run records cleaned byfixture."
+  main_ui: "IsolatedRFauthbrowser+REALRFAPI/disposableQA:390feedback,Nextcard,320 untouchedcard20.4sexpiry/ring0,auto-next,answer-next-exit/finishsummaryPASS. Actualsource testIDs used afterscriptselector corrections; noapplicationgameplayfailurefound. Forced503session settles/Retryworks. MyTests newunavailablemessage verified390 forced503; falseemptyhistorycard absent."
+  live_readonly: "ApprovedrealPINloginPASS onwebproxy; initialownedcompletedlist14total/12loadedPASS. Latercanonical503AI/assets and520MyTests blocked releasedimage+zoomretest. Paritytests3SKIPdirectcanonicalReadTimeout; noPINguesses/resets/retriesandnoacademicPOSTsent. Inresultbrowseronly solution-open analyticsPOSTintercepted503 toprotectrecords; sourceimage GETsreal. Do notclaimliveimageE2Evalidatedthispass."
+  small_bug_fix: "MyTests no longerlabels serverfailure as emptyhistory; savedworkpreservedguidance. Comparisonselectionreset movedintotab/examevents(removesextraeffectrender). Verifiedscreenshot/loading-failure-not-empty-390.jpg."
+  preservation: "TemporaryUI3profiles/grants/matchesexact-UIDcleaned;grantfilesdeleted. iter43_baseline_guard_checkPASS:344originalprofiles,10257coins,originalwalletownership+archive fingerprints unchanged. PIN/sourcecontents/artworks/DBschema/env/nativeengineunchanged."
+  limitations: "P0physicalAndroidimagecache/decode/WebView/timingQA stillrequired; no signedAPK/AAB (<20MBunverified). NativeStore API-sim/realIndexedDB deepertests notnewlyperformed beyondexistinghelpertests. Externalcanonical503/520 persists; DONOTautoretrycookie-rotatingauth/session/PIN. No worldbest/instant/FPS claim."
+  reports: "test_reports/iteration_48.json,iteration_49.json,iteration_49_main_followup.json;reference/ITER49_NATIVE_LOADING.md;memory/PRD.md latestsection."

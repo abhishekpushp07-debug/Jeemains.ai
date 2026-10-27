@@ -1,7 +1,8 @@
-import { DeviceStore, DISK_BUDGET, MAX_IMAGE, serialOperations } from "./types";
+import { DeviceStore, DISK_BUDGET, MAX_IMAGE } from "./types";
+import { priorityOperations } from "./priorityOperations";
 
 type Entry = { id: string; iv: Uint8Array; cipher: ArrayBuffer; size: number; used: number };
-const serial = serialOperations();
+const serial = priorityOperations();
 let db: IDBDatabase | null = null, scope = "", key: CryptoKey | null = null;
 const bytes = (data: Uint8Array) => data.slice().buffer as ArrayBuffer;
 const aad = (owner: string, id: string) => bytes(new TextEncoder().encode(`jeelive-images-v1|${owner}|${id}`));
@@ -47,7 +48,7 @@ export const deviceStore: DeviceStore = {
       await transaction("meta", "readwrite", s => s.put({ scope: owner, key }, "account"));
     } else key = saved.key;
     scope = owner;
-  }),
+  }, 0, true),
   read: (owner, id) => serial(async () => {
     if (owner !== scope || !key) return null;
     const record = await transaction<Entry | undefined>("images", "readonly", s => s.get(id));
@@ -57,7 +58,7 @@ export const deviceStore: DeviceStore = {
       await transaction("catalog", "readwrite", s => s.put({ id, size: record.size, used: Date.now() }));
       return new Uint8Array(plain);
     } catch { await commit(id); return null; }
-  }),
+  }, 100),
   write: (owner, id, plain) => serial(async () => {
     if (owner !== scope || !key || plain.length > MAX_IMAGE + 4096) return;
     const iv = crypto.getRandomValues(new Uint8Array(12));
@@ -71,5 +72,5 @@ export const deviceStore: DeviceStore = {
     await commit(id, { id, iv, cipher, used: Date.now(), size: cipher.byteLength });
   }),
   remove: (owner, id) => serial(async () => { if (owner === scope) await commit(id); }),
-  clear: () => serial(reset),
+  clear: () => serial(reset, 0, true),
 };

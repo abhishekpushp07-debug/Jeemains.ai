@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { FlatList, Modal, ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, Modal, ScrollView, StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, post, put, uuid } from "@/src/api/client";
 import { loadResult } from "@/src/api/paperOpening";
 import { useAuth } from "@/src/auth";
 import { AssetImage } from "@/src/components/AssetImage";
+import { ImageWarmup } from "@/src/components/player/ImageWarmup";
 import { AiSolution } from "@/src/components/AiSolution";
 import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
@@ -113,6 +114,7 @@ function Unavailable({ title, reason, testID }: { title: string; reason?: string
 }
 
 function Solutions({ r, id, version }: { r: any; id: string; version: string }) {
+  const { width } = useWindowDimensions();
   const rows: any[] = useMemo(() => r.questions || [], [r.questions]);
   const subjects = useMemo(() => [...new Set(rows.map(subjectOf))], [rows]);
   const [filter, setFilter] = useState(view.filter);
@@ -123,7 +125,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
   const q = rows.find((x) => x.id === qid && subjectOf(x) === subject && matches(x, filter)) || list[0];
   const [remembered, setRemembered] = useState<Record<string, string>>({});
   const [grid, setGrid] = useState(false);
-  usePaperAssets(id, rows, q?.id, true, version);
+  const warmPaths = usePaperAssets(id, rows, q?.id, true, version);
   function chooseSubject(s: string) { if (q) setRemembered(old => ({ ...old, [subject]: q.id })); setSubject(s); setQid(remembered[s] || ""); }
   useEffect(() => { Object.assign(view, { filter, subject, qid: q?.id || "" }); }, [filter, subject, q?.id]);
   const rail = useRef<FlatList>(null);
@@ -144,6 +146,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
 
   return (
     <View style={{ gap: space.md }} testID="solution-navigator">
+      <ImageWarmup paths={warmPaths} width={Math.max(1, width - 4 * space.lg - 2)} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
         {FILTERS.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.surfaceInverse} />)}
       </ScrollView>
@@ -308,7 +311,7 @@ export default function Result() {
 
   const ready = resultIsReleased(status, r);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
-  usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready);
+  usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready && tab !== "solutions");
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <Header testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />

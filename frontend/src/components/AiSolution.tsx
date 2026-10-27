@@ -1,8 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { memo, useMemo } from "react";
 import { Platform, View } from "react-native";
-import { WebView } from "react-native-webview";
 import katex from "katex";
-import { KATEX_CSS } from "@/src/katexCss";
+import { OfflineMath } from "./OfflineMath";
 import { Icon, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 
@@ -113,20 +112,7 @@ function html(sol: any, label: string) {
   const sec = (title: string, body: string, tone = "") => body ? `<section class="${tone}"><h4>${title}</h4>${body}</section>` : "";
   const list = (xs: any[]) => (xs?.length ? `<ul>${xs.map((x) => `<li>${tex(x)}</li>`).join("")}</ul>` : "");
   const steps = (sol.steps || []).map((s: any, i: number) => `<div class="step"><div class="n">${i + 1}</div><div><b>${tex(String(s.title || "").replace(/^\d+\.\s*/, ""))}</b><p>${tex(s.explanation)}</p></div></div>`).join("");
-  return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<style>${KATEX_CSS}</style>
-<style>
-body{margin:0;font-family:-apple-system,Roboto,sans-serif;font-size:15px;line-height:1.55;color:${colors.custom_onReading};background:transparent}
-h4{margin:0 0 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${colors.muted}}
-section{margin:0 0 14px;padding:12px;border-radius:12px;background:${colors.surface};border:1px solid ${colors.border}}
-section.good{background:${colors.custom_successSoft};border-color:${colors.success}55}
-section.warn{background:${colors.custom_warningSoft};border-color:${colors.custom_amber}55}
-section.info{background:${colors.custom_infoSoft};border-color:${colors.brandPrimary}44}
-p{margin:4px 0 0}ul{margin:0;padding-left:18px}li{margin:3px 0}
-.step{display:flex;gap:10px;margin:10px 0}.step .n{flex:0 0 24px;height:24px;border-radius:12px;background:${colors.brandPrimary};color:${colors.onBrandPrimary};font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}
-.final{font-size:17px;font-weight:800;color:${colors.success}}
-.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}.katex{font-size:1.05em}
-</style></head><body><div id="c">
+  return `
 ${sec("Concept", `<p>${tex(sol.concept)}</p>`, "info")}
 ${sec("Given", list(sol.given))}
 ${sec("Step-by-step", steps)}
@@ -135,22 +121,14 @@ ${sec("Shortcut", sol.shortcut ? `<p>${tex(sol.shortcut)}</p>` : "", "info")}
 ${sec("Common mistakes", list(sol.common_mistakes), "warn")}
 ${sec("Time tip", sol.time_tip ? `<p>${tex(sol.time_tip)}</p>` : "")}
 ${sec("Examiner insight", sol.insight ? `<p>${tex(sol.insight)}</p>` : "")}
-<p style="font-size:11px;color:${colors.muted}">${esc(label)}</p></div>
-<script>
-function size(){window.ReactNativeWebView&&window.ReactNativeWebView.postMessage(String(document.getElementById('c').scrollHeight+8))}
-window.addEventListener('load',size);setTimeout(size,200);setTimeout(size,1000);
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
-</script></body></html>`;
+<p style="font-size:11px;color:${colors.muted}">${esc(label)}</p>`;
 }
 
-function Native({ sol, label, number }: { sol: any; label: string; number: number }) {
-  const [h, setH] = useState(600);
-  const src = useMemo(() => ({ html: html(sol, label) }), [sol, label]);
-  return (
-    <WebView testID={`ai-solution-web-${number}`} originWhitelist={["*"]} source={src} scrollEnabled={false} style={{ height: h, backgroundColor: "transparent" }}
-      onMessage={(e) => { const n = Number(e.nativeEvent.data); if (n > 50) setH(n); }} setSupportMultipleWindows={false} javaScriptEnabled />
-  );
-}
+const SOLUTION_CSS = `body{margin:0;font:15px -apple-system,Roboto,sans-serif;line-height:1.55;color:${colors.custom_onReading};background:transparent;overflow-wrap:anywhere}h4{margin:0 0 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${colors.muted}}section{margin:0 0 14px;padding:12px;border-radius:12px;background:${colors.surface};border:1px solid ${colors.border}}section.good{background:${colors.custom_successSoft};border-color:${colors.success}55}section.warn{background:${colors.custom_warningSoft};border-color:${colors.custom_amber}55}section.info{background:${colors.custom_infoSoft};border-color:${colors.brandPrimary}44}p{margin:4px 0 0}ul{margin:0;padding-left:18px}li{margin:3px 0}.step{display:flex;gap:10px;margin:10px 0}.step>div:last-child{min-width:0}.step .n{flex:0 0 24px;height:24px;border-radius:12px;background:${colors.brandPrimary};color:${colors.onBrandPrimary};font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}.final{font-size:17px;font-weight:800;color:${colors.success}}.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}.katex{font-size:1.05em}`;
+const Native = memo(function Native({ sol, label, number }: { sol: any; label: string; number: number }) {
+  const body = useMemo(() => html(sol, label), [sol, label]);
+  return <OfflineMath testID={`ai-solution-web-${number}`} body={body} css={SOLUTION_CSS} initialHeight={600} />;
+});
 
 function Box({ title, tone, children }: { title: string; tone?: string; children: React.ReactNode }) {
   return (
@@ -161,8 +139,8 @@ function Box({ title, tone, children }: { title: string; tone?: string; children
   );
 }
 
+const P = ({ s }: { s: any }) => <T size={14} color={colors.custom_onReading}>{plainMath(s)}</T>;
 function Fallback({ sol, label }: { sol: any; label: string }) {
-  const P = ({ s }: { s: any }) => <T size={14} color={colors.custom_onReading}>{plainMath(s)}</T>;
   return (
     <View style={{ gap: space.sm }}>
       {sol.concept ? <Box title="Concept" tone={colors.custom_infoSoft}><P s={sol.concept} /></Box> : null}

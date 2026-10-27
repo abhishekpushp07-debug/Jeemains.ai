@@ -85,7 +85,7 @@ function RapidSessionRound() {
   const reduced = useReducedMotion();
   const [session, setSession] = useState<any>(null);
   const [cards, setCards] = useState<RCard[]>([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(() => (p.exam && p.exam !== "JEE") || p.subject === "Biology" || p.diagrams === "1" ? "This practice is archived. Return to JEE Main Rapid Fire." : "");
   const [empty, setEmpty] = useState(false);
   const [i, setI] = useState(0);
   const [choice, setChoice] = useState<number | null>(null);
@@ -108,9 +108,7 @@ function RapidSessionRound() {
   useEffect(() => {
     let alive = true;
     if (!uid) return; // wait for auth hydration (avoids a 401 POST on cold deep-link)
-    setError("");
     if ((p.exam && p.exam !== "JEE") || p.subject === "Biology" || p.diagrams === "1") {
-      setError("This practice is archived. Return to JEE Main Rapid Fire.");
       return;
     }
     const run = p.review
@@ -125,11 +123,13 @@ function RapidSessionRound() {
   useEffect(() => {
     if (!card || done) return;
     startedAt.current = mono();
+    // One reset per card keeps native maths views mounted between cards.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLeft(LIMIT);
     setChoice(null);
     setTimedOut(false);
     scrollRef.current?.scrollTo({ y: 0, animated: false });
-    x.value = 0;
+    x.set(0);
   }, [card?.id, done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const finish = useCallback(async () => {
@@ -148,6 +148,10 @@ function RapidSessionRound() {
     if (i + 1 >= cards.length) finish();
     else setI(i + 1);
   }, [i, cards.length, finish]);
+  function fly(dir: number) {
+    if (reduced) { advance(); return; }
+    x.set(withTiming(dir * 500, { duration: 180 }, (f) => { if (f) runOnJS(advance)(); }));
+  }
 
   const record = (r: Res) => { results.current = [...results.current.filter((y) => y.card_id !== r.card_id), r]; };
 
@@ -155,12 +159,14 @@ function RapidSessionRound() {
     if (!card || locked || done) return;
     const iv = setInterval(() => {
       const l = LIMIT - (mono() - startedAt.current);
-      setLeft(Math.max(0, l));
+      // Expiry still checked every 100ms; only the displayed second rerenders.
+      setLeft(previous => Math.ceil(previous / 1000) === Math.ceil(Math.max(0, l) / 1000) ? previous : Math.max(0, l));
       const sec = Math.ceil(l / 1000);
       if (l > 0 && sec <= 5 && sec !== lastTick.current) { lastTick.current = sec; playSfx("tick", 0.6); }
       if (l <= 0) {
         // Only the current visible card expires; future cards are never consumed in background.
         record({ card_id: card.id, outcome: "timed_out", choice: null, ms: LIMIT });
+        setCombo(0);
         setTimedOut(true);
       }
     }, 100);
@@ -177,7 +183,7 @@ function RapidSessionRound() {
   }, [choice, card?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (timedOut) { setCombo(0); playSfx("wrong", 0.6); buzz("warning"); }
+    if (timedOut) { playSfx("wrong", 0.6); buzz("warning"); }
     if (!timedOut) return;
     const t = setTimeout(advance, 1400);
     return () => clearTimeout(t);
@@ -207,15 +213,12 @@ function RapidSessionRound() {
     tap();
     fly(1);
   }
-  function fly(dir: number) {
-    if (reduced) { advance(); return; }
-    x.value = withTiming(dir * 500, { duration: 180 }, (f) => { if (f) runOnJS(advance)(); });
-  }
-
-  const pan = Gesture.Pan().activeOffsetX([-15, 15]).onUpdate((e) => { x.value = e.translationX; }).onEnd((e) => {
+  // Gesture callbacks run on interaction, not during render; refs hold the clock.
+  // eslint-disable-next-line react-hooks/refs
+  const pan = Gesture.Pan().activeOffsetX([-15, 15]).onUpdate((e) => { x.set(e.translationX); }).onEnd((e) => {
     if (e.translationX > 110 && choice !== null) runOnJS(next)();
     else if (e.translationX < -110 && choice === null && !timedOut) runOnJS(skip)();
-    else x.value = withSpring(0);
+    else x.set(withSpring(0));
   });
   const cardStyle = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { rotate: `${x.value / 25}deg` }] }));
 
@@ -259,7 +262,7 @@ function RapidSessionRound() {
           <ScrollView ref={scrollRef} testID="rf-card-scroll" style={styles.scroll} contentContainerStyle={styles.cardArea} showsVerticalScrollIndicator={false}>
             {cards[i + 1] ? <View pointerEvents="none" style={{ position: "absolute", left: 14, right: 14, top: 30, bottom: 6, borderRadius: radius.lg, backgroundColor: tint + "33", borderWidth: 1, borderColor: tint + "88", transform: [{ scale: 0.95 }] }} /> : null}
             <GestureDetector gesture={pan}>
-              <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[styles.questionCard, { borderColor: locked ? timedOut ? colors.warning : choice === card.answer ? colors.success : colors.error : tint + "66" }, cardStyle]}>
+              <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[styles.questionCard, { borderColor: locked ? timedOut ? colors.warning : choice === card.answer ? colors.success : colors.error : tint + "66" }, cardStyle]}>
                 <View style={{ height: 4, width: 48, borderRadius: 2, backgroundColor: tint }} />
                 <RapidText text={card.prompt} size={20} testID="rf-card-prompt" />
                 <BiologyDiagram diagram={card.diagram} testID="rf-card-diagram" />

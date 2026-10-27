@@ -1,0 +1,63 @@
+{
+  "summary": "Iteration49 verification executed for critical auth/JSON body timeout handling, forced-session-503 bootstrap recovery, read-only parity test repair, and isolated performance/runtime guards. New iter49 isolated frontend suite passed 7/7; iter40 and iter48 isolated suites also passed. Backend readonly parity remained blocked by direct canonical ReadTimeout, so live direct-vs-proxy result/image parity could not be completed.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST https://jeelive.ai/api/auth/phone",
+        "issue": "Direct canonical auth from this runtime intermittently times out (ReadTimeout), causing readonly parity suite skips.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Session bootstrap (/api/jl/auth/session)",
+        "issue": "Live console still shows intermittent 503 from upstream/session probe; however entry error UI settles and login form remains editable/retryable (no infinite spinner reproduced).",
+        "affected_testIDs": [
+          "entry-phone-input",
+          "entry-pin-input"
+        ]
+      }
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/frontend/tests/iter49_frontend_isolated_tests.cjs",
+    "/app/frontend/tests/iter48_frontend_isolated_tests.cjs",
+    "/app/frontend/tests/iter40_frontend_isolated_tests.cjs",
+    "/app/backend/tests/test_iter48_readonly_proxy_asset_parity.py",
+    "/app/test_reports/pytest/iter49_readonly_proxy_asset_parity.xml",
+    "/app/test_reports/artifacts_iter49/ui_load_retry/home_entry_375.jpeg",
+    "/app/test_reports/artifacts_iter49/ui_load_retry/automation_output/20261027_104827_b0cc83550a74/console_20261027_104827.log",
+    "/app/test_reports/artifacts_iter49/ui_session503_retry/session_503_recovery.jpeg",
+    "/app/test_reports/artifacts_iter49/offline_math_harness_retry/offline_math_harness.jpeg"
+  ],
+  "action_items": [
+    "Investigate/stabilize upstream canonical auth transport timeouts from this environment, then rerun readonly direct-vs-proxy completed-result/image SHA parity.",
+    "Keep backend no-retry policy for /auth/session and credential POSTs unchanged; current frontend recovery path is functioning under forced 503.",
+    "Run native-device validation for WebView/OfflineMath, encrypted disk store, and real Android performance; web preview/browser harness cannot prove native decoding performance or full native bridge behavior."
+  ],
+  "critical_code_review_comments": [
+    "apiRaw now enforces deadline over both fetch headers and JSON body consumption; caller AbortError stays distinct and deadline maps to ApiError 503 in isolated execution.",
+    "Credential submission and /auth/session paths still avoid refresh retry while existing non-auth 401 refresh contract remains intact (isolated execution via stubs).",
+    "Readonly parity test was corrected to discover completed attempts from /my/tests?tab=completed&page=1 instead of relying on historical hardcoded IDs."
+  ],
+  "updated_files": [
+    "/app/frontend/tests/iter49_frontend_isolated_tests.cjs",
+    "/app/backend/tests/test_iter48_readonly_proxy_asset_parity.py",
+    "/app/test_reports/iteration_49.json"
+  ],
+  "success_rate": {
+    "backend": "0% pass / 100% skipped (3 skipped due upstream direct canonical auth ReadTimeout)",
+    "frontend": "High on executed scope: iter49 isolated 7/7, iter48 isolated 5/5, iter40 isolated 12/12, forced-503 entry recovery PASS"
+  },
+  "seed_data_creation": "No seed data created. No academic attempt start/visit/answer/submit/solution-open writes performed.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "If direct canonical auth stabilizes, rerun /app/backend/tests/test_iter48_readonly_proxy_asset_parity.py and verify completed-result question/solution image SHA parity from discovered OWN completed IDs. Continue avoiding PIN guessing, retries, and academic writes.",
+  "rca_of_issue": "RCA: observed spinner concern is upstream session/bootstrap availability rather than app deadlock. Evidence: live load and forced 503 both reached entry error state with editable inputs and functional Retry action. Separate backend parity blocker is direct canonical transport ReadTimeout, not test harness selector failure."
+}
