@@ -102,6 +102,17 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Home screenshot correction — boxed text removal
+home_copy_removal:
+  implemented: true
+  working: true
+  needs_retesting: false
+  file: "frontend/app/(tabs)/index.tsx"
+  scope: "Remove five marked marketing text elements and unused headline styles; preserve original four exam artworks/labels/routes and all functional sections."
+  verification: "Self-tests PASS: real approved PIN sign-in, five removed testIDs absent, four original images fully loaded, 390px/320px grid without horizontal overflow, JEE Main route works, tsc and changed-file lint pass. No academic/learner writes."
+  screenshots: "jeelive-home-clean-loaded-390.jpeg, jeelive-home-clean-loaded-320.jpeg"
+  limitations: "Phone-size browser preview only; unrelated native build/performance/backlog unchanged."
+
 ## Iteration51 — EAS invalid filename fix and native size analysis
 iteration51_main_followup:
   local_archive_working: true

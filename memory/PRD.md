@@ -1,5 +1,12 @@
 # JEELIVE.AI Native App — PRD
 
+## Latest UI correction — remove boxed Home marketing copy
+- User's annotated screenshot explicitly crosses out all promotional text below the logo and asks for an icon-led app, not a text-heavy landing page.
+- Removed only `100% FREE · BUILT FOR YOUR NEXT STEP`, `Your exam.`, `Your next big step.`, supporting paragraph and `CHOOSE YOUR EXAM` from `frontend/app/(tabs)/index.tsx`; removed unused headline/title styles. No empty replacement spacer.
+- Original target/diamond/rocket/crown artwork, four card labels/subtitles/badges/routes, logo/account, conditional continue/session notices, Rapid Fire, series and bottom navigation unchanged. Added `home-header`/`home-exam-grid` testIDs. No API/auth/data/dependency changes.
+- Self-verified with approved real PIN sign-in and read-only UI: all five removed elements absent, original four images fully loaded, 390px and320px layout fits, JEE Main card navigation works. No new test accounts, academic attempts, answers or PIN edits. TypeScript and modified-file lint PASS.
+- Screenshots `jeelive-home-clean-loaded-390.jpeg` and `jeelive-home-clean-loaded-320.jpeg`. Initial captures were taken during entrance animation; final captures waited for image-loading indicators to disappear and all ancestor opacity to reach1. This is mobile-sized preview evidence, not physical-device testing.
+
 ## Latest user-requested fresh deployment health check
 - User explicitly requested Deployment Agent and a readiness health check. Agent invoked; no app code, secrets, repository tracking, supervisor command or user data changed. Expo restarted; Expo and backend RUNNING with no new Expo error output.
 - Generic scanner again returned **FAIL**, solely demanding `.env` tracking and `--tunnel`. These are the same previously investigated false positives, not a new app defect. Scanner verdict is retained as FAIL; do not claim it returned PASS or commit secrets to appease it.

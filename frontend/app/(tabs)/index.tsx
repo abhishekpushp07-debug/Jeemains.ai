@@ -51,7 +51,7 @@ export default function Home() {
       contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: bottom + space.xl, paddingHorizontal: space.lg, gap: space.lg }}
       refreshControl={<RefreshControl refreshing={false} onRefresh={() => { series.reload(); progress.reload(); }} />}
     >
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+      <View testID="home-header" style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
         <BrandMark testID="home-brand" />
         <Press testID="home-account-button" onPress={() => router.push("/account")} accessibilityLabel="Account" style={{ flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.md, height: 44, borderRadius: radius.pill, backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="account-circle-outline" size={20} color={colors.onSurface} />
@@ -83,15 +83,7 @@ export default function Home() {
         </Animated.View>
       ) : null}
 
-      <View style={styles.headline}>
-        <T testID="home-free-eyebrow" w="heavy" size={10} color={colors.brandText} style={styles.eyebrow}>100% FREE · BUILT FOR YOUR NEXT STEP</T>
-        <T testID="home-title" w="heavy" size={30} style={styles.title}>Your exam.</T>
-        <T testID="home-title-accent" w="heavy" size={30} color={colors.brandText} style={styles.title}>Your next big step.</T>
-        <T testID="home-description" size={13} color={colors.muted}>Real papers, focused practice. Pick up where you stopped.</T>
-      </View>
-
-      <T testID="home-exam-section-label" size={11} w="bold" color={colors.muted} style={styles.eyebrow}>CHOOSE YOUR EXAM</T>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.lg }}>
+      <View testID="home-exam-grid" style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.lg }}>
         {TILES.map((t, i) => (
           <Animated.View key={t.id} entering={reducedMotion ? undefined : FadeInDown.delay(60 * i).duration(380)} style={{ width: "48%" }}>
             <ExamTile testID={"home-tile-" + t.id} kind={t.kind} title={t.title} sub={t.sub} shine={shine} badge={t.badge} onPress={() => router.push(t.to as any)} />
@@ -136,9 +128,7 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  headline: { gap: 3, paddingTop: space.sm, paddingBottom: space.xs },
   eyebrow: { letterSpacing: 1.2, marginBottom: space.sm },
-  title: { lineHeight: 34, letterSpacing: -0.6 },
   finishControls: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: space.sm },
   shineToggle: { minHeight: 44, paddingHorizontal: space.md, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.border, flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: colors.surfaceSecondary },
 });
