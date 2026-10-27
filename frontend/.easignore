@@ -1,6 +1,14 @@
 node_modules/
+# Also mirrored at the repository root for EAS Git/monorepo archives.
 .git/
 .expo/
+.metro-cache/
+.cache/
+dist/
+web-build/
+android/.gradle/
+android/build/
+android/app/build/
 .env
 .env.*
 *.env
@@ -11,6 +19,12 @@ node_modules/
 **/*.key
 **/*.jks
 **/*.keystore
+**/*.p8
+**/*.p12
+**/*.mobileprovision
+**/*token.json*
+**/*credentials.json*
+.credentials
 credentials.json
 **/credentials.json
 memory/

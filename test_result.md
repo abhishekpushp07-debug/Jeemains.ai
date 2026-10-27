@@ -102,6 +102,38 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Iteration51 — EAS invalid filename fix and native size analysis
+iteration51_main_followup:
+  local_archive_working: true
+  needs_retesting: false
+  full_eas_or_signed_artifact_verified: false
+  report: "test_reports/iteration_51_main_followup.json"
+  verified: "Root+frontend actual Node copy/tar/gzip/extraction PASS202/201files; no existing or staged invalidUTF8 names. Required build inputs retained, secrets/caches/backend/gitmetadata excluded. Existing24frontendtests/TSC/Doctor20/20/public390smoke PASS."
+  corrections: "Initial tester/RCA index-only critical conclusion incorrect for current default EAS --no-checkout + working-tree-copy. Officialsourcechecked. Test strengthened to actualfs.cp; this caught root !/frontend/ directoryfilter mismatch, fixed to !/frontend and retestPASS. Deleted path in previousindex remains snapshotwarning, notcurrentworkingarchivefailure."
+  limitation: "Normal snapshot must capture deletion and ignorefiles before fresh checkout. No Gitwrites/EASguardbypass/cloudbuild. <20000000byteAPK/physicalspeed stillunverified."
+iteration51_build_inputs:
+  user_confirmation: "Build fix, phir size jaanch. World best lightening fast and under 20mb app."
+  implemented: true
+  working: NA
+  needs_retesting: true
+  priority: high
+  changes:
+    - "Deleted ONLY the confirmed zero-byte invalid-UTF8 file frontend/<bytes 01 b0 d7 40 40 30 b1 44 40 38>. Byte-path unlink required; no Git writes/reset. Snapshot should record deletion."
+    - "Added root .easignore: official EAS docs require Git-root rules; frontend-only .easignore was insufficient for this monorepo. Native frontend code/assets/config/scripts remain included; backend/private notes/content archives/env/key/test/cache/build outputs excluded. Retained frontend ignore for standalone packaging."
+    - "Excluded ~69MiB local .metro-cache from source upload. This is NOT an APK-size reduction claim. No native engine/SDK/app code/API/data/auth changes."
+  main_checks:
+    - "Whole frontend GNU tar to /dev/null PASS; corrupt path absent, no existing tracked invalid UTF8 names."
+    - "Expo Doctor20/20 PASS. Android raw export --no-bytecode PASS: JS4321833 + assets3900067 =8221900 bytes (8.222MB/7.841MiB). Not signedAPK, not Hermes bytecode; production Hermes unchanged."
+    - "Default and ARM64 native introspection PASS; shrinking/minify/bundle-compression remain enabled."
+  test_plan:
+    - "Independent byte-safe filesystem/index scan; confirm deleted file no longer in latest tracked snapshot."
+    - "Use installed ignore library to stage both repo-root and frontend-only source archives; validate UTF8 roundtrip + Node lstat and gzip/tar extraction. CLI EAS is blocked here: do NOT bypass or call cloud builds. Label archive emulation honestly."
+    - "Assert required frontend package/yarn/config/metro/main/preinstall guard sources, app routes, legal JSON, referenced assets remain; reject backend, memory, .emergent, .git, credentials/env, caches, tests, public handoff ZIP. Do not read/report secret values."
+    - "Repeat raw-export measurements independently and verify release/ARM64 gradle properties; default architectures unchanged. Run existing iter40/48/49 isolated frontend suites24tests, no learner mutations."
+    - "Mobile public entry/privacy smoke390px, no realPIN/login needed. Do not alter account/history/RF/wallet or canonical API."
+  limitations: "No AndroidSDK/Java/Gradle/physicaldevice; EASCLI execution disabled. Full cloud archive/build and signedAPK/AAB<20000000bytes not verified. Prior canonical503/520 risks and deferred direct-account-deletion remain."
+
+
 ## Iteration 30 — exam isolation, diagrams, weak revision, NEET portable bank
 user_problem_statement: "Separate JEE/NEET leaderboards using arena exam selection; quick Biology diagram cards; one-tap most-missed chapter revision; save all existing NEET content independently for future NEETLIVE.AI."
 backend:

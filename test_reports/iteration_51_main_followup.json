@@ -1,0 +1,53 @@
+{
+  "scope": "Local Android build-input bug fix and size analysis only",
+  "supersedes": "iteration_51.json index-only critical finding; original report retained",
+  "local_archive_working": true,
+  "generic_readiness_scan": {
+    "reported_status": "FAIL",
+    "findings": "Repeated known incorrect demand to track .env and add --tunnel",
+    "disposition": "Disputed false positives, not silently converted to PASS. Secrets stay ignored; managed HTTPS manifest and launch bundle verified200 by independent troubleshooting. No supervisor/env changes.",
+    "runtime_after_restart": "Expo/backend RUNNING, public SDK58 Android manifest and bundle200; no new render errors. urllib403 differed from successful curl/preview requests; no physical-device proof implied."
+  },
+  "checks": {
+    "confirmed_corrupt_file_absent": true,
+    "existing_invalid_utf8_filenames": 0,
+    "node_copy_root_then_tar_gzip_extract": "PASS, 202 files",
+    "node_copy_frontend_then_tar_gzip_extract": "PASS, 201 files",
+    "required_frontend_inputs_retained": true,
+    "secret_backend_cache_test_and_git_inputs_excluded": true,
+    "expo_doctor": "20/20 PASS",
+    "default_and_arm64_native_config_introspection": "PASS",
+    "typescript": "PASS",
+    "existing_frontend_isolated_tests": "24/24 PASS (12+5+7)",
+    "changed_test_config_lint": "PASS",
+    "public_entry_to_privacy_390px": "PASS"
+  },
+  "report_correction": {
+    "cause": "Initial test and RCA assumed EAS always checks out HEAD. Official GitClient instead clones with --no-checkout when requireCommit is false and then copies actual working files. Current config does not enable requireCommit.",
+    "test_strengthened": "Node fs.cp with real ignore filtering now precedes tar/extract; existing invalid files still fail. Old deleted index entry recorded as snapshot warning, not silently ignored. Git metadata excluded from staged archive.",
+    "new_issue_found_and_fixed": "Directory whitelist !/frontend/ did not match fs.cp filter's slashless frontend directory. Changed to !/frontend; both archive tests now PASS.",
+    "source_references": [
+      "https://github.com/expo/eas-cli/blob/main/packages/eas-cli/src/vcs/clients/git.ts",
+      "https://github.com/expo/eas-cli/blob/main/packages/eas-cli/src/vcs/local.ts",
+      "https://docs.expo.dev/build-reference/easignore/"
+    ]
+  },
+  "raw_android_export": {
+    "javascript_bytes": 4321833,
+    "assets_bytes": 3900067,
+    "asset_count": 74,
+    "total_bytes": 8221900,
+    "is_apk_or_aab": false,
+    "is_hermes_bytecode": false,
+    "production_engine_changed": false
+  },
+  "limitations": [
+    "Prior Git index still lists deleted corrupt file until normal snapshot records changes. Latest deletion and ignorefiles must be included before a fresh source checkout build.",
+    "Local simulation, not full EAS CLI or cloud build. CLI disabled; no bypass attempted.",
+    "No Java/AndroidSDK/Gradle/physical device/signed artifact. Strict APK under20000000bytes target remains unverified.",
+    "Native physical speed and previous canonical503/520 stability remain unverified/unresolved.",
+    "Account deletion is explicitly deferred/unavailable; no account/data mutations."
+  ],
+  "mocked_apis": [],
+  "learner_writes": false
+}

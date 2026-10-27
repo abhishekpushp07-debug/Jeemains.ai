@@ -1,0 +1,54 @@
+# EAS reads this file at the Git root, above the standalone frontend package.
+# Keep native build inputs, not the API server, private notes or content archives.
+/*
+# No trailing slash: Node's copy filter checks the directory name without one.
+!/frontend
+!/.easignore
+
+node_modules/
+.git/
+.expo/
+.metro-cache/
+.cache/
+.idea/
+.vscode/
+.DS_Store
+.kotlin/
+.metro-health-check*
+*.tsbuildinfo
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# Build service must inject configuration; never upload secrets or signing keys.
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision
+*credentials.json*
+*token.json*
+.credentials
+
+/frontend/dist/
+/frontend/web-build/
+/frontend/android/.gradle/
+/frontend/android/build/
+/frontend/android/app/build/
+/frontend/tests/
+/frontend/test_reports/
+/frontend/app-example/
+**/*.test.ts
+**/*.test.tsx
+**/*.test.js
+**/*.test.cjs
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
