@@ -2,8 +2,11 @@ import { Platform } from "react-native";
 import * as Crypto from "expo-crypto";
 import Constants from "expo-constants";
 import { storage } from "@/src/utils/storage";
-import { AssetValue, PrivateAssetQueue } from "@/src/assets/PrivateAssetQueue";
+import { PrivateAssetQueue } from "@/src/assets/PrivateAssetQueue";
 import { Image as ExpoImage } from "expo-image";
+import { clearImageGrants, imageGrant, registerImageGrants } from "@/src/assets/assetGrants";
+import { configureImageDisk, purgeImageDisk } from "@/src/assets/deviceCache/cache";
+import { ImageResponse, loadOriginalImage } from "@/src/assets/imageDownload";
 
 // Native talks to jeelive.ai directly (cookie session, no extra hop).
 // Web preview cannot carry jeelive.ai cookies cross-origin, so it uses a thin pass-through proxy.
@@ -117,10 +120,11 @@ export const del = <T = any>(path: string) => api<T>(path, { method: "DELETE", b
 
 // Protected original bytes: bounded memory-only cache + priority/dedup queue.
 // On web use Blob URLs to avoid base64 conversion/copies; native stays in RAM.
-async function fetchPrivateAsset(path: string, signal: AbortSignal, retry = true): Promise<AssetValue> {
+async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders: Record<string, string> = {}, retry = true): Promise<ImageResponse> {
   if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution)\/\d+(\?score_version=[^&]+)?$/.test(path)) throw new ApiError("Unsupported private image path.");
   const h = await headers(false);
   h.Accept = "image/png,image/*";
+  Object.assign(h, extraHeaders);
   const ctl = new AbortController();
   const stop = () => ctl.abort();
   signal.addEventListener("abort", stop, { once: true });
@@ -129,38 +133,34 @@ async function fetchPrivateAsset(path: string, signal: AbortSignal, retry = true
   try {
     const res = await fetch(BASE + path, { credentials: "include", headers: h, signal: ctl.signal });
     if (res.status === 401) {
-      if (retry && await refresh()) return fetchPrivateAsset(path, signal, false);
+      if (retry && await refresh()) return fetchPrivateAsset(path, signal, extraHeaders, false);
       onAuthLost?.();
     }
-    if (!res.ok) throw new ApiError(res.status === 429 ? "Image service is busy. Wait a moment and retry." : "The original image could not load. Retry.", res.status, retryAfter(res));
-    const blob = await res.blob();
-    if (!blob.type.startsWith("image/")) throw new ApiError("The source returned an invalid image. Please retry.");
+    if (!res.ok && res.status !== 304) throw new ApiError(res.status === 429 ? "Image service is busy. Wait a moment and retry." : "The original image could not load. Retry.", res.status, retryAfter(res));
+    const bytes = res.status === 304 ? new Uint8Array() : new Uint8Array(await res.arrayBuffer());
     if (signal.aborted || ctl.signal.aborted) throw Object.assign(new Error("Image loading stopped."), { name: "AbortError" });
-    if (WEB && typeof URL.createObjectURL === "function") {
-      const uri = URL.createObjectURL(blob);
-      return { uri, bytes: blob.size, dispose: () => URL.revokeObjectURL(uri) };
-    }
-    const uri: string = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      const abort = () => { reader.abort(); reject(Object.assign(new Error("Image loading stopped."), { name: "AbortError" })); };
-      ctl.signal.addEventListener("abort", abort, { once: true });
-      reader.onloadend = () => { ctl.signal.removeEventListener("abort", abort); if (typeof reader.result === "string") resolve(reader.result); else reject(new Error("The image could not be decoded.")); };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-    return { uri, bytes: uri.length * 2 };
+    return { status: res.status, headers: res.headers, bytes };
   } catch (e) {
     if (signal.aborted || e instanceof ApiError) throw e;
     throw new ApiError("Image connection interrupted. Tap retry when online.", 0);
   } finally { clearTimeout(timer); signal.removeEventListener("abort", stop); }
 }
-export const privateAssets = new PrivateAssetQueue(fetchPrivateAsset);
+export const privateAssets = new PrivateAssetQueue((path, signal) => loadOriginalImage(path, signal, fetchPrivateAsset), 6, 48 * 1024 * 1024, path => !!imageGrant(path));
 let assetOwner: string | null = null;
+export const getAssetAccount = () => assetOwner;
+let assetEpoch = 0;
+export const getAssetEpoch = () => assetEpoch;
+const scopeListeners = new Set<() => void>();
+export const onAssetScopeReset = (listener: () => void) => { scopeListeners.add(listener); return () => { scopeListeners.delete(listener); }; };
+function resetImageMemory() { assetEpoch++; privateAssets.pause(); clearImageGrants(); scopeListeners.forEach(fn => fn()); void ExpoImage.clearMemoryCache().catch(() => {}); }
 privateAssets.pause();
-export const clearAssetCache = () => { assetOwner = null; privateAssets.pause(); void ExpoImage.clearMemoryCache().catch(() => {}); };
+export const clearAssetCache = (purgeDisk = false) => { assetOwner = null; resetImageMemory(); if (purgeDisk) purgeImageDisk(); };
 export const setAssetAccount = (uid: string) => {
-  if (assetOwner !== uid) clearAssetCache();
+  if (assetOwner !== uid) { resetImageMemory(); configureImageDisk(uid, CANONICAL_API); }
   assetOwner = uid; privateAssets.resume();
+};
+export const registerAssetManifest = (id: string, rows: any[], solutions: boolean, version = "original", renew = false) => {
+  if (assetOwner) registerImageGrants(id, rows, solutions, version, path => privateAssets.invalidate(path), renew);
 };
 export const assetDataUri = (path: string) => privateAssets.get(path, 100);
 

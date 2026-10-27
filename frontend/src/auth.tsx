@@ -25,8 +25,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const generation = useRef(0), checking = useRef(false);
   const invalidateProbe = useCallback(() => { generation.current++; }, []);
 
-  const forgetPrivateProfile = useCallback(async () => {
-    clearAssetCache(); setUser(null);
+  const forgetPrivateProfile = useCallback(async (purgeDownloads = false) => {
+    clearAssetCache(purgeDownloads); setUser(null);
     await storage.removeItem("jl_user");
     // Pending drafts remain partitioned by the original server-issued user ID.
   }, []);
@@ -89,7 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await storage.setItem("jl_signed_out", true);
     try { await post("/auth/logout", {}); setSignOutWarning(""); }
     catch { setSignOutWarning("Signed out on this device. Server sign-out couldn't be confirmed while offline."); }
-    await forgetPrivateProfile(); await resetSessionHandle(); setExpired(false);
+    await forgetPrivateProfile(true); await resetSessionHandle(); setExpired(false);
   }, [user, forgetPrivateProfile]);
   const pendingDraftCount = useCallback(async () => user ? (await draftIndex(user.id)).length : 0, [user]);
   const value = useMemo(() => ({ user, ready, expired, sessionError, signOutWarning, signIn, signUp, changePin, signOut, checkSession, pendingDraftCount }),

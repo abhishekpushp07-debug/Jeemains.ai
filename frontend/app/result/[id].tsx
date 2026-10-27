@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { FlatList, Modal, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { api, apiRaw, post, put, uuid } from "@/src/api/client";
+import { api, post, put, uuid } from "@/src/api/client";
+import { loadResult } from "@/src/api/paperOpening";
+import { useAuth } from "@/src/auth";
 import { AssetImage } from "@/src/components/AssetImage";
 import { AiSolution } from "@/src/components/AiSolution";
 import { MathText } from "@/src/components/MathText";
@@ -13,7 +15,6 @@ import { academicStyles, colors, fonts, LearningTone, learningTones, radius, spa
 import { fmtClock, unixDate } from "@/src/navigation";
 import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
 import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
-import { AssetProgress } from "@/src/components/player/AssetProgress";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -122,7 +123,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
   const q = rows.find((x) => x.id === qid && subjectOf(x) === subject && matches(x, filter)) || list[0];
   const [remembered, setRemembered] = useState<Record<string, string>>({});
   const [grid, setGrid] = useState(false);
-  const preload = usePaperAssets(id, rows, q?.id, true, version);
+  usePaperAssets(id, rows, q?.id, true, version);
   function chooseSubject(s: string) { if (q) setRemembered(old => ({ ...old, [subject]: q.id })); setSubject(s); setQid(remembered[s] || ""); }
   useEffect(() => { Object.assign(view, { filter, subject, qid: q?.id || "" }); }, [filter, subject, q?.id]);
   const rail = useRef<FlatList>(null);
@@ -151,7 +152,6 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
         <T testID="solution-subject-position" size={12} color={colors.muted} style={learningStyles.solutionPosition}>{subject} · {q ? list.findIndex(item => item.id === q.id) + 1 : 0} of {list.length}</T>
         <Press testID="solution-grid-open" onPress={() => setGrid(true)} style={learningStyles.gridButton}><Icon name="view-grid-outline" size={18} color={colors.brandText} /><T size={12} w="bold">Question grid</T></Press>
       </View>
-      <AssetProgress prefix="solution" progress={preload} solutions />
       {list.length ? (
         <FlatList ref={rail} testID="solution-question-rail" horizontal showsHorizontalScrollIndicator={false} data={list} keyExtractor={(x) => x.id} contentContainerStyle={{ gap: 8, paddingRight: space.xl }}
           getItemLayout={(_, i) => ({ length: 52, offset: 52 * i, index: i })} onScrollToIndexFailed={() => {}}
@@ -273,13 +273,14 @@ function ReportSheet({ visible, onClose, id, q }: { visible: boolean; onClose: (
 }
 
 export default function Result() {
+  const { user } = useAuth();
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [version, setVersion] = useState("original");
   const [received, setR] = useState<any>(null);
   const [receivedKey, setReceivedKey] = useState("");
-  const r = receivedKey === `${id}|${version}` ? received : null;
+  const r = receivedKey === `${user?.id}|${id}|${version}` ? received : null;
   const [status, setStatus] = useState(0);
   const [err, setErr] = useState("");
   const [tab, setTab] = useState<Tab>(view.tab);
@@ -291,9 +292,10 @@ export default function Result() {
   useEffect(() => {
     let alive = true;
     let t: any;
-    apiRaw(`/attempts/${id}/results?score_version=${encodeURIComponent(version)}`).then((res) => {
+    if (!user) return;
+    loadResult(id!, version).then((res) => {
       if (!alive) return;
-      setErr(""); setReceivedKey(`${id}|${version}`);
+      setErr(""); setReceivedKey(`${user.id}|${id}|${version}`);
       setR(res.data);
       setStatus(res.status);
       if (res.status === 202 && res.data?.grading_status !== "failed" && polls.current < 12) {
@@ -302,11 +304,11 @@ export default function Result() {
       }
     }).catch((e) => alive && setErr(e.message));
     return () => { alive = false; clearTimeout(t); };
-  }, [id, version, n]);
+  }, [id, version, n, user]);
 
   const ready = resultIsReleased(status, r);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
-  const prepared = usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready);
+  usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready);
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <Header testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
@@ -315,7 +317,6 @@ export default function Result() {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
             {TABS.map(([v, l, ic]) => <LearningTab key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} tone={TAB_TONE[v]} />)}
           </ScrollView>
-          {tab !== "solutions" ? <View style={learningStyles.progress}><AssetProgress prefix="result" progress={prepared} solutions /></View> : null}
         </View>
       ) : null}
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.sm, paddingBottom: insets.bottom + space.xl, gap: space.md }}>

@@ -8,8 +8,8 @@ import { storage } from "@/src/utils/storage";
 import { invalidate } from "@/src/useCached";
 import { Button, Card, ErrorBox, Header, Icon, Notice, Press, Skeleton, Stat, T } from "@/src/components/ui";
 import { colors, radius, space, subjectColor } from "@/src/theme";
-import { ReadyToStart } from "@/src/components/player/ReadyToStart";
 import { checkReadiness } from "@/src/api/readiness";
+import { warmAttempt } from "@/src/api/paperOpening";
 
 export default function SetDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -18,7 +18,6 @@ export default function SetDetail() {
   const { user } = useAuth();
   const [s, setS] = useState<any>(null);
   const [error, setError] = useState("");
-  const [readyOpen, setReadyOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
   const [reload, setReload] = useState(0);
@@ -46,9 +45,9 @@ export default function SetDetail() {
       // Same start_key on every retry of this intent → no duplicate attempts.
       const a = await post(`/sets/${id}/start`, { start_key: key.current, device_checked: true, preview: false });
       if (!a?.id) throw new Error("The start could not be confirmed. Your retry key is preserved.");
+      void warmAttempt(a.id, a);
       await storage.removeItem(startKeyName);
       invalidate(`u.${user?.id}.`);
-      setReadyOpen(false);
       router.replace((a.status === "completed" ? "/result/" : "/attempt/") + a.id as any);
     } catch (e: any) {
       setError(e.message);
@@ -110,12 +109,11 @@ export default function SetDetail() {
         <ErrorBox error={error} testID="set-error" />
         {user ? (
           <>
-            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={() => { if (s.attempt?.status === "active") router.replace(`/attempt/${s.attempt.id}`); else { setError(""); setReadyOpen(true); } }} color={colors.surfaceInverse} />
-            <T testID="set-start-note" size={11} color={colors.muted} style={{ textAlign: "center" }}>Check your device, then start when ready. Original images load in the background as soon as the attempt opens. The server controls your deadline.</T>
+            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={() => { if (s.attempt?.status === "active") { void warmAttempt(s.attempt.id); router.replace(`/attempt/${s.attempt.id}`); } else void start(); }} color={colors.surfaceInverse} />
+            <T testID="set-start-note" size={11} color={colors.muted} style={{ textAlign: "center" }}>Starting accepts the rules above. Your official timer begins when the server opens your attempt.</T>
           </>
         ) : <Button testID="set-signin-button" label="Sign in to start" onPress={() => router.push("/entry")} />}
       </ScrollView>
-      {readyOpen ? <ReadyToStart setId={id!} title={s.title} busy={busy} error={error} onClose={() => setReadyOpen(false)} onStart={time => void start(time)} /> : null}
     </View>
   );
 }

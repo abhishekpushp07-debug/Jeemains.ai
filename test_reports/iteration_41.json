@@ -1,0 +1,78 @@
+{
+  "summary": "Iteration 41 live QA executed for both backend and frontend using env-based live PIN flow. Backend auth/session parity and readonly history checks passed, but proxy image passthrough had intermittent upstream 503. Frontend login and result navigation worked intermittently; multiple runs hit transient /api/jl 503 causing auth or navigation disruption, so full cache-performance proof is incomplete.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "GET /api/jl/attempts/{id}/questions/{qid}/asset/question/0",
+        "issue": "Intermittent 503 from proxy path during live run (canonical direct same path returned 200 in same test context). Breaks validator/header parity verification and can interrupt image loading.",
+        "priority": "CRITICAL"
+      },
+      {
+        "endpoint": "POST /api/jl/auth/phone and GET /api/jl/auth/me",
+        "issue": "Intermittent 503 observed in runtime logs; frontend sign-in can show 'Connection interrupted' despite valid credentials.",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Entry login -> authenticated tabs",
+        "issue": "Live login is flaky due transient proxy 503; same credentials alternated between success and failure across runs.",
+        "affected_testIDs": [
+          "entry-phone-input",
+          "entry-pin-input",
+          "entry-continue-button",
+          "entry-error"
+        ]
+      },
+      {
+        "flow": "JEE/PYQ/cache-validation end-to-end",
+        "issue": "Could not complete stable measurement for first-image timing + reload-cache GET pattern because /api/jl upstream intermittently failed during scripted run.",
+        "affected_testIDs": [
+          "tab-jee",
+          "exam-destination-pyq",
+          "pyq-screen",
+          "player-screen",
+          "result-screen"
+        ]
+      }
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter41_live_pin_readonly_and_cache_headers.py",
+    "/app/test_reports/pytest/iter41_backend.xml",
+    "/app/test_reports/pytest/iter41_backend_retry.xml",
+    "/app/test_reports/artifacts/iter41_smoke/preview_smoke.jpeg",
+    "/app/test_reports/artifacts/iter41_ui/ui_error.jpeg",
+    "/app/test_reports/artifacts/iter41_ui_run3/final_20261027_062329.jpeg"
+  ],
+  "action_items": [
+    "Main agent: investigate intermittent proxy upstream failures (503) on /api/jl auth and asset routes; add resilient retry/backoff only where safe.",
+    "Main agent: retest requested cache-validator contract (304/206 one-byte checks + ETag/Last-Modified passthrough) after proxy stability fix.",
+    "Main agent: re-run mobile E2E for direct Start/Continue, subject-grid persistence, and post-submit solution warm timing once backend proxy is stable.",
+    "APK <20MB remains NOT VERIFIED in this environment (no native artifact build/measurement done here)."
+  ],
+  "critical_code_review_comments": [
+    "Proxy passthrough implementation includes validator/range headers in code, but live reliability (503 intermittency) currently blocks dependable behavior.",
+    "Auth/session model correctly uses per-SID cookie jars; one-login-per-session behavior validated in backend test fixture.",
+    "Frontend env key usage is EXPO_PUBLIC_* based; verify production env alignment with required EXPO_BACKEND_URL contract to avoid config drift."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter41_live_pin_readonly_and_cache_headers.py",
+    "/app/test_reports/iteration_41.json"
+  ],
+  "success_rate": {
+    "backend": "80% (4/5 pass; 1 fail due intermittent proxy 503 on asset parity)",
+    "frontend": "Partial (~40% of requested live checks verified; blocked by intermittent proxy 503 and run-time instability during metrics capture)"
+  },
+  "seed_data_creation": "None (read-only testing only)",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Valid env credentials do work intermittently. Reuse backend pytest file above with -n0. Check supervisor backend logs for /api/jl 503 bursts. UI runs confirmed JEE tab present, NEET absent, and result screen reachable; full cache-validation metrics need stable proxy window.",
+  "rca_of_issue": "Primary blocker is upstream/proxy instability rather than deterministic app logic: backend logs show occasional /api/jl 503 on auth/me, auth/phone, and question asset paths; frontend then surfaces 'Connection interrupted' on login and navigation-dependent flows. Reproduction: run live login + JEE navigation multiple times; observe alternating pass/fail with 503 in backend logs. Mitigation: stabilize proxy upstream call reliability and re-run full performance/cache contract checks."
+}

@@ -6,7 +6,6 @@ import { useAuth } from "@/src/auth";
 import { useAttempt } from "@/src/useAttempt";
 import { availableQuestions, imagePaths, usePaperAssets } from "@/src/assets/paperAssets";
 import { SubjectTabs, QuestionGrid, useSubjectNavigation } from "@/src/components/player/SubjectNavigation";
-import { AssetProgress } from "@/src/components/player/AssetProgress";
 import { invalidate } from "@/src/useCached";
 import { AssetImage } from "@/src/components/AssetImage";
 import { MathText } from "@/src/components/MathText";
@@ -47,7 +46,7 @@ export default function Player() {
   const questions = useMemo(() => availableQuestions<any>(a?.questions || [], bonusOpen), [a?.questions, bonusOpen]);
   const nav = useSubjectNavigation<any>(questions);
   const q = nav.question;
-  const images = usePaperAssets(id!, questions, q?.id, false);
+  usePaperAssets(id!, questions, q?.id, false);
   useEffect(() => { if (q) A.visit(q.id); }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     reading.current?.scrollTo({ y: 0, animated: false });
@@ -131,7 +130,6 @@ export default function Player() {
         </View>
         <SubjectTabs prefix="player-subject" questions={questions} subject={nav.subject} onSelect={nav.selectSubject} />
         <T testID="player-subject-position" size={11} color={colors.muted}>{nav.subject} · {idx + 1} of {nav.rows.length} · Q{q?.number}</T>
-        <AssetProgress prefix="player" progress={images} />
       </View>
 
       <ScrollView ref={reading} contentContainerStyle={{ padding: space.md, gap: space.md, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled">
@@ -147,7 +145,6 @@ export default function Player() {
         ) : null}
         {A.error && !A.conflict ? <ErrorBox error={A.error} testID="player-error" /> : null}
         {lockedMain ? <Notice tone="info">Main answers are locked after entering the bonus section.</Notice> : null}
-        {missingImage ? <Notice testID="player-image-wait" tone="info">Loading this question’s original images. You can navigate freely; answering unlocks when they display.</Notice> : null}
 
         {q ? (
           <View testID="question-reading-surface" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.border }}>

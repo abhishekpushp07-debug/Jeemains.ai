@@ -309,3 +309,10 @@ iteration39_verification:
   static: "Strictprojecteslint allchangedfiles + tsc PASS afterfinalfollow-up."
   pending: "UpdatedsecureworkingLIVEphone/PIN needed. Liveplayernavigation/sourcequestionmetadata/actuallatency/solutionwarmup E2E unverified. Localhostcross-originCORS isexistingnonrequiredtestorigin issue,hostedworks."
   user_action: "User skipped securecredentialupdate afteriteration39 implementation. No more credential attempts; safehandoffwithliveverificationpending."
+
+## Iteration40 — silent direct start + encrypted persistent images + Androidsize
+user_scope: "Remove75/78imagecounter/distraction. DownloadASAPonStart/Reattempttap; solutionsafterSubmit; reuseonsamedevice. ChoiceSeedhatestkholo. UseralsorequestsAndroidbuildunder20MB."
+implementation: "RemovedReadySheet/progresscounters; earlyattempt/resultstagingbeforePlayer/Resultsrender,dedupmetadatafetch,originaldeadlinepreserved;6slotsvisiblepriority,fullpaperscheduling+48MiBRAM/256MiBencrypteddisk. AESGCMnativeSecureStore+Files/webnonextractableCryptoKeyIDB;authorizedmanifestgate,ETag/rangevalidatorforreuse,nootheraccount/lockedsolutionleak,logoutpurge,expirylockedciphertext. Transparentproxyconditional/rangeheadersonly."
+size_work: "R8/shrink/compression,defaultAAB+optionalARM64APKprofile,unusedMonoloadingremoved,ZIPuploadexclusion. AndroidrawJS/assetsgraphcompiled with--no-bytecode:8,160,615registeredbytes; NOTAPK. ActualHermescompileblockedARM64host/x86binary; noSDK/Gradle/Java orAPKartifact. <20MBNOTverified."
+latest_checks: "TypeScript/projectESLint/PythonlintPASS. Neednewiteration40tests; olderiter39ReadySheet/staticexpectations nowobsolete. Noauthcredentialretry/nativephysicaltest."
+reference: "reference/ITER40_SILENT_CACHE_AND_ANDROID_SIZE.md"

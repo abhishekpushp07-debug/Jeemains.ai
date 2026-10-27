@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AppState } from "react-native";
 import { api, ApiError, post, put, uuid } from "@/src/api/client";
 import { Draft, DraftMap, loadDrafts, saveDrafts } from "@/src/drafts";
+import { loadAttempt, receivedAt, warmResult, prepareImages } from "@/src/api/paperOpening";
 
 export type Attempt = any;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -30,9 +31,9 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
   const debounce = useRef<any>(null);
   const conflictRef = useRef(false);
   const done = useRef(onCompleted);
-  done.current = onCompleted;
+  useEffect(() => { done.current = onCompleted; }, [onCompleted]);
 
-  const syncClock = (server: number) => (anchor.current = { server: server * 1000, mono: mono() });
+  const syncClock = (server: number, at = mono()) => (anchor.current = { server: server * 1000, mono: at });
   const persist = useCallback(() => {
     setPending({ ...drafts.current });
     saveDrafts(uid, id, data.current?.title || "Attempt", drafts.current);
@@ -43,8 +44,9 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     if (loading.current || Date.now() < retryState.current.after) return;
     loading.current = true;
     try {
-      const d = await api("/attempts/" + id);
-      syncClock(d.server_now);
+      const d = await loadAttempt(id);
+      if (!d) throw new Error("Sign in to open this attempt.");
+      syncClock(d.server_now, receivedAt(d));
       data.current = d;
       setAttempt(d);
       setOnline(true);
@@ -134,7 +136,9 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
   }, [id, persist]);
 
   useEffect(() => {
-    load();
+    let alive = true;
+    Promise.resolve().then(() => { if (alive) void load(); });
+    return () => { alive = false; };
   }, [load]);
 
   useEffect(() => {
@@ -244,6 +248,8 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     setError("");
     await settle();
     const receipt = await post(`/attempts/${id}/submit`, {});
+    // Grading/embargo rules stay authoritative. Warm only a released result.
+    void warmResult(id).catch(() => {});
     await saveDrafts(uid, id, "", {});
     return receipt;
   };
@@ -253,6 +259,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     await settle();
     const r = await post(`/attempts/${id}/bonus`, {});
     data.current = { ...data.current, bonus_unlocked_at: r.bonus_unlocked_at };
+    prepareImages(data.current);
     setAttempt(data.current);
   };
 

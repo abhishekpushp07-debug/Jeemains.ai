@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useSyncExternalStore } from "react";
 import { useFocusEffect } from "expo-router";
-import { privateAssets } from "@/src/api/client";
+import { privateAssets, registerAssetManifest } from "@/src/api/client";
 
 export type PaperQuestion = { id: string; number?: number; subject?: string; asset_count?: number; solution_asset_count?: number; bonus?: boolean };
 export const subjectOf = (q?: PaperQuestion) => q?.subject?.trim() || "Uncategorised";
@@ -23,6 +23,7 @@ export function prioritizedPaths(id: string, rows: PaperQuestion[], selected: st
 export function usePaperAssets(id: string, rows: PaperQuestion[], selected?: string, solutions = false, version = "original", enabled = true) {
   const paths = useMemo(() => prioritizedPaths(id, rows, selected, solutions, version), [id, rows, selected, solutions, version]);
   const revision = useSyncExternalStore(privateAssets.subscribe, privateAssets.snapshot, privateAssets.snapshot);
+  useLayoutEffect(() => { if (enabled && rows.length) registerAssetManifest(id, rows, solutions, version); }, [id, rows, solutions, version, enabled]);
   useFocusEffect(useCallback(() => { if (enabled) privateAssets.selectGroup(id); }, [id, enabled]));
   useEffect(() => {
     if (!enabled || !rows.length || !privateAssets.isGroup(id)) return;

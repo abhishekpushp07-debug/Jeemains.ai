@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,6 +11,8 @@ type Props = { path: string; label: string; testID?: string; onLoaded?: (path: s
 export function AssetImage(props: Props) { return <OriginalImage key={props.path} {...props} />; }
 function OriginalImage({ path, label, testID = "source-image", onLoaded, onFailed }: Props) {
   const [uri, setUri] = useState<string | null>(() => privateAssets.peek(path) || null);
+  useSyncExternalStore(privateAssets.subscribe, privateAssets.snapshot, privateAssets.snapshot);
+  const displayed = privateAssets.peek(path) || uri;
   const [err, setErr] = useState("");
   const [ratio, setRatio] = useState(2.2);
   const [zoom, setZoom] = useState(false);
@@ -29,10 +31,10 @@ function OriginalImage({ path, label, testID = "source-image", onLoaded, onFaile
       <T size={13} w="bold" color={colors.brandText}>Retry original image</T>
     </Press>
   </View>;
-  if (!uri) return <View testID={`${testID}-loading`} style={styles.loading}><ActivityIndicator color={colors.brandText} /><T size={12} color={colors.custom_onReading}>Loading original image…</T></View>;
+  if (!displayed) return <View testID={`${testID}-loading`} accessibilityLabel="Preparing question image" style={styles.loading}><ActivityIndicator color={colors.brandText} /></View>;
   return <>
     <Pressable testID={testID} onPress={() => setZoom(true)} accessibilityRole="imagebutton" accessibilityLabel={`${label}. Tap to zoom`}>
-      <Image source={{ uri }} testID={`${testID}-bitmap`} recyclingKey={path} cachePolicy="memory" transition={0} style={[styles.image, { aspectRatio: ratio }]} contentFit="contain"
+      <Image source={{ uri: displayed }} testID={`${testID}-bitmap`} recyclingKey={path} cachePolicy="memory" transition={0} style={[styles.image, { aspectRatio: ratio }]} contentFit="contain"
         onError={() => setErr("The image could not be displayed. Retry the original image.")}
         onLoad={e => { if (e.source.width && e.source.height) setRatio(e.source.width / e.source.height); onLoaded?.(path); }} />
       <View style={styles.zoomLabel}><Icon name="magnify-plus-outline" size={14} color={colors.onSurfaceInverse} /><T size={10} w="bold" color={colors.onSurfaceInverse}>Zoom</T></View>
@@ -42,7 +44,7 @@ function OriginalImage({ path, label, testID = "source-image", onLoaded, onFaile
         <Press testID="asset-zoom-close" onPress={() => setZoom(false)} accessibilityLabel="Close zoom" style={styles.close}><Icon name="close" size={24} color={colors.onSurface} /></Press>
         <ScrollView maximumZoomScale={4} minimumZoomScale={1} contentContainerStyle={styles.zoomScroll}>
           <ScrollView horizontal maximumZoomScale={4} contentContainerStyle={{ minWidth: width }}>
-            <Image source={{ uri }} recyclingKey={path} cachePolicy="memory" transition={0} style={{ width, aspectRatio: ratio }} contentFit="contain" />
+            <Image source={{ uri: displayed }} recyclingKey={path} cachePolicy="memory" transition={0} style={{ width, aspectRatio: ratio }} contentFit="contain" />
           </ScrollView>
         </ScrollView>
         <T testID={`${testID}-zoom-help`} size={12} color={colors.custom_onReading} style={[styles.help, { paddingBottom: insets.bottom + space.md }]}>Pinch or scroll to read the original.</T>

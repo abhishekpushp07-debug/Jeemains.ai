@@ -2,6 +2,7 @@ import { api, post, uuid } from "./client";
 import { storage } from "@/src/utils/storage";
 import { invalidate } from "@/src/useCached";
 import { checkReadiness } from "./readiness";
+import { warmAttempt } from "./paperOpening";
 
 export type PyqAttempt = { id: string; status: string; resumable?: boolean; result_available?: boolean };
 export type PyqPaper = {
@@ -57,17 +58,22 @@ export async function resumePyq(paper: PyqPaper): Promise<OpenedAttempt> {
   if (!paper.attempt?.id) throw new Error("The saved attempt could not be found. Refresh the list.");
   const attempt = await api<OpenedAttempt>(`/attempts/${encodeURIComponent(paper.attempt.id)}`);
   if (!attempt?.id || !attempt.status) throw new Error("Could not confirm the saved attempt. Please retry.");
+  if (attempt.status === "active") void warmAttempt(attempt.id, attempt);
   return attempt; // Expired/sealed attempts go to their result; never POST a new start.
 }
 
 async function begin(uid: string, paper: PyqPaper, checkedAt = 0): Promise<OpenedAttempt> {
   const storageKey = `pyq.start.${uid}.${paper.id}`;
   // Recheck authoritative status before a cached card can start a duplicate attempt.
-  const detail = await api<{ attempt?: PyqAttempt }>(`/my/sets/${encodeURIComponent(paper.id)}`);
+  const [detail] = await Promise.all([
+    api<{ attempt?: PyqAttempt }>(`/my/sets/${encodeURIComponent(paper.id)}`),
+    checkedAt && Date.now() - checkedAt <= 60000 ? Promise.resolve() : checkReadiness(paper.id),
+  ]);
   // GET details + preflight/start enforce the backend's actual permission contract.
   // Do not infer availability from unrelated live-event metadata.
   if (detail.attempt?.id && (detail.attempt.status === "active" || detail.attempt.resumable)) {
     await storage.removeItem(storageKey);
+    void warmAttempt(detail.attempt.id);
     return detail.attempt;
   }
   const rawIntent = await storage.getItem<string | null>(storageKey, null);
@@ -76,11 +82,12 @@ async function begin(uid: string, paper: PyqPaper, checkedAt = 0): Promise<Opene
   const priorResult = paper.latest_result_id || (paper.attempt?.status === "completed" ? paper.attempt.id : null);
   const intent = previous?.key && previous.priorResult === priorResult ? previous : { key: uuid(), priorResult };
   if (!await storage.setItem(storageKey, JSON.stringify(intent))) throw new Error("Phone storage is unavailable. Free some space and retry so your start can be recovered safely.");
-  if (!checkedAt || Date.now() - checkedAt > 60000) await checkReadiness(paper.id);
   const attempt = await post<OpenedAttempt>(`/sets/${encodeURIComponent(paper.id)}/start`, {
     start_key: intent.key, device_checked: true, preview: false,
   });
   if (!attempt?.id || !attempt.status) throw new Error("The start could not be confirmed. Retry safely; your start request is saved.");
+  // Start asset requests before navigation, storage cleanup or a Player render.
+  void warmAttempt(attempt.id, attempt);
   await storage.removeItem(storageKey);
   invalidate(`u.${uid}.`);
   return attempt;

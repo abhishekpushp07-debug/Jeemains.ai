@@ -1,0 +1,11 @@
+{
+  "cli": { "appVersionSource": "local" },
+  "build": {
+    "release": { "distribution": "store", "android": { "buildType": "app-bundle" } },
+    "apk-arm64": {
+      "distribution": "internal",
+      "env": { "JEELIVE_ANDROID_ARM64_ONLY": "1" },
+      "android": { "buildType": "apk" }
+    }
+  }
+}

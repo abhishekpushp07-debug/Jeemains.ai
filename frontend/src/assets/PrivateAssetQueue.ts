@@ -18,7 +18,7 @@ export class PrivateAssetQueue {
   private group = "";
   private enabled = true;
   private pinned = new Set<string>();
-  constructor(private load: (path: string, signal: AbortSignal) => Promise<AssetValue>, readonly concurrency = 4, readonly maxBytes = 48 * 1024 * 1024) {}
+  constructor(private load: (path: string, signal: AbortSignal) => Promise<AssetValue>, readonly concurrency = 6, readonly maxBytes = 48 * 1024 * 1024, private permitted = (_path: string) => true) {}
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   snapshot = () => this.revision;
   private notify() {
@@ -28,6 +28,11 @@ export class PrivateAssetQueue {
   peek(path: string) { return this.cache.get(path)?.uri; }
   isGroup(group: string) { return group === this.group; }
   pin(paths: string[]) { this.pinned = new Set(paths); }
+  invalidate(path: string) {
+    const old = this.cache.get(path); if (old) { old.dispose?.(); this.bytes -= old.bytes; this.cache.delete(path); }
+    const job = this.jobs.get(path); if (job) { job.ctl.abort(); this.jobs.delete(path); job.reject(cancelled()); }
+    this.failures.delete(path); this.admitted.delete(path); this.notify();
+  }
   status(path: string) { return this.cache.has(path) ? "ready" : this.failures.has(path) ? "failed" : this.jobs.has(path) ? "loading" : "idle"; }
   progress(paths: string[]): AssetProgress {
     let ready = 0, failed = 0, queued = 0;
@@ -45,13 +50,11 @@ export class PrivateAssetQueue {
   }
   preload(paths: string[]) {
     if (!this.enabled) return;
-    // A bounded window is deliberate on small phones. All normal-size crops are
-    // fetched ASAP; huge papers continue on demand rather than exhausting RAM.
-    const pendingBytes = [...this.jobs.values()].filter(j => j.priority < 100).length * 128 * 1024;
-    let reserved = this.bytes + pendingBytes;
+    // Jobs contain paths only. Encrypted disk persistence lets the entire paper
+    // finish downloading even when older decoded images leave the RAM window.
     for (const path of paths) {
-      if (this.admitted.has(path) || this.cache.has(path) || reserved >= this.maxBytes * .9) continue;
-      this.admitted.add(path); reserved += 128 * 1024;
+      if (this.admitted.has(path) || this.cache.has(path)) continue;
+      this.admitted.add(path);
       void this.get(path, 10).catch(() => {});
     }
   }
@@ -60,7 +63,7 @@ export class PrivateAssetQueue {
     this.preload(paths); this.notify();
   }
   get(path: string, priority = 100): Promise<string> {
-    if (!this.enabled) return Promise.reject(cancelled());
+    if (!this.enabled || !this.permitted(path)) return Promise.reject(cancelled());
     const cached = this.cache.get(path);
     if (cached) { this.cache.delete(path); this.cache.set(path, cached); return Promise.resolve(cached.uri); }
     const old = this.jobs.get(path);

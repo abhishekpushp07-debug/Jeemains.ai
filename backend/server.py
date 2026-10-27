@@ -14,6 +14,7 @@ from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resol
 from revision import record_learning, weak_chapters, make_router as make_revision
 from owner_downloads import make_router as make_owner_downloads
 from branding import router as branding_router
+from jl_transport import canonical_request
 import asyncio, json, logging, os, re, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
@@ -61,7 +62,7 @@ def now_iso():
 http: httpx.AsyncClient | None = None
 JAR_CACHE: dict[str, dict] = {}
 SID_RE = re.compile(r"^[A-Za-z0-9-]{16,64}$")
-PASS_HEADERS = ("content-type", "retry-after", "location", "cache-control")
+PASS_HEADERS = ("content-type", "retry-after", "location", "cache-control", "etag", "last-modified", "content-range", "accept-ranges")
 
 
 class CookieJar(BaseDocument):
@@ -108,13 +109,16 @@ async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)
     headers = {"Accept": request.headers.get("accept", "application/json")}
     if request.headers.get("content-type"):
         headers["Content-Type"] = request.headers["content-type"]
+    for name in ("if-none-match", "if-modified-since", "if-range", "range"):
+        if request.headers.get(name):
+            headers[name] = request.headers[name]
     if cookies:
         headers["Cookie"] = "; ".join(f"{k}={v}" for k, v in cookies.items())
     body = await request.body()
     try:
-        r = await http.request(request.method, f"{JEELIVE_API}/{path}", params=request.query_params,
-                               content=body or None, headers=headers)
-    except httpx.HTTPError:
+        r = await canonical_request(http, request.method, f"{JEELIVE_API}/{path}", path=path,
+                                    params=request.query_params, body=body or None, headers=headers)
+    except (httpx.HTTPError, asyncio.TimeoutError):
         return Response(json.dumps({"data": None, "error": {"code": "upstream_unreachable",
                         "message": "Connection interrupted. Your last saved work is safe. Please try again."},
                         "meta": {"api_version": "1"}}), status_code=503, media_type="application/json")
