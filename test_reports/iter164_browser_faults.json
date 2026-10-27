@@ -1,0 +1,73 @@
+{
+ "B signup isolated": {
+  "pass": true,
+  "detail": 200
+ },
+ "401 on image -> exactly one refresh + retry loaded": {
+  "pass": true,
+  "detail": [
+   [
+    "/api/attempts/d3c2c7ad-82f4-44ba-83f9-e843cfd43971/questions/309ecde3-ef09-5baf-a3fd-18dc2b1ea190/asset/question/0",
+    "INJ401"
+   ],
+   [
+    "/api/auth/refresh",
+    200
+   ],
+   [
+    "/api/attempts/d3c2c7ad-82f4-44ba-83f9-e843cfd43971/questions/bf4569ae-c2ff-58cb-a1ab-9e39d1fa7efa/asset/question/0",
+    200
+   ],
+   [
+    "/api/attempts/d3c2c7ad-82f4-44ba-83f9-e843cfd43971/questions/309ecde3-ef09-5baf-a3fd-18dc2b1ea190/asset/question/0",
+    200
+   ]
+  ]
+ },
+ "503 shows retryable source error, no refresh triggered": {
+  "pass": true,
+  "detail": {
+   "err_visible": true
+  }
+ },
+ "answers blocked while source failed": {
+  "pass": true,
+  "detail": {
+   "option_disabled": true
+  }
+ },
+ "manual retry loads image": {
+  "pass": true,
+  "detail": ""
+ },
+ "answers enabled after retry": {
+  "pass": true,
+  "detail": ""
+ },
+ "logout cleared cookies": {
+  "pass": true,
+  "detail": []
+ },
+ "B cannot read A attempt (404/403) and no A images shown": {
+  "pass": true,
+  "detail": [
+   [
+    "GET",
+    "/api/attempts/d3c2c7ad-82f4-44ba-83f9-e843cfd43971",
+    404,
+    151
+   ]
+  ]
+ },
+ "A blob URLs revoked after switch": {
+  "pass": true,
+  "detail": {
+   "a_blobs": 0,
+   "still_readable": 0
+  }
+ },
+ "no page errors": {
+  "pass": true,
+  "detail": []
+ }
+}
