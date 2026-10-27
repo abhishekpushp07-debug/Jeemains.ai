@@ -1,5 +1,5 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
-## Active work — 2026-10-27: User-approved measured performance hardening, tests then LIVE. See memory/CHANGELOG.md for baseline163 and new dated progress; memory/ROADMAP.md for priorities. Prior requirements/history below preserved. No paid infra/data resets authorised; do not claim world-best/500k without evidence.
+## Active work — 2026-10-27: Performance code verified through QA168 (cold PYQ checks 4.67s→1.16s, 9.13s→.35s; 400 original crops pixel-identical; frontend167/build pass). User-approved code-only LIVE redeploy QUEUED and accepted: bcd75d41-4661-4f5a-bead-654e0ffe34d2. Do not redispatch or poll; deployment panel/notification reports outcome. Publication NOT confirmed. LIVE Cloudflare520 transport fault remains unresolved, not an application-code fix. See memory/CHANGELOG.md for evidence and memory/ROADMAP.md for remaining work. Preserve all customer data/IDs; no paid infra/reset authorised; no world-best/500k claim.
 
 
 ## Requested student PIN reset COMPLETED — 2026-10-26
@@ -530,11 +530,11 @@ React (CRA/craco, Shadcn) + FastAPI (`backend/server.py`, modules in `backend/te
 - Frontend: Player bonus gate (`components/player/BonusGate.js`), `MockSectionScores.js`, Studio `MockBookPanel.js`, `full-mocks.css`.
 
 ## User personas
-- Students (phone-only login) practising BITSAT/JEE/COMEDK on mobile/desktop.
+- Students (phone + four-digit PIN login; current sessions preserved) practising BITSAT/JEE/COMEDK on mobile/desktop.
 - Owner/staff using the Content Studio (email + password).
 
 ## Core requirements (static)
-Free access; phone-only student login; exam hubs (Mock Tests / Chapter-wise / Results); source-image questions with Fit/zoom/pan; offline answer recovery; server timer + auto-submit; instant results and PDF report; honest labels (no invented ranks/solutions).
+Free access; phone + four-digit PIN student login, logged-in PIN change and owner-only reset (no OTP); exam hubs (Mock Tests / Chapter-wise / Results); source-image questions with Fit/zoom/pan; offline answer recovery; server timer + auto-submit; instant results and PDF report; honest labels (no invented ranks/solutions). Current brand/theme JEELIVE.AI black/blood-red; canonical MongoDB/API shared with native app, Rapid Fire excluded.
 
 ## What's been implemented
 - 2026-10-17: Imported repo; app starts (env configured, deps installed, poppler/LibreOffice installed). Restored the 94 live BITSAT chapter tests (30/32/32, 4,700 Q, original IDs, end 17 Oct 2027).

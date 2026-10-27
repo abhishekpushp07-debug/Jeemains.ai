@@ -1,0 +1,80 @@
+{
+  "summary": "Iteration 168, backend only, narrow final QA. Checked the PNG compress_level=1 change (used only for reviewed full-res pages with page.rect.width>1600; smaller pages keep the original MuPDF PNG) and the time.sleep(.001) yield after each whole-page validation raster. All runs were in the foreground, in-process ASGI, against a disposable isolated DB (db_dropped=true, storage_puts=[], real_handles_left=[]) with LOCAL original PDFs behind a mocked storage GET. No live calls, no customer writes, no app code edits. RESULTS: bench 3/3 passed; pixel-fidelity + source-cache 17/17 passed (106 s; all 400 refs are RGB-exact to pre-163); whole-page smoke 3/3 passed (Jan 201 geometry checks / 26 pages / 26 pixmaps at 0.3 / 0 PNG encodes / 1 GET; invalid last ref and zero-pixel last ref both fail closed with no proof cached). PNG1 removes the PNG6 cold-CPU regression and is now faster than 164: Jan remaining-images crop_render CPU 10.76 s (164) / 14.76 s (166) -> 9.12 s (168), p50 156/203 -> 137 ms. Jan bytes are 58.28 MB / 46.75 MB -> 53.26 MB, which is -8.6% vs 164 and +13.9% vs 166. April output is byte-identical to 164 (7,587,192 B). The 1 ms yield fixed the event-loop tail: during the cold Jan preflight, /api/series max went 1028 ms (166) -> 135 ms (168), health p95 42.5 -> 1.0 ms, probes 2 -> 8. The cost is a small cold-preflight overhead: Jan 1131/1136 -> 1163 ms, Apr 330/328 -> 354 ms. The live deployer Cloudflare 520 is still UNRESOLVED (platform issue, not retested). Performance is NOT qualified for 500k users or global 4G; these numbers are server-side on the preview pod only.",
+  "perf_163_164_166_168": {
+    "jan_preflight_cold_ms": "4667 / 4689 / 1131,1136 / 1163",
+    "apr_preflight_cold_ms": "9126 / 9134 / 330,328 / 354",
+    "cold_preflight_proof_168": "jan 201 geom / 26 pages / 26 wholepage pixmaps; apr 199 / 25 / 25; storage_get=1 each; crop_render 0",
+    "warm_preflight_p50_ms": "jan 6.4/6.4/8.0,7.0/6.6; apr 6.4/7.2/7.8,7.1/6.9",
+    "event_loop_probe_cold_jan": "series_max 729/205/1028,1032/135 ms; health_p95 50.7/1.0/42.5,42.4/1.0 ms; probes 8/23/2,2/8",
+    "jan_first_image_ms": "126/119/157/110 (bytes 437658/437658/349813/413437)",
+    "jan_second_image_ms": "209/204/250/179",
+    "jan_solution_first_ms": "186/178/231/159",
+    "jan_image_cold_after_reset_ms": "167/159/203/147",
+    "jan_remaining_seq": "p50 164/156/203/137; p95 234/225/311/190; max 276/237/367/204; crop_render_s 10.61/10.76/14.76/9.12; bytes 58.28MB/58.28MB/46.75MB/53.26MB",
+    "apr_remaining_seq": "p50 93/86/91/86; p95 126/119/128/122; max 146/140/166/401 (single outlier); crop_render_s 5.59/5.62/5.91/5.90; bytes 7587192 identical to 163/164",
+    "apr_single_images": "first 69/63/65/63 ms; solution_first 157/150/155/151; bytes identical to 164",
+    "alternating_12_distinct_ms": "1467/1371/1601/1310",
+    "concurrency10_cold_distinct": "wall 1105/1020/970/778 ms; 8x200 + 2x503 unchanged (admission control)",
+    "concurrency10_preflight_warm_ms": "4710/4763/1163/1184",
+    "rss_mb_end": "168: 998 (166: 909/1008, 163: 1048), the cache fill is within noise"
+  },
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "cold preflight (validate_crop_pages)", "issue": "The 1 ms yield adds about 25-30 ms per cold preflight (Jan +27..32 ms, Apr +24..26 ms vs 166). This is expected and bounded; warm is unaffected."},
+      {"endpoint": "april remaining images sequential", "issue": "One max outlier of 400.6 ms (p95 122 ms is unchanged; earlier runs 140-166 ms). April does not use the PNG1 path (output is byte-identical), so this is most likely pod noise. It was a single run and was not repeated, as instructed."},
+      {"endpoint": "PNG1 tradeoff", "issue": "Jan reviewed scanned images are 13.9% larger than with PNG6 (53.26 MB vs 46.75 MB for 78 images) but 8.6% smaller than 164 and use 15% less CPU than 164. The tradeoff is favourable vs both 164 and 166 for CPU. Bytes are a middle ground, not a minimum."},
+      {"endpoint": "live deployer", "issue": "Cloudflare 520 on live is still UNRESOLVED (platform). Not retested, as instructed."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "evidence": {
+    "/app/test_reports/iter168_perf_after.json": "raw bench output (cleanup: db_dropped=true, storage_puts=[], real_handles_left=[])",
+    "/app/test_reports/pytest/iter168_bench.xml": "3 passed, 52.7 s",
+    "/app/test_reports/pytest/iter168_pixel_sourcecache.xml": "17 passed, 106 s",
+    "/app/test_reports/pytest/iter168_wholepage_smoke.xml": "3 passed (all-geometry Jan24S1 + 2 fail-closed last-ref cases)",
+    "/app/test_reports/iter168_wholepage_smoke_evidence.json": "per-paper counts and negatives; iter166 evidence file was backed up and restored unchanged",
+    "png_for_view": [
+      "/tmp/iter168_png/jan24s1_q2_q_refs_0.png",
+      "/tmp/iter168_png/jan24s1_q2_q_refs_1.png",
+      "/tmp/iter168_png/jan24s1_q2_s_refs_0.png",
+      "/tmp/iter168_png/apr08s2_q1_q_refs_0.png",
+      "/tmp/iter168_png/apr08s2_q1_s_refs_0.png",
+      "/tmp/iter168_png/apr08s2_q1_s_refs_1.png",
+      "/tmp/iter168_png/apr08s2_q67_q_refs_0.png",
+      "/tmp/iter168_png/apr08s2_q67_q_refs_1.png",
+      "/tmp/iter168_png/apr08s2_q67_s_refs_0.png"
+    ],
+    "png_vs_166_decoded": "All 9 PNGs are pixel_equal=True vs /tmp/iter166_png, with the same dimensions and mode; only the compressed size differs"
+  },
+  "test_report_links": [
+    "/app/backend/tests/bench_iter163_perf_baseline.py",
+    "/app/backend/tests/test_iter164_pixel_fidelity.py",
+    "/app/backend/tests/test_iter164_source_cache.py",
+    "/app/backend/tests/test_iter166_wholepage_validation.py",
+    "/app/backend/tests/compare_iter168.py",
+    "/app/backend/tests/check_iter168_png.py",
+    "/app/test_reports/iter168_perf_after.json",
+    "/app/test_reports/pytest/iter168_bench.xml",
+    "/app/test_reports/pytest/iter168_pixel_sourcecache.xml",
+    "/app/test_reports/pytest/iter168_wholepage_smoke.xml"
+  ],
+  "action_items": [
+    "OK to publish from the backend perf/correctness standpoint for the tested scope. Keep PNG1 + 1 ms yield; a process pool is not needed because the yield measurably fixed the event-loop tail (series max 135 ms).",
+    "Still track the live Cloudflare 520 as an unresolved platform issue. Local passes do not cover it."
+  ],
+  "critical_code_review_comments": [
+    "tejas_core._render_crop_png: the optimize_png gate uses page.rect.width>1600 in page points, not output pixels. This is correct for the current scanned Jan pages, but a future large-point vector page would also get PNG1. Harmless for fidelity; bytes may grow.",
+    "Pre-existing: the Jan reviewed crops output 1601 px wide (1 px over the 1600 target, from rounding with min(scale,1600/w)). Not a regression; 166 was the same.",
+    "validate_crop_pages renders all whole pages before reaching an out-of-range last ref (invalid page 999 fails after 26 rasters). It still fails closed with no proof cached. An optional cheap optimisation would be to geometry-check all refs first and then raster.",
+    "The derivative cache identity is bumped to render:5, so stale PNG6 entries are not served. Good.",
+    "test_iter166_wholepage_validation.py writes its EV file on teardown at a fixed path, so partial runs overwrite the 166 evidence. The tester backed it up and restored it. Consider an EV_OUT env override."
+  ],
+  "updated_files": ["/app/backend/tests/compare_iter168.py", "/app/backend/tests/check_iter168_png.py"],
+  "success_rate": {"backend": "100% (23/23 tests: bench 3, pixel/source 17, wholepage smoke 3)", "frontend": "not tested (167 passed, unchanged)"},
+  "seed_data_creation": "None persistent. Synthetic owner/PIN student only in a random isolated DB, which was dropped afterwards. Customer DB_NAME=test_database untouched; no leftover perf/iso DBs found.",
+  "test_credentials": "Runtime-generated synthetic credentials in the isolated DB only; no customer credentials used.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "168 is the final PNG1 + 1 ms yield verification. Baseline JSONs: iter163_perf_baseline, iter164_perf_after, iter166_perf_after(_run2), iter168_perf_after. Run python backend/tests/compare_iter168.py for the side-by-side. Do not run bench_iter166_png6_cpu_gil.py (it hardcodes level 6). Live 520 is unresolved. No frontend retest needed unless the UI changes."
+}

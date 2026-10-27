@@ -1,5 +1,29 @@
 # Capacity and operations — reference design, not provisioning
 
+## Verified application performance — 2026-10-27
+Release is QUEUED, not confirmed live. Reports: iterations163baseline,164initialregression/load,165CPUdiagnosis,166wholepagevalidation,167frontend/build,168finalbackend. Benchmarks are isolated in-process ASGI on the preview pod with disposable Mongo databases and **MOCKED storage GET delivering original local PDF bytes**. Production storage RTT, global mobile networks and fleet capacity are not measured. No customer writes, object-store PUTs or database-binding changes; all isolated DBs dropped.
+
+| Server-side metric | Baseline163/164 | Final168 |
+| --- | --- | --- |
+| Jan24S1 cold device check | 4.67s | 1.16s |
+| Apr08S2 cold device check | 9.13s | 0.354s |
+| Warm device check | 6–7ms | 6–7ms |
+| Concurrent cold source downloads | 7 | 1 |
+| Jan remaining-question PNG bytes | 58.28MB | 53.26MB |
+| Jan remaining-crop render CPU | 10.76s | 9.12s |
+| Jan question-image median | 156ms | 137ms |
+| Series request max during cold Jan check | 729ms baseline163 | 135ms |
+
+One April image max400.6ms was observed in168, while p95122ms and encoded bytes remained unchanged; the outlier was not reproduced and must not be declared resolved. All400checkedfull-resolutionquestion/solutioncrops are RGB/pixel/dimension-identical topre163. PreflightchecksEVERYreferencegeometry/omission, sourceSHA andpermissions; onlydiscardedlow-resvalidationrasterwork is coalesced perpage. Student delivery retains original clipped renderer, PNG format, masks and dimensions. Wholepage pixels are NEVERsubstitutedforstudentassets. A1msyieldbetweenpage-renders prevents the validationworker starving co-located API work. PNGlevel1 applies only to reviewed large-page full-rescrops; ordinary-page MuPDFencoder unchanged.
+
+Runtime cache additions: sourcePDF64MiBperprocess with striped cold-read coalescing and PUT invalidation; delivered crop cache48MiB remains, duplicate core cache bypassed in canonical derivative path. Private browser BlobURLs use12MiBcached-budget plus activelydisplayedleases,4inflightrequests, same-user/sessionepoch, logout/switch/401revocation and abortedoldgenerationfetches. No private HTTPpubliccache/ServiceWorker/persistentbodycache, and no solutions before serverrelease. Nextquestionprefetchmax2assets skipsSave-Data. Freshstartresponseone-useRAMhandoffTTL5s sameuser/attempt; reload remains canonicalGET. Native API/PNG/receipt/deadline contracts unchanged.
+
+Frontend167 passed9desktop/mobileattempt-switchraces,21resource/auth-fetchtests andproductionbuild. Finalsmoke168passed1920×800/390×844withoutoverflow. Existing frontend auth requests now share401refresh, not403/429/decode retries. Font preload points toactualcompiledFigtree400/700Latinassets; unusedexternalInterCSS removed; lazyrouteheightstabilized. No native-app-session parity claim.
+
+**Outstanding production incident:** deployer independently reproduced30-secondCloudflare520requests that never reach otherwise-running backend pods (RCA402afcbe-cbe8-4eb7-aa1b-491fa5beb602.MD). It is the edge/worker→Kubernetes transport path, outside repository/preview repair tools; application optimizations do not establish resolution. Platform intervention and post-release observation required. The /health probe mismatch is separate latent hardening, not the520cause. No sharedRedis service exists/provisioned, no HPA/tier change authorised; MongoDB remains canonical. Do not claimworld-best,500kcapacity,orproductionSLOcompliance.
+
+
+
 ## Mounted runtime clarification — 2026-10-24
 The worksheet below is the UNMOUNTED V5 reference design, retained for source traceability. It is not the current protocol. Current `/api/internal/capacity/profile` adds `mounted_runtime` without removing legacy fields.
 
