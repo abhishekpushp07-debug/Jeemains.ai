@@ -6,10 +6,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
 import { invalidate, useCached } from "@/src/useCached";
-import { Button, ErrorBox, Icon, Press, Sheet, Skeleton, T } from "@/src/components/ui";
+import { Button, ErrorBox, Icon, Press, Sheet, Skeleton, T } from "@/src/rapid/ui";
+import { Art } from "@/src/rapid/Art";
 import { Avatar, EntryEffect, EntryShow } from "@/src/components/Entry";
 import { RARITY } from "@/src/avatars";
-import { colors, radius, space } from "@/src/theme";
+import { rapidColors as colors, radius, space } from "@/src/theme";
 
 type Tab = "entry" | "frame" | "theme" | "powerup" | "avatar";
 const TABS: [Tab, string][] = [["avatar", "Avatars"], ["entry", "Entry Effects"], ["frame", "Frames"], ["theme", "Arenas"], ["powerup", "Power-ups"]];
@@ -28,14 +29,16 @@ export default function Shop() {
   const [play, setPlay] = useState(0);
   const [info, setInfo] = useState(false);
   const [show, setShow] = useState("");
+  const [purchase, setPurchase] = useState<any>(null);
   const d = shop.data;
   const refresh = () => { invalidate(`u.${uid}.rfprofile`); shop.reload(); };
 
   async function act(path: string, body: any, key: string) {
     setBusy(key);
     setError("");
-    try { await rf(path, uid, { method: "POST", body }); refresh(); } catch (e: any) { setError(e.message); }
-    setBusy("");
+    try { await rf(path, uid, { method: "POST", body }); refresh(); return true; }
+    catch (e: any) { setError(e.message); return false; }
+    finally { setBusy(""); }
   }
   const items = (d?.items || []).filter((i: any) => i.slot === tab);
 
@@ -49,7 +52,7 @@ export default function Shop() {
       </View>
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.lg }}>
         <LinearGradient colors={[colors.custom_gameCardHi, colors.custom_examBitsatDeep]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ borderRadius: radius.lg, padding: space.xl, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.md }}>
-          <Icon name="hexagon-multiple" size={54} color={colors.custom_neonAmber} />
+          <Art kind="coins" size={80} testID="shop-coins-art" />
           <View>
             <T w="heavy" size={36} color={colors.onSurfaceInverse} testID="shop-balance">{d?.coins ?? "—"}</T>
             <T w="bold" size={13} color={colors.custom_neonAmber}>Your coins · {d?.freezes ?? 0} streak freeze{d?.freezes === 1 ? "" : "s"}</T>
@@ -66,8 +69,8 @@ export default function Shop() {
             </Press>
           ))}
         </ScrollView>
-        <ErrorBox error={error} testID="shop-error" />
-        {!d ? <Skeleton h={200} /> : null}
+        <ErrorBox error={error || shop.error} testID="shop-error" retry={shop.reload} />
+        {!d && !shop.error ? <Skeleton h={200} /> : null}
         {d && tab === "avatar" ? (
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", rowGap: space.md }}>
             {d.avatars.map((a: any) => {
@@ -84,10 +87,10 @@ export default function Shop() {
                   <T w="heavy" size={14} color={colors.onSurfaceInverse} numberOfLines={1}>{a.title}</T>
                   {owned ? (
                     <Button testID={"shop-avatar-use-" + a.id} kind={selected ? "secondary" : "primary"} label={selected ? "Selected ✓" : a.price ? "Use" : "Use · Free"} color={colors.custom_amber} busy={busy === a.id} onPress={() => !selected && act("/profile/avatar", { avatar: a.id }, a.id)}
-                      style={{ alignSelf: "stretch", minHeight: 40 }} />
+                      style={{ alignSelf: "stretch", minHeight: 44 }} />
                   ) : (
                     <Button testID={"shop-avatar-buy-" + a.id} label={d.coins >= a.price ? `Buy · ${a.price}` : `${a.price} coins`} icon="hexagon-multiple" disabled={d.coins < a.price} color={colors.custom_examJee} busy={busy === a.id}
-                      style={{ alignSelf: "stretch", minHeight: 40 }} onPress={() => act("/shop/buy", { item_id: a.id }, a.id)} />
+                      style={{ alignSelf: "stretch", minHeight: 44 }} onPress={() => { setError(""); setPurchase(a); }} />
                   )}
                 </View>
               );
@@ -114,11 +117,11 @@ export default function Shop() {
                     <T w="heavy" size={15} color={it.price ? colors.custom_neonAmber : colors.custom_neonGreen}>{it.price || "FREE"}</T>
                   </View>
                   {owned && it.slot !== "powerup" ? (
-                    <Button testID={"shop-equip-" + it.id} kind={equipped ? "secondary" : "primary"} label={equipped ? "Equipped ✓" : "Equip"} color={colors.custom_amber} busy={busy === it.id} style={{ alignSelf: "stretch", minHeight: 40 }}
+                    <Button testID={"shop-equip-" + it.id} kind={equipped ? "secondary" : "primary"} label={equipped ? "Equipped ✓" : "Equip"} color={colors.custom_amber} busy={busy === it.id} style={{ alignSelf: "stretch", minHeight: 44 }}
                       onPress={() => act("/shop/equip", { slot: it.slot, item_id: equipped ? null : it.id }, it.id)} />
                   ) : (
-                    <Button testID={"shop-buy-" + it.id} label={afford ? "Buy" : "Need more"} disabled={!afford} color={colors.custom_examJee} busy={busy === it.id} style={{ alignSelf: "stretch", minHeight: 40 }}
-                      onPress={() => act("/shop/buy", { item_id: it.id }, it.id)} />
+                    <Button testID={"shop-buy-" + it.id} label={afford ? "Buy" : "Need more"} disabled={!afford} color={colors.custom_examJee} busy={busy === it.id} style={{ alignSelf: "stretch", minHeight: 44 }}
+                      onPress={() => { setError(""); setPurchase(it); }} />
                   )}
                 </View>
               );
@@ -126,6 +129,15 @@ export default function Shop() {
           </View>
         ) : null}
       </ScrollView>
+      <Sheet visible={!!purchase} onClose={() => !busy && setPurchase(null)} testID="shop-purchase-sheet">
+        <T testID="shop-purchase-title" w="heavy" size={24}>Make it yours?</T>
+        <T testID="shop-purchase-item" w="bold" size={18}>{purchase?.title}</T>
+        <T testID="shop-purchase-cost" color={colors.muted}>{purchase?.price} Coins · Current balance {d?.coins ?? "—"}</T>
+        <T testID="shop-purchase-note" size={12} color={colors.muted}>Uses earned game coins only. No real money is charged.</T>
+        <ErrorBox testID="shop-purchase-error" error={error} />
+        <Button testID="shop-purchase-confirm" label={`Confirm · ${purchase?.price || 0} Coins`} busy={!!busy} disabled={!purchase || (d?.coins ?? 0) < purchase.price} onPress={async () => { if (purchase && await act("/shop/buy", { item_id: purchase.id }, purchase.id)) setPurchase(null); }} />
+        <Button testID="shop-purchase-cancel" kind="secondary" label="Keep browsing" disabled={!!busy} onPress={() => setPurchase(null)} />
+      </Sheet>
       <Sheet visible={!!preview} onClose={() => setPreview(null)} testID="shop-preview-sheet">
         <T w="heavy" size={18}>{preview?.title}</T>
         <View style={{ height: 180, borderRadius: radius.lg, backgroundColor: colors.custom_gameBg, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
@@ -139,7 +151,7 @@ export default function Shop() {
       {show ? <EntryShow me={{ avatar: d?.avatar, frame: d?.equipped?.frame, entry: show }} opp={{ name: "Rival", avatar: "av_dragon", frame: "frame_fire", entry: "entry_lightning", bot: true }} onDone={() => setShow("")} testID="shop-entry-show" /> : null}
       <Sheet visible={info} onClose={() => setInfo(false)} testID="shop-info-sheet">
         <T w="heavy" size={18}>How do I earn coins?</T>
-        {["2 coins per correct card in sprints and duels", "+50 coins for every duel win", "+30 coins for a flawless session", "Daily quests pay 30–50 coins each", "Coins are earned only — no real money, no purchases"].map((x) => (
+        {["2 coins per correct card in sprints and duels", "+50 coins for a duel win with at least 5 correct", "+30 coins for a flawless run of at least 10 cards", "Daily quests pay 30–50 coins each", "Coins are earned only — no real-money payments"].map((x) => (
           <View key={x} style={{ flexDirection: "row", gap: 8 }}><Icon name="star-four-points" size={16} color={colors.custom_neonAmber} /><T size={13} style={{ flex: 1 }}>{x}</T></View>
         ))}
         <Button testID="shop-info-close" label="Got it" onPress={() => setInfo(false)} />

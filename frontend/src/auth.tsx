@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { AppState } from "react-native";
-import { api, clearAssetCache, post, resetSessionHandle, setAssetAccount, setAuthLostHandler } from "@/src/api/client";
+import { api, clearAssetCache, clearRapidAccess, post, resetSessionHandle, setAssetAccount, setAuthLostHandler } from "@/src/api/client";
 import { storage } from "@/src/utils/storage";
 import { draftIndex, discardAllDrafts } from "@/src/drafts";
 
@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const invalidateProbe = useCallback(() => { generation.current++; }, []);
 
   const forgetPrivateProfile = useCallback(async (purgeDownloads = false) => {
-    clearAssetCache(purgeDownloads); setUser(null);
+    clearAssetCache(purgeDownloads); clearRapidAccess(); setUser(null);
     await storage.removeItem("jl_user");
     // Pending drafts remain partitioned by the original server-issued user ID.
   }, []);

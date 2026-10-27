@@ -1,4 +1,4 @@
-import { colors } from "@/src/theme";
+import { rapidColors as colors } from "@/src/theme";
 
 // 3D hero portraits bundled with the app (generated once, see backend/rapidfire/generate_avatars.py).
 export const AVATAR_IMAGES: Record<string, number> = {

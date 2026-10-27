@@ -1,1712 +1,1123 @@
 [
- {
-  "id": "c5ecf57d-c22f-467c-b7ce-a66f67df7370",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Sum of roots of ax²+bx+c=0",
-  "formula": "α+β = -b/a",
-  "options": [
-   "-b/a",
-   "c/a",
-   "b/a",
-   "-c/a"
-  ],
-  "answer": 0,
-  "explain": "By Vieta's formulas, sum of roots = -b/a for ax²+bx+c=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "677ddbb8-feec-48f7-ada5-e514ec88f9f2",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Product of roots of ax²+bx+c=0",
-  "formula": "α·β = c/a",
-  "options": [
-   "b/a",
-   "-c/a",
-   "-b/a",
-   "c/a"
-  ],
-  "answer": 3,
-  "explain": "By Vieta's formulas, product of roots = c/a for ax²+bx+c=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "304c52ae-7205-496d-ab2c-634711a9caf5",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Nature of roots when discriminant D > 0",
-  "formula": "D = b²-4ac",
-  "options": [
-   "Complex conjugates",
-   "Purely imaginary",
-   "Real and distinct",
-   "Real and equal"
-  ],
-  "answer": 2,
-  "explain": "D>0 implies two distinct real roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2d0b0004-74bf-40c2-be60-8273f9a4e28e",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Nature of roots when D = 0",
-  "formula": "D = b²-4ac",
-  "options": [
-   "Rational and unequal",
-   "Real and distinct",
-   "Imaginary",
-   "Real and equal"
-  ],
-  "answer": 3,
-  "explain": "D=0 gives a repeated (equal) real root: α = β = -b/2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "27be574c-de68-4316-bdaf-5b9e90660f5b",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Quadratic with roots α,β is written as",
-  "formula": "x²-(α+β)x+αβ=0",
-  "options": [
-   "x²-(α+β)x+αβ=0",
-   "x²-(α+β)x-αβ=0",
-   "x²+(α+β)x+αβ=0",
-   "x²+(αβ)x-(α+β)=0"
-  ],
-  "answer": 0,
-  "explain": "Standard form using sum and product of roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cb58bed7-9ab2-4a2f-9659-48046aa0533d",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If a,b,c ∈ Q and D is a perfect square, roots are",
-  "formula": "",
-  "options": [
-   "Complex",
-   "Irrational",
-   "Equal",
-   "Rational"
-  ],
-  "answer": 3,
-  "explain": "Rational coefficients + perfect-square discriminant ⇒ rational roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6d285e13-c582-4bf7-9aed-d3852d2866ec",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If one root is 2+√3, the other root (a,b,c∈Q) is",
-  "formula": "",
-  "options": [
-   "-2+√3",
-   "2+√3",
-   "2-√3",
-   "-2-√3"
-  ],
-  "answer": 2,
-  "explain": "Irrational roots occur in conjugate pairs when coefficients are rational.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "def8e7b5-224b-48d9-bee7-ed4d5e775f41",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If one root is 3+2i, the other root (a,b,c∈R) is",
-  "formula": "",
-  "options": [
-   "-3-2i",
-   "3-2i",
-   "3+2i",
-   "-3+2i"
-  ],
-  "answer": 1,
-  "explain": "Complex roots occur in conjugate pairs for real coefficients.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7ce1a664-87bc-4267-9d7e-a13d6ff8cfc4",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Value of |α-β| in terms of D and a",
-  "formula": "|α-β| = √D/|a|",
-  "options": [
-   "√D/|a|",
-   "√D·|a|",
-   "D/|a|",
-   "√D/a²"
-  ],
-  "answer": 0,
-  "explain": "|α-β|² = (α+β)²-4αβ = D/a², so |α-β|=√D/|a|.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d1aea69f-37f3-4072-a5b6-3b550a2fb7fb",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Condition for both roots of ax²+bx+c=0 to be positive",
-  "formula": "",
-  "options": [
-   "D≥0, c/a<0",
-   "D≥0, -b/a>0, c/a<0",
-   "D≥0, -b/a<0, c/a>0",
-   "D≥0, -b/a>0, c/a>0"
-  ],
-  "answer": 3,
-  "explain": "Both roots positive ⟺ sum>0 and product>0 with D≥0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "56776677-390d-4c25-950a-719a4d22ab95",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Condition for roots of ax²+bx+c=0 to have opposite signs",
-  "formula": "",
-  "options": [
-   "D < 0",
-   "b/a > 0",
-   "c/a < 0",
-   "b/a < 0"
-  ],
-  "answer": 2,
-  "explain": "Opposite sign roots ⟺ product of roots = c/a < 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f18027f8-ac7b-4d01-947a-6b78144ef205",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "α²+β² expressed using sum and product of roots",
-  "formula": "α²+β² = (α+β)²-2αβ",
-  "options": [
-   "(α+β)²-2αβ",
-   "(α-β)²+2αβ",
-   "(α+β)²+2αβ",
-   "(αβ)²-2(α+β)"
-  ],
-  "answer": 0,
-  "explain": "Standard identity: α²+β²=(α+β)²-2αβ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "878f59bb-b14a-42d0-8cb0-89c9af154837",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "α³+β³ expressed using sum S and product P",
-  "formula": "α³+β³ = S³-3SP",
-  "options": [
-   "S³+3SP",
-   "S²P-3S",
-   "S³-3SP",
-   "S³-3P"
-  ],
-  "answer": 2,
-  "explain": "α³+β³=(α+β)³-3αβ(α+β)=S³-3SP.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b30ac3be-9e3a-4468-8065-fada303be192",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If roots of x²-px+q=0 are α,β then α²+β² equals",
-  "formula": "",
-  "options": [
-   "p²-2q",
-   "p²-q",
-   "p²+2q",
-   "2q-p²"
-  ],
-  "answer": 0,
-  "explain": "α+β=p, αβ=q ⇒ α²+β²=(p)²-2q = p²-2q.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "38bdda25-69b3-4a3a-b680-407dd0472934",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For equal roots, the repeated root value is",
-  "formula": "x = -b/2a",
-  "options": [
-   "b/2a",
-   "-b/a",
-   "-b/2a",
-   "b/a"
-  ],
-  "answer": 2,
-  "explain": "When D=0, both roots coincide at -b/2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "849dfaa6-5f54-48c0-8c86-c3b22df25f32",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Maximum value of f(x)=ax²+bx+c (a<0) is",
-  "formula": "(4ac-b²)/4a",
-  "options": [
-   "(b²-4ac)/4a",
-   "-(b²-4ac)/4a",
-   "(4ac-b²)/4a",
-   "-D/4a"
-  ],
-  "answer": 2,
-  "explain": "Vertex value = -D/4a = (4ac-b²)/4a; for a<0 this is a maximum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "830dd47d-7a8a-4137-b487-455b177016ca",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Vertex (minimum/maximum) of f(x)=ax²+bx+c occurs at x =",
-  "formula": "x = -b/2a",
-  "options": [
-   "-b/2a",
-   "-b/a",
-   "b/2a",
-   "c/a"
-  ],
-  "answer": 0,
-  "explain": "Vertex x-coordinate is always -b/2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7c6c152d-d386-4cee-b2c0-7f3983f67078",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Sign of f(x)=ax²+bx+c for all x when a>0 and D<0",
-  "formula": "",
-  "options": [
-   "Always negative",
-   "Depends on c",
-   "Can be zero",
-   "Always positive"
-  ],
-  "answer": 3,
-  "explain": "a>0, D<0 ⇒ parabola opens up, no real roots ⇒ f(x)>0 for all x.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "635ccd94-664c-4d06-9d4f-c1a4df3de8dc",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Condition for ax²+bx+c>0 for ALL real x",
-  "formula": "",
-  "options": [
-   "a>0 and D=0",
-   "a>0 and D>0",
-   "a<0 and D<0",
-   "a>0 and D<0"
-  ],
-  "answer": 3,
-  "explain": "Quadratic is always positive iff a>0 and discriminant<0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d00168c2-0677-4f18-beb6-17560ab7cb23",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If one root of ax²+bx+c=0 is reciprocal of the other, then",
-  "formula": "c = a",
-  "options": [
-   "c = -a",
-   "b = c",
-   "c = a",
-   "b = a"
-  ],
-  "answer": 2,
-  "explain": "Product of roots αβ=1=c/a, so c=a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d5aeb5af-c1cd-41f5-a450-f255b45c51d9",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If one root of ax²+bx+c=0 is negative of the other, then",
-  "formula": "b = 0",
-  "options": [
-   "b = 0",
-   "c = 0",
-   "a = 0",
-   "a = c"
-  ],
-  "answer": 0,
-  "explain": "Sum of roots α+β=0=-b/a, so b=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2f67d7a4-8a80-4cfa-90c7-326472198c29",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Condition for ax²+bx+c=0 to have one root zero",
-  "formula": "c = 0",
-  "options": [
-   "c = 0",
-   "b = 0",
-   "a = c",
-   "a = 0"
-  ],
-  "answer": 0,
-  "explain": "If 0 is a root, product αβ=c/a=0 (a≠0), so c=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0361d3c6-9426-46fa-abb1-95def301b4c9",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If D>0 and a,b,c∈Q, D is NOT a perfect square, roots are",
-  "formula": "",
-  "options": [
-   "Equal",
-   "Complex",
-   "Irrational conjugates",
-   "Rational"
-  ],
-  "answer": 2,
-  "explain": "Rational coefficients + non-perfect-square D>0 ⇒ irrational conjugate roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f9edfe97-9419-4e7a-af73-0709c7ba2dbc",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of ax²+bx+c=0, then 1/α+1/β equals",
-  "formula": "–b/c",
-  "options": [
-   "c/b",
-   "–c/b",
-   "b/c",
-   "–b/c"
-  ],
-  "answer": 3,
-  "explain": "1/α+1/β = (α+β)/(αβ) = (–b/a)/(c/a) = –b/c.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ffa350df-2341-43bb-b5d0-ff35491acd85",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Condition for roots of ax²+bx+c=0 to be equal in magnitude but opposite in sign",
-  "formula": "b = 0",
-  "options": [
-   "b = 0",
-   "c = 0",
-   "a = c",
-   "D = 0"
-  ],
-  "answer": 0,
-  "explain": "Roots equal & opposite ⟹ sum = 0 ⟹ –b/a = 0 ⟹ b = 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1896aafb-36a3-4bdc-a24b-23c8fbc0b4a4",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If one root of ax²+bx+c=0 is double the other, the condition is",
-  "formula": "2b²=9ac",
-  "options": [
-   "2b² = 9ac",
-   "4b² = 9ac",
-   "b² = 2ac",
-   "b² = 4ac"
-  ],
-  "answer": 0,
-  "explain": "Let roots be r,2r: sum=3r=–b/a, product=2r²=c/a ⟹ 2(b/3a)²=c/a ⟹ 2b²=9ac.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1f518f80-1ec4-4f77-9e97-42d51dcac04b",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The quadratic equation whose roots are reciprocals of roots of ax²+bx+c=0 is",
-  "formula": "cx²+bx+a=0",
-  "options": [
-   "cx²+bx+a=0",
-   "cx²–bx+a=0",
-   "ax²–bx+c=0",
-   "ax²+cx+b=0"
-  ],
-  "answer": 0,
-  "explain": "Replace x by 1/x in ax²+bx+c=0, then multiply by x² to get cx²+bx+a=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8875c290-0917-4ddc-8308-216a22e8eab6",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The quadratic equation whose roots are negatives of roots of ax²+bx+c=0 is",
-  "formula": "ax²–bx+c=0",
-  "options": [
-   "ax²+bx–c=0",
-   "ax²+bx+c=0 unchanged",
-   "cx²–bx+a=0",
-   "ax²–bx+c=0"
-  ],
-  "answer": 3,
-  "explain": "Replace x by –x: a(–x)²+b(–x)+c=0 ⟹ ax²–bx+c=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "db33a3cb-8b25-429b-949d-34fda523e640",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For f(x)=ax²+bx+c with a>0, f(x)>0 between roots when",
-  "formula": "",
-  "options": [
-   "This never happens; f(x)<0 between roots",
-   "f(x)>0 always between roots",
-   "D<0 and a>0",
-   "D>0 and a>0"
-  ],
-  "answer": 0,
-  "explain": "When a>0, the parabola opens up, so f(x)<0 between the two real roots, not >0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cce7fa97-da5f-4b16-a9bf-0424270e62d1",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For ax²+bx+c<0 to hold for ALL real x, the required conditions are",
-  "formula": "a<0 and D<0",
-  "options": [
-   "a<0 and D>0",
-   "a<0 and D=0",
-   "a<0 and D<0",
-   "a>0 and D<0"
-  ],
-  "answer": 2,
-  "explain": "Parabola opens downward (a<0) and no real roots (D<0) ensures f(x)<0 for all x.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bef18704-7bf7-4682-955a-dd847b35066c",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Minimum value of ax²+bx+c (a>0) is",
-  "formula": "(4ac–b²)/4a",
-  "options": [
-   "(b²–4ac)/4a",
-   "–b/2a",
-   "(4ac–b²)/4a",
-   "c–b²/4"
-  ],
-  "answer": 2,
-  "explain": "Minimum = c – b²/(4a) = (4ac–b²)/(4a) occurs at vertex x=–b/(2a).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1ab6cfef-dd14-41a1-bef4-1df5c451c4b5",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Roots of ax²+bx+c=0 are both negative when (a>0)",
-  "formula": "S<0, P>0, D≥0",
-  "options": [
-   "S<0, P>0, D≥0",
-   "S<0, P<0, D≥0",
-   "S<0, P>0, D<0",
-   "S>0, P>0, D≥0"
-  ],
-  "answer": 0,
-  "explain": "Both roots negative ⟹ sum negative, product positive, and D≥0 for real roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d24af0a3-ed5c-400b-a4de-39abc59b4183",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If ax²+bx+c=0 has a repeated root, that root is also a root of",
-  "formula": "2ax+b=0",
-  "options": [
-   "bx+2c=0",
-   "ax²+c=0",
-   "2ax+b=0",
-   "ax+b=0"
-  ],
-  "answer": 2,
-  "explain": "Repeated root satisfies f(x)=0 and f'(x)=2ax+b=0 simultaneously.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9bbfaefe-1080-4ddb-b3c6-bff5f14562c8",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For the equation x²–(sum)x+(product)=0, if sum=8 and product=15, the roots are",
-  "formula": "",
-  "options": [
-   "1 and 15",
-   "3 and 5",
-   "4 and 4",
-   "6 and 2"
-  ],
-  "answer": 1,
-  "explain": "3+5=8, 3×5=15; direct use of Vieta's formulas.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9ab02a18-2ee4-46d4-9866-43ebd678f41c",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If p,q are roots of x²+bx+c=0, then (p+q)²–2pq equals",
-  "formula": "b²–2c",
-  "options": [
-   "b²–4c",
-   "b²–2c",
-   "b²+2c",
-   "2b–c²"
-  ],
-  "answer": 1,
-  "explain": "(p+q)²–2pq = (–b)²–2c = b²–2c, which equals p²+q².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0599ea73-7cd8-42a1-8dcc-8da834a6b8d4",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The expression b²–4ac is called the discriminant; its sign for complex conjugate roots is",
-  "formula": "D < 0",
-  "options": [
-   "D > 0",
-   "D = 0",
-   "D ≥ 0",
-   "D < 0"
-  ],
-  "answer": 3,
-  "explain": "Complex (non-real) conjugate roots occur precisely when discriminant D = b²–4ac < 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6141ed5a-95ef-405a-9211-a6bdb36b5756",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If ax²+bx+c=0 (a≠0), both roots lie in interval (k,∞) iff",
-  "formula": "af(k)>0, D≥0, –b/2a>k",
-  "options": [
-   "f(k)>0, D>0 only",
-   "f(k)<0 and D>0",
-   "af(k)>0, D≥0, vertex x>k",
-   "af(k)>0 and b/2a>k"
-  ],
-  "answer": 2,
-  "explain": "Both roots > k requires f(k) same sign as a, real roots (D≥0), and vertex > k.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "74f4b3b5-fce6-4d68-a500-51806053f2f7",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For k to lie between the roots of ax²+bx+c=0, the condition is",
-  "formula": "af(k) < 0",
-  "options": [
-   "af(k) < 0",
-   "f(k) = 0",
-   "af(k) > 0",
-   "D > 0 only"
-  ],
-  "answer": 0,
-  "explain": "k lies strictly between roots iff af(k)<0 (value and leading coeff have opposite signs).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c05354b3-43f0-45ba-a4f3-7439ab327e18",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of ax²+bx+c=0, then (α–β)² equals",
-  "formula": "(b²–4ac)/a²",
-  "options": [
-   "(4ac–b²)/a²",
-   "(b²–4ac)/a²",
-   "D/a",
-   "b²/a²–4c"
-  ],
-  "answer": 1,
-  "explain": "(α–β)²=(α+β)²–4αβ = b²/a²–4c/a = (b²–4ac)/a² = D/a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5e2ccba1-1726-4470-b83c-52058e577696",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For ax²+bx+c=0 (a>0), exactly one root exceeds k iff",
-  "formula": "a·f(k) < 0",
-  "options": [
-   "af(k)>0",
-   "f(k)=0",
-   "D>0 and f(k)>0",
-   "af(k)<0"
-  ],
-  "answer": 3,
-  "explain": "One root on each side of k means f(k) and a have opposite signs, so af(k)<0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0c378708-43c2-4c7b-912c-52c73fdf2245",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The number of real values of k for which x²+kx+1=0 has equal roots is",
-  "formula": "D=k²–4=0",
-  "options": [
-   "Infinitely many",
-   "0",
-   "1",
-   "2"
-  ],
-  "answer": 3,
-  "explain": "D=k²–4=0 gives k=±2, so exactly 2 real values.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1640bd43-56ed-403b-8ff9-523c822cdaf8",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²–x+2=0, then α³+β³ equals",
-  "formula": "S³–3SP",
-  "options": [
-   "–1",
-   "–5",
-   "7",
-   "5"
-  ],
-  "answer": 1,
-  "explain": "S=1,P=2; α³+β³=S(S²–3P)=1(1–6)=–5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7f7b66db-2c8b-454e-8681-045fe79f31f1",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If one root of x²+px+q=0 is twice the other, then condition on p and q is",
-  "formula": "2p² = 9q",
-  "options": [
-   "2p²=9q",
-   "p²=4q",
-   "p²=2q",
-   "4p²=9q"
-  ],
-  "answer": 0,
-  "explain": "Roots α,2α: 3α=–p, 2α²=q → 2(p/3)²=q → 2p²=9q.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bc8f74fa-eb4b-4c93-80eb-02dbf61adda6",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For real and distinct roots of 2x²+3x+k=0, k must satisfy",
-  "formula": "D=9–8k>0",
-  "options": [
-   "k = 9/8",
-   "k < 9/8",
-   "k > 9/8",
-   "k < 3/2"
-  ],
-  "answer": 1,
-  "explain": "D=9–8k>0 requires k<9/8 for real distinct roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bd54d538-002f-42a5-948e-33d0d8dd8a69",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If f(x)=ax²+bx+c and f(0)·f(1)<0, then between 0 and 1 there is",
-  "formula": "",
-  "options": [
-   "Exactly two roots",
-   "At least one real root",
-   "A repeated root",
-   "No real root"
-  ],
-  "answer": 1,
-  "explain": "Opposite signs of f(0) and f(1) guarantee at least one root in (0,1) by IVT.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3d23a51c-bcd7-4466-9824-148784a12dc8",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Product of roots of cx²+bx+a=0 (c≠0) is",
-  "formula": "a/c",
-  "options": [
-   "c/a",
-   "–b/c",
-   "b/c",
-   "a/c"
-  ],
-  "answer": 3,
-  "explain": "By Vieta's, product of roots = constant/leading coefficient = a/c.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c79f55a9-0350-40ea-8e7a-9c48cc9ccde2",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²–3x+4=0, value of (α–1)(β–1) is",
-  "formula": "f(1)",
-  "options": [
-   "–2",
-   "4",
-   "2",
-   "6"
-  ],
-  "answer": 2,
-  "explain": "(α–1)(β–1)=αβ–(α+β)+1=4–3+1=2, equivalently f(1)=1–3+4=2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "378f91c9-5a5f-4819-a27e-8b42ab7f0c53",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²+x+1=0, then α²+β² equals",
-  "formula": "S²–2P",
-  "options": [
-   "3",
-   "–1",
-   "–3",
-   "1"
-  ],
-  "answer": 1,
-  "explain": "S=–1, P=1; α²+β²=S²–2P=1–2=–1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "13e72078-8046-4b03-a452-9ccdb0508b63",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The quadratic with rational coefficients and one root 1/(2+√3) is",
-  "formula": "",
-  "options": [
-   "x²–4x–1=0",
-   "x²–2x+1=0",
-   "x²–4x+1=0",
-   "x²+4x+1=0"
-  ],
-  "answer": 2,
-  "explain": "1/(2+√3)=2–√3; roots 2+√3 and 2–√3; sum=4, product=1 → x²–4x+1=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cf60a140-afa7-4dc3-a2eb-1b4b7edede73",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For ax²+bx+c=0, if a+b+c=0, then one root is always",
-  "formula": "x=1",
-  "options": [
-   "1",
-   "–c/a",
-   "–1",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "Substituting x=1: a+b+c=0 ✓, so x=1 is always a root.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ffe88f00-aaa9-4b51-9e57-9ab1053a3eb1",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The equation x²+1=0 has roots that are",
-  "formula": "x=±i",
-  "options": [
-   "Real distinct roots",
-   "Irrational roots",
-   "Complex conjugates ±i",
-   "Real equal roots ±1"
-  ],
-  "answer": 2,
-  "explain": "D=0–4=–4<0 so roots are complex: x=±i, a conjugate pair.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0f826b24-8abe-4c36-a083-f62fd8278f7c",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²+bx+c=0, then (α+1)(β+1) equals",
-  "formula": "1+b+c",
-  "options": [
-   "1–b+c",
-   "c–b+1",
-   "1+b+c",
-   "b+c–1"
-  ],
-  "answer": 1,
-  "explain": "(α+1)(β+1)=αβ+(α+β)+1=c+(–b)+1=c–b+1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ab908d53-662c-4256-8ba6-e86f1cc588dd",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The discriminant of a quadratic is negative. Its graph (a>0) intersects x-axis in how many points?",
-  "formula": "D<0",
-  "options": [
-   "2 points",
-   "0 points",
-   "1 point",
-   "Infinitely many"
-  ],
-  "answer": 1,
-  "explain": "D<0 means no real roots, so the parabola (a>0) lies entirely above the x-axis.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "212cb2b9-15b5-4768-b5b9-861f46ace0b5",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The equation whose roots are α+β and αβ (α,β roots of x²–5x+6=0) is",
-  "formula": "",
-  "options": [
-   "x²–5x+6=0",
-   "x²+11x+30=0",
-   "x²–11x+30=0",
-   "x²–11x–30=0"
-  ],
-  "answer": 2,
-  "explain": "α+β=5, αβ=6; new roots: 5 and 6; equation: x²–11x+30=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4e911f00-7285-450d-87ff-880f854ad0a3",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are the roots of 3x²–5x+2=0, then 1/α+1/β equals",
-  "formula": "(α+β)/(αβ)",
-  "options": [
-   "5/2",
-   "2/5",
-   "3/2",
-   "–5/2"
-  ],
-  "answer": 0,
-  "explain": "1/α+1/β=(α+β)/(αβ)=(5/3)/(2/3)=5/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1be88b3a-fe26-4f9a-95c6-795d70662157",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²–5x+6=0, then α²–αβ+β² equals",
-  "formula": "α²–αβ+β² = (α+β)²–3αβ",
-  "options": [
-   "19",
-   "7",
-   "13",
-   "1"
-  ],
-  "answer": 1,
-  "explain": "(α+β)²=25, 3αβ=18, so α²–αβ+β²=25–18=7.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b1d573a4-c0b9-47cf-8a0b-2c53717b9ade",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²+2x+4=0, then α³ equals (use cube roots of unity logic)",
-  "formula": "",
-  "options": [
-   "–4",
-   "–8",
-   "4",
-   "8"
-  ],
-  "answer": 3,
-  "explain": "Roots are –1±i√3 = 2ω,2ω² (scaled); α³=(2ω)³=8ω³=8.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6a39ebf8-a8c6-4004-a8f5-974e46a2371e",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The equation x²–bx+c=0 has both roots positive iff",
-  "formula": "",
-  "options": [
-   "b>0, c<0, b²≥4c",
-   "b>0, c>0, b²≤4c",
-   "b>0, c>0, b²≥4c",
-   "b<0, c>0, b²≥4c"
-  ],
-  "answer": 2,
-  "explain": "Sum=b>0, product=c>0, and D=b²–4c≥0 are all required.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c6383d6f-d4ea-4b1b-9e24-4cc131eed38a",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²–px+q=0, then (α–β)² equals",
-  "formula": "p²–4q",
-  "options": [
-   "p²–2q",
-   "p²–4q",
-   "p²+4q",
-   "4q–p²"
-  ],
-  "answer": 1,
-  "explain": "(α–β)²=(α+β)²–4αβ=p²–4q.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ac2e753b-7e3a-4934-a4c2-21738230dc35",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For ax²+bx+c=0 (a>0) with roots α<β, f(x)<0 for x in",
-  "formula": "",
-  "options": [
-   "(–∞,α)∪(β,∞)",
-   "(–∞,β)",
-   "(α, β)",
-   "(α,∞)"
-  ],
-  "answer": 2,
-  "explain": "Upward parabola is negative only between the two roots α and β.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "98e22ee3-1c62-4902-a19f-84d0f3982119",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If sum of roots of kx²+2x+3k=0 equals their product, then k equals",
-  "formula": "S = P",
-  "options": [
-   "2/3",
-   "–2/3",
-   "–3/2",
-   "3/2"
-  ],
-  "answer": 1,
-  "explain": "Sum=–2/k, Product=3k/k=3; –2/k=3 → k=–2/3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5648bf8e-7d60-4db0-89a8-f1d0af7ec910",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If the roots of ax²+bx+c=0 are α,β then roots of cx²+bx+a=0 are",
-  "formula": "",
-  "options": [
-   "α+1 and β+1",
-   "α² and β²",
-   "–α and –β",
-   "1/α and 1/β"
-  ],
-  "answer": 3,
-  "explain": "Reversing coefficients replaces each root r with 1/r.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "250c519a-fb01-45bb-8fa0-5c4ab9dc1ea9",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²+x+1=0, then α¹⁰⁰+β¹⁰⁰ equals",
-  "formula": "",
-  "options": [
-   "1",
-   "0",
-   "2",
-   "–1"
-  ],
-  "answer": 3,
-  "explain": "Roots are ω,ω² (cube roots of unity); ω¹⁰⁰=ω, ω²⁰⁰=ω²; sum=ω+ω²=–1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3df00694-a8bb-461f-aa17-b97a5a485ddf",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If the roots of x²–bx+c=0 differ by 1, then b²–4c equals",
-  "formula": "(α–β)²=1",
-  "options": [
-   "1",
-   "0",
-   "b²–4c=1",
-   "4"
-  ],
-  "answer": 0,
-  "explain": "(α–β)²=(α+β)²–4αβ=b²–4c=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "438cc14a-cc74-4653-8677-71bedf680b50",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²+x+1=0, then α²⁰²⁴+β²⁰²⁴ equals",
-  "formula": "ω³=1",
-  "options": [
-   "0",
-   "−1",
-   "1",
-   "2"
-  ],
-  "answer": 1,
-  "explain": "Roots are ω,ω². 2024=3×674+2, so α²⁰²⁴+β²⁰²⁴=ω²+ω⁴=ω²+ω=−1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f11c8f1c-28a6-4d6a-a3a3-956c2b56bd78",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For x²+bx+c=0, if roots are α,β then (α−β)² equals",
-  "formula": "(α−β)²=b²−4c",
-  "options": [
-   "b²−4c",
-   "4c−b²",
-   "b²−2c",
-   "b²+4c"
-  ],
-  "answer": 0,
-  "explain": "(α−β)²=(α+β)²−4αβ=b²−4c for monic quadratic.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5cb6cbd3-ce09-487e-81b1-a1acec8ef8eb",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of 3x²+5x+2=0, then α/β+β/α equals",
-  "formula": "(S²−2P)/P",
-  "options": [
-   "13/6",
-   "25/12",
-   "25/6",
-   "−13/6"
-  ],
-  "answer": 0,
-  "explain": "S=−5/3, P=2/3; (S²−2P)/P=(25/9−4/3)/(2/3)=(13/9)/(2/3)=13/6; sign: negative since both negative roots... actually = (25/9−4/3)/(2/3)=13/6. Answer is 13/6.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "12ea03a7-7bc7-48f2-94e0-16fe11e83da9",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If the equation x²+2kx+k²+k−1=0 has real roots, then k satisfies",
-  "formula": "D≥0",
-  "options": [
-   "k≤−1 or k≥1",
-   "All real k",
-   "k≤1",
-   "k≥1"
-  ],
-  "answer": 2,
-  "explain": "D=4k²−4(k²+k−1)=4(1−k)≥0 gives k≤1. Correction: k≤1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "795e772c-4fef-49f0-82b3-2138934e6d77",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Roots of ax²+bx+c=0 are real and equal when b²=4ac. The value of each root is",
-  "formula": "x = −b/(2a)",
-  "options": [
-   "b/(2a)",
-   "c/a",
-   "−b/(2a)",
-   "−b/a"
-  ],
-  "answer": 2,
-  "explain": "For equal roots D=0, both roots merge to −b/(2a).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c77f93b3-8e5e-4801-86e1-ae3fbec0a3ff",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²−6x+8=0, the equation with roots α²,β² is",
-  "formula": "",
-  "options": [
-   "x²+20x+64=0",
-   "x²−20x+64=0",
-   "x²−20x+16=0",
-   "x²−52x+64=0"
-  ],
-  "answer": 1,
-  "explain": "α²+β²=(α+β)²−2αβ=36−16=20; α²β²=(αβ)²=64; equation: x²−20x+64=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "39ad5bf1-2261-4430-b526-90ce3c38b36c",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "Which condition ensures ax²+bx+c=0 has one root in (0,1) and other outside (0,1)?",
-  "formula": "f(0)·f(1)<0",
-  "options": [
-   "f(0)·f(1)>0",
-   "f(0)·f(1)<0",
-   "D>0 and f(0)<0",
-   "D=0 and f(1)=0"
-  ],
-  "answer": 1,
-  "explain": "One root inside, one outside (0,1) iff f(0)·f(1)<0 by intermediate value theorem.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2bcd7d9d-0772-4423-b55a-12b5b2dc6187",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²−px+q=0, then (1+α)(1+β) equals",
-  "formula": "",
-  "options": [
-   "1+p−q",
-   "1+p+q",
-   "1−p+q",
-   "q−p+1"
-  ],
-  "answer": 1,
-  "explain": "f(−1)=1+p+q but (1+α)(1+β)=1+(α+β)+αβ=1+p+q. Wait: α+β=p, αβ=q → 1+p+q.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a11a5d76-f9c6-40c2-bf99-49dcab8da7c8",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²−px+q=0, then α⁴+β⁴ in terms of p,q equals",
-  "formula": "",
-  "options": [
-   "p⁴+4p²q+2q²",
-   "(p²−2q)²−2q²",
-   "p⁴−4qp²+2q²",
-   "p⁴−4p²q+2q²"
-  ],
-  "answer": 1,
-  "explain": "α²+β²=p²−2q; α⁴+β⁴=(α²+β²)²−2(αβ)²=(p²−2q)²−2q².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "105003a7-64fd-4baa-821a-c3df5f286e5b",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "The number of real roots of x²+|x|+1=0 is",
-  "formula": "",
-  "options": [
-   "1",
-   "2",
-   "4",
-   "0"
-  ],
-  "answer": 3,
-  "explain": "x²≥0 and |x|≥0 and 1>0, so x²+|x|+1≥1>0; no real roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a3ca2ac9-71a2-46bd-93e5-d8be06f714c5",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²−3x+4=0, then α³+β³ equals",
-  "formula": "S³−3SP",
-  "options": [
-   "27",
-   "−9",
-   "−27",
-   "9"
-  ],
-  "answer": 1,
-  "explain": "α+β=3, αβ=4; α³+β³=(3)³−3(3)(4)=27−36=−9. Answer is −9.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e7e8455d-fa60-4ca4-872d-de7cb0264d68",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If the roots of x²+px+q=0 are in the ratio 1:2, the condition relating p and q is",
-  "formula": "2p²=9q",
-  "options": [
-   "3p²=8q",
-   "p²=9q",
-   "p²=4q",
-   "2p²=9q"
-  ],
-  "answer": 3,
-  "explain": "Let roots be α,2α; 3α=−p, 2α²=q; eliminating α: 2(−p/3)²=q → 2p²=9q.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c185a4c3-622c-43c0-885f-a9dfeea02aef",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For x²+2(k−1)x+(k+5)=0 to have real roots, k satisfies",
-  "formula": "D≥0",
-  "options": [
-   "k≤−1 or k≥4",
-   "k≤1 or k≥4",
-   "−4≤k≤1",
-   "k≤−4 or k≥1"
-  ],
-  "answer": 0,
-  "explain": "D=4(k−1)²−4(k+5)≥0 → k²−3k−4≥0 → (k−4)(k+1)≥0 → k≤−1 or k≥4.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7ef15b3f-7d68-4bfe-98a6-4f43b591bc58",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If roots of x²−bx+c=0 are sinθ and cosθ, then b²−2c equals",
-  "formula": "sin²θ+cos²θ=1",
-  "options": [
-   "0",
-   "2",
-   "1",
-   "−1"
-  ],
-  "answer": 2,
-  "explain": "b=sinθ+cosθ, c=sinθcosθ; b²−2c=(sinθ+cosθ)²−2sinθcosθ=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2c8314c6-12a7-4f69-9b9a-be9e00a78974",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²−5x+6=0, then |α−β| equals",
-  "formula": "|α−β|=√D/|a|",
-  "options": [
-   "2",
-   "3",
-   "1",
-   "√13"
-  ],
-  "answer": 2,
-  "explain": "D=25−24=1; |α−β|=√1/1=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "27a0d2a2-175f-4329-8ec5-7e8e95fb2d82",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "A quadratic with real coefficients has one root 3i. The quadratic is",
-  "formula": "",
-  "options": [
-   "x²+9=0",
-   "x²+6x+9=0",
-   "x²−9=0",
-   "x²+3x+9=0"
-  ],
-  "answer": 0,
-  "explain": "Complex roots come in conjugate pairs: roots are 3i and −3i; product=9, sum=0 → x²+9=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f7eddbcc-918f-473c-896f-1e58f2d4af73",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of ax²+bx+c=0, then aα²+bα equals",
-  "formula": "aα²+bα+c=0",
-  "options": [
-   "−c",
-   "0",
-   "b",
-   "c"
-  ],
-  "answer": 0,
-  "explain": "Since α is a root: aα²+bα+c=0, so aα²+bα=−c.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d1f26ec4-2d98-45b3-93d0-8586ac350612",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If a+b+c=0 for ax²+bx+c=0, one root is always",
-  "formula": "",
-  "options": [
-   "2",
-   "-1",
-   "1",
-   "0"
-  ],
-  "answer": 2,
-  "explain": "x=1 satisfies a(1)+b(1)+c=a+b+c=0, so 1 is always a root.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9fb20052-0f39-4cd3-bf40-e340bcd4ee75",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For ax²+bx+c=0 (a>0), f(x)<0 for x between roots α<β means",
-  "formula": "",
-  "options": [
-   "x < α",
-   "x < α or x > β",
-   "x > β",
-   "α < x < β"
-  ],
-  "answer": 3,
-  "explain": "For a>0, parabola opens up; f(x)<0 strictly between the two roots.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "051efbca-9b3c-4c4b-afeb-61c47508296e",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If roots of x²+px+q=0 are in ratio 1:2, condition relating p and q is",
-  "formula": "",
-  "options": [
-   "p²=2q",
-   "p²=4q",
-   "2p²=9q",
-   "2p²=3q"
-  ],
-  "answer": 2,
-  "explain": "Roots α,2α: sum=3α=–p, product=2α²=q; α=–p/3, so 2p²/9=q → 2p²=9q.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3e64bede-a34f-4a33-9904-2b8c24b766ba",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²–px+q=0, then α⁴+β⁴ equals",
-  "formula": "(S²–2P)²–2P²",
-  "options": [
-   "p⁴–4p²q+2q²",
-   "(p²–2q)²+2q²",
-   "(p²–2q)²–2q²",
-   "(p²+2q)²–2q²"
-  ],
-  "answer": 2,
-  "explain": "α²+β²=p²–2q; α⁴+β⁴=(α²+β²)²–2(αβ)²=(p²–2q)²–2q².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a26554a8-415f-4d91-af6d-d20f7e376985",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "For ax²+bx+c=0 (a>0), if b²<4ac, then f(x) for all real x is",
-  "formula": "",
-  "options": [
-   "Can be zero",
-   "Changes sign",
-   "Always positive",
-   "Always negative"
-  ],
-  "answer": 2,
-  "explain": "D<0 and a>0 means parabola opens up with no real roots, so f(x)>0 for all x.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0c2bbd87-52df-4c99-8683-cefc35217511",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If roots of x²–bx+c=0 differ by 1, then b²–4c equals",
-  "formula": "(α–β)²=b²–4c",
-  "options": [
-   "0",
-   "1",
-   "4",
-   "-1"
-  ],
-  "answer": 1,
-  "explain": "(α–β)²=b²–4c; given |α–β|=1, so b²–4c=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c64ba553-b773-4e69-b96a-f5a5f5899b19",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β are roots of x²+2x+4=0, then α³ equals",
-  "formula": "",
-  "options": [
-   "4",
-   "8",
-   "-4",
-   "-8"
-  ],
-  "answer": 1,
-  "explain": "Roots are –1±i√3=2ω,2ω² where ω is cube root of unity; α³=(2ω)³=8ω³=8. Wait: α³=8 for one root, –8 for other? Each root cubed: (–1+i√3)³=–8. So α³=–8.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4861544c-db54-4e4e-a37a-ea07fbc76e0c",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If the roots of ax²+bx+c=0 are α,β, then a(x–α)(x–β) expanded equals",
-  "formula": "",
-  "options": [
-   "ax²–bx+c",
-   "x²+bx+c",
-   "ax²+bx+c",
-   "a²x²+bx+c"
-  ],
-  "answer": 2,
-  "explain": "By Vieta's: a(x–α)(x–β)=a[x²–(α+β)x+αβ]=ax²+bx+c.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bab74143-ba77-49d7-9a19-5f78f94680f1",
-  "subject": "Mathematics",
-  "chapter": "Quadratic Equations",
-  "topic": "Quadratic Equations",
-  "prompt": "If α,β roots of ax²+bx+c=0, then α²+β² equals",
-  "formula": "(b²−2ac)/a²",
-  "options": [
-   "2ac/a²",
-   "(b²−4ac)/a²",
-   "(b²−2ac)/a²",
-   "(b²+2ac)/a²"
-  ],
-  "answer": 2,
-  "explain": "α²+β²=(α+β)²−2αβ=(−b/a)²−2(c/a)=(b²−2ac)/a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- }
+  {
+    "id": "c5ecf57d-c22f-467c-b7ce-a66f67df7370",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Sum of roots of ax²+bx+c=0",
+    "formula": "α+β = -b/a",
+    "options": [
+      "-b/a",
+      "c/a",
+      "b/a",
+      "-c/a"
+    ],
+    "answer": 0,
+    "explain": "By Vieta's formulas, sum of roots = -b/a for ax²+bx+c=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "677ddbb8-feec-48f7-ada5-e514ec88f9f2",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Product of roots of ax²+bx+c=0",
+    "formula": "α·β = c/a",
+    "options": [
+      "b/a",
+      "-c/a",
+      "-b/a",
+      "c/a"
+    ],
+    "answer": 3,
+    "explain": "By Vieta's formulas, product of roots = c/a for ax²+bx+c=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "304c52ae-7205-496d-ab2c-634711a9caf5",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Nature of roots when discriminant D > 0",
+    "formula": "D = b²-4ac",
+    "options": [
+      "Complex conjugates",
+      "Purely imaginary",
+      "Real and distinct",
+      "Real and equal"
+    ],
+    "answer": 2,
+    "explain": "D>0 implies two distinct real roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2d0b0004-74bf-40c2-be60-8273f9a4e28e",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Nature of roots when D = 0",
+    "formula": "D = b²-4ac",
+    "options": [
+      "Rational and unequal",
+      "Real and distinct",
+      "Imaginary",
+      "Real and equal"
+    ],
+    "answer": 3,
+    "explain": "D=0 gives a repeated (equal) real root: α = β = -b/2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "27be574c-de68-4316-bdaf-5b9e90660f5b",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Quadratic with roots α,β is written as",
+    "formula": "x²-(α+β)x+αβ=0",
+    "options": [
+      "x²-(α+β)x+αβ=0",
+      "x²-(α+β)x-αβ=0",
+      "x²+(α+β)x+αβ=0",
+      "x²+(αβ)x-(α+β)=0"
+    ],
+    "answer": 0,
+    "explain": "Standard form using sum and product of roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "cb58bed7-9ab2-4a2f-9659-48046aa0533d",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If a,b,c ∈ Q and D is a perfect square, roots are",
+    "formula": "",
+    "options": [
+      "Complex",
+      "Irrational",
+      "Equal",
+      "Rational"
+    ],
+    "answer": 3,
+    "explain": "Rational coefficients + perfect-square discriminant ⇒ rational roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "6d285e13-c582-4bf7-9aed-d3852d2866ec",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If one root is 2+√3, the other root (a,b,c∈Q) is",
+    "formula": "",
+    "options": [
+      "-2+√3",
+      "2+√3",
+      "2-√3",
+      "-2-√3"
+    ],
+    "answer": 2,
+    "explain": "Irrational roots occur in conjugate pairs when coefficients are rational.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "def8e7b5-224b-48d9-bee7-ed4d5e775f41",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If one root is 3+2i, the other root (a,b,c∈R) is",
+    "formula": "",
+    "options": [
+      "-3-2i",
+      "3-2i",
+      "3+2i",
+      "-3+2i"
+    ],
+    "answer": 1,
+    "explain": "Complex roots occur in conjugate pairs for real coefficients.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7ce1a664-87bc-4267-9d7e-a13d6ff8cfc4",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Value of |α-β| in terms of D and a",
+    "formula": "|α-β| = √D/|a|",
+    "options": [
+      "√D/|a|",
+      "√D·|a|",
+      "D/|a|",
+      "√D/a²"
+    ],
+    "answer": 0,
+    "explain": "|α-β|² = (α+β)²-4αβ = D/a², so |α-β|=√D/|a|.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d1aea69f-37f3-4072-a5b6-3b550a2fb7fb",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Condition for both roots of ax²+bx+c=0 to be positive",
+    "formula": "",
+    "options": [
+      "D≥0, c/a<0",
+      "D≥0, -b/a>0, c/a<0",
+      "D≥0, -b/a<0, c/a>0",
+      "D≥0, -b/a>0, c/a>0"
+    ],
+    "answer": 3,
+    "explain": "Both roots positive ⟺ sum>0 and product>0 with D≥0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "56776677-390d-4c25-950a-719a4d22ab95",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Condition for roots of ax²+bx+c=0 to have opposite signs",
+    "formula": "",
+    "options": [
+      "D < 0",
+      "b/a > 0",
+      "c/a < 0",
+      "b/a < 0"
+    ],
+    "answer": 2,
+    "explain": "Opposite sign roots ⟺ product of roots = c/a < 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f18027f8-ac7b-4d01-947a-6b78144ef205",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "α²+β² expressed using sum and product of roots",
+    "formula": "α²+β² = (α+β)²-2αβ",
+    "options": [
+      "(α+β)²-2αβ",
+      "(α-β)²+2αβ",
+      "(α+β)²+2αβ",
+      "(αβ)²-2(α+β)"
+    ],
+    "answer": 0,
+    "explain": "Standard identity: α²+β²=(α+β)²-2αβ.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "878f59bb-b14a-42d0-8cb0-89c9af154837",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "α³+β³ expressed using sum S and product P",
+    "formula": "α³+β³ = S³-3SP",
+    "options": [
+      "S³+3SP",
+      "S²P-3S",
+      "S³-3SP",
+      "S³-3P"
+    ],
+    "answer": 2,
+    "explain": "α³+β³=(α+β)³-3αβ(α+β)=S³-3SP.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b30ac3be-9e3a-4468-8065-fada303be192",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If roots of x²-px+q=0 are α,β then α²+β² equals",
+    "formula": "",
+    "options": [
+      "p²-2q",
+      "p²-q",
+      "p²+2q",
+      "2q-p²"
+    ],
+    "answer": 0,
+    "explain": "α+β=p, αβ=q ⇒ α²+β²=(p)²-2q = p²-2q.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "38bdda25-69b3-4a3a-b680-407dd0472934",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For equal roots, the repeated root value is",
+    "formula": "x = -b/2a",
+    "options": [
+      "b/2a",
+      "-b/a",
+      "-b/2a",
+      "b/a"
+    ],
+    "answer": 2,
+    "explain": "When D=0, both roots coincide at -b/2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "830dd47d-7a8a-4137-b487-455b177016ca",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Vertex (minimum/maximum) of f(x)=ax²+bx+c occurs at x =",
+    "formula": "x = -b/2a",
+    "options": [
+      "-b/2a",
+      "-b/a",
+      "b/2a",
+      "c/a"
+    ],
+    "answer": 0,
+    "explain": "Vertex x-coordinate is always -b/2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7c6c152d-d386-4cee-b2c0-7f3983f67078",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Sign of f(x)=ax²+bx+c for all x when a>0 and D<0",
+    "formula": "",
+    "options": [
+      "Always negative",
+      "Depends on c",
+      "Can be zero",
+      "Always positive"
+    ],
+    "answer": 3,
+    "explain": "a>0, D<0 ⇒ parabola opens up, no real roots ⇒ f(x)>0 for all x.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "635ccd94-664c-4d06-9d4f-c1a4df3de8dc",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Condition for ax²+bx+c>0 for ALL real x",
+    "formula": "",
+    "options": [
+      "a>0 and D=0",
+      "a>0 and D>0",
+      "a<0 and D<0",
+      "a>0 and D<0"
+    ],
+    "answer": 3,
+    "explain": "Quadratic is always positive iff a>0 and discriminant<0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d00168c2-0677-4f18-beb6-17560ab7cb23",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If one root of ax²+bx+c=0 is reciprocal of the other, then",
+    "formula": "c = a",
+    "options": [
+      "c = -a",
+      "b = c",
+      "c = a",
+      "b = a"
+    ],
+    "answer": 2,
+    "explain": "Product of roots αβ=1=c/a, so c=a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d5aeb5af-c1cd-41f5-a450-f255b45c51d9",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If one root of ax²+bx+c=0 is negative of the other, then",
+    "formula": "b = 0",
+    "options": [
+      "b = 0",
+      "c = 0",
+      "a = 0",
+      "a = c"
+    ],
+    "answer": 0,
+    "explain": "Sum of roots α+β=0=-b/a, so b=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2f67d7a4-8a80-4cfa-90c7-326472198c29",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Condition for ax²+bx+c=0 to have one root zero",
+    "formula": "c = 0",
+    "options": [
+      "c = 0",
+      "b = 0",
+      "a = c",
+      "a = 0"
+    ],
+    "answer": 0,
+    "explain": "If 0 is a root, product αβ=c/a=0 (a≠0), so c=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0361d3c6-9426-46fa-abb1-95def301b4c9",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If D>0 and a,b,c∈Q, D is NOT a perfect square, roots are",
+    "formula": "",
+    "options": [
+      "Equal",
+      "Complex",
+      "Irrational conjugates",
+      "Rational"
+    ],
+    "answer": 2,
+    "explain": "Rational coefficients + non-perfect-square D>0 ⇒ irrational conjugate roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f9edfe97-9419-4e7a-af73-0709c7ba2dbc",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If α,β are roots of ax²+bx+c=0, then 1/α+1/β equals",
+    "formula": "–b/c",
+    "options": [
+      "c/b",
+      "–c/b",
+      "b/c",
+      "–b/c"
+    ],
+    "answer": 3,
+    "explain": "1/α+1/β = (α+β)/(αβ) = (–b/a)/(c/a) = –b/c.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ffa350df-2341-43bb-b5d0-ff35491acd85",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Condition for roots of ax²+bx+c=0 to be equal in magnitude but opposite in sign",
+    "formula": "b = 0",
+    "options": [
+      "b = 0",
+      "c = 0",
+      "a = c",
+      "D = 0"
+    ],
+    "answer": 0,
+    "explain": "Roots equal & opposite ⟹ sum = 0 ⟹ –b/a = 0 ⟹ b = 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1896aafb-36a3-4bdc-a24b-23c8fbc0b4a4",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If one root of ax²+bx+c=0 is double the other, the condition is",
+    "formula": "2b²=9ac",
+    "options": [
+      "2b² = 9ac",
+      "4b² = 9ac",
+      "b² = 2ac",
+      "b² = 4ac"
+    ],
+    "answer": 0,
+    "explain": "Let roots be r,2r: sum=3r=–b/a, product=2r²=c/a ⟹ 2(b/3a)²=c/a ⟹ 2b²=9ac.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1f518f80-1ec4-4f77-9e97-42d51dcac04b",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The quadratic equation whose roots are reciprocals of roots of ax²+bx+c=0 is",
+    "formula": "cx²+bx+a=0",
+    "options": [
+      "cx²+bx+a=0",
+      "cx²–bx+a=0",
+      "ax²–bx+c=0",
+      "ax²+cx+b=0"
+    ],
+    "answer": 0,
+    "explain": "Replace x by 1/x in ax²+bx+c=0, then multiply by x² to get cx²+bx+a=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8875c290-0917-4ddc-8308-216a22e8eab6",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The quadratic equation whose roots are negatives of roots of ax²+bx+c=0 is",
+    "formula": "ax²–bx+c=0",
+    "options": [
+      "ax²+bx–c=0",
+      "ax²+bx+c=0 unchanged",
+      "cx²–bx+a=0",
+      "ax²–bx+c=0"
+    ],
+    "answer": 3,
+    "explain": "Replace x by –x: a(–x)²+b(–x)+c=0 ⟹ ax²–bx+c=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "cce7fa97-da5f-4b16-a9bf-0424270e62d1",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For ax²+bx+c<0 to hold for ALL real x, the required conditions are",
+    "formula": "a<0 and D<0",
+    "options": [
+      "a<0 and D>0",
+      "a<0 and D=0",
+      "a<0 and D<0",
+      "a>0 and D<0"
+    ],
+    "answer": 2,
+    "explain": "Parabola opens downward (a<0) and no real roots (D<0) ensures f(x)<0 for all x.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bef18704-7bf7-4682-955a-dd847b35066c",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Minimum value of ax²+bx+c (a>0) is",
+    "formula": "(4ac–b²)/4a",
+    "options": [
+      "(b²–4ac)/4a",
+      "–b/2a",
+      "(4ac–b²)/4a",
+      "c–b²/4"
+    ],
+    "answer": 2,
+    "explain": "Minimum = c – b²/(4a) = (4ac–b²)/(4a) occurs at vertex x=–b/(2a).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1ab6cfef-dd14-41a1-bef4-1df5c451c4b5",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Roots of ax²+bx+c=0 are both negative when (a>0)",
+    "formula": "S<0, P>0, D≥0",
+    "options": [
+      "S<0, P>0, D≥0",
+      "S<0, P<0, D≥0",
+      "S<0, P>0, D<0",
+      "S>0, P>0, D≥0"
+    ],
+    "answer": 0,
+    "explain": "Both roots negative ⟹ sum negative, product positive, and D≥0 for real roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d24af0a3-ed5c-400b-a4de-39abc59b4183",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If ax²+bx+c=0 has a repeated root, that root is also a root of",
+    "formula": "2ax+b=0",
+    "options": [
+      "bx+2c=0",
+      "ax²+c=0",
+      "2ax+b=0",
+      "ax+b=0"
+    ],
+    "answer": 2,
+    "explain": "Repeated root satisfies f(x)=0 and f'(x)=2ax+b=0 simultaneously.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9ab02a18-2ee4-46d4-9866-43ebd678f41c",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If p,q are roots of x²+bx+c=0, then (p+q)²–2pq equals",
+    "formula": "b²–2c",
+    "options": [
+      "b²–4c",
+      "b²–2c",
+      "b²+2c",
+      "2b–c²"
+    ],
+    "answer": 1,
+    "explain": "(p+q)²–2pq = (–b)²–2c = b²–2c, which equals p²+q².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0599ea73-7cd8-42a1-8dcc-8da834a6b8d4",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The expression b²–4ac is called the discriminant; its sign for complex conjugate roots is",
+    "formula": "D < 0",
+    "options": [
+      "D > 0",
+      "D = 0",
+      "D ≥ 0",
+      "D < 0"
+    ],
+    "answer": 3,
+    "explain": "Complex (non-real) conjugate roots occur precisely when discriminant D = b²–4ac < 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "6141ed5a-95ef-405a-9211-a6bdb36b5756",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If ax²+bx+c=0 (a≠0), both roots lie in interval (k,∞) iff",
+    "formula": "af(k)>0, D≥0, –b/2a>k",
+    "options": [
+      "f(k)>0, D>0 only",
+      "f(k)<0 and D>0",
+      "af(k)>0, D≥0, vertex x>k",
+      "af(k)>0 and b/2a>k"
+    ],
+    "answer": 2,
+    "explain": "Both roots > k requires f(k) same sign as a, real roots (D≥0), and vertex > k.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "74f4b3b5-fce6-4d68-a500-51806053f2f7",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For k to lie between the roots of ax²+bx+c=0, the condition is",
+    "formula": "af(k) < 0",
+    "options": [
+      "af(k) < 0",
+      "f(k) = 0",
+      "af(k) > 0",
+      "D > 0 only"
+    ],
+    "answer": 0,
+    "explain": "k lies strictly between roots iff af(k)<0 (value and leading coeff have opposite signs).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c05354b3-43f0-45ba-a4f3-7439ab327e18",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If α,β are roots of ax²+bx+c=0, then (α–β)² equals",
+    "formula": "(b²–4ac)/a²",
+    "options": [
+      "(4ac–b²)/a²",
+      "(b²–4ac)/a²",
+      "D/a",
+      "b²/a²–4c"
+    ],
+    "answer": 1,
+    "explain": "(α–β)²=(α+β)²–4αβ = b²/a²–4c/a = (b²–4ac)/a² = D/a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bd54d538-002f-42a5-948e-33d0d8dd8a69",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If f(x)=ax²+bx+c and f(0)·f(1)<0, then between 0 and 1 there is",
+    "formula": "",
+    "options": [
+      "Exactly two roots",
+      "At least one real root",
+      "A repeated root",
+      "No real root"
+    ],
+    "answer": 1,
+    "explain": "Opposite signs of f(0) and f(1) guarantee at least one root in (0,1) by IVT.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "3d23a51c-bcd7-4466-9824-148784a12dc8",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Product of roots of cx²+bx+a=0 (c≠0) is",
+    "formula": "a/c",
+    "options": [
+      "c/a",
+      "–b/c",
+      "b/c",
+      "a/c"
+    ],
+    "answer": 3,
+    "explain": "By Vieta's, product of roots = constant/leading coefficient = a/c.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "cf60a140-afa7-4dc3-a2eb-1b4b7edede73",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For ax²+bx+c=0, if a+b+c=0, then one root is always",
+    "formula": "x=1",
+    "options": [
+      "1",
+      "–c/a",
+      "–1",
+      "0"
+    ],
+    "answer": 0,
+    "explain": "Substituting x=1: a+b+c=0 ✓, so x=1 is always a root.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ffe88f00-aaa9-4b51-9e57-9ab1053a3eb1",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The equation x²+1=0 has roots that are",
+    "formula": "x=±i",
+    "options": [
+      "Real distinct roots",
+      "Irrational roots",
+      "Complex conjugates ±i",
+      "Real equal roots ±1"
+    ],
+    "answer": 2,
+    "explain": "D=0–4=–4<0 so roots are complex: x=±i, a conjugate pair.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ab908d53-662c-4256-8ba6-e86f1cc588dd",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The discriminant of a quadratic is negative. Its graph (a>0) intersects x-axis in how many points?",
+    "formula": "D<0",
+    "options": [
+      "2 points",
+      "0 points",
+      "1 point",
+      "Infinitely many"
+    ],
+    "answer": 1,
+    "explain": "D<0 means no real roots, so the parabola (a>0) lies entirely above the x-axis.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "6a39ebf8-a8c6-4004-a8f5-974e46a2371e",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The equation x²–bx+c=0 has both roots positive iff",
+    "formula": "",
+    "options": [
+      "b>0, c<0, b²≥4c",
+      "b>0, c>0, b²≤4c",
+      "b>0, c>0, b²≥4c",
+      "b<0, c>0, b²≥4c"
+    ],
+    "answer": 2,
+    "explain": "Sum=b>0, product=c>0, and D=b²–4c≥0 are all required.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c6383d6f-d4ea-4b1b-9e24-4cc131eed38a",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If α,β are roots of x²–px+q=0, then (α–β)² equals",
+    "formula": "p²–4q",
+    "options": [
+      "p²–2q",
+      "p²–4q",
+      "p²+4q",
+      "4q–p²"
+    ],
+    "answer": 1,
+    "explain": "(α–β)²=(α+β)²–4αβ=p²–4q.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ac2e753b-7e3a-4934-a4c2-21738230dc35",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For ax²+bx+c=0 (a>0) with roots α<β, f(x)<0 for x in",
+    "formula": "",
+    "options": [
+      "(–∞,α)∪(β,∞)",
+      "(–∞,β)",
+      "(α, β)",
+      "(α,∞)"
+    ],
+    "answer": 2,
+    "explain": "Upward parabola is negative only between the two roots α and β.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "5648bf8e-7d60-4db0-89a8-f1d0af7ec910",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If the roots of ax²+bx+c=0 are α,β then roots of cx²+bx+a=0 are",
+    "formula": "",
+    "options": [
+      "α+1 and β+1",
+      "α² and β²",
+      "–α and –β",
+      "1/α and 1/β"
+    ],
+    "answer": 3,
+    "explain": "Reversing coefficients replaces each root r with 1/r.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f11c8f1c-28a6-4d6a-a3a3-956c2b56bd78",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For x²+bx+c=0, if roots are α,β then (α−β)² equals",
+    "formula": "(α−β)²=b²−4c",
+    "options": [
+      "b²−4c",
+      "4c−b²",
+      "b²−2c",
+      "b²+4c"
+    ],
+    "answer": 0,
+    "explain": "(α−β)²=(α+β)²−4αβ=b²−4c for monic quadratic.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "795e772c-4fef-49f0-82b3-2138934e6d77",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Roots of ax²+bx+c=0 are real and equal when b²=4ac. The value of each root is",
+    "formula": "x = −b/(2a)",
+    "options": [
+      "b/(2a)",
+      "c/a",
+      "−b/(2a)",
+      "−b/a"
+    ],
+    "answer": 2,
+    "explain": "For equal roots D=0, both roots merge to −b/(2a).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "39ad5bf1-2261-4430-b526-90ce3c38b36c",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "Which condition ensures ax²+bx+c=0 has one root in (0,1) and other outside (0,1)?",
+    "formula": "f(0)·f(1)<0",
+    "options": [
+      "f(0)·f(1)>0",
+      "f(0)·f(1)<0",
+      "D>0 and f(0)<0",
+      "D=0 and f(1)=0"
+    ],
+    "answer": 1,
+    "explain": "One root inside, one outside (0,1) iff f(0)·f(1)<0 by intermediate value theorem.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2bcd7d9d-0772-4423-b55a-12b5b2dc6187",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If α,β are roots of x²−px+q=0, then (1+α)(1+β) equals",
+    "formula": "",
+    "options": [
+      "1+p−q",
+      "1+p+q",
+      "1−p+q",
+      "q−p+1"
+    ],
+    "answer": 1,
+    "explain": "f(−1)=1+p+q but (1+α)(1+β)=1+(α+β)+αβ=1+p+q. Wait: α+β=p, αβ=q → 1+p+q.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "105003a7-64fd-4baa-821a-c3df5f286e5b",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "The number of real roots of x²+|x|+1=0 is",
+    "formula": "",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "0"
+    ],
+    "answer": 3,
+    "explain": "x²≥0 and |x|≥0 and 1>0, so x²+|x|+1≥1>0; no real roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7ef15b3f-7d68-4bfe-98a6-4f43b591bc58",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If roots of x²−bx+c=0 are sinθ and cosθ, then b²−2c equals",
+    "formula": "sin²θ+cos²θ=1",
+    "options": [
+      "0",
+      "2",
+      "1",
+      "−1"
+    ],
+    "answer": 2,
+    "explain": "b=sinθ+cosθ, c=sinθcosθ; b²−2c=(sinθ+cosθ)²−2sinθcosθ=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "27a0d2a2-175f-4329-8ec5-7e8e95fb2d82",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "A quadratic with real coefficients has one root 3i. The quadratic is",
+    "formula": "",
+    "options": [
+      "x²+9=0",
+      "x²+6x+9=0",
+      "x²−9=0",
+      "x²+3x+9=0"
+    ],
+    "answer": 0,
+    "explain": "Complex roots come in conjugate pairs: roots are 3i and −3i; product=9, sum=0 → x²+9=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f7eddbcc-918f-473c-896f-1e58f2d4af73",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If α,β are roots of ax²+bx+c=0, then aα²+bα equals",
+    "formula": "aα²+bα+c=0",
+    "options": [
+      "−c",
+      "0",
+      "b",
+      "c"
+    ],
+    "answer": 0,
+    "explain": "Since α is a root: aα²+bα+c=0, so aα²+bα=−c.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d1f26ec4-2d98-45b3-93d0-8586ac350612",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If a+b+c=0 for ax²+bx+c=0, one root is always",
+    "formula": "",
+    "options": [
+      "2",
+      "-1",
+      "1",
+      "0"
+    ],
+    "answer": 2,
+    "explain": "x=1 satisfies a(1)+b(1)+c=a+b+c=0, so 1 is always a root.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9fb20052-0f39-4cd3-bf40-e340bcd4ee75",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For ax²+bx+c=0 (a>0), f(x)<0 for x between roots α<β means",
+    "formula": "",
+    "options": [
+      "x < α",
+      "x < α or x > β",
+      "x > β",
+      "α < x < β"
+    ],
+    "answer": 3,
+    "explain": "For a>0, parabola opens up; f(x)<0 strictly between the two roots.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a26554a8-415f-4d91-af6d-d20f7e376985",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "For ax²+bx+c=0 (a>0), if b²<4ac, then f(x) for all real x is",
+    "formula": "",
+    "options": [
+      "Can be zero",
+      "Changes sign",
+      "Always positive",
+      "Always negative"
+    ],
+    "answer": 2,
+    "explain": "D<0 and a>0 means parabola opens up with no real roots, so f(x)>0 for all x.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0c2bbd87-52df-4c99-8683-cefc35217511",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If roots of x²–bx+c=0 differ by 1, then b²–4c equals",
+    "formula": "(α–β)²=b²–4c",
+    "options": [
+      "0",
+      "1",
+      "4",
+      "-1"
+    ],
+    "answer": 1,
+    "explain": "(α–β)²=b²–4c; given |α–β|=1, so b²–4c=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4861544c-db54-4e4e-a37a-ea07fbc76e0c",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If the roots of ax²+bx+c=0 are α,β, then a(x–α)(x–β) expanded equals",
+    "formula": "",
+    "options": [
+      "ax²–bx+c",
+      "x²+bx+c",
+      "ax²+bx+c",
+      "a²x²+bx+c"
+    ],
+    "answer": 2,
+    "explain": "By Vieta's: a(x–α)(x–β)=a[x²–(α+β)x+αβ]=ax²+bx+c.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bab74143-ba77-49d7-9a19-5f78f94680f1",
+    "subject": "Mathematics",
+    "chapter": "Quadratic Equations",
+    "topic": "Quadratic Equations",
+    "prompt": "If α,β roots of ax²+bx+c=0, then α²+β² equals",
+    "formula": "(b²−2ac)/a²",
+    "options": [
+      "2ac/a²",
+      "(b²−4ac)/a²",
+      "(b²−2ac)/a²",
+      "(b²+2ac)/a²"
+    ],
+    "answer": 2,
+    "explain": "α²+β²=(α+β)²−2αβ=(−b/a)²−2(c/a)=(b²−2ac)/a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  }
 ]

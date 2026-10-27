@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import { T } from "@/src/components/ui";
-import { colors } from "@/src/theme";
+import { rapidColors as colors } from "@/src/theme";
 
 const LIMIT = 20000;
 

@@ -15,6 +15,8 @@ from revision import record_learning, weak_chapters, make_router as make_revisio
 from owner_downloads import make_router as make_owner_downloads
 from branding import router as branding_router
 from jl_transport import canonical_request
+from rf_access import make_access_router, install_access_guard
+from rapid_deck import fresh_deck
 import asyncio, json, logging, os, re, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
@@ -205,6 +207,8 @@ CARD_MTIMES: dict[str, float] = {}
 
 async def sync_cards():
     from pymongo import UpdateOne
+    if await db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
+        return
     changed = False
     # NEET is a preserved archive, not an actively synced/live bank in this app.
     for exam, directory in (("JEE", CARDS_DIR),):
@@ -260,8 +264,8 @@ async def rf_catalog(exam: Optional[Exam] = None):
         CATALOG_CACHE[key] = {"exam": exam, "diagram_count": sum(r["diagrams"] for r in rows), "subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
                               "chapters": [{"name": c, "count": counts.get((s, c), 0)} for c in chs]} for s, chs in order.items()],
                               "exams": {active: SUBJECTS[active] for active in ACTIVE_EXAMS},
-                              "review_status": "pilot_review_pending",
-                              "note": "Formula/concept cards for JEE Main. Pending owner review during the private pilot."}
+                              "review_status": "quick_recall_reviewed_v1",
+                              "note": "Full-bank quick-recall suitability pass completed. Answer time is an editorial estimate, not a student timing guarantee."}
     return CATALOG_CACHE[key]
 
 
@@ -294,8 +298,7 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
             docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "exam": exam, "subject": data.subject, "retired": {"$ne": True}}, {"_id": 0}).to_list(30)
             mode = "repeat_missed"
         else:
-            match = {"exam": exam, "subject": data.subject, "retired": {"$ne": True}, **({"chapter": data.chapter} if data.chapter else {}), **({"diagram": {"$ne": None}} if data.diagram_only else {})}
-            docs = await db.rf_cards.aggregate([{"$match": match}, {"$sample": {"size": data.count}}]).to_list(data.count)
+            docs = await fresh_deck(db, exam, data.subject, data.chapter, data.count)
             mode = "diagrams" if data.diagram_only else "fresh"
         if not docs:
             raise HTTPException(404, "No reviewed cards are available for this selection yet.")
@@ -380,7 +383,8 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
     resolve_exam(s.exam, s.subject)
     cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": s.card_ids}}).to_list(30)]
     by_id = {c.id: c for c in cards}
-    return {**s.model_dump(exclude={"mongo_id", "user_id"}), "cards": [public_card(by_id[i]) for i in s.card_ids if i in by_id]}
+    recorded = await db.rf_awards.find_one({'uid': uid, 'ref': 'solo:' + sid}, {'_id': 0, 'reward': 1}) if s.status == 'completed' else None
+    return {**s.model_dump(exclude={"mongo_id", "user_id"}), "cards": [public_card(by_id[i]) for i in s.card_ids if i in by_id], 'reward': (recorded or {}).get('reward')}
 
 
 from duels import make_router as make_duels  # noqa: E402
@@ -389,7 +393,9 @@ api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))
 api.include_router(branding_router)
+api.include_router(make_access_router(db))
 app.include_router(api)
+install_access_guard(app, db)
 from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
 app.add_middleware(GZipMiddleware, minimum_size=1024)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -402,6 +408,8 @@ async def startup():
     # Never persist upstream cookies on the shared client; each sid has its own jar (prevents cross-user session leak)
     http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[]))
     await db.rf_cards.create_index("id", unique=True)
+    await db.rf_access.create_index('digest', unique=True)
+    await db.rf_access.create_index('expires_at', expireAfterSeconds=0)
     await db.rf_cards.create_index([("subject", 1), ("chapter", 1)])
     await db.rf_sessions.create_index([("user_id", 1), ("request_id", 1)], unique=True)
     await db.rf_sessions.create_index("id", unique=True)

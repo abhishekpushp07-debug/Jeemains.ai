@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Pressable, View } from "react-native";
+import { Modal, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { playSfx } from "@/src/sfx";
 import Animated, { Easing, FadeInDown, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withTiming, ZoomIn } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import { rf } from "@/src/api/client";
+import { useAuth } from "@/src/auth";
+import { Art } from "@/src/rapid/Art";
 import { useCached } from "@/src/useCached";
-import { Icon, T } from "@/src/components/ui";
-import { colors, radius, space } from "@/src/theme";
+import { Icon, T } from "@/src/rapid/ui";
+import { rapidColors as colors, radius, space } from "@/src/theme";
+
+const styles = StyleSheet.create({ pending: { padding: 18, borderRadius: 18, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.custom_gameCard } });
 
 export type GameProfile = { xp: number; level: number; level_floor: number; next_level_xp: number; coins: number; streak: number; best_streak: number; played_today: boolean; sessions: number; duels: number; wins: number; cards_correct: number; badges: { id: string; title: string; body: string; earned: boolean }[]; avatar?: string; equipped?: Record<string, string | null>; owned?: string[]; freezes?: number; quests?: any[] };
 export type Reward = { xp: number; coins: number; streak: number; level_before: number; level_after: number; level_up: boolean; new_badges: { id: string; title: string; body: string }[];
@@ -78,6 +82,7 @@ export function Burst() {
 }
 
 function CountUp({ to, color, size = 26, prefix = "+" }: { to: number; color: string; size?: number; prefix?: string }) {
+  const reduced = useReducedMotion();
   const [v, setV] = useState(0);
   useEffect(() => {
     let k = 0;
@@ -89,7 +94,7 @@ function CountUp({ to, color, size = 26, prefix = "+" }: { to: number; color: st
     }, 35);
     return () => clearInterval(iv);
   }, [to]);
-  return <T w="heavy" size={size} color={color}>{prefix}{v}</T>;
+  return <T w="heavy" size={size} color={color}>{prefix}{reduced ? to : v}</T>;
 }
 
 function XpBar({ r }: { r: Reward }) {
@@ -117,13 +122,14 @@ function XpBar({ r }: { r: Reward }) {
 
 // Full-screen level-up moment (tap anywhere to continue).
 function LevelUpOverlay({ level, onClose }: { level: number; onClose: () => void }) {
+  const reduced = useReducedMotion();
   useEffect(() => { playSfx("levelup"); const t = setTimeout(onClose, 2600); return () => clearTimeout(t); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Modal transparent animationType="fade" visible onRequestClose={onClose}>
       <Pressable testID="level-up-overlay" onPress={onClose} style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_gameBg + "F2", gap: space.lg }}>
         <Burst />
-        <Animated.View entering={ZoomIn.springify().damping(8)}><LevelGem level={level} size={150} /></Animated.View>
-        <Animated.View entering={FadeInDown.delay(250)} style={{ alignItems: "center", gap: 4 }}>
+        <Animated.View entering={reduced ? undefined : ZoomIn.springify().damping(8)}><LevelGem level={level} size={150} /></Animated.View>
+        <Animated.View entering={reduced ? undefined : FadeInDown.delay(250)} style={{ alignItems: "center", gap: 4 }}>
           <T w="heavy" size={40} color={colors.custom_neonAmber} style={{ letterSpacing: 3 }}>LEVEL UP!</T>
           <T w="bold" size={16} color={colors.onSurfaceInverse}>You reached Level {level}</T>
           <T size={12} color={colors.custom_gameMuted}>Tap to continue</T>
@@ -133,18 +139,22 @@ function LevelUpOverlay({ level, onClose }: { level: number; onClose: () => void
   );
 }
 
-export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward?: Reward | null; title: string; testID?: string }) {
+export function RewardPanel({ reward, title, testID = "reward-panel", historical = false }: { reward?: Reward | null; title: string; testID?: string; historical?: boolean }) {
   const router = useRouter();
+  const reduced = useReducedMotion();
+  const { user } = useAuth();
+  const profile = useGameProfile(user?.id);
   const [closed, setClosed] = useState<number | null>(null);
-  const lvl = !!reward?.level_up && closed !== reward.level_after;
+  const lvl = !historical && !!reward?.level_up && closed !== reward.level_after;
   useEffect(() => {
-    if (reward && !reward.level_up && reward.coins > 0) playSfx("coin", 0.7);
+    if (!historical && reward && !reward.level_up && reward.coins > 0) playSfx("coin", 0.7);
+    profile.reload();
   }, [reward?.level_after, reward?.coins]); // eslint-disable-line react-hooks/exhaustive-deps
-  if (!reward) return null;
+  if (!reward || !Number.isFinite(reward.coins)) return <View testID={`${testID}-pending`} style={styles.pending}><T size={13} color={colors.muted}>Rewards are not confirmed yet. Reopen this result to check.</T></View>;
   if (reward.played === false) {
     return (
       <View testID={testID} style={{ borderRadius: radius.lg, padding: space.lg, gap: space.sm, alignItems: "center", backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
-        <Icon name="treasure-chest" size={40} color={colors.custom_gameMuted} />
+        <Art kind="spark" size={64} />
         <T w="heavy" size={17} color={colors.onSurfaceInverse}>{title}</T>
         <T size={13} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>Answer at least one card to earn XP, coins and keep your streak alive.</T>
       </View>
@@ -153,8 +163,8 @@ export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward
   return (
     <View testID={testID} style={{ borderRadius: radius.lg, overflow: "hidden" }}>
       <LinearGradient colors={[colors.custom_gameCardHi, colors.custom_gameBg]} style={{ padding: space.lg, gap: space.md, alignItems: "center" }}>
-        <Burst />
-        <Animated.View entering={ZoomIn.duration(350)}><Icon name="treasure-chest" size={54} color={colors.custom_neonAmber} /></Animated.View>
+        {!historical ? <Burst /> : null}
+        <Animated.View entering={reduced || historical ? undefined : ZoomIn.duration(350)}><Art kind="trophy" size={100} /></Animated.View>
         <T w="heavy" size={20} color={colors.onSurfaceInverse} style={{ textAlign: "center" }}>{title}</T>
         <View style={{ flexDirection: "row", gap: space.md }}>
           <View style={{ alignItems: "center", flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard }} testID="reward-xp">
@@ -163,7 +173,7 @@ export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward
           </View>
           <View style={{ alignItems: "center", flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard }} testID="reward-coins">
             <CountUp to={reward.coins} color={colors.custom_neonAmber} />
-            <T size={11} w="bold" color={colors.custom_gameMuted}>COINS</T>
+            <T testID="reward-credit-label" size={11} w="bold" color={colors.custom_gameMuted}>{historical ? "COINS EARNED" : "COINS CREDITED"}</T>
           </View>
           <View style={{ alignItems: "center", flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard }} testID="reward-streak">
             <View style={{ flexDirection: "row", alignItems: "center" }}><Icon name="fire" size={22} color={colors.custom_examBitsat} /><T w="heavy" size={26} color={colors.onSurfaceInverse}>{reward.streak}</T></View>
@@ -171,7 +181,7 @@ export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward
           </View>
         </View>
         {reward.level_up ? (
-          <Animated.View entering={FadeInDown.delay(300)} testID="reward-level-up" style={{ flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.lg, paddingVertical: space.sm, borderRadius: radius.pill, backgroundColor: colors.custom_neonAmber }}>
+          <Animated.View entering={reduced ? undefined : FadeInDown.delay(300)} testID="reward-level-up" style={{ flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.lg, paddingVertical: space.sm, borderRadius: radius.pill, backgroundColor: colors.custom_neonAmber }}>
             <Icon name="arrow-up-bold-circle" size={20} color={colors.custom_gameBg} />
             <T w="heavy" size={14} color={colors.custom_gameBg}>LEVEL UP! You reached Level {reward.level_after}</T>
           </Animated.View>
@@ -180,7 +190,7 @@ export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward
         {reward.coins_total != null ? (
           <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }} testID="reward-coin-balance">
             <Icon name="hexagon-multiple" size={16} color={colors.custom_neonAmber} />
-            <T w="bold" size={13} color={colors.custom_gameMuted}>Balance <T w="heavy" size={13} color={colors.custom_neonAmber}>{reward.coins_total}</T> coins</T>
+            <T w="bold" size={13} color={colors.custom_gameMuted}>Current balance <T w="heavy" size={13} color={colors.custom_neonAmber}>{profile.data?.coins ?? "—"}</T> Coins</T>
           </View>
         ) : null}
         {reward.quest_ready ? (
@@ -192,7 +202,7 @@ export function RewardPanel({ reward, title, testID = "reward-panel" }: { reward
         ) : null}
         {lvl ? <LevelUpOverlay level={reward.level_after} onClose={() => setClosed(reward.level_after)} /> : null}
         {reward.new_badges.map((b, i) => (
-          <Animated.View key={b.id} entering={FadeInDown.delay(450 + i * 150)} testID={"reward-badge-" + b.id} style={{ flexDirection: "row", alignItems: "center", gap: space.md, alignSelf: "stretch", padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_neonAmber }}>
+          <Animated.View key={b.id} entering={reduced ? undefined : FadeInDown.delay(450 + i * 150)} testID={"reward-badge-" + b.id} style={{ flexDirection: "row", alignItems: "center", gap: space.md, alignSelf: "stretch", padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_neonAmber }}>
             <Icon name={BADGE_ICON[b.id] || "medal"} size={28} color={colors.custom_neonAmber} />
             <View style={{ flex: 1 }}>
               <T w="heavy" size={14} color={colors.custom_neonAmber}>New badge · {b.title}</T>

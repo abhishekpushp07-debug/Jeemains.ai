@@ -1,1710 +1,1577 @@
 [
- {
-  "id": "61bb8d74-ea46-4e11-8a18-4d90ca11cd7a",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrix Multiplication",
-  "prompt": "Order of matrix A is 3×4, B is 4×5. Order of AB is?",
-  "formula": "",
-  "options": [
-   "4×4",
-   "3×5",
-   "4×5",
-   "3×4"
-  ],
-  "answer": 1,
-  "explain": "If A is m×n and B is n×p, then AB is m×p. So 3×5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0f25356e-f270-41b6-9e8e-75dab9eb6371",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "For a square matrix A, det(kA) where A is n×n equals?",
-  "formula": "det(kA) = kⁿ det(A)",
-  "options": [
-   "det(A)",
-   "kⁿ det(A)",
-   "k² det(A)",
-   "k det(A)"
-  ],
-  "answer": 1,
-  "explain": "Each row gets multiplied by k; with n rows, determinant scales by kⁿ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "613046c5-9911-40b3-a109-318c94def50f",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "det(AB) equals?",
-  "formula": "det(AB) = det(A)·det(B)",
-  "options": [
-   "det(A)+det(B)",
-   "det(A)−det(B)",
-   "det(A)/det(B)",
-   "det(A)·det(B)"
-  ],
-  "answer": 3,
-  "explain": "Multiplicative property of determinants: det(AB)=det(A)det(B).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2296e6e3-a972-411e-9cf0-0bb12823b289",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Types of Matrices",
-  "prompt": "A symmetric matrix satisfies?",
-  "formula": "Aᵀ = A",
-  "options": [
-   "Aᵀ = A",
-   "Aᵀ = −A",
-   "A = A⁻¹",
-   "A² = I"
-  ],
-  "answer": 0,
-  "explain": "A matrix is symmetric if transpose equals itself: Aᵀ = A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "458ad19b-309b-43d6-9711-f744aa8d8130",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Types of Matrices",
-  "prompt": "A skew-symmetric matrix satisfies?",
-  "formula": "Aᵀ = −A",
-  "options": [
-   "Aᵀ = A",
-   "det(A) = 1",
-   "A² = −I",
-   "Aᵀ = −A"
-  ],
-  "answer": 3,
-  "explain": "Skew-symmetric means Aᵀ = −A; diagonal elements are always zero.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "14d36e0f-d2b7-4f18-ad9f-d7940d24f1c3",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "For skew-symmetric matrix of odd order, det(A) = ?",
-  "formula": "det(A) = 0",
-  "options": [
-   "1",
-   "Cannot determine",
-   "−1",
-   "0"
-  ],
-  "answer": 3,
-  "explain": "det(Aᵀ)=det(A) and det(−A)=(−1)ⁿdet(A); odd n gives det(A)=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "37cf00bb-699d-4ecd-b143-fc00a9d3ac2e",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Adjoint and Inverse",
-  "prompt": "Adjoint of A for 2×2: A=[[a,b],[c,d]] is?",
-  "formula": "adj(A) = [[d,−b],[−c,a]]",
-  "options": [
-   "[[d,−b],[−c,a]]",
-   "[[a,b],[c,d]]",
-   "[[d,b],[c,a]]",
-   "[[a,−b],[−c,d]]"
-  ],
-  "answer": 0,
-  "explain": "For 2×2, swap diagonal elements and negate off-diagonal elements.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7800c6a9-c7b9-4278-8994-caa3f535bf3c",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Adjoint and Inverse",
-  "prompt": "A⁻¹ in terms of adj(A) is?",
-  "formula": "A⁻¹ = adj(A)/det(A)",
-  "options": [
-   "adj(A)·det(A)",
-   "det(A)/adj(A)",
-   "adj(A)−det(A)",
-   "adj(A)/det(A)"
-  ],
-  "answer": 3,
-  "explain": "Inverse exists when det(A)≠0; formula: A⁻¹ = adj(A)/det(A).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "36d7ae03-37b4-4ab1-a975-f7eef0a1917f",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Cramer's Rule",
-  "prompt": "Cramer's rule: solution x₁ = ?",
-  "formula": "x₁ = D₁/D",
-  "options": [
-   "D₁−D",
-   "D₁/D",
-   "D₁·D",
-   "D/D₁"
-  ],
-  "answer": 1,
-  "explain": "In Cramer's rule, each variable = determinant with replaced column / det(coeff matrix).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f4e395cd-64ab-47af-bc22-ca0b3242f9d1",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "System of Equations",
-  "prompt": "For homogeneous system AX=0, non-trivial solution exists when?",
-  "formula": "det(A) = 0",
-  "options": [
-   "det(A) = 1",
-   "det(A) < 0",
-   "det(A) ≠ 0",
-   "det(A) = 0"
-  ],
-  "answer": 3,
-  "explain": "Non-trivial (non-zero) solutions exist iff the coefficient matrix is singular.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d71acdfa-e956-4a33-821e-cb9c8e9cbd12",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Transpose",
-  "prompt": "Transpose of product (AB)ᵀ equals?",
-  "formula": "(AB)ᵀ = BᵀAᵀ",
-  "options": [
-   "AᵀBᵀ",
-   "Aᵀ+Bᵀ",
-   "BᵀAᵀ",
-   "AB"
-  ],
-  "answer": 2,
-  "explain": "Reversal rule for transpose: (AB)ᵀ = BᵀAᵀ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c63cdeae-cfb9-4c07-a8a9-8c89965c5fb0",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "If two rows of a determinant are identical, det = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "0",
-   "Undefined",
-   "2"
-  ],
-  "answer": 1,
-  "explain": "Interchanging identical rows changes sign but value is same, so det = 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e2c3ff47-be16-4c97-bd9d-679146233352",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "Interchanging two rows of a determinant multiplies det by?",
-  "formula": "",
-  "options": [
-   "−1",
-   "0",
-   "+1",
-   "2"
-  ],
-  "answer": 0,
-  "explain": "Each row interchange changes the sign of the determinant.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8c672881-8476-4a71-adfe-833605750a70",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "det(Aᵀ) = ?",
-  "formula": "det(Aᵀ) = det(A)",
-  "options": [
-   "det(A)",
-   "−det(A)",
-   "0",
-   "1/det(A)"
-  ],
-  "answer": 0,
-  "explain": "Transposing a matrix does not change its determinant value.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "80e9feac-c8b6-4b63-8b70-f5ae7b273d82",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Special Matrices",
-  "prompt": "det of diagonal matrix diag(d₁,d₂,d₃) = ?",
-  "formula": "d₁·d₂·d₃",
-  "options": [
-   "0",
-   "d₁·d₂·d₃",
-   "d₁+d₂+d₃",
-   "d₁²+d₂²+d₃²"
-  ],
-  "answer": 1,
-  "explain": "Determinant of a diagonal matrix is the product of diagonal entries.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "60e54d71-c7e8-4689-b4ab-ef2345adf0ea",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Symmetric Matrices",
-  "prompt": "If A and B are symmetric, AB is symmetric only if?",
-  "formula": "",
-  "options": [
-   "det(A)=det(B)",
-   "A+B=I",
-   "A = B",
-   "AB = BA"
-  ],
-  "answer": 3,
-  "explain": "(AB)ᵀ = BᵀAᵀ = BA; equals AB only when AB = BA (they commute).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6c6bec6a-d924-45c9-a155-33ca1a8c2340",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Properties of Determinants",
-  "prompt": "Adding a multiple of one row to another row changes det by?",
-  "formula": "",
-  "options": [
-   "Makes det zero",
-   "Nothing (det unchanged)",
-   "Adds that multiple to det",
-   "Multiplies det by that multiple"
-  ],
-  "answer": 1,
-  "explain": "Row operation Rᵢ → Rᵢ + kRⱼ (i≠j) does not change the determinant.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7af3bb87-57f3-4b60-8b93-6372205a533a",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For n×n matrix A, det(adj A) = ?",
-  "formula": "det(adj A) = (det A)^(n−1)",
-  "options": [
-   "(det A)^(n+1)",
-   "det A",
-   "(det A)^n",
-   "(det A)^(n−1)"
-  ],
-  "answer": 3,
-  "explain": "Standard result: det(adj A) = (det A)^(n−1) for any n×n matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "90f9a426-e91f-4c6f-9520-c9d6327b791d",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For n×n matrix A, A·adj(A) = ?",
-  "formula": "A·adj(A) = det(A)·Iₙ",
-  "options": [
-   "adj(A)·A⁻¹",
-   "det(A)·Iₙ",
-   "det(A)·A",
-   "Iₙ"
-  ],
-  "answer": 1,
-  "explain": "A·adj(A) = adj(A)·A = det(A)·I; fundamental property linking adjoint and determinant.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c1f2feef-9aac-4c7c-9ce3-bfe575082e97",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is n×n and det(A)≠0, rank of A is?",
-  "formula": "ρ(A) = n",
-  "options": [
-   "1",
-   "0",
-   "n",
-   "n−1"
-  ],
-  "answer": 2,
-  "explain": "A non-singular (invertible) matrix has full rank equal to its order n.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1bd239ed-f311-45e4-922c-79f94f92d842",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "det of a triangular (upper/lower) matrix equals?",
-  "formula": "det = product of diagonal entries",
-  "options": [
-   "Product of all entries",
-   "Sum of diagonal entries",
-   "Sum of all entries",
-   "Product of diagonal entries"
-  ],
-  "answer": 3,
-  "explain": "For any triangular matrix, determinant = product of its main diagonal elements.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "63157b8d-a898-4432-a42f-70960741b3d1",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is m×n and B is n×p, then (AB)ᵀ order is?",
-  "formula": "(AB)ᵀ is p×m",
-  "options": [
-   "p × n",
-   "m × p",
-   "n × m",
-   "p × m"
-  ],
-  "answer": 3,
-  "explain": "AB is m×p, so (AB)ᵀ is p×m.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "62ec5445-617a-4621-8bfd-5b49cfa1e02d",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Cofactor Cᵢⱼ of element aᵢⱼ is?",
-  "formula": "Cᵢⱼ = (−1)^(i+j) Mᵢⱼ",
-  "options": [
-   "(−1)^(i−j) × minor Mᵢⱼ",
-   "(−1)^(i+j) × minor Mᵢⱼ",
-   "minor Mᵢⱼ only",
-   "(i+j) × minor Mᵢⱼ"
-  ],
-  "answer": 1,
-  "explain": "Cofactor = signed minor; sign given by (−1)^(i+j).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c4538650-b64a-46da-9dfe-6777e065aa1c",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Sum of products of elements of a row with cofactors of ANOTHER row equals?",
-  "formula": "Σ aᵢₖ Cⱼₖ = 0 (i≠j)",
-  "options": [
-   "det(A)",
-   "1",
-   "0",
-   "trace(A)"
-  ],
-  "answer": 2,
-  "explain": "Alien cofactor property: cross-multiplication of row elements with cofactors of different row = 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b0908d1f-a4f5-47d1-9962-28dfcebeee08",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If each element of a row is multiplied by k, det is multiplied by?",
-  "formula": "det → k·det",
-  "options": [
-   "1/k",
-   "k²",
-   "kⁿ",
-   "k"
-  ],
-  "answer": 3,
-  "explain": "Multiplying ALL elements of one row by k multiplies det by k (not kⁿ).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "55532fa2-3109-4c06-9a25-ec15811b5fb4",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For a 3×3 matrix A with det(A)=d, det(3A) = ?",
-  "formula": "det(3A) = 3³·d = 27d",
-  "options": [
-   "3d",
-   "81d",
-   "27d",
-   "9d"
-  ],
-  "answer": 2,
-  "explain": "det(kA)=kⁿ·det(A); for n=3, k=3: 3³·d = 27d.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "611d1a10-298e-438d-b2b3-ae899f075b40",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Matrix multiplication is generally NOT?",
-  "formula": "AB ≠ BA in general",
-  "options": [
-   "Commutative",
-   "Closed",
-   "Distributive",
-   "Associative"
-  ],
-  "answer": 0,
-  "explain": "Matrix multiplication is NOT commutative; AB ≠ BA in general.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3edd2a87-e2d8-4478-ba6e-17933945a39b",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For a square matrix, A + Aᵀ is always?",
-  "formula": "(A + Aᵀ)ᵀ = A + Aᵀ",
-  "options": [
-   "Orthogonal",
-   "Skew-symmetric",
-   "Symmetric",
-   "Singular"
-  ],
-  "answer": 2,
-  "explain": "A + Aᵀ is always symmetric since (A+Aᵀ)ᵀ = Aᵀ+A = A+Aᵀ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7ed25edc-108e-4ec4-995d-a04ab694e930",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Diagonal elements of a skew-symmetric matrix are always?",
-  "formula": "aᵢᵢ = 0",
-  "options": [
-   "Zero",
-   "One",
-   "Equal to each other",
-   "Positive"
-  ],
-  "answer": 0,
-  "explain": "From Aᵀ = −A: aᵢᵢ = −aᵢᵢ ⟹ aᵢᵢ = 0; all diagonal entries must be zero.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "18c3066e-f977-47ca-bd22-0cf94869277a",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is invertible, (A⁻¹)ᵀ = ?",
-  "formula": "(A⁻¹)ᵀ = (Aᵀ)⁻¹",
-  "options": [
-   "(A⁻¹)²",
-   "A⁻¹",
-   "(Aᵀ)⁻¹",
-   "(Aᵀ)"
-  ],
-  "answer": 2,
-  "explain": "Transpose and inverse operations commute: (A⁻¹)ᵀ = (Aᵀ)⁻¹.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "325508a5-12ac-4cdf-9868-0945daca64c1",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "det of a matrix with a zero row is?",
-  "formula": "det = 0",
-  "options": [
-   "Equal to trace",
-   "1",
-   "Undefined",
-   "0"
-  ],
-  "answer": 3,
-  "explain": "If any row (or column) of a matrix is all zeros, its determinant is zero.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d162658f-af51-4333-8fbf-9ff244cde906",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Every square matrix can be expressed as sum of symmetric and skew-symmetric matrices. Symmetric part is?",
-  "formula": "½(A + Aᵀ)",
-  "options": [
-   "A + Aᵀ",
-   "½(A + Aᵀ)",
-   "½(Aᵀ − A)",
-   "½(A − Aᵀ)"
-  ],
-  "answer": 1,
-  "explain": "Any square matrix A = ½(A+Aᵀ) + ½(A−Aᵀ); first term is symmetric part.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "19a1ac69-bded-40e7-80b3-f381f607c03d",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "(AB)⁻¹ equals? (A,B invertible)",
-  "formula": "(AB)⁻¹ = B⁻¹A⁻¹",
-  "options": [
-   "A⁻¹B⁻¹",
-   "A⁻¹B",
-   "B⁻¹A⁻¹",
-   "B⁻¹A"
-  ],
-  "answer": 2,
-  "explain": "Inverse of a product reverses order: (AB)⁻¹ = B⁻¹A⁻¹.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "23041a49-3aed-4f2a-a049-5d5e0d01b959",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 3×3 matrix A with det(A)=d≠0, det(A⁻¹) = ?",
-  "formula": "det(A⁻¹) = 1/det(A)",
-  "options": [
-   "d",
-   "1/d",
-   "d²",
-   "−d"
-  ],
-  "answer": 1,
-  "explain": "Since AA⁻¹=I, det(A)·det(A⁻¹)=1, so det(A⁻¹)=1/det(A).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1717097b-abdd-442c-b8a0-2ef7e53a24fd",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For n×n matrix A, trace(A) equals sum of its?",
-  "formula": "",
-  "options": [
-   "Column sums",
-   "Cofactors",
-   "Eigenvalues",
-   "Diagonal minors"
-  ],
-  "answer": 2,
-  "explain": "trace(A) = Σaᵢᵢ = sum of all eigenvalues of A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "61c6fd05-e236-4f64-b58a-0a67e525c36a",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "det(A) for n×n equals the product of its?",
-  "formula": "",
-  "options": [
-   "Cofactors",
-   "Singular values",
-   "Diagonal elements",
-   "Eigenvalues"
-  ],
-  "answer": 3,
-  "explain": "det(A) = product of all eigenvalues (counted with multiplicity).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "74060380-49e4-45ea-8601-bbf2139099fa",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is a 2×2 matrix with eigenvalues λ₁,λ₂, then trace(A) is?",
-  "formula": "",
-  "options": [
-   "λ₁+λ₂",
-   "λ₁/λ₂",
-   "λ₁·λ₂",
-   "λ₁−λ₂"
-  ],
-  "answer": 0,
-  "explain": "For any square matrix, trace = sum of eigenvalues.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e5c9e597-2c0a-4de7-a0b7-935bf27bd318",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3 with det(A)=5, det(2A) = ?",
-  "formula": "det(kA)=kⁿ·det(A)",
-  "options": [
-   "20",
-   "10",
-   "160",
-   "40"
-  ],
-  "answer": 3,
-  "explain": "det(2A)=2³·det(A)=8×5=40.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e0ca67e1-9606-42a1-bc76-53fc31ecb954",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "The minor Mᵢⱼ of element aᵢⱼ is the determinant of matrix obtained by?",
-  "formula": "",
-  "options": [
-   "Replacing row i by zeros",
-   "Deleting row i and column j",
-   "Deleting row j and column i",
-   "Transposing row i and column j"
-  ],
-  "answer": 1,
-  "explain": "Minor Mᵢⱼ = det of submatrix after deleting ith row and jth column.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b9e2dd92-68b9-4db9-b936-73e24831eed7",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Cofactor Cᵢⱼ relates to minor Mᵢⱼ by?",
-  "formula": "Cᵢⱼ = (−1)^(i+j) Mᵢⱼ",
-  "options": [
-   "Mᵢⱼ/(i+j)",
-   "(−1)^(i−j) Mᵢⱼ",
-   "(−1)^(ij) Mᵢⱼ",
-   "(−1)^(i+j) Mᵢⱼ"
-  ],
-  "answer": 3,
-  "explain": "Cofactor includes sign factor (−1)^(i+j) applied to the minor.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ccffe545-5d15-4f75-a739-fd7fffd5c723",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "The system AX=B has unique solution when?",
-  "formula": "",
-  "options": [
-   "det(B) = 0",
-   "det(A) ≠ 0",
-   "rank(A) < rank([A|B])",
-   "det(A) = 0"
-  ],
-  "answer": 1,
-  "explain": "Unique solution exists iff A is invertible, i.e., det(A)≠0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b3426eee-7afe-4eed-9ceb-65eec5db79e3",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For homogeneous system AX=0, trivial solution always exists when?",
-  "formula": "",
-  "options": [
-   "Only if A is symmetric",
-   "Always (for any A)",
-   "Only if det(A)=0",
-   "Only if det(A)≠0"
-  ],
-  "answer": 1,
-  "explain": "X=0 always satisfies AX=0 regardless of A; trivial solution always exists.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8bbdd433-3343-4a89-9a55-2d5f3e038a93",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3 skew-symmetric, diagonal elements must be?",
-  "formula": "",
-  "options": [
-   "All positive",
-   "All negative",
-   "All zero",
-   "All equal"
-  ],
-  "answer": 2,
-  "explain": "Skew-symmetric: aᵢⱼ=−aⱼᵢ ⟹ aᵢᵢ=−aᵢᵢ ⟹ aᵢᵢ=0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f0a93ac3-3620-4635-96c9-14a1c8d0ec71",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "det(A²) in terms of det(A) is?",
-  "formula": "det(A²)=[det(A)]²",
-  "options": [
-   "det(A)+det(A)",
-   "det(2A)",
-   "2·det(A)",
-   "[det(A)]²"
-  ],
-  "answer": 3,
-  "explain": "det(A²)=det(A·A)=det(A)·det(A)=[det(A)]².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "42d44c20-dd45-436f-8fc8-3a41828be70d",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is orthogonal, det(A) can only be?",
-  "formula": "det(A)=±1",
-  "options": [
-   "0 or 1",
-   "±1",
-   "Only 1",
-   "Any real number"
-  ],
-  "answer": 1,
-  "explain": "AAᵀ=I ⟹ det(A)·det(Aᵀ)=1 ⟹ [det(A)]²=1 ⟹ det(A)=±1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bcf374f6-b828-42ea-9e2c-d5d364333403",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For a 3×3 matrix, expansion of det along any row/column gives the same?",
-  "formula": "",
-  "options": [
-   "Sum of minors",
-   "Value of det",
-   "Different values",
-   "Sum of cofactors"
-  ],
-  "answer": 1,
-  "explain": "Determinant is unique; expansion along any row or column yields the same value.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f24c1b43-f142-4542-bbfc-cd7f97c98ba2",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is idempotent (A²=A) and invertible, then A must equal?",
-  "formula": "",
-  "options": [
-   "O",
-   "2A",
-   "I",
-   "Aᵀ"
-  ],
-  "answer": 2,
-  "explain": "A²=A ⟹ A(A−I)=O; if A invertible, multiply A⁻¹ ⟹ A=I.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9d246a07-1f94-4c15-90b9-876982a44151",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Matrix A is called singular if?",
-  "formula": "",
-  "options": [
-   "Aᵀ = A",
-   "det(A) ≠ 0",
-   "det(A) = 0",
-   "A² = A"
-  ],
-  "answer": 2,
-  "explain": "A square matrix is singular iff its determinant is zero.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0d1170eb-8dc3-4e9a-a75a-a962e28f4809",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A and B are n×n matrices, trace(A+B) equals?",
-  "formula": "",
-  "options": [
-   "trace(A)·trace(B)",
-   "trace(A)+trace(B)",
-   "n·trace(A)",
-   "trace(AB)"
-  ],
-  "answer": 1,
-  "explain": "Trace is linear: trace(A+B)=Σ(aᵢᵢ+bᵢᵢ)=trace(A)+trace(B).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9d0acdad-1689-46b1-ad25-b0a64a0e7a9e",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For square matrices A, B: trace(AB) equals?",
-  "formula": "",
-  "options": [
-   "trace(Aᵀ B)",
-   "det(AB)",
-   "trace(BA)",
-   "trace(A)·trace(B)"
-  ],
-  "answer": 2,
-  "explain": "trace(AB)=trace(BA) always; this is the cyclic property of trace.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "70fd48ac-7288-4272-8c73-a2df244552ac",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3 and det(A)=d, then det(−A) = ?",
-  "formula": "det(−A)=(−1)ⁿdet(A)",
-  "options": [
-   "−d",
-   "3d",
-   "−3d",
-   "d"
-  ],
-  "answer": 0,
-  "explain": "det(−A)=(−1)³det(A)=−d for 3×3 matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "22d3ca99-b5f5-4f2d-8144-f886eb120f79",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 2×2 matrix A, det(adj A) equals?",
-  "formula": "det(adj A) = det(A)^(n−1)",
-  "options": [
-   "1/det(A)",
-   "det(A)²",
-   "det(A)³",
-   "det(A)"
-  ],
-  "answer": 3,
-  "explain": "For n=2, det(adj A)=det(A)^(n−1)=det(A)^1=det(A).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d24be8c5-f964-408f-bcbb-871165f511e5",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3, then A·(adj A) equals?",
-  "formula": "A·adj(A) = det(A)·I",
-  "options": [
-   "I₃",
-   "adj(A)·A⁻¹",
-   "det(A)·I₃",
-   "det(A)·A"
-  ],
-  "answer": 2,
-  "explain": "By definition, A·adj(A)=det(A)·Iₙ for any square matrix A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5a1e5476-9254-44e9-9afb-635537d81b9e",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For a 4×4 matrix A with det(A)=3, det(adj A) = ?",
-  "formula": "det(adj A) = det(A)^(n−1)",
-  "options": [
-   "81",
-   "27",
-   "9",
-   "3"
-  ],
-  "answer": 1,
-  "explain": "n=4, so det(adj A)=3^(4−1)=3³=27.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "55052e1a-88cb-473a-9f57-616764d868b6",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For square matrix A, which property does adj(kA) satisfy?",
-  "formula": "adj(kA) = kⁿ⁻¹·adj(A)",
-  "options": [
-   "kⁿ·adj(A)",
-   "kⁿ⁻¹·adj(A)",
-   "adj(A)/k",
-   "k·adj(A)"
-  ],
-  "answer": 1,
-  "explain": "adj(kA)=k^(n−1)·adj(A) for n×n matrix A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9e34102b-da0c-4c51-9b93-bb120c049c26",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3 with det(A)=2, then det(adj(adj A)) = ?",
-  "formula": "det(adj(adj A)) = det(A)^(n−1)²",
-  "options": [
-   "16",
-   "4",
-   "64",
-   "8"
-  ],
-  "answer": 0,
-  "explain": "det(adj(adj A))=det(A)^((n−1)²)=2^4=16 for n=3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9edb1bc8-8ddf-422c-821e-796b70d06e03",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "The number of non-zero rows in row-echelon form defines matrix's?",
-  "formula": "",
-  "options": [
-   "Order",
-   "Nullity",
-   "Trace",
-   "Rank"
-  ],
-  "answer": 3,
-  "explain": "Rank equals the number of non-zero rows in row echelon (reduced) form.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "30a3bc7a-ef10-41b4-ab43-f02897fbccf5",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is symmetric and B is symmetric, (A+B) is?",
-  "formula": "(A+B)ᵀ = Aᵀ+Bᵀ",
-  "options": [
-   "Singular",
-   "Always symmetric",
-   "Always skew-symmetric",
-   "Orthogonal"
-  ],
-  "answer": 1,
-  "explain": "(A+B)ᵀ=Aᵀ+Bᵀ=A+B, so A+B is always symmetric.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8d28093b-642f-408a-aed1-e045801b82ea",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 3×3 matrix A, if Aᵀ = −A, then A is?",
-  "formula": "Aᵀ = −A",
-  "options": [
-   "Idempotent",
-   "Orthogonal",
-   "Skew-symmetric",
-   "Symmetric"
-  ],
-  "answer": 2,
-  "explain": "The condition Aᵀ=−A defines a skew-symmetric matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1b1e116c-dfa3-4da7-b8c4-c4e031739bad",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is a 2×2 matrix with eigenvalues 3 and −1, then det(A) = ?",
-  "formula": "det(A) = λ₁·λ₂",
-  "options": [
-   "3",
-   "2",
-   "−3",
-   "−1"
-  ],
-  "answer": 2,
-  "explain": "Determinant equals product of eigenvalues: 3×(−1)=−3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8f92627a-47fa-4cf1-bdbd-6edd30e8ab65",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For matrices, which statement about eigenvalues of Aᵀ is true?",
-  "formula": "",
-  "options": [
-   "Same as eigenvalues of A",
-   "Reciprocal of A's eigenvalues",
-   "Zero always",
-   "Negative of A's eigenvalues"
-  ],
-  "answer": 0,
-  "explain": "A and Aᵀ have the same characteristic polynomial, hence same eigenvalues.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1a1c2c11-13d3-4857-b0e2-771ec675a1cd",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "The skew-symmetric part of square matrix A is?",
-  "formula": "(A − Aᵀ)/2",
-  "options": [
-   "(A+Aᵀ)/2",
-   "A−Aᵀ",
-   "(A−Aᵀ)/2",
-   "(A+Aᵀ)"
-  ],
-  "answer": 2,
-  "explain": "Any square matrix splits as symmetric part (A+Aᵀ)/2 and skew part (A−Aᵀ)/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8a559b50-a9a6-4938-a041-b4cf00d3091d",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A and B are n×n matrices, det(A+B) equals?",
-  "formula": "",
-  "options": [
-   "Not generally det(A)+det(B)",
-   "det(A)+det(B)",
-   "det(A)·det(B)",
-   "det(A)−det(B)"
-  ],
-  "answer": 0,
-  "explain": "det is not linear over addition; det(A+B)≠det(A)+det(B) in general.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "33bbdb45-d674-496c-b868-54101f5ef9c7",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 3×3 matrices A, B: det(AB) = det(BA)?",
-  "formula": "det(AB)=det(A)det(B)=det(BA)",
-  "options": [
-   "Always true",
-   "Only if A is symmetric",
-   "Never true",
-   "Only if A=B"
-  ],
-  "answer": 0,
-  "explain": "det(AB)=det(A)·det(B)=det(B)·det(A)=det(BA) always.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0f2170d9-5252-49d2-8f6e-7a6ece9e70ba",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "Which matrix is its own inverse?",
-  "formula": "A²=I ⟹ A=A⁻¹",
-  "options": [
-   "Idempotent matrix",
-   "Involutory matrix",
-   "Orthogonal matrix",
-   "Nilpotent matrix"
-  ],
-  "answer": 1,
-  "explain": "An involutory matrix satisfies A²=I, so A⁻¹=A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "785dcc7d-166d-4527-994c-3a45a5983738",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3 symmetric, how many distinct elements can it have?",
-  "formula": "n(n+1)/2",
-  "options": [
-   "3",
-   "9",
-   "5",
-   "6"
-  ],
-  "answer": 3,
-  "explain": "For n=3 symmetric matrix, distinct elements = n(n+1)/2 = 6.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bd2763e6-afe1-486b-90c7-5d91eb9437e2",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is a 2×2 non-singular matrix, adj(adj A) = ?",
-  "formula": "adj(adj A)=det(A)^(n−2)·A",
-  "options": [
-   "A",
-   "I",
-   "det(A)·A",
-   "adj(A)"
-  ],
-  "answer": 0,
-  "explain": "adj(adj A)=det(A)^(n−2)·A; for n=2, exponent=0, so adj(adj A)=A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0e1a8d85-f096-4283-9afa-0b43502ee2f9",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "A matrix with all elements above main diagonal zero is called?",
-  "formula": "",
-  "options": [
-   "Lower triangular",
-   "Diagonal",
-   "Scalar",
-   "Upper triangular"
-  ],
-  "answer": 0,
-  "explain": "Lower triangular matrix has all elements above main diagonal equal to zero.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a16dc9b1-75e0-49a5-a919-9d2850c105c4",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If all elements of a 3×3 determinant's row are zero, det = ?",
-  "formula": "",
-  "options": [
-   "1",
-   "Undefined",
-   "0",
-   "−1"
-  ],
-  "answer": 2,
-  "explain": "A determinant with an all-zero row is always equal to 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "433d15e0-131b-47ef-9a9c-679501217167",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "det of a 2×2 matrix [[a,b],[c,d]] equals?",
-  "formula": "ad − bc",
-  "options": [
-   "ab−cd",
-   "ad−bc",
-   "ac−bd",
-   "ad+bc"
-  ],
-  "answer": 1,
-  "explain": "Standard definition: det([[a,b],[c,d]])=ad−bc.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "97f1b3e8-9cde-45d4-b2f8-3794df9c8db0",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For n×n matrix A, (A⁻¹)⁻¹ = ?",
-  "formula": "(A⁻¹)⁻¹ = A",
-  "options": [
-   "A",
-   "I",
-   "Aᵀ",
-   "adj(A)"
-  ],
-  "answer": 0,
-  "explain": "The inverse of the inverse of a matrix returns the original matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4bb1048e-d6bb-4b33-b120-23506fa8a985",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is 3×3 and det(A)=5, then det(adj A) = ?",
-  "formula": "det(adj A) = det(A)^(n−1)",
-  "options": [
-   "5",
-   "125",
-   "1/5",
-   "25"
-  ],
-  "answer": 3,
-  "explain": "det(adj A) = [det(A)]^(n−1) = 5² = 25 for n=3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e9a9e903-43df-4f42-9749-9e14470c1285",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For square matrix A of order n, adj(Aᵀ) equals?",
-  "formula": "adj(Aᵀ) = (adj A)ᵀ",
-  "options": [
-   "Aᵀ",
-   "(adj A)⁻¹",
-   "(adj A)ᵀ",
-   "adj A"
-  ],
-  "answer": 2,
-  "explain": "Transpose and adjoint operations commute: adj(Aᵀ) = (adj A)ᵀ.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "59406741-e8a8-463b-bb24-4a7c83145a85",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For n×n matrix, if det(A)=d, det(A^k) = ?",
-  "formula": "det(Aᵏ) = dᵏ",
-  "options": [
-   "k·d",
-   "dᵏ",
-   "kd²",
-   "d+k"
-  ],
-  "answer": 1,
-  "explain": "det(Aᵏ) = [det(A)]ᵏ by repeated application of det(AB)=det(A)det(B).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "101ab7d1-6038-42f4-8946-a524f907a79f",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If AX=B is consistent, which relation between ranks is needed?",
-  "formula": "ρ(A) = ρ(A|B)",
-  "options": [
-   "ρ(A)=n always",
-   "ρ(A)=ρ(A|B)",
-   "ρ(A)>ρ(A|B)",
-   "ρ(A)<ρ(A|B)"
-  ],
-  "answer": 1,
-  "explain": "System AX=B is consistent iff rank of coefficient matrix = rank of augmented matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "22767d6b-0bf0-40e5-8239-148dc3407d2f",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 3×3 matrix A with det(A)=d, det(adj(A)) equals?",
-  "formula": "det(adj A) = d²",
-  "options": [
-   "d³",
-   "d",
-   "d²",
-   "1/d"
-  ],
-  "answer": 2,
-  "explain": "det(adj A) = [det A]^(n−1) = d² for 3×3 matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d0164e11-1e64-4771-b3cb-a6ed511aa0cf",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If all diagonal elements of a square matrix are 1 and rest 0, it is called?",
-  "formula": "",
-  "options": [
-   "Identity matrix",
-   "Diagonal matrix",
-   "Null matrix",
-   "Scalar matrix"
-  ],
-  "answer": 0,
-  "explain": "Identity matrix Iₙ has 1s on diagonal and 0s elsewhere; AI = IA = A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a2f9701f-3846-4236-9b51-15ebf6ab2644",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is n×n with det(A)≠0, then A·(adj A) = ?",
-  "formula": "A·adj(A) = det(A)·Iₙ",
-  "options": [
-   "det(A)·A",
-   "det(A)·Iₙ",
-   "adj(A)·A only",
-   "Iₙ"
-  ],
-  "answer": 1,
-  "explain": "By definition, A·adj(A) = adj(A)·A = det(A)·I for any square matrix A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b1ee76b1-a321-4ca7-aea6-24edd2e5ded5",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 2×2 matrix [[a,b],[c,d]], trace equals?",
-  "formula": "tr(A) = a+d",
-  "options": [
-   "a+b+c+d",
-   "a+d",
-   "ad−bc",
-   "a−d"
-  ],
-  "answer": 1,
-  "explain": "Trace is sum of main diagonal elements: a₁₁ + a₂₂ = a + d.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7ed8d788-bda6-4c5a-9101-11777b91eacb",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For square matrix A, which is always true about det(A·Aᵀ)?",
-  "formula": "det(AAᵀ) = [det(A)]²",
-  "options": [
-   "2det(A)",
-   "[det(A)]²",
-   "det(A)",
-   "det(A)+det(Aᵀ)"
-  ],
-  "answer": 1,
-  "explain": "det(AAᵀ)=det(A)det(Aᵀ)=[det(A)]² since det(Aᵀ)=det(A).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "362a6fdf-791d-4292-8dbd-4f7445db8fc8",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is idempotent (A²=A), eigenvalues of A can only be?",
-  "formula": "",
-  "options": [
-   "1 or −1",
-   "0 or 1",
-   "Any real number",
-   "0 or −1"
-  ],
-  "answer": 1,
-  "explain": "If λ is eigenvalue, λ²=λ ⟹ λ(λ−1)=0, so eigenvalues are 0 or 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b123acc4-15c0-42ff-8b71-64405d3c85a1",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For a non-singular matrix A, which statement about adj(A) is true?",
-  "formula": "adj(A) = det(A)·A⁻¹",
-  "options": [
-   "adj(A) = det(A)·A",
-   "adj(A) = A/det(A)",
-   "adj(A) = det(A)·A⁻¹",
-   "adj(A) = A⁻¹/det(A)"
-  ],
-  "answer": 2,
-  "explain": "From A⁻¹ = adj(A)/det(A), rearranging gives adj(A) = det(A)·A⁻¹.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0e7bcdac-b921-4613-afc3-c8114dba12d6",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 3×3 matrix, if two columns are proportional, det = ?",
-  "formula": "",
-  "options": [
-   "Cannot determine",
-   "1",
-   "−1",
-   "0"
-  ],
-  "answer": 3,
-  "explain": "Proportional columns make matrix singular (linearly dependent columns), so det = 0.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4041881e-f8ee-4050-a07f-adeb99043c17",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If eigenvalues of 3×3 matrix A are 1,2,3 then trace(A) = ?",
-  "formula": "tr(A) = Σλᵢ",
-  "options": [
-   "4",
-   "3",
-   "6",
-   "5"
-  ],
-  "answer": 2,
-  "explain": "Trace equals sum of eigenvalues: 1+2+3 = 6.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "dd78a078-5072-49a4-af50-5bcaa5876c95",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For n×n matrix A, det(kA) = ?",
-  "formula": "det(kA) = kⁿ·det(A)",
-  "options": [
-   "k·det(A)",
-   "k²·det(A)",
-   "kⁿ·det(A)",
-   "det(A)"
-  ],
-  "answer": 2,
-  "explain": "Each of the n rows gets multiplied by k, contributing kⁿ factor to determinant.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9af9af64-7939-4c13-b20f-583e9322b341",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For 3×3 matrix A with det(A)=d, det(adj(A)) = ?",
-  "formula": "det(adj A) = dⁿ⁻¹",
-  "options": [
-   "d",
-   "d³",
-   "d⁻¹",
-   "d²"
-  ],
-  "answer": 3,
-  "explain": "det(adj A) = [det(A)]^(n−1); for n=3, it equals d².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "5ed9f492-b16b-4589-9c07-34e4b7037805",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is n×n and B is n×n, det(AB) = ?",
-  "formula": "det(AB) = det(A)·det(B)",
-  "options": [
-   "det(A)·det(B)",
-   "det(A)+det(B)",
-   "det(A)−det(B)",
-   "det(A)/det(B)"
-  ],
-  "answer": 0,
-  "explain": "Multiplicative property of determinants: det(AB)=det(A)·det(B).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d388fa67-e1fc-440d-bfb3-1c77cdc68648",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "If A is a square matrix, det(A) equals product of its eigenvalues. det(adj A) equals?",
-  "formula": "det(adj A) = [det(A)]^(n−1)",
-  "options": [
-   "det(A)",
-   "[det(A)]^(n+1)",
-   "[det(A)]^(n−1)",
-   "[det(A)]^n"
-  ],
-  "answer": 2,
-  "explain": "Standard result: det(adj A) = [det(A)]^(n−1) for an n×n matrix.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c011cbdd-654f-4961-a1e2-ee1b201bad0e",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "For a matrix A, det(Aᵀ) compared to det(A) is?",
-  "formula": "det(Aᵀ) = det(A)",
-  "options": [
-   "Zero",
-   "Equal to det(A)",
-   "Negative of det(A)",
-   "Reciprocal of det(A)"
-  ],
-  "answer": 1,
-  "explain": "Transpose does not change the value of the determinant: det(Aᵀ)=det(A).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "720599ca-9f20-40b0-867e-e6ac189b0836",
-  "subject": "Mathematics",
-  "chapter": "Matrices and Determinants",
-  "topic": "Matrices and Determinants",
-  "prompt": "The product of a matrix A and its adjoint equals?",
-  "formula": "A·adj(A) = det(A)·Iₙ",
-  "options": [
-   "det(A)·Iₙ",
-   "adj(A)·A only",
-   "Iₙ",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "A·adj(A)=adj(A)·A=det(A)·I; this holds for any square matrix A.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- }
+  {
+    "id": "61bb8d74-ea46-4e11-8a18-4d90ca11cd7a",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrix Multiplication",
+    "prompt": "Order of matrix A is 3×4, B is 4×5. Order of AB is?",
+    "formula": "",
+    "options": [
+      "4×4",
+      "3×5",
+      "4×5",
+      "3×4"
+    ],
+    "answer": 1,
+    "explain": "If A is m×n and B is n×p, then AB is m×p. So 3×5.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0f25356e-f270-41b6-9e8e-75dab9eb6371",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "For a square matrix A, det(kA) where A is n×n equals?",
+    "formula": "det(kA) = kⁿ det(A)",
+    "options": [
+      "det(A)",
+      "kⁿ det(A)",
+      "k² det(A)",
+      "k det(A)"
+    ],
+    "answer": 1,
+    "explain": "Each row gets multiplied by k; with n rows, determinant scales by kⁿ.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "613046c5-9911-40b3-a109-318c94def50f",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "det(AB) equals?",
+    "formula": "det(AB) = det(A)·det(B)",
+    "options": [
+      "det(A)+det(B)",
+      "det(A)−det(B)",
+      "det(A)/det(B)",
+      "det(A)·det(B)"
+    ],
+    "answer": 3,
+    "explain": "Multiplicative property of determinants: det(AB)=det(A)det(B).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2296e6e3-a972-411e-9cf0-0bb12823b289",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Types of Matrices",
+    "prompt": "A symmetric matrix satisfies?",
+    "formula": "Aᵀ = A",
+    "options": [
+      "Aᵀ = A",
+      "Aᵀ = −A",
+      "A = A⁻¹",
+      "A² = I"
+    ],
+    "answer": 0,
+    "explain": "A matrix is symmetric if transpose equals itself: Aᵀ = A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "458ad19b-309b-43d6-9711-f744aa8d8130",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Types of Matrices",
+    "prompt": "A skew-symmetric matrix satisfies?",
+    "formula": "Aᵀ = −A",
+    "options": [
+      "Aᵀ = A",
+      "det(A) = 1",
+      "A² = −I",
+      "Aᵀ = −A"
+    ],
+    "answer": 3,
+    "explain": "Skew-symmetric means Aᵀ = −A; diagonal elements are always zero.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "14d36e0f-d2b7-4f18-ad9f-d7940d24f1c3",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "For skew-symmetric matrix of odd order, det(A) = ?",
+    "formula": "det(A) = 0",
+    "options": [
+      "1",
+      "Cannot determine",
+      "−1",
+      "0"
+    ],
+    "answer": 3,
+    "explain": "det(Aᵀ)=det(A) and det(−A)=(−1)ⁿdet(A); odd n gives det(A)=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "37cf00bb-699d-4ecd-b143-fc00a9d3ac2e",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Adjoint and Inverse",
+    "prompt": "Adjoint of A for 2×2: A=[[a,b],[c,d]] is?",
+    "formula": "adj(A) = [[d,−b],[−c,a]]",
+    "options": [
+      "[[d,−b],[−c,a]]",
+      "[[a,b],[c,d]]",
+      "[[d,b],[c,a]]",
+      "[[a,−b],[−c,d]]"
+    ],
+    "answer": 0,
+    "explain": "For 2×2, swap diagonal elements and negate off-diagonal elements.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7800c6a9-c7b9-4278-8994-caa3f535bf3c",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Adjoint and Inverse",
+    "prompt": "A⁻¹ in terms of adj(A) is?",
+    "formula": "A⁻¹ = adj(A)/det(A)",
+    "options": [
+      "adj(A)·det(A)",
+      "det(A)/adj(A)",
+      "adj(A)−det(A)",
+      "adj(A)/det(A)"
+    ],
+    "answer": 3,
+    "explain": "Inverse exists when det(A)≠0; formula: A⁻¹ = adj(A)/det(A).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "36d7ae03-37b4-4ab1-a975-f7eef0a1917f",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Cramer's Rule",
+    "prompt": "Cramer's rule: solution x₁ = ?",
+    "formula": "x₁ = D₁/D",
+    "options": [
+      "D₁−D",
+      "D₁/D",
+      "D₁·D",
+      "D/D₁"
+    ],
+    "answer": 1,
+    "explain": "In Cramer's rule, each variable = determinant with replaced column / det(coeff matrix).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f4e395cd-64ab-47af-bc22-ca0b3242f9d1",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "System of Equations",
+    "prompt": "For homogeneous system AX=0, non-trivial solution exists when?",
+    "formula": "det(A) = 0",
+    "options": [
+      "det(A) = 1",
+      "det(A) < 0",
+      "det(A) ≠ 0",
+      "det(A) = 0"
+    ],
+    "answer": 3,
+    "explain": "Non-trivial (non-zero) solutions exist iff the coefficient matrix is singular.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d71acdfa-e956-4a33-821e-cb9c8e9cbd12",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Transpose",
+    "prompt": "Transpose of product (AB)ᵀ equals?",
+    "formula": "(AB)ᵀ = BᵀAᵀ",
+    "options": [
+      "AᵀBᵀ",
+      "Aᵀ+Bᵀ",
+      "BᵀAᵀ",
+      "AB"
+    ],
+    "answer": 2,
+    "explain": "Reversal rule for transpose: (AB)ᵀ = BᵀAᵀ.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c63cdeae-cfb9-4c07-a8a9-8c89965c5fb0",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "If two rows of a determinant are identical, det = ?",
+    "formula": "",
+    "options": [
+      "1",
+      "0",
+      "Undefined",
+      "2"
+    ],
+    "answer": 1,
+    "explain": "Interchanging identical rows changes sign but value is same, so det = 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "e2c3ff47-be16-4c97-bd9d-679146233352",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "Interchanging two rows of a determinant multiplies det by?",
+    "formula": "",
+    "options": [
+      "−1",
+      "0",
+      "+1",
+      "2"
+    ],
+    "answer": 0,
+    "explain": "Each row interchange changes the sign of the determinant.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8c672881-8476-4a71-adfe-833605750a70",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "det(Aᵀ) = ?",
+    "formula": "det(Aᵀ) = det(A)",
+    "options": [
+      "det(A)",
+      "−det(A)",
+      "0",
+      "1/det(A)"
+    ],
+    "answer": 0,
+    "explain": "Transposing a matrix does not change its determinant value.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "80e9feac-c8b6-4b63-8b70-f5ae7b273d82",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Special Matrices",
+    "prompt": "det of diagonal matrix diag(d₁,d₂,d₃) = ?",
+    "formula": "d₁·d₂·d₃",
+    "options": [
+      "0",
+      "d₁·d₂·d₃",
+      "d₁+d₂+d₃",
+      "d₁²+d₂²+d₃²"
+    ],
+    "answer": 1,
+    "explain": "Determinant of a diagonal matrix is the product of diagonal entries.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "60e54d71-c7e8-4689-b4ab-ef2345adf0ea",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Symmetric Matrices",
+    "prompt": "If A and B are symmetric, AB is symmetric only if?",
+    "formula": "",
+    "options": [
+      "det(A)=det(B)",
+      "A+B=I",
+      "A = B",
+      "AB = BA"
+    ],
+    "answer": 3,
+    "explain": "(AB)ᵀ = BᵀAᵀ = BA; equals AB only when AB = BA (they commute).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "6c6bec6a-d924-45c9-a155-33ca1a8c2340",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Properties of Determinants",
+    "prompt": "Adding a multiple of one row to another row changes det by?",
+    "formula": "",
+    "options": [
+      "Makes det zero",
+      "Nothing (det unchanged)",
+      "Adds that multiple to det",
+      "Multiplies det by that multiple"
+    ],
+    "answer": 1,
+    "explain": "Row operation Rᵢ → Rᵢ + kRⱼ (i≠j) does not change the determinant.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7af3bb87-57f3-4b60-8b93-6372205a533a",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For n×n matrix A, det(adj A) = ?",
+    "formula": "det(adj A) = (det A)^(n−1)",
+    "options": [
+      "(det A)^(n+1)",
+      "det A",
+      "(det A)^n",
+      "(det A)^(n−1)"
+    ],
+    "answer": 3,
+    "explain": "Standard result: det(adj A) = (det A)^(n−1) for any n×n matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "90f9a426-e91f-4c6f-9520-c9d6327b791d",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For n×n matrix A, A·adj(A) = ?",
+    "formula": "A·adj(A) = det(A)·Iₙ",
+    "options": [
+      "adj(A)·A⁻¹",
+      "det(A)·Iₙ",
+      "det(A)·A",
+      "Iₙ"
+    ],
+    "answer": 1,
+    "explain": "A·adj(A) = adj(A)·A = det(A)·I; fundamental property linking adjoint and determinant.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c1f2feef-9aac-4c7c-9ce3-bfe575082e97",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is n×n and det(A)≠0, rank of A is?",
+    "formula": "ρ(A) = n",
+    "options": [
+      "1",
+      "0",
+      "n",
+      "n−1"
+    ],
+    "answer": 2,
+    "explain": "A non-singular (invertible) matrix has full rank equal to its order n.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1bd239ed-f311-45e4-922c-79f94f92d842",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "det of a triangular (upper/lower) matrix equals?",
+    "formula": "det = product of diagonal entries",
+    "options": [
+      "Product of all entries",
+      "Sum of diagonal entries",
+      "Sum of all entries",
+      "Product of diagonal entries"
+    ],
+    "answer": 3,
+    "explain": "For any triangular matrix, determinant = product of its main diagonal elements.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "63157b8d-a898-4432-a42f-70960741b3d1",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is m×n and B is n×p, then (AB)ᵀ order is?",
+    "formula": "(AB)ᵀ is p×m",
+    "options": [
+      "p × n",
+      "m × p",
+      "n × m",
+      "p × m"
+    ],
+    "answer": 3,
+    "explain": "AB is m×p, so (AB)ᵀ is p×m.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "62ec5445-617a-4621-8bfd-5b49cfa1e02d",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Cofactor Cᵢⱼ of element aᵢⱼ is?",
+    "formula": "Cᵢⱼ = (−1)^(i+j) Mᵢⱼ",
+    "options": [
+      "(−1)^(i−j) × minor Mᵢⱼ",
+      "(−1)^(i+j) × minor Mᵢⱼ",
+      "minor Mᵢⱼ only",
+      "(i+j) × minor Mᵢⱼ"
+    ],
+    "answer": 1,
+    "explain": "Cofactor = signed minor; sign given by (−1)^(i+j).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c4538650-b64a-46da-9dfe-6777e065aa1c",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Sum of products of elements of a row with cofactors of ANOTHER row equals?",
+    "formula": "Σ aᵢₖ Cⱼₖ = 0 (i≠j)",
+    "options": [
+      "det(A)",
+      "1",
+      "0",
+      "trace(A)"
+    ],
+    "answer": 2,
+    "explain": "Alien cofactor property: cross-multiplication of row elements with cofactors of different row = 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b0908d1f-a4f5-47d1-9962-28dfcebeee08",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If each element of a row is multiplied by k, det is multiplied by?",
+    "formula": "det → k·det",
+    "options": [
+      "1/k",
+      "k²",
+      "kⁿ",
+      "k"
+    ],
+    "answer": 3,
+    "explain": "Multiplying ALL elements of one row by k multiplies det by k (not kⁿ).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "611d1a10-298e-438d-b2b3-ae899f075b40",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Matrix multiplication is generally NOT?",
+    "formula": "AB ≠ BA in general",
+    "options": [
+      "Commutative",
+      "Closed",
+      "Distributive",
+      "Associative"
+    ],
+    "answer": 0,
+    "explain": "Matrix multiplication is NOT commutative; AB ≠ BA in general.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "3edd2a87-e2d8-4478-ba6e-17933945a39b",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For a square matrix, A + Aᵀ is always?",
+    "formula": "(A + Aᵀ)ᵀ = A + Aᵀ",
+    "options": [
+      "Orthogonal",
+      "Skew-symmetric",
+      "Symmetric",
+      "Singular"
+    ],
+    "answer": 2,
+    "explain": "A + Aᵀ is always symmetric since (A+Aᵀ)ᵀ = Aᵀ+A = A+Aᵀ.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7ed25edc-108e-4ec4-995d-a04ab694e930",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Diagonal elements of a skew-symmetric matrix are always?",
+    "formula": "aᵢᵢ = 0",
+    "options": [
+      "Zero",
+      "One",
+      "Equal to each other",
+      "Positive"
+    ],
+    "answer": 0,
+    "explain": "From Aᵀ = −A: aᵢᵢ = −aᵢᵢ ⟹ aᵢᵢ = 0; all diagonal entries must be zero.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "18c3066e-f977-47ca-bd22-0cf94869277a",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is invertible, (A⁻¹)ᵀ = ?",
+    "formula": "(A⁻¹)ᵀ = (Aᵀ)⁻¹",
+    "options": [
+      "(A⁻¹)²",
+      "A⁻¹",
+      "(Aᵀ)⁻¹",
+      "(Aᵀ)"
+    ],
+    "answer": 2,
+    "explain": "Transpose and inverse operations commute: (A⁻¹)ᵀ = (Aᵀ)⁻¹.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "325508a5-12ac-4cdf-9868-0945daca64c1",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "det of a matrix with a zero row is?",
+    "formula": "det = 0",
+    "options": [
+      "Equal to trace",
+      "1",
+      "Undefined",
+      "0"
+    ],
+    "answer": 3,
+    "explain": "If any row (or column) of a matrix is all zeros, its determinant is zero.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d162658f-af51-4333-8fbf-9ff244cde906",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Every square matrix can be expressed as sum of symmetric and skew-symmetric matrices. Symmetric part is?",
+    "formula": "½(A + Aᵀ)",
+    "options": [
+      "A + Aᵀ",
+      "½(A + Aᵀ)",
+      "½(Aᵀ − A)",
+      "½(A − Aᵀ)"
+    ],
+    "answer": 1,
+    "explain": "Any square matrix A = ½(A+Aᵀ) + ½(A−Aᵀ); first term is symmetric part.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "19a1ac69-bded-40e7-80b3-f381f607c03d",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "(AB)⁻¹ equals? (A,B invertible)",
+    "formula": "(AB)⁻¹ = B⁻¹A⁻¹",
+    "options": [
+      "A⁻¹B⁻¹",
+      "A⁻¹B",
+      "B⁻¹A⁻¹",
+      "B⁻¹A"
+    ],
+    "answer": 2,
+    "explain": "Inverse of a product reverses order: (AB)⁻¹ = B⁻¹A⁻¹.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "23041a49-3aed-4f2a-a049-5d5e0d01b959",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 3×3 matrix A with det(A)=d≠0, det(A⁻¹) = ?",
+    "formula": "det(A⁻¹) = 1/det(A)",
+    "options": [
+      "d",
+      "1/d",
+      "d²",
+      "−d"
+    ],
+    "answer": 1,
+    "explain": "Since AA⁻¹=I, det(A)·det(A⁻¹)=1, so det(A⁻¹)=1/det(A).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1717097b-abdd-442c-b8a0-2ef7e53a24fd",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For n×n matrix A, trace(A) equals sum of its?",
+    "formula": "",
+    "options": [
+      "Column sums",
+      "Cofactors",
+      "Eigenvalues",
+      "Diagonal minors"
+    ],
+    "answer": 2,
+    "explain": "trace(A) = Σaᵢᵢ = sum of all eigenvalues of A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "61c6fd05-e236-4f64-b58a-0a67e525c36a",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "det(A) for n×n equals the product of its?",
+    "formula": "",
+    "options": [
+      "Cofactors",
+      "Singular values",
+      "Diagonal elements",
+      "Eigenvalues"
+    ],
+    "answer": 3,
+    "explain": "det(A) = product of all eigenvalues (counted with multiplicity).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "74060380-49e4-45ea-8601-bbf2139099fa",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is a 2×2 matrix with eigenvalues λ₁,λ₂, then trace(A) is?",
+    "formula": "",
+    "options": [
+      "λ₁+λ₂",
+      "λ₁/λ₂",
+      "λ₁·λ₂",
+      "λ₁−λ₂"
+    ],
+    "answer": 0,
+    "explain": "For any square matrix, trace = sum of eigenvalues.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "e0ca67e1-9606-42a1-bc76-53fc31ecb954",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "The minor Mᵢⱼ of element aᵢⱼ is the determinant of matrix obtained by?",
+    "formula": "",
+    "options": [
+      "Replacing row i by zeros",
+      "Deleting row i and column j",
+      "Deleting row j and column i",
+      "Transposing row i and column j"
+    ],
+    "answer": 1,
+    "explain": "Minor Mᵢⱼ = det of submatrix after deleting ith row and jth column.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b9e2dd92-68b9-4db9-b936-73e24831eed7",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Cofactor Cᵢⱼ relates to minor Mᵢⱼ by?",
+    "formula": "Cᵢⱼ = (−1)^(i+j) Mᵢⱼ",
+    "options": [
+      "Mᵢⱼ/(i+j)",
+      "(−1)^(i−j) Mᵢⱼ",
+      "(−1)^(ij) Mᵢⱼ",
+      "(−1)^(i+j) Mᵢⱼ"
+    ],
+    "answer": 3,
+    "explain": "Cofactor includes sign factor (−1)^(i+j) applied to the minor.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ccffe545-5d15-4f75-a739-fd7fffd5c723",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "The system AX=B has unique solution when?",
+    "formula": "",
+    "options": [
+      "det(B) = 0",
+      "det(A) ≠ 0",
+      "rank(A) < rank([A|B])",
+      "det(A) = 0"
+    ],
+    "answer": 1,
+    "explain": "Unique solution exists iff A is invertible, i.e., det(A)≠0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b3426eee-7afe-4eed-9ceb-65eec5db79e3",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For homogeneous system AX=0, trivial solution always exists when?",
+    "formula": "",
+    "options": [
+      "Only if A is symmetric",
+      "Always (for any A)",
+      "Only if det(A)=0",
+      "Only if det(A)≠0"
+    ],
+    "answer": 1,
+    "explain": "X=0 always satisfies AX=0 regardless of A; trivial solution always exists.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8bbdd433-3343-4a89-9a55-2d5f3e038a93",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is 3×3 skew-symmetric, diagonal elements must be?",
+    "formula": "",
+    "options": [
+      "All positive",
+      "All negative",
+      "All zero",
+      "All equal"
+    ],
+    "answer": 2,
+    "explain": "Skew-symmetric: aᵢⱼ=−aⱼᵢ ⟹ aᵢᵢ=−aᵢᵢ ⟹ aᵢᵢ=0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f0a93ac3-3620-4635-96c9-14a1c8d0ec71",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "det(A²) in terms of det(A) is?",
+    "formula": "det(A²)=[det(A)]²",
+    "options": [
+      "det(A)+det(A)",
+      "det(2A)",
+      "2·det(A)",
+      "[det(A)]²"
+    ],
+    "answer": 3,
+    "explain": "det(A²)=det(A·A)=det(A)·det(A)=[det(A)]².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "42d44c20-dd45-436f-8fc8-3a41828be70d",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is orthogonal, det(A) can only be?",
+    "formula": "det(A)=±1",
+    "options": [
+      "0 or 1",
+      "±1",
+      "Only 1",
+      "Any real number"
+    ],
+    "answer": 1,
+    "explain": "AAᵀ=I ⟹ det(A)·det(Aᵀ)=1 ⟹ [det(A)]²=1 ⟹ det(A)=±1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bcf374f6-b828-42ea-9e2c-d5d364333403",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For a 3×3 matrix, expansion of det along any row/column gives the same?",
+    "formula": "",
+    "options": [
+      "Sum of minors",
+      "Value of det",
+      "Different values",
+      "Sum of cofactors"
+    ],
+    "answer": 1,
+    "explain": "Determinant is unique; expansion along any row or column yields the same value.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f24c1b43-f142-4542-bbfc-cd7f97c98ba2",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is idempotent (A²=A) and invertible, then A must equal?",
+    "formula": "",
+    "options": [
+      "O",
+      "2A",
+      "I",
+      "Aᵀ"
+    ],
+    "answer": 2,
+    "explain": "A²=A ⟹ A(A−I)=O; if A invertible, multiply A⁻¹ ⟹ A=I.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9d246a07-1f94-4c15-90b9-876982a44151",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Matrix A is called singular if?",
+    "formula": "",
+    "options": [
+      "Aᵀ = A",
+      "det(A) ≠ 0",
+      "det(A) = 0",
+      "A² = A"
+    ],
+    "answer": 2,
+    "explain": "A square matrix is singular iff its determinant is zero.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0d1170eb-8dc3-4e9a-a75a-a962e28f4809",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A and B are n×n matrices, trace(A+B) equals?",
+    "formula": "",
+    "options": [
+      "trace(A)·trace(B)",
+      "trace(A)+trace(B)",
+      "n·trace(A)",
+      "trace(AB)"
+    ],
+    "answer": 1,
+    "explain": "Trace is linear: trace(A+B)=Σ(aᵢᵢ+bᵢᵢ)=trace(A)+trace(B).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9d0acdad-1689-46b1-ad25-b0a64a0e7a9e",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For square matrices A, B: trace(AB) equals?",
+    "formula": "",
+    "options": [
+      "trace(Aᵀ B)",
+      "det(AB)",
+      "trace(BA)",
+      "trace(A)·trace(B)"
+    ],
+    "answer": 2,
+    "explain": "trace(AB)=trace(BA) always; this is the cyclic property of trace.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "70fd48ac-7288-4272-8c73-a2df244552ac",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is 3×3 and det(A)=d, then det(−A) = ?",
+    "formula": "det(−A)=(−1)ⁿdet(A)",
+    "options": [
+      "−d",
+      "3d",
+      "−3d",
+      "d"
+    ],
+    "answer": 0,
+    "explain": "det(−A)=(−1)³det(A)=−d for 3×3 matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "22d3ca99-b5f5-4f2d-8144-f886eb120f79",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 2×2 matrix A, det(adj A) equals?",
+    "formula": "det(adj A) = det(A)^(n−1)",
+    "options": [
+      "1/det(A)",
+      "det(A)²",
+      "det(A)³",
+      "det(A)"
+    ],
+    "answer": 3,
+    "explain": "For n=2, det(adj A)=det(A)^(n−1)=det(A)^1=det(A).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d24be8c5-f964-408f-bcbb-871165f511e5",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is 3×3, then A·(adj A) equals?",
+    "formula": "A·adj(A) = det(A)·I",
+    "options": [
+      "I₃",
+      "adj(A)·A⁻¹",
+      "det(A)·I₃",
+      "det(A)·A"
+    ],
+    "answer": 2,
+    "explain": "By definition, A·adj(A)=det(A)·Iₙ for any square matrix A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "55052e1a-88cb-473a-9f57-616764d868b6",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For square matrix A, which property does adj(kA) satisfy?",
+    "formula": "adj(kA) = kⁿ⁻¹·adj(A)",
+    "options": [
+      "kⁿ·adj(A)",
+      "kⁿ⁻¹·adj(A)",
+      "adj(A)/k",
+      "k·adj(A)"
+    ],
+    "answer": 1,
+    "explain": "adj(kA)=k^(n−1)·adj(A) for n×n matrix A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9edb1bc8-8ddf-422c-821e-796b70d06e03",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "The number of non-zero rows in row-echelon form defines matrix's?",
+    "formula": "",
+    "options": [
+      "Order",
+      "Nullity",
+      "Trace",
+      "Rank"
+    ],
+    "answer": 3,
+    "explain": "Rank equals the number of non-zero rows in row echelon (reduced) form.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "30a3bc7a-ef10-41b4-ab43-f02897fbccf5",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is symmetric and B is symmetric, (A+B) is?",
+    "formula": "(A+B)ᵀ = Aᵀ+Bᵀ",
+    "options": [
+      "Singular",
+      "Always symmetric",
+      "Always skew-symmetric",
+      "Orthogonal"
+    ],
+    "answer": 1,
+    "explain": "(A+B)ᵀ=Aᵀ+Bᵀ=A+B, so A+B is always symmetric.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8d28093b-642f-408a-aed1-e045801b82ea",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 3×3 matrix A, if Aᵀ = −A, then A is?",
+    "formula": "Aᵀ = −A",
+    "options": [
+      "Idempotent",
+      "Orthogonal",
+      "Skew-symmetric",
+      "Symmetric"
+    ],
+    "answer": 2,
+    "explain": "The condition Aᵀ=−A defines a skew-symmetric matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8f92627a-47fa-4cf1-bdbd-6edd30e8ab65",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For matrices, which statement about eigenvalues of Aᵀ is true?",
+    "formula": "",
+    "options": [
+      "Same as eigenvalues of A",
+      "Reciprocal of A's eigenvalues",
+      "Zero always",
+      "Negative of A's eigenvalues"
+    ],
+    "answer": 0,
+    "explain": "A and Aᵀ have the same characteristic polynomial, hence same eigenvalues.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1a1c2c11-13d3-4857-b0e2-771ec675a1cd",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "The skew-symmetric part of square matrix A is?",
+    "formula": "(A − Aᵀ)/2",
+    "options": [
+      "(A+Aᵀ)/2",
+      "A−Aᵀ",
+      "(A−Aᵀ)/2",
+      "(A+Aᵀ)"
+    ],
+    "answer": 2,
+    "explain": "Any square matrix splits as symmetric part (A+Aᵀ)/2 and skew part (A−Aᵀ)/2.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8a559b50-a9a6-4938-a041-b4cf00d3091d",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A and B are n×n matrices, det(A+B) equals?",
+    "formula": "",
+    "options": [
+      "Not generally det(A)+det(B)",
+      "det(A)+det(B)",
+      "det(A)·det(B)",
+      "det(A)−det(B)"
+    ],
+    "answer": 0,
+    "explain": "det is not linear over addition; det(A+B)≠det(A)+det(B) in general.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "33bbdb45-d674-496c-b868-54101f5ef9c7",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 3×3 matrices A, B: det(AB) = det(BA)?",
+    "formula": "det(AB)=det(A)det(B)=det(BA)",
+    "options": [
+      "Always true",
+      "Only if A is symmetric",
+      "Never true",
+      "Only if A=B"
+    ],
+    "answer": 0,
+    "explain": "det(AB)=det(A)·det(B)=det(B)·det(A)=det(BA) always.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0f2170d9-5252-49d2-8f6e-7a6ece9e70ba",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "Which matrix is its own inverse?",
+    "formula": "A²=I ⟹ A=A⁻¹",
+    "options": [
+      "Idempotent matrix",
+      "Involutory matrix",
+      "Orthogonal matrix",
+      "Nilpotent matrix"
+    ],
+    "answer": 1,
+    "explain": "An involutory matrix satisfies A²=I, so A⁻¹=A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "785dcc7d-166d-4527-994c-3a45a5983738",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is 3×3 symmetric, how many distinct elements can it have?",
+    "formula": "n(n+1)/2",
+    "options": [
+      "3",
+      "9",
+      "5",
+      "6"
+    ],
+    "answer": 3,
+    "explain": "For n=3 symmetric matrix, distinct elements = n(n+1)/2 = 6.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bd2763e6-afe1-486b-90c7-5d91eb9437e2",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is a 2×2 non-singular matrix, adj(adj A) = ?",
+    "formula": "adj(adj A)=det(A)^(n−2)·A",
+    "options": [
+      "A",
+      "I",
+      "det(A)·A",
+      "adj(A)"
+    ],
+    "answer": 0,
+    "explain": "adj(adj A)=det(A)^(n−2)·A; for n=2, exponent=0, so adj(adj A)=A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0e1a8d85-f096-4283-9afa-0b43502ee2f9",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "A matrix with all elements above main diagonal zero is called?",
+    "formula": "",
+    "options": [
+      "Lower triangular",
+      "Diagonal",
+      "Scalar",
+      "Upper triangular"
+    ],
+    "answer": 0,
+    "explain": "Lower triangular matrix has all elements above main diagonal equal to zero.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a16dc9b1-75e0-49a5-a919-9d2850c105c4",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If all elements of a 3×3 determinant's row are zero, det = ?",
+    "formula": "",
+    "options": [
+      "1",
+      "Undefined",
+      "0",
+      "−1"
+    ],
+    "answer": 2,
+    "explain": "A determinant with an all-zero row is always equal to 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "433d15e0-131b-47ef-9a9c-679501217167",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "det of a 2×2 matrix [[a,b],[c,d]] equals?",
+    "formula": "ad − bc",
+    "options": [
+      "ab−cd",
+      "ad−bc",
+      "ac−bd",
+      "ad+bc"
+    ],
+    "answer": 1,
+    "explain": "Standard definition: det([[a,b],[c,d]])=ad−bc.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "97f1b3e8-9cde-45d4-b2f8-3794df9c8db0",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For n×n matrix A, (A⁻¹)⁻¹ = ?",
+    "formula": "(A⁻¹)⁻¹ = A",
+    "options": [
+      "A",
+      "I",
+      "Aᵀ",
+      "adj(A)"
+    ],
+    "answer": 0,
+    "explain": "The inverse of the inverse of a matrix returns the original matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "e9a9e903-43df-4f42-9749-9e14470c1285",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For square matrix A of order n, adj(Aᵀ) equals?",
+    "formula": "adj(Aᵀ) = (adj A)ᵀ",
+    "options": [
+      "Aᵀ",
+      "(adj A)⁻¹",
+      "(adj A)ᵀ",
+      "adj A"
+    ],
+    "answer": 2,
+    "explain": "Transpose and adjoint operations commute: adj(Aᵀ) = (adj A)ᵀ.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "59406741-e8a8-463b-bb24-4a7c83145a85",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For n×n matrix, if det(A)=d, det(A^k) = ?",
+    "formula": "det(Aᵏ) = dᵏ",
+    "options": [
+      "k·d",
+      "dᵏ",
+      "kd²",
+      "d+k"
+    ],
+    "answer": 1,
+    "explain": "det(Aᵏ) = [det(A)]ᵏ by repeated application of det(AB)=det(A)det(B).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "101ab7d1-6038-42f4-8946-a524f907a79f",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If AX=B is consistent, which relation between ranks is needed?",
+    "formula": "ρ(A) = ρ(A|B)",
+    "options": [
+      "ρ(A)=n always",
+      "ρ(A)=ρ(A|B)",
+      "ρ(A)>ρ(A|B)",
+      "ρ(A)<ρ(A|B)"
+    ],
+    "answer": 1,
+    "explain": "System AX=B is consistent iff rank of coefficient matrix = rank of augmented matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "22767d6b-0bf0-40e5-8239-148dc3407d2f",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 3×3 matrix A with det(A)=d, det(adj(A)) equals?",
+    "formula": "det(adj A) = d²",
+    "options": [
+      "d³",
+      "d",
+      "d²",
+      "1/d"
+    ],
+    "answer": 2,
+    "explain": "det(adj A) = [det A]^(n−1) = d² for 3×3 matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d0164e11-1e64-4771-b3cb-a6ed511aa0cf",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If all diagonal elements of a square matrix are 1 and rest 0, it is called?",
+    "formula": "",
+    "options": [
+      "Identity matrix",
+      "Diagonal matrix",
+      "Null matrix",
+      "Scalar matrix"
+    ],
+    "answer": 0,
+    "explain": "Identity matrix Iₙ has 1s on diagonal and 0s elsewhere; AI = IA = A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a2f9701f-3846-4236-9b51-15ebf6ab2644",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is n×n with det(A)≠0, then A·(adj A) = ?",
+    "formula": "A·adj(A) = det(A)·Iₙ",
+    "options": [
+      "det(A)·A",
+      "det(A)·Iₙ",
+      "adj(A)·A only",
+      "Iₙ"
+    ],
+    "answer": 1,
+    "explain": "By definition, A·adj(A) = adj(A)·A = det(A)·I for any square matrix A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b1ee76b1-a321-4ca7-aea6-24edd2e5ded5",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 2×2 matrix [[a,b],[c,d]], trace equals?",
+    "formula": "tr(A) = a+d",
+    "options": [
+      "a+b+c+d",
+      "a+d",
+      "ad−bc",
+      "a−d"
+    ],
+    "answer": 1,
+    "explain": "Trace is sum of main diagonal elements: a₁₁ + a₂₂ = a + d.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7ed8d788-bda6-4c5a-9101-11777b91eacb",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For square matrix A, which is always true about det(A·Aᵀ)?",
+    "formula": "det(AAᵀ) = [det(A)]²",
+    "options": [
+      "2det(A)",
+      "[det(A)]²",
+      "det(A)",
+      "det(A)+det(Aᵀ)"
+    ],
+    "answer": 1,
+    "explain": "det(AAᵀ)=det(A)det(Aᵀ)=[det(A)]² since det(Aᵀ)=det(A).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "362a6fdf-791d-4292-8dbd-4f7445db8fc8",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is idempotent (A²=A), eigenvalues of A can only be?",
+    "formula": "",
+    "options": [
+      "1 or −1",
+      "0 or 1",
+      "Any real number",
+      "0 or −1"
+    ],
+    "answer": 1,
+    "explain": "If λ is eigenvalue, λ²=λ ⟹ λ(λ−1)=0, so eigenvalues are 0 or 1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b123acc4-15c0-42ff-8b71-64405d3c85a1",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For a non-singular matrix A, which statement about adj(A) is true?",
+    "formula": "adj(A) = det(A)·A⁻¹",
+    "options": [
+      "adj(A) = det(A)·A",
+      "adj(A) = A/det(A)",
+      "adj(A) = det(A)·A⁻¹",
+      "adj(A) = A⁻¹/det(A)"
+    ],
+    "answer": 2,
+    "explain": "From A⁻¹ = adj(A)/det(A), rearranging gives adj(A) = det(A)·A⁻¹.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0e7bcdac-b921-4613-afc3-c8114dba12d6",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 3×3 matrix, if two columns are proportional, det = ?",
+    "formula": "",
+    "options": [
+      "Cannot determine",
+      "1",
+      "−1",
+      "0"
+    ],
+    "answer": 3,
+    "explain": "Proportional columns make matrix singular (linearly dependent columns), so det = 0.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "dd78a078-5072-49a4-af50-5bcaa5876c95",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For n×n matrix A, det(kA) = ?",
+    "formula": "det(kA) = kⁿ·det(A)",
+    "options": [
+      "k·det(A)",
+      "k²·det(A)",
+      "kⁿ·det(A)",
+      "det(A)"
+    ],
+    "answer": 2,
+    "explain": "Each of the n rows gets multiplied by k, contributing kⁿ factor to determinant.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9af9af64-7939-4c13-b20f-583e9322b341",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For 3×3 matrix A with det(A)=d, det(adj(A)) = ?",
+    "formula": "det(adj A) = dⁿ⁻¹",
+    "options": [
+      "d",
+      "d³",
+      "d⁻¹",
+      "d²"
+    ],
+    "answer": 3,
+    "explain": "det(adj A) = [det(A)]^(n−1); for n=3, it equals d².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "5ed9f492-b16b-4589-9c07-34e4b7037805",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is n×n and B is n×n, det(AB) = ?",
+    "formula": "det(AB) = det(A)·det(B)",
+    "options": [
+      "det(A)·det(B)",
+      "det(A)+det(B)",
+      "det(A)−det(B)",
+      "det(A)/det(B)"
+    ],
+    "answer": 0,
+    "explain": "Multiplicative property of determinants: det(AB)=det(A)·det(B).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d388fa67-e1fc-440d-bfb3-1c77cdc68648",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "If A is a square matrix, det(A) equals product of its eigenvalues. det(adj A) equals?",
+    "formula": "det(adj A) = [det(A)]^(n−1)",
+    "options": [
+      "det(A)",
+      "[det(A)]^(n+1)",
+      "[det(A)]^(n−1)",
+      "[det(A)]^n"
+    ],
+    "answer": 2,
+    "explain": "Standard result: det(adj A) = [det(A)]^(n−1) for an n×n matrix.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c011cbdd-654f-4961-a1e2-ee1b201bad0e",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "For a matrix A, det(Aᵀ) compared to det(A) is?",
+    "formula": "det(Aᵀ) = det(A)",
+    "options": [
+      "Zero",
+      "Equal to det(A)",
+      "Negative of det(A)",
+      "Reciprocal of det(A)"
+    ],
+    "answer": 1,
+    "explain": "Transpose does not change the value of the determinant: det(Aᵀ)=det(A).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "720599ca-9f20-40b0-867e-e6ac189b0836",
+    "subject": "Mathematics",
+    "chapter": "Matrices and Determinants",
+    "topic": "Matrices and Determinants",
+    "prompt": "The product of a matrix A and its adjoint equals?",
+    "formula": "A·adj(A) = det(A)·Iₙ",
+    "options": [
+      "det(A)·Iₙ",
+      "adj(A)·A only",
+      "Iₙ",
+      "0"
+    ],
+    "answer": 0,
+    "explain": "A·adj(A)=adj(A)·A=det(A)·I; this holds for any square matrix A.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  }
 ]

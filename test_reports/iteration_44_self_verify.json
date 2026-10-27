@@ -1,0 +1,42 @@
+{
+  "type": "Main-agent phone-size UI verification after testing-agent iterations 42/43",
+  "date": "2026-10-27",
+  "final_backend_regression": "19 passed,1 data-dependent skipped,1 canonical-login deselected; pytest -n0. Parallel failure traced to iteration42 broad fixture cleanup deleting iteration43 grants, fixed to exact fixture-owned IDs including shop test accounts.",
+  "production_mocked_apis": [],
+  "test_harness_only": {
+    "identity": "Temporary TEST-RF-portrait-* local users and valid hashed expiring grants",
+    "intercepts": ["Canonical auth/session, auth/me and PIN form success for fixture identity only", "rf/access fixture grant exchange", "Unrelated academic prefetch returns 503 instead of invalid-fixture 401"],
+    "gameplay": "All RF API responses, wallets, rewards, history, purchases and live WebSocket state are real",
+    "diagram": "Valid explicit card_ids used for a controlled 30-card QA deck; actual shuffled response followed. No fake diagram/card response."
+  },
+  "resolved_testing_blocker": "Iteration43 sign-outs were correct reactions to fake canonical fixture identity hitting real protected academic APIs. Harness-only isolation fixed the tests; production auth security was NOT weakened.",
+  "passed": [
+    "390x844 lobby with actually loaded original managed art, actual Coins and enabled Play Now modes",
+    "Solo 30-card/20-second contract, correct feedback, no answer formula before answer",
+    "Solo skip, real 20-second timeout, partial finish, actual +2 Coins and252 balance",
+    "Play-again creates different session ID and resets to Card1of30",
+    "Real invite creation, second participant joins, authenticated live duel, UI answer and feedback",
+    "All30 duel answers settle; real friend history contains opponent,bothscores,timestamp",
+    "History row opens existing result with no POST/new duel; historical Coins earned label",
+    "360x800 shop confirmation does not spend until Confirm, correct300coin deduction1000to700",
+    "Purchased avatar can be equipped; lobby balance refreshes; Frames tab renders",
+    "Purchase cancel retains actual700coin balance",
+    "Native-vector double-slit geometry renders at360px; all4options reachable; no horizontal overflow; no answer-reference leak",
+    "After removing all QA data:344profiles,10257coins,399awardrecords; wallet/ownershipandNEETprofile fingerprints identical; JEE sessions/duels/learning all0"
+  ],
+  "remaining_limitations": [
+    "Canonical backend intermittently returns502/503/timeouts; no claim that upstream availability is fixed",
+    "Physical Android/nativecookie bridge/offline typesetting/performance/accessibility requires device check",
+    "Final APK/AAB size not measured; under20MB not guaranteed",
+    "Sparsechapter data-dependent backendcase skipped in iter43 because currentPhysicsbank had none"
+  ],
+  "screenshots": [
+    "20261027_074753_ef761c825730/rf-verified-lobby.jpeg",
+    "20261027_074753_ef761c825730/rf-verified-result.jpeg",
+    "20261027_074929_1f9b194419dd/rf-verified-populated-history.jpeg",
+    "20261027_075354_89b7b43fcdff/rf-verified-shop-360.jpeg",
+    "20261027_075523_835ae2063810/rf-verified-diagram-360.jpeg",
+    "20261027_075523_835ae2063810/rf-verified-confirmation-360.jpeg"
+  ],
+  "note": "Early screenshots immediately after navigation captured entrance animation mid-frame. Final diagram/confirmation captures awaited animation completion. No end-user account or academic record modified by UI fixture testing."
+}

@@ -3,8 +3,8 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { rf } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
-import { colors, radius, space } from "@/src/theme";
-import { ErrorBox, Icon, Press, T } from "./ui";
+import { rapidColors as colors, radius, space } from "@/src/theme";
+import { ErrorBox, Icon, Press, T } from "@/src/rapid/ui";
 
 export function WeakRevision({ uid, exam }: { uid: string; exam: "JEE" }) {
   const router = useRouter();

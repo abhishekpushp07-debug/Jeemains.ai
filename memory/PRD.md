@@ -1,5 +1,53 @@
 # JEELIVE.AI Native App — PRD
 
+## Current release — Rapid Fire portrait refresh (2026-10-27)
+This section supersedes historical Rapid Fire/auth descriptions below. Approved
+scope is the FULL `/app/plan/plan.md` Phase 1, not a cosmetic-only preview.
+
+### Implemented
+- Original teal/royal-blue/purple energy lobby, graphite playing cards, managed
+  original art (~31KB total), prominent actual Coins/progression, solo/quick-match/
+  practice-rival modes, Challenge Friend + Join code and one-tap private history.
+- Matching shop/avatars/leaderboard/reward/history surfaces; purchase confirmation,
+  balance refresh and historical earned-reward labels. Same +1 score/2 Coins rules,
+  original win/perfect bonuses; 30 cards and 20 seconds retained.
+- Full AI-assisted reread of all 7,045 active JEE cards: 6,155 kept, 890 permanently
+  rejected. No bulk rewriting. Fourteen scientific vector diagrams added to retained
+  concepts. Answer-reference formulae appear only after answering/review.
+- Approved RF-only cleanup: 209 solo sessions, 388 duels, 255 learning events and
+  old JEE match/leaderboard statistics removed/reset. Also purged 4,041 older retired
+  JEE card records. Source seeds cannot resurrect the newly rejected cards.
+- Wallet/ownership/award and archived NEET fingerprints unchanged: 344 profiles,
+  10,257 total Coins, 399 award records. QA data removed; fresh JEE history empty.
+- RF HTTP and WS now use expiring opaque grants derived from VERIFIED canonical
+  identity, not X-RF-User assertions. `/api/rf/access` verifies web X-JL-Sid or native
+  access cookie against canonical `/auth/me`. Cookie is not persisted in the app;
+  grant token stays in RAM, digest/15-minute expiry in Mongo. HTTP guard replaces
+  any supplied UID; socket first JSON frame carries grant (not URL query).
+- Existing academic/PYQ endpoints and native direct canonical transport remain;
+  PIN credentials, original home artwork and charcoal/red theme unchanged.
+
+### Architecture additions
+- `frontend/src/rapid/{ui,Art,Lobby,RapidText,ScientificDiagram,Diagram}.tsx`
+- `frontend/app/rapid/{history,leaderboard}.tsx` plus rebuilt `(tabs)/rapid.tsx`.
+- `backend/rf_access.py`, `rapid_deck.py`; `branding.py` serves managed RF art.
+- Offline operator scripts and hash-bound review decisions in `backend/rapidfire/`.
+  One-time migration `rapid_portrait_2026_v1` is complete. Do not reset future matches.
+- Detailed counts, preservation evidence and limitations: `memory/RAPID_FIRE_REVIEW.md`.
+
+### Verified / backlog
+- Verified: TypeScript/lints, canonical positive PIN-to-RF grant, API privacy/WS,
+  complete 30-card duel/scoring/rewards, solo partial/idempotent rewards, shop/equip,
+  real phone-size UI solo timeout/play-again, friend history, purchase and 360px diagram.
+- Reports: iterations 42/43 plus `test_reports/iteration_44_self_verify.json`.
+- P0 release validation: physical Android native bridge/typesetting/touch/performance.
+  Web/browser evidence is not a native device test. Canonical intermittent 502/503
+  availability remains outside this app; safe GET retries/bounded errors only.
+- P1: measure actual Android build size (<20MB remains an unverified target), then
+  real-device load/cache performance. No new dependencies, video or 3D engine added.
+- P2: approved plan Phase 2/3 content/cosmetics/competition expansions await separate approval.
+
+
 ## Original problem
 A native Android (Expo React Native) student app for JEELIVE.AI covering JEE Main, BITSAT and COMEDK, for a private pilot. It reuses the existing jeelive.ai backend without changing it and has every student feature from the website: exam hubs, mocks/chapters, a reliable test player, results, focused Solutions, My Tests, the 62-day All India series with streak, reflection and reports. It also adds a new Rapid Fire mode: 20-second formula/concept cards. Phone entry is unverified (no OTP). The Home screen has a 2×2 tile grid (JEE Main, Live JEE Series, BITSAT, COMEDK) in the user's exact supplied card design. The bottom bar has Home, Rapid Fire, a raised diamond LIVE button, My Tests and Mission. Mission explains the AI-made content (80-parameter PYQ analysis), says the app is free and asks students to share it. The user also asked for very fast loading and for 5 lakh concurrent students.
 

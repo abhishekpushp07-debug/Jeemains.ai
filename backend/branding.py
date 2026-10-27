@@ -3,6 +3,7 @@ import asyncio
 import hashlib
 import logging
 import os
+import json
 from pathlib import Path
 
 import httpx
@@ -22,6 +23,10 @@ ASSETS = {
     "bitsat": ("jeelive-ai/uploads/brand/8117d2c8-4830-472a-b142-feb6527c2c73.jpg", "49a885034cefc4848cf42c5cbfea3fdbdce68f08a1638d6ec1250102e75642cb", "image/jpeg"),
     "comedk": ("jeelive-ai/uploads/brand/08fb078a-2e15-4af7-b928-a19a3ad5254e.jpg", "e24682ea5a92814c9b01fbe5a704614ba542004fc0ca1a70a2d16d8338e50028", "image/jpeg"),
 }
+_rf_manifest = Path(__file__).parent / 'rapidfire' / 'art_manifest.json'
+if _rf_manifest.exists():
+    ASSETS.update({f'rf-{name}': (row['path'], row['sha256'], 'image/webp')
+                   for name, row in json.loads(_rf_manifest.read_text()).items()})
 _storage_key = None
 _assets = {}
 _lock = asyncio.Lock()
@@ -73,6 +78,14 @@ async def original_card(kind: str):
     if kind not in {"jee", "live", "bitsat", "comedk"}:
         raise HTTPException(404, "Unknown card artwork")
     return await public_asset_response(kind)
+
+
+@router.get('/rapid/{kind}.webp')
+async def rapid_art(kind: str):
+    name = 'rf-' + kind
+    if name not in ASSETS:
+        raise HTTPException(404, 'Unknown game artwork')
+    return await public_asset_response(name)
 
 
 async def public_asset_response(name):

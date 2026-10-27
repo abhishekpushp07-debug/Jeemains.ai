@@ -15,7 +15,7 @@ const extra = Constants.expoConfig?.extra;
 const CANONICAL_API = (extra?.jeeliveApi || process.env.EXPO_PUBLIC_JEELIVE_API) as string;
 const BASE = WEB ? `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/jl` : CANONICAL_API;
 export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
-export const RF_BASE = `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/rf`;
+export const RF_BASE = `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/rf`;
 
 export const uuid = () => Crypto.randomUUID();
 
@@ -57,6 +57,24 @@ async function headers(json: boolean) {
 }
 
 let refreshing: Promise<boolean> | null = null;
+async function boundedAuthFetch(url: string, options: RequestInit, ms = 32000): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), ms);
+  try { return await fetch(url, { ...options, signal: controller.signal }); }
+  catch (error: any) {
+    if (controller.signal.aborted) throw new ApiError("Account service is taking longer than usual. Please try again.", 503);
+    throw error;
+  } finally { clearTimeout(timeout); }
+}
+let nativeAccessCookie = "";
+function captureNativeAccess(res: Response) {
+  if (WEB) return;
+  // Native fetch exposes response cookie headers; browser HttpOnly cookies are
+  // never read. Keep only the access cookie in RAM, never PIN or refresh token.
+  const raw = res.headers.get("set-cookie") || "";
+  const value = /(?:^|,\s*)access_token=([^;,]*)/.exec(raw)?.[1];
+  if (value) nativeAccessCookie = value.replace(/^"|"$/g, "");
+}
 let onAuthLost: (() => void) | null = null;
 export const setAuthLostHandler = (fn: (() => void) | null) => (onAuthLost = fn);
 
@@ -64,7 +82,8 @@ function refresh(): Promise<boolean> {
   if (!refreshing) {
     refreshing = (async () => {
       try {
-        const r = await fetch(BASE + "/auth/refresh", { method: "POST", credentials: "include", headers: await headers(true), body: "{}" });
+        const r = await boundedAuthFetch(BASE + "/auth/refresh", { method: "POST", credentials: "include", headers: await headers(true), body: "{}" });
+        captureNativeAccess(r);
         return r.ok;
       } catch {
         return false;
@@ -89,12 +108,15 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
   const body = opts.body === undefined ? (method === "GET" ? undefined : "{}") : JSON.stringify(opts.body);
   let res: Response;
   try {
-    res = await fetch(BASE + path, { method, body, credentials: "include", headers: await headers(body !== undefined), signal: opts.signal });
+    const options = { method, body, credentials: "include" as const, headers: await headers(body !== undefined), signal: opts.signal };
+    res = path.startsWith("/auth/") && !opts.signal ? await boundedAuthFetch(BASE + path, options) : await fetch(BASE + path, options);
   } catch (e: any) {
     if (e?.name === "AbortError") throw e;
+    if (e instanceof ApiError) throw e;
     throw new ApiError("Connection interrupted. Your last saved work is safe. Please try again.", 0);
   }
   const credentialSubmission = ["/auth/phone", "/auth/phone/signup", "/auth/login"].includes(path);
+  if (path.startsWith("/auth/")) captureNativeAccess(res);
   const refreshable = !credentialSubmission && !["/auth/refresh", "/auth/logout", "/auth/session"].includes(path);
   if (res.status === 401 && refreshable) {
     if (retry && await refresh()) return apiRaw<T>(path, opts, false);
@@ -165,15 +187,43 @@ export const registerAssetManifest = (id: string, rows: any[], solutions: boolea
 export const assetDataUri = (path: string) => privateAssets.get(path, 100);
 
 // Rapid Fire (JEELIVE companion service)
-export async function rf<T = any>(path: string, userId: string, opts: { method?: string; body?: unknown } = {}): Promise<T> {
+let rfGrant: { token: string; uid: string; until: number } | null = null;
+let grantFlight: Promise<string> | null = null;
+let rfGeneration = 0;
+export function clearRapidAccess() {
+  const old = rfGrant;
+  rfGrant = null; nativeAccessCookie = ""; rfGeneration++;
+  if (old) void fetch(RF_BASE + "/access/revoke", { method: "POST", headers: { Authorization: `Bearer ${old.token}` } }).catch(() => {});
+}
+export async function rapidAccess(userId: string): Promise<string> {
+  if (rfGrant?.uid === userId && rfGrant.until > Date.now() + 30000) return rfGrant.token;
+  if (grantFlight) { await grantFlight; if (rfGrant?.uid === userId) return rfGrant.token; }
+  const generation = rfGeneration;
+  grantFlight = (async () => {
+    if (!WEB && !nativeAccessCookie && !await refresh()) throw new ApiError("Reconnect your account to open Rapid Fire.", 401);
+    const h: Record<string, string> = { "Content-Type": "application/json" };
+    if (WEB) h["X-JL-Sid"] = (await sessionHandle())!;
+    const exchange = () => boundedAuthFetch(RF_BASE + "/access", { method: "POST", headers: h, body: JSON.stringify(WEB ? {} : { access_cookie: nativeAccessCookie }) });
+    let res = await exchange();
+    if (res.status === 401 && await refresh()) res = await exchange();
+    const result = await res.json().catch(() => null);
+    if (!res.ok || result?.user_id !== userId || generation !== rfGeneration) throw new ApiError(result?.detail || "Your Rapid Fire session could not be verified. Please sign in again.", res.status);
+    rfGrant = { token: result.token, uid: result.user_id, until: Date.parse(result.expires_at) };
+    return result.token as string;
+  })().finally(() => { grantFlight = null; });
+  return grantFlight;
+}
+export async function rf<T = any>(path: string, userId: string, opts: { method?: string; body?: unknown } = {}, retry = true): Promise<T> {
   let res: Response;
+  const publicPath = /^\/(catalog|cards)(\?|$)/.test(path);
+  const token = publicPath ? null : await rapidAccess(userId);
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 15000);
   try {
     res = await fetch(RF_BASE + path, {
       signal: ctl.signal,
       method: opts.method || "GET",
-      headers: { "Content-Type": "application/json", "X-RF-User": userId },
+      headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
       body: opts.body === undefined ? undefined : JSON.stringify(opts.body),
     });
   } catch {
@@ -181,6 +231,7 @@ export async function rf<T = any>(path: string, userId: string, opts: { method?:
     throw new ApiError(ctl.signal.aborted ? "Rapid Fire is taking too long. Check your connection and retry." : "You're offline. Rapid Fire needs a connection to load cards.", 0);
   }
   clearTimeout(timer);
+  if (res.status === 401 && retry) { rfGrant = null; return rf<T>(path, userId, opts, false); }
   const data = await res.json().catch(() => null);
   if (!res.ok) throw new ApiError(typeof data?.detail === "string" ? data.detail : "Rapid Fire is unavailable right now. Retry.", res.status);
   return data as T;

@@ -6,10 +6,10 @@ import Animated, {
   withDelay, withRepeat, withSequence, withTiming,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
-import { Icon, T } from "@/src/components/ui";
+import { Icon, T } from "@/src/rapid/ui";
 import { AVATAR_IMAGES } from "@/src/avatars";
 import { playSfx } from "@/src/sfx";
-import { colors } from "@/src/theme";
+import { rapidColors as colors } from "@/src/theme";
 
 export const FRAME_COLORS: Record<string, [string, string]> = {
   frame_gold: [colors.custom_neonAmber, colors.custom_amber],

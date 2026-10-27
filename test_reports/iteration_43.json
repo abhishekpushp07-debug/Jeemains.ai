@@ -1,0 +1,68 @@
+{
+  "summary": "Iteration 43 completed for backend + partial frontend. Backend mutating RF regression passed for solo/duel/history/shop/access rules with isolated TEST users and cleanup; frontend fixture UI run repeatedly hit auth/session-loss redirect before deep mutating flows could complete.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Fixture-authenticated Rapid session/duel UI continuation",
+        "issue": "During mutating UI flows, app intermittently redirects from Rapid screen to entry sign-in with banner 'Your session ended. Sign in again.' before/while card interactions. Console shows repeated 401s on unrelated /api/jl/* prefetch endpoints, followed by auth-loss behavior.",
+        "affected_testIDs": [
+          "rf-play-now",
+          "rf-start-button",
+          "rf-option-0",
+          "rf-skip-button",
+          "rf-session-screen"
+        ]
+      },
+      {
+        "flow": "Required fixture harness contract for UI mutating tests",
+        "issue": "To keep fixture session alive in browser automation, /api/jl/auth/refresh had to be intercepted in addition to auth/session, auth/me, /rf/access; otherwise unrelated JL prefetch 401s trigger sign-out and abort RF UI flow.",
+        "affected_testIDs": [
+          "entry-continue-button",
+          "rapid-fire-home"
+        ]
+      }
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter42_rf_access_privacy_and_assets.py",
+    "/app/backend/tests/test_iter43_rf_mutating_flows.py",
+    "/app/test_reports/pytest/iter43_backend_recheck.xml",
+    "/app/test_reports/pytest/iter43_mutating_backend.xml",
+    "/app/test_reports/artifacts/iter43_ui_load/entry_loaded_390.jpeg",
+    "/app/test_reports/artifacts/iter43_ui_fixture_a_fast/automation_output/20261027_074148_687b3d2fa56c/console_20261027_074148.log",
+    "/app/test_reports/artifacts/iter43_ui_fixture_a_fast/lobby_390.jpeg"
+  ],
+  "action_items": [
+    "Investigate frontend auth-loss cascade: unrelated JL 401 prefetch calls should not invalidate an active RF fixture/canonical session during Rapid gameplay.",
+    "Stabilize RF UI test harness contract so mutating flows can proceed without intercepting extra auth refresh endpoint.",
+    "After auth-loss fix, rerun full requested mobile UI scope: solo timeout+skip+diagram screenshots, duel invite/join two-view progression, history tap read-only verification, and shop purchase/equip/insufficient via UI."
+  ],
+  "critical_code_review_comments": [
+    "Backend access guard + owner scoping + WS first-frame grant auth work as expected under malformed token tests (array/int denied).",
+    "Fresh deck uniqueness and catalog invariants hold in tested runs (30 unique normalized prompts, 14 diagrams, no duplicate reward on session reopen).",
+    "Protected baseline guards remained unchanged after tests and cleanup (profiles=344, coins_sum=10257, wallet_ownership hash match, neet_profile_stats hash match)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter43_rf_mutating_flows.py",
+    "/app/tests/iter43_prepare_ui_fixture.py",
+    "/app/tests/iter43_cleanup_ui_fixture.py",
+    "/app/tests/iter43_baseline_guard_check.py",
+    "/app/test_reports/iteration_43.json"
+  ],
+  "success_rate": {
+    "backend": "100% (recheck 10/10 pass excluding canonical login + iter43 mutating 9 pass, 1 skip for sparse chapter availability)",
+    "frontend": "Partial (~25% requested UI scope; blocked by auth redirect/session-loss during fixture mutating flow)"
+  },
+  "seed_data_creation": "Created isolated TEST-RF-portrait-* fixture users/tokens for backend+UI testing and cleaned exact run-created UIDs; also cleaned known iter42 fixture UIDs TEST-RF-portrait-uiA-7ba2ac03 / uiB-7ba2ac03.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Loop-prevention triggered on repeated UI failure for same session selectors after 3 attempts. Backend API mutating coverage is stable and reusable in /app/backend/tests/test_iter43_rf_mutating_flows.py. UI failure reproduces with fixture flow redirecting to entry screen while console logs repeated 401s on /api/jl/* prefetch endpoints.",
+  "rca_of_issue": "RCA: In web preview, non-RF JL calls (pyq/streak/exam-navigation/etc.) return 401 under local fixture auth because canonical cookie jar is not truly established for those paths. API client treats these 401s as refreshable and may trigger auth-loss, clearing user state and returning to entry screen. This interrupts Rapid mutating UI before solo/duel completion. Mitigation: prevent unrelated 401 prefetch calls from cascading into global auth-loss during RF fixture runs, or provide a fully valid canonical session cookie path for fixture mode."
+}

@@ -5,29 +5,30 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { FadeIn, ZoomIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { Ring } from "@/src/components/Ring";
-import { BiologyDiagram, Diagram } from "@/src/components/BiologyDiagram";
+import { RapidDiagram as BiologyDiagram, RapidDiagramSpec as Diagram } from "@/src/rapid/Diagram";
 import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
 import { rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
-import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap } from "@/src/components/ui";
+import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap } from "@/src/rapid/ui";
+import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
-import { colors, radius, space, subjectColor } from "@/src/theme";
+import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
 const LIMIT = 20000;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
 type RCard = { id: string; exam?: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string; diagram?: Diagram };
 type Res = { card_id: string; outcome: "correct" | "incorrect" | "skipped" | "timed_out"; choice: number | null; ms: number };
 
-function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard[]; onRepeat: (ids: string[]) => void; onAgain: () => void; onExit: () => void }) {
+function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; cards: RCard[]; onRepeat: (ids: string[]) => void; onAgain: () => void; onExit: () => void; historical?: boolean }) {
   const [review, setReview] = useState(false);
   const sum = s.summary;
   const byId = Object.fromEntries(cards.map((c) => [c.id, c]));
   const missed = (s.results || []).filter((r: any) => r.outcome !== "correct");
   return (
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
-      <RewardPanel reward={s.reward} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "Blazing run! Loot unlocked" : sum.correct > 0 ? "Sprint complete! Loot earned" : "Sprint complete"} />
-      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonAmber}>{s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : s.mode === "diagrams" ? "Biology diagram sprint" : "Solo Sprint"}</T>
+      <RewardPanel reward={s.reward} historical={historical} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "What a run!" : "Sprint complete"} />
+      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : "Solo Sprint"}</T>
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
         <T w="heavy" size={44} color={colors.onSurfaceInverse} testID="rf-summary-score">{sum.score}<T w="semibold" size={22} color={colors.custom_whiteA70}> / {sum.total}</T></T>
@@ -55,9 +56,9 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
         return (
           <Card key={m.card_id} testID={"rf-review-" + m.card_id} style={{ gap: 6 }}>
             <T w="bold" size={11} color={colors.muted}>{c.chapter}</T>
-            <T w="bold" size={15}>{c.prompt}</T>
+            <RapidText testID={`rf-review-prompt-${c.id}`} text={c.prompt} size={16} />
             <BiologyDiagram diagram={c.diagram} testID={`rf-review-diagram-${c.id}`} />
-            {c.formula ? <T w="heavy" size={16} color={colors.custom_neonAmber}>{c.formula}</T> : null}
+            {c.formula ? <RapidText testID={`rf-review-formula-${c.id}`} text={c.formula} size={18} /> : null}
             <T size={13} color={colors.error}>{m.outcome === "timed_out" ? "⏱ Timed out" : m.outcome === "skipped" ? "↷ Skipped" : `✗ You chose: ${c.options[m.choice]}`}</T>
             <T size={13} w="bold" color={colors.success}>✓ Correct: {c.options[c.answer]}</T>
             {c.explain ? <T size={12} color={colors.muted}>{c.explain}</T> : null}
@@ -72,6 +73,11 @@ function Summary({ s, cards, onRepeat, onAgain, onExit }: { s: any; cards: RCard
 }
 
 export default function RapidSession() {
+  const p = useLocalSearchParams();
+  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.ids, p.exam, p.revision])} />;
+}
+
+function RapidSessionRound() {
   const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; ids?: string; review?: string; diagrams?: string; revision?: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
@@ -130,6 +136,8 @@ export default function RapidSession() {
     try {
       const s = await rf(`/sessions/${session.id}/complete`, uid, { method: "POST", body: { results: results.current } });
       invalidate(`u.${uid}.rfhist`);
+      invalidate(`u.${uid}.rfprofile`);
+      invalidate(`u.${uid}.rfshop`);
       invalidate(`u.${uid}.revision`);
       invalidate(`u.${uid}.rfboard`);
       setDone(s);
@@ -246,16 +254,16 @@ export default function RapidSession() {
       {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={() => router.back()} />} /></Card></View> : null}
       {!card && !error && !empty && !done ? <View style={{ padding: space.lg }}><Skeleton h={380} /></View> : null}
 
-      {done ? <Summary s={done} cards={cards} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
+      {done ? <Summary s={done} cards={cards} historical={!!p.review} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
         <View style={{ flex: 1, paddingHorizontal: space.lg }}>
           <ScrollView ref={scrollRef} testID="rf-card-scroll" style={styles.scroll} contentContainerStyle={styles.cardArea} showsVerticalScrollIndicator={false}>
             {cards[i + 1] ? <View pointerEvents="none" style={{ position: "absolute", left: 14, right: 14, top: 30, bottom: 6, borderRadius: radius.lg, backgroundColor: tint + "33", borderWidth: 1, borderColor: tint + "88", transform: [{ scale: 0.95 }] }} /> : null}
             <GestureDetector gesture={pan}>
-              <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: card.diagram ? space.md : space.xl, gap: card.diagram ? space.sm : space.md, borderWidth: 1, borderColor: colors.border, shadowColor: colors.surfaceInverse, shadowOpacity: 0.12, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 6 }, cardStyle]}>
+              <Animated.View key={card.id} entering={reduced ? undefined : FadeIn.duration(180)} testID="rf-card" style={[styles.questionCard, { borderColor: locked ? timedOut ? colors.warning : choice === card.answer ? colors.success : colors.error : tint + "66" }, cardStyle]}>
                 <View style={{ height: 4, width: 48, borderRadius: 2, backgroundColor: tint }} />
-                <T w="heavy" size={19} color={colors.custom_onReading} testID="rf-card-prompt">{card.prompt}</T>
+                <RapidText text={card.prompt} size={20} testID="rf-card-prompt" />
                 <BiologyDiagram diagram={card.diagram} testID="rf-card-diagram" />
-                {card.formula ? <View style={{ padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T w="heavy" size={20} color={colors.custom_neonAmber} style={{ textAlign: "center" }} testID="rf-card-formula">{card.formula}</T></View> : null}
+                {locked && card.formula ? <View style={styles.formula}><RapidText text={card.formula} size={21} testID="rf-card-formula" /></View> : null}
                 <View style={{ gap: space.sm }}>
                   {card.options.map((o, k) => {
                     const isAns = k === card.answer, picked = k === choice;
@@ -266,7 +274,7 @@ export default function RapidSession() {
                       <Press key={k} testID={"rf-option-" + k} disabled={locked} onPress={() => answer(k)} haptic={false} accessibilityLabel={`${o}${show && isAns ? ", correct answer" : show && picked ? ", your choice, incorrect" : ""}`}
                         style={{ minHeight: 52, borderRadius: radius.md, borderWidth: 2, borderColor: bd, backgroundColor: bg, flexDirection: "row", alignItems: "center", paddingHorizontal: space.md, gap: space.sm }}>
                         <T w="heavy" size={13} color={colors.muted}>{"ABCD"[k]}</T>
-                        <T w="bold" size={15} style={{ flex: 1 }} color={colors.custom_onReading}>{o}</T>
+                        <View style={styles.optionText}><RapidText text={o} size={16} testID={`rf-option-text-${k}`} /></View>
                         {show && isAns ? <Icon name="check-circle" size={20} color={colors.success} /> : show && picked ? <Icon name="close-circle" size={20} color={colors.error} /> : null}
                       </Press>
                     );
@@ -275,7 +283,7 @@ export default function RapidSession() {
                 {locked ? (
                   <View testID="rf-feedback" accessibilityLiveRegion="polite" style={{ gap: 2 }}>
                     <T w="heavy" size={15} color={timedOut ? colors.warning : choice === card.answer ? colors.success : colors.error}>{timedOut ? "⏱ Timed out" : choice === card.answer ? "✓ Correct" : "✗ Incorrect"}</T>
-                    {card.explain ? <T size={13} color={colors.custom_onReading}>{card.explain}</T> : null}
+                    {card.explain ? <RapidText text={card.explain} size={14} testID="rf-feedback-explanation" /> : null}
                   </View>
                 ) : null}
               </Animated.View>
@@ -291,7 +299,7 @@ export default function RapidSession() {
 
       <Sheet visible={exit} onClose={() => setExit(false)} testID="rf-exit-sheet">
         <T w="heavy" size={19}>Leave this session?</T>
-        <T size={13} color={colors.muted}>Cards you haven’t seen won’t be counted. You can finish now to save what you’ve done.</T>
+        <T testID="rf-exit-explanation" size={13} color={colors.muted}>Finish now to save your answers. Unanswered cards are recorded as skipped, not incorrect.</T>
         <Button testID="rf-exit-finish" label="Finish & see summary" onPress={() => { setExit(false); finish(); }} color={colors.custom_amber} />
         <Button testID="rf-exit-discard" kind="secondary" label="Leave without saving" onPress={() => router.back()} />
         <Button testID="rf-exit-stay" kind="ghost" label="Keep going" onPress={() => setExit(false)} />
@@ -301,6 +309,8 @@ export default function RapidSession() {
 }
 
 const styles = StyleSheet.create({
+  questionCard: { backgroundColor: colors.custom_reading, borderRadius: 26, padding: 20, gap: 18, borderWidth: 1, shadowColor: colors.custom_gameBg, shadowOpacity: 0.3, shadowRadius: 16, elevation: 4 },
+  formula: { padding: 14, backgroundColor: colors.surface, borderRadius: 14 }, optionText: { flex: 1, paddingVertical: 12 },
   scroll: { flex: 1 },
   cardArea: { flexGrow: 1, justifyContent: "center", paddingVertical: space.sm },
 });

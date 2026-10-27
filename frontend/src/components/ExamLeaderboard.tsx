@@ -1,7 +1,7 @@
 import React from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { colors, radius, space } from "@/src/theme";
-import { ErrorBox, Icon, T } from "./ui";
+import { rapidColors as colors, radius, space } from "@/src/theme";
+import { ErrorBox, Icon, T } from "@/src/rapid/ui";
 
 export function ExamLeaderboard({ exam, data, error, loading, retry }: { exam: string; data: any; error: string; loading: boolean; retry: () => void }) {
   const board = data?.exam === exam ? data : null;

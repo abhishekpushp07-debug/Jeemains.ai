@@ -1,214 +1,92 @@
 {
-  "theme_identity": {
-    "name": "JEELIVE.AI Deep Blood Dark Theme",
-    "reference_url": "https://jeelive.ai",
-    "css_source": "https://jeelive.ai/static/css/main.cecdf12b.css",
-    "description": "Official JEELIVE.AI visual identity matching the public live site. Deep dark surface (#08080A), high-contrast blood red accents (#D91222 / #FF6974), dark maroon soft badges (#280D13), and refined card surfaces (#14141C / #0F0F14)."
+  "project_name": "JEELIVE Rapid Fire — Premium Portrait Game Redesign",
+  "archetype": "ARCHETYPE 7: ELECTRIC & NEON (Future, Speed, Disruption) mixed with SOFT UTILITY",
+  "theme_strategy": {
+    "game_theme": "Teal, Royal Blue, and Purple identity on Near-Black/Graphite surfaces",
+    "rest_app_theme": "Retain existing rest-app charcoal/red theme for non-game sections",
+    "orientation": "Portrait-only native mobile layout (Expo Android focus)"
   },
   "colors": {
-    "surface": "#08080A",
-    "onSurface": "#F8FAFC",
-    "surfaceSecondary": "#14141C",
-    "onSurfaceSecondary": "#F8FAFC",
-    "surfaceAlt": "#0F0F14",
-    "surfaceTertiary": "#280D13",
-    "onSurfaceTertiary": "#FF6974",
-    "surfaceInverse": "#D91222",
-    "onSurfaceInverse": "#FFFFFF",
-    "muted": "#B0B0BF",
-    "mutedSecondary": "#9292A5",
-    "brandText": "#FF6974",
-    "brand": "#D91222",
-    "onBrand": "#FFFFFF",
-    "brandPrimary": "#D91222",
-    "onBrandPrimary": "#FFFFFF",
-    "brandSecondary": "#B91020",
-    "onBrandSecondary": "#FFFFFF",
-    "brandTertiary": "#280D13",
-    "onBrandTertiary": "#FF6974",
-    "brandSoft": "#280D13",
-    "brandLine": "#67202C",
-    "focusRing": "#FF7883",
-    "success": "#56D99A",
-    "onSuccess": "#10231C",
-    "successSoft": "#10231C",
-    "successLine": "#22533E",
-    "warning": "#F1BC63",
-    "onWarning": "#2A2113",
-    "warningSoft": "#2A2113",
-    "warningLine": "#62502A",
-    "error": "#FF7883",
-    "onError": "#2F1118",
-    "errorSoft": "#2F1118",
-    "errorLine": "#793240",
-    "border": "#2A2A38",
-    "borderStrong": "#67202C",
-    "divider": "#2A2A38",
-    "custom_examJee": "#D91222",
-    "custom_examJeeDeep": "#280D13",
-    "custom_examBitsat": "#EF9B25",
-    "custom_examBitsatDeep": "#7A1A0C",
-    "custom_examComedk": "#0A2025",
-    "custom_examComedkGold": "#A7F3E8",
-    "custom_series": "#24090E",
-    "custom_seriesBright": "#D91222",
-    "custom_burgundy": "#67202C",
-    "custom_subjectPhysics": "#D91222",
-    "custom_subjectChemistry": "#56D99A",
-    "custom_subjectMaths": "#FF7883",
-    "custom_subjectBiology": "#56D99A",
-    "custom_darkCard": "#14141C",
-    "custom_amber": "#F1BC63",
-    "custom_cyan": "#D91222",
-    "custom_gameBg": "#08080A",
-    "custom_gameCard": "#14141C",
-    "custom_gameCardHi": "#1A1A24",
-    "custom_gameLine": "#2A2A38",
-    "custom_neonAmber": "#F1BC63",
-    "custom_neonCyan": "#FF6974",
-    "custom_neonGreen": "#56D99A",
-    "custom_neonRed": "#FF7883",
-    "custom_gameMuted": "#B0B0BF",
-    "custom_overlay": "rgba(8, 8, 10, 0.85)",
-    "custom_whiteA70": "rgba(248, 250, 252, 0.72)",
-    "custom_whiteA15": "rgba(248, 250, 252, 0.15)"
+    "background_surfaces": {
+      "lobby_bg": "#0B0C10",
+      "card_surface": "#12141C",
+      "card_surface_hover": "#1A1D28",
+      "dialog_surface": "#161822",
+      "subtle_border": "rgba(255, 255, 255, 0.12)"
+    },
+    "brand_palette": {
+      "teal_primary": "#00F2FE",
+      "teal_glow": "rgba(0, 242, 254, 0.4)",
+      "royal_blue": "#2563EB",
+      "royal_blue_dark": "#1E3A8A",
+      "purple_accent": "#9333EA",
+      "purple_glow": "rgba(147, 51, 234, 0.4)",
+      "coin_gold": "#FFD700",
+      "coin_orange": "#F59E0B"
+    },
+    "feedback_colors": {
+      "correct_emerald": "#10B981",
+      "incorrect_rose": "#F43F5E",
+      "timeout_amber": "#F59E0B"
+    },
+    "text_colors": {
+      "heading": "#FFFFFF",
+      "body_primary": "#F1F5F9",
+      "body_secondary": "#94A3B8",
+      "muted": "#64748B"
+    }
   },
   "typography": {
-    "font_families": {
-      "display": "Figtree, sans-serif",
-      "body": "Figtree, sans-serif",
-      "mono": "Roboto Mono, monospace"
+    "game_headings": {
+      "font_family": "Outfit, Nunito, System-UI, sans-serif",
+      "weight": "800 (ExtraBold / Rounded)",
+      "h1_lobby": "text-3xl font-extrabold tracking-tight text-white",
+      "h2_card": "text-xl font-bold tracking-normal text-slate-100"
     },
-    "font_files": {
-      "figtree": [
-        "assets/fonts/Figtree-400.ttf",
-        "assets/fonts/Figtree-500.ttf",
-        "assets/fonts/Figtree-600.ttf",
-        "assets/fonts/Figtree-700.ttf",
-        "assets/fonts/Figtree-800.ttf"
-      ],
-      "jakarta": [
-        "assets/fonts/PlusJakartaSans-400.ttf",
-        "assets/fonts/PlusJakartaSans-500.ttf",
-        "assets/fonts/PlusJakartaSans-600.ttf",
-        "assets/fonts/PlusJakartaSans-700.ttf",
-        "assets/fonts/PlusJakartaSans-800.ttf"
-      ]
-    },
-    "hierarchy": {
-      "h1": {
-        "size": 32,
-        "weight": "800",
-        "lineHeight": 38,
-        "letterSpacing": -0.5
-      },
-      "h2": {
-        "size": 24,
-        "weight": "800",
-        "lineHeight": 30,
-        "letterSpacing": -0.3
-      },
-      "h3": {
-        "size": 18,
-        "weight": "700",
-        "lineHeight": 24
-      },
-      "body": {
-        "size": 14,
-        "weight": "400",
-        "lineHeight": 20
-      },
-      "caption": {
-        "size": 12,
-        "weight": "500",
-        "lineHeight": 16,
-        "color": "#B0B0BF"
-      },
-      "eyebrow": {
-        "size": 10,
-        "weight": "800",
-        "letterSpacing": 1.4,
-        "color": "#FF6974"
-      }
+    "questions_and_formulas": {
+      "font_family": "Inter, KaTeX Math, System-UI, sans-serif",
+      "body_style": "text-base leading-relaxed text-slate-100",
+      "formula_style": "font-mono text-cyan-300 text-lg py-1 px-2 bg-slate-900/80 rounded border border-cyan-500/20"
     }
   },
-  "layouts": {
-    "spacing_scale": {
-      "xs": 4,
-      "sm": 8,
-      "md": 12,
-      "lg": 16,
-      "xl": 24,
-      "xxl": 32
-    },
-    "border_radius": {
-      "sm": 6,
-      "md": 10,
-      "lg": 16,
-      "pill": 999
-    },
-    "pyq_minimal_click_flow": {
-      "entry_point": "JEE Main Hub card -> Direct click to PYQ papers list",
-      "paper_list_header": "Header with title 'JEE Main PYQs' and inline Year filter chips (All, 2026, 2025, 2024, 2023) and Shift filter chips (All, Jan Shift 1, Jan Shift 2, Apr Shift 1, Apr Shift 2)",
-      "row_card_structure": {
-        "left": "Icon / Year badge in #280D13 container with #FF6974 text",
-        "middle": "Paper Title (e.g., JEE Main 2026 24 Jan Shift 1), metadata count (75 Q, 180 min, 300 marks)",
-        "actions": {
-          "unattempted": "Single 'Start' button (#D91222 background, white text)",
-          "in_progress": "Single 'Continue' button (#F1BC63 amber background, dark text)",
-          "completed": "Two distinct buttons: 'Result' (#280D13 border button) and 'Re-attempt' (#D91222 background button)"
-        }
-      },
-      "empty_and_error_states": "Honest status display if backend returns 0 published papers: 'No PYQ papers live yet' with clear message and retry action."
+  "layout_and_grids": {
+    "mode": "Mobile Portrait Hero Grid (1 Column, Stacked Sections)",
+    "container_padding": "px-4 py-6",
+    "touch_targets": "min-h-[48px] rounded-2xl flex items-center justify-center font-bold px-6 py-4",
+    "components": {
+      "lobby_top_bar": "Flex row, justify-between, avatar preview + progression pill left, coin balance pill right",
+      "emblem_area": "Centered glowing 3D-effect energy emblem with pulse animation",
+      "actions": "Primary Play Now (Teal to Royal Blue gradient with elevated shadow) + Challenge Friend (Purple border with royal blue glow)",
+      "card_face": "Near-black #12141C card with 1px border border-teal-500/30, subtle radial glow backdrop, 20-second circular progress timer at top right"
     }
   },
-  "components": {
-    "ExamTile": "Card with 136px height image banner, rounded 24px container, deep dark background #14141C",
-    "ExamHub": "JEE Main replaced Mock entry with direct 'PYQ papers' option (Explore PYQ papers / Start PYQ)",
-    "SeriesBanner": "Flagship 100% AI banner in deep blood maroon (#160B10) with radiant glow and 200+ tagline",
-    "SetRow": "Minimal-click paper row with dynamic Start / Continue / Result + Re-attempt action triggers",
-    "SolutionNavigator": "Horizontal scrollable question pill bar with green (correct), red (incorrect), yellow (skipped) states and uploaded solution viewer"
+  "visual_enhancers": {
+    "card_depth": "Subtle 1px border stroke with 10% opacity, layered ambient drop shadows, soft cyan/violet rim lighting",
+    "glassmorphism": "backdrop-blur-md bg-slate-900/80 border border-white/10",
+    "emblems_and_badges": "Cohesive dimensional energy emblems for Play Now, Duel, Coins, and Trophies"
   },
   "motion": {
-    "preset": "Framer motion / Reanimated FadeInDown",
-    "duration_fast": 180,
-    "duration_normal": 350,
-    "touch_active_scale": 0.96
-  },
-  "accessibility": {
-    "min_contrast_ratio": "4.5:1",
-    "data_testid_required": true,
-    "test_id_examples": [
-      "exam-direct-mocks-jee-main",
-      "exam-destination-pyq",
-      "pyq-year-filter-2026",
-      "pyq-shift-filter-jan1",
-      "pyq-start-button-id",
-      "pyq-continue-button-id",
-      "pyq-result-button-id",
-      "pyq-reattempt-button-id"
-    ]
+    "card_transitions": "Framer Motion slide-in-up (duration 0.25s, ease-out)",
+    "timer_pulse": "Subtle scale pulse when timer <= 5s",
+    "button_press": "Scale down to 0.96 on active press with quick spring response",
+    "reduced_motion": "Honors prefers-reduced-motion by replacing smooth slides with instant opacity fades"
   },
   "image_urls": {
-    "jeelive_logo": "assets/images/jeelive-logo.webp",
-    "tile_jee": "assets/images/tile-jee.jpg",
-    "tile_bitsat": "assets/images/tile-bitsat.jpg",
-    "tile_comedk": "assets/images/tile-comedk.jpg",
-    "tile_live": "assets/images/tile-live.jpg"
+    "neon_emblem": "https://images.unsplash.com/photo-1638947604157-d259d219eeee?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHxfHxnYW1lJTIwdHJvcGh5JTIwY29pbiUyMGF2YXRhciUyMGVtYmxlbSUyMG5lb258ZW58MHx8fHwxNzkzMDgzODI1fDA&ixlib=rb-4.1.0&q=85",
+    "neon_diamonds": "https://images.unsplash.com/photo-1738683959505-3739fea6b94f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwzfHxnYW1lJTIwdHJvcGh5JTIwY29pbiUyMGF2YXRhciUyMGVtYmxlbSUyMG5lb258ZW58MHx8fHwxNzkzMDgzODI1fDA&ixlib=rb-4.1.0&q=85",
+    "glowing_object": "https://images.unsplash.com/photo-1737079709078-51fce967e430?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHw0fHxnYW1lJTIwdHJvcGh5JTIwY29pbiUyMGF2YXRhciUyMGVtYmxlbSUyMG5lb258ZW58MHx8fHwxNzkzMDgzODI1fDA&ixlib=rb-4.1.0&q=85"
   },
   "instructions_to_main_agent": [
-    "Update frontend theme tokens in /app/frontend/src/theme.ts to match jeelive.ai public live site colors exactly (#08080A background, #D91222 primary, #FF6974 brandText, #280D13 brandSoft, #67202C brandLine).",
-    "Ensure JEE Main hub route replaces Mock tests entry with PYQ papers entry.",
-    "Implement the minimal-click PYQ flow: directly displaying paper list with inline Year and Shift filters.",
-    "Provide immediate action buttons on paper rows: 'Start' for unattempted, 'Continue' for in-progress, and twin buttons 'Result' & 'Re-attempt' for completed tests.",
-    "Handle empty states gracefully when zero published PYQ papers are returned from API, showing an honest status without fabricated data.",
-    "Preserve all existing functionality for BITSAT, COMEDK, Chapter practice, Live series, and Rapid Fire.",
-    "Include data-testid on all interactive PYQ elements for test automation."
+    "Ensure all interactive elements have explicit data-testid attributes in kebab-case format.",
+    "Do NOT alter global rest-app themes (charcoal/red) outside of the Rapid Fire mobile game section.",
+    "Retain existing 30 cards format and 20-second timer per card.",
+    "Keep visible real coin counters in top player bar, shop, and results screens.",
+    "Implement one-tap Friends Fight history modal/drawer from lobby.",
+    "Ensure high contrast on dark graphite cards for formulas and text legibility."
   ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
-    "Never use dark gradients over dark backgrounds — use solid deep dark #08080A background with crisp 1px #2A2A38 / #67202C borders.",
-    "Always set explicit text color on hover and active states.",
-    "Keep layout spacing clean and responsive with 2x padding.",
-    "All interactive components MUST contain kebab-case data-testid attributes."
-  ]
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "accessibility": "WCAG AA contrast for text (min 4.5:1), touch targets min 48px",
+    "testing_attributes": "All key elements must have data-testid (e.g., data-testid='play-now-button', data-testid='coin-balance')",
+    "fonts_rule": "Use rounded expressive headings for game elements, clean mono/sans for formulas"
+  }
 }

@@ -316,3 +316,18 @@ implementation: "RemovedReadySheet/progresscounters; earlyattempt/resultstagingb
 size_work: "R8/shrink/compression,defaultAAB+optionalARM64APKprofile,unusedMonoloadingremoved,ZIPuploadexclusion. AndroidrawJS/assetsgraphcompiled with--no-bytecode:8,160,615registeredbytes; NOTAPK. ActualHermescompileblockedARM64host/x86binary; noSDK/Gradle/Java orAPKartifact. <20MBNOTverified."
 latest_checks: "TypeScript/projectESLint/PythonlintPASS. Neednewiteration40tests; olderiter39ReadySheet/staticexpectations nowobsolete. Noauthcredentialretry/nativephysicaltest."
 reference: "reference/ITER40_SILENT_CACHE_AND_ANDROID_SIZE.md"
+
+## Iterations42–44 — approved Rapid Fire premium portrait refresh
+iteration44_rapid_current:
+  implemented: true
+  backend_working: true
+  frontend_working: true
+  reports: "test_reports/iteration_42.json, iteration_43.json, iteration_44_self_verify.json"
+  scope: "FULL approved /app/plan/plan.md Phase1; portraitenergyart/lobby/darkcards/actualcoins/privatefriendhistory/shop/results + fullbankreview/permanentRFcleanup. Academic/PINaccounts/PYQs and archivedNEET unchanged. Phase2/3 notbuilt."
+  content: "7045 fullhash-bound AI-assisted cardreviews,6155kept,890newrejected deleted plus4041olderretiredJEErecords.14 originalscientificvector diagrams. No bulkrewriting. Freshdecks30unique,20sec; no padding. Timing editorialestimate not measuredguarantee."
+  cleanup: "209solo,388duels,255learningevents deleted; JEEperformance/leaderboardreset.344profiles/10257Coins/399awardrecords andallprotectedwallet/ownership/NEETfingerprints unchanged aftercleanupandQA. Maintenanceoff, freshJEEhistoryempty."
+  backend_checks: "Finalserial regression19passed1sparsePhysicsdata-dependent skip; canonicalpositiveintegrationpreviouslypassed, not repeatedly retried. HTTPownerbinding/WSfirstframetoken,30cardduelfinish/rewards,solo/idempotence,shop/equip/insufficient,historyprivacyanduniquecontent passed."
+  ui_checks: "Main390/360phonechecks completedsolo correct/skip/real20stimeout/result+2Coins/currentbalance/newplayagain; invite/join/liveanswer/full30duelfinish/historyread-onlyrow; shoppurchaseconfirmation/deduction/equip/balancerefresh/cancel; nativevectordiagramreadability,4optionsaccessible,nohorizontaloverflow."
+  harness_findings: "Iteration43fakecanonicalfixturetriggeredlegitimate401signoutfromacademicprefetch; solvedONLYintestharnessbyisolatingirrelevantJLcalls, notweakeningproductionauth. Combinedparallelpytestfixturebroadcleanupdeletedotherworkergrant; fixedexactownedIDs inclshopfixturesandranserial."
+  app_mocked_apis: "None. UItests usedexplicitisolatedauthfixtures; allRFgameplay/wallet/historyresponsesreal. AllQAdataremoved."
+  remaining: "Canonicalupstream502/503/timeoutsstillpossible; boundederrorhandling/safeGETretry present,noautomaticPOSTcredentialretry. PhysicalAndroidcookiebridge/typesetting/performance/accessibilityandactualAPKsize measurement pending; <20MBnotguaranteed."

@@ -5,7 +5,7 @@ import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, IconName, Press, T } from "@/src/components/ui";
-import { colors, space } from "@/src/theme";
+import { colors, rapidColors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 
 const ITEMS: Record<string, { label: string; icon: IconName; active: IconName }> = {
@@ -18,8 +18,9 @@ const ITEMS: Record<string, { label: string; icon: IconName; active: IconName }>
 
 function JeeTabBar({ state, emitter, navigateToTab }: any) {
   const insets = useSafeAreaInsets();
+  const gameActive = state.routes[state.index]?.name === "rapid";
   return (
-    <View style={{ backgroundColor: colors.surfaceSecondary, borderTopWidth: 1, borderTopColor: colors.border, paddingBottom: insets.bottom, flexDirection: "row", height: (Platform.OS === "web" ? 64 : 62) + insets.bottom, overflow: "visible" }}>
+    <View style={{ backgroundColor: gameActive ? rapidColors.surface : colors.surfaceSecondary, borderTopWidth: 1, borderTopColor: gameActive ? rapidColors.border : colors.border, paddingBottom: insets.bottom, flexDirection: "row", height: (Platform.OS === "web" ? 64 : 62) + insets.bottom, overflow: "visible" }}>
       {state.routes.map((route: any, i: number) => {
         const item = ITEMS[route.name];
         if (!item) return null;
@@ -33,11 +34,11 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
             <View key={route.key} style={{ flex: 1, alignItems: "center" }}>
               <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" style={{ alignItems: "center", marginTop: -26 }} scaleTo={0.92}>
                 <View style={{ width: 62, height: 62, alignItems: "center", justifyContent: "center" }}>
-                  <LinearGradient colors={focused ? [colors.custom_seriesBright, colors.custom_series] : [colors.custom_series, colors.custom_seriesBright]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                  <LinearGradient colors={focused ? [rapidColors.brandPrimary, rapidColors.custom_neonViolet] : [colors.custom_series, colors.custom_seriesBright]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
                     style={{ position: "absolute", width: 50, height: 50, borderRadius: 12, transform: [{ rotate: "45deg" }], borderWidth: 3, borderColor: colors.surfaceSecondary, shadowColor: colors.custom_series, shadowOpacity: 0.4, shadowRadius: 10, shadowOffset: { width: 0, height: 6 }, elevation: 8 }} />
                   <Icon name="diamond-stone" size={26} color={colors.onBrandSecondary} />
                 </View>
-                <T w="heavy" size={11} color={focused ? colors.custom_neonAmber : colors.muted} style={{ marginTop: 2, letterSpacing: 1 }}>RAPID</T>
+                <T w="heavy" size={11} color={focused ? rapidColors.custom_neonCyan : colors.muted} style={{ marginTop: 2, letterSpacing: 1 }}>RAPID</T>
               </Press>
             </View>
           );

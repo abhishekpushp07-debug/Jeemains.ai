@@ -1,1712 +1,1458 @@
 [
- {
-  "id": "05ea77af-bb90-4dba-98aa-4583ca4aae46",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Standard equation of ellipse with major axis along x-axis?",
-  "formula": "x²/a² + y²/b² = 1, a > b",
-  "options": [
-   "x² + y² = a²",
-   "x²/a² + y²/b² = 1, a > b",
-   "x²/b² + y²/a² = 1, a > b",
-   "x²/a² - y²/b² = 1"
-  ],
-  "answer": 1,
-  "explain": "When a > b, major axis is along x-axis; semi-major = a, semi-minor = b.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b579da18-f5c8-4f4a-b1a7-2ce19951140a",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Eccentricity relation for ellipse x²/a² + y²/b² = 1 (a > b)?",
-  "formula": "b² = a²(1 - e²)",
-  "options": [
-   "b² = a²(1 - e²)",
-   "a² = b²(1 - e²)",
-   "b² = a²(1 + e²)",
-   "b² = a²(e² - 1)"
-  ],
-  "answer": 0,
-  "explain": "For ellipse, 0 < e < 1 and b² = a²(1 - e²) defines the relationship.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "26633508-dba4-4d13-8b4e-ceb8417b9e8f",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Foci of ellipse x²/a² + y²/b² = 1 (a > b) are at?",
-  "formula": "(±ae, 0)",
-  "options": [
-   "(±a, 0)",
-   "(0, ±ae)",
-   "(±be, 0)",
-   "(±ae, 0)"
-  ],
-  "answer": 3,
-  "explain": "Foci lie on the major axis at distance ae from centre, so (±ae, 0).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9ecd3339-1390-441b-af76-faa831307de2",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Length of major axis of x²/a² + y²/b² = 1 (a > b)?",
-  "formula": "2a",
-  "options": [
-   "2b",
-   "a",
-   "2a",
-   "b"
-  ],
-  "answer": 2,
-  "explain": "Major axis spans from (−a, 0) to (a, 0), so its length is 2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0b5809a7-3cee-478a-a7cd-7bf60805f607",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Length of latus rectum of ellipse x²/a² + y²/b² = 1?",
-  "formula": "2b²/a",
-  "options": [
-   "2ab",
-   "2b²/a",
-   "2a²/b",
-   "b²/a"
-  ],
-  "answer": 1,
-  "explain": "Latus rectum is the chord through focus perpendicular to major axis; length = 2b²/a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "224494f1-d212-4aab-b700-19f846f50274",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Sum of focal distances of any point P on ellipse equals?",
-  "formula": "SP + S'P = 2a",
-  "options": [
-   "2ae",
-   "2b",
-   "a + b",
-   "2a"
-  ],
-  "answer": 3,
-  "explain": "This is the focal-chord (definition) property: sum of distances from two foci = 2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a826f3e0-9525-4188-bcd3-a0ff53cbcd8d",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Directrices of ellipse x²/a² + y²/b² = 1 (a > b) are?",
-  "formula": "x = ±a/e",
-  "options": [
-   "x = ±ae",
-   "y = ±a/e",
-   "x = ±a/e",
-   "x = ±b/e"
-  ],
-  "answer": 2,
-  "explain": "Directrices are vertical lines at x = ±a/e for major axis along x-axis.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "109f0b9e-b9f9-433e-9621-14976ebe3036",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Equation of tangent to x²/a² + y²/b² = 1 at point (x₁, y₁)?",
-  "formula": "xx₁/a² + yy₁/b² = 1",
-  "options": [
-   "xx₁/a² - yy₁/b² = 1",
-   "x/x₁ + y/y₁ = 1",
-   "xx₁/a² + yy₁/b² = 1",
-   "xx₁ + yy₁ = a²"
-  ],
-  "answer": 2,
-  "explain": "T = 0 form: replace x² → xx₁, y² → yy₁ in ellipse equation.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cdf322f8-e521-4447-bb50-f6d99fe9664c",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Condition for y = mx + c to be tangent to x²/a² + y²/b² = 1?",
-  "formula": "c² = a²m² + b²",
-  "options": [
-   "c² = b²m² + a²",
-   "c² = a²m² + b²",
-   "c = am + b",
-   "c² = a²m² - b²"
-  ],
-  "answer": 1,
-  "explain": "Tangent condition: substitute y = mx + c into ellipse and discriminant = 0 gives c² = a²m² + b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cfabfc75-a1d2-48c3-86cb-b6853463797d",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Equation of normal to x²/a² + y²/b² = 1 at point (x₁, y₁)?",
-  "formula": "a²x/x₁ - b²y/y₁ = a² - b²",
-  "options": [
-   "a²x/x₁ - b²y/y₁ = a² - b²",
-   "b²x/x₁ - a²y/y₁ = a² - b²",
-   "xx₁/a² - yy₁/b² = 0",
-   "a²x·x₁ - b²y·y₁ = 1"
-  ],
-  "answer": 0,
-  "explain": "Normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = a² − b² (= a²e²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cc919759-ec29-4ea5-a628-75122c2bdb4c",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Auxiliary circle of ellipse x²/a² + y²/b² = 1 has equation?",
-  "formula": "x² + y² = a²",
-  "options": [
-   "x² + y² = a²b²",
-   "x² + y² = a²",
-   "x² + y² = b²",
-   "x² + y² = a² + b²"
-  ],
-  "answer": 1,
-  "explain": "Auxiliary circle has radius = semi-major axis a, centred at origin.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "36013387-c7a5-49fd-bbe1-7504d694c66f",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Parametric equations of ellipse x²/a² + y²/b² = 1?",
-  "formula": "x = a cosθ, y = b sinθ",
-  "options": [
-   "x = a cosθ, y = a sinθ",
-   "x = a secθ, y = b tanθ",
-   "x = a sinθ, y = b cosθ",
-   "x = a cosθ, y = b sinθ"
-  ],
-  "answer": 3,
-  "explain": "Standard parametric form uses eccentric angle θ: (a cosθ, b sinθ).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "38950187-4a26-4fea-8834-c9b44622e88b",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Tangent at parametric point (a cosθ, b sinθ) on ellipse?",
-  "formula": "x cosθ/a + y sinθ/b = 1",
-  "options": [
-   "ax cosθ + by sinθ = 1",
-   "x sinθ/a + y cosθ/b = 1",
-   "x cosθ/a + y sinθ/b = 1",
-   "x/a cosθ - y/b sinθ = 1"
-  ],
-  "answer": 2,
-  "explain": "Substitute (a cosθ, b sinθ) into T = 0 form: x cosθ/a + y sinθ/b = 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "be0eed20-1aab-490b-9c17-5b69ea3f58a8",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Director circle of ellipse x²/a² + y²/b² = 1 has equation?",
-  "formula": "x² + y² = a² + b²",
-  "options": [
-   "x² + y² = a² + b²",
-   "x² + y² = a² - b²",
-   "x² + y² = 2a²",
-   "x² + y² = a²"
-  ],
-  "answer": 0,
-  "explain": "Locus of point from which two perpendicular tangents to ellipse are drawn is x² + y² = a² + b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c079b6f6-d93a-42a7-a171-035bce179c04",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Eccentricity range for an ellipse is?",
-  "formula": "0 < e < 1",
-  "options": [
-   "0 < e < 1",
-   "e = 1",
-   "e > 1",
-   "e ≥ 1"
-  ],
-  "answer": 0,
-  "explain": "For ellipse eccentricity satisfies 0 < e < 1; e = 0 gives circle, e = 1 gives parabola.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c6fc2e8f-4aa2-4edc-84c5-990b47cd3ea5",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a² + y²/b² = 1 with b > a, foci are at?",
-  "formula": "(0, ±be)",
-  "options": [
-   "(±be, 0)",
-   "(±ae, 0)",
-   "(0, ±ae)",
-   "(0, ±be)"
-  ],
-  "answer": 3,
-  "explain": "When b > a, major axis is along y-axis; foci at (0, ±be) where e = √(1 − a²/b²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "95ebf66e-483f-432c-bc72-7dca27bd6a94",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Area of ellipse x²/a² + y²/b² = 1 is?",
-  "formula": "πab",
-  "options": [
-   "πa²",
-   "πb²",
-   "2πab",
-   "πab"
-  ],
-  "answer": 3,
-  "explain": "Area of ellipse = π × semi-major × semi-minor = πab.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0e85382e-47c9-43c5-9b74-432bb4a31e2b",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Chord of contact from external point (h,k) to x²/a² + y²/b² = 1?",
-  "formula": "hx/a² + ky/b² = 1",
-  "options": [
-   "hx/a² - ky/b² = 1",
-   "hx·a² + ky·b² = 1",
-   "kx/a² + hy/b² = 1",
-   "hx/a² + ky/b² = 1"
-  ],
-  "answer": 3,
-  "explain": "Chord of contact (T = 0) from (h, k): replace x₁ = h, y₁ = k in tangent equation.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "81c641fb-7b55-46d4-87bc-cbfbb942097f",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "End-points of latus rectum of x²/a² + y²/b² = 1 (a > b) are?",
-  "formula": "(±ae, ±b²/a)",
-  "options": [
-   "(±b, ±ae)",
-   "(±ae, ±a²/b)",
-   "(±a, ±b²/a)",
-   "(±ae, ±b²/a)"
-  ],
-  "answer": 3,
-  "explain": "Foci at x = ±ae; substituting gives y² = b²(1 − e²) = b⁴/a², so y = ±b²/a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ee1afaaa-1791-4a5e-8ae3-705dc57632b0",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Pair of tangents from (h,k) to ellipse — combined equation uses?",
-  "formula": "SS₁ = T²",
-  "options": [
-   "S = T",
-   "SS₁ = T²",
-   "S + S₁ = 2T",
-   "S·T = S₁"
-  ],
-  "answer": 1,
-  "explain": "Joint equation of pair of tangents from external point: SS₁ = T², where S, T, S₁ are standard.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "68c97dd7-c88d-4fe1-8b0c-55af10117baf",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The chord joining (a cosα, b sinα) and (a cosβ, b sinβ) on ellipse?",
-  "formula": "x/a cos((α+β)/2) + y/b sin((α+β)/2) = cos((α−β)/2)",
-  "options": [
-   "x cos((α+β)/2)/a + y sin((α+β)/2)/b = cos((α−β)/2)",
-   "x sinα/a + y cosβ/b = 1",
-   "x/a + y/b = cos(α−β)",
-   "x/a + y/b = cos((α+β)/2)"
-  ],
-  "answer": 0,
-  "explain": "Standard result for chord joining two parametric points on ellipse.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8e5c4383-960d-4131-9b27-919063c4acae",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse, if e is eccentricity and l is semi-latus rectum, then l = ?",
-  "formula": "l = b²/a = a(1 − e²)",
-  "options": [
-   "a(1 + e²)",
-   "b²/b = b",
-   "a(1 − e²)",
-   "b(1 − e²)"
-  ],
-  "answer": 2,
-  "explain": "Semi-latus rectum = b²/a, and since b² = a²(1−e²), it equals a(1−e²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2cf442e2-7160-4cd6-b812-11dc8281f8e6",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Which of these represents an ellipse? (a, b > 0, a ≠ b)",
-  "formula": "",
-  "options": [
-   "x² + y² = a²",
-   "x²/a² + y²/b² = 1",
-   "y² = 4ax",
-   "x²/a² - y²/b² = 1"
-  ],
-  "answer": 1,
-  "explain": "Sum of two squared terms equal to 1 with different denominators gives an ellipse.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "79ea4084-81d1-49ab-80fc-4f944b2bde96",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Minor axis length of x²/a² + y²/b² = 1 (a > b) is?",
-  "formula": "",
-  "options": [
-   "2b",
-   "b",
-   "2a",
-   "a"
-  ],
-  "answer": 0,
-  "explain": "Minor axis lies along y-axis with length 2b when a > b.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1e5dce2f-31f4-41da-b4d4-d00125a3c3e5",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Distance from centre to focus of x²/a² + y²/b² = 1 (a > b)?",
-  "formula": "c = ae",
-  "options": [
-   "be",
-   "a/e",
-   "ae",
-   "b/e"
-  ],
-  "answer": 2,
-  "explain": "Focal distance from centre is c = ae, where e is eccentricity.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "076895bd-676f-4e7f-9e03-3687b1f93174",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Relation between a, b, c for ellipse (a > b, c = focal dist)?",
-  "formula": "b² = a² - c²",
-  "options": [
-   "c² = a² + b²",
-   "a² = b² − c²",
-   "b² = a² − c²",
-   "b² = c² − a²"
-  ],
-  "answer": 2,
-  "explain": "For ellipse b² = a²(1 − e²) = a² − c², fundamental relation.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7b1bf461-e69c-4274-8256-356529aa9fe9",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a² + y²/b² = 1, what is the semi-latus rectum?",
-  "formula": "l = b²/a",
-  "options": [
-   "b²/a",
-   "a²/b",
-   "b/a",
-   "2b²/a"
-  ],
-  "answer": 0,
-  "explain": "Semi-latus rectum = b²/a; full latus rectum = 2b²/a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "71eba183-5208-40f9-9a77-95ac761fd9fc",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Slope of normal to x²/a² + y²/b² = 1 at (x₁,y₁)?",
-  "formula": "",
-  "options": [
-   "-b²x₁/(a²y₁)",
-   "-a²y₁/(b²x₁)",
-   "b²x₁/(a²y₁)",
-   "a²y₁/(b²x₁)"
-  ],
-  "answer": 3,
-  "explain": "Tangent slope = −b²x₁/(a²y₁), so normal slope = a²y₁/(b²x₁). Wait — normal slope is −1/tangent slope = a²y₁/(b²x₁). Correct answer is index 3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "626dc81b-4154-4483-a287-d5b246a18a19",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Normal to ellipse x²/a² + y²/b² = 1 at (x₁,y₁): which is correct?",
-  "formula": "",
-  "options": [
-   "xx₁/a² + yy₁/b² = 1",
-   "a²x/x₁ − b²y/y₁ = a²−b²",
-   "x/x₁ − y/y₁ = 1",
-   "a²x·x₁ − b²y·y₁ = 0"
-  ],
-  "answer": 1,
-  "explain": "Normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = a² − b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "24dea6f1-ab2d-49ca-b2db-3228111c2cd3",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Equation of normal to ellipse at parametric point (a cosθ, b sinθ)?",
-  "formula": "",
-  "options": [
-   "ax sinθ − by cosθ = 0",
-   "ax cosθ + by sinθ = a²",
-   "x cosθ/a − y sinθ/b = 1",
-   "ax/cosθ − by/sinθ = a²−b²"
-  ],
-  "answer": 3,
-  "explain": "Normal at (a cosθ, b sinθ): ax/cosθ − by/sinθ = a² − b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "60dde6f6-1a7e-4bf5-8394-e8d28275030c",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The foot of perpendicular from focus to any tangent of ellipse lies on?",
-  "formula": "",
-  "options": [
-   "Directrix",
-   "Auxiliary circle",
-   "Director circle",
-   "Minor axis"
-  ],
-  "answer": 1,
-  "explain": "Foot of perpendicular from either focus to any tangent lies on the auxiliary circle x²+y²=a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1ded4f35-3513-4940-ab4f-b2815d9eb325",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "What is the condition for point (h, k) to lie inside ellipse x²/a²+y²/b²=1?",
-  "formula": "",
-  "options": [
-   "h²/a² + k²/b² < 1",
-   "h²/a² + k²/b² > 1",
-   "h²/a² + k²/b² = 1",
-   "h²/b² + k²/a² < 1"
-  ],
-  "answer": 0,
-  "explain": "Point (h,k) is inside ellipse iff h²/a² + k²/b² < 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bea19eb8-0b5c-4ea2-94c5-71bd355801d6",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Tangent to x²/a² + y²/b²=1 with slope m has y-intercept?",
-  "formula": "c = ±√(a²m²+b²)",
-  "options": [
-   "±√(a²m²+b²)",
-   "±√(b²m²+a²)",
-   "±√(a²m²−b²)",
-   "±√(a²+b²)"
-  ],
-  "answer": 0,
-  "explain": "Tangent y=mx±√(a²m²+b²); intercept magnitude = √(a²m²+b²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1ddcd630-3a65-4af3-a4c9-f1bce8b4e443",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1, the ratio (distance from focus)/(distance from directrix) for any point is?",
-  "formula": "",
-  "options": [
-   "e²",
-   "1/e",
-   "1",
-   "e"
-  ],
-  "answer": 3,
-  "explain": "Focus-directrix property: focal distance / directrix distance = e (eccentricity).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "58463090-4dc8-4464-a5d7-24334dfcda23",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Conjugate diameters of ellipse: if slope of one diameter is m₁, other m₂ satisfies?",
-  "formula": "m₁·m₂ = −b²/a²",
-  "options": [
-   "m₁m₂ = −b²/a²",
-   "m₁+m₂ = 0",
-   "m₁m₂ = b²/a²",
-   "m₁m₂ = −a²/b²"
-  ],
-  "answer": 0,
-  "explain": "Two diameters are conjugate if m₁·m₂ = −b²/a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "761355d2-63c6-4baf-be18-794d6d983c44",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/25 + y²/16 = 1, eccentricity is?",
-  "formula": "",
-  "options": [
-   "3/4",
-   "4/5",
-   "5/4",
-   "3/5"
-  ],
-  "answer": 3,
-  "explain": "a²=25, b²=16, c²=9, e=c/a=3/5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "47064c74-ed2f-4d1f-a2a1-bdcf600d92f7",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Distance between two directrices of ellipse x²/a²+y²/b²=1 (a>b) is?",
-  "formula": "",
-  "options": [
-   "2a",
-   "2ae",
-   "2a/e",
-   "2b/e"
-  ],
-  "answer": 2,
-  "explain": "Directrices at x=±a/e, so distance between them = 2a/e.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "20d75b31-1d52-424c-8514-cd9a85cd589a",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Distance between two foci of x²/a²+y²/b²=1 (a>b) is?",
-  "formula": "",
-  "options": [
-   "2ae",
-   "2a/e",
-   "2be",
-   "2b"
-  ],
-  "answer": 0,
-  "explain": "Foci at (±ae, 0), so distance between them = 2ae.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0e53679b-d1ae-4a30-9c66-02e9c9d9189f",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Focal radii from focus S(ae,0) to point P(x₁,y₁) on ellipse x²/a²+y²/b²=1?",
-  "formula": "r₁ = a - ex₁",
-  "options": [
-   "a - ex₁ only",
-   "b - ex₁ and b + ex₁",
-   "a - ex₁ and a + ex₁",
-   "a + ex₁ and a - ex₁ from S'"
-  ],
-  "answer": 2,
-  "explain": "From S(ae,0): SP = a−ex₁; from S'(−ae,0): S'P = a+ex₁; sum = 2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d5c8aa0e-bc50-4a25-8f3a-6fcbaf69f51a",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Equation of chord of ellipse whose midpoint is (h, k)?",
-  "formula": "T = S₁",
-  "options": [
-   "hx/a² + ky/b² = h²/a² + k²/b²",
-   "kx/a² + hy/b² = 1",
-   "hx/a² − ky/b² = 1",
-   "hx + ky = a² + b²"
-  ],
-  "answer": 0,
-  "explain": "Using T = S₁: hx/a² + ky/b² = h²/a² + k²/b² gives midpoint chord.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "55f69556-f116-47a9-acd3-aa7021cd6970",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), the length of semi-minor axis b in terms of a and e?",
-  "formula": "b = a√(1−e²)",
-  "options": [
-   "a/e",
-   "a(1−e)",
-   "a√(e²−1)",
-   "a√(1−e²)"
-  ],
-  "answer": 3,
-  "explain": "From c² = a²−b² and e = c/a: b² = a²(1−e²), so b = a√(1−e²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "70727274-df96-4f5c-88d9-06d48ec9ee88",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The eccentricity of ellipse with semi-axes a and b (a>b) satisfies b² = a²(1−e²). If a=5, b=4, then e?",
-  "formula": "e = c/a",
-  "options": [
-   "4/5",
-   "√41/5",
-   "3/5",
-   "1/5"
-  ],
-  "answer": 2,
-  "explain": "c² = 25−16 = 9, c = 3, e = 3/5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "28427b29-21c8-4be4-9630-a6362d847aa5",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The condition for line lx + my + n = 0 to be tangent to x²/a²+y²/b²=1?",
-  "formula": "a²l² + b²m² = n²",
-  "options": [
-   "a²m² + b²l² = n²",
-   "a²l² + b²m² = n²",
-   "l²+m² = n²(a²+b²)",
-   "l²/a² + m²/b² = n²"
-  ],
-  "answer": 1,
-  "explain": "Writing as y = −(l/m)x−(n/m), tangency gives c² = a²m²+b², leading to a²l²+b²m²=n².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9d9dd057-c7c6-4375-9532-1f670bfacbd8",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Angle between tangents from external point (h,k) to ellipse is 90° iff (h,k) lies on?",
-  "formula": "",
-  "options": [
-   "Auxiliary circle x²+y²=a²",
-   "Major axis",
-   "Director circle x²+y²=a²+b²",
-   "Directrix x=a/e"
-  ],
-  "answer": 2,
-  "explain": "Locus of point from which perpendicular tangents are drawn is the director circle.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4cc36618-eedf-42b8-ad45-c832c24952bb",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), the min distance from focus to ellipse?",
-  "formula": "a(1−e)",
-  "options": [
-   "b²/a",
-   "a(1−e)",
-   "a−b",
-   "a(1+e)"
-  ],
-  "answer": 1,
-  "explain": "Nearest point to focus is vertex (a,0); distance = a−ae = a(1−e).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b4d482a5-8e50-4ead-be45-025a76a76171",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Max distance of point on x²/a²+y²/b²=1 (a>b) from a focus?",
-  "formula": "a(1+e)",
-  "options": [
-   "a(1+e)",
-   "2a",
-   "a+b",
-   "a(1−e)"
-  ],
-  "answer": 0,
-  "explain": "Farthest point from focus S(ae,0) is vertex (−a,0); distance = a+ae = a(1+e).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b2f04213-e0f6-4738-8677-3b0a50c3212e",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1, product of slopes of conjugate diameters m₁·m₂ = ?",
-  "formula": "m₁·m₂ = −b²/a²",
-  "options": [
-   "−b²/a²",
-   "−1",
-   "b²/a²",
-   "−a²/b²"
-  ],
-  "answer": 0,
-  "explain": "Diameters y = m₁x and y = m₂x are conjugate iff m₁m₂ = −b²/a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "66293c91-2bb6-4987-b7b8-99aec3325783",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/9+y²/4=1, the equation of tangent with slope m=1?",
-  "formula": "y=mx±√(a²m²+b²)",
-  "options": [
-   "y = x ± √7",
-   "y = x ± √13",
-   "y = x ± √5",
-   "y = x ± 5"
-  ],
-  "answer": 1,
-  "explain": "c² = a²m²+b² = 9(1)+4 = 13, so y = x±√13.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6b16056a-6dc5-49d2-86d4-9d187e977d51",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), eccentricity of an ellipse for which a=2b is?",
-  "formula": "",
-  "options": [
-   "1/2",
-   "√3",
-   "1/√2",
-   "√3/2"
-  ],
-  "answer": 3,
-  "explain": "b²=a²(1−e²); b=a/2 ⟹ 1/4=1−e² ⟹ e²=3/4 ⟹ e=√3/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3d999ef2-a7ce-496a-9da7-f98c70f315b2",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), length of latus rectum = 2b²/a. If a=5, b=4, LR = ?",
-  "formula": "LR = 2b²/a",
-  "options": [
-   "6",
-   "32/5",
-   "16/5",
-   "8/5"
-  ],
-  "answer": 1,
-  "explain": "LR = 2b²/a = 2(16)/5 = 32/5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7631853d-dec8-4b7f-bff3-27797e14cc8f",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Polar of point (h,k) w.r.t. x²/a²+y²/b²=1 is?",
-  "formula": "hx/a² + ky/b² = 1",
-  "options": [
-   "kx/a² + hy/b² = 1",
-   "hx/b² + ky/a² = 1",
-   "hx/a² + ky/b² = 1",
-   "x²/a² + y²/b² = hk"
-  ],
-  "answer": 2,
-  "explain": "The polar (chord of contact / pole–polar) of (h,k) w.r.t. the ellipse is hx/a²+ky/b²=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d8ba2410-68af-47de-aa0c-8462770997d9",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "If tangents at ends of any chord of ellipse meet at (h,k), then chord is the __ of (h,k)?",
-  "formula": "",
-  "options": [
-   "Asymptote",
-   "Polar",
-   "Directrix",
-   "Normal"
-  ],
-  "answer": 1,
-  "explain": "The chord of contact from an external point is its polar w.r.t. the ellipse.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1ba0d42a-3d0e-4402-a470-c88fe0284804",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "If a diameter of x²/a²+y²/b²=1 has slope m, its conjugate diameter slope m' satisfies?",
-  "formula": "m·m' = −b²/a²",
-  "options": [
-   "m·m' = b²/a²",
-   "m+m' = 0",
-   "m·m' = −a²/b²",
-   "m·m' = −b²/a²"
-  ],
-  "answer": 3,
-  "explain": "Conjugate diameters of ellipse satisfy m·m' = −b²/a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fa408204-d2e6-423d-8d26-864c054fb464",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The equation x²/a²+y²/b²=1 with a>b represents an ellipse. Its vertices are at?",
-  "formula": "",
-  "options": [
-   "(±a, ±b)",
-   "(±a, 0)",
-   "(±c, 0)",
-   "(0, ±b)"
-  ],
-  "answer": 1,
-  "explain": "Vertices (ends of major axis) of the ellipse with a>b are at (±a, 0).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2a3cb5ce-2f77-4afb-97ab-c8c9dea31c5e",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Number of tangents from an external point to ellipse x²/a²+y²/b²=1?",
-  "formula": "",
-  "options": [
-   "1",
-   "4",
-   "2",
-   "3"
-  ],
-  "answer": 2,
-  "explain": "Exactly two distinct tangents can be drawn from an external point to an ellipse.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7f872e5f-d1ec-4927-ab07-5889146093a6",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1, the normal at (x₁,y₁) is: a²x/x₁ − b²y/y₁ = ?",
-  "formula": "a²x/x₁ − b²y/y₁ = a²−b²",
-  "options": [
-   "a²−b²",
-   "a²b²",
-   "a²+b²",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "Normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = a²−b² (= a²e²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b99cc649-60a5-45ad-a6bd-98627ff1f799",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The sum of the two semi-axes of x²/a²+y²/b²=1 (a>b) in terms of e and a is?",
-  "formula": "a + b = a(1+√(1−e²))",
-  "options": [
-   "a(2−e²)",
-   "a(1+e)",
-   "a(1+√(1−e²))",
-   "2a(1−e)"
-  ],
-  "answer": 2,
-  "explain": "b = a√(1−e²), so a+b = a(1+√(1−e²)).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "47ef816f-b143-49b8-b617-68a74301fd5b",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "If (x₁,y₁) is midpoint of chord of x²/a²+y²/b²=1, the chord equation is?",
-  "formula": "T = S₁",
-  "options": [
-   "xx₁/a²+yy₁/b² = x₁²/a²+y₁²/b²",
-   "xx₁/a²−yy₁/b² = 1",
-   "x₁x/a²+y₁y/b² = 0",
-   "x²/a²+y²/b² = x₁y₁"
-  ],
-  "answer": 0,
-  "explain": "Chord with midpoint (x₁,y₁): T=S₁, i.e. xx₁/a²+yy₁/b²=x₁²/a²+y₁²/b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4746df80-351f-4fac-bc39-0970beb78623",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1, the tangent at any point makes equal angles with?",
-  "formula": "",
-  "options": [
-   "The normal and major axis",
-   "The two directrices",
-   "The two axes",
-   "The two focal radii"
-  ],
-  "answer": 3,
-  "explain": "Tangent at P is equally inclined to the focal radii SP and S'P (reflection property).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "642398ea-a2c6-48e5-9aad-de58235957be",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), the latus rectum passes through focus and is ⊥ to?",
-  "formula": "",
-  "options": [
-   "Major axis",
-   "Minor axis",
-   "Directrix",
-   "Tangent at vertex"
-  ],
-  "answer": 0,
-  "explain": "Latus rectum is the focal chord perpendicular to the major axis.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d9f7b2f3-13ab-4df8-99fe-918e4cf15ee1",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), min distance from a focus to the ellipse is?",
-  "formula": "a − ae = a(1−e)",
-  "options": [
-   "a(1+e)",
-   "a−b",
-   "a(1−e)",
-   "b(1−e)"
-  ],
-  "answer": 2,
-  "explain": "Nearest point to focus S(ae,0) is vertex (a,0); distance = a − ae = a(1−e).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "312b5d75-e198-4de9-9dfa-793dd2029643",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), max distance from focus S(ae,0) to ellipse is?",
-  "formula": "a(1+e)",
-  "options": [
-   "a(1−e)",
-   "2a",
-   "a+b",
-   "a(1+e)"
-  ],
-  "answer": 3,
-  "explain": "Farthest point from focus S(ae,0) is vertex (−a,0); distance = a + ae = a(1+e).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9d8023a3-7a07-4ffd-9136-f8d82e3e32eb",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Condition for line lx+my+n=0 to be tangent to x²/a²+y²/b²=1?",
-  "formula": "a²l² + b²m² = n²",
-  "options": [
-   "a²l² + b²m² = n²",
-   "a²m² + b²l² = n²",
-   "l²a² − m²b² = n²",
-   "l²/a² + m²/b² = n²"
-  ],
-  "answer": 0,
-  "explain": "Standard tangency condition for lx+my+n=0 to ellipse is a²l²+b²m²=n².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "26a03e1c-a6a1-4db8-9257-7ea653651719",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/25+y²/9=1, distance between the two directrices is?",
-  "formula": "2a/e",
-  "options": [
-   "10",
-   "25/2",
-   "50/3",
-   "50/4"
-  ],
-  "answer": 3,
-  "explain": "a=5,b=3,e=4/5; 2a/e=10/(4/5)=50/4=12.5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "88ddf934-801d-496c-b4b1-56a31c65b423",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For conjugate diameters of x²/a²+y²/b²=1, if slopes m₁,m₂ then m₁·m₂ = ?",
-  "formula": "m₁m₂ = −b²/a²",
-  "options": [
-   "a²/b²",
-   "−b²/a²",
-   "−a²/b²",
-   "b²/a²"
-  ],
-  "answer": 1,
-  "explain": "Condition for conjugate diameters: m₁·m₂ = −b²/a².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f23ea208-2ee9-42ca-bb20-43bd5bd437c3",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Vertices of x²/a²+y²/b²=1 (a>b) are at?",
-  "formula": "",
-  "options": [
-   "(±a, 0)",
-   "(±b, 0)",
-   "(0, ±b)",
-   "(±ae, 0)"
-  ],
-  "answer": 0,
-  "explain": "Vertices are the endpoints of the major axis: (±a, 0) when a>b.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "39fdbbf9-f5ba-45e9-8140-4220eaf34d94",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1, the normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = ?",
-  "formula": "a² − b²",
-  "options": [
-   "a²b²",
-   "0",
-   "a² − b²",
-   "a² + b²"
-  ],
-  "answer": 2,
-  "explain": "Standard normal equation to ellipse at (x₁,y₁) is a²x/x₁ − b²y/y₁ = a²−b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "680fa526-da7b-482b-ba70-f27eab93aa07",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), eccentricity when a = 2b is?",
-  "formula": "",
-  "options": [
-   "√3",
-   "√3/2",
-   "1/√2",
-   "1/2"
-  ],
-  "answer": 1,
-  "explain": "b²=a²(1−e²); b=a/2 ⟹ 1/4=1−e² ⟹ e²=3/4 ⟹ e=√3/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c441eafe-7d91-44bd-866f-1dc33afa16b3",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/9+y²/4=1, equation of tangent with slope m=1 is?",
-  "formula": "y = x ± √13",
-  "options": [
-   "y = x ± √7",
-   "y = x ± 5",
-   "y = x ± √13",
-   "y = x ± √5"
-  ],
-  "answer": 2,
-  "explain": "c²=a²m²+b²=9(1)+4=13; tangent: y=x±√13.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "dfa4980a-72cb-4fbc-8a7b-99e08dffacd0",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), length of LR=2b²/a. If a=5,b=4, LR=?",
-  "formula": "2b²/a",
-  "options": [
-   "32/5",
-   "16/5",
-   "8/5",
-   "4"
-  ],
-  "answer": 0,
-  "explain": "LR = 2(16)/5 = 32/5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "169b687b-19a7-4e98-9d09-c57cd12557ff",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Interior of ellipse x²/a²+y²/b²=1 is defined by which inequality?",
-  "formula": "",
-  "options": [
-   "x²/a²−y²/b² < 1",
-   "x²/a²+y²/b² < 1",
-   "x²/a²+y²/b² > 1",
-   "x²/a²+y²/b² = 0"
-  ],
-  "answer": 1,
-  "explain": "Points inside the ellipse satisfy x²/a²+y²/b² < 1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9562dd51-ae9b-4967-98bf-c10400577b05",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "If tangents at ends of a chord of x²/a²+y²/b²=1 meet at (h,k), then chord is the __ of (h,k)?",
-  "formula": "",
-  "options": [
-   "Chord of contact only",
-   "Polar only",
-   "Polar and chord of contact",
-   "Diameter of ellipse"
-  ],
-  "answer": 2,
-  "explain": "For external point, chord of contact = polar; both names apply to line hx/a²+ky/b²=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "452ebe85-b06a-4ddf-b4ed-bdbb446930fe",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), the relation b²=a²(1−e²) gives e when a=5, b=3?",
-  "formula": "e = c/a",
-  "options": [
-   "√(16/25) = 4/5",
-   "3/5",
-   "c/a with c=4,a=5",
-   "4/5"
-  ],
-  "answer": 3,
-  "explain": "e=√(1−9/25)=√(16/25)=4/5; options A and C are equivalent.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a8e4147d-b486-4a7a-8a0c-f373c4cbbb3a",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), what is the semi-latus rectum?",
-  "formula": "l = b²/a",
-  "options": [
-   "b/a²",
-   "b²/a",
-   "a²/b",
-   "2b²/a"
-  ],
-  "answer": 1,
-  "explain": "The semi-latus rectum of an ellipse is b²/a (half the full latus rectum 2b²/a).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "27523ae9-5726-4a31-ba63-e0aea49f3df6",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), min distance from focus S(ae,0) to ellipse is?",
-  "formula": "r_min = a − ae = a(1−e)",
-  "options": [
-   "a(1+e)",
-   "b(1−e)",
-   "a(1−e)",
-   "a−b"
-  ],
-  "answer": 2,
-  "explain": "Closest point on ellipse to focus is nearer vertex (a,0); distance = a−ae = a(1−e).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4a9e94d9-44a2-4ebb-b744-523f9f11fb1e",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), max distance from focus S(ae,0) to ellipse is?",
-  "formula": "r_max = a + ae = a(1+e)",
-  "options": [
-   "a(1+e)",
-   "2a",
-   "a+b",
-   "a(1−e)"
-  ],
-  "answer": 0,
-  "explain": "Farthest point from focus is the far vertex (−a,0); distance = a+ae = a(1+e).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "cdef8325-3240-4f1b-a1cd-dddc33f96915",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), LR=2b²/a. If a=5, b=4, LR=?",
-  "formula": "LR = 2b²/a",
-  "options": [
-   "16/5",
-   "32/25",
-   "8/5",
-   "32/5"
-  ],
-  "answer": 3,
-  "explain": "LR=2(16)/5=32/5.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "345e6ff0-8e45-4b8f-b1ab-f432d89c4aab",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "If (x₁,y₁) is midpoint of a chord of x²/a²+y²/b²=1, the chord equation is?",
-  "formula": "T = S₁",
-  "options": [
-   "xx₁/a²−yy₁/b²=0",
-   "x²/a²+y²/b²=x₁y₁",
-   "xx₁/a²+yy₁/b²=x₁²/a²+y₁²/b²",
-   "x/a²+y/b²=1"
-  ],
-  "answer": 2,
-  "explain": "Equation of chord with midpoint (x₁,y₁) is T=S₁: xx₁/a²+yy₁/b²=x₁²/a²+y₁²/b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "ee64a438-32b7-4f8e-a523-1befe4d76eba",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Area enclosed by ellipse x²/a² + y²/b² = 1 is?",
-  "formula": "A = πab",
-  "options": [
-   "πab",
-   "2πab",
-   "π(a+b)",
-   "πa²b"
-  ],
-  "answer": 0,
-  "explain": "Area of ellipse is πab; reduces to πa² for circle (a=b).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "55e41e46-1ed1-45a6-8828-0fd1e29b847e",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), directrix equations are?",
-  "formula": "x = ±a/e",
-  "options": [
-   "x = ±ae",
-   "x = ±b/e",
-   "x = ±a/e",
-   "x = ±a²/b"
-  ],
-  "answer": 2,
-  "explain": "Directrices are x = ±a/e where e is eccentricity; foci are at x = ±ae.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "13bb298c-cb18-4f66-8377-5df8adfc4dd0",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse, length of major axis when a>b in x²/a²+y²/b²=1 is?",
-  "formula": "2a",
-  "options": [
-   "2a",
-   "a",
-   "a+b",
-   "2b"
-  ],
-  "answer": 0,
-  "explain": "Major axis length is 2a (along x-axis when a>b); minor axis length is 2b.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "81e62ed5-a423-491d-b534-4d003266ef2d",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Parametric coordinates of any point on x²/a²+y²/b²=1 are?",
-  "formula": "(a cosθ, b sinθ)",
-  "options": [
-   "(a secθ, b tanθ)",
-   "(a cosθ, b sinθ)",
-   "(a cosθ, b cosθ)",
-   "(b cosθ, a sinθ)"
-  ],
-  "answer": 1,
-  "explain": "Standard parametric form: x=a cosθ, y=b sinθ; θ is eccentric angle.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4150faf4-09fe-42a7-9b06-9db7e9f52d3a",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), sum of focal distances of any point P is?",
-  "formula": "SP + S'P = 2a",
-  "options": [
-   "2a",
-   "2b",
-   "2a/e",
-   "2ae"
-  ],
-  "answer": 0,
-  "explain": "Defining property: sum of distances from any point on ellipse to two foci = 2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c76233f9-feee-4430-8818-568f2c3d5cd0",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "The tangent to x²/a²+y²/b²=1 at point (x₁,y₁) is?",
-  "formula": "xx₁/a² + yy₁/b² = 1",
-  "options": [
-   "x/x₁a² + y/y₁b² = 1",
-   "x₁x/a + y₁y/b = 1",
-   "xx₁/a² + yy₁/b² = 1",
-   "xx₁/a² − yy₁/b² = 1"
-  ],
-  "answer": 2,
-  "explain": "Tangent at (x₁,y₁) replaces x²→xx₁, y²→yy₁ by T=0 rule.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "39703743-0fed-4d27-a596-df57c9d04d84",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), focus S is at (ae,0). Focal distance to P(x₁,y₁)?",
-  "formula": "SP = a − ex₁",
-  "options": [
-   "ae − x₁",
-   "a + ex₁",
-   "b − ex₁",
-   "a − ex₁"
-  ],
-  "answer": 3,
-  "explain": "SP = a−ex₁ (nearer focus); S'P = a+ex₁ (farther focus); sum = 2a.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1a90243d-36ee-4aa1-bcd7-c67b4144b3cf",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "Equation of the director circle (orthoptic circle) of x²/a²+y²/b²=1 is?",
-  "formula": "x²+y² = a²+b²",
-  "options": [
-   "x²+y² = a²",
-   "x²+y² = b²",
-   "x²+y² = a²−b²",
-   "x²+y² = a²+b²"
-  ],
-  "answer": 3,
-  "explain": "Locus of point from which tangents to ellipse are perpendicular is x²+y²=a²+b².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7e19b48a-a641-4351-9c6c-8ff2b7d1bb22",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1, the condition for y = mx+c to be a tangent is?",
-  "formula": "c² = a²m² + b²",
-  "options": [
-   "c² = a²m²−b²",
-   "c = am+b",
-   "c² = a²m²+b²",
-   "c² = a²+b²m²"
-  ],
-  "answer": 2,
-  "explain": "Tangency condition for line y=mx+c: c²=a²m²+b²; gives tangent as y=mx±√(a²m²+b²).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "97ebb18f-8d60-49eb-94a4-675c3f17c371",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), the eccentricity range is?",
-  "formula": "0 < e < 1",
-  "options": [
-   "0 < e < 1",
-   "e ≥ 1",
-   "e = 1",
-   "e > 1"
-  ],
-  "answer": 0,
-  "explain": "Ellipse is defined by 0<e<1; e=0 is circle, e=1 is parabola, e>1 is hyperbola.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0265465d-3765-4fce-89f8-a82185f7775f",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "For x²/a²+y²/b²=1 (a>b), the end-points of major axis (vertices) are?",
-  "formula": "(±a, 0)",
-  "options": [
-   "(±b, 0)",
-   "(±a, 0)",
-   "(0, ±b)",
-   "(±ae, 0)"
-  ],
-  "answer": 1,
-  "explain": "Major axis lies on x-axis (a>b); vertices (ends of major axis) are (±a, 0).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "55b037e8-8a78-41ba-b6fc-05d1ebf5dfa9",
-  "subject": "Mathematics",
-  "chapter": "Ellipse",
-  "topic": "Ellipse",
-  "prompt": "If equation of ellipse is 9x²+16y²=144, its eccentricity is?",
-  "formula": "e = √7/4",
-  "options": [
-   "3/4",
-   "√7/3",
-   "√7/4",
-   "4/3"
-  ],
-  "answer": 2,
-  "explain": "x²/16+y²/9=1 → a=4,b=3; e=√(1−9/16)=√(7/16)=√7/4.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- }
+  {
+    "id": "05ea77af-bb90-4dba-98aa-4583ca4aae46",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Standard equation of ellipse with major axis along x-axis?",
+    "formula": "x²/a² + y²/b² = 1, a > b",
+    "options": [
+      "x² + y² = a²",
+      "x²/a² + y²/b² = 1, a > b",
+      "x²/b² + y²/a² = 1, a > b",
+      "x²/a² - y²/b² = 1"
+    ],
+    "answer": 1,
+    "explain": "When a > b, major axis is along x-axis; semi-major = a, semi-minor = b.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b579da18-f5c8-4f4a-b1a7-2ce19951140a",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Eccentricity relation for ellipse x²/a² + y²/b² = 1 (a > b)?",
+    "formula": "b² = a²(1 - e²)",
+    "options": [
+      "b² = a²(1 - e²)",
+      "a² = b²(1 - e²)",
+      "b² = a²(1 + e²)",
+      "b² = a²(e² - 1)"
+    ],
+    "answer": 0,
+    "explain": "For ellipse, 0 < e < 1 and b² = a²(1 - e²) defines the relationship.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1,
+    "diagram": {
+      "kind": "ellipse",
+      "caption": "Ellipse with horizontal semi-axis a and vertical semi-axis b"
+    }
+  },
+  {
+    "id": "26633508-dba4-4d13-8b4e-ceb8417b9e8f",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Foci of ellipse x²/a² + y²/b² = 1 (a > b) are at?",
+    "formula": "(±ae, 0)",
+    "options": [
+      "(±a, 0)",
+      "(0, ±ae)",
+      "(±be, 0)",
+      "(±ae, 0)"
+    ],
+    "answer": 3,
+    "explain": "Foci lie on the major axis at distance ae from centre, so (±ae, 0).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9ecd3339-1390-441b-af76-faa831307de2",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Length of major axis of x²/a² + y²/b² = 1 (a > b)?",
+    "formula": "2a",
+    "options": [
+      "2b",
+      "a",
+      "2a",
+      "b"
+    ],
+    "answer": 2,
+    "explain": "Major axis spans from (−a, 0) to (a, 0), so its length is 2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0b5809a7-3cee-478a-a7cd-7bf60805f607",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Length of latus rectum of ellipse x²/a² + y²/b² = 1?",
+    "formula": "2b²/a",
+    "options": [
+      "2ab",
+      "2b²/a",
+      "2a²/b",
+      "b²/a"
+    ],
+    "answer": 1,
+    "explain": "Latus rectum is the chord through focus perpendicular to major axis; length = 2b²/a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "224494f1-d212-4aab-b700-19f846f50274",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Sum of focal distances of any point P on ellipse equals?",
+    "formula": "SP + S'P = 2a",
+    "options": [
+      "2ae",
+      "2b",
+      "a + b",
+      "2a"
+    ],
+    "answer": 3,
+    "explain": "This is the focal-chord (definition) property: sum of distances from two foci = 2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a826f3e0-9525-4188-bcd3-a0ff53cbcd8d",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Directrices of ellipse x²/a² + y²/b² = 1 (a > b) are?",
+    "formula": "x = ±a/e",
+    "options": [
+      "x = ±ae",
+      "y = ±a/e",
+      "x = ±a/e",
+      "x = ±b/e"
+    ],
+    "answer": 2,
+    "explain": "Directrices are vertical lines at x = ±a/e for major axis along x-axis.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "109f0b9e-b9f9-433e-9621-14976ebe3036",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Equation of tangent to x²/a² + y²/b² = 1 at point (x₁, y₁)?",
+    "formula": "xx₁/a² + yy₁/b² = 1",
+    "options": [
+      "xx₁/a² - yy₁/b² = 1",
+      "x/x₁ + y/y₁ = 1",
+      "xx₁/a² + yy₁/b² = 1",
+      "xx₁ + yy₁ = a²"
+    ],
+    "answer": 2,
+    "explain": "T = 0 form: replace x² → xx₁, y² → yy₁ in ellipse equation.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "cdf322f8-e521-4447-bb50-f6d99fe9664c",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Condition for y = mx + c to be tangent to x²/a² + y²/b² = 1?",
+    "formula": "c² = a²m² + b²",
+    "options": [
+      "c² = b²m² + a²",
+      "c² = a²m² + b²",
+      "c = am + b",
+      "c² = a²m² - b²"
+    ],
+    "answer": 1,
+    "explain": "Tangent condition: substitute y = mx + c into ellipse and discriminant = 0 gives c² = a²m² + b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "cfabfc75-a1d2-48c3-86cb-b6853463797d",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Equation of normal to x²/a² + y²/b² = 1 at point (x₁, y₁)?",
+    "formula": "a²x/x₁ - b²y/y₁ = a² - b²",
+    "options": [
+      "a²x/x₁ - b²y/y₁ = a² - b²",
+      "b²x/x₁ - a²y/y₁ = a² - b²",
+      "xx₁/a² - yy₁/b² = 0",
+      "a²x·x₁ - b²y·y₁ = 1"
+    ],
+    "answer": 0,
+    "explain": "Normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = a² − b² (= a²e²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "cc919759-ec29-4ea5-a628-75122c2bdb4c",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Auxiliary circle of ellipse x²/a² + y²/b² = 1 has equation?",
+    "formula": "x² + y² = a²",
+    "options": [
+      "x² + y² = a²b²",
+      "x² + y² = a²",
+      "x² + y² = b²",
+      "x² + y² = a² + b²"
+    ],
+    "answer": 1,
+    "explain": "Auxiliary circle has radius = semi-major axis a, centred at origin.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "36013387-c7a5-49fd-bbe1-7504d694c66f",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Parametric equations of ellipse x²/a² + y²/b² = 1?",
+    "formula": "x = a cosθ, y = b sinθ",
+    "options": [
+      "x = a cosθ, y = a sinθ",
+      "x = a secθ, y = b tanθ",
+      "x = a sinθ, y = b cosθ",
+      "x = a cosθ, y = b sinθ"
+    ],
+    "answer": 3,
+    "explain": "Standard parametric form uses eccentric angle θ: (a cosθ, b sinθ).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "38950187-4a26-4fea-8834-c9b44622e88b",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Tangent at parametric point (a cosθ, b sinθ) on ellipse?",
+    "formula": "x cosθ/a + y sinθ/b = 1",
+    "options": [
+      "ax cosθ + by sinθ = 1",
+      "x sinθ/a + y cosθ/b = 1",
+      "x cosθ/a + y sinθ/b = 1",
+      "x/a cosθ - y/b sinθ = 1"
+    ],
+    "answer": 2,
+    "explain": "Substitute (a cosθ, b sinθ) into T = 0 form: x cosθ/a + y sinθ/b = 1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "be0eed20-1aab-490b-9c17-5b69ea3f58a8",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Director circle of ellipse x²/a² + y²/b² = 1 has equation?",
+    "formula": "x² + y² = a² + b²",
+    "options": [
+      "x² + y² = a² + b²",
+      "x² + y² = a² - b²",
+      "x² + y² = 2a²",
+      "x² + y² = a²"
+    ],
+    "answer": 0,
+    "explain": "Locus of point from which two perpendicular tangents to ellipse are drawn is x² + y² = a² + b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c079b6f6-d93a-42a7-a171-035bce179c04",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Eccentricity range for an ellipse is?",
+    "formula": "0 < e < 1",
+    "options": [
+      "0 < e < 1",
+      "e = 1",
+      "e > 1",
+      "e ≥ 1"
+    ],
+    "answer": 0,
+    "explain": "For ellipse eccentricity satisfies 0 < e < 1; e = 0 gives circle, e = 1 gives parabola.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1,
+    "diagram": {
+      "kind": "ellipse",
+      "caption": "Ellipse with horizontal semi-axis a and vertical semi-axis b"
+    }
+  },
+  {
+    "id": "c6fc2e8f-4aa2-4edc-84c5-990b47cd3ea5",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a² + y²/b² = 1 with b > a, foci are at?",
+    "formula": "(0, ±be)",
+    "options": [
+      "(±be, 0)",
+      "(±ae, 0)",
+      "(0, ±ae)",
+      "(0, ±be)"
+    ],
+    "answer": 3,
+    "explain": "When b > a, major axis is along y-axis; foci at (0, ±be) where e = √(1 − a²/b²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "95ebf66e-483f-432c-bc72-7dca27bd6a94",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Area of ellipse x²/a² + y²/b² = 1 is?",
+    "formula": "πab",
+    "options": [
+      "πa²",
+      "πb²",
+      "2πab",
+      "πab"
+    ],
+    "answer": 3,
+    "explain": "Area of ellipse = π × semi-major × semi-minor = πab.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0e85382e-47c9-43c5-9b74-432bb4a31e2b",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Chord of contact from external point (h,k) to x²/a² + y²/b² = 1?",
+    "formula": "hx/a² + ky/b² = 1",
+    "options": [
+      "hx/a² - ky/b² = 1",
+      "hx·a² + ky·b² = 1",
+      "kx/a² + hy/b² = 1",
+      "hx/a² + ky/b² = 1"
+    ],
+    "answer": 3,
+    "explain": "Chord of contact (T = 0) from (h, k): replace x₁ = h, y₁ = k in tangent equation.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "81c641fb-7b55-46d4-87bc-cbfbb942097f",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "End-points of latus rectum of x²/a² + y²/b² = 1 (a > b) are?",
+    "formula": "(±ae, ±b²/a)",
+    "options": [
+      "(±b, ±ae)",
+      "(±ae, ±a²/b)",
+      "(±a, ±b²/a)",
+      "(±ae, ±b²/a)"
+    ],
+    "answer": 3,
+    "explain": "Foci at x = ±ae; substituting gives y² = b²(1 − e²) = b⁴/a², so y = ±b²/a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ee1afaaa-1791-4a5e-8ae3-705dc57632b0",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Pair of tangents from (h,k) to ellipse — combined equation uses?",
+    "formula": "SS₁ = T²",
+    "options": [
+      "S = T",
+      "SS₁ = T²",
+      "S + S₁ = 2T",
+      "S·T = S₁"
+    ],
+    "answer": 1,
+    "explain": "Joint equation of pair of tangents from external point: SS₁ = T², where S, T, S₁ are standard.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8e5c4383-960d-4131-9b27-919063c4acae",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse, if e is eccentricity and l is semi-latus rectum, then l = ?",
+    "formula": "l = b²/a = a(1 − e²)",
+    "options": [
+      "a(1 + e²)",
+      "b²/b = b",
+      "a(1 − e²)",
+      "b(1 − e²)"
+    ],
+    "answer": 2,
+    "explain": "Semi-latus rectum = b²/a, and since b² = a²(1−e²), it equals a(1−e²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1,
+    "diagram": {
+      "kind": "ellipse",
+      "caption": "Ellipse with horizontal semi-axis a and vertical semi-axis b"
+    }
+  },
+  {
+    "id": "2cf442e2-7160-4cd6-b812-11dc8281f8e6",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Which of these represents an ellipse? (a, b > 0, a ≠ b)",
+    "formula": "",
+    "options": [
+      "x² + y² = a²",
+      "x²/a² + y²/b² = 1",
+      "y² = 4ax",
+      "x²/a² - y²/b² = 1"
+    ],
+    "answer": 1,
+    "explain": "Sum of two squared terms equal to 1 with different denominators gives an ellipse.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "79ea4084-81d1-49ab-80fc-4f944b2bde96",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Minor axis length of x²/a² + y²/b² = 1 (a > b) is?",
+    "formula": "",
+    "options": [
+      "2b",
+      "b",
+      "2a",
+      "a"
+    ],
+    "answer": 0,
+    "explain": "Minor axis lies along y-axis with length 2b when a > b.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1e5dce2f-31f4-41da-b4d4-d00125a3c3e5",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Distance from centre to focus of x²/a² + y²/b² = 1 (a > b)?",
+    "formula": "c = ae",
+    "options": [
+      "be",
+      "a/e",
+      "ae",
+      "b/e"
+    ],
+    "answer": 2,
+    "explain": "Focal distance from centre is c = ae, where e is eccentricity.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "076895bd-676f-4e7f-9e03-3687b1f93174",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Relation between a, b, c for ellipse (a > b, c = focal dist)?",
+    "formula": "b² = a² - c²",
+    "options": [
+      "c² = a² + b²",
+      "a² = b² − c²",
+      "b² = a² − c²",
+      "b² = c² − a²"
+    ],
+    "answer": 2,
+    "explain": "For ellipse b² = a²(1 − e²) = a² − c², fundamental relation.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7b1bf461-e69c-4274-8256-356529aa9fe9",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a² + y²/b² = 1, what is the semi-latus rectum?",
+    "formula": "l = b²/a",
+    "options": [
+      "b²/a",
+      "a²/b",
+      "b/a",
+      "2b²/a"
+    ],
+    "answer": 0,
+    "explain": "Semi-latus rectum = b²/a; full latus rectum = 2b²/a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "626dc81b-4154-4483-a287-d5b246a18a19",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Normal to ellipse x²/a² + y²/b² = 1 at (x₁,y₁): which is correct?",
+    "formula": "",
+    "options": [
+      "xx₁/a² + yy₁/b² = 1",
+      "a²x/x₁ − b²y/y₁ = a²−b²",
+      "x/x₁ − y/y₁ = 1",
+      "a²x·x₁ − b²y·y₁ = 0"
+    ],
+    "answer": 1,
+    "explain": "Normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = a² − b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "24dea6f1-ab2d-49ca-b2db-3228111c2cd3",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Equation of normal to ellipse at parametric point (a cosθ, b sinθ)?",
+    "formula": "",
+    "options": [
+      "ax sinθ − by cosθ = 0",
+      "ax cosθ + by sinθ = a²",
+      "x cosθ/a − y sinθ/b = 1",
+      "ax/cosθ − by/sinθ = a²−b²"
+    ],
+    "answer": 3,
+    "explain": "Normal at (a cosθ, b sinθ): ax/cosθ − by/sinθ = a² − b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "60dde6f6-1a7e-4bf5-8394-e8d28275030c",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "The foot of perpendicular from focus to any tangent of ellipse lies on?",
+    "formula": "",
+    "options": [
+      "Directrix",
+      "Auxiliary circle",
+      "Director circle",
+      "Minor axis"
+    ],
+    "answer": 1,
+    "explain": "Foot of perpendicular from either focus to any tangent lies on the auxiliary circle x²+y²=a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1ded4f35-3513-4940-ab4f-b2815d9eb325",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "What is the condition for point (h, k) to lie inside ellipse x²/a²+y²/b²=1?",
+    "formula": "",
+    "options": [
+      "h²/a² + k²/b² < 1",
+      "h²/a² + k²/b² > 1",
+      "h²/a² + k²/b² = 1",
+      "h²/b² + k²/a² < 1"
+    ],
+    "answer": 0,
+    "explain": "Point (h,k) is inside ellipse iff h²/a² + k²/b² < 1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bea19eb8-0b5c-4ea2-94c5-71bd355801d6",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Tangent to x²/a² + y²/b²=1 with slope m has y-intercept?",
+    "formula": "c = ±√(a²m²+b²)",
+    "options": [
+      "±√(a²m²+b²)",
+      "±√(b²m²+a²)",
+      "±√(a²m²−b²)",
+      "±√(a²+b²)"
+    ],
+    "answer": 0,
+    "explain": "Tangent y=mx±√(a²m²+b²); intercept magnitude = √(a²m²+b²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1ddcd630-3a65-4af3-a4c9-f1bce8b4e443",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1, the ratio (distance from focus)/(distance from directrix) for any point is?",
+    "formula": "",
+    "options": [
+      "e²",
+      "1/e",
+      "1",
+      "e"
+    ],
+    "answer": 3,
+    "explain": "Focus-directrix property: focal distance / directrix distance = e (eccentricity).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "58463090-4dc8-4464-a5d7-24334dfcda23",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Conjugate diameters of ellipse: if slope of one diameter is m₁, other m₂ satisfies?",
+    "formula": "m₁·m₂ = −b²/a²",
+    "options": [
+      "m₁m₂ = −b²/a²",
+      "m₁+m₂ = 0",
+      "m₁m₂ = b²/a²",
+      "m₁m₂ = −a²/b²"
+    ],
+    "answer": 0,
+    "explain": "Two diameters are conjugate if m₁·m₂ = −b²/a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "47064c74-ed2f-4d1f-a2a1-bdcf600d92f7",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Distance between two directrices of ellipse x²/a²+y²/b²=1 (a>b) is?",
+    "formula": "",
+    "options": [
+      "2a",
+      "2ae",
+      "2a/e",
+      "2b/e"
+    ],
+    "answer": 2,
+    "explain": "Directrices at x=±a/e, so distance between them = 2a/e.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "20d75b31-1d52-424c-8514-cd9a85cd589a",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Distance between two foci of x²/a²+y²/b²=1 (a>b) is?",
+    "formula": "",
+    "options": [
+      "2ae",
+      "2a/e",
+      "2be",
+      "2b"
+    ],
+    "answer": 0,
+    "explain": "Foci at (±ae, 0), so distance between them = 2ae.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0e53679b-d1ae-4a30-9c66-02e9c9d9189f",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Focal radii from focus S(ae,0) to point P(x₁,y₁) on ellipse x²/a²+y²/b²=1?",
+    "formula": "r₁ = a - ex₁",
+    "options": [
+      "a - ex₁ only",
+      "b - ex₁ and b + ex₁",
+      "a - ex₁ and a + ex₁",
+      "a + ex₁ and a - ex₁ from S'"
+    ],
+    "answer": 2,
+    "explain": "From S(ae,0): SP = a−ex₁; from S'(−ae,0): S'P = a+ex₁; sum = 2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d5c8aa0e-bc50-4a25-8f3a-6fcbaf69f51a",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Equation of chord of ellipse whose midpoint is (h, k)?",
+    "formula": "T = S₁",
+    "options": [
+      "hx/a² + ky/b² = h²/a² + k²/b²",
+      "kx/a² + hy/b² = 1",
+      "hx/a² − ky/b² = 1",
+      "hx + ky = a² + b²"
+    ],
+    "answer": 0,
+    "explain": "Using T = S₁: hx/a² + ky/b² = h²/a² + k²/b² gives midpoint chord.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "55f69556-f116-47a9-acd3-aa7021cd6970",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), the length of semi-minor axis b in terms of a and e?",
+    "formula": "b = a√(1−e²)",
+    "options": [
+      "a/e",
+      "a(1−e)",
+      "a√(e²−1)",
+      "a√(1−e²)"
+    ],
+    "answer": 3,
+    "explain": "From c² = a²−b² and e = c/a: b² = a²(1−e²), so b = a√(1−e²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "28427b29-21c8-4be4-9630-a6362d847aa5",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "The condition for line lx + my + n = 0 to be tangent to x²/a²+y²/b²=1?",
+    "formula": "a²l² + b²m² = n²",
+    "options": [
+      "a²m² + b²l² = n²",
+      "a²l² + b²m² = n²",
+      "l²+m² = n²(a²+b²)",
+      "l²/a² + m²/b² = n²"
+    ],
+    "answer": 1,
+    "explain": "Writing as y = −(l/m)x−(n/m), tangency gives c² = a²m²+b², leading to a²l²+b²m²=n².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9d9dd057-c7c6-4375-9532-1f670bfacbd8",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Angle between tangents from external point (h,k) to ellipse is 90° iff (h,k) lies on?",
+    "formula": "",
+    "options": [
+      "Auxiliary circle x²+y²=a²",
+      "Major axis",
+      "Director circle x²+y²=a²+b²",
+      "Directrix x=a/e"
+    ],
+    "answer": 2,
+    "explain": "Locus of point from which perpendicular tangents are drawn is the director circle.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4cc36618-eedf-42b8-ad45-c832c24952bb",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), the min distance from focus to ellipse?",
+    "formula": "a(1−e)",
+    "options": [
+      "b²/a",
+      "a(1−e)",
+      "a−b",
+      "a(1+e)"
+    ],
+    "answer": 1,
+    "explain": "Nearest point to focus is vertex (a,0); distance = a−ae = a(1−e).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b4d482a5-8e50-4ead-be45-025a76a76171",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Max distance of point on x²/a²+y²/b²=1 (a>b) from a focus?",
+    "formula": "a(1+e)",
+    "options": [
+      "a(1+e)",
+      "2a",
+      "a+b",
+      "a(1−e)"
+    ],
+    "answer": 0,
+    "explain": "Farthest point from focus S(ae,0) is vertex (−a,0); distance = a+ae = a(1+e).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b2f04213-e0f6-4738-8677-3b0a50c3212e",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1, product of slopes of conjugate diameters m₁·m₂ = ?",
+    "formula": "m₁·m₂ = −b²/a²",
+    "options": [
+      "−b²/a²",
+      "−1",
+      "b²/a²",
+      "−a²/b²"
+    ],
+    "answer": 0,
+    "explain": "Diameters y = m₁x and y = m₂x are conjugate iff m₁m₂ = −b²/a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7631853d-dec8-4b7f-bff3-27797e14cc8f",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Polar of point (h,k) w.r.t. x²/a²+y²/b²=1 is?",
+    "formula": "hx/a² + ky/b² = 1",
+    "options": [
+      "kx/a² + hy/b² = 1",
+      "hx/b² + ky/a² = 1",
+      "hx/a² + ky/b² = 1",
+      "x²/a² + y²/b² = hk"
+    ],
+    "answer": 2,
+    "explain": "The polar (chord of contact / pole–polar) of (h,k) w.r.t. the ellipse is hx/a²+ky/b²=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d8ba2410-68af-47de-aa0c-8462770997d9",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "If tangents at ends of any chord of ellipse meet at (h,k), then chord is the __ of (h,k)?",
+    "formula": "",
+    "options": [
+      "Asymptote",
+      "Polar",
+      "Directrix",
+      "Normal"
+    ],
+    "answer": 1,
+    "explain": "The chord of contact from an external point is its polar w.r.t. the ellipse.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1ba0d42a-3d0e-4402-a470-c88fe0284804",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "If a diameter of x²/a²+y²/b²=1 has slope m, its conjugate diameter slope m' satisfies?",
+    "formula": "m·m' = −b²/a²",
+    "options": [
+      "m·m' = b²/a²",
+      "m+m' = 0",
+      "m·m' = −a²/b²",
+      "m·m' = −b²/a²"
+    ],
+    "answer": 3,
+    "explain": "Conjugate diameters of ellipse satisfy m·m' = −b²/a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "fa408204-d2e6-423d-8d26-864c054fb464",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "The equation x²/a²+y²/b²=1 with a>b represents an ellipse. Its vertices are at?",
+    "formula": "",
+    "options": [
+      "(±a, ±b)",
+      "(±a, 0)",
+      "(±c, 0)",
+      "(0, ±b)"
+    ],
+    "answer": 1,
+    "explain": "Vertices (ends of major axis) of the ellipse with a>b are at (±a, 0).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2a3cb5ce-2f77-4afb-97ab-c8c9dea31c5e",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Number of tangents from an external point to ellipse x²/a²+y²/b²=1?",
+    "formula": "",
+    "options": [
+      "1",
+      "4",
+      "2",
+      "3"
+    ],
+    "answer": 2,
+    "explain": "Exactly two distinct tangents can be drawn from an external point to an ellipse.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7f872e5f-d1ec-4927-ab07-5889146093a6",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1, the normal at (x₁,y₁) is: a²x/x₁ − b²y/y₁ = ?",
+    "formula": "a²x/x₁ − b²y/y₁ = a²−b²",
+    "options": [
+      "a²−b²",
+      "a²b²",
+      "a²+b²",
+      "0"
+    ],
+    "answer": 0,
+    "explain": "Normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = a²−b² (= a²e²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b99cc649-60a5-45ad-a6bd-98627ff1f799",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "The sum of the two semi-axes of x²/a²+y²/b²=1 (a>b) in terms of e and a is?",
+    "formula": "a + b = a(1+√(1−e²))",
+    "options": [
+      "a(2−e²)",
+      "a(1+e)",
+      "a(1+√(1−e²))",
+      "2a(1−e)"
+    ],
+    "answer": 2,
+    "explain": "b = a√(1−e²), so a+b = a(1+√(1−e²)).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "47ef816f-b143-49b8-b617-68a74301fd5b",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "If (x₁,y₁) is midpoint of chord of x²/a²+y²/b²=1, the chord equation is?",
+    "formula": "T = S₁",
+    "options": [
+      "xx₁/a²+yy₁/b² = x₁²/a²+y₁²/b²",
+      "xx₁/a²−yy₁/b² = 1",
+      "x₁x/a²+y₁y/b² = 0",
+      "x²/a²+y²/b² = x₁y₁"
+    ],
+    "answer": 0,
+    "explain": "Chord with midpoint (x₁,y₁): T=S₁, i.e. xx₁/a²+yy₁/b²=x₁²/a²+y₁²/b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4746df80-351f-4fac-bc39-0970beb78623",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1, the tangent at any point makes equal angles with?",
+    "formula": "",
+    "options": [
+      "The normal and major axis",
+      "The two directrices",
+      "The two axes",
+      "The two focal radii"
+    ],
+    "answer": 3,
+    "explain": "Tangent at P is equally inclined to the focal radii SP and S'P (reflection property).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "642398ea-a2c6-48e5-9aad-de58235957be",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1 (a>b), the latus rectum passes through focus and is ⊥ to?",
+    "formula": "",
+    "options": [
+      "Major axis",
+      "Minor axis",
+      "Directrix",
+      "Tangent at vertex"
+    ],
+    "answer": 0,
+    "explain": "Latus rectum is the focal chord perpendicular to the major axis.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d9f7b2f3-13ab-4df8-99fe-918e4cf15ee1",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1 (a>b), min distance from a focus to the ellipse is?",
+    "formula": "a − ae = a(1−e)",
+    "options": [
+      "a(1+e)",
+      "a−b",
+      "a(1−e)",
+      "b(1−e)"
+    ],
+    "answer": 2,
+    "explain": "Nearest point to focus S(ae,0) is vertex (a,0); distance = a − ae = a(1−e).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "312b5d75-e198-4de9-9dfa-793dd2029643",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1 (a>b), max distance from focus S(ae,0) to ellipse is?",
+    "formula": "a(1+e)",
+    "options": [
+      "a(1−e)",
+      "2a",
+      "a+b",
+      "a(1+e)"
+    ],
+    "answer": 3,
+    "explain": "Farthest point from focus S(ae,0) is vertex (−a,0); distance = a + ae = a(1+e).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9d8023a3-7a07-4ffd-9136-f8d82e3e32eb",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Condition for line lx+my+n=0 to be tangent to x²/a²+y²/b²=1?",
+    "formula": "a²l² + b²m² = n²",
+    "options": [
+      "a²l² + b²m² = n²",
+      "a²m² + b²l² = n²",
+      "l²a² − m²b² = n²",
+      "l²/a² + m²/b² = n²"
+    ],
+    "answer": 0,
+    "explain": "Standard tangency condition for lx+my+n=0 to ellipse is a²l²+b²m²=n².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "88ddf934-801d-496c-b4b1-56a31c65b423",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For conjugate diameters of x²/a²+y²/b²=1, if slopes m₁,m₂ then m₁·m₂ = ?",
+    "formula": "m₁m₂ = −b²/a²",
+    "options": [
+      "a²/b²",
+      "−b²/a²",
+      "−a²/b²",
+      "b²/a²"
+    ],
+    "answer": 1,
+    "explain": "Condition for conjugate diameters: m₁·m₂ = −b²/a².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f23ea208-2ee9-42ca-bb20-43bd5bd437c3",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Vertices of x²/a²+y²/b²=1 (a>b) are at?",
+    "formula": "",
+    "options": [
+      "(±a, 0)",
+      "(±b, 0)",
+      "(0, ±b)",
+      "(±ae, 0)"
+    ],
+    "answer": 0,
+    "explain": "Vertices are the endpoints of the major axis: (±a, 0) when a>b.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "39fdbbf9-f5ba-45e9-8140-4220eaf34d94",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1, the normal at (x₁,y₁): a²x/x₁ − b²y/y₁ = ?",
+    "formula": "a² − b²",
+    "options": [
+      "a²b²",
+      "0",
+      "a² − b²",
+      "a² + b²"
+    ],
+    "answer": 2,
+    "explain": "Standard normal equation to ellipse at (x₁,y₁) is a²x/x₁ − b²y/y₁ = a²−b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "169b687b-19a7-4e98-9d09-c57cd12557ff",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Interior of ellipse x²/a²+y²/b²=1 is defined by which inequality?",
+    "formula": "",
+    "options": [
+      "x²/a²−y²/b² < 1",
+      "x²/a²+y²/b² < 1",
+      "x²/a²+y²/b² > 1",
+      "x²/a²+y²/b² = 0"
+    ],
+    "answer": 1,
+    "explain": "Points inside the ellipse satisfy x²/a²+y²/b² < 1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9562dd51-ae9b-4967-98bf-c10400577b05",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "If tangents at ends of a chord of x²/a²+y²/b²=1 meet at (h,k), then chord is the __ of (h,k)?",
+    "formula": "",
+    "options": [
+      "Chord of contact only",
+      "Polar only",
+      "Polar and chord of contact",
+      "Diameter of ellipse"
+    ],
+    "answer": 2,
+    "explain": "For external point, chord of contact = polar; both names apply to line hx/a²+ky/b²=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a8e4147d-b486-4a7a-8a0c-f373c4cbbb3a",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1 (a>b), what is the semi-latus rectum?",
+    "formula": "l = b²/a",
+    "options": [
+      "b/a²",
+      "b²/a",
+      "a²/b",
+      "2b²/a"
+    ],
+    "answer": 1,
+    "explain": "The semi-latus rectum of an ellipse is b²/a (half the full latus rectum 2b²/a).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "27523ae9-5726-4a31-ba63-e0aea49f3df6",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), min distance from focus S(ae,0) to ellipse is?",
+    "formula": "r_min = a − ae = a(1−e)",
+    "options": [
+      "a(1+e)",
+      "b(1−e)",
+      "a(1−e)",
+      "a−b"
+    ],
+    "answer": 2,
+    "explain": "Closest point on ellipse to focus is nearer vertex (a,0); distance = a−ae = a(1−e).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4a9e94d9-44a2-4ebb-b744-523f9f11fb1e",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), max distance from focus S(ae,0) to ellipse is?",
+    "formula": "r_max = a + ae = a(1+e)",
+    "options": [
+      "a(1+e)",
+      "2a",
+      "a+b",
+      "a(1−e)"
+    ],
+    "answer": 0,
+    "explain": "Farthest point from focus is the far vertex (−a,0); distance = a+ae = a(1+e).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "345e6ff0-8e45-4b8f-b1ab-f432d89c4aab",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "If (x₁,y₁) is midpoint of a chord of x²/a²+y²/b²=1, the chord equation is?",
+    "formula": "T = S₁",
+    "options": [
+      "xx₁/a²−yy₁/b²=0",
+      "x²/a²+y²/b²=x₁y₁",
+      "xx₁/a²+yy₁/b²=x₁²/a²+y₁²/b²",
+      "x/a²+y/b²=1"
+    ],
+    "answer": 2,
+    "explain": "Equation of chord with midpoint (x₁,y₁) is T=S₁: xx₁/a²+yy₁/b²=x₁²/a²+y₁²/b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "ee64a438-32b7-4f8e-a523-1befe4d76eba",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Area enclosed by ellipse x²/a² + y²/b² = 1 is?",
+    "formula": "A = πab",
+    "options": [
+      "πab",
+      "2πab",
+      "π(a+b)",
+      "πa²b"
+    ],
+    "answer": 0,
+    "explain": "Area of ellipse is πab; reduces to πa² for circle (a=b).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "55e41e46-1ed1-45a6-8828-0fd1e29b847e",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), directrix equations are?",
+    "formula": "x = ±a/e",
+    "options": [
+      "x = ±ae",
+      "x = ±b/e",
+      "x = ±a/e",
+      "x = ±a²/b"
+    ],
+    "answer": 2,
+    "explain": "Directrices are x = ±a/e where e is eccentricity; foci are at x = ±ae.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "13bb298c-cb18-4f66-8377-5df8adfc4dd0",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse, length of major axis when a>b in x²/a²+y²/b²=1 is?",
+    "formula": "2a",
+    "options": [
+      "2a",
+      "a",
+      "a+b",
+      "2b"
+    ],
+    "answer": 0,
+    "explain": "Major axis length is 2a (along x-axis when a>b); minor axis length is 2b.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "81e62ed5-a423-491d-b534-4d003266ef2d",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Parametric coordinates of any point on x²/a²+y²/b²=1 are?",
+    "formula": "(a cosθ, b sinθ)",
+    "options": [
+      "(a secθ, b tanθ)",
+      "(a cosθ, b sinθ)",
+      "(a cosθ, b cosθ)",
+      "(b cosθ, a sinθ)"
+    ],
+    "answer": 1,
+    "explain": "Standard parametric form: x=a cosθ, y=b sinθ; θ is eccentric angle.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4150faf4-09fe-42a7-9b06-9db7e9f52d3a",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), sum of focal distances of any point P is?",
+    "formula": "SP + S'P = 2a",
+    "options": [
+      "2a",
+      "2b",
+      "2a/e",
+      "2ae"
+    ],
+    "answer": 0,
+    "explain": "Defining property: sum of distances from any point on ellipse to two foci = 2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c76233f9-feee-4430-8818-568f2c3d5cd0",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "The tangent to x²/a²+y²/b²=1 at point (x₁,y₁) is?",
+    "formula": "xx₁/a² + yy₁/b² = 1",
+    "options": [
+      "x/x₁a² + y/y₁b² = 1",
+      "x₁x/a + y₁y/b = 1",
+      "xx₁/a² + yy₁/b² = 1",
+      "xx₁/a² − yy₁/b² = 1"
+    ],
+    "answer": 2,
+    "explain": "Tangent at (x₁,y₁) replaces x²→xx₁, y²→yy₁ by T=0 rule.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "39703743-0fed-4d27-a596-df57c9d04d84",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1 (a>b), focus S is at (ae,0). Focal distance to P(x₁,y₁)?",
+    "formula": "SP = a − ex₁",
+    "options": [
+      "ae − x₁",
+      "a + ex₁",
+      "b − ex₁",
+      "a − ex₁"
+    ],
+    "answer": 3,
+    "explain": "SP = a−ex₁ (nearer focus); S'P = a+ex₁ (farther focus); sum = 2a.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1a90243d-36ee-4aa1-bcd7-c67b4144b3cf",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "Equation of the director circle (orthoptic circle) of x²/a²+y²/b²=1 is?",
+    "formula": "x²+y² = a²+b²",
+    "options": [
+      "x²+y² = a²",
+      "x²+y² = b²",
+      "x²+y² = a²−b²",
+      "x²+y² = a²+b²"
+    ],
+    "answer": 3,
+    "explain": "Locus of point from which tangents to ellipse are perpendicular is x²+y²=a²+b².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7e19b48a-a641-4351-9c6c-8ff2b7d1bb22",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1, the condition for y = mx+c to be a tangent is?",
+    "formula": "c² = a²m² + b²",
+    "options": [
+      "c² = a²m²−b²",
+      "c = am+b",
+      "c² = a²m²+b²",
+      "c² = a²+b²m²"
+    ],
+    "answer": 2,
+    "explain": "Tangency condition for line y=mx+c: c²=a²m²+b²; gives tangent as y=mx±√(a²m²+b²).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "97ebb18f-8d60-49eb-94a4-675c3f17c371",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), the eccentricity range is?",
+    "formula": "0 < e < 1",
+    "options": [
+      "0 < e < 1",
+      "e ≥ 1",
+      "e = 1",
+      "e > 1"
+    ],
+    "answer": 0,
+    "explain": "Ellipse is defined by 0<e<1; e=0 is circle, e=1 is parabola, e>1 is hyperbola.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0265465d-3765-4fce-89f8-a82185f7775f",
+    "subject": "Mathematics",
+    "chapter": "Ellipse",
+    "topic": "Ellipse",
+    "prompt": "For x²/a²+y²/b²=1 (a>b), the end-points of major axis (vertices) are?",
+    "formula": "(±a, 0)",
+    "options": [
+      "(±b, 0)",
+      "(±a, 0)",
+      "(0, ±b)",
+      "(±ae, 0)"
+    ],
+    "answer": 1,
+    "explain": "Major axis lies on x-axis (a>b); vertices (ends of major axis) are (±a, 0).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  }
 ]

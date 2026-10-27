@@ -16,6 +16,8 @@ from pymongo import CursorType, ReturnDocument
 from shop import equipped_of, rival_profile, safe_avatar
 from exam_groups import Exam, require_active_exam, resolve_exam
 from revision import record_learning
+from rf_access import verified_grant
+from rapid_deck import fresh_deck
 
 DUEL_CARDS = 30
 CARD_SECONDS = 20
@@ -177,10 +179,7 @@ def make_router(db, rf_user, public_card, award):
         return {"status": "ready", "start_at": start, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
 
     async def pick_cards(subject, chapter, exam):
-        match = {"exam": exam, "subject": subject, "retired": {"$ne": True}, **({"chapter": chapter} if chapter else {})}
-        docs = await db.rf_cards.aggregate([{"$match": match}, {"$sample": {"size": DUEL_CARDS}}, {"$project": {"id": 1}}]).to_list(DUEL_CARDS)
-        if not docs:
-            raise HTTPException(404, "No reviewed cards available for this selection yet.")
+        docs = await fresh_deck(db, exam, subject, chapter, DUEL_CARDS)
         return [d["id"] for d in docs]
 
     def winner(d):
@@ -252,10 +251,12 @@ def make_router(db, rf_user, public_card, award):
         return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid, exam=d["exam"])
 
     async def view(d, uid):
+        if await db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
+            raise HTTPException(503, 'Rapid Fire is refreshing. Please retry shortly.')
         # Reject archived matches before presence, bot, settlement or reward writes.
         resolve_exam(d.get("exam"), d["subject"])
         mine_p = next((p for p in d["players"] if p["uid"] == uid), None)
-        if mine_p and time.time() - mine_p.get("seen_ts", 0) > 3:  # presence write at most every 3 s per player
+        if mine_p and d['status'] != 'finished' and time.time() - mine_p.get("seen_ts", 0) > 3:  # no presence mutations for historical reads
             await db.rf_duels.update_one({"id": d["id"], "players.uid": uid}, {"$set": {"players.$.seen_ts": time.time()}})
         d = await settle(d)
         if uid not in [p["uid"] for p in d["players"]]:
@@ -263,7 +264,8 @@ def make_router(db, rf_user, public_card, award):
         reveal = d["status"] == "finished"
         reward = None
         if reveal:
-            reward = await reward_for(d, uid)
+            recorded = await db.rf_awards.find_one({'uid': uid, 'ref': 'duel:' + d['id']}, {'_id': 0, 'reward': 1})
+            reward = (recorded or {}).get('reward')
         cards = []
         if d["status"] in ("ready", "finished"):
             docs = await get_cards(d["card_ids"])
@@ -273,12 +275,14 @@ def make_router(db, rf_user, public_card, award):
                     if not reveal:  # hide key and bank id so answers can't be looked up mid-duel
                         c.pop("answer", None)
                         c.pop("explain", None)
+                        c.pop("formula", None)  # answer-side formula reference, not a prompt premise
                         c["id"] = f"{d['id'][:8]}-{k}"
                     cards.append(c)
         return {
             "id": d["id"], "exam": d["exam"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
             "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS,
             "reward": reward, "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
+            "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat() if d.get('finished_ts') else None,
             "vs_bot": d.get("vs_bot", False), "players": [{"you": p["uid"] == uid, "bot": p.get("bot", False), "avatar": p.get("avatar"), "frame": p.get("frame"), "entry": p.get("entry"), "id": p["uid"][:6] if p["uid"] != uid else "you", "name": p["name"], "answered": len(p["answers"]), "score": p["score"],
                          "done": p["done"], "forfeit": bool(p.get("forfeit")), **({"answers": p["answers"]} if reveal or p["uid"] == uid else {}), **({"uid": p["uid"]} if reveal else {})} for p in d["players"]],
         }
@@ -382,7 +386,7 @@ def make_router(db, rf_user, public_card, award):
             raise HTTPException(400, "Unknown card.")
         if data.index < len(me["answers"]):  # idempotent replay: never re-score a locked card
             prev = me["answers"][data.index]
-            return {"index": data.index, "outcome": prev["outcome"], "answer": card["answer"], "explain": card.get("explain", ""), "score": me["score"]}
+            return {"index": data.index, "outcome": prev["outcome"], "answer": card["answer"], "explain": card.get("explain", ""), "formula": card.get('formula', ''), "score": me["score"]}
         d = await settle(d)
         if d["status"] != "ready" or time.time() < d["start_at"] - 1 or me.get("forfeit"):
             raise HTTPException(409, "This duel is not accepting answers.")
@@ -401,17 +405,23 @@ def make_router(db, rf_user, public_card, award):
             raise HTTPException(409, "Answer already recorded.")
         await settle(await db.rf_duels.find_one({"id": did}))
         notify(did)
-        return {"index": data.index, "outcome": outcome, "answer": card["answer"], "explain": card.get("explain", ""), "score": me["score"] + inc}
+        return {"index": data.index, "outcome": outcome, "answer": card["answer"], "explain": card.get("explain", ""), "formula": card.get('formula', ''), "score": me["score"] + inc}
 
     @r.websocket("/{did}/ws")
     async def live(ws: WebSocket, did: str, u: str = ""):
         await ws.accept()
         try:
-            uid = rf_user(u)
+            # A UID in the URL never proves membership. First frame carries an
+            # expiring opaque grant; tokens stay out of URL/access logs.
+            hello = json.loads(await asyncio.wait_for(ws.receive_text(), timeout=8))
+            if not isinstance(hello, dict):
+                raise HTTPException(401, 'Invalid socket authentication.')
+            grant = await verified_grant(db, hello.get('token', ''))
+            uid = grant['uid']
             d = await db.rf_duels.find_one({"id": did, "players.uid": uid})
             if d:
                 resolve_exam(d.get("exam"), d["subject"])
-        except HTTPException:
+        except (HTTPException, ValueError, asyncio.TimeoutError, WebSocketDisconnect):
             d = None
         if not d:
             await ws.close(code=4404)
@@ -423,7 +433,13 @@ def make_router(db, rf_user, public_card, award):
             tickers[did] = asyncio.create_task(ticker(did))
         try:
             while True:
-                await ws.receive_text()  # client pings keep the socket alive; state flows server -> phone
+                ttl = grant['expires_at'].replace(tzinfo=timezone.utc).timestamp() - time.time()
+                if ttl <= 0:
+                    raise asyncio.TimeoutError
+                # Expire even an idle socket; a UID or an old token is not a session.
+                await asyncio.wait_for(ws.receive_text(), timeout=ttl)
+        except asyncio.TimeoutError:
+            await ws.close(code=4401)
         except (WebSocketDisconnect, RuntimeError):
             pass
         finally:
@@ -433,11 +449,15 @@ def make_router(db, rf_user, public_card, award):
                 sockets.pop(did, None)
 
     @r.get("")
-    async def mine(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):
+    async def mine(exam: Optional[Exam] = None, friends_only: bool = False, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         exam = require_active_exam(exam)
-        docs = await db.rf_duels.find({"players.uid": uid, "status": "finished", "exam": exam}, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(10).to_list(10)
+        query = {"players.uid": uid, "status": "finished", "exam": exam}
+        if friends_only:
+            query.update(mode='invite', vs_bot={'$ne': True})
+        docs = await db.rf_duels.find(query, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(50).to_list(50)
         return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
+                           "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat(), 'mode': d['mode'],
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"]} for p in d["players"]]} for d in docs]}
 
     return r

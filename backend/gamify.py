@@ -180,8 +180,8 @@ def make_router(db, rf_user):
         q = {**scope, **{k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}, "retired": {"$ne": True}}
         total = await db.rf_cards.count_documents(q)
         # answers/explanations are never exposed publicly (they could be looked up mid-duel)
-        items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
-        return {"items": items, "total": total, "page": page, "pages": max(1, math.ceil(total / limit)), "review_status": "pilot_review_pending"}
+        items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0, "formula": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
+        return {"items": items, "total": total, "page": page, "pages": max(1, math.ceil(total / limit)), "review_status": "quick_recall_reviewed_v1"}
 
     @r.get("/shop")
     async def shop(x_rf_user: Optional[str] = Header(None)):

@@ -1,0 +1,85 @@
+{
+  "summary": "Iteration 42 completed for both backend and frontend. Backend RF access/privacy/cleanup/shop regression passed (11/11). Frontend canonical login/lobby/history/shop checks ran on web preview with screenshots, but login still intermittently fails due upstream /api/jl auth 503 and full solo/duel fixture flow could not be completed end-to-end.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Rapid mode sheet",
+        "issue": "Rules text shows '+1 per correct' while backend reward logic grants +2 coins/correct.",
+        "testID": "rf-mode-rules",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Canonical PIN login on entry screen",
+        "issue": "Intermittent 'Connection interrupted' on sign-in; backend log shows transient 503 on POST /api/jl/auth/phone.",
+        "affected_testIDs": [
+          "entry-phone-input",
+          "entry-pin-input",
+          "entry-continue-button",
+          "entry-error"
+        ]
+      },
+      {
+        "flow": "Rapid lobby/profile/shop/history data hydration",
+        "issue": "Coins/profile/histories sometimes remain in loading state ('—'/spinner) in web run despite page render success.",
+        "affected_testIDs": [
+          "game-hud-coins",
+          "rf-friends-history",
+          "shop-balance"
+        ]
+      },
+      {
+        "flow": "Fixture-only mutating UI run for solo/duel",
+        "issue": "Fixture run reached Rapid lobby and verified test wallet coins, but Play Now modal did not reliably open before timeout in first run; retry run aborted due browser process crash.",
+        "affected_testIDs": [
+          "rf-play-now",
+          "rf-play-sheet",
+          "rf-start-button",
+          "duel-screen"
+        ]
+      }
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter42_rf_access_privacy_and_assets.py",
+    "/app/test_reports/pytest/iter42_backend.xml",
+    "/app/test_reports/artifacts/iter42_ui_canonical_login/canonical_login_error.jpeg",
+    "/app/test_reports/artifacts/iter42_ui_canonical_followup/friends_history_390.jpeg",
+    "/app/test_reports/artifacts/iter42_ui_canonical_followup/shop_390.jpeg",
+    "/app/test_reports/artifacts/iter42_ui_360/layout_360_error.jpeg",
+    "/app/test_reports/artifacts/iter42_ui_fixture/rapid_lobby_fixture_390.jpeg",
+    "/app/test_reports/artifacts/iter42_ui_fixture/fixture_ui_error.jpeg"
+  ],
+  "action_items": [
+    "Fix transient upstream/proxy auth instability (503 on /api/jl/auth/phone) and re-run mobile web login regression at 390x844 and 360x800.",
+    "Align Rapid mode sheet reward copy with actual reward logic (+2 per correct).",
+    "Re-run full UI mutating flows (solo full/partial finish, duel completion/history, shop purchase confirmation + single deduction) after auth stability is restored.",
+    "Validate full Rapid UI on physical Android separately (not executed in this environment)."
+  ],
+  "critical_code_review_comments": [
+    "Access guard and websocket token-first auth are correctly enforced; spoofed X-RF-User cannot bypass ownership in tested flows.",
+    "Public RF cards endpoint correctly omits answer/explain/formula and cleanup report/migration marker match approved counts.",
+    "Frontend reward copy drift detected at rf-mode-rules: UI says +1 but backend gamify awards +2 per correct.",
+    "Frontend env uses EXPO_PUBLIC_BACKEND_URL/EXPO_PUBLIC_JEELIVE_API; keep production env mapping aligned with expected EXPO_BACKEND_URL contract."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter42_rf_access_privacy_and_assets.py",
+    "/app/test_reports/iteration_42.json"
+  ],
+  "success_rate": {
+    "backend": "100% (11/11 pass)",
+    "frontend": "Partial (~45% of requested UI scope executed; blocked by intermittent canonical auth 503 and incomplete fixture run)"
+  },
+  "seed_data_creation": "Created transient TEST-RF-portrait-* grants/profiles only; cleanup fixture removes these records by prefix after test suite.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Canonical login succeeded in some runs and failed in others with 503. Backend regression file is stable and should be reused. UI fixture used MOCKED auth/session + auth/me + rf/access only (all gameplay endpoints remained real).",
+  "rca_of_issue": "Primary blocker is intermittent canonical proxy auth availability: repeated web UI runs showed POST /api/jl/auth/phone sometimes returning 503, causing entry error and preventing consistent authenticated tab navigation. Secondary UI issue is rules-text drift (+1 displayed vs +2 backend). Repro: open entry, submit approved phone/PIN, repeat several runs; observe alternating success/failure with corresponding backend 503 logs."
+}

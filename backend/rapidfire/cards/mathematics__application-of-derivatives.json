@@ -1,1700 +1,1249 @@
 [
- {
-  "id": "6ea48168-4e15-41d1-9be3-696e68f460c7",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Increasing & Decreasing Functions",
-  "prompt": "Condition for f(x) to be strictly increasing on (a,b)",
-  "formula": "f'(x) > 0",
-  "options": [
-   "f'(x) > 0 for all x in (a,b)",
-   "f''(x) > 0 for all x in (a,b)",
-   "f'(x) < 0 for all x in (a,b)",
-   "f'(x) = 0 for all x in (a,b)"
-  ],
-  "answer": 0,
-  "explain": "A function is strictly increasing on (a,b) if its derivative is positive throughout the interval.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3f4296aa-df00-41dd-a642-5235ca3413c4",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Maxima & Minima",
-  "prompt": "At a local maximum, the sign of f'(x) changes from",
-  "formula": "",
-  "options": [
-   "+ to +",
-   "− to +",
-   "− to −",
-   "+ to −"
-  ],
-  "answer": 3,
-  "explain": "First derivative test: f'(x) changes from positive to negative at a local maximum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "06026907-f5df-4972-b9f5-812fbea9056c",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Maxima & Minima",
-  "prompt": "Second derivative test: if f'(c)=0 and f''(c)>0, then x=c is",
-  "formula": "",
-  "options": [
-   "Saddle point",
-   "Local maximum",
-   "Local minimum",
-   "Point of inflection"
-  ],
-  "answer": 2,
-  "explain": "f''(c) > 0 with f'(c) = 0 implies concave up, so local minimum at x = c.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "031c2d71-cd59-49b6-aacb-857431e28847",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents & Normals",
-  "prompt": "Equation of tangent to y=f(x) at point (x₁,y₁)",
-  "formula": "y−y₁ = f'(x₁)(x−x₁)",
-  "options": [
-   "y−x₁ = f'(y₁)(x−y₁)",
-   "y−y₁ = −1/f'(x₁)(x−x₁)",
-   "y = f'(x₁)x + y₁",
-   "y−y₁ = f'(x₁)(x−x₁)"
-  ],
-  "answer": 3,
-  "explain": "Tangent uses slope = f'(x₁) and passes through the point (x₁, y₁) on the curve.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bbcfdfe4-9ecb-4c76-ad6e-4e9acad92b0d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents & Normals",
-  "prompt": "Slope of normal to y=f(x) at x=x₁ is",
-  "formula": "−1/f'(x₁)",
-  "options": [
-   "1/f'(x₁)",
-   "−1/f'(x₁)",
-   "f'(x₁)",
-   "−f'(x₁)"
-  ],
-  "answer": 1,
-  "explain": "Normal is perpendicular to tangent, so its slope = −1/(slope of tangent).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fdaa4160-6add-4aea-a3f7-0c22e0caa132",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Rolle's & LMVT",
-  "prompt": "Rolle's theorem requires f to be continuous on [a,b], differentiable on (a,b), and",
-  "formula": "",
-  "options": [
-   "f(a) = 0",
-   "f(a) = f(b)",
-   "f(a) + f(b) = 0",
-   "f'(a) = f'(b)"
-  ],
-  "answer": 1,
-  "explain": "Rolle's theorem's third condition is f(a) = f(b), guaranteeing f'(c) = 0 for some c.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "71653212-fd8c-4bff-bbae-e6b10cd6075d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Rolle's & LMVT",
-  "prompt": "LMVT guarantees f'(c) equals",
-  "formula": "[f(b)−f(a)]/(b−a)",
-  "options": [
-   "[f(a)−f(b)]/(b−a)",
-   "[f(b)−f(a)]/(b−a)",
-   "f'(a)+f'(b)",
-   "f(b)/b − f(a)/a"
-  ],
-  "answer": 1,
-  "explain": "Lagrange's MVT: there exists c in (a,b) where f'(c) equals the average rate of change.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "20c7a42c-e963-4e6c-a5b5-ba7cb19ccdfc",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Approximations",
-  "prompt": "The approximate change in y = f(x) for small Δx is",
-  "formula": "Δy ≈ f'(x)·Δx",
-  "options": [
-   "f(x)·Δx",
-   "f''(x)·Δx",
-   "f'(x)·Δx",
-   "f'(x)/Δx"
-  ],
-  "answer": 2,
-  "explain": "Linear approximation (differentials): dy = f'(x)dx is used to approximate Δy.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7a2f90af-e20e-455d-8e19-9b9bf9c6cd4f",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents & Normals",
-  "prompt": "If the tangent to a curve is horizontal, then at that point",
-  "formula": "f'(x) = 0",
-  "options": [
-   "f'(x) = 1",
-   "f''(x) = 0",
-   "f(x) = 0",
-   "f'(x) = 0"
-  ],
-  "answer": 3,
-  "explain": "A horizontal tangent has slope = 0, so f'(x) = 0 at that point.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "58e22739-a5c1-465e-8b63-383b7a904f95",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Maxima & Minima",
-  "prompt": "Point where f'(x)=0 but f does NOT have local extremum is called",
-  "formula": "",
-  "options": [
-   "Point where f'=0, no extremum",
-   "Point of inflection",
-   "Critical point",
-   "Cusp"
-  ],
-  "answer": 0,
-  "explain": "If f'(c)=0 but sign of f' doesn't change, it may be a point of inflection, not extremum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0323601a-119a-4b17-bdd4-6caf240b594a",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Concavity & Inflection",
-  "prompt": "For curve y=f(x), f''(x)<0 means the curve is",
-  "formula": "",
-  "options": [
-   "Strictly increasing",
-   "Concave downward",
-   "Strictly decreasing",
-   "Concave upward"
-  ],
-  "answer": 1,
-  "explain": "f''(x) < 0 implies the slope is decreasing, so the curve is concave downward (convex upward).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a8b0b5ef-323f-4361-93be-cb3395c70c30",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Concavity & Inflection",
-  "prompt": "At a point of inflection, f''(x) equals",
-  "formula": "f''(x) = 0",
-  "options": [
-   "1",
-   "undefined only",
-   "0 (and changes sign)",
-   "f'(x)"
-  ],
-  "answer": 2,
-  "explain": "Point of inflection occurs where f''(x)=0 and f'' changes sign (concavity changes).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "46557c6b-dce1-460d-bca0-837f7bfd0b01",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Increasing & Decreasing Functions",
-  "prompt": "If f'(x) = 0 for all x in (a,b), then f is",
-  "formula": "",
-  "options": [
-   "Strictly increasing",
-   "Zero everywhere",
-   "Constant on (a,b)",
-   "Linear on (a,b)"
-  ],
-  "answer": 2,
-  "explain": "Zero derivative throughout an interval implies the function is constant on that interval.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4b24853f-2138-489d-8b42-db3d2f1e63e9",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents & Normals",
-  "prompt": "Two curves are orthogonal if at intersection point m₁·m₂ equals",
-  "formula": "m₁·m₂ = −1",
-  "options": [
-   "1",
-   "0",
-   "∞",
-   "−1"
-  ],
-  "answer": 3,
-  "explain": "Orthogonal curves have perpendicular tangents, so product of slopes = −1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c08128ed-05b8-42d7-b2d0-1e9c80541a4e",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Maxima & Minima",
-  "prompt": "Critical points of f(x) are where f'(x) is",
-  "formula": "",
-  "options": [
-   "Maximum",
-   "Equal to f(x)",
-   "Positive",
-   "0 or undefined"
-  ],
-  "answer": 3,
-  "explain": "Critical points occur where f'(x) = 0 or f'(x) does not exist.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "07113e10-1e5f-47cc-970b-070d3a7466c5",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Absolute Maxima & Minima",
-  "prompt": "For closed interval [a,b], absolute maximum is the largest among",
-  "formula": "",
-  "options": [
-   "Critical values only",
-   "f at midpoint only",
-   "f(a), f(b), and all critical values",
-   "f(a) and f(b) only"
-  ],
-  "answer": 2,
-  "explain": "On [a,b], compare f at endpoints and all critical points to find absolute maximum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b8d5d39a-5877-496a-ba0b-18d230f82cf3",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents & Normals",
-  "prompt": "The equation of normal to y=f(x) at (x₁,y₁) is",
-  "formula": "y−y₁ = −1/f'(x₁)·(x−x₁)",
-  "options": [
-   "y−y₁ = −(x−x₁)/f'(x₁)",
-   "y−y₁ = f'(x₁)/(x−x₁)",
-   "y = −x/f'(x₁)",
-   "y−y₁ = f'(x₁)(x−x₁)"
-  ],
-  "answer": 0,
-  "explain": "Normal has slope −1/f'(x₁) and passes through (x₁,y₁), giving the stated equation.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fa1e6f8f-bb9e-4a51-8d33-7ffd25056ae7",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima & Minima (Applications)",
-  "prompt": "Among all rectangles with fixed perimeter P, maximum area is achieved when it is a",
-  "formula": "",
-  "options": [
-   "Golden rectangle",
-   "Rhombus",
-   "Square",
-   "Rectangle with ratio 1:2"
-  ],
-  "answer": 2,
-  "explain": "By AM-GM inequality, for fixed perimeter, area is maximum when length = breadth (square).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8980979d-759c-42c9-95e8-2ac9e26122ce",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Increasing and Decreasing Functions",
-  "prompt": "Condition for f(x) to be strictly decreasing on (a,b)",
-  "formula": "f'(x) < 0 ∀ x ∈ (a,b)",
-  "options": [
-   "f'(x) < 0 for all x in (a,b)",
-   "f'(x) = 0 for all x in (a,b)",
-   "f'(x) > 0 for all x in (a,b)",
-   "f''(x) < 0 for all x in (a,b)"
-  ],
-  "answer": 0,
-  "explain": "Strictly decreasing ⟺ derivative is negative throughout the interval.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9102b0fd-900a-4950-bf88-c6297e3ed4b7",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Extrema",
-  "prompt": "At a local minimum, the sign of f'(x) changes from",
-  "formula": "",
-  "options": [
-   "negative to positive",
-   "negative to negative",
-   "positive to negative",
-   "positive to positive"
-  ],
-  "answer": 0,
-  "explain": "f' changes – to + as x crosses a local minimum (first derivative test).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "62733ea6-cbc1-43f1-8cb7-81012a2abaa3",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Extrema",
-  "prompt": "Second derivative test: f'(c)=0 and f''(c)<0 implies x=c is",
-  "formula": "",
-  "options": [
-   "point of inflection",
-   "saddle point",
-   "local maximum",
-   "local minimum"
-  ],
-  "answer": 2,
-  "explain": "f''(c)<0 means concave down at c, so f has local maximum there.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a057961d-b52e-4bad-84c8-db299c0b914f",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Rolle's Theorem",
-  "prompt": "Rolle's theorem conclusion: there exists c ∈ (a,b) such that",
-  "formula": "f'(c) = 0",
-  "options": [
-   "f'(c) = 0",
-   "f'(c) = f(b)−f(a)",
-   "f(c) = 0",
-   "f''(c) = 0"
-  ],
-  "answer": 0,
-  "explain": "Under Rolle's conditions, at least one c exists where the derivative vanishes.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "31dc7604-6e77-4df2-bb1c-0b3cb6b41b41",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Mean Value Theorems",
-  "prompt": "LMVT condition NOT required for the theorem to apply",
-  "formula": "",
-  "options": [
-   "f'(a) = f'(b)",
-   "f differentiable on (a,b)",
-   "a ≠ b",
-   "f continuous on [a,b]"
-  ],
-  "answer": 0,
-  "explain": "LMVT only needs continuity on [a,b] and differentiability on (a,b); no endpoint derivative equality needed.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "97e0668d-4981-41a4-b949-42d8a6d51229",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Mean Value Theorems",
-  "prompt": "If f is continuous on [a,b] and f(a)·f(b)<0, by which theorem does a root exist?",
-  "formula": "",
-  "options": [
-   "Extreme Value Theorem",
-   "Intermediate Value Theorem",
-   "Rolle's Theorem",
-   "LMVT"
-  ],
-  "answer": 1,
-  "explain": "IVT guarantees a root when a continuous function changes sign on [a,b].",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7fc9b484-daf4-444b-928a-b6e65e546bdc",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima (Optimization)",
-  "prompt": "Among all cylinders with fixed volume V, the surface area is minimum when",
-  "formula": "h = 2r",
-  "options": [
-   "height = diameter",
-   "height = 2·diameter",
-   "height = radius",
-   "height = πr"
-  ],
-  "answer": 0,
-  "explain": "Minimising total surface area of cylinder with fixed V gives h = 2r (height = diameter).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "3e0a1f7e-b823-42c9-92b8-5da7abe059d8",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "The maximum value of sin x + cos x is",
-  "formula": "√2",
-  "options": [
-   "√2/2",
-   "√2",
-   "1",
-   "2"
-  ],
-  "answer": 1,
-  "explain": "sin x + cos x = √2 sin(x+π/4), maximum value is √2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2c4a831e-81e5-4d35-a5e4-345b01d5d501",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=ax²+bx+c (a>0), minimum value occurs at x=",
-  "formula": "x = −b/(2a)",
-  "options": [
-   "b/a",
-   "−b/(2a)",
-   "b/(2a)",
-   "−b/a"
-  ],
-  "answer": 1,
-  "explain": "Vertex of upward parabola gives minimum at x = −b/(2a).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "25d7ba0f-65bb-4c71-9272-cf139f8365c3",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents and Normals",
-  "prompt": "For the curve y²=4ax, slope of tangent at point (at²,2at) is",
-  "formula": "1/t",
-  "options": [
-   "t/2",
-   "1/t",
-   "t",
-   "2/t"
-  ],
-  "answer": 1,
-  "explain": "Differentiating y²=4ax: dy/dx = 2a/y = 2a/(2at) = 1/t.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "aa0989ef-99b6-43d6-a951-ef0ef5d6cabb",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Local Extrema",
-  "prompt": "If f'(x)>0 on (a,c) and f'(x)<0 on (c,b), then f(c) is",
-  "formula": "",
-  "options": [
-   "local maximum",
-   "local minimum",
-   "point of inflection",
-   "absolute minimum"
-  ],
-  "answer": 0,
-  "explain": "f' changes from + to – at c, confirming local maximum by first derivative test.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "74bf4f5e-e438-4fd7-9103-7c70cf368e6d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=xˣ (x>0), f'(x)=0 at x=",
-  "formula": "x = 1/e",
-  "options": [
-   "1",
-   "e",
-   "1/e",
-   "e²"
-  ],
-  "answer": 2,
-  "explain": "f(x)=eˣˡⁿˣ, f'=xˣ(1+ln x)=0 ⟹ ln x=−1 ⟹ x=1/e.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c6bff4a4-9108-4ae2-9722-1a0751bd2327",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "The minimum value of f(x)=x+1/x for x>0 is",
-  "formula": "",
-  "options": [
-   "1",
-   "1/2",
-   "0",
-   "2"
-  ],
-  "answer": 3,
-  "explain": "By AM-GM, x+1/x ≥ 2√(x·1/x)=2; equality at x=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "08fddd3b-7667-4093-bd9a-5eb4a9624486",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Approximations",
-  "prompt": "Percentage error in volume of sphere if radius has 1% error is",
-  "formula": "3%",
-  "options": [
-   "1%",
-   "2%",
-   "3%",
-   "6%"
-  ],
-  "answer": 2,
-  "explain": "V=4πr³/3, dV/V=3·dr/r; so percentage error in V = 3×1% = 3%.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4ab3b52d-f3c2-465d-b634-524c14342c71",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents and Normals",
-  "prompt": "The normal to y=f(x) is parallel to x-axis when",
-  "formula": "",
-  "options": [
-   "f'(x) = 0",
-   "f'(x) is undefined (vert. tangent)",
-   "f''(x) = 0",
-   "f(x) = 0"
-  ],
-  "answer": 0,
-  "explain": "Normal slope = −1/f'(x); it's horizontal (parallel to x-axis) when f'(x)→∞ i.e. vertical tangent.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4293ee06-2465-4479-b097-97a17554b708",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Concavity and Inflection",
-  "prompt": "If f''(c)=0 and f'''(c)≠0, then x=c is",
-  "formula": "",
-  "options": [
-   "local minimum",
-   "point of inflection",
-   "local maximum",
-   "critical point only"
-  ],
-  "answer": 1,
-  "explain": "f''=0 with f'''≠0 confirms sign change of f'', hence a point of inflection.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "dbbd7c25-431d-4342-ac2f-491b7b26d4e0",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For f(x) on [a,b], LMVT guarantees c in",
-  "formula": "c ∈ (a,b)",
-  "options": [
-   "[a,b) only",
-   "closed interval [a,b]",
-   "open interval (a,b)",
-   "(a,b] only"
-  ],
-  "answer": 2,
-  "explain": "LMVT states the point c with f'(c)=(f(b)-f(a))/(b-a) lies in the open interval (a,b).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "31e55637-8d2f-48db-a993-97766603dc10",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "f(x)=x³ at x=0: the point is",
-  "formula": "",
-  "options": [
-   "absolute maximum",
-   "local maximum",
-   "point of inflection",
-   "local minimum"
-  ],
-  "answer": 2,
-  "explain": "f''(0)=0 and f'' changes sign at x=0, so it is a point of inflection, not an extremum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "bb6bd844-c185-46d5-a68b-ae58eddab9c2",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Among all triangles with fixed perimeter, maximum area is achieved by",
-  "formula": "",
-  "options": [
-   "scalene triangle",
-   "equilateral triangle",
-   "isosceles triangle",
-   "right triangle"
-  ],
-  "answer": 1,
-  "explain": "By AM-GM inequality, equilateral triangle maximises area for a given perimeter.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8607b5ba-10ee-40fc-ba21-b81cb35a7e38",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The function f(x)=|x−1| is NOT differentiable at",
-  "formula": "",
-  "options": [
-   "x=1",
-   "x=0",
-   "x=2",
-   "x=−1"
-  ],
-  "answer": 0,
-  "explain": "|x−1| has a sharp corner at x=1, so it is not differentiable there.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4c79fd54-05d3-48dc-909c-f70c9869f8ae",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Slope of tangent to x²+y²=r² at point (x₁,y₁) is",
-  "formula": "m = −x₁/y₁",
-  "options": [
-   "y₁/x₁",
-   "−y₁/x₁",
-   "x₁/y₁",
-   "−x₁/y₁"
-  ],
-  "answer": 3,
-  "explain": "Implicit differentiation: 2x+2y·dy/dx=0 ⟹ dy/dx=−x/y.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4b6416f3-376c-41ee-b310-426f0c65c4d8",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The minimum sum of a positive number and its reciprocal is",
-  "formula": "x+1/x ≥ 2",
-  "options": [
-   "2",
-   "1",
-   "√2",
-   "4"
-  ],
-  "answer": 0,
-  "explain": "By AM-GM, x+1/x ≥ 2√(x·1/x)=2, equality at x=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a332a7a9-3e2e-4e58-9a26-bb945ccb6e56",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "If f'(c)=0 and f' does NOT change sign at c, then c is",
-  "formula": "",
-  "options": [
-   "neither max nor min",
-   "local minimum",
-   "absolute extremum",
-   "local maximum"
-  ],
-  "answer": 0,
-  "explain": "No sign change in f' at c means c is not an extremum; it may be an inflection point.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "bcce04c1-1c62-408e-8275-c96b91eec3e4",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The function f(x)=x²−4x+5 has minimum at x=",
-  "formula": "x = −b/2a",
-  "options": [
-   "4",
-   "−4",
-   "−2",
-   "2"
-  ],
-  "answer": 3,
-  "explain": "For ax²+bx+c, minimum at x=−b/2a=4/2=2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "658a01b9-1abb-48be-95e4-a5c4d0a2d693",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Among rectangles inscribed in ellipse x²/a²+y²/b²=1, max area is",
-  "formula": "A_max = 2ab",
-  "options": [
-   "ab/2",
-   "ab",
-   "4ab",
-   "2ab"
-  ],
-  "answer": 3,
-  "explain": "Maximum area of rectangle inscribed in ellipse is 2ab, achieved at (a/√2, b/√2).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "06208659-8f65-4609-8fe4-0e15a58ebfc0",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Percentage error in area of circle if radius has 2% error is",
-  "formula": "dA/A = 2·dr/r",
-  "options": [
-   "8%",
-   "1%",
-   "2%",
-   "4%"
-  ],
-  "answer": 3,
-  "explain": "A=πr², so dA/A=2dr/r; 2% error in r gives 4% error in area.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "30ebdb0f-756d-4f29-b2ca-467e4f29fd41",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "If f is differentiable and f'(x)>0 everywhere, f is",
-  "formula": "",
-  "options": [
-   "constant",
-   "periodic",
-   "strictly increasing",
-   "strictly decreasing"
-  ],
-  "answer": 2,
-  "explain": "f'(x)>0 for all x implies f is strictly increasing on its entire domain.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "b5ddd06d-d39a-4c22-819c-143acf9c1252",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The maximum value of f(x)=−x²+4x+1 is",
-  "formula": "f_max = c − b²/4a",
-  "options": [
-   "4",
-   "−5",
-   "5",
-   "1"
-  ],
-  "answer": 2,
-  "explain": "Vertex at x=2: f(2)=−4+8+1=5; since a<0, this is the maximum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "aa0327df-ad4e-40c9-b51e-772fd8538a47",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "At a point of inflection where f''=0, which additional condition confirms it?",
-  "formula": "",
-  "options": [
-   "f'=0",
-   "f is continuous",
-   "f'' changes sign",
-   "f'''=0"
-  ],
-  "answer": 2,
-  "explain": "f'' must change sign at the point; f''=0 alone is necessary but not sufficient.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "16bedd07-892b-477e-845e-46e55ff2ff8b",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For the curve y=1/x, slope of tangent at (1,1) is",
-  "formula": "dy/dx = −1/x²",
-  "options": [
-   "1",
-   "0",
-   "−2",
-   "−1"
-  ],
-  "answer": 3,
-  "explain": "dy/dx=−1/x²; at x=1, slope=−1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "9f5d1af5-7d1b-44f0-9b72-fe669004bf67",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Rolle's theorem is a special case of LMVT when",
-  "formula": "f(a)=f(b)",
-  "options": [
-   "f(a)=f(b)",
-   "f(a)=0",
-   "f'(a)=0",
-   "f is constant"
-  ],
-  "answer": 0,
-  "explain": "When f(a)=f(b), LMVT gives f'(c)=0, which is exactly Rolle's conclusion.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "741f51f6-b336-4eb2-8887-4ee63b1c5e24",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "f(x)=x³−3x has local maximum value",
-  "formula": "",
-  "options": [
-   "3",
-   "0",
-   "2",
-   "−2"
-  ],
-  "answer": 2,
-  "explain": "f'(x)=3x²−3=0 at x=±1; f(−1)=−1+3=2 is local max (f''(−1)<0).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "83256900-dfa2-472d-bd7b-ad7bd065f488",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The maximum product of two positive numbers with fixed sum S is",
-  "formula": "P_max = S²/4",
-  "options": [
-   "S²/2",
-   "S²",
-   "S/4",
-   "S²/4"
-  ],
-  "answer": 3,
-  "explain": "By AM-GM, if x+y=S then xy≤(S/2)²=S²/4, equality when x=y=S/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "98318abb-0b31-4722-9c12-30184db10d9d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Rate of change of area of circle w.r.t. radius r is",
-  "formula": "dA/dr = 2πr",
-  "options": [
-   "πr²",
-   "2πr",
-   "4πr",
-   "πr"
-  ],
-  "answer": 1,
-  "explain": "A=πr², so dA/dr=2πr; a direct application of derivatives as rate of change.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main"
- },
- {
-  "id": "d9dbdeb7-7ae7-4fcf-a4be-26d33f7883c3",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The value of c in LMVT for f(x)=x² on [1,3] is",
-  "formula": "c = (a+b)/2 for f=x²",
-  "options": [
-   "√5",
-   "1",
-   "3",
-   "2"
-  ],
-  "answer": 3,
-  "explain": "f'(c)=[f(3)−f(1)]/(3−1)=(9−1)/2=4; f'(c)=2c=4 → c=2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "da0e747c-93b6-4b6f-9a7a-be79574a8613",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For f(x)=x³−6x²+9x+2, the local minimum value is",
-  "formula": "",
-  "options": [
-   "6",
-   "4",
-   "0",
-   "2"
-  ],
-  "answer": 3,
-  "explain": "Critical pts x=1(max) and x=3(min); f(3)=27−54+27+2=2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2ad5fa94-5c19-4ff9-9ad8-de3ca671095f",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For f(x)=x⁴, the second derivative test at x=0 gives",
-  "formula": "f''(0)=0",
-  "options": [
-   "Local minimum",
-   "Inflection",
-   "Local maximum",
-   "Test inconclusive"
-  ],
-  "answer": 3,
-  "explain": "f''(0)=0 means the second derivative test fails; higher-order test needed (it is actually a minimum).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c43ba7f3-d913-487b-8988-a6ee8b33d5ed",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The number of critical points of f(x)=x³−3x is",
-  "formula": "f'(x)=3x²−3=0",
-  "options": [
-   "2",
-   "3",
-   "1",
-   "0"
-  ],
-  "answer": 0,
-  "explain": "f'=3(x²−1)=0 gives x=±1; two critical points.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2be75a69-bd2a-49d4-ae38-363ef36faf93",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For a circle, if radius increases at 2 cm/s, rate of area increase when r=5 cm is",
-  "formula": "dA/dt=2πr·(dr/dt)",
-  "options": [
-   "5π cm²/s",
-   "10π cm²/s",
-   "25π cm²/s",
-   "20π cm²/s"
-  ],
-  "answer": 3,
-  "explain": "dA/dt=2πr·dr/dt=2π(5)(2)=20π cm²/s.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c90b1af9-b31b-4f90-b250-7f4413a6a9fc",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The function f(x)=x−sin x is monotonically",
-  "formula": "f'(x)=1−cos x ≥ 0",
-  "options": [
-   "Non-monotonic",
-   "Decreasing on ℝ",
-   "Increasing on ℝ",
-   "Periodic only"
-  ],
-  "answer": 2,
-  "explain": "f'(x)=1−cos x ≥ 0 for all x, zero only at isolated points, so f is strictly increasing.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0f708572-0e34-4f26-81df-4b0f0ced4177",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For f(x) with f'(c)=0, the point c is NOT an extremum if",
-  "formula": "",
-  "options": [
-   "f''(c)<0",
-   "f' doesn't change sign at c",
-   "f(c) is defined",
-   "f''(c)>0"
-  ],
-  "answer": 1,
-  "explain": "If f' does not change sign around c, c is an inflection point, not an extremum (e.g., x³ at 0).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "e77b83bd-def1-46ca-8cba-46986b35e556",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "Rolle's theorem CANNOT be applied to f(x)=|x| on [−1,1] because",
-  "formula": "",
-  "options": [
-   "f(−1)≠f(1)",
-   "f not continuous",
-   "f has no root",
-   "f not differentiable at 0"
-  ],
-  "answer": 3,
-  "explain": "|x| is not differentiable at x=0, violating the differentiability condition of Rolle's theorem.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6fe72ac7-2f65-4a28-b984-982fe1aed61d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For f(x)=ln(1+x) on [0,1], LMVT gives c equal to",
-  "formula": "f'(c)=[f(1)−f(0)]/(1−0)=ln2",
-  "options": [
-   "1/ln2 − 1",
-   "1",
-   "ln2",
-   "1−ln2"
-  ],
-  "answer": 0,
-  "explain": "f'(c)=1/(1+c)=ln2 → 1+c=1/ln2 → c=1/ln2−1 ≈ 0.4427.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "7563aeec-ffd7-4515-a567-8ed22a62f95c",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "For a sphere, if volume V=4πr³/3, relative error dV/V equals",
-  "formula": "dV/V = 3(dr/r)",
-  "options": [
-   "dr/r",
-   "2(dr/r)",
-   "3(dr/r)",
-   "4(dr/r)"
-  ],
-  "answer": 2,
-  "explain": "Taking log: ln V=ln(4π/3)+3 ln r; differentiating: dV/V=3 dr/r.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c81c240f-f939-4528-9db1-95f8de8eae62",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Application of Derivatives",
-  "prompt": "The function f(x)=2x³−15x²+36x+10 is decreasing on",
-  "formula": "f'(x)=6(x−2)(x−3)",
-  "options": [
-   "(2,3)",
-   "(0,2)",
-   "(3,∞)",
-   "(−∞,2)"
-  ],
-  "answer": 0,
-  "explain": "f'=6x²−30x+36=6(x−2)(x−3)<0 for x∈(2,3); decreasing there.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "fd4352ee-8752-4a80-b1eb-328f2c08afb5",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=x³−3x²+3x−1, the point x=1 is",
-  "formula": "",
-  "options": [
-   "A point of inflection",
-   "Absolute minimum",
-   "Local maximum",
-   "Local minimum"
-  ],
-  "answer": 0,
-  "explain": "f'(1)=0, f''(1)=0, f'''(1)=6≠0, so x=1 is a point of inflection, not extremum.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f1f7a42b-5b32-4f33-9bdd-7545e9133ad5",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Rate of Change",
-  "prompt": "Rate of change of volume of sphere w.r.t. radius r is",
-  "formula": "dV/dr = 4πr²",
-  "options": [
-   "8πr",
-   "4πr³/3",
-   "2πr²",
-   "4πr²"
-  ],
-  "answer": 3,
-  "explain": "V=4πr³/3, so dV/dr=4πr², which equals the surface area.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "d7a451b8-4d7a-4804-b377-b6fe2df6ec4e",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "The maximum value of f(x)=sin x·cos x on ℝ is",
-  "formula": "f = ½sin 2x",
-  "options": [
-   "√2",
-   "1",
-   "√2/2",
-   "1/2"
-  ],
-  "answer": 3,
-  "explain": "sin x·cos x = ½sin2x, maximum of sin2x is 1, so max value = 1/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "79b50cc0-fd75-43e3-a7dc-ff9ae311bf3c",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=x/(1+x²), f has a local maximum at x=",
-  "formula": "",
-  "options": [
-   "x = 0",
-   "x = 2",
-   "x = −1",
-   "x = 1"
-  ],
-  "answer": 3,
-  "explain": "f'(x)=(1−x²)/(1+x²)²=0 gives x=±1; f''(1)<0 so local max at x=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6ed22814-4d59-476d-8d42-87d9cb88edfa",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "If x+y=k (constant, x,y>0), the maximum of xy is",
-  "formula": "k²/4",
-  "options": [
-   "k²",
-   "k²/4",
-   "k²/2",
-   "k/4"
-  ],
-  "answer": 1,
-  "explain": "By AM-GM, xy ≤ ((x+y)/2)²=k²/4, equality when x=y=k/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "a8f43b02-ca9d-474b-b288-15103f8f69fd",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangent and Normal",
-  "prompt": "For parametric curve x=t², y=t³, dy/dx at t=2 is",
-  "formula": "dy/dx = (dy/dt)/(dx/dt)",
-  "options": [
-   "4/3",
-   "3/2",
-   "2",
-   "3"
-  ],
-  "answer": 3,
-  "explain": "dy/dt=3t², dx/dt=2t, so dy/dx=3t/2; at t=2, dy/dx=3.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "1820211a-4dd7-422c-bbcc-55ca08d674d0",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "Among all rectangles with fixed area A, perimeter is minimum for",
-  "formula": "",
-  "options": [
-   "A 2:1 rectangle",
-   "Any rectangle equally",
-   "A 3:1 rectangle",
-   "A square"
-  ],
-  "answer": 3,
-  "explain": "For fixed area, perimeter is minimized when length=breadth, i.e., it's a square.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9d574fe0-a6d8-4112-a959-4b1deefde525",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangent and Normal",
-  "prompt": "For the curve y=x²−x, the tangent is parallel to x-axis at x=",
-  "formula": "",
-  "options": [
-   "1/2",
-   "0",
-   "1",
-   "−1/2"
-  ],
-  "answer": 0,
-  "explain": "f'(x)=2x−1=0 gives x=1/2; tangent is horizontal there.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0d387688-c6a6-43ce-8453-a1672d1a0fcd",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=x⁴−8x²+2, number of local extrema is",
-  "formula": "",
-  "options": [
-   "4",
-   "1",
-   "3",
-   "2"
-  ],
-  "answer": 2,
-  "explain": "f'(x)=4x³−16x=4x(x²−4)=0 at x=0,±2; sign changes at all three, so 3 extrema.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "506f5159-a575-4eda-a798-48e385d3e43f",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Approximation and Errors",
-  "prompt": "The error in computing x³ if error in x is δx is approximately",
-  "formula": "3x²δx",
-  "options": [
-   "x²δx",
-   "3x²δx",
-   "x³δx",
-   "3xδx"
-  ],
-  "answer": 1,
-  "explain": "By differentials, d(x³)=3x²dx, so approximate error is 3x²·δx.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "b3e1e232-722d-49a6-9ad5-c97e063fd3b5",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=e^x−x, the minimum value is",
-  "formula": "",
-  "options": [
-   "1",
-   "e",
-   "0",
-   "−1"
-  ],
-  "answer": 0,
-  "explain": "f'(x)=eˣ−1=0 at x=0; f''(0)=1>0, minimum value f(0)=e⁰−0=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "93e9a952-0212-4627-a177-80a2fe12f888",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Mean Value Theorem",
-  "prompt": "If LMVT is applied to f(x)=√x on [1,4], the value of c is",
-  "formula": "c = ((f(b)−f(a))/(b−a))^{−2}... c=9/4",
-  "options": [
-   "2",
-   "5/2",
-   "7/4",
-   "9/4"
-  ],
-  "answer": 3,
-  "explain": "f'(c)=1/(2√c)=(f(4)−f(1))/(4−1)=(2−1)/3=1/3; √c=3/2, c=9/4.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "0bb01202-bb73-4256-92bd-ff361d09a116",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Monotonicity",
-  "prompt": "For f(x)=x³−3x²+6x+5, the function is",
-  "formula": "f'(x)=3x²−6x+6=3(x²−2x+2)",
-  "options": [
-   "Has local min only",
-   "Always increasing",
-   "Always decreasing",
-   "Has local max only"
-  ],
-  "answer": 1,
-  "explain": "Discriminant of f'(x) is negative and leading coeff positive, so f'(x)>0 always.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "41df0cf0-9a4a-480d-81b8-852a9365f965",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=x²−2x+3, the minimum value is",
-  "formula": "f_min = c − b²/4a",
-  "options": [
-   "2",
-   "1",
-   "0",
-   "3"
-  ],
-  "answer": 0,
-  "explain": "f_min = 3 − (−2)²/(4·1) = 3−1 = 2, achieved at x=1.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "18e974ce-080e-458f-b63d-c3a903c20e5c",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Concavity and Inflection",
-  "prompt": "At inflection point, if f''(c)=0, what must additionally hold?",
-  "formula": "",
-  "options": [
-   "f(c)=0",
-   "f'' changes sign at c",
-   "f'''(c)=0",
-   "f'(c)=0"
-  ],
-  "answer": 1,
-  "explain": "Inflection requires f'' to change sign at c; f''=0 alone is insufficient.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "f9d7f934-d1be-4bad-b89f-fbf28cab7d2d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Rate of Change",
-  "prompt": "Rate of increase of volume of cube with side x w.r.t. x is",
-  "formula": "dV/dx = 3x²",
-  "options": [
-   "3x²",
-   "2x²",
-   "x³",
-   "6x"
-  ],
-  "answer": 0,
-  "explain": "V = x³, so dV/dx = 3x².",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "49deec42-c684-4835-8d3e-ad67ac3f77be",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Second Derivative Test",
-  "prompt": "For f(x)=x³, at x=0 the second derivative test gives",
-  "formula": "f''(0)=0",
-  "options": [
-   "Local maximum",
-   "Local minimum",
-   "Inflection point confirmed",
-   "Test inconclusive"
-  ],
-  "answer": 3,
-  "explain": "f''(0)=0 means the second derivative test is inconclusive; need higher derivatives.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "9422b1a5-29da-40b1-9bb5-2438511390be",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents and Normals",
-  "prompt": "The normal to the curve y=x² at (1,1) has slope",
-  "formula": "m_n = −1/f'(1)",
-  "options": [
-   "1/2",
-   "−1/2",
-   "−2",
-   "2"
-  ],
-  "answer": 1,
-  "explain": "f'(1)=2, so slope of normal = −1/2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "331b947a-f452-43f5-81d5-f277c4db46ae",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=3x⁴−4x³, the local minimum occurs at x=",
-  "formula": "f'(x)=12x³−12x²=12x²(x−1)",
-  "options": [
-   "3",
-   "0",
-   "−1",
-   "1"
-  ],
-  "answer": 3,
-  "explain": "f'=0 at x=0 and x=1; f'' test shows x=1 is local min (f''(1)>0).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "6690a405-90c2-4736-8de5-9fa36dc406db",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Approximations and Errors",
-  "prompt": "If surface area S=4πr², relative error dS/S in terms of dr/r is",
-  "formula": "dS/S = 2 dr/r",
-  "options": [
-   "dr/r",
-   "3 dr/r",
-   "2 dr/r",
-   "4 dr/r"
-  ],
-  "answer": 2,
-  "explain": "Differentiating S=4πr² logarithmically: dS/S = 2·dr/r.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "4873652e-f065-4f9c-8a7b-4b2e8a7af82a",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "For f(x)=2x³+3x²−12x, local maximum value is",
-  "formula": "",
-  "options": [
-   "12",
-   "4",
-   "−7",
-   "20"
-  ],
-  "answer": 3,
-  "explain": "f'=6x²+6x−12=0 ⟹ x=−2 (max), x=1 (min); f(−2)=−16+12+24=20.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "19fda452-d2bf-4bef-b16a-79b70210945d",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents and Normals",
-  "prompt": "For the curve x²+y²=25, the tangent at (3,4) has equation",
-  "formula": "x·x₁+y·y₁=r²",
-  "options": [
-   "3x+4y=25",
-   "3x−4y=25",
-   "4x+3y=25",
-   "4x−3y=25"
-  ],
-  "answer": 0,
-  "explain": "Tangent to circle at (x₁,y₁): xx₁+yy₁=r², so 3x+4y=25.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c01c87fc-dbdf-410a-b137-effbe1be17b2",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Maxima and Minima",
-  "prompt": "f(x)=x/(x²+1) has local maximum at x=",
-  "formula": "f'(x)=(1−x²)/(x²+1)²",
-  "options": [
-   "0",
-   "−1",
-   "2",
-   "1"
-  ],
-  "answer": 3,
-  "explain": "f'=0 at x=±1; f''>0 at x=−1 (min), f''<0 at x=1 (max).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "8d13a0ee-8204-4e1a-bf8e-76e963ce8bc1",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents and Normals",
-  "prompt": "The slope of the tangent to y=√x at x=4 is",
-  "formula": "dy/dx = 1/(2√x)",
-  "options": [
-   "1/4",
-   "1/8",
-   "2",
-   "1/2"
-  ],
-  "answer": 0,
-  "explain": "dy/dx = 1/(2√x); at x=4, slope = 1/(2·2) = 1/4.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c61fdae1-6415-4ea3-b2b1-01f8bdd67712",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Approximations and Errors",
-  "prompt": "If the error in measuring side of a square is 0.1%, the error in area is",
-  "formula": "dA/A = 2·dx/x",
-  "options": [
-   "1%",
-   "0.1%",
-   "0.2%",
-   "0.4%"
-  ],
-  "answer": 2,
-  "explain": "A=x², so dA/A = 2·dx/x = 2×0.1% = 0.2%.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "2752d92f-cd39-4f6b-89ec-c31bf106b768",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Monotonicity",
-  "prompt": "For f(x)=2x³−9x²+12x+4, the function decreases on",
-  "formula": "f'(x)=6x²−18x+12=6(x−1)(x−2)",
-  "options": [
-   "(−∞, 1)",
-   "(0, 1)",
-   "(1, 2)",
-   "(2, ∞)"
-  ],
-  "answer": 2,
-  "explain": "f'<0 between roots x=1 and x=2, so f decreases on (1,2).",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- },
- {
-  "id": "c8ea15a4-1aaf-4b36-87e2-595c67e9453f",
-  "subject": "Mathematics",
-  "chapter": "Application of Derivatives",
-  "topic": "Tangents and Normals",
-  "prompt": "For the parabola y=x², the tangent at x=a is parallel to y=4x−1 when a=",
-  "formula": "f'(a)=2a=4",
-  "options": [
-   "4",
-   "2",
-   "1/2",
-   "1"
-  ],
-  "answer": 1,
-  "explain": "Slope of given line is 4; f'(a)=2a=4 ⟹ a=2.",
-  "review_status": "pilot_review_pending",
-  "syllabus": "JEE Main",
-  "verified": 1
- }
+  {
+    "id": "6ea48168-4e15-41d1-9be3-696e68f460c7",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Increasing & Decreasing Functions",
+    "prompt": "Condition for f(x) to be strictly increasing on (a,b)",
+    "formula": "f'(x) > 0",
+    "options": [
+      "f'(x) > 0 for all x in (a,b)",
+      "f''(x) > 0 for all x in (a,b)",
+      "f'(x) < 0 for all x in (a,b)",
+      "f'(x) = 0 for all x in (a,b)"
+    ],
+    "answer": 0,
+    "explain": "A function is strictly increasing on (a,b) if its derivative is positive throughout the interval.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "3f4296aa-df00-41dd-a642-5235ca3413c4",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Local Maxima & Minima",
+    "prompt": "At a local maximum, the sign of f'(x) changes from",
+    "formula": "",
+    "options": [
+      "+ to +",
+      "− to +",
+      "− to −",
+      "+ to −"
+    ],
+    "answer": 3,
+    "explain": "First derivative test: f'(x) changes from positive to negative at a local maximum.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "06026907-f5df-4972-b9f5-812fbea9056c",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Local Maxima & Minima",
+    "prompt": "Second derivative test: if f'(c)=0 and f''(c)>0, then x=c is",
+    "formula": "",
+    "options": [
+      "Saddle point",
+      "Local maximum",
+      "Local minimum",
+      "Point of inflection"
+    ],
+    "answer": 2,
+    "explain": "f''(c) > 0 with f'(c) = 0 implies concave up, so local minimum at x = c.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "031c2d71-cd59-49b6-aacb-857431e28847",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents & Normals",
+    "prompt": "Equation of tangent to y=f(x) at point (x₁,y₁)",
+    "formula": "y−y₁ = f'(x₁)(x−x₁)",
+    "options": [
+      "y−x₁ = f'(y₁)(x−y₁)",
+      "y−y₁ = −1/f'(x₁)(x−x₁)",
+      "y = f'(x₁)x + y₁",
+      "y−y₁ = f'(x₁)(x−x₁)"
+    ],
+    "answer": 3,
+    "explain": "Tangent uses slope = f'(x₁) and passes through the point (x₁, y₁) on the curve.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bbcfdfe4-9ecb-4c76-ad6e-4e9acad92b0d",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents & Normals",
+    "prompt": "Slope of normal to y=f(x) at x=x₁ is",
+    "formula": "−1/f'(x₁)",
+    "options": [
+      "1/f'(x₁)",
+      "−1/f'(x₁)",
+      "f'(x₁)",
+      "−f'(x₁)"
+    ],
+    "answer": 1,
+    "explain": "Normal is perpendicular to tangent, so its slope = −1/(slope of tangent).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "fdaa4160-6add-4aea-a3f7-0c22e0caa132",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Rolle's & LMVT",
+    "prompt": "Rolle's theorem requires f to be continuous on [a,b], differentiable on (a,b), and",
+    "formula": "",
+    "options": [
+      "f(a) = 0",
+      "f(a) = f(b)",
+      "f(a) + f(b) = 0",
+      "f'(a) = f'(b)"
+    ],
+    "answer": 1,
+    "explain": "Rolle's theorem's third condition is f(a) = f(b), guaranteeing f'(c) = 0 for some c.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "71653212-fd8c-4bff-bbae-e6b10cd6075d",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Rolle's & LMVT",
+    "prompt": "LMVT guarantees f'(c) equals",
+    "formula": "[f(b)−f(a)]/(b−a)",
+    "options": [
+      "[f(a)−f(b)]/(b−a)",
+      "[f(b)−f(a)]/(b−a)",
+      "f'(a)+f'(b)",
+      "f(b)/b − f(a)/a"
+    ],
+    "answer": 1,
+    "explain": "Lagrange's MVT: there exists c in (a,b) where f'(c) equals the average rate of change.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "20c7a42c-e963-4e6c-a5b5-ba7cb19ccdfc",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Approximations",
+    "prompt": "The approximate change in y = f(x) for small Δx is",
+    "formula": "Δy ≈ f'(x)·Δx",
+    "options": [
+      "f(x)·Δx",
+      "f''(x)·Δx",
+      "f'(x)·Δx",
+      "f'(x)/Δx"
+    ],
+    "answer": 2,
+    "explain": "Linear approximation (differentials): dy = f'(x)dx is used to approximate Δy.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7a2f90af-e20e-455d-8e19-9b9bf9c6cd4f",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents & Normals",
+    "prompt": "If the tangent to a curve is horizontal, then at that point",
+    "formula": "f'(x) = 0",
+    "options": [
+      "f'(x) = 1",
+      "f''(x) = 0",
+      "f(x) = 0",
+      "f'(x) = 0"
+    ],
+    "answer": 3,
+    "explain": "A horizontal tangent has slope = 0, so f'(x) = 0 at that point.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0323601a-119a-4b17-bdd4-6caf240b594a",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Concavity & Inflection",
+    "prompt": "For curve y=f(x), f''(x)<0 means the curve is",
+    "formula": "",
+    "options": [
+      "Strictly increasing",
+      "Concave downward",
+      "Strictly decreasing",
+      "Concave upward"
+    ],
+    "answer": 1,
+    "explain": "f''(x) < 0 implies the slope is decreasing, so the curve is concave downward (convex upward).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a8b0b5ef-323f-4361-93be-cb3395c70c30",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Concavity & Inflection",
+    "prompt": "At a point of inflection, f''(x) equals",
+    "formula": "f''(x) = 0",
+    "options": [
+      "1",
+      "undefined only",
+      "0 (and changes sign)",
+      "f'(x)"
+    ],
+    "answer": 2,
+    "explain": "Point of inflection occurs where f''(x)=0 and f'' changes sign (concavity changes).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "46557c6b-dce1-460d-bca0-837f7bfd0b01",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Increasing & Decreasing Functions",
+    "prompt": "If f'(x) = 0 for all x in (a,b), then f is",
+    "formula": "",
+    "options": [
+      "Strictly increasing",
+      "Zero everywhere",
+      "Constant on (a,b)",
+      "Linear on (a,b)"
+    ],
+    "answer": 2,
+    "explain": "Zero derivative throughout an interval implies the function is constant on that interval.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4b24853f-2138-489d-8b42-db3d2f1e63e9",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents & Normals",
+    "prompt": "Two curves are orthogonal if at intersection point m₁·m₂ equals",
+    "formula": "m₁·m₂ = −1",
+    "options": [
+      "1",
+      "0",
+      "∞",
+      "−1"
+    ],
+    "answer": 3,
+    "explain": "Orthogonal curves have perpendicular tangents, so product of slopes = −1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c08128ed-05b8-42d7-b2d0-1e9c80541a4e",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Local Maxima & Minima",
+    "prompt": "Critical points of f(x) are where f'(x) is",
+    "formula": "",
+    "options": [
+      "Maximum",
+      "Equal to f(x)",
+      "Positive",
+      "0 or undefined"
+    ],
+    "answer": 3,
+    "explain": "Critical points occur where f'(x) = 0 or f'(x) does not exist.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "07113e10-1e5f-47cc-970b-070d3a7466c5",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Absolute Maxima & Minima",
+    "prompt": "For closed interval [a,b], absolute maximum is the largest among",
+    "formula": "",
+    "options": [
+      "Critical values only",
+      "f at midpoint only",
+      "f(a), f(b), and all critical values",
+      "f(a) and f(b) only"
+    ],
+    "answer": 2,
+    "explain": "On [a,b], compare f at endpoints and all critical points to find absolute maximum.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b8d5d39a-5877-496a-ba0b-18d230f82cf3",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents & Normals",
+    "prompt": "The equation of normal to y=f(x) at (x₁,y₁) is",
+    "formula": "y−y₁ = −1/f'(x₁)·(x−x₁)",
+    "options": [
+      "y−y₁ = −(x−x₁)/f'(x₁)",
+      "y−y₁ = f'(x₁)/(x−x₁)",
+      "y = −x/f'(x₁)",
+      "y−y₁ = f'(x₁)(x−x₁)"
+    ],
+    "answer": 0,
+    "explain": "Normal has slope −1/f'(x₁) and passes through (x₁,y₁), giving the stated equation.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "fa1e6f8f-bb9e-4a51-8d33-7ffd25056ae7",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima & Minima (Applications)",
+    "prompt": "Among all rectangles with fixed perimeter P, maximum area is achieved when it is a",
+    "formula": "",
+    "options": [
+      "Golden rectangle",
+      "Rhombus",
+      "Square",
+      "Rectangle with ratio 1:2"
+    ],
+    "answer": 2,
+    "explain": "By AM-GM inequality, for fixed perimeter, area is maximum when length = breadth (square).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8980979d-759c-42c9-95e8-2ac9e26122ce",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Increasing and Decreasing Functions",
+    "prompt": "Condition for f(x) to be strictly decreasing on (a,b)",
+    "formula": "f'(x) < 0 ∀ x ∈ (a,b)",
+    "options": [
+      "f'(x) < 0 for all x in (a,b)",
+      "f'(x) = 0 for all x in (a,b)",
+      "f'(x) > 0 for all x in (a,b)",
+      "f''(x) < 0 for all x in (a,b)"
+    ],
+    "answer": 0,
+    "explain": "Strictly decreasing ⟺ derivative is negative throughout the interval.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "9102b0fd-900a-4950-bf88-c6297e3ed4b7",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Local Extrema",
+    "prompt": "At a local minimum, the sign of f'(x) changes from",
+    "formula": "",
+    "options": [
+      "negative to positive",
+      "negative to negative",
+      "positive to negative",
+      "positive to positive"
+    ],
+    "answer": 0,
+    "explain": "f' changes – to + as x crosses a local minimum (first derivative test).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "62733ea6-cbc1-43f1-8cb7-81012a2abaa3",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Local Extrema",
+    "prompt": "Second derivative test: f'(c)=0 and f''(c)<0 implies x=c is",
+    "formula": "",
+    "options": [
+      "point of inflection",
+      "saddle point",
+      "local maximum",
+      "local minimum"
+    ],
+    "answer": 2,
+    "explain": "f''(c)<0 means concave down at c, so f has local maximum there.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a057961d-b52e-4bad-84c8-db299c0b914f",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Rolle's Theorem",
+    "prompt": "Rolle's theorem conclusion: there exists c ∈ (a,b) such that",
+    "formula": "f'(c) = 0",
+    "options": [
+      "f'(c) = 0",
+      "f'(c) = f(b)−f(a)",
+      "f(c) = 0",
+      "f''(c) = 0"
+    ],
+    "answer": 0,
+    "explain": "Under Rolle's conditions, at least one c exists where the derivative vanishes.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "31dc7604-6e77-4df2-bb1c-0b3cb6b41b41",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Mean Value Theorems",
+    "prompt": "LMVT condition NOT required for the theorem to apply",
+    "formula": "",
+    "options": [
+      "f'(a) = f'(b)",
+      "f differentiable on (a,b)",
+      "a ≠ b",
+      "f continuous on [a,b]"
+    ],
+    "answer": 0,
+    "explain": "LMVT only needs continuity on [a,b] and differentiability on (a,b); no endpoint derivative equality needed.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "97e0668d-4981-41a4-b949-42d8a6d51229",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Mean Value Theorems",
+    "prompt": "If f is continuous on [a,b] and f(a)·f(b)<0, by which theorem does a root exist?",
+    "formula": "",
+    "options": [
+      "Extreme Value Theorem",
+      "Intermediate Value Theorem",
+      "Rolle's Theorem",
+      "LMVT"
+    ],
+    "answer": 1,
+    "explain": "IVT guarantees a root when a continuous function changes sign on [a,b].",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7fc9b484-daf4-444b-928a-b6e65e546bdc",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima (Optimization)",
+    "prompt": "Among all cylinders with fixed volume V, the surface area is minimum when",
+    "formula": "h = 2r",
+    "options": [
+      "height = diameter",
+      "height = 2·diameter",
+      "height = radius",
+      "height = πr"
+    ],
+    "answer": 0,
+    "explain": "Minimising total surface area of cylinder with fixed V gives h = 2r (height = diameter).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "3e0a1f7e-b823-42c9-92b8-5da7abe059d8",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "The maximum value of sin x + cos x is",
+    "formula": "√2",
+    "options": [
+      "√2/2",
+      "√2",
+      "1",
+      "2"
+    ],
+    "answer": 1,
+    "explain": "sin x + cos x = √2 sin(x+π/4), maximum value is √2.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2c4a831e-81e5-4d35-a5e4-345b01d5d501",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "For f(x)=ax²+bx+c (a>0), minimum value occurs at x=",
+    "formula": "x = −b/(2a)",
+    "options": [
+      "b/a",
+      "−b/(2a)",
+      "b/(2a)",
+      "−b/a"
+    ],
+    "answer": 1,
+    "explain": "Vertex of upward parabola gives minimum at x = −b/(2a).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "25d7ba0f-65bb-4c71-9272-cf139f8365c3",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents and Normals",
+    "prompt": "For the curve y²=4ax, slope of tangent at point (at²,2at) is",
+    "formula": "1/t",
+    "options": [
+      "t/2",
+      "1/t",
+      "t",
+      "2/t"
+    ],
+    "answer": 1,
+    "explain": "Differentiating y²=4ax: dy/dx = 2a/y = 2a/(2at) = 1/t.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "aa0989ef-99b6-43d6-a951-ef0ef5d6cabb",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Local Extrema",
+    "prompt": "If f'(x)>0 on (a,c) and f'(x)<0 on (c,b), then f(c) is",
+    "formula": "",
+    "options": [
+      "local maximum",
+      "local minimum",
+      "point of inflection",
+      "absolute minimum"
+    ],
+    "answer": 0,
+    "explain": "f' changes from + to – at c, confirming local maximum by first derivative test.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "74bf4f5e-e438-4fd7-9103-7c70cf368e6d",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "For f(x)=xˣ (x>0), f'(x)=0 at x=",
+    "formula": "x = 1/e",
+    "options": [
+      "1",
+      "e",
+      "1/e",
+      "e²"
+    ],
+    "answer": 2,
+    "explain": "f(x)=eˣˡⁿˣ, f'=xˣ(1+ln x)=0 ⟹ ln x=−1 ⟹ x=1/e.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c6bff4a4-9108-4ae2-9722-1a0751bd2327",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "The minimum value of f(x)=x+1/x for x>0 is",
+    "formula": "",
+    "options": [
+      "1",
+      "1/2",
+      "0",
+      "2"
+    ],
+    "answer": 3,
+    "explain": "By AM-GM, x+1/x ≥ 2√(x·1/x)=2; equality at x=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "08fddd3b-7667-4093-bd9a-5eb4a9624486",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Approximations",
+    "prompt": "Percentage error in volume of sphere if radius has 1% error is",
+    "formula": "3%",
+    "options": [
+      "1%",
+      "2%",
+      "3%",
+      "6%"
+    ],
+    "answer": 2,
+    "explain": "V=4πr³/3, dV/V=3·dr/r; so percentage error in V = 3×1% = 3%.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4293ee06-2465-4479-b097-97a17554b708",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Concavity and Inflection",
+    "prompt": "If f''(c)=0 and f'''(c)≠0, then x=c is",
+    "formula": "",
+    "options": [
+      "local minimum",
+      "point of inflection",
+      "local maximum",
+      "critical point only"
+    ],
+    "answer": 1,
+    "explain": "f''=0 with f'''≠0 confirms sign change of f'', hence a point of inflection.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "dbbd7c25-431d-4342-ac2f-491b7b26d4e0",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "For f(x) on [a,b], LMVT guarantees c in",
+    "formula": "c ∈ (a,b)",
+    "options": [
+      "[a,b) only",
+      "closed interval [a,b]",
+      "open interval (a,b)",
+      "(a,b] only"
+    ],
+    "answer": 2,
+    "explain": "LMVT states the point c with f'(c)=(f(b)-f(a))/(b-a) lies in the open interval (a,b).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "31e55637-8d2f-48db-a993-97766603dc10",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "f(x)=x³ at x=0: the point is",
+    "formula": "",
+    "options": [
+      "absolute maximum",
+      "local maximum",
+      "point of inflection",
+      "local minimum"
+    ],
+    "answer": 2,
+    "explain": "f''(0)=0 and f'' changes sign at x=0, so it is a point of inflection, not an extremum.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "bb6bd844-c185-46d5-a68b-ae58eddab9c2",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "Among all triangles with fixed perimeter, maximum area is achieved by",
+    "formula": "",
+    "options": [
+      "scalene triangle",
+      "equilateral triangle",
+      "isosceles triangle",
+      "right triangle"
+    ],
+    "answer": 1,
+    "explain": "By AM-GM inequality, equilateral triangle maximises area for a given perimeter.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "8607b5ba-10ee-40fc-ba21-b81cb35a7e38",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "The function f(x)=|x−1| is NOT differentiable at",
+    "formula": "",
+    "options": [
+      "x=1",
+      "x=0",
+      "x=2",
+      "x=−1"
+    ],
+    "answer": 0,
+    "explain": "|x−1| has a sharp corner at x=1, so it is not differentiable there.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4c79fd54-05d3-48dc-909c-f70c9869f8ae",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "Slope of tangent to x²+y²=r² at point (x₁,y₁) is",
+    "formula": "m = −x₁/y₁",
+    "options": [
+      "y₁/x₁",
+      "−y₁/x₁",
+      "x₁/y₁",
+      "−x₁/y₁"
+    ],
+    "answer": 3,
+    "explain": "Implicit differentiation: 2x+2y·dy/dx=0 ⟹ dy/dx=−x/y.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "4b6416f3-376c-41ee-b310-426f0c65c4d8",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "The minimum sum of a positive number and its reciprocal is",
+    "formula": "x+1/x ≥ 2",
+    "options": [
+      "2",
+      "1",
+      "√2",
+      "4"
+    ],
+    "answer": 0,
+    "explain": "By AM-GM, x+1/x ≥ 2√(x·1/x)=2, equality at x=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "a332a7a9-3e2e-4e58-9a26-bb945ccb6e56",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "If f'(c)=0 and f' does NOT change sign at c, then c is",
+    "formula": "",
+    "options": [
+      "neither max nor min",
+      "local minimum",
+      "absolute extremum",
+      "local maximum"
+    ],
+    "answer": 0,
+    "explain": "No sign change in f' at c means c is not an extremum; it may be an inflection point.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "658a01b9-1abb-48be-95e4-a5c4d0a2d693",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "Among rectangles inscribed in ellipse x²/a²+y²/b²=1, max area is",
+    "formula": "A_max = 2ab",
+    "options": [
+      "ab/2",
+      "ab",
+      "4ab",
+      "2ab"
+    ],
+    "answer": 3,
+    "explain": "Maximum area of rectangle inscribed in ellipse is 2ab, achieved at (a/√2, b/√2).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "30ebdb0f-756d-4f29-b2ca-467e4f29fd41",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "If f is differentiable and f'(x)>0 everywhere, f is",
+    "formula": "",
+    "options": [
+      "constant",
+      "periodic",
+      "strictly increasing",
+      "strictly decreasing"
+    ],
+    "answer": 2,
+    "explain": "f'(x)>0 for all x implies f is strictly increasing on its entire domain.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "aa0327df-ad4e-40c9-b51e-772fd8538a47",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "At a point of inflection where f''=0, which additional condition confirms it?",
+    "formula": "",
+    "options": [
+      "f'=0",
+      "f is continuous",
+      "f'' changes sign",
+      "f'''=0"
+    ],
+    "answer": 2,
+    "explain": "f'' must change sign at the point; f''=0 alone is necessary but not sufficient.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "9f5d1af5-7d1b-44f0-9b72-fe669004bf67",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "Rolle's theorem is a special case of LMVT when",
+    "formula": "f(a)=f(b)",
+    "options": [
+      "f(a)=f(b)",
+      "f(a)=0",
+      "f'(a)=0",
+      "f is constant"
+    ],
+    "answer": 0,
+    "explain": "When f(a)=f(b), LMVT gives f'(c)=0, which is exactly Rolle's conclusion.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "83256900-dfa2-472d-bd7b-ad7bd065f488",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "The maximum product of two positive numbers with fixed sum S is",
+    "formula": "P_max = S²/4",
+    "options": [
+      "S²/2",
+      "S²",
+      "S/4",
+      "S²/4"
+    ],
+    "answer": 3,
+    "explain": "By AM-GM, if x+y=S then xy≤(S/2)²=S²/4, equality when x=y=S/2.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "98318abb-0b31-4722-9c12-30184db10d9d",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "Rate of change of area of circle w.r.t. radius r is",
+    "formula": "dA/dr = 2πr",
+    "options": [
+      "πr²",
+      "2πr",
+      "4πr",
+      "πr"
+    ],
+    "answer": 1,
+    "explain": "A=πr², so dA/dr=2πr; a direct application of derivatives as rate of change.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main"
+  },
+  {
+    "id": "2ad5fa94-5c19-4ff9-9ad8-de3ca671095f",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "For f(x)=x⁴, the second derivative test at x=0 gives",
+    "formula": "f''(0)=0",
+    "options": [
+      "Local minimum",
+      "Inflection",
+      "Local maximum",
+      "Test inconclusive"
+    ],
+    "answer": 3,
+    "explain": "f''(0)=0 means the second derivative test fails; higher-order test needed (it is actually a minimum).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c90b1af9-b31b-4f90-b250-7f4413a6a9fc",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "The function f(x)=x−sin x is monotonically",
+    "formula": "f'(x)=1−cos x ≥ 0",
+    "options": [
+      "Non-monotonic",
+      "Decreasing on ℝ",
+      "Increasing on ℝ",
+      "Periodic only"
+    ],
+    "answer": 2,
+    "explain": "f'(x)=1−cos x ≥ 0 for all x, zero only at isolated points, so f is strictly increasing.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0f708572-0e34-4f26-81df-4b0f0ced4177",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "For f(x) with f'(c)=0, the point c is NOT an extremum if",
+    "formula": "",
+    "options": [
+      "f''(c)<0",
+      "f' doesn't change sign at c",
+      "f(c) is defined",
+      "f''(c)>0"
+    ],
+    "answer": 1,
+    "explain": "If f' does not change sign around c, c is an inflection point, not an extremum (e.g., x³ at 0).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "e77b83bd-def1-46ca-8cba-46986b35e556",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "Rolle's theorem CANNOT be applied to f(x)=|x| on [−1,1] because",
+    "formula": "",
+    "options": [
+      "f(−1)≠f(1)",
+      "f not continuous",
+      "f has no root",
+      "f not differentiable at 0"
+    ],
+    "answer": 3,
+    "explain": "|x| is not differentiable at x=0, violating the differentiability condition of Rolle's theorem.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "7563aeec-ffd7-4515-a567-8ed22a62f95c",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Application of Derivatives",
+    "prompt": "For a sphere, if volume V=4πr³/3, relative error dV/V equals",
+    "formula": "dV/V = 3(dr/r)",
+    "options": [
+      "dr/r",
+      "2(dr/r)",
+      "3(dr/r)",
+      "4(dr/r)"
+    ],
+    "answer": 2,
+    "explain": "Taking log: ln V=ln(4π/3)+3 ln r; differentiating: dV/V=3 dr/r.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f1f7a42b-5b32-4f33-9bdd-7545e9133ad5",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Rate of Change",
+    "prompt": "Rate of change of volume of sphere w.r.t. radius r is",
+    "formula": "dV/dr = 4πr²",
+    "options": [
+      "8πr",
+      "4πr³/3",
+      "2πr²",
+      "4πr²"
+    ],
+    "answer": 3,
+    "explain": "V=4πr³/3, so dV/dr=4πr², which equals the surface area.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "d7a451b8-4d7a-4804-b377-b6fe2df6ec4e",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "The maximum value of f(x)=sin x·cos x on ℝ is",
+    "formula": "f = ½sin 2x",
+    "options": [
+      "√2",
+      "1",
+      "√2/2",
+      "1/2"
+    ],
+    "answer": 3,
+    "explain": "sin x·cos x = ½sin2x, maximum of sin2x is 1, so max value = 1/2.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "79b50cc0-fd75-43e3-a7dc-ff9ae311bf3c",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "For f(x)=x/(1+x²), f has a local maximum at x=",
+    "formula": "",
+    "options": [
+      "x = 0",
+      "x = 2",
+      "x = −1",
+      "x = 1"
+    ],
+    "answer": 3,
+    "explain": "f'(x)=(1−x²)/(1+x²)²=0 gives x=±1; f''(1)<0 so local max at x=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "6ed22814-4d59-476d-8d42-87d9cb88edfa",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "If x+y=k (constant, x,y>0), the maximum of xy is",
+    "formula": "k²/4",
+    "options": [
+      "k²",
+      "k²/4",
+      "k²/2",
+      "k/4"
+    ],
+    "answer": 1,
+    "explain": "By AM-GM, xy ≤ ((x+y)/2)²=k²/4, equality when x=y=k/2.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "1820211a-4dd7-422c-bbcc-55ca08d674d0",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "Among all rectangles with fixed area A, perimeter is minimum for",
+    "formula": "",
+    "options": [
+      "A 2:1 rectangle",
+      "Any rectangle equally",
+      "A 3:1 rectangle",
+      "A square"
+    ],
+    "answer": 3,
+    "explain": "For fixed area, perimeter is minimized when length=breadth, i.e., it's a square.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "506f5159-a575-4eda-a798-48e385d3e43f",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Approximation and Errors",
+    "prompt": "The error in computing x³ if error in x is δx is approximately",
+    "formula": "3x²δx",
+    "options": [
+      "x²δx",
+      "3x²δx",
+      "x³δx",
+      "3xδx"
+    ],
+    "answer": 1,
+    "explain": "By differentials, d(x³)=3x²dx, so approximate error is 3x²·δx.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "b3e1e232-722d-49a6-9ad5-c97e063fd3b5",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "For f(x)=e^x−x, the minimum value is",
+    "formula": "",
+    "options": [
+      "1",
+      "e",
+      "0",
+      "−1"
+    ],
+    "answer": 0,
+    "explain": "f'(x)=eˣ−1=0 at x=0; f''(0)=1>0, minimum value f(0)=e⁰−0=1.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "0bb01202-bb73-4256-92bd-ff361d09a116",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Monotonicity",
+    "prompt": "For f(x)=x³−3x²+6x+5, the function is",
+    "formula": "f'(x)=3x²−6x+6=3(x²−2x+2)",
+    "options": [
+      "Has local min only",
+      "Always increasing",
+      "Always decreasing",
+      "Has local max only"
+    ],
+    "answer": 1,
+    "explain": "Discriminant of f'(x) is negative and leading coeff positive, so f'(x)>0 always.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "18e974ce-080e-458f-b63d-c3a903c20e5c",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Concavity and Inflection",
+    "prompt": "At inflection point, if f''(c)=0, what must additionally hold?",
+    "formula": "",
+    "options": [
+      "f(c)=0",
+      "f'' changes sign at c",
+      "f'''(c)=0",
+      "f'(c)=0"
+    ],
+    "answer": 1,
+    "explain": "Inflection requires f'' to change sign at c; f''=0 alone is insufficient.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "f9d7f934-d1be-4bad-b89f-fbf28cab7d2d",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Rate of Change",
+    "prompt": "Rate of increase of volume of cube with side x w.r.t. x is",
+    "formula": "dV/dx = 3x²",
+    "options": [
+      "3x²",
+      "2x²",
+      "x³",
+      "6x"
+    ],
+    "answer": 0,
+    "explain": "V = x³, so dV/dx = 3x².",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "49deec42-c684-4835-8d3e-ad67ac3f77be",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Second Derivative Test",
+    "prompt": "For f(x)=x³, at x=0 the second derivative test gives",
+    "formula": "f''(0)=0",
+    "options": [
+      "Local maximum",
+      "Local minimum",
+      "Inflection point confirmed",
+      "Test inconclusive"
+    ],
+    "answer": 3,
+    "explain": "f''(0)=0 means the second derivative test is inconclusive; need higher derivatives.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "331b947a-f452-43f5-81d5-f277c4db46ae",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "For f(x)=3x⁴−4x³, the local minimum occurs at x=",
+    "formula": "f'(x)=12x³−12x²=12x²(x−1)",
+    "options": [
+      "3",
+      "0",
+      "−1",
+      "1"
+    ],
+    "answer": 3,
+    "explain": "f'=0 at x=0 and x=1; f'' test shows x=1 is local min (f''(1)>0).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "6690a405-90c2-4736-8de5-9fa36dc406db",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Approximations and Errors",
+    "prompt": "If surface area S=4πr², relative error dS/S in terms of dr/r is",
+    "formula": "dS/S = 2 dr/r",
+    "options": [
+      "dr/r",
+      "3 dr/r",
+      "2 dr/r",
+      "4 dr/r"
+    ],
+    "answer": 2,
+    "explain": "Differentiating S=4πr² logarithmically: dS/S = 2·dr/r.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "19fda452-d2bf-4bef-b16a-79b70210945d",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Tangents and Normals",
+    "prompt": "For the curve x²+y²=25, the tangent at (3,4) has equation",
+    "formula": "x·x₁+y·y₁=r²",
+    "options": [
+      "3x+4y=25",
+      "3x−4y=25",
+      "4x+3y=25",
+      "4x−3y=25"
+    ],
+    "answer": 0,
+    "explain": "Tangent to circle at (x₁,y₁): xx₁+yy₁=r², so 3x+4y=25.",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "c01c87fc-dbdf-410a-b137-effbe1be17b2",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Maxima and Minima",
+    "prompt": "f(x)=x/(x²+1) has local maximum at x=",
+    "formula": "f'(x)=(1−x²)/(x²+1)²",
+    "options": [
+      "0",
+      "−1",
+      "2",
+      "1"
+    ],
+    "answer": 3,
+    "explain": "f'=0 at x=±1; f''>0 at x=−1 (min), f''<0 at x=1 (max).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  },
+  {
+    "id": "2752d92f-cd39-4f6b-89ec-c31bf106b768",
+    "subject": "Mathematics",
+    "chapter": "Application of Derivatives",
+    "topic": "Monotonicity",
+    "prompt": "For f(x)=2x³−9x²+12x+4, the function decreases on",
+    "formula": "f'(x)=6x²−18x+12=6(x−1)(x−2)",
+    "options": [
+      "(−∞, 1)",
+      "(0, 1)",
+      "(1, 2)",
+      "(2, ∞)"
+    ],
+    "answer": 2,
+    "explain": "f'<0 between roots x=1 and x=2, so f decreases on (1,2).",
+    "review_status": "quick_recall_reviewed_v1",
+    "syllabus": "JEE Main",
+    "verified": 1
+  }
 ]

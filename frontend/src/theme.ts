@@ -144,6 +144,30 @@ setColorScheme?.(defaultScheme); // the luxury theme is always dark
 
 export const colors = light;
 
+// Rapid Fire is a deliberately isolated game identity. Academic tokens above stay unchanged.
+export const rapidColors = {
+  ...light,
+  surface: "#0B0E18", surfaceSecondary: "#151925", surfaceAlt: "#101421",
+  surfaceTertiary: "#162A37", onSurfaceTertiary: "#65E6D4",
+  surfaceInverse: "#1E335C", brand: "#3370F5", brandPrimary: "#3370F5",
+  brandText: "#65E6D4", brandLine: "#285D62", brandSecondary: "#244EB5",
+  brandTertiary: "#172342", onBrandTertiary: "#A9CAFF",
+  border: "#2B3346", borderStrong: "#465470", divider: "#252E40",
+  muted: "#A5B2CB", mutedSecondary: "#91A0BC", info: "#7BABFF", onInfo: "#101C32",
+  custom_gameBg: "#0B0E18", custom_gameCard: "#141925", custom_gameCardHi: "#1E2639",
+  custom_gameLine: "#2B3346", custom_gameMuted: "#A5B2CB",
+  custom_neonCyan: "#65E6D4", custom_neonViolet: "#B9A1FF", custom_neonMagenta: "#BA91F5",
+  custom_neonAmber: "#F8CF75", custom_amber: "#3370F5", custom_cyan: "#65E6D4",
+  custom_examBitsat: "#F8B76B", custom_examBitsatDeep: "#1F2241", custom_examJee: "#3370F5",
+  custom_examJeeDeep: "#151D3B", custom_examComedkGold: "#F8CF75",
+  custom_reading: "#171C28", custom_onReading: "#F1F5FF", custom_infoSoft: "#1A2B4A",
+  custom_subjectPhysics: "#65E6D4", custom_subjectChemistry: "#8EB6FF", custom_subjectMaths: "#B9A1FF",
+  custom_rarityRare: "#8EB6FF", custom_rarityEpic: "#B9A1FF", custom_rarityLegendary: "#F8CF75",
+  custom_overlay: "rgba(5,8,17,0.88)",
+};
+export const rapidSubjectColor = (s?: string) => s === "Physics" ? rapidColors.custom_subjectPhysics
+  : s === "Chemistry" ? rapidColors.custom_subjectChemistry : rapidColors.custom_subjectMaths;
+
 export const fonts = {
   regular: "Figtree-400",
   medium: "Figtree-500",

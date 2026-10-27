@@ -2,8 +2,9 @@ import React, { useMemo, useState } from "react";
 import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, TextInput, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import { Icon, IconName, Press, T } from "@/src/components/ui";
-import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
+import { useReducedMotion } from "react-native-reanimated";
+import { Icon, IconName, Press, T } from "@/src/rapid/ui";
+import { rapidColors as colors, fonts, foregroundOn, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", Biology: "dna" };
@@ -17,6 +18,7 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
   recent: { subject: string; chapter: string }[]; onPick: (subject: string, chapter: string) => void;
 }) {
   const insets = useSafeAreaInsets();
+  const reduced = useReducedMotion();
   const [q, setQ] = useState("");
   const [tab, setTab] = useState(subject);
   const [lastSubject, setLastSubject] = useState(subject);
@@ -29,12 +31,12 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
   const row = (s: string, c: { name: string; count: number }) => {
     const on = subject === s && chapter === c.name;
     return (
-      <Press key={s + c.name} testID={"rf-chapter-" + slug(c.name)} disabled={!c.count} onPress={() => pick(s, c.name)}
+      <Press key={s + c.name} testID={"rf-chapter-" + slug(c.name)} disabled={c.count < 30} onPress={() => pick(s, c.name)}
         style={{ flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: on ? subjectColor(s) + "26" : colors.custom_gameCardHi, borderWidth: 1, borderColor: on ? subjectColor(s) : "transparent", opacity: c.count ? 1 : 0.4 }}>
         <View style={{ width: 6, height: 28, borderRadius: 3, backgroundColor: subjectColor(s) }} />
         <View style={{ flex: 1 }}>
           <T w="bold" size={15} color={colors.onSurfaceInverse}>{c.name}</T>
-          {query ? <T size={11} color={colors.custom_gameMuted}>{short(s)}</T> : null}
+          {c.count < 30 ? <T testID={`rf-chapter-sparse-${slug(c.name)}`} size={11} color={colors.custom_gameMuted}>Choose Mixed for a full round</T> : query ? <T size={11} color={colors.custom_gameMuted}>{short(s)}</T> : null}
         </View>
         <View style={{ paddingHorizontal: 8, height: 24, borderRadius: 12, justifyContent: "center", backgroundColor: colors.custom_gameBg }}>
           <T w="bold" size={11} color={colors.custom_gameMuted}>{c.count} cards</T>
@@ -45,9 +47,9 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose} statusBarTranslucent>
+    <Modal visible={visible} transparent animationType={reduced ? "none" : "slide"} onRequestClose={onClose} statusBarTranslucent>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
-        <Pressable onPress={onClose} style={{ flex: 1, backgroundColor: colors.custom_gameBg + "B3" }} accessibilityLabel="Close chapter picker" />
+        <Pressable testID="rf-chapter-backdrop" onPress={onClose} style={{ flex: 1, backgroundColor: colors.custom_gameBg + "B3" }} accessibilityLabel="Close chapter picker" />
         <View testID="rf-chapter-sheet" style={{ height: "86%", backgroundColor: colors.custom_gameCard, borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingTop: space.sm, paddingBottom: insets.bottom + space.md, borderTopWidth: 1, borderColor: colors.custom_gameLine }}>
           <View style={{ alignSelf: "center", width: 44, height: 5, borderRadius: 3, backgroundColor: colors.custom_gameLine, marginBottom: space.md }} />
           <View style={{ paddingHorizontal: space.lg, gap: space.md }}>
@@ -58,7 +60,7 @@ export function ChapterSheet({ visible, onClose, subjects, subject, chapter, rec
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm, height: 52, paddingHorizontal: space.md, borderRadius: radius.lg, backgroundColor: colors.custom_gameBg, borderWidth: 1.5, borderColor: q ? colors.custom_neonCyan : colors.custom_gameLine }}>
               <Icon name="magnify" size={22} color={q ? colors.custom_neonCyan : colors.custom_gameMuted} />
               <TextInput testID="rf-chapter-search" value={q} onChangeText={setQ} placeholder="Search chapters…" placeholderTextColor={colors.custom_gameMuted} style={{ flex: 1, color: colors.onSurfaceInverse, fontFamily: fonts.bold, fontSize: 16 }} />
-              {q ? <Press onPress={() => setQ("")} style={{ width: 32, height: 32, alignItems: "center", justifyContent: "center" }}><Icon name="close-circle" size={18} color={colors.custom_gameMuted} /></Press> : null}
+              {q ? <Press testID="rf-chapter-clear-search" accessibilityLabel="Clear chapter search" onPress={() => setQ("")} style={{ width: 44, height: 44, alignItems: "center", justifyContent: "center" }}><Icon name="close-circle" size={18} color={colors.custom_gameMuted} /></Press> : null}
             </View>
             {!query ? (
               <View style={{ flexDirection: "row", gap: 6 }}>
