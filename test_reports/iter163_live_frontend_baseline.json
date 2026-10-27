@@ -1,0 +1,26 @@
+{
+ "label": "LIVE https://jeelive.ai public guest pages + public GETs, 2026-10-27, Chromium (Playwright) from preview-region datacenter (cf-ray ORD). UNTHROTTLED, no network/CPU emulation. NOT global user speed. Low-rate read-only GETs, no login.",
+ "documents": {
+  "html": {"ttfb_ms_curl": [777, 341, 252, 347, 442], "transfer_gz_bytes": 1861, "cache_control": "no-cache, no-store, must-revalidate", "encoding": "gzip"},
+  "main_js": {"path": "/static/js/main.76b8d7a3.js", "raw_bytes": 549590, "gzip_bytes": 169670, "brotli": "NOT served (br request returns identity 549590)", "cache_control": "public, max-age=31536000, immutable"},
+  "main_css": {"path": "/static/css/main.e9500e69.css", "raw_bytes": 342157, "gzip_bytes": 59770, "font_face_rules": 34, "notes": "App.css 144KB + feature CSS all global"},
+  "fonts": {"loaded_home": ["Figtree 400/500/600/700/800", "Roboto Mono 400/500/700"], "woff2_files_home": 8, "woff2_bytes_home": 97840, "discovered_at_ms": 978, "preload": false, "unused_third_party_css": "fonts.googleapis.com Inter:wght@600 render-blocking link, Inter never in document.fonts"},
+  "third_party_scripts": ["assets.emergent.sh/scripts/emergent-main.js", "ap.emergent.sh array.js", "posthog-recorder.js", "surveys.js", "web-vitals-with-attribution.js"]
+ },
+ "pages": {
+  "desktop1920x800 /": {"cold": {"ttfb": 341, "domInteractive": 739, "dcl": 941, "load": 1405, "fcp": 1060, "lcp": 1060, "cls": 0.0, "requests": 20, "transfer_bytes": 337568, "decoded_bytes": 1018866, "long_tasks_ms": [59, 59], "dom_nodes": 302}, "warm": {"ttfb": 173, "fcp": 252, "lcp": 252, "load": 301, "transfer_bytes": 2624}},
+  "desktop1920x800 /login": {"cold": {"ttfb": 347, "fcp": 912, "lcp": 1304, "load": 1280, "cls": 0.144, "cls_source": "simple-footer simple-footer-public (shifts when lazy route chunk 896 mounts)", "requests": 17, "transfer_bytes": 299364}, "warm": {"fcp": 468, "lcp": 760, "cls": 0.144, "transfer_bytes": 7851}},
+  "mobile390x844 /": {"cold": {"ttfb": 252, "fcp": 1004, "lcp": 1004, "load": 1416, "cls": 0.0, "requests": 19, "transfer_bytes": 324278, "long_tasks_ms": [67, 57]}, "warm": {"fcp": 160, "lcp": 160, "load": 225, "transfer_bytes": 2620}},
+  "mobile390x844 /login": {"cold": {"fcp": 828, "lcp": 1268, "cls": 0.373, "cls_note": "0.373 in run 1; 0 in run 2 (intermittent, footer/lazy chunk timing)", "transfer_bytes": 287706}, "warm": {"fcp": 348, "lcp": 464, "cls": 0.373}},
+  "duplicate_requests_live": "none (production build; dev preview duplicates are React.StrictMode only)",
+  "api_waterfall_home": "HTML -> main.js/css (~430ms) -> JS exec -> /api/series/all-india-jee + /api/auth/session start at ~1000ms; total 277-290ms each vs Server-Timing app 11.6ms / 0.6ms => ~270ms edge/network RTT per call"
+ },
+ "public_api_samples": {
+  "/api/health": {"app_dur_ms": 0.5, "ttfb_ms_ok": "137-330", "cloudflare_520_after_30s": "6 of 30 samples"},
+  "/api/series/all-india-jee": {"app_dur_ms": "10.4-11.7", "ttfb_ms_ok": "146-516", "cloudflare_520_after_30s": "1 of 5"},
+  "/api/ready": {"app_dur_ms": "3.1-3.6", "cloudflare_520_after_30s": "1 of 5"},
+  "/api/sets": {"app_dur_ms": "23.9-40.2", "ttfb_ms": "174-528", "cloudflare_520_after_30s": "0 of 6"},
+  "aggregate_live_520": "~9 of ~46 low-rate GETs (~20%) hung exactly 30.1-30.6s then Cloudflare 520, incl. trivial /api/health (no DB, no admission lane). Preview: 0 of 15.",
+  "headers": "API: private, no-store; gzip; Server-Timing app;dur present; cf-cache-status DYNAMIC"
+ }
+}

@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle2, Wifi, Clock3, ShieldCheck, Loader2, FileQuestion, Flag, Save, FileDown } from 'lucide-react';
 import { api, post } from '../lib/api';
+import {rememberStartedAttempt} from '../lib/privateResources';
 import { useAuth } from '../lib/auth';
 import { PageTitle, Badge, Loading, ErrorBox, Field } from '../components/Shared';
 import { MathText } from '../components/QuestionContent';
@@ -57,6 +58,7 @@ export default function SetDetail() {
     try {
       const a = await post('/sets/' + id + '/start', { preview, device_checked: confirmed, start_key: key.current });
       sessionStorage.removeItem('tejas-start-' + id);
+      rememberStartedAttempt(userId,a);
       nav(a.status === 'completed' ? '/results/' + a.id : '/attempts/' + a.id, {state:{returnTo}});
     } catch (e) { setError(e.message); setBusy(false); }
   }

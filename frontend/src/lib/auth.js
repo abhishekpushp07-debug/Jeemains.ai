@@ -1,5 +1,6 @@
 import React,{createContext,useCallback,useContext,useEffect,useMemo,useRef,useState} from 'react';
 import {api,post} from './api';
+import {resetPrivateResources} from './privateResources';
 import {profileDrafts,discardProfileDraft} from './drafts';
 import {AlertDialog,AlertDialogContent,AlertDialogHeader,AlertDialogTitle,AlertDialogDescription,AlertDialogFooter} from '../components/ui/alert-dialog';
 import {Button} from '../components/ui/button';
@@ -8,9 +9,9 @@ export function AuthProvider({children}){
  const [user,commitUser]=useState(null); const [checking,setChecking]=useState(true);
  const [signoutDrafts,setSignoutDrafts]=useState(null); const decision=useRef(null);
  const generation=useRef(0),mounted=useRef(true),bootstrap=useRef(null);
- const setUser=useCallback(next=>{generation.current+=1;bootstrap.current?.abort();commitUser(next);setChecking(false);},[]);
+ const setUser=useCallback(next=>{generation.current+=1;bootstrap.current?.abort();resetPrivateResources(next?.id||null);commitUser(next);setChecking(false);},[]);
  useEffect(()=>{mounted.current=true;const controller=new AbortController();bootstrap.current=controller;const epoch=generation.current;
-  api('/auth/session',{signal:controller.signal}).then(data=>{if(mounted.current&&epoch===generation.current){commitUser(data.user);setChecking(false);}}).catch(()=>{if(mounted.current&&!controller.signal.aborted&&epoch===generation.current){commitUser(null);setChecking(false);}});
+  api('/auth/session',{signal:controller.signal}).then(data=>{if(mounted.current&&epoch===generation.current){resetPrivateResources(data.user?.id||null);commitUser(data.user);setChecking(false);}}).catch(()=>{if(mounted.current&&!controller.signal.aborted&&epoch===generation.current){resetPrivateResources();commitUser(null);setChecking(false);}});
   return()=>{mounted.current=false;controller.abort();};
  },[]);
  const choose=choice=>{const resolve=decision.current;decision.current=null;setSignoutDrafts(null);resolve?.(choice);};
@@ -21,7 +22,7 @@ export function AuthProvider({children}){
   if(choice==='cancel')return false;
   generation.current+=1;bootstrap.current?.abort();await post('/auth/logout');
   if(choice==='discard')profileDrafts(user?.id).forEach(discardProfileDraft);
-  if(mounted.current){commitUser(null);setChecking(false);}return true;
+  if(mounted.current){resetPrivateResources();commitUser(null);setChecking(false);}return true;
  },[user?.id]);
  const value=useMemo(()=>({user,setUser,checking,logout}),[user,setUser,checking,logout]);
  return <AuthContext.Provider value={value}>{children}

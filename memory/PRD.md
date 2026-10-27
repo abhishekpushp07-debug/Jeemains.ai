@@ -1,4 +1,6 @@
 # jeemains.ai (Campus 2 / Witcircle) — PRD
+## Active work — 2026-10-27: User-approved measured performance hardening, tests then LIVE. See memory/CHANGELOG.md for baseline163 and new dated progress; memory/ROADMAP.md for priorities. Prior requirements/history below preserved. No paid infra/data resets authorised; do not claim world-best/500k without evidence.
+
 
 ## Requested student PIN reset COMPLETED — 2026-10-26
 Latestuserrepeatedimmediateresetbeforetheirdeployment. Liveowner-resetroutewasalreadyavailable. Executedexplicitowner-authorisedPOSTonceperenvironmentLIVEjeelive.aiandPREVIEW forexactexistinguser-requestedphone/PIN(privateinputsNOTpersistedhere). BOTHreceiptsok, sameexistingstudentID/phone+exactversionincrementverifiedviaownerGETdirectory;oldstudentcookiesrevoked;no studentlogin/impersonation/newaccount/historydelete;ownercurrentidentityunchangedandonlyoperationalsessionsloggedout. ActualresetCOMPLETEsupersedesallpendingtargetnotes. No redeploy/codechange thisturn. DoNOTrepeatreset or print/storeuserPIN; nextuseractionloginwiththeirchosenPIN. Testsnotneededfornewcode(nochanges), actualoperationalcommitreadbackverifiedbothDBs.

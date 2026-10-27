@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SourceDetailViewer } from './SourceDetailViewer';
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -14,7 +14,7 @@ import {
   ZoomIn,
 } from "lucide-react";
 import { useAuth } from "../lib/auth";
-import { API, post } from "../lib/api";
+import { acquireSourceAsset } from '../lib/privateResources';
 import {
   Dialog,
   DialogContent,
@@ -169,57 +169,29 @@ export function Confirm({
     </Dialog>
   );
 }
-export function SourceImage({ path, alt = "Source region", onError, onLoad, readable = false, testId = 'source' }) {
-  const [failed, setFailed] = useState(false);
-  const [v, setV] = useState(0);
-  const [zoom, setZoom] = useState(false);
-  const [refreshed,setRefreshed]=useState(false);
-  useEffect(()=>{setFailed(false);setRefreshed(false);setV(0);},[path]);
-  return (
-    <div className="source-image">
-      {failed ? (
-        <ErrorBox
-          error="This source image did not load. Do not guess missing content."
-          retry={() => {
-            setFailed(false);
-            setRefreshed(false);
-            setV(v + 1);
-          }}
-        />
-      ) : readable ? <SourceDetailViewer key={path} inline testId={testId} src={API + path + (path.includes('?') ? '&' : '?') + 'v=' + v} alt={alt} onExpand={()=>setZoom(true)} onLoad={()=>onLoad?.()} onError={async()=>{onError?.();if(!refreshed){setRefreshed(true);try{await post('/auth/refresh');setV(n=>n+1);return;}catch{}}setFailed(true)}}/> : (
-        <Button
-          className="image-button"
-          data-testid={testId+'-zoom'}
-          aria-label="Enlarge source image"
-          onClick={() => setZoom(true)}
-        >
-          <img
-            src={API + path + (path.includes("?") ? "&" : "?") + "v=" + v}
-            alt={alt}
-            loading={readable ? 'eager' : 'lazy'}
-            onLoad={onLoad}
-            onError={async () => {
-              onError?.();
-              if(!refreshed){setRefreshed(true);try{await post('/auth/refresh');setV(n=>n+1);return;}catch{}}
-              setFailed(true);
-            }}
-          />
-          <span>
-            <ZoomIn size={14} /> Enlarge
-          </span>
-        </Button>
-      )}
-      <Dialog open={zoom} onOpenChange={setZoom}>
-        <DialogContent className="image-dialog">
-          <DialogTitle>Source detail</DialogTitle>
-          <DialogDescription>
-            Zoom in and drag to read the original notation. No formula transcription is substituted.
-          </DialogDescription>
-          <SourceDetailViewer src={API + path + (path.includes('?') ? '&' : '?') + 'v=' + v} alt={alt} />
-        </DialogContent>
-      </Dialog>
-    </div>
-  );
+export function SourceImage({ path, alt = 'Source region', onError, onLoad, readable = false, testId = 'source' }) {
+  const {user}=useAuth();
+  const node=useRef(null),callbacks=useRef({onError,onLoad});callbacks.current={onError,onLoad};
+  const [failed,setFailed]=useState(false),[v,setV]=useState(0),[zoom,setZoom]=useState(false),[src,setSrc]=useState(null),[visible,setVisible]=useState(readable);
+  useEffect(()=>{
+    if(readable){setVisible(true);return;}
+    const observer=new IntersectionObserver(list=>{if(list.some(entry=>entry.isIntersecting)){setVisible(true);observer.disconnect();}},{rootMargin:'200px'});
+    if(node.current)observer.observe(node.current);return()=>observer.disconnect();
+  },[readable,path]);
+  useEffect(()=>{
+    setSrc(null);setFailed(false);setZoom(false);
+    if(!visible||!user?.id)return;
+    let stopped=false,asset;
+    acquireSourceAsset(path,{reload:v>0}).then(value=>{asset=value;if(stopped)value.release();else setSrc(value.url);}).catch(error=>{if(!stopped&&error.name!=='AbortError'){setFailed(true);callbacks.current.onError?.();}});
+    return()=>{stopped=true;asset?.release();};
+  },[path,user?.id,visible,v]);
+  function imageFailed(){setFailed(true);callbacks.current.onError?.();}
+  return <div className="source-image" ref={node}>
+    {failed?<ErrorBox error="This source image did not load. Do not guess missing content." retry={()=>setV(n=>n+1)}/>:!src?<Skeleton className="h-32 w-full" data-testid={testId+'-loading'}/>:readable?
+      <SourceDetailViewer key={path} inline testId={testId} src={src} alt={alt} onExpand={()=>setZoom(true)} onLoad={()=>callbacks.current.onLoad?.()} onError={imageFailed}/>:
+      <Button className="image-button" data-testid={testId+'-zoom'} aria-label="Enlarge source image" onClick={()=>setZoom(true)}><img src={src} alt={alt} loading="lazy" onLoad={()=>callbacks.current.onLoad?.()} onError={imageFailed}/><span><ZoomIn size={14}/> Enlarge</span></Button>}
+    <Dialog open={zoom} onOpenChange={setZoom}><DialogContent className="image-dialog"><DialogTitle>Source detail</DialogTitle><DialogDescription>Zoom in and drag to read the original notation. No formula transcription is substituted.</DialogDescription>{src&&<SourceDetailViewer src={src} alt={alt}/>}</DialogContent></Dialog>
+  </div>;
 }
 export const CheckLine = ({ children }) => (
   <span className="check-line">

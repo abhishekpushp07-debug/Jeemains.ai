@@ -1,10 +1,15 @@
 """Private platform object storage. All authorization is performed by API callers."""
 
-import os, threading, time
+import os, threading, time, hashlib
 import requests
 from tejas.cache import ByteCache
 
-_source_cache = ByteCache(32 * 1024 * 1024)
+_source_cache = ByteCache(64 * 1024 * 1024)
+_source_locks = [threading.Lock() for _ in range(32)]
+
+
+def source_lock(path):
+    return _source_locks[int.from_bytes(hashlib.sha256(path.encode()).digest()[:4], 'big') % len(_source_locks)]
 
 BASE = (
     os.environ.get("INTEGRATION_PROXY_URL") or ""
@@ -71,11 +76,18 @@ def request(method, path, data=None, content_type=None):
 
 
 def put_object(path, data, content_type="application/pdf"):
-    return request("PUT", path, data, content_type).json()["path"]
+    with source_lock(path):
+        result = request('PUT', path, data, content_type).json()['path']
+        _source_cache.remove(path)
+        return result
 
 
 def get_object(path):
     cached = _source_cache.get(path)
     if cached is not None:
         return cached
-    return _source_cache.put(path, request("GET", path).content)
+    with source_lock(path):
+        cached = _source_cache.get(path)
+        if cached is not None:
+            return cached
+        return _source_cache.put(path, request('GET', path).content)

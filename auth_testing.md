@@ -1,5 +1,12 @@
 # Authentication testing contract
 
+## Performance auth/privacy verification — 2026-10-27
+Currentperfphase163baseline→164changes: no backendauth/claims/cookie/ownercredentialchanges. Frontend fetchWithSession sharesone401refreshpromise acrossJSON/assets/downloads; staggered401responsesfromsameoldgenerationretryoncewithoutnewrefresh. Neverrefreshon403/429/503/image-decodeerror. AbortError preserved. Every write contract/ACK unchanged.
+Private source cache is MEMORY-ONLY percurrentuser/sessionepoch,12MiB cachedblob budget plusactivelydisplayedleases,4inflightbounded; no localStorage/CacheStorage/HTTPpubliccache. SourceassetHTTPheadersremainprivate,no-store; solutions alwaysserverreleased/owned oninitialfetch. Logout/setUser/PINchange/switch/failed401clear and revokeURLs/abortinflight; lateoldscopecompletioncannotcache/render undernewuser. TestA→Bswitchduringimagefetchandpendingprefetch, oldgenerationrelease, cacheevictionrefcounts, oversizedactiveentry, manualretry, zoomlease, rowunmount, allrequests401staggeredthenonecookie-refresh. No cachedAimageforB evenifpathguessed; no pre-release solution prefetch. Nextquestiononlymax2images and4queuedrequests; Save-Data skips.
+StartresponsehandoffoneuseRAM5secondTTL andsameuser+attemptID only; no privatebodyhistory/localStorage; fullreload/newvisit stillGETcanonical. Verify changingPlayerid whilecomponentreused loadsnewattempt, draftsanswersclockpreserved, lostACK/idempotence same. Existingclockserverauthorityremains. FixturesisolatedactualJWT/endtoend, no customerwrites/actualuserPIN.
+
+
+
 ## Owner reset QA161 — 2026-10-26
 User approved owner-only reset for a real existing student; NEVER use that actual number or requested PIN in tests/files/screenshots. Only random isolated identities/PINs. Current live target has NOT yet been reset; this is implementation QA, operational reset follows publication.
 - Auth matrix for POST /api/auth/owner/student-pin-reset: authenticated owner allowed, reviewer/student403, anonymous401, revokedowner/currentrolechange403, cross-origin denied. Owner's cookies/identity must stay owner; no studenttoken/SetCookie minted.

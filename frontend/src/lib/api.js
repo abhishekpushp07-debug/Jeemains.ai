@@ -1,5 +1,6 @@
 export const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 let refreshing;
+let refreshVersion = 0;
 let studioActive = 0;
 const studioWaiters = [];
 async function fetchStudioRead(url, options) {
@@ -12,6 +13,21 @@ async function fetchStudioRead(url, options) {
     else studioActive -= 1;
   }
 }
+export function refreshSession() {
+  if (!refreshing) refreshing = fetch(API + '/auth/refresh', {method:'POST', credentials:'include'}).then(response => { if(response.ok)refreshVersion+=1;return response; }).finally(() => { refreshing = null; });
+  return refreshing;
+}
+export async function fetchWithSession(path, options = {}, retry = true) {
+  const request = path.startsWith('/studio/') && (!options.method || options.method === 'GET') ? fetchStudioRead : fetch;
+  const initialRefresh = refreshVersion;
+  let response = await request(API + path, {...options, credentials:'include'});
+  if (response.status === 401 && retry && !path.startsWith('/auth/')) {
+    const refreshed = initialRefresh === refreshVersion ? await refreshSession() : {ok:true};
+    if (refreshed.ok) response = await request(API + path, {...options, credentials:'include'});
+  }
+  if (response.status === 401 && !path.startsWith('/auth/')) window.dispatchEvent(new Event('tejas-session-lost'));
+  return response;
+}
 export async function api(path, options = {}, retry = true) {
   const headers =
     options.body instanceof FormData
@@ -19,27 +35,15 @@ export async function api(path, options = {}, retry = true) {
       : { "Content-Type": "application/json" };
   let res;
   try {
-    const request = path.startsWith('/studio/') && (!options.method || options.method === 'GET') ? fetchStudioRead : fetch;
-    res = await request(API + path, {
+    res = await fetchWithSession(path, {
       ...options,
       headers: { ...headers, ...options.headers },
-      credentials: "include",
-    });
-  } catch {
+    }, retry);
+  } catch (error) {
+    if (error.name === 'AbortError') throw error;
     throw new Error(
       "Connection interrupted. Your last saved work is safe. Please try again.",
     );
-  }
-  if (res.status === 401 && retry && !path.startsWith("/auth/")) {
-    if (!refreshing)
-      refreshing = fetch(API + "/auth/refresh", {
-        method: "POST",
-        credentials: "include",
-      }).finally(() => {
-        refreshing = null;
-      });
-    const refresh = await refreshing;
-    if (refresh.ok) return api(path, options, false);
   }
   if (!res.ok) {
     let data;
@@ -76,11 +80,7 @@ export const post = (path, data = {}) =>
 export const put = (path, data) =>
   api(path, { method: "PUT", body: JSON.stringify(data) });
 export async function downloadFile(path, filename) {
-  let res = await fetch(API + path, { credentials: "include" });
-  if (res.status === 401) {
-    await post("/auth/refresh");
-    res = await fetch(API + path, { credentials: "include" });
-  }
+  const res = await fetchWithSession(path);
   if (!res.ok)
     throw new Error(
       "The file is unavailable. Retry generation, or sign in again.",

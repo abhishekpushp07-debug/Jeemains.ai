@@ -65,6 +65,19 @@ const webpackConfig = {
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);
       }
+      if (!isDevServer) {
+        const HtmlWebpackPlugin = require('html-webpack-plugin');
+        webpackConfig.plugins.push({apply(compiler) {
+          compiler.hooks.compilation.tap('CriticalFontPreload', compilation => {
+            HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tap('CriticalFontPreload', data => {
+              const prefix = compilation.outputOptions.publicPath === 'auto' ? '/' : compilation.outputOptions.publicPath;
+              const fonts = Object.keys(compilation.assets).filter(name => /figtree-latin-(400|700)-normal.*\.woff2$/.test(name));
+              data.html = data.html.replace('</head>', fonts.map(name => `<link rel="preload" as="font" type="font/woff2" crossorigin href="${prefix}${name}">`).join('') + '</head>');
+              return data;
+            });
+          });
+        }});
+      }
       return webpackConfig;
     },
   },

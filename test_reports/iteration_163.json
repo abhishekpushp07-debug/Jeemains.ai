@@ -1,0 +1,96 @@
+{
+ "summary": "ITERATION 163 = PERFORMANCE BASELINE ONLY (no app code/deps/env changes). (A) LIVE https://jeelive.ai guest home/login, cold+warm, Chromium desktop 1920x800 and mobile 390x844, UNTHROTTLED (no network/CPU emulation) from preview-region datacenter (cf-ray ORD) - not global user speed. Plus ~46 low-rate public GETs. (B) Isolated preview backend: disposable DB on a command-monitored Motor client, real auth, synthetic runtime owner + PIN student, PYQ bundle imported with ORIGINAL LOCAL PDFs (disk bytes, NOT object-storage network). Full student PYQ flow measured for Jan 24 2026 S1 (18.39MB PDF, 81 question crops, 201 unique refs) and Apr 08 2026 S2 (13.93MB, 76 crops, 199 refs). (C) Browser waterfall of SetDetail->preflight->start->Player against an isolated bridge. Bench ran 3 times and was stable (Jan cold preflight 4665-4672ms every run). All isolated DBs were dropped and checked; creds file deleted; 0 storage PUTs; 0 real DB handles left; no customer DB writes; no live logins.",
+ "methodology": {
+  "live": "Playwright PerformanceObserver (paint/LCP/CLS/longtask) + Resource Timing + CDP Performance metrics. Cold = new context + Network.clearBrowserCache; warm = same context reload. curl for headers/encoding. Low-rate GETs only.",
+  "isolated_backend": "bench_iter163_perf_baseline.py: in-process ASGI, so ms = server-side app time on this 2-CPU cgroup pod (single process); no internet RTT. Counters per request: storage GETs/bytes, fitz PDF opens, crop renders (low-res vs full), Mongo commands by name + ms. Cold = process caches cleared (source/crop/derivative/validation/pack). Mongo WiredTiger cache is NOT cleared. Warm = n=3-7 repeats, p50/p95.",
+  "profilers": "/tmp micro-profiles (read-only, local PDFs) splitting render cost: page parse vs raster vs PNG encode; PNG vs JPEG q80 vs grayscale PNG size.",
+  "storage_caveat": "LOCAL disk read is about 2ms per 18MB. Real object storage adds a full 9-18MB download for every source-cache miss (not measured here)."
+ },
+ "baseline_metrics_key": {
+  "live_home_cold_desktop": "TTFB 341, FCP/LCP 1060, load 1405ms, 20 req, 338KB transfer / 1.02MB decoded, long tasks 59+59ms",
+  "live_home_cold_mobile": "TTFB 252, FCP/LCP 1004, load 1416ms, 324KB",
+  "live_home_warm": "desktop LCP 252ms, mobile LCP 160ms, about 2.6KB transfer (immutable static cache works)",
+  "live_login": "cold LCP 1304 desktop / 1268 mobile. CLS 0.144 desktop (simple-footer shift) and 0.373 mobile in 1 of 2 runs",
+  "live_bundle": "main.js 549,590 raw / 169,670 gzip; main.css 342,157 raw / 59,770 gzip; no brotli; 8 woff2 = 97.8KB, discovered at about 978ms, not preloaded",
+  "live_api": "Server-Timing app: health 0.5ms, series 10-12ms, sets 24-40ms, ready 3ms. Total about 150-520ms, so edge/network RTT dominates. About 9 of 46 GETs hung 30.1-30.6s and then returned Cloudflare 520.",
+  "isolated_home": "warm p50: /api/sets 6.0, series 3.2, auth/me 1.6, pyq catalogue 5.0, my/sets 6.9, attempts 1.9 ms (2-5 DB commands each). 10 concurrent catalogue reads: 28ms p50.",
+  "isolated_pyq_flow_jan": "set detail 4ms | preflight COLD 4667ms (201 low-res renders = 4.64s CPU, 1 storage GET 18.39MB, 6 DB) | preflight warm 7.7ms | start 48ms (53KB, 10 DB) | Player refetch 8ms (same 53KB) | first image after preflight 127ms / 437KB (still renders) | second 210ms / 648KB | remaining 78 images: p50 164ms, p95 228ms, 12.4s total, 58.3MB PNG | image warm 2.8ms | save p50 6.1ms (4 DB) | submit 34ms -> 202 (22 DB) | results ready on 1st poll 24ms / 350KB | solution image 186ms first, 4ms repeat",
+  "isolated_pyq_flow_apr": "preflight COLD 9126ms (199 low-res renders = 9.11s) | warm 6.9ms | start 24ms | first image 70ms / 94KB | 74 images p50 93ms, 7.0s, 7.6MB | save 5.4ms | submit 30ms | results 22ms",
+  "event_loop_probe": "During a cold Jan preflight, unrelated /api/series p50 went from 3ms to 573ms (p95 729) and /api/health from 0.4 to 10.9ms p50 (51 p95). Only 8 probe rounds completed in 4.7s.",
+  "concurrency10": "10 cold distinct Jan images: wall 1.07s, 8x200 + 2x503 (asset lane limit 8), 7 full-PDF source fetches = 128.7MB for one 18MB file. 10 concurrent COLD preflights: all about 4.7-5.0s (coalesced, 1 render pass).",
+  "memory": "bench RSS 167MB -> 659MB after one Jan paper flow -> 979MB after the concurrency step (cgroup 8GB, 2 CPU, uvicorn --workers 1). Caches: source PDF 32MiB (holds about 2 large papers; 30 papers are 9.1-18.4MB), core crop 32MiB + derivative 48MiB storing the SAME PNG bytes, pack 32MiB (375KB used), validation 8KB."
+ },
+ "ranked_bottlenecks_with_proof": [
+  {"rank": 1, "class": "infra / edge / replica (LIVE)", "issue": "Intermittent 30s hang then Cloudflare 520 on about 20% of low-rate live GETs, including trivial /api/health (0.5ms handler, no DB, bypasses the admission gate) and /api/ready. Preview had 0 of 15. The hang is exactly 30.1-30.6s, which matches an edge/ingress origin timeout to an unhealthy upstream, not app CPU. The earlier live Playwright run also timed out (30s networkidle).", "action": "Deployer infra RCA: replica health, readiness probe, a dead or stale pod in the LB pool, cold-start or scale-to-zero. Highest user impact: any login/start/save/image can stall 30s."},
+  {"rank": 2, "class": "frontend network / payload", "issue": "Scanned-source question images are huge. Jan paper: 81 question PNGs = 58.3MB (avg 720KB, 1601px RGB), versus Apr 7.6MB. For 10 Jan crops: PNG 5.61MB, JPEG q80 1.04MB (5.4x smaller), grayscale PNG about 3.1x smaller (lossless). Assets are sent with Cache-Control private, no-store, so the browser re-downloads on every revisit: in the browser test, next x3 / prev x3 downloaded every image twice (4.59MB for 4 questions). There is no next-question prefetch.", "action": "Grayscale PNG (lossless) or WebP/JPEG after a legibility check. Use private, max-age, immutable for attempt-scoped immutable crops (ownership is still checked server-side; private cache only). Prefetch the next question's assets."},
+  {"rank": 3, "class": "CPU (cold derivatives)", "issue": "Cold preflight costs 4.67s (Jan) / 9.13s (Apr). 99% of that is validate_source_crops rendering about 200 low-res refs, with each render re-parsing the page content. Profiler: per-page DisplayList reuse gives 4.62s -> 0.85s (Jan) and 9.10s -> 0.09s (Apr). This work does NOT warm the full-res question images: the first image after preflight is still a fresh render (103-186ms).", "action": "Cache a DisplayList per (source sha, page) in validation and render_crop. Optionally warm the first N full-res question crops during or after preflight. Re-run the bench."},
+  {"rank": 4, "class": "CPU / GIL event-loop starvation", "issue": "PyMuPDF rendering in the threadpool starves the asyncio loop on the 2-CPU, single-worker pod: unrelated reads go from 3ms to about 570ms during one cold preflight.", "action": "Move rendering to a process pool or worker (or reduce render cost via #3). Bound render concurrency below the asset lane limit."},
+  {"rank": 5, "class": "CPU (full-res render path)", "issue": "Per distinct image (Jan) render is 100-190ms. 15 crops: 1.94s now -> 0.95s with DisplayList reuse. PNG encode is about 40% of the time. Every miss hashes the 18MB PDF twice (derivatives integrity check + crop_png key; about 10ms each) and re-opens fitz per crop. The PNG is cached twice (derivatives 48MiB + tejas_core 32MiB). The 32MiB core cache cannot hold one Jan paper (58MB).", "action": "Memoize the verified sha per cached source object. Use a single crop cache sized to real usage. Reuse open documents / DisplayLists."},
+  {"rank": 6, "class": "PDF network / concurrency", "issue": "get_object has no single-flight. 10 concurrent cold images gave 7 full 18MB fetches (128.7MB). With real object storage that means 7 parallel multi-MB downloads. The 32MiB source cache holds only about 2 large papers, so students spread across >2 papers trigger full-PDF refetches on every crop miss (derived from limits, not measured with 3+ papers). The asset lane limit 8 returned 503 x2; on the frontend a 503 img triggers onError -> refresh POST -> one retry -> error box.", "action": "Single-flight per source path. Size the source cache by bytes x papers in use, or store pre-rendered crops."},
+  {"rank": 7, "class": "frontend bundle / render", "issue": "One global 342KB CSS (App.css 144KB plus all feature CSS), 550KB JS. Gzip only, no brotli. Fonts discovered late (about 980ms) with no preload. Render-blocking fonts.googleapis.com Inter 600 stylesheet even though Inter is never used. 5 third-party scripts (Emergent + PostHog recorder/surveys/web-vitals). /login CLS 0.144-0.373 from the footer shifting when lazy chunk 896 mounts.", "action": "Preload the 2-3 critical woff2 files and drop unused weights (Roboto Mono 600, Figtree 800 if unused). Remove the Inter link. Enable brotli at the edge if possible. Code-split route CSS. Reserve min-height for lazy route content."},
+  {"rank": 8, "class": "frontend duplicate fetch", "issue": "Player re-GETs /api/attempts/{id} (53KB) immediately after /start already returned the same view. Dev-preview duplicates of session/my-sets/saved/question-reports come from React.StrictMode only; live production showed 0 duplicates.", "action": "Pass the start payload via navigation state and skip the first load."},
+  {"rank": 9, "class": "frontend auth retry", "issue": "N images getting 401 cause N parallel /auth/refresh POSTs (SourceImage calls post('/auth/refresh') directly; the api.js 'refreshing' dedupe is skipped for /auth/ paths). The retry is bounded (one per image) and there is NO loop. An idle Player made 0 requests in 12s.", "action": "Share one refresh promise for image errors."},
+  {"rank": 10, "class": "DB", "issue": "No bottleneck at this data size: all explained queries are IXSCAN with no COLLSCAN, and DB time is 0.3-5ms per request. Caveat: the copy has only 30 sets and 2 attempts. The pyq catalogue state aggregation chose index set_id_1_mode_1_competition_ranked_1_summary.score_-1 instead of user_id_1_set_id_1_mode_1, so keys examined would grow with set popularity in production. The catalogue sorts in memory (30 docs).", "action": "Run a read-only explain on production-size data, or hint user_id_1_set_id_1_mode_1. Do not change prod indexes without approval."}
+ ],
+ "backend_issues": {
+  "critical": [
+   {"endpoint": "LIVE /api/* (incl. /api/health)", "issue": "About 20% of low-rate GETs hang 30s, then Cloudflare 520. Preview is unaffected.", "priority": "CRITICAL"},
+   {"endpoint": "POST /api/sets/{id}/preflight (pyq, cold)", "issue": "4.7-9.1s of CPU re-parsing pages for about 200 low-res crops. It starves the event loop and does not warm the real images.", "priority": "HIGH"}
+  ],
+  "minor": [
+   {"endpoint": "GET /api/attempts/{id}/questions/{qid}/asset/*", "issue": "Up to 900KB PNG per crop; no-store; 100-300ms cold render; 2x sha256 of the full PDF per miss; double cache; get_object not single-flight; 503 at 9+ concurrent cold."},
+   {"endpoint": "GET /api/attempts/{id}/results", "issue": "350KB uncompressed payload (23ms). Gzip in prod. Grading completed inline, so the first poll returned 200 (no 202 observed in isolation)."}
+  ]
+ },
+ "frontend_issues": {
+  "ui_bugs": [],
+  "integration_issues": [
+   {"flow": "SetDetail start -> Player", "issue": "Duplicate GET /api/attempts/{id} (53KB) right after start", "affected_selectors": ["[data-testid='set-preflight-start-button']"]},
+   {"flow": "Player question navigation", "issue": "Images re-downloaded on every revisit (no-store); no next-question prefetch", "affected_selectors": ["[data-testid='player-next']", "[data-testid='player-previous']"]},
+   {"flow": "Image 401", "issue": "One /auth/refresh POST per failing image (parallel), not single-flight", "affected_selectors": []}
+  ],
+  "design_issues": [
+   {"screen": "/login", "issues": ["CLS 0.144 desktop / 0.373 mobile (intermittent) from simple-footer shifting when the lazy chunk mounts"]},
+   {"screen": "Player Jan 24 S1 Q2", "issues": ["Second question crop shows only a 'MATICS' page header fragment (q_refs content artifact, not perf); content team should review"]}
+  ]
+ },
+ "test_report_links": [
+  "/app/backend/tests/bench_iter163_perf_baseline.py",
+  "/app/backend/tests/iso_harness_perf163.py",
+  "/app/backend/tests/iso_bridge_perf163.py",
+  "/app/backend/tests/compare_perf163.py",
+  "/app/test_reports/iter163_perf_baseline.json",
+  "/app/test_reports/iter163_live_frontend_baseline.json"
+ ],
+ "action_items": [
+  "Ask the deployer for an infra RCA of the live 30s / Cloudflare 520 hangs (about 20%, includes /api/health). This is the top item.",
+  "Cut question-image bytes (grayscale or WebP/JPEG after a legibility check) and make immutable attempt assets privately cacheable. Add next-question prefetch.",
+  "Use a per-page DisplayList cache in validate_source_crops and render_crop. Warm the first full-res crops. Move rendering off the event-loop process or into a process pool.",
+  "Single-flight get_object. Dedupe the crop caches. Memoize the verified sha. Revisit source cache sizing.",
+  "Frontend: remove the unused Inter Google Fonts link, preload critical fonts, trim weights, fix the /login footer CLS, reuse the start payload in Player, single-flight the image refresh.",
+  "AFTER fixes, re-run the exact harness: PERF_OUT=/app/test_reports/iterNNN_perf_after.json python -m pytest bench_iter163_perf_baseline.py -p no:cacheprovider -q -n0 -s, then python compare_perf163.py <before> <after>."
+ ],
+ "critical_code_review_comments": [
+  "derivatives.render_crop: get_object + sha256(18MB) + crop_png (another sha256 of 18MB for the key) + validate_pdf/fitz.open per crop. The page is re-parsed for every crop.",
+  "validate_source_crops renders at 0.3 scale. Its output is discarded and keyed differently from the delivered images, so cold full-res images remain.",
+  "tejas_core._crop_cache (32MiB) and derivatives._cache (48MiB) duplicate the same bytes.",
+  "SourceImage onError calls post('/auth/refresh') per image, bypassing the shared refresh promise in api.js.",
+  "Asset responses use 'private, no-store'. Server ownership checks already enforce access, so private max-age is safe for immutable crops."
+ ],
+ "updated_files": [
+  "/app/backend/tests/iso_harness_perf163.py",
+  "/app/backend/tests/bench_iter163_perf_baseline.py",
+  "/app/backend/tests/iso_bridge_perf163.py",
+  "/app/backend/tests/compare_perf163.py",
+  "/app/test_reports/iter163_perf_baseline.json",
+  "/app/test_reports/iter163_live_frontend_baseline.json",
+  "/app/test_reports/iteration_163.json"
+ ],
+ "success_rate": {"backend": "100% (3/3 bench tests pass; baseline captured)", "frontend": "100% of planned live measurements captured"},
+ "test_credentials": "No real/customer/owner credentials used. Synthetic owner + PIN students were generated at runtime inside disposable DBs tejas_isolated_perf163_*, which were dropped (asserted). /tmp/perf163_creds.json was deleted.",
+ "seed_data_creation": "Only in disposable isolated DBs (PYQ import from the local bundle). All dropped.",
+ "retest_needed": true,
+ "should_main_agent_self_test": true,
+ "context_for_next_testing_agent": "AFTER run: cd /app/backend/tests && PERF_OUT=/app/test_reports/iterNNN_perf_after.json python -m pytest bench_iter163_perf_baseline.py -p no:cacheprovider -q -n0 -s (about 80s, foreground), then python compare_perf163.py /app/test_reports/iter163_perf_baseline.json <after>. The harness only patches tejas_storage.request (local PDFs) and keeps the real get_object cache. If the fix renames caches (tejas_storage._source_cache, tejas_core._crop_cache, derivatives._cache/_validation_cache, packs._cache), update reset_process_caches() and tejas_core.validate_pdf/_render_crop_png counters. Browser waterfall: python iso_bridge_perf163.py (127.0.0.1:8797, /__test/counters); proxy **/api/** with httpx + a SimpleCookie jar; stop with pkill -INT -f iso_bridge_perf163.py. For live: repeat the Playwright cold/warm script (unthrottled) and the curl 520 sampling.",
+ "rca of the issue": "The largest delays by class: (1) LIVE infra/edge, 30s 520 hangs; (2) frontend network, multi-MB scanned PNGs with no-store; (3) CPU, cold derivative rendering that re-parses pages, about 200 times per preflight, and starves the event loop. DB and home APIs are not bottlenecks (under 10ms server). Object-storage network for full-PDF fetches on cache misses is likely significant in prod but was not measured (local disk boundary)."
+}

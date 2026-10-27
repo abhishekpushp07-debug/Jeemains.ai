@@ -107,7 +107,7 @@ function Shell() {
         Skip to content
       </a>
       {!player && <Header />}
-      <main id="main">
+      <main id="main" style={!player?{minHeight:'calc(100svh - 72px)'}:undefined}>
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Landing />} />

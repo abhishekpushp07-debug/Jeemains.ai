@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { api, post, put } from "../../lib/api";
+import {takeStartedAttempt} from '../../lib/privateResources';
 const postpone = (state, error) => {
   state.current.failures = Math.min(6, state.current.failures + 1);
   state.current.after = Date.now() + Math.max(error?.retryAfterMs || 0, Math.min(30000, 1000 * 2 ** state.current.failures) + Math.random() * 1500);
@@ -69,7 +70,7 @@ export function useAttempt(id, user) {
     if (loading.current || Date.now() < retryState.current.after) return;
     loading.current = true;
     try {
-      const d = await api("/attempts/" + id);
+      const d = takeStartedAttempt(user.id,id) || await api('/attempts/' + id);
       syncClock(d.server_now);
       data.current = d;
       setAttempt(d);
@@ -96,9 +97,9 @@ export function useAttempt(id, user) {
     } finally {
       loading.current = false;
     }
-  }, [id, storage, persist, openResult]);
+  }, [id, user.id, storage, persist, openResult]);
   useEffect(() => {
-    load();
+    if(data.current?.id!==id)load();
   }, [load]);
   const flush = useCallback(async () => {
     if (

@@ -259,28 +259,43 @@ def score_attempt(attempt):
     return score(attempt)
 
 
-def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _document=None):
+def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _document=None, _display_lists=None):
     doc = _document if _document is not None else validate_pdf(data, reviewed_large_pages=reviewed_large_pages)
-    p = ref["page"] - 1
-    if p < 0 or p >= len(doc):
-        raise ValueError("Source page is out of range.")
-    rect = fitz.Rect(ref["rect"])
-    if rect.is_empty or not doc[p].rect.contains(rect):
-        raise ValueError("Source region is outside the page.")
-    if reviewed_large_pages:
-        scale = min(scale, 1600 / rect.width, 2400 / rect.height)
-    pix = doc[p].get_pixmap(matrix=fitz.Matrix(scale, scale), clip=rect, alpha=False)
-    if ref.get('omit_rects'):
-        pixels = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n).copy()
-        for coordinates in ref['omit_rects']:
-            omitted = fitz.Rect(coordinates)
-            if omitted.is_empty or not rect.contains(omitted):
-                raise ValueError('Omitted source region must be within its crop.')
-            left, top = max(0, math.floor(omitted.x0 * scale) - pix.x), max(0, math.floor(omitted.y0 * scale) - pix.y)
-            right, bottom = math.ceil(omitted.x1 * scale) - pix.x, math.ceil(omitted.y1 * scale) - pix.y
-            pixels[top:bottom, left:right] = 255
-        pix = fitz.Pixmap(fitz.csRGB, pix.width, pix.height, pixels.tobytes(), False)
-    return pix.tobytes('png')
+    try:
+        p = ref['page'] - 1
+        if p < 0 or p >= len(doc):
+            raise ValueError('Source page is out of range.')
+        page = doc[p]
+        rect = fitz.Rect(ref['rect'])
+        if rect.is_empty or not page.rect.contains(rect):
+            raise ValueError('Source region is outside the page.')
+        if reviewed_large_pages:
+            scale = min(scale, 1600 / rect.width, 2400 / rect.height)
+        if _display_lists is not None:
+            if p not in _display_lists:
+                _display_lists[p] = page.get_displaylist()
+                if len(_display_lists) > 2:
+                    _display_lists.pop(next(iter(_display_lists)))
+            pix = _display_lists[p].get_pixmap(matrix=fitz.Matrix(scale, scale), clip=rect, alpha=False)
+        else:
+            pix = page.get_pixmap(matrix=fitz.Matrix(scale, scale), clip=rect, alpha=False)
+        pixels = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n)
+        if ref.get('omit_rects'):
+            pixels = pixels.copy()
+            for coordinates in ref['omit_rects']:
+                omitted = fitz.Rect(coordinates)
+                if omitted.is_empty or not rect.contains(omitted):
+                    raise ValueError('Omitted source region must be within its crop.')
+                left, top = max(0, math.floor(omitted.x0 * scale) - pix.x), max(0, math.floor(omitted.y0 * scale) - pix.y)
+                right, bottom = math.ceil(omitted.x1 * scale) - pix.x, math.ceil(omitted.y1 * scale) - pix.y
+                pixels[top:bottom, left:right] = 255
+            pix = fitz.Pixmap(fitz.csRGB, pix.width, pix.height, pixels.tobytes(), False)
+        if pix.n == 3 and np.array_equal(pixels[:, :, 0], pixels[:, :, 1]) and np.array_equal(pixels[:, :, 0], pixels[:, :, 2]):
+            pix = fitz.Pixmap(fitz.csGRAY, pix.width, pix.height, pixels[:, :, 0].tobytes(), False)
+        return pix.tobytes('png')
+    finally:
+        if _document is None:
+            doc.close()
 
 
 from tejas.cache import ByteCache

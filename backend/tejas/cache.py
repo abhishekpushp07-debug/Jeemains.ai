@@ -30,3 +30,11 @@ class ByteCache:
                 _, v = self.data.popitem(last=False)
                 self.size -= len(v)
         return value
+
+    def remove(self, key):
+        with self.lock:
+            value = self.data.pop(key, None)
+            if value is not None:
+                self.size -= len(value)
+
+

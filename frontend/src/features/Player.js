@@ -24,6 +24,7 @@ import {QuestionReport, QuestionReportsProvider} from '../components/QuestionRep
 import { useLocation, useNavigate } from 'react-router-dom';
 import {Button} from '../components/ui/button';
 import {Input} from '../components/ui/input';
+import {prefetchSourceAssets} from '../lib/privateResources';
 
 export default function Player() {
   const { id } = useParams();
@@ -61,6 +62,11 @@ export default function Player() {
   const qs = !a ? [] : bonusRule ? a.questions.filter((x) => !!x.bonus === bonusOpen) : a.questions;
   const q = qs[index] || qs[0];
   const questionId = q?.id;
+  const nextQuestion=qs[index+1];
+  useEffect(()=>{
+    if(!a||a.status!=='active'||!nextQuestion||!online)return;
+    prefetchSourceAssets(Array.from({length:Math.min(2,nextQuestion.asset_count||0)},(_,i)=>`/attempts/${id}/questions/${nextQuestion.id}/asset/question/${i}`));
+  },[id,questionId,nextQuestion?.id,a?.status,online]);
   useEffect(() => {
     if(!a)return;
     try { setIndex(Math.max(0,Math.min(qs.length-1,Number(sessionStorage.getItem(`test-question-${id}-${bonusOpen}`))||0))); }
