@@ -259,16 +259,42 @@ def score_attempt(attempt):
     return score(attempt)
 
 
+def _crop_geometry(doc, ref):
+    p = ref['page'] - 1
+    if p < 0 or p >= len(doc):
+        raise ValueError('Source page is out of range.')
+    page = doc[p]
+    rect = fitz.Rect(ref['rect'])
+    if rect.is_empty or not page.rect.contains(rect):
+        raise ValueError('Source region is outside the page.')
+    for coordinates in ref.get('omit_rects', []):
+        omitted = fitz.Rect(coordinates)
+        if omitted.is_empty or not rect.contains(omitted):
+            raise ValueError('Omitted source region must be within its crop.')
+    return page, rect
+
+
+def validate_crop_pages(doc, refs):
+    matrix = fitz.Matrix(.3, .3)
+    last_page = None
+    for ref in sorted(refs, key=lambda item: item['page']):
+        page, rect = _crop_geometry(doc, ref)
+        if (rect * matrix).irect.is_empty:
+            raise ValueError('Source region has no renderable pixels.')
+        if page.number != last_page:
+            pix = page.get_pixmap(matrix=matrix, alpha=False)
+            if not pix.width or not pix.height:
+                raise ValueError('Source page could not render.')
+            last_page = page.number
+            del pix
+
+
 def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _document=None, _display_lists=None):
     doc = _document if _document is not None else validate_pdf(data, reviewed_large_pages=reviewed_large_pages)
     try:
-        p = ref['page'] - 1
-        if p < 0 or p >= len(doc):
-            raise ValueError('Source page is out of range.')
-        page = doc[p]
-        rect = fitz.Rect(ref['rect'])
-        if rect.is_empty or not page.rect.contains(rect):
-            raise ValueError('Source region is outside the page.')
+        page, rect = _crop_geometry(doc, ref)
+        p = page.number
+        optimize_png = reviewed_large_pages and scale >= 1
         if reviewed_large_pages:
             scale = min(scale, 1600 / rect.width, 2400 / rect.height)
         if _display_lists is not None:
@@ -284,15 +310,13 @@ def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _documen
             pixels = pixels.copy()
             for coordinates in ref['omit_rects']:
                 omitted = fitz.Rect(coordinates)
-                if omitted.is_empty or not rect.contains(omitted):
-                    raise ValueError('Omitted source region must be within its crop.')
                 left, top = max(0, math.floor(omitted.x0 * scale) - pix.x), max(0, math.floor(omitted.y0 * scale) - pix.y)
                 right, bottom = math.ceil(omitted.x1 * scale) - pix.x, math.ceil(omitted.y1 * scale) - pix.y
                 pixels[top:bottom, left:right] = 255
             pix = fitz.Pixmap(fitz.csRGB, pix.width, pix.height, pixels.tobytes(), False)
         if pix.n == 3 and np.array_equal(pixels[:, :, 0], pixels[:, :, 1]) and np.array_equal(pixels[:, :, 0], pixels[:, :, 2]):
             pix = fitz.Pixmap(fitz.csGRAY, pix.width, pix.height, pixels[:, :, 0].tobytes(), False)
-        return pix.tobytes('png')
+        return pix.pil_tobytes(format='PNG', compress_level=6) if optimize_png else pix.tobytes('png')
     finally:
         if _document is None:
             doc.close()

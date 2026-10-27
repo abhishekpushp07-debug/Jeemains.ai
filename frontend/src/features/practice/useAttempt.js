@@ -22,6 +22,7 @@ export function useAttempt(id, user) {
     drafts = useRef({}),
     running = useRef(false),
     loading = useRef(false),
+    loadController = useRef(null),
     retryState = useRef({ failures: 0, after: 0 }),
     deadlineRetry = useRef({ failures: 0, after: 0 }),
     anchor = useRef({ server: 0, mono: 0 }),
@@ -69,8 +70,11 @@ export function useAttempt(id, user) {
   const load = useCallback(async () => {
     if (loading.current || Date.now() < retryState.current.after) return;
     loading.current = true;
+    const controller = new AbortController();
+    loadController.current = controller;
     try {
-      const d = takeStartedAttempt(user.id,id) || await api('/attempts/' + id);
+      const d = takeStartedAttempt(user.id,id) || await api('/attempts/' + id, {signal:controller.signal});
+      if (controller.signal.aborted) return;
       syncClock(d.server_now);
       data.current = d;
       setAttempt(d);
@@ -92,15 +96,17 @@ export function useAttempt(id, user) {
       retryState.current = { failures: 0, after: 0 };
       if (d.status === "completed") openResult();
     } catch (e) {
+      if (controller.signal.aborted) return;
       postpone(retryState, e);
       setError(e.message);
     } finally {
-      loading.current = false;
+      if (loadController.current === controller) loading.current = false;
     }
   }, [id, user.id, storage, persist, openResult]);
   useEffect(() => {
     if(data.current?.id!==id)load();
-  }, [load]);
+    return () => { loadController.current?.abort(); loading.current = false; };
+  }, [load, id]);
   const flush = useCallback(async () => {
     if (
       running.current ||

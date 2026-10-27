@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
+  useParams,
   Navigate,
 } from "react-router-dom";
 import { Toaster } from "./components/ui/sonner";
@@ -91,6 +92,11 @@ class Boundary extends React.Component {
     );
   }
 }
+function PlayerRoute() {
+  const {id} = useParams();
+  const {user} = useAuth();
+  return <Player key={`${user.id}:${id}`} />;
+}
 function Shell() {
   const loc = useLocation();
   const player = loc.pathname.startsWith("/attempts/");
@@ -139,7 +145,7 @@ function Shell() {
               path="/attempts/:id"
               element={
                 <Protected>
-                  <Player />
+                  <PlayerRoute />
                 </Protected>
               }
             />

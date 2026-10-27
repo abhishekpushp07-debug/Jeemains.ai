@@ -21,7 +21,7 @@ def render_crop(source, ref, scale=2):
             raise CanonicalIntegrityError('Frozen image integrity check failed')
         return raw
     reviewed = source.get('source_collection') == 'jee-pyq-written' and bool(source.get('sha256'))
-    identity = json.dumps({'source': source.get('sha256') or source['path'], 'ref': ref, 'scale': scale, 'reviewed_large_pages': reviewed, 'render': 3}, sort_keys=True, separators=(',', ':'))
+    identity = json.dumps({'source': source.get('sha256') or source['path'], 'ref': ref, 'scale': scale, 'reviewed_large_pages': reviewed, 'render': 4}, sort_keys=True, separators=(',', ':'))
     key = sha256(identity.encode()).hexdigest()
     found = _cache.get(key)
     if found is not None:
@@ -42,11 +42,11 @@ _validation_locks = [Lock() for _ in range(32)]
 
 def validate_source_crops(source, refs):
     from tejas_storage import get_object
-    from tejas_core import validate_pdf, _render_crop_png
+    from tejas_core import validate_pdf, validate_crop_pages
     from .canonical import CanonicalIntegrityError
     reviewed = source.get('source_collection') == 'jee-pyq-written' and bool(source.get('sha256'))
     unique = {json.dumps(ref, sort_keys=True, separators=(',', ':')): ref for ref in refs}
-    identity = json.dumps({'source': source.get('sha256') or source['path'], 'refs': sorted(unique), 'reviewed': reviewed, 'validation': 1}, sort_keys=True)
+    identity = json.dumps({'source': source.get('sha256') or source['path'], 'refs': sorted(unique), 'reviewed': reviewed, 'validation': 2}, sort_keys=True)
     key = sha256(identity.encode()).hexdigest()
     cacheable = bool(source.get('sha256'))
     with _validation_locks[int(key[:8], 16) % len(_validation_locks)]:
@@ -56,12 +56,7 @@ def validate_source_crops(source, refs):
         if source.get('sha256') and sha256(raw).hexdigest() != source['sha256']:
             raise CanonicalIntegrityError('Source PDF failed its recorded integrity check.')
         with validate_pdf(raw, reviewed_large_pages=reviewed) as doc:
-            display_lists = {}
-            try:
-                for ref in sorted(unique.values(), key=lambda item: item['page']):
-                    _render_crop_png(raw, ref, .3, reviewed_large_pages=reviewed, _document=doc, _display_lists=display_lists)
-            finally:
-                display_lists.clear()
+            validate_crop_pages(doc, unique.values())
         if cacheable:
             _validation_cache.put(key, bytes.fromhex(key))
 

@@ -1,0 +1,38 @@
+{
+ "summary": "Narrow read-only profiling on the original local PDFs, using test-only scripts in /tmp. No DB, network or app changes. ROOT CAUSE: fz_run_display_list takes 85% (Jan) to 99% (Apr) of cold validation time. MuPDF decodes and downscales the page images again for every clip. A DisplayList stores only the drawing operations, not the decoded images, so reusing it saves almost nothing (building the lists took only 9ms and 5ms in total). Prototype: render one whole-page pixmap per page at 0.3, then cut each crop out with integer slicing. This is 3.5x faster on Jan (4736 -> 1360ms) and 26x faster on Apr (9200 -> 357ms), and uses less memory. However, the slices are NOT pixel-identical to the clip renders, and the differences are inside the crops, not only at the edges. The validation output is thrown away, so a whole-page render can still serve as the decodability check, as long as every per-ref geometry and omit check stays in place.",
+ "diagnostics": {
+  "Jan24S1": {"refs": 201, "pages_used": 26, "page_pt": "2479x3508, scanned, up to 27 images per page", "current_ms": 4736, "phase_ms": {"displaylist_build": 8.9, "clip_raster_fz_run_display_list": 4021, "png_encode_output_unused": 641, "gray_check": 22.6}, "peak_tracemalloc_MB": 51.1, "wholepage_ms": 1360, "wholepage_phase_ms": {"page_raster": 1064, "slice": 11}, "wholepage_peak_MB": 20.7, "max_page_pix": "744x1053 (within 1200x1200)", "pixel_match": "0 of 201 identical; all 201 differ inside the crop (max abs diff up to 182); shapes and origins match"},
+  "Apr08S2": {"refs": 199, "pages_used": 25, "page_pt": "595x842, at most 2 images per page", "current_ms": 9200, "phase_ms": {"displaylist_build": 5.4, "clip_raster": 9116, "png_encode": 49.5}, "peak_MB": 3.0, "wholepage_ms": 357, "wholepage_peak_MB": 1.1, "max_page_pix": "179x253", "pixel_match": "0 of 199 identical; 7 differ only at the edge, 192 differ inside the crop (sampled max abs diff 54-78)"},
+  "sha256_ms": "7-10",
+  "validate_pdf_ms": "1.6-2.4",
+  "interpretation": "Apr pages are small, but every 0.3 clip makes MuPDF decode the full-resolution embedded image again (~47ms per clip), and nothing is reused between clips. The differences inside the crops most likely come from image resampling and anti-aliasing changing with the clip origin. Whole-page slicing must therefore NOT replace the full-resolution delivery renders; use it only for the low-res validation, whose output is discarded."
+ },
+ "wholepage_validation_equivalence": "Still needed, unchanged: the sha256 check, the page-range check, the rect non-empty and inside page.rect check, and the omit_rects-inside-crop check. These are pure geometry and must run for EVERY ref, including an invalid last one; the prototype ran page.rect.contains before rendering. Decodability: a full-page render draws everything on the page, including every image that any ref touches. That makes it stricter: it could fail on a corrupt image that no ref uses. MuPDF also often only warns on decode errors, in both paths. Not verified with a corrupted-image fixture yet; a test is needed.",
+ "encoding_12_fullres_crops_scale2": {
+  "Jan6": {"mupdf_png": "3.69MB", "pil_c1": "3.42MB / 229ms", "pil_c6": "2.97MB / 594ms (-19%)", "pil_opt": "2.94MB / 2317ms", "webp_ll_m0": "3.44MB / 569ms", "webp_ll_m4": "2.19MB / 2747ms"},
+  "Apr6": {"mupdf_png": "547KB", "pil_c1": "598KB / 31ms", "pil_c6": "541KB / 64ms", "pil_opt": "536KB / 248ms", "webp_ll_m0": "513KB / 35ms", "webp_ll_m4": "437KB / 137ms"},
+  "all_rgb_exact": true,
+  "note": "The mupdf CPU figure includes the render; the others are encode-only. Recommendation: if payload size matters, switch to Pillow PNG compress_level=6. It keeps the PNG format, is ~19% smaller on scans and costs modest CPU. Do not use optimize=True. WebP would need Accept negotiation plus a PNG fallback; not implemented."
+ },
+ "useAttempt_route_switch_race": {
+  "status": "UNREPRODUCED. No browser or React test was run within the time budget. This is a code-review risk only, NOT a verified bug.",
+  "evidence": "The /attempts/:id route renders the same <Player/> element, so navigating from A to B reuses the same hook instance. load() (useAttempt.js:69-100) has no id or staleness guard. A late response for A runs data.current=d and setAttempt(d), so A's data would show in B's view. Also, loading.current is still true from A, so B's load returns early.",
+  "minimal_fix": "In App.js, key Player by user.id+id, for example a small wrapper that uses useParams and renders <Player key={`${user.id}:${id}`}/>. A's hook instance then unmounts on navigation. Optionally, also guard setState after await with a requestId or mounted ref so late callbacks are dropped."
+ },
+ "next_minimal_implementation": [
+  "In validate_source_crops only: render ONE full-page pixmap per page at 0.3 (alpha=False, keep at most 1-2 cached). Keep every per-ref geometry and omit check. Skip the PNG encode and gray check because the output is unused. Expected cold time: ~1.4s (Jan) and ~0.36s (Apr).",
+  "Keep the delivery _render_crop_png (scale 2) on the clip path, because whole-page slices are not pixel-identical.",
+  "Gray conversion was useful for 0 of 400 crops; it costs only ~20ms, so removing it is optional.",
+  "Add a test with a corrupted embedded image on a ref page to confirm both paths reject it the same way.",
+  "Key Player by user.id+id."
+ ],
+ "runtime_commands": ["cd /tmp && python iter165_prof.py", "cd /tmp && python iter165_encode.py"],
+ "test_report_links": ["/tmp/iter165_prof.py", "/tmp/iter165_encode.py", "/tmp/iter165_prof.json", "/tmp/iter165_encode.json"],
+ "backend_issues": {"critical": [], "minor": [{"endpoint": "validate_source_crops", "issue": "DisplayList reuse is ineffective; clip rasterisation dominates the cold preflight"}]},
+ "frontend_issues": {"ui_bugs": [], "integration_issues": [{"flow": "route switch from attempt A to B", "issue": "Unreproduced stale-response risk in useAttempt.load", "affected_selectors": []}], "design_issues": []},
+ "updated_files": ["/app/test_reports/iteration_164.json", "/app/test_reports/iteration_165.json"],
+ "success_rate": {"backend": "diagnostic only", "frontend": "not tested (code review only)"},
+ "retest_needed": true,
+ "should_main_agent_self_test": true,
+ "context_for_next_testing_agent": "No app code was changed. The harness blocked copying artifacts into /app, so the scripts and JSON are in /tmp only. After main implements whole-page validation, rerun /tmp/iter165_prof.py, test_iter164_pixel_fidelity.py and a corrupt-image fixture test."
+}

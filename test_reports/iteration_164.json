@@ -1,0 +1,16 @@
+{
+ "summary": "RECONSTRUCTED after the fact by the iter165 agent from EXISTING raw iter164 artifacts only (no reruns). The previous agent timed out before writing a summary. Scope of the previous forced summary: isolated preview pod, in-process ASGI, synthetic users, original PDFs from local disk. It did NOT use the customer DB and did NOT run live.",
+ "evidence": {
+  "pytest/iter164_pixel.xml": "12 tests, 0 failures/errors/skips, 119.2s",
+  "pytest/iter164_pyq141.xml": "25 tests, 0 failures, 125.3s",
+  "pytest/iter164_load145.xml": "5 tests, 0 failures, 39.0s",
+  "iter164_browser_prod.json": "prod build served via request interception; desktop cold FCP 248ms, CLS 0",
+  "iter164_browser_faults.json": "401 -> exactly one refresh + retry: pass; 503 shows retryable source error without refresh: pass",
+  "iter164_perf_after.json": "cold preflight unchanged at ~4.7s (Jan24S1) and ~9.1s (Apr08S2); grayscale conversion useful for 0 of 400 crops"
+ },
+ "backend_issues": {"critical": [], "minor": [{"endpoint": "validate_source_crops cold path", "issue": "Reusing the per-page DisplayList did not make the cold path any faster"}]},
+ "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+ "success_rate": {"backend": "100% correctness (per XML)", "frontend": "pass (per raw JSON)"},
+ "retest_needed": true,
+ "context_for_next_testing_agent": "See iteration_165.json for why the cold path did not change."
+}
