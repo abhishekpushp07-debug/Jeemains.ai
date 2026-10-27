@@ -1,5 +1,42 @@
 # JEELIVE.AI Native App — PRD
 
+## Latest priority — API fetching speed + private Redis (2026-10-27)
+User prioritized API speed/Redis before native size work; chose app-private Redis
+and asked us to choose the technical setup. Implemented and measured; no
+"world fastest" or APK-size guarantee.
+
+- Private supervised UNIX-socket Redis,0700,no TCP/persistence,32MBLRU limit.
+  Only public RF catalogue/card-page/selection metadata; NO auth/private academic
+  responses/wallets/results. Mongo and canonical remain authoritative.
+- Warm30-card selection changed from reading all2383 fullPhysicsdocs to cached
+  selectionmetadata + indexed live30-card read, with retired/duplicate safeguards.
+- Same benchmark: selection p50 **17.586→1.718ms (~10.2x)**; external publicRF
+  catalogue **82.562→68.878ms**, card page **73.652→62.174ms** (~16%median gain).
+  Cataloguep95 worsened280.234→324.782ms; internet/cold variability is not hidden.
+- Pure ASGI auth guard preserves ownerbinding; HTTP/2 canonical pool/45skeepalive,
+  original-image gzip bypass, boundedJSONcompression, timing/cacheheaders,
+  explicit configured CORSorigins. No auth/writePOSTauto-retries.
+- Shared appin-flight reads, accountreset cancellation, bounded64-entry/2MiB JSON
+  accounting, oneprefetchlane, Home5→2speculativecalls. Publiccataloguefocus
+  reusesfresh data while wallet/privatequeries revalidate. Nativecanonical
+  transport and encryptedquestion-imagecache remain unchanged; no newfrontenddeps.
+- Mainphone-sizecheck: onecatalogue+oneprofileGET atinitialRFmount; catalogue
+  remainedone acrossshop/historynavigation; livewallet re-fetched. ActualQA
+  game250→252Coinreward/result/shopverified. Fixturesremovedafterward.
+- Finalbackend25passed/1data-dependentskip; clientcacheunits/TSC/lintpassed;
+  trusted/foreignCORSchecks andRedis-outagefail-open passed. Protectedbaseline
+  profiles/wallets/awards/NEET unchanged. See `memory/API_SPEED_REDIS.md`,
+  `test_reports/api_speed_{before,after}.json`, iterations46/47.
+- Architecture additions: `backend/{metadata_cache,redis_runtime,performance,
+  cors_config}.py`, `redis_runtime.json`, supervisor template;
+  `frontend/src/resourceCache.ts`. Private service must be provisioned again if
+  runtime is recreated; backend safely falls back when Redis is unavailable.
+- P0 remaining: physicalAndroidAPI/render/cache measurements; canonical502/503/
+  first-fetch bottlenecks need upstreamtimings/logs, not stale privatecaching.
+- P1: actualAPK/AAB measurement, under20MBtarget remainsunverified. Phase2/3
+  game/content expansion remains separately approved future scope, not built now.
+
+
 ## Current release — Rapid Fire portrait refresh (2026-10-27)
 This section supersedes historical Rapid Fire/auth descriptions below. Approved
 scope is the FULL `/app/plan/plan.md` Phase 1, not a cosmetic-only preview.

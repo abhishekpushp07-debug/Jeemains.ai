@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { api, rf } from "@/src/api/client";
-import { prefetch, useCached } from "@/src/useCached";
+import { cancelPrefetch, prefetch, useCached } from "@/src/useCached";
 import { Card, Icon, Notice, Press, T } from "@/src/components/ui";
 import { SeriesBanner, Series } from "@/src/components/SeriesBanner";
 import { ExamTile, TileKind } from "@/src/components/ExamTile";
@@ -32,20 +32,16 @@ export default function Home() {
   const series = useCached<Series>("series", (signal) => api("/series/all-india-jee", { signal }));
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
   const current = progress.data?.items?.[0];
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     if (!user) return;
-    // Warm the next likely screens so they open instantly.
+    // One ordered background lane; don't flood canonical with five speculative
+    // requests while the first screen is still loading. Navigation promotes demand.
     const t = setTimeout(() => {
-      for (const slug of ["jee-main", "bitsat"]) {
-        const path = `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind: "chapters", subject: "Physics", q: "", page: "1" })}`;
-        prefetch(`u.${user.id}.${path}`, () => api(path));
-      }
-      prefetch("rf.catalog", () => rf("/catalog", user.id));
-      prefetch(`u.${user.id}.pyq.jee-main`, getPyqCatalogue);
-      prefetch(`u.${user.id}.streak`, () => api("/series/all-india-jee/streak"));
-    }, 400);
-    return () => clearTimeout(t);
-  }, [user]);
+      prefetch("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", user.id));
+      prefetch(`u.${user.id}.pyq.jee-main`, signal => getPyqCatalogue(signal));
+    }, 700);
+    return () => { clearTimeout(t); cancelPrefetch(`u.${user.id}.`); };
+  }, [user]));
   const bottom = usesNativeTabs ? insets.bottom : 0;
 
   return (

@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.responses import JSONResponse
+from starlette.datastructures import Headers, MutableHeaders
 from jl_transport import canonical_request
 
 load_dotenv()
@@ -79,21 +80,37 @@ def make_access_router(db):
     return router
 
 
-def install_access_guard(app, db):
-    @app.middleware('http')
-    async def guard(request: Request, call_next):
-        path = request.url.path.rstrip('/')
-        if path.startswith('/api/rf/') and await db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
-            return JSONResponse({'detail': 'Rapid Fire is refreshing its question bank. Please retry shortly.'}, status_code=503, headers={'Retry-After': '15'})
+class RFAccessGuard:
+    """Same authorization, pure ASGI: no streaming/task wrapper around every response."""
+    def __init__(self, app, db):
+        self.app, self.db = app, db
+
+    async def __call__(self, scope, receive, send):
+        if scope['type'] != 'http':
+            return await self.app(scope, receive, send)
+        path = scope.get('path', '').rstrip('/')
+        if not path.startswith('/api/rf/'):
+            return await self.app(scope, receive, send)
+        if await self.db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
+            response = JSONResponse({'detail': 'Rapid Fire is refreshing its question bank. Please retry shortly.'}, status_code=503, headers={'Retry-After': '15', 'Cache-Control': 'no-store'})
+            return await response(scope, receive, send)
         public = path in ('/api/rf/catalog', '/api/rf/cards', '/api/rf/access')
-        if path.startswith('/api/rf/') and not public and request.method != 'OPTIONS':
+        if not public and scope['method'] != 'OPTIONS':
             try:
-                grant = await verified_grant(db, request.headers.get('authorization', '').removeprefix('Bearer '))
+                grant = await verified_grant(self.db, Headers(scope=scope).get('authorization', '').removeprefix('Bearer '))
             except HTTPException as exc:
-                return JSONResponse({'detail': exc.detail}, status_code=exc.status_code, headers={'Cache-Control': 'no-store'})
-            # Replace, never trust, all user supplied RF identity headers.
-            request.scope['headers'] = [(k, v) for k, v in request.scope['headers'] if k.lower() != b'x-rf-user'] + [(b'x-rf-user', grant['uid'].encode())]
-        response = await call_next(request)
-        if path.startswith('/api/rf/') and not public:
-            response.headers['Cache-Control'] = 'no-store'
-        return response
+                response = JSONResponse({'detail': exc.detail}, status_code=exc.status_code, headers={'Cache-Control': 'no-store'})
+                return await response(scope, receive, send)
+            scope = {**scope, 'headers': [(k, v) for k, v in scope['headers'] if k.lower() != b'x-rf-user'] + [(b'x-rf-user', grant['uid'].encode())]}
+
+        async def private_send(message):
+            # /access issues a token and is uncached too, despite not requiring a grant.
+            if message['type'] == 'http.response.start' and path not in ('/api/rf/catalog', '/api/rf/cards'):
+                MutableHeaders(scope=message)['Cache-Control'] = 'no-store'
+            await send(message)
+
+        await self.app(scope, receive, private_send)
+
+
+def install_access_guard(app, db):
+    app.add_middleware(RFAccessGuard, db=db)

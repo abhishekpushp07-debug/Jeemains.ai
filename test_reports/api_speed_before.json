@@ -1,0 +1,538 @@
+{
+  "label": "before",
+  "timestamp_utc": "2026-10-27T09:04:43Z",
+  "scope": "baseline_readonly_before_redis",
+  "targets": {
+    "local_internal": {
+      "name": "internal_service",
+      "base_url_redacted": "INTERNAL_SERVICE_URL_REDACTED"
+    },
+    "external_preview": {
+      "name": "public_preview",
+      "base_public_url": "https://jeelive-mobile.preview.emergentagent.com"
+    }
+  },
+  "benchmarks": {
+    "fresh_deck": {
+      "name": "fresh_deck_internal_db_selection",
+      "exam": "JEE",
+      "subject": "Physics",
+      "n": 15,
+      "warmup_runs": 1,
+      "db_reads_per_run": 1,
+      "notes": [
+        "Selection path currently reads full filtered pool via to_list(12000) each request.",
+        "Deck content is randomized by shuffle; payload hash equality is not expected for this section."
+      ],
+      "summary": {
+        "n": 15,
+        "p50_ms": 17.586,
+        "p95_ms": 17.915,
+        "min_ms": 17.246,
+        "max_ms": 28.386
+      },
+      "all_valid_30_unique": true,
+      "samples": [
+        {
+          "run": 1,
+          "duration_ms": 17.525,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 2,
+          "duration_ms": 17.777,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 3,
+          "duration_ms": 17.364,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 4,
+          "duration_ms": 17.586,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 5,
+          "duration_ms": 17.324,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 6,
+          "duration_ms": 17.915,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 7,
+          "duration_ms": 17.336,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 8,
+          "duration_ms": 17.625,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 9,
+          "duration_ms": 17.302,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 10,
+          "duration_ms": 17.732,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 11,
+          "duration_ms": 17.246,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 12,
+          "duration_ms": 17.633,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 13,
+          "duration_ms": 17.367,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 14,
+          "duration_ms": 28.386,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 15,
+          "duration_ms": 17.783,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        }
+      ]
+    },
+    "public_api_local_internal_n10": [
+      {
+        "path": "/api/rf/catalog?exam=JEE",
+        "n": 10,
+        "summary": {
+          "n": 10,
+          "p50_ms": 42.024,
+          "p95_ms": 43.011,
+          "min_ms": 24.149,
+          "max_ms": 43.011
+        },
+        "status_counts": {
+          "200": 10
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 24.149,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 2,
+            "duration_ms": 42.568,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 3,
+            "duration_ms": 41.977,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 4,
+            "duration_ms": 41.947,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 5,
+            "duration_ms": 42.013,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 6,
+            "duration_ms": 41.985,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 7,
+            "duration_ms": 42.089,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 8,
+            "duration_ms": 42.951,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 9,
+            "duration_ms": 42.035,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 10,
+            "duration_ms": 43.011,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          }
+        ],
+        "successful_sample_count": 10,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05"
+      },
+      {
+        "path": "/api/rf/cards?exam=JEE&subject=Physics&page=1&limit=20",
+        "n": 10,
+        "summary": {
+          "n": 10,
+          "p50_ms": 47.989,
+          "p95_ms": 49.008,
+          "min_ms": 47.926,
+          "max_ms": 49.008
+        },
+        "status_counts": {
+          "200": 10
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 49.008,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 2,
+            "duration_ms": 47.926,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 3,
+            "duration_ms": 48.017,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 4,
+            "duration_ms": 47.985,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 5,
+            "duration_ms": 47.982,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 6,
+            "duration_ms": 48.038,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 7,
+            "duration_ms": 47.955,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 8,
+            "duration_ms": 48.022,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 9,
+            "duration_ms": 47.992,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 10,
+            "duration_ms": 47.955,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          }
+        ],
+        "successful_sample_count": 10,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2"
+      }
+    ],
+    "public_api_external_preview_n8": [
+      {
+        "path": "/api/rf/catalog?exam=JEE",
+        "n": 8,
+        "summary": {
+          "n": 8,
+          "p50_ms": 82.562,
+          "p95_ms": 280.234,
+          "min_ms": 56.433,
+          "max_ms": 280.234
+        },
+        "status_counts": {
+          "200": 8
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 280.234,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 2,
+            "duration_ms": 63.22,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 3,
+            "duration_ms": 72.474,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 4,
+            "duration_ms": 114.633,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 5,
+            "duration_ms": 63.608,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 6,
+            "duration_ms": 56.433,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 7,
+            "duration_ms": 111.41,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          },
+          {
+            "run": 8,
+            "duration_ms": 92.651,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null
+          }
+        ],
+        "successful_sample_count": 8,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05"
+      },
+      {
+        "path": "/api/rf/cards?exam=JEE&subject=Physics&page=1&limit=20",
+        "n": 8,
+        "summary": {
+          "n": 8,
+          "p50_ms": 73.652,
+          "p95_ms": 250.321,
+          "min_ms": 60.39,
+          "max_ms": 250.321
+        },
+        "status_counts": {
+          "200": 8
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 82.687,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 2,
+            "duration_ms": 66.432,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 3,
+            "duration_ms": 62.559,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 4,
+            "duration_ms": 250.321,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 5,
+            "duration_ms": 141.935,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 6,
+            "duration_ms": 61.876,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 7,
+            "duration_ms": 80.872,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          },
+          {
+            "run": 8,
+            "duration_ms": 60.39,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null
+          }
+        ],
+        "successful_sample_count": 8,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2"
+      }
+    ]
+  },
+  "protected_rf_snapshot": {
+    "reference_from_portrait_cleanup_report": {
+      "profiles": 344,
+      "coins_sum": 10257,
+      "wallet_ownership": "a8352b5626be043a562e0fd52bbf47846774cb04bcb6366bb7c2c8c443e98750",
+      "neet_profile_stats": "eaaf2f6642b6754328fb550703f9d39b8ecd371943fcb8d5190b07a54573bc60"
+    },
+    "before": {
+      "profiles": 344,
+      "coins_sum": 10257,
+      "wallet_ownership": "a8352b5626be043a562e0fd52bbf47846774cb04bcb6366bb7c2c8c443e98750",
+      "neet_profile_stats": "eaaf2f6642b6754328fb550703f9d39b8ecd371943fcb8d5190b07a54573bc60"
+    },
+    "after": {
+      "profiles": 344,
+      "coins_sum": 10257,
+      "wallet_ownership": "a8352b5626be043a562e0fd52bbf47846774cb04bcb6366bb7c2c8c443e98750",
+      "neet_profile_stats": "eaaf2f6642b6754328fb550703f9d39b8ecd371943fcb8d5190b07a54573bc60"
+    },
+    "unchanged": true
+  },
+  "notes": [
+    "Read-only benchmark: no create/update/delete actions.",
+    "No canonical auth writes attempted.",
+    "API hashes are provided to compare before/after implementation with identical payload expectations."
+  ]
+}

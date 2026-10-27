@@ -24,7 +24,7 @@ export default function RapidHome() {
   const [claimBusy, setClaimBusy] = useState("");
   const cat = useCached<any>("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", uid));
   const prof = useGameProfile(uid), p = prof.data;
-  const refreshProfile = prof.reload, refreshCatalog = cat.reload;
+  const refreshProfile = prof.revalidate, refreshCatalog = cat.revalidate;
   useFocusEffect(useCallback(() => { refreshProfile(); refreshCatalog(); }, [refreshProfile, refreshCatalog]));
   const pick = (s: string, ch: string) => { setSubject(s); setChapter(ch); Object.assign(selection, { subject: s, chapter: ch }); };
   const sub = cat.data?.subjects?.find((s: any) => s.name === subject);

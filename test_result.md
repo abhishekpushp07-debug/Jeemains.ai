@@ -331,3 +331,17 @@ iteration44_rapid_current:
   harness_findings: "Iteration43fakecanonicalfixturetriggeredlegitimate401signoutfromacademicprefetch; solvedONLYintestharnessbyisolatingirrelevantJLcalls, notweakeningproductionauth. Combinedparallelpytestfixturebroadcleanupdeletedotherworkergrant; fixedexactownedIDs inclshopfixturesandranserial."
   app_mocked_apis: "None. UItests usedexplicitisolatedauthfixtures; allRFgameplay/wallet/historyresponsesreal. AllQAdataremoved."
   remaining: "Canonicalupstream502/503/timeoutsstillpossible; boundederrorhandling/safeGETretry present,noautomaticPOSTcredentialretry. PhysicalAndroidcookiebridge/typesetting/performance/accessibilityandactualAPKsize measurement pending; <20MBnotguaranteed."
+
+## Iterations45–47 — API speed and private Redis priority
+api_speed_redis_current:
+  implemented: true
+  working: true
+  baseline: "test_reports/api_speed_before.json"
+  measured_after: "test_reports/api_speed_after.json"
+  reports: "test_reports/iteration_46.json, iteration_47_api_speed_self_verify.json"
+  scope: "Private server-side UNIXsocketRedis32MB; publicRFmetadataonly; no privateacademic/auth/coin/resultcaching. Sourceauthority intact. No newnative/frontenddependency."
+  measured: "Warm30cardselectionp5017.586to1.718ms~10.2x. ExternalRFcatalog82.562to68.878ms; cards73.652to62.174ms~16%median. Identicalresponsehashes. Cataloguep95worsened280.234to324.782(networkcoldvariance). LocalHTTPX~42ms retained, notcherry-pickedaway."
+  frontend: "Singleflightreads, boundedRAM, onebackgroundprefetchlane, correctsharedcataloguekey, Home5to2speculativecalls. Publicfreshcataloguefocusreuse/privatewalletrefetch. Main390pxverified1catalogue+1profileinitialGET; samecatalogue1throughshop/history; liveprofile2GETs. ActualQA250to252Coinresult/shoprefreshverified."
+  validation: "Final25backendpassed1skip1canonicaldeselected; frontendcacheunits/TSC/lintpassed. Redisstopfailopen/privatepermissions/noauthdata/protectedartworkschecked. CORSnowexactconfiguredorigins, trusted200/foreign400."
+  preservation: "ExactQAfixturesremoved.344profiles/10257Coins/399awardrecords; fullprotectedfingerprintsunchanged.2non-QA-taggedJEEduels(cancelled/ready)foundinfinalinspectionanddeliberatelyretained; donotresetnewplayhistory."
+  caveats: "PhysicalAndroidandAPKsizemeasurementpending; canonicalupstream502/503notfixedbyRedis; no worldfastest/under20MBguarantee. Fixtureauthonlyinharness, no productionmockedAPIs."

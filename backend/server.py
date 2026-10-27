@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, Request, Header, HTTPException
-from fastapi.responses import Response
+from fastapi.responses import Response, JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -17,6 +17,9 @@ from branding import router as branding_router
 from jl_transport import canonical_request
 from rf_access import make_access_router, install_access_guard
 from rapid_deck import fresh_deck
+from metadata_cache import metadata_cache
+from performance import ServerTiming, AssetAwareCompression
+from cors_config import allowed_origins
 import asyncio, json, logging, os, re, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
@@ -123,10 +126,13 @@ async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)
     except (httpx.HTTPError, asyncio.TimeoutError):
         return Response(json.dumps({"data": None, "error": {"code": "upstream_unreachable",
                         "message": "Connection interrupted. Your last saved work is safe. Please try again."},
-                        "meta": {"api_version": "1"}}), status_code=503, media_type="application/json")
+                        "meta": {"api_version": "1"}}), status_code=503, media_type="application/json", headers={'Cache-Control': 'no-store', 'Vary': 'X-JL-Sid'})
     if apply_set_cookies(cookies, r.headers):
         await save_jar(x_jl_sid, cookies)
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}
+    out['Vary'] = 'X-JL-Sid'
+    if path.startswith('auth/'):
+        out['Cache-Control'] = 'no-store'
     return Response(content=r.content, status_code=r.status_code, headers=out)
 
 
@@ -237,7 +243,7 @@ async def sync_cards():
         result = await db.rf_cards.update_many({"source_file": {"$regex": "^" + exam + ":", "$nin": keys}, "retired": {"$ne": True}}, {"$set": {"retired": True}})
         changed |= bool(result.modified_count)
     if changed:
-        CATALOG_CACHE.clear()
+        await metadata_cache.invalidate_prefix(f'{db.name}:')
 
 
 async def card_sync_loop():
@@ -249,24 +255,21 @@ async def card_sync_loop():
         await asyncio.sleep(60)
 
 
-CATALOG_CACHE: dict = {}
-
-
 @api.get("/rf/catalog")
 async def rf_catalog(exam: Optional[Exam] = None):
     exam = require_active_exam(exam)
-    key = exam
-    if key not in CATALOG_CACHE:
+    async def load():
         scope = {"exam": exam}
         rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}, **scope}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}, "diagrams": {"$sum": {"$cond": [{"$ifNull": ["$diagram", False]}, 1, 0]}}}}]).to_list(1000)
         order = {subject: chapters for subject, chapters in json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text()).items() if subject in SUBJECTS[exam]}
         counts = {(r["_id"]["s"], r["_id"]["c"]): r["n"] for r in rows}
-        CATALOG_CACHE[key] = {"exam": exam, "diagram_count": sum(r["diagrams"] for r in rows), "subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
+        return {"exam": exam, "diagram_count": sum(r["diagrams"] for r in rows), "subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
                               "chapters": [{"name": c, "count": counts.get((s, c), 0)} for c in chs]} for s, chs in order.items()],
                               "exams": {active: SUBJECTS[active] for active in ACTIVE_EXAMS},
                               "review_status": "quick_recall_reviewed_v1",
                               "note": "Full-bank quick-recall suitability pass completed. Answer time is an editorial estimate, not a student timing guarantee."}
-    return CATALOG_CACHE[key]
+    value, state = await metadata_cache.get_or_load(f'{db.name}:catalog:{exam}', load, ttl=60)
+    return JSONResponse(value, headers={'X-Cache': state, 'Cache-Control': 'no-cache'})
 
 
 def public_card(c: Card) -> dict:
@@ -396,15 +399,16 @@ api.include_router(branding_router)
 api.include_router(make_access_router(db))
 app.include_router(api)
 install_access_guard(app, db)
-from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
-app.add_middleware(GZipMiddleware, minimum_size=1024)
-app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
+app.add_middleware(ServerTiming)
+app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=allowed_origins(), allow_methods=["*"], allow_headers=["*"], expose_headers=['Server-Timing', 'X-Cache'])
 
 
 @app.on_event("startup")
 async def startup():
     global http
-    http = httpx.AsyncClient(timeout=httpx.Timeout(30.0, connect=10.0), limits=httpx.Limits(max_connections=200, max_keepalive_connections=50))
+    http = httpx.AsyncClient(http2=True, timeout=httpx.Timeout(30.0, connect=10.0),
+                             limits=httpx.Limits(max_connections=200, max_keepalive_connections=50, keepalive_expiry=45.0))
     # Never persist upstream cookies on the shared client; each sid has its own jar (prevents cross-user session leak)
     http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[]))
     await db.rf_cards.create_index("id", unique=True)
@@ -423,8 +427,10 @@ async def startup():
     await db.rf_profiles.create_index("uid", unique=True)
     await db.rf_profiles.create_index([("xp", -1)])
     await db.rf_cards.create_index([("exam", 1), ("subject", 1), ("chapter", 1), ("retired", 1)])
+    await db.rf_cards.create_index([('exam', 1), ('subject', 1), ('chapter', 1), ('id', 1)])
     await db.rf_sessions.create_index([("user_id", 1), ("exam", 1), ("status", 1), ("completed_at", -1)])
     await db.rf_duels.create_index([("exam", 1), ("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])
+    await db.rf_duels.create_index([('players.uid', 1), ('exam', 1), ('status', 1), ('finished_ts', -1)])
     await db.rf_learning_events.create_index([("uid", 1), ("ref", 1)], unique=True)
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])
     for exam in SUBJECTS:
@@ -447,6 +453,7 @@ async def startup():
 
 @app.on_event("shutdown")
 async def shutdown():
+    await metadata_cache.close()
     if http:
         await http.aclose()
     client.close()

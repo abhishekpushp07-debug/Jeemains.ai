@@ -7,6 +7,7 @@ import { Image as ExpoImage } from "expo-image";
 import { clearImageGrants, imageGrant, registerImageGrants } from "@/src/assets/assetGrants";
 import { configureImageDisk, purgeImageDisk } from "@/src/assets/deviceCache/cache";
 import { ImageResponse, loadOriginalImage } from "@/src/assets/imageDownload";
+import { resources } from "@/src/resourceCache";
 
 // Native talks to jeelive.ai directly (cookie session, no extra hop).
 // Web preview cannot carry jeelive.ai cookies cross-origin, so it uses a thin pass-through proxy.
@@ -57,12 +58,12 @@ async function headers(json: boolean) {
 }
 
 let refreshing: Promise<boolean> | null = null;
-async function boundedAuthFetch(url: string, options: RequestInit, ms = 32000): Promise<Response> {
+async function boundedAuthFetch(url: string, options: RequestInit, ms = 32000, message = "Account service is taking longer than usual. Please try again."): Promise<Response> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), ms);
   try { return await fetch(url, { ...options, signal: controller.signal }); }
   catch (error: any) {
-    if (controller.signal.aborted) throw new ApiError("Account service is taking longer than usual. Please try again.", 503);
+    if (controller.signal.aborted) throw new ApiError(message, 503);
     throw error;
   } finally { clearTimeout(timeout); }
 }
@@ -108,8 +109,13 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
   const body = opts.body === undefined ? (method === "GET" ? undefined : "{}") : JSON.stringify(opts.body);
   let res: Response;
   try {
-    const options = { method, body, credentials: "include" as const, headers: await headers(body !== undefined), signal: opts.signal };
-    res = path.startsWith("/auth/") && !opts.signal ? await boundedAuthFetch(BASE + path, options) : await fetch(BASE + path, options);
+    // Account-scoped JSON freshness is controlled by our explicit cache, never
+    // a browser HTTP cache shared across different X-JL-Sid sessions.
+    const options = { method, body, credentials: "include" as const, headers: await headers(body !== undefined), signal: opts.signal,
+      ...(WEB ? { cache: "no-store" as const } : {}) };
+    res = !opts.signal && (path.startsWith("/auth/") || method === "GET")
+      ? await boundedAuthFetch(BASE + path, options, 32000, path.startsWith("/auth/") ? undefined : "The server is taking longer than usual. Please try again.")
+      : await fetch(BASE + path, options);
   } catch (e: any) {
     if (e?.name === "AbortError") throw e;
     if (e instanceof ApiError) throw e;
@@ -176,9 +182,9 @@ const scopeListeners = new Set<() => void>();
 export const onAssetScopeReset = (listener: () => void) => { scopeListeners.add(listener); return () => { scopeListeners.delete(listener); }; };
 function resetImageMemory() { assetEpoch++; privateAssets.pause(); clearImageGrants(); scopeListeners.forEach(fn => fn()); void ExpoImage.clearMemoryCache().catch(() => {}); }
 privateAssets.pause();
-export const clearAssetCache = (purgeDisk = false) => { assetOwner = null; resetImageMemory(); if (purgeDisk) purgeImageDisk(); };
+export const clearAssetCache = (purgeDisk = false) => { assetOwner = null; resources.clear(); resetImageMemory(); if (purgeDisk) purgeImageDisk(); };
 export const setAssetAccount = (uid: string) => {
-  if (assetOwner !== uid) { resetImageMemory(); configureImageDisk(uid, CANONICAL_API); }
+  if (assetOwner !== uid) { resources.clear(); resetImageMemory(); configureImageDisk(uid, CANONICAL_API); }
   assetOwner = uid; privateAssets.resume();
 };
 export const registerAssetManifest = (id: string, rows: any[], solutions: boolean, version = "original", renew = false) => {
@@ -234,5 +240,6 @@ export async function rf<T = any>(path: string, userId: string, opts: { method?:
   if (res.status === 401 && retry) { rfGrant = null; return rf<T>(path, userId, opts, false); }
   const data = await res.json().catch(() => null);
   if (!res.ok) throw new ApiError(typeof data?.detail === "string" ? data.detail : "Rapid Fire is unavailable right now. Retry.", res.status);
+  if (opts.method && opts.method !== "GET") resources.invalidate(`u.${userId}.rf`);
   return data as T;
 }

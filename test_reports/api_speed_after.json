@@ -1,0 +1,646 @@
+{
+  "label": "after",
+  "timestamp_utc": "2026-10-27T09:18:24Z",
+  "scope": "readonly_actual_api_measurements",
+  "targets": {
+    "local_internal": {
+      "name": "internal_service",
+      "base_url_redacted": "INTERNAL_SERVICE_URL_REDACTED"
+    },
+    "external_preview": {
+      "name": "public_preview",
+      "base_public_url": "https://jeelive-mobile.preview.emergentagent.com"
+    }
+  },
+  "benchmarks": {
+    "fresh_deck": {
+      "name": "fresh_deck_internal_db_selection",
+      "exam": "JEE",
+      "subject": "Physics",
+      "n": 15,
+      "warmup_runs": 1,
+      "db_reads_per_run": 1,
+      "notes": [
+        "Warm selection: cached public metadata plus one authoritative indexed read for30cards; cold metadata read separately.",
+        "Deck content is randomized by shuffle; payload hash equality is not expected for this section."
+      ],
+      "summary": {
+        "n": 15,
+        "p50_ms": 1.718,
+        "p95_ms": 2.07,
+        "min_ms": 1.674,
+        "max_ms": 2.094
+      },
+      "all_valid_30_unique": true,
+      "samples": [
+        {
+          "run": 1,
+          "duration_ms": 2.094,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 2,
+          "duration_ms": 2.07,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 3,
+          "duration_ms": 1.849,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 4,
+          "duration_ms": 1.813,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 5,
+          "duration_ms": 1.763,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 6,
+          "duration_ms": 1.718,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 7,
+          "duration_ms": 1.717,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 8,
+          "duration_ms": 1.712,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 9,
+          "duration_ms": 1.692,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 10,
+          "duration_ms": 1.674,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 11,
+          "duration_ms": 1.708,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 12,
+          "duration_ms": 1.743,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 13,
+          "duration_ms": 1.709,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 14,
+          "duration_ms": 1.744,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        },
+        {
+          "run": 15,
+          "duration_ms": 1.681,
+          "card_count": 30,
+          "unique_prompt_count": 30,
+          "valid_cardcount_30unique": true
+        }
+      ]
+    },
+    "public_api_local_internal_n10": [
+      {
+        "path": "/api/rf/catalog?exam=JEE",
+        "n": 10,
+        "summary": {
+          "n": 10,
+          "p50_ms": 41.974,
+          "p95_ms": 42.324,
+          "min_ms": 22.311,
+          "max_ms": 42.324
+        },
+        "status_counts": {
+          "200": 10
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 22.311,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=13.11",
+            "cache": "MISS",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 2,
+            "duration_ms": 42.324,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.75",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 3,
+            "duration_ms": 41.944,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.80",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 4,
+            "duration_ms": 41.964,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.85",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 5,
+            "duration_ms": 41.948,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.82",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 6,
+            "duration_ms": 41.984,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.74",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 7,
+            "duration_ms": 42.086,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.74",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 8,
+            "duration_ms": 41.922,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.73",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 9,
+            "duration_ms": 41.989,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.65",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 10,
+            "duration_ms": 41.997,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.66",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          }
+        ],
+        "successful_sample_count": 10,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05"
+      },
+      {
+        "path": "/api/rf/cards?exam=JEE&subject=Physics&page=1&limit=20",
+        "n": 10,
+        "summary": {
+          "n": 10,
+          "p50_ms": 41.995,
+          "p95_ms": 48.033,
+          "min_ms": 41.974,
+          "max_ms": 48.033
+        },
+        "status_counts": {
+          "200": 10
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 48.033,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=7.16",
+            "cache": "MISS",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 2,
+            "duration_ms": 41.987,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.94",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 3,
+            "duration_ms": 41.988,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.88",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 4,
+            "duration_ms": 41.979,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.80",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 5,
+            "duration_ms": 42.037,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.75",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 6,
+            "duration_ms": 41.974,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.90",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 7,
+            "duration_ms": 41.975,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.81",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 8,
+            "duration_ms": 42.034,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.87",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 9,
+            "duration_ms": 42.003,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.82",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 10,
+            "duration_ms": 42.105,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.83",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          }
+        ],
+        "successful_sample_count": 10,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2"
+      }
+    ],
+    "public_api_external_preview_n8": [
+      {
+        "path": "/api/rf/catalog?exam=JEE",
+        "n": 8,
+        "summary": {
+          "n": 8,
+          "p50_ms": 68.878,
+          "p95_ms": 324.782,
+          "min_ms": 58.578,
+          "max_ms": 324.782
+        },
+        "status_counts": {
+          "200": 8
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 324.782,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=1.25",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 2,
+            "duration_ms": 62.472,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.82",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 3,
+            "duration_ms": 77.732,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.90",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 4,
+            "duration_ms": 61.625,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.81",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 5,
+            "duration_ms": 65.81,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=0.82",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 6,
+            "duration_ms": 74.418,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=1.01",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 7,
+            "duration_ms": 71.946,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=1.11",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          },
+          {
+            "run": 8,
+            "duration_ms": 58.578,
+            "status": 200,
+            "size_bytes": 3475,
+            "payload_hash": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05",
+            "error": null,
+            "server_timing": "app;dur=1.05",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1185"
+          }
+        ],
+        "successful_sample_count": 8,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "41381269f311af7cf32c0ed90b54c060cc27fa7c0348d0bd4d8444c61c097f05"
+      },
+      {
+        "path": "/api/rf/cards?exam=JEE&subject=Physics&page=1&limit=20",
+        "n": 8,
+        "summary": {
+          "n": 8,
+          "p50_ms": 62.174,
+          "p95_ms": 82.097,
+          "min_ms": 57.541,
+          "max_ms": 82.097
+        },
+        "status_counts": {
+          "200": 8
+        },
+        "samples": [
+          {
+            "run": 1,
+            "duration_ms": 61.857,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.93",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 2,
+            "duration_ms": 70.753,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=1.05",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 3,
+            "duration_ms": 75.438,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=0.95",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 4,
+            "duration_ms": 82.097,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=1.15",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 5,
+            "duration_ms": 62.492,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=1.47",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 6,
+            "duration_ms": 60.268,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=1.15",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 7,
+            "duration_ms": 60.525,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=1.09",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          },
+          {
+            "run": 8,
+            "duration_ms": 57.541,
+            "status": 200,
+            "size_bytes": 9484,
+            "payload_hash": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2",
+            "error": null,
+            "server_timing": "app;dur=1.17",
+            "cache": "HIT-MEMORY",
+            "wire_content_length": "1943"
+          }
+        ],
+        "successful_sample_count": 8,
+        "payload_hash_unique_count": 1,
+        "payload_hash_first": "85d5ff7571b418af34bb4d85116e8993f47a3ba008461c247b680a57efa44ad2"
+      }
+    ]
+  },
+  "protected_rf_snapshot": {
+    "reference_from_portrait_cleanup_report": {
+      "profiles": 344,
+      "coins_sum": 10257,
+      "wallet_ownership": "a8352b5626be043a562e0fd52bbf47846774cb04bcb6366bb7c2c8c443e98750",
+      "neet_profile_stats": "eaaf2f6642b6754328fb550703f9d39b8ecd371943fcb8d5190b07a54573bc60"
+    },
+    "before": {
+      "profiles": 344,
+      "coins_sum": 10257,
+      "wallet_ownership": "a8352b5626be043a562e0fd52bbf47846774cb04bcb6366bb7c2c8c443e98750",
+      "neet_profile_stats": "eaaf2f6642b6754328fb550703f9d39b8ecd371943fcb8d5190b07a54573bc60"
+    },
+    "after": {
+      "profiles": 344,
+      "coins_sum": 10257,
+      "wallet_ownership": "a8352b5626be043a562e0fd52bbf47846774cb04bcb6366bb7c2c8c443e98750",
+      "neet_profile_stats": "eaaf2f6642b6754328fb550703f9d39b8ecd371943fcb8d5190b07a54573bc60"
+    },
+    "unchanged": true
+  },
+  "notes": [
+    "Read-only benchmark: no create/update/delete actions.",
+    "No canonical auth writes attempted.",
+    "API hashes are provided to compare before/after implementation with identical payload expectations."
+  ]
+}

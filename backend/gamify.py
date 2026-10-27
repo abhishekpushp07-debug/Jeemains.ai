@@ -6,6 +6,10 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Header, HTTPException, Query
+from fastapi.responses import JSONResponse
+from metadata_cache import metadata_cache
+import hashlib
+import json
 from pymongo.errors import DuplicateKeyError
 from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
 from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
@@ -178,10 +182,14 @@ def make_router(db, rf_user):
         exam = require_active_exam(exam or ("NEET" if subject == "Biology" else "JEE"))
         scope = {"exam": exam}
         q = {**scope, **{k: v for k, v in (("subject", subject), ("chapter", chapter)) if v}, "retired": {"$ne": True}}
-        total = await db.rf_cards.count_documents(q)
-        # answers/explanations are never exposed publicly (they could be looked up mid-duel)
-        items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0, "formula": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
-        return {"items": items, "total": total, "page": page, "pages": max(1, math.ceil(total / limit)), "review_status": "quick_recall_reviewed_v1"}
+        async def load():
+            total = await db.rf_cards.count_documents(q)
+            # NO answers, explanations or answer-side formulae in Redis/public pages.
+            items = await db.rf_cards.find(q, {"_id": 0, "answer": 0, "explain": 0, "formula": 0}).sort([("subject", 1), ("chapter", 1), ("id", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
+            return {"items": items, "total": total, "page": page, "pages": max(1, math.ceil(total / limit)), "review_status": "quick_recall_reviewed_v1"}
+        variant = hashlib.sha256(json.dumps([exam, subject, chapter, page, limit]).encode()).hexdigest()
+        data, state = await metadata_cache.get_or_load(f'{db.name}:cards:{variant}', load, ttl=60)
+        return JSONResponse(data, headers={'X-Cache': state, 'Cache-Control': 'no-cache'})
 
     @r.get("/shop")
     async def shop(x_rf_user: Optional[str] = Header(None)):

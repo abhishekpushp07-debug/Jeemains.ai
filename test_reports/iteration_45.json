@@ -1,0 +1,51 @@
+{
+  "summary": "Baseline-only backend performance benchmark completed before Redis implementation. Added reusable read-only benchmark runner and captured /api/rf/catalog, /api/rf/cards, and internal fresh_deck timings with payload hashes and protected-data guard snapshots.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "internal rapid_deck.fresh_deck(db, 'JEE', 'Physics')",
+        "issue": "Function loads the full subject pool each call via to_list(12000) before dedupe/shuffle. This is O(pool_size) per request and is the primary backend hotspot to optimize (candidate for Redis/materialized selection/index strategy).",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/perf_api_benchmark.py",
+    "/app/backend/tests/test_perf_api_benchmark_baseline.py",
+    "/app/test_reports/api_speed_before.json",
+    "/app/test_reports/pytest/iter45_perf_benchmark.xml"
+  ],
+  "action_items": [
+    "Implement optimization (Redis/index/query-path) without changing response payload semantics for /api/rf/catalog and /api/rf/cards.",
+    "After implementation, rerun: python /app/backend/tests/perf_api_benchmark.py --label after and compare p50/p95 plus payload_hash_first/payload_hash_unique_count fields.",
+    "Preserve read-only guard invariants (profiles, coins_sum, wallet_ownership, neet_profile_stats)."
+  ],
+  "critical_code_review_comments": [
+    "Baseline confirms data integrity remained unchanged: protected snapshot before/after matches reference hashes and counts.",
+    "Both public endpoints were stable and deterministic in this run (all 200; unique payload hash count = 1 for local and external samples).",
+    "External preview p95 spike observed on catalog (~324ms) while local internal remained lower; likely ingress/network variance on first external sample, not payload drift."
+  ],
+  "updated_files": [
+    "/app/backend/tests/perf_api_benchmark.py",
+    "/app/backend/tests/test_perf_api_benchmark_baseline.py",
+    "/app/test_reports/api_speed_before.json",
+    "/app/test_reports/iteration_45.json",
+    "/app/test_reports/pytest/iter45_perf_benchmark.xml"
+  ],
+  "success_rate": {
+    "backend": "100% (requested baseline measurements completed; verifier test passed 1/1)",
+    "frontend": "N/A (backend-only scope)"
+  },
+  "seed_data_creation": "No seed or mutating data created. Read-only benchmark only.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use the same runner with --label after for strict before/after comparability. Do not alter benchmark sample sizes (fresh_deck N=15, local endpoints N=10, external N=8) when measuring implementation impact.",
+  "rca_of_issue": "Primary latency hotspot is algorithmic: fresh_deck currently fetches broad card pool and performs in-process shuffle/dedup/grouping each request. This creates avoidable per-request DB read + Python CPU overhead that scales with pool size."
+}
