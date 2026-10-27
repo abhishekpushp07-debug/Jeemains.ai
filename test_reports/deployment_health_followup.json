@@ -1,0 +1,37 @@
+{
+  "request": "Call Deployment Agent and Run Health Check to Check for Readiness for Deployment",
+  "deployment_agent_invoked": true,
+  "scanner_verdict": "FAIL",
+  "scanner_findings": [
+    {"finding": "Secret .env files ignored", "disposition": "Known false positive: configuration injected at runtime; secrets must stay out of source control"},
+    {"finding": "Supervisor missing --tunnel", "disposition": "Known false positive: verified public HTTPS ingress already serves native manifest and launch asset"}
+  ],
+  "scanner_positive_checks": [
+    "Compilation passed",
+    "Environment configuration valid",
+    "API and database URLs environment-based",
+    "Configured CORS origins valid",
+    "No destructive database startup operation found"
+  ],
+  "fresh_independent_runtime_checks": {
+    "expo_service": "RUNNING after restart",
+    "backend_service": "RUNNING",
+    "new_expo_error_log_output": "none",
+    "public_native_manifest": "HTTP200, valid JSON",
+    "launch_asset": "public HTTPS URL verified by troubleshooting",
+    "backend_health": "HTTP200 statusok",
+    "public_config_injected": true,
+    "secret_env_files_untracked": true
+  },
+  "overall_assessment": "Observed runtime infrastructure healthy. Automated scanner remains FAIL with disputed false positives; not relabeled PASS. Full release readiness unverified.",
+  "remaining_gates": [
+    "Full signed native build and actual APK under20000000bytes",
+    "Physical Android cold/warm performance and native functionality",
+    "Canonical intermittent503/520 reliability",
+    "Owner-deferred account deletion for store submission"
+  ],
+  "code_or_configuration_changed": false,
+  "secrets_committed": false,
+  "learner_data_mutated": false,
+  "cloud_build_or_publish_performed": false
+}

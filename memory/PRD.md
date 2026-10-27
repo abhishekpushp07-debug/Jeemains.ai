@@ -1,5 +1,11 @@
 # JEELIVE.AI Native App — PRD
 
+## Latest user-requested fresh deployment health check
+- User explicitly requested Deployment Agent and a readiness health check. Agent invoked; no app code, secrets, repository tracking, supervisor command or user data changed. Expo restarted; Expo and backend RUNNING with no new Expo error output.
+- Generic scanner again returned **FAIL**, solely demanding `.env` tracking and `--tunnel`. These are the same previously investigated false positives, not a new app defect. Scanner verdict is retained as FAIL; do not claim it returned PASS or commit secrets to appease it.
+- Independent fresh read-only troubleshooting verified public Expo native manifest HTTP200, publicHTTPS launch asset, backend health HTTP200/statusok, injected public configuration and untrackedsecret.envfiles. Runtime infrastructure is healthy for these checks. This does NOT establish production capacity, physicalAndroid behavior, signing, cloud native build or all upstream API availability.
+- No tunnel/config/secret changes are warranted by those findings. The diagnostic agent's broad “production-ready/fullyfunctional” phrasing is **not adopted**: signedAPK<20MB, physicalspeed, canonical503/520 reliability and explicitly deferred account deletion remain pending release gates. Report:`test_reports/deployment_health_followup.json`.
+
 ## Latest iteration51 — EAS filename fix + Android size analysis
 - User approved **“Build fix, phir size jaanch”** and reiterated lightning-fast/under20MB target. Hindi/Hinglish communication. No unsupported world's-fastest/sub20MB claim.
 - Deleted ONLY confirmed corrupt zero-byte frontend filename (basename hex `01b0d7404030b1444038`) with byte-safe unlink. No Git index/commit/reset command, app runtime/auth/data/native engine/dependency/artwork/env change.
