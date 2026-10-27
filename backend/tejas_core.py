@@ -1,6 +1,6 @@
 """Source-aware, review-only PDF segmentation, deterministic scoring and complete reports."""
 
-import re, uuid, math
+import re, uuid, math, time
 import fitz
 import numpy as np
 
@@ -287,6 +287,7 @@ def validate_crop_pages(doc, refs):
                 raise ValueError('Source page could not render.')
             last_page = page.number
             del pix
+            time.sleep(.001)
 
 
 def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _document=None, _display_lists=None):
@@ -294,7 +295,7 @@ def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _documen
     try:
         page, rect = _crop_geometry(doc, ref)
         p = page.number
-        optimize_png = reviewed_large_pages and scale >= 1
+        optimize_png = reviewed_large_pages and scale >= 1 and page.rect.width > 1600
         if reviewed_large_pages:
             scale = min(scale, 1600 / rect.width, 2400 / rect.height)
         if _display_lists is not None:
@@ -316,7 +317,7 @@ def _render_crop_png(data, ref, scale=2, *, reviewed_large_pages=False, _documen
             pix = fitz.Pixmap(fitz.csRGB, pix.width, pix.height, pixels.tobytes(), False)
         if pix.n == 3 and np.array_equal(pixels[:, :, 0], pixels[:, :, 1]) and np.array_equal(pixels[:, :, 0], pixels[:, :, 2]):
             pix = fitz.Pixmap(fitz.csGRAY, pix.width, pix.height, pixels[:, :, 0].tobytes(), False)
-        return pix.pil_tobytes(format='PNG', compress_level=6) if optimize_png else pix.tobytes('png')
+        return pix.pil_tobytes(format='PNG', compress_level=1) if optimize_png else pix.tobytes('png')
     finally:
         if _document is None:
             doc.close()

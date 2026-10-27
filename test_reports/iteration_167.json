@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration 167 FRONTEND-ONLY targeted QA of attempt A->B route race fix (PlayerRoute key user.id:id + useAttempt load AbortController/post-await abort check/cleanup). All browser API responses were QA-only MOCKED fixtures via page.route (labelled); NO real API calls, NO DB/bridge, NO backend writes. 9/9 browser race checks PASS (CRA preview StrictMode desktop 1920x800 + mobile 390x844 x {late A active, late A completed, direct initial B load} + built production bundle late-A-completed race). Node iter164 privateResources+fetchWithSession 21/21 PASS unchanged. Production build BUILD_PATH=/tmp/fe167_build exit 0; Figtree 400/700 preloads present and load 200; built /login renders at 1920x800 and 390x844 with no overflow/page errors.",
+  "checks": {
+    "race_lateA_active_desktop_and_mobile": "PASS - after pushState+popstate while GET /attempts/A delayed 3s, GET /attempts/B issued ~0.02s later; title 'Fixture attempt B' rendered in 0.10-0.18s; late A (aborted by unmount cleanup, net::ERR_ABORTED expected) never overwrote B; URL stays /attempts/B; only question 'Fixture B' shown",
+    "race_lateA_completed_desktop_and_mobile": "PASS - late completed A did NOT redirect to /results/A; URL stays /attempts/B",
+    "strictmode_initial_B_load": "PASS - StrictMode double-effect: first GET /attempts/B aborted, second loads; B rendered in 0.44-0.96s (<5s, no stall)",
+    "built_bundle_race_no_strictmode": "PASS - single GET A, GET B, question-reports/visit/PUT only for B, no redirect",
+    "answer_PUT_paths": "PASS - only PUT /attempts/B/answers/q-B in every flow",
+    "draft_isolation": "PASS - pre-seeded tejas-draft-TEST_ROUTE_FIXTURE-A unchanged byte-for-byte; tejas-draft-...-B has no q-A; meta only for B",
+    "overflow": "PASS - scrollWidth==innerWidth (1920/1920, 390/390) in all flows",
+    "page_errors": "none (question-reports fixture returns [] array as required)",
+    "node_tests": "21/21 PASS incl. 'startedAttempt handoff: one-use, same user+id, active, 5s TTL'",
+    "build": "yarn build exit 0 (~19s); only pre-existing react-hooks/exhaustive-deps warnings in SavePaperButton.js, SeriesStreak.js, LiveSeries.js (not in edited files); preload links figtree-latin-400/700 woff2 exist (11KB) and served 200; document.fonts.check 400/700 true"
+  },
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/frontend/tests/iter164_private_resources.test.mjs", "/app/test_reports/iteration_167.json"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "useAttempt load: cleanup sets loading.current=false and finally only resets for own controller - correct; post-await `controller.signal.aborted` check also covers takeStartedAttempt synchronous path.",
+    "Note (not a bug): `.player-title` is hidden at 390px (mobile) - tests must use textContent not visibility.",
+    "Pre-existing eslint exhaustive-deps warnings for 'user' in SavePaperButton.js, SeriesStreak.js, LiveSeries.js - low priority."
+  ],
+  "limitations": [
+    "All attempt/session data MOCKED (user TEST_ROUTE_FIXTURE); no real backend exercised (Cloudflare 520 live issue unresolved/platform, no live calls).",
+    "RAM start handoff (0 extra GET) and expired/refresh canonical GET verified only via Node unit test, not via a real browser start flow (no DB writes allowed).",
+    "Same-id different-user key change verified by code review (PlayerRoute key `${user.id}:${id}`, storage key includes user.id) and Node owner checks, not by a browser user switch.",
+    "Built-bundle checks served /tmp/fe167_build via temporary local static server (stopped afterwards)."
+  ],
+  "updated_files": ["/app/test_reports/iteration_167.json"],
+  "success_rate": {"backend": "N/A (not in scope)", "frontend": "100%"},
+  "seed_data_creation": "None in DB. Browser localStorage seed only in throwaway contexts: tejas-draft-TEST_ROUTE_FIXTURE-A.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Race fixture pattern: page.route('**/api/**') returning auth/session user TEST_ROUTE_FIXTURE, delayed GET /attempts/A (3s), question-reports => [] (array!), visit => {visited:[]}, answers PUT echo {accepted, current_revision, server_now}. Use wait_for_function on .player-title textContent (hidden on mobile). Screens: /root/.emergent/automation_output/iter167_*.jpeg."
+}
