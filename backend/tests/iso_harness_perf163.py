@@ -107,6 +107,35 @@ def counted_render(data, ref, scale=2, **k):
 
 tejas_core.validate_pdf = counted_validate
 tejas_core._render_crop_png = counted_render
+
+# iter166 TEST-ONLY instrumentation: per-ref geometry checks and Page.get_pixmap calls (scale-bucketed), guards untouched
+import fitz as _fitz  # noqa: E402
+_real_geom, _real_pixmap = tejas_core._crop_geometry, _fitz.Page.get_pixmap
+GEOM_LOG = []      # (page) per geometry check
+PIXMAP_LOG = []    # (page_number, scale, clip is None)
+
+
+def counted_geometry(doc, ref):
+    with LOCK:
+        STATS['crop_geometry'] += 1; GEOM_LOG.append(ref.get('page'))
+    return _real_geom(doc, ref)
+
+
+def counted_pixmap(self, *a, **k):
+    m = k.get('matrix'); sc = round(m.a, 3) if m is not None else 1
+    t = time.perf_counter()
+    try:
+        return _real_pixmap(self, *a, **k)
+    finally:
+        with LOCK:
+            whole = k.get('clip') is None
+            STATS['pixmap_calls'] += 1; STATS['pixmap_s'] += time.perf_counter() - t
+            STATS['pixmap_wholepage_lowres' if whole and sc < 1 else 'pixmap_clip_lowres' if sc < 1 else 'pixmap_full'] += 1
+            PIXMAP_LOG.append((self.number, sc, whole))
+
+
+tejas_core._crop_geometry = counted_geometry
+_fitz.Page.get_pixmap = counted_pixmap
 tejas_storage.request = fake_request
 
 PATCHED = []

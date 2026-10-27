@@ -17,7 +17,7 @@ C = json.loads(gzip.decompress((RES / 'jee_pyq.json.gz').read_bytes()))['collect
 FILES = {f['id']: f for f in C['tejas_files']}
 SETS = {s['id']: s for s in C['tejas_sets']}
 PAPERS = ['jee-main-pyq-2026-01-24-s1', 'jee-main-pyq-2026-04-08-s2']
-OUT = Path('/tmp/iter164_png'); OUT.mkdir(exist_ok=True)
+OUT = Path(os.environ.get('PNG_OUT', '/tmp/iter164_png')); OUT.mkdir(exist_ok=True)  # iter166: PNG_OUT override (test-only)
 STATS = {}
 
 
@@ -198,6 +198,6 @@ def test_jan24_s1_q2_and_dump_pngs():
         for k in ('q_refs', 's_refs'):
             for i, r in enumerate(q.get(k, [])[:2]):
                 (OUT / f'apr08s2_q{q["number"]}_{k}_{i}.png').write_bytes(tejas_core._render_crop_png(raw2, r, 2, reviewed_large_pages=True))
-    Path('/tmp/iter164_q2_info.json').write_text(json.dumps(info, indent=1))
+    (OUT / 'q2_info.json').write_text(json.dumps(info, indent=1))
     print(json.dumps(info, indent=1))
     assert q2.get('q_refs')

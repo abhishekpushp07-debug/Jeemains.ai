@@ -1,0 +1,1299 @@
+{
+ "methodology": {
+  "scope": "ISOLATED preview pod, in-process ASGI, synthetic users; NOT customer DB; NOT live; NOT global user speed",
+  "storage": "LOCAL DISK original PDFs via patched tejas_storage.request; real get_object 32MB source cache kept",
+  "cold": "process caches cleared (source/crop/derivative/validation/pack); Mongo WiredTiger cache NOT cleared",
+  "repeats": 7
+ },
+ "steps": {
+  "setup_pyq_import_local": {
+   "s": 23.2,
+   "steps": 53,
+   "db_cmds": 777,
+   "db_ms": 592.13,
+   "db_by_cmd": {
+    "findAndModify": 53,
+    "aggregate": 53,
+    "update": 159,
+    "insert": 90,
+    "find": 422
+   }
+  },
+  "auth.signup": {
+   "ms": 232.6,
+   "status": 200,
+   "bytes": 277,
+   "db_cmds": 5,
+   "db_ms": 3.38,
+   "db_by_cmd": {
+    "findAndModify": 1,
+    "insert": 2,
+    "find": 2
+   }
+  },
+  "health_first": {
+   "ms": 0.9,
+   "status": 200,
+   "bytes": 158,
+   "db_by_cmd": {}
+  },
+  "home.sets_first": {
+   "ms": 9.5,
+   "status": 200,
+   "bytes": 18466,
+   "db_cmds": 2,
+   "db_ms": 5.2,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 1
+   }
+  },
+  "home.sets_warm": {
+   "n": 7,
+   "p50_ms": 6.8,
+   "p95_ms": 8.4,
+   "max_ms": 8.4,
+   "status": [
+    200
+   ],
+   "bytes": 18466,
+   "db_cmds_per_call": 2,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 1
+   },
+   "other_counters_last_call": {
+    "db_ms": 4.54
+   }
+  },
+  "home.series_first": {
+   "ms": 4.3,
+   "status": 200,
+   "bytes": 15270,
+   "db_cmds": 2,
+   "db_ms": 0.39,
+   "db_by_cmd": {
+    "hello": 1,
+    "find": 1
+   }
+  },
+  "home.series_warm": {
+   "n": 7,
+   "p50_ms": 3.6,
+   "p95_ms": 3.8,
+   "max_ms": 3.8,
+   "status": [
+    200
+   ],
+   "bytes": 15271,
+   "db_cmds_per_call": 2,
+   "db_by_cmd": {
+    "hello": 1,
+    "find": 1
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.31
+   }
+  },
+  "home.auth_me_first": {
+   "ms": 2.1,
+   "status": 200,
+   "bytes": 277,
+   "db_cmds": 2,
+   "db_ms": 0.56,
+   "db_by_cmd": {
+    "find": 2
+   }
+  },
+  "home.auth_me_warm": {
+   "n": 7,
+   "p50_ms": 1.5,
+   "p95_ms": 1.6,
+   "max_ms": 1.6,
+   "status": [
+    200
+   ],
+   "bytes": 277,
+   "db_cmds_per_call": 2,
+   "db_by_cmd": {
+    "find": 2
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.32
+   }
+  },
+  "pyq.catalogue_first": {
+   "ms": 10.0,
+   "status": 200,
+   "bytes": 7263,
+   "db_cmds": 5,
+   "db_ms": 6.15,
+   "db_by_cmd": {
+    "hello": 1,
+    "aggregate": 1,
+    "find": 3
+   }
+  },
+  "pyq.catalogue_warm": {
+   "n": 7,
+   "p50_ms": 5.1,
+   "p95_ms": 9.2,
+   "max_ms": 9.2,
+   "status": [
+    200
+   ],
+   "bytes": 7263,
+   "db_cmds_per_call": 5,
+   "db_by_cmd": {
+    "hello": 1,
+    "aggregate": 1,
+    "find": 3
+   },
+   "other_counters_last_call": {
+    "db_ms": 2.18
+   }
+  },
+  "home.my_sets_first": {
+   "ms": 9.9,
+   "status": 200,
+   "bytes": 18441,
+   "db_cmds": 3,
+   "db_ms": 5.42,
+   "db_by_cmd": {
+    "find": 3
+   }
+  },
+  "home.my_sets_warm": {
+   "n": 7,
+   "p50_ms": 6.8,
+   "p95_ms": 9.7,
+   "max_ms": 9.7,
+   "status": [
+    200
+   ],
+   "bytes": 18441,
+   "db_cmds_per_call": 3,
+   "db_by_cmd": {
+    "find": 3
+   },
+   "other_counters_last_call": {
+    "db_ms": 2.78
+   }
+  },
+  "history.attempts_first": {
+   "ms": 3.6,
+   "status": 200,
+   "bytes": 122,
+   "db_cmds": 3,
+   "db_ms": 1.14,
+   "db_by_cmd": {
+    "find": 3
+   }
+  },
+  "history.attempts_warm": {
+   "n": 7,
+   "p50_ms": 2.2,
+   "p95_ms": 2.6,
+   "max_ms": 2.6,
+   "status": [
+    200
+   ],
+   "bytes": 122,
+   "db_cmds_per_call": 3,
+   "db_by_cmd": {
+    "find": 3
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.73
+   }
+  },
+  "guest.sets_warm": {
+   "n": 7,
+   "p50_ms": 7.3,
+   "p95_ms": 7.6,
+   "max_ms": 7.6,
+   "status": [
+    200
+   ],
+   "bytes": 18466,
+   "db_cmds_per_call": 2,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 1
+   },
+   "other_counters_last_call": {
+    "db_ms": 3.17
+   }
+  },
+  "guest.series_warm": {
+   "n": 7,
+   "p50_ms": 3.4,
+   "p95_ms": 3.7,
+   "max_ms": 3.7,
+   "status": [
+    200
+   ],
+   "bytes": 15271,
+   "db_cmds_per_call": 2,
+   "db_by_cmd": {
+    "hello": 1,
+    "find": 1
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.32
+   }
+  },
+  "january.my_set_detail_cold": {
+   "ms": 4.6,
+   "status": 200,
+   "bytes": 1016,
+   "db_cmds": 4,
+   "db_ms": 1.79,
+   "db_by_cmd": {
+    "hello": 1,
+    "find": 3
+   }
+  },
+  "january.preflight_cold": {
+   "ms": 1130.6,
+   "status": 200,
+   "bytes": 239,
+   "crop_geometry": 201,
+   "pixmap_wholepage_lowres": 26,
+   "pixmap_calls": 26,
+   "pdf_open": 1,
+   "storage_s": 0.0028,
+   "pixmap_s": 1.0954,
+   "db_ms": 3.46,
+   "db_by_cmd": {
+    "hello": 1,
+    "update": 1,
+    "find": 4
+   },
+   "storage_get": 1,
+   "db_cmds": 6,
+   "pdf_open_s": 0.0016,
+   "storage_bytes": 18390332
+  },
+  "january.preflight_cold_iter166_proof": {
+   "geometry_checks": 201,
+   "geometry_unique_pages": 26,
+   "pixmap_calls": 26,
+   "pixmap_unique_pages": 26,
+   "pixmap_scales": [
+    0.3
+   ],
+   "all_pixmaps_wholepage": true,
+   "pages_geom_eq_pages_raster": true
+  },
+  "january.preflight_warm": {
+   "n": 3,
+   "p50_ms": 8.0,
+   "p95_ms": 8.2,
+   "max_ms": 8.2,
+   "status": [
+    200
+   ],
+   "bytes": 239,
+   "db_cmds_per_call": 6,
+   "db_by_cmd": {
+    "hello": 1,
+    "update": 1,
+    "find": 4
+   },
+   "other_counters_last_call": {
+    "db_ms": 3.56
+   }
+  },
+  "january.start": {
+   "ms": 61.7,
+   "status": 200,
+   "bytes": 54293,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "update": 2,
+    "insert": 2,
+    "find": 5
+   },
+   "db_cmds": 10,
+   "db_ms": 42.27
+  },
+  "january.player_refetch_attempt": {
+   "ms": 8.7,
+   "status": 200,
+   "bytes": 54293,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 2
+   },
+   "db_cmds": 3,
+   "db_ms": 1.16
+  },
+  "january.first_image_after_preflight": {
+   "ms": 156.9,
+   "status": 200,
+   "bytes": 349813,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.1422,
+   "pixmap_s": 0.0542,
+   "db_ms": 1.49,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0012
+  },
+  "january.second_image": {
+   "ms": 250.1,
+   "status": 200,
+   "bytes": 526744,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.2357,
+   "pixmap_s": 0.1158,
+   "db_ms": 1.59,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0012
+  },
+  "january.remaining_images_sequential": {
+   "images": 78,
+   "total_s": 15.86,
+   "png_bytes_total": 46746718,
+   "p50_ms": 203.0,
+   "p95_ms": 311.2,
+   "max_ms": 366.7,
+   "crop_geometry": 78,
+   "pixmap_calls": 78,
+   "pdf_open": 78,
+   "pixmap_full": 77,
+   "pixmap_clip_lowres": 1,
+   "db_by_cmd": {
+    "find": 312
+   },
+   "db_cmds": 312,
+   "crop_render": 78,
+   "crop_render_s": 14.7589,
+   "pixmap_s": 5.6016,
+   "db_ms": 101.75,
+   "crop_render_full": 78,
+   "pdf_open_s": 0.0931
+  },
+  "january.image_warm_repeat": {
+   "n": 5,
+   "p50_ms": 3.0,
+   "p95_ms": 4.1,
+   "max_ms": 4.1,
+   "status": [
+    200
+   ],
+   "bytes": 349813,
+   "db_cmds_per_call": 4,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.69
+   }
+  },
+  "january.read_attempt_warm": {
+   "n": 5,
+   "p50_ms": 7.3,
+   "p95_ms": 7.9,
+   "max_ms": 7.9,
+   "status": [
+    200
+   ],
+   "bytes": 54292,
+   "db_cmds_per_call": 3,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 2
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.71
+   }
+  },
+  "january.status_poll": {
+   "n": 5,
+   "p50_ms": 2.0,
+   "p95_ms": 2.8,
+   "max_ms": 2.8,
+   "status": [
+    200
+   ],
+   "bytes": 293,
+   "db_cmds_per_call": 3,
+   "db_by_cmd": {
+    "find": 3
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.53
+   }
+  },
+  "january.save_answer": {
+   "n": 5,
+   "statuses": [
+    200,
+    200,
+    200,
+    200,
+    200
+   ],
+   "p50_ms": 6.9,
+   "p95_ms": 8.2,
+   "db_cmds_per_call": 4,
+   "db_by_cmd": {
+    "findAndModify": 1,
+    "find": 3
+   }
+  },
+  "january.submit": {
+   "ms": 31.5,
+   "status": 202,
+   "bytes": 313,
+   "db_by_cmd": {
+    "findAndModify": 2,
+    "aggregate": 1,
+    "update": 7,
+    "insert": 2,
+    "find": 10
+   },
+   "db_cmds": 22,
+   "db_ms": 19.25
+  },
+  "january.results_until_ready": {
+   "total_ms": 23.9,
+   "polls": 1,
+   "codes": [
+    200
+   ],
+   "final": {
+    "ms": 23.8,
+    "status": 200,
+    "bytes": 349677,
+    "db_by_cmd": {
+     "aggregate": 1,
+     "find": 5
+    },
+    "db_cmds": 6,
+    "db_ms": 1.5
+   }
+  },
+  "january.results_warm": {
+   "n": 5,
+   "p50_ms": 22.7,
+   "p95_ms": 23.5,
+   "max_ms": 23.5,
+   "status": [
+    200
+   ],
+   "bytes": 349677,
+   "db_cmds_per_call": 6,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 5
+   },
+   "other_counters_last_call": {
+    "db_ms": 1.79
+   }
+  },
+  "january.original_solution_image_first": {
+   "ms": 231.4,
+   "status": 200,
+   "bytes": 606792,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.2178,
+   "pixmap_s": 0.0901,
+   "db_ms": 1.14,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0012
+  },
+  "january.original_solution_image_repeat": {
+   "ms": 3.8,
+   "status": 200,
+   "bytes": 606792,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "db_ms": 1.29
+  },
+  "january.image_cold_after_cache_reset": {
+   "ms": 202.6,
+   "status": 200,
+   "bytes": 442639,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 5
+   },
+   "db_cmds": 5,
+   "crop_render": 1,
+   "crop_render_s": 0.1829,
+   "storage_s": 0.0027,
+   "pixmap_s": 0.0909,
+   "db_ms": 1.17,
+   "storage_get": 1,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0012,
+   "storage_bytes": 18390332
+  },
+  "january.image_next_distinct_source_cached": {
+   "ms": 171.8,
+   "status": 200,
+   "bytes": 388516,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.1579,
+   "pixmap_s": 0.0688,
+   "db_ms": 1.26,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0012
+  },
+  "april.my_set_detail_cold": {
+   "ms": 4.1,
+   "status": 200,
+   "bytes": 1016,
+   "db_by_cmd": {
+    "hello": 1,
+    "find": 3
+   },
+   "db_cmds": 4,
+   "db_ms": 1.69
+  },
+  "april.preflight_cold": {
+   "ms": 329.9,
+   "status": 200,
+   "bytes": 239,
+   "crop_geometry": 199,
+   "pixmap_wholepage_lowres": 25,
+   "pixmap_calls": 25,
+   "pdf_open": 1,
+   "db_by_cmd": {
+    "hello": 1,
+    "update": 1,
+    "find": 4
+   },
+   "db_cmds": 6,
+   "storage_s": 0.0026,
+   "pixmap_s": 0.3015,
+   "db_ms": 3.18,
+   "storage_get": 1,
+   "pdf_open_s": 0.0011,
+   "storage_bytes": 13927343
+  },
+  "april.preflight_cold_iter166_proof": {
+   "geometry_checks": 199,
+   "geometry_unique_pages": 25,
+   "pixmap_calls": 25,
+   "pixmap_unique_pages": 25,
+   "pixmap_scales": [
+    0.3
+   ],
+   "all_pixmaps_wholepage": true,
+   "pages_geom_eq_pages_raster": true
+  },
+  "april.preflight_warm": {
+   "n": 3,
+   "p50_ms": 7.8,
+   "p95_ms": 7.8,
+   "max_ms": 7.8,
+   "status": [
+    200
+   ],
+   "bytes": 238,
+   "db_cmds_per_call": 6,
+   "db_by_cmd": {
+    "hello": 1,
+    "update": 1,
+    "find": 4
+   },
+   "other_counters_last_call": {
+    "db_ms": 2.62
+   }
+  },
+  "april.start": {
+   "ms": 22.9,
+   "status": 200,
+   "bytes": 54293,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "update": 2,
+    "insert": 2,
+    "find": 5
+   },
+   "db_cmds": 10,
+   "db_ms": 7.52
+  },
+  "april.player_refetch_attempt": {
+   "ms": 7.9,
+   "status": 200,
+   "bytes": 54292,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 2
+   },
+   "db_cmds": 3,
+   "db_ms": 0.91
+  },
+  "april.first_image_after_preflight": {
+   "ms": 65.0,
+   "status": 200,
+   "bytes": 91362,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.0546,
+   "pixmap_s": 0.0431,
+   "db_ms": 0.86,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0011
+  },
+  "april.second_image": {
+   "ms": 62.2,
+   "status": 200,
+   "bytes": 51928,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.0508,
+   "pixmap_s": 0.0422,
+   "db_ms": 1.22,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.001
+  },
+  "april.remaining_images_sequential": {
+   "images": 74,
+   "total_s": 6.78,
+   "png_bytes_total": 7514644,
+   "p50_ms": 90.9,
+   "p95_ms": 128.2,
+   "max_ms": 166.2,
+   "crop_geometry": 74,
+   "pixmap_calls": 74,
+   "pdf_open": 74,
+   "pixmap_full": 74,
+   "db_by_cmd": {
+    "find": 296
+   },
+   "db_cmds": 296,
+   "crop_render": 74,
+   "crop_render_s": 5.9147,
+   "pixmap_s": 4.9649,
+   "db_ms": 97.52,
+   "crop_render_full": 74,
+   "pdf_open_s": 0.0786
+  },
+  "april.image_warm_repeat": {
+   "n": 5,
+   "p50_ms": 2.5,
+   "p95_ms": 3.6,
+   "max_ms": 3.6,
+   "status": [
+    200
+   ],
+   "bytes": 91362,
+   "db_cmds_per_call": 4,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.68
+   }
+  },
+  "april.read_attempt_warm": {
+   "n": 5,
+   "p50_ms": 7.1,
+   "p95_ms": 7.3,
+   "max_ms": 7.3,
+   "status": [
+    200
+   ],
+   "bytes": 54293,
+   "db_cmds_per_call": 3,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 2
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.6
+   }
+  },
+  "april.status_poll": {
+   "n": 5,
+   "p50_ms": 2.2,
+   "p95_ms": 2.5,
+   "max_ms": 2.5,
+   "status": [
+    200
+   ],
+   "bytes": 293,
+   "db_cmds_per_call": 3,
+   "db_by_cmd": {
+    "find": 3
+   },
+   "other_counters_last_call": {
+    "db_ms": 0.6
+   }
+  },
+  "april.save_answer": {
+   "n": 5,
+   "statuses": [
+    200,
+    200,
+    200,
+    200,
+    200
+   ],
+   "p50_ms": 5.6,
+   "p95_ms": 6.8,
+   "db_cmds_per_call": 4,
+   "db_by_cmd": {
+    "findAndModify": 1,
+    "find": 3
+   }
+  },
+  "april.submit": {
+   "ms": 33.8,
+   "status": 202,
+   "bytes": 313,
+   "db_by_cmd": {
+    "findAndModify": 2,
+    "aggregate": 1,
+    "update": 7,
+    "insert": 2,
+    "find": 10
+   },
+   "db_cmds": 22,
+   "db_ms": 23.05
+  },
+  "april.results_until_ready": {
+   "total_ms": 22.2,
+   "polls": 1,
+   "codes": [
+    200
+   ],
+   "final": {
+    "ms": 22.2,
+    "status": 200,
+    "bytes": 348690,
+    "db_by_cmd": {
+     "aggregate": 1,
+     "find": 5
+    },
+    "db_cmds": 6,
+    "db_ms": 1.44
+   }
+  },
+  "april.results_warm": {
+   "n": 5,
+   "p50_ms": 22.2,
+   "p95_ms": 22.6,
+   "max_ms": 22.6,
+   "status": [
+    200
+   ],
+   "bytes": 348689,
+   "db_cmds_per_call": 6,
+   "db_by_cmd": {
+    "aggregate": 1,
+    "find": 5
+   },
+   "other_counters_last_call": {
+    "db_ms": 1.56
+   }
+  },
+  "april.original_solution_image_first": {
+   "ms": 155.0,
+   "status": 200,
+   "bytes": 165046,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.1443,
+   "pixmap_s": 0.1207,
+   "db_ms": 0.96,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0011
+  },
+  "april.original_solution_image_repeat": {
+   "ms": 3.8,
+   "status": 200,
+   "bytes": 165046,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "db_ms": 1.23
+  },
+  "april.image_cold_after_cache_reset": {
+   "ms": 68.1,
+   "status": 200,
+   "bytes": 41587,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 5
+   },
+   "db_cmds": 5,
+   "crop_render": 1,
+   "crop_render_s": 0.0511,
+   "storage_s": 0.0023,
+   "pixmap_s": 0.0437,
+   "db_ms": 1.02,
+   "storage_get": 1,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.0011,
+   "storage_bytes": 13927343
+  },
+  "april.image_next_distinct_source_cached": {
+   "ms": 54.4,
+   "status": 200,
+   "bytes": 62066,
+   "crop_geometry": 1,
+   "pixmap_calls": 1,
+   "pdf_open": 1,
+   "pixmap_full": 1,
+   "db_by_cmd": {
+    "find": 4
+   },
+   "db_cmds": 4,
+   "crop_render": 1,
+   "crop_render_s": 0.0432,
+   "pixmap_s": 0.0335,
+   "db_ms": 1.15,
+   "crop_render_full": 1,
+   "pdf_open_s": 0.001
+  },
+  "concurrency10.cold_distinct_images": {
+   "wall_ms": 970.3,
+   "statuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    503,
+    503
+   ],
+   "p50_ms": 736.6,
+   "max_ms": 968.6,
+   "crop_geometry": 8,
+   "pixmap_calls": 8,
+   "pdf_open": 8,
+   "pixmap_full": 8,
+   "db_by_cmd": {
+    "find": 33
+   },
+   "db_cmds": 33,
+   "crop_render": 8,
+   "crop_render_s": 3.7525,
+   "storage_s": 0.0031,
+   "pixmap_s": 1.4521,
+   "db_ms": 43.21,
+   "storage_get": 1,
+   "crop_render_full": 8,
+   "pdf_open_s": 0.0097,
+   "storage_bytes": 18390332
+  },
+  "concurrency10.pyq_catalogue_warm": {
+   "wall_ms": 79.7,
+   "statuses": [
+    200
+   ],
+   "p50_ms": 77.6,
+   "max_ms": 79.3
+  },
+  "concurrency10.preflight_warm": {
+   "wall_ms": 1162.7,
+   "statuses": [
+    200
+   ],
+   "p50_ms": 1159.1,
+   "max_ms": 1162.4
+  },
+  "alternating_two_papers_12_distinct_images": {
+   "wall_ms": 1601.4,
+   "crop_geometry": 12,
+   "pixmap_calls": 12,
+   "pdf_open": 12,
+   "pixmap_full": 12,
+   "db_by_cmd": {
+    "find": 50
+   },
+   "db_cmds": 50,
+   "crop_render": 12,
+   "crop_render_s": 1.4287,
+   "storage_s": 0.0085,
+   "pixmap_s": 0.8333,
+   "db_ms": 16.35,
+   "storage_get": 2,
+   "crop_render_full": 12,
+   "pdf_open_s": 0.0131,
+   "storage_bytes": 32317675
+  },
+  "event_loop_probe_during_cold_preflight": {
+   "preflight_ms": 1140.9,
+   "status": 200,
+   "idle_health_p50_ms": 0.4,
+   "health_p50_ms": 0.9,
+   "health_p95_ms": 42.5,
+   "health_max_ms": 42.5,
+   "series_p50_ms": 4.9,
+   "series_p95_ms": 1028.3,
+   "series_max_ms": 1028.3,
+   "probes": 2
+  }
+ },
+ "rss_mb_start": {
+  "VmHWM": 195.7,
+  "VmRSS": 164.5
+ },
+ "papers": {
+  "january": {
+   "id": "jee-main-pyq-2026-01-24-s1",
+   "title": "JEE Main PYQ \u00b7 24 Jan 2026 \u00b7 Shift 1",
+   "date": "2026-01-24",
+   "pdf_bytes": 18390332,
+   "files": 1,
+   "questions": 75,
+   "question_crops": 81,
+   "unique_refs_all": 201
+  },
+  "april": {
+   "id": "jee-main-pyq-2026-04-08-s2",
+   "title": "JEE Main PYQ \u00b7 08 Apr 2026 \u00b7 Shift 2",
+   "date": "2026-04-08",
+   "pdf_bytes": 13927343,
+   "files": 1,
+   "questions": 75,
+   "question_crops": 76,
+   "unique_refs_all": 199
+  },
+  "all_count": 30,
+  "pdf_bytes_range": [
+   9067413,
+   18390332
+  ]
+ },
+ "rss_mb_after_january": {
+  "VmHWM": 633.0,
+  "VmRSS": 627.6
+ },
+ "rss_mb_after_april": {
+  "VmHWM": 633.0,
+  "VmRSS": 627.7
+ },
+ "admission_snapshot": {
+  "live": {
+   "limit": 32,
+   "peak": 1,
+   "admitted": 32,
+   "rejected": 0,
+   "failed": 0
+  },
+  "read": {
+   "limit": 16,
+   "peak": 10,
+   "admitted": 108,
+   "rejected": 0,
+   "failed": 0
+  },
+  "asset": {
+   "limit": 8,
+   "peak": 8,
+   "admitted": 194,
+   "rejected": 2,
+   "failed": 0
+  },
+  "auth": {
+   "limit": 4,
+   "peak": 1,
+   "admitted": 5,
+   "rejected": 0,
+   "failed": 0
+  },
+  "control": {
+   "limit": 4,
+   "peak": 1,
+   "admitted": 53,
+   "rejected": 0,
+   "failed": 0
+  },
+  "probe": {
+   "limit": 2,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  }
+ },
+ "cache_limits": {
+  "pack_cache": {
+   "hits": 208,
+   "misses": 7,
+   "coalesced": 7,
+   "loads": 7,
+   "evictions": 0,
+   "bytes": 748393,
+   "limit_bytes": 33554432,
+   "entries": 2,
+   "loading": 0
+  },
+  "source_pdf_cache": {
+   "limit": 67108864,
+   "used": 32317675,
+   "entries": 2
+  },
+  "core_crop_cache": {
+   "limit": 33554432,
+   "used": 0
+  },
+  "derivative_cache": {
+   "limit": 50331648,
+   "used": 2953102
+  },
+  "validation_cache": {
+   "limit": 8192,
+   "used": 0
+  }
+ },
+ "rss_mb_end": {
+  "VmHWM": 1009.1,
+  "VmRSS": 1008.3
+ },
+ "mongo_explain": {
+  "pyq_catalogue": {
+   "stages": [
+    "SORT",
+    "FETCH",
+    "IXSCAN:{'status': 1, 'audience': 1, 'exam': 1, 'created_at': -1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 30,
+   "keysExamined": 30,
+   "nReturned": 30
+  },
+  "public_catalogue_home": {
+   "stages": [
+    "SORT",
+    "FETCH",
+    "IXSCAN:{'status': 1, 'audience': 1, 'exam': 1, 'created_at': -1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 30,
+   "keysExamined": 30,
+   "nReturned": 30
+  },
+  "set_by_id": {
+   "stages": [
+    "FETCH",
+    "IXSCAN:{'id': 1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 1,
+   "keysExamined": 1,
+   "nReturned": 1
+  },
+  "attempt_owned": {
+   "stages": [
+    "FETCH",
+    "IXSCAN:{'id': 1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 1,
+   "keysExamined": 1,
+   "nReturned": 1
+  },
+  "attempts_recent_by_user": {
+   "stages": [
+    "FETCH",
+    "IXSCAN:{'user_id': 1, 'started_at': -1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 2,
+   "keysExamined": 2,
+   "nReturned": 2
+  },
+  "attempts_user_set_state": {
+   "stages": [
+    "SORT",
+    "FETCH",
+    "IXSCAN:{'set_id': 1, 'mode': 1, 'competition_ranked': 1, 'summary.score': -1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 1,
+   "keysExamined": 2,
+   "nReturned": 1
+  },
+  "start_key_lookup": {
+   "stages": [
+    "FETCH",
+    "IXSCAN:{'user_id': 1, 'started_at': -1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 2,
+   "keysExamined": 2,
+   "nReturned": 0
+  },
+  "files_by_id": {
+   "stages": [
+    "FETCH",
+    "IXSCAN:{'id': 1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 0,
+   "keysExamined": 0,
+   "nReturned": 0
+  },
+  "preflight_upsert_key": {
+   "stages": [
+    "FETCH",
+    "IXSCAN:{'user_id': 1, 'set_id': 1}"
+   ],
+   "COLLSCAN": false,
+   "docsExamined": 1,
+   "keysExamined": 1,
+   "nReturned": 1
+  }
+ },
+ "collection_stats": {
+  "tejas_sets": {
+   "count": 30,
+   "avgObjSize": 139640,
+   "size": 4189215,
+   "nindexes": 7,
+   "indexes": [
+    "_id_",
+    "chapter_book_id_1_chapter_number_1",
+    "id_1",
+    "pyq_date_catalogue",
+    "series_date_1",
+    "status_1_audience_1_exam_1_created_at_-1",
+    "status_1_exam_1"
+   ]
+  },
+  "tejas_attempts": {
+   "count": 2,
+   "avgObjSize": 14467,
+   "size": 28934,
+   "nindexes": 15,
+   "indexes": [
+    "_id_",
+    "chapter_attempt_latest",
+    "exam_attempt_history",
+    "id_1",
+    "set_id_1_mode_1_competition_ranked_1_summary.score_-1",
+    "set_id_1_status_1_version_1",
+    "set_id_1_version_1_status_1_mode_1_cohort_indexed_1_submitted_at_1_id_1",
+    "status_1_deadline_1",
+    "status_1_grading_status_1_submitted_at_1",
+    "user_id_1_exam_1_mode_1_status_1_submitted_at_-1",
+    "user_id_1_series_id_1_started_at_-1",
+    "user_id_1_set_id_1_mode_1",
+    "user_id_1_start_key_1",
+    "user_id_1_start_request_keys_1",
+    "user_id_1_started_at_-1"
+   ]
+  },
+  "tejas_packs": {
+   "count": 2,
+   "avgObjSize": 7464,
+   "size": 14928,
+   "nindexes": 1,
+   "indexes": [
+    "_id_"
+   ]
+  },
+  "tejas_files": {
+   "count": 30,
+   "avgObjSize": 687,
+   "size": 20626,
+   "nindexes": 3,
+   "indexes": [
+    "_id_",
+    "id_1",
+    "set_id_1_created_at_-1"
+   ]
+  },
+  "tejas_users": {
+   "count": 1,
+   "avgObjSize": 293,
+   "size": 293,
+   "nindexes": 3,
+   "indexes": [
+    "_id_",
+    "email_1",
+    "id_1"
+   ]
+  },
+  "tejas_sessions": {
+   "count": 5,
+   "avgObjSize": 189,
+   "size": 948,
+   "nindexes": 3,
+   "indexes": [
+    "_id_",
+    "expires_at_1",
+    "id_1"
+   ]
+  }
+ },
+ "cleanup": {
+  "db_dropped": true,
+  "storage_puts": [],
+  "real_handles_left": []
+ }
+}

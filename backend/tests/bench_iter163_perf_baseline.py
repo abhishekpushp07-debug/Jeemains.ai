@@ -133,8 +133,14 @@ async def paper_flow(label, paper, phone, p):
         assert (await c.post('/api/auth/phone', json={'phone': phone, 'pin': p})).status_code == 200
         H.reset_process_caches()
         _, m = await timed(c, 'GET', f'/api/my/sets/{pid}'); one(f'{label}.my_set_detail_cold', m)
+        g0, p0 = len(H.GEOM_LOG), len(H.PIXMAP_LOG)  # iter166 test-only: per-ref geometry + per-page raster evidence
         r, m = await timed(c, 'POST', f'/api/sets/{pid}/preflight', json={'test_response': 'ok'}); one(f'{label}.preflight_cold', m)
         assert r.status_code == 200, r.text
+        gl, pl = H.GEOM_LOG[g0:], H.PIXMAP_LOG[p0:]
+        R['steps'][f'{label}.preflight_cold_iter166_proof'] = {
+            'geometry_checks': len(gl), 'geometry_unique_pages': len(set(gl)), 'pixmap_calls': len(pl),
+            'pixmap_unique_pages': len({x[0] for x in pl}), 'pixmap_scales': sorted({x[1] for x in pl}),
+            'all_pixmaps_wholepage': all(x[2] for x in pl), 'pages_geom_eq_pages_raster': set(gl) == {x[0] + 1 for x in pl}}
         await series(c, f'{label}.preflight_warm', 'POST', f'/api/sets/{pid}/preflight', n=3, json={'test_response': 'ok'})
         r, m = await timed(c, 'POST', f'/api/sets/{pid}/start', json={'start_key': 'P163_' + uuid.uuid4().hex, 'device_checked': True})
         one(f'{label}.start', m); assert r.status_code == 200, r.text

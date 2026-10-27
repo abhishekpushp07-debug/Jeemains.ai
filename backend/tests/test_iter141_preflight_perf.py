@@ -24,7 +24,7 @@ FID = PAPER['file_ids'][0]
 RAW = (AUDIT / (FILES[FID]['source_drive_id'] + '.pdf')).read_bytes()
 SRC = {**FILES[FID], 'path': 'TEST/jan141/' + FID}
 STORE = {SRC['path']: RAW}
-C = {'get': 0, 'open': 0, 'render': 0, 'pixmap': 0}
+C = {'get': 0, 'open': 0, 'render': 0, 'pixmap': 0, 'geom': 0}  # iter166: + per-ref geometry counter
 LK = threading.Lock()
 EV = {}
 OUT = Path('/app/test_reports/iter141_preflight_perf_evidence.json')
@@ -43,6 +43,7 @@ def unique_refs(s):
 
 
 REFS = unique_refs(PAPER)
+PAGES = lambda refs: len({r['page'] for r in refs})  # noqa: E731
 
 
 def bump(k):
@@ -52,6 +53,9 @@ def bump(k):
 @pytest.fixture(autouse=True)
 def counters(monkeypatch):
     real_open, real_render, real_pix = fitz.open, tejas_core._render_crop_png, fitz.Page.get_pixmap
+    real_geom = tejas_core._crop_geometry
+    def gm(*a, **k):
+        bump('geom'); return real_geom(*a, **k)
     def g(p):
         bump('get'); return STORE[p]
     def o(*a, **k):
@@ -64,6 +68,7 @@ def counters(monkeypatch):
     monkeypatch.setattr(fitz, 'open', o)
     monkeypatch.setattr(tejas_core, '_render_crop_png', r)
     monkeypatch.setattr(fitz.Page, 'get_pixmap', px)
+    monkeypatch.setattr(tejas_core, '_crop_geometry', gm)
     yield
 
 
@@ -110,8 +115,9 @@ def test_baseline_vs_new_cold_warm():
     # old opens/reads the PDF once per unique ref
     assert old_cold_c['get'] == n and old_cold_c['open'] == n and old_cold_c['render'] == n
     # new: one GET, one fitz Document, every unique region rendered (no skipped regions)
-    assert new_cold_c == {'get': 1, 'open': 1, 'render': n, 'pixmap': n}, new_cold_c
-    assert new_warm_c == {'get': 0, 'open': 0, 'render': 0, 'pixmap': 0}, new_warm_c
+    # iter166 adapted: obsolete render==n; now every ref geometry-checked + one whole-page raster per referenced page
+    assert new_cold_c == {'get': 1, 'open': 1, 'render': 0, 'pixmap': PAGES(REFS), 'geom': n}, new_cold_c
+    assert new_warm_c == {'get': 0, 'open': 0, 'render': 0, 'pixmap': 0, 'geom': 0}, new_warm_c
     assert new_cold < old_cold, (new_cold, old_cold)
 
 
@@ -124,7 +130,7 @@ def test_all_jan_papers_new_cold():
         src = {**FILES[fid], 'path': 'TEST/jan141/' + fid}; STORE[src['path']] = raw
         refs = unique_refs(s); reset()
         rows[s['id']] = {'refs': len(refs), 's': timed(derivatives.validate_source_crops, src, refs), 'calls': snap()}
-        assert rows[s['id']]['calls'] == {'get': 1, 'open': 1, 'render': len(refs), 'pixmap': len(refs)}
+        assert rows[s['id']]['calls'] == {'get': 1, 'open': 1, 'render': 0, 'pixmap': PAGES(refs), 'geom': len(refs)}  # iter166 adapted
     EV['all_jan_new_cold'] = rows
     EV['all_jan_new_cold_max_s'] = max(r['s'] for r in rows.values())
 
@@ -136,7 +142,7 @@ def test_four_concurrent_coalesced():
     with ThreadPoolExecutor(4) as ex:
         list(ex.map(lambda _: derivatives.validate_source_crops(SRC, list(REFS)), range(4)))
     EV['new_concurrent4'] = {'wall_s': round(time.perf_counter() - t, 3), 'calls': snap()}
-    assert snap() == {'get': 1, 'open': 1, 'render': len(REFS), 'pixmap': len(REFS)}, snap()
+    assert snap() == {'get': 1, 'open': 1, 'render': 0, 'pixmap': PAGES(REFS), 'geom': len(REFS)}, snap()  # iter166 adapted
     # shuffled order of same complete ref set reuses proof
     for k in C: C[k] = 0
     derivatives.validate_source_crops(SRC, list(reversed(REFS)))
@@ -178,7 +184,8 @@ def test_negative_last_ref_not_cached(name):
     with pytest.raises((ValueError, KeyError, TypeError)):
         derivatives.validate_source_crops(SRC, refs)
     first = snap()
-    assert first['get'] == 1 and first['open'] == 1 and first['render'] == len(refs)  # earlier refs were all rendered
+    # iter166 adapted: refs validated in page order, fail at first bad ref; no clip render; pages up to failure rastered
+    assert first['get'] == 1 and first['open'] == 1 and first['render'] == 0 and first['geom'] >= 1 and first['pixmap'] <= PAGES(REFS)
     assert len(derivatives._validation_cache.data) == 0
     with pytest.raises((ValueError, KeyError, TypeError)):
         derivatives.validate_source_crops(SRC, refs)
@@ -194,7 +201,7 @@ def test_hash_mismatch_not_cached():
     for _ in range(2):
         with pytest.raises(CanonicalIntegrityError):
             derivatives.validate_source_crops(bad, REFS)
-    assert C['get'] == 2 and C['open'] == 0 and C['render'] == 0 and not derivatives._validation_cache.data
+    assert C['get'] == 2 and C['open'] == 0 and C['render'] == 0 and C['pixmap'] == 0 and not derivatives._validation_cache.data
     # INFO: content-addressed proof (same as old render_crop cache): after a success, storage bytes are not
     # re-read for the same sha within the process; record behaviour, do not assert either way.
     derivatives.validate_source_crops(SRC, REFS)
