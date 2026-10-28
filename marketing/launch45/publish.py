@@ -73,7 +73,7 @@ def publish():
             previous_file.write_text(json.dumps({"assets": previous}, indent=2) + "\n")
             print(json.dumps({"verified": name, "bytes": len(data)}), flush=True)
     public = {key: value for key, value in result.items() if not key.startswith("source-")}
-    for name in ("vertical-mobile.mp4", "landscape-mobile.mp4"):
+    for name in ("vertical-mobile.mp4", "landscape-mobile.mp4", "launch-mobile-pack.zip"):
         if name in previous:
             public[name] = previous[name]
     (APP / "backend/marketing_manifest.json").write_text(json.dumps({"campaign": "launch45-v1", "assets": public}, indent=2) + "\n")

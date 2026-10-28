@@ -102,6 +102,22 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Iteration56 — user click opens app preview instead of download
+iteration56_delivery:
+  user_request: "Direct toh aur doenload nahi ho rha zip.me shi format do ya kuch aise do jo ho doenload . Actually click krte hi preview khul ja rha app ka"
+  priority: high
+  stuck_count: 3
+  implemented: true
+  working: true
+  needs_retesting: false
+  scope: "NEWphonecompatibleZIPexactly2verified720pbaselineMP4s,preservingoriginalmasterZIP;fixedassetlaunch-mobile-pack.zip+short/api/marketing/videos.zipalias;standalone/backendHTML/api/marketing/downloads withactualformdownloadbutton,noExpo/router/login. No app/auth/academicdatachanges."
+  diagnosis: "Publicexistingfile200attachmentbytescorrect,noredirect;appNOuniversal/associateddomains. Useractualchat/browsernotknown. TroubleshooteragainassertedWhatsApp/Telegraminterceptionwithoutdeviceevidence;DO NOT adoptasconfirmedcause. Supportlookupstopped/unverified,no documentedchatattachmentoralternatehostmechanism."
+  test_plan: "ValidateNEWZIP publicdownload200PKsignatureSHA/sizeexact2ASCIIrootmembersplainZIP_STOREDnoencryptionCRC/extractedMP4SHA+fullffmpegdecode. Alias+canonicalrouteidenticalbytes/headers/ranges;actualbrowseronstandalonepagebuttonexpect_downloadnotjustcurl, filenamecompletebytesCRC, neitherrootExpo norredirect. BothstandaloneMP4buttonsdownload. Mobile320/390layoutnooverflow,plainHTMLnoauth/Metro. Existing9assetsunchangedexacthashes;allowlistnow10. Userchatclick/physicalphoneconfirmationNOTclaimed."
+  files: "backend/marketing_media.py,backend/launch_download.html,marketing/launch45/download_pack.py,marketing_manifest.json"
+  main_checks: "MainREALbrowserpageZIPbuttonsave13403359bytes/PKmagic/CRC/extractedMP4SHA PASS;390/320nooverflow. Independent100/100pytest,3/3actualbrowserZIP+MP4clickdownloadscompleteexactfilenames/bytes/SHA/pageunchanged;publicextractedvideofulldecodesPASS. Reporttest_reports/iteration_56.json."
+  user_device_verified: false
+  final_guidance: "GivecopyableFULL/api/marketing/downloadsURLforChromeaddressbarinstead ofonlyclickablechatlink;DownloadZIPthenFilesDownloadsExtractMP4. Rootcauseofuserchatpreviewopeningunproven;awaitphoneconfirmation."
+
 ## Iteration55 — session stability and fast list verification
 iteration55_current:
   user_choices: "Pehle logout aur list loading. World best banao na. Then verify MP4 compatibility."

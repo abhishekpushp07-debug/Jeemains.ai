@@ -15,14 +15,14 @@ APP = ROOT.parents[1]
 load_dotenv(APP / "backend/.env")
 
 
-def make_pack(output, expected=None):
-    target = output / "JEELIVE-Launch-Videos-45s.zip"
+def make_pack(output, expected=None, mobile=False):
+    target = output / ("JEELIVE-Mobile-Videos-45s.zip" if mobile else "JEELIVE-Launch-Videos-45s.zip")
     with zipfile.ZipFile(target, "w", compression=zipfile.ZIP_STORED) as archive:
         for mode in ("vertical", "landscape"):
-            name = f"JEELIVE-launch-45s-{mode}.mp4"
+            name = f"JEELIVE-Mobile-{mode.title()}-45s.mp4" if mobile else f"JEELIVE-launch-45s-{mode}.mp4"
             data = (output / name).read_bytes()
             if expected:
-                record = expected[f"{mode}.mp4"]
+                record = expected[f"{mode}-mobile.mp4" if mobile else f"{mode}.mp4"]
                 if len(data) != record["bytes"] or hashlib.sha256(data).hexdigest() != record["sha256"]:
                     raise ValueError("MP4 differs from verified published master")
             info = zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
@@ -34,13 +34,14 @@ def make_pack(output, expected=None):
     return target
 
 
-def publish_pack():
+def publish_pack(mobile=False):
     manifest_file = APP / "backend/marketing_manifest.json"
     manifest = json.loads(manifest_file.read_text())
-    target = make_pack(ROOT / "output", manifest["assets"])
+    target = make_pack(ROOT / "output", manifest["assets"], mobile=mobile)
+    asset_name = "launch-mobile-pack.zip" if mobile else "launch-pack.zip"
     data = target.read_bytes()
     digest = hashlib.sha256(data).hexdigest()
-    previous = manifest["assets"].get("launch-pack.zip")
+    previous = manifest["assets"].get(asset_name)
     if previous and previous["sha256"] == digest:
         print(json.dumps({"already_published": True, "bytes": len(data), "sha256": digest}))
         return
@@ -59,11 +60,11 @@ def publish_pack():
         if verified.status_code != 200 or hashlib.sha256(verified.content).hexdigest() != digest:
             raise RuntimeError("Archive read-back verification failed")
     record = {"path": path, "sha256": digest, "bytes": len(data), "content_type": "application/zip", "filename": target.name}
-    manifest["assets"]["launch-pack.zip"] = record
+    manifest["assets"][asset_name] = record
     manifest_file.write_text(json.dumps(manifest, indent=2) + "\n")
     published_file = ROOT / "published.json"
     published = json.loads(published_file.read_text())
-    published["assets"]["launch-pack.zip"] = record
+    published["assets"][asset_name] = record
     published_file.write_text(json.dumps(published, indent=2) + "\n")
     print(json.dumps({"verified_zip": target.name, "bytes": len(data), "sha256": digest, "members": 2}))
 
@@ -71,5 +72,6 @@ def publish_pack():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--publish", action="store_true", required=True)
-    parser.parse_args()
-    publish_pack()
+    parser.add_argument("--mobile", action="store_true", help="Package the verified phone-compatible MP4s, preserving the master ZIP")
+    args = parser.parse_args()
+    publish_pack(mobile=args.mobile)

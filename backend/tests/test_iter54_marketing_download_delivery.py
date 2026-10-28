@@ -53,7 +53,7 @@ def launch_zip_bytes(api_client: requests.Session) -> bytes:
 
 
 # Allowlist and manifest structure
-def test_manifest_has_expected_9_public_assets(manifest_assets: dict):
+def test_manifest_has_expected_10_public_assets(manifest_assets: dict):
     expected = {
         "vertical.mp4",
         "landscape.mp4",
@@ -64,6 +64,7 @@ def test_manifest_has_expected_9_public_assets(manifest_assets: dict):
         "launch-pack.zip",
         "vertical-mobile.mp4",
         "landscape-mobile.mp4",
+        "launch-mobile-pack.zip",
     }
     assert set(manifest_assets.keys()) == expected
 

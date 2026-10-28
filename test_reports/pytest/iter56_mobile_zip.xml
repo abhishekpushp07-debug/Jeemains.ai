@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="9" time="11.294" timestamp="2026-10-28T17:51:42.222547+00:00" hostname="agent-env-2a161864-6556-461a-840f-e57ce19b1d42"><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_zip_delivery_contract[/api/marketing/launch/launch-mobile-pack.zip]" time="1.869"><failure message="KeyError: 'content-length'">backend/tests/test_iter56_mobile_zip_downloads.py:48: in test_zip_delivery_contract
+    assert head.headers[key] == response.headers[key]
+                                ^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/structures.py:65: in __getitem__
+    return self._store[key.lower()][1]
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'content-length'</failure></testcase><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_zip_delivery_contract[/api/marketing/videos.zip]" time="5.845"><failure message="KeyError: 'content-length'">backend/tests/test_iter56_mobile_zip_downloads.py:48: in test_zip_delivery_contract
+    assert head.headers[key] == response.headers[key]
+                                ^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/structures.py:65: in __getitem__
+    return self._store[key.lower()][1]
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'content-length'</failure></testcase><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_archive_integrity" time="0.020" /><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_extracted_mobile_media_full_decode[vertical-dimensions0]" time="0.474" /><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_extracted_mobile_media_full_decode[landscape-dimensions1]" time="0.427" /><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_original_manifest_preservation" time="0.003" /><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_readonly_and_unknown_assets" time="1.912" /><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_standalone_html" time="0.139" /><testcase classname="tests.test_iter56_mobile_zip_downloads" name="test_packaging_idempotence_and_master_preservation" time="0.205" /></testsuite></testsuites>

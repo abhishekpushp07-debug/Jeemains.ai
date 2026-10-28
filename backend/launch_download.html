@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="hi-Latn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>JEELIVE · Video downloads</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#08080a;color:#f8fafc;font-family:system-ui,sans-serif;line-height:1.55;padding:32px 20px}
+    main{max-width:480px;margin:0 auto}header{font-weight:800;letter-spacing:.04em;color:#ff6974;margin-bottom:32px}
+    h1{font-size:32px;line-height:1.15;margin:0 0 14px}p{color:#b0b0bf;margin:12px 0 24px}.card{background:#14141c;border:1px solid #30303b;border-radius:20px;padding:22px;margin-bottom:24px}
+    .tag{color:#ff6974;font-size:12px;font-weight:700;letter-spacing:.08em}.meta{font-size:14px;margin:12px 0 20px}form{margin:0}
+    button,a{font:inherit}button{display:block;width:100%;min-height:54px;background:#d91222;color:white;font-weight:750;border:0;border-radius:14px;padding:14px;cursor:pointer}
+    button:active{opacity:.8}a:focus-visible,button:focus-visible{outline:3px solid #f8fafc;outline-offset:4px}.files{display:grid;gap:12px;margin-top:16px}
+    .files a{min-height:48px;display:flex;align-items:center;justify-content:center;padding:12px;border:1px solid #444452;border-radius:12px;color:#f8fafc;text-decoration:none}
+    h2{font-size:18px;margin:0 0 8px}ol{padding-left:22px;color:#b0b0bf}li{padding:5px 0}.note{font-size:13px;border-top:1px solid #30303b;padding-top:20px}strong{color:#f8fafc}
+  </style>
+</head>
+<body><main id="root" data-testid="launch-download-page">
+  <header data-testid="download-brand">JEELIVE.AI / VIDEO FILES</header>
+  <h1 data-testid="download-title">Dono videos.<br>Ek simple ZIP.</h1>
+  <p data-testid="download-description">Yeh sirf download page hai, JEELIVE app preview nahi. Login ki zaroorat nahi hai.</p>
+  <section class="card" aria-label="Phone-compatible videos">
+    <span class="tag" data-testid="download-format">PHONE-COMPATIBLE MP4</span>
+    <p class="meta" data-testid="download-contents">Vertical Reel + Landscape video<br>45 seconds each · 720p · Music + Hinglish<br><strong>ZIP · __ZIP_SIZE__ MB · 2 MP4 files</strong></p>
+    <form action="/api/marketing/videos.zip" method="get">
+      <button type="submit" data-testid="download-mobile-zip">Download ZIP · __ZIP_SIZE__ MB</button>
+    </form>
+    <div class="files">
+      <a data-testid="download-vertical-mp4" href="/api/marketing/launch/vertical-mobile.mp4?download=1" download="JEELIVE-Mobile-Vertical-45s.mp4">Sirf Vertical MP4 · 7 MB</a>
+      <a data-testid="download-landscape-mp4" href="/api/marketing/launch/landscape-mobile.mp4?download=1" download="JEELIVE-Mobile-Landscape-45s.mp4">Sirf Landscape MP4 · 6.4 MB</a>
+    </div>
+  </section>
+  <section aria-label="ZIP opening instructions">
+    <h2 data-testid="download-instructions-title">Download ke baad</h2>
+    <ol data-testid="download-instructions"><li>Phone mein <strong>Files → Downloads</strong> kholo.</li><li><strong>JEELIVE-Mobile-Videos-45s.zip</strong> par tap karke <strong>Extract / Unzip</strong> chuno.</li><li>Nikale hue <strong>.mp4</strong> videos kholo. ZIP khud video nahi hai.</li></ol>
+  </section>
+  <p class="note" data-testid="download-browser-help">Chat link app preview khol de, toh is page ka poora URL copy karke Chrome/Safari ki address bar mein kholo. Download ko phone par confirm karna abhi baaki hai.</p>
+</main></body>
+</html>

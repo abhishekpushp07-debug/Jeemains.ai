@@ -10,16 +10,33 @@ import tempfile
 import httpx
 from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import Response, StreamingResponse
+from fastapi.responses import HTMLResponse, Response, StreamingResponse
 
 load_dotenv(Path(__file__).with_name(".env"))
 router = APIRouter(prefix="/marketing")
 MANIFEST = Path(__file__).with_name("marketing_manifest.json")
 CACHE = Path(tempfile.gettempdir()) / "jeelive-public-campaign"
-ALLOWED = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip", "vertical-mobile.mp4", "landscape-mobile.mp4"}
+ALLOWED = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip", "vertical-mobile.mp4", "landscape-mobile.mp4", "launch-mobile-pack.zip"}
 _locks = {name: asyncio.Lock() for name in ALLOWED}
 _storage_key = None
 _verified = set()
+
+
+@router.get("/downloads", response_class=HTMLResponse)
+async def launch_download_page():
+    """Standalone file-delivery document, outside the Expo app/router; no login."""
+    record = asset_record("launch-mobile-pack.zip")
+    template = Path(__file__).with_name("launch_download.html").read_text()
+    return HTMLResponse(template.replace("__ZIP_SIZE__", f'{record["bytes"] / 1000000:.1f}'), headers={
+        "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer",
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; object-src 'none'",
+    })
+
+
+@router.api_route("/videos.zip", methods=["GET", "HEAD"])
+async def mobile_zip_download(request: Request):
+    """Short, copyable URL with the same verified byte/range delivery contract."""
+    return await campaign_asset("launch-mobile-pack.zip", request)
 
 
 def asset_record(name):
