@@ -14,6 +14,7 @@ from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resol
 from revision import record_learning, weak_chapters, make_router as make_revision
 from owner_downloads import make_router as make_owner_downloads
 from branding import router as branding_router
+from marketing_media import router as marketing_router
 from legal_pages import router as legal_router
 from jl_transport import canonical_request
 from rf_access import make_access_router, install_access_guard
@@ -397,6 +398,7 @@ api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))
 api.include_router(branding_router)
+api.include_router(marketing_router)
 api.include_router(legal_router)
 api.include_router(make_access_router(db))
 app.include_router(api)

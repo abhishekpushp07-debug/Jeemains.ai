@@ -102,6 +102,35 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Iteration53 — Research-led dual-format45s launch film
+iteration53_final:
+  working: true
+  needs_retesting: false
+  report: "test_reports/iteration_53.json"
+  checks: "67/67PASSpublicdeliveryandmediaregressions;all6assetsSHA/HEAD/GET/MIME/attachment/allowlist;Ranges/conditionalrequests;4fullvideodecodes1350frames/durations/resolutions/codecs/audio/faststart;posters;realWebMbrowserplayback+seek390andwide."
+  delivery: "Currentbase+/api/marketing/launch/vertical.mp4?download=1 andlandscape.mp4?download=1;previewvertical.webm/landscape.webm."
+  limitations: "ThisbrowserlacksH264/AAC;validMP4download/decodeverifiedseparatelyfromactualWebMplayback. PhysicalphoneMP4notclaimed. NoappUI/nativebundle/datachanges."
+launch45_delivery:
+  implemented: true
+  working: true
+  needs_retesting: false
+  user_choices: "BothVerticalReel/ShortsANDLandscapeYouTube;45-secondcinematic;Music+Hinglishtext;researchfirst,beautifulnotmechanical;dominant20secondno-penRapidFireandAllIndiaTestSeries."
+  creative: "marketing/launch45/BRIEF.md isauthoritative—notunsupported claims in generateddesign_guidelines.json.27sRapidFire,12sAllIndia,6sbrandfinale;motion-designedconceptpreview,notlearnerfootage;nofakecoins/ranks/percentile/4thexamclaims. Originallogo/avatars/palettepreserved."
+  implemented_files: "marketing/launch45/{graphics,shots,render,music,publish}.py;backend/marketing_media.py +server.pyrouterinclude;generatedbackend/marketing_manifest.json. No mobileappUI/auth/data/dependencychanges."
+  real_outputs:
+    - "vertical.mp4:1080x1920,45.000s,30fps1350frames,H264yuv420p/AAC48kstereo,7724316bytes"
+    - "landscape.mp4:1920x1080,45.000s,30fps1350frames,H264yuv420p/AAC48kstereo,7373179bytes"
+    - "Same-contentVP9/OpusWebMbrowserpreviews(vertical4486542bytes,landscape4517644bytes),2JPEGposters;managedobjectstorageUUIDuploads+allSHAreadbacksPASS. Sourcestagesalsoobjectstored. No commercialmusiccopied;originalinstrumentalcomposed."
+  public_routes: "/api/marketing/launch/{vertical.mp4,landscape.mp4,vertical.webm,landscape.webm,poster-vertical.jpg,poster-landscape.jpg};GET/HEADonly;?download=1attachment;singlebyterangesexplicitbecauseStarlette0.37.2. Fixedallowlist,sanitized503errors,noarbitraryproxy/upload/privatecontent."
+  verified_main: "Pythonlint/compilePASS;ffprobemasters45.000s/resolution/codecsPASS;manageduploadsSHAreadbacksPASS;independentvideo/audioanalysisreviewedactualverticalandfinallandscape:legible,nooverlap/blankframes/harshaudio;transitionpolished. RealpublicWebMbrowser390playsbothformats,seek11.9sNewtonanswerand31.5sAllIndiaPASS."
+  browser_diagnostic: "MP4testbrowsercannotdecodeH264/AAC:canPlayTypeempty,DEMUXER_ERROR_NO_SUPPORTED_STREAMS,HTTP206valid. The initialRCAclaim'no-storeuniversallypreventsbuffering'wasincorrect;WebMplaysunderSAMEheaders,CDN/env/cacheconfigUNCHANGED. MP4mastersvalid andfornormalclients/upload;WebMactualtestedbrowserpreview."
+  testing_required:
+    - "Verifyall6publicassetsHEAD/GET fullSHAagainstmanifest/contenttypes/content-length/downloadattachment,unknown/traversalprivatepaths404,bounded/open/suffixranges206withcorrectbytes,invalid/reversed/huge/multirange416,IfRangefallback200/IfNoneMatch304. Noauthrequired/noaccountrequests."
+    - "FFmpegFULldecode4videos;ffprobeMP4exact45.000s/WebMwithin.1s,expected1080dimensions30fps,all1350frames,audio48kstereo,MP4faststartmoovbeforemdat. Measureaudiononsilence/peak/blackframeboundaries,don'tmistakedarkdesignforblank."
+    - "BrowserVP9/Opusloadplayseekbothvariants,muteunmuteifgesturepossible,endhold,390/landscapewide;don'tcallMP4brokenwhenbrowserdoesn'tsupportitscodec. MainalreadypublicactualWebMplays/seekPASS."
+    - "Read-onlyappentryandknownhealthsmoke;frontendlogo/theme/Home/RF/SeriesBanner unchangedhashagainstlatestpre-videoGitcommit. NoAPIacademic/RF/walletwrites/privateuserlogin orfixturesoncanonical. Allassetsoutsidefrontend/nativebundle. NoEAS/build/deploymentchecks."
+  limitations: "Quiz/duel are clearlymotion-designedfeatureillustrations;notactuallearnerrecording. BrowserQAusesWebMbecausetestbrowserlacksH264/AAC;physicalphoneMP4notclaimedtested. ExistingAPK<20MB/upstream/deletionbacklogunchanged."
+
 ## Iteration52 — All India native gradient washout
 iteration52_final:
   working: true
