@@ -102,6 +102,17 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Iteration54 — launch-file download complaint
+launch_download_fallback:
+  implemented: true
+  working: true
+  needs_retesting: false
+  report: "test_reports/iteration_54.json"
+  change: "Explicitvideo downloads nowoctet-streamattachment;defaultpreviewtypesunchanged. Always-attachmentlaunch-pack.zipcontains2bit-identicalMP4masters. NoappUI/authchanges."
+  verified: "58/58deliveryregressionsPASS; independentbrowserusergestureZIP+bothMP4downloads3/3PASSfilename/bytes/SHA;mainalsoZIPdownload/extract/CRC/masterSHAsPASS."
+  zip: "15097795bytes;sha256aceeaa6329a41e32109521acb6f9da1118c81b0816b1c27ab33577dbec339822"
+  remaining: "Useractualdevice/browserfailurecouldnotbereproduced;don'tassertparticularWebViewcause. NewZIPfallback+binarydownloadverifiedonstandardtestbrowser,awaituserconfirmation."
+
 ## Iteration53 — Research-led dual-format45s launch film
 iteration53_final:
   working: true

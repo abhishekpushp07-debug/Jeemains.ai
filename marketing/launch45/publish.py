@@ -10,6 +10,7 @@ import uuid
 import httpx
 from dotenv import load_dotenv
 from PIL import Image
+from download_pack import make_pack
 
 ROOT = Path(__file__).parent
 APP = ROOT.parents[1]
@@ -42,6 +43,7 @@ def publish():
         items[f"{mode}.mp4"] = (video, "video/mp4")
         items[f"{mode}.webm"] = (video.with_suffix(".webm"), "video/webm")
         items[f"poster-{mode}.jpg"] = (poster, "image/jpeg")
+    items["launch-pack.zip"] = (make_pack(output), "application/zip")
     for name in ["rapid-stage", "series-stage"]:
         items[f"source-{name}.jpg"] = (ROOT / "assets" / f"{name}.jpg", "image/jpeg")
     previous_file = ROOT / "published.json"
@@ -72,7 +74,7 @@ def publish():
             print(json.dumps({"verified": name, "bytes": len(data)}), flush=True)
     public = {key: value for key, value in result.items() if not key.startswith("source-")}
     (APP / "backend/marketing_manifest.json").write_text(json.dumps({"campaign": "launch45-v1", "assets": public}, indent=2) + "\n")
-    print("Published allowlist: 2 MP4 masters + 2 WebM previews + 2 posters; no secrets or learner data")
+    print("Published allowlist: 2 MP4 masters + 2 WebM previews + 2 posters + download ZIP; no secrets or learner data")
 
 
 if __name__ == "__main__":

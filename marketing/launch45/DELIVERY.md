@@ -4,6 +4,10 @@ Two independently composed45s/1080p/30fps films with originalinstrumentalmusic a
 
 Currentbase:https://jeelive-mobile.preview.emergentagent.com (futureforks: usecurrentEXPO_PUBLIC_BACKEND_URL).
 
+**Preferred single-file download:** `/api/marketing/launch/launch-pack.zip` (15.1MB). Alwaysdownloadsasanattachment;extracttoobtainBOTHoriginalMP4s,nore-encoding. Noappinstallorloginneeded. ExplicitMP4`?download=1`nowreturnsbinaryattachmenttoavoidinvoluntaryinlineplayback. Defaultpreviewlinksunchanged.
+
+Iteration54:58/58scopeddeliverytestsand3/3actualbrowserZIP/MP4downloadspass,includingarchiveCRC/individualSHAchecks. Userdevice/browserstillunknown;openinChrome/Safariifchatrestrictsdownloads,andrequesterrorcreenshotifstillblocked. Don'tclaimWhatsApporcodecascertainrootcause.
+
 | Format | Preview | MP4 master |
 |---|---|---|
 | VerticalReel/Shorts1080×1920 | `/api/marketing/launch/vertical.webm` | `/api/marketing/launch/vertical.mp4?download=1` (7.72MB) |

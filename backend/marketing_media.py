@@ -16,7 +16,7 @@ load_dotenv(Path(__file__).with_name(".env"))
 router = APIRouter(prefix="/marketing")
 MANIFEST = Path(__file__).with_name("marketing_manifest.json")
 CACHE = Path(tempfile.gettempdir()) / "jeelive-public-campaign"
-ALLOWED = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg"}
+ALLOWED = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip"}
 _locks = {name: asyncio.Lock() for name in ALLOWED}
 _storage_key = None
 _verified = set()
@@ -111,10 +111,13 @@ async def campaign_asset(name: str, request: Request):
         start, end = byte_range(range_header, size)
         status = 206
         headers["Content-Range"] = f"bytes {start}-{end}/{size}"
-    disposition = "attachment" if request.query_params.get("download") == "1" else "inline"
+    download = request.query_params.get("download") == "1" or name.endswith(".zip")
+    disposition = "attachment" if download else "inline"
+    # Download links are files, not a request to open an inline video decoder.
+    media_type = "application/octet-stream" if download and record["content_type"].startswith("video/") else record["content_type"]
     headers["Content-Disposition"] = f'{disposition}; filename="{record["filename"]}"'
     headers["Content-Length"] = str(end - start + 1)
     if request.method == "HEAD":
-        return Response(status_code=status, media_type=record["content_type"], headers=headers)
+        return Response(status_code=status, media_type=media_type, headers=headers)
     path = await cached_asset(name, record)
-    return StreamingResponse(chunks(path, start, end - start + 1), status_code=status, media_type=record["content_type"], headers=headers)
+    return StreamingResponse(chunks(path, start, end - start + 1), status_code=status, media_type=media_type, headers=headers)
