@@ -100,7 +100,7 @@ def test_public_asset_smoke_head(api_client: requests.Session):
 
 # Manifest and allowlist integrity
 def test_manifest_exposes_exact_public_allowlist(manifest: dict):
-    expected = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip"}
+    expected = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip", "vertical-mobile.mp4", "landscape-mobile.mp4"}
     assert set(manifest.keys()) == expected
 
 

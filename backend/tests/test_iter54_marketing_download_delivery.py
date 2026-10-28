@@ -53,7 +53,7 @@ def launch_zip_bytes(api_client: requests.Session) -> bytes:
 
 
 # Allowlist and manifest structure
-def test_manifest_has_expected_7_public_assets(manifest_assets: dict):
+def test_manifest_has_expected_9_public_assets(manifest_assets: dict):
     expected = {
         "vertical.mp4",
         "landscape.mp4",
@@ -62,6 +62,8 @@ def test_manifest_has_expected_7_public_assets(manifest_assets: dict):
         "poster-vertical.jpg",
         "poster-landscape.jpg",
         "launch-pack.zip",
+        "vertical-mobile.mp4",
+        "landscape-mobile.mp4",
     }
     assert set(manifest_assets.keys()) == expected
 
@@ -72,7 +74,7 @@ def test_zip_manifest_path_is_uuid_object(manifest_assets: dict):
 
 
 # Download disposition and MIME contract
-@pytest.mark.parametrize("name", ["vertical.mp4", "landscape.mp4"])
+@pytest.mark.parametrize("name", ["vertical.mp4", "landscape.mp4", "vertical-mobile.mp4", "landscape-mobile.mp4"])
 def test_mp4_default_is_inline_video_mime(api_client: requests.Session, manifest_assets: dict, name: str):
     _require_base_url()
     response = api_client.get(_asset_url(name), timeout=120)
@@ -82,7 +84,7 @@ def test_mp4_default_is_inline_video_mime(api_client: requests.Session, manifest
     assert manifest_assets[name]["filename"] in response.headers.get("Content-Disposition", "")
 
 
-@pytest.mark.parametrize("name", ["vertical.mp4", "landscape.mp4"])
+@pytest.mark.parametrize("name", ["vertical.mp4", "landscape.mp4", "vertical-mobile.mp4", "landscape-mobile.mp4"])
 def test_mp4_download_query_forces_attachment_octet_stream(api_client: requests.Session, manifest_assets: dict, name: str):
     _require_base_url()
     response = api_client.get(_asset_url(name) + "?download=1", timeout=120)

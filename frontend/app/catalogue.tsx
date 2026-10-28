@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { FlatList, TextInput, View } from "react-native";
 import { Redirect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { api } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
+import { useListFocus } from "@/src/useListFocus";
 import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
 import { examBySlug, fmtClock, unixDate } from "@/src/navigation";
@@ -20,7 +21,7 @@ export function attemptAction(s: any): { label: string; to: string; tone: string
   return { label: "Start", to: `/set/${s.id}`, tone: colors.surfaceInverse };
 }
 
-function SetRow({ s }: { s: any }) {
+const SetRow = memo(function SetRow({ s }: { s: any }) {
   const router = useRouter();
   const act = attemptAction(s);
   const available = s.live_enabled !== false && s.status === "published";
@@ -32,7 +33,7 @@ function SetRow({ s }: { s: any }) {
           <T w="heavy" size={16} color={foregroundOn(subjectColor(subj))}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
         </View>
         <View style={{ flex: 1, gap: 2 }}>
-          <T w="heavy" size={15} numberOfLines={2}>{s.title}</T>
+          <T testID={`set-title-${s.id}`} w="heavy" size={15} numberOfLines={2}>{s.title}</T>
           <T size={12} color={colors.muted}>{s.count} Q · {s.rules?.minutes ? s.rules.minutes + " min" : "Untimed"} · +{s.rules?.correct}/{s.rules?.wrong} · {s.maximum} marks</T>
           {s.saved ? <T size={11} w="bold" color={colors.custom_neonAmber}>Saved</T> : null}
         </View>
@@ -44,7 +45,7 @@ function SetRow({ s }: { s: any }) {
       </Card>
     </Press>
   );
-}
+});
 
 function HistoryRow({ a }: { a: any }) {
   const router = useRouter();
@@ -62,7 +63,7 @@ function HistoryRow({ a }: { a: any }) {
 export default function CatalogueRoute() {
   const { slug, kind } = useLocalSearchParams<{ slug: string; kind: string }>();
   if (slug === "jee-main" && (kind === "mocks" || kind === "pyq")) return <Redirect href="/pyq" />;
-  return <Catalogue />;
+  return <Catalogue key={`${slug}.${kind}`} />;
 }
 
 function Catalogue() {
@@ -71,7 +72,7 @@ function Catalogue() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
-  const memKey = `${slug}.${kind}`;
+  const memKey = `${user?.id}.${slug}.${kind}`;
   const [subject, setSubject] = useState(remembered[memKey]?.subject ?? (kind === "chapters" ? "Physics" : ""));
   const [q, setQ] = useState(remembered[memKey]?.q ?? "");
   const [query, setQuery] = useState(q);
@@ -87,6 +88,7 @@ function Catalogue() {
     : `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind: kind!, subject: kind === "chapters" ? subject : "", q: query, page: String(page) })}`;
   const valid = !!slug && (kind === "history" || kind === "mocks" || kind === "chapters");
   const res = useCached<any>(user && valid ? `u.${user.id}.${path}` : null, (signal) => api(path, { signal }));
+  useListFocus(res.revalidate);
   const fullKey = user && valid ? `u.${user.id}.${path}` : null;
   const items: any[] = res.data && res.dataKey === fullKey ? res.data.items : [];
   const subjects = Object.keys(res.data?.subject_counts || {}).sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
@@ -95,7 +97,7 @@ function Catalogue() {
 
   return (
     <View testID={`catalogue-${slug}-${kind}`} style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header title={title} eyebrow={exam?.name} onBack={() => router.back()} />
+      <Header title={title} eyebrow={exam?.name} backTestID="catalogue-back-button" onBack={() => router.back()} />
       {kind !== "history" ? (
         <View style={{ paddingHorizontal: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.surfaceSecondary, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, paddingHorizontal: space.md, height: 46 }}>
@@ -113,7 +115,10 @@ function Catalogue() {
         </View>
       ) : <View style={{ height: space.md }} />}
       <FlatList
+        testID="catalogue-list"
         data={items}
+        initialNumToRender={8} maxToRenderPerBatch={8} windowSize={7}
+        refreshing={res.refreshing} onRefresh={res.reload}
         keyExtractor={(x) => x.id}
         renderItem={({ item }) => (kind === "history" ? <HistoryRow a={item} /> : <SetRow s={item} />)}
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.md }}
@@ -121,7 +126,7 @@ function Catalogue() {
           <ErrorBox error={res.error} retry={res.reload} testID="catalogue-error" />
           {res.data ? <T size={12} color={colors.muted} testID="catalogue-count">{res.data.total} {kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : "mock tests")}</T> : null}
         </>}
-        ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (
+        ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View testID="catalogue-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (
           <Card testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}
             body={query ? "Try another search." : kind === "history" ? "Your attempts for this exam will appear here." : `Reviewed ${exam?.name} papers appear here when published. Nothing fake is shown.`}
             action={kind === "mocks" ? <Button testID="catalogue-try-chapters" kind="secondary" label="Try chapter-wise practice" onPress={() => router.replace(`/catalogue?slug=${slug}&kind=chapters`)} /> : undefined} /></Card>

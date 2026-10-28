@@ -1,0 +1,82 @@
+[
+  {
+    "name": "multiple data401 requests share one refresh; late401 reuses token revision",
+    "passed": true
+  },
+  {
+    "name": "rotating session GET and data401 refresh never overlap",
+    "passed": true
+  },
+  {
+    "name": "null session receives one refresh then verified user",
+    "passed": true
+  },
+  {
+    "name": "mounted good user survives session/data401 rotation collision",
+    "passed": true
+  },
+  {
+    "name": "confirmed anonymous concurrent requests clear auth exactly once",
+    "passed": true
+  },
+  {
+    "name": "PIN/signup/logout/changePIN submissions are never automatically replayed",
+    "passed": true
+  },
+  {
+    "name": "old account epoch response is ignored",
+    "passed": true
+  },
+  {
+    "name": "full body deadline remains bounded with caller signal",
+    "passed": true
+  },
+  {
+    "name": "invalid cached profile never authenticates bootstrap",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives session503",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives sessionHTML401",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives sessionMalformed200",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives refresh503",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives refreshTimeout",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives refreshNull401",
+    "passed": true
+  },
+  {
+    "name": "verified mounted user survives refreshMalformed401",
+    "passed": true
+  },
+  {
+    "name": "provider account-switch stale bootstrap cannot resurrect prior account",
+    "passed": true
+  },
+  {
+    "name": "ResourceCache academic TTL10s, explicit force, private counts always revalidate",
+    "passed": true
+  },
+  {
+    "name": "actual useCached warm initial, key/account-null isolation, dedup, 503 retains data",
+    "passed": true
+  },
+  {
+    "name": "actual useListFocus avoids mount duplicate; focus/foreground revalidate and cleanup",
+    "passed": true
+  }
+]

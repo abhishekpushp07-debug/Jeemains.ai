@@ -17,6 +17,7 @@ from branding import router as branding_router
 from marketing_media import router as marketing_router
 from legal_pages import router as legal_router
 from jl_transport import canonical_request
+from session_coordination import session_rotation
 from rf_access import make_access_router, install_access_guard
 from rapid_deck import fresh_deck
 from metadata_cache import metadata_cache
@@ -112,6 +113,11 @@ def apply_set_cookies(cookies: dict, headers: httpx.Headers) -> bool:
 async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)):
     if not SID_RE.match(x_jl_sid):
         raise HTTPException(400, "Invalid session handle.")
+    async with session_rotation(x_jl_sid, path):
+        return await forward_jeelive(path, request, x_jl_sid)
+
+
+async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
     cookies = dict(await load_jar(x_jl_sid))
     headers = {"Accept": request.headers.get("accept", "application/json")}
     if request.headers.get("content-type"):
@@ -129,8 +135,12 @@ async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)
         return Response(json.dumps({"data": None, "error": {"code": "upstream_unreachable",
                         "message": "Connection interrupted. Your last saved work is safe. Please try again."},
                         "meta": {"api_version": "1"}}), status_code=503, media_type="application/json", headers={'Cache-Control': 'no-store', 'Vary': 'X-JL-Sid'})
-    if apply_set_cookies(cookies, r.headers):
-        await save_jar(x_jl_sid, cookies)
+    if r.headers.get_list("set-cookie"):
+        # Merge only received cookie changes, never persist an older read's full
+        # cookie snapshot over a just-completed renewal.
+        current = dict(await load_jar(x_jl_sid))
+        if apply_set_cookies(current, r.headers):
+            await save_jar(x_jl_sid, current)
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}
     out['Vary'] = 'X-JL-Sid'
     if path.startswith('auth/'):

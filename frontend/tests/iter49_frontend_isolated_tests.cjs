@@ -171,7 +171,7 @@ test("apiRaw deadline includes hanging json body and maps deadline to ApiError 5
   }
 });
 
-test("apiRaw does not auto-refresh credential POST or /auth/session", async () => {
+test("apiRaw never refreshes credential POST; session gets one canonical refresh chance", async () => {
   const { mod, setFetch, resetFetch, fetchCalls } = mkClientModule();
   try {
     setFetch(async (url) => {
@@ -184,7 +184,7 @@ test("apiRaw does not auto-refresh credential POST or /auth/session", async () =
 
     fetchCalls.length = 0;
     await assert.rejects(() => mod.apiRaw("/auth/session"), (e) => e?.status === 401);
-    assert.strictEqual(fetchCalls.filter((x) => String(x.url).includes("/auth/refresh")).length, 0, "/auth/session must not trigger refresh");
+    assert.strictEqual(fetchCalls.filter((x) => String(x.url).includes("/auth/refresh")).length, 1, "supplied GET/session contract allows rotation and one refresh, never a loop");
   } finally {
     resetFetch();
   }
@@ -267,4 +267,5 @@ async function run() {
   }
 }
 
-run();
+module.exports = { loadTsModule, mkClientModule, response, wait, withFastTimeouts, mkStorage };
+if (require.main === module) run();

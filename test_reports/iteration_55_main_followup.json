@@ -1,0 +1,32 @@
+{
+  "case": "Unexpected logout and mock-list reliability fixes; compatible MP4 delivery",
+  "supersedes": "iteration_55.json unresolved issues, retained as original reproduction evidence",
+  "fixed": [
+    "GET/session and POST/refresh serialized in client; token revision tracks successful session checks",
+    "Empty/malformed401 renewal is transient, not verified expiry; response parsing bounded",
+    "POST/auth/pin excluded from automatic auth retry",
+    "Caller abort settles while shared renewal continues for other readers",
+    "Web proxy current-worker per-SID rotation ordering and incoming-only cookie merge",
+    "Catalogue/MyTests focus refresh, manual refresh state, key-matched warm cache and bounded memo mock rows",
+    "Two additive public managed-storage720pbaselineMP4s; original videos and ZIP preserved"
+  ],
+  "frontend_regressions": {"new_passed":23,"prior_iter49_passed":7,"failed":0,"typecheck":"PASS","lint":"PASS"},
+  "backend_media_regressions": {"passed":96,"failed":0,"xml":"pytest/iter55_final_media_transport.xml"},
+  "live_ui": {
+    "authentication":"One main approved existing-account login200; earlier independent tester login200; no credentials changed",
+    "bitsat":"50 mocks; page2; search; clear resets page1; back/revisit;320px no overflow",
+    "my_tests":"All3tabs;10visiblecompletedrows retained during explicitly injected503; real Retry200recovers",
+    "session":"Foreground session503 explicitly injected; signed-in screen remains visible",
+    "measurements":"BITSAT navigation462ms initial/468ms warm single samples; browser390, notAndroid",
+    "screenshots":["jeelive-bitsat-verified-320.jpeg","jeelive-tests-recovery-390.jpeg"],
+    "production_mocked_apis":false,
+    "academic_or_rf_writes":false
+  },
+  "media": {
+    "vertical-mobile.mp4":{"bytes":7032763,"sha256":"9e7764a6e4751bb65f32f1a2a3490c7e670d2b742004c09ee879faeb09dfeaa9"},
+    "landscape-mobile.mp4":{"bytes":6370296,"sha256":"9bc37d8aebc7bb3e584348014b37183b905b1c56e847d01d9ca096fd02ca7f7a"},
+    "verified":"managed upload readback, public download SHA/bytes/disposition,45s720p30fpsbaselineH264AACfaststart, fullFFmpegdecode",
+    "physical_phone_playback":false
+  },
+  "limitations":["No physicalAndroid QA/worldfastest guarantee","SignedAPK<20MB unverified","Canonical503/520 upstream outages not eliminated","Proxy locking is currentworker only; distributed coordinator and shared jar invalidation needed before multiworker claim","Direct account deletion remains owner-deferred"]
+}

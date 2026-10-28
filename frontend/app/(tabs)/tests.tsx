@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { api, del, post } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
+import { useListFocus } from "@/src/useListFocus";
 import { Button, Card, Chip, Empty, ErrorBox, Icon, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
 import { academicStyles, colors, fonts, learningTones, radius, space } from "@/src/theme";
 import { LearningBadge, learningStatusTone } from "@/src/components/LearningTheme";
@@ -40,6 +41,7 @@ export default function MyTests() {
   }, [q]);
   const params = new URLSearchParams({ tab, page: "1", q: query, status, exam }).toString();
   const list = useCached<any>(user ? `u.${user.id}.tests.${params}` : null, (signal) => api("/my/tests?" + params, { signal }));
+  useListFocus(list.revalidate);
 
   const choose = (item: any) => setSelected((o) => (o.some((x) => x.id === item.id) ? o.filter((x) => x.id !== item.id) : o.length < 2 ? [...o, item] : o));
   async function compare() {
@@ -137,7 +139,7 @@ export default function MyTests() {
         keyExtractor={(x) => x.id}
         renderItem={renderItem}
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xl, gap: space.md }}
-        refreshControl={<RefreshControl refreshing={false} onRefresh={list.reload} />}
+        refreshControl={<RefreshControl testID="my-tests-refresh" refreshing={list.refreshing} onRefresh={list.reload} />}
         ListHeaderComponent={<>
           <ErrorBox error={list.error} retry={list.reload} testID="my-tests-error" />
           {tab === "completed" ? <T size={11} color={colors.muted} testID="my-tests-comparison-help">Select two attempts of the same paper and version to compare.</T> : null}

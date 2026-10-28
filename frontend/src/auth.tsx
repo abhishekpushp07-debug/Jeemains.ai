@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { AppState } from "react-native";
-import { api, clearAssetCache, clearRapidAccess, post, resetSessionHandle, setAssetAccount, setAuthLostHandler } from "@/src/api/client";
+import { advanceAuthEpoch, ApiError, api, clearAssetCache, clearRapidAccess, post, resetSessionHandle, setAssetAccount, setAuthLostHandler } from "@/src/api/client";
 import { storage } from "@/src/utils/storage";
 import { draftIndex, discardAllDrafts } from "@/src/drafts";
 
@@ -22,52 +22,64 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [expired, setExpired] = useState(false);
   const [sessionError, setSessionError] = useState("");
   const [signOutWarning, setSignOutWarning] = useState("");
-  const generation = useRef(0), checking = useRef(false);
-  const invalidateProbe = useCallback(() => { generation.current++; }, []);
+  const generation = useRef(0), checking = useRef<Promise<void> | null>(null);
+  const invalidateProbe = useCallback(() => { generation.current++; checking.current = null; }, []);
 
   const forgetPrivateProfile = useCallback(async (purgeDownloads = false) => {
     clearAssetCache(purgeDownloads); clearRapidAccess(); setUser(null);
     await storage.removeItem("jl_user");
     // Pending drafts remain partitioned by the original server-issued user ID.
   }, []);
-  const acceptUser = useCallback(async (u: User) => {
+  const acceptUser = useCallback(async (u: User, version = generation.current, explicit = false) => {
     if (!u || typeof u.id !== "string" || !u.id) throw new Error("The account response could not be verified. Please sign in again.");
-    setAssetAccount(u.id);
+    if (version !== generation.current) return u;
     await storage.setItem("jl_user", JSON.stringify(u));
-    await storage.removeItem("jl_signed_out");
+    if (version !== generation.current) return u;
+    if (explicit) await storage.removeItem("jl_signed_out");
+    if (version !== generation.current) return u;
+    setAssetAccount(u.id);
     setUser(u); setExpired(false); setSessionError(""); setSignOutWarning(""); setReady(true);
     return u;
   }, []);
-  const checkSession = useCallback(async () => {
-    if (checking.current) return;
-    checking.current = true;
+  const checkSession = useCallback((): Promise<void> => {
+    if (checking.current) return checking.current;
     const version = generation.current;
+    const probe = (async () => {
     try {
       if (await storage.getItem<boolean>("jl_signed_out", false)) return;
       setSessionError("");
       const s = await api<{ user: User | null }>("/auth/session");
       if (version !== generation.current) return;
-      if (s?.user) await acceptUser(s.user);
-      else await forgetPrivateProfile();
-    } catch {
-      if (version === generation.current) setSessionError("Couldn't check your session. Connect to the internet and retry, or sign in below.");
-    } finally { checking.current = false; setReady(true); }
+      if (s?.user) await acceptUser(s.user, version);
+      else { advanceAuthEpoch(); await forgetPrivateProfile(); }
+    } catch (error: any) {
+      if (version === generation.current && error?.name !== "AbortError") {
+        if (error instanceof ApiError && error.status === 401) { advanceAuthEpoch(); setExpired(true); await forgetPrivateProfile(); }
+        else setSessionError("Couldn't check your session. Connect to the internet and retry, or sign in below.");
+      }
+    } finally { if (version === generation.current) setReady(true); }
+    })();
+    checking.current = probe;
+    void probe.finally(() => { if (checking.current === probe) checking.current = null; });
+    return probe;
   }, [acceptUser, forgetPrivateProfile]);
 
   useEffect(() => {
     // A cached profile is not proof of authentication; never render it first.
     let mounted = true;
     Promise.resolve().then(() => { if (mounted) void checkSession(); });
-    setAuthLostHandler(() => { generation.current++; setExpired(true); void forgetPrivateProfile(); });
+    setAuthLostHandler(() => { invalidateProbe(); setExpired(true); setReady(true); void forgetPrivateProfile(); });
     const listener = AppState.addEventListener("change", state => { if (state === "active") void checkSession(); });
-    return () => { mounted = false; invalidateProbe(); setAuthLostHandler(null); listener.remove(); };
+    return () => { mounted = false; invalidateProbe(); advanceAuthEpoch(); setAuthLostHandler(null); listener.remove(); };
   }, [checkSession, forgetPrivateProfile, invalidateProbe]);
 
   const authenticate = useCallback(async (path: string, body: object) => {
-    generation.current++;
+    generation.current++; advanceAuthEpoch();
+    const version = generation.current;
     const u = await post<User>(path, body);
-    generation.current++; // Ignore a background session probe begun mid-login.
-    return acceptUser(u);
+    if (version !== generation.current) throw Object.assign(new Error("An older sign-in request was stopped."), { name: "AbortError" });
+    generation.current++; advanceAuthEpoch(); // Ignore requests begun mid-login.
+    return acceptUser(u, generation.current, true);
   }, [acceptUser]);
   const signIn = useCallback((phone: string, pin: string) => authenticate("/auth/phone", { phone, pin }), [authenticate]);
   const signUp = useCallback((phone: string, pin: string, confirm: string) => authenticate("/auth/phone/signup", { phone, pin, confirm_pin: confirm }), [authenticate]);
@@ -82,7 +94,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, acceptUser]);
 
   const signOut = useCallback(async (drafts: "keep" | "discard") => {
-    generation.current++;
+    generation.current++; advanceAuthEpoch();
     if (user && drafts === "discard") await discardAllDrafts(user.id);
     // Prevent native cookies left after an offline logout from silently signing
     // this installation back in. A successful explicit login removes this guard.

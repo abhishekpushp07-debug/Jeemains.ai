@@ -1,0 +1,64 @@
+{
+  "summary": "Independent iteration55 verification found four unresolved auth gaps. Actual-module isolated frontend tests:17/23 PASS,6 FAIL; existing iter49:7/7 PASS; iter46 cache suite PASS. Backend:14/15 PASS,1 isolated proxy-race FAIL. One approved live PIN login200; reused its exact session without further login. Real PYQ30, BITSAT pagination/search, and MyTests3 tabs APIs pass. Browser390/320 Home/PYQ pass; further UI navigation stopped after harness selector failures. Both compatible MP4s fully decode; published originals retain download integrity.",
+  "backend_issues": {
+    "critical": [{"endpoint":"/api/jl/auth/session + /api/jl/auth/refresh","issue":"Actual jeelive_proxy isolated concurrency test observed two simultaneous rotations using same SID/cookie snapshot. server.py115 copies jar before IO and132-133 saves whole snapshot without per-SID rotation coordination. Together with frontend race, overlapping refresh-cookie consumption can revoke sessions or overwrite newer cookies. Not deliberately reproduced against live canonical accounts.","priority":"HIGH"}],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow":"Foreground session check concurrent with data401 recovery","issue":"GET/session does not join/serialize with POST/refresh. Actual client maximum rotation concurrency2; actual provider with isolated refresh-token-reuse transport forgot a previously verified user. Data401-only dedup and late401-after-refresh pass, but do not fix the session race.","affected_testIDs":["home-screen","entry-screen"]},
+      {"flow":"Unverified refresh401 after session user:null","issue":"refresh() treats any non-HTML HTTP401 as confirmed expiry without parsing JSON. Null and malformed JSON401 both caused real provider logic to clear verified user in isolated hook-host tests. SessionHTML401/session malformed/503, refreshHTML401/503/timeout preserve user correctly.","affected_testIDs":["home-screen","entry-screen"]},
+      {"flow":"Change PIN request recovery","issue":"POST/auth/pin omitted from credentialSubmission exclusions. Actual client replayed it twice after401 + refresh. Login/signup/logout correctly remain single submission. No live PIN change performed.","affected_testIDs":[]},
+      {"flow":"Cancellation during auth recovery","issue":"Caller signal is honored through original fetch/body but not passed into refresh/recovery. After401, caller abort leaves API promise pending while independent refresh waits, potentially32s. Supplemental actual-client test failed prompt cancellation.","affected_testIDs":[]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/frontend/tests/iter55_auth_cache_regression.cjs",
+    "/app/frontend/tests/iter55_auth_cancellation.cjs",
+    "/app/frontend/tests/iter49_frontend_isolated_tests.cjs",
+    "/app/frontend/tests/resourceCache_iter46.ts",
+    "/app/backend/tests/test_iter55_transport_media.py",
+    "/app/backend/tests/test_iter55_live_lists_readonly.py",
+    "/app/tests/iter55_live_readonly_ui.py",
+    "/app/test_reports/pytest/iter55_transport_media.xml",
+    "/app/test_reports/pytest/iter55_live_lists_readonly.xml",
+    "/app/test_reports/artifacts_iter55/isolated_results.json",
+    "/app/test_reports/artifacts_iter55/auth_extra_results.json",
+    "/app/test_reports/artifacts_iter55/live_metrics_followup.json"
+  ],
+  "action_items": [
+    "Main: coordinate all cookie-rotating session checks and refreshes in client, plus protect per-SID proxy jar updates. Account for session-induced token revision and stale requests; do not globally serialize ordinary catalogue reads.",
+    "Main: classify null/malformed refresh401 as unavailable, not proof of expiry; preserve verified user. Retain genuine confirmed-expiry clearing exactly once.",
+    "Main: exclude POST/auth/pin from automatic auth recovery/replay like login/signup/logout.",
+    "Main: settle caller-aborted request promptly during recovery without canceling another reader's shared refresh.",
+    "Retest all new failing regressions, then finish live BITSAT pagination/search/pull-refresh/focus and MyTests tab/failure UI checks. These UI flows were not reached; API checks do not certify the buttons.",
+    "Publish compatible MP4s separately: local files are valid but current manifest still delivers original masters. Physical Android/browser compatibility remains unverified."
+  ],
+  "critical_code_review_comments": [
+    "client.ts88-109 coordinates POST refresh only; GET/session at143-185 may itself rotate cookies outside that flight. tokenRevision increments only on explicit refresh.",
+    "client.ts99 returns false on refresh401 before any JSON validation. auth.tsx54 then accepts session user:null as expiry and clears the profile.",
+    "client.ts175-186 omits /auth/pin from no-replay credential endpoints.",
+    "ResourceCache10s academic freshness, force bypass, private MyTests always-revalidate, dedup/account separation and actual useCached warm initial/matching dataKey/null isolation/503 retain-data/loading settlement tests PASS. Actual useListFocus avoids first duplicate, revalidates focus/foreground, cleans listener. Hook tests use a deterministic MOCKED React host, executing supplied modules, not source-regex assertions or physical React Native mounting.",
+    "Existing iter49 assertion that session never refreshes was obsolete under supplied contract01_BACKEND_AND_AUTH.md15. Updated only that expectation to exactly one refresh; credential no-replay, deadlines and other valid assertions retained.",
+    "Catalogue memo rows/pull-refresh/search/pagination/focus reviewed; browser interactions beyond PYQ not completed. No measured Android speed or world-best claim is supported."
+  ],
+  "updated_files": [
+    "/app/frontend/tests/iter49_frontend_isolated_tests.cjs",
+    "/app/frontend/tests/iter55_auth_cache_regression.cjs",
+    "/app/frontend/tests/iter55_auth_cancellation.cjs",
+    "/app/backend/tests/test_iter55_transport_media.py",
+    "/app/backend/tests/test_iter55_live_lists_readonly.py",
+    "/app/tests/iter55_live_readonly_ui.py",
+    "/app/test_reports/iteration_55.json",
+    "/app/test_result.md"
+  ],
+  "success_rate": {"backend":"93.3% (14/15; only proxy concurrency failed; live lists5/5)","frontend":"73.9% new isolated tests (17/23); existing iter49 7/7 and iter46 suite PASS; live UI partial, not full-pass"},
+  "seed_data_creation": "None. No academic Start/visit/answer/submit/results solution-open, signup/changePIN/logout, or RF gameplay writes. Login once only; exact-time own proxy handle read for harness session restoration, no cookie/token/PIN printed or persisted in reports. Test identities/transport exist only in isolated process memory.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Production code unchanged. Main must address four auth gaps. Public browser metrics: bootstrap1830ms; PYQ first navigation247ms and warm revisit137ms, both0 new PYQ requests because Home already made one genuine prefetch200. 30 real papers;4 original artworks eventually loaded; Home/PYQ320 no overflow. Samples only, no p50/p95, not Android. Initial image spinner resolved, not broken artwork. Browser stopped on hidden tab-index under root JEE hub; correct route requires hub back, not tapping hidden background tab. This is harness coverage limitation, not established product navigation defect. Isolated browser503/foreground injections in saved script were NOT reached. Hook/provider transient tests and live GET lists were completed separately. MP4 full decode: constrained-baseline H264 level3.1/yuv420p,720x1280/1280x720,30fps1350frames,45s,AAC-LC44.1k stereo,moov-before-mdat; sizes7032763/6370296bytes. Local only; published original MP4/ZIP hashes pass. No physical device available. Own temporary session-handle files removed; live list suite skips unless a future run explicitly supplies its own single approved session.",
+  "rca_of_issue": "Auth regression reproduction is deterministic, ISOLATED/MOCKED transport only: mount actual provider with verified user; hold foreground GET/session inside simulated cookie rotation; issue two dataGET401s; client starts POST/refresh concurrently; fixture models refresh-token reuse rejection; provider user becomes null. Actual proxy test independently observes same concurrency2. Additional deterministic failures: GET/session user:null + refresh401 null/malformed body clears verified user; /auth/pin401 + successful refresh produces2 PIN POSTs; caller abort during refresh stays pending. These demonstrate gaps, not proof every live reported logout has this cause. No live logout or API500 reproduced this pass."
+}

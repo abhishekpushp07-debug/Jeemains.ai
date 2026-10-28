@@ -41,13 +41,22 @@ export function resultId(p: PyqPaper): string | null {
   return p.latest_result_id || ((["completed", "expired"].includes(p.attempt?.status || "") || p.attempt?.result_available === true) ? p.attempt!.id : null);
 }
 
+const dateFormatter = new Intl.DateTimeFormat("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const shiftOrder = new Intl.Collator(undefined, { numeric: true });
+const dateLabels = new Map<string, string>();
 export function paperDate(date: string): string {
+  const cached = dateLabels.get(date);
+  if (cached) return cached;
   const d = new Date(date + "T12:00:00Z");
-  return Number.isNaN(d.getTime()) ? date : d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+  if (Number.isNaN(d.getTime())) return date;
+  const label = dateFormatter.format(d);
+  if (dateLabels.size >= 128) dateLabels.delete(dateLabels.keys().next().value!);
+  dateLabels.set(date, label);
+  return label;
 }
 
 export function sortPapers(items: PyqPaper[]) {
-  return [...items].sort((a, b) => b.year - a.year || a.exam_date.localeCompare(b.exam_date) || String(a.shift).localeCompare(String(b.shift), undefined, { numeric: true }));
+  return [...items].sort((a, b) => b.year - a.year || (a.exam_date < b.exam_date ? -1 : a.exam_date > b.exam_date ? 1 : 0) || shiftOrder.compare(String(a.shift), String(b.shift)));
 }
 
 type StartIntent = { key: string; priorResult: string | null };

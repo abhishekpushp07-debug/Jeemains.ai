@@ -5,7 +5,10 @@ type Pending = { promise: Promise<any>; controller: AbortController };
 type Store = (key: string, raw: string, at: number) => void;
 const MAX_BYTES = 2 * 1024 * 1024;
 const MAX_ITEM = 384 * 1024;
-const freshFor = (key: string) => key.startsWith("rf.catalog.") ? 60000 : 0;
+// A short, account-keyed list window removes duplicate navigation reads. Actions
+// still recheck the server; explicit refresh and attempt mutations invalidate it.
+const freshFor = (key: string) => key.startsWith("rf.catalog.") ? 60000 :
+  /^u\.[^.]+\.(pyq\.jee-main$|\/exam-navigation\/[^/]+\/catalogue\?)/.test(key) ? 10000 : 0;
 
 export class ResourceCache {
   private memory = new Map<string, Entry>();

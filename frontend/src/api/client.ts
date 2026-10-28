@@ -58,7 +58,28 @@ async function headers(json: boolean) {
   return h;
 }
 
-let refreshing: Promise<boolean> | null = null;
+let authEpoch = 0, tokenRevision = 0;
+export const advanceAuthEpoch = () => { authEpoch++; };
+const requireEpoch = (epoch: number) => {
+  if (epoch !== authEpoch) throw Object.assign(new Error("An older session request was stopped."), { name: "AbortError" });
+};
+let refreshing: { epoch: number; promise: Promise<boolean> } | null = null;
+// GET /auth/session may rotate the same cookie as POST /auth/refresh. Keep
+// those exchanges ordered; ordinary lists/images remain fully concurrent.
+let rotationTail: Promise<unknown> = Promise.resolve();
+function rotateSession<T>(epoch: number, run: () => Promise<T>): Promise<T> {
+  const operation = rotationTail.then(() => { requireEpoch(epoch); return run(); });
+  rotationTail = operation.catch(() => {});
+  return operation;
+}
+async function awaitRecovery<T>(operation: Promise<T>, signal?: AbortSignal): Promise<T> {
+  // Cancel this waiter, not a renewal shared with another visible screen.
+  try { return await requestDeadline(() => operation, 32000, signal); }
+  catch (error) {
+    if (error instanceof RequestDeadlineError) throw new ApiError("Account verification is taking longer than usual. Please retry.", 503);
+    throw error;
+  }
+}
 async function boundedAuthFetch(url: string, options: RequestInit, ms = 32000, message = "Account service is taking longer than usual. Please try again."): Promise<Response> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), ms);
@@ -81,18 +102,35 @@ let onAuthLost: (() => void) | null = null;
 export const setAuthLostHandler = (fn: (() => void) | null) => (onAuthLost = fn);
 
 function refresh(): Promise<boolean> {
-  if (!refreshing) {
-    refreshing = (async () => {
+  const epoch = authEpoch;
+  const revision = tokenRevision;
+  if (!refreshing || refreshing.epoch !== epoch) {
+    const flight = { epoch, promise: Promise.resolve(false) };
+    refreshing = flight;
+    flight.promise = rotateSession(epoch, async () => {
       try {
-        const r = await boundedAuthFetch(BASE + "/auth/refresh", { method: "POST", credentials: "include", headers: await headers(true), body: "{}" });
-        captureNativeAccess(r);
-        return r.ok;
-      } catch {
-        return false;
+        if (revision !== tokenRevision) return true; // queued session check already renewed access
+        const h = await headers(true);
+        const { r, body } = await requestDeadline(async signal => {
+          const r = await fetch(BASE + "/auth/refresh", { method: "POST", credentials: "include", headers: h, body: "{}", signal });
+          const body = await r.json().catch(() => null);
+          return { r, body };
+        }, 32000);
+        requireEpoch(epoch);
+        if (r.headers.get("content-type")?.includes("text/html")) throw new ApiError("Account verification is temporarily unavailable. Please retry.", 503);
+        if (r.ok && body && typeof body === "object" && !Array.isArray(body)) { captureNativeAccess(r); tokenRevision++; return true; }
+        const rejection = body?.error?.message || body?.detail;
+        if (r.status === 401 && typeof rejection === "string" && rejection.trim()) return false;
+        // Empty/malformed/intermediary401 is not proof that the cookie expired.
+        throw new ApiError("Your session could not be renewed right now. Please retry; your saved work is safe.", 503, retryAfter(r));
+      } catch (error: any) {
+        requireEpoch(epoch);
+        if (error instanceof ApiError) throw error;
+        throw new ApiError("Connection interrupted while checking your account. Please retry.", 503);
       }
-    })().finally(() => setTimeout(() => (refreshing = null), 0));
+    }).finally(() => { if (refreshing === flight) refreshing = null; });
   }
-  return refreshing;
+  return refreshing.promise;
 }
 
 const retryAfter = (r: Response) => {
@@ -105,7 +143,31 @@ const retryAfter = (r: Response) => {
 
 export type RawResult<T> = { status: number; data: T; retryAfterMs: number };
 
-export async function apiRaw<T = any>(path: string, opts: { method?: string; body?: unknown; signal?: AbortSignal } = {}, retry = true): Promise<RawResult<T>> {
+let validation: { epoch: number; promise: Promise<boolean> } | null = null;
+async function confirmSessionEnded(epoch: number): Promise<boolean> {
+  requireEpoch(epoch);
+  if (!validation || validation.epoch !== epoch) {
+    const flight = { epoch, promise: Promise.resolve(false) };
+    validation = flight;
+    flight.promise = apiRaw<{ user: { id: string } | null }>("/auth/session", {}, false, epoch)
+      .then(result => result.data.user === null)
+      .catch(error => { if (error instanceof ApiError && error.status === 401) return true; throw error; })
+      .finally(() => { if (validation === flight) validation = null; });
+  }
+  const ended = await validation.promise;
+  requireEpoch(epoch);
+  return ended;
+}
+async function recoverUnauthorized(epoch: number, revision: number, retry: boolean, signal?: AbortSignal) {
+  requireEpoch(epoch);
+  if (retry && (revision !== tokenRevision || await awaitRecovery(refresh(), signal))) { requireEpoch(epoch); return true; }
+  if (await awaitRecovery(confirmSessionEnded(epoch), signal)) { requireEpoch(epoch); advanceAuthEpoch(); onAuthLost?.(); }
+  return false;
+}
+
+export async function apiRaw<T = any>(path: string, opts: { method?: string; body?: unknown; signal?: AbortSignal } = {}, retry = true, epoch = authEpoch): Promise<RawResult<T>> {
+  requireEpoch(epoch);
+  const revision = tokenRevision;
   const method = opts.method || "GET";
   const body = opts.body === undefined ? (method === "GET" ? undefined : "{}") : JSON.stringify(opts.body);
   let res: Response;
@@ -117,11 +179,20 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
       ...(WEB ? { cache: "no-store" as const } : {}) };
     // Supplying a cancellation signal must not disable the request deadline.
     // Keep it active through JSON consumption, including slow/chunked bodies.
-    const received = await requestDeadline(async signal => {
+    const receive = () => requestDeadline(async signal => {
+      requireEpoch(epoch);
       const response = await fetch(BASE + path, { ...options, signal });
-      const data = await response.json().catch(() => null);
+      const data = response.status === 204 ? null : await response.json().catch(() => {
+        if (response.ok) throw new ApiError("The server response was incomplete. Please retry.", 503);
+        return null;
+      });
+      const inner = data?.meta?.api_version ? data.data : data;
+      if (path === "/auth/session" && response.ok && typeof inner?.user?.id === "string" && inner.user.id) {
+        requireEpoch(epoch); captureNativeAccess(response); tokenRevision++;
+      }
       return { response, data };
     }, 32000, opts.signal);
+    const received = path === "/auth/session" ? await awaitRecovery(rotateSession(epoch, receive), opts.signal) : await receive();
     res = received.response; payload = received.data;
   } catch (e: any) {
     if (e?.name === "AbortError") throw e;
@@ -129,19 +200,29 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
     if (e instanceof ApiError) throw e;
     throw new ApiError("Connection interrupted. Your last saved work is safe. Please try again.", 0);
   }
-  const credentialSubmission = ["/auth/phone", "/auth/phone/signup", "/auth/login"].includes(path);
+  requireEpoch(epoch);
+  const data = payload && Object.prototype.hasOwnProperty.call(payload, "data") && payload.meta?.api_version ? payload.data : payload;
+  const credentialSubmission = ["/auth/phone", "/auth/phone/signup", "/auth/login", "/auth/pin"].includes(path);
   if (path.startsWith("/auth/")) captureNativeAccess(res);
+  if (path === "/auth/session") {
+    if (res.ok && (!data || !Object.prototype.hasOwnProperty.call(data, "user") || (data.user !== null && (!data.user || typeof data.user.id !== "string" || !data.user.id)))) {
+      throw new ApiError("Your session response could not be verified. Please retry.", 503);
+    }
+    const denial = payload?.error?.message || payload?.detail;
+    if (res.status === 401 && (typeof denial !== "string" || !denial.trim())) throw new ApiError("Account verification is temporarily unavailable. Please retry.", 503);
+    // /auth/session can return HTTP200 + user:null when only access has expired.
+    // Give the canonical refresh cookie one chance before forgetting the account.
+    if (retry && (res.status === 401 || (res.ok && data.user === null)) && await awaitRecovery(refresh(), opts.signal)) return apiRaw<T>(path, opts, false, epoch);
+  }
   const refreshable = !credentialSubmission && !["/auth/refresh", "/auth/logout", "/auth/session"].includes(path);
   if (res.status === 401 && refreshable) {
-    if (retry && await refresh()) return apiRaw<T>(path, opts, false);
-    onAuthLost?.();
+    if (await recoverUnauthorized(epoch, revision, retry, opts.signal)) return apiRaw<T>(path, opts, false, epoch);
   }
   if (!res.ok) {
     const d = payload?.error?.message || payload?.detail;
     const msg = typeof d === "string" ? d : Array.isArray(d) ? d.map((x: any) => x.msg).join(". ") : "This request could not finish. Please try again.";
     throw new ApiError(msg, res.status, retryAfter(res), payload?.error?.code);
   }
-  const data = payload && Object.prototype.hasOwnProperty.call(payload, "data") && payload.meta?.api_version ? payload.data : payload;
   return { status: res.status, data, retryAfterMs: retryAfter(res) };
 }
 
@@ -152,7 +233,9 @@ export const del = <T = any>(path: string) => api<T>(path, { method: "DELETE", b
 
 // Protected original bytes: bounded memory-only cache + priority/dedup queue.
 // On web use Blob URLs to avoid base64 conversion/copies; native stays in RAM.
-async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders: Record<string, string> = {}, retry = true): Promise<ImageResponse> {
+async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders: Record<string, string> = {}, retry = true, epoch = authEpoch): Promise<ImageResponse> {
+  requireEpoch(epoch);
+  const revision = tokenRevision;
   if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution)\/\d+(\?score_version=[^&]+)?$/.test(path)) throw new ApiError("Unsupported private image path.");
   const h = await headers(false);
   h.Accept = "image/png,image/*";
@@ -164,16 +247,16 @@ async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders
   const timer = setTimeout(stop, 25000);
   try {
     const res = await fetch(BASE + path, { credentials: "include", headers: h, signal: ctl.signal });
+    requireEpoch(epoch);
     if (res.status === 401) {
-      if (retry && await refresh()) return fetchPrivateAsset(path, signal, extraHeaders, false);
-      onAuthLost?.();
+      if (await recoverUnauthorized(epoch, revision, retry, signal)) return fetchPrivateAsset(path, signal, extraHeaders, false, epoch);
     }
     if (!res.ok && res.status !== 304) throw new ApiError(res.status === 429 ? "Image service is busy. Wait a moment and retry." : "The original image could not load. Retry.", res.status, retryAfter(res));
     const bytes = res.status === 304 ? new Uint8Array() : new Uint8Array(await res.arrayBuffer());
     if (signal.aborted || ctl.signal.aborted) throw Object.assign(new Error("Image loading stopped."), { name: "AbortError" });
     return { status: res.status, headers: res.headers, bytes };
   } catch (e) {
-    if (signal.aborted || e instanceof ApiError) throw e;
+    if (signal.aborted || (e as any)?.name === "AbortError" || e instanceof ApiError) throw e;
     throw new ApiError("Image connection interrupted. Tap retry when online.", 0);
   } finally { clearTimeout(timer); signal.removeEventListener("abort", stop); }
 }

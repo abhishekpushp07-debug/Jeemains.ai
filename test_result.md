@@ -102,6 +102,31 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Iteration55 — session stability and fast list verification
+iteration55_current:
+  user_choices: "Pehle logout aur list loading. World best banao na. Then verify MP4 compatibility."
+  priority: high
+  needs_retesting: false
+  implemented: true
+  working: true
+  changes: "Inherited auth refresh/confirmation and 10s account-scoped list cache need independent edge-case tests. Added catalogue/My Tests focus+foreground revalidation; catalogue pull-refresh and memoized bounded rows; useCached explicit manual-refresh state and immediate matching-key warm data. Original artwork/theme/canonical records unchanged."
+  test_plan: "Actual client and provider tests: concurrent data401 + foreground /auth/session rotation race; network/5xx/HTML malformed recovery must not logout; confirmed anonymous must clear; old epoch must not resurrect; cached profile not auth; credentials not replayed. List cold/warm/10s revalidation/manual force/failure/account isolation. Read-only live phone UI login once then PYQ/BITSAT mocks/MyTests navigation, foreground+offline return. No academic writes, no new accounts, no PIN changes or RF writes."
+  context: "Integration playbook invoked but generic response incorrectly mentioned POST/auth/session; actual local supplied transport contract specifies GET/auth/session (may rotate) and POST/auth/refresh. Do not adopt invented endpoint. Native current package versions remain source of truth. Handoff claimed universal MP4 fix but compatible files exist only locally, not manifest; check later, no false physical-device claims."
+  main_checks: "FINAL23new+7existingfrontendregressionsPASS,tsc/lintsPASS;96backend/mediaPASS. RealBITSAT50/page2/search/clear/revisit andMyTests3tabsPASS. Injected503keeps10visiblecompletedrowsandsession;realRetry200recovers;320pxnooverflow. Originalreport55 failures superseded by main followup, not deleted."
+  fixes_verified: "Client sessionGET/refreshPOST rotationordering+tokenrevision; malformedrefresh401transient; PINchange noautoplay; cancellationindependentsharedrenewal. Webproxy perSIDcurrentworkerlocks+mergeincomingcookies. Ordinaryreads stayparallel; multiworkercoordination remainsseparategate."
+  compatible_delivery: "NEWvertical-mobile.mp4/landscape-mobile.mp4publicmanagedobjects;7,032,763/6,370,296bytes.45s720pbaselineH264+AAC,fulldecode/SHA/downloadPASS. Originals/ZIPunchanged; physicalphoneplayback nottested."
+  final_report: "test_reports/iteration_55_main_followup.json"
+  limitations: "No physical Android or signed artifact; world-fastest/<20MB remain unverified. Account deletion remains owner-deferred."
+
+iteration55_testing_review:
+  agent: testing
+  working: false
+  needs_retesting: true
+  report: "test_reports/iteration_55.json"
+  findings: "Four unresolved auth gaps: sessionGET/refreshPOST rotation overlap (client AND proxy), malformed/null refresh401 clears verified user, automatic auth/pin replay, caller abort waits during refresh. New actual-module tests17/23PASS; backend14/15PASS. Production unchanged."
+  passing: "Existingiter49 7/7; iter46cachePASS;10sacademicTTL/force/privatecounts/hookkeyisolation/focusPASS. RealONE approvedlogin200/reusedsession. RealPYQ30,BITSATpagination/search,MyTests3tabsGET5/5PASS. BothcompatibleMP4fulldecode+publishedoriginaldownloadhashesPASS."
+  browser: "390/320Home4originalartworks/PYQ30/nooverflowPASS. ActualbrowserPYQfirst247ms,warm137ms,0newrequestsafterHomeprefetch;NOTAndroid. BITSAT/MyTestsUI/failureinjectionnotreachedafterharnessnavigationselectorfailures;dontclaimfullUIpass."
+
 ## Iteration54 — launch-file download complaint
 launch_download_fallback:
   implemented: true

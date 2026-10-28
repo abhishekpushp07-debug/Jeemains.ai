@@ -1,0 +1,59 @@
+{
+  "metrics": [
+    {
+      "label": "cold browser bootstrap to home (same verified session)",
+      "visible_ms": 1830,
+      "request_count": 1
+    },
+    {
+      "label": "PYQ first navigation (home-prefetched)",
+      "visible_ms": 247,
+      "request_count": 0
+    },
+    {
+      "label": "PYQ warm revisit within10s",
+      "visible_ms": 137,
+      "request_count": 0
+    }
+  ],
+  "requests": [
+    {
+      "path": "/auth/session",
+      "method": "GET",
+      "at": 13781.36462126
+    },
+    {
+      "path": "other-read",
+      "method": "GET",
+      "at": 13782.106538611
+    },
+    {
+      "path": "/my/tests?tab=progress&page=1",
+      "method": "GET",
+      "at": 13782.106678669
+    },
+    {
+      "path": "/pyq/jee-main",
+      "method": "GET",
+      "at": 13782.405620458
+    }
+  ],
+  "responses": [
+    {
+      "path": "/auth/session",
+      "status": 200
+    },
+    {
+      "path": "/series/all-india-jee",
+      "status": 200
+    },
+    {
+      "path": "/my/tests",
+      "status": 200
+    },
+    {
+      "path": "/pyq/jee-main",
+      "status": 200
+    }
+  ]
+}

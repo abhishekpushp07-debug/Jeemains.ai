@@ -25,16 +25,20 @@ export default function PyqPapers() {
   const uid = useRef(user?.id);
   useEffect(() => { uid.current = user?.id; }, [user?.id]);
   const refresh = papers.reload;
+  const revalidate = papers.revalidate;
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
-  useFocusEffect(useCallback(() => { if (first.current) first.current = false; else refresh(); }, [refresh]));
-  useEffect(() => { const sub = AppState.addEventListener("change", (state) => { if (state === "active") refresh(); }); return () => sub.remove(); }, [refresh]);
+  useFocusEffect(useCallback(() => {
+    if (first.current) first.current = false; else revalidate();
+    const sub = AppState.addEventListener("change", state => { if (state === "active") revalidate(); });
+    return () => sub.remove();
+  }, [revalidate]));
 
   const items = useMemo(() => sortPapers(papers.data?.items || []), [papers.data]);
   const years = useMemo(() => [...new Set(items.map((p) => p.year))].sort((a, b) => b - a), [items]);
   const shifts = useMemo(() => [...new Set(items.filter((p) => !year || p.year === year).map((p) => String(p.shift)))].sort(), [items, year]);
   const selectedYear = year && years.includes(year) ? year : null;
   const selectedShift = shifts.includes(shift) ? shift : "";
-  const visible = items.filter((p) => (!selectedYear || p.year === selectedYear) && (!selectedShift || String(p.shift) === selectedShift));
+  const visible = useMemo(() => items.filter((p) => (!selectedYear || p.year === selectedYear) && (!selectedShift || String(p.shift) === selectedShift)), [items, selectedYear, selectedShift]);
 
   async function open(paper: PyqPaper, checkedAt = 0) {
     if (!user || locked.current) return;
@@ -58,7 +62,8 @@ export default function PyqPapers() {
   return <View testID="pyq-screen" style={[styles.screen, { paddingTop: insets.top + space.sm }]}>
     <Header title="PYQ papers" eyebrow="JEE MAIN" testID="pyq-header" backTestID="pyq-back-button" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)/jee")} />
     <FlatList testID="pyq-paper-list" data={visible} keyExtractor={(p) => p.id} showsVerticalScrollIndicator={false}
-      refreshing={papers.loading && !!papers.data} onRefresh={refresh}
+      initialNumToRender={6} maxToRenderPerBatch={6} windowSize={7}
+      refreshing={papers.refreshing} onRefresh={refresh}
       contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + space.xl }]}
       ListHeaderComponent={<View style={styles.intro}>
         <View style={styles.heading}>

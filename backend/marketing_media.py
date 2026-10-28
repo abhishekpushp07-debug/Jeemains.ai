@@ -16,7 +16,7 @@ load_dotenv(Path(__file__).with_name(".env"))
 router = APIRouter(prefix="/marketing")
 MANIFEST = Path(__file__).with_name("marketing_manifest.json")
 CACHE = Path(tempfile.gettempdir()) / "jeelive-public-campaign"
-ALLOWED = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip"}
+ALLOWED = {"vertical.mp4", "landscape.mp4", "vertical.webm", "landscape.webm", "poster-vertical.jpg", "poster-landscape.jpg", "launch-pack.zip", "vertical-mobile.mp4", "landscape-mobile.mp4"}
 _locks = {name: asyncio.Lock() for name in ALLOWED}
 _storage_key = None
 _verified = set()

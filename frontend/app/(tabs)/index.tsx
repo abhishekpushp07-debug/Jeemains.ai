@@ -27,21 +27,22 @@ export default function Home() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user, expired } = useAuth();
+  const uid = user?.id;
   const [shine, setShine] = useState(true);
   const reducedMotion = useReducedMotion();
   const series = useCached<Series>("series", (signal) => api("/series/all-india-jee", { signal }));
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
   const current = progress.data?.items?.[0];
   useFocusEffect(useCallback(() => {
-    if (!user) return;
+    if (!uid) return;
     // One ordered background lane; don't flood canonical with five speculative
     // requests while the first screen is still loading. Navigation promotes demand.
     const t = setTimeout(() => {
-      prefetch("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", user.id));
-      prefetch(`u.${user.id}.pyq.jee-main`, signal => getPyqCatalogue(signal));
-    }, 700);
-    return () => { clearTimeout(t); cancelPrefetch(`u.${user.id}.`); };
-  }, [user]));
+      prefetch(`u.${uid}.pyq.jee-main`, signal => getPyqCatalogue(signal), false);
+      prefetch("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", uid));
+    }, 300);
+    return () => { clearTimeout(t); cancelPrefetch(`u.${uid}.`); };
+  }, [uid]));
   const bottom = usesNativeTabs ? insets.bottom : 0;
 
   return (

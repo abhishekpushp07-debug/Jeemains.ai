@@ -7,10 +7,11 @@ resources.setPersistence((key, raw, at) => {
   void Promise.resolve(storage.setItem("cache." + key, `{"v":2,"at":${at},"data":${raw}}`)).catch(() => {});
 });
 
-export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) => Promise<T>, persist = true): { data: T | null; error: string; loading: boolean; reload: () => void; revalidate: () => void; dataKey: string | null } {
+export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) => Promise<T>, persist = true): { data: T | null; error: string; loading: boolean; refreshing: boolean; reload: () => void; revalidate: () => void; dataKey: string | null } {
   const [data, setData] = useState<T | null>(key ? resources.peek<T>(key) : null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(!data);
+  const [refreshing, setRefreshing] = useState(false);
   const [tick, setTick] = useState(0);
   const [dataKey, setDataKey] = useState<string | null>(key);
   const fetchRef = useRef(fetcher);
@@ -28,6 +29,7 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
     setData(cached);
     setDataKey(key);
     setLoading(cached === null);
+    setRefreshing(force);
     (async () => {
       // Network starts immediately; the persisted copy only paints if the network hasn't answered yet.
       let fresh = false;
@@ -52,7 +54,7 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
       } catch (e: any) {
         if (alive && e?.name !== "AbortError") setError(e?.message || "Could not load. Retry.");
       } finally {
-        if (alive) setLoading(false);
+        if (alive) { setLoading(false); setRefreshing(false); }
       }
     })();
     return () => {
@@ -65,11 +67,13 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
   const reload = useCallback(() => { forceNext.current = true; setTick((t) => t + 1); }, []);
   const revalidate = useCallback(() => { forceNext.current = false; setTick((t) => t + 1); }, []);
   // A key change renders before the effect runs; never flash another exam/account's data.
-  return { data: dataKey === key ? data : (key ? resources.peek<T>(key) : null), error: dataKey === key ? error : "", loading: dataKey === key ? loading : true, reload, revalidate, dataKey };
+  const visible = key ? (dataKey === key ? data : resources.peek<T>(key)) : null;
+  return { data: visible, error: dataKey === key ? error : "", loading: key ? (dataKey === key ? loading : visible === null) : false,
+    refreshing: !!key && dataKey === key && refreshing, reload, revalidate, dataKey: key };
 }
 
 export const invalidate = (prefix: string) => resources.invalidate(prefix);
 
 // Warm the in-memory cache before the user navigates (no UI state involved).
-export function prefetch<T>(key: string, fetcher: (signal: AbortSignal) => Promise<T>) { resources.prefetch(key, fetcher); }
+export function prefetch<T>(key: string, fetcher: (signal: AbortSignal) => Promise<T>, persist = true) { resources.prefetch(key, fetcher, persist); }
 export const cancelPrefetch = (prefix: string) => resources.cancelPrefetch(prefix);

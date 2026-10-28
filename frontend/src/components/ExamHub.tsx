@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -6,6 +6,8 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { Empty, Header, Icon, IconName, Press, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 import { examBySlug } from "@/src/navigation";
+import { useAuth } from "@/src/auth";
+import { warmExamCatalogue } from "@/src/api/catalogueWarm";
 
 export const examGrad = (slug?: string): [string, string] =>
   slug === "bitsat" ? [colors.custom_examBitsat, colors.custom_examBitsatDeep] : slug === "comedk" ? [colors.custom_darkCard, colors.custom_examComedk] : [colors.custom_examJee, colors.custom_examJeeDeep];
@@ -14,6 +16,8 @@ export function ExamHub({ slug, inTab = false }: { slug: string; inTab?: boolean
   const exam = examBySlug(slug);
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const { user } = useAuth();
+  useEffect(() => { if (user?.id) warmExamCatalogue(user.id, slug); }, [user?.id, slug]);
   if (!exam) return <View style={styles.screen}><Empty title="Exam not found." /></View>;
   const jee = slug === "jee-main";
   const items: { id: string; title: string; body: string; icon: IconName; to: string }[] = [
