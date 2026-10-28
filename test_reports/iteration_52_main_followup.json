@@ -1,0 +1,28 @@
+{
+  "scope": "Correct native SVG transparency without changing original AllIndia colours",
+  "root_cause": "Installed native SVG extractor masks off stopColor alpha and uses stopOpacity default1; rgba-only stops became opaque white/black/red on native.",
+  "fix": "Separate RGB and explicit stopOpacity via processColor, memoize and forward both to SVG Stop.",
+  "verification": {
+    "regression_tests": "5/5 PASS",
+    "actual_native_svg_extractor_before_after": "PASS: alpha255 bug reproduced; explicitalpha0/51/26 correct",
+    "actual_component_all_owner_layers_to_extractor": "PASS: every original ARGB, offset, layer order and angle preserved",
+    "palette_and_artwork_hashes_unchanged": true,
+    "typescript_and_lint": "PASS",
+    "main_real_login": "HTTP200",
+    "main_home_banner_390_and_320": "PASS",
+    "pause_explainer_and_hub_navigation": "PASS"
+  },
+  "independent_tester_ui": {
+    "status": "Inconclusive entry attempt, not repeated",
+    "backend_log_evidence": "09:59 auth/session200, no matching PIN POST. Main09:54 PINPOST200 and seriesGET200 plus successful authenticatedbannerflow were already independently verified.",
+    "auth_bug_established": false,
+    "auth_code_changed": false
+  },
+  "limitations": [
+    "Actual installed native SVG JavaScript extractor tested with RNWeb processColor normalization boundary; physical Android device not available.",
+    "Physical Android visual confirmation remains pending. No claim of full upstream API reliability or new native signed build."
+  ],
+  "mocked_product_apis": [],
+  "learner_data_mutated": false,
+  "original_test_report": "iteration_52.json"
+}

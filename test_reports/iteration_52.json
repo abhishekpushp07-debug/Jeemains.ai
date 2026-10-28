@@ -1,0 +1,51 @@
+{
+  "summary": "Frontend-only iteration52 verification completed. Native SVG alpha regression is reproducible with actual installed react-native-svg extractor and verified fixed by explicit stopOpacity forwarding. Live authenticated banner UI flow could not be completed in this run after one approved sign-in attempt.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "PIN login -> home -> series banner interactions",
+        "issue": "Single approved login attempt on /entry did not transition to home and did not surface entry-error text within timeout; due scope guard, no retry attempts were made.",
+        "affected_testIDs": [
+          "entry-continue-button",
+          "home-screen",
+          "entry-error"
+        ]
+      }
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/iter52_native_svg_gradient_regression.cjs",
+    "/app/test_reports/artifacts_iter52/ui_load/jeelive-series-opacity390.jpeg",
+    "/app/test_reports/artifacts_iter52/ui_load/jeelive-series-opacity320.jpeg",
+    "/app/test_reports/artifacts_iter52/ui_series/automation_output/20261028_095923_41711e1a932f/console_20261028_095923.log"
+  ],
+  "action_items": [
+    "Main agent to re-run one authenticated mobile UI pass for series banner (390/320) in a trusted session context and capture jeelive-series-opacity390/320 from home screen.",
+    "If sign-in still stalls, inspect auth network request/response for entry submit path and cookie/session bootstrap race in browser automation context.",
+    "Keep production palette/artwork unchanged (already hash-matched against git 7cd149d for requested files)."
+  ],
+  "critical_code_review_comments": [
+    "No redesign drift found: hashes for design-tokens.json, theme.ts, SeriesBanner.tsx, ExamCardFinish.tsx, ExamTile.tsx, and 4 original tile JPGs all match commit 7cd149d.",
+    "WebsiteGradient currently preserves parseGradientLayers(value).reverse() order, forwards stopColor + stopOpacity to Svg Stop, and memoizes by [value]."
+  ],
+  "updated_files": [
+    "/app/tests/iter52_native_svg_gradient_regression.cjs",
+    "/app/test_reports/iteration_52.json"
+  ],
+  "success_rate": {
+    "backend": "NA",
+    "frontend": "85%"
+  },
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Native-side gradient bug verification is fully covered via reusable test against ACTUAL installed react-native-svg commonjs extractor with processColor boundary simulation and before/after alpha assertions. Authenticated home/banner UI checks remain pending due one-attempt sign-in non-transition in this run; do not brute-force login retries.",
+  "rca_of_issue": "RCA (verified): react-native-svg extractGradient discards embedded alpha from stopColor and composes packed ARGB using stopOpacity (default=1), which turns rgba transparent/soft stops opaque when only stopColor is passed. Mitigation (verified by tests): split stopColor into opaque RGB + explicit stopOpacity and pass both props. Before pipeline produced alpha byte 255 for rgba(0) and rgba(.2); after pipeline yields expected bytes (0 for transparent, 51 for 0.2, 26 for 0.1 CTA). Physical device rendering remains unverified in this environment."
+}

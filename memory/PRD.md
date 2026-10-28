@@ -1,5 +1,14 @@
 # JEELIVE.AI Native App — PRD
 
+## Latest iteration52 — All India native gradient colour correction
+- User objected to white/black/red washout of AllIndia banner/CTA in screenshot, asking why colours changed. **Do not redesign/recolour it.** Last Home-copy removal did not modify SeriesBanner/theme/gradient (Git comparison confirmed).
+- Root cause confirmed in installed react-native-svg native `extractGradient`: embedded stopColor RGBAalpha is discarded and replaced with stopOpacity (default1). Our CSS adapter passed RGBAcolour only, making transparentblack/softwhite opaque on native. Web SVG honoured embeddedalpha, hiding the defect in prior browser-onlychecks.
+- Added small `src/gradientStop.ts` using ReactNative `processColor` to separateRGB and unsignedARGBalpha/255; WebsiteGradient memoizesconversion and forwards BOTHstopColor+stopOpacity. No theme/token/layout/shine/CTA/content/API/auth/dependencychanges. Originalpalette/artwork/sourcefiles hash-match7cd149d.
+- Final **5/5 regressionsPASS** in `tests/iter52_native_svg_gradient_regression.cjs`: actualinstallednativeSVGextractor reproducesbefore255alpha and verifiesafter0/51/26; alphaformat/boundary/signedinteger/fallback; allownerbanner/shine/CTA/ribbontokens; actualReactcomponent render→nativeextractorpreservesEVERYoriginalARGB/offset/layerangle/order. NativeprocessColorboundary suppliedbyrealRNWebnormalizer; NOThardwareemulation. TSC/ESLintPASS.
+- MainrealreadonlyPINPOST200→Home390/320screenshots: readableoriginaldarkruby/onyxbanner, redCTA, explicittransparent/softSVGstops, pause, explaineropen/close, Openhub→/livePASS. Noattempt/PIN/account/RFwrites. Screenshots`jeelive-series-opacity-390.jpeg`,`jeelive-series-opacity-320.jpeg`.
+- TesterindependentUIattemptinconclusive: nohome/noentryerrorobserved; timestamp09:59logshaveGETauth/session200butNOcorrespondingPINPOST. Main09:54PINPOSTandseriesGETboth200plusactualauthenticatedflowPASS. Noauthbugestablished, noauthcodeweakened/changed, noadditionalcredentialretries. Originalreport52retainedwiththisfollowup.
+- **PhysicalAndroidvisualconfirmationstillpending**; extractor+browserproofnotclaimedashardwaretest. Existingnativeartifact/size/canonicalavailability/deferreddeletionbacklogunchanged. `test_reports/iteration_52_main_followup.json` recordsfinalscope.
+
 ## Latest UI correction — remove boxed Home marketing copy
 - User's annotated screenshot explicitly crosses out all promotional text below the logo and asks for an icon-led app, not a text-heavy landing page.
 - Removed only `100% FREE · BUILT FOR YOUR NEXT STEP`, `Your exam.`, `Your next big step.`, supporting paragraph and `CHOOSE YOUR EXAM` from `frontend/app/(tabs)/index.tsx`; removed unused headline/title styles. No empty replacement spacer.

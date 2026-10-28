@@ -102,6 +102,33 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
+## Iteration52 — All India native gradient washout
+iteration52_final:
+  working: true
+  needs_retesting: false
+  physical_device_verified: false
+  regression: "5/5PASS. ActualReactWebsiteGradient render + all ownerexportlayers/shine/CTA/ribbon → actualinstallednativeSVGextractor; everyoriginalARGB/offset/angle/order retained. Reproducesbeforeopaque255 andcorrects0/51/26alphas. Normalizerboundary usesRNWebprocessColor, notnativehardware. TSC/lintsPASS."
+  palette_preservation: "Token/theme/SeriesBanner/ExamCardFinish/ExamTile and original4JPG hashes match7cd149d. OnlyRGBAconversionandStopopacitycodechanged."
+  main_ui: "RealPINPOST200/Home/banner390and320/readability/explicitopacity/pause/explaineropenclose/Openhub→livePASS. Noacademic/gamewrites."
+  tester_ui_note: "Independenttesterentryattemptinconclusive; noPINPOST at09:59inbackendlogs, onlyauth/session200. PriorMAIN09:54realPINPOSTandseriesGET200withsuccessfulbannerflowfulfillsUIcheck; not claimingallauthreliabilityfixed."
+  report: "test_reports/iteration_52_main_followup.json"
+series_native_opacity:
+  user_request: "Yebkyu colour badal diye all india test series ka ? Gadhe — screenshot shows opaque white/black/red banner and white/black CTA hiding title/schedule."
+  implemented: true
+  working: true
+  needs_retesting: false
+  priority: high
+  files: "frontend/src/gradientStop.ts, frontend/src/components/WebsiteGradient.tsx"
+  cause: "Installed react-native-svg/src/lib/extract/extractGradient.ts:91-92 discards stopColor alpha (color &0x00ffffff) and replaces it with stopOpacity default1. Our stops only passed rgba color, so intended0..0.25opacity becameopaque on native, unlike browser. Same forCTAtransparentblack."
+  fix: "Use RN processColor to split opaque RGB and explicit unsignedARGBalpha/255, memoized pergradientvalue; pass BOTH stopColor and stopOpacity to SvgStop. Palette/designtokens/layers/order/angles/animation/layout/content unchanged. Home textremoval edit did NOT touch anyseries/themefile (gitcomparison verified)."
+  main_checks: "TSC+lintsPASS. RealreadonlyHome390/320: explicit0andsoftalphaSVGstops, darkruby/onyxreadablebanner/redCTA, pause shine, explanationopen/close andOpenhub→/livePASS. Noattempt/accountwrites."
+  test_plan:
+    - "Add nativegradientregression using actual installed Svg extractGradient conversion with real RN processColor-compatible normalization: reproduce BEFOREopaque255 forRGBA0/.2, AFTERalpha0/51, preserveRGB/offsets. Native extraction code not just hand-reimplemented assertion; nohardwareclaim."
+    - "All current ownerexport livebanner layers/shine/CTA/ribbon: alpha0,.04,.1,.13,.15,.2,.25,1; opaque rgb/hex/named andRGBAalpha boundaries. SignedAndroidpackedcolors andtransparent0 handled; fallbackinvalidcolor doesn'tcrash."
+    - "Actual WebsiteGradient renderer passes BOTHprops; useMemo transformation preserves layerorder,offsets/angles/size/CSSgradientLine. Compare supplieddesign-tokenfile/theme/SeriesBanner/ExamTile/artwork hashes to7cd149d, no palettechange."
+    - "Phone390/320 readonly banner/shinepause/resume/explanation/hub and nohero textregression. Useapprovedcredentials memory/test_credentials.md onlyifneeded; mainalreadyloggedinlive once, no repeatedauthforunitcases; stop401/429. Nolearnerwrites/API mocks/productseeds."
+  limitations: "No physicalAndroid here. Browser alone cannot prove native fix; actual native SVG JS gradient extraction regression required, devicevisual confirmation remainsusercheck."
+
 ## Home screenshot correction — boxed text removal
 home_copy_removal:
   implemented: true
