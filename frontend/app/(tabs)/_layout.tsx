@@ -1,26 +1,30 @@
 import React from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
 import { Tabs } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-import { Icon, IconName, Press, T } from "@/src/components/ui";
-import { colors, rapidColors, space } from "@/src/theme";
+import { IconName, Press, T } from "@/src/components/ui";
+import { Glyph } from "@/src/components/Glyph";
+import { colors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 
-const ITEMS: Record<string, { label: string; icon: IconName; active: IconName }> = {
-  index: { label: "Home", icon: "home-variant-outline", active: "home-variant" },
-  jee: { label: "JEE Main", icon: "atom-variant", active: "atom-variant" },
-  rapid: { label: "Rapid Fire", icon: "diamond-stone", active: "diamond-stone" },
-  tests: { label: "My Tests", icon: "clipboard-text-outline", active: "clipboard-text" },
-  mission: { label: "Mission", icon: "rocket-launch-outline", active: "rocket-launch" },
+const ITEMS: Record<string, { label: string; icon: IconName }> = {
+  index: { label: "Home", icon: "home-variant-outline" },
+  rank: { label: "Rank", icon: "podium" },
+  rapid: { label: "Rapid Fire", icon: "lightning-bolt" },
+  tests: { label: "My Tests", icon: "clipboard-text-outline" },
+  mission: { label: "Mission", icon: "compass-outline" },
 };
+// The bar stays ink-black on every tab (light app, dark dock), like a premium wallet.
+const BAR = colors.custom_dock, ON = colors.custom_dockInk, OFF = colors.custom_dockMuted;
 
 function JeeTabBar({ state, emitter, navigateToTab }: any) {
   const insets = useSafeAreaInsets();
-  const gameActive = state.routes[state.index]?.name === "rapid";
+  const narrow = useWindowDimensions().width < 360;
+  const labelSize = narrow ? 10 : 10.5;
   return (
-    <View style={[styles.bar, { backgroundColor: gameActive ? rapidColors.surface : colors.custom_bar, borderTopColor: gameActive ? rapidColors.border : colors.custom_barLine, paddingBottom: insets.bottom, height: (Platform.OS === "web" ? 68 : 66) + insets.bottom }]}>
+    <View style={[styles.bar, { paddingBottom: insets.bottom, height: (Platform.OS === "web" ? 70 : 68) + insets.bottom }]}>
       {state.routes.map((route: any, i: number) => {
         const item = ITEMS[route.name];
         if (!item) return null;
@@ -33,23 +37,23 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
           return (
             <View key={route.key} style={styles.rapidCol}>
               <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" accessibilityState={{ selected: focused }} style={styles.rapidPress} scaleTo={0.92}>
-                <View style={styles.diamondBox}>
-                  <View pointerEvents="none" style={[styles.glow, { backgroundColor: focused ? rapidColors.brandPrimary : colors.brandPrimary }]} />
-                  <LinearGradient colors={focused ? [rapidColors.brandPrimary, rapidColors.custom_neonViolet] : [colors.custom_diamondFrom, colors.custom_diamondTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
-                    style={[styles.diamond, { borderColor: focused ? rapidColors.custom_neonCyan : colors.brandLine }]} />
-                  <Icon name="lightning-bolt" size={24} color={colors.custom_webWhite} />
+                {/* Royal-blue glass capsule: outer view carries the glow, inner view clips the layers. */}
+                <View testID="tab-rapid-glass" style={[styles.glassGlow, focused && styles.glassGlowOn]}>
+                  <View style={[styles.glass, narrow && styles.glassNarrow, focused && styles.glassOn]}>
+                    <LinearGradient colors={[colors.custom_rfGlassFrom, colors.custom_rfGlassMid, colors.custom_rfGlassTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+                    <LinearGradient colors={[colors.custom_rfGlassSheen, colors.custom_clear]} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }} style={styles.sheen} />
+                    <View><Glyph name="lightning-bolt" size={narrow ? 22 : 24} color={colors.custom_rfGlassInk} stroke={1.9} /></View>
+                  </View>
                 </View>
-                <T w="heavy" size={9} numberOfLines={1} color={focused ? rapidColors.custom_neonCyan : colors.custom_dim} style={styles.label}>RAPID FIRE</T>
+                <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_rfGlassLine} style={styles.label}>RAPID FIRE</T>
               </Press>
             </View>
           );
         }
         return (
-          <Press key={route.key} testID={"tab-" + route.name} onPress={onPress} accessibilityLabel={item.label} accessibilityRole="tab" accessibilityState={{ selected: focused }} style={styles.item}>
-            <View style={[styles.iconWrap, focused && { backgroundColor: colors.custom_webGlass }]}>
-              <Icon name={focused ? item.active : item.icon} size={22} color={focused ? colors.onSurface : colors.custom_dim} />
-            </View>
-            <T w="heavy" size={9} numberOfLines={1} color={focused ? colors.onSurface : colors.custom_dim} style={styles.label}>{item.label.toUpperCase()}</T>
+          <Press key={route.key} testID={"tab-" + route.name} onPress={onPress} accessibilityLabel={item.label} accessibilityRole="tab" accessibilityState={{ selected: focused }} style={styles.item} scaleTo={0.94}>
+            <Glyph name={item.icon} size={24} color={focused ? ON : OFF} stroke={focused ? 1.9 : 1.5} />
+            <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : OFF} style={styles.label}>{item.label.toUpperCase()}</T>
           </Press>
         );
       })}
@@ -60,19 +64,19 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
 export default function TabsLayout() {
   if (usesNativeTabs) {
     return (
-      <NativeTabs tintColor={colors.brandText}>
+      <NativeTabs tintColor={colors.brandPrimary}>
         <NativeTabs.Trigger name="index"><NativeTabs.Trigger.Icon sf="house.fill" /><NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label></NativeTabs.Trigger>
-        <NativeTabs.Trigger name="jee"><NativeTabs.Trigger.Icon sf="atom" /><NativeTabs.Trigger.Label>JEE</NativeTabs.Trigger.Label></NativeTabs.Trigger>
-        <NativeTabs.Trigger name="rapid"><NativeTabs.Trigger.Icon sf="diamond.fill" /><NativeTabs.Trigger.Label>Rapid</NativeTabs.Trigger.Label></NativeTabs.Trigger>
+        <NativeTabs.Trigger name="rank"><NativeTabs.Trigger.Icon sf="trophy.fill" /><NativeTabs.Trigger.Label>Rank</NativeTabs.Trigger.Label></NativeTabs.Trigger>
+        <NativeTabs.Trigger name="rapid"><NativeTabs.Trigger.Icon sf="bolt.fill" /><NativeTabs.Trigger.Label>Rapid</NativeTabs.Trigger.Label></NativeTabs.Trigger>
         <NativeTabs.Trigger name="tests"><NativeTabs.Trigger.Icon sf="list.clipboard.fill" /><NativeTabs.Trigger.Label>Tests</NativeTabs.Trigger.Label></NativeTabs.Trigger>
-        <NativeTabs.Trigger name="mission"><NativeTabs.Trigger.Icon sf="sparkles" /><NativeTabs.Trigger.Label>Mission</NativeTabs.Trigger.Label></NativeTabs.Trigger>
+        <NativeTabs.Trigger name="mission"><NativeTabs.Trigger.Icon sf="safari" /><NativeTabs.Trigger.Label>Mission</NativeTabs.Trigger.Label></NativeTabs.Trigger>
       </NativeTabs>
     );
   }
   return (
     <Tabs screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: colors.surface } }} tabBar={(p) => <JeeTabBar {...p} />}>
       <Tabs.Screen name="index" />
-      <Tabs.Screen name="jee" />
+      <Tabs.Screen name="rank" />
       <Tabs.Screen name="rapid" />
       <Tabs.Screen name="tests" />
       <Tabs.Screen name="mission" />
@@ -81,13 +85,15 @@ export default function TabsLayout() {
 }
 
 const styles = StyleSheet.create({
-  bar: { borderTopWidth: 1, flexDirection: "row", overflow: "visible" },
-  item: { flex: 1, minWidth: 0, alignItems: "center", justifyContent: "center", gap: 3, paddingTop: space.xs },
-  iconWrap: { width: 44, height: 32, borderRadius: 16, alignItems: "center", justifyContent: "center" },
-  label: { letterSpacing: 1.1 },
-  rapidCol: { flex: 1.25, alignItems: "center" },
-  rapidPress: { alignItems: "center", marginTop: -24, gap: 2 },
-  diamondBox: { width: 64, height: 64, alignItems: "center", justifyContent: "center" },
-  glow: { position: "absolute", width: 72, height: 72, borderRadius: 36, opacity: 0.16 },
-  diamond: { position: "absolute", width: 44, height: 44, borderRadius: 11, transform: [{ rotate: "45deg" }], borderWidth: 1.5, shadowColor: colors.brandPrimary, shadowOpacity: 0.45, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 8 },
+  bar: { flexDirection: "row", overflow: "visible", backgroundColor: BAR, borderTopLeftRadius: 0, paddingTop: 2 },
+  item: { flex: 1, minWidth: 0, alignItems: "center", justifyContent: "center", gap: 6, paddingTop: space.xs },
+  label: { letterSpacing: 0.9 },
+  rapidCol: { flex: 1.3, alignItems: "center" },
+  rapidPress: { alignItems: "center", marginTop: -22, gap: 6 },
+  glassGlow: { borderRadius: 28, backgroundColor: colors.custom_rfGlassMid, shadowColor: colors.custom_rfGlassGlow, shadowOpacity: 0.55, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 12 },
+  glassGlowOn: { shadowOpacity: 0.85, shadowRadius: 22 },
+  glass: { width: 80, height: 54, borderRadius: 27, overflow: "hidden", borderWidth: 2, borderColor: colors.custom_rfGlassLine, alignItems: "center", justifyContent: "center" },
+  glassNarrow: { width: 68, height: 50, borderRadius: 25 },
+  glassOn: { borderColor: colors.custom_dockInk },
+  sheen: { position: "absolute", top: 0, left: 0, right: 0, height: "55%" },
 });

@@ -1,0 +1,59 @@
+{
+  "summary": "Visual QA of the light CRED-style redesign (Expo web, 390x844 and 320x700). I did one real PIN login (7004186276) and reused that session by injecting localStorage. Every non-GET /api/jl/** request was aborted, so no academic writes were made (no attempts, answers, submits, reflections, reports or PIN changes). Overall PASS: no red screen, tsc --noEmit is clean, and no purple was found by a computed-colour sweep of 14 screens. Entry: white canvas, JeeCircle.ai logo, black 'Sign in' segment and button. Home: 22 of 22 testIDs navigate correctly (account, series view-all/CTA/hub, 4 rail tiles, For You x3 open My Tests on the right tab, RF entry, promo CTA, My Tests view-all, 7 explore chips; share is a no-op on web). The All India card is black with a red CTA. The '18 DONE' badge renders. There is no Continue card because the in-progress count is 0. The tab bar is black (rgb 11,11,13) on all 5 tabs with a raised orb. The Rapid Fire tab and /rapid/leaderboard|shop|history stay fully dark (0 of 126 white samples each) and Home returns to light after visiting them. ExamHub for jee-main, bitsat and comedk is light with line-icon heroes; the destination rows navigate. My Tests: segment switch, BITSAT filter, search ('Work' gives 1 card), Open result -> /result/<id>, Saved empty state -> Explore exams. Result: the score card is a red-to-black gradient. Solutions: the question image is readable on white, 5 filters, the grid sheet opens and closes, and the report sheet opens and closes without submitting. /live hub: pastel cards are readable, 20 day chips load (no skeleton bug), the How it works sheet opens. /pyq, chapters, history, set detail (Start not tapped), account, change-pin (view only), forgot-pin, privacy, delete-account and performance all render light with no dark leftovers apart from intentional black CTAs. Issues are mostly minor layout and contrast items, listed below. Clipping at 320px: the promo banner copy is cut off.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "PromoBanner (Home)", "issue": "At 320px the body text is clipped to 'score 200+ with AI. / 62 daily …' (text height 69 vs scrollHeight 92) and the 'AI ASTRA · 100% AI' eyebrow wraps to 2 lines. The 50px '200+' takes too much width. Reference: src/components/home/HomeParts.tsx:72-78 (numberOfLines=3, promoNum size 50). Fix: shrink or hide the number below ~360px, or stack it.", "testID": "home-promo", "priority": "MEDIUM"},
+      {"component": "HomeSeriesCard date line", "issue": "At 320px it truncates to '1 Dec – 31 Jan · one mock a d…'. Reference: src/components/series/HomeSeriesCard.tsx:64 (numberOfLines=1). Use a shorter narrow copy (e.g. 'one a day') like the existing 'ALL INDIA' narrow label.", "testID": "all-india-series-banner", "priority": "LOW"},
+      {"component": "Set detail eyebrow", "issue": "At 320px the eyebrow truncates to 'JEE MAIN · CHAPTER P…' (app/set/[id].tsx header).", "testID": "set detail header", "priority": "LOW"},
+      {"component": "My Tests search (web)", "issue": "When focused, the browser's default black rectangular focus outline is drawn inside the rounded search pill. Add outlineStyle:'none' (web) to the TextInput.", "testID": "my-tests-search", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Contrast (computed WCAG)", "issues": [
+        "/pyq hero second line 'your next attempt.' is #A6A6AE on white = 2.42:1 at 26px (below 3:1 for large text). Use custom_eyebrow #8E8E97 or darker.",
+        "Home footer 'made for every aspirant.' is custom_qFreshLine #D9D9DF on white ≈1.4:1 (HomeParts.tsx:97). Fine if it is meant as a watermark, but it is real text with no accessibility hiding.",
+        "/live stats: the '0 skipped' icon is rgb(236,214,220) on rgb(251,239,241) = 1.23:1, almost invisible. The locked milestone icons are #A6A6AE on #F6F6F8 = 2.24:1."
+      ]},
+      {"screen": "Touch targets / tiny text", "issues": [
+        "home-promo-cta 'Know more' is 93x36 (<44pt). Reference: HomeParts.tsx:121 height 36.",
+        "/live series-map-day-* cells are 30x30 tap targets.",
+        "Tab labels are 9.5px, the For You badges ('18 DONE', 'DUEL') are 8.5px and the rail badges are 9.5px. All are below ~11pt legibility. At 320px the gap between 'RAPID FIRE' and 'MY TESTS' is only 6px."
+      ]},
+      {"screen": "Consistency", "issues": [
+        "Chapter-wise (/catalogue chapters): the selected subject chip is filled RED (Physics) with red number rings, but everywhere else selection is black.",
+        "Solutions: the subject chip is a saturated mustard fill, the only loud colour block on the page.",
+        "Results & history: the negative score '-2 / 300' shows in success green, and 'Preparing result' is red (reads as an error) while My Tests shows the same state in orange.",
+        "My Tests chip row: a status chip (black) and the exam chip 'All exams' (dark grey) are both selected in the same scroll row, which reads as two different selection styles.",
+        "Catalogue: the '29 LIVE CHAPTER TESTS' label is only ~4px below the subject chips (needs 8-12px).",
+        "app.json splash and android adaptiveIcon backgroundColor are still #08080A (dark), so the app flashes dark before the white home on native launch."
+      ]}
+    ],
+    "react_native_issues": [
+      {"component": "iOS 26 NativeTabs path", "issue": "When usesNativeTabs (iOS>=26), the app uses system liquid-glass tabs with tintColor colors.onSurface (#0F0F12), not the black CRED dock. On the dark Rapid Fire tab, near-black tint may be low-contrast. Cannot be verified on web. Reference: app/(tabs)/_layout.tsx:58-66"}
+    ]
+  },
+  "test_report_links": ["/tmp/contrast.js (contrast sweep helper)", ".screenshots/ (browser automation output)"],
+  "action_items": [
+    "Fix the PromoBanner clipping at narrow widths (HomeParts.tsx:72-78): scale or hide '200+' below 360px, or allow 4 lines.",
+    "Add short narrow copy for the HomeSeriesCard date line (HomeSeriesCard.tsx:64) and the set-detail eyebrow at 320px.",
+    "Raise contrast: the /pyq hero 2nd line (#A6A6AE), the /live 'skipped' icon (1.23:1) and the locked milestone icons. Optionally darken the home footer watermark or hide it from accessibility.",
+    "Make home-promo-cta at least 44pt tall. Consider tab labels at least 10.5-11px and badges at least 9.5px.",
+    "Unify selection colour: make the chapter-wise subject chip and the solutions subject chip black or ink like the rest. Colour negative history scores in error or neutral, not green, and make 'Preparing result' amber consistently.",
+    "Add outlineStyle:'none' on web for the My Tests search TextInput.",
+    "Optional: update the app.json splash and adaptiveIcon backgroundColor to white to match the light theme. Check the iOS 26 NativeTabs tint on the dark RF tab.",
+    "Player (code review only, no in-progress attempt exists): contrast is OK (white numbers on green/red/teal bubbles, 'Save & Next' black with #F6F6F8 text). However, the selected option uses brand RED border, letter bubble and check (attempt/[id].tsx:330-333). In an exam this can read as 'wrong'; consider ink/black selection like the CRED style."
+  ],
+  "critical_code_review_comments": [
+    "tsc --noEmit is clean. No references remain to the deleted ExamTile, ExamCardFinish, WebsiteGradient or tile images.",
+    "src/rapid/* imports rapidColors, and the shared ErrorBox/Stat use useTheme() (palette-aware), so there is no light leak in RF.",
+    "Glyph falls back to MDI for unknown names, which keeps a mixed icon style wherever the MDI fallback renders (e.g. /live stat icons and the solutions grid). Acceptable.",
+    "Set detail footer copy 'Owner-supplied TEJAS200 JEE Main chapter questions…' shows internal source naming to learners (possibly pre-existing)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "~92% (all navigation and flows pass; 1 medium + several low visual issues)"},
+  "seed_data_creation": "None. Read-only. One PIN login; all non-GET /api/jl/** aborted (the solution-open POST abort shows 'Couldn't record that you viewed this solution', which is a test artifact).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Log in once via entry-phone-input / entry-pin-input / entry-continue-button. Save localStorage (jl_sid, jl_user) and inject it with add_init_script. Abort non-GET /api/jl/**. Note: aborting /auth/refresh on the entry screen shows a 'Couldn't check your session' notice, which is a test artifact. Use locator.click() for my-tests-tab-label-*. Result IDs: 952adf58-7270-4e2a-add7-25ab00733152 (Coordination Compounds), 876bd703-0de4-4444-a5a5-782a3fdb7a08 (Work Energy Power). Set /set/7673f038-c872-5dcd-95b3-249e1da78377. In-progress count is 0, so no player or Continue card. Use the contrast helper /tmp/contrast.js through page.evaluate."
+}

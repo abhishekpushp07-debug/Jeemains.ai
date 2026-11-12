@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
-import { Icon, IconName, T } from "@/src/components/ui";
+import { IconName, T } from "@/src/components/ui";
+import { Glyph } from "@/src/components/Glyph";
 import { DCard, IconCircle, Pill, SectionLabel } from "@/src/components/design";
 import { useShare } from "@/src/components/SeriesBanner";
 import { colors, space } from "@/src/theme";
@@ -25,8 +26,8 @@ export default function Mission() {
     <ScrollView testID="mission-screen" style={{ flex: 1, backgroundColor: colors.surface }} contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.xl }}>
       <Animated.View entering={enter(0)} style={{ gap: space.md }}>
         <View style={styles.brand}>
-          <View style={styles.ai}><T w="heavy" size={10} color={colors.custom_todayCta}>100% AI</T></View>
-          <Icon name="creation" size={14} color={colors.custom_eyebrow} />
+          <View style={styles.ai}><T w="bold" size={10} color={colors.brandText}>100% AI</T></View>
+          <Glyph name="creation" size={14} color={colors.custom_eyebrow} />
           <T size={12} color={colors.custom_eyebrow}>Created by <T w="heavy" size={12} color={colors.custom_softText}>AI Astra</T></T>
         </View>
         <T w="heavy" size={10} color={colors.brandText} style={{ letterSpacing: 2.4 }}>OUR MISSION</T>

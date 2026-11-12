@@ -41,9 +41,9 @@ export default function Live() {
           right={<RoundButton testID="series-tab-about" icon="information-variant" label="How it works" onPress={() => setOpen(true)} />} />
       </View>
       <View style={styles.brand}>
-        <View testID="series-100ai-ribbon" style={styles.ai}><T w="heavy" size={10} color={colors.custom_todayCta}>100% AI</T></View>
+        <View testID="series-100ai-ribbon" style={styles.ai}><T w="bold" size={10} color={colors.brandText}>100% AI</T></View>
         <T size={12} color={colors.custom_eyebrow} style={{ flex: 1 }}>
-          <T testID="series-score-200-tagline" w="heavy" size={12.5} color={colors.custom_todayTo}>Score 200+ with AI</T>
+          <T testID="series-score-200-tagline" w="heavy" size={12.5} color={colors.brandText}>Score 200+ with AI</T>
           <T testID="series-astra-credit" size={12} color={colors.custom_eyebrow}>{"  ·  "}Created by <T w="heavy" size={12} color={colors.custom_softText}>AI Astra</T></T>
         </T>
       </View>

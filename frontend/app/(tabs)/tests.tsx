@@ -9,7 +9,7 @@ import { useListFocus } from "@/src/useListFocus";
 import { Chip, Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, DSheet, Pill, Segmented, StatusLine } from "@/src/components/design";
 import { toneInk } from "@/src/components/PyqPaperCard";
-import { colors, fonts, radius, space } from "@/src/theme";
+import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { learningStatusTone } from "@/src/components/LearningTheme";
 import { fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
 
@@ -25,10 +25,6 @@ const STATUS_LABEL: Record<string, string> = {
 };
 // Kept at module level so returning to this tab restores the same view.
 const memo = { tab: "progress" as Tab, q: "", status: "all", exam: "" };
-
-function Strip({ color }: { color: string }) {
-  return <View pointerEvents="none" style={[styles.strip, { backgroundColor: color }]} />;
-}
 
 export default function MyTests() {
   const insets = useSafeAreaInsets();
@@ -75,7 +71,6 @@ export default function MyTests() {
     if (tab === "saved") {
       return (
         <DCard testID={"saved-paper-" + item.set_id} style={[styles.paper, { opacity: item.available ? 1 : 0.75 }]}>
-          <Strip color={colors.custom_savedBlue} />
           <View style={styles.statusRow}>
             <StatusLine testID={`saved-paper-status-${item.set_id}`} label="Saved" color={colors.custom_savedBlue} />
             <T testID={`saved-paper-meta-${item.set_id}`} size={11.5} color={colors.custom_eyebrow}>{item.exam} · saved {unixDate(item.saved_at)}</T>
@@ -95,7 +90,6 @@ export default function MyTests() {
     const picked = selected.some((x) => x.id === item.id);
     return (
       <DCard testID={`attempt-container-${item.id}`} style={[styles.paper, picked && { borderColor: colors.brandPrimary }]}>
-        <Strip color={ink} />
         <Press testID={"attempt-card-" + item.id} onPress={() => router.push(((item.resumable ? "/attempt/" : "/result/") + item.id) as any)} scaleTo={0.99} style={styles.attemptContent}>
           <View style={styles.statusRow}>
             <StatusLine testID={`attempt-status-${item.id}`} label={label} color={ink} />
@@ -106,7 +100,7 @@ export default function MyTests() {
             Started {unixDate(item.started_at)} · {item.saved_answers}/{item.count} saved
             {item.remaining_seconds ? " · " + fmtClock(Math.round(item.remaining_seconds)) + " left" : ""}
           </T>
-          {item.summary ? <T testID={`attempt-score-${item.id}`} w="heavy" size={15} color={colors.custom_mint}>{item.summary.score} / {item.summary.maximum} marks{item.summary.accuracy != null ? ` · ${item.summary.accuracy}% accuracy` : ""}</T> : null}
+          {item.summary ? <T testID={`attempt-score-${item.id}`} w="heavy" size={15} color={item.summary.score < 0 ? colors.error : item.summary.score > 0 ? colors.custom_mint : colors.onSurface}>{item.summary.score} / {item.summary.maximum} marks{item.summary.accuracy != null ? ` · ${item.summary.accuracy}% accuracy` : ""}</T> : null}
         </Press>
         <View style={styles.actions}>
           {item.compare_eligible ? (
@@ -134,15 +128,15 @@ export default function MyTests() {
             sub: list.data?.counts ? String(list.data.counts[t]) : undefined, subTestID: `my-tests-count-${t}` }))} />
         <View style={styles.search}>
           <Icon name="magnify" size={20} color={colors.custom_eyebrow} />
-          <TextInput testID="my-tests-search" value={q} onChangeText={setQ} placeholder="Search test names…" placeholderTextColor={colors.custom_dim} maxLength={100} style={{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }} />
+          <TextInput testID="my-tests-search" value={q} onChangeText={setQ} placeholder="Search test names…" placeholderTextColor={colors.custom_dim} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />
           {q ? <Press testID="my-tests-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search"><Icon name="close-circle" size={18} color={colors.custom_eyebrow} /></Press> : null}
         </View>
       </View>
       <View style={{ height: 60, justifyContent: "center" }}>
         <FlatList horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
-          data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), ...["", "JEE Main", "BITSAT", "COMEDK"].map((e) => ({ k: "e" + e, v: e, l: e || "All exams", kind: "exam" }))]}
+          data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), { k: "divider", v: "", l: "", kind: "divider" }, ...["", "JEE Main", "BITSAT", "COMEDK"].map((e) => ({ k: "e" + e, v: e, l: e || "All exams", kind: "exam" }))]}
           keyExtractor={(x) => x.k}
-          renderItem={({ item }) => <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} color={item.kind === "exam" ? colors.custom_softText : colors.onSurface} onPress={() => { if (item.kind === "status") setStatus(item.v); else { if (item.v !== exam) setSelected([]); setExam(item.v); } }} />}
+          renderItem={({ item }) => item.kind === "divider" ? <View style={styles.chipDivider} /> : <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} onPress={() => { if (item.kind === "status") setStatus(item.v); else { if (item.v !== exam) setSelected([]); setExam(item.v); } }} />}
         />
       </View>
       {selected.length > 0 ? (
@@ -186,13 +180,13 @@ export default function MyTests() {
 }
 
 const styles = StyleSheet.create({
-  paper: { padding: 18, paddingTop: 20, borderRadius: 20, gap: space.sm, overflow: "hidden" },
-  strip: { position: "absolute", top: 0, left: 0, right: 0, height: 3 },
+  paper: { padding: 18, borderRadius: 22, gap: space.sm, overflow: "hidden" },
   statusRow: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: space.sm },
   attemptContent: { gap: space.sm },
   actions: { flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-end", gap: space.sm, alignItems: "center", marginTop: space.xs },
   compare: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 14, minHeight: 44, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised },
   go: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 16, minHeight: 44, borderRadius: radius.pill },
   goOutline: { borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised },
-  search: { flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_card, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 },
+  search: { flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_cardRaised, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 },
+  chipDivider: { width: 1, height: 24, marginHorizontal: 4, backgroundColor: colors.custom_cardLineStrong },
 });

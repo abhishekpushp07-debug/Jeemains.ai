@@ -1,11 +1,12 @@
 // Design tokens for JEECIRCLE.AI. Keys match the "color" block of /app/design_guidelines.json.
-import { useMemo } from "react";
-import { Appearance, StyleSheet, useColorScheme, ViewStyle, TextStyle, ImageStyle } from "react-native";
-import { componentStyle, homeDesign, websiteDesign } from "./websiteDesign";
+import { createContext, useContext, useMemo } from "react";
+import { Appearance, Platform, StyleSheet, ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { componentStyle } from "./websiteDesign";
 
 export type ColorScheme = "light" | "dark";
 
-const light = {
+// Previous dark luxury palette — kept only as the base of the isolated Rapid Fire identity.
+const dark = {
   surface: "#08080A",
   onSurface: "#F8FAFC",
   surfaceSecondary: "#14141C",
@@ -155,23 +156,73 @@ const light = {
   custom_comedkGlow: "#8A90A6", custom_bitsatGlow: "#FF9933", custom_jeeGlow: "#B00000",
   custom_diamondFrom: "#FF4A5A", custom_diamondTo: "#A3000E",
   custom_shade: "rgba(0,0,0,0.62)",
+  // Ink-black dock, promo and chip tints shared by both palettes.
+  custom_dock: "#0B0B0D", custom_dockInk: "#FFFFFF", custom_dockMuted: "#7C7C85", custom_dockOrb: "#141417", custom_dockOrbLine: "#2C2C32",
+  custom_promoFrom: "#E6F7F3", custom_promoTo: "#F1F6FF", custom_promoInk: "#0F766E",
+  custom_chipFrom: "#FFFFFF", custom_chipTo: "#F3F3F6",
+  // All India card: onyx → deep ruby with a soft red glow and a hairline sheen.
+  custom_seriesFrom: "#0B0B0D", custom_seriesMid: "#17090D", custom_seriesTo: "#3A0912", custom_seriesGlow: "#E11D2E",
+  custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
+  // Matte royal maroon for exam names; royal-blue glass capsule for the Rapid Fire dock button.
+  custom_royalMaroon: "#7A1F35",
+  custom_rfGlassFrom: "rgba(118,152,255,0.96)", custom_rfGlassMid: "#2F55E4", custom_rfGlassTo: "rgba(22,40,148,0.96)",
+  custom_rfGlassLine: "#A9BEFF", custom_rfGlassGlow: "#3D6BFF", custom_rfGlassSheen: "rgba(255,255,255,0.42)", custom_rfGlassInk: "#FFFFFF",
 };
 
-export type ThemeColors = typeof light;
+export type ThemeColors = typeof dark;
 
-export const defaultScheme = "dark" satisfies ColorScheme;
-export const themes: { light: ThemeColors; dark?: ThemeColors } = { light, dark: light };
+// 2026 "quiet light" academic palette: white canvas, near-black ink, hairline borders,
+// red only as a small brand accent, black primary actions.
+const light: ThemeColors = {
+  ...dark,
+  surface: "#FFFFFF", onSurface: "#0F0F12",
+  surfaceSecondary: "#FFFFFF", onSurfaceSecondary: "#0F0F12",
+  surfaceAlt: "#F6F6F8",
+  surfaceTertiary: "#FFF1F2", onSurfaceTertiary: "#C1121F",
+  surfaceInverse: "#0F0F12", onSurfaceInverse: "#FFFFFF",
+  muted: "#6B6B75", mutedSecondary: "#8C8C96",
+  brandText: "#C1121F", brandLine: "#F5C9CE", focusRing: "#D91222",
+  brand: "#D91222", onBrand: "#FFFFFF", brandPrimary: "#D91222", onBrandPrimary: "#FFFFFF",
+  brandSecondary: "#A50E1B", onBrandSecondary: "#FFFFFF",
+  brandTertiary: "#FFF1F2", onBrandTertiary: "#C1121F",
+  success: "#15803D", onSuccess: "#FFFFFF", warning: "#B45309", onWarning: "#FFFFFF",
+  error: "#DC2626", onError: "#FFFFFF", info: "#3C3C44", onInfo: "#FFFFFF",
+  border: "#E8E8EC", borderStrong: "#D4D4DA", divider: "#EFEFF2",
 
-export function setColorScheme(scheme: ColorScheme | null) {
-  Appearance.setColorScheme?.(scheme ?? "unspecified");
-}
-setColorScheme?.(defaultScheme); // the luxury theme is always dark
+  custom_examJee: "#D91222", custom_examJeeDeep: "#FFF1F2", custom_examBitsat: "#D97706", custom_examBitsatDeep: "#FFF6E8",
+  custom_examComedk: "#3C3C44", custom_examComedkGold: "#A27B2C",
+  custom_series: "#0E0E10", custom_seriesBright: "#FF5A66", custom_burgundy: "#8A1C2B",
+  custom_subjectPhysics: "#D9363E", custom_subjectChemistry: "#C27C0E", custom_subjectMaths: "#0D9488", custom_subjectBiology: "#15803D",
+  custom_darkCard: "#F6F6F8", custom_amber: "#B45309", custom_cyan: "#C1121F",
+  custom_reading: "#FFFFFF", custom_onReading: "#1A1A1F",
+  custom_successSoft: "#EAF7EE", custom_errorSoft: "#FEF2F2", custom_warningSoft: "#FFF7E6", custom_infoSoft: "#F4F4F7",
+  custom_gameBg: "#FFFFFF", custom_gameCard: "#FFFFFF", custom_gameCardHi: "#F6F6F8", custom_gameLine: "#ECECF0",
+  custom_neonAmber: "#B45309", custom_neonCyan: "#0F766E", custom_neonGreen: "#15803D", custom_neonViolet: "#0D9488", custom_neonMagenta: "#C1121F",
+  custom_rarityRare: "#6B7280", custom_rarityEpic: "#0D9488", custom_rarityLegendary: "#B7791F", custom_rarityCommon: "#8E8E97",
+  custom_neonRed: "#DC2626", custom_gameMuted: "#6B6B75",
+  custom_overlay: "rgba(15,15,18,0.55)",
+
+  custom_card: "#FFFFFF", custom_cardRaised: "#F6F6F8", custom_cardLine: "#ECECF0", custom_cardLineStrong: "#DEDEE4",
+  custom_bar: "#F6F6F8", custom_barLine: "#ECECF0",
+  custom_eyebrow: "#74747E", custom_dim: "#A6A6AE", custom_softText: "#3C3C44", custom_pastelInk: "#111114",
+  custom_selectedOption: "#FFF4F5",
+  custom_qAnswered: "#16A34A", custom_qNotAnswered: "#DC2626", custom_qMarked: "#0D9488", custom_qMarkedInk: "#0F766E",
+  custom_qMarkedSoft: "#E6F6F4", custom_qFresh: "#F1F1F4", custom_qFreshLine: "#D9D9DF", custom_qInk: "#FFFFFF",
+  custom_gold: "#B7791F", custom_goldDeep: "#7A4E00", custom_flame: "#EA580C", custom_flameSoft: "#FFF0E6",
+  custom_goldSoft: "#FFF6DB", custom_missSoft: "#FBEFF1",
+  custom_timerAmber: "#B45309", custom_savedBlue: "#2563EB", custom_mint: "#15803D", custom_mintSoft: "#EAF7EE",
+  custom_jeeGlow: "#D91222",
+  custom_shade: "rgba(15,15,18,0.45)",
+};
+
+export const defaultScheme = "light" satisfies ColorScheme;
+Appearance.setColorScheme?.(defaultScheme); // academic screens are always the light palette
 
 export const colors = light;
 
-// Rapid Fire is a deliberately isolated game identity. Academic tokens above stay unchanged.
+// Rapid Fire is a deliberately isolated dark game identity. Academic tokens above never recolour it.
 export const rapidColors = {
-  ...light,
+  ...dark,
   surface: "#0B0E18", surfaceSecondary: "#151925", surfaceAlt: "#101421",
   surfaceTertiary: "#162A37", onSurfaceTertiary: "#65E6D4",
   surfaceInverse: "#1E335C", brand: "#3370F5", brandPrimary: "#3370F5",
@@ -203,6 +254,8 @@ export const fonts = {
 export const monoFonts = { regular: "RobotoMono-400", medium: "RobotoMono-500", semibold: "RobotoMono-600", bold: "RobotoMono-700" };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
+// Rounded search pills draw their own frame; drop the browser's rectangular focus outline.
+export const noOutline = (Platform.OS === "web" ? { outlineStyle: "none" } : {}) as TextStyle;
 export const radius = { sm: 6, md: 12, lg: 20, pill: 999 };
 
 // Website learning-workspace.css segment tokens, scoped to academic screens.
@@ -216,25 +269,6 @@ export const learningTones = {
 };
 export type LearningTone = keyof typeof learningTones;
 
-export type ExamCardKind = "jee" | "live" | "bitsat" | "comedk";
-export function examCardColors(kind: ExamCardKind) {
-  const { card, cta } = homeDesign(kind === "jee" ? "jee-main" : kind === "live" ? "all-india" : kind);
-  return { background: card.default.backgroundColor, layers: card.default.backgroundImage,
-    ink: card.h2.color, accent: card.small.color, muted: card.p.color, line: card.default.borderTopColor,
-    button: cta.backgroundColor, buttonInk: cta.color, buttonLayers: cta.backgroundImage,
-    iconBackground: colors.custom_webGlass, shadow: card.default.boxShadow,
-    innerLine: card.after.borderTopColor, shine: card.before.backgroundImage,
-  };
-}
-
-// Selector-scoped states from the export; these never recolour the RF palette.
-export const academicStyles = {
-  pyq: componentStyle("pyq.default"), score: componentStyle("result.score"),
-  tab: componentStyle("tab.default"), selectedTab: componentStyle("tab.selected"),
-  source: componentStyle("solution.source"), original: componentStyle("solution.original"),
-};
-export const seriesHome = websiteDesign.home_cards["all-india"];
-
 // All India status pastels, shared by every series surface (Home card, hub, chips, map, graph).
 export type SeriesTone = "today" | "done" | "upcoming" | "missed";
 export const pastel: Record<SeriesTone, { from: string; to: string; ink: string; body: string; cta: string; label: string }> = {
@@ -243,25 +277,24 @@ export const pastel: Record<SeriesTone, { from: string; to: string; ink: string;
   upcoming: { from: light.custom_upFrom, to: light.custom_upTo, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
   missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
 };
-export const examGlow = (kind: "jee" | "bitsat" | "comedk" | "live") =>
-  kind === "bitsat" ? light.custom_bitsatGlow : kind === "comedk" ? light.custom_comedkGlow : light.custom_jeeGlow;
-
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;
 
 // Readable labels on both bright semantic colours and the dark primary button.
 export function foregroundOn(background: string): string {
-  if (!/^#[0-9a-f]{6}$/i.test(background)) return light.onBrandPrimary;
+  if (!/^#[0-9a-f]{6}$/i.test(background)) return dark.onBrandPrimary;
   const channels = [1, 3, 5].map((i) => parseInt(background.slice(i, i + 2), 16) / 255)
     .map((c) => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
   const luminance = channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
-  return luminance > 0.179 ? light.surface : light.onBrandPrimary;
+  return luminance > 0.179 ? dark.surface : dark.onBrandPrimary;
 }
 
+// Shared primitives read the palette from context: academic screens get `colors`,
+// Rapid Fire screens wrap themselves in the rapid palette (see src/rapid/ui.tsx).
+export const PaletteContext = createContext<ThemeColors>(light);
 export function useTheme(): { scheme: ColorScheme; colors: ThemeColors } {
-  const system = useColorScheme();
-  const scheme: ColorScheme = (system === "light" || system === "dark") && themes[system] ? system : defaultScheme;
-  return { scheme, colors: themes[scheme] ?? themes.light };
+  const palette = useContext(PaletteContext);
+  return { scheme: palette === light ? "light" : "dark", colors: palette };
 }
 
 type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle };

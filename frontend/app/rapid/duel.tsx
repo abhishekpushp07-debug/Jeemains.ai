@@ -7,7 +7,7 @@ import Animated, { FadeIn, ZoomIn, useReducedMotion } from "react-native-reanima
 import { useAuth } from "@/src/auth";
 import { RF_BASE, rf, uuid, rapidAccess } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
-import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap, buzz } from "@/src/rapid/ui";
+import { Button, Card, ErrorBox, Icon, Press, Sheet, T, tap, buzz, withRapid } from "@/src/rapid/ui";
 import { Art } from "@/src/rapid/Art";
 import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
@@ -42,7 +42,7 @@ export async function shareOnWhatsApp(code: string, subject: string) {
   }
 }
 
-export default function Duel() {
+function Duel() {
   const p = useLocalSearchParams();
   return <DuelRound key={JSON.stringify([p.r, p.review, p.mode, p.code, p.subject, p.chapter, p.exam])} />;
 }
@@ -404,3 +404,5 @@ const styles = StyleSheet.create({
   playScroll: { flex: 1 },
   playContent: { paddingHorizontal: space.lg, paddingBottom: space.md },
 });
+
+export default withRapid(Duel);

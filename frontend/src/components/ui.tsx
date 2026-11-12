@@ -4,6 +4,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } fr
 import MaterialDesignIcons from "@react-native-vector-icons/material-design-icons";
 import * as Haptics from "expo-haptics";
 import { fonts, foregroundOn, makeStyles, radius, space, useTheme } from "@/src/theme";
+import { Glyph } from "./Glyph";
 
 export const Icon = MaterialDesignIcons;
 export type IconName = React.ComponentProps<typeof MaterialDesignIcons>["name"];
@@ -24,15 +25,16 @@ export const buzz = (kind: "success" | "error" | "warning") => {
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
-export function Press({ onPress, style, children, disabled, testID, accessibilityLabel, accessibilityRole = "button", accessibilityState, haptic = true, scaleTo = 0.97 }: {
+export function Press({ onPress, style, children, disabled, testID, accessibilityLabel, accessibilityRole = "button", accessibilityState, haptic = true, scaleTo = 0.97, hitSlop }: {
   onPress?: () => void; style?: StyleProp<ViewStyle>; children: React.ReactNode; disabled?: boolean; testID?: string; accessibilityLabel?: string; haptic?: boolean; scaleTo?: number;
-  accessibilityRole?: PressableProps["accessibilityRole"]; accessibilityState?: PressableProps["accessibilityState"];
+  accessibilityRole?: PressableProps["accessibilityRole"]; accessibilityState?: PressableProps["accessibilityState"]; hitSlop?: PressableProps["hitSlop"];
 }) {
   const s = useSharedValue(1);
   const a = useAnimatedStyle(() => ({ transform: [{ scale: s.value }] }));
   return (
     <AnimatedPressable
       testID={testID}
+      hitSlop={hitSlop}
       accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ ...accessibilityState, disabled: !!disabled }}
@@ -59,19 +61,19 @@ export function Button({ label, onPress, kind = "primary", icon, busy, disabled,
   label: string; onPress?: () => void; kind?: "primary" | "secondary" | "ghost" | "danger"; icon?: IconName; busy?: boolean; disabled?: boolean; testID?: string; color?: string; style?: StyleProp<ViewStyle>;
 }) {
   const { colors } = useTheme();
-  const bg = kind === "primary" ? color ?? colors.brandPrimary : kind === "danger" ? colors.error : kind === "secondary" ? colors.surfaceSecondary : "transparent";
+  const bg = kind === "primary" ? color ?? colors.onSurface : kind === "danger" ? colors.error : kind === "secondary" ? colors.surfaceSecondary : "transparent";
   const fg = kind === "primary" || kind === "danger" ? foregroundOn(bg) : color === colors.custom_amber ? colors.custom_neonAmber : color ?? colors.brandText;
   return (
     <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={label}
-      style={[{ minHeight: 50, borderRadius: radius.md, backgroundColor: bg, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.sm, paddingHorizontal: space.lg, borderWidth: kind === "secondary" ? 1 : 0, borderColor: colors.border }, style]}>
-      {busy ? <ActivityIndicator color={fg} /> : icon ? <Icon name={icon} size={19} color={fg} /> : null}
+      style={[{ minHeight: 52, borderRadius: 16, backgroundColor: bg, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: space.sm, paddingHorizontal: space.lg, borderWidth: kind === "secondary" ? 1 : 0, borderColor: colors.border }, style]}>
+      {busy ? <ActivityIndicator color={fg} /> : icon ? <Glyph name={icon} size={19} color={fg} stroke={1.8} /> : null}
       <T testID={testID ? `${testID}-label` : undefined} w="bold" size={15} color={fg}>{label}</T>
     </Press>
   );
 }
 
 const useBoxStyles = makeStyles((c) => ({
-  card: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, padding: space.lg, borderWidth: 1, borderColor: c.border, shadowColor: c.surfaceInverse, shadowOpacity: 0.06, shadowRadius: 12, shadowOffset: { width: 0, height: 4 }, elevation: 2 },
+  card: { backgroundColor: c.surfaceSecondary, borderRadius: 22, padding: space.lg, borderWidth: 1, borderColor: c.custom_cardLine },
   notice: { flexDirection: "row", gap: space.sm, padding: space.md, borderRadius: radius.md, alignItems: "flex-start" },
   chip: { height: 44, paddingHorizontal: space.md, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, borderWidth: 1, flexShrink: 0 },
   empty: { alignItems: "center", padding: space.xl, gap: space.sm },
@@ -89,7 +91,7 @@ export function Notice({ tone = "info", icon, children, testID }: { tone?: "info
   const [bg, fg] = map[tone];
   return (
     <View testID={testID} style={[st.notice, { backgroundColor: bg }]} accessibilityRole="alert">
-      <Icon name={icon ?? (tone === "error" ? "alert-circle-outline" : tone === "warning" ? "alert-outline" : tone === "success" ? "check-circle-outline" : "information-outline")} size={18} color={fg} />
+      <Glyph name={icon ?? (tone === "error" ? "alert-circle-outline" : tone === "warning" ? "alert-outline" : tone === "success" ? "check-circle-outline" : "information-outline")} size={18} color={fg} stroke={1.8} />
       <View style={{ flex: 1 }}>{typeof children === "string" ? <T size={13} color={fg} w="medium">{children}</T> : children}</View>
     </View>
   );
@@ -98,7 +100,7 @@ export function Notice({ tone = "info", icon, children, testID }: { tone?: "info
 export function Chip({ label, active, onPress, color, testID, icon, count }: { label: string; active?: boolean; onPress?: () => void; color?: string; testID?: string; icon?: IconName; count?: number }) {
   const { colors } = useTheme();
   const st = useBoxStyles();
-  const c = color ?? colors.brandPrimary;
+  const c = color ?? colors.onSurface;
   const activeInk = foregroundOn(c);
   return (
     <Press testID={testID} onPress={onPress} accessibilityLabel={label} style={[st.chip, { backgroundColor: active ? c : colors.surfaceSecondary, borderColor: active ? c : colors.border }]}>
@@ -114,8 +116,8 @@ export function Empty({ icon = "book-open-page-variant-outline", title, body, ac
   const st = useBoxStyles();
   return (
     <View testID={testID} style={st.empty}>
-      <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: colors.custom_infoSoft, alignItems: "center", justifyContent: "center" }}>
-        <Icon name={icon} size={30} color={colors.brandText} />
+      <View style={{ width: 64, height: 64, borderRadius: 32, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" }}>
+        <Glyph name={icon} size={28} color={colors.onSurface} stroke={1.5} />
       </View>
       <T w="bold" size={17} style={{ textAlign: "center" }}>{title}</T>
       {body ? <T size={13} color={colors.muted} style={{ textAlign: "center" }}>{body}</T> : null}
@@ -154,13 +156,13 @@ export function Header({ title, eyebrow, onBack, right, color, testID, backTestI
   return (
     <View testID={testID} style={{ flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.lg, paddingBottom: space.md }}>
       {onBack ? (
-        <Press testID={backTestID || "header-back-button"} onPress={onBack} accessibilityLabel="Back" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
-          <Icon name="arrow-left" size={22} color={colors.onSurface} />
+        <Press testID={backTestID || "header-back-button"} onPress={onBack} accessibilityLabel="Back" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.custom_cardLineStrong }}>
+          <Glyph name="chevron-left" size={22} color={colors.onSurface} stroke={1.8} />
         </Press>
       ) : null}
       <View style={{ flex: 1 }}>
-        {eyebrow ? <T w="bold" size={11} color={color ?? colors.muted} style={{ letterSpacing: 1.2 }}>{eyebrow.toUpperCase()}</T> : null}
-        <T testID={testID ? `${testID}-title` : undefined} w="heavy" size={22} numberOfLines={2}>{title}</T>
+        {eyebrow ? <T w="bold" size={11} color={color ?? colors.custom_eyebrow} style={{ letterSpacing: 2.2 }}>{eyebrow.toUpperCase()}</T> : null}
+        <T testID={testID ? `${testID}-title` : undefined} w="heavy" size={21} numberOfLines={2}>{title}</T>
       </View>
       {right}
     </View>

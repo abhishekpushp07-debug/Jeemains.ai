@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
-import { Button, ErrorBox, Icon, Press, Sheet, T } from "@/src/rapid/ui";
+import { Button, ErrorBox, Icon, Press, Sheet, T, withRapid } from "@/src/rapid/ui";
 import { BADGE_ICON, useGameProfile } from "@/src/components/game";
 import { ChapterSheet } from "@/src/components/ChapterSheet";
 import { WeakRevision } from "@/src/components/ArenaLearning";
@@ -16,7 +16,7 @@ import { rapidColors as colors, fonts, rapidSubjectColor as subjectColor } from 
 const selection = { subject: "Physics", chapter: "" };
 const SUBJECTS = ["Physics", "Chemistry", "Mathematics"];
 type Panel = "" | "play" | "chapters" | "join" | "quests" | "trophies";
-export default function RapidHome() {
+function RapidHome() {
   const insets = useSafeAreaInsets(), router = useRouter(), { user } = useAuth();
   const uid = user?.id || "";
   const [subject, setSubject] = useState(selection.subject), [chapter, setChapter] = useState(selection.chapter);
@@ -67,3 +67,4 @@ const styles = StyleSheet.create({
   shortcuts: { flexDirection: "row", borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.border, paddingVertical: 12 }, today: { flexDirection: "row", alignItems: "center", minHeight: 52, gap: 8 }, soloLink: { minHeight: 44, flexDirection: "row", alignItems: "center", justifyContent: "space-between" }, center: { textAlign: "center" },
   form: { gap: 16 }, input: { height: 60, paddingHorizontal: 14, borderRadius: 16, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, color: colors.onSurface, fontFamily: fonts.heavy, fontSize: 24, letterSpacing: 7, textAlign: "center" }, quest: { minHeight: 66, flexDirection: "row", alignItems: "center", gap: 12 },
 });
+export default withRapid(RapidHome);

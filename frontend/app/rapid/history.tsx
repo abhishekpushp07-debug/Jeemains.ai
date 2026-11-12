@@ -6,11 +6,11 @@ import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { Art } from "@/src/rapid/Art";
-import { Button, ErrorBox, Icon, Press, Skeleton, T } from "@/src/rapid/ui";
+import { Button, ErrorBox, Icon, Press, Skeleton, T, withRapid } from "@/src/rapid/ui";
 import { rapidColors as colors } from "@/src/theme";
 
 const dateLabel = (iso: string) => new Date(iso).toLocaleString(undefined, { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
-export default function History() {
+function History() {
   const router = useRouter(), insets = useSafeAreaInsets(), { user } = useAuth();
   const params = useLocalSearchParams<{ tab?: string }>();
   const [tab, setTab] = useState(params.tab === "solo" ? "solo" : "friends");
@@ -38,3 +38,4 @@ export default function History() {
   </View>;
 }
 const styles = StyleSheet.create({ root: { flex: 1, backgroundColor: colors.custom_gameBg }, header: { flexDirection: "row", alignItems: "center", gap: 12, paddingHorizontal: 20, paddingBottom: 20 }, back: { width: 44, height: 44, borderRadius: 16, backgroundColor: colors.custom_gameCard, alignItems: "center", justifyContent: "center" }, flex: { flex: 1 }, tabs: { marginHorizontal: 20, padding: 4, borderRadius: 16, backgroundColor: colors.surfaceAlt, flexDirection: "row", gap: 6 }, tab: { flex: 1, minHeight: 46, alignItems: "center", justifyContent: "center", borderRadius: 12 }, active: { backgroundColor: colors.custom_gameCardHi }, content: { padding: 20, gap: 16 }, empty: { alignItems: "center", paddingVertical: 36, gap: 20 }, center: { textAlign: "center" }, match: { padding: 18, borderRadius: 22, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.border, gap: 14 }, row: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 10 } });
+export default withRapid(History);

@@ -22,7 +22,7 @@ export function DayMap({ days, selected, onSelect }: { days: DayInfo[]; selected
         {col.map(d => {
           const faded = d.tone === "upcoming" && d.day > todayDay + 1;
           const on = d.day === selected;
-          return <Press key={d.day} testID={"series-map-day-" + d.day} haptic={false} onPress={() => onSelect(d.day)} accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}`} accessibilityState={{ selected: on }}
+          return <Press key={d.day} testID={"series-map-day-" + d.day} haptic={false} hitSlop={GAP / 2} onPress={() => onSelect(d.day)} accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}`} accessibilityState={{ selected: on }}
             style={{ opacity: faded ? 0.35 : 1 }}>
             <PastelSurface tone={d.tone} style={[styles.cell, { width: size, height: size, borderRadius: Math.round(size / 4) }, (d.isToday || on) && styles.cellOn]}>
               {d.isToday || on ? <T w="heavy" size={Math.max(9, Math.round(size / 3))} color={colors.custom_pastelInk}>{d.day}</T> : null}

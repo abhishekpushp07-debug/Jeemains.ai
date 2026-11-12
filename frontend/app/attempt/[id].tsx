@@ -20,6 +20,8 @@ import { fmtClock } from "@/src/navigation";
 const CONF = [[0.25, "Guess"], [0.5, "Unsure"], [1, "Sure"]] as const;
 const ZOOM = [1, 1.2, 1.4];
 const has = (v: any) => !!String(v?.value || "").trim();
+// Tablets: a centred reading column; wide screens (landscape tablets) add an always-open palette panel.
+const TABLET = 600, WIDE = 900, COLUMN = 760, SIDE = 360;
 
 export default function Player() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -90,6 +92,10 @@ export default function Player() {
   const scale = ZOOM[zoom];
   const subjectCounts = nav.rows.reduce((c, x: any) => { c[stateOf(x)]++; return c; }, { answered: 0, answered_marked: 0, marked: 0, not_answered: 0, fresh: 0 } as Record<PaletteState, number>);
   const subjectPending = nav.rows.filter((x: any) => A.pending[x.id]).length;
+  const wide = width >= WIDE;
+  const frame = width >= TABLET ? styles.frame : null;
+  const topFrame = wide ? null : frame;
+  const readWidth = wide ? Math.min(width - SIDE, COLUMN) : Math.min(width, COLUMN);
 
   async function doSubmit() {
     setBusy(true);
@@ -114,9 +120,9 @@ export default function Player() {
 
   return (
     <View testID="player-screen" style={{ flex: 1, backgroundColor: colors.surface }}>
-      <ImageWarmup paths={warmPaths} width={Math.max(1, width - 2 * space.lg - 2 * 18 - 2)} />
+      <ImageWarmup paths={warmPaths} width={Math.max(1, readWidth - 2 * space.lg - 2 * 18 - 2)} />
       <View style={[styles.top, { paddingTop: insets.top + space.sm }]}>
-        <View style={styles.topRow}>
+        <View style={[styles.topRow, topFrame]}>
           <RoundButton testID="player-exit-button" icon="close" label="Leave attempt" color={colors.onSurface} onPress={() => setSheet("exit")} />
           <View style={{ flex: 1, minWidth: 0 }}>
             <T w="heavy" size={13.5} numberOfLines={1}>{a.title}</T>
@@ -135,13 +141,15 @@ export default function Player() {
             <T w="heavy" size={12} color={colors.onBrandPrimary}>Submit</T>
           </Press>
         </View>
-        <View testID="player-progress" style={styles.progress} accessibilityLabel={`${counts.answered} of ${questions.length} answered`}>
+        <View testID="player-progress" style={[styles.progress, topFrame]} accessibilityLabel={`${counts.answered} of ${questions.length} answered`}>
           <LinearGradient colors={[colors.brandPrimary, colors.custom_todayTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: `${(counts.answered / Math.max(1, questions.length)) * 100}%`, height: "100%", borderRadius: 2 }} />
         </View>
-        <SubjectSegment prefix="player-subject" questions={questions} subject={nav.subject} onSelect={nav.selectSubject} answered={answeredOf} />
+        <View style={topFrame}><SubjectSegment prefix="player-subject" questions={questions} subject={nav.subject} onSelect={nav.selectSubject} answered={answeredOf} /></View>
       </View>
 
-      <ScrollView ref={reading} contentContainerStyle={{ paddingHorizontal: space.lg, paddingTop: space.md, gap: space.md, paddingBottom: space.xl }} keyboardShouldPersistTaps="handled">
+      <View style={styles.body}>
+      <View style={{ flex: 1 }}>
+      <ScrollView ref={reading} style={{ flex: 1 }} contentContainerStyle={[{ paddingHorizontal: space.lg, paddingTop: space.md, gap: space.md, paddingBottom: space.xl }, frame]} keyboardShouldPersistTaps="handled">
         {timeUp ? <Notice tone="error" testID="player-time-up">Time’s up. Editing is closed; confirming the sealed attempt with the server. Late drafts are not scored.</Notice> : null}
         {A.conflict ? (
           <Notice tone="error" testID="player-conflict">
@@ -180,7 +188,7 @@ export default function Player() {
           <View style={{ gap: 6 }}>
             <T w="heavy" size={10} color={colors.custom_eyebrow} style={{ letterSpacing: 1.8 }}>YOUR ANSWER</T>
             <TextInput testID="player-integer-input" editable={!disabled} value={cur.value} onChangeText={(v) => A.edit(q.id, { value: v.slice(0, 30) })} keyboardType="numbers-and-punctuation" placeholder="Type an exact integer"
-              placeholderTextColor={colors.custom_dim} style={[styles.numeric, has(cur) && { borderColor: colors.brandPrimary }]} />
+              placeholderTextColor={colors.custom_dim} style={[styles.numeric, has(cur) && { borderColor: colors.onSurface }]} />
           </View>
         ) : (
           <View style={{ gap: 10 }}>
@@ -193,10 +201,10 @@ export default function Player() {
                   }} accessibilityLabel={`Option ${k}${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.985}
                   style={[styles.option, sel && styles.optionOn]}>
                   <View style={[styles.letter, sel && styles.letterOn]}>
-                    <T w="heavy" size={13} color={sel ? colors.onBrandPrimary : colors.custom_softText}>{k}</T>
+                    <T w="heavy" size={13} color={sel ? colors.onSurfaceInverse : colors.custom_softText}>{k}</T>
                   </View>
                   <T size={Math.round(15 * scale)} w={sel ? "heavy" : "medium"} style={{ flex: 1 }} color={sel ? colors.onSurface : colors.custom_softText}>{String(label).startsWith("See original") ? `Option ${k} (see image)` : String(label)}</T>
-                  {sel ? <View style={styles.check}><Icon name="check" size={14} color={colors.onBrandPrimary} /></View> : null}
+                  {sel ? <View style={styles.check}><Icon name="check" size={14} color={colors.onSurfaceInverse} /></View> : null}
                 </Press>
               );
             })}
@@ -222,7 +230,7 @@ export default function Player() {
       </ScrollView>
 
       <View style={[styles.dock, { paddingBottom: insets.bottom + space.sm }]}>
-        <View style={styles.dockRow}>
+        <View style={[styles.dockRow, frame]}>
           <Press testID="player-mark-button" disabled={disabled} onPress={() => A.edit(q.id, { marked: !cur.marked })} accessibilityLabel={cur.marked ? "Unmark review" : "Mark for review"} accessibilityState={{ selected: !!cur.marked }}
             style={[styles.mark, cur.marked && { backgroundColor: colors.custom_qMarkedSoft }]}>
             <Icon name={cur.marked ? "flag" : "flag-outline"} size={17} color={colors.custom_qMarkedInk} />
@@ -236,17 +244,30 @@ export default function Player() {
             <Icon name="arrow-right" size={17} color={colors.custom_bar} />
           </Press>
         </View>
-        <View style={styles.summary}>
+        <View style={[styles.summary, frame]}>
           <View style={styles.summaryCounts}>
             <Count color={colors.custom_qAnswered} label={`${counts.answered} answered`} testID="player-count-answered" />
             <Count color={colors.custom_qMarked} label={`${counts.marked} marked`} testID="player-count-marked" />
             <Count color={colors.custom_qFreshLine} label={`${questions.length - counts.answered} left`} testID="player-count-left" />
           </View>
-          <Press testID="player-palette-button" onPress={() => setSheet("palette")} accessibilityLabel="Question palette" style={styles.paletteBtn}>
+          {wide ? null : <Press testID="player-palette-button" onPress={() => setSheet("palette")} accessibilityLabel="Question palette" style={styles.paletteBtn}>
             <Icon name="view-grid" size={14} color={colors.onSurface} />
             <T w="heavy" size={12}>Palette</T>
-          </Press>
+          </Press>}
         </View>
+      </View>
+      </View>
+
+      {wide ? (
+        <View testID="player-side-panel" style={styles.side}>
+          <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md, paddingBottom: insets.bottom + space.lg }}>
+            <T testID="side-palette-label" w="heavy" size={10} color={colors.custom_eyebrow} style={{ letterSpacing: 1.8 }}>QUESTION PALETTE · {nav.subject.toUpperCase()} · {nav.rows.length}</T>
+            <Legend counts={subjectCounts} pending={subjectPending} />
+            <PaletteGrid prefix="side-q" questions={nav.rows} stateOf={stateOf} currentId={q.id} pendingIds={A.pending} onSelect={qid => { tap(); nav.select(qid); }} />
+            {bonusEligible ? <Pill testID="side-bonus-open" kind="outline" label="Enter bonus section" icon="star-plus-outline" onPress={() => setSheet("bonus")} /> : null}
+          </ScrollView>
+        </View>
+      ) : null}
       </View>
 
       <DSheet visible={sheet === "palette"} onClose={() => setSheet(null)} testID="player-palette-sheet" title="Question palette" closeTestID="palette-close">
@@ -315,6 +336,9 @@ function Count({ color, label, testID }: { color: string; label: string; testID:
 
 const styles = StyleSheet.create({
   top: { paddingHorizontal: space.lg, paddingBottom: space.sm, gap: space.md, backgroundColor: colors.surface },
+  frame: { width: "100%", maxWidth: COLUMN, alignSelf: "center" },
+  body: { flex: 1, flexDirection: "row" },
+  side: { width: SIDE, backgroundColor: colors.custom_bar, borderLeftWidth: 1, borderLeftColor: colors.custom_barLine },
   topRow: { flexDirection: "row", alignItems: "center", gap: space.sm },
   saveRow: { flexDirection: "row", alignItems: "center", gap: 5, marginTop: 2 },
   saveDot: { width: 7, height: 7, borderRadius: 4 },
@@ -327,10 +351,10 @@ const styles = StyleSheet.create({
   question: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine, padding: 18, gap: space.md },
   numeric: { height: 64, borderRadius: 16, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, paddingHorizontal: space.lg, fontFamily: fonts.heavy, fontSize: 24, color: colors.onSurface },
   option: { flexDirection: "row", alignItems: "center", gap: 14, minHeight: 60, paddingHorizontal: space.lg, paddingVertical: space.md, borderRadius: 16, borderWidth: 1.5, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card },
-  optionOn: { borderColor: colors.brandPrimary, backgroundColor: colors.custom_selectedOption },
+  optionOn: { borderColor: colors.onSurface, backgroundColor: colors.custom_cardRaised },
   letter: { width: 30, height: 30, borderRadius: 15, borderWidth: 1.5, borderColor: colors.custom_qFreshLine, alignItems: "center", justifyContent: "center" },
-  letterOn: { backgroundColor: colors.brandPrimary, borderColor: colors.brandPrimary },
-  check: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center" },
+  letterOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },
+  check: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.onSurface, alignItems: "center", justifyContent: "center" },
   conf: { flexDirection: "row", alignItems: "center", gap: space.sm, flexWrap: "wrap" },
   confChip: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, justifyContent: "center" },
   confOn: { borderColor: colors.custom_mint, backgroundColor: colors.custom_mintSoft },

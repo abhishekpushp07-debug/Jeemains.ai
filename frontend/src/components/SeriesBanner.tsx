@@ -1,6 +1,7 @@
 import React from "react";
 import { Share, View } from "react-native";
-import { Icon, T } from "@/src/components/ui";
+import { T } from "@/src/components/ui";
+import { Glyph } from "@/src/components/Glyph";
 import { colors, space } from "@/src/theme";
 import { DSheet, Pill } from "./design";
 
@@ -12,7 +13,7 @@ export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () 
       <T w="heavy" size={10} color={colors.brandText} style={{ letterSpacing: 1.8 }}>THE DAILY FULL-SYLLABUS CHALLENGE</T>
       <T w="heavy" size={22}>62 days. One focused mission.</T>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-        <T w="heavy" size={14} color={colors.custom_todayTo}>Score 200+ with AI</T>
+        <T w="heavy" size={14} color={colors.brandText}>Score 200+ with AI</T>
         <T size={13} color={colors.muted}>· AI analysed PYQ based test series · Created by <T w="heavy" size={13}>AI Astra</T></T>
       </View>
       {[
@@ -24,7 +25,7 @@ export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () 
         "Your streak grows with each live day you finish. Archive practice doesn’t count.",
       ].map((x) => (
         <View key={x} style={{ flexDirection: "row", gap: space.sm, alignItems: "flex-start" }}>
-          <Icon name="check-circle-outline" size={18} color={colors.custom_doneFrom} />
+          <Glyph name="check-circle-outline" size={18} color={colors.success} />
           <T size={13.5} color={colors.custom_softText} style={{ flex: 1 }}>{x}</T>
         </View>
       ))}

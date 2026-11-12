@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
 import { invalidate, useCached } from "@/src/useCached";
-import { Button, ErrorBox, Icon, Press, Sheet, Skeleton, T } from "@/src/rapid/ui";
+import { Button, ErrorBox, Icon, Press, Sheet, Skeleton, T, withRapid } from "@/src/rapid/ui";
 import { Art } from "@/src/rapid/Art";
 import { Avatar, EntryEffect, EntryShow } from "@/src/components/Entry";
 import { RARITY } from "@/src/avatars";
@@ -15,7 +15,7 @@ import { rapidColors as colors, radius, space } from "@/src/theme";
 type Tab = "entry" | "frame" | "theme" | "powerup" | "avatar";
 const TABS: [Tab, string][] = [["avatar", "Avatars"], ["entry", "Entry Effects"], ["frame", "Frames"], ["theme", "Arenas"], ["powerup", "Power-ups"]];
 
-export default function Shop() {
+function Shop() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
@@ -159,3 +159,5 @@ export default function Shop() {
     </View>
   );
 }
+
+export default withRapid(Shop);

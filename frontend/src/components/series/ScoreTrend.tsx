@@ -55,12 +55,12 @@ export function ScoreTrend({ days }: { days: DayInfo[] }) {
           {ticks.map(t => <Line key={t} x1={LEFT} x2={w - RIGHT} y1={y(t)} y2={y(t)} stroke={t === lo ? colors.custom_cardLine : colors.custom_barLine} strokeWidth={1} />)}
           {runs.filter(r => r.length > 1).map((r, i) => <Path key={"a" + i} fill="url(#trendArea)" d={`M${x(r[0].day)},${y(r[0].score)} ${r.slice(1).map(p => `L${x(p.day)},${y(p.score)}`).join(" ")} L${x(r[r.length - 1].day)},${base} L${x(r[0].day)},${base} Z`} />)}
           {gaps.map(([a, b]) => <Line key={"g" + a.day} x1={x(a.day)} y1={y(a.score)} x2={x(b.day)} y2={y(b.score)} stroke={colors.custom_dim} strokeWidth={1.6} strokeDasharray="3 4" />)}
-          {runs.filter(r => r.length > 1).map((r, i) => <Polyline key={"l" + i} points={r.map(p => `${x(p.day)},${y(p.score)}`).join(" ")} fill="none" stroke={colors.custom_doneFrom} strokeWidth={2.4} strokeLinejoin="round" strokeLinecap="round" />)}
-          {pts.map(p => p === best || p === last ? null : <Circle key={p.day} cx={x(p.day)} cy={y(p.score)} r={3} fill={colors.custom_doneFrom} />)}
+          {runs.filter(r => r.length > 1).map((r, i) => <Polyline key={"l" + i} points={r.map(p => `${x(p.day)},${y(p.score)}`).join(" ")} fill="none" stroke={colors.custom_doneInk} strokeWidth={2.2} strokeLinejoin="round" strokeLinecap="round" />)}
+          {pts.map(p => p === best || p === last ? null : <Circle key={p.day} cx={x(p.day)} cy={y(p.score)} r={3} fill={colors.custom_doneInk} />)}
           {missed.map(d => <Circle key={"m" + d.day} cx={x(d.day)} cy={base} r={4} fill={colors.custom_missTo} />)}
           {todayDay && todayDay <= maxDay && !pts.some(p => p.day === todayDay) ? <Circle cx={x(todayDay)} cy={base} r={4} fill={colors.custom_todayTo} /> : null}
           <Circle cx={x(best.day)} cy={y(best.score)} r={5} fill={colors.custom_card} stroke={colors.custom_gold} strokeWidth={2} />
-          {last !== best ? <Circle cx={x(last.day)} cy={y(last.score)} r={6} fill={colors.custom_doneFrom} stroke={colors.surface} strokeWidth={2} /> : null}
+          {last !== best ? <Circle cx={x(last.day)} cy={y(last.score)} r={6} fill={colors.custom_doneInk} stroke={colors.surface} strokeWidth={2} /> : null}
           {last !== best ? <Rect x={Math.min(w - RIGHT - 38, x(last.day) - 19)} y={y(last.score) - 26} width={38} height={18} rx={9} fill={colors.custom_doneFrom} /> : null}
         </Svg>
         {ticks.map(t => <T key={"t" + t} size={9.5} color={colors.custom_dim} style={[styles.yLabel, { top: y(t) - 7 }]}>{Math.round(t)}</T>)}

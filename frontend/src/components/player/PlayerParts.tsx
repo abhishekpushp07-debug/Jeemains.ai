@@ -59,7 +59,7 @@ export function Legend({ counts, pending }: { counts: Record<PaletteState, numbe
   const left: PaletteState[] = ["answered", "not_answered", "fresh"], right: PaletteState[] = ["marked", "answered_marked"];
   const row = (k: PaletteState) => <View key={k} testID={`palette-legend-${k}`} style={styles.legendRow}>
     <View style={[styles.legendDot, { backgroundColor: PALETTE[k].bg }]}>{k === "answered_marked" ? <View style={styles.legendMini} /> : null}</View>
-    <T size={12} color={colors.custom_softText} style={{ flex: 1 }} numberOfLines={1}>{PALETTE[k].label}</T>
+    <T size={12} color={colors.custom_softText} style={{ flex: 1 }} numberOfLines={2}>{PALETTE[k].label}</T>
     <T w="heavy" size={12}>{counts[k]}</T>
   </View>;
   return <View testID="palette-legend" style={styles.legend}>

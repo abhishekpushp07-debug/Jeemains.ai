@@ -8,7 +8,7 @@ import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
 import { Chip, Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, Pill, ScreenHeader, StatusLine } from "@/src/components/design";
-import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { examBySlug, fmtClock, unixDate } from "@/src/navigation";
 
 const ORDER = ["Physics", "Chemistry", "Mathematics"];
@@ -26,13 +26,12 @@ const SetRow = memo(function SetRow({ s }: { s: any }) {
   const router = useRouter();
   const act = attemptAction(s);
   const available = s.live_enabled !== false && s.status === "published";
-  const subj = s.chapter_subject || s.subjects?.[0];
   const status = !available ? ["Unavailable", colors.custom_eyebrow] : act.label === "Resume" ? ["In progress", colors.custom_timerAmber] : act.label === "Result" ? ["Completed", colors.custom_mint] : s.saved ? ["Saved", colors.custom_savedBlue] : null;
   return (
     <Press testID={"set-row-" + s.id} disabled={!available} onPress={() => router.push(act.to as any)} scaleTo={0.985} accessibilityLabel={`${s.title}. ${available ? act.label : "Unavailable"}`}>
       <DCard style={{ flexDirection: "row", gap: space.md, alignItems: "center", padding: space.md, paddingRight: space.lg }}>
-        <View style={{ width: 46, height: 46, borderRadius: 23, backgroundColor: colors.custom_cardRaised, borderWidth: 1.5, borderColor: subjectColor(subj), alignItems: "center", justifyContent: "center" }}>
-          <T w="heavy" size={15} color={subjectColor(subj)}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
+        <View style={{ width: 46, height: 46, borderRadius: 23, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" }}>
+          <T w="heavy" size={15}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
         </View>
         <View style={{ flex: 1, gap: 3 }}>
           <T testID={`set-title-${s.id}`} w="heavy" size={15} numberOfLines={2}>{s.title}</T>
@@ -56,7 +55,7 @@ function HistoryRow({ a }: { a: any }) {
       <DCard style={{ gap: 4 }}>
         <T w="heavy" size={10} color={colors.custom_eyebrow} style={{ letterSpacing: 1.4 }}>{unixDate(a.started_at).toUpperCase()} · {String(a.status).toUpperCase()}</T>
         <T w="heavy" size={15}>{a.title}</T>
-        <T size={13} color={a.summary ? colors.custom_mint : colors.brandText} w="heavy">{a.summary ? `${a.summary.score} / ${a.summary.maximum}` : a.resumable ? `Resume${a.remaining_seconds ? " · " + fmtClock(Math.round(a.remaining_seconds)) + " left" : ""}` : a.status === "embargoed" ? "Result sealed until release" : "Preparing result"}</T>
+        <T size={13} color={a.summary ? (a.summary.score < 0 ? colors.error : a.summary.score > 0 ? colors.custom_mint : colors.onSurface) : a.status === "embargoed" ? colors.muted : colors.custom_timerAmber} w="heavy">{a.summary ? `${a.summary.score} / ${a.summary.maximum}` : a.resumable ? `Resume${a.remaining_seconds ? " · " + fmtClock(Math.round(a.remaining_seconds)) + " left" : ""}` : a.status === "embargoed" ? "Result sealed until release" : "Preparing result"}</T>
       </DCard>
     </Press>
   );
@@ -104,7 +103,7 @@ function Catalogue() {
         <View style={{ paddingHorizontal: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_card, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 }}>
             <Icon name="magnify" size={20} color={colors.muted} />
-            <TextInput testID="catalogue-search-input" value={q} onChangeText={setQ} placeholder={kind === "chapters" ? "Find a chapter…" : "Find a mock test…"} placeholderTextColor={colors.muted} maxLength={100} style={{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }} />
+            <TextInput testID="catalogue-search-input" value={q} onChangeText={setQ} placeholder={kind === "chapters" ? "Find a chapter…" : "Find a mock test…"} placeholderTextColor={colors.muted} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />
             {q ? <Press testID="catalogue-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search"><Icon name="close-circle" size={18} color={colors.muted} /></Press> : null}
           </View>
         </View>
@@ -113,7 +112,7 @@ function Catalogue() {
         <View style={{ height: 56, justifyContent: "center" }}>
           <FlatList horizontal showsHorizontalScrollIndicator={false} data={subjectList} keyExtractor={(x) => x}
             contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
-            renderItem={({ item }) => <Chip testID={"catalogue-subject-" + item.toLowerCase()} label={item} color={subjectColor(item)} active={subject === item} count={res.data?.subject_counts?.[item]} onPress={() => { setPage(1); setSubject(item); }} />} />
+            renderItem={({ item }) => <Chip testID={"catalogue-subject-" + item.toLowerCase()} label={item} active={subject === item} count={res.data?.subject_counts?.[item]} onPress={() => { setPage(1); setSubject(item); }} />} />
         </View>
       ) : <View style={{ height: space.md }} />}
       <FlatList
@@ -126,7 +125,7 @@ function Catalogue() {
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.md }}
         ListHeaderComponent={<>
           <ErrorBox error={res.error} retry={res.reload} testID="catalogue-error" />
-          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2 }} testID="catalogue-count">{`${res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : "mock tests")}`.toUpperCase()}</T> : null}
+          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2, marginTop: kind === "chapters" ? space.sm : 0 }} testID="catalogue-count">{`${res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : "mock tests")}`.toUpperCase()}</T> : null}
         </>}
         ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View testID="catalogue-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (
           <DCard testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}

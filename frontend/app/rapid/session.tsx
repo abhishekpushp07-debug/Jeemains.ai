@@ -10,7 +10,7 @@ import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
 import { rf, uuid } from "@/src/api/client";
 import { invalidate } from "@/src/useCached";
-import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap } from "@/src/rapid/ui";
+import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap, withRapid } from "@/src/rapid/ui";
 import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
@@ -72,7 +72,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
   );
 }
 
-export default function RapidSession() {
+function RapidSession() {
   const p = useLocalSearchParams();
   return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.ids, p.exam, p.revision])} />;
 }
@@ -317,3 +317,5 @@ const styles = StyleSheet.create({
   scroll: { flex: 1 },
   cardArea: { flexGrow: 1, justifyContent: "center", paddingVertical: space.sm },
 });
+
+export default withRapid(RapidSession);

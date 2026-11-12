@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 import { PaperQuestion, subjectId, subjectOf } from "@/src/assets/paperAssets";
-import { colors, foregroundOn, radius, space, subjectColor } from "@/src/theme";
+import { colors, radius, space } from "@/src/theme";
 import { Icon, IconName, Press, T } from "../ui";
 
 export function useSubjectNavigation<T extends PaperQuestion>(questions: T[]) {
@@ -28,10 +28,11 @@ export function SubjectTabs({ questions, subject, onSelect, prefix }: { question
   const subjects = [...new Set(questions.map(subjectOf))];
   return <ScrollView testID={`${prefix}-tabs`} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>
     {subjects.map(name => {
-      const active = name === subject, color = subjectColor(name);
-      return <Press testID={`${prefix}-${subjectId(name)}`} key={name} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={`${name}, ${questions.filter(q => subjectOf(q) === name).length} questions`} onPress={() => onSelect(name)} style={[styles.tab, { backgroundColor: active ? color : colors.custom_card, borderColor: active ? color : colors.custom_cardLine }]}>
-        <T testID={`${prefix}-${subjectId(name)}-label`} w="bold" size={13} color={active ? foregroundOn(color) : colors.onSurface}>{name}</T>
-        <T testID={`${prefix}-${subjectId(name)}-count`} size={11} w="bold" color={active ? foregroundOn(color) : colors.muted}>{questions.filter(q => subjectOf(q) === name).length}</T>
+      // Same black selection as every other segmented control in the app.
+      const active = name === subject;
+      return <Press testID={`${prefix}-${subjectId(name)}`} key={name} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={`${name}, ${questions.filter(q => subjectOf(q) === name).length} questions`} onPress={() => onSelect(name)} style={[styles.tab, { backgroundColor: active ? colors.onSurface : colors.custom_card, borderColor: active ? colors.onSurface : colors.custom_cardLine }]}>
+        <T testID={`${prefix}-${subjectId(name)}-label`} w="bold" size={13} color={active ? colors.onSurfaceInverse : colors.onSurface}>{name}</T>
+        <T testID={`${prefix}-${subjectId(name)}-count`} size={11} w="bold" color={active ? colors.custom_qFreshLine : colors.muted}>{questions.filter(q => subjectOf(q) === name).length}</T>
       </Press>;
     })}
   </ScrollView>;

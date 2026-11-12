@@ -31,7 +31,7 @@ export default function RootLayout() {
       <ErrorBoundary>
         <AuthProvider>
           <KeyboardProvider>
-            <StatusBar style="light" />
+            <StatusBar style="dark" />
             <AuthGate />
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
               <Stack.Screen name="attempt/[id]" options={{ gestureEnabled: false }} />

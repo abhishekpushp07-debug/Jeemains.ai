@@ -107,7 +107,6 @@ export default function SetDetail() {
             ].filter(Boolean).map((x: any) => (
               <View key={x} style={{ flexDirection: "row", gap: space.sm, alignItems: "flex-start" }}><Icon name="check-circle-outline" size={17} color={colors.custom_softText} style={{ marginTop: 1 }} /><T size={13} color={colors.custom_softText} style={{ flex: 1 }}>{x}</T></View>
             ))}
-            {s.source ? <T size={11} color={colors.custom_eyebrow}>{s.source}</T> : null}
           </DCard>
         </View>
         <Notice tone="info" icon="content-save-outline" testID="set-offline-notice">Your drafts stay on this phone if the internet drops. They show as Pending until the server confirms them — check the save status before submitting.</Notice>

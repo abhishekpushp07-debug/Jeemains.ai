@@ -1,12 +1,28 @@
-import React, { useId } from "react";
+import React, { useCallback, useId } from "react";
 import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { useFocusEffect } from "expo-router";
+import { setStatusBarStyle } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useReducedMotion } from "react-native-reanimated";
 import * as Base from "@/src/components/ui";
-import { rapidColors as colors, foregroundOn } from "@/src/theme";
+import { PaletteContext, rapidColors as colors, foregroundOn } from "@/src/theme";
 
 export { Icon, tap, buzz, ErrorBox, Stat } from "@/src/components/ui";
 export type { IconName } from "@/src/components/ui";
+
+// Rapid Fire keeps its own dark identity on top of the light app: shared primitives read
+// this palette and the status bar turns light while any RF screen is focused.
+let rapidFocus = 0;
+export function withRapid<P extends object>(Screen: React.ComponentType<P>) {
+  function RapidScreen(props: P) {
+    useFocusEffect(useCallback(() => {
+      rapidFocus++; setStatusBarStyle("light");
+      return () => { rapidFocus = Math.max(0, rapidFocus - 1); if (!rapidFocus) setStatusBarStyle("dark"); };
+    }, []));
+    return <PaletteContext.Provider value={colors}><Screen {...props} /></PaletteContext.Provider>;
+  }
+  return RapidScreen;
+}
 export function T(props: React.ComponentProps<typeof Base.T>) {
   const id = useId().replace(/[^a-zA-Z0-9]/g, "");
   return <Base.T testID={`rf-text-${id}`} color={colors.onSurface} {...props} />;

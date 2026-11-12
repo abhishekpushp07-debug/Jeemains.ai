@@ -6,7 +6,8 @@ import { useAuth } from "@/src/auth";
 import { getPyqCatalogue, openPyq, paperState, PyqCatalogue, PyqPaper, resumePyq, sortPapers } from "@/src/api/pyq";
 import { useCached } from "@/src/useCached";
 import { PyqPaperCard } from "@/src/components/PyqPaperCard";
-import { Chip, Empty, ErrorBox, Icon, Skeleton, T } from "@/src/components/ui";
+import { Chip, Empty, ErrorBox, Skeleton, T } from "@/src/components/ui";
+import { Glyph } from "@/src/components/Glyph";
 import { Pill, ScreenHeader } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 
@@ -61,15 +62,15 @@ export default function PyqPapers() {
   }
 
   return <View testID="pyq-screen" style={[styles.screen, { paddingTop: insets.top + space.sm }]}>
-    <ScreenHeader title="PYQ papers" eyebrow="JEE MAIN" testID="pyq-header" backTestID="pyq-back-button" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)/jee")} />
+    <ScreenHeader title="PYQ papers" eyebrow="JEE MAIN" testID="pyq-header" backTestID="pyq-back-button" onBack={() => router.canGoBack() ? router.back() : router.replace("/exam/jee-main")} />
     <FlatList testID="pyq-paper-list" data={visible} keyExtractor={(p) => p.id} showsVerticalScrollIndicator={false}
       initialNumToRender={6} maxToRenderPerBatch={6} windowSize={7}
       refreshing={papers.refreshing} onRefresh={refresh}
       contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + space.xl }]}
       ListHeaderComponent={<View style={styles.intro}>
         <View style={styles.heading}>
-          <View style={styles.copy}><T testID="pyq-title" size={26} w="heavy">Real papers.</T><T testID="pyq-subtitle" size={26} w="heavy" color={colors.brandText}>Your next attempt.</T></View>
-          <View style={styles.emblem}><Icon name="file-document-check-outline" size={30} color={colors.brandText} /></View>
+          <View style={styles.copy}><T testID="pyq-title" size={26} w="heavy">real papers.</T><T testID="pyq-subtitle" size={26} w="heavy" color={colors.custom_eyebrow}>your next attempt.</T></View>
+          <View style={styles.emblem}><Glyph name="file-document-check-outline" size={30} color={colors.onSurface} stroke={1.4} /></View>
         </View>
         <T testID="pyq-description" size={13} color={colors.muted}>Pick a paper and start. Your place is saved when you leave.</T>
         {papers.data ? <T testID="pyq-total" size={11} w="bold" color={colors.custom_eyebrow} style={styles.caps}>{`${papers.data.total} ${papers.data.total === 1 ? "paper" : "papers"} available${selectedYear || selectedShift ? ` · ${visible.length} shown` : ""}`.toUpperCase()}</T> : null}
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
   intro: { gap: space.md, paddingTop: space.sm },
   heading: { flexDirection: "row", alignItems: "center", gap: space.md },
   copy: { flex: 1 },
-  emblem: { width: 60, height: 60, borderRadius: 30, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine, alignItems: "center", justifyContent: "center" },
+  emblem: { width: 64, height: 64, borderRadius: 32, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" },
   filters: { gap: space.sm, paddingRight: space.lg },
   item: { gap: space.sm }, section: { letterSpacing: 2.4, marginTop: space.xs }, caps: { letterSpacing: 2 },
   loading: { gap: space.lg }, empty: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine },

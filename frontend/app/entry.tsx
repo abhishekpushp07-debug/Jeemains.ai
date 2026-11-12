@@ -49,7 +49,7 @@ export default function Entry() {
     {sessionError ? <ErrorBox testID="entry-session-error" error={sessionError} retry={checkSession} /> : null}
     <View style={styles.tabs}>
       {(["login", "signup"] as const).map(tab => <Press testID={`entry-tab-${tab}`} key={tab} accessibilityRole="tab" accessibilityState={{ selected: mode === tab }} disabled={submit.busy} onPress={() => switchMode(tab)} style={[styles.tab, mode === tab && styles.selected]}>
-        <T testID={`entry-tab-${tab}-label`} size={14} w="bold" color={mode === tab ? colors.onBrandPrimary : colors.muted}>{tab === "login" ? "Sign in" : "Create account"}</T>
+        <T testID={`entry-tab-${tab}-label`} size={14} w="bold" color={mode === tab ? colors.onSurfaceInverse : colors.muted}>{tab === "login" ? "Sign in" : "Create account"}</T>
       </Press>)}
     </View>
     <View style={styles.form}>
@@ -71,8 +71,8 @@ export default function Entry() {
 }
 const styles = StyleSheet.create({
   intro: { gap: space.sm }, eyebrow: { letterSpacing: 1.5, marginTop: space.sm },
-  tabs: { flexDirection: "row", padding: 4, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.surfaceSecondary },
-  tab: { flex: 1, minHeight: 44, alignItems: "center", justifyContent: "center", borderRadius: 8 }, selected: { backgroundColor: colors.brandPrimary },
+  tabs: { flexDirection: "row", padding: 4, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_cardRaised },
+  tab: { flex: 1, minHeight: 44, alignItems: "center", justifyContent: "center", borderRadius: radius.pill }, selected: { backgroundColor: colors.onSurface },
   form: { gap: space.md }, forgot: { alignSelf: "flex-end", minHeight: 44, justifyContent: "center", paddingHorizontal: space.sm, marginTop: -space.sm },
   footer: { gap: space.md, paddingBottom: space.sm }, center: { textAlign: "center" },
 });

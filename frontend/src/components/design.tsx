@@ -1,27 +1,28 @@
-import React, { useCallback, useEffect, useId, useState } from "react";
-import { ActivityIndicator, AppState, Modal, Pressable, ScrollView, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import React, { useEffect, useId } from "react";
+import { ActivityIndicator, Modal, Pressable, ScrollView, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useFocusEffect } from "expo-router";
 import Svg, { Circle, Defs, LinearGradient as SvgGradient, Stop } from "react-native-svg";
-import Animated, { Easing, SlideInDown, FadeIn, useAnimatedProps, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withTiming, cancelAnimation } from "react-native-reanimated";
+import Animated, { Easing, SlideInDown, FadeIn, useAnimatedProps, useReducedMotion, useSharedValue, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors, pastel, radius, SeriesTone, space } from "@/src/theme";
-import { Icon, IconName, Press, T } from "./ui";
+import { IconName, Press, T } from "./ui";
+import { Glyph } from "./Glyph";
 
-/** Small, widely spaced CAPITAL heading with an optional "view all ›" link. */
+/** Quiet, widely spaced CAPITAL heading with an optional lowercase "view all ›" link. */
 export function SectionLabel({ title, action, onAction, right, testID, actionTestID }: {
   title: string; action?: string; onAction?: () => void; right?: React.ReactNode; testID?: string; actionTestID?: string;
 }) {
   return <View style={styles.sectionRow}>
-    <T testID={testID} w="bold" size={11} color={colors.custom_eyebrow} style={styles.sectionText}>{title.toUpperCase()}</T>
+    <T testID={testID} w="bold" size={12} color={colors.custom_eyebrow} style={styles.sectionText}>{title.toUpperCase()}</T>
     {right}
     {onAction ? <Press testID={actionTestID} onPress={onAction} accessibilityLabel={`${action || "View all"} ${title}`} style={styles.sectionAction}>
-      <T size={12.5} color={colors.muted}>{action || "view all"} ›</T>
+      <T size={14} color={colors.custom_softText}>{action || "view all"}</T>
+      <Glyph name="chevron-right" size={16} color={colors.custom_softText} />
     </Press> : null}
   </View>;
 }
 
-/** Thin-bordered dark card with soft round corners. */
+/** White hairline card with soft round corners. */
 export function DCard({ children, style, testID }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string }) {
   return <View testID={testID} style={[styles.card, style]}>{children}</View>;
 }
@@ -38,24 +39,24 @@ export function Pill({ label, onPress, kind = "light", icon, iconRight, busy, di
   style?: StyleProp<ViewStyle>; ink?: string; bg?: string; size?: "sm" | "md" | "lg"; accessibilityLabel?: string;
 }) {
   const base = {
-    light: [colors.onSurface, colors.custom_bar, colors.onSurface],
+    light: [colors.onSurface, colors.onSurfaceInverse, colors.onSurface],
     dark: [colors.custom_pastelInk, colors.custom_todayCta, colors.custom_pastelInk],
     brand: [colors.brandPrimary, colors.onBrandPrimary, colors.brandPrimary],
-    outline: [colors.custom_cardRaised, colors.custom_softText, colors.custom_cardLineStrong],
+    outline: [colors.custom_card, colors.onSurface, colors.custom_cardLineStrong],
     teal: ["transparent", colors.custom_qMarkedInk, colors.custom_qMarked],
     danger: ["transparent", colors.error, colors.error],
   }[kind];
   const fill = bg ?? base[0], fg = ink ?? base[1];
-  const h = size === "lg" ? 52 : size === "sm" ? 44 : 48;
-  return <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={accessibilityLabel || label}
-    style={[styles.pill, { minHeight: h, backgroundColor: fill, borderColor: bg ?? base[2], borderWidth: kind === "outline" || kind === "teal" || kind === "danger" ? 1.5 : 0 }, style]}>
-    {busy ? <ActivityIndicator color={fg} /> : icon ? <Icon name={icon} size={18} color={fg} /> : null}
-    <T testID={testID ? `${testID}-label` : undefined} w="heavy" size={size === "sm" ? 13 : 14} color={fg} numberOfLines={1}>{label}</T>
-    {iconRight && !busy ? <Icon name={iconRight} size={18} color={fg} /> : null}
+  const h = size === "lg" ? 54 : size === "sm" ? 44 : 50;
+  return <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={accessibilityLabel || label} scaleTo={0.97}
+    style={[styles.pill, { minHeight: h, backgroundColor: fill, borderColor: bg ?? base[2], borderWidth: kind === "outline" || kind === "teal" || kind === "danger" ? 1 : 0 }, style]}>
+    {busy ? <ActivityIndicator color={fg} /> : icon ? <Glyph name={icon} size={18} color={fg} stroke={1.8} /> : null}
+    <T testID={testID ? `${testID}-label` : undefined} w="bold" size={size === "sm" ? 13.5 : 15} color={fg} numberOfLines={1}>{label}</T>
+    {iconRight && !busy ? <Glyph name={iconRight} size={18} color={fg} stroke={1.8} /> : null}
   </Press>;
 }
 
-/** Rounded segmented pill: the selected segment turns white. */
+/** Rounded segmented control: the selected segment turns black. */
 export function Segmented<K extends string>({ items, value, onChange, prefix, testID, compact }: {
   items: { key: K; label: string; sub?: string; testID?: string; subTestID?: string; labelTestID?: string; a11y?: string }[];
   value: K; onChange: (key: K) => void; prefix: string; testID?: string; compact?: boolean;
@@ -64,24 +65,24 @@ export function Segmented<K extends string>({ items, value, onChange, prefix, te
     {items.map(item => {
       const on = item.key === value;
       return <Press key={item.key} testID={item.testID ?? `${prefix}-${item.key}`} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={item.a11y ?? item.label}
-        onPress={() => onChange(item.key)} scaleTo={0.98} style={[styles.segmentItem, compact && { minHeight: 44 }, on && { backgroundColor: colors.onSurface }]}>
-        <T testID={item.labelTestID} w={on ? "heavy" : "bold"} size={12.5} numberOfLines={1} color={on ? colors.custom_bar : colors.custom_softText}>{item.label}</T>
-        {item.sub !== undefined ? <T testID={item.subTestID} w="bold" size={10} color={on ? colors.custom_qFreshLine : colors.custom_eyebrow}>{item.sub}</T> : null}
+        onPress={() => onChange(item.key)} scaleTo={0.98} style={[styles.segmentItem, compact && { minHeight: 44 }, on && styles.segmentOn]}>
+        <T testID={item.labelTestID} w={on ? "bold" : "semibold"} size={13} numberOfLines={1} color={on ? colors.onSurfaceInverse : colors.custom_softText}>{item.label}</T>
+        {item.sub !== undefined ? <T testID={item.subTestID} w="bold" size={10.5} color={on ? colors.custom_dim : colors.custom_eyebrow}>{item.sub}</T> : null}
       </Press>;
     })}
   </View>;
 }
 
-export function ScreenHeader({ title, eyebrow, onBack, right, testID, backTestID, eyebrowColor }: {
-  title: string; eyebrow?: string; onBack?: () => void; right?: React.ReactNode; testID?: string; backTestID?: string; eyebrowColor?: string;
+export function ScreenHeader({ title, eyebrow, onBack, right, testID, backTestID, eyebrowColor, titleColor }: {
+  title: string; eyebrow?: string; onBack?: () => void; right?: React.ReactNode; testID?: string; backTestID?: string; eyebrowColor?: string; titleColor?: string;
 }) {
   return <View testID={testID} style={styles.header}>
     {onBack ? <Press testID={backTestID || "header-back-button"} onPress={onBack} accessibilityLabel="Back" style={styles.round}>
-      <Icon name="chevron-left" size={24} color={colors.onSurface} />
+      <Glyph name="chevron-left" size={22} color={colors.onSurface} stroke={1.8} />
     </Press> : null}
     <View style={{ flex: 1 }}>
-      {eyebrow ? <T w="heavy" size={10} color={eyebrowColor ?? colors.brandText} style={{ letterSpacing: 1.8 }} numberOfLines={1}>{eyebrow.toUpperCase()}</T> : null}
-      <T testID={testID ? `${testID}-title` : undefined} w="heavy" size={20} numberOfLines={2}>{title}</T>
+      {eyebrow ? <T w="bold" size={11} color={eyebrowColor ?? colors.custom_eyebrow} style={{ letterSpacing: 2.2 }} numberOfLines={2}>{eyebrow.toUpperCase()}</T> : null}
+      <T testID={testID ? `${testID}-title` : undefined} w="heavy" size={21} color={titleColor} numberOfLines={2}>{title}</T>
     </View>
     {right}
   </View>;
@@ -89,27 +90,28 @@ export function ScreenHeader({ title, eyebrow, onBack, right, testID, backTestID
 
 export function RoundButton({ icon, onPress, testID, label, color, active, style }: { icon: IconName; onPress: () => void; testID?: string; label: string; color?: string; active?: boolean; style?: StyleProp<ViewStyle> }) {
   return <Press testID={testID} onPress={onPress} accessibilityLabel={label} accessibilityState={active !== undefined ? { selected: active } : undefined} style={[styles.round, style]}>
-    <Icon name={icon} size={20} color={color ?? colors.custom_softText} />
+    <Glyph name={icon} size={20} color={color ?? colors.custom_softText} stroke={1.8} />
   </Press>;
 }
 
 export function StatusLine({ color, label, testID }: { color: string; label: string; testID?: string }) {
   return <View testID={testID} style={styles.statusLine}>
     <View style={[styles.dot, { backgroundColor: color }]} />
-    <T testID={testID ? `${testID}-label` : undefined} w="heavy" size={10} color={color} style={{ letterSpacing: 1.2 }} numberOfLines={1}>{label.toUpperCase()}</T>
+    <T testID={testID ? `${testID}-label` : undefined} w="bold" size={10.5} color={color} style={{ letterSpacing: 1.4 }} numberOfLines={1}>{label.toUpperCase()}</T>
   </View>;
 }
 
+/** Soft grey circle holding a hairline icon (inverted = black circle, white icon). */
 export function IconCircle({ icon, color, bg, size = 40, line }: { icon: IconName; color: string; bg?: string; size?: number; line?: string }) {
-  return <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: bg ?? colors.custom_cardRaised, borderWidth: 1, borderColor: line ?? colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" }}>
-    <Icon name={icon} size={Math.round(size * 0.48)} color={color} />
+  return <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: bg ?? colors.custom_cardRaised, borderWidth: 1, borderColor: line ?? colors.custom_cardLine, alignItems: "center", justifyContent: "center" }}>
+    <Glyph name={icon} size={Math.round(size * 0.48)} color={color} />
   </View>;
 }
 
 /** Grouped settings list ("SECURITY", "PRIVACY", "ACCOUNT"). */
 export function GroupList({ title, children, testID }: { title: string; children: React.ReactNode; testID?: string }) {
   const rows = React.Children.toArray(children).filter(Boolean);
-  return <View testID={testID} style={{ gap: space.sm }}>
+  return <View testID={testID} style={{ gap: space.md }}>
     <SectionLabel title={title} />
     <View style={styles.group}>
       {rows.map((row, i) => <View key={i} style={i ? styles.groupDivider : undefined}>{row}</View>)}
@@ -120,12 +122,12 @@ export function GroupList({ title, children, testID }: { title: string; children
 export function ListRow({ icon, label, sub, onPress, testID, danger, busy }: { icon: IconName; label: string; sub?: string; onPress: () => void; testID?: string; danger?: boolean; busy?: boolean }) {
   const ink = danger ? colors.error : colors.onSurface;
   return <Press testID={testID} onPress={onPress} disabled={busy} accessibilityLabel={label} scaleTo={0.99} style={styles.listRow}>
-    <IconCircle icon={icon} color={danger ? colors.error : colors.custom_softText} size={38} />
+    <IconCircle icon={icon} color={danger ? colors.error : colors.onSurface} size={40} />
     <View style={{ flex: 1, gap: 1 }}>
-      <T testID={testID ? `${testID}-label` : undefined} w="bold" size={15} color={ink}>{label}</T>
-      {sub ? <T size={12} color={colors.custom_eyebrow}>{sub}</T> : null}
+      <T testID={testID ? `${testID}-label` : undefined} w="semibold" size={15.5} color={ink}>{label}</T>
+      {sub ? <T size={12.5} color={colors.muted}>{sub}</T> : null}
     </View>
-    {busy ? <ActivityIndicator color={colors.muted} /> : <Icon name="chevron-right" size={20} color={colors.custom_dim} />}
+    {busy ? <ActivityIndicator color={colors.muted} /> : <Glyph name="chevron-right" size={18} color={colors.custom_dim} />}
   </Press>;
 }
 
@@ -154,31 +156,7 @@ export function ProgressRing({ size, stroke, value, track, color, gradient, chil
   </View>;
 }
 
-/** Soft diagonal shine sweep; pauses off-screen, in background and with reduce motion. */
-export function Shine({ enabled, testID }: { enabled: boolean; testID?: string }) {
-  const reduced = useReducedMotion();
-  const [focused, setFocused] = useState(false);
-  const [foreground, setForeground] = useState(AppState.currentState === "active");
-  const [width, setWidth] = useState(0);
-  const x = useSharedValue(0);
-  useFocusEffect(useCallback(() => { setFocused(true); return () => setFocused(false); }, []));
-  useEffect(() => { const sub = AppState.addEventListener("change", s => setForeground(s === "active")); return () => sub.remove(); }, []);
-  const running = enabled && !reduced && focused && foreground && width > 0;
-  useEffect(() => {
-    cancelAnimation(x);
-    x.value = 0;
-    if (running) x.value = withRepeat(withDelay(2600, withTiming(1, { duration: 1700, easing: Easing.inOut(Easing.quad) })), -1, false);
-    return () => cancelAnimation(x);
-  }, [running, x]);
-  const band = useAnimatedStyle(() => ({ transform: [{ translateX: -width * 0.6 + x.value * width * 1.9 }, { rotate: "18deg" }] }));
-  return <View testID={testID} pointerEvents="none" style={[StyleSheet.absoluteFill, { overflow: "hidden" }]} onLayout={e => setWidth(e.nativeEvent.layout.width)}>
-    {running ? <Animated.View testID={testID ? `${testID}-band` : undefined} style={[styles.shineBand, band]}>
-      <LinearGradient colors={[colors.custom_webTransparent, colors.custom_webJeeShine, colors.custom_webTransparent]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={StyleSheet.absoluteFill} />
-    </Animated.View> : null}
-  </View>;
-}
-
-/** Bottom sheet in the new language: rises from the bottom, handle + title + close. */
+/** Bottom sheet: rises from the bottom, handle + title + close. */
 export function DSheet({ visible, onClose, title, children, testID, closeTestID, scroll = true }: {
   visible: boolean; onClose: () => void; title?: string; children: React.ReactNode; testID?: string; closeTestID?: string; scroll?: boolean;
 }) {
@@ -194,9 +172,9 @@ export function DSheet({ visible, onClose, title, children, testID, closeTestID,
     <Animated.View testID={testID} entering={reduced ? undefined : SlideInDown.duration(260)} style={[styles.sheet, { paddingBottom: insets.bottom + space.lg }]}>
       <View style={styles.handle} />
       {title ? <View style={styles.sheetTitle}>
-        <T w="heavy" size={18} style={{ flex: 1 }}>{title}</T>
+        <T w="heavy" size={19} style={{ flex: 1 }}>{title}</T>
         <Press testID={closeTestID ?? (testID ? `${testID}-close` : undefined)} onPress={onClose} accessibilityLabel="Close" style={styles.sheetClose}>
-          <Icon name="close" size={18} color={colors.custom_softText} />
+          <Glyph name="close" size={18} color={colors.onSurface} stroke={1.8} />
         </Press>
       </View> : null}
       {scroll ? <ScrollView contentContainerStyle={{ gap: space.md, paddingBottom: space.xs }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">{children}</ScrollView>
@@ -208,23 +186,23 @@ export function DSheet({ visible, onClose, title, children, testID, closeTestID,
 
 const styles = StyleSheet.create({
   sectionRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm, minHeight: 28 },
-  sectionText: { letterSpacing: 2.4, flexShrink: 1 },
-  sectionAction: { minHeight: 44, minWidth: 44, justifyContent: "center", alignItems: "flex-end", paddingLeft: space.sm },
-  card: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine, padding: space.lg },
-  pill: { borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, paddingHorizontal: 18 },
-  segment: { flexDirection: "row", padding: 4, gap: 2, borderRadius: radius.pill, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine },
-  segmentItem: { flex: 1, minWidth: 0, minHeight: 40, borderRadius: radius.pill, alignItems: "center", justifyContent: "center", paddingHorizontal: 6, paddingVertical: 3 },
+  sectionText: { letterSpacing: 2.6, flexShrink: 1 },
+  sectionAction: { minHeight: 44, minWidth: 44, flexDirection: "row", alignItems: "center", justifyContent: "flex-end", gap: 2, paddingLeft: space.sm },
+  card: { backgroundColor: colors.custom_card, borderRadius: 22, borderWidth: 1, borderColor: colors.custom_cardLine, padding: space.lg },
+  pill: { borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingHorizontal: 20 },
+  segment: { flexDirection: "row", padding: 4, gap: 2, borderRadius: radius.pill, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine },
+  segmentItem: { flex: 1, minWidth: 0, minHeight: 42, borderRadius: radius.pill, alignItems: "center", justifyContent: "center", paddingHorizontal: 6, paddingVertical: 3 },
+  segmentOn: { backgroundColor: colors.onSurface },
   header: { flexDirection: "row", alignItems: "center", gap: space.md, paddingHorizontal: space.lg, paddingBottom: space.md },
-  round: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" },
+  round: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" },
   statusLine: { flexDirection: "row", alignItems: "center", gap: 6, flexShrink: 1 },
   dot: { width: 7, height: 7, borderRadius: 4 },
-  group: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine, overflow: "hidden" },
+  group: { backgroundColor: colors.custom_card, borderRadius: 22, borderWidth: 1, borderColor: colors.custom_cardLine, overflow: "hidden" },
   groupDivider: { borderTopWidth: 1, borderTopColor: colors.custom_barLine },
-  listRow: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 64, paddingHorizontal: space.lg, paddingVertical: space.sm },
-  shineBand: { position: "absolute", top: -40, bottom: -40, width: 90 },
+  listRow: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 68, paddingHorizontal: space.lg, paddingVertical: space.sm },
   sheetLayer: { flex: 1, justifyContent: "flex-end" },
-  sheet: { backgroundColor: colors.custom_card, borderTopLeftRadius: 28, borderTopRightRadius: 28, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.xl, paddingTop: space.md, gap: space.md, maxHeight: "88%" },
+  sheet: { backgroundColor: colors.custom_card, borderTopLeftRadius: 28, borderTopRightRadius: 28, paddingHorizontal: space.xl, paddingTop: space.md, gap: space.md, maxHeight: "88%" },
   handle: { alignSelf: "center", width: 40, height: 4, borderRadius: 2, backgroundColor: colors.custom_qFreshLine },
   sheetTitle: { flexDirection: "row", alignItems: "center", gap: space.sm },
-  sheetClose: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" },
+  sheetClose: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.custom_cardRaised, alignItems: "center", justifyContent: "center" },
 });

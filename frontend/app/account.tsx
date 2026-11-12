@@ -3,7 +3,8 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
-import { Icon, Notice, T } from "@/src/components/ui";
+import { Notice, T } from "@/src/components/ui";
+import { Glyph } from "@/src/components/Glyph";
 import { DCard, DSheet, GroupList, ListRow, Pill, ScreenHeader } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 
@@ -32,7 +33,7 @@ export default function Account() {
       <ScreenHeader testID="account-header" backTestID="account-back-button" title="Account" eyebrow="JEECIRCLE profile" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)")} />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.xs, paddingBottom: insets.bottom + space.xxl, gap: space.xl }}>
         <DCard testID="account-profile" style={styles.profile}>
-          <View style={styles.avatar}><Icon name="account" size={30} color={colors.onSurface} /></View>
+          <View style={styles.avatar}><Glyph name="account-outline" size={28} color={colors.onSurface} stroke={1.4} /></View>
           <View style={{ flex: 1, gap: 2 }}>
             <T testID="account-name" w="heavy" size={18}>{user?.name || "Practice profile"}</T>
             <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEECIRCLE profile"}</T>
@@ -66,5 +67,5 @@ export default function Account() {
 
 const styles = StyleSheet.create({
   profile: { flexDirection: "row", gap: space.md, alignItems: "center", padding: 20 },
-  avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine, alignItems: "center", justifyContent: "center" },
+  avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" },
 });

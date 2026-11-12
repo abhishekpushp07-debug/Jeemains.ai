@@ -40,7 +40,7 @@ export function PinField({ value, onChange, label = "4-digit PIN", testID, disab
 
 const styles = StyleSheet.create({
   group: { gap: space.sm },
-  field: { flexDirection: "row", alignItems: "center", minHeight: 56, borderRadius: radius.md, borderWidth: 1, borderColor: colors.borderStrong, backgroundColor: colors.surfaceSecondary, paddingLeft: space.md, paddingRight: 4 },
+  field: { flexDirection: "row", alignItems: "center", minHeight: 56, borderRadius: 16, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, paddingLeft: space.md, paddingRight: 4 },
   input: { flex: 1, minWidth: 0, fontFamily: fonts.medium, fontSize: 16, color: colors.onSurface, paddingHorizontal: space.sm, paddingVertical: space.md },
   pin: { letterSpacing: 3 },
   eye: { width: 48, height: 48, alignItems: "center", justifyContent: "center" },
