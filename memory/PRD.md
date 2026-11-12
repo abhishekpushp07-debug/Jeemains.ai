@@ -1,5 +1,16 @@
 # JEELIVE.AI Native App — PRD
 
+## Latest iteration58 — teal instead of purple, red/black All India card, Result/Solutions theme, JEECIRCLE.AI rename
+- User asked (Phase 1 review): light purple → teal everywhere; Home All India card back to red & black like before; Result + Solutions = colour/theme only (no function/content change); rename the app to jeecircle.ai everywhere.
+- theme.ts: Maths subject, neon violet and epic rarity tokens are now teal; the upcoming pastel is teal and done is soft green (so the two stay distinct); marked-for-review is teal #0D9488 with ink #5EEAD4. Rapid Fire violet tokens are teal too; duel opponent score is amber and RF Maths is amber so they don't clash with the teal Physics colour; history loss is muted. Pill kind renamed purple→teal.
+- HomeSeriesCard is back on the original ruby/onyx surface (ExamCardFinish live layers + shine, red CTA, website 100% AI badge gradient) with all the new content kept (ring, status accent dot, streak/skipped, CTA). The Live JEE Series tile is now dark with a red glow (pastel tone prop removed from ExamTile).
+- Result screen: ScreenHeader, white-active pill tabs, red→black score card, dark stat tiles, dark solution card/rail/grid/reflection; AiSolution sections restyled. Logic and testIDs unchanged.
+- Rename: new bundled SVG logo `src/assets/brandLogo.ts` (original emblem + tagline, "JeeCircle.ai" wordmark drawn from Figtree-800 as paths) — BrandMark no longer fetches the logo, so it draws instantly. Splash PNG regenerated (same filename). app.json name JEECIRCLE.AI; all user-visible JEELIVE text in app, legal content.json, backend legal_pages changed. Website/API domain links (jeelive.ai), package id, slug, storage paths, cache keys and marketing video files are intentionally unchanged.
+- Bug fix: `useCached` re-requests (max 2 times) when a shared read is aborted by a central reset while the screen is still mounted. This fixes `/live` opened cold being stuck on the skeleton (tester reproduced 2/3; main verified cold /live 3/3 PASS).
+- Env: `redis-server` disappears when the pod resets (apt packages don't persist); reinstalled via apt for the preview. The backend works without it.
+- Testing: iteration_58 frontend PASS for every requested item (no purple left anywhere in the rendered UI; layout OK at 320/390). Low: 4 avatar images and the RF hero art still contain violet pixels (images, not theme).
+- Pending: user to send the PIN-backend repo link for account deletion (they said yes); user to check the video ZIP download; signed APK <20MB still unverified.
+
 ## Latest iteration56 — compatible ZIP and standalone download page
 - User exact: **“Direct toh aur doenload nahi ho rha zip.me shi format do ya kuch aise do jo ho doenload . Actually click krte hi preview khul ja rha app ka”**. Repeated delivery complaint; do not call resolved on their phone solely from server/browser tests.
 - Confirmed existing public MP4 attachment responses and correct bytes/no redirect; app has no associated-domain/universal-link rules. **Actual chat/device interception cause unproven.** Troubleshooter again guessed WhatsApp/Telegram; support search stopped/unverified and found no documented actual chat attachment/alternate-host mechanism. Do not repeat that guess as fact or claim a native chat attachment was supplied.

@@ -6,8 +6,9 @@ import { useAuth } from "@/src/auth";
 import { api } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
-import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, Press, Skeleton, T } from "@/src/components/ui";
-import { colors, fonts, foregroundOn, radius, space, subjectColor } from "@/src/theme";
+import { Chip, Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
+import { DCard, Pill, ScreenHeader, StatusLine } from "@/src/components/design";
+import { colors, fonts, radius, space, subjectColor } from "@/src/theme";
 import { examBySlug, fmtClock, unixDate } from "@/src/navigation";
 
 const ORDER = ["Physics", "Chemistry", "Mathematics"];
@@ -26,23 +27,24 @@ const SetRow = memo(function SetRow({ s }: { s: any }) {
   const act = attemptAction(s);
   const available = s.live_enabled !== false && s.status === "published";
   const subj = s.chapter_subject || s.subjects?.[0];
+  const status = !available ? ["Unavailable", colors.custom_eyebrow] : act.label === "Resume" ? ["In progress", colors.custom_timerAmber] : act.label === "Result" ? ["Completed", colors.custom_mint] : s.saved ? ["Saved", colors.custom_savedBlue] : null;
   return (
-    <Press testID={"set-row-" + s.id} disabled={!available} onPress={() => router.push(act.to as any)}>
-      <Card style={{ flexDirection: "row", gap: space.md, alignItems: "center", padding: space.md }}>
-        <View style={{ width: 46, height: 46, borderRadius: 14, backgroundColor: subjectColor(subj), alignItems: "center", justifyContent: "center" }}>
-          <T w="heavy" size={16} color={foregroundOn(subjectColor(subj))}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
+    <Press testID={"set-row-" + s.id} disabled={!available} onPress={() => router.push(act.to as any)} scaleTo={0.985} accessibilityLabel={`${s.title}. ${available ? act.label : "Unavailable"}`}>
+      <DCard style={{ flexDirection: "row", gap: space.md, alignItems: "center", padding: space.md, paddingRight: space.lg }}>
+        <View style={{ width: 46, height: 46, borderRadius: 23, backgroundColor: colors.custom_cardRaised, borderWidth: 1.5, borderColor: subjectColor(subj), alignItems: "center", justifyContent: "center" }}>
+          <T w="heavy" size={15} color={subjectColor(subj)}>{s.chapter_number ?? s.mock_number ?? "•"}</T>
         </View>
-        <View style={{ flex: 1, gap: 2 }}>
+        <View style={{ flex: 1, gap: 3 }}>
           <T testID={`set-title-${s.id}`} w="heavy" size={15} numberOfLines={2}>{s.title}</T>
-          <T size={12} color={colors.muted}>{s.count} Q · {s.rules?.minutes ? s.rules.minutes + " min" : "Untimed"} · +{s.rules?.correct}/{s.rules?.wrong} · {s.maximum} marks</T>
-          {s.saved ? <T size={11} w="bold" color={colors.custom_neonAmber}>Saved</T> : null}
+          <T size={11.5} color={colors.muted}>{s.count} Q · {s.rules?.minutes ? s.rules.minutes + " min" : "Untimed"} · +{s.rules?.correct}/{s.rules?.wrong} · {s.maximum} marks</T>
+          {status ? <StatusLine testID={`set-status-${s.id}`} label={status[0]} color={status[1]} /> : null}
         </View>
         {available ? (
-          <View style={{ paddingHorizontal: 12, height: 34, borderRadius: radius.pill, backgroundColor: act.tone, alignItems: "center", justifyContent: "center" }}>
-            <T w="heavy" size={12} color={colors.onBrandPrimary}>{act.label}</T>
+          <View style={{ paddingHorizontal: 14, height: 36, borderRadius: radius.pill, backgroundColor: act.label === "Start" ? colors.onSurface : act.label === "Resume" ? colors.custom_timerAmber : colors.custom_cardRaised, borderWidth: act.label === "Result" ? 1 : 0, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" }}>
+            <T w="heavy" size={12} color={act.label === "Result" ? colors.onSurface : colors.custom_bar}>{act.label}</T>
           </View>
-        ) : <T size={11} w="bold" color={colors.muted}>Unavailable</T>}
-      </Card>
+        ) : null}
+      </DCard>
     </Press>
   );
 });
@@ -50,12 +52,12 @@ const SetRow = memo(function SetRow({ s }: { s: any }) {
 function HistoryRow({ a }: { a: any }) {
   const router = useRouter();
   return (
-    <Press testID={"history-row-" + a.id} onPress={() => router.push(((a.resumable ? "/attempt/" : "/result/") + a.id) as any)}>
-      <Card style={{ gap: 4 }}>
-        <T w="bold" size={11} color={colors.muted}>{unixDate(a.started_at)} · {a.status}</T>
+    <Press testID={"history-row-" + a.id} onPress={() => router.push(((a.resumable ? "/attempt/" : "/result/") + a.id) as any)} scaleTo={0.985}>
+      <DCard style={{ gap: 4 }}>
+        <T w="heavy" size={10} color={colors.custom_eyebrow} style={{ letterSpacing: 1.4 }}>{unixDate(a.started_at).toUpperCase()} · {String(a.status).toUpperCase()}</T>
         <T w="heavy" size={15}>{a.title}</T>
-        <T size={13} color={colors.brandText} w="bold">{a.summary ? `${a.summary.score} / ${a.summary.maximum}` : a.resumable ? `Resume${a.remaining_seconds ? " · " + fmtClock(Math.round(a.remaining_seconds)) + " left" : ""}` : a.status === "embargoed" ? "Result sealed until release" : "Preparing result"}</T>
-      </Card>
+        <T size={13} color={a.summary ? colors.custom_mint : colors.brandText} w="heavy">{a.summary ? `${a.summary.score} / ${a.summary.maximum}` : a.resumable ? `Resume${a.remaining_seconds ? " · " + fmtClock(Math.round(a.remaining_seconds)) + " left" : ""}` : a.status === "embargoed" ? "Result sealed until release" : "Preparing result"}</T>
+      </DCard>
     </Press>
   );
 }
@@ -97,10 +99,10 @@ function Catalogue() {
 
   return (
     <View testID={`catalogue-${slug}-${kind}`} style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header title={title} eyebrow={exam?.name} backTestID="catalogue-back-button" onBack={() => router.back()} />
+      <ScreenHeader title={title} eyebrow={exam?.name} backTestID="catalogue-back-button" onBack={() => router.back()} />
       {kind !== "history" ? (
         <View style={{ paddingHorizontal: space.lg }}>
-          <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.surfaceSecondary, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, paddingHorizontal: space.md, height: 46 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_card, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 }}>
             <Icon name="magnify" size={20} color={colors.muted} />
             <TextInput testID="catalogue-search-input" value={q} onChangeText={setQ} placeholder={kind === "chapters" ? "Find a chapter…" : "Find a mock test…"} placeholderTextColor={colors.muted} maxLength={100} style={{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }} />
             {q ? <Press testID="catalogue-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search"><Icon name="close-circle" size={18} color={colors.muted} /></Press> : null}
@@ -124,18 +126,18 @@ function Catalogue() {
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.md }}
         ListHeaderComponent={<>
           <ErrorBox error={res.error} retry={res.reload} testID="catalogue-error" />
-          {res.data ? <T size={12} color={colors.muted} testID="catalogue-count">{res.data.total} {kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : "mock tests")}</T> : null}
+          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2 }} testID="catalogue-count">{`${res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : "mock tests")}`.toUpperCase()}</T> : null}
         </>}
         ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View testID="catalogue-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (
-          <Card testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}
+          <DCard testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}
             body={query ? "Try another search." : kind === "history" ? "Your attempts for this exam will appear here." : `Reviewed ${exam?.name} papers appear here when published. Nothing fake is shown.`}
-            action={kind === "mocks" ? <Button testID="catalogue-try-chapters" kind="secondary" label="Try chapter-wise practice" onPress={() => router.replace(`/catalogue?slug=${slug}&kind=chapters`)} /> : undefined} /></Card>
+            action={kind === "mocks" ? <Pill testID="catalogue-try-chapters" kind="outline" label="Try chapter-wise practice" onPress={() => router.replace(`/catalogue?slug=${slug}&kind=chapters`)} /> : undefined} /></DCard>
         ) : undefined}
         ListFooterComponent={res.data?.pages > 1 ? (
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-            <Button testID="catalogue-prev-page" kind="secondary" label="Previous" disabled={page <= 1} onPress={() => setPage((p) => p - 1)} style={{ flex: 1 }} />
+            <Pill testID="catalogue-prev-page" kind="outline" label="Previous" icon="chevron-left" disabled={page <= 1} onPress={() => setPage((p) => p - 1)} style={{ flex: 1 }} />
             <T w="bold" size={13} testID="catalogue-page">{page} / {res.data.pages}</T>
-            <Button testID="catalogue-next-page" kind="secondary" label="Next" disabled={page >= res.data.pages} onPress={() => setPage((p) => p + 1)} style={{ flex: 1 }} />
+            <Pill testID="catalogue-next-page" kind="outline" label="Next" iconRight="chevron-right" disabled={page >= res.data.pages} onPress={() => setPage((p) => p + 1)} style={{ flex: 1 }} />
           </View>) : undefined}
       />
     </View>

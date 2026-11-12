@@ -1,93 +1,223 @@
-# JEELIVE Rapid Fire — Premium Portrait Game Redesign
+# JEELIVE.AI — Naya World-Class Look (Home, Test Screen, All India Series aur baaki screens)
 
-Rapid Fire ko mechanical quiz screen se ek original, inviting competitive game mein badla jayega—teal, royal blue aur purple ki identity ke saath.
-Core experience quick concept recall hoga: readable dark cards, 20-second turns, visible coins aur clearly accessible Friends Fight history.
+App ka dark look aur JEELIVE laal rang wahi rehte hain. Design CRED jaisa saaf aur premium banta hai, aur Wit Circle jaisa exam-focused.
+All India Test Series soft pastel rangon mein dikhti hai. Har din ka rang uske status se tay hota hai, aur din-ba-din score graph bhi milta hai.
 
-## Who it's for
+Mockups (sirf rang-roop dikhane ke liye; number example hain, app mein asli data dikhega):
+- Home: `home-v2-b.svg` (chuna gaya Option B — Journey First)
+- Test dene wali screen: `player.svg`
+- Question palette: `player-palette.svg`
+- All India Series hub: `series-hub.svg`
+- Teeno Home options ki tulna: `home-options.md`
 
-JEE Main, BITSAT aur COMEDK students jo short, exciting solo rounds aur friend duels se concepts, formulae aur diagrams revise karna chahte hain. Experience everyday Android phones par comfortable hoga, sirf high-end devices ke liye nahi.
+## Kiske liye
+- JEE Main, BITSAT aur COMEDK ki taiyari karne wale students, jo roz app kholte hain aur ek nazar mein dekhna chahte hain:
+  - aaj kya karna hai
+  - unki progress kahan tak pahunchi hai
+- App owner, jo chahte hain ki app beautiful, elegant aur professional dikhe.
 
-## Core features and experience
+## Core features aur experience
 
-### 1. Original game lobby, not a dashboard
-- Rapid Fire ki apni visual identity hogi; JEELIVE branding retained rahegi.
-- Top player strip mein avatar, existing progression aur clearly labelled **Coins** balance rahega. Coins kisi hidden menu mein nahi honge.
-- Center mein original energy-themed emblem aur prominent **Play Now** action hoga. **Challenge Friend** equally discoverable, separate action hoga.
-- Friends Fight history lobby se one tap par khulegi. Existing leaderboard, shop aur avatar options readable, consistent game-style shortcuts banenge—not a wall of identical utility tiles.
-- Reference se polished depth, tangible rewards aur inviting buttons ki feeling li jayegi; pool balls, cues, chests, logo ya layout copy nahi honge.
+### Sab screens par ek design language
+- Section ke upar chhote, faile hue CAPITAL headings, halke grey rang mein. Daayein "view all ›" link, jahan poori list ho.
+- Patli border wale, gol kinaron ke cards. Zyada khaali jagah, kam bheed.
+- Gol pill buttons. Har screen par ek hi mukhya button, jo sabse saaf dikhe.
+- Bottom bar: icon ke neeche faile CAPITAL labels; chuna hua tab chamakdaar, baaki dhundle.
+  - Wahi 5 tabs, wahi kram.
+  - Beech ka ubhra hua Rapid Fire button apne diamond look mein, halki laal roshni ke saath.
+- Dark rang, JEELIVE laal, exam ke rang (JEE laal, BITSAT orange, COMEDK graphite) aur Figtree font wahi rehte hain.
+- All India ke pastel status rang, poori app mein ek jaise:
 
-### 2. Premium dark playing cards
-- Card faces near-black/graphite rahenge, subtle grey depth aur restrained teal/blue/purple edge lighting ke saath. Plain white question cards replace honge.
-- Question, formula aur diagram hero content honge; decoration unke peeche rahegi. Options comfortably tappable aur clearly separated honge.
-- Solo aur duel screens same visual family mein honge. Duel mein both players, live score, card progress aur timer instantly readable honge.
-- Correct, incorrect aur timeout states colour ke saath text/symbol se bhi clear honge. Result screen actual score, earned coins aur existing performance information dikhayegi.
-- Existing 30-card format aur **20 seconds per card** retained rahenge. Scoring aur rewards rules is redesign ke bahane silently change nahi honge.
+| Status | Rang |
+|---|---|
+| Aaj / Live | peach-rose |
+| Ho gaya | mint-aqua |
+| Aane wala | lavender-periwinkle |
+| Chhoot gaya | sand-blush |
 
-### 3. Existing question bank ka full suitability pass
-- Existing active Rapid Fire bank ko card-by-card reread kiya jayega; sirf number/keyword filter ya small sample review par selection depend nahi karega.
-- Numerical calculation, pen-and-paper working, multi-step derivation, lengthy reading aur strong student ko approximately **20 seconds ya zyada** lene wale cards reject honge.
-- Keep: direct concept understanding, formula recognition, relationships, units, trends, misconceptions aur fast diagram interpretation.
-- Kisi card mein number ya constant hona apne aap rejection nahi hai. Direct recall acceptable hai; calculation-based numerical nahi.
-- Target answer time generally 5–15 seconds hoga. Borderline or ambiguous cards active play mein nahi rakhe jayenge. Timing suitability ek informed estimate hogi, har student ke liye guarantee nahi.
-- Suitable existing questions rewrite nahi honge. Existing concepts par necessary diagrams add honge; unke labels, relationships aur correct answer scientifically consistent hone chahiye. Diagrams decorative filler ya answer giveaways nahi honge.
-- Subject/chapter coverage ko jitna suitable bank allow kare utna balanced rakha jayega. Pool bharne ke liye rejected questions ya same-match duplicates wapas nahi aayenge.
-- Completion par kept/deleted counts aur rejection reasons ka concise summary milega.
+### Home — Option B "Journey First"
+1. **Upar:** logo aur account button. Session khatam hone ki maujooda notice zaroorat padne par wahi rehti hai.
+2. **Bada All India card (sabse upar):** aaj ke status ke pastel rang mein. Isme ye sab hai:
+   - Apple Fitness jaisi progress ring: kitne din ho gaye, jaise 16/62 aur 26%.
+   - Aaj ke test ka naam aur jaankari: questions, samay, marking.
+   - Current streak aur kitne din chhoote.
+   - "100% AI" badge.
+   - Ek bada button, jo halat ke hisaab se badalta hai: "Start today's test" / "Resume" / "View result" / "Opens 1 Dec".
+   - Card par halki chamak (shine). Use rokne ka chhota control rehta hai.
+3. **Continue row:** sirf jab koi test adhoora ho. Test ka naam, kitne answers save hue, bacha samay, aur "Resume" button.
+4. **EXAMS:** 2×2 grid, aapki 3D art aur PYQ / 100% AI badges ke saath.
+   - Art tile ke upar-daayein kone se thoda bahar "uchhalti" dikhti hai, peeche exam rang ki halki roshni ke saath (premium 3D feel).
+   - Naam aur subtitle neeche-baayein.
+   - Live JEE Series ka tile aaj ke status ke pastel rang mein. Baaki teen tiles dark, apne exam rang ki chamak ke saath.
+5. **MY TESTS:** teen chhote stat cards (In progress, Saved, Completed), har ek ki ginti ke saath. Tap karne par My Tests usi tab par khulta hai.
+6. **Rapid Fire:** patla entry card. Sirf frame naya, Rapid Fire khud nahi badalta.
+- Koi search bar ya shortcut pills nahi.
 
-### 4. Approved permanent cleanup
-- Rejected Rapid Fire cards **bank se permanently delete** honge, archive nahi.
-- Purani Rapid Fire testing-game history, including solo aur friend duels, **delete** hogi. Us history se nikle old match-performance records aur leaderboard standings fresh gameplay ke liye reset honge.
-- Coins balance, existing owned/equipped cosmetics aur account access preserve rahenge. Coin earning/spending records balance correctness ke liye preserve rahenge; unhe match history samajhkar delete nahi kiya jayega.
-- Cleanup sirf Rapid Fire tak limited rahega. Academic tests, PYQs, website results, login aur archived NEET material delete ya alter nahi honge.
-- Plan approval ke baad hi cleanup implement hoga. Deleted testing matches aur rejected card records app se recoverable nahi rahenge.
+### Test dene wali screen (world-class, NTA jaisa jaana-pehchaana)
+**Upar ki patti**
+- Bahar nikalne ka button aur test ka naam.
+- "Saved / Saving / Offline" status, jaisa abhi hai.
+- Bada timer pill: aakhri 10 minute mein amber, aakhri 2 minute mein laal.
+- Laal "Submit" button.
+- Neeche ek patli progress line: kitne sawaal attempt hue.
 
-### 5. Coins and Friends Fight history
-- Lobby aur relevant shop/results screens mein actual current balance visible rahega; decorative/fake coin totals nahi honge.
-- Completed rounds aur existing purchases ke baad balance correctly refresh hoga. Rewards screen sirf actually credited coins ko credited batayegi.
-- Dedicated Friends Fight history mein opponent, result, both scores aur date/time clearly visible honge. Apne matches ki details sirf relevant participants ko milengi.
-- Old testing history delete hone ke baad honest empty state hogi; first new completed duel se real history populate hogi.
-- History se existing friend-challenge flow tak quick action milega; purane result ko tap karna bina confirmation naya match start nahi karega.
+**Subject aur sawaal**
+- Subject tabs (Physics / Chemistry / Maths) ek gol segmented pill mein, har subject ki ginti ke saath (jaise 12/25).
+- Sawaal ka header: "Q 11 of 75", sawaal ka type (jaise Single correct), marking (+4 · −1), bookmark star aur zoom button.
+- Sawaal ek saaf card mein, bade padhne-layak text aur zoom hone wali images ke saath.
+
+**Options aur jawab**
+- Options bade tap-cards hain, A/B/C/D gol ghere mein.
+- Chuna hua option laal border, laal ghere aur ✓ ke saath.
+- Numerical sawaal mein bada answer box.
+- "How sure?" (Guess / Unsure / Sure) optional rehta hai, jaisa abhi hai.
+
+**Neeche ki patti (angoothe ki pahunch mein)**
+- Teen buttons: "Mark for review" (purple outline), "Clear", aur bada safed "Save & Next".
+- Usse neeche ek patli line: "38 answered · 5 marked · 32 left" aur "Palette" button.
+
+**Question palette (neeche se upar aane wali sheet)**
+- Subject tabs.
+- Ginti ke saath legend.
+- Gol rangeen number-bubbles, NTA jaise jaane-pehchaane rangon mein:
+  - Answered = hara
+  - Not answered = laal
+  - Marked for review = purple
+  - Answered & marked = purple, hare dot ke saath
+  - Not visited = grey
+- Abhi wale sawaal par safed ghera.
+- Kisi bubble par tap karne se wahi sawaal khulta hai.
+- Neeche "Back to question" aur "Submit test".
+
+**Submit se pehle**
+- Confirm sheet har subject ki ginti dikhati hai: answered, marked, not answered.
+
+**Jo nahi badalta**
+- Saving, timer, resume, conflict handling aur submit ka saara logic.
+- BITSAT bonus lock.
+- Bahar nikalne par guard.
+
+### All India Test Series hub (gehri soch ke saath, ek hi scroll page)
+1. **Header:** "All India Series", "62 DAYS · FULL SYLLABUS" eyebrow, aur "i" button jo "How it works" kholta hai. "Score 200+ with AI" aur "Created by AI Astra" yahin rehte hain.
+2. **Journey card:**
+   - Badi progress ring (16/62 days).
+   - Current streak, best streak aur skipped din.
+   - Cups ki milestone line (7, 14, 30, 62 din). Jeete hue cups sunehre, baaki tale ke saath.
+3. **TODAY card:** pastel rang mein.
+   - Din aur tareekh, test ka naam, questions/samay/marking.
+   - Chhota countdown "Last start in 3h 12m".
+   - Bada button jo halat ke hisaab se badalta hai: "Check device & start" / "Resume live attempt" / "Open live result".
+4. **ALL DAYS patti:** 1 se 62 tak din ke chhote pastel chips, side-swipe. Khulte hi aaj ke din par aati hai. Kisi din par tap karne se neeche us din ka bada card aata hai:
+   - Ho chuka din: score (jaise 212/300) aur "View result".
+   - Pichhla din: "Practise this paper" (archive).
+   - Aane wala din: kab khulega.
+   - Result abhi nahi aaya: "Results at 11:59 PM".
+5. **SCORE TREND graph:** din-ba-din score ki line.
+   - Best score sunehre nishaan se.
+   - Average aur best upar likhe hote hain.
+   - Chhoote din graph mein khaali jagah (dashed) ke roop mein.
+   - Kisi point par tap karne se us din ka result khulta hai.
+   - Sirf wahi din dikhte hain jinka result aa chuka hai. Pehle result se pehle ek pyara khaali-state message.
+6. **MY RESULTS:** pastel mint cards ki list: din, test ka naam, score, aur ">" teer.
+7. **62-DAY MAP:** GitHub jaisa rangeen chaukor-grid. Saare 62 din status ke rang mein, neeche rang-guide ke saath. Aage aane wale din halke rang mein.
+- Pull-to-refresh, honest khaali/error states aur 12:01 AM – 11:59 PM IST ke niyam wahi rehte hain.
+
+### Exam hubs aur paper lists
+- Exam hub (JEE Main, BITSAT, COMEDK): upar exam art aur naam, neeche spaced headings ke saath sections (PYQ, Chapters, Mocks).
+- Subject chips gol pill style mein.
+- Paper ki har row ek saaf card hai:
+  - naam
+  - saal/shift ya questions/samay
+  - chhoti rangeen status line
+  - daayein pill button: Start / Continue / Result + Re-attempt
+- Paper detail (start se pehle ki screen) bhi isi style mein.
+- Search, filters, pages, pull-to-refresh aur honest empty states wahi rehte hain.
+
+### My Tests
+- Teen tabs (In progress, Saved, Completed) ek gol segmented pill mein.
+- Har test card patli border ke saath, upar status ki rangeen patti aur saaf pill actions.
+- Exam/status chips, search aur compare wahi rehte hain.
+
+### Mission aur Account
+- **Mission:** spaced headings, gol line icons ke saath chhote points (AI se bana content, 80-parameter PYQ analysis, poori tarah free), aur ek bold "Share" button.
+- **Account:**
+  - Upar profile card (phone ke aakhri 4 ank).
+  - Neeche groups mein list rows: "SECURITY" (Change PIN), "PRIVACY", "ACCOUNT" (Delete account, Sign out).
+  - Change PIN, Privacy aur Delete account ke andar ke pages bhi isi style mein.
+
+### Jo bilkul nahi badlega
+- Rapid Fire ki saari screens.
+- Result aur Solutions screens (Phase 2 tak abhi jaisi).
+- Login aur ye saare flows: data, website ke saath sync, caching, speed, logout se bachane wala system.
+- Koi bhaari image nahi. Pastel, rings, graph aur map sab code se bante hain, isliye app ka size nahi badhta.
 
 ## User flow
-
-1. Rapid Fire open → portrait lobby → avatar/progression, coins aur main play choices immediately visible.
-2. Play Now → existing solo/match choices → 30-card quick-recall round.
-3. Challenge Friend → existing invite/join flow → both players ready → live duel.
-4. Har card → readable prompt/diagram → 20-second answer window → clear feedback → next card.
-5. Round complete → result, actual earned coins aur relevant performance summary → play again, challenge friend ya lobby.
-6. Friends Fight History → recent new duels → selected match details → friend challenge shortcut.
-7. Coins/shop shortcut → current balance aur existing cosmetics → existing purchase/equip flow.
+1. App khulta hai, Home dikhta hai. Sabse upar pastel All India card hai: ring dikhati hai kitne din ho gaye, aur ek tap mein aaj ka test shuru hota hai.
+2. Agar koi test adhoora hai, to Continue row se ek tap mein wapas test par.
+3. EXAMS se JEE Main → JEE hub → PYQ list → Start. Test screen khulti hai.
+4. Test mein:
+   - subject tabs se subject badlo
+   - option tap karo
+   - "Save & Next" dabao
+   - "Palette" se kisi bhi sawaal par jao
+   - "Submit" → har subject ki ginti dekho → confirm
+   - Result abhi jaisa khulta hai.
+5. All India card ya "view all" → series hub: journey ring, aaj ka card, din-patti, score graph, results aur 62-din ka map.
+6. My Tests ke stat card (jaise "Saved") → My Tests usi tab par.
+7. Bottom bar se kabhi bhi Home, JEE Main, Rapid Fire, My Tests ya Mission. Account upar ke button se.
 
 ## UI/UX feel
-
-- **Art direction:** polished, playful energy arena—not a sci-fi control panel. Teal brings energy, royal blue gives depth, purple adds personality; graphite surfaces keep content calm.
-- **Original artwork:** cohesive dimensional illustrations for the main play, friend duel, coin and trophy actions. Generic line icons main attraction nahi honge; small utility controls simple reh sakte hain. Full 3D rendering required nahi hoga.
-- **Typography:** warm, rounded, confident game headings; questions/options mein clean, highly readable typography. Fractions, superscripts, subscripts aur diagram labels visually correct rahenge. Font treatment formula reading ko compromise nahi karega.
-- **Screen composition:** top player/coin strip, one strong central play area, clear friend action aur compact secondary navigation. No crowded rewards wall, unnecessary badges or landscape layout squeezed into portrait.
-- **Motion:** responsive button presses, quick card transitions, controlled victory celebration aur subtle feedback. No continuous flashing, long unskippable animation or visual effect covering a question.
-- **Clarity:** strong text contrast, generous tap targets, readable small-phone layouts, reduced-motion support aur useful loading/error/empty states.
-- **Performance:** artwork compressed aur reused/cached hoga. Decorative art loading gameplay ko block nahi karegi. Essential scientific diagrams load na hone par unreadable questions silently serve nahi honge.
-- **Size discipline:** lightweight art and effects; heavy videos or full 3D engine nahi. Android app ka existing under-20MB target retained hai, lekin final build measurement ke bina size guarantee nahi di jayegi.
+- Beautiful, elegant, professional: shaant dark background, patli lines, zyada khaali jagah. Rang sirf jahan matlab ho: exam ki pehchaan, status ki pehchaan, aur All India ke pastel.
+- CRED aur Wit Circle sirf inspiration hain, copy nahi. Look JEELIVE ka apna aur unse bhi sundar banta hai.
+- Test screen par sab kuch padhne aur jaldi tap karne ke liye bana hai: bada text, bade options, mukhya buttons angoothe ki pahunch mein.
+- Har tap target kam se kam 44px; 320px chhoti screen par bhi kuch nahi katta.
+- Halke fade/slide animations, ring bharne aur graph banne ka chhota animation. Phone par "reduce motion" on ho to sab animation band.
 
 ## Implementation phases
 
-### Phase 1 — MVP: complete requested Rapid Fire refresh — abhi ka scope
-Original portrait lobby, coherent game artwork/typography, dark solo/duel cards, existing results/shop/leaderboard/avatar surfaces ka matching treatment, prominent actual coins, accessible Friends Fight history, full existing-bank suitability pass, concept-based diagrams, approved permanent cleanup aur 20-second gameplay. Requested features ko cosmetic-only preview tak limit nahi kiya jayega.
+**Phase 1 — MVP (abhi banega)**
+- Nayi design language aur naya bottom bar.
+- Home — Option B "Journey First".
+- Test dene wali screen, question palette aur submit confirm.
+- All India Series hub: journey ring, today card, din-patti aur din card, score trend graph, results, 62-din ka map. Home ka All India card aur Live tile bhi.
+- Exam hubs, paper lists aur paper detail.
+- My Tests.
+- Mission, Account aur Account ke andar ke pages.
 
-### Phase 2 — Content depth and refinement — abhi build nahi hoga
-Fresh gameplay feedback ke basis par further pacing refinements, sparse chapters ke liye separately approved new concept/diagram content aur a broader original cosmetics collection. Whole-bank rewriting automatically start nahi hogi.
+**Phase 2 — Baaki screens**
+- Result aur Solutions isi style mein (analysis cards, subject-wise score rings).
+- Login/entry aur Forgot PIN isi style mein.
 
-### Phase 3 — Expanded competition — abhi build nahi hoga
-Separately approved recurring competitions, longer-term social progression aur richer friend rivalry features. New earning/spending rules ya monetisation bina separate approval introduce nahi honge.
+**Phase 3 — Polish**
+- Loading ke waqt naye style ke skeleton cards.
+- Tap par halki vibration aur press animations.
+- Tablet / badi screen aur test screen ke liye landscape layout.
 
-## Assumptions
+## Aapke chune hue faisle
+- Dark look hi rahega.
+- Nayi design in screens par: Home, Exam hubs aur paper lists, My Tests aur All India Series, Mission aur Account. Test dene wali screen bhi ab Phase 1 mein ("jo world best ho").
+- Home par 2×2 exam grid, naye style mein.
+- All India cards soft pastel gradients mein, rang status ke hisaab se.
+- All India mein din-ba-din score graph.
+- Home par koi search bar ya shortcut pills nahi.
+- Home ka layout: Option B — Journey First.
 
-- Current scope Rapid Fire hai. Baaki JEELIVE app ka charcoal/red theme, PIN authentication, academic content synchronisation aur PYQ experience unchanged rahenge.
-- Portrait-only gameplay compulsory hai; device rotate karna required nahi hoga.
-- Supplied screenshot mood reference hai, reproduction brief nahi. Product name JEELIVE Rapid Fire retained rahega.
-- Existing gameplay modes, 30-card format, scoring, reward rates aur friend invite/join behaviour retained rahenge unless a change is explicitly described above.
-- User ne rejected cards aur old RF testing history permanently delete karne ko choose kiya hai. Approval mein unse derived match-performance/leaderboard reset included hai; wallet balances, owned items aur account access reset nahi hain.
-- Existing concepts par original explanatory diagrams add karna allowed hai; bulk question rewriting allowed nahi hai. Active NEET content reintroduce nahi hoga.
-- Existing question language retained rahegi. Game labels short aur familiar rahenge; content ka automatic Hindi translation is scope mein nahi hai.
-- Artwork ke liye existing media hosting reuse hogi. Cached art available reh sakti hai, lekin live duels, latest coins aur new results ke liye internet required rahega; offline multiplayer promise nahi hai.
-- New ads, paid currency, payment integration, clubs, loot boxes, push notifications ya new question-generation service Phase 1 ka part nahi hain.
-- “World-class” quality ambition hai, measurable superiority claim nahi. Final experience ka focus original identity, delightful interaction, scientific correctness aur clear gameplay hoga.
+## Assumptions (bina pooche liye gaye faisle)
+- **Question palette ke rang NTA jaise:**
+  - hara = answered, laal = not answered, purple = marked, purple + hara dot = answered & marked, grey = not visited.
+  - Abhi app mein marked laal aur answered & marked sunehra hai. Ye badal jaayega, kyunki students ko asli exam se yahi rang yaad hote hain.
+- **"Save & Next" naam NTA jaisa.** Saving pehle ki tarah apne aap hoti rehti hai; button bas agle sawaal par le jaata hai.
+- **Timer ka rang:** aakhri 10 minute mein amber, aakhri 2 minute mein laal. Ye chhota naya kaam hai.
+- **Submit confirm sheet** mein har subject ki ginti dikhegi.
+- **All India hub ke tabs hate:** "Live & schedule / Archive / My results" ki jagah ab ek hi scroll page hai. Archive ke din din-patti aur 62-din ke map se khulte hain.
+- **"Skipped" din:** wo pichhla live din jismein aapka live attempt nahi hua.
+- **Score graph** sirf live attempts ke released results dikhata hai. Archive practice ke score graph mein nahi milte.
+- **Home ka All India card:**
+  - "100% AI" badge rakhta hai.
+  - "Score 200+ with AI" aur "Created by AI Astra" series hub ke header aur "How it works" mein chale jaate hain, taaki Home saaf rahe.
+- **Series shuru hone se pehle** Home card lavender rang mein "Opens 1 Dec" dikhata hai. Series khatam hone ke baad archive dikhata hai.
+- **Home ka Live JEE Series tile** bhi pastel status-rang leta hai. Baaki teen tiles dark rehte hain.
+- **Beech ka Rapid Fire button** diamond hi rehta hai, kyunki Rapid Fire nahi badalna.
+- **Labels normal case mein,** sirf section headings aur status lines CAPITAL mein.
+- **Maujooda badges (PYQ, 100% AI) rehte hain.** Shine rokne ka control chhote icon ke roop mein rehta hai.
+- **Layout website se alag dikhega,** par rang, font aur saara content website jaisa hi rehta hai.

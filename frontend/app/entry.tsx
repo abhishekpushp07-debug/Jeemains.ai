@@ -42,7 +42,7 @@ export default function Entry() {
       <BrandMark testID="entry-brand" />
       <T testID="entry-eyebrow" size={11} w="bold" color={colors.brandText} style={styles.eyebrow}>YOUR PRACTICE. ONE ACCOUNT.</T>
       <T testID="entry-title" size={30} w="heavy">{signup ? "Start your next chapter." : "Welcome back."}</T>
-      <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEELIVE account." : "Sign in with the same mobile number and PIN you use on jeelive.ai."}</T>
+      <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEECIRCLE account." : "Sign in with the same mobile number and PIN you use on our website."}</T>
     </Animated.View>
     {expired ? <Notice testID="entry-session-expired" tone="warning">Your session ended. Sign in again. Saved results and account-scoped drafts are preserved.</Notice> : null}
     {signOutWarning ? <Notice testID="entry-signout-warning" tone="warning">{signOutWarning}</Notice> : null}

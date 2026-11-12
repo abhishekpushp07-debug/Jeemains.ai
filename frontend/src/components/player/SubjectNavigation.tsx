@@ -29,7 +29,7 @@ export function SubjectTabs({ questions, subject, onSelect, prefix }: { question
   return <ScrollView testID={`${prefix}-tabs`} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>
     {subjects.map(name => {
       const active = name === subject, color = subjectColor(name);
-      return <Press testID={`${prefix}-${subjectId(name)}`} key={name} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={`${name}, ${questions.filter(q => subjectOf(q) === name).length} questions`} onPress={() => onSelect(name)} style={[styles.tab, { backgroundColor: active ? color : colors.surfaceSecondary, borderColor: active ? color : colors.border }]}>
+      return <Press testID={`${prefix}-${subjectId(name)}`} key={name} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={`${name}, ${questions.filter(q => subjectOf(q) === name).length} questions`} onPress={() => onSelect(name)} style={[styles.tab, { backgroundColor: active ? color : colors.custom_card, borderColor: active ? color : colors.custom_cardLine }]}>
         <T testID={`${prefix}-${subjectId(name)}-label`} w="bold" size={13} color={active ? foregroundOn(color) : colors.onSurface}>{name}</T>
         <T testID={`${prefix}-${subjectId(name)}-count`} size={11} w="bold" color={active ? foregroundOn(color) : colors.muted}>{questions.filter(q => subjectOf(q) === name).length}</T>
       </Press>;
@@ -50,7 +50,7 @@ export function QuestionGrid({ questions, onSelect, appearance, prefix }: { ques
   </View>;
 }
 const styles = StyleSheet.create({
-  tabs: { gap: space.sm, paddingVertical: 2 }, tab: { flexDirection: "row", alignItems: "center", justifyContent: "center", minHeight: 44, gap: 8, paddingHorizontal: space.md, borderRadius: radius.md, borderWidth: 1 },
+  tabs: { gap: space.sm, paddingVertical: 2 }, tab: { flexDirection: "row", alignItems: "center", justifyContent: "center", minHeight: 44, gap: 8, paddingHorizontal: space.lg, borderRadius: radius.pill, borderWidth: 1 },
   grid: { width: "100%", flexShrink: 1 }, list: { maxHeight: 300 }, listContent: { gap: 8, paddingBottom: 4 }, row: { gap: 8 },
   cell: { width: 44, height: 44, borderRadius: 10, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: colors.borderStrong }, state: { position: "absolute", top: 3, right: 3 },
 });

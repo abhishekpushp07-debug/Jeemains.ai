@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Tabs } from "expo-router";
 import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,7 +20,7 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
   const insets = useSafeAreaInsets();
   const gameActive = state.routes[state.index]?.name === "rapid";
   return (
-    <View style={{ backgroundColor: gameActive ? rapidColors.surface : colors.surfaceSecondary, borderTopWidth: 1, borderTopColor: gameActive ? rapidColors.border : colors.border, paddingBottom: insets.bottom, flexDirection: "row", height: (Platform.OS === "web" ? 64 : 62) + insets.bottom, overflow: "visible" }}>
+    <View style={[styles.bar, { backgroundColor: gameActive ? rapidColors.surface : colors.custom_bar, borderTopColor: gameActive ? rapidColors.border : colors.custom_barLine, paddingBottom: insets.bottom, height: (Platform.OS === "web" ? 68 : 66) + insets.bottom }]}>
       {state.routes.map((route: any, i: number) => {
         const item = ITEMS[route.name];
         if (!item) return null;
@@ -31,25 +31,25 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
         };
         if (route.name === "rapid") {
           return (
-            <View key={route.key} style={{ flex: 1, alignItems: "center" }}>
-              <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" style={{ alignItems: "center", marginTop: -26 }} scaleTo={0.92}>
-                <View style={{ width: 62, height: 62, alignItems: "center", justifyContent: "center" }}>
-                  <LinearGradient colors={focused ? [rapidColors.brandPrimary, rapidColors.custom_neonViolet] : [colors.custom_series, colors.custom_seriesBright]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
-                    style={{ position: "absolute", width: 50, height: 50, borderRadius: 12, transform: [{ rotate: "45deg" }], borderWidth: 3, borderColor: colors.surfaceSecondary, shadowColor: colors.custom_series, shadowOpacity: 0.4, shadowRadius: 10, shadowOffset: { width: 0, height: 6 }, elevation: 8 }} />
-                  <Icon name="diamond-stone" size={26} color={colors.onBrandSecondary} />
+            <View key={route.key} style={styles.rapidCol}>
+              <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" accessibilityState={{ selected: focused }} style={styles.rapidPress} scaleTo={0.92}>
+                <View style={styles.diamondBox}>
+                  <View pointerEvents="none" style={[styles.glow, { backgroundColor: focused ? rapidColors.brandPrimary : colors.brandPrimary }]} />
+                  <LinearGradient colors={focused ? [rapidColors.brandPrimary, rapidColors.custom_neonViolet] : [colors.custom_diamondFrom, colors.custom_diamondTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                    style={[styles.diamond, { borderColor: focused ? rapidColors.custom_neonCyan : colors.brandLine }]} />
+                  <Icon name="lightning-bolt" size={24} color={colors.custom_webWhite} />
                 </View>
-                <T w="heavy" size={11} color={focused ? rapidColors.custom_neonCyan : colors.muted} style={{ marginTop: 2, letterSpacing: 1 }}>RAPID</T>
+                <T w="heavy" size={9} numberOfLines={1} color={focused ? rapidColors.custom_neonCyan : colors.custom_dim} style={styles.label}>RAPID FIRE</T>
               </Press>
             </View>
           );
         }
-        const tint = focused ? colors.custom_seriesBright : colors.muted;
         return (
-          <Press key={route.key} testID={"tab-" + route.name} onPress={onPress} accessibilityLabel={item.label} style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 2, paddingTop: space.xs }}>
-            <View style={{ paddingHorizontal: 14, paddingVertical: 3, borderRadius: 14, backgroundColor: focused ? colors.custom_infoSoft : "transparent" }}>
-              <Icon name={focused ? item.active : item.icon} size={23} color={route.name === "jee" && focused ? colors.custom_examJee : tint} />
+          <Press key={route.key} testID={"tab-" + route.name} onPress={onPress} accessibilityLabel={item.label} accessibilityRole="tab" accessibilityState={{ selected: focused }} style={styles.item}>
+            <View style={[styles.iconWrap, focused && { backgroundColor: colors.custom_webGlass }]}>
+              <Icon name={focused ? item.active : item.icon} size={22} color={focused ? colors.onSurface : colors.custom_dim} />
             </View>
-            <T w={focused ? "heavy" : "semibold"} size={11} color={focused ? colors.onSurface : colors.muted} numberOfLines={1}>{item.label}</T>
+            <T w="heavy" size={9} numberOfLines={1} color={focused ? colors.onSurface : colors.custom_dim} style={styles.label}>{item.label.toUpperCase()}</T>
           </Press>
         );
       })}
@@ -79,3 +79,15 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  bar: { borderTopWidth: 1, flexDirection: "row", overflow: "visible" },
+  item: { flex: 1, minWidth: 0, alignItems: "center", justifyContent: "center", gap: 3, paddingTop: space.xs },
+  iconWrap: { width: 44, height: 32, borderRadius: 16, alignItems: "center", justifyContent: "center" },
+  label: { letterSpacing: 1.1 },
+  rapidCol: { flex: 1.25, alignItems: "center" },
+  rapidPress: { alignItems: "center", marginTop: -24, gap: 2 },
+  diamondBox: { width: 64, height: 64, alignItems: "center", justifyContent: "center" },
+  glow: { position: "absolute", width: 72, height: 72, borderRadius: 36, opacity: 0.16 },
+  diamond: { position: "absolute", width: 44, height: 44, borderRadius: 11, transform: [{ rotate: "45deg" }], borderWidth: 1.5, shadowColor: colors.brandPrimary, shadowOpacity: 0.45, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 8 },
+});

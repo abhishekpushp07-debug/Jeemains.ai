@@ -12,5 +12,5 @@ export const legalUrl = (page: "privacy" | "delete-account") => {
 };
 export async function openLegal(page: "privacy" | "delete-account") { await Linking.openURL(legalUrl(page)); }
 export async function contactPrivacy() {
-  await Linking.openURL(`mailto:${privacyContact}?subject=${encodeURIComponent("JEELIVE.AI privacy support")}`);
+  await Linking.openURL(`mailto:${privacyContact}?subject=${encodeURIComponent("JEECIRCLE.AI privacy support")}`);
 }

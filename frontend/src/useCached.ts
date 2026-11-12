@@ -16,6 +16,7 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
   const [dataKey, setDataKey] = useState<string | null>(key);
   const fetchRef = useRef(fetcher);
   const forceNext = useRef(false);
+  const aborts = useRef(0);
   fetchRef.current = fetcher;
 
   useEffect(() => {
@@ -44,17 +45,23 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
           } catch {}
         });
       }
+      let retry = false;
       try {
         const load = fetchRef.current; // bind this render's account/path before sharing the promise
         const v = await resources.request<T>(key, load, persist, force);
         fresh = true;
+        aborts.current = 0;
         if (!alive) return;
         setData(v);
         setDataKey(key);
       } catch (e: any) {
-        if (alive && e?.name !== "AbortError") setError(e?.message || "Could not load. Retry.");
+        // A central reset (session restore, invalidation) cancelled the shared read while
+        // this screen still needs it: ask again instead of leaving a skeleton forever.
+        if (alive && e?.name === "AbortError" && aborts.current < 2) { aborts.current++; retry = true; }
+        else if (alive && e?.name !== "AbortError") setError(e?.message || "Could not load. Retry.");
       } finally {
-        if (alive) { setLoading(false); setRefreshing(false); }
+        if (alive && !retry) { setLoading(false); setRefreshing(false); }
+        if (alive && retry) setTick((t) => t + 1);
       }
     })();
     return () => {

@@ -26,7 +26,7 @@ export function playerName(phone?: string) {
 }
 
 function inviteText(code: string, subject: string) {
-  return `⚡ Rapid Fire duel on JEELIVE.AI! ${subject} · 30 formula cards · 20 s each.\nJoin with code: ${code}\nOpen JEELIVE.AI → Rapid Fire → Join with code. Free for everyone: https://jeelive.ai`;
+  return `⚡ Rapid Fire duel on JEECIRCLE.AI! ${subject} · 30 formula cards · 20 s each.\nJoin with code: ${code}\nOpen JEECIRCLE.AI → Rapid Fire → Join with code. Free for everyone: https://jeelive.ai`;
 }
 
 export async function shareOnWhatsApp(code: string, subject: string) {
@@ -365,11 +365,11 @@ function Side({ p, right, total }: { p: any; right?: boolean; total: number }) {
         <Avatar icon={p?.avatar} frame={p?.frame} size={34} />
         <View style={{ flexShrink: 1, alignItems: right ? "flex-end" : "flex-start" }}>
           <T w="heavy" size={12} color={colors.onSurfaceInverse} numberOfLines={1}>{p?.you ? "You" : p?.name || "Waiting…"}</T>
-          {p?.bot ? <T testID="duel-practice-rival-label" size={10} color={colors.custom_neonViolet}>Practice rival</T> : null}
+          {p?.bot ? <T testID="duel-practice-rival-label" size={10} color={colors.custom_neonAmber}>Practice rival</T> : null}
         </View>
       </View>
       <Animated.View key={p?.score ?? 0} entering={reduced ? undefined : ZoomIn.duration(220)}>
-        <T w="heavy" size={30} color={right ? colors.custom_neonViolet : colors.custom_neonCyan} testID={right ? "duel-opp-score" : "duel-my-score"}>{p?.score ?? 0}</T>
+        <T w="heavy" size={30} color={right ? colors.custom_neonAmber : colors.custom_neonCyan} testID={right ? "duel-opp-score" : "duel-my-score"}>{p?.score ?? 0}</T>
       </Animated.View>
       <View style={{ height: 6, width: "100%", borderRadius: 3, backgroundColor: colors.custom_gameLine, overflow: "hidden", alignItems: right ? "flex-end" : "flex-start" }}>
         <View style={{ width: `${((p?.answered || 0) / total) * 100}%`, height: "100%", backgroundColor: right ? colors.custom_neonRed : colors.custom_neonCyan }} />

@@ -124,7 +124,7 @@ ${sec("Examiner insight", sol.insight ? `<p>${tex(sol.insight)}</p>` : "")}
 <p style="font-size:11px;color:${colors.muted}">${esc(label)}</p>`;
 }
 
-const SOLUTION_CSS = `body{margin:0;font:15px -apple-system,Roboto,sans-serif;line-height:1.55;color:${colors.custom_onReading};background:transparent;overflow-wrap:anywhere}h4{margin:0 0 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${colors.muted}}section{margin:0 0 14px;padding:12px;border-radius:12px;background:${colors.surface};border:1px solid ${colors.border}}section.good{background:${colors.custom_successSoft};border-color:${colors.success}55}section.warn{background:${colors.custom_warningSoft};border-color:${colors.custom_amber}55}section.info{background:${colors.custom_infoSoft};border-color:${colors.brandPrimary}44}p{margin:4px 0 0}ul{margin:0;padding-left:18px}li{margin:3px 0}.step{display:flex;gap:10px;margin:10px 0}.step>div:last-child{min-width:0}.step .n{flex:0 0 24px;height:24px;border-radius:12px;background:${colors.brandPrimary};color:${colors.onBrandPrimary};font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}.final{font-size:17px;font-weight:800;color:${colors.success}}.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}.katex{font-size:1.05em}`;
+const SOLUTION_CSS = `body{margin:0;font:15px -apple-system,Roboto,sans-serif;line-height:1.55;color:${colors.custom_onReading};background:transparent;overflow-wrap:anywhere}h4{margin:0 0 6px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:${colors.muted}}section{margin:0 0 14px;padding:12px;border-radius:14px;background:${colors.custom_bar};border:1px solid ${colors.custom_cardLine}}section.good{background:${colors.custom_successSoft};border-color:${colors.success}55}section.warn{background:${colors.custom_warningSoft};border-color:${colors.custom_amber}55}section.info{background:${colors.custom_infoSoft};border-color:${colors.brandPrimary}44}p{margin:4px 0 0}ul{margin:0;padding-left:18px}li{margin:3px 0}.step{display:flex;gap:10px;margin:10px 0}.step>div:last-child{min-width:0}.step .n{flex:0 0 24px;height:24px;border-radius:12px;background:${colors.brandPrimary};color:${colors.onBrandPrimary};font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}.final{font-size:17px;font-weight:800;color:${colors.success}}.katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0}.katex{font-size:1.05em}`;
 const Native = memo(function Native({ sol, label, number }: { sol: any; label: string; number: number }) {
   const body = useMemo(() => html(sol, label), [sol, label]);
   return <OfflineMath testID={`ai-solution-web-${number}`} body={body} css={SOLUTION_CSS} initialHeight={600} />;
@@ -132,7 +132,7 @@ const Native = memo(function Native({ sol, label, number }: { sol: any; label: s
 
 function Box({ title, tone, children }: { title: string; tone?: string; children: React.ReactNode }) {
   return (
-    <View style={{ padding: space.md, borderRadius: radius.md, gap: 4, backgroundColor: tone || colors.surface, borderWidth: 1, borderColor: colors.border }}>
+    <View style={{ padding: space.md, borderRadius: 14, gap: 4, backgroundColor: tone || colors.custom_bar, borderWidth: 1, borderColor: colors.custom_cardLine }}>
       <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>{title.toUpperCase()}</T>
       {children}
     </View>
@@ -175,7 +175,7 @@ export function AiSolution({ item, number, disclosure }: { item?: AiItem; number
   );
   if (item.state !== "ready" || !item.solution) {
     return (
-      <View testID={`ai-solution-pending-${number}`} style={{ gap: space.sm, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border }}>
+      <View testID={`ai-solution-pending-${number}`} style={{ gap: space.sm, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_cardLine }}>
         {head}
         <T size={13} color={colors.muted}>{item.flag ? "The AI solution for this question was held back after a quality check." : "The AI solution for this question is being prepared. Check back soon."}</T>
       </View>

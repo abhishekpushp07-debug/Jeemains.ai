@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
-import { Button, Card, Header, Icon, Notice, Sheet, T } from "@/src/components/ui";
+import { Icon, Notice, T } from "@/src/components/ui";
+import { DCard, DSheet, GroupList, ListRow, Pill, ScreenHeader } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 
 export default function Account() {
@@ -28,34 +29,42 @@ export default function Account() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header testID="account-header" backTestID="account-back-button" title="Account" eyebrow="JEELIVE profile" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)")} />
-      <ScrollView contentContainerStyle={{ padding: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.lg }}>
-        <Card testID="account-profile" style={{ flexDirection: "row", gap: space.md, alignItems: "center" }}>
-          <Icon name="account-circle" size={44} color={colors.brandText} />
-          <View style={{ flex: 1 }}>
-            <T testID="account-name" w="heavy" size={17}>{user?.name || "Practice profile"}</T>
-            <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEELIVE profile"}</T>
+      <ScreenHeader testID="account-header" backTestID="account-back-button" title="Account" eyebrow="JEECIRCLE profile" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)")} />
+      <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.xs, paddingBottom: insets.bottom + space.xxl, gap: space.xl }}>
+        <DCard testID="account-profile" style={styles.profile}>
+          <View style={styles.avatar}><Icon name="account" size={30} color={colors.onSurface} /></View>
+          <View style={{ flex: 1, gap: 2 }}>
+            <T testID="account-name" w="heavy" size={18}>{user?.name || "Practice profile"}</T>
+            <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEECIRCLE profile"}</T>
           </View>
-        </Card>
+        </DCard>
         <Notice testID="account-pin-notice">Sign in with your mobile number and 4-digit PIN. A PIN does not verify phone ownership; no OTP is sent.</Notice>
-        {user?.role === "student" ? <Button testID="account-change-pin-button" label="Change PIN" icon="lock-reset" onPress={() => router.push("/change-pin")} /> : null}
-        <Button testID="account-pin-help-button" label="PIN & account access help" kind="secondary" icon="help-circle-outline" onPress={() => router.push("/forgot-pin")} />
-        <Button testID="account-loading-performance" label="Loading performance" kind="secondary" icon="speedometer" onPress={() => router.push("/performance")} />
-        <Button testID="account-privacy" label="Privacy policy & support" kind="secondary" icon="shield-check-outline" onPress={() => router.push("/privacy")} />
-        <Button testID="account-deletion" label="Account deletion information" kind="ghost" icon="account-remove-outline" onPress={() => router.push("/delete-account")} />
-        {expired ? (
-          <Button testID="account-reenter-button" label="Sign in again" icon="login" onPress={() => finish("keep")} />
-        ) : null}
-        <Button testID="account-signout-button" kind="secondary" label="Sign out" icon="logout" busy={busy} onPress={begin} />
-        <T testID="account-signout-note" size={12} color={colors.muted}>Signing out clears this device’s session and cached question images. Saved answers and results stay with your existing JEELIVE account.</T>
+        {expired ? <Pill testID="account-reenter-button" size="lg" label="Sign in again" icon="login" onPress={() => finish("keep")} /> : null}
+        <GroupList title="Security" testID="account-group-security">
+          {user?.role === "student" ? <ListRow testID="account-change-pin-button" icon="lock-reset" label="Change PIN" sub="Set a new 4-digit PIN" onPress={() => router.push("/change-pin")} /> : null}
+          <ListRow testID="account-pin-help-button" icon="help-circle-outline" label="PIN & account access help" onPress={() => router.push("/forgot-pin")} />
+        </GroupList>
+        <GroupList title="Privacy" testID="account-group-privacy">
+          <ListRow testID="account-privacy" icon="shield-check-outline" label="Privacy policy & support" onPress={() => router.push("/privacy")} />
+          <ListRow testID="account-loading-performance" icon="speedometer" label="Loading performance" sub="Check how fast papers and images load" onPress={() => router.push("/performance")} />
+        </GroupList>
+        <GroupList title="Account" testID="account-group-account">
+          <ListRow testID="account-deletion" icon="account-remove-outline" label="Delete account" sub="How account deletion works" onPress={() => router.push("/delete-account")} />
+          <ListRow testID="account-signout-button" icon="logout" label="Sign out" danger busy={busy} onPress={begin} />
+        </GroupList>
+        <T testID="account-signout-note" size={12} color={colors.custom_eyebrow}>Signing out clears this device’s session and cached question images. Saved answers and results stay with your existing JEECIRCLE account.</T>
       </ScrollView>
-      <Sheet visible={sheet !== null} onClose={() => setSheet(null)} testID="signout-drafts-sheet">
-        <T w="heavy" size={19}>Unsynced work on this phone</T>
+      <DSheet visible={sheet !== null} onClose={() => setSheet(null)} testID="signout-drafts-sheet" title="Unsynced work on this phone">
         <T size={13} color={colors.muted}>{sheet} attempt{sheet === 1 ? "" : "s"} still have answers waiting for server acknowledgement. They are not submitted or scored.</T>
-        <Button testID="signout-keep-drafts" label="Keep drafts & sign out" onPress={() => finish("keep")} />
-        <Button testID="signout-discard-drafts" kind="danger" label="Discard drafts & sign out" onPress={() => finish("discard")} />
-        <Button testID="signout-stay" kind="secondary" label="Stay signed in" onPress={() => setSheet(null)} />
-      </Sheet>
+        <Pill testID="signout-stay" label="Stay signed in" onPress={() => setSheet(null)} />
+        <Pill testID="signout-keep-drafts" kind="outline" label="Keep drafts & sign out" onPress={() => finish("keep")} />
+        <Pill testID="signout-discard-drafts" kind="danger" label="Discard drafts & sign out" onPress={() => finish("discard")} />
+      </DSheet>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  profile: { flexDirection: "row", gap: space.md, alignItems: "center", padding: 20 },
+  avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine, alignItems: "center", justifyContent: "center" },
+});

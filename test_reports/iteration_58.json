@@ -1,0 +1,43 @@
+{
+  "summary": "Frontend colour/brand pass QA (Expo web, 390x844 and 320x700), plus one read-only GET of /api/legal/privacy. One real PIN login (7004186276), then the session was reused through localStorage injection. Every non-GET /api/jl/** request was aborted by Playwright, so there were no academic writes: no attempts, answers, submits, reflections, reports or PIN changes. PASS: Entry shows the bundled JeeCircle.ai + SCORE 200+ WITH AI logo (entry-brand-original-loaded), the '...PIN you use on our website.' copy, and no JEELIVE text. Home: the header logo reads JeeCircle.ai. The All India card is ruby/black (bg rgb(22,11,16), border rgb(152,71,85)) with a red CTA (rgb(182,17,42)). The status line has a 7px teal dot (#C7F2EC). Ring and shine toggle work (aria-checked true->false). Hub button and CTA both open /live. All 4 exam tiles route correctly (jee-main, live, bitsat, comedk). The Live tile is dark with a red glow and its subtitle is red-pink (#FF7883). Hub: upcoming cards, day chips and day map are teal. Done is soft green and the legend is correct. The How it works sheet opens on-screen (y=177) and closes. A computed-style purple scan (hue 245-315 across color/bg/border/backgroundImage/boxShadow plus SVG fills) found ZERO purple on Home, Hub, explainer, My Tests, Mission, Account, /exam/jee-main, /exam/bitsat, /exam/comedk, Rapid Fire, Forgot PIN, Privacy and all Result tabs. The static hex scan of src/app also found no purple. Rapid Fire tab gradient when focused is linear-gradient(#3370F5 -> #2DD4BF). Maths subject colour is #5EEAD4 in theme.ts. There are no In-progress attempts (count 0), so the player palette was checked by code review: custom_qMarked #0D9488, marked/answered_marked use it, the mark button and flag use custom_qMarkedInk #5EEAD4. Result (Work Energy Power and Coordination Compounds): ScreenHeader and back button (back returns to /tests); pill tabs (active is white rgb(248,250,252)); score card is a red->black linear-gradient (#B91020 -> #160B10); stat tiles are dark (#111117) with coloured values (correct green, incorrect red, skipped amber); subject-wise bars. The git diff of result/[id].tsx contains style-only changes, no function or content changes. Solutions: filter chips with a white active chip (Incorrect 11 maps to an 11-item rail); the subject pill; the rail with a white selected bubble; the dark solution card; your answer / answer key boxes; the AI solution pending block; the reflection panel; the grid sheet opens and closes; the report sheet opens and closes (not submitted). Rename: Account 'JEECIRCLE PROFILE', Mission 'JEECIRCLE.AI', Forgot PIN shows 'JEECIRCLE' and 'Open JEECIRCLE website', Privacy (7 mentions), Rapid Fire eyebrow 'JEECIRCLE', backend legal page title 'Privacy policy — JEECIRCLE.AI'. The splash PNG and app.json name are JEECIRCLE.AI. Layout at 320 and 390: no clipped text or CTA on the Home card, Result analysis or Solutions; overflow is only inside the horizontal scroll rows. FAIL (HIGH, pre-existing, not caused by this colour pass): opening /live directly on a cold start (refresh or deep link) leaves the hub stuck on a skeleton forever in 2 of 3 runs. Root cause is in the Notes field.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "supervisor: jeelive-redis", "issue": "FATAL in this forked env: redis_runtime.py execvp('redis-server') raises FileNotFoundError because the redis-server binary is missing. The backend still serves; the Redis cache/RF runtime is unavailable in the preview."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "All India hub cold load (/live deep link / web refresh)", "issue": "The series request is aborted by resources.clear() in setAssetAccount() during session bind. useCached swallows the AbortError and never refetches, so day chips, prelaunch card and map stay a skeleton indefinitely. Reproduced 2 of 3 runs. Navigating Home -> hub works.", "testID": "series-prelaunch / series-chip-N", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Global (low, optional)", "issues": [
+        "Bundled avatar art still has noticeable violet in its pixels: av_crystal 25%, av_galaxy 18%, av_scholar 16%, av_ninja 11%. This is raster character art, not theme colour; decide whether the 'replace purple' request covers it.",
+        "The Rapid Fire lobby hero bolt art has an indigo/blue ring (raster). It is blue rather than purple, but users may read it as violet.",
+        "Token names custom_neonViolet/custom_neonMagenta now hold teal values. Visually fine, but the names are misleading; consider renaming."
+      ]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter58_brand_legal.py", "/app/test_reports/pytest/iter58_brand_legal.xml"],
+  "action_items": [
+    "HIGH: Fix the /live cold-load skeleton hang. Options: (a) in useCached, when the AbortError came from central invalidation (not unmount), bump tick or refetch while still alive; (b) have ResourceCache.invalidate/clear notify subscribers so mounted useCached hooks reload; (c) skip resources.clear() in setAssetAccount when assetOwner was null (first bind of the same restored user). Check the other non-uid-keyed useCached reads too (catalogue, exam hubs), since the same race applies.",
+    "LOW (optional): Decide whether the violet in the avatar raster art (av_crystal, av_galaxy, av_scholar, av_ninja) should be recoloured to match 'replace purple with teal'.",
+    "INFO: jeelive-redis supervisor program is FATAL (redis-server binary missing in this env)."
+  ],
+  "critical_code_review_comments": [
+    "src/api/client.ts setAssetAccount: resources.clear() runs even on the first bind (assetOwner === null) for the same restored user. It aborts in-flight screen reads that started before auth resolved.",
+    "src/useCached.ts: the catch ignores AbortError while alive. A centrally aborted request leaves loading=false and data=null with no error and no retry (silent dead state).",
+    "result/[id].tsx diff is style-only (Header -> ScreenHeader, Card -> DCard/LinearGradient, colour tokens). No logic or content change, as requested.",
+    "PlayerParts PALETTE marked/answered_marked use custom_qMarked #0D9488 with white ink (custom_qInk). Teal ink #5EEAD4 is used on the mark button and flag in attempt/[id].tsx.",
+    "app.json (protected) was modified by main agent for the name change (name 'JEECIRCLE.AI'); slug/package unchanged."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter58_brand_legal.py"],
+  "success_rate": {"backend": "100% (2/2 legal page checks)", "frontend": "~95% (all requested checks pass except the /live cold-load hang)"},
+  "seed_data_creation": "None. No accounts or records created.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Log in once via entry-phone-input/entry-pin-input/entry-continue-button, save localStorage jl_sid/jl_user, then inject them with add_init_script. Abort non-GET /api/jl/** (this aborts solution-open POST, which shows 'Couldn't record that you viewed this solution' — a test artifact). The My Tests segmented tab did not switch with force=True click but a normal locator.click() on my-tests-tab-label-completed works. Use attempt-card-<id> to open a result; Work Energy Power (14/50 saved) has rich solutions. In-progress count is 0. To repro the hub bug: fresh context + session injection, goto /live, wait 12s, series-chip-* count is 0 and jl/series/all-india-jee shows net::ERR_ABORTED.",
+  "rca_of_issue": "Hub skeleton hang: /live mounts with the restored jl_user and starts the useCached('series') fetch. The background session verify then calls setAssetAccount(uid). assetOwner is null, so this triggers resources.clear() -> invalidate('') -> pending.controller.abort() on the 'series' flight. useCached's effect catches the AbortError, does not set an error, sets loading=false and keeps data=null. Its deps [key, tick, persist] never change ('series' is not uid-keyed), so it never refetches. streak/history keys include uid and start after bind, so they succeed (seen as 200 in logs). Mitigation is in the action items."
+}

@@ -6,7 +6,8 @@ import { useAuth } from "@/src/auth";
 import { getPyqCatalogue, openPyq, paperState, PyqCatalogue, PyqPaper, resumePyq, sortPapers } from "@/src/api/pyq";
 import { useCached } from "@/src/useCached";
 import { PyqPaperCard } from "@/src/components/PyqPaperCard";
-import { Button, Chip, Empty, ErrorBox, Header, Icon, Skeleton, T } from "@/src/components/ui";
+import { Chip, Empty, ErrorBox, Icon, Skeleton, T } from "@/src/components/ui";
+import { Pill, ScreenHeader } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 
 export default function PyqPapers() {
@@ -60,18 +61,18 @@ export default function PyqPapers() {
   }
 
   return <View testID="pyq-screen" style={[styles.screen, { paddingTop: insets.top + space.sm }]}>
-    <Header title="PYQ papers" eyebrow="JEE MAIN" testID="pyq-header" backTestID="pyq-back-button" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)/jee")} />
+    <ScreenHeader title="PYQ papers" eyebrow="JEE MAIN" testID="pyq-header" backTestID="pyq-back-button" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)/jee")} />
     <FlatList testID="pyq-paper-list" data={visible} keyExtractor={(p) => p.id} showsVerticalScrollIndicator={false}
       initialNumToRender={6} maxToRenderPerBatch={6} windowSize={7}
       refreshing={papers.refreshing} onRefresh={refresh}
       contentContainerStyle={[styles.list, { paddingBottom: insets.bottom + space.xl }]}
       ListHeaderComponent={<View style={styles.intro}>
         <View style={styles.heading}>
-          <View style={styles.copy}><T testID="pyq-title" size={28} w="heavy">Real papers.</T><T testID="pyq-subtitle" size={28} w="heavy" color={colors.brandText}>Your next attempt.</T></View>
+          <View style={styles.copy}><T testID="pyq-title" size={26} w="heavy">Real papers.</T><T testID="pyq-subtitle" size={26} w="heavy" color={colors.brandText}>Your next attempt.</T></View>
           <View style={styles.emblem}><Icon name="file-document-check-outline" size={30} color={colors.brandText} /></View>
         </View>
         <T testID="pyq-description" size={13} color={colors.muted}>Pick a paper and start. Your place is saved when you leave.</T>
-        {papers.data ? <T testID="pyq-total" size={12} w="bold" color={colors.brandText}>{papers.data.total} {papers.data.total === 1 ? "paper" : "papers"} available{selectedYear || selectedShift ? ` · ${visible.length} shown` : ""}</T> : null}
+        {papers.data ? <T testID="pyq-total" size={11} w="bold" color={colors.custom_eyebrow} style={styles.caps}>{`${papers.data.total} ${papers.data.total === 1 ? "paper" : "papers"} available${selectedYear || selectedShift ? ` · ${visible.length} shown` : ""}`.toUpperCase()}</T> : null}
         {years.length ? <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filters} testID="pyq-year-filters">
           <Chip testID="pyq-year-all" label="All years" active={!selectedYear} onPress={() => { setYear(null); setShift(""); }} />
           {years.map((y) => <Chip testID={`pyq-year-${y}`} key={y} label={String(y)} active={selectedYear === y} onPress={() => { setYear(y); setShift(""); }} />)}
@@ -83,16 +84,16 @@ export default function PyqPapers() {
         <ErrorBox testID="pyq-load-error" error={papers.error} retry={refresh} />
       </View>}
       renderItem={({ item, index }) => <View style={styles.item}>
-        {index === 0 || visible[index - 1].year !== item.year ? <T testID={`pyq-section-${item.year}`} size={11} color={colors.muted} w="heavy" style={styles.section}>{item.year} PAPERS</T> : null}
+        {index === 0 || visible[index - 1].year !== item.year ? <T testID={`pyq-section-${item.year}`} size={11} color={colors.custom_eyebrow} w="bold" style={styles.section}>{item.year} PAPERS</T> : null}
         <PyqPaperCard paper={item} busy={busy === item.id} locked={!!busy} error={failedPaper === item.id ? error : ""} onOpen={() => void open(item)} onResult={(id) => router.push(`/result/${encodeURIComponent(id)}`)} />
       </View>}
       ListEmptyComponent={!papers.data && !papers.error ? <View testID="pyq-loading" style={styles.loading}><Skeleton h={200} /><Skeleton h={200} /></View> : !papers.error ?
         <View testID="pyq-empty" style={styles.empty}><Empty icon="file-document-outline" title={items.length ? "No papers match these filters" : "No PYQs returned for this account"}
           body={items.length ? "Try all years and shifts to see the available papers." : "The connected website hasn't returned any papers for this account. Refresh to check again. Your existing tests are safe."}
-          action={<Button testID="pyq-empty-refresh" label={items.length ? "Reset filters" : "Refresh papers"} kind="secondary" icon="refresh" onPress={() => { setYear(null); setShift(""); refresh(); }} />} /></View> : undefined}
+          action={<Pill testID="pyq-empty-refresh" label={items.length ? "Reset filters" : "Refresh papers"} kind="outline" icon="refresh" onPress={() => { setYear(null); setShift(""); refresh(); }} />} /></View> : undefined}
       ListFooterComponent={papers.data ? <View style={styles.footer}>
-        {papers.data.source_note ? <T testID="pyq-source-note" size={11} color={colors.mutedSecondary}>{papers.data.source_note}</T> : null}
-        {items.length ? <T testID="pyq-start-rules" size={11} color={colors.mutedSecondary}>Each paper follows its own timing and marking rules. Re-attempt never replaces previous results.</T> : null}
+        {papers.data.source_note ? <T testID="pyq-source-note" size={11} color={colors.custom_eyebrow}>{papers.data.source_note}</T> : null}
+        {items.length ? <T testID="pyq-start-rules" size={11} color={colors.custom_eyebrow}>Each paper follows its own timing and marking rules. Re-attempt never replaces previous results.</T> : null}
       </View> : undefined} />
   </View>;
 }
@@ -103,9 +104,9 @@ const styles = StyleSheet.create({
   intro: { gap: space.md, paddingTop: space.sm },
   heading: { flexDirection: "row", alignItems: "center", gap: space.md },
   copy: { flex: 1 },
-  emblem: { width: 60, height: 60, borderRadius: 20, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine, alignItems: "center", justifyContent: "center" },
+  emblem: { width: 60, height: 60, borderRadius: 30, backgroundColor: colors.brandTertiary, borderWidth: 1, borderColor: colors.brandLine, alignItems: "center", justifyContent: "center" },
   filters: { gap: space.sm, paddingRight: space.lg },
-  item: { gap: space.sm }, section: { letterSpacing: 1.4, marginTop: space.xs },
-  loading: { gap: space.lg }, empty: { backgroundColor: colors.surfaceSecondary, borderRadius: 20, borderWidth: 1, borderColor: colors.border },
+  item: { gap: space.sm }, section: { letterSpacing: 2.4, marginTop: space.xs }, caps: { letterSpacing: 2 },
+  loading: { gap: space.lg }, empty: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine },
   footer: { gap: space.sm, paddingVertical: space.sm },
 });

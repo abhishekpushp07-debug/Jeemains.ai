@@ -17,7 +17,7 @@ export function PlayerStrip({ profile: p, onAvatar, onCoins }: { profile?: GameP
 }
 export function EnergyHero() {
   return <View testID="rf-battle-hero" style={styles.hero}>
-    <View style={styles.heroCopy}><T testID="rf-brand" size={11} w="heavy" color={colors.custom_neonCyan} style={styles.eyebrow}>JEELIVE</T><T testID="rf-game-title" size={34} w="heavy" style={styles.title}>Rapid{"\n"}Fire.</T><T testID="rf-game-tagline" size={12} color={colors.muted}>Big concepts. Quick wins.</T></View>
+    <View style={styles.heroCopy}><T testID="rf-brand" size={11} w="heavy" color={colors.custom_neonCyan} style={styles.eyebrow}>JEECIRCLE</T><T testID="rf-game-title" size={34} w="heavy" style={styles.title}>Rapid{"\n"}Fire.</T><T testID="rf-game-tagline" size={12} color={colors.muted}>Big concepts. Quick wins.</T></View>
     <View style={styles.heroArt}><Art kind="spark" size={184} testID="rf-original-emblem" /></View>
     <View style={styles.rule}><Icon name="cards-outline" color={colors.custom_neonCyan} size={15} /><T testID="rf-game-rules" size={11} w="bold" color={colors.muted}>30 cards <T color={colors.borderStrong}> / </T> 20 seconds each</T></View>
   </View>;

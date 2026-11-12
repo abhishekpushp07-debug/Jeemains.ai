@@ -10,9 +10,11 @@ import { ImageWarmup } from "@/src/components/player/ImageWarmup";
 import { AiSolution } from "@/src/components/AiSolution";
 import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
-import { Button, Card, Chip, Empty, ErrorBox, Header, Icon, IconName, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
+import { LinearGradient } from "expo-linear-gradient";
+import { Button, Chip, Empty, ErrorBox, Icon, IconName, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
+import { DCard as Card, ScreenHeader } from "@/src/components/design";
 import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
-import { academicStyles, colors, fonts, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
+import { colors, fonts, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
 import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
 import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
@@ -54,11 +56,11 @@ function Analysis({ r }: { r: any }) {
   const s = r.summary;
   return (
     <View style={{ gap: space.md }}>
-      <Card testID="result-score-card" style={learningStyles.score}>
+      <LinearGradient testID="result-score-card" colors={[colors.brandSecondary, colors.custom_series]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={learningStyles.score}>
         <T testID="result-score-version-label" w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>YOUR SCORE · {r.score_version === "original" ? "ORIGINAL" : "REVISED"}</T>
         <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
         <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtClock(s.total_seconds)} used` : ""}</T>
-      </Card>
+      </LinearGradient>
       <View style={{ flexDirection: "row", gap: space.sm }}>
         <LearningStat testID="result-correct" label="Correct" value={s.correct} tone="completed" />
         <LearningStat testID="result-incorrect" label="Incorrect" value={s.incorrect} tone="error" />
@@ -78,7 +80,7 @@ function Analysis({ r }: { r: any }) {
               <T w="bold" size={14} color={subjectColor(name)}>{name}</T>
               <T w="bold" size={13}>{g.score} marks · {g.correct}/{g.count} correct</T>
             </View>
-            <View style={{ height: 8, borderRadius: 4, backgroundColor: colors.border, overflow: "hidden" }}>
+            <View style={{ height: 8, borderRadius: 4, backgroundColor: colors.custom_qFresh, overflow: "hidden" }}>
               <View style={{ width: `${g.count ? (g.correct / g.count) * 100 : 0}%`, height: "100%", backgroundColor: subjectColor(name) }} />
             </View>
           </View>
@@ -148,7 +150,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
     <View style={{ gap: space.md }} testID="solution-navigator">
       <ImageWarmup paths={warmPaths} width={Math.max(1, width - 4 * space.lg - 2)} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
-        {FILTERS.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.surfaceInverse} />)}
+        {FILTERS.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.onSurface} />)}
       </ScrollView>
       <SubjectTabs prefix="solution-subject" questions={rows} subject={subject} onSelect={chooseSubject} />
       <View style={learningStyles.solutionTools}>
@@ -163,9 +165,9 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
             const sel = item.id === q?.id;
             return (
               <Press testID={"solution-question-" + item.number} onPress={() => setQid(item.id)} accessibilityLabel={`Question ${item.number}, ${item.outcome}${item.marked ? ", marked" : ""}${sel ? ", selected" : ""}`}
-                style={{ width: 44, height: 48, borderRadius: 10, alignItems: "center", justifyContent: "center", backgroundColor: sel ? colors.surfaceInverse : colors.surfaceSecondary, borderWidth: 2, borderColor: sel ? colors.surfaceInverse : c }}>
-                <T w="heavy" size={14} color={sel ? colors.onSurfaceInverse : colors.onSurface}>{item.number}</T>
-                <Icon name={item.marked ? "flag" : ic} size={11} color={sel ? colors.onSurfaceInverse : c} />
+                style={{ width: 44, height: 48, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: sel ? colors.onSurface : colors.custom_card, borderWidth: 2, borderColor: sel ? colors.onSurface : c }}>
+                <T w="heavy" size={14} color={sel ? colors.custom_bar : colors.onSurface}>{item.number}</T>
+                <Icon name={item.marked ? "flag" : ic} size={11} color={sel ? colors.custom_bar : c} />
               </Press>
             );
           }} />
@@ -173,7 +175,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
         <Card testID="solution-empty-filter"><Empty icon="filter-off-outline" title={`No ${filter} questions in ${subject}.`} action={<Button testID="solution-show-all" kind="secondary" label="Show all questions" onPress={() => setFilter("all")} />} /></Card>
       )}
       {q ? (
-        <View testID="solution-card" style={{ backgroundColor: colors.custom_reading, borderRadius: radius.lg, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.border }}>
+        <View testID="solution-card" style={{ backgroundColor: colors.custom_card, borderRadius: 22, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.custom_cardLine }}>
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
             <T w="heavy" size={16}>Q{q.number}</T>
             <View style={{ paddingHorizontal: 8, paddingVertical: 2, borderRadius: radius.pill, backgroundColor: (OUT[q.outcome] || OUT.skipped)[0] }}>
@@ -184,8 +186,8 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
           {q.render_mode !== "source" && q.text ? <MathText testID="solution-question-text" text={q.text} /> : null}
           {imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
-            <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response || "—"}</T></View>
-            <View style={{ flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).join(" / ")}</T></View>
+            <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_barLine }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response || "—"}</T></View>
+            <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).join(" / ")}</T></View>
           </View>
           <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>{q.solution_kind === "answer_key_only" ? "SUPPLIED ANSWER KEY" : "SUPPLIED SOLUTION"}</T>
           {q.solution_kind === "answer_key_only" ? (
@@ -206,7 +208,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
         <T testID="solution-grid-title" size={18} w="heavy">Solution question grid</T>
         <SubjectTabs prefix="solution-grid-subject" questions={rows} subject={subject} onSelect={chooseSubject} />
         <T testID="solution-grid-filter" size={12} color={colors.muted}>{subject} · {filter} · {list.length} questions</T>
-        <QuestionGrid prefix="solution-grid-q" questions={list} onSelect={id => { setQid(id); setGrid(false); }} appearance={row => ({ bg: row.id === q?.id ? colors.surfaceInverse : colors.surfaceSecondary, fg: row.id === q?.id ? colors.onSurfaceInverse : (OUT[row.outcome] || OUT.skipped)[0], icon: (OUT[row.outcome] || OUT.skipped)[1], label: row.outcome })} />
+        <QuestionGrid prefix="solution-grid-q" questions={list} onSelect={id => { setQid(id); setGrid(false); }} appearance={row => ({ bg: row.id === q?.id ? colors.onSurface : colors.custom_card, fg: row.id === q?.id ? colors.custom_bar : (OUT[row.outcome] || OUT.skipped)[0], icon: (OUT[row.outcome] || OUT.skipped)[1], label: row.outcome })} />
         <Button testID="solution-grid-close" kind="secondary" label="Close grid" onPress={() => setGrid(false)} />
       </Sheet></View></Modal>
     </View>
@@ -229,13 +231,13 @@ function Reflection({ id, q, version, state, consulted }: { id: string; q: any; 
   }
   const steps: [string, string, boolean][] = [["identified_error", "Identified my error", !!s.category], ["wrote_note", "Wrote a note", !!(s.note || "").trim()], ["reviewed_solution", "Reviewed the solution", consulted], ["retry_planned", "Planned a retry", true]];
   return (
-    <View testID="reflection-panel" style={{ gap: space.sm, padding: space.md, borderRadius: radius.md, backgroundColor: colors.surface }}>
+    <View testID="reflection-panel" style={{ gap: space.sm, padding: space.md, borderRadius: 16, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_barLine }}>
       <T w="heavy" size={14}>Your reflection {s.completed ? "· steps recorded" : ""}</T>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 6 }}>
         {CATS.map(([v, l]) => <Chip key={v} testID={"reflection-cat-" + v} label={l} active={s.category === v} onPress={() => setS({ ...s, category: s.category === v ? null : v })} />)}
       </ScrollView>
       <TextInput testID="reflection-note-input" value={s.note || ""} onChangeText={(t) => setS({ ...s, note: t.slice(0, 500) })} placeholder="Short private note (max 500)" placeholderTextColor={colors.muted} multiline
-        style={{ minHeight: 60, borderRadius: radius.md, borderWidth: 1, borderColor: colors.border, padding: space.md, fontFamily: fonts.regular, fontSize: 14, color: colors.onSurface, backgroundColor: colors.surfaceSecondary, textAlignVertical: "top" }} />
+        style={{ minHeight: 60, borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLine, padding: space.md, fontFamily: fonts.regular, fontSize: 14, color: colors.onSurface, backgroundColor: colors.custom_card, textAlignVertical: "top" }} />
       {steps.map(([k, l, ok]) => (
         <Press key={k} testID={"reflection-step-" + k} disabled={busy || (!ok && !s[k])} onPress={() => save({ [k]: !s[k] })} style={{ flexDirection: "row", alignItems: "center", gap: 8, minHeight: 40 }}>
           <Icon name={s[k] ? "checkbox-marked-circle" : "checkbox-blank-circle-outline"} size={22} color={s[k] ? colors.success : colors.muted} />
@@ -314,7 +316,7 @@ export default function Result() {
   usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready && tab !== "solutions");
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
+      <ScreenHeader testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
       {ready ? (
         <View style={learningStyles.navigation}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
@@ -368,9 +370,9 @@ export default function Result() {
 }
 
 const learningStyles = StyleSheet.create({
-  score: { gap: space.md, borderRadius: 18, backgroundColor: academicStyles.score.backgroundColor, borderColor: academicStyles.score.backgroundColor },
-  navigation: { minHeight: 66, paddingVertical: space.sm, justifyContent: "center" },
-  section: { gap: space.sm, borderTopWidth: 5, borderRadius: 13, paddingVertical: 20 },
+  score: { gap: space.md, borderRadius: 24, padding: 20, borderWidth: 1, borderColor: colors.brandLine },
+  navigation: { minHeight: 60, paddingVertical: space.sm, justifyContent: "center" },
+  section: { gap: space.sm, borderTopWidth: 3, borderRadius: 20, paddingVertical: 20 },
   solutionTools: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: space.sm, justifyContent: "space-between" },
   solutionPosition: { flexShrink: 1 }, gridButton: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.sm },
   progress: { paddingHorizontal: space.lg, paddingTop: space.sm },

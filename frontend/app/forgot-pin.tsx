@@ -22,11 +22,11 @@ export default function ForgotPin() {
       <T testID="forgot-pin-existing-instructions" size={14} color={colors.muted}>On that signed-in device, open Account / Profile → Change PIN. Confirm your registered mobile number, then choose a new 4-digit PIN.</T>
       {user ? <Button testID="forgot-pin-change-button" label="Change my PIN" icon="lock-reset" onPress={() => router.replace("/change-pin")} /> : null}
     </Card>
-    <Notice testID="forgot-pin-reset-unavailable" tone="warning">JEELIVE does not currently offer a public PIN reset or OTP recovery. A mobile number alone cannot unlock an existing account.</Notice>
-    <T testID="forgot-pin-help" size={14} color={colors.muted}>If you aren’t signed in on any device, contact your JEELIVE account administrator through your existing official contact. Do not share your PIN. The app cannot reset it for you.</T>
+    <Notice testID="forgot-pin-reset-unavailable" tone="warning">JEECIRCLE does not currently offer a public PIN reset or OTP recovery. A mobile number alone cannot unlock an existing account.</Notice>
+    <T testID="forgot-pin-help" size={14} color={colors.muted}>If you aren’t signed in on any device, contact your JEECIRCLE account administrator through your existing official contact. Do not share your PIN. The app cannot reset it for you.</T>
     <ErrorBox testID="forgot-pin-link-error" error={error} />
     <Button testID="forgot-pin-login-button" label={user ? "Back to account" : "Back to sign in"} onPress={() => router.dismissTo(user ? "/account" : "/entry")} />
-    <Button testID="forgot-pin-website-button" kind="secondary" icon="open-in-new" label="Open JEELIVE website" onPress={() => { setError(""); Linking.openURL(websiteLoginUrl()).catch(() => setError("Couldn't open your browser. Please try again.")); }} />
+    <Button testID="forgot-pin-website-button" kind="secondary" icon="open-in-new" label="Open JEECIRCLE website" onPress={() => { setError(""); Linking.openURL(websiteLoginUrl()).catch(() => setError("Couldn't open your browser. Please try again.")); }} />
   </AuthShell>;
 }
 const styles = StyleSheet.create({ hero: { gap: space.md }, card: { gap: space.md } });

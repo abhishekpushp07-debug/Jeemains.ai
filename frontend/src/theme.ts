@@ -1,4 +1,4 @@
-// Design tokens for JEELIVE.AI. Keys match the "color" block of /app/design_guidelines.json.
+// Design tokens for JEECIRCLE.AI. Keys match the "color" block of /app/design_guidelines.json.
 import { useMemo } from "react";
 import { Appearance, StyleSheet, useColorScheme, ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { componentStyle, homeDesign, websiteDesign } from "./websiteDesign";
@@ -55,7 +55,7 @@ const light = {
   custom_burgundy: "#67202C",
   custom_subjectPhysics: "#FF6974",
   custom_subjectChemistry: "#F1BC63",
-  custom_subjectMaths: "#D9B1E9",
+  custom_subjectMaths: "#5EEAD4",
   custom_subjectBiology: "#56D99A",
   custom_darkCard: "#14141C",
   custom_amber: "#906224",
@@ -73,10 +73,10 @@ const light = {
   custom_neonAmber: "#F1BC63",
   custom_neonCyan: "#FF6974",
   custom_neonGreen: "#56D99A",
-  custom_neonViolet: "#D9B1E9",
+  custom_neonViolet: "#5EEAD4",
   custom_neonMagenta: "#FF6974",
   custom_rarityRare: "#C0C6CF",
-  custom_rarityEpic: "#D9B1E9",
+  custom_rarityEpic: "#2DD4BF",
   custom_rarityLegendary: "#F1BC63",
   custom_rarityCommon: "#B0B0BF",
   custom_neonRed: "#FF7883",
@@ -130,6 +130,31 @@ const light = {
   custom_webActiveInk: "#92400E",
   custom_webErrorSoft: "#FEF2F2",
   custom_webErrorInk: "#991B1B",
+
+  // 2026 design language: calm dark surfaces, thin lines, All India status pastels.
+  custom_card: "#111117",
+  custom_cardRaised: "#16161E",
+  custom_cardLine: "#26262F",
+  custom_cardLineStrong: "#2E2E38",
+  custom_bar: "#0B0B0E",
+  custom_barLine: "#1E1E26",
+  custom_eyebrow: "#8A8A99",
+  custom_dim: "#6E6E7A",
+  custom_softText: "#D6D6E0",
+  custom_pastelInk: "#1A1A22",
+  custom_selectedOption: "#1C0D11",
+  custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
+  custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
+  custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
+  custom_missFrom: "#F3E7D8", custom_missTo: "#ECD6DC", custom_missInk: "#7A4A3C", custom_missBody: "#5E4A44", custom_missCta: "#F3E7D8",
+  custom_qAnswered: "#22C55E", custom_qNotAnswered: "#EF4444", custom_qMarked: "#0D9488", custom_qMarkedInk: "#5EEAD4",
+  custom_qMarkedSoft: "#0B2A27", custom_qFresh: "#2A2A33", custom_qFreshLine: "#3A3A46", custom_qInk: "#FFFFFF",
+  custom_gold: "#FFC94D", custom_goldDeep: "#5A3B00", custom_flame: "#FF8A3D", custom_flameSoft: "#2A160C",
+  custom_goldSoft: "#2A2410", custom_missSoft: "#2A1A20",
+  custom_timerAmber: "#FFB547", custom_savedBlue: "#9DB8FF", custom_mint: "#3DDC97", custom_mintSoft: "#10261A",
+  custom_comedkGlow: "#8A90A6", custom_bitsatGlow: "#FF9933", custom_jeeGlow: "#B00000",
+  custom_diamondFrom: "#FF4A5A", custom_diamondTo: "#A3000E",
+  custom_shade: "rgba(0,0,0,0.62)",
 };
 
 export type ThemeColors = typeof light;
@@ -156,13 +181,13 @@ export const rapidColors = {
   muted: "#A5B2CB", mutedSecondary: "#91A0BC", info: "#7BABFF", onInfo: "#101C32",
   custom_gameBg: "#0B0E18", custom_gameCard: "#141925", custom_gameCardHi: "#1E2639",
   custom_gameLine: "#2B3346", custom_gameMuted: "#A5B2CB",
-  custom_neonCyan: "#65E6D4", custom_neonViolet: "#B9A1FF", custom_neonMagenta: "#BA91F5",
+  custom_neonCyan: "#65E6D4", custom_neonViolet: "#2DD4BF", custom_neonMagenta: "#14B8A6",
   custom_neonAmber: "#F8CF75", custom_amber: "#3370F5", custom_cyan: "#65E6D4",
   custom_examBitsat: "#F8B76B", custom_examBitsatDeep: "#1F2241", custom_examJee: "#3370F5",
   custom_examJeeDeep: "#151D3B", custom_examComedkGold: "#F8CF75",
   custom_reading: "#171C28", custom_onReading: "#F1F5FF", custom_infoSoft: "#1A2B4A",
-  custom_subjectPhysics: "#65E6D4", custom_subjectChemistry: "#8EB6FF", custom_subjectMaths: "#B9A1FF",
-  custom_rarityRare: "#8EB6FF", custom_rarityEpic: "#B9A1FF", custom_rarityLegendary: "#F8CF75",
+  custom_subjectPhysics: "#65E6D4", custom_subjectChemistry: "#8EB6FF", custom_subjectMaths: "#F8B76B",
+  custom_rarityRare: "#8EB6FF", custom_rarityEpic: "#2DD4BF", custom_rarityLegendary: "#F8CF75",
   custom_overlay: "rgba(5,8,17,0.88)",
 };
 export const rapidSubjectColor = (s?: string) => s === "Physics" ? rapidColors.custom_subjectPhysics
@@ -209,6 +234,17 @@ export const academicStyles = {
   source: componentStyle("solution.source"), original: componentStyle("solution.original"),
 };
 export const seriesHome = websiteDesign.home_cards["all-india"];
+
+// All India status pastels, shared by every series surface (Home card, hub, chips, map, graph).
+export type SeriesTone = "today" | "done" | "upcoming" | "missed";
+export const pastel: Record<SeriesTone, { from: string; to: string; ink: string; body: string; cta: string; label: string }> = {
+  today: { from: light.custom_todayFrom, to: light.custom_todayTo, ink: light.custom_todayInk, body: light.custom_todayBody, cta: light.custom_todayCta, label: "Today" },
+  done: { from: light.custom_doneFrom, to: light.custom_doneTo, ink: light.custom_doneInk, body: light.custom_doneBody, cta: light.custom_doneCta, label: "Done" },
+  upcoming: { from: light.custom_upFrom, to: light.custom_upTo, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
+  missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
+};
+export const examGlow = (kind: "jee" | "bitsat" | "comedk" | "live") =>
+  kind === "bitsat" ? light.custom_bitsatGlow : kind === "comedk" ? light.custom_comedkGlow : light.custom_jeeGlow;
 
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;

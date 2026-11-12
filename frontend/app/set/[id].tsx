@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { api, del, post, uuid } from "@/src/api/client";
 import { storage } from "@/src/utils/storage";
 import { invalidate } from "@/src/useCached";
-import { Button, Card, ErrorBox, Header, Icon, Notice, Press, Skeleton, Stat, T } from "@/src/components/ui";
+import { ErrorBox, Icon, Notice, Skeleton, T } from "@/src/components/ui";
+import { DCard, Pill, RoundButton, ScreenHeader, SectionLabel } from "@/src/components/design";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 import { checkReadiness } from "@/src/api/readiness";
 import { warmAttempt } from "@/src/api/paperOpening";
@@ -67,53 +68,64 @@ export default function SetDetail() {
 
   if (!s) return (
     <View style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header title="Loading paper…" onBack={() => router.back()} />
+      <ScreenHeader title="Loading paper…" onBack={() => router.back()} />
       <View style={{ padding: space.lg, gap: space.md }}>{error ? <ErrorBox error={error} retry={() => setReload((n) => n + 1)} /> : <><Skeleton h={140} /><Skeleton h={220} /></>}</View>
     </View>
   );
   const count = s.count ?? s.questions?.length;
   const minutes = s.rules?.minutes;
   const subj = s.chapter_subject;
+  const facts: [string, string | number, string][] = [["Questions", count, "set-question-count"], [minutes ? "Minutes" : "Untimed", minutes || "—", "set-duration"], ["Max marks", s.maximum ?? count * s.rules.correct, "set-maximum-marks"]];
   return (
     <View testID="set-detail-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <Header title={s.title} eyebrow={`${s.exam} · ${s.series_id ? "All India series" : s.test_kind === "chapter" ? "Chapter practice" : s.test_kind === "pyq" ? "Previous-year paper" : "Full mock"}`} color={subjectColor(subj)} onBack={() => router.back()}
-        right={<Press testID="set-save-toggle" onPress={toggleSave} accessibilityLabel={saved ? "Unsave paper" : "Save paper"} style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}><Icon name={saved ? "bookmark" : "bookmark-outline"} size={22} color={colors.custom_neonAmber} /></Press>} />
-      <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: 0, paddingBottom: insets.bottom + space.xl, gap: space.md }}>
-        <Card testID="set-facts" style={{ gap: space.md }}>
-          <View style={{ flexDirection: "row", gap: space.sm }}>
-            <Stat testID="set-question-count" label="Questions" value={count} />
-            <Stat testID="set-duration" label={minutes ? "Minutes" : "Untimed"} value={minutes || "—"} />
-            <Stat testID="set-maximum-marks" label="Max marks" value={s.maximum ?? count * s.rules.correct} />
+      <ScreenHeader title={s.title} eyebrow={`${s.exam} · ${s.series_id ? "All India series" : s.test_kind === "chapter" ? "Chapter practice" : s.test_kind === "pyq" ? "Previous-year paper" : "Full mock"}`} eyebrowColor={subj ? subjectColor(subj) : undefined} onBack={() => router.back()}
+        right={<RoundButton testID="set-save-toggle" icon={saved ? "bookmark" : "bookmark-outline"} color={colors.custom_gold} active={saved} label={saved ? "Unsave paper" : "Save paper"} onPress={toggleSave} />} />
+      <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.xs, paddingBottom: insets.bottom + space.xl, gap: space.lg }}>
+        <DCard testID="set-facts" style={{ gap: space.lg }}>
+          <View style={styles.facts}>
+            {facts.map(([label, value, testID], i) => <View key={testID} testID={testID} style={[styles.fact, i > 0 && styles.factLine]}>
+              <T w="heavy" size={24}>{String(value)}</T>
+              <T size={11.5} color={colors.custom_eyebrow}>{label}</T>
+            </View>)}
           </View>
           <View testID="set-marking-rule" style={{ flexDirection: "row", gap: space.sm, flexWrap: "wrap" }}>
-            {[[`+${s.rules.correct} correct`, colors.success], [`${s.rules.wrong} incorrect`, colors.error], [`${s.rules.skipped ?? 0} unanswered`, colors.muted]].map(([l, c]) => (
-              <View key={l} style={{ paddingHorizontal: 10, paddingVertical: 4, borderRadius: radius.pill, borderWidth: 1, borderColor: c }}><T w="bold" size={12} color={c}>{l}</T></View>
+            {[[`+${s.rules.correct} correct`, colors.custom_mint], [`${s.rules.wrong} incorrect`, colors.error], [`${s.rules.skipped ?? 0} unanswered`, colors.muted]].map(([l, c]) => (
+              <View key={l} style={[styles.rule, { borderColor: c }]}><T w="bold" size={12} color={c}>{l}</T></View>
             ))}
           </View>
           {s.types ? <T size={12} color={colors.muted}>{s.types.mcq ?? 0} MCQ · {s.types.integer ?? 0} integer</T> : null}
-        </Card>
-        <Card style={{ gap: space.sm }} testID="set-instructions">
-          <T w="heavy" size={16}>Before you start</T>
-          {[
-            "One correct option per question, or an exact integer where stated. Mark for review and return anytime.",
-            s.rules.numeric_rule,
-            minutes ? "The timer starts when the attempt opens and keeps running if you disconnect or leave the app. Only answers the server receives before the deadline are scored." : "Untimed practice — come back to your saved attempt whenever you need.",
-            s.series_id ? "Live results and solutions are sealed until 11:59 PM IST." : s.solution_kind === "answer_key_only" ? "Submitting is final. Score and supplied answer keys appear after grading. This book has no worked solutions." : "Submitting is final. Your result and supplied solutions appear afterwards.",
-            s.test_kind === "chapter" ? "This is chapter practice, not a full exam simulation. Rank estimates are not shown for chapter scores." : null,
-          ].filter(Boolean).map((x: any) => (
-            <View key={x} style={{ flexDirection: "row", gap: 8 }}><Icon name="circle-small" size={20} color={colors.onSurface} /><T size={13} style={{ flex: 1 }}>{x}</T></View>
-          ))}
-          {s.source ? <T size={11} color={colors.muted}>{s.source}</T> : null}
-        </Card>
+        </DCard>
+        <View style={{ gap: space.sm }}>
+          <SectionLabel title="Before you start" />
+          <DCard testID="set-instructions" style={{ gap: space.md }}>
+            {[
+              "One correct option per question, or an exact integer where stated. Mark for review and return anytime.",
+              s.rules.numeric_rule,
+              minutes ? "The timer starts when the attempt opens and keeps running if you disconnect or leave the app. Only answers the server receives before the deadline are scored." : "Untimed practice — come back to your saved attempt whenever you need.",
+              s.series_id ? "Live results and solutions are sealed until 11:59 PM IST." : s.solution_kind === "answer_key_only" ? "Submitting is final. Score and supplied answer keys appear after grading. This book has no worked solutions." : "Submitting is final. Your result and supplied solutions appear afterwards.",
+              s.test_kind === "chapter" ? "This is chapter practice, not a full exam simulation. Rank estimates are not shown for chapter scores." : null,
+            ].filter(Boolean).map((x: any) => (
+              <View key={x} style={{ flexDirection: "row", gap: space.sm, alignItems: "flex-start" }}><Icon name="check-circle-outline" size={17} color={colors.custom_softText} style={{ marginTop: 1 }} /><T size={13} color={colors.custom_softText} style={{ flex: 1 }}>{x}</T></View>
+            ))}
+            {s.source ? <T size={11} color={colors.custom_eyebrow}>{s.source}</T> : null}
+          </DCard>
+        </View>
         <Notice tone="info" icon="content-save-outline" testID="set-offline-notice">Your drafts stay on this phone if the internet drops. They show as Pending until the server confirms them — check the save status before submitting.</Notice>
         <ErrorBox error={error} testID="set-error" />
         {user ? (
           <>
-            <Button testID="set-start-button" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={() => { if (s.attempt?.status === "active") { void warmAttempt(s.attempt.id); router.replace(`/attempt/${s.attempt.id}`); } else void start(); }} color={colors.surfaceInverse} />
-            <T testID="set-start-note" size={11} color={colors.muted} style={{ textAlign: "center" }}>Starting accepts the rules above. Your official timer begins when the server opens your attempt.</T>
+            <Pill testID="set-start-button" size="lg" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={() => { if (s.attempt?.status === "active") { void warmAttempt(s.attempt.id); router.replace(`/attempt/${s.attempt.id}`); } else void start(); }} />
+            <T testID="set-start-note" size={11} color={colors.custom_eyebrow} style={{ textAlign: "center" }}>Starting accepts the rules above. Your official timer begins when the server opens your attempt.</T>
           </>
-        ) : <Button testID="set-signin-button" label="Sign in to start" onPress={() => router.push("/entry")} />}
+        ) : <Pill testID="set-signin-button" size="lg" label="Sign in to start" onPress={() => router.push("/entry")} />}
       </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  facts: { flexDirection: "row" },
+  fact: { flex: 1, gap: 2, paddingHorizontal: space.sm },
+  factLine: { borderLeftWidth: 1, borderLeftColor: colors.custom_cardLine },
+  rule: { paddingHorizontal: 12, height: 30, justifyContent: "center", borderRadius: radius.pill, borderWidth: 1 },
+});

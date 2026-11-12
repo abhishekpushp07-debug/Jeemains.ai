@@ -1,0 +1,44 @@
+{
+  "summary": "Frontend-only QA of the Phase-1 redesign (Expo web, 390x844 + 320x700). One real PIN login; I reused that session in every other context by putting it into localStorage, so there was no 401/429 churn. Every non-GET /api/jl/** request was blocked by Playwright, except the read-only compare POST. Nothing academic was written. Series live, resume, done and embargoed states and the player (qa-mock-1) were tested only through route-interception fixtures. Almost all requested flows work: Home in both prelaunch and live fixture states; card state mapping and CTA targets; exam grid routing; MY TESTS stat to tab deep-link (including the repeat-tap case); the tab bar; hub streak card, today card and last-start countdown; day strip and day cards; score trend (Best/Avg, gold best, dashed gaps, point to /result/<id>); MY RESULTS toggle; the 62-day map scrolling to the strip; the whole player (timer amber at 8:58 and red at 1:38, options, mark/star, zoom 16->19px, clear, prev/next, next-subject, integer input, confidence, palette colours, legend and bubble jump, the per-subject submit table, exit sheet); exam hubs; PYQ (pills and year filter); catalogue (search, chips, pagination); set detail (Start and Save present, not pressed); My Tests (tabs, counts, search, clear, compare sheet, Open result); Mission; Account and all its sub-screens; Rapid Fire is unchanged. Defects found: (1) HIGH: the hub 'How it works' sheet opens off-screen. (2) MEDIUM: nested <button> on the Home Continue row. (3) Text clipping at 320px. (4) MINOR: an intermittent ignored first tap on exam-hub destinations, plus testID naming mismatches.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "All India hub 'How it works' explainer (DSheet)", "issue": "Tapping series-tab-about dims the screen but the sheet is rendered off-screen: series-explainer bbox y=1032 on an 844px viewport. The user sees only a dark overlay. RCA: <SeriesExplainer> is rendered INSIDE the hub <ScrollView> (app/live.tsx:80). DSheet's sheetLayer is position:absolute top/bottom 0 with justifyContent flex-end, so it stretches over the whole scroll content and the sheet anchors to the bottom of the content, not the viewport. Fix: wrap the screen in <View style={{flex:1}}> and render <SeriesExplainer> after </ScrollView>, as account.tsx and tests.tsx already do.", "testID": "series-explainer", "priority": "HIGH"},
+      {"component": "Home Continue row", "issue": "Pressable inside Pressable: the home-continue-attempt Press wraps the Pill home-continue-resume (app/(tabs)/index.tsx:82-89). On web this renders <button> inside <button> and logs React errors ('<button> cannot contain a nested button' / hydration error), shown as a red dev error toast. Fix: make the inner Resume a non-pressable visual pill, or drop the outer Press.", "testID": "home-continue-attempt", "priority": "MEDIUM"},
+      {"component": "Exam hub destination rows", "issue": "Intermittent: on a fresh page load the first tap on exam-destination-* (bitsat mocks, jee-main chapters) right after the row appears is ignored (no navigation after 8s); a second tap works. Probable cause: the FadeInDown entering animation on each row (src/components/ExamHub.tsx:33) moves the row during the press, so the press is cancelled. Consider dropping the translate or using an opacity-only fade.", "testID": "exam-destination-*", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Player @320px", "issues": ["Dock labels are truncated: 'Mark for ...' and 'Save & ...'. Use shorter labels, an icon-only mark button, or allow 2 lines at narrow widths.", "The '+4 · -1' marking chip wraps to its own line under 'SINGLE CORRECT'.", "Title truncates ('QA Fixtu...'). Acceptable, but the top bar is tight.", "player-submit-top is 68x40, below the 44pt minimum height."]},
+      {"screen": "Home @320px", "issues": ["Live tile title 'Live JEE Ser...' is clipped; tile description 'DAY 10 · LIVE TODAY' is clipped.", "In the live state the card header wraps: 'ALL INDIA SERIES' and 'DAY 10 / 62' each break onto 2 lines.", "MY TESTS stat labels 'In progress' and 'Completed' are clipped."]},
+      {"screen": "All India hub @320px", "issues": ["The '· Created by AI Astra' credit wraps to its own line starting with a bullet."]},
+      {"screen": "62-day map", "issues": ["Map cells are about 30px, below the 44pt touch target (acceptable for a dense grid, but the strip chips are the reliable target)."]},
+      {"screen": "My Tests compare sheet", "issues": ["The sheet sits above the bottom tab bar; the tab bar is not dimmed and stays tappable while the sheet is open."]}
+    ],
+    "react_native_issues": [
+      {"component": "Nested Pressable", "issue": "Pressable nested in Pressable produces an invalid nested <button> on web. Reference: /app/frontend/app/(tabs)/index.tsx:82"},
+      {"component": "DSheet inside ScrollView", "issue": "Absolute overlay sheet placed inside ScrollView content, so it is not anchored to the viewport. Reference: /app/frontend/app/live.tsx:80"}
+    ]
+  },
+  "test_report_links": ["/app/tests/fixtures/iter57_series_fixture.py", "/app/tests/fixtures/iter57_player_fixture.py"],
+  "action_items": [
+    "HIGH: Move <SeriesExplainer> outside the <ScrollView> in app/live.tsx (wrap in a flex:1 View) so the 'How it works' sheet appears on screen.",
+    "MEDIUM: Remove the nested Pressable on the Home Continue row (index.tsx:82-89).",
+    "Fix 320px clipping: player dock labels ('Mark for review' / 'Save & Next'), Live tile title and description, MY TESTS stat labels, the series card header wrap in the live state, and the hub credit line wrap.",
+    "LOW: Investigate the first tap being ignored on exam-hub destination rows during the entering animation.",
+    "LOW: The review request's testIDs home-series-streak/home-series-skipped are actually series-home-streak/series-home-skipped in HomeSeriesCard.tsx:63/65. Align the names or update the docs.",
+    "LOW: Raise player-submit-top height to at least 44."
+  ],
+  "critical_code_review_comments": [
+    "TodayCard prelaunch copy hard-codes 'The first challenge opens 1 December.' (DayCards.tsx:20) instead of using istDate(series.first_date), while the eyebrow on the same card is already dynamic.",
+    "HomeSeriesCard embargoed state shows the badge 'COMPLETED' with a 'Results at 11:59 PM' CTA that routes to /live. Correct, but the CTA could be non-actionable or explanatory.",
+    "Data/sync/auth files were not touched; no mocks in production code."
+  ],
+  "updated_files": ["/app/tests/fixtures/iter57_series_fixture.py (new, test-only)", "/app/tests/fixtures/iter57_player_fixture.py (new, test-only)"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "~93% (about 3 functional defects across ~45 checked flows, plus 320px visual issues)"},
+  "seed_data_creation": "None. No real attempts, saves, PIN changes or sign-outs. All non-GET /api/jl calls were blocked by Playwright except the read-only compare POST, which returned 409 for attempts from different papers, as expected.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Log in once with entry-phone-input/entry-pin-input/entry-continue-button, save localStorage keys jl_sid and jl_user, then inject them via add_init_script in later contexts. Load the fixtures with exec(open(path).read(), ns), then call await ns['install'](page, variant) for the series (variant = live | resume | done | embargoed) or await install(page, deadline_secs, log) for the player. Open the player with history.pushState('/attempt/qa-mock-1') + popstate. The palette shows bubbles for the current subject only (palette-q-6+ appear after selecting palette-subject-chemistry). The real series is prelaunch (opens 1 Dec 2026).",
+  "rca_of_issue": "Explainer off-screen: DSheet uses an absolute full-size layer with justifyContent flex-end. Inside a ScrollView that layer spans the full content height (about 1700px), so the sheet sits at the content bottom. Reproduce: open /live and tap series-tab-about; series-explainer bbox y=1032 > viewport 844. Mitigation: render it as a sibling of the ScrollView."
+}
