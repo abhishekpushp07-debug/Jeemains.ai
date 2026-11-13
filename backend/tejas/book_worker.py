@@ -54,6 +54,7 @@ async def read_batch(book, token, source):
 
 
 async def publish_batch(book, token, source):
+    if book.paused or not book.payload['auto_publish']:return False
     published=0
     for mock in await mocks_for(book):
         if mock.state!='ready' or mock.issues or mock.published_generation==mock.generation:continue

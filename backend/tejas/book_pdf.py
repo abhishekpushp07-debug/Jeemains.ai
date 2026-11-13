@@ -6,11 +6,14 @@ LIMIT=100*1024*1024
 
 def run(source, items):
     source=Path(source)
-    if not 0<source.stat().st_size<=LIMIT:
+    try: size=source.stat().st_size
+    except FileNotFoundError: raise ValueError('The cached original was refreshed. Retry; saved progress is kept.') from None
+    if not 0<size<=LIMIT:
         raise ValueError('Use a PDF within 100 MB.')
     with tempfile.TemporaryDirectory(prefix='book-private-') as tmp:
         root=Path(tmp)
         try: os.link(source,root/'input.pdf')
+        except FileNotFoundError: raise ValueError('The cached original was refreshed. Retry; saved progress is kept.') from None
         except OSError: shutil.copyfile(source,root/'input.pdf')
         (root/'request.json').write_text(json.dumps({'items':items}))
         try:

@@ -39,14 +39,14 @@ async def scale(own):
     ks = [[q['answer'] for q in (await H.TDB.tejas_sets.find_one({'id': x['set_id']}))['questions']] for x in v['mocks']]
     check('10-mock keys preserved', all(k == ['B', 'B', 'C'] for k in ks), ks)
     # 50 / 51 mocks
-    for n, expect in ((50, True), (51, False)):
+    for n, expect in ((50, True), (51, False)):  # 171: 51 branch now asserts allowed
         raw = build_pdf([{'n': i, 'qs': one(f'F{i}'), 'keys': [(1, 'B')]} for i in range(1, n + 1)], path=OUT / f'book_{n}mocks.pdf')
         b = await upload(own, raw, f'TEST_QA170 {n}'); t = time.time(); _, v = await complete(own, b['id'])
         print(f'{n}-mock processed %.1fs pages=%s state=%s msg=%s detected=%s published=%s' % (time.time() - t, v['pages'], v['state'], v['message'][:90], v['counts']['detected'], v['counts']['published']))
         if expect:
             check('50-mock book structure detected (50)', v['counts']['detected'] == 50, v['counts'])
             check('50 clean mocks ALL auto-publish (short native key pages)', v['counts']['published'] == 50 and v.get('scanned_pages', 0) == 0, (v['counts'], v.get('scanned_pages')))
-        else: check('51-mock book rejected, nothing published', v['state'] == 'failed' and '50' in v['message'] and await H.TDB.tejas_sets.count_documents({'book_import_id': b['id']}) == 0, (v['state'], v['message']))
+        else: check('51-mock book now ALLOWED (171: no mock cap), all 51 published', v['counts']['detected'] == 51 and v['counts']['published'] == 51, (v['state'], v['message'], v['counts']))
 
 
 async def holds(own):

@@ -3,7 +3,7 @@ from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, KEY, choose_options
 
 MOCK=re.compile(r'^(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
-ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,2}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
+ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,3}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
 
 
 def read_page(lines, previous, geometry=()):

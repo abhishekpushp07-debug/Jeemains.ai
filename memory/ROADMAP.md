@@ -2,6 +2,8 @@
 
 ## Book publishing (2026-11-13)
 - P0: Validate with one real owner-supplied publisher PDF in preview before deploy; deploy only on explicit request.
+- P1: Owner login is email/password (/owner-login); phone+PIN accounts are students. Phone-based owner login would need explicit approval.
+- P2 perf: incremental rebuild (each matching step re-scans all pages, ~4.7s at 1,500 pages/150 mocks); stream upload parts to disk instead of in-memory join (~580MB peak at 100 MB).
 - P1: Two-column worked-solution continuation coverage; browser check of BookUpload resume-after-pause and BITSAT bonus UI.
 - P2 (cosmetic): round coordinate display, hide response-format for non-question regions, cleaner instruction-page listing, larger series breadcrumb.
 - Phases 2/3 (layout profiles, bilingual, delegated editors) need separate approval.

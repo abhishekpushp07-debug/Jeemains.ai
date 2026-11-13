@@ -167,8 +167,8 @@ async def main():
     check('identical part retry idempotent 200', r.status_code == 200, r.status_code)
     other_edition = await own.post('/api/admin/books', json={'filename': 'a.pdf', 'title': 't', 'sha256': sha, 'size': len(raw), 'edition': 'v2', 'rights_confirmed': True})
     check('different edition => different import id', other_edition.json()['id'] != bid)
-    r = await own.post('/api/admin/books', json={'filename': 'a.pdf', 'title': 't', 'sha256': sha, 'size': 50 * 1024 * 1024 + 1, 'rights_confirmed': True})
-    check('size > 50MB rejected 422', r.status_code == 422, r.status_code)
+    r = await own.post('/api/admin/books', json={'filename': 'a.pdf', 'title': 't', 'sha256': sha, 'size': 100 * 1024 * 1024 + 1, 'rights_confirmed': True})
+    check('size > 100MiB rejected 422', r.status_code == 422, r.status_code)
     r = await own.post('/api/admin/books', json={'filename': 'a.pdf', 'title': 't', 'sha256': sha, 'size': 10, 'rights_confirmed': False})
     check('rights not confirmed rejected 422', r.status_code == 422, r.status_code)
     r = await own.post('/api/admin/books', json={'filename': 'a.pdf', 'title': 't', 'sha256': sha, 'size': 10, 'rights_confirmed': True, 'release_at': time.time() - 60})
@@ -365,10 +365,11 @@ async def limits():
     d = fitz.open()
     for _ in range(1001): d.new_page(width=200, height=200)
     raw1001 = d.tobytes(); d.delete_page(1000); raw1000 = d.tobytes(); d.close()
-    t = time.time(); info = inspect(raw1000); check('1000-page inspect ok', info['pages'] == 1000, info)
+    (OUT / 'p1000.pdf').write_bytes(raw1000); (OUT / 'p1001.pdf').write_bytes(raw1001)  # 171: inspect() takes a path now
+    t = time.time(); info = inspect(OUT / 'p1000.pdf'); check('1000-page inspect ok', info['pages'] == 1000, info)
     print('1000-page inspect %.1fs scanned_sample=%s' % (time.time() - t, info.get('scanned_sample')))
-    try: inspect(raw1001); check('1001-page rejected', False, 'accepted')
-    except ValueError as e: check('1001-page rejected', '1,000' in str(e), e)
+    try: info = inspect(OUT / 'p1001.pdf'); check('1001-page now ACCEPTED (171: no page cap)', info['pages'] == 1001, info)
+    except ValueError as e: check('1001-page now ACCEPTED (171: no page cap)', False, e)
 
 
 async def run():
