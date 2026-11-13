@@ -1,5 +1,6 @@
-import React from "react";
-import { Image, Platform, StyleSheet, View, useWindowDimensions } from "react-native";
+import React, { useEffect } from "react";
+import { Image, Platform, StyleProp, StyleSheet, View, ViewStyle, useWindowDimensions } from "react-native";
+import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Tabs } from "expo-router";
 import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -18,6 +19,26 @@ const ITEMS: Record<string, { label: string; icon: IconName }> = {
 // The bar stays ink-black on every tab (light app, dark dock), like a premium wallet.
 const BAR = colors.custom_dock, ON = colors.custom_dockInk, OFF = colors.custom_dockMuted;
 const GEM = require("../../assets/images/rapid-gem.webp");
+// Same diamond with a differently shaped flame; cross-fading the two makes the fire flicker.
+const GEM_FLICKER = require("../../assets/images/rapid-gem-flicker.webp");
+
+function RapidGem({ style }: { style: StyleProp<ViewStyle> }) {
+  const reduced = useReducedMotion();
+  const flame = useSharedValue(0);
+  useEffect(() => {
+    if (reduced) return;
+    const step = (to: number, ms: number) => withTiming(to, { duration: ms, easing: Easing.inOut(Easing.quad) });
+    flame.value = withRepeat(withSequence(step(0.9, 420), step(0.3, 300), step(0.75, 380), step(0, 520)), -1, false);
+    return () => cancelAnimation(flame);
+  }, [reduced, flame]);
+  const flicker = useAnimatedStyle(() => ({ opacity: flame.value }));
+  return (
+    <View testID="tab-rapid-gem" style={style} accessible={false}>
+      <Image source={GEM} resizeMode="contain" style={styles.gemLayer} />
+      <Animated.Image source={GEM_FLICKER} resizeMode="contain" style={[styles.gemLayer, flicker]} />
+    </View>
+  );
+}
 
 function JeeTabBar({ state, emitter, navigateToTab }: any) {
   const insets = useSafeAreaInsets();
@@ -37,9 +58,8 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
           return (
             <View key={route.key} style={styles.rapidCol}>
               <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" accessibilityState={{ selected: focused }} style={styles.rapidPress} scaleTo={0.92}>
-                {/* Sparkly blue diamond (transparent artwork) rising out of the dock. */}
-                <Image testID="tab-rapid-gem" source={GEM} resizeMode="contain" accessible={false}
-                  style={[styles.gem, narrow && styles.gemNarrow, focused && styles.gemOn]} />
+                {/* Sparkly blue diamond with a soft fire inside (transparent artwork) rising out of the dock. */}
+                <RapidGem style={[styles.gem, narrow && styles.gemNarrow, focused && styles.gemOn]} />
                 <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_gemBlue} style={styles.label}>RAPID FIRE</T>
               </Press>
             </View>
@@ -85,8 +105,10 @@ const styles = StyleSheet.create({
   label: { letterSpacing: 0.9 },
   rapidCol: { flex: 1.3, alignItems: "center" },
   rapidPress: { alignItems: "center", marginTop: -26, gap: 4 },
-  // Artwork is 265×240 (blue diamond + sparkles); keep that ratio so nothing crops.
+  // Artwork is 265×240 (blue diamond, inner fire, sparkles); keep that ratio so nothing crops.
   gem: { width: 66, height: 60 },
   gemNarrow: { width: 57, height: 52 },
   gemOn: { transform: [{ scale: 1.08 }] },
+  // Explicit size: web otherwise gives a required image its natural 265×240 size.
+  gemLayer: { position: "absolute", top: 0, left: 0, width: "100%", height: "100%" },
 });
