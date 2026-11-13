@@ -174,7 +174,8 @@ def make_router(db, rf_user, seat_duel):
                                               {"players.uid": 1, "players.bot": 1, "players.team": 1, "gang_id": 1, "team_mode": 1, "teams": 1, "subject": 1, "chapter": 1, "picks": 1, "winner": 1})
             if not duel:
                 raise HTTPException(404, "Match not found.")
-            picks = scope_of(duel)  # a rematch is always on the same subjects and chapters
+            # A rematch is on the same subjects and chapters, unless the player chose a new battleground (Badla lo).
+            picks = normalise(data.picks) if data.picks else scope_of(duel)
             waiting = await db.rf_challenges.find_one({"rematch_of": data.rematch_of, "status": "open", "expires_ts": {"$gt": now}, "invites.uid": uid})
             if waiting:  # someone already opened the rematch room: take a seat
                 return await join(waiting["id"], uid)

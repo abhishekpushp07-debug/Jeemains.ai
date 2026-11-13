@@ -98,4 +98,20 @@ export function Radar({ size = 240, children }: { size?: number; children: React
   </View>;
 }
 
+/** A red "live" dot that pulses (still under Reduce Motion). */
+export function LiveDot({ size = 10, color = fx.crimson }: { size?: number; color?: string }) {
+  const reduced = useReducedMotion();
+  const t = useSharedValue(0);
+  useEffect(() => {
+    if (reduced) return;
+    t.value = withRepeat(withTiming(1, { duration: 1100, easing: Easing.out(Easing.quad) }), -1, false);
+    return () => cancelAnimation(t);
+  }, [t, reduced]);
+  const ring = useAnimatedStyle(() => ({ opacity: 0.8 * (1 - t.value), transform: [{ scale: 1 + t.value * 1.4 }] }));
+  return <View style={{ width: size, height: size, alignItems: "center", justifyContent: "center" }}>
+    {reduced ? null : <Animated.View style={[styles.abs, { width: size, height: size, borderRadius: size, backgroundColor: color }, ring]} />}
+    <View style={{ width: size, height: size, borderRadius: size, backgroundColor: color }} />
+  </View>;
+}
+
 const styles = StyleSheet.create({ off: { opacity: 0.5 }, abs: { position: "absolute" }, top: { zIndex: 60 } });

@@ -188,7 +188,13 @@ async def _revenge(db, api, u, tag):
     did = await api.match(a, b, {"picks": PCM})
     await db.rf_duels.update_one({"id": did}, {"$set": {"status": "finished", "winner": b["uid"], "finished_ts": time.time()}})
     last = (await api.get(f"/players/{b['pid']}", a)).json()["head_to_head"]
-    assert last == {"you": 0, "them": 1, "played": 1, "last": {"id": did, "won": False, "tie": False}}
+    assert last == {"you": 0, "them": 1, "played": 1, "last": {"id": did, "won": False, "tie": False, "picks": [{**p, "chapter": None} for p in PCM]}}
+    h2h = (await api.get(f"/players/{b['pid']}/h2h", a)).json()["items"]
+    assert h2h[0]["id"] == did and [p["subject"] for p in h2h[0]["picks"]] == ["Physics", "Chemistry", "Mathematics"]
+    # Badla lo: the loser picks a new battleground first; the challenge still goes to the same friend
+    room = (await api.post("/challenges", a, {"rematch_of": did, "picks": [{"subject": "Chemistry", "chapter": None}]})).json()
+    assert room["revenge"] is True and room["label"] == "Mixed Chemistry" and room["rematch_of"] == did and room["single"]
+    await api.post(f"/challenges/{room['id']}/cancel", a, {})
     room = (await api.post("/challenges", a, {"rematch_of": did})).json()
     assert room["revenge"] is True and room["label"] == "PCM Mixed" and room["rematch_of"] == did and room["single"]
     assert (await api.get("/inbox", b)).json()["challenges"][0]["revenge"] is True
@@ -248,7 +254,7 @@ async def _gang_links(db, api, u, tag):
     a, b, c = u["a"], u["b"], u["c"]
     gang = (await api.post("/gangs", a, {"name": f"TESTP3 Gang {tag}", "emblem": "lion"})).json()["id"]
     detail = (await api.get(f"/gangs/{gang}", a)).json()
-    assert detail["kind"] == "gang" and detail["max"] == 20 and detail["league"] == {"pts": 0, "wins": 0, "losses": 0, "ties": 0}
+    assert detail["kind"] == "gang" and detail["max"] == 20 and "league" not in detail
     r = await api.post(f"/gangs/{gang}/join", b, {"code": detail["invite_code"]})
     assert r.status_code == 403 and "Friend Code" in r.json()["detail"]
     await api.befriend(b, a)
@@ -286,33 +292,30 @@ async def _leagues(db, api, u, tag):
     assert (await api.post("/league/friends/claim", a)).status_code == 409
     assert (await api.get("/league/friends", a)).json()["last"]["claimed"] is True
 
-    # Gang League: a Gang War that ends level gives both gangs 1 point
+    # Gang War board: a Gang War that ends level adds a tie to both gangs, and both players join the top-100 scorers board
     g1 = (await api.post("/gangs", a, {"name": f"TESTP3 Lions {tag}", "emblem": "lion"})).json()["id"]
     g2 = (await api.post("/gangs", d, {"name": f"TESTP3 Wolves {tag}", "emblem": "wolf"})).json()["id"]
     room = (await api.post("/challenges", a, {"gang_id": g1, "rival_gang_id": g2})).json()
     assert room["team_mode"] is True
     did = (await api.post(f"/challenges/{room['id']}/accept", d)).json()["duel_id"]
+    await db.rf_duels.update_one({"id": did, "players.uid": d["uid"]}, {"$set": {"players.$.score": 4}})
     await db.rf_duels.update_one({"id": did}, {"$set": {"ends_at": time.time() - 1}})
-    assert (await api.get(f"/duels/{did}", a)).json()["winner"] == "tie"
-    table = (await api.get("/league/gangs", a)).json()
-    rows = {x["id"]: x for x in table["items"] + table["mine"]}
-    assert (rows[g1]["pts"], rows[g1]["ties"], rows[g1]["wins"], rows[g1]["mine"]) == (1, 1, 0, True) and rows[g2]["pts"] == 1 and rows[g2]["mine"] is False
-    assert table["points"] == {"wins": 3, "ties": 1, "losses": 0} and table["prizes"] == [300, 200, 100]
+    assert (await api.get(f"/duels/{did}", a)).json()["winner"] == "team:b"
     detail = (await api.get(f"/gangs/{g1}", a)).json()
-    assert detail["league"]["pts"] == 1 and detail["record"] == {"wins": 0, "losses": 0, "ties": 1}
+    assert "league" not in detail and detail["record"] == {"wins": 0, "losses": 1, "ties": 0}
+    assert (await api.get(f"/gangs/{g2}", d)).json()["record"] == {"wins": 1, "losses": 0, "ties": 0}
+    await asyncio.sleep(21)  # the top-100 list is cached for 20 s
+    board = (await api.get("/league/gangwar", d)).json()
+    assert board["size"] == 100 and len(board["items"]) <= 100
+    rows = {x["pid"]: x for x in board["items"]}
+    assert (rows[d["pid"]]["score"], rows[d["pid"]]["wins"], rows[d["pid"]]["matches"], rows[d["pid"]]["you"]) == (4, 1, 1, True)
+    assert board["you"]["score"] == 4 and board["you"]["rank"] == rows[d["pid"]]["rank"]
+    assert rows[a["pid"]]["wins"] == 0 and (await api.get("/league/gangwar", b)).json()["you"] is None  # b never played a Gang War
+    assert (await api.get("/league/gangs", a)).status_code in (404, 405)  # the weekly gang table is gone
     # playing this week moved last week's totals aside; the finished league still reads them
     mine = await db.rf_profiles.find_one({"uid": a["uid"]})
     assert mine["week_stats"]["week"] == week and mine["last_week"]["xp"] == 300
     assert (await api.get("/league/friends", a)).json()["last"]["rank"] == 2
-    # last week's winning gang: members who were already in collect once
-    await db.rf_gangs.update_one({"id": g1}, {"$set": {"last_league": {"week": last, "pts": 99999, "wins": 33333, "losses": 0, "ties": 0}, "members.0.ts": time.time() - 30 * 86400}})
-    won = (await api.get("/league/gangs", a)).json()["last"]
-    assert won["items"][0]["id"] == g1 and [(x["id"], x["rank"], x["prize"], x["claimed"]) for x in won["prizes"]] == [(g1, 1, 300, False)]
-    coins = (await db.rf_profiles.find_one({"uid": a["uid"]}))["coins"]
-    assert (await api.post(f"/league/gangs/{g1}/claim", a)).json() == {"coins": 300, "coins_total": coins + 300}
-    assert (await api.post(f"/league/gangs/{g1}/claim", a)).status_code == 409
-    assert (await api.post(f"/league/gangs/{g2}/claim", a)).status_code == 409  # not my gang
-    assert (await api.get("/league/gangs", a)).json()["last"]["prizes"][0]["claimed"] is True
 
 
 # ---------- knockout cups ----------
@@ -368,6 +371,27 @@ async def _cups(db, api, u, tag):
     assert prof["cups_won"] == 1 and "cup_champion" in prof["badges"] and prof["coins"] >= 70
     assert (await api.get("/inbox", a)).json()["cup"] is None
     assert any(m["cup"] for m in (await api.get("/duels?exam=JEE", a)).json()["items"])
+
+    # Watch code: anybody with it can follow the cup and its live matches, up to 100 people
+    look = (await db.rf_cups.find_one({"id": cid}))
+    assert re.fullmatch(r"[A-HJ-NP-Z2-9]{6}", look["code"])
+    assert (await api.post("/cups/watch", d, {"code": "ZZZZZZ"})).status_code == 404
+    seen = (await api.post("/cups/watch", d, {"code": look["code"].lower()})).json()
+    assert seen["spectating"] is True and seen["joined"] is False and seen["spectators"] == 1 and seen["code"] == look["code"]
+    assert (await api.get(f"/cups/{cid}", d)).status_code == 200
+    assert (await api.post("/cups/watch", d, {"code": look["code"]})).json()["spectators"] == 1  # once per person
+    await db.rf_cups.update_one({"id": cid}, {"$set": {"spectators": [d["uid"]] + [f"TEST-x{i}" for i in range(99)]}})
+    assert (await api.post("/cups/watch", c, {"code": look["code"]})).status_code == 409
+    assert (await api.get("/cups", a)).json()["items"][0]["id"] == cid
+
+    # 16 seats: an Open Cup of 16 fills with practice rivals and starts at the Round of 16
+    big = (await api.post("/cups", d, {"kind": "open", "size": 16, "picks": [{"subject": "Mathematics"}]})).json()
+    assert big["size"] == 16 and big["status"] == "open"
+    await db.rf_cups.update_one({"id": big["id"]}, {"$set": {"expires_ts": time.time() - 1}})
+    big = (await api.get(f"/cups/{big['id']}", d)).json()
+    assert big["status"] == "live" and len(big["players"]) == 16 and big["rounds"][0]["name"] == "Round of 16" and len(big["rounds"][0]["matches"]) == 8
+    await api.post(f"/duels/{big['my_duel']}/forfeit", d)
+    assert next(p for p in (await api.get(f"/cups/{big['id']}", d)).json()["players"] if p["you"])["out"] is True
 
     # Friends Cup: only invited friends, the host starts it
     await api.befriend(a, b)

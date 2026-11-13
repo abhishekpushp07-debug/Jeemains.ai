@@ -1,0 +1,49 @@
+{
+  "summary": "Iteration 62. Tested Rapid Fire 2.0 Phase 3 on the frontend and backend as the QA learner (7004186276) at 390px and 320px. Backend: test_rf_phase3.py passed 7/7. The new live public-URL suite test_rf_phase3_live_api.py passed 6/6: h2h picks, profile head_to_head.last picks, Badla with new picks (revenge, single, new label) then cancel, cup watch with a bad code returns 404, friends league, and the gang war board. Frontend checks that passed: lobby subject chips stay on one row at 390 and 320, and the toggles and PCM work. ScopeSheet works: quick mix tiles are not truncated at 390, plus tabs, 29 Physics chapters, tray chips you can remove, search and clear, done updating the ribbon label and card count, and close. LiveStrip is hidden when nothing is live. Cup hub works: kind and size segments, scope, prizes, the invalid watch code error and the cup-mine list. A 4-player Open Cup ran end to end: lobby with seat count, 40 s countdown, code, copy, share and Leave; auto-redirect to the duel; forfeit; bracket with SF and Final; auto-scroll; champion panel; PLAY ANOTHER CUP. Friends Cup works: the invite cap is size-1 (3/3), START is disabled with 'Waiting for 1 friend to join', and Cancel cup works. The watch screen shows the duo layout, status, viewer count and note, and a bad id shows a clean error. Badla lo works end to end: the h2h sheet shows h2h-badla-top and a per-lost-row button; rf-badla-sheet has the title 'Badla lo! 🔥', is prefilled with the lost match's picks (Mixed Chemistry) and shows SEND BADLA. Closing it sends no POST. Changing to Mixed Physics and sending POSTs {rematch_of, picks}, closes both sheets and opens the Match Room for Aarav (backend label 'Mixed Physics', revenge and single true). player-badla was correctly NOT shown because the fixture's newest match is a WIN. Friends League works: week, reset countdown, week/all-time switch and rows. The Gang War board empty state works. The gang form Gang/Batch note works. The gang-war-sheet search and empty state work (a temporary TEST gang was created, then removed). Play Friends uses the multi-pick ScopeSheet with no old code section. Issues found are mostly UI polish and one test-data leftover. Deprecated packages: none. SafeAreaView issues: none.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/rf/challenges/{cid}", "issue": "Returns seats:5 for a single 1 v 1 challenge (single:true). The UI uses room.seats, so a 1 v 1 Badla room shows You + 4 'Open' seats. For single rooms it should return seats:2, or the UI should treat single as 2."},
+      {"endpoint": "POST /api/rf/access", "issue": "A transient 503 (upstream verify) happened once. The player profile then showed 'Could not verify your session. Please retry.' and did not retry by itself."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Match Room (1 v 1 Badla)", "issue": "The 1 v 1 Challenge room renders 4 extra 'Open' seats (seat grid uses room.seats=5). The header shows 'Physics · Mixed chapters' instead of the challenge label ('Mixed Physics'), and nothing shows it is a revenge (no Badla/🔥 state for the sender). The WhatsApp remind text uses room.subject, so multi-pick labels are lost. Ref: frontend/app/rapid/room/[cid].tsx:70-110, :74", "testID": "room-seats", "priority": "MEDIUM"},
+      {"component": "ScopeSheet 6th pick", "issue": "At 5 picks the chapter rows are disabled ((!on && full) disables them), so tapping a 6th chapter does nothing silently and rf-scope-warn never appears. The warning only shows when a whole-subject tile hits the limit. Show the warning when a 6th row is tapped, or don't disable the row and let toggle() warn. Ref: frontend/src/rapid/ScopeSheet.tsx:87", "testID": "rf-scope-warn", "priority": "LOW"},
+      {"component": "Cup hub 16-player tile", "issue": "The 16-player bracket dot graphic overlaps the 'Round of 16 → Final' caption (teal dots sit on the text) at 390 and 320.", "testID": "cup-size-16", "priority": "LOW"},
+      {"component": "Cup hub error", "issue": "The watch-code error 'No cup has this code' (cup-hub-error) stays on screen next to the CREATE CUP button after you change kind or size. It looks like a create error. Clear it when the input changes or when kind/size changes.", "testID": "cup-hub-error", "priority": "LOW"},
+      {"component": "Friends Cup lobby", "issue": "The host can't see the list of invited friends or their status (the Match Room has 'Invited (n)'), and there is no remind button. 'Cancel cup' cancels right away with no confirmation.", "testID": "cup-leave", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Lobby at 320px", "issues": ["Subject chip 'Chemistry' is truncated to 'Chemis…'", "The 'Weak cards' sticker label is clipped at the right edge", "'Practice Ri…' tile title is truncated", "Ribbon sub text is truncated ('3/5 picke…')", "The Knockout Cup tile breaks badly: 'NEW · KNOCKOUT CUP' wraps to 3 lines, 'Knockout Cup' wraps to 2 lines and the sub text is truncated ('4 · 8 · 16 players · l…')", "Subject chips are 40px tall (below 44)"]},
+      {"screen": "Cup screen at 320px", "issues": ["'PLAY ANOTHER CUP' is truncated to 'PLAY ANOTH…'", "The fixed bottom CTA covers part of the watch-code card ('0/100 watching' line) at 390 too. Add bottom padding to the scroll content."]},
+      {"screen": "H2H sheet", "issues": ["The per-row 'Badla lo' button is 38px tall (below the 44px touch target)"]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_phase3.py", "/app/backend/tests/test_rf_phase3_live_api.py", "/app/test_reports/pytest/rf_phase3_live_api.xml"],
+  "action_items": [
+    "1 v 1 / Badla Match Room: for single rooms show only 1 opponent seat, show the challenge label (not subject + 'Mixed chapters') and a revenge banner for the host, and use the label in the WhatsApp remind text",
+    "ScopeSheet: show rf-scope-warn when the user taps a 6th chapter (don't silently disable it)",
+    "At 320px fix the Knockout Cup lobby tile text wrapping/truncation, the 'Chemis…' chip, 'PLAY ANOTHER CUP' truncation and the clipped 'Weak cards' label",
+    "Cup hub: stop the 16-player dot graphic overlapping its caption, and clear cup-hub-error when kind/size/input changes",
+    "Cup screen: add bottom padding so the fixed CTA doesn't cover the watch-code card",
+    "Friends Cup lobby: show invited friends and their status; add a confirm before 'Cancel cup'",
+    "Make the h2h row Badla button at least 44px tall",
+    "TEST DATA: an orphan earlier fixture run (TEST-fixture-4a77da-0/1/2, pids PFD1F0CC1/PA232739D/PA3DCE10D) is still friends with the QA learner. rf_social_fixture.py cleanup only removes the run in its state file, so the QA learner now shows duplicate Aarav/Diya/Kabir in Friends League, Play Friends and the cup invite list. Remove those exact uids (rf_friends, rf_profiles, their feed/duels) and make seed() refuse to run, or clean up any TEST-fixture-* friends, when the state file is missing"
+  ],
+  "critical_code_review_comments": [
+    "HeadToHead History: h2h-badla-top targets the most recent LOST match even when the latest match was a win, while the profile player-badla only shows when the last match was lost. The two are inconsistent; confirm this is intended.",
+    "duel.tsx back(): after forfeiting a cup duel opened directly (deep link, no history), the player lands on /rapid instead of the cup bracket. Use go.cup(d.cup_id) when d.cup_id is set.",
+    "The watch screen counts the participant as a viewer when they open their own finished match (watch-viewers 1)."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_phase3_live_api.py (new, test only)"],
+  "success_rate": {"backend": "100% (13/13)", "frontend": "~88% (core flows all work; UI polish issues listed)"},
+  "seed_data_creation": "Ran rf_social_fixture.py seed, then cleanup (removed 3 friends and 4 duels, wallet restored). Created and cancelled 2 Badla challenges (1 UI, 1 pytest). Played 1 Open 4-player cup (forfeited; it stays in the QA learner's RF history). Created and cancelled 1 Friends Cup. Created TEST QA Gang G798C4BBDBC, left it, and deleted that exact doc.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login by typing into the first input plus entry-pin-input. The session is in localStorage jl_sid/jl_user; inject it per context to avoid repeated logins. The RF bearer comes from POST /api/rf/access with X-JL-Sid. Leagues are at /api/rf/league/friends and /gangwar; cups are at /api/rf/cups/*. Live watch of a friend match can't be tested because fixture friends can't play, and practice-rival cup matches finish instantly, so no cup-match-*-watch button was seen live. The fixture's newest h2h match is a WIN, so player-badla is hidden by design. Use h2h-sheet Badla buttons. Orphan TEST-fixture-4a77da-* friends still exist (see action items).",
+  "rca_of_issue": "Duplicate friends: an earlier seed run (4a77da) left its records behind because the fixture state file was overwritten or missing, so a later seed/cleanup only tracked run 1386f7. Badla room seat count: rooms.py returns SEATS (5) for single challenges and room/[cid].tsx renders room.seats - seated.length placeholders."
+}

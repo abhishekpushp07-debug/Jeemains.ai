@@ -27,6 +27,7 @@ DUEL_CARDS = 30
 CARD_SECONDS = 15
 WAIT_SECONDS = 120
 MAX_PLAYERS = 5
+MAX_WATCHERS = 100  # people watching one live match at the same time
 
 
 def trailing(answers: list) -> int:
@@ -412,14 +413,15 @@ def make_router(db, rf_user, public_card, award):
         gangs = [g for g in [d.get("gang_id"), *(t["id"] for t in (d.get("teams") or {}).values())] if g]
         if await db.rf_gangs.find_one({"closed": {"$ne": True}, "$and": [{"members.uid": uid}, {"$or": [{"id": {"$in": gangs}}, {"members.uid": {"$in": uids}}]}]}, {"_id": 1}):
             return True
-        return bool(d.get("cup_id") and await db.rf_cups.find_one({"id": d["cup_id"], "$or": [{"players.uid": uid}, {"invites": uid}]}, {"_id": 1}))
+        return bool(d.get("cup_id") and await db.rf_cups.find_one({"id": d["cup_id"], "$or": [{"players.uid": uid}, {"invites": uid}, {"spectators": uid}]}, {"_id": 1}))
 
     async def spectate(d):
         """What a spectator sees: live scores, streaks and progress. Never the cards, so nobody can help a player from outside."""
         d = await settle(d)
         place = {p["uid"]: k + 1 for k, p in enumerate(ranking(d))}
         ts = (d.get("team_scores") or team_scores(d)) if d.get("team_mode") else None
-        return {"spectator": True, "id": d["id"], "label": label_for(d), "status": d["status"], "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(),
+        return {"spectator": True, "id": d["id"], "label": label_for(d), "status": d["status"], "watchers": sum(time.time() - t < 6 for t in watching.get(d["id"], {}).values()),
+                "team_mode": bool(d.get("team_mode")), "winner_team": d.get("winner", "")[5:] if str(d.get("winner", "")).startswith("team:") else None, "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(),
                 "total": len(d["card_ids"]), "cup_id": d.get("cup_id"), "tie": d.get("winner") == "tie", "teams": {t: {**d["teams"][t], **ts[t]} for t in ("a", "b")} if ts else None,
                 "players": [{"name": p["name"], "avatar": p.get("avatar"), "frame": p.get("frame"), "pid": None if p.get("bot") else p.get("pid") or make_pid(p["uid"]), "bot": bool(p.get("bot")),
                              "level": p.get("level", 1), "score": p["score"], "answered": len(p["answers"]), "rank": place[p["uid"]], "team": p.get("team"), "done": p["done"], "forfeit": bool(p.get("forfeit")),
@@ -463,13 +465,16 @@ def make_router(db, rf_user, public_card, award):
             if data.exam and existing["exam"] != data.exam:
                 raise HTTPException(409, f"This is a {existing['exam']} duel. Switch your arena exam to join.")
             return await view(existing, uid)
-        invitation = await db.rf_duels.find_one({"code": code}, {"_id": 0, "exam": 1, "subject": 1, "status": 1, "created_ts": 1})
+        invitation = await db.rf_duels.find_one({"code": code}, {"_id": 0, "exam": 1, "subject": 1, "status": 1, "created_ts": 1, "players.uid": 1})
         if invitation:
             resolve_exam(invitation.get("exam"), invitation["subject"])
         if not invitation or invitation["status"] != "waiting" or invitation["created_ts"] <= time.time() - 1800:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
         if invitation and data.exam and invitation["exam"] != data.exam:
             raise HTTPException(409, f"This is a {invitation['exam']} duel. Switch your arena exam to join.")
+        # Codes never make strangers rivals: only friends (made with a Friend Code) can take this seat.
+        if not await db.rf_friends.find_one({"uid": uid, "fid": invitation["players"][0]["uid"]}, {"_id": 1}):
+            raise HTTPException(403, "Duel codes are only for friends. Add this player with their Friend Code first.")
         d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "created_ts": {"$gt": time.time() - 1800}, "players.uid": {"$ne": uid}, "exam": exam},
                                                   {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
         if not d:
@@ -501,8 +506,10 @@ def make_router(db, rf_user, public_card, award):
         if not d or d["status"] not in ("ready", "finished") or not await can_watch(d, uid):
             raise HTTPException(404, "This match is not open to watch.")
         if d["status"] == "ready":
-            seen = watching.setdefault(did, {})
-            seen[uid] = time.time()
+            seen, now = watching.setdefault(did, {}), time.time()
+            if now - seen.get(uid, 0) >= 6 and sum(now - t < 6 for t in seen.values()) >= MAX_WATCHERS:
+                raise HTTPException(409, f"{MAX_WATCHERS} people are already watching this match. Try again in a moment.")
+            seen[uid] = now
             if len(watching) > 2000:
                 watching.clear()
         return await spectate(d)

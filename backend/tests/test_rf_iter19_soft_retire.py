@@ -19,9 +19,14 @@ load_dotenv("/app/frontend/.env")
 load_dotenv("/app/backend/.env")
 BASE_URL = os.environ.get("EXPO_PUBLIC_BACKEND_URL").rstrip("/")
 UID = "db0c62b8-eeaf-41be-b8b1-05f5f34ac1d8"
-H = {"X-RF-User": UID}
 SUBJ, CHAP = "Chemistry", "p-Block"
 mdb = MongoClient(os.environ["MONGO_URL"])[os.environ["DB_NAME"]]
+# Rapid Fire needs a verified grant (iteration 42): a raw X-RF-User header is no longer a session.
+import hashlib  # noqa: E402
+from datetime import datetime, timedelta, timezone  # noqa: E402
+_TOKEN = "iter19-" + uuid.uuid4().hex + uuid.uuid4().hex
+mdb.rf_access.insert_one({"digest": hashlib.sha256(_TOKEN.encode()).hexdigest(), "uid": UID, "sid": "", "expires_at": datetime.now(timezone.utc) + timedelta(minutes=30)})
+H = {"Authorization": f"Bearer {_TOKEN}"}
 
 
 def rid():
@@ -67,8 +72,8 @@ def test_httpx_pinned_and_importable():
 def test_catalog_matches_non_retired():
     cat = requests.get(f"{BASE_URL}/api/rf/catalog").json()
     total = sum(s["total"] for s in cat["subjects"])
-    assert total == mdb.rf_cards.count_documents({"retired": {"$ne": True}})
-    assert 10000 <= total <= 12000
+    assert total == mdb.rf_cards.count_documents({"exam": "JEE", "retired": {"$ne": True}})  # the catalogue is JEE only (NEET is archived)
+    assert 5000 <= total <= 12000
 
 
 # Solo sprint returns 30 non-retired cards
@@ -84,7 +89,7 @@ def test_solo_sprint_30_non_retired():
 def retired_card():
     s = requests.post(f"{BASE_URL}/api/rf/sessions", json={"subject": SUBJ, "chapter": CHAP, "request_id": rid()}, headers=H).json()
     x = s["cards"][0]["id"]
-    base = mdb.rf_cards.count_documents({"subject": SUBJ, "chapter": CHAP, "retired": {"$ne": True}})
+    base = mdb.rf_cards.count_documents({"exam": "JEE", "subject": SUBJ, "chapter": CHAP, "retired": {"$ne": True}})
     mdb.rf_cards.update_one({"id": x}, {"$set": {"retired": True}})
     yield {"x": x, "old_sid": s["id"], "old_card_ids": s["card_ids"], "base": base}
     mdb.rf_cards.update_one({"id": x}, {"$set": {"retired": False}})
@@ -175,7 +180,7 @@ def test_duel_ai_rival_end_to_end():
     d = requests.post(f"{BASE_URL}/api/rf/duels", json={"subject": "Mathematics", "chapter": None, "mode": "random", "name": "TEST_P", "request_id": rid()}, headers=H).json()
     v = requests.post(f"{BASE_URL}/api/rf/duels/{d['id']}/bot", headers=H).json()
     assert v["status"] == "ready" and v["vs_bot"] is True and v["total"] == 30
-    assert 4.3 <= v["start_at"] - v["server_now"] <= 4.7
+    assert 10.3 <= v["start_at"] - v["server_now"] <= 10.7  # 9.5 s 1 v 1 entry show + 1 s
     time.sleep(max(0, v["start_at"] - v["server_now"]) + 0.5)
     g = requests.get(f"{BASE_URL}/api/rf/duels/{d['id']}", headers=H).json()
     assert g["status"] == "ready" and len(g["cards"]) >= 1

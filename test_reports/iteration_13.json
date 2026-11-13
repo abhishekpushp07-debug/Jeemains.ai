@@ -28,6 +28,6 @@
   "seed_data_creation": "None. No attempts were submitted. Viewing questions triggered solution-open POSTs for 8501cf9c (Q1-8, 31-38, 61-68, 71-78, 91-98) and for 385dc381 (Q1 and Q3).",
   "retest_needed": false,
   "should_main_agent_self_test": true,
-  "context_for_next_testing_agent": "Run `EXPO_PUBLIC_BACKEND_URL=https://jeelive-mobile.preview.emergentagent.com python /app/backend/tests/check_ai_solutions_math.py` first; it dumps /tmp/ai_items.json. Then run `node /app/backend/tests/run_plainmath.js [samples]`. The full JEE pending attempt id is 385dc381-b394-441e-89db-b281f9f081f2. The Solutions rail is per subject; select a solution-subject-<slug> chip before clicking solution-question-N. Question images use testID solution-qimage-N-0.",
+  "context_for_next_testing_agent": "Run `EXPO_PUBLIC_BACKEND_URL=https://knockout-arena-77--53pzlg0l.preview.emergentagent.com python /app/backend/tests/check_ai_solutions_math.py` first; it dumps /tmp/ai_items.json. Then run `node /app/backend/tests/run_plainmath.js [samples]`. The full JEE pending attempt id is 385dc381-b394-441e-89db-b281f9f081f2. The Solutions rail is per subject; select a solution-subject-<slug> chip before clicking solution-question-N. Question images use testID solution-qimage-N-0.",
   "rca_of_issue": "Stale image: AssetImage's useEffect([path, n]) clears err but not uri. React reuses the component across questions because the key is 'q0'. So until assetDataUri(newPath) resolves, the old data URI keeps rendering under the new question number."
 }

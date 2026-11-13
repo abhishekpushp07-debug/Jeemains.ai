@@ -7,7 +7,7 @@ import { invalidate } from "@/src/useCached";
 import { T } from "@/src/components/ui";
 import { arena } from "@/src/theme";
 import { EMBLEM_IDS, Emblem } from "@/src/rapid/Art";
-import { RaisedButton, SectionTitle, arenaInput } from "@/src/rapid/arena";
+import { RaisedButton, SectionTitle, Segment, arenaInput } from "@/src/rapid/arena";
 import { Jelly } from "@/src/rapid/juice";
 import { Check, InnerScreen, Note, PersonRow } from "@/src/rapid/parts";
 import { ErrorBox, withRapid } from "@/src/rapid/ui";
@@ -19,7 +19,7 @@ function GangForm() {
   const router = useRouter(), uid = useAuth().user?.id || "";
   const friends = useFriends(uid);
   const [name, setName] = useState(edit.name || ""), [emblem, setEmblem] = useState(edit.emblem || "lion");
-  const [picked, setPicked] = useState<string[]>([]);
+  const [picked, setPicked] = useState<string[]>([]), [kind, setKind] = useState<"gang" | "batch">("gang");
   const [busy, setBusy] = useState(false), [error, setError] = useState("");
   const myFriends = friends.data?.items || [];
 
@@ -27,7 +27,7 @@ function GangForm() {
     setBusy(true); setError("");
     try {
       if (edit.gid) { await rf(`/gangs/${edit.gid}`, uid, { method: "PATCH", body: { name: name.trim(), emblem } }); invalidate(`u.${uid}.rfgangs`); router.back(); return; }
-      const made = await rf<any>("/gangs", uid, { method: "POST", body: { name: name.trim(), emblem, pids: picked } });
+      const made = await rf<any>("/gangs", uid, { method: "POST", body: { name: name.trim(), emblem, kind, pids: picked } });
       invalidate(`u.${uid}.rfgangs`);
       router.replace(go.gang(made.id));
     } catch (e: any) { setError(e.message); setBusy(false); }
@@ -41,6 +41,10 @@ function GangForm() {
       <T w="heavy" size={20} color={arena.gold} numberOfLines={1}>{name.trim() || "Your gang"}</T>
     </View>
     <TextInput testID="gang-form-name" accessibilityLabel="Gang name" value={name} onChangeText={setName} maxLength={20} placeholder="Gang name (up to 20 letters)" placeholderTextColor={arena.faint} autoCorrect={false} style={arenaInput} />
+    {edit.gid ? null : <>
+      <Segment prefix="gang-form-kind" value={kind} onChange={setKind} items={[["gang", "Gang · friends"], ["batch", "Batch · class"]]} />
+      <T testID="gang-form-kind-note" size={12} color={arena.muted} style={styles.center}>{kind === "batch" ? "Up to 200 classmates. Anyone with the batch link can join." : "A circle of friends. The link works for friends of a member."}</T>
+    </>}
 
     <SectionTitle title="Emblem" />
     <View style={styles.grid}>
@@ -62,7 +66,7 @@ function GangForm() {
 }
 
 const styles = StyleSheet.create({
-  preview: { alignItems: "center", gap: 4 },
+  preview: { alignItems: "center", gap: 4 }, center: { textAlign: "center" },
   grid: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   cell: { width: "23%", aspectRatio: 1, alignItems: "center", justifyContent: "center", borderRadius: 18, backgroundColor: arena.panel, borderWidth: 2, borderColor: arena.rim },
   cellOn: { borderColor: arena.gold, backgroundColor: arena.panelHi },

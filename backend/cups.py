@@ -1,9 +1,11 @@
 """Knockout Cups: single elimination, 15-card matches, every round starts for everyone at the same moment.
 
-Open Cup: 4 seats, anyone can join; practice rivals take the seats nobody filled. Friends Cup: 4 or 8 seats for the
-host's friends or one of their gangs (empty seats become byes). The cup moves on by itself as soon as a round is decided.
+Open Cup: 4, 8 or 16 seats, anyone can join; practice rivals take the seats nobody filled. Friends Cup: 4, 8 or 16 seats
+for the host's friends or one of their gangs; the host may start early and empty seats become byes. The cup moves on by
+itself as soon as a round is decided. Every cup has a 6-letter watch code: up to 100 people can follow it live.
 """
 import random
+import secrets
 import time
 import uuid
 from datetime import datetime, timezone
@@ -12,6 +14,7 @@ from typing import List, Literal, Optional
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
+from pymongo.errors import DuplicateKeyError
 
 from exam_groups import resolve_exam
 from scope import Pick, normalise, scope_fields, scope_of
@@ -22,17 +25,24 @@ CUP_CARDS = 15
 LOBBY_SECONDS = {"open": 40, "private": 300}
 BREAK_SECONDS = 10  # between two rounds, so winners can catch their breath
 ACTIVE = ["open", "live"]
-ROUND_NAMES = {1: "Final", 2: "Semi-finals", 4: "Quarter-finals"}
+ROUND_NAMES = {1: "Final", 2: "Semi-finals", 4: "Quarter-finals", 8: "Round of 16"}
 SHOWN = ("pid", "name", "avatar", "frame", "level")
+MAX_SPECTATORS = 100  # people who follow a cup with its watch code
+CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
 
 class CupCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     kind: Literal["open", "private"]
-    size: Literal[4, 8] = 4
+    size: Literal[4, 8, 16] = 4
     picks: Optional[List[Pick]] = Field(default=None, max_length=5)
-    pids: List[str] = Field(default_factory=list, max_length=7)
+    pids: List[str] = Field(default_factory=list, max_length=15)
     gang_id: Optional[str] = Field(default=None, max_length=16)
+
+
+class CupWatch(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    code: str = Field(min_length=6, max_length=8)
 
 
 def make_router(db, rf_user, duels):
@@ -174,20 +184,66 @@ def make_router(db, rf_user, duels):
 
         mine = next((m for m in current if uid in (m["a"], m["b"]) and m["duel_id"] and not m["winner"]), None)
         host = c["host_uid"] == uid
-        return {"id": c["id"], "kind": c["kind"], "status": c["status"], "label": c["label"], "picks": c["picks"], "size": c["size"], "cards": CUP_CARDS,
+        invited = []
+        if host and c["kind"] == "private" and c["status"] == "open" and c.get("invites"):  # the host sees who was invited and who is in
+            profs = await db.rf_profiles.find({"uid": {"$in": c["invites"][:40]}}).to_list(40)
+            invited = [{**{k: card(p)[k] for k in SHOWN}, "joined": p["uid"] in idx} for p in profs]
+            invited.sort(key=lambda p: not p["joined"])
+        return {"id": c["id"], "kind": c["kind"], "status": c["status"], "label": c["label"], "picks": c["picks"], "size": c["size"], "cards": CUP_CARDS, "code": c.get("code"),
+                "spectators": len(c.get("spectators") or []), "max_spectators": MAX_SPECTATORS, "spectating": uid not in idx and uid in (c.get("spectators") or []),
                 "round": rnd, "is_host": host, "joined": uid in idx, "invited": uid in c.get("invites", []), "expires_in": max(0, round(c["expires_ts"] - now)),
                 "can_start": host and c["status"] == "open" and c["kind"] == "private" and len(c["players"]) >= 2,
                 "players": [{**{k: p.get(k) for k in SHOWN}, "bot": bool(p.get("bot")), "you": p["uid"] == uid, "out": p["uid"] in out} for p in c["players"]],
                 "rounds": [{"name": ROUND_NAMES.get(len(rd), f"Round {k + 1}"), "matches": [match(m) for m in rd]} for k, rd in enumerate(rounds)],
-                "my_duel": mine["duel_id"] if mine else None, "champion": idx.get(c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0)}
+                "my_duel": mine["duel_id"] if mine else None, "champion": idx.get(c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0), "invited_players": invited}
 
     async def open_for(cid, uid):
-        """A cup this player may look at: they play in it, were invited, or are friends with someone playing."""
+        """A cup this player may look at: they play in it, were invited, follow it with its code, or are friends with someone playing."""
         c = await fresh(cid)
         uids = [p["uid"] for p in (c or {}).get("players", []) if not p.get("bot")]
-        if not c or not (uid in uids or uid in c.get("invites", []) or await db.rf_friends.find_one({"uid": uid, "fid": {"$in": uids}}, {"_id": 1})):
+        if not c or not (uid in uids or uid in c.get("invites", []) or uid in (c.get("spectators") or [])
+                         or await db.rf_friends.find_one({"uid": uid, "fid": {"$in": uids}}, {"_id": 1})):
             raise HTTPException(404, "Cup not found.")
         return c
+
+    async def insert(c):
+        """Store a new cup with a watch code nobody else has."""
+        for _ in range(5):
+            c["code"] = "".join(secrets.choice(CODE_ALPHABET) for _ in range(6))
+            try:
+                await db.rf_cups.insert_one(c)
+                return c
+            except DuplicateKeyError:
+                c.pop("_id", None)
+        raise HTTPException(503, "Could not open the cup. Please try again.")
+
+    @r.get("")
+    async def mine(x_rf_user: Optional[str] = Header(None)):
+        """Your last 10 cups, newest first."""
+        uid = rf_user(x_rf_user)
+        docs = await db.rf_cups.find({"players.uid": uid, "status": {"$in": ["open", "live", "finished"]}}, {"_id": 0, "id": 1, "label": 1, "size": 1, "status": 1, "kind": 1, "champion": 1,
+                                                                                                                "players.uid": 1, "players.name": 1, "prizes": 1, "created_ts": 1}).sort("created_ts", -1).limit(10).to_list(10)
+        name = lambda c, u: next((p["name"] for p in c["players"] if p["uid"] == u), None)  # noqa: E731
+        return {"items": [{"id": c["id"], "label": c["label"], "size": c["size"], "status": c["status"], "kind": c["kind"], "players": len(c["players"]), "won": c.get("champion") == uid,
+                           "champion": name(c, c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0)} for c in docs]}
+
+    @r.post("/watch")
+    async def watch(data: CupWatch, x_rf_user: Optional[str] = Header(None)):
+        """Follow a cup with its watch code: its bracket and every live match. Up to 100 people per cup."""
+        uid = rf_user(x_rf_user)
+        code = "".join(ch for ch in data.code.upper() if ch.isalnum())
+        c = await db.rf_cups.find_one({"code": code, "status": {"$in": ["open", "live", "finished"]}})
+        if not c:
+            raise HTTPException(404, "No cup has this code. Check it and try again.")
+        if uid in [p["uid"] for p in c["players"]] or uid in c.get("invites", []) or uid in (c.get("spectators") or []):
+            return await view(c, uid)
+        got = await db.rf_cups.find_one_and_update({"id": c["id"], "spectators": {"$ne": uid}, f"spectators.{MAX_SPECTATORS - 1}": {"$exists": False}},
+                                                   {"$push": {"spectators": uid}}, return_document=after)
+        if not got:
+            got = await fresh(c["id"])
+            if uid not in (got.get("spectators") or []):
+                raise HTTPException(409, f"{MAX_SPECTATORS} people are already watching this cup.")
+        return await view(got, uid)
 
     @r.post("")
     async def create(data: CupCreate, x_rf_user: Optional[str] = Header(None)):
@@ -201,8 +257,7 @@ def make_router(db, rf_user, duels):
         exam, scope, me = resolve_exam("JEE", picks[0]["subject"]), scope_fields(picks), await seat(uid)
         invites, gang_id, size = [], None, data.size
         if data.kind == "open":
-            size = 4
-            c = await db.rf_cups.find_one_and_update({"kind": "open", "status": "open", "scope_key": scope["scope_key"], "expires_ts": {"$gt": now + 3}, "players.uid": {"$ne": uid}, "players.3": {"$exists": False}},
+            c = await db.rf_cups.find_one_and_update({"kind": "open", "status": "open", "size": size, "scope_key": scope["scope_key"], "expires_ts": {"$gt": now + 3}, "players.uid": {"$ne": uid}, f"players.{size - 1}": {"$exists": False}},
                                                      {"$push": {"players": me}}, sort=[("created_ts", 1)], return_document=after)
             if c:
                 return await view(c, uid)
@@ -222,9 +277,8 @@ def make_router(db, rf_user, duels):
             if not invites:
                 raise HTTPException(400, "Pick friends or a gang for your cup.")
         c = {"id": str(uuid.uuid4()), "kind": data.kind, "size": size, "host_uid": uid, "exam": exam, **scope, "status": "open", "created_ts": now, "expires_ts": now + LOBBY_SECONDS[data.kind],
-             "gang_id": gang_id, "invites": invites, "players": [me], "rounds": [], "round": -1}
-        await db.rf_cups.insert_one(c)
-        return await view(c, uid)
+             "gang_id": gang_id, "invites": invites, "players": [me], "spectators": [], "rounds": [], "round": -1}
+        return await view(await insert(c), uid)
 
     @r.get("/{cid}")
     async def get(cid: str, x_rf_user: Optional[str] = Header(None)):

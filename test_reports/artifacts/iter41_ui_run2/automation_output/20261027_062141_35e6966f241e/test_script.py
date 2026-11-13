@@ -182,7 +182,7 @@ async def run_test(page, output_dir, page_url):
                     await page.wait_for_timeout(1200)
                     break
 
-        await page.goto('https://jeelive-mobile.preview.emergentagent.com/(tabs)/tests')
+        await page.goto('https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/(tabs)/tests')
         await page.wait_for_timeout(1500)
         blocked = await page.locator('[data-testid="entry-screen"]').count() > 0
         print(f'Private route blocked after logout={blocked}')

@@ -3,7 +3,7 @@ import { AppState, ScrollView, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, { FadeIn, ZoomIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { FadeIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { Ring } from "@/src/components/Ring";
 import { RapidDiagram as BiologyDiagram, RapidDiagramSpec as Diagram } from "@/src/rapid/Diagram";
 import { RewardPanel } from "@/src/components/game";
@@ -15,6 +15,7 @@ import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
 import { GemColor } from "@/src/rapid/Art";
 import { ArenaBg } from "@/src/rapid/arena";
+import { decodePicks } from "@/src/rapid/scope";
 import { DiamondsWon, GemFlare, StreakGem, gemAt } from "@/src/rapid/StreakGem";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
@@ -78,11 +79,12 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
 
 function RapidSession() {
   const p = useLocalSearchParams();
-  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.ids, p.exam, p.revision])} />;
+  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.revision])} />;
 }
 
 function RapidSessionRound() {
-  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; ids?: string; review?: string; diagrams?: string; revision?: string }>();
+  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; picks?: string; ids?: string; review?: string; diagrams?: string; revision?: string }>();
+  const picks = decodePicks(p.picks);
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
@@ -119,11 +121,12 @@ function RapidSessionRound() {
     }
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
-      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: p.subject || "Physics", chapter: p.chapter || null, count: 30, revision: p.revision === "1", request_id: reqId.current, ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
+      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: 30, revision: p.revision === "1", request_id: reqId.current,
+          ...(picks && !p.ids && p.revision !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
     run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else setError(e.message); });
     return () => { alive = false; };
-  }, [p.review, p.subject, p.chapter, p.ids, p.exam, p.diagrams, p.revision, uid, n]);
+  }, [p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.diagrams, p.revision, uid, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Timer starts only when the card is visible; resets per card.
   useEffect(() => {
@@ -229,7 +232,7 @@ function RapidSessionRound() {
   const cardStyle = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { rotate: `${x.value / 25}deg` }] }));
 
   const tint = subjectColor(card?.subject || p.subject);
-  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", diagrams: p.diagrams || "", r: uuid() } });
+  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", picks: p.picks || "", diagrams: p.diagrams || "", r: uuid() } });
 
   return (
     <ArenaBg dim testID="rf-session-screen" style={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>

@@ -1,0 +1,36 @@
+{
+  "summary": "Iteration 63: retest of the 8 fixes from iteration 62 plus a light regression, done at 390 and 320 px as the approved QA learner (one PIN login, session reused). Backend: 15/15 pass (test_rf_phase3 7/7, live API 6/6, new test_rf_iter63_cup_invited_live 2/2). The host now gets invited_players for a private cup with no duplicates, and the Friends League shows each fixture friend once. Frontend: all 8 retest items pass. (1) Badla room: 1 open seat only, title 'Badla Challenge 🔥', room-meta shows the label ('Mixed Chemistry' / 'PCM Mixed'), room-revenge shows 'BADLA LO!', the WhatsApp text uses the label. h2h-badla-top is hidden because the newest match is a win, and the per-row h2h-badla button on the lost row is 49 px tall. (2) The 6th pick shows rf-scope-warn and still keeps 5 picks. The warning clears after a remove and add. (3) Lobby at 320: chips sit in one row at 44 px with no icons, 'Chemistry' is not cut off, 'Weak cards' is fine, the Knockout tile is compact ('NEW' / 'Knockout Cup' / '4 · 8 · 16 players'), and the ribbon reads 'Physics · 1/5 · 2383 cards'. (4) Cup hub: the 16-player dots no longer overlap the caption. cup-watch-error appears under the watch panel and clears when typing. The prizes strip is stacked. (5) Cup screen at 390 and 320: cup-code sits above the dock, and cup-again reads 'NEW CUP' without being cut off. (6) Friends Cup lobby: cup-invited rows show 'Invited', cup-remind is there, and cup-leave opens cup-cancel-sheet. Keep leaves the cup open; Confirm cancels it in the DB and goes to /rapid. (7) A cup duel opened straight from its link and then forfeited lands on /rapid/cup/<cid>, which shows the bracket and the champion. (8) After seed, Play Friends, cup invites and the Friends League each show the fixture friends exactly once. Regression: the Open Cup 4 flow works end to end (lobby, 40 s countdown, auto-duel 'KNOCKOUT CUP · MIXED PHYSICS', forfeit, bracket, champion). Trophy Ranks All India, Friends and Gang War all work, and the Gang/Batch segment toggles (44 px). Remaining issues are minor and visual only.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Match Room dock", "issue": "The WhatsApp button label is cut off as 'Remind on Whats…' at 390 and 'Remind on …' at 320 (scrollWidth 168 > clientWidth 156 at 390). Shorten it to 'Remind', drop the 'on WhatsApp' wording at narrow widths, or give the button more of the row.", "testID": "room-remind", "priority": "LOW"},
+      {"component": "Cup hub watch error", "issue": "After a bad watch code, cup-watch-error renders at y=765–807 on 390x844, exactly behind the fixed FIND A CUP footer (dock top 765). The user cannot see it without scrolling. Scroll it into view or add bottom content padding equal to the footer height.", "testID": "cup-watch-error", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Match Room at 320", "issues": ["The title 'Badla Challenge 🔥' wraps so the 🔥 sits alone on line 2. Use numberOfLines={1} with adjustsFontSizeToFit, or a smaller size.", "The 1 v 1 seats are pushed to the far left and far right with a big empty gap. A centred You VS ? layout would look better."]},
+      {"screen": "H2H sheet at 320", "issue_note": "", "issues": ["On the lost row, the 'Badla lo' button squeezes the subtitle to 'Mixed Chemi…' so the date is hidden"]},
+      {"screen": "Cup screen at 320", "issues": ["cup-meta is cut off as 'Friends · Mixed Physics · 15 ca…'", "Bracket horizontal scroll starts mid-column: the Final card's left side (player names) is clipped at 320. Snap or offset to a whole column."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_phase3.py", "/app/backend/tests/test_rf_phase3_live_api.py", "/app/backend/tests/test_rf_iter63_cup_invited_live.py", "/app/test_reports/pytest/iter63.xml", "/app/test_reports/pytest/iter63_live.xml", "/app/test_reports/pytest/iter63_invited.xml"],
+  "action_items": [
+    "Fix the room-remind label being cut off at 390/320 (shorter label or more width)",
+    "Make cup-watch-error visible above the fixed cup-create footer: scroll to it, or add bottom padding equal to the footer height",
+    "Optional polish at 320: keep the Badla room title on one line, centre the 1 v 1 seats as a VS layout, show the date on the h2h lost row, stop cup-meta being cut off, and snap the bracket scroll to whole columns"
+  ],
+  "critical_code_review_comments": [
+    "cups.py view(): invited_players is shown only to the host of an open private cup and capped at 40. Verified with no duplicates and joined=false.",
+    "HeadToHead History: the top button shows only while rows[0] is lost, which is correct. Not verified live because the fixture's newest match is a win.",
+    "duel.tsx back(): router.canGoBack() ? back : cup bracket. Verified with a direct-link open.",
+    "Playwright force=True clicks on ArenaBar Jelly tabs (arena-tab-trophy) did not register right after load, but normal clicks work. Possibly a press-in/press-out handler. Not a user-facing bug."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter63_cup_invited_live.py (new test only)"],
+  "success_rate": {"backend": "100% (15/15)", "frontend": "~95% (all 8 retest items pass; 2 minor visual bugs)"},
+  "seed_data_creation": "Ran rf_social_fixture.py seed, then cleanup at the end. Verified afterwards: 0 TEST-fixture-* profiles, 0 fixture duels, the QA learner has 0 fixture friends, and the wallet is restored. Records the test created on the QA learner, left in place: 1 open 4-player cup (finished; learner forfeited the semi against practice rivals), 2 private cups (cancelled), 2 Badla rooms (cancelled).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Session: log in once, read localStorage jl_sid (JSON-encoded string, so json.loads it), inject it via add_init_script, and use it as RF_TEST_SID for the live pytest. Lost fixture h2h row id is fb25de96-... (random per seed). Use normal (non-force) clicks for arena-tab-* tabs. The open cup with practice rivals reaches its duel about 40 s after creation.",
+  "rca_of_issue": "room-remind: RaisedButton with styles.wide shares the row with Cancel (flex), so the label has about 156 px at 390. cup-watch-error: the ErrorBox is the last item in the ScrollView, and the content bottom padding doesn't account for the absolute/fixed footer, so the newly rendered error sits under the footer until the user scrolls."
+}

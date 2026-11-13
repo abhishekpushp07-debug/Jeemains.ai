@@ -13,14 +13,24 @@ import { GoldTitle, Panel, RaisedButton, SectionTitle, Segment } from "./arena";
 import { Jelly, Pop } from "./juice";
 import { Bar, Face, GemStrip, Note } from "./parts";
 import { RushTrack } from "./RushTrack";
+import { FriendsLeague, GangWarBoard } from "./Leagues";
 import { ErrorBox } from "./ui";
-import { go, ordinal, shortSubject, takeArenaPart } from "./social";
+import { go, ordinal, takeArenaPart } from "./social";
 
 type Part = "ranks" | "rewards" | "matches";
 const MEDAL = [arena.gold, "#D8DEE9", "#E0A36B"];
 const day = (iso?: string) => (iso ? new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "");
 
+/** Ranks: everyone (All India), just your friends (weekly league), or the Gang War top 100. */
 function Ranks({ uid }: { uid: string }) {
+  const [board, setBoard] = useState<"all" | "friends" | "gangwar">("all");
+  return <View style={styles.list}>
+    <Segment prefix="rf-board-kind" value={board} onChange={setBoard} items={[["all", "All India"], ["friends", "Friends"], ["gangwar", "Gang War"]]} />
+    {board === "all" ? <AllIndia uid={uid} /> : board === "friends" ? <FriendsLeague uid={uid} /> : <GangWarBoard uid={uid} />}
+  </View>;
+}
+
+function AllIndia({ uid }: { uid: string }) {
   const router = useRouter();
   const board = useCached<any>(uid ? `u.${uid}.rfboard.JEE` : null, () => rf("/leaderboard?exam=JEE", uid), false);
   const reload = board.reload;
@@ -116,7 +126,7 @@ function Matches({ uid }: { uid: string }) {
         <View style={[styles.result, m.won && styles.resultWon]}><T w="heavy" size={12} color={m.won ? arena.badgeInk : arena.text}>{group ? ordinal(m.place) : m.won ? "WON" : m.tie ? "TIE" : "LOST"}</T></View>
         <View style={styles.flex}>
           <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{group ? `${m.scores.length} players` : `vs ${others[0]?.name || "Rival"}`} · {me?.score ?? 0}{group ? "" : ` – ${others[0]?.score ?? 0}`}</T>
-          <T w="bold" size={11} color={arena.muted} numberOfLines={1}>{shortSubject(m.subject)} · {m.chapter || "Mixed"} · {day(m.finished_at)}</T>
+          <T w="bold" size={11} color={arena.muted} numberOfLines={1}>{m.cup ? "Cup · " : m.team ? "Gang War · " : ""}{m.label || m.chapter || "Mixed"} · {day(m.finished_at)}</T>
         </View>
         <View style={styles.gemRow}>{gems(m.diamonds)}</View>
       </Pressable>;
@@ -124,7 +134,7 @@ function Matches({ uid }: { uid: string }) {
       <View style={styles.result}><T w="heavy" size={13} color={arena.text}>{s.summary?.score ?? 0}/{s.summary?.total ?? 0}</T></View>
       <View style={styles.flex}>
         <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{s.mode === "weak_revision" ? "Weak cards" : "Solo Sprint"} · {s.chapter || "Mixed"}</T>
-        <T w="bold" size={11} color={arena.muted}>{shortSubject(s.subject)} · {day(s.completed_at)}</T>
+        <T w="bold" size={11} color={arena.muted}>{s.label || s.subject} · {day(s.completed_at)}</T>
       </View>
       <View style={styles.gemRow}>{gems(s.diamonds)}</View>
     </Pressable>)}

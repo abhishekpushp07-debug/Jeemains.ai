@@ -62,6 +62,8 @@ def match(db, me, friend, mine, theirs, days_ago, subject):
 def seed(pid):
     if os.path.exists(STATE):
         cleanup()
+    else:
+        sweep()  # leftovers of a run whose state file was lost would show every friend twice
     db, run, now = db_of(), uuid.uuid4().hex[:6], time.time()
     me = db.rf_profiles.find_one({"pid": pid})
     if not me:
@@ -94,9 +96,26 @@ def seed(pid):
     print(json.dumps({"ok": True, "player": pid, "friends": [{"name": p["name"], "pid": p["pid"]} for p in friends], "duels": state["duels"]}))
 
 
+def sweep():
+    """No state file (an earlier run's file was lost): remove every TEST-fixture-* profile and what hangs off it. The real player's wallet is not touched."""
+    db = db_of()
+    uids = [p["uid"] for p in db.rf_profiles.find({"uid": {"$regex": "^TEST-fixture-"}}, {"_id": 0, "uid": 1})]
+    if not uids:
+        print(json.dumps({"ok": True, "note": "nothing to clean"}))
+        return
+    db.rf_profiles.delete_many({"uid": {"$in": uids}})
+    db.rf_friends.delete_many({"$or": [{"uid": {"$in": uids}}, {"fid": {"$in": uids}}]})
+    db.rf_feed.delete_many({"uid": {"$in": uids}})
+    db.rf_notices.delete_many({"$or": [{"uid": {"$in": uids}}, {"from_uid": {"$in": uids}}]})
+    db.rf_challenges.delete_many({"$or": [{"from_uid": {"$in": uids}}, {"invites.uid": {"$in": uids}}]})
+    db.rf_duels.delete_many({"players.uid": {"$in": uids}})
+    db.rf_awards.delete_many({"uid": {"$in": uids}})
+    print(json.dumps({"ok": True, "swept_orphan_friends": len(uids)}))
+
+
 def cleanup():
     if not os.path.exists(STATE):
-        print(json.dumps({"ok": True, "note": "nothing to clean"}))
+        sweep()
         return
     with open(STATE, encoding="utf-8") as f:
         state = json.load(f)

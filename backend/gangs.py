@@ -10,8 +10,6 @@ from typing import List, Literal, Optional
 from fastapi import APIRouter, Header, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
 
-from gamify import ist_week
-from leagues import gang_week
 from social import blocked_uids, card, find_player, public_name, team_scores
 
 EMBLEMS = ("lion", "eagle", "thunder", "crown", "shield", "dragon", "wolf", "rocket")
@@ -186,7 +184,7 @@ def make_router(db, rf_user):
         board = sorted(({**{k: m[k] for k in ("pid", "name", "avatar", "frame", "you")}, "wins": wins[u], "played": played[u]}
                         for u, m in ((m["uid"], next(x for x in members if x["pid"] == card(profs.get(m["uid"], {"uid": m["uid"]}))["pid"])) for m in g["members"]) if played[u]),
                        key=lambda row: (-row["wins"], -row["played"]))
-        return {"member": True, "id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "league": gang_week(g, ist_week()), "is_leader": g["leader_uid"] == uid, "max": cap_of(g), "members": members,
+        return {"member": True, "id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "is_leader": g["leader_uid"] == uid, "max": cap_of(g), "members": members,
                 "online": sum(m["online"] and not m["you"] for m in members), "record": record_of(g), "invite_code": g["invite_code"],
                 "board": board[:10], "rivals": list(rivals.values())[:5], "recent": recent}
 

@@ -26,7 +26,7 @@ async def run_test(page, output_dir, page_url):
         await page.route('**/*', handle_route)
 
         print('Step 1: Open app with isolated auth fixture')
-        await page.goto('https://jeelive-mobile.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
+        await page.goto('https://knockout-arena-77--53pzlg0l.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
         await page.wait_for_selector('[data-testid="tab-rapid"]', timeout=30000)
         print('Step 1 passed: fixture auth loaded')
 
@@ -91,7 +91,7 @@ async def run_test(page, output_dir, page_url):
         print('Step 4 passed: duel state captured')
 
         print('Step 5: Open shop directly and capture wallet state')
-        await page.goto('https://jeelive-mobile.preview.emergentagent.com/rapid/shop', wait_until='domcontentloaded', timeout=40000)
+        await page.goto('https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/rapid/shop', wait_until='domcontentloaded', timeout=40000)
         await page.wait_for_selector('[data-testid="shop-screen"]', timeout=15000)
         await page.wait_for_timeout(1500)
         await page.screenshot(path='/app/test_reports/artifacts/iter42_ui_fixture/automation_output/20261027_072655_6f15fd8c62bc/shop_fixture_390.jpeg', type="jpeg", quality=40, full_page=False)

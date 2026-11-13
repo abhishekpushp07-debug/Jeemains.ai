@@ -495,7 +495,8 @@ async def startup():
     await db.rf_cups.create_index([("invites", 1), ("status", 1)])
     await db.rf_cups.create_index([("kind", 1), ("status", 1), ("scope_key", 1)])
     await db.rf_duels.create_index([("status", 1), ("players.uid", 1)])
-    await db.rf_gangs.create_index("league.week", sparse=True)
+    await db.rf_cups.create_index("code", unique=True, partialFilterExpression={"code": {"$type": "string"}})
+    await db.rf_duels.create_index([("team_mode", 1), ("status", 1)], sparse=True)
     await db.rf_feed.create_index("at", expireAfterSeconds=14 * 86400)
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])
     for exam in SUBJECTS:

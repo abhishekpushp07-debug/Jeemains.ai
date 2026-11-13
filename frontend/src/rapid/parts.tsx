@@ -11,7 +11,7 @@ import { ArenaBg, OnlineDot, ScreenTop } from "./arena";
 import { Jelly, Pop } from "./juice";
 import { PlayerCard } from "./social";
 
-type Person = Partial<PlayerCard> & { name?: string };
+type Person = Partial<Omit<PlayerCard, "pid">> & { pid?: string | null; name?: string };
 
 /** A player's portrait with the green online dot. Tapping it opens their profile when `onPress` is given. */
 export function Face({ p, size = 46, onPress, testID }: { p: Person; size?: number; onPress?: () => void; testID?: string }) {

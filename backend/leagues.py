@@ -1,7 +1,7 @@
-"""Weekly leagues, Monday to Sunday (IST).
+"""Leagues and boards.
 
-Friends League: you and your friends ranked by the week's XP. Gang League: gangs ranked by Gang War points
-(3 for a win, 1 for a tie). Last week's top 3 collect coins once the new week begins.
+Friends League: you and your friends ranked by the week's XP (Monday to Sunday, IST); last week's top 3 collect coins.
+Gang War board: the top 100 scorers of every Gang vs Gang battle ever played (no weekly table).
 """
 import time
 from typing import Optional
@@ -13,10 +13,8 @@ from shop import equipped_of, safe_avatar
 from social import blocked_uids, public_name
 
 FRIEND_PRIZES = (150, 100, 50)
-GANG_PRIZES = (300, 200, 100)
-POINTS = {"wins": 3, "ties": 1, "losses": 0}
-RIVAL_CAP = 3  # wars against the same gang that count for points in one week
 EMPTY = {"xp": 0, "wins": 0, "correct": 0, "matches": 0}
+BOARD_SIZE = 100
 
 
 def week_stats(p: dict, key: str) -> dict:
@@ -28,33 +26,15 @@ def week_stats(p: dict, key: str) -> dict:
     return {**EMPTY, "week": key}
 
 
-def gang_week(g: dict, key: str) -> dict:
-    for field in ("league", "last_league"):
-        s = g.get(field) or {}
-        if s.get("week") == key:
-            return {k: s.get(k, 0) for k in ("pts", "wins", "losses", "ties")}
-    return {"pts": 0, "wins": 0, "losses": 0, "ties": 0}
-
-
 async def record_battle(db, d: dict, win: str):
-    """A Gang War ended: both gangs' all-time record and this week's league points, counted once."""
-    week = ist_week()
-    for side, other in (("a", "b"), ("b", "a")):
-        gid, rival = d["teams"][side]["id"], d["teams"][other]["id"]
-        g = await db.rf_gangs.find_one({"id": gid}, {"league": 1}) or {}
-        lg, rolled = g.get("league") or {}, {}
-        if lg.get("week") != week:
-            rolled = {"last_league": lg} if lg.get("week") else {}
-            lg = {"week": week, "pts": 0, "wins": 0, "losses": 0, "ties": 0, "vs": {}}
+    """A Gang War ended: both gangs' all-time record, counted once."""
+    for side in ("a", "b"):
         result = "ties" if win == "tie" else "wins" if win == "team:" + side else "losses"
-        met = (lg.get("vs") or {}).get(rival, 0)
-        lg = {**lg, result: lg.get(result, 0) + 1, "pts": lg.get("pts", 0) + (POINTS[result] if met < RIVAL_CAP else 0), "vs": {**(lg.get("vs") or {}), rival: met + 1}}
-        await db.rf_gangs.update_one({"id": gid}, {"$set": {"league": lg, **rolled}, "$inc": {result: 1}})
+        await db.rf_gangs.update_one({"id": d["teams"][side]["id"]}, {"$inc": {result: 1}})
 
 
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf/league")
-    live = {"closed": {"$ne": True}}
     last_week = lambda: ist_week(time.time() - 7 * 86400)  # noqa: E731
 
     # ---------- Friends League ----------
@@ -102,51 +82,36 @@ def make_router(db, rf_user):
             raise HTTPException(409, "You already collected this prize.")
         return {"coins": prize, "coins_total": p["coins"]}
 
-    # ---------- Gang League ----------
-    async def gang_table(key):
-        gangs = await db.rf_gangs.find({**live, "$or": [{"league.week": key}, {"last_league.week": key}]},
-                                       {"_id": 0, "id": 1, "name": 1, "emblem": 1, "kind": 1, "members.uid": 1, "league": 1, "last_league": 1}).to_list(3000)
-        rows = [{"id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "members": len(g["members"]), **gang_week(g, key)} for g in gangs]
-        rows.sort(key=lambda x: (-x["pts"], -x["wins"], x["losses"], x["id"]))
-        return [{**x, "rank": i + 1} for i, x in enumerate(rows)]
+    # ---------- Gang War board ----------
+    totals = [{"$match": {"team_mode": True, "status": "finished"}}, {"$unwind": "$players"}, {"$match": {"players.bot": {"$ne": True}}},
+              {"$group": {"_id": "$players.uid", "score": {"$sum": "$players.score"}, "matches": {"$sum": 1},
+                          "wins": {"$sum": {"$cond": [{"$in": ["$players.uid", {"$ifNull": ["$winners", []]}]}, 1, 0]}}}}]
+    order = {"$sort": {"score": -1, "wins": -1, "_id": 1}}
+    top_cache: dict = {}
 
-    async def my_gangs(uid):
-        return {g["id"]: g for g in await db.rf_gangs.find({"members.uid": uid, **live}, {"_id": 0, "id": 1, "name": 1, "emblem": 1, "kind": 1, "members": 1}).to_list(20)}
+    async def top():
+        hit = top_cache.get("t")
+        if hit and time.time() - hit[0] < 20:
+            return hit[1]
+        rows = await db.rf_duels.aggregate([*totals, order, {"$limit": BOARD_SIZE}]).to_list(BOARD_SIZE)
+        top_cache["t"] = (time.time(), rows)
+        return rows
 
-    def gang_prize(row, g, uid):
-        """Top 3 with points, for players who were already in the gang before this week began."""
-        joined = next((m["ts"] for m in g["members"] if m["uid"] == uid), time.time())
-        week_start = time.time() + week_ends_in() - 7 * 86400
-        return GANG_PRIZES[row["rank"] - 1] if row["rank"] <= 3 and row["pts"] > 0 and joined < week_start else 0
-
-    @r.get("/gangs")
-    async def gangs_league(x_rf_user: Optional[str] = Header(None)):
+    @r.get("/gangwar")
+    async def gang_war_board(x_rf_user: Optional[str] = Header(None)):
+        """Everyone who played Gang vs Gang, ranked by the points they scored for their gang. Top 100, all time."""
         uid = rf_user(x_rf_user)
-        mine, week, last = await my_gangs(uid), ist_week(), last_week()
-        rows = [{**x, "mine": x["id"] in mine} for x in await gang_table(week)]
-        final = await gang_table(last)
-        claims = set((await db.rf_profiles.find_one({"uid": uid}, {"league_claims": 1}) or {}).get("league_claims") or [])
-        ranked = {x["id"] for x in rows}
-        unranked = [{"id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "members": len(g["members"]), "pts": 0, "wins": 0, "losses": 0, "ties": 0, "rank": None, "mine": True}
-                    for g in mine.values() if g["id"] not in ranked]
-        return {"week": week, "ends_in": week_ends_in(), "items": rows[:50], "mine": [x for x in rows[50:] if x["mine"]] + unranked,
-                "points": POINTS, "prizes": GANG_PRIZES, "rival_cap": RIVAL_CAP,
-                "last": {"week": last, "items": final[:3],
-                         "prizes": [{"id": x["id"], "name": x["name"], "emblem": x["emblem"], "rank": x["rank"], "prize": gang_prize(x, mine[x["id"]], uid), "claimed": f"g:{x['id']}:{last}" in claims}
-                                    for x in final[:3] if x["id"] in mine and gang_prize(x, mine[x["id"]], uid)]}}
-
-    @r.post("/gangs/{gid}/claim")
-    async def claim_gang(gid: str, x_rf_user: Optional[str] = Header(None)):
-        uid = rf_user(x_rf_user)
-        g, last = (await my_gangs(uid)).get(gid), last_week()
-        row = next((x for x in await gang_table(last) if x["id"] == gid), None) if g else None
-        prize = gang_prize(row, g, uid) if row else 0
-        if not prize:
-            raise HTTPException(409, "No prize here. Your gang must finish the week in the top 3, and you must have been a member that week.")
-        key = f"g:{gid}:{last}"
-        p = await db.rf_profiles.find_one_and_update({"uid": uid, "league_claims": {"$ne": key}}, {"$inc": {"coins": prize}, "$addToSet": {"league_claims": key}}, return_document=True)
-        if not p:
-            raise HTTPException(409, "You already collected this prize.")
-        return {"coins": prize, "coins_total": p["coins"]}
+        rows = await top()
+        profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [x["_id"] for x in rows] + [uid]}}).to_list(len(rows) + 1)}
+        items = [{"rank": i + 1, "pid": (profs.get(x["_id"]) or {}).get("pid"), "name": public_name(profs.get(x["_id"]) or {}), "avatar": safe_avatar((profs.get(x["_id"]) or {}).get("avatar")),
+                  "frame": equipped_of(profs.get(x["_id"]) or {}).get("frame"), "level": level_of((profs.get(x["_id"]) or {}).get("xp", 0)),
+                  "score": x["score"], "matches": x["matches"], "wins": x["wins"], "you": x["_id"] == uid} for i, x in enumerate(rows)]
+        me = next((x for x in items if x["you"]), None)
+        if not me:
+            mine = await db.rf_duels.aggregate([{"$match": {"team_mode": True, "status": "finished", "players.uid": uid}}, *totals[1:], {"$match": {"_id": uid}}]).to_list(1)
+            if mine:
+                ahead = await db.rf_duels.aggregate([*totals, {"$match": {"$or": [{"score": {"$gt": mine[0]["score"]}}, {"score": mine[0]["score"], "wins": {"$gt": mine[0]["wins"]}}]}}, {"$count": "n"}]).to_list(1)
+                me = {"rank": (ahead[0]["n"] if ahead else 0) + 1, "score": mine[0]["score"], "matches": mine[0]["matches"], "wins": mine[0]["wins"]}
+        return {"items": items, "you": {k: me[k] for k in ("rank", "score", "matches", "wins")} if me else None, "size": BOARD_SIZE}
 
     return r

@@ -4,18 +4,19 @@ import { useSegments } from "expo-router";
 import { RF_BASE, rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
+import type { Pick } from "./scope";
 
 // Rapid Fire social data shared by the arena screens: the inbox (presence, challenge banner, notices), friends and gangs.
 export type PlayerCard = { pid: string; name: string; avatar?: string | null; frame?: string | null; entry?: string | null; level: number; online: boolean; seen_ts?: number | null };
 export type GangTag = { id: string; name: string; emblem: string };
 export type GangRow = GangTag & { members: number; online: number; leader: boolean };
-export type ChallengeNote = { id: string; subject: string; chapter?: string | null; expires_in: number; joined: number; seats: number; single: boolean; gang: GangTag | null; from: PlayerCard };
+export type ChallengeNote = { id: string; subject: string; chapter?: string | null; label: string; revenge: boolean; expires_in: number; joined: number; seats: number; single: boolean; gang: GangTag | null;
+  vs?: { a: GangTag; b: GangTag } | null; team?: "a" | "b" | null; from: PlayerCard };
+export type CupNote = { id: string; label: string; size: number; joined: number; expires_in: number; from: PlayerCard };
 export type Notice = { id: string; kind: "friend_added" | "gang_added"; ts: number; gang?: GangTag | null; from: PlayerCard };
-export type Inbox = { me: PlayerCard; room: string | null; challenges: ChallengeNote[]; notices: Notice[] };
+export type Inbox = { me: PlayerCard; room: string | null; cup: string | null; cups: CupNote[]; challenges: ChallengeNote[]; notices: Notice[] };
 export type Friend = PlayerCard & { follows_you: boolean };
 
-// The subject and chapter chosen on the lobby stage; challenges start from the same choice.
-export const selection = { subject: "Physics", chapter: "" };
 export const shortSubject = (s?: string) => (s === "Mathematics" ? "Maths" : s || "");
 export const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.max(0, s % 60)).padStart(2, "0")}`;
 export const ordinal = (n: number) => `${n}${["th", "st", "nd", "rd"][n % 10 > 3 || Math.floor(n / 10) === 1 ? 0 : n % 10]}`;
@@ -82,10 +83,17 @@ export const go = {
   challenge: (params: { pid?: string; gang?: string } = {}) => ({ pathname: "/rapid/challenge", params }) as any,
   /** A Match Room, or straight into the match when it has already started. */
   room: (room: { id: string; duel_id?: string | null }) => (room.duel_id ? go.duel({ did: room.duel_id }) : ({ pathname: "/rapid/room/[cid]", params: { cid: room.id } }) as any),
+  cups: () => "/rapid/cup" as any,
+  cup: (cid: string) => ({ pathname: "/rapid/cup/[cid]", params: { cid } }) as any,
+  watch: (did: string) => ({ pathname: "/rapid/watch/[did]", params: { did } }) as any,
 };
-/** Send a challenge to one friend, several friends, a whole gang, or everyone from a finished match (rematch). */
-export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: string; rematch_of?: string; subject: string; chapter?: string | null }) =>
-  rf<any>("/challenges", uid, { method: "POST", body: { ...body, chapter: body.chapter || null } });
+/** Send a challenge to one friend, several friends, a whole gang, a rival gang (Gang War), or everyone from a finished match (rematch, Badla). */
+export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: string; rival_gang_id?: string; rematch_of?: string; picks?: Pick[] }) =>
+  rf<any>("/challenges", uid, { method: "POST", body });
+
+// Matches your friends and gang mates are playing right now, to watch live.
+export type LiveMatch = { id: string; label: string; cup: boolean; started: boolean; total: number; teams: string[] | null; players: { name: string; avatar?: string | null; frame?: string | null; score: number; answered: number }[] };
+export const useLiveMatches = (uid?: string) => useCached<{ items: LiveMatch[] }>(uid ? `u.${uid}.rflive` : null, () => rf("/duels/live", uid!), false);
 /** "5 min ago", "3 h ago", "2 d ago" for a time given in seconds. */
 export const ago = (ts: number) => {
   const min = Math.max(1, Math.round((Date.now() / 1000 - ts) / 60));

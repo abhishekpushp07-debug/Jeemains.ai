@@ -153,7 +153,7 @@ def test_solo_session_partial_then_reopen_no_duplicate_credit(state):
     )
     assert create.status_code == 200
     payload = create.json()
-    assert payload.get("seconds_per_card") == 20
+    assert payload.get("seconds_per_card") == 15  # solo cards are 15 s since iteration 61
     cards = payload.get("cards") or []
     assert len(cards) == 30
     sid = payload["id"]
@@ -307,6 +307,9 @@ def test_duel_invite_join_and_full_30_cards_with_rewards(state, mongo_db):
     duel_a = create.json()
     did, code = duel_a["id"], duel_a.get("code")
     assert isinstance(code, str) and len(code) == 6
+    # Duel codes only work between friends (Phase 3): make A and B friends first.
+    for x, y in ((state["a"]["uid"], state["b"]["uid"]), (state["b"]["uid"], state["a"]["uid"])):
+        mongo_db.rf_friends.update_one({"uid": x, "fid": y}, {"$setOnInsert": {"ts": time.time()}}, upsert=True)
 
     join = requests.post(
         f"{BASE_URL}/api/rf/duels/join",

@@ -550,3 +550,15 @@ iteration49_main_final:
   preservation: "TemporaryUI3profiles/grants/matchesexact-UIDcleaned;grantfilesdeleted. iter43_baseline_guard_checkPASS:344originalprofiles,10257coins,originalwalletownership+archive fingerprints unchanged. PIN/sourcecontents/artworks/DBschema/env/nativeengineunchanged."
   limitations: "P0physicalAndroidimagecache/decode/WebView/timingQA stillrequired; no signedAPK/AAB (<20MBunverified). NativeStore API-sim/realIndexedDB deepertests notnewlyperformed beyondexistinghelpertests. Externalcanonical503/520 persists; DONOTautoretrycookie-rotatingauth/session/PIN. No worldbest/instant/FPS claim."
   reports: "test_reports/iteration_48.json,iteration_49.json,iteration_49_main_followup.json;reference/ITER49_NATIVE_LOADING.md;memory/PRD.md latestsection."
+## Iteration62 — Rapid Fire Phase 3 (frontend wiring + Badla flow)
+test_plan_iter62:
+  current_focus:
+    - "Lobby: subject chips (Physics/Chemistry/Maths/PCM, one row at 390 and 320), battleground ribbon opens ScopeSheet (max 5 picks, Quick Mix, chapter tabs, search, tray, card count, 5-pick warning)"
+    - "Knockout Cup hub /rapid/cup: Open vs Friends, 4/8/16 sizes, battleground, prizes strip, watch-with-code, Your cups list; lobby seats/progress/countdown/watch code; bracket with auto-scroll, BYE/TBD, champion"
+    - "Live spectating /rapid/watch/[did]: LiveStrip in lobby and cup hub, watch codes (max 100)"
+    - "Badla lo: user choice = choose subject/chapter again FIRST, then same opponent gets the challenge. Entry points: MatchResult (lost 1v1 vs friend), player profile player-badla, h2h sheet h2h-badla-top / h2h-badla-<id>. Sheet testID rf-badla-sheet, done rf-scope-done (label SEND BADLA). Backend POST /api/rf/challenges {rematch_of, picks} uses the new picks; without picks keeps the old scope."
+    - "Trophy tab Ranks: All India / Friends (weekly league, claim) / Gang War top 100 boards"
+    - "Gang form: Gang vs Batch segment; Gang War sheet in gang screen"
+agent_communication_iter62:
+  - agent: main
+    message: "Backend tests/test_rf_phase3.py 7/7 pass (run with -o addopts=). Login 7004186276 / PIN 5524 (web). Fixture: python /app/tests/rf_social_fixture.py seed|cleanup (adds 3 TEST friends + 4 h2h matches vs Aarav incl. 1 lost). Clean up after testing."

@@ -12,6 +12,7 @@ import { Pop } from "@/src/rapid/juice";
 import { Face, PersonRow } from "@/src/rapid/parts";
 import { ErrorBox, withRapid } from "@/src/rapid/ui";
 import { clock, go, refreshInbox, roomLink, sendWhatsApp, shortSubject } from "@/src/rapid/social";
+import { encodePicks } from "@/src/rapid/scope";
 
 const STATUS: Record<string, [string, string]> = {
   sent: ["Sent", arena.faint], seen: ["Seen", arena.aqua], joined: ["Joined ✓", arena.online], declined: ["Declined", arena.danger], left: ["Left", arena.danger],
@@ -67,11 +68,13 @@ function Room() {
   }, [status, room?.my_status])); // eslint-disable-line react-hooks/exhaustive-deps
 
   const left = room ? Math.max(0, Math.round(room.expires_in - (Date.now() - fetchedAt.current) / 1000)) : 0;
-  const seated = room ? [{ ...room.host, you: room.is_host, host: true }, ...room.players.filter((p: any) => p.status === "joined")].slice(0, room.seats) : [];
+  const seats = room?.single ? 2 : room?.seats || 0; // a 1 v 1 challenge has one seat for the friend, not five
+  const seated = room ? [{ ...room.host, you: room.is_host, host: true }, ...room.players.filter((p: any) => p.status === "joined")].slice(0, seats) : [];
   const invited = room?.players || [];
   const guest = room && !room.is_host, joined = room?.my_status === "joined";
-  const title = room?.gang ? room.gang.name : room?.single ? "1 v 1 Challenge" : "Match Room";
-  const remind = () => sendWhatsApp(`⚔️ Join my Rapid Fire match on JEECIRCLE.AI! ${room.subject} · 30 cards · 15 s each.\nTake your seat before the timer runs out: ${roomLink(cid)}`);
+  const title = room?.gang ? room.gang.name : room?.revenge ? "Badla lo! 🔥" : room?.single ? "1 v 1 Challenge" : "Match Room";
+  const label = room?.label || (room ? `${shortSubject(room.subject)} · ${room.chapter || "Mixed chapters"}` : "");
+  const remind = () => sendWhatsApp(`${room.revenge ? "🔥 Badla time! Rematch me" : "⚔️ Join my Rapid Fire match"} on JEECIRCLE.AI! ${label} · 30 cards · 15 s each.\nTake your seat before the timer runs out: ${roomLink(cid)}`);
 
   return <ArenaBg testID="room-screen">
     <View style={[styles.frame, { paddingTop: insets.top + 6, paddingBottom: insets.bottom + 10 }]}>
@@ -79,7 +82,7 @@ function Room() {
         <CloseButton testID="room-close" label={room?.is_host ? "Cancel challenge" : "Leave room"} onPress={close} />
         <View style={styles.flex}>
           <GoldTitle testID="room-title">{title}</GoldTitle>
-          {room ? <T testID="room-meta" w="bold" size={12} color={arena.aqua} numberOfLines={1}>{shortSubject(room.subject)} · {room.chapter || "Mixed chapters"}</T> : null}
+          {room ? <T testID="room-meta" w="bold" size={12} color={arena.aqua} numberOfLines={1}>{label}</T> : null}
         </View>
         {room?.gang ? <Emblem id={room.gang.emblem} size={46} /> : <GameIcon name="swords" size={42} />}
       </View>
@@ -90,24 +93,31 @@ function Room() {
           <GameIcon name="rival" size={92} />
           <GoldTitle size={26} center testID="room-closed-title">{(CLOSED[status] || CLOSED.cancelled)[0]}</GoldTitle>
           <T size={13} color={arena.muted} style={styles.center}>{(CLOSED[status] || CLOSED.cancelled)[1]}</T>
-          <RaisedButton testID="room-quick-match" icon="swords" height={60} label="Quick Match" sub="A rival is always ready" onPress={() => router.replace(go.duel({ mode: "random", subject: room.subject, chapter: room.chapter || "", r: uuid() }))} style={styles.stretch} />
+          <RaisedButton testID="room-quick-match" icon="swords" height={60} label="Quick Match" sub="A rival is always ready" onPress={() => router.replace(go.duel({ mode: "random", picks: encodePicks(room.picks || [{ subject: room.subject, chapter: room.chapter || null }]), r: uuid() }))} style={styles.stretch} />
           {room.is_host ? <RaisedButton testID="room-send-again" tone="wine" label="Send again" onPress={() => router.replace(go.challenge(room.gang ? { gang: room.gang.id } : {}))} style={styles.stretch} /> : null}
           <RaisedButton testID="room-back" tone="wine" label="Back to the Arena" onPress={back} style={styles.stretch} />
         </View>
         : <>
           <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+            {room.revenge ? <Panel testID="room-revenge" style={styles.revenge}>
+              <GameIcon name="flame" size={44} />
+              <View style={styles.flex}>
+                <T w="heavy" size={15} color={arena.gold}>{room.is_host ? "BADLA LO!" : `${room.host.name} wants revenge!`}</T>
+                <T w="bold" size={12} color={arena.text}>{room.is_host ? "You lost the last one. Win this and take it back." : "They lost the last match to you. Defend your win!"}</T>
+              </View>
+            </Panel> : null}
             <Panel gold style={styles.clock}>
-              <T w="heavy" size={12} color={arena.aqua} style={styles.spaced}>{room.single ? "WAITING FOR YOUR FRIEND" : `${room.joined} / ${room.seats} JOINED`}</T>
+              <T w="heavy" size={12} color={arena.aqua} style={styles.spaced}>{room.single ? "WAITING FOR YOUR FRIEND" : `${room.joined} / ${seats} JOINED`}</T>
               <T testID="room-countdown" w="heavy" size={46} color={left <= 30 ? arena.danger : arena.gold}>{clock(left)}</T>
               <T size={12} color={arena.muted} style={styles.center}>{room.single ? "The match starts the moment they accept." : "Starts on START, when all 5 seats fill, or when the timer ends."}</T>
             </Panel>
-            <View style={styles.seats} testID="room-seats">
+            <View style={[styles.seats, room.single && styles.seatsDuo]} testID="room-seats">
               {seated.map((p: any) => <Pop key={p.pid} style={styles.seat}>
                 <Face p={p} size={54} />
                 <T w="heavy" size={11} color={p.you ? arena.gold : arena.text} numberOfLines={1}>{p.you ? "You" : p.name}</T>
                 <T w="bold" size={9} color={arena.aqua}>{p.host ? "HOST" : "READY"}</T>
               </Pop>)}
-              {Array.from({ length: room.seats - seated.length }, (_, i) => <View key={i} style={styles.seat}>
+              {Array.from({ length: Math.max(0, seats - seated.length) }, (_, i) => <View key={i} style={styles.seat}>
                 <View style={styles.empty}><T w="heavy" size={22} color={arena.faint}>?</T></View>
                 <T w="bold" size={11} color={arena.faint}>Open</T>
               </View>)}
@@ -126,7 +136,7 @@ function Room() {
               {joined ? <T testID="room-waiting-host" w="bold" size={13} color={arena.aqua} style={styles.center}>You’re in! Waiting for {room.host.name} to start…</T> : null}
               <View style={styles.row}>
                 <RaisedButton testID={room.is_host ? "room-cancel" : "room-leave"} tone="wine" label={room.is_host ? "Cancel" : "Leave"} busy={busy === "cancel" || busy === "leave"} disabled={!!busy} onPress={close} style={styles.flex} />
-                <RaisedButton testID="room-remind" glyph="whatsapp" label="Remind on WhatsApp" onPress={remind} style={styles.wide} />
+                <RaisedButton testID="room-remind" glyph="whatsapp" label="Remind" onPress={remind} style={styles.wide} />
               </View>
             </>}
           </View>
@@ -138,11 +148,12 @@ function Room() {
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, wide: { flex: 1.6 }, stretch: { alignSelf: "stretch" }, center: { textAlign: "center" }, spaced: { letterSpacing: 2 },
   frame: { flex: 1, width: "100%", maxWidth: 560, alignSelf: "center" },
+  revenge: { flexDirection: "row", alignItems: "center", gap: 12, padding: 12, borderColor: arena.danger },
   top: { flexDirection: "row", alignItems: "center", gap: 12, paddingHorizontal: 16, minHeight: 56 },
   middle: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12, paddingHorizontal: 20 },
   content: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 16, gap: 12 },
   clock: { alignItems: "center", padding: 16, gap: 2 },
-  seats: { flexDirection: "row", justifyContent: "space-between" }, seat: { width: "19%", alignItems: "center", gap: 2 },
+  seats: { flexDirection: "row", justifyContent: "space-between" }, seatsDuo: { justifyContent: "center", gap: 40 }, seat: { width: "19%", alignItems: "center", gap: 2 },
   empty: { width: 54, height: 54, borderRadius: 27, alignItems: "center", justifyContent: "center", borderWidth: 2, borderStyle: "dashed", borderColor: arena.rimHi, backgroundColor: arena.panelEdge },
   dock: { paddingHorizontal: 16, paddingTop: 8, gap: 10 }, row: { flexDirection: "row", gap: 10 },
 });

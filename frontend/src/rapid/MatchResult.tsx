@@ -10,12 +10,14 @@ import { GameIcon, PhoenixDiamond } from "./Art";
 import { GoldTitle, Panel, RaisedButton, SectionTitle } from "./arena";
 import { RapidDiagram } from "./Diagram";
 import { Confetti, Jelly, Twinkles } from "./juice";
-import { MatchPlayer, Podium, shownName } from "./MatchParts";
+import { MatchPlayer, Podium, TeamBar, shownName } from "./MatchParts";
 import { Note, PersonRow } from "./parts";
 import { RapidText } from "./RapidText";
 import { DiamondsWon } from "./StreakGem";
 import { ErrorBox } from "./ui";
 import { go, ordinal, sendChallenge, useFriends } from "./social";
+import { encodePicks } from "./scope";
+import { useBadla } from "./HeadToHead";
 
 const MISS: Record<string, string> = { timed_out: "Timed out", skipped: "Skipped" };
 
@@ -31,17 +33,24 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
   const humans = others.filter((p) => !p.bot && p.pid);
   const friendPids = new Set((friends.data?.items || []).map((f) => f.pid));
   // A Match Room can be called again as it was. Outside one, only friends can be called back (friends are made with a Friend Code).
-  const callBack = humans.length > 0 && (d.mode === "friend" || humans.some((p) => friendPids.has(p.pid!)));
+  const callBack = !d.cup_id && humans.length > 0 && (d.mode === "friend" || humans.some((p) => friendPids.has(p.pid!)));
+  // Lost a 1 v 1 to a friend: the button becomes "Badla lo" (choose the battleground again, then the same friend is challenged).
+  const badla = callBack && !group && !won && !tie;
+  const team = d.team_mode ? d.teams : null, teamWon = team && d.winner === `team:${d.my_team}`;
   const mine = me?.answers || [];
   const missed = (d.cards as any[]).map((c, k) => ({ c, k, a: mine[k] })).filter((x) => x.a?.outcome !== "correct");
   const open = (pid: string) => router.push(go.player(pid));
+  const revenge = useBadla(uid, { replace: true });
 
   const again = async () => {
+    // Badla lo: choose the battleground again first, then the same friend gets the challenge.
+    if (badla) { revenge.badla(d.id, d.picks, opp ? shownName(opp) : undefined); return; }
     setBusy("again"); setError("");
     try {
       // Friends get a new Match Room with everyone invited; anybody else is simply a fresh match.
-      if (callBack) router.replace(go.room(await sendChallenge(uid, { rematch_of: d.id, subject: d.subject, chapter: d.chapter })));
-      else router.replace(go.duel({ mode: d.mode === "random" ? "random" : "ai", subject: d.subject, chapter: d.chapter || "", r: uuid() }));
+      if (d.cup_id) router.replace(go.cup(d.cup_id));
+      else if (callBack) router.replace(go.room(await sendChallenge(uid, { rematch_of: d.id })));
+      else router.replace(go.duel({ mode: d.mode === "random" ? "random" : "ai", picks: encodePicks(d.picks || [{ subject: d.subject, chapter: d.chapter }]), r: uuid() }));
     } catch (e: any) { setError(e.message); setBusy(""); }
   };
 
@@ -53,7 +62,9 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
           <Twinkles spots={[[10, 16, 16], [90, 20, 13], [50, 2, 12], [22, 84, 10], [80, 80, 12]]} />
         </View> : <GameIcon name={tie ? "swords" : "flame"} size={88} testID="duel-result-art" />}
         <GoldTitle size={won ? 42 : 34} center testID="duel-outcome">{won ? "VICTORY" : tie ? "IT’S A TIE" : "GOOD FIGHT"}</GoldTitle>
-        {group ? <T testID="duel-final-place" w="heavy" size={16} color={arena.aqua}>{ordinal(me?.rank || 1)} of {players.length} · {me?.score ?? 0} correct</T>
+        {d.cup_id ? <T testID="duel-cup-note" w="heavy" size={13} color={arena.gold}>{won ? "You go through to the next round!" : "Knocked out of the cup. Watch the rest live!"}</T> : null}
+        {team ? <View style={styles.stretch}><TeamBar teams={team} mine={d.my_team} /><T testID="duel-team-outcome" w="heavy" size={13} color={teamWon ? arena.gold : arena.muted} style={styles.center}>{d.winner === "tie" ? "The gangs are level" : teamWon ? "Your gang wins the war!" : "Your gang lost this war"}</T></View>
+          : group ? <T testID="duel-final-place" w="heavy" size={16} color={arena.aqua}>{ordinal(me?.rank || 1)} of {players.length} · {me?.score ?? 0} correct</T>
           : <View testID="duel-final-score" style={styles.versus}>
             <View style={styles.side}><Avatar icon={me?.avatar} frame={me?.frame} size={54} /><T w="heavy" size={12} color={arena.gold} numberOfLines={1}>You</T></View>
             <View style={styles.score}>
@@ -106,18 +117,19 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
     </ScrollView>
 
     <View style={styles.dock}>
-      <ErrorBox testID="duel-result-error" error={error} />
+      <ErrorBox testID="duel-result-error" error={error || revenge.error} />
       <View style={styles.row}>
         <RaisedButton testID="duel-done" tone="wine" label="Done" height={58} disabled={busy === "again"} onPress={onDone} style={styles.flex} />
-        <RaisedButton testID="duel-rematch" icon="swords" height={58} streak label={callBack ? "REMATCH" : "PLAY AGAIN"} busy={busy === "again"} disabled={!!busy} onPress={again} style={styles.wide} />
+        {historical && d.cup_id ? null : <RaisedButton testID="duel-rematch" icon={badla ? "flame" : d.cup_id ? "trophy" : "swords"} height={58} streak label={d.cup_id ? "BACK TO CUP" : badla ? "BADLA LO" : callBack ? "REMATCH" : "PLAY AGAIN"} busy={busy === "again" || !!revenge.busy} disabled={!!busy || !!revenge.busy} onPress={again} style={styles.wide} />}
       </View>
+      {revenge.sheet}
     </View>
     {won && !historical ? <Confetti count={36} /> : null}
   </View>;
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, minWidth: 0 }, wide: { flex: 1.7 }, center: { textAlign: "center" }, row: { flexDirection: "row", gap: 10 }, list: { gap: 8 },
+  flex: { flex: 1, minWidth: 0 }, wide: { flex: 1.7 }, center: { textAlign: "center" }, stretch: { alignSelf: "stretch", gap: 6 }, row: { flexDirection: "row", gap: 10 }, list: { gap: 8 },
   content: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 16, gap: 14 },
   hero: { alignItems: "center", gap: 6, paddingVertical: 18, paddingHorizontal: 14 },
   versus: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", alignSelf: "stretch", gap: 6 }, side: { width: 78, alignItems: "center", gap: 4 },

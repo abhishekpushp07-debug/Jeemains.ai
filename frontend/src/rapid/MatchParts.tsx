@@ -4,6 +4,7 @@ import Animated, { ZoomIn, useReducedMotion } from "react-native-reanimated";
 import { T } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
 import { arena } from "@/src/theme";
+import { Emblem } from "./Art";
 import { Jelly, Pop } from "./juice";
 import { RivalGem, StreakGem } from "./StreakGem";
 import { ordinal } from "./social";
@@ -82,6 +83,21 @@ export function Lineup({ players }: { players: MatchPlayer[] }) {
   </View>;
 }
 
+type Team = { id: string; name: string; emblem: string; score: number; counted?: number; players?: number };
+/** Gang vs Gang: both gangs' running totals (each side's best N scores count, N = the smaller side). */
+export function TeamBar({ teams, mine }: { teams?: Record<"a" | "b", Team> | null; mine?: "a" | "b" | null }) {
+  if (!teams) return null;
+  const me = mine || "a", them = me === "a" ? "b" : "a", us = teams[me], rival = teams[them];
+  const lead = us.score - rival.score;
+  return <View testID="duel-team-bar" style={styles.team}>
+    <Emblem id={us.emblem} size={34} />
+    <View style={styles.flex}><T w="heavy" size={11} color={arena.gold} numberOfLines={1}>{us.name}</T><T testID="duel-team-mine" w="heavy" size={22} color={arena.gold}>{us.score}</T></View>
+    <View style={[styles.vs, lead > 0 && styles.vsUp]}><T w="heavy" size={11} color={arena.badgeInk}>{lead > 0 ? `+${lead}` : lead < 0 ? `${lead}` : "VS"}</T></View>
+    <View style={[styles.flex, styles.end]}><T w="heavy" size={11} color={arena.text} numberOfLines={1}>{rival.name}</T><T testID="duel-team-theirs" w="heavy" size={22} color={arena.text}>{rival.score}</T></View>
+    <Emblem id={rival.emblem} size={34} />
+  </View>;
+}
+
 const STEP = [92, 66, 48];
 /** 1st, 2nd and 3rd of a 3 to 5 player match. Tapping a player opens their profile. */
 export function Podium({ players, onOpen }: { players: MatchPlayer[]; onOpen?: (pid: string) => void }) {
@@ -111,6 +127,8 @@ const styles = StyleSheet.create({
   track: { height: 6, alignSelf: "stretch", borderRadius: 3, backgroundColor: arena.panelEdge, overflow: "hidden" }, fill: { height: "100%", borderRadius: 3 },
   vs: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center", backgroundColor: arena.gold, borderWidth: 2, borderColor: arena.goldDeep },
   cells: { flexDirection: "row", gap: 6 },
+  team: { flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 18, backgroundColor: arena.panelHi, borderWidth: 1.5, borderColor: arena.gold },
+  vsUp: { backgroundColor: arena.online, borderColor: arena.tealDeep },
   cell: { flex: 1, minWidth: 0, alignItems: "center", gap: 1, paddingVertical: 6, paddingHorizontal: 2, borderRadius: 14, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },
   cellYou: { borderColor: arena.gold, backgroundColor: arena.panelHi }, gone: { opacity: 0.45 },
   scoreRow: { flexDirection: "row", alignItems: "center", gap: 6 }, cellGem: { position: "absolute", top: 2, right: 3 },

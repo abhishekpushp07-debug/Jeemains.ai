@@ -19,7 +19,7 @@ from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
 from gamify import BADGES, level_of, vault_total
-from scope import label_for
+from scope import label_for, scope_of
 from shop import equipped_of, safe_avatar
 
 ONLINE_SECONDS = 60
@@ -231,9 +231,10 @@ def make_router(db, rf_user):
         if them != uid:
             out["relation"] = await relation(uid, them)
             both = {"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}}  # head-to-head counts 1 v 1 matches only
-            last = await db.rf_duels.find_one(both, {"_id": 0, "id": 1, "winner": 1}, sort=[("finished_ts", -1)])
+            last = await db.rf_duels.find_one(both, {"_id": 0, "id": 1, "winner": 1, "subject": 1, "chapter": 1, "picks": 1}, sort=[("finished_ts", -1)])
             out["head_to_head"] = {"you": await db.rf_duels.count_documents({**both, "winner": uid}), "them": await db.rf_duels.count_documents({**both, "winner": them}),
-                                   "played": await db.rf_duels.count_documents(both), "last": {"id": last["id"], "won": last.get("winner") == uid, "tie": last.get("winner") == "tie"} if last else None}
+                                   "played": await db.rf_duels.count_documents(both),
+                                   "last": {"id": last["id"], "won": last.get("winner") == uid, "tie": last.get("winner") == "tie", "picks": scope_of(last)} if last else None}
         else:
             out["friend_count"] = await db.rf_friends.count_documents({"uid": uid})
             out["friend_code"] = await friend_code_of(db, uid)
@@ -249,7 +250,7 @@ def make_router(db, rf_user):
         docs = await db.rf_duels.find({"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}},
                                       {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "label": 1, "picks": 1, "winner": 1, "finished_ts": 1, "players.uid": 1, "players.score": 1}).sort("finished_ts", -1).limit(30).to_list(30)
         score = lambda d, u: next((p.get("score", 0) for p in d["players"] if p["uid"] == u), 0)  # noqa: E731
-        return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "label": label_for(d), "you": score(d, uid), "them": score(d, them), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
+        return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "label": label_for(d), "picks": scope_of(d), "you": score(d, uid), "them": score(d, them), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "finished_at": datetime.fromtimestamp(d["finished_ts"], timezone.utc).isoformat()} for d in docs]}
 
     @r.get("/feed")

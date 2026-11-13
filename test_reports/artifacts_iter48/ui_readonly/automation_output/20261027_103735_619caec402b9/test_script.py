@@ -40,7 +40,7 @@ async def run_test(page, output_dir, page_url):
         await page.screenshot(path='/app/test_reports/artifacts_iter48/ui_readonly/automation_output/20261027_103735_619caec402b9/home_320.jpeg', type="jpeg", quality=40, full_page=False)
         print("Step 5: Home loaded at 320")
 
-        await page.goto('https://jeelive-mobile.preview.emergentagent.com/performance')
+        await page.goto('https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/performance')
         await page.wait_for_timeout(3000)
         perf_visible = await page.locator('[data-testid="loading-performance-screen"]').count() > 0
         print(f"Step 6: Performance screen visible: {perf_visible}")

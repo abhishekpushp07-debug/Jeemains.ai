@@ -1,16 +1,54 @@
-import React, { useCallback, useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet, TextInput, View } from "react-native";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
-import { rf } from "@/src/api/client";
+import { RF_BASE, rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { invalidate, useCached } from "@/src/useCached";
 import { T } from "@/src/components/ui";
 import { arena } from "@/src/theme";
 import { Emblem } from "@/src/rapid/Art";
-import { GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena";
+import { GoldTitle, Panel, RaisedButton, SectionTitle, arenaInput } from "@/src/rapid/arena";
 import { InnerScreen, Note, PersonRow } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
-import { go, seenText, shortSubject, useFriends } from "@/src/rapid/social";
+import { scopeLabel, useScope } from "@/src/rapid/scope";
+import { go, sendChallenge, sendWhatsApp, seenText, shortSubject, useFriends } from "@/src/rapid/social";
+
+type Rival = { id: string; name: string; emblem: string; kind: string; members: number; wins: number; losses: number; ties: number };
+
+/** Find a rival gang by its name or gang code, and send the Gang War: my gang against theirs, up to 5 a side. */
+function WarSheet({ uid, gid, onClose, visible }: { uid: string; gid: string; onClose: () => void; visible: boolean }) {
+  const router = useRouter(), picks = useScope();
+  const [q, setQ] = useState(""), [found, setFound] = useState<Rival[] | null>(null), [busy, setBusy] = useState(""), [error, setError] = useState("");
+  const rows = q.trim().length < 2 ? null : found;
+  useEffect(() => {
+    const term = q.trim();
+    if (term.length < 2) return;
+    let live = true;
+    const t = setTimeout(() => { rf<{ items: Rival[] }>(`/gangs/search?q=${encodeURIComponent(term)}`, uid).then((r) => { if (live) setFound(r.items.filter((x) => x.id !== gid)); }).catch((e) => { if (live) setError(e.message); }); }, 350);
+    return () => { live = false; clearTimeout(t); };
+  }, [q, uid, gid]);
+  const war = async (rival: Rival) => {
+    setBusy(rival.id); setError("");
+    try { const room = await sendChallenge(uid, { gang_id: gid, rival_gang_id: rival.id, picks }); onClose(); router.push(go.room(room)); }
+    catch (e: any) { setError(e.message); }
+    finally { setBusy(""); }
+  };
+  return <Sheet visible={visible} onClose={onClose} testID="gang-war-sheet">
+    <GoldTitle size={22}>Gang War</GoldTitle>
+    <T size={13} color={arena.muted}>Your gang against another gang, up to 5 a side, on {scopeLabel(picks)}. Rivals don’t need to be your friends.</T>
+    <TextInput testID="gang-war-search" value={q} onChangeText={setQ} placeholder="Rival gang name or code (G…)" placeholderTextColor={arena.faint} autoCorrect={false} style={arenaInput} />
+    {rows?.map((g) => <View key={g.id} testID={`gang-war-row-${g.id}`} style={styles.match}>
+      <Emblem id={g.emblem} size={44} />
+      <View style={styles.flex}>
+        <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{g.name}</T>
+        <T w="bold" size={11} color={arena.muted}>{g.members} members · {g.wins}W {g.losses}L {g.ties}T</T>
+      </View>
+      <RaisedButton testID={`gang-war-send-${g.id}`} label="Battle" height={42} busy={busy === g.id} disabled={!!busy} onPress={() => war(g)} style={styles.small} />
+    </View>)}
+    {rows && !rows.length ? <Note testID="gang-war-empty">No gang found. Ask the rival leader for their gang code.</Note> : null}
+    <ErrorBox testID="gang-war-error" error={error} />
+  </Sheet>;
+}
 
 const day = (iso?: string) => (iso ? new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "");
 
@@ -21,7 +59,7 @@ function Gang() {
   const q = useCached<any>(uid && gid ? `u.${uid}.rfgang.${gid}` : null, () => rf(`/gangs/${gid}`, uid), false);
   const friends = useFriends(uid);
   const [busy, setBusy] = useState(""), [error, setError] = useState(""), [note, setNote] = useState("");
-  const [sheet, setSheet] = useState<"" | "add" | "more">("");
+  const [sheet, setSheet] = useState<"" | "add" | "more" | "war">("");
   const reload = q.reload;
   useFocusEffect(useCallback(() => { reload(); }, [reload]));
   const g = q.data;
@@ -47,8 +85,17 @@ function Gang() {
       <Panel gold testID="gang-card" style={styles.card}>
         <Emblem id={g.emblem} size={104} testID="gang-emblem" />
         <GoldTitle size={26} center testID="gang-name">{g.name}</GoldTitle>
-        <T w="bold" size={13} color={g.online ? arena.online : arena.muted}>{g.online} online now</T>
+        <T w="bold" size={13} color={g.online ? arena.online : arena.muted}>{g.kind === "batch" ? "Coaching batch · " : ""}{g.online} online now</T>
+        <View style={styles.record} testID="gang-record">
+          {([["WINS", g.record.wins], ["LOSSES", g.record.losses], ["TIES", g.record.ties]] as const).map(([k, v]) => <View key={k} style={styles.stat}><T w="heavy" size={20} color={arena.gold}>{v}</T><T w="bold" size={9} color={arena.muted}>{k}</T></View>)}
+        </View>
+        <T testID="gang-code" w="bold" size={11} color={arena.aqua}>Gang code {g.id} · rivals use it to find you</T>
       </Panel>
+      <View style={styles.row}>
+        <RaisedButton testID="gang-war" icon="gang" label="GANG WAR" sub="vs another gang" height={56} onPress={() => setSheet("war")} style={styles.flex} />
+        <RaisedButton testID="gang-invite-link" tone="wine" glyph="whatsapp" label="Invite link" sub={g.kind === "batch" ? "anyone can join" : "for friends of members"} height={56}
+          onPress={() => sendWhatsApp(`Join ${g.name} on JEECIRCLE.AI Rapid Fire and battle other gangs with us!\n${RF_BASE}/g/${g.id}/${g.invite_code}`)} style={styles.flex} />
+      </View>
       <View style={styles.row}>
         <RaisedButton testID="gang-add-friends" label="Add friends" icon="friends" disabled={g.members.length >= g.max} onPress={() => { setNote(""); setSheet("add"); }} style={styles.flex} />
         <RaisedButton testID="gang-more" tone="wine" label={g.is_leader ? "Manage" : "Leave / Report"} onPress={() => setSheet("more")} style={styles.flex} />
@@ -63,7 +110,7 @@ function Gang() {
       <SectionTitle title="Last gang matches" />
       {g.recent.map((m: any) => <View key={m.id} testID={`gang-match-${m.id}`} style={styles.match}>
         <View style={styles.flex}>
-          <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{m.winner === "Tie" ? "Tie" : `${m.winner} won`} · {m.players} players</T>
+          <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{m.battle ? `${m.battle.won ? "WON" : m.battle.us === m.battle.them ? "TIE" : "LOST"} ${m.battle.us}–${m.battle.them} vs ${m.battle.rival}` : `${m.winner === "Tie" ? "Tie" : `${m.winner} won`} · ${m.players} players`}</T>
           <T w="bold" size={11} color={arena.muted} numberOfLines={1}>{shortSubject(m.subject)} · {m.chapter || "Mixed"} · {day(m.finished_at)}</T>
         </View>
         {m.you_played ? <RaisedButton testID={`gang-match-open-${m.id}`} tone="wine" label="View" height={40} onPress={() => router.push(go.duel({ review: m.id }))} style={styles.small} /> : null}
@@ -71,6 +118,7 @@ function Gang() {
       {!g.recent.length ? <Note testID="gang-matches-empty">No gang match yet. Challenge the gang and start the rivalry!</Note> : null}
     </>}
 
+    {g ? <WarSheet uid={uid} gid={gid} visible={sheet === "war"} onClose={() => setSheet("")} /> : null}
     <Sheet visible={sheet === "add"} onClose={() => setSheet("")} testID="gang-add-sheet">
       <GoldTitle size={20}>Add your friends</GoldTitle>
       {note ? <T testID="gang-add-note" w="bold" size={13} color={arena.aqua}>{note}</T> : null}
@@ -95,6 +143,7 @@ function Gang() {
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, row: { flexDirection: "row", gap: 10 }, small: { width: 92 },
   card: { alignItems: "center", gap: 4, padding: 18 },
+  record: { flexDirection: "row", gap: 8, marginTop: 6 }, stat: { width: 76, alignItems: "center", paddingVertical: 6, borderRadius: 14, backgroundColor: arena.panelEdge, borderWidth: 1, borderColor: arena.rim },
   match: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 58, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 16, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },
 });
 

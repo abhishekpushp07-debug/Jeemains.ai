@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, BackHandler, ScrollView, StyleSheet, View } from "react-native";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import * as Clipboard from "expo-clipboard";
 import Animated, { FadeIn, ZoomIn, useReducedMotion } from "react-native-reanimated";
 import { RF_BASE, rapidAccess, rf, uuid } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
@@ -12,22 +11,23 @@ import { Avatar, EntryShow } from "@/src/components/Entry";
 import { playSfx } from "@/src/sfx";
 import { arena, rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 import { GameIcon, GemColor } from "@/src/rapid/Art";
-import { ArenaBg, CloseButton, GoldTitle, Panel, RaisedButton } from "@/src/rapid/arena";
+import { ArenaBg, CloseButton, GoldTitle, RaisedButton } from "@/src/rapid/arena";
 import { RapidDiagram } from "@/src/rapid/Diagram";
 import { Radar } from "@/src/rapid/juice";
-import { Lineup, MatchPlayer, ScoreStrip, shownName } from "@/src/rapid/MatchParts";
+import { Lineup, MatchPlayer, ScoreStrip, TeamBar, shownName } from "@/src/rapid/MatchParts";
 import { MatchResult } from "@/src/rapid/MatchResult";
 import { RapidText } from "@/src/rapid/RapidText";
 import { GemFlare, gemAt, trailingStreak } from "@/src/rapid/StreakGem";
 import { ErrorBox, Icon, Press, Sheet, T, buzz, tap, withRapid } from "@/src/rapid/ui";
-import { go, sendWhatsApp, shortSubject } from "@/src/rapid/social";
+import { go } from "@/src/rapid/social";
+import { encodePicks, picksFrom, scopeLabel } from "@/src/rapid/scope";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
-type Params = { mode?: "random" | "invite" | "join" | "ai"; subject?: string; chapter?: string; code?: string; review?: string; did?: string };
+type Params = { mode?: "random" | "ai"; subject?: string; chapter?: string; picks?: string; review?: string; did?: string };
 
 function Duel() {
   const p = useLocalSearchParams();
-  return <Match key={JSON.stringify([p.r, p.did, p.review, p.mode, p.code, p.subject, p.chapter])} />;
+  return <Match key={JSON.stringify([p.r, p.did, p.review, p.mode, p.subject, p.chapter, p.picks])} />;
 }
 
 /**
@@ -48,7 +48,7 @@ function Match() {
   const [clock, setClock] = useState(0);
   const [streak, setStreak] = useState(0);
   const [flare, setFlare] = useState<GemColor | null>(null);
-  const [exit, setExit] = useState(false), [copied, setCopied] = useState(false), [n, setN] = useState(0);
+  const [exit, setExit] = useState(false), [n, setN] = useState(0);
   const reqId = useRef(uuid());
   const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const anchor = useRef({ server: 0, mono: 0 });
@@ -60,15 +60,15 @@ function Match() {
   useEffect(() => {
     let alive = true;
     if (!uid) return; // wait for sign-in to settle (a cold link would get a 401)
-    const create = (mode: "random" | "invite") => rf<any>("/duels", uid, { method: "POST", body: { exam: "JEE", subject: p.subject || "Physics", chapter: p.chapter || null, mode, name, request_id: reqId.current } });
+    const picks = picksFrom(p);
+    const create = (mode: "random" | "invite") => rf<any>("/duels", uid, { method: "POST", body: { exam: "JEE", subject: picks[0].subject, picks, mode, name, request_id: reqId.current } });
     const run = p.review || p.did ? rf<any>(`/duels/${p.review || p.did}`, uid)
-      : p.mode === "join" ? rf<any>("/duels/join", uid, { method: "POST", body: { code: p.code || "", name, exam: "JEE" } })
       // Practice Rival: open a private match and seat the rival at once, no waiting.
       : p.mode === "ai" ? create("invite").then((v) => (v.status === "waiting" ? rf<any>(`/duels/${v.id}/bot`, uid, { method: "POST", body: {} }) : v))
-      : create(p.mode === "invite" ? "invite" : "random");
+      : create("random");
     run.then((v) => alive && apply(v)).catch((e) => alive && setError(e.message));
     return () => { alive = false; };
-  }, [p.mode, p.code, p.subject, p.chapter, p.review, p.did, uid, name, apply, n]);
+  }, [p.mode, p.subject, p.chapter, p.picks, p.review, p.did, uid, name, apply, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Quick Match never leaves a student waiting alone: after a short search a practice rival takes the seat.
   useEffect(() => {
@@ -178,7 +178,8 @@ function Match() {
     buzz(won ? "success" : "warning");
   }, [d?.status, uid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const back = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/rapid"));
+  // A cup match opened from a link has nothing behind it: go to its bracket, not the lobby.
+  const back = () => (router.canGoBack() ? router.back() : router.replace(d?.cup_id ? go.cup(d.cup_id) : "/(tabs)/rapid"));
   const leave = () => {
     if (d?.status === "waiting") rf(`/duels/${d.id}/cancel`, uid, { method: "POST", body: {} }).catch(() => {});
     back();
@@ -190,37 +191,34 @@ function Match() {
     return () => sub.remove();
   }, [inMatch, d?.status])); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const subject = d?.subject || p.subject || "Physics", chapter = d?.chapter || p.chapter || "";
-  const tint = subjectColor(subject);
-  const quick = () => router.replace(go.duel({ mode: "random", subject, chapter, r: uuid() }));
+  const subject = d?.subject || p.subject || "Physics";
+  const picks = d?.picks || picksFrom(p), label = d?.label || scopeLabel(picks);
+  const tint = subjectColor(card?.subject || subject);
+  const quick = () => router.replace(go.duel({ mode: "random", picks: encodePicks(picks), r: uuid() }));
   // On your own phone you enter first, then the others in the order they joined.
   const entrants = me ? [me, ...players.filter((x) => !x.you)] : players;
 
   let body: React.ReactNode = null;
   if (!d) {
     body = error ? <View style={styles.middle}><ErrorBox testID="duel-error" error={error} retry={() => { setError(""); setN((x) => x + 1); }} /><RaisedButton testID="duel-back" tone="wine" label="Back to the Arena" onPress={back} style={styles.stretch} /></View>
-      : <View style={styles.middle} testID="duel-loading"><ActivityIndicator color={arena.aqua} size="large" /><T w="bold" color={arena.muted}>{p.mode === "join" ? "Joining the match…" : "Setting up your match…"}</T></View>;
+      : <View style={styles.middle} testID="duel-loading"><ActivityIndicator color={arena.aqua} size="large" /><T w="bold" color={arena.muted}>Setting up your match…</T></View>;
   } else if (d.status === "waiting" && d.mode === "random") {
     body = <View style={styles.middle} testID="duel-waiting">
       <Radar size={250}><Avatar icon={me?.avatar} frame={me?.frame} size={104} /></Radar>
       <GoldTitle size={26} center testID="duel-searching">Finding a rival…</GoldTitle>
-      <T w="bold" size={13} color={arena.aqua} style={styles.center}>{shortSubject(subject)} · {chapter || "Mixed chapters"}</T>
+      <T w="bold" size={13} color={arena.aqua} style={styles.center}>{label}</T>
       <T size={12} color={arena.muted} style={styles.center}>A practice rival steps in if nobody is free.</T>
       <RaisedButton testID="duel-cancel-search" tone="wine" label="Cancel" onPress={leave} style={styles.stretch} />
     </View>;
   } else if (d.status === "waiting") {
-    body = <ScrollView contentContainerStyle={styles.content} testID="duel-waiting">
-      <Panel gold testID="duel-invite-card" style={styles.code}>
-        <T w="heavy" size={12} color={arena.aqua} style={styles.spaced}>DUEL CODE</T>
-        <T w="heavy" size={42} color={arena.gold} style={styles.codeText} testID="duel-code">{d.code}</T>
-        <View style={styles.rowCenter}><ActivityIndicator color={arena.aqua} /><T w="bold" size={13} color={arena.text}>Waiting for your friend…</T></View>
-        <T size={12} color={arena.muted} style={styles.center}>The match starts the moment they join with this code.</T>
-      </Panel>
-      <RaisedButton testID="duel-share-whatsapp" glyph="whatsapp" height={58} label="Send on WhatsApp"
-        onPress={() => sendWhatsApp(`⚔️ Rapid Fire duel on JEECIRCLE.AI! ${subject} · 30 cards · 15 s each.\nJoin with code: ${d.code}\nOpen JEECIRCLE.AI → Rapid Fire → Play Friends → Play with a code.`)} />
-      <RaisedButton testID="duel-copy-code" tone="wine" glyph={copied ? "check" : "content-copy"} label={copied ? "Copied" : "Copy code"} onPress={async () => { await Clipboard.setStringAsync(d.code); setCopied(true); }} />
-      <RaisedButton testID="duel-quick-match-instead" tone="wine" icon="swords" label="Quick Match instead" onPress={() => { rf(`/duels/${d.id}/cancel`, uid, { method: "POST", body: {} }).catch(() => {}); quick(); }} />
-    </ScrollView>;
+    // A Practice Rival match whose rival has not sat down yet (a slow network): seat it again.
+    body = <View style={styles.middle} testID="duel-waiting">
+      <Radar size={220}><Avatar icon={me?.avatar} frame={me?.frame} size={96} /></Radar>
+      <GoldTitle size={24} center>Calling your rival…</GoldTitle>
+      <RaisedButton testID="duel-seat-rival" icon="rival" label="Start now" onPress={() => rf(`/duels/${d.id}/bot`, uid, { method: "POST", body: {} }).then(apply).catch((e) => setError(e.message))} style={styles.stretch} />
+      <ErrorBox testID="duel-error" error={error} />
+      <RaisedButton testID="duel-cancel-search" tone="wine" label="Cancel" onPress={leave} style={styles.stretch} />
+    </View>;
   } else if (d.status === "expired" || d.status === "cancelled") {
     body = <View style={styles.middle} testID="duel-closed">
       <GameIcon name="rival" size={92} />
@@ -240,6 +238,7 @@ function Match() {
     const edge = verdict ? (verdict.outcome === "correct" ? colors.success : verdict.outcome === "incorrect" ? colors.error : colors.warning) : tint + "66";
     body = <View style={styles.flex} testID="duel-play">
       <View style={styles.strip}>
+        {d.team_mode ? <TeamBar teams={d.teams} mine={d.my_team} /> : null}
         <ScoreStrip players={players} total={total} streak={streak} />
         {opp?.forfeit && players.length === 2 ? <View testID="duel-opponent-left" style={styles.leftNote}><T w="heavy" size={12} color={arena.badgeInk} style={styles.center}>{shownName(opp)} left. Finish your cards to take the win!</T></View> : null}
       </View>
@@ -283,7 +282,7 @@ function Match() {
       <T w="bold" size={13} color={arena.muted} style={styles.center}>{players.length > 2 ? "Waiting for the others to finish…" : `Waiting for ${shownName(opp)} to finish…`}</T>
     </View>;
   } else if (d.status === "finished") {
-    body = <MatchResult d={d} uid={uid} historical={!!p.review} onDone={back} />;
+    body = <MatchResult d={d} uid={uid} historical={!!p.review} onDone={d.cup_id && !p.review ? () => router.replace(go.cup(d.cup_id)) : back} />;
   }
 
   return <ArenaBg dim={playing} testID="duel-screen">
@@ -291,9 +290,10 @@ function Match() {
       <View style={styles.top}>
         <CloseButton testID="duel-exit-button" label={inMatch ? "Leave match" : "Close"} onPress={close} />
         <View style={styles.flex}>
-          <T testID="duel-exam-group" w="heavy" size={12} color={arena.aqua} numberOfLines={1}>{shortSubject(subject).toUpperCase()} · {chapter || "Mixed chapters"}</T>
-          <T testID="duel-card-counter" w="heavy" size={17} color={arena.text} numberOfLines={1}>{playing ? `Card ${idx + 1} / ${total}` : d?.status === "finished" ? (p.review ? "Match review" : "Match result") : players.length > 2 ? `${players.length}-player match` : "1 v 1 match"}</T>
+          <T testID="duel-exam-group" w="heavy" size={12} color={arena.aqua} numberOfLines={1}>{(d?.cup_id ? "KNOCKOUT CUP · " : d?.team_mode ? "GANG WAR · " : "") + label.toUpperCase()}</T>
+          <T testID="duel-card-counter" w="heavy" size={17} color={arena.text} numberOfLines={1}>{playing ? `Card ${idx + 1} / ${total}` : d?.status === "finished" ? (p.review ? "Match review" : "Match result") : d?.team_mode ? "Gang vs Gang" : players.length > 2 ? `${players.length}-player match` : "1 v 1 match"}</T>
         </View>
+        {d?.watchers && d.status === "ready" ? <View testID="duel-watchers" style={styles.watchers}><Icon name="eye" size={14} color={arena.aqua} /><T w="heavy" size={11} color={arena.aqua}>{d.watchers}</T></View> : null}
         {playing ? <Ring light left={left} color={tint} limit={limit} /> : <GameIcon name="swords" size={42} />}
       </View>
       {body}
@@ -315,7 +315,7 @@ const styles = StyleSheet.create({
   top: { flexDirection: "row", alignItems: "center", gap: 12, paddingHorizontal: 16, minHeight: 58 },
   middle: { flex: 1, alignItems: "center", justifyContent: "center", gap: 14, paddingHorizontal: 20 },
   content: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 16, gap: 12 },
-  code: { alignItems: "center", gap: 8, padding: 18 }, codeText: { letterSpacing: 8 }, rowCenter: { flexDirection: "row", alignItems: "center", gap: 8 },
+  watchers: { flexDirection: "row", alignItems: "center", gap: 3, paddingHorizontal: 8, height: 26, borderRadius: 13, backgroundColor: arena.panelEdge, borderWidth: 1, borderColor: arena.rim },
   strip: { paddingHorizontal: 16, paddingTop: 4, gap: 6 },
   leftNote: { padding: space.sm, borderRadius: radius.md, backgroundColor: arena.online },
   cardArea: { flexGrow: 1, justifyContent: "center", paddingHorizontal: 16, paddingVertical: space.md },
