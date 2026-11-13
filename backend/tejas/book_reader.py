@@ -3,7 +3,7 @@ from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, KEY, choose_options
 
 MOCK=re.compile(r'^(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,2})\b',re.I)
-ROLE=re.compile(r'^(?:(?:detailed|worked)\s+)?(solutions?|answers?\s*keys?|answers?)\b',re.I)
+ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,2}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
 
 
 def read_page(lines, previous, geometry=()):
@@ -13,7 +13,7 @@ def read_page(lines, previous, geometry=()):
         return PageMap(issues=['Scanned or empty page: approve AI reading or map the original page manually.']),context
     headers=[]; anchors=[]
     for line in lines:
-        value=line['text'];m=MOCK.match(value);role=ROLE.match(value)
+        value=line['text'];m=MOCK.match(value);role=ROLE.fullmatch(value.strip())
         if m:
             label='Mock '+str(int(m[1])); headers.append((line['rect'][1], 'mock',label))
             starts_questions=bool(re.search(r'\b(?:instructions|duration|total questions)\b',text,re.I) or choose_options(text)[0])
