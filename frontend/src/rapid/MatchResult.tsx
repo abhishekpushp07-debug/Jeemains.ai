@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { rf, uuid } from "@/src/api/client";
-import { invalidate } from "@/src/useCached";
+import { uuid } from "@/src/api/client";
 import { T } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
 import { RewardPanel } from "@/src/components/game";
@@ -31,6 +30,8 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
   const ranked = [...players].sort((a, b) => a.rank - b.rank);
   const humans = others.filter((p) => !p.bot && p.pid);
   const friendPids = new Set((friends.data?.items || []).map((f) => f.pid));
+  // A Match Room can be called again as it was. Outside one, only friends can be called back (friends are made with a Friend Code).
+  const callBack = humans.length > 0 && (d.mode === "friend" || humans.some((p) => friendPids.has(p.pid!)));
   const mine = me?.answers || [];
   const missed = (d.cards as any[]).map((c, k) => ({ c, k, a: mine[k] })).filter((x) => x.a?.outcome !== "correct");
   const open = (pid: string) => router.push(go.player(pid));
@@ -38,16 +39,10 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
   const again = async () => {
     setBusy("again"); setError("");
     try {
-      // Real rivals get a new Match Room with everyone invited; a practice rival is simply a fresh match.
-      if (humans.length) router.replace(go.room(await sendChallenge(uid, { rematch_of: d.id, subject: d.subject, chapter: d.chapter })));
+      // Friends get a new Match Room with everyone invited; anybody else is simply a fresh match.
+      if (callBack) router.replace(go.room(await sendChallenge(uid, { rematch_of: d.id, subject: d.subject, chapter: d.chapter })));
       else router.replace(go.duel({ mode: d.mode === "random" ? "random" : "ai", subject: d.subject, chapter: d.chapter || "", r: uuid() }));
     } catch (e: any) { setError(e.message); setBusy(""); }
-  };
-  const add = async (pid: string) => {
-    setBusy(pid); setError("");
-    try { await rf("/friends", uid, { method: "POST", body: { pid } }); invalidate(`u.${uid}.rffriends`); friends.reload(); }
-    catch (e: any) { setError(e.message); }
-    finally { setBusy(""); }
   };
 
   return <View style={styles.flex}>
@@ -92,8 +87,7 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
       {others.map((p, i) => p.bot || !p.pid
         ? <PersonRow key={i} testID="duel-rival-practice" p={{ name: p.name, avatar: p.avatar, frame: p.frame }} sub="Practice rival" />
         : <PersonRow key={p.pid} testID={`duel-player-${p.pid}`} p={{ name: p.name, avatar: p.avatar, frame: p.frame }} sub={`Level ${p.level ?? 1} · ${p.wins ?? 0} win${p.wins === 1 ? "" : "s"} · View profile`} onPress={() => open(p.pid!)}
-          right={friendPids.has(p.pid) ? <T testID={`duel-friend-${p.pid}`} w="heavy" size={12} color={arena.gold}>Friends ✓</T>
-            : <RaisedButton testID={`duel-add-friend-${p.pid}`} label="Add Friend" height={42} busy={busy === p.pid} disabled={!!busy || !friends.data} onPress={() => add(p.pid!)} style={styles.add} />} />)}
+          right={friendPids.has(p.pid) ? <T testID={`duel-friend-${p.pid}`} w="heavy" size={12} color={arena.gold}>Friends ✓</T> : null} />)}
 
       <Jelly testID="duel-toggle-misses" accessibilityLabel={review ? "Hide the cards you missed" : `Review ${missed.length} missed cards`} disabled={!missed.length} onPress={() => setReview(!review)} style={styles.reviewToggle}>
         <GameIcon name="target" size={34} />
@@ -115,7 +109,7 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
       <ErrorBox testID="duel-result-error" error={error} />
       <View style={styles.row}>
         <RaisedButton testID="duel-done" tone="wine" label="Done" height={58} disabled={busy === "again"} onPress={onDone} style={styles.flex} />
-        <RaisedButton testID="duel-rematch" icon="swords" height={58} streak label={humans.length ? "REMATCH" : "PLAY AGAIN"} busy={busy === "again"} disabled={!!busy} onPress={again} style={styles.wide} />
+        <RaisedButton testID="duel-rematch" icon="swords" height={58} streak label={callBack ? "REMATCH" : "PLAY AGAIN"} busy={busy === "again"} disabled={!!busy} onPress={again} style={styles.wide} />
       </View>
     </View>
     {won && !historical ? <Confetti count={36} /> : null}
@@ -129,7 +123,7 @@ const styles = StyleSheet.create({
   versus: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", alignSelf: "stretch", gap: 6 }, side: { width: 78, alignItems: "center", gap: 4 },
   score: { flexDirection: "row", alignItems: "center", gap: 10 },
   rank: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 56, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 16, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },
-  rankYou: { borderColor: arena.gold, backgroundColor: arena.panelHi }, place: { width: 38 }, add: { width: 116 },
+  rankYou: { borderColor: arena.gold, backgroundColor: arena.panelHi }, place: { width: 38 },
   reviewToggle: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 56, paddingHorizontal: 12, borderRadius: 18, backgroundColor: arena.panelHi, borderWidth: 1.5, borderColor: arena.rim, borderBottomWidth: 5, borderBottomColor: arena.panelEdge },
   reviewCard: { gap: 6, padding: 14, borderRadius: 18, backgroundColor: colors.custom_reading, borderWidth: 1.5, borderColor: arena.rim },
   dock: { paddingHorizontal: 16, paddingTop: 8, gap: 8 },

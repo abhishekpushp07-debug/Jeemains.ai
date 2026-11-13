@@ -60,6 +60,12 @@ async def _cleanup(db, users):
     await db.rf_learning_events.delete_many({"uid": {"$in": uids}})
 
 
+async def _befriend(s, who, other):
+    """`who` enters `other`'s Friend Code: both become friends at once."""
+    code = (await s.get("/friends/code", headers=other["h"])).json()["code"]
+    return await s.post("/friends", json={"code": code}, headers=who["h"])
+
+
 def test_rooms_flow():
     asyncio.run(_rooms())
 
@@ -72,18 +78,19 @@ async def _rooms():
         async with httpx.AsyncClient(base_url=BASE, timeout=20) as s:
             post = lambda path, who, body=None: s.post(path, json=body or {}, headers=who["h"])  # noqa: E731
             get = lambda path, who: s.get(path, headers=who["h"])  # noqa: E731
+            befriend = lambda who, other: _befriend(s, who, other)  # noqa: E731
             # identity: account name, else masked number; never the full number
             pa = (await get(f"/players/{a['pid']}", b)).json()
             pb = (await get(f"/players/{b['pid']}", a)).json()
             assert pa["name"] == "TESTAsha" and pa["is_me"] is False and set(pa["diamonds"]) == {"red", "blue", "emerald", "gold", "kohinoor"}
             assert pb["name"] == "••••••0002" and "9000000002" not in str(pb)
-            assert (await s.get("/players/search", params={"q": "TESTAsh"}, headers=b["h"])).status_code == 200
+            assert (await s.get("/players/search", params={"q": "TESTAsh"}, headers=b["h"])).status_code == 404  # players are found only by Friend Code
             # a challenge needs a friend edge first
             assert (await post("/challenges", a, {"pids": [b["pid"]], "subject": "Physics"})).status_code == 403
-            assert (await post("/friends", a, {"pid": b["pid"]})).json()["relation"]["friend"] is True
+            assert (await befriend(a, b)).json()["relation"]["friend"] is True
             inbox = (await get("/inbox", b)).json()
             assert [(n["kind"], n["from"]["pid"]) for n in inbox["notices"]] == [("friend_added", a["pid"])]
-            assert (await post("/friends", b, {"pid": a["pid"]})).json()["relation"] == {"friend": True, "follows_you": True, "blocked": False}
+            assert (await befriend(b, a)).json()["relation"] == {"friend": True, "follows_you": True, "blocked": False}
             assert (await get("/inbox", b)).json()["notices"] == []
             friends = (await get("/friends", a)).json()["items"]
             assert friends[0]["pid"] == b["pid"] and friends[0]["online"] is True and friends[0]["follows_you"] is True
@@ -109,7 +116,7 @@ async def _rooms():
 
             # several friends: host presses START once one has joined; a player can leave and come back
             for other in (c, d):
-                await post("/friends", a, {"pid": other["pid"]})
+                await befriend(a, other)
             room = (await post("/challenges", a, {"pids": [b["pid"], c["pid"], d["pid"]], "subject": "Chemistry"})).json()
             assert not room["single"] and room["joined"] == 1 and not room["can_start"]
             assert (await post(f"/challenges/{room['id']}/start", a)).status_code == 409
@@ -154,9 +161,9 @@ async def _gangs():
         async with httpx.AsyncClient(base_url=BASE, timeout=20) as s:
             post = lambda path, who, body=None: s.post(path, json=body or {}, headers=who["h"])  # noqa: E731
             get = lambda path, who: s.get(path, headers=who["h"])  # noqa: E731
-            await post("/friends", a, {"pid": b["pid"]})
-            await post("/friends", a, {"pid": c["pid"]})
-            await post("/friends", b, {"pid": d["pid"]})
+            await _befriend(s, a, b)
+            await _befriend(s, a, c)
+            await _befriend(s, b, d)
             # names: length and blocked words; emblem must be one of the 8
             assert (await post("/gangs", a, {"name": "x ", "emblem": "lion"})).status_code == 400
             assert (await post("/gangs", a, {"name": "Ch0d Squad", "emblem": "lion"})).status_code == 400
@@ -184,8 +191,8 @@ async def _gangs():
             started = (await post(f"/challenges/{room['id']}/accept", b)).json()
             assert started["status"] == "started"  # everyone who was invited has answered
             assert (await db.rf_duels.find_one({"id": started["duel_id"]}))["gang_id"] == gid
-            # block also stops direct adds and hides the blocker's profile
-            assert (await post("/friends", a, {"pid": d["pid"]})).status_code == 403
+            # block also stops adds (the code looks unknown) and hides the blocker's profile
+            assert (await _befriend(s, a, d)).status_code == 404
             assert (await get(f"/players/{d['pid']}", a)).status_code == 404
             assert (await post(f"/gangs/{gid}/report", b, {"reason": "test"})).status_code == 200
             # leader leaves: the longest-standing member takes over; the last one out closes the gang
@@ -195,9 +202,9 @@ async def _gangs():
             await post(f"/gangs/{gid}/leave", d)
             assert (await db.rf_gangs.find_one({"id": gid}))["closed"] is True
             # public link pages: no login, no phone number
-            page = await s.get(f"/invite/{a['pid']}")
-            assert page.status_code == 200 and "://rapid/player/" + a["pid"] in page.text and "9000000001" not in page.text
-            assert (await s.get(f"/c/{room['id']}")).status_code == 200
+            page = await s.get(f"/c/{room['id']}")
+            assert page.status_code == 200 and "://rapid/room/" + room["id"] in page.text and "9000000001" not in page.text
+            assert (await s.get(f"/invite/{a['pid']}")).status_code == 404  # friends are made with a Friend Code, not a public link
             assert (await s.get("/friends")).status_code == 401
     finally:
         await _cleanup(db, users)

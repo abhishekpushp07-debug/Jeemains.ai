@@ -13,13 +13,13 @@ import { GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena"
 import { HeadToHeadCard } from "@/src/rapid/HeadToHead";
 import { GemStrip, InnerScreen, Note, WingedFace } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
-import { day, go, inviteLink, seenText, sendWhatsApp, setArenaTab, shortSubject, useGangs } from "@/src/rapid/social";
+import { day, go, prettyCode, seenText, setArenaTab, shareFriendCode, shortSubject, useGangs } from "@/src/rapid/social";
 
 function Tile({ label, value, testID }: { label: string; value: string | number; testID: string }) {
   return <View testID={testID} style={styles.tile}><T w="heavy" size={20} color={arena.gold}>{value}</T><T w="bold" size={10} color={arena.muted} style={styles.center}>{label}</T></View>;
 }
 
-/** A player's showcase: who they are, how they play, their diamonds and trophies, and the buttons to add, challenge or bring them into a gang. */
+/** A player's showcase: who they are, how they play, their diamonds and trophies, and the buttons to challenge them or bring them into a gang. Friends are made with a Friend Code. */
 function Player() {
   const { pid } = useLocalSearchParams<{ pid: string }>();
   const router = useRouter(), uid = useAuth().user?.id || "";
@@ -44,7 +44,7 @@ function Player() {
     setPick(false); invalidate(`u.${uid}.rfgangs`);
     setNote(r.added ? `${p.name} is now in ${name}.` : r.skipped[0] || `${p.name} is already in ${name}.`);
   });
-  const store = (part: string) => { setArenaTab("store", part); router.navigate("/(tabs)/rapid"); };
+  const arenaTab = (tab: "store" | "gang", part = "") => { setArenaTab(tab, part); router.navigate("/(tabs)/rapid"); };
 
   return <InnerScreen testID="player-screen" title={p?.is_me ? "Your profile" : "Player"} sub={p?.title}>
     {!p ? (q.error ? <ErrorBox testID="player-error" error={q.error} retry={q.reload} /> : <ActivityIndicator testID="player-loading" color={arena.aqua} size="large" />) : <>
@@ -52,22 +52,22 @@ function Player() {
         <WingedFace p={p} diamonds={p.diamonds} size={portrait} testID="player-wings" />
         <GoldTitle size={26} center testID="player-name">{p.name}</GoldTitle>
         <T testID="player-title" w="heavy" size={13} color={arena.aqua}>{p.title} · Level {p.level}</T>
-        <T testID="player-seen" w="bold" size={12} color={p.online ? arena.online : arena.muted}>{seenText(p)}{rel?.follows_you ? " · Added you" : ""}</T>
+        <T testID="player-seen" w="bold" size={12} color={p.online ? arena.online : arena.muted}>{seenText(p)}</T>
       </Panel>
 
       {p.is_me ? <>
         <View style={styles.row}>
-          <RaisedButton testID="player-change-avatar" label="Avatar & frame" onPress={() => store("avatar")} style={styles.flex} />
-          <RaisedButton testID="player-change-entry" label="Entry effect" onPress={() => store("entry")} style={styles.flex} />
+          <RaisedButton testID="player-change-avatar" label="Avatar & frame" onPress={() => arenaTab("store", "avatar")} style={styles.flex} />
+          <RaisedButton testID="player-change-entry" label="Entry effect" onPress={() => arenaTab("store", "entry")} style={styles.flex} />
         </View>
-        <RaisedButton testID="player-invite" tone="wine" glyph="whatsapp" label={`Invite friends · ${p.friend_count} so far`} onPress={() => sendWhatsApp(`Add me on JEECIRCLE.AI Rapid Fire and let’s see who is faster! ${inviteLink(p.pid)}`)} />
+        <RaisedButton testID="player-share-code" tone="wine" glyph="whatsapp" height={58} label="Send my Friend Code" sub={`${prettyCode(p.friend_code)} · ${p.friend_count} friend${p.friend_count === 1 ? "" : "s"} so far`} onPress={() => shareFriendCode(p.friend_code)} />
       </> : rel?.blocked ? <RaisedButton testID="player-unblock" tone="wine" label="Unblock" busy={busy === "unblock"} onPress={() => act("unblock", () => rf(`/blocks/${pid}`, uid, { method: "DELETE" }))} /> : <>
         <View style={styles.row}>
           {rel?.friend ? <View testID="player-friends-badge" style={styles.friends}><T w="heavy" size={14} color={arena.gold}>Friends ✓</T></View>
-            : <RaisedButton testID="player-add-friend" label={rel?.follows_you ? "Add back" : "Add Friend"} icon="friends" busy={busy === "add"} disabled={!!busy} onPress={() => act("add", () => rf("/friends", uid, { method: "POST", body: { pid } }))} style={styles.flex} />}
+            : <RaisedButton testID="player-add-friend" label="Enter code" icon="friends" onPress={() => arenaTab("gang")} style={styles.flex} />}
           <RaisedButton testID="player-challenge" label="Challenge" icon="swords" disabled={!rel?.friend} onPress={() => router.push(go.challenge({ pid }))} style={styles.flex} />
         </View>
-        {rel?.friend ? <RaisedButton testID="player-add-to-gang" tone="wine" label="Add to gang" onPress={() => setPick(true)} /> : <Note>Add {p.name} as a friend to challenge them.</Note>}
+        {rel?.friend ? <RaisedButton testID="player-add-to-gang" tone="wine" label="Add to gang" onPress={() => setPick(true)} /> : <Note testID="player-code-note">Friends are made with a Friend Code. Ask {p.name} for theirs, enter it, and you can challenge each other.</Note>}
       </>}
       {note ? <T testID="player-note" w="bold" size={13} color={arena.aqua} style={styles.center}>{note}</T> : null}
       <ErrorBox testID="player-action-error" error={error} />

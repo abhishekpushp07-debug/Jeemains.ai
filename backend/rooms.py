@@ -15,10 +15,12 @@ from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 
 from exam_groups import resolve_exam
+from scope import Pick, label_for, normalise, scope_fields, scope_of
 from social import blocked_uids, card, find_player, make_pid, public_name
 
 ROOM_SECONDS = 180
 SEATS = 5
+MAX_INVITES = 25  # a big batch invites its most recently active members, not all 200
 APP_SCHEME = "frontend"  # the scheme this app registers (app.json)
 WAITING = ["sent", "seen"]
 ORDER = {"joined": 0, "seen": 1, "sent": 2, "declined": 3, "left": 3}
@@ -28,8 +30,9 @@ class RoomCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     pids: List[str] = Field(default_factory=list, max_length=SEATS - 1)
     gang_id: Optional[str] = Field(default=None, max_length=16)
-    subject: Literal["Physics", "Chemistry", "Mathematics"]
+    subject: Literal["Physics", "Chemistry", "Mathematics"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
+    picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters; wins over subject and chapter
     rematch_of: Optional[str] = Field(default=None, max_length=64)
     # Gang Battle: my gang (gang_id) against this gang, as two teams of up to 5.
     rival_gang_id: Optional[str] = Field(default=None, max_length=16)
@@ -39,6 +42,12 @@ def make_router(db, rf_user, seat_duel):
     r = APIRouter(prefix="/rf")
     after = ReturnDocument.AFTER
     open_gang = {"closed": {"$ne": True}}
+
+    async def most_active(uids):
+        if len(uids) <= MAX_INVITES:
+            return uids
+        seen = {p["uid"]: p.get("seen_ts") or 0 for p in await db.rf_profiles.find({"uid": {"$in": uids}}, {"uid": 1, "seen_ts": 1}).to_list(len(uids))}
+        return sorted(uids, key=lambda u: -seen.get(u, 0))[:MAX_INVITES]
 
     def joined_of(c):
         return sorted((i for i in c["invites"] if i["status"] == "joined"), key=lambda i: i["ts"])
@@ -55,8 +64,8 @@ def make_router(db, rf_user, seat_duel):
         rival = await db.rf_gangs.find_one({"id": rival_id, **open_gang})
         if not mine or not rival or mine["id"] == rival["id"]:
             raise HTTPException(404, "Gang not found.")
-        ours = [m["uid"] for m in mine["members"] if m["uid"] != uid and m["uid"] not in hidden]
-        theirs = [m["uid"] for m in rival["members"] if m["uid"] != uid and m["uid"] not in hidden and m["uid"] not in ours]
+        ours = await most_active([m["uid"] for m in mine["members"] if m["uid"] != uid and m["uid"] not in hidden])
+        theirs = await most_active([m["uid"] for m in rival["members"] if m["uid"] != uid and m["uid"] not in hidden and m["uid"] not in ours])
         if not theirs:
             raise HTTPException(400, "That gang has nobody to battle yet.")
         tag = lambda g: {k: g[k] for k in ("id", "name", "emblem")}  # noqa: E731
@@ -73,7 +82,7 @@ def make_router(db, rf_user, seat_duel):
             seats = teams["a"]["uids"] + teams["b"]["uids"]
         else:
             seats = [got["from_uid"]] + [i["uid"] for i in joined][:SEATS - 1]
-        duel_id = await seat_duel(got["exam"], got["subject"], got.get("chapter"), seats, got["id"], got.get("gang_id"), teams)
+        duel_id = await seat_duel(got["exam"], scope_of(got), seats, got["id"], got.get("gang_id"), teams)
         return await db.rf_challenges.find_one_and_update({"id": c["id"]}, {"$set": {"status": "started", "duel_id": duel_id}}, return_document=after)
 
     async def settle(c):
@@ -110,7 +119,7 @@ def make_router(db, rf_user, seat_duel):
             a, b = team_counts(c)
             ready = b >= 1
             vs = {"a": {**c["vs"]["a"], "joined": a + 1, "seats": SEATS}, "b": {**c["vs"]["b"], "joined": b, "seats": SEATS}}
-        return {"id": c["id"], "status": c["status"], "subject": c["subject"], "chapter": c.get("chapter"), "exam": c["exam"], "duel_id": c.get("duel_id"), "single": bool(c.get("single")),
+        return {"id": c["id"], "status": c["status"], "subject": c["subject"], "chapter": c.get("chapter"), "label": label_for(c), "picks": scope_of(c), "revenge": bool(c.get("revenge")), "exam": c["exam"], "duel_id": c.get("duel_id"), "single": bool(c.get("single")),
                 "rematch_of": c.get("rematch_of"), "expires_in": max(0, round(c["expires_ts"] - time.time())), "seats": SEATS, "joined": joined + 1, "is_host": host,
                 "my_status": "host" if host else mine["status"], "can_start": host and c["status"] == "open" and ready, "gang": await gang_tag(c),
                 "team_mode": battle, "vs": vs, "my_team": ("a" if host else mine.get("team")) if battle else None,
@@ -157,14 +166,15 @@ def make_router(db, rf_user, seat_duel):
     @r.post("/challenges")
     async def create(data: RoomCreate, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        exam = resolve_exam("JEE", data.subject)
+        picks = normalise(data.picks, data.subject, data.chapter)
         now, gang_id, hidden = time.time(), None, await blocked_uids(db, uid)
-        vs, team_of = None, {}
+        vs, team_of, revenge = None, {}, False
         if data.rematch_of:
             duel = await db.rf_duels.find_one({"id": data.rematch_of, "players.uid": uid, "status": "finished"},
-                                              {"players.uid": 1, "players.bot": 1, "players.team": 1, "gang_id": 1, "team_mode": 1, "teams": 1})
+                                              {"players.uid": 1, "players.bot": 1, "players.team": 1, "gang_id": 1, "team_mode": 1, "teams": 1, "subject": 1, "chapter": 1, "picks": 1, "winner": 1})
             if not duel:
                 raise HTTPException(404, "Match not found.")
+            picks = scope_of(duel)  # a rematch is always on the same subjects and chapters
             waiting = await db.rf_challenges.find_one({"rematch_of": data.rematch_of, "status": "open", "expires_ts": {"$gt": now}, "invites.uid": uid})
             if waiting:  # someone already opened the rematch room: take a seat
                 return await join(waiting["id"], uid)
@@ -175,6 +185,13 @@ def make_router(db, rf_user, seat_duel):
             else:
                 targets = [p["uid"] for p in duel["players"] if p["uid"] != uid and not p.get("bot") and p["uid"] not in hidden]
                 gang_id = duel.get("gang_id")
+                if not gang_id:  # outside a gang, only friends can be called back
+                    friends = {f["fid"] for f in await db.rf_friends.find({"uid": uid, "fid": {"$in": targets}}, {"_id": 0, "fid": 1}).to_list(len(targets) or 1)}
+                    targets = [t for t in targets if t in friends]
+                    if not targets:
+                        raise HTTPException(403, "Rematches are for friends. Add this player with their Friend Code first.")
+                # Badla: you lost this 1 v 1 and want it back.
+                revenge = len(duel["players"]) == 2 and duel.get("winner") not in (uid, "tie")
         elif data.gang_id and data.rival_gang_id:
             gang_id, vs, team_of = await battle_sides(uid, data.gang_id, data.rival_gang_id, hidden)
             targets = list(team_of)
@@ -183,7 +200,7 @@ def make_router(db, rf_user, seat_duel):
             if not gang:
                 raise HTTPException(404, "Gang not found.")
             gang_id = gang["id"]
-            targets = [m["uid"] for m in gang["members"] if m["uid"] != uid and m["uid"] not in hidden]
+            targets = await most_active([m["uid"] for m in gang["members"] if m["uid"] != uid and m["uid"] not in hidden])
         else:
             targets = list(dict.fromkeys([(await find_player(db, pid))["uid"] for pid in data.pids]))
             if uid in targets:
@@ -192,11 +209,12 @@ def make_router(db, rf_user, seat_duel):
                 raise HTTPException(403, "You can’t challenge this player.")
             friends = {f["fid"] for f in await db.rf_friends.find({"uid": uid, "fid": {"$in": targets}}, {"_id": 0, "fid": 1}).to_list(len(targets))}
             if set(targets) - friends:
-                raise HTTPException(403, "Add this player as a friend first.")
+                raise HTTPException(403, "Add this player with their Friend Code first.")
         if not targets:
             raise HTTPException(400, "There’s nobody to challenge here yet.")
         await free(uid)
-        c = {"id": str(uuid.uuid4()), "from_uid": uid, "exam": exam, "subject": data.subject, "chapter": data.chapter, "status": "open", "created_ts": now,
+        exam = resolve_exam("JEE", picks[0]["subject"])
+        c = {"id": str(uuid.uuid4()), "from_uid": uid, "exam": exam, **scope_fields(picks), "revenge": revenge, "status": "open", "created_ts": now,
              "expires_ts": now + ROOM_SECONDS, "rematch_of": data.rematch_of, "gang_id": gang_id, "single": len(targets) == 1 and not data.gang_id and not vs, "joined": 0,
              **({"team_mode": True, "vs": vs} if vs else {}),
              "invites": [{"uid": t, "status": "sent", "ts": now, **({"team": team_of[t]} if vs else {})} for t in targets]}
@@ -256,15 +274,21 @@ def make_router(db, rf_user, seat_duel):
         mine = await db.rf_challenges.find_one({"status": "open", "$or": [{"from_uid": uid}, {"invites": {"$elemMatch": {"uid": uid, "status": "joined"}}}]}, {"id": 1}, sort=[("created_ts", -1)])
         notices = await db.rf_notices.find({"uid": uid, "done": False}).sort("ts", -1).limit(6).to_list(6)
         people = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [c["from_uid"] for c in rooms] + [n["from_uid"] for n in notices]}}).to_list(12)}
-        return {"me": card(me), "room": mine["id"] if mine else None,
-                "challenges": [{"id": c["id"], "subject": c["subject"], "chapter": c.get("chapter"), "expires_in": max(0, round(c["expires_ts"] - now)), "joined": c.get("joined", 0) + 1,
+        cups = await db.rf_cups.find({"status": "open", "expires_ts": {"$gt": now}, "invites": uid, "players.uid": {"$ne": uid}}).sort("created_ts", -1).limit(2).to_list(2)
+        my_cup = await db.rf_cups.find_one({"players.uid": uid, "status": {"$in": ["open", "live"]}}, {"id": 1})
+        hosts = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [c["host_uid"] for c in cups]}}).to_list(2)} if cups else {}
+        return {"me": card(me), "room": mine["id"] if mine else None, "cup": my_cup["id"] if my_cup else None,
+                "cups": [{"id": c["id"], "label": c["label"], "size": c["size"], "joined": len(c["players"]), "expires_in": max(0, round(c["expires_ts"] - now)),
+                          "from": card(hosts.get(c["host_uid"], {"uid": c["host_uid"]}))} for c in cups],
+                "challenges": [{"id": c["id"], "subject": c["subject"], "chapter": c.get("chapter"), "label": label_for(c), "revenge": bool(c.get("revenge")), "expires_in": max(0, round(c["expires_ts"] - now)), "joined": c.get("joined", 0) + 1,
                                 "seats": SEATS * 2 if c.get("vs") else SEATS, "single": bool(c.get("single")), "gang": await gang_tag(c), "vs": c.get("vs"),
                                 "team": next((i.get("team") for i in c["invites"] if i["uid"] == uid), None), "from": card(people.get(c["from_uid"], {"uid": c["from_uid"]}))} for c in rooms],
                 "notices": [{"id": n["id"], "kind": n["kind"], "ts": n["ts"], "gang": n.get("gang"), "from": card(people[n["from_uid"]])} for n in notices if n["from_uid"] in people]}
 
     # ---------- public link pages (WhatsApp invites; no login, no private data) ----------
-    def page(title, lead, button, deep, code, hint="In the app: Rapid Fire → Gang → Search → type this code."):
-        t, lead_, c = html.escape(title), html.escape(lead), html.escape(code)
+    def page(title, lead, button, deep, code="", hint=""):
+        t, lead_ = html.escape(title), html.escape(lead)
+        box = f'<div class="code" data-testid="rf-link-code">{html.escape(code)}</div>' if code else ""
         return HTMLResponse(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{t} · JEECIRCLE.AI</title><style>body{{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0,#8C1227,#3D0610);color:#fff;font-family:system-ui,sans-serif}}
 main{{max-width:380px;padding:32px 24px;text-align:center}}.k{{letter-spacing:3px;font-size:12px;color:#FFD75E;font-weight:800}}h1{{font-size:28px;margin:14px 0 8px;color:#FFD75E}}p{{color:#9EF3E6;line-height:1.5}}
@@ -272,14 +296,8 @@ a{{display:block;margin-top:14px;padding:16px;border-radius:16px;font-weight:800
 .code{{margin-top:22px;padding:12px;border-radius:14px;border:1px dashed #C2485C;font-size:20px;letter-spacing:4px;font-weight:800}}</style></head>
 <body><main data-testid="rf-link-page"><div class="k">JEECIRCLE.AI · RAPID FIRE</div><h1 data-testid="rf-link-title">{t}</h1><p>{lead_}</p>
 <a class="p" data-testid="rf-link-open" href="{deep}">{html.escape(button)}</a><a class="s" data-testid="rf-link-download" href="https://jeelive.ai">Get the app</a>
-<div class="code" data-testid="rf-link-code">{c}</div><p style="font-size:12px">{html.escape(hint)}</p></main></body></html>""",
+{box}<p style="font-size:12px">{html.escape(hint)}</p></main></body></html>""",
                             headers={"Cache-Control": "no-store"})
-
-    @r.get("/invite/{pid}", include_in_schema=False)
-    async def invite_page(pid: str):
-        p = await find_player(db, pid)
-        return page(f"{public_name(p)} wants to be your Rapid Fire friend", "Quick formula duels for JEE. Add each other, then challenge in one tap.",
-                    "Open their profile", f"{APP_SCHEME}://rapid/player/{p['pid']}", p["pid"])
 
     @r.get("/g/{gid}/{code}", include_in_schema=False)
     async def gang_page(gid: str, code: str):
@@ -297,8 +315,8 @@ a{{display:block;margin-top:14px;padding:16px;border-radius:16px;font-weight:800
             raise HTTPException(404, "Challenge not found.")
         p = await db.rf_profiles.find_one({"uid": c["from_uid"]}) or {}
         open_ = c["status"] == "open" and c["expires_ts"] > time.time()
-        return page(f"{public_name(p)} challenged you · {c['subject']}" if open_ else "This challenge has closed",
+        return page(f"{public_name(p)} challenged you · {label_for(c)}" if open_ else "This challenge has closed",
                     "30 cards · 15 seconds each. Take your seat in the Match Room before the timer runs out." if open_ else "Ask your friend to send a new one from Rapid Fire.",
-                    "Open the Match Room", f"{APP_SCHEME}://rapid/room/{cid}", p.get("pid") or make_pid(c["from_uid"]))
+                    "Open the Match Room", f"{APP_SCHEME}://rapid/room/{cid}", hint="Already in the app? The invitation is waiting on your Rapid Fire screen.")
 
     return r

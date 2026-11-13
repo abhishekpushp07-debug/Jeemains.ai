@@ -20,6 +20,7 @@ from jl_transport import canonical_request
 from session_coordination import session_rotation
 from rf_access import make_access_router, install_access_guard
 from rapid_deck import fresh_deck
+from scope import Pick, normalise, scope_fields
 from metadata_cache import metadata_cache
 from performance import ServerTiming, AssetAwareCompression
 from cors_config import allowed_origins
@@ -169,8 +170,9 @@ class Card(BaseDocument):
 
 class SessionCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"]
+    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
+    picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters for a fresh sprint
     count: int = Field(default=30, ge=1, le=30)
     card_ids: Optional[List[str]] = Field(default=None, max_length=30)
     request_id: str = Field(min_length=8, max_length=64)
@@ -197,6 +199,8 @@ class RfSession(BaseDocument):
     request_id: str
     subject: str
     chapter: Optional[str] = None
+    picks: Optional[List[dict]] = None
+    label: Optional[str] = None
     mode: str = "fresh"
     card_ids: List[str]
     status: str = "active"
@@ -291,6 +295,9 @@ def public_card(c: Card) -> dict:
 @api.post("/rf/sessions")
 async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
+    scope = None if data.revision or data.card_ids else scope_fields(normalise(data.picks, data.subject, data.chapter))
+    if scope:
+        data.subject, data.chapter = scope["subject"], scope["chapter"]
     exam = resolve_exam(data.exam, data.subject)
     if data.diagram_only:
         raise HTTPException(410, "Diagram sprints are archived in this app.")
@@ -313,13 +320,13 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
             docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "exam": exam, "subject": data.subject, "retired": {"$ne": True}}, {"_id": 0}).to_list(30)
             mode = "repeat_missed"
         else:
-            docs = await fresh_deck(db, exam, data.subject, data.chapter, data.count)
+            docs = await fresh_deck(db, exam, data.subject, data.chapter, data.count, picks=scope["picks"])
             mode = "diagrams" if data.diagram_only else "fresh"
         if not docs:
             raise HTTPException(404, "No reviewed cards are available for this selection yet.")
         cards = [Card.from_mongo(d) for d in docs]
         existing = RfSession(id=str(uuid.uuid4()), user_id=uid, request_id=data.request_id, subject=data.subject,
-                             chapter=data.chapter, exam=exam, mode=mode, card_ids=[c.id for c in cards])
+                             chapter=data.chapter, exam=exam, mode=mode, card_ids=[c.id for c in cards], **({"picks": scope["picks"], "label": scope["label"]} if scope else {}))
         try:
             await db.rf_sessions.insert_one(existing.to_mongo())
         except DuplicateKeyError:
@@ -413,11 +420,15 @@ from social import make_router as make_social  # noqa: E402
 from rooms import make_router as make_rooms  # noqa: E402
 from gangs import make_router as make_gangs  # noqa: E402
 from gamify import phoenix  # noqa: E402
-duel_router, seat_duel = make_duels(db, rf_user, public_card, award)
+from leagues import make_router as make_leagues  # noqa: E402
+from cups import make_router as make_cups  # noqa: E402
+duel_router, duel_api = make_duels(db, rf_user, public_card, award)
 api.include_router(duel_router)
 api.include_router(make_social(db, rf_user))
-api.include_router(make_rooms(db, rf_user, seat_duel))
+api.include_router(make_rooms(db, rf_user, duel_api["seat"]))
 api.include_router(make_gangs(db, rf_user))
+api.include_router(make_leagues(db, rf_user))
+api.include_router(make_cups(db, rf_user, duel_api))
 api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))
@@ -478,6 +489,13 @@ async def startup():
     await db.rf_duels.create_index([("teams.a.id", 1), ("finished_ts", -1)], sparse=True)
     await db.rf_duels.create_index([("teams.b.id", 1), ("finished_ts", -1)], sparse=True)
     await db.rf_feed.create_index([("uid", 1), ("ts", -1)])
+    await db.rf_profiles.create_index("friend_code", unique=True, partialFilterExpression={"friend_code": {"$type": "string"}})
+    await db.rf_cups.create_index("id", unique=True)
+    await db.rf_cups.create_index([("players.uid", 1), ("status", 1)])
+    await db.rf_cups.create_index([("invites", 1), ("status", 1)])
+    await db.rf_cups.create_index([("kind", 1), ("status", 1), ("scope_key", 1)])
+    await db.rf_duels.create_index([("status", 1), ("players.uid", 1)])
+    await db.rf_gangs.create_index("league.week", sparse=True)
     await db.rf_feed.create_index("at", expireAfterSeconds=14 * 86400)
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])
     for exam in SUBJECTS:

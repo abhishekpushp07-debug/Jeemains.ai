@@ -19,8 +19,14 @@ export const selection = { subject: "Physics", chapter: "" };
 export const shortSubject = (s?: string) => (s === "Mathematics" ? "Maths" : s || "");
 export const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.max(0, s % 60)).padStart(2, "0")}`;
 export const ordinal = (n: number) => `${n}${["th", "st", "nd", "rd"][n % 10 > 3 || Math.floor(n / 10) === 1 ? 0 : n % 10]}`;
-export const inviteLink = (pid: string) => `${RF_BASE}/invite/${pid}`;
 export const roomLink = (cid: string) => `${RF_BASE}/c/${cid}`;
+
+// Friend Code: the only way to become friends. Shown in two groups of four so it is easy to read out.
+export const cleanCode = (text: string) => text.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
+export const prettyCode = (code?: string | null) => (code ? `${code.slice(0, 4)} ${code.slice(4)}` : "");
+export const useFriendCode = (uid?: string) => useCached<{ code: string }>(uid ? `u.${uid}.rfcode` : null, () => rf("/friends/code", uid!));
+export const shareFriendCode = (code: string) =>
+  sendWhatsApp(`Add me on JEECIRCLE.AI Rapid Fire and let’s see who is faster!\nMy Friend Code: ${prettyCode(code)}\nIn the app: Rapid Fire → Gang → Enter a friend’s code.`);
 
 export async function sendWhatsApp(text: string) {
   try { await Linking.openURL("whatsapp://send?text=" + encodeURIComponent(text)); }

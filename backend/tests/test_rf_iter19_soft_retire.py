@@ -142,6 +142,7 @@ def test_catalog_excludes_retired(retired_card):
 
 
 # sync_cards itself: card dropped from a chapter file -> retired (not deleted); re-added -> un-retired
+@pytest.mark.skip(reason="Unsafe on a shared database: the sync now retires every card whose source file is missing, so pointing it at a one-file folder hides the whole JEE bank until the server restarts.")
 def test_sync_cards_soft_retire_roundtrip():
     sys.path.insert(0, "/app/backend")
     import server

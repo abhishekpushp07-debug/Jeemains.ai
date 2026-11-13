@@ -75,10 +75,9 @@ def seed(pid):
         p = {"uid": uid, "pid": make_pid(uid), "name": name, "display_name": name, "avatar": avatar, "xp": xp, "coins": 0, "diamonds": diamonds, "best_phoenix": best, "badges": badges,
              "equipped": equipped, "owned": [v for v in equipped.values() if v], "wins": 4 + k, "duels": 9 + k, "seen_ts": now + 3600 if online else now - (k + 1) * 5400}
         db.rf_profiles.insert_one(dict(p))
-        db.rf_friends.insert_one({"uid": me["uid"], "fid": uid, "ts": now})
+        db.rf_friends.insert_many([{"uid": me["uid"], "fid": uid, "ts": now}, {"uid": uid, "fid": me["uid"], "ts": now}])  # a Friend Code makes both sides friends
         friends.append(p)
         state["friends"].append(uid)
-    db.rf_friends.insert_one({"uid": friends[0]["uid"], "fid": me["uid"], "ts": now})
     a, b, c = friends
     events = [(a, "win", {"vs": "Riya M.", "mine": 24, "theirs": 19}, 0.3), (b, "gem", {"colour": "emerald"}, 2), (c, "run", {"n": 5}, 5), (a, "level", {"level": 7}, 26),
               (b, "badge", {"title": "Sharpshooter"}, 50), (c, "win", {"team": "Kota Warriors", "vs": "Delhi Dynamos", "mine": 61, "theirs": 54}, 74), (b, "gem", {"colour": "kohinoor"}, 98), (a, "win", {"players": 4, "mine": 22}, 120)]

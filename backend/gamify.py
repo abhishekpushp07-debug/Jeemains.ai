@@ -25,6 +25,7 @@ BADGES = {
     "perfect": ("Flawless", "Every card correct in a session of 10+"),
     "duelist_10": ("Duelist", "Played 10 duels"),
     "champion_10": ("Champion", "Won 10 duels"),
+    "cup_champion": ("Cup Champion", "Won a knockout cup"),
 }
 
 
@@ -78,6 +79,19 @@ def level_floor(level: int) -> int:
 
 def ist_day(ts: Optional[float] = None) -> str:
     return datetime.fromtimestamp(ts or time.time(), IST).strftime("%Y-%m-%d")
+
+
+def ist_week(ts: Optional[float] = None) -> str:
+    """The league week (Monday to Sunday, IST) a moment falls in."""
+    year, week, _ = datetime.fromtimestamp(ts or time.time(), IST).isocalendar()
+    return f"{year}-W{week:02d}"
+
+
+def week_ends_in() -> int:
+    """Seconds until the leagues reset (next Monday 00:00 IST)."""
+    now = datetime.now(IST)
+    monday = (now + timedelta(days=7 - now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+    return max(0, int((monday - now).total_seconds()))
 
 
 def public_profile(p: dict) -> dict:
@@ -148,6 +162,12 @@ def make_router(db, rf_user):
             ds = {"day": today, "sprints": 0, "correct": 0, "wins": 0, "claimed": [], "gems": 0, "rush": []}
         ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" and played else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0),
               "gems": ds.get("gems", 0) + sum(diamonds.values())}
+        # This week's totals feed the Friends League. A new week moves the old totals to `last_week` (prizes are paid from there).
+        week, ws, rolled = ist_week(), p.get("week_stats") or {}, {}
+        if ws.get("week") != week:
+            rolled = {"last_week": ws} if ws.get("week") else {}
+            ws = {"week": week, "xp": 0, "wins": 0, "correct": 0, "matches": 0}
+        ws = {**ws, "xp": ws.get("xp", 0) + xp, "wins": ws.get("wins", 0) + (1 if won else 0), "correct": ws.get("correct", 0) + correct, "matches": ws.get("matches", 0) + (1 if played and kind == "duel" else 0)}
         # Wins in a row across matches (for the friend feed). Solo sprints never touch it.
         win_run = p.get("win_run", 0) if kind == "solo" or not played else (p.get("win_run", 0) + 1 if won else 0)
         before = level_of(p.get("xp", 0))
@@ -167,7 +187,7 @@ def make_router(db, rf_user):
                 inc["duels"] = 1
             inc["wins"] = 1 if won else 0
         # Atomic counters so concurrent sprint + duel never lose XP/coins.
-        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, "win_run": win_run, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak, "best_phoenix": phoenix_streak}},
+        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, "win_run": win_run, "week_stats": ws, **rolled, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak, "best_phoenix": phoenix_streak}},
                                                      upsert=True, return_document=True)
         have = set(p.get("badges", []))
         rules = {"first_sprint": p.get("sessions", 0) >= 1, "first_win": p.get("wins", 0) >= 1, "streak_3": streak >= 3, "streak_7": streak >= 7, "streak_30": streak >= 30,

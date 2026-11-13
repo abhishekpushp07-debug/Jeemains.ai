@@ -7,7 +7,7 @@ import random
 import string
 import time
 import uuid
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
@@ -20,6 +20,8 @@ from rf_access import verified_grant
 from rapid_deck import fresh_deck
 from gamify import level_of, phoenix
 from social import make_pid, public_name, team_line, team_scores
+from scope import Pick, label_for, normalise, scope_fields, scope_of
+from leagues import record_battle
 
 DUEL_CARDS = 30
 CARD_SECONDS = 15
@@ -44,8 +46,9 @@ def entry_seconds(players: int) -> float:
 
 class DuelCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"]
+    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
+    picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters; wins over subject and chapter
     mode: Literal["random", "invite"]
     name: str = Field(min_length=1, max_length=24)
     request_id: str = Field(min_length=8, max_length=64)
@@ -75,6 +78,8 @@ def make_router(db, rf_user, public_card, award):
     card_cache: dict = {}  # cards are immutable during play: cache to skip a DB read per view
     sockets: dict = {}  # did -> {ws: {"uid": str, "sig": str}}
     tickers: dict = {}
+    hooks: list = []  # called once with every match that just finished (knockout cups move on from here)
+    watching: dict = {}  # did -> {uid: last look} for the "watching" count
     node = uuid.uuid4().hex  # this server process
     bus = {"task": None}
 
@@ -196,33 +201,40 @@ def make_router(db, rf_user, public_card, award):
         resolve_exam(d.get("exam"), d["subject"])
         return d
 
-    def start_fields(players=2):
+    def start_fields(players=2, cards=DUEL_CARDS, delay=0.0):
         # Every phone plays the entry show against this server clock, so card 1 opens at the same moment for all.
         show = entry_seconds(players)
-        start = time.time() + show + 1.0
-        return {"status": "ready", "start_at": start, "entry_seconds": show, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
+        start = time.time() + delay + show + 1.0
+        return {"status": "ready", "start_at": start, "entry_seconds": show, "ends_at": start + cards * (CARD_SECONDS + 2) + 30}
 
-    async def pick_cards(subject, chapter, exam):
-        docs = await fresh_deck(db, exam, subject, chapter, DUEL_CARDS)
-        return [d["id"] for d in docs]
+    async def pick_cards(exam, picks, count=DUEL_CARDS):
+        return [d["id"] for d in await fresh_deck(db, exam, picks[0]["subject"], count=count, picks=picks)]
 
-    async def seat_duel(exam, subject, chapter, uids, challenge_id, gang_id=None, teams=None):
-        """A Match Room started: 2 to 5 players seated at once (or two gang teams of up to 5), entry show starts on every phone."""
+    def make_bot(rival=None, cards=DUEL_CARDS):
+        """A practice rival's seat. A knockout cup passes its own rival so the same one plays every round."""
+        rival = rival or rival_profile()
+        return {"uid": rival.get("uid") or "bot-" + uuid.uuid4().hex[:10], "bot": True, "name": rival["name"], "avatar": rival["avatar"], "frame": rival["frame"], "entry": rival["entry"],
+                "level": rival.get("level") or random.randint(3, 14), "wins": rival.get("wins") or random.randint(4, 90),
+                "answers": [], "score": 0, "ms": cards * CARD_SECONDS * 1000, "done": False, "pace": rival.get("pace") or random.uniform(4.0, 6.5), "acc": rival.get("acc") or random.uniform(0.55, 0.8),
+                "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
+
+    async def seat_duel(exam, picks, uids, challenge_id, gang_id=None, teams=None, extra=None, cards=DUEL_CARDS, bots=(), delay=0.0):
+        """A Match Room or a cup round started: 2 to 5 players seated at once (or two gang teams of up to 5), entry show starts on every phone."""
         existing = await db.rf_duels.find_one({"challenge_id": challenge_id}, {"id": 1})
         if existing:
             return existing["id"]
         if not teams:
             uids = uids[:MAX_PLAYERS]
-        players = [await player(u) for u in uids]
-        extra = {}
+        players = [await player(u) for u in uids] + [make_bot(b, cards) for b in bots]
+        more = {"vs_bot": True} if bots else {}
         if teams:  # Gang vs Gang: each side enters as one team, so the show is as long as a 1 v 1
             side = {u: t for t in ("a", "b") for u in teams[t]["uids"]}
             for p in players:
                 p["team"] = side[p["uid"]]
-            extra = {"team_mode": True, "teams": {t: {k: teams[t][k] for k in ("id", "name", "emblem")} for t in ("a", "b")}}
-        d = {"id": str(uuid.uuid4()), "code": None, "exam": exam, "mode": "friend", "subject": subject, "chapter": chapter, "card_ids": await pick_cards(subject, chapter, exam),
+            more = {"team_mode": True, "teams": {t: {k: teams[t][k] for k in ("id", "name", "emblem")} for t in ("a", "b")}}
+        d = {"id": str(uuid.uuid4()), "code": None, "exam": exam, "mode": "friend", **scope_fields(picks), "card_ids": await pick_cards(exam, picks, cards),
              "players": players, "created_ts": time.time(), "request_id": "challenge:" + challenge_id,
-             "request_ids": ["challenge:" + challenge_id], "challenge_id": challenge_id, "gang_id": gang_id, **extra, **start_fields(2 if teams else len(uids))}
+             "request_ids": ["challenge:" + challenge_id], "challenge_id": challenge_id, "gang_id": gang_id, **more, **(extra or {}), **start_fields(2 if teams else len(players), cards, delay)}
         await db.rf_duels.insert_one(d)
         notify(d["id"])
         return d["id"]
@@ -314,13 +326,16 @@ def make_router(db, rf_user, public_card, award):
                 fields["winners"] = [p["uid"] for p in d["players"] if win == "team:" + p.get("team", "") and not p.get("forfeit")]
                 fields["team_scores"] = team_scores(d)
             flipped = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "ready"}, {"$set": fields}, return_document=ReturnDocument.AFTER)
-            if flipped and d.get("team_mode") and win in ("team:a", "team:b"):  # the gangs' battle record, counted once
-                won_side, lost_side = ("a", "b") if win == "team:a" else ("b", "a")
-                await db.rf_gangs.update_one({"id": d["teams"][won_side]["id"]}, {"$inc": {"wins": 1}})
-                await db.rf_gangs.update_one({"id": d["teams"][lost_side]["id"]}, {"$inc": {"losses": 1}})
+            if flipped and d.get("team_mode"):  # the gangs' battle record and league points, counted once
+                await record_battle(db, d, win)
             d = flipped or await db.rf_duels.find_one({"id": d["id"]})
             for p in [x for x in d["players"] if not x.get("bot")]:  # reward both players at settle time, even if one never returns
                 await reward_for(d, p["uid"])
+            for hook in hooks if flipped else ():
+                try:
+                    await hook(d)
+                except Exception as e:  # noqa: BLE001  (the cup catches up on its next look)
+                    log.warning("match-end hook failed: %s", e)
         return d
 
     def won_by(d, uid):
@@ -379,6 +394,7 @@ def make_router(db, rf_user, public_card, award):
         return {
             **team, "you_won": won_by(d, uid),
             "id": d["id"], "exam": d["exam"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
+            "label": label_for(d), "picks": scope_of(d), "cup_id": d.get("cup_id"), "watchers": sum(time.time() - t < 6 for t in watching.get(d["id"], {}).values()),
             "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS, "entry_seconds": d.get("entry_seconds") or entry_seconds(2), "challenge_id": d.get("challenge_id"),
             "reward": reward, "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
             "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat() if d.get('finished_ts') else None,
@@ -388,27 +404,50 @@ def make_router(db, rf_user, public_card, award):
                          "done": p["done"], "forfeit": bool(p.get("forfeit")), **({"answers": p["answers"]} if reveal or p["uid"] == uid else {}), **({"uid": p["uid"]} if reveal else {})} for p in d["players"]],
         }
 
+    async def can_watch(d, uid):
+        """Friends of a player, their gang mates, and everybody in the same knockout cup may watch a match."""
+        uids = [p["uid"] for p in d["players"] if not p.get("bot")]
+        if uid in uids or await db.rf_friends.find_one({"uid": uid, "fid": {"$in": uids}}, {"_id": 1}):
+            return True
+        gangs = [g for g in [d.get("gang_id"), *(t["id"] for t in (d.get("teams") or {}).values())] if g]
+        if await db.rf_gangs.find_one({"closed": {"$ne": True}, "$and": [{"members.uid": uid}, {"$or": [{"id": {"$in": gangs}}, {"members.uid": {"$in": uids}}]}]}, {"_id": 1}):
+            return True
+        return bool(d.get("cup_id") and await db.rf_cups.find_one({"id": d["cup_id"], "$or": [{"players.uid": uid}, {"invites": uid}]}, {"_id": 1}))
+
+    async def spectate(d):
+        """What a spectator sees: live scores, streaks and progress. Never the cards, so nobody can help a player from outside."""
+        d = await settle(d)
+        place = {p["uid"]: k + 1 for k, p in enumerate(ranking(d))}
+        ts = (d.get("team_scores") or team_scores(d)) if d.get("team_mode") else None
+        return {"spectator": True, "id": d["id"], "label": label_for(d), "status": d["status"], "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(),
+                "total": len(d["card_ids"]), "cup_id": d.get("cup_id"), "tie": d.get("winner") == "tie", "teams": {t: {**d["teams"][t], **ts[t]} for t in ("a", "b")} if ts else None,
+                "players": [{"name": p["name"], "avatar": p.get("avatar"), "frame": p.get("frame"), "pid": None if p.get("bot") else p.get("pid") or make_pid(p["uid"]), "bot": bool(p.get("bot")),
+                             "level": p.get("level", 1), "score": p["score"], "answered": len(p["answers"]), "rank": place[p["uid"]], "team": p.get("team"), "done": p["done"], "forfeit": bool(p.get("forfeit")),
+                             "streak": p.get("streak", 0) if p.get("bot") else trailing(p["answers"]), "won": d["status"] == "finished" and (won_by(d, p["uid"]) or d.get("winner") == "team:" + str(p.get("team"))),
+                             "trail": [a["outcome"] == "correct" for a in p["answers"][-8:]] if not p.get("bot") else []} for p in d["players"]]}
+
     def public_card_dict(c):
         return {k: c.get(k) for k in ("id", "exam", "subject", "chapter", "topic", "prompt", "formula", "options", "answer", "explain", "diagram")}
 
     @r.post("")
     async def create(data: DuelCreate, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        exam = resolve_exam(data.exam, data.subject)
+        picks = normalise(data.picks, data.subject, data.chapter)
+        exam, scope = resolve_exam(data.exam, picks[0]["subject"]), scope_fields(picks)
         mine = await db.rf_duels.find_one({"request_id": data.request_id, "players.uid": uid})
         if mine:
             return await view(mine, uid)
         if data.mode == "random":
             now = time.time()
             match = await db.rf_duels.find_one_and_update(
-                {"exam": exam, "status": "waiting", "mode": "random", "subject": data.subject, "chapter": data.chapter, "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
+                {"exam": exam, "status": "waiting", "mode": "random", "scope_key": scope["scope_key"], "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
                 {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
             if match:
                 await db.rf_duels.update_one({"id": match["id"]}, {"$addToSet": {"request_ids": data.request_id}})
                 notify(match["id"])
                 return await view(match, uid)
         d = {"id": str(uuid.uuid4()), "code": "".join(random.choices(string.ascii_uppercase.replace("O", "").replace("I", "") + "23456789", k=6)),
-             "exam": exam, "mode": data.mode, "subject": data.subject, "chapter": data.chapter, "status": "waiting", "card_ids": await pick_cards(data.subject, data.chapter, exam),
+             "exam": exam, "mode": data.mode, **scope, "status": "waiting", "card_ids": await pick_cards(exam, picks),
              "players": [await player(uid, data.name)], "created_ts": time.time(), "request_id": data.request_id, "request_ids": [data.request_id]}
         await db.rf_duels.insert_one(d)
         return await view(d, uid)
@@ -438,6 +477,36 @@ def make_router(db, rf_user, public_card, award):
         notify(d["id"])
         return await view(d, uid)
 
+    @r.get("/live")
+    async def live_now(x_rf_user: Optional[str] = Header(None)):
+        """Matches being played right now by your friends and gang mates, to watch."""
+        uid = rf_user(x_rf_user)
+        blocks = await db.rf_blocks.find({"$or": [{"uid": uid}, {"bid": uid}]}, {"_id": 0}).to_list(500)
+        hidden = {uid} | {b["bid"] for b in blocks} | {b["uid"] for b in blocks}
+        uids = {f["fid"] for f in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)}
+        for g in await db.rf_gangs.find({"members.uid": uid, "closed": {"$ne": True}}, {"_id": 0, "members.uid": 1}).to_list(10):
+            uids |= {m["uid"] for m in g["members"][:200]}
+        now = time.time()
+        docs = await db.rf_duels.find({"status": "ready", "ends_at": {"$gt": now}, "players.uid": {"$in": list(uids - hidden), "$ne": uid}},
+                                      {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "label": 1, "picks": 1, "start_at": 1, "cup_id": 1, "card_ids": 1, "teams": 1, "players.name": 1, "players.avatar": 1,
+                                       "players.frame": 1, "players.score": 1, "players.answers.i": 1}).sort("start_at", -1).limit(8).to_list(8)
+        return {"items": [{"id": d["id"], "label": label_for(d), "cup": bool(d.get("cup_id")), "started": d["start_at"] <= now, "total": len(d["card_ids"]),
+                           "teams": [d["teams"][t]["name"] for t in ("a", "b")] if d.get("teams") else None,
+                           "players": [{"name": p["name"], "avatar": p.get("avatar"), "frame": p.get("frame"), "score": p["score"], "answered": len(p.get("answers") or [])} for p in d["players"][:5]]} for d in docs]}
+
+    @r.get("/{did}/watch")
+    async def watch(did: str, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        d = await db.rf_duels.find_one({"id": did}, {"_id": 0})
+        if not d or d["status"] not in ("ready", "finished") or not await can_watch(d, uid):
+            raise HTTPException(404, "This match is not open to watch.")
+        if d["status"] == "ready":
+            seen = watching.setdefault(did, {})
+            seen[uid] = time.time()
+            if len(watching) > 2000:
+                watching.clear()
+        return await spectate(d)
+
     @r.get("/{did}")
     async def get(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
@@ -455,11 +524,7 @@ def make_router(db, rf_user, public_card, award):
     async def vs_bot(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         await active_owned_duel(did, uid)
-        rival = rival_profile()
-        bot = {"uid": "bot-" + uuid.uuid4().hex[:10], "bot": True, "name": rival["name"], "avatar": rival["avatar"], "frame": rival["frame"], "entry": rival["entry"],
-               "level": random.randint(3, 14), "wins": random.randint(4, 90),
-               "answers": [], "score": 0, "ms": DUEL_CARDS * CARD_SECONDS * 1000, "done": False, "pace": random.uniform(4.0, 6.5), "acc": random.uniform(0.55, 0.8),
-               "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
+        bot = make_bot()
         d = await db.rf_duels.find_one_and_update({"id": did, "status": {"$in": ["waiting", "expired"]}, "players.0.uid": uid, "players": {"$size": 1}},
                                                   {"$push": {"players": bot}, "$set": {**start_fields(), "vs_bot": True}}, return_document=ReturnDocument.AFTER)
         if not d:
@@ -560,10 +625,10 @@ def make_router(db, rf_user, public_card, award):
         docs = await db.rf_duels.find(query, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(50).to_list(50)
         won = {a["ref"]: (a.get("reward") or {}).get("diamonds") or {} for a in
                await db.rf_awards.find({"uid": uid, "ref": {"$in": ["duel:" + d["id"] for d in docs]}}, {"_id": 0, "ref": 1, "reward.diamonds": 1}).to_list(50)}
-        return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "won": won_by(d, uid), "tie": d.get("winner") == "tie", "team": team_line(d, uid),
+        return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "label": label_for(d), "cup": bool(d.get("cup_id")), "won": won_by(d, uid), "tie": d.get("winner") == "tie", "team": team_line(d, uid),
                            "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat(), 'mode': d['mode'], "diamonds": won.get("duel:" + d["id"], {}),
                            "place": next(k + 1 for k, p in enumerate(ranking(d)) if p["uid"] == uid),
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"], "bot": bool(p.get("bot")), "pid": None if p.get("bot") else p.get("pid") or make_pid(p["uid"]),
                                        "avatar": p.get("avatar"), "frame": p.get("frame")} for p in ranking(d)]} for d in docs]}
 
-    return r, seat_duel
+    return r, {"seat": seat_duel, "settle": settle, "hooks": hooks}

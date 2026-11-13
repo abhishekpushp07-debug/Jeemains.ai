@@ -1,0 +1,276 @@
+"""Knockout Cups: single elimination, 15-card matches, every round starts for everyone at the same moment.
+
+Open Cup: 4 seats, anyone can join; practice rivals take the seats nobody filled. Friends Cup: 4 or 8 seats for the
+host's friends or one of their gangs (empty seats become byes). The cup moves on by itself as soon as a round is decided.
+"""
+import random
+import time
+import uuid
+from datetime import datetime, timezone
+from typing import List, Literal, Optional
+
+from fastapi import APIRouter, Header, HTTPException
+from pydantic import BaseModel, ConfigDict, Field
+from pymongo import ReturnDocument
+
+from exam_groups import resolve_exam
+from scope import Pick, normalise, scope_fields, scope_of
+from shop import rival_profile
+from social import blocked_uids, card, find_player
+
+CUP_CARDS = 15
+LOBBY_SECONDS = {"open": 40, "private": 300}
+BREAK_SECONDS = 10  # between two rounds, so winners can catch their breath
+ACTIVE = ["open", "live"]
+ROUND_NAMES = {1: "Final", 2: "Semi-finals", 4: "Quarter-finals"}
+SHOWN = ("pid", "name", "avatar", "frame", "level")
+
+
+class CupCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    kind: Literal["open", "private"]
+    size: Literal[4, 8] = 4
+    picks: Optional[List[Pick]] = Field(default=None, max_length=5)
+    pids: List[str] = Field(default_factory=list, max_length=7)
+    gang_id: Optional[str] = Field(default=None, max_length=16)
+
+
+def make_router(db, rf_user, duels):
+    r = APIRouter(prefix="/rf/cups")
+    after = ReturnDocument.AFTER
+
+    async def seat(uid):
+        p = await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid}
+        return {"uid": uid, **{k: card(p)[k] for k in SHOWN}, "ts": time.time()}
+
+    def rival_seat():
+        rival = rival_profile()
+        return {"uid": "bot-" + uuid.uuid4().hex[:10], "bot": True, "pid": None, **{k: rival[k] for k in ("name", "avatar", "frame", "entry")},
+                "level": random.randint(3, 14), "wins": random.randint(4, 90), "acc": random.uniform(0.5, 0.75), "pace": random.uniform(4.0, 6.5)}
+
+    async def fresh(cid):
+        return await db.rf_cups.find_one({"id": cid})
+
+    async def fill(c, rnd, pairs):
+        """Seat every match of a round. Safe to run twice: matches are found again by their cup, round and number."""
+        seats, matches = {p["uid"]: p for p in c["players"]}, []
+        for m, (a, b) in enumerate(pairs):
+            row = {"a": a, "b": b, "winner": None, "duel_id": None, "score": None}
+            humans = [u for u in (a, b) if u and not seats[u].get("bot")]
+            if not a or not b:  # a bye
+                row["winner"] = a or b
+            elif not humans:  # two practice rivals: decided at once
+                rng = random.Random(f"{c['id']}:{rnd}:{m}")
+                score = [rng.randint(6, 13), rng.randint(6, 13)]
+                row.update(winner=a if score[0] >= score[1] else b, score=score)
+            else:
+                row["duel_id"] = await duels["seat"](c["exam"], scope_of(c), humans, f"cup:{c['id']}:{rnd}:{m}", gang_id=c.get("gang_id"), cards=CUP_CARDS,
+                                                     extra={"mode": "cup", "cup_id": c["id"], "cup_round": rnd}, bots=[seats[u] for u in (a, b) if seats[u].get("bot")],
+                                                     delay=BREAK_SECONDS if rnd else 2)
+            matches.append(row)
+        return await db.rf_cups.find_one_and_update({"id": c["id"]}, {"$set": {f"rounds.{rnd}": matches}}, return_document=after)
+
+    async def build(c, rnd, pairs, was):
+        got = await db.rf_cups.find_one_and_update({"id": c["id"], **was}, {"$set": {"round": rnd, "pairs": pairs, "built_ts": time.time()}}, return_document=after)
+        return await fill(got, rnd, pairs) if got else await fresh(c["id"])
+
+    async def begin(c):
+        """The lobby closes: practice rivals fill an Open Cup, the draw is made and round 1 starts."""
+        players = list(c["players"]) + ([rival_seat() for _ in range(c["size"] - len(c["players"]))] if c["kind"] == "open" else [])
+        random.Random(c["id"]).shuffle(players)
+        n = 2
+        while n < len(players):
+            n *= 2
+        slots = [p["uid"] for p in players] + [None] * (n - len(players))
+        pairs, now = [[slots[i], slots[n - 1 - i]] for i in range(n // 2)], time.time()
+        got = await db.rf_cups.find_one_and_update({"id": c["id"], "status": "open", "players": {"$size": len(c["players"])}},
+                                                   {"$set": {"players": players, "size": n, "started_ts": now, "status": "live", "round": 0, "pairs": pairs, "built_ts": now}}, return_document=after)
+        # No update means somebody joined or left this very moment: the next look starts the cup.
+        return await fill(got, 0, pairs) if got else await fresh(c["id"])
+
+    def decide(d, row):
+        """Who goes through. A tie goes to the real player over a practice rival, then to the faster one."""
+        ps = {p["uid"]: p for p in d["players"]}
+        a, b = ps[row["a"]], ps[row["b"]]
+        win = d.get("winner") if d.get("winner") in ps else min((a, b), key=lambda p: (bool(p.get("forfeit")), bool(p.get("bot")), p["ms"]))["uid"]
+        return win, [a["score"], b["score"]]
+
+    async def finish(c, champion):
+        seats = {p["uid"]: p for p in c["players"]}
+        humans = [p for p in c["players"] if not p.get("bot")]
+        final = c["rounds"][-1][0]
+        runner = final["b"] if final["a"] == champion else final["a"]
+        prizes = {}
+        if not seats[champion].get("bot"):
+            prizes[champion] = 30 + 40 * (len(humans) - 1)
+        if runner and not seats[runner].get("bot") and len(humans) > 2:
+            prizes[runner] = 15 * (len(humans) - 1)
+        got = await db.rf_cups.find_one_and_update({"id": c["id"], "status": "live"}, {"$set": {"status": "finished", "champion": champion, "prizes": prizes, "finished_ts": time.time()}}, return_document=after)
+        if not got:
+            return await fresh(c["id"])
+        for uid, coins in prizes.items():  # paid once: only the request that closed the cup gets here
+            won = uid == champion
+            await db.rf_profiles.update_one({"uid": uid}, {"$inc": {"coins": coins, **({"cups_won": 1} if won else {})}, **({"$addToSet": {"badges": "cup_champion"}} if won and len(humans) > 1 else {})})
+        if champion in prizes and len(humans) > 1 and not champion.startswith("TEST"):
+            await db.rf_feed.insert_one({"id": "cup:" + c["id"], "uid": champion, "kind": "cup", "data": {"players": len(c["players"]), "label": c["label"]}, "ts": time.time(), "at": datetime.now(timezone.utc)})
+        return got
+
+    async def settle(c):
+        """Move the cup on when its moment has come: start it, record finished matches, seat the next round, crown the champion."""
+        now = time.time()
+        if c["status"] == "open":
+            full, late = len(c["players"]) >= c["size"], now > c["expires_ts"]
+            if full or c.get("go") or (late and (c["kind"] == "open" or len(c["players"]) >= 2)):
+                return await begin(c)
+            if late:
+                return await db.rf_cups.find_one_and_update({"id": c["id"], "status": "open"}, {"$set": {"status": "expired"}}, return_document=after) or c
+            return c
+        if c["status"] != "live":
+            return c
+        rnd = c["round"]
+        if len(c.get("rounds") or []) <= rnd:  # the round is still being seated (or the server stopped half-way: seat it again)
+            return await fill(c, rnd, c["pairs"]) if now - c["built_ts"] > 8 else c
+        changed = False
+        for m, row in enumerate(c["rounds"][rnd]):
+            if row["winner"] or not row["duel_id"]:
+                continue
+            d = await db.rf_duels.find_one({"id": row["duel_id"]})
+            d = await duels["settle"](d) if d else None
+            if d and d["status"] == "finished":
+                win, score = decide(d, row)
+                await db.rf_cups.update_one({"id": c["id"], f"rounds.{rnd}.{m}.winner": None}, {"$set": {f"rounds.{rnd}.{m}.winner": win, f"rounds.{rnd}.{m}.score": score}})
+                changed = True
+        if changed:
+            c = await fresh(c["id"])
+        winners = [row["winner"] for row in c["rounds"][rnd]]
+        if c["status"] != "live" or c["round"] != rnd or not all(winners):
+            return c
+        if len(winners) == 1:
+            return await finish(c, winners[0])
+        return await build(c, rnd + 1, [winners[i:i + 2] for i in range(0, len(winners), 2)], {"status": "live", "round": rnd})
+
+    async def on_match_end(d):
+        if d.get("cup_id"):
+            c = await fresh(d["cup_id"])
+            if c:
+                await settle(c)
+
+    duels["hooks"].append(on_match_end)
+
+    async def view(c, uid):
+        c = await settle(c)
+        now, rounds, rnd = time.time(), c.get("rounds") or [], c.get("round", -1)
+        idx = {p["uid"]: i for i, p in enumerate(c["players"])}
+        current = rounds[rnd] if c["status"] == "live" and 0 <= rnd < len(rounds) else []
+        ids = [m["duel_id"] for m in current if m["duel_id"] and not m["winner"]]
+        live = {d["id"]: d for d in await db.rf_duels.find({"id": {"$in": ids}}, {"_id": 0, "id": 1, "start_at": 1, "players.uid": 1, "players.score": 1}).to_list(8)} if ids else {}
+        out = {u for rd in rounds for m in rd if m["winner"] for u in (m["a"], m["b"]) if u and u != m["winner"]}
+
+        def match(m):
+            d = live.get(m["duel_id"])
+            score = {p["uid"]: p["score"] for p in d["players"]} if d else {}
+            return {"a": idx.get(m["a"]), "b": idx.get(m["b"]), "winner": idx.get(m["winner"]), "score": m["score"] or ([score.get(m["a"], 0), score.get(m["b"], 0)] if d else None),
+                    "duel_id": m["duel_id"], "live": bool(d) and d["start_at"] <= now, "starts_in": max(0, round(d["start_at"] - now)) if d else 0, "mine": uid in (m["a"], m["b"])}
+
+        mine = next((m for m in current if uid in (m["a"], m["b"]) and m["duel_id"] and not m["winner"]), None)
+        host = c["host_uid"] == uid
+        return {"id": c["id"], "kind": c["kind"], "status": c["status"], "label": c["label"], "picks": c["picks"], "size": c["size"], "cards": CUP_CARDS,
+                "round": rnd, "is_host": host, "joined": uid in idx, "invited": uid in c.get("invites", []), "expires_in": max(0, round(c["expires_ts"] - now)),
+                "can_start": host and c["status"] == "open" and c["kind"] == "private" and len(c["players"]) >= 2,
+                "players": [{**{k: p.get(k) for k in SHOWN}, "bot": bool(p.get("bot")), "you": p["uid"] == uid, "out": p["uid"] in out} for p in c["players"]],
+                "rounds": [{"name": ROUND_NAMES.get(len(rd), f"Round {k + 1}"), "matches": [match(m) for m in rd]} for k, rd in enumerate(rounds)],
+                "my_duel": mine["duel_id"] if mine else None, "champion": idx.get(c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0)}
+
+    async def open_for(cid, uid):
+        """A cup this player may look at: they play in it, were invited, or are friends with someone playing."""
+        c = await fresh(cid)
+        uids = [p["uid"] for p in (c or {}).get("players", []) if not p.get("bot")]
+        if not c or not (uid in uids or uid in c.get("invites", []) or await db.rf_friends.find_one({"uid": uid, "fid": {"$in": uids}}, {"_id": 1})):
+            raise HTTPException(404, "Cup not found.")
+        return c
+
+    @r.post("")
+    async def create(data: CupCreate, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        now = time.time()
+        mine = await db.rf_cups.find_one({"players.uid": uid, "status": {"$in": ACTIVE}})
+        mine = await settle(mine) if mine else None
+        if mine and mine["status"] in ACTIVE:  # one cup at a time: back to the one you are in
+            return await view(mine, uid)
+        picks = normalise(data.picks)
+        exam, scope, me = resolve_exam("JEE", picks[0]["subject"]), scope_fields(picks), await seat(uid)
+        invites, gang_id, size = [], None, data.size
+        if data.kind == "open":
+            size = 4
+            c = await db.rf_cups.find_one_and_update({"kind": "open", "status": "open", "scope_key": scope["scope_key"], "expires_ts": {"$gt": now + 3}, "players.uid": {"$ne": uid}, "players.3": {"$exists": False}},
+                                                     {"$push": {"players": me}}, sort=[("created_ts", 1)], return_document=after)
+            if c:
+                return await view(c, uid)
+        else:
+            hidden = await blocked_uids(db, uid)
+            targets = [(await find_player(db, pid))["uid"] for pid in data.pids]
+            friends = {f["fid"] for f in await db.rf_friends.find({"uid": uid, "fid": {"$in": targets}}, {"_id": 0, "fid": 1}).to_list(len(targets) or 1)}
+            if uid in targets or hidden & set(targets) or set(targets) - friends:
+                raise HTTPException(403, "Add this player with their Friend Code first.")
+            if data.gang_id:
+                gang = await db.rf_gangs.find_one({"id": data.gang_id, "members.uid": uid, "closed": {"$ne": True}})
+                if not gang:
+                    raise HTTPException(404, "Gang not found.")
+                gang_id = gang["id"]
+                targets += [m["uid"] for m in sorted(gang["members"], key=lambda m: -m["ts"]) if m["uid"] != uid and m["uid"] not in hidden][:40]
+            invites = list(dict.fromkeys(targets))
+            if not invites:
+                raise HTTPException(400, "Pick friends or a gang for your cup.")
+        c = {"id": str(uuid.uuid4()), "kind": data.kind, "size": size, "host_uid": uid, "exam": exam, **scope, "status": "open", "created_ts": now, "expires_ts": now + LOBBY_SECONDS[data.kind],
+             "gang_id": gang_id, "invites": invites, "players": [me], "rounds": [], "round": -1}
+        await db.rf_cups.insert_one(c)
+        return await view(c, uid)
+
+    @r.get("/{cid}")
+    async def get(cid: str, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        return await view(await open_for(cid, uid), uid)
+
+    @r.post("/{cid}/join")
+    async def join(cid: str, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        c = await fresh(cid)
+        if not c or (c["kind"] == "private" and uid not in c["invites"] and uid != c["host_uid"]):
+            raise HTTPException(404, "This cup is for invited friends.")
+        if await db.rf_cups.find_one({"players.uid": uid, "status": {"$in": ACTIVE}, "id": {"$ne": cid}}, {"_id": 1}):
+            raise HTTPException(409, "Finish the cup you are in first.")
+        got = await db.rf_cups.find_one_and_update({"id": cid, "status": "open", "expires_ts": {"$gt": time.time()}, "players.uid": {"$ne": uid}, f"players.{c['size'] - 1}": {"$exists": False}},
+                                                   {"$push": {"players": await seat(uid)}}, return_document=after)
+        if not got:
+            got = await fresh(cid)
+            if not any(p["uid"] == uid for p in got["players"]):
+                raise HTTPException(409, "This cup is full or has already started.")
+        return await view(got, uid)
+
+    @r.post("/{cid}/leave")
+    async def leave(cid: str, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        c = await db.rf_cups.find_one({"id": cid, "players.uid": uid})
+        if not c:
+            raise HTTPException(404, "Cup not found.")
+        if c["status"] != "open":
+            raise HTTPException(409, "The cup has started. Leaving a match now counts as a loss.")
+        rest = [p for p in c["players"] if p["uid"] != uid]
+        if c["host_uid"] == uid and (c["kind"] == "private" or not rest):
+            await db.rf_cups.update_one({"id": cid, "status": "open"}, {"$set": {"status": "cancelled"}})
+        else:
+            await db.rf_cups.update_one({"id": cid, "status": "open"}, {"$pull": {"players": {"uid": uid}}, **({"$set": {"host_uid": rest[0]["uid"]}} if c["host_uid"] == uid else {})})
+        return {"ok": True}
+
+    @r.post("/{cid}/start")
+    async def start(cid: str, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        c = await db.rf_cups.find_one({"id": cid, "host_uid": uid})
+        if not c:
+            raise HTTPException(403, "Only the player who opened the cup can start it.")
+        if c["status"] == "open" and len(c["players"]) < 2:
+            raise HTTPException(409, "Wait for at least one friend to join.")
+        await db.rf_cups.update_one({"id": cid, "status": "open"}, {"$set": {"go": True}})
+        return await view(await fresh(cid), uid)
+
+    return r

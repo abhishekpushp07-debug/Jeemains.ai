@@ -5,15 +5,18 @@ import time
 import uuid
 from collections import Counter
 from datetime import datetime, timezone
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from fastapi import APIRouter, Header, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
 
+from gamify import ist_week
+from leagues import gang_week
 from social import blocked_uids, card, find_player, public_name, team_scores
 
 EMBLEMS = ("lion", "eagle", "thunder", "crown", "shield", "dragon", "wolf", "rocket")
 MAX_MEMBERS, MAX_GANGS = 20, 10
+BATCH_MEMBERS = 200  # a coaching batch: a big gang anyone with its link can join
 # Words a gang name may not contain (checked after removing spaces, symbols and look-alike digits).
 BLOCKED = ("fuck", "shit", "bitch", "asshole", "bastard", "pussy", "slut", "whore", "nigg", "rapist", "porn", "chutiya", "chutia", "bhosdi", "bhosad",
            "madarchod", "behenchod", "bhenchod", "gandu", "gaand", "lund", "lauda", "lavda", "randi", "harami", "bsdk", "chod")
@@ -34,6 +37,7 @@ class GangCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     name: str = Field(min_length=2, max_length=40)
     emblem: str = Field(max_length=12)
+    kind: Literal["gang", "batch"] = "gang"
     pids: List[str] = Field(default_factory=list, max_length=MAX_MEMBERS - 1)
 
 
@@ -59,8 +63,12 @@ class Join(BaseModel):
 
 
 def record_of(g: dict) -> dict:
-    """Gang Battle record: battles won and lost against other gangs."""
-    return {"wins": int(g.get("wins", 0)), "losses": int(g.get("losses", 0))}
+    """Gang War record: wars won, lost and tied against other gangs."""
+    return {"wins": int(g.get("wins", 0)), "losses": int(g.get("losses", 0)), "ties": int(g.get("ties", 0))}
+
+
+def cap_of(g: dict) -> int:
+    return BATCH_MEMBERS if g.get("kind") == "batch" else MAX_MEMBERS
 
 
 def make_router(db, rf_user):
@@ -85,17 +93,17 @@ def make_router(db, rf_user):
         hidden = await blocked_uids(db, uid)
         targets = list(dict.fromkeys([(await find_player(db, pid))["uid"] for pid in pids]))
         friends = {f["fid"] for f in await db.rf_friends.find({"uid": uid, "fid": {"$in": targets}}, {"_id": 0, "fid": 1}).to_list(len(targets) or 1)}
-        have = {m["uid"] for m in g["members"]}
+        have, cap = {m["uid"] for m in g["members"]}, cap_of(g)
         added, skipped = 0, []
         for t in targets:
             if t in have:
                 continue
-            reason = ("Not in your friends" if t not in friends or t in hidden else "Gang is full" if len(have) >= MAX_MEMBERS
+            reason = ("Not in your friends" if t not in friends or t in hidden else "Gang is full" if len(have) >= cap
                       else "Already in 10 gangs" if await db.rf_gangs.count_documents({"members.uid": t, **live}) >= MAX_GANGS else "")
             if reason:
                 skipped.append(reason)
                 continue
-            res = await db.rf_gangs.update_one({"id": g["id"], "members.uid": {"$ne": t}, f"members.{MAX_MEMBERS - 1}": {"$exists": False}},
+            res = await db.rf_gangs.update_one({"id": g["id"], "members.uid": {"$ne": t}, f"members.{cap - 1}": {"$exists": False}},
                                                {"$push": {"members": {"uid": t, "ts": time.time(), "by": uid}}})
             if res.modified_count:
                 have.add(t)
@@ -113,7 +121,7 @@ def make_router(db, rf_user):
         gangs = await db.rf_gangs.find({"members.uid": uid, **live}, {"_id": 0}).sort("created_ts", 1).to_list(MAX_GANGS)
         uids = list({m["uid"] for g in gangs for m in g["members"]})
         profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": uids}}, {"uid": 1, "seen_ts": 1}).to_list(len(uids) or 1)}
-        return {"items": [{"id": g["id"], "name": g["name"], "emblem": g["emblem"], "members": len(g["members"]), "leader": g["leader_uid"] == uid,
+        return {"items": [{"id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "members": len(g["members"]), "leader": g["leader_uid"] == uid,
                            "online": online_count([profs[m["uid"]] for m in g["members"] if m["uid"] in profs and m["uid"] != uid])} for g in gangs]}
 
     @r.post("")
@@ -122,7 +130,7 @@ def make_router(db, rf_user):
         name, emblem = clean_name(data.name), emblem_of(data.emblem)
         if await db.rf_gangs.count_documents({"members.uid": uid, **live}) >= MAX_GANGS:
             raise HTTPException(409, "You’re already in 10 gangs. Leave one to start another.")
-        g = {"id": "G" + uuid.uuid4().hex[:10].upper(), "name": name, "emblem": emblem, "leader_uid": uid, "created_ts": time.time(), "closed": False,
+        g = {"id": "G" + uuid.uuid4().hex[:10].upper(), "name": name, "emblem": emblem, "kind": data.kind, "leader_uid": uid, "created_ts": time.time(), "closed": False,
              "members": [{"uid": uid, "ts": time.time(), "by": uid}]}
         await db.rf_gangs.insert_one(g)
         result = await add(g, uid, data.pids) if data.pids else {"added": 0, "skipped": []}
@@ -135,7 +143,7 @@ def make_router(db, rf_user):
         term = q.strip()
         query = {"id": term.upper()} if re.fullmatch(r"[Gg][0-9A-Fa-f]{10}", term) else {"name": {"$regex": re.escape(term), "$options": "i"}}
         rows = await db.rf_gangs.find({**query, **live, "members.uid": {"$ne": uid}}, {"_id": 0}).limit(20).to_list(20)
-        return {"items": [{"id": g["id"], "name": g["name"], "emblem": g["emblem"], "members": len(g["members"]), **record_of(g)} for g in rows]}
+        return {"items": [{"id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "members": len(g["members"]), **record_of(g)} for g in rows]}
 
     @r.get("/{gid}")
     async def detail(gid: str, code: Optional[str] = Query(default=None, max_length=8), x_rf_user: Optional[str] = Header(None)):
@@ -146,12 +154,12 @@ def make_router(db, rf_user):
             raise HTTPException(404, "Gang not found.")
         if not inside:  # opened from an invite link: a preview with one Join button
             leader = await db.rf_profiles.find_one({"uid": g["leader_uid"]}) or {}
-            return {"member": False, "id": g["id"], "name": g["name"], "emblem": g["emblem"], "size": len(g["members"]), "max": MAX_MEMBERS, "leader": public_name(leader), "record": record_of(g)}
+            return {"member": False, "id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "size": len(g["members"]), "max": cap_of(g), "leader": public_name(leader), "record": record_of(g)}
         if not g.get("invite_code"):
             g["invite_code"] = secrets.token_hex(4).upper()
             await db.rf_gangs.update_one({"id": gid, "invite_code": {"$exists": False}}, {"$set": {"invite_code": g["invite_code"]}})
             g["invite_code"] = (await db.rf_gangs.find_one({"id": gid}, {"invite_code": 1}))["invite_code"]
-        profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [m["uid"] for m in g["members"]]}}).to_list(MAX_MEMBERS)}
+        profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [m["uid"] for m in g["members"]]}}).to_list(BATCH_MEMBERS)}
         members = [{**card(profs.get(m["uid"], {"uid": m["uid"]})), "leader": m["uid"] == g["leader_uid"], "you": m["uid"] == uid} for m in g["members"]]
         members.sort(key=lambda m: (not m["you"], not m["online"], -(m.get("seen_ts") or 0)))
         # Every finished gang match and Gang Battle this gang played (newest first) feeds the recent list, the rivals and the leaderboard.
@@ -178,7 +186,7 @@ def make_router(db, rf_user):
         board = sorted(({**{k: m[k] for k in ("pid", "name", "avatar", "frame", "you")}, "wins": wins[u], "played": played[u]}
                         for u, m in ((m["uid"], next(x for x in members if x["pid"] == card(profs.get(m["uid"], {"uid": m["uid"]}))["pid"])) for m in g["members"]) if played[u]),
                        key=lambda row: (-row["wins"], -row["played"]))
-        return {"member": True, "id": g["id"], "name": g["name"], "emblem": g["emblem"], "is_leader": g["leader_uid"] == uid, "max": MAX_MEMBERS, "members": members,
+        return {"member": True, "id": g["id"], "name": g["name"], "emblem": g["emblem"], "kind": g.get("kind", "gang"), "league": gang_week(g, ist_week()), "is_leader": g["leader_uid"] == uid, "max": cap_of(g), "members": members,
                 "online": sum(m["online"] and not m["you"] for m in members), "record": record_of(g), "invite_code": g["invite_code"],
                 "board": board[:10], "rivals": list(rivals.values())[:5], "recent": recent}
 
@@ -193,9 +201,12 @@ def make_router(db, rf_user):
             return {"ok": True}
         if g["leader_uid"] in await blocked_uids(db, uid):
             raise HTTPException(403, "You can’t join this gang.")
+        # A gang is a circle of friends: the link works once you are friends with a member. A batch is open to everyone with its link.
+        if g.get("kind") != "batch" and not await db.rf_friends.find_one({"uid": uid, "fid": {"$in": [m["uid"] for m in g["members"]]}}, {"_id": 1}):
+            raise HTTPException(403, "Become friends with a member first: enter their Friend Code in Gang & Friends.")
         if await db.rf_gangs.count_documents({"members.uid": uid, **live}) >= MAX_GANGS:
             raise HTTPException(409, "You’re already in 10 gangs. Leave one to join another.")
-        res = await db.rf_gangs.update_one({"id": gid, "members.uid": {"$ne": uid}, f"members.{MAX_MEMBERS - 1}": {"$exists": False}},
+        res = await db.rf_gangs.update_one({"id": gid, "members.uid": {"$ne": uid}, f"members.{cap_of(g) - 1}": {"$exists": False}},
                                            {"$push": {"members": {"uid": uid, "ts": time.time(), "by": uid}}})
         if not res.modified_count:
             raise HTTPException(409, "This gang is full.")

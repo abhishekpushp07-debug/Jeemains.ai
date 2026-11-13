@@ -75,7 +75,8 @@ async def _feed():
     try:
         async with httpx.AsyncClient(base_url=BASE, timeout=20) as s:
             # befriend only user1
-            r = await s.post("/friends", headers=me["h"], json={"pid": friend["pid"]})
+            code = (await s.get("/friends/code", headers=friend["h"])).json()["code"]
+            r = await s.post("/friends", headers=me["h"], json={"code": code})
             assert r.status_code == 200
             # Insert feed events: 2 by friend (recent + 8-day-old), 1 by stranger
             at = datetime.now(timezone.utc)
@@ -169,7 +170,7 @@ async def _h2h():
 
             # counts match profile.head_to_head
             prof = (await s.get(f"/players/{friend['pid']}", headers=me["h"])).json()
-            assert prof["head_to_head"] == {"you": 2, "them": 1, "played": 3}
+            assert prof["head_to_head"] == {"you": 2, "them": 1, "played": 3, "last": {"id": duel_ids[0], "won": True, "tie": False}}
 
             # 404 for self
             assert (await s.get(f"/players/{me['pid']}/h2h", headers=me["h"])).status_code == 404

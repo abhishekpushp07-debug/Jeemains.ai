@@ -1,4 +1,4 @@
-"""Rapid Fire social layer: verified player identity, profiles, one-way friends, blocks and one-tap challenges.
+"""Rapid Fire social layer: verified player identity, profiles, friends (made only with a Friend Code), blocks and one-tap challenges.
 
 Everything lives in the Rapid Fire companion collections (never on the canonical website). Phone numbers are
 never stored in clear text: only an HMAC (for exact-number search) and the last 4 digits (for masked names).
@@ -13,12 +13,13 @@ from collections import Counter
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, Header, HTTPException, Query
+from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
 from gamify import BADGES, level_of, vault_total
+from scope import label_for
 from shop import equipped_of, safe_avatar
 
 ONLINE_SECONDS = 60
@@ -47,6 +48,26 @@ async def phone_hash(db, phone) -> Optional[str]:
 
 def make_pid(uid: str) -> str:
     return "P" + hashlib.sha256(("rf-player:" + uid).encode()).hexdigest()[:8].upper()
+
+
+# Friend Code: the only way to become friends. It is private to its owner (unlike the public player id) and has no look-alike letters.
+CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+CODE_RE = re.compile(r"^[A-HJ-NP-Z2-9]{8}$")
+MAX_FRIENDS = 500
+
+
+async def friend_code_of(db, uid: str) -> str:
+    p = await db.rf_profiles.find_one({"uid": uid}, {"friend_code": 1}) or {}
+    for _ in range(6):
+        if p.get("friend_code"):
+            return p["friend_code"]
+        try:
+            code = "".join(secrets.choice(CODE_ALPHABET) for _ in range(8))
+            p = await db.rf_profiles.find_one_and_update({"uid": uid, "friend_code": {"$exists": False}}, {"$set": {"friend_code": code, "pid": make_pid(uid)}},
+                                                         upsert=True, return_document=ReturnDocument.AFTER)
+        except DuplicateKeyError:  # another request made it first, or the code is taken: read again
+            p = await db.rf_profiles.find_one({"uid": uid}, {"friend_code": 1}) or {}
+    raise HTTPException(503, "Could not make your Friend Code. Please try again.")
 
 
 def public_name(p: dict) -> str:
@@ -101,6 +122,11 @@ class Target(BaseModel):
     pid: str = Field(min_length=9, max_length=9)
 
 
+class FriendCode(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    code: str = Field(min_length=8, max_length=12)
+
+
 async def find_player(db, pid: str) -> dict:
     p = await db.rf_profiles.find_one({"pid": str(pid).upper()}) if PID_RE.match(str(pid).upper()) else None
     if not p:
@@ -117,6 +143,20 @@ async def blocked_uids(db, uid: str) -> set:
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf")
     stats_cache: dict = {}
+    misses: dict = {}  # uid -> times of wrong Friend Codes (stops code guessing)
+
+    async def by_code(uid, raw):
+        """The player who owns this Friend Code. Wrong codes are counted: 20 in 10 minutes locks the search for a while."""
+        now = time.time()
+        recent = misses[uid] = [t for t in misses.get(uid, []) if now - t < 600]
+        if len(recent) >= 20:
+            raise HTTPException(429, "Too many wrong codes. Try again in a few minutes.")
+        code = re.sub(r"[^A-Za-z0-9]", "", str(raw or "")).upper()
+        p = await db.rf_profiles.find_one({"friend_code": code}) if CODE_RE.match(code) else None
+        if not p or (p["uid"] != uid and await blocked_between(uid, p["uid"])):
+            recent.append(now)
+            raise HTTPException(404, "No player has this Friend Code. Check it and try again.")
+        return p
 
     async def me_profile(uid):
         p = await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid}
@@ -139,7 +179,7 @@ def make_router(db, rf_user):
         mine_won = {"$or": [{"winner": uid}, {"winners": uid}]}
         matches = await db.rf_duels.count_documents(q)
         wins = await db.rf_duels.count_documents({**q, **mine_won})
-        docs = await db.rf_duels.find(q, {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "winner": 1, "winners": 1, "finished_ts": 1, "vs_bot": 1, "mode": 1, "team_mode": 1, "teams": 1, "team_scores": 1,
+        docs = await db.rf_duels.find(q, {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "label": 1, "picks": 1, "winner": 1, "winners": 1, "finished_ts": 1, "vs_bot": 1, "mode": 1, "team_mode": 1, "teams": 1, "team_scores": 1,
                                          "players.uid": 1, "players.pid": 1, "players.name": 1, "players.score": 1, "players.bot": 1, "players.team": 1, "players.ms": 1, "players.forfeit": 1, "players.answers.outcome": 1}
                                   ).sort("finished_ts", -1).limit(300).to_list(300)
         won = lambda d: d.get("winner") == uid or uid in (d.get("winners") or [])  # noqa: E731
@@ -159,7 +199,7 @@ def make_router(db, rf_user):
             opp = max(others, key=lambda p: p.get("score", 0)) if others else {}
             group = len(others) > 1
             line = team_line(d, uid)
-            recent.append({"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "won": won(d), "tie": d.get("winner") == "tie", "players": len(d["players"]), "team": line,
+            recent.append({"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "label": label_for(d), "won": won(d), "tie": d.get("winner") == "tie", "players": len(d["players"]), "team": line,
                            "score": mine.get("score", 0), "opp_score": opp.get("score", 0), "opp_name": f"{len(others)} players" if group else opp.get("name") or "Rival",
                            "opp_pid": None if group or opp.get("bot") else opp.get("pid"),
                            "opp_bot": bool(opp.get("bot")), "finished_at": datetime.fromtimestamp(d["finished_ts"], timezone.utc).isoformat()})
@@ -177,23 +217,6 @@ def make_router(db, rf_user):
         return {"friend": bool(mine), "follows_you": bool(theirs), "blocked": bool(blocked)}
 
     # ---------- profiles ----------
-    @r.get("/players/search")
-    async def search(q: str = Query(min_length=2, max_length=40), x_rf_user: Optional[str] = Header(None)):
-        uid = rf_user(x_rf_user)
-        term = q.strip()
-        digits = _digits(term) if re.fullmatch(r"[+\d\s-]{10,16}", term) else ""
-        if digits:
-            query = {"phone_hash": await phone_hash(db, digits)}
-        elif PID_RE.match(term.upper()):
-            query = {"pid": term.upper()}
-        else:
-            query = {"display_name": {"$regex": re.escape(term), "$options": "i"}}
-        blocks = await db.rf_blocks.find({"$or": [{"uid": uid}, {"bid": uid}]}, {"_id": 0}).to_list(500)
-        hidden = {uid} | {b["bid"] for b in blocks} | {b["uid"] for b in blocks}
-        rows = await db.rf_profiles.find({**query, "uid": {"$nin": list(hidden), "$not": re.compile("^TEST")}}).limit(20).to_list(20)
-        friends = {f["fid"] for f in await db.rf_friends.find({"uid": uid, "fid": {"$in": [p["uid"] for p in rows]}}, {"_id": 0, "fid": 1}).to_list(20)}
-        return {"items": [{**card(p), "friend": p["uid"] in friends} for p in rows]}
-
     @r.get("/players/{pid}")
     async def player_profile(pid: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
@@ -204,14 +227,16 @@ def make_router(db, rf_user):
         stats = await stats_of(them)
         out = {**card(p), "is_me": them == uid, "title": stats["title"], "stats": {k: stats[k] for k in ("matches", "wins", "win_rate", "best_streak", "accuracy")},
                "recent": stats["recent"], "trophies": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1]} for b in BADGES if b in p.get("badges", [])],
-               "invite_path": f"/rf/invite/{card(p)['pid']}", "diamonds": vault_total(p), "best_phoenix": p.get("best_phoenix", 0)}
+               "diamonds": vault_total(p), "best_phoenix": p.get("best_phoenix", 0)}
         if them != uid:
             out["relation"] = await relation(uid, them)
             both = {"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}}  # head-to-head counts 1 v 1 matches only
+            last = await db.rf_duels.find_one(both, {"_id": 0, "id": 1, "winner": 1}, sort=[("finished_ts", -1)])
             out["head_to_head"] = {"you": await db.rf_duels.count_documents({**both, "winner": uid}), "them": await db.rf_duels.count_documents({**both, "winner": them}),
-                                   "played": await db.rf_duels.count_documents(both)}
+                                   "played": await db.rf_duels.count_documents(both), "last": {"id": last["id"], "won": last.get("winner") == uid, "tie": last.get("winner") == "tie"} if last else None}
         else:
             out["friend_count"] = await db.rf_friends.count_documents({"uid": uid})
+            out["friend_code"] = await friend_code_of(db, uid)
         return out
 
     @r.get("/players/{pid}/h2h")
@@ -222,9 +247,9 @@ def make_router(db, rf_user):
         if them == uid or await db.rf_blocks.find_one({"uid": them, "bid": uid}, {"_id": 1}):
             raise HTTPException(404, "Player not found.")
         docs = await db.rf_duels.find({"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}},
-                                      {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "winner": 1, "finished_ts": 1, "players.uid": 1, "players.score": 1}).sort("finished_ts", -1).limit(30).to_list(30)
+                                      {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "label": 1, "picks": 1, "winner": 1, "finished_ts": 1, "players.uid": 1, "players.score": 1}).sort("finished_ts", -1).limit(30).to_list(30)
         score = lambda d, u: next((p.get("score", 0) for p in d["players"] if p["uid"] == u), 0)  # noqa: E731
-        return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "you": score(d, uid), "them": score(d, them), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
+        return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "label": label_for(d), "you": score(d, uid), "them": score(d, them), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "finished_at": datetime.fromtimestamp(d["finished_ts"], timezone.utc).isoformat()} for d in docs]}
 
     @r.get("/feed")
@@ -248,31 +273,49 @@ def make_router(db, rf_user):
         items.sort(key=lambda x: (not x["online"], -(x.get("seen_ts") or 0)))
         return {"items": items}
 
-    @r.post("/friends")
-    async def add_friend(data: Target, x_rf_user: Optional[str] = Header(None)):
+    @r.get("/friends/code")
+    async def my_code(x_rf_user: Optional[str] = Header(None)):
+        """Your own Friend Code, to share with the people you want as friends."""
+        return {"code": await friend_code_of(db, rf_user(x_rf_user))}
+
+    @r.get("/friends/code/{code}")
+    async def friend_preview(code: str, x_rf_user: Optional[str] = Header(None)):
+        """Who owns this Friend Code (shown before you add them)."""
         uid = rf_user(x_rf_user)
-        p = await by_pid(data.pid)
+        p = await by_code(uid, code)
+        return {**card(p), "is_me": p["uid"] == uid, "friend": (await relation(uid, p["uid"]))["friend"]}
+
+    @r.post("/friends")
+    async def add_friend(data: FriendCode, x_rf_user: Optional[str] = Header(None)):
+        """A Friend Code makes both players friends at once: whoever shares their code agrees to it."""
+        uid = rf_user(x_rf_user)
+        p = await by_code(uid, data.code)
         them = p["uid"]
         if them == uid:
-            raise HTTPException(400, "That’s you!")
-        if await blocked_between(uid, them):
-            raise HTTPException(403, "You can’t add this player.")
-        try:
-            await db.rf_friends.insert_one({"uid": uid, "fid": them, "ts": time.time()})
-            if not await db.rf_friends.find_one({"uid": them, "fid": uid}, {"_id": 1}):
-                await db.rf_notices.update_one({"uid": them, "from_uid": uid, "kind": "friend_added"},
-                                               {"$set": {"ts": time.time(), "done": False}, "$setOnInsert": {"id": str(uuid.uuid4())}}, upsert=True)
-        except DuplicateKeyError:
-            pass
-        # Adding someone back answers their notice.
+            raise HTTPException(400, "That’s your own code! Share it with a friend.")
+        if not await db.rf_friends.find_one({"uid": uid, "fid": them}, {"_id": 1}):
+            for a in (uid, them):
+                if await db.rf_friends.count_documents({"uid": a}) >= MAX_FRIENDS:
+                    raise HTTPException(409, "Your friend list is full." if a == uid else "This player’s friend list is full.")
+        new = False
+        for a, b in ((uid, them), (them, uid)):
+            try:
+                await db.rf_friends.insert_one({"uid": a, "fid": b, "ts": time.time()})
+                new = True
+            except DuplicateKeyError:
+                pass
+        if new:
+            await db.rf_notices.update_one({"uid": them, "from_uid": uid, "kind": "friend_added"},
+                                           {"$set": {"ts": time.time(), "done": False}, "$setOnInsert": {"id": str(uuid.uuid4())}}, upsert=True)
         await db.rf_notices.update_many({"uid": uid, "from_uid": them, "kind": "friend_added"}, {"$set": {"done": True}})
-        return {"relation": await relation(uid, them)}
+        return {"friend": card(p), "relation": await relation(uid, them)}
 
     @r.delete("/friends/{pid}")
     async def remove_friend(pid: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         p = await by_pid(pid)
-        await db.rf_friends.delete_one({"uid": uid, "fid": p["uid"]})
+        await db.rf_friends.delete_many({"$or": [{"uid": uid, "fid": p["uid"]}, {"uid": p["uid"], "fid": uid}]})
+        await db.rf_notices.update_many({"$or": [{"uid": uid, "from_uid": p["uid"]}, {"uid": p["uid"], "from_uid": uid}], "kind": "friend_added"}, {"$set": {"done": True}})
         return {"relation": await relation(uid, p["uid"])}
 
     @r.post("/blocks")
