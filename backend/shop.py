@@ -22,8 +22,19 @@ SHOP = [
     {"id": "theme_ocean", "slot": "theme", "title": "Deep Ocean", "body": "Calm teal depths.", "price": 350, "icon": "waves", "colors": ["#032B3A", "#070B18"]},
     {"id": "theme_gold", "slot": "theme", "title": "Royal Gold", "body": "Champion’s gold arena.", "price": 900, "icon": "trophy", "colors": ["#3A2A05", "#070B18"]},
 ]
-SHOP_BY_ID = {i["id"]: i for i in SHOP}
-FREE_ENTRY = "entry_spark"  # everyone owns it; auto-equipped until the student picks another
+# Diamond specials: never sold for coins. Paid with streak diamonds from the Vault.
+GEM_SHOP = [
+    {"id": "frame_ruby", "slot": "frame", "title": "Ruby Blaze", "body": "A burning ruby ring around your avatar.", "price": 0, "gems": {"red": 6}, "icon": "diamond-stone"},
+    {"id": "frame_sapphire", "slot": "frame", "title": "Sapphire Halo", "body": "A royal-blue halo that pulses in matches.", "price": 0, "gems": {"blue": 4}, "icon": "diamond-stone"},
+    {"id": "frame_emerald", "slot": "frame", "title": "Emerald Aura", "body": "Deep green glow for long streaks.", "price": 0, "gems": {"emerald": 2}, "icon": "diamond-stone"},
+    {"id": "frame_kohinoor", "slot": "frame", "title": "Kohinoor Crown", "body": "The rarest ring in the arena.", "price": 0, "gems": {"emerald": 3, "gold": 1}, "icon": "crown"},
+    {"id": "entry_ruby", "slot": "entry", "title": "Ruby Storm", "body": "Arrive inside a storm of red diamonds.", "price": 0, "gems": {"red": 10}, "icon": "diamond-stone"},
+    {"id": "entry_sapphire", "slot": "entry", "title": "Sapphire Comet", "body": "Streak in like a blue comet.", "price": 0, "gems": {"blue": 6}, "icon": "diamond-stone"},
+    {"id": "entry_emerald", "slot": "entry", "title": "Emerald Surge", "body": "Rise on a wave of green light.", "price": 0, "gems": {"emerald": 3}, "icon": "diamond-stone"},
+    {"id": "entry_kohinoor", "slot": "entry", "title": "Kohinoor Nova", "body": "A white-gold nova. Only for 20-streak legends.", "price": 0, "gems": {"kohinoor": 1}, "icon": "diamond-stone"},
+]
+SHOP_BY_ID = {i["id"]: i for i in SHOP + GEM_SHOP}
+FREE_ENTRY = "entry_spark"  # everyone owns it and can equip it
 
 
 def owned_of(p: dict) -> list:
@@ -31,10 +42,8 @@ def owned_of(p: dict) -> list:
 
 
 def equipped_of(p: dict) -> dict:
-    eq = dict(p.get("equipped") or {})
-    if not eq.get("entry"):
-        eq["entry"] = FREE_ENTRY
-    return eq
+    """No entry effect picked: the app plays the default Royal entry."""
+    return dict(p.get("equipped") or {})
 # 3D game-style hero avatars: 4 free starters, the rest bought with coins by rarity.
 _AV = [
     ("av_topper", "Neon Topper", "common", 0, "a cheerful Indian teen boy student with headphones and a glowing cyan hoodie"),
@@ -53,12 +62,16 @@ _AV = [
     ("av_dragon", "Dragon Master", "legendary", 1500, "a confident young dragon master with a small red dragon on the shoulder, fiery glow"),
     ("av_galaxy", "Galaxy Queen", "legendary", 2000, "a regal cosmic queen with a starry galaxy cape, nebula hair and a glowing tiara"),
     ("av_einstein", "Professor Nova", "legendary", 2000, "a genius wild-white-haired scientist hero with glowing formula holograms around"),
+    ("av_ruby", "Ruby Striker", "diamond", 0, "a fierce teen warrior girl in crimson crystal armour with glowing ruby gems on the shoulders and a red diamond visor"),
+    ("av_emperor", "Diamond Emperor", "diamond", 0, "a majestic young emperor in white-gold diamond armour with a brilliant kohinoor diamond on the forehead and prismatic rainbow light"),
 ]
-AVATAR_ITEMS = [{"id": i, "slot": "avatar", "title": t, "rarity": r, "price": p, "prompt": pr} for i, t, r, p, pr in _AV]
+# Diamond-only avatars: paid with streak diamonds, never coins.
+AVATAR_GEMS = {"av_ruby": {"red": 8, "blue": 2}, "av_emperor": {"emerald": 2, "gold": 1}}
+AVATAR_ITEMS = [{"id": i, "slot": "avatar", "title": t, "rarity": r, "price": p, "prompt": pr, **({"gems": AVATAR_GEMS[i]} if i in AVATAR_GEMS else {})} for i, t, r, p, pr in _AV]
 AVATAR_BY_ID = {a["id"]: a for a in AVATAR_ITEMS}
-FREE_AVATARS = [a["id"] for a in AVATAR_ITEMS if not a["price"]]
+FREE_AVATARS = [a["id"] for a in AVATAR_ITEMS if not a["price"] and not a.get("gems")]
 AVATARS = [a["id"] for a in AVATAR_ITEMS]
-BUYABLE = {**SHOP_BY_ID, **{a["id"]: a for a in AVATAR_ITEMS if a["price"]}}
+BUYABLE = {**SHOP_BY_ID, **{a["id"]: a for a in AVATAR_ITEMS if a["price"] or a.get("gems")}}
 
 
 def safe_avatar(a):

@@ -1,4 +1,4 @@
-import { rapidColors as colors } from "@/src/theme";
+import { gemColors, rapidColors as colors } from "@/src/theme";
 
 // 3D hero portraits bundled with the app (generated once, see backend/rapidfire/generate_avatars.py).
 export const AVATAR_IMAGES: Record<string, number> = {
@@ -18,6 +18,8 @@ export const AVATAR_IMAGES: Record<string, number> = {
   av_dragon: require("../assets/avatars/av_dragon.webp"),
   av_galaxy: require("../assets/avatars/av_galaxy.webp"),
   av_einstein: require("../assets/avatars/av_einstein.webp"),
+  av_ruby: require("../assets/avatars/av_ruby.webp"),
+  av_emperor: require("../assets/avatars/av_emperor.webp"),
 };
 
 export const RARITY: Record<string, { label: string; color: string }> = {
@@ -25,4 +27,5 @@ export const RARITY: Record<string, { label: string; color: string }> = {
   rare: { label: "RARE", color: colors.custom_rarityRare },
   epic: { label: "EPIC", color: colors.custom_rarityEpic },
   legendary: { label: "LEGENDARY", color: colors.custom_rarityLegendary },
+  diamond: { label: "DIAMOND", color: gemColors.kohinoor },
 };

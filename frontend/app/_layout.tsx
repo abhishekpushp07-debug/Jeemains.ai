@@ -8,6 +8,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { ErrorBoundary } from "@/src/components/error-boundary";
 import { AuthProvider, useAuth } from "@/src/auth";
+import { InboxPoller } from "@/src/rapid/social";
 import { colors } from "@/src/theme";
 
 const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account"];
@@ -33,9 +34,12 @@ export default function RootLayout() {
           <KeyboardProvider>
             <StatusBar style="dark" />
             <AuthGate />
+            <InboxPoller />
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
               <Stack.Screen name="attempt/[id]" options={{ gestureEnabled: false }} />
               <Stack.Screen name="rapid/session" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
+              <Stack.Screen name="rapid/duel" options={{ gestureEnabled: false, animation: "fade" }} />
+              <Stack.Screen name="rapid/room/[cid]" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
             </Stack></SessionBoundary>
           </KeyboardProvider>
         </AuthProvider>

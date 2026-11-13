@@ -39,5 +39,5 @@ export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () 
 
 export function useShare() {
   return () =>
-    Share.share({ message: "JEECIRCLE.AI — free JEE Main, BITSAT & COMEDK practice: chapter tests, 62-day All India series and 20-second Rapid Fire formula cards. Free for everyone. https://jeelive.ai" }).catch(() => {});
+    Share.share({ message: "JEECIRCLE.AI — free JEE Main, BITSAT & COMEDK practice: chapter tests, 62-day All India series and 15-second Rapid Fire formula cards. Free for everyone. https://jeelive.ai" }).catch(() => {});
 }

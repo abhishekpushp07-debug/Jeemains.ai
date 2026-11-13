@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, useWindowDimensions } from "react-native";
+import React, { useEffect, useId, useState } from "react";
+import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
-import Animated, {
-  Easing, SharedValue, cancelAnimation, interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue,
-  withDelay, withRepeat, withSequence, withTiming,
-} from "react-native-reanimated";
+import * as Haptics from "expo-haptics";
+import Animated, { Easing, Extrapolation, SharedValue, cancelAnimation, interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
-import { Icon, T } from "@/src/rapid/ui";
+import Svg, { Circle, Defs, Path, RadialGradient, Stop } from "react-native-svg";
+import { Icon, T } from "@/src/components/ui";
 import { AVATAR_IMAGES } from "@/src/avatars";
+import { Emblem, PhoenixDiamond } from "@/src/rapid/Art";
 import { playSfx } from "@/src/sfx";
-import { rapidColors as colors } from "@/src/theme";
+import { arena, fx, gemColors } from "@/src/theme";
 
 export const FRAME_COLORS: Record<string, [string, string]> = {
-  frame_gold: [colors.custom_neonAmber, colors.custom_amber],
-  frame_neon: [colors.custom_neonCyan, colors.brandPrimary],
-  frame_fire: [colors.custom_examBitsat, colors.custom_examJee],
-  frame_diamond: [colors.custom_neonCyan, colors.custom_neonAmber],
+  frame_gold: [arena.gold, arena.goldDeep], frame_neon: [fx.bolt, arena.teal], frame_fire: [fx.ember, fx.fire], frame_diamond: [fx.white, fx.ice],
+  // Diamond specials, paid with streak diamonds.
+  frame_ruby: [gemColors.red, fx.fire], frame_sapphire: [fx.bolt, gemColors.blue], frame_emerald: [gemColors.emerald, arena.teal], frame_kohinoor: [gemColors.kohinoor, gemColors.gold],
 };
+const STILL_FRAMES = ["frame_gold"];
+const CROWNED = ["frame_diamond", "frame_kohinoor"];
 
 // Avatar: 3D hero portrait with an optional purchased frame (animated pulse for neon/fire/diamond frames).
 export function Avatar({ icon, frame, size = 56, testID }: { icon?: string | null; frame?: string | null; size?: number; testID?: string }) {
@@ -25,170 +26,217 @@ export function Avatar({ icon, frame, size = 56, testID }: { icon?: string | nul
   useEffect(() => {
     cancelAnimation(pulse);
     pulse.value = 1;
-    if (!reduced && (frame === "frame_neon" || frame === "frame_diamond" || frame === "frame_fire")) pulse.value = withRepeat(withTiming(1.08, { duration: 900 }), -1, true);
+    if (!reduced && frame && FRAME_COLORS[frame] && !STILL_FRAMES.includes(frame)) pulse.value = withRepeat(withTiming(1.08, { duration: 900 }), -1, true);
   }, [frame, reduced, pulse]);
   const a = useAnimatedStyle(() => ({ transform: [{ scale: pulse.value }] }));
-  const ring = frame ? FRAME_COLORS[frame] : [colors.custom_gameLine, colors.custom_gameLine];
-  const img = icon ? AVATAR_IMAGES[icon] : AVATAR_IMAGES.av_robo;
+  const ring = (frame && FRAME_COLORS[frame]) || [arena.rimHi, arena.rim];
   return (
     <Animated.View testID={testID} style={[{ width: size, height: size }, a]}>
-      <LinearGradient colors={ring as [string, string]} style={{ flex: 1, borderRadius: size / 2, padding: frame ? 3 : 2 }}>
-        <View style={{ flex: 1, borderRadius: size / 2, backgroundColor: colors.custom_gameCardHi, alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-          {img ? <Image source={img} style={{ width: "100%", height: "100%" }} contentFit="cover" transition={120} /> : <Icon name={icon as any} size={size * 0.55} color={colors.onSurfaceInverse} />}
+      <LinearGradient colors={ring as [string, string]} style={{ flex: 1, borderRadius: size / 2, padding: frame ? Math.max(3, size / 22) : 2 }}>
+        <View style={{ flex: 1, borderRadius: size / 2, backgroundColor: arena.panelHi, overflow: "hidden" }}>
+          <Image source={AVATAR_IMAGES[icon || ""] || AVATAR_IMAGES.av_robo} style={styles.fill} contentFit="cover" transition={120} />
         </View>
       </LinearGradient>
-      {frame === "frame_diamond" ? <View style={{ position: "absolute", top: -8, alignSelf: "center" }}><Icon name="crown" size={size * 0.34} color={colors.custom_neonAmber} /></View> : null}
+      {frame && CROWNED.includes(frame) ? <View style={styles.crown}><Icon name="crown" size={size * 0.34} color={arena.gold} /></View> : null}
     </Animated.View>
   );
 }
 
 type Motion = "radial" | "rise" | "fall" | "swirlIn" | "swirlOut" | "streak" | "spiral";
-export const EFFECTS: Record<string, { icon: string; c1: string; c2: string; motion: Motion }> = {
-  entry_spark: { icon: "star-four-points", c1: colors.custom_neonCyan, c2: colors.custom_neonMagenta, motion: "radial" },
-  entry_rocket: { icon: "rocket-launch", c1: colors.custom_examBitsat, c2: colors.custom_neonAmber, motion: "rise" },
-  entry_lightning: { icon: "lightning-bolt", c1: colors.custom_neonCyan, c2: colors.onSurfaceInverse, motion: "radial" },
-  entry_supercar: { icon: "car-sports", c1: colors.custom_examBitsat, c2: colors.custom_neonRed, motion: "streak" },
-  entry_crown: { icon: "crown", c1: colors.custom_neonAmber, c2: colors.custom_examComedkGold, motion: "fall" },
-  entry_tornado: { icon: "weather-tornado", c1: colors.custom_neonCyan, c2: colors.custom_gameMuted, motion: "spiral" },
-  entry_meteor: { icon: "meteor", c1: colors.custom_examBitsat, c2: colors.custom_examJee, motion: "radial" },
-  entry_dragon: { icon: "fire", c1: colors.custom_examJee, c2: colors.custom_examBitsat, motion: "rise" },
-  entry_phoenix: { icon: "bird", c1: colors.custom_neonAmber, c2: colors.custom_examBitsat, motion: "rise" },
-  entry_galaxy: { icon: "orbit", c1: colors.custom_neonViolet, c2: colors.custom_neonMagenta, motion: "swirlOut" },
-  entry_blackhole: { icon: "atom-variant", c1: colors.custom_neonViolet, c2: colors.custom_gameBg, motion: "swirlIn" },
+type Effect = { label: string; icon: string; c1: string; c2: string; motion: Motion; from: "left" | "right" | "top" | "bottom"; sfx: string };
+// Players who never picked an entry effect arrive with this one.
+export const ROYAL: Effect = { label: "Royal", icon: "crown", c1: fx.gold, c2: fx.white, motion: "fall", from: "top", sfx: "entry_crown" };
+export const EFFECTS: Record<string, Effect> = {
+  entry_spark: { label: "Neon Spark", icon: "star-four-points", c1: fx.ice, c2: fx.white, motion: "radial", from: "bottom", sfx: "entry_spark" },
+  entry_rocket: { label: "Rocket Launch", icon: "rocket-launch", c1: fx.fire, c2: fx.ember, motion: "rise", from: "bottom", sfx: "entry_rocket" },
+  entry_lightning: { label: "Thunder Strike", icon: "lightning-bolt", c1: fx.bolt, c2: fx.white, motion: "radial", from: "top", sfx: "entry_lightning" },
+  entry_supercar: { label: "Supercar Drift", icon: "car-sports", c1: fx.fire, c2: fx.smoke, motion: "streak", from: "right", sfx: "entry_supercar" },
+  entry_crown: { label: "Royal Parade", icon: "crown", c1: fx.gold, c2: fx.ember, motion: "fall", from: "top", sfx: "entry_crown" },
+  entry_tornado: { label: "Cyclone Spin", icon: "weather-tornado", c1: fx.ice, c2: fx.smoke, motion: "spiral", from: "bottom", sfx: "entry_tornado" },
+  entry_meteor: { label: "Meteor Crash", icon: "meteor", c1: fx.fire, c2: fx.crimson, motion: "radial", from: "top", sfx: "entry_meteor" },
+  entry_dragon: { label: "Dragon Inferno", icon: "fire", c1: fx.crimson, c2: fx.fire, motion: "rise", from: "left", sfx: "entry_dragon" },
+  entry_phoenix: { label: "Phoenix Rise", icon: "bird", c1: fx.ember, c2: fx.fire, motion: "rise", from: "bottom", sfx: "entry_phoenix" },
+  entry_galaxy: { label: "Galaxy Warp", icon: "orbit", c1: fx.sky, c2: fx.ice, motion: "swirlOut", from: "right", sfx: "entry_galaxy" },
+  entry_blackhole: { label: "Black Hole", icon: "atom-variant", c1: fx.white, c2: fx.sky, motion: "swirlIn", from: "top", sfx: "entry_blackhole" },
+  // Diamond specials, paid with streak diamonds.
+  entry_ruby: { label: "Ruby Storm", icon: "diamond-stone", c1: gemColors.red, c2: fx.white, motion: "fall", from: "top", sfx: "entry_meteor" },
+  entry_sapphire: { label: "Sapphire Comet", icon: "diamond-stone", c1: gemColors.blue, c2: fx.bolt, motion: "streak", from: "right", sfx: "entry_galaxy" },
+  entry_emerald: { label: "Emerald Surge", icon: "diamond-stone", c1: gemColors.emerald, c2: fx.ice, motion: "rise", from: "bottom", sfx: "entry_phoenix" },
+  entry_kohinoor: { label: "Kohinoor Nova", icon: "diamond-stone", c1: gemColors.kohinoor, c2: gemColors.gold, motion: "swirlOut", from: "top", sfx: "entry_blackhole" },
 };
+export const effectOf = (id?: string | null) => (id && EFFECTS[id]) || ROYAL;
 
-const N = 22;
+export const BUILD = 0.5, EACH = 3.5, VS = 1.3, FIGHT = 0.7;
+/** Length of the show in seconds: 2 players = 9.5, 5 players = 20. */
+export const showSeconds = (players: number) => BUILD + EACH * players + VS + FIGHT;
+
+const N = 30;
 const rnd = (i: number, k: number) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+const heavy = () => { if (Platform.OS !== "web") Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {}); };
 
-function Particle({ i, p, motion, color, w, h }: { i: number; p: SharedValue<number>; motion: Motion; color: string; w: number; h: number }) {
-  const r1 = rnd(i, 1), r2 = rnd(i, 2), size = 4 + r1 * 9;
+function Particle({ i, clock, start, motion, color, w, h }: { i: number; clock: SharedValue<number>; start: number; motion: Motion; color: string; w: number; h: number }) {
+  const r1 = rnd(i, 1), r2 = rnd(i, 2), size = 6 + r1 * 14;
   const st = useAnimatedStyle(() => {
-    const t = p.value;
-    let x = 0, y = 0, o = interpolate(t, [0, 0.15, 0.75, 1], [0, 1, 0.9, 0]);
+    const t = Math.min(1, Math.max(0, (clock.value - start - 0.5 - r2 * 0.5) / 2.2));
     const ang = (i / N) * Math.PI * 2 + r2;
-    if (motion === "radial") { x = Math.cos(ang) * t * w * (0.35 + r1 * 0.3); y = Math.sin(ang) * t * h * (0.25 + r1 * 0.2); }
-    else if (motion === "rise") { x = (r1 - 0.5) * w * 0.8 + Math.sin(t * 6 + i) * 14; y = h * 0.3 - t * h * (0.5 + r2 * 0.4); }
-    else if (motion === "fall") { x = (r1 - 0.5) * w * 0.9; y = -h * 0.4 + t * h * (0.5 + r2 * 0.3); }
-    else if (motion === "streak") { x = w * 0.6 - t * w * (1.2 + r2); y = (r1 - 0.5) * h * 0.4; }
-    else if (motion === "spiral") { const a = ang + t * 10; const rr = 30 + t * w * 0.35; x = Math.cos(a) * rr * 0.6; y = h * 0.2 - t * h * 0.45 + Math.sin(a) * 18; }
-    else { const a = ang + t * (motion === "swirlIn" ? -9 : 7); const rr = motion === "swirlIn" ? (1 - t) * w * 0.55 : t * w * 0.5; x = Math.cos(a) * rr; y = Math.sin(a) * rr * 0.6; }
-    return { opacity: o, transform: [{ translateX: x }, { translateY: y }, { scale: motion === "streak" ? 1 : 1 - t * 0.4 }] };
+    let x = 0, y = 0;
+    if (motion === "radial") { x = Math.cos(ang) * t * w * (0.4 + r1 * 0.4); y = Math.sin(ang) * t * h * (0.3 + r1 * 0.3); }
+    else if (motion === "rise") { x = (r1 - 0.5) * w + Math.sin(t * 6 + i) * 18; y = h * 0.5 - t * h * (0.7 + r2 * 0.5); }
+    else if (motion === "fall") { x = (r1 - 0.5) * w; y = -h * 0.55 + t * h * (0.8 + r2 * 0.4); }
+    else if (motion === "streak") { x = w * 0.7 - t * w * (1.3 + r2); y = (r1 - 0.5) * h * 0.7; }
+    else if (motion === "spiral") { const a = ang + t * 10; const rr = 40 + t * w * 0.5; x = Math.cos(a) * rr; y = h * 0.35 - t * h * 0.7 + Math.sin(a) * 30; }
+    else { const a = ang + t * (motion === "swirlIn" ? -9 : 7); const rr = motion === "swirlIn" ? (1 - t) * w * 0.7 : t * w * 0.65; x = Math.cos(a) * rr; y = Math.sin(a) * rr * 0.8; }
+    return { opacity: t <= 0 ? 0 : interpolate(t, [0, 0.12, 0.75, 1], [0, 1, 0.9, 0]), transform: [{ translateX: x }, { translateY: y }, { scale: motion === "streak" ? 1 : 1 - t * 0.4 }] };
   });
   const streak = motion === "streak";
-  return <Animated.View pointerEvents="none" style={[{ position: "absolute", width: streak ? 30 + r1 * 50 : size, height: streak ? 3 : size, borderRadius: size, backgroundColor: color, shadowColor: color, shadowOpacity: 1, shadowRadius: 8 }, st]} />;
+  return <Animated.View pointerEvents="none" style={[{ position: "absolute", width: streak ? 60 + r1 * 110 : size, height: streak ? 4 : size, borderRadius: size, backgroundColor: color, shadowColor: color, shadowOpacity: 1, shadowRadius: 10 }, st]} />;
 }
 
-// One effect "burst": particles + a giant glowing effect icon behind the player.
-function Burst({ effect, p, w, h }: { effect?: string | null; p: SharedValue<number>; w: number; h: number }) {
-  const fx = effect ? EFFECTS[effect] : null;
-  const icon = useAnimatedStyle(() => ({ opacity: interpolate(p.value, [0, 0.2, 0.7, 1], [0, 0.9, 0.6, 0]), transform: [{ scale: interpolate(p.value, [0, 0.3, 1], [0.3, 1.25, 1.6]) }, { rotate: `${(fx?.motion === "swirlIn" || fx?.motion === "swirlOut" || fx?.motion === "spiral" ? p.value * 300 : 0)}deg` }] }));
-  if (!fx) return null;
-  return (
-    <View pointerEvents="none" style={{ position: "absolute", alignItems: "center", justifyContent: "center", width: 1, height: 1 }}>
-      <Animated.View style={[{ position: "absolute", width: 190, height: 190, borderRadius: 95, alignItems: "center", justifyContent: "center", backgroundColor: fx.c1 + "2E" }, icon]}>
-        <Icon name={fx.icon as any} size={110} color={fx.c1} />
-      </Animated.View>
-      {Array.from({ length: N }, (_, i) => <Particle key={i} i={i} p={p} motion={fx.motion} color={i % 3 ? fx.c1 : fx.c2} w={w} h={h} />)}
-    </View>
-  );
+const RAYS = Array.from({ length: 12 }, (_, i) => i * 30);
+/** Twelve beams of light fanning out from the player, with a soft glow in the middle. Drawn once; the wrapper turns it. */
+const Beams = React.memo(function Beams({ size, color }: { size: number; color: string }) {
+  const r = size / 2, id = "entryGlow" + useId().replace(/[^a-zA-Z0-9]/g, "");
+  return <Svg width={size} height={size} viewBox={`${-r} ${-r} ${size} ${size}`}>
+    {/* Explicit stopOpacity: native SVG ignores alpha inside stopColor. */}
+    <Defs><RadialGradient id={id} cx="0" cy="0" r={r * 0.42} gradientUnits="userSpaceOnUse"><Stop offset="0" stopColor={color} stopOpacity={0.75} /><Stop offset="1" stopColor={color} stopOpacity={0} /></RadialGradient></Defs>
+    {RAYS.map((deg) => <Path key={deg} d={`M0 0 L${-r * 0.12} ${-r} L${r * 0.12} ${-r} Z`} fill={color} opacity={deg % 60 ? 0.13 : 0.26} transform={`rotate(${deg})`} />)}
+    <Circle r={r * 0.42} fill={`url(#${id})`} />
+  </Svg>;
+});
+
+// `emblem` makes this a gang's entry in a Gang Battle: the whole team arrives as one, under its emblem, with `sub` as its second line.
+export type EntryPlayer = { name?: string; avatar?: string | null; frame?: string | null; entry?: string | null; level?: number; wins?: number; you?: boolean; bot?: boolean; emblem?: string | null; sub?: string };
+const who = (p: EntryPlayer) => (p.emblem ? p.name : p.you ? "You" : p.name) || "Rival";
+const face = (p: EntryPlayer, size: number) => (p.emblem ? <Emblem id={p.emblem} size={size} /> : <Avatar icon={p.avatar} frame={p.frame} size={size} />);
+
+// One player's full-screen 3.5 seconds: the effect fills the screen, the avatar slams down, the nameplate rises.
+function PlayerEntry({ p, start, clock, W, H, reduced }: { p: EntryPlayer; start: number; clock: SharedValue<number>; W: number; H: number; reduced: boolean }) {
+  const e = effectOf(p.entry);
+  const size = Math.min(W * 0.52, 230);
+  const far = e.from === "left" ? -W : e.from === "right" ? W : e.from === "top" ? -H * 0.7 : H * 0.7;
+  const side = e.from === "left" || e.from === "right";
+  const tint = useAnimatedStyle(() => ({ opacity: interpolate(clock.value - start, [0, 0.2, 3.1, 3.5], [0, 1, 1, 0], Extrapolation.CLAMP) }));
+  const glyph = useAnimatedStyle(() => {
+    const u = clock.value - start;
+    const spin = e.motion === "swirlIn" || e.motion === "swirlOut" || e.motion === "spiral" ? u * 90 : 0;
+    return { opacity: interpolate(u, [0, 0.3, 2.8, 3.4], [0, 0.42, 0.3, 0], Extrapolation.CLAMP), transform: [{ scale: reduced ? 1.6 : interpolate(u, [0, 0.6, 3.5], [0.4, 1.6, 2.3], Extrapolation.CLAMP) }, { rotate: `${reduced ? 0 : spin}deg` }] };
+  });
+  const body = useAnimatedStyle(() => {
+    const u = clock.value - start;
+    const o = interpolate(u, [0.1, 0.3, 3.1, 3.45], [0, 1, 1, 0], Extrapolation.CLAMP);
+    if (reduced) return { opacity: o };
+    const t = Math.min(1, Math.max(0, (u - 0.15) / 0.55)), pos = far * Math.pow(1 - t, 3);
+    return { opacity: o, transform: [side ? { translateX: pos } : { translateY: pos }, { scale: interpolate(u, [0.15, 0.7, 0.82, 1, 3.1, 3.5], [0.5, 1.28, 0.94, 1, 1, 1.4], Extrapolation.CLAMP) }] };
+  });
+  const plate = useAnimatedStyle(() => {
+    const u = clock.value - start;
+    return { opacity: interpolate(u, [1, 1.3, 3.1, 3.4], [0, 1, 1, 0], Extrapolation.CLAMP), transform: [{ translateY: reduced ? 0 : interpolate(u, [1, 1.3], [30, 0], Extrapolation.CLAMP) }] };
+  });
+  const flash = useAnimatedStyle(() => ({ opacity: reduced ? 0 : interpolate(clock.value - start, [0.66, 0.73, 1.1], [0, 0.7, 0], Extrapolation.CLAMP) }));
+  // The landing: beams of light burst out behind the avatar and keep turning, and a shockwave ring races outwards.
+  const beamSize = Math.max(W, H) * 1.5;
+  const beams = useAnimatedStyle(() => {
+    const u = clock.value - start;
+    return { opacity: interpolate(u, [0.6, 0.85, 3.05, 3.4], [0, 1, 1, 0], Extrapolation.CLAMP), transform: [{ rotate: `${reduced ? 0 : u * 20}deg` }, { scale: reduced ? 1 : interpolate(u, [0.6, 0.95], [0.25, 1], Extrapolation.CLAMP) }] };
+  });
+  const wave = useAnimatedStyle(() => {
+    const u = clock.value - start;
+    return { opacity: reduced ? 0 : interpolate(u, [0.68, 0.74, 1.55], [0, 0.95, 0], Extrapolation.CLAMP), transform: [{ scale: interpolate(u, [0.68, 1.55], [0.7, 3.4], Extrapolation.CLAMP) }] };
+  });
+  return <View pointerEvents="none" style={[StyleSheet.absoluteFill, styles.centered]}>
+    <Animated.View style={[StyleSheet.absoluteFill, tint]}><LinearGradient colors={[e.c1, arena.black, arena.black, e.c1]} locations={[0, 0.42, 0.62, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[StyleSheet.absoluteFill, styles.tint]} /></Animated.View>
+    <Animated.View style={[styles.glyph, glyph]}><Icon name={e.icon as any} size={W * 0.8} color={e.c1} /></Animated.View>
+    <Animated.View style={[styles.glyph, beams]}><Beams size={beamSize} color={e.c1} /></Animated.View>
+    {reduced ? null : Array.from({ length: N }, (_, i) => <Particle key={i} i={i} clock={clock} start={start} motion={e.motion} color={i % 3 ? e.c1 : e.c2} w={W} h={H} />)}
+    <Animated.View style={[styles.glyph, { width: size, height: size, borderRadius: size / 2, borderWidth: 5, borderColor: e.c2 }, wave]} />
+    <Animated.View style={[styles.centered, body]}>{face(p, size)}</Animated.View>
+    <Animated.View style={[styles.plate, { borderColor: e.c1 }, plate]}>
+      <T w="heavy" size={26} color={arena.text} numberOfLines={1} style={styles.center}>{who(p)}</T>
+      <T w="bold" size={14} color={arena.gold} style={styles.center}>{p.sub || `Level ${p.level ?? 1} · ${p.wins ?? 0} win${p.wins === 1 ? "" : "s"}${p.bot ? " · Practice rival" : ""}`}</T>
+      <T w="heavy" size={11} color={e.c1} style={[styles.center, styles.spaced]}>{e.label.toUpperCase()} ENTRY</T>
+    </Animated.View>
+    <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: e.c2 }, flash]} />
+  </View>;
 }
 
-// Small inline entry preview (shop cards / sheets). Plays sound on each replay.
-export function EntryEffect({ effect, fromRight = false, children, play = 0, sound = false }: { effect?: string | null; fromRight?: boolean; children: React.ReactNode; play?: number; sound?: boolean }) {
-  const reduced = useReducedMotion();
-  const { width } = useWindowDimensions();
-  const x = useSharedValue(0), s = useSharedValue(1), p = useSharedValue(0);
-  useEffect(() => {
-    if (sound && play) playSfx(effect);
-    if (reduced) return;
-    x.value = fromRight ? 200 : -200;
-    s.value = 0.4;
-    p.value = 0;
-    x.value = withTiming(0, { duration: 650, easing: Easing.out(Easing.back(1.4)) });
-    s.value = withDelay(150, withTiming(1, { duration: 450, easing: Easing.out(Easing.back(1.6)) }));
-    p.value = effect ? withTiming(1, { duration: 1400, easing: Easing.out(Easing.quad) }) : 0;
-  }, [effect, fromRight, reduced, play]); // eslint-disable-line react-hooks/exhaustive-deps
-  const body = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { scale: s.value }] }));
-  return (
-    <View style={{ alignItems: "center", justifyContent: "center" }}>
-      <Burst effect={effect} p={p} w={Math.min(width, 360) * 0.7} h={170} />
-      <Animated.View style={body}>{children}</Animated.View>
-    </View>
-  );
-}
-
-type P = { name?: string; avatar?: string | null; frame?: string | null; entry?: string | null; bot?: boolean };
-
-// Full-screen 3-second duel intro: you blast in, rival blasts in, VS slam, FIGHT. Then card 1.
-export function EntryShow({ me, opp, onDone, testID = "entry-show" }: { me?: P; opp?: P; onDone?: () => void; testID?: string }) {
+/**
+ * Entry show before every match: dark build-up, 3.5 seconds for each player (you first), VS slam in front of the
+ * Phoenix Diamond, FIGHT. `elapsed` is how far into the show the server clock already is, so every phone stays in step.
+ * `solo` plays just one entry (profile "Watch entry", store preview).
+ */
+export function EntryShow({ players, elapsed = 0, solo, onDone, testID = "entry-show" }: { players: EntryPlayer[]; elapsed?: number; solo?: boolean; onDone?: () => void; testID?: string }) {
   const { width: W, height: H } = useWindowDimensions();
-  const reduced = useReducedMotion();
-  const a = useSharedValue(0), b = useSharedValue(0), pa = useSharedValue(0), pb = useSharedValue(0);
-  const vs = useSharedValue(0), flash = useSharedValue(0), shake = useSharedValue(0), out = useSharedValue(1), fight = useSharedValue(0);
+  const reduced = !!useReducedMotion();
+  const n = players.length;
+  const vsAt = BUILD + EACH * n, fightAt = vsAt + VS, end = solo ? vsAt : fightAt + FIGHT;
+  const clock = useSharedValue(elapsed);
+  const [phase, setPhase] = useState(-1);
   useEffect(() => {
-    const ease = Easing.out(Easing.back(1.3));
-    const timers = [
-      setTimeout(() => playSfx(me?.entry || "entry_rocket"), 0),
-      setTimeout(() => playSfx(opp?.entry || "entry_lightning", 0.85), 1000),
-      setTimeout(() => playSfx("vs"), 2000),
-      setTimeout(() => playSfx("go", 0.8), 3000),
-    ];
-    if (reduced) {
-      a.value = 1; b.value = 1; vs.value = 1; fight.value = 1;
-      const t = setTimeout(() => onDone?.(), 4000);
-      return () => { clearTimeout(t); timers.forEach(clearTimeout); };
-    }
-    a.value = withTiming(1, { duration: 900, easing: ease });
-    pa.value = withTiming(1, { duration: 1700, easing: Easing.out(Easing.quad) });
-    b.value = withDelay(1000, withTiming(1, { duration: 900, easing: ease }));
-    pb.value = withDelay(1000, withTiming(1, { duration: 1700, easing: Easing.out(Easing.quad) }));
-    vs.value = withDelay(2000, withTiming(1, { duration: 420, easing: Easing.out(Easing.back(2)) }));
-    flash.value = withDelay(2000, withSequence(withTiming(0.85, { duration: 70 }), withTiming(0, { duration: 380 })));
-    shake.value = withDelay(2000, withSequence(withTiming(10, { duration: 50 }), withTiming(-10, { duration: 50 }), withTiming(6, { duration: 50 }), withTiming(0, { duration: 60 })));
-    fight.value = withDelay(3000, withTiming(1, { duration: 380, easing: Easing.out(Easing.back(1.8)) }));
-    out.value = withDelay(3650, withTiming(0, { duration: 350 }, (f) => { if (f && onDone) runOnJS(onDone)(); }));
-    return () => timers.forEach(clearTimeout);
+    const cues: [number, () => void][] = [];
+    players.forEach((p, i) => {
+      const at = BUILD + EACH * i;
+      cues.push([at, () => { setPhase(i); playSfx(effectOf(p.entry).sfx, i ? 0.85 : 1); }], [at + 0.72, heavy]);
+    });
+    if (!solo) cues.push([vsAt, () => setPhase(n)], [vsAt + 0.5, () => { playSfx("vs"); heavy(); }], [fightAt, () => playSfx("go", 0.8)]);
+    const late = cues.filter(([at]) => at <= elapsed).map(([, run]) => run);
+    if (late.length) setPhase(Math.min(n, Math.max(0, Math.floor((elapsed - BUILD) / EACH))));
+    const timers = cues.filter(([at]) => at > elapsed).map(([at, run]) => setTimeout(run, (at - elapsed) * 1000));
+    clock.value = withTiming(end, { duration: Math.max(0, end - elapsed) * 1000, easing: Easing.linear }, (f) => { if (f && onDone) runOnJS(onDone)(); });
+    return () => { timers.forEach(clearTimeout); cancelAnimation(clock); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const root = useAnimatedStyle(() => ({ opacity: out.value, transform: [{ translateX: shake.value }] }));
-  const left = useAnimatedStyle(() => ({ transform: [{ translateX: interpolate(a.value, [0, 1], [-W, 0]) }, { scale: interpolate(a.value, [0, 1], [0.4, 1]) }] }));
-  const right = useAnimatedStyle(() => ({ transform: [{ translateX: interpolate(b.value, [0, 1], [W, 0]) }, { scale: interpolate(b.value, [0, 1], [0.4, 1]) }] }));
-  const vsS = useAnimatedStyle(() => ({ opacity: vs.value > 0.05 ? 1 : 0, transform: [{ scale: Math.max(0.6, interpolate(vs.value, [0, 1], [3, 1])) }, { rotate: `${interpolate(vs.value, [0, 1], [-25, 0])}deg` }] }));
-  const flashS = useAnimatedStyle(() => ({ opacity: flash.value }));
-  const fightS = useAnimatedStyle(() => ({ opacity: Math.min(1, fight.value), transform: [{ scale: Math.max(0.3, interpolate(fight.value, [0, 1], [0.3, 1])) }] }));
-  const size = Math.min(132, W * 0.32);
-
-  const player = (p: P | undefined, mine: boolean) => (
-    <View style={{ alignItems: "center", gap: 8, width: W * 0.42 }}>
-      <Avatar icon={p?.avatar} frame={p?.frame} size={size} />
-      <T w="heavy" size={17} color={colors.onSurfaceInverse} numberOfLines={1}>{mine ? "You" : p?.name || "Rival"}</T>
-      {null}
-      {p?.entry ? <T w="bold" size={11} color={EFFECTS[p.entry]?.c1 || colors.custom_gameMuted} numberOfLines={1}>{EFFECTS[p.entry] ? p.entry.replace("entry_", "").toUpperCase() + " ENTRY" : ""}</T> : null}
-    </View>
-  );
+  const root = useAnimatedStyle(() => {
+    let shake = 0;
+    if (!reduced) {
+      for (let i = 0; i <= n; i++) {
+        const dt = clock.value - (i < n ? BUILD + EACH * i + 0.72 : vsAt + 0.55);
+        if (dt > 0 && dt < 0.35 && (i < n || !solo)) shake += Math.sin(dt * 70) * 11 * (1 - dt / 0.35);
+      }
+    }
+    return { opacity: interpolate(clock.value, [end - 0.18, end], [1, 0], Extrapolation.CLAMP), transform: [{ translateX: shake }] };
+  });
+  const ring = useAnimatedStyle(() => ({ opacity: interpolate(clock.value, [0, 0.4, 0.7], [0, 0.9, 0], Extrapolation.CLAMP), transform: [{ scale: interpolate(clock.value, [0, 0.7], [0.2, 2.4], Extrapolation.CLAMP) }] }));
+  const lineup = useAnimatedStyle(() => ({ opacity: interpolate(clock.value - vsAt, [0, 0.25], [0, 1], Extrapolation.CLAMP) }));
+  const gem = useAnimatedStyle(() => ({ transform: [{ scale: reduced ? 1 : interpolate(clock.value - vsAt, [0, 0.4], [0.3, 1], Extrapolation.CLAMP) }] }));
+  const vs = useAnimatedStyle(() => {
+    const v = clock.value - vsAt;
+    return { opacity: v > 0.3 ? 1 : 0, transform: [{ scale: reduced ? 1 : interpolate(v, [0.3, 0.55, 0.7], [3.4, 0.9, 1], Extrapolation.CLAMP) }, { rotate: `${reduced ? 0 : interpolate(v, [0.3, 0.55], [-22, 0], Extrapolation.CLAMP)}deg` }] };
+  });
+  const slam = useAnimatedStyle(() => ({ opacity: reduced ? 0 : interpolate(clock.value - vsAt, [0.5, 0.56, 0.95], [0, 0.85, 0], Extrapolation.CLAMP) }));
+  const fight = useAnimatedStyle(() => {
+    const f = clock.value - fightAt;
+    return { opacity: f > 0 ? 1 : 0, transform: [{ scale: reduced ? 1 : interpolate(f, [0, 0.2, 0.32], [0.3, 1.15, 1], Extrapolation.CLAMP) }] };
+  });
+  const seat = Math.min(96, (W - 32) / n - 10);
 
   return (
-    <Animated.View testID={testID} style={[StyleSheet.absoluteFill, { zIndex: 50 }, root]}>
-      <LinearGradient colors={[colors.custom_gameCardHi, colors.custom_gameBg, colors.custom_examJeeDeep]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-      <View style={{ flex: 1, justifyContent: "center", gap: H * 0.04 }}>
-        <Animated.View style={[{ alignSelf: "flex-start", marginLeft: W * 0.06, alignItems: "center", justifyContent: "center" }, left]}>
-          <Burst effect={me?.entry || "entry_rocket"} p={pa} w={W} h={H * 0.5} />
-          {player(me, true)}
-        </Animated.View>
-        <Animated.View style={[{ alignSelf: "center" }, vsS]}>
-          <LinearGradient colors={[colors.custom_neonAmber, colors.custom_examBitsat]} style={{ width: 92, height: 92, borderRadius: 46, alignItems: "center", justifyContent: "center", borderWidth: 3, borderColor: colors.onSurfaceInverse }}>
-            <T w="heavy" size={38} color={colors.custom_gameBg}>VS</T>
-          </LinearGradient>
-        </Animated.View>
-        <Animated.View style={[{ alignSelf: "flex-end", marginRight: W * 0.06, alignItems: "center", justifyContent: "center" }, right]}>
-          <Burst effect={opp?.entry || "entry_lightning"} p={pb} w={W} h={H * 0.5} />
-          {player(opp, false)}
-        </Animated.View>
-        <Animated.View style={[{ alignSelf: "center" }, fightS]}>
-          <T w="heavy" size={46} color={colors.custom_neonAmber} style={{ letterSpacing: 4, textShadowColor: colors.custom_examBitsat, textShadowRadius: 16 }} testID="entry-fight">FIGHT!</T>
-        </Animated.View>
-      </View>
-      <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: colors.onSurfaceInverse }, flashS]} />
+    <Animated.View testID={testID} accessibilityLabel="Entry show" style={[StyleSheet.absoluteFill, styles.root, root]}>
+      <Animated.View pointerEvents="none" style={[styles.ring, ring]} />
+      {phase >= 0 && phase < n ? <PlayerEntry key={phase} p={players[phase]} start={BUILD + EACH * phase} clock={clock} W={W} H={H} reduced={reduced} /> : null}
+      {phase >= n && !solo ? <Animated.View testID="entry-versus" style={[StyleSheet.absoluteFill, styles.centered, lineup]}>
+        <LinearGradient pointerEvents="none" colors={[arena.black, arena.bgDeep, arena.black]} locations={[0.12, 0.52, 0.92]} style={StyleSheet.absoluteFill} />
+        <Animated.View style={[styles.gem, gem]}><PhoenixDiamond width={Math.min(W * 0.82, 340)} /></Animated.View>
+        <View style={styles.seats}>
+          {players.map((p, i) => <View key={i} style={[styles.seat, { width: seat + 8 }]}>
+            {face(p, seat)}
+            <T w="heavy" size={n > 3 ? 11 : 13} color={p.you ? arena.gold : arena.text} numberOfLines={1}>{who(p)}</T>
+          </View>)}
+        </View>
+        <Animated.View style={vs}><T w="heavy" size={84} color={arena.gold} style={styles.vs}>VS</T></Animated.View>
+        <Animated.View style={[styles.fight, fight]}><T w="heavy" size={50} color={arena.text} style={styles.fightText} testID="entry-fight">FIGHT!</T></Animated.View>
+        <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: arena.gold }, slam]} />
+      </Animated.View> : null}
     </Animated.View>
   );
 }
+
+const styles = StyleSheet.create({
+  fill: { width: "100%", height: "100%" }, crown: { position: "absolute", top: -8, alignSelf: "center" },
+  root: { zIndex: 50, backgroundColor: arena.black }, centered: { alignItems: "center", justifyContent: "center" }, center: { textAlign: "center" },
+  tint: { opacity: 0.55 }, glyph: { position: "absolute" }, spaced: { letterSpacing: 2.5 },
+  ring: { position: "absolute", alignSelf: "center", top: "42%", width: 180, height: 180, borderRadius: 90, borderWidth: 6, borderColor: arena.gold },
+  plate: { position: "absolute", bottom: "13%", left: 24, right: 24, paddingVertical: 14, paddingHorizontal: 16, borderRadius: 20, borderWidth: 2, backgroundColor: arena.scrim, gap: 4 },
+  gem: { position: "absolute" }, seats: { position: "absolute", top: "17%", left: 16, right: 16, flexDirection: "row", justifyContent: "space-around" }, seat: { alignItems: "center", gap: 6 },
+  vs: { letterSpacing: 4, textShadowColor: arena.bgDeep, textShadowOffset: { width: 0, height: 5 }, textShadowRadius: 2 },
+  fight: { position: "absolute", bottom: "16%" }, fightText: { letterSpacing: 5, textShadowColor: fx.fire, textShadowRadius: 18 },
+});

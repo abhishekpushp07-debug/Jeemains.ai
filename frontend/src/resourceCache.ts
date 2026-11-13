@@ -18,6 +18,14 @@ export class ResourceCache {
   private bytes = 0;
   private store?: Store;
   private counters = { loads: 0, coalesced: 0, freshHits: 0, evictions: 0 };
+  private listeners = new Map<string, Set<(value: any) => void>>();
+
+  /** Every screen showing the same key hears a fresh value the moment any one of them loads it. */
+  subscribe(key: string, listener: (value: any) => void) {
+    const set = this.listeners.get(key) || new Set();
+    set.add(listener); this.listeners.set(key, set);
+    return () => { set.delete(listener); if (!set.size) this.listeners.delete(key); };
+  }
 
   setPersistence(store: Store) { this.store = store; }
   peek<T>(key: string): T | null {
@@ -63,7 +71,7 @@ export class ResourceCache {
       if (controller.signal.aborted) throw Object.assign(new Error("Request stopped."), { name: "AbortError" });
       return load(controller.signal);
     }), cancelled])
-      .then(value => { if (this.flights.get(key) === pending) this.remember(key, value, persist); return value; })
+      .then(value => { if (this.flights.get(key) === pending) { this.remember(key, value, persist); this.listeners.get(key)?.forEach(listener => listener(value)); } return value; })
       .finally(() => { clearTimeout(timer); if (this.flights.get(key) === pending) this.flights.delete(key); });
     return pending.promise;
   }

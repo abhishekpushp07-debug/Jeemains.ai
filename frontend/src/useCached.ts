@@ -71,6 +71,9 @@ export function useCached<T>(key: string | null, fetcher: (signal: AbortSignal) 
     };
   }, [key, tick, persist]);
 
+  // Another screen loaded this key again (a claim, a purchase, a refresh): show the same fresh value here too.
+  useEffect(() => (key ? resources.subscribe(key, (value) => { setData(value); setDataKey(key); setError(""); setLoading(false); }) : undefined), [key]);
+
   const reload = useCallback(() => { forceNext.current = true; setTick((t) => t + 1); }, []);
   const revalidate = useCallback(() => { forceNext.current = false; setTick((t) => t + 1); }, []);
   // A key change renders before the effect runs; never flash another exam/account's data.

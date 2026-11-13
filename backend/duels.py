@@ -7,7 +7,7 @@ import random
 import string
 import time
 import uuid
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Header, HTTPException, WebSocket, WebSocketDisconnect
@@ -18,10 +18,28 @@ from exam_groups import Exam, require_active_exam, resolve_exam
 from revision import record_learning
 from rf_access import verified_grant
 from rapid_deck import fresh_deck
+from gamify import level_of, phoenix
+from social import make_pid, public_name, team_line, team_scores
 
 DUEL_CARDS = 30
-CARD_SECONDS = 20
+CARD_SECONDS = 15
 WAIT_SECONDS = 120
+MAX_PLAYERS = 5
+
+
+def trailing(answers: list) -> int:
+    """Correct answers in a row right now (the Phoenix streak rivals can see)."""
+    n = 0
+    for a in reversed(answers):
+        if a.get("outcome") != "correct":
+            break
+        n += 1
+    return n
+
+
+def entry_seconds(players: int) -> float:
+    """Entry show: 0.5 s build-up, 3.5 s per player, 1.3 s VS slam, 0.7 s FIGHT (2 players = 9.5 s, 5 players = 20 s)."""
+    return 0.5 + 3.5 * max(2, min(MAX_PLAYERS, players)) + 1.3 + 0.7
 
 
 class DuelCreate(BaseModel):
@@ -162,10 +180,14 @@ def make_router(db, rf_user, public_card, award):
         finally:
             tickers.pop(did, None)
 
-    async def player(uid, name):
-        prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": name.strip()[:24]}}, upsert=True, return_document=True) or {}
+    async def player(uid, name=""):
+        prof = await db.rf_profiles.find_one({"uid": uid}) or {}
+        # Verified account name (or masked number) wins over anything the phone sends.
+        shown = public_name(prof) if (prof.get("display_name") or prof.get("phone_last4")) else (name.strip()[:24] or "Player")
+        prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": shown, "pid": make_pid(uid)}}, upsert=True, return_document=True) or {}
         eq = equipped_of(prof)
-        return {"uid": uid, "name": name.strip()[:24], "avatar": safe_avatar(prof.get("avatar")), "frame": eq.get("frame"), "entry": eq.get("entry"), "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
+        return {"uid": uid, "pid": make_pid(uid), "name": shown, "level": level_of(prof.get("xp", 0)), "wins": prof.get("wins", 0), "avatar": safe_avatar(prof.get("avatar")), "frame": eq.get("frame"), "entry": eq.get("entry"),
+                "answers": [], "score": 0, "ms": 0, "done": False, "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
 
     async def active_owned_duel(did, uid):
         d = await db.rf_duels.find_one({"id": did, "players.uid": uid}, {"_id": 0})
@@ -174,18 +196,57 @@ def make_router(db, rf_user, public_card, award):
         resolve_exam(d.get("exam"), d["subject"])
         return d
 
-    def start_fields():
-        start = time.time() + 4.6  # 4 s entry show + network margin, then card 1
-        return {"status": "ready", "start_at": start, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
+    def start_fields(players=2):
+        # Every phone plays the entry show against this server clock, so card 1 opens at the same moment for all.
+        show = entry_seconds(players)
+        start = time.time() + show + 1.0
+        return {"status": "ready", "start_at": start, "entry_seconds": show, "ends_at": start + DUEL_CARDS * (CARD_SECONDS + 2) + 30}
 
     async def pick_cards(subject, chapter, exam):
         docs = await fresh_deck(db, exam, subject, chapter, DUEL_CARDS)
         return [d["id"] for d in docs]
 
+    async def seat_duel(exam, subject, chapter, uids, challenge_id, gang_id=None, teams=None):
+        """A Match Room started: 2 to 5 players seated at once (or two gang teams of up to 5), entry show starts on every phone."""
+        existing = await db.rf_duels.find_one({"challenge_id": challenge_id}, {"id": 1})
+        if existing:
+            return existing["id"]
+        if not teams:
+            uids = uids[:MAX_PLAYERS]
+        players = [await player(u) for u in uids]
+        extra = {}
+        if teams:  # Gang vs Gang: each side enters as one team, so the show is as long as a 1 v 1
+            side = {u: t for t in ("a", "b") for u in teams[t]["uids"]}
+            for p in players:
+                p["team"] = side[p["uid"]]
+            extra = {"team_mode": True, "teams": {t: {k: teams[t][k] for k in ("id", "name", "emblem")} for t in ("a", "b")}}
+        d = {"id": str(uuid.uuid4()), "code": None, "exam": exam, "mode": "friend", "subject": subject, "chapter": chapter, "card_ids": await pick_cards(subject, chapter, exam),
+             "players": players, "created_ts": time.time(), "request_id": "challenge:" + challenge_id,
+             "request_ids": ["challenge:" + challenge_id], "challenge_id": challenge_id, "gang_id": gang_id, **extra, **start_fields(2 if teams else len(uids))}
+        await db.rf_duels.insert_one(d)
+        notify(d["id"])
+        return d["id"]
+
+    def ranking(d):
+        """Live order: players who left go last, then higher score, then less answer time."""
+        return sorted(d["players"], key=lambda p: (bool(p.get("forfeit")), -p["score"], p["ms"]))
+
     def winner(d):
         ps = d["players"]
         if len(ps) < 2:
             return None
+        if d.get("team_mode"):  # the higher team score wins; a side where everybody left cannot win
+            ts = team_scores(d)
+            gone = {t: all(p.get("forfeit") for p in ps if p.get("team") == t) for t in ("a", "b")}
+            if gone["a"] != gone["b"]:
+                return "team:b" if gone["a"] else "team:a"
+            a, b = (ts["a"]["score"], -ts["a"]["ms"]), (ts["b"]["score"], -ts["b"]["ms"])
+            return "tie" if a == b else "team:a" if a > b else "team:b"
+        if len(ps) > 2:  # everyone plays for themselves: first place wins
+            first, second = ranking(d)[:2]
+            if first.get("forfeit"):
+                return "tie"
+            return "tie" if not second.get("forfeit") and (first["score"], first["ms"]) == (second["score"], second["ms"]) else first["uid"]
         a, b = ps
         if a.get("bot") or b.get("bot"):
             human, bot = (b, a) if a.get("bot") else (a, b)
@@ -203,8 +264,13 @@ def make_router(db, rf_user, public_card, award):
         return "tie"
 
     def tie_break(d):
-        ps = d["players"]
-        return len(ps) == 2 and not (ps[0].get("forfeit") or ps[1].get("forfeit")) and ps[0]["score"] == ps[1]["score"] and ps[0]["ms"] != ps[1]["ms"]
+        if len(d["players"]) < 2:
+            return False
+        if d.get("team_mode"):
+            ts = team_scores(d)
+            return ts["a"]["score"] == ts["b"]["score"] and ts["a"]["ms"] != ts["b"]["ms"]
+        a, b = ranking(d)[:2]
+        return not (a.get("forfeit") or b.get("forfeit")) and a["score"] == b["score"] and a["ms"] != b["ms"]
 
     async def simulate_bot(d):
         """Seated arena opponent (fills a quick match when no student joins): paces itself; never lowers its score."""
@@ -214,7 +280,10 @@ def make_router(db, rf_user, public_card, award):
         me = next(p for p in d["players"] if not p.get("bot"))
         total = len(d["card_ids"])
         n = total if me["done"] else max(0, min(total, int((time.time() - d["start_at"]) / bot["pace"])))
-        natural = max(bot["score"], round(n * bot["acc"]))  # the opponent's score never goes down
+        # Which cards the rival gets right is fixed per match, so it has real runs of correct answers (and a Phoenix streak rivals can see).
+        rng = random.Random(d["id"])
+        hits = [rng.random() < bot["acc"] for _ in range(total)][:n]
+        natural = max(bot["score"], sum(hits))  # the opponent's score never goes down
         if me["score"] >= 5 and natural >= me["score"]:
             # a student who is really playing: hold the opponent until the student overtakes, then stay just behind
             gap = 1 + int(d["id"].replace("-", "")[:2], 16) % 3  # ends 1-3 behind, varies per match so it never looks scripted
@@ -223,8 +292,13 @@ def make_router(db, rf_user, public_card, award):
             score = natural
         if n != len(bot["answers"]) or score != bot["score"]:
             answers = [{"i": i, "outcome": "bot"} for i in range(n)]
-            await db.rf_duels.update_one({"id": d["id"], "players.uid": bot["uid"]}, {"$set": {"players.$.answers": answers, "players.$.score": score, "players.$.done": n >= total}})
-            bot.update({"answers": answers, "score": score, "done": n >= total})
+            more, gained = n - len(bot["answers"]), score - bot["score"]
+            if score == sum(hits):  # playing its own game: the streak is the run of correct cards it is on right now
+                streak = next((k for k, hit in enumerate(reversed(hits)) if not hit), n)
+            else:  # held back behind the student: count from what its score just did
+                streak = bot.get("streak", 0) + gained if gained >= more else gained
+            await db.rf_duels.update_one({"id": d["id"], "players.uid": bot["uid"]}, {"$set": {"players.$.answers": answers, "players.$.score": score, "players.$.done": n >= total, "players.$.streak": streak}})
+            bot.update({"answers": answers, "score": score, "done": n >= total, "streak": streak})
         return d
 
     async def settle(d):
@@ -234,11 +308,23 @@ def make_router(db, rf_user, public_card, award):
         if d["status"] == "waiting" and now - d["created_ts"] > (WAIT_SECONDS if d["mode"] == "random" else 1800):
             d = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "waiting"}, {"$set": {"status": "expired"}}, return_document=ReturnDocument.AFTER) or d
         if d["status"] == "ready" and (now > d["ends_at"] or all(p["done"] for p in d["players"])):
-            d = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "ready"}, {"$set": {"status": "finished", "winner": winner(d), "tie_break": tie_break(d), "finished_ts": now}},
-                                                      return_document=ReturnDocument.AFTER) or await db.rf_duels.find_one({"id": d["id"]})
+            win = winner(d)
+            fields = {"status": "finished", "winner": win, "tie_break": tie_break(d), "finished_ts": now}
+            if d.get("team_mode"):
+                fields["winners"] = [p["uid"] for p in d["players"] if win == "team:" + p.get("team", "") and not p.get("forfeit")]
+                fields["team_scores"] = team_scores(d)
+            flipped = await db.rf_duels.find_one_and_update({"id": d["id"], "status": "ready"}, {"$set": fields}, return_document=ReturnDocument.AFTER)
+            if flipped and d.get("team_mode") and win in ("team:a", "team:b"):  # the gangs' battle record, counted once
+                won_side, lost_side = ("a", "b") if win == "team:a" else ("b", "a")
+                await db.rf_gangs.update_one({"id": d["teams"][won_side]["id"]}, {"$inc": {"wins": 1}})
+                await db.rf_gangs.update_one({"id": d["teams"][lost_side]["id"]}, {"$inc": {"losses": 1}})
+            d = flipped or await db.rf_duels.find_one({"id": d["id"]})
             for p in [x for x in d["players"] if not x.get("bot")]:  # reward both players at settle time, even if one never returns
                 await reward_for(d, p["uid"])
         return d
+
+    def won_by(d, uid):
+        return d.get("winner") == uid or uid in (d.get("winners") or [])
 
     async def reward_for(d, uid):
         me = next(p for p in d["players"] if p["uid"] == uid)
@@ -248,7 +334,14 @@ def make_router(db, rf_user, public_card, award):
         await record_learning(db, uid, "duel:" + d["id"], d["exam"], rows, list(docs.values()),
                               datetime.fromtimestamp(d["finished_ts"], timezone.utc).isoformat())
         # Seated arena opponents count exactly like a live match (coins, record, wins, badges).
-        return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, d.get("winner") == uid, exam=d["exam"])
+        # Diamonds are only kept by players who finished: leaving the match forfeits them.
+        gems, best = ({}, 0) if me.get("forfeit") else phoenix([a["outcome"] for a in me["answers"]])
+        others = [p for p in d["players"] if p["uid"] != uid]
+        line = team_line(d, uid)
+        meta = ({"team": line["mine"], "vs": line["theirs"], "mine": line["my_score"], "theirs": line["their_score"]} if line
+                else {"bot": True} if any(p.get("bot") for p in others)
+                else {"vs": others[0]["name"], "mine": me["score"], "theirs": others[0]["score"]} if len(others) == 1 else {"players": len(d["players"]), "mine": me["score"]})
+        return await award(uid, "duel:" + d["id"], "duel", me["score"], len(d["card_ids"]), answered, won_by(d, uid), exam=d["exam"], diamonds=gems, phoenix_streak=best, meta=meta)
 
     async def view(d, uid):
         if await db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
@@ -278,12 +371,20 @@ def make_router(db, rf_user, public_card, award):
                         c.pop("formula", None)  # answer-side formula reference, not a prompt premise
                         c["id"] = f"{d['id'][:8]}-{k}"
                     cards.append(c)
+        place = {p["uid"]: k + 1 for k, p in enumerate(ranking(d))}
+        team = {}
+        if d.get("team_mode"):
+            ts = d.get("team_scores") if reveal and d.get("team_scores") else team_scores(d)
+            team = {"team_mode": True, "my_team": next((p.get("team") for p in d["players"] if p["uid"] == uid), None), "teams": {t: {**d["teams"][t], **ts[t]} for t in ("a", "b")}}
         return {
+            **team, "you_won": won_by(d, uid),
             "id": d["id"], "exam": d["exam"], "code": d.get("code"), "mode": d["mode"], "subject": d["subject"], "chapter": d.get("chapter"), "status": d["status"],
-            "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS,
+            "start_at": d.get("start_at"), "ends_at": d.get("ends_at"), "server_now": time.time(), "seconds_per_card": CARD_SECONDS, "entry_seconds": d.get("entry_seconds") or entry_seconds(2), "challenge_id": d.get("challenge_id"),
             "reward": reward, "winner": d.get("winner"), "tie_break": d.get("tie_break"), "you": uid, "total": len(d["card_ids"]), "cards": cards,
             "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat() if d.get('finished_ts') else None,
             "vs_bot": d.get("vs_bot", False), "players": [{"you": p["uid"] == uid, "bot": p.get("bot", False), "avatar": p.get("avatar"), "frame": p.get("frame"), "entry": p.get("entry"), "id": p["uid"][:6] if p["uid"] != uid else "you", "name": p["name"], "answered": len(p["answers"]), "score": p["score"],
+                         "pid": None if p.get("bot") else p.get("pid") or make_pid(p["uid"]), "level": p.get("level", 1), "wins": p.get("wins", 0), "rank": place[p["uid"]], "team": p.get("team"),
+                         "streak": p.get("streak", 0) if p.get("bot") else trailing(p["answers"]),
                          "done": p["done"], "forfeit": bool(p.get("forfeit")), **({"answers": p["answers"]} if reveal or p["uid"] == uid else {}), **({"uid": p["uid"]} if reveal else {})} for p in d["players"]],
         }
 
@@ -356,6 +457,7 @@ def make_router(db, rf_user, public_card, award):
         await active_owned_duel(did, uid)
         rival = rival_profile()
         bot = {"uid": "bot-" + uuid.uuid4().hex[:10], "bot": True, "name": rival["name"], "avatar": rival["avatar"], "frame": rival["frame"], "entry": rival["entry"],
+               "level": random.randint(3, 14), "wins": random.randint(4, 90),
                "answers": [], "score": 0, "ms": DUEL_CARDS * CARD_SECONDS * 1000, "done": False, "pace": random.uniform(4.0, 6.5), "acc": random.uniform(0.55, 0.8),
                "joined_ts": time.time(), "seen_ts": time.time(), "last_ts": None, "forfeit": False}
         d = await db.rf_duels.find_one_and_update({"id": did, "status": {"$in": ["waiting", "expired"]}, "players.0.uid": uid, "players": {"$size": 1}},
@@ -454,10 +556,14 @@ def make_router(db, rf_user, public_card, award):
         exam = require_active_exam(exam)
         query = {"players.uid": uid, "status": "finished", "exam": exam}
         if friends_only:
-            query.update(mode='invite', vs_bot={'$ne': True})
+            query.update(mode={'$in': ['invite', 'friend']}, vs_bot={'$ne': True})
         docs = await db.rf_duels.find(query, {"_id": 0, "card_ids": 0}).sort("finished_ts", -1).limit(50).to_list(50)
-        return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
-                           "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat(), 'mode': d['mode'],
-                           "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"]} for p in d["players"]]} for d in docs]}
+        won = {a["ref"]: (a.get("reward") or {}).get("diamonds") or {} for a in
+               await db.rf_awards.find({"uid": uid, "ref": {"$in": ["duel:" + d["id"] for d in docs]}}, {"_id": 0, "ref": 1, "reward.diamonds": 1}).to_list(50)}
+        return {"items": [{"id": d["id"], "exam": d["exam"], "subject": d["subject"], "chapter": d.get("chapter"), "won": won_by(d, uid), "tie": d.get("winner") == "tie", "team": team_line(d, uid),
+                           "finished_at": datetime.fromtimestamp(d['finished_ts'], timezone.utc).isoformat(), 'mode': d['mode'], "diamonds": won.get("duel:" + d["id"], {}),
+                           "place": next(k + 1 for k, p in enumerate(ranking(d)) if p["uid"] == uid),
+                           "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"], "bot": bool(p.get("bot")), "pid": None if p.get("bot") else p.get("pid") or make_pid(p["uid"]),
+                                       "avatar": p.get("avatar"), "frame": p.get("frame")} for p in ranking(d)]} for d in docs]}
 
-    return r
+    return r, seat_duel

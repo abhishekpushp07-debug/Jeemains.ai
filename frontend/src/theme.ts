@@ -218,26 +218,44 @@ Appearance.setColorScheme?.(defaultScheme); // academic screens are always the l
 
 export const colors = light;
 
-// Rapid Fire is a deliberately isolated dark game identity. Academic tokens above never recolour it.
+// Rapid Fire is its own world: the Blood Red Arena. Academic tokens above never recolour it.
+// Shining blood red is the stage, teal is only for things you press, gold is only for wins, rewards and special frames.
+export const arena = {
+  bgTop: "#B0101E", bg: "#7C0913", bgDeep: "#45050C", mark: "#C2283A", vignette: "#140103", glow: "#FF3B4E",
+  // Cards and player rows are near-black cherry glass with a ruby rim, so they stand clear of the blood-red stage.
+  panel: "#16070A", panelHi: "#2B0C12", panelEdge: "#0A0304", rim: "#8E2231", rimHi: "#FF6B7A", bar: "#0D0406",
+  teal: "#14B8A6", tealHi: "#3EE6D0", tealDeep: "#0B6F65", tealOutline: "#064E47",
+  gold: "#FFD75E", goldDeep: "#C98A12", goldSoft: "rgba(255,215,94,0.16)",
+  aqua: "#9EF3E6", text: "#FFFFFF", muted: "#EBBFC6", faint: "#C9929C",
+  badge: "#FFE14D", badgeInk: "#3A0610", online: "#3DDC84", danger: "#FFB4B4", black: "#000000",
+  clear: "rgba(255,255,255,0)", sheen: "rgba(255,255,255,0.5)", gloss: "rgba(255,255,255,0.26)", shade: "rgba(0,0,0,0.45)", scrim: "rgba(20,2,6,0.86)",
+  // The shine: a band of light that crosses the stage, and the glassy top of every card.
+  shine: "rgba(255,255,255,0.12)", panelGloss: "rgba(255,255,255,0.08)",
+};
+// The five streak diamonds, and the lights used by entry effects.
+export const gemColors = { red: "#FF4D5E", blue: "#4D7CFF", emerald: "#2FD27A", gold: "#FFD75E", kohinoor: "#F4F8FF" };
+export const fx = { fire: "#FF7A2F", ember: "#FFC24D", bolt: "#7DF9FF", white: "#FFFFFF", smoke: "#C9CED6", gold: "#FFD75E", crimson: "#FF4D5E", sky: "#4D7CFF", ice: "#9EF3E6", night: "#0B1026" };
+
 export const rapidColors = {
   ...dark,
-  surface: "#0B0E18", surfaceSecondary: "#151925", surfaceAlt: "#101421",
-  surfaceTertiary: "#162A37", onSurfaceTertiary: "#65E6D4",
-  surfaceInverse: "#1E335C", brand: "#3370F5", brandPrimary: "#3370F5",
-  brandText: "#65E6D4", brandLine: "#285D62", brandSecondary: "#244EB5",
-  brandTertiary: "#172342", onBrandTertiary: "#A9CAFF",
-  border: "#2B3346", borderStrong: "#465470", divider: "#252E40",
-  muted: "#A5B2CB", mutedSecondary: "#91A0BC", info: "#7BABFF", onInfo: "#101C32",
-  custom_gameBg: "#0B0E18", custom_gameCard: "#141925", custom_gameCardHi: "#1E2639",
-  custom_gameLine: "#2B3346", custom_gameMuted: "#A5B2CB",
-  custom_neonCyan: "#65E6D4", custom_neonViolet: "#2DD4BF", custom_neonMagenta: "#14B8A6",
-  custom_neonAmber: "#F8CF75", custom_amber: "#3370F5", custom_cyan: "#65E6D4",
-  custom_examBitsat: "#F8B76B", custom_examBitsatDeep: "#1F2241", custom_examJee: "#3370F5",
-  custom_examJeeDeep: "#151D3B", custom_examComedkGold: "#F8CF75",
-  custom_reading: "#171C28", custom_onReading: "#F1F5FF", custom_infoSoft: "#1A2B4A",
-  custom_subjectPhysics: "#65E6D4", custom_subjectChemistry: "#8EB6FF", custom_subjectMaths: "#F8B76B",
-  custom_rarityRare: "#8EB6FF", custom_rarityEpic: "#2DD4BF", custom_rarityLegendary: "#F8CF75",
-  custom_overlay: "rgba(5,8,17,0.88)",
+  surface: "#100508", surfaceSecondary: "#1F0A0E", surfaceAlt: "#160709",
+  surfaceTertiary: arena.panelHi, onSurfaceTertiary: arena.aqua,
+  surfaceInverse: "#2A0509", onSurface: arena.text, onSurfaceInverse: arena.text, onSurfaceSecondary: arena.muted,
+  brand: arena.teal, brandPrimary: arena.teal, brandText: arena.aqua, brandLine: arena.tealDeep, brandSecondary: "#0E8F81",
+  brandTertiary: "#0E3A36", onBrandTertiary: arena.aqua,
+  border: arena.rim, borderStrong: "#B8404F", divider: "#3A1219",
+  muted: arena.muted, mutedSecondary: "#D9A5AE", info: arena.aqua, onInfo: arena.bgDeep,
+  success: "#4ADE80", error: "#FF8A8A", warning: "#FFC857", custom_successSoft: "#0F3D2A", custom_errorSoft: "#5C1010",
+  custom_gameBg: arena.bg, custom_gameCard: arena.panel, custom_gameCardHi: arena.panelHi,
+  custom_gameLine: arena.rim, custom_gameMuted: arena.muted,
+  custom_neonCyan: arena.aqua, custom_neonViolet: arena.tealHi, custom_neonMagenta: arena.teal,
+  custom_neonAmber: arena.gold, custom_amber: arena.teal, custom_cyan: arena.aqua, custom_neonGreen: "#4ADE80", custom_neonRed: "#FF8A8A",
+  custom_examBitsat: fx.fire, custom_examBitsatDeep: "#2A0509", custom_examJee: fx.crimson,
+  custom_examJeeDeep: "#2A0509", custom_examComedkGold: arena.gold,
+  custom_reading: "#23070D", custom_onReading: "#FFFFFF", custom_infoSoft: "#0E3A36",
+  custom_subjectPhysics: "#7DE8DA", custom_subjectChemistry: arena.gold, custom_subjectMaths: "#FFB37A",
+  custom_rarityRare: "#7DB4FF", custom_rarityEpic: arena.tealHi, custom_rarityLegendary: arena.gold,
+  custom_overlay: arena.scrim,
 };
 export const rapidSubjectColor = (s?: string) => s === "Physics" ? rapidColors.custom_subjectPhysics
   : s === "Chemistry" ? rapidColors.custom_subjectChemistry : rapidColors.custom_subjectMaths;

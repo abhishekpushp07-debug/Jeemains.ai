@@ -13,9 +13,12 @@ import { invalidate } from "@/src/useCached";
 import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap, withRapid } from "@/src/rapid/ui";
 import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
+import { GemColor } from "@/src/rapid/Art";
+import { ArenaBg } from "@/src/rapid/arena";
+import { DiamondsWon, GemFlare, StreakGem, gemAt } from "@/src/rapid/StreakGem";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
-const LIMIT = 20000;
+const LIMIT = 15000;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
 type RCard = { id: string; exam?: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string; diagram?: Diagram };
 type Res = { card_id: string; outcome: "correct" | "incorrect" | "skipped" | "timed_out"; choice: number | null; ms: number };
@@ -28,6 +31,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
   return (
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
       <RewardPanel reward={s.reward} historical={historical} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "What a run!" : "Sprint complete"} />
+      {s.mode === "fresh" ? <DiamondsWon reward={s.reward} /> : null}
       <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : "Solo Sprint"}</T>
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
@@ -96,6 +100,7 @@ function RapidSessionRound() {
   const [n, setN] = useState(0);
   const results = useRef<Res[]>([]);
   const [combo, setCombo] = useState(0);
+  const [flare, setFlare] = useState<GemColor | null>(null);
   const startedAt = useRef(0);
   const lastTick = useRef(0);
   const reqId = useRef(uuid());
@@ -104,6 +109,7 @@ function RapidSessionRound() {
   const uid = user?.id || "";
   const card = cards[i];
   const locked = choice !== null || timedOut;
+  const fresh = session?.mode === "fresh";
 
   useEffect(() => {
     let alive = true;
@@ -193,12 +199,12 @@ function RapidSessionRound() {
     if (locked || !card) return;
     setChoice(k);
     const ok = k === card.answer;
-    buzz(ok ? "success" : "error");
-    setCombo((c) => {
-      const n = ok ? c + 1 : 0;
-      playSfx(ok ? (n >= 3 && n % 3 === 0 ? "combo" : "correct") : "wrong", 0.8);
-      return n;
-    });
+    const streak = ok ? combo + 1 : 0;
+    setCombo(streak);
+    // Diamonds come from fresh sprints only; the flare plays in the gap before the next card.
+    const gem = fresh ? gemAt(streak) : null;
+    if (gem) setFlare(gem);
+    else { buzz(ok ? "success" : "error"); playSfx(ok ? "correct" : "wrong", 0.8); }
     record({ card_id: card.id, outcome: k === card.answer ? "correct" : "incorrect", choice: k, ms: Math.min(LIMIT, Math.round(mono() - startedAt.current)) });
   }
   function skip() {
@@ -226,7 +232,7 @@ function RapidSessionRound() {
   const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", diagrams: p.diagrams || "", r: uuid() } });
 
   return (
-    <View testID="rf-session-screen" style={{ flex: 1, backgroundColor: colors.custom_gameBg, paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
+    <ArenaBg dim testID="rf-session-screen" style={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: space.lg, gap: space.md, minHeight: 56 }}>
         <Press testID="rf-exit-button" onPress={() => (done || empty || error && !session ? router.back() : setExit(true))} accessibilityLabel="Exit session" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="close" size={22} color={colors.onSurface} />
@@ -236,12 +242,7 @@ function RapidSessionRound() {
           {card && !done ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
               <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter">Card {i + 1} of {cards.length}</T>
-              {combo >= 2 ? (
-                <Animated.View key={combo} entering={reduced ? undefined : ZoomIn.duration(200)} testID="rf-combo" style={{ flexDirection: "row", alignItems: "center", gap: 2, paddingHorizontal: 8, height: 24, borderRadius: radius.pill, backgroundColor: colors.custom_neonAmber }}>
-                  <Icon name="fire" size={14} color={colors.custom_gameBg} />
-                  <T w="heavy" size={12} color={colors.custom_gameBg}>COMBO x{combo}</T>
-                </Animated.View>
-              ) : null}
+              {fresh ? <StreakGem streak={combo} /> : null}
             </View>
           ) : <T w="heavy" size={16} color={colors.onSurfaceInverse}>{done ? "Session complete" : "Loading cards…"}</T>}
         </View>
@@ -307,7 +308,8 @@ function RapidSessionRound() {
         <Button testID="rf-exit-discard" kind="secondary" label="Leave without saving" onPress={() => router.back()} />
         <Button testID="rf-exit-stay" kind="ghost" label="Keep going" onPress={() => setExit(false)} />
       </Sheet>
-    </View>
+      {flare ? <GemFlare key={`${i}-${flare}`} color={flare} onDone={() => setFlare(null)} /> : null}
+    </ArenaBg>
   );
 }
 
@@ -318,4 +320,4 @@ const styles = StyleSheet.create({
   cardArea: { flexGrow: 1, justifyContent: "center", paddingVertical: space.sm },
 });
 
-export default withRapid(RapidSession);
+export default withRapid(RapidSession, { banner: false });

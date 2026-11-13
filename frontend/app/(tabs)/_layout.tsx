@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { Image, Platform, StyleProp, StyleSheet, View, ViewStyle, useWindowDimensions } from "react-native";
 import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
-import { Tabs } from "expo-router";
+import { Tabs, useSegments } from "expo-router";
 import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { IconName, Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { colors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
+import { ChallengeBanner } from "@/src/rapid/ChallengeBanner";
+import { useInbox } from "@/src/rapid/social";
 
 const ITEMS: Record<string, { label: string; icon: IconName }> = {
   index: { label: "Home", icon: "home-variant-outline" },
@@ -44,6 +46,9 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
   const insets = useSafeAreaInsets();
   const narrow = useWindowDimensions().width < 360;
   const labelSize = narrow ? 10 : 10.5;
+  const challenged = !!useInbox()?.challenges.length;
+  // Inside Rapid Fire the arena shows its own bar (Home, Trophy, Arena, Gang, Store).
+  if (state.routes[state.index]?.name === "rapid") return null;
   return (
     <View style={[styles.bar, { paddingBottom: insets.bottom, height: (Platform.OS === "web" ? 70 : 68) + insets.bottom }]}>
       {state.routes.map((route: any, i: number) => {
@@ -60,6 +65,7 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
               <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" accessibilityState={{ selected: focused }} style={styles.rapidPress} scaleTo={0.92}>
                 {/* Sparkly blue diamond with a soft fire inside (transparent artwork) rising out of the dock. */}
                 <RapidGem style={[styles.gem, narrow && styles.gemNarrow, focused && styles.gemOn]} />
+                {challenged ? <View testID="tab-rapid-dot" accessibilityLabel="A challenge is waiting" style={styles.dot} /> : null}
                 <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_gemBlue} style={styles.label}>RAPID FIRE</T>
               </Press>
             </View>
@@ -77,6 +83,8 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
 }
 
 export default function TabsLayout() {
+  // A challenge can arrive while the student is on Home.
+  const onHome = (useSegments() as string[]).length === 1;
   if (usesNativeTabs) {
     return (
       <NativeTabs tintColor={colors.brandPrimary}>
@@ -89,17 +97,22 @@ export default function TabsLayout() {
     );
   }
   return (
-    <Tabs screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: colors.surface } }} tabBar={(p) => <JeeTabBar {...p} />}>
-      <Tabs.Screen name="index" />
-      <Tabs.Screen name="rank" />
-      <Tabs.Screen name="rapid" />
-      <Tabs.Screen name="tests" />
-      <Tabs.Screen name="mission" />
-    </Tabs>
+    <View style={styles.root}>
+      <Tabs screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: colors.surface } }} tabBar={(p) => <JeeTabBar {...p} />}>
+        <Tabs.Screen name="index" />
+        <Tabs.Screen name="rank" />
+        <Tabs.Screen name="rapid" />
+        <Tabs.Screen name="tests" />
+        <Tabs.Screen name="mission" />
+      </Tabs>
+      {onHome ? <ChallengeBanner floating /> : null}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  root: { flex: 1 },
+  dot: { position: "absolute", top: 0, right: 6, width: 12, height: 12, borderRadius: 6, backgroundColor: colors.brandPrimary, borderWidth: 2, borderColor: BAR },
   bar: { flexDirection: "row", overflow: "visible", backgroundColor: BAR, borderTopLeftRadius: 0, paddingTop: 2 },
   item: { flex: 1, minWidth: 0, alignItems: "center", justifyContent: "center", gap: 6, paddingTop: space.xs },
   label: { letterSpacing: 0.9 },

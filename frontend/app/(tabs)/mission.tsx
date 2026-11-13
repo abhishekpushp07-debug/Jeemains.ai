@@ -13,7 +13,7 @@ import { usesNativeTabs } from "@/src/navigation";
 const STEPS: { icon: IconName; title: string; body: string }[] = [
   { icon: "database-search-outline", title: "Every PYQ, studied", body: "Each previous-year JEE question is analysed by AI on 80 parameters — concept, sub-topic, difficulty, trap type, time cost, formula family and more." },
   { icon: "chart-timeline-variant-shimmer", title: "Patterns become papers", body: "Those patterns guide which concepts, mixes and difficulty curves each test series paper practises — the series’ AI-led prediction and estimation approach." },
-  { icon: "lightning-bolt-outline", title: "Concepts become cards", body: "Rapid Fire turns the most-tested formulas and concepts into 20-second recall cards, so revision fits into any 3 minutes." },
+  { icon: "lightning-bolt-outline", title: "Concepts become cards", body: "Rapid Fire turns the most-tested formulas and concepts into 15-second recall cards, so revision fits into any 3 minutes." },
   { icon: "heart-outline", title: "Free for every student", body: "No fees, no paywall. Practice, analysis and solutions are free for all — because every aspirant deserves a fair shot." },
 ];
 

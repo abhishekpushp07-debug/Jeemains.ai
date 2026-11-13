@@ -11,7 +11,7 @@ from metadata_cache import metadata_cache
 import hashlib
 import json
 from pymongo.errors import DuplicateKeyError
-from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
+from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, GEM_SHOP, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
 from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
 
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -26,6 +26,46 @@ BADGES = {
     "duelist_10": ("Duelist", "Played 10 duels"),
     "champion_10": ("Champion", "Won 10 duels"),
 }
+
+
+# Phoenix streak: correct answers in a row inside one match. Passing a milestone wins one diamond of that colour.
+MILESTONES = ((3, "red"), (5, "blue"), (10, "emerald"), (15, "gold"), (20, "kohinoor"))
+DIAMONDS = tuple(c for _, c in MILESTONES)
+
+
+def phoenix(outcomes: list) -> tuple:
+    """Diamonds won and the longest streak for one match. Wrong, timed-out and skipped cards restart the count."""
+    won, streak, best = {}, 0, 0
+    for o in outcomes:
+        streak = streak + 1 if o == "correct" else 0
+        best = max(best, streak)
+        for at, colour in MILESTONES:
+            if streak == at:
+                won[colour] = won.get(colour, 0) + 1
+    return won, best
+
+
+def vault_of(p: dict) -> dict:
+    """Diamonds in hand (the Store spends these)."""
+    have = p.get("diamonds") or {}
+    return {c: int(have.get(c, 0)) for c in DIAMONDS}
+
+
+def vault_total(p: dict) -> dict:
+    """Every diamond ever collected, including the ones already spent in the Store."""
+    spent = p.get("diamonds_spent") or {}
+    return {c: n + int(spent.get(c, 0)) for c, n in vault_of(p).items()}
+
+
+# Diamond Rush: the diamonds won today move a daily track; each milestone opens a chest. Resets at midnight IST.
+RUSH = ((1, "Bronze", 25, None), (3, "Silver", 50, None), (6, "Gold", 80, "freeze"), (10, "Royal", 120, "blue"), (15, "Phoenix", 200, "gold"))
+
+
+def rush_of(p: dict) -> dict:
+    ds = p.get("day_stats") or {}
+    stats = ds if ds.get("day") == ist_day() else {}
+    points, opened = stats.get("gems", 0), stats.get("rush", [])
+    return {"points": points, "steps": [{"at": at, "chest": name, "coins": coins, "bonus": bonus, "done": points >= at, "claimed": at in opened} for at, name, coins, bonus in RUSH]}
 
 
 def level_of(xp: int) -> int:
@@ -49,7 +89,8 @@ def public_profile(p: dict) -> dict:
             "sessions": p.get("sessions", 0), "duels": p.get("duels", 0), "wins": p.get("wins", 0), "cards_correct": p.get("cards_correct", 0),
             "badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1], "earned": b in p.get("badges", [])} for b in BADGES],
             "avatar": safe_avatar(p.get("avatar")), "equipped": equipped_of(p), "owned": owned_of(p), "freezes": p.get("freezes", 0),
-            "quests": quests_of(p)}
+            "quests": quests_of(p), "diamonds": vault_of(p), "diamonds_total": vault_total(p), "rush": rush_of(p),
+            "best_phoenix": p.get("best_phoenix", 0), "pid": p.get("pid"), "name": p.get("name")}
 
 
 def quests_of(p: dict) -> list:
@@ -65,8 +106,9 @@ def make_router(db, rf_user):
     board_cache = {}
     board_locks = {exam: asyncio.Lock() for exam in ACTIVE_EXAMS}
 
-    async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE") -> dict:
-        """Idempotent per (uid, ref): replays return the original reward."""
+    async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE",
+                    diamonds: Optional[dict] = None, phoenix_streak: int = 0, meta: Optional[dict] = None) -> dict:
+        """Idempotent per (uid, ref): replays return the original reward. `meta` describes the match for the friend feed."""
         require_active_exam(exam)
         try:
             await db.rf_awards.insert_one({"uid": uid, "ref": ref, "exam": exam, "ts": time.time()})
@@ -100,15 +142,21 @@ def make_router(db, rf_user):
                 used_freeze = True
             else:
                 streak = 1
+        diamonds = {c: n for c, n in (diamonds or {}).items() if c in DIAMONDS and n > 0}
         ds = p.get("day_stats") or {}
         if ds.get("day") != today:
-            ds = {"day": today, "sprints": 0, "correct": 0, "wins": 0, "claimed": []}
-        ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" and played else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0)}
+            ds = {"day": today, "sprints": 0, "correct": 0, "wins": 0, "claimed": [], "gems": 0, "rush": []}
+        ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" and played else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0),
+              "gems": ds.get("gems", 0) + sum(diamonds.values())}
+        # Wins in a row across matches (for the friend feed). Solo sprints never touch it.
+        win_run = p.get("win_run", 0) if kind == "solo" or not played else (p.get("win_run", 0) + 1 if won else 0)
         before = level_of(p.get("xp", 0))
         inc = {"xp": xp, "coins": coins, "cards_correct": correct}
         inc[f"exam_stats.{exam}.xp"] = xp
         inc[f"exam_stats.{exam}.wins"] = 1 if won else 0
         inc[f"exam_stats.{exam}.cards_correct"] = correct
+        for colour, n in diamonds.items():
+            inc[f"diamonds.{colour}"] = n
         if kind == "solo":
             if played:
                 inc["sessions"] = 1
@@ -119,7 +167,7 @@ def make_router(db, rf_user):
                 inc["duels"] = 1
             inc["wins"] = 1 if won else 0
         # Atomic counters so concurrent sprint + duel never lose XP/coins.
-        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak}},
+        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, "win_run": win_run, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak, "best_phoenix": phoenix_streak}},
                                                      upsert=True, return_document=True)
         have = set(p.get("badges", []))
         rules = {"first_sprint": p.get("sessions", 0) >= 1, "first_win": p.get("wins", 0) >= 1, "streak_3": streak >= 3, "streak_7": streak >= 7, "streak_30": streak >= 30,
@@ -130,9 +178,23 @@ def make_router(db, rf_user):
         after = level_of(p["xp"])
         reward = {"exam": exam, "exam_xp_total": p.get("exam_stats", {}).get(exam, {}).get("xp", 0), "xp": xp, "coins": coins, "streak": streak, "freeze_used": used_freeze, "level_before": before, "level_after": after, "level_up": after > before,
                   "xp_total": p["xp"], "coins_total": p["coins"], "level_floor": level_floor(after), "next_level_xp": level_floor(after + 1), "played": played,
-                  "quest_ready": any(q["done"] and not q["claimed"] for q in quests_of(p)),
+                  "quest_ready": any(q["done"] and not q["claimed"] for q in quests_of(p)) or any(s["done"] and not s["claimed"] for s in rush_of(p)["steps"]),
+                  "diamonds": diamonds, "phoenix_streak": phoenix_streak, "vault": vault_of(p),
                   "new_badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1]} for b in new]}
         await db.rf_awards.update_one({"uid": uid, "ref": ref}, {"$set": {"reward": reward}})
+        # Friend feed: the moments worth telling friends about.
+        events = []
+        if kind == "duel" and won and meta and not meta.get("bot"):
+            events.append(("win", meta))
+        if kind == "duel" and won and win_run in (3, 5, 10):
+            events.append(("run", {"n": win_run}))
+        events += [("gem", {"colour": c}) for c in ("emerald", "gold", "kohinoor") if diamonds.get(c)]
+        if after > before:
+            events.append(("level", {"level": after}))
+        events += [("badge", {"title": BADGES[b][0]}) for b in new]
+        if events and not uid.startswith("TEST"):
+            now = datetime.now(timezone.utc)
+            await db.rf_feed.insert_many([{"id": f"{ref}:{k}", "uid": uid, "kind": kind_, "data": data, "ts": time.time(), "at": now} for k, (kind_, data) in enumerate(events)])
         board_cache.pop(exam, None)
         return reward
 
@@ -150,13 +212,14 @@ def make_router(db, rf_user):
         async with board_locks[exam]:
             cached = board_cache.get(exam, {})
             if time.time() - cached.get("ts", 0) > 15:
-                rows = await db.rf_profiles.find(query, {"_id": 0, "uid": 1, "name": 1, "exam_stats": 1}).sort([(field, -1), ("uid", 1)]).limit(20).to_list(20)
+                rows = await db.rf_profiles.find(query, {"_id": 0, "uid": 1, "name": 1, "exam_stats": 1, "pid": 1, "avatar": 1, "equipped": 1}).sort([(field, -1), ("uid", 1)]).limit(20).to_list(20)
                 cached = {"ts": time.time(), "rows": rows}
                 board_cache[exam] = cached
         items = []
         for i, row in enumerate(cached["rows"]):
             stats = row.get("exam_stats", {}).get(exam, {})
-            items.append({"rank": i + 1, "name": row.get("name") or f"{exam} Aspirant", "you": row["uid"] == uid,
+            items.append({"rank": i + 1, "name": row.get("name") or f"{exam} Aspirant", "you": row["uid"] == uid, "pid": row.get("pid"),
+                          "avatar": safe_avatar(row.get("avatar")), "frame": equipped_of(row).get("frame"),
                           "xp": stats.get("xp", 0), "level": level_of(stats.get("xp", 0)), "wins": stats.get("wins", 0)})
         mine = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "exam_stats": 1, "name": 1}) or {}
         xp = mine.get("exam_stats", {}).get(exam, {}).get("xp", 0)
@@ -195,7 +258,8 @@ def make_router(db, rf_user):
     async def shop(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         p = await db.rf_profiles.find_one({"uid": uid}) or {}
-        return {"items": SHOP, "avatars": [{k: a[k] for k in ("id", "title", "rarity", "price")} for a in AVATAR_ITEMS], "coins": p.get("coins", 0), "owned": owned_of(p), "equipped": equipped_of(p), "freezes": p.get("freezes", 0), "avatar": safe_avatar(p.get("avatar"))}
+        return {"items": SHOP + GEM_SHOP, "avatars": [{k: a.get(k) for k in ("id", "title", "rarity", "price", "gems")} for a in AVATAR_ITEMS], "coins": p.get("coins", 0), "diamonds": vault_of(p),
+                "owned": owned_of(p), "equipped": equipped_of(p), "freezes": p.get("freezes", 0), "avatar": safe_avatar(p.get("avatar"))}
 
     @r.post("/shop/buy")
     async def buy(data: dict, x_rf_user: Optional[str] = Header(None)):
@@ -203,18 +267,39 @@ def make_router(db, rf_user):
         item = BUYABLE.get(str(data.get("item_id")))
         if not item:
             raise HTTPException(404, "Item not found.")
-        if not item["price"]:
+        gems = item.get("gems")
+        if not item["price"] and not gems:
             raise HTTPException(409, "You already own this. It is free for everyone.")
-        q = {"uid": uid, "coins": {"$gte": item["price"]}}
-        upd = {"$inc": {"coins": -item["price"], **({"freezes": 1} if item.get("consumable") else {})}}
-        if not item.get("consumable"):
-            q["owned"] = {"$ne": item["id"]}
-            upd["$addToSet"] = {"owned": item["id"]}
+        if gems:  # diamond specials: every colour in the price must be in the Vault
+            q = {"uid": uid, "owned": {"$ne": item["id"]}, **{f"diamonds.{c}": {"$gte": n} for c, n in gems.items()}}
+            upd = {"$inc": {k: v for c, n in gems.items() for k, v in ((f"diamonds.{c}", -n), (f"diamonds_spent.{c}", n))}, "$addToSet": {"owned": item["id"]}}
+        else:
+            q = {"uid": uid, "coins": {"$gte": item["price"]}}
+            upd = {"$inc": {"coins": -item["price"], **({"freezes": 1} if item.get("consumable") else {})}}
+            if not item.get("consumable"):
+                q["owned"] = {"$ne": item["id"]}
+                upd["$addToSet"] = {"owned": item["id"]}
         p = await db.rf_profiles.find_one_and_update(q, upd, return_document=True)
         if not p:
             have = await db.rf_profiles.find_one({"uid": uid}) or {}
-            raise HTTPException(409, "You already own this." if item["id"] in have.get("owned", []) else f"Not enough coins — you need {item['price']}. Earn more in sprints and duels.")
-        return {"coins": p["coins"], "owned": p.get("owned", []), "freezes": p.get("freezes", 0)}
+            need = ", ".join(f"{n} {c.title()}" for c, n in (gems or {}).items())
+            raise HTTPException(409, "You already own this." if item["id"] in have.get("owned", []) else f"Not enough diamonds. You need {need}. Win them with Phoenix streaks." if gems
+                                else f"Not enough coins — you need {item['price']}. Earn more in sprints and duels.")
+        return {"coins": p.get("coins", 0), "owned": p.get("owned", []), "freezes": p.get("freezes", 0), "diamonds": vault_of(p)}
+
+    @r.post("/rush/claim")
+    async def rush_claim(data: dict, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        step = next((s for s in RUSH if s[0] == data.get("at")), None)
+        if not step:
+            raise HTTPException(404, "Chest not found.")
+        at, name, coins, bonus = step
+        inc = {"coins": coins, **({"freezes": 1} if bonus == "freeze" else {f"diamonds.{bonus}": 1} if bonus else {})}
+        p = await db.rf_profiles.find_one_and_update({"uid": uid, "day_stats.day": ist_day(), "day_stats.gems": {"$gte": at}, "day_stats.rush": {"$ne": at}},
+                                                     {"$inc": inc, "$addToSet": {"day_stats.rush": at}}, return_document=True)
+        if not p:
+            raise HTTPException(409, "This chest is not ready yet, or you already opened it.")
+        return {"chest": name, "coins": coins, "bonus": bonus, "coins_total": p["coins"], "rush": rush_of(p)}
 
     @r.post("/shop/equip")
     async def equip(data: dict, x_rf_user: Optional[str] = Header(None)):
@@ -235,7 +320,7 @@ def make_router(db, rf_user):
         a = AVATAR_BY_ID.get(data.get("avatar"))
         if not a:
             raise HTTPException(400, "Unknown avatar.")
-        if a["price"] and a["id"] not in ((await db.rf_profiles.find_one({"uid": uid}) or {}).get("owned", [])):
+        if (a["price"] or a.get("gems")) and a["id"] not in ((await db.rf_profiles.find_one({"uid": uid}) or {}).get("owned", [])):
             raise HTTPException(403, "Buy this avatar first.")
         await db.rf_profiles.update_one({"uid": uid}, {"$set": {"avatar": data["avatar"]}}, upsert=True)
         return {"ok": True}

@@ -1,0 +1,32 @@
+{
+  "summary": "Iteration 61 — Rapid Fire 2.0 three new features + colour redesign. Backend: 5 new pytest tests for /feed, /players/{pid}/h2h, /rush/claim, diamond store (buy ruby/emerald, blocked kohinoor, av_ruby 403 before purchase, diamonds_total), /duels/{id} players[].streak — ALL PASS. Regression test_rf_social.py (3 tests) still green (8/8 total). Frontend: UI tested on the real QA learner (phone 7004186276) after seeding rf_social_fixture: Friend Activity feed renders 3 preview rows → 'See all (8)' toggle → 8 rows (all event kinds show sensible text, no 'undefined'); Aarav profile shows HEAD TO HEAD card ('You 2 – 1 Aarav Sharma', '4 matches played, 1 v 1 only'), tapping See every match opens h2h-sheet with W/L/T form dots, 4 rows, note, tapping a row opens duel-result match review; Diya profile correctly shows 'No 1 v 1 match yet' and no open button; player-wings present inside the card on 390px (no overflow at 320px either); Rewards tab shows Diamond Rush with Bronze/Silver OPEN; Bronze claim marks chest Opened ✓ and backend returns +25 coins BUT the top-strip game-hud-coins HUD stayed at 102 (did not refresh client-side — see bug below); Store Frames tab shows YOUR DIAMONDS panel and Ruby Blaze/Sapphire Halo/Emerald Aura/Kohinoor Crown with diamond price buttons, Ruby Blaze purchase sheet confirms with 'Buy with diamonds' and completes. Colour redesign: blood-red stage, dark cherry cards, gold titles, no leftover navy/blue — looks correct in every tab screenshot. No React Native deprecated packages or SafeAreaView issues spotted in the scoped files.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "TrophyTab → RushTrack", "issue": "After claiming Bronze (rf-rush-claim-1) the backend awards +25 coins (confirmed by rush_claim 200 and pytest coverage), the chest shows 'Opened ✓', but the top-strip game-hud-coins text stays at 102 both before and after the claim. The HUD (coin pill) is not refreshed from the claim response on the client. Need to merge rush/claim.coins_total into the profile store or invalidate the HUD query.", "testID": "game-hud-coins + rf-rush-claim-1", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rf_iter61_new_apis.py",
+    "/app/test_reports/pytest/iter61_all.xml",
+    "/app/test_reports/pytest/iter61_new_apis.xml",
+    "/app/test_reports/artifacts_iter61_ui/"
+  ],
+  "action_items": [
+    "Fix game-hud-coins not refreshing after /rf/rush/claim. RushTrack returns new coins_total in the response — propagate it into whatever hook feeds arena-top profile/coins (same place that updates after shop buy).",
+    "(Optional hardening) /app/backend/social.py:96 team_line() crashes with KeyError when a duel has team_mode=True but no 'teams' field. Prod seeder never does this, but a `d.get('teams') or {}` guard would be safer for forward-compat."
+  ],
+  "critical_code_review_comments": [
+    "Social.stats_of caches by uid for 30 s without invalidation on new duels — not blocking but can make freshly finished matches lag in the h2h counts UI."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_iter61_new_apis.py"],
+  "success_rate": {"backend": "100% (8/8 pytest)", "frontend": "~93% — feed, h2h, wings, store, Diamond Rush claim all work; only HUD coin refresh after Rush claim is broken"},
+  "seed_data_creation": "Ran `python /app/tests/rf_social_fixture.py seed` once for the approved QA learner PF37CC308 (friends Aarav PBD880036, Diya PA39617A9, Kabir PA0E9BCCC; 4 duels). Did NOT run cleanup — main agent requested it leaves the fixture intact for screenshots. Backend tests created TEST-iter61-* throwaway profiles and deleted them in finally blocks.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "QA fixture is still seeded (PF37CC308). Aarav pid PBD880036, Diya PA39617A9, Kabir PA0E9BCCC. Backend tests in /app/backend/tests/test_rf_iter61_new_apis.py — run with `pytest tests/test_rf_iter61_new_apis.py -o addopts=` (pytest.ini enables xdist with loadscope which does NOT play nice with asyncio.run inside each test — use `-o addopts=` to disable). Live rival streak diamond (duel-opp-streak) was not observed in UI because no practice match was run end-to-end (entry show is 9.5 s + 15 s/card, flaky over the preview); backend `/duels/{id}` `players[].streak` numeric trailing-correct is covered by test_duel_streak.",
+  "rca_of_issue": "HUD coin refresh after Rush claim: screenshots 10_rewards_rush.png and 11_bronze_claimed.png both show '102' in game-hud-coins while the chest itself transitions from OPEN → Opened ✓. Backend POST /api/rf/rush/claim returns {coins, coins_total, rush}; RushTrack.tsx likely consumes the response locally for the chest state only and doesn't push coins_total back into the arena HUD store (compare with /shop/buy which updates coins correctly). Fix: in the onSuccess of the rush claim mutation, call the same setter/invalidator used by /shop/buy (e.g. profile query refresh or wallet store merge of coins_total)."
+}

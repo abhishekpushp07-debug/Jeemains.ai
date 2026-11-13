@@ -326,7 +326,7 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
             return await rf_create(data, x_rf_user)
     by_id = {c.id: c for c in cards}
     return {**existing.model_dump(exclude={"mongo_id", "user_id"}),
-            "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": 20}
+            "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": 15}
 
 
 @api.post("/rf/sessions/{sid}/complete")
@@ -370,7 +370,9 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
                                     "summary": summary, "completed_at": now_iso()}})
     s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid}))
     await record_learning(db, uid, "solo:" + sid, s.exam, s.results, list(cards.values()), s.completed_at)
-    reward = await award(uid, "solo:" + sid, "solo", s.summary["correct"], s.summary["total"], s.summary["answered"], exam=s.exam)
+    # Diamonds come from fresh sprints only: replays of the same missed cards never earn them.
+    gems, best = phoenix([r["outcome"] for r in s.results]) if s.mode == "fresh" else ({}, 0)
+    reward = await award(uid, "solo:" + sid, "solo", s.summary["correct"], s.summary["total"], s.summary["answered"], exam=s.exam, diamonds=gems, phoenix_streak=best)
     return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": reward}
 
 
@@ -381,6 +383,10 @@ async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Hea
     query = {"user_id": uid, "status": "completed", "exam": exam}
     docs = await db.rf_sessions.find(query, {"_id": 0, "user_id": 0, "results": 0}) \
         .sort("completed_at", -1).limit(20).to_list(20)
+    won = {a["ref"]: (a.get("reward") or {}).get("diamonds") or {} for a in
+           await db.rf_awards.find({"uid": uid, "ref": {"$in": ["solo:" + d["id"] for d in docs]}}, {"_id": 0, "ref": 1, "reward.diamonds": 1}).to_list(20)}
+    for d in docs:
+        d["diamonds"] = won.get("solo:" + d["id"], {})
     agg = await db.rf_sessions.aggregate([{"$match": query},
                                           {"$group": {"_id": None, "sessions": {"$sum": 1}, "correct": {"$sum": "$summary.correct"},
                                                       "cards": {"$sum": "$summary.total"}}}]).to_list(1)
@@ -403,7 +409,15 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
 
 
 from duels import make_router as make_duels  # noqa: E402
-api.include_router(make_duels(db, rf_user, public_card, award))
+from social import make_router as make_social  # noqa: E402
+from rooms import make_router as make_rooms  # noqa: E402
+from gangs import make_router as make_gangs  # noqa: E402
+from gamify import phoenix  # noqa: E402
+duel_router, seat_duel = make_duels(db, rf_user, public_card, award)
+api.include_router(duel_router)
+api.include_router(make_social(db, rf_user))
+api.include_router(make_rooms(db, rf_user, seat_duel))
+api.include_router(make_gangs(db, rf_user))
 api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))
@@ -446,6 +460,25 @@ async def startup():
     await db.rf_duels.create_index([("exam", 1), ("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])
     await db.rf_duels.create_index([('players.uid', 1), ('exam', 1), ('status', 1), ('finished_ts', -1)])
     await db.rf_learning_events.create_index([("uid", 1), ("ref", 1)], unique=True)
+    # Rapid Fire social layer (profiles, friends, blocks, notices, challenges).
+    await db.rf_profiles.create_index("pid", unique=True, partialFilterExpression={"pid": {"$type": "string"}})
+    await db.rf_profiles.create_index("phone_hash", sparse=True)
+    await db.rf_friends.create_index([("uid", 1), ("fid", 1)], unique=True)
+    await db.rf_friends.create_index("fid")
+    await db.rf_blocks.create_index([("uid", 1), ("bid", 1)], unique=True)
+    await db.rf_blocks.create_index("bid")
+    await db.rf_notices.create_index([("uid", 1), ("done", 1), ("ts", -1)])
+    await db.rf_challenges.create_index("id", unique=True)
+    await db.rf_challenges.create_index([("invites.uid", 1), ("status", 1), ("expires_ts", 1)])
+    await db.rf_challenges.create_index([("from_uid", 1), ("status", 1)])
+    await db.rf_gangs.create_index("id", unique=True)
+    await db.rf_gangs.create_index([("members.uid", 1), ("closed", 1)])
+    await db.rf_duels.create_index([("gang_id", 1), ("finished_ts", -1)], sparse=True)
+    await db.rf_duels.create_index("challenge_id", sparse=True)
+    await db.rf_duels.create_index([("teams.a.id", 1), ("finished_ts", -1)], sparse=True)
+    await db.rf_duels.create_index([("teams.b.id", 1), ("finished_ts", -1)], sparse=True)
+    await db.rf_feed.create_index([("uid", 1), ("ts", -1)])
+    await db.rf_feed.create_index("at", expireAfterSeconds=14 * 86400)
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])
     for exam in SUBJECTS:
         await db.rf_profiles.create_index([(f"exam_stats.{exam}.xp", -1), ("uid", 1)])

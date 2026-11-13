@@ -6,16 +6,20 @@ import Animated, { Easing, FadeInDown, useAnimatedStyle, useReducedMotion, useSh
 import { LinearGradient } from "expo-linear-gradient";
 import { rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
-import { Art } from "@/src/rapid/Art";
+import { Alive, GameIcon } from "@/src/rapid/Art";
+import { setArenaTab } from "@/src/rapid/social";
 import { useCached } from "@/src/useCached";
 import { Icon, T } from "@/src/rapid/ui";
 import { rapidColors as colors, radius, space } from "@/src/theme";
 
 const styles = StyleSheet.create({ pending: { padding: 18, borderRadius: 18, borderWidth: 1, borderColor: colors.border, backgroundColor: colors.custom_gameCard } });
 
-export type GameProfile = { xp: number; level: number; level_floor: number; next_level_xp: number; coins: number; streak: number; best_streak: number; played_today: boolean; sessions: number; duels: number; wins: number; cards_correct: number; badges: { id: string; title: string; body: string; earned: boolean }[]; avatar?: string; equipped?: Record<string, string | null>; owned?: string[]; freezes?: number; quests?: any[] };
+export type GameProfile = { xp: number; level: number; level_floor: number; next_level_xp: number; coins: number; streak: number; best_streak: number; played_today: boolean; sessions: number; duels: number; wins: number; cards_correct: number; badges: { id: string; title: string; body: string; earned: boolean }[]; avatar?: string; equipped?: Record<string, string | null>; owned?: string[]; freezes?: number; quests?: any[]; diamonds?: Record<string, number>; diamonds_total?: Record<string, number>; best_phoenix?: number; pid?: string; name?: string;
+  rush?: { points: number; steps: { at: number; chest: string; coins: number; bonus: string | null; done: boolean; claimed: boolean }[] } };
+/** Rewards waiting to be claimed: finished daily quests and Diamond Rush chests. */
+export const rewardsReady = (p?: GameProfile | null) => (p?.quests || []).filter((q: any) => q.done && !q.claimed).length + (p?.rush?.steps || []).filter((s) => s.done && !s.claimed).length;
 export type Reward = { xp: number; coins: number; streak: number; level_before: number; level_after: number; level_up: boolean; new_badges: { id: string; title: string; body: string }[];
-  xp_total?: number; coins_total?: number; level_floor?: number; next_level_xp?: number; played?: boolean; quest_ready?: boolean };
+  xp_total?: number; coins_total?: number; level_floor?: number; next_level_xp?: number; played?: boolean; quest_ready?: boolean; diamonds?: Record<string, number>; phoenix_streak?: number };
 
 export const BADGE_ICON: Record<string, any> = { first_sprint: "flag-checkered", first_win: "sword", streak_3: "fire", streak_7: "fire-circle", streak_30: "crown", sharpshooter: "target", perfect: "star-shooting", duelist_10: "sword-cross", champion_10: "trophy-award" };
 
@@ -154,7 +158,7 @@ export function RewardPanel({ reward, title, testID = "reward-panel", historical
   if (reward.played === false) {
     return (
       <View testID={testID} style={{ borderRadius: radius.lg, padding: space.lg, gap: space.sm, alignItems: "center", backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
-        <Art kind="spark" size={64} />
+        <GameIcon name="bolt" size={64} />
         <T w="heavy" size={17} color={colors.onSurfaceInverse}>{title}</T>
         <T size={13} color={colors.custom_gameMuted} style={{ textAlign: "center" }}>Answer at least one card to earn XP, coins and keep your streak alive.</T>
       </View>
@@ -164,7 +168,7 @@ export function RewardPanel({ reward, title, testID = "reward-panel", historical
     <View testID={testID} style={{ borderRadius: radius.lg, overflow: "hidden" }}>
       <LinearGradient colors={[colors.custom_gameCardHi, colors.custom_gameBg]} style={{ padding: space.lg, gap: space.md, alignItems: "center" }}>
         {!historical ? <Burst /> : null}
-        <Animated.View entering={reduced || historical ? undefined : ZoomIn.duration(350)}><Art kind="trophy" size={100} /></Animated.View>
+        <Animated.View entering={reduced || historical ? undefined : ZoomIn.duration(350)}><Alive kind="hop"><GameIcon name="trophy" size={100} /></Alive></Animated.View>
         <T w="heavy" size={20} color={colors.onSurfaceInverse} style={{ textAlign: "center" }}>{title}</T>
         <View style={{ flexDirection: "row", gap: space.md }}>
           <View style={{ alignItems: "center", flex: 1, padding: space.md, borderRadius: radius.md, backgroundColor: colors.custom_gameCard }} testID="reward-xp">
@@ -194,9 +198,9 @@ export function RewardPanel({ reward, title, testID = "reward-panel", historical
           </View>
         ) : null}
         {reward.quest_ready ? (
-          <Pressable testID="reward-quest-ready" onPress={() => router.push("/(tabs)/rapid")} style={{ flexDirection: "row", alignItems: "center", gap: space.sm, alignSelf: "stretch", minHeight: 44, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: colors.custom_neonGreen }}>
+          <Pressable testID="reward-quest-ready" onPress={() => { setArenaTab("trophy", "rewards"); router.navigate("/(tabs)/rapid"); }} style={{ flexDirection: "row", alignItems: "center", gap: space.sm, alignSelf: "stretch", minHeight: 44, paddingHorizontal: space.md, borderRadius: radius.md, backgroundColor: colors.custom_neonGreen }}>
             <Icon name="gift" size={20} color={colors.custom_gameBg} />
-            <T w="heavy" size={13} color={colors.custom_gameBg} style={{ flex: 1 }}>Daily quest complete — claim your coins!</T>
+            <T w="heavy" size={13} color={colors.custom_gameBg} style={{ flex: 1 }}>A reward is ready. Tap to claim it!</T>
             <Icon name="chevron-right" size={20} color={colors.custom_gameBg} />
           </Pressable>
         ) : null}

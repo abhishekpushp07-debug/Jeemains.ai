@@ -66,6 +66,8 @@ def make_access_router(db):
                 raise HTTPException(401, 'Canonical identity could not be verified.')
         except (httpx.HTTPError, ValueError, asyncio.TimeoutError) as exc:
             raise HTTPException(503, 'Could not verify your session. Please retry.') from exc
+        from social import remember_identity
+        await remember_identity(db, uid, user)
         token = secrets.token_urlsafe(32)
         expiry = datetime.now(timezone.utc) + timedelta(minutes=15)
         await db.rf_access.insert_one({'digest': token_digest(token), 'uid': uid, 'sid': sid, 'expires_at': expiry})
@@ -94,7 +96,8 @@ class RFAccessGuard:
         if await self.db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
             response = JSONResponse({'detail': 'Rapid Fire is refreshing its question bank. Please retry shortly.'}, status_code=503, headers={'Retry-After': '15', 'Cache-Control': 'no-store'})
             return await response(scope, receive, send)
-        public = path in ('/api/rf/catalog', '/api/rf/cards', '/api/rf/access')
+        # WhatsApp link pages are public HTML that reveal only a display name, subject and player code.
+        public = path in ('/api/rf/catalog', '/api/rf/cards', '/api/rf/access') or path.startswith(('/api/rf/invite/', '/api/rf/c/', '/api/rf/g/'))
         if not public and scope['method'] != 'OPTIONS':
             try:
                 grant = await verified_grant(self.db, Headers(scope=scope).get('authorization', '').removeprefix('Bearer '))
