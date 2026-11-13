@@ -25,6 +25,7 @@ INFLIGHT_LIMITS = {name: budget('TEJAS_INFLIGHT_' + name.upper(), default, 1, 25
                    for name, default in [('live', 32), ('read', 16), ('asset', 8), ('auth', 4), ('control', 4), ('probe', 2)]}
 INLINE_JOBS = os.environ.get('TEJAS_INLINE_JOBS', 'true').lower() == 'true'
 LANE_LIMITS = {
+    'book_step': budget('TEJAS_BOOK_CONCURRENCY', 1, 1, 1),
     'grade': budget('TEJAS_GRADE_CONCURRENCY', 2, 1, 8),
     'report': budget('TEJAS_REPORT_CONCURRENCY', 1, 1, 4),
     'extract': budget('TEJAS_EXTRACT_CONCURRENCY', 1, 1, 2),

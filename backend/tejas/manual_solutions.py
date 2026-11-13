@@ -139,6 +139,8 @@ async def solve_status(id: str, u=Depends(owner)):
 @router.post('/sets/{id}/solve')
 async def request_solve(id: str, data: SolvePayload, bg: BackgroundTasks, u=Depends(owner)):
     s = await paper(id)
+    if s.get('book_import_id'):
+        raise HTTPException(409, 'Approve a separate explanation allowance in Super Admin → Uploads for this book.')
     rid = str(uuid5(NAMESPACE_URL, f"owner-request:{u['id']}:{id}:{data.request_id}"))
     existing = await requests.find_one({'_id': rid})
     if existing:

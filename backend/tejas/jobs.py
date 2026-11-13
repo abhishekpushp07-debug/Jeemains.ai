@@ -91,7 +91,10 @@ async def run_job(id, drain=True):
             return
         try:
             output = {}
-            if kind == 'ai_solution':
+            if kind == 'book_step':
+                from .book_worker import step
+                message = await step(j)
+            elif kind == 'ai_solution':
                 from .ai_solutions import process
                 message = await process(j)
             elif kind in ('smart_prepare','smart_page'):
@@ -272,6 +275,8 @@ async def maintenance():
         await ensure_grade(a)
     # Exhausted crashed workers must become visibly failed, not running forever.
     await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
+    from .book_worker import recover
+    await recover()
     selected = []
     for kind, capacity in LANE_LIMITS.items():
         if kind == 'ai_solution':

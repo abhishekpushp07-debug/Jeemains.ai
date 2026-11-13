@@ -21,7 +21,7 @@ class ImportGuard:
         if not manual_solve and method in ('POST','PUT','PATCH','DELETE') and re.match(r'^/api/studio/sets/[^/]+(?:/|$)', path):
             from .db import sets
             id=path.split('/')[4]
-            record=await sets.find_one({'id':id,'$or':[{'import_id':{'$exists':True}},{'chapter_book_id':{'$exists':True}},{'auto_import_id':{'$exists':True}}]},{'_id':0,'id':1})
+            record=await sets.find_one({'id':id,'$or':[{'import_id':{'$exists':True}},{'chapter_book_id':{'$exists':True}},{'auto_import_id':{'$exists':True}},{'book_import_id':{'$exists':True}}]},{'_id':0,'id':1})
             if record:
                 return await error_response('Imported test content is frozen. Use its organiser to schedule or pause it; upload corrected sources as a new test.',409,'immutable_import')(scope,receive,send)
         if path not in ('/api/studio/imports','/api/studio/chapter-books','/api/studio/auto-imports') or method != 'POST': return await self.app(scope,receive,send)

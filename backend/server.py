@@ -42,6 +42,7 @@ from tejas import (
     pyq,
     pyq_import,
     students,
+    book_imports,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -207,6 +208,7 @@ for module in [
     pyq,
     pyq_import,
     students,
+    book_imports,
 ]:
     app.include_router(module.router)
 

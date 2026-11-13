@@ -81,6 +81,12 @@ async def audit(actor, action, resource, detail=""):
 
 
 async def indexes():
+    await db.tejas_books.create_index([('owner_id', 1), ('created_at', -1)])
+    await db.tejas_book_parts.create_index([('book_id', 1), ('number', 1)], unique=True)
+    await db.tejas_book_pages.create_index([('book_id', 1), ('number', 1)], unique=True)
+    await db.tejas_book_mocks.create_index([('book_id', 1), ('order', 1)])
+    await db.tejas_book_allowances.create_index([('book_id', 1), ('state', 1), ('created_at', 1)])
+    await sets.create_index([('book_import_id', 1), ('mock_number', 1)])
     await sets.create_index('series_date', unique=True, sparse=True)
     await attempts.create_index([('user_id', 1), ('series_id', 1), ('started_at', -1)])
     for name in ('tejas_smart_imports', 'tejas_smart_papers', 'tejas_smart_questions',

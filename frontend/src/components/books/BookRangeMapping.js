@@ -1,0 +1,10 @@
+import React,{useState} from 'react';
+import {Button} from '../ui/button';
+import {post} from '../../lib/api';
+import {BookField,BookError} from './BookShared';
+
+export function BookRangeMapping({book,onSaved}){
+ const [form,setForm]=useState({first_page:1,last_page:1,mock:'',subject:'',role:'question',note:''}),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ async function save(e){e.preventDefault();setBusy(true);setError('');try{await post(`/admin/books/${book.id}/map-range`,{...form,revision:book.revision});onSaved();}catch(e){setError(e.message);}finally{setBusy(false);}}
+ return <details className="book-range-mapping"><summary data-testid="book-range-toggle">Repair mock / subject boundaries across a page range</summary><form onSubmit={save} data-testid="book-range-form"><p className="book-note">Assign existing regions to a precise mock. This does not approve crops or dismiss issues. For mixed pages, use the individual page review desk.</p><div className="book-form-grid">{[['first_page','First page'],['last_page','Last page']].map(([key,label])=><BookField key={key} label={label} id={`book-range-${key}`} type="number" min={1} max={book.read_pages} value={form[key]} onChange={e=>setForm({...form,[key]:Number(e.target.value)})}/>)}<BookField label="Exact mock label" id="book-range-mock" required value={form.mock} onChange={e=>setForm({...form,mock:e.target.value})}/><BookField label="Subject (blank preserves detected subjects)" id="book-range-subject" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}/></div><BookField label="Region type in this range" id="book-range-role"><select id="book-range-role" data-testid="book-range-role" value={form.role} onChange={e=>setForm({...form,role:e.target.value})}>{['question','key','solution'].map(v=><option key={v}>{v}</option>)}</select></BookField><BookField label="Source evidence / reason" id="book-range-note" required minLength={8} value={form.note} onChange={e=>setForm({...form,note:e.target.value})}/><BookError error={error}/><Button disabled={busy} data-testid="book-map-range">Save range mapping</Button></form></details>;
+}

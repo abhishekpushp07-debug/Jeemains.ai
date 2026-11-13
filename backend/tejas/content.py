@@ -166,7 +166,8 @@ async def set_detail(id: str):
 async def studio_sets(u=Depends(staff)):
     from .catalog import page
 
-    return [summary(s) for s in await page({"qa_only": {"$ne": True}, 'import_id': {'$exists': False}, 'chapter_book_id': {'$exists': False}}, size=100)]
+    query = {"qa_only": {"$ne": True}, 'import_id': {'$exists': False}, 'chapter_book_id': {'$exists': False}, 'book_import_id': {'$exists': False}}
+    return [summary(s) for s in await page(query, size=100)]
 
 
 @router.post("/studio/sets")
@@ -202,6 +203,10 @@ async def create_set(data: SetInput, u=Depends(staff)):
 @router.get("/studio/sets/{id}")
 async def studio_set(id: str, u=Depends(staff)):
     s = await get(sets, id)
+    if s.get('book_import_id'):
+        from .book_store import load_book
+        await owner(u)
+        await load_book(s['book_import_id'], u)
     s["files"] = await files.find(
         {"id": {"$in": s.get("file_ids", [])}}, {"_id": 0, "path": 0}
     ).to_list(100)
@@ -337,6 +342,10 @@ async def source_text(id: str, page: int, u=Depends(staff)):
 @router.get("/studio/files/{id}/download")
 async def source_download(id: str, u=Depends(staff)):
     f = await get(files, id)
+    if f.get('book_import_id'):
+        from .book_store import load_book
+        await owner(u)
+        await load_book(f['book_import_id'], u)
     return Response(
         await run_in_threadpool(get_object, f["path"]),
         media_type="application/pdf",

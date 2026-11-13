@@ -271,7 +271,15 @@ from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
 from .live_series import Assignment
 
+from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap
+
 MODELS = {
+    'book_imports.create': UploadInput,
+    'book_imports.map_range': RangeMap,
+    'book_imports.repair_page': PageRepair,
+    'book_imports.rules': RuleRepair,
+    'book_imports.control': Control,
+    'book_imports.allowance': Allowance,
     'live_series.assign': Assignment,
     'pyq_import.import_step': EmptyPayload,
     'my_tests.save_paper': EmptyPayload,

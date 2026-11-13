@@ -9,6 +9,15 @@ from .request_contracts import MODELS, EmptyPayload
 
 # owner boundary, workload tier, current idempotency behavior
 SPEC = {
+    **{f'book_imports.{name}': ('book_owner_private_source', tier, mode) for name,tier,mode in (
+        ('listing','normal','read'),('create','control','owner_source_hash_edition'),('read','normal','read'),
+        ('part','control','immutable_part_hash'),('complete','control','leased_completion'),
+        ('page_list','normal','read'),('page_detail','normal','read'),('page_image','batch','read'),
+        ('repair_page','control','lease_page_revision'),('mock_detail','normal','read'),('rules','control','lease_mock_revision'),
+        ('control','control','lease_book_revision'),('allowance','control','owner_explicit_bounded_request_receipt'),
+        ('preview_crop','batch','owner_source_region_only'),('map_range','control','lease_range_mapping'))},
+    'book_imports.series_list': ('current_released_series_metadata_only','normal','read'),
+    'book_imports.series_detail': ('current_released_series_metadata_only','normal','read'),
     'pyq.catalogue': ('authenticated_pyq_metadata_own_attempts_only', 'normal', 'read'),
     'pyq_import.import_status': ('owner_only_pyq_import_status', 'normal', 'read'),
     'pyq_import.import_step': ('owner_only_verified_insert_only_pyq_import', 'heavy', 'leased_resumable_content_append'),
@@ -184,11 +193,15 @@ def install_contracts(app):
             raise RuntimeError('API route lacks an explicit local contract: ' + key)
         owner, tier, idem = SPEC[key]
         writes = bool(route.methods & {'POST', 'PUT', 'PATCH', 'DELETE'})
-        upload = key in ('content.upload', 'imports.create_import', 'chapter_books.upload_book', 'smart_imports.upload')
+        upload = key in ('content.upload', 'imports.create_import', 'chapter_books.upload_book', 'smart_imports.upload', 'book_imports.part')
         model = (MODELS.get(key, EmptyPayload) if writes and not upload else None)
         if writes and not upload and route.body_field and key not in MODELS:
             raise RuntimeError('Body-bearing route lacks an explicit input model: ' + key)
         limit = 64 * 1024 if key in ('smart_imports.repair', 'smart_imports.clarify') else 256 * 1024 if key == 'content.edit_question' else 64 * 1024 if key in ('content.create_set', 'content.update_set', 'content.subset') else 4096
+        if key == 'book_imports.repair_page':
+            limit = 512 * 1024
+        elif key in ('book_imports.rules', 'book_imports.allowance'):
+            limit = 128 * 1024
         if not writes or upload:
             limit = 0
         registry.append(RouteContract(route, key, owner, tier, idem, roles(route.dependant), limit, model, writes and not upload))
