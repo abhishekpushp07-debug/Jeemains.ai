@@ -95,6 +95,7 @@ export default function Studio() {
       {user.role === 'owner' && <SeriesSchedulePanel/>}
       <ManualSolvePanel />
       <QuestionReportsPanel />
+      {user.role === 'owner' && <div className="import-card flex flex-wrap items-center justify-between gap-4 mb-6" data-testid="studio-book-upload-pointer"><div><strong>One combined book with many mocks?</strong><p className="import-muted">Use Upload Book: up to 100 MB per PDF, no page or mock limit. The PDF uploaders below take up to 50 MB per file.</p></div><Link className="btn btn-primary" to="/super-admin/uploads" data-testid="studio-open-book-upload">Upload Book</Link></div>}
       <StudioImportHub />
       <MockBookPanel />
       <AiReviewPanel />

@@ -306,7 +306,55 @@ async def g_patho(own):
     check('Mock 1 held, Mocks 2/3 published', st.get('Mock 1') == 'held' and st.get('Mock 2') == 'published' and st.get('Mock 3') == 'published', st)
 
 
-GROUPS = {'size': g_size, 'key3': g_key3, 'pages': g_pages, 'large': g_large, 'cache': g_cache, 'lease': g_lease, 'patho': g_patho}
+# ---------------- real dispatch, no test pump: a book needing more than JOB_DRAIN_QUANTUM+1 batches must finish by itself
+async def settle(own, bid, seconds=100):
+    t = time.time(); v = await view(own, bid)
+    while (v['state'] in ('received', 'reading', 'matching') or J._continuing) and time.time() - t < seconds:
+        await asyncio.sleep(1); v = await view(own, bid)
+    mine = {'kind': 'book_step', 'payload.book_id': bid}
+    return v, await H.TDB.tejas_jobs.count_documents(mine | {'status': {'$in': ['queued', 'running']}}), await H.TDB.tejas_jobs.count_documents(mine), round(time.time() - t)
+
+
+async def g_chain(own):
+    STEPWISE['on'] = False
+    raw = big_pdf(range(1, 31), 12)
+    b = await upload(own, raw, 'TEST_QA172 Chain'); await own.post(f"/api/admin/books/{b['id']}/complete")
+    v, open_jobs, steps, secs = await settle(own, b['id'])
+    check('421-page / 30-mock book finishes on real dispatch without a test pump', v['state'] == 'published' and v['read_pages'] == v['pages'] == 421 and v['counts']['published'] == 30 and open_jobs == 0, (v['state'], v['read_pages'], v['pages'], v['counts'], open_jobs, steps, secs))
+    check('chain is longer than one drain quantum and still bounded', 17 < steps <= 40, steps)
+    b = await upload(own, raw, 'TEST_QA172 Chain manual', edition='manual', auto_publish=False); await own.post(f"/api/admin/books/{b['id']}/complete")
+    v, open_jobs, steps, secs = await settle(own, b['id'])
+    check('auto_publish=False book stops by itself on real dispatch (no runaway chain)', v['state'] == 'ready' and v['read_pages'] == 421 and v['counts']['published'] == 0 and v['counts']['ready'] == 30 and open_jobs == 0 and steps <= 26, (v['state'], v['read_pages'], v['counts'], open_jobs, steps, secs))
+    for f in BS.CACHE.glob(hashlib.sha256(raw).hexdigest() + '.pdf'): f.unlink()
+
+
+# ---------------- a failed publication must stay held across batches: no retry storm, later clean mocks not blocked, chain ends
+async def g_holds(own):
+    from collections import Counter
+    STEPWISE['on'] = False
+    raw = big_pdf(range(1, 9), 2); real = BW.publish_ready; tried = []
+    async def failing(book, token, source, mid=None):
+        m = await H.TDB.tejas_book_mocks.find_one({'_id': mid}); tried.append(m['label'])
+        if m['order'] <= 5: raise ValueError('QA172 simulated content failure')
+        return await real(book, token, source, mid)
+    BW.publish_ready = failing
+    try:
+        b = await upload(own, raw, 'TEST_QA172 Holds'); bid = b['id']; await own.post(f'/api/admin/books/{bid}/complete')
+        v, open_jobs, steps, secs = await settle(own, bid, 30)
+    finally: BW.publish_ready = real
+    st = {m['label']: m['state'] for m in v['mocks']}; held = [m for m in v['mocks'] if m['state'] == 'held']
+    check('5 failing mocks held with their reason, 3 later clean mocks published, processing stops', v['state'] == 'attention_needed' and v['counts']['published'] == 3 and len(held) == 5 and all(any('QA172' in i for i in m['issues']) for m in held) and open_jobs == 0, (v['state'], st, open_jobs, steps, secs))
+    check('a failed publication is tried once, not on every batch', bool(tried) and max(Counter(tried).values()) == 1, dict(Counter(tried)))
+    v = await view(own, bid); r = await own.post(f'/api/admin/books/{bid}/control', json={'revision': v['revision'], 'action': 'retry'})
+    v, open_jobs, steps, secs = await settle(own, bid, 30)
+    check('owner Retry re-attempts the held mocks and publishes all 8', r.status_code == 200 and v['state'] == 'published' and v['counts']['published'] == 8 and open_jobs == 0, (r.status_code, v['state'], v['counts'], open_jobs))
+    b = await upload(own, raw, 'TEST_QA172 Late', edition='late', release_at=time.time() + 4); bid = b['id']
+    await asyncio.sleep(5); await own.post(f'/api/admin/books/{bid}/complete'); v, open_jobs, steps, secs = await settle(own, bid, 30)
+    check('8 mocks that missed their schedule are all held for a release decision and processing stops', v['state'] == 'attention_needed' and v['counts']['published'] == 0 and all(m['state'] == 'held' and m['missed_release'] for m in v['mocks']) and len(v['mocks']) == 8 and open_jobs == 0 and steps <= 8, (v['state'], v['counts'], [m['state'] for m in v['mocks']], open_jobs, steps, secs))
+    for f in BS.CACHE.glob(hashlib.sha256(raw).hexdigest() + '.pdf'): f.unlink()
+
+
+GROUPS = {'size': g_size, 'key3': g_key3, 'pages': g_pages, 'large': g_large, 'cache': g_cache, 'lease': g_lease, 'patho': g_patho, 'chain': g_chain, 'holds': g_holds}
 
 
 async def run(names):

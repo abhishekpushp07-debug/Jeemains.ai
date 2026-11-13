@@ -21,9 +21,9 @@ Not yet a unified universal importer:
 These are implementation findings, not a fresh live-system certification.
 
 ## Slide 3 — The first-release ambition
-One combined PDF containing 10 or 50 mocks.
+One combined PDF containing 10, 50 or more mocks.
 
-Proposed ceiling: 1,000 pages and 50 MB, covering the requested 15–20 MB books.
+Only intake limit: 100 MB per PDF. No fixed page or mock limit (owner decision, 2026-11-13); large books are read in batches. This covers the requested 15–20 MB books.
 
 JEE Main, BITSAT, COMEDK and explicitly described custom rules, where the test experience supports those rules.
 
@@ -86,12 +86,12 @@ Only Phase 1 is in scope after approval. No code is being built now.
 - Auto-publish each complete mock rather than wait for the whole book.
 - Allow clearly labelled key-only mocks while AI generation remains optional and owner-requested.
 - Block missing keys or unsupported exam mechanics rather than improvise.
-- Treat 50 mocks / 1,000 pages / 50 MB as the proposed support target, not an existing universal capability.
+- The only intake limit is 100 MB per PDF, with no page or mock cap. Preview testing on synthetic labelled PDFs (storage and AI mocked) covered 1,501 pages / 150 mocks; that is not a guarantee for every publisher layout.
 - Preserve source crops first; do not promise perfect OCR or transcription.
 - Keep original books owner-private and protect solutions until the correct release stage.
 
 ## Slide 12 — Honest limits and success
-No promise of zero recognition errors, instant 1,000-page processing or a fixed AI bill before the workload is known.
+No promise of zero recognition errors, instant processing of very large books or a fixed AI bill before the workload is known.
 
 Storage documentation does not provide native resumable upload or permanent deletion; the product must implement recovery and accurately describe access removal.
 

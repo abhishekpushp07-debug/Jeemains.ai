@@ -1,7 +1,22 @@
 # Active roadmap
 
 ## Book publishing (2026-11-13)
-- P0: Validate with one real owner-supplied publisher PDF in preview before deploy; deploy only on explicit request.
+- UPDATE 2026-11-13 late night (overrides the lines below where they differ):
+  - P0: The stall fix has never been deployed. No deploy run of any status exists after 10:25:43Z on 2026-11-13 (deployer); the fix was saved 19:48–20:33Z. The user approved the deploy at 22:05Z and it was dispatched about 22:13Z; outcome pending. Then confirm the live bundle contains "Connection problem on part".
+  - P0: The fix files are uncommitted in git (HEAD e602cf1 is older). Make sure a checkpoint exists before any deploy.
+  - P0: No signed-in session has called /api/admin/books* on production and there are 0 books there. Get one real upload done by the owner (/owner-login, email + password) and a screenshot with the time if it fails.
+  - P0: maintenance cron approved by the user (22:05Z); WEBHOOK_CRON_SECRET added in preview and verified there (dispatcher 200, 2 expired preview attempts closed and graded, endpoint checks 7/7). After the deploy, confirm on production that the key exists and that POST /api/cron/maintenance arrives with 200. Expected first-run effects: 13 expired attempts closed (11 with no answers), 12 submitted attempts graded, 1 old report job re-dispatched. Unknown until then whether a production dispatcher is scheduled at all.
+  - P1: Stale-tab error page. The edge returns the HTML page (200) for a missing /static/js file, so a tab opened before a deploy shows "We couldn't open this screen" on its next screen change. Possible fix: reload once automatically when a screen file fails to load. Not confirmed as the page the user saw; not approved yet.
+  - P1: Slowness not reproduced. All stalls measured from the preview pod fell in one two-minute window in which unrelated hosts stalled too (17 of 20 in the same second), so the pod cannot be used to judge the site. Needs a screenshot with the time from the user, or edge analytics from platform support.
+  - P1: 100 MB PUT to real object storage unproven. Storage has no delete API; ask before running a probe that writes there.
+
+- P0: User deployed on 2026-11-13; live serves the new build (routes + bundle checked from outside, no login). No real publisher PDF has been run in preview (0 books) or on production (deployer reports 0 books). Validate with one real owner-supplied PDF; pod memory headroom for a 100 MB upload on production is unmeasured (preview peak ~580 MB RSS vs 4Gi limit).
+- P0: Redeploy needed. Production still has the stall: any book over 340 pages stops reading until the owner presses "Retry saved work" (each press gives 340 more pages). Fix is in preview, tested 270/270 in isolated DBs. Deploy only on the user's word.
+- P0: WEBHOOK_CRON_SECRET missing in preview and production, so scheduled maintenance never runs (expired attempts are only closed when someone opens them; interrupted jobs are not recovered after a pod restart). Needs the user's go-ahead because it changes production behaviour. Follow the scheduled-recurring-tasks skill.
+- P0: Unknown whether the production container permits the PDF sandbox (chroot + seccomp as root). Watch the first real upload there.
+- P1: User's "site slow / error page" not reproduced. Ask for a screenshot with the time; edge analytics need platform support.
+- P1: receive() joins all parts in memory and put_object sends up to 100 MB in one request with a 120 s timeout; real object storage has only been proven with files up to ~18 MB. Test one large real file in preview.
+- P2: /health on live returns the SPA HTML with 200, not a health check; the real probe is /api/health.
 - P1: Owner login is email/password (/owner-login); phone+PIN accounts are students. Phone-based owner login would need explicit approval.
 - P2 perf: incremental rebuild (each matching step re-scans all pages, ~4.7s at 1,500 pages/150 mocks); stream upload parts to disk instead of in-memory join (~580MB peak at 100 MB).
 - P1: Two-column worked-solution continuation coverage; browser check of BookUpload resume-after-pause and BITSAT bonus UI.

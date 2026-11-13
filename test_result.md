@@ -1,7 +1,33 @@
+# Maintenance cron check — 2026-11-13 22:09–22:12 UTC, preview only, self-run by main agent
+User approved switching maintenance on. WEBHOOK_CRON_SECRET added to preview backend/.env, backend restarted.
+Platform dispatch script: http=200; maintenance ran 22:09:31Z, closed and graded the 2 preview attempts expired since 2026-10-26 (ready 6→8, ledgers 6→8, no open or failed jobs).
+Endpoint at localhost 7/7: no header 401, empty Bearer 401, wrong token 401, wrong event 400, non-JSON 400, valid 200 accepted, same run id 200 duplicate. Public preview address with curl: no token 401, wrong token 401.
+Harness note: Python urllib through the public preview address is answered 403 "error code: 1010" by the edge; that is not the app.
+Timer-fired dispatch at 22:15Z returned 200 (last_run 22:15:01Z, no open or failed jobs).
+Not covered: anything on production. Deploy dispatched about 22:13Z; at 22:16:30Z live still served the old build.
+
+
+
+# Regression re-run — 2026-11-13 late night, self-run by main agent (no testing agent, no app code changed)
+Reason: the user reports the problem is still there. Cause found: the fix was never deployed (no deploy run after 10:25:43Z; fix saved 19:48–20:33Z).
+Results (isolated disposable DBs, storage + AI MOCKED, real sandboxed PDF worker): book_publishing_iso170 105/105, rules_iso170 41/41, ext170 60/60, book_scale_iso171 "size key3 cache lease patho" 24/24, "chain holds" 7/7, "large" 10/10, "pages" 23/23 = 270/270. One run of "large" was killed by a tool timeout a few seconds after starting and was re-run in full; only test_database existed afterwards.
+Frontend: production build to a temp folder compiles and contains the fix strings.
+Live, unauthenticated only: bundle lacks "Connection problem on part" and "PDF to mocks"; a missing /static/js file is answered with the HTML page (200), which gives the "We couldn't open this screen" page in a tab opened before a deploy (reproduced in a headless browser at 1920x800 and 390x844).
+Not covered: real publisher PDF, real object storage with a large file, any signed-in flow on production, the cron endpoint with a valid secret.
+
+
+
+# Large-book stall fix — 2026-11-13 night, self-tested by main agent (no testing agent run)
+Bug: a book needing more than 17 batches (340 pages) stopped in "reading" with 1 queued book_step job; cron recovery is dead (WEBHOOK_CRON_SECRET missing). Second bug: failed or late publications were retried on every batch. Fixed in tejas/jobs.py, book_worker.py, book_publish.py, book_imports.py, book_models.py; BookUpload.js retries parts; Shared.js + Studio.js link to /super-admin/uploads.
+Results (isolated disposable DBs, storage + AI MOCKED, real sandboxed PDF worker): book_publishing_iso170 105/105, rules_iso170 41/41, ext170 60/60, book_scale_iso171 "size key3 cache lease patho holds chain" 31/31, "large" 10/10, "pages" 23/23. New groups: chain (real dispatch, no pump), holds (no retry storm, owner Retry works, missed schedule stays held).
+Browser (preview frontend, /api routed to tests/book_bridge172.py, no job pump): upload with an injected 520, automatic retry, resume, pause during retry, 421 pages / 30 mocks published without help; 1920x800 and 390x844, no overflow.
+Not covered: real publisher PDF, real object storage with a large file, production. Harness note: drain() now waits for jobs._continuing so the pump never races the app's own chain.
+
+
 # Limits change — 2026-11-13, QA171 required
 User: "1000 page ka limit hta do bas mb ka limit rkho 100 mb" + chose "Mock limit bhi hata do"; asked deep testing. Now ONLY 100 MB/PDF limit (UploadInput, worker, client, listing limits); page and mock caps removed (RangeMap/page_list unbounded, series detail no 50 cap, rebuild no 50-mock cap, MOCK regex \d{1,3}). Per-approval AI allowance caps raised to 10000 targets/20000 requests (cost safety kept).
 Scale fixes: worker now batch API (items list, per-item errors, clip_text action); book_pdf.run hard-links cached original into sandbox (no 100MB copy per call), inspect_many chunks 10. book_store.original returns verified local disk cache path (/tmp/jeelive-book-originals, sha-named, newest 6 kept; download+sha verify on miss). renew() extends lease. Worker: 20 pages per step with batched extraction (fallback per page), publishes max 5 clean mocks per step then re-enqueues (state 'matching'), 409 lease errors no longer converted into mock holds; upload parts deleted after original stored; received_parts no longer capped at 100 (resume >50MB). Page repair uses batched clip_text. Main self-check: 1200-page synthetic info .14s, 20-page batch .25s, crop/clip/bad-page error OK.
-Real user phone account 7004186276 checked by main in preview: phone+PIN login 200 but /api/admin/books 403 (phone profiles are always students by design; Super Admin needs owner email/password /owner-login). Session logged out. Do NOT use this real account in QA.
+Real user phone account [number not stored] checked by main in preview: phone+PIN login 200 but /api/admin/books 403 (phone profiles are always students by design; Super Admin needs owner email/password /owner-login). Session logged out. Do NOT use this real account in QA.
 
 
 ## QA169 defects fixed — 2026-11-13, retest170 required

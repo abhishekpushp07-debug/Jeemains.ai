@@ -72,7 +72,8 @@ async def publish_batch(book, token, source):
 
 async def hold(book, token, mock, reason):
     await fence(book,token)
-    mock.state='held';mock.issues=list(dict.fromkeys(mock.issues+[str(reason)[:350]]))
+    mock.publish_hold=str(reason)[:350]
+    mock.state='held';mock.issues=list(dict.fromkeys(mock.issues+[mock.publish_hold]))
     await save_mock(mock)
 
 
@@ -128,6 +129,7 @@ async def step(job):
             more=more or bool(await db.tejas_book_allowances.find_one({'book_id':id,'state':'queued'}))
         await save_book(book,token)
     except Exception as exc:
+        import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
         book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
         try:await save_book(book,token)
         except HTTPException:pass

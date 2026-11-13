@@ -56,8 +56,9 @@ def q3(tag):
 async def drain(limit=200):
     n = 0
     while n < limit:
+        if J._continuing:  # the app is still chaining batches by itself; never race it
+            await asyncio.gather(*list(J._continuing)); continue
         j = await H.TDB.tejas_jobs.find_one({'kind': 'book_step', 'status': 'queued'}, sort=[('created_at', 1)])
-        if not j: j = await H.TDB.tejas_jobs.find_one({'kind': 'book_step', 'status': 'queued'})
         if not j: break
         await J.run_job(j['id']); n += 1
     return n

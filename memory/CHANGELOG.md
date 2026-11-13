@@ -1,8 +1,36 @@
+## 2026-11-13 22:05–22:16 UTC — maintenance switched on in preview, deploy dispatched (outcome pending)
+User approved both the deploy and the maintenance job after seeing its production effects (13 expired attempts closed, 12 submitted attempts graded, 1 report job re-dispatched).
+Added WEBHOOK_CRON_SECRET to preview backend/.env (generated, never printed) and restarted the backend. No app code changed.
+Preview check: platform dispatch script 200, scheduled 22:15Z run 200, endpoint checks 7/7. Maintenance closed and graded 2 preview attempts that had been expired since 2026-10-26.
+Deploy dispatched about 22:13Z (code-only, same production DB and secrets, plus the new key). At 22:16:30Z live still served the old build. Not verified: deploy result, cron on production, a real book upload on production.
+
+
+
+## 2026-11-13 late night (fork) — diagnosis only, no app code changed
+Found: the book-processing stall fix is not on production because no deploy ran after it was written (deployer: newest run afd285f5 completed 10:25:43Z; fix saved 19:48–20:33Z). Confirmed from outside that the live bundle lacks the fix's strings. Fix files are still uncommitted in git.
+Re-ran the book suites in isolated DBs (storage + AI MOCKED): 270/270. Frontend production build compiles.
+Maintenance cron left off: its first production run would close 13 expired attempts, grade 12 submitted ones and re-dispatch 1 report job; the user has not agreed to that. A new key in preview backend/.env reaches production on the next redeploy.
+Slowness not reproduced; stalls measured from the preview pod fell in a window in which unrelated hosts stalled too. Showed one error-page mechanism on live (old tab after a deploy), not fixed.
+Not run: real-storage 100 MB probe, cron secret, any deploy.
+
+
+
 # Performance work — dated implementation and measurement history
 
-## 2026-11-13 — Limits: only 100 MB per PDF (preview only, not deployed)
+## 2026-11-13 night — large-book stall fixed (preview only, not deployed)
+Cause: jobs.drain_lane quantum (16) ended a book's batch chain after 17 batches (340 pages); cron recovery is dead because WEBHOOK_CRON_SECRET is missing. Repro in isolated DB: 421-page book stuck at 340/421 with 1 queued job for 50 s. Fix: book_step lane continues in a fresh task. Also fixed a retry storm (failed or late publications were retried every batch) with BookMock.publish_hold kept across rebuilds and cleared by owner-requested runs. BookUpload retries a failed part 3 times; Pause works mid-retry. Added "Upload Book" entry points in the account menu and Content Studio.
+Tests (isolated DBs, storage + AI MOCKED): 270/270 across iso170, rules170, ext170, scale171 (new groups: chain, holds), large, pages. Browser smoke without a job pump via tests/book_bridge172.py: 421 pages / 30 mocks published by itself; injected 520 retried; desktop + mobile, no overflow. Not tested with a real publisher PDF or on production.
+Not changed: cron secret (needs user decision), production (needs redeploy).
+
+
+## 2026-11-13 evening — post-deploy outside checks, deck numbers, no app code change
+User kept the 100 MB-only limit; plan/deck.md updated to match. Re-ran tests/book_scale_iso171.py size key3: 11/11 (isolated DB, storage + AI MOCKED).
+Live https://jeelive.ai, unauthenticated GET only: /api/health 26/26 200, same 136 API paths as preview (23 book routes), bundle carries the new upload copy, anon admin 401, owner-login renders desktop + mobile. Nothing behind login was tested on production. Read-only deployer diagnosis (its report): run afd285f5 live since 10:25Z, 2 pods healthy with 0 restarts, zero 5xx/tracebacks, 1 owner, ADMIN_* present, 0 books on production; no fault confirmed; pod memory under a 100 MB upload, 520 recurrence and authenticated flows remain unconfirmed. Owner-login seeding behaviour documented in PRD status.
+
+
+## 2026-11-13 — Limits: only 100 MB per PDF (tested in preview; user deployed later the same day)
 User: "1000 page ka limit hta do bas mb ka limit rkho 100 mb"; chose "Mock limit bhi hata do". Page and mock caps removed; 3-digit mock headings ("Mock Test 120", "Answer Key - Mock Test 100"). Scale: sandboxed worker batch API with hard-linked cached original (/tmp/jeelive-book-originals, sha-verified, newest 6), 20 pages per step, max 5 mocks published per step with lease renewal, upload parts deleted after original stored, resume no longer capped at 100 parts.
-QA171 (isolated DBs, storage+AI MOCKED, real parser): exactly 100 MiB/200 parts accepted, +1 byte 422; 1,501 pages/150 mocks read in 75 steps (127s, ~215MB RSS) and all published; 100 MiB file peak ~580MB RSS; browser 54.7MB/110-part pause+resume. Found endless loop (auto_publish off, >5 ready mocks) + ROLE 2-digit headings → fixed; retests key3 11/11, pages 23/23. Real phone 7004186276 checked: login works, but it is a student account → Super Admin API 403 by design (owner uses email/password /owner-login). Session logged out; no role changes.
+QA171 (isolated DBs, storage+AI MOCKED, real parser): exactly 100 MiB/200 parts accepted, +1 byte 422; 1,501 pages/150 mocks read in 75 steps (127s, ~215MB RSS) and all published; 100 MiB file peak ~580MB RSS; browser 54.7MB/110-part pause+resume. Found endless loop (auto_publish off, >5 ready mocks) + ROLE 2-digit headings → fixed; retests key3 11/11, pages 23/23. Real phone [number not stored] checked: login works, but it is a student account → Super Admin API 403 by design (owner uses email/password /owner-login). Session logged out; no role changes.
 
 
 ## 2026-11-13 — Phase 1 book publishing (preview only, not deployed)

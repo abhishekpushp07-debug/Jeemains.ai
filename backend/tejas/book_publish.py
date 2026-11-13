@@ -128,6 +128,9 @@ async def rebuild(book, token):
                                   'key':[{'page':p.number,'rect':r.rect,'printed_answer':r.answer} for p,r in keys+solutions if r.answer]},
                 'coverage_key':coverage_key})
         for orphan in (set(solution_groups)|set(key_groups))-set(question_groups):issues.append('Key/solution has no matching question: '+str(orphan))
+        # Holds placed at publication time must survive the next rebuild; only an owner action clears them.
+        if mock.missed_release and not mock.release_override:issues.append('Missed scheduled release. Choose a new release decision; it will not launch late automatically.')
+        if mock.publish_hold:issues.append(mock.publish_hold)
         mock.pages={role:sorted({p.number for p,r in relevant if r.role==role}) for role in ('question','key','solution','instructions')}
         mock.questions=questions;mock.issues=list(dict.fromkeys(issues))[:500]
         if not questions:mock.issues.append('No complete questions found.')

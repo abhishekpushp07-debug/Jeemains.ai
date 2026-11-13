@@ -17,8 +17,15 @@ export function BookUpload({onOpen}){
     setMessage(`Transferring part ${i+1} of ${Math.ceil(file.size/book.chunk_size)}…`);
     const chunk=file.slice(i*book.chunk_size,(i+1)*book.chunk_size);
     const partHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await chunk.arrayBuffer())),v=>v.toString(16).padStart(2,'0')).join('');
-    const r=await fetchWithSession(`/admin/books/${book.id}/parts/${i}?sha256=${partHash}`,{method:'PUT',headers:{'Content-Type':'application/octet-stream'},body:chunk});
-    if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.error?.message||d.detail||'Transfer interrupted. Retry the same file; completed parts are saved.');}
+    let r=null,tries=0;
+    for(;;){tries+=1;
+     try{r=await fetchWithSession(`/admin/books/${book.id}/parts/${i}?sha256=${partHash}`,{method:'PUT',headers:{'Content-Type':'application/octet-stream'},body:chunk});}catch{r=null;}
+     if(r&&(r.ok||(r.status<500&&r.status!==408&&r.status!==429)))break;
+     if(tries>=4||stopped.current)break;
+     setMessage(`Connection problem on part ${i+1}. Retrying (${tries} of 3)…`);await new Promise(done=>setTimeout(done,1500*tries));
+    }
+    if((!r||!r.ok)&&stopped.current){setMessage('Transfer paused. Reselect this same PDF and Upload Book to resume completed parts.');return;}
+    if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||'Transfer interrupted. Retry the same file; completed parts are saved.');}
     done+=Math.min(book.chunk_size,file.size-i*book.chunk_size);setSent(done);
    }
    await post(`/admin/books/${book.id}/complete`);onOpen(book.id);

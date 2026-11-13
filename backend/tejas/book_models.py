@@ -167,6 +167,7 @@ class BookMock(BaseDocument):
     missed_release: bool = False
     original_solution_identities: list[str] = Field(default_factory=list)
     release_override: bool = False
+    publish_hold: str = ''
 
 
 class UploadPart(BaseDocument):

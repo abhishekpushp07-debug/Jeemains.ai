@@ -212,8 +212,17 @@ async def drain_lane(kind):
             if not next_job:
                 break
             await run_job(next_job['id'], drain=False)
+        else:
+            if kind == 'book_step':
+                # A book is a chain of one-batch jobs: continue in a fresh task instead of stalling at the quantum.
+                task = asyncio.create_task(drain_lane(kind))
+                _continuing.add(task)
+                task.add_done_callback(_continuing.discard)
     finally:
         _draining.discard(kind)
+
+
+_continuing = set()
 
 
 @router.get('/jobs/{id}')

@@ -13,6 +13,8 @@ router=APIRouter(prefix='/api',tags=['Source-first book publishing'])
 
 
 async def dispatch(book,bg):
+    # Every owner-requested run re-attempts publications that were held earlier; the worker's own chain never does.
+    await db.tejas_book_mocks.update_many({'book_id':book.id,'publish_hold':{'$nin':['',None]}},{'$set':{'publish_hold':''}})
     job=await enqueue_book(book)
     from .jobs import run_job
     bg.add_task(run_job,job['id'])
