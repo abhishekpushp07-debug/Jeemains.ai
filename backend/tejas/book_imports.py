@@ -7,7 +7,7 @@ from .db import db, sets, now, audit
 from .canonical import database_now
 from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, Book, BookPage, BookMock, UploadPart, BookAllowance
 from .book_store import CHUNK, normalized, identity, digest, load_book, book_view, lock_book, save_book, unlock, fence, original, enqueue_book, mocks_for, save_mock
-from .book_pdf import inspect
+from .book_pdf import inspect, inspect_many
 
 router=APIRouter(prefix='/api',tags=['Source-first book publishing'])
 
@@ -21,7 +21,7 @@ async def dispatch(book,bg):
 @router.get('/admin/books')
 async def listing(u=Depends(owner)):
     rows=await db.tejas_books.find({'owner_id':u['id'],'removed':False}).sort('created_at',-1).limit(50).to_list(50)
-    return {'items':[await book_view(Book.from_mongo(r),False) for r in rows], 'limits':{'bytes':50*1024*1024,'pages':1000,'mocks':50},'model':__import__('tejas.astra',fromlist=['MODEL']).MODEL}
+    return {'items':[await book_view(Book.from_mongo(r),False) for r in rows], 'limits':{'bytes':100*1024*1024,'pages':None,'mocks':None},'model':__import__('tejas.astra',fromlist=['MODEL']).MODEL}
 
 
 @router.post('/admin/books')
@@ -87,7 +87,7 @@ async def complete(id:str,bg:BackgroundTasks,u=Depends(owner)):
 
 
 @router.get('/admin/books/{id}/pages')
-async def page_list(id:str,page:int=Query(1,ge=1,le=1000),u=Depends(owner)):
+async def page_list(id:str,page:int=Query(1,ge=1),u=Depends(owner)):
     book=await load_book(id,u)
     rows=await db.tejas_book_pages.find({'book_id':id}).sort('number',1).skip((page-1)*25).limit(25).to_list(25)
     return {'items':[BookPage.from_mongo(r).model_dump(exclude={'text','context','regions'}) | {'region_count':len(r.get('regions',[]))} for r in rows],'total':book.payload.get('pages',0),'page':page}
@@ -119,9 +119,10 @@ async def repair_page(id:str,number:int,body:PageRepair,bg:BackgroundTasks,u=Dep
         frozen={normalized(m.label) for m in mocks if m.published_generation==m.generation}
         if any(normalized(r.mock) in frozen for r in page.regions+body.regions):raise HTTPException(409,'Published regions are frozen. Create a corrected version for that mock before editing.')
         if body.classification in ('questions','solutions','answer_key','mixed') and not body.regions:raise HTTPException(422,'Mapped content needs source regions.')
-        raw=await original(book)
-        for r in body.regions:
-            data=await run_in_threadpool(inspect,raw,'crop',number,r.rect)
+        source=await original(book)
+        clips=await run_in_threadpool(inspect_many,source,[{'action':'clip_text','page':number,'rect':r.rect} for r in body.regions],40) if body.regions else []
+        for r,data in zip(body.regions,clips):
+            if data.get('error'):raise HTTPException(422,data['error'])
             if not page.scanned:r.text=data['text']
             if r.role!='question':r.option_labels=[]
             if r.role in ('question','key','solution') and (not r.mock or not r.subject or not r.number):raise HTTPException(422,'Every source item needs its mock, subject and printed number.')
@@ -144,7 +145,7 @@ async def map_range(id:str,body:RangeMap,bg:BackgroundTasks,u=Depends(owner)):
         if body.first_page>body.last_page or body.last_page>book.payload.get('read_pages',0):raise HTTPException(422,'Choose a received page range in reading order.')
         mocks=await mocks_for(book)
         frozen={normalized(m.label) for m in mocks if m.published_generation==m.generation}
-        rows=await db.tejas_book_pages.find({'book_id':id,'number':{'$gte':body.first_page,'$lte':body.last_page}}).sort('number',1).to_list(1000)
+        rows=await db.tejas_book_pages.find({'book_id':id,'number':{'$gte':body.first_page,'$lte':body.last_page}}).sort('number',1).to_list(None)
         if normalized(body.mock) in frozen or any(normalized(r.get('mock','')) in frozen for row in rows for r in row.get('regions',[])):
             raise HTTPException(409,'Create corrected versions before remapping published regions.')
         for row in rows:
@@ -261,7 +262,7 @@ async def allowance(id:str,body:Allowance,bg:BackgroundTasks,u=Depends(owner)):
         if body.purpose=='reading':
             if any(not 1<=p<=book.payload['pages'] for p in targets):raise HTTPException(422,'Selected pages must belong to this book.')
             published={normalized(m.label) for m in await mocks_for(book) if m.published_generation==m.generation}
-            selected=await db.tejas_book_pages.find({'book_id':id,'number':{'$in':targets}}).to_list(1000)
+            selected=await db.tejas_book_pages.find({'book_id':id,'number':{'$in':targets}},{'regions.mock':1}).to_list(None)
             if any(normalized(r.get('mock','')) in published for p in selected for r in p.get('regions',[])):raise HTTPException(409,'Create a corrected mock version before re-reading published regions.')
         else:
             papers=await sets.find({'book_import_id':id,'questions.id':{'$in':targets}},{'questions':1}).to_list(100)
@@ -295,6 +296,6 @@ async def series_detail(id:str,u=Depends(current)):
     from .catalog import available,PROJECT
     from .content import summary
     query=available(u);query['book_import_id']=id
-    rows=await sets.find(query,PROJECT|{'book_series_title':1}).sort('mock_number',1).limit(50).to_list(50)
+    rows=await sets.find(query,PROJECT|{'book_series_title':1}).sort('mock_number',1).to_list(None)
     if not rows:raise HTTPException(404,'No released mocks in this series.')
     return {'id':id,'title':rows[0]['book_series_title'],'published_count':len(rows),'items':[summary(s) for s in rows]}

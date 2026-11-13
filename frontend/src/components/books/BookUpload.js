@@ -8,7 +8,7 @@ export function BookUpload({onOpen}){
  const [file,setFile]=useState(null),[title,setTitle]=useState(''),[edition,setEdition]=useState(''),[rights,setRights]=useState(false),[auto,setAuto]=useState(true),[schedule,setSchedule]=useState(''),[competitive,setCompetitive]=useState(false),[closes,setCloses]=useState('');
  const [busy,setBusy]=useState(false),[sent,setSent]=useState(0),[message,setMessage]=useState(''),[error,setError]=useState('');const stopped=useRef(false);
  async function upload(e){e.preventDefault();setError('');if(!file||!rights)return;stopped.current=false;setBusy(true);setSent(0);
-  try{if(file.size>50*1024*1024)throw new Error('Choose a PDF within 50 MB.');setMessage('Checking file identity…');
+  try{if(file.size>100*1024*1024)throw new Error('Choose a PDF within 100 MB.');setMessage('Checking file identity…');
    const bytes=await file.arrayBuffer();const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),v=>v.toString(16).padStart(2,'0')).join('');
    const book=await post('/admin/books',{filename:file.name,title:title.trim()||file.name.replace(/\.pdf$/i,''),edition,sha256:hash,size:file.size,rights_confirmed:true,auto_publish:auto,release_at:schedule?new Date(schedule).getTime()/1000:null,competitive,closes_at:closes?new Date(closes).getTime()/1000:null});
    if(book.state!=='uploading'){onOpen(book.id);return;}
@@ -24,7 +24,7 @@ export function BookUpload({onOpen}){
    await post(`/admin/books/${book.id}/complete`);onOpen(book.id);
   }catch(e){setError(e.message);}finally{setBusy(false);}
  }
- return <form className="book-upload" onSubmit={upload} data-testid="book-upload-form"><div className="book-upload-heading"><UploadCloud size={28}/><div><h2>One book. Separate mocks.</h2><p>Up to 50 MB · 1,000 pages · 50 mocks. Uncertain content stays private.</p></div></div>
+ return <form className="book-upload" onSubmit={upload} data-testid="book-upload-form"><div className="book-upload-heading"><UploadCloud size={28}/><div><h2>One book. Separate mocks.</h2><p>Up to 100 MB per PDF · no page or mock limit. Uncertain content stays private.</p></div></div>
   <BookField label="Combined PDF book" id="book-file" type="file" accept="application/pdf,.pdf" disabled={busy} required onChange={e=>{const f=e.target.files[0];setFile(f||null);if(f)setTitle(f.name.replace(/\.pdf$/i,''));}}/>
   <div className="book-form-grid"><BookField label="Series title" id="book-title" value={title} maxLength={160} required disabled={busy} onChange={e=>setTitle(e.target.value)}/><BookField label="Edition label (optional)" id="book-edition" value={edition} maxLength={80} disabled={busy} onChange={e=>setEdition(e.target.value)} /></div>
   <p className="book-note" data-testid="book-duplicate-notice">Identical PDF + edition opens the existing upload. Change the edition only for a deliberate separate import.</p>

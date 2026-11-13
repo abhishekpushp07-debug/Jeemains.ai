@@ -3,7 +3,7 @@ import {Button} from '../ui/button';
 import {BookField,BookError} from './BookShared';
 import {api,post} from '../../lib/api';
 
-function parsePages(text){const result=[];for(const part of text.split(',')){if(!part.trim())continue;const range=part.trim().match(/^(\d+)(?:-(\d+))?$/);if(!range)throw new Error('Use page numbers or ranges, such as 4,8-12.');const a=Number(range[1]),b=Number(range[2]||range[1]);if(b<a||b-a>1000)throw new Error('Invalid page range.');for(let n=a;n<=b;n++)result.push(n);}return [...new Set(result)];}
+function parsePages(text){const result=[];for(const part of text.split(',')){if(!part.trim())continue;const range=part.trim().match(/^(\d+)(?:-(\d+))?$/);if(!range)throw new Error('Use page numbers or ranges, such as 4,8-12.');const a=Number(range[1]),b=Number(range[2]||range[1]);if(b<a||b-a>10000)throw new Error('Invalid page range.');for(let n=a;n<=b;n++)result.push(n);}return [...new Set(result)];}
 
 export function BookAllowances({book,onSaved}){
  const [purpose,setPurpose]=useState('reading'),[pages,setPages]=useState(''),[limit,setLimit]=useState(1),[approved,setApproved]=useState(false),[candidates,setCandidates]=useState([]),[chosen,setChosen]=useState([]),[error,setError]=useState(''),[busy,setBusy]=useState(false);

@@ -1,4 +1,5 @@
-import hashlib, json, uuid
+import hashlib, json, os, tempfile, uuid
+from pathlib import Path
 from fastapi import HTTPException
 from pymongo import ReturnDocument
 from starlette.concurrency import run_in_threadpool
@@ -9,6 +10,31 @@ from .auth import owner, staff
 from tejas_storage import get_object
 
 CHUNK=512*1024
+CACHE=Path(tempfile.gettempdir())/'jeelive-book-originals'
+
+
+def remember(raw, sha):
+    CACHE.mkdir(mode=0o700,exist_ok=True)
+    target=CACHE/f'{sha}.pdf'
+    fd,tmp=tempfile.mkstemp(dir=CACHE,suffix='.part')
+    with os.fdopen(fd,'wb') as f:f.write(raw)
+    os.replace(tmp,target)
+    try:
+        for old in sorted(CACHE.glob('*.pdf'),key=lambda p:p.stat().st_mtime)[:-6]:
+            if old!=target:old.unlink(missing_ok=True)
+    except OSError:pass
+    return target
+
+
+def cached(sha, size, path):
+    target=CACHE/f'{sha}.pdf'
+    try:
+        if target.stat().st_size==size:
+            os.utime(target);return target
+    except OSError:pass
+    raw=get_object(path)
+    if digest(raw)!=sha:raise ValueError('Original book integrity check failed; processing is held.')
+    return remember(raw,sha)
 
 
 def identity(*parts):
@@ -63,9 +89,13 @@ async def unlock(book, token):
 
 
 async def original(book):
-    raw=await run_in_threadpool(get_object,book.payload['source_path'])
-    if digest(raw)!=book.payload['sha256']:raise ValueError('Original book integrity check failed; processing is held.')
-    return raw
+    p=book.payload
+    return await run_in_threadpool(cached,p['sha256'],p['size'],p['source_path'])
+
+
+async def renew(book, token):
+    result=await db.tejas_books.update_one({'_id':book.id,'lock_token':token,'removed':False,'$expr':{'$gt':['$lock_until',EPOCH_NOW]}},[{'$set':{'lock_until':{'$add':[EPOCH_NOW,900]}}}])
+    if not result.matched_count:raise HTTPException(409,'Book processing lease expired. Retry from saved progress.')
 
 
 async def pages_for(book):
@@ -94,7 +124,7 @@ async def book_view(book, detail=True):
         if m.state=='scheduled' and (p.get('release_at') or 0)<=stamp:
             m.state='published'
     counts={s:sum(m.state==s for m in items) for s in ('held','ready','published','paused','scheduled')}
-    parts=await db.tejas_book_parts.find({'book_id':book.id},{'_id':0,'number':1}).to_list(100)
+    parts=await db.tejas_book_parts.find({'book_id':book.id},{'_id':0,'number':1}).to_list(None) if book.state=='uploading' else []
     allowances=[BookAllowance.from_mongo(r).model_dump(exclude={'owner_id','book_id'}) async for r in db.tejas_book_allowances.find({'book_id':book.id}).sort('created_at',-1).limit(20)] if detail else []
     return {'id':book.id,'title':p['title'],'filename':p['filename'],'state':book.state,'revision':book.revision,
         'size':p['size'],'sha256':p['sha256'],'edition':p.get('edition',''),'chunk_size':CHUNK,'received_parts':sorted(r['number'] for r in parts),

@@ -11,7 +11,7 @@ class UploadInput(Input):
     filename: str = Field(min_length=1, max_length=180)
     title: str = Field(min_length=1, max_length=160)
     sha256: str = Field(pattern=r'^[a-f0-9]{64}$')
-    size: int = Field(gt=0, le=50*1024*1024)
+    size: int = Field(gt=0, le=100*1024*1024)
     edition: str = Field(default='', max_length=80)
     rights_confirmed: Literal[True]
     auto_publish: bool = True
@@ -77,8 +77,8 @@ class SectionScoring(Input):
 
 class RangeMap(Input):
     revision: int = Field(ge=0)
-    first_page: int = Field(ge=1,le=1000)
-    last_page: int = Field(ge=1,le=1000)
+    first_page: int = Field(ge=1)
+    last_page: int = Field(ge=1)
     mock: str = Field(min_length=1,max_length=120)
     subject: str = Field(default='',max_length=80)
     role: Literal['question','key','solution']
@@ -119,9 +119,9 @@ class Control(Input):
 class Allowance(Input):
     revision: int = Field(ge=0)
     purpose: Literal['reading','explanations']
-    pages: list[int] = Field(default_factory=list, max_length=1000)
-    question_ids: list[str] = Field(default_factory=list, max_length=1000)
-    max_requests: int = Field(ge=1, le=2000)
+    pages: list[int] = Field(default_factory=list, max_length=10000)
+    question_ids: list[str] = Field(default_factory=list, max_length=10000)
+    max_requests: int = Field(ge=1, le=20000)
     approved: Literal[True]
     request_id: str = Field(min_length=8, max_length=100)
 

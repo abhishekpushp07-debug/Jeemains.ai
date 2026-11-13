@@ -4,9 +4,9 @@ from starlette.concurrency import run_in_threadpool
 from .db import db, sets, files, now, audit
 from .canonical import database_now
 from .book_models import BookMock, MockRules
-from .book_store import identity, normalized, save_mock, pages_for, mocks_for, fence, digest, principal
+from .book_store import identity, normalized, save_mock, pages_for, mocks_for, fence, renew, digest, principal
 from .book_reader import infer_rules
-from .book_pdf import inspect
+from .book_pdf import inspect_many
 from .content import valid_rules, question_issues, publish_validated
 from tejas_storage import put_object
 
@@ -21,7 +21,10 @@ def question_identity(r):return (normalized(r.subject),normalized(r.section or r
 async def rebuild(book, token):
     pages=await pages_for(book); known={normalized(m.label):m for m in await mocks_for(book)}
     labels=list(dict.fromkeys(normalized(r.mock) for p in pages for r in p.regions if r.mock and r.role not in ('ignore','instructions')))
-    if len(labels)>50:raise ValueError('More than 50 mocks detected. Split this book; nothing new was published.')
+    by_label={}
+    for p in pages:
+        for r in p.regions:
+            if r.mock and r.role!='ignore':by_label.setdefault(normalized(r.mock),[]).append((p,r))
     unknown=[p.number for p in pages if p.classification=='unresolved' or (p.issues and not any(r.mock for r in p.regions))]
     spans={}
     for p in pages:
@@ -38,7 +41,7 @@ async def rebuild(book, token):
             containing={normalized(r.mock) for p in neighbours for r in p.regions if r.mock}
         affected[number]=containing
     for order,label in enumerate(labels,1):
-        relevant=[(p,r) for p in pages for r in p.regions if normalized(r.mock)==label and r.role!='ignore']
+        relevant=by_label[label]
         mock=known.get(label) or BookMock(id=identity(book.id,label),book_id=book.id,label=relevant[0][1].mock,order=order)
         if mock.published_generation==mock.generation:continue
         mock.order=order;issues=[];question_groups={};key_groups={};solution_groups={}
@@ -136,8 +139,8 @@ async def rebuild(book, token):
             mock.state='held';mock.questions=[];mock.issues=['All mapped regions were removed. Restore the mock boundaries.'];await save_mock(mock)
 
 
-async def crop_ref(book,mock,raw,region,role,index):
-    crop=await run_in_threadpool(inspect,raw,'crop',region['page'],region['rect'])
+async def crop_ref(book,mock,crop,region,role):
+    if crop.get('error'):raise ValueError(f"Page {region['page']}: {crop['error']}")
     png=crop['image_bytes'];fid=identity(book.id,digest(png),role)
     path=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/crops/{fid}.png',png,'image/png')
     await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
@@ -155,11 +158,16 @@ async def publish_ready(book,token,raw,only_mid=None):
             mock.missed_release=True
         if mock.missed_release and not mock.release_override:
             mock.state='held';mock.issues=['Missed scheduled release. Choose a new release decision; it will not launch late automatically.'];await save_mock(mock);continue
-        await fence(book,token)
+        await renew(book,token)
         sid=identity(mock.id,mock.generation);existing=await sets.find_one({'id':sid})
         if existing and existing.get('status')=='published':
             mock.set_id=sid;mock.published_generation=mock.generation;mock.state='published';await save_mock(mock);continue
         questions=[];rules=mock.rules
+        wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
+        rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10)
+        crops={}
+        for (qid,role,_),crop in zip(wanted,rendered):crops.setdefault((qid,role),[]).append(crop)
+        await renew(book,token)
         for original_q in mock.questions:
             q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None)
             q.update(render_mode='source',solution_number=q['number'],approved=True,issues=[],q_refs=[],s_refs=[],
@@ -171,9 +179,9 @@ async def publish_ready(book,token,raw,only_mid=None):
                     q['scoring']={k:section[k] for k in ('correct','wrong','skipped')}
             if rules['mechanic']=='bitsat_bonus':q['bonus']=q['number']>rules['expected_questions']-rules['bonus_count']
             for role,key in (('question','q_refs'),('solution','s_refs')):
-                for index,region in enumerate(source[role]):
+                for region,crop in zip(source[role],crops.get((q['id'],role),[])):
                     await fence(book,token)
-                    q[key].append(await crop_ref(book,mock,raw,region,role,index))
+                    q[key].append(await crop_ref(book,mock,crop,region,role))
             errors=question_issues(q,rules['exam'])
             if errors:raise ValueError('; '.join(errors))
             questions.append(q)
