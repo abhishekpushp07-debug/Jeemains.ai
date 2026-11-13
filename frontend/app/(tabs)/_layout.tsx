@@ -1,7 +1,6 @@
 import React from "react";
-import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
+import { Image, Platform, StyleSheet, View, useWindowDimensions } from "react-native";
 import { Tabs } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
 import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { IconName, Press, T } from "@/src/components/ui";
@@ -18,6 +17,7 @@ const ITEMS: Record<string, { label: string; icon: IconName }> = {
 };
 // The bar stays ink-black on every tab (light app, dark dock), like a premium wallet.
 const BAR = colors.custom_dock, ON = colors.custom_dockInk, OFF = colors.custom_dockMuted;
+const GEM = require("../../assets/images/rapid-gem.webp");
 
 function JeeTabBar({ state, emitter, navigateToTab }: any) {
   const insets = useSafeAreaInsets();
@@ -37,15 +37,10 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
           return (
             <View key={route.key} style={styles.rapidCol}>
               <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" accessibilityState={{ selected: focused }} style={styles.rapidPress} scaleTo={0.92}>
-                {/* Royal-blue glass capsule: outer view carries the glow, inner view clips the layers. */}
-                <View testID="tab-rapid-glass" style={[styles.glassGlow, focused && styles.glassGlowOn]}>
-                  <View style={[styles.glass, narrow && styles.glassNarrow, focused && styles.glassOn]}>
-                    <LinearGradient colors={[colors.custom_rfGlassFrom, colors.custom_rfGlassMid, colors.custom_rfGlassTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-                    <LinearGradient colors={[colors.custom_rfGlassSheen, colors.custom_clear]} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 1 }} style={styles.sheen} />
-                    <View><Glyph name="lightning-bolt" size={narrow ? 22 : 24} color={colors.custom_rfGlassInk} stroke={1.9} /></View>
-                  </View>
-                </View>
-                <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_rfGlassLine} style={styles.label}>RAPID FIRE</T>
+                {/* Winged ruby diamond (transparent artwork) rising out of the dock. */}
+                <Image testID="tab-rapid-gem" source={GEM} resizeMode="contain" accessible={false}
+                  style={[styles.gem, narrow && styles.gemNarrow, focused && styles.gemOn]} />
+                <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_seriesBright} style={styles.label}>RAPID FIRE</T>
               </Press>
             </View>
           );
@@ -89,11 +84,9 @@ const styles = StyleSheet.create({
   item: { flex: 1, minWidth: 0, alignItems: "center", justifyContent: "center", gap: 6, paddingTop: space.xs },
   label: { letterSpacing: 0.9 },
   rapidCol: { flex: 1.3, alignItems: "center" },
-  rapidPress: { alignItems: "center", marginTop: -22, gap: 6 },
-  glassGlow: { borderRadius: 28, backgroundColor: colors.custom_rfGlassMid, shadowColor: colors.custom_rfGlassGlow, shadowOpacity: 0.55, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 12 },
-  glassGlowOn: { shadowOpacity: 0.85, shadowRadius: 22 },
-  glass: { width: 80, height: 54, borderRadius: 27, overflow: "hidden", borderWidth: 2, borderColor: colors.custom_rfGlassLine, alignItems: "center", justifyContent: "center" },
-  glassNarrow: { width: 68, height: 50, borderRadius: 25 },
-  glassOn: { borderColor: colors.custom_dockInk },
-  sheen: { position: "absolute", top: 0, left: 0, right: 0, height: "55%" },
+  rapidPress: { alignItems: "center", marginTop: -26, gap: 4 },
+  // Artwork is 360×201; keep that ratio so the wings never crop.
+  gem: { width: 100, height: 56 },
+  gemNarrow: { width: 82, height: 46 },
+  gemOn: { transform: [{ scale: 1.08 }] },
 });

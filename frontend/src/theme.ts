@@ -163,10 +163,8 @@ const dark = {
   // All India card: onyx → deep ruby with a soft red glow and a hairline sheen.
   custom_seriesFrom: "#0B0B0D", custom_seriesMid: "#17090D", custom_seriesTo: "#3A0912", custom_seriesGlow: "#E11D2E",
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
-  // Matte royal maroon for exam names; royal-blue glass capsule for the Rapid Fire dock button.
+  // Matte royal maroon for exam names.
   custom_royalMaroon: "#7A1F35",
-  custom_rfGlassFrom: "rgba(118,152,255,0.96)", custom_rfGlassMid: "#2F55E4", custom_rfGlassTo: "rgba(22,40,148,0.96)",
-  custom_rfGlassLine: "#A9BEFF", custom_rfGlassGlow: "#3D6BFF", custom_rfGlassSheen: "rgba(255,255,255,0.42)", custom_rfGlassInk: "#FFFFFF",
 };
 
 export type ThemeColors = typeof dark;
