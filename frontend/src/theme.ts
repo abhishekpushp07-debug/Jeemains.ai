@@ -163,8 +163,8 @@ const dark = {
   // All India card: onyx → deep ruby with a soft red glow and a hairline sheen.
   custom_seriesFrom: "#0B0B0D", custom_seriesMid: "#17090D", custom_seriesTo: "#3A0912", custom_seriesGlow: "#E11D2E",
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
-  // Matte royal maroon for exam names.
-  custom_royalMaroon: "#7A1F35",
+  // Matte royal maroon for exam names; ice blue that matches the Rapid Fire diamond.
+  custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8CC4FF",
 };
 
 export type ThemeColors = typeof dark;

@@ -37,10 +37,10 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
           return (
             <View key={route.key} style={styles.rapidCol}>
               <Press testID="tab-rapid" onPress={onPress} accessibilityLabel="Rapid Fire arena" accessibilityState={{ selected: focused }} style={styles.rapidPress} scaleTo={0.92}>
-                {/* Winged ruby diamond (transparent artwork) rising out of the dock. */}
+                {/* Sparkly blue diamond (transparent artwork) rising out of the dock. */}
                 <Image testID="tab-rapid-gem" source={GEM} resizeMode="contain" accessible={false}
                   style={[styles.gem, narrow && styles.gemNarrow, focused && styles.gemOn]} />
-                <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_seriesBright} style={styles.label}>RAPID FIRE</T>
+                <T w="bold" size={labelSize} numberOfLines={1} color={focused ? ON : colors.custom_gemBlue} style={styles.label}>RAPID FIRE</T>
               </Press>
             </View>
           );
@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
   label: { letterSpacing: 0.9 },
   rapidCol: { flex: 1.3, alignItems: "center" },
   rapidPress: { alignItems: "center", marginTop: -26, gap: 4 },
-  // Artwork is 360×201; keep that ratio so the wings never crop.
-  gem: { width: 100, height: 56 },
-  gemNarrow: { width: 82, height: 46 },
+  // Artwork is 265×240 (blue diamond + sparkles); keep that ratio so nothing crops.
+  gem: { width: 66, height: 60 },
+  gemNarrow: { width: 57, height: 52 },
   gemOn: { transform: [{ scale: 1.08 }] },
 });
