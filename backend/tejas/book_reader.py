@@ -9,15 +9,16 @@ ROLE=re.compile(r'^(?:(?:detailed|worked)\s+)?(solutions?|answers?\s*keys?|answe
 def read_page(lines, previous, geometry=()):
     context=dict(previous); regions=[]; issues=[]
     text='\n'.join(x['text'] for x in lines)
-    if not lines or len(text.strip())<30:
-        return PageMap(issues=['Scanned or sparse page: approve AI reading or map the original page manually.']),context
+    if not lines:
+        return PageMap(issues=['Scanned or empty page: approve AI reading or map the original page manually.']),context
     headers=[]; anchors=[]
     for line in lines:
         value=line['text'];m=MOCK.match(value);role=ROLE.match(value)
         if m:
             label='Mock '+str(int(m[1])); headers.append((line['rect'][1], 'mock',label))
-            if context.get('role') in ('key','solution'):
-                issues.append('Mock heading follows keys/solutions: confirm whether this starts questions or a consolidated answer section.')
+            starts_questions=bool(re.search(r'\b(?:instructions|duration|total questions)\b',text,re.I) or choose_options(text)[0])
+            if context.get('role') in ('key','solution') and not starts_questions:
+                issues.append('Mock heading follows keys/solutions without question instructions: confirm the section type.')
         if role and len(value)<140:
             headers.append((line['rect'][1],'role','solution' if 'solution' in role[1].lower() else 'key'))
         subject=SUBJECT.match(value)
@@ -74,7 +75,7 @@ def read_page(lines, previous, geometry=()):
         if role=='solution' and not a[1]:issues.append('Bare solution numbers may be numbered steps; confirm anchors.')
         regions.append(Region(role=role,mock=local.get('mock',''),subject=local.get('subject',''),section=local.get('subject',''),
             number=int(a[1] or a[2]),rect=rect,text=value[:30000],answer=next(iter(keys)) if len(keys)==1 else '',
-            option_labels=list(family),response_type='mcq' if family else 'unresolved',checked=not two and not ambiguous and bool(a[1]) and role!='solution'))
+            option_labels=list(family),response_type='mcq' if family else 'unresolved',checked=not two and not ambiguous and bool(a[1])))
     before=min(a[0]['rect'][1] for a in anchors)
     intro='\n'.join(x['text'] for x in lines if x['rect'][1]<before)
     if intro.strip():

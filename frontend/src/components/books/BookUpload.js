@@ -15,7 +15,9 @@ export function BookUpload({onOpen}){
    const existing=new Set(book.received_parts);let done=book.received_parts.reduce((n,i)=>n+Math.min(book.chunk_size,file.size-i*book.chunk_size),0);setSent(done);
    for(let i=0;i<Math.ceil(file.size/book.chunk_size);i++){if(stopped.current){setMessage('Transfer paused. Reselect this same PDF and Upload Book to resume completed parts.');return;}if(existing.has(i))continue;
     setMessage(`Transferring part ${i+1} of ${Math.ceil(file.size/book.chunk_size)}…`);
-    const r=await fetchWithSession(`/admin/books/${book.id}/parts/${i}`,{method:'PUT',headers:{'Content-Type':'application/octet-stream'},body:file.slice(i*book.chunk_size,(i+1)*book.chunk_size)});
+    const chunk=file.slice(i*book.chunk_size,(i+1)*book.chunk_size);
+    const partHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await chunk.arrayBuffer())),v=>v.toString(16).padStart(2,'0')).join('');
+    const r=await fetchWithSession(`/admin/books/${book.id}/parts/${i}?sha256=${partHash}`,{method:'PUT',headers:{'Content-Type':'application/octet-stream'},body:chunk});
     if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.error?.message||d.detail||'Transfer interrupted. Retry the same file; completed parts are saved.');}
     done+=Math.min(book.chunk_size,file.size-i*book.chunk_size);setSent(done);
    }

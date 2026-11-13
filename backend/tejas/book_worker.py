@@ -43,7 +43,7 @@ async def step(job):
                         data=await run_in_threadpool(inspect,raw,'text',n)
                         mapped,context=read_page(data['lines'],context,data.get('geometry',[]))
                         text='\n'.join(line['text'] for line in data['lines'])
-                        page=BookPage(id=identity(id,'page',n),book_id=id,number=n,**mapped.model_dump(),text=text[:150000],scanned=len(text.strip())<30,context=context,provenance={'kind':'native'})
+                        page=BookPage(id=identity(id,'page',n),book_id=id,number=n,**mapped.model_dump(),text=text[:150000],scanned=not data['lines'],context=context,provenance={'kind':'native'})
                     except ValueError as exc:
                         page=BookPage(id=identity(id,'page',n),book_id=id,number=n,issues=[str(exc)],context=context)
                     await db.tejas_book_pages.update_one({'_id':page.id},{'$setOnInsert':page.to_mongo()},upsert=True)

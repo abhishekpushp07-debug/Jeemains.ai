@@ -311,6 +311,11 @@ async def upload(
 async def source_page(id: str, page: int, u=Depends(staff)):
     require_capability(Capability.SOURCE_PARSE)
     f = await get(files, id)
+    if f.get('book_import_id'):
+        from .book_store import load_book
+        await owner(u)
+        await load_book(f['book_import_id'], u)
+        raise HTTPException(409, 'Use the book review desk for source-page images and text.')
     raw = await run_in_threadpool(get_object, f["path"])
     d = validate_pdf(raw)
     if not 1 <= page <= len(d):
@@ -328,6 +333,11 @@ async def source_page(id: str, page: int, u=Depends(staff)):
 async def source_text(id: str, page: int, u=Depends(staff)):
     require_capability(Capability.SOURCE_PARSE)
     f = await get(files, id)
+    if f.get('book_import_id'):
+        from .book_store import load_book
+        await owner(u)
+        await load_book(f['book_import_id'], u)
+        raise HTTPException(409, 'Use the book review desk for source-page images and text.')
     raw = await run_in_threadpool(get_object, f["path"])
     d = validate_pdf(raw)
     if not 1 <= page <= len(d):
@@ -742,6 +752,10 @@ async def subset(id: str, data: dict, u=Depends(staff)):
 async def preview_asset(id: str, qid: str, kind: str, index: int, u=Depends(staff)):
     require_capability(Capability.SOURCE_PARSE)
     s = await get(sets, id)
+    if s.get('book_import_id'):
+        from .book_store import load_book
+        await owner(u)
+        await load_book(s['book_import_id'], u)
     q = next((q for q in s["questions"] if q["id"] == qid), None)
     if not q or kind not in ["question", "solution"]:
         raise HTTPException(404, "Asset not found.")
@@ -750,5 +764,5 @@ async def preview_asset(id: str, qid: str, kind: str, index: int, u=Depends(staf
         raise HTTPException(404, "Source region not found.")
     ref = refs[index]
     f = await get(files, ref["file_id"])
-    raw = await run_in_threadpool(get_object, f["path"])
-    return Response(await run_in_threadpool(crop_png, raw, ref), media_type="image/png")
+    from .derivatives import render_crop
+    return Response(await run_in_threadpool(render_crop, f, ref), media_type="image/png")

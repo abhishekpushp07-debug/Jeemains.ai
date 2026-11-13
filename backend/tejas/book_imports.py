@@ -6,7 +6,7 @@ from .auth import owner, current
 from .db import db, sets, now, audit
 from .canonical import database_now
 from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, Book, BookPage, BookMock, UploadPart, BookAllowance
-from .book_store import CHUNK, identity, digest, load_book, book_view, lock_book, save_book, unlock, fence, original, enqueue_book, mocks_for, save_mock
+from .book_store import CHUNK, normalized, identity, digest, load_book, book_view, lock_book, save_book, unlock, fence, original, enqueue_book, mocks_for, save_mock
 from .book_pdf import inspect
 
 router=APIRouter(prefix='/api',tags=['Source-first book publishing'])
@@ -47,7 +47,7 @@ async def read(id:str,u=Depends(owner)):
 
 
 @router.put('/admin/books/{id}/parts/{number}')
-async def part(id:str,number:int,request:Request,u=Depends(owner)):
+async def part(id:str,number:int,request:Request,sha256:str=Query(...,pattern=r'^[a-f0-9]{64}$'),u=Depends(owner)):
     book=await load_book(id,u)
     if book.state!='uploading':raise HTTPException(409,'Upload is already complete; open its progress.')
     total=math.ceil(book.payload['size']/CHUNK)
@@ -62,7 +62,9 @@ async def part(id:str,number:int,request:Request,u=Depends(owner)):
     try:await asyncio.wait_for(receive(),30)
     except asyncio.TimeoutError:raise HTTPException(408,'Upload part interrupted. Retry this part.') from None
     if len(data)!=expected:raise HTTPException(422,'Upload part is incomplete.')
-    raw=bytes(data);pid=identity(id,'part',number)
+    raw=bytes(data)
+    if digest(raw)!=sha256:raise HTTPException(422,'Upload part checksum mismatch. Retry this part; no bytes were saved.')
+    pid=identity(id,'part',number)
     value=UploadPart(id=pid,book_id=id,number=number,sha256=digest(raw),data=raw)
     try:await db.tejas_book_parts.insert_one(value.to_mongo())
     except DuplicateKeyError:
@@ -114,13 +116,14 @@ async def repair_page(id:str,number:int,body:PageRepair,bg:BackgroundTasks,u=Dep
         page=BookPage.from_mongo(row)
         if page.revision!=body.revision:raise HTTPException(409,'Page changed elsewhere. Reload before saving.')
         mocks=await mocks_for(book)
-        frozen={m.label.casefold() for m in mocks if m.published_generation==m.generation}
-        if any(r.mock.casefold() in frozen for r in page.regions+body.regions):raise HTTPException(409,'Published regions are frozen. Create a corrected version for that mock before editing.')
+        frozen={normalized(m.label) for m in mocks if m.published_generation==m.generation}
+        if any(normalized(r.mock) in frozen for r in page.regions+body.regions):raise HTTPException(409,'Published regions are frozen. Create a corrected version for that mock before editing.')
         if body.classification in ('questions','solutions','answer_key','mixed') and not body.regions:raise HTTPException(422,'Mapped content needs source regions.')
         raw=await original(book)
         for r in body.regions:
             data=await run_in_threadpool(inspect,raw,'crop',number,r.rect)
             if not page.scanned:r.text=data['text']
+            if r.role!='question':r.option_labels=[]
             if r.role in ('question','key','solution') and (not r.mock or not r.subject or not r.number):raise HTTPException(422,'Every source item needs its mock, subject and printed number.')
         page.classification=body.classification;page.regions=body.regions;page.issues=body.issues;page.revision+=1
         page.provenance={'kind':'owner_repair','actor':u['id'],'at':now(),'note':body.note,'previous':page.provenance.get('kind','native')}
@@ -140,9 +143,9 @@ async def map_range(id:str,body:RangeMap,bg:BackgroundTasks,u=Depends(owner)):
     try:
         if body.first_page>body.last_page or body.last_page>book.payload.get('read_pages',0):raise HTTPException(422,'Choose a received page range in reading order.')
         mocks=await mocks_for(book)
-        frozen={m.label.casefold() for m in mocks if m.published_generation==m.generation}
+        frozen={normalized(m.label) for m in mocks if m.published_generation==m.generation}
         rows=await db.tejas_book_pages.find({'book_id':id,'number':{'$gte':body.first_page,'$lte':body.last_page}}).sort('number',1).to_list(1000)
-        if body.mock.casefold() in frozen or any(r.get('mock','').casefold() in frozen for row in rows for r in row.get('regions',[])):
+        if normalized(body.mock) in frozen or any(normalized(r.get('mock','')) in frozen for row in rows for r in row.get('regions',[])):
             raise HTTPException(409,'Create corrected versions before remapping published regions.')
         for row in rows:
             page=BookPage.from_mongo(row)
@@ -213,6 +216,7 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
             await sets.update_many({'book_import_id':id},{'$set':{'status':'withdrawn','live_enabled':False}})
             await save_book(book,token)
             await db.tejas_books.update_one({'_id':id,'lock_token':token},{'$set':{'removed':True,'state':'removed'}})
+            await audit(u['id'],'Book remove',id,body.reason or 'Owner removed source access; history retained.')
             return {'removed':True,'message':'Access removed, not physically erased. Historical results and their assets are retained.'}
         elif body.action in ('resume','retry','publish'):
             if book.state=='uploading':raise HTTPException(409,'Finish transferring the PDF first.')
@@ -227,6 +231,12 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
             if body.action=='pause_mock':
                 if mock.set_id:await sets.update_one({'id':mock.set_id,'book_import_id':id},{'$set':{'status':'withdrawn','live_enabled':False}})
                 mock.state='paused'
+            elif body.action=='resume_mock':
+                if mock.state!='paused' or mock.published_generation!=mock.generation or not mock.set_id:raise HTTPException(409,'Only a paused, unchanged published mock can resume.')
+                stamp=await database_now()
+                if book.payload.get('competitive') and stamp>=book.payload['closes_at']:raise HTTPException(409,'The competitive window has closed; publish a new edition instead.')
+                await sets.update_one({'id':mock.set_id,'book_import_id':id},{'$set':{'status':'published','live_enabled':True}})
+                mock.state='scheduled' if (book.payload.get('release_at') or 0)>stamp else 'published'
             elif body.action=='new_version':
                 if mock.published_generation!=mock.generation:raise HTTPException(409,'A draft version already exists.')
                 mock.generation+=1;mock.state='held';mock.issues=['Corrected version created; repair source pages and recheck before publication.']
@@ -250,9 +260,9 @@ async def allowance(id:str,body:Allowance,bg:BackgroundTasks,u=Depends(owner)):
         if not targets:raise HTTPException(422,'Select the exact pages or questions to process.')
         if body.purpose=='reading':
             if any(not 1<=p<=book.payload['pages'] for p in targets):raise HTTPException(422,'Selected pages must belong to this book.')
-            published={m.label.casefold() for m in await mocks_for(book) if m.published_generation==m.generation}
+            published={normalized(m.label) for m in await mocks_for(book) if m.published_generation==m.generation}
             selected=await db.tejas_book_pages.find({'book_id':id,'number':{'$in':targets}}).to_list(1000)
-            if any(r.get('mock','').casefold() in published for p in selected for r in p.get('regions',[])):raise HTTPException(409,'Create a corrected mock version before re-reading published regions.')
+            if any(normalized(r.get('mock','')) in published for p in selected for r in p.get('regions',[])):raise HTTPException(409,'Create a corrected mock version before re-reading published regions.')
         else:
             papers=await sets.find({'book_import_id':id,'questions.id':{'$in':targets}},{'questions':1}).to_list(100)
             eligible={q['id'] for s in papers for q in s['questions'] if q.get('solution_kind')=='answer_key_only' and not q.get('ai_solution') and q.get('answer')}

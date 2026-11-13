@@ -23,12 +23,27 @@ async def rebuild(book, token):
     labels=list(dict.fromkeys(normalized(r.mock) for p in pages for r in p.regions if r.mock and r.role not in ('ignore','instructions')))
     if len(labels)>50:raise ValueError('More than 50 mocks detected. Split this book; nothing new was published.')
     unknown=[p.number for p in pages if p.classification=='unresolved' or (p.issues and not any(r.mock for r in p.regions))]
+    spans={}
+    for p in pages:
+        for r in p.regions:
+            if r.mock and r.role!='ignore':
+                key=normalized(r.mock);bounds=spans.setdefault(key,[p.number,p.number]);bounds[1]=p.number
+    affected={}
+    for number in unknown:
+        containing={label for label,(first,last) in spans.items() if first<=number<=last}
+        if not containing:
+            before=[p for p in pages if p.number<number and any(r.mock for r in p.regions)]
+            after=[p for p in pages if p.number>number and any(r.mock for r in p.regions)]
+            neighbours=(before[-1:] if before else [])+(after[:1] if after else [])
+            containing={normalized(r.mock) for p in neighbours for r in p.regions if r.mock}
+        affected[number]=containing
     for order,label in enumerate(labels,1):
         relevant=[(p,r) for p in pages for r in p.regions if normalized(r.mock)==label and r.role!='ignore']
         mock=known.get(label) or BookMock(id=identity(book.id,label),book_id=book.id,label=relevant[0][1].mock,order=order)
         if mock.published_generation==mock.generation:continue
         mock.order=order;issues=[];question_groups={};key_groups={};solution_groups={}
-        if unknown:issues.append('Unmapped pages may contain this mock’s keys or continuations: '+', '.join(map(str,unknown[:30])))
+        local_unknown=[number for number,affected_labels in affected.items() if label in affected_labels]
+        if local_unknown:issues.append('Unmapped pages in or beside this mock’s source ranges need review: '+', '.join(map(str,local_unknown[:30])))
         for p,r in relevant:
             if p.issues:issues.extend(f'Page {p.number}: {x}' for x in p.issues)
             if r.role=='instructions':continue
@@ -61,6 +76,8 @@ async def rebuild(book, token):
                 if rules['exam']!='BITSAT' or rules['bonus_count']!=12 or rules['expected_questions']<=12:issues.append('Only the existing 12-question BITSAT bonus mechanic is supported.')
             elif rules['bonus_count']:issues.append('Bonus questions require the supported BITSAT bonus mechanic.')
             raw_instructions='\n'.join(r.text for _,r in instructions)
+            if re.search(r'\b(?:worked|detailed)\s+solutions?\s+(?:follow|provided|included|for\s+(?:all|every))',raw_instructions,re.I) and rules.get('solution_policy')!='original_expected':
+                issues.append('Printed instructions promise original worked solutions. Failed capture cannot be relabelled key-only.')
             declared_counts={int(n) for n in re.findall(r'(?:total\s+(?:number\s+of\s+)?questions|questions)\s*[:=]\s*(\d+)',raw_instructions,re.I)}
             if declared_counts and declared_counts!={rules['expected_questions']}:
                 issues.append('Printed question count conflicts with the proposed count; a missing source question cannot be waived.')
@@ -91,7 +108,9 @@ async def rebuild(book, token):
             if kind=='mcq' and (len(labels_for_options)<2 or answer not in labels_for_options):issues.append(f'{first.subject} Q{first.number}: incomplete options or key does not match printed labels.')
             if kind=='integer' and not re.fullmatch(r'[+-]?\d{1,20}',answer):issues.append(f'{first.subject} Q{first.number}: unsupported exact-integer key.')
             coverage_key=f'{first.subject}|{first.section or first.subject}|{first.number}'
-            no_solution=rules.get('solution_policy')=='key_only' or (rules.get('solution_policy')=='mixed' and coverage_key in rules.get('key_only',[]))
+            source_expects=coverage_key in mock.original_solution_identities or bool(solutions)
+            if solutions and coverage_key not in mock.original_solution_identities:mock.original_solution_identities.append(coverage_key)
+            no_solution=not source_expects and (rules.get('solution_policy')=='key_only' or (rules.get('solution_policy')=='mixed' and coverage_key in rules.get('key_only',[])))
             if not solutions and not no_solution:issues.append(f'{first.subject} Q{first.number}: original solution expected but not captured; attach its regions.')
             if not solutions and not keys:issues.append(f'{first.subject} Q{first.number}: original key region required.')
             shared=[(p,r) for p,r in relevant if r.role=='shared' and normalized(r.subject)==key[0] and normalized(r.section or r.subject)==key[1] and key[2] in r.shared_for]

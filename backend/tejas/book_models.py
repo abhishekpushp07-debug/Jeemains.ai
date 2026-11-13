@@ -111,7 +111,7 @@ class RuleRepair(Input):
 
 class Control(Input):
     revision: int = Field(ge=0)
-    action: Literal['pause','resume','retry','remove','publish','new_version','pause_mock','release_now']
+    action: Literal['pause','resume','retry','remove','publish','new_version','pause_mock','resume_mock','release_now']
     mock_id: str = Field(default='', max_length=80)
     reason: str = Field(default='', max_length=1000)
 
@@ -165,6 +165,7 @@ class BookMock(BaseDocument):
     published_generation: int = 0
     history: list[str] = Field(default_factory=list)
     missed_release: bool = False
+    original_solution_identities: list[str] = Field(default_factory=list)
     release_override: bool = False
 
 

@@ -1,0 +1,76 @@
+{
+  "summary": "Adversarial isolated full-stack QA of Phase-1 source-first PDF-to-mock Book Publishing. Backend: real mounted FastAPI app via httpx ASGITransport (no uvicorn), REAL JWT sessions (staff /api/auth/login, student /api/auth/phone/signup) in disposable DBs tejas_isolated_book169_<hex> (all dropped; none remain), REAL sealed book_pdf_worker subprocess parser on self-generated labelled PDFs (3/10/50/51 mocks, 1000/1001-page), storage transport MOCKED (in-memory tejas_storage.request), AI provider MOCKED (book_ai.ask / solve_and_check fakes; zero real paid calls). 121 checks total: main workflow 83/84, rules/scale/schedule 34/37. Frontend: Playwright on preview URL with /api/** route-fulfilled from REAL captured isolated-API responses (envelopes + PNG crops), no customer DB writes. Frontend production build passes (BUILD_PATH=/tmp). Three HIGH defects found: (1) any mock after the first in the standard per-mock layout (instructions -> questions -> answer key, repeated) is automatically held; (2) one unmapped/sparse page anywhere in the book holds every mock; (3) BookSeries crashes when you click from the series list to a series detail.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "book_reader.read_page (automatic publication)", "issue": "The 'Mock heading follows keys/solutions: confirm whether this starts questions or a consolidated answer section.' page issue fires for every mock whose heading follows the previous mock's answer key. In the standard per-mock layout (Instr -> Q -> Key) only Mock 1 auto-publishes: 10-mock book published 1/10, the 3-mock book published 1/3. Clean Mocks 2..N need a manual page repair (verified that clearing the issue on that page then publishes the mock). This defeats automatic clean publication for 10/50-mock books.", "priority": "HIGH"},
+      {"endpoint": "book_publish.rebuild (hold isolation)", "issue": "`unknown` pages (classification unresolved, or a page with issues and no mock region) are appended as 'Unmapped pages may contain this mock's keys…' to EVERY mock. A single blank/scanned page inside Mock 2 held the clean Mock 1 too. Combined with the sparse-page heuristic below, the 50-mock fixture (1 question per mock, short key pages) published 0/50. This violates 'clean mocks publish while another is held'.", "priority": "HIGH"},
+      {"endpoint": "book_reader / book_worker scanned heuristic", "issue": "Any page with <30 text chars (e.g. a real native answer-key page 'Answer Key / Q1. (B)') is classified as scanned/sparse with no regions, so it becomes unmapped. With the rebuild issue above, it holds the whole book. Consider using anchors/headers before the length threshold.", "priority": "MEDIUM"}
+    ],
+    "minor": [
+      {"endpoint": "GET /api/studio/files/{id}/page|text/{page}, GET /api/studio/sets/{id}/questions/{qid}/asset/{kind}/{index}", "issue": "These routes have no book_import_id owner guard (studio_set and download do have one). Today reviewers get 503 only because of the permanent SOURCE_PARSE safety hold. With the hold lifted in the test, a reviewer or another owner reached the handler, which raised an unhandled ValueError('Upload a valid PDF file…') on the PNG crop. That would be an HTTP 500 instead of a 403/404. Add the same owner + load_book guard."},
+      {"endpoint": "POST /api/admin/books/{id}/control action=remove", "issue": "Returns before the audit() call, so 'remove' leaves no audit record, unlike the other actions."},
+      {"endpoint": "PUT /pages/{n} and map-range frozen check", "issue": "The frozen check uses label.casefold() but rebuild uses normalized() (whitespace collapse). A region mock label with extra spaces can bypass the published-region freeze check. Use normalized() in both places."},
+      {"endpoint": "control pause_mock", "issue": "There is no un-pause path: a paused published mock can only come back through new_version. Confirm this is intended."},
+      {"endpoint": "PUT /mocks/{mid}/rules", "issue": "The owner can switch solution_policy to key_only even when the printed book expected original solutions. The only control is a free-text note; no evidence that the book itself says 'no worked solutions' is required."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "features/BookSeries.js", "issue": "Clicking a series in /book-series crashes into the error boundary ('We couldn't open this screen'). Console: TypeError: Cannot read properties of undefined (reading 'minutes'). RCA: the component is reused for /book-series and /book-series/:id. On the first render after `id` changes it still holds the old list `data` (items without `rules`), and the useEffect setData(null) runs only after that render, so `item.rules.minutes` throws. Loading /book-series/:id directly works. Fix: key data by id (e.g. state {id, payload}, render only when payload.id===id), add key={id} on the route element, or guard item.rules?.minutes.", "selector": "[data-testid^=book-series-item-]", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Book detail / page list", "issues": ["Count chips have no space between number and label: '7 / 7PAGES READ', '2DETECTED', '1HELD'. The page list shows 'Page 1contents1 regions'.", "BookUpload schedule uses the native <input type=datetime-local> picker (guideline: shadcn calendar/date-time).", "React warning: 'Cannot infer the option value of complex children' (an <option> without a value prop).", "The option-labels CSV field is shown and saved for instructions regions too (it saved option_labels A–E on an instructions region).", "Crop rectangles can only be drawn by dragging; there are no numeric coordinate inputs, although the request mentions coordinate editing."]}
+    ]
+  },
+  "passed_highlights": [
+    "Auth: anonymous 401, student 403, reviewer 403 on /api/admin/books*; another owner gets 404 on GET/part/page image; revoked owner gets 403 on complete, and the worker refuses to publish after revocation (book stays 'received', 0 sets)",
+    "Upload: 415 wrong content-type, 422 out-of-range part, 422 incomplete part, 409 complete with missing parts, 409 different bytes for a stored part, idempotent identical part retry, same PDF+edition dedupe (resume via received_parts), different edition gives a new id, 422 for >50MB, rights false and past release_at",
+    "No 'jeelive/books' or source_path in any owner/student/series/attempt/result response; students get 403 on original page images",
+    "1000-page inspect accepted, 1001 rejected; 51 mocks makes the book fail with 'More than 50 mocks…' and nothing published; 50 mocks detected 50 (151 pages read in ~20s)",
+    "Key conflict, answer visible in question crop, optional 'Attempt any' instructions, missing rules, unsupported bitsat_bonus on Custom, shared passage exposing a key, and question/key overlap are all held with explicit issues",
+    "Custom exam + per-section scoring copied to questions[].scoring after owner rule clarification; rule evidence page outside the book gives 422",
+    "Repeated Q1 across mocks gives distinct question ids and set ids",
+    "Canonical flow on a NEW published book set: preflight, start, save, submit, results; active question crop 200, active key crop 403, post-submit key crop 200; no keys in the active attempt payload",
+    "Published page repair 409; new_version, repair, resume publishes v2 under a new set id, the old set is withdrawn with unchanged keys, the old attempt result is byte-identical and its crop is still served; retry does not duplicate sets",
+    "Remove: book 404, series 404 for students, historical results and crops retained",
+    "Schedule: scheduled mock hidden until release, then visible; a missed release is held with an explicit decision; release_now publishes it; competitive release_now gets 409; competitive start in window works; key crop and results are embargoed until close",
+    "AI (MOCKED): no automatic AI calls; reading allowance spent exactly 1 call and the page became an ai_proposal with regions unchecked; explanations used 2 requests per question (4 total) and only the verified question got ai_solution; the disagreeing one stayed without; keys unchanged; max_requests 1 below the 2-request cost gives budget_required with no call; an interrupted 'running' allowance becomes failed with no silent retry; a reused request_id for different work gives 409",
+    "Frontend: workspace list/detail, counts, book map, mock desk active/released preview stage notice, rules save payload, review desk (canvas, 4 crop outlines, region fields incl. checked/continuation/complete, note, save payload), crop drag updates the rect ([0.1,0.045,0.7,0.18]), option CSV blur parsed, AI exact pages '5,6-7' gives pages [5,6,7] with approval disabled until consent, remove confirm/cancel sends no write, Home 'Book series' link present; desktop 1920x800 and mobile 390x844 horizontal overflow 0",
+    "Legacy AI solving remains paused (mock_solutions.AI_SOLVING_PAUSED=True, no override in book code); frontend build exit 0"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/iso_harness_book169.py",
+    "/app/backend/tests/book_publishing_iso169.py",
+    "/app/backend/tests/book_publishing_rules_iso169.py",
+    "/app/backend/tests/book_capture_iso169.py",
+    "/tmp/book169/run_main.log",
+    "/tmp/book169/run_rules.log",
+    "/tmp/book169/results.json",
+    "/tmp/book169/results_rules.json"
+  ],
+  "evidence_images_for_main": ["/tmp/book169/page3_questions.png", "/tmp/book169/mock1_q1_question_crop.png", "/tmp/book169/mock1_q1_key_crop.png", "/tmp/book169/student_q1_crop.png", "/tmp/book169/student_q1_key_after_submit.png"],
+  "fixture_pdfs": "/tmp/book169/book_*.pdf (synthetic, labelled)",
+  "action_items": [
+    "HIGH: book_reader: do not emit the blocking 'Mock heading follows keys/solutions' issue for the standard per-mock layout (a new 'Mock Test N' heading followed by instructions or question anchors); keep it only when there is real ambiguity, e.g. a heading followed by key-style anchors",
+    "HIGH: book_publish.rebuild: attach unmapped/unresolved page issues only to the mock(s) whose page span contains or borders the page (previous/next mock boundary), not to every mock",
+    "MEDIUM: treat short native pages that have key/question anchors or role headers as readable, not scanned (<30 chars currently)",
+    "HIGH (frontend): fix the BookSeries stale data crash on list->detail navigation",
+    "Add book_import_id owner guards to /studio/files/{id}/page|text and /studio/sets/{id}/questions/{qid}/asset (latent behind the SOURCE_PARSE hold; currently a 500 path)",
+    "Minor: audit on remove; use normalized() for frozen-label checks; spacing in count chips and page list; shadcn date-time instead of datetime-local; <option> value prop; hide option labels for non-question regions"
+  ],
+  "critical_code_review_comments": [
+    "The isolation intent is undermined by rebuild's global `unknown` list. Clean mocks must not depend on unrelated pages",
+    "book_imports.part buffers each 512KB part in memory and stores raw bytes in Mongo (fine within 50MB). A transport-corrupted but immutable part can only be recovered with a new edition, because a different-bytes retry gets 409",
+    "book_view converts 'scheduled' to 'published' for display only; the stored mock.state stays 'scheduled' (counts are fine)",
+    "Not covered: AI supplement visibility through /api/attempts/{id}/ai-solutions after submission and after competition end (only key-crop and results embargo verified); BITSAT 12-bonus happy path with 13+ questions and bonus_rule end-to-end; worked-solution (supplied_worked) books, because solution regions are always unchecked and need owner review"
+  ],
+  "updated_files": ["/app/backend/tests/iso_harness_book169.py", "/app/backend/tests/book_publishing_iso169.py", "/app/backend/tests/book_publishing_rules_iso169.py", "/app/backend/tests/book_capture_iso169.py"],
+  "success_rate": {"backend": "96% (117/121 checks; 4 failures from 2 root-cause defects)", "frontend": "~92% (all tested controls work; 1 crash on series list->detail)"},
+  "test_credentials": "Read /app/memory/test_credentials.md. No real owner login. Ephemeral random owner/owner2/reviewer (bcrypt, inserted only into disposable DBs) and random student phone/PIN; all removed with the DBs. No customer DB writes.",
+  "seed_data_creation": "None in the customer DB. Only disposable tejas_isolated_book169_* DBs, all dropped and verified (none remain).",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run from /app/backend: `python tests/book_publishing_iso169.py` (~60s) and `python tests/book_publishing_rules_iso169.py` (~100s). They print PASS/FAIL lines and a TOTAL line and drop their DB. The harness rebinds every Motor handle; API responses use the v1 envelope {data,error,meta}, which the script unwraps. The ASGITransport base_url/Origin must be the preview URL (origin guard). Background tasks run inline. Use J.INLINE_JOBS=False to defer them. For browser tests, run tests/book_capture_iso169.py to regenerate /tmp/book169/fixtures.json and route-fulfil /api/** with it. Expected-to-fail checks until fixed: 'Mock 2 clean (per-mock key layout)', '10 clean mocks all publish', 'scanned page in Mock 2 does not hold clean Mock 1', 'Mock 3 publishes after rule clarification'.",
+  "rca of the issue": "Defect 1: read_page sets context.role='key' after an 'Answer Key' header. The next page's 'Mock Test N' heading then hits `if context.get('role') in ('key','solution')`, which adds a page issue; rebuild copies page issues into the mock, so the mock is held. Repro: book_A_3mocks.pdf. Mitigation: downgrade it to non-blocking, or drop it when the heading starts a new mock followed by instructions or question anchors. Defect 2: rebuild computes `unknown` from all pages and adds it to every label. Repro: book_scanned_page.pdf (a blank page inside Mock 2 holds Mock 1). Mitigation: scope it by page span. Defect 3 (frontend): stale state across a route param change in BookSeries."
+}
