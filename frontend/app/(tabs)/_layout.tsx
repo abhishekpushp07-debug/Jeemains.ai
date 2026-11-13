@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
   item: { flex: 1, minWidth: 0, alignItems: "center", justifyContent: "center", gap: 6, paddingTop: space.xs },
   label: { letterSpacing: 0.9 },
   rapidCol: { flex: 1.3, alignItems: "center" },
-  rapidPress: { alignItems: "center", marginTop: -26, gap: 4 },
-  // Artwork is 265×240 (blue diamond, inner fire, sparkles); keep that ratio so nothing crops.
-  gem: { width: 66, height: 60 },
-  gemNarrow: { width: 57, height: 52 },
+  rapidPress: { alignItems: "center", marginTop: -22, gap: 4 },
+  // Artwork is 190×224 (royal-blue rhombus, 20% wider and 20% shorter than the first cut); keep that ratio.
+  gem: { width: 48, height: 56 },
+  gemNarrow: { width: 41, height: 48 },
   gemOn: { transform: [{ scale: 1.08 }] },
   // Explicit size: web otherwise gives a required image its natural 265×240 size.
   gemLayer: { position: "absolute", top: 0, left: 0, width: "100%", height: "100%" },
