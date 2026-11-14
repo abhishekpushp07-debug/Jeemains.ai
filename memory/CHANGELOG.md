@@ -1,3 +1,9 @@
+## 2026-11-14 — Organised Super Admin Phase 1 (preview only, not deployed)
+Built: 7-part Super Admin; Exams & Content (create custom exams hidden until Show on Home, custom sections, reorder sections/tests, rename, Live/Unlive switch, move within exam, unplaced list, advanced tools); destination-first upload wizard (book / paper / Excel / chapter book by section layout) with student preview; book detail with "Publish all ready" (now or scheduled) and per-mock switches; Review (held reasons, reports, solutions, mock-book checks); Schedule & Live; Students; Team (reviewer list/grant/remove). Student Home/exam hub/section pages now read the structure from /api/catalog/*. Hidden exams blocked for students on list, detail, preflight and start. Auto-publish removed (legacy 'publish' action no longer enables it). App guide section 12 added (docs + public download copy).
+Fixed after QA: scheduled per-mock release shown as published; legacy publish re-enabling auto-publish; resume_mock state; PDF paper into chapters section; chapter-book destination validated before dedupe; empty file 422; '1 test' plural; import page shows destination.
+Tests: structure_iso173 133/133, structure_imports_iso174 51/51 (isolated DBs, storage + AI mocked).
+
+
 ## 2026-11-13 22:05–22:16 UTC — maintenance switched on in preview, deploy dispatched (outcome pending)
 User approved both the deploy and the maintenance job after seeing its production effects (13 expired attempts closed, 12 submitted attempts graded, 1 report job re-dispatched).
 Added WEBHOOK_CRON_SECRET to preview backend/.env (generated, never printed) and restarted the backend. No app code changed.

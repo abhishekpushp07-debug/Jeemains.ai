@@ -127,7 +127,7 @@ async def list_books(u=Depends(staff)):
 
 @router.post('/studio/chapter-books',response_model=BookView,status_code=202)
 async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
-    async with request.form(max_files=1,max_fields=2) as form:
+    async with request.form(max_files=1,max_fields=3) as form:
         if not {'file','request_id'}<=set(form.keys())<={'file','request_id','section_id'} or len(form.multi_items())!=len(form.keys()): raise HTTPException(422,'Upload one chapter-book PDF and its request identifier.')
         try: request_id=str(uuid.UUID(str(form['request_id'])))
         except ValueError: raise HTTPException(422,'A UUID upload identifier is required.')
@@ -141,11 +141,11 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         prior=await db.tejas_chapter_uploads.find_one({'id':receipt})
         if prior['sha256']!=sha:raise HTTPException(409,'That upload identifier belongs to a different file.')
         old=await books.find_one({'id':identity},{'_id':0})
-        if old:return await book_view(old)
         dest=None
         if form.get('section_id'):
             from .structure import destination
             dest=await destination(str(form['section_id']),('chapters',))
+        if old:return await book_view(old)
         if SLOTS.locked():raise HTTPException(429,'A chapter book is processing. Retry shortly.',headers={'Retry-After':'5'})
         fid=str(uuid.uuid5(uuid.UUID(identity),'source'))
         path=await run_in_threadpool(put_object,f'tejas/chapter-books/{identity}/{fid}.pdf',raw)

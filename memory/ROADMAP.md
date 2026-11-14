@@ -1,5 +1,14 @@
 # Active roadmap
 
+## Organised Super Admin (2026-11-14)
+- P0: Deploy needed for production (user's word only). After deploy, check /super-admin on live and that built-in exams/sections seed (3 exams, 7 sections).
+- P0 (carried): confirm on production that a real combined-book upload reads and processes (stall fix deploy outcome was pending).
+- P1: Toasts at top centre briefly cover the admin breadcrumb (cosmetic). Import schedule form uses native date inputs.
+- P1: Visibility cache is per process (5 s TTL, refreshed on structure/start/detail/list calls); multi-pod hide/show may lag a few seconds on list endpoints.
+- P1: Obsolete old suites (book_publishing_iso170, rules170, scale171, bridges 170/171) assume auto-publish; replace with structure_iso173 / structure_imports_iso174.
+- Phase 2 (separate approval): tags/filters, bulk move, multi-book queue, section scheduling, hard scans/bilingual, layout profiles, All India direct upload. Phase 3: per-exam reviewer assignment, quality/usage reports, bulk scheduling.
+
+
 ## Book publishing (2026-11-13)
 - UPDATE 2026-11-13 late night (overrides the lines below where they differ):
   - P0: The stall fix has never been deployed. No deploy run of any status exists after 10:25:43Z on 2026-11-13 (deployer); the fix was saved 19:48–20:33Z. The user approved the deploy at 22:05Z and it was dispatched about 22:13Z; outcome pending. Then confirm the live bundle contains "Connection problem on part".

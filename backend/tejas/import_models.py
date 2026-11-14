@@ -56,6 +56,7 @@ class ImportView(BaseModel):
     live_enabled: bool = False
     revision: int = 0
     server_now: float
+    destination: dict | None = None
 
 class ImportList(BaseModel):
     items: list[ImportView]

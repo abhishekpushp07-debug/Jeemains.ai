@@ -13,6 +13,7 @@ import { useAuth } from '../lib/auth';
 import { ErrorBox, Confirm } from '../components/Shared';
 import { MathText, QuestionContent } from '../components/QuestionContent';
 import { ChapterBookUploader } from './ChapterBookStudio';
+import { DestinationChip } from '../components/admin/AdminShared';
 import { toast } from 'sonner';
 
 const ist = (value) => value ? new Date(value * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST' : 'Not scheduled';
@@ -114,6 +115,7 @@ export default function StudioImport() {
   return <div className="container page import-detail" data-testid="studio-organiser-detail">
     <Button asChild variant="link" className="p-0 mb-6"><Link to="/super-admin/upload" data-testid="studio-organiser-breadcrumb"><ArrowLeft size={16} /> Uploads</Link></Button>
     <div className="import-title-row"><div><div className="import-section-label">{record.format.toUpperCase()} IMPORT · CUSTOM PRACTICE</div><h1 data-testid="import-test-title">{record.title}</h1><p className="import-muted" data-testid="import-test-facts">{record.exam} · {record.count} questions · {record.duration_minutes} minutes · +{record.exam === 'BITSAT' ? 3 : 4} / −1 marking</p></div><ImportStatus value={record.status} testid="studio-organiser-status-badge" /></div>
+    {record.destination && <DestinationChip large exam={record.destination.exam_name} section={record.destination.section_name} testId="import-destination" />}
     <ErrorBox error={error} />
     <div className="import-detail-grid">
       <section className="import-main">

@@ -44,7 +44,7 @@ def view(record, s=None, detail=True):
         issues=record.get('issues', []) if detail else [], count=len(record.get('questions', [])),
         exam=record.get('exam', 'JEE Main'), duration_minutes=record.get('duration_minutes', 180),
         set_id=s.get('id'), series_import=s.get('series_import', False), series_date=s.get('series_date'), start_at=s.get('start_at'), end_at=s.get('end_at'),
-        live_enabled=s.get('live_enabled', False), revision=s.get('revision', 0), server_now=now())
+        live_enabled=s.get('live_enabled', False), revision=s.get('revision', 0), server_now=now(), destination=record.get('destination'))
 
 
 async def read_record(id):
@@ -106,7 +106,8 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
             if not hasattr(f,'read') or not (f.filename or '').lower().endswith('.'+format): raise HTTPException(422,'File extension must match the selected format.')
             limit=(50 if format=='pdf' else 5)*1024*1024
             raw=await f.read(limit+1)
-            if not raw or len(raw)>limit: raise HTTPException(413,f'Use {format.upper()} files within the displayed size limit.')
+            if not raw: raise HTTPException(422,f'The {role} file is empty. Choose the original file again.')
+            if len(raw)>limit: raise HTTPException(413,f'Use {format.upper()} files within the displayed size limit.')
             if not raw.startswith(b'%PDF-' if format=='pdf' else b'PK'): raise HTTPException(422,'File content does not match its format.')
             sources.append({'id':uid(),'kind':role,'name':Path(f.filename).name[:160], 'sha256':hashlib.sha256(raw).hexdigest(),'size':len(raw)})
             payloads.append(raw)
@@ -119,7 +120,7 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
         dest=None
         if form.get('section_id'):
             from .structure import destination
-            dest=await destination(str(form['section_id']))
+            dest=await destination(str(form['section_id']),('list',) if format=='pdf' else ('list','chapters'))
         async with SLOTS:
             for source,raw in zip(sources,payloads):
                 source['path']=await run_in_threadpool(put_object,f"tejas/imports/{id}/{source['id']}.{format}",raw,'application/pdf' if format=='pdf' else XLSX)

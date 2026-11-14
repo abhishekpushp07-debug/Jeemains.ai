@@ -248,7 +248,7 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
                 stamp=await database_now()
                 if book.payload.get('competitive') and stamp>=book.payload['closes_at']:raise HTTPException(409,'The competitive window has closed; publish a new edition instead.')
                 await sets.update_one({'id':mock.set_id,'book_import_id':id},{'$set':{'status':'published','live_enabled':True}})
-                mock.state='scheduled' if (book.payload.get('release_at') or 0)>stamp else 'published'
+                mock.state='scheduled' if (mock.release_at or book.payload.get('release_at') or 0)>stamp else 'published'
             elif body.action=='new_version':
                 if mock.published_generation!=mock.generation:raise HTTPException(409,'A draft version already exists.')
                 mock.generation+=1;mock.state='held';mock.issues=['Corrected version created; repair source pages and recheck before publication.']
