@@ -1,5 +1,10 @@
 # JEELIVE.AI Native App — PRD
 
+## Iteration71 — Phone login fix (all platforms through our server)
+- Bug: installed Android app showed "Couldn't check your session…" + "Connection interrupted" on sign-in (preview + live); native fetch to https://jeelive.ai/api threw on the phone while the phone browser opened jeelive.ai. Deployer RCA: production backend healthy, no failing requests.
+- Fix (user approved): `src/api/client.ts` BASE = `${EXPO_PUBLIC_BACKEND_URL}/api/jl` on every platform with X-JL-Sid (web AsyncStorage `jl_sid`; native SecureStore `jl_sid`, falls back to AsyncStorage if the Keychain write fails). Native cookie capture removed; `/api/rf/access` always X-JL-Sid + `{}`. `rf_access.py` still accepts old builds' `access_cookie` (kept for already-installed builds).
+- Tested: `test_reports/iteration_70.json` — backend 10/10 (`tests/test_iter70_native_proxy_login.py`), web sign-in → Home, Rapid Fire, Store, reload persistence, sign-out → sign-in all pass. Native not runnable here: user must republish and install a new Android build.
+
 ## Deployment health check (after iteration70)
 - First check FAILED: rf_feed TTL index auto-deleted feed rows; Redis (unsupported in production). Fixed: startup now drops the old `at_1` TTL index (rows kept, reads already show last 7 days); `metadata_cache.py` is memory-only (no redis import), redis/hiredis removed from requirements, `redis_runtime.py/.json`, Redis tests and the `jeelive-redis` supervisor program removed (backup conf at /tmp/jeelive-redis.conf.bak). Also deleted `frontend/eas.json` (pipeline makes its own; the apk-arm64 profile is gone) and `frontend/package-lock.json` (yarn only).
 - Re-check: status WARN, no blockers. Remaining WARN: root .gitignore ignores .env (platform-managed, left as is). INFO: backend legal_pages.py reads frontend/src/legal/content.json at import (works in monorepo).

@@ -10,12 +10,13 @@ import { ImageResponse, loadOriginalImage } from "@/src/assets/imageDownload";
 import { resources } from "@/src/resourceCache";
 import { requestDeadline, RequestDeadlineError } from "./requestDeadline";
 
-// Native talks to jeelive.ai directly (cookie session, no extra hop).
-// Web preview cannot carry jeelive.ai cookies cross-origin, so it uses a thin pass-through proxy.
+// Every platform talks to jeelive.ai through our thin pass-through proxy: browsers cannot carry jeelive.ai
+// cookies cross-origin, and some phones cannot reach jeelive.ai directly ("Connection interrupted" at sign-in).
+// The proxy keeps this device's jeelive.ai cookies in a server-side jar named by the X-JL-Sid handle.
 const WEB = Platform.OS === "web";
 const extra = Constants.expoConfig?.extra;
 const CANONICAL_API = (extra?.jeeliveApi || process.env.EXPO_PUBLIC_JEELIVE_API) as string;
-const BASE = WEB ? `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/jl` : CANONICAL_API;
+const BASE = `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/jl`;
 export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
 export const RF_BASE = `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/rf`;
 
@@ -33,28 +34,30 @@ export class ApiError extends Error {
   }
 }
 
+// The handle unlocks this device's cookie jar, so on a phone it lives in the Keychain.
+const SID_KEY = "jl_sid";
 let sid: string | null = null;
 let sidFlight: Promise<string> | null = null;
 async function sessionHandle() {
-  if (!WEB) return null;
   if (sid) return sid;
   if (!sidFlight) sidFlight = (async () => {
-    sid = await storage.getItem<string | null>("jl_sid", null);
-    if (!sid) { sid = uuid(); await storage.setItem("jl_sid", sid); }
+    // A phone whose Keychain refuses the write keeps it in app storage, so it is not signed out on every launch.
+    sid = (WEB ? null : await storage.secureGet<string | null>(SID_KEY, null)) || await storage.getItem<string | null>(SID_KEY, null);
+    if (!sid) { sid = uuid(); if (WEB || !await storage.secureSet(SID_KEY, sid)) await storage.setItem(SID_KEY, sid); }
     return sid;
   })().finally(() => { sidFlight = null; });
   return sidFlight;
 }
 export async function resetSessionHandle() {
   sid = null;
-  if (WEB) await storage.removeItem("jl_sid");
+  if (!WEB) await storage.secureRemove(SID_KEY);
+  await storage.removeItem(SID_KEY);
 }
 
 async function headers(json: boolean) {
   const h: Record<string, string> = { Accept: "application/json" };
   if (json) h["Content-Type"] = "application/json";
-  const s = await sessionHandle();
-  if (s) h["X-JL-Sid"] = s;
+  h["X-JL-Sid"] = await sessionHandle();
   return h;
 }
 
@@ -89,15 +92,6 @@ async function boundedAuthFetch(url: string, options: RequestInit, ms = 32000, m
     throw error;
   } finally { clearTimeout(timeout); }
 }
-let nativeAccessCookie = "";
-function captureNativeAccess(res: Response) {
-  if (WEB) return;
-  // Native fetch exposes response cookie headers; browser HttpOnly cookies are
-  // never read. Keep only the access cookie in RAM, never PIN or refresh token.
-  const raw = res.headers.get("set-cookie") || "";
-  const value = /(?:^|,\s*)access_token=([^;,]*)/.exec(raw)?.[1];
-  if (value) nativeAccessCookie = value.replace(/^"|"$/g, "");
-}
 let onAuthLost: (() => void) | null = null;
 export const setAuthLostHandler = (fn: (() => void) | null) => (onAuthLost = fn);
 
@@ -118,7 +112,7 @@ function refresh(): Promise<boolean> {
         }, 32000);
         requireEpoch(epoch);
         if (r.headers.get("content-type")?.includes("text/html")) throw new ApiError("Account verification is temporarily unavailable. Please retry.", 503);
-        if (r.ok && body && typeof body === "object" && !Array.isArray(body)) { captureNativeAccess(r); tokenRevision++; return true; }
+        if (r.ok && body && typeof body === "object" && !Array.isArray(body)) { tokenRevision++; return true; }
         const rejection = body?.error?.message || body?.detail;
         if (r.status === 401 && typeof rejection === "string" && rejection.trim()) return false;
         // Empty/malformed/intermediary401 is not proof that the cookie expired.
@@ -188,7 +182,7 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
       });
       const inner = data?.meta?.api_version ? data.data : data;
       if (path === "/auth/session" && response.ok && typeof inner?.user?.id === "string" && inner.user.id) {
-        requireEpoch(epoch); captureNativeAccess(response); tokenRevision++;
+        requireEpoch(epoch); tokenRevision++;
       }
       return { response, data };
     }, 32000, opts.signal);
@@ -203,7 +197,6 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
   requireEpoch(epoch);
   const data = payload && Object.prototype.hasOwnProperty.call(payload, "data") && payload.meta?.api_version ? payload.data : payload;
   const credentialSubmission = ["/auth/phone", "/auth/phone/signup", "/auth/login", "/auth/pin"].includes(path);
-  if (path.startsWith("/auth/")) captureNativeAccess(res);
   if (path === "/auth/session") {
     if (res.ok && (!data || !Object.prototype.hasOwnProperty.call(data, "user") || (data.user !== null && (!data.user || typeof data.user.id !== "string" || !data.user.id)))) {
       throw new ApiError("Your session response could not be verified. Please retry.", 503);
@@ -285,7 +278,7 @@ let grantFlight: Promise<string> | null = null;
 let rfGeneration = 0;
 export function clearRapidAccess() {
   const old = rfGrant;
-  rfGrant = null; nativeAccessCookie = ""; rfGeneration++;
+  rfGrant = null; rfGeneration++;
   if (old) void fetch(RF_BASE + "/access/revoke", { method: "POST", headers: { Authorization: `Bearer ${old.token}` } }).catch(() => {});
 }
 export async function rapidAccess(userId: string): Promise<string> {
@@ -294,10 +287,8 @@ export async function rapidAccess(userId: string): Promise<string> {
   if (grantFlight) { await grantFlight.catch(() => {}); if (rfGrant?.uid === userId && rfGrant.until > Date.now() + 30000) return rfGrant.token; }
   const generation = rfGeneration;
   grantFlight = (async () => {
-    if (!WEB && !nativeAccessCookie && !await refresh()) throw new ApiError("Reconnect your account to open Rapid Fire.", 401);
-    const h: Record<string, string> = { "Content-Type": "application/json" };
-    if (WEB) h["X-JL-Sid"] = (await sessionHandle())!;
-    const exchange = () => boundedAuthFetch(RF_BASE + "/access", { method: "POST", headers: h, body: JSON.stringify(WEB ? {} : { access_cookie: nativeAccessCookie }) });
+    const h: Record<string, string> = { "Content-Type": "application/json", "X-JL-Sid": await sessionHandle() };
+    const exchange = () => boundedAuthFetch(RF_BASE + "/access", { method: "POST", headers: h, body: "{}" });
     let res = await exchange();
     if (res.status === 401 && await refresh()) res = await exchange();
     const result = await res.json().catch(() => null);

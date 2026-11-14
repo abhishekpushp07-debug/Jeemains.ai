@@ -1,0 +1,39 @@
+{
+  "summary": "The fix that sends phone login through our server works. Backend: the /api/jl proxy and /api/rf/access with X-JL-Sid behave as specified, 10/10 checks (one assertion in my own test was wrong at first; see below). Web preview at 390x844: cold open shows no 'Couldn't check your session' error. Sign-in with 7004186276/5524 lands on Home ('good afternoon, learner.') and requests go to /api/jl/auth/phone 200, /api/rf/access 200, /api/jl/my/tests 200, /api/jl/series/all-india-jee 200, /api/rf/catalog 200. The Rapid Fire arena loads with no 'could not be verified' error. The Store tab shows the diamond wallet (7/4/1) and the shop-squads card. After a reload the user is still signed in (GET /auth/session returned user=present on the same sid). Signing out clears the handle; signing in again creates a new handle and Rapid Fire works again. Static review confirms native now uses the same proxy path as web. 4 sign-ins used in total, no wrong PINs.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/access", "issue": "The old native fallback is still there: with no X-JL-Sid, the endpoint accepts body.access_cookie. No client uses it any more. It is safe, because the cookie is checked against canonical /auth/me, but it is dead code and extra attack surface. The rf_access.py docstring is also out of date ('native supplies its canonical access cookie')."},
+      {"endpoint": "POST /api/jl/auth/refresh", "issue": "On every anonymous cold open, /auth/session returns user:null, the client then tries POST /auth/refresh and gets a 401. This causes an extra round trip and a console 'Failed to load resource 401' error every time. Harmless, but the client could skip refresh when the session was never signed in."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "Native build/env", "issue": "The fix only reaches phones after a NEW native build. No expo-updates is installed, so it cannot arrive as an over-the-air update. backendUrl is baked from EXPO_PUBLIC_BACKEND_URL at build time (app.config.js:7). For the live APK this must be the production deployed backend, not the preview URL, or the phone will hit a sleeping or unreachable preview host. Reference: /app/frontend/app.config.js:7, /app/frontend/src/api/client.ts:19"},
+      {"component": "SecureStore session handle", "issue": "storage.secureSet failures are swallowed silently (src/utils/storage/index.ts:89-95). If the Android keystore write fails, the sid lives only in memory, so the user is signed out after every cold start with no error shown. Consider falling back to AsyncStorage, or logging when secureSet returns false. Reference: /app/frontend/src/api/client.ts:44-45"}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_iter70_native_proxy_login.py", "/app/test_reports/pytest/iter70.xml"],
+  "action_items": [
+    "Rebuild and redistribute the Android APK/AAB (preview and live) with EXPO_PUBLIC_BACKEND_URL set to the production backend domain. Already-installed builds still call jeelive.ai directly and will keep failing.",
+    "Optional: in client.ts sessionHandle(), check the boolean returned by secureSet and fall back to AsyncStorage, so a keystore failure does not cause a sign-out on every launch.",
+    "Optional: remove the unused access_cookie branch from rf_access.py and update its docstring.",
+    "Optional: skip POST /auth/refresh after an anonymous /auth/session (user:null) when this handle has never signed in, to remove the 401 console noise."
+  ],
+  "critical_code_review_comments": [
+    "client.ts: BASE = backendUrl + '/api/jl' on all platforms. CANONICAL_API is used only by websiteLoginUrl (line 20) and the configureImageDisk origin key (line 265). headers() always sets X-JL-Sid. fetchPrivateAsset uses BASE + headers(). rapidAccess always sends X-JL-Sid with body '{}'. No native-cookie code is left (captureNativeAccess/nativeAccessCookie are gone).",
+    "resetSessionHandle clears both the in-memory sid and storage on every platform. Verified on web: after sign-out the jl_sid key is gone and the next sign-in creates a new uuid.",
+    "The comment in auth.tsx signOut about 'native cookies left after an offline logout' is out of date. The jl_signed_out guard is still useful.",
+    "The SID key 'jl_sid' is valid for SecureStore ([A-Za-z0-9._-]). A uuid (36 chars) matches the backend SID_RE ^[A-Za-z0-9-]{16,64}$."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter70_native_proxy_login.py"],
+  "success_rate": {"backend": "100% (10/10; the login assertion was fixed after the first run. Its first run failed only because Cloudflare adds a __cf_bm cookie at the ingress; login itself returned 200. No access_token/refresh_token cookie reaches the client.)", "frontend": "100%"},
+  "seed_data_creation": "None. The pytest run deletes its own jl_jars and rf_access rows by exact sid/digest. The two browser handles from run 2 (e7a3879b…, 5c49c7d4…) were removed by exact sid. The handle from browser run 1 was not captured and remains as one signed-in jl_jars row. Its canonical session was not logged out.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run the backend contract with: JL_QA_PHONE=… JL_QA_PIN=… pytest tests/test_iter70_native_proxy_login.py -n0 (one login). Use -k SidValidation for checks that need no login. testIDs: entry-phone-input, entry-pin-input, entry-continue-button, home-screen, home-greeting, tab-rapid, arena-tab-store, shop-squads, home-account-button, account-signout-button, signout-keep-drafts. On the RF screen the main tab-rapid bar is hidden, so wait for home-screen or arena tabs instead. The native app itself cannot be run here.",
+  "rca_of_issue": "On native, client.ts used to call https://jeelive.ai/api directly, and that fetch threw on the user's phone (no request reached the backend). Now every platform calls ${backendUrl}/api/jl, and the server-side cookie jar is keyed by X-JL-Sid. Verified on web, and the native code path is now identical apart from where the sid is stored. A real-device check needs a rebuilt APK."
+}
