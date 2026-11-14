@@ -17,6 +17,9 @@ const WEB = Platform.OS === "web";
 const extra = Constants.expoConfig?.extra;
 const CANONICAL_API = (extra?.jeeliveApi || process.env.EXPO_PUBLIC_JEELIVE_API) as string;
 const BACKEND = (extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL) as string;
+// A build made without its server address fails every request the same way as being offline: say which it is.
+const NO_SERVER = "This app build is missing its server address. Please install the latest build.";
+const offline = (message: string) => new ApiError(BACKEND ? message : NO_SERVER, 0);
 const BASE = `${BACKEND}/api/jl`;
 export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
 export const RF_BASE = `${BACKEND}/api/rf`;
@@ -141,7 +144,7 @@ export async function resetForgottenPin(phone: string, pin: string, confirm: str
   const res = await boundedAuthFetch(`${BACKEND}/api/account/forgot-pin`, {
     method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({ phone, new_pin: pin, confirm_pin: confirm }),
-  }).catch(error => { throw error instanceof ApiError ? error : new ApiError("Connection interrupted. Please try again.", 0); });
+  }).catch(error => { throw error instanceof ApiError ? error : offline("Connection interrupted. Please try again."); });
   if (res.ok) return;
   const data = await res.json().catch(() => null);
   throw new ApiError(typeof data?.detail === "string" ? data.detail : "Couldn't set your new PIN. Please try again.", res.status, retryAfter(res));
@@ -204,7 +207,7 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
     if (e?.name === "AbortError") throw e;
     if (e instanceof RequestDeadlineError) throw new ApiError("The server is taking longer than usual. Please try again. Your last saved work is safe.", 503);
     if (e instanceof ApiError) throw e;
-    throw new ApiError("Connection interrupted. Your last saved work is safe. Please try again.", 0);
+    throw offline("Connection interrupted. Your last saved work is safe. Please try again.");
   }
   requireEpoch(epoch);
   const data = payload && Object.prototype.hasOwnProperty.call(payload, "data") && payload.meta?.api_version ? payload.data : payload;
