@@ -145,7 +145,9 @@ def summary(s):
 @router.get("/sets")
 async def catalogue(exam: str = "", q: str = "", page: int = 1):
     from .catalog import available, counts, page as catalogue_page
+    from .structure import visibility
 
+    await visibility()
     f = available(exam=exam, search=q)
     data = await catalogue_page(f, page)
     return {

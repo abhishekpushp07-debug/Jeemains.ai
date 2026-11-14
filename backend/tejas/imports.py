@@ -261,6 +261,7 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
         if dest and not series:
             from .structure import next_order
             s.update(catalog_section_id=dest['section_id'],catalog_order=await next_order(dest['section_id']))
+            if dest['exam_key'] not in RULE_EXAMS:s['exam']=dest['exam_key']
         if series:
             if r.get('qa_only') or not valid_paper(s):
                 raise HTTPException(409, 'Series requires a reviewed public JEE Main full paper: 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')

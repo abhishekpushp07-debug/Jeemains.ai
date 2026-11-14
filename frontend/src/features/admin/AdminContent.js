@@ -13,7 +13,7 @@ import {toast} from 'sonner';
 
 function SectionRow({s,i,total,busy,onOpen,onMove,onRename,onHide}){
  return <li className="admin-row admin-section-row" data-testid={'admin-section-'+s.slug}>
-  <button type="button" className="admin-row-main admin-row-button" onClick={onOpen} data-testid={'admin-section-open-'+s.slug}><strong>{s.name}</strong><small>{s.layout==='chapters'?'Subject › chapter':'Simple list'} · {s.counts.total} tests · {s.counts.live} live{s.counts.draft?` · ${s.counts.draft} draft`:''}</small></button>
+  <button type="button" className="admin-row-main admin-row-button" onClick={onOpen} data-testid={'admin-section-open-'+s.slug}><strong>{s.name}</strong><small>{s.layout==='chapters'?'Subject › chapter':'Simple list'} · {s.counts.total} test{s.counts.total===1?'':'s'} · {s.counts.live} live{s.counts.draft?` · ${s.counts.draft} draft`:''}</small></button>
   {s.hidden?<StatusChip state="hidden" testId={'admin-section-state-'+s.slug}/>:s.counts.live?<StatusChip state="live" label="Students see it" testId={'admin-section-state-'+s.slug}/>:<StatusChip state="paused" label="Not shown: no live test" testId={'admin-section-state-'+s.slug}/>}
   <div className="admin-test-actions">
    <Button size="icon" variant="ghost" aria-label={'Move '+s.name+' up'} disabled={busy||i===0} onClick={()=>onMove(i,-1)} data-testid={'admin-section-up-'+s.slug}><ArrowUp size={16}/></Button>

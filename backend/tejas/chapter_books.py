@@ -198,7 +198,9 @@ async def process_book(identity):
                    'rights_upload':True,'rights_publish':True,'rights_report':True,'rights_attested_by':r['created_by'],
                    'competition':False,'live_enabled':False,'solution_kind':'supplied_worked' if worked else 'answer_key_only','verification':c['verification'],
                    'independent_check':evidence,'start_page':c['start_page'],'end_page':c['end_page'],'key_page':c['key_page']}
-                if dest:s.update(catalog_section_id=dest['section_id'])
+                if dest:
+                    s.update(catalog_section_id=dest['section_id'])
+                    if dest['exam_key'] not in RULE_EXAMS:s['exam']=dest['exam_key']
                 await sets.update_one({'id':sid},{'$setOnInsert':s},upsert=True)
             await books.update_one(fence,{'$set':{'status':'ready','subject':result['subject'],'pages':result['pages'],'parsed_sha256':parsed_sha,
                 'exam':result.get('exam','BITSAT'),'minutes':result.get('minutes',60),'solution_kind':result.get('solution_kind','answer_key_only'),

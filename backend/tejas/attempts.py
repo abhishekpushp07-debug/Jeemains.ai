@@ -147,7 +147,9 @@ def attempt_view(a):
 @router.get("/my/sets")
 async def my_sets(exam: str = "", q: str = "", page: int = 1, u=Depends(current)):
     from .catalog import available
+    from .structure import visibility
 
+    await visibility()
     data = await catalogue_page(available(u, exam, q), page)
     return {"items": [summary(s) for s in data], "page": page}
 

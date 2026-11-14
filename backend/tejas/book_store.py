@@ -121,7 +121,7 @@ async def book_view(book, detail=True):
     from .canonical import database_now
     stamp=await database_now()
     for m in items:
-        if m.state=='scheduled' and (p.get('release_at') or 0)<=stamp:
+        if m.state=='scheduled' and (m.release_at or p.get('release_at') or 0)<=stamp:
             m.state='published'
     counts={s:sum(m.state==s for m in items) for s in ('held','ready','published','paused','scheduled')}
     parts=await db.tejas_book_parts.find({'book_id':book.id},{'_id':0,'number':1}).to_list(None) if book.state=='uploading' else []

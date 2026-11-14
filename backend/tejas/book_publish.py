@@ -207,7 +207,7 @@ async def publish_ready(book,token,raw,only_mid=None):
         if rules['mechanic']=='bitsat_bonus':data['rules']['bonus_rule']='answer_all_main_then_lock'
         if dest:
             from .structure import next_order
-            if 'catalog_base' not in book.payload:book.payload['catalog_base']=await next_order(dest['section_id'])
+            if 'catalog_base' not in book.payload:book.payload['catalog_base']=await next_order(dest['section_id'])-1
             data.update(catalog_section_id=dest['section_id'],catalog_order=book.payload['catalog_base']+mock.order)
         if data['competition']:
             if mock.release_override:raise ValueError('An expired competitive window needs a new edition and future schedule.')
