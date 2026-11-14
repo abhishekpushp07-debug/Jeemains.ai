@@ -1,5 +1,9 @@
 # JEELIVE.AI Native App — PRD
 
+## Deployment health check (after iteration70)
+- First check FAILED: rf_feed TTL index auto-deleted feed rows; Redis (unsupported in production). Fixed: startup now drops the old `at_1` TTL index (rows kept, reads already show last 7 days); `metadata_cache.py` is memory-only (no redis import), redis/hiredis removed from requirements, `redis_runtime.py/.json`, Redis tests and the `jeelive-redis` supervisor program removed (backup conf at /tmp/jeelive-redis.conf.bak). Also deleted `frontend/eas.json` (pipeline makes its own; the apk-arm64 profile is gone) and `frontend/package-lock.json` (yarn only).
+- Re-check: status WARN, no blockers. Remaining WARN: root .gitignore ignores .env (platform-managed, left as is). INFO: backend legal_pages.py reads frontend/src/legal/content.json at import (works in monorepo).
+
 ## Latest iteration70 — Stadium Cheer banner, diamond unlock, smaller Android bundle
 - User (Hinglish): board "chamak nahi rha, baccho jaisa lag rha, sexy rugby match jaisa nahi"; chose "Diamonds se cheerleader kharidna" with rule "wins se apne aap level + diamonds se jaldi unlock"; and "APK size jaanch (<20MB)".
 - `src/rapid/CheerBanner.tsx` (new): pro-stadium banner — satin cloth with cut corners + gloss, metallic trim, leaning metallic-foil CONGRATULATIONS! (SVG text, outline + shadow), glint sweep, glitter (10/13/15/18 by level), swaying fringe, halo pulsing on each count, spear-tip poles; corner stripes only when banner ≥210 px so the name always fits. Colours per level in theme `cheer` (1 crimson/gold, 2 black/gold, 3 sapphire/silver, 4 plum/rose-gold), `arena.glint`. Old bulbs/rainbow letters removed. Lead dancer now renders under the banner.

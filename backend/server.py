@@ -528,7 +528,9 @@ async def startup():
     await backfill_cup_crowns()
     asyncio.create_task(cup_night_loop())
     await db.rf_duels.create_index([("team_mode", 1), ("status", 1)], sparse=True)
-    await db.rf_feed.create_index("at", expireAfterSeconds=14 * 86400)
+    # Feed rows are kept (reads already show only the last 7 days); retire the old auto-delete index if present.
+    if "at_1" in await db.rf_feed.index_information():
+        await db.rf_feed.drop_index("at_1")
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])
     for exam in SUBJECTS:
         await db.rf_profiles.create_index([(f"exam_stats.{exam}.xp", -1), ("uid", 1)])
