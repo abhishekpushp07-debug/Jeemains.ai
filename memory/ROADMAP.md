@@ -1,7 +1,9 @@
 # Active roadmap
 
 ## 1-lakh simultaneous exam (2026-11-14)
-- P0: Deploy the integrity + speed work only on the user's go-ahead. The first maintenance run after deploy will auto-repair live: archive+remove 13 orphan ranking entries and 7 orphan score records, retry 1 failed report job. Then confirm the Data health panel on live shows them fixed.
+- P0: Deploy (integrity + speed + 15-min start window) dispatched 2026-11-14 on the user's "Go Live". Confirm live build, then that the first maintenance run fixed 13 orphan ranking entries, 7 orphan score records and retried 1 report job (Super Admin › Overview › Data health).
+- P2: Instant score means a student who submits early can learn whether single answers were right while late starters are still writing (inherent to the user's choice). Option: hide the topic breakdown until the end.
+- P2 (cosmetic): make the live score number larger on the results card.
 - P0 (infra, needs platform/Emergent support, not code): measured CPU per student over a 3-hour JEE paper is about 0.9–1.25 CPU-seconds (150 saves, 75 visits, start, submit, grade, results). 1 lakh students need about 10–12 vCPU of backend on average and ~10 vCPU to admit everyone within 2 minutes, plus a MongoDB tier for ~1,400 answer writes/s. Production today is 2 pods x 1 vCPU limit: about 10,000 starts per minute and roughly 16–22k students sitting the exam at the same time. Ask platform support for more replicas/CPU (or autoscaling) and a larger DB tier, then run one staged load test on that setup before a 1-lakh event.
 - P0 (infra): Cloudflare 520 / 30 s hangs on live remain an edge issue outside the app.
 - P1: For fixed-end live exams, open a start window (e.g. 15 min) so starts spread out; a student delayed at start loses time because deadline = min(start + duration, exam end).

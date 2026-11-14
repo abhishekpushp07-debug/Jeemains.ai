@@ -1,0 +1,29 @@
+{
+  "summary": "Tested the 15-minute live start window and the instant score on submit, on both backend and frontend. Backend: ran the real ASGI app with real cookie auth against disposable isolated DBs only. Regression suites all pass: integrity176 32/32, iter177_t1 44/44, start_window177 26/26, iter145_load 5/5. A new T1 edge suite passes 21/21. It covers window maths at the boundary (exactly at last_start_at, closes_at shorter than the duration, legacy exams with no window), a scheduled exam's can_start, an on-time starter's deadline, the results response while grading is pending versus once graded, no leak of questions/analytics/ledger, other students blocked from the result, exam-navigation history showing the summary, POST /report returning 403 before the end, the 409 text giving the IST time and the minutes, a submitted student unable to open a second attempt after the window (still one attempt row), a running student reopening the same attempt, list status staying 'live' with can_start false, the My Tests 'grading' filter, a reschedule recomputing the window, and apply_to_upcoming skipping exams that already have a window. Frontend: tested on the preview URL with /api/** mocked through Playwright. Competition cards show the start window text and a disabled 'Starting closed at' button. The detail page shows the window and the new embargo text; legacy exams without a window keep the old text. The embargoed results view covers score ready (with subject chips only when there is more than one subject), calculating (polls about every 3 s), series sealed (no polling, series hub link), and has no overflow at 390px. The Studio schedule summary shows 'Starting closes' and 'Answers & ranks unlock'. Downloaded docs match SHA256SUMS.json (85/85). No functional bugs found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/competitions cards + detail", "issues": ["The start window text uses the time only ('Start by 11:21 pm IST'). Book-published competitive exams can have a window that runs for days (last_start_at = closes_at - duration), so the date should be shown when last_start_at is not on the same day as start_at.", "After the window closes, the card still says 'Start by <time>' next to the disabled 'Starting closed at <time>' button. This repeats the same information; consider hiding the 'Start by' line when can_start is false."]},
+      {"screen": "/results embargoed score card", "issues": ["The score '112 / 300' is an h2 at body-card size. It is the main thing on the page and could be made more prominent. Cosmetic only."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_iter178_t1_window_isolated.py", "/app/backend/tests/test_start_window177_isolated.py", "/app/backend/tests/test_integrity176_isolated.py", "/app/backend/tests/test_iter177_t1_isolated.py", "/app/backend/tests/test_iter145_load.py"],
+  "action_items": [
+    "Optional: show the date in the start window label when it is on a different IST day from the start time.",
+    "Optional: hide the 'Start by' line once can_start is false."
+  ],
+  "critical_code_review_comments": [
+    "Integrity trade-off (design, not a bug): the instant summary includes per-subject and per-topic counts. A student who submits early (for example a second phone/PIN account, or answering a single question) learns which answers were correct while others can still start for up to 15 minutes and are still writing for up to 3 hours. This is inherent to an instant score. If it matters, return only the total score/counts and keep the topic breakdown (summary.topics) until end_at.",
+    "live_window.guard message: strftime('%d %b, ...').replace(' 0',' ') removes the zero from the hour but not from the day ('05 Nov, 9:05 PM'). Cosmetic.",
+    "apply_to_upcoming runs in every lifespan start and is idempotent (verified). It filters on series_id $exists False. That is fine because attempts and sets only set series_id for series papers.",
+    "Results.js stops polling after 45 polls (about 2.5 min) and leaves 'Calculating your score…' on screen. The 'Check results' button recovers. Acceptable."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter178_t1_window_isolated.py (new)"],
+  "success_rate": {"backend": "100% (128/128 across 5 suites)", "frontend": "100% of tested flows"},
+  "seed_data_creation": "None in the customer DB. Isolated DBs only (tejas_isolated_t1w178_*, tejas_isolated_window177_*), all dropped. A leftover disposable DB 'tejas_isolated_window177_632358' from an earlier main-agent run was also dropped. No isolated DBs remain.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run with: cd /app/backend/tests && python -W ignore test_iter178_t1_window_isolated.py (calls structure.seed() inside the isolated DB so the exam-navigation slug 'jee-main' resolves). UI was tested with page.route mocks: auth/session returns the {data:{user},meta} envelope, and /attempts/{id}/results returns embargoed in three modes (score/calc/series). In dev, StrictMode fires two requests on mount, so the first poll gap reads 0 s. Known stale unrelated tests: test_iter118_auth_cors_isolated.py and test_iter119_denied_headers.py."
+}

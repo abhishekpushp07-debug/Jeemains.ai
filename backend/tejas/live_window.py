@@ -20,7 +20,8 @@ def can_start(s, t):
 
 def guard(s, t):
     if s.get('competition') and not s.get('series_id') and not can_start(s, t):
-        at = datetime.fromtimestamp(s['last_start_at'], IST).strftime('%d %b, %I:%M %p').replace(' 0', ' ')
+        d = datetime.fromtimestamp(s['last_start_at'], IST)
+        at = f"{d.day} {d:%b}, {d.hour % 12 or 12}:{d:%M %p}"
         raise HTTPException(409, f"Starting closed at {at} IST so that every student gets the full "
                                  f"{s['rules']['minutes']} minutes. Students who started on time keep their full time.")
 
