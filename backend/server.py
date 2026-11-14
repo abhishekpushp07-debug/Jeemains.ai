@@ -57,6 +57,8 @@ async def lifespan(app):
     await indexes()
     await auth.seed_owner()
     await structure.seed()
+    from tejas.live_window import apply_to_upcoming
+    await apply_to_upcoming()
     from tejas.mock_solutions import solutions
     await solutions.create_index('id', unique=True)
     await solutions.create_index([('state', 1), ('order', 1)])

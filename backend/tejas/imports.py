@@ -43,7 +43,7 @@ def view(record, s=None, detail=True):
         message=record.get('message', ''), questions=record.get('questions', []) if detail else [],
         issues=record.get('issues', []) if detail else [], count=len(record.get('questions', [])),
         exam=record.get('exam', 'JEE Main'), duration_minutes=record.get('duration_minutes', 180),
-        set_id=s.get('id'), series_import=s.get('series_import', False), series_date=s.get('series_date'), start_at=s.get('start_at'), end_at=s.get('end_at'),
+        set_id=s.get('id'), series_import=s.get('series_import', False), series_date=s.get('series_date'), start_at=s.get('start_at'), end_at=s.get('end_at'), last_start_at=s.get('last_start_at'),
         live_enabled=s.get('live_enabled', False), revision=s.get('revision', 0), server_now=now(), destination=record.get('destination'))
 
 
@@ -227,7 +227,8 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
         if not now()-60<=start<=now()+366*86400: raise ValueError()
     except ValueError: raise HTTPException(422,'Choose a start time from now to one year ahead, including timezone.')
     existing=await sets.find_one({'id':id},{'_id':0})
-    end=start+r['duration_minutes']*60
+    from .live_window import window as live_window
+    last_start,end=live_window(start,r['duration_minutes'])
     series = None
     if data.series_date:
         from .live_series import FIRST, LAST, SERIES_ID, window, valid_paper
@@ -244,7 +245,7 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
         raise HTTPException(409, 'Manage series dates in the All India owner schedule panel. Existing regular competitions cannot be converted.')
     if existing:
         if existing.get('start_at',0)<=now(): raise HTTPException(409,'A started test cannot be rescheduled. Upload a new test for another competition.')
-        res=await sets.update_one({'id':id,'revision':data.revision,'start_at':{'$gt':now()}},{'$set':{'start_at':start,'end_at':end,'live_enabled':True,'status':'published'},'$inc':{'revision':1}})
+        res=await sets.update_one({'id':id,'revision':data.revision,'start_at':{'$gt':now()}},{'$set':{'start_at':start,'end_at':end,'last_start_at':last_start,'live_enabled':True,'status':'published'},'$inc':{'revision':1}})
         if not res.modified_count: raise HTTPException(409,'Schedule changed elsewhere. Reload before retrying.')
     else:
         if data.revision!=0: raise HTTPException(409,'Reload this import before scheduling.')
@@ -258,7 +259,7 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
            'rules':rules,'status':'published','version':1,'revision':1,'created_at':r['created_at'],'published_at':now(),
            'profile_mode':'practice','audience':'all','allowed_phones':[],'allowed_emails':[],'expires':'',
            'rights_upload':True,'rights_publish':True,'rights_report':True,'rights_attested_by':r['rights_attested_by'],
-           'start_at':start,'end_at':end,'live_enabled':True,'competition':True}
+           'start_at':start,'end_at':end,'last_start_at':last_start,'live_enabled':True,'competition':True}
         if dest and not series:
             from .structure import next_order
             s.update(catalog_section_id=dest['section_id'],catalog_order=await next_order(dest['section_id']))
@@ -267,6 +268,7 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
             if r.get('qa_only') or not valid_paper(s):
                 raise HTTPException(409, 'Series requires a reviewed public JEE Main full paper: 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')
             s.update(series_id=SERIES_ID, series_date=data.series_date, series_import=True, competition=False, test_kind='mock', full_length=True)
+            s.pop('last_start_at')
         # One immutable content version in one insert; no archive-before-CAS race.
         try: await sets.insert_one(s)
         except DuplicateKeyError: raise HTTPException(409,'Another schedule was saved. Reload to see it.')

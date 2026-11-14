@@ -53,6 +53,7 @@ class ImportView(BaseModel):
     series_date: str | None = None
     start_at: float | None = None
     end_at: float | None = None
+    last_start_at: float | None = None
     live_enabled: bool = False
     revision: int = 0
     server_now: float

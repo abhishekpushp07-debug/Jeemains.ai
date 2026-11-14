@@ -211,7 +211,8 @@ async def publish_ready(book,token,raw,only_mid=None):
             data.update(catalog_section_id=dest['section_id'],catalog_order=book.payload['catalog_base']+mock.order)
         if data['competition']:
             if mock.release_override:raise ValueError('An expired competitive window needs a new edition and future schedule.')
-            data['end_at']=book.payload['closes_at']
+            from .live_window import window as live_window
+            data['last_start_at'],data['end_at']=live_window(start,rules['minutes'],book.payload['closes_at'])
         await fence(book,token)
         await sets.update_one({'id':sid},{'$setOnInsert':data},upsert=True)
         await publish_validated(sid,{'confirm':True},await principal(book))

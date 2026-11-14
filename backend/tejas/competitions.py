@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from .auth import current
 from .db import sets, attempts, now
 from .canonical import clocked_one, database_now
+from .live_window import can_start
 
 router=APIRouter(prefix='/api/competitions',tags=['Competitions'])
 
@@ -16,6 +17,8 @@ class Competition(BaseModel):
     minutes:int
     start_at:float
     end_at:float
+    last_start_at:float|None=None
+    can_start:bool=True
     status:str
     attempt_id:str|None=None
     attempt_status:str|None=None
@@ -46,13 +49,13 @@ class Leaderboard(BaseModel):
 def item(s,a=None,t=None):
     a=a or {}; t=now() if t is None else t
     return Competition(id=s['id'],title=s['title'],exam=s['exam'],count=len(s.get('questions',[])),minutes=s['rules']['minutes'],
-        start_at=s['start_at'],end_at=s['end_at'],status='ended' if t>=s['end_at'] else 'unlive' if not s['live_enabled'] else 'scheduled' if t<s['start_at'] else 'live',
+        start_at=s['start_at'],end_at=s['end_at'],last_start_at=s.get('last_start_at'),can_start=can_start(s,t),status='ended' if t>=s['end_at'] else 'unlive' if not s['live_enabled'] else 'scheduled' if t<s['start_at'] else 'live',
         attempt_id=a.get('id'),attempt_status=a.get('status'))
 
 
 @router.get('',response_model=CompetitionList)
 async def catalogue(u=Depends(current)):
-    docs=await sets.find({'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'live_enabled':1}).sort('start_at',-1).limit(50).to_list(50)
+    docs=await sets.find({'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'last_start_at':1,'live_enabled':1}).sort('start_at',-1).limit(50).to_list(50)
     own=await attempts.find({'user_id':u['id'],'set_id':{'$in':[s['id'] for s in docs]},'mode':'practice','competition_end':{'$exists':True}},{'_id':0,'id':1,'set_id':1,'status':1}).to_list(50)
     own={a['set_id']:a for a in own}
     t = await database_now()
@@ -82,7 +85,7 @@ async def standings(id):
 
 @router.get('/{id}',response_model=Leaderboard)
 async def leaderboard(id:str,u=Depends(current)):
-    s=await clocked_one(sets, {'id':id,'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'live_enabled':1})
+    s=await clocked_one(sets, {'id':id,'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'last_start_at':1,'live_enabled':1})
     if not s: raise HTTPException(404,'Competition not found.')
     own=await attempts.find_one({'set_id':id,'user_id':u['id'],'mode':'practice','competition_end':{'$exists':True}},{'_id':0,'id':1,'status':1})
     participants,count,top,ranked=await standings(id)

@@ -3,6 +3,7 @@ from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 from .auth import current
+from .live_window import score_sealed
 from .catalog import PROJECT
 from .content import summary
 from .db import attempts, sets, now, db
@@ -101,7 +102,7 @@ async def history(slug: str, kind: Literal['all', 'mock', 'pyq', 'chapter', 'pra
         match['started_at'] = {'$gte': now() - int(days) * 86400}
     fields = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'mode', 'version', 'started_at',
         'deadline', 'status', 'submitted_at', 'receipt', 'reason', 'summary', 'count',
-        'grading_status', 'competition_end', 'test_kind')}
+        'grading_status', 'competition_end', 'test_kind', 'series_id')}
     pipeline = [
         {'$match': match},
         {'$sort': {'started_at': -1, 'id': -1}},
@@ -131,7 +132,7 @@ async def history(slug: str, kind: Literal['all', 'mock', 'pyq', 'chapter', 'pra
         if a['status'] == 'active' and a.get('deadline') and a['deadline'] <= t:
             closed = await finalize(a['id'], 'time_limit', projection={'_id': 0, **fields})
             a.update({k: v for k, v in closed.items() if k in fields})
-        if a.get('competition_end', 0) > t:
+        if score_sealed(a, t):
             a['summary'] = None
         a['server_now'] = t
     total = result['meta'][0]['total'] if result['meta'] else 0

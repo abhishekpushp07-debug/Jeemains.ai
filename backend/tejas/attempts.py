@@ -18,6 +18,7 @@ from .idempotency import fingerprint, verify_start, bind_start_alias
 from .contracts import EnvelopeResponse
 from .derivatives import render_crop
 from .canonical import EPOCH_NOW, clocked_one, verify_ledger, database_now
+from .live_window import guard as guard_live_start, score_sealed
 from pydantic import ConfigDict
 
 router = APIRouter(prefix="/api", tags=["Practice"])
@@ -134,7 +135,7 @@ def attempt_view(a, public=None):
     ]
     return {
         **{k: a.get(k) for k in fields},
-        "summary": a.get('summary') if a.get('competition_end', 0) <= a.get('_database_now', now()) else None,
+        "summary": None if score_sealed(a, a.get('_database_now', now())) else a.get('summary'),
         "competition_end": a.get('competition_end'),
         'confidence_observations': {qid: {'probability': x.get('confidence'), 'response': x.get('normalized_value', x.get('value',''))} for qid,x in a.get('first_answers',{}).items()},
         'confidence_changed_questions': a.get('confidence_changed_questions', []),
@@ -174,6 +175,8 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     from .structure import hidden_from
     if not preview and (s["status"] != "published" or not permitted(s, u, at=t) or await hidden_from(s, u)):
         raise HTTPException(404, "This set is not available.")
+    if not preview:
+        guard_live_start(s, t)
     entry = await paper(s)
     if not entry.count:
         raise HTTPException(400, "This set has no questions yet.")
@@ -258,6 +261,7 @@ async def start(id: str, data: Start, u=Depends(current)):
     entry = await paper(s)
     if not preview:
         guard_start(s, started_at)
+        guard_live_start(s, started_at)
         if s.get('series_id') and not valid_paper({**s, 'questions': entry.questions}):
             raise HTTPException(409, 'This series paper needs owner review before new attempts can start.')
     if not data.device_checked:
@@ -350,7 +354,7 @@ async def start(id: str, data: Start, u=Depends(current)):
 
 @router.get("/attempts")
 async def history(page: int = 1, u=Depends(current)):
-    fields = {k: 1 for k in ("id", "set_id", "title", "exam", "mode", "version", "rules", "started_at", "deadline", "status", "submitted_at", "receipt", "reason", "summary", "profile", "count", "grading_status", "competition_end")}
+    fields = {k: 1 for k in ("id", "set_id", "title", "exam", "mode", "version", "rules", "started_at", "deadline", "status", "submitted_at", "receipt", "reason", "summary", "profile", "count", "grading_status", "competition_end", "series_id")}
     data = await attempts.find({"user_id": u["id"]}, {"_id": 0, **fields, '_database_now': EPOCH_NOW}).sort("started_at", -1).skip((max(1, min(page, 10000)) - 1) * 20).limit(20).to_list(20)
     for a in data:
         t = a.pop('_database_now')
@@ -358,7 +362,7 @@ async def history(page: int = 1, u=Depends(current)):
             closed = await finalize(a["id"], "time_limit", projection={'_id': 0, **fields})
             a.update({k: v for k, v in closed.items() if k in fields})
         a["server_now"] = t
-        if a.get('competition_end', 0) > t: a['summary'] = None
+        if score_sealed(a, t): a['summary'] = None
     return {"items": data, "page": page}
 
 
@@ -468,8 +472,17 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
     from .corrections import with_grade
 
     a = await expire(await owned(id, u))
-    if a['status'] == 'completed' and a.get('competition_end', 0) > a.get('_database_now', now()):
-        return {'id': id, 'title': a['title'], 'status': 'embargoed', 'release_at': a['competition_end'], 'receipt': a.get('receipt'), 'server_now': a.get('_database_now', now()), 'series_id': a.get('series_id')}
+    t = a.get('_database_now', now())
+    if a['status'] == 'completed' and a.get('competition_end', 0) > t:
+        sealed = {'id': id, 'title': a['title'], 'status': 'embargoed', 'release_at': a['competition_end'], 'receipt': a.get('receipt'), 'server_now': t, 'series_id': a.get('series_id')}
+        if not score_sealed(a, t):
+            # Score now; answers, solutions and ranks wait until every live student's time is up.
+            if a.get('summary') and a.get('grading_status') == 'ready':
+                sealed.update(summary=a['summary'], score_released=True)
+            else:
+                job = await ensure_grade(a, bg)
+                sealed.update(summary=None, score_released=True, grading_status=(job or {}).get('status', 'queued'), retry_after_ms=2000)
+        return sealed
     if a["status"] == "completed":
         if not a.get("ledger"):
             job = await ensure_grade(a, bg)

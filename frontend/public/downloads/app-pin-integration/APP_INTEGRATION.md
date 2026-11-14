@@ -92,7 +92,9 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 | Public paper summary | GET `/sets/{set_id}` | Published/available only |
 | My available papers | GET `/my/sets?exam=JEE%20Main&page=1` | Authenticated availability |
 | My paper summary | GET `/my/sets/{set_id}` | Use before start, retains server rules |
-| Exam chapters/mocks | GET `/exam-navigation/{slug}/catalogue?kind=chapters` | Slugs `jee-main`, `bitsat`, `comedk`; JEE date-wise PYQ uses its dedicated endpoint |
+| Exam list (new) | GET `/catalog/exams` | Auth required. Exams in Home order, built-in first; owner-created exams appear only after the owner chooses Show on Home |
+| Exam sections (new) | GET `/catalog/exams/{slug}` | Sections in the owner's order; only sections with at least one live test for this learner are returned, with `live_count` |
+| Exam section tests | GET `/exam-navigation/{slug}/catalogue?section={section_slug}` | Use the section `slug` from `/catalog/exams/{slug}`. Legacy `kind=mocks|chapters` still works. Response `section.layout` is `list` or `chapters` (subject › chapter) |
 | Exam result history | GET `/exam-navigation/{slug}/history` | Current learner only |
 | All India schedule | GET `/series/all-india-jee` | Never substitute locally invented dates/counts |
 | All India own history | GET `/series/all-india-jee/history` | Auth required |
@@ -112,6 +114,8 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 | Mistake-only retry | POST `/attempts/{attempt_id}/retry` | NOT the same as repeating the full PYQ paper |
 
 The website's route `/exams/jee-main/pyq` corresponds to the dedicated catalogue. An app route can be named differently; paper, learner and attempt identities must not differ.
+
+Latest PYQ UI revision (2026-10-26): only a year selector; render EVERY paper of that year in one vertical list (current reviewed metadata:2026 has19,2025 has11). No date filter, pagination or load-more. Dates/shifts remain on each card. Ignore/remove legacy `date` query parameters while retaining `year`. Cards alternate ruby/navy/plum/forest dark surfaces and keep Start/Resume/View Result/Attempt Again actions. This UI revision is newer than the previously delivered PIN LIVE ZIP's design snapshot; use the updated source `pyq.css`/`PyqCatalogue.js` or request a refreshed visual handoff before asserting native pixel parity.
 
 ## 7. Start, autosave and two-device consistency
 
@@ -187,3 +191,29 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 - Full native visual parity and actual native cookie persistence: app-agent/device verification pending.
 - PIN + simple owner student directory: deployed; live route/schema/validation and public login/signup forms verified without creating production students or attempts. Full real-auth signup/change/permissions tests were run in isolated databases. No payment/OTP service enabled.
 - No passwords, cookies, signing keys, private source PDFs, answer-key dumps or private student exports are included in this package.
+
+## 12. Exam structure: exams, sections, order and visibility (added 2026-11-14)
+
+The owner now manages the student-facing structure from Super Admin › Exams & Content. The app must render the same places as the website, in the same order, from the API. Do not hard-code which sections an exam has.
+
+1. Home exam cards: `GET /catalog/exams` → `items[]` with `slug`, `name`, `short`, `subjects`, `color`, `builtin`, `shown`, `order`. Built-in exams (`jee-main`, `bitsat`, `comedk`) keep their existing card designs. Owner-created exams (`builtin:false`) follow in `order`; `color` is one of `teal|amber|violet|rose|lime|sky`. A learner never receives an exam the owner has not shown on Home.
+2. Exam page: `GET /catalog/exams/{slug}` → the exam plus `sections[]` in owner order: `id`, `slug`, `name`, `description`, `layout` (`list` or `chapters`), `kind` (`pyq`, `mocks`, `chapters` or `custom`), `live_count`. Only sections with at least one live test for this learner are returned. Always add a Results entry at the end (`GET /exam-navigation/{slug}/history`). A hidden or unknown exam returns 404.
+3. Section list: `GET /exam-navigation/{slug}/catalogue?section={section_slug}&page=1` (plus optional `subject`, `q`). Items are already in the owner's order. For `layout=chapters`, first show `subject_counts`, then call again with `subject`. JEE Main `pyq` keeps its dedicated `GET /pyq/jee-main` screen.
+4. Test names: use `title` from the API; the owner can rename tests and the API returns the new name. Mocks from a combined book use their printed names (for example "Mock Test 07"); the book title is not student-facing.
+5. Availability: the owner can switch any test Unlive. Unlive tests disappear from every list and cannot be started; existing attempts, scores and results stay readable. Tests in a hidden exam are unavailable even by direct link (404 on summary/start).
+6. `GET /my/sets/{set_id}` and `GET /sets/{set_id}` now include `catalog_path` (for example `/exams/bitsat/mocks`) so a back action can return to the right section.
+7. Old `/book-series` routes are retired on the website; book mocks now appear inside their exam section. `GET /book-series/{id}` still answers and includes `path`.
+
+Acceptance: compare the app's Home, exam page and one section list with the website for the same learner; names, order and counts must match.
+
+
+
+## 13. Live exam start window and instant score (added 2026-11-14)
+
+Applies to regular live exams (`competition:true`), not the All India series.
+
+1. `GET /competitions` and `GET /competitions/{id}` items now include `last_start_at` (epoch seconds, may be null on older exams) and `can_start` (bool). `status` is unchanged (`scheduled|live|unlive|ended`). Show "Start by <last_start_at>" and hide the start button when `can_start` is false.
+2. New starts are accepted from `start_at` until `last_start_at` (15 minutes). Each student's `deadline` is their own start + full duration. `end_at` = `last_start_at` + duration (the last possible finish). After `last_start_at`, `POST /sets/{id}/preflight` and `POST /sets/{id}/start` return 409 with a readable message; resuming an attempt already started still works.
+3. Score on submission: `GET /attempts/{id}/results` before `end_at` still returns `status:"embargoed"` with `release_at`, plus `score_released:true` and `summary` (score, maximum, correct, incorrect, skipped, accuracy, subjects…). While scoring is running `summary` is null; poll again after `retry_after_ms`. `GET /attempts`, `GET /attempts/{id}` and My Tests show the summary as soon as it is graded.
+4. Answers, solutions, worked solutions, question reports, revision attempts and the leaderboard stay locked until `end_at`, so students who started later in the window cannot receive answers early.
+5. All India series attempts keep the old rule: `score_released` is absent and the score stays sealed until the series day closes.

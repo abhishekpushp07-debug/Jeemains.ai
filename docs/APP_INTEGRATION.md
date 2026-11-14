@@ -206,3 +206,14 @@ The owner now manages the student-facing structure from Super Admin › Exams & 
 
 Acceptance: compare the app's Home, exam page and one section list with the website for the same learner; names, order and counts must match.
 
+
+
+## 13. Live exam start window and instant score (added 2026-11-14)
+
+Applies to regular live exams (`competition:true`), not the All India series.
+
+1. `GET /competitions` and `GET /competitions/{id}` items now include `last_start_at` (epoch seconds, may be null on older exams) and `can_start` (bool). `status` is unchanged (`scheduled|live|unlive|ended`). Show "Start by <last_start_at>" and hide the start button when `can_start` is false.
+2. New starts are accepted from `start_at` until `last_start_at` (15 minutes). Each student's `deadline` is their own start + full duration. `end_at` = `last_start_at` + duration (the last possible finish). After `last_start_at`, `POST /sets/{id}/preflight` and `POST /sets/{id}/start` return 409 with a readable message; resuming an attempt already started still works.
+3. Score on submission: `GET /attempts/{id}/results` before `end_at` still returns `status:"embargoed"` with `release_at`, plus `score_released:true` and `summary` (score, maximum, correct, incorrect, skipped, accuracy, subjects…). While scoring is running `summary` is null; poll again after `retry_after_ms`. `GET /attempts`, `GET /attempts/{id}` and My Tests show the summary as soon as it is graded.
+4. Answers, solutions, worked solutions, question reports, revision attempts and the leaderboard stay locked until `end_at`, so students who started later in the window cannot receive answers early.
+5. All India series attempts keep the old rule: `score_released` is absent and the score stays sealed until the series day closes.

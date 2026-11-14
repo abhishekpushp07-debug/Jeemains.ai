@@ -28,6 +28,7 @@ import {
 import { QuestionContent, MathText } from "../components/QuestionContent";
 import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalyticsWorkspace';
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
+import { EmbargoedResult } from '../components/results/EmbargoedResult';
 import { ReportButton } from "../components/ReportButton";
 import { MockSectionScores } from '../components/results/MockSectionScores';
 import {BitsatBranchView} from '../components/results/BitsatBranchView';
@@ -141,7 +142,10 @@ export default function Results() {
       try {
         const result = await api('/attempts/' + id + '/results?score_version=' + encodeURIComponent(scoreVersion), { signal: controller.signal });
         if (controller.signal.aborted) return;
-        if (result.status === 'embargoed') { setPending(result); }
+        if (result.status === 'embargoed') {
+          setPending(result);
+          if (result.score_released && !result.summary && ++polls < 45) { timer = setTimeout(load, 3000 + Math.random() * 1000); }
+        }
         else if (result.status === 'grading') {
           setPending(result);
           if (result.grading_status !== 'failed' && ++polls < 45) {
@@ -168,7 +172,7 @@ export default function Results() {
       setBusy(false);
     }
   }
-  if (pending?.status === 'embargoed') return <div className="container page" data-testid="results-embargoed"><PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are sealed." description={pending.title} /><section className="import-card"><h2>A fair window for everyone.</h2><p className="import-muted" data-testid="results-release-time">Your results and solutions unlock at {new Date(pending.release_at * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST, after the competition closes.</p><p className="import-fineprint mt-4 [overflow-wrap:anywhere]" data-testid="results-embargo-receipt">Submission receipt: {pending.receipt}</p><div className="flex flex-wrap gap-3 mt-6"><Button data-testid="results-release-refresh" onClick={() => setRefresh(v => v + 1)}>Check results</Button><Button asChild variant="outline"><Link data-testid="results-competition-hub" to={pending.series_id?'/series/all-india-jee?tab=results':'/competitions'}>{pending.series_id?'All India series hub':'Competition hub'}</Link></Button></div></section></div>;
+  if (pending?.status === 'embargoed') return <EmbargoedResult pending={pending} onRefresh={() => setRefresh(v => v + 1)} />;
   if (pending) return <div className="container page" data-testid="results-grading-pending">
     <PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are safely submitted." description="Your sealed answers are being graded in the background. You can leave this page and return from your exam’s Results section." />
     <div className="card">
