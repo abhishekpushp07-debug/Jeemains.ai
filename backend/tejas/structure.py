@@ -1,7 +1,7 @@
 """Owner-managed exam → section → test placement. Students only reach shown exams and live tests."""
-import re, time, uuid
+import hashlib, re, secrets, time, uuid
 from typing import Annotated, Literal
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Path
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import UpdateOne
 from .auth import current, owner, staff
@@ -16,6 +16,8 @@ class Payload(BaseModel):
 router = APIRouter(prefix='/api', tags=['Exam structure'])
 exams = db.tejas_catalog_exams
 sections = db.tejas_catalog_sections
+previews = db.tejas_section_previews
+PREVIEW_DAYS = 7
 
 CHAPTER_FILTER = {'$or': [
     {'chapter_book_id': {'$exists': True, '$nin': [None, '']}},
@@ -116,6 +118,7 @@ def section_view(s):
 async def seed():
     await sections.create_index([('exam_slug', 1), ('slug', 1)], unique=True)
     await sets.create_index('catalog_section_id', sparse=True)
+    await previews.create_index([('section_id', 1), ('created_at', -1)])
     for order, (slug, key, short, subjects, kinds) in enumerate(BUILTIN, 1):
         await exams.update_one({'_id': slug}, {'$setOnInsert': {'slug': slug, 'key': key, 'name': key, 'short': short,
             'subjects': subjects, 'color': slug, 'builtin': True, 'shown': True, 'order': order, 'created_at': now()}}, upsert=True)
@@ -504,6 +507,83 @@ async def held_mocks(u=Depends(staff)):
     return {'items': [{'id': r['_id'], 'book_id': r['book_id'], 'label': r['label'], 'issues': r.get('issues', []),
                        'book_title': books[r['book_id']]['payload']['title'], 'destination': books[r['book_id']]['payload'].get('destination')}
                       for r in rows if r['book_id'] in books]}
+
+
+# Shareable read-only section preview (titles, order and status only)
+
+def token_hash(token):
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+async def active_link(sid, t):
+    return await previews.find_one({'section_id': sid, 'revoked': False, 'expires_at': {'$gt': t}},
+                                   {'_id': 0, 'expires_at': 1}, sort=[('created_at', -1)])
+
+
+@router.get('/admin/catalog/sections/{sid}/preview-link')
+async def preview_link_status(sid: str, u=Depends(owner)):
+    await section_doc(sid)
+    row = await active_link(sid, await database_now())
+    return {'active': bool(row), 'expires_at': (row or {}).get('expires_at')}
+
+
+@router.post('/admin/catalog/sections/{sid}/preview-link')
+async def create_preview_link(sid: str, u=Depends(owner)):
+    s = await section_doc(sid)
+    t = await database_now()
+    await previews.update_many({'section_id': sid, 'revoked': False}, {'$set': {'revoked': True, 'revoked_at': t}})
+    token = secrets.token_urlsafe(24)
+    expires = t + PREVIEW_DAYS * 86400
+    await previews.insert_one({'_id': token_hash(token), 'section_id': sid, 'created_by': u['id'], 'created_at': t,
+                               'expires_at': expires, 'revoked': False})
+    await audit(u['id'], 'Section preview link created (old link stopped)', sid, f"{s['exam_slug']} › {s['name']}")
+    return {'token': token, 'expires_at': expires}
+
+
+@router.delete('/admin/catalog/sections/{sid}/preview-link')
+async def revoke_preview_link(sid: str, u=Depends(owner)):
+    await section_doc(sid)
+    t = await database_now()
+    done = await previews.update_many({'section_id': sid, 'revoked': False}, {'$set': {'revoked': True, 'revoked_at': t}})
+    if done.modified_count:
+        await audit(u['id'], 'Section preview link turned off', sid)
+    return {'active': False, 'expires_at': None}
+
+
+def waiting_state(m, t):
+    if m['state'] == 'held':
+        return 'held'
+    if m.get('publish_requested'):
+        return 'scheduled' if (m.get('release_at') or 0) > t else 'publishing'
+    return 'ready'
+
+
+async def waiting_mocks(sid, t):
+    books = await db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False}, {'_id': 1}).sort('created_at', 1).to_list(200)
+    rank = {b['_id']: i for i, b in enumerate(books)}
+    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None},
+        {'_id': 0, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1, 'rules.minutes': 1,
+         'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
+    rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
+    return [{'title': m['label'], 'state': waiting_state(m, t), 'count': m.get('count', 0), 'minutes': (m.get('rules') or {}).get('minutes'),
+             'subject': None, 'start_at': m.get('release_at') if m.get('publish_requested') else None} for m in rows]
+
+
+@router.get('/preview/sections/{token}')
+async def section_preview(token: str = Path(min_length=20, max_length=64, pattern=r'^[A-Za-z0-9_-]+$')):
+    t = await database_now()
+    link = await previews.find_one({'_id': token_hash(token)}, {'_id': 0})
+    s = await sections.find_one({'_id': link['section_id']}, {'_id': 0}) if link and not link['revoked'] and link['expires_at'] > t else None
+    if not s:
+        raise HTTPException(404, 'This preview link has expired or was turned off. Ask the owner for a new link.')
+    e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
+    items = [{k: v[k] for k in ('title', 'state', 'count', 'minutes', 'subject', 'start_at')}
+             for v in (test_view(x, t) for x in await section_tests(s, e['key']))]
+    items += await waiting_mocks(s['id'], t)
+    return {'exam': {'name': e['name'], 'short': e['short'], 'color': e['color'], 'shown': e['shown']},
+            'section': {'name': s['name'], 'description': s.get('description', ''), 'layout': s['layout'], 'hidden': s['hidden']},
+            'items': items, 'live_count': sum(i['state'] == 'live' for i in items),
+            'expires_at': link['expires_at'], 'server_now': t}
 
 
 @router.get('/admin/schedule/timed')

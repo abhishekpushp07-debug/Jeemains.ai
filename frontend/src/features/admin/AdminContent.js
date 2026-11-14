@@ -9,6 +9,7 @@ import {ErrorBox} from '../../components/Shared';
 import {AdminCrumbs,AdminHeading,StatusChip,StudentPath,ExamDialog,SectionDialog,TextDialog} from '../../components/admin/AdminShared';
 import {SectionTests} from '../../components/admin/SectionTests';
 import {ContentTools} from './ContentTools';
+import {PreviewLink} from '../../components/admin/PreviewLink';
 import {toast} from 'sonner';
 
 function SectionRow({s,i,total,busy,onOpen,onMove,onRename,onHide}){
@@ -53,7 +54,7 @@ function SectionPanel({exam,section,onChanged}){
  if(section==='unplaced')return <section className="admin-panel" data-testid="admin-unplaced-panel"><div className="admin-panel-head"><div><h2>Not in any section</h2><p>Students reach these only through competitions or saved links. Use Move to place them.</p></div></div><SectionTests exam={exam} path={`/admin/catalog/exams/${exam.slug}/unplaced`} onChanged={onChanged}/></section>;
  return <section className="admin-panel" data-testid={'admin-section-panel-'+section.slug}>
   <div className="admin-panel-head"><div><h2 data-testid="admin-section-name">{section.name}</h2><StudentPath exam={exam.name} section={section.name}/>{section.description&&<p>{section.description}</p>}</div>
-   {section.kind!=='pyq'&&<Button asChild><Link to={`/super-admin/upload/new?exam=${exam.slug}&section=${section.id}`} data-testid="admin-section-add-content"><Plus size={16}/>Add content here</Link></Button>}</div>
+   <div className="admin-actions"><PreviewLink section={section} exam={exam}/>{section.kind!=='pyq'&&<Button asChild><Link to={`/super-admin/upload/new?exam=${exam.slug}&section=${section.id}`} data-testid="admin-section-add-content"><Plus size={16}/>Add content here</Link></Button>}</div></div>
   {section.hidden&&<p className="admin-note warn" data-testid="admin-section-hidden-note">This section is hidden from students.</p>}
   <SectionTests section={section} exam={exam} path={`/admin/catalog/sections/${section.id}/tests`} onChanged={onChanged}/>
  </section>;

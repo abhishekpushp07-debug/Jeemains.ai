@@ -45,6 +45,7 @@ const StudioImport = lazy(() => import('./features/StudioImport'));
 const ChapterBookStudio = lazy(() => import('./features/ChapterBookStudio'));
 const StudioEditor = lazy(() => import("./features/StudioEditor"));
 const Info = lazy(() => import("./features/Info"));
+const SectionPreview = lazy(() => import('./features/SectionPreview'));
 function Protected({ children, staff = false }) {
   const { user, checking } = useAuth();
   const loc = useLocation();
@@ -128,6 +129,7 @@ function Shell() {
             <Route path="/" element={<Landing />} />
             <Route path="/series/all-india-jee" element={<LiveSeries />} />
             <Route path="/exams" element={<Exams />} />
+            <Route path="/preview/s/:token" element={<SectionPreview />} />
             <Route path="/exams/:examSlug" element={<Protected><ExamHub /></Protected>} />
             <Route path="/exams/jee-main/pyq" element={<Protected><PyqCatalogue /></Protected>} />
             <Route path="/exams/:examSlug/mocks" element={<Protected><ExamSection kind="mocks" /></Protected>} />
