@@ -4,7 +4,7 @@ from .db import db
 from .book_models import BookPage, UploadPart, BookAllowance
 from .book_store import lock_book, unlock, save_book, fence, renew, original, remember, digest, identity, enqueue_book, mocks_for, save_mock
 from .book_pdf import inspect, inspect_many
-from .book_reader import read_page
+from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
 from tejas_storage import put_object
 
@@ -42,9 +42,9 @@ async def read_batch(book, token, source):
         if data.get('error'):
             page=BookPage(id=identity(id,'page',n),book_id=id,number=n,issues=[data['error']],context=context)
         else:
-            mapped,context=read_page(data['lines'],context,data.get('geometry',[]))
+            mapped,context=read_page(data['lines'],context,data.get('geometry',[]),data.get('images',[]))
             text='\n'.join(line['text'] for line in data['lines'])
-            page=BookPage(id=identity(id,'page',n),book_id=id,number=n,**mapped.model_dump(),text=text[:150000],scanned=not data['lines'],context=context,provenance={'kind':'native'})
+            page=BookPage(id=identity(id,'page',n),book_id=id,number=n,**mapped.model_dump(),text=text[:150000],scanned=not data['lines'],context=context,provenance={'kind':'native','reader':READER_VERSION})
         await db.tejas_book_pages.update_one({'_id':page.id},{'$setOnInsert':page.to_mongo()},upsert=True)
     p['read_pages']=numbers[-1] if numbers else start
     p['scanned_pages']=await db.tejas_book_pages.count_documents({'book_id':id,'scanned':True})
@@ -86,7 +86,7 @@ async def receive(book, token):
     source=await run_in_threadpool(remember,raw,p['sha256'])
     info=await run_in_threadpool(inspect,source)
     p['source_path']=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/original.pdf',raw,'application/pdf')
-    p.update(pages=info['pages'],read_pages=0,scanned_pages=0,message='Original received privately. Reading pages in recoverable batches.')
+    p.update(pages=info['pages'],read_pages=0,scanned_pages=0,reader_version=READER_VERSION,message='Original received privately. Reading pages in recoverable batches.')
     book.state='reading';await save_book(book,token)
     await db.tejas_book_parts.delete_many({'book_id':book.id})
     return source
@@ -105,6 +105,11 @@ async def step(job):
         p=book.payload
         if book.state=='uploading':return 'Waiting for upload completion.'
         source=await receive(book,token) if not p.get('source_path') else await original(book)
+        if p.get('reader_version')!=READER_VERSION:
+            # Books read by an older page reader are re-read automatically; owner repairs and AI-approved pages are kept.
+            await db.tejas_book_pages.delete_many({'book_id':id,'provenance.kind':'native','provenance.reader':{'$ne':READER_VERSION}})
+            p.update(read_pages=0,reader_version=READER_VERSION,message='Re-reading pages with the improved reader. Owner repairs are kept.')
+            book.state='reading';await save_book(book,token)
         if p.get('read_pages',0)<p['pages']:
             more=await read_batch(book,token,source)
         if not more:
@@ -142,7 +147,8 @@ async def step(job):
 
 
 async def recover():
-    rows=await db.tejas_books.find({'removed':False,'paused':False,'state':{'$in':['received','reading','matching']}}).limit(20).to_list(20)
+    rows=await db.tejas_books.find({'removed':False,'paused':False,'$or':[{'state':{'$in':['received','reading','matching']}},
+        {'state':{'$in':['attention_needed','ready']},'payload.reader_version':{'$ne':READER_VERSION}}]}).limit(20).to_list(20)
     from .book_models import Book
     for row in rows:
         await enqueue_book(Book.from_mongo(row))

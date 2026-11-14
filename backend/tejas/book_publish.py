@@ -47,30 +47,42 @@ async def rebuild(book, token):
         mock.order=order;issues=[];question_groups={};key_groups={};solution_groups={}
         local_unknown=[number for number,affected_labels in affected.items() if label in affected_labels]
         if local_unknown:issues.append('Unmapped pages in or beside this mock’s source ranges need review: '+', '.join(map(str,local_unknown[:30])))
+        printed=[]
         for p,r in relevant:
             if p.issues:issues.extend(f'Page {p.number}: {x}' for x in p.issues)
             if r.role=='instructions':continue
             if not r.checked:issues.append(f'Page {p.number}, Q{r.number}: source region needs review.')
-            if r.role in ('question','key','solution') and (not r.subject or not r.number):issues.append(f'Page {p.number}: subject and printed question number are required.')
+            if r.role in ('question','key','solution') and (not r.number or (r.role=='question' and not r.subject)):issues.append(f'Page {p.number}: subject and printed question number are required.')
             if not r.complete:issues.append(f'Page {p.number}, Q{r.number}: unresolved continuation.')
             if r.role=='shared':
                 if not r.shared_for:issues.append(f'Page {p.number}: shared passage must name its printed questions.')
-                if r.answer or re.search(r'\b(?:answer|ans\.|solution|correct option)\s*[:=]',r.text,re.I) or any(other.role in ('key','solution') and overlap(r.rect,other.rect) for other in p.regions):
+                if r.answer or re.search(r'(?im)^\s*(?:answer|ans\.|solution|correct option)\s*[:=]',r.text) or any(other.role in ('key','solution') and overlap(r.rect,other.rect) for other in p.regions):
                     issues.append(f'Page {p.number}: shared passage exposes a key or solution.')
                 continue
-            group={'question':question_groups,'key':key_groups,'solution':solution_groups}[r.role]
-            group.setdefault(question_identity(r),[]).append((p,r))
+            if r.role!='question':
+                printed.append((p,r));continue
+            question_groups.setdefault(question_identity(r),[]).append((p,r))
             if r.role=='question':
                 for other in p.regions:
                     if other is not r and other.role in ('key','solution','question') and overlap(r.rect,other.rect):
                         issues.append(f'Page {p.number}, Q{r.number}: question overlaps another question, key or solution.')
-                if r.answer or re.search(r'\b(?:answer|ans\.|solution|correct option)\s*[:=]',r.text,re.I):
+                # Printed keys sit at the start of a line; 'oxalate solution: white ppt' is chemistry, not a leaked answer.
+                if r.answer or re.search(r'(?im)^\s*(?:answer|ans\.|solution|correct option)\s*[:=]',r.text):
                     issues.append(f'Page {p.number}, Q{r.number}: answer or solution visible in question region.')
+        by_number={}
+        for key in question_groups:by_number.setdefault(key[2],[]).append(key)
+        for p,r in printed:
+            # Keys and solutions printed by question number alone bind to the one question carrying that number.
+            ident=question_identity(r)
+            if ident not in question_groups and len(by_number.get(r.number,[]))==1:ident=by_number[r.number][0]
+            (key_groups if r.role=='key' else solution_groups).setdefault(ident,[]).append((p,r))
         instructions=[(p,r) for p,r in relevant if r.role=='instructions']
         if not mock.rules:
             inferred=infer_rules('\n'.join(r.text for _,r in instructions))
             if inferred:
-                inferred['source_pages']=sorted({p.number for p,_ in instructions});mock.rules=MockRules.model_validate(inferred).model_dump()
+                inferred['source_pages']=sorted({p.number for p,_ in instructions})[:30]
+                if not solution_groups and any(re.search(r'\bquestions\s+only\b',p.text,re.I) for p,_ in relevant):inferred['solution_policy']='key_only'
+                mock.rules=MockRules.model_validate(inferred).model_dump()
         if not mock.rules:issues.append('Confirm printed examination rules, count, duration, marking and solution coverage.')
         if mock.rules and book.payload.get('destination'):
             from .structure import rule_exam
@@ -90,7 +102,8 @@ async def rebuild(book, token):
             section_ids=[(normalized(s['subject']),normalized(s['section'])) for s in rules.get('section_scoring',[])]
             if len(section_ids)!=len(set(section_ids)) or any(key not in {k[:2] for k in question_groups} for key in section_ids):
                 issues.append('Section marking has duplicate or unmapped section identities.')
-            if re.search(r'\b(optional|attempt\s+any|round(?:ed|ing)|decimal|multiple\s+correct)\b',raw_instructions,re.I):
+            checked_text=re.sub(r'\boptional\s+bonus\b','bonus',raw_instructions,flags=re.I) if rules['mechanic']=='bitsat_bonus' else raw_instructions
+            if re.search(r'\b(optional|attempt\s+any|round(?:ed|ing)|decimal|multiple\s+correct)\b',checked_text,re.I):
                 issues.append('Printed optional/rounding/multiple-answer instructions cannot be converted to attempt-all or exact integers.')
             if len(question_groups)!=rules['expected_questions']:issues.append(f'Printed count {rules["expected_questions"]}; detected {len(question_groups)} distinct questions.')
             groups={}
@@ -109,7 +122,7 @@ async def rebuild(book, token):
             answer=next(iter(answers)) if len(answers)==1 else ''
             if not answer:issues.append(f'{first.subject} Q{first.number}: missing or conflicting supplied key.')
             labels_for_options=list(dict.fromkeys(x for _,r in entries for x in r.option_labels))
-            kind=first.response_type
+            kind=first.response_type if first.response_type!='unresolved' or len(labels_for_options)<2 else 'mcq'
             if kind=='unresolved':issues.append(f'{first.subject} Q{first.number}: response type is unresolved.')
             if kind=='mcq' and (len(labels_for_options)<2 or answer not in labels_for_options):issues.append(f'{first.subject} Q{first.number}: incomplete options or key does not match printed labels.')
             if kind=='integer' and not re.fullmatch(r'[+-]?\d{1,20}',answer):issues.append(f'{first.subject} Q{first.number}: unsupported exact-integer key.')

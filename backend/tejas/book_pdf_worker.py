@@ -6,6 +6,22 @@ from pdf_organiser_worker import seal
 LIMIT=100*1024*1024
 
 
+def visible_drawings(page):
+    """Drawing boxes trimmed to their clip paths, so clipped-away strokes do not count as printed content."""
+    out=[];clips={}
+    for d in page.get_drawings(extended=True)[:4000]:
+        level=d.get('level',0)
+        for k in [k for k in clips if k>=level]:del clips[k]
+        if d.get('type')=='clip':
+            clips[level]=d.get('scissor') or d['rect'];continue
+        if d.get('type')=='group':continue
+        x0,y0,x1,y1=d['rect']
+        for c in clips.values():x0,y0,x1,y1=max(x0,c[0]),max(y0,c[1]),min(x1,c[2]),min(y1,c[3])
+        if x1>=x0 and y1>=y0:out.append([x0,y0,x1,y1])
+        if len(out)>=2000:break
+    return out
+
+
 def handle(doc, item):
     action=item.get('action')
     if action=='info':
@@ -24,10 +40,10 @@ def handle(doc, item):
                     x0,y0,x1,y1=line['bbox']
                     lines.append({'text':text,'rect':[max(0,x0/w),max(0,y0/h),min(1,x1/w),min(1,y1/h)]})
         if sum(len(x['text']) for x in lines)>150000: raise ValueError('Page text exceeds safe processing budget.')
-        geometry=[list(i['bbox']) for i in page.get_image_info()]
-        geometry.extend(list(d['rect']) for d in page.get_drawings()[:2000])
-        geometry=[[max(0,r[0]/w),max(0,r[1]/h),min(1,r[2]/w),min(1,r[3]/h)] for r in geometry]
-        return {'lines':lines,'width':w,'height':h,'geometry':geometry}
+        images=[list(i['bbox']) for i in page.get_image_info()]
+        geometry=images+visible_drawings(page)
+        scale=lambda rows:[[max(0,r[0]/w),max(0,r[1]/h),min(1,r[2]/w),min(1,r[3]/h)] for r in rows]
+        return {'lines':lines,'width':w,'height':h,'geometry':scale(geometry),'images':scale(images)}
     r=item.get('rect') or [0,0,1,1]
     if len(r)!=4 or not all(isinstance(x,(int,float)) for x in r) or not (0<=r[0]<r[2]<=1 and 0<=r[1]<r[3]<=1): raise ValueError('Invalid crop.')
     clip=fitz.Rect(r[0]*w,r[1]*h,r[2]*w,r[3]*h)

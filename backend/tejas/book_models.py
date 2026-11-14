@@ -59,7 +59,7 @@ class Region(Input):
 
 class PageMap(Input):
     classification: Literal['cover','contents','instructions','questions','answer_key','solutions','mixed','unresolved'] = 'unresolved'
-    regions: list[Region] = Field(default_factory=list, max_length=100)
+    regions: list[Region] = Field(default_factory=list, max_length=400)
     issues: list[str] = Field(default_factory=list, max_length=30)
 
 
