@@ -10,6 +10,7 @@ import { Alive, Emblem, GameIcon } from "@/src/rapid/Art";
 import { GoldTitle, Panel, RaisedButton, Ribbon, SectionTitle, Segment, arenaInput } from "@/src/rapid/arena";
 import { Jelly, Pop, Twinkles } from "@/src/rapid/juice";
 import { Check, Face, InnerScreen, Note, PersonRow } from "@/src/rapid/parts";
+import { CupNightBanner } from "@/src/rapid/CupNight";
 import { LiveStrip } from "@/src/rapid/LiveStrip";
 import { ScopeSheet } from "@/src/rapid/ScopeSheet";
 import { cardCount, scopeLabel, scopeSubjects, setScope, useScope } from "@/src/rapid/scope";
@@ -61,6 +62,7 @@ function CupHub() {
     footer={<><ErrorBox testID="cup-hub-error" error={error} />
       <RaisedButton testID="cup-create" icon="swords" height={62} streak busy={busy === "create"} disabled={!ready || !!busy}
         label={kind === "open" ? "FIND A CUP" : "CREATE CUP"} sub={`${size} players · ${label}`} onPress={create} /></>}>
+    <CupNightBanner uid={uid} testID="cup-hub-night" />
     <Panel gold testID="cup-hero" style={styles.hero}>
       <View><Alive kind="breathe"><GameIcon name="trophy" size={104} /></Alive><Twinkles spots={[[8, 20, 14], [92, 26, 12], [50, 0, 11], [16, 86, 10], [86, 82, 12]]} /></View>
       <GoldTitle size={28} center>KNOCKOUT CUP</GoldTitle>

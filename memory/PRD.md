@@ -628,3 +628,12 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Keep all verified native dependency/branding/permission/privacy/support/publicaccess improvements. No changes were made to the supplied canonical repository, running website accounts/data, login/PINs or repository settings.
 - PIN-confirmed direct account deletion remains intentionally unavailable; neither the information page nor an email is a completed deletion flow. Do not label the app fully Play Store submission-ready.
 - Future gates: matching website PIN source and verified cross-service deletion; actual signed AAB/APK/version/ABI/16KB/physical-device performance/<20MB evidence; Play Console requirements and canonical API reliability. Existing CDN edge-script assertion is documented with strict CSP and readable public policy; not an automatic Play-policy rejection.
+
+## Phase 4 polish — Iterations 66–67 (2026-06)
+- Crown Celebration now plays on EVERY Knockout Cup win (user choice). Backend cup view returns `title_no`, `first_title`, `my_crown`; `finish()` stores `title_no` on the cup. Modal: FIRST CROWN / CROWN #N, "Champion again!", GOLD/SILVER CROWN · N CUPS chip, scrolls on short phones, art colour follows the player's overall crown.
+- Bug fixed: celebration only shows while the cup screen is focused and is marked seen only after the player closes it.
+- Cup Night: 30 s lead-in before round 1; seated players can't start/join another cup in the last 15 min (409); after the draw `count` = seated, `missed` flag + night-missed panel for busy joiners.
+- UI: Cup Night banner short kicker + 2-line countdown on small phones, moved to top of Knockout hub; duel wait shows a ticking countdown; entry-show white flash toned down; big/small button labels shrink below 360 px.
+- Session flash on hard reload fixed (rapidAccess ignores empty uid, no shared failure).
+- Tests: backend 14/14 (test_rf_phase3/phase4/iter65/iter66); frontend iteration 67 all pass.
+- Backlog: cleanup of /app/backend/tools image scripts before build (APK < 20MB); video zip deep-link (deferred by user).

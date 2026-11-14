@@ -98,7 +98,7 @@ export function RaisedButton({ label, sub, icon, glyph, onPress, disabled, busy,
   }, [streak, reduced, off, x]);
   const face = useAnimatedStyle(() => ({ transform: [{ translateY: down.value * (lip - 1) }] }));
   const light = useAnimatedStyle(() => ({ transform: [{ translateX: -120 + x.value * 560 }, { rotate: "18deg" }] }));
-  const big = height >= 60;
+  const big = height >= 60, narrow = useWindowDimensions().width < 360; // small phones: a slightly smaller label so it never cuts off
   return <Pressable testID={testID} disabled={off} accessibilityRole="button" accessibilityLabel={accessibilityLabel || (sub ? `${label}, ${sub}` : label)} accessibilityState={{ disabled: !!off, busy: !!busy }}
     onPressIn={() => { down.value = withTiming(1, { duration: 70 }); }} onPressOut={() => { down.value = withTiming(0, { duration: 130 }); }} onPress={() => { tap(); onPress?.(); }}
     style={[{ height: height + lip, borderRadius: radius, backgroundColor: c.lip, opacity: disabled ? 0.5 : 1 }, style]}>
@@ -109,7 +109,7 @@ export function RaisedButton({ label, sub, icon, glyph, onPress, disabled, busy,
       <View style={styles.buttonRow}>
         {busy ? <ActivityIndicator color={c.ink} /> : icon ? <GameIcon name={icon} size={big ? 44 : 30} /> : glyph ? <Icon name={glyph} size={big ? 24 : 20} color={c.ink} /> : null}
         {children || <View style={styles.buttonCopy}>
-          <T w="heavy" size={big ? 24 : height >= 50 ? 16 : 14} color={c.ink} numberOfLines={1} style={[styles.inkShadow, { textShadowColor: tone === "teal" ? arena.tealOutline : arena.panelEdge, letterSpacing: big ? 2 : 0.3 }]}>{label}</T>
+          <T w="heavy" size={big ? (narrow ? 19 : 24) : height >= 50 && !narrow ? 16 : 14} color={c.ink} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.75} style={[styles.inkShadow, { textShadowColor: tone === "teal" ? arena.tealOutline : arena.panelEdge, letterSpacing: big ? (narrow ? 1 : 2) : 0.3 }]}>{label}</T>
           {sub ? <T w="bold" size={11} color={c.ink} numberOfLines={1} style={{ opacity: 0.9 }}>{sub}</T> : null}
         </View>}
       </View>

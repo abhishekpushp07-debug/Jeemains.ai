@@ -85,6 +85,7 @@ export const go = {
   /** A Match Room, or straight into the match when it has already started. */
   room: (room: { id: string; duel_id?: string | null }) => (room.duel_id ? go.duel({ did: room.duel_id }) : ({ pathname: "/rapid/room/[cid]", params: { cid: room.id } }) as any),
   cups: () => "/rapid/cup" as any,
+  night: () => "/rapid/cup/night" as any,
   cup: (cid: string) => ({ pathname: "/rapid/cup/[cid]", params: { cid } }) as any,
   watch: (did: string) => ({ pathname: "/rapid/watch/[did]", params: { did } }) as any,
 };
@@ -95,6 +96,23 @@ export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: st
 // Matches your friends and gang mates are playing right now, to watch live.
 export type LiveMatch = { id: string; label: string; cup: boolean; started: boolean; total: number; teams: string[] | null; players: { name: string; avatar?: string | null; frame?: string | null; score: number; answered: number }[] };
 export const useLiveMatches = (uid?: string) => useCached<{ items: LiveMatch[] }>(uid ? `u.${uid}.rflive` : null, () => rf("/duels/live", uid!), false);
+
+// Badla pending: friends whose latest 1 v 1s you lost (up to 4 in a row; at 5 the Badla is dropped).
+export type BadlaRow = PlayerCard & { streak: number; left: number; match_id: string; picks: Pick[]; label: string; lost_at: string };
+export const useBadlaPending = (uid?: string) => useCached<{ items: BadlaRow[]; max: number }>(uid ? `u.${uid}.rfbadla` : null, () => rf("/badla", uid!), false);
+
+// Cup Night: a free Open Cup every day at 8 pm IST, seats from 7 pm, cups of up to 16.
+export type NightCup = { id: string; no: number; size: number; status: string; code: string; mine: boolean; real_players: number; round: string | null;
+  champion: { name: string; avatar?: string | null; frame?: string | null; bot: boolean; you: boolean } | null };
+export type CupNight = { day: string; now: number; start_ts: number; doors_ts: number; next_ts: number; phase: "soon" | "doors" | "live"; status: string; time_label: string; doors_label: string;
+  joined: boolean; missed?: boolean; count: number; friends: PlayerCard[]; my_cup: string | null; cups: NightCup[]; label: string; cards: number; seats: number; local: number };
+/** `local` is the phone's clock when the answer came, so countdowns follow the server's clock, not the phone's. */
+export const useCupNight = (uid?: string) => useCached<CupNight>(uid ? `u.${uid}.rfnight` : null, () => rf<CupNight>("/cups/night", uid!).then((d) => ({ ...d, local: Date.now() / 1000 })), false);
+/** "5h 12m" for long waits, "42:07" in the last hour. */
+export const countdown = (s: number) => {
+  const t = Math.max(0, Math.round(s)), h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60);
+  return h ? `${h}h ${String(m).padStart(2, "0")}m` : `${m}:${String(t % 60).padStart(2, "0")}`;
+};
 /** "5 min ago", "3 h ago", "2 d ago" for a time given in seconds. */
 export const ago = (ts: number) => {
   const min = Math.max(1, Math.round((Date.now() / 1000 - ts) / 60));

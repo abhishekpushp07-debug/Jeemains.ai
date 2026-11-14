@@ -23,6 +23,7 @@ from scope import label_for, scope_of
 from shop import equipped_of, safe_avatar
 
 ONLINE_SECONDS = 60
+BADLA_MAX = 5  # lose this many 1 v 1s in a row to one friend and that Badla is dropped; the next loss after a win starts a new one
 TITLES = {"Physics": "Physics Ace", "Chemistry": "Chemistry Ace", "Mathematics": "Maths Ace"}
 PID_RE = re.compile(r"^P[0-9A-F]{8}$")
 _key: dict = {}
@@ -257,6 +258,34 @@ def make_router(db, rf_user):
         score = lambda d, u: next((p.get("score", 0) for p in d["players"] if p["uid"] == u), 0)  # noqa: E731
         return {"items": [{"id": d["id"], "subject": d["subject"], "chapter": d.get("chapter"), "label": label_for(d), "picks": scope_of(d), "you": score(d, uid), "them": score(d, them), "won": d.get("winner") == uid, "tie": d.get("winner") == "tie",
                            "finished_at": datetime.fromtimestamp(d["finished_ts"], timezone.utc).isoformat()} for d in docs]}
+
+    @r.get("/badla")
+    async def badla_pending(x_rf_user: Optional[str] = Header(None)):
+        """Friends you owe a Badla: your latest 1 v 1s against them were losses (ties skipped). It is gone once you win one
+        back, or after BADLA_MAX losses in a row; the next loss after a win starts a new one."""
+        uid = rf_user(x_rf_user)
+        hidden = await blocked_uids(db, uid)
+        fids = {e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)} - hidden
+        if not fids:
+            return {"items": [], "max": BADLA_MAX}
+        docs = await db.rf_duels.find({"players.uid": uid, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}},
+                                      {"_id": 0, "id": 1, "players.uid": 1, "winner": 1, "finished_ts": 1, "subject": 1, "chapter": 1, "picks": 1}).sort("finished_ts", -1).limit(300).to_list(300)
+        runs: dict = {}
+        for d in docs:  # newest first: count the losses in a row against each friend
+            them = next((p["uid"] for p in d["players"] if p["uid"] != uid), None)
+            run = runs.setdefault(them, {"n": 0, "last": None, "open": True}) if them in fids else None
+            if not run or not run["open"] or d.get("winner") not in (uid, them):
+                continue
+            if d["winner"] == uid:
+                run["open"] = False  # badla taken
+                continue
+            run["n"] += 1
+            run["last"] = run["last"] or d
+            run["open"] = run["n"] < BADLA_MAX
+        owed = sorted(((t, x) for t, x in runs.items() if 0 < x["n"] < BADLA_MAX), key=lambda tx: -tx[1]["last"]["finished_ts"])[:12]
+        profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [t for t, _ in owed]}}).to_list(len(owed) or 1)}
+        return {"max": BADLA_MAX, "items": [{**card(profs.get(t) or {"uid": t}), "streak": x["n"], "left": BADLA_MAX - x["n"], "match_id": x["last"]["id"], "picks": scope_of(x["last"]),
+                                             "label": label_for(x["last"]), "lost_at": datetime.fromtimestamp(x["last"]["finished_ts"], timezone.utc).isoformat()} for t, x in owed]}
 
     @r.get("/feed")
     async def feed(x_rf_user: Optional[str] = Header(None)):

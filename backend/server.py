@@ -428,7 +428,8 @@ api.include_router(make_social(db, rf_user))
 api.include_router(make_rooms(db, rf_user, duel_api["seat"]))
 api.include_router(make_gangs(db, rf_user))
 api.include_router(make_leagues(db, rf_user))
-api.include_router(make_cups(db, rf_user, duel_api))
+cups_router = make_cups(db, rf_user, duel_api)
+api.include_router(cups_router)
 api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))
@@ -441,6 +442,16 @@ install_access_guard(app, db)
 app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
 app.add_middleware(ServerTiming)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=allowed_origins(), allow_methods=["*"], allow_headers=["*"], expose_headers=['Server-Timing', 'X-Cache'])
+
+
+async def cup_night_loop():
+    """Cup Night starts at 8 pm IST on its own: every 10 seconds, seat tonight's cups once their moment has come."""
+    while True:
+        try:
+            await cups_router.night_tick()
+        except Exception:  # noqa: BLE001 - a bad tick must never stop the next one
+            logging.getLogger(__name__).exception("cup night tick failed")
+        await asyncio.sleep(10)
 
 
 async def backfill_cup_crowns():
@@ -511,7 +522,9 @@ async def startup():
     await db.rf_duels.create_index([("status", 1), ("players.uid", 1)])
     await db.rf_cups.create_index("code", unique=True, partialFilterExpression={"code": {"$type": "string"}})
     await db.rf_cups.create_index([("champion", 1), ("status", 1), ("finished_ts", -1)], sparse=True)
+    await db.rf_cups.create_index("night", sparse=True)
     await backfill_cup_crowns()
+    asyncio.create_task(cup_night_loop())
     await db.rf_duels.create_index([("team_mode", 1), ("status", 1)], sparse=True)
     await db.rf_feed.create_index("at", expireAfterSeconds=14 * 86400)
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])

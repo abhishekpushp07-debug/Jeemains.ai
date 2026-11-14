@@ -86,6 +86,9 @@ def seed(pid):
     db.rf_feed.insert_many([{"id": f"{state['feed']}{k}", "uid": p["uid"], "kind": kind, "data": data, "ts": now - hours * 3600, "at": datetime.now(timezone.utc)} for k, (p, kind, data, hours) in enumerate(events)])
     for mine, theirs, days, subject in ((18, 14, 0.2, "Physics"), (11, 16, 1, "Chemistry"), (15, 15, 3, "Mathematics"), (21, 12, 6, "Physics")):
         state["duels"].append(match(db, me, a, mine, theirs, days, subject))
+    # Badla pending: the player lost the last two 1 v 1s to Diya.
+    for mine, theirs, days, subject in ((9, 17, 0.1, "Chemistry"), (12, 14, 0.5, "Physics")):
+        state["duels"].append(match(db, me, b, mine, theirs, days, subject))
     # Cup Champion showcase: Diya won 3 cups (2 against a real player, Kabir), so her crown is gold ×3; Aarav won 1 practice cup: silver.
     def cup(champ, humans, size, label, days):
         ts = now - days * 86400

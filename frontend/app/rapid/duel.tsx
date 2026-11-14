@@ -30,6 +30,18 @@ function Duel() {
   return <Match key={JSON.stringify([p.r, p.did, p.review, p.mode, p.subject, p.chapter, p.picks])} />;
 }
 
+/** The wait before the entry show, ticking down every second on the server clock (a Cup Night lead-in is 30 s). */
+function Soon({ at, now }: { at: number; now: () => number }) {
+  const [t, setT] = useState(now);
+  useEffect(() => {
+    const iv = setInterval(() => setT(now()), 250);
+    return () => clearInterval(iv);
+  }, [now]);
+  const left = Math.ceil(at - t);
+  return left > 0 ? <T testID="duel-countdown-left" w="heavy" size={48} color={arena.gold}>{left}</T> : null;
+}
+
+
 /**
  * One match from start to finish: finding a rival (or waiting on a code), the entry show in step with the server clock,
  * 30 cards against 1 to 4 rivals with the Phoenix streak, then the result. `did` opens a match seated by a Match Room, `review` an old one.
@@ -231,6 +243,7 @@ function Match() {
     body = <View style={styles.middle} testID="duel-countdown">
       <Lineup players={entrants} />
       <GoldTitle size={26} center>Get ready…</GoldTitle>
+      <Soon at={showStart} now={serverNow} />
       <T testID="duel-countdown-rules" size={13} color={arena.muted} style={styles.center}>Same {total} cards for everyone · {limit / 1000} s each · +1 per correct</T>
     </View>;
   } else if (playing) {

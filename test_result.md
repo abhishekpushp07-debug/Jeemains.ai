@@ -562,3 +562,16 @@ test_plan_iter62:
 agent_communication_iter62:
   - agent: main
     message: "Backend tests/test_rf_phase3.py 7/7 pass (run with -o addopts=). Login 7004186276 / PIN 5524 (web). Fixture: python /app/tests/rf_social_fixture.py seed|cleanup (adds 3 TEST friends + 4 h2h matches vs Aarav incl. 1 lost). Clean up after testing."
+
+## Iteration65 — Badla pending strip, Crown celebration, Colosseum entry, daily Cup Night
+agent_communication_iter65:
+  - agent: main
+    message: "Backend: GET /api/rf/badla; /api/rf/cups/night, POST /night/join, /night/leave; cup view first_title/real_players/night/night_no; background loop seats Cup Night. pytest tests/test_rf_phase4.py (2) + test_rf_phase3.py (7) pass with -o addopts=. Fixture rf_social_fixture.py seed adds 2 recent losses vs Diya (Badla x2)."
+
+## Iteration66 — Crown celebration on EVERY cup win (user choice), focus-gated; Phase 4 polish
+agent_communication_iter66:
+  - agent: main
+    message: "User chose: crown celebration on EVERY cup win (not only first). Backend cups.py: finish() stores title_no (champion's cups_won after this win) on the cup; view returns title_no (0 unless you are champion), first_title (title_no==1), my_crown {won,real}. Night: round-1 lead-in 30 s (NIGHT_LEAD) for night cups; night_guard → 409 on POST /cups and /cups/{cid}/join in the last 15 min before start for a player seated tonight; seat_night stores missed (busy uids); /cups/night count = seated after draw, new field missed. Frontend: [cid].tsx celebration only when screen focused (isFocused state from useFocusEffect), storage rf.crown.<cid> set only when user closes (Continue/See/back). CrownCelebration: props no/crown, kicker FIRST CROWN vs CROWN #N, title 'Champion again!' for N>1, chip GOLD/SILVER CROWN · N CUPS, ScrollView for short screens. CupNight banner: shorter kicker ('DAILY · 8:00 PM'), 2-line countdown line, smaller trophy <360px. Cup hub: night banner moved to top. Night screen: night-missed panel. Entry flash toned down (peak 0.28). client.ts rapidAccess: session generation race now retries instead of 'sign in again'. pytest test_rf_phase4/phase3/iter65 pass."
+agent_communication_iter66b:
+  - agent: main
+    message: "Fixes after iteration66: client.ts rapidAccess — empty userId throws early (no exchange), waiters use grantFlight.catch(), generation check moved above the verify throw; cup [cid].tsx load() returns early when uid empty. RaisedButton big labels: 19px/letterSpacing 1 on <360px + adjustsFontSizeToFit. duel.tsx: countdown number (testID duel-countdown-left) ticks during the wait before the entry show (Cup Night 30 s lead-in). CrownCelebration art/rays gold follows the player's overall crown (my_crown.real>0), matching the chip."

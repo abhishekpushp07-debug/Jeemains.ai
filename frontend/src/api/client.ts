@@ -289,8 +289,9 @@ export function clearRapidAccess() {
   if (old) void fetch(RF_BASE + "/access/revoke", { method: "POST", headers: { Authorization: `Bearer ${old.token}` } }).catch(() => {});
 }
 export async function rapidAccess(userId: string): Promise<string> {
+  if (!userId) throw new ApiError("Signing you in…", 0); // the account is still loading: nothing to exchange yet
   if (rfGrant?.uid === userId && rfGrant.until > Date.now() + 30000) return rfGrant.token;
-  if (grantFlight) { await grantFlight; if (rfGrant?.uid === userId) return rfGrant.token; }
+  if (grantFlight) { await grantFlight.catch(() => {}); if (rfGrant?.uid === userId && rfGrant.until > Date.now() + 30000) return rfGrant.token; }
   const generation = rfGeneration;
   grantFlight = (async () => {
     if (!WEB && !nativeAccessCookie && !await refresh()) throw new ApiError("Reconnect your account to open Rapid Fire.", 401);
@@ -300,11 +301,12 @@ export async function rapidAccess(userId: string): Promise<string> {
     let res = await exchange();
     if (res.status === 401 && await refresh()) res = await exchange();
     const result = await res.json().catch(() => null);
-    if (!res.ok || result?.user_id !== userId || generation !== rfGeneration) throw new ApiError(result?.detail || "Your Rapid Fire session could not be verified. Please sign in again.", res.status);
+    if (generation !== rfGeneration) return ""; // the session changed while this was in flight: ask again for the new one
+    if (!res.ok || result?.user_id !== userId) throw new ApiError(result?.detail || "Your Rapid Fire session could not be verified. Please sign in again.", res.status);
     rfGrant = { token: result.token, uid: result.user_id, until: Date.parse(result.expires_at) };
     return result.token as string;
   })().finally(() => { grantFlight = null; });
-  return grantFlight;
+  return (await grantFlight) || rapidAccess(userId);
 }
 export async function rf<T = any>(path: string, userId: string, opts: { method?: string; body?: unknown } = {}, retry = true): Promise<T> {
   let res: Response;

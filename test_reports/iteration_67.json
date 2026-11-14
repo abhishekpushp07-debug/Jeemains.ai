@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 67 was a frontend retest against the public URL, signed in as the QA learner PF37CC308. HIGH fix VERIFIED. A hard reload of /rapid/cup/<cid> never showed the session error, 'Signing you in…' or any error element. That held for 8 reloads at normal speed and 3 reloads on a slowed network (600 ms latency, 400 KB/s). The text was sampled every 150-200 ms for 4.5 to 12 s after each reload. Each reload made exactly one POST /api/rf/access, which returned 200. The same check passed on 5 reloads each of /rapid/cup, /rapid/cup/night and the /rapid lobby tab, with no console errors. At 320 px the big button labels now use 19 px text with 1 px letter spacing, and none are cut (scrollWidth equals clientWidth): FIND A CUP 116/116, PLAY YOUR MATCH 192/192, JOIN CUP NIGHT 168/168, SEE MY CROWN 157/157. At 375 and 390 px they are unchanged (24 px, 2 px spacing). The duel waiting screen now shows duel-countdown-left. On a normal cup final it counted 11 down to 1. During the Cup Night lead-in it counted 31 down to 1, one step per second. CrownCelebration: with the profile set to cups_won=1 and cups_real=1, winning a cup against practice rivals showed gold crown art (#FFD75E/#C98A12). The modal read CROWN #2 / Champion again! / ×2 GOLD CROWN · 2 CUPS. With a fresh profile the art was silver (#C9CED6) and the modal read FIRST CROWN / You are a Cup Champion! / SILVER CROWN · 1 CUP. Regressions all pass: (1) the crown modal does not show on the duel result screen while the final ends, and no rf.crown key is written; it shows after going back to the cup. (2) Continue stores the key, and the modal does not come back after a reload. (3) SEE MY CROWN opens /rapid/player/PF37CC308 and stores the key. (4) The Cup Night banner (cup-hub-night) is above cup-hero on the hub. (5) At 320 px, 'Doors open in 6h 27m · 7:00 pm' wraps to 2 lines with nothing cut. (6) Doors/JOIN, joining, and the automatic move to the night duel all work. Minor: two small buttons still cut their labels at 320 px. No deprecated Expo packages were found. All test data was cleaned up.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Duel match result (cup) at 320 px", "issues": ["Small RaisedButton 'BACK TO CUP' (testID duel-rematch, 16 px) is cut to 'BACK TO C…' (scrollWidth 112 > clientWidth 107). It fits at 375 px."]},
+      {"screen": "Player profile at 320 px", "issues": ["'Avatar & frame' (testID player-change-avatar, 16 px) is cut to 'Avatar & fra…' (117 > 109). It fits at 375 px."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/_iter66_snapshot.py", "/app/backend/tests/_iter65_crown.py", "/app/backend/tests/_iter65_night_ctl.py", "/app/backend/tests/_iter66_night_at.py", "/tmp/slow_watch.py (temporary slow-win driver, not kept)"],
+  "action_items": [
+    "MINOR: at widths under 360 px, also shrink the label of small RaisedButtons (height < 60, 16 px), or shorten the label. Seen on duel-rematch 'BACK TO CUP' and player-change-avatar 'Avatar & frame'. Note that adjustsFontSizeToFit has no effect on react-native-web."
+  ],
+  "critical_code_review_comments": [
+    "client.ts:292-309: the empty-userId early throw, grantFlight.catch(() => {}) for waiters, and the generation check placed before the verify throw are all correct. Only one /rf/access call is made per load.",
+    "client.ts:292: rapidAccess('') throws ApiError('Signing you in…'). Any future screen that calls rf() without a uid guard and sends the error to setError would flash that text. The current cup, hub, night, duel and lobby screens guard correctly (useCached uses a null key, [cid] load() returns early, duel waits for uid).",
+    "adjustsFontSizeToFit and minimumFontScale on RaisedButton do nothing on web. The fix depends on the fixed 19 px size at widths under 360 px, which is enough for the four big labels tested."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not retested (unchanged; 14/14 in iteration 66)", "frontend": "100% of requested items (two minor small-button truncations outside scope)"},
+  "seed_data_creation": "None kept. Created 2 QA Open Cups (d9b1ba75, cb5a13bb), 1 Cup Night cup and tonight's rf_cup_nights doc. _iter66_snapshot.py restore removed 3 cups, 5 duels, 14 duel feed rows and 4 awards by exact ids, and put the QA profile back (coins 118, xp 260, cups_won/cups_real unset, badges []). The temporary cups_won=1/cups_real=1 change was undone by that same restore. _iter65_night_ctl.py restore deleted tonight's night doc. Checked afterwards: no night cups, no rf_cup_nights docs, and no active QA cups.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Session reuse: inject /tmp/iter66_ls.json into localStorage with add_init_script, guarded by a sessionStorage flag. It still worked on 2026-11-14. Browser scripts can call DB helpers through subprocess. A slow driver (watch with a per-match delay, DELAY env) lets you see the countdown and PLAY YOUR MATCH (go_back from the auto-routed duel). Run _iter66_snapshot.py save before and restore after, then _iter65_night_ctl.py restore. Each browser_automation run is a new context, so rf.crown seen keys do not carry over and the modal shows again. That is expected per device."
+}

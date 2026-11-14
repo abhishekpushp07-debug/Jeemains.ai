@@ -14,6 +14,8 @@ import { ArenaBg, CloseButton, GoldTitle, Panel, RaisedButton, SectionTitle } fr
 import { Confetti, Jelly, LiveDot, Pop, Twinkles } from "@/src/rapid/juice";
 import { Face, PersonRow } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
+import { CrownCelebration } from "@/src/rapid/CrownCelebration";
+import { storage } from "@/src/utils/storage";
 import { clock, go, refreshInbox, sendWhatsApp } from "@/src/rapid/social";
 
 type Seat = { pid?: string | null; name: string; avatar?: string | null; frame?: string | null; level?: number; bot: boolean; you: boolean; out: boolean };
@@ -87,6 +89,7 @@ function Cup() {
   const [, tick] = useState(0);
   const fetchedAt = useRef(0), focused = useRef(true), sent = useRef<string | null>(null);
   const load = useCallback(async () => {
+    if (!uid) return; // the account is still loading
     try { const c = await rf(`/cups/${cid}`, uid); fetchedAt.current = Date.now(); setCup(c); setError(""); }
     catch (e: any) { setError(e.message); }
   }, [cid, uid]);
@@ -98,7 +101,8 @@ function Cup() {
     const poll = setInterval(load, 2000), second = setInterval(() => tick((n) => n + 1), 1000);
     return () => { clearInterval(poll); clearInterval(second); };
   }, [uid, moving, load]);
-  useFocusEffect(useCallback(() => { focused.current = true; load(); return () => { focused.current = false; }; }, [load]));
+  const [isFocused, setFocused] = useState(true);
+  useFocusEffect(useCallback(() => { focused.current = true; setFocused(true); load(); return () => { focused.current = false; setFocused(false); }; }, [load]));
   // Your next match is seated: go straight in, so the entry show starts with your rival's.
   useEffect(() => {
     if (cup?.my_duel && focused.current && sent.current !== cup.my_duel) { sent.current = cup.my_duel; router.push(go.duel({ did: cup.my_duel })); }
@@ -120,6 +124,17 @@ function Cup() {
   const left = cup ? Math.max(0, Math.round(cup.expires_in - (Date.now() - fetchedAt.current) / 1000)) : 0;
   const me: Seat | undefined = cup?.players.find((p: Seat) => p.you);
   const champ: Seat | null = cup?.champion != null ? cup.players[cup.champion] : null;
+  // Every cup you win: the crown celebration. It waits until this screen is in front (the final may end while you are
+  // still on the match result) and counts as seen only once you close it.
+  const [crowned, setCrowned] = useState(false);
+  const won = status === "finished" && !!champ?.you;
+  useEffect(() => {
+    if (!won || !isFocused) return;
+    let live = true;
+    storage.getItem(`rf.crown.${cid}`, false).then((seen) => { if (live && !seen) setCrowned(true); });
+    return () => { live = false; };
+  }, [won, isFocused, cid]);
+  const closeCrown = () => { setCrowned(false); storage.setItem(`rf.crown.${cid}`, true); };
   const share = () => sendWhatsApp(`🏆 Watch my Rapid Fire Knockout Cup live on JEECIRCLE.AI!\n${cup.size} players · ${cup.label}\nWatch code: ${cup.code}\nApp → Rapid Fire → Knockout Cup → Watch with a code.`);
   const remind = () => sendWhatsApp(`🏆 Join my Rapid Fire Knockout Cup on JEECIRCLE.AI!\n${cup.size} players · ${cup.label} · ${cup.cards} cards a match\nOpen the app → Rapid Fire → Knockout Cup and press Join before the timer runs out.`);
   const [confirm, setConfirm] = useState(false);
@@ -193,7 +208,7 @@ function Cup() {
       <View style={styles.top}>
         <CloseButton testID="cup-close" label="Close" onPress={back} />
         <View style={styles.flex}>
-          <GoldTitle testID="cup-title">{cup ? `${cup.size}-Player Cup` : "Knockout Cup"}</GoldTitle>
+          <GoldTitle testID="cup-title">{cup ? (cup.night ? `Cup Night #${cup.night_no}` : `${cup.size}-Player Cup`) : "Knockout Cup"}</GoldTitle>
           {cup ? <T testID="cup-meta" w="bold" size={12} color={arena.aqua} numberOfLines={1}>{cup.kind === "open" ? "Open" : "Friends"} · {cup.label}</T> : null}
         </View>
         <GameIcon name="trophy" size={42} />
@@ -214,6 +229,8 @@ function Cup() {
       <RaisedButton testID="cup-cancel-confirm" tone="danger" label="Cancel cup" busy={busy === "leave"} onPress={() => { setConfirm(false); act("leave"); }} />
     </Sheet>
     {status === "finished" && champ?.you ? <Confetti count={40} /> : null}
+    {me ? <CrownCelebration visible={crowned && isFocused} no={cup?.title_no || 1} crown={cup?.my_crown} gold={(cup?.real_players || 0) > 1}
+      onClose={closeCrown} onSee={() => { closeCrown(); if (me.pid) router.push(go.player(me.pid)); }} /> : null}
   </ArenaBg>;
 }
 

@@ -14,6 +14,8 @@ import { Badge, GoldTitle, Panel, RaisedButton, Ribbon, SectionTitle } from "./a
 import { Jelly, Twinkles } from "./juice";
 import { Face, GemStrip } from "./parts";
 import { LiveStrip } from "./LiveStrip";
+import { BadlaStrip } from "./BadlaStrip";
+import { CupNightBanner } from "./CupNight";
 import { ScopeSheet, SubjectChips } from "./ScopeSheet";
 import { MAX_PICKS, cardCount, encodePicks, scopeLabel, scopeSubjects, setScope, useScope } from "./scope";
 import { ErrorBox, Sheet } from "./ui";
@@ -93,6 +95,7 @@ export function LobbyTab() {
         <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub="30 cards · 15 s" delay={2300} narrow={narrow} disabled={!can} onPress={() => play("solo")} />
       </View>
 
+      <CupNightBanner uid={uid} />
       <Jelly testID="rf-knockout" accessibilityLabel={`Knockout Cup. 4, 8 or 16 players${cupLive ? ". Your cup is on" : ""}`} onPress={() => router.push(cupLive ? go.cup(inbox!.cup!) : go.cups())} style={styles.cupWrap}>
         <LinearGradient colors={["#5A0A14", arena.panel]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.cup}>
           <View pointerEvents="none" style={styles.tileGloss} />
@@ -108,6 +111,7 @@ export function LobbyTab() {
       </Jelly>
 
       <LiveStrip uid={uid} />
+      <BadlaStrip uid={uid} />
 
       <SectionTitle title="Your gang & friends" action="See all" testID="rf-open-gang-tab" onAction={() => setArenaTab("gang")} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.people} testID="rf-people-strip">

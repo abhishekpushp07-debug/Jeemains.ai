@@ -11,6 +11,9 @@ import { Emblem, PhoenixDiamond } from "@/src/rapid/Art";
 import { playSfx } from "@/src/sfx";
 import { arena, fx, gemColors } from "@/src/theme";
 
+/** The original Colosseum of Rome, packed and roaring: every entry show happens on its sand. */
+const COLOSSEUM = require("../../assets/arena/bg_colosseum.webp");
+
 export const FRAME_COLORS: Record<string, [string, string]> = {
   frame_gold: [arena.gold, arena.goldDeep], frame_neon: [fx.bolt, arena.teal], frame_fire: [fx.ember, fx.fire], frame_diamond: [fx.white, fx.ice],
   // Diamond specials, paid with streak diamonds.
@@ -132,19 +135,20 @@ function PlayerEntry({ p, start, clock, W, H, reduced }: { p: EntryPlayer; start
     const u = clock.value - start;
     return { opacity: interpolate(u, [1, 1.3, 3.1, 3.4], [0, 1, 1, 0], Extrapolation.CLAMP), transform: [{ translateY: reduced ? 0 : interpolate(u, [1, 1.3], [30, 0], Extrapolation.CLAMP) }] };
   });
-  const flash = useAnimatedStyle(() => ({ opacity: reduced ? 0 : interpolate(clock.value - start, [0.66, 0.73, 1.1], [0, 0.7, 0], Extrapolation.CLAMP) }));
+  const flash = useAnimatedStyle(() => ({ opacity: reduced ? 0 : interpolate(clock.value - start, [0.66, 0.72, 0.95], [0, 0.28, 0], Extrapolation.CLAMP) })); // a quick spark, never a white-out over the Colosseum
   // The landing: beams of light burst out behind the avatar and keep turning, and a shockwave ring races outwards.
   const beamSize = Math.max(W, H) * 1.5;
   const beams = useAnimatedStyle(() => {
     const u = clock.value - start;
-    return { opacity: interpolate(u, [0.6, 0.85, 3.05, 3.4], [0, 1, 1, 0], Extrapolation.CLAMP), transform: [{ rotate: `${reduced ? 0 : u * 20}deg` }, { scale: reduced ? 1 : interpolate(u, [0.6, 0.95], [0.25, 1], Extrapolation.CLAMP) }] };
+    // Lighter over the Colosseum, so the arena stays visible behind the burst.
+    return { opacity: interpolate(u, [0.6, 0.85, 3.05, 3.4], [0, 0.6, 0.6, 0], Extrapolation.CLAMP), transform: [{ rotate: `${reduced ? 0 : u * 20}deg` }, { scale: reduced ? 1 : interpolate(u, [0.6, 0.95], [0.25, 1], Extrapolation.CLAMP) }] };
   });
   const wave = useAnimatedStyle(() => {
     const u = clock.value - start;
     return { opacity: reduced ? 0 : interpolate(u, [0.68, 0.74, 1.55], [0, 0.95, 0], Extrapolation.CLAMP), transform: [{ scale: interpolate(u, [0.68, 1.55], [0.7, 3.4], Extrapolation.CLAMP) }] };
   });
   return <View pointerEvents="none" style={[StyleSheet.absoluteFill, styles.centered]}>
-    <Animated.View style={[StyleSheet.absoluteFill, tint]}><LinearGradient colors={[e.c1, arena.black, arena.black, e.c1]} locations={[0, 0.42, 0.62, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[StyleSheet.absoluteFill, styles.tint]} /></Animated.View>
+    <Animated.View style={[StyleSheet.absoluteFill, tint]}><LinearGradient colors={[e.c1, arena.clear, arena.clear, e.c1]} locations={[0, 0.38, 0.66, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[StyleSheet.absoluteFill, styles.tint]} /></Animated.View>
     <Animated.View style={[styles.glyph, glyph]}><Icon name={e.icon as any} size={W * 0.8} color={e.c1} /></Animated.View>
     <Animated.View style={[styles.glyph, beams]}><Beams size={beamSize} color={e.c1} /></Animated.View>
     {reduced ? null : Array.from({ length: N }, (_, i) => <Particle key={i} i={i} clock={clock} start={start} motion={e.motion} color={i % 3 ? e.c1 : e.c2} w={W} h={H} />)}
@@ -208,13 +212,17 @@ export function EntryShow({ players, elapsed = 0, solo, onDone, testID = "entry-
     return { opacity: f > 0 ? 1 : 0, transform: [{ scale: reduced ? 1 : interpolate(f, [0, 0.2, 0.32], [0.3, 1.15, 1], Extrapolation.CLAMP) }] };
   });
   const seat = Math.min(96, (W - 32) / n - 10);
+  // The camera pushes slowly into the arena for the whole show.
+  const push = useAnimatedStyle(() => ({ transform: [{ scale: reduced ? 1.04 : interpolate(clock.value, [0, end], [1.04, 1.18], Extrapolation.CLAMP) }] }));
 
   return (
     <Animated.View testID={testID} accessibilityLabel="Entry show" style={[StyleSheet.absoluteFill, styles.root, root]}>
+      <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, push]}><Image testID={`${testID}-colosseum`} source={COLOSSEUM} style={styles.fill} contentFit="cover" contentPosition="center" /></Animated.View>
+      <LinearGradient pointerEvents="none" colors={[arena.shade, arena.clear, arena.clear, arena.scrim]} locations={[0, 0.3, 0.6, 1]} style={StyleSheet.absoluteFill} />
       <Animated.View pointerEvents="none" style={[styles.ring, ring]} />
       {phase >= 0 && phase < n ? <PlayerEntry key={phase} p={players[phase]} start={BUILD + EACH * phase} clock={clock} W={W} H={H} reduced={reduced} /> : null}
       {phase >= n && !solo ? <Animated.View testID="entry-versus" style={[StyleSheet.absoluteFill, styles.centered, lineup]}>
-        <LinearGradient pointerEvents="none" colors={[arena.black, arena.bgDeep, arena.black]} locations={[0.12, 0.52, 0.92]} style={StyleSheet.absoluteFill} />
+        <LinearGradient pointerEvents="none" colors={[arena.scrim, arena.shade, arena.scrim]} locations={[0.12, 0.52, 0.92]} style={StyleSheet.absoluteFill} />
         <Animated.View style={[styles.gem, gem]}><PhoenixDiamond width={Math.min(W * 0.82, 340)} /></Animated.View>
         <View style={styles.seats}>
           {players.map((p, i) => <View key={i} style={[styles.seat, { width: seat + 8 }]}>
@@ -233,7 +241,7 @@ export function EntryShow({ players, elapsed = 0, solo, onDone, testID = "entry-
 const styles = StyleSheet.create({
   fill: { width: "100%", height: "100%" }, crown: { position: "absolute", top: -8, alignSelf: "center" },
   root: { zIndex: 50, backgroundColor: arena.black }, centered: { alignItems: "center", justifyContent: "center" }, center: { textAlign: "center" },
-  tint: { opacity: 0.55 }, glyph: { position: "absolute" }, spaced: { letterSpacing: 2.5 },
+  tint: { opacity: 0.4 }, glyph: { position: "absolute" }, spaced: { letterSpacing: 2.5 },
   ring: { position: "absolute", alignSelf: "center", top: "42%", width: 180, height: 180, borderRadius: 90, borderWidth: 6, borderColor: arena.gold },
   plate: { position: "absolute", bottom: "13%", left: 24, right: 24, paddingVertical: 14, paddingHorizontal: 16, borderRadius: 20, borderWidth: 2, backgroundColor: arena.scrim, gap: 4 },
   gem: { position: "absolute" }, seats: { position: "absolute", top: "17%", left: 16, right: 16, flexDirection: "row", justifyContent: "space-around" }, seat: { alignItems: "center", gap: 6 },

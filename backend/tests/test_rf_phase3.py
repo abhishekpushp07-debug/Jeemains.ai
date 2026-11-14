@@ -365,6 +365,10 @@ async def _cups(db, api, u, tag):
             await api.post(f"/duels/{other['my_duel']}/forfeit", b)
     cup = (await api.get(f"/cups/{cid}", a)).json()
     assert cup["status"] == "finished" and cup["players"][cup["champion"]]["you"] and cup["prize"] == 70 and [r["name"] for r in cup["rounds"]] == ["Semi-finals", "Final"]
+    assert cup["first_title"] is True and cup["title_no"] == 1 and cup["real_players"] == 2  # a's first cup ever: the crown celebration
+    assert cup["my_crown"] == {"won": 1, "real": 1}
+    lost = (await api.get(f"/cups/{cid}", b)).json()
+    assert lost["first_title"] is False and lost["title_no"] == 0 and lost["my_crown"] is None
     assert all(m["winner"] is not None and m["score"] for r in cup["rounds"] for m in r["matches"])
     assert next(p for p in (await api.get(f"/cups/{cid}", b)).json()["players"] if p["you"])["out"] is True
     prof = await db.rf_profiles.find_one({"uid": a["uid"]})
