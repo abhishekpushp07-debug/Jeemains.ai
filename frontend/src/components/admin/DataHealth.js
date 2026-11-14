@@ -16,7 +16,9 @@ function Summary({report}){
  const issues=report.checks.filter(c=>c.found||c.found===null);
  const left=report.needs_attention+report.checks.filter(c=>c.state==='not_checked').length;
  const Icon=left?ShieldAlert:ShieldCheck;
- const text=!issues.length?`All ${report.checks.length} checks passed. No duplicate, broken or mismatched records.`:`${report.found} problem records found, ${report.fixed} fixed automatically${left?`, ${left} check${left===1?'':'s'} need you`:''}.`;
+ const done=report.checks.filter(c=>c.state==='fixed').reduce((n,c)=>n+c.fixed,0);
+ const fixing=report.checks.filter(c=>c.state==='fixing').reduce((n,c)=>n+(c.left||0),0);
+ const text=!issues.length?`All ${report.checks.length} checks passed. No duplicate, broken or mismatched records.`:`${report.found} problem records found, ${done} fixed automatically${fixing?`, ${fixing} still being fixed`:''}${left?`, ${left} ${left===1?'check needs':'checks need'} you`:''}.`;
  return <><p className={'admin-health-summary'+(left?' warn':'')} data-testid="data-health-summary"><Icon size={18} aria-hidden="true"/>{text}</p>
   {issues.length>0&&<ul className="admin-list" data-testid="data-health-list">{issues.map(c=><Row key={c.key} c={c}/>)}</ul>}
   {report.missing_safeguards.length>0&&<p className="admin-note warn" data-testid="data-health-safeguards">Missing database safeguards: {report.missing_safeguards.join(', ')}.</p>}</>;
@@ -30,8 +32,9 @@ export function DataHealth(){
  async function run(){setBusy(true);try{await post('/admin/integrity/run');toast.success('Data check started. Results appear here in about a minute.');await load();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  const report=data?.report;
  return <section className="admin-panel" data-testid="data-health-panel">
-  <div className="admin-panel-head"><div><h2>Data health</h2><p className="admin-note" data-testid="data-health-last-run">{data?.running?'Checking now…':report?`Last checked ${when(report.last_run)} · took ${report.duration_s}s`:data?'Not checked yet.':'Loading…'} Counts only, never student details. {data?.schedule}</p></div>
-   <Button variant="outline" disabled={busy||!data||data.running} onClick={run} data-testid="data-health-run"><RefreshCw size={16} className={data?.running?'spin':''}/>Check now</Button></div>
+  <div className="admin-panel-head"><div><h2>Data health</h2><p className="admin-note" data-testid="data-health-last-run">{data?.running?'Checking now…':report?`Last checked ${when(report.last_run)} · took ${report.duration_s}s.`:data?'Not checked yet.':error?'':'Loading…'} Counts only, never student details. {data?.schedule}</p></div>
+   {!data&&error?<Button variant="outline" onClick={load} data-testid="data-health-retry"><RefreshCw size={16}/>Try again</Button>
+   :<Button variant="outline" disabled={busy||!data||data.running} onClick={run} data-testid="data-health-run"><RefreshCw size={16} className={data?.running?'spin':''}/>Check now</Button>}</div>
   {error&&<p className="admin-note warn" data-testid="data-health-error">{error}</p>}
   {report&&<Summary report={report}/>}
  </section>;

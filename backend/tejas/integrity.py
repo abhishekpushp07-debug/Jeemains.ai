@@ -134,6 +134,20 @@ async def regrade(ids):
     return len(ids)
 
 
+async def trusted_ledger(aid):
+    """The frozen score record, only when its commitment verifies against the sealed attempt."""
+    full = await attempts.find_one({'id': aid}, {'_id': 0, 'id': 1, 'user_id': 1, 'pack_id': 1, 'sealed_seq': 1, 'answers': 1,
+                                                 'rules': 1, 'profile': 1, 'version': 1, 'key_version': 1})
+    ledger = await db.tejas_ledgers.find_one({'id': aid}, {'_id': 0})
+    if not full or not ledger:
+        return None
+    try:
+        verify_ledger({**full, 'ledger': ledger})
+    except CanonicalIntegrityError:
+        return None
+    return ledger
+
+
 async def stash(kind, docs, reason):
     for d in docs:
         await archive.update_one({'_id': f"{kind}:{d['_id']}"}, {'$setOnInsert': {'kind': kind, 'reason': reason, 'doc': d, 'archived_at': now()}}, upsert=True)
@@ -154,34 +168,38 @@ async def fix(key, t):
             await ensure_grade(closed)
         return len(found)
     if key == 'waiting_for_score':
-        found = await rows(coll, build(t), ['id', 'user_id', 'set_id', 'status'])
-        for a in found:
-            await ensure_grade(a)
-        return len(found)
+        restored, queue = 0, []
+        for a in await rows(coll, build(t), ['id']):
+            ledger = await trusted_ledger(a['id'])
+            if ledger is None:
+                queue.append(a['id'])
+                continue
+            restored += (await attempts.update_one({'id': a['id'], 'status': 'completed', 'grading_status': {'$nin': ['ready', 'failed']}},
+                                                   {'$set': {'summary': ledger['summary'], 'grading_status': 'ready'}})).modified_count
+        return restored + await regrade(queue)
     if key == 'score_failed':
         return await regrade([a['id'] for a in await rows(coll, build(t), ['id'])])
     if key == 'score_without_record':
         from .db import get
         from .corrections import freeze_ledger
         fixed = 0
-        for a in await rows(coll, build(t), ['id']):
+        for a in await rows(coll, build(t), ['id', 'summary']):
             try:  # rebuild from the sealed answers; the visible score stays untouched if that is impossible
                 ledger = await freeze_ledger(await get(attempts, a['id']))
             except Exception:
                 log.warning('Frozen score record could not be rebuilt for one attempt')
                 continue
+            if a.get('summary') != ledger['summary']:
+                await stash('summary', [{'_id': a['id'], 'summary': a.get('summary')}], 'replaced by score rebuilt from sealed answers')
             fixed += (await attempts.update_one({'id': a['id'], 'status': 'completed'}, {'$set': {'summary': ledger['summary'], 'grading_status': 'ready'}})).matched_count
         return fixed
     if key == 'score_differs':
         fixed = 0
-        for a in await rows(coll, build(t), ['id']):
-            full = await attempts.find_one({'id': a['id']}, {'_id': 0, 'id': 1, 'user_id': 1, 'pack_id': 1, 'sealed_seq': 1, 'answers': 1,
-                                                             'rules': 1, 'profile': 1, 'version': 1, 'key_version': 1})
-            ledger = await db.tejas_ledgers.find_one({'id': a['id']}, {'_id': 0})
-            try:
-                verify_ledger({**full, 'ledger': ledger})
-            except CanonicalIntegrityError:
+        for a in await rows(coll, build(t), ['id', 'summary']):
+            ledger = await trusted_ledger(a['id'])
+            if ledger is None:
                 continue  # left visible in the report; a broken commitment is never auto-resolved
+            await stash('summary', [{'_id': a['id'], 'summary': a.get('summary')}], 'differed from the frozen score record')
             fixed += (await attempts.update_one({'id': a['id'], 'status': 'completed'}, {'$set': {'summary': ledger['summary']}})).modified_count
         return fixed
     if key == 'peer_entry_orphan':
@@ -205,7 +223,8 @@ async def fix(key, t):
         await db.tejas_ledgers.delete_many({'_id': {'$in': [d['_id'] for d in found]}})
         return len(found)
     if key == 'session_orphan':
-        found = await rows(coll, build(t), [])
+        found = await rows(coll, build(t), ['user_id', 'access_type', 'expires_at'])
+        await stash('session', found, 'account no longer exists')
         return (await db.tejas_sessions.delete_many({'_id': {'$in': [d['_id'] for d in found]}})).deleted_count
     if key == 'job_stopped':
         found = await rows(coll, build(t), ['id'])
@@ -233,6 +252,9 @@ async def run(trigger, repair=True):
                     except Exception:
                         log.exception('Integrity repair %s deferred', key)
                         fixed[key] = 0
+        if fixed.get('waiting_for_score') or fixed.get('score_failed') or fixed.get('open_after_time'):
+            from .jobs import drain_lane
+            await drain_lane('grade')
         after = await measure(now()) if fixed else before
         checks = []
         for key, item in before.items():
@@ -248,9 +270,6 @@ async def run(trigger, repair=True):
         await ops.update_one({'id': 'integrity'}, {'$set': {'id': 'integrity', 'report': report}}, upsert=True)
         if report['fixed']:
             await audit(ACTOR, 'Data integrity repair', 'integrity', ', '.join(f'{k}={v}' for k, v in fixed.items() if v))
-        if fixed.get('waiting_for_score') or fixed.get('score_failed') or fixed.get('open_after_time'):
-            from .jobs import drain_lane
-            await drain_lane('grade')
         return report
     finally:
         await ops.update_one({'_id': 'integrity-lock'}, {'$set': {'until': 0}})

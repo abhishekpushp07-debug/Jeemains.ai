@@ -112,8 +112,12 @@ class Protections:
         ctx = request_id.set(rid)
         started = time.perf_counter()
 
+        sent = False
+
         async def stamped(message):
+            nonlocal sent
             if message["type"] == "http.response.start":
+                sent = True
                 headers = MutableHeaders(scope=message)
                 headers.update({**self.HEADERS, "X-Request-ID": rid,
                                 "Server-Timing": f"app;dur={(time.perf_counter()-started)*1000:.1f}"})
@@ -124,6 +128,10 @@ class Protections:
             if scope["method"] in ("POST", "PUT", "PATCH", "DELETE") and origin is not None and not origin_allowed(origin, origins):
                 return await error_response("Cross-origin write rejected.", 403, "origin_denied")(scope, receive, stamped)
             await self.app(scope, receive, stamped)
+        except Exception:
+            if not sent:  # keep the {data,error,meta} envelope and headers; the error is re-raised for the server log
+                await error_response("Something went wrong on our side. Saved answers are unchanged; please try again.", 500, "server_error")(scope, receive, stamped)
+            raise
         finally:
             request_id.reset(ctx)
 

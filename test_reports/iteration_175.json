@@ -1,0 +1,45 @@
+{
+  "summary": "Tested the iteration-176 scale/integrity change against the real ASGI app with real cookie auth in disposable isolated DBs. All isolated DBs were dropped afterwards and none are left. Nothing was written to the customer DB and the live site was never called. (1) The main agent's test_integrity176_isolated.py was re-run: 32/32 PASS. (2) My new independent suite test_iter177_t1_isolated.py: 42/44 PASS. It covers the native/RedOS envelope, the attempt_view leak check, the shared pack per revision, preflight rejecting a bad source ref after an edit, PIN change and owner PIN reset evicting the session cache, the integrity endpoints (shape/403/401/409/running), report-only checks staying untouched, regrade of waiting/failed scores, leaderboard ties 100,90,90,80 -> 1,2,2,4 with a correct 'you' row and no private data, security headers, origin_denied with a matching request id, and the run_job return value. (3) test_iter145_load.py: 5/5 PASS. (4) Public preview curl, read-only: security headers present (ingress rewrites Cache-Control to no-store,no-cache,must-revalidate). A cross-origin POST returns 403 origin_denied, and the request id in the body matches the header. (5) The DataHealth UI on /super-admin was tested with every /api call mocked through page.route, so the real backend and customer DB were never touched. Verified: all-clear, problem (fixed/fixing/needs_attention/not_checked + safeguards), running (button disabled, 'Checking now…', polling recovers), POST 409 toast, GET error, never-run, and no horizontal overflow at 390px (scrollWidth 390).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "integrity.fix('waiting_for_score') (tejas/integrity.py ~L156)", "issue": "REPRODUCED. A completed attempt with grading_status 'queued' (or 'grading') whose grade job 'grade-<id>' is already 'done' is never repaired. ensure_grade() -> enqueue() gets a DuplicateKeyError and returns the existing done job, so nothing is requeued. The run still counts it as fixed=1, state 'fixing', left=1. Every later run (including the nightly one) reports the same thing again, so the 'second run finds nothing to repair' guarantee fails. Repro: submit+grade an attempt, set attempts.grading_status='queued', run integrity.run twice, drain_lane('grade') -> grading_status stays 'queued'. Fix: in the waiting_for_score branch use regrade() (it resets a done/failed job to queued) for attempts whose job status is done. Or, if a valid ledger exists, set grading_status='ready' and the summary from the ledger. Count fixed only when a job was actually queued.", "priority": "HIGH"},
+      {"endpoint": "integrity.fix('session_orphan')", "issue": "Orphan sessions are deleted directly and NOT archived to tejas_integrity_archive. The spec says orphan ranking entries, ledgers AND sessions are archived, then removed. Either stash them (minus anything sensitive) or update the spec/docs."},
+      {"endpoint": "integrity.fix('score_without_record')", "issue": "The attempt summary is overwritten with the rebuilt ledger summary unconditionally. If the rebuilt score is lower than the visible one, the visible score is downgraded with no comparison or audit of the old value. Confirm this matches the 'without downgrading visible score' intent; consider recording the previous summary in the archive."},
+      {"endpoint": "server.py Protections (unhandled exceptions)", "issue": "An unhandled exception in a route returns a bare text/plain 'Internal Server Error' 500 from Starlette's ServerErrorMiddleware. It has NO X-Request-ID, no security headers and no {data,error,meta} envelope, which the native client expects. Verified with a temporary test-only route in the isolated harness. This is probably pre-existing (the old BaseHTTPMiddleware had the same behaviour). Fix: register @app.exception_handler(Exception) that returns error_response(..., 500, 'internal_error'), or catch it inside Protections and send an enveloped 500."},
+      {"endpoint": "auth.current() student cache", "issue": "Small TOCTOU window. A request that read the session/profile from the DB just before a PIN change or logout can call remember_student() after forget_student() has run. That re-caches the old identity for up to 10s. Cache eviction is also per-process only (other workers rely on the 10s TTL). This is acceptable by design; noting it for awareness."},
+      {"endpoint": "tests/test_iter118_auth_cors_isolated.py, test_iter119_denied_headers.py", "issue": "Stale tests that send /api/auth/phone without 'pin', as the main agent noted. They were not re-run and still need updating."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "DataHealth GET error state", "issue": "When GET /api/admin/integrity fails, the panel shows the error AND 'Loading…' in data-health-last-run at the same time. The Check now button stays disabled forever (data is null) and there is no retry, so the owner cannot recover without reloading the page.", "selector": "[data-testid='data-health-last-run'], [data-testid='data-health-run']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Super Admin Overview / Data health", "issues": ["The summary adds 'fixing' items (found 4, fixed 4, left 1) to 'fixed automatically', which overstates fixes while one record is still waiting.", "Otherwise the layout is clean: chips are readable, there is no overflow at 390px, and contrast is OK."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_iter177_t1_isolated.py", "/app/backend/tests/test_integrity176_isolated.py", "/app/backend/tests/test_iter145_load.py"],
+  "action_items": [
+    "Fix waiting_for_score repair when the grade job is already 'done' (requeue through regrade() or restore from a valid ledger), and do not count it as fixed when nothing was queued.",
+    "Archive orphan sessions before deleting them (as specified), or document why they are not archived.",
+    "Add a global Exception handler so unhandled 500s keep the {data,error,meta} envelope, X-Request-ID and security headers.",
+    "DataHealth: on GET error, hide 'Loading…', add a Retry, and/or allow Check now.",
+    "Optional: review score_without_record overwrite semantics against 'never downgrade visible score'."
+  ],
+  "critical_code_review_comments": [
+    "papers.py caches entry.validated per (set id, revision, version). Source validation that depends on header-only fields (file_ids) or on the files collection is not re-run if those change without a revision bump.",
+    "papers.Paper.questions/public are shared mutable lists across all students in the process. Any future per-request mutation would leak across students; consider deep-freezing them or copying on deliver.",
+    "integrity.start_run checks the lock and then runs in BackgroundTasks, so two concurrent POSTs both return started=true. Only one actually runs (the DuplicateKeyError lock guard), which is harmless.",
+    "Protections overrides any route-level Cache-Control (e.g. mock_solutions PNG 'private, max-age=3600'). This is the same as the previous middleware."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter177_t1_isolated.py"],
+  "success_rate": {"backend": "95% (74/76 isolated checks + 5/5 load; 2 failures share one root cause: waiting_for_score)", "frontend": "100% of DataHealth render states (1 low-priority UX issue)"},
+  "test_credentials": "Isolated only: random TEST owner (password random per run) + TEST phone students, removed with the dropped DB. Real ADMIN credentials were NOT used.",
+  "seed_data_creation": "None in the customer DB. All fixtures lived in tejas_isolated_t1iter177_* and tejas_isolated_integrity176_* DBs, both dropped (verified 0 isolated DBs left).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend/tests && python test_iter177_t1_isolated.py (44 checks; expect the 2 waiting_for_score checks to pass after the fix) and python test_integrity176_isolated.py (32). UI: mock all **/api/** via page.route; /auth/session must return {data:{user:{role:'owner'}},meta:{api_version:'1'}}, otherwise api() does not unwrap data and the app redirects to the owner login.",
+  "rca of the issue": "waiting_for_score: integrity.fix calls attempts.ensure_grade(a) -> jobs.enqueue('grade'). enqueue's insert_one fails with DuplicateKeyError for an existing 'grade-<id>' and returns the existing job unchanged. When that job is 'done', nothing is requeued and the attempt stays 'queued' forever. run() still records fixed=len(found). The fix is to reset done/failed jobs, as regrade() already does for score_failed."
+}

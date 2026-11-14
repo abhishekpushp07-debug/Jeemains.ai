@@ -177,10 +177,9 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     entry = await paper(s)
     if not entry.count:
         raise HTTPException(400, "This set has no questions yet.")
-    # Per-user availability is checked above; immutable source validation is reused per paper revision.
-    if not entry.validated:
+    if entry.needs_check(s):
         await validate_sources(s, entry.refs)
-        entry.validated = True
+        entry.mark_checked(s)
     await db.tejas_preflight.update_one(
         {"user_id": u["id"], "set_id": id},
         {
