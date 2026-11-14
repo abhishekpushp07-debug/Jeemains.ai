@@ -1,5 +1,12 @@
 # JEELIVE.AI Native App — PRD
 
+## Iteration74 — 100k scale: many servers through the database + cheerleader shortfall
+- User (Hinglish): "Pehle 100k scaling poori karo; Pehle diamonds se cheerleader" (both), servers joined through "Apne database se hi jodo" (no Redis), squad price "Har cheerleader ki alag keemat" (already: Gold 8 Red+2 Blue, Royal 6 Blue+2 Emerald, Legend 3 Emerald+2 Gold; Rookie opens on the first cup win), short of diamonds → "Kitne aur chahiye, wo batao".
+- Backend: addressed live channel (`rf_duels.ws_nodes`, events `to`/`by.<node>`, capped 128 MB), one-trip answers (`quick_answer` pipeline update), cross-server spectator count `rf_watch`, inbox `poll_s` (8, 20 when busy), Mongo pool 40, cached collection objects (`Collections` in server.py), practice-rival runs cached. Squad 409 message now lists the exact shortfall. Details + numbers: `memory/SCALE.md`.
+- Frontend: `ShortNote` in StoreParts ("NEED 3 more Ruby…", testIDs `squad-<id>-short`, `squad-buy-short`); InboxPoller polls every 25 s inside rapid/duel, session, watch and follows `poll_s`.
+- Fix after testing (`test_reports/iteration_72.json`): squad buy no longer charges diamonds for a squad already opened by cup wins (409 'Tap USE'); price buttons 44 px; clearer shortfall a11y label. Tester file `tests/test_iter75_review.py` passes.
+- Tests: `tests/test_iter74_multiserver.py` (4, two of them need RF_NODE_B), iter73/phase3/iter69 pass. Load: 3000 students on 3 workers (practice rivals and student vs student) with 0 errors. 100k itself needs production capacity (~50 app cores + a big MongoDB) — to arrange with Emergent support.
+
 ## Iteration72 — Security audit + simple Forgot PIN
 - Security audit (read-only): CONDITIONAL PASS. SEC-001 session handle (X-JL-Sid jar) no TTL/rotation; SEC-002 4-digit PIN brute force via proxy (shared server IP). User chose "Abhi nahi" — not fixed yet. Positive: Set-Cookie never returned, server-priced atomic buys, server-derived RF identity, strict CORS.
 - Forgot PIN (owner's explicit choice, no OTP, warned twice): `backend/pin_reset.py` POST `/api/account/forgot-pin` {phone,new_pin,confirm_pin} → owner login (env JEELIVE_OWNER_EMAIL/PASSWORD, in-process cookies) → `admin/students?q=` exact last-10-digit match → `auth/owner/student-pin-reset` with expected_pin_version. Throttle 5/h per number, 30/h per IP (rightmost X-Forwarded-For), log in Mongo `pin_resets`. `app/forgot-pin.tsx`: phone + new PIN + confirm → Set new PIN → auto sign-in → Home.

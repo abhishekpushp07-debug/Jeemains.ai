@@ -16,6 +16,7 @@ import { playSfx } from "@/src/sfx";
 import { GemColor } from "@/src/rapid/Art";
 import { ArenaBg } from "@/src/rapid/arena";
 import { decodePicks } from "@/src/rapid/scope";
+import { ArenaWait, useArenaWait } from "@/src/rapid/ArenaWait";
 import { DiamondsWon, GemFlare, StreakGem, gemAt } from "@/src/rapid/StreakGem";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
@@ -106,6 +107,7 @@ function RapidSessionRound() {
   const startedAt = useRef(0);
   const lastTick = useRef(0);
   const reqId = useRef(uuid());
+  const seat = useArenaWait(() => setN((v) => v + 1));
   const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const x = useSharedValue(0);
   const uid = user?.id || "";
@@ -124,7 +126,7 @@ function RapidSessionRound() {
       : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: 30, revision: p.revision === "1", request_id: reqId.current,
           ...(picks && !p.ids && p.revision !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
-    run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else setError(e.message); });
+    run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else if (!seat.hold(e)) setError(e.message); });
     return () => { alive = false; };
   }, [p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.diagrams, p.revision, uid, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -257,9 +259,10 @@ function RapidSessionRound() {
         </View>
       ) : null}
 
+      {seat.waiting && !card ? <ArenaWait testID="rf-arena-wait" left={seat.left} onCancel={() => { seat.cancel(); router.back(); }} /> : null}
       {error ? <View style={{ padding: space.lg }}><ErrorBox error={error} retry={() => (session ? finish() : setN((v) => v + 1))} testID="rf-error" /></View> : null}
       {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={() => router.back()} />} /></Card></View> : null}
-      {!card && !error && !empty && !done ? <View style={{ padding: space.lg }}><Skeleton h={380} /></View> : null}
+      {!card && !error && !empty && !done && !seat.waiting ? <View style={{ padding: space.lg }}><Skeleton h={380} /></View> : null}
 
       {done ? <Summary s={done} cards={cards} historical={!!p.review} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
         <View style={{ flex: 1, paddingHorizontal: space.lg }}>

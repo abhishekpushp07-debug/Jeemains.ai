@@ -62,7 +62,8 @@ async def main(cmd):
         if await db.rf_cup_nights.find_one({"_id": day}):
             print("night doc exists for today; not touching"); return
         st = now + 290
-        await db.rf_cup_nights.insert_one({"_id": day, "uids": [qa["uid"]], "status": "open", "start_ts": st})
+        await db.rf_cup_nights.insert_one({"_id": day, "status": "open", "start_ts": st})
+        await db.rf_night_seats.insert_one({"_id": f"{day}:{qa['uid']}", "day": day, "uid": qa["uid"], "ts": now})
         s.update({"night_day": day, "night_start": st})
         save(s)
         for _ in range(15):
@@ -85,6 +86,7 @@ async def main(cmd):
             print("qa restored", upd)
         if s.get("night_day"):
             print("night", (await db.rf_cup_nights.delete_one({"_id": s["night_day"], "start_ts": s["night_start"]})).deleted_count)
+            await db.rf_night_seats.delete_one({"_id": f"{s['night_day']}:{qa['uid']}"})
             print("notices", (await db.rf_notices.delete_many({"uid": qa["uid"], "kind": "cup_night", "night.day": s["night_day"]})).deleted_count)
         os.remove(STATE)
 

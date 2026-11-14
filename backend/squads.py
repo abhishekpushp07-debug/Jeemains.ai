@@ -55,13 +55,18 @@ def make_router(db, rf_user):
             raise HTTPException(404, "This squad is not for sale.")
         gems = s["gems"]
         got = await db.rf_profiles.find_one_and_update(
-            {"uid": uid, "owned": {"$ne": s["id"]}, **{f"diamonds.{c}": {"$gte": n} for c, n in gems.items()}},
+            {"uid": uid, "owned": {"$ne": s["id"]}, "cups_won": {"$not": {"$gte": s["wins"]}}, **{f"diamonds.{c}": {"$gte": n} for c, n in gems.items()}},
             {"$inc": {k: v for c, n in gems.items() for k, v in ((f"diamonds.{c}", -n), (f"diamonds_spent.{c}", n))}, "$addToSet": {"owned": s["id"]}, "$set": {"squad": s["id"]}},
             return_document=ReturnDocument.AFTER)
         if not got:
             have = await db.rf_profiles.find_one({"uid": uid}) or {}
-            need = ", ".join(f"{n} {c.title()}" for c, n in gems.items())
-            raise HTTPException(409, "You already have this squad." if s["id"] in (have.get("owned") or []) else f"Not enough diamonds. You need {need}. Win them in cups and Phoenix streaks.")
+            if s["id"] in (have.get("owned") or []):
+                raise HTTPException(409, "You already have this squad.")
+            if have.get("cups_won", 0) >= s["wins"]:  # opened by cup wins: never charge diamonds for it
+                raise HTTPException(409, "Your cup wins already opened this squad. Tap USE to pick it.")
+            wallet = vault_of(have)
+            short = ", ".join(f"{n - wallet.get(c, 0)} more {c.title()}" for c, n in gems.items() if wallet.get(c, 0) < n)
+            raise HTTPException(409, f"Not enough diamonds. You need {short}. Win them in cups and Phoenix streaks.")
         return await state(uid)
 
     @r.post("/squads/equip")

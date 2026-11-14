@@ -7,6 +7,8 @@ import hashlib
 import asyncio
 import os
 import secrets
+import time
+from collections import OrderedDict
 from datetime import datetime, timedelta, timezone
 
 import httpx
@@ -24,20 +26,50 @@ def token_digest(token):
     return hashlib.sha256(token.encode()).hexdigest()
 
 
+# Every Rapid Fire request carries a grant. Checking Mongo each time costs one read per request, so a verified grant is
+# remembered in this process for GRANT_RECHECK seconds (never past its own expiry). Revoking drops it here at once;
+# another server process may honour a revoked grant for at most GRANT_RECHECK seconds.
+GRANT_RECHECK, GRANT_MEMORY = 30, 200_000
+_grants: OrderedDict = OrderedDict()
+_maintenance = {"at": -1e9, "on": False}
+
+
+def _expires(grant):
+    return grant['expires_at'].replace(tzinfo=timezone.utc)
+
+
 async def verified_grant(db, token):
     if not isinstance(token, str) or not token or len(token) > 128:
         raise HTTPException(401, 'Sign in to use Rapid Fire.')
-    grant = await db.rf_access.find_one({'digest': token_digest(token), 'expires_at': {'$gt': datetime.now(timezone.utc)}}, {'_id': 0})
+    digest, now = token_digest(token), datetime.now(timezone.utc)
+    hit = _grants.get(digest)
+    if hit and time.monotonic() - hit[1] < GRANT_RECHECK and _expires(hit[0]) > now:
+        return hit[0]
+    grant = await db.rf_access.find_one({'digest': digest, 'expires_at': {'$gt': now}}, {'_id': 0})
     if not grant:
+        _grants.pop(digest, None)
         raise HTTPException(401, 'Rapid Fire session expired. Please reconnect.')
+    _grants[digest] = (grant, time.monotonic())
+    _grants.move_to_end(digest)
+    while len(_grants) > GRANT_MEMORY:
+        _grants.popitem(last=False)
     return grant
+
+
+async def maintenance_on(db) -> bool:
+    """The question-bank refresh switch, read from Mongo at most every 5 seconds per process."""
+    if time.monotonic() - _maintenance["at"] > 5:
+        _maintenance["on"] = bool(await db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}, {'_id': 1}))
+        _maintenance["at"] = time.monotonic()
+    return _maintenance["on"]
 
 
 class AccessRequest(BaseModel):
     access_cookie: str | None = Field(default=None, max_length=8192)
 
 
-def make_access_router(db):
+def make_access_router(db, client):
+    """`client` returns the server's shared canonical HTTP client (pooled connections, no TLS handshake per sign-in)."""
     router = APIRouter(prefix='/rf')
 
     @router.post('/access')
@@ -52,9 +84,8 @@ def make_access_router(db):
         if not cookie or '\r' in cookie or '\n' in cookie or ';' in cookie:
             raise HTTPException(401, 'Your canonical session needs refreshing.')
         try:
-            async with httpx.AsyncClient(timeout=10) as client:
-                result = await canonical_request(client, 'GET', os.environ['JEELIVE_API'].rstrip('/') + '/auth/me', path='auth/me',
-                                                  params=None, body=None, headers={'Cookie': 'access_token=' + cookie, 'Accept': 'application/json'})
+            result = await canonical_request(client(), 'GET', os.environ['JEELIVE_API'].rstrip('/') + '/auth/me', path='auth/me',
+                                              params=None, body=None, headers={'Cookie': 'access_token=' + cookie, 'Accept': 'application/json'})
             if result.status_code in (401, 403):
                 raise HTTPException(401, 'Your canonical session needs refreshing.')
             if not result.is_success:
@@ -76,6 +107,7 @@ def make_access_router(db):
     @router.post('/access/revoke')
     async def revoke(request: Request):
         token = request.headers.get('authorization', '').removeprefix('Bearer ')
+        _grants.pop(token_digest(token), None)
         await db.rf_access.delete_one({'digest': token_digest(token)})
         return {'ok': True}
 
@@ -93,7 +125,7 @@ class RFAccessGuard:
         path = scope.get('path', '').rstrip('/')
         if not path.startswith('/api/rf/'):
             return await self.app(scope, receive, send)
-        if await self.db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
+        if await maintenance_on(self.db):
             response = JSONResponse({'detail': 'Rapid Fire is refreshing its question bank. Please retry shortly.'}, status_code=503, headers={'Retry-After': '15', 'Cache-Control': 'no-store'})
             return await response(scope, receive, send)
         # WhatsApp link pages are public HTML that reveal only a display name, subject and player code.

@@ -47,7 +47,7 @@ function Night() {
   const s = n ? nightState(n, now) : null, key = s?.key;
   useFocusEffect(useCallback(() => {
     reload();
-    const iv = setInterval(reload, 5000);
+    const iv = setInterval(reload, 5000 + Math.random() * 2000);
     return () => clearInterval(iv);
   }, [reload]));
   useEffect(() => { if (key) reload(); }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -118,7 +118,7 @@ function Night() {
       </Panel>
 
       {n.cups.length ? <>
-        <SectionTitle title={`Tonight’s cups (${n.cups.length})`} />
+        <SectionTitle title={`Tonight’s cups (${Math.max(n.cups_total || 0, n.cups.length)})`} />
         {n.cups.map((c) => <CupRow key={c.id} c={c} busy={busy === c.id} onOpen={() => open(c)} />)}
       </> : null}
 

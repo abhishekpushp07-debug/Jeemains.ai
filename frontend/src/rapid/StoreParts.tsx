@@ -15,12 +15,24 @@ export const isFree = (it: Priced) => !it.price && !it.gems;
 export const canAfford = (it: Priced, w: Wallet) => (it.gems ? gemsOf(it).every(([c, n]) => (w?.diamonds?.[c] || 0) >= n) : (w?.coins ?? 0) >= it.price);
 export const costText = (it?: Priced | null) => (it?.gems ? `${gemsOf(it).map(([c, n]) => `${n} ${GEM_LABEL[c]}`).join(" + ")} diamonds` : `${it?.price ?? 0} coins`);
 export const haveText = (it: Priced | null | undefined, w: Wallet) => (it?.gems ? gemsOf(it).map(([c]) => `${w?.diamonds?.[c] || 0} ${GEM_LABEL[c]}`).join(", ") : `${w?.coins ?? "—"}`);
+/** The diamonds still missing for this price ([] when the player can pay). */
+export const shortOf = (it: Priced | null | undefined, w: Wallet) => gemsOf(it).map(([c, n]) => [c, n - (w?.diamonds?.[c] || 0)] as [GemColor, number]).filter(([, n]) => n > 0);
+
+/** "Need 3 more Ruby + 1 more Sapphire": shown under a diamond price the player cannot pay yet. */
+export function ShortNote({ it, wallet, testID }: { it: Priced | null | undefined; wallet: Wallet; testID: string }) {
+  const short = shortOf(it, wallet);
+  if (!short.length) return null;
+  return <View testID={testID} accessibilityLabel={`Need ${short.map(([c, n]) => `${n} more ${GEM_LABEL[c]}`).join(" and ")}`} style={styles.short}>
+    <T w="heavy" size={11} color={arena.text}>NEED</T>
+    {short.map(([c, n]) => <View key={c} style={styles.cost}><Gem color={c} size={16} /><T w="heavy" size={13} color={arena.gold}>{n} more</T></View>)}
+  </View>;
+}
 
 /** Buy button that shows the price: a coin amount, or the diamonds it costs. Off until the player can pay. */
 export function PriceButton({ it, wallet, busy, onPress, testID }: { it: Priced; wallet: Wallet; busy?: boolean; onPress: () => void; testID: string }) {
   const off = !canAfford(it, wallet);
-  if (!it.gems) return <RaisedButton testID={testID} height={42} icon="coin" label={`${it.price}`} disabled={off} busy={busy} onPress={onPress} style={styles.stretch} />;
-  return <RaisedButton testID={testID} height={42} disabled={off} busy={busy} onPress={onPress} accessibilityLabel={`Buy for ${costText(it)}`} style={styles.stretch}>
+  if (!it.gems) return <RaisedButton testID={testID} height={44} icon="coin" label={`${it.price}`} disabled={off} busy={busy} onPress={onPress} style={styles.stretch} />;
+  return <RaisedButton testID={testID} height={44} disabled={off} busy={busy} onPress={onPress} accessibilityLabel={`Buy for ${costText(it)}`} style={styles.stretch}>
     <View style={styles.line}>{gemsOf(it).map(([c, n]) => <View key={c} style={styles.cost}><Gem color={c} size={22} /><T w="heavy" size={15} color={arena.text}>{n}</T></View>)}</View>
   </RaisedButton>;
 }
@@ -38,4 +50,5 @@ const styles = StyleSheet.create({
   stretch: { alignSelf: "stretch" }, center: { textAlign: "center" },
   line: { flexDirection: "row", alignItems: "center", gap: 10 }, cost: { flexDirection: "row", alignItems: "center", gap: 2 },
   wallet: { padding: 12, gap: 6 }, title: { letterSpacing: 2, textAlign: "center" },
+  short: { flexDirection: "row", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 8 },
 });

@@ -125,6 +125,7 @@ def quests_of(p: dict) -> list:
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf")
     board_cache = {}
+    rank_cache = {}  # (exam, uid) -> (when, xp, rank)
     board_locks = {exam: asyncio.Lock() for exam in ACTIVE_EXAMS}
 
     async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE",
@@ -222,7 +223,8 @@ def make_router(db, rf_user):
         if events and not uid.startswith("TEST"):
             now = datetime.now(timezone.utc)
             await db.rf_feed.insert_many([{"id": f"{ref}:{k}", "uid": uid, "kind": kind_, "data": data, "ts": time.time(), "at": now} for k, (kind_, data) in enumerate(events)])
-        board_cache.pop(exam, None)
+        # The leaderboard is NOT reset here: with thousands of matches ending every second it would never stay cached.
+        # It refreshes every 15 seconds, and each player's own row is always read fresh.
         return reward
 
     @r.get("/profile")
@@ -252,7 +254,14 @@ def make_router(db, rf_user):
         xp = mine.get("exam_stats", {}).get(exam, {}).get("xp", 0)
         rank = None
         if xp > 0 and not uid.startswith("TEST") and not mine.get("name", "").startswith("TEST"):
-            rank = 1 + await db.rf_profiles.count_documents({**query, "$or": [{field: {"$gt": xp}}, {field: xp, "uid": {"$lt": uid}}]})
+            hit = rank_cache.get((exam, uid))
+            if hit and hit[1] == xp and time.time() - hit[0] < 30:  # counting everyone above you is the costly part
+                rank = hit[2]
+            else:
+                rank = 1 + await db.rf_profiles.count_documents({**query, "$or": [{field: {"$gt": xp}}, {field: xp, "uid": {"$lt": uid}}]})
+                if len(rank_cache) > 100_000:
+                    rank_cache.clear()
+                rank_cache[(exam, uid)] = (time.time(), xp, rank)
         return {"exam": exam, "items": items, "you": {"rank": rank, "xp": xp, "level": level_of(xp)},
                 "note": "Exam-only practice XP. Wallet, streak and overall level remain shared."}
 

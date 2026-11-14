@@ -16,7 +16,7 @@ export type ChallengeNote = { id: string; subject: string; chapter?: string | nu
 export type CupNote = { id: string; label: string; size: number; joined: number; expires_in: number; from: PlayerCard };
 export type NightNote = { day: string; start_ts: number; time_label: string; starts_in: number };
 export type Notice = { id: string; kind: "friend_added" | "gang_added" | "cup_night"; ts: number; gang?: GangTag | null; night?: NightNote; from: PlayerCard };
-export type Inbox = { me: PlayerCard; room: string | null; cup: string | null; cups: CupNote[]; challenges: ChallengeNote[]; notices: Notice[] };
+export type Inbox = { me: PlayerCard; room: string | null; cup: string | null; cups: CupNote[]; challenges: ChallengeNote[]; notices: Notice[]; poll_s?: number };
 export type Friend = PlayerCard & { follows_you: boolean };
 
 export const shortSubject = (s?: string) => (s === "Mathematics" ? "Maths" : s || "");
@@ -53,18 +53,27 @@ export const useInbox = () => useSyncExternalStore(subscribe, read, read);
 /** Seconds since the inbox was read, to keep countdowns moving between polls. */
 export const inboxAge = () => (Date.now() - fetchedAt) / 1000;
 
-/** Keeps the player online and the challenge banner fresh while the app is open. Rests during a test. */
+/** Keeps the player online and the challenge banner fresh while the app is open. Rests during a test, looks rarely
+ *  during a live match (invitations can't be opened mid-match), and slows down when the server says it is packed. */
 export function InboxPoller() {
   const { user } = useAuth();
-  const inTest = (useSegments()[0] as string) === "attempt";
+  const seg = useSegments() as string[];
+  const inTest = seg[0] === "attempt";
+  const playing = seg[0] === "rapid" && ["duel", "session", "watch"].includes(seg[1] || "");
   const uid = user?.id;
   useEffect(() => {
     if (!uid) { inbox = null; emit(); return; }
     if (inTest) return;
-    refreshInbox(uid);
-    const iv = setInterval(() => { if (AppState.currentState === "active") refreshInbox(uid); }, 6000);
-    return () => clearInterval(iv);
-  }, [uid, inTest]);
+    let t: ReturnType<typeof setTimeout> | undefined, live = true;
+    // Every open app polls this: a random spread keeps the crowd from knocking in the same second.
+    const next = () => {
+      const base = Math.max(inbox?.poll_s || 8, playing ? 25 : 8);
+      t = setTimeout(async () => { if (AppState.currentState === "active") await refreshInbox(uid); if (live) next(); }, (base - 1 + Math.random() * 2) * 1000);
+    };
+    if (!playing || !inbox) refreshInbox(uid);
+    next();
+    return () => { live = false; clearTimeout(t); };
+  }, [uid, inTest, playing]);
   return null;
 }
 
@@ -110,7 +119,7 @@ export const useBadlaPending = (uid?: string) => useCached<{ items: BadlaRow[]; 
 export type NightCup = { id: string; no: number; size: number; status: string; code: string; mine: boolean; real_players: number; round: string | null;
   champion: { name: string; avatar?: string | null; frame?: string | null; bot: boolean; you: boolean } | null };
 export type CupNight = { day: string; now: number; start_ts: number; doors_ts: number; next_ts: number; phase: "soon" | "doors" | "live"; status: string; time_label: string; doors_label: string;
-  joined: boolean; missed?: boolean; count: number; friends: PlayerCard[]; my_cup: string | null; cups: NightCup[]; label: string; cards: number; seats: number; local: number };
+  joined: boolean; missed?: boolean; count: number; friends: PlayerCard[]; my_cup: string | null; cups: NightCup[]; cups_total?: number; label: string; cards: number; seats: number; local: number };
 /** `local` is the phone's clock when the answer came, so countdowns follow the server's clock, not the phone's. */
 export const useCupNight = (uid?: string) => useCached<CupNight>(uid ? `u.${uid}.rfnight` : null, () => rf<CupNight>("/cups/night", uid!).then((d) => ({ ...d, local: Date.now() / 1000 })), false);
 /** Notices that belong in the Gang tab list (the Cup Night reminder has its own banner). */

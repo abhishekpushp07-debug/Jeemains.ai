@@ -28,17 +28,16 @@ async def main(cmd):
         print("night cups with QA:", [c["id"] for c in cups], "duels:", len(duel_ids))
         r = await db.rf_cups.delete_many({"night": day, "players.uid": qa})
         print("deleted cups", r.deleted_count)
-        n = await db.rf_cup_nights.find_one({"_id": day})
-        others = [u for u in (n or {}).get("uids", []) if u != qa and not u.startswith("TEST")]
+        others = [s["uid"] for s in await db.rf_night_seats.find({"day": day}, {"uid": 1}).to_list(None) if s["uid"] != qa and not s["uid"].startswith("TEST")]
+        await db.rf_night_seats.delete_one({"_id": f"{day}:{qa}"})
         if others:
-            print("REAL players present; only pulling QA", len(others))
-            await db.rf_cup_nights.update_one({"_id": day}, {"$pull": {"uids": qa}})
+            print("REAL players present; only removed QA's seat", len(others))
         else:
             print("deleted night", (await db.rf_cup_nights.delete_one({"_id": day})).deleted_count)
     n = await db.rf_cup_nights.find_one({"_id": day})
     if n:
         n["start_in"] = round(n.get("start_ts", 0) - time.time())
-        n["uids"] = ["QA" if u == qa else u[:8] for u in n.get("uids", [])]
+        n["seats"] = ["QA" if s["uid"] == qa else s["uid"][:8] for s in await db.rf_night_seats.find({"day": day}, {"uid": 1}).to_list(50)]
     print("night:", n)
     print("QA active cups:", await db.rf_cups.find({"players.uid": qa, "status": {"$in": ["open", "live"]}}, {"_id": 0, "id": 1, "status": 1, "night": 1, "size": 1}).to_list(10))
 

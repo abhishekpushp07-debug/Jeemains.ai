@@ -124,6 +124,7 @@ async def _guard(db, api, u):
         await _cleanup_cups(db, cids)
         await db.rf_cups.delete_many({"night": day, "players.uid": {"$in": [x["uid"] for x in u.values()]}})
         await db.rf_cup_nights.delete_one({"_id": day})
+        await db.rf_night_seats.delete_many({"day": day})
 
 
 # lead-in: night round-1 duel starts ~30 s + show later than a normal cup's round-1 duel
@@ -162,3 +163,4 @@ async def _lead(db, api, u):
         await _cleanup_cups(db, cids)
         await db.rf_cups.delete_many({"night": day, "players.uid": {"$in": [x["uid"] for x in u.values()]}})
         await db.rf_cup_nights.delete_one({"_id": day})
+        await db.rf_night_seats.delete_many({"day": day})

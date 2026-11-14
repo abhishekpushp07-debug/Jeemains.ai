@@ -331,7 +331,7 @@ export async function rf<T = any>(path: string, userId: string, opts: { method?:
   clearTimeout(timer);
   if (res.status === 401 && retry) { rfGrant = null; return rf<T>(path, userId, opts, false); }
   const data = await res.json().catch(() => null);
-  if (!res.ok) throw new ApiError(typeof data?.detail === "string" ? data.detail : "Rapid Fire is unavailable right now. Retry.", res.status);
+  if (!res.ok) throw new ApiError(typeof data?.detail === "string" ? data.detail : "Rapid Fire is unavailable right now. Retry.", res.status, retryAfter(res), data?.code);
   if (opts.method && opts.method !== "GET") resources.invalidate(`u.${userId}.rf`);
   return data as T;
 }

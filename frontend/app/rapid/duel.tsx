@@ -21,6 +21,7 @@ import { GemFlare, gemAt, trailingStreak } from "@/src/rapid/StreakGem";
 import { ErrorBox, Icon, Press, Sheet, T, buzz, tap, withRapid } from "@/src/rapid/ui";
 import { go } from "@/src/rapid/social";
 import { encodePicks, picksFrom, scopeLabel } from "@/src/rapid/scope";
+import { ArenaWait, useArenaWait } from "@/src/rapid/ArenaWait";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
 type Params = { mode?: "random" | "ai"; subject?: string; chapter?: string; picks?: string; review?: string; did?: string };
@@ -66,7 +67,9 @@ function Match() {
   const anchor = useRef({ server: 0, mono: 0 });
   const startedAt = useRef(0), lastTick = useRef(0), hold = useRef(0), sending = useRef(false), outcomes = useRef<string[]>([]);
   const serverNow = () => anchor.current.server + (mono() - anchor.current.mono) / 1000;
-  const apply = useCallback((v: any) => { anchor.current = { server: v.server_now, mono: mono() }; setD(v); }, []);
+  // Live pushes leave out the 30 cards once this phone has them ("lite"): keep the ones we already hold.
+  const apply = useCallback((v: any) => { anchor.current = { server: v.server_now, mono: mono() }; setD((prev: any) => (v.cards === undefined && prev?.id === v.id ? { ...v, cards: prev.cards } : v)); }, []);
+  const seat = useArenaWait(() => setN((x) => x + 1));
 
   // Open, create or join once per intent (request_id makes retries safe).
   useEffect(() => {
@@ -78,7 +81,7 @@ function Match() {
       // Practice Rival: open a private match and seat the rival at once, no waiting.
       : p.mode === "ai" ? create("invite").then((v) => (v.status === "waiting" ? rf<any>(`/duels/${v.id}/bot`, uid, { method: "POST", body: {} }) : v))
       : create("random");
-    run.then((v) => alive && apply(v)).catch((e) => alive && setError(e.message));
+    run.then((v) => alive && apply(v)).catch((e) => { if (alive && !seat.hold(e)) setError(e.message); });
     return () => { alive = false; };
   }, [p.mode, p.subject, p.chapter, p.picks, p.review, p.did, uid, name, apply, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -93,18 +96,19 @@ function Match() {
   const over = !d?.id || d.status === "finished" || d.status === "cancelled" || d.status === "expired";
   useEffect(() => {
     if (over) return;
-    let ws: WebSocket | null = null, live = false, stop = false;
+    let ws: WebSocket | null = null, live = false, stop = false, tries = 0;
     let retry: ReturnType<typeof setTimeout> | undefined;
     const connect = () => {
       ws = new WebSocket(`${RF_BASE.replace(/^http/, "ws")}/duels/${d.id}/ws`);
-      ws.onopen = () => { rapidAccess(uid).then((token) => { if (!stop && ws?.readyState === WebSocket.OPEN) { ws.send(JSON.stringify({ token })); live = true; } }).catch(() => ws?.close()); };
+      ws.onopen = () => { rapidAccess(uid).then((token) => { if (!stop && ws?.readyState === WebSocket.OPEN) { ws.send(JSON.stringify({ token, lite: 1 })); live = true; tries = 0; } }).catch(() => ws?.close()); };
       ws.onmessage = (e) => { try { apply(JSON.parse(e.data)); } catch { /* not a state frame */ } };
-      ws.onclose = () => { live = false; if (!stop) retry = setTimeout(connect, 2000); };
+      // Back off with a random spread: after a server restart, thousands of phones must not reconnect in the same instant.
+      ws.onclose = () => { live = false; if (!stop) retry = setTimeout(connect, Math.min(15000, 1500 * 2 ** tries++) * (0.6 + Math.random() * 0.8)); };
       ws.onerror = () => ws?.close();
     };
     connect();
     const ping = setInterval(() => { if (live) ws?.send("p"); }, 20000);
-    const poll = setInterval(() => { if (!live) rf(`/duels/${d.id}`, uid).then(apply).catch(() => {}); }, 3000);
+    const poll = setInterval(() => { if (!live) rf(`/duels/${d.id}`, uid).then(apply).catch(() => {}); }, 2500 + Math.random() * 1000);
     return () => { stop = true; clearTimeout(retry); clearInterval(ping); clearInterval(poll); ws?.close(); };
   }, [d?.id, over, uid, apply]);
 
@@ -212,7 +216,8 @@ function Match() {
 
   let body: React.ReactNode = null;
   if (!d) {
-    body = error ? <View style={styles.middle}><ErrorBox testID="duel-error" error={error} retry={() => { setError(""); setN((x) => x + 1); }} /><RaisedButton testID="duel-back" tone="wine" label="Back to the Arena" onPress={back} style={styles.stretch} /></View>
+    body = seat.waiting ? <ArenaWait testID="duel-arena-wait" left={seat.left} onCancel={() => { seat.cancel(); back(); }} />
+      : error ? <View style={styles.middle}><ErrorBox testID="duel-error" error={error} retry={() => { setError(""); setN((x) => x + 1); }} /><RaisedButton testID="duel-back" tone="wine" label="Back to the Arena" onPress={back} style={styles.stretch} /></View>
       : <View style={styles.middle} testID="duel-loading"><ActivityIndicator color={arena.aqua} size="large" /><T w="bold" color={arena.muted}>Setting up your match…</T></View>;
   } else if (d.status === "waiting" && d.mode === "random") {
     body = <View style={styles.middle} testID="duel-waiting">

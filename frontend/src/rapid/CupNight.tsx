@@ -56,14 +56,14 @@ export function CupNightBanner({ uid, testID = "rf-cup-night" }: { uid: string; 
   const now = useServerNow(n);
   useFocusEffect(useCallback(() => {
     reload();
-    const iv = setInterval(reload, 20000);
+    const iv = setInterval(reload, 20000 + Math.random() * 5000);
     return () => clearInterval(iv);
   }, [reload]));
   const s = n ? nightState(n, now) : null, key = s?.key;
   useEffect(() => { if (key) reload(); }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (key !== "drawing") return;
-    const iv = setInterval(reload, 3000);
+    const iv = setInterval(reload, 3000 + Math.random() * 2000);
     return () => clearInterval(iv);
   }, [key, reload]);
   if (!n || !s) return null;

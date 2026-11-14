@@ -18,10 +18,10 @@ async def migrate_exam_data(db):
                 "exam": doc["exam"], "legacy_exam_split": True,
                 "exam_win": bool(doc.get("winner") == award["uid"] and award.get("reward", {}).get("coins", 0) >= 50)}})
     async for profile in db.rf_profiles.find({"legacy_exam_split_v1": {"$ne": True}}, {"_id": 0, "uid": 1}):
-        rows = await db.rf_awards.aggregate([
+        rows = await (await db.rf_awards.aggregate([
             {"$match": {"uid": profile["uid"], "legacy_exam_split": True}},
             {"$group": {"_id": "$exam", "xp": {"$sum": "$reward.xp"}, "wins": {"$sum": {"$cond": ["$exam_win", 1, 0]}}}},
-        ]).to_list(2)
+        ])).to_list(2)
         inc = {f"exam_stats.{r['_id']}.{key}": r[key] for r in rows for key in ("xp", "wins") if r["_id"] in ("JEE", "NEET")}
         await db.rf_profiles.update_one({"uid": profile["uid"], "legacy_exam_split_v1": {"$ne": True}},
                                         {"$set": {"legacy_exam_split_v1": True}, **({"$inc": inc} if inc else {})})

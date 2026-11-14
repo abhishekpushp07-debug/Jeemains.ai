@@ -3,18 +3,20 @@
 A room stays open for 3 minutes. It starts when the single invited friend accepts, when the host presses START,
 when all 5 seats are full, when everyone invited has answered, or at the 3-minute mark with whoever joined.
 """
+import asyncio
 import html
 import re
 import time
 import uuid
 from typing import List, Literal, Optional
 
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 
 from exam_groups import resolve_exam
+from load_guard import arena_gate, busy
 from scope import Pick, label_for, normalise, scope_fields, scope_of
 from social import blocked_uids, card, find_player, make_pid, public_name
 
@@ -163,7 +165,7 @@ def make_router(db, rf_user, seat_duel):
         await free(uid, keep=cid)
         return await view(c, uid)
 
-    @r.post("/challenges")
+    @r.post("/challenges", dependencies=[Depends(arena_gate)])
     async def create(data: RoomCreate, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         picks = normalise(data.picks, data.subject, data.chapter)
@@ -227,7 +229,7 @@ def make_router(db, rf_user, seat_duel):
         uid = rf_user(x_rf_user)
         return await view(await owned(cid, uid), uid)
 
-    @r.post("/challenges/{cid}/accept")
+    @r.post("/challenges/{cid}/accept", dependencies=[Depends(arena_gate)])
     async def accept(cid: str, x_rf_user: Optional[str] = Header(None)):
         return await join(cid, rf_user(x_rf_user))
 
@@ -268,17 +270,30 @@ def make_router(db, rf_user, seat_duel):
     async def inbox(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         now = time.time()
-        me = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"seen_ts": now, "pid": make_pid(uid)}}, upsert=True, return_document=after)
-        live = {"status": "open", "expires_ts": {"$gt": now}}
-        await db.rf_challenges.update_many({**live, "invites": {"$elemMatch": {"uid": uid, "status": "sent"}}}, {"$set": {"invites.$.status": "seen"}})
-        rooms = await db.rf_challenges.find({**live, "invites": {"$elemMatch": {"uid": uid, "status": "seen"}}}).sort("created_ts", -1).limit(3).to_list(3)
-        mine = await db.rf_challenges.find_one({"status": "open", "$or": [{"from_uid": uid}, {"invites": {"$elemMatch": {"uid": uid, "status": "joined"}}}]}, {"id": 1}, sort=[("created_ts", -1)])
-        notices = await db.rf_notices.find({"uid": uid, "done": False, "$or": [{"expires_ts": {"$exists": False}}, {"expires_ts": {"$gt": now}}]}).sort("ts", -1).limit(6).to_list(6)
-        people = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [c["from_uid"] for c in rooms] + [n["from_uid"] for n in notices]}}).to_list(12)}
-        cups = await db.rf_cups.find({"status": "open", "expires_ts": {"$gt": now}, "invites": uid, "players.uid": {"$ne": uid}}).sort("created_ts", -1).limit(2).to_list(2)
-        my_cup = await db.rf_cups.find_one({"players.uid": uid, "status": {"$in": ["open", "live"]}}, {"id": 1})
-        hosts = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [c["host_uid"] for c in cups]}}).to_list(2)} if cups else {}
+        # Every open app polls this, so it is kept to 4 reads run side by side: "online" is refreshed only when it is
+        # 20 s old (it lasts 60 s), challenges and cups each come from one query that answers two questions.
+        me, talks, notices, cupset = await asyncio.gather(
+            db.rf_profiles.find_one({"uid": uid}),
+            db.rf_challenges.find({"status": "open", "$or": [{"from_uid": uid}, {"invites.uid": uid}]}).sort("created_ts", -1).limit(20).to_list(20),
+            db.rf_notices.find({"uid": uid, "done": False, "$or": [{"expires_ts": {"$exists": False}}, {"expires_ts": {"$gt": now}}]}).sort("ts", -1).limit(6).to_list(6),
+            db.rf_cups.find({"status": {"$in": ["open", "live"]}, "$or": [{"invites": uid}, {"players.uid": uid}]},
+                            {"_id": 0, "id": 1, "label": 1, "size": 1, "status": 1, "expires_ts": 1, "host_uid": 1, "invites": 1, "players.uid": 1}).sort("created_ts", -1).limit(10).to_list(10))
+        if not me or not me.get("pid") or now - (me.get("seen_ts") or 0) > 20:
+            me = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"seen_ts": now, "pid": make_pid(uid)}}, upsert=True, return_document=after)
+        status_of = lambda c: next((i["status"] for i in c["invites"] if i["uid"] == uid), None)  # noqa: E731
+        rooms = [c for c in talks if c["expires_ts"] > now and status_of(c) in WAITING][:3]
+        mine = next((c for c in talks if c["from_uid"] == uid or status_of(c) == "joined"), None)
+        unseen = [c["id"] for c in rooms if status_of(c) == "sent"]
+        if unseen:  # the host sees "seen" once the invitation is on this player's screen
+            await db.rf_challenges.update_many({"id": {"$in": unseen}, "invites": {"$elemMatch": {"uid": uid, "status": "sent"}}}, {"$set": {"invites.$.status": "seen"}})
+        playing = lambda c: any(p["uid"] == uid for p in c["players"])  # noqa: E731
+        cups = [c for c in cupset if c["status"] == "open" and c["expires_ts"] > now and uid in (c.get("invites") or []) and not playing(c)][:2]
+        my_cup = next((c for c in cupset if playing(c)), None)
+        ids = list({c["from_uid"] for c in rooms} | {n["from_uid"] for n in notices} | {c["host_uid"] for c in cups})
+        people = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": ids}}).to_list(len(ids))} if ids else {}
+        hosts = people
         return {"me": card(me), "room": mine["id"] if mine else None, "cup": my_cup["id"] if my_cup else None,
+                "poll_s": 20 if busy() else 8,  # a packed server asks every phone to look less often; matches keep their speed
                 "cups": [{"id": c["id"], "label": c["label"], "size": c["size"], "joined": len(c["players"]), "expires_in": max(0, round(c["expires_ts"] - now)),
                           "from": card(hosts.get(c["host_uid"], {"uid": c["host_uid"]}))} for c in cups],
                 "challenges": [{"id": c["id"], "subject": c["subject"], "chapter": c.get("chapter"), "label": label_for(c), "revenge": bool(c.get("revenge")), "expires_in": max(0, round(c["expires_ts"] - now)), "joined": c.get("joined", 0) + 1,

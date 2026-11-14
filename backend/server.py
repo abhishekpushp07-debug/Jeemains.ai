@@ -1,8 +1,9 @@
-from fastapi import FastAPI, APIRouter, Request, Header, HTTPException
+from fastapi import FastAPI, APIRouter, Depends, Request, Header, HTTPException
 from fastapi.responses import Response, JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import AsyncMongoClient
+from pymongo.asynchronous.collection import AsyncCollection
 from pydantic import BaseModel, Field, BeforeValidator, ConfigDict
 from typing import Annotated, Literal, Optional, List
 from pathlib import Path
@@ -18,7 +19,8 @@ from marketing_media import router as marketing_router
 from legal_pages import router as legal_router
 from jl_transport import canonical_request
 from session_coordination import session_rotation
-from rf_access import make_access_router, install_access_guard
+from rf_access import make_access_router, install_access_guard, maintenance_on
+from load_guard import ArenaBusy, InflightCounter, arena_gate, busy_response, monitor as load_monitor, raise_fd_limit, snapshot as load_snapshot
 from rapid_deck import fresh_deck
 from scope import Pick, normalise, scope_fields
 from metadata_cache import metadata_cache
@@ -29,8 +31,27 @@ import asyncio, json, logging, os, re, time, uuid, httpx
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-client = AsyncIOMotorClient(os.environ['MONGO_URL'])
-db = client[os.environ['DB_NAME']]
+class Collections:
+    """`db.<name>` makes a new collection object on every access in PyMongo; the busiest paths do that thousands of
+    times a second, so each collection object is made once and reused. Everything else goes straight to the database."""
+    def __init__(self, database):
+        self._db = database
+
+    def __getattr__(self, name):
+        value = getattr(self._db, name)
+        if isinstance(value, AsyncCollection):
+            self.__dict__[name] = value
+        return value
+
+    def __getitem__(self, name):
+        return self._db[name]
+
+
+# Native PyMongo async driver: no thread pool per query (about half the CPU of Motor per database call).
+# 40 connections per process are plenty for async calls of 1-2 ms, and keep many servers x processes inside the
+# database's connection limit (a full pool on every process of a big fleet would be refused by the database).
+client = AsyncMongoClient(os.environ['MONGO_URL'], maxPoolSize=int(os.environ.get('MONGO_MAX_POOL', '40')))
+db = Collections(client[os.environ['DB_NAME']])
 JEELIVE_API = os.environ['JEELIVE_API'].rstrip('/')
 CARDS_DIR = ROOT_DIR / 'rapidfire' / 'cards'
 
@@ -67,9 +88,8 @@ def now_iso():
     return datetime.now(timezone.utc).isoformat()
 
 
-# ---------- JEELIVE proxy (web preview only; native talks to jeelive.ai directly) ----------
+# ---------- JEELIVE proxy (every platform signs in through here) ----------
 http: httpx.AsyncClient | None = None
-JAR_CACHE: dict[str, dict] = {}
 SID_RE = re.compile(r"^[A-Za-z0-9-]{16,64}$")
 PASS_HEADERS = ("content-type", "retry-after", "location", "cache-control", "etag", "last-modified", "content-range", "accept-ranges")
 
@@ -81,15 +101,13 @@ class CookieJar(BaseDocument):
 
 
 async def load_jar(sid: str) -> dict:
-    if sid in JAR_CACHE:
-        return JAR_CACHE[sid]
-    jar = CookieJar.from_mongo(await db.jl_jars.find_one({"sid": sid}))
-    JAR_CACHE[sid] = jar.cookies if jar else {}
-    return JAR_CACHE[sid]
+    # Always read from Mongo (one indexed read): with several server processes a per-process copy could send a
+    # refresh cookie another process has just rotated, which signs the student out.
+    jar = CookieJar.from_mongo(await db.jl_jars.find_one({"sid": sid}, {"_id": 0, "sid": 1, "cookies": 1}))
+    return jar.cookies if jar else {}
 
 
 async def save_jar(sid: str, cookies: dict):
-    JAR_CACHE[sid] = cookies
     await db.jl_jars.update_one({"sid": sid}, {"$set": CookieJar(sid=sid, cookies=cookies).to_mongo()}, upsert=True)
 
 
@@ -114,7 +132,7 @@ def apply_set_cookies(cookies: dict, headers: httpx.Headers) -> bool:
 async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)):
     if not SID_RE.match(x_jl_sid):
         raise HTTPException(400, "Invalid session handle.")
-    async with session_rotation(x_jl_sid, path):
+    async with session_rotation(db, x_jl_sid, path):
         return await forward_jeelive(path, request, x_jl_sid)
 
 
@@ -229,7 +247,7 @@ CARD_MTIMES: dict[str, float] = {}
 
 async def sync_cards():
     from pymongo import UpdateOne
-    if await db.rf_maintenance.find_one({'_id': 'portrait-cleanup', 'active': True}):
+    if await maintenance_on(db):
         return
     changed = False
     # NEET is a preserved archive, not an actively synced/live bank in this app.
@@ -276,7 +294,7 @@ async def rf_catalog(exam: Optional[Exam] = None):
     exam = require_active_exam(exam)
     async def load():
         scope = {"exam": exam}
-        rows = await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}, **scope}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}, "diagrams": {"$sum": {"$cond": [{"$ifNull": ["$diagram", False]}, 1, 0]}}}}]).to_list(1000)
+        rows = await (await db.rf_cards.aggregate([{"$match": {"retired": {"$ne": True}, **scope}}, {"$group": {"_id": {"s": "$subject", "c": "$chapter"}, "n": {"$sum": 1}, "diagrams": {"$sum": {"$cond": [{"$ifNull": ["$diagram", False]}, 1, 0]}}}}])).to_list(1000)
         order = {subject: chapters for subject, chapters in json.loads((ROOT_DIR / "rapidfire" / "chapters.json").read_text()).items() if subject in SUBJECTS[exam]}
         counts = {(r["_id"]["s"], r["_id"]["c"]): r["n"] for r in rows}
         return {"exam": exam, "diagram_count": sum(r["diagrams"] for r in rows), "subjects": [{"name": s, "total": sum(counts.get((s, c), 0) for c in chs),
@@ -292,7 +310,7 @@ def public_card(c: Card) -> dict:
     return c.model_dump(exclude={"mongo_id", "syllabus"})
 
 
-@api.post("/rf/sessions")
+@api.post("/rf/sessions", dependencies=[Depends(arena_gate)])
 async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
     scope = None if data.revision or data.card_ids else scope_fields(normalise(data.picks, data.subject, data.chapter))
@@ -394,9 +412,9 @@ async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Hea
            await db.rf_awards.find({"uid": uid, "ref": {"$in": ["solo:" + d["id"] for d in docs]}}, {"_id": 0, "ref": 1, "reward.diamonds": 1}).to_list(20)}
     for d in docs:
         d["diamonds"] = won.get("solo:" + d["id"], {})
-    agg = await db.rf_sessions.aggregate([{"$match": query},
+    agg = await (await db.rf_sessions.aggregate([{"$match": query},
                                           {"$group": {"_id": None, "sessions": {"$sum": 1}, "correct": {"$sum": "$summary.correct"},
-                                                      "cards": {"$sum": "$summary.total"}}}]).to_list(1)
+                                                      "cards": {"$sum": "$summary.total"}}}])).to_list(1)
     totals = agg[0] if agg else {"sessions": 0, "correct": 0, "cards": 0}
     totals.pop("_id", None)
     return {"items": docs, "totals": totals}
@@ -440,22 +458,30 @@ api.include_router(make_owner_downloads(db))
 api.include_router(branding_router)
 api.include_router(marketing_router)
 api.include_router(legal_router)
-api.include_router(make_access_router(db))
+api.include_router(make_access_router(db, lambda: http))
 app.include_router(api)
 install_access_guard(app, db)
 app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
 app.add_middleware(ServerTiming)
-app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=allowed_origins(), allow_methods=["*"], allow_headers=["*"], expose_headers=['Server-Timing', 'X-Cache'])
+app.add_middleware(InflightCounter)
+app.add_exception_handler(ArenaBusy, busy_response)
+app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=allowed_origins(), allow_methods=["*"], allow_headers=["*"], expose_headers=['Server-Timing', 'X-Cache', 'Retry-After'])
+
+
+@app.get("/api/health/load", include_in_schema=False)
+async def health_load():
+    """This process's load (no player data): event-loop delay, requests in flight, live sockets, whether new matches wait."""
+    return JSONResponse(load_snapshot(), headers={"Cache-Control": "no-store"})
 
 
 async def cup_night_loop():
-    """Cup Night starts at 8 pm IST on its own: every 10 seconds, seat tonight's cups once their moment has come."""
+    """Cup Night starts at 8 pm IST on its own: every 3 seconds, seat tonight's cups once their moment has come."""
     while True:
         try:
             await cups_router.night_tick()
         except Exception:  # noqa: BLE001 - a bad tick must never stop the next one
             logging.getLogger(__name__).exception("cup night tick failed")
-        await asyncio.sleep(10)
+        await asyncio.sleep(3)
 
 
 async def backfill_cup_crowns():
@@ -463,7 +489,7 @@ async def backfill_cup_crowns():
     if await db.rf_meta.find_one({"_id": "cup_crowns_v1"}):
         return
     humans = {"$size": {"$filter": {"input": "$players", "cond": {"$ne": ["$$this.bot", True]}}}}
-    rows = db.rf_cups.aggregate([{"$match": {"status": "finished", "champion": {"$type": "string"}}},
+    rows = await db.rf_cups.aggregate([{"$match": {"status": "finished", "champion": {"$type": "string"}}},
                                  {"$group": {"_id": "$champion", "won": {"$sum": 1}, "real": {"$sum": {"$cond": [{"$gt": [humans, 1]}, 1, 0]}}}}])
     async for row in rows:
         if not row["_id"].startswith("bot-"):
@@ -475,8 +501,14 @@ async def backfill_cup_crowns():
 @app.on_event("startup")
 async def startup():
     global http
+    raise_fd_limit()  # one open file per player socket: the 1024 default capped a process at ~1000 players
+    asyncio.create_task(load_monitor())
+    if os.environ.get("RF_ACCESS_LOG") != "1":  # a log line per request costs real CPU at crowd scale
+        logging.getLogger("uvicorn.access").setLevel(logging.WARNING)
+        logging.getLogger("uvicorn.error").setLevel(logging.WARNING)
     http = httpx.AsyncClient(http2=True, timeout=httpx.Timeout(30.0, connect=10.0),
-                             limits=httpx.Limits(max_connections=200, max_keepalive_connections=50, keepalive_expiry=45.0))
+                             limits=httpx.Limits(max_connections=int(os.environ.get("JL_MAX_CONNECTIONS", "400")),
+                                                 max_keepalive_connections=int(os.environ.get("JL_KEEPALIVE_CONNECTIONS", "100")), keepalive_expiry=45.0))
     # Never persist upstream cookies on the shared client; each sid has its own jar (prevents cross-user session leak)
     http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[]))
     await db.rf_cards.create_index("id", unique=True)
@@ -487,6 +519,9 @@ async def startup():
     await db.rf_sessions.create_index("id", unique=True)
     await db.rf_sessions.create_index([("user_id", 1), ("status", 1), ("completed_at", -1)])
     await db.jl_jars.create_index("sid", unique=True)
+    await db.jl_locks.create_index("until", expireAfterSeconds=60)
+    await db.rf_night_seats.create_index([("day", 1), ("group", 1)])
+    await db.rf_night_seats.create_index([("day", 1), ("ts", 1)])
     await db.pin_resets.create_index([("phone", 1), ("at", -1)])
     await db.pin_resets.create_index([("ip", 1), ("at", -1)])
     await db.rf_duels.create_index("id", unique=True)
@@ -529,9 +564,14 @@ async def startup():
     await db.rf_cups.create_index("code", unique=True, partialFilterExpression={"code": {"$type": "string"}})
     await db.rf_cups.create_index([("champion", 1), ("status", 1), ("finished_ts", -1)], sparse=True)
     await db.rf_cups.create_index("night", sparse=True)
+    await db.rf_cups.create_index([("night", 1), ("night_no", 1)], sparse=True)
     await backfill_cup_crowns()
+    await cups_router.migrate_nights()
     asyncio.create_task(cup_night_loop())
     await db.rf_duels.create_index([("team_mode", 1), ("status", 1)], sparse=True)
+    # Spectators of a live match, shared by every server (count + 100-watcher limit); rows vanish a minute after the last look.
+    await db.rf_watch.create_index([("did", 1), ("ts", 1)])
+    await db.rf_watch.create_index("at", expireAfterSeconds=60)
     # Feed rows are kept (reads already show only the last 7 days); retire the old auto-delete index if present.
     if "at_1" in await db.rf_feed.index_information():
         await db.rf_feed.drop_index("at_1")
@@ -544,13 +584,14 @@ async def startup():
     from exam_migration import migrate_exam_data
     await migrate_exam_data(db)
     # Duel live channel must be a capped collection before any event is written (see duels.py tail()).
+    from duels import EVENTS_BYTES, EVENTS_MAX
     if "rf_events" not in await db.list_collection_names():
         try:
-            await db.create_collection("rf_events", capped=True, size=32 * 1024 * 1024, max=200000)
+            await db.create_collection("rf_events", capped=True, size=EVENTS_BYTES, max=EVENTS_MAX)
         except Exception:  # noqa: BLE001
             pass
     elif not (await db.rf_events.options()).get("capped"):
-        await db.command("convertToCapped", "rf_events", size=32 * 1024 * 1024)
+        await db.command("convertToCapped", "rf_events", size=EVENTS_BYTES)
     asyncio.create_task(card_sync_loop())
 
 
@@ -559,4 +600,4 @@ async def shutdown():
     await metadata_cache.close()
     if http:
         await http.aclose()
-    client.close()
+    await client.close()

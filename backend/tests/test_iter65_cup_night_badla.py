@@ -91,6 +91,7 @@ async def _split(db, api, u):
     finally:
         await db.rf_cups.delete_many({"night": day, "players.uid": {"$in": [x["uid"] for x in u.values()]}})
         await db.rf_cup_nights.delete_one({"_id": day})
+        await db.rf_night_seats.delete_many({"day": day})
 
 
 # Badla: 3-player and team duels never count; a ghost (non-friend) is never listed

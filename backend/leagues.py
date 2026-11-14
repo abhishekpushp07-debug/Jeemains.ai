@@ -93,7 +93,7 @@ def make_router(db, rf_user):
         hit = top_cache.get("t")
         if hit and time.time() - hit[0] < 20:
             return hit[1]
-        rows = await db.rf_duels.aggregate([*totals, order, {"$limit": BOARD_SIZE}]).to_list(BOARD_SIZE)
+        rows = await (await db.rf_duels.aggregate([*totals, order, {"$limit": BOARD_SIZE}])).to_list(BOARD_SIZE)
         top_cache["t"] = (time.time(), rows)
         return rows
 
@@ -108,9 +108,9 @@ def make_router(db, rf_user):
                   "score": x["score"], "matches": x["matches"], "wins": x["wins"], "you": x["_id"] == uid, "crown": crown_of(profs.get(x["_id"]) or {})} for i, x in enumerate(rows)]
         me = next((x for x in items if x["you"]), None)
         if not me:
-            mine = await db.rf_duels.aggregate([{"$match": {"team_mode": True, "status": "finished", "players.uid": uid}}, *totals[1:], {"$match": {"_id": uid}}]).to_list(1)
+            mine = await (await db.rf_duels.aggregate([{"$match": {"team_mode": True, "status": "finished", "players.uid": uid}}, *totals[1:], {"$match": {"_id": uid}}])).to_list(1)
             if mine:
-                ahead = await db.rf_duels.aggregate([*totals, {"$match": {"$or": [{"score": {"$gt": mine[0]["score"]}}, {"score": mine[0]["score"], "wins": {"$gt": mine[0]["wins"]}}]}}, {"$count": "n"}]).to_list(1)
+                ahead = await (await db.rf_duels.aggregate([*totals, {"$match": {"$or": [{"score": {"$gt": mine[0]["score"]}}, {"score": mine[0]["score"], "wins": {"$gt": mine[0]["wins"]}}]}}, {"$count": "n"}])).to_list(1)
                 me = {"rank": (ahead[0]["n"] if ahead else 0) + 1, "score": mine[0]["score"], "matches": mine[0]["matches"], "wins": mine[0]["wins"]}
         return {"items": items, "you": {k: me[k] for k in ("rank", "score", "matches", "wins")} if me else None, "size": BOARD_SIZE}
 

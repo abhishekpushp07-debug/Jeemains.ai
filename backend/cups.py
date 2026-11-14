@@ -4,6 +4,8 @@ Open Cup: 4, 8 or 16 seats, anyone can join; practice rivals take the seats nobo
 for the host's friends or one of their gangs; the host may start early and empty seats become byes. The cup moves on by
 itself as soon as a round is decided. Every cup has a 6-letter watch code: up to 100 people can follow it live.
 """
+import asyncio
+import logging
 import os
 import random
 import secrets
@@ -12,18 +14,20 @@ import uuid
 from datetime import datetime, timedelta, timezone
 from typing import List, Literal, Optional
 
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
-from pymongo import ReturnDocument
+from pymongo import ReturnDocument, UpdateOne
 from pymongo.errors import DuplicateKeyError
 
 from exam_groups import resolve_exam
+from load_guard import arena_gate
 from gamify import crown_of
 from scope import Pick, normalise, scope_fields, scope_of
 from shop import rival_profile
 from social import blocked_uids, card, find_player
 
 CUP_CARDS = 15
+log = logging.getLogger("cups")
 LOBBY_SECONDS = {"open": 40, "private": 300}
 BREAK_SECONDS = 10  # between two rounds, so winners can catch their breath
 ACTIVE = ["open", "live"]
@@ -87,9 +91,11 @@ def make_router(db, rf_user, duels):
     r = APIRouter(prefix="/rf/cups")
     after = ReturnDocument.AFTER
 
+    def seat_of(p):
+        return {"uid": p["uid"], **{k: card(p)[k] for k in SHOWN}, "ts": time.time()}
+
     async def seat(uid):
-        p = await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid}
-        return {"uid": uid, **{k: card(p)[k] for k in SHOWN}, "ts": time.time()}
+        return seat_of(await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid})
 
     def rival_seat():
         rival = rival_profile()
@@ -278,94 +284,193 @@ def make_router(db, rf_user, duels):
                            "champion": name(c, c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0), "gems_won": (c.get("gems") or {}).get(uid, {}), "night": bool(c.get("night"))} for c in docs]}
 
     # ---------- Cup Night: every day at 8 pm IST ----------
-    async def seat_night(n):
-        """8 pm: everybody who joined is drawn into cups of up to 16 (evenly split); practice rivals fill the empty seats."""
-        got = await db.rf_cup_nights.find_one_and_update({"_id": n["_id"], "status": "open"}, {"$set": {"status": "seating", "seating_ts": time.time()}}, return_document=after)
-        if not got:
-            return await db.rf_cup_nights.find_one({"_id": n["_id"]})
-        busy = {p["uid"] for c in await db.rf_cups.find({"players.uid": {"$in": got["uids"]}, "status": {"$in": ACTIVE}}, {"_id": 0, "players.uid": 1}).to_list(500) for p in c["players"]}
-        uids = [u for u in got["uids"] if u not in busy]  # already in another cup: that one comes first
-        missed = [u for u in got["uids"] if u in busy]  # told on the Cup Night screen why they were not drawn
-        random.Random(got["_id"]).shuffle(uids)
-        k, ids, at = -(-len(uids) // NIGHT_SEATS), [], 0
+    # Every seat is its own small document in rf_night_seats ({day}:{uid}), so a night with 100,000 students never becomes
+    # one huge document that every phone reads. The 8 pm draw runs in the background on one server process; it writes the
+    # groups to the seats first, so another process can finish the draw if this one stops half-way.
+    nights, counts, lists = {}, {}, {}  # day -> (read_at, value): tiny per-process caches shared by everybody polling
+
+    def seat_key(day, uid):
+        return f"{day}:{uid}"
+
+    async def night_doc(day, start, fresh_=False):
+        hit = nights.get(day)
+        if hit and not fresh_ and time.monotonic() - hit[0] < 1:
+            return hit[1]
+        n = await db.rf_cup_nights.find_one({"_id": day}, {"uids": 0, "missed": 0, "cups": 0}) or {"_id": day, "status": "open", "start_ts": start, "new": True}
+        nights[day] = (time.monotonic(), n)
+        return n
+
+    async def seat_count(day):
+        hit = counts.get(day)
+        if hit and time.monotonic() - hit[0] < 3:
+            return hit[1]
+        n = await db.rf_night_seats.count_documents({"day": day})
+        counts[day] = (time.monotonic(), n)
+        return n
+
+    async def night_list(day):
+        """The first 20 cups of the night (the same for everybody); a player's own cup is added to it separately."""
+        hit = lists.get(day)
+        if hit and time.monotonic() - hit[0] < 2:
+            return hit[1]
+        rows = await db.rf_cups.find({"night": day}, {"_id": 0, "id": 1, "night_no": 1, "size": 1, "status": 1, "code": 1, "round": 1, "rounds": 1, "champion": 1,
+                                                      "players.uid": 1, "players.name": 1, "players.avatar": 1, "players.frame": 1, "players.bot": 1}).sort("night_no", 1).limit(20).to_list(20)
+        lists[day] = (time.monotonic(), rows)
+        return rows
+
+    async def draw(day):
+        """8 pm: everybody with a seat is drawn into cups of up to 16 (evenly split); practice rivals fill the empty seats."""
+        n = await db.rf_cup_nights.find_one({"_id": day}, {"uids": 0})
+        if not n.get("groups_ready"):
+            uids = [s["uid"] for s in await db.rf_night_seats.find({"day": day}, {"_id": 0, "uid": 1}).sort("uid", 1).to_list(None)]
+            busy = set()
+            for i in range(0, len(uids), 1000):  # already in another cup: that one comes first
+                chunk = set(uids[i:i + 1000])
+                async for c in db.rf_cups.find({"players.uid": {"$in": list(chunk)}, "status": {"$in": ACTIVE}, "night": {"$ne": day}}, {"_id": 0, "players.uid": 1}):
+                    busy |= {p["uid"] for p in c["players"]} & chunk
+            drawn = [u for u in uids if u not in busy]
+            random.Random(day).shuffle(drawn)
+            k, at, ops = -(-len(drawn) // NIGHT_SEATS), 0, []
+            for i in range(k):
+                size = len(drawn) // k + (1 if i < len(drawn) % k else 0)
+                ops += [UpdateOne({"_id": seat_key(day, u)}, {"$set": {"group": i + 1, "pos": pos}}) for pos, u in enumerate(drawn[at:at + size])]
+                at += size
+            ops += [UpdateOne({"_id": seat_key(day, u)}, {"$set": {"missed": True}}) for u in uids if u in busy]  # told on the Cup Night screen
+            for i in range(0, len(ops), 1000):
+                await db.rf_night_seats.bulk_write(ops[i:i + 1000], ordered=False)
+            n = await db.rf_cup_nights.find_one_and_update({"_id": day}, {"$set": {"groups_ready": True, "groups": k, "seated": len(drawn)}}, projection={"uids": 0}, return_document=after)
         picks = normalise(NIGHT_PICKS)
         exam, scope = resolve_exam("JEE", picks[0]["subject"]), scope_fields(picks)
-        for i in range(k):
-            group = uids[at:at + len(uids) // k + (1 if i < len(uids) % k else 0)]
-            at += len(group)
-            now = time.time()
-            c = {"id": f"night-{got['_id']}-{i + 1}", "kind": "open", "night": got["_id"], "night_no": i + 1, "size": 4 if len(group) <= 4 else 8 if len(group) <= 8 else 16,
-                 "host_uid": group[0], "exam": exam, **scope, "status": "open", "created_ts": now, "expires_ts": now, "gang_id": None, "invites": [],
-                 "players": [await seat(u) for u in group], "spectators": [], "rounds": [], "round": -1}
-            if not await db.rf_cups.find_one({"id": c["id"]}, {"_id": 1}):
-                await insert(c)
-            await settle(await fresh(c["id"]))  # the lobby is already over: the draw is made and round 1 starts
-            ids.append(c["id"])
-        return await db.rf_cup_nights.find_one_and_update({"_id": got["_id"]}, {"$set": {"status": "seated", "cups": ids, "seated": len(uids), "missed": missed}}, return_document=after)
+
+        async def open_cup(no):
+            cid = f"night-{day}-{no}"
+            if not await db.rf_cups.find_one({"id": cid}, {"_id": 1}):
+                uids = [s["uid"] for s in await db.rf_night_seats.find({"day": day, "group": no}, {"_id": 0, "uid": 1, "pos": 1}).sort("pos", 1).to_list(NIGHT_SEATS)]
+                if not uids:
+                    return
+                profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": uids}}).to_list(len(uids))}
+                now = time.time()
+                await insert({"id": cid, "kind": "open", "night": day, "night_no": no, "size": 4 if len(uids) <= 4 else 8 if len(uids) <= 8 else 16,
+                              "host_uid": uids[0], "exam": exam, **scope, "status": "open", "created_ts": now, "expires_ts": now, "gang_id": None, "invites": [],
+                              "players": [seat_of(profs.get(u) or {"uid": u}) for u in uids], "spectators": [], "rounds": [], "round": -1})
+            await settle(await fresh(cid))  # the lobby is already over: the draw is made and round 1 starts
+            await db.rf_night_seats.update_many({"day": day, "group": no}, {"$set": {"cup": cid}})
+
+        todo = list(range(1, n.get("groups", 0) + 1))
+        for i in range(0, len(todo), 25):  # 25 cups at a time; each finished batch tells the other servers this draw is alive
+            for res in await asyncio.gather(*(open_cup(no) for no in todo[i:i + 25]), return_exceptions=True):
+                if isinstance(res, Exception):
+                    log.warning("cup night seating failed: %s", res)
+            await db.rf_cup_nights.update_one({"_id": day}, {"$set": {"seating_ts": time.time()}})
+        lists.pop(day, None)
+        await db.rf_cup_nights.update_one({"_id": day}, {"$set": {"status": "seated", "cups_n": len(todo)}})
+        nights.pop(day, None)
+
+    drawing = {}  # day -> the draw task this process is running
 
     async def night_now():
         now = time.time()
         day, start = night_of(now)
-        n = await db.rf_cup_nights.find_one({"_id": day}) or {"_id": day, "uids": [], "status": "open"}
+        n = await night_doc(day, start)
         start = n.get("start_ts", start)  # a night keeps the start it was opened with
-        if now >= start and n["status"] == "open" and n["uids"]:
-            n = await seat_night(n)
-        elif n["status"] == "seating" and now - n.get("seating_ts", now) > 60:  # the seating request died half-way: keep what was seated
-            ids = [c["id"] for c in await db.rf_cups.find({"night": day}, {"_id": 0, "id": 1}).to_list(100)]
-            n = await db.rf_cup_nights.find_one_and_update({"_id": day}, {"$set": {"status": "seated", "cups": ids}}, return_document=after)
-        return n, now, day, start
+        if now >= start and n.get("status") == "open" and not n.get("new"):
+            # The background tick draws within 3 s anyway; a look at the right moment starts it at once and waits briefly,
+            # so a small night is drawn before this answer. A huge one keeps drawing in the background ("seating").
+            task = drawing.get(day)
+            if not task or task.done():
+                task = drawing[day] = asyncio.create_task(night_tick())
+            try:
+                await asyncio.wait_for(asyncio.shield(task), timeout=3)
+            except Exception:  # noqa: BLE001  (still drawing, or failed: the tick loop finishes it)
+                pass
+            n = await night_doc(day, start, fresh_=True)
+        return n, now, day, n.get("start_ts", start)
 
     async def night_tick():
-        """Called every few seconds by the server: the 7:55 pm reminder, then seats tonight's Cup Night at 8 pm even if nobody has the app open."""
-        n, now, day, start = await night_now()
-        if n.get("status") == "open" and n.get("uids") and not n.get("reminded") and 0 < start - now <= NIGHT_REMIND:
-            got = await db.rf_cup_nights.find_one_and_update({"_id": day, "status": "open", "reminded": {"$ne": True}}, {"$set": {"reminded": True}}, return_document=after)
-            if got and got["uids"]:  # once per night, to everybody holding a seat at that moment
-                await db.rf_notices.insert_many([{"id": str(uuid.uuid4()), "uid": u, "from_uid": u, "kind": "cup_night", "ts": now, "done": False, "expires_ts": start + 120,
-                                                  "night": {"day": day, "start_ts": start, "time_label": ist_time(start)}} for u in got["uids"]])
+        """Called every few seconds by every server: the 7:55 pm reminder, then the 8 pm draw (one server does it), even if nobody has the app open."""
+        now = time.time()
+        day, start = night_of(now)
+        n = await night_doc(day, start, fresh_=True)
+        if n.get("new"):
+            return
+        start = n.get("start_ts", start)
+        if n.get("status") == "open" and not n.get("reminded") and 0 < start - now <= NIGHT_REMIND:
+            if await db.rf_cup_nights.find_one_and_update({"_id": day, "status": "open", "reminded": {"$ne": True}}, {"$set": {"reminded": True}}):
+                batch = []  # once per night, to everybody holding a seat at that moment
+                async for s in db.rf_night_seats.find({"day": day}, {"_id": 0, "uid": 1}):
+                    batch.append({"id": str(uuid.uuid4()), "uid": s["uid"], "from_uid": s["uid"], "kind": "cup_night", "ts": now, "done": False, "expires_ts": start + 120,
+                                  "night": {"day": day, "start_ts": start, "time_label": ist_time(start)}})
+                    if len(batch) == 1000:
+                        await db.rf_notices.insert_many(batch)
+                        batch = []
+                if batch:
+                    await db.rf_notices.insert_many(batch)
+        if now >= start and n.get("status") == "open":
+            if await db.rf_cup_nights.find_one_and_update({"_id": day, "status": "open"}, {"$set": {"status": "seating", "seating_ts": now}}, projection={"_id": 1}):
+                await draw(day)
+        elif n.get("status") == "seating" and now - n.get("seating_ts", now) > 60:  # the server drawing tonight stopped: finish its draw
+            if await db.rf_cup_nights.find_one_and_update({"_id": day, "status": "seating", "seating_ts": n.get("seating_ts")}, {"$set": {"seating_ts": now}}, projection={"_id": 1}):
+                await draw(day)
 
     r.night_tick = night_tick
 
+    async def migrate_nights():
+        """Once: nights stored the old way (every seat in one `uids` list) move to one seat document each."""
+        async for n in db.rf_cup_nights.find({"uids": {"$exists": True}}):
+            day, missed = n["_id"], set(n.get("missed") or [])
+            cup_of = {p["uid"]: c["id"] for c in await db.rf_cups.find({"night": day}, {"_id": 0, "id": 1, "players.uid": 1}).to_list(None) for p in c["players"]}
+            ops = [UpdateOne({"_id": seat_key(day, u)}, {"$setOnInsert": {"day": day, "uid": u, "ts": k, **({"missed": True} if u in missed else {}), **({"cup": cup_of[u]} if u in cup_of else {})}}, upsert=True)
+                   for k, u in enumerate(n["uids"])]
+            if ops:
+                await db.rf_night_seats.bulk_write(ops, ordered=False)
+            done = {"groups_ready": True, "cups_n": len(n.get("cups") or [])} if n.get("status") in ("seated", "seating") else {}
+            await db.rf_cup_nights.update_one({"_id": day}, {"$unset": {"uids": "", "missed": ""}, **({"$set": done} if done else {})})
+
+    r.migrate_nights = migrate_nights
+
     @r.get("/night")
     async def night(x_rf_user: Optional[str] = Header(None)):
-        """Tonight's Cup Night: the countdown, who has joined (your friends first), and after 8 pm every cup with its champion."""
+        """Tonight's Cup Night: the countdown, who has joined (your friends first), and after 8 pm the cups with their champions."""
         uid = rf_user(x_rf_user)
         n, now, day, start = await night_now()
-        joined = n.get("uids") or []
-        fids = {e["fid"] for e in await db.rf_friends.find({"uid": uid, "fid": {"$in": joined}}, {"_id": 0, "fid": 1}).to_list(500)} - await blocked_uids(db, uid) if joined else set()
-        friends = [{k: card(p)[k] for k in SHOWN} for p in await db.rf_profiles.find({"uid": {"$in": list(fids)[:12]}}).to_list(12)]
-        cups, my_cup = [], None
-        if n.get("cups"):
-            docs = await db.rf_cups.find({"id": {"$in": n["cups"]}}, {"_id": 0, "id": 1, "night_no": 1, "size": 1, "status": 1, "code": 1, "round": 1, "rounds": 1, "champion": 1,
-                                                                    "players.uid": 1, "players.name": 1, "players.avatar": 1, "players.frame": 1, "players.bot": 1}).to_list(100)
-            for c in sorted(docs, key=lambda c: c.get("night_no", 0)):
-                if any(p["uid"] == uid for p in c["players"]):
-                    my_cup = c["id"]
+        mine_seat = await db.rf_night_seats.find_one({"_id": seat_key(day, uid)}, {"_id": 0, "cup": 1, "missed": 1})
+        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)]
+        seated = {s["uid"] for s in await db.rf_night_seats.find({"_id": {"$in": [seat_key(day, f) for f in fids]}}, {"_id": 0, "uid": 1}).to_list(500)} if fids else set()
+        seated -= await blocked_uids(db, uid) if seated else set()
+        friends = [{k: card(p)[k] for k in SHOWN} for p in await db.rf_profiles.find({"uid": {"$in": list(seated)[:12]}}).to_list(12)]
+        cups, my_cup = [], (mine_seat or {}).get("cup")
+        if n.get("status") in ("seating", "seated"):
+            rows = list(await night_list(day))
+            if my_cup and all(c["id"] != my_cup for c in rows):
+                own = await db.rf_cups.find_one({"id": my_cup}, {"_id": 0})
+                rows = [own] + rows if own else rows
+            for c in rows:
                 champ = next((p for p in c["players"] if p["uid"] == c.get("champion")), None)
                 left = len(c["rounds"][c["round"]]) if c["status"] == "live" and c.get("rounds") and 0 <= c["round"] < len(c["rounds"]) else 0
                 cups.append({"id": c["id"], "no": c.get("night_no"), "size": c["size"], "status": c["status"], "code": c.get("code"), "mine": c["id"] == my_cup,
                              "real_players": sum(not p.get("bot") for p in c["players"]), "round": ROUND_NAMES.get(left) if left else None,
                              "champion": {k: champ.get(k) for k in ("name", "avatar", "frame")} | {"bot": bool(champ.get("bot")), "you": champ["uid"] == uid} if champ else None})
         phase = "soon" if now < start - DOORS_SECONDS else "doors" if now < start else "live"
+        count = n["seated"] if n["status"] == "seated" and "seated" in n else await seat_count(day)
         return {"day": day, "now": now, "start_ts": start, "doors_ts": start - DOORS_SECONDS, "next_ts": start + 86400, "phase": phase, "status": n["status"],
-                "time_label": ist_time(start), "doors_label": ist_time(start - DOORS_SECONDS),
-                "joined": uid in joined, "missed": uid in (n.get("missed") or []), "count": n.get("seated", len(joined)) if n["status"] == "seated" else len(joined), "friends": friends, "my_cup": my_cup, "cups": cups, "label": "PCM Mixed", "cards": CUP_CARDS, "seats": NIGHT_SEATS}
+                "time_label": ist_time(start), "doors_label": ist_time(start - DOORS_SECONDS), "joined": bool(mine_seat), "missed": bool((mine_seat or {}).get("missed")),
+                "count": count, "friends": friends, "my_cup": my_cup, "cups": cups, "cups_total": max(n.get("cups_n") or n.get("groups") or 0, len(cups)),
+                "label": "PCM Mixed", "cards": CUP_CARDS, "seats": NIGHT_SEATS}
 
     async def night_start(day, start):
         """The start of today's night: the one it was opened with, else the daily time."""
-        n = await db.rf_cup_nights.find_one({"_id": day}, {"_id": 0, "start_ts": 1})
-        return (n or {}).get("start_ts", start)
+        return (await night_doc(day, start)).get("start_ts", start)
 
     async def night_guard(uid):
         """In the last 15 minutes before Cup Night, a player with a seat stays free for it."""
         now = time.time()
         day, start = night_of(now)
-        n = await db.rf_cup_nights.find_one({"_id": day, "status": "open", "uids": uid}, {"_id": 0, "start_ts": 1})
-        start = (n or {}).get("start_ts", start)
-        if n and 0 < start - now <= NIGHT_GUARD:
+        n = await night_doc(day, start)
+        start = n.get("start_ts", start)
+        if n.get("status") == "open" and 0 < start - now <= NIGHT_GUARD and await db.rf_night_seats.find_one({"_id": seat_key(day, uid)}, {"_id": 1}):
             raise HTTPException(409, f"Cup Night starts at {ist_time(start)} and your seat is waiting. Leave Cup Night first to play another cup now.")
 
-    @r.post("/night/join")
+    @r.post("/night/join", dependencies=[Depends(arena_gate)])
     async def night_join(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         now = time.time()
@@ -377,7 +482,10 @@ def make_router(db, rf_user, duels):
             raise HTTPException(409, f"Doors open at {ist_time(start - DOORS_SECONDS)}. Come back then to take your seat.")
         if await db.rf_cups.find_one({"players.uid": uid, "status": {"$in": ACTIVE}}, {"_id": 1}):
             raise HTTPException(409, "Finish the cup you are in first.")
-        await db.rf_cup_nights.update_one({"_id": day}, {"$addToSet": {"uids": uid}, "$setOnInsert": {"status": "open", "start_ts": start}}, upsert=True)
+        await db.rf_cup_nights.update_one({"_id": day}, {"$setOnInsert": {"status": "open", "start_ts": start}}, upsert=True)
+        await db.rf_night_seats.update_one({"_id": seat_key(day, uid)}, {"$setOnInsert": {"day": day, "uid": uid, "ts": now}}, upsert=True)
+        nights.pop(day, None)
+        counts.pop(day, None)
         return await night(x_rf_user)
 
     @r.post("/night/leave")
@@ -386,7 +494,9 @@ def make_router(db, rf_user, duels):
         day, start = night_of(time.time())
         if time.time() >= await night_start(day, start):
             raise HTTPException(409, "Cup Night has started. Leaving a match now counts as a loss.")
-        await db.rf_cup_nights.update_one({"_id": day, "status": "open"}, {"$pull": {"uids": uid}})
+        if await db.rf_cup_nights.find_one({"_id": day, "status": "open"}, {"_id": 1}):
+            await db.rf_night_seats.delete_one({"_id": seat_key(day, uid)})
+            counts.pop(day, None)
         await db.rf_notices.update_many({"uid": uid, "kind": "cup_night", "done": False}, {"$set": {"done": True}})  # no seat, no reminder
         return await night(x_rf_user)
 
@@ -432,7 +542,7 @@ def make_router(db, rf_user, duels):
                 raise HTTPException(409, f"{MAX_SPECTATORS} people are already watching this cup.")
         return await view(got, uid)
 
-    @r.post("")
+    @r.post("", dependencies=[Depends(arena_gate)])
     async def create(data: CupCreate, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         now = time.time()
@@ -473,7 +583,7 @@ def make_router(db, rf_user, duels):
         uid = rf_user(x_rf_user)
         return await view(await open_for(cid, uid), uid)
 
-    @r.post("/{cid}/join")
+    @r.post("/{cid}/join", dependencies=[Depends(arena_gate)])
     async def join(cid: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
         c = await fresh(cid)

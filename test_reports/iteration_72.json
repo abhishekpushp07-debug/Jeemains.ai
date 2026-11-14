@@ -1,0 +1,36 @@
+{
+  "summary": "Tested 100k-scaling (one-trip answers, cross-server push, cross-server spectators, inbox poll_s, load counters) and Cheer Squad diamond buying. Requested suites run with a second 3-worker backend on :8002 (RF_NODE_B): iter74 4/4, iter73 4 + 1 skipped (Cup Night doors-hour only), phase3 7/7, iter69 4/4 -> 19 passed, 1 skipped. New independent suite tests/test_iter75_review.py: 8/9 passed. One minor backend bug: POST /api/rf/squads/buy charges diamonds for a squad already opened by cup wins. Frontend (390 and 320 wide, QA learner 9R/4B/1E/0G, 2 cups): every squads-screen check matched the request. Golden Glam buy is enabled with no shortfall note. Royal shows squad-squad_royal-short NEED 2 more Blue + 1 more Emerald, and its button is disabled. Legend shows NEED 2 more Emerald + 2 more Gold, also disabled. The buy sheet opens with no squad-buy-short, the confirm button is enabled and Not now closes it. Tapping the disabled Royal button opens nothing. No horizontal overflow at 320. Regression passed: lobby, the Store tab's Cheer Squads card opens /rapid/squads, and a Practice Rival match took 4 answers (all 200, the rival's live score moved 0->3). Leaving the match ends it as a forfeit and returns to /rapid, and ws_nodes was emptied. Inbox polling measured about 1 call per 9 s outside a match and none faster inside it. The QA wallet is unchanged (9/4/1, 188 coins) and nothing was bought. No deprecated Expo packages were found (expo-audio is used; no expo-av).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/squads/buy", "issue": "A squad already opened by cup wins (cups_won >= wins, not in owned) can still be bought, and diamonds are deducted (reproduced: cups_won=3, buy squad_gold -> 200 and red 9->1). The UI hides the button, but a race (a cup is won while the sheet is open) or a direct API call wastes diamonds. Fix: add a filter so cups_won < s['wins'] (or return 409 'Already opened by cup wins'). squads.py:57-60"},
+      {"endpoint": "POST /api/rf/squads/buy, /squads/equip", "issue": "The body is a raw dict, not a Pydantic model (works, but there is no schema validation; an empty or unknown id correctly gives 404)."},
+      {"endpoint": "GET /api/health/load", "issue": "Anyone can call it without auth, and it returns pid and open_files_limit. Consider limiting it to internal callers or removing pid."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "rapid/squads", "issues": ["PriceButton height is 42 (squad-*-buy), below the 44pt touch-target minimum", "ShortNote accessibilityLabel reads awkwardly: 'Need 2 Blue + 1 Emerald more diamonds'. Suggest 'Need 2 more Blue and 1 more Emerald diamonds'", "The 'NEED' label is 11px muted text on a dark panel, so contrast is low"]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter75_review.py", "/app/test_reports/pytest/iter72_main.xml", "/app/test_reports/pytest/iter75_review.xml"],
+  "action_items": [
+    "squads.py buy(): reject squads already unlocked by cup wins (add a cups_won < wins condition to the find_one_and_update filter, else 409), so no diamonds are spent for nothing",
+    "Optional: make PriceButton at least 44 high; reword the ShortNote accessibility label; use a Pydantic model for the squads buy/equip body"
+  ],
+  "critical_code_review_comments": [
+    "quick_answer keeps the same guards as the full path (status, ends_at, order via $size, forfeit). Server-measured ms is clamped to 0..16000. Replays and out-of-order answers fall back to the full path, which is correct. Negative index and index 30 are blocked by DuelAnswer (422).",
+    "rf_events tailable cursor stays alive with no matching events (checked on the live 74k-doc capped collection), so idle servers do not re-scan it.",
+    "ws_nodes uses a per-process uuid. If a server dies without closing its sockets, its node id stays in live matches' ws_nodes, and events keep being addressed to the dead node until the match ends. That is harmless but wasteful; consider a TTL or a heartbeat-based cleanup.",
+    "InboxPoller uses a setTimeout chain: max(poll_s, 25 when playing else 8) with ±1 s jitter. It follows poll_s at each reschedule. When the app comes back to the foreground, no refresh happens until the next tick (up to 8 s)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter75_review.py (new)"],
+  "success_rate": {"backend": "96% (27/28 executed; 1 skipped by time window)", "frontend": "100% of requested flows"},
+  "seed_data_creation": "Only TEST-rv75-* grants/profiles/duels/rf_watch rows were created by the test file and removed by its fixture (verified 0 left). One real Practice Rival match was played and forfeited on the QA account, as the request asked. No purchase was made and the QA wallet is unchanged.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Starting the :8002 backend with plain nohup inside a tool call hangs the call and gets killed when it times out. Use `setsid nohup ... < /dev/null & disown` (the call still timed out, but the process survived), then pkill -f 'port 8002' afterwards. Login in Playwright: click the inputs and use keyboard.type (page.fill on entry-phone-input did not stick). The QA pid is PF37CC308 (rf_profiles.pid). Ignore the pre-existing 401 on /api/jl/auth/refresh that comes before login."
+}

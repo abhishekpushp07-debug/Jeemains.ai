@@ -12,7 +12,7 @@ import { GoldTitle, Panel, RaisedButton } from "@/src/rapid/arena";
 import { CheerSquad } from "@/src/rapid/CheerSquad";
 import { Pop } from "@/src/rapid/juice";
 import { GemStrip, InnerScreen } from "@/src/rapid/parts";
-import { PriceButton, canAfford, costText, haveText } from "@/src/rapid/StoreParts";
+import { PriceButton, ShortNote, canAfford, costText, haveText } from "@/src/rapid/StoreParts";
 import { SquadItem, useInbox, useSquads } from "@/src/rapid/social";
 import { squadFrames } from "@/src/rapid/squadArt";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
@@ -46,6 +46,7 @@ function SquadCard({ s, on, diamonds, busy, onPreview, onUse, onBuy }: { s: Squa
             : s.gems ? <PriceButton testID={`squad-${s.id}-buy`} it={{ id: s.id, price: 0, gems: s.gems }} wallet={{ diamonds }} busy={busy} onPress={onBuy} /> : null}
         </View>
       </View>
+      {!s.unlocked && s.gems ? <ShortNote testID={`squad-${s.id}-short`} it={{ id: s.id, price: 0, gems: s.gems }} wallet={{ diamonds }} /> : null}
     </Panel>
   </Pop>;
 }
@@ -83,6 +84,7 @@ function Squads() {
       <GoldTitle size={24} testID="squad-buy-title">{buying?.title}</GoldTitle>
       <T testID="squad-buy-why" w="bold" size={13} color={arena.text}>Skip the {buying?.need} cup win{buying?.need === 1 ? "" : "s"} still needed. They dance for every crown you win from today.</T>
       <T testID="squad-buy-cost" w="heavy" size={14} color={arena.gold}>{costText(price)} · You have {haveText(price, wallet)}</T>
+      <ShortNote testID="squad-buy-short" it={price} wallet={wallet} />
       <T size={12} color={arena.muted}>Uses diamonds won in Knockout Cups and Phoenix streaks. No real money is charged. Cup wins still open every squad for free.</T>
       <ErrorBox testID="squad-buy-error" error={error} />
       <RaisedButton testID="squad-buy-confirm" glyph="diamond-stone" label="UNLOCK WITH DIAMONDS" sub={costText(price)} height={58} busy={!!busy} disabled={!price || !canAfford(price, wallet)} onPress={buy} />

@@ -20,7 +20,7 @@ async def record_learning(db, uid, ref, exam, rows, cards, completed_at):
 
 
 async def weak_chapters(db, uid, exam):
-    rows = await db.rf_learning_events.aggregate([
+    rows = await (await db.rf_learning_events.aggregate([
         {"$match": {"uid": uid, "exam": exam}},
         {"$sort": {"completed_at": 1, "ref": 1}},
         {"$unwind": "$results"},
@@ -36,7 +36,7 @@ async def weak_chapters(db, uid, exam):
         {"$sort": {"misses": -1, "_id.subject": 1, "_id.chapter": 1}},
         {"$project": {"_id": 0, "subject": "$_id.subject", "chapter": "$_id.chapter", "misses": 1,
                       "remaining": {"$size": "$card_ids"}, "card_ids": {"$slice": ["$card_ids", 30]}}},
-    ]).to_list(150)
+    ])).to_list(150)
     return rows
 
 
