@@ -9,12 +9,7 @@ web-build/
 android/.gradle/
 android/build/
 android/app/build/
-.env
-.env.*
-*.env
-**/.env
-**/.env.*
-**/*.env
+# .env stays in the upload: the build service writes the live server address into it (public EXPO_PUBLIC_* values).
 **/*.pem
 **/*.key
 **/*.jks

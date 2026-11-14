@@ -1,5 +1,9 @@
 # JEELIVE.AI Native App — PRD
 
+## Iteration75 — Installed APK "Connection interrupted" ROOT CAUSE fixed
+- Deployer RCA (`/app/deployer-agent-docs/RCA_780f04ff-...MD`): both `.easignore` files excluded `.env`, so EAS never got `frontend/.env` (where the pipeline writes the production EXPO_PUBLIC_BACKEND_URL) → `extra.backendUrl` undefined → fetch("undefined/api/...") failed on the phone. This was also the real cause of the iteration71 phone-login bug.
+- Fix: `.env` exclusions removed from `/app/.easignore` and `/app/frontend/.easignore` (key/secret excludes kept). `client.ts` now says "This app build is missing its server address" if a build ever lacks it. User must re-Publish and generate a new Android build. NEVER exclude frontend/.env from EAS again.
+
 ## Iteration74 — 100k scale: many servers through the database + cheerleader shortfall
 - User (Hinglish): "Pehle 100k scaling poori karo; Pehle diamonds se cheerleader" (both), servers joined through "Apne database se hi jodo" (no Redis), squad price "Har cheerleader ki alag keemat" (already: Gold 8 Red+2 Blue, Royal 6 Blue+2 Emerald, Legend 3 Emerald+2 Gold; Rookie opens on the first cup win), short of diamonds → "Kitne aur chahiye, wo batao".
 - Backend: addressed live channel (`rf_duels.ws_nodes`, events `to`/`by.<node>`, capped 128 MB), one-trip answers (`quick_answer` pipeline update), cross-server spectator count `rf_watch`, inbox `poll_s` (8, 20 when busy), Mongo pool 40, cached collection objects (`Collections` in server.py), practice-rival runs cached. Squad 409 message now lists the exact shortfall. Details + numbers: `memory/SCALE.md`.

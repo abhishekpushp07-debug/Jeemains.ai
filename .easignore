@@ -21,10 +21,10 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
-# Build service must inject configuration; never upload secrets or signing keys.
-.env
-.env.*
-*.env
+# frontend/.env MUST be uploaded: the build service writes the live server address into it (EXPO_PUBLIC_* values are
+# public, they end up inside the app anyway). Without it the app has no server address and every request fails.
+# Never upload signing keys or other secrets.
+/backend/.env
 *.pem
 *.key
 *.jks
