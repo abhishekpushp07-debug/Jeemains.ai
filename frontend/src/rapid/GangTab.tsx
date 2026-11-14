@@ -12,7 +12,7 @@ import { FriendCodeBox } from "./FriendCodeBox";
 import { FriendFeed } from "./FriendFeed";
 import { Face, Note, PersonRow } from "./parts";
 import { ErrorBox } from "./ui";
-import { go, refreshInbox, seenText, shareFriendCode, useFriendCode, useFriends, useGangs, useInbox } from "./social";
+import { gangNotices, go, refreshInbox, seenText, shareFriendCode, useFriendCode, useFriends, useGangs, useInbox } from "./social";
 
 /** Gang tab: your gangs and friends in one place. Add a friend with a Friend Code, see who added you, and challenge in one tap. */
 export function GangTab() {
@@ -38,7 +38,7 @@ export function GangTab() {
     <ErrorBox testID="rf-gang-error" error={error || friends.error || gangs.error} retry={() => { friends.reload(); gangs.reload(); }} />
 
     <>
-      {(inbox?.notices || []).map((n) => <Pop key={n.id}><Panel gold testID={`rf-notice-${n.kind}`} style={styles.notice}>
+      {gangNotices(inbox).map((n) => <Pop key={n.id}><Panel gold testID={`rf-notice-${n.kind}`} style={styles.notice}>
         <View style={styles.noticeRow}>
           {n.kind === "gang_added" && n.gang ? <Emblem id={n.gang.emblem} size={44} /> : <Face p={n.from} size={44} onPress={() => router.push(go.player(n.from.pid))} />}
           <T w="heavy" size={14} color={arena.text} style={styles.flex}>{n.kind === "gang_added" && n.gang ? `${n.from.name} added you to ${n.gang.name}` : `${n.from.name} added you with your Friend Code. You are friends now!`}</T>

@@ -10,6 +10,7 @@ import { Avatar } from "@/src/components/Entry";
 import { arena } from "@/src/theme";
 import { Emblem } from "./Art";
 import { Panel, RaisedButton } from "./arena";
+import { NightReminder } from "./NightReminder";
 import { clock, go, inboxAge, refreshInbox, shortSubject, useInbox } from "./social";
 
 /** Incoming challenge with Accept / Decline and the time left. `floating` pins it under the status bar (Home and inner arena screens). */
@@ -26,7 +27,7 @@ export function ChallengeBanner({ floating }: { floating?: boolean }) {
     const iv = setInterval(() => tick((n) => n + 1), 1000);
     return () => clearInterval(iv);
   }, [id]);
-  if (!c || !user) return null;
+  if (!c || !user) return <NightReminder floating={floating} />;
   const left = Math.max(0, Math.round(c.expires_in - inboxAge()));
   if (!left) return null;
   const act = async (what: "accept" | "decline") => {

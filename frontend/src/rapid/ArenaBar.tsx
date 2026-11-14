@@ -11,7 +11,7 @@ import { arena } from "@/src/theme";
 import { GameIcon, GameIconName, GemColor, PhoenixDiamond, topGem } from "./Art";
 import { Badge } from "./arena";
 import { Jelly, Twinkles } from "./juice";
-import { ArenaTab, setArenaTab, useArenaTab, useInbox } from "./social";
+import { ArenaTab, gangNotices, setArenaTab, useArenaTab, useInbox } from "./social";
 
 type Key = "home" | ArenaTab;
 const ITEMS: { key: Key; label: string; icon?: GameIconName }[] = [
@@ -45,7 +45,7 @@ export function ArenaBar() {
   const profile = useGameProfile(useAuth().user?.id).data;
   const badges: Partial<Record<Key, number>> = {
     trophy: rewardsReady(profile),
-    gang: (inbox?.challenges.length || 0) + (inbox?.notices.length || 0),
+    gang: (inbox?.challenges.length || 0) + gangNotices(inbox).length,
   };
   return <View testID="arena-bar" style={[styles.bar, { paddingBottom: insets.bottom, height: 66 + insets.bottom }]}>
     <LinearGradient pointerEvents="none" colors={[arena.clear, arena.gold, arena.clear]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.line} />

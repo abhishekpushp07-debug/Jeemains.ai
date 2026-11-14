@@ -38,6 +38,7 @@ DOORS_SECONDS = 3600  # seats can be taken an hour before
 NIGHT_SEATS = 16
 NIGHT_LEAD = 30  # seconds between the 8 pm draw and round 1, so everybody can get to their match
 NIGHT_GUARD = 900  # in the last 15 minutes before the start, a player with a seat cannot begin another cup
+NIGHT_REMIND = 300  # 7:55 pm: every seat holder gets an in-app reminder
 NIGHT_PICKS = [{"subject": s, "chapter": None} for s in ("Physics", "Chemistry", "Mathematics")]
 
 
@@ -297,8 +298,13 @@ def make_router(db, rf_user, duels):
         return n, now, day, start
 
     async def night_tick():
-        """Called every few seconds by the server: seats tonight's Cup Night at 8 pm even if nobody has the app open."""
-        await night_now()
+        """Called every few seconds by the server: the 7:55 pm reminder, then seats tonight's Cup Night at 8 pm even if nobody has the app open."""
+        n, now, day, start = await night_now()
+        if n.get("status") == "open" and n.get("uids") and not n.get("reminded") and 0 < start - now <= NIGHT_REMIND:
+            got = await db.rf_cup_nights.find_one_and_update({"_id": day, "status": "open", "reminded": {"$ne": True}}, {"$set": {"reminded": True}}, return_document=after)
+            if got and got["uids"]:  # once per night, to everybody holding a seat at that moment
+                await db.rf_notices.insert_many([{"id": str(uuid.uuid4()), "uid": u, "from_uid": u, "kind": "cup_night", "ts": now, "done": False, "expires_ts": start + 120,
+                                                  "night": {"day": day, "start_ts": start, "time_label": ist_time(start)}} for u in got["uids"]])
 
     r.night_tick = night_tick
 
@@ -363,7 +369,32 @@ def make_router(db, rf_user, duels):
         if time.time() >= await night_start(day, start):
             raise HTTPException(409, "Cup Night has started. Leaving a match now counts as a loss.")
         await db.rf_cup_nights.update_one({"_id": day, "status": "open"}, {"$pull": {"uids": uid}})
+        await db.rf_notices.update_many({"uid": uid, "kind": "cup_night", "done": False}, {"$set": {"done": True}})  # no seat, no reminder
         return await night(x_rf_user)
+
+    @r.get("/champions")
+    async def champions(x_rf_user: Optional[str] = Header(None)):
+        """Champions Wall: the last Cup Night's champions (real players only), shown until the next night's doors open."""
+        uid = rf_user(x_rf_user)
+        now = time.time()
+        day, start = night_of(now)
+        start = await night_start(day, start)
+        if now >= start:  # tonight's cups, as their champions are crowned
+            show, until = day, night_of(now + 86400)[1] - DOORS_SECONDS
+        elif now < start - DOORS_SECONDS:  # last night's, until tonight's doors open
+            show, until = night_of(now - 86400)[0], start - DOORS_SECONDS
+        else:
+            return {"day": None, "tonight": False, "items": [], "until_ts": start, "time_label": ist_time(start)}
+        docs = await db.rf_cups.find({"night": show, "status": "finished"}, {"_id": 0, "id": 1, "night_no": 1, "size": 1, "champion": 1, "title_no": 1,
+                                                                          "players.uid": 1, "players.bot": 1}).to_list(100)
+        won = [(c, next((p for p in c["players"] if p["uid"] == c.get("champion") and not p.get("bot")), None)) for c in docs]
+        won = [(c, p["uid"]) for c, p in won if p]
+        hidden = await blocked_uids(db, uid)
+        profiles = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [u for _, u in won]}}).to_list(100)}
+        items = [{"cup_id": c["id"], "no": c.get("night_no"), "size": c["size"], "real_players": sum(not p.get("bot") for p in c["players"]), "title_no": c.get("title_no") or 0,
+                  "you": u == uid, **{k: v for k, v in card(profiles[u]).items() if k in (*SHOWN, "crown")}}
+                 for c, u in sorted(won, key=lambda w: w[0].get("night_no", 0)) if u in profiles and u not in hidden]
+        return {"day": show, "tonight": show == day, "items": items[:12], "until_ts": until, "time_label": ist_time(start)}
 
     @r.post("/watch")
     async def watch(data: CupWatch, x_rf_user: Optional[str] = Header(None)):

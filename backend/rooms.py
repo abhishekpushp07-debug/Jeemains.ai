@@ -273,7 +273,7 @@ def make_router(db, rf_user, seat_duel):
         await db.rf_challenges.update_many({**live, "invites": {"$elemMatch": {"uid": uid, "status": "sent"}}}, {"$set": {"invites.$.status": "seen"}})
         rooms = await db.rf_challenges.find({**live, "invites": {"$elemMatch": {"uid": uid, "status": "seen"}}}).sort("created_ts", -1).limit(3).to_list(3)
         mine = await db.rf_challenges.find_one({"status": "open", "$or": [{"from_uid": uid}, {"invites": {"$elemMatch": {"uid": uid, "status": "joined"}}}]}, {"id": 1}, sort=[("created_ts", -1)])
-        notices = await db.rf_notices.find({"uid": uid, "done": False}).sort("ts", -1).limit(6).to_list(6)
+        notices = await db.rf_notices.find({"uid": uid, "done": False, "$or": [{"expires_ts": {"$exists": False}}, {"expires_ts": {"$gt": now}}]}).sort("ts", -1).limit(6).to_list(6)
         people = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [c["from_uid"] for c in rooms] + [n["from_uid"] for n in notices]}}).to_list(12)}
         cups = await db.rf_cups.find({"status": "open", "expires_ts": {"$gt": now}, "invites": uid, "players.uid": {"$ne": uid}}).sort("created_ts", -1).limit(2).to_list(2)
         my_cup = await db.rf_cups.find_one({"players.uid": uid, "status": {"$in": ["open", "live"]}}, {"id": 1})
@@ -284,7 +284,8 @@ def make_router(db, rf_user, seat_duel):
                 "challenges": [{"id": c["id"], "subject": c["subject"], "chapter": c.get("chapter"), "label": label_for(c), "revenge": bool(c.get("revenge")), "expires_in": max(0, round(c["expires_ts"] - now)), "joined": c.get("joined", 0) + 1,
                                 "seats": SEATS * 2 if c.get("vs") else SEATS, "single": bool(c.get("single")), "gang": await gang_tag(c), "vs": c.get("vs"),
                                 "team": next((i.get("team") for i in c["invites"] if i["uid"] == uid), None), "from": card(people.get(c["from_uid"], {"uid": c["from_uid"]}))} for c in rooms],
-                "notices": [{"id": n["id"], "kind": n["kind"], "ts": n["ts"], "gang": n.get("gang"), "from": card(people[n["from_uid"]])} for n in notices if n["from_uid"] in people]}
+                "notices": [{"id": n["id"], "kind": n["kind"], "ts": n["ts"], "gang": n.get("gang"), "from": card(people[n["from_uid"]]),
+                             **({"night": {**n["night"], "starts_in": max(0, round(n["night"]["start_ts"] - now))}} if n.get("night") else {})} for n in notices if n["from_uid"] in people]}
 
     # ---------- public link pages (WhatsApp invites; no login, no private data) ----------
     def page(title, lead, button, deep, code="", hint=""):

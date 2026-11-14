@@ -1,5 +1,5 @@
 import { useEffect, useSyncExternalStore } from "react";
-import { AppState, Linking, Share } from "react-native";
+import { AppState, Linking, Platform, Share } from "react-native";
 import { useSegments } from "expo-router";
 import { RF_BASE, rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
@@ -14,7 +14,8 @@ export type GangRow = GangTag & { members: number; online: number; leader: boole
 export type ChallengeNote = { id: string; subject: string; chapter?: string | null; label: string; revenge: boolean; expires_in: number; joined: number; seats: number; single: boolean; gang: GangTag | null;
   vs?: { a: GangTag; b: GangTag } | null; team?: "a" | "b" | null; from: PlayerCard };
 export type CupNote = { id: string; label: string; size: number; joined: number; expires_in: number; from: PlayerCard };
-export type Notice = { id: string; kind: "friend_added" | "gang_added"; ts: number; gang?: GangTag | null; from: PlayerCard };
+export type NightNote = { day: string; start_ts: number; time_label: string; starts_in: number };
+export type Notice = { id: string; kind: "friend_added" | "gang_added" | "cup_night"; ts: number; gang?: GangTag | null; night?: NightNote; from: PlayerCard };
 export type Inbox = { me: PlayerCard; room: string | null; cup: string | null; cups: CupNote[]; challenges: ChallengeNote[]; notices: Notice[] };
 export type Friend = PlayerCard & { follows_you: boolean };
 
@@ -31,6 +32,7 @@ export const shareFriendCode = (code: string) =>
   sendWhatsApp(`Add me on JEECIRCLE.AI Rapid Fire and let’s see who is faster!\nMy Friend Code: ${prettyCode(code)}\nIn the app: Rapid Fire → Gang → Enter a friend’s code.`);
 
 export async function sendWhatsApp(text: string) {
+  if (Platform.OS === "web") { await Linking.openURL("https://wa.me/?text=" + encodeURIComponent(text)).catch(() => {}); return; } // a computer may have no WhatsApp app
   try { await Linking.openURL("whatsapp://send?text=" + encodeURIComponent(text)); }
   catch {
     try { await Linking.openURL("https://wa.me/?text=" + encodeURIComponent(text)); }
@@ -79,6 +81,8 @@ export const takeArenaPart = () => { const part = arenaPart; arenaPart = ""; ret
 // Routes of the arena's inner screens.
 export const go = {
   player: (pid: string) => ({ pathname: "/rapid/player/[pid]", params: { pid } }) as any,
+  /** A champion's profile with their cheer squad dancing in the trophy cabinet. */
+  cheer: (pid: string) => ({ pathname: "/rapid/player/[pid]", params: { pid, cheer: "1" } }) as any,
   gang: (gid: string) => ({ pathname: "/rapid/gang/[gid]", params: { gid } }) as any,
   duel: (params: Record<string, string>) => ({ pathname: "/rapid/duel", params }) as any,
   challenge: (params: { pid?: string; gang?: string } = {}) => ({ pathname: "/rapid/challenge", params }) as any,
@@ -108,6 +112,14 @@ export type CupNight = { day: string; now: number; start_ts: number; doors_ts: n
   joined: boolean; missed?: boolean; count: number; friends: PlayerCard[]; my_cup: string | null; cups: NightCup[]; label: string; cards: number; seats: number; local: number };
 /** `local` is the phone's clock when the answer came, so countdowns follow the server's clock, not the phone's. */
 export const useCupNight = (uid?: string) => useCached<CupNight>(uid ? `u.${uid}.rfnight` : null, () => rf<CupNight>("/cups/night", uid!).then((d) => ({ ...d, local: Date.now() / 1000 })), false);
+/** Notices that belong in the Gang tab list (the Cup Night reminder has its own banner). */
+export const gangNotices = (i?: Inbox | null) => (i?.notices || []).filter((n) => n.kind !== "cup_night");
+/** Dismiss a notice (seen, or acted on). */
+export const dismissNotice = (uid: string, id: string) => rf(`/notices/${id}/dismiss`, uid, { method: "POST", body: {} });
+
+// Champions Wall: the last Cup Night's champions, in the lobby until the next night's doors open.
+export type Champion = PlayerCard & { cup_id: string; no: number; size: number; real_players: number; title_no: number; you: boolean };
+export const useChampions = (uid?: string) => useCached<{ day: string | null; tonight?: boolean; items: Champion[]; until_ts: number; time_label: string }>(uid ? `u.${uid}.rfchamps` : null, () => rf("/cups/champions", uid!), false);
 /** "5h 12m" for long waits, "42:07" in the last hour. */
 export const countdown = (s: number) => {
   const t = Math.max(0, Math.round(s)), h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60);

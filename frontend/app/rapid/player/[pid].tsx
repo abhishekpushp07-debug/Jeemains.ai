@@ -12,6 +12,7 @@ import { Emblem } from "@/src/rapid/Art";
 import { GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena";
 import { HeadToHeadCard } from "@/src/rapid/HeadToHead";
 import { CupShowcase } from "@/src/rapid/CupShowcase";
+import { CheerSquad } from "@/src/rapid/CheerSquad";
 import { Crown, GemStrip, InnerScreen, Note, WingedFace } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
 import { day, go, prettyCode, seenText, setArenaTab, shareFriendCode, shortSubject, useGangs } from "@/src/rapid/social";
@@ -22,8 +23,9 @@ function Tile({ label, value, testID }: { label: string; value: string | number;
 
 /** A player's showcase: who they are, how they play, their diamonds and trophies, and the buttons to challenge them or bring them into a gang. Friends are made with a Friend Code. */
 function Player() {
-  const { pid } = useLocalSearchParams<{ pid: string }>();
+  const { pid, cheer } = useLocalSearchParams<{ pid: string; cheer?: string }>();
   const router = useRouter(), uid = useAuth().user?.id || "";
+  const [cheering, setCheering] = useState(cheer === "1"); // from Cheer on the Champions Wall: the squad dances as you arrive
   const q = useCached<any>(uid && pid ? `u.${uid}.rfplayer.${pid}` : null, () => rf(`/players/${pid}`, uid), false);
   const gangs = useGangs(uid);
   const [busy, setBusy] = useState(""), [error, setError] = useState(""), [note, setNote] = useState("");
@@ -76,7 +78,7 @@ function Player() {
       {note ? <T testID="player-note" w="bold" size={13} color={arena.aqua} style={styles.center}>{note}</T> : null}
       <ErrorBox testID="player-action-error" error={error} />
 
-      {p.cups ? <CupShowcase cups={p.cups} name={p.name} me={p.is_me} /> : null}
+      {p.cups ? <CupShowcase cups={p.cups} name={p.name} me={p.is_me} onCheer={() => setCheering(true)} /> : null}
 
       <View style={styles.tiles}>
         <Tile testID="player-stat-matches" label="MATCHES" value={s.matches} />
@@ -132,6 +134,7 @@ function Player() {
     <Modal visible={show} transparent animationType="fade" onRequestClose={() => setShow(false)} statusBarTranslucent>
       {show && p ? <EntryShow solo testID="player-entry-show" players={[{ name: p.name, you: p.is_me, avatar: p.avatar, frame: p.frame, entry: p.entry, level: p.level, wins: s.wins }]} onDone={() => setShow(false)} /> : null}
     </Modal>
+    {p?.cups?.won ? <CheerSquad visible={cheering} name={p.name} avatar={p.avatar} frame={p.frame} crown={p.crown?.won ? p.crown : { won: p.cups.won, real: p.cups.real }} onClose={() => setCheering(false)} /> : null}
   </InnerScreen>;
 }
 

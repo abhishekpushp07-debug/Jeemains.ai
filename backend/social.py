@@ -232,7 +232,7 @@ def make_router(db, rf_user):
         # Cup Champion showcase: every cup won (real-player wins counted apart) and the last five titles.
         wins = await db.rf_cups.find({"champion": them, "status": "finished"}, {"_id": 0, "id": 1, "label": 1, "size": 1, "kind": 1, "players.bot": 1, "finished_ts": 1}).sort("finished_ts", -1).limit(5).to_list(5)
         out["cups"] = {**(crown_of(p) or {"won": 0, "real": 0}), "played": await db.rf_cups.count_documents({"players.uid": them, "status": "finished"}),
-                       "recent": [{"id": c["id"], "label": c["label"], "size": c["size"], "kind": c["kind"], "humans": sum(not x.get("bot") for x in c["players"]),
+                       "recent": [{"id": c["id"], "label": c.get("label") or "Knockout Cup", "size": c["size"], "kind": c["kind"], "humans": sum(not x.get("bot") for x in c["players"]),
                                    "finished_at": datetime.fromtimestamp(c["finished_ts"], timezone.utc).isoformat()} for c in wins]}
         if them != uid:
             out["relation"] = await relation(uid, them)

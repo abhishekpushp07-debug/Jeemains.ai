@@ -14,7 +14,7 @@ import { STANDS, nightState, useServerNow } from "@/src/rapid/CupNight";
 import { LiveDot, Pop } from "@/src/rapid/juice";
 import { Face, InnerScreen, Note } from "@/src/rapid/parts";
 import { ErrorBox, withRapid } from "@/src/rapid/ui";
-import { NightCup, countdown, go, refreshInbox, useCupNight } from "@/src/rapid/social";
+import { NightCup, countdown, dismissNotice, go, refreshInbox, useCupNight, useInbox } from "@/src/rapid/social";
 
 const STEPS: [GameIconName, string, string][] = [
   ["chest", "Doors open", "Take your seat any time in the hour before the start."],
@@ -54,6 +54,9 @@ function Night() {
   // 8 pm: your cup is drawn, so go straight to its bracket (and from there into your first match).
   const sent = useRef("");
   const mine = n?.cups.find((c) => c.mine);
+  // On this screen the 7:55 pm reminder has done its job.
+  const reminder = useInbox()?.notices.find((x) => x.kind === "cup_night")?.id;
+  useEffect(() => { if (reminder && uid) dismissNotice(uid, reminder).then(() => refreshInbox(uid)).catch(() => {}); }, [reminder, uid]);
   useEffect(() => {
     if (key === "mine" && mine && sent.current !== mine.id) { sent.current = mine.id; router.push(go.cup(mine.id)); }
   }, [key, mine?.id]); // eslint-disable-line react-hooks/exhaustive-deps

@@ -1,0 +1,50 @@
+{
+  "summary": "Iteration 68 tested the backend and the frontend against the public URL, signed in as the QA learner PF37CC308 (PIN login, 375/320/390 viewports). Testing ran at 13:50-14:30 IST, so the wall showed last night's champions. Backend: 13/13 regression tests passed (iter67 champions/reminder, iter65, iter66, iter46 Redis metadata cache). The new edge suite test_iter68_wall_edges.py passed 3 of 4: auth 401 works, blocked champions are hidden both ways, and the wall is empty while doors are open and shows tonight's champions after the start. The one failure is a minor contract gap: the doors-window answer has no 'tonight' key. Redis answers PONG on /tmp/jeelive-redis/cache.sock and API medians are about 130 ms over ingress. Frontend: everything worked. The Champions Wall sits under the Cup Night banner, with 'Last night’s champions', a count of 2, 'You!' on your own card, crown chips, 'Cup N · size', and CHEER buttons 106x45 that open /rapid/player/<pid>?cheer=1. The Cheer Squad modal shows the board with the name, two dancing cheerleaders (animation confirmed), confetti, cheer-line, Cheer again and Continue. The profile section is now 'Trophy Cabinet', and player-cups-cheer reopens the show on other profiles and on your own. A non-champion opened with cheer=1 gets no show and no button. Crown celebration: 'Champion again!' / CROWN #2, the Share on WhatsApp button, then the crown-share overlay. The card is exactly 4:5 (320x400; 272x340 at 320 px) with no clipped text. On web 'Message only' is hidden, Send opens whatsapp://send?text=<caption with Friend Code> and Back returns to the celebration. SEE MY CROWN goes to the profile. Cup Night reminder: the banner floats on Home, sits inline in the Rapid tab and shows on inner screens. It reads 'CUP NIGHT · <time>' and 'Your seat is ready!', and the countdown ticks. Later dismisses it for good (also after reload). OPEN goes to /rapid/cup/night and marks the notice done. Opening the Cup Night screen also marks it done. The reminder is not in the Gang list and adds nothing to the Gang badge. Regression: all screens bundle and load (/, /rapid, /rapid/cup, /rapid/cup/night, tests, rank, mission, account, pyq, vault, player, privacy). Figtree 400/700/800 and MaterialDesignIcons load, no asset gives a 4xx, and every app.json asset path exists. No console errors apart from one navigator.vibrate warning on web. No deprecated Expo packages were found (expo-av, expo-barcode-scanner and expo-background-fetch are absent).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/rf/cups/champions", "issue": "In the doors window (7-8 pm) the answer is {day:null, items:[], until_ts, time_label} with no 'tonight' key. The contract says {day, tonight, items, until_ts, time_label}. The frontend copes (it hides the wall when day is null). Reference: backend/cups.py:387"},
+      {"endpoint": "GET /api/rf/players/{pid}", "issue": "player_profile reads c['label'] directly for recent cup wins, so a finished cup without 'label' makes the whole profile return 500 (KeyError). Real cups always have a label, but seeded or legacy docs break it; my first seed hit this. Use c.get('label') or a fallback. Reference: backend/social.py:235"},
+      {"endpoint": "jeelive-redis supervisor service", "issue": "redis_runtime.py execs the system binary 'redis-server', which was installed by hand with apt in this pod. Nothing in the repo installs it, so a fresh pod or deployment will be FATAL again and lose the Redis tier (speed requirement)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CrownShare caption", "issue": "For a Cup Night win the card says 'Cup Night · N players', but the WhatsApp caption always says 'won my Nth Knockout Cup'. Reference: src/rapid/CrownShare.tsx:53", "testID": "crown-share-send", "priority": "LOW"},
+      {"component": "sendWhatsApp on web", "issue": "On web, Linking.openURL('whatsapp://send?...') does not throw, so the wa.me fallback is never reached. Desktop browsers without WhatsApp get nothing. On web use https://wa.me/?text= directly. Reference: src/rapid/social.ts:35", "testID": "crown-share-send", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Crown share overlay (crown-celebration > crown-share)", "issues": ["The shareLayer scrim is see-through, so the celebration underneath shows through: 'shows every title you win.' at 320 px and a ghost 'Continue' button under Back at 375/390. Use an opaque or blurred backdrop. Reference: src/rapid/CrownCelebration.tsx:112"]},
+      {"screen": "Cheer Squad modal at 375x667", "issues": ["The Continue button (cheer-close) starts at y=645 and is 57 tall, so it sits half below the fold and needs a scroll. It fits at 320x640. Consider capping the dancer height by the available height so both buttons stay visible on SE-size phones."]},
+      {"screen": "Home floating NightReminder", "issues": ["While shown it covers the header logo and the account button (top 8-147 px). Acceptable for a short-lived alert, noted only."]}
+    ],
+    "react_native_issues": [
+      {"component": "NightReminder buzz on web", "issue": "buzz('warning') runs as soon as the reminder mounts. On web this logs a console error: 'Blocked call to navigator.vibrate because user hasn't tapped on the frame'. Skip haptics on web or before the first interaction. Reference: src/rapid/NightReminder.tsx:24"}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_iter68_wall_edges.py", "/app/backend/tests/_iter68_seed.py", "/app/test_reports/pytest/iter68.xml", "/app/test_reports/pytest/iter68_edges.xml"],
+  "action_items": [
+    "cups.py:387 - add 'tonight': False to the doors-window answer of /cups/champions",
+    "social.py:235 - use c.get('label', '') in the profile's recent cup wins so one cup without a label cannot return 500",
+    "Make redis-server part of the build or deployment (or bundle the binary); otherwise jeelive-redis goes FATAL on a fresh pod",
+    "CrownShare caption: say 'Cup Night' when s.night is true, to match the card",
+    "sendWhatsApp: on Platform.OS==='web' open https://wa.me/?text=... directly",
+    "CrownCelebration shareLayer: use an opaque backdrop so the celebration buttons and text do not show through",
+    "CheerSquad: keep Continue above the fold at 375x667 (cap the dancer height using H minus board and buttons)",
+    "NightReminder: skip buzz() on web"
+  ],
+  "critical_code_review_comments": [
+    "The champions endpoint hides blocked players in both directions, ignores bot champions and caps the list at 12 items (verified).",
+    "Night reminder: an atomic find_one_and_update on reminded=$ne true gives exactly one notice per seat holder. Expired notices are filtered out and leave marks them done (verified).",
+    "gangNotices() keeps cup_night out of both the Gang list and the ArenaBar badge (verified in the UI).",
+    "Player profile: CheerSquad renders only when p.cups.won > 0, so a non-champion opened with cheer=1 gets nothing (verified)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter68_wall_edges.py (new)", "/app/backend/tests/_iter68_seed.py (new tester helper)"],
+  "success_rate": {"backend": "94% (16/17; the 1 failure is the minor missing 'tonight' key)", "frontend": "100% of the requested flows work; 2 low UI bugs and 3 design notes"},
+  "seed_data_creation": "Everything I created was temporary and removed by exact id. 3 finished night cups night-TESTi68-3ad48c-{0,1,2} for 2026-11-13, a TEST profile (uid TEST-i68-3ad48c, pid P683AD48C, 'TEST_Champ Riya'), QA cups_won/cups_real set to 1 for a while (now unset again, so they are missing as before), a cup-win run via _iter65_crown.py (cup 94671ed3 plus its 2 duels, feed and awards), and a Cup Night doc for 2026-11-14 (start now+290 s, deleted before it started, so nothing was seated) with its 3 cup_night notices. Restore order: _iter66_snapshot restore, then _iter65_crown restore, then _iter68_seed clean. Afterwards: QA coins 118, xp 260, 6 cups (as before), 0 cup_night notices, no night doc for today, and no TEST-i68 or TEST-i65 leftovers.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: type phone and PIN with page.keyboard into get_by_placeholder('Mobile number') and entry-pin-input; .fill() did not stick. After login I saved localStorage to /tmp/iter68_ls.json and jl_sid to /tmp/jl_sid.txt (0600), then injected them with add_init_script. Seed the wall with backend/tests/_iter68_seed.py wall | remind | clean. Seeded cups need 'label', and pids must match ^P[0-9A-F]{8}$ or the profile returns 404/500. 'remind' inserts a night doc with start=now+290 s. Delete it before the start, or the night loop will seat real cups for the QA learner. pytest.ini adds xdist: run single-file suites with -n0.",
+  "rca_of_issue": "No functional bugs in the new features."
+}

@@ -46,14 +46,15 @@ class MetadataCache:
             self._retry_at = time.monotonic() + 5
             return None
 
-    def _remember(self, key, value, raw, ttl):
+    def _remember(self, key, value, raw, ttl, shared=True):
         if len(raw) > CONFIG['max_entry_bytes']:
             return
         if key in self._l1:
             self._bytes -= self._l1.pop(key)[2]
         # Conservative JSON-to-object memory estimate, bounded independently of Redis.
         weight = len(raw) * 3
-        self._l1[key] = (time.monotonic() + min(ttl, 2), value, weight)
+        # With Redis up, memory only bridges 2 s (Redis is the shared copy). If Redis is down, memory keeps it up to 30 s so speed holds.
+        self._l1[key] = (time.monotonic() + min(ttl, 2 if shared else 30), value, weight)
         self._bytes += weight
         while self._bytes > CONFIG['l1_budget_bytes'] or len(self._l1) > 64:
             self._bytes -= self._l1.popitem(last=False)[1][2]
@@ -122,8 +123,8 @@ class MetadataCache:
             except (TypeError, ValueError):
                 return value, 'BYPASS'
             if epoch == self._epoch and value is not None and len(raw) <= CONFIG['max_entry_bytes']:
-                await self._redis_call('set', self.prefix + key, raw, ex=ttl)
-                self._remember(key, value, raw, ttl)
+                stored = await self._redis_call('set', self.prefix + key, raw, ex=ttl)
+                self._remember(key, value, raw, ttl, shared=bool(stored))
             return value, 'MISS' if self.redis and time.monotonic() >= self._retry_at else 'BYPASS'
         finally:
             if owned:

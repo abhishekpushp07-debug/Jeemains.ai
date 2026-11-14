@@ -230,6 +230,7 @@ function Cup() {
     </Sheet>
     {status === "finished" && champ?.you ? <Confetti count={40} /> : null}
     {me ? <CrownCelebration visible={crowned && isFocused} no={cup?.title_no || 1} crown={cup?.my_crown} gold={(cup?.real_players || 0) > 1}
+      share={cup ? { name: me.name, avatar: me.avatar, frame: me.frame, label: cup.label, size: cup.size, night: !!cup.night } : undefined}
       onClose={closeCrown} onSee={() => { closeCrown(); if (me.pid) router.push(go.player(me.pid)); }} /> : null}
   </ArenaBg>;
 }

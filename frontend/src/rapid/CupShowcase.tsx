@@ -38,11 +38,11 @@ function WinRow({ w, i }: { w: Win; i: number }) {
  * Cup Champion showcase on a profile: every Knockout Cup won (wins against real players counted apart), cups played,
  * and the last five titles. Your own profile gets a button to go and win (or defend) the crown.
  */
-export function CupShowcase({ cups, name, me }: { cups: Cups; name: string; me: boolean }) {
+export function CupShowcase({ cups, name, me, onCheer }: { cups: Cups; name: string; me: boolean; onCheer?: () => void }) {
   const router = useRouter();
   const champ = cups.won > 0, rate = cups.played ? Math.min(100, Math.round((cups.won / cups.played) * 100)) : 0;
   return <>
-    <SectionTitle title="Cup Champion" />
+    <SectionTitle title="Trophy Cabinet" />
     <Panel gold testID="player-cups" style={styles.panel}>
       <LinearGradient pointerEvents="none" colors={[arena.goldSoft, arena.clear]} style={StyleSheet.absoluteFill} />
       <View style={styles.head}>
@@ -71,6 +71,7 @@ export function CupShowcase({ cups, name, me }: { cups: Cups; name: string; me: 
         <T w="heavy" size={11} color={arena.gold} style={styles.kicker}>LATEST TITLES</T>
         {cups.recent.map((w, i) => <WinRow key={w.id} w={w} i={i} />)}
       </View> : null}
+      {champ && onCheer ? <RaisedButton testID="player-cups-cheer" tone="wine" glyph="party-popper" height={56} label="Cheer squad" sub={me ? "Watch them dance for your crown" : `Cheer for ${name}`} onPress={onCheer} /> : null}
       {me ? <RaisedButton testID="player-cups-play" icon="trophy" height={58} streak label={champ ? "DEFEND YOUR CROWN" : "PLAY A KNOCKOUT CUP"} sub="4 · 8 · 16 players" onPress={() => router.push(go.cups())} /> : null}
       <View style={styles.legend}>
         <Crown c={{ won: 1, real: 1 }} /><T w="bold" size={11} color={arena.muted}>beat real players</T>

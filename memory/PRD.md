@@ -637,3 +637,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Session flash on hard reload fixed (rapidAccess ignores empty uid, no shared failure).
 - Tests: backend 14/14 (test_rf_phase3/phase4/iter65/iter66); frontend iteration 67 all pass.
 - Backlog: cleanup of /app/backend/tools image scripts before build (APK < 20MB); video zip deep-link (deferred by user).
+
+## Iteration 68 (2026-06) — Champions Wall, Cheer Squad, Crown Share, Cup Night reminder, cleanup
+- Champions Wall in lobby (GET /api/rf/cups/champions): last/tonight's Cup Night real champions until next doors (7 pm). CHEER → champion profile with Cheer Squad (2 AI-generated cheerleaders dancing, swinging CONGRATULATIONS board, stage lights, confetti). Profile section renamed "Trophy Cabinet" with a "Cheer squad" replay button.
+- Crown Share on crown celebration: 4:5 crown card + WhatsApp (native: view-shot + expo-sharing, Android caption copied; web: wa.me text).
+- 7:55 pm Cup Night reminder: rf_notices kind cup_night (once per seat holder, expires after start), NightReminder banner; Later/OPEN/Cup Night screen dismiss; excluded from Gang list/badge.
+- Cleanup: removed backend/tools image scripts, unused fonts/images. Redis: redis-server missing in pod (installed manually here); metadata cache L1 holds 30 s when Redis is down so speed holds.
+- Tests: test_iter67_champions_reminder.py, test_iter68_wall_edges.py pass; frontend iteration 68 pass, follow-up fixes applied (tonight key, label fallback, caption, wa.me on web, solid share backdrop, Cheer fits 375x667, no web vibrate).
