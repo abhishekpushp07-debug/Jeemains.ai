@@ -1,5 +1,12 @@
 # JEELIVE.AI Native App — PRD
-## Latest iteration62/63 — Rapid Fire Phase 3 wired: multi-pick battleground, Knockout Cup, live watch, Badla lo, Friends League, Gang War board
+## Latest iteration64 — Cup Champion Showcase
+- User choices: count ALL cup wins, real-player wins shown apart; list of past cup wins on the profile; crown next to names in leagues, Gang War and friend lists. "World best and perfect".
+- Backend: `crown_of(p)` in `gamify.py` → `{"won", "real"}` or null, added to `social.card()` (all player cards), `/leaderboard`, `/league/friends`, `/league/gangwar`. `cups.finish` increments `cups_real` when 2+ real players. `/players/{pid}` returns `cups {won, real, played, recent[5]}`. One-time startup backfill `backfill_cup_crowns()` (marker `rf_meta._id=cup_crowns_v1`). Index rf_cups (champion, status, finished_ts).
+- Frontend: `src/rapid/CupShowcase.tsx` (trophy hero, titles, 4 stat tiles, latest titles with BEAT N REAL / PRACTICE tags, gold/silver legend, own-profile CTA). `Crown`, `NameLine`, `crownText` in `parts.tsx` — gold crown = beat real players, silver = practice cups, ×N. Used in PersonRow, BoardRow + podium (Leagues), All India rows, player card. Gang tab Challenge button becomes icon-only < 360 px.
+- Fixture seeds cup titles: Diya gold ×3, Aarav silver ×1, Kabir none; cleanup removes `fixture-cup-*` cups.
+- Testing: `test_reports/iteration_64.json` all pass (backend 16/16 incl. new `tests/test_rf_cup_crowns.py`); minor polish then fixed (a11y labels include crown, Win % capped, podium testID, shorter win row, legend 11 px).
+
+## iteration62/63 — Rapid Fire Phase 3 wired: multi-pick battleground, Knockout Cup, live watch, Badla lo, Friends League, Gang War board
 - User (Hinglish) confirmed order; Badla choice = **"Pehle subject/chapter dobara chunein"** (choose battleground first, then same opponent gets the challenge). Asked for "Beautiful, powerful" / "World's best" Knockout UI.
 - **Battleground** (`src/rapid/scope.ts`, `ScopeSheet.tsx`): up to 5 picks (whole subject or chapter), PCM Mixed, Quick Mix tiles, chapter tabs/search/tray, 6th pick warning. Lobby `SubjectChips` one row (icons hidden < 380 px, 44 px tall). Used by lobby, Play Friends, Cup hub, Gang War.
 - **Knockout Cup** (`app/rapid/cup/index.tsx`, `cup/[cid].tsx`, backend `cups.py`): Open (40 s lobby, practice rivals fill) / Friends (host START, empty seats = BYE, invited list `invited_players` + WhatsApp remind, cancel confirm), 4/8/16, prizes strip, watch-by-code (max 100), seat progress bar, bracket that slides to the current round, champion panel, NEW CUP. Cup duel opened by link returns to its bracket.

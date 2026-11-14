@@ -10,23 +10,23 @@ import { arena } from "@/src/theme";
 import { GameIcon } from "./Art";
 import { GoldTitle, Panel, RaisedButton, Segment } from "./arena";
 import { Confetti, Pop } from "./juice";
-import { Face, Note } from "./parts";
+import { Face, NameLine, Note, crownText } from "./parts";
 import { ErrorBox } from "./ui";
-import { go, setArenaTab } from "./social";
+import { Crown as CrownT, go, setArenaTab } from "./social";
 
 const MEDAL = [arena.gold, "#D8DEE9", "#E0A36B"];
-type Row = { rank: number; pid?: string | null; name: string; avatar?: string | null; frame?: string | null; level: number; you: boolean; xp?: number; wins: number; score?: number; matches?: number };
+type Row = { rank: number; pid?: string | null; name: string; avatar?: string | null; frame?: string | null; level: number; you: boolean; xp?: number; wins: number; score?: number; matches?: number; crown?: CrownT | null };
 const left = (s: number) => { const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600); return d ? `${d}d ${h}h` : `${h}h ${Math.floor((s % 3600) / 60)}m`; };
 
 /** One ranked row: medal, face, name, and the number that ranks it. */
 export function BoardRow({ row, value, sub, testID, i = 0 }: { row: Row; value: string; sub: string; testID: string; i?: number }) {
   const router = useRouter();
   return <Pop delay={Math.min(i, 8) * 40}>
-    <Pressable testID={testID} disabled={!row.pid || row.you} onPress={() => { tap(); router.push(go.player(row.pid!)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}, ${value}`} style={[styles.row, row.you && styles.rowYou]}>
+    <Pressable testID={testID} disabled={!row.pid || row.you} onPress={() => { tap(); router.push(go.player(row.pid!)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}${crownText(row.crown)}, ${value}`} style={[styles.row, row.you && styles.rowYou]}>
       <View style={[styles.medal, row.rank <= 3 && { backgroundColor: MEDAL[row.rank - 1], borderColor: arena.badgeInk }]}><T w="heavy" size={13} color={row.rank <= 3 ? arena.badgeInk : arena.muted}>{row.rank}</T></View>
       <Face p={row} size={40} />
       <View style={styles.flex}>
-        <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{row.name}{row.you ? " (you)" : ""}</T>
+        <NameLine name={`${row.name}${row.you ? " (you)" : ""}`} crown={row.crown} size={14} testID={`${testID}-crown`} />
         <T w="bold" size={11} color={arena.muted} numberOfLines={1}>{sub}</T>
       </View>
       <T w="heavy" size={13} color={arena.gold}>{value}</T>
@@ -63,7 +63,7 @@ export function FriendsLeague({ uid }: { uid: string }) {
       <T w="heavy" size={12} color={arena.gold}>LAST WEEK’S PODIUM</T>
       <View style={styles.podium}>{d.last.items.map((x: Row) => <View key={x.rank} style={styles.podiumCell}>
         <View style={[styles.medal, { backgroundColor: MEDAL[x.rank - 1], borderColor: arena.badgeInk }]}><T w="heavy" size={12} color={arena.badgeInk}>{x.rank}</T></View>
-        <Face p={x} size={x.rank === 1 ? 52 : 42} /><T w="heavy" size={11} color={x.you ? arena.gold : arena.text} numberOfLines={1}>{x.you ? "You" : x.name}</T>
+        <Face p={x} size={x.rank === 1 ? 52 : 42} /><NameLine name={x.you ? "You" : x.name} crown={x.crown} size={11} color={x.you ? arena.gold : arena.text} testID={`rf-league-podium-crown-${x.rank}`} />
         <T w="bold" size={10} color={arena.muted}>{x.xp} XP</T>
       </View>)}</View>
       {d.last.can_claim ? <RaisedButton testID="rf-league-claim" icon="coin" height={52} streak label={`COLLECT ${d.last.prize} COINS`} sub={`You finished ${d.last.rank === 1 ? "1st" : d.last.rank === 2 ? "2nd" : "3rd"}!`} busy={busy} onPress={claim} />

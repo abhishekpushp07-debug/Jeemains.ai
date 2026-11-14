@@ -5,11 +5,11 @@ import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Icon, T, tap } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
-import { arena } from "@/src/theme";
+import { arena, fx } from "@/src/theme";
 import { GEM_LABEL, GEM_ORDER, Gem, PhoenixDiamond, topGem } from "./Art";
 import { ArenaBg, OnlineDot, ScreenTop } from "./arena";
 import { Jelly, Pop } from "./juice";
-import { PlayerCard } from "./social";
+import { Crown as CrownT, PlayerCard } from "./social";
 
 type Person = Partial<Omit<PlayerCard, "pid">> & { pid?: string | null; name?: string };
 
@@ -30,14 +30,39 @@ export function WingedFace({ p, diamonds, size = 104, testID }: { p: Person; dia
 
 export function PersonRow({ p, sub, right, onPress, testID, selected }: { p: Person; sub?: string; right?: React.ReactNode; onPress?: () => void; testID?: string; selected?: boolean }) {
   return <View testID={testID} style={[styles.row, selected && styles.rowOn]}>
-    <Pressable onPress={onPress ? () => { tap(); onPress(); } : undefined} disabled={!onPress} accessibilityRole="button" accessibilityLabel={p.name} accessibilityState={{ selected: !!selected }} style={styles.rowMain}>
+    <Pressable onPress={onPress ? () => { tap(); onPress(); } : undefined} disabled={!onPress} accessibilityRole="button" accessibilityLabel={`${p.name || "Player"}${crownText(p.crown)}`} accessibilityState={{ selected: !!selected }} style={styles.rowMain}>
       <Face p={p} />
       <View style={styles.flex}>
-        <T w="heavy" size={15} color={arena.text} numberOfLines={1}>{p.name || "Player"}</T>
+        <NameLine name={p.name || "Player"} crown={p.crown} testID={testID ? `${testID}-crown` : undefined} />
         {sub ? <T w="bold" size={12} color={p.online ? arena.online : arena.muted} numberOfLines={1}>{sub}</T> : null}
       </View>
     </Pressable>
     {right}
+  </View>;
+}
+
+/** Read out after a name in a row's label: ", Cup Champion ×3". Empty when the player has no crown. */
+export const crownText = (c?: CrownT | null) => (c?.won ? `, Cup Champion${c.won > 1 ? ` ×${c.won}` : ""}` : "");
+
+/**
+ * The Cup Champion crown: gold once a Knockout Cup is won against real players, silver while every title came from
+ * practice-rival cups. Shows ×N for more than one cup.
+ */
+export function Crown({ c, size = "sm", testID }: { c?: CrownT | null; size?: "sm" | "lg"; testID?: string }) {
+  if (!c?.won) return null;
+  const gold = c.real > 0, big = size === "lg", ink = gold ? arena.badgeInk : arena.panelEdge;
+  return <View testID={testID} accessible accessibilityLabel={`Cup Champion, ${c.won} cup${c.won === 1 ? "" : "s"} won${c.real ? `, ${c.real} against real players` : ", practice cups"}`}
+    style={[styles.crown, big && styles.crownBig, gold ? styles.crownGold : styles.crownSilver]}>
+    <Icon name="crown" size={big ? 20 : 13} color={ink} />
+    {c.won > 1 ? <T w="heavy" size={big ? 14 : 10} color={ink}>×{c.won}</T> : null}
+  </View>;
+}
+
+/** A player's name with their champion crown right after it. */
+export function NameLine({ name, crown, size = 15, color = arena.text, testID }: { name: string; crown?: CrownT | null; size?: number; color?: string; testID?: string }) {
+  return <View style={styles.nameLine}>
+    <T w="heavy" size={size} color={color} numberOfLines={1} style={styles.shrink}>{name}</T>
+    <Crown c={crown} testID={testID} />
   </View>;
 }
 
@@ -80,6 +105,10 @@ export function InnerScreen({ title, sub, right, children, testID, footer }: { t
 
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, dot: { position: "absolute", right: -1, bottom: -1 }, winged: { alignItems: "center", justifyContent: "center" },
+  nameLine: { flexDirection: "row", alignItems: "center", gap: 6, minWidth: 0 }, shrink: { flexShrink: 1 },
+  crown: { flexDirection: "row", alignItems: "center", gap: 2, height: 20, paddingHorizontal: 5, borderRadius: 10, borderWidth: 1.5 },
+  crownBig: { height: 32, paddingHorizontal: 9, borderRadius: 16, gap: 4 },
+  crownGold: { backgroundColor: arena.gold, borderColor: arena.goldDeep }, crownSilver: { backgroundColor: fx.smoke, borderColor: fx.white },
   row: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 64, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 18, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },
   rowOn: { borderColor: arena.tealHi, backgroundColor: arena.panelHi }, rowMain: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 12, minHeight: 48 },
   check: { width: 30, height: 30, borderRadius: 10, borderWidth: 2, borderColor: arena.rimHi, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelEdge },

@@ -7,7 +7,8 @@ import { useCached } from "@/src/useCached";
 import type { Pick } from "./scope";
 
 // Rapid Fire social data shared by the arena screens: the inbox (presence, challenge banner, notices), friends and gangs.
-export type PlayerCard = { pid: string; name: string; avatar?: string | null; frame?: string | null; entry?: string | null; level: number; online: boolean; seen_ts?: number | null };
+export type Crown = { won: number; real: number };
+export type PlayerCard = { pid: string; name: string; avatar?: string | null; frame?: string | null; entry?: string | null; level: number; online: boolean; seen_ts?: number | null; crown?: Crown | null };
 export type GangTag = { id: string; name: string; emblem: string };
 export type GangRow = GangTag & { members: number; online: number; leader: boolean };
 export type ChallengeNote = { id: string; subject: string; chapter?: string | null; label: string; revenge: boolean; expires_in: number; joined: number; seats: number; single: boolean; gang: GangTag | null;

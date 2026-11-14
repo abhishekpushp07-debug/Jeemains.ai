@@ -11,7 +11,8 @@ import { arena } from "@/src/theme";
 import { Emblem } from "@/src/rapid/Art";
 import { GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena";
 import { HeadToHeadCard } from "@/src/rapid/HeadToHead";
-import { GemStrip, InnerScreen, Note, WingedFace } from "@/src/rapid/parts";
+import { CupShowcase } from "@/src/rapid/CupShowcase";
+import { Crown, GemStrip, InnerScreen, Note, WingedFace } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
 import { day, go, prettyCode, seenText, setArenaTab, shareFriendCode, shortSubject, useGangs } from "@/src/rapid/social";
 
@@ -50,7 +51,10 @@ function Player() {
     {!p ? (q.error ? <ErrorBox testID="player-error" error={q.error} retry={q.reload} /> : <ActivityIndicator testID="player-loading" color={arena.aqua} size="large" />) : <>
       <Panel gold testID="player-card" style={styles.card}>
         <WingedFace p={p} diamonds={p.diamonds} size={portrait} testID="player-wings" />
-        <GoldTitle size={26} center testID="player-name">{p.name}</GoldTitle>
+        <View style={styles.nameRow}>
+          <GoldTitle size={26} center testID="player-name">{p.name}</GoldTitle>
+          <Crown c={p.crown} size="lg" testID="player-crown" />
+        </View>
         <T testID="player-title" w="heavy" size={13} color={arena.aqua}>{p.title} · Level {p.level}</T>
         <T testID="player-seen" w="bold" size={12} color={p.online ? arena.online : arena.muted}>{seenText(p)}</T>
       </Panel>
@@ -71,6 +75,8 @@ function Player() {
       </>}
       {note ? <T testID="player-note" w="bold" size={13} color={arena.aqua} style={styles.center}>{note}</T> : null}
       <ErrorBox testID="player-action-error" error={error} />
+
+      {p.cups ? <CupShowcase cups={p.cups} name={p.name} me={p.is_me} /> : null}
 
       <View style={styles.tiles}>
         <Tile testID="player-stat-matches" label="MATCHES" value={s.matches} />
@@ -132,6 +138,7 @@ function Player() {
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, center: { textAlign: "center" }, row: { flexDirection: "row", gap: 10 },
   card: { alignItems: "center", gap: 4, padding: 18 },
+  nameRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" },
   friends: { flex: 1, height: 57, borderRadius: 20, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.gold },
   tiles: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
   tile: { flexGrow: 1, flexBasis: "30%", minHeight: 66, alignItems: "center", justifyContent: "center", gap: 2, padding: 6, borderRadius: 16, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },

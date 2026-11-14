@@ -1,6 +1,6 @@
 """Local-only QA data for the Rapid Fire friend feed, head-to-head history, Diamond Rush and diamond store.
 
-  python tests/rf_social_fixture.py seed      # add three TEST friends, their activity, four 1 v 1 matches, and diamonds to try the store
+  python tests/rf_social_fixture.py seed      # add three TEST friends, their activity, four 1 v 1 matches, cup titles (Diya gold ×3, Aarav silver) and diamonds to try the store
   python tests/rf_social_fixture.py cleanup   # remove exactly what seed created and put the player's wallet back
 
 Touches only the Rapid Fire companion collections in this preview database. Nothing is sent to the canonical website.
@@ -86,6 +86,17 @@ def seed(pid):
     db.rf_feed.insert_many([{"id": f"{state['feed']}{k}", "uid": p["uid"], "kind": kind, "data": data, "ts": now - hours * 3600, "at": datetime.now(timezone.utc)} for k, (p, kind, data, hours) in enumerate(events)])
     for mine, theirs, days, subject in ((18, 14, 0.2, "Physics"), (11, 16, 1, "Chemistry"), (15, 15, 3, "Mathematics"), (21, 12, 6, "Physics")):
         state["duels"].append(match(db, me, a, mine, theirs, days, subject))
+    # Cup Champion showcase: Diya won 3 cups (2 against a real player, Kabir), so her crown is gold ×3; Aarav won 1 practice cup: silver.
+    def cup(champ, humans, size, label, days):
+        ts = now - days * 86400
+        players = [{"uid": h["uid"], "pid": h["pid"], "name": h["name"], "bot": False} for h in humans]
+        players += [{"uid": f"bot-fixture{run}{len(players) + i}", "pid": None, "name": "Practice Rival", "bot": True} for i in range(size - len(players))]
+        db.rf_cups.insert_one({"id": f"fixture-cup-{run}-{days}", "kind": "open", "size": size, "status": "finished", "exam": "JEE", "label": label, "players": players,
+                               "champion": champ["uid"], "prizes": {champ["uid"]: 30 + 40 * (len(humans) - 1)}, "created_ts": ts - 600, "finished_ts": ts, "code": None})
+    for champ, humans, size, label, days in ((b, [b, c], 8, "PCM Mixed", 1), (b, [b, c], 4, "Mixed Physics", 4), (b, [b], 4, "Mixed Chemistry", 9), (a, [a], 4, "Mixed Mathematics", 2)):
+        cup(champ, humans, size, label, days)
+    db.rf_profiles.update_one({"uid": b["uid"]}, {"$set": {"cups_won": 3, "cups_real": 2}, "$addToSet": {"badges": "cup_champion"}})
+    db.rf_profiles.update_one({"uid": a["uid"]}, {"$set": {"cups_won": 1, "cups_real": 0}})
     # Three diamonds won today (two Diamond Rush chests ready) and enough diamonds in hand for one store special.
     today = datetime.fromtimestamp(now, IST).strftime("%Y-%m-%d")
     old = me.get("day_stats") or {}
@@ -110,6 +121,7 @@ def sweep():
     db.rf_challenges.delete_many({"$or": [{"from_uid": {"$in": uids}}, {"invites.uid": {"$in": uids}}]})
     db.rf_duels.delete_many({"players.uid": {"$in": uids}})
     db.rf_awards.delete_many({"uid": {"$in": uids}})
+    db.rf_cups.delete_many({"players.uid": {"$in": uids}})
     print(json.dumps({"ok": True, "swept_orphan_friends": len(uids)}))
 
 
@@ -127,6 +139,7 @@ def cleanup():
     db.rf_challenges.delete_many({"$or": [{"from_uid": {"$in": uids}}, {"invites.uid": {"$in": uids}}]})
     db.rf_duels.delete_many({"$or": [{"id": {"$in": state["duels"]}}, {"players.uid": {"$in": uids}}]})
     db.rf_awards.delete_many({"$or": [{"uid": me, "ref": {"$in": ["duel:" + d for d in state["duels"]]}}, {"uid": {"$in": uids}}]})
+    db.rf_cups.delete_many({"players.uid": {"$in": uids}})
     wallet = state["wallet"]
     gone = {k: "" for k in WALLET if k not in wallet}
     db.rf_profiles.update_one({"uid": me}, {"$set": wallet, **({"$unset": gone} if gone else {})})

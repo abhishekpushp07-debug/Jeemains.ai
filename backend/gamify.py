@@ -69,6 +69,13 @@ def rush_of(p: dict) -> dict:
     return {"points": points, "steps": [{"at": at, "chest": name, "coins": coins, "bonus": bonus, "done": points >= at, "claimed": at in opened} for at, name, coins, bonus in RUSH]}
 
 
+def crown_of(p: dict) -> Optional[dict]:
+    """The champion's crown next to a player's name: every Knockout Cup they won, and how many of those beat real players."""
+    won = p.get("cups_won", 0)
+    return {"won": won, "real": min(p.get("cups_real", 0), won)} if won else None
+
+
+
 def level_of(xp: int) -> int:
     return int(math.sqrt(max(0, xp) / 100)) + 1
 
@@ -232,7 +239,7 @@ def make_router(db, rf_user):
         async with board_locks[exam]:
             cached = board_cache.get(exam, {})
             if time.time() - cached.get("ts", 0) > 15:
-                rows = await db.rf_profiles.find(query, {"_id": 0, "uid": 1, "name": 1, "exam_stats": 1, "pid": 1, "avatar": 1, "equipped": 1}).sort([(field, -1), ("uid", 1)]).limit(20).to_list(20)
+                rows = await db.rf_profiles.find(query, {"_id": 0, "uid": 1, "name": 1, "exam_stats": 1, "pid": 1, "avatar": 1, "equipped": 1, "cups_won": 1, "cups_real": 1}).sort([(field, -1), ("uid", 1)]).limit(20).to_list(20)
                 cached = {"ts": time.time(), "rows": rows}
                 board_cache[exam] = cached
         items = []
@@ -240,7 +247,7 @@ def make_router(db, rf_user):
             stats = row.get("exam_stats", {}).get(exam, {})
             items.append({"rank": i + 1, "name": row.get("name") or f"{exam} Aspirant", "you": row["uid"] == uid, "pid": row.get("pid"),
                           "avatar": safe_avatar(row.get("avatar")), "frame": equipped_of(row).get("frame"),
-                          "xp": stats.get("xp", 0), "level": level_of(stats.get("xp", 0)), "wins": stats.get("wins", 0)})
+                          "xp": stats.get("xp", 0), "level": level_of(stats.get("xp", 0)), "wins": stats.get("wins", 0), "crown": crown_of(row)})
         mine = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "exam_stats": 1, "name": 1}) or {}
         xp = mine.get("exam_stats", {}).get(exam, {}).get("xp", 0)
         rank = None

@@ -1,0 +1,42 @@
+{
+  "summary": "Iteration 64: Cup Champion Showcase + crowns, tested as the approved QA learner PF37CC308 (one PIN login, session reused) at 390 and 320 px. Backend: 16/16 pass (test_rf_phase3 7/7 plus the new test_rf_cup_crowns 9/9 on the public URL). The profile crown and cups block are correct for Diya (gold ×3, real 2, played 3, newest 3 wins first, humans 2/2/1), Aarav (silver, 1/0/1), Kabir (null crown, played 2) and an empty own profile. Crown appears on /friends, /league/friends (items and all_time), /leaderboard and /league/gangwar, with no _id leaks; the endpoint returns 401/403 without auth. Frontend: every requested item passes. Diya's profile shows the gold ×3 crown, '3 titles', '2 won against real players', tiles 3/2/3/100%, 3 latest-title rows (BEAT 1 REAL, BEAT 1 REAL, PRACTICE), the legend, and no play button. Aarav shows a silver crown with no ×N, 'Won against practice rivals so far' and PRACTICE. Kabir shows 'No crown yet', '<name> has not won a cup yet.', player-cups-empty and no player-crown. Own profile: 'No crown yet' and 'PLAY A KNOCKOUT CUP', which opens /rapid/cup. Crowns appear on the Gang tab friend rows, the Friends League rows (This week and All time) and the Play Friends rows, and not on Kabir's. Gang War and All India show no crowns (no cup winners there). The crown accessibility label is exactly 'Cup Champion, 3 cups won, 2 against real players'. With a temporary 40-character name, the crown stays visible after the truncated name at 390 and 320 px. Tapping a league row opens the profile. The last-week podium was not shown (no last-week data), so the podium crown was not seen. Fixture cleanup confirmed: 0 TEST-fixture-* profiles, 0 fixture-cup-* cups, 0 fixture friend rows, 0 TEST-crown-* leftovers. No deprecated Expo packages in the files reviewed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/rf/players/{pid} cups", "issue": "'won'/'real' come from the profile counters (cups_won/cups_real), while 'played' is a live count of rf_cups. If old cup docs are pruned, or the counters drift (backfill $set racing with a live finish), won can exceed played: WIN % > 100% and 'recent' shorter than won. Suggest clamping rate on the client and played = max(played, won) on the server."},
+      {"endpoint": "server.py backfill_cup_crowns", "issue": "Uses $set for absolute values at startup. A cup that finishes between the aggregate and the update is lost, or double counted with $inc. Only a one-time risk because of the rf_meta guard. Acceptable, just noting it."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Gang tab friends list at 320 px", "issues": ["With the crown plus the wide 'Challenge' button, even short names get cut to 3–4 characters ('Aara…', 'Diy…'), and the sub line too ('Level 7 · Onli…'). The crown is still visible, but you can hardly read who the friend is. Suggest an icon-only or narrower Challenge button below about 360 px, or showing the crown as a badge on the avatar."]},
+      {"screen": "Profile latest titles at 320 px", "issues": ["The meta line '13 Nov · 8 players · Open cup' is truncated, so Open/Friends is lost. Minor."]},
+      {"screen": "Cup Champion legend", "issues": ["The legend text is 10 px muted ('beat real players' / 'practice cups'). It is readable, but small for a key legend; 11–12 px would be better."]}
+    ],
+    "react_native_issues": [
+      {"component": "Crown accessibility inside rows", "issue": "The PersonRow Pressable sets accessibilityLabel={p.name}, and BoardRow sets `Rank N, name, value`. Both override the children, so screen readers never announce the crown on friend, league or board rows; only the profile crown is announced. Reference: /app/frontend/src/rapid/parts.tsx:33, /app/frontend/src/rapid/Leagues.tsx:25, /app/frontend/src/rapid/TrophyTab.tsx:50"},
+      {"component": "Podium crown testID", "issue": "The last-week podium NameLine has no testID, so the podium crown cannot be targeted. Reference: /app/frontend/src/rapid/Leagues.tsx:66"}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_cup_crowns.py", "/app/backend/tests/test_rf_phase3.py", "/app/test_reports/pytest/pytest_cup_crowns.xml"],
+  "action_items": [
+    "Add the crown text to the row-level accessibilityLabel in PersonRow (parts.tsx:33), BoardRow (Leagues.tsx:25) and the rf-board-row Pressable (TrophyTab.tsx:50), e.g. `${name}, Cup Champion ×3`.",
+    "At 320 px on the Gang tab friend rows, make the Challenge button narrower or icon-only so names are not cut to 3 characters next to the crown.",
+    "Optional: on the server, return played = max(played, won), or clamp WIN % to 100.",
+    "Optional: add testID `rf-league-last-<rank>-crown` to the podium NameLine (Leagues.tsx:66)."
+  ],
+  "critical_code_review_comments": [
+    "crown_of clamps real <= won and returns null for 0 wins. Correct, and used consistently by card(), leaderboard, the Friends League table and gangwar.",
+    "cups.finish increments cups_won only for a non-bot champion in prizes, and cups_real only when there are 2+ humans. Correct, and safe against paying twice (inside the find_one_and_update winner branch).",
+    "The profile 'recent' query is sorted by finished_ts desc and limited to 5, and projects only the needed fields. Good."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_cup_crowns.py (new)"],
+  "success_rate": {"backend": "100% (16/16)", "frontend": "100% of requested checks (podium crown not seen: no last-week data)"},
+  "seed_data_creation": "Used the existing seeded fixture. For the truncation test, Diya's fixture name was temporarily set to a 40-character name and then restored. Afterwards ran `python tests/rf_social_fixture.py cleanup`: removed 3 friends and 4 duels and restored the wallet. Verified 0 TEST-fixture-* profiles, 0 fixture-cup-* cups and 0 fixture friend rows. The pytest TEST-crown viewer (grant, profile, friend rows) was removed by exact uid.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "test_rf_cup_crowns.py needs the fixture seeded (`python /app/tests/rf_social_fixture.py seed`) and skips otherwise. It creates its own TEST-crown-* viewer with a hashed grant and uses the public URL from frontend/.env EXPO_PUBLIC_BACKEND_URL. Web session: log in once at /entry and inject localStorage jl_sid with add_init_script. Gang War rows use testID rf-gangwar-row-<rank>, and All India rows use rf-board-row-<rank> with crown rf-board-crown-<rank>.",
+  "rca_of_issue": ""
+}

@@ -368,7 +368,13 @@ async def _cups(db, api, u, tag):
     assert all(m["winner"] is not None and m["score"] for r in cup["rounds"] for m in r["matches"])
     assert next(p for p in (await api.get(f"/cups/{cid}", b)).json()["players"] if p["you"])["out"] is True
     prof = await db.rf_profiles.find_one({"uid": a["uid"]})
-    assert prof["cups_won"] == 1 and "cup_champion" in prof["badges"] and prof["coins"] >= 70
+    assert prof["cups_won"] == 1 and prof["cups_real"] == 1 and "cup_champion" in prof["badges"] and prof["coins"] >= 70
+    # Cup Champion showcase: the crown travels with the player card, the profile lists the title
+    shown = (await api.get(f"/players/{a['pid']}", b)).json()
+    assert shown["crown"] == {"won": 1, "real": 1} and shown["cups"]["won"] == 1 and shown["cups"]["real"] == 1 and shown["cups"]["played"] >= 1
+    assert shown["cups"]["recent"][0]["id"] == cid and shown["cups"]["recent"][0]["humans"] == 2 and shown["cups"]["recent"][0]["size"] == 4
+    loser = (await api.get(f"/players/{b['pid']}", a)).json()
+    assert loser["crown"] is None and loser["cups"]["won"] == 0 and loser["cups"]["played"] >= 1 and loser["cups"]["recent"] == []
     assert (await api.get("/inbox", a)).json()["cup"] is None
     assert any(m["cup"] for m in (await api.get("/duels?exam=JEE", a)).json()["items"])
 

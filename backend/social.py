@@ -18,7 +18,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
-from gamify import BADGES, level_of, vault_total
+from gamify import BADGES, crown_of, level_of, vault_total
 from scope import label_for, scope_of
 from shop import equipped_of, safe_avatar
 
@@ -97,7 +97,7 @@ def _online(p: dict) -> bool:
 def card(p: dict) -> dict:
     eq = equipped_of(p)
     return {"pid": p.get("pid") or make_pid(p["uid"]), "name": public_name(p), "avatar": safe_avatar(p.get("avatar")), "frame": eq.get("frame"),
-            "entry": eq.get("entry"), "level": level_of(p.get("xp", 0)), "online": _online(p), "seen_ts": p.get("seen_ts")}
+            "entry": eq.get("entry"), "level": level_of(p.get("xp", 0)), "online": _online(p), "seen_ts": p.get("seen_ts"), "crown": crown_of(p)}
 
 
 def team_scores(d: dict) -> dict:
@@ -228,6 +228,11 @@ def make_router(db, rf_user):
         out = {**card(p), "is_me": them == uid, "title": stats["title"], "stats": {k: stats[k] for k in ("matches", "wins", "win_rate", "best_streak", "accuracy")},
                "recent": stats["recent"], "trophies": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1]} for b in BADGES if b in p.get("badges", [])],
                "diamonds": vault_total(p), "best_phoenix": p.get("best_phoenix", 0)}
+        # Cup Champion showcase: every cup won (real-player wins counted apart) and the last five titles.
+        wins = await db.rf_cups.find({"champion": them, "status": "finished"}, {"_id": 0, "id": 1, "label": 1, "size": 1, "kind": 1, "players.bot": 1, "finished_ts": 1}).sort("finished_ts", -1).limit(5).to_list(5)
+        out["cups"] = {**(crown_of(p) or {"won": 0, "real": 0}), "played": await db.rf_cups.count_documents({"players.uid": them, "status": "finished"}),
+                       "recent": [{"id": c["id"], "label": c["label"], "size": c["size"], "kind": c["kind"], "humans": sum(not x.get("bot") for x in c["players"]),
+                                   "finished_at": datetime.fromtimestamp(c["finished_ts"], timezone.utc).isoformat()} for c in wins]}
         if them != uid:
             out["relation"] = await relation(uid, them)
             both = {"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}}  # head-to-head counts 1 v 1 matches only

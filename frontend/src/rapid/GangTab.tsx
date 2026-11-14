@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
@@ -19,6 +19,7 @@ export function GangTab() {
   const router = useRouter(), uid = useAuth().user?.id || "";
   const inbox = useInbox(), friends = useFriends(uid), gangs = useGangs(uid), myCode = useFriendCode(uid).data?.code;
   const [busy, setBusy] = useState(""), [error, setError] = useState("");
+  const narrow = useWindowDimensions().width < 360; // small phones: an icon-only Challenge button leaves room for the name and crown
   const reloads = [friends.reload, gangs.reload];
   useFocusEffect(useCallback(() => { reloads.forEach((f) => f()); if (uid) refreshInbox(uid); }, [...reloads, uid])); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -85,7 +86,8 @@ export function GangTab() {
       <SectionTitle title={`Friends${mine.length ? ` (${mine.length})` : ""}`} />
       <View style={styles.list} testID="rf-friends-list">
         {mine.map((f) => <PersonRow key={f.pid} testID={`rf-friend-row-${f.pid}`} p={f} sub={`Level ${f.level} · ${seenText(f)}`} onPress={() => router.push(go.player(f.pid))}
-          right={<RaisedButton testID={`rf-friend-challenge-${f.pid}`} label="Challenge" height={42} onPress={() => router.push(go.challenge({ pid: f.pid }))} style={styles.medium} />} />)}
+          right={narrow ? <RaisedButton testID={`rf-friend-challenge-${f.pid}`} icon="swords" height={44} accessibilityLabel={`Challenge ${f.name}`} onPress={() => router.push(go.challenge({ pid: f.pid }))} style={styles.iconBtn} />
+            : <RaisedButton testID={`rf-friend-challenge-${f.pid}`} label="Challenge" height={42} onPress={() => router.push(go.challenge({ pid: f.pid }))} style={styles.medium} />} />)}
         {friends.data && !mine.length ? <Note testID="rf-friends-empty">No friends yet. Send your Friend Code on WhatsApp, or enter a friend’s code above.</Note> : null}
         {!friends.data && friends.loading ? <ActivityIndicator color={arena.aqua} /> : null}
       </View>
@@ -95,7 +97,7 @@ export function GangTab() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, content: { paddingHorizontal: 16, paddingTop: 4, paddingBottom: 28, gap: 12 }, list: { gap: 8 },
-  medium: { width: 112 },
+  medium: { width: 112 }, iconBtn: { width: 52 },
   notice: { padding: 12, gap: 10 }, noticeRow: { flexDirection: "row", alignItems: "center", gap: 10 },
   actions: { flexDirection: "row", gap: 10 },
   action: { flex: 1, minHeight: 92, alignItems: "center", justifyContent: "center", gap: 2, borderRadius: 20, backgroundColor: arena.panelHi, borderWidth: 1.5, borderColor: arena.rim, borderBottomWidth: 6, borderBottomColor: arena.panelEdge },

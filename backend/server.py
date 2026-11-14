@@ -24,7 +24,7 @@ from scope import Pick, normalise, scope_fields
 from metadata_cache import metadata_cache
 from performance import ServerTiming, AssetAwareCompression
 from cors_config import allowed_origins
-import asyncio, json, logging, os, re, uuid, httpx
+import asyncio, json, logging, os, re, time, uuid, httpx
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -443,6 +443,20 @@ app.add_middleware(ServerTiming)
 app.add_middleware(CORSMiddleware, allow_credentials=True, allow_origins=allowed_origins(), allow_methods=["*"], allow_headers=["*"], expose_headers=['Server-Timing', 'X-Cache'])
 
 
+async def backfill_cup_crowns():
+    """Once: count every cup each player has won, and how many of those beat real players (cups_real arrived after the first cups)."""
+    if await db.rf_meta.find_one({"_id": "cup_crowns_v1"}):
+        return
+    humans = {"$size": {"$filter": {"input": "$players", "cond": {"$ne": ["$$this.bot", True]}}}}
+    rows = db.rf_cups.aggregate([{"$match": {"status": "finished", "champion": {"$type": "string"}}},
+                                 {"$group": {"_id": "$champion", "won": {"$sum": 1}, "real": {"$sum": {"$cond": [{"$gt": [humans, 1]}, 1, 0]}}}}])
+    async for row in rows:
+        if not row["_id"].startswith("bot-"):
+            await db.rf_profiles.update_one({"uid": row["_id"]}, {"$set": {"cups_won": row["won"], "cups_real": row["real"]}})
+    await db.rf_meta.update_one({"_id": "cup_crowns_v1"}, {"$set": {"ts": time.time()}}, upsert=True)
+
+
+
 @app.on_event("startup")
 async def startup():
     global http
@@ -496,6 +510,8 @@ async def startup():
     await db.rf_cups.create_index([("kind", 1), ("status", 1), ("scope_key", 1)])
     await db.rf_duels.create_index([("status", 1), ("players.uid", 1)])
     await db.rf_cups.create_index("code", unique=True, partialFilterExpression={"code": {"$type": "string"}})
+    await db.rf_cups.create_index([("champion", 1), ("status", 1), ("finished_ts", -1)], sparse=True)
+    await backfill_cup_crowns()
     await db.rf_duels.create_index([("team_mode", 1), ("status", 1)], sparse=True)
     await db.rf_feed.create_index("at", expireAfterSeconds=14 * 86400)
     await db.rf_learning_events.create_index([("uid", 1), ("exam", 1), ("completed_at", 1), ("ref", 1)])

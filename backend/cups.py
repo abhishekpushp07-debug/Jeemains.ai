@@ -120,7 +120,8 @@ def make_router(db, rf_user, duels):
             return await fresh(c["id"])
         for uid, coins in prizes.items():  # paid once: only the request that closed the cup gets here
             won = uid == champion
-            await db.rf_profiles.update_one({"uid": uid}, {"$inc": {"coins": coins, **({"cups_won": 1} if won else {})}, **({"$addToSet": {"badges": "cup_champion"}} if won and len(humans) > 1 else {})})
+            await db.rf_profiles.update_one({"uid": uid}, {"$inc": {"coins": coins, **({"cups_won": 1, **({"cups_real": 1} if len(humans) > 1 else {})} if won else {})},
+                                                           **({"$addToSet": {"badges": "cup_champion"}} if won and len(humans) > 1 else {})})
         if champion in prizes and len(humans) > 1 and not champion.startswith("TEST"):
             await db.rf_feed.insert_one({"id": "cup:" + c["id"], "uid": champion, "kind": "cup", "data": {"players": len(c["players"]), "label": c["label"]}, "ts": time.time(), "at": datetime.now(timezone.utc)})
         return got

@@ -8,7 +8,7 @@ from typing import Optional
 
 from fastapi import APIRouter, Header, HTTPException
 
-from gamify import ist_week, level_of, week_ends_in
+from gamify import crown_of, ist_week, level_of, week_ends_in
 from shop import equipped_of, safe_avatar
 from social import blocked_uids, public_name
 
@@ -48,7 +48,7 @@ def make_router(db, rf_user):
     def table(profs, uid, value):
         ranked = sorted(profs, key=lambda p: (-value(p)[0], -value(p)[1], p["uid"]))
         return [{"rank": i + 1, "pid": p.get("pid"), "name": public_name(p), "avatar": safe_avatar(p.get("avatar")), "frame": equipped_of(p).get("frame"),
-                 "level": level_of(p.get("xp", 0)), "xp": value(p)[0], "wins": value(p)[1], "you": p["uid"] == uid} for i, p in enumerate(ranked)]
+                 "level": level_of(p.get("xp", 0)), "xp": value(p)[0], "wins": value(p)[1], "you": p["uid"] == uid, "crown": crown_of(p)} for i, p in enumerate(ranked)]
 
     def weekly(profs, uid, key):
         return table(profs, uid, lambda p: (week_stats(p, key)["xp"], week_stats(p, key)["wins"]))
@@ -105,7 +105,7 @@ def make_router(db, rf_user):
         profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [x["_id"] for x in rows] + [uid]}}).to_list(len(rows) + 1)}
         items = [{"rank": i + 1, "pid": (profs.get(x["_id"]) or {}).get("pid"), "name": public_name(profs.get(x["_id"]) or {}), "avatar": safe_avatar((profs.get(x["_id"]) or {}).get("avatar")),
                   "frame": equipped_of(profs.get(x["_id"]) or {}).get("frame"), "level": level_of((profs.get(x["_id"]) or {}).get("xp", 0)),
-                  "score": x["score"], "matches": x["matches"], "wins": x["wins"], "you": x["_id"] == uid} for i, x in enumerate(rows)]
+                  "score": x["score"], "matches": x["matches"], "wins": x["wins"], "you": x["_id"] == uid, "crown": crown_of(profs.get(x["_id"]) or {})} for i, x in enumerate(rows)]
         me = next((x for x in items if x["you"]), None)
         if not me:
             mine = await db.rf_duels.aggregate([{"$match": {"team_mode": True, "status": "finished", "players.uid": uid}}, *totals[1:], {"$match": {"_id": uid}}]).to_list(1)

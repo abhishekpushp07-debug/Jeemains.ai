@@ -11,7 +11,7 @@ import { arena } from "@/src/theme";
 import { Alive, GEM_ORDER, GameIcon, Gem } from "./Art";
 import { GoldTitle, Panel, RaisedButton, SectionTitle, Segment } from "./arena";
 import { Jelly, Pop } from "./juice";
-import { Bar, Face, GemStrip, Note } from "./parts";
+import { Bar, Face, GemStrip, NameLine, Note, crownText } from "./parts";
 import { RushTrack } from "./RushTrack";
 import { FriendsLeague, GangWarBoard } from "./Leagues";
 import { ErrorBox } from "./ui";
@@ -47,11 +47,11 @@ function AllIndia({ uid }: { uid: string }) {
       </View>
     </Panel> : null}
     {d?.items?.map((row: any, i: number) => <Pop key={row.rank} delay={Math.min(i, 8) * 40}>
-      <Pressable testID={`rf-board-row-${row.rank}`} disabled={!row.pid} onPress={() => { tap(); router.push(go.player(row.pid)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}`} style={[styles.row, row.you && styles.rowYou]}>
+      <Pressable testID={`rf-board-row-${row.rank}`} disabled={!row.pid} onPress={() => { tap(); router.push(go.player(row.pid)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}${crownText(row.crown)}`} style={[styles.row, row.you && styles.rowYou]}>
         <View style={[styles.medal, row.rank <= 3 && { backgroundColor: MEDAL[row.rank - 1], borderColor: arena.badgeInk }]}><T testID={`rf-board-rank-${row.rank}`} w="heavy" size={13} color={row.rank <= 3 ? arena.badgeInk : arena.muted}>{row.rank}</T></View>
         <Face p={row} size={40} />
         <View style={styles.flex}>
-          <T testID={`rf-board-name-${row.rank}`} w="heavy" size={14} color={arena.text} numberOfLines={1}>{row.name}{row.you ? " (you)" : ""}</T>
+          <View testID={`rf-board-name-${row.rank}`}><NameLine name={`${row.name}${row.you ? " (you)" : ""}`} crown={row.crown} size={14} testID={`rf-board-crown-${row.rank}`} /></View>
           <T w="bold" size={11} color={arena.muted}>Level {row.level} · {row.wins} win{row.wins === 1 ? "" : "s"}</T>
         </View>
         <T testID={`rf-board-xp-${row.rank}`} w="heavy" size={13} color={arena.gold}>{row.xp} XP</T>
