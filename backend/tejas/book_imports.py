@@ -1,11 +1,11 @@
-import asyncio, math
+import asyncio, math, re
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, Response, Query
 from pymongo.errors import DuplicateKeyError
 from starlette.concurrency import run_in_threadpool
 from .auth import owner, current
 from .db import db, sets, now, audit
 from .canonical import database_now
-from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, Book, BookPage, BookMock, UploadPart, BookAllowance
+from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, Book, BookPage, BookMock, UploadPart, BookAllowance
 from .book_store import CHUNK, normalized, identity, digest, load_book, book_view, lock_book, save_book, unlock, fence, original, enqueue_book, mocks_for, save_mock
 from .book_pdf import inspect, inspect_many
 
@@ -22,7 +22,7 @@ async def dispatch(book,bg):
 
 @router.get('/admin/books')
 async def listing(u=Depends(owner)):
-    rows=await db.tejas_books.find({'owner_id':u['id'],'removed':False}).sort('created_at',-1).limit(50).to_list(50)
+    rows=await db.tejas_books.find({'owner_id':u['id'],'removed':False,'archived':{'$ne':True}}).sort('created_at',-1).limit(50).to_list(50)
     return {'items':[await book_view(Book.from_mongo(r),False) for r in rows], 'limits':{'bytes':100*1024*1024,'pages':None,'mocks':None},'model':__import__('tejas.astra',fromlist=['MODEL']).MODEL}
 
 
@@ -31,16 +31,19 @@ async def create(body:UploadInput,u=Depends(owner)):
     if not body.filename.lower().endswith('.pdf'):raise HTTPException(422,'Choose a PDF book.')
     if body.release_at and body.release_at<=await database_now():raise HTTPException(422,'Choose a future schedule or immediate publication.')
     id=identity('book',u['id'],body.sha256,body.edition.strip())
-    existing=await db.tejas_books.find_one({'_id':id})
-    if existing:
+    # The same PDF may go to another section, or come back after its first copy moved to the Library.
+    while (existing:=await db.tejas_books.find_one({'_id':id})):
         book=Book.from_mongo(existing)
         if book.removed:raise HTTPException(409,'This PDF was uploaded before and its access was removed, so it cannot be imported again.')
-        return await book_view(book)
-    from .structure import destination
-    dest=await destination(body.section_id,('list',))
-    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump()|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']})
+        if not existing.get('archived') and (book.payload.get('destination') or {}).get('section_id')==body.section_id:return await book_view(book)
+        id=identity(id,'next',body.section_id)
+    from .structure import destination, mark_replacing
+    replace=['all'] if body.replace_all else body.replace_ids
+    dest=await destination(body.section_id,('list',),replace)
+    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']})
     try:await db.tejas_books.insert_one(book.to_mongo())
     except DuplicateKeyError:return await book_view(await load_book(id,u))
+    await mark_replacing(dest,body.title)
     await audit(u['id'],'Book upload initiated',id,f"Rights confirmed; destination {dest['exam_name']} › {dest['section_name']}; publication only on owner request")
     return await book_view(book)
 
@@ -229,6 +232,7 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
             run=True
         elif body.action=='publish_ready':
             if book.state=='uploading':raise HTTPException(409,'Finish transferring the PDF first.')
+            if (book.payload.get('destination') or {}).get('series'):raise HTTPException(409,'All India mocks go live on their day. Give each ready mock a day instead.')
             if body.release_at and body.release_at<=await database_now():raise HTTPException(422,'Choose a future date and time, or publish now.')
             picked=[m for m in await mocks_for(book) if m.state=='ready' and not m.issues and m.published_generation!=m.generation and (not body.mock_id or m.id==body.mock_id)]
             if not picked:raise HTTPException(409,'This mock is not ready. Fix its held problems first.' if body.mock_id else 'No mocks are ready yet. Held mocks stay private until their problems are fixed.')
@@ -261,6 +265,108 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
     finally:await unlock(book,token)
     if run and not book.paused:await dispatch(book,bg)
     return await book_view(book)
+
+
+async def request_publication(bid,wanted,release_at,bg,u):
+    """Ask the worker to publish ready mocks of one section book (all of them when `wanted` is None)."""
+    await load_book(bid,u);book,token=await lock_book(bid);picked=[]
+    try:
+        if book.state!='uploading' and not (book.payload.get('destination') or {}).get('series'):
+            picked=[m for m in await mocks_for(book) if m.state=='ready' and not m.issues and m.published_generation!=m.generation
+                    and not m.publish_requested and (wanted is None or m.id in wanted)]
+            for m in picked:
+                m.publish_requested=True;m.release_at=release_at;m.revision+=1;await save_mock(m)
+            if picked:
+                book.paused=False;book.state='matching';await save_book(book,token)
+                await audit(u['id'],'Book publish_ready',bid,f'{len(picked)} ready mocks'+(' scheduled' if release_at else ''))
+    finally:await unlock(book,token)
+    if picked:await dispatch(book,bg)
+    return len(picked)
+
+
+def question_problems(mock):
+    """Group a held mock's blocking issues by the question they concern."""
+    out,used=[],set()
+    for q in mock.questions:
+        n=q['original_number'];pages=sorted({r['page'] for r in q['source_regions']['question']})
+        near=set(pages)|({pages[-1]+1} if pages else set())
+        mine=[]
+        for i,x in enumerate(mock.issues):
+            m=re.match(r'Page (\d+)(?:, |: )Q(\d+)\b',x)
+            if (m and int(m.group(2))==n and int(m.group(1)) in near) or x.startswith(f"{q['subject']} Q{n}:"):
+                mine.append(x);used.add(i)
+        if mine:
+            out.append({'id':q['id'],'subject':q['subject'],'section':q['section'],'number':n,'type':q['type'],'options':list(q.get('options',{})),
+                'answer':q.get('answer',''),'issues':mine,'pages':pages,'next_page':pages[-1]+1 if pages else None,
+                'question_images':len(q['source_regions']['question']),'solution_images':len(q['source_regions']['solution']),
+                'has_key':bool(q['source_regions']['solution']),'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
+    return out,[x for i,x in enumerate(mock.issues) if i not in used]
+
+
+@router.get('/admin/books/{id}/mocks/{mid}/problems')
+async def mock_problems(id:str,mid:str,u=Depends(owner)):
+    await load_book(id,u);row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
+    if not row:raise HTTPException(404,'Mock not found.')
+    mock=BookMock.from_mongo(row);questions,general=question_problems(mock)
+    return {'id':mock.id,'label':mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
+            'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
+
+
+@router.post('/admin/books/{id}/mocks/{mid}/fix')
+async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depends(owner)):
+    await load_book(id,u);book,token=await lock_book(id)
+    try:
+        row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
+        if not row:raise HTTPException(404,'Mock not found.')
+        mock=BookMock.from_mongo(row)
+        if mock.revision!=body.revision:raise HTTPException(409,'This mock was rechecked a moment ago. Reload and try again.')
+        if mock.published_generation==mock.generation:raise HTTPException(409,'Published mocks are frozen. Create a corrected version first.')
+        q=next((x for x in mock.questions if x['id']==body.question_id),None)
+        if not q:raise HTTPException(404,'This question is no longer in the mock. Reload.')
+        mcq=body.response_type=='mcq';labels=list(dict.fromkeys(body.option_labels)) if mcq else []
+        answer=body.answer.strip().upper() if mcq else body.answer.strip()
+        if mcq and (len(labels)<2 or answer not in labels):raise HTTPException(422,'Tick at least two printed options and choose the correct one among them.')
+        if not mcq and not re.fullmatch(r'[+-]?\d{1,20}',answer):raise HTTPException(422,'A numerical answer must be a whole number, for example 12 or -3.')
+        n=q['original_number'];label=normalized(mock.label);ident=(normalized(q['subject']),normalized(q['section']),n)
+        coverage=f"{q['subject']}|{q['section']}|{n}"
+        if body.key_only:
+            if coverage in mock.original_solution_identities:raise HTTPException(409,'This book prints a worked solution for this question. Attach it in the page editor instead.')
+            if not mock.rules:raise HTTPException(409,'Confirm this mock’s rules first, then mark key-only questions.')
+        qpages=sorted({r['page'] for r in q['source_regions']['question']})
+        near=set(qpages)|({qpages[-1]+1} if qpages else set())
+        raw={r['_id']:r for r in await db.tejas_book_pages.find({'book_id':id,'number':{'$in':sorted(near|{p for v in mock.pages.values() for p in v})}}).to_list(None)}
+        pages=sorted((BookPage.from_mongo(r) for r in raw.values()),key=lambda p:p.number)
+        mine=lambda r:normalized(r.mock)==label and r.number==n
+        exact=lambda r:(normalized(r.subject),normalized(r.section or r.subject),r.number)==ident
+        keys=[(p,r) for p in pages for r in p.regions if mine(r) and r.role in ('key','solution') and exact(r)] or \
+             [(p,r) for p in pages for r in p.regions if mine(r) and r.role in ('key','solution')]
+        if not keys:raise HTTPException(409,'No printed answer key was found for this question. Open the page editor and mark where its key is printed.')
+        changed={}
+        for p in pages:
+            for r in p.regions:
+                if mine(r) and r.role=='question' and exact(r):
+                    r.response_type=body.response_type;r.complete=True;r.checked=True;r.option_labels=[] if r.continuation else labels
+                    changed[p.number]=p
+            if p.number in near:
+                kept=[x for x in p.issues if not re.match(rf'Q{n}\b',x)]
+                if kept!=p.issues:p.issues=kept;changed[p.number]=p
+        for p,r in keys:
+            r.answer=answer;r.checked=True;changed[p.number]=p
+        note=f"Quick fix: {mock.label} {q['subject']} Q{n} = {answer} ({body.response_type})"
+        for p in changed.values():
+            p.revision+=1;p.provenance={'kind':'owner_repair','actor':u['id'],'at':now(),'note':note,'previous':p.provenance.get('kind','native')}
+            await fence(book,token)
+            await db.tejas_book_page_history.update_one({'_id':identity(p.id,p.revision)},{'$setOnInsert':{'book_id':id,'before':raw[p.id],'after':p.to_mongo(),'note':note,'actor':u['id']}},upsert=True)
+            await db.tejas_book_pages.replace_one({'_id':p.id},p.to_mongo())
+        if body.key_only:
+            if mock.rules.get('solution_policy')=='original_expected':mock.rules['solution_policy']='mixed'
+            if mock.rules.get('solution_policy')=='mixed' and coverage not in mock.rules.setdefault('key_only',[]):mock.rules['key_only'].append(coverage)
+            mock.revision+=1;await save_mock(mock)
+        book.state='matching';await save_book(book,token)
+        await audit(u['id'],'Book question quick fix',mid,note+(' · key only' if body.key_only else ''))
+    finally:await unlock(book,token)
+    if not book.paused:await dispatch(book,bg)
+    return {'ok':True,'message':f"Saved {q['subject']} Q{n}. Rechecking {mock.label}…"}
 
 
 @router.post('/admin/books/{id}/allowances')

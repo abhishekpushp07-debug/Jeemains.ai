@@ -11,8 +11,8 @@ import {toast} from 'sonner';
 
 const TONES={uploading:'processing',received:'processing',reading:'processing',matching:'processing',publishing:'processing',queued:'processing',organising:'processing',
  held:'attention',attention_needed:'attention',failed:'attention',blocked:'attention',interrupted:'attention',
- ready:'ready',published:'live',live:'live',scheduled:'scheduled',unlive:'hidden',paused:'hidden',draft:'hidden',hidden:'hidden',removed:'hidden',ended:'ended'};
-const LABELS={uploading:'Uploading',received:'Received',reading:'Reading',matching:'Checking',publishing:'Publishing…',queued:'Queued',organising:'Organising',held:'Held',attention_needed:'Needs attention',failed:'Needs attention',blocked:'Needs attention',interrupted:'Needs attention',ready:'Ready',published:'Live',live:'Live',scheduled:'Scheduled',unlive:'Unlive',paused:'Paused',draft:'Draft',hidden:'Hidden',removed:'Removed',ended:'Ended'};
+ ready:'ready',published:'live',live:'live',scheduled:'scheduled',unlive:'hidden',paused:'hidden',draft:'hidden',hidden:'hidden',removed:'hidden',ended:'ended',archived:'hidden'};
+const LABELS={uploading:'Uploading',received:'Received',reading:'Reading',matching:'Checking',publishing:'Publishing…',queued:'Queued',organising:'Organising',held:'Held',attention_needed:'Needs attention',failed:'Needs attention',blocked:'Needs attention',interrupted:'Needs attention',ready:'Ready',published:'Live',live:'Live',scheduled:'Scheduled',unlive:'Unlive',paused:'Paused',draft:'Draft',hidden:'Hidden',removed:'Removed',ended:'Ended',archived:'In Library'};
 export const StatusChip=({state,label,testId})=><span className={'admin-chip tone-'+(TONES[state]||'hidden')} data-testid={testId}><i aria-hidden="true"/>{label||LABELS[state]||state}</span>;
 
 export const DestinationChip=({exam,section,large,testId='destination-chip'})=><span className={'admin-destination'+(large?' is-large':'')} data-testid={testId}><MapPin size={large?18:14} aria-hidden="true"/><span>{exam}</span><ChevronRight size={14} aria-hidden="true"/><strong>{section}</strong></span>;
@@ -28,6 +28,10 @@ export const StudentPath=({exam,section})=><p className="admin-student-path" dat
 
 function AdminDialog({open,onClose,title,text,testId,busy,canSave,onSave,button,children}){
  return <Dialog open={open} onOpenChange={v=>!v&&onClose()}><DialogContent className="tejas-dialog admin-dialog" data-testid={testId}><DialogTitle>{title}</DialogTitle>{text&&<DialogDescription>{text}</DialogDescription>}<form className="admin-form" onSubmit={e=>{e.preventDefault();if(canSave&&!busy)onSave();}}>{children}<div className="button-row"><Button type="button" variant="outline" onClick={onClose} data-testid={testId+'-cancel'}>Cancel</Button><Button type="submit" disabled={busy||!canSave} data-testid={testId+'-save'}>{busy&&<Loader2 size={16} className="spin"/>}{button}</Button></div></form></DialogContent></Dialog>;
+}
+
+export function ConfirmDialog({open,onClose,title,text,button,onConfirm,busy,testId='confirm-dialog'}){
+ return <AdminDialog open={open} onClose={onClose} title={title} text={text} testId={testId} busy={busy} canSave onSave={onConfirm} button={button}/>;
 }
 
 const COLORS=['teal','amber','violet','rose','lime','sky'];

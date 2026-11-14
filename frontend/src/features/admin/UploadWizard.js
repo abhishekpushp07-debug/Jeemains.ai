@@ -21,12 +21,13 @@ function Rights({checked,onChange}){
  return <label className="book-check" data-testid="wizard-rights-label"><input type="checkbox" data-testid="wizard-rights" checked={checked} onChange={e=>onChange(e.target.checked)}/><span>I have permission to upload and share these questions, explanations and student reports.</span></label>;
 }
 
-function FileForm({type,section,onDone}){
+function FileForm({type,section,replace,onDone}){
  const [questions,setQuestions]=useState(null),[solutions,setSolutions]=useState(null),[two,setTwo]=useState(false),[rights,setRights]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');const key=useRef(null);
  const pdf=type==='paper',needSecond=pdf||(type==='excel'&&two);
  function pick(setter){return f=>{setter(f);key.current=null;setError('');};}
  async function send(){setBusy(true);setError('');key.current ||= crypto.randomUUID();const form=new FormData();form.append('request_id',key.current);form.append('section_id',section.id);
-  try{if(type==='chapter'){form.append('file',questions);const r=await api('/studio/chapter-books',{method:'POST',body:form});onDone({id:r.id,link:'/studio/chapter-books/'+r.id,title:r.title});}
+  try{if(replace)form.append('replace',replace);
+   if(type==='chapter'){form.append('file',questions);const r=await api('/studio/chapter-books',{method:'POST',body:form});onDone({id:r.id,link:'/studio/chapter-books/'+r.id,title:r.title});}
    else{form.append('format',pdf?'pdf':'xlsx');form.append('questions',questions);if(needSecond)form.append('solutions',solutions);const r=await api('/studio/imports',{method:'POST',body:form});onDone({id:r.id,link:'/studio/imports/'+r.id,title:r.title});}
   }catch(e){setError(e.message);}finally{setBusy(false);}}
  const template=variant=>downloadFile('/studio/imports/template?variant='+variant,`jeelive-ai-${variant}-template.xlsx`).catch(e=>toast.error(e.message));
@@ -51,6 +52,7 @@ function ExistingList({section}){
 }
 
 function Done({exam,section,done}){
+ if(section.kind==='series')return <section className="admin-panel admin-preview" data-testid="wizard-done"><span className="eyebrow">ALL INDIA TEST SERIES</span><div className="admin-row is-new" data-testid="wizard-new-item"><CheckCircle2 size={18}/><div className="admin-row-main"><strong>{done.title}</strong><small>Being organised privately. When it is ready, give it a day in Schedule & Live. Students see it only on that day.</small></div><StatusChip state="queued"/></div><div className="admin-actions"><Button asChild><Link to="/super-admin/schedule" data-testid="wizard-open-schedule">Open Schedule & Live<ArrowRight size={16}/></Link></Button><Button asChild variant="outline"><Link to={done.link} data-testid="wizard-open-review">Review the upload</Link></Button></div></section>;
  return <section className="admin-panel admin-preview" data-testid="wizard-done">
   <span className="eyebrow">STUDENTS WILL SEE IT LIKE THIS</span>
   <StudentPath exam={exam.name} section={section.name}/>
@@ -60,12 +62,22 @@ function Done({exam,section,done}){
  </section>;
 }
 
+export const AITS={id:'jee-main:aits',slug:'aits',name:'All India Test Series',layout:'list',kind:'series',counts:{live:0,total:0}};
+
+function ReplaceNote({replace,section}){
+ const count=replace.split(',').length;
+ const n=replace==='all'?'every test':`${count} test${count===1?'':'s'}`;
+ return <p className="admin-note warn admin-replace-note" data-testid="wizard-replace-note">Replacing {n} in {section.name}. They stay live until this new upload is published, then move to your Library. Students keep their old scores.</p>;
+}
+
 export default function UploadWizard(){
  const [params,setParams]=useSearchParams();const nav=useNavigate();
  const [catalog,setCatalog]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0),[dialog,setDialog]=useState(null),[done,setDone]=useState(null);
  useEffect(()=>{api('/admin/catalog').then(d=>{setCatalog(d);setError('');}).catch(e=>setError(e.message));},[reload]);
  const exam=catalog?.items.find(e=>e.slug===params.get('exam'));
- const section=exam?.sections.find(s=>s.id===params.get('section'));
+ const sections=exam?(exam.slug==='jee-main'?[...exam.sections,AITS]:exam.sections):[];
+ const section=sections.find(s=>s.id===params.get('section'));
+ const replace=section&&section.kind!=='series'?params.get('replace')||'':'';
  const type=section&&TYPES[params.get('type')]?.layouts.includes(section.layout)?params.get('type'):'';
  const step=done?5:!section?1:!type?2:Number(params.get('step'))===3?3:2;
  function go(values){const next=new URLSearchParams(params);Object.entries(values).forEach(([k,v])=>v?next.set(k,v):next.delete(k));setParams(next);}
@@ -75,19 +87,20 @@ export default function UploadWizard(){
   <AdminHeading testId="upload-wizard-title" title={step===1?'Where does it go?':step===2?'What kind of file?':step===3?'Details':'Uploaded.'} text="Choose the place first, then the file. Nothing goes live on its own."/>
   <StepBar step={step}/>
   {section&&<DestinationChip large exam={exam.name} section={section.name} testId="wizard-destination"/>}
+  {replace&&<ReplaceNote replace={replace} section={section}/>}
   <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>
   {!catalog&&!error&&<Skeleton className="h-64"/>}
   {catalog&&step===1&&<section className="admin-panel" data-testid="wizard-step-place">
    <h2>Exam</h2>
-   <div className="admin-choice-row" role="radiogroup" aria-label="Exam">{catalog.items.map(e=><button type="button" role="radio" aria-checked={exam?.slug===e.slug} key={e.slug} className={'admin-pill'+(exam?.slug===e.slug?' is-picked':'')} onClick={()=>go({exam:e.slug,section:null,type:null,step:null})} data-testid={'wizard-exam-'+e.slug}>{e.name}{!e.shown&&<small> · hidden</small>}</button>)}<button type="button" className="admin-pill is-add" onClick={()=>setDialog('exam')} data-testid="wizard-new-exam"><Plus size={15}/>New exam</button></div>
-   {exam&&<><h2>Section in {exam.name}</h2><div className="admin-choice-grid" role="radiogroup" aria-label="Section">{exam.sections.map(s=>{const locked=s.kind==='pyq';return <button type="button" role="radio" aria-checked={false} key={s.id} disabled={locked} className="admin-choice" onClick={()=>go({section:s.id,type:null,step:null})} data-testid={'wizard-section-'+s.slug}><strong>{s.name}</strong><small>{locked?'Filled only by the verified PYQ import.':`${s.layout==='chapters'?'Subject › chapter':'Simple list'} · ${s.counts.live} live`}</small></button>;})}<button type="button" className="admin-choice is-add" onClick={()=>setDialog('section')} data-testid="wizard-new-section"><Plus size={18}/><strong>New section</strong><small>For example Revision Tests or Crash Course.</small></button></div></>}
+   <div className="admin-choice-row" role="radiogroup" aria-label="Exam">{catalog.items.map(e=><button type="button" role="radio" aria-checked={exam?.slug===e.slug} key={e.slug} className={'admin-pill'+(exam?.slug===e.slug?' is-picked':'')} onClick={()=>go({exam:e.slug,section:null,type:null,step:null,replace:null})} data-testid={'wizard-exam-'+e.slug}>{e.name}{!e.shown&&<small> · hidden</small>}</button>)}<button type="button" className="admin-pill is-add" onClick={()=>setDialog('exam')} data-testid="wizard-new-exam"><Plus size={15}/>New exam</button></div>
+   {exam&&<><h2>Section in {exam.name}</h2><div className="admin-choice-grid" role="radiogroup" aria-label="Section">{sections.map(s=>{const locked=s.kind==='pyq';return <button type="button" role="radio" aria-checked={false} key={s.id} disabled={locked} className={'admin-choice'+(s.kind==='series'?' is-series':'')} onClick={()=>go({section:s.id,type:null,step:null,replace:null})} data-testid={'wizard-section-'+s.slug}><strong>{s.name}</strong><small>{locked?'Filled only by the verified PYQ import.':s.kind==='series'?'62 daily papers · a book of full mocks or one paper':`${s.layout==='chapters'?'Subject › chapter':'Simple list'} · ${s.counts.live} live`}</small></button>;})}<button type="button" className="admin-choice is-add" onClick={()=>setDialog('section')} data-testid="wizard-new-section"><Plus size={18}/><strong>New section</strong><small>For example Revision Tests or Crash Course.</small></button></div></>}
    {!exam&&<p className="admin-note" data-testid="wizard-pick-exam">Pick an exam to see its sections.</p>}
   </section>}
   {step===2&&<section className="admin-panel" data-testid="wizard-step-type">
    <div className="admin-choice-grid">{Object.entries(TYPES).filter(([,t])=>t.layouts.includes(section.layout)).map(([key,t])=><button type="button" key={key} className={'admin-choice'+(type===key?' is-picked':'')} onClick={()=>go({type:key,step:'3'})} data-testid={'wizard-type-'+key}><t.Icon size={22}/><strong>{t.title}</strong><small>{t.text}</small></button>)}</div>
-   <Button variant="ghost" onClick={()=>go({section:null,type:null,step:null})} data-testid="wizard-back-place"><ArrowLeft size={16}/>Change place</Button>
+   <Button variant="ghost" onClick={()=>go({section:null,type:null,step:null,replace:null})} data-testid="wizard-back-place"><ArrowLeft size={16}/>Change place</Button>
   </section>}
-  {step===3&&<>{type==='book'?<BookUpload sectionId={section.id} onOpen={id=>nav('/super-admin/upload?book='+id)}/>:<FileForm type={type} section={section} onDone={setDone}/>}
+  {step===3&&<>{type==='book'?<BookUpload sectionId={section.id} replace={replace} onOpen={id=>nav('/super-admin/upload?book='+id)}/>:<FileForm type={type} section={section} replace={replace} onDone={setDone}/>}
    <Button variant="ghost" onClick={()=>go({type:null,step:null})} data-testid="wizard-back-type"><ArrowLeft size={16}/>Change file type</Button></>}
   {step===5&&<Done exam={exam} section={section} done={done}/>}
   <ExamDialog open={dialog==='exam'} onClose={()=>setDialog(null)} onCreated={e=>{go({exam:e.slug,section:null,type:null,step:null});setReload(n=>n+1);}}/>

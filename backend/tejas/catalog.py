@@ -50,6 +50,7 @@ def available(user=None, exam="", search=""):
         "owner_unlive": {"$ne": True},
         "series_id": {"$exists": False},
         "series_import": {"$ne": True},
+        "archived": {"$ne": True},
         "$and": [
             {'$or': [{'start_at': {'$exists': False}}, {'$expr': {'$lte': ['$start_at', EPOCH_NOW]}}]},
             {'$or': [{'end_at': {'$exists': False}}, {'$expr': {'$gt': ['$end_at', EPOCH_NOW]}}]},

@@ -5,7 +5,7 @@ load_dotenv(Path(__file__).parent / ".env")
 import os, uuid, time
 import tejas.reports  # noqa: F401  fail fast on report syntax errors (it is otherwise imported lazily)
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, HTTPException
 from starlette.datastructures import MutableHeaders
 from fastapi.exceptions import RequestValidationError
 from tejas.origins import ExplicitOriginCORS, configured_origins, origin_allowed
@@ -46,6 +46,7 @@ from tejas import (
     book_imports,
     structure,
     integrity,
+    library,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -57,6 +58,8 @@ async def lifespan(app):
     await indexes()
     await auth.seed_owner()
     await structure.seed()
+    import asyncio
+    asyncio.create_task(library.cleanup_once())
     from tejas.live_window import apply_to_upcoming
     await apply_to_upcoming()
     from tejas.mock_solutions import solutions
@@ -234,6 +237,7 @@ for module in [
     book_imports,
     structure,
     integrity,
+    library,
 ]:
     app.include_router(module.router)
 

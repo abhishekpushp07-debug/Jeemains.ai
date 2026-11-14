@@ -17,7 +17,7 @@ from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from starlette.concurrency import run_in_threadpool
 from .auth import owner, staff
-from .db import db, sets, files, uid, now, get, clean
+from .db import db, sets, files, uid, now, get
 from .import_models import ImportView, ImportList, ScheduleInput, LiveInput
 from .sandbox import organise_pdfs
 from .content import valid_rules, question_issues
@@ -80,7 +80,7 @@ async def template(variant: str = 'combined', u=Depends(staff)):
 
 @router.get('', response_model=ImportList)
 async def list_imports(u=Depends(staff)):
-    records=await imports.find({'qa_only': {'$ne': True}}, {'_id':0}).sort('created_at',-1).limit(50).to_list(50)
+    records=await imports.find({'qa_only': {'$ne': True}, 'archived': {'$ne': True}}, {'_id':0}).sort('created_at',-1).limit(50).to_list(50)
     linked=await sets.find({'id':{'$in':[r['id'] for r in records]}}, {'_id':0,'id':1,'start_at':1,'end_at':1,'revision':1,'live_enabled':1,'series_date':1,'series_import':1}).to_list(50)
     by_id={s['id']:s for s in linked}
     return ImportList(items=[view(r,by_id.get(r['id']),False) for r in records])
@@ -89,8 +89,8 @@ async def list_imports(u=Depends(staff)):
 @router.post('', response_model=ImportView, status_code=202)
 async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner)):
     # Middleware authenticates and bounds multipart bytes before FastAPI can spool.
-    async with request.form(max_files=2,max_fields=3) as form:
-        if set(form.keys()) - {'questions','solutions','request_id','format','section_id'} or len(form.multi_items()) != len(form.keys()):
+    async with request.form(max_files=2,max_fields=4) as form:
+        if set(form.keys()) - {'questions','solutions','request_id','format','section_id','replace'} or len(form.multi_items()) != len(form.keys()):
             raise HTTPException(422,'Use one questions file and, optionally, one solutions file.')
         format=str(form.get('format',''))
         if format not in ('pdf','xlsx'): raise HTTPException(422,'Choose PDF or Excel (.xlsx).')
@@ -120,7 +120,8 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
         dest=None
         if form.get('section_id'):
             from .structure import destination
-            dest=await destination(str(form['section_id']),('list',) if format=='pdf' else ('list','chapters'))
+            replace=[x for x in str(form.get('replace','')).split(',') if x.strip()][:1000]
+            dest=await destination(str(form['section_id']),('list',) if format=='pdf' else ('list','chapters'),replace)
         async with SLOTS:
             for source,raw in zip(sources,payloads):
                 source['path']=await run_in_threadpool(put_object,f"tejas/imports/{id}/{source['id']}.{format}",raw,'application/pdf' if format=='pdf' else XLSX)
@@ -130,6 +131,8 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
                 'rights_attested_at':now(),'rights_attested_by':u['id'],**({'destination':dest} if dest else {})}
         # Atomic identity claim; duplicate POST cannot create another import/test.
         await imports.update_one({'id':id},{'$setOnInsert':record},upsert=True)
+        from .structure import mark_replacing
+        await mark_replacing(dest,title)
         bg.add_task(process_import,id)
         return view(record)
 
@@ -243,6 +246,8 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
         end = series['closes_at']
     if existing and (existing.get('series_import') or existing.get('series_id') or data.series_date):
         raise HTTPException(409, 'Manage series dates in the All India owner schedule panel. Existing regular competitions cannot be converted.')
+    if (r.get('destination') or {}).get('series') and not series:
+        raise HTTPException(409, 'This paper was uploaded for the All India Test Series. Give it a day in Schedule & Live.')
     if existing:
         if existing.get('start_at',0)<=now(): raise HTTPException(409,'A started test cannot be rescheduled. Upload a new test for another competition.')
         res=await sets.update_one({'id':id,'revision':data.revision,'start_at':{'$gt':now()}},{'$set':{'start_at':start,'end_at':end,'last_start_at':last_start,'live_enabled':True,'status':'published'},'$inc':{'revision':1}})
@@ -262,7 +267,7 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
            'start_at':start,'end_at':end,'last_start_at':last_start,'live_enabled':True,'competition':True}
         if dest and not series:
             from .structure import next_order
-            s.update(catalog_section_id=dest['section_id'],catalog_order=await next_order(dest['section_id']))
+            s.update(catalog_section_id=dest['section_id'],catalog_order=dest.get('replace_order') or await next_order(dest['section_id']))
             if dest['exam_key'] not in RULE_EXAMS:s['exam']=dest['exam_key']
         if series:
             if r.get('qa_only') or not valid_paper(s):
@@ -272,6 +277,9 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
         # One immutable content version in one insert; no archive-before-CAS race.
         try: await sets.insert_one(s)
         except DuplicateKeyError: raise HTTPException(409,'Another schedule was saved. Reload to see it.')
+        if dest and not series and dest.get('replaces') and (await imports.update_one({'id':id,'replaced_at':{'$exists':False}},{'$set':{'replaced_at':now()}})).modified_count:
+            from .structure import apply_replacement
+            await apply_replacement(dest,u['id'],r['title'])
     return view(r,await sets.find_one({'id':id},{'_id':0}))
 
 

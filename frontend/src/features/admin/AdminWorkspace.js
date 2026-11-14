@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink,Navigate,Route,Routes} from 'react-router-dom';
-import {LayoutDashboard,FolderTree,UploadCloud,ClipboardCheck,CalendarClock,UsersRound,ShieldCheck} from 'lucide-react';
+import {LayoutDashboard,FolderTree,UploadCloud,ClipboardCheck,CalendarClock,UsersRound,ShieldCheck,Archive} from 'lucide-react';
 import {useAuth} from '../../lib/auth';
 import AdminOverview from './AdminOverview';
 import AdminContent from './AdminContent';
@@ -10,9 +10,10 @@ import AdminReview from './AdminReview';
 import AdminSchedule from './AdminSchedule';
 import AdminStudents from './AdminStudents';
 import AdminTeam from './AdminTeam';
+import AdminLibrary from './AdminLibrary';
 import '../../book-publishing.css';
 
-const NAV=[['','Overview',LayoutDashboard,true],['content','Exams & Content',FolderTree,true],['upload','Upload',UploadCloud,true],['review','Review',ClipboardCheck,false],['schedule','Schedule & Live',CalendarClock,true],['students','Students',UsersRound,true],['team','Team',ShieldCheck,true]];
+const NAV=[['','Overview',LayoutDashboard,true],['content','Exams & Content',FolderTree,true],['upload','Upload',UploadCloud,true],['review','Review',ClipboardCheck,false],['schedule','Schedule & Live',CalendarClock,true],['library','Library',Archive,true],['students','Students',UsersRound,true],['team','Team',ShieldCheck,true]];
 
 export default function AdminWorkspace(){
  const {user}=useAuth();const owner=user.role==='owner';
@@ -31,6 +32,7 @@ export default function AdminWorkspace(){
     <Route path="upload/new" element={gate(<UploadWizard/>)}/>
     <Route path="review" element={<AdminReview/>}/>
     <Route path="schedule" element={gate(<AdminSchedule/>)}/>
+    <Route path="library" element={gate(<AdminLibrary/>)}/>
     <Route path="students" element={gate(<AdminStudents/>)}/>
     <Route path="team" element={gate(<AdminTeam/>)}/>
     <Route path="*" element={<Navigate to="/super-admin" replace/>}/>

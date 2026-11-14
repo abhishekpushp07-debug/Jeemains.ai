@@ -1,11 +1,12 @@
 from collections import Counter
 from datetime import date, datetime, time, timedelta
+from typing import Literal
 from zoneinfo import ZoneInfo
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
 from .auth import current, owner
-from .db import sets, attempts, get, now, audit
+from .db import db, sets, attempts, get, now, audit
 from .canonical import database_now
 
 router = APIRouter(prefix='/api', tags=['All India series'])
@@ -54,6 +55,18 @@ def valid_paper(s):
                     and q.get('disposition', 'standard') == 'standard' for q in qs))
 
 
+def series_problem(mock):
+    """Why a book mock cannot be an All India paper, or None."""
+    r = mock.rules or {}
+    if not r:
+        return 'Confirm this mock’s rules first.'
+    if r.get('minutes') != 180 or r.get('correct') != 4 or r.get('wrong') != -1 or r.get('mechanic') != 'all_compulsory' or r.get('section_scoring') or r.get('bonus_count'):
+        return 'All India papers need 180 minutes and +4 / −1 / 0 marking.'
+    paper = {'exam': 'JEE Main', 'rules': {'minutes': 180, 'correct': 4, 'wrong': -1, 'skipped': 0},
+             'questions': [{'subject': q.get('subject', ''), 'type': q.get('type')} for q in mock.questions]}
+    return None if valid_paper(paper) else 'All India papers need 75 questions: 20 MCQ + 5 numerical in each of Physics, Chemistry and Mathematics.'
+
+
 async def schedule_data(studio=False):
     from .content import permitted
     t = await database_now()
@@ -95,17 +108,48 @@ async def history(page: int = Query(1, ge=1, le=10000), u=Depends(current)):
     return {'items': items, 'page': page, 'total': await attempts.count_documents(match), 'latest_result_id': (latest or {}).get('id')}
 
 
+async def series_book_mocks():
+    """Mocks of books uploaded to the All India Test Series, in book and printed order."""
+    from .book_models import BookMock
+    books = await db.tejas_books.find({'payload.destination.series': True, 'removed': False, 'archived': {'$ne': True}},
+                                      {'_id': 1, 'payload.title': 1, 'state': 1}).sort('created_at', 1).to_list(100)
+    title = {b['_id']: b['payload']['title'] for b in books}
+    rank = {b['_id']: i for i, b in enumerate(books)}
+    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(title)}}, {'questions.subject': 1, 'questions.type': 1, 'rules': 1, 'label': 1, 'order': 1,
+        'state': 1, 'set_id': 1, 'series_date': 1, 'book_id': 1, 'issues': {'$slice': 1}, 'publish_requested': 1}).to_list(5000)
+    rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
+    built = {s['id']: s for s in await sets.find({'id': {'$in': [m['set_id'] for m in rows if m.get('set_id')]}}, {'_id': 0, 'id': 1, 'series_date': 1, 'revision': 1}).to_list(None)}
+    out = []
+    for m in rows:
+        s = built.get(m.get('set_id'))
+        ready = m['state'] == 'ready' and not s
+        out.append({'id': m['_id'], 'book_id': m['book_id'], 'book_title': title[m['book_id']], 'label': m['label'], 'order': m['order'],
+                    'state': m['state'], 'set_id': s['id'] if s else None, 'series_date': s.get('series_date') if s else m.get('series_date'),
+                    'pending': bool(not s and m.get('series_date')), 'issue': (m.get('issues') or [''])[0],
+                    'problem': series_problem(BookMock.from_mongo({**m, 'issues': []})) if ready else None})
+    return [{'id': b['_id'], 'title': b['payload']['title'], 'state': b['state']} for b in books], out
+
+
 @router.get('/studio/all-india-jee')
 async def studio_schedule(u=Depends(owner)):
     from .imports import imports
     data = await schedule_data(studio=True)
     t = await database_now()
-    rows = await sets.find({'exam': 'JEE Main', '$or': [{'status': 'published'}, {'series_import': True}], 'audience': 'all', 'qa_only': {'$ne': True}, 'competition': {'$ne': True}}, {'_id': 0, 'questions.ai_solution': 0}).limit(500).to_list(500)
+    rows = await sets.find({'exam': 'JEE Main', '$or': [{'status': 'published'}, {'series_import': True}], 'audience': 'all', 'qa_only': {'$ne': True}, 'competition': {'$ne': True}, 'archived': {'$ne': True}}, {'_id': 0, 'questions.ai_solution': 0}).limit(500).to_list(500)
     used = set(await attempts.distinct('set_id', {'set_id': {'$in': [s['id'] for s in rows]}, 'mode': {'$ne': 'preview'}}))
     data['papers'] = [{'id': s['id'], 'title': s['title'], 'revision': s['revision'], 'series_date': s.get('series_date'), 'kind': 'paper'} for s in rows if valid_paper(s) and s['id'] not in used and (not s.get('series_date') or t < window(s['series_date'])['opens_at'])]
-    ready = await imports.find({'status': 'ready', 'exam': 'JEE Main', 'qa_only': {'$ne': True}}, {'_id': 0}).limit(500).to_list(500)
+    ready = await imports.find({'status': 'ready', 'exam': 'JEE Main', 'qa_only': {'$ne': True}, 'archived': {'$ne': True}}, {'_id': 0}).limit(500).to_list(500)
     existing = set(await sets.distinct('id', {'id': {'$in': [r['id'] for r in ready]}}))
     data['papers'] = [{'id': r['id'], 'title': r['title'], 'revision': 0, 'kind': 'private_import'} for r in ready if r['id'] not in existing and not r.get('issues') and valid_paper({'exam': r['exam'], 'questions': r.get('questions', []), 'rules': {'minutes': r.get('duration_minutes'), 'correct': 4, 'wrong': -1, 'skipped': 0}})] + data['papers']
+    books, mocks = await series_book_mocks()
+    data['books'], data['book_mocks'] = books, mocks
+    data['papers'] = [{'id': m['id'], 'title': f"{m['book_title']} · {m['label']}", 'revision': 0, 'kind': 'book_mock'}
+                      for m in mocks if m['state'] == 'ready' and not m['set_id'] and not m['series_date'] and not m['problem']] + data['papers']
+    pending = {m['series_date']: m for m in mocks if m['pending']}
+    for slot in data['slots']:
+        if not slot['set_id'] and slot['date'] in pending:
+            m = pending[slot['date']]
+            slot['pending'] = {'mock_id': m['id'], 'title': f"{m['book_title']} · {m['label']}"}
     return data
 
 
@@ -114,24 +158,30 @@ class Assignment(BaseModel):
     set_id: str = Field(min_length=1, max_length=100)
     date: date
     expected_revision: int = Field(ge=0)
+    kind: Literal['paper', 'private_import', 'book_mock'] = 'paper'
+    replace: bool = False
 
 
-@router.post('/studio/all-india-jee/assign')
-async def assign(data: Assignment, u=Depends(owner)):
-    if not FIRST <= data.date <= LAST:
+class Fill(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    book_id: str = Field(min_length=1, max_length=100)
+    start_date: date
+    replace: bool = False
+
+
+class Clear(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    book_id: str = Field(default='', max_length=100)
+
+
+def check_range(day):
+    if not FIRST <= day <= LAST:
         raise HTTPException(422, 'Choose a date from 1 December 2026 to 31 January 2027.')
-    s = await sets.find_one({'id': data.set_id}, {'_id': 0})
-    if s is None:
-        from .imports import schedule_import
-        from .import_models import ScheduleInput
-        await schedule_import(data.set_id, ScheduleInput(start_at=data.date.isoformat()+'T00:01:00+05:30', revision=data.expected_revision, series_date=data.date.isoformat()), u)
-        await audit(u['id'], 'Private import published directly to All India series', data.set_id, data.date.isoformat())
-        return {'ok': True}
-    if s['revision'] != data.expected_revision:
-        raise HTTPException(409, 'The paper changed. Reload before assigning it.')
+
+
+async def assign_set(s, day, u):
     if (s['status'] != 'published' and not s.get('series_import')) or s.get('audience') != 'all' or s.get('qa_only') or s.get('competition') or not valid_paper(s):
         raise HTTPException(409, 'Select a published public JEE Main paper: 75 questions, 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')
-    day = data.date.isoformat()
     if now() >= window(day)['opens_at'] or (s.get('series_date') and now() >= window(s['series_date'])['opens_at']):
         raise HTTPException(409, 'A day that has opened cannot be assigned or moved.')
     if await attempts.find_one({'set_id': s['id'], 'mode': {'$ne': 'preview'}}, {'_id': 0, 'id': 1}):
@@ -140,28 +190,186 @@ async def assign(data: Assignment, u=Depends(owner)):
         raise HTTPException(409, 'The paper permissions expire before its scheduled date.')
     if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or s.get('start_at', float('inf')) > window(day)['opens_at'] or s.get('end_at', 0) < window(day)['closes_at']):
         raise HTTPException(409, 'Enable publication and extend its availability to cover the full scheduled day first.')
+    if await db.tejas_book_mocks.find_one({'series_date': day, 'set_id': None}, {'_id': 1}):
+        raise HTTPException(409, 'This date already has a paper. Remove its assignment before replacing it.')
     update = {'series_id': SERIES_ID, 'series_date': day, 'test_kind': 'mock'}
     if s.get('series_import'):
         update.update(start_at=window(day)['opens_at'], end_at=window(day)['closes_at'], live_enabled=True, status='published')
     try:
-        changed = await sets.update_one({'id': s['id'], 'revision': data.expected_revision}, {'$set': update, '$inc': {'revision': 1}})
+        changed = await sets.update_one({'id': s['id'], 'revision': s['revision']}, {'$set': update, '$inc': {'revision': 1}})
     except DuplicateKeyError:
         raise HTTPException(409, 'This date already has a paper. Remove its assignment before replacing it.')
     if not changed.modified_count: raise HTTPException(409, 'The paper changed. Reload before assigning it.')
     await audit(u['id'], 'All India series date assigned', s['id'], day)
+
+
+async def unassign_set(s, u):
+    if not s.get('series_date'): return
+    if now() >= window(s['series_date'])['opens_at']:
+        raise HTTPException(409, 'An opened series day cannot be removed.')
+    update = {'$unset': {'series_id': '', 'series_date': ''}, '$inc': {'revision': 1}}
+    if s.get('series_import'):
+        update['$set'] = {'status': 'withdrawn', 'live_enabled': False}
+    changed = await sets.update_one({'id': s['id'], 'revision': s['revision']}, update)
+    if not changed.modified_count: raise HTTPException(409, 'The paper changed. Reload before removing the assignment.')
+    await audit(u['id'], 'All India series date removed', s['id'], s['series_date'])
+
+
+async def clear_pending(query, u):
+    """Book mocks waiting for their day go back to unassigned; nothing was built or shown yet."""
+    rows = await db.tejas_book_mocks.find({**query, 'series_date': {'$nin': [None, '']}, 'set_id': None}, {'_id': 1, 'series_date': 1}).to_list(5000)
+    cleared = 0
+    for m in rows:
+        if now() >= window(m['series_date'])['opens_at']:
+            continue
+        changed = await db.tejas_book_mocks.update_one({'_id': m['_id'], 'set_id': None}, {'$set': {'series_date': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
+        if changed.modified_count:
+            cleared += 1
+            await audit(u['id'], 'All India book mock day removed', m['_id'], m['series_date'])
+    return cleared
+
+
+async def free_day(day, u):
+    if now() >= window(day)['opens_at']:
+        raise HTTPException(409, 'A day that has opened cannot be changed.')
+    s = await sets.find_one({'series_date': day}, {'_id': 0, 'questions': 0})
+    if s:
+        await unassign_set(s, u)
+    await clear_pending({'series_date': day}, u)
+
+
+async def assign_book_mocks(book_id, pairs, bg, u):
+    """Give ready mocks of an All India book their days; the worker builds each paper privately for its day."""
+    from .book_models import BookMock
+    from .book_store import lock_book, save_book, unlock, mocks_for, save_mock
+    from .book_imports import dispatch
+    row = await db.tejas_books.find_one({'_id': book_id, 'removed': False, 'archived': {'$ne': True}}, {'payload.destination': 1})
+    if not row or not (row['payload'].get('destination') or {}).get('series'):
+        raise HTTPException(409, 'Only books uploaded to the All India Test Series can fill its days.')
+    book, token = await lock_book(book_id)
+    try:
+        by_id = {m.id: m for m in await mocks_for(book)}
+        for mid, day in pairs:
+            m = by_id.get(mid)
+            if not isinstance(m, BookMock):
+                raise HTTPException(404, 'Mock not found. Reload.')
+            if m.state != 'ready' or m.issues or m.set_id:
+                raise HTTPException(409, f'{m.label} is not ready for a day yet.')
+            problem = series_problem(m)
+            if problem:
+                raise HTTPException(409, f'{m.label}: {problem}')
+            if now() >= window(day)['opens_at']:
+                raise HTTPException(409, 'A day that has opened cannot be assigned.')
+            if await sets.find_one({'series_date': day}, {'_id': 1}) or await db.tejas_book_mocks.find_one({'series_date': day, 'set_id': None, '_id': {'$ne': mid}}, {'_id': 1}):
+                raise HTTPException(409, f'{day} already has a paper. Remove it first, or choose to replace it.')
+            m.series_date = day; m.publish_requested = True; m.release_at = window(day)['opens_at']; m.revision += 1
+            await save_mock(m)
+        book.paused = False; book.state = 'matching'
+        await save_book(book, token)
+        await audit(u['id'], 'All India book mocks given days', book_id, ', '.join(f'{by_id[m].label}={d}' for m, d in pairs)[:1900])
+    finally:
+        await unlock(book, token)
+    await dispatch(book, bg)
+
+
+@router.post('/studio/all-india-jee/assign')
+async def assign(data: Assignment, bg: BackgroundTasks, u=Depends(owner)):
+    check_range(data.date)
+    day = data.date.isoformat()
+    if data.replace:
+        await free_day(day, u)
+    if data.kind == 'book_mock':
+        m = await db.tejas_book_mocks.find_one({'_id': data.set_id}, {'book_id': 1})
+        if not m: raise HTTPException(404, 'Mock not found. Reload.')
+        await assign_book_mocks(m['book_id'], [(data.set_id, day)], bg, u)
+        return {'ok': True}
+    s = await sets.find_one({'id': data.set_id}, {'_id': 0})
+    if s is None:
+        if await db.tejas_book_mocks.find_one({'series_date': day, 'set_id': None}, {'_id': 1}):
+            raise HTTPException(409, 'This date already has a paper. Remove its assignment before replacing it.')
+        from .imports import schedule_import
+        from .import_models import ScheduleInput
+        await schedule_import(data.set_id, ScheduleInput(start_at=data.date.isoformat()+'T00:01:00+05:30', revision=data.expected_revision, series_date=data.date.isoformat()), u)
+        await audit(u['id'], 'Private import published directly to All India series', data.set_id, data.date.isoformat())
+        return {'ok': True}
+    if s['revision'] != data.expected_revision:
+        raise HTTPException(409, 'The paper changed. Reload before assigning it.')
+    await assign_set(s, day, u)
+    return {'ok': True}
+
+
+@router.post('/studio/all-india-jee/fill')
+async def fill(data: Fill, bg: BackgroundTasks, u=Depends(owner)):
+    """Ready mocks of one All India book take free days in printed order from the start date."""
+    from .book_models import BookMock
+    check_range(data.start_date)
+    if not await db.tejas_books.find_one({'_id': data.book_id, 'payload.destination.series': True, 'removed': False, 'archived': {'$ne': True}}, {'_id': 1}):
+        raise HTTPException(409, 'Only books uploaded to the All India Test Series can fill its days.')
+    mocks = [BookMock.from_mongo(r) async for r in db.tejas_book_mocks.find({'book_id': data.book_id}).sort('order', 1)]
+    built = {s['id']: s for s in await sets.find({'book_import_id': data.book_id, 'series_import': True}, {'_id': 0, 'questions': 0}).to_list(None)}
+    used = set(await attempts.distinct('set_id', {'set_id': {'$in': list(built)}, 'mode': {'$ne': 'preview'}}))
+    own = {s['series_date'] for s in built.values() if s.get('series_date')} | {m.series_date for m in mocks if m.series_date and not m.set_id}
+    queue, left = [], []
+    for m in mocks:
+        s = built.get(m.set_id) if m.set_id else None
+        if s:
+            if not s.get('series_date') and s['id'] not in used:
+                queue.append((m, s))
+        elif m.series_date:
+            continue
+        elif m.state == 'ready' and not m.issues and not series_problem(m):
+            queue.append((m, None))
+        else:
+            left.append({'label': m.label, 'reason': series_problem(m) if m.state == 'ready' else 'Held: fix its problems first.'})
+    t = now()
+    taken = {s['series_date'] for s in await sets.find({'series_id': SERIES_ID}, {'_id': 0, 'series_date': 1}).to_list(None)}
+    taken |= {r['series_date'] for r in await db.tejas_book_mocks.find({'series_date': {'$nin': [None, '']}, 'set_id': None}, {'series_date': 1}).to_list(None)}
+    day, assigned, pairs = data.start_date, [], []
+    for m, s in queue:
+        while day <= LAST and (t >= window(day.isoformat())['opens_at'] or day.isoformat() in own or (day.isoformat() in taken and not data.replace)):
+            day += timedelta(days=1)
+        if day > LAST:
+            left.append({'label': m.label, 'reason': 'No free day left before 31 January.'})
+            continue
+        iso = day.isoformat()
+        if iso in taken:
+            await free_day(iso, u)
+        if s:
+            await assign_set(s, iso, u)
+        else:
+            pairs.append((m.id, iso))
+        taken.add(iso); assigned.append({'label': m.label, 'date': iso})
+        day += timedelta(days=1)
+    if pairs:
+        await assign_book_mocks(data.book_id, pairs, bg, u)
+    if not assigned and not left:
+        raise HTTPException(409, 'Every ready mock of this book already has a day.')
+    return {'assigned': assigned, 'left': left,
+            'message': f"{len(assigned)} mock{'s' if len(assigned) != 1 else ''} given a day" + (f'; {len(left)} could not be placed.' if left else '.')}
+
+
+@router.post('/studio/all-india-jee/clear')
+async def clear(data: Clear, u=Depends(owner)):
+    """Remove every future day (of one book, or all), so the series can be refilled. Opened days never change."""
+    t = now()
+    query = {'series_id': SERIES_ID, **({'book_import_id': data.book_id} if data.book_id else {})}
+    removed = 0
+    for s in await sets.find(query, {'_id': 0, 'questions': 0}).to_list(None):
+        if t < window(s['series_date'])['opens_at']:
+            await unassign_set(s, u); removed += 1
+    removed += await clear_pending({'book_id': data.book_id} if data.book_id else {}, u)
+    return {'removed': removed, 'message': f"{removed} future day{'s' if removed != 1 else ''} cleared. Opened days are unchanged."}
+
+
+@router.delete('/studio/all-india-jee/book-mocks/{mock_id}')
+async def unassign_book_mock(mock_id: str, u=Depends(owner)):
+    n = await clear_pending({'_id': mock_id}, u)
+    if not n: raise HTTPException(409, 'This mock has no waiting day, or its paper is already built. Remove it from the assigned list instead.')
     return {'ok': True}
 
 
 @router.delete('/studio/all-india-jee/{set_id}')
 async def unassign(set_id: str, u=Depends(owner)):
     s = await get(sets, set_id)
-    if not s.get('series_date'): return {'ok': True}
-    if now() >= window(s['series_date'])['opens_at']:
-        raise HTTPException(409, 'An opened series day cannot be removed.')
-    update = {'$unset': {'series_id': '', 'series_date': ''}, '$inc': {'revision': 1}}
-    if s.get('series_import'):
-        update['$set'] = {'status': 'withdrawn', 'live_enabled': False}
-    changed = await sets.update_one({'id': set_id, 'revision': s['revision']}, update)
-    if not changed.modified_count: raise HTTPException(409, 'The paper changed. Reload before removing the assignment.')
-    await audit(u['id'], 'All India series date removed', set_id, s['series_date'])
+    await unassign_set(s, u)
     return {'ok': True}

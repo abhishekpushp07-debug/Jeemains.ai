@@ -1,7 +1,7 @@
 """Owner-managed exam → section → test placement. Students only reach shown exams and live tests."""
 import hashlib, re, secrets, time, uuid
 from typing import Annotated, Literal
-from fastapi import APIRouter, Depends, HTTPException, Path
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Path, Query
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import UpdateOne
 from .auth import current, owner, staff
@@ -31,8 +31,11 @@ MOCK_FILTER = {'$and': [
 UNPLACED = {'$or': [{'catalog_section_id': {'$exists': False}}, {'catalog_section_id': {'$in': [None, '']}}]}
 LEGACY = {'pyq': {'test_kind': 'pyq'}, 'chapters': CHAPTER_FILTER, 'mocks': MOCK_FILTER}
 LIVE_FLAG = {'$or': [{'live_enabled': {'$ne': False}}, {'test_kind': 'pyq'}]}
-ADMIN_BASE = {'qa_only': {'$ne': True}, 'status': {'$ne': 'withdrawn'}, 'is_deleted': {'$ne': True},
+ADMIN_BASE = {'qa_only': {'$ne': True}, 'status': {'$ne': 'withdrawn'}, 'is_deleted': {'$ne': True}, 'archived': {'$ne': True},
               'series_id': {'$exists': False}, 'series_import': {'$ne': True}}
+SERIES_SECTION = 'jee-main:aits'
+SERIES_DEST = {'section_id': SERIES_SECTION, 'section_name': 'All India Test Series', 'section_slug': 'aits', 'layout': 'list',
+               'exam_slug': 'jee-main', 'exam_key': 'JEE Main', 'exam_name': 'JEE Main', 'series': True}
 ORDER = [('catalog_order', 1), ('chapter_subject', 1), ('chapter_number', 1), ('mock_number', 1), ('created_at', -1), ('id', 1)]
 BUILTIN = (
     ('jee-main', 'JEE Main', 'JEE', ['Physics', 'Chemistry', 'Mathematics'], ('pyq', 'mocks', 'chapters')),
@@ -87,6 +90,17 @@ class TestPatch(Payload):
     title: str | None = Field(default=None, min_length=2, max_length=160)
     live: bool | None = None
     section_id: Identity | None = None
+
+
+class PublishItem(Payload):
+    kind: Literal['book', 'book_mock', 'chapter_book']
+    id: Identity
+
+
+class PublishInput(Payload):
+    items: list[PublishItem] = Field(default_factory=list, max_length=500)
+    section_id: str = Field(default='', max_length=100)
+    release_at: float | None = Field(default=None, gt=0)
 
 
 def slugify(text):
@@ -192,15 +206,44 @@ def live_query(user, exam, section, search=''):
     return q
 
 
-async def destination(section_id, layouts=('list', 'chapters')):
+async def destination(section_id, layouts=('list', 'chapters'), replace=None):
+    if section_id == SERIES_SECTION:
+        if 'list' not in layouts:
+            raise HTTPException(422, 'The All India Test Series takes full papers or a book of full mocks, not chapter books.')
+        if replace:
+            raise HTTPException(422, 'Change All India days in Schedule & Live instead.')
+        return dict(SERIES_DEST)
     s = await sections.find_one({'_id': section_id}, {'_id': 0}) if section_id else None
     if not s:
         raise HTTPException(422, 'Choose the exam and section this upload belongs to.')
     if s['kind'] == 'pyq' or s['layout'] not in layouts:
         raise HTTPException(422, 'This file type does not fit that section. Choose another section or file type.')
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
-    return {'section_id': s['id'], 'section_name': s['name'], 'section_slug': s['slug'], 'layout': s['layout'],
+    dest = {'section_id': s['id'], 'section_name': s['name'], 'section_slug': s['slug'], 'layout': s['layout'],
             'exam_slug': e['slug'], 'exam_key': e['key'], 'exam_name': e['name']}
+    if replace:
+        present = [x['id'] for x in await section_tests(s, e['key']) if x.get('test_kind') != 'pyq']
+        ids = present if list(replace) == ['all'] else list(dict.fromkeys(replace))
+        if not ids:
+            raise HTTPException(409, 'There is nothing in this section to replace.')
+        if set(ids) - set(present):
+            raise HTTPException(409, 'Some tests to replace are no longer in this section. Reload and choose again.')
+        orders = [r['catalog_order'] for r in await sets.find({'id': {'$in': ids}}, {'_id': 0, 'catalog_order': 1}).to_list(len(ids))
+                  if isinstance(r.get('catalog_order'), (int, float))]
+        dest.update(replaces=ids, replace_order=int(min(orders)) if orders else None)
+    return dest
+
+
+async def mark_replacing(dest, title):
+    if dest and dest.get('replaces'):
+        await sets.update_many({'id': {'$in': dest['replaces']}, 'archived': {'$ne': True}}, {'$set': {'replace_pending': title[:160]}})
+
+
+async def apply_replacement(dest, actor, title):
+    """Old tests leave for the Library only once their replacement is published."""
+    if dest and dest.get('replaces'):
+        from .library import archive_sets
+        await archive_sets(dest['replaces'], actor, f'Replaced by {title}'[:300])
 
 
 async def next_order(section_id):
@@ -247,7 +290,7 @@ FIELDS = {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'exam': 1, 'status'
           'chapter_book_id': 1, 'chapter_subject': 1, 'chapter_number': 1, 'mock_number': 1, 'catalog_section_id': 1,
           'catalog_order': 1, 'live_enabled': 1, 'owner_unlive': 1, 'start_at': 1, 'end_at': 1, 'expires': 1, 'audience': 1,
           'import_id': 1, 'book_import_id': 1, 'mock_book_id': 1, 'series_import': 1, 'series_date': 1, 'rules.minutes': 1,
-          'pyq_date': 1, 'count': {'$size': {'$ifNull': ['$questions', []]}}}
+          'pyq_date': 1, 'replace_pending': 1, 'count': {'$size': {'$ifNull': ['$questions', []]}}}
 
 
 def test_view(s, t):
@@ -255,7 +298,8 @@ def test_view(s, t):
             'state': test_state(s, t), 'source': source_of(s), 'count': s.get('count', 0), 'minutes': (s.get('rules') or {}).get('minutes'),
             'subject': s.get('chapter_subject'), 'chapter_number': s.get('chapter_number'), 'mock_number': s.get('mock_number'),
             'catalog_order': s.get('catalog_order'), 'start_at': s.get('start_at'), 'end_at': s.get('end_at'), 'pyq_date': s.get('pyq_date'),
-            'book_import_id': s.get('book_import_id'), 'import_id': s.get('import_id'), 'chapter_book_id': s.get('chapter_book_id')}
+            'book_import_id': s.get('book_import_id'), 'import_id': s.get('import_id'), 'chapter_book_id': s.get('chapter_book_id'),
+            'test_kind': s.get('test_kind'), 'replace_pending': s.get('replace_pending')}
 
 
 async def section_tests(section, exam_key):
@@ -479,7 +523,7 @@ async def update_test(id: str, body: TestPatch, u=Depends(owner)):
 
 @router.get('/admin/overview')
 async def overview(u=Depends(owner)):
-    books = await db.tejas_books.find({'owner_id': u['id'], 'removed': False},
+    books = await db.tejas_books.find({'owner_id': u['id'], 'removed': False, 'archived': {'$ne': True}},
         {'_id': 1, 'state': 1, 'paused': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1,
          'payload.destination': 1, 'updated_at': 1}).sort('updated_at', -1).limit(100).to_list(100)
     mocks = await db.tejas_book_mocks.find({'book_id': {'$in': [b['_id'] for b in books]}, 'state': {'$in': ['ready', 'held']}},
@@ -502,7 +546,7 @@ async def overview(u=Depends(owner)):
 @router.get('/admin/review/held')
 async def held_mocks(u=Depends(staff)):
     rows = await db.tejas_book_mocks.find({'state': 'held'}, {'_id': 1, 'book_id': 1, 'label': 1, 'issues': {'$slice': 8}}).sort('book_id', 1).limit(300).to_list(300)
-    books = {b['_id']: b for b in await db.tejas_books.find({'_id': {'$in': list({r['book_id'] for r in rows})}, 'removed': False},
+    books = {b['_id']: b for b in await db.tejas_books.find({'_id': {'$in': list({r['book_id'] for r in rows})}, 'removed': False, 'archived': {'$ne': True}},
              {'_id': 1, 'payload.title': 1, 'payload.destination': 1}).to_list(300)}
     return {'items': [{'id': r['_id'], 'book_id': r['book_id'], 'label': r['label'], 'issues': r.get('issues', []),
                        'book_title': books[r['book_id']]['payload']['title'], 'destination': books[r['book_id']]['payload'].get('destination')}
@@ -559,7 +603,7 @@ def waiting_state(m, release, t):
 
 
 async def waiting_mocks(sid, t):
-    books = await db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False},
+    books = await db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}},
                                       {'_id': 1, 'payload.title': 1, 'payload.release_at': 1}).sort('created_at', 1).to_list(200)
     rank = {b['_id']: i for i, b in enumerate(books)}
     book = {b['_id']: b['payload'] for b in books}
@@ -599,3 +643,89 @@ async def timed_tests(u=Depends(owner)):
     rows = await sets.find({'$and': [ADMIN_BASE, {'status': 'published'}, {'$or': [{'start_at': {'$gt': t}}, {'competition': True, 'end_at': {'$gt': t}}]}]},
                            FIELDS).sort('start_at', 1).limit(200).to_list(200)
     return {'items': [test_view(x, t) for x in rows], 'server_now': t}
+
+
+# Ready-to-publish desk: book mocks, paper uploads and chapter books that are checked but not yet live
+
+async def waiting_items(sid=''):
+    t = await database_now()
+    where = {'payload.destination.section_id': sid} if sid else {'payload.destination.section_id': {'$exists': True}}
+    books = await db.tejas_books.find({**where, 'removed': False, 'archived': {'$ne': True}, 'payload.destination.series': {'$ne': True}},
+        {'_id': 1, 'payload.title': 1, 'payload.release_at': 1, 'payload.destination': 1}).sort('created_at', 1).to_list(300)
+    rank = {b['_id']: i for i, b in enumerate(books)}
+    info = {b['_id']: b['payload'] for b in books}
+    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None},
+        {'_id': 1, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1,
+         'issue': {'$arrayElemAt': ['$issues', 0]}, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}},
+         'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
+    rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
+    out = []
+    for m in rows:
+        p = info[m['book_id']]
+        release = m.get('release_at') or p.get('release_at')
+        out.append({'kind': 'book_mock', 'id': m['_id'], 'book_id': m['book_id'], 'title': m['label'], 'book': p['title'],
+                    'state': waiting_state(m, release, t), 'count': m.get('count', 0), 'unit': 'questions', 'issue': m.get('issue') or '',
+                    'issue_count': m.get('issue_count', 0), 'start_at': release if m.get('publish_requested') else None, 'destination': p['destination']})
+    dq = {'destination.section_id': sid} if sid else {'destination.section_id': {'$exists': True}}
+    recs = await db.tejas_imports.find({**dq, 'status': 'ready', 'archived': {'$ne': True}, 'destination.series': {'$ne': True}, 'qa_only': {'$ne': True}},
+        {'_id': 0, 'id': 1, 'title': 1, 'destination': 1, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}},
+         'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(500)
+    made = set(await sets.distinct('id', {'id': {'$in': [r['id'] for r in recs]}}))
+    out += [{'kind': 'import', 'id': r['id'], 'title': r['title'], 'book': 'Paper / Excel upload', 'state': 'held' if r['issue_count'] else 'ready',
+             'count': r['count'], 'unit': 'questions', 'issue': 'Open the upload to fix its source issues.' if r['issue_count'] else '',
+             'issue_count': r['issue_count'], 'start_at': None, 'destination': r['destination']} for r in recs if r['id'] not in made]
+    for r in await db.tejas_chapter_books.find({**dq, 'status': 'ready', 'archived': {'$ne': True}, 'qa_only': {'$ne': True}},
+                                                {'_id': 0, 'id': 1, 'title': 1, 'destination': 1}).to_list(300):
+        drafts = await sets.count_documents({'chapter_book_id': r['id'], 'start_at': {'$exists': False}, 'archived': {'$ne': True}})
+        if drafts:
+            out.append({'kind': 'chapter_book', 'id': r['id'], 'title': r['title'], 'book': 'Chapter book', 'state': 'ready', 'count': drafts,
+                        'unit': 'chapters', 'issue': '', 'issue_count': 0, 'start_at': None, 'destination': r['destination']})
+    return out
+
+
+@router.get('/admin/catalog/waiting')
+async def waiting(section_id: str = Query('', max_length=100), u=Depends(owner)):
+    return {'items': await waiting_items(section_id)}
+
+
+@router.post('/admin/publish-ready')
+async def publish_ready_items(body: PublishInput, bg: BackgroundTasks, u=Depends(owner)):
+    if body.release_at and body.release_at <= await database_now():
+        raise HTTPException(422, 'Choose a future date and time, or publish now.')
+    items = [(i.kind, i.id) for i in body.items] or [(x['kind'], x['id']) for x in await waiting_items(body.section_id)
+                                                     if x['state'] == 'ready' and x['kind'] != 'import']
+    if not items:
+        raise HTTPException(409, 'Nothing here is ready yet. Held items stay private until their problems are fixed.')
+    from .book_imports import request_publication
+    wanted = {}
+    for kind, id in items:
+        if kind == 'book':
+            wanted[id] = None
+        elif kind == 'book_mock':
+            m = await db.tejas_book_mocks.find_one({'_id': id}, {'book_id': 1})
+            if not m:
+                raise HTTPException(404, 'Mock not found.')
+            if wanted.get(m['book_id'], set()) is not None:
+                wanted.setdefault(m['book_id'], set()).add(id)
+    done, notes = 0, []
+    for bid, ids in wanted.items():
+        done += await request_publication(bid, ids, body.release_at, bg, u)
+    for kind, id in items:
+        if kind != 'chapter_book':
+            continue
+        if body.release_at:
+            notes.append('Chapter books publish straight away. Choose Now for them.')
+            continue
+        from .chapter_books import publish_book, ChapterAction, books as chapter_records
+        r = await chapter_records.find_one({'id': id}, {'_id': 0, 'revision': 1})
+        if not r:
+            raise HTTPException(404, 'Chapter book not found.')
+        try:
+            await publish_book(id, ChapterAction(revision=r['revision']), u)
+            done += 1
+        except HTTPException as exc:
+            notes.append(str(exc.detail))
+    if not done:
+        raise HTTPException(409, notes[0] if notes else 'Nothing could be published. Held mocks stay private until their problems are fixed.')
+    when = 'scheduled for the chosen time' if body.release_at else 'publishing now. They appear to students in a moment'
+    return {'requested': done, 'notes': notes, 'message': f"{done} item{'s' if done != 1 else ''} {when}."}

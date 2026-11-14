@@ -85,7 +85,7 @@ def valid_rules(r):
 
 
 def permitted(s, u=None, series_schedule=False, *, at):
-    if s.get('owner_unlive'):
+    if s.get('owner_unlive') or s.get('archived'):
         return False
     if s.get('series_import') and (not s.get('series_date') or not s.get('live_enabled')):
         return False

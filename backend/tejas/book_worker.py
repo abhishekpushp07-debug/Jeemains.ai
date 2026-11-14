@@ -102,6 +102,7 @@ async def step(job):
     try:
         await fence(book,token)
         if book.paused:return 'Book paused by owner.'
+        if await db.tejas_books.find_one({'_id':id,'archived':True},{'_id':1}):return 'Book is in the Library.'
         p=book.payload
         if book.state=='uploading':return 'Waiting for upload completion.'
         source=await receive(book,token) if not p.get('source_path') else await original(book)

@@ -121,14 +121,14 @@ def independent_evidence(sha, parsed_sha, chapter, subject):
 
 @router.get('/studio/chapter-books',response_model=BookList)
 async def list_books(u=Depends(staff)):
-    records=await books.find({'qa_only':{'$ne':True}},{'_id':0}).sort('created_at',-1).limit(30).to_list(30)
+    records=await books.find({'qa_only':{'$ne':True},'archived':{'$ne':True}},{'_id':0}).sort('created_at',-1).limit(30).to_list(30)
     return BookList(items=[await book_view(r) for r in records])
 
 
 @router.post('/studio/chapter-books',response_model=BookView,status_code=202)
 async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
-    async with request.form(max_files=1,max_fields=3) as form:
-        if not {'file','request_id'}<=set(form.keys())<={'file','request_id','section_id'} or len(form.multi_items())!=len(form.keys()): raise HTTPException(422,'Upload one chapter-book PDF and its request identifier.')
+    async with request.form(max_files=1,max_fields=4) as form:
+        if not {'file','request_id'}<=set(form.keys())<={'file','request_id','section_id','replace'} or len(form.multi_items())!=len(form.keys()): raise HTTPException(422,'Upload one chapter-book PDF and its request identifier.')
         try: request_id=str(uuid.UUID(str(form['request_id'])))
         except ValueError: raise HTTPException(422,'A UUID upload identifier is required.')
         f=form['file']
@@ -141,10 +141,14 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         prior=await db.tejas_chapter_uploads.find_one({'id':receipt})
         if prior['sha256']!=sha:raise HTTPException(409,'That upload identifier belongs to a different file.')
         old=await books.find_one({'id':identity},{'_id':0})
+        # A copy already in the Library, or aimed at another section, does not block a fresh upload of the same PDF.
+        while old and (old.get('archived') or ((old.get('destination') or {}).get('section_id') or '')!=str(form.get('section_id') or '')):
+            identity=str(uuid.uuid5(uuid.UUID(identity),'next:'+str(form.get('section_id',''))));old=await books.find_one({'id':identity},{'_id':0})
         dest=None
         if form.get('section_id'):
             from .structure import destination
-            dest=await destination(str(form['section_id']),('chapters',))
+            replace=[x for x in str(form.get('replace','')).split(',') if x.strip()][:1000]
+            dest=await destination(str(form['section_id']),('chapters',),replace)
         if old:return await book_view(old)
         if SLOTS.locked():raise HTTPException(429,'A chapter book is processing. Retry shortly.',headers={'Retry-After':'5'})
         fid=str(uuid.uuid5(uuid.UUID(identity),'source'))
@@ -153,6 +157,8 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         await files.update_one({'id':fid},{'$setOnInsert':source},upsert=True)
         record={'id':identity,'title':Path(f.filename).stem.replace('_',' ')[:160],'source':source,'status':'queued','revision':0,'created_at':now(),'created_by':u['id'],**({'destination':dest} if dest else {})}
         await books.update_one({'id':identity},{'$setOnInsert':record},upsert=True)
+        from .structure import mark_replacing
+        await mark_replacing(dest,record['title'])
         bg.add_task(process_book,identity)
         return await book_view(record)
 
@@ -258,6 +264,10 @@ async def publish_book(id:str,data:ChapterAction,u=Depends(owner)):
             {'$set':{'status':'published','start_at':start,'end_at':start+365*86400,'published_at':start,'live_enabled':True,
                      'expires':datetime.fromtimestamp(start+365*86400,timezone.utc).date().isoformat()},'$inc':{'revision':1}})
     await audit(u['id'],'Chapter book published',id,f'{len(children)} independently source-rechecked tests;365-day access; source-specific personal timers and marking')
+    dest=r.get('destination')
+    if dest and dest.get('replaces') and (await books.update_one({'id':id,'replaced_at':{'$exists':False}},{'$set':{'replaced_at':now()}})).modified_count:
+        from .structure import apply_replacement
+        await apply_replacement(dest,u['id'],r['title'])
     return await book_view(await get(books,id))
 
 

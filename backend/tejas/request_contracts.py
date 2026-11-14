@@ -269,10 +269,11 @@ class CronEnvelope(BaseModel):
 from .cohorts import RankScenario
 from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
-from .live_series import Assignment
+from .live_series import Assignment, Fill, Clear
 
-from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap
-from .structure import ExamInput, ExamPatch, SectionInput, SectionPatch, OrderInput, TestPatch
+from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix
+from .structure import ExamInput, ExamPatch, SectionInput, SectionPatch, OrderInput, TestPatch, PublishInput
+from .library import ArchiveInput, RestoreInput
 
 MODELS = {
     'structure.create_exam': ExamInput, 'structure.update_exam': ExamPatch,
@@ -285,6 +286,10 @@ MODELS = {
     'book_imports.control': Control,
     'book_imports.allowance': Allowance,
     'live_series.assign': Assignment,
+    'live_series.fill': Fill, 'live_series.clear': Clear,
+    'structure.publish_ready_items': PublishInput,
+    'book_imports.fix_question': QuestionFix,
+    'library.archive': ArchiveInput, 'library.restore': RestoreInput,
     'pyq_import.import_step': EmptyPayload,
     'my_tests.save_paper': EmptyPayload,
     'my_tests.compare': CompareAttemptsPayload,

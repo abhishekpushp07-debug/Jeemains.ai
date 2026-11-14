@@ -19,6 +19,8 @@ class UploadInput(Input):
     release_at: float | None = Field(default=None, gt=0)
     competitive: bool = False
     closes_at: float | None = Field(default=None, gt=0)
+    replace_ids: list[str] = Field(default_factory=list, max_length=1000)
+    replace_all: bool = False
 
     @model_validator(mode='after')
     def schedule(self):
@@ -118,6 +120,16 @@ class Control(Input):
     release_at: float | None = Field(default=None, gt=0)
 
 
+class QuestionFix(Input):
+    revision: int = Field(ge=0)
+    question_id: str = Field(min_length=1, max_length=120)
+    response_type: Literal['mcq', 'integer']
+    option_labels: list[Literal['A', 'B', 'C', 'D', 'E']] = Field(default_factory=list, max_length=5)
+    answer: str = Field(min_length=1, max_length=40)
+    complete: Literal[True]
+    key_only: bool = False
+
+
 class Allowance(Input):
     revision: int = Field(ge=0)
     purpose: Literal['reading','explanations']
@@ -172,6 +184,7 @@ class BookMock(BaseDocument):
     publish_hold: str = ''
     publish_requested: bool = False
     release_at: float | None = None
+    series_date: str | None = None
 
 
 class UploadPart(BaseDocument):

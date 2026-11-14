@@ -21,7 +21,6 @@ export default function AdminOverview(){
  const [data,setData]=useState(null),[error,setError]=useState('');
  const load=useCallback(()=>api('/admin/overview').then(d=>{setData(d);setError('');}).catch(e=>setError(e.message)),[]);
  useEffect(()=>{load();const timer=setInterval(load,15000);return()=>clearInterval(timer);},[load]);
- const readyLink=data?.ready_books.length===1?'/super-admin/upload?book='+data.ready_books[0]:'/super-admin/upload';
  return <div className="admin-page" data-testid="admin-overview-page">
   <AdminCrumbs items={[{label:'Super Admin'},{label:'Overview'}]}/>
   <AdminHeading testId="super-admin-title" title="What needs you today." text={data?`${plural(data.processing.filter(b=>['uploading','received','reading','matching'].includes(b.state)).length,'upload')} reading · ${plural(data.ready,'mock')} ready · ${data.held} held`:'Loading your publishing desk…'} action={<div className="admin-actions"><Button asChild><Link to="/super-admin/upload/new" data-testid="overview-add-content"><UploadCloud size={17}/>Add content</Link></Button><Button asChild variant="outline"><Link to="/super-admin/content" data-testid="overview-open-content"><FolderTree size={17}/>Exams & Content</Link></Button></div>}/>
@@ -29,12 +28,12 @@ export default function AdminOverview(){
   {!data&&!error?<div className="admin-tiles">{[1,2,3,4].map(n=><Skeleton key={n} className="h-28"/>)}</div>:data&&<>
    <div className="admin-tiles" data-testid="overview-tiles">
     <Tile Icon={BookOpen} value={data.processing.length} label="Uploads in progress" to="/super-admin/upload" testId="overview-tile-uploads" tone="processing"/>
-    <Tile Icon={CheckCircle2} value={data.ready} label="Mocks ready to publish" to={readyLink} testId="overview-tile-ready" tone="ready"/>
+    <Tile Icon={CheckCircle2} value={data.ready} label="Mocks ready to publish" to="/super-admin/review?tab=ready" testId="overview-tile-ready" tone="ready"/>
     <Tile Icon={AlertTriangle} value={data.held} label="Held mocks" to="/super-admin/review?tab=held" testId="overview-tile-held" tone="attention"/>
     <Tile Icon={MessageSquareWarning} value={data.open_reports} label="New question reports" to="/super-admin/review?tab=reports" testId="overview-tile-reports" tone="scheduled"/>
    </div>
    <section className="admin-panel"><h2>Uploads</h2><Processing items={data.processing}/></section>
-   <section className="admin-panel"><h2>Held, and why</h2>{data.held_items.length?<ul className="admin-list" data-testid="overview-held-list">{data.held_items.map(m=><li key={m.id} className="admin-row" data-testid={'overview-held-'+m.id}><div className="admin-row-main"><strong>{m.label}</strong><small>{m.book_title}</small><p className="admin-reason">{m.reason}</p></div><Button asChild variant="outline"><Link to={'/super-admin/upload?book='+m.book_id} data-testid={'overview-held-fix-'+m.id}>Fix</Link></Button></li>)}</ul>:<p className="admin-empty" data-testid="overview-no-held">Nothing is held. Every checked mock is ready or live.</p>}</section>
+   <section className="admin-panel"><h2>Held, and why</h2>{data.held_items.length?<ul className="admin-list" data-testid="overview-held-list">{data.held_items.map(m=><li key={m.id} className="admin-row" data-testid={'overview-held-'+m.id}><div className="admin-row-main"><strong>{m.label}</strong><small>{m.book_title}</small><p className="admin-reason">{m.reason}</p></div><Button asChild variant="outline"><Link to={`/super-admin/upload?book=${m.book_id}&fix=${m.id}`} data-testid={'overview-held-fix-'+m.id}>Fix problems</Link></Button></li>)}</ul>:<p className="admin-empty" data-testid="overview-no-held">Nothing is held. Every checked mock is ready or live.</p>}</section>
    <DataHealth/>
   </>}
  </div>;

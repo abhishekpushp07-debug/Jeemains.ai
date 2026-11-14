@@ -1,13 +1,14 @@
 import React,{useEffect,useState} from 'react';
 import {Link,useSearchParams} from 'react-router-dom';
-import {Plus,ArrowUp,ArrowDown,Pencil,Eye,EyeOff,Home,ChevronRight,CalendarClock,FolderOpen} from 'lucide-react';
+import {Plus,ArrowUp,ArrowDown,Pencil,Eye,EyeOff,Home,ChevronRight,CalendarClock,FolderOpen,RefreshCw,Archive,UploadCloud} from 'lucide-react';
 import {api,post,patch} from '../../lib/api';
 import {invalidateCatalog} from '../../lib/catalog';
 import {Button} from '../../components/ui/button';
 import {Skeleton} from '../../components/ui/skeleton';
 import {ErrorBox} from '../../components/Shared';
-import {AdminCrumbs,AdminHeading,StatusChip,StudentPath,ExamDialog,SectionDialog,TextDialog} from '../../components/admin/AdminShared';
+import {AdminCrumbs,AdminHeading,StatusChip,StudentPath,ExamDialog,SectionDialog,TextDialog,ConfirmDialog} from '../../components/admin/AdminShared';
 import {SectionTests} from '../../components/admin/SectionTests';
+import {WaitingList} from '../../components/admin/WaitingList';
 import {ContentTools} from './ContentTools';
 import {PreviewLink} from '../../components/admin/PreviewLink';
 import {toast} from 'sonner';
@@ -41,7 +42,7 @@ function ExamPanel({exam,busy,run,open}){
   {exam.sections.length?<ol className="admin-list" data-testid="admin-section-list">{exam.sections.map((s,i)=><SectionRow key={s.id} s={s} i={i} total={exam.sections.length} busy={busy} onOpen={()=>open(s.id)} onMove={move} onRename={()=>setDialog({rename:s})} onHide={()=>run(()=>patch('/admin/catalog/sections/'+s.id,{hidden:!s.hidden}),s.hidden?`${s.name} will show when it has a live test.`:`${s.name} is hidden from students.`)}/>)}</ol>:<div className="admin-empty" data-testid="admin-no-sections"><p>No sections yet. Create one, then add content to it.</p></div>}
   <ul className="admin-list admin-extra-rows">
    <li className="admin-row"><div className="admin-row-main"><strong>Results</strong><small>Always shown to students in every exam.</small></div></li>
-   {exam.slug==='jee-main'&&<li className="admin-row" data-testid="admin-series-row"><div className="admin-row-main"><strong>All India JEE series</strong><small>Daily papers and their schedule.</small></div><Button asChild variant="outline"><Link to="/super-admin/schedule" data-testid="admin-series-open"><CalendarClock size={16}/>Schedule & Live</Link></Button></li>}
+   {exam.slug==='jee-main'&&<li className="admin-row" data-testid="admin-series-row"><div className="admin-row-main"><strong>All India Test Series</strong><small>62 daily papers, 1 Dec – 31 Jan. Upload a book of full mocks or one paper, then give each a day.</small></div><div className="admin-test-actions"><Button asChild><Link to="/super-admin/upload/new?exam=jee-main&section=jee-main:aits" data-testid="admin-series-add"><UploadCloud size={16}/>Upload book or paper</Link></Button><Button asChild variant="outline"><Link to="/super-admin/schedule" data-testid="admin-series-open"><CalendarClock size={16}/>Days</Link></Button></div></li>}
    {exam.unplaced>0&&<li className="admin-row" data-testid="admin-unplaced-row"><div className="admin-row-main"><strong>Not in any section ({exam.unplaced})</strong><small>Practice or competition tests that no section lists. Move them where they belong.</small></div><Button variant="outline" onClick={()=>open('unplaced')} data-testid="admin-unplaced-open"><FolderOpen size={16}/>Review</Button></li>}
   </ul>
   <SectionDialog open={dialog==='section'} onClose={()=>setDialog(null)} exam={exam} onCreated={()=>run(async()=>{})}/>
@@ -51,12 +52,19 @@ function ExamPanel({exam,busy,run,open}){
 }
 
 function SectionPanel({exam,section,onChanged}){
+ const [version,setVersion]=useState(0),[confirm,setConfirm]=useState(false),[busy,setBusy]=useState(false);
  if(section==='unplaced')return <section className="admin-panel" data-testid="admin-unplaced-panel"><div className="admin-panel-head"><div><h2>Not in any section</h2><p>Students reach these only through competitions or saved links. Use Move to place them.</p></div></div><SectionTests exam={exam} path={`/admin/catalog/exams/${exam.slug}/unplaced`} onChanged={onChanged}/></section>;
+ const changed=()=>{setVersion(n=>n+1);onChanged();};
+ const open=section.kind!=='pyq';
+ async function archiveAll(){setBusy(true);try{const r=await post('/admin/library/archive',{section_id:section.id});invalidateCatalog();toast.success(r.message);setConfirm(false);changed();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  return <section className="admin-panel" data-testid={'admin-section-panel-'+section.slug}>
   <div className="admin-panel-head"><div><h2 data-testid="admin-section-name">{section.name}</h2><StudentPath exam={exam.name} section={section.name}/>{section.description&&<p>{section.description}</p>}</div>
-   <div className="admin-actions"><PreviewLink section={section} exam={exam}/>{section.kind!=='pyq'&&<Button asChild><Link to={`/super-admin/upload/new?exam=${exam.slug}&section=${section.id}`} data-testid="admin-section-add-content"><Plus size={16}/>Add content here</Link></Button>}</div></div>
+   <div className="admin-actions"><PreviewLink section={section} exam={exam}/>{open&&<Button asChild><Link to={`/super-admin/upload/new?exam=${exam.slug}&section=${section.id}`} data-testid="admin-section-add-content"><Plus size={16}/>Add content here</Link></Button>}</div></div>
+  {open&&section.counts?.total>0&&<div className="admin-actions" data-testid="admin-section-replace-actions"><Button asChild variant="outline"><Link to={`/super-admin/upload/new?exam=${exam.slug}&section=${section.id}&replace=all`} data-testid="admin-section-replace-all"><RefreshCw size={16}/>Replace all with a new upload</Link></Button><Button variant="outline" onClick={()=>setConfirm(true)} data-testid="admin-section-archive-all"><Archive size={16}/>Move all to Library</Button></div>}
   {section.hidden&&<p className="admin-note warn" data-testid="admin-section-hidden-note">This section is hidden from students.</p>}
-  <SectionTests section={section} exam={exam} path={`/admin/catalog/sections/${section.id}/tests`} onChanged={onChanged}/>
+  {open&&<WaitingList key={'w'+version} sectionId={section.id} onChanged={changed}/>}
+  <SectionTests key={version} section={section} exam={exam} path={`/admin/catalog/sections/${section.id}/tests`} onChanged={onChanged}/>
+  <ConfirmDialog open={confirm} onClose={()=>setConfirm(false)} busy={busy} onConfirm={archiveAll} testId="archive-all-confirm" title={`Move everything in ${section.name} to the Library?`} text="Students stop seeing these tests on the website and the app. Everyone keeps their old scores. Uploads waiting for this section go to the Library too. You can restore any test later." button="Move all to Library"/>
  </section>;
 }
 

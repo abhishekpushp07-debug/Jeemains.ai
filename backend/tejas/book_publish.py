@@ -1,6 +1,6 @@
 import copy, json, re
 from starlette.concurrency import run_in_threadpool
-from .db import sets, files, now, audit
+from .db import db, sets, files, now, audit
 from .canonical import database_now
 from .book_models import BookMock, MockRules
 from .book_store import identity, normalized, save_mock, pages_for, mocks_for, fence, renew, digest, principal
@@ -171,10 +171,12 @@ async def crop_ref(book,mock,crop,region,role):
 async def publish_ready(book,token,raw,only_mid=None):
     if book.paused:return
     dest=book.payload.get('destination')
+    series=bool(dest and dest.get('series'))
     for mock in await mocks_for(book):
         if only_mid and mock.id!=only_mid:continue
         if not (book.payload.get('auto_publish') or mock.publish_requested):continue
         if mock.state!='ready' or mock.issues or mock.published_generation==mock.generation:continue
+        if series and not mock.series_date:continue
         if book.payload.get('release_at') and await database_now()>=book.payload['release_at'] and not mock.release_override:
             mock.missed_release=True
         if mock.missed_release and not mock.release_override:
@@ -183,6 +185,12 @@ async def publish_ready(book,token,raw,only_mid=None):
         sid=identity(mock.id,mock.generation);existing=await sets.find_one({'id':sid})
         if existing and existing.get('status')=='published':
             mock.set_id=sid;mock.published_generation=mock.generation;mock.state='published';await save_mock(mock);continue
+        if series:
+            from .live_series import window as day_window
+            opens=day_window(mock.series_date)['opens_at']
+            if await database_now()>=opens or await sets.find_one({'series_date':mock.series_date,'id':{'$ne':sid}},{'_id':1}):
+                # Its day opened or was taken before the paper was built: it waits, unassigned, for a new day.
+                mock.series_date=None;mock.publish_requested=False;mock.release_at=None;await save_mock(mock);continue
         questions=[];rules=mock.rules
         wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
         rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10)
@@ -217,9 +225,13 @@ async def publish_ready(book,token,raw,only_mid=None):
             'rights_upload':True,'rights_publish':True,'rights_report':True,'audience':'all','allowed_emails':[],'allowed_phones':[],'expires':'',
             'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False),'created_at':now(),'created_by':book.owner_id}
         if rules['mechanic']=='bitsat_bonus':data['rules']['bonus_rule']='answer_all_main_then_lock'
-        if dest:
+        if series:
+            from .live_series import SERIES_ID, window as day_window
+            w=day_window(mock.series_date);start=w['opens_at']
+            data.update(series_id=SERIES_ID,series_date=mock.series_date,series_import=True,start_at=start,end_at=w['closes_at'],competition=False)
+        elif dest:
             from .structure import next_order
-            if 'catalog_base' not in book.payload:book.payload['catalog_base']=await next_order(dest['section_id'])-1
+            if 'catalog_base' not in book.payload:book.payload['catalog_base']=(dest.get('replace_order') or await next_order(dest['section_id']))-1
             data.update(catalog_section_id=dest['section_id'],catalog_order=book.payload['catalog_base']+mock.order)
         if data['competition']:
             if mock.release_override:raise ValueError('An expired competitive window needs a new edition and future schedule.')
@@ -232,5 +244,10 @@ async def publish_ready(book,token,raw,only_mid=None):
             await sets.update_one({'id':mock.set_id,'book_import_id':book.id},{'$set':{'status':'withdrawn','live_enabled':False}})
             if mock.set_id not in mock.history:mock.history.append(mock.set_id)
         mock.set_id=sid;mock.published_generation=mock.generation;mock.publish_requested=False;mock.state='scheduled' if start>stamp else 'published';await save_mock(mock)
+        if dest and dest.get('replaces') and not book.payload.get('replaced_at'):
+            from .structure import apply_replacement
+            book.payload['replaced_at']=now()
+            await db.tejas_books.update_one({'_id':book.id},{'$set':{'payload.replaced_at':book.payload['replaced_at']}})
+            await apply_replacement(dest,book.owner_id,book.payload['title'])
         book.payload.setdefault('metrics',{}).setdefault('first_ready_seconds',max(0,now()-book.created_at))
         await audit(book.owner_id,'Book mock published',sid,'Original keys and source evidence retained; previous attempts unchanged.')

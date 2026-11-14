@@ -1,4 +1,4 @@
-import hashlib, json, os, tempfile, uuid
+import hashlib, os, tempfile, uuid
 from pathlib import Path
 from fastapi import HTTPException
 from pymongo import ReturnDocument
@@ -126,6 +126,9 @@ async def book_view(book, detail=True):
     counts={s:sum(m.state==s for m in items) for s in ('held','ready','published','paused','scheduled')}
     parts=await db.tejas_book_parts.find({'book_id':book.id},{'_id':0,'number':1}).to_list(None) if book.state=='uploading' else []
     allowances=[BookAllowance.from_mongo(r).model_dump(exclude={'owner_id','book_id'}) async for r in db.tejas_book_allowances.find({'book_id':book.id}).sort('created_at',-1).limit(20)] if detail else []
+    linked={s['id']:s for s in await db.tejas_sets.find({'book_import_id':book.id},{'_id':0,'id':1,'archived':1,'series_date':1}).to_list(None)} if detail else {}
+    series=bool((p.get('destination') or {}).get('series'))
+    if series:from .live_series import series_problem
     return {'id':book.id,'title':p['title'],'filename':p['filename'],'state':book.state,'revision':book.revision,
         'size':p['size'],'sha256':p['sha256'],'edition':p.get('edition',''),'chunk_size':CHUNK,'received_parts':sorted(r['number'] for r in parts),
         'pages':p.get('pages',0),'read_pages':p.get('read_pages',0),'scanned_pages':p.get('scanned_pages',0),
@@ -135,7 +138,10 @@ async def book_view(book, detail=True):
                   'awaiting_budget':sum(a['state']=='budget_required' for a in allowances)},
         'mocks':[m.model_dump(exclude={'book_id','questions'}) | {'count':len(m.questions),
             'original_solutions':sum(q.get('solution_kind')=='supplied_worked' for q in m.questions),
-            'key_only':sum(q.get('solution_kind')=='answer_key_only' for q in m.questions)} for m in items],
+            'key_only':sum(q.get('solution_kind')=='answer_key_only' for q in m.questions),
+            'archived':bool(linked.get(m.set_id,{}).get('archived')),
+            'series_date':linked[m.set_id].get('series_date') if m.set_id in linked else m.series_date,
+            'series_problem':series_problem(m) if series and m.state=='ready' else None} for m in items],
         'allowances':allowances,'created_at':book.created_at,'metrics':p.get('metrics',{}),
         'pricing_notice':'A credible per-page currency price is not available. Only the explicitly approved request allowance is used.',
         'retention_notice':'Remove import removes access; it does not permanently erase stored objects. Historical result assets are retained.'}

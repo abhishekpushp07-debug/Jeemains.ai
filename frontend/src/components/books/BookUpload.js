@@ -6,13 +6,13 @@ import {BookField,BookError} from './BookShared';
 
 const sha=async data=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',data)),v=>v.toString(16).padStart(2,'0')).join('');
 
-export function BookUpload({sectionId,onOpen}){
+export function BookUpload({sectionId,replace='',onOpen}){
  const [file,setFile]=useState(null),[title,setTitle]=useState(''),[rights,setRights]=useState(false);
  const [busy,setBusy]=useState(false),[sent,setSent]=useState(0),[message,setMessage]=useState(''),[error,setError]=useState('');const stopped=useRef(false);
  async function upload(e){e.preventDefault();setError('');if(!file||!rights)return;stopped.current=false;setBusy(true);setSent(0);
   try{if(file.size>100*1024*1024)throw new Error('Choose a PDF within 100 MB.');setMessage('Checking file identity…');
    const hash=await sha(await file.arrayBuffer());
-   const book=await post('/admin/books',{filename:file.name,title:title.trim()||file.name.replace(/\.pdf$/i,''),sha256:hash,size:file.size,rights_confirmed:true,section_id:sectionId});
+   const book=await post('/admin/books',{filename:file.name,title:title.trim()||file.name.replace(/\.pdf$/i,''),sha256:hash,size:file.size,rights_confirmed:true,section_id:sectionId,...(replace==='all'?{replace_all:true}:replace?{replace_ids:replace.split(',')}:{})});
    if(book.state!=='uploading'){onOpen(book.id);return;}
    const existing=new Set(book.received_parts);let done=book.received_parts.reduce((n,i)=>n+Math.min(book.chunk_size,file.size-i*book.chunk_size),0);setSent(done);
    for(let i=0;i<Math.ceil(file.size/book.chunk_size);i++){if(stopped.current){setMessage('Transfer paused. Choose this same PDF again and press Upload to resume completed parts.');return;}if(existing.has(i))continue;
