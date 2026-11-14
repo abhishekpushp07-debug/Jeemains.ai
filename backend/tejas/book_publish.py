@@ -1,7 +1,6 @@
 import copy, json, re
-from fastapi import HTTPException
 from starlette.concurrency import run_in_threadpool
-from .db import db, sets, files, now, audit
+from .db import sets, files, now, audit
 from .canonical import database_now
 from .book_models import BookMock, MockRules
 from .book_store import identity, normalized, save_mock, pages_for, mocks_for, fence, renew, digest, principal

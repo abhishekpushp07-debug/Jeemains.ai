@@ -1,5 +1,11 @@
 # Active roadmap
 
+## Native mock-book reader (2026-11-14)
+- P0: Deploy the reader fix only on the user's go-ahead. After deploy, the live 4,481-page JEE book re-reads by itself (READER_VERSION changed; recover() picks it up). Owner repairs and published-mock pages are kept; no AI is used. Then check on live: expected ~35/50 mocks ready and ~19 questions held for review.
+- P1: The 19 held JEE questions (mostly Q20/Q45/Q70, last question of a section) need the owner's quick check in Attention Needed: the print does not show their options/answer type clearly enough to publish safely.
+- P2 (cosmetic): 2 crop pairs (Mock 7 p543, Mock 49 p4305) where a tall bracket physically overlaps the line above; a straight cut cannot separate them.
+
+
 ## 1-lakh simultaneous exam (2026-11-14)
 - P0: Deploy (integrity + speed + 15-min start window) dispatched 2026-11-14 on the user's "Go Live". Confirm live build, then that the first maintenance run fixed 13 orphan ranking entries, 7 orphan score records and retried 1 report job (Super Admin › Overview › Data health).
 - P2: Instant score means a student who submits early can learn whether single answers were right while late starters are still writing (inherent to the user's choice). Option: hide the topic breakdown until the end.

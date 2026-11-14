@@ -103,3 +103,12 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - QA174: isolated DB 67/67 (tests/section_preview_iso175.py), frontend passed; the 3 minor QA items were fixed and the isolated suite re-ran 67/67. Customer preview DB: QA created and then turned off links on jee-main:mocks and bitsat:chapters (revoked rows + audit only).
 - Production deploy of the whole organised Super Admin + preview link dispatched (job bcd75d41-4661-4f5a-bead-654e0ffe34d2); live confirmation pending.
 
+## 2026-11-14 — Native mock-book reader fix (no AI): answer keys, solutions, crops, safe re-read
+- Root cause on live (4,481-page JEE book, 50 mocks all held, ~25,000 issues): "Answer key" / "Detailed solutions" pages were read as instructions, so no mock had keys or solutions. Source PDF was fine; it was the reader.
+- tejas/book_reader.py: explicit key/solution page roles bound to the current "Mock N" + subject; key cells parsed natively; no false anchors from formulas, solution steps, wrapped lines, "Q2 = 1", stray "511."; header/footer labels ignored; crop cuts follow the printed row (tall glyphs, big brackets ⎛⎜⎝ / private-use pieces, 2x2/3x3 matrices, integral limits) and never cut inside a header. READER_VERSION bumped.
+- tejas/book_publish.py: continuation issues name the page the question starts on ("starts on the previous page"); unused imports removed.
+- tejas/book_worker.py: books read by an older reader are re-read automatically on recover(); owner repairs, AI-approved pages and pages of published mocks are never touched; no duplicate mocks; no AI allowance is ever created by native reading.
+- Results (in memory, no DB writes, no AI): BITSAT 1,284 pages 50/50 ready, 0 issues. JEE 4,481 pages 35 ready / 15 held, 38 issues = 19 questions (Q20/Q45/Q70 at section ends) whose type/options cannot be confirmed from the print plus their follow-on checks; these stay held on purpose for owner review. Synthetic 3-mock book 2 ready / 1 held (deliberately broken mock stays held). Crop edge audit: only 2 physically overlapping rows left (cosmetic).
+- Tests: tests/book_reader_regressions178.py (all pass), tests/reread_iso179.py 15/15 (isolated DB), tests/repro_book_rebuild.py, tests/boundary_slice179.py, tests/audit_crops.py; testing agent iteration_177. Test PDFs live in /tmp/book (lost on pod restart; not committed).
+- NOT deployed. Production book not reprocessed yet; waits for the user's go-ahead.
+

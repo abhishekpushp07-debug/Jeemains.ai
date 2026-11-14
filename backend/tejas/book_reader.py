@@ -17,6 +17,8 @@ CELL_KEY=re.compile(r'[A-D]|[+\-\u2212]?\d{1,20}')
 # A printed key needs 'is', ':' or a bracket after the cue, so prose such as 'could then answer a different' is not a key.
 ANSWER_NEAR=re.compile(r'\b(?:[Aa]nswer|ANSWER|Ans\.?|[Cc]orrect[ \t]+(?:option|answer))[ \t]*(?:(?:is[ \t]+|[:=\-][ \t]*)[\[(]?|[\[(])[ \t]*([A-D](?![A-Za-z])|[+\-]?\d+(?![\d.]))')
 TOP,BOTTOM=.06,.94
+# Big bracket pieces (⎛ ⎜ ⎝, private-use TeX extension glyphs, or fonts mapping them to '"' and '#') printed as their own spans.
+DELIMITER=re.compile(r'[\uf8e0-\uf8ff\u239b-\u23ad()\[\]{}|"#]+')
 
 
 def mock_title(value):
@@ -64,14 +66,16 @@ def pad(rect):
     return [max(0,rect[0]-.006),max(0,rect[1]-.004),min(1,rect[2]+.006),min(1,rect[3]+.004)]
 
 
-def row_top(line, boxes):
+def row_top(line, boxes, delimiters=frozenset()):
     """Top of the printed row an anchor starts, including tall formulas set on that same row.
     A raised glyph joins the row only if it overlaps the row more than the content printed above it
-    (an integral's lower limit from the previous option stays with that option)."""
+    (an integral's lower limit from the previous option stays with that option); bracket pieces of a
+    matrix on the row are never 'content above'."""
     x0,y0,_,y1=line['rect'];top=y0
     def own(b,top):
         mine=min(b[3],y1)-max(b[1],top)
-        above=max([min(b[3],o[3])-max(b[1],o[1]) for o in boxes if o is not b and o[1]<b[1]-.002 and o[3]-o[1]<.05 and min(b[2],o[2])-max(b[0],o[0])>-.05]+[0])
+        # Only content that ends above the anchor row counts as 'above'; a matrix bracket on the row itself does not.
+        above=max([min(b[3],o[3])-max(b[1],o[1]) for o in boxes if o is not b and id(o) not in delimiters and o[1]<b[1]-.002 and o[3]<=y0-.001 and o[3]-o[1]<.05 and min(b[2],o[2])-max(b[0],o[0])>-.05]+[0])
         return mine>=above
     for _ in range(4):
         grown=min([top]+[b[1] for b in boxes if b[0]>x0+.01 and b[1]>=y0-.03 and b[3]-b[1]<.05 and b[1]<y1 and b[3]>top+.001 and own(b,top)])
@@ -211,7 +215,7 @@ def read_page(lines, previous, geometry=(), images=()):
             return page_map('solutions',[continued_solution(open_s,[.02,ceiling,.98,foot],body_text)],issues),context
         classification='instructions' if headers or re.search(r'\b(duration|instructions|marking)\b',text,re.I) else 'unresolved'
         if classification=='unresolved':issues.append('No reliable question or key anchors; classify or attach this continuation.')
-        if open_q:issues.append(f'Q{open_q["number"]}: confirm response type, options and continuation.')
+        if open_q:issues.append(f'Q{open_q["number"]} (starts on the previous page): confirm response type, options and continuation.')
         regions=[Region(role='instructions' if classification=='instructions' else 'ignore',mock=context.get('mock',''),rect=[.01,.01,.99,.99],text=text[:30000],checked=classification=='instructions')]
         return page_map(classification,regions,issues),context
     first=min([a[0]['rect'][1] for a in anchors]+[h[0] for h in shared])
@@ -221,6 +225,7 @@ def read_page(lines, previous, geometry=(), images=()):
     pictures=[list(b) for b in images]
     header_rows={round(h[0],3) for h in headers}
     header_rects=[x['rect'] for x in body if round(x['rect'][1],3) in header_rows]
+    delimiters={id(x['rect']) for x in body if DELIMITER.fullmatch(x['text'].strip())}
     starts=sorted([(int(two and a[0]['rect'][0]>.46),a[0]['rect'][1],'anchor',a) for a in anchors]+[(0,h[0],'shared',h) for h in shared],key=lambda s:(s[0],s[1]))
     def column(col):
         x0,x1=(.02,.98) if not two else (.02,.49) if col==0 else (.5,.98)
@@ -228,14 +233,14 @@ def read_page(lines, previous, geometry=(), images=()):
     def cut_for(col,y,kind,item):
         if kind!='anchor':return max(ceiling,y-.002)
         x0=item[0]['rect'][0]
-        floor=max([ceiling]+[r[3] for r in header_rects if r[3]<=item[0]['rect'][1]+.002])
-        top=row_top(item[0],[b for b in column(col) if b not in header_rects])
+        floor=max([ceiling]+[r[3]-.003 for r in header_rects if r[3]<=item[0]['rect'][1]+.002])
+        top=row_top(item[0],[b for b in column(col) if b not in header_rects],delimiters)
         if open_q is None and not any(s[0]==col and s[1]<y for s in starts):
             # Only the page's first question may own an inline table header set just above its first line.
             top=min([top]+[x['rect'][1] for x in body if x['rect'][0]>x0+.3 and top-.006<x['rect'][3]<=top+.001 and x['rect'][3]-x['rect'][1]<.05 and not re.match(r'^\(?[A-D]\)',x['text'].strip())])
         # Tall rows touch: split the overlap between the previous row's descent and this row's raised glyphs.
         intruding=[b[3] for b in column(col) if b[3]-b[1]<.05 and b[1]<top-.004 and top<b[3]<=top+.012]
-        return max(floor,min(top+.003,(top+max(intruding))/2) if intruding else top-.002)
+        return max(floor,min(item[0]['rect'][1]-.001,top+.003,(top+max(intruding))/2) if intruding else top-.002)
     cuts=[cut_for(*s) for s in starts]
     first=min(cuts)
     above=[x for x in body if x['rect'][1]<first]
@@ -246,7 +251,7 @@ def read_page(lines, previous, geometry=(), images=()):
             family,_=option_family(intro,intro.splitlines())
             regions.append(Region(role='question',mock=open_q['mock'],subject=open_q['subject'],section=open_q['subject'],number=open_q['number'],rect=rect,
                 text=intro[:30000],option_labels=list(family),response_type='mcq' if family else 'unresolved',continuation=True,checked=bool(family)))
-            if not family:issues.append(f'Q{open_q["number"]}: confirm response type, options and continuation.')
+            if not family:issues.append(f'Q{open_q["number"]} (starts on the previous page): confirm response type, options and continuation.')
             open_q=None
         elif intro.strip() and open_s and context.get('role')=='solution' and open_s.get('mock')==context.get('mock'):
             regions.append(continued_solution(open_s,rect,intro))
@@ -255,7 +260,7 @@ def read_page(lines, previous, geometry=(), images=()):
             if intro.strip() and not INTRO_OK.search(intro) and any(not re.search(allowed,line.strip(),re.I) for line in intro.splitlines() if len(line.strip())>3):
                 issues.append('Leading content may continue a previous question or solution. Attach it explicitly instead of discarding it as instructions.')
             regions.append(Region(role='instructions',mock=context.get('mock',''),rect=rect,text='\n'.join(x['text'] for x in above)[:30000],checked=True))
-    if open_q:issues.append(f'Q{open_q["number"]}: confirm response type, options and continuation.')
+    if open_q:issues.append(f'Q{open_q["number"]} (starts on the previous page): confirm response type, options and continuation.')
     last=dict(context.get('last') or {});running=context.get('mock');carry=None;solution_carry=None;base=dict(previous)
     for _,kind,value in headers:
         if kind=='role' and value and _<0:apply(base,kind,value)

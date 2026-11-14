@@ -40,7 +40,7 @@ async def read_batch(book, token, source):
             context=BookPage.from_mongo(existing).context;continue
         data=extracted[n]
         if data.get('error'):
-            page=BookPage(id=identity(id,'page',n),book_id=id,number=n,issues=[data['error']],context=context)
+            page=BookPage(id=identity(id,'page',n),book_id=id,number=n,issues=[data['error']],context=context,provenance={'kind':'native','reader':READER_VERSION})
         else:
             mapped,context=read_page(data['lines'],context,data.get('geometry',[]),data.get('images',[]))
             text='\n'.join(line['text'] for line in data['lines'])
@@ -106,8 +106,9 @@ async def step(job):
         if book.state=='uploading':return 'Waiting for upload completion.'
         source=await receive(book,token) if not p.get('source_path') else await original(book)
         if p.get('reader_version')!=READER_VERSION:
-            # Books read by an older page reader are re-read automatically; owner repairs and AI-approved pages are kept.
-            await db.tejas_book_pages.delete_many({'book_id':id,'provenance.kind':'native','provenance.reader':{'$ne':READER_VERSION}})
+            # Books read by an older page reader are re-read automatically; owner repairs, AI-approved pages and pages of published mocks are kept.
+            published=sorted({n for m in await mocks_for(book) if m.published_generation for numbers in m.pages.values() for n in numbers})
+            await db.tejas_book_pages.delete_many({'book_id':id,'number':{'$nin':published},'provenance.kind':{'$nin':['owner_repair','ai_proposal']},'provenance.reader':{'$ne':READER_VERSION}})
             p.update(read_pages=0,reader_version=READER_VERSION,message='Re-reading pages with the improved reader. Owner repairs are kept.')
             book.state='reading';await save_book(book,token)
         if p.get('read_pages',0)<p['pages']:

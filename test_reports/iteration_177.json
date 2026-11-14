@@ -1,0 +1,43 @@
+{
+  "summary": "Backend-only check of the native PDF mock-book reader (no AI, no prod, no customer DB). Every requested suite printed exactly the expected numbers: reader regressions 27/27; BITSAT 50-mock book 50 ready, 0 issues, 142 questions per mock, BITSAT 180 min +3/-1 with bonus, every question has a key; JEE 50-mock 4,481-page book 35 ready, 15 held, 38 issues (all 19 held questions are real source defects, checked by rendering the pages and by text); synthetic book 2 ready + 1 held (Mock 3 Q2 has a conflicting key); isolated suites 173: 133/133, 174: 51/51, 175: 67/67. Looking at the crops turned up one real quality bug the counts do not catch: in the BITSAT book, about 9 matrix questions sit in READY mocks with a bad top crop edge. The top row of the 2x2 matrix is cut off (it goes into the previous question's crop), and the top of the question number is clipped too.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "tejas/book_reader.py read_page -> row_top()/cut_for() (question crop top edge)", "issue": "Questions whose first line has a stacked 2x2 matrix (A = [4 1; 2 2] style, set as 3 text rows) get a top crop edge that cuts through the matrix's top row and the question number. The top row ends up at the bottom of the previous question's crop. The mock is still marked READY with 0 issues, so it would auto-publish with a question students cannot read. Confirmed by rendering BITSAT Mock 40 Q120 p985 (crop starts at y=.6589, but the matrix top row starts at y=.6484 and the bracket at .6454), Mock 29 Q99 p706 and Mock 46 Q140 p1135. The same edge pattern shows in Mock 20 Q119 p488, 33 Q106 p807, 41 Q100 p1008, 45 Q110 p1105, 45 Q116 p1106 and 46 Q113 p1131. JEE book: none (only 1 harmless superscript case).", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "book_reader continuation issue text", "issue": "For 3 of the 19 genuine defects, the issue names the NEXT page instead of the page where the question is printed: 'Page 1089: Q70' is really on p1088, 'Page 1975: Q45' on p1974, 'Page 2151: Q20' on p2150. This sends the owner to the wrong page. The other 16 name the right page."},
+      {"endpoint": "tejas/book_worker.py step() re-read", "issue": "Pages saved with an extraction error get provenance={} (no kind='native'), so the reader-version delete never removes them. A page that failed for a temporary reason stays failed after the re-read."},
+      {"endpoint": "tejas/book_worker.py step()/recover()", "issue": "The automatic re-read deletes and re-reads native pages that belong to PUBLISHED mocks. rebuild() skips mocks where published_generation==generation, so published sets and student attempts are not touched. But the owner's AI 'reading' path refuses with 409 ('Create a corrected mock version before re-reading published regions') and this path does not apply that guard. If reader v3 labels the same pages with a different mock title than the old reader, a second BookMock with a new label would be built from the published mock's pages and, with auto_publish on, could be published as a duplicate. This is unlikely while titles stay the same. Suggest skipping pages already mapped to published mocks, or holding any new label whose pages overlap a published mock."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/book_reader_regressions178.py",
+    "/app/backend/tests/repro_book_rebuild.py",
+    "/app/backend/tests/audit_crops.py",
+    "/app/backend/tests/flagged_crops179.py",
+    "/app/backend/tests/boundary_slice179.py",
+    "/app/backend/tests/structure_iso173.py",
+    "/app/backend/tests/structure_imports_iso174.py",
+    "/app/backend/tests/section_preview_iso175.py"
+  ],
+  "action_items": [
+    "Fix row_top()/cut_for() so a stacked matrix (or any multi-row formula) on a question's first line moves the cut above its top row. Today own() treats the matrix's own bracket glyph '\"' (y .6454-.6572) as 'content printed above' the '4' (y .6484-.6614), so the row does not grow. The 'intruding' split then sets the cut at (top+max(intruding))/2 = .6589, which is below the question number's own top (.6565). Add a regression using BITSAT p985 Q120 and a check in repro_book_rebuild's AUDIT that flags crop edges that slice glyphs (tests/boundary_slice179.py does this; run it with TEXTONLY=1).",
+    "Report continuation and option defects on the page where the question starts (p1088, p1974, p2150), not on the next page.",
+    "Optional: give error pages provenance kind='native' so they are re-read, and protect pages of published mocks during the automatic re-read."
+  ],
+  "critical_code_review_comments": [
+    "The step() re-read is safe for student data: rebuild() skips mocks where published_generation==generation, publish_batch skips mocks that are already published, and publish_ready creates a new set id identity(mock.id, generation), so a published mock is not re-published and attempts are not changed unless the label changes (see minor issue).",
+    "read_batch uses $setOnInsert and skips existing pages, so kept owner_repair and ai_proposal pages are not overwritten. Old v1/v2 pages had provenance {'kind':'native'} with no 'reader' key; checked in git history, the {$ne:3} filter matches them, so stuck live books will be re-read.",
+    "The delete and the read_pages reset are idempotent if the process crashes, because reader_version is saved only after the delete.",
+    "AI runs only from process_allowance, and only when a tejas_book_allowances row in state queued/running exists. That row is inserted only by the owner approval endpoint in book_imports.py, after the full read, with a request budget. An interrupted 'running' allowance fails instead of being charged again. No AI path runs without an owner-approved allowance.",
+    "The leak check looks only at region text, not pixels, so crop-geometry bugs like the matrix one are not visible to it. A glyph-slice check on crop edges would catch them."
+  ],
+  "updated_files": ["/app/backend/tests/flagged_crops179.py (new, test-only)", "/app/backend/tests/boundary_slice179.py (new, test-only)"],
+  "success_rate": {"backend": "All requested suites matched expectations (27/27, 133/133, 51/51, 67/67, BITSAT/JEE/synthetic counts exact). One HIGH crop-quality defect is open (about 9 BITSAT matrix questions).", "frontend": "not tested (backend only)"},
+  "seed_data_creation": "None. Isolated suites created and dropped their own DBs (tejas_isolated_book170_*). The repro scripts run in memory.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "/tmp/book/bitsat50.pdf and /tmp/book/jee50.pdf exist. For JEE runs use 'setsid nohup python -u repro_book_rebuild.py ... < /dev/null &' (plain nohup gets killed when a foreground call times out). It takes about 4 min (extraction 220 s). After a fix, rerun: AUDIT=/tmp/bitsat_audit.json python repro_book_rebuild.py /tmp/book/bitsat50.pdf; then TEXTONLY=1 python boundary_slice179.py /tmp/book/bitsat50.pdf /tmp/bitsat_audit.json /tmp/s.png 8. Expect the matrix cases (Mock 20/29/33/40/41/45/46) to be gone; the remaining radical-sign '√' cases are cosmetic. The 'crop contains another question number' AUDIT flags (BITSAT 185, JEE 66) are false positives (fraction digits such as 3, 5, 40, 426 printed on their own line); checked visually.",
+  "rca of the issue": "Matrix crop: book_reader.row_top() grows the row upward only with glyphs that own() says overlap the anchor row more than the content above them. In a stacked matrix the left bracket glyph '\"' starts above the top row '4 1', so own() treats the matrix's own top row as belonging to the bracket 'above' it and leaves it out. cut_for() then sees those glyphs as 'intruding' from the previous row and splits the difference, putting the cut at .6589, below the anchor row's own top (.6565). Reproduce: rebuild bitsat50 with AUDIT, then crop Mock 40 Q120 (p985); the top matrix row is missing. Fix direction: ignore boxes that overlap horizontally with the candidate's own row cluster when computing 'above' (or treat bracket/delimiter glyphs as part of the row), and never let the cut go below the anchor line's own top."
+}
