@@ -89,6 +89,7 @@ export const go = {
   /** A Match Room, or straight into the match when it has already started. */
   room: (room: { id: string; duel_id?: string | null }) => (room.duel_id ? go.duel({ did: room.duel_id }) : ({ pathname: "/rapid/room/[cid]", params: { cid: room.id } }) as any),
   cups: () => "/rapid/cup" as any,
+  squads: () => "/rapid/squads" as any,
   night: () => "/rapid/cup/night" as any,
   cup: (cid: string) => ({ pathname: "/rapid/cup/[cid]", params: { cid } }) as any,
   watch: (did: string) => ({ pathname: "/rapid/watch/[did]", params: { did } }) as any,
@@ -120,6 +121,11 @@ export const dismissNotice = (uid: string, id: string) => rf(`/notices/${id}/dis
 // Champions Wall: the last Cup Night's champions, in the lobby until the next night's doors open.
 export type Champion = PlayerCard & { cup_id: string; no: number; size: number; real_players: number; title_no: number; you: boolean };
 export const useChampions = (uid?: string) => useCached<{ day: string | null; tonight?: boolean; items: Champion[]; until_ts: number; time_label: string }>(uid ? `u.${uid}.rfchamps` : null, () => rf("/cups/champions", uid!), false);
+
+// Cheer Squads: levels open with cup wins, or buy one early with diamonds. More wins, a more glamorous squad.
+export type SquadItem = { id: string; level: number; title: string; body: string; wins: number; gems: Record<string, number> | null; unlocked: boolean; bought: boolean; need: number };
+export type Squads = { items: SquadItem[]; equipped: string; cups_won: number; diamonds: Record<string, number> };
+export const useSquads = (uid?: string) => useCached<Squads>(uid ? `u.${uid}.rfsquads` : null, () => rf("/squads", uid!), false);
 /** "5h 12m" for long waits, "42:07" in the last hour. */
 export const countdown = (s: number) => {
   const t = Math.max(0, Math.round(s)), h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60);

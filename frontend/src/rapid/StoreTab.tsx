@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal, ScrollView, StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
@@ -9,13 +11,14 @@ import { Avatar, EntryShow } from "@/src/components/Entry";
 import { useGameProfile } from "@/src/components/game";
 import { RARITY } from "@/src/avatars";
 import { playSfx } from "@/src/sfx";
-import { arena } from "@/src/theme";
+import { arena, cheer } from "@/src/theme";
 import { Alive, GameIcon } from "./Art";
 import { GoldTitle, Panel, RaisedButton } from "./arena";
 import { Jelly } from "./juice";
 import { DiamondWallet, PriceButton, canAfford, costText, haveText, isFree } from "./StoreParts";
 import { ErrorBox, Sheet, Skeleton } from "./ui";
-import { takeArenaPart } from "./social";
+import { go, takeArenaPart } from "./social";
+import { squadFrames } from "./squadArt";
 
 type Tab = "avatar" | "entry" | "frame" | "theme" | "powerup";
 const TABS: [Tab, string][] = [["avatar", "Avatars"], ["entry", "Entry Effects"], ["frame", "Frames"], ["theme", "Arenas"], ["powerup", "Power-ups"]];
@@ -49,7 +52,17 @@ export function StoreTab() {
         </View>
         <RaisedButton testID="shop-what-are-coins" label="Earn" tone="wine" height={42} onPress={() => setInfo(true)} style={styles.earn} />
       </Panel>
-      <DiamondWallet diamonds={d?.diamonds} />
+      {d ? <DiamondWallet diamonds={d.diamonds} /> : <Skeleton h={104} />}
+      <Jelly testID="shop-squads" accessibilityLabel="Cheer Squads. Unlock a squad early with diamonds" onPress={() => router.push(go.squads())} style={styles.squads}>
+        <LinearGradient colors={[cheer[1].cloth[1], cheer[2].cloth[2]]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+        <Image source={squadFrames(1, "c")[0]} style={styles.squadPeek} contentFit="contain" />
+        <View style={styles.flex}>
+          <T w="heavy" size={11} color={arena.aqua} style={styles.kicker}>CHEER SQUADS</T>
+          <GoldTitle size={18}>Unlock early with diamonds</GoldTitle>
+          <T size={11} color={arena.muted} numberOfLines={2}>Cup wins open every level. Diamonds open them today.</T>
+        </View>
+        <Icon name="chevron-right" size={26} color={arena.gold} />
+      </Jelly>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.tabs} contentContainerStyle={styles.tabRow}>
         {TABS.map(([v, l]) => <Jelly key={v} testID={"shop-tab-" + v} accessibilityRole="tab" accessibilityState={{ selected: tab === v }} onPress={() => setTab(v)} style={[styles.tab, tab === v && styles.tabOn]}>
           <T w="heavy" size={13} color={tab === v ? arena.text : arena.muted}>{l}</T>
@@ -117,5 +130,7 @@ const styles = StyleSheet.create({
   rarity: { alignSelf: "flex-start", paddingHorizontal: 8, height: 18, borderRadius: 9, justifyContent: "center" },
   preview: { width: "100%", height: 92, borderRadius: 14, alignItems: "center", justifyContent: "center", overflow: "hidden" },
   playBadge: { position: "absolute", right: 6, bottom: 6, width: 26, height: 26, borderRadius: 13, alignItems: "center", justifyContent: "center", backgroundColor: arena.teal, borderWidth: 1.5, borderColor: arena.tealOutline },
+  squads: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 88, paddingRight: 10, borderRadius: 20, overflow: "hidden", borderWidth: 1.5, borderColor: arena.gold, borderBottomWidth: 4, borderBottomColor: arena.goldDeep },
+  squadPeek: { width: 64, height: 84 }, kicker: { letterSpacing: 1.5 },
   blurb: { textAlign: "center", minHeight: 30 }, earnRow: { flexDirection: "row", alignItems: "center", gap: 10 },
 });

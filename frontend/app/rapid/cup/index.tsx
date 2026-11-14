@@ -6,7 +6,7 @@ import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
 import { T } from "@/src/components/ui";
 import { arena } from "@/src/theme";
-import { Alive, Emblem, GameIcon } from "@/src/rapid/Art";
+import { Alive, Emblem, GameIcon, Gem } from "@/src/rapid/Art";
 import { GoldTitle, Panel, RaisedButton, Ribbon, SectionTitle, Segment, arenaInput } from "@/src/rapid/arena";
 import { Jelly, Pop, Twinkles } from "@/src/rapid/juice";
 import { Check, Face, InnerScreen, Note, PersonRow } from "@/src/rapid/parts";
@@ -69,6 +69,7 @@ function CupHub() {
       <T w="bold" size={12} color={arena.aqua} style={styles.center}>{CUP_CARDS} cards a match · every round starts together · lose once and you’re out</T>
       <View testID="cup-prizes" style={styles.prizes}>
         <View style={styles.prize}><GameIcon name="coin" size={26} /><T w="heavy" size={11} color={arena.gold} style={styles.center}>Win 30 coins{"\n"}+40 per real rival</T></View>
+        <View testID="cup-prize-gems" style={styles.prize}><Gem color="blue" size={26} /><T w="heavy" size={11} color={arena.gold} style={styles.center}>Diamonds for{"\n"}the top two</T></View>
         <View style={styles.prize}><GameIcon name="trophy" size={26} /><T w="heavy" size={11} color={arena.gold} style={styles.center}>Cup Champion{"\n"}trophy</T></View>
       </View>
     </Panel>

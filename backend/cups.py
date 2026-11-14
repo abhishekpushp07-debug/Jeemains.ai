@@ -40,6 +40,21 @@ NIGHT_LEAD = 30  # seconds between the 8 pm draw and round 1, so everybody can g
 NIGHT_GUARD = 900  # in the last 15 minutes before the start, a player with a seat cannot begin another cup
 NIGHT_REMIND = 300  # 7:55 pm: every seat holder gets an in-app reminder
 NIGHT_PICKS = [{"subject": s, "chapter": None} for s in ("Physics", "Chemistry", "Mathematics")]
+# Diamonds for the champion and the runner-up, straight into the Vault. Real-player cups pay the most, Cup Night most of all.
+CUP_GEMS = {4: ({"red": 3}, {"red": 1}), 8: ({"red": 3, "blue": 2}, {"red": 2}), 16: ({"blue": 3, "emerald": 1}, {"blue": 1, "red": 2})}
+
+
+def cup_gems(c: dict, humans: int, place: int) -> dict:
+    if humans <= 1:  # practice rivals only: one red diamond for the champion
+        return {"red": 1} if place == 1 else {}
+    size = max([s for s in CUP_GEMS if s <= len(c["players"])] or [4])
+    g = dict(CUP_GEMS[size][place - 1])
+    if c.get("night"):
+        bonus = {"gold": 1, "emerald": 1} if place == 1 else {"blue": 1}
+        g = {k: g.get(k, 0) + bonus.get(k, 0) for k in {*g, *bonus}}
+    return g
+
+
 
 
 def night_of(ts: float):
@@ -138,9 +153,12 @@ def make_router(db, rf_user, duels):
             prizes[champion] = 30 + 40 * (len(humans) - 1)
         if runner and not seats[runner].get("bot") and len(humans) > 2:
             prizes[runner] = 15 * (len(humans) - 1)
-        got = await db.rf_cups.find_one_and_update({"id": c["id"], "status": "live"}, {"$set": {"status": "finished", "champion": champion, "prizes": prizes, "finished_ts": time.time()}}, return_document=after)
+        gems = {u: g for u, g in ((champion, cup_gems(c, len(humans), 1)), (runner, cup_gems(c, len(humans), 2))) if u and g and not seats[u].get("bot")}
+        got = await db.rf_cups.find_one_and_update({"id": c["id"], "status": "live"}, {"$set": {"status": "finished", "champion": champion, "prizes": prizes, "gems": gems, "finished_ts": time.time()}}, return_document=after)
         if not got:
             return await fresh(c["id"])
+        for uid, g in gems.items():  # diamonds straight into the Vault
+            await db.rf_profiles.update_one({"uid": uid}, {"$inc": {f"diamonds.{colour}": n for colour, n in g.items()}})
         for uid, coins in prizes.items():  # paid once: only the request that closed the cup gets here
             won = uid == champion
             p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {"coins": coins, **({"cups_won": 1, **({"cups_real": 1} if len(humans) > 1 else {})} if won else {})},
@@ -226,7 +244,7 @@ def make_router(db, rf_user, duels):
                 "can_start": host and c["status"] == "open" and c["kind"] == "private" and len(c["players"]) >= 2,
                 "players": [{**{k: p.get(k) for k in SHOWN}, "bot": bool(p.get("bot")), "you": p["uid"] == uid, "out": p["uid"] in out} for p in c["players"]],
                 "rounds": [{"name": ROUND_NAMES.get(len(rd), f"Round {k + 1}"), "matches": [match(m) for m in rd]} for k, rd in enumerate(rounds)],
-                "my_duel": mine["duel_id"] if mine else None, "champion": idx.get(c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0), "invited_players": invited,
+                "my_duel": mine["duel_id"] if mine else None, "champion": idx.get(c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0), "gems_won": (c.get("gems") or {}).get(uid, {}), "invited_players": invited,
                 "first_title": title_no == 1, "title_no": title_no, "my_crown": my_crown, "real_players": sum(not p.get("bot") for p in c["players"]), "night": c.get("night"), "night_no": c.get("night_no")}
 
     async def open_for(cid, uid):
@@ -254,10 +272,10 @@ def make_router(db, rf_user, duels):
         """Your last 10 cups, newest first."""
         uid = rf_user(x_rf_user)
         docs = await db.rf_cups.find({"players.uid": uid, "status": {"$in": ["open", "live", "finished"]}}, {"_id": 0, "id": 1, "label": 1, "size": 1, "status": 1, "kind": 1, "champion": 1, "night": 1,
-                                                                                                                "players.uid": 1, "players.name": 1, "prizes": 1, "created_ts": 1}).sort("created_ts", -1).limit(10).to_list(10)
+                                                                                                                "players.uid": 1, "players.name": 1, "prizes": 1, "gems": 1, "created_ts": 1}).sort("created_ts", -1).limit(10).to_list(10)
         name = lambda c, u: next((p["name"] for p in c["players"] if p["uid"] == u), None)  # noqa: E731
         return {"items": [{"id": c["id"], "label": c["label"], "size": c["size"], "status": c["status"], "kind": c["kind"], "players": len(c["players"]), "won": c.get("champion") == uid,
-                           "champion": name(c, c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0), "night": bool(c.get("night"))} for c in docs]}
+                           "champion": name(c, c.get("champion")), "prize": (c.get("prizes") or {}).get(uid, 0), "gems_won": (c.get("gems") or {}).get(uid, {}), "night": bool(c.get("night"))} for c in docs]}
 
     # ---------- Cup Night: every day at 8 pm IST ----------
     async def seat_night(n):

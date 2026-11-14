@@ -422,6 +422,7 @@ from gangs import make_router as make_gangs  # noqa: E402
 from gamify import phoenix  # noqa: E402
 from leagues import make_router as make_leagues  # noqa: E402
 from cups import make_router as make_cups  # noqa: E402
+from squads import make_router as make_squads  # noqa: E402
 duel_router, duel_api = make_duels(db, rf_user, public_card, award)
 api.include_router(duel_router)
 api.include_router(make_social(db, rf_user))
@@ -430,6 +431,7 @@ api.include_router(make_gangs(db, rf_user))
 api.include_router(make_leagues(db, rf_user))
 cups_router = make_cups(db, rf_user, duel_api)
 api.include_router(cups_router)
+api.include_router(make_squads(db, rf_user))
 api.include_router(game_router)
 api.include_router(make_revision(db, rf_user))
 api.include_router(make_owner_downloads(db))

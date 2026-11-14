@@ -97,7 +97,7 @@ class RFAccessGuard:
             response = JSONResponse({'detail': 'Rapid Fire is refreshing its question bank. Please retry shortly.'}, status_code=503, headers={'Retry-After': '15', 'Cache-Control': 'no-store'})
             return await response(scope, receive, send)
         # WhatsApp link pages are public HTML that reveal only a display name, subject and player code.
-        public = path in ('/api/rf/catalog', '/api/rf/cards', '/api/rf/access') or path.startswith(('/api/rf/invite/', '/api/rf/c/', '/api/rf/g/'))
+        public = path in ('/api/rf/catalog', '/api/rf/cards', '/api/rf/access') or path.startswith(('/api/rf/invite/', '/api/rf/c/', '/api/rf/g/', '/api/rf/art/'))
         if not public and scope['method'] != 'OPTIONS':
             try:
                 grant = await verified_grant(self.db, Headers(scope=scope).get('authorization', '').removeprefix('Bearer '))
@@ -108,7 +108,7 @@ class RFAccessGuard:
 
         async def private_send(message):
             # /access issues a token and is uncached too, despite not requiring a grant.
-            if message['type'] == 'http.response.start' and path not in ('/api/rf/catalog', '/api/rf/cards'):
+            if message['type'] == 'http.response.start' and path not in ('/api/rf/catalog', '/api/rf/cards') and not path.startswith('/api/rf/art/'):
                 MutableHeaders(scope=message)['Cache-Control'] = 'no-store'
             await send(message)
 

@@ -230,11 +230,20 @@ export const arena = {
   badge: "#FFE14D", badgeInk: "#3A0610", online: "#3DDC84", danger: "#FFB4B4", black: "#000000",
   clear: "rgba(255,255,255,0)", sheen: "rgba(255,255,255,0.5)", gloss: "rgba(255,255,255,0.26)", shade: "rgba(0,0,0,0.45)", scrim: "rgba(20,2,6,0.86)",
   // The shine: a band of light that crosses the stage, and the glassy top of every card.
-  shine: "rgba(255,255,255,0.12)", panelGloss: "rgba(255,255,255,0.08)",
+  shine: "rgba(255,255,255,0.12)", panelGloss: "rgba(255,255,255,0.08)", glint: "rgba(255,255,255,0.78)",
 };
 // The five streak diamonds, and the lights used by entry effects.
 export const gemColors = { red: "#FF4D5E", blue: "#4D7CFF", emerald: "#2FD27A", gold: "#FFD75E", kohinoor: "#F4F8FF" };
 export const fx = { fire: "#FF7A2F", ember: "#FFC24D", bolt: "#7DF9FF", white: "#FFFFFF", smoke: "#C9CED6", gold: "#FFD75E", crimson: "#FF4D5E", sky: "#4D7CFF", ice: "#9EF3E6", night: "#0B1026" };
+// The stadium banner the Cheer Squad carries, per squad level: satin cloth (top → bottom), metallic foil for the letters,
+// the trim on the border, poles and fringe (light → deep), the corner stripes, the letter outline, the name plate and the glitter.
+const goldFoil = ["#FFF8D6", "#FFD75E", "#B8760C", "#FFE38A", "#FFF8D6"] as const, goldTrim = ["#FFF2B8", "#E2A82A", "#8A5806"] as const;
+export const cheer = {
+  1: { cloth: ["#E3203A", "#9A0B1D", "#4A030B"], foil: goldFoil, trim: goldTrim, stripe: "#FFD75E", ink: "#3A0610", plate: "#1A0307", glitter: ["#FFFFFF", "#FFE89A"] },
+  2: { cloth: ["#3A2C14", "#140D04", "#000000"], foil: goldFoil, trim: goldTrim, stripe: "#FFD75E", ink: "#1A1204", plate: "#000000", glitter: ["#FFFFFF", "#FFD75E"] },
+  3: { cloth: ["#3557E6", "#152686", "#060B36"], foil: ["#FFFFFF", "#E3EBF7", "#8794AC", "#F4F7FF", "#FFFFFF"], trim: ["#FFFFFF", "#B4BED0", "#5A6579"], stripe: "#DCE6F5", ink: "#050A2A", plate: "#040822", glitter: ["#FFFFFF", "#9EC3FF"] },
+  4: { cloth: ["#5A1E3A", "#2A0A1E", "#0E0209"], foil: ["#FFF1EA", "#F4B9A4", "#B76E5D", "#FFD9CC", "#FFF1EA"], trim: ["#FFE7DC", "#D99682", "#87483B"], stripe: "#F4B9A4", ink: "#22051A", plate: "#160410", glitter: ["#FFFFFF", "#FFD1E8", "#9EF3E6"] },
+} as const;
 
 export const rapidColors = {
   ...dark,

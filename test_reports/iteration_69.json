@@ -1,0 +1,38 @@
+{
+  "summary": "Iteration 69 tested the Cheer Squad banner redesign, the diamond unlock flow, the Store entry point, the regression after removing expo-symbols, and the squads backend. The backend pytest test_iter69_squads.py passed 4 of 4. In the UI, the new stadium banner renders for all 4 levels with distinct colours: L1 crimson/gold, L2 black/gold, L3 sapphire/silver, L4 plum/rose-gold. Each banner has satin cloth with cut corners and metallic trim, a leaning foil CONGRATULATIONS! title (aria-label correct), a dark name plate with a crown chip, gold fringe, spear-tip poles, glitter, and a glint that moves (its transform changed between samples). No marquee bulbs or rainbow letters remain in the code or on screen. Continue and Cheer again are visible without scrolling at 375x667, 390x844 and 320x568. The page does not scroll sideways. ONE FAIL: at 320 width the name plate cuts the short name 'Learner' to 'Lear...'. At 375 and 390 the name is not cut. The diamond buy flow works end to end; the QA wallet was temporarily raised and then restored exactly. The Store CHEER SQUADS card opens /rapid/squads. Regression after removing expo-symbols passed: the bundle loads, all 5 bottom tabs work, the Rapid Fire lobby, /rapid/cup and the player Trophy Cabinet (cheer and squads buttons) work, there are no console errors and expo-symbols is never mentioned. No deprecated Expo packages were found (no expo-av, expo-symbols or expo-barcode-scanner in package.json or the source).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CheerBanner name plate", "issue": "At 320x568 the short name 'Learner' is cut to 'Lear...' (cheer-banner-name scrollWidth > clientWidth) on every level. RCA: at SW=308 the banner is bw=184.8 and bh=86. The plateRow side padding is 11+16+(h-7-plateTop)*tan12+4 = 36.7 px on each side, which leaves only about 111 px. The plate needs about 128 px: 24 padding + 3 border + about 50 for the name at 12.3 px + 6 gap + about 45 for the crown chip. Reference: /app/frontend/src/rapid/CheerBanner.tsx:79,125-127,141", "testID": "cheer-banner-name", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "CheerSquad modal", "issues": [
+        "The avatar medal almost touches the title. The gap between the medal bottom and the top of the cap letters is only about 2 px at 375 and 390 and about 3 px at 320, and the 3 px ink outline stroke closes most of that gap. The medal does not cover the letters, but visually it touches the 'RATU' letters. Consider about 4-6 px more top offset.",
+        "On counts 1 and 5 (lead star jump, hop 0.16) the lead dancer's raised pom-poms pass over the name plate and crown chip (seen on level 2 after the purchase). This briefly hides the player's name.",
+        "Holder element boxes run past the screen at 390 (left -46, right 448). The modal clips them, so the page does not scroll sideways, but the edges of the holders' hair and arms come close to the screen edge."
+      ]},
+      {"screen": "Store (shop-screen)", "issues": ["While /api/rf/shop loads, the YOUR DIAMONDS strip shows 0 0 0 0 0 and the coin balance shows '—'. The top strip already shows the real balance at that moment, so the zeros are misleading. Use a skeleton or spinner instead of 0."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter69_squads.py", "/app/test_reports/pytest/iter70_squads.xml", "/app/tests/iter70_qa_wallet.py"],
+  "action_items": [
+    "Fix the name being cut at 320 width in CheerBanner. Options: lower the side padding (e.g. one stripe or a smaller inset when w < 200), cut the plate paddingHorizontal to 8 on small banners, shrink the name font for narrow banners (e.g. Math.min(16, w/15) -> a smaller factor below 200 px), or give the banner a larger share of SW on narrow screens (bw = max(SW*0.6, ~205)). Then re-verify 'Learner' at 320, 375 and 390.",
+    "Optional: give the medal 4-6 px more clearance from the title.",
+    "Optional: keep the lead's star-jump pom-poms below the name plate (smaller LEAD_HOP on counts 1/5, or put the lead's top lower).",
+    "Optional: show a skeleton instead of 0 diamonds while the Store loads."
+  ],
+  "critical_code_review_comments": [
+    "CheerBanner.tsx 145 lines and CheerSquad.tsx 183 lines: both are well under the size limit. Styles use StyleSheet.create, and there is no raw text outside <T>.",
+    "squads.tsx: after a purchase the code calls q.reload(), reloads the profile and then shows the preview. The error is hidden while the sheet is open (error={buying ? '' : error}) and shows inside the sheet instead. Good.",
+    "backend squads.py buy uses an atomic find_one_and_update with guards ($gte per colour and owned $ne), so it cannot double-spend. Good. The endpoints are unchanged."
+  ],
+  "updated_files": ["/app/tests/iter70_qa_wallet.py (new helper: backup/raise/restore QA wallet)"],
+  "success_rate": {"backend": "100% (4/4)", "frontend": "95% (all flows passed; name cut at 320 width failed)"},
+  "seed_data_creation": "Temporarily set diamonds.red=10 on QA profile pid PF37CC308, then bought squad_gold and switched back to rookie. Afterwards diamonds {red 7, blue 4, emerald 1} were restored exactly, and diamonds_spent, owned and squad were unset, as they did not exist before. The restore was verified with an exact match. No other data was touched.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: type phone and PIN with page.keyboard into get_by_placeholder('Mobile number') and entry-pin-input, then click entry-continue-button. localStorage was saved to /tmp/iter70_ls.json (0600) and injected via add_init_script. Use python /app/tests/iter70_qa_wallet.py show|backup|raise|restore to test buying safely. Rapid Fire store tab = arena-tab-store. Medal element = cheer-banner.parentElement.parentElement.lastElementChild. To check the name cut, compare cheer-banner-name scrollWidth against clientWidth.",
+  "rca_of_issue": "Name cut at 320: the space for the name plate is the banner width minus 2 x 'side' (stripes + lean), about 111 px, and the plate content needs about 128 px. The fix is in the layout maths in CheerBanner.tsx (lines 79 and 125-141)."
+}

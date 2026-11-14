@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { ActivityIndicator, Modal, StyleSheet, View, useWindowDimensions } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, Modal, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
@@ -13,6 +13,8 @@ import { GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena"
 import { HeadToHeadCard } from "@/src/rapid/HeadToHead";
 import { CupShowcase } from "@/src/rapid/CupShowcase";
 import { CheerSquad } from "@/src/rapid/CheerSquad";
+import { CrownShare } from "@/src/rapid/CrownShare";
+import { prefetchSquad } from "@/src/rapid/squadArt";
 import { Crown, GemStrip, InnerScreen, Note, WingedFace } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
 import { day, go, prettyCode, seenText, setArenaTab, shareFriendCode, shortSubject, useGangs } from "@/src/rapid/social";
@@ -26,6 +28,7 @@ function Player() {
   const { pid, cheer } = useLocalSearchParams<{ pid: string; cheer?: string }>();
   const router = useRouter(), uid = useAuth().user?.id || "";
   const [cheering, setCheering] = useState(cheer === "1"); // from Cheer on the Champions Wall: the squad dances as you arrive
+  const [sharing, setSharing] = useState(false);
   const q = useCached<any>(uid && pid ? `u.${uid}.rfplayer.${pid}` : null, () => rf(`/players/${pid}`, uid), false);
   const gangs = useGangs(uid);
   const [busy, setBusy] = useState(""), [error, setError] = useState(""), [note, setNote] = useState("");
@@ -33,6 +36,7 @@ function Player() {
   const reload = q.reload;
   useFocusEffect(useCallback(() => { reload(); }, [reload]));
   const p = q.data, rel = p?.relation, s = p?.stats;
+  useEffect(() => { prefetchSquad(p?.squad?.level); }, [p?.squad?.level]); // the squad's poses are ready before Cheer is tapped
   // The wings are 2.5 portraits wide; shrink the portrait on narrow phones so they stay inside the card.
   const portrait = Math.min(104, (Math.min(useWindowDimensions().width, 560) - 80) / 2.5);
 
@@ -78,7 +82,7 @@ function Player() {
       {note ? <T testID="player-note" w="bold" size={13} color={arena.aqua} style={styles.center}>{note}</T> : null}
       <ErrorBox testID="player-action-error" error={error} />
 
-      {p.cups ? <CupShowcase cups={p.cups} name={p.name} me={p.is_me} onCheer={() => setCheering(true)} /> : null}
+      {p.cups ? <CupShowcase cups={p.cups} name={p.name} me={p.is_me} squad={p.squad} onCheer={() => setCheering(true)} onShare={() => setSharing(true)} /> : null}
 
       <View style={styles.tiles}>
         <Tile testID="player-stat-matches" label="MATCHES" value={s.matches} />
@@ -134,11 +138,19 @@ function Player() {
     <Modal visible={show} transparent animationType="fade" onRequestClose={() => setShow(false)} statusBarTranslucent>
       {show && p ? <EntryShow solo testID="player-entry-show" players={[{ name: p.name, you: p.is_me, avatar: p.avatar, frame: p.frame, entry: p.entry, level: p.level, wins: s.wins }]} onDone={() => setShow(false)} /> : null}
     </Modal>
-    {p?.cups?.won ? <CheerSquad visible={cheering} name={p.name} avatar={p.avatar} frame={p.frame} crown={p.crown?.won ? p.crown : { won: p.cups.won, real: p.cups.real }} onClose={() => setCheering(false)} /> : null}
+    {p?.cups?.won ? <CheerSquad visible={cheering} name={p.name} avatar={p.avatar} frame={p.frame} crown={p.crown?.won ? p.crown : { won: p.cups.won, real: p.cups.real }}
+      level={p.squad?.level} title={p.squad?.title} onClose={() => setCheering(false)} /> : null}
+    {p?.is_me && p.cups?.won ? <Modal visible={sharing} transparent animationType="fade" onRequestClose={() => setSharing(false)} statusBarTranslucent>
+      <View style={styles.shareLayer}><ScrollView contentContainerStyle={styles.shareScroll} showsVerticalScrollIndicator={false}>
+        <CrownShare s={{ name: p.name, avatar: p.avatar, frame: p.frame, no: p.cups.won, crown: p.crown?.won ? p.crown : { won: p.cups.won, real: p.cups.real },
+          label: p.cups.recent[0]?.label || "Knockout Cup", size: p.cups.recent[0]?.size || 4, cabinet: true }} onBack={() => setSharing(false)} />
+      </ScrollView></View>
+    </Modal> : null}
   </InnerScreen>;
 }
 
 const styles = StyleSheet.create({
+  shareLayer: { flex: 1, backgroundColor: arena.bgDeep }, shareScroll: { flexGrow: 1, justifyContent: "center", paddingHorizontal: 20, paddingVertical: 32 },
   flex: { flex: 1, minWidth: 0 }, center: { textAlign: "center" }, row: { flexDirection: "row", gap: 10 },
   card: { alignItems: "center", gap: 4, padding: 18 },
   nameRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, flexWrap: "wrap" },

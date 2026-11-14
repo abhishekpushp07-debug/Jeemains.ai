@@ -9,7 +9,7 @@ import { invalidate } from "@/src/useCached";
 import { Icon, T } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
 import { arena } from "@/src/theme";
-import { Alive, GameIcon } from "@/src/rapid/Art";
+import { Alive, GEM_ORDER, GameIcon, Gem } from "@/src/rapid/Art";
 import { ArenaBg, CloseButton, GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena";
 import { Confetti, Jelly, LiveDot, Pop, Twinkles } from "@/src/rapid/juice";
 import { Face, PersonRow } from "@/src/rapid/parts";
@@ -156,6 +156,10 @@ function Cup() {
       <Face p={champ} size={72} />
       <GoldTitle size={30} center testID="cup-champion-name">{champ.you ? "YOU WON THE CUP!" : champ.name}</GoldTitle>
       <T w="bold" size={13} color={arena.text} style={styles.center}>{cup.prize ? `+${cup.prize} coins for you` : me ? (me.out ? "Knocked out this time. Next cup is yours!" : "") : "What a cup! Thanks for watching."}</T>
+      {Object.keys(cup.gems_won || {}).length ? <View testID="cup-gems-won" style={styles.gemsWon}>
+        <T w="heavy" size={13} color={arena.gold}>+ DIAMONDS</T>
+        {GEM_ORDER.filter((c) => cup.gems_won[c]).map((c) => <View key={c} style={styles.gemsWon}><Gem color={c} size={26} /><T w="heavy" size={15} color={arena.text}>{cup.gems_won[c]}</T></View>)}
+      </View> : null}
     </Panel></Pop> : status === "open" ? <Panel gold testID="cup-lobby" style={styles.hero}>
       <Alive kind="breathe"><GameIcon name="trophy" size={84} /></Alive>
       <T testID="cup-seats-count" w="heavy" size={12} color={arena.aqua} style={styles.spaced}>{cup.players.length} / {cup.size} SEATS</T>
@@ -236,6 +240,7 @@ function Cup() {
 }
 
 const styles = StyleSheet.create({
+  gemsWon: { flexDirection: "row", alignItems: "center", gap: 6, flexWrap: "wrap", justifyContent: "center" },
   flex: { flex: 1, minWidth: 0 }, stretch: { alignSelf: "stretch" }, center: { textAlign: "center" }, spaced: { letterSpacing: 2 }, push: { marginLeft: "auto" },
   frame: { flex: 1, width: "100%", maxWidth: 560, alignSelf: "center" },
   top: { flexDirection: "row", alignItems: "center", gap: 12, paddingHorizontal: 16, minHeight: 56 },

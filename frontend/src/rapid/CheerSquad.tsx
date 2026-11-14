@@ -3,173 +3,182 @@ import { Modal, Platform, ScrollView, StyleSheet, View, useWindowDimensions } fr
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import Animated, { Easing, SharedValue, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
-import Svg, { Circle, Defs, LinearGradient as Grad, Path, Stop } from "react-native-svg";
+import Animated, { Easing, SharedValue, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withTiming } from "react-native-reanimated";
+import Svg, { Circle, Defs, Line, LinearGradient as Grad, Path, Stop } from "react-native-svg";
 import { T } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
 import { playSfx } from "@/src/sfx";
-import { arena, fx } from "@/src/theme";
-import { GoldTitle, RaisedButton } from "./arena";
+import { arena, fx, gemColors } from "@/src/theme";
+import { RaisedButton } from "./arena";
+import { CheerBanner, Pole } from "./CheerBanner";
 import { Confetti, Pop, Twinkles } from "./juice";
-import { Crown } from "./parts";
 import { CrownArt } from "./CrownArt";
+import { SQUAD_GEO, squadFrames } from "./squadArt";
 
 const ARENA = require("../../assets/arena/bg_colosseum.webp");
-const SQUAD = {
-  a: [require("../../assets/arena/cheer_a1.webp"), require("../../assets/arena/cheer_a2.webp")],
-  b: [require("../../assets/arena/cheer_b1.webp"), require("../../assets/arena/cheer_b2.webp")],
-};
-const ASPECT = 0.71; // sprite width / height
-const BAR = 860; // one jump + one sway, in ms
-const BEAM_W = 220;
+const COUNT = 8, BEAT = 430; // an 8-count routine
+// One pose per count. Holders: 0 stand, 1 side kick, 2 knee lift, 3 lunge. Lead: 0 star jump, 1 high kick, 2 hip sway, 3 high-low.
+const HOLD_SEQ = [0, 2, 0, 1, 0, 3, 2, 1];
+const HOLD_HOP = [0.06, 0.03, 0.06, 0.02, 0.06, 0, 0.03, 0.02];
+const LEAD_SEQ = [2, 0, 3, 1, 2, 0, 3, 1];
+const LEAD_HOP = [0.02, 0.16, 0, 0.05, 0.02, 0.16, 0, 0.05];
+const LEAD_SPIN = [0, 0, 1, 0, 0, 0, 1, 0]; // a full turn on counts 3 and 7
+const GEMS = [gemColors.red, gemColors.gold, gemColors.emerald, gemColors.blue, gemColors.kohinoor];
+// What each squad level brings to the stage (the banner's own colours are theme `cheer`).
+const LOOK = {
+  1: { beams: [arena.gold, arena.gold], bursts: 2, tint: null },
+  2: { beams: [arena.gold, fx.ember], bursts: 4, tint: arena.goldSoft },
+  3: { beams: [gemColors.blue, gemColors.kohinoor, fx.ice, gemColors.blue], bursts: 5, tint: `${gemColors.blue}2E` },
+  4: { beams: GEMS.slice(0, 4), bursts: 7, tint: `${gemColors.kohinoor}24` },
+} as const;
+type Level = keyof typeof LOOK;
 
-/**
- * One cheerleader: two poses (pom-poms up in a jump, pom-poms at the hips in a sway) swapped on the beat, with the hop,
- * the sway and a floor shadow that shrinks while she is in the air. `phase` 0.5 dances the opposite move.
- */
-function Dancer({ who, height, clock, phase = 0, flip, testID }: { who: "a" | "b"; height: number; clock: SharedValue<number>; phase?: number; flip?: boolean; testID?: string }) {
-  const w = height * ASPECT, dir = flip ? -1 : 1;
+/** One pose of a dancer: shown only on the counts that use it. */
+function Frame({ src, i, clock, seq }: { src: number | { uri: string }; i: number; clock: SharedValue<number>; seq: number[] }) {
+  const style = useAnimatedStyle(() => ({ opacity: seq[Math.floor(clock.value * COUNT) % COUNT] === i ? 1 : 0 }));
+  return <Animated.View style={[StyleSheet.absoluteFill, style]}><Image source={src} style={StyleSheet.absoluteFill} contentFit="contain" transition={0} /></Animated.View>;
+}
+
+/** A dancer running the routine: the pose of each count, a hop, a squash on landing, a sway, and (lead only) full turns. */
+function Dancer({ frames, height, aspect, clock, seq, hops, spins, flip, style, testID }: {
+  frames: (number | { uri: string })[]; height: number; aspect: number; clock: SharedValue<number>; seq: number[]; hops: number[]; spins?: number[]; flip?: boolean; style?: object; testID?: string;
+}) {
+  const w = height * aspect, dir = flip ? -1 : 1;
   const body = useAnimatedStyle(() => {
-    const t = (clock.value + phase) % 1, up = t < 0.5, k = up ? t / 0.5 : (t - 0.5) / 0.5;
-    const hop = up ? Math.sin(k * Math.PI) : 0, sway = up ? 0 : Math.sin(k * Math.PI);
-    return { transform: [{ translateY: -hop * height * 0.13 }, { translateX: sway * w * 0.07 * dir }, { rotate: `${(up ? hop * 4 : -sway * 8) * dir}deg` },
-      { scaleX: dir }, { scaleY: up ? 1 + hop * 0.03 : 1 - sway * 0.025 }] };
+    const x = clock.value * COUNT, n = Math.floor(x) % COUNT, k = x - Math.floor(x);
+    const turn = spins && spins[n] ? Math.cos(k * Math.PI * 2) : 1;
+    return { transform: [{ translateY: -Math.sin(k * Math.PI) * hops[n] * height }, { rotate: `${Math.sin(k * Math.PI) * 3 * dir * (n % 2 ? 1 : -1)}deg` },
+      { scaleX: dir * (Math.abs(turn) < 0.08 ? 0.08 * Math.sign(turn || 1) : turn) }, { scaleY: 1 - (1 - Math.min(1, k * 6)) * 0.035 }] };
   });
-  const jump = useAnimatedStyle(() => ({ opacity: (clock.value + phase) % 1 < 0.5 ? 1 : 0 }));
-  const hips = useAnimatedStyle(() => ({ opacity: (clock.value + phase) % 1 < 0.5 ? 0 : 1 }));
   const shadow = useAnimatedStyle(() => {
-    const t = (clock.value + phase) % 1, hop = t < 0.5 ? Math.sin((t / 0.5) * Math.PI) : 0;
-    return { opacity: 0.32 - hop * 0.18, transform: [{ scaleX: 1 - hop * 0.4 }] };
+    const x = clock.value * COUNT, n = Math.floor(x) % COUNT, up = Math.sin((x - Math.floor(x)) * Math.PI) * hops[n] * 6;
+    return { opacity: 0.32 - up * 0.2, transform: [{ scaleX: 1 - up * 0.4 }] };
   });
-  return <View testID={testID} style={{ width: w, height }}>
-    <Animated.View style={[styles.shadow, { width: w * 0.44, left: w * 0.28, height: height * 0.035, borderRadius: w }, shadow]} />
-    <Animated.View style={[StyleSheet.absoluteFill, body]}>
-      <Animated.View style={[StyleSheet.absoluteFill, jump]}><Image source={SQUAD[who][0]} style={StyleSheet.absoluteFill} contentFit="contain" /></Animated.View>
-      <Animated.View style={[StyleSheet.absoluteFill, hips]}><Image source={SQUAD[who][1]} style={StyleSheet.absoluteFill} contentFit="contain" /></Animated.View>
-    </Animated.View>
+  return <View testID={testID} style={[{ position: "absolute", width: w, height }, style]}>
+    <Animated.View style={[styles.shadow, { width: w * 0.4, left: w * 0.3, height: height * 0.035, borderRadius: w }, shadow]} />
+    <Animated.View style={[StyleSheet.absoluteFill, body]}>{frames.map((f, i) => <Frame key={i} src={f} i={i} clock={clock} seq={seq} />)}</Animated.View>
   </View>;
 }
 
-/** A sweeping stage light from the top corner: a soft cone that fades out towards the floor. */
-function Beam({ left, clock, height }: { left: boolean; clock: SharedValue<number>; height: number }) {
-  const style = useAnimatedStyle(() => ({ transform: [{ rotate: `${(left ? -1 : 1) * (14 + Math.sin(clock.value * Math.PI * 2) * 12)}deg` }] }));
-  return <Animated.View pointerEvents="none" style={[styles.beam, { height, [left ? "left" : "right"]: -100, transformOrigin: "top center" }, style]}>
-    <Svg width={BEAM_W} height={height}>
-      <Defs><Grad id="cone" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor={arena.gold} stopOpacity={0.5} /><Stop offset="0.6" stopColor={arena.gold} stopOpacity={0.12} /><Stop offset="1" stopColor={arena.gold} stopOpacity={0} /></Grad></Defs>
-      <Path d={`M${BEAM_W / 2 - 10} 0 L${BEAM_W / 2 + 10} 0 L${BEAM_W} ${height} L0 ${height} Z`} fill="url(#cone)" />
+/** A firework bursting in the sky over and over. */
+function Burst({ x, y, size, color, delay, testID }: { x: number; y: number; size: number; color: string; delay: number; testID?: string }) {
+  const reduced = !!useReducedMotion();
+  const p = useSharedValue(0);
+  useEffect(() => {
+    if (reduced) return;
+    p.value = withDelay(delay, withRepeat(withTiming(1, { duration: 1500, easing: Easing.out(Easing.cubic) }), -1, false));
+    return () => cancelAnimation(p);
+  }, [reduced, delay]); // eslint-disable-line react-hooks/exhaustive-deps
+  const style = useAnimatedStyle(() => ({ opacity: p.value < 0.08 ? p.value * 12 : Math.max(0, 1 - (p.value - 0.08) / 0.8), transform: [{ scale: 0.15 + p.value * 0.95 }] }));
+  const rays = Array.from({ length: 14 }, (_, i) => (i / 14) * Math.PI * 2), c = size / 2;
+  return <Animated.View testID={testID} pointerEvents="none" style={[{ position: "absolute", left: x - c, top: y - c, width: size, height: size }, style]}>
+    <Svg width={size} height={size}>
+      {rays.map((a) => <Line key={a} x1={c + Math.cos(a) * c * 0.22} y1={c + Math.sin(a) * c * 0.22} x2={c + Math.cos(a) * c * 0.86} y2={c + Math.sin(a) * c * 0.86} stroke={color} strokeWidth={2.4} strokeLinecap="round" />)}
+      {rays.map((a) => <Circle key={`d${a}`} cx={c + Math.cos(a) * c * 0.95} cy={c + Math.sin(a) * c * 0.95} r={2.6} fill={fx.white} />)}
+      <Circle cx={c} cy={c} r={c * 0.12} fill={fx.white} opacity={0.9} />
     </Svg>
   </Animated.View>;
 }
 
-/** The light bulbs round the board: two sets that blink in turn, so the lights look like they chase each other. */
-function Bulbs({ w, h, set, blink }: { w: number; h: number; set: 0 | 1; blink: SharedValue<number> }) {
-  const style = useAnimatedStyle(() => ({ opacity: set ? 1 - blink.value * 0.75 : 0.25 + blink.value * 0.75 }));
-  const step = 18, pts: [number, number][] = [];
-  for (let x = 10; x <= w - 10; x += step) pts.push([x, 6], [x, h - 6]);
-  for (let y = 6 + step; y <= h - 6 - step / 2; y += step) pts.push([6, y], [w - 6, y]);
-  return <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, style]}>
-    <Svg width={w} height={h}>{pts.filter((_, i) => i % 2 === set).map(([x, y]) => <Circle key={`${x}-${y}`} cx={x} cy={y} r={3.6} fill={fx.ember} stroke={fx.white} strokeWidth={1.2} />)}</Svg>
+/** A sweeping stage light from the top: a soft cone that fades towards the floor. */
+function Beam({ x, color, clock, height, phase }: { x: number; color: string; clock: SharedValue<number>; height: number; phase: number }) {
+  const style = useAnimatedStyle(() => ({ transform: [{ rotate: `${Math.sin((clock.value + phase) * Math.PI * 2) * 26}deg` }] }));
+  const id = `cone${Math.round(phase * 100)}`;
+  return <Animated.View pointerEvents="none" style={[styles.beam, { height, left: x - BEAM_W / 2, transformOrigin: "top center" }, style]}>
+    <Svg width={BEAM_W} height={height}>
+      <Defs><Grad id={id} x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor={color} stopOpacity={0.5} /><Stop offset="0.6" stopColor={color} stopOpacity={0.12} /><Stop offset="1" stopColor={color} stopOpacity={0} /></Grad></Defs>
+      <Path d={`M${BEAM_W / 2 - 10} 0 L${BEAM_W / 2 + 10} 0 L${BEAM_W} ${height} L0 ${height} Z`} fill={`url(#${id})`} />
+    </Svg>
   </Animated.View>;
 }
-
-/** The hanging Congratulations board with the champion on it, swinging gently on its gold chains. */
-function Board({ width, name, avatar, frame, crown, blink, swing }: { width: number; name: string; avatar?: string | null; frame?: string | null; crown: { won: number; real: number }; blink: SharedValue<number>; swing: SharedValue<number> }) {
-  const h = Math.round(width * 0.6), gold = crown.real > 0;
-  const sway = useAnimatedStyle(() => ({ transform: [{ rotate: `${Math.sin(swing.value * Math.PI * 2) * 2.2}deg` }] }));
-  return <Animated.View testID="cheer-board" style={[{ width, transformOrigin: "top center" }, sway]}>
-    <View style={styles.chains}><View style={styles.chain} /><View style={styles.chain} /></View>
-    <View style={[styles.board, { height: h }]}>
-      <LinearGradient colors={[arena.panelHi, arena.panel, arena.panelEdge]} style={StyleSheet.absoluteFill} />
-      <Bulbs w={width} h={h} set={0} blink={blink} />
-      <Bulbs w={width} h={h} set={1} blink={blink} />
-      <View style={styles.boardBody}>
-        <GoldTitle size={Math.min(30, width * 0.085)} center testID="cheer-board-title">CONGRATULATIONS</GoldTitle>
-        <View style={styles.who}>
-          <View><Avatar icon={avatar} frame={frame} size={Math.min(64, width * 0.17)} /><View style={styles.crownOn}><CrownArt size={34} gold={gold} /></View></View>
-          <View style={styles.flex}>
-            <T testID="cheer-board-name" w="heavy" size={Math.min(22, width * 0.06)} color={arena.text} numberOfLines={1}>{name}</T>
-            <View style={styles.inline}><Crown c={crown} size="lg" /><T w="heavy" size={12} color={gold ? arena.gold : fx.smoke} numberOfLines={1}>{crown.won} CUP{crown.won === 1 ? "" : "S"} WON</T></View>
-          </View>
-        </View>
-        <T w="heavy" size={12} color={arena.aqua} style={styles.spaced} numberOfLines={1}>KNOCKOUT CUP CHAMPION</T>
-      </View>
-    </View>
-  </Animated.View>;
-}
+const BEAM_W = 200;
 
 /**
- * The cheer squad in a champion's trophy cabinet: stage lights sweep the Colosseum, the Congratulations board swings
- * on its chains with the champion's name, and the cheerleaders dance on the beat while confetti rains. Cheer again
- * replays it. Scrolls on short phones so the buttons are always reachable.
+ * The cheer squad in a champion's Trophy Cabinet. Two cheerleaders carry the Congratulations banner over their heads
+ * and run the routine (stand, knee, kick, lunge) while the lead dances in front of them (star jumps, kicks, hip sways,
+ * full turns). Fireworks and stage lights grow with the squad level. Scrolls on short phones so the buttons stay reachable.
  */
-export function CheerSquad({ visible, name, avatar, frame, crown, onClose }: { visible: boolean; name: string; avatar?: string | null; frame?: string | null; crown: { won: number; real: number }; onClose: () => void }) {
+export function CheerSquad({ visible, name, avatar, frame, crown, level: lv = 1, title, onClose }: {
+  visible: boolean; name: string; avatar?: string | null; frame?: string | null; crown: { won: number; real: number }; level?: number; title?: string; onClose: () => void;
+}) {
   const { width: W, height: H } = useWindowDimensions();
   const reduced = !!useReducedMotion();
-  const clock = useSharedValue(0), blink = useSharedValue(0), swing = useSharedValue(0), lights = useSharedValue(0);
+  const level = (LOOK[lv as Level] ? lv : 1) as Level, look = LOOK[level], geo = SQUAD_GEO[level];
+  const clock = useSharedValue(0), glitter = useSharedValue(0), wave = useSharedValue(0), sweep = useSharedValue(0), lights = useSharedValue(0);
   const [round, setRound] = useState(0);
   useEffect(() => {
     if (!visible || reduced) return;
-    clock.value = 0;
-    clock.value = withRepeat(withTiming(1, { duration: BAR, easing: Easing.linear }), -1, false);
-    blink.value = withRepeat(withTiming(1, { duration: 260, easing: Easing.linear }), -1, true);
-    swing.value = withRepeat(withTiming(1, { duration: 3400, easing: Easing.linear }), -1, false);
-    lights.value = withRepeat(withTiming(1, { duration: 5200, easing: Easing.linear }), -1, false);
-    return () => { [clock, blink, swing, lights].forEach((v) => cancelAnimation(v)); };
-  }, [visible, reduced]); // eslint-disable-line react-hooks/exhaustive-deps
+    const loop = (v: SharedValue<number>, ms: number, back = false) => { v.value = 0; v.value = withRepeat(withTiming(1, { duration: ms, easing: Easing.linear }), -1, back); };
+    loop(clock, COUNT * BEAT); loop(glitter, 1900); loop(wave, 1600); loop(sweep, 2300); loop(lights, 6000);
+    return () => { [clock, glitter, wave, sweep, lights].forEach((v) => cancelAnimation(v)); };
+  }, [visible, reduced, round]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!visible) return;
-    playSfx(round ? "combo" : "win");
+    playSfx(round ? "combo" : level >= 3 ? "levelup" : "win");
     if (Platform.OS !== "web") Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
-  }, [visible, round]);
+  }, [visible, round, level]);
 
-  const boardW = Math.min(W - 32, 420);
-  const wide = W >= 640; // tablets: a back row joins in
-  // Short phones: the dancers give up height so the board, the line and both buttons fit without scrolling.
-  const dancer = Math.min(H * 0.36, ((wide ? Math.min(W, 900) * 0.5 : W) - 16) / 2 / ASPECT, 340, Math.max(160, H - boardW * 0.6 - 300));
+  // The stage: the banner hangs between the holders' raised fists (their grip points), the lead dances in front.
+  const SW = Math.min(W - 12, 620), bw = Math.min(SW * 0.6, 520), gl = (SW - bw) / 2, gr = gl + bw;
+  const Hh = Math.max(150, Math.min(H * 0.32, 250, SW * 0.62, (H - 470) / 1.1)), Hl = Hh * 0.95;
+  const bh = Math.max(86, Math.min(124, bw * 0.42)), medal = Math.min(58, bh * 0.62);
+  const ga = geo.a.grip, gb = geo.b.grip, wa = Hh * geo.a.aspect, wb = Hh * geo.b.aspect;
+  const top = bh + medal / 2 + Hh * 0.08 + 6 - Math.min(ga[0][1], gb[0][1]) * Hh; // room above the holders for the banner
+  const SH = top + Hh * 1.1;
+  const leftA = gl - ga[0][0] * wa, leftB = gr - (1 - gb[0][0]) * wb;
+  const hand = (p: number) => ((ga[p][1] + gb[p][1]) / 2) * Hh;
+  const carry = useAnimatedStyle(() => {
+    const x = clock.value * COUNT, n = Math.floor(x) % COUNT, k = x - Math.floor(x), p = HOLD_SEQ[n];
+    const tilt = Math.atan2((gb[p][1] - ga[p][1]) * Hh, bw) * (180 / Math.PI);
+    return { transform: [{ translateY: hand(p) - hand(0) - Math.sin(k * Math.PI) * HOLD_HOP[n] * Hh }, { rotate: `${tilt + Math.sin(wave.value * Math.PI * 2) * 0.8}deg` }] };
+  });
+  const bursts = Array.from({ length: look.bursts }, (_, i) => ({ x: SW * (0.12 + ((i * 0.37) % 0.78)), y: 18 + ((i * 53) % Math.max(40, top - bh)), size: 70 + ((i * 29) % 50), color: GEMS[i % GEMS.length], delay: i * 330 }));
   return <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
     <View testID="cheer-squad" style={styles.flex}>
       <Image source={ARENA} style={StyleSheet.absoluteFill} contentFit="cover" />
       <LinearGradient pointerEvents="none" colors={[arena.scrim, arena.shade, arena.scrim]} locations={[0, 0.5, 1]} style={StyleSheet.absoluteFill} />
-      <Beam left clock={lights} height={H * 0.95} />
-      <Beam left={false} clock={lights} height={H * 0.95} />
+      {look.tint ? <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: look.tint }]} /> : null}
+      {look.beams.map((c, i) => <Beam key={i} x={W * ((i + 0.5) / look.beams.length)} color={c} clock={lights} height={H * 0.95} phase={i / look.beams.length} />)}
       <ScrollView style={styles.flex} contentContainerStyle={styles.root} showsVerticalScrollIndicator={false} bounces={false}>
-        <Pop delay={100} style={styles.center}><Board width={boardW} name={name} avatar={avatar} frame={frame} crown={crown} blink={blink} swing={swing} /></Pop>
-        <View style={[styles.stage, { height: dancer * (wide ? 1.12 : 1.04) }]}>
-          {wide ? <View style={[styles.backRow, { bottom: dancer * 0.16 }]}>
-            <Dancer who="b" height={dancer * 0.78} clock={clock} phase={0.5} flip testID="cheer-dancer-back-1" />
-            <Dancer who="a" height={dancer * 0.78} clock={clock} phase={0.5} flip testID="cheer-dancer-back-2" />
-          </View> : null}
-          <View style={styles.frontRow}>
-            <Dancer who="a" height={dancer} clock={clock} testID="cheer-dancer-1" />
-            <Dancer who="b" height={dancer} clock={clock} phase={0.5} testID="cheer-dancer-2" />
-          </View>
-          <Twinkles spots={[[8, 12, 16], [92, 10, 14], [50, 4, 12], [18, 58, 10], [84, 52, 12]]} />
+        <Pop><View testID="cheer-level" style={styles.pill}><T w="heavy" size={11} color={arena.badgeInk} style={styles.spaced}>LEVEL {level} · {(title || "Rookie Squad").toUpperCase()}</T></View></Pop>
+        <View testID="cheer-stage" style={{ width: SW, height: SH, alignSelf: "center" }}>
+          {bursts.map((b, i) => <Burst key={i} {...b} testID={i ? undefined : "cheer-burst"} />)}
+          {/* The lead dances under the banner so her pom-poms never hide the champion's name. */}
+          <Dancer testID="cheer-lead" frames={squadFrames(level, "c")} height={Hl} aspect={geo.c.aspect} clock={clock} seq={LEAD_SEQ} hops={LEAD_HOP} spins={LEAD_SPIN}
+            style={{ left: SW / 2 - (Hl * geo.c.aspect) / 2, top: SH - Hl }} />
+          <Animated.View style={[styles.carry, { left: gl - 4, top: top + hand(0) - bh, width: bw + 8 }, carry]}>
+            <Pole side="left" level={level} height={bh + 30} />
+            <Pole side="right" level={level} height={bh + 30} />
+            <View style={styles.bannerAt}><CheerBanner w={bw} h={bh} top={medal / 2} level={level} name={name} crown={crown} clock={clock} count={COUNT} glitter={glitter} wave={wave} sweep={sweep} /></View>
+            <View style={[styles.medal, { top: -medal / 2, left: bw / 2 + 4 - medal / 2 }]}>
+              <Avatar icon={avatar} frame={frame} size={medal} />
+              <View style={[styles.medalCrown, { top: -medal * 0.5 }]}><CrownArt size={medal * 0.7} gold={crown.real > 0} /></View>
+            </View>
+          </Animated.View>
+          <Dancer testID="cheer-holder-1" frames={squadFrames(level, "a")} height={Hh} aspect={geo.a.aspect} clock={clock} seq={HOLD_SEQ} hops={HOLD_HOP} style={{ left: leftA, top }} />
+          <Dancer testID="cheer-holder-2" frames={squadFrames(level, "b")} height={Hh} aspect={geo.b.aspect} clock={clock} seq={HOLD_SEQ} hops={HOLD_HOP} flip style={{ left: leftB, top }} />
+          <Twinkles spots={[[6, 30, 16], [94, 26, 14], [50, 2, 12], [14, 70, 10], [86, 66, 12], [30, 12, 10], [70, 14, 10]]} color={level === 4 ? gemColors.kohinoor : arena.gold} />
         </View>
-        <Pop delay={500}><T testID="cheer-line" w="bold" size={14} color={arena.text} style={styles.centerText}>The cheer squad is dancing for {name}! {crown.won > 1 ? `${crown.won} cups won and counting.` : "A Knockout Cup champion."}</T></Pop>
+        <Pop delay={400}><T testID="cheer-line" w="bold" size={14} color={arena.text} style={styles.centerText}>The {title || "Rookie Squad"} is dancing for {name}! {crown.won > 1 ? `${crown.won} cups won and counting.` : "A Knockout Cup champion."}</T></Pop>
         <View style={styles.buttons}>
           <RaisedButton testID="cheer-again" glyph="party-popper" height={60} streak label="CHEER AGAIN" sub="Louder this time!" onPress={() => setRound((n) => n + 1)} />
           <RaisedButton testID="cheer-close" tone="wine" label="Continue" onPress={onClose} />
         </View>
       </ScrollView>
-      <Confetti key={round} count={56} />
+      <Confetti key={round} count={level >= 3 ? 72 : 56} />
     </View>
   </Modal>;
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, minWidth: 0 }, center: { alignSelf: "center" }, centerText: { textAlign: "center" }, spaced: { letterSpacing: 2 },
-  inline: { flexDirection: "row", alignItems: "center", gap: 6 },
-  root: { flexGrow: 1, justifyContent: "center", paddingHorizontal: 16, paddingTop: 44, paddingBottom: 28, gap: 10 },
+  flex: { flex: 1, minWidth: 0 }, centerText: { textAlign: "center" }, spaced: { letterSpacing: 1.6 },
+  root: { flexGrow: 1, justifyContent: "center", paddingHorizontal: 6, paddingTop: 40, paddingBottom: 28, gap: 10 },
+  pill: { alignSelf: "center", paddingHorizontal: 14, height: 28, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: arena.gold, borderWidth: 1.5, borderColor: arena.goldDeep },
   beam: { position: "absolute", top: -10, width: BEAM_W },
-  chains: { flexDirection: "row", justifyContent: "space-between", paddingHorizontal: "22%", height: 22, marginTop: -22 },
-  chain: { width: 3, height: 22, borderRadius: 2, backgroundColor: arena.goldDeep, borderLeftWidth: 1, borderLeftColor: arena.gold },
-  board: { borderRadius: 22, borderWidth: 3, borderColor: arena.gold, borderBottomWidth: 6, borderBottomColor: arena.goldDeep, overflow: "hidden" },
-  boardBody: { flex: 1, alignItems: "center", justifyContent: "center", gap: 8, paddingHorizontal: 24, paddingVertical: 16 },
-  who: { flexDirection: "row", alignItems: "center", gap: 12, alignSelf: "stretch", justifyContent: "center" },
-  crownOn: { position: "absolute", top: -22, left: 0, right: 0, alignItems: "center" },
-  stage: { alignSelf: "stretch", justifyContent: "flex-end" },
-  frontRow: { flexDirection: "row", justifyContent: "space-around", alignItems: "flex-end" },
-  backRow: { position: "absolute", left: "18%", right: "18%", flexDirection: "row", justifyContent: "space-between", opacity: 0.85 },
+  carry: { position: "absolute" },
+  bannerAt: { marginHorizontal: 4 },
+  medal: { position: "absolute", alignItems: "center" },
+  medalCrown: { position: "absolute", left: 0, right: 0, alignItems: "center" },
   shadow: { position: "absolute", bottom: 0, backgroundColor: arena.black },
-  buttons: { alignSelf: "stretch", gap: 10, maxWidth: 460, width: "100%", marginHorizontal: "auto" },
+  buttons: { alignSelf: "center", gap: 10, maxWidth: 460, width: "100%", paddingHorizontal: 10 },
 });

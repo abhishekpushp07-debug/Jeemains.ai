@@ -234,6 +234,9 @@ def make_router(db, rf_user):
         out["cups"] = {**(crown_of(p) or {"won": 0, "real": 0}), "played": await db.rf_cups.count_documents({"players.uid": them, "status": "finished"}),
                        "recent": [{"id": c["id"], "label": c.get("label") or "Knockout Cup", "size": c["size"], "kind": c["kind"], "humans": sum(not x.get("bot") for x in c["players"]),
                                    "finished_at": datetime.fromtimestamp(c["finished_ts"], timezone.utc).isoformat()} for c in wins]}
+        if out["cups"]["won"]:  # the cheer squad that dances in this champion's Trophy Cabinet
+            from squads import squad_of
+            out["squad"] = squad_of(p)
         if them != uid:
             out["relation"] = await relation(uid, them)
             both = {"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}}  # head-to-head counts 1 v 1 matches only

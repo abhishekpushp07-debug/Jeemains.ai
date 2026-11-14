@@ -16,7 +16,7 @@ import { CrownArt } from "./CrownArt";
 import { ordinal, prettyCode, sendWhatsApp, useFriendCode } from "./social";
 
 const ARENA = require("../../assets/arena/bg_colosseum.webp");
-export type CrownShareInfo = { name: string; avatar?: string | null; frame?: string | null; no: number; crown: { won: number; real: number }; label: string; size: number; night?: boolean };
+export type CrownShareInfo = { name: string; avatar?: string | null; frame?: string | null; no: number; crown: { won: number; real: number }; label: string; size: number; night?: boolean; cabinet?: boolean };
 
 /** The crown card friends see on WhatsApp: 4:5, drawn in units of the card width so it looks the same on every phone. */
 function CrownCard({ s, code, width }: { s: CrownShareInfo; code?: string; width: number }) {
@@ -31,9 +31,9 @@ function CrownCard({ s, code, width }: { s: CrownShareInfo; code?: string; width
       <View style={[styles.inline, { gap: 10 * u }]}><Avatar icon={s.avatar} frame={s.frame} size={44 * u} /><T w="heavy" size={20 * u} color={arena.text} numberOfLines={1} style={styles.shrink}>{s.name}</T></View>
       <View style={[styles.chip, { paddingHorizontal: 12 * u, height: 32 * u, borderRadius: 16 * u, gap: 6 * u }]}>
         <Crown c={s.crown} size="lg" />
-        <T w="heavy" size={12 * u} color={gold ? arena.gold : fx.smoke}>{s.no === 1 ? "FIRST CROWN" : `CROWN #${s.no}`} · {gold ? "GOLD" : "SILVER"}</T>
+        <T w="heavy" size={12 * u} color={gold ? arena.gold : fx.smoke}>{s.cabinet ? `${s.crown.won} CUP${s.crown.won === 1 ? "" : "S"} WON` : s.no === 1 ? "FIRST CROWN" : `CROWN #${s.no}`} · {gold ? "GOLD" : "SILVER"}</T>
       </View>
-      <T w="bold" size={12 * u} color={arena.text} style={styles.center} numberOfLines={1}>{s.night ? "Cup Night" : "Knockout Cup"} · {s.size} players · {s.label}</T>
+      <T w="bold" size={12 * u} color={arena.text} style={styles.center} numberOfLines={1}>{s.cabinet ? `Latest title · ${s.label}` : `${s.night ? "Cup Night" : "Knockout Cup"} · ${s.size} players · ${s.label}`}</T>
       <View style={[styles.cta, { borderRadius: 14 * u, paddingVertical: 8 * u, paddingHorizontal: 12 * u, marginTop: 4 * u }]}>
         <T w="heavy" size={13 * u} color={arena.gold} style={styles.center}>Think you’re faster? Beat me!</T>
         {code ? <T w="heavy" size={12 * u} color={arena.aqua} style={[styles.center, styles.spaced]}>FRIEND CODE {prettyCode(code)}</T> : null}
@@ -50,7 +50,8 @@ export function CrownShare({ s, onBack }: { s: CrownShareInfo; onBack: () => voi
   const uid = useAuth().user?.id, code = useFriendCode(uid).data?.code;
   const card = useRef<any>(null), W = useWindowDimensions().width; // the card View, captured as a picture
   const [busy, setBusy] = useState(false), [note, setNote] = useState("");
-  const caption = `👑 I just won my ${s.no === 1 ? "first" : ordinal(s.no)} ${s.night ? "Cup Night" : "Knockout Cup"} on JEECIRCLE.AI Rapid Fire!\n${s.size} players · ${s.label}. Think you’re faster? Beat me!`
+  const caption = (s.cabinet ? `👑 I'm a ${s.crown.won}× Knockout Cup champion on JEECIRCLE.AI Rapid Fire!\nLatest title: ${s.label}. Think you’re faster? Beat me!`
+    : `👑 I just won my ${s.no === 1 ? "first" : ordinal(s.no)} ${s.night ? "Cup Night" : "Knockout Cup"} on JEECIRCLE.AI Rapid Fire!\n${s.size} players · ${s.label}. Think you’re faster? Beat me!`)
     + `${code ? `\nMy Friend Code: ${prettyCode(code)}` : ""}\nhttps://jeelive.ai`;
   const send = async () => {
     setBusy(true); setNote("");
