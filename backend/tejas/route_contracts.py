@@ -30,6 +30,8 @@ SPEC = {
     'structure.order_tests': ('owner_only_test_order','control','full_set_replace'),
     'structure.update_test': ('owner_only_test_placement_no_content_change','control','replace_fields_audited'),
     'structure.overview': ('owner_only_publishing_overview','normal','read'),
+    'integrity.report': ('owner_only_integrity_counts_no_personal_data','normal','read'),
+    'integrity.start_run': ('owner_only_integrity_run','control','single_flight_audited'),
     'structure.held_mocks': ('staff_held_mock_reasons_only','normal','read'),
     'structure.timed_tests': ('owner_only_schedule_metadata','normal','read'),
     'structure.preview_link_status': ('owner_only_section_preview_link_metadata','normal','read'),

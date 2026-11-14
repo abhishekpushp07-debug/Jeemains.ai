@@ -105,7 +105,7 @@ async def refresh(job):
         'outcomes':[{'$unwind':'$items'},{'$group':{'_id':{'q':'$items.id','outcome':'$items.outcome'},'count':{'$sum':1},'number':{'$first':'$items.number'},'type':{'$first':'$items.type'},'options':{'$first':'$items.option_keys'}}}],
         'choices':[{'$unwind':'$items'},{'$match':{'items.type':'mcq','items.response':{'$ne':''}}},{'$group':{'_id':{'q':'$items.id','choice':'$items.response'},'count':{'$sum':1}}}],
     }}]
-    result=(await db.tejas_cohort_entries.aggregate(pipeline,allowDiskUse=True,maxTimeMS=20000).to_list(1))[0]
+    result=(await db.tejas_cohort_entries.aggregate(pipeline,allowDiskUse=True,maxTimeMS=120000).to_list(1))[0]
     n=result['meta'][0]['n'] if result['meta'] else 0;maximum=result['meta'][0]['maximum'] if result['meta'] else 0
     question_map={}
     for item in result['outcomes']:
@@ -160,7 +160,7 @@ async def read(id:str,bg:BackgroundTasks,score_version:str='original',u=Depends(
     first=await db.tejas_cohort_entries.find_one({'cohort_id':cid,'user_id':u['id']},{'_id':0,'items':0})
     if not snap or state.get('dirty') or first and first.get('updated_at',0)>snap.get('computed_at',0):
         from .jobs import enqueue,run_job
-        job=await enqueue('cohort',u['id'],a['set_id'],{'cohort_id':cid,'scope':{'set_id':a['set_id'],'version':a['version']},'key':cid+'-'+str(int(now()//10))})
+        job=await enqueue('cohort',u['id'],a['set_id'],{'cohort_id':cid,'scope':{'set_id':a['set_id'],'version':a['version']},'key':cid+'-'+str(int(now()//30))})
         if job['status'] in ('queued','running'):bg.add_task(run_job,job['id'])
         if not snap:return CohortResponse(state='preparing',reason='Preparing comparable first-attempt statistics. Your score is already sealed.')
     n=snap['sample_size'];common={'sample_size':n,'computed_at':snap['computed_at'],'viewing_retry':retry,

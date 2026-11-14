@@ -6,6 +6,7 @@ import {Button} from '../../components/ui/button';
 import {Skeleton} from '../../components/ui/skeleton';
 import {ErrorBox} from '../../components/Shared';
 import {AdminCrumbs,AdminHeading,DestinationChip,StatusChip} from '../../components/admin/AdminShared';
+import {DataHealth} from '../../components/admin/DataHealth';
 
 const plural=(n,word)=>`${n} ${word}${n===1?'':'s'}`;
 
@@ -34,6 +35,7 @@ export default function AdminOverview(){
    </div>
    <section className="admin-panel"><h2>Uploads</h2><Processing items={data.processing}/></section>
    <section className="admin-panel"><h2>Held, and why</h2>{data.held_items.length?<ul className="admin-list" data-testid="overview-held-list">{data.held_items.map(m=><li key={m.id} className="admin-row" data-testid={'overview-held-'+m.id}><div className="admin-row-main"><strong>{m.label}</strong><small>{m.book_title}</small><p className="admin-reason">{m.reason}</p></div><Button asChild variant="outline"><Link to={'/super-admin/upload?book='+m.book_id} data-testid={'overview-held-fix-'+m.id}>Fix</Link></Button></li>)}</ul>:<p className="admin-empty" data-testid="overview-no-held">Nothing is held. Every checked mock is ready or live.</p>}</section>
+   <DataHealth/>
   </>}
  </div>;
 }

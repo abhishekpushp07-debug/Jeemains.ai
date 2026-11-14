@@ -210,14 +210,14 @@ async def hydrate(a):
     return a
 
 
-async def insert_attempt(a):
+async def insert_attempt(a, pack_id=None, response_schema=None):
     from .db import attempts
 
-    a["pack_id"] = await seal(a["questions"])
+    a["pack_id"] = pack_id or await seal(a["questions"])
     a["count"] = len(a["questions"])
     from .learning_progress import family
     a['progress_family'] = family(a)
-    a["response_schema"] = {
+    a["response_schema"] = response_schema or {
         q["id"]: {"type": q["type"], "options": list(q.get("options", {})), **({"bonus": True} if q.get("bonus") else {})}
         for q in a["questions"]
     }

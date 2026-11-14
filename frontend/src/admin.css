@@ -1,3 +1,9 @@
+.admin-health-summary{display:flex;align-items:center;gap:10px;margin:14px 0 0;font-weight:600;color:var(--success)}
+.admin-health-summary.warn{color:var(--warning)}
+.admin-health-summary svg{flex:none}
+.spin{animation:admin-spin 1s linear infinite}
+@keyframes admin-spin{to{transform:rotate(360deg)}}
+
 .admin-preview-link{display:flex;flex-direction:column;gap:12px;margin:8px 0}
 .admin-preview-link input{font:500 13px var(--font-mono)}
 .section-preview{max-width:820px;display:flex;flex-direction:column;gap:18px;animation:fadeUp .4s ease-out both}

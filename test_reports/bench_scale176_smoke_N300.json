@@ -1,0 +1,266 @@
+{
+ "N": 300,
+ "C": 64,
+ "SAVES": 20,
+ "db": "tejas_isolated_scale176_f26077",
+ "cold_preflight": 200,
+ "me": {
+  "n": 300,
+  "wall_s": 3.0,
+  "rps": 99.9,
+  "cpu_ms_per_req": 2.01,
+  "first": {
+   "503": 32,
+   "200": 268
+  },
+  "final": {
+   "200": 300
+  },
+  "retries": 32,
+  "p50_ms": 45.8,
+  "p95_ms": 1851.3,
+  "p99_ms": 2711.0,
+  "max_ms": 2992.5
+ },
+ "preflight": {
+  "n": 300,
+  "wall_s": 4.38,
+  "rps": 68.4,
+  "cpu_ms_per_req": 8.08,
+  "first": {
+   "503": 50,
+   "200": 250
+  },
+  "final": {
+   "200": 300
+  },
+  "retries": 62,
+  "p50_ms": 118.1,
+  "p95_ms": 2785.6,
+  "p99_ms": 3462.9,
+  "max_ms": 4251.7
+ },
+ "start": {
+  "n": 300,
+  "wall_s": 6.57,
+  "rps": 45.7,
+  "cpu_ms_per_req": 15.32,
+  "first": {
+   "503": 39,
+   "200": 261
+  },
+  "final": {
+   "200": 300
+  },
+  "retries": 71,
+  "p50_ms": 459.1,
+  "p95_ms": 4212.2,
+  "p99_ms": 5060.2,
+  "max_ms": 6563.0
+ },
+ "start_ok": 300,
+ "start_resume_same_key": {
+  "n": 200,
+  "wall_s": 3.96,
+  "rps": 50.5,
+  "cpu_ms_per_req": 8.25,
+  "first": {
+   "503": 33,
+   "200": 167
+  },
+  "final": {
+   "200": 200
+  },
+  "retries": 33,
+  "p50_ms": 234.2,
+  "p95_ms": 2363.1,
+  "p99_ms": 2962.9,
+  "max_ms": 2999.1
+ },
+ "resume_same_attempt": 200,
+ "save": {
+  "n": 6000,
+  "wall_s": 20.85,
+  "rps": 287.8,
+  "cpu_ms_per_req": 3.39,
+  "first": {
+   "503": 60,
+   "200": 5940
+  },
+  "final": {
+   "200": 6000
+  },
+  "retries": 295,
+  "p50_ms": 84.7,
+  "p95_ms": 203.6,
+  "p99_ms": 299.5,
+  "max_ms": 20744.3
+ },
+ "status_poll": {
+  "n": 300,
+  "wall_s": 3.02,
+  "rps": 99.3,
+  "cpu_ms_per_req": 3.05,
+  "first": {
+   "503": 32,
+   "200": 268
+  },
+  "final": {
+   "200": 300
+  },
+  "retries": 32,
+  "p50_ms": 66.9,
+  "p95_ms": 1948.2,
+  "p99_ms": 2829.4,
+  "max_ms": 3009.3
+ },
+ "visit": {
+  "n": 300,
+  "wall_s": 2.97,
+  "rps": 101.0,
+  "cpu_ms_per_req": 3.24,
+  "first": {
+   "503": 32,
+   "200": 268
+  },
+  "final": {
+   "200": 300
+  },
+  "retries": 32,
+  "p50_ms": 83.2,
+  "p95_ms": 1998.9,
+  "p99_ms": 2879.5,
+  "max_ms": 2957.6
+ },
+ "submit": {
+  "n": 300,
+  "wall_s": 3.3,
+  "rps": 91.0,
+  "cpu_ms_per_req": 7.85,
+  "first": {
+   "503": 32,
+   "202": 268
+  },
+  "final": {
+   "202": 300
+  },
+  "retries": 32,
+  "p50_ms": 101.4,
+  "p95_ms": 2173.0,
+  "p99_ms": 2579.7,
+  "max_ms": 3285.6
+ },
+ "grade_drain": {
+  "graded": 300,
+  "wall_s": 4.96,
+  "cpu_ms_per_grade": 7.28
+ },
+ "answers_mismatch_attempts": 0,
+ "leaderboard": {
+  "n": 50,
+  "wall_s": 0.24,
+  "rps": 204.2,
+  "cpu_ms_per_req": 4.13,
+  "first": {
+   "200": 50
+  },
+  "final": {
+   "200": 50
+  },
+  "retries": 0,
+  "p50_ms": 48.6,
+  "p95_ms": 67.3,
+  "p99_ms": 71.1,
+  "max_ms": 71.1
+ },
+ "results": {
+  "n": 50,
+  "wall_s": 1.21,
+  "rps": 41.3,
+  "cpu_ms_per_req": 24.89,
+  "first": {
+   "200": 50
+  },
+  "final": {
+   "200": 50
+  },
+  "retries": 0,
+  "p50_ms": 226.3,
+  "p95_ms": 303.1,
+  "p99_ms": 305.4,
+  "max_ms": 305.4
+ },
+ "cohort_first_ms": 59.7,
+ "cohort_refresh": {
+  "wall_s": 0.0,
+  "sample": 300,
+  "entries": 300
+ },
+ "login_bcrypt": {
+  "n": 24,
+  "wall_s": 5.29,
+  "rps": 4.5,
+  "cpu_ms_per_req": 227.59,
+  "first": {
+   "503": 20,
+   "200": 4
+  },
+  "final": {
+   "200": 24
+  },
+  "retries": 24,
+  "p50_ms": 2613.9,
+  "p95_ms": 4750.1,
+  "p99_ms": 5287.7,
+  "max_ms": 5287.7
+ },
+ "attempt_doc_avg_bytes": 25729,
+ "admission": {
+  "live": {
+   "limit": 32,
+   "peak": 32,
+   "admitted": 7700,
+   "rejected": 527,
+   "failed": 0
+  },
+  "read": {
+   "limit": 16,
+   "peak": 16,
+   "admitted": 402,
+   "rejected": 62,
+   "failed": 0
+  },
+  "asset": {
+   "limit": 8,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  },
+  "auth": {
+   "limit": 4,
+   "peak": 4,
+   "admitted": 24,
+   "rejected": 24,
+   "failed": 0
+  },
+  "control": {
+   "limit": 4,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  },
+  "probe": {
+   "limit": 2,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  }
+ },
+ "maxrss_mb": 354.7,
+ "storage_puts": 0,
+ "llm_calls": 0,
+ "db_dropped": true
+}

@@ -6,6 +6,7 @@ import os, uuid, time
 import tejas.reports  # noqa: F401  fail fast on report syntax errors (it is otherwise imported lazily)
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, HTTPException
+from starlette.datastructures import MutableHeaders
 from fastapi.exceptions import RequestValidationError
 from tejas.origins import ExplicitOriginCORS, configured_origins, origin_allowed
 from tejas import (
@@ -44,6 +45,7 @@ from tejas import (
     students,
     book_imports,
     structure,
+    integrity,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -89,35 +91,44 @@ app.add_middleware(
 )
 
 
-@app.middleware("http")
-async def protections(request: Request, call_next):
-    rid = str(uuid.uuid4())
-    ctx = request_id.set(rid)
-    started = time.perf_counter()
-    try:
-        origin = request.headers.get("origin")
-        if (
-            request.method in ["POST", "PUT", "PATCH", "DELETE"]
-            and origin is not None
-            and not origin_allowed(origin, origins)
-        ):
-            response = error_response("Cross-origin write rejected.", 403, "origin_denied")
-        else:
-            response = await call_next(request)
-        response.headers.update(
-            {
-                "X-Content-Type-Options": "nosniff",
-                "Referrer-Policy": "same-origin",
-                "X-Request-ID": rid,
-                "Cache-Control": "private, no-store",
-                "X-Frame-Options": "DENY",
-                "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-                "Server-Timing": f"app;dur={(time.perf_counter()-started)*1000:.1f}",
-            }
-        )
-        return response
-    finally:
-        request_id.reset(ctx)
+class Protections:
+    """Pure ASGI (no BaseHTTPMiddleware task hop): request id, cross-origin write guard and security headers."""
+
+    HEADERS = {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "same-origin",
+        "Cache-Control": "private, no-store",
+        "X-Frame-Options": "DENY",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    }
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+        rid = str(uuid.uuid4())
+        ctx = request_id.set(rid)
+        started = time.perf_counter()
+
+        async def stamped(message):
+            if message["type"] == "http.response.start":
+                headers = MutableHeaders(scope=message)
+                headers.update({**self.HEADERS, "X-Request-ID": rid,
+                                "Server-Timing": f"app;dur={(time.perf_counter()-started)*1000:.1f}"})
+            await send(message)
+
+        try:
+            origin = next((v.decode("latin-1") for k, v in scope["headers"] if k == b"origin"), None)
+            if scope["method"] in ("POST", "PUT", "PATCH", "DELETE") and origin is not None and not origin_allowed(origin, origins):
+                return await error_response("Cross-origin write rejected.", 403, "origin_denied")(scope, receive, stamped)
+            await self.app(scope, receive, stamped)
+        finally:
+            request_id.reset(ctx)
+
+
+app.add_middleware(Protections)
 
 
 @app.exception_handler(HTTPException)
@@ -212,6 +223,7 @@ for module in [
     students,
     book_imports,
     structure,
+    integrity,
 ]:
     app.include_router(module.router)
 

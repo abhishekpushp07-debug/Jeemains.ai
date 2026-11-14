@@ -1,0 +1,267 @@
+{
+ "N": 4000,
+ "C": 48,
+ "SAVES": 4,
+ "db": "tejas_isolated_scale176_0c1dbd",
+ "cold_preflight": 200,
+ "me": {
+  "n": 4000,
+  "wall_s": 9.33,
+  "rps": 428.7,
+  "cpu_ms_per_req": 1.73,
+  "first": {
+   "200": 3978,
+   "503": 22
+  },
+  "final": {
+   "200": 4000
+  },
+  "retries": 62,
+  "p50_ms": 43.8,
+  "p95_ms": 128.0,
+  "p99_ms": 165.1,
+  "max_ms": 9312.7
+ },
+ "preflight": {
+  "n": 4000,
+  "wall_s": 13.72,
+  "rps": 291.6,
+  "cpu_ms_per_req": 3.42,
+  "first": {
+   "503": 48,
+   "200": 3952
+  },
+  "final": {
+   "200": 4000
+  },
+  "retries": 207,
+  "p50_ms": 45.4,
+  "p95_ms": 60.5,
+  "p99_ms": 2890.4,
+  "max_ms": 13676.6
+ },
+ "start": {
+  "n": 4000,
+  "wall_s": 37.71,
+  "rps": 106.1,
+  "cpu_ms_per_req": 8.51,
+  "first": {
+   "503": 114,
+   "200": 3886
+  },
+  "final": {
+   "200": 4000
+  },
+  "retries": 286,
+  "p50_ms": 276.5,
+  "p95_ms": 447.9,
+  "p99_ms": 5513.0,
+  "max_ms": 21791.5
+ },
+ "start_ok": 4000,
+ "start_resume_same_key": {
+  "n": 200,
+  "wall_s": 3.94,
+  "rps": 50.8,
+  "cpu_ms_per_req": 9.34,
+  "first": {
+   "503": 16,
+   "200": 184
+  },
+  "final": {
+   "200": 200
+  },
+  "retries": 18,
+  "p50_ms": 271.3,
+  "p95_ms": 2000.0,
+  "p99_ms": 2861.7,
+  "max_ms": 3927.7
+ },
+ "resume_same_attempt": 200,
+ "save": {
+  "n": 16000,
+  "wall_s": 68.34,
+  "rps": 234.1,
+  "cpu_ms_per_req": 3.66,
+  "first": {
+   "503": 59,
+   "200": 15941
+  },
+  "final": {
+   "200": 15998,
+   "503": 2
+  },
+  "retries": 533,
+  "p50_ms": 115.3,
+  "p95_ms": 272.8,
+  "p99_ms": 497.8,
+  "max_ms": 64521.3
+ },
+ "status_poll": {
+  "n": 4000,
+  "wall_s": 13.85,
+  "rps": 288.9,
+  "cpu_ms_per_req": 2.71,
+  "first": {
+   "503": 25,
+   "200": 3975
+  },
+  "final": {
+   "200": 4000
+  },
+  "retries": 97,
+  "p50_ms": 84.8,
+  "p95_ms": 129.3,
+  "p99_ms": 630.8,
+  "max_ms": 13811.6
+ },
+ "visit": {
+  "n": 4000,
+  "wall_s": 14.65,
+  "rps": 273.0,
+  "cpu_ms_per_req": 3.3,
+  "first": {
+   "503": 31,
+   "200": 3969
+  },
+  "final": {
+   "200": 4000
+  },
+  "retries": 107,
+  "p50_ms": 83.9,
+  "p95_ms": 286.4,
+  "p99_ms": 392.5,
+  "max_ms": 12661.0
+ },
+ "submit": {
+  "n": 4000,
+  "wall_s": 17.5,
+  "rps": 228.6,
+  "cpu_ms_per_req": 4.67,
+  "first": {
+   "503": 109,
+   "202": 3891
+  },
+  "final": {
+   "202": 4000
+  },
+  "retries": 116,
+  "p50_ms": 111.7,
+  "p95_ms": 380.4,
+  "p99_ms": 2334.1,
+  "max_ms": 5857.9
+ },
+ "grade_drain": {
+  "graded": 4000,
+  "wall_s": 101.45,
+  "cpu_ms_per_grade": 11.14
+ },
+ "answers_mismatch_attempts": 2,
+ "leaderboard": {
+  "n": 50,
+  "wall_s": 0.28,
+  "rps": 179.4,
+  "cpu_ms_per_req": 4.11,
+  "first": {
+   "200": 50
+  },
+  "final": {
+   "200": 50
+  },
+  "retries": 0,
+  "p50_ms": 53.8,
+  "p95_ms": 98.6,
+  "p99_ms": 132.7,
+  "max_ms": 132.7
+ },
+ "results": {
+  "n": 50,
+  "wall_s": 1.28,
+  "rps": 39.1,
+  "cpu_ms_per_req": 25.82,
+  "first": {
+   "200": 50
+  },
+  "final": {
+   "200": 50
+  },
+  "retries": 0,
+  "p50_ms": 217.4,
+  "p95_ms": 404.4,
+  "p99_ms": 406.1,
+  "max_ms": 406.1
+ },
+ "cohort_first_ms": 406.6,
+ "cohort_refresh": {
+  "wall_s": 0.0,
+  "sample": 4000,
+  "entries": 4000
+ },
+ "login_bcrypt": {
+  "n": 8,
+  "wall_s": 3.27,
+  "rps": 2.4,
+  "cpu_ms_per_req": 227.65,
+  "first": {
+   "503": 4,
+   "200": 4
+  },
+  "final": {
+   "200": 8
+  },
+  "retries": 4,
+  "p50_ms": 1534.1,
+  "p95_ms": 3270.5,
+  "p99_ms": 3270.5,
+  "max_ms": 3270.5
+ },
+ "attempt_doc_avg_bytes": 13731,
+ "admission": {
+  "live": {
+   "limit": 32,
+   "peak": 32,
+   "admitted": 36198,
+   "rejected": 1221,
+   "failed": 0
+  },
+  "read": {
+   "limit": 16,
+   "peak": 16,
+   "admitted": 4102,
+   "rejected": 207,
+   "failed": 0
+  },
+  "asset": {
+   "limit": 8,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  },
+  "auth": {
+   "limit": 4,
+   "peak": 4,
+   "admitted": 8,
+   "rejected": 4,
+   "failed": 0
+  },
+  "control": {
+   "limit": 4,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  },
+  "probe": {
+   "limit": 2,
+   "peak": 0,
+   "admitted": 0,
+   "rejected": 0,
+   "failed": 0
+  }
+ },
+ "maxrss_mb": 1187.0,
+ "storage_puts": 0,
+ "llm_calls": 0,
+ "db_dropped": true
+}

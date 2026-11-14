@@ -60,8 +60,9 @@ async def require_lease(j):
 
 
 async def run_job(id, drain=True):
+    """Returns True only when this call claimed and processed the job."""
     if not INLINE_JOBS:
-        return
+        return False
     header = await jobs.find_one({'id': id}, {'kind': 1})
     if not header or header['kind'] not in _active:
         return
@@ -180,6 +181,7 @@ async def run_job(id, drain=True):
             await drain_lane('smart_page')
         elif kind == 'smart_page':
             await drain_lane('ai_solution')
+    return True
 
 
 async def drain_for(set_id):
@@ -269,19 +271,65 @@ async def download(id: str, u=Depends(current)):
     return Response(await run_in_threadpool(get_object, j['path']), media_type='application/pdf', headers={'Content-Disposition': 'attachment; filename="jeemains-ai-results.pdf"', 'Cache-Control': 'private, no-store'})
 
 
+async def drain_grades(stop):
+    """Mass-submit backlog: keep every grade lane slot busy until no queued grade remains or time runs out."""
+    import time
+    done = 0
+
+    async def worker():
+        nonlocal done
+        while time.monotonic() < stop:
+            j = await jobs.find_one({'kind': 'grade', 'status': 'queued', '$and': [
+                {'$expr': {'$lte': [{'$ifNull': ['$next_run_at', 0]}, EPOCH_NOW]}},
+                {'$or': [{'attempts': {'$lt': JOB_ATTEMPTS}}, {'attempts': {'$exists': False}}]}]},
+                {'id': 1}, sort=[('created_at', 1)])
+            if not j:
+                return
+            if await run_job(j['id'], drain=False):
+                done += 1
+            else:
+                await asyncio.sleep(0.05)
+    await asyncio.gather(*(worker() for _ in range(LANE_LIMITS['grade'])))
+    return done
+
+
 async def maintenance():
+    import time
     from .attempts import finalize, ensure_grade
     from .content import archive_publication
+    t = now()
+    try:
+        await db.tejas_operations.update_one({'_id': 'maintenance-lock', 'until': {'$lt': t}}, {'$set': {'until': t + 840}}, upsert=True)
+    except DuplicateKeyError:
+        return  # the previous run is still working through a backlog
+    stop = time.monotonic() + 780
+    try:
+        await maintain(stop, finalize, ensure_grade, archive_publication)
+    finally:
+        await db.tejas_operations.update_one({'_id': 'maintenance-lock'}, {'$set': {'until': 0}})
+
+
+async def maintain(stop, finalize, ensure_grade, archive_publication):
+    import time
     pending = await sets.find({'publication_pending': {'$exists': True}}, {'id': 1, 'publication_pending': 1}).limit(50).to_list(50)
     for s in pending:
         await archive_publication(s)
-    expired = await attempts.find({'status': 'active', 'deadline': {'$gt': 0}, '$expr': {'$lte': ['$deadline', EPOCH_NOW]}}, {'id': 1}).sort('deadline', 1).limit(1000).to_list(1000)
-    for a in expired:
-        await finalize(a['id'], 'time_limit', projection={'_id': 0, 'id': 1})
+    # Everyone-at-once exams: close every timed-out attempt, not just the first batch.
+    expired = 0
+    while time.monotonic() < stop:
+        batch = await attempts.find({'status': 'active', 'deadline': {'$gt': 0}, '$expr': {'$lte': ['$deadline', EPOCH_NOW]}}, {'id': 1}).sort('deadline', 1).limit(500).to_list(500)
+        if not batch:
+            break
+        for a in batch:
+            await finalize(a['id'], 'time_limit', projection={'_id': 0, 'id': 1})
+        expired += len(batch)
     # Recover a crash after durable close but before enqueue, including pre-upgrade submissions.
-    outbox = await attempts.find({'status': 'completed', 'grading_status': {'$nin': ['ready', 'failed']}}, {'id': 1, 'user_id': 1, 'set_id': 1, 'status': 1}).limit(1000).to_list(1000)
-    for a in outbox:
+    outbox = 0
+    async for a in attempts.find({'status': 'completed', 'grading_status': {'$nin': ['ready', 'failed']}}, {'id': 1, 'user_id': 1, 'set_id': 1, 'status': 1}).sort('submitted_at', 1):
+        if time.monotonic() >= stop:
+            break
         await ensure_grade(a)
+        outbox += 1
     # Exhausted crashed workers must become visibly failed, not running forever.
     await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
     from .book_worker import recover
@@ -296,9 +344,12 @@ async def maintenance():
         ]}, {'id': 1}).sort('created_at', 1).limit(capacity).to_list(capacity)
         selected.extend(rows)
     await asyncio.gather(*(run_job(j['id']) for j in selected))
+    graded = await drain_grades(stop)
     from .manual_solutions import dispatch_manual
     await dispatch_manual()  # Recovery only: processes existing owner-click consent, never discovers content.
-    await db.tejas_operations.update_one({'id': 'maintenance'}, {'$set': {'last_run': now(), 'expired': len(expired), 'outbox_checked': len(outbox), 'recovered_jobs': len(selected)}}, upsert=True)
+    from .integrity import launch
+    launch()  # nightly data check + safe repairs, single-flight under its own lock
+    await db.tejas_operations.update_one({'id': 'maintenance'}, {'$set': {'last_run': now(), 'expired': expired, 'outbox_checked': outbox, 'recovered_jobs': len(selected), 'graded': graded}}, upsert=True)
 
 
 @router.post('/cron/maintenance')

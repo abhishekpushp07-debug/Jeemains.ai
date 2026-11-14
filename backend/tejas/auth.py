@@ -1,4 +1,5 @@
-import os, hashlib
+import os, hashlib, time
+from collections import OrderedDict
 from datetime import datetime, timezone, timedelta
 import bcrypt, jwt
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
@@ -123,15 +124,43 @@ async def identity(p):
     return u
 
 
+# Student session checks are reused for at most STUDENT_SESSION_SECONDS per process; JWT signature and expiry
+# are still verified on every request. Staff sessions are never cached. Logout/PIN changes clear this process at once.
+STUDENT_SESSION_SECONDS = 10
+_STUDENT_MAX = 20000
+_students = OrderedDict()
+
+
+def forget_student(user_id=None, token=None):
+    if token:
+        _students.pop(hashlib.sha256(token.encode()).digest(), None)
+    if user_id:
+        for key in [k for k, v in _students.items() if v[1] == user_id]:
+            _students.pop(key, None)
+
+
+def remember_student(key, u):
+    stamp = time.monotonic()
+    _students[key] = (stamp + STUDENT_SESSION_SECONDS, u['id'], dict(u))
+    _students.move_to_end(key)
+    while _students and (len(_students) > _STUDENT_MAX or next(iter(_students.values()))[0] <= stamp):
+        _students.popitem(last=False)
+
+
 async def current(request: Request):
     try:
+        raw = request.cookies.get("access_token")
         p = jwt.decode(
-            request.cookies.get("access_token"),
+            raw,
             os.environ["JWT_SECRET"],
             algorithms=["HS256"],
         )
         if p["type"] != "access":
             raise ValueError()
+        key = hashlib.sha256(raw.encode()).digest() if p.get("access_type") == "unverified_phone" else None
+        hit = _students.get(key) if key else None
+        if hit and hit[0] > time.monotonic():
+            return dict(hit[2])
         record = await sessions.find_one(
             {
                 "id": p["sid"],
@@ -144,8 +173,10 @@ async def current(request: Request):
         u = await identity(p)
         from .staff_credentials import check_session_generation
         check_session_generation(record, u, p.get('access_type'))
+        if key:
+            remember_student(key, u)
         return u
-    except (jwt.PyJWTError, ValueError, KeyError, TypeError):
+    except (jwt.PyJWTError, ValueError, KeyError, TypeError, AttributeError):
         raise HTTPException(
             401, "Sign in again with your current credentials. Saved work is retained."
         )
@@ -264,6 +295,7 @@ async def logout(request: Request, response: Response):
             p = None
         if p and p.get("sid"):
             await sessions.delete_one({"id": p["sid"]})
+            forget_student(user_id=p.get("sub"))
         response.delete_cookie(
             name, path="/", secure=True, httponly=True, samesite="lax"
         )

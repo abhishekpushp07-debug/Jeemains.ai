@@ -9,7 +9,7 @@ from starlette.concurrency import run_in_threadpool
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError, PyMongoError
 from .db import audit, db, uid, now
-from .auth import current, hashpw, new_session, owner, verify
+from .auth import current, forget_student, hashpw, new_session, owner, verify
 from .documents import BaseDocument
 from .request_contracts import PhonePayload, PhoneSignupPayload, PinChangePayload, OwnerPinResetPayload
 from .rate_limits import increment
@@ -118,6 +118,7 @@ async def change_pin(data: PinChangePayload, request: Request, response: Respons
         return_document=ReturnDocument.AFTER, projection={'_id': 0, 'pin_hash': 0})
     if not updated:
         raise HTTPException(409, 'Your account changed. Sign in again before changing the PIN.')
+    forget_student(user_id=u['id'])
     from .db import audit
     await audit(u['id'], 'student_pin_changed', u['id'])
     result = await new_session({**updated, 'role': 'student', 'access_type': 'unverified_phone'}, response)
@@ -156,6 +157,7 @@ async def owner_reset_pin(data: OwnerPinResetPayload, response: Response, u=Depe
         return_document=ReturnDocument.AFTER, projection={'_id': 0, 'id': 1, 'pin_version': 1})
     if not updated:
         raise HTTPException(409, 'Student changed or is not resettable. Refresh the student list before trying again.')
+    forget_student(user_id=updated['id'])
     try:
         await audit(u['id'], 'owner_student_pin_reset', updated['id'], f"pin_version={updated['pin_version']}")
     except PyMongoError:

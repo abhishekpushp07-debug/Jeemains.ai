@@ -109,7 +109,7 @@ async def expire(a):
     return await hydrate(a)
 
 
-def attempt_view(a):
+def attempt_view(a, public=None):
     fields = [
         "id",
         "set_id",
@@ -138,7 +138,7 @@ def attempt_view(a):
         "competition_end": a.get('competition_end'),
         'confidence_observations': {qid: {'probability': x.get('confidence'), 'response': x.get('normalized_value', x.get('value',''))} for qid,x in a.get('first_answers',{}).items()},
         'confidence_changed_questions': a.get('confidence_changed_questions', []),
-        "questions": [delivered(q) for q in a["questions"]],
+        "questions": public if public is not None else [delivered(q) for q in a["questions"]],
         "server_now": a.get('_database_now', now()),
         "count": len(a["questions"]),
     }
@@ -165,26 +165,42 @@ async def my_set(id: str, u=Depends(current)):
 
 @router.post("/sets/{id}/preflight")
 async def preflight(id: str, data: dict, u=Depends(current)):
-    s = await get(sets, id)
+    from .papers import HEADER, paper
+    s = await sets.find_one({'id': id}, HEADER)
+    if not s:
+        raise HTTPException(404, "This item is unavailable or does not exist.")
     preview = data.get("preview") and u["role"] in ["owner", "reviewer"]
     t = await database_now()
     from .structure import hidden_from
     if not preview and (s["status"] != "published" or not permitted(s, u, at=t) or await hidden_from(s, u)):
         raise HTTPException(404, "This set is not available.")
-    if not s["questions"]:
+    entry = await paper(s)
+    if not entry.count:
         raise HTTPException(400, "This set has no questions yet.")
+    # Per-user availability is checked above; immutable source validation is reused per paper revision.
+    if not entry.validated:
+        await validate_sources(s, entry.refs)
+        entry.validated = True
+    await db.tejas_preflight.update_one(
+        {"user_id": u["id"], "set_id": id},
+        {
+            "$set": {
+                "revision": s["revision"],
+                "at": t,
+                "test_response": str(data.get("test_response", ""))[:30],
+            }
+        },
+        upsert=True,
+    )
+    return {
+        "ok": True,
+        "message": "Connection, source assets and test response verified. No attempt or timer has started.",
+        "server_now": t,
+    }
+
+
+async def validate_sources(s, unique_refs):
     source_map = {}
-    # Per-user availability is checked before any immutable source validation reuse.
-    unique_refs = []
-    seen_refs = set()
-    import json
-    for q in s['questions']:
-        for kind in ('q_refs', 's_refs'):
-            for ref in q.get(kind, []):
-                identity = json.dumps(ref, sort_keys=True, separators=(',', ':'))
-                if identity not in seen_refs:
-                    seen_refs.add(identity)
-                    unique_refs.append(ref)
     if s.get('test_kind') == 'pyq':
         from .derivatives import validate_source_crops
         from .canonical import CanonicalIntegrityError
@@ -204,22 +220,6 @@ async def preflight(id: str, data: dict, u=Depends(current)):
                 raise HTTPException(400, 'Source region is invalid. Check page and coordinates.')
     else:
         await validate_refs(s, {'q_refs': unique_refs, 's_refs': []}, source_map)
-    await db.tejas_preflight.update_one(
-        {"user_id": u["id"], "set_id": id},
-        {
-            "$set": {
-                "revision": s["revision"],
-                "at": t,
-                "test_response": str(data.get("test_response", ""))[:30],
-            }
-        },
-        upsert=True,
-    )
-    return {
-        "ok": True,
-        "message": "Connection, source assets and test response verified. No attempt or timer has started.",
-        "server_now": t,
-    }
 
 
 @router.post("/sets/{id}/start")
@@ -230,7 +230,8 @@ async def start(id: str, data: Start, u=Depends(current)):
     if existing:
         verify_start(existing, id, data)
         return attempt_view(await expire(existing))
-    s = await clocked_one(sets, {'id': id}, {'_id': 0, 'questions.ai_solution': 0})
+    from .papers import HEADER, paper, start_data
+    s = await clocked_one(sets, {'id': id}, HEADER)
     if not s:
         raise HTTPException(404, 'This set is not available.')
     started_at = s.pop('_database_now')
@@ -255,9 +256,10 @@ async def start(id: str, data: Start, u=Depends(current)):
     from .structure import hidden_from
     if not preview and (s["status"] != "published" or not permitted(s, u, at=started_at) or await hidden_from(s, u)):
         raise HTTPException(404, "This set is not available to start.")
+    entry = await paper(s)
     if not preview:
         guard_start(s, started_at)
-        if s.get('series_id') and not valid_paper(s):
+        if s.get('series_id') and not valid_paper({**s, 'questions': entry.questions}):
             raise HTTPException(409, 'This series paper needs owner review before new attempts can start.')
     if not data.device_checked:
         raise HTTPException(400, "Complete the device and content check first.")
@@ -273,8 +275,9 @@ async def start(id: str, data: Start, u=Depends(current)):
         raise HTTPException(
             400, "Run the connection and content check again before starting."
         )
-    if not s["questions"]:
+    if not entry.count:
         raise HTTPException(400, "No questions are available.")
+    await start_data(entry, s, delivered)
     from .exam_navigation import classify_set
     a = {
         "test_kind": classify_set(s),
@@ -291,9 +294,9 @@ async def start(id: str, data: Start, u=Depends(current)):
         "exam": s["exam"],
         "version": s["version"],
         "rules": copy.deepcopy(s["rules"]),
-        "profile": await seal_profile(s),
+        "profile": copy.deepcopy(entry.profile),
         "visited": [],
-        "questions": copy.deepcopy(s["questions"]),
+        "questions": entry.questions,
         "attribution": s.get("attribution", ""),
         "report_allowed": bool(s.get("rights_report")),
         "mode": mode,
@@ -323,9 +326,11 @@ async def start(id: str, data: Start, u=Depends(current)):
         a["deadline"] = a["started_at"] + a["rules"]["minutes"] * 60
         if a.get('competition_end'):
             a['deadline'] = min(a['deadline'], a['competition_end'])
+    inserted = True
     try:
-        await insert_attempt(a)
+        await insert_attempt(a, entry.pack_id, entry.response_schema)
     except DuplicateKeyError:
+        inserted = False
         a = await attempts.find_one({'id': competition_id}, {'_id': 0}) if competition_id else None
         if not a:
             a = await attempts.find_one(
@@ -341,7 +346,7 @@ async def start(id: str, data: Start, u=Depends(current)):
             raise HTTPException(409, "Another start is being resolved. Retry with the same identifier.")
         await bind_start_alias(a, id, data)
     await audit(u["id"], "Attempt started", a["id"], mode)
-    return attempt_view(await hydrate(a))
+    return attempt_view(a, entry.public) if inserted else attempt_view(await hydrate(a))
 
 
 @router.get("/attempts")

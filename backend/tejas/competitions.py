@@ -1,5 +1,5 @@
 """Competition read models from real immutable attempts; no seeded ranks or percentile claims."""
-import hashlib
+import hashlib, time
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from .auth import current
@@ -59,24 +59,38 @@ async def catalogue(u=Depends(current)):
     return CompetitionList(items=[item(s,own.get(s['id']),t) for s in docs],server_now=t)
 
 
+BOARD_SECONDS = 10
+_boards = {}
+
+
+async def standings(id):
+    """Shared counts + top 50 from the competition_rank index; reused per process for BOARD_SECONDS."""
+    hit = _boards.get(id)
+    if hit and hit[0] > time.monotonic():
+        return hit[1]
+    base = {'set_id': id, 'mode': 'practice', 'competition_ranked': True}
+    ranked = {**base, 'status': 'completed', 'grading_status': 'ready', 'summary.score': {'$exists': True}}
+    top = await attempts.find(ranked, {'_id': 0, 'id': 1, 'user_id': 1, 'summary.score': 1, 'summary.accuracy': 1}).sort([('summary.score', -1), ('id', 1)]).limit(50).to_list(50)
+    for i, r in enumerate(top):
+        r['rank'] = top[i - 1]['rank'] if i and r['summary']['score'] == top[i - 1]['summary']['score'] else i + 1
+    data = (await attempts.count_documents(base), await attempts.count_documents(ranked), top, ranked)
+    _boards[id] = (time.monotonic() + BOARD_SECONDS, data)
+    if len(_boards) > 64:
+        _boards.pop(next(iter(_boards)))
+    return data
+
+
 @router.get('/{id}',response_model=Leaderboard)
 async def leaderboard(id:str,u=Depends(current)):
     s=await clocked_one(sets, {'id':id,'competition':True,'qa_only':{'$ne':True}},{'_id':0,'id':1,'title':1,'exam':1,'questions.id':1,'rules.minutes':1,'start_at':1,'end_at':1,'live_enabled':1})
     if not s: raise HTTPException(404,'Competition not found.')
     own=await attempts.find_one({'set_id':id,'user_id':u['id'],'mode':'practice','competition_end':{'$exists':True}},{'_id':0,'id':1,'status':1})
-    base={'set_id':id,'mode':'practice','competition_ranked':True}
-    participants=await attempts.count_documents(base)
-    count=await attempts.count_documents({**base,'status':'completed','grading_status':'ready','summary.score':{'$exists':True}})
+    participants,count,top,ranked=await standings(id)
     t = s['_database_now']
     common=dict(competition=item(s,own,t),participants=participants,graded=count,pending=participants-count,server_now=t)
     if t<s['end_at']: return Leaderboard(status='embargoed',**common)
-    # Rank only frozen original ledgers. $rank deliberately does not use elapsed time.
-    rows=await attempts.aggregate([
-        {'$match':{**base,'status':'completed','grading_status':'ready','summary.score':{'$exists':True}}},
-        {'$setWindowFields':{'sortBy':{'summary.score':-1},'output':{'rank':{'$rank':{}}}}},
-        {'$facet':{'top':[{'$sort':{'rank':1,'id':1}},{'$limit':50},{'$project':{'_id':0,'id':1,'user_id':1,'summary.score':1,'summary.accuracy':1,'rank':1}}],
-                   'you':[{'$match':{'user_id':u['id']}},{'$limit':1},{'$project':{'_id':0,'id':1,'user_id':1,'summary.score':1,'summary.accuracy':1,'rank':1}}]}}
-    ]).to_list(1)
-    data=rows[0] if rows else {'top':[],'you':[]}
+    # Equal scores share rank (1, 1, 3): 1 + number of ranked attempts with a strictly higher frozen score.
+    mine=await attempts.find_one({**ranked,'user_id':u['id']},{'_id':0,'id':1,'user_id':1,'summary.score':1,'summary.accuracy':1})
+    if mine: mine['rank']=1+await attempts.count_documents({**ranked,'summary.score':{'$gt':mine['summary']['score']}})
     def rank(r): return Ranking(rank=r['rank'],learner='Learner '+hashlib.sha256((id+r['user_id']).encode()).hexdigest()[:8].upper(),score=r['summary']['score'],accuracy=r['summary'].get('accuracy'),is_you=r['user_id']==u['id'])
-    return Leaderboard(status='provisional' if count<participants else 'ready',rows=[rank(r) for r in data['top']],you=rank(data['you'][0]) if data['you'] else None,**common)
+    return Leaderboard(status='provisional' if count<participants else 'ready',rows=[rank(r) for r in top],you=rank(mine) if mine else None,**common)
