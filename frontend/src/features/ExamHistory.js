@@ -3,6 +3,7 @@ import {Link,useParams,useSearchParams,useLocation} from 'react-router-dom';
 import {ArrowUpRight,Clock3} from 'lucide-react';
 import {api} from '../lib/api';
 import {examBySlug} from '../lib/exams';
+import {useExamStructure} from '../lib/catalog';
 import {ExamBreadcrumbs,ExamDestinations} from '../components/exams/ExamNavigation';
 import {Empty,ErrorBox,Badge} from '../components/Shared';
 import {Button} from '../components/ui/button';
@@ -13,7 +14,7 @@ import {Card} from '../components/ui/card';
 
 export default function ExamHistory(){
  const location=useLocation();
- const {examSlug}=useParams(),exam=examBySlug(examSlug);const [params,setParams]=useSearchParams();
+ const {examSlug}=useParams();const structure=useExamStructure(examSlug);const exam=examBySlug(examSlug)||structure.data;const [params,setParams]=useSearchParams();
  const kind=['mock','pyq','chapter','practice'].includes(params.get('kind'))?params.get('kind'):'all',days=['7','30','90'].includes(params.get('days'))?params.get('days'):'all',page=Math.max(1,Math.min(10000,Number(params.get('page'))||1));
  const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0);
  useEffect(()=>{
@@ -22,6 +23,7 @@ export default function ExamHistory(){
   return()=>controller.abort();
  },[exam,examSlug,kind,days,page,reload]);
  function update(values){const next=new URLSearchParams(params);Object.entries(values).forEach(([k,v])=>v?next.set(k,String(v)):next.delete(k));setParams(next)}
+ if(!exam&&!structure.error)return <div className="container page" data-testid="exam-results-loading"><Skeleton className="h-64"/></div>;
  if(!exam)return <div className="container page"><Empty title="Exam not found." action={<Button asChild><Link to="/home" data-testid="history-invalid-home">Back to Home</Link></Button>}/></div>;
  return <div className="container page exam-history" data-testid="exam-results-page"><ExamBreadcrumbs exam={exam} section={{label:'Results'}}/><header className="exam-simple-heading"><span className="eyebrow" data-testid="exam-results-exam">{exam.name}</span><h1 data-testid="exam-results-title">Your attempts. Your progress.</h1><p data-testid="exam-results-description">Resume a test or revisit your score, question-by-question review and available solutions.</p></header>
   <ExamDestinations exam={exam}/>

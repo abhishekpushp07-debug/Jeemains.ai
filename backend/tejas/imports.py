@@ -89,8 +89,8 @@ async def list_imports(u=Depends(staff)):
 @router.post('', response_model=ImportView, status_code=202)
 async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner)):
     # Middleware authenticates and bounds multipart bytes before FastAPI can spool.
-    async with request.form(max_files=2,max_fields=2) as form:
-        if set(form.keys()) - {'questions','solutions','request_id','format'} or len(form.multi_items()) != len(form.keys()):
+    async with request.form(max_files=2,max_fields=3) as form:
+        if set(form.keys()) - {'questions','solutions','request_id','format','section_id'} or len(form.multi_items()) != len(form.keys()):
             raise HTTPException(422,'Use one questions file and, optionally, one solutions file.')
         format=str(form.get('format',''))
         if format not in ('pdf','xlsx'): raise HTTPException(422,'Choose PDF or Excel (.xlsx).')
@@ -116,13 +116,17 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
             if existing['fingerprint']!=fingerprint: raise HTTPException(409,'Upload identifier already belongs to different files. Start a new upload.')
             return view(existing,await sets.find_one({'id':id},{'_id':0}))
         if SLOTS.locked(): raise HTTPException(429,'Two imports are processing. Please retry shortly.',headers={'Retry-After':'5'})
+        dest=None
+        if form.get('section_id'):
+            from .structure import destination
+            dest=await destination(str(form['section_id']))
         async with SLOTS:
             for source,raw in zip(sources,payloads):
                 source['path']=await run_in_threadpool(put_object,f"tejas/imports/{id}/{source['id']}.{format}",raw,'application/pdf' if format=='pdf' else XLSX)
         title=Path(sources[0]['name']).stem.replace('_',' ').strip()[:150] or 'Imported practice test'
         record={'id':id,'title':title,'format':format,'fingerprint':fingerprint,'sources':sources,'status':'queued',
                 'created_at':now(),'created_by':u['id'],'questions':[],'issues':[],
-                'rights_attested_at':now(),'rights_attested_by':u['id']}
+                'rights_attested_at':now(),'rights_attested_by':u['id'],**({'destination':dest} if dest else {})}
         # Atomic identity claim; duplicate POST cannot create another import/test.
         await imports.update_one({'id':id},{'$setOnInsert':record},upsert=True)
         bg.add_task(process_import,id)
@@ -244,12 +248,19 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
     else:
         if data.revision!=0: raise HTTPException(409,'Reload this import before scheduling.')
         rules=valid_rules({'minutes':r['duration_minutes'],'correct':3 if r['exam']=='BITSAT' else 4,'wrong':-1,'skipped':0})
+        dest=r.get('destination')
+        from .structure import RULE_EXAMS
+        if dest and not series and dest['exam_key'] in RULE_EXAMS and dest['exam_key']!=r['exam']:
+            raise HTTPException(409,f"This paper reads as {r['exam']}, but it was uploaded to {dest['exam_name']}. Upload it again under {r['exam']}.")
         s={'id':id,'import_id':id,'title':r['title'],'exam':r['exam'],'year':'','source':'Owner-supplied '+r['format'].upper()+'; deterministic ID/number pairing; supplied keys, not independently academically verified.',
            'attribution':'Owner-supplied study material','questions':r['questions'],'file_ids':[ref['file_id'] for q in r['questions'] for key in ('q_refs','s_refs') for ref in q.get(key,[])],
            'rules':rules,'status':'published','version':1,'revision':1,'created_at':r['created_at'],'published_at':now(),
            'profile_mode':'practice','audience':'all','allowed_phones':[],'allowed_emails':[],'expires':'',
            'rights_upload':True,'rights_publish':True,'rights_report':True,'rights_attested_by':r['rights_attested_by'],
            'start_at':start,'end_at':end,'live_enabled':True,'competition':True}
+        if dest and not series:
+            from .structure import next_order
+            s.update(catalog_section_id=dest['section_id'],catalog_order=await next_order(dest['section_id']))
         if series:
             if r.get('qa_only') or not valid_paper(s):
                 raise HTTPException(409, 'Series requires a reviewed public JEE Main full paper: 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')

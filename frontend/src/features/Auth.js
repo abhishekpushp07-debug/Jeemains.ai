@@ -47,7 +47,7 @@ export default function Auth({ staff = false }) {
         next?.startsWith('/') && !next.startsWith('//') && !next.includes('\\') && !/[\u0000-\u001f]/.test(next)
           ? next
           : staff
-            ? "/studio"
+            ? "/super-admin"
             : "/home",
         {replace:true},
       );
@@ -90,7 +90,7 @@ export default function Auth({ staff = false }) {
         <span className="auth-icon">
           {staff ? <ShieldCheck size={25} /> : <Phone size={24} />}
         </span>
-        <h2 data-testid="auth-title">{staff ? 'Content Studio.' : signup ? 'Create your student account.' : 'Welcome back.'}</h2>
+        <h2 data-testid="auth-title">{staff ? 'Super Admin.' : signup ? 'Create your student account.' : 'Welcome back.'}</h2>
         <p>
           {staff
             ? "Authorized owners and reviewers only."
@@ -172,7 +172,7 @@ export default function Auth({ staff = false }) {
             {busy
               ? "Opening your space…"
               : staff
-                ? "Open Content Studio"
+                ? "Open Super Admin"
                 : signup ? 'Create account' : 'Sign in'}
             <ArrowRight size={18} />
           </Button>

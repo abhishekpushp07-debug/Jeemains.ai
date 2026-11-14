@@ -185,3 +185,18 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 - Full native visual parity and actual native cookie persistence: app-agent/device verification pending.
 - PIN + simple owner student directory: built/tested in preview; publication held for coordinated native compatibility. No payment/OTP service enabled.
 - No passwords, cookies, signing keys, private source PDFs, answer-key dumps or private student exports are included in this package.
+
+## 12. Exam structure: exams, sections, order and visibility (added 2026-11-14)
+
+The owner now manages the student-facing structure from Super Admin › Exams & Content. The app must render the same places as the website, in the same order, from the API. Do not hard-code which sections an exam has.
+
+1. Home exam cards: `GET /catalog/exams` → `items[]` with `slug`, `name`, `short`, `subjects`, `color`, `builtin`, `shown`, `order`. Built-in exams (`jee-main`, `bitsat`, `comedk`) keep their existing card designs. Owner-created exams (`builtin:false`) follow in `order`; `color` is one of `teal|amber|violet|rose|lime|sky`. A learner never receives an exam the owner has not shown on Home.
+2. Exam page: `GET /catalog/exams/{slug}` → the exam plus `sections[]` in owner order: `id`, `slug`, `name`, `description`, `layout` (`list` or `chapters`), `kind` (`pyq`, `mocks`, `chapters` or `custom`), `live_count`. Only sections with at least one live test for this learner are returned. Always add a Results entry at the end (`GET /exam-navigation/{slug}/history`). A hidden or unknown exam returns 404.
+3. Section list: `GET /exam-navigation/{slug}/catalogue?section={section_slug}&page=1` (plus optional `subject`, `q`). Items are already in the owner's order. For `layout=chapters`, first show `subject_counts`, then call again with `subject`. JEE Main `pyq` keeps its dedicated `GET /pyq/jee-main` screen.
+4. Test names: use `title` from the API; the owner can rename tests and the API returns the new name. Mocks from a combined book use their printed names (for example "Mock Test 07"); the book title is not student-facing.
+5. Availability: the owner can switch any test Unlive. Unlive tests disappear from every list and cannot be started; existing attempts, scores and results stay readable. Tests in a hidden exam are unavailable even by direct link (404 on summary/start).
+6. `GET /my/sets/{set_id}` and `GET /sets/{set_id}` now include `catalog_path` (for example `/exams/bitsat/mocks`) so a back action can return to the right section.
+7. Old `/book-series` routes are retired on the website; book mocks now appear inside their exam section. `GET /book-series/{id}` still answers and includes `path`.
+
+Acceptance: compare the app's Home, exam page and one section list with the website for the same learner; names, order and counts must match.
+

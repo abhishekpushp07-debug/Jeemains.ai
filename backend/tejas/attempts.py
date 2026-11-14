@@ -154,10 +154,11 @@ async def my_sets(exam: str = "", q: str = "", page: int = 1, u=Depends(current)
 
 @router.get("/my/sets/{id}")
 async def my_set(id: str, u=Depends(current)):
+    from .structure import hidden_from, path_for
     s = await get(sets, id)
-    if s["status"] != "published" or not permitted(s, u, at=await database_now()):
+    if s["status"] != "published" or not permitted(s, u, at=await database_now()) or await hidden_from(s, u):
         raise HTTPException(404, "This set is not available to your account.")
-    return summary(s)
+    return {**summary(s), 'catalog_path': await path_for(s)}
 
 
 @router.post("/sets/{id}/preflight")
@@ -165,7 +166,8 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     s = await get(sets, id)
     preview = data.get("preview") and u["role"] in ["owner", "reviewer"]
     t = await database_now()
-    if not preview and (s["status"] != "published" or not permitted(s, u, at=t)):
+    from .structure import hidden_from
+    if not preview and (s["status"] != "published" or not permitted(s, u, at=t) or await hidden_from(s, u)):
         raise HTTPException(404, "This set is not available.")
     if not s["questions"]:
         raise HTTPException(400, "This set has no questions yet.")
@@ -248,7 +250,8 @@ async def start(id: str, data: Start, u=Depends(current)):
         if active["status"] == "active":
             await bind_start_alias(active, id, data)
             return attempt_view(active)
-    if not preview and (s["status"] != "published" or not permitted(s, u, at=started_at)):
+    from .structure import hidden_from
+    if not preview and (s["status"] != "published" or not permitted(s, u, at=started_at) or await hidden_from(s, u)):
         raise HTTPException(404, "This set is not available to start.")
     if not preview:
         guard_start(s, started_at)

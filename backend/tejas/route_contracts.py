@@ -17,6 +17,22 @@ SPEC = {
         ('control','control','lease_book_revision'),('allowance','control','owner_explicit_bounded_request_receipt'),
         ('preview_crop','batch','owner_source_region_only'),('map_range','control','lease_range_mapping'))},
     'book_imports.series_list': ('current_released_series_metadata_only','normal','read'),
+    'structure.student_exams': ('current_profile_visible_exam_metadata','normal','read'),
+    'structure.student_exam': ('current_profile_visible_section_metadata','normal','read'),
+    'structure.admin_catalog': ('owner_only_catalogue_structure','normal','read'),
+    'structure.create_exam': ('owner_only_hidden_new_exam','control','unique_exam_name'),
+    'structure.update_exam': ('owner_only_custom_exam_settings','control','replace_fields_audited'),
+    'structure.create_section': ('owner_only_new_section','control','not_idempotent_audited'),
+    'structure.update_section': ('owner_only_section_settings','control','replace_fields_audited'),
+    'structure.order_sections': ('owner_only_section_order','control','full_set_replace'),
+    'structure.admin_section_tests': ('owner_only_section_test_metadata','normal','read'),
+    'structure.admin_unplaced': ('owner_only_unplaced_test_metadata','normal','read'),
+    'structure.order_tests': ('owner_only_test_order','control','full_set_replace'),
+    'structure.update_test': ('owner_only_test_placement_no_content_change','control','replace_fields_audited'),
+    'structure.overview': ('owner_only_publishing_overview','normal','read'),
+    'structure.held_mocks': ('staff_held_mock_reasons_only','normal','read'),
+    'structure.timed_tests': ('owner_only_schedule_metadata','normal','read'),
+    'reviewers.list_reviewers': ('owner_reviewer_administration','normal','read'),
     'book_imports.series_detail': ('current_released_series_metadata_only','normal','read'),
     'pyq.catalogue': ('authenticated_pyq_metadata_own_attempts_only', 'normal', 'read'),
     'pyq_import.import_status': ('owner_only_pyq_import_status', 'normal', 'read'),
@@ -201,6 +217,8 @@ def install_contracts(app):
         if key == 'book_imports.repair_page':
             limit = 512 * 1024
         elif key in ('book_imports.rules', 'book_imports.allowance'):
+            limit = 128 * 1024
+        elif key in ('structure.order_tests', 'structure.order_sections'):
             limit = 128 * 1024
         if not writes or upload:
             limit = 0

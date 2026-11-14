@@ -19,8 +19,7 @@ import "./full-mocks.css";
 import "./result-analysis.css";
 const Auth = lazy(() => import("./features/Auth"));
 const Exams = lazy(() => import("./features/Exams"));
-const SuperAdmin = lazy(() => import('./features/SuperAdmin'));
-const BookPublishing = lazy(() => import('./features/BookPublishing'));
+const AdminWorkspace = lazy(() => import('./features/admin/AdminWorkspace'));
 const BookSeries = lazy(() => import('./features/BookSeries'));
 const Profile = lazy(() => import('./features/Profile'));
 import './learning-workspace.css';
@@ -30,6 +29,7 @@ import './series-streak.css';
 import './exam-light.css';
 import './vibrant-ui.css';
 import './pyq.css';
+import './admin.css';
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
@@ -40,7 +40,6 @@ const SavedDrafts = lazy(() => import("./features/SavedDrafts"));
 const SetDetail = lazy(() => import("./features/SetDetail"));
 const Player = lazy(() => import("./features/Player"));
 const Results = lazy(() => import("./features/Results"));
-const Studio = lazy(() => import("./features/Studio"));
 const Competitions = lazy(() => import('./features/Competitions'));
 const StudioImport = lazy(() => import('./features/StudioImport'));
 const ChapterBookStudio = lazy(() => import('./features/ChapterBookStudio'));
@@ -99,6 +98,14 @@ function PlayerRoute() {
   const {user} = useAuth();
   return <Player key={`${user.id}:${id}`} />;
 }
+function LegacyUploads() {
+  const loc = useLocation();
+  return <Navigate to={'/super-admin/upload' + loc.search} replace />;
+}
+function StudioHome() {
+  const {user} = useAuth();
+  return <Navigate to={user.role === 'owner' ? '/super-admin/content' : '/super-admin/review'} replace />;
+}
 function Shell() {
   const loc = useLocation();
   const player = loc.pathname.startsWith("/attempts/");
@@ -123,14 +130,14 @@ function Shell() {
             <Route path="/exams" element={<Exams />} />
             <Route path="/exams/:examSlug" element={<Protected><ExamHub /></Protected>} />
             <Route path="/exams/jee-main/pyq" element={<Protected><PyqCatalogue /></Protected>} />
-            <Route path="/exams/jee-main/mocks" element={<Navigate to="/exams/jee-main/pyq" replace />} />
             <Route path="/exams/:examSlug/mocks" element={<Protected><ExamSection kind="mocks" /></Protected>} />
             <Route path="/exams/:examSlug/chapters" element={<Protected><ExamSection kind="chapters" /></Protected>} />
             <Route path="/exams/:examSlug/results" element={<Protected><ExamHistory /></Protected>} />
-            <Route path="/super-admin/uploads" element={<Protected staff><BookPublishing /></Protected>} />
+            <Route path="/exams/:examSlug/:sectionSlug" element={<Protected><ExamSection /></Protected>} />
+            <Route path="/super-admin/uploads" element={<LegacyUploads />} />
             <Route path="/book-series" element={<Protected><BookSeries /></Protected>} />
             <Route path="/book-series/:id" element={<Protected><BookSeries /></Protected>} />
-            <Route path="/super-admin" element={<Protected staff><SuperAdmin /></Protected>} />
+            <Route path="/super-admin/*" element={<Protected staff><AdminWorkspace /></Protected>} />
             <Route path="/profile" element={<Protected><Profile /></Protected>} />
             <Route path="/my-tests" element={<Navigate to="/profile" replace />} />
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />
@@ -166,7 +173,7 @@ function Shell() {
               path="/studio"
               element={
                 <Protected staff>
-                  <Studio />
+                  <StudioHome />
                 </Protected>
               }
             />

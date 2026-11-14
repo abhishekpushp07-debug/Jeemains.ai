@@ -29,6 +29,7 @@ PROJECT = {
     "questions.approved": 1,
     'questions.scoring': 1,
     'test_kind': 1, 'full_length': 1, 'mock_number': 1,
+    'display_title': 1, 'catalog_section_id': 1, 'catalog_order': 1,
     "questions.disposition": 1,
 }
 
@@ -46,6 +47,7 @@ def available(user=None, exam="", search=""):
             )
     query = {
         "status": "published",
+        "owner_unlive": {"$ne": True},
         "series_id": {"$exists": False},
         "series_import": {"$ne": True},
         "$and": [
@@ -64,6 +66,10 @@ def available(user=None, exam="", search=""):
             },
         ],
     }
+    from .structure import hidden_clause
+    hidden = hidden_clause(user)
+    if hidden:
+        query["$and"].append(hidden)
     if exam:
         query["exam"] = exam
     if search:

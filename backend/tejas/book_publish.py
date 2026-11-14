@@ -72,6 +72,9 @@ async def rebuild(book, token):
             if inferred:
                 inferred['source_pages']=sorted({p.number for p,_ in instructions});mock.rules=MockRules.model_validate(inferred).model_dump()
         if not mock.rules:issues.append('Confirm printed examination rules, count, duration, marking and solution coverage.')
+        if mock.rules and book.payload.get('destination'):
+            from .structure import rule_exam
+            mock.rules['exam']=rule_exam(book.payload['destination'])
         rules=mock.rules
         if rules:
             if rules.get('unsupported') or rules['mechanic']=='unsupported':issues.append('Printed test mechanics are unsupported; this mock cannot publish.')
@@ -135,6 +138,7 @@ async def rebuild(book, token):
         mock.questions=questions;mock.issues=list(dict.fromkeys(issues))[:500]
         if not questions:mock.issues.append('No complete questions found.')
         mock.state='held' if mock.issues else 'ready';mock.revision+=1
+        if mock.state=='held':mock.publish_requested=False
         if book.payload.get('release_at') and await database_now()>=book.payload['release_at'] and mock.state=='held':mock.missed_release=True
         await fence(book,token);await save_mock(mock)
     for label,mock in known.items():
@@ -153,9 +157,11 @@ async def crop_ref(book,mock,crop,region,role):
 
 
 async def publish_ready(book,token,raw,only_mid=None):
-    if book.paused or not book.payload['auto_publish']:return
+    if book.paused:return
+    dest=book.payload.get('destination')
     for mock in await mocks_for(book):
         if only_mid and mock.id!=only_mid:continue
+        if not (book.payload.get('auto_publish') or mock.publish_requested):continue
         if mock.state!='ready' or mock.issues or mock.published_generation==mock.generation:continue
         if book.payload.get('release_at') and await database_now()>=book.payload['release_at'] and not mock.release_override:
             mock.missed_release=True
@@ -189,15 +195,20 @@ async def publish_ready(book,token,raw,only_mid=None):
             if errors:raise ValueError('; '.join(errors))
             questions.append(q)
         if len(json.dumps(questions).encode())>5*1024*1024:raise ValueError('This mock exceeds the safe content budget.')
-        stamp=await database_now();start=stamp if mock.release_override else book.payload.get('release_at') or stamp
+        stamp=await database_now();start=stamp if mock.release_override else mock.release_at or book.payload.get('release_at') or stamp
+        suffix=f' · v{mock.generation}' if mock.generation>1 else ''
         data={'id':sid,'book_import_id':book.id,'book_series_title':book.payload['title'],'mock_number':mock.order,
-            'title':book.payload['title']+' · '+mock.label+(f' · v{mock.generation}' if mock.generation>1 else ''),
-            'exam':rules['exam'],'test_kind':'mock','full_length':True,'profile_mode':'practice','rules':valid_rules({'minutes':rules['minutes'],'correct':rules['correct'],'wrong':rules['wrong'],'skipped':0}),
+            'title':(mock.label if dest else book.payload['title']+' · '+mock.label)+suffix,
+            'exam':dest['exam_key'] if dest else rules['exam'],'test_kind':'mock','full_length':True,'profile_mode':'practice','rules':valid_rules({'minutes':rules['minutes'],'correct':rules['correct'],'wrong':rules['wrong'],'skipped':0}),
             'questions':questions,'file_ids':sorted({r['file_id'] for q in questions for k in ('q_refs','s_refs') for r in q[k]}),
             'status':'draft','version':0,'revision':1,'source':'Owner-uploaded '+book.payload['filename'],'attribution':'Original book source; owner-confirmed content-use rights.',
             'rights_upload':True,'rights_publish':True,'rights_report':True,'audience':'all','allowed_emails':[],'allowed_phones':[],'expires':'',
             'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False),'created_at':now(),'created_by':book.owner_id}
         if rules['mechanic']=='bitsat_bonus':data['rules']['bonus_rule']='answer_all_main_then_lock'
+        if dest:
+            from .structure import next_order
+            if 'catalog_base' not in book.payload:book.payload['catalog_base']=await next_order(dest['section_id'])
+            data.update(catalog_section_id=dest['section_id'],catalog_order=book.payload['catalog_base']+mock.order)
         if data['competition']:
             if mock.release_override:raise ValueError('An expired competitive window needs a new edition and future schedule.')
             data['end_at']=book.payload['closes_at']
@@ -207,6 +218,6 @@ async def publish_ready(book,token,raw,only_mid=None):
         if mock.set_id and mock.set_id!=sid:
             await sets.update_one({'id':mock.set_id,'book_import_id':book.id},{'$set':{'status':'withdrawn','live_enabled':False}})
             if mock.set_id not in mock.history:mock.history.append(mock.set_id)
-        mock.set_id=sid;mock.published_generation=mock.generation;mock.state='scheduled' if start>stamp else 'published';await save_mock(mock)
+        mock.set_id=sid;mock.published_generation=mock.generation;mock.publish_requested=False;mock.state='scheduled' if start>stamp else 'published';await save_mock(mock)
         book.payload.setdefault('metrics',{}).setdefault('first_ready_seconds',max(0,now()-book.created_at))
         await audit(book.owner_id,'Book mock published',sid,'Original keys and source evidence retained; previous attempts unchanged.')

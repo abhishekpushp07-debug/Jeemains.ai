@@ -79,6 +79,8 @@ export const post = (path, data = {}) =>
   api(path, { method: "POST", body: JSON.stringify(data) });
 export const put = (path, data) =>
   api(path, { method: "PUT", body: JSON.stringify(data) });
+export const patch = (path, data) =>
+  api(path, { method: "PATCH", body: JSON.stringify(data) });
 export async function downloadFile(path, filename) {
   const res = await fetchWithSession(path);
   if (!res.ok)

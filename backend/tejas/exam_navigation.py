@@ -3,29 +3,14 @@ from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 from .auth import current
-from .catalog import available, PROJECT
+from .catalog import PROJECT
 from .content import summary
 from .db import attempts, sets, now, db
 from .canonical import EPOCH_NOW
+from .structure import CHAPTER_FILTER, MOCK_FILTER, ORDER, exam_doc, section_by_slug, section_view, live_query, visibility
 
 router = APIRouter(prefix='/api/exam-navigation', tags=['Exam navigation'])
-EXAMS = {'jee-main': 'JEE Main', 'bitsat': 'BITSAT', 'comedk': 'COMEDK'}
 PAGE_SIZE = 12
-CHAPTER_FILTER = {'$or': [
-    {'chapter_book_id': {'$exists': True, '$nin': [None, '']}},
-    {'test_kind': 'chapter'},
-]}
-MOCK_FILTER = {'$and': [
-    {'$or': [{'chapter_book_id': {'$exists': False}}, {'chapter_book_id': None}, {'chapter_book_id': ''}]},
-    {'$or': [{'test_kind': 'mock'}, {'full_length': True}]},
-    {'test_kind': {'$nin': ['chapter', 'pyq']}},
-]}
-
-
-def exam_name(slug):
-    if slug not in EXAMS:
-        raise HTTPException(404, 'This exam is not supported.')
-    return EXAMS[slug]
 
 
 def classify_set(s):
@@ -46,6 +31,7 @@ class NavigationCatalogue(BaseModel):
     total: int
     page: int
     pages: int
+    section: dict = Field(default_factory=dict)
 
 
 class NavigationHistory(BaseModel):
@@ -56,34 +42,23 @@ class NavigationHistory(BaseModel):
     pages: int
 
 
-def live_query(user, exam, kind, search=''):
-    q = available(user, exam, search)
-    q['qa_only'] = {'$ne': True}
-    q['$and'].extend([
-        CHAPTER_FILTER if kind == 'chapters' else MOCK_FILTER,
-        {'$or': [{'live_enabled': {'$exists': False}}, {'live_enabled': True}]},
-        {'$or': [{'start_at': {'$exists': False}}, {'$expr': {'$lte': ['$start_at', EPOCH_NOW]}}]},
-        {'$or': [{'end_at': {'$exists': False}}, {'$expr': {'$gt': ['$end_at', EPOCH_NOW]}}]},
-    ])
-    return q
-
-
 @router.get('/{slug}/catalogue', response_model=NavigationCatalogue)
-async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters',
+async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters', section: str = Query('', max_length=60),
                     subject: str = Query('', max_length=100), q: str = Query('', max_length=100),
                     page: int = Query(1, ge=1, le=10000), user=Depends(current)):
-    exam = exam_name(slug)
-    query = live_query(user, exam, kind, q)
+    await visibility()
+    exam = await exam_doc(slug, user)
+    found = await section_by_slug(slug, section or kind, user)
+    kind = 'chapters' if found['layout'] == 'chapters' else 'mocks'
+    query = live_query(user, exam, found, q)
     if subject:
         query['$and'].append({'$or': [{'chapter_subject': subject}, {'questions.subject': subject}]})
     total = await sets.count_documents(query)
-    rows = await sets.find(query, {**PROJECT, 'test_kind': 1, 'full_length': 1}).sort(
-        [('chapter_subject', 1), ('chapter_number', 1), ('mock_number', 1), ('created_at', -1), ('id', 1)]
-    ).skip((page - 1) * PAGE_SIZE).limit(PAGE_SIZE).to_list(PAGE_SIZE)
+    rows = await sets.find(query, {**PROJECT, 'test_kind': 1, 'full_length': 1}).sort(ORDER).skip((page - 1) * PAGE_SIZE).limit(PAGE_SIZE).to_list(PAGE_SIZE)
     subjects = []
     if kind == 'chapters':
         subjects = await sets.aggregate([
-            {'$match': live_query(user, exam, kind)},
+            {'$match': live_query(user, exam, found)},
             {'$project': {'subjects': {'$cond': [
                 {'$ne': [{'$ifNull': ['$chapter_subject', '']}, '']},
                 ['$chapter_subject'], {'$setUnion': ['$questions.subject', []]},
@@ -108,7 +83,7 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters',
                 value['status'] = 'completed'
             latest[a['_id']] = value
     saved_ids = {d['set_id'] async for d in db.tejas_saved_tests.find({'user_id': user['id'], 'set_id': {'$in': [s['id'] for s in rows]}}, {'_id': 0, 'set_id': 1})} if rows else set()
-    return NavigationCatalogue(exam=exam, kind=kind, total=total, page=page,
+    return NavigationCatalogue(exam=exam['name'], kind=kind, section=section_view(found), total=total, page=page,
         pages=max(1, (total + PAGE_SIZE - 1) // PAGE_SIZE),
         subject_counts={s['_id']: s['count'] for s in subjects if s['_id']},
         items=[{**summary(s), 'test_kind': classify_set(s), 'attempt': latest.get(s['id']), 'saved': s['id'] in saved_ids} for s in rows])
@@ -119,7 +94,8 @@ async def history(slug: str, kind: Literal['all', 'mock', 'pyq', 'chapter', 'pra
                   days: Literal['all', '7', '30', '90'] = 'all',
                   page: int = Query(1, ge=1, le=10000), user=Depends(current)):
     from .attempts import finalize
-    exam = exam_name(slug)
+    await visibility()
+    exam = (await exam_doc(slug, user))['key']
     match = {'user_id': user['id'], 'exam': exam, 'mode': {'$ne': 'preview'}}
     if days != 'all':
         match['started_at'] = {'$gte': now() - int(days) * 86400}

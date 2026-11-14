@@ -85,6 +85,8 @@ def valid_rules(r):
 
 
 def permitted(s, u=None, series_schedule=False, *, at):
+    if s.get('owner_unlive'):
+        return False
     if s.get('series_import') and (not s.get('series_date') or not s.get('live_enabled')):
         return False
     if s.get('series_date') and not series_schedule:
@@ -118,7 +120,6 @@ def summary(s):
             k: s.get(k)
             for k in [
                 "id",
-                "title",
                 "exam",
                 "year",
                 "status",
@@ -129,8 +130,10 @@ def summary(s):
                 "created_at",
                 "test_kind", "full_length", "mock_number", "series_id", "series_date",
                 "chapter_book_id", "chapter_number", "chapter_subject", "solution_kind", "start_at", "end_at", "live_enabled",
+                "catalog_section_id",
             ]
         },
+        "title": s.get("display_title") or s.get("title"),
         "count": len(qs),
         "approved_count": sum(q.get("approved", False) for q in qs),
         "subjects": list(dict.fromkeys(q["subject"] for q in qs if q.get("subject"))),
@@ -154,12 +157,13 @@ async def catalogue(exam: str = "", q: str = "", page: int = 1):
 
 @router.get("/sets/{id}")
 async def set_detail(id: str):
+    from .structure import hidden_from, path_for
     s = await get(sets, id)
-    if s["status"] != "published" or not permitted(s, at=await database_now()):
+    if s["status"] != "published" or not permitted(s, at=await database_now()) or await hidden_from(s, None):
         raise HTTPException(
             404, "This practice set is not available for public practice yet."
         )
-    return summary(s)
+    return {**summary(s), 'catalog_path': await path_for(s)}
 
 
 @router.get("/studio/sets")

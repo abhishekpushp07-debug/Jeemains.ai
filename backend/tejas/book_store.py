@@ -129,7 +129,7 @@ async def book_view(book, detail=True):
     return {'id':book.id,'title':p['title'],'filename':p['filename'],'state':book.state,'revision':book.revision,
         'size':p['size'],'sha256':p['sha256'],'edition':p.get('edition',''),'chunk_size':CHUNK,'received_parts':sorted(r['number'] for r in parts),
         'pages':p.get('pages',0),'read_pages':p.get('read_pages',0),'scanned_pages':p.get('scanned_pages',0),
-        'message':p.get('message',''),'auto_publish':p['auto_publish'],'paused':book.paused,
+        'message':p.get('message',''),'auto_publish':p['auto_publish'],'paused':book.paused,'destination':p.get('destination'),
         'release_at':p.get('release_at'),'competitive':p.get('competitive',False),'closes_at':p.get('closes_at'),
         'counts':{'detected':len(items),**counts,'complete':counts['ready']+counts['published']+counts['scheduled'],
                   'awaiting_budget':sum(a['state']=='budget_required' for a in allowances)},

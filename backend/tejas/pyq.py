@@ -42,7 +42,7 @@ class PyqCatalogue(BaseModel):
 async def catalogue(response: Response, u=Depends(current)):
     response.headers['Cache-Control'] = 'private, no-store'
     match = {**available(u, 'JEE Main'), 'test_kind': 'pyq', 'qa_only': {'$ne': True}, 'is_deleted': {'$ne': True}}
-    fields = {'_id': 0, 'id': 1, 'title': 1, 'pyq_date': 1, 'pyq_year': 1, 'pyq_shift': 1,
+    fields = {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'pyq_date': 1, 'pyq_year': 1, 'pyq_shift': 1,
               'rules.minutes': 1, 'rules.correct': 1, 'count': {'$size': '$questions'}}
     rows = await db.tejas_sets.find(match, fields).sort([('pyq_date', -1), ('pyq_shift', 1), ('id', 1)]).limit(500).to_list(500)
     stamp = await database_now()
@@ -66,7 +66,7 @@ async def catalogue(response: Response, u=Depends(current)):
         if attempt and attempt['status'] == 'active' and attempt.get('deadline') and attempt['deadline'] <= stamp:
             attempt['status'] = 'completed'
             results[row['id']] = attempt['id']
-        papers.append(PyqPaper(id=row['id'], title=row['title'], exam_date=row['pyq_date'], year=row['pyq_year'],
+        papers.append(PyqPaper(id=row['id'], title=row.get('display_title') or row['title'], exam_date=row['pyq_date'], year=row['pyq_year'],
                               shift=row['pyq_shift'], count=row['count'], minutes=row['rules']['minutes'],
                               maximum=row['count'] * row['rules']['correct'], attempt=attempt,
                               latest_result_id=results.get(row['id']), attempt_count=own.get('count', 0)))

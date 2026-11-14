@@ -43,6 +43,7 @@ from tejas import (
     pyq_import,
     students,
     book_imports,
+    structure,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -53,6 +54,7 @@ from tejas_storage import StorageError
 async def lifespan(app):
     await indexes()
     await auth.seed_owner()
+    await structure.seed()
     from tejas.mock_solutions import solutions
     await solutions.create_index('id', unique=True)
     await solutions.create_index([('state', 1), ('order', 1)])
@@ -209,6 +211,7 @@ for module in [
     pyq_import,
     students,
     book_imports,
+    structure,
 ]:
     app.include_router(module.router)
 

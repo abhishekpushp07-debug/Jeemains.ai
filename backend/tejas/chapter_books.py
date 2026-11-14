@@ -127,8 +127,8 @@ async def list_books(u=Depends(staff)):
 
 @router.post('/studio/chapter-books',response_model=BookView,status_code=202)
 async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
-    async with request.form(max_files=1,max_fields=1) as form:
-        if set(form.keys())!={'file','request_id'} or len(form.multi_items())!=2: raise HTTPException(422,'Upload one chapter-book PDF and its request identifier.')
+    async with request.form(max_files=1,max_fields=2) as form:
+        if not {'file','request_id'}<=set(form.keys())<={'file','request_id','section_id'} or len(form.multi_items())!=len(form.keys()): raise HTTPException(422,'Upload one chapter-book PDF and its request identifier.')
         try: request_id=str(uuid.UUID(str(form['request_id'])))
         except ValueError: raise HTTPException(422,'A UUID upload identifier is required.')
         f=form['file']
@@ -142,12 +142,16 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         if prior['sha256']!=sha:raise HTTPException(409,'That upload identifier belongs to a different file.')
         old=await books.find_one({'id':identity},{'_id':0})
         if old:return await book_view(old)
+        dest=None
+        if form.get('section_id'):
+            from .structure import destination
+            dest=await destination(str(form['section_id']),('chapters',))
         if SLOTS.locked():raise HTTPException(429,'A chapter book is processing. Retry shortly.',headers={'Retry-After':'5'})
         fid=str(uuid.uuid5(uuid.UUID(identity),'source'))
         path=await run_in_threadpool(put_object,f'tejas/chapter-books/{identity}/{fid}.pdf',raw)
         source={'id':fid,'path':path,'sha256':sha,'kind':'combined','name':Path(f.filename).name[:160],'size':len(raw),'set_id':identity,'created_at':now(),'is_deleted':False}
         await files.update_one({'id':fid},{'$setOnInsert':source},upsert=True)
-        record={'id':identity,'title':Path(f.filename).stem.replace('_',' ')[:160],'source':source,'status':'queued','revision':0,'created_at':now(),'created_by':u['id']}
+        record={'id':identity,'title':Path(f.filename).stem.replace('_',' ')[:160],'source':source,'status':'queued','revision':0,'created_at':now(),'created_by':u['id'],**({'destination':dest} if dest else {})}
         await books.update_one({'id':identity},{'$setOnInsert':record},upsert=True)
         bg.add_task(process_book,identity)
         return await book_view(record)
@@ -170,6 +174,10 @@ async def process_book(identity):
                 result['source_minutes']=result['minutes']
                 result['minutes']={'Physics':90,'Mathematics':120,'Chemistry':70}[result['subject']]
                 for chapter in result['chapters']: chapter['minutes']=result['minutes']
+            dest=r.get('destination')
+            from .structure import RULE_EXAMS
+            if dest and dest['exam_key'] in RULE_EXAMS and dest['exam_key']!=result.get('exam','BITSAT'):
+                raise ValueError(f"This book reads as {result.get('exam','BITSAT')}, but it was uploaded to {dest['exam_name']}. Upload it again under {result.get('exam','BITSAT')}.")
             parsed_sha=hashlib.sha256(json.dumps(result).encode()).hexdigest()
             for c in result['chapters']:
                 if not await books.find_one(fence,{'id':1}):return
@@ -190,6 +198,7 @@ async def process_book(identity):
                    'rights_upload':True,'rights_publish':True,'rights_report':True,'rights_attested_by':r['created_by'],
                    'competition':False,'live_enabled':False,'solution_kind':'supplied_worked' if worked else 'answer_key_only','verification':c['verification'],
                    'independent_check':evidence,'start_page':c['start_page'],'end_page':c['end_page'],'key_page':c['key_page']}
+                if dest:s.update(catalog_section_id=dest['section_id'])
                 await sets.update_one({'id':sid},{'$setOnInsert':s},upsert=True)
             await books.update_one(fence,{'$set':{'status':'ready','subject':result['subject'],'pages':result['pages'],'parsed_sha256':parsed_sha,
                 'exam':result.get('exam','BITSAT'),'minutes':result.get('minutes',60),'solution_kind':result.get('solution_kind','answer_key_only'),

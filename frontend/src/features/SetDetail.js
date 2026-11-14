@@ -28,7 +28,7 @@ export default function SetDetail() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
-  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? '/series/all-india-jee' : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
+  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? '/series/all-india-jee' : s.catalog_path ? s.catalog_path+((s.chapter_book_id||s.test_kind==='chapter')&&s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):'') : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
     setS(null); setError(''); setChecked(false); setConfirmed(false);

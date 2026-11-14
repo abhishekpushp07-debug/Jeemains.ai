@@ -272,8 +272,12 @@ from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 from .live_series import Assignment
 
 from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap
+from .structure import ExamInput, ExamPatch, SectionInput, SectionPatch, OrderInput, TestPatch
 
 MODELS = {
+    'structure.create_exam': ExamInput, 'structure.update_exam': ExamPatch,
+    'structure.create_section': SectionInput, 'structure.update_section': SectionPatch,
+    'structure.order_sections': OrderInput, 'structure.order_tests': OrderInput, 'structure.update_test': TestPatch,
     'book_imports.create': UploadInput,
     'book_imports.map_range': RangeMap,
     'book_imports.repair_page': PageRepair,

@@ -34,12 +34,14 @@ async def create(body:UploadInput,u=Depends(owner)):
     existing=await db.tejas_books.find_one({'_id':id})
     if existing:
         book=Book.from_mongo(existing)
-        if book.removed:raise HTTPException(409,'Access was removed from this import. Use a new edition label to deliberately create a new import.')
+        if book.removed:raise HTTPException(409,'This PDF was uploaded before and its access was removed, so it cannot be imported again.')
         return await book_view(book)
-    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump()|{'rights_attested_at':now(),'rights_attested_by':u['id']})
+    from .structure import destination
+    dest=await destination(body.section_id,('list',))
+    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump()|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']})
     try:await db.tejas_books.insert_one(book.to_mongo())
     except DuplicateKeyError:return await book_view(await load_book(id,u))
-    await audit(u['id'],'Book upload initiated',id,'Rights confirmed; automatic clean publication selected='+str(body.auto_publish))
+    await audit(u['id'],'Book upload initiated',id,f"Rights confirmed; destination {dest['exam_name']} › {dest['section_name']}; publication only on owner request")
     return await book_view(book)
 
 
@@ -226,6 +228,14 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
             book.paused=False;book.state='received' if not book.payload.get('source_path') else 'reading' if book.payload.get('read_pages',0)<book.payload.get('pages',0) else 'matching'
             if body.action=='publish':book.payload['auto_publish']=True
             run=True
+        elif body.action=='publish_ready':
+            if book.state=='uploading':raise HTTPException(409,'Finish transferring the PDF first.')
+            if body.release_at and body.release_at<=await database_now():raise HTTPException(422,'Choose a future date and time, or publish now.')
+            picked=[m for m in await mocks_for(book) if m.state=='ready' and not m.issues and m.published_generation!=m.generation and (not body.mock_id or m.id==body.mock_id)]
+            if not picked:raise HTTPException(409,'This mock is not ready. Fix its held problems first.' if body.mock_id else 'No mocks are ready yet. Held mocks stay private until their problems are fixed.')
+            for m in picked:
+                m.publish_requested=True;m.release_at=body.release_at;m.revision+=1;await save_mock(m)
+            book.paused=False;book.state='matching';run=True
         else:
             row=await db.tejas_book_mocks.find_one({'_id':body.mock_id,'book_id':id})
             if not row:raise HTTPException(404,'Mock not found.')
@@ -298,6 +308,7 @@ async def series_detail(id:str,u=Depends(current)):
     from .catalog import available,PROJECT
     from .content import summary
     query=available(u);query['book_import_id']=id
-    rows=await sets.find(query,PROJECT|{'book_series_title':1}).sort('mock_number',1).to_list(None)
+    rows=await sets.find(query,PROJECT|{'book_series_title':1,'test_kind':1,'full_length':1}).sort('mock_number',1).to_list(None)
     if not rows:raise HTTPException(404,'No released mocks in this series.')
-    return {'id':id,'title':rows[0]['book_series_title'],'published_count':len(rows),'items':[summary(s) for s in rows]}
+    from .structure import path_for
+    return {'id':id,'title':rows[0]['book_series_title'],'published_count':len(rows),'path':await path_for(rows[0]),'items':[summary(s) for s in rows]}

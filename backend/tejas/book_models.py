@@ -13,8 +13,9 @@ class UploadInput(Input):
     sha256: str = Field(pattern=r'^[a-f0-9]{64}$')
     size: int = Field(gt=0, le=100*1024*1024)
     edition: str = Field(default='', max_length=80)
+    section_id: str = Field(default='', max_length=100)
     rights_confirmed: Literal[True]
-    auto_publish: bool = True
+    auto_publish: bool = False
     release_at: float | None = Field(default=None, gt=0)
     competitive: bool = False
     closes_at: float | None = Field(default=None, gt=0)
@@ -111,9 +112,10 @@ class RuleRepair(Input):
 
 class Control(Input):
     revision: int = Field(ge=0)
-    action: Literal['pause','resume','retry','remove','publish','new_version','pause_mock','resume_mock','release_now']
+    action: Literal['pause','resume','retry','remove','publish','publish_ready','new_version','pause_mock','resume_mock','release_now']
     mock_id: str = Field(default='', max_length=80)
     reason: str = Field(default='', max_length=1000)
+    release_at: float | None = Field(default=None, gt=0)
 
 
 class Allowance(Input):
@@ -168,6 +170,8 @@ class BookMock(BaseDocument):
     original_solution_identities: list[str] = Field(default_factory=list)
     release_override: bool = False
     publish_hold: str = ''
+    publish_requested: bool = False
+    release_at: float | None = None
 
 
 class UploadPart(BaseDocument):

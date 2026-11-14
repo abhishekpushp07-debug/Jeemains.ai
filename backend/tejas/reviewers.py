@@ -8,6 +8,12 @@ from .db import users, audit, uid, now
 router = APIRouter(prefix="/api/studio", tags=["Reviewer authorization"])
 
 
+@router.get("/reviewers")
+async def list_reviewers(u=Depends(owner)):
+    rows = await users.find({"role": "reviewer"}, {"_id": 0, "id": 1, "email": 1, "created_at": 1}).sort("email", 1).limit(200).to_list(200)
+    return {"items": rows}
+
+
 class Access(BaseModel):
     email: EmailStr
     role: str
