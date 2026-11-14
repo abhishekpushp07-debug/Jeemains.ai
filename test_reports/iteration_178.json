@@ -1,0 +1,53 @@
+{
+  "summary": "Library, replace-via-upload, Ready-to-publish desk, Held fixer and AITS days (pick day + auto-fill + clear) were tested in a new isolated harness: /app/backend/tests/library_aits_iso180.py, a disposable DB that is dropped at the end, with mocked storage and AI. Result: 125 checks, 123 PASS, 2 FAIL. Both failures are real AITS bugs in live_series.py. The harness confirmed that no AI was called anywhere, including 45 owner fixes of held AITS numerical questions. Also verified: one-time cleanup (fail -> lease reset -> retry -> done; idempotent; PYQ, JEE Main mocks and series untouched), archive/restore/export, PYQ refusals, owner-only auth, that student history is kept, and that old tests stay live until the replacement is published and then move to the Library in the same catalog slot. Preview frontend was checked with owner login, non-destructive only: real POST/PUT/DELETE calls were blocked or aborted by Playwright route guards, and some list data was injected for render checks. Library, Content section bulk controls and Move-to-Library confirm (opened then cancelled), PYQ panel without controls, Upload wizard AITS choice and replace note, Review > Ready tab with Ready popover (now/schedule) and held 'Fix' link, Schedule AITS panel (upload link, assign + replace checkbox, fill form, Clear future confirm cancelled) and 390px mobile all render without errors. Owner session logged out at the end.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/studio/all-india-jee/fill", "issue": "Fill can never give a day again to AITS papers that are already built but unassigned (for example after 'Clear all future days' or removing one assignment); it returns 409 'Select a published public JEE Main paper...'. RCA: live_series.py line 309 loads the built sets with projection {'questions': 0}, so assign_set() -> valid_paper(s) at line 183 sees no questions and fails. Repro in the harness: assign, fill, clear all, fill again -> 409. Fix: do not drop questions in that query (or re-read the full set inside assign_set).", "priority": "HIGH"},
+      {"endpoint": "POST /api/studio/all-india-jee/assign (replace:true)", "issue": "The paper already on the day is removed before the new assignment is checked. live_series.py lines 279-280 call free_day() first, and only then assign_book_mocks() or assign_set() validate. If the new mock or paper is then refused (rule problem, held, stale revision), the API returns 409 but the old paper has already lost its day, and a series_import paper is also set to status 'withdrawn'. Repro: a paper on 2026-12-20, then assign a 3-question AITS book mock there with replace:true -> 409, and the old paper now has series_date=None and status 'withdrawn'. Fix: validate the new item first, then free the day. The same pattern exists in fill() with replace:true: free_day() at line 336 runs inside the loop before assign_set() and assign_book_mocks(), so a later failure leaves days half-cleared.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/admin/library/archive {section_id} + restore", "issue": "archive_sources() archives and pauses every book aimed at the section, including books whose mocks were ready but never published, so they have no sets. The Library lists only sets, so such a book can never be restored from the UI. Restoring the section's tests does not un-archive it, because restore_sets only handles sources linked to the restored sets. It also disappears from the Ready desk. Seen in the harness: after section archive and restore of A,B, the book stays archived=True, paused=True."},
+      {"endpoint": "POST /api/admin/library/archive {ids}", "issue": "PYQ refusal only checks test_kind=='pyq'. A test placed in a pyq-kind section (catalog_section_id 'jee-main:pyq') whose test_kind is missing or different could still be archived. Consider also refusing ids whose catalog_section_id is a pyq section."},
+      {"endpoint": "POST /api/studio/imports, POST /api/studio/chapter-books (field 'replace')", "issue": "Comma-separated ids are not trimmed (imports.py line 123, chapter_books.py line 150: kept only if x.strip(), but x itself is used unstripped), so 'id1, id2' gives a 409 'no longer in this section'."},
+      {"endpoint": "POST /api/studio/chapter-books", "issue": "The queued response shows exam 'BITSAT' (default) even when section_id is jee-main:chapters, until the worker reads the PDF. This is cosmetic, but the wizard may show the wrong exam at first."},
+      {"endpoint": "Native book reader (AITS)", "issue": "This is a product/usability issue, not a crash. In a book with JEE Main-style numerical questions (no options), every numerical question is held with 'confirm response type, options and continuation', so each 75-question AITS mock needs 15 manual Held-fixer saves before it is ready (45 saves for 3 mocks in the harness). Consider a bulk 'these are numerical, the keys are as printed' action per mock or subject."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "UploadWizard ReplaceNote", "issue": "/super-admin/upload/new?exam=jee-main&section=jee-main:pyq&replace=all shows the 'Replacing every test...' note for a PYQ section (UploadWizard.js line 80 only excludes kind 'series'). The backend refuses it with 422, but the UI should not suggest PYQ can be replaced.", "selector": "[data-testid=wizard-replace-note]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Review > Ready to publish > ReadyAction popover", "issues": ["The 'Schedule' button (ready-action-*-schedule) sticks out past the right edge of the popover next to the date input", "Uses the browser's native datetime-local picker (mm/dd/yyyy) instead of the shadcn calendar/time picker"]},
+      {"screen": "Exams & Content > All India Test Series row", "issues": ["The action label is 'Upload book or paper', while the brief said 'Add book or paper'. Wording only; functionally fine"]},
+      {"screen": "Schedule AITS panel", "issues": ["The 'Upload a book or paper' button sits tight under the instruction text with no top margin", "The Fill form has an uneven gap between the select row and the 'Replace papers already on those days' checkbox"]},
+      {"screen": "Upload wizard, AITS file types", "issues": ["AITS also offers 'Excel workbook'. The brief said combined book / one paper; confirm this is intended"]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/library_aits_iso180.py"],
+  "action_items": [
+    "Fix live_series.fill: do not project out questions for the built sets passed to assign_set (line 309), so refilling after clear or unassign works",
+    "Fix assign(replace:true) and fill(replace:true): validate the new mock or paper before free_day() unassigns or withdraws the existing paper; avoid half-applied fills",
+    "Library: make archived books that have no sets (ready, unpublished mocks) restorable, or do not archive them as part of a section archive",
+    "Trim ids in the 'replace' form field (imports.py, chapter_books.py)",
+    "Hide ReplaceNote for pyq sections in UploadWizard",
+    "Fix the ReadyAction popover Schedule button overflow; consider the shadcn date/time picker",
+    "Consider a bulk confirm for numerical questions in the Held fixer (AITS books)"
+  ],
+  "critical_code_review_comments": [
+    "live_series.py assign(): free_day() runs before validation, so a refused request is destructive",
+    "live_series.py fill(): built set query excludes questions, so valid_paper always fails for built sets",
+    "library.archive_sources(): books aimed at the section are archived with no restore path when they have no sets",
+    "library.archive(): PYQ guard relies only on test_kind; the GUARD in archive_sets also only uses test_kind",
+    "export GET writes an audit entry on every download. Fine, just noting that it writes"
+  ],
+  "updated_files": ["/app/backend/tests/library_aits_iso180.py"],
+  "success_rate": {"backend": "98.4% (123/125 harness checks)", "frontend": "100% of non-destructive render/open/cancel checks; HeldFixer panel on the book page not exercised with real data (preview has no held mock)"},
+  "test_credentials": "Owner ADMIN_EMAIL/ADMIN_PASSWORD read from backend/.env, never printed; owner session logged out at the end. Harness uses random staff and student accounts inside its own dropped DB.",
+  "seed_data_creation": "None in preview. The harness creates TEST_ data only in tejas_isolated_book170_<hex> and drops it.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && timeout 290 python tests/library_aits_iso180.py (about 2-3 min; prints PASS/FAIL and drops its DB). It contains build_aits(), which makes a valid 75-question JEE Main AITS book (3 mocks); its numerical questions come out held and are fixed through /fix in a loop. Expected after the fixes: 'refill skips taken 12-10' and 'refused replace keeps old paper on its day' pass. Preview frontend checks used Playwright page.route to block mutations and to inject waiting/studio/section-tests data. Preview has 222 archived tests (78 JEE chapters, 94 BITSAT chapters, 50 BITSAT mocks), no AITS books, and no non-PYQ live tests. Do not mutate preview.",
+  "rca of the issue": "Fill-refill bug: live_series.py:309 sets.find(..., {'_id':0,'questions':0}), then line 338 assign_set(s) -> line 183 valid_paper(s) needs s['questions'] -> 409. Replace bug: live_series.py:279-280 free_day(day,u) runs before the item checks at 284 and 297; free_day -> unassign_set sets status 'withdrawn' for series_import papers. Mitigation: run the checks first (or a dry-run validate step), then free the day, ideally under the book lock."
+}

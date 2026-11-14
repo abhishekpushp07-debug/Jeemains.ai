@@ -147,7 +147,7 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         dest=None
         if form.get('section_id'):
             from .structure import destination
-            replace=[x for x in str(form.get('replace','')).split(',') if x.strip()][:1000]
+            replace=[x.strip() for x in str(form.get('replace','')).split(',') if x.strip()][:1000]
             dest=await destination(str(form['section_id']),('chapters',),replace)
         if old:return await book_view(old)
         if SLOTS.locked():raise HTTPException(429,'A chapter book is processing. Retry shortly.',headers={'Retry-After':'5'})
@@ -155,7 +155,8 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         path=await run_in_threadpool(put_object,f'tejas/chapter-books/{identity}/{fid}.pdf',raw)
         source={'id':fid,'path':path,'sha256':sha,'kind':'combined','name':Path(f.filename).name[:160],'size':len(raw),'set_id':identity,'created_at':now(),'is_deleted':False}
         await files.update_one({'id':fid},{'$setOnInsert':source},upsert=True)
-        record={'id':identity,'title':Path(f.filename).stem.replace('_',' ')[:160],'source':source,'status':'queued','revision':0,'created_at':now(),'created_by':u['id'],**({'destination':dest} if dest else {})}
+        from .structure import RULE_EXAMS
+        record={'id':identity,'title':Path(f.filename).stem.replace('_',' ')[:160],'source':source,'status':'queued','revision':0,'created_at':now(),'created_by':u['id'],**({'destination':dest} if dest else {}),**({'exam':dest['exam_key']} if dest and dest.get('exam_key') in RULE_EXAMS else {})}
         await books.update_one({'id':identity},{'$setOnInsert':record},upsert=True)
         from .structure import mark_replacing
         await mark_replacing(dest,record['title'])

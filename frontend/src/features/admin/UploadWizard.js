@@ -76,7 +76,7 @@ export default function UploadWizard(){
  useEffect(()=>{api('/admin/catalog').then(d=>{setCatalog(d);setError('');}).catch(e=>setError(e.message));},[reload]);
  const exam=catalog?.items.find(e=>e.slug===params.get('exam'));
  const sections=exam?(exam.slug==='jee-main'?[...exam.sections,AITS]:exam.sections):[];
- const section=sections.find(s=>s.id===params.get('section'));
+ const section=sections.find(s=>s.id===params.get('section')&&s.kind!=='pyq');
  const replace=section&&section.kind!=='series'?params.get('replace')||'':'';
  const type=section&&TYPES[params.get('type')]?.layouts.includes(section.layout)?params.get('type'):'';
  const step=done?5:!section?1:!type?2:Number(params.get('step'))===3?3:2;

@@ -120,7 +120,7 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
         dest=None
         if form.get('section_id'):
             from .structure import destination
-            replace=[x for x in str(form.get('replace','')).split(',') if x.strip()][:1000]
+            replace=[x.strip() for x in str(form.get('replace','')).split(',') if x.strip()][:1000]
             dest=await destination(str(form['section_id']),('list',) if format=='pdf' else ('list','chapters'),replace)
         async with SLOTS:
             for source,raw in zip(sources,payloads):

@@ -29,12 +29,22 @@ function Group({g,picked,onCheck,onRestore,busy}){
  </section>;
 }
 
+const UPLOAD={book:'Combined book',chapter_book:'Chapter book',import:'Paper / Excel'};
+
+function Uploads({items,busy,onRestore}){
+ if(!items.length)return null;
+ return <section className="admin-panel admin-uploads-panel" data-testid="library-uploads">
+  <div className="admin-panel-head"><div><h2>Uploads in the Library</h2><p>Their mocks were never published. Restore one to see it again in Upload and on the Ready desk.</p></div></div>
+  <ul className="admin-list">{items.map(x=><li key={x.kind+x.id} className="admin-row" data-testid={'library-upload-'+x.id}><div className="admin-row-main"><strong>{x.title}</strong><small>{[UPLOAD[x.kind],x.place,`moved ${when(x.archived_at)}`].filter(Boolean).join(' · ')}</small></div><Button variant="outline" size="sm" disabled={busy} onClick={()=>onRestore([],[{kind:x.kind,id:x.id}])} data-testid={'library-upload-restore-'+x.id}><RotateCcw size={15}/>Restore</Button></li>)}</ul>
+ </section>;
+}
+
 export default function AdminLibrary(){
  const [data,setData]=useState(null),[error,setError]=useState(''),[picked,setPicked]=useState(new Set()),[busy,setBusy]=useState(false),[reload,setReload]=useState(0),[q,setQ]=useState(''),[zipping,setZipping]=useState(false);
  useEffect(()=>{api('/admin/library').then(d=>{setData(d);setError('');}).catch(e=>setError(e.message));},[reload]);
  const groups=useMemo(()=>{const map=new Map();(data?.items||[]).filter(t=>!q||t.title.toLowerCase().includes(q.toLowerCase())).forEach(t=>{const key=t.section_id||'none:'+t.exam_name;if(!map.has(key))map.set(key,{sid:t.section_id,exam:t.exam_name||'Other',section:t.section_name,items:[]});map.get(key).items.push(t);});return [...map.values()];},[data,q]);
  function check(id,on){setPicked(p=>{const n=new Set(p);on?n.add(id):n.delete(id);return n;});}
- async function restore(ids){setBusy(true);try{const r=await post('/admin/library/restore',{ids});invalidateCatalog();toast.success(r.message);setPicked(new Set());setReload(n=>n+1);}catch(e){toast.error(e.message);}finally{setBusy(false);}}
+ async function restore(ids,uploads=[]){setBusy(true);try{const r=await post('/admin/library/restore',{ids,uploads});invalidateCatalog();toast.success(r.message);setPicked(new Set());setReload(n=>n+1);}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  async function zipAll(){setZipping(true);try{await downloadFile('/admin/library/export','jeelive-library.zip');}catch(e){toast.error(e.message);}finally{setZipping(false);}}
  return <div className="admin-page" data-testid="admin-library-page">
   <AdminCrumbs items={[{label:'Super Admin',to:'/super-admin'},{label:'Library'}]}/>
@@ -43,6 +53,7 @@ export default function AdminLibrary(){
   {!data&&!error&&<Skeleton className="h-64"/>}
   {data&&<>
    <div className="admin-select-bar" data-testid="library-toolbar"><Search size={16} aria-hidden="true"/><Input value={q} onChange={e=>setQ(e.target.value)} placeholder="Find a test by name" aria-label="Find a test" className="admin-search" data-testid="library-search"/>{picked.size>0&&<><span data-testid="library-selected-count">{picked.size} selected</span><Button size="sm" disabled={busy} onClick={()=>restore([...picked])} data-testid="library-restore-selected"><RotateCcw size={15}/>Restore selected</Button><Button size="sm" variant="ghost" onClick={()=>setPicked(new Set())} data-testid="library-clear-selection">Clear</Button></>}</div>
+   <Uploads items={data.uploads||[]} busy={busy} onRestore={restore}/>
    {!data.items.length?<div className="admin-empty" data-testid="library-empty"><Archive size={22}/><p>The Library is empty. Tests you move here from Exams & Content, or replace with a new upload, appear here.</p></div>:groups.map(g=><Group key={g.sid||g.exam+g.section} g={g} picked={picked} onCheck={check} onRestore={restore} busy={busy}/>)}
   </>}
  </div>;

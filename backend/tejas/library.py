@@ -1,7 +1,7 @@
 """Owner Library: tests taken away from students, kept with every student's old score, restorable and downloadable."""
 import json, logging, os, re, tempfile, zipfile
 from datetime import datetime, timezone
-from typing import Annotated
+from typing import Annotated, Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field
@@ -32,15 +32,29 @@ class ArchiveInput(Payload):
     reason: str = Field(default='', max_length=300)
 
 
+class UploadRef(Payload):
+    kind: Literal['book', 'chapter_book', 'import']
+    id: Identity
+
+
 class RestoreInput(Payload):
-    ids: list[Identity] = Field(min_length=1, max_length=2000)
+    ids: list[Identity] = Field(default_factory=list, max_length=2000)
+    uploads: list[UploadRef] = Field(default_factory=list, max_length=500)
+
+
+UPLOADS = {'book': ('tejas_books', '_id'), 'chapter_book': ('tejas_chapter_books', 'id'), 'import': ('tejas_imports', 'id')}
+
+
+async def pyq_sections():
+    from .structure import sections
+    return [s['id'] for s in await sections.find({'kind': 'pyq'}, {'_id': 0, 'id': 1}).to_list(500)]
 
 
 async def archive_sets(ids, actor, reason):
     ids = list(dict.fromkeys(ids))
     if not ids:
         return 0
-    done = await sets.update_many({'id': {'$in': ids}, 'archived': {'$ne': True}, **GUARD},
+    done = await sets.update_many({'id': {'$in': ids}, 'archived': {'$ne': True}, 'catalog_section_id': {'$nin': await pyq_sections()}, **GUARD},
         {'$set': {'archived': True, 'archived_at': now(), 'archived_by': actor, 'archived_reason': reason[:300]},
          '$unset': {'replace_pending': ''}})
     return done.modified_count
@@ -78,7 +92,39 @@ async def archive_section(section_id, actor, reason):
     return {'tests': tests, 'uploads': await archive_sources(section_id, ids)}
 
 
+async def restore_uploads(refs):
+    n = 0
+    for kind, (name, key) in UPLOADS.items():
+        ids = [r.id for r in refs if r.kind == kind]
+        if not ids:
+            continue
+        if name == 'tejas_books':
+            change = [{'$set': {'paused': {'$ifNull': ['$paused_before_archive', False]}}}, {'$unset': ['archived', 'archived_at', 'paused_before_archive']}]
+        else:
+            change = {'$unset': {'archived': '', 'archived_at': ''}}
+        n += (await db[name].update_many({key: {'$in': ids}, 'archived': True}, change)).modified_count
+    return n
+
+
+async def archived_uploads(rows):
+    """Uploads moved to the Library that have no test of their own in it (their mocks were never published)."""
+    linked = {f: {r.get(f) for r in rows if r.get(f)} for f, _, _ in SOURCES}
+    out = []
+    for b in await db.tejas_books.find({'archived': True, 'removed': False}, {'_id': 1, 'payload.title': 1, 'payload.destination': 1, 'archived_at': 1}).to_list(500):
+        if b['_id'] not in linked['book_import_id']:
+            d = b['payload'].get('destination') or {}
+            out.append({'kind': 'book', 'id': b['_id'], 'title': b['payload']['title'], 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': b.get('archived_at')})
+    for name, kind, field in (('tejas_chapter_books', 'chapter_book', 'chapter_book_id'), ('tejas_imports', 'import', 'import_id')):
+        for r in await db[name].find({'archived': True}, {'_id': 0, 'id': 1, 'title': 1, 'destination': 1, 'archived_at': 1}).to_list(500):
+            if r['id'] not in linked[field]:
+                d = r.get('destination') or {}
+                out.append({'kind': kind, 'id': r['id'], 'title': r.get('title', ''), 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': r.get('archived_at')})
+    return out
+
+
 async def restore_sets(ids):
+    if not ids:
+        return 0
     rows = await sets.find({'id': {'$in': ids}, 'archived': True}, {'_id': 0, 'id': 1, **{f: 1 for f, _, _ in SOURCES}}).to_list(2000)
     if not rows:
         return 0
@@ -123,7 +169,7 @@ async def library(u=Depends(owner)):
     for r, (sid, sname, eslug) in zip(rows, await placed(rows)):
         items.append({**test_view(r, t), 'section_id': sid, 'section_name': sname, 'exam_slug': eslug, 'exam_name': exam_names.get(eslug, r.get('exam') or ''),
                       'archived_at': r.get('archived_at'), 'reason': r.get('archived_reason', ''), 'attempts': taken.get(r['id'], 0)})
-    return {'items': items, 'total': len(items)}
+    return {'items': items, 'total': len(items), 'uploads': await archived_uploads(rows)}
 
 
 @router.post('/admin/library/archive')
@@ -134,7 +180,7 @@ async def archive(body: ArchiveInput, u=Depends(owner)):
     if body.section_id:
         counts = await archive_section(body.section_id, u['id'], reason)
     else:
-        pyq = await sets.count_documents({'id': {'$in': body.ids}, 'test_kind': 'pyq'})
+        pyq = await sets.count_documents({'id': {'$in': body.ids}, '$or': [{'test_kind': 'pyq'}, {'catalog_section_id': {'$in': await pyq_sections()}}]})
         if pyq:
             raise HTTPException(409, 'PYQ papers are never moved to the Library.')
         counts = {'tests': await archive_sets(body.ids, u['id'], reason), 'uploads': 0}
@@ -144,9 +190,13 @@ async def archive(body: ArchiveInput, u=Depends(owner)):
 
 @router.post('/admin/library/restore')
 async def restore(body: RestoreInput, u=Depends(owner)):
+    if not body.ids and not body.uploads:
+        raise HTTPException(422, 'Choose what to restore.')
     n = await restore_sets(body.ids)
-    await audit(u['id'], 'Restored from Library', ','.join(body.ids[:20]), str(n))
-    return {'restored': n, 'message': f"{n} test{'s' if n != 1 else ''} back in {'their' if n != 1 else 'its'} section."}
+    k = await restore_uploads(body.uploads)
+    await audit(u['id'], 'Restored from Library', ','.join(body.ids[:20] + [r.id for r in body.uploads[:20]]), f'{n} tests, {k} uploads')
+    message = f"{n} test{'s' if n != 1 else ''} back in {'their' if n != 1 else 'its'} section." if body.ids else f"{k} upload{'s' if k != 1 else ''} back in Upload."
+    return {'restored': n, 'uploads': k, 'message': message}
 
 
 def safe(text):

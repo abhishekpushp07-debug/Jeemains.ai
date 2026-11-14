@@ -1,5 +1,12 @@
 # Active roadmap
 
+## Super Admin content management (2026-11-14)
+- P0: Deploy only on the user's word. On the first production start, cleanup_once() moves BITSAT mocks + chapter-wise and JEE Main chapter-wise into the Library (PYQ untouched). After the deploy, check /super-admin/library on live and that the BITSAT/JEE Main PYQ sections still show their papers.
+- P1: In AITS books whose numerical questions have no "Numerical/Section B" heading, every numerical question is held. Each one then needs one Held-fixer save. Option: a bulk "these are numerical, keys as printed" confirm for each mock.
+- P2 (cosmetic): ReadyAction uses the native date-time input; the shadcn date and time picker could replace it.
+- Waiting for content: new BITSAT mocks, chapter-wise and PYQ, and new JEE Main chapter-wise (the user will supply them).
+
+
 ## Native mock-book reader (2026-11-14)
 - P0: Deploy the reader fix only on the user's go-ahead. After deploy, the live 4,481-page JEE book re-reads by itself (READER_VERSION changed; recover() picks it up). Owner repairs and published-mock pages are kept; no AI is used. Then check on live: expected ~35/50 mocks ready and ~19 questions held for review.
 - P1: The 19 held JEE questions (mostly Q20/Q45/Q70, last question of a section) need the owner's quick check in Attention Needed: the print does not show their options/answer type clearly enough to publish safely.
