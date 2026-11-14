@@ -16,9 +16,10 @@ import { requestDeadline, RequestDeadlineError } from "./requestDeadline";
 const WEB = Platform.OS === "web";
 const extra = Constants.expoConfig?.extra;
 const CANONICAL_API = (extra?.jeeliveApi || process.env.EXPO_PUBLIC_JEELIVE_API) as string;
-const BASE = `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/jl`;
+const BACKEND = (extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL) as string;
+const BASE = `${BACKEND}/api/jl`;
 export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
-export const RF_BASE = `${extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL}/api/rf`;
+export const RF_BASE = `${BACKEND}/api/rf`;
 
 export const uuid = () => Crypto.randomUUID();
 
@@ -134,6 +135,17 @@ const retryAfter = (r: Response) => {
   const ms = Number.isFinite(n) ? n * 1000 : Date.parse(hint) - Date.now();
   return Number.isFinite(ms) ? Math.max(0, ms) : 0;
 };
+
+/** Forgot PIN: our server sets the new PIN for this number (no OTP, by the owner's choice). */
+export async function resetForgottenPin(phone: string, pin: string, confirm: string) {
+  const res = await boundedAuthFetch(`${BACKEND}/api/account/forgot-pin`, {
+    method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ phone, new_pin: pin, confirm_pin: confirm }),
+  }).catch(error => { throw error instanceof ApiError ? error : new ApiError("Connection interrupted. Please try again.", 0); });
+  if (res.ok) return;
+  const data = await res.json().catch(() => null);
+  throw new ApiError(typeof data?.detail === "string" ? data.detail : "Couldn't set your new PIN. Please try again.", res.status, retryAfter(res));
+}
 
 export type RawResult<T> = { status: number; data: T; retryAfterMs: number };
 

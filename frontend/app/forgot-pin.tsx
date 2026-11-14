@@ -1,32 +1,56 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import * as Linking from "expo-linking";
 import { useAuth } from "@/src/auth";
-import { websiteLoginUrl } from "@/src/api/client";
+import { resetForgottenPin } from "@/src/api/client";
+import { cleanPhone, pinFormError, useAuthSubmit, validPhone, validPin } from "@/src/authPin";
 import { AuthShell } from "@/src/components/auth/AuthShell";
-import { Button, Card, ErrorBox, Header, Icon, Notice, T } from "@/src/components/ui";
+import { PhoneField, PinField } from "@/src/components/auth/Fields";
+import { Button, ErrorBox, Header, Icon, T } from "@/src/components/ui";
 import { colors, space } from "@/src/theme";
 
+/** Forgot PIN: mobile number, new PIN, confirm PIN, done. The student is signed in straight away. */
 export default function ForgotPin() {
-  const { user } = useAuth();
+  const { signIn } = useAuth();
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [phone, setPhone] = useState("");
+  const [pin, setPin] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [saved, setSaved] = useState(false); // new PIN saved, but signing in needs another try
+  const submit = useAuthSubmit();
   const back = () => router.canGoBack() ? router.back() : router.replace("/entry");
+  const home = () => { if (router.canDismiss()) router.dismissAll(); router.replace("/(tabs)"); };
+  const go = () => submit.run(() => pinFormError(phone, pin, confirm), async () => {
+    const number = cleanPhone(phone);
+    await resetForgottenPin(number, pin, confirm);
+    try { await signIn(number, pin); }
+    catch { setSaved(true); setPin(""); setConfirm(""); return; }
+    setPin(""); setConfirm(""); home();
+  });
+  if (saved) return <AuthShell testID="forgot-pin-screen">
+    <View testID="forgot-pin-success" style={styles.section}>
+      <Icon name="shield-check-outline" size={44} color={colors.success} />
+      <T testID="forgot-pin-success-title" size={26} w="heavy">Your new PIN is set.</T>
+      <T testID="forgot-pin-success-description" size={15} color={colors.muted}>Sign in with your mobile number and the new PIN. Your tests and results are unchanged.</T>
+      <Button testID="forgot-pin-signin-button" label="Go to sign in" icon="arrow-right" onPress={() => router.dismissTo("/entry")} />
+    </View>
+  </AuthShell>;
   return <AuthShell testID="forgot-pin-screen">
-    <Header testID="forgot-pin-header" backTestID="forgot-pin-back" title="Forgot PIN?" eyebrow="Account access" onBack={back} />
-    <View style={styles.hero}><Icon name="shield-key-outline" size={38} color={colors.brandText} /><T testID="forgot-pin-title" size={26} w="heavy">Keep your account intact.</T>
-      <T testID="forgot-pin-description" size={14} color={colors.muted}>Your tests and results stay with your existing account. Don’t create another account to recover them.</T></View>
-    <Card testID="forgot-pin-existing-session" style={styles.card}>
-      <T testID="forgot-pin-existing-title" size={17} w="bold">Still signed in somewhere?</T>
-      <T testID="forgot-pin-existing-instructions" size={14} color={colors.muted}>On that signed-in device, open Account / Profile → Change PIN. Confirm your registered mobile number, then choose a new 4-digit PIN.</T>
-      {user ? <Button testID="forgot-pin-change-button" label="Change my PIN" icon="lock-reset" onPress={() => router.replace("/change-pin")} /> : null}
-    </Card>
-    <Notice testID="forgot-pin-reset-unavailable" tone="warning">JEECIRCLE does not currently offer a public PIN reset or OTP recovery. A mobile number alone cannot unlock an existing account.</Notice>
-    <T testID="forgot-pin-help" size={14} color={colors.muted}>If you aren’t signed in on any device, contact your JEECIRCLE account administrator through your existing official contact. Do not share your PIN. The app cannot reset it for you.</T>
-    <ErrorBox testID="forgot-pin-link-error" error={error} />
-    <Button testID="forgot-pin-login-button" label={user ? "Back to account" : "Back to sign in"} onPress={() => router.dismissTo(user ? "/account" : "/entry")} />
-    <Button testID="forgot-pin-website-button" kind="secondary" icon="open-in-new" label="Open JEECIRCLE website" onPress={() => { setError(""); Linking.openURL(websiteLoginUrl()).catch(() => setError("Couldn't open your browser. Please try again.")); }} />
+    <Header testID="forgot-pin-header" backTestID="forgot-pin-back" title="Forgot PIN?" eyebrow="Account access" onBack={submit.busy ? undefined : back} />
+    <View style={styles.hero}>
+      <Icon name="lock-reset" size={38} color={colors.brandText} />
+      <T testID="forgot-pin-title" size={26} w="heavy">Set a new PIN.</T>
+      <T testID="forgot-pin-description" size={14} color={colors.muted}>Enter your mobile number and choose a new 4-digit PIN. Your tests and results stay with your account.</T>
+    </View>
+    <View style={styles.section}>
+      <PhoneField testID="forgot-pin-phone-input" value={phone} onChange={setPhone} disabled={submit.busy} />
+      <PinField testID="forgot-pin-new-input" label="New 4-digit PIN" value={pin} onChange={setPin} disabled={submit.busy} />
+      <PinField testID="forgot-pin-confirm-input" label="Confirm new PIN" value={confirm} onChange={setConfirm} disabled={submit.busy} onSubmit={go} />
+      <ErrorBox testID="forgot-pin-error" error={submit.error} />
+      {submit.retrySeconds > 0 ? <T testID="forgot-pin-rate-limit" size={13} color={colors.warning}>Please wait {submit.retrySeconds > 90 ? `${Math.ceil(submit.retrySeconds / 60)} min` : `${submit.retrySeconds}s`} before trying again.</T> : null}
+      <Button testID="forgot-pin-submit" label="Set new PIN" icon="check" onPress={go} busy={submit.busy}
+        disabled={!validPhone(phone) || !validPin(pin) || !validPin(confirm) || submit.retrySeconds > 0} />
+    </View>
   </AuthShell>;
 }
-const styles = StyleSheet.create({ hero: { gap: space.md }, card: { gap: space.md } });
+const styles = StyleSheet.create({ hero: { gap: space.md }, section: { gap: space.lg } });

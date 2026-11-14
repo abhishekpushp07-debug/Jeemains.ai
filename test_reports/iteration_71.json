@@ -1,0 +1,36 @@
+{
+  "summary": "Forgot PIN (no OTP) checked on the backend and in the web preview at 390x844. Backend: 10/10 checks passed in tests/test_forgot_pin_iter72.py. A PIN mismatch returns 422 with the exact message. Bad phone or PIN formats, a missing field and an extra field each return 422. The unknown number 7000000099 (called once) returns 404 'No account uses this number. Create an account instead.' and leaks nothing. The per-number throttle returns 429 with Retry-After 3600, checked by putting 5 fake rows for 9999900077 into pin_resets; the throttled call wrote no row, a mismatch is still 422 while throttled, and the fake rows were removed by _id. Frontend: 'Forgot PIN?' is 89x44 and opens /forgot-pin. The screen shows the title 'Set a new PIN.' and all 3 fields with the right labels. 'Set new PIN' stays disabled until the form is valid. A mismatch shows the error in forgot-pin-error without calling the API. Back returns to /entry. Real end-to-end run done exactly once: 7004186276 with new PIN 5524 and confirm 5524 got 200 from forgot-pin, then auth/phone 200, and the app landed on Home ('good afternoon, learner.'). Signing out from the account screen worked (logout 200, rf/access/revoke 200), and a normal sign-in with 7004186276/5524 reached Home again. Only 2 sign-ins in total. The 404 and 429 errors display correctly in the UI (checked with intercepted responses only): the 429 shows a countdown and disables the button. The Create account tab still shows the Confirm PIN field and hides Forgot PIN. No deprecated Expo packages were found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/account/forgot-pin", "issue": "The per-IP throttle trusts the first X-Forwarded-For entry, which the client can set. Sending X-Forwarded-For: 203.0.113.77 got the row logged with sha256('203.0.113.77'). So the 30/hour IP limit can be bypassed by rotating that header, which allows unlimited number enumeration (404 vs 200) and resets across many numbers at 5 per number per hour. Reference: backend/pin_reset.py:79"},
+      {"endpoint": "POST /api/account/forgot-pin", "issue": "student['pin_version'] is read without a check. If the website ever leaves that field out, the endpoint crashes with an unhandled KeyError and returns 500 instead of the 503 UNAVAILABLE message. Reference: backend/pin_reset.py:108"}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "forgot-pin", "issues": ["After a 429 the countdown reads 'Please wait 3598s before trying again.' Showing about 3,600 seconds is awkward; show minutes instead (e.g. 'about 60 min').", "The 404 message says 'Create an account instead.' but there is no button or link to the Create account tab (minor)."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_forgot_pin_iter72.py", "/app/test_reports/pytest/iter72_forgot_pin.xml", "/app/test_reports/iter72_fp_mismatch.jpg", "/app/test_reports/iter72_after_reset_home.jpg", "/app/test_reports/iter72_normal_signin_home.jpg", "/app/test_reports/iter72_fp_429_mock.jpg"],
+  "action_items": [
+    "Change how the client IP is worked out in pin_reset.throttle: use the ingress-appended (rightmost trusted) X-Forwarded-For hop or request.client.host, not the first, client-settable entry.",
+    "Check that student has a pin_version (or use .get) and return 503 UNAVAILABLE if it is missing.",
+    "Do not run TestRealReset in backend/tests/test_forgot_pin_iter71.py, or its 5 real upstream lookups, as routine regression: it does a real reset of the QA account. Mark it opt-in or delete it. Use test_forgot_pin_iter72.py, which needs no real reset and fakes the throttle in Mongo.",
+    "Optional UX: show the 429 wait in minutes, and add a 'Create account' link next to the 404 error."
+  ],
+  "critical_code_review_comments": [
+    "pin_reset.py is clean. Validation (Pydantic extra=forbid plus regex) runs before the mismatch check and the throttle. Every outcome is logged with hashed phone and IP. The owner session is re-created once on a 401 or 403. No owner data or cookies are returned to the client.",
+    "The reset uses expected_pin_version, which gives good optimistic concurrency.",
+    "forgot-pin.tsx handles reset-OK-but-sign-in-failed with a 'Your new PIN is set' screen. This could not be tested without another real reset, so it was not tested."
+  ],
+  "updated_files": ["/app/backend/tests/test_forgot_pin_iter72.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "Temporarily inserted 5 pin_resets rows for the fake number 9999900077 and deleted them by _id. Deleted the single pin_resets log row created by the 7000000099 404 check. The QA account 7004186276 was reset exactly once by the tester, to the SAME PIN 5524, and then verified with a normal sign-in. In the last hour pin_resets holds 2 'reset' rows for this number (one by main, one by the tester).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The QA number 7004186276 has used 2 of its 5 hourly reset attempts as of 2026-11-14 15:45 UTC. The PIN is still 5524. Do not do any further real resets. For the throttle path, seed fake rows in Mongo (see test_forgot_pin_iter72.py). For UI error states, use Playwright route interception."
+}

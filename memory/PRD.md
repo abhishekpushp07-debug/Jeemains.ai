@@ -1,5 +1,10 @@
 # JEELIVE.AI Native App — PRD
 
+## Iteration72 — Security audit + simple Forgot PIN
+- Security audit (read-only): CONDITIONAL PASS. SEC-001 session handle (X-JL-Sid jar) no TTL/rotation; SEC-002 4-digit PIN brute force via proxy (shared server IP). User chose "Abhi nahi" — not fixed yet. Positive: Set-Cookie never returned, server-priced atomic buys, server-derived RF identity, strict CORS.
+- Forgot PIN (owner's explicit choice, no OTP, warned twice): `backend/pin_reset.py` POST `/api/account/forgot-pin` {phone,new_pin,confirm_pin} → owner login (env JEELIVE_OWNER_EMAIL/PASSWORD, in-process cookies) → `admin/students?q=` exact last-10-digit match → `auth/owner/student-pin-reset` with expected_pin_version. Throttle 5/h per number, 30/h per IP (rightmost X-Forwarded-For), log in Mongo `pin_resets`. `app/forgot-pin.tsx`: phone + new PIN + confirm → Set new PIN → auto sign-in → Home.
+- Tested: `test_reports/iteration_71.json` (tester naming) — backend 10/10 (`tests/test_forgot_pin_iter72.py`), real reset of QA number to the SAME PIN 5524 → auto sign-in → Home, sign-out → sign-in OK. Fixed after: IP from rightmost XFF hop, guard missing pin_version (503 not 500), countdown in minutes, removed real-reset test file.
+
 ## Iteration71 — Phone login fix (all platforms through our server)
 - Bug: installed Android app showed "Couldn't check your session…" + "Connection interrupted" on sign-in (preview + live); native fetch to https://jeelive.ai/api threw on the phone while the phone browser opened jeelive.ai. Deployer RCA: production backend healthy, no failing requests.
 - Fix (user approved): `src/api/client.ts` BASE = `${EXPO_PUBLIC_BACKEND_URL}/api/jl` on every platform with X-JL-Sid (web AsyncStorage `jl_sid`; native SecureStore `jl_sid`, falls back to AsyncStorage if the Keychain write fails). Native cookie capture removed; `/api/rf/access` always X-JL-Sid + `{}`. `rf_access.py` still accepts old builds' `access_cookie` (kept for already-installed builds).
