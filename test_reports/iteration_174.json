@@ -1,0 +1,33 @@
+{
+  "summary": "Section preview link feature tested. Backend: new isolated harness test /app/backend/tests/section_preview_iso175.py (disposable DB, random owner/reviewer/student, DB dropped afterwards). 67/67 checks pass. They cover owner-only GET/POST/DELETE (anon 401, reviewer/student 403, unknown section 404), the empty status {active:false, expires_at:null}, a 32-char url-safe token, expiry 7 days out, only sha256(token) stored as _id (raw token not stored), audits for create and turn-off (a repeat DELETE adds no audit), rotation (old token 404, new token 200, one active row), revoke with the 404 message, idempotent DELETE, and expired links (404, status inactive). Ten malformed tokens all return 404/422 and never 500. The public payload has exactly the specified fields. Item order matches catalog_order with live/draft/paused/unlive/scheduled states. Waiting combined-book mocks come after the tests in book created_at then mock order, as ready/held/scheduled(start_at=release_at)/publishing. Removed books and other sections are excluded. No ids, answers, solutions, question text or token leak. A hidden custom chapters exam (shown=false) and a hidden section still preview, while the student still gets 404 on /api/catalog/exams/{slug} and the exam is not in the student list. Frontend on the preview URL as the real owner (state-neutral): the JEE Main › Mock Tests section panel shows Phone preview link and Add content here. The dialog shows loading, then status. Create link shows the url/copy/open box (share hidden because navigator.share is absent), with toasts. Make a new link rotates (old token 404, new 200). Turn off link toggles back and its toast shows. Logged-out 390px and 1920px public pages render the banner, path, title, count, the no-live warning and the empty state with 0 overflow. After turn-off the page shows 'This preview link does not open.' BITSAT › Chapter-wise Tests (94 tests) previews with subject headings chemistry/mathematics/physics, order identical to the admin list, Live chips and 0 overflow at 390px. A route-mocked payload confirmed every chip (Live/Draft/Not live yet/Unlive/Scheduled/Ready/Held/Publishing…) and the hidden-exam and hidden-section warnings. Regression: the section panel lists 94 tests with 94 live switches, 94 rename buttons and 94 move selects; the rename dialog opens (cancelled, no change); the Add content here href is correct. Every link I created was turned off (verified active:false on jee-main:mocks and bitsat:chapters). No customer test/section/exam state was changed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/preview/sections/{token} (waiting_state)", "issue": "Waiting mocks use only mock.release_at to choose scheduled vs publishing and to fill start_at. Book publishing uses mock.release_at OR book.payload.release_at (book_publish.py:198, book_store.py:124). A mock waiting under a book-level release time would briefly show 'publishing' with start_at null. The window is short, because the set is created with a future start_at once the job runs."},
+      {"endpoint": "GET /api/preview/sections/{token}", "issue": "Waiting mock titles are only the label ('Mock 1', 'Mock 2'). With two books in one section the labels repeat ('Mock 1, Mock 2, Mock 1, Mock 2') and the owner cannot tell which book a mock comes from. Consider prefixing the book title, or showing the expected student title."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "SectionPreview List", "issues": ["Subject grouping runs for every layout, not only 'chapters'. A list-layout section holding a test with chapter_subject would get subject headings. Groups follow first appearance, so interleaved subjects would be regrouped and the order would differ from what students see. Consider grouping only when section.layout==='chapters'.", "In chapter layout, waiting book mocks (subject null) appear after the subject groups with no heading. Acceptable, but a heading such as 'Waiting to publish' would be clearer."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/section_preview_iso175.py"],
+  "action_items": [
+    "Optional: waiting_state/start_at should fall back to the book-level payload.release_at, matching book_publish.",
+    "Optional: show which book a waiting mock comes from (titles repeat across books).",
+    "Optional: group by subject only for chapters layout in SectionPreview.js."
+  ],
+  "critical_code_review_comments": [
+    "Security is sound: a 192-bit token, sha256 stored as _id, raw token shown once, rotate and revoke update all active rows, the Path regex and length check block malformed input (422), and the 404 message does not reveal whether a token ever existed.",
+    "previews.find_one for public GET is by _id, so it is efficient; waiting_mocks loads up to 5000 mocks with $size projection — fine for current scale."
+  ],
+  "updated_files": ["/app/backend/tests/section_preview_iso175.py"],
+  "success_rate": {"backend": "100% (67/67)", "frontend": "100%"},
+  "seed_data_creation": "None persisted. The isolated DB was dropped. On the preview/customer DB, preview links were created on jee-main:mocks and bitsat:chapters and then turned off (DELETE verified, active:false). These are revoked rows in tejas_section_previews plus audit entries. Nothing else was changed.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run: cd /app/backend && python tests/section_preview_iso175.py. UI owner login is at /owner-login (input[type=email]/[type=password], login-submit-button); read the credentials from backend .env and never print them. The preview DB has jee-main:mocks empty and bitsat:chapters with 94 live tests. Non-live chip rendering was checked by route-mocking /api/preview/sections/** (the envelope needs meta.api_version). The clipboard copy shows the error toast in headless mode because of permissions; this is expected."
+}

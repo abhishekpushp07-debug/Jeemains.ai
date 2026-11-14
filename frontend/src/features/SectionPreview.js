@@ -11,7 +11,7 @@ const NOTE={live:'Students see this now',scheduled:'Opens to students at its sta
 const LABEL={live:'Live',ready:'Ready',paused:'Not live yet'};
 
 function Row({t,n}){
- const meta=[`${t.count} questions`,t.minutes?`${t.minutes} min`:null,t.state==='scheduled'&&t.start_at?'Opens '+previewWhen(t.start_at):NOTE[t.state]].filter(Boolean).join(' · ');
+ const meta=[t.book?'From '+t.book:null,`${t.count} questions`,t.minutes?`${t.minutes} min`:null,t.state==='scheduled'&&t.start_at?'Opens '+previewWhen(t.start_at):NOTE[t.state]].filter(Boolean).join(' · ');
  return <li className={'admin-row'+(t.state==='live'?'':' is-pending')} data-testid={'section-preview-item-'+n}>
   <span className="admin-test-index" aria-hidden="true">{String(n).padStart(2,'0')}</span>
   <div className="admin-row-main"><strong data-testid={'section-preview-title-'+n}>{t.title}</strong><small>{meta}</small></div>
@@ -26,10 +26,10 @@ function Warnings({data}){
  return notes.map(n=><p key={n} className="admin-note warn section-preview-warn" data-testid="section-preview-warning"><AlertTriangle size={15}/>{n}</p>);
 }
 
-function List({items}){
+function List({items,chapters}){
  if(!items.length)return <Empty title="Nothing in this section yet.">Tests appear here as soon as they are added to this section.</Empty>;
  const groups=[];let n=0;
- items.forEach(t=>{const key=t.subject||'';let g=groups.find(x=>x.key===key);if(!g){g={key,items:[]};groups.push(g);}g.items.push(t);});
+ items.forEach(t=>{const key=!chapters?'':t.book?'Waiting to publish':t.subject||'';let g=groups.find(x=>x.key===key);if(!g){g={key,items:[]};groups.push(g);}g.items.push(t);});
  return groups.map(g=><div key={g.key} className="section-preview-group">{g.key&&<h2 data-testid={'section-preview-subject-'+g.key.toLowerCase().replace(/\s+/g,'-')}>{g.key}</h2>}<ol className="admin-list" data-testid="section-preview-list">{g.items.map(t=>{n+=1;return <Row key={n} t={t} n={n}/>;})}</ol></div>);
 }
 
@@ -44,6 +44,6 @@ export default function SectionPreview(){
   <header className="exam-simple-heading"><span className="eyebrow" data-testid="section-preview-exam">{data.exam.name}</span><h1 data-testid="section-preview-title">{data.section.name}</h1>{data.section.description&&<p>{data.section.description}</p>}</header>
   <Warnings data={data}/>
   <p className="section-preview-count" aria-live="polite" data-testid="section-preview-count">{data.live_count} live now · {data.items.length-data.live_count} not live yet</p>
-  <List items={data.items}/>
+  <List items={data.items} chapters={data.section.layout==='chapters'}/>
  </div>;
 }

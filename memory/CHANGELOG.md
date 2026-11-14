@@ -81,3 +81,11 @@ Frontendbaseline: coldhomepage~1.0sLCP andwarm160–252ms fromUSdatacenterunthro
 QA baseline files: tests/iso_harness_perf163.py,bench_iter163_perf_baseline.py,iso_bridge_perf163.py,compare_perf163.py; reportsiteration163 +iter163_perf_baseline.json +iter163_live_frontend_baseline.json. All original PDFs via localstorageboundary; realnetworkstorage latency NOT measured. Repeat exactafterharness, comparecold/warm/CPU/payload/RSS/error/receipts; full privacy/render pixel fidelity required. No implementation or new dependencies installed yet as of this entry.
 
 Earlier project history is preserved, unchanged, in PRD.md; new detailed entries continue here to prevent that file exceeding700lines.
+
+## 2026-11-14 — Section phone preview link + production deploy dispatched
+- Owner-only GET/POST/DELETE /api/admin/catalog/sections/{sid}/preview-link: create (rotates old link), status, turn off. 7-day expiry, 192-bit token, only sha256(token) stored in tejas_section_previews, audited.
+- Public GET /api/preview/sections/{token}: read-only titles/order/status (live, draft, paused, unlive, scheduled, ended) plus combined-book mocks waiting to publish (ready/held/publishing/scheduled, falls back to book-level release_at, shows the book title). No question content, ids or answers. Hidden exams/sections still preview but stay unreachable for students.
+- UI: "Phone preview link" button in Super Admin › Exams & Content › section panel (copy/share/open, make new, turn off). Public page /preview/s/:token, mobile-first, subject groups only for chapter layout plus a "Waiting to publish" group.
+- QA174: isolated DB 67/67 (tests/section_preview_iso175.py), frontend passed; the 3 minor QA items were fixed and the isolated suite re-ran 67/67. Customer preview DB: QA created and then turned off links on jee-main:mocks and bitsat:chapters (revoked rows + audit only).
+- Production deploy of the whole organised Super Admin + preview link dispatched (job bcd75d41-4661-4f5a-bead-654e0ffe34d2); live confirmation pending.
+

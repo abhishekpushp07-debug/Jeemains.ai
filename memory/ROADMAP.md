@@ -1,11 +1,12 @@
 # Active roadmap
 
 ## Organised Super Admin (2026-11-14)
-- P0: Deploy needed for production (user's word only). After deploy, check /super-admin on live and that built-in exams/sections seed (3 exams, 7 sections).
+- P0: Production deploy dispatched 2026-11-14 (user-approved; job bcd75d41-4661-4f5a-bead-654e0ffe34d2), outcome not yet confirmed. After it is live, check /super-admin on live, built-in exams/sections seed (3 exams, 7 sections) and one phone preview link (then turn it off).
 - P0 (carried): confirm on production that a real combined-book upload reads and processes (stall fix deploy outcome was pending).
 - P1: Toasts at top centre briefly cover the admin breadcrumb (cosmetic). Import schedule form uses native date inputs.
 - P1: Visibility cache is per process (5 s TTL, refreshed on structure/start/detail/list calls); multi-pod hide/show may lag a few seconds on list endpoints.
 - P1: Obsolete old suites (book_publishing_iso170, rules170, scale171, bridges 170/171) assume auto-publish; replace with structure_iso173 / structure_imports_iso174.
+- P2 (from QA174, optional): QR code in the phone preview dialog so the owner can scan instead of copy.
 - Phase 2 (separate approval): tags/filters, bulk move, multi-book queue, section scheduling, hard scans/bilingual, layout profiles, All India direct upload. Phase 3: per-exam reviewer assignment, quality/usage reports, bulk scheduling.
 
 

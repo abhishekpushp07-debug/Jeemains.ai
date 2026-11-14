@@ -550,23 +550,30 @@ async def revoke_preview_link(sid: str, u=Depends(owner)):
     return {'active': False, 'expires_at': None}
 
 
-def waiting_state(m, t):
+def waiting_state(m, release, t):
     if m['state'] == 'held':
         return 'held'
     if m.get('publish_requested'):
-        return 'scheduled' if (m.get('release_at') or 0) > t else 'publishing'
+        return 'scheduled' if (release or 0) > t else 'publishing'
     return 'ready'
 
 
 async def waiting_mocks(sid, t):
-    books = await db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False}, {'_id': 1}).sort('created_at', 1).to_list(200)
+    books = await db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False},
+                                      {'_id': 1, 'payload.title': 1, 'payload.release_at': 1}).sort('created_at', 1).to_list(200)
     rank = {b['_id']: i for i, b in enumerate(books)}
+    book = {b['_id']: b['payload'] for b in books}
     rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None},
         {'_id': 0, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1, 'rules.minutes': 1,
          'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
     rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
-    return [{'title': m['label'], 'state': waiting_state(m, t), 'count': m.get('count', 0), 'minutes': (m.get('rules') or {}).get('minutes'),
-             'subject': None, 'start_at': m.get('release_at') if m.get('publish_requested') else None} for m in rows]
+    out = []
+    for m in rows:
+        release = m.get('release_at') or book[m['book_id']].get('release_at')
+        out.append({'title': m['label'], 'state': waiting_state(m, release, t), 'count': m.get('count', 0),
+                    'minutes': (m.get('rules') or {}).get('minutes'), 'subject': None, 'book': book[m['book_id']].get('title'),
+                    'start_at': release if m.get('publish_requested') else None})
+    return out
 
 
 @router.get('/preview/sections/{token}')
@@ -577,7 +584,7 @@ async def section_preview(token: str = Path(min_length=20, max_length=64, patter
     if not s:
         raise HTTPException(404, 'This preview link has expired or was turned off. Ask the owner for a new link.')
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
-    items = [{k: v[k] for k in ('title', 'state', 'count', 'minutes', 'subject', 'start_at')}
+    items = [{**{k: v[k] for k in ('title', 'state', 'count', 'minutes', 'subject', 'start_at')}, 'book': None}
              for v in (test_view(x, t) for x in await section_tests(s, e['key']))]
     items += await waiting_mocks(s['id'], t)
     return {'exam': {'name': e['name'], 'short': e['short'], 'color': e['color'], 'shown': e['shown']},
