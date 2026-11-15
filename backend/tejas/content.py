@@ -114,6 +114,7 @@ def permitted(s, u=None, series_schedule=False, *, at):
 
 
 def summary(s):
+    from .structure import place_line
     qs = s.get("questions", [])
     return {
         **{
@@ -125,7 +126,6 @@ def summary(s):
                 "status",
                 "rules",
                 "version",
-                "source",
                 "attribution",
                 "created_at",
                 "test_kind", "full_length", "mock_number", "series_id", "series_date", "series_window", "pyq_year",
@@ -134,6 +134,7 @@ def summary(s):
             ]
         },
         "title": s.get("display_title") or s.get("title"),
+        "source": place_line(s),
         "count": len(qs),
         "approved_count": sum(q.get("approved", False) for q in qs),
         "subjects": list(dict.fromkeys(q["subject"] for q in qs if q.get("subject"))),

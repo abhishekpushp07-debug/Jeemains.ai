@@ -173,3 +173,65 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
  .chapter-pages{grid-template-columns:repeat(2,minmax(0,1fr))}
  .chapter-page.is-open{grid-column:1/-1}
 }
+
+/* Library: a plain recycle bin, segmented by exam › mock type › subject */
+.library-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.library-stats>div{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface-card)}
+.library-stats>div>strong{font-family:var(--font-mono);font-size:26px;font-weight:700;line-height:1.1;color:var(--ink)}
+.library-stats>div>span{font-size:12px;color:var(--text-muted)}
+.library-guide{margin-bottom:16px;border:1px solid var(--brand-line);border-radius:18px;background:var(--surface-card);overflow:hidden}
+.library-guide-head{display:flex;align-items:center;gap:10px;width:100%;min-height:var(--touch-target);padding:14px 18px;border:0;background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.library-guide-head strong{flex:1;font-size:15px}
+.library-guide-head svg.is-open,.library-group-title svg.is-open{transform:rotate(180deg)}
+.library-guide-head svg,.library-group-title svg{transition:transform var(--motion-fast)}
+.library-guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;padding:0 18px 18px}
+.library-guide-card{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface-alt);font-size:13px;color:var(--text-muted)}
+.library-guide-card h3{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:var(--ink)}
+.library-guide-card p{margin:0}
+.library-guide-card ul,.library-guide-card ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px}
+.library-guide-card li strong{color:var(--ink)}
+.library-guide-card ol a{font-weight:700;color:var(--brand-text);text-decoration:underline;text-underline-offset:3px}
+.library-guide-card ol small{display:block;margin-top:2px;font-size:12px}
+.library-segments{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none}
+.library-segments button{display:inline-flex;align-items:center;gap:8px;flex:none;min-height:var(--touch-target);padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface-card);color:var(--text-muted);font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:border-color var(--motion-fast),color var(--motion-fast),background-color var(--motion-fast)}
+.library-segments button:hover{color:var(--ink);border-color:var(--brand-line)}
+.library-segments button.is-active{color:var(--ink);border-color:var(--brand-line);background:var(--brand-soft);box-shadow:inset 0 -2px 0 var(--brand-line)}
+.library-count{padding:1px 8px;border-radius:999px;font-size:11px;font-family:var(--font-mono);background:var(--surface-alt);border:1px solid var(--line)}
+.library-search{display:flex;align-items:center;gap:8px;margin:4px 0 14px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-alt)}
+.library-search input{border:0;background:transparent;box-shadow:none}
+.library-group{margin-bottom:12px;border:1px solid var(--line);border-radius:16px;background:var(--surface-card)}
+.library-group-head{display:flex;align-items:center;gap:12px;padding:12px 14px;flex-wrap:wrap}
+.library-group-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:1;min-width:0;min-height:var(--touch-target);padding:0;border:0;background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.library-group-title span,.library-uploads-head>span{display:flex;flex-direction:column;gap:2px;min-width:0}
+.library-group-title strong,.library-uploads-head strong{font-size:15px;overflow-wrap:anywhere}
+.library-group-title small,.library-uploads-head small{font-size:12px;color:var(--text-muted)}
+.library-group-actions{display:flex;gap:6px;flex-wrap:wrap}
+.library-subgroup{padding:0 14px 12px}
+.library-subhead{display:flex;align-items:center;gap:8px;margin:4px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.library-subhead span{font-family:var(--font-mono)}
+.library-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.library-uploads-head+.library-list{padding:0 14px 12px}
+.library-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-alt);transition:border-color var(--motion-fast)}
+.library-row:hover{border-color:var(--brand-line)}
+.library-row-main{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.library-row-main strong{overflow-wrap:anywhere}
+.library-tags{display:flex;flex-wrap:wrap;gap:6px}
+.library-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:12px;color:var(--text-muted);background:var(--surface-card);border:1px solid var(--line)}
+.library-tag.was-live{color:var(--success);border-color:var(--success-line);background:var(--success-soft)}
+.library-tag.has-attempts{color:var(--ink)}
+.library-tag.is-quiet{border-style:dashed}
+.library-reason{font-size:12px;color:var(--warning)}
+.library-sticky-bar{position:sticky;bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;padding:12px 16px;border-radius:16px;border:1px solid var(--brand-line);background:color-mix(in srgb,var(--surface-card) 92%,transparent);backdrop-filter:blur(14px);box-shadow:0 16px 36px rgba(0,0,0,.45);z-index:30;font-weight:700}
+.library-restore-facts{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--text-muted)}
+.library-restore-facts .is-live{color:var(--ink);font-weight:700}
+@media (max-width:640px){
+ .library-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .library-stats>div{padding:10px}
+ .library-stats>div>strong{font-size:20px}
+ .library-row{flex-wrap:wrap}
+ .library-row>button{width:100%}
+ .library-group-actions{width:100%}
+ .library-group-actions>button{flex:1}
+ .library-sticky-bar{bottom:8px}
+}
+

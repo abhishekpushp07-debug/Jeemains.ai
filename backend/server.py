@@ -64,7 +64,7 @@ async def lifespan(app):
     await auth.seed_owner()
     await structure.seed()
     import asyncio
-    asyncio.create_task(library.cleanup_once())
+    asyncio.create_task(library.run_cleanups())
     from tejas.live_window import apply_to_upcoming
     await apply_to_upcoming()
     from tejas.mock_solutions import solutions

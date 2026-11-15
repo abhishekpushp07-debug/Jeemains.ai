@@ -53,7 +53,7 @@ Color = Literal['teal', 'amber', 'violet', 'rose', 'lime', 'sky']
 Name = Annotated[str, Field(min_length=2, max_length=60)]
 Subject = Annotated[str, Field(min_length=1, max_length=40)]
 Identity = Annotated[str, Field(min_length=1, max_length=100)]
-_seen = {'at': -1e9, 'keys': frozenset(), 'sections': frozenset()}
+_seen = {'at': -1e9, 'keys': frozenset(), 'sections': frozenset(), 'exam_by_key': {}, 'section_names': {}}
 
 
 class ExamInput(Payload):
@@ -174,8 +174,24 @@ async def visibility(force=False):
     if force or time.monotonic() - _seen['at'] > 5:
         hidden = await exams.find({'shown': False}, {'_id': 0, 'slug': 1, 'key': 1}).to_list(500)
         ids = await sections.distinct('id', {'exam_slug': {'$in': [e['slug'] for e in hidden]}}) if hidden else []
-        _seen.update(at=time.monotonic(), keys=frozenset(e['key'] for e in hidden), sections=frozenset(ids))
+        names = {e['key']: (e['slug'], e.get('name') or e['key']) for e in await exams.find({}, {'_id': 0, 'slug': 1, 'key': 1, 'name': 1}).to_list(500)}
+        places = {s['id']: s['name'] for s in await sections.find({}, {'_id': 0, 'id': 1, 'name': 1}).to_list(2000)}
+        _seen.update(at=time.monotonic(), keys=frozenset(e['key'] for e in hidden), sections=frozenset(ids), exam_by_key=names, section_names=places)
     return _seen
+
+
+def place_line(s):
+    """What students read under a test's name: where it sits, e.g. 'BITSAT · Chapter-wise Tests · Physics'. Never a file name."""
+    slug, name = _seen['exam_by_key'].get(s.get('exam'), ('', s.get('exam') or ''))
+    sid = s.get('catalog_section_id') or (f'{slug}:{legacy_kind(s)}' if slug and legacy_kind(s) else '')
+    if not sid and s.get('series_id') and slug:
+        sid = f'{slug}:aits'
+    parts = [name, _seen['section_names'].get(sid)]
+    if legacy_kind(s) == 'chapters':
+        parts.append(s.get('chapter_subject'))
+    elif s.get('test_kind') == 'pyq':
+        parts.append(str(s.get('pyq_year') or s.get('year') or '') or None)
+    return ' · '.join(p for p in parts if p)
 
 
 def hidden_clause(user):
