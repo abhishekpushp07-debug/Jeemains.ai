@@ -126,11 +126,13 @@ export function CheerSquad({ visible, name, avatar, frame, crown, level: lv = 1,
   const top = bh + medal / 2 + Hh * 0.08 + 6 - Math.min(ga[0][1], gb[0][1]) * Hh; // room above the holders for the banner
   const SH = top + Hh * 1.1;
   const leftA = gl - ga[0][0] * wa, leftB = gr - (1 - gb[0][0]) * wb;
-  const hand = (p: number) => ((ga[p][1] + gb[p][1]) / 2) * Hh;
+  // Where the holders' hands are in each pose. Kept as plain numbers: on a phone this animation runs on the UI thread,
+  // which cannot call an ordinary app function (doing so closes the installed app; the browser preview never shows it).
+  const hands = ga.map((g, p) => ((g[1] + gb[p][1]) / 2) * Hh);
   const carry = useAnimatedStyle(() => {
     const x = clock.value * COUNT, n = Math.floor(x) % COUNT, k = x - Math.floor(x), p = HOLD_SEQ[n];
     const tilt = Math.atan2((gb[p][1] - ga[p][1]) * Hh, bw) * (180 / Math.PI);
-    return { transform: [{ translateY: hand(p) - hand(0) - Math.sin(k * Math.PI) * HOLD_HOP[n] * Hh }, { rotate: `${tilt + Math.sin(wave.value * Math.PI * 2) * 0.8}deg` }] };
+    return { transform: [{ translateY: hands[p] - hands[0] - Math.sin(k * Math.PI) * HOLD_HOP[n] * Hh }, { rotate: `${tilt + Math.sin(wave.value * Math.PI * 2) * 0.8}deg` }] };
   });
   const bursts = Array.from({ length: look.bursts }, (_, i) => ({ x: SW * (0.12 + ((i * 0.37) % 0.78)), y: 18 + ((i * 53) % Math.max(40, top - bh)), size: 70 + ((i * 29) % 50), color: GEMS[i % GEMS.length], delay: i * 330 }));
   return <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
@@ -146,7 +148,7 @@ export function CheerSquad({ visible, name, avatar, frame, crown, level: lv = 1,
           {/* The lead dances under the banner so her pom-poms never hide the champion's name. */}
           <Dancer testID="cheer-lead" frames={squadFrames(level, "c")} height={Hl} aspect={geo.c.aspect} clock={clock} seq={LEAD_SEQ} hops={LEAD_HOP} spins={LEAD_SPIN}
             style={{ left: SW / 2 - (Hl * geo.c.aspect) / 2, top: SH - Hl }} />
-          <Animated.View style={[styles.carry, { left: gl - 4, top: top + hand(0) - bh, width: bw + 8 }, carry]}>
+          <Animated.View style={[styles.carry, { left: gl - 4, top: top + hands[0] - bh, width: bw + 8 }, carry]}>
             <Pole side="left" level={level} height={bh + 30} />
             <Pole side="right" level={level} height={bh + 30} />
             <View style={styles.bannerAt}><CheerBanner w={bw} h={bh} top={medal / 2} level={level} name={name} crown={crown} clock={clock} count={COUNT} glitter={glitter} wave={wave} sweep={sweep} /></View>
