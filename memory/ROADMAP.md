@@ -1,7 +1,7 @@
 # Simple PIN (2026-11-15)
 - P0: Deploy only on the user's word "deploy". Forgot PIN goes live together with the one-time fresh start and Library work. After deploy: check /api/auth/pin/reset is in the live openapi and the app agent switches its Forgot Password screen to it.
 - P0 (owner action): send docs/SERVER_SIZE_REQUEST.md to platform support.
-- P1: Read the deployer's read-only live report (job bcd75d41-4661-4f5a-bead-654e0ffe34d2) and act on it after approval.
+- Live read-only report (2026-11-15, deployer): healthy. Last 5 deploys succeeded, serving dded31fd (12:29Z). 2 pods, 0 restarts/OOM, tier_4 Elite, CPU req 2/limit 4, mem 8/16 Gi per pod (earlier "2×1 vCPU" note was wrong). Cron maintenance 200s, 189 runs in 7 d, first nightly repair done. 24 h: one 503 on a studio asset, no 500/502/504. Largest collections: book_pages 8,962, question_solutions 7,100, files 5,564. 14 student profiles (1 new in 7 d). Not visible to the deployer: per-pod CPU use, slow requests/520s (no latency in logs), app-vs-web User-Agent, DB byte size, slow queries, backups (ask platform support/Atlas).
 - P1 (open choice): no guard stops an outside PIN reset during a student's running live paper; add one if the owner asks.
 - P2: Archiving single tests by id does not move their source PDF to the Library (only section/fresh start do), so such a PDF never shows "Back from the Library".
 - P2: Existing students pay the old 196 ms PIN check once on their first sign-in after deploy.
