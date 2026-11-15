@@ -135,6 +135,33 @@ async def find_player(db, pid: str) -> dict:
     return p
 
 
+async def make_friends(db, uid: str, them: str, strict: bool = True, via: Optional[str] = None) -> bool:
+    """Both players become friends at once and `them` gets a "friend added" notice (`via` "link": `uid` joined their match link).
+    True if they were not friends before. A full friend list stops it: an error when `strict`, otherwise nothing happens."""
+    if not await db.rf_friends.find_one({"uid": uid, "fid": them}, {"_id": 1}):
+        for a in (uid, them):
+            if await db.rf_friends.count_documents({"uid": a}) >= MAX_FRIENDS:
+                if not strict:
+                    return False
+                raise HTTPException(409, "Your friend list is full." if a == uid else "This player’s friend list is full.")
+    new = False
+    for a, b in ((uid, them), (them, uid)):
+        try:
+            await db.rf_friends.insert_one({"uid": a, "fid": b, "ts": time.time()})
+            new = True
+        except DuplicateKeyError:
+            pass
+    if new:
+        await db.rf_notices.update_one({"uid": them, "from_uid": uid, "kind": "friend_added"},
+                                       {"$set": {"ts": time.time(), "done": False, "via": via}, "$setOnInsert": {"id": str(uuid.uuid4())}}, upsert=True)
+    await db.rf_notices.update_many({"uid": uid, "from_uid": them, "kind": "friend_added"}, {"$set": {"done": True}})
+    return new
+
+
+async def blocked_between(db, a: str, b: str) -> bool:
+    return bool(await db.rf_blocks.find_one({"$or": [{"uid": a, "bid": b}, {"uid": b, "bid": a}]}, {"_id": 1}))
+
+
 async def blocked_uids(db, uid: str) -> set:
     """Everyone this player blocked, or who blocked this player."""
     rows = await db.rf_blocks.find({"$or": [{"uid": uid}, {"bid": uid}]}, {"_id": 0}).to_list(1000)
@@ -154,7 +181,7 @@ def make_router(db, rf_user):
             raise HTTPException(429, "Too many wrong codes. Try again in a few minutes.")
         code = re.sub(r"[^A-Za-z0-9]", "", str(raw or "")).upper()
         p = await db.rf_profiles.find_one({"friend_code": code}) if CODE_RE.match(code) else None
-        if not p or (p["uid"] != uid and await blocked_between(uid, p["uid"])):
+        if not p or (p["uid"] != uid and await blocked_between(db, uid, p["uid"])):
             recent.append(now)
             raise HTTPException(404, "No player has this Friend Code. Check it and try again.")
         return p
@@ -168,9 +195,6 @@ def make_router(db, rf_user):
 
     async def by_pid(pid):
         return await find_player(db, pid)
-
-    async def blocked_between(a, b) -> bool:
-        return bool(await db.rf_blocks.find_one({"$or": [{"uid": a, "bid": b}, {"uid": b, "bid": a}]}, {"_id": 1}))
 
     async def stats_of(uid):
         hit = stats_cache.get(uid)
@@ -331,21 +355,7 @@ def make_router(db, rf_user):
         them = p["uid"]
         if them == uid:
             raise HTTPException(400, "That’s your own code! Share it with a friend.")
-        if not await db.rf_friends.find_one({"uid": uid, "fid": them}, {"_id": 1}):
-            for a in (uid, them):
-                if await db.rf_friends.count_documents({"uid": a}) >= MAX_FRIENDS:
-                    raise HTTPException(409, "Your friend list is full." if a == uid else "This player’s friend list is full.")
-        new = False
-        for a, b in ((uid, them), (them, uid)):
-            try:
-                await db.rf_friends.insert_one({"uid": a, "fid": b, "ts": time.time()})
-                new = True
-            except DuplicateKeyError:
-                pass
-        if new:
-            await db.rf_notices.update_one({"uid": them, "from_uid": uid, "kind": "friend_added"},
-                                           {"$set": {"ts": time.time(), "done": False}, "$setOnInsert": {"id": str(uuid.uuid4())}}, upsert=True)
-        await db.rf_notices.update_many({"uid": uid, "from_uid": them, "kind": "friend_added"}, {"$set": {"done": True}})
+        await make_friends(db, uid, them)
         return {"friend": card(p), "relation": await relation(uid, them)}
 
     @r.delete("/friends/{pid}")

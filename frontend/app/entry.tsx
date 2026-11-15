@@ -10,11 +10,14 @@ import { PhoneField, PinField } from "@/src/components/auth/Fields";
 import { AuthShell } from "@/src/components/auth/AuthShell";
 import { colors, radius, space } from "@/src/theme";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
+import { isRoomPath } from "@/src/rapid/social";
 
 export default function Entry() {
   const { signIn, signUp, user, ready, sessionError, checkSession, expired, signOutWarning } = useAuth();
   const router = useRouter();
-  const params = useLocalSearchParams<{ mode?: string }>();
+  const params = useLocalSearchParams<{ mode?: string; next?: string }>();
+  // Opened from a match link: back to that Match Room after sign-in, otherwise home.
+  const target = (isRoomPath(params.next) ? params.next : HOME_ROUTE) as typeof HOME_ROUTE;
   const reduced = useReducedMotion();
   const [mode, setMode] = useState<"login" | "signup">(params.mode === "signup" ? "signup" : "login");
   const [phone, setPhone] = useState("");
@@ -24,7 +27,7 @@ export default function Entry() {
   const entryFocused = useRef(false);
   const signup = mode === "signup";
   useFocusEffect(useCallback(() => { entryFocused.current = true; return () => { entryFocused.current = false; }; }, []));
-  useFocusEffect(useCallback(() => { if (ready && user) router.replace(HOME_ROUTE); }, [ready, user, router]));
+  useFocusEffect(useCallback(() => { if (ready && user) router.replace(target); }, [ready, user, router, target]));
   function switchMode(next: typeof mode) { setMode(next); setPin(""); setConfirm(""); submit.setError(""); }
   const go = () => {
     if (!ready) return; // Keyboard submit must also respect session bootstrap.
@@ -34,7 +37,7 @@ export default function Entry() {
       setPin(""); setConfirm("");
       if (!entryFocused.current) return; // A late login must not hijack policy reading.
       if (router.canDismiss()) router.dismissAll();
-      router.replace(HOME_ROUTE);
+      router.replace(target);
     });
   };
   const invalid = !validPhone(phone) || !validPin(pin) || (signup && !validPin(confirm));
@@ -45,6 +48,7 @@ export default function Entry() {
       <T testID="entry-title" size={30} w="heavy">{signup ? "Start your next chapter." : "Welcome back."}</T>
       <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEELIVE.AI account. It works on the website and the app too." : "Sign in with the same mobile number and PIN you use on our website."}</T>
     </Animated.View>
+    {target !== HOME_ROUTE ? <Notice testID="entry-match-note" tone="info">Sign in or create an account to take your seat in the Rapid Fire match.</Notice> : null}
     {expired ? <Notice testID="entry-session-expired" tone="warning">Your session ended. Sign in again. Saved results and account-scoped drafts are preserved.</Notice> : null}
     {signOutWarning ? <Notice testID="entry-signout-warning" tone="warning">{signOutWarning}</Notice> : null}
     {sessionError ? <ErrorBox testID="entry-session-error" error={sessionError} retry={checkSession} /> : null}

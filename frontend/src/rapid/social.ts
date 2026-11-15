@@ -15,7 +15,7 @@ export type ChallengeNote = { id: string; subject: string; chapter?: string | nu
   vs?: { a: GangTag; b: GangTag } | null; team?: "a" | "b" | null; from: PlayerCard };
 export type CupNote = { id: string; label: string; size: number; joined: number; expires_in: number; from: PlayerCard };
 export type NightNote = { day: string; start_ts: number; time_label: string; starts_in: number };
-export type Notice = { id: string; kind: "friend_added" | "gang_added" | "cup_night"; ts: number; gang?: GangTag | null; night?: NightNote; from: PlayerCard };
+export type Notice = { id: string; kind: "friend_added" | "gang_added" | "cup_night"; ts: number; gang?: GangTag | null; via?: "link" | null; night?: NightNote; from: PlayerCard };
 export type Inbox = { me: PlayerCard; room: string | null; cup: string | null; cups: CupNote[]; challenges: ChallengeNote[]; notices: Notice[]; poll_s?: number };
 export type Friend = PlayerCard & { follows_you: boolean };
 
@@ -23,6 +23,12 @@ export const shortSubject = (s?: string) => (s === "Mathematics" ? "Maths" : s |
 export const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.max(0, s % 60)).padStart(2, "0")}`;
 export const ordinal = (n: number) => `${n}${["th", "st", "nd", "rd"][n % 10 > 3 || Math.floor(n / 10) === 1 ? 0 : n % 10]}`;
 export const roomLink = (cid: string) => `${RF_BASE}/c/${cid}`;
+/** A Match Room screen path (where a signed-out player returns after signing in from a match link). */
+export const isRoomPath = (path?: string) => !!path && /^\/rapid\/room\/[0-9a-f-]{36}$/.test(path);
+/** WhatsApp message for a Match Room: a match link (anyone can take a seat and becomes your friend), a Badla, or a reminder for invited friends. */
+export const shareRoom = (room: { id: string; link?: boolean; revenge?: boolean }, label: string) => sendWhatsApp(room.link
+  ? `⚔️ Rapid Fire match on JEELIVE.AI! ${label} · 30 cards · 15 s each.\nTap to take a seat (app or browser). Join and we become friends:\n${roomLink(room.id)}`
+  : `${room.revenge ? "🔥 Badla time! Rematch me" : "⚔️ Join my Rapid Fire match"} on JEELIVE.AI! ${label} · 30 cards · 15 s each.\nTake your seat before the timer runs out: ${roomLink(room.id)}`);
 
 // Friend Code: the only way to become friends. Shown in two groups of four so it is easy to read out.
 export const cleanCode = (text: string) => text.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
@@ -32,10 +38,12 @@ export const shareFriendCode = (code: string) =>
   sendWhatsApp(`Add me on JEELIVE.AI Rapid Fire and let’s see who is faster!\nMy Friend Code: ${prettyCode(code)}\nIn the app: Rapid Fire → Gang → Enter a friend’s code.`);
 
 export async function sendWhatsApp(text: string) {
-  if (Platform.OS === "web") { await Linking.openURL("https://wa.me/?text=" + encodeURIComponent(text)).catch(() => {}); return; } // a computer may have no WhatsApp app
+  // api.whatsapp.com directly: the wa.me redirect breaks emoji such as ⚔️ in the message.
+  const web = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
+  if (Platform.OS === "web") { await Linking.openURL(web).catch(() => {}); return; } // a computer may have no WhatsApp app
   try { await Linking.openURL("whatsapp://send?text=" + encodeURIComponent(text)); }
   catch {
-    try { await Linking.openURL("https://wa.me/?text=" + encodeURIComponent(text)); }
+    try { await Linking.openURL(web); }
     catch { Share.share({ message: text }).catch(() => {}); }
   }
 }
@@ -103,8 +111,9 @@ export const go = {
   cup: (cid: string) => ({ pathname: "/rapid/cup/[cid]", params: { cid } }) as any,
   watch: (did: string) => ({ pathname: "/rapid/watch/[did]", params: { did } }) as any,
 };
-/** Send a challenge to one friend, several friends, a whole gang, a rival gang (Gang War), or everyone from a finished match (rematch, Badla). */
-export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: string; rival_gang_id?: string; rematch_of?: string; picks?: Pick[] }) =>
+/** Send a challenge to one friend, several friends, a whole gang, a rival gang (Gang War), or everyone from a finished match (rematch, Badla).
+ *  `link` also opens the room to anyone with its WhatsApp link. */
+export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: string; rival_gang_id?: string; rematch_of?: string; picks?: Pick[]; link?: boolean }) =>
   rf<any>("/challenges", uid, { method: "POST", body });
 
 // Matches your friends and gang mates are playing right now, to watch live.

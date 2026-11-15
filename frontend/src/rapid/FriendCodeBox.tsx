@@ -64,7 +64,7 @@ export function FriendCodeBox({ uid, onAdded, onOpen }: { uid: string; onAdded: 
       right={found.is_me ? <T testID="rf-code-me" w="heavy" size={12} color={arena.aqua}>That’s you</T>
         : found.friend ? <T testID="rf-code-friend" w="heavy" size={12} color={arena.gold}>Friends ✓</T>
         : <RaisedButton testID="rf-code-add" label="Add" height={42} busy={busy === "add"} disabled={!!busy} onPress={add} style={styles.add} />} /></Pop>
-      : !text ? <T testID="rf-code-hint" size={12} color={arena.muted} style={styles.center}>Friends are made only with a Friend Code. Share yours or enter a friend’s, and you both become friends at once.</T> : null}
+      : !text ? <T testID="rf-code-hint" size={12} color={arena.muted} style={styles.center}>Share your Friend Code or enter a friend’s, and you both become friends at once. Players who join your match link become friends too.</T> : null}
   </View>;
 }
 

@@ -693,3 +693,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 ## Iteration77 — Deployment health check (Jun 2026)
 - Deployment agent: WARN, no blockers. Lint cleaned (unknown eslint rule comments removed, duplicate import merged). Regression smoke passed (iteration_77).
 - Open store/security warnings (not fixed, need owner decision): in-app account deletion disabled (Apple 5.1.1(v)); Forgot PIN has no OTP (user's choice) and needs JEELIVE_OWNER_EMAIL / JEELIVE_OWNER_PASSWORD in the deployed backend.
+
+## Iteration78 — WhatsApp match links (Jun 2026)
+- Play Friends → SHARE MATCH LINK creates a "Link Match" room (rooms.py `link:true`): anyone with the link takes one of 4 guest seats (host + 4), 3-minute room, starts on START / full / timer.
+- Taking a seat from the link makes the guest and host friends at once (social.make_friends, notice `via:"link"`). Blocked players can't see the room; invite-only rooms unchanged.
+- Public page /api/rf/c/{cid}: Open in the app, Play in your browser (/api/arena/rapid/room/{cid}), Get the app; WhatsApp preview text (og tags).
+- Signed-out link visitors sign in and come straight back to the room (entry `next`). WhatsApp share uses api.whatsapp.com (emoji safe). Browser arena rebuilt.
+- Tests: tests/test_iter77_match_link.py, tests/test_iter78_match_link_public.py, test_rf_social.py pass; frontend iteration_78 pass.

@@ -1,0 +1,35 @@
+{
+  "summary": "Iteration 78 – WhatsApp match links for Rapid Fire. Backend: test_iter77_match_link.py + test_rf_social.py pass (4/4). A new public-URL edge test (test_iter78_match_link_public.py) also passes: a link room with no pids; a stranger sees my_status 'link' and friend false; an unauthenticated GET is rejected; accept makes mutual friends and sends a friend_added notice; the seat count goes from '4 of 4' to '3 of 4 seats open'; a guest can't START; an outsider after start gets 409; an invite-only room returns 404 to strangers; the browser arena route returns 200. Frontend at 390x844, all flows PASS. (1) Host: Play Friends -> SHARE MATCH LINK -> 'Link Match' room with room-link, Copy link (-> 'Copied'), Share on WhatsApp, countdown 2:58, START disabled ('Waiting for 1 friend to join'). A fixture joined through the API -> 'Joined ✓', START enabled ('2 players ready') -> host moved to /rapid/duel and the joiner's room shows started with the same duel_id. (2) Visitor: room-link-invite 'TEST Host78 invited you', Not now + JOIN MATCH (no Decline) -> room-waiting-host + room-friend-note 'You and TEST Host78 are now friends ✓'; the Gang tab lists the host. (3) Signed-out deep link -> /entry?next=... with entry-match-note -> after sign-in, back on the same room. (4) Public page rf-link-browser -> /api/arena/entry?next=... -> sign-in -> /api/arena/rapid/room/<cid> shows the Match Room (checked on mobile and desktop). (5) Outsider on a started link room -> room-closed 'Match already started' with Quick Match and Back. (6) Regression: SEND CHALLENGE to a friend gives a '1 v 1 Challenge' room (Sent, Remind, Cancel works); an invite-only room shows Decline/ACCEPT and Decline leads to 'Challenge declined'. Two minor issues: the WhatsApp share text has a corrupted first emoji on web, and the friend_added notice text is wrong for link joins. No deprecated Expo packages detected.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "sendWhatsApp / shareRoom (web + native fallback)", "issue": "The share text starts with '⚔️'. https://wa.me/?text= redirects to api.whatsapp.com and turns that emoji into U+FFFD, so the message starts with '�'. Observed popup: api.whatsapp.com/send/?text=%EF%BF%BD+Rapid+Fire+match...; reproduced with curl -I 'https://wa.me/?text=%E2%9A%94%EF%B8%8F'. Reference: frontend/src/rapid/social.ts:30-31,41,44", "testID": "challenge-share-link / room-share-link / room-remind", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Gang tab (host after a link join)", "issues": ["The friend_added notice says 'TEST Joiner78 added you with your Friend Code. You are friends now!' even when the friendship came from a match link. Reference: frontend/src/rapid/GangTab.tsx:44 (the notice has no 'via' field; social.py make_friends).", "The FriendCodeBox hint 'Friends are made only with a Friend Code' is no longer true now that links also make friends. Reference: frontend/src/rapid/FriendCodeBox.tsx:67"]},
+      {"screen": "Match Room closed (started)", "issues": ["The 'Match already started' body says 'The seats filled up before you joined', but the room may have started from the host's START with only 1 guest. Consider neutral wording. Reference: frontend/app/rapid/room/[cid].tsx:25"]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter77_match_link.py", "/app/backend/tests/test_iter78_match_link_public.py", "/app/backend/tests/iter78_link_fixture.py", "/app/test_reports/pytest/iter78_match_link.xml"],
+  "action_items": [
+    "LOW: In sendWhatsApp use https://api.whatsapp.com/send?text= (or drop the leading emoji) for web and the native fallback, so the first emoji doesn't arrive as '�'.",
+    "LOW: Record how a friendship was made (e.g. via:'link' on the friend_added notice) and show '<name> joined your match link. You are friends now!'. Update the FriendCodeBox hint to mention match links.",
+    "LOW (optional): Neutral copy for 'Match already started' when the host pressed START."
+  ],
+  "critical_code_review_comments": [
+    "rooms.py room-link-empty logic ([cid].tsx:153) checks !invited.length. After every link guest leaves, invited still holds 'Left' rows, so the 'Seats fill up as friends tap your link' hint never comes back. Cosmetic.",
+    "rooms.py join(): free(uid, keep=cid) runs after the seat is taken (correct). make_friends(strict=False) silently skips when the friend list is full, but the response still returns friend=False, so the UI just doesn't show the friend note. Acceptable, though there is no message explaining it.",
+    "On web, the first Playwright force-click on rf-play-friends right after the lobby rendered did not navigate; a normal click after about 3 s worked. Likely a hydration/animation timing issue in Tile, not a user-facing bug."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter78_match_link_public.py (new)", "/app/backend/tests/iter78_link_fixture.py (new helper: setup/host/invite/accept/start/get/cleanup)"],
+  "success_rate": {"backend": "100% (5/5 pytest)", "frontend": "100% of requested flows (6/6)"},
+  "seed_data_creation": "Created 3 TEST-iter78-* fixture players (joiner/host/outsider) with rf_access grants (tokens only in a 0600 /tmp file). Cleanup was run: 3 access, 6 friend edges, 3 notices, 6 challenges, 2 duels and 3 profiles deleted. The QA learner (PF37CC308) is back to its baseline: 0 friends, 0 notices, 0 open or hosted challenges. The QA learner's link-match duel with the fixture was deleted unfinished.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on web: TextInput needs page.keyboard.type (page.fill doesn't register). Use tests/iter78_link_fixture.py for a second player (python3 tests/iter78_link_fixture.py setup, then host <Subject> <key> / accept <cid> <key> / start <cid> <key> / invite host / cleanup). subprocess calls work from inside browser_automation scripts. The QA learner's baseline is 0 RF friends and 0 notices."
+}

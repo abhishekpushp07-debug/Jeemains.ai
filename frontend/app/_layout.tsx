@@ -1,5 +1,5 @@
 import { ARENA, HOME_ROUTE, arenaAllows } from "@/src/arenaMode"; // first: the browser arena sets up its column before any screen measures the window
-import { Stack, useRouter, useSegments } from "expo-router";
+import { Stack, usePathname, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import { ActivityIndicator, LogBox, StyleSheet, View } from "react-native";
@@ -9,7 +9,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { ErrorBoundary } from "@/src/components/error-boundary";
 import { AuthProvider, useAuth } from "@/src/auth";
-import { InboxPoller } from "@/src/rapid/social";
+import { InboxPoller, isRoomPath } from "@/src/rapid/social";
 import { colors } from "@/src/theme";
 
 const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account"];
@@ -49,17 +49,18 @@ export default function RootLayout() {
   );
 }
 
-// Signed-out users opening any inner route are sent to entry (no endless placeholders).
+// Signed-out users opening any inner route are sent to entry (no endless placeholders). A match link comes back to its room after sign-in.
 // The browser arena is Rapid Fire only: tests stay on the website, so their routes lead back to the lobby.
 function AuthGate() {
   const { user, ready } = useAuth();
   const segments = useSegments();
+  const pathname = usePathname();
   const router = useRouter();
   useEffect(() => {
     const first = segments[0] as string | undefined;
-    if (ready && !user && first && !PUBLIC_ROUTES.includes(first)) router.replace("/entry");
+    if (ready && !user && first && !PUBLIC_ROUTES.includes(first)) router.replace(isRoomPath(pathname) ? { pathname: "/entry", params: { next: pathname } } : "/entry");
     else if (ARENA && ready && user && !arenaAllows(segments as string[])) router.replace(HOME_ROUTE);
-  }, [ready, user, segments, router]);
+  }, [ready, user, segments, pathname, router]);
   return null;
 }
 
