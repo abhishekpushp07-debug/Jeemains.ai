@@ -1,7 +1,7 @@
 # Active roadmap
 
 ## Super Admin content management (2026-11-14)
-- P0: Deploy only on the user's word. On the first production start, cleanup_once() moves BITSAT mocks + chapter-wise and JEE Main chapter-wise into the Library (PYQ untouched). After the deploy, check /super-admin/library on live and that the BITSAT/JEE Main PYQ sections still show their papers.
+- P0: The user asked to deploy on 2026-11-14. The deploy was dispatched (job bcd75d41-4661-4f5a-bead-654e0ffe34d2); the outcome is not confirmed yet. On the first production start, cleanup_once() moves BITSAT mocks + chapter-wise and JEE Main chapter-wise into the Library (PYQ untouched). After the deploy, check /super-admin/library on live and that the BITSAT/JEE Main PYQ sections still show their papers.
 - P1: In AITS books whose numerical questions have no "Numerical/Section B" heading, every numerical question is held. Each one then needs one Held-fixer save. Option: a bulk "these are numerical, keys as printed" confirm for each mock.
 - P2 (cosmetic): ReadyAction uses the native date-time input; the shadcn date and time picker could replace it.
 - Waiting for content: new BITSAT mocks, chapter-wise and PYQ, and new JEE Main chapter-wise (the user will supply them).
