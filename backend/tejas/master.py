@@ -108,15 +108,18 @@ async def type_mocks(sid: str, u=Depends(owner)):
                       'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject')})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
-            {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'}]},
-                                       {'state': 1, 'paused': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1}):
+            {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'},
+            {'state': 'ready', 'restored_at': {'$exists': True}}]},
+                                       {'state': 1, 'paused': 1, 'restored_at': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1}):
         unread, chapters = b['state'] == 'attention_needed', bool(b['payload'].get('chapters'))
         done = b['state'] == 'ready' or bool(unread and await db.tejas_book_mocks.find_one({'book_id': b['_id']}, {'_id': 1}))
-        if done and not chapters:
+        # A read PDF is listed only if it is chapter-wise (rename/split again) or came back from the Library.
+        if done and not chapters and not b.get('restored_at'):
             continue
         unread = unread and not done
-        # A chapter-wise PDF stays listed after reading so its chapters can be renamed or split again.
-        message = (f"{await db.tejas_book_mocks.count_documents({'book_id': b['_id'], 'archived': {'$ne': True}})} chapters read. Open Chapters to rename them or change where they start." if done else
+        made = await db.tejas_book_mocks.count_documents({'book_id': b['_id'], 'archived': {'$ne': True}}) if done else 0
+        message = (f"{made} chapters read. Open Chapters to rename them or change where they start." if done and chapters else
+                   f"Back from the Library. {made} mock{'s' if made != 1 else ''} read from it, listed in this type." if done else
                    'No questions could be read from this PDF. A scanned (photo) PDF cannot be read by itself: use Write instead.' if unread else b['payload'].get('message', ''))
         paused = bool(b.get('paused')) and b['state'] != 'failed'
         uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'done' if done else 'failed' if unread else 'paused' if paused else b['state'],

@@ -42,6 +42,18 @@ def verify(p, h):
     return bcrypt.checkpw(p.encode(), h.encode())
 
 
+# A 4-digit PIN gains little from a slow hash (rate limits protect it); a light one keeps exam-day sign-in fast.
+PIN_ROUNDS = 8
+
+
+def hash_pin(p):
+    return bcrypt.hashpw(p.encode(), bcrypt.gensalt(PIN_ROUNDS)).decode()
+
+
+def pin_hash_heavy(h):
+    return int(h.split('$')[2]) > PIN_ROUNDS
+
+
 def token(u, sid, kind, seconds):
     return jwt.encode(
         {

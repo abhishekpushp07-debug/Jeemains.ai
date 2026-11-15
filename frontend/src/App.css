@@ -1689,6 +1689,19 @@ code {
   color: var(--brand-text);
   font-weight: 600;
 }
+.auth-card .forgot-pin-link {
+  display: inline-block;
+  margin: -6px 0 6px;
+  padding: 4px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand-text);
+  transition: opacity 0.2s ease;
+}
+.auth-card .forgot-pin-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
 .field {
   display: flex;
   flex-direction: column;

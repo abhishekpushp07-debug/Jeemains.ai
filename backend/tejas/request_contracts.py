@@ -319,7 +319,7 @@ MODELS = {
     'attempts.solution_consulted': EmptyPayload,
     'imports.schedule_import': ScheduleInput, 'imports.toggle_live': LiveInput,
     'auth.login': LoginPayload, 'phone.access': PhonePayload, 'auth.preferences': PreferencePayload,
-    'phone.signup': PhoneSignupPayload, 'phone.change_pin': PinChangePayload,
+    'phone.signup': PhoneSignupPayload, 'phone.change_pin': PinChangePayload, 'phone.reset_pin': PinChangePayload,
     'phone.owner_reset_pin': OwnerPinResetPayload,
     'content.create_set': SetPayload, 'content.update_set': SetPayload,
     'content.edit_question': QuestionPayload, 'content.extract': ExtractPayload,

@@ -1,150 +1,157 @@
-# JEELIVE.AI Super Admin: Ek Master
+# JEELIVE.AI: Simple PIN, One Account, Exam-Day Readiness
 
-Ek hi screen jahan exam banta hai, exam ke andar mock type judta hai, aur mock type ke andar PDF upload karke ya likh kar mock banta hai.
-Har mock ka status wahin badalta hai, aur All India Test Series har exam ke liye Home par apna alag card pati hai.
+A student who forgets the PIN sets a new one in three steps, with no OTP, on the website and in the app.
+The same number and PIN work on both, and the site is checked and prepared for a first live exam of 20,000 to 1 lakh students.
 
-## Kiske liye
+## Who it's for
 
-- **Owner (Super Admin):** exam, mock type, mock, status, series. Sab kuch ek jagah se.
-- **Reviewer:** sirf woh mocks jinme kuch theek karna hai, aur students ke question reports.
-- **Students:** website aur app par wahi dekhte hain jo Master mein Live hai.
+- **Students:** sign up once, use the same number and PIN on the website and the app, and reset a forgotten PIN themselves.
+- **Owner:** no more PIN reset requests, a plain report of what is wrong on the live site, and a clear list of what 1 lakh students need.
+- **App agent:** one short message that says exactly which server calls the app must use.
+
+## What was found before writing this plan
+
+Read from the code, not yet run:
+
+- The website login has no "Forgot PIN". It tells the student to ask the owner. A student who forgot the PIN cannot get back in alone.
+- A PIN can be changed only from inside Profile, after signing in.
+- Older students who never set a PIN cannot sign in at all unless they are still signed in somewhere.
+- Not yet checked: whether the Change PIN button inside Profile itself fails. It is tested first, and fixed if it does.
+
+Website and app, by design:
+
+- Both use one server and one student list. A student who signs up on the website can sign in on the app with the same number and PIN, and the other way round.
+- This holds only if the app calls the same server with the same sign-up and sign-in calls. The app's code cannot be seen from here, so this is not confirmed.
+- Rapid Fire has its own separate accounts. That stays as it is.
 
 ## Core features and experience
 
-### 1. Ek Master screen, teen level
+### 1. Forgot PIN (website)
 
-Exam › Mock type › Mock. Upar hamesha raasta dikhta hai, jaise `Master › JEE Main › Mock Tests`.
+- A "Forgot PIN?" link under the PIN box on the login screen.
+- One screen: mobile number, new 4-digit PIN, confirm PIN.
+- A "PIN changed" confirmation. The student is signed in and continues to Home.
+- No OTP, no old PIN, no owner approval.
+- Works for every student number, including older accounts that never had a PIN.
+- A number with no account shows "No account with this number" and a link to create one.
+- The line "There is no public PIN reset" is removed from the login screen.
 
-Master ke upar ek patli line batati hai ki aaj kya dekhna hai, jaise "4 mock theek karne hain · 12 Live ke liye taiyaar · 3 student reports". Click karne par wahi mocks khulte hain.
+### 2. Change PIN inside Profile
 
-Upar teen chhote links rehte hain: **Library, Students, Team**.
+- Stays where it is: new PIN, confirm, save.
+- Tested first. If it fails, the cause is found and fixed.
 
-### 2. Naya exam
+### 3. One account on website and app
 
-"+ New exam" par chaar cheezein: naam, chhota naam, subjects, card ka rang. Naya exam students se chhupa rehta hai jab tak "Show on Home" na dabaya jaye.
+- The same Forgot PIN call is opened for the app, so the app's Forgot Password screen can use it.
+- The app guide is updated.
+- The read-only look at the live site (item 5) shows whether the app's sign-ups arrive at the same server as the website's.
+- The message for the app agent:
 
-### 3. Mock type jodna
+```
+Use one server for everything: https://jeelive.ai/api
+Do not keep a separate student list. Rapid Fire stays separate, as today.
 
-Exam ke andar "+ Add mock type" par paanch vikalp:
+Sign up:            POST /auth/phone/signup   phone, pin, confirm_pin
+Sign in:            POST /auth/phone          phone, pin
+Change PIN (signed in): POST /auth/pin        phone, new_pin, confirm_pin
+Forgot PIN (not signed in): POST /auth/pin/reset   phone, new_pin, confirm_pin
+   -> signs the student in, same reply as Sign in
+   -> works on jeelive.ai only after the next deploy
 
-| Type | Students ko kaise dikhta hai |
-|---|---|
-| PYQ | Papers saal ke hisaab se |
-| Mock | Poore papers ki seedhi list |
-| Chapter-wise | Subject › Chapter |
-| All India Test Series | Roz ek paper, rank ke saath, Home par alag card |
-| Apna type | Naam owner deta hai (jaise Revision Tests), list seedhi ya Subject › Chapter |
+PIN is text of exactly 4 digits. Keep leading zeros.
+Keep the cookies the server sends and send them on every call. There is no bearer token.
+Identify the student by the server's user.id, never by a local id.
+After any PIN change, other devices are signed out. Saved answers and results stay.
 
-Har type ka naam badal sakta hai, upar-neeche ho sakta hai, students se chhup sakta hai, aur uska apna default time aur marks hota hai. Students ko ek type tabhi dikhta hai jab usme kam se kam ek Live mock ho.
+Check: sign up on the website, sign in on the app with the same number and PIN,
+and My Tests must show the same attempts. Then repeat the other way round.
+```
 
-### 4. Mock banana: PDF upload
+### 4. Sign-in rush before a live exam
 
-- Ek box mein main PDF. System khud dekhta hai ki usme ek mock hai ya kai. "File type" nahi poochha jaata.
-- Ek hi PDF mein questions, answer key aur solutions teeno hon to teeno wahi se liye jaate hain.
-- Alag-alag hon to do aur optional box hain: **Answer key PDF** aur **Solutions PDF**.
-- Chapter-wise type mein har chapter alag test banta hai. Baaki types mein har chhapa hua mock ya paper alag test banta hai.
-- Padhna peeche chalta rehta hai; screen band kar sakte hain. Progress usi mock type ki list ke upar dikhta hai.
-- Har mock Draft ban kar list mein aata hai. Jis question ko system pakka nahi padh paya, us mock par "Draft · 3 to fix" dikhta hai aur "Fix" button khulta hai: question ki photo, jawab ka type, sahi jawab, save.
-- Answer key ke bina mock Live nahi ho sakta. Solution ke bina ho sakta hai (sirf answer key ke saath).
-- Koi AI credit apne aap kharch nahi hota.
+- Seen in the code, not measured: every sign-in checks the PIN with a deliberately slow lock. On the two small live servers this could allow only a few hundred sign-ins per minute.
+- 20,000 students signing in within 15 minutes need about 1,300 per minute.
+- The real number is measured first. If it is too low, the student PIN check is made lighter. Staff passwords are not changed. Existing PINs keep working.
 
-### 5. Mock banana: Write
+### 5. Read-only look at the live site
 
-Pehle mock ka naam. Time aur marks type ke default se bhare aate hain.
+Nothing is changed and no test account is created. A plain report covers:
 
-- **Ek-ek question:** subject (chapter-wise mein chapter bhi), question ka text (maths ke saath) aur chaho to photo, jawab ka type (options ya numerical), options A–D (text ya photo), sahi jawab, solution (text ya photo, optional). "Save & next".
-- **Poora paper paste:** poora text chipkao. System questions, options, answer key aur solutions alag karta hai aur list dikhata hai. Jo saaf nahi hai us par nishaan lagta hai aur woh ek-ek wale form mein theek hota hai.
+- whether the earlier deploys and the first nightly data repair actually completed
+- error and slow-request counts, including the 30-second hangs seen earlier
+- whether the live server allows the safe PDF reader
+- database size, the lookups that are slow, and whether a backup is visible
+- whether sign-ups from the app reach this server
 
-Dono tareeke ek hi mock mein mil sakte hain. Likha hua mock kabhi bhi wapas khol kar badla ja sakta hai.
+Any fix on live waits for the word "deploy".
 
-### 6. Har mock ka status
+### 6. Server size for 1 lakh
 
-| Status | Matlab |
-|---|---|
-| Draft | Sirf owner ko dikhta hai |
-| Live | Students ko dikhta hai |
-| Scheduled | Chuni hui date aur time (IST) par apne aap Live |
-| Off | Students se chhupa; scores surakshit |
-| Library | List se hata, Library mein surakshit, wahan se wapas aa sakta hai |
+- Measured earlier, not re-measured: the live site runs on 2 small servers. That is about 10,000 exam starts per minute and roughly 16,000 to 22,000 students writing at once.
+- 1 lakh at once needs about 10 to 12 CPUs and a database that takes about 1,400 answer saves per second.
+- This cannot be fixed in code. A ready request for platform support is prepared with these numbers, for the owner to send.
 
-- Har mock ki row par ek status button; ek click mein badalta hai.
-- Kai mock chun kar, ya "Select all" se, ek saath status badalta hai.
-- Schedule karte waqt ek switch "Live exam": sab students ek saath dete hain, 15 minute ka start window, turant score, rank. Switch ke bina mock us time se practice ke liye khul jaata hai.
-- Jis mock mein kuch theek karna baaki hai woh Live ya Scheduled nahi ho sakta; wajah saath mein dikhti hai.
-- Naye PDF se purane mock badalna (ek, kuch ya sab) rehta hai: purane tab tak Live rehte hain jab tak naya Live na ho, phir Library mein jaate hain.
-- Students ke purane attempts aur scores hamesha rehte hain.
+### 7. Three small known faults
 
-### 7. All India Test Series, har exam ke liye
-
-- Jodte waqt: shuru ki date, kitne din, roz khulne ka time, aur start karne ka aakhri time (IST).
-- Andar din ki list dikhti hai (Day 1 · 1 Dec, Day 2 · 2 Dec …). Paper PDF se ya likh kar bante hain, phir har paper ko din milta hai: ek-ek karke, ya "Fill days in order" se.
-- Paper apne din se pehle students ko nahi dikhta. Din ke baad practice ke roop mein rehta hai.
-- Jo din khul chuka hai woh nahi badalta. Aage ke din, dates aur time badal sakte hain.
-- "Show on Home" chalu karte hi us exam ki series ka alag card Home par aata hai.
-- Aaj ki JEE Main series (62 din, 1 Dec – 31 Jan) jaisi hai waisi rehti hai aur isi jagah se chalti hai.
-
-### 8. Students ko kya dikhega
-
-- Har exam ka ek card. Uske andar PYQ, Mock, Chapter-wise aur apne types.
-- Har chalu series ka alag bada card, aaj wale All India banner jaisi polished design mein, us exam ke naam ke saath. Ek se zyada series hon to cards saath-saath; mobile par ek ke neeche ek.
-
-### 9. Purane screens
-
-- Overview, Exams & Content, Upload, Review aur Schedule & Live hat jaate hain. Unka kaam Master ke andar hota hai. Purane links Master par le jaate hain.
-- Screen se hatne wale purane tools: 5-step upload wizard, file type chunna, purana manual editor, JEE transfer panel, Solutions (AI review) tab, Mock book checks tab, Data health panel.
-- Koi content, attempt ya score delete nahi hota.
+- A tab left open across a deploy shows "We couldn't open this screen" on the next click. It will reload itself once instead.
+- The clean source line could lose the exam name just after a server restart. Confirmed first, then fixed.
+- A PDF restored from the Library after it was read does not come back in the Uploads panel. It will.
 
 ## User flow
 
-1. Super Admin kholne par Master khulta hai: saare exams ke cards.
-2. "+ New exam" se naam, chhota naam, subjects aur rang bhar kar exam banta hai (abhi chhupa).
-3. Exam ke andar "+ Add mock type" se Mock chuna jaata hai.
-4. Mock type ke andar "Upload PDF" se file jaati hai. Mocks Draft ban kar list mein aate hain.
-5. Jis mock par "Fix" hai, uske cards bhar kar save hote hain.
-6. "Select all" ke baad "Make Live" ya "Schedule".
-7. "+ Add mock type" se All India Test Series: date, din, time. Papers upload, "Fill days in order", phir "Show on Home".
-8. Exam par "Show on Home".
-9. Student Home par exam ka card aur series ka alag card dekhta hai.
+1. A student opens Login and taps "Forgot PIN?".
+2. The student enters the mobile number, a new PIN, and the PIN again.
+3. "PIN changed" appears and the student is on Home, signed in.
+4. The student opens the app and signs in with the same number and the new PIN. My Tests shows the same attempts.
+5. A signed-in student can still change the PIN from Profile.
+6. The owner reads the live report and sends the server-size request to platform support.
 
 ## UI/UX feel
 
-- Ek screen, teen level. Kahin bhi teen click se zyada door nahi.
-- Bade, saaf cards aur rows. Har row par ek hi mukhya button.
-- Mock banane ke liye har jagah sirf do bade buttons: "Upload PDF" aur "Write".
-- Status ek rangeen chip hai jo dabane par badalta hai.
-- Engine ke shabd (held, matching, allowance, region, publication) screen par nahi aate.
-- Aaj ki dark theme rehti hai. Home ke exam cards ke rang nahi badalte.
-- Mobile par poora kaam hota hai: level ek-ek karke khulte hain.
+- Same dark theme and the same login card.
+- One link, one screen, one confirmation. No extra steps or warnings.
+- Large number boxes that open the number keypad on a phone.
+- Short, plain English messages.
+- Works fully at phone width.
 
 ## Implementation phases
 
-**Phase 1 (abhi banega):** upar ke 9 hisse. Master screen, naya exam, mock type (4 + apna), PDF upload (ek PDF ya alag key/solutions), Write (ek-ek aur paste), paanch status aur bulk badlav, har exam ke liye All India Test Series apni dates ke saath aur Home par alag card, purane screens hatana.
+**Phase 1 (built now):** the seven items above. Forgot PIN, Change PIN check, one account with the app message and guide, sign-in rush, read-only live report, server-size request, three small faults.
 
-**Phase 2 (alag approval):** ek exam mein agle saal ki nayi series aur purani series ka archive; PDF se bane mock mein question likh kar jodna ya badalna; mock ki copy aur doosre exam mein le jaana; search aur filters; drag karke order; kai numerical questions ek saath confirm karna.
+**Phase 2 (separate approval):**
+- One staged load test at exam size after the servers are enlarged.
+- A short waiting line under overload, so answer saves are not turned away.
+- 100 MB PDFs uploaded without holding the whole file in memory, and one real 100 MB storage test.
+- Faster reading of very large PDFs.
+- Decimal numerical answers.
+- Browser checks still open: replacing mocks with a new PDF, a series day while it is open, photo and Excel upload.
+- A check of student-history lookups at 1-lakh size.
 
-**Phase 3 (alag approval):** scanned (photo) PDF aur do-bhasha papers padhna; har exam ke liye alag reviewer; har mock ki report (kitne attempts, average score); kisne kya badla ka itihaas.
+**Phase 3 (separate approval):**
+- Scanned (photo) PDFs.
+- A database backup and restore drill.
+- The 30-second hangs at the network edge, taken up with platform support.
+- Series cards for new exams in the app.
+- The earlier Master Phase 2 and 3 items.
 
 ## Assumptions
 
-1. Aaj ka saara content jahan hai wahin rehta hai. Aaj ke "sections" hi ab "mock types" kehlate hain.
-2. PYQ, Mock, Chapter-wise aur All India Test Series ek exam mein ek-ek baar judte hain. Apne types jitne chahiye utne.
-3. PYQ type mein ab upload aur likhna khula hai. Har PYQ paper par saal zaroori hai; date aur shift optional.
-4. Aaj ke 30 verified JEE Main PYQ papers par taala rehta hai: unhe badla nahi ja sakta aur Library mein nahi bheja ja sakta. Sirf Live ya Off.
-5. Har PDF 100 MB tak. Sirf searchable PDF apne aap padhe jaate hain; scanned PDF ke liye Phase 1 mein Write.
-6. Upload par ek tick rehta hai: "is content ko students ko dikhane ki permission hai". Write mein nahi.
-7. Excel se questions laana Write ke andar ek chhote link ke roop mein rehta hai.
-8. Master mein koi AI button nahi hai. Padhna aur theek karna bina AI ke hota hai.
-9. Default time aur marks: JEE Main, BITSAT aur COMEDK mein exam ke pattern se bhare aate hain; naye exam mein owner ek baar bharta hai. PDF mein chhape niyam milen to wahi lagte hain, na milen to default.
-10. Live mock mein badlav naya version banata hai. Purane attempts aur scores nahi badalte.
-11. Mock ka naam PDF mein chhapa label hota hai; badal sakte hain.
-12. Ek exam mein ek samay par ek hi series. Result aur rank ke niyam wahi hain jo aaj JEE Main series mein hain.
-13. Ek series ke saare papers ka pattern ek jaisa hona chahiye (questions, time, marks) taaki rank barabar ho. JEE Main, BITSAT aur COMEDK mein exam ka apna pattern; naye exam mein pehla paper pattern tay karta hai.
-14. Series ka card Home aur website ke opening page dono par aata hai, exam card ke andar row ke roop mein nahi. Card exam ke rang mein banta hai; JEE Main series ka rang jaisa hai waisa.
-15. Website aur app ek hi jagah se content lete hain. JEE Main series app mein bina badlav chalti hai. Naye exams ki series ka card app mein tab dikhega jab app nayi series list padhne lage; app integration guide update hogi.
-16. Reviewer ko sirf theek karne wali list aur student question reports dikhte hain.
-17. Data health check raat ko apne aap chalta rehta hai. Dikkat ho to Master ke upar ek line dikhti hai.
-18. Kathin PDF ke liye page-level repair tools rehte hain, lekin "Fix" screen se ek link door, alag screen nahi.
-19. Jo purane tests kisi type mein nahi hain woh exam ke andar "Not in any type" ke neeche dikhte hain, jahan se unhe type mein rakha ja sakta hai.
-20. Screen ke labels saral English mein rehte hain, jaise abhi.
-21. Pichhle deploy ke saath gaya ek-baar ka cleanup (BITSAT mocks aur chapter-wise, JEE Main chapter-wise Library mein; PYQ untouched) is plan mein nahi badalta. Unki jagah naya content isi Master se aayega.
-22. Phase 1 pehle preview mein banta hai. jeelive.ai par sirf go-ahead ke baad jaata hai.
+1. "Forgot Password" is labelled "Forgot PIN?" because students have a PIN, not a password.
+2. Anyone who knows a student's mobile number can set a new PIN for it, open that student's tests and results, and sign that student out. This follows the owner's words: "Anyone can change any phone number or password, and it's okay."
+3. This also applies during a live exam. Someone can sign another student out in the middle of a ranked paper, or submit it. No guard for this is included. One can be added on request: no outside reset while that student's live paper is running.
+4. A limit stays: 5 PIN resets per number in 15 minutes, then a wait message.
+5. After a reset, every other device on that number is signed out. Saved answers, attempts and results stay. A running attempt continues after signing in again.
+6. A number with no account is not created by Forgot PIN. The student is sent to sign-up.
+7. Owner and reviewer logins (email and password) cannot be reset this way.
+8. The owner's reset in Super Admin › Students stays.
+9. The privacy page gets one honest line: a PIN can be reset by anyone who knows the number.
+10. "It is there in the app" is read as: the app already has a Forgot Password screen. The app's code is not visible from here, so the app side is done by the app agent.
+11. Rapid Fire accounts and server are not touched.
+12. The student PIN check is made lighter only if the measurement shows sign-in is too slow.
+13. The live look is read-only. The 100 MB storage test is not run, as it was not chosen.
+14. The capacity numbers are from earlier measurements. Phase 1 does not include a new load test.
+15. The server request is sized for 1 lakh, the top of the range given.
+16. One deploy carries everything built in preview. Forgot PIN reaches jeelive.ai together with the one-time cleanup: old non-PYQ tests go to the Library and the JEE Main series loses its papers but keeps its dates. Nothing goes live until the owner says "deploy".
+17. The note "Deprecated. The not code" was not understood. Nothing is removed or changed because of it.
+18. Screen labels stay in simple English.

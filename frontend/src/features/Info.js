@@ -86,11 +86,12 @@ export default function Info() {
           <p>
             HttpOnly cookies maintain a session after entry. A session cannot
             fetch a different profile’s records by changing an attempt URL.
-            Changing your PIN requires your existing signed-in session and signs
-            out other sessions. Older phone-only profiles can set their first PIN
-            from an existing session; signup cannot claim an existing profile.
-            There is no public PIN reset. The authorised owner can reset an existing
-            student's PIN after confirming the request, without changing saved results.
+            Forgot your PIN? Use Forgot PIN on the sign-in screen: your mobile
+            number and a new PIN, with no OTP and no old PIN. Because nothing
+            checks phone ownership, anyone who knows your number can set a new PIN
+            for it. A new PIN signs out every other device; saved practice and
+            results stay. Signup cannot claim an existing profile. The owner can
+            also reset a student's PIN without changing saved results.
           </p>
           <h2>Staff and answer-key protection</h2>
           <p>

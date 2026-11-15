@@ -72,12 +72,22 @@ function Protected({ children, staff = false }) {
     );
   return children;
 }
+const STALE_RELOAD = 'tejas-stale-reload';
 class Boundary extends React.Component {
-  state = { error: false };
+  state = { error: false, reloading: false };
   static getDerivedStateFromError() {
     return { error: true };
   }
+  componentDidCatch(error) {
+    // A tab opened before a deploy asks for screen files that no longer exist: reload once to get the new ones.
+    if (error?.name !== 'ChunkLoadError' && !/Loading (CSS )?chunk|dynamically imported module/i.test(error?.message || '')) return;
+    if (Date.now() - Number(sessionStorage.getItem(STALE_RELOAD) || 0) < 60000) return;
+    sessionStorage.setItem(STALE_RELOAD, String(Date.now()));
+    this.setState({ reloading: true });
+    window.location.reload();
+  }
   render() {
+    if (this.state.reloading) return <Loading />;
     return this.state.error ? (
       <div className="container section">
         <h1>We couldn’t open this screen.</h1>
@@ -146,6 +156,7 @@ function Shell() {
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />
             <Route path="/login" element={<Auth />} />
             <Route path="/signup" element={<Auth />} />
+            <Route path="/forgot-pin" element={<Auth />} />
             <Route path="/owner-login" element={<Auth staff />} />
             <Route
               path="/home"

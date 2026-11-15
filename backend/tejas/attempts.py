@@ -159,7 +159,8 @@ async def my_sets(exam: str = "", q: str = "", page: int = 1, u=Depends(current)
 
 @router.get("/my/sets/{id}")
 async def my_set(id: str, u=Depends(current)):
-    from .structure import hidden_from, path_for
+    from .structure import hidden_from, path_for, visibility
+    await visibility()
     s = await get(sets, id)
     if s["status"] != "published" or not permitted(s, u, at=await database_now()) or await hidden_from(s, u):
         raise HTTPException(404, "This set is not available to your account.")

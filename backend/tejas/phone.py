@@ -9,7 +9,7 @@ from starlette.concurrency import run_in_threadpool
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError, PyMongoError
 from .db import audit, db, uid, now
-from .auth import current, forget_student, hashpw, new_session, owner, verify
+from .auth import current, forget_student, hash_pin, new_session, owner, pin_hash_heavy, verify
 from .documents import BaseDocument
 from .request_contracts import PhonePayload, PhoneSignupPayload, PinChangePayload, OwnerPinResetPayload
 from .rate_limits import increment
@@ -79,9 +79,12 @@ async def access(data: PhonePayload, request: Request, response: Response):
         raise HTTPException(429, 'Too many incorrect PIN attempts. Please wait before signing in again.',
                             headers={'Retry-After': str(max(1, int((hour + 1) * 3600 - stamp) + 1))})
     if not u or not u.get('pin_hash') or not await run_in_threadpool(verify, data.pin, u['pin_hash']):
-        raise HTTPException(401, 'Mobile number or PIN is incorrect. Older profiles must set a PIN from their existing signed-in session.')
+        raise HTTPException(401, 'Mobile number or PIN is incorrect. Forgot your PIN? Use Forgot PIN to set a new one.')
     await db.tejas_phone_limits.update_one({'_id': budget_key, 'count': {'$gt': 0}}, {'$inc': {'count': -1}})
-    await db.tejas_phone_profiles.update_one({'id': u['id']}, {'$set': {'last_seen_at': now()}})
+    change = {'last_seen_at': now()}
+    if pin_hash_heavy(u['pin_hash']):
+        change['pin_hash'] = await run_in_threadpool(hash_pin, data.pin)
+    await db.tejas_phone_profiles.update_one({'id': u['id'], 'pin_hash': u['pin_hash']}, {'$set': change})
     result = await new_session({**u, 'role': 'student', 'access_type': 'unverified_phone'}, response)
     await db.tejas_phone_limits.delete_one({'_id': limit_key})
     return result
@@ -92,10 +95,10 @@ async def signup(data: PhoneSignupPayload, request: Request, response: Response)
     phone = normalize_phone(data.phone)
     await limit_pin(phone, request, 'signup')
     if await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 1}):
-        raise HTTPException(409, 'This number already has a profile. Sign in, or set a PIN from its existing signed-in session.')
+        raise HTTPException(409, 'This number already has an account. Sign in, or use Forgot PIN to set a new PIN.')
     stamp = now()
     profile = PhoneProfile.from_mongo({'_id': uid(), 'id': uid(), 'phone': phone,
-        'pin_hash': await run_in_threadpool(hashpw, data.pin), 'created_at': stamp,
+        'pin_hash': await run_in_threadpool(hash_pin, data.pin), 'created_at': stamp,
         'consent_at': stamp, 'last_seen_at': stamp})
     try:
         await db.tejas_phone_profiles.insert_one(profile.to_mongo())
@@ -104,23 +107,18 @@ async def signup(data: PhoneSignupPayload, request: Request, response: Response)
     return await new_session(profile.model_dump(by_alias=True, exclude={'id', 'pin_hash'}), response)
 
 
-@router.post('/pin')
-async def change_pin(data: PinChangePayload, request: Request, response: Response, u=Depends(current)):
-    phone = normalize_phone(data.phone)
-    if u.get('access_type') != 'unverified_phone' or phone != u.get('phone'):
-        raise HTTPException(403, 'You can change only your own student PIN.')
-    await limit_pin(phone, request, 'change')
+async def replace_pin(u, phone, new_pin, response, action, extra=None):
+    """New PIN, a fresh session here, every other session of this student signed out. Saved work stays."""
     version = u.get('pin_version', 0)
-    hashed = await run_in_threadpool(hashpw, data.new_pin)
+    hashed = await run_in_threadpool(hash_pin, new_pin)
     updated = await db.tejas_phone_profiles.find_one_and_update(
         {'id': u['id'], 'phone': phone, '$expr': {'$eq': [{'$ifNull': ['$pin_version', 0]}, version]}},
-        {'$set': {'pin_hash': hashed}, '$inc': {'pin_version': 1}},
+        {'$set': {'pin_hash': hashed, **(extra or {})}, '$inc': {'pin_version': 1}},
         return_document=ReturnDocument.AFTER, projection={'_id': 0, 'pin_hash': 0})
     if not updated:
-        raise HTTPException(409, 'Your account changed. Sign in again before changing the PIN.')
+        raise HTTPException(409, 'This PIN was changed a moment ago. Try again.')
     forget_student(user_id=u['id'])
-    from .db import audit
-    await audit(u['id'], 'student_pin_changed', u['id'])
+    await audit(u['id'], action, u['id'])
     result = await new_session({**updated, 'role': 'student', 'access_type': 'unverified_phone'}, response)
     try:
         await db.tejas_sessions.delete_many({'user_id': u['id'], 'access_type': 'unverified_phone', '$or': [
@@ -128,6 +126,27 @@ async def change_pin(data: PinChangePayload, request: Request, response: Respons
     except PyMongoError:
         logging.getLogger(__name__).warning('Stale PIN sessions remain fenced; physical cleanup deferred to expiry.')
     return result
+
+
+@router.post('/pin')
+async def change_pin(data: PinChangePayload, request: Request, response: Response, u=Depends(current)):
+    phone = normalize_phone(data.phone)
+    if u.get('access_type') != 'unverified_phone' or phone != u.get('phone'):
+        raise HTTPException(403, 'You can change only your own student PIN.')
+    await limit_pin(phone, request, 'change')
+    return await replace_pin(u, phone, data.new_pin, response, 'student_pin_changed')
+
+
+@router.post('/pin/reset')
+async def reset_pin(data: PinChangePayload, request: Request, response: Response):
+    """Forgot PIN: number + new PIN, no OTP and no old PIN (owner's choice). Signs the student in like sign-in does."""
+    phone = normalize_phone(data.phone)
+    await limit_pin(phone, request, 'reset')
+    u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0, 'id': 1, 'pin_version': 1})
+    if not u:
+        raise HTTPException(404, 'No account with this number. Create one instead.')
+    return await replace_pin(u, phone, data.new_pin, response, 'student_pin_reset_forgot',
+                             {'pin_reset_at': now(), 'pin_reset_via': 'forgot_pin'})
 
 
 class OwnerPinResetReceipt(BaseModel):
@@ -149,7 +168,7 @@ async def owner_reset_pin(data: OwnerPinResetPayload, response: Response, u=Depe
         if count > maximum:
             raise HTTPException(429, 'Too many PIN resets. Please wait before trying again.',
                                 headers={'Retry-After': str(max(1, int((window + 1) * 900 - stamp) + 1))})
-    hashed = await run_in_threadpool(hashpw, data.new_pin)
+    hashed = await run_in_threadpool(hash_pin, data.new_pin)
     updated = await db.tejas_phone_profiles.find_one_and_update(
         {'phone': phone, 'role': {'$in': ['student', None]}, 'access_type': {'$in': ['unverified_phone', None]},
          '$expr': {'$eq': [{'$ifNull': ['$pin_version', 0]}, data.expected_pin_version]}},

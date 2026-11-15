@@ -113,6 +113,8 @@ async def remove_saved(id: str, u=Depends(current)):
 
 
 async def saved_page(u, exam, q, start, end, status, page):
+    from .structure import visibility
+    await visibility()
     match = filters({'user_id': u['id']}, exam, q, start, end, 'saved_at')
     pipeline = [{'$match': match}, {'$lookup': {'from': sets.name, 'let': {'sid': '$set_id'},
         'pipeline': [{'$match': {'$and': [visible_set(u), {'$expr': {'$eq': ['$id', '$$sid']}}]}}, {'$project': PROJECT}], 'as': 'live'}}]

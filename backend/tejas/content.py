@@ -160,7 +160,8 @@ async def catalogue(exam: str = "", q: str = "", page: int = 1):
 
 @router.get("/sets/{id}")
 async def set_detail(id: str):
-    from .structure import hidden_from, path_for
+    from .structure import hidden_from, path_for, visibility
+    await visibility()
     s = await get(sets, id)
     if s["status"] != "published" or not permitted(s, at=await database_now()) or await hidden_from(s, None):
         raise HTTPException(
@@ -172,6 +173,8 @@ async def set_detail(id: str):
 @router.get("/studio/sets")
 async def studio_sets(u=Depends(staff)):
     from .catalog import page
+    from .structure import visibility
+    await visibility()
 
     query = {"qa_only": {"$ne": True}, 'import_id': {'$exists': False}, 'chapter_book_id': {'$exists': False}, 'book_import_id': {'$exists': False}}
     return [summary(s) for s in await page(query, size=100)]

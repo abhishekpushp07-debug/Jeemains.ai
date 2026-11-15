@@ -103,7 +103,7 @@ async def restore_uploads(refs):
         if not ids:
             continue
         if name == 'tejas_books':
-            change = [{'$set': {'paused': {'$ifNull': ['$paused_before_archive', False]}}}, {'$unset': ['archived', 'archived_at', 'paused_before_archive']}]
+            change = [{'$set': {'paused': {'$ifNull': ['$paused_before_archive', False]}, 'restored_at': now()}}, {'$unset': ['archived', 'archived_at', 'paused_before_archive']}]
         else:
             change = {'$unset': {'archived': '', 'archived_at': ''}}
         n += (await db[name].update_many({key: {'$in': ids}, 'archived': True}, change)).modified_count
@@ -159,7 +159,7 @@ async def restore_sets(ids):
         if not owners:
             continue
         if name == 'tejas_books':
-            change = [{'$set': {'paused': {'$ifNull': ['$paused_before_archive', False]}}}, {'$unset': ['archived', 'archived_at', 'paused_before_archive']}]
+            change = [{'$set': {'paused': {'$ifNull': ['$paused_before_archive', False]}, 'restored_at': now()}}, {'$unset': ['archived', 'archived_at', 'paused_before_archive']}]
         else:
             change = {'$unset': {'archived': '', 'archived_at': ''}}
         await db[name].update_many({key: {'$in': owners}, 'archived': True}, change)

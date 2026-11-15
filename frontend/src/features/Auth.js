@@ -11,6 +11,7 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
+import { toast } from "sonner";
 import { post } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import { Field, ErrorBox } from "../components/Shared";
@@ -18,6 +19,8 @@ export default function Auth({ staff = false }) {
   const { setUser } = useAuth();
   const location = useLocation();
   const signup = !staff && location.pathname === '/signup';
+  const reset = !staff && location.pathname === '/forgot-pin';
+  const [missing, setMissing] = useState(false);
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
   const nav = useNavigate();
@@ -29,19 +32,22 @@ export default function Auth({ staff = false }) {
   const [busy, setBusy] = useState(false);
   async function submit(e) {
     e.preventDefault();
-    if (signup && pin !== confirmPin) { setError('PINs must match.'); return; }
+    setMissing(false);
+    if ((signup || reset) && pin !== confirmPin) { setError('PINs must match.'); return; }
     setBusy(true);
     setError("");
     try {
-      const u = await post(
-        staff ? '/auth/login' : signup ? '/auth/phone/signup' : '/auth/phone',
-        staff ? { email, password } : signup ? { phone, pin, confirm_pin: confirmPin } : { phone, pin },
-      );
+      const [path, body] = staff ? ['/auth/login', { email, password }]
+        : signup ? ['/auth/phone/signup', { phone, pin, confirm_pin: confirmPin }]
+        : reset ? ['/auth/pin/reset', { phone, new_pin: pin, confirm_pin: confirmPin }]
+        : ['/auth/phone', { phone, pin }];
+      const u = await post(path, body);
       if (staff && !["owner", "reviewer"].includes(u.role))
         throw new Error(
           "This is the staff entrance. Use mobile-number entry for student practice.",
         );
       setUser(u);
+      if (reset) toast.success('PIN changed. You are signed in.');
       const next = params.get("next");
       nav(
         next?.startsWith('/') && !next.startsWith('//') && !next.includes('\\') && !/[\u0000-\u001f]/.test(next)
@@ -53,6 +59,7 @@ export default function Auth({ staff = false }) {
       );
     } catch (e) {
       setError(e.message);
+      setMissing(reset && e.status === 404);
     } finally {
       setBusy(false);
     }
@@ -90,13 +97,14 @@ export default function Auth({ staff = false }) {
         <span className="auth-icon">
           {staff ? <ShieldCheck size={25} /> : <Phone size={24} />}
         </span>
-        <h2 data-testid="auth-title">{staff ? 'Super Admin.' : signup ? 'Create your student account.' : 'Welcome back.'}</h2>
+        <h2 data-testid="auth-title">{staff ? 'Super Admin.' : signup ? 'Create your student account.' : reset ? 'Set a new PIN.' : 'Welcome back.'}</h2>
         <p>
           {staff
             ? "Authorized owners and reviewers only."
-            : signup ? 'Your mobile number and a 4-digit PIN. No OTP.' : 'Sign in with your mobile number and 4-digit PIN.'}
+            : signup ? 'Your mobile number and a 4-digit PIN. No OTP.' : reset ? 'Your mobile number and a new 4-digit PIN. No OTP, no old PIN.' : 'Sign in with your mobile number and 4-digit PIN.'}
         </p>
         <ErrorBox error={error} />
+        {missing && <p className="auth-switch"><Link data-testid="forgot-pin-create-account" to="/signup" onClick={()=>{setError('');setMissing(false);setPin('');setConfirmPin('');}}>Create an account with this number</Link></p>}
         <form onSubmit={submit}>
           {staff ? (
             <>
@@ -148,15 +156,16 @@ export default function Auth({ staff = false }) {
                   Outside India? Include your country code, starting with +.
                 </small>
               </label>
-              <Field id="student-pin-input" label={signup ? 'Create 4-digit PIN' : '4-digit PIN'} type="password" inputMode="numeric" autoComplete={signup ? 'new-password' : 'current-password'} pattern="[0-9]{4}" minLength={4} maxLength={4} required value={pin} onChange={e=>setPin(e.target.value.replace(/[^0-9]/g,''))}/>
-              {signup && <Field id="student-confirm-pin-input" label="Confirm PIN" type="password" inputMode="numeric" autoComplete="new-password" pattern="[0-9]{4}" minLength={4} maxLength={4} required value={confirmPin} onChange={e=>setConfirmPin(e.target.value.replace(/[^0-9]/g,''))}/>}
+              <Field id={reset ? 'forgot-pin-new-input' : 'student-pin-input'} label={signup ? 'Create 4-digit PIN' : reset ? 'New 4-digit PIN' : '4-digit PIN'} type="password" inputMode="numeric" autoComplete={signup || reset ? 'new-password' : 'current-password'} pattern="[0-9]{4}" minLength={4} maxLength={4} required value={pin} onChange={e=>setPin(e.target.value.replace(/[^0-9]/g,''))}/>
+              {!signup && !reset && <Link className="forgot-pin-link" data-testid="forgot-pin-link" to={'/forgot-pin' + (params.toString() ? '?' + params.toString() : '')} onClick={()=>{setError('');setPin('');setConfirmPin('');}}>Forgot PIN?</Link>}
+              {(signup || reset) && <Field id={reset ? 'forgot-pin-confirm-input' : 'student-confirm-pin-input'} label="Confirm PIN" type="password" inputMode="numeric" autoComplete="new-password" pattern="[0-9]{4}" minLength={4} maxLength={4} required value={confirmPin} onChange={e=>setConfirmPin(e.target.value.replace(/[^0-9]/g,''))}/>}
               <p
                 className="phone-disclosure"
                 id="phone-access-note"
                 data-testid="student-login-no-otp-notice"
               >
                 PIN protects access to your saved practice; it does not verify phone ownership. No OTP is sent.
-                {!signup && ' Older profile without a PIN? Set it in Profile from your existing signed-in session.'}
+                {reset && ' Other devices on this number are signed out. Your saved practice and results stay.'}
               </p>
             </>
           )}
@@ -165,7 +174,7 @@ export default function Auth({ staff = false }) {
             className="btn btn-primary full-width"
             disabled={busy}
             data-testid={
-              staff ? "login-submit-button" : "student-login-continue-button"
+              staff ? "login-submit-button" : reset ? "forgot-pin-submit-button" : "student-login-continue-button"
             }
           >
             {busy ? <Loader2 className="spin" size={18} /> : null}
@@ -173,7 +182,7 @@ export default function Auth({ staff = false }) {
               ? "Opening your space…"
               : staff
                 ? "Open Super Admin"
-                : signup ? 'Create account' : 'Sign in'}
+                : signup ? 'Create account' : reset ? 'Save new PIN' : 'Sign in'}
             <ArrowRight size={18} />
           </Button>
         </form>
@@ -186,8 +195,7 @@ export default function Auth({ staff = false }) {
           </p>
         ) : (
           <>
-            <p className="auth-switch"><Link data-testid="student-auth-switch" to={(signup ? '/login' : '/signup') + (params.toString() ? '?' + params.toString() : '')} onClick={()=>{setError('');setPin('');setConfirmPin('');}}>{signup ? 'Already have an account? Sign in' : 'New student? Create an account'}</Link></p>
-            {!signup && <p className="phone-disclosure" data-testid="pin-recovery-note">Change your PIN inside your signed-in Profile. If you cannot sign in, request a reset from the owner. There is no public PIN reset.</p>}
+            <p className="auth-switch"><Link data-testid="student-auth-switch" to={(signup || reset ? '/login' : '/signup') + (params.toString() ? '?' + params.toString() : '')} onClick={()=>{setError('');setMissing(false);setPin('');setConfirmPin('');}}>{signup ? 'Already have an account? Sign in' : reset ? 'Remembered your PIN? Sign in' : 'New student? Create an account'}</Link></p>
             <p className="phone-consent">
               By continuing, you agree to store this number and your practice
               records as described in our{" "}

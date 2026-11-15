@@ -284,6 +284,8 @@ async def chapter_live(id:str,sid:str,data:ChapterLive,u=Depends(owner)):
 
 
 async def exam_catalogue(subject,q,page,user=None):
+    from .structure import visibility
+    await visibility()
     query=available(user,'BITSAT',q);query['chapter_book_id']={'$exists':True}
     totals_query=available(user,'BITSAT');totals_query['chapter_book_id']={'$exists':True}
     if subject:

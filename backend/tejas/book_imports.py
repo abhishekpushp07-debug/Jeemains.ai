@@ -424,5 +424,6 @@ async def series_detail(id:str,u=Depends(current)):
     query=available(u);query['book_import_id']=id
     rows=await sets.find(query,PROJECT|{'book_series_title':1,'test_kind':1,'full_length':1}).sort('mock_number',1).to_list(None)
     if not rows:raise HTTPException(404,'No released mocks in this series.')
-    from .structure import path_for
+    from .structure import path_for, visibility
+    await visibility()
     return {'id':id,'title':rows[0]['book_series_title'],'published_count':len(rows),'path':await path_for(rows[0]),'items':[summary(s) for s in rows]}
