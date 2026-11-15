@@ -1,0 +1,35 @@
+{
+  "summary": "Tested Forgot PIN (POST /api/auth/pin/reset + /forgot-pin UI), signed-in Change PIN, PIN bcrypt cost 12->8 with rehash on sign-in, the stale-tab chunk auto-reload, the /privacy text, mobile layout, and a Library-restored PDF showing in the Master type Uploads panel. Everything ran on isolated disposable DBs and the library_bridge183 bridge. The new suite tests/forgot_pin_iso184.py passed 53/53. Regressions passed: iter154 27/27, iter155 12/12, iter156 15/15, iter161 11/11 (each file run alone with -n0), fresh_start_iso183 38/38, master_iso181 124/124. Browser checks through the bridge passed: link, title, carried-over phone, mismatch error, unknown-number 404 with signup link, success toast and /home, old PIN rejected and new PIN accepted, Profile Change PIN toast and new PIN works, switch link, signup, privacy text, no overflow at 390px. Stale chunk: when the chunk fails once, the page reloads once and Login renders. When it fails every time, the page reloads once and then shows 'We couldn’t open this screen.' with reload-app, with no loop.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/admin/library/archive {ids}", "issue": "Archiving tests by ids never moves their source PDF (tejas_books) to the Library; only the section path and fresh start call archive_sources (response uploads: 0). So a PDF whose tests were archived one by one is never archived, never gets restored_at on restore, and so does not show 'Back from the Library' in Master Uploads. archive_sources' 'older uploads whose every test is now in the Library' branch is only reached with section_id. Confirm this is intended."},
+      {"endpoint": "pytest harness", "issue": "The exact command in the request (4 PIN suites in one pytest call) errors under the pytest.ini xdist default: 'Future belongs to a different loop' in the module fixtures. Each suite passes alone, or all four pass with -n0. This is a harness problem, not an app bug."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/login mobile", "issues": ["The 'Forgot PIN?' link tap target is 65x26 px, under the recommended 44 px height. Add padding or a min-height."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/forgot_pin_iso184.py"],
+  "action_items": [
+    "Optional: decide whether archiving tests by ids should also archive (and later mark restored) their source PDF when all of its tests are in the Library.",
+    "Optional: enlarge the Forgot PIN? link tap target on mobile.",
+    "Optional: make the PIN isolated suites xdist-safe, or document running them with -n0."
+  ],
+  "critical_code_review_comments": [
+    "phone.reset_pin does not filter role/access_type on tejas_phone_profiles, while owner_reset_pin does. This is fine as long as staff accounts never live in tejas_phone_profiles (staff are in tejas_users, and an email as phone gives 422).",
+    "Forgot PIN with no OTP lets anyone who knows a number take over that account and sign out its other devices. This is the owner's accepted design and the privacy page says so. The only brake is the limit of 5 per number per 15 minutes (plus per-IP limits for global IPs).",
+    "The Boundary reload in App.js is correctly limited to ChunkLoadError or 'Loading chunk' messages and to once per 60 s via sessionStorage. In the CRA dev server the react-error-overlay also appears over the error page (dev only).",
+    "The rehash in access() uses a CAS on pin_hash, so a PIN change racing a sign-in will not be overwritten. Good."
+  ],
+  "updated_files": ["/app/backend/tests/forgot_pin_iso184.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "Only in isolated DBs and the bridge DB (TEST student 95xxxxxxxx, PINs 1357->2468->9753). The bridge was stopped and its DB tejas_isolated_book170_8513300f dropped. Every suite dropped its own DB. One empty, indexes-only DB, tejas_isolated_book170_677e53c0, of unknown origin (possibly a concurrent run) was left untouched. No preview customer data or owner login was used.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && python tests/forgot_pin_iso184.py (prints PASS/FAIL, drops its DB). Run the PIN pytest suites one file at a time or with -n0. Browser: start library_bridge183.py 2400 &, create a student via /api/auth/phone/signup on 127.0.0.1:8770, and route **/api/** to the bridge, forwarding the context cookies manually. Stale-chunk test: route regex .*/static/js/.*\\.chunk\\.js and return text/html. In dev the Auth chunk is src_features_Auth_js.chunk.js, loaded on clicking public-header-login-link from /."
+}

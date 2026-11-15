@@ -1690,9 +1690,11 @@ code {
   font-weight: 600;
 }
 .auth-card .forgot-pin-link {
-  display: inline-block;
-  margin: -6px 0 6px;
-  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: -12px 0 0;
+  padding: 0 12px 0 0;
   font-size: 12px;
   font-weight: 600;
   color: var(--brand-text);

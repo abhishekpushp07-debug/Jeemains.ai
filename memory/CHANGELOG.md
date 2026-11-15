@@ -1,3 +1,12 @@
+## 2026-11-15 (newest) — Simple PIN, One Account, Exam-Day Readiness (preview only, NOT deployed)
+- Forgot PIN: POST /api/auth/pin/reset {phone,new_pin,confirm_pin}; /forgot-pin screen; 'Forgot PIN?' link on /login; "There is no public PIN reset" removed from login and privacy page.
+- Change PIN in Profile verified working (shared replace_pin helper).
+- Student PIN hash bcrypt cost 12 → 8 (re-hash on next sign-in); staff passwords unchanged.
+- Stale tab after deploy reloads itself once; source line refreshes exam/section names on every route; a read PDF restored from the Library shows again in Master Uploads.
+- docs/APP_INTEGRATION.md (Forgot PIN for the app), docs/SERVER_SIZE_REQUEST.md (10–12 vCPU, DB for ~1,400 saves/s).
+- Tests: iteration_184 all pass; tests/forgot_pin_iso184.py 53/53.
+
+
 ## 2026-11-15 (latest) — Clean source line, fresh start, Library redesign (preview only, NOT deployed)
 Students and the app now read where a test sits ("BITSAT · Chapter-wise Tests · Physics", "JEE Main · PYQ Papers · 2025") instead of file names or back-office text. One-time fresh start: only JEE Main PYQ stays for students; all other tests, All India series papers (dates kept) and uploads move to the Library; Rapid Fire untouched; student attempts untouched. Library redesigned as a plain recycle bin: stats, guide with next upload steps, exam tabs, type chips, search, exam › type groups with subject sub-headers, select + sticky restore, restore dialog in plain words; series papers return to their day when free.
 Tests: fresh_start_iso183 38/38; regressions library_aits_iso180 125/125, master_iso181 124/124, structure_iso173 133/133, chapters_iso182 58/58; testing agent iteration_183 passed after 3 small fixes.

@@ -1,3 +1,13 @@
+# Simple PIN (2026-11-15)
+- P0: Deploy only on the user's word "deploy". Forgot PIN goes live together with the one-time fresh start and Library work. After deploy: check /api/auth/pin/reset is in the live openapi and the app agent switches its Forgot Password screen to it.
+- P0 (owner action): send docs/SERVER_SIZE_REQUEST.md to platform support.
+- P1: Read the deployer's read-only live report (job bcd75d41-4661-4f5a-bead-654e0ffe34d2) and act on it after approval.
+- P1 (open choice): no guard stops an outside PIN reset during a student's running live paper; add one if the owner asks.
+- P2: Archiving single tests by id does not move their source PDF to the Library (only section/fresh start do), so such a PDF never shows "Back from the Library".
+- P2: Existing students pay the old 196 ms PIN check once on their first sign-in after deploy.
+- Phase 2 (separate approval): staged load test, overload waiting line, 100 MB streaming upload, faster large PDFs, decimal answers, open browser checks, history lookups at 1 lakh.
+
+
 # Master Phase 1 (2026-11-15)
 - P0: Wait for the user's go-ahead before deploying Master to jeelive.ai. On deploy the sets index series_date_1 is replaced by series_day_unique (done at startup by db.indexes()). The same deploy runs the one-time fresh start on production (only JEE Main PYQ stays; every other test, the 62-day JEE series papers and uploads go to the Library; series dates kept). After deploy: check the Library on live and that JEE Main PYQ still shows 30 papers.
 - P0 after deploy: owner makes one real PDF upload and one written mock on live; ask for a screenshot if anything fails.
