@@ -43,6 +43,13 @@ SPEC = {
     'master.type_mocks': ('owner_only_type_mock_metadata','normal','read'),
     'master.change_status': ('owner_only_mock_status','control','per_item_state_audited'),
     'master.dismiss_upload': ('owner_only_upload_to_library','control','idempotent_flag_audited'),
+    'chapter_split.read_chapters': ('owner_only_chapter_upload_metadata','normal','read'),
+    'chapter_split.page_thumb': ('owner_only_chapter_page_image','batch','read'),
+    'chapter_split.save_details': ('owner_only_chapter_names_subjects','control','lease_book_revision_audited'),
+    'chapter_split.save_starts': ('owner_only_chapter_starts','control','lease_book_revision_audited'),
+    'chapter_split.clear_starts': ('owner_only_chapter_starts','control','lease_book_revision_audited'),
+    'draft_preview.open_preview': ('owner_or_reviewer_unpublished_drafts_only','control','content_fingerprint_private_copy'),
+    'draft_preview.preview_status': ('owner_or_reviewer_unpublished_drafts_only','normal','read'),
     'written.create_written': ('owner_only_new_draft_mock','control','not_idempotent_audited'),
     'written.read_written': ('owner_any_reviewer_flagged_drafts_only','normal','read'),
     'written.update_written': ('owner_only_written_mock_details','control','revision_CAS_audited'),
@@ -258,7 +265,7 @@ def install_contracts(app):
             limit = 512 * 1024
         elif key in ('book_imports.rules', 'book_imports.allowance'):
             limit = 128 * 1024
-        elif key in ('structure.order_tests', 'structure.order_sections', 'master.change_status'):
+        elif key in ('structure.order_tests', 'structure.order_sections', 'master.change_status', 'chapter_split.save_starts', 'chapter_split.save_details'):
             limit = 128 * 1024
         elif key in ('written.save_question', 'written.paste'):
             limit = 512 * 1024

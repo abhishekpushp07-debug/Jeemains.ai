@@ -17,11 +17,11 @@ export async function mergePdfs(files,name){
  return merged;
 }
 
-export async function sendBook({file,title,sectionId,replace,year,onProgress,stopped}){
+export async function sendBook({file,title,sectionId,replace,year,subject,onProgress,stopped}){
  if(file.size>LIMIT)throw new Error('Choose a PDF within 100 MB.');
  onProgress('Checking the file…',0);
  const book=await post('/admin/books',{filename:file.name,title,sha256:await sha(await file.arrayBuffer()),size:file.size,rights_confirmed:true,section_id:sectionId,
-  ...(year?{year}:{}),...(replace==='all'?{replace_all:true}:replace?{replace_ids:replace.split(',')}:{})});
+  ...(year?{year}:{}),...(subject?{subject}:{}),...(replace==='all'?{replace_all:true}:replace?{replace_ids:replace.split(',')}:{})});
  if(book.state!=='uploading')return book.id;
  const have=new Set(book.received_parts),total=Math.ceil(file.size/book.chunk_size);let sent=0;
  for(let i=0;i<total;i++){

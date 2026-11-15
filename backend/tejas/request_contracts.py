@@ -277,6 +277,7 @@ from .library import ArchiveInput, RestoreInput
 from .master import StatusInput
 from .written import WrittenInput, WrittenPatch, QuestionInput, PasteInput
 from .series_admin import SeriesConfig, SeriesAssign, SeriesUnassign
+from .chapter_split import ChapterNames, Starts
 
 MODELS = {
     'structure.create_exam': ExamInput, 'structure.update_exam': ExamPatch,
@@ -298,6 +299,8 @@ MODELS = {
     'written.save_question': QuestionInput, 'written.paste': PasteInput, 'written.delete_question': EmptyPayload,
     'series_admin.update_config': SeriesConfig, 'series_admin.assign': SeriesAssign, 'series_admin.unassign': SeriesUnassign,
     'series_admin.fill': EmptyPayload, 'series_admin.clear': EmptyPayload,
+    'chapter_split.save_details': ChapterNames, 'chapter_split.save_starts': Starts, 'chapter_split.clear_starts': EmptyPayload,
+    'draft_preview.open_preview': EmptyPayload,
     'pyq_import.import_step': EmptyPayload,
     'my_tests.save_paper': EmptyPayload,
     'my_tests.compare': CompareAttemptsPayload,

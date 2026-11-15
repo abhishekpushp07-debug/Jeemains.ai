@@ -10,9 +10,9 @@ import {invalidateCatalog} from '../../lib/catalog';
 import {toast} from 'sonner';
 
 const TONES={uploading:'processing',received:'processing',reading:'processing',matching:'processing',publishing:'processing',queued:'processing',organising:'processing',
- held:'attention',attention_needed:'attention',failed:'attention',blocked:'attention',interrupted:'attention',
+ held:'attention',attention_needed:'attention',chapters_needed:'attention',done:'ready',failed:'attention',blocked:'attention',interrupted:'attention',
  ready:'ready',published:'live',live:'live',scheduled:'scheduled',unlive:'hidden',paused:'hidden',draft:'hidden',hidden:'hidden',removed:'hidden',ended:'ended',archived:'hidden'};
-const LABELS={uploading:'Uploading',received:'Received',reading:'Reading',matching:'Checking',publishing:'Publishing…',queued:'Queued',organising:'Organising',held:'Held',attention_needed:'Needs attention',failed:'Needs attention',blocked:'Needs attention',interrupted:'Needs attention',ready:'Ready',published:'Live',live:'Live',scheduled:'Scheduled',unlive:'Unlive',paused:'Paused',draft:'Draft',hidden:'Hidden',removed:'Removed',ended:'Ended',archived:'In Library'};
+const LABELS={chapters_needed:'Mark chapters',done:'Read',uploading:'Uploading',received:'Received',reading:'Reading',matching:'Checking',publishing:'Publishing…',queued:'Queued',organising:'Organising',held:'Held',attention_needed:'Needs attention',failed:'Needs attention',blocked:'Needs attention',interrupted:'Needs attention',ready:'Ready',published:'Live',live:'Live',scheduled:'Scheduled',unlive:'Unlive',paused:'Paused',draft:'Draft',hidden:'Hidden',removed:'Removed',ended:'Ended',archived:'In Library'};
 export const StatusChip=({state,label,testId})=><span className={'admin-chip tone-'+(TONES[state]||'hidden')} data-testid={testId}><i aria-hidden="true"/>{label||LABELS[state]||state}</span>;
 
 export const DestinationChip=({exam,section,large,testId='destination-chip'})=><span className={'admin-destination'+(large?' is-large':'')} data-testid={testId}><MapPin size={large?18:14} aria-hidden="true"/><span>{exam}</span><ChevronRight size={14} aria-hidden="true"/><strong>{section}</strong></span>;

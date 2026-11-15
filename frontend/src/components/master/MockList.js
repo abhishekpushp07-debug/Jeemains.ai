@@ -8,6 +8,7 @@ import {DropdownMenu,DropdownMenuTrigger,DropdownMenuContent,DropdownMenuItem,Dr
 import {TextDialog,ConfirmDialog} from '../admin/AdminShared';
 import {ScheduleDialog} from './ScheduleDialog';
 import {StatusLabel,SOURCE,fixLink,fmtIST,plural} from './MasterShared';
+import {TryAsStudent} from './TryAsStudent';
 import {toast} from 'sonner';
 
 const key=m=>m.kind+':'+m.id;
@@ -37,7 +38,7 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
   <span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
   <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts}</small>{m.replace_pending&&<small className="admin-replacing">Being replaced by “{m.replace_pending}”. It moves to the Library when that goes Live.</small>}</div>
   <StatusMenu m={m} busy={busy} onPick={onPick}/>
-  <div className="admin-test-actions">{main}{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Rename '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>
+  <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&<TryAsStudent m={m}/>}{main}{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Rename '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>
  </li>;
 }
 

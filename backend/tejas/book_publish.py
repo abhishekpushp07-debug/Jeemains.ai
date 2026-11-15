@@ -7,6 +7,7 @@ from .book_store import identity, normalized, save_mock, pages_for, mocks_for, f
 from .book_reader import infer_rules
 from .book_pdf import inspect_many
 from .content import valid_rules, question_issues, publish_validated
+from .chapter_reader import book_subjects, match_subject, syllabus_subject, resolve_subject, bookmark_title
 from tejas_storage import put_object
 
 
@@ -17,8 +18,32 @@ def overlap(a,b):
 def question_identity(r):return (normalized(r.subject),normalized(r.section or r.subject),r.number)
 
 
+async def chapter_context(book, pages):
+    """What the pages say about each chapter (number, title, subject), plus the book's single subject if it names one."""
+    info,found={},set()
+    for p in pages:
+        for label,record in (p.context.get('chapter_info') or {}).items():
+            current=info.setdefault(normalized(label),{})
+            for k,v in record.items():
+                if v and not current.get(k):current[k]=v
+        found|=set(p.context.get('book_subjects') or [])
+    pl=book.payload;dest=pl.get('destination') or {}
+    allowed=(await db.tejas_catalog_exams.find_one({'_id':dest.get('exam_slug')},{'_id':0,'subjects':1}) or {}).get('subjects') or []
+    named={s for s in found|book_subjects(pl.get('title',''))|book_subjects(pl.get('filename','')) if match_subject(s,allowed)}
+    return {'info':info,'allowed':allowed,'book':next(iter(named)) if len(named)==1 else '','marks':pl.get('bookmarks') or []}
+
+
+def chapter_record(book, mock, label, relevant, ctx, order):
+    record=ctx['info'].get(label,{});override=(book.payload.get('chapter_overrides') or {}).get(label,{})
+    pages=sorted({p.number for p,r in relevant if r.role=='question'}) or sorted({p.number for p,_ in relevant})
+    title=override.get('title') or record.get('title') or bookmark_title(ctx['marks'],pages[0] if pages else 0) or mock.label
+    subject,source=resolve_subject([(override.get('subject'),'you'),(book.payload.get('subject'),'upload'),(record.get('subject'),'pdf'),(ctx['book'],'book'),(syllabus_subject(title),'name')],ctx['allowed'])
+    return {'number':record.get('number') or order,'title':title[:120],'subject':subject,'subject_from':source,'start_page':pages[0] if pages else None}
+
+
 async def rebuild(book, token):
     pages=await pages_for(book); known={normalized(m.label):m for m in await mocks_for(book)}
+    chapters=await chapter_context(book,pages) if book.payload.get('chapters') else None
     labels=list(dict.fromkeys(normalized(r.mock) for p in pages for r in p.regions if r.mock and r.role not in ('ignore','instructions')))
     by_label={}
     for p in pages:
@@ -113,6 +138,7 @@ async def rebuild(book, token):
             if len(section_ids)!=len(set(section_ids)) or any(key not in {k[:2] for k in question_groups} for key in section_ids):
                 issues.append('Section marking has duplicate or unmapped section identities.')
             checked_text=re.sub(r'\boptional\s+bonus\b','bonus',raw_instructions,flags=re.I) if rules['mechanic']=='bitsat_bonus' else raw_instructions
+            if chapters is not None:checked_text=re.sub(r'\boptional\s+(?:enrichment\s+)?(?:practice|reading|exercise)\b','practice',checked_text,flags=re.I)
             if re.search(r'\b(optional|attempt\s+any|round(?:ed|ing)|decimal|multiple\s+correct)\b',checked_text,re.I):
                 issues.append('Printed optional/rounding/multiple-answer instructions cannot be converted to attempt-all or exact integers.')
             if len(question_groups)!=rules['expected_questions']:issues.append(f'Printed count {rules["expected_questions"]}; detected {len(question_groups)} distinct questions.')
@@ -158,6 +184,9 @@ async def rebuild(book, token):
         # Holds placed at publication time must survive the next rebuild; only an owner action clears them.
         if mock.missed_release and not mock.release_override:issues.append('Missed scheduled release. Choose a new release decision; it will not launch late automatically.')
         if mock.publish_hold:issues.append(mock.publish_hold)
+        if chapters is not None:
+            mock.chapter=chapter_record(book,mock,label,relevant,chapters,order)
+            if not mock.chapter['subject']:issues.append('Choose the subject for this chapter.')
         mock.pages={role:sorted({p.number for p,r in relevant if r.role==role}) for role in ('question','key','solution','instructions')}
         mock.questions=questions;mock.issues=list(dict.fromkeys(issues))[:500]
         if not questions:mock.issues.append('No complete questions found.')
@@ -173,11 +202,70 @@ async def rebuild(book, token):
 async def crop_ref(book,mock,crop,region,role):
     if crop.get('error'):raise ValueError(f"Page {region['page']}: {crop['error']}")
     png=crop['image_bytes'];fid=identity(book.id,digest(png),role)
-    path=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/crops/{fid}.png',png,'image/png')
-    await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
-        'path':path,'kind':'rendered_png','sha256':digest(png),'source_sha256':book.payload['sha256'],
-        'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
+    if not await files.find_one({'id':fid},{'_id':1}):
+        path=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/crops/{fid}.png',png,'image/png')
+        await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
+            'path':path,'kind':'rendered_png','sha256':digest(png),'source_sha256':book.payload['sha256'],
+            'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
     return {'file_id':fid,'page':region['page'],'rect':region['rect'],'prerendered':True}
+
+
+async def source_questions(book, mock, raw, guard=None, strict=True):
+    """The mock's questions with original page crops, exactly as students receive them. Not strict: incomplete questions are left out and listed."""
+    rules=mock.rules;chapter=mock.chapter or {}
+    wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
+    rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10)
+    crops={}
+    for (qid,role,_),crop in zip(wanted,rendered):crops.setdefault((qid,role),[]).append(crop)
+    if guard:await guard('renew')
+    questions,left=[],[]
+    for original_q in mock.questions:
+        q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None)
+        q.update(render_mode='source',solution_number=q['number'],approved=True,issues=[],q_refs=[],s_refs=[],
+            accessible_text=q['text'],solution_accessible_text=q['solution'],review_note='Source-mapping checks passed; supplied key preserved, not independently academically certified.',
+            source_evidence={'book_sha256':book.payload['sha256'],'edition':book.payload.get('edition',''),'mock':mock.label,'regions':source},
+            source_warning='Original page images preserve notation. A fully accessible transcription is not available.')
+        for section in rules.get('section_scoring',[]):
+            if normalized(section['subject'])==normalized(q['subject']) and normalized(section['section'])==normalized(q['section']):
+                q['scoring']={k:section[k] for k in ('correct','wrong','skipped')}
+        if rules['mechanic']=='bitsat_bonus':q['bonus']=q['number']>rules['expected_questions']-rules['bonus_count']
+        if chapter:
+            # A chapter test carries its chapter's subject; Exercise / Level headings stay as its sections.
+            subject=chapter.get('subject') or 'General'
+            q['section']=subject if normalized(q['section']) in ('questions',normalized(q['subject'])) else q['section']
+            q['subject']=subject
+        try:
+            for role,key in (('question','q_refs'),('solution','s_refs')):
+                for region,crop in zip(source[role],crops.get((q['id'],role),[])):
+                    if guard:await guard('fence')
+                    q[key].append(await crop_ref(book,mock,crop,region,role))
+            errors=question_issues(q,rules['exam'])
+        except ValueError as exc:
+            if strict:raise
+            errors=[str(exc)]
+        if errors:
+            if strict:raise ValueError('; '.join(errors))
+            left.append({'number':original_q['original_number'],'subject':original_q['subject'],'reason':errors[0]});continue
+        questions.append(q)
+    if len(json.dumps(questions).encode())>5*1024*1024:raise ValueError('This mock exceeds the safe content budget.')
+    return questions,left
+
+
+def base_set(book, mock, questions, dest, suffix=''):
+    """The test record students get; publishing adds its id, timing and place."""
+    rules=mock.rules;chapter=mock.chapter or {}
+    title=chapter.get('title') or mock.label if chapter else mock.label if dest else book.payload['title']+' · '+mock.label
+    data={'book_series_title':book.payload['title'],'mock_number':mock.order,'title':title+suffix,
+        'exam':dest['exam_key'] if dest else rules['exam'],'test_kind':'mock','full_length':True,'profile_mode':'practice','rules':valid_rules({'minutes':rules['minutes'],'correct':rules['correct'],'wrong':rules['wrong'],'skipped':0}),
+        'questions':questions,'file_ids':sorted({r['file_id'] for q in questions for k in ('q_refs','s_refs') for r in q[k]}),
+        'status':'draft','version':0,'revision':1,'source':'Owner-uploaded '+book.payload['filename'],'attribution':'Original book source; owner-confirmed content-use rights.',
+        'rights_upload':True,'rights_publish':True,'rights_report':True,'audience':'all','allowed_emails':[],'allowed_phones':[],'expires':'','created_at':now(),'created_by':book.owner_id}
+    if chapter:
+        kinds={q['solution_kind'] for q in questions}
+        data.update(test_kind='chapter',full_length=False,chapter_subject=chapter.get('subject') or 'General',chapter_number=chapter.get('number') or mock.order,chapter_title=chapter.get('title') or mock.label)
+        if len(kinds)==1:data['solution_kind']=kinds.pop()
+    if rules['mechanic']=='bitsat_bonus':data['rules']['bonus_rule']='answer_all_main_then_lock'
+    return data
 
 
 async def publish_ready(book,token,raw,only_mid=None):
@@ -205,40 +293,13 @@ async def publish_ready(book,token,raw,only_mid=None):
             if await database_now()>=opens or await sets.find_one({'series_id':cfg['id'],'series_date':mock.series_date,'id':{'$ne':sid}},{'_id':1}):
                 # Its day opened or was taken before the paper was built: it waits, unassigned, for a new day.
                 mock.series_date=None;mock.publish_requested=False;mock.release_at=None;await save_mock(mock);continue
-        questions=[];rules=mock.rules
-        wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
-        rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10)
-        crops={}
-        for (qid,role,_),crop in zip(wanted,rendered):crops.setdefault((qid,role),[]).append(crop)
-        await renew(book,token)
-        for original_q in mock.questions:
-            q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None)
-            q.update(render_mode='source',solution_number=q['number'],approved=True,issues=[],q_refs=[],s_refs=[],
-                accessible_text=q['text'],solution_accessible_text=q['solution'],review_note='Source-mapping checks passed; supplied key preserved, not independently academically certified.',
-                source_evidence={'book_sha256':book.payload['sha256'],'edition':book.payload.get('edition',''),'mock':mock.label,'regions':source},
-                source_warning='Original page images preserve notation. A fully accessible transcription is not available.')
-            for section in rules.get('section_scoring',[]):
-                if normalized(section['subject'])==normalized(q['subject']) and normalized(section['section'])==normalized(q['section']):
-                    q['scoring']={k:section[k] for k in ('correct','wrong','skipped')}
-            if rules['mechanic']=='bitsat_bonus':q['bonus']=q['number']>rules['expected_questions']-rules['bonus_count']
-            for role,key in (('question','q_refs'),('solution','s_refs')):
-                for region,crop in zip(source[role],crops.get((q['id'],role),[])):
-                    await fence(book,token)
-                    q[key].append(await crop_ref(book,mock,crop,region,role))
-            errors=question_issues(q,rules['exam'])
-            if errors:raise ValueError('; '.join(errors))
-            questions.append(q)
-        if len(json.dumps(questions).encode())>5*1024*1024:raise ValueError('This mock exceeds the safe content budget.')
+        rules=mock.rules
+        async def guard(kind):
+            await (renew(book,token) if kind=='renew' else fence(book,token))
+        questions,_=await source_questions(book,mock,raw,guard)
         stamp=await database_now();start=stamp if mock.release_override else mock.release_at or book.payload.get('release_at') or stamp
         suffix=f' · v{mock.generation}' if mock.generation>1 else ''
-        data={'id':sid,'book_import_id':book.id,'book_series_title':book.payload['title'],'mock_number':mock.order,
-            'title':(mock.label if dest else book.payload['title']+' · '+mock.label)+suffix,
-            'exam':dest['exam_key'] if dest else rules['exam'],'test_kind':'mock','full_length':True,'profile_mode':'practice','rules':valid_rules({'minutes':rules['minutes'],'correct':rules['correct'],'wrong':rules['wrong'],'skipped':0}),
-            'questions':questions,'file_ids':sorted({r['file_id'] for q in questions for k in ('q_refs','s_refs') for r in q[k]}),
-            'status':'draft','version':0,'revision':1,'source':'Owner-uploaded '+book.payload['filename'],'attribution':'Original book source; owner-confirmed content-use rights.',
-            'rights_upload':True,'rights_publish':True,'rights_report':True,'audience':'all','allowed_emails':[],'allowed_phones':[],'expires':'',
-            'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False) or mock.live_exam,'created_at':now(),'created_by':book.owner_id}
-        if rules['mechanic']=='bitsat_bonus':data['rules']['bonus_rule']='answer_all_main_then_lock'
+        data={'id':sid,'book_import_id':book.id,**base_set(book,mock,questions,dest,suffix),'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False) or mock.live_exam}
         if series:
             w=day_window(mock.series_date,cfg);start=w['opens_at']
             data.update(series_id=cfg['id'],series_date=mock.series_date,series_window=w,series_import=True,start_at=start,end_at=w['closes_at'],competition=False)

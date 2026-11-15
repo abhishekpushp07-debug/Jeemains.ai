@@ -27,6 +27,8 @@ def handle(doc, item):
     if action=='info':
         sample=min(10,len(doc))
         return {'pages':len(doc),'sampled_pages':sample,'scanned_sample':sum(len(doc[i].get_text().strip())<30 for i in range(sample))}
+    if action=='toc':
+        return {'toc':[[int(l),str(t)[:160],int(p)] for l,t,p in doc.get_toc(simple=True)[:2000]]}
     n=item.get('page')
     if not isinstance(n,int) or not 1<=n<=len(doc): raise ValueError('Page outside the book.')
     page=doc[n-1];w,h=page.rect.width,page.rect.height
@@ -48,8 +50,8 @@ def handle(doc, item):
     if len(r)!=4 or not all(isinstance(x,(int,float)) for x in r) or not (0<=r[0]<r[2]<=1 and 0<=r[1]<r[3]<=1): raise ValueError('Invalid crop.')
     clip=fitz.Rect(r[0]*w,r[1]*h,r[2]*w,r[3]*h)
     if action=='clip_text': return {'text':page.get_text(clip=clip)[:30000]}
-    if action not in ('crop','page'): raise ValueError('Unsupported PDF action.')
-    scale=min(2,1800/clip.width,2400/clip.height)
+    if action not in ('crop','page','thumb'): raise ValueError('Unsupported PDF action.')
+    scale=min(1,820/clip.width) if action=='thumb' else min(2,1800/clip.width,2400/clip.height)
     pix=page.get_pixmap(matrix=fitz.Matrix(scale,scale),clip=clip,alpha=False)
     data=pix.tobytes('png')
     if len(data)>8*1024*1024: raise ValueError('Page image exceeds safe budget.')

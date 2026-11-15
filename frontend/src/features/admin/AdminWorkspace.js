@@ -9,6 +9,7 @@ import WriteEditor from './master/WriteEditor';
 import FixList from './master/FixList';
 import FixMock from './master/FixMock';
 import ReportsPage from './master/ReportsPage';
+import ChapterSplit from './master/ChapterSplit';
 import AdminStudents from './AdminStudents';
 import AdminTeam from './AdminTeam';
 import AdminLibrary from './AdminLibrary';
@@ -44,6 +45,7 @@ export default function AdminWorkspace(){
     <Route path="fix" element={<FixList/>}/>
     <Route path="fix/:bookId/:mockId" element={<FixMock/>}/>
     <Route path="reports" element={<ReportsPage/>}/>
+    <Route path="chapters/:id" element={gate(<ChapterSplit/>)}/>
     <Route path="upload" element={gate(<BookRepair/>)}/>
     <Route path="library" element={gate(<AdminLibrary/>)}/>
     <Route path="students" element={gate(<AdminStudents/>)}/>

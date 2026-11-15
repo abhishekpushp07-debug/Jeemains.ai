@@ -39,8 +39,16 @@ async def create(body:UploadInput,u=Depends(owner)):
         id=identity(id,'next',body.section_id)
     from .structure import destination, mark_replacing
     replace=['all'] if body.replace_all else body.replace_ids
-    dest=await destination(body.section_id,('list',),replace,body.year)
-    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']})
+    dest=await destination(body.section_id,('list','chapters'),replace,body.year)
+    extra={}
+    if dest['layout']=='chapters':
+        # Chapter-wise PDF: every chapter becomes its own test; subject read from the PDF unless chosen here.
+        from .chapter_reader import match_subject
+        allowed=(await db.tejas_catalog_exams.find_one({'_id':dest['exam_slug']},{'subjects':1}) or {}).get('subjects') or []
+        extra={'chapters':True,'subject':match_subject(body.subject,allowed)}
+        if body.subject and not extra['subject']:raise HTTPException(422,'Choose one of this exam’s subjects, or Read from the PDF.')
+    elif body.subject:raise HTTPException(422,'A subject is chosen only for chapter-wise PDFs.')
+    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year','subject'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']}|extra)
     try:await db.tejas_books.insert_one(book.to_mongo())
     except DuplicateKeyError:return await book_view(await load_book(id,u))
     await mark_replacing(dest,body.title)

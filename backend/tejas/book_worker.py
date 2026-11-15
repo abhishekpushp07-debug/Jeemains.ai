@@ -6,6 +6,7 @@ from .book_store import lock_book, unlock, save_book, fence, renew, original, re
 from .book_pdf import inspect, inspect_many
 from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
+from .chapter_reader import plan_start, bookmark_plan
 from tejas_storage import put_object
 
 PAGES_PER_STEP=20
@@ -34,11 +35,15 @@ async def read_batch(book, token, source):
     previous=await db.tejas_book_pages.find_one({'book_id':id,'number':start})
     context=(previous or {}).get('context',{})
     if not start and p.get('single_mock'):context={'mock':p['single_mock'],'single':True,'subject':'General'}
+    if not start and p.get('chapters'):context={'chapters':True,'plan':bool(p.get('chapter_plan'))}
+    plan_at={}
+    for e in p.get('chapter_plan') or []:plan_at.setdefault(e['page'],[]).append(e)
     for n in numbers:
         await fence(book,token)
         existing=await db.tejas_book_pages.find_one({'_id':identity(id,'page',n)})
         if existing:
             context=BookPage.from_mongo(existing).context;continue
+        for e in plan_at.get(n,[]):context=plan_start(context,e)
         data=extracted[n]
         if data.get('error'):
             page=BookPage(id=identity(id,'page',n),book_id=id,number=n,issues=[data['error']],context=context,provenance={'kind':'native','reader':READER_VERSION})
@@ -86,6 +91,9 @@ async def receive(book, token):
     if len(raw)!=p['size'] or digest(raw)!=p['sha256']:raise ValueError('Upload hash mismatch. Reselect the exact PDF and retry completed parts.')
     source=await run_in_threadpool(remember,raw,p['sha256'])
     info=await run_in_threadpool(inspect,source)
+    if p.get('chapters'):
+        try:p['bookmarks']=(await run_in_threadpool(inspect,source,'toc'))['toc'][:1000]
+        except ValueError:p['bookmarks']=[]
     p['source_path']=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/original.pdf',raw,'application/pdf')
     p.update(pages=info['pages'],read_pages=0,scanned_pages=0,reader_version=READER_VERSION,message='Original received privately. Reading pages in recoverable batches.')
     book.state='reading';await save_book(book,token)
@@ -115,16 +123,27 @@ async def step(job):
             book.state='reading';await save_book(book,token)
         if p.get('read_pages',0)<p['pages']:
             more=await read_batch(book,token,source)
+        marks_needed=False
         if not more and not p.get('single_checked'):
             # A PDF with no printed mock heading is one paper: read it again as a single mock named after the upload.
             p['single_checked']=True
             labelled=await db.tejas_book_pages.find_one({'book_id':id,'regions.mock':{'$nin':['',None]}},{'_id':1})
             items=await db.tejas_book_pages.find_one({'book_id':id,'regions.role':{'$in':['question','key','solution']}},{'_id':1})
-            if items and not labelled:
+            if items and not labelled and p.get('chapters'):
+                # No printed chapter headings: the PDF's own bookmarks split it, otherwise the owner marks where each chapter starts.
+                plan=bookmark_plan(p.get('bookmarks') or [],p['pages']) if not p.get('chapter_plan') else []
+                if plan:
+                    p.update(chapter_plan=plan,plan_source='bookmarks',read_pages=0,message='No printed chapter headings. Splitting chapters by the PDF bookmarks.')
+                    await db.tejas_book_pages.delete_many({'book_id':id,'provenance.kind':'native'})
+                    book.state='reading';await save_book(book,token);more=True
+                else:
+                    marks_needed=True;book.state='chapters_needed'
+                    p['message']='Chapter headings were not found. Mark the page where each chapter starts.'
+            elif items and not labelled:
                 p.update(single_mock=p['title'][:100],read_pages=0,message='One paper found. Reading it as a single mock.')
                 await db.tejas_book_pages.delete_many({'book_id':id,'provenance.kind':'native'})
                 book.state='reading';await save_book(book,token);more=True
-        if not more:
+        if not more and not marks_needed:
             allowance=await db.tejas_book_allowances.find_one({'book_id':id,'state':{'$in':['queued','running']}},sort=[('created_at',1)])
             if allowance:
                 from .book_ai import process_allowance

@@ -104,17 +104,23 @@ async def type_mocks(sid: str, u=Depends(owner)):
             qs, general = question_problems(BookMock.from_mongo(row))
             to_fix = max(1, len(qs) + len(general))
         items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': to_fix, 'key_only': w.get('key_only', 0),
-                      'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False})
+                      'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False,
+                      'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject')})
     uploads = []
-    async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, 'state': {'$in': [*PROCESSING, 'attention_needed']}},
-                                       {'state': 1, 'paused': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1}):
-        unread = b['state'] == 'attention_needed'
-        if unread and await db.tejas_book_mocks.find_one({'book_id': b['_id']}, {'_id': 1}):
+    async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
+            {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'}]},
+                                       {'state': 1, 'paused': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1}):
+        unread, chapters = b['state'] == 'attention_needed', bool(b['payload'].get('chapters'))
+        done = b['state'] == 'ready' or bool(unread and await db.tejas_book_mocks.find_one({'book_id': b['_id']}, {'_id': 1}))
+        if done and not chapters:
             continue
+        unread = unread and not done
+        # A chapter-wise PDF stays listed after reading so its chapters can be renamed or split again.
+        message = (f"{await db.tejas_book_mocks.count_documents({'book_id': b['_id'], 'archived': {'$ne': True}})} chapters read. Open Chapters to rename them or change where they start." if done else
+                   'No questions could be read from this PDF. A scanned (photo) PDF cannot be read by itself: use Write instead.' if unread else b['payload'].get('message', ''))
         paused = bool(b.get('paused')) and b['state'] != 'failed'
-        uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'failed' if unread else 'paused' if paused else b['state'],
-                        'pages': b['payload'].get('pages', 0), 'read_pages': b['payload'].get('read_pages', 0),
-                        'message': 'No questions could be read from this PDF. A scanned (photo) PDF cannot be read by itself: use Write instead.' if unread else b['payload'].get('message', ''),
+        uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'done' if done else 'failed' if unread else 'paused' if paused else b['state'],
+                        'pages': 0 if done else b['payload'].get('pages', 0), 'read_pages': b['payload'].get('read_pages', 0), 'chapters': chapters, 'message': message,
                         'active': b['state'] in ('received', 'reading', 'matching') and not paused})
     async for c in db.tejas_chapter_books.find({'destination.section_id': sid, 'archived': {'$ne': True}, 'status': {'$in': ['queued', 'organising', 'failed']}},
                                                {'_id': 0, 'id': 1, 'title': 1, 'status': 1, 'message': 1}):

@@ -1,6 +1,7 @@
 import re
 from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, choose_options
+from .chapter_reader import find as chapter_marks, exercise
 
 READER_VERSION=3
 MOCK=re.compile(r'^(?:(?:jee\s*main|jee|bitsat|comedk)\s+)?(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
@@ -117,9 +118,21 @@ def continued_solution(open_s, rect, value):
         rect=rect,text=value[:30000],continuation=True,checked=True)
 
 
+def chapter_headings(lines, context):
+    """Chapter-wise books only: printed chapter headings, unless the owner's or the PDF's own chapter starts are in use."""
+    if not context.get('chapters') or context.get('plan'):
+        return [],set()
+    return chapter_marks(lines,context.get('chapter_info') or {},band)
+
+
 def read_keys(lines, body, pairs, context):
     """One checked key region per printed table cell pair, assigned to the nearest mock title above it."""
-    titles=sorted((x['rect'][1],'Mock '+str(int(m[1]))) for x in lines for m in [mock_title(x['text'].strip())] if m)
+    if context.get('chapters'):
+        marks,_=chapter_headings(lines,context)
+        titles=sorted((m['y'],m['label']) for m in marks)
+        for m in marks:apply(context,'chapter',(m['label'],m['record']))
+    else:
+        titles=sorted((x['rect'][1],'Mock '+str(int(m[1]))) for x in lines for m in [mock_title(x['text'].strip())] if m)
     regions=[]
     for number,answer,rect in pairs:
         label=next((t[1] for t in reversed(titles) if t[0]<=rect[1]),context.get('mock',''))
@@ -134,21 +147,27 @@ def read_keys(lines, body, pairs, context):
 
 def scan_headers(lines, text, context, issues):
     headers=[]; qprefixed=[]; others=[]
+    chapters=context.get('chapters')
     starts=[round(x['rect'][0],2) for x in lines if x['rect'][0]<.3 and not band(x)]
     left=max(set(starts),key=starts.count) if starts else .3
-    for line in lines:
-        value=line['text'].strip();m=mock_title(value);role=ROLE.fullmatch(value) if value[:1].isupper() else None;margin=band(line)
+    marks,used=chapter_headings(lines,context)
+    for c in marks:
+        headers+=[(c['y'],'mock',c['label']),(c['y'],'chapter',(c['label'],c['record']))]+([(c['y'],'role',c['role'])] if c['role'] else [])+[(y,'title',None) for y in c['rows'][1:]]
+    for i,line in enumerate(lines):
+        value=line['text'].strip();m=None if chapters else mock_title(value);role=ROLE.fullmatch(value) if value[:1].isupper() else None;margin=band(line)
         if m:
             headers.append((line['rect'][1],'mock','Mock '+str(int(m[1]))))
             starts_questions=bool(re.search(r'\b(?:instructions|duration|total questions|time\s*:)\b',text,re.I) or choose_options(text)[0])
             if context.get('role') in ('key','solution') and not starts_questions and not margin and context.get('mock')=='Mock '+str(int(m[1])):
                 issues.append('Mock heading follows keys/solutions without question instructions: confirm the section type.')
-        if role and len(value)<140 and (not margin or line['rect'][0]<.2):
+        if role and i not in used and len(value)<140 and (not margin or line['rect'][0]<.2):
             # A running section label at the left margin names the whole page; centred navigation links do not.
             headers.append((-1 if margin else line['rect'][1],'role','solution' if 'solution' in role[1].lower() else 'key'))
-        if margin:continue
+        if margin or i in used:continue
         subject=SUBJECT.match(value) if value[:1].isupper() and len(value.split())<=7 and not value.endswith(('.',',',';')) else None
-        if subject and len(value)<90:headers.append((line['rect'][1],'subject',subject[1].title().replace('Maths','Mathematics')))
+        # In a chapter-wise book a subject heading names the chapter's subject; Exercise / Level / Part headings split its numbering.
+        if subject and len(value)<90:headers.append((line['rect'][1],'seen_subject' if chapters else 'subject',subject[1].title().replace('Maths','Mathematics')))
+        if chapters and exercise(value):headers.append((line['rect'][1],'subject',exercise(value)))
         section=SECTION.match(value)
         if section and len(value)<90:headers.append((line['rect'][1],'numeric',section[1].lower()=='b' or bool(NUMERIC.search(value))))
         elif NUMERIC_HEAD.match(value):headers.append((line['rect'][1],'numeric',True))
@@ -162,9 +181,20 @@ def scan_headers(lines, text, context, issues):
 
 def apply(target, kind, value):
     if kind=='mock':
-        if target.get('mock')!=value:target.update(mock=value,role='question',last={})
+        if target.get('mock')!=value:
+            target.update(mock=value,role='question',last={})
+            if target.get('chapters'):target.update(subject='Questions',numeric=False)
     elif kind=='subject':target.update(subject=value,numeric=False)
     elif kind in ('role','numeric'):target[kind]=value
+    elif kind=='chapter':
+        label,record=value
+        info={k:dict(v) for k,v in (target.get('chapter_info') or {}).items()};current=info.setdefault(label,{})
+        for k,v in record.items():
+            if v and not current.get(k):current[k]=v
+        target['chapter_info']=info
+    elif kind=='seen_subject':
+        if target.get('mock'):apply(target,'chapter',(target['mock'],{'subject':value}))
+        else:target['book_subjects']=sorted(set(target.get('book_subjects') or [])|{value})
 
 
 def printed_keys(value, role):
@@ -182,11 +212,11 @@ def read_page(lines, previous, geometry=(), images=()):
     body_text='\n'.join(x['text'] for x in body)
     foot=min([x['rect'][1] for x in margin if x['rect'][1]>=BOTTOM]+[.97])-.004
     footer_text=' '.join(x['text'] for x in margin if x['rect'][1]>=BOTTOM)
-    titles={int(m[1]) for x in lines for m in [mock_title(x['text'].strip())] if m}
+    titles={m['label'] for m in chapter_headings(body,context)[0]} if context.get('chapters') else {int(m[1]) for x in lines for m in [mock_title(x['text'].strip())] if m}
     margin_anchor=any(anchor_of(x) for x in body if x['rect'][0]<.27)
     if (re.search(r'^\s*(contents|index)\b',body_text,re.I|re.M) and not margin_anchor) or (len(titles)>=3 and not any(ROLE.fullmatch(x['text'].strip()) for x in body)):
         return page_map('contents',[Region(role='ignore',rect=[.01,.01,.99,.99],text=text[:30000],checked=True)],[]),context
-    if any(ROLE.fullmatch(x['text'].strip()) and 'solution' not in x['text'].lower() for x in body):
+    if any(ROLE.fullmatch(x['text'].strip()) and 'solution' not in x['text'].lower() for x in body) or (context.get('chapters') and any(c['role']=='key' for c in chapter_headings(body,context)[0])):
         pairs=key_cells(body)
         if pairs:return read_keys(lines,body,pairs,context)
     headers,anchors=scan_headers(lines,text,context,issues)
@@ -203,7 +233,7 @@ def read_page(lines, previous, geometry=(), images=()):
     two=any(x[0]['rect'][0]>.46 for x in anchors) and any(x[0]['rect'][0]<.3 for x in anchors)
     if two:
         issues.append('Two-column layout: confirm column boundaries and continuation regions in the review desk.')
-    if len({h[2] for h in headers if h[1]=='mock'})>1:
+    if len({h[2] for h in headers if h[1]=='mock'})>1 and (two or not context.get('chapters')):
         issues.append('Multiple mock headings share this page; map their regions explicitly.')
     shared=[h for h in headers if h[1]=='shared']
     open_q=context.pop('open_q',None);open_s=context.pop('open_s',None)
@@ -259,7 +289,9 @@ def read_page(lines, previous, geometry=(), images=()):
             regions.append(continued_solution(open_s,rect,intro))
         else:
             allowed=r'^(?:jee|bitsat|comedk|mock|practice|test|paper|time|duration|questions|total|correct|incorrect|wrong|unanswered|skipped|all\s+questions|instructions|physics|chemistry|math|solutions?|answers?|no\s+worked|page|english|logical|numerical|section)\b'
-            if intro.strip() and not INTRO_OK.search(intro) and any(not re.search(allowed,line.strip(),re.I) for line in intro.splitlines() if len(line.strip())>3):
+            chapter_intro=context.get('chapters') and any(h[1]=='mock' and h[0]<first for h in headers)
+            if context.get('chapters'):allowed=allowed[:-3]+r'|\d{1,3}\s*[–\-]\s*\d{1,3})\b'
+            if intro.strip() and not INTRO_OK.search(intro) and not chapter_intro and any(not re.search(allowed,line.strip(),re.I) for line in intro.splitlines() if len(line.strip())>3):
                 issues.append('Leading content may continue a previous question or solution. Attach it explicitly instead of discarding it as instructions.')
             regions.append(Region(role='instructions',mock=context.get('mock',''),rect=rect,text='\n'.join(x['text'] for x in above)[:30000],checked=True))
     if open_q:issues.append(f'Q{open_q["number"]} (starts on the previous page): confirm response type, options and continuation.')

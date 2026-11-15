@@ -209,7 +209,7 @@ async def create_set(data: SetInput, u=Depends(staff)):
 @router.get("/studio/sets/{id}")
 async def studio_set(id: str, u=Depends(staff)):
     s = await get(sets, id)
-    if s.get('book_import_id'):
+    if s.get('book_import_id') and not s.get('draft_preview'):
         from .book_store import load_book
         await owner(u)
         await load_book(s['book_import_id'], u)

@@ -128,7 +128,7 @@ async def enqueue_all():
     if AI_SOLVING_PAUSED:
         return 0
     t = now()
-    rows = await sets.find({'status': {'$in': ['draft', 'review', 'published']}, 'full_length': True},
+    rows = await sets.find({'status': {'$in': ['draft', 'review', 'published']}, 'full_length': True, 'qa_only': {'$ne': True}},
         {'_id': 0, 'id': 1, 'status': 1, 'live_enabled': 1, 'end_at': 1, 'full_length': 1, 'created_at': 1, 'mock_book_id': 1, 'chapter_book_id': 1,
          'mock_number': 1, 'chapter_number': 1, 'questions.id': 1, 'questions.number': 1, 'questions.answer': 1, 'questions.q_refs': 1,
          'questions.ai_solution.solution_id': 1, 'questions.ai_solution.refs_hash': 1}).to_list(5000)

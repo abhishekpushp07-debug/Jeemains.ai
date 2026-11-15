@@ -602,10 +602,10 @@ async def overview(u=Depends(owner)):
 
 @router.get('/admin/review/held')
 async def held_mocks(u=Depends(staff)):
-    rows = await db.tejas_book_mocks.find({'state': 'held', 'archived': {'$ne': True}}, {'_id': 1, 'book_id': 1, 'label': 1, 'issues': {'$slice': 8}}).sort('book_id', 1).limit(300).to_list(300)
+    rows = await db.tejas_book_mocks.find({'state': 'held', 'archived': {'$ne': True}}, {'_id': 1, 'book_id': 1, 'label': 1, 'chapter.title': 1, 'issues': {'$slice': 8}}).sort('book_id', 1).limit(300).to_list(300)
     books = {b['_id']: b for b in await db.tejas_books.find({'_id': {'$in': list({r['book_id'] for r in rows})}, 'removed': False, 'archived': {'$ne': True}},
              {'_id': 1, 'payload.title': 1, 'payload.destination': 1}).to_list(300)}
-    return {'items': [{'id': r['_id'], 'book_id': r['book_id'], 'label': r['label'], 'issues': r.get('issues', []),
+    return {'items': [{'id': r['_id'], 'book_id': r['book_id'], 'label': (r.get('chapter') or {}).get('title') or r['label'], 'issues': r.get('issues', []),
                        'book_title': books[r['book_id']]['payload']['title'], 'destination': books[r['book_id']]['payload'].get('destination')}
                       for r in rows if r['book_id'] in books]}
 
@@ -665,13 +665,13 @@ async def waiting_mocks(sid, t):
     rank = {b['_id']: i for i, b in enumerate(books)}
     book = {b['_id']: b['payload'] for b in books}
     rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None, 'archived': {'$ne': True}},
-        {'_id': 0, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1, 'rules.minutes': 1,
+        {'_id': 0, 'book_id': 1, 'label': 1, 'chapter': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1, 'rules.minutes': 1,
          'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
     rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
     out = []
     for m in rows:
         release = m.get('release_at') or book[m['book_id']].get('release_at')
-        out.append({'title': m['label'], 'state': waiting_state(m, release, t), 'count': m.get('count', 0),
+        out.append({'title': (m.get('chapter') or {}).get('title') or m['label'], 'state': waiting_state(m, release, t), 'count': m.get('count', 0),
                     'minutes': (m.get('rules') or {}).get('minutes'), 'subject': None, 'book': book[m['book_id']].get('title'),
                     'start_at': release if m.get('publish_requested') else None})
     return out
@@ -712,7 +712,7 @@ async def waiting_items(sid=''):
     rank = {b['_id']: i for i, b in enumerate(books)}
     info = {b['_id']: b['payload'] for b in books}
     rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None, 'archived': {'$ne': True}},
-        {'_id': 1, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1,
+        {'_id': 1, 'book_id': 1, 'label': 1, 'chapter': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1,
          'issue': {'$arrayElemAt': ['$issues', 0]}, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}},
          'key_only': {'$size': {'$filter': {'input': {'$ifNull': ['$questions', []]}, 'cond': {'$eq': ['$$this.solution_kind', 'answer_key_only']}}}},
          'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
@@ -721,7 +721,7 @@ async def waiting_items(sid=''):
     for m in rows:
         p = info[m['book_id']]
         release = m.get('release_at') or p.get('release_at')
-        out.append({'kind': 'book_mock', 'id': m['_id'], 'book_id': m['book_id'], 'title': m['label'], 'book': p['title'],
+        out.append({'kind': 'book_mock', 'id': m['_id'], 'book_id': m['book_id'], 'title': (m.get('chapter') or {}).get('title') or m['label'], 'book': p['title'], 'chapter': m.get('chapter') or {},
                     'state': waiting_state(m, release, t), 'count': m.get('count', 0), 'key_only': m.get('key_only', 0), 'unit': 'questions', 'issue': m.get('issue') or '',
                     'issue_count': m.get('issue_count', 0), 'start_at': release if m.get('publish_requested') else None, 'destination': p['destination']})
     dq = {'destination.section_id': sid} if sid else {'destination.section_id': {'$exists': True}}

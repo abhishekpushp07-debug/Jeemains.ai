@@ -129,3 +129,47 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .series-exam-card-facts{display:flex;gap:10px 16px;flex-wrap:wrap;font-size:14px;opacity:.95}
 .series-exam-card-facts span{display:inline-flex;align-items:center;gap:6px}
 .series-exam-card-cta{align-self:flex-start;background:#fff!important;color:#0b0b0b!important}
+
+
+/* Chapter-wise PDFs: chapter list and page marker */
+.chapter-rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.chapter-row{display:grid;grid-template-columns:auto minmax(0,1fr) 190px auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--surface-card);transition:border-color var(--motion-fast)}
+.chapter-row:hover{border-color:var(--brand-line)}
+.chapter-row-main{display:flex;flex-direction:column;gap:4px;min-width:0}
+.chapter-row-main small{color:var(--text-muted);font-size:12px}
+.chapter-subject{min-height:var(--touch-target)}
+.chapter-marker-body{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;align-items:start}
+.chapter-plan-list{position:sticky;top:12px;display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface-alt);max-height:calc(100vh - 40px);overflow:auto}
+.chapter-plan-list h3{display:flex;align-items:center;gap:6px;margin:0;font-size:14px}
+.chapter-plan-list ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.chapter-plan-list li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:start}
+.chapter-plan-fields{display:flex;flex-direction:column;gap:6px;min-width:0}
+.chapter-plan-fields small,.chapter-marker-bar small{font-size:12px;color:var(--text-muted)}
+.chapter-plan-fields small.warn,.chapter-marker-bar small.warn{color:var(--warning)}
+.chapter-pages-wrap{display:flex;flex-direction:column;gap:12px;align-items:flex-start;min-width:0}
+.chapter-pages{list-style:none;margin:0;padding:0;width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.chapter-page{position:relative;display:flex;flex-direction:column;gap:6px;padding:8px;border:1px solid var(--line);border-radius:14px;background:var(--surface-card);transition:border-color var(--motion-fast),transform var(--motion-fast)}
+.chapter-page:hover{transform:translateY(-2px);border-color:var(--brand-line)}
+.chapter-page.is-marked{border-color:var(--success-line);box-shadow:inset 0 0 0 1px var(--success-line)}
+.chapter-page.is-open{grid-column:span 2;border-color:var(--brand-line)}
+.chapter-page-shot{display:block;padding:0;border:0;background:#fff;border-radius:8px;overflow:hidden;cursor:pointer;min-height:120px}
+.chapter-page-shot img{display:block;width:100%;height:auto}
+.chapter-page-shot p{margin:0;padding:40px 8px;font-size:12px;color:#555;text-align:center}
+.chapter-page-foot{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px}
+.chapter-hint{padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;color:var(--review);background:var(--review-soft);border:1px solid var(--review-line)}
+.chapter-page-tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;background:var(--success-soft);color:var(--success);border:1px solid var(--success-line);overflow-wrap:anywhere}
+.chapter-page-tag.role-key,.chapter-page-tag.role-solution{background:var(--surface-alt);color:var(--text-muted);border-color:var(--line)}
+.chapter-mark-form{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:12px;background:var(--surface-alt);border:1px solid var(--line)}
+.chapter-mark-head{display:flex;justify-content:space-between;align-items:center}
+.chapter-role-pick{display:flex;flex-wrap:wrap;gap:6px}
+.chapter-role-pick button{padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface-card);color:var(--ink);font-size:12px;font-weight:700;cursor:pointer;transition:background-color var(--motion-fast),border-color var(--motion-fast)}
+.chapter-role-pick button.is-on{background:var(--brand-soft,var(--surface-card));border-color:var(--brand-line);color:var(--brand-text)}
+.chapter-marker-bar{position:sticky;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface-card);z-index:2}
+@media (max-width:760px){
+ .chapter-row{grid-template-columns:auto minmax(0,1fr);grid-template-areas:'num main' 'subj subj' 'chip chip'}
+ .chapter-row>.admin-test-index{grid-area:num}.chapter-row-main{grid-area:main}.chapter-row .chapter-subject{grid-area:subj}.chapter-row>.admin-chip{grid-area:chip;justify-self:start}
+ .chapter-marker-body{grid-template-columns:minmax(0,1fr)}
+ .chapter-plan-list{position:static;max-height:none}
+ .chapter-pages{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .chapter-page.is-open{grid-column:1/-1}
+}

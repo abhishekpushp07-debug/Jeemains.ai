@@ -22,6 +22,7 @@ class UploadInput(Input):
     replace_ids: list[str] = Field(default_factory=list, max_length=1000)
     replace_all: bool = False
     year: int | None = Field(default=None, ge=1990, le=2100)
+    subject: str = Field(default='', max_length=40)
 
     @model_validator(mode='after')
     def schedule(self):
@@ -189,6 +190,7 @@ class BookMock(BaseDocument):
     series_id: str | None = None
     archived: bool = False
     live_exam: bool = False
+    chapter: dict = Field(default_factory=dict)
 
 
 class UploadPart(BaseDocument):

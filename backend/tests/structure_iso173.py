@@ -187,9 +187,13 @@ async def main():
              {'n': 3, 'qs': q3('S3'), 'keys': [(1, 'B'), (2, 'B'), (2, 'A'), (3, 'C')]}]
     raw = build_pdf(mocks); sha = hashlib.sha256(raw).hexdigest()
     base = {'filename': 'b.pdf', 'title': 'TEST_QA173 Book', 'sha256': sha, 'size': len(raw), 'rights_confirmed': True}
-    for sid_, label in ((None, 'missing'), ('nope', 'invalid'), ('jee-main:pyq', 'pyq'), ('bitsat:chapters', 'chapters layout'), (nch, 'custom chapters')):
+    for sid_, label in ((None, 'missing'), ('nope', 'invalid'), ('jee-main:pyq', 'pyq')):
         r = await own.post('/api/admin/books', json={**base, **({'section_id': sid_} if sid_ else {})})
         check(f'book create section {label} 422', r.status_code == 422, (r.status_code, r.text[:150]))
+    # Iteration 182: chapter-wise types take PDFs through the chapter reader (one test per chapter).
+    for sid_, label in (('bitsat:chapters', 'chapters layout'), (nch, 'custom chapters')):
+        r = await own.post('/api/admin/books', json={**base, 'title': 'TEST_QA173 Chapters ' + label, 'section_id': sid_})
+        check(f'book create section {label} accepted as chapter-wise', r.status_code == 200, (r.status_code, r.text[:150]))
     b = await upload(own, raw, 'TEST_QA173 Book', section_id='bitsat:mocks', auto_publish=True)
     bid = b['id']
     check('book destination stored', (b.get('destination') or {}).get('section_id') == 'bitsat:mocks' and b['auto_publish'] is False, (b.get('destination'), b.get('auto_publish')))
