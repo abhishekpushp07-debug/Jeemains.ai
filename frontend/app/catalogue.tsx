@@ -9,7 +9,8 @@ import { useListFocus } from "@/src/useListFocus";
 import { Chip, Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, Pill, ScreenHeader, StatusLine } from "@/src/components/design";
 import { colors, fonts, noOutline, radius, space } from "@/src/theme";
-import { examBySlug, fmtClock, unixDate } from "@/src/navigation";
+import { fmtClock, unixDate } from "@/src/navigation";
+import { cachedExamName, cataloguePath } from "@/src/api/examCatalog";
 
 const ORDER = ["Physics", "Chemistry", "Mathematics"];
 // Remember subject/search per exam+kind so Back never resets the list.
@@ -62,18 +63,17 @@ function HistoryRow({ a }: { a: any }) {
 }
 
 export default function CatalogueRoute() {
-  const { slug, kind } = useLocalSearchParams<{ slug: string; kind: string }>();
-  if (slug === "jee-main" && (kind === "mocks" || kind === "pyq")) return <Redirect href="/pyq" />;
-  return <Catalogue key={`${slug}.${kind}`} />;
+  const { slug, kind, section } = useLocalSearchParams<{ slug: string; kind: string; section?: string }>();
+  if (slug === "jee-main" && kind === "pyq") return <Redirect href="/pyq" />;
+  return <Catalogue key={`${slug}.${kind}.${section || ""}`} />;
 }
 
 function Catalogue() {
-  const { slug, kind } = useLocalSearchParams<{ slug: string; kind: "mocks" | "chapters" | "history" }>();
-  const exam = examBySlug(slug);
+  const { slug, kind, section = "" } = useLocalSearchParams<{ slug: string; kind: "mocks" | "chapters" | "history"; section?: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
-  const memKey = `${user?.id}.${slug}.${kind}`;
+  const memKey = `${user?.id}.${slug}.${kind}.${section}`;
   const [subject, setSubject] = useState(remembered[memKey]?.subject ?? (kind === "chapters" ? "Physics" : ""));
   const [q, setQ] = useState(remembered[memKey]?.q ?? "");
   const [query, setQuery] = useState(q);
@@ -86,7 +86,7 @@ function Catalogue() {
 
   const path = kind === "history"
     ? `/exam-navigation/${slug}/history?page=${page}`
-    : `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind: kind!, subject: kind === "chapters" ? subject : "", q: query, page: String(page) })}`;
+    : cataloguePath(slug, section ? "mocks" : kind!, section, kind === "chapters" ? subject : "", query, page);
   const valid = !!slug && (kind === "history" || kind === "mocks" || kind === "chapters");
   const res = useCached<any>(user && valid ? `u.${user.id}.${path}` : null, (signal) => api(path, { signal }));
   useListFocus(res.revalidate);
@@ -94,16 +94,20 @@ function Catalogue() {
   const items: any[] = res.data && res.dataKey === fullKey ? res.data.items : [];
   const subjects = Object.keys(res.data?.subject_counts || {}).sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
   const subjectList = subjects.length ? subjects : ORDER;
-  const title = kind === "history" ? "Results & history" : kind === "chapters" ? "Chapter-wise" : "Mock tests";
+  // An exam without Physics (or a new one) opens on its own first subject.
+  useEffect(() => { if (kind === "chapters" && subjects.length && !subjects.includes(subject)) { setPage(1); setSubject(subjects[0]); } }, [kind, subjects.join(), subject]); // eslint-disable-line react-hooks/exhaustive-deps
+  const own = !!section; // a section the owner created on the website
+  const examName = (typeof res.data?.exam === "string" && res.data.exam) || cachedExamName(user?.id, slug);
+  const title = kind === "history" ? "Results & history" : res.data?.section?.name || (kind === "chapters" ? "Chapter-wise" : "Mock tests");
 
   return (
     <View testID={`catalogue-${slug}-${kind}`} style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader title={title} eyebrow={exam?.name} backTestID="catalogue-back-button" onBack={() => router.back()} />
+      <ScreenHeader title={title} eyebrow={examName} backTestID="catalogue-back-button" onBack={() => router.back()} />
       {kind !== "history" ? (
         <View style={{ paddingHorizontal: space.lg }}>
           <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_card, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 }}>
             <Icon name="magnify" size={20} color={colors.muted} />
-            <TextInput testID="catalogue-search-input" value={q} onChangeText={setQ} placeholder={kind === "chapters" ? "Find a chapter…" : "Find a mock test…"} placeholderTextColor={colors.muted} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />
+            <TextInput testID="catalogue-search-input" value={q} onChangeText={setQ} placeholder={kind === "chapters" ? "Find a chapter…" : own ? "Find a paper…" : "Find a mock test…"} placeholderTextColor={colors.muted} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />
             {q ? <Press testID="catalogue-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search"><Icon name="close-circle" size={18} color={colors.muted} /></Press> : null}
           </View>
         </View>
@@ -125,12 +129,12 @@ function Catalogue() {
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.md }}
         ListHeaderComponent={<>
           <ErrorBox error={res.error} retry={res.reload} testID="catalogue-error" />
-          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2, marginTop: kind === "chapters" ? space.sm : 0 }} testID="catalogue-count">{`${res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : "mock tests")}`.toUpperCase()}</T> : null}
+          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2, marginTop: kind === "chapters" ? space.sm : 0 }} testID="catalogue-count">{`${res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : own ? "papers" : "mock tests")}`.toUpperCase()}</T> : null}
         </>}
         ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View testID="catalogue-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (
-          <DCard testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}
-            body={query ? "Try another search." : kind === "history" ? "Your attempts for this exam will appear here." : `Reviewed ${exam?.name} papers appear here when published. Nothing fake is shown.`}
-            action={kind === "mocks" ? <Pill testID="catalogue-try-chapters" kind="outline" label="Try chapter-wise practice" onPress={() => router.replace(`/catalogue?slug=${slug}&kind=chapters`)} /> : undefined} /></DCard>
+          <DCard testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : own ? "No papers in this section yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}
+            body={query ? "Try another search." : kind === "history" ? "Your attempts for this exam will appear here." : `Reviewed ${examName} papers appear here when published. Nothing fake is shown.`}
+            action={kind === "mocks" && !own ? <Pill testID="catalogue-try-chapters" kind="outline" label="Try chapter-wise practice" onPress={() => router.replace(`/catalogue?slug=${slug}&kind=chapters`)} /> : undefined} /></DCard>
         ) : undefined}
         ListFooterComponent={res.data?.pages > 1 ? (
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>

@@ -135,7 +135,6 @@ function RapidSessionRound() {
     if (!card || done) return;
     startedAt.current = mono();
     // One reset per card keeps native maths views mounted between cards.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLeft(LIMIT);
     setChoice(null);
     setTimedOut(false);
@@ -225,7 +224,6 @@ function RapidSessionRound() {
     fly(1);
   }
   // Gesture callbacks run on interaction, not during render; refs hold the clock.
-  // eslint-disable-next-line react-hooks/refs
   const pan = Gesture.Pan().activeOffsetX([-15, 15]).onUpdate((e) => { x.set(e.translationX); }).onEnd((e) => {
     if (e.translationX > 110 && choice !== null) runOnJS(next)();
     else if (e.translationX < -110 && choice === null && !timedOut) runOnJS(skip)();

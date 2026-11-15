@@ -307,11 +307,11 @@ def make_router(db, rf_user, seat_duel):
         t, lead_ = html.escape(title), html.escape(lead)
         box = f'<div class="code" data-testid="rf-link-code">{html.escape(code)}</div>' if code else ""
         return HTMLResponse(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{t} · JEECIRCLE.AI</title><style>body{{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0,#8C1227,#3D0610);color:#fff;font-family:system-ui,sans-serif}}
+<title>{t} · JEELIVE.AI</title><style>body{{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0,#8C1227,#3D0610);color:#fff;font-family:system-ui,sans-serif}}
 main{{max-width:380px;padding:32px 24px;text-align:center}}.k{{letter-spacing:3px;font-size:12px;color:#FFD75E;font-weight:800}}h1{{font-size:28px;margin:14px 0 8px;color:#FFD75E}}p{{color:#9EF3E6;line-height:1.5}}
 a{{display:block;margin-top:14px;padding:16px;border-radius:16px;font-weight:800;text-decoration:none}}.p{{background:linear-gradient(#2FE0C8,#12B5A0);border-bottom:5px solid #0A6E63;color:#fff}}.s{{border:1px solid #8A2A3C;background:#3E0A14;color:#fff}}
 .code{{margin-top:22px;padding:12px;border-radius:14px;border:1px dashed #C2485C;font-size:20px;letter-spacing:4px;font-weight:800}}</style></head>
-<body><main data-testid="rf-link-page"><div class="k">JEECIRCLE.AI · RAPID FIRE</div><h1 data-testid="rf-link-title">{t}</h1><p>{lead_}</p>
+<body><main data-testid="rf-link-page"><div class="k">JEELIVE.AI · RAPID FIRE</div><h1 data-testid="rf-link-title">{t}</h1><p>{lead_}</p>
 <a class="p" data-testid="rf-link-open" href="{deep}">{html.escape(button)}</a><a class="s" data-testid="rf-link-download" href="https://jeelive.ai">Get the app</a>
 {box}<p style="font-size:12px">{html.escape(hint)}</p></main></body></html>""",
                             headers={"Cache-Control": "no-store"})

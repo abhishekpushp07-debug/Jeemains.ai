@@ -11,7 +11,10 @@ import { DCard, DSheet, Pill, Segmented, StatusLine } from "@/src/components/des
 import { toneInk } from "@/src/components/PyqPaperCard";
 import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { learningStatusTone } from "@/src/components/LearningTheme";
-import { fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
+import { EXAMS, fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
+import { useExams } from "@/src/api/examCatalog";
+
+const EXAM_FILTERS = EXAMS.map(e => ({ key: e.name, name: e.name }));
 
 type Tab = "progress" | "saved" | "completed";
 const TABS: Tab[] = ["progress", "saved", "completed"];
@@ -50,6 +53,12 @@ export default function MyTests() {
   const search = new URLSearchParams({ tab, page: "1", q: query, status, exam }).toString();
   const list = useCached<any>(user ? `u.${user.id}.tests.${search}` : null, (signal) => api("/my/tests?" + search, { signal }));
   useListFocus(list.revalidate);
+  // Exam filters follow the website's exam list, so attempts of a newly added exam can be filtered too.
+  const catalog = useExams();
+  useListFocus(catalog.revalidate);
+  // An exam the owner has hidden cannot stay selected: the website refuses that filter.
+  const examKeys = catalog.exams?.map(e => e.key).join("|");
+  useEffect(() => { if (exam && examKeys !== undefined && !examKeys.split("|").includes(exam)) setExam(""); }, [exam, examKeys]);
 
   const choose = (item: any) => setSelected((o) => (o.some((x) => x.id === item.id) ? o.filter((x) => x.id !== item.id) : o.length < 2 ? [...o, item] : o));
   async function compare() {
@@ -134,7 +143,7 @@ export default function MyTests() {
       </View>
       <View style={{ height: 60, justifyContent: "center" }}>
         <FlatList horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
-          data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), { k: "divider", v: "", l: "", kind: "divider" }, ...["", "JEE Main", "BITSAT", "COMEDK"].map((e) => ({ k: "e" + e, v: e, l: e || "All exams", kind: "exam" }))]}
+          data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), { k: "divider", v: "", l: "", kind: "divider" }, ...[{ key: "", name: "All exams" }, ...(catalog.exams ?? EXAM_FILTERS)].map((e) => ({ k: "e" + e.key, v: e.key, l: e.name, kind: "exam" }))]}
           keyExtractor={(x) => x.k}
           renderItem={({ item }) => item.kind === "divider" ? <View style={styles.chipDivider} /> : <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} onPress={() => { if (item.kind === "status") setStatus(item.v); else { if (item.v !== exam) setSelected([]); setExam(item.v); } }} />}
         />

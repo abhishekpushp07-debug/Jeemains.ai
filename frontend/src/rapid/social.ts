@@ -29,7 +29,7 @@ export const cleanCode = (text: string) => text.replace(/[^A-Za-z0-9]/g, "").toU
 export const prettyCode = (code?: string | null) => (code ? `${code.slice(0, 4)} ${code.slice(4)}` : "");
 export const useFriendCode = (uid?: string) => useCached<{ code: string }>(uid ? `u.${uid}.rfcode` : null, () => rf("/friends/code", uid!));
 export const shareFriendCode = (code: string) =>
-  sendWhatsApp(`Add me on JEECIRCLE.AI Rapid Fire and let’s see who is faster!\nMy Friend Code: ${prettyCode(code)}\nIn the app: Rapid Fire → Gang → Enter a friend’s code.`);
+  sendWhatsApp(`Add me on JEELIVE.AI Rapid Fire and let’s see who is faster!\nMy Friend Code: ${prettyCode(code)}\nIn the app: Rapid Fire → Gang → Enter a friend’s code.`);
 
 export async function sendWhatsApp(text: string) {
   if (Platform.OS === "web") { await Linking.openURL("https://wa.me/?text=" + encodeURIComponent(text)).catch(() => {}); return; } // a computer may have no WhatsApp app

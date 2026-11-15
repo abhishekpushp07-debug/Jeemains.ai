@@ -31,8 +31,8 @@ footer{margin-top:32px;border-top:1px solid #2a2a38;padding-top:20px}footer a{di
 
 def page(title, body, test_id):
     email = escape(CONTENT["supportEmail"])
-    return HTMLResponse(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)} — JEECIRCLE.AI</title><style>{CSS}</style></head>
-<body><main data-testid="{test_id}"><div data-testid="public-legal-brand" class="brand">JEECIRCLE.AI</div><nav data-testid="public-legal-navigation" aria-label="Legal pages"><a data-testid="public-privacy-link" href="/api/legal/privacy">Privacy policy</a><a data-testid="public-deletion-link" href="/api/legal/delete-account">Account deletion</a></nav>
+    return HTMLResponse(f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)} — JEELIVE.AI</title><style>{CSS}</style></head>
+<body><main data-testid="{test_id}"><div data-testid="public-legal-brand" class="brand">JEELIVE.AI</div><nav data-testid="public-legal-navigation" aria-label="Legal pages"><a data-testid="public-privacy-link" href="/api/legal/privacy">Privacy policy</a><a data-testid="public-deletion-link" href="/api/legal/delete-account">Account deletion</a></nav>
 <h1 data-testid="public-legal-title">{escape(title)}</h1>{body}<footer><h2 data-testid="public-support-title">Privacy support</h2><a data-testid="public-support-email" href="mailto:{email}">{email}</a><p data-testid="public-email-warning" class="muted">Never email your PIN, passwords or session tokens. Opening an email app does not send a message or delete an account.</p></footer></main></body></html>""", headers=HEADERS)
 
 

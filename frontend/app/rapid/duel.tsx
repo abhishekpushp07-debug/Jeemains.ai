@@ -121,7 +121,7 @@ function Match() {
   useEffect(() => {
     if (!ready) return;
     const now = serverNow();
-    setClock(now); // eslint-disable-line react-hooks/set-state-in-effect
+    setClock(now);
     const timers = [showStart, d.start_at].filter((at) => at > now).map((at) => setTimeout(() => setClock(serverNow() + 0.05), (at - now) * 1000));
     return () => timers.forEach(clearTimeout);
   }, [ready, d?.id, d?.start_at]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -142,7 +142,7 @@ function Match() {
     if (!card) return;
     startedAt.current = mono();
     lastTick.current = 0;
-    setChoice(null); // eslint-disable-line react-hooks/set-state-in-effect
+    setChoice(null);
     setFb(null);
     setLeft(limit);
     scroll.current?.scrollTo({ y: 0, animated: false });

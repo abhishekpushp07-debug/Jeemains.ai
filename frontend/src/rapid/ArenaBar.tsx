@@ -8,6 +8,8 @@ import { T } from "@/src/components/ui";
 import { useAuth } from "@/src/auth";
 import { rewardsReady, useGameProfile } from "@/src/components/game";
 import { arena } from "@/src/theme";
+import { ARENA } from "@/src/arenaMode";
+import { websiteHomeUrl } from "@/src/api/client";
 import { GameIcon, GameIconName, GemColor, PhoenixDiamond, topGem } from "./Art";
 import { Badge } from "./arena";
 import { Jelly, Twinkles } from "./juice";
@@ -50,7 +52,7 @@ export function ArenaBar() {
   return <View testID="arena-bar" style={[styles.bar, { paddingBottom: insets.bottom, height: 66 + insets.bottom }]}>
     <LinearGradient pointerEvents="none" colors={[arena.clear, arena.gold, arena.clear]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.line} />
     {ITEMS.map((item) => <Item key={item.key} item={item} on={item.key === tab} badge={badges[item.key] || 0}
-      onPress={() => (item.key === "home" ? router.navigate("/(tabs)") : setArenaTab(item.key))} />)}
+      onPress={() => (item.key !== "home" ? setArenaTab(item.key) : ARENA ? window.location.assign(websiteHomeUrl()) : router.navigate("/(tabs)"))} />)}
   </View>;
 }
 

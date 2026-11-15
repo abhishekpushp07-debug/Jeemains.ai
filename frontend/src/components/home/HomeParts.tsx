@@ -104,7 +104,7 @@ export function HomeFooter() {
   return <View testID="home-footer" style={styles.footer}>
     {/* Decorative watermark; the caption below carries the same meaning for screen readers. */}
     <T w="heavy" size={34} color={colors.custom_qFreshLine} style={{ lineHeight: 38 }} aria-hidden accessibilityElementsHidden importantForAccessibility="no-hide-descendants">made for every{"\n"}aspirant.</T>
-    <T size={12} color={colors.custom_eyebrow}>JEECIRCLE.AI · free forever · crafted with AI Astra</T>
+    <T size={12} color={colors.custom_eyebrow}>JEELIVE.AI · free forever · crafted with AI Astra</T>
   </View>;
 }
 

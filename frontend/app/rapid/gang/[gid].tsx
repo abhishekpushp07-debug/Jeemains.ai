@@ -94,7 +94,7 @@ function Gang() {
       <View style={styles.row}>
         <RaisedButton testID="gang-war" icon="gang" label="GANG WAR" sub="vs another gang" height={56} onPress={() => setSheet("war")} style={styles.flex} />
         <RaisedButton testID="gang-invite-link" tone="wine" glyph="whatsapp" label="Invite link" sub={g.kind === "batch" ? "anyone can join" : "for friends of members"} height={56}
-          onPress={() => sendWhatsApp(`Join ${g.name} on JEECIRCLE.AI Rapid Fire and battle other gangs with us!\n${RF_BASE}/g/${g.id}/${g.invite_code}`)} style={styles.flex} />
+          onPress={() => sendWhatsApp(`Join ${g.name} on JEELIVE.AI Rapid Fire and battle other gangs with us!\n${RF_BASE}/g/${g.id}/${g.invite_code}`)} style={styles.flex} />
       </View>
       <View style={styles.row}>
         <RaisedButton testID="gang-add-friends" label="Add friends" icon="friends" disabled={g.members.length >= g.max} onPress={() => { setNote(""); setSheet("add"); }} style={styles.flex} />

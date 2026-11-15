@@ -1,8 +1,11 @@
 /** Keep default device support; the optional small-APK profile targets ARM64 only. */
 module.exports = ({ config }) => {
   const arm64 = process.env.JEELIVE_ANDROID_ARM64_ONLY === "1";
+  // Browser arena export only (scripts/build_arena_web.sh): the web build lives under /api/arena on our server.
+  const arenaWeb = process.env.JEELIVE_ARENA_EXPORT === "1";
   return {
     ...config,
+    ...(arenaWeb ? { experiments: { ...config.experiments, baseUrl: "/api/arena" } } : {}),
     extra: {
       ...config.extra,
       backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,

@@ -74,7 +74,7 @@ function Room() {
   const guest = room && !room.is_host, joined = room?.my_status === "joined";
   const title = room?.gang ? room.gang.name : room?.revenge ? "Badla lo! 🔥" : room?.single ? "1 v 1 Challenge" : "Match Room";
   const label = room?.label || (room ? `${shortSubject(room.subject)} · ${room.chapter || "Mixed chapters"}` : "");
-  const remind = () => sendWhatsApp(`${room.revenge ? "🔥 Badla time! Rematch me" : "⚔️ Join my Rapid Fire match"} on JEECIRCLE.AI! ${label} · 30 cards · 15 s each.\nTake your seat before the timer runs out: ${roomLink(cid)}`);
+  const remind = () => sendWhatsApp(`${room.revenge ? "🔥 Badla time! Rematch me" : "⚔️ Join my Rapid Fire match"} on JEELIVE.AI! ${label} · 30 cards · 15 s each.\nTake your seat before the timer runs out: ${roomLink(cid)}`);
 
   return <ArenaBg testID="room-screen">
     <View style={[styles.frame, { paddingTop: insets.top + 6, paddingBottom: insets.bottom + 10 }]}>

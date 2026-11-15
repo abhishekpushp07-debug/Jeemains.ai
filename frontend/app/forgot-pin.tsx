@@ -8,6 +8,7 @@ import { AuthShell } from "@/src/components/auth/AuthShell";
 import { PhoneField, PinField } from "@/src/components/auth/Fields";
 import { Button, ErrorBox, Header, Icon, T } from "@/src/components/ui";
 import { colors, space } from "@/src/theme";
+import { HOME_ROUTE } from "@/src/arenaMode";
 
 /** Forgot PIN: mobile number, new PIN, confirm PIN, done. The student is signed in straight away. */
 export default function ForgotPin() {
@@ -19,7 +20,7 @@ export default function ForgotPin() {
   const [saved, setSaved] = useState(false); // new PIN saved, but signing in needs another try
   const submit = useAuthSubmit();
   const back = () => router.canGoBack() ? router.back() : router.replace("/entry");
-  const home = () => { if (router.canDismiss()) router.dismissAll(); router.replace("/(tabs)"); };
+  const home = () => { if (router.canDismiss()) router.dismissAll(); router.replace(HOME_ROUTE); };
   const go = () => submit.run(() => pinFormError(phone, pin, confirm), async () => {
     const number = cleanPhone(phone);
     await resetForgottenPin(number, pin, confirm);

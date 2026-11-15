@@ -17,6 +17,7 @@ from owner_downloads import make_router as make_owner_downloads
 from branding import router as branding_router
 from marketing_media import router as marketing_router
 from legal_pages import router as legal_router
+from arena_web import router as arena_web_router
 from jl_transport import canonical_request
 from session_coordination import session_rotation
 from rf_access import make_access_router, install_access_guard, maintenance_on
@@ -458,6 +459,7 @@ api.include_router(make_owner_downloads(db))
 api.include_router(branding_router)
 api.include_router(marketing_router)
 api.include_router(legal_router)
+api.include_router(arena_web_router)
 api.include_router(make_access_router(db, lambda: http))
 app.include_router(api)
 install_access_guard(app, db)

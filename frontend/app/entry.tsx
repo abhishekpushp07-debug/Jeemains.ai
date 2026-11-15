@@ -9,6 +9,7 @@ import { BrandMark } from "@/src/components/BrandMark";
 import { PhoneField, PinField } from "@/src/components/auth/Fields";
 import { AuthShell } from "@/src/components/auth/AuthShell";
 import { colors, radius, space } from "@/src/theme";
+import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 
 export default function Entry() {
   const { signIn, signUp, user, ready, sessionError, checkSession, expired, signOutWarning } = useAuth();
@@ -23,7 +24,7 @@ export default function Entry() {
   const entryFocused = useRef(false);
   const signup = mode === "signup";
   useFocusEffect(useCallback(() => { entryFocused.current = true; return () => { entryFocused.current = false; }; }, []));
-  useFocusEffect(useCallback(() => { if (ready && user) router.replace("/(tabs)"); }, [ready, user, router]));
+  useFocusEffect(useCallback(() => { if (ready && user) router.replace(HOME_ROUTE); }, [ready, user, router]));
   function switchMode(next: typeof mode) { setMode(next); setPin(""); setConfirm(""); submit.setError(""); }
   const go = () => {
     if (!ready) return; // Keyboard submit must also respect session bootstrap.
@@ -33,16 +34,16 @@ export default function Entry() {
       setPin(""); setConfirm("");
       if (!entryFocused.current) return; // A late login must not hijack policy reading.
       if (router.canDismiss()) router.dismissAll();
-      router.replace("/(tabs)");
+      router.replace(HOME_ROUTE);
     });
   };
   const invalid = !validPhone(phone) || !validPin(pin) || (signup && !validPin(confirm));
   return <AuthShell testID="entry-screen">
     <Animated.View entering={reduced ? undefined : FadeInDown.duration(300)} style={styles.intro}>
       <BrandMark testID="entry-brand" />
-      <T testID="entry-eyebrow" size={11} w="bold" color={colors.brandText} style={styles.eyebrow}>YOUR PRACTICE. ONE ACCOUNT.</T>
+      <T testID="entry-eyebrow" size={11} w="bold" color={colors.brandText} style={styles.eyebrow}>{ARENA ? "RAPID FIRE · ONE ACCOUNT" : "YOUR PRACTICE. ONE ACCOUNT."}</T>
       <T testID="entry-title" size={30} w="heavy">{signup ? "Start your next chapter." : "Welcome back."}</T>
-      <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEECIRCLE account." : "Sign in with the same mobile number and PIN you use on our website."}</T>
+      <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEELIVE.AI account. It works on the website and the app too." : "Sign in with the same mobile number and PIN you use on our website."}</T>
     </Animated.View>
     {expired ? <Notice testID="entry-session-expired" tone="warning">Your session ended. Sign in again. Saved results and account-scoped drafts are preserved.</Notice> : null}
     {signOutWarning ? <Notice testID="entry-signout-warning" tone="warning">{signOutWarning}</Notice> : null}
@@ -64,7 +65,7 @@ export default function Entry() {
       <Press testID="entry-privacy-link" onPress={() => { setPin(""); setConfirm(""); router.push("/privacy"); }} style={{ minHeight: 44, alignItems: "center", justifyContent: "center" }}><T testID="entry-privacy-label" size={13} color={colors.muted}>Privacy policy & account deletion</T></Press>
     </View>
     <View style={styles.footer}>
-      <T testID="entry-sync-note" size={12} w="medium" color={colors.muted} style={styles.center}>{signup ? "Already have an account? Sign in instead—your history stays with your existing account." : "Your tests, progress and original solutions stay in sync with the website."}</T>
+      <T testID="entry-sync-note" size={12} w="medium" color={colors.muted} style={styles.center}>{signup ? "Already have an account? Sign in instead—your history stays with your existing account." : ARENA ? "Your coins, diamonds, friends and gangs are the same as in the app." : "Your tests, progress and original solutions stay in sync with the website."}</T>
       <T testID="entry-pin-notice" size={11} color={colors.muted} style={styles.center}>Your PIN protects sign-in. No OTP is sent; phone ownership is not verified.</T>
     </View>
   </AuthShell>;

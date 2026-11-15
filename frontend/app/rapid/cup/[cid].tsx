@@ -135,8 +135,8 @@ function Cup() {
     return () => { live = false; };
   }, [won, isFocused, cid]);
   const closeCrown = () => { setCrowned(false); storage.setItem(`rf.crown.${cid}`, true); };
-  const share = () => sendWhatsApp(`🏆 Watch my Rapid Fire Knockout Cup live on JEECIRCLE.AI!\n${cup.size} players · ${cup.label}\nWatch code: ${cup.code}\nApp → Rapid Fire → Knockout Cup → Watch with a code.`);
-  const remind = () => sendWhatsApp(`🏆 Join my Rapid Fire Knockout Cup on JEECIRCLE.AI!\n${cup.size} players · ${cup.label} · ${cup.cards} cards a match\nOpen the app → Rapid Fire → Knockout Cup and press Join before the timer runs out.`);
+  const share = () => sendWhatsApp(`🏆 Watch my Rapid Fire Knockout Cup live on JEELIVE.AI!\n${cup.size} players · ${cup.label}\nWatch code: ${cup.code}\nApp → Rapid Fire → Knockout Cup → Watch with a code.`);
+  const remind = () => sendWhatsApp(`🏆 Join my Rapid Fire Knockout Cup on JEELIVE.AI!\n${cup.size} players · ${cup.label} · ${cup.cards} cards a match\nOpen the app → Rapid Fire → Knockout Cup and press Join before the timer runs out.`);
   const [confirm, setConfirm] = useState(false);
   const watch = (did: string) => router.push(go.watch(did));
   const roundName = cup?.rounds?.[cup.round]?.name;

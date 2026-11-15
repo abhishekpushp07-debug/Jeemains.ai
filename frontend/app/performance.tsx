@@ -25,7 +25,7 @@ export default function Performance() {
       <T testID="loading-performance-counts" size={13} color={colors.muted}>Memory hits: {report.counters.memory_hit || 0} · Encrypted cache hits: {report.counters.disk_hit || 0} · Image opens: {report.counters.image_open || 0}</T>
       <T testID="loading-performance-context" size={12} color={colors.muted}>Cold and cached loads are included. Prefetched downloads are included in network timings. Paint timing ends at the image display callback; it is not an FPS measurement. Web preview cannot measure Android decoding.</T>
       <Button testID="loading-performance-refresh" label="Refresh timings" onPress={() => setReport(loadingMetrics.snapshot())} />
-      <Button testID="loading-performance-share" label="Share timing report" kind="secondary" onPress={async () => { try { await Share.share({ message: JSON.stringify({ app: "JEECIRCLE loading", platform: Platform.OS, ...report }, null, 2) }); } catch { setMessage("The report could not be shared. Please try again."); } }} />
+      <Button testID="loading-performance-share" label="Share timing report" kind="secondary" onPress={async () => { try { await Share.share({ message: JSON.stringify({ app: "JEELIVE loading", platform: Platform.OS, ...report }, null, 2) }); } catch { setMessage("The report could not be shared. Please try again."); } }} />
       <Button testID="loading-performance-reset" label="Reset timings only" kind="ghost" onPress={() => { loadingMetrics.reset(); setReport(loadingMetrics.snapshot()); setMessage("Timings reset. Saved answers and cached images are unchanged."); }} />
       {message ? <T testID="loading-performance-message" size={13}>{message}</T> : null}
     </ScrollView>

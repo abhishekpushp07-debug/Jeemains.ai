@@ -32,7 +32,7 @@ export default function Mission() {
         </View>
         <T w="heavy" size={10} color={colors.brandText} style={{ letterSpacing: 2.4 }}>OUR MISSION</T>
         <T w="heavy" size={30}>Built by AI.{"\n"}Made for you.</T>
-        <T size={14} color={colors.muted}>JEECIRCLE.AI’s practice content and test series are designed by AI analysing every PYQ question on 80 parameters, aiming for the world’s best prediction and estimation of what to practise.</T>
+        <T size={14} color={colors.muted}>JEELIVE.AI’s practice content and test series are designed by AI analysing every PYQ question on 80 parameters, aiming for the world’s best prediction and estimation of what to practise.</T>
         <View style={styles.stats}>
           {[["80", "parameters"], ["62", "daily mocks"], ["₹0", "forever"]].map(([a, b], i) => (
             <View key={b} style={[styles.stat, i > 0 && styles.statLine]}>
@@ -61,7 +61,7 @@ export default function Mission() {
       <DCard style={styles.share}>
         <Image source={require("../../assets/images/jeelive-icon.png")} style={styles.icon} />
         <T w="heavy" size={20} style={{ textAlign: "center" }}>It’s free. Pass it on.</T>
-        <T size={13} color={colors.muted} style={{ textAlign: "center" }}>Share JEECIRCLE.AI with your friends, batchmates and juniors. One share can change someone’s preparation.</T>
+        <T size={13} color={colors.muted} style={{ textAlign: "center" }}>Share JEELIVE.AI with your friends, batchmates and juniors. One share can change someone’s preparation.</T>
         <Pill testID="mission-share-button" size="lg" label="Share with friends" icon="share-variant" onPress={share} style={{ alignSelf: "stretch" }} />
       </DCard>
 

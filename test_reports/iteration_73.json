@@ -1,0 +1,42 @@
+{
+  "summary": "Iteration76 verification (JEELIVE rebrand, website-driven catalog, browser arena). Backend 11/12 passed, 1 skipped (edge cache-override). Arena sign-in, lobby, 480px column at 1280 (x=400, width=480, height=800), redirect of every non-RF route to /api/arena/rapid, Home button navigates to https://jeelive.ai/, reload persistence, no app tab bar inside arena, no horizontal overflow at 390/320 — all PASS. App preview @390: no 'JEECIRCLE' text, wordmark 'Jeelive.ai / SCORE 200+ WITH AI', footer 'JEELIVE.AI · free forever · crafted with AI Astra' present, Home grid testIDs home-tile-jee-main / -bitsat / -comedk / -live match live /api/jl/catalog/exams (3 real exams + ALL INDIA), JEE Main description 'pyq papers' (PYQ first), COMEDK falls back to the two default rows, tab bar HOME/RANK/RAPID FIRE/MY TESTS/MISSION intact, tab-rapid opens arena-screen at /rapid. Public legal pages /api/legal/privacy and /api/legal/delete-account show JEELIVE brand and have no JEECIRCLE string. RF public link GET /api/rf/c/<unknown-uuid> returns 404 JSON (no crash). Path-escape attempts on /api/arena/../server.py and %2e%2e/.env never leak code or env.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/arena/_expo/static/js/web/<hashed>.js", "issue": "arena_web.py correctly sets 'Cache-Control: public, max-age=31536000, immutable' but the preview edge (Cloudflare) rewrites the header to 'no-store, no-cache, must-revalidate'. App code is fine; this is a platform/edge override to note before claiming long-cache behaviour in production."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "app Home section heading", "issue": "Spec says the Home section should read 'Explore JEELIVE'; the rendered heading is 'PRACTICE' on /app Home. 'JEELIVE' therefore does not appear as a visible section title (only in logo wordmark, footer and screen bodies). Please confirm if the rename to 'PRACTICE' is intentional; otherwise restore 'Explore JEELIVE'.", "testID": "home-exam-grid", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "/api/arena/tests redirect", "issue": "URL correctly ends up at /api/arena/rapid, but data-testid=\"my-tests-screen\" was still briefly present in the DOM right after the redirect. Not a visible-UX bug (user never sees a tests screen) but suggests the My Tests component mounts for a frame before the arenaAllows guard replaces the route. Consider gating the render inside arenaAllows() rather than only redirecting.", "affected_testIDs": ["arena-screen","my-tests-screen"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter76_arena_brand.py",
+    "/app/test_reports/pytest/iter76_arena.xml"
+  ],
+  "action_items": [
+    "Confirm whether the Home section heading 'PRACTICE' is the final label or if 'Explore JEELIVE' should be restored (spec mismatch).",
+    "Optional: harden test-route handling inside the arena so the My Tests screen component does not even mount for a frame when the URL is /api/arena/tests before redirecting to /rapid.",
+    "Known-not-tested by this agent (hard rules): actual Rapid Fire play (Solo Sprint, Practice Rival WebSocket) inside /api/arena; arena sheets/modals (battleground sheet, Store purchase sheet) stay inside the 480 column at 1280; account-signout flow inside /api/arena; player-account absence on own profile in the app preview; exam page row ordering vs live /api/jl/catalog/exams/{slug}; My Tests exam-chip filter; Catalogue lists (bitsat/jee-main/comedk) including the honest empty-state for comedk mocks and the redirect of jee-main&kind=pyq to /pyq; /forgot-pin brand sweep."
+  ],
+  "critical_code_review_comments": [
+    "backend/arena_web.py index response uses 'Cache-Control: no-cache' and hashed-asset response uses 'public, max-age=31536000, immutable' with a hashed/_expo|assets prefix check — correct. The 404 fallback and path-escape resolution (Path(index.parent / path).resolve().is_relative_to(index.parent)) look safe; dotdot and %2e%2e cases both redirect/404 and never leak env values.",
+    "src/api/examCatalog.ts useExams filters shown!==false and sorts by order; that matches the spec that hidden exams must not appear. Falls back to the built-in 3 exams only on error, which is intentional for offline.",
+    "src/arenaMode.ts arenaAllows should be consulted during route render, not only before navigation, to prevent the brief my-tests-screen mount described in integration_issues."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter76_arena_brand.py (new)"
+  ],
+  "success_rate": {"backend": "92% (11/12 asserted; 1 skip due to edge CDN header override)", "frontend": "~90% of requested flows (brand sweep, grid from live catalog, arena sign-in/column/redirects/reload/widths PASS; RF gameplay, modals, chip-filter and catalogue lists were out of scope due to hard rules against academic writes and to avoid 429s)"},
+  "seed_data_creation": "None. Only one read-only sign-in per browser context on the approved QA account 7004186276. No academic Start/Resume/Submit, no RF match played, no wallet mutation, no PIN change, no gang/cup/store purchase. Coins 188 and diamonds 14 observed and unchanged.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Entry form submit testID is 'entry-continue-button' (not 'entry-submit'); fill inputs by click+keyboard.type (page.fill does not stick on the PIN input). The app preview Home page under knockout-arena-77 uses the literal section title 'PRACTICE'; the problem statement expected 'Explore JEELIVE' — flag to main agent before further brand tests. Arena 1280 column box is exactly {x:400,y:0,width:480,height:800}. /api/arena/tests leaves my-tests-screen in the DOM briefly even after the URL has redirected; use URL rather than testID presence to check the redirect. Edge CDN rewrites hashed-asset Cache-Control to no-store — verify via code review, not response headers.",
+  "rca_of_issue": "n/a — this run was a verification, not a bug chase."
+}

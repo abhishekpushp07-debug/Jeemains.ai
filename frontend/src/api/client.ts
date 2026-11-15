@@ -9,6 +9,7 @@ import { configureImageDisk, purgeImageDisk } from "@/src/assets/deviceCache/cac
 import { ImageResponse, loadOriginalImage } from "@/src/assets/imageDownload";
 import { resources } from "@/src/resourceCache";
 import { requestDeadline, RequestDeadlineError } from "./requestDeadline";
+import { ARENA } from "@/src/arenaMode";
 
 // Every platform talks to jeelive.ai through our thin pass-through proxy: browsers cannot carry jeelive.ai
 // cookies cross-origin, and some phones cannot reach jeelive.ai directly ("Connection interrupted" at sign-in).
@@ -16,12 +17,14 @@ import { requestDeadline, RequestDeadlineError } from "./requestDeadline";
 const WEB = Platform.OS === "web";
 const extra = Constants.expoConfig?.extra;
 const CANONICAL_API = (extra?.jeeliveApi || process.env.EXPO_PUBLIC_JEELIVE_API) as string;
-const BACKEND = (extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL) as string;
+// The browser arena is served by our own server, so it always talks to the server it came from.
+export const BACKEND = (ARENA ? window.location.origin : extra?.backendUrl || process.env.EXPO_PUBLIC_BACKEND_URL) as string;
 // A build made without its server address fails every request the same way as being offline: say which it is.
 const NO_SERVER = "This app build is missing its server address. Please install the latest build.";
 const offline = (message: string) => new ApiError(BACKEND ? message : NO_SERVER, 0);
 const BASE = `${BACKEND}/api/jl`;
 export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
+export const websiteHomeUrl = () => new URL("/", CANONICAL_API).href;
 export const RF_BASE = `${BACKEND}/api/rf`;
 
 export const uuid = () => Crypto.randomUUID();

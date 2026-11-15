@@ -1,3 +1,4 @@
+import { ARENA, HOME_ROUTE, arenaAllows } from "@/src/arenaMode"; // first: the browser arena sets up its column before any screen measures the window
 import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
@@ -49,6 +50,7 @@ export default function RootLayout() {
 }
 
 // Signed-out users opening any inner route are sent to entry (no endless placeholders).
+// The browser arena is Rapid Fire only: tests stay on the website, so their routes lead back to the lobby.
 function AuthGate() {
   const { user, ready } = useAuth();
   const segments = useSegments();
@@ -56,6 +58,7 @@ function AuthGate() {
   useEffect(() => {
     const first = segments[0] as string | undefined;
     if (ready && !user && first && !PUBLIC_ROUTES.includes(first)) router.replace("/entry");
+    else if (ARENA && ready && user && !arenaAllows(segments as string[])) router.replace(HOME_ROUTE);
   }, [ready, user, segments, router]);
   return null;
 }
@@ -67,7 +70,8 @@ function SessionBoundary({ children }: { children: React.ReactNode }) {
   const publicScreen = PUBLIC_ROUTES.includes(first);
   // Public help/entry/policy must stay usable while the account server connects.
   // Private routes remain covered until a verified session has settled.
-  const blocked = !publicScreen && (!ready || !user);
+  // In the browser arena a test route is never shown, not even for the moment before it leads back to the lobby.
+  const blocked = (!publicScreen && (!ready || !user)) || (ARENA && !arenaAllows(segments as string[]));
   // Keep the root navigator mounted (required for Expo deep links), but never
   // expose a private route while validating or redirecting an expired session.
   return <View style={styles.root}>

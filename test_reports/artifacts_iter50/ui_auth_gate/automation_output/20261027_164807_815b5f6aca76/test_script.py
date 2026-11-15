@@ -21,7 +21,7 @@ async def run_test(page, output_dir, page_url):
             await page.route("**/api/jl/auth/session", pending_session)
             await page.route("**/api/jl/auth/phone", watch_login)
 
-            await page.goto("https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/entry", wait_until="domcontentloaded")
+            await page.goto("https://jeelive-unified--01f8rch2.preview.emergentagent.com/entry", wait_until="domcontentloaded")
             await page.wait_for_selector('[data-testid="entry-screen"]', timeout=15000)
             await page.fill('[data-testid="entry-phone-input"]', "7004186276")
             await page.fill('[data-testid="entry-pin-input"]', "5524")
@@ -54,13 +54,13 @@ async def run_test(page, output_dir, page_url):
 
         # Step 2: Public legal pages are reachable directly without login.
         try:
-            await page.goto("https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/privacy", wait_until="domcontentloaded")
+            await page.goto("https://jeelive-unified--01f8rch2.preview.emergentagent.com/privacy", wait_until="domcontentloaded")
             await page.wait_for_selector('[data-testid="privacy-screen"]', timeout=10000)
             await page.wait_for_selector('[data-testid="privacy-contact-email"]', timeout=10000)
             email_text = await page.text_content('[data-testid="privacy-contact-email"]')
             print(f"STEP2 email text: {email_text}")
 
-            await page.goto("https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/delete-account", wait_until="domcontentloaded")
+            await page.goto("https://jeelive-unified--01f8rch2.preview.emergentagent.com/delete-account", wait_until="domcontentloaded")
             await page.wait_for_selector('[data-testid="delete-account-screen"]', timeout=10000)
             await page.wait_for_selector('[data-testid="delete-account-status"]', timeout=10000)
             status_text = await page.text_content('[data-testid="delete-account-status"]')
@@ -75,7 +75,7 @@ async def run_test(page, output_dir, page_url):
                 await route.fulfill(status=200, content_type="application/json", body='{"user":null}')
 
             await page.route("**/api/jl/auth/session", anonymous_session)
-            await page.goto("https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/performance", wait_until="domcontentloaded")
+            await page.goto("https://jeelive-unified--01f8rch2.preview.emergentagent.com/performance", wait_until="domcontentloaded")
             await page.wait_for_timeout(2500)
             guarded_url = page.url
             print(f"STEP3 guarded URL: {guarded_url}")
@@ -90,7 +90,7 @@ async def run_test(page, output_dir, page_url):
 
         # Step 4: One live sign-in attempt (max one) to verify normal flow.
         try:
-            await page.goto("https://knockout-arena-77--53pzlg0l.preview.emergentagent.com/entry", wait_until="domcontentloaded")
+            await page.goto("https://jeelive-unified--01f8rch2.preview.emergentagent.com/entry", wait_until="domcontentloaded")
             await page.wait_for_selector('[data-testid="entry-screen"]', timeout=15000)
             await page.fill('[data-testid="entry-phone-input"]', "7004186276")
             await page.fill('[data-testid="entry-pin-input"]', "5524")

@@ -25,7 +25,7 @@ function CrownCard({ s, code, width }: { s: CrownShareInfo; code?: string; width
     <Image source={ARENA} style={StyleSheet.absoluteFill} contentFit="cover" />
     <LinearGradient colors={[arena.shade, arena.scrim]} locations={[0, 0.75]} style={StyleSheet.absoluteFill} />
     <View style={[styles.cardBody, { padding: 18 * u, gap: 6 * u }]}>
-      <T w="heavy" size={11 * u} color={arena.aqua} style={styles.spaced}>JEECIRCLE.AI · RAPID FIRE</T>
+      <T w="heavy" size={11 * u} color={arena.aqua} style={styles.spaced}>JEELIVE.AI · RAPID FIRE</T>
       <CrownArt size={150 * u} gold={gold} />
       <GoldTitle size={30 * u} center>CUP CHAMPION</GoldTitle>
       <View style={[styles.inline, { gap: 10 * u }]}><Avatar icon={s.avatar} frame={s.frame} size={44 * u} /><T w="heavy" size={20 * u} color={arena.text} numberOfLines={1} style={styles.shrink}>{s.name}</T></View>
@@ -50,8 +50,8 @@ export function CrownShare({ s, onBack }: { s: CrownShareInfo; onBack: () => voi
   const uid = useAuth().user?.id, code = useFriendCode(uid).data?.code;
   const card = useRef<any>(null), W = useWindowDimensions().width; // the card View, captured as a picture
   const [busy, setBusy] = useState(false), [note, setNote] = useState("");
-  const caption = (s.cabinet ? `👑 I'm a ${s.crown.won}× Knockout Cup champion on JEECIRCLE.AI Rapid Fire!\nLatest title: ${s.label}. Think you’re faster? Beat me!`
-    : `👑 I just won my ${s.no === 1 ? "first" : ordinal(s.no)} ${s.night ? "Cup Night" : "Knockout Cup"} on JEECIRCLE.AI Rapid Fire!\n${s.size} players · ${s.label}. Think you’re faster? Beat me!`)
+  const caption = (s.cabinet ? `👑 I'm a ${s.crown.won}× Knockout Cup champion on JEELIVE.AI Rapid Fire!\nLatest title: ${s.label}. Think you’re faster? Beat me!`
+    : `👑 I just won my ${s.no === 1 ? "first" : ordinal(s.no)} ${s.night ? "Cup Night" : "Knockout Cup"} on JEELIVE.AI Rapid Fire!\n${s.size} players · ${s.label}. Think you’re faster? Beat me!`)
     + `${code ? `\nMy Friend Code: ${prettyCode(code)}` : ""}\nhttps://jeelive.ai`;
   const send = async () => {
     setBusy(true); setNote("");

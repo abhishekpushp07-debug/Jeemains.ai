@@ -7,6 +7,7 @@ import { Notice, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { DCard, DSheet, GroupList, ListRow, Pill, ScreenHeader } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
+import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 
 export default function Account() {
   const insets = useSafeAreaInsets();
@@ -30,13 +31,13 @@ export default function Account() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader testID="account-header" backTestID="account-back-button" title="Account" eyebrow="JEECIRCLE profile" onBack={() => router.canGoBack() ? router.back() : router.replace("/(tabs)")} />
+      <ScreenHeader testID="account-header" backTestID="account-back-button" title="Account" eyebrow="JEELIVE profile" onBack={() => router.canGoBack() ? router.back() : router.replace(HOME_ROUTE)} />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.xs, paddingBottom: insets.bottom + space.xxl, gap: space.xl }}>
         <DCard testID="account-profile" style={styles.profile}>
           <View style={styles.avatar}><Glyph name="account-outline" size={28} color={colors.onSurface} stroke={1.4} /></View>
           <View style={{ flex: 1, gap: 2 }}>
             <T testID="account-name" w="heavy" size={18}>{user?.name || "Practice profile"}</T>
-            <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEECIRCLE profile"}</T>
+            <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEELIVE profile"}</T>
           </View>
         </DCard>
         <Notice testID="account-pin-notice">Sign in with your mobile number and 4-digit PIN. A PIN does not verify phone ownership; no OTP is sent.</Notice>
@@ -47,13 +48,14 @@ export default function Account() {
         </GroupList>
         <GroupList title="Privacy" testID="account-group-privacy">
           <ListRow testID="account-privacy" icon="shield-check-outline" label="Privacy policy & support" onPress={() => router.push("/privacy")} />
-          <ListRow testID="account-loading-performance" icon="speedometer" label="Loading performance" sub="Check how fast papers and images load" onPress={() => router.push("/performance")} />
+          {/* Papers and their images are not part of the browser arena. */}
+          {ARENA ? null : <ListRow testID="account-loading-performance" icon="speedometer" label="Loading performance" sub="Check how fast papers and images load" onPress={() => router.push("/performance")} />}
         </GroupList>
         <GroupList title="Account" testID="account-group-account">
           <ListRow testID="account-deletion" icon="account-remove-outline" label="Delete account" sub="How account deletion works" onPress={() => router.push("/delete-account")} />
           <ListRow testID="account-signout-button" icon="logout" label="Sign out" danger busy={busy} onPress={begin} />
         </GroupList>
-        <T testID="account-signout-note" size={12} color={colors.custom_eyebrow}>Signing out clears this device’s session and cached question images. Saved answers and results stay with your existing JEECIRCLE account.</T>
+        <T testID="account-signout-note" size={12} color={colors.custom_eyebrow}>Signing out clears this device’s session and cached question images. Saved answers and results stay with your existing JEELIVE account.</T>
       </ScrollView>
       <DSheet visible={sheet !== null} onClose={() => setSheet(null)} testID="signout-drafts-sheet" title="Unsynced work on this phone">
         <T size={13} color={colors.muted}>{sheet} attempt{sheet === 1 ? "" : "s"} still have answers waiting for server acknowledgement. They are not submitted or scored.</T>

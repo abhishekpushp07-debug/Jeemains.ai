@@ -8,6 +8,7 @@ import { Icon, T } from "@/src/components/ui";
 import { EntryShow, effectOf } from "@/src/components/Entry";
 import { BADGE_ICON } from "@/src/components/game";
 import { arena } from "@/src/theme";
+import { ARENA } from "@/src/arenaMode";
 import { Emblem } from "@/src/rapid/Art";
 import { GoldTitle, Panel, RaisedButton, SectionTitle } from "@/src/rapid/arena";
 import { HeadToHeadCard } from "@/src/rapid/HeadToHead";
@@ -118,6 +119,8 @@ function Player() {
       {!p.recent.length ? <Note testID="player-matches-empty">No matches yet.</Note> : null}
 
       {!p.is_me && !rel?.blocked ? <RaisedButton testID="player-more" tone="wine" label="Remove or block" onPress={() => setMore(true)} /> : null}
+      {/* Browser arena: a shared computer needs a way to sign out (the app does this from Home → Account). */}
+      {p.is_me && ARENA ? <RaisedButton testID="player-account" tone="wine" glyph="account" label="Account & sign out" onPress={() => router.push("/account")} /> : null}
     </>}
 
     <Sheet visible={pick} onClose={() => setPick(false)} testID="player-gang-sheet">

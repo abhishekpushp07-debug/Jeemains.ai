@@ -9,15 +9,25 @@ import { Notice, Press, T } from "@/src/components/ui";
 import { SectionLabel } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { HomeSeriesCard } from "@/src/components/series/HomeSeriesCard";
-import { ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem, HomeFooter, PromoBanner } from "@/src/components/home/HomeParts";
+import { ChipItem, ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem, HomeFooter, PromoBanner } from "@/src/components/home/HomeParts";
 import { useShare } from "@/src/components/SeriesBanner";
 import { BrandMark } from "@/src/components/BrandMark";
 import { getPyqCatalogue } from "@/src/api/pyq";
 import { colors, space } from "@/src/theme";
-import { usesNativeTabs } from "@/src/navigation";
+import { EXAMS, usesNativeTabs } from "@/src/navigation";
 import { useSeriesData } from "@/src/series";
+import { examIcon, useExams } from "@/src/api/examCatalog";
+import { useListFocus } from "@/src/useListFocus";
 
 const greeting = () => { const h = new Date().getHours(); return h < 5 ? "good night" : h < 12 ? "good morning" : h < 17 ? "good afternoon" : "good evening"; };
+// The three exams keep their own tile look; the names come from the website.
+const TILE: Record<string, Omit<GridItem, "id" | "label" | "to">> = {
+  "jee-main": { icon: "atom-variant", value: "pyq papers", badge: "PYQ" },
+  bitsat: { icon: "school-outline", value: "mock tests" },
+  comedk: { icon: "office-building-outline", value: "mock tests" },
+};
+// Shown while the website's list is on its way, so the grid never jumps.
+const BUILT_IN_TILES = EXAMS.map(e => ({ slug: e.slug, name: e.name }));
 
 export default function Home() {
   const insets = useSafeAreaInsets();
@@ -27,6 +37,8 @@ export default function Home() {
   const uid = user?.id;
   const { series, streak, days, reload } = useSeriesData(uid, false);
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
+  const catalog = useExams();
+  useListFocus(catalog.revalidate);
   const current = progress.data?.items?.[0];
   const counts = progress.data?.counts;
   useFocusEffect(useCallback(() => {
@@ -45,12 +57,14 @@ export default function Home() {
   const liveSub = !s ? "62-day series" : s.today < s.first_date ? "opens 1 dec" : s.today > s.last_date ? "practice archive" : today ? `day ${today.day} · ${today.label.toLowerCase()}` : "62-day series";
   const first = user?.name?.trim().split(/\s+/)[0];
   const openTests = (tab: string) => router.push({ pathname: "/(tabs)/tests", params: { tab, at: String(Date.now()) } });
+  // Shortcuts to an exam disappear with it when the owner hides that exam on the website.
+  const shown = (slug: string) => !catalog.exams || catalog.exams.some(e => e.slug === slug);
   const badge = (key: string, word: string) => counts?.[key] ? `${counts[key]} ${word}` : undefined;
 
   const exams: GridItem[] = [
-    { id: "jee-main", icon: "atom-variant", label: "JEE MAIN", value: "pyq papers", badge: "PYQ", to: "/exam/jee-main" },
-    { id: "bitsat", icon: "school-outline", label: "BITSAT", value: "mock tests", to: "/exam/bitsat" },
-    { id: "comedk", icon: "office-building-outline", label: "COMEDK", value: "mock tests", to: "/exam/comedk" },
+    // The website's own exam list, in its order: a new exam gets its own tile, a hidden one disappears.
+    ...(catalog.exams ?? BUILT_IN_TILES).map((e, i) => TILE[e.slug] ? { ...TILE[e.slug], id: e.slug, label: e.name.toUpperCase(), to: `/exam/${e.slug}` }
+      : { id: e.slug, icon: examIcon(e.slug, i), label: e.name.toUpperCase(), value: "practice tests", to: `/exam/${e.slug}` }),
     { id: "live", icon: "calendar-check-outline", label: "ALL INDIA", value: liveSub, badge: "LIVE", to: "/live" },
   ];
 
@@ -59,7 +73,7 @@ export default function Home() {
       testID="home-screen"
       style={{ flex: 1, backgroundColor: colors.surface }}
       contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: bottom + space.xxl, paddingHorizontal: space.lg, gap: space.xxl }}
-      refreshControl={<RefreshControl refreshing={false} onRefresh={() => { reload(); progress.reload(); }} />}
+      refreshControl={<RefreshControl refreshing={false} onRefresh={() => { reload(); progress.reload(); catalog.reload(); }} />}
     >
       <View style={{ gap: space.lg }}>
         <View testID="home-header" style={styles.header}>
@@ -108,17 +122,17 @@ export default function Home() {
       <PromoBanner onPress={() => router.push("/live")} />
 
       <View style={{ gap: space.md }}>
-        <SectionLabel title="Explore JEECIRCLE" />
-        <ExploreChips items={[
-          { id: "pyq", icon: "file-document-check-outline", label: "pyq papers", tint: colors.brandText, onPress: () => router.push("/pyq") },
-          { id: "chapters", icon: "book-open-page-variant-outline", label: "chapter-wise", tint: colors.custom_qMarkedInk, onPress: () => router.push("/catalogue?slug=jee-main&kind=chapters") },
+        <SectionLabel title="Explore JEELIVE" />
+        <ExploreChips items={([
+          { id: "pyq", exam: "jee-main", icon: "file-document-check-outline", label: "pyq papers", tint: colors.brandText, onPress: () => router.push("/pyq") },
+          { id: "chapters", exam: "jee-main", icon: "book-open-page-variant-outline", label: "chapter-wise", tint: colors.custom_qMarkedInk, onPress: () => router.push("/catalogue?slug=jee-main&kind=chapters") },
           { id: "series", icon: "calendar-check-outline", label: "all india series", tint: colors.onSurface, onPress: () => router.push("/live") },
-          { id: "bitsat", icon: "school-outline", label: "bitsat mocks", tint: colors.custom_timerAmber, onPress: () => router.push("/catalogue?slug=bitsat&kind=mocks") },
-          { id: "comedk", icon: "office-building-outline", label: "comedk mocks", tint: colors.custom_softText, onPress: () => router.push("/catalogue?slug=comedk&kind=mocks") },
-          { id: "history", icon: "history", label: "results & history", tint: colors.custom_savedBlue, onPress: () => router.push("/catalogue?slug=jee-main&kind=history") },
+          { id: "bitsat", exam: "bitsat", icon: "school-outline", label: "bitsat mocks", tint: colors.custom_timerAmber, onPress: () => router.push("/catalogue?slug=bitsat&kind=mocks") },
+          { id: "comedk", exam: "comedk", icon: "office-building-outline", label: "comedk mocks", tint: colors.custom_softText, onPress: () => router.push("/catalogue?slug=comedk&kind=mocks") },
+          { id: "history", exam: "jee-main", icon: "history", label: "results & history", tint: colors.custom_savedBlue, onPress: () => router.push("/catalogue?slug=jee-main&kind=history") },
           { id: "share", icon: "share-variant", label: "share with friends", tint: colors.success, onPress: share },
           { id: "mission", icon: "compass-outline", label: "our mission", tint: colors.brandText, onPress: () => router.push("/(tabs)/mission") },
-        ]} />
+        ] as (ChipItem & { exam?: string })[]).filter(c => !c.exam || shown(c.exam))} />
       </View>
 
       <HomeFooter />

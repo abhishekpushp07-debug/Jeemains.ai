@@ -1,4 +1,4 @@
-// Design tokens for JEECIRCLE.AI. Keys match the "color" block of /app/design_guidelines.json.
+// Design tokens for JEELIVE.AI. Keys match the "color" block of /app/design_guidelines.json.
 import { createContext, useContext, useMemo } from "react";
 import { Appearance, Platform, StyleSheet, ViewStyle, TextStyle, ImageStyle } from "react-native";
 import { componentStyle } from "./websiteDesign";
