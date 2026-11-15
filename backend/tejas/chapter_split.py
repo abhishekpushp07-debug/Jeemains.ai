@@ -133,7 +133,9 @@ async def save_details(id: str, body: ChapterNames, bg: BackgroundTasks, u=Depen
             subject = match_subject(item.subject, allowed)
             if item.subject and not subject:
                 raise HTTPException(422, f"Choose one of this exam's subjects for {item.title}.")
-            changes[normalized(item.label)] = {'title': ' '.join(item.title.split()), 'subject': subject}
+            # A subject left as it was keeps its source (PDF, upload…); only a changed one becomes "Chosen by you".
+            kept = changes.get(normalized(item.label), {}).get('subject', '')
+            changes[normalized(item.label)] = {'title': ' '.join(item.title.split()), 'subject': subject if subject != (m.chapter or {}).get('subject') else kept}
         book.payload['chapter_overrides'] = changes
         book.state = 'matching'
         await save_book(book, token)

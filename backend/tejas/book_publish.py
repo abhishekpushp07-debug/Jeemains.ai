@@ -37,7 +37,8 @@ def chapter_record(book, mock, label, relevant, ctx, order):
     record=ctx['info'].get(label,{});override=(book.payload.get('chapter_overrides') or {}).get(label,{})
     pages=sorted({p.number for p,r in relevant if r.role=='question'}) or sorted({p.number for p,_ in relevant})
     title=override.get('title') or record.get('title') or bookmark_title(ctx['marks'],pages[0] if pages else 0) or mock.label
-    subject,source=resolve_subject([(override.get('subject'),'you'),(book.payload.get('subject'),'upload'),(record.get('subject'),'pdf'),(ctx['book'],'book'),(syllabus_subject(title),'name')],ctx['allowed'])
+    marked=book.payload.get('plan_source')=='owner'
+    subject,source=resolve_subject([(override.get('subject'),'you'),(record.get('subject') if marked else '','you'),(book.payload.get('subject'),'upload'),(record.get('subject'),'pdf'),(ctx['book'],'book'),(syllabus_subject(title),'name')],ctx['allowed'])
     return {'number':record.get('number') or order,'title':title[:120],'subject':subject,'subject_from':source,'start_page':pages[0] if pages else None}
 
 

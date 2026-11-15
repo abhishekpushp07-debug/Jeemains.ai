@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useRef,useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {Loader2,Save,Plus,Trash2,RotateCcw,Flag,X,ListOrdered} from 'lucide-react';
 import {api,put,fetchWithSession} from '../../../lib/api';
@@ -8,7 +8,7 @@ import {Input} from '../../../components/ui/input';
 import {Skeleton} from '../../../components/ui/skeleton';
 import {Select,SelectTrigger,SelectValue,SelectContent,SelectItem} from '../../../components/ui/select';
 import {ErrorBox} from '../../../components/Shared';
-import {AdminHeading,StatusChip} from '../../../components/admin/AdminShared';
+import {AdminHeading,StatusChip,ConfirmDialog} from '../../../components/admin/AdminShared';
 import {MasterCrumbs,plural} from '../../../components/master/MasterShared';
 
 const ROLE={question:'Questions',key:'Answer key',solution:'Solutions'};
@@ -77,11 +77,13 @@ function ChapterTable({data,onSaved}){
  </section>;
 }
 
-function MarkForm({page,chapters,starts,onMark,onClear,onClose}){
+function MarkForm({page,chapters,starts,restart,onMark,onClear,onClose}){
  const before=starts.filter(s=>s.role==='question'&&s.page<=page).sort((a,b)=>b.page-a.page)[0];
- const [chapter,setChapter]=useState(before?String(before.chapter):'new'),[role,setRole]=useState(before?'key':'question');
+ const fresh=restart||!before;
+ const [chapter,setChapter]=useState(fresh?'new':String(before.chapter)),[role,setRole]=useState(fresh?'question':'key');const box=useRef(null);
+ useEffect(()=>{box.current?.scrollIntoView({block:'nearest',behavior:'smooth'});},[]);
  useEffect(()=>{if(role==='question')setChapter(c=>c===(before?String(before.chapter):'')?'new':c);},[role]);// eslint-disable-line react-hooks/exhaustive-deps
- return <div className="chapter-mark-form" data-testid={'chapter-mark-form-'+page}>
+ return <div className="chapter-mark-form" ref={box} data-testid={'chapter-mark-form-'+page}>
   <div className="chapter-mark-head"><strong>Page {page} starts…</strong><Button size="icon" variant="ghost" onClick={onClose} aria-label="Close" data-testid="chapter-mark-close"><X size={15}/></Button></div>
   <div className="chapter-role-pick" role="radiogroup" aria-label="What starts on this page">{Object.entries(ROLE).map(([k,v])=><button type="button" key={k} role="radio" aria-checked={role===k} className={role===k?'is-on':''} onClick={()=>setRole(k)} data-testid={'chapter-mark-role-'+k}>{v}</button>)}</div>
   <Select value={chapter} onValueChange={setChapter}><SelectTrigger data-testid="chapter-mark-chapter" aria-label="Of which chapter"><SelectValue/></SelectTrigger><SelectContent>
@@ -134,7 +136,7 @@ function StartMarker({data,onDone,onCancel}){
    <PlanChapters chapters={chapters} starts={starts} subjects={data.subjects} onChange={(i,c)=>setChapters(all=>all.map((x,j)=>j===i?c:x))} onRemove={remove} onAdd={()=>setChapters(c=>[...c,{...blank}])}/>
    <div className="chapter-pages-wrap">
     <ol className="chapter-pages" data-testid="chapter-pages">{pages.map(n=><PageCard key={n} id={data.id} n={n} marks={starts.filter(s=>s.page===n)} chapters={chapters} restart={restarts.has(n)} open={open===n} onOpen={()=>setOpen(open===n?null:n)}>
-     {open===n&&<MarkForm page={n} chapters={chapters} starts={starts} onMark={mark} onClear={p=>{setStarts(s=>s.filter(x=>x.page!==p));setOpen(null);}} onClose={()=>setOpen(null)}/>}
+     {open===n&&<MarkForm page={n} chapters={chapters} starts={starts} restart={restarts.has(n)} onMark={mark} onClear={p=>{setStarts(s=>s.filter(x=>x.page!==p));setOpen(null);}} onClose={()=>setOpen(null)}/>}
     </PageCard>)}</ol>
     {shown<data.pages&&<Button variant="outline" onClick={()=>setShown(s=>s+24)} data-testid="chapter-pages-more">Show more pages ({data.pages-shown} left)</Button>}
    </div>
@@ -146,21 +148,22 @@ function StartMarker({data,onDone,onCancel}){
 
 export default function ChapterSplit(){
  const {id}=useParams();
- const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0),[marking,setMarking]=useState(false);
+ const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0),[marking,setMarking]=useState(false),[asking,setAsking]=useState(false);
  useEffect(()=>{api('/admin/master/chapters/'+id).then(d=>{setData(d);setError('');if(d.state==='chapters_needed')setMarking(true);}).catch(e=>setError(e.message));},[id,reload]);
  const reading=data?.reading;
  useEffect(()=>{if(!reading)return;const t=setInterval(()=>setReload(n=>n+1),4000);return()=>clearInterval(t);},[reading]);
  if(error)return <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>;
  if(!data)return <Skeleton className="h-64"/>;
  const refresh=()=>{setMarking(false);setReload(n=>n+1);};
- async function useHeadings(){try{const r=await api(`/admin/master/chapters/${id}/starts`,{method:'DELETE'});toast.success(r.message);refresh();}catch(e){toast.error(e.message);}}
+ async function useHeadings(){setAsking(false);try{const r=await api(`/admin/master/chapters/${id}/starts`,{method:'DELETE'});toast.success(r.message);refresh();}catch(e){toast.error(e.message);}}
  const how=data.plan_source==='owner'?'Split by the pages you marked.':data.plan_source==='bookmarks'?'Split by the PDF’s own bookmarks.':'Split by the chapter headings printed in the PDF.';
  return <div className="admin-page master-page" data-testid="chapter-split-page">
   <MasterCrumbs exam={data.exam} type={{id:data.section.id,name:data.section.name}} last="Chapters"/>
   <AdminHeading testId="chapter-split-title" title={data.title} text={data.state==='chapters_needed'?'Chapter headings were not found in this PDF. Mark where each chapter starts and it is split by itself.':`${how} Each chapter is its own Draft test.`}
-   action={!marking&&!data.reading&&<div className="admin-actions">{!data.locked&&<Button variant="outline" onClick={()=>setMarking(true)} data-testid="chapter-change-starts"><Flag size={16}/>Change where chapters start</Button>}{data.plan_source&&data.plan_source!=='headings'&&!data.locked&&<Button variant="ghost" onClick={useHeadings} data-testid="chapter-use-headings"><RotateCcw size={16}/>Read the PDF by itself again</Button>}</div>}/>
+   action={!marking&&!data.reading&&<div className="admin-actions">{!data.locked&&<Button variant="outline" onClick={()=>setMarking(true)} data-testid="chapter-change-starts"><Flag size={16}/>Change where chapters start</Button>}{data.plan_source&&data.plan_source!=='headings'&&!data.locked&&<Button variant="ghost" onClick={()=>setAsking(true)} data-testid="chapter-use-headings"><RotateCcw size={16}/>Read the PDF by itself again</Button>}</div>}/>
   {data.reading&&<div className="admin-progress" role="status" data-testid="chapter-reading"><progress value={data.read_pages} max={data.pages||1}/><small><Loader2 size={13} className="spin"/> {data.message}</small></div>}
   {data.locked&&!marking&&<p className="admin-note" data-testid="chapter-locked-note">Some chapters are Live, so the split is fixed. You can still rename chapters that are not Live.</p>}
   {marking?<StartMarker data={data} onDone={refresh} onCancel={data.state==='chapters_needed'?null:()=>setMarking(false)}/>:<ChapterTable data={data} onSaved={()=>setReload(n=>n+1)}/>}
+  <ConfirmDialog open={asking} onClose={()=>setAsking(false)} testId="chapter-use-headings-confirm" title="Read the PDF by itself again?" text="The pages you marked, and the chapter names and subjects you gave, are cleared. Draft chapter tests from this PDF are made again from the printed headings or bookmarks. If none are found, you mark the pages again." button="Read again" onConfirm={useHeadings}/>
  </div>;
 }

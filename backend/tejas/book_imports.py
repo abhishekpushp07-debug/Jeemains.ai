@@ -316,7 +316,7 @@ async def mock_problems(id:str,mid:str,u=Depends(staff)):
     await load_book(id);row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
     if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
     mock=BookMock.from_mongo(row);questions,general=question_problems(mock)
-    return {'id':mock.id,'label':mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
+    return {'id':mock.id,'label':(mock.chapter or {}).get('title') or mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
             'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
 
 

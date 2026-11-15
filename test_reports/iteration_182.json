@@ -1,0 +1,43 @@
+{
+  "summary": "Frontend-only test of Chapter PDF Reader + Draft Preview through the isolated bridge (FE https://campus-search-debug.preview.emergentagent.com, /api routed to 127.0.0.1:8770 with bridge cookies). All 7 requested flows PASS: type page uploads/chips/30 chapter drafts; chapter table rename -> 'Save 1 change' -> toast -> persists after reload; no-headings page marker (16 page pictures all HTTP 200, Q1 hints on p1/p9, mark p1+p9 as new chapters, names, subject, problem text gating, remove chapter also removes its marks, save -> reading poll -> 2 rows with given names, 'Read the PDF by itself again' shown and works); upload dialog subject select + chunked upload of chapters_layout_b.pdf -> 2 drafts Kinematics=Physics, Mole Concept=Chemistry within ~10s; Try as student -> 'Preparing…' -> /sets/<id>?preview=true with PRIVATE REVIEW eyebrow, notice, 'Back to Master' returns to type page; preflight -> Start private preview -> 50-question player -> answer -> submit -> results page; reviewer scope, reviewer blocked from /super-admin/chapters/<id> (redirect to /super-admin), reviewer Try as student on held mock FixMock works; mobile 390 no overflow on type/chapters/marker, 2-column page grid, sticky bottom bar usable. Only minor issues found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "PUT /api/admin/master/chapters/{id}/details", "issue": "Renaming only the title (subject untouched) flips provenance to 'Subject: chosen by you' because the unchanged subject is stored in chapter_overrides. Frontend sends {label,title,subject} for every changed row; backend should only override subject when it differs (or frontend should omit unchanged subject)."},
+      {"endpoint": "PUT /api/admin/master/chapters/{id}/starts", "issue": "Subject chosen by the owner in the page marker (Physics for chapter 1) is labelled 'Subject: printed in the pdf' afterwards; chapter_record only reads chapter_overrides for 'you' source, so owner-picked subjects from the marker get the wrong provenance label."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "FixMock / HeldFixer title", "issue": "Fix page heading shows raw label 'Chapter 1'/'Chapter 2' instead of chapter title (e.g. 'TEST_Motion Basics', 'Kinematics') while the Things-to-fix list shows the real title.", "selector": "[data-testid=fix-mock-page]", "priority": "LOW"},
+      {"component": "FixMock (reviewer, non-held mock)", "issue": "Heading stays 'Loading…' alongside 'Mock not found.' error, and 'Try as student' is still offered.", "selector": "[data-testid=fix-mock-page]", "priority": "LOW"},
+      {"component": "ChapterSplit 'Read the PDF by itself again'", "issue": "Runs immediately with no confirm; for a no-headings PDF it wipes the owner's marks, names and subjects and returns to an empty marker.", "selector": "[data-testid=chapter-use-headings]", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "Draft preview of a held chapter (TEST_Motion Basics, '1 to fix')", "issue": "Preview opened with all 50 questions and no 'left out until fixed' toast. Probably fine if the issue is a page-level 'leading content' warning and not a question to fix, but please confirm left_out behaviour matches the chip count.", "affected_selectors": ["mock-try-6a091b9a-47d2-55a0-aec8-e024f01a36fa"]}
+    ],
+    "design_issues": [
+      {"screen": "Set detail (private preview)", "issues": ["Source line shows 'Owner-uploaded Physics chapter book.pdf'. The upload dialog calls this name 'private', so check that live chapter sets don't show the upload filename to students."]},
+      {"screen": "Results after private preview", "issues": ["Back link says 'Back to BITSAT tests & results' rather than going back to Master. Small gap for owner/reviewer."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Only store subject override in /details when the subject actually changed (provenance label)",
+    "Give owner-chosen subjects from the page marker the 'Chosen by you' source",
+    "FixMock heading: use chapter title for chapter-wise mocks; replace 'Loading…' on error",
+    "Optional: confirm dialog before chapter-use-headings discards owner marks",
+    "Check that the upload filename isn't shown as the student-facing source for live chapter tests"
+  ],
+  "critical_code_review_comments": [
+    "ChapterSplit.js MarkForm useEffect on role with eslint-disable is fragile; logic works in tests but is hard to reason about",
+    "ChapterTable save sends every field of changed rows (causes the provenance issue above)",
+    "Page picture queue (max 3 + 503 retry) works: 16/16 images 200 on desktop"
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested (frontend only)", "frontend": "100% of requested flows (7/7) pass; 5 minor issues"},
+  "seed_data_creation": "In bridge disposable DB only: renamed Physics chapter 1 to 'TEST_Units and Dimensions'; marked no-headings book into TEST_Motion Basics/TEST_Atoms Basics then reset with 'Read the PDF by itself again' (now back to chapters_needed); uploaded 'TEST_Layout B upload'; 1 owner preview attempt submitted. No preview/customer DB writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge routing pattern: page.route(FE+'/api/**') -> route.fetch('http://127.0.0.1:8770'+path, headers with cookie from bridge.json[role] and origin=FE). Player submit confirm is [data-testid=confirm-accept]; preflight: fill device-test-answer, click preflight-run-check, preflight-acknowledge, set-preflight-start-button. No-headings book is now back in chapters_needed state."
+}

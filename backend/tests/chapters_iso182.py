@@ -111,7 +111,11 @@ async def main():
         r = await own.put(f'/api/admin/master/chapters/{pid}/details', json={'items': [{'label': first['label'], 'title': 'Units and Dimensions', 'subject': 'Physics'}]})
         await drain(500)
         m0 = (await mocks(pid))[0]
-        check('rename chapter saved', r.status_code == 200 and m0['chapter']['title'] == 'Units and Dimensions' and m0['chapter']['subject_from'] == 'you', (r.text[:200], m0.get('chapter')))
+        check('rename chapter saved; unchanged subject keeps its source', r.status_code == 200 and m0['chapter']['title'] == 'Units and Dimensions' and m0['chapter']['subject_from'] == 'book', (r.text[:200], m0.get('chapter')))
+        r = await own.put(f'/api/admin/master/chapters/{pid}/details', json={'items': [{'label': first['label'], 'title': 'Units and Dimensions', 'subject': 'Mathematics'}]})
+        await drain(500)
+        m0 = (await mocks(pid))[0]
+        check('changed subject is chosen by you', r.status_code == 200 and m0['chapter']['subject'] == 'Mathematics' and m0['chapter']['subject_from'] == 'you', m0.get('chapter'))
         r = await own.put(f'/api/admin/master/chapters/{pid}/details', json={'items': [{'label': first['label'], 'title': 'X chapter', 'subject': 'Biology'}]})
         check('subject outside the exam refused', r.status_code == 422, r.status_code)
         r = await rev.put(f'/api/admin/master/chapters/{pid}/details', json={'items': [{'label': first['label'], 'title': 'Hack', 'subject': ''}]})
@@ -149,7 +153,7 @@ async def main():
         await drain(3000)
         ms = await mocks(hid)
         check('marked starts: 2 chapters read', r.status_code == 200 and len(ms) == 2 and [len(m['questions']) for m in ms] == [50, 50], (r.text[:200], [(m['label'], len(m['questions']), m['issues'][:2]) for m in ms]))
-        check('marked starts: names kept and subject asked when unclear', [m['chapter']['title'] for m in ms] == ['Units', 'Motion in a line'] and ms[0]['chapter']['subject'] == 'Physics', [m.get('chapter') for m in ms])
+        check('marked starts: names kept and subject asked when unclear', [m['chapter']['title'] for m in ms] == ['Units', 'Motion in a line'] and ms[0]['chapter']['subject'] == 'Physics' and ms[0]['chapter']['subject_from'] == 'you', [m.get('chapter') for m in ms])
         d = (await own.get(f'/api/admin/master/chapters/{hid}')).json()
         check('marked starts: plan shown back to the owner', d['plan_source'] == 'owner' and len(d['draft']['starts']) == 2, d['draft'])
 
