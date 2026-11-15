@@ -33,6 +33,7 @@ async def read_batch(book, token, source):
     await renew(book,token)
     previous=await db.tejas_book_pages.find_one({'book_id':id,'number':start})
     context=(previous or {}).get('context',{})
+    if not start and p.get('single_mock'):context={'mock':p['single_mock'],'single':True,'subject':'General'}
     for n in numbers:
         await fence(book,token)
         existing=await db.tejas_book_pages.find_one({'_id':identity(id,'page',n)})
@@ -114,6 +115,15 @@ async def step(job):
             book.state='reading';await save_book(book,token)
         if p.get('read_pages',0)<p['pages']:
             more=await read_batch(book,token,source)
+        if not more and not p.get('single_checked'):
+            # A PDF with no printed mock heading is one paper: read it again as a single mock named after the upload.
+            p['single_checked']=True
+            labelled=await db.tejas_book_pages.find_one({'book_id':id,'regions.mock':{'$nin':['',None]}},{'_id':1})
+            items=await db.tejas_book_pages.find_one({'book_id':id,'regions.role':{'$in':['question','key','solution']}},{'_id':1})
+            if items and not labelled:
+                p.update(single_mock=p['title'][:100],read_pages=0,message='One paper found. Reading it as a single mock.')
+                await db.tejas_book_pages.delete_many({'book_id':id,'provenance.kind':'native'})
+                book.state='reading';await save_book(book,token);more=True
         if not more:
             allowance=await db.tejas_book_allowances.find_one({'book_id':id,'state':{'$in':['queued','running']}},sort=[('created_at',1)])
             if allowance:

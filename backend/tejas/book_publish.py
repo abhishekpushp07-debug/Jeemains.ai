@@ -76,12 +76,23 @@ async def rebuild(book, token):
             if ident not in question_groups and len(by_number.get(r.number,[]))==1:ident=by_number[r.number][0]
             (key_groups if r.role=='key' else solution_groups).setdefault(ident,[]).append((p,r))
         instructions=[(p,r) for p,r in relevant if r.role=='instructions']
+        # A book that itself promises worked solutions never drops them silently; the owner decides per question in Fix.
+        promised=bool(re.search(r'\b(?:worked|detailed)\s+solutions?\s+(?:follow|provided|included|for\s+(?:all|every))','\n'.join(r.text for _,r in instructions),re.I))
         if not mock.rules:
             inferred=infer_rules('\n'.join(r.text for _,r in instructions))
             if inferred:
                 inferred['source_pages']=sorted({p.number for p,_ in instructions})[:30]
                 if not solution_groups and any(re.search(r'\bquestions\s+only\b',p.text,re.I) for p,_ in relevant):inferred['solution_policy']='key_only'
                 mock.rules=MockRules.model_validate(inferred).model_dump()
+            elif question_groups and (book.payload.get('destination') or {}).get('defaults'):
+                # Nothing printed: the mock type's own time and marks apply, as the owner set them.
+                d=book.payload['destination']['defaults'];nums=[k[2] for k in question_groups]
+                mock.rules=MockRules.model_validate({'exam':'Custom','minutes':d['minutes'],'expected_questions':len(question_groups),'correct':d['correct'],'wrong':d['wrong'],
+                    'mechanic':'all_compulsory','numbering':'per_section' if len(set(nums))<len(nums) else 'continuous','first_number':max(1,min(nums)),
+                    'solution_policy':'mixed','source_pages':[relevant[0][0].number],'note':'Default time and marks of this mock type; the PDF prints none.'}).model_dump()
+        if mock.rules and mock.rules.get('note','').startswith('Default time and marks') and question_groups:
+            nums=[k[2] for k in question_groups]
+            mock.rules.update(expected_questions=len(nums),numbering='per_section' if len(set(nums))<len(nums) else 'continuous',first_number=max(1,min(nums)))
         if not mock.rules:issues.append('Confirm printed examination rules, count, duration, marking and solution coverage.')
         if mock.rules and book.payload.get('destination'):
             from .structure import rule_exam
@@ -128,7 +139,8 @@ async def rebuild(book, token):
             coverage_key=f'{first.subject}|{first.section or first.subject}|{first.number}'
             source_expects=coverage_key in mock.original_solution_identities or bool(solutions)
             if solutions and coverage_key not in mock.original_solution_identities:mock.original_solution_identities.append(coverage_key)
-            no_solution=not source_expects and (rules.get('solution_policy')=='key_only' or (rules.get('solution_policy')=='mixed' and coverage_key in rules.get('key_only',[])))
+            # An answer key is enough; a worked solution is optional unless this book printed one for the question.
+            no_solution=not source_expects and ((bool(keys) and not promised and not solution_groups) or rules.get('solution_policy')=='key_only' or (rules.get('solution_policy')=='mixed' and coverage_key in rules.get('key_only',[])))
             if not solutions and not no_solution:issues.append(f'{first.subject} Q{first.number}: original solution expected but not captured; attach its regions.')
             if not solutions and not keys:issues.append(f'{first.subject} Q{first.number}: original key region required.')
             shared=[(p,r) for p,r in relevant if r.role=='shared' and normalized(r.subject)==key[0] and normalized(r.section or r.subject)==key[1] and key[2] in r.shared_for]
@@ -187,8 +199,10 @@ async def publish_ready(book,token,raw,only_mid=None):
             mock.set_id=sid;mock.published_generation=mock.generation;mock.state='published';await save_mock(mock);continue
         if series:
             from .live_series import window as day_window
-            opens=day_window(mock.series_date)['opens_at']
-            if await database_now()>=opens or await sets.find_one({'series_date':mock.series_date,'id':{'$ne':sid}},{'_id':1}):
+            from .series_admin import series_cfg
+            cfg=await series_cfg(dest.get('series_id'))
+            opens=day_window(mock.series_date,cfg)['opens_at']
+            if await database_now()>=opens or await sets.find_one({'series_id':cfg['id'],'series_date':mock.series_date,'id':{'$ne':sid}},{'_id':1}):
                 # Its day opened or was taken before the paper was built: it waits, unassigned, for a new day.
                 mock.series_date=None;mock.publish_requested=False;mock.release_at=None;await save_mock(mock);continue
         questions=[];rules=mock.rules
@@ -223,20 +237,21 @@ async def publish_ready(book,token,raw,only_mid=None):
             'questions':questions,'file_ids':sorted({r['file_id'] for q in questions for k in ('q_refs','s_refs') for r in q[k]}),
             'status':'draft','version':0,'revision':1,'source':'Owner-uploaded '+book.payload['filename'],'attribution':'Original book source; owner-confirmed content-use rights.',
             'rights_upload':True,'rights_publish':True,'rights_report':True,'audience':'all','allowed_emails':[],'allowed_phones':[],'expires':'',
-            'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False),'created_at':now(),'created_by':book.owner_id}
+            'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False) or mock.live_exam,'created_at':now(),'created_by':book.owner_id}
         if rules['mechanic']=='bitsat_bonus':data['rules']['bonus_rule']='answer_all_main_then_lock'
         if series:
-            from .live_series import SERIES_ID, window as day_window
-            w=day_window(mock.series_date);start=w['opens_at']
-            data.update(series_id=SERIES_ID,series_date=mock.series_date,series_import=True,start_at=start,end_at=w['closes_at'],competition=False)
+            w=day_window(mock.series_date,cfg);start=w['opens_at']
+            data.update(series_id=cfg['id'],series_date=mock.series_date,series_window=w,series_import=True,start_at=start,end_at=w['closes_at'],competition=False)
+            if cfg.get('pattern'):data['series_pattern']={**cfg['pattern'],'count':len(questions)}
         elif dest:
             from .structure import next_order
             if 'catalog_base' not in book.payload:book.payload['catalog_base']=(dest.get('replace_order') or await next_order(dest['section_id']))-1
             data.update(catalog_section_id=dest['section_id'],catalog_order=book.payload['catalog_base']+mock.order)
+            if dest.get('pyq'):data.update(test_kind='pyq',master_pyq=True,pyq_year=dest['year'],pyq_date='',pyq_shift=0)
         if data['competition']:
             if mock.release_override:raise ValueError('An expired competitive window needs a new edition and future schedule.')
             from .live_window import window as live_window
-            data['last_start_at'],data['end_at']=live_window(start,rules['minutes'],book.payload['closes_at'])
+            data['last_start_at'],data['end_at']=live_window(start,rules['minutes'],book.payload.get('closes_at') if book.payload.get('competitive') else None)
         await fence(book,token)
         await sets.update_one({'id':sid},{'$setOnInsert':data},upsert=True)
         await publish_validated(sid,{'confirm':True},await principal(book))

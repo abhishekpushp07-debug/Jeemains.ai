@@ -217,3 +217,11 @@ Applies to regular live exams (`competition:true`), not the All India series.
 3. Score on submission: `GET /attempts/{id}/results` before `end_at` still returns `status:"embargoed"` with `release_at`, plus `score_released:true` and `summary` (score, maximum, correct, incorrect, skipped, accuracy, subjects…). While scoring is running `summary` is null; poll again after `retry_after_ms`. `GET /attempts`, `GET /attempts/{id}` and My Tests show the summary as soon as it is graded.
 4. Answers, solutions, worked solutions, question reports, revision attempts and the leaderboard stay locked until `end_at`, so students who started later in the window cannot receive answers early.
 5. All India series attempts keep the old rule: `score_released` is absent and the score stays sealed until the series day closes.
+
+## 14. Test series for every exam and written questions (added 2026-11-15, preview only until deployed)
+- `GET /api/series` (no login needed) lists every test series that is switched on: `id`, `title`, `exam {slug,name,color}`, `first_date`, `last_date`, `total`, `open_time`, `last_start`, `today`, `today_slot`, `builtin`. The JEE Main series is the item with `builtin: true`; its existing endpoints under `/api/series/all-india-jee` are unchanged.
+- `GET /api/series/{id}/schedule` gives the day list in the same slot shape as the JEE series (`day`, `date`, `opens_at`, `last_start_at`, `closes_at`, `archive_at`, `state`, `ready`, `set_id`, `title`, `can_start`). `GET /api/series/{id}/history` (login) lists the student's own attempts.
+- Starting, autosave, submit and results use the existing set and attempt endpoints. A live series attempt carries `series_id`, `series_date`, `mode: series_live`; its score stays sealed until that day's `closes_at`.
+- `GET /api/catalog/exams/{slug}` never lists a series as a section: show each series as its own card from `GET /api/series`.
+- Questions written in Super Admin have `render_mode: "written"`: show `text` (maths between `$` signs) and option texts, then `asset_count` images from the existing `/asset/question/{i}` endpoint. `asset_labels[i]` is empty for the question figure or `Option A`…`Option D` for an option figure. Solutions work the same way with `solution_asset_count`.
+- PYQ papers made in Super Admin may have an empty `exam_date` and `shift: 0`; use `year` and `title` for those.

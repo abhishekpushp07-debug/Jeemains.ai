@@ -35,9 +35,32 @@ SPEC = {
     'structure.held_mocks': ('staff_held_mock_reasons_only','normal','read'),
     'structure.waiting': ('owner_only_ready_to_publish_metadata','normal','read'),
     'structure.publish_ready_items': ('owner_only_publish_ready_items','control','per_mock_request_flag_audited'),
-    'book_imports.mock_problems': ('book_owner_private_source','normal','read'),
-    'book_imports.fix_question': ('book_owner_private_source','control','lease_mock_revision'),
+    'book_imports.mock_problems': ('owner_any_reviewer_held_mocks_only','normal','read'),
+    'book_imports.fix_question': ('owner_any_reviewer_held_mocks_only','control','lease_mock_revision'),
     'library.library': ('owner_only_library_metadata','normal','read'),
+    'master.summary': ('owner_only_publishing_counts','normal','read'),
+    'master.fix_list': ('staff_mocks_to_fix_metadata','normal','read'),
+    'master.type_mocks': ('owner_only_type_mock_metadata','normal','read'),
+    'master.change_status': ('owner_only_mock_status','control','per_item_state_audited'),
+    'master.dismiss_upload': ('owner_only_upload_to_library','control','idempotent_flag_audited'),
+    'written.create_written': ('owner_only_new_draft_mock','control','not_idempotent_audited'),
+    'written.read_written': ('owner_any_reviewer_flagged_drafts_only','normal','read'),
+    'written.update_written': ('owner_only_written_mock_details','control','revision_CAS_audited'),
+    'written.save_question': ('staff_written_question','control','revision_CAS_audited'),
+    'written.delete_question': ('staff_written_question','control','revision_CAS_audited'),
+    'written.upload_image': ('staff_written_mock_photo','control','new_file_each_upload'),
+    'written.read_image': ('staff_written_mock_photo','batch','read'),
+    'written.paste': ('staff_written_mock_paste','control','revision_CAS_audited'),
+    'written.excel': ('owner_only_written_mock_excel_rows','control','revision_CAS_audited'),
+    'series_admin.public_list': ('public_series_schedule_metadata_only','normal','read'),
+    'series_admin.public_schedule': ('public_series_schedule_metadata_only','normal','read'),
+    'series_admin.public_history': ('own_series_attempts_only','normal','read'),
+    'series_admin.owner_view': ('owner_series_schedule_only','normal','read'),
+    'series_admin.update_config': ('owner_future_days_only','control','opened_days_unchanged_audited'),
+    'series_admin.assign': ('owner_future_day_only','control','unique_series_day'),
+    'series_admin.unassign': ('owner_future_day_only','control','idempotent_clear'),
+    'series_admin.fill': ('owner_future_days_only','control','free_days_in_order_audited'),
+    'series_admin.clear': ('owner_future_days_only','control','idempotent_clear'),
     'library.archive': ('owner_only_library_move','control','idempotent_flag_audited'),
     'library.restore': ('owner_only_library_restore','control','idempotent_flag_audited'),
     'library.export': ('owner_only_library_export','batch','read'),
@@ -226,7 +249,7 @@ def install_contracts(app):
             raise RuntimeError('API route lacks an explicit local contract: ' + key)
         owner, tier, idem = SPEC[key]
         writes = bool(route.methods & {'POST', 'PUT', 'PATCH', 'DELETE'})
-        upload = key in ('content.upload', 'imports.create_import', 'chapter_books.upload_book', 'smart_imports.upload', 'book_imports.part')
+        upload = key in ('content.upload', 'imports.create_import', 'chapter_books.upload_book', 'smart_imports.upload', 'book_imports.part', 'written.upload_image', 'written.excel')
         model = (MODELS.get(key, EmptyPayload) if writes and not upload else None)
         if writes and not upload and route.body_field and key not in MODELS:
             raise RuntimeError('Body-bearing route lacks an explicit input model: ' + key)
@@ -235,8 +258,10 @@ def install_contracts(app):
             limit = 512 * 1024
         elif key in ('book_imports.rules', 'book_imports.allowance'):
             limit = 128 * 1024
-        elif key in ('structure.order_tests', 'structure.order_sections'):
+        elif key in ('structure.order_tests', 'structure.order_sections', 'master.change_status'):
             limit = 128 * 1024
+        elif key in ('written.save_question', 'written.paste'):
+            limit = 512 * 1024
         if not writes or upload:
             limit = 0
         registry.append(RouteContract(route, key, owner, tier, idem, roles(route.dependant), limit, model, writes and not upload))

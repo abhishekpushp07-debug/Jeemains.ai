@@ -66,8 +66,8 @@ async def catalogue(response: Response, u=Depends(current)):
         if attempt and attempt['status'] == 'active' and attempt.get('deadline') and attempt['deadline'] <= stamp:
             attempt['status'] = 'completed'
             results[row['id']] = attempt['id']
-        papers.append(PyqPaper(id=row['id'], title=row.get('display_title') or row['title'], exam_date=row['pyq_date'], year=row['pyq_year'],
-                              shift=row['pyq_shift'], count=row['count'], minutes=row['rules']['minutes'],
+        papers.append(PyqPaper(id=row['id'], title=row.get('display_title') or row['title'], exam_date=row.get('pyq_date') or '', year=row['pyq_year'],
+                              shift=row.get('pyq_shift') or 0, count=row['count'], minutes=row['rules']['minutes'],
                               maximum=row['count'] * row['rules']['correct'], attempt=attempt,
                               latest_result_id=results.get(row['id']), attempt_count=own.get('count', 0)))
     return PyqCatalogue(items=papers, years=sorted({p.year for p in papers}, reverse=True), total=len(papers), server_now=stamp)

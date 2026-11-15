@@ -128,6 +128,7 @@ def read_keys(lines, body, pairs, context):
     issues=[] if all(r.mock for r in regions) else ['Answer key table has no mock title; map it to its mock.']
     if titles:context['mock']=titles[-1][1]
     context['role']='key';context.pop('open_q',None);context.pop('last',None)
+    context['seen']=True
     return page_map('answer_key',regions,issues),context
 
 
@@ -207,7 +208,8 @@ def read_page(lines, previous, geometry=(), images=()):
     shared=[h for h in headers if h[1]=='shared']
     open_q=context.pop('open_q',None);open_s=context.pop('open_s',None)
     if not anchors and not shared:
-        if not context.get('mock') and not any(h[1]=='mock' for h in headers):
+        lead=context.get('single') and not context.get('seen') and not open_q and not re.search(r'\b(duration|instructions|marking)\b',text,re.I)
+        if lead or (not context.get('mock') and not any(h[1]=='mock' for h in headers)):
             return page_map('cover',[Region(role='ignore',rect=[.01,.01,.99,.99],text=text[:30000],checked=True)],[]),context
         for _,kind,value in headers:apply(context,kind,value)
         if open_s and context.get('role')=='solution' and context.get('mock')==open_s['mock'] and body_text.strip():
@@ -321,7 +323,7 @@ def read_page(lines, previous, geometry=(), images=()):
             number=number,rect=rect,text=value[:30000],answer=next(iter(keys)) if len(keys)==1 else '',
             option_labels=list(family),response_type=kind_of,checked=not two and not ambiguous and (qprefix or consecutive)))
     for y,kind,value in headers:apply(context,kind,value)
-    context['last']=last
+    context['last']=last;context['seen']=True
     if carry:context['open_q']=carry
     if solution_carry:context['open_s']=solution_carry
     roles={r.role for r in regions if r.role not in ('instructions','ignore','shared')}

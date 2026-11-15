@@ -8,12 +8,10 @@ import {Button} from '../components/ui/button';
 import {BookReview} from '../components/books/BookReview';
 import {BookMockDesk} from '../components/books/BookMockDesk';
 import {BookRangeMapping} from '../components/books/BookRangeMapping';
-import {BookAllowances} from '../components/books/BookAllowances';
 import {BookError,BookStatus,BookField} from '../components/books/BookShared';
-import {AdminCrumbs,StepBar,DestinationChip} from '../components/admin/AdminShared';
+import {AdminCrumbs,DestinationChip} from '../components/admin/AdminShared';
 import {StudentPreview} from '../components/admin/StudentPreview';
 import {HeldFixer} from '../components/books/HeldFixer';
-import {SeriesBookPanel} from '../components/books/SeriesBookPanel';
 import {toast} from 'sonner';
 import '../book-publishing.css';
 
@@ -29,7 +27,7 @@ function BookProgress({book}){
 
 export default function BookPublishing(){
  const {user}=useAuth();const [params,setParams]=useSearchParams();const id=params.get('book');
- const [book,setBook]=useState(null),[section,setSection]=useState(null),[error,setError]=useState(''),[page,setPage]=useState(null),[mock,setMock]=useState(null),[pageInput,setPageInput]=useState(1),[pageRows,setPageRows]=useState([]),[pageList,setPageList]=useState(1),[action,setAction]=useState(null),[reason,setReason]=useState(''),[busy,setBusy]=useState(false),[fixing,setFixing]=useState(params.get('fix'));
+ const [book,setBook]=useState(null),[section,setSection]=useState(null),[error,setError]=useState(''),[page,setPage]=useState(Number(params.get('page'))||null),[mock,setMock]=useState(params.get('mock')),[pageInput,setPageInput]=useState(1),[pageRows,setPageRows]=useState([]),[pageList,setPageList]=useState(1),[action,setAction]=useState(null),[reason,setReason]=useState(''),[busy,setBusy]=useState(false),[fixing,setFixing]=useState(params.get('fix'));
  const fixRef=useRef(null);
  const refresh=useCallback(async()=>{if(user?.role!=='owner')return;try{setError('');const b=await api(`/admin/books/${id}`);setBook(b);if(b.read_pages){const p=await api(`/admin/books/${id}/pages?page=${pageList}`);setPageRows(p.items);}if(b.destination&&!b.destination.series)setSection(await api(`/admin/catalog/sections/${b.destination.section_id}/tests`));}catch(e){setError(e.message);}},[id,user?.role,pageList]);
  useEffect(()=>{refresh();},[refresh]);
@@ -42,15 +40,14 @@ export default function BookPublishing(){
  const dest=book.destination,readingDone=book.pages>0&&book.read_pages===book.pages&&!['uploading','received','reading'].includes(book.state);
  const ruleExam=dest?(RULE_EXAMS.includes(dest.exam_key)?dest.exam_key:'Custom'):'';
  return <div className="admin-page book-workspace" data-testid="book-publishing-workspace">
-  <AdminCrumbs items={[{label:'Super Admin',to:'/super-admin'},{label:'Upload',to:'/super-admin/upload'},{label:book.title}]}/>
-  <StepBar step={readingDone?5:4}/>
+  <AdminCrumbs items={[{label:'Master',to:'/super-admin'},...(dest?[{label:dest.exam_name,to:'/super-admin/exam/'+dest.exam_slug},{label:dest.section_name,to:`/super-admin/exam/${dest.exam_slug}/${dest.section_id}`}]:[]),{label:book.title}]}/>
   {dest?<DestinationChip large exam={dest.exam_name} section={dest.section_name} testId="book-destination"/>:<p className="admin-note warn" data-testid="book-no-destination">This older upload has no exam section. It publishes only through its original automatic setting.</p>}
   <BookError error={error}/>
   <BookProgress book={book}/>
   <div className="book-actions"><Button variant="outline" disabled={busy||book.state==='uploading'} data-testid="book-pause-resume" onClick={()=>control(book.paused?'resume':'pause')}>{book.paused?<Play size={15}/>:<Pause size={15}/>} {book.paused?'Resume processing':'Pause automatic work'}</Button><Button variant="outline" disabled={busy||book.state==='uploading'} onClick={()=>control('retry')} data-testid="book-retry">Retry saved work</Button><Button variant="outline" onClick={refresh} data-testid="book-refresh-detail"><RefreshCw size={15}/>Refresh</Button><Button variant="outline" onClick={()=>setAction({kind:'remove',mid:''})} data-testid="book-remove">Remove access</Button></div>
-  {book.state==='uploading'&&<p className="book-note">Open Upload › Add content, choose the same place and file type, and select this exact PDF again to resume the received parts.</p>}
+  {book.state==='uploading'&&<p className="book-note">Open this mock type in Master, press Upload PDF and choose this exact PDF again to resume the received parts.</p>}
   {action&&<section className="book-confirm" data-testid="book-control-confirm"><h2>{action.kind.replaceAll('_',' ')}</h2><p>{action.kind==='remove'?book.retention_notice:action.kind==='new_version'?'A new private version preserves previous attempts and scores. Automatic work pauses while you repair it.':'Record why this mock should change availability. A late release requires an explicit new decision.'}</p><BookField label="Reason" id="book-control-reason" value={reason} onChange={e=>setReason(e.target.value)}/><div className="book-actions"><Button disabled={busy||!reason.trim()} onClick={()=>control(action.kind,action.mid,reason)} data-testid="book-confirm-action">Confirm</Button><Button variant="outline" onClick={()=>setAction(null)} data-testid="book-cancel-action">Cancel</Button></div></section>}
-  {dest?.series&&<SeriesBookPanel book={book} onChanged={refresh} onFix={fix}/>}
+  {dest?.series&&<p className="admin-note" data-testid="book-series-note">These are All India Test Series papers. <Link to={`/super-admin/exam/${dest.exam_slug}/${dest.section_id}`}>Give each one a day in its series.</Link></p>}
   {dest&&!dest.series&&<StudentPreview book={book} section={section} busy={busy} onFix={fix} onRefresh={refresh}
     onPublish={release=>control('publish_ready','','',release,release?'Ready mocks are scheduled. They open at the chosen time.':'Publishing ready mocks now. They appear to students in a moment.')}
     onRequest={m=>control('publish_ready',m.id,'',null,`${m.label} is being published.`)}
@@ -58,7 +55,6 @@ export default function BookPublishing(){
   <div ref={fixRef} className="admin-fix-area" data-testid="book-fix-area"><h2 className="admin-fix-title">Review & fix</h2>
    {fixing?<HeldFixer key={fixing} bookId={id} mockId={fixing} onClose={()=>setFixing(null)} onOpenPage={n=>{setFixing(null);setPage(n);}} onOpenRules={()=>{setMock(fixing);setFixing(null);}} onSaved={refresh}/>:page?<BookReview key={`${id}-${page}`} bookId={id} number={page} onSaved={refresh} onClose={()=>setPage(null)}/>:mock?<BookMockDesk key={mock} bookId={id} mockId={mock} ruleExam={ruleExam} onSaved={refresh} onClose={()=>setMock(null)}/>:<BookMap book={book} onMock={setMock} onPage={setPage} onFix={fix} onAction={(kind,mid)=>setAction({kind,mid})}/>}
    <section className="book-pages"><BookRangeMapping book={book} onSaved={refresh}/><div className="book-section-heading"><h2>Source pages & attention queue</h2><div className="book-actions"><BookField label="Open page" id="book-open-page-number" type="number" min={1} max={book.read_pages||1} value={pageInput} onChange={e=>setPageInput(Number(e.target.value))}/><Button disabled={pageInput<1||pageInput>book.read_pages} onClick={()=>{setMock(null);setFixing(null);setPage(pageInput);}} data-testid="book-open-page">Review page</Button></div></div><div className="book-page-list">{pageRows.map(p=><button key={p.id} onClick={()=>{setMock(null);setFixing(null);setPage(p.number);}} data-testid={`book-page-${p.number}`} className={p.issues.length?'has-issues':''}><strong>Page {p.number}</strong><span>{p.classification.replaceAll('_',' ')}</span><small>{p.issues.length?`${p.issues.length} issue(s)`:`${p.region_count} regions`}</small></button>)}</div><div className="book-actions"><Button variant="outline" disabled={pageList===1} onClick={()=>setPageList(v=>v-1)} data-testid="book-pages-prev">Previous pages</Button><span data-testid="book-page-pagination">{pageList} / {Math.max(1,Math.ceil(book.pages/25))}</span><Button variant="outline" disabled={pageList*25>=book.read_pages} onClick={()=>setPageList(v=>v+1)} data-testid="book-pages-next">Next pages</Button></div></section>
-   {book.read_pages===book.pages&&book.pages>0&&<BookAllowances book={book} onSaved={refresh}/>}
    <section className="book-quality" data-testid="book-quality-report"><h2>Quality & provenance</h2><p>Automatically read: {book.metrics.native_pages||0} pages · manually repaired: {book.metrics.manually_repaired_pages||0} · AI proposals: {book.metrics.ai_proposed_pages||0}</p><p>Blocking issues: {book.metrics.blocking_issues||0}. Zero unresolved blockers is a publication rule, not a guarantee that detection never misses an error.</p>{book.metrics.first_ready_seconds!=null&&<p>Measured time to first ready publication: {Math.round(book.metrics.first_ready_seconds)} seconds</p>}<p className="book-note">{book.retention_notice}</p></section>
   </div>
  </div>;

@@ -87,7 +87,14 @@ async def indexes():
     await db.tejas_book_mocks.create_index([('book_id', 1), ('order', 1)])
     await db.tejas_book_allowances.create_index([('book_id', 1), ('state', 1), ('created_at', 1)])
     await sets.create_index([('book_import_id', 1), ('mock_number', 1)])
-    await sets.create_index('series_date', unique=True, sparse=True)
+    # One paper per day in each series; several series may share a calendar date.
+    if 'series_date_1' in await sets.index_information():
+        try:
+            await sets.drop_index('series_date_1')
+        except Exception:
+            pass  # another instance dropped it first
+    await sets.create_index([('series_id', 1), ('series_date', 1)], unique=True, name='series_day_unique',
+                            partialFilterExpression={'series_date': {'$type': 'string'}})
     await attempts.create_index([('user_id', 1), ('series_id', 1), ('started_at', -1)])
     for name in ('tejas_smart_imports', 'tejas_smart_papers', 'tejas_smart_questions',
                  'tejas_smart_keys', 'tejas_ai_solutions', 'tejas_ai_settings',

@@ -1,128 +1,150 @@
-# JEELIVE.AI — Organised Super Admin: "Pehle jagah chuno, phir upload karo"
+# JEELIVE.AI Super Admin: Ek Master
 
-Ek saaf Super Admin jahan har upload pehle yeh poochta hai ki woh kis exam aur kis section mein jayega, aur publish se pehle dikhata hai ki students ko woh website aur app par kahan dikhega.
-Exams, sections aur tests ek hi jagah se banenge aur sambhale jayenge, aur unka order wahi hoga jo students dekhte hain. Koi bhi test "random" jagah par nahi jayega.
+Ek hi screen jahan exam banta hai, exam ke andar mock type judta hai, aur mock type ke andar PDF upload karke ya likh kar mock banta hai.
+Har mock ka status wahin badalta hai, aur All India Test Series har exam ke liye Home par apna alag card pati hai.
 
 ## Kiske liye
-- **Owner (aap):** exam banana, section banana, books/papers upload karna, publish karna, students aur team sambhalna.
-- **Reviewers (staff):** sirf review ka kaam: held items, question reports, solutions check karna. Upload, publish, exams aur students sirf owner ke paas.
-- **Students:** website aur app par jahan jaate hain wahan sahi test sahi section mein milega.
 
-## Core features aur experience (Phase 1)
+- **Owner (Super Admin):** exam, mock type, mock, status, series. Sab kuch ek jagah se.
+- **Reviewer:** sirf woh mocks jinme kuch theek karna hai, aur students ke question reports.
+- **Students:** website aur app par wahi dekhte hain jo Master mein Live hai.
 
-### 1. Ek Super Admin, saaf hisson mein
-Ab tak Super Admin, Content Studio aur Upload Book teen alag jagah hain, aur Content Studio mein ek ke neeche ek 10 panels hain. Ab sab ek workspace mein aayega, aur menu mein 7 hisse honge:
-1. **Overview:** sirf woh jo aapka kaam maang raha hai: kaunsa upload chal raha hai, kitne mocks publish ke liye ready hain, kya held hai aur kyun, kitni nayi question reports aayi hain.
-2. **Exams & Content:** exam → section → tests, bilkul usi order mein jo students dekhte hain. Yahin exam banana, section banana, naam badalna, order badalna, test ko doosre section mein bhejna, live/unlive karna.
-3. **Upload:** ek hi "Add content" button. Pehle jagah chunte hain, phir file (neeche detail hai).
-4. **Review:** held mocks aur unki wajah, question reports, manual solve, AI explanation review. Yeh sab tools pehle se hain, bas ek jagah aa jayenge.
-5. **Schedule & Live:** All India JEE series ki schedule aur jin tests ka time window hai.
-6. **Students:** mobile number list aur PIN reset (jaisa abhi hai).
-7. **Team:** reviewer access dena ya hatana.
-- Purane Content Studio aur Upload Book ke links kaam karte rahenge aur seedhe naye hisse mein khulenge.
-- Har screen ke upar breadcrumb hamesha poora rasta dikhayega, jaise: BITSAT › Mock Tests › Mock 07.
+## Core features and experience
 
-### 2. Upload wizard: jagah pehle, file baad mein
-- **Step 1: Kahan jayega?**
-  - Exam chuno: JEE Main / BITSAT / COMEDK / aapke banaye exams / **+ Naya exam**.
-  - Section chuno: PYQ Papers / Mock Tests / Chapter-wise Tests / aapke banaye sections / **+ Naya section**.
-  - Exam aur section dono chune bina aage nahi badh sakte.
-- **Step 2: Kis tarah ki file?** Sirf woh options dikhenge jo us section mein fit hote hain:
-  - Ek combined book jismein kai mocks hain (100 MB tak, page ya mock ki koi limit nahi).
-  - Ek paper ki questions + solutions PDFs.
-  - Chapter book.
-  - Excel.
-- **Step 3: Details.** Sirf title aur rights ki confirmation. "Edition label" hata diya jayega. Wahi PDF dobara upload karne par purana upload hi khulega.
-- **Step 4: Upload aur reading.** Progress, pause/resume aur auto-retry pehle jaise rahenge.
-- **Step 5: "Students ko aise dikhega" preview.** Yahan dikhega:
-  - Rasta: "Website aur App: Home › BITSAT › Mock Tests".
-  - Us section ki poori list: pehle se live tests, aur aapke naye mocks unke baad.
-  - Har mock ka status: Ready / Held (wajah ke saath) / Live.
-- Mock ka exam ab upload par chuni jagah se aayega, isliye mock rules screen par exam alag se nahi poochha jayega. Printed rules (time, marks) pehle ki tarah har mock ke liye book se hi aayenge.
+### 1. Ek Master screen, teen level
 
-### 3. Publish: dono tareeke milenge
-- Upload se kuch bhi apne aap live nahi hoga.
-- **"Saare ready mocks publish karo":** ek click mein jo bhi mocks saare checks paas kar chuke hain, sab live. Chahein to "abhi" ya koi date/time chun sakte hain.
-- **Har mock ka apna Live / Unlive switch.**
-- Held mocks kisi bhi button se live nahi honge jab tak unki problem theek na ho.
-- Students ko mocks seedhe section ki list mein dikhenge, book ka naam kahin nahi. Mock ka naam book par chhape naam se aayega (jaise "Mock Test 07"), aur aap use badal sakte hain.
-- Alag "Book series" page hat jayega. Uske purane links us exam ke section mein khulenge.
+Exam › Mock type › Mock. Upar hamesha raasta dikhta hai, jaise `Master › JEE Main › Mock Tests`.
 
-### 4. Naya exam banana
-- Exam ki details: naam, chhota naam, subjects, aur Home card ka rang (kuch taiyaar rangon mein se).
-- Naya exam students ko tab tak nahi dikhega jab tak aap **"Home par dikhao"** na dabayein, chahe uske tests live hon. Wapas chhupana bhi ek click hai.
-- Jab tak exam chhupa hai, students uske tests tak link se bhi nahi pahunch payenge. Aap "Student ki tarah dekho" se pehle check kar sakte hain.
-- JEE Main, BITSAT, COMEDK aur All India card jaise hain waise hi rahenge. Naye exams unke baad aayenge.
+Master ke upar ek patli line batati hai ki aaj kya dekhna hai, jaise "4 mock theek karne hain · 12 Live ke liye taiyaar · 3 student reports". Click karne par wahi mocks khulte hain.
 
-### 5. Apne sections banana
-- Kisi bhi exam mein naya section bana sakte hain, jaise "Revision Tests" ya "Crash Course".
-- Section ki details: naam, ek line ka description, aur list ka tareeka: seedhi list (jaise Mock Tests) ya subject › chapter (jaise Chapter-wise).
-- Exam page par sections aapke rakhe order mein dikhenge. Students ko section tabhi dikhega jab usmein kam se kam ek live test ho aur aapne use chhupaya na ho.
-- JEE Main mein ab Mock Tests section bhi ho sakta hai. Abhi JEE Main ke mocks ka link PYQ par chala jaata hai. Yeh section tabhi dikhega jab usmein mocks live honge.
-- Results section har exam mein apne aap rahega.
+Upar teen chhote links rehte hain: **Library, Students, Team**.
 
-### 6. Pehle se maujood content apni jagah rahega
-- 30 JEE Main PYQ papers, BITSAT mock book, chapter books, All India series, aur saare attempts, scores aur results wahin rahenge jahan students unhe abhi dekhte hain.
-- Bas ab yeh sab "Exams & Content" mein unki sahi jagah par dikhenge. Students ke liye kuch bhi gayab nahi hoga ya jagah nahi badlega.
-- Kisi test ko baad mein doosri jagah bhejne par bhi purane attempts aur scores bache rahenge.
+### 2. Naya exam
 
-### 7. App mein kahan dikhega
-- App apne developer ka alag project hai aur wahi live API use karta hai jo website karti hai.
-- Is phase mein naya structure (exams, sections, order, chhupana/dikhana) usi API mein aa jayega, aur app integration guide update hoga, taaki app bilkul wahi jagah dikhaye jo website dikhati hai.
-- App ka apna code is project mein nahi badlega. App ke developer ko guide ke hisaab se update karna hoga.
+"+ New exam" par chaar cheezein: naam, chhota naam, subjects, card ka rang. Naya exam students se chhupa rehta hai jab tak "Show on Home" na dabaya jaye.
 
-## User flow (owner)
-1. Owner login › Super Admin › **Overview** dikhega: "2 uploads reading, 28 mocks ready, 2 held".
-2. **Add content** › BITSAT › Mock Tests › "Combined book" › PDF chuno › title › Upload.
-3. Reading chalti rahegi, aap screen band kar sakte hain. Overview par progress dikhti rahegi.
-4. "Students ko aise dikhega" preview: Home › BITSAT › Mock Tests › Mock 1–30 (2 held, wajah ke saath).
-5. **Saare ready publish karo** dabao, ya kuch mocks ka switch alag se on karo.
-6. Held mock ko Review mein theek karo, phir uska switch on karo.
-7. Naya exam: Exams & Content › + Naya exam › NEET › sections banao › upload › publish › jab sab theek lage tab **Home par dikhao**.
+### 3. Mock type jodna
 
-**Student flow:** Home › exam card › section › test list › test shuru. Website aur app dono par yahi rasta.
+Exam ke andar "+ Add mock type" par paanch vikalp:
+
+| Type | Students ko kaise dikhta hai |
+|---|---|
+| PYQ | Papers saal ke hisaab se |
+| Mock | Poore papers ki seedhi list |
+| Chapter-wise | Subject › Chapter |
+| All India Test Series | Roz ek paper, rank ke saath, Home par alag card |
+| Apna type | Naam owner deta hai (jaise Revision Tests), list seedhi ya Subject › Chapter |
+
+Har type ka naam badal sakta hai, upar-neeche ho sakta hai, students se chhup sakta hai, aur uska apna default time aur marks hota hai. Students ko ek type tabhi dikhta hai jab usme kam se kam ek Live mock ho.
+
+### 4. Mock banana: PDF upload
+
+- Ek box mein main PDF. System khud dekhta hai ki usme ek mock hai ya kai. "File type" nahi poochha jaata.
+- Ek hi PDF mein questions, answer key aur solutions teeno hon to teeno wahi se liye jaate hain.
+- Alag-alag hon to do aur optional box hain: **Answer key PDF** aur **Solutions PDF**.
+- Chapter-wise type mein har chapter alag test banta hai. Baaki types mein har chhapa hua mock ya paper alag test banta hai.
+- Padhna peeche chalta rehta hai; screen band kar sakte hain. Progress usi mock type ki list ke upar dikhta hai.
+- Har mock Draft ban kar list mein aata hai. Jis question ko system pakka nahi padh paya, us mock par "Draft · 3 to fix" dikhta hai aur "Fix" button khulta hai: question ki photo, jawab ka type, sahi jawab, save.
+- Answer key ke bina mock Live nahi ho sakta. Solution ke bina ho sakta hai (sirf answer key ke saath).
+- Koi AI credit apne aap kharch nahi hota.
+
+### 5. Mock banana: Write
+
+Pehle mock ka naam. Time aur marks type ke default se bhare aate hain.
+
+- **Ek-ek question:** subject (chapter-wise mein chapter bhi), question ka text (maths ke saath) aur chaho to photo, jawab ka type (options ya numerical), options A–D (text ya photo), sahi jawab, solution (text ya photo, optional). "Save & next".
+- **Poora paper paste:** poora text chipkao. System questions, options, answer key aur solutions alag karta hai aur list dikhata hai. Jo saaf nahi hai us par nishaan lagta hai aur woh ek-ek wale form mein theek hota hai.
+
+Dono tareeke ek hi mock mein mil sakte hain. Likha hua mock kabhi bhi wapas khol kar badla ja sakta hai.
+
+### 6. Har mock ka status
+
+| Status | Matlab |
+|---|---|
+| Draft | Sirf owner ko dikhta hai |
+| Live | Students ko dikhta hai |
+| Scheduled | Chuni hui date aur time (IST) par apne aap Live |
+| Off | Students se chhupa; scores surakshit |
+| Library | List se hata, Library mein surakshit, wahan se wapas aa sakta hai |
+
+- Har mock ki row par ek status button; ek click mein badalta hai.
+- Kai mock chun kar, ya "Select all" se, ek saath status badalta hai.
+- Schedule karte waqt ek switch "Live exam": sab students ek saath dete hain, 15 minute ka start window, turant score, rank. Switch ke bina mock us time se practice ke liye khul jaata hai.
+- Jis mock mein kuch theek karna baaki hai woh Live ya Scheduled nahi ho sakta; wajah saath mein dikhti hai.
+- Naye PDF se purane mock badalna (ek, kuch ya sab) rehta hai: purane tab tak Live rehte hain jab tak naya Live na ho, phir Library mein jaate hain.
+- Students ke purane attempts aur scores hamesha rehte hain.
+
+### 7. All India Test Series, har exam ke liye
+
+- Jodte waqt: shuru ki date, kitne din, roz khulne ka time, aur start karne ka aakhri time (IST).
+- Andar din ki list dikhti hai (Day 1 · 1 Dec, Day 2 · 2 Dec …). Paper PDF se ya likh kar bante hain, phir har paper ko din milta hai: ek-ek karke, ya "Fill days in order" se.
+- Paper apne din se pehle students ko nahi dikhta. Din ke baad practice ke roop mein rehta hai.
+- Jo din khul chuka hai woh nahi badalta. Aage ke din, dates aur time badal sakte hain.
+- "Show on Home" chalu karte hi us exam ki series ka alag card Home par aata hai.
+- Aaj ki JEE Main series (62 din, 1 Dec – 31 Jan) jaisi hai waisi rehti hai aur isi jagah se chalti hai.
+
+### 8. Students ko kya dikhega
+
+- Har exam ka ek card. Uske andar PYQ, Mock, Chapter-wise aur apne types.
+- Har chalu series ka alag bada card, aaj wale All India banner jaisi polished design mein, us exam ke naam ke saath. Ek se zyada series hon to cards saath-saath; mobile par ek ke neeche ek.
+
+### 9. Purane screens
+
+- Overview, Exams & Content, Upload, Review aur Schedule & Live hat jaate hain. Unka kaam Master ke andar hota hai. Purane links Master par le jaate hain.
+- Screen se hatne wale purane tools: 5-step upload wizard, file type chunna, purana manual editor, JEE transfer panel, Solutions (AI review) tab, Mock book checks tab, Data health panel.
+- Koi content, attempt ya score delete nahi hota.
+
+## User flow
+
+1. Super Admin kholne par Master khulta hai: saare exams ke cards.
+2. "+ New exam" se naam, chhota naam, subjects aur rang bhar kar exam banta hai (abhi chhupa).
+3. Exam ke andar "+ Add mock type" se Mock chuna jaata hai.
+4. Mock type ke andar "Upload PDF" se file jaati hai. Mocks Draft ban kar list mein aate hain.
+5. Jis mock par "Fix" hai, uske cards bhar kar save hote hain.
+6. "Select all" ke baad "Make Live" ya "Schedule".
+7. "+ Add mock type" se All India Test Series: date, din, time. Papers upload, "Fill days in order", phir "Show on Home".
+8. Exam par "Show on Home".
+9. Student Home par exam ka card aur series ka alag card dekhta hai.
 
 ## UI/UX feel
-- Shaant, saaf workspace. Site ka maujooda dark theme aur brand rang hi rahenge.
-- Desktop par baayein side fixed menu. Mobile par upar scroll hone wale tabs. Har screen par ek hi mukhya kaam.
-- Wizard ke steps ek-ek karke, upar step bar ke saath. Mobile par har step poori screen par.
-- Har jagah ek jaise status rang: Processing, Needs attention, Ready, Live, Hidden.
-- Destination (Exam › Section) har upload aur har test par bade, saaf chip mein dikhega, taaki galat jagah ka shak hi na ho.
-- Khaali jagahon par seedha agla kadam likha hoga, jaise "Is section mein abhi kuch nahi. Add content." Har action ke baad chhota toast confirmation.
+
+- Ek screen, teen level. Kahin bhi teen click se zyada door nahi.
+- Bade, saaf cards aur rows. Har row par ek hi mukhya button.
+- Mock banane ke liye har jagah sirf do bade buttons: "Upload PDF" aur "Write".
+- Status ek rangeen chip hai jo dabane par badalta hai.
+- Engine ke shabd (held, matching, allowance, region, publication) screen par nahi aate.
+- Aaj ki dark theme rehti hai. Home ke exam cards ke rang nahi badalte.
+- Mobile par poora kaam hota hai: level ek-ek karke khulte hain.
 
 ## Implementation phases
-**Phase 1 (MVP, abhi banega):** upar ke saare 7 features:
-- 7 hisson wala Super Admin.
-- Jagah-pehle upload wizard aur student preview.
-- "Saare ready publish karo" aur har mock ka Live switch.
-- Naya exam aur "Home par dikhao".
-- Naye sections.
-- Purane content ko catalogue mein lana, bina kuch badle.
-- App ke liye API aur guide update.
 
-**Phase 2 (baad mein, alag approval):**
-- Tests par tags/filters.
-- Kai tests ek saath doosri jagah bhejna.
-- Kai books ki queue.
-- Section ke hisaab se scheduling.
-- Mushkil scans aur bilingual books ka support.
-- Baar-baar aane wale publisher layouts yaad rakhna.
-- All India series mein seedha upload.
+**Phase 1 (abhi banega):** upar ke 9 hisse. Master screen, naya exam, mock type (4 + apna), PDF upload (ek PDF ya alag key/solutions), Write (ek-ek aur paste), paanch status aur bulk badlav, har exam ke liye All India Test Series apni dates ke saath aur Home par alag card, purane screens hatana.
 
-**Phase 3 (baad mein, alag approval):**
-- Exam ke hisaab se reviewers ko kaam baantna.
-- Har exam aur section ki quality aur usage report.
-- Bade paimane par bulk scheduling aur publishing.
+**Phase 2 (alag approval):** ek exam mein agle saal ki nayi series aur purani series ka archive; PDF se bane mock mein question likh kar jodna ya badalna; mock ki copy aur doosre exam mein le jaana; search aur filters; drag karke order; kai numerical questions ek saath confirm karna.
 
-## Assumptions (bina pooche liye gaye faisle)
-- "Level" ka matlab upload form ka "Edition label" field samjha gaya hai. Woh hata diya jayega. Iske baad wahi PDF jaan-boojh kar doosri baar alag import nahi ho payega; wahi purana upload khulega.
-- Pichle approved Phase 1 ka "checks pass hone par apne aap publish" wala checkbox hata diya jayega. Ab kuch bhi tabhi live hoga jab aap Publish dabayein ya switch on karein.
-- Content Studio alag page ke roop mein nahi rahega. Uske saare tools Super Admin ke hisson mein chale jayenge, aur purane links naye hisse mein khulenge.
-- Reviewers ko sirf Review hissa milega. Upload, publish, exams, sections, students aur team sirf owner ke paas.
-- Purane uploaders (paper pair, chapter book) ki 50 MB limit aur unke format ke niyam waise hi rahenge. 100 MB aur koi page/mock limit nahi, sirf combined book ke liye.
-- Chapter book ka maujooda format (har chapter 50 sawal) hi chalega. Wizard use sirf chapter-type sections mein dikhayega.
-- Kisi section mein naye mocks pehle se live tests ke baad, book ke chhape order mein judenge. Order aap baad mein badal sakte hain.
-- Naye exam ka Home card taiyaar rangon mein se ek lega. Maujooda chaar cards ke rang aur design nahi badlenge.
-- All India JEE series catalogue mein dikhegi aur Schedule & Live se sambhali jayegi. Usmein seedha upload Phase 2 mein aayega.
-- App ka code is project mein nahi badlega. Sirf API aur integration guide update honge.
-- Saare purane tests, attempts, scores aur student accounts jaise hain waise rahenge. Koi data delete ya reset nahi hoga.
+**Phase 3 (alag approval):** scanned (photo) PDF aur do-bhasha papers padhna; har exam ke liye alag reviewer; har mock ki report (kitne attempts, average score); kisne kya badla ka itihaas.
+
+## Assumptions
+
+1. Aaj ka saara content jahan hai wahin rehta hai. Aaj ke "sections" hi ab "mock types" kehlate hain.
+2. PYQ, Mock, Chapter-wise aur All India Test Series ek exam mein ek-ek baar judte hain. Apne types jitne chahiye utne.
+3. PYQ type mein ab upload aur likhna khula hai. Har PYQ paper par saal zaroori hai; date aur shift optional.
+4. Aaj ke 30 verified JEE Main PYQ papers par taala rehta hai: unhe badla nahi ja sakta aur Library mein nahi bheja ja sakta. Sirf Live ya Off.
+5. Har PDF 100 MB tak. Sirf searchable PDF apne aap padhe jaate hain; scanned PDF ke liye Phase 1 mein Write.
+6. Upload par ek tick rehta hai: "is content ko students ko dikhane ki permission hai". Write mein nahi.
+7. Excel se questions laana Write ke andar ek chhote link ke roop mein rehta hai.
+8. Master mein koi AI button nahi hai. Padhna aur theek karna bina AI ke hota hai.
+9. Default time aur marks: JEE Main, BITSAT aur COMEDK mein exam ke pattern se bhare aate hain; naye exam mein owner ek baar bharta hai. PDF mein chhape niyam milen to wahi lagte hain, na milen to default.
+10. Live mock mein badlav naya version banata hai. Purane attempts aur scores nahi badalte.
+11. Mock ka naam PDF mein chhapa label hota hai; badal sakte hain.
+12. Ek exam mein ek samay par ek hi series. Result aur rank ke niyam wahi hain jo aaj JEE Main series mein hain.
+13. Ek series ke saare papers ka pattern ek jaisa hona chahiye (questions, time, marks) taaki rank barabar ho. JEE Main, BITSAT aur COMEDK mein exam ka apna pattern; naye exam mein pehla paper pattern tay karta hai.
+14. Series ka card Home aur website ke opening page dono par aata hai, exam card ke andar row ke roop mein nahi. Card exam ke rang mein banta hai; JEE Main series ka rang jaisa hai waisa.
+15. Website aur app ek hi jagah se content lete hain. JEE Main series app mein bina badlav chalti hai. Naye exams ki series ka card app mein tab dikhega jab app nayi series list padhne lage; app integration guide update hogi.
+16. Reviewer ko sirf theek karne wali list aur student question reports dikhte hain.
+17. Data health check raat ko apne aap chalta rehta hai. Dikkat ho to Master ke upar ek line dikhti hai.
+18. Kathin PDF ke liye page-level repair tools rehte hain, lekin "Fix" screen se ek link door, alag screen nahi.
+19. Jo purane tests kisi type mein nahi hain woh exam ke andar "Not in any type" ke neeche dikhte hain, jahan se unhe type mein rakha ja sakta hai.
+20. Screen ke labels saral English mein rehte hain, jaise abhi.
+21. Pichhle deploy ke saath gaya ek-baar ka cleanup (BITSAT mocks aur chapter-wise, JEE Main chapter-wise Library mein; PYQ untouched) is plan mein nahi badalta. Unki jagah naya content isi Master se aayega.
+22. Phase 1 pehle preview mein banta hai. jeelive.ai par sirf go-ahead ke baad jaata hai.

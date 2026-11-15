@@ -2,7 +2,7 @@ import asyncio, math, re
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, Response, Query
 from pymongo.errors import DuplicateKeyError
 from starlette.concurrency import run_in_threadpool
-from .auth import owner, current
+from .auth import owner, current, staff
 from .db import db, sets, now, audit
 from .canonical import database_now
 from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, Book, BookPage, BookMock, UploadPart, BookAllowance
@@ -39,8 +39,8 @@ async def create(body:UploadInput,u=Depends(owner)):
         id=identity(id,'next',body.section_id)
     from .structure import destination, mark_replacing
     replace=['all'] if body.replace_all else body.replace_ids
-    dest=await destination(body.section_id,('list',),replace)
-    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']})
+    dest=await destination(body.section_id,('list',),replace,body.year)
+    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']})
     try:await db.tejas_books.insert_one(book.to_mongo())
     except DuplicateKeyError:return await book_view(await load_book(id,u))
     await mark_replacing(dest,body.title)
@@ -183,10 +183,10 @@ async def mock_detail(id:str,mid:str,u=Depends(owner)):
 
 
 @router.get('/admin/books/{id}/mocks/{mid}/questions/{qid}/asset/{kind}/{index}')
-async def preview_crop(id:str,mid:str,qid:str,kind:str,index:int,u=Depends(owner)):
-    book=await load_book(id,u)
+async def preview_crop(id:str,mid:str,qid:str,kind:str,index:int,u=Depends(staff)):
+    book=await load_book(id)
     row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
-    if not row:raise HTTPException(404,'Mock not found.')
+    if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
     mock=BookMock.from_mongo(row)
     q=next((q for q in mock.questions if q['id']==qid),None)
     refs=(q or {}).get('source_regions',{}).get(kind,[]) if kind in ('question','solution') else []
@@ -273,7 +273,7 @@ async def request_publication(bid,wanted,release_at,bg,u):
     try:
         if book.state!='uploading' and not (book.payload.get('destination') or {}).get('series'):
             picked=[m for m in await mocks_for(book) if m.state=='ready' and not m.issues and m.published_generation!=m.generation
-                    and not m.publish_requested and (wanted is None or m.id in wanted)]
+                    and not m.publish_requested and not m.archived and (wanted is None or m.id in wanted)]
             for m in picked:
                 m.publish_requested=True;m.release_at=release_at;m.revision+=1;await save_mock(m)
             if picked:
@@ -304,21 +304,22 @@ def question_problems(mock):
 
 
 @router.get('/admin/books/{id}/mocks/{mid}/problems')
-async def mock_problems(id:str,mid:str,u=Depends(owner)):
-    await load_book(id,u);row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
-    if not row:raise HTTPException(404,'Mock not found.')
+async def mock_problems(id:str,mid:str,u=Depends(staff)):
+    await load_book(id);row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
+    if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
     mock=BookMock.from_mongo(row);questions,general=question_problems(mock)
     return {'id':mock.id,'label':mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
             'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
 
 
 @router.post('/admin/books/{id}/mocks/{mid}/fix')
-async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depends(owner)):
-    await load_book(id,u);book,token=await lock_book(id)
+async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depends(staff)):
+    await load_book(id);book,token=await lock_book(id)
     try:
         row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
         if not row:raise HTTPException(404,'Mock not found.')
         mock=BookMock.from_mongo(row)
+        if u['role']!='owner' and mock.state!='held':raise HTTPException(404,'Mock not found.')
         if mock.revision!=body.revision:raise HTTPException(409,'This mock was rechecked a moment ago. Reload and try again.')
         if mock.published_generation==mock.generation:raise HTTPException(409,'Published mocks are frozen. Create a corrected version first.')
         q=next((x for x in mock.questions if x['id']==body.question_id),None)

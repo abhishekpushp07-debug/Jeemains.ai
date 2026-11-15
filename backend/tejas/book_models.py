@@ -21,6 +21,7 @@ class UploadInput(Input):
     closes_at: float | None = Field(default=None, gt=0)
     replace_ids: list[str] = Field(default_factory=list, max_length=1000)
     replace_all: bool = False
+    year: int | None = Field(default=None, ge=1990, le=2100)
 
     @model_validator(mode='after')
     def schedule(self):
@@ -185,6 +186,9 @@ class BookMock(BaseDocument):
     publish_requested: bool = False
     release_at: float | None = None
     series_date: str | None = None
+    series_id: str | None = None
+    archived: bool = False
+    live_exam: bool = False
 
 
 class UploadPart(BaseDocument):

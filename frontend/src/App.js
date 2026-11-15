@@ -30,6 +30,7 @@ import './exam-light.css';
 import './vibrant-ui.css';
 import './pyq.css';
 import './admin.css';
+import './master.css';
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
@@ -43,9 +44,9 @@ const Results = lazy(() => import("./features/Results"));
 const Competitions = lazy(() => import('./features/Competitions'));
 const StudioImport = lazy(() => import('./features/StudioImport'));
 const ChapterBookStudio = lazy(() => import('./features/ChapterBookStudio'));
-const StudioEditor = lazy(() => import("./features/StudioEditor"));
 const Info = lazy(() => import("./features/Info"));
 const SectionPreview = lazy(() => import('./features/SectionPreview'));
+const SeriesPage = lazy(() => import('./features/SeriesPage'));
 function Protected({ children, staff = false }) {
   const { user, checking } = useAuth();
   const loc = useLocation();
@@ -104,8 +105,7 @@ function LegacyUploads() {
   return <Navigate to={'/super-admin/upload' + loc.search} replace />;
 }
 function StudioHome() {
-  const {user} = useAuth();
-  return <Navigate to={user.role === 'owner' ? '/super-admin/content' : '/super-admin/review'} replace />;
+  return <Navigate to="/super-admin" replace />;
 }
 function Shell() {
   const loc = useLocation();
@@ -128,6 +128,7 @@ function Shell() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/series/all-india-jee" element={<LiveSeries />} />
+            <Route path="/series/:seriesId" element={<SeriesPage />} />
             <Route path="/exams" element={<Exams />} />
             <Route path="/preview/s/:token" element={<SectionPreview />} />
             <Route path="/exams/:examSlug" element={<Protected><ExamHub /></Protected>} />
@@ -187,7 +188,7 @@ function Shell() {
               path="/studio/:id"
               element={
                 <Protected staff>
-                  <StudioEditor />
+                  <StudioHome />
                 </Protected>
               }
             />

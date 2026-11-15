@@ -1,4 +1,4 @@
-import { examPath, safeExamReturn } from '../lib/exams';
+import { examPath, safeExamReturn, seriesPath, JEE_SERIES } from '../lib/exams';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle2, Wifi, Clock3, ShieldCheck, Loader2, FileQuestion, Flag, Save, FileDown } from 'lucide-react';
@@ -28,7 +28,7 @@ export default function SetDetail() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
-  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? '/series/all-india-jee' : s.catalog_path ? s.catalog_path+((s.chapter_book_id||s.test_kind==='chapter')&&s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):'') : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
+  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? seriesPath(s.series_id) : s.catalog_path ? s.catalog_path+((s.chapter_book_id||s.test_kind==='chapter')&&s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):'') : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
     setS(null); setError(''); setChecked(false); setConfirmed(false);
@@ -70,7 +70,7 @@ export default function SetDetail() {
       <Link className="breadcrumb" data-testid="set-back" to={preview ? '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? 'Back to Content Studio' : 'Back to '+s.exam+' tests'}</Link>
       <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Review the rules, check your device and begin; original supplied solutions unlock after submission.' : s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
-      {s.series_id&&<div className="series-preflight-note" data-testid="series-preflight-rules"><strong>All India JEE Mains · {s.series_date} (IST)</strong><p>Live starts: 12:01 AM–8:59:00 PM. One live attempt; the original 180-minute deadline continues on resume. Live results and solutions release at 11:59 PM. From the following day, starts become separate archive-practice attempts.</p></div>}
+      {s.series_id&&s.series_id!==JEE_SERIES&&<div className="series-preflight-note" data-testid="series-preflight-rules"><strong>All India series · {s.series_date} (IST)</strong><p>One live attempt on its day; resuming keeps the original deadline. Live results and solutions release when the day closes. From the next day, starts are separate archive-practice attempts.</p></div>}{s.series_id===JEE_SERIES&&<div className="series-preflight-note" data-testid="series-preflight-rules"><strong>All India JEE Mains · {s.series_date} (IST)</strong><p>Live starts: 12:01 AM–8:59:00 PM. One live attempt; the original 180-minute deadline continues on resume. Live results and solutions release at 11:59 PM. From the following day, starts become separate archive-practice attempts.</p></div>}
       <div className="preflight-grid">
         <Card className="card instructions" data-testid="set-instructions">
           <div className="preflight-step-label" data-testid="preflight-rules-step"><span>01</span> Get familiar</div>
@@ -87,7 +87,7 @@ export default function SetDetail() {
             <li data-testid="set-response-format">{s.test_kind === 'pyq' ? 'Select one listed option, or enter an integer where stated. Source-marked multiple accepted answers and withdrawn questions retain their supplied scoring treatment.' : 'One correct option per question, or an integer entry where stated.'} Mark for review and return to any question.</li>
             {s.rules.numeric_rule&&<li>{s.rules.numeric_rule}</li>}
             <li>{minutes ? 'The timer keeps running during a disconnect. Only answers received before the deadline are scored.' : 'This is untimed practice. Come back to your saved attempt whenever you need.'}</li>
-            <li>{s.series_id?'Live results and solutions are sealed until 11:59 PM IST. Archive practice results unlock after submission.':s.solution_kind==='answer_key_only'?'Submitting is final. Your score and supplied answer keys become available after grading. This book has no worked solutions.':'Submitting is final. Your result and matched solutions become available afterward.'}</li>
+            <li>{s.series_id&&s.series_id!==JEE_SERIES?'Live results and solutions are sealed until the series day closes. Archive practice results unlock after submission.':s.series_id?'Live results and solutions are sealed until 11:59 PM IST. Archive practice results unlock after submission.':s.solution_kind==='answer_key_only'?'Submitting is final. Your score and supplied answer keys become available after grading. This book has no worked solutions.':'Submitting is final. Your result and matched solutions become available afterward.'}</li>
           </ul>
           <div className="notice preflight-recovery" data-testid="preflight-offline-recovery-notice"><Save size={19} /><span><strong>Your drafts stay on this device.</strong> Offline edits remain pending until the server acknowledges them. Check the save status before submitting.</span></div>
           <details className="profile-details"><summary data-testid="practice-profile-details">About this practice profile</summary><p>Free navigation · Original question order · Exact integers · Solutions after submission. This custom profile is not an official-year exam simulation. Review includes every question, regardless of review filters.</p></details>

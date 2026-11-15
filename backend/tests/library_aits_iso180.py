@@ -226,7 +226,7 @@ async def held_tests(own, rev):
     check('problems 200 shape', r.status_code == 200 and {'label', 'state', 'revision', 'questions', 'general', 'rules_missing', 'frozen'} <= set(p), (r.status_code, sorted(p)))
     qs = p.get('questions', []); print('problems', json.dumps(p)[:900])
     check('problems lists Q2 with issue + keys', any(q['number'] == 2 and q['issues'] for q in qs) and all({'id', 'subject', 'number', 'type', 'options', 'answer', 'issues', 'pages', 'next_page', 'question_images', 'key_only_allowed'} <= set(q) for q in qs), qs)
-    r = await rev.get(f"/api/admin/books/{bk['id']}/mocks/{m2}/problems"); check('reviewer problems 403', r.status_code == 403, r.status_code)
+    r = await rev.get(f"/api/admin/books/{bk['id']}/mocks/{m2}/problems"); check('reviewer reads problems of a mock that needs fixing (Master plan) 200', r.status_code == 200, r.status_code)
     if not qs: return
     q = next(x for x in qs if x['number'] == 2); base = f"/api/admin/books/{bk['id']}/mocks/{m2}/fix"
     body = {'revision': p['revision'], 'question_id': q['id'], 'response_type': 'mcq', 'option_labels': ['A', 'B', 'C', 'D'], 'answer': 'B', 'complete': True}
@@ -235,7 +235,7 @@ async def held_tests(own, rev):
     r = await own.post(base, json={**body, 'response_type': 'integer', 'option_labels': [], 'answer': '1.5'}); check('fix integer non-whole 422', r.status_code == 422, r.status_code)
     r = await own.post(base, json={**body, 'revision': p['revision'] + 7}); check('fix stale revision 409', r.status_code == 409, r.status_code)
     r = await own.post(base, json={**body, 'complete': False}); check('fix complete false 422', r.status_code == 422, r.status_code)
-    r = await rev.post(base, json=body); check('reviewer fix 403', r.status_code == 403, r.status_code)
+    r = await rev.post(base, json={**body, 'revision': p['revision'] + 7}); check('reviewer fix reaches the same stale-revision guard 409', r.status_code == 409, r.status_code)
     ai0 = dict(H.AI_CALLS)
     r = await own.post(base, json=body); await drain()
     check('fix valid 200', r.status_code == 200, r.text[:200])

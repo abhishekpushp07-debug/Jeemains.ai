@@ -47,6 +47,9 @@ from tejas import (
     structure,
     integrity,
     library,
+    master,
+    written,
+    series_admin,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -238,6 +241,9 @@ for module in [
     structure,
     integrity,
     library,
+    master,
+    written,
+    series_admin,
 ]:
     app.include_router(module.router)
 

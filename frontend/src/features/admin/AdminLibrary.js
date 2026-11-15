@@ -29,12 +29,12 @@ function Group({g,picked,onCheck,onRestore,busy}){
  </section>;
 }
 
-const UPLOAD={book:'Combined book',chapter_book:'Chapter book',import:'Paper / Excel'};
+const UPLOAD={book:'PDF upload',chapter_book:'Chapter PDF',import:'Paper / Excel',book_mock:'Draft mock from a PDF'};
 
 function Uploads({items,busy,onRestore}){
  if(!items.length)return null;
  return <section className="admin-panel admin-uploads-panel" data-testid="library-uploads">
-  <div className="admin-panel-head"><div><h2>Uploads in the Library</h2><p>Their mocks were never published. Restore one to see it again in Upload and on the Ready desk.</p></div></div>
+  <div className="admin-panel-head"><div><h2>Uploads in the Library</h2><p>Their mocks were never published. Restore one to see it again as a Draft in its mock type.</p></div></div>
   <ul className="admin-list">{items.map(x=><li key={x.kind+x.id} className="admin-row" data-testid={'library-upload-'+x.id}><div className="admin-row-main"><strong>{x.title}</strong><small>{[UPLOAD[x.kind],x.place,`moved ${when(x.archived_at)}`].filter(Boolean).join(' · ')}</small></div><Button variant="outline" size="sm" disabled={busy} onClick={()=>onRestore([],[{kind:x.kind,id:x.id}])} data-testid={'library-upload-restore-'+x.id}><RotateCcw size={15}/>Restore</Button></li>)}</ul>
  </section>;
 }
@@ -47,14 +47,14 @@ export default function AdminLibrary(){
  async function restore(ids,uploads=[]){setBusy(true);try{const r=await post('/admin/library/restore',{ids,uploads});invalidateCatalog();toast.success(r.message);setPicked(new Set());setReload(n=>n+1);}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  async function zipAll(){setZipping(true);try{await downloadFile('/admin/library/export','jeelive-library.zip');}catch(e){toast.error(e.message);}finally{setZipping(false);}}
  return <div className="admin-page" data-testid="admin-library-page">
-  <AdminCrumbs items={[{label:'Super Admin',to:'/super-admin'},{label:'Library'}]}/>
+  <AdminCrumbs items={[{label:'Master',to:'/super-admin'},{label:'Library'}]}/>
   <AdminHeading testId="admin-library-title" title="Library" text="Tests taken away from students. Everyone keeps their old scores in their history. Restore any time, or download everything as a ZIP." action={<Button onClick={zipAll} disabled={zipping||!data?.items.length} data-testid="library-zip-all"><Download size={17}/>{zipping?'Preparing ZIP…':'Download all as ZIP'}</Button>}/>
   <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>
   {!data&&!error&&<Skeleton className="h-64"/>}
   {data&&<>
    <div className="admin-select-bar" data-testid="library-toolbar"><Search size={16} aria-hidden="true"/><Input value={q} onChange={e=>setQ(e.target.value)} placeholder="Find a test by name" aria-label="Find a test" className="admin-search" data-testid="library-search"/>{picked.size>0&&<><span data-testid="library-selected-count">{picked.size} selected</span><Button size="sm" disabled={busy} onClick={()=>restore([...picked])} data-testid="library-restore-selected"><RotateCcw size={15}/>Restore selected</Button><Button size="sm" variant="ghost" onClick={()=>setPicked(new Set())} data-testid="library-clear-selection">Clear</Button></>}</div>
    <Uploads items={data.uploads||[]} busy={busy} onRestore={restore}/>
-   {!data.items.length?<div className="admin-empty" data-testid="library-empty"><Archive size={22}/><p>The Library is empty. Tests you move here from Exams & Content, or replace with a new upload, appear here.</p></div>:groups.map(g=><Group key={g.sid||g.exam+g.section} g={g} picked={picked} onCheck={check} onRestore={restore} busy={busy}/>)}
+   {!data.items.length?<div className="admin-empty" data-testid="library-empty"><Archive size={22}/><p>The Library is empty. Mocks you move here from Master, or replace with a new PDF, appear here.</p></div>:groups.map(g=><Group key={g.sid||g.exam+g.section} g={g} picked={picked} onCheck={check} onRestore={restore} busy={busy}/>)}
   </>}
  </div>;
 }

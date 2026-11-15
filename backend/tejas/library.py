@@ -16,7 +16,8 @@ router = APIRouter(prefix='/api', tags=['Library'])
 Identity = Annotated[str, Field(min_length=1, max_length=100)]
 # set field, source collection, key field in that collection
 SOURCES = (('book_import_id', 'tejas_books', '_id'), ('chapter_book_id', 'tejas_chapter_books', 'id'), ('import_id', 'tejas_imports', 'id'))
-GUARD = {'test_kind': {'$ne': 'pyq'}, 'series_id': {'$exists': False}, 'series_import': {'$ne': True}}
+# Verified PYQ papers never leave; PYQ papers made in Master can.
+GUARD = {'$or': [{'test_kind': {'$ne': 'pyq'}}, {'master_pyq': True}], 'series_id': {'$exists': False}, 'series_import': {'$ne': True}}
 CLEANUP_ID = 'library-2026-11-bitsat-and-jee-main-chapters'
 CLEANUP_SECTIONS = ('bitsat:mocks', 'bitsat:chapters', 'jee-main:chapters')
 CLEANUP_REASON = 'Moved to the Library to make way for new content. Students keep their old scores.'
@@ -33,7 +34,7 @@ class ArchiveInput(Payload):
 
 
 class UploadRef(Payload):
-    kind: Literal['book', 'chapter_book', 'import']
+    kind: Literal['book', 'chapter_book', 'import', 'book_mock']
     id: Identity
 
 
@@ -45,16 +46,11 @@ class RestoreInput(Payload):
 UPLOADS = {'book': ('tejas_books', '_id'), 'chapter_book': ('tejas_chapter_books', 'id'), 'import': ('tejas_imports', 'id')}
 
 
-async def pyq_sections():
-    from .structure import sections
-    return [s['id'] for s in await sections.find({'kind': 'pyq'}, {'_id': 0, 'id': 1}).to_list(500)]
-
-
 async def archive_sets(ids, actor, reason):
     ids = list(dict.fromkeys(ids))
     if not ids:
         return 0
-    done = await sets.update_many({'id': {'$in': ids}, 'archived': {'$ne': True}, 'catalog_section_id': {'$nin': await pyq_sections()}, **GUARD},
+    done = await sets.update_many({'id': {'$in': ids}, 'archived': {'$ne': True}, **GUARD},
         {'$set': {'archived': True, 'archived_at': now(), 'archived_by': actor, 'archived_reason': reason[:300]},
          '$unset': {'replace_pending': ''}})
     return done.modified_count
@@ -83,17 +79,19 @@ async def archive_sources(section_id, set_ids):
 
 async def archive_section(section_id, actor, reason):
     from .structure import section_doc, exams, section_tests
+    from .structure import locked
     s = await section_doc(section_id)
     if s['kind'] == 'pyq':
-        raise HTTPException(409, 'PYQ Papers are never moved to the Library.')
+        raise HTTPException(409, 'A whole PYQ type is never moved to the Library. Move your own PYQ papers one by one.')
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
-    ids = [x['id'] for x in await section_tests(s, e['key']) if x.get('test_kind') != 'pyq']
+    ids = [x['id'] for x in await section_tests(s, e['key']) if not locked(x)]
     tests = await archive_sets(ids, actor, reason)
     return {'tests': tests, 'uploads': await archive_sources(section_id, ids)}
 
 
 async def restore_uploads(refs):
-    n = 0
+    mocks = [r.id for r in refs if r.kind == 'book_mock']
+    n = (await db.tejas_book_mocks.update_many({'_id': {'$in': mocks}, 'archived': True}, {'$set': {'archived': False}})).modified_count if mocks else 0
     for kind, (name, key) in UPLOADS.items():
         ids = [r.id for r in refs if r.kind == kind]
         if not ids:
@@ -114,6 +112,10 @@ async def archived_uploads(rows):
         if b['_id'] not in linked['book_import_id']:
             d = b['payload'].get('destination') or {}
             out.append({'kind': 'book', 'id': b['_id'], 'title': b['payload']['title'], 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': b.get('archived_at')})
+    titles = {b['_id']: b['payload'] for b in await db.tejas_books.find({'removed': False, 'archived': {'$ne': True}}, {'_id': 1, 'payload.title': 1, 'payload.destination': 1}).to_list(5000)}
+    for m in await db.tejas_book_mocks.find({'archived': True, 'set_id': None, 'book_id': {'$in': list(titles)}}, {'_id': 1, 'book_id': 1, 'label': 1}).to_list(2000):
+        d = titles[m['book_id']].get('destination') or {}
+        out.append({'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': None})
     for name, kind, field in (('tejas_chapter_books', 'chapter_book', 'chapter_book_id'), ('tejas_imports', 'import', 'import_id')):
         for r in await db[name].find({'archived': True}, {'_id': 0, 'id': 1, 'title': 1, 'destination': 1, 'archived_at': 1}).to_list(500):
             if r['id'] not in linked[field]:
@@ -180,9 +182,8 @@ async def archive(body: ArchiveInput, u=Depends(owner)):
     if body.section_id:
         counts = await archive_section(body.section_id, u['id'], reason)
     else:
-        pyq = await sets.count_documents({'id': {'$in': body.ids}, '$or': [{'test_kind': 'pyq'}, {'catalog_section_id': {'$in': await pyq_sections()}}]})
-        if pyq:
-            raise HTTPException(409, 'PYQ papers are never moved to the Library.')
+        if await sets.count_documents({'id': {'$in': body.ids}, 'test_kind': 'pyq', 'master_pyq': {'$ne': True}}):
+            raise HTTPException(409, 'Verified PYQ papers are never moved to the Library.')
         counts = {'tests': await archive_sets(body.ids, u['id'], reason), 'uploads': 0}
     await audit(u['id'], 'Moved to Library', body.section_id or ','.join(body.ids[:20]), json.dumps(counts))
     return {**counts, 'message': f"{counts['tests']} test{'s' if counts['tests'] != 1 else ''} moved to the Library. Students' old scores are kept."}

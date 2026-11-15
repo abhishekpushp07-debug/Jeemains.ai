@@ -34,8 +34,8 @@ LIVE_FLAG = {'$or': [{'live_enabled': {'$ne': False}}, {'test_kind': 'pyq'}]}
 ADMIN_BASE = {'qa_only': {'$ne': True}, 'status': {'$ne': 'withdrawn'}, 'is_deleted': {'$ne': True}, 'archived': {'$ne': True},
               'series_id': {'$exists': False}, 'series_import': {'$ne': True}}
 SERIES_SECTION = 'jee-main:aits'
-SERIES_DEST = {'section_id': SERIES_SECTION, 'section_name': 'All India Test Series', 'section_slug': 'aits', 'layout': 'list',
-               'exam_slug': 'jee-main', 'exam_key': 'JEE Main', 'exam_name': 'JEE Main', 'series': True}
+SINGLE_KINDS = ('pyq', 'mocks', 'chapters', 'aits')
+EXAM_RULES = {'JEE Main': (180, 4, -1), 'BITSAT': (180, 3, -1), 'COMEDK': (180, 1, 0)}
 ORDER = [('catalog_order', 1), ('chapter_subject', 1), ('chapter_number', 1), ('mock_number', 1), ('created_at', -1), ('id', 1)]
 BUILTIN = (
     ('jee-main', 'JEE Main', 'JEE', ['Physics', 'Chemistry', 'Mathematics'], ('pyq', 'mocks', 'chapters')),
@@ -47,6 +47,7 @@ SECTION_DEFAULTS = {
     'pyq': ('PYQ Papers', 'Choose an exam date and shift. Start a full paper or revisit your results.', 'list'),
     'mocks': ('Mock Tests', 'Live, full-length papers. Practice the complete test in one sitting.', 'list'),
     'chapters': ('Chapter-wise Tests', 'Choose a subject, pick a chapter and build understanding.', 'chapters'),
+    'aits': ('All India Test Series', 'One paper a day with an all-India rank.', 'list'),
 }
 Color = Literal['teal', 'amber', 'violet', 'rose', 'lime', 'sky']
 Name = Annotated[str, Field(min_length=2, max_length=60)]
@@ -70,16 +71,30 @@ class ExamPatch(Payload):
     shown: bool | None = None
 
 
+Clock = Annotated[str, Field(pattern=r'^([01]\d|2[0-3]):[0-5]\d$')]
+
+
 class SectionInput(Payload):
     name: Name
     description: str = Field(default='', max_length=160)
     layout: Literal['list', 'chapters']
+    kind: Literal['pyq', 'mocks', 'chapters', 'aits', 'custom'] = 'custom'
+    minutes: int | None = Field(default=None, gt=0, le=1440)
+    correct: float | None = Field(default=None, gt=0, le=100)
+    wrong: float | None = Field(default=None, ge=-100, le=0)
+    first_date: str | None = Field(default=None, pattern=r'^\d{4}-\d{2}-\d{2}$')
+    days: int | None = Field(default=None, ge=1, le=366)
+    open_time: Clock | None = None
+    last_start: Clock | None = None
 
 
 class SectionPatch(Payload):
     name: Name | None = None
     description: str | None = Field(default=None, max_length=160)
     hidden: bool | None = None
+    minutes: int | None = Field(default=None, gt=0, le=1440)
+    correct: float | None = Field(default=None, gt=0, le=100)
+    wrong: float | None = Field(default=None, ge=-100, le=0)
 
 
 class OrderInput(Payload):
@@ -126,7 +141,12 @@ def exam_view(e):
 
 
 def section_view(s):
-    return {k: s.get(k) for k in ('id', 'exam_slug', 'slug', 'name', 'description', 'layout', 'kind', 'builtin', 'hidden', 'order')}
+    return {k: s.get(k) for k in ('id', 'exam_slug', 'slug', 'name', 'description', 'layout', 'kind', 'builtin', 'hidden', 'order', 'defaults', 'series_id')}
+
+
+def default_rules(exam_key, kind):
+    minutes, correct, wrong = EXAM_RULES.get(exam_key, (180, 4, -1))
+    return {'minutes': 60 if kind == 'chapters' else minutes, 'correct': correct, 'wrong': wrong}
 
 
 async def seed():
@@ -142,6 +162,11 @@ async def seed():
             await sections.update_one({'_id': sid}, {'$setOnInsert': {'id': sid, 'exam_slug': slug, 'slug': kind, 'kind': kind,
                 'name': name, 'description': description, 'layout': layout, 'builtin': True, 'hidden': False,
                 'order': position, 'created_at': now()}}, upsert=True)
+    from .series_admin import seed_jee
+    await seed_jee()
+    for e in await exams.find({'key': {'$in': list(EXAM_RULES)}}, {'_id': 0, 'slug': 1, 'key': 1}).to_list(10):
+        async for s in sections.find({'exam_slug': e['slug'], 'defaults': {'$exists': False}}, {'_id': 1, 'kind': 1}):
+            await sections.update_one({'_id': s['_id'], 'defaults': {'$exists': False}}, {'$set': {'defaults': default_rules(e['key'], s['kind'])}})
     await visibility(force=True)
 
 
@@ -206,23 +231,26 @@ def live_query(user, exam, section, search=''):
     return q
 
 
-async def destination(section_id, layouts=('list', 'chapters'), replace=None):
-    if section_id == SERIES_SECTION:
-        if 'list' not in layouts:
-            raise HTTPException(422, 'The All India Test Series takes full papers or a book of full mocks, not chapter books.')
-        if replace:
-            raise HTTPException(422, 'Change All India days in Schedule & Live instead.')
-        return dict(SERIES_DEST)
+async def destination(section_id, layouts=('list', 'chapters'), replace=None, year=None):
     s = await sections.find_one({'_id': section_id}, {'_id': 0}) if section_id else None
     if not s:
-        raise HTTPException(422, 'Choose the exam and section this upload belongs to.')
-    if s['kind'] == 'pyq' or s['layout'] not in layouts:
-        raise HTTPException(422, 'This file type does not fit that section. Choose another section or file type.')
+        raise HTTPException(422, 'Choose the exam and mock type this upload belongs to.')
+    if s['layout'] not in layouts:
+        raise HTTPException(422, 'This file does not fit that mock type.')
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
     dest = {'section_id': s['id'], 'section_name': s['name'], 'section_slug': s['slug'], 'layout': s['layout'],
-            'exam_slug': e['slug'], 'exam_key': e['key'], 'exam_name': e['name']}
+            'exam_slug': e['slug'], 'exam_key': e['key'], 'exam_name': e['name'],
+            'defaults': s.get('defaults') or default_rules(e['key'], s['kind'])}
+    if s['kind'] == 'aits':
+        if replace:
+            raise HTTPException(422, 'Change All India papers from their days instead.')
+        return {**dest, 'series': True, 'series_id': s.get('series_id')}
+    if s['kind'] == 'pyq':
+        if not year:
+            raise HTTPException(422, 'Enter the year of this PYQ paper.')
+        dest.update(pyq=True, year=int(year))
     if replace:
-        present = [x['id'] for x in await section_tests(s, e['key']) if x.get('test_kind') != 'pyq']
+        present = [x['id'] for x in await section_tests(s, e['key']) if not locked(x)]
         ids = present if list(replace) == ['all'] else list(dict.fromkeys(replace))
         if not ids:
             raise HTTPException(409, 'There is nothing in this section to replace.')
@@ -286,7 +314,9 @@ def source_of(s):
     return 'pyq' if s.get('test_kind') == 'pyq' else 'manual'
 
 
+FLAGS = {'$size': {'$filter': {'input': {'$ifNull': ['$questions', []]}, 'cond': {'$ne': [{'$ifNull': ['$$this.flag', '']}, '']}}}}
 FIELDS = {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'exam': 1, 'status': 1, 'test_kind': 1, 'full_length': 1,
+          'written': 1, 'master_pyq': 1, 'competition': 1, 'last_start_at': 1, 'pyq_year': 1, 'flags': FLAGS,
           'chapter_book_id': 1, 'chapter_subject': 1, 'chapter_number': 1, 'mock_number': 1, 'catalog_section_id': 1,
           'catalog_order': 1, 'live_enabled': 1, 'owner_unlive': 1, 'start_at': 1, 'end_at': 1, 'expires': 1, 'audience': 1,
           'import_id': 1, 'book_import_id': 1, 'mock_book_id': 1, 'series_import': 1, 'series_date': 1, 'rules.minutes': 1,
@@ -299,7 +329,13 @@ def test_view(s, t):
             'subject': s.get('chapter_subject'), 'chapter_number': s.get('chapter_number'), 'mock_number': s.get('mock_number'),
             'catalog_order': s.get('catalog_order'), 'start_at': s.get('start_at'), 'end_at': s.get('end_at'), 'pyq_date': s.get('pyq_date'),
             'book_import_id': s.get('book_import_id'), 'import_id': s.get('import_id'), 'chapter_book_id': s.get('chapter_book_id'),
-            'test_kind': s.get('test_kind'), 'replace_pending': s.get('replace_pending')}
+            'test_kind': s.get('test_kind'), 'replace_pending': s.get('replace_pending'), 'written': bool(s.get('written')),
+            'locked': locked(s), 'flags': s.get('flags', 0), 'live_exam': bool(s.get('competition')), 'year': s.get('pyq_year')}
+
+
+def locked(s):
+    """The verified PYQ papers: only Live or Off, never edited, replaced or moved to the Library."""
+    return s.get('test_kind') == 'pyq' and not s.get('master_pyq')
 
 
 async def section_tests(section, exam_key):
@@ -322,6 +358,8 @@ async def student_exam(slug: str, u=Depends(current)):
     e = await exam_doc(slug, u)
     found = []
     for s in await exam_sections(slug):
+        if s['kind'] == 'aits':
+            continue
         count = await sets.count_documents(live_query(u, e, s))
         if count:
             found.append({**section_view(s), 'live_count': count})
@@ -342,7 +380,7 @@ async def admin_catalog(u=Depends(owner)):
     all_sections = await sections.find({}, {'_id': 0}).sort([('order', 1), ('created_at', 1)]).to_list(2000)
     known = {s['id'] for s in all_sections}
     tally = {}
-    async for s in sets.find(ADMIN_BASE, {k: v for k, v in FIELDS.items() if k != 'count'}).limit(50000):
+    async for s in sets.find(ADMIN_BASE, {k: v for k, v in FIELDS.items() if k not in ('count', 'flags')}).limit(50000):
         sid = s.get('catalog_section_id')
         if not sid:
             kind, slug = legacy_kind(s), slug_by_key.get(s.get('exam'))
@@ -397,8 +435,15 @@ async def update_exam(slug: str, body: ExamPatch, u=Depends(owner)):
 
 @router.post('/admin/catalog/exams/{slug}/sections')
 async def create_section(slug: str, body: SectionInput, u=Depends(owner)):
-    if not await exams.find_one({'_id': slug}):
+    e = await exams.find_one({'_id': slug}, {'_id': 0})
+    if not e:
         raise HTTPException(404, 'Exam not found.')
+    kind = body.kind
+    if kind in SINGLE_KINDS and await sections.find_one({'exam_slug': slug, 'kind': kind}):
+        raise HTTPException(409, f'{e["name"]} already has this mock type. Open it instead.')
+    layout = 'chapters' if kind == 'chapters' else body.layout if kind == 'custom' else 'list'
+    rules = default_rules(e['key'], kind)
+    rules.update({k: v for k, v in (('minutes', body.minutes), ('correct', body.correct), ('wrong', body.wrong)) if v is not None})
     name = ' '.join(body.name.split())
     base = slugify(name) or 'section'
     if base == 'results':
@@ -409,8 +454,12 @@ async def create_section(slug: str, body: SectionInput, u=Depends(owner)):
         candidate = f'{base}-{n}'
     last = await sections.find_one({'exam_slug': slug}, {'_id': 0, 'order': 1}, sort=[('order', -1)])
     sid = str(uuid.uuid4())
-    doc = {'id': sid, 'exam_slug': slug, 'slug': candidate, 'kind': 'custom', 'name': name, 'description': body.description.strip(),
-           'layout': body.layout, 'builtin': False, 'hidden': False, 'order': (last or {}).get('order', 0) + 1, 'created_at': now(), 'created_by': u['id']}
+    doc = {'id': sid, 'exam_slug': slug, 'slug': candidate, 'kind': kind, 'name': name, 'description': body.description.strip(),
+           'layout': layout, 'builtin': False, 'hidden': False, 'order': (last or {}).get('order', 0) + 1, 'created_at': now(), 'created_by': u['id'],
+           'defaults': rules}
+    if kind == 'aits':
+        from .series_admin import create_series
+        doc['series_id'] = await create_series(e, sid, body, rules)
     await sections.insert_one({'_id': sid, **doc})
     await visibility(force=True)
     await audit(u['id'], 'Section created', sid, f'{slug} › {name}')
@@ -419,8 +468,12 @@ async def create_section(slug: str, body: SectionInput, u=Depends(owner)):
 
 @router.patch('/admin/catalog/sections/{sid}')
 async def update_section(sid: str, body: SectionPatch, u=Depends(owner)):
-    await section_doc(sid)
+    s = await section_doc(sid)
     change = {k: v for k, v in body.model_dump(exclude_unset=True).items() if v is not None}
+    rules = {k: change.pop(k) for k in ('minutes', 'correct', 'wrong') if k in change}
+    if rules:
+        e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0, 'key': 1})
+        change['defaults'] = {**(s.get('defaults') or default_rules(e['key'], s['kind'])), **rules}
     if 'name' in change:
         change['name'] = ' '.join(change['name'].split())
     if not change:
@@ -494,6 +547,8 @@ async def update_test(id: str, body: TestPatch, u=Depends(owner)):
     if not s:
         raise HTTPException(404, 'Test not found here. All India series papers are managed in Schedule & Live.')
     change, unset, notes = {}, {}, []
+    if locked(s) and (body.title is not None or body.section_id is not None):
+        raise HTTPException(409, 'Verified PYQ papers are locked. You can only switch them Live or Off.')
     if body.title is not None:
         change['display_title'] = ' '.join(body.title.split())
         notes.append('title=' + change['display_title'])
@@ -507,8 +562,10 @@ async def update_test(id: str, body: TestPatch, u=Depends(owner)):
         target = await section_doc(body.section_id)
         if target['exam_slug'] != await exam_slug_of(s):
             raise HTTPException(409, 'Move tests within the same exam.')
+        if target['kind'] == 'aits':
+            raise HTTPException(409, 'Give All India papers a day from the series instead.')
         if target['kind'] == 'pyq' and s.get('test_kind') != 'pyq':
-            raise HTTPException(409, 'Only verified PYQ papers belong in PYQ Papers.')
+            raise HTTPException(409, 'Only PYQ papers belong in a PYQ type. Upload or write the paper there with its year.')
         change.update(catalog_section_id=target['id'], catalog_order=await next_order(target['id']))
         notes.append('section=' + target['id'])
     if not notes:
@@ -545,7 +602,7 @@ async def overview(u=Depends(owner)):
 
 @router.get('/admin/review/held')
 async def held_mocks(u=Depends(staff)):
-    rows = await db.tejas_book_mocks.find({'state': 'held'}, {'_id': 1, 'book_id': 1, 'label': 1, 'issues': {'$slice': 8}}).sort('book_id', 1).limit(300).to_list(300)
+    rows = await db.tejas_book_mocks.find({'state': 'held', 'archived': {'$ne': True}}, {'_id': 1, 'book_id': 1, 'label': 1, 'issues': {'$slice': 8}}).sort('book_id', 1).limit(300).to_list(300)
     books = {b['_id']: b for b in await db.tejas_books.find({'_id': {'$in': list({r['book_id'] for r in rows})}, 'removed': False, 'archived': {'$ne': True}},
              {'_id': 1, 'payload.title': 1, 'payload.destination': 1}).to_list(300)}
     return {'items': [{'id': r['_id'], 'book_id': r['book_id'], 'label': r['label'], 'issues': r.get('issues', []),
@@ -607,7 +664,7 @@ async def waiting_mocks(sid, t):
                                       {'_id': 1, 'payload.title': 1, 'payload.release_at': 1}).sort('created_at', 1).to_list(200)
     rank = {b['_id']: i for i, b in enumerate(books)}
     book = {b['_id']: b['payload'] for b in books}
-    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None},
+    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None, 'archived': {'$ne': True}},
         {'_id': 0, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1, 'rules.minutes': 1,
          'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
     rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
@@ -654,7 +711,7 @@ async def waiting_items(sid=''):
         {'_id': 1, 'payload.title': 1, 'payload.release_at': 1, 'payload.destination': 1}).sort('created_at', 1).to_list(300)
     rank = {b['_id']: i for i, b in enumerate(books)}
     info = {b['_id']: b['payload'] for b in books}
-    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None},
+    rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None, 'archived': {'$ne': True}},
         {'_id': 1, 'book_id': 1, 'label': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1,
          'issue': {'$arrayElemAt': ['$issues', 0]}, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}},
          'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)

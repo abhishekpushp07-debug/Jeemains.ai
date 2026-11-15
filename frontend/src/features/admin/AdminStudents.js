@@ -15,7 +15,7 @@ export default function AdminStudents(){
   return()=>{clearTimeout(timer);controller.abort();};
  },[query,page,reload]);
  return <div className="admin-page" data-testid="admin-students-page">
-  <AdminCrumbs items={[{label:'Super Admin',to:'/super-admin'},{label:'Students'}]}/>
+  <AdminCrumbs items={[{label:'Master',to:'/super-admin'},{label:'Students'}]}/>
   <AdminHeading testId="admin-students-title" title="Students" text="Registered student mobile numbers. Only you can view this list and reset a student's PIN." action={<span className="badge" data-testid="student-total"><UsersRound size={16}/>{data?.total??'—'} students</span>}/>
   <div className="flex gap-3 mb-6"><label className="flex items-center gap-2 flex-1 min-w-0"><Search size={18}/><Input aria-label="Search mobile number" type="search" inputMode="tel" placeholder="Search mobile number" maxLength={32} value={query} onChange={e=>{setQuery(e.target.value.replace(/[^+0-9\s()-]/g,''));setPage(1);}} data-testid="student-search"/></label><Button variant="outline" aria-label="Refresh student list" onClick={()=>setReload(v=>v+1)} disabled={busy} data-testid="student-refresh"><RefreshCw size={17}/></Button></div>
   <ErrorBox error={error} retry={()=>setReload(v=>v+1)}/>

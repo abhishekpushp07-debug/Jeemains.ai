@@ -55,7 +55,7 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters', 
     if subject:
         query['$and'].append({'$or': [{'chapter_subject': subject}, {'questions.subject': subject}]})
     total = await sets.count_documents(query)
-    rows = await sets.find(query, {**PROJECT, 'test_kind': 1, 'full_length': 1}).sort(ORDER).skip((page - 1) * PAGE_SIZE).limit(PAGE_SIZE).to_list(PAGE_SIZE)
+    rows = await sets.find(query, {**PROJECT, 'test_kind': 1, 'full_length': 1}).sort(([('pyq_year', -1)] if found['kind'] == 'pyq' else []) + ORDER).skip((page - 1) * PAGE_SIZE).limit(PAGE_SIZE).to_list(PAGE_SIZE)
     subjects = []
     if kind == 'chapters':
         subjects = await sets.aggregate([

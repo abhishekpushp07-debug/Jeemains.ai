@@ -274,6 +274,9 @@ from .live_series import Assignment, Fill, Clear
 from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix
 from .structure import ExamInput, ExamPatch, SectionInput, SectionPatch, OrderInput, TestPatch, PublishInput
 from .library import ArchiveInput, RestoreInput
+from .master import StatusInput
+from .written import WrittenInput, WrittenPatch, QuestionInput, PasteInput
+from .series_admin import SeriesConfig, SeriesAssign, SeriesUnassign
 
 MODELS = {
     'structure.create_exam': ExamInput, 'structure.update_exam': ExamPatch,
@@ -290,6 +293,11 @@ MODELS = {
     'structure.publish_ready_items': PublishInput,
     'book_imports.fix_question': QuestionFix,
     'library.archive': ArchiveInput, 'library.restore': RestoreInput,
+    'master.change_status': StatusInput,
+    'written.create_written': WrittenInput, 'written.update_written': WrittenPatch,
+    'written.save_question': QuestionInput, 'written.paste': PasteInput, 'written.delete_question': EmptyPayload,
+    'series_admin.update_config': SeriesConfig, 'series_admin.assign': SeriesAssign, 'series_admin.unassign': SeriesUnassign,
+    'series_admin.fill': EmptyPayload, 'series_admin.clear': EmptyPayload,
     'pyq_import.import_step': EmptyPayload,
     'my_tests.save_paper': EmptyPayload,
     'my_tests.compare': CompareAttemptsPayload,

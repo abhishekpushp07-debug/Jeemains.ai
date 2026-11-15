@@ -15,9 +15,9 @@ const PaperCard = ({ paper, tone }) => {
   const active = paper.attempt?.status === 'active';
   const done = paper.attempt?.status === 'completed';
   return <article className={'card pyq-paper-card pyq-tone-' + tone} data-state={active ? 'active' : done ? 'completed' : 'new'} data-testid={'pyq-paper-' + paper.id}>
-    <div className="pyq-paper-heading"><span className="badge pyq-shift-badge" data-testid={'pyq-shift-' + paper.id}>Shift {paper.shift}</span><span className="badge pyq-status-badge" data-testid={'pyq-status-' + paper.id}>{active ? 'In progress' : done ? 'Completed' : 'Not attempted'}</span></div>
+    <div className="pyq-paper-heading"><span className="badge pyq-shift-badge" data-testid={'pyq-shift-' + paper.id}>{paper.shift ? 'Shift ' + paper.shift : paper.year}</span><span className="badge pyq-status-badge" data-testid={'pyq-status-' + paper.id}>{active ? 'In progress' : done ? 'Completed' : 'Not attempted'}</span></div>
     <div className="pyq-paper-body"><div className="pyq-paper-summary">
-    <h2 data-testid={'pyq-paper-title-' + paper.id}><CalendarDays size={19} aria-hidden="true"/>{dateLabel(paper.exam_date)}</h2>
+    <h2 data-testid={'pyq-paper-title-' + paper.id}><CalendarDays size={19} aria-hidden="true"/>{paper.exam_date ? dateLabel(paper.exam_date) : paper.title}</h2>
     <p className="pyq-paper-meta" data-testid={'pyq-paper-meta-' + paper.id}><span><FileCheck2 size={16}/>{paper.count} questions</span><span><Clock3 size={16}/>{paper.minutes} min</span><span>{paper.maximum} marks</span></p>
     <p data-testid={'pyq-paper-rules-' + paper.id}>Physics · Chemistry · Mathematics<br/>+4 correct · −1 incorrect · Source-matched answers & solutions</p>
     {paper.attempt_count > 0 && <p data-testid={'pyq-attempt-count-' + paper.id}>{paper.attempt_count} full-paper attempt{paper.attempt_count === 1 ? '' : 's'} · Previous results stay available</p>}

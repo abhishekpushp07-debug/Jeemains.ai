@@ -90,8 +90,8 @@ def permitted(s, u=None, series_schedule=False, *, at):
     if s.get('series_import') and (not s.get('series_date') or not s.get('live_enabled')):
         return False
     if s.get('series_date') and not series_schedule:
-        from .live_series import window
-        if at < window(s['series_date'])['opens_at']:
+        from .live_series import set_window
+        if at < set_window(s)['opens_at']:
             return False
     if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or at < s.get('start_at', float('inf')) or at >= s.get('end_at', 0)):
         return False
@@ -128,7 +128,7 @@ def summary(s):
                 "source",
                 "attribution",
                 "created_at",
-                "test_kind", "full_length", "mock_number", "series_id", "series_date",
+                "test_kind", "full_length", "mock_number", "series_id", "series_date", "series_window", "pyq_year",
                 "chapter_book_id", "chapter_number", "chapter_subject", "solution_kind", "start_at", "end_at", "live_enabled",
                 "catalog_section_id",
             ]

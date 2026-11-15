@@ -36,6 +36,8 @@ def delivered(q):
     if q.get('source_option_labels'):
         p['source_option_labels'] = q['source_option_labels']
     p["asset_count"] = len(q.get("q_refs", []))
+    if q.get('render_mode') == 'written':
+        p['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
     p.pop("q_refs", None)
     # Native extracted text can be inaccurate. Only reviewed source alt text is exposed in image mode.
     if q.get("render_mode") == "source":
@@ -320,7 +322,8 @@ async def start(id: str, data: Start, u=Depends(current)):
             raise HTTPException(409, 'The series day changed. Reload before starting.')
         a.update(series_id=s['series_id'], series_date=s['series_date'], test_kind='mock')
         if series_live:
-            a['competition_end'] = window(s['series_date'])['closes_at']
+            from .live_series import set_window
+            a['competition_end'] = set_window(s)['closes_at']
             a['competition_ranked'] = False
     if s.get('competition') and not preview:
         a['competition_end'] = s['end_at']
@@ -494,6 +497,8 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
     for q in result["questions"]:
         q["asset_count"] = len(q.get("q_refs", []))
         q["solution_asset_count"] = len(q.get("s_refs", []))
+        if q.get('render_mode') == 'written':
+            q['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
     from .insights import insights
     from .reviews import states_for, review_summary
     a['review_states'] = await states_for(a)

@@ -127,7 +127,7 @@ async def book_view(book, detail=True):
     parts=await db.tejas_book_parts.find({'book_id':book.id},{'_id':0,'number':1}).to_list(None) if book.state=='uploading' else []
     allowances=[BookAllowance.from_mongo(r).model_dump(exclude={'owner_id','book_id'}) async for r in db.tejas_book_allowances.find({'book_id':book.id}).sort('created_at',-1).limit(20)] if detail else []
     linked={s['id']:s for s in await db.tejas_sets.find({'book_import_id':book.id},{'_id':0,'id':1,'archived':1,'series_date':1}).to_list(None)} if detail else {}
-    series=bool((p.get('destination') or {}).get('series'))
+    series=bool((p.get('destination') or {}).get('series')) and (p['destination'].get('series_id') or 'all-india-jee-2026-27')=='all-india-jee-2026-27'
     if series:from .live_series import series_problem
     return {'id':book.id,'title':p['title'],'filename':p['filename'],'state':book.state,'revision':book.revision,
         'size':p['size'],'sha256':p['sha256'],'edition':p.get('edition',''),'chunk_size':CHUNK,'received_parts':sorted(r['number'] for r in parts),

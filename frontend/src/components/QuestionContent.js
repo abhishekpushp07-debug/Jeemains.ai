@@ -44,6 +44,25 @@ export function QuestionContent({
   const refs = solution ? q.s_refs : q.q_refs;
   const text = solution ? q.solution : q.text;
   const alt = solution ? q.solution_accessible_text : q.accessible_text;
+  if (q.render_mode === "written")
+    return (
+      <div className="question-written">
+        <MathText text={text} />
+        {Array.from({ length: count || 0 }, (_, i) => (
+          <figure key={base + i} className="question-written-figure">
+            {!solution && q.asset_labels?.[i] && <figcaption>{q.asset_labels[i]}</figcaption>}
+            <SourceImage
+              readable={readable && !solution}
+              testId={'written-' + q.id + '-' + (solution ? 'solution' : 'question') + '-' + i}
+              path={`${base}/asset/${solution ? "solution" : "question"}/${i}`}
+              alt={(solution ? 'Solution figure' : q.asset_labels?.[i] || 'Question figure')}
+              onError={() => onAssetError?.(i)}
+              onLoad={() => onAssetLoad?.(i)}
+            />
+          </figure>
+        ))}
+      </div>
+    );
   if (q.render_mode === "source" && count)
     return (
       <div className="question-source">

@@ -1,4 +1,4 @@
-import { examPath, safeExamReturn } from '../lib/exams';
+import { examPath, safeExamReturn, seriesPath } from '../lib/exams';
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -521,7 +521,7 @@ export default function Player() {
         </p>
       </Confirm>
       {bonusRule && <BonusConfirm open={bonusConfirm} onClose={() => setBonusConfirm(false)} onConfirm={doEnterBonus} busy={enteringBonus} rule={bonusRule} marking={a.rules} />}
-      <Confirm open={exitOpen} onClose={()=>setExitOpen(false)} title="Leave this test for now?" button="Leave test" onConfirm={()=>nav(safeExamReturn(location.state?.returnTo,a.series_id?'/series/all-india-jee':examPath(a.exam)+'/results'))}>
+      <Confirm open={exitOpen} onClose={()=>setExitOpen(false)} title="Leave this test for now?" button="Leave test" onConfirm={()=>nav(safeExamReturn(location.state?.returnTo,a.series_id?seriesPath(a.series_id):examPath(a.exam)+'/results'))}>
         <p>Your original timer keeps running. Server-saved answers remain; {nPending} local draft(s) are not yet acknowledged. Resume this same attempt from My Tests.</p>
       </Confirm>
     </div></QuestionReportsProvider>

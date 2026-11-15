@@ -16,15 +16,27 @@ LAST = date(2027, 1, 31)
 IST = ZoneInfo('Asia/Kolkata')
 
 
-def window(day):
+JEE_TIMES = {'open_time': '00:01', 'last_start': '20:59', 'close_time': '23:59'}
+
+
+def window(day, cfg=None):
+    cfg = cfg or JEE_TIMES
     d = date.fromisoformat(day)
-    return {key: datetime.combine(d + timedelta(days=offset), time(h, m), IST).timestamp()
-            for key, h, m, offset in [('opens_at', 0, 1, 0), ('last_start_at', 20, 59, 0),
-                                     ('closes_at', 23, 59, 0), ('archive_at', 0, 0, 1)]}
+    out = {}
+    for key, value, offset in (('opens_at', cfg['open_time'], 0), ('last_start_at', cfg['last_start'], 0),
+                               ('closes_at', cfg.get('close_time', '23:59'), 0), ('archive_at', '00:00', 1)):
+        h, m = map(int, value.split(':'))
+        out[key] = datetime.combine(d + timedelta(days=offset), time(h, m), IST).timestamp()
+    return out
 
 
-def phase(day, timestamp):
-    w = window(day)
+def set_window(s):
+    """A series paper keeps the day window it was given; JEE papers from before windows were stored use the JEE times."""
+    return s.get('series_window') or window(s['series_date'])
+
+
+def phase(day, timestamp, w=None):
+    w = w or window(day)
     if timestamp < w['opens_at']: return 'upcoming'
     if timestamp <= w['last_start_at']: return 'live'
     if timestamp < w['closes_at']: return 'start_closed'
@@ -33,18 +45,31 @@ def phase(day, timestamp):
 
 
 def series_mode(s, timestamp):
-    if s.get('series_id') != SERIES_ID: return None
-    state = phase(s['series_date'], timestamp)
+    if not s.get('series_id') or not s.get('series_date'): return None
+    state = phase(s['series_date'], timestamp, set_window(s))
     return 'series_practice' if state == 'archive' else 'series_live'
 
 
+def clock(t):
+    d = datetime.fromtimestamp(t, IST)
+    return f"{d.hour % 12 or 12}:{d:%M} {'AM' if d.hour < 12 else 'PM'}"
+
+
 def guard_start(s, timestamp):
-    if s.get('series_id') != SERIES_ID: return
-    if phase(s['series_date'], timestamp) not in ('live', 'archive'):
-        raise HTTPException(409, 'Live starts are allowed from 12:01 AM through 8:59:00 PM IST on the scheduled day. Archive practice opens the following day.')
+    if not s.get('series_id') or not s.get('series_date'): return
+    w = set_window(s)
+    if phase(s['series_date'], timestamp, w) not in ('live', 'archive'):
+        raise HTTPException(409, f"Live starts are allowed from {clock(w['opens_at'])} through {clock(w['last_start_at'])} IST on the scheduled day. Archive practice opens the following day.")
+
+
+def paper_pattern(s):
+    r = s.get('rules', {})
+    return {'count': len(s.get('questions', [])), 'minutes': r.get('minutes'), 'correct': r.get('correct'), 'wrong': r.get('wrong')}
 
 
 def valid_paper(s):
+    if s.get('series_pattern'):
+        return paper_pattern(s) == s['series_pattern'] and not s.get('rules', {}).get('bonus_rule')
     qs, r = s.get('questions', []), s.get('rules', {})
     shape = Counter((q.get('subject', '').lower().replace('maths', 'mathematics'), q.get('type')) for q in qs)
     required = Counter({(subject, kind): count for subject in ('physics', 'chemistry', 'mathematics') for kind, count in [('mcq', 20), ('integer', 5)]})
@@ -111,7 +136,7 @@ async def history(page: int = Query(1, ge=1, le=10000), u=Depends(current)):
 async def series_book_mocks():
     """Mocks of books uploaded to the All India Test Series, in book and printed order."""
     from .book_models import BookMock
-    books = await db.tejas_books.find({'payload.destination.series': True, 'removed': False, 'archived': {'$ne': True}},
+    books = await db.tejas_books.find({'payload.destination.series': True, 'payload.destination.series_id': {'$in': [None, SERIES_ID]}, 'removed': False, 'archived': {'$ne': True}},
                                       {'_id': 1, 'payload.title': 1, 'state': 1}).sort('created_at', 1).to_list(100)
     title = {b['_id']: b['payload']['title'] for b in books}
     rank = {b['_id']: i for i, b in enumerate(books)}
@@ -199,7 +224,7 @@ async def book_mock_problem(mid):
     row = await db.tejas_book_mocks.find_one({'_id': mid})
     if not row:
         return 'Mock not found. Reload.'
-    if not await db.tejas_books.find_one({'_id': row['book_id'], 'payload.destination.series': True, 'removed': False, 'archived': {'$ne': True}}, {'_id': 1}):
+    if not await db.tejas_books.find_one({'_id': row['book_id'], 'payload.destination.series': True, 'payload.destination.series_id': {'$in': [None, SERIES_ID]}, 'removed': False, 'archived': {'$ne': True}}, {'_id': 1}):
         return 'Only books uploaded to the All India Test Series can fill its days.'
     m = BookMock.from_mongo(row)
     if m.state != 'ready' or m.issues or m.set_id:
@@ -264,7 +289,7 @@ async def clear_pending(query, u):
 async def free_day(day, u):
     if now() >= window(day)['opens_at']:
         raise HTTPException(409, 'A day that has opened cannot be changed.')
-    s = await sets.find_one({'series_date': day}, {'_id': 0, 'questions': 0})
+    s = await sets.find_one({'series_id': SERIES_ID, 'series_date': day}, {'_id': 0, 'questions': 0})
     if s:
         await unassign_set(s, u)
     await clear_pending({'series_date': day}, u)
@@ -292,7 +317,7 @@ async def assign_book_mocks(book_id, pairs, bg, u):
                 raise HTTPException(409, f'{m.label}: {problem}')
             if now() >= window(day)['opens_at']:
                 raise HTTPException(409, 'A day that has opened cannot be assigned.')
-            if await sets.find_one({'series_date': day}, {'_id': 1}) or await db.tejas_book_mocks.find_one({'series_date': day, 'set_id': None, '_id': {'$ne': mid}}, {'_id': 1}):
+            if await sets.find_one({'series_id': SERIES_ID, 'series_date': day}, {'_id': 1}) or await db.tejas_book_mocks.find_one({'series_date': day, 'set_id': None, '_id': {'$ne': mid}}, {'_id': 1}):
                 raise HTTPException(409, f'{day} already has a paper. Remove it first, or choose to replace it.')
             m.series_date = day; m.publish_requested = True; m.release_at = window(day)['opens_at']; m.revision += 1
             await save_mock(m)
@@ -348,7 +373,7 @@ async def fill(data: Fill, bg: BackgroundTasks, u=Depends(owner)):
     """Ready mocks of one All India book take free days in printed order from the start date."""
     from .book_models import BookMock
     check_range(data.start_date)
-    if not await db.tejas_books.find_one({'_id': data.book_id, 'payload.destination.series': True, 'removed': False, 'archived': {'$ne': True}}, {'_id': 1}):
+    if not await db.tejas_books.find_one({'_id': data.book_id, 'payload.destination.series': True, 'payload.destination.series_id': {'$in': [None, SERIES_ID]}, 'removed': False, 'archived': {'$ne': True}}, {'_id': 1}):
         raise HTTPException(409, 'Only books uploaded to the All India Test Series can fill its days.')
     mocks = [BookMock.from_mongo(r) async for r in db.tejas_book_mocks.find({'book_id': data.book_id}).sort('order', 1)]
     built = {s['id']: s for s in await sets.find({'book_import_id': data.book_id, 'series_import': True}, {'_id': 0}).to_list(None)}
@@ -424,5 +449,7 @@ async def unassign_book_mock(mock_id: str, u=Depends(owner)):
 @router.delete('/studio/all-india-jee/{set_id}')
 async def unassign(set_id: str, u=Depends(owner)):
     s = await get(sets, set_id)
+    if s.get('series_id') not in (None, SERIES_ID):
+        raise HTTPException(404, 'Manage this paper from its own series.')
     await unassign_set(s, u)
     return {'ok': True}

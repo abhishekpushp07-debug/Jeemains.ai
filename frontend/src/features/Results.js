@@ -1,4 +1,4 @@
-import { examPath, safeExamReturn } from '../lib/exams';
+import { examPath, safeExamReturn, seriesPath, JEE_SERIES } from '../lib/exams';
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Link,
@@ -204,7 +204,7 @@ export default function Results() {
   } catch {}
   return (
     <QuestionReportsProvider attemptId={id}><div className="container page results-page">
-      <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,r.series_id?'/series/all-india-jee?tab=results':examPath(r.exam)+'/results')} data-testid="results-home">
+      <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,r.series_id?seriesPath(r.series_id)+(r.series_id===JEE_SERIES?'?tab=results':''):examPath(r.exam)+'/results')} data-testid="results-home">
         <ArrowLeft size={14} /> {r.series_id?'Back to All India series':location.state?.returnTo?.startsWith('/profile')?'Back to My Tests':`Back to ${r.exam} ${location.state?.returnTo?.includes('/results')?'results':'tests & results'}`}
       </Link>
       <PageTitle

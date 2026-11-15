@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { PageTitle } from '../Shared';
+import { seriesPath, JEE_SERIES } from '../../lib/exams';
 
 const ist = n => new Date(n * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST';
 const slug = v => v.toLowerCase().replace(/\W+/g, '-');
@@ -27,7 +28,7 @@ export function EmbargoedResult({ pending, onRefresh }) {
       <p className="import-fineprint mt-4 [overflow-wrap:anywhere]" data-testid="results-embargo-receipt">Submission receipt: {pending.receipt}</p>
       <div className="flex flex-wrap gap-3 mt-6">
         <Button data-testid="results-release-refresh" onClick={onRefresh}>Check results</Button>
-        <Button asChild variant="outline"><Link data-testid="results-competition-hub" to={pending.series_id ? '/series/all-india-jee?tab=results' : '/competitions'}>{pending.series_id ? 'All India series hub' : 'Competition hub'}</Link></Button>
+        <Button asChild variant="outline"><Link data-testid="results-competition-hub" to={pending.series_id ? seriesPath(pending.series_id)+(pending.series_id===JEE_SERIES?'?tab=results':'') : '/competitions'}>{pending.series_id ? 'All India series hub' : 'Competition hub'}</Link></Button>
       </div>
     </section>
   </div>;
