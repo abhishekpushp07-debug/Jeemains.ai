@@ -1,0 +1,30 @@
+{
+  "summary": "Tested JEELIVE.AI Super Admin 'Master' flows end-to-end against the isolated bridge (127.0.0.1:8770, disposable DB, mocked storage/AI) via Playwright route-rewrite on the real preview frontend. Backend isolated suite rerun: `python tests/master_iso181.py` -> TOTAL 115 PASS 115 FAIL 0 (including 'no AI calls in whole run'). Frontend flows exercised as owner, reviewer and student: Master home + Today line + exam cards + Library/Students/Team top links, old links (/super-admin/content, /review, /schedule, /upload/new, /studio) all redirect to Master, +New exam dialog (name/short/subjects/colour), landing on exam page with the 'Hidden from students...' note, +Add mock type dialog with all 5 kinds, duplicate once-per-exam kind correctly disabled after creation, type settings icon, PDF upload (questions_only+answer_key_only -> 1 Draft row with 3 questions, upload-send disabled until the permission tick is on), status chip menu Make Live transitions Draft -> Live (shows 'Going live…' interim chip), Schedule dialog with Live-exam switch (past time correctly refuses: Save button disabled with 'Choose a time in the future.' hint), Switch Off, Move to Library confirm, bulk Select all + bulk-live/schedule/off/library/replace/clear (bulk-replace opens upload dialog correctly), Write dialog -> write editor with MathJax $..$ preview, question save, Numerical vs Options toggle, Paste whole paper (2 valid + 1 broken Q parsed into 3 rows, broken one flagged -> 'Draft · 3 to fix' on the type list and Make Live disabled), AITS type creation (series-first-date, series-days, series-open-time, series-last-start all present and persisted), JEE Main built-in AITS page shows '62 days', 'opens 12:01 AM', 'last start 8:59 PM IST', has NO 'Dates & times' button and NO 'Show on Home' switch (verified by text), Reviewer /super-admin shows 'Things to fix' + reviewer-scope-note, admin-nav-library/students/team are absent for reviewer, admin-nav-master present, /super-admin/exam/jee-main redirects to Master for reviewer, Fix items for the written draft listed with Fix button. Student side: /home shows all-india-series-banner, /exams/jee-main shows Mock Tests but NOT 'All India' as a type (since no Show-on-Home series exists yet in the fresh DB), /series/all-india-jee shows series-calendar unchanged. Mobile 390x844 on Master home, JEE exam page, type page and bulk bar: scrollWidth==clientWidth==390, no horizontal overflow; bulk buttons stack cleanly. One real finding: the newly created TEST_NEET_UG AITS type's owner view did not expose series-day-list / series-fill / series-papers testids when the type was empty (only the top shell loaded); needs retest with at least two written papers to verify series-paper-day select, Fill days in order, and series-settings-dialog. Did not exercise Excel import, chapter-wise subject+chapter write dialog, Fix flow screen for a PDF held mock (no held PDF mock available), series Show on Home student banner reflection, or question-photo PNG upload path (time budget).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/master_iso181.py",
+    "/app/backend/tests/master_bridge181.py"
+  ],
+  "action_items": [
+    "No regressions blocking owner / reviewer / student flows observed. Consider follow-up: exercise the AITS owner panel with real papers (assign day, fill, free, clear, dates dialog, Show on Home student reflection) and the FixMock screen for a held PDF mock; both were not reachable from the fresh isolated DB in this run."
+  ],
+  "critical_code_review_comments": [
+    "Schedule dialog uses the browser-native date/time picker; the brief accepts this but earlier iterations flagged it for consistency with shadcn.",
+    "data-testid 'series-dates' on the JEE Main AITS page is attached to a <p> text element that renders the dates description; keeping it visually-only (not a button) matches the spec but the name 'series-dates' may read like a button and could be renamed (e.g. 'series-dates-text') to avoid ambiguity in future selector-based tests."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (115/115 isolated)", "frontend": "100% of the flows reached; AITS-with-papers and FixMock screens not reached"},
+  "test_credentials": "Used only the isolated bridge cookies (owner, reviewer) from /tmp/uibridge/bridge.json and a bridge-signed-up student (phone 9388881111). No real preview credentials used; no preview-DB mutations.",
+  "seed_data_creation": "Created inside the isolated bridge DB only (dropped on bridge exit): one exam 'TEST_NEET_UG' with Mock, Daily Challenge (custom) and AITS (5 days) types; one Live mock from PDF upload (questions_only.pdf + answer_key_only.pdf); one Written draft 'TEST_WrittenMockA' with 1 clean MCQ and 3 pasted questions (3 flagged). Nothing touched on the preview or production DB.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bridge at 127.0.0.1:8770 (started ~17:13 UTC, lives ~40min). Cookies in /tmp/uibridge/bridge.json. To test student flows, POST /api/auth/phone/signup on the bridge with Origin header set to BASE, then parse /tmp/stu_cookies.txt (HttpOnly rows) into {access_token, refresh_token} and use as cookies. Isolated suite: `cd /app/backend && timeout 285 python tests/master_iso181.py` -> 115/115 PASS ~80s. Not yet exercised on UI: series owner panel with real papers (assign day, Fill in order, Free, Dates & times dialog, Show on Home student reflection), FixMock /super-admin/fix/:bookId/:mockId page with a held PDF mock, question-photo upload, Excel import link in Write, chapter-wise Write dialog asking subject+chapter, PYQ Write dialog asking year. All owner and student test-ids listed in the brief render as expected on this preview build; no page errors observed in any captured pageerror listener."
+}

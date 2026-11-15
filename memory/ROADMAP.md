@@ -1,3 +1,13 @@
+# Master Phase 1 (2026-11-15)
+- P0: Wait for the user's go-ahead before deploying Master to jeelive.ai. On deploy the sets index series_date_1 is replaced by series_day_unique (done at startup by db.indexes()).
+- P0 after deploy: owner makes one real PDF upload and one written mock on live; ask for a screenshot if anything fails.
+- P1: Not yet seen in a real browser (backend suite only): replacing mocks with a new PDF end to end, Library restore, a series day while it is open, and photo / Excel file bytes sent by a real browser.
+- P1: Chapter-wise PDFs outside the known 50-question chapter-book format are not read; needs a general chapter reader (not approved yet).
+- P1: The mobile app must read GET /api/series to show series cards for new exams (docs/APP_INTEGRATION.md section 14).
+- Phase 2 (needs approval): next year's series and archive of the old one; add or change a written question inside a PDF mock; copy a mock or move it to another exam; search and filters; drag to reorder; confirm many numerical questions at once.
+- Phase 3 (needs approval): scanned and two-language PDFs; a reviewer per exam; per-mock report; change history.
+
+
 # Active roadmap
 
 ## Super Admin content management (2026-11-14)

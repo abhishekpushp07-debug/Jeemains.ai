@@ -4,6 +4,7 @@ import {Button} from '../ui/button';
 import {Input} from '../ui/input';
 import {api,post} from '../../lib/api';
 import {BookError,PrivateBookImage} from './BookShared';
+import {plain} from '../master/MasterShared';
 import {toast} from 'sonner';
 
 const LETTERS=['A','B','C','D','E'];
@@ -24,7 +25,7 @@ function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
  async function save(){setBusy(true);setError('');try{const r=await post(`/admin/books/${bookId}/mocks/${mockId}/fix`,{revision,question_id:q.id,response_type:type,option_labels:type==='mcq'?options:[],answer:answer.trim(),complete:true,key_only:keyOnly});toast.success(r.message);setDone(true);onSaved();}catch(e){setError(e.message);}finally{setBusy(false);}}
  return <article className={'held-card'+(done?' is-done':'')} data-testid={tag}>
   <header className="held-card-head"><strong>{q.subject} · Q{q.number}</strong><span>Page {q.pages.join(', ')}</span>{done&&<span className="held-saved" data-testid={tag+'-saved'}><CheckCircle2 size={15}/>Saved · rechecking</span>}</header>
-  <ul className="admin-reasons">{q.issues.map((x,i)=><li key={i}>{x}</li>)}</ul>
+  <ul className="admin-reasons">{[...new Set(q.issues.map(plain))].map((x,i)=><li key={i}>{x}</li>)}</ul>
   <div className="held-crops">{Array.from({length:q.question_images},(_,i)=><PrivateBookImage key={i} path={`/admin/books/${bookId}/mocks/${mockId}/questions/${q.id}/asset/question/${i}`} alt={`${q.subject} question ${q.number}, part ${i+1}`} testId={`${tag}-img-${i}`}/>)}</div>
   {onOpenPage&&<div className="book-actions">{q.pages.map(n=><Button key={n} variant="outline" size="sm" onClick={()=>onOpenPage(n)} data-testid={`${tag}-page-${n}`}>Full page {n}</Button>)}{q.next_page&&<Button variant="outline" size="sm" onClick={()=>onOpenPage(q.next_page)} data-testid={`${tag}-next-page`}>Next page {q.next_page}</Button>}</div>}
   <div className="held-form">
@@ -50,7 +51,7 @@ export function HeldFixer({bookId,mockId,onClose,onOpenPage,onOpenRules,onSaved}
   {data&&<>
    {data.state!=='held'&&<p className="admin-note" data-testid="held-fixer-clear">Nothing is left to fix here. Go back to its list to make it Live.</p>}
    {data.frozen&&<p className="admin-note warn">This mock is published. Create a corrected version before changing it.</p>}
-   {data.general.length>0&&<div className="held-general" data-testid="held-general"><strong>Other things to check</strong><ul>{data.general.map((x,i)=><li key={i}><span>{x}</span>{onOpenPage&&pagesIn(x).map(n=><Button key={n} variant="link" size="sm" onClick={()=>onOpenPage(n)} data-testid={`held-general-page-${i}-${n}`}>Open page {n}</Button>)}</li>)}</ul>{onOpenRules&&(data.rules_missing||data.general.some(rulesIssue))&&<Button variant="outline" onClick={onOpenRules} data-testid="held-open-rules">Open this mock’s rules</Button>}</div>}
+   {data.general.length>0&&<div className="held-general" data-testid="held-general"><strong>Other things to check</strong><ul>{data.general.map((x,i)=><li key={i}><span>{plain(x)}</span>{onOpenPage&&pagesIn(x).map(n=><Button key={n} variant="link" size="sm" onClick={()=>onOpenPage(n)} data-testid={`held-general-page-${i}-${n}`}>Open page {n}</Button>)}</li>)}</ul>{onOpenRules&&(data.rules_missing||data.general.some(rulesIssue))&&<Button variant="outline" onClick={onOpenRules} data-testid="held-open-rules">Open this mock’s rules</Button>}</div>}
    {data.questions.map(q=><QuestionCard key={q.id+data.revision} q={q} bookId={bookId} mockId={mockId} revision={data.revision} onSaved={saved} onOpenPage={onOpenPage}/>)}
    {!data.questions.length&&!data.general.length&&data.state==='held'&&<p data-testid="held-fixer-none">No problems are listed right now. Press Refresh in a moment.</p>}
   </>}

@@ -8,7 +8,7 @@ import {Skeleton} from '../../../components/ui/skeleton';
 import {Tabs,TabsList,TabsTrigger} from '../../../components/ui/tabs';
 import {ErrorBox} from '../../../components/Shared';
 import {AdminHeading} from '../../../components/admin/AdminShared';
-import {MasterCrumbs,fixLink,plural} from '../../../components/master/MasterShared';
+import {MasterCrumbs,fixLink,plural,plain} from '../../../components/master/MasterShared';
 
 export function FixItems({tab}){
  const [data,setData]=useState(null),[error,setError]=useState('');
@@ -18,7 +18,7 @@ export function FixItems({tab}){
  const items=tab==='ready'?data.ready:data.items;
  if(!items.length)return <p className="admin-empty" data-testid={'fix-empty-'+tab}>{tab==='ready'?'Nothing is waiting. New mocks appear here once they are complete.':'Nothing to fix. Every uploaded or written mock is complete.'}</p>;
  return <ul className="admin-list" data-testid={'fix-list-'+tab}>{items.map(m=><li key={m.kind+m.id} className="admin-row" data-testid={'fix-item-'+m.id}>
-  <div className="admin-row-main"><strong>{m.title}</strong><small>{[m.place,m.source,tab==='ready'?plural(m.count,'question'):plural(m.count,'thing')+' to fix'].filter(Boolean).join(' · ')}</small>{m.reason&&<p className="admin-reason">{m.reason}</p>}</div>
+  <div className="admin-row-main"><strong>{m.title}</strong><small>{[m.place,m.source,tab==='ready'?plural(m.count,'question'):`${m.count}${m.more?'+':''} to check`].filter(Boolean).join(' · ')}</small>{m.reason&&<p className="admin-reason">{plain(m.reason)}</p>}</div>
   {tab==='ready'?(m.section_id&&<Button asChild variant="outline"><Link to={`/super-admin/exam/${m.exam_slug}/${m.section_id}`} data-testid={'fix-open-'+m.id}>Open its list<ArrowUpRight size={15}/></Link></Button>)
    :<Button asChild><Link to={fixLink(m)} data-testid={'fix-open-'+m.id}><Wrench size={15}/>Fix</Link></Button>}
  </li>)}</ul>;

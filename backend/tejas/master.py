@@ -48,7 +48,7 @@ async def fix_list(u=Depends(staff)):
     out = [{'kind': 'book_mock', 'id': m['id'], 'book_id': m['book_id'], 'title': m['label'], 'source': m['book_title'],
             'place': ' › '.join(x for x in ((m.get('destination') or {}).get('exam_name'), (m.get('destination') or {}).get('section_name')) if x),
             'section_id': (m.get('destination') or {}).get('section_id'), 'exam_slug': (m.get('destination') or {}).get('exam_slug'),
-            'count': len(m['issues']), 'reason': (m['issues'] or [''])[0]} for m in (await held_mocks(u))['items']]
+            'count': len(m['issues']), 'more': len(m['issues']) >= 8, 'reason': (m['issues'] or [''])[0]} for m in (await held_mocks(u))['items']]
     names = {s['id']: s for s in await sections.find({}, {'_id': 0, 'id': 1, 'name': 1, 'exam_slug': 1}).to_list(2000)}
     exam_names = {e['slug']: e['name'] for e in await exams.find({}, {'_id': 0, 'slug': 1, 'name': 1}).to_list(200)}
     written = {'written': True, 'status': 'draft', 'archived': {'$ne': True}}
@@ -96,7 +96,14 @@ async def type_mocks(sid: str, u=Depends(owner)):
         if w['kind'] != 'book_mock':
             continue
         status = {'ready': 'draft', 'held': 'draft', 'publishing': 'publishing', 'scheduled': 'scheduled'}[w['state']]
-        items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': w['issue_count'] if w['state'] == 'held' else 0,
+        to_fix = 0
+        if w['state'] == 'held':
+            from .book_imports import question_problems
+            from .book_models import BookMock
+            row = await db.tejas_book_mocks.find_one({'_id': w['id']})
+            qs, general = question_problems(BookMock.from_mongo(row))
+            to_fix = max(1, len(qs) + len(general))
+        items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': to_fix, 'key_only': w.get('key_only', 0),
                       'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, 'state': {'$in': [*PROCESSING, 'attention_needed']}},

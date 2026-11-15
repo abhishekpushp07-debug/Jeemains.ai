@@ -34,6 +34,17 @@ def single_pdf(n=3):
     raw = doc.tobytes(); doc.close(); return raw
 
 
+def fix_pdf():
+    doc = fitz.open(); p = doc.new_page(); p.insert_text((40, 60), 'Physics', fontsize=13); y = 100
+    for num, text, opts in [(1, 'A ball falls 20 m. Find the time.', ['1 s', '2 s', '3 s', '4 s']), (2, 'How many significant figures are in 0.00520?', []), (3, 'The unit of force is', ['joule', 'newton', 'watt', 'pascal'])]:
+        p.insert_text((40, y), f'Q{num}. {text}', fontsize=11); y += 20
+        for lab, o in zip('ABCD', opts): p.insert_text((60, y), f'({lab}) {o}', fontsize=11); y += 18
+        y += 22
+    p = doc.new_page(); p.insert_text((40, 60), 'Answer Key', fontsize=13); y = 100
+    for num, ans in [(1, 'B'), (2, '3'), (3, 'B')]: p.insert_text((40, y), f'Q{num}. ({ans})', fontsize=11); y += 20
+    raw = doc.tobytes(); doc.close(); return raw
+
+
 def mcq(text, answer='B', **kw):
     return {'id': '', 'subject': 'Physics', 'chapter': '', 'text': text, 'image': '', 'type': 'mcq', 'options': [{'text': x, 'image': ''} for x in 'wxyz'],
             'answer': answer, 'solution': '', 'solution_image': '', **kw}
@@ -181,6 +192,20 @@ async def main():
     b3 = await upload(own, single_pdf(2), 'NEET 2023 Paper', section_id=pyq_t['id'], year=2023); await complete(own, b3['id']); await drain()
     m3 = await BM.find_one({'book_id': b3['id']}) or {}; sc, d = await status(own, 'live', [{'kind': 'book_mock', 'id': m3.get('_id', 'x')}]); await drain(); s = await SETS.find_one({'book_import_id': b3['id']}) or {}
     check('PYQ PDF publishes as a PYQ paper with its year', d.get('done') == 1 and s.get('test_kind') == 'pyq' and s.get('pyq_year') == 2023 and s.get('master_pyq'), (d, m3.get('state'), m3.get('issues')))
+    b5 = await upload(own, fix_pdf(), 'Needs Fix', section_id=mock_t['id']); await complete(own, b5['id']); await drain()
+    m5 = await BM.find_one({'book_id': b5['id']}) or {}; base5 = f"/api/admin/books/{b5['id']}/mocks/{m5.get('_id')}"
+    row = next((x for x in J(await own.get(f"{M}/types/{mock_t['id']}/mocks"))['items'] if x['id'] == m5.get('_id')), {})
+    check('PDF with one unclear question: Draft, 1 to fix, key-only count shown', m5.get('state') == 'held' and row.get('status') == 'draft' and row.get('to_fix') == 1 and row.get('key_only') == 3, (m5.get('state'), m5.get('issues'), row))
+    sc, d = await status(own, 'live', [{'kind': 'book_mock', 'id': m5.get('_id', 'x')}]); check('mock with something to fix cannot go Live, reason given', d.get('done') == 0 and 'Fix' in d['skipped'][0]['reason'], d)
+    fx = J(await rev.get(M + '/fix')); check('reviewer sees it in the fix list', any(x['id'] == m5.get('_id') for x in fx.get('items', [])), fx)
+    pr = J(await rev.get(base5 + '/problems')); q5 = (pr.get('questions') or [{}])[0]
+    r = await rev.get(f"{base5}/questions/{q5.get('id')}/asset/question/0"); check('reviewer sees the question photo', r.status_code == 200 and r.content[:4] == b'\x89PNG', r.status_code)
+    r = await rev.get(f"/api/admin/books/{b5['id']}/pages/1/image"); check('reviewer cannot open whole book pages 403', r.status_code == 403, r.status_code)
+    r = await rev.get(f"/api/admin/books/{b5['id']}"); check('reviewer cannot open the upload itself 403', r.status_code == 403, r.status_code)
+    r = await stu.get(base5 + '/problems'); check('student cannot read problems 403', r.status_code == 403, r.status_code)
+    r = await rev.post(base5 + '/fix', json={'revision': pr.get('revision', 0), 'question_id': q5.get('id', 'x'), 'response_type': 'integer', 'option_labels': [], 'answer': '3', 'complete': True, 'key_only': False}); await drain()
+    m5 = await BM.find_one({'book_id': b5['id']}) or {}; check('reviewer fix makes the mock complete', r.status_code == 200 and m5.get('state') == 'ready', (r.status_code, r.text[:200], m5.get('issues')))
+    r = await rev.get(base5 + '/problems'); check('reviewer loses access once nothing is left to fix 404', r.status_code == 404, r.status_code)
     blank = fitz.open(); blank.new_page(); braw = blank.tobytes(); blank.close()
     b4 = await upload(own, braw, 'Scanned Paper', section_id=mock_t['id']); await complete(own, b4['id']); await drain()
     ups = [x for x in J(await own.get(f"{M}/types/{mock_t['id']}/mocks")).get('uploads', []) if x['id'] == b4['id']]

@@ -446,7 +446,7 @@ async def fill(sid: str, bg: BackgroundTasks, u=Depends(owner)):
         raise HTTPException(409, 'No ready paper could take a day. Fix or finish papers first, or free some future days.' if queue else 'Every ready paper already has a day.')
     await audit(u['id'], 'Test series days filled in order', sid, f'{placed} placed')
     extra = f' {len(queue) - placed} waiting for more days.' if len(queue) > placed else ''
-    return {'placed': placed, 'message': f"{placed} paper{'s' if placed != 1 else ''} given days in order.{extra}" + (f' {left} still need work.' if left else '')}
+    return {'placed': placed, 'message': f"{placed} paper{'s' if placed != 1 else ''} given days in order.{extra}" + (f" {left} still need{'s' if left == 1 else ''} work." if left else '')}
 
 
 async def unassign_set(cfg, id, u):
