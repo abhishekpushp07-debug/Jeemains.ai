@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import {ChevronDown,Download,RotateCcw} from 'lucide-react';
 import {Button} from '../ui/button';
 import {downloadFile} from '../../lib/api';
@@ -36,6 +36,7 @@ function bySubject(items){
 // One exam › mock type, folded by default when the list is long; chapter-wise tests are split by subject.
 export function LibraryGroup({g,startOpen,picked,onCheck,onRestore,busy}){
  const [open,setOpen]=useState(startOpen),[zipping,setZipping]=useState(false);
+ useEffect(()=>{if(startOpen)setOpen(true);},[startOpen]);
  const key=g.sid||'none-'+g.exam;
  const all=g.items.every(t=>picked.has(t.id)),attempts=g.items.reduce((n,t)=>n+t.attempts,0);
  const parts=g.kind==='chapters'?bySubject(g.items):[['',g.items]];

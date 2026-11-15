@@ -108,6 +108,7 @@ async def main():
         check('was-state shown (Live / Draft / Scheduled)', items[s['bmock']]['state'] == 'live' and items[s['draft']]['state'] == 'draft' and items[s['jmock']]['state'] == 'scheduled', {k: items[s[k]]['state'] for k in ('bmock', 'draft', 'jmock')})
         check('attempts kept and fresh-start summary', lib['attempts_kept'] >= 1 and lib['fresh_start']['counts']['kept'] == 2 and [e['slug'] for e in lib['exams']][:3] == ['jee-main', 'bitsat', 'comedk'], (lib.get('attempts_kept'), lib.get('fresh_start'), lib.get('exams')))
         check('uploads never Live listed', {u['id'] for u in lib['uploads']} >= {'bk-ch', 'cb-1', 'imp-bitsat'}, [u['id'] for u in lib['uploads']])
+        check('uploads say where they go', next(u['place'] for u in lib['uploads'] if u['id'] == 'bk-ch') == 'BITSAT \u203a Chapter-wise Tests', [u['place'] for u in lib['uploads']])
         r = await rev.get('/api/admin/library'); check('reviewer cannot open the Library', r.status_code == 403, r.status_code)
         z = await own.get('/api/admin/library/export', params={'section_id': 'jee-main:aits'})
         names = zipfile.ZipFile(io.BytesIO(z.content)).namelist() if z.status_code == 200 else []

@@ -112,21 +112,22 @@ async def restore_uploads(refs):
 
 async def archived_uploads(rows):
     """Uploads moved to the Library that have no test of their own in it (their mocks were never published)."""
+    from .structure import sections, exams
+    exam_names = {e['slug']: e['name'] for e in await exams.find({}, {'_id': 0, 'slug': 1, 'name': 1}).to_list(500)}
+    known = {s['id']: f"{exam_names.get(s['exam_slug'], '')} › {s['name']}" for s in await sections.find({}, {'_id': 0, 'id': 1, 'name': 1, 'exam_slug': 1}).to_list(2000)}
+    where = lambda d: ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x) or known.get(d.get('section_id'), '')
     linked = {f: {r.get(f) for r in rows if r.get(f)} for f, _, _ in SOURCES}
     out = []
     for b in await db.tejas_books.find({'archived': True, 'removed': False}, {'_id': 1, 'payload.title': 1, 'payload.destination': 1, 'archived_at': 1}).to_list(500):
         if b['_id'] not in linked['book_import_id']:
-            d = b['payload'].get('destination') or {}
-            out.append({'kind': 'book', 'id': b['_id'], 'title': b['payload']['title'], 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': b.get('archived_at')})
+            out.append({'kind': 'book', 'id': b['_id'], 'title': b['payload']['title'], 'place': where(b['payload'].get('destination') or {}), 'archived_at': b.get('archived_at')})
     titles = {b['_id']: b['payload'] for b in await db.tejas_books.find({'removed': False, 'archived': {'$ne': True}}, {'_id': 1, 'payload.title': 1, 'payload.destination': 1}).to_list(5000)}
     for m in await db.tejas_book_mocks.find({'archived': True, 'set_id': None, 'book_id': {'$in': list(titles)}}, {'_id': 1, 'book_id': 1, 'label': 1}).to_list(2000):
-        d = titles[m['book_id']].get('destination') or {}
-        out.append({'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': None})
+        out.append({'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'place': where(titles[m['book_id']].get('destination') or {}), 'archived_at': None})
     for name, kind, field in (('tejas_chapter_books', 'chapter_book', 'chapter_book_id'), ('tejas_imports', 'import', 'import_id')):
         for r in await db[name].find({'archived': True}, {'_id': 0, 'id': 1, 'title': 1, 'destination': 1, 'archived_at': 1}).to_list(500):
             if r['id'] not in linked[field]:
-                d = r.get('destination') or {}
-                out.append({'kind': kind, 'id': r['id'], 'title': r.get('title', ''), 'place': ' › '.join(x for x in (d.get('exam_name'), d.get('section_name')) if x), 'archived_at': r.get('archived_at')})
+                out.append({'kind': kind, 'id': r['id'], 'title': r.get('title', ''), 'place': where(r.get('destination') or {}), 'archived_at': r.get('archived_at')})
     return out
 
 
@@ -138,11 +139,14 @@ async def restore_sets(ids):
     if not rows:
         return 0, 0
     dayless = 0
+    from .series_admin import dates
+    ranges = {c['_id']: set(dates(c)) for c in await db.tejas_series.find({}, {'first_date': 1, 'days': 1}).to_list(200)}
     for r in rows:
         day = r.get('library_series') or {}
         if not day:
             continue
-        free = bool(day.get('series_date')) and not await sets.find_one({'series_id': day.get('series_id'), 'series_date': day['series_date'], 'id': {'$ne': r['id']}}, {'_id': 1})
+        # Back on its day only if the day still belongs to the series and nobody else has it; otherwise it waits without a day.
+        free = day.get('series_date') in ranges.get(day.get('series_id'), ()) and not await sets.find_one({'series_id': day.get('series_id'), 'series_date': day['series_date'], 'id': {'$ne': r['id']}}, {'_id': 1})
         try:
             await sets.update_one({'id': r['id']}, {'$set': day, '$unset': {'library_series': ''}} if free else {'$unset': {'library_series': ''}})
         except DuplicateKeyError:

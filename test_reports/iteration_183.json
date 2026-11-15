@@ -1,0 +1,39 @@
+{
+  "summary": "Tested the Library redesign, fresh start and clean source line through the isolated bridge (127.0.0.1:8770, routed with Playwright). Owner and student cookies came from /tmp/uibridge/bridge.json. No preview login and no writes to the preview DB. Working: stats (17/0/4), ZIP download (jeelive-library.zip, 15KB), guide collapse that persists in localStorage after reload, fresh summary text, 4 next-step links with the correct hrefs, exam tabs (All 17, JEE Main 5, BITSAT 11, COMEDK 1, Uploads 4), type chips, group fold/unfold, BITSAT chapter subject sub-headers (Chemistry 3, Mathematics 2, Physics 4), group checkbox (selects 10, unchecking leaves 1), sticky bar with count, Clear and Restore selected, the restore dialog facts (live / quiet / series), Cancel (no change), Confirm (toast, row gone, count drops), single, selected and group Restore all, upload restore (toast, upload count 3) and the 390px mobile layout (no horizontal overflow, Restore button nearly full width, sticky bar and dialog usable). Series day: SFUT went back on day 5 (2026-12-05) in the Master series Days list. Student: BITSAT and COMEDK show no tests before restore. JEE Main PYQ shows 2 papers. /sets/{pyq} shows the fixed PYQ line. API source is 'JEE Main · PYQ Papers · 2025'. After the owner restored BMOCK, students see it on /exams/bitsat/mocks with exam-source 'BITSAT · Mock Tests' and on its detail page. No '.pdf' or 'Owner-uploaded/supplied' text anywhere. Rapid Fire is untouched. fresh_start_iso183.py was re-run: 37/37 pass. Found 1 real UI bug (search results stay folded) and 3 minor issues.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/admin/library/restore (restore_sets)", "issue": "A series paper's day is only checked for being free. It is not checked against the series date range. TEST_SPAST (day 2026-11-02) was restored with series_date 2026-11-02, but the JEE series runs 2026-12-01 to 2027-01-31. The paper now appears neither in the Master Days list nor in 'Papers without a day (0)', and the section tests list is empty. It is invisible to the owner in Master. Suggest: if the day is outside the series range or already over, bring the paper back without a day so it appears in 'Papers without a day'."},
+      {"endpoint": "GET /api/admin/library uploads[].place", "issue": "place is built only from destination.exam_name / section_name. Uploads whose destination has only section_id (every seeded upload: bk-ch, bk-ser, cb-1, imp-bitsat) show no 'where it goes' tag. Suggest deriving it from section_id through the catalog, e.g. 'BITSAT › Chapter-wise Tests'."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "LibraryGroup (LibraryGroups.js)", "issue": "Searching does not unfold groups. open is useState(startOpen), and the key is sid+exam+kind with no q, so groups mounted folded stay folded when the user types. With All exams selected, typing 'chemistry' leaves 'BITSAT › Chapter-wise Tests · 3 tests' folded with 0 visible rows; 'Series' gives the same result. The rows only appear after switching a type chip, which remounts the groups. Fix: add useEffect(()=>{if(startOpen)setOpen(true)},[startOpen]) or add q to the key.", "selector": "[data-testid=library-search] + [data-testid^=library-group-toggle-]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Uploads never Live restore of PDF 'bk-ch'", "issue": "The restore works: toast '1 upload back in its mock type.' and the item leaves the Library. The book itself is not listed in the BITSAT Chapter-wise Uploads panel (type-uploads), because master.py hides 'ready' books without chapters. Only its draft 'Chapter 1' (bm-sched) comes back in the type's items list. The panel text 'see it again as a Draft in its mock type' is accurate, but the review expectation 'shows again in its mock type's Uploads list' is not met for already-read PDFs. Make sure this is the intended behaviour.", "affected_selectors": ["library-upload-restore-bk-ch", "type-uploads"]}
+    ],
+    "design_issues": [
+      {"screen": "Library guide panel (desktop)", "issues": ["The left card 'Like a recycle bin' has a large empty area under its 4 bullets because it stretches to the height of the right card. Consider align-items:start or less padding."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/fresh_start_iso183.py"],
+  "action_items": [
+    "Fix Library search so matching groups unfold (LibraryGroup open state should follow startOpen when q changes).",
+    "restore_sets: if a series paper's day is outside the series date range (or already past), bring it back without a day so it is visible in 'Papers without a day'.",
+    "Library uploads: work out 'place' from destination.section_id when exam_name/section_name are missing.",
+    "Optional: confirm the intended behaviour for restored already-read PDF uploads (draft shows, but not in the Uploads panel)."
+  ],
+  "critical_code_review_comments": [
+    "LibraryGroups.js: useState(startOpen) is only read on first render. Prop changes (search) are ignored. This is the root cause of the search bug.",
+    "Upload restore (library-upload-restore-*) runs immediately with no confirm dialog, unlike test restores. That is acceptable since it is harmless, but it is inconsistent.",
+    "structure.place_line depends on the module cache _seen, which visibility() fills. If summary() is ever called before visibility() has run (e.g. a cold start on a non-catalogue route), the source line could lose the exam or section name. Consider awaiting visibility() inside callers or lazily inside place_line."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (fresh_start_iso183 37/37)", "frontend": "94% (1 of ~18 checked flows has a bug)"},
+  "seed_data_creation": "None. The bridge DB was mutated by restores: SFUT, SPAST, BMOCK and upload bk-ch were restored. The Library is now 14 tests / 3 uploads.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The bridge (tests/library_bridge183.py) runs on 127.0.0.1:8770. Route **/api/** with the cookie header from /tmp/uibridge/bridge.json (owner/student). Master series Days use data-testid series-day-{dayNumber}, not the date; for exact dates use GET /admin/master/series/all-india-jee-2026-27 slots. The student JEE PYQ page (/exams/jee-main/pyq) uses its own cards, without exam-source-* testids; exam-source-* appears on /exams/{slug}/mocks|chapters. Retest: search unfolding, the SPAST out-of-range restore and upload place tags."
+}

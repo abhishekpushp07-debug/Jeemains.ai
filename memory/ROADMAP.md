@@ -1,5 +1,5 @@
 # Master Phase 1 (2026-11-15)
-- P0: Wait for the user's go-ahead before deploying Master to jeelive.ai. On deploy the sets index series_date_1 is replaced by series_day_unique (done at startup by db.indexes()).
+- P0: Wait for the user's go-ahead before deploying Master to jeelive.ai. On deploy the sets index series_date_1 is replaced by series_day_unique (done at startup by db.indexes()). The same deploy runs the one-time fresh start on production (only JEE Main PYQ stays; every other test, the 62-day JEE series papers and uploads go to the Library; series dates kept). After deploy: check the Library on live and that JEE Main PYQ still shows 30 papers.
 - P0 after deploy: owner makes one real PDF upload and one written mock on live; ask for a screenshot if anything fails.
 - P1: Not yet seen in a real browser (backend suite only): replacing mocks with a new PDF end to end, Library restore, a series day while it is open, and photo / Excel file bytes sent by a real browser.
 - DONE 2026-11-15 (preview): general chapter reader (headings, bookmarks, owner-marked starts, subjects) and Draft preview (Try as student). Deploy only with the Master go-ahead.
