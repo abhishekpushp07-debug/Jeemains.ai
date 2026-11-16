@@ -156,7 +156,7 @@ def name_heading(value):
 def named_role(value):
     """'Answer key – <chapter name>', '<chapter name> – Solutions' or 'Solutions: <chapter name>' as (role, title); the title must match a chapter already seen."""
     v = ' '.join(value.split())
-    if not v[:1].isupper() or len(v) > 110:
+    if not (v[:1].isupper() or v[:1].isdigit()) or len(v) > 110:
         return None
     m = ROLE_NAMED.match(v)
     if m:
@@ -167,7 +167,8 @@ def named_role(value):
             return None
         role, title = tail[1], v[:tail.start()]
     title = tidy(title)
-    if not title or not title[:1].isupper() or len(title.split()) > 12 or re.match(r'^\d', title):
+    # '3D Geometry' may start with a digit: the caller accepts only a title that names a chapter already seen.
+    if not title or not (title[:1].isupper() or title[:1].isdigit()) or len(title.split()) > 12:
         return None
     return ('solution' if 'solution' in role.lower() else 'key'), title
 

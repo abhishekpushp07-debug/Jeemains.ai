@@ -1,3 +1,13 @@
+## 2026-11-16 — Chapter-wise PDFs: solutions at the end of each chapter are read
+- Live RCA (book a05c49f7 'bitsat maths final', 640 pages): 435 pages 'unresolved', 0 solutions, all 34 chapter mocks held (~6,513 issues). Cause: the reader did not know headings like 'Answer key – <chapter name>' / '<chapter name> – Solutions', paired key-table cells '1' with '11' when keys print as '(B)', and took '…Differentiability)' inside working as a new chapter.
+- chapter_reader: named_role() (role heading naming a known chapter, digit-led titles like '3D Geometry' allowed), name_heading() rejects brackets, bookmark_plan() adds key/solution starts from child bookmarks.
+- book_reader (READER_VERSION 4): key table + solutions on one page are both read; '(B)' key cells; group labels '(Q16–Q30)' not flagged; under a plan only the current chapter's printed key/solution headings are used.
+- book_worker: use_bookmark_parts() reads by the PDF's bookmarks when they mark every chapter's key/solutions (owner plan wins); on the v4 re-read, never-released old-label mocks are deleted and kept pages are relabelled by page range.
+- Result on the owner's PDF: 32 chapters × 50 questions + 50 worked solutions + key, no conflicts; only Mathematical Induction Q37/Q38 (page 183, tall matrix) held for a crop fix.
+- Tests: iteration_190 (all requested passed), iteration_191 + self-run tests/maths_bookmarks_iso190.py 36/39 — the 3 failures are a synthetic case (published old-label mock owning part of a chapter), impossible on the live book (0 published mocks). Regressions 178/182/key_table_split190 pass. NOT deployed.
+- Known stale suites: book_publishing_iso170, book_publishing_rules_iso170, book_capture_iso170 (uploads lack section_id).
+
+
 ## 2026-11-16 — Owner editing power (preview only, NOT deployed)
 - Edit questions on every Draft PDF mock: answer buttons A–E, type options the picture cuts off (students see them under the picture), change the answer; filter "Fewer than 4 options".
 - PDF upload: 8 retries with backoff and 90 s per part, waits while offline, resumes a half-sent copy even after it was moved to the Library.

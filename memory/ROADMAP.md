@@ -29,6 +29,10 @@
 # Active roadmap
 
 
+## Chapter-wise solutions reader (2026-11-16)
+- P0: Deploy when the user says "Deploy". After deploy every unpublished PDF is re-read automatically by reader v4 (published papers and owner repairs kept); 'bitsat maths final' should show 31 ready chapters + Mathematical Induction held for Q37/Q38 crop.
+- P2: a published old-label mock that owns only part of a bookmark chapter leaves that chapter held after a plan switch (not the case on the live book).
+
 ## Simple start + get-ready + AITS results (2026-11-16)
 - P0: Deploy when the user says "Deploy" — the live site still has the slow "Check my device" until then.
 - Note: AITS solutions now open during the live day (owner's choice); a student who finishes early can share them with later starters.
