@@ -52,6 +52,7 @@ class HistoryItem(BaseModel):
     resumable: bool = False
     result_available: bool = False
     compare_eligible: bool = False
+    deleted: bool = False
 
 
 def save_id(user_id, set_id):
@@ -147,8 +148,8 @@ def history_item(a, t):
         saved_answers=sum(bool(str(v.get('value', '')).strip()) for v in (a.get('answers') or {}).values()),
         last_saved_at=max(acknowledgements) if acknowledgements else None, count=a.get('count', len(a.get('questions', []))),
         summary=summary_value, version=a.get('version'), report_allowed=bool(a.get('report_allowed')) and bool(summary_value) and a.get('competition_end', 0) <= t,
-        resumable=active, result_available=not active,
-        compare_eligible=bool(summary_value) and a.get('mode') == 'practice' and not a.get('parent_attempt') and not a.get('competition_end'))
+        resumable=active, result_available=not active, deleted=bool(a.get('set_deleted')),
+        compare_eligible=bool(summary_value) and a.get('mode') == 'practice' and not a.get('parent_attempt') and not a.get('competition_end') and not a.get('set_deleted'))
 
 
 @router.get('')
@@ -175,7 +176,7 @@ async def my_tests(tab: Literal['progress', 'saved', 'completed'] = 'progress', 
         elif status == 'embargoed': match['$and'].append({'status': 'completed', 'competition_end': {'$gt': t}, 'series_id': {'$exists': True}})
         elif status == 'active': match['$and'].append(active)
         total = await attempts.count_documents(match)
-        projection = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'status', 'mode', 'started_at', 'submitted_at', 'deadline', 'count', 'summary', 'version', 'report_allowed', 'answers', 'competition_end', 'parent_attempt', 'series_id')}
+        projection = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'status', 'mode', 'started_at', 'submitted_at', 'deadline', 'count', 'summary', 'version', 'report_allowed', 'answers', 'competition_end', 'parent_attempt', 'series_id', 'set_deleted')}
         rows = await attempts.find(match, {'_id': 0, **projection}).sort([('started_at', -1), ('id', -1)]).skip((page-1)*SIZE).limit(SIZE).to_list(SIZE)
         items = [history_item(a, t).model_dump() for a in rows]
     return {'items': items, 'total': total, 'page': page, 'pages': max(1, math.ceil(total/SIZE)), 'counts': counts, 'server_now': t}

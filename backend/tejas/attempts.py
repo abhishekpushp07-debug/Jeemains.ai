@@ -477,6 +477,10 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
 
     a = await expire(await owned(id, u))
     t = a.get('_database_now', now())
+    if a.get('set_deleted'):
+        # The owner deleted this test: only the score line is kept.
+        return {'id': id, 'title': a['title'], 'exam': a.get('exam'), 'status': 'deleted', 'submitted_at': a.get('submitted_at'),
+                'summary': None if score_sealed(a, t) else a.get('summary'), 'server_now': t}
     if a['status'] == 'completed' and a.get('competition_end', 0) > t:
         sealed = {'id': id, 'title': a['title'], 'status': 'embargoed', 'release_at': a['competition_end'], 'receipt': a.get('receipt'), 'server_now': t, 'series_id': a.get('series_id')}
         if not score_sealed(a, t):

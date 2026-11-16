@@ -273,10 +273,10 @@ from .live_series import Assignment, Fill, Clear
 
 from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix
 from .structure import ExamInput, ExamPatch, SectionInput, SectionPatch, OrderInput, TestPatch, PublishInput
-from .library import ArchiveInput, RestoreInput
+from .library import ArchiveInput, RestoreInput, DeleteInput
 from .master import StatusInput
 from .written import WrittenInput, WrittenPatch, QuestionInput, PasteInput
-from .series_admin import SeriesConfig, SeriesAssign, SeriesUnassign
+from .series_admin import SeriesConfig, SeriesAssign, SeriesUnassign, SeriesLive
 from .chapter_split import ChapterNames, Starts
 
 MODELS = {
@@ -293,11 +293,11 @@ MODELS = {
     'live_series.fill': Fill, 'live_series.clear': Clear,
     'structure.publish_ready_items': PublishInput,
     'book_imports.fix_question': QuestionFix,
-    'library.archive': ArchiveInput, 'library.restore': RestoreInput,
+    'library.archive': ArchiveInput, 'library.restore': RestoreInput, 'library.delete': DeleteInput,
     'master.change_status': StatusInput,
     'written.create_written': WrittenInput, 'written.update_written': WrittenPatch,
     'written.save_question': QuestionInput, 'written.paste': PasteInput, 'written.delete_question': EmptyPayload,
-    'series_admin.update_config': SeriesConfig, 'series_admin.assign': SeriesAssign, 'series_admin.unassign': SeriesUnassign,
+    'series_admin.update_config': SeriesConfig, 'series_admin.assign': SeriesAssign, 'series_admin.unassign': SeriesUnassign, 'series_admin.paper_live': SeriesLive,
     'series_admin.fill': EmptyPayload, 'series_admin.clear': EmptyPayload,
     'chapter_split.save_details': ChapterNames, 'chapter_split.save_starts': Starts, 'chapter_split.clear_starts': EmptyPayload,
     'draft_preview.open_preview': EmptyPayload,

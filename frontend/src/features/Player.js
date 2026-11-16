@@ -364,7 +364,7 @@ export default function Player() {
                 answering; do not guess missing content.
               </div>
             )}
-            {q.type==='mcq'&&q.render_mode==='source'&&<p className="source-options-hint" data-testid="player-source-options-hint">{q.source_option_labels ? 'Read options 1–4 in the original image above, then select the matching number.' : 'Read options A–D in the original image above, then select the matching letter.'}</p>}
+            {q.type==='mcq'&&q.render_mode==='source'&&<p className="source-options-hint" data-testid="player-source-options-hint">{Object.keys(q.typed_options||{}).length ? 'Read the options in the picture above. Options the picture does not show are typed below.' : q.source_option_labels ? 'Read options 1–4 in the original image above, then select the matching number.' : 'Read options A–D in the original image above, then select the matching letter.'}</p>}
             <fieldset disabled={locked} className="answer-fieldset">
               <legend>
                 {q.type === "mcq"
@@ -392,7 +392,7 @@ export default function Player() {
                       <span className="option-index" data-testid={'player-option-label-' + key}>{q.source_option_labels?.[key] || key}</span>
                       <div className="option-copy" data-testid={'player-option-math-' + key}>
                         {q.render_mode === 'source'
-                          ? `Option ${q.source_option_labels?.[key] || key} (as shown above)`
+                          ? (q.typed_options?.[key] ? <MathText text={q.typed_options[key]} /> : `Option ${q.source_option_labels?.[key] || key} (as shown above)`)
                           : <MathText text={value} />}
                       </div>
                       {current.value === key && (

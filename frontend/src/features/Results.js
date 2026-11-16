@@ -28,7 +28,7 @@ import {
 import { QuestionContent, MathText } from "../components/QuestionContent";
 import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalyticsWorkspace';
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
-import { EmbargoedResult } from '../components/results/EmbargoedResult';
+import { EmbargoedResult, DeletedResult } from '../components/results/EmbargoedResult';
 import { ReportButton } from "../components/ReportButton";
 import { MockSectionScores } from '../components/results/MockSectionScores';
 import {BitsatBranchView} from '../components/results/BitsatBranchView';
@@ -142,7 +142,8 @@ export default function Results() {
       try {
         const result = await api('/attempts/' + id + '/results?score_version=' + encodeURIComponent(scoreVersion), { signal: controller.signal });
         if (controller.signal.aborted) return;
-        if (result.status === 'embargoed') {
+        if (result.status === 'deleted') setPending(result);
+        else if (result.status === 'embargoed') {
           setPending(result);
           if (result.score_released && !result.summary && ++polls < 45) { timer = setTimeout(load, 3000 + Math.random() * 1000); }
         }
@@ -172,6 +173,7 @@ export default function Results() {
       setBusy(false);
     }
   }
+  if (pending?.status === 'deleted') return <DeletedResult pending={pending} />;
   if (pending?.status === 'embargoed') return <EmbargoedResult pending={pending} onRefresh={() => setRefresh(v => v + 1)} />;
   if (pending) return <div className="container page" data-testid="results-grading-pending">
     <PageTitle eyebrow="SUBMISSION RECEIVED" title="Your answers are safely submitted." description="Your sealed answers are being graded in the background. You can leave this page and return from your exam’s Results section." />
@@ -489,6 +491,13 @@ export default function Results() {
                         <div key={k} className="review-option-math" data-testid={'review-option-' + q.number + '-' + k}>
                           <strong>{k}.</strong> <MathText text={v} />
                         </div>
+                    ))}
+                  </div>
+                )}
+                {q.render_mode === "source" && q.type === "mcq" && Object.keys(q.typed_options || {}).length > 0 && (
+                  <div className="review-options" data-testid={'review-typed-options-' + q.number}>
+                    {Object.entries(q.typed_options).map(([k, v]) => (
+                        <div key={k} className="review-option-math"><strong>{k}.</strong> <MathText text={v} /></div>
                     ))}
                   </div>
                 )}

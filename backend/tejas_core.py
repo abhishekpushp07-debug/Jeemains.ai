@@ -236,6 +236,7 @@ def public_question(q):
             "accessible_text",
             "q_refs",
             "bonus",
+            "typed_options",
         ]
     }
 

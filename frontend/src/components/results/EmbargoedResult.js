@@ -17,6 +17,18 @@ function LiveScore({ s }) {
   </section>;
 }
 
+export function DeletedResult({ pending }) {
+  const score = pending.summary;
+  return <div className="container page" data-testid="results-deleted">
+    <PageTitle eyebrow="RESULT" title="This test was deleted." description={pending.title} />
+    {score && <LiveScore s={score} />}
+    <section className={'import-card' + (score ? ' mt-6' : '')}>
+      <p className="import-muted" data-testid="results-deleted-note">The owner removed this test from the website. Your score is kept here, but its questions and solutions can no longer be opened.</p>
+      <div className="flex flex-wrap gap-3 mt-6"><Button asChild><Link to="/profile" data-testid="results-deleted-my-tests">My Tests</Link></Button></div>
+    </section>
+  </div>;
+}
+
 export function EmbargoedResult({ pending, onRefresh }) {
   const open = pending.score_released, score = pending.summary;
   return <div className="container page" data-testid="results-embargoed">

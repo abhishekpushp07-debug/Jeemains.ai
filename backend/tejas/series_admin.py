@@ -43,6 +43,11 @@ class SeriesUnassign(Payload):
     id: Identity
 
 
+class SeriesLive(Payload):
+    id: Identity
+    live: bool
+
+
 async def seed_jee():
     from .structure import sections
     await series.update_one({'_id': SERIES_ID}, {'$setOnInsert': {**JEE, 'created_at': now()}}, upsert=True)
@@ -194,7 +199,7 @@ async def slots(cfg, t, studio=False):
                 'can_start': ready and state in ('live', 'archive')}
         if studio:
             m = pending.get(day)
-            slot.update(opened=t >= w['opens_at'], paper={'kind': 'set', 'id': s['id'], 'title': s.get('display_title') or s['title'], 'written': bool(s.get('written'))} if s
+            slot.update(opened=t >= w['opens_at'], paper={'kind': 'set', 'id': s['id'], 'title': s.get('display_title') or s['title'], 'written': bool(s.get('written')), 'off': bool(s.get('owner_unlive'))} if s
                         else {'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'pending': True} if m else None)
         out.append(slot)
     return out
@@ -473,6 +478,17 @@ async def unassign(sid: str, body: SeriesUnassign, u=Depends(owner)):
         await db.tejas_book_mocks.update_one({'_id': body.id}, {'$set': {'series_date': None, 'series_id': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
         await audit(u['id'], 'Test series day removed', body.id, m['series_date'])
     return {'message': 'Day freed. The paper is back in the list without a day.'}
+
+
+@router.post('/admin/master/series/{sid}/live')
+async def paper_live(sid: str, body: SeriesLive, u=Depends(owner)):
+    """Off hides one day's paper from students; Live shows it again. The day still decides when it opens."""
+    cfg = await series_cfg(sid)
+    done = await sets.update_one({'id': body.id, 'series_id': cfg['id']}, {'$unset': {'owner_unlive': ''}} if body.live else {'$set': {'owner_unlive': True}})
+    if not done.matched_count:
+        raise HTTPException(404, 'This paper has no day in this series. Reload.')
+    await audit(u['id'], 'Test series paper ' + ('Live' if body.live else 'Off'), body.id, '')
+    return {'message': 'Live again. Students see it on its day.' if body.live else "Switched off. Students do not see this day's paper until you switch it back on."}
 
 
 @router.post('/admin/master/series/{sid}/clear')

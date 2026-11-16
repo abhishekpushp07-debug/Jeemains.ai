@@ -28,7 +28,7 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
   const file=await mergePdfs([main,key,sols].filter(Boolean),main.name);
   await sendBook({file,title:name,sectionId:section.id,replace,year:pyq?Number(year):null,subject:chapters?subject:'',stopped,onProgress:(m,p)=>{setMsg(m);setProgress(p);}});
   toast.success('Uploaded. Reading happens in the background; you can close this screen.');onStarted();onClose();
- }catch(e){toast.error(e.message);setMsg('');}finally{setBusy(false);}}
+ }catch(e){toast.error(e.message);setMsg(e.message);}finally{setBusy(false);}}
  const ok=main&&rights&&(!pyq||/^\d{4}$/.test(year));
  return <Dialog open={open} onOpenChange={v=>!v&&!busy&&onClose()}><DialogContent className="tejas-dialog admin-dialog master-dialog" data-testid="upload-dialog">
   <DialogTitle>Upload PDF to {section.name}</DialogTitle>

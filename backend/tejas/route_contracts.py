@@ -70,6 +70,8 @@ SPEC = {
     'series_admin.clear': ('owner_future_days_only','control','idempotent_clear'),
     'library.archive': ('owner_only_library_move','control','idempotent_flag_audited'),
     'library.restore': ('owner_only_library_restore','control','idempotent_flag_audited'),
+    'library.delete': ('owner_only_library_permanent_delete','control','typed_confirm_idempotent_audited'),
+    'series_admin.paper_live': ('owner_series_paper_only','control','idempotent_flag_audited'),
     'library.export': ('owner_only_library_export','batch','read'),
     'live_series.fill': ('owner_future_days_only','control','free_days_in_order_audited'),
     'live_series.clear': ('owner_future_days_only','control','revision_CAS'),
@@ -266,8 +268,10 @@ def install_contracts(app):
             limit = 512 * 1024
         elif key in ('book_imports.rules', 'book_imports.allowance'):
             limit = 128 * 1024
-        elif key in ('structure.order_tests', 'structure.order_sections', 'master.change_status', 'chapter_split.save_starts', 'chapter_split.save_details'):
+        elif key in ('structure.order_tests', 'structure.order_sections', 'master.change_status', 'chapter_split.save_starts', 'chapter_split.save_details', 'library.restore', 'library.delete'):
             limit = 128 * 1024
+        elif key == 'book_imports.fix_question':
+            limit = 64 * 1024
         elif key in ('written.save_question', 'written.paste'):
             limit = 512 * 1024
         if not writes or upload:

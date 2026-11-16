@@ -49,7 +49,13 @@ class RestoreInput(Payload):
     uploads: list[UploadRef] = Field(default_factory=list, max_length=500)
 
 
+class DeleteInput(RestoreInput):
+    confirm: Literal['DELETE']
+
+
 UPLOADS = {'book': ('tejas_books', '_id'), 'chapter_book': ('tejas_chapter_books', 'id'), 'import': ('tejas_imports', 'id')}
+FIELD = {'book': 'book_import_id', 'chapter_book': 'chapter_book_id', 'import': 'import_id'}
+BOOK_PARTS = ('tejas_book_pages', 'tejas_book_page_history', 'tejas_book_parts', 'tejas_book_mocks', 'tejas_book_allowances', 'tejas_book_supplements')
 
 
 async def archive_sets(ids, actor, reason, guard=GUARD):
@@ -122,7 +128,7 @@ async def archived_uploads(rows):
         if b['_id'] not in linked['book_import_id']:
             out.append({'kind': 'book', 'id': b['_id'], 'title': b['payload']['title'], 'place': where(b['payload'].get('destination') or {}), 'archived_at': b.get('archived_at')})
     titles = {b['_id']: b['payload'] for b in await db.tejas_books.find({'removed': False, 'archived': {'$ne': True}}, {'_id': 1, 'payload.title': 1, 'payload.destination': 1}).to_list(5000)}
-    for m in await db.tejas_book_mocks.find({'archived': True, 'set_id': None, 'book_id': {'$in': list(titles)}}, {'_id': 1, 'book_id': 1, 'label': 1}).to_list(2000):
+    for m in await db.tejas_book_mocks.find({'archived': True, 'deleted': {'$ne': True}, 'set_id': None, 'book_id': {'$in': list(titles)}}, {'_id': 1, 'book_id': 1, 'label': 1}).to_list(2000):
         out.append({'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'place': where(titles[m['book_id']].get('destination') or {}), 'archived_at': None})
     for name, kind, field in (('tejas_chapter_books', 'chapter_book', 'chapter_book_id'), ('tejas_imports', 'import', 'import_id')):
         for r in await db[name].find({'archived': True}, {'_id': 0, 'id': 1, 'title': 1, 'destination': 1, 'archived_at': 1}).to_list(500):
@@ -229,6 +235,74 @@ async def restore(body: RestoreInput, u=Depends(owner)):
     if dayless:
         message += f" {dayless} series paper{'s' if dayless != 1 else ''} came back without a day because the day is taken: give {'them' if dayless != 1 else 'it'} a free day in the series."
     return {'restored': n, 'uploads': k, 'without_day': dayless, 'message': message}
+
+
+@router.post('/admin/library/delete')
+async def delete(body: DeleteInput, u=Depends(owner)):
+    if not body.ids and not body.uploads:
+        raise HTTPException(422, 'Choose what to delete.')
+    await check_uploads(body.uploads)
+    n, gone = await delete_sets(body.ids)
+    k = await delete_uploads(body.uploads) + gone
+    await audit(u['id'], 'Deleted from Library', ','.join(body.ids[:20] + [r.id for r in body.uploads[:20]]), f'{n} tests, {k} uploads')
+    parts = [f"{n} test{'s' if n != 1 else ''}"] if n or not k else []
+    parts += [f"{k} upload{'s' if k != 1 else ''}"] if k else []
+    return {'deleted': n, 'uploads': k, 'message': ' and '.join(parts) + " deleted for good. Students keep their score lines."}
+
+
+async def drop_source(name, key, sid):
+    """An upload's records leave the database. The platform file store keeps the original file bytes (it has no delete)."""
+    if name == 'tejas_books':
+        for part in BOOK_PARTS:
+            await db[part].delete_many({'book_id': sid})
+        await db.tejas_jobs.delete_many({'set_id': sid, 'kind': 'book_step', 'status': {'$ne': 'running'}})
+    await db[name].delete_one({key: sid})
+
+
+async def delete_sets(ids):
+    """Library tests leave for good; each attempt keeps its score line. A source upload in the Library that no test uses any more goes too."""
+    from .canonical import database_now
+    rows = await sets.find({'id': {'$in': ids}, 'archived': True}, {'_id': 0, 'id': 1, **{f: 1 for f, _, _ in SOURCES}}).to_list(3000)
+    keep = [r['id'] for r in rows]
+    if not keep:
+        return 0, 0
+    t = await database_now()
+    if await attempts.find_one({'set_id': {'$in': keep}, 'status': 'active', '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}, {'_id': 1}):
+        raise HTTPException(409, 'A student is still writing one of these tests. Try again when their time is up.')
+    await attempts.update_many({'set_id': {'$in': keep}}, {'$set': {'set_deleted': True, 'set_deleted_at': now()}})
+    for name in ('tejas_saved_tests', 'tejas_question_solutions', 'tejas_versions'):
+        await db[name].delete_many({'set_id': {'$in': keep}})
+    await db.tejas_book_mocks.update_many({'set_id': {'$in': keep}}, {'$set': {'archived': True, 'deleted': True}})
+    await sets.delete_many({'id': {'$in': keep}, 'archived': True})
+    gone = 0
+    for field, name, key in SOURCES:
+        for sid in {r[field] for r in rows if r.get(field)}:
+            if not await sets.find_one({field: sid}, {'_id': 1}) and await db[name].find_one({key: sid, 'archived': True}, {'_id': 1}):
+                await drop_source(name, key, sid)
+                gone += 1
+    return len(keep), gone
+
+
+async def check_uploads(refs):
+    for r in refs:
+        if r.kind != 'book_mock' and await sets.find_one({FIELD[r.kind]: r.id, 'archived': {'$ne': True}}, {'_id': 1}):
+            raise HTTPException(409, 'Some tests made from this upload are still in Master. Move them to the Library first, then delete.')
+
+
+async def delete_uploads(refs):
+    mocks = [r.id for r in refs if r.kind == 'book_mock']
+    n = (await db.tejas_book_mocks.update_many({'_id': {'$in': mocks}, 'archived': True, 'set_id': None}, {'$set': {'deleted': True}})).modified_count if mocks else 0
+    for r in refs:
+        if r.kind == 'book_mock':
+            continue
+        name, key = UPLOADS[r.kind]
+        if not await db[name].find_one({key: r.id, 'archived': True}, {'_id': 1}):
+            continue
+        await delete_sets(await sets.distinct('id', {FIELD[r.kind]: r.id}))
+        if await db[name].find_one({key: r.id}, {'_id': 1}):
+            await drop_source(name, key, r.id)
+        n += 1
+    return n
 
 
 def safe(text):

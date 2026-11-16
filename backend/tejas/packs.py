@@ -174,7 +174,7 @@ async def seal(questions):
                 "approved_at",
                 "disposition",
                 "accepted_answers",
-                "source_option_labels", "source_warning", "source_evidence", "pairing_evidence",
+                "source_option_labels", "source_warning", "source_evidence", "pairing_evidence", "typed_options",
             }
         }
         for q in questions

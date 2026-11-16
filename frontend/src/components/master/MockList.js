@@ -4,6 +4,7 @@ import {ChevronDown,Wrench,PencilLine,Eye,Pencil,RefreshCw,Archive,Radio,Calenda
 import {post,patch} from '../../lib/api';
 import {invalidateCatalog} from '../../lib/catalog';
 import {Button} from '../ui/button';
+import {Switch} from '../ui/switch';
 import {DropdownMenu,DropdownMenuTrigger,DropdownMenuContent,DropdownMenuItem,DropdownMenuSeparator} from '../ui/dropdown-menu';
 import {TextDialog,ConfirmDialog} from '../admin/AdminShared';
 import {ScheduleDialog} from './ScheduleDialog';
@@ -13,10 +14,20 @@ import {toast} from 'sonner';
 
 const key=m=>m.kind+':'+m.id;
 
+function LiveSwitch({m,busy,onPick}){
+ const on=['live','scheduled','publishing'].includes(m.status);
+ const blocked=busy||m.status==='publishing'||m.status==='ended'||(!on&&(m.to_fix>0||m.empty));
+ const word={scheduled:'Scheduled',publishing:'Going live',ended:'Ended'}[m.status]||(on?'Live':'Off');
+ return <label className={'master-live-switch'+(on?' is-on':'')} title={m.to_fix>0&&!on?'Fix its marked questions first':undefined}>
+  <Switch checked={on} disabled={blocked} onCheckedChange={v=>onPick(v?'live':'off',[m])} aria-label={(on?'Switch off ':'Make Live ')+m.title} data-testid={'mock-live-switch-'+m.id}/>
+  <span data-testid={'mock-live-word-'+m.id}>{word}</span>
+ </label>;
+}
+
 function StatusMenu({m,busy,onPick}){
  const [label,tone]=StatusLabel({m});
  const blocked=m.to_fix>0||m.empty;
- return <DropdownMenu><DropdownMenuTrigger asChild disabled={busy||m.status==='publishing'}><button type="button" className={'admin-chip master-status tone-'+tone} data-testid={'mock-status-'+m.id} aria-label={`Status ${label}. Change status of ${m.title}`}><i aria-hidden="true"/>{label}<ChevronDown size={13} aria-hidden="true"/></button></DropdownMenuTrigger>
+ return <DropdownMenu><DropdownMenuTrigger asChild disabled={busy||m.status==='publishing'}><button type="button" className={'admin-chip master-status tone-'+tone} data-testid={'mock-status-'+m.id} aria-label={`Status ${label}. Change status of ${m.title}`}><span className="master-status-caption">Status</span><i aria-hidden="true"/>{label}<ChevronDown size={13} aria-hidden="true"/></button></DropdownMenuTrigger>
   <DropdownMenuContent align="end" className="master-menu">
    <DropdownMenuItem disabled={blocked||m.status==='live'} onSelect={()=>onPick('live',[m])} data-testid={'mock-make-live-'+m.id}><Radio size={15}/>Make Live</DropdownMenuItem>
    <DropdownMenuItem disabled={blocked||m.locked} onSelect={()=>onPick('scheduled',[m])} data-testid={'mock-schedule-'+m.id}><CalendarClock size={15}/>Schedule…</DropdownMenuItem>
@@ -32,12 +43,13 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
   m.status==='scheduled'&&m.start_at?`Opens ${fmtIST(m.start_at)}`:null,m.live_exam?'Live exam':null].filter(Boolean).join(' · ');
  const main=m.to_fix>0?<Button asChild size="sm"><Link to={fixLink(m)} data-testid={'mock-fix-'+m.id}><Wrench size={15}/>Fix</Link></Button>
   :m.written?<Button asChild size="sm" variant="outline"><Link to={'/super-admin/write/'+m.id} data-testid={'mock-edit-'+m.id}><PencilLine size={15}/>Edit</Link></Button>
+  :m.kind==='book_mock'&&m.status==='draft'?<Button asChild size="sm" variant="outline"><Link to={`/super-admin/fix/${m.book_id}/${m.id}?all=1`} data-testid={'mock-edit-questions-'+m.id}><PencilLine size={15}/>Edit</Link></Button>
   :m.kind==='set'&&m.status!=='draft'?<Button asChild size="icon" variant="ghost"><Link to={'/sets/'+m.id} aria-label={'See '+m.title+' as a student'} data-testid={'mock-student-'+m.id}><Eye size={16}/></Link></Button>:null;
  return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}>
   <input type="checkbox" className="admin-row-check" checked={checked} onChange={e=>onCheck(m,e.target.checked)} aria-label={'Select '+m.title} data-testid={'mock-select-'+m.id}/>
   <span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
   <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts}</small>{m.replace_pending&&<small className="admin-replacing">Being replaced by “{m.replace_pending}”. It moves to the Library when that goes Live.</small>}</div>
-  <StatusMenu m={m} busy={busy} onPick={onPick}/>
+  <div className="master-row-status"><LiveSwitch m={m} busy={busy} onPick={onPick}/><StatusMenu m={m} busy={busy} onPick={onPick}/></div>
   <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&<TryAsStudent m={m}/>}{main}{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Rename '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>
  </li>;
 }

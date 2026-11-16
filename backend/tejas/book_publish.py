@@ -159,6 +159,7 @@ async def rebuild(book, token):
             answer=next(iter(answers)) if len(answers)==1 else ''
             if not answer:issues.append(f'{first.subject} Q{first.number}: missing or conflicting supplied key.')
             labels_for_options=list(dict.fromkeys(x for _,r in entries for x in r.option_labels))
+            typed={x:t for _,r in entries for x,t in r.option_texts.items() if x in labels_for_options and t}
             kind=first.response_type if first.response_type!='unresolved' or len(labels_for_options)<2 else 'mcq'
             if kind=='unresolved':issues.append(f'{first.subject} Q{first.number}: response type is unresolved.')
             if kind=='mcq' and (len(labels_for_options)<2 or answer not in labels_for_options):issues.append(f'{first.subject} Q{first.number}: incomplete options or key does not match printed labels.')
@@ -173,7 +174,7 @@ async def rebuild(book, token):
             shared=[(p,r) for p,r in relevant if r.role=='shared' and normalized(r.subject)==key[0] and normalized(r.section or r.subject)==key[1] and key[2] in r.shared_for]
             qid=identity(mock.id,mock.generation,*key)
             questions.append({'id':qid,'number':position,'original_number':first.number,'subject':first.subject,'section':first.section or first.subject,
-                'type':kind,'answer':answer,'options':{x:'Original option '+x for x in labels_for_options},
+                'type':kind,'answer':answer,'options':{x:'Original option '+x for x in labels_for_options},**({'typed_options':typed} if typed and kind=='mcq' else {}),
                 'text':'\n'.join(r.text for _,r in entries) or f'Original question {first.number}; image transcription unavailable.',
                 'solution_kind':'supplied_worked' if solutions else 'answer_key_only',
                 'solution':'Original book worked solution.' if solutions else f'Supplied answer key: {answer}. This book does not contain a worked solution.',

@@ -35,7 +35,13 @@ async def create(body:UploadInput,u=Depends(owner)):
     while (existing:=await db.tejas_books.find_one({'_id':id})):
         book=Book.from_mongo(existing)
         if book.removed:raise HTTPException(409,'This PDF was uploaded before and its access was removed, so it cannot be imported again.')
-        if not existing.get('archived') and (book.payload.get('destination') or {}).get('section_id')==body.section_id:return await book_view(book)
+        same=(book.payload.get('destination') or {}).get('section_id')==body.section_id
+        if not existing.get('archived') and same:return await book_view(book)
+        # A half-sent copy moved to the Library carries on from the parts it already has.
+        if same and book.state=='uploading':
+            await db.tejas_books.update_one({'_id':id,'archived':True},[{'$set':{'paused':{'$ifNull':['$paused_before_archive',False]}}},{'$unset':['archived','archived_at','paused_before_archive']}])
+            await audit(u['id'],'Book upload resumed',id,'Half-sent copy taken back from the Library')
+            return await book_view(await load_book(id,u))
         id=identity(id,'next',body.section_id)
     from .structure import destination, mark_replacing
     replace=['all'] if body.replace_all else body.replace_ids
@@ -292,8 +298,8 @@ async def request_publication(bid,wanted,release_at,bg,u):
     return len(picked)
 
 
-def question_problems(mock):
-    """Group a held mock's blocking issues by the question they concern."""
+def question_problems(mock, everything=False):
+    """Group a held mock's blocking issues by the question they concern; everything=True lists clean questions too."""
     out,used=[],set()
     for q in mock.questions:
         n=q['original_number'];pages=sorted({r['page'] for r in q['source_regions']['question']})
@@ -303,8 +309,8 @@ def question_problems(mock):
             m=re.match(r'Page (\d+)(?:, |: )Q(\d+)\b',x)
             if (m and int(m.group(2))==n and int(m.group(1)) in near) or x.startswith(f"{q['subject']} Q{n}:"):
                 mine.append(x);used.add(i)
-        if mine:
-            out.append({'id':q['id'],'subject':q['subject'],'section':q['section'],'number':n,'type':q['type'],'options':list(q.get('options',{})),
+        if mine or everything:
+            out.append({'id':q['id'],'subject':q['subject'],'section':q['section'],'number':n,'type':q['type'],'options':list(q.get('options',{})),'typed_options':q.get('typed_options',{}),
                 'answer':q.get('answer',''),'issues':mine,'pages':pages,'next_page':pages[-1]+1 if pages else None,
                 'question_images':len(q['source_regions']['question']),'solution_images':len(q['source_regions']['solution']),
                 'has_key':bool(q['source_regions']['solution']),'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
@@ -312,10 +318,10 @@ def question_problems(mock):
 
 
 @router.get('/admin/books/{id}/mocks/{mid}/problems')
-async def mock_problems(id:str,mid:str,u=Depends(staff)):
+async def mock_problems(id:str,mid:str,every:bool=Query(False,alias='all'),u=Depends(staff)):
     await load_book(id);row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
     if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
-    mock=BookMock.from_mongo(row);questions,general=question_problems(mock)
+    mock=BookMock.from_mongo(row);questions,general=question_problems(mock,every and u['role']=='owner')
     return {'id':mock.id,'label':(mock.chapter or {}).get('title') or mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
             'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
 
@@ -336,6 +342,8 @@ async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depe
         answer=body.answer.strip().upper() if mcq else body.answer.strip()
         if mcq and (len(labels)<2 or answer not in labels):raise HTTPException(422,'Tick at least two printed options and choose the correct one among them.')
         if not mcq and not re.fullmatch(r'[+-]?\d{1,20}',answer):raise HTTPException(422,'A numerical answer must be a whole number, for example 12 or -3.')
+        texts={k:v.strip() for k,v in body.option_texts.items() if mcq and k in labels and v.strip()}
+        if any(len(v)>2000 for v in texts.values()):raise HTTPException(422,'Keep each typed option under 2,000 characters.')
         n=q['original_number'];label=normalized(mock.label);ident=(normalized(q['subject']),normalized(q['section']),n)
         coverage=f"{q['subject']}|{q['section']}|{n}"
         if body.key_only:
@@ -355,13 +363,14 @@ async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depe
             for r in p.regions:
                 if mine(r) and r.role=='question' and exact(r):
                     r.response_type=body.response_type;r.complete=True;r.checked=True;r.option_labels=[] if r.continuation else labels
+                    r.option_texts={} if r.continuation else texts
                     changed[p.number]=p
             if p.number in near:
                 kept=[x for x in p.issues if not re.match(rf'Q{n}\b',x)]
                 if kept!=p.issues:p.issues=kept;changed[p.number]=p
         for p,r in keys:
             r.answer=answer;r.checked=True;changed[p.number]=p
-        note=f"Quick fix: {mock.label} {q['subject']} Q{n} = {answer} ({body.response_type})"
+        note=f"Quick fix: {mock.label} {q['subject']} Q{n} = {answer} ({body.response_type})"+(f" · typed options {','.join(texts)}" if texts else '')
         for p in changed.values():
             p.revision+=1;p.provenance={'kind':'owner_repair','actor':u['id'],'at':now(),'note':note,'previous':p.provenance.get('kind','native')}
             await fence(book,token)

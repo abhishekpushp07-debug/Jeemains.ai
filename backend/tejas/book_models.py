@@ -41,6 +41,8 @@ class Region(Input):
     text: str = Field(default='', max_length=30000)
     answer: str = Field(default='', max_length=40)
     option_labels: list[str] = Field(default_factory=list, max_length=8)
+    # Owner-typed text for options the page picture does not show (for example a crop that cuts off C and D).
+    option_texts: dict[str, str] = Field(default_factory=dict, max_length=8)
     response_type: Literal['mcq', 'integer', 'unresolved'] = 'unresolved'
     continuation: bool = False
     shared_for: list[int] = Field(default_factory=list, max_length=100)
@@ -58,6 +60,9 @@ class Region(Input):
             raise ValueError('Option labels must be unique.')
         if any(label not in ('A','B','C','D','1','2','3','4','E','F','G','H') for label in self.option_labels):
             raise ValueError('Unsupported option identifier.')
+        if any(len(v) > 2000 for v in self.option_texts.values()):
+            raise ValueError('Keep each typed option under 2,000 characters.')
+        self.option_texts = {k: v.strip() for k, v in self.option_texts.items() if k in self.option_labels and v.strip()}
         return self
 
 
@@ -128,6 +133,7 @@ class QuestionFix(Input):
     response_type: Literal['mcq', 'integer']
     option_labels: list[Literal['A', 'B', 'C', 'D', 'E']] = Field(default_factory=list, max_length=5)
     answer: str = Field(min_length=1, max_length=40)
+    option_texts: dict[Literal['A', 'B', 'C', 'D', 'E'], str] = Field(default_factory=dict, max_length=5)
     complete: Literal[True]
     key_only: bool = False
 
@@ -189,6 +195,7 @@ class BookMock(BaseDocument):
     series_date: str | None = None
     series_id: str | None = None
     archived: bool = False
+    deleted: bool = False
     live_exam: bool = False
     chapter: dict = Field(default_factory=dict)
 

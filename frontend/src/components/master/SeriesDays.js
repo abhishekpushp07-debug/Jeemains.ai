@@ -36,7 +36,7 @@ function Settings({open,onClose,data,onSaved}){
 }
 
 function Paper({c,free,busy,onAssign}){
- const link=c.kind==='written'?'/super-admin/write/'+c.id:c.held?`/super-admin/fix/${c.book_id}/${c.id}`:null;
+ const link=c.kind==='written'?'/super-admin/write/'+c.id:c.kind==='book_mock'?`/super-admin/fix/${c.book_id}/${c.id}${c.held?'':'?all=1'}`:null;
  return <li className="admin-row" data-testid={'series-paper-'+c.id}>
   <div className="admin-row-main"><strong>{c.title}</strong><small>{[c.book,plural(c.count,'question'),c.kind==='written'?'Written':c.kind==='set'?'Built, no day':'From PDF'].filter(Boolean).join(' · ')}</small>{c.problem&&<p className="admin-reason">{c.problem}</p>}</div>
   {link&&<Button asChild size="sm" variant={c.held||c.problem?'default':'outline'}><Link to={link} data-testid={'series-paper-open-'+c.id}>{c.held?<><Wrench size={15}/>Fix</>:<><PencilLine size={15}/>Edit</>}</Link></Button>}
@@ -69,6 +69,7 @@ export function SeriesDays({section,reloadKey,onChanged}){
    <ol className="master-days" data-testid="series-day-list">{data.slots.map(s=>{const [label,tone]=STATE[s.state]||STATE.upcoming;return <li key={s.date} className={'master-day'+(s.paper?' has-paper':'')+(s.opened?' is-opened':'')} data-testid={'series-day-'+s.day}>
     <span className="master-day-num">Day {s.day}</span><span className="master-day-date">{dayIST(s.date)}</span>
     <strong className="master-day-title">{s.paper?s.paper.title:'Free'}{s.paper?.pending&&<small> · being prepared</small>}</strong>
+    {s.paper?.kind==='set'&&<label className={'master-live-switch'+(s.paper.off?'':' is-on')}><Switch checked={!s.paper.off} disabled={busy} onCheckedChange={v=>run(()=>post(`/admin/master/series/${data.id}/live`,{id:s.paper.id,live:v}))} aria-label={(s.paper.off?'Make Live ':'Switch off ')+'day '+s.day} data-testid={'series-day-live-'+s.day}/><span data-testid={'series-day-live-word-'+s.day}>{s.paper.off?'Off':'Live'}</span></label>}
     <StatusChip state={tone==='live'?'live':tone} label={label} testId={'series-day-state-'+s.day}/>
     {s.paper&&!s.opened&&<Button size="icon" variant="ghost" disabled={busy} aria-label={'Free day '+s.day} onClick={()=>run(()=>post(`/admin/master/series/${data.id}/unassign`,{kind:s.paper.kind,id:s.paper.id}))} data-testid={'series-day-free-'+s.day}><X size={15}/></Button>}
    </li>;})}</ol>

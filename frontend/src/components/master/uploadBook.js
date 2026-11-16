@@ -3,6 +3,16 @@ import {api,post,fetchWithSession} from '../../lib/api';
 
 const sha=async data=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',data)),v=>v.toString(16).padStart(2,'0')).join('');
 const LIMIT=100*1024*1024;
+const TRIES=8;
+const wait=ms=>new Promise(done=>setTimeout(done,ms));
+
+// One part, with a time limit so a part lost on the way is sent again instead of waiting for ever.
+async function putPart(path,chunk){
+ const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),90000);
+ try{return await fetchWithSession(path,{method:'PUT',headers:{'Content-Type':'application/octet-stream'},body:chunk,signal:ctl.signal});}
+ catch{return null;}
+ finally{clearTimeout(timer);}
+}
 
 // Answer key and solutions PDFs are appended after the questions, so the reader sees one book.
 export async function mergePdfs(files,name){
@@ -31,13 +41,17 @@ export async function sendBook({file,title,sectionId,replace,year,subject,onProg
   onProgress(`Sending part ${i+1} of ${total}…`,sent/file.size);
   const chunk=file.slice(i*book.chunk_size,(i+1)*book.chunk_size),hash=await sha(await chunk.arrayBuffer());
   let r=null;
-  for(let tries=1;tries<=4;tries++){
-   try{r=await fetchWithSession(`/admin/books/${book.id}/parts/${i}?sha256=${hash}`,{method:'PUT',headers:{'Content-Type':'application/octet-stream'},body:chunk});}catch{r=null;}
+  for(let tries=1;tries<=TRIES;tries++){
+   while(navigator.onLine===false&&!stopped?.current){onProgress(`Internet is off. Waiting for it to come back (part ${i+1} of ${total})…`,sent/file.size);await wait(1500);}
+   if(stopped?.current)throw new Error('Paused. Choose the same PDF again to continue from where it stopped.');
+   r=await putPart(`/admin/books/${book.id}/parts/${i}?sha256=${hash}`,chunk);
    if(r&&(r.ok||(r.status<500&&r.status!==408&&r.status!==429)))break;
-   onProgress(`Connection problem on part ${i+1}. Retrying (${tries} of 3)…`,sent/file.size);
-   await new Promise(done=>setTimeout(done,1500*tries));
+   if(tries===TRIES)break;
+   const delay=Math.min(30000,2000*2**(tries-1));
+   onProgress(`Connection dropped on part ${i+1} of ${total}. Trying again in ${Math.round(delay/1000)} s (${tries} of ${TRIES-1})…`,sent/file.size);
+   await wait(delay);
   }
-  if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||'Sending stopped. Choose the same PDF again; parts already sent are kept.');}
+  if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||`Sending stopped at part ${i+1} of ${total}. Press Upload again with the same PDF: the ${i} parts already sent are kept.`);}
   sent+=size;
  }
  onProgress('Sent. Reading starts now.',1);
