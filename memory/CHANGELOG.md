@@ -168,3 +168,13 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - "Give a day" waits up to 30 s (one budget per request) for a busy PDF instead of the instant "book changed / processing" 409.
 - Tests: testing agent iteration_187 (47/47 new + 124/124 regression in isolated DBs, frontend all flows); follow-up fixes: schedule_data uses stored series_window, single wait budget, metric styling. NOT deployed.
 
+
+
+## 2026-11-16 — Simple Start test, 60 s get-ready with whole-paper loading, AITS score + solutions on submit
+- Live RCA (deployer): "Check my device" hung >2 min because POST /sets/{id}/preflight validated ~150 crops one by one (Cloudflare 100 s timeout), and the check repeated every minute per pod.
+- User (Hinglish): keep it simple for every test; Start test → 60 s counter with fun rules, "Begin now" allowed; whole paper must load at once and keep loading; AITS marks + solutions right after submit, rank after the day closes.
+- SetDetail.js rewritten: facts, marking, 3 steps, one "Start test" (no integer box, device check or checkbox). Start sends get_ready:true; start no longer needs preflight; preflight no longer validates sources (papers.needs_check removed).
+- attempts.start: ready_until = start + up to 60 s (shortened only so a live window never cuts solving time); deadline = ready_until + duration. POST /attempts/{id}/begin ends it early (deadline = now + duration). Answers and visits rejected while ready_until is in the future. GET /attempts/{id}/assets/pack returns 12 pictures per request (binary header + PNGs, skips a bad crop).
+- Frontend: GetReady.js (ring countdown, 6 rules, load bar, Begin now enabled at 100%, opens by itself at 0), preloadPaper in privateResources.js (2 workers, retries forever, falls back to single pictures, pins images in memory), useAttempt computes ready synchronously.
+- live_window.answers_sealed replaces score_sealed: All India series show score, answers, solutions, reviews, retry, report right after submit; regular live competitions unchanged. New GET /attempts/{id}/series-rank (sealed until the day closes, then rank among the day's live attempts; owner's early attempt counts as asked). SeriesRankCard on results. "Result sealed" status/filter removed. Texts updated (hub, banner, player, SeriesPage). docs/APP_INTEGRATION.md updated.
+- Tests: iteration_188 (backend 47/47 + 47/47 regression; 2 frontend bugs fixed), iteration_189 (109/109 backend, all retest items pass; last CSS band fixed and checked by screenshot). NOT deployed.

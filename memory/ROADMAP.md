@@ -29,6 +29,10 @@
 # Active roadmap
 
 
+## Simple start + get-ready + AITS results (2026-11-16)
+- P0: Deploy when the user says "Deploy" — the live site still has the slow "Check my device" until then.
+- Note: AITS solutions now open during the live day (owner's choice); a student who finishes early can share them with later starters.
+
 ## AITS dates + owner early access (2026-11-16)
 - P0: Deploy only when the user says "Deploy". On deploy, the one-time JEE dates job runs on live: series becomes 9 Dec 2026 – 27 Jan 2027; live papers on 1–8 Dec (or after 27 Jan) lose their day and show under "without a day" for the owner to give again.
 - Known minor: anonymous GET /api/sets/{id} still 404s for owner early papers (UI uses /api/my/sets/{id}, so no effect).

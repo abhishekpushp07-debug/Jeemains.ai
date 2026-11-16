@@ -397,13 +397,15 @@ async def visit_question(id: str, data: Visit, u=Depends(current)):
         UUID(qid)
     except ValueError:
         raise HTTPException(400, "Unknown question identity.")
-    a = await clocked_one(attempts, {"id": id, "user_id": u["id"]}, {"_id": 0, "status": 1, "deadline": 1, "visited": 1, f"response_schema.{qid}": 1, "questions.id": 1})
+    a = await clocked_one(attempts, {"id": id, "user_id": u["id"]}, {"_id": 0, "status": 1, "deadline": 1, "visited": 1, "ready_until": 1, f"response_schema.{qid}": 1, "questions.id": 1})
     if not a:
         raise HTTPException(404, "Attempt not found.")
     if a["status"] != "active" or (a["deadline"] and a['_database_now'] >= a["deadline"]):
         if a["status"] == "active":
             await finalize(id, "time_limit")
         raise HTTPException(409, "The attempt has ended.")
+    if a.get("ready_until", 0) > a['_database_now']:
+        raise HTTPException(409, "Your paper opens in a few seconds.", headers={"Retry-After": "2"})
     if qid not in a.get("response_schema", {}) and not any(q["id"] == qid for q in a.get("questions", [])):
         raise HTTPException(400, "Unknown question identity.")
     t = {"$divide": [{"$toLong": "$$NOW"}, 1000]}

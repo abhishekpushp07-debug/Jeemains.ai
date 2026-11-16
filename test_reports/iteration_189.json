@@ -1,0 +1,30 @@
+{
+  "summary": "Retest of the iteration_188 fixes plus regression, run only on disposable isolated databases. Backend: get_ready_iso188 47/47, series_dates_iso187 47/47, and the new get_ready_iso189 15/15 after one test-assertion fix (submit returns 202). Frontend at 1920px and 390px through ui_bridge188, with API calls routed to 127.0.0.1:8770. Passed: (a) on a fresh Start test, no /visit, no question-reports and no individual asset GET were sent during the countdown; the only calls were start and assets/pack. On reload during the countdown, the get-ready screen appeared on the first render with no /visit. /visit and question-reports start only after Begin now or auto-open. (b) The ring is 112x112 at both 390px and 1920px, and the seconds number is 35px. (c) Backend: pack skips a failing crop and missing source files, returns 200 with a header that lists only the rendered images, and keeps total. Frontend: the active player loads a stripped crop on its own. (d) PUT answer during the countdown returns 409 'Your paper opens in a few seconds…' with Retry-After 2. It saves normally after /begin or after the countdown. (e) The series eyebrow is 'JEE MAIN · ALL INDIA TEST SERIES' and the back link is 'Back to All India series'. The clock and shield icons sit inline. (f) At auto-open the timer showed 00:10:00 for a 10-minute paper, and 00:09:59 after Begin now. (g) The rank card shows '2:35 AM IST' when sealed and '#1 of 1' when ready. Regression passed: the 100% preload enables Begin now; series results open right away with the rank sealed; practice flow start → Begin now → answer (PUT 200, 'All responses saved') → submit → result. One part of (e) is NOT fixed: the empty band above the facts row is still there.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "POST /api/attempts/{id}/visit", "issue": "There is no ready_until guard on the server. The frontend no longer calls it during the countdown, so this is defence-in-depth only."}
+  ]},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "SetDetail start card (App.css)", "issue": "The empty band above the facts row is still there. The fix `.set-simple .instruction-facts { margin-top:0; border-top:0; padding-top:0 }` at App.css:1716 is overridden by `.set-detail .instruction-facts { margin: var(--space-6) 0 0; padding: var(--space-6) 0 }` at App.css:6478. Both rules have the same specificity and the later one wins. Computed margin-top is 24px and padding-top is 24px, plus 24px card padding: about 49px at 390px and about 68px at 1920px before the icons, against 27px side padding. Fix: raise specificity, e.g. `.set-detail.set-simple .instruction-facts {margin-top:0;padding-top:0;border-top:0}`, or move the rule after line 6478.", "selector": "[data-testid=set-facts]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Player after auto-open", "issues": ["The timer holds at 00:10:00 for about one to two ticks before counting down, because of the min() cap. It never goes above the duration, so this is acceptable and cosmetic."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/get_ready_iso189.py", "/app/backend/tests/get_ready_iso188.py", "/app/backend/tests/series_dates_iso187.py", "/app/backend/tests/ui_bridge188.py"],
+  "action_items": [
+    "Fix the CSS specificity so the empty band above set-facts is really removed (App.css:1716 vs 6478)."
+  ],
+  "critical_code_review_comments": [
+    "lib/privateResources.js preloadPaper: if a pack returns 200 but leaves out an item, part() calls the pack again up to 3 times, with about 2+4+8 s of backoff, before fetching that picture individually. During the countdown the player is not mounted, so one bad crop keeps Begin now disabled for about 15 s and re-downloads the whole pack 3 times. Better: when a pack succeeds but items are missing, fetch the missing paths individually straight away.",
+    "Pre-existing and minor: on load/reload the player sends GET /attempts/{id} twice and GET question-reports twice (seen after Begin now as well)."
+  ],
+  "updated_files": ["/app/backend/tests/get_ready_iso189.py (new)"],
+  "success_rate": {"backend": "100% (109/109 across 187/188/189 isolated suites)", "frontend": "95% (all retest items pass except the empty band from (e))"},
+  "seed_data_creation": "Only in disposable isolated DBs (bridges and suites drop them). The bridge was stopped and its DB dropped. The preview DB was not touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend: cd /app/backend && timeout 290 python tests/get_ready_iso189.py (ready_until save guard; pack skip via monkeypatched tejas.attempts.render_crop and hidden tejas_files ids). UI: python tests/ui_bridge188.py 1800 &, then route **/api/** to 127.0.0.1:8770 with the student cookie from /tmp/uibridge/bridge.json. Option buttons use data-testid player-option-<KEY>. The submit dialog button text is 'Submit & see results'. On mobile the player-submit-button sits inside the collapsed navigator, so use desktop for submit. Stop the bridge with pkill -INT -f ui_bridge188.py so it drops its DB.",
+  "rca of the issue": "Empty band: CSS cascade. `.set-detail .instruction-facts` (0,2,0, line 6478) comes later than `.set-simple .instruction-facts` (0,2,0, line 1716) with equal specificity, so its margin and padding win."
+}
