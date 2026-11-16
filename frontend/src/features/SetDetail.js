@@ -75,8 +75,8 @@ export default function SetDetail() {
   if (!s) return <div className="container page"><ErrorBox error={error} retry={() => setRetry(v => v + 1)} />{!error && <Loading />}</div>;
   return (
     <div className="container page set-detail set-simple" data-testid="set-detail-page">
-      <Link className="breadcrumb" data-testid="set-back" to={preview ? location.state?.previewBack || '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? (location.state?.previewBack ? 'Back to Master' : 'Back to Content Studio') : 'Back to '+s.exam+' tests'}</Link>
-      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Original supplied solutions unlock after you submit.' : s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
+      <Link className="breadcrumb" data-testid="set-back" to={preview ? location.state?.previewBack || '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? (location.state?.previewBack ? 'Back to Master' : 'Back to Content Studio') : s.series_id ? 'Back to All India series' : 'Back to '+s.exam+' tests'}</Link>
+      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : s.series_id ? `${s.exam.toUpperCase()} · ALL INDIA TEST SERIES` : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Original supplied solutions unlock after you submit.' : s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
       <SeriesNote s={s} />
       <Card className="card set-start-card" data-testid="set-instructions">

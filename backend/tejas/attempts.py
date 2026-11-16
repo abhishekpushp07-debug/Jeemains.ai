@@ -377,9 +377,11 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
     refs = [(q["id"], i, r) for q in questions if not (q.get("bonus") and not a.get("bonus_unlocked_at")) for i, r in enumerate(q.get("q_refs", []))]
     part = refs[offset:offset + limit]
     sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r in part})}}, {"_id": 0})}
-    images = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r in part))
-    head = json.dumps({"total": len(refs), "items": [{"question_id": qid, "index": i, "size": len(b)} for (qid, i, _), b in zip(part, images)]}).encode()
-    return Response(len(head).to_bytes(4, "big") + head + b"".join(images), media_type="application/octet-stream",
+    rendered = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r in part if r["file_id"] in sources), return_exceptions=True)
+    # A picture that cannot render is left out; the app then loads it on its own, so one bad crop never blocks the rest.
+    found = [(qid, i, b) for (qid, i, _), b in zip([p for p in part if p[2]["file_id"] in sources], rendered) if isinstance(b, bytes)]
+    head = json.dumps({"total": len(refs), "items": [{"question_id": qid, "index": i, "size": len(b)} for qid, i, b in found]}).encode()
+    return Response(len(head).to_bytes(4, "big") + head + b"".join(b for _, _, b in found), media_type="application/octet-stream",
                     headers={"Cache-Control": "private, no-store"})
 
 

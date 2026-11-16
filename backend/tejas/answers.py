@@ -55,7 +55,7 @@ async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
     body_hash = fingerprint(body)
     projection = {'_id': 0, 'id': 1, 'user_id': 1, 'status': 1, 'deadline': 1, 'pack_id': 1,
                   f'answers.{qid}': 1, f'response_schema.{qid}': 1,
-                  f'command_receipts.{key}': 1, 'command_count': 1, 'rules.bonus_rule': 1, 'bonus_unlocked_at': 1}
+                  f'command_receipts.{key}': 1, 'command_count': 1, 'rules.bonus_rule': 1, 'bonus_unlocked_at': 1, 'ready_until': 1}
     a = await clocked_one(attempts, {'id': id, 'user_id': u['id']}, projection)
     if not a:
         raise HTTPException(404, 'Attempt not found.')
@@ -73,6 +73,8 @@ async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
             from .attempts import finalize
             await finalize(id, 'time_limit')
         raise HTTPException(409, 'The attempt has ended. Late drafts are not accepted or scored.')
+    if a.get('ready_until', 0) > a['_database_now']:
+        raise HTTPException(409, 'Your paper opens in a few seconds. Answers are saved once it opens.', headers={'Retry-After': '2'})
     q = a.get('response_schema', {}).get(qid)
     if not q:
         if a.get('pack_id'):

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Trophy, Clock3 } from 'lucide-react';
 import { api } from '../../lib/api';
 
-const ist = n => new Date(n * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', timeStyle: 'short' }) + ' IST';
+const ist = n => new Date(n * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', timeStyle: 'short' }).toUpperCase() + ' IST';
 
 // The day's All India rank: score and solutions are already open; the rank waits for the day to close.
 export function SeriesRankCard({ id }) {

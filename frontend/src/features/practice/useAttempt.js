@@ -17,7 +17,7 @@ export function useAttempt(id, user) {
   const [saving, setSaving] = useState(false);
   const [online, setOnline] = useState(navigator.onLine);
   const [seconds, setSeconds] = useState(null);
-  const [ready, setReady] = useState(0);
+  const [, setReadyTick] = useState(0);
   const [conflict, setConflict] = useState(false);
   const data = useRef(null),
     drafts = useRef({}),
@@ -264,17 +264,16 @@ export function useAttempt(id, user) {
       document.removeEventListener("visibilitychange", visible);
     };
   }, [attempt?.deadline, id, openResult]);
+  const readyLeft = () => attempt?.ready_until && attempt.status === "active"
+    ? Math.max(0, Math.ceil((attempt.ready_until * 1000 - (anchor.current.server + performance.now() - anchor.current.mono)) / 1000))
+    : 0;
+  const ready = readyLeft();
   useEffect(() => {
-    if (!attempt?.ready_until || attempt.status !== "active") { setReady(0); return; }
-    let interval;
-    const tick = () => {
-      const serverNow = anchor.current.server + performance.now() - anchor.current.mono;
-      const left = Math.max(0, Math.ceil((attempt.ready_until * 1000 - serverNow) / 1000));
-      setReady(left);
-      if (!left) clearInterval(interval);
-    };
-    interval = setInterval(tick, 250);
-    tick();
+    if (!attempt?.ready_until || attempt.status !== "active") return;
+    const interval = setInterval(() => {
+      setReadyTick(v => v + 1);
+      if (Math.ceil((attempt.ready_until * 1000 - (anchor.current.server + performance.now() - anchor.current.mono)) / 1000) <= 0) clearInterval(interval);
+    }, 250);
     return () => clearInterval(interval);
   }, [attempt?.ready_until, attempt?.status]);
   const begin = async () => {

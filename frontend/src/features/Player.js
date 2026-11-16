@@ -146,11 +146,7 @@ export default function Player() {
   const time =
     seconds === null
       ? "Untimed"
-      : `${Math.floor(seconds / 3600)
-          .toString()
-          .padStart(2, "0")}:${Math.floor((seconds % 3600) / 60)
-          .toString()
-          .padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;
+      : clock(a.rules.minutes ? Math.min(seconds, a.rules.minutes * 60) : seconds);
   const assetBlocked = Object.keys(blocked).some((k) =>
     k.startsWith(q.id + ":"),
   );
@@ -536,4 +532,5 @@ export default function Player() {
 }
 
 const nPendingCount = (pending) => Object.keys(pending).length;
+const clock = (n) => [Math.floor(n / 3600), Math.floor((n % 3600) / 60), n % 60].map((v) => String(v).padStart(2, "0")).join(":");
 const committedOrDraft = (a, all) => a.questions.filter((x) => String(all[x.id]?.value || "").trim()).length;
