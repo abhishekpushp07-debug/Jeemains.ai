@@ -45,9 +45,55 @@ export async function acquireSourceAsset(path,{reload=false}={}){
  entry.refs+=1;trim();let released=false;
  return {url:entry.url,release:()=>{if(released)return;released=true;entry.refs-=1;if(entry.retired&&!entry.refs)URL.revokeObjectURL(entry.url);trim();}};
 }
-export function prefetchSourceAssets(paths){
- if(navigator.connection?.saveData)return;
- paths.slice(0,2).forEach(path=>{acquireSourceAsset(path).then(asset=>asset.release()).catch(()=>{});});
+function hold(entry){
+ entry.refs+=1;let released=false;
+ return ()=>{if(released)return;released=true;entry.refs-=1;if(entry.retired&&!entry.refs)URL.revokeObjectURL(entry.url);trim();};
+}
+function keep(path,blob){
+ let entry=entries.get(path);
+ if(!entry){entry={url:URL.createObjectURL(blob),size:blob.size,refs:0,retired:false};entries.set(path,entry);bytes+=entry.size;}
+ return hold(entry);
+}
+const PACK=12, pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+// Loads every question picture of an active attempt in a few requests and keeps them in memory until stop().
+// A part that fails is retried (then fetched picture by picture) until it loads; loading never gives up while the test is open.
+export function preloadPaper(attemptId,paths,onProgress){
+ const generation=epoch, held=new Map(), controller=new AbortController();
+ controllers.add(controller);
+ let stopped=false, next=0;
+ const live=()=>!stopped&&generation===epoch&&!!userId;
+ const missing=list=>list.filter(path=>!held.has(path));
+ const report=()=>{if(live())onProgress(held.size,paths.length);};
+ async function pack(offset){
+  const res=await fetchWithSession(`/attempts/${attemptId}/assets/pack?offset=${offset}&limit=${PACK}`,{cache:'no-store',signal:controller.signal});
+  if(!res.ok)throw new Error('Paper part '+res.status);
+  const buffer=await res.arrayBuffer(), size=new DataView(buffer).getUint32(0);
+  const head=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,4,size)));
+  let at=4+size;
+  for(const item of head.items){
+   const path=`/attempts/${attemptId}/questions/${item.question_id}/asset/question/${item.index}`;
+   if(live()&&!held.has(path))held.set(path,keep(path,new Blob([new Uint8Array(buffer,at,item.size)],{type:'image/png'})));
+   at+=item.size;
+  }
+ }
+ async function part(offset){
+  const want=paths.slice(offset,offset+PACK);
+  for(let failures=0;live()&&missing(want).length;){
+   for(const path of missing(want))if(entries.has(path))held.set(path,hold(entries.get(path)));
+   if(!missing(want).length)break;
+   if(!navigator.onLine){await pause(2000);continue;}
+   try{
+    if(failures<3)await pack(offset);
+    else for(const path of missing(want)){const asset=await acquireSourceAsset(path);if(live()&&!held.has(path))held.set(path,asset.release);else asset.release();}
+   }catch(e){if(e?.name==='AbortError')return;}
+   report();
+   if(missing(want).length){failures+=1;await pause(Math.min(15000,1000*2**Math.min(failures,4))+Math.random()*800);}
+  }
+ }
+ async function worker(){while(live()&&next<paths.length){const offset=next;next+=PACK;await part(offset);}}
+ report();
+ Promise.all([worker(),worker()]).finally(()=>controllers.delete(controller));
+ return ()=>{stopped=true;controller.abort();controllers.delete(controller);for(const release of held.values())release();held.clear();};
 }
 export function rememberStartedAttempt(owner,attempt){
  if(owner===userId&&attempt.status==='active')bootstrap={owner,attempt,at:performance.now()};

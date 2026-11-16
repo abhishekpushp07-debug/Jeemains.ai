@@ -51,7 +51,8 @@ async def released(id, u):
     a = await owned(id, u)
     if a.get('status') != 'completed':
         raise HTTPException(409, 'Complete this attempt before viewing its progress.')
-    if a.get('competition_end', 0) > a['_database_now']:
+    from .live_window import answers_sealed
+    if answers_sealed(a, a['_database_now']):
         raise HTTPException(403, 'Results remain sealed until release.')
     if not a.get('summary'):
         raise HTTPException(409, 'The original score is still being prepared.')

@@ -214,6 +214,7 @@ class StartPayload(Payload):
     start_key: RequestKey
     device_checked: bool = False
     preview: bool = False
+    get_ready: bool = False
 
 
 class VisitPayload(Payload):

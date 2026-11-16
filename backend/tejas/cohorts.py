@@ -142,7 +142,8 @@ async def refresh(job):
 async def _released(id,u):
     a=await owned(id,u)
     if a['status']!='completed':raise HTTPException(409,'Comparison becomes available after submission.')
-    if a.get('competition_end',0)>a['_database_now']:raise HTTPException(403,'Results are under embargo until the competition ends.')
+    from .live_window import answers_sealed
+    if answers_sealed(a,a['_database_now']):raise HTTPException(403,'Results are under embargo until the competition ends.')
     return a
 
 @router.get('/{id}/cohort',response_model=CohortResponse)

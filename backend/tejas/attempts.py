@@ -10,7 +10,7 @@ from .auth import current
 from .packs import hydrate, insert_attempt
 from .profiles import seal_profile
 from .catalog import page as catalogue_page
-from .content import summary, permitted, validate_refs
+from .content import summary, permitted
 from tejas_core import public_question, score_attempt, crop_png
 from tejas_storage import get_object
 
@@ -18,8 +18,12 @@ from .idempotency import fingerprint, verify_start, bind_start_alias
 from .contracts import EnvelopeResponse
 from .derivatives import render_crop
 from .canonical import EPOCH_NOW, clocked_one, verify_ledger, database_now
-from .live_window import guard as guard_live_start, score_sealed
+from .live_window import guard as guard_live_start, answers_sealed
+import asyncio, json
+from fastapi import Query
 from pydantic import ConfigDict
+
+READY_SECONDS = 60
 
 router = APIRouter(prefix="/api", tags=["Practice"])
 
@@ -29,6 +33,7 @@ class Start(BaseModel):
     start_key: str = Field(min_length=8, max_length=100)
     device_checked: bool = False
     preview: bool = False
+    get_ready: bool = False
 
 
 def delivered(q):
@@ -133,11 +138,10 @@ def attempt_view(a, public=None):
         "visited",
         "test_kind",
         "bonus_unlocked_at",
-        "series_id", "series_date",
+        "series_id", "series_date", "ready_until",
     ]
     return {
         **{k: a.get(k) for k in fields},
-        "summary": None if score_sealed(a, a.get('_database_now', now())) else a.get('summary'),
         "competition_end": a.get('competition_end'),
         'confidence_observations': {qid: {'probability': x.get('confidence'), 'response': x.get('normalized_value', x.get('value',''))} for qid,x in a.get('first_answers',{}).items()},
         'confidence_changed_questions': a.get('confidence_changed_questions', []),
@@ -183,9 +187,6 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     entry = await paper(s)
     if not entry.count:
         raise HTTPException(400, "This set has no questions yet.")
-    if entry.needs_check(s):
-        await validate_sources(s, entry.refs)
-        entry.mark_checked(s)
     await db.tejas_preflight.update_one(
         {"user_id": u["id"], "set_id": id},
         {
@@ -199,32 +200,9 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     )
     return {
         "ok": True,
-        "message": "Connection, source assets and test response verified. No attempt or timer has started.",
+        "message": "Connection checked. No attempt or timer has started.",
         "server_now": t,
     }
-
-
-async def validate_sources(s, unique_refs):
-    source_map = {}
-    if s.get('test_kind') == 'pyq':
-        from .derivatives import validate_source_crops
-        from .canonical import CanonicalIntegrityError
-        grouped = {}
-        for ref in unique_refs:
-            fid = ref.get('file_id')
-            if fid not in s.get('file_ids', []):
-                raise HTTPException(400, 'Source region must belong to this set.')
-            grouped.setdefault(fid, []).append(ref)
-        for fid, refs in grouped.items():
-            source = await get(files, fid)
-            try:
-                await run_in_threadpool(validate_source_crops, source, refs)
-            except CanonicalIntegrityError:
-                raise HTTPException(503, 'The original source could not be verified. Please try again later; the timer has not started.')
-            except (ValueError, KeyError, TypeError):
-                raise HTTPException(400, 'Source region is invalid. Check page and coordinates.')
-    else:
-        await validate_refs(s, {'q_refs': unique_refs, 's_refs': []}, source_map)
 
 
 @router.post("/sets/{id}/start")
@@ -267,20 +245,6 @@ async def start(id: str, data: Start, u=Depends(current)):
         guard_live_start(s, started_at)
         if s.get('series_id') and not valid_paper({**s, 'questions': entry.questions}):
             raise HTTPException(409, 'This series paper needs owner review before new attempts can start.')
-    if not data.device_checked:
-        raise HTTPException(400, "Complete the device and content check first.")
-    pf = await db.tejas_preflight.find_one(
-        {
-            "user_id": u["id"],
-            "set_id": id,
-            "revision": s["revision"],
-            "at": {"$gt": started_at - 1800},
-        }
-    )
-    if not pf:
-        raise HTTPException(
-            400, "Run the connection and content check again before starting."
-        )
     if not entry.count:
         raise HTTPException(400, "No questions are available.")
     await start_data(entry, s, delivered)
@@ -329,8 +293,14 @@ async def start(id: str, data: Start, u=Depends(current)):
     if s.get('competition') and not preview:
         a['competition_end'] = s['end_at']
         a['competition_ranked'] = u.get('role') == 'student' and u.get('access_type') == 'unverified_phone'
-    if a["rules"]["minutes"]:
-        a["deadline"] = a["started_at"] + a["rules"]["minutes"] * 60
+    seconds = a["rules"]["minutes"] * 60
+    if data.get_ready:
+        # 60 seconds to read the rules while the paper loads; the clock starts after it (or at Begin now).
+        lead = READY_SECONDS if not (seconds and a.get('competition_end')) else max(0, min(READY_SECONDS, a['competition_end'] - seconds - started_at))
+        if lead:
+            a['ready_until'] = started_at + lead
+    if seconds:
+        a["deadline"] = a.get('ready_until', started_at) + seconds
         if a.get('competition_end'):
             a['deadline'] = min(a['deadline'], a['competition_end'])
     inserted = True
@@ -366,13 +336,51 @@ async def history(page: int = 1, u=Depends(current)):
             closed = await finalize(a["id"], "time_limit", projection={'_id': 0, **fields})
             a.update({k: v for k, v in closed.items() if k in fields})
         a["server_now"] = t
-        if score_sealed(a, t): a['summary'] = None
     return {"items": data, "page": page}
 
 
 @router.get("/attempts/{id}")
 async def read_attempt(id: str, u=Depends(current)):
     return attempt_view(await expire(await owned(id, u)))
+
+
+@router.post("/attempts/{id}/begin")
+async def begin(id: str, u=Depends(current)):
+    """Begin now: ends the get-ready countdown early, so the student's full time starts from this moment."""
+    a = await clocked_one(attempts, {"id": id, "user_id": u["id"]}, {"_id": 0, "status": 1, "deadline": 1, "ready_until": 1, "rules.minutes": 1, "competition_end": 1})
+    if not a:
+        raise HTTPException(404, "Attempt not found.")
+    t = a["_database_now"]
+    if a["status"] == "active" and a.get("ready_until", 0) > t:
+        change = {"ready_until": t}
+        if a["deadline"]:
+            change["deadline"] = min(t + a["rules"]["minutes"] * 60, a.get("competition_end") or float("inf"))
+        done = await attempts.find_one_and_update({"id": id, "user_id": u["id"], "status": "active", "ready_until": a["ready_until"]}, {"$set": change},
+                                                  projection={"_id": 0, "ready_until": 1, "deadline": 1}, return_document=ReturnDocument.AFTER)
+        a.update(done or await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "ready_until": 1, "deadline": 1}))
+    return {"ready_until": a.get("ready_until"), "deadline": a["deadline"], "server_now": t}
+
+
+@router.get("/attempts/{id}/assets/pack")
+async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int = Query(12, ge=1, le=16), u=Depends(current)):
+    """Question pictures of an active attempt in paper order, many per response, so the whole paper loads in a few requests.
+    Body: 4-byte big-endian header length, JSON header {total, items:[{question_id, index, size}]}, then the PNG bytes in order."""
+    from .attempt_status import owned_header
+    from .packs import entry_for
+    a = await owned_header(id, u)
+    if a["status"] != "active":
+        raise HTTPException(409, "This attempt is no longer active.")
+    if a.get("pack_id"):
+        questions = (await entry_for(a["pack_id"])).questions
+    else:
+        questions = (await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "questions": 1}))["questions"]
+    refs = [(q["id"], i, r) for q in questions if not (q.get("bonus") and not a.get("bonus_unlocked_at")) for i, r in enumerate(q.get("q_refs", []))]
+    part = refs[offset:offset + limit]
+    sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r in part})}}, {"_id": 0})}
+    images = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r in part))
+    head = json.dumps({"total": len(refs), "items": [{"question_id": qid, "index": i, "size": len(b)} for (qid, i, _), b in zip(part, images)]}).encode()
+    return Response(len(head).to_bytes(4, "big") + head + b"".join(images), media_type="application/octet-stream",
+                    headers={"Cache-Control": "private, no-store"})
 
 
 class Visit(BaseModel):
@@ -480,16 +488,15 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
     if a.get('set_deleted'):
         # The owner deleted this test: only the score line is kept.
         return {'id': id, 'title': a['title'], 'exam': a.get('exam'), 'status': 'deleted', 'submitted_at': a.get('submitted_at'),
-                'summary': None if score_sealed(a, t) else a.get('summary'), 'server_now': t}
-    if a['status'] == 'completed' and a.get('competition_end', 0) > t:
+                'summary': a.get('summary'), 'server_now': t}
+    if a['status'] == 'completed' and answers_sealed(a, t):
+        # Live exam: score now; answers, solutions and ranks wait until every live student's time is up.
         sealed = {'id': id, 'title': a['title'], 'status': 'embargoed', 'release_at': a['competition_end'], 'receipt': a.get('receipt'), 'server_now': t, 'series_id': a.get('series_id')}
-        if not score_sealed(a, t):
-            # Score now; answers, solutions and ranks wait until every live student's time is up.
-            if a.get('summary') and a.get('grading_status') == 'ready':
-                sealed.update(summary=a['summary'], score_released=True)
-            else:
-                job = await ensure_grade(a, bg)
-                sealed.update(summary=None, score_released=True, grading_status=(job or {}).get('status', 'queued'), retry_after_ms=2000)
+        if a.get('summary') and a.get('grading_status') == 'ready':
+            sealed.update(summary=a['summary'], score_released=True)
+        else:
+            job = await ensure_grade(a, bg)
+            sealed.update(summary=None, score_released=True, grading_status=(job or {}).get('status', 'queued'), retry_after_ms=2000)
         return sealed
     if a["status"] == "completed":
         if not a.get("ledger"):
@@ -542,7 +549,7 @@ async def asset(
     from .attempt_status import owned_header
     from .packs import question
     a = await owned_header(id, u)
-    if kind not in ['question', 'solution'] or kind == 'solution' and (a['status'] != 'completed' or a.get('competition_end', 0) > a['_database_now']):
+    if kind not in ['question', 'solution'] or kind == 'solution' and (a['status'] != 'completed' or answers_sealed(a, a['_database_now'])):
         raise HTTPException(403, 'Solution assets remain private until submission.')
     pack_id = a.get('pack_id')
     if a['status'] == 'completed' and score_version and score_version != 'original':
@@ -575,7 +582,7 @@ class SolutionConsulted(BaseModel):
 @router.post('/attempts/{id}/questions/{qid}/solution-open', response_model=SolutionConsulted)
 async def solution_consulted(id: str, qid: str, u=Depends(current)):
     a = await owned(id, u)
-    if a['status'] != 'completed' or a.get('competition_end', 0) > a.get('_database_now', now()):
+    if a['status'] != 'completed' or answers_sealed(a, a.get('_database_now', now())):
         raise HTTPException(403, 'Solutions are not released for this attempt yet.')
     if not any(q['id'] == qid for q in a['questions']):
         raise HTTPException(404, 'Question not found.')
@@ -591,7 +598,7 @@ async def retry(id: str, data: dict, u=Depends(current)):
     from .corrections import with_grade
 
     a = await expire(await owned(id, u))
-    if a.get('competition_end', 0) > a.get('_database_now', now()):
+    if answers_sealed(a, a.get('_database_now', now())):
         raise HTTPException(403, 'Revision attempts unlock when the competition window closes.')
     if a["status"] == "completed" and not a.get("ledger"):
         raise HTTPException(409, "Your answers are sealed. Wait for grading before starting a retry.", headers={"Retry-After": "2"})
@@ -716,7 +723,7 @@ async def report(id: str, bg: BackgroundTasks, data: dict, u=Depends(current)):
     from .corrections import with_grade
 
     a = await expire(await owned(id, u))
-    if a.get('competition_end', 0) > a.get('_database_now', now()):
+    if answers_sealed(a, a.get('_database_now', now())):
         raise HTTPException(403, 'Reports unlock when the competition window closes.')
     version = str(data.get("score_version", "original"))
     if a["status"] == "completed" and not a.get("ledger"):

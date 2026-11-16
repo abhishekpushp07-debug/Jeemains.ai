@@ -3,7 +3,6 @@ from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 from .auth import current
-from .live_window import score_sealed
 from .catalog import PROJECT
 from .content import summary
 from .db import attempts, sets, now, db
@@ -132,8 +131,6 @@ async def history(slug: str, kind: Literal['all', 'mock', 'pyq', 'chapter', 'pra
         if a['status'] == 'active' and a.get('deadline') and a['deadline'] <= t:
             closed = await finalize(a['id'], 'time_limit', projection={'_id': 0, **fields})
             a.update({k: v for k, v in closed.items() if k in fields})
-        if score_sealed(a, t):
-            a['summary'] = None
         a['server_now'] = t
     total = result['meta'][0]['total'] if result['meta'] else 0
     return NavigationHistory(exam=exam, items=rows, total=total, page=page, pages=max(1, (total + 19) // 20))

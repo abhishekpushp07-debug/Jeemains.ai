@@ -108,8 +108,11 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 | My Tests library | GET `/my/tests` | Read current response filters/counts; do not create a second local history store |
 | Saved-paper state | GET/POST/DELETE `/my/tests/saved/{set_id}` | Same canonical learner |
 | Attempt history | GET `/attempts?page=1` | Current learner; 20 per page |
-| Connection/content check | POST `/sets/{set_id}/preflight` | Body `{ "test_response": "A" }`; no timer starts |
+| Connection check (optional) | POST `/sets/{set_id}/preflight` | Body `{ "test_response": "A" }`; no timer starts; no longer required before start |
 | Start/full reattempt | POST `/sets/{set_id}/start` | See next section |
+| Begin now | POST `/attempts/{attempt_id}/begin` | Empty JSON body; ends the 60 s get-ready early; returns `ready_until`, `deadline`, `server_now` |
+| Whole-paper pictures | GET `/attempts/{attempt_id}/assets/pack?offset=0&limit=12` | Active attempt only. Binary: 4-byte big-endian header length, JSON header `{total, items:[{question_id,index,size}]}`, then PNG bytes in order. Loop `offset` by `limit` until `total` |
+| All India rank | GET `/attempts/{attempt_id}/series-rank` | `state: sealed` (with `release_at`) until the day closes, then `ready` with `rank`, `total`, `top_percent` |
 | Resume state | GET `/attempts/{attempt_id}` | Same attempt, not another start |
 | Lightweight state | GET `/attempts/{attempt_id}/status` | Server time/deadline/status/grading |
 | Save answer | PUT `/attempts/{attempt_id}/answers/{question_id}` | Receipt + revision protocol below |
@@ -127,7 +130,7 @@ Latest PYQ UI revision (2026-10-26): only a year selector; render EVERY paper of
 ## 7. Start, autosave and two-device consistency
 
 1. Fetch the summary and server rules; preserve official question/order/options/marking.
-2. Run preflight successfully. Within its validity window, POST start with `{ "start_key": "<fresh UUID for this intentional start>", "device_checked": true, "preview": false }`.
+2. POST start with `{ "start_key": "<fresh UUID for this intentional start>", "preview": false, "get_ready": true }`. Preflight is no longer needed. With `get_ready: true` the attempt has `ready_until` (start + up to 60 s): show the rules and load the whole paper with `/assets/pack`; the `deadline` already adds this time. Open the paper at `ready_until`, or call `/begin` when the student taps Begin now (the deadline then becomes now + full duration). Without `get_ready` the clock starts at once, as before.
 3. Persist that start key until its response is known; retries reuse it. An already active same-paper attempt is returned, including the same ID/deadline. Use its server state, not a freshly reset timer. Full intentional reattempt after completion uses a NEW start key and retains old results.
 4. Render the returned `questions` using their server UUIDs, `type`, `options`, text/HTML/math and `asset_count`. Scanned question and solution images must come from the protected crop endpoint; do not OCR/retype them or guess options.
 5. Queue edits per learner → attempt → question. Save body:
@@ -223,12 +226,12 @@ Applies to regular live exams (`competition:true`), not the All India series.
 2. New starts are accepted from `start_at` until `last_start_at` (15 minutes). Each student's `deadline` is their own start + full duration. `end_at` = `last_start_at` + duration (the last possible finish). After `last_start_at`, `POST /sets/{id}/preflight` and `POST /sets/{id}/start` return 409 with a readable message; resuming an attempt already started still works.
 3. Score on submission: `GET /attempts/{id}/results` before `end_at` still returns `status:"embargoed"` with `release_at`, plus `score_released:true` and `summary` (score, maximum, correct, incorrect, skipped, accuracy, subjects…). While scoring is running `summary` is null; poll again after `retry_after_ms`. `GET /attempts`, `GET /attempts/{id}` and My Tests show the summary as soon as it is graded.
 4. Answers, solutions, worked solutions, question reports, revision attempts and the leaderboard stay locked until `end_at`, so students who started later in the window cannot receive answers early.
-5. All India series attempts keep the old rule: `score_released` is absent and the score stays sealed until the series day closes.
+5. All India series attempts (changed 2026-11-17): score, answers and solutions open right after submission. Only the day's All India rank waits until the series day closes (`GET /attempts/{id}/series-rank`).
 
 ## 14. Test series for every exam and written questions (added 2026-11-15, preview only until deployed)
 - `GET /api/series` (no login needed) lists every test series that is switched on: `id`, `title`, `exam {slug,name,color}`, `first_date`, `last_date`, `total`, `open_time`, `last_start`, `today`, `today_slot`, `builtin`. The JEE Main series is the item with `builtin: true`; its existing endpoints under `/api/series/all-india-jee` are unchanged.
 - `GET /api/series/{id}/schedule` gives the day list in the same slot shape as the JEE series (`day`, `date`, `opens_at`, `last_start_at`, `closes_at`, `archive_at`, `state`, `ready`, `set_id`, `title`, `can_start`). `GET /api/series/{id}/history` (login) lists the student's own attempts.
-- Starting, autosave, submit and results use the existing set and attempt endpoints. A live series attempt carries `series_id`, `series_date`, `mode: series_live`; its score stays sealed until that day's `closes_at`.
+- Starting, autosave, submit and results use the existing set and attempt endpoints. A live series attempt carries `series_id`, `series_date`, `mode: series_live`; its score and solutions open on submission and its rank at that day's `closes_at`.
 - `GET /api/catalog/exams/{slug}` never lists a series as a section: show each series as its own card from `GET /api/series`.
 - Questions written in Super Admin have `render_mode: "written"`: show `text` (maths between `$` signs) and option texts, then `asset_count` images from the existing `/asset/question/{i}` endpoint. `asset_labels[i]` is empty for the question figure or `Option A`…`Option D` for an option figure. Solutions work the same way with `solution_asset_count`.
 - PYQ papers made in Super Admin may have an empty `exam_date` and `shift: 0`; use `year` and `title` for those.

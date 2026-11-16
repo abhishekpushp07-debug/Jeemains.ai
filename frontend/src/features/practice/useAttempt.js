@@ -17,6 +17,7 @@ export function useAttempt(id, user) {
   const [saving, setSaving] = useState(false);
   const [online, setOnline] = useState(navigator.onLine);
   const [seconds, setSeconds] = useState(null);
+  const [ready, setReady] = useState(0);
   const [conflict, setConflict] = useState(false);
   const data = useRef(null),
     drafts = useRef({}),
@@ -264,6 +265,25 @@ export function useAttempt(id, user) {
     };
   }, [attempt?.deadline, id, openResult]);
   useEffect(() => {
+    if (!attempt?.ready_until || attempt.status !== "active") { setReady(0); return; }
+    let interval;
+    const tick = () => {
+      const serverNow = anchor.current.server + performance.now() - anchor.current.mono;
+      const left = Math.max(0, Math.ceil((attempt.ready_until * 1000 - serverNow) / 1000));
+      setReady(left);
+      if (!left) clearInterval(interval);
+    };
+    interval = setInterval(tick, 250);
+    tick();
+    return () => clearInterval(interval);
+  }, [attempt?.ready_until, attempt?.status]);
+  const begin = async () => {
+    const r = await post("/attempts/" + id + "/begin", {});
+    syncClock(r.server_now);
+    data.current = { ...data.current, ready_until: r.ready_until, deadline: r.deadline };
+    setAttempt(data.current);
+  };
+  useEffect(() => {
     const warn = (e) => {
       if (Object.keys(drafts.current).length) {
         e.preventDefault();
@@ -346,6 +366,8 @@ export function useAttempt(id, user) {
     saving,
     online,
     seconds,
+    ready,
+    begin,
     conflict,
     load,
     edit,

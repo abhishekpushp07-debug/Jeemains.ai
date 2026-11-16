@@ -254,7 +254,7 @@ async def public_history(sid: str, page: int = Query(1, ge=1, le=10000), u=Depen
     from .my_tests import history_item
     t = await database_now()
     match = {'user_id': u['id'], 'series_id': sid, 'mode': {'$in': ['series_live', 'series_practice']}}
-    fields = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'mode', 'version', 'started_at', 'submitted_at', 'deadline', 'status', 'count', 'summary', 'answers', 'competition_end', 'series_date')}
+    fields = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'mode', 'version', 'started_at', 'submitted_at', 'deadline', 'status', 'count', 'summary', 'answers', 'competition_end', 'series_date', 'series_id')}
     rows = await attempts.find(match, {'_id': 0, **fields}).sort('started_at', -1).skip((page - 1) * 20).limit(20).to_list(20)
     return {'items': [{**history_item(a, t).model_dump(), 'series_date': a['series_date']} for a in rows], 'page': page,
             'total': await attempts.count_documents(match)}

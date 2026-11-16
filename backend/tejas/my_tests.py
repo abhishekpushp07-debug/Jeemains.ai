@@ -15,7 +15,7 @@ from .content import summary
 from .request_contracts import EmptyPayload, CompareAttemptsPayload
 from .learning_progress import released, paper_basis, point
 from .canonical import database_now, EPOCH_NOW
-from .live_window import score_sealed
+from .live_window import answers_sealed
 
 router = APIRouter(prefix='/api/my/tests', tags=['My Tests'])
 saved = db.tejas_saved_tests
@@ -137,17 +137,16 @@ async def saved_page(u, exam, q, start, end, status, page):
 
 def history_item(a, t):
     expired = a['status'] == 'active' and bool(a.get('deadline')) and a['deadline'] <= t
-    released = not score_sealed(a, t)
     active = a['status'] == 'active' and not expired
-    status = 'active' if active else 'expired' if expired else 'embargoed' if not released else 'completed' if a.get('summary') else 'grading'
-    summary_value = a.get('summary') if not active and not expired and released else None
+    status = 'active' if active else 'expired' if expired else 'completed' if a.get('summary') else 'grading'
+    summary_value = a.get('summary') if not active and not expired else None
     acknowledgements = [v.get('accepted_at', 0) for v in (a.get('answers') or {}).values() if v.get('accepted_at')]
     return HistoryItem(id=a['id'], set_id=a['set_id'], title=a['title'], exam=a['exam'], status=status,
         mode=a.get('mode', 'practice'), started_at=a['started_at'], submitted_at=a.get('submitted_at'),
         deadline=a.get('deadline', 0), remaining_seconds=max(0, a['deadline']-t) if active and a.get('deadline') else None,
         saved_answers=sum(bool(str(v.get('value', '')).strip()) for v in (a.get('answers') or {}).values()),
         last_saved_at=max(acknowledgements) if acknowledgements else None, count=a.get('count', len(a.get('questions', []))),
-        summary=summary_value, version=a.get('version'), report_allowed=bool(a.get('report_allowed')) and bool(summary_value) and a.get('competition_end', 0) <= t,
+        summary=summary_value, version=a.get('version'), report_allowed=bool(a.get('report_allowed')) and bool(summary_value) and not answers_sealed(a, t),
         resumable=active, result_available=not active, deleted=bool(a.get('set_deleted')),
         compare_eligible=bool(summary_value) and a.get('mode') == 'practice' and not a.get('parent_attempt') and not a.get('competition_end') and not a.get('set_deleted'))
 
@@ -156,7 +155,7 @@ def history_item(a, t):
 async def my_tests(tab: Literal['progress', 'saved', 'completed'] = 'progress', exam: str = Query('', max_length=30),
                    q: str = Query('', max_length=100), status: str = Query('all', max_length=30),
                    start: date | None = None, end: date | None = None, page: int = Query(1, ge=1, le=10000), u=Depends(current)):
-    if status not in ({'all', 'active'} if tab == 'progress' else {'all', 'available', 'unavailable'} if tab == 'saved' else {'all', 'completed', 'expired', 'grading', 'embargoed'}):
+    if status not in ({'all', 'active'} if tab == 'progress' else {'all', 'available', 'unavailable'} if tab == 'saved' else {'all', 'completed', 'expired', 'grading'}):
         raise HTTPException(422, 'This status does not apply to the selected My Tests tab.')
     t = await database_now()
     active = {'status': 'active', '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}
@@ -171,9 +170,8 @@ async def my_tests(tab: Literal['progress', 'saved', 'completed'] = 'progress', 
         match = filters(dict(base), exam, q, start, end, 'started_at')
         match['$and'] = [active if tab == 'progress' else {'$or': [{'status': 'completed'}, expired]}]
         if status == 'expired': match['$and'].append(expired)
-        elif status == 'completed': match['$and'].append({'status': 'completed', 'summary': {'$ne': None}, '$or': [{'competition_end': {'$not': {'$gt': t}}}, {'series_id': {'$exists': False}}]})
-        elif status == 'grading': match['$and'].append({'status': 'completed', 'summary': None, '$or': [{'competition_end': {'$not': {'$gt': t}}}, {'series_id': {'$exists': False}}]})
-        elif status == 'embargoed': match['$and'].append({'status': 'completed', 'competition_end': {'$gt': t}, 'series_id': {'$exists': True}})
+        elif status == 'completed': match['$and'].append({'status': 'completed', 'summary': {'$ne': None}})
+        elif status == 'grading': match['$and'].append({'status': 'completed', 'summary': None})
         elif status == 'active': match['$and'].append(active)
         total = await attempts.count_documents(match)
         projection = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'status', 'mode', 'started_at', 'submitted_at', 'deadline', 'count', 'summary', 'version', 'report_allowed', 'answers', 'competition_end', 'parent_attempt', 'series_id', 'set_deleted')}

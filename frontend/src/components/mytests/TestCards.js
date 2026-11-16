@@ -7,7 +7,7 @@ import {ReportButton} from '../ReportButton';
 import {SavePaperButton} from '../SavePaperButton';
 
 const date=value=>new Date(value*1000).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'});
-const labels={active:'In progress',completed:'Completed',expired:'Time expired',grading:'Preparing result',embargoed:'Result sealed'};
+const labels={active:'In progress',completed:'Completed',expired:'Time expired',grading:'Preparing result'};
 export const AttemptCard=({item,returnTo,selected,onSelect,comparisonFull})=>{
  const s=item.summary;
  const accuracy=typeof s?.correct==='number'&&typeof s?.attempted==='number'?(s.attempted?Math.round(1000*s.correct/s.attempted)/10:null):(s?.accuracy??null);

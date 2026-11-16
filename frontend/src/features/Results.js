@@ -37,6 +37,7 @@ import { BarChart3,TrendingUp,Target,Trophy,BookOpen } from 'lucide-react';
 import { ResultAnalysis } from '../components/results/ResultAnalysis';
 import { AiSolution, PeerQuestionStat } from '../components/results/AiSolution';
 import { useResultExtras } from '../components/results/useResultExtras';
+import { SeriesRankCard } from '../components/results/SeriesRankCard';
 import {QuestionReport, QuestionReportsProvider} from '../components/QuestionReport';
 import {Tabs, TabsList, TabsTrigger} from '../components/ui/tabs';
 import { SolutionNavigator, matchesOutcome } from '../components/results/SolutionNavigator';
@@ -319,6 +320,7 @@ export default function Results() {
           <small>Worth another look</small>
         </div>
       </div>
+      {r.mode === 'series_live' && <SeriesRankCard id={id} />}
       <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank',r.exam==='BITSAT'?'Branch matches':'Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
       <section className="result-view-panel" hidden={view!=='analysis'} data-testid="result-analysis-panel" aria-label="Result analysis">
       <MeterShortcuts exam={r.exam} journey={meters.journey} rank={meters.rank} onView={changeView}/>

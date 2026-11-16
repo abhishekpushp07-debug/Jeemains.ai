@@ -24,7 +24,8 @@ import {QuestionReport, QuestionReportsProvider} from '../components/QuestionRep
 import { useLocation, useNavigate } from 'react-router-dom';
 import {Button} from '../components/ui/button';
 import {Input} from '../components/ui/input';
-import {prefetchSourceAssets} from '../lib/privateResources';
+import {preloadPaper} from '../lib/privateResources';
+import { GetReady } from '../components/player/GetReady';
 
 export default function Player() {
   const { id } = useParams();
@@ -40,6 +41,8 @@ export default function Player() {
     saving,
     online,
     seconds,
+    ready,
+    begin,
     conflict,
     load,
     edit,
@@ -56,17 +59,20 @@ export default function Player() {
     [navOpen, setNavOpen] = useState(false),
     [blocked, setBlocked] = useState({}),
     [bonusConfirm, setBonusConfirm] = useState(false),
-    [enteringBonus, setEnteringBonus] = useState(false);
+    [enteringBonus, setEnteringBonus] = useState(false),
+    [loaded, setLoaded] = useState({ done: 0, total: 0 });
+  const readying = ready > 0;
   const bonusRule = a?.rules?.bonus_rule;
   const bonusOpen = !!a?.bonus_unlocked_at;
   const qs = !a ? [] : bonusRule ? a.questions.filter((x) => !!x.bonus === bonusOpen) : a.questions;
   const q = qs[index] || qs[0];
   const questionId = q?.id;
-  const nextQuestion=qs[index+1];
   useEffect(()=>{
-    if(!a||a.status!=='active'||!nextQuestion||!online)return;
-    prefetchSourceAssets(Array.from({length:Math.min(2,nextQuestion.asset_count||0)},(_,i)=>`/attempts/${id}/questions/${nextQuestion.id}/asset/question/${i}`));
-  },[id,questionId,nextQuestion?.id,a?.status,online]);
+    if(!a||a.status!=='active')return;
+    const paths=a.questions.filter(x=>!(x.bonus&&!a.bonus_unlocked_at)).flatMap(x=>Array.from({length:x.asset_count||0},(_,i)=>`/attempts/${id}/questions/${x.id}/asset/question/${i}`));
+    setLoaded({done:0,total:paths.length});
+    return preloadPaper(id,paths,(done,total)=>setLoaded({done,total}));
+  },[id,a?.id,a?.status,a?.bonus_unlocked_at]);
   useEffect(() => {
     if(!a)return;
     try { setIndex(Math.max(0,Math.min(qs.length-1,Number(sessionStorage.getItem(`test-question-${id}-${bonusOpen}`))||0))); }
@@ -74,10 +80,10 @@ export default function Player() {
   }, [a?.id, bonusOpen]);
   useEffect(()=>{if(a&&qs.length)try{sessionStorage.setItem(`test-question-${id}-${bonusOpen}`,String(index))}catch{}},[id,a?.id,bonusOpen,index]);
   useEffect(() => {
-    if (questionId) visit(questionId);
-  }, [questionId, visit, online]);
+    if (questionId && !readying) visit(questionId);
+  }, [questionId, visit, online, readying]);
   useEffect(() => {
-    if (!a || !q) return;
+    if (!a || !q || readying) return;
     function shortcut(e) {
       if (e.repeat || e.altKey || e.ctrlKey || e.metaKey || e.isComposing || confirm || bonusConfirm || navOpen || document.querySelector('[role="dialog"]')) return;
       if (e.target.closest('input, textarea, select, button, a, canvas, [contenteditable="true"], [role="slider"], [role="radio"], [role="tab"]')) return;
@@ -93,7 +99,7 @@ export default function Player() {
     }
     document.addEventListener('keydown',shortcut);
     return()=>document.removeEventListener('keydown',shortcut);
-  },[a,q,qs.length,pending,seconds,conflict,blocked,confirm,bonusConfirm,navOpen,edit]);
+  },[a,q,qs.length,pending,seconds,conflict,blocked,confirm,bonusConfirm,navOpen,edit,readying]);
 
   async function doEnterBonus() {
     setEnteringBonus(true);
@@ -126,6 +132,7 @@ export default function Player() {
         {!error && <Loading />}
       </div>
     );
+  if (readying) return <GetReady attempt={a} seconds={ready} loaded={loaded} onBegin={begin} />;
   const current = pending[q.id] || a.answers[q.id] || {},
     all = { ...a.answers, ...pending };
   const committed = a.questions.filter((x) =>
@@ -492,7 +499,7 @@ export default function Player() {
         onConfirm={doSubmit}
       >
         <p>
-          Submission is final. {a.mode==='series_live'?'Your result and solutions unlock at 11:59 PM IST after today’s live window closes.':'Your result and available solutions are released afterward.'}
+          Submission is final. {a.mode==='series_live'?'Your score and solutions open right away. Your All India rank joins at 11:59 PM IST.':'Your result and available solutions are released afterward.'}
         </p>
         <div className="submission-stats">
           <span>

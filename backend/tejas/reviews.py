@@ -59,7 +59,8 @@ async def released(id,u,score_version='original'):
     from .attempts import owned
     from .corrections import with_grade
     a=await owned(id,u)
-    if a['status']!='completed' or a.get('competition_end',0)>a['_database_now']:
+    from .live_window import answers_sealed
+    if a['status']!='completed' or answers_sealed(a,a['_database_now']):
         raise HTTPException(403,'Study review unlocks after submission and the competition window closes.')
     if not a.get('ledger'):
         raise HTTPException(409,'Wait for grading before reviewing this attempt.')

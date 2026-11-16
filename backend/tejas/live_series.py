@@ -138,11 +138,41 @@ async def history(page: int = Query(1, ge=1, le=10000), u=Depends(current)):
     from .my_tests import history_item
     t = await database_now()
     match = {'user_id': u['id'], 'series_id': SERIES_ID, 'mode': {'$in': ['series_live', 'series_practice']}}
-    fields = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'mode', 'version', 'started_at', 'submitted_at', 'deadline', 'status', 'count', 'summary', 'answers', 'competition_end', 'series_date')}
+    fields = {k: 1 for k in ('id', 'set_id', 'title', 'exam', 'mode', 'version', 'started_at', 'submitted_at', 'deadline', 'status', 'count', 'summary', 'answers', 'competition_end', 'series_date', 'series_id')}
     rows = await attempts.find(match, {'_id': 0, **fields}).sort('started_at', -1).skip((page-1)*20).limit(20).to_list(20)
     items = [{**history_item(a, t).model_dump(), 'series_date': a['series_date']} for a in rows]
-    latest = await attempts.find_one({**match, 'status': 'completed', 'summary': {'$ne': None}, 'competition_end': {'$not': {'$gt': t}}}, {'_id': 0, 'id': 1}, sort=[('submitted_at', -1)])
+    latest = await attempts.find_one({**match, 'status': 'completed', 'summary': {'$ne': None}}, {'_id': 0, 'id': 1}, sort=[('submitted_at', -1)])
     return {'items': items, 'page': page, 'total': await attempts.count_documents(match), 'latest_result_id': (latest or {}).get('id')}
+
+
+class SeriesRank(BaseModel):
+    state: Literal['sealed', 'preparing', 'ready', 'unavailable']
+    release_at: float | None = None
+    rank: int | None = None
+    total: int | None = None
+    top_percent: float | None = None
+    score: float | None = None
+    note: str = 'Rank among every live attempt of this paper on its day. Equal scores share a rank (1, 1, 3). Archive practice and previews are not counted.'
+
+
+@router.get('/attempts/{id}/series-rank', response_model=SeriesRank)
+async def series_rank(id: str, u=Depends(current)):
+    """The day's All India rank: score and solutions show on submission, the rank once every live student's time is up."""
+    from .canonical import clocked_one
+    a = await clocked_one(attempts, {'id': id, 'user_id': u['id']}, {'_id': 0, 'set_id': 1, 'mode': 1, 'status': 1, 'grading_status': 1, 'summary.score': 1, 'competition_end': 1})
+    if not a:
+        raise HTTPException(404, 'Attempt not found.')
+    if a.get('mode') != 'series_live' or a['status'] != 'completed':
+        return SeriesRank(state='unavailable')
+    if a.get('competition_end', 0) > a['_database_now']:
+        return SeriesRank(state='sealed', release_at=a['competition_end'])
+    if a.get('grading_status') != 'ready' or not a.get('summary'):
+        return SeriesRank(state='preparing')
+    ranked = {'set_id': a['set_id'], 'mode': 'series_live', 'status': 'completed', 'grading_status': 'ready'}
+    score = a['summary']['score']
+    total = await attempts.count_documents(ranked)
+    rank = 1 + await attempts.count_documents({**ranked, 'summary.score': {'$gt': score}})
+    return SeriesRank(state='ready', rank=rank, total=total, top_percent=round(100 * rank / total, 1), score=score)
 
 
 async def series_book_mocks():

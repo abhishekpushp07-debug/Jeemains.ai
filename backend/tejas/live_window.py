@@ -26,9 +26,10 @@ def guard(s, t):
                                  f"{s['rules']['minutes']} minutes. Students who started on time keep their full time.")
 
 
-def score_sealed(a, t):
-    """All India series keep scores sealed until the day closes; other live exams show the score on submission."""
-    return bool(a.get('series_id')) and a.get('competition_end', 0) > t
+def answers_sealed(a, t):
+    """Live exams keep answers and solutions sealed until every student's time is up.
+    All India series show score and solutions on submission; only the day's rank waits for the close."""
+    return not a.get('series_id') and a.get('competition_end', 0) > t
 
 
 async def apply_to_upcoming():

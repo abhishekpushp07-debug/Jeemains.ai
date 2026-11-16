@@ -261,10 +261,11 @@ async def download(id: str, u=Depends(current)):
     j = await get(jobs, id)
     if j['kind'] != 'report' or j['user_id'] != u['id']:
         raise HTTPException(404, 'Report not found.')
-    attempt = await clocked_one(attempts, {'id': j['payload']['attempt_id'], 'user_id': u['id']}, {'_id':0, 'competition_end':1})
+    attempt = await clocked_one(attempts, {'id': j['payload']['attempt_id'], 'user_id': u['id']}, {'_id':0, 'competition_end':1, 'series_id':1})
     if not attempt:
         raise HTTPException(404, 'Attempt not found.')
-    if attempt.get('competition_end', 0) > attempt['_database_now']:
+    from .live_window import answers_sealed
+    if answers_sealed(attempt, attempt['_database_now']):
         raise HTTPException(403, 'Reports unlock when the competition window closes.')
     if j['status'] != 'done':
         raise HTTPException(409, 'The report is not ready yet.', headers={'Retry-After': '3'})

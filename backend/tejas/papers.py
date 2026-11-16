@@ -1,7 +1,7 @@
 """Per-process cache of question-derived paper data keyed by (set id, revision, version).
 Every question edit bumps the set revision with a CAS, so an entry can never serve edited questions.
 Status, live windows and permissions are never cached: callers re-read the header on every request."""
-import asyncio, json, time
+import asyncio, json
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from fastapi import HTTPException
@@ -9,7 +9,6 @@ from .db import sets
 
 HEADER = {'_id': 0, 'questions': 0}
 _MAX = 24
-CHECK_SECONDS = 60
 _cache = OrderedDict()
 _flights = {}
 
@@ -22,16 +21,7 @@ class Paper:
     response_schema: dict | None = None
     public: list | None = None
     profile: dict | None = None
-    checked: tuple | None = None
     lock: asyncio.Lock = field(default_factory=asyncio.Lock)
-
-    def needs_check(self, header):
-        """Source files are re-verified every minute and whenever the attached file list changes."""
-        files = json.dumps(header.get('file_ids') or [], sort_keys=True, default=str)
-        return self.checked is None or self.checked[0] != files or time.monotonic() - self.checked[1] > CHECK_SECONDS
-
-    def mark_checked(self, header):
-        self.checked = (json.dumps(header.get('file_ids') or [], sort_keys=True, default=str), time.monotonic())
 
     @property
     def count(self):
