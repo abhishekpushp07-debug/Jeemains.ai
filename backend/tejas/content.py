@@ -91,7 +91,7 @@ def permitted(s, u=None, series_schedule=False, *, at):
         return False
     if s.get('series_date') and not series_schedule:
         from .live_series import set_window
-        if at < set_window(s)['opens_at']:
+        if at < set_window(s)['opens_at'] and (u or {}).get('role') != 'owner':
             return False
     if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or at < s.get('start_at', float('inf')) or at >= s.get('end_at', 0)):
         return False

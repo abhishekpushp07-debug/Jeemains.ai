@@ -11,5 +11,9 @@ export const examBySlug = slug => EXAMS.find(e=>e.slug===slug) || CUSTOM.get(slu
 export const examByName = name => EXAMS.find(e=>e.name===name) || [...CUSTOM.values()].find(e=>e.key===name||e.name===name);
 export const safeExamReturn = (path, fallback) => typeof path==='string' && (/^\/exams\/[a-z0-9-]{2,48}\/[a-z0-9-]{2,48}(\?[^#]*)?$/.test(path)||/^\/series\/[a-z0-9-]{2,80}(\?[^#]*)?$/.test(path)||/^\/profile(\?[^#]*)?$/.test(path)) ? path : fallback;
 export const JEE_SERIES = 'all-india-jee-2026-27';
+export const JEE_SERIES_DAYS = 50;
+export const JEE_SERIES_DATES = '9 Dec 2026 – 27 Jan 2027';
+export const JEE_SERIES_START = '9 December 2026';
+export const JEE_SERIES_START_SHORT = '9 Dec';
 export const seriesPath = id => id===JEE_SERIES ? '/series/all-india-jee' : '/series/'+id;
 export const examPath = name => {const e=examByName(name);return e?'/exams/'+e.slug:'/home'};

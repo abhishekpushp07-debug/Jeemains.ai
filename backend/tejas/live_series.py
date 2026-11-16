@@ -2,18 +2,24 @@ from collections import Counter
 from datetime import date, datetime, time, timedelta
 from typing import Literal
 from zoneinfo import ZoneInfo
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
-from .auth import current, owner
+from .auth import current, owner, maybe_current
 from .db import db, sets, attempts, get, now, audit
 from .canonical import database_now
 
 router = APIRouter(prefix='/api', tags=['All India series'])
 SERIES_ID = 'all-india-jee-2026-27'
-FIRST = date(2026, 12, 1)
-LAST = date(2027, 1, 31)
+# The owner's dates: 50 papers, 9 December 2026 to 27 January 2027.
+FIRST = date(2026, 12, 9)
+TOTAL = 50
+LAST = FIRST + timedelta(days=TOTAL - 1)
 IST = ZoneInfo('Asia/Kolkata')
+
+
+def nice(d):
+    return f'{d.day} {d:%B %Y}'
 
 
 JEE_TIMES = {'open_time': '00:01', 'last_start': '20:59', 'close_time': '23:59'}
@@ -55,10 +61,13 @@ def clock(t):
     return f"{d.hour % 12 or 12}:{d:%M} {'AM' if d.hour < 12 else 'PM'}"
 
 
-def guard_start(s, timestamp):
+def guard_start(s, timestamp, early=False):
     if not s.get('series_id') or not s.get('series_date'): return
     w = set_window(s)
-    if phase(s['series_date'], timestamp, w) not in ('live', 'archive'):
+    state = phase(s['series_date'], timestamp, w)
+    # The owner may take a paper before its day; it then counts like a live attempt of that day.
+    if early and state == 'upcoming': return
+    if state not in ('live', 'archive'):
         raise HTTPException(409, f"Live starts are allowed from {clock(w['opens_at'])} through {clock(w['last_start_at'])} IST on the scheduled day. Archive practice opens the following day.")
 
 
@@ -92,33 +101,35 @@ def series_problem(mock):
     return None if valid_paper(paper) else 'All India papers need 75 questions: 20 MCQ + 5 numerical in each of Physics, Chemistry and Mathematics.'
 
 
-async def schedule_data(studio=False):
+async def schedule_data(studio=False, early=False):
     from .content import permitted
     t = await database_now()
     projection = {'_id': 0, 'questions': 0, 'allowed_emails': 0, 'allowed_phones': 0}
-    rows = await sets.find({'series_id': SERIES_ID}, projection).limit(62).to_list(62)
+    rows = await sets.find({'series_id': SERIES_ID}, projection).limit(TOTAL + 20).to_list(TOTAL + 20)
     by_day = {s['series_date']: s for s in rows}
     slots = []
-    for i in range(62):
+    for i in range(TOTAL):
         day = (FIRST + timedelta(days=i)).isoformat()
         s = by_day.get(day)
         ready = bool(s and s['status'] == 'published' and permitted(s, series_schedule=True, at=t))
         state = phase(day, t)
-        visible = ready and state != 'upcoming'
-        slots.append({'day': i + 1, 'date': day, **window(day), 'state': state,
-                      'ready': ready if studio or state != 'upcoming' else False, 'set_id': s['id'] if s and (studio or visible) else None,
+        soon = early and ready and state == 'upcoming'
+        visible = ready and (state != 'upcoming' or soon)
+        slots.append({'day': i + 1, 'date': day, **window(day), 'state': state, 'early': soon,
+                      'ready': ready if studio or soon or state != 'upcoming' else False, 'set_id': s['id'] if s and (studio or visible) else None,
                       'title': s['title'] if s and (studio or visible) else f'All India JEE Mains · Test {i + 1:02d}',
-                      'can_start': ready and state in ('live', 'archive'),
+                      'can_start': ready and (state in ('live', 'archive') or soon),
                       **({'revision': s['revision'], 'publication_status': s['status'], 'series_import': s.get('series_import', False), 'live_enabled': s.get('live_enabled', False)} if studio and s else {})})
     today = datetime.fromtimestamp(t, IST).date().isoformat()
     return {'id': SERIES_ID, 'title': 'All India JEE Mains Test Series', 'first_date': FIRST.isoformat(),
-            'last_date': LAST.isoformat(), 'total': 62, 'timezone': 'Asia/Kolkata', 'server_now': t,
+            'last_date': LAST.isoformat(), 'total': TOTAL, 'timezone': 'Asia/Kolkata', 'server_now': t,
             'today': today, 'slots': slots, 'today_slot': next((s for s in slots if s['date'] == today), None)}
 
 
 @router.get('/series/all-india-jee')
-async def catalogue():
-    return await schedule_data()
+async def catalogue(request: Request):
+    u = await maybe_current(request)
+    return await schedule_data(early=(u or {}).get('role') == 'owner')
 
 
 @router.get('/series/all-india-jee/history')
@@ -201,7 +212,7 @@ class Clear(BaseModel):
 
 def check_range(day):
     if not FIRST <= day <= LAST:
-        raise HTTPException(422, 'Choose a date from 1 December 2026 to 31 January 2027.')
+        raise HTTPException(422, f'Choose a date from {nice(FIRST)} to {nice(LAST)}.')
 
 
 async def set_problem(s, day):
@@ -298,12 +309,12 @@ async def free_day(day, u):
 async def assign_book_mocks(book_id, pairs, bg, u):
     """Give ready mocks of an All India book their days; the worker builds each paper privately for its day."""
     from .book_models import BookMock
-    from .book_store import lock_book, save_book, unlock, mocks_for, save_mock
+    from .book_store import lock_book_waiting, save_book, unlock, mocks_for, save_mock
     from .book_imports import dispatch
     row = await db.tejas_books.find_one({'_id': book_id, 'removed': False, 'archived': {'$ne': True}}, {'payload.destination': 1})
     if not row or not (row['payload'].get('destination') or {}).get('series'):
         raise HTTPException(409, 'Only books uploaded to the All India Test Series can fill its days.')
-    book, token = await lock_book(book_id)
+    book, token = await lock_book_waiting(book_id)
     try:
         by_id = {m.id: m for m in await mocks_for(book)}
         for mid, day in pairs:
@@ -400,7 +411,7 @@ async def fill(data: Fill, bg: BackgroundTasks, u=Depends(owner)):
         while day <= LAST and (t >= window(day.isoformat())['opens_at'] or day.isoformat() in own or (day.isoformat() in taken and not data.replace)):
             day += timedelta(days=1)
         if day > LAST:
-            left.append({'label': m.label, 'reason': 'No free day left before 31 January.'})
+            left.append({'label': m.label, 'reason': f'No free day left before {LAST.day} {LAST:%B}.'})
             continue
         iso = day.isoformat()
         problem = await set_problem(s, iso) if s else None

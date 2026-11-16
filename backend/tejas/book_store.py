@@ -1,4 +1,4 @@
-import hashlib, os, tempfile, uuid
+import asyncio, hashlib, os, tempfile, uuid
 from pathlib import Path
 from fastapi import HTTPException
 from pymongo import ReturnDocument
@@ -69,6 +69,18 @@ async def lock_book(id, revision=None):
     row=await db.tejas_books.find_one_and_update(query,[{'$set':{'lock_token':token,'lock_until':{'$add':[EPOCH_NOW,900]}}}],return_document=ReturnDocument.AFTER)
     if not row:raise HTTPException(409,'This book changed or is processing a batch. Reload and retry; saved work is retained.',headers={'Retry-After':'3'})
     return Book.from_mongo(row),token
+
+
+async def lock_book_waiting(id, seconds=30):
+    """Waits a little for the PDF's running batch (for example building the last paper) instead of failing at once."""
+    for _ in range(int(seconds / 1.5)):
+        try:
+            return await lock_book(id)
+        except HTTPException as e:
+            if e.status_code != 409:
+                raise
+            await asyncio.sleep(1.5)
+    raise HTTPException(409, 'This PDF is still finishing earlier work, such as building the last paper. Wait a minute, then press Give a day again. Nothing was lost.', headers={'Retry-After': '30'})
 
 
 async def fence(book, token):

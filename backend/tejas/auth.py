@@ -194,6 +194,14 @@ async def current(request: Request):
         )
 
 
+async def maybe_current(request: Request):
+    """The signed-in user, or None for a visitor."""
+    try:
+        return await current(request)
+    except HTTPException:
+        return None
+
+
 async def staff(u=Depends(current)):
     if u.get("access_type") == "unverified_phone" or u["role"] not in [
         "owner",

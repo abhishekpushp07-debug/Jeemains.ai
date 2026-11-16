@@ -372,9 +372,16 @@ async def student_exams(u=Depends(current)):
 async def student_exam(slug: str, u=Depends(current)):
     await visibility()
     e = await exam_doc(slug, u)
+    from .series_admin import visible_series
+    from .live_series import SERIES_ID
+    open_series = {c['section_id']: c['id'] for c in await visible_series()}
     found = []
     for s in await exam_sections(slug):
         if s['kind'] == 'aits':
+            # A test series opens inside its own exam; only JEE Main also has the Home banner.
+            if s['id'] in open_series:
+                sid = open_series[s['id']]
+                found.append({**section_view(s), 'live_count': 0, 'series_path': '/series/all-india-jee' if sid == SERIES_ID else '/series/' + sid})
             continue
         count = await sets.count_documents(live_query(u, e, s))
         if count:

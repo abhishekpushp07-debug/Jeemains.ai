@@ -19,7 +19,7 @@ export default function ExamHub(){
  return <div className="container page exam-home" data-testid="exam-hub-page"><ExamBreadcrumbs exam={exam}/>{data&&!data.shown&&<OwnerHiddenNote exam={data}/>}
   <header className="exam-simple-heading"><span className="eyebrow" data-testid="exam-hub-eyebrow">YOUR {exam.name.toUpperCase()} SPACE</span><h1 data-testid="exam-hub-title">What would you like to do?</h1><p data-testid="exam-hub-description">One clear path from practice to understanding.</p></header>
   {!sections?<div className="exam-choice-grid" data-testid="exam-hub-sections-loading">{[1,2,3].map(n=><Skeleton key={n} className="h-56"/>)}</div>:<div className="exam-choice-grid" data-testid="exam-hub-card-grid">
-   {sections.map((s,i)=><NavigationCard key={s.id} to={`/exams/${examSlug}/${s.slug}`} title={s.name} description={s.description||`${s.live_count} live test${s.live_count===1?'':'s'}`} Icon={ICONS[s.kind]||ListChecks} index={index(i+1)} testId={'exam-hub-card-'+s.slug}/>)}
+   {sections.map((s,i)=><NavigationCard key={s.id} to={s.series_path||`/exams/${examSlug}/${s.slug}`} title={s.name} description={s.series_path?(s.description||'One paper a day with an all-India rank.'):(s.description||`${s.live_count} live test${s.live_count===1?'':'s'}`)} Icon={ICONS[s.kind]||ListChecks} index={index(i+1)} testId={'exam-hub-card-'+s.slug}/>)}
    <NavigationCard to={`/exams/${examSlug}/results`} title="Results" description="Revisit previous attempts, your answers and available solutions." Icon={ChartNoAxesCombined} index={index(sections.length+1)} testId="exam-hub-card-results"/>
   </div>}
   {sections&&!sections.length&&<p className="exam-hub-empty" data-testid="exam-hub-no-sections">Tests for {exam.name} will appear here as soon as they go live.</p>}

@@ -1,13 +1,13 @@
-"""All India Test Series for any exam: one paper a day on its own dates and times, a separate Home card when switched on."""
+"""All India Test Series for any exam: one paper a day on its own dates and times. Students open it inside its exam; only JEE Main has the Home banner."""
 from datetime import date, datetime, timedelta
 from typing import Annotated, Literal
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
-from .auth import current, owner
+from .auth import current, owner, maybe_current
 from .db import db, sets, attempts, now, audit
 from .canonical import database_now
-from .live_series import SERIES_ID, IST, JEE_TIMES, window, phase, valid_paper, paper_pattern, series_problem
+from .live_series import SERIES_ID, IST, JEE_TIMES, FIRST, LAST, TOTAL, window, phase, valid_paper, paper_pattern, series_problem
 
 router = APIRouter(prefix='/api', tags=['Test series'])
 series = db.tejas_series
@@ -15,7 +15,8 @@ Identity = Annotated[str, Field(min_length=1, max_length=100)]
 Clock = Annotated[str, Field(pattern=r'^([01]\d|2[0-3]):[0-5]\d$')]
 Day = Annotated[str, Field(pattern=r'^\d{4}-\d{2}-\d{2}$')]
 JEE = {'id': SERIES_ID, 'exam_slug': 'jee-main', 'section_id': 'jee-main:aits', 'title': 'All India JEE Mains Test Series',
-       'first_date': '2026-12-01', 'days': 62, **JEE_TIMES, 'shown': True, 'builtin': True, 'pattern': None}
+       'first_date': FIRST.isoformat(), 'days': TOTAL, **JEE_TIMES, 'shown': True, 'builtin': True, 'pattern': None}
+JEE_DATES_ID = 'jee-series-2026-12-09-50-days'
 JEE_RULE = 'All India JEE papers need 75 questions (20 MCQ + 5 numerical in each subject), 180 minutes and +4 / −1 marking.'
 
 
@@ -184,7 +185,7 @@ async def day_papers(cfg, studio):
     return {s['series_date']: s for s in rows}, pending
 
 
-async def slots(cfg, t, studio=False):
+async def slots(cfg, t, studio=False, early=False):
     from .content import permitted
     by_day, pending = await day_papers(cfg, studio)
     out = []
@@ -193,10 +194,11 @@ async def slots(cfg, t, studio=False):
         w = (s or {}).get('series_window') or window(day, cfg)
         ready = bool(s and s['status'] == 'published' and permitted(s, series_schedule=True, at=t))
         state = phase(day, t, w)
-        visible = studio or (ready and state != 'upcoming')
-        slot = {'day': i + 1, 'date': day, **w, 'state': state, 'ready': ready if visible else False,
+        soon = early and ready and state == 'upcoming'
+        visible = studio or (ready and (state != 'upcoming' or soon))
+        slot = {'day': i + 1, 'date': day, **w, 'state': state, 'ready': ready if visible else False, 'early': soon,
                 'set_id': s['id'] if s and visible else None, 'title': (s.get('display_title') or s['title']) if s and visible else f"{cfg['title']} · Test {i + 1:02d}",
-                'can_start': ready and state in ('live', 'archive')}
+                'can_start': ready and (state in ('live', 'archive') or soon)}
         if studio:
             m = pending.get(day)
             slot.update(opened=t >= w['opens_at'], paper={'kind': 'set', 'id': s['id'], 'title': s.get('display_title') or s['title'], 'written': bool(s.get('written')), 'off': bool(s.get('owner_unlive'))} if s
@@ -205,9 +207,9 @@ async def slots(cfg, t, studio=False):
     return out
 
 
-async def schedule(cfg, studio=False):
+async def schedule(cfg, studio=False, early=False):
     t = await database_now()
-    days = await slots(cfg, t, studio)
+    days = await slots(cfg, t, studio, early)
     today = datetime.fromtimestamp(t, IST).date().isoformat()
     from .structure import exams
     e = await exams.find_one({'_id': cfg['exam_slug']}, {'_id': 0, 'name': 1, 'color': 1, 'slug': 1, 'shown': 1}) or {}
@@ -238,11 +240,12 @@ async def public_list():
 
 
 @router.get('/series/{sid}/schedule')
-async def public_schedule(sid: str):
+async def public_schedule(sid: str, request: Request):
     cfg = next((c for c in await visible_series() if c['id'] == sid), None)
     if not cfg:
         raise HTTPException(404, 'This test series is not open.')
-    return await schedule(cfg)
+    u = await maybe_current(request)
+    return await schedule(cfg, early=(u or {}).get('role') == 'owner')
 
 
 @router.get('/series/{sid}/history')
@@ -271,7 +274,7 @@ async def update_config(sid: str, body: SeriesConfig, u=Depends(owner)):
     if not change:
         raise HTTPException(422, 'Nothing to change.')
     if cfg.get('builtin') and set(change) - {'title'}:
-        raise HTTPException(409, 'The JEE Main series keeps its 62 days (1 Dec – 31 Jan), its times and its Home banner.')
+        raise HTTPException(409, f'The JEE Main series keeps its {TOTAL} days ({FIRST.day} {FIRST:%b} – {LAST.day} {LAST:%b}), its times and its Home banner.')
     new = {**cfg, **change}
     try:
         date.fromisoformat(new['first_date'])
@@ -281,7 +284,7 @@ async def update_config(sid: str, body: SeriesConfig, u=Depends(owner)):
     if not set(change) & {'first_date', 'days', 'open_time', 'last_start'}:
         await series.update_one({'_id': sid}, {'$set': change})
         await audit(u['id'], 'Test series settings changed', sid, ', '.join(f'{k}={v}' for k, v in change.items()))
-        return {'message': ('Its card now shows on Home.' if change.get('shown') else 'Hidden from Home.') if 'shown' in change else 'Series saved.', 'moved': 0}
+        return {'message': ('Students can now open it inside its exam.' if change.get('shown') else 'Closed to students.') if 'shown' in change else 'Series saved.', 'moved': 0}
     t = await database_now()
     keep = set(dates(new))
     rows = await sets.find({'series_id': sid}, {'_id': 0, 'id': 1, 'series_date': 1, 'series_window': 1, 'revision': 1}).to_list(None)
@@ -364,7 +367,7 @@ async def assign_built(cfg, id, day, w):
 async def assign_mocks(cfg, pairs, bg, u):
     """Checked mocks of a series book get their days; the worker builds each paper privately for its day."""
     from .book_models import BookMock
-    from .book_store import lock_book, save_book, unlock, save_mock, load_book
+    from .book_store import lock_book_waiting, save_book, unlock, save_mock, load_book
     from .book_imports import dispatch
     books = {b['_id'] for b in await series_books(cfg)}
     by_book = {}
@@ -385,7 +388,7 @@ async def assign_mocks(cfg, pairs, bg, u):
                 raise HTTPException(409, f'{m.label}: every paper in this series needs {count} questions, so ranks stay fair.')
         by_book.setdefault(m.book_id, []).append((m, day, w))
     for bid, items in by_book.items():
-        book, token = await lock_book(bid)
+        book, token = await lock_book_waiting(bid)
         try:
             for m, day, w in items:
                 m.series_date, m.series_id, m.publish_requested, m.release_at = day, cfg['id'], True, w['opens_at']
@@ -462,6 +465,31 @@ async def unassign_set(cfg, id, u):
         raise HTTPException(409, 'An opened day cannot be changed.')
     await sets.update_one({'id': id}, {'$unset': {k: '' for k in ('series_id', 'series_date', 'series_window', 'series_pattern', 'start_at', 'end_at')}, '$inc': {'revision': 1}})
     await audit(u['id'], 'Test series day removed', id, s['series_date'])
+
+
+async def jee_dates_job():
+    """One time: the JEE Main series moves to the owner's 50 days; papers on other days lose their day and wait to be given one again."""
+    cfg = await series_cfg(SERIES_ID)
+    new = {'first_date': FIRST.isoformat(), 'days': TOTAL}
+    keep = set(dates({**cfg, **new}))
+    t = await database_now()
+    moved = 0
+    for s in await sets.find({'series_id': SERIES_ID}, {'_id': 0, 'id': 1, 'series_date': 1, 'series_window': 1}).to_list(None):
+        if s['series_date'] in keep or t >= (s.get('series_window') or window(s['series_date'], cfg))['opens_at']:
+            continue
+        await unassign_set(cfg, s['id'], {'id': 'system'})
+        moved += 1
+    for m in await db.tejas_book_mocks.find({'series_date': {'$nin': [None, '']}, 'set_id': None, **mock_scope(cfg)}, {'_id': 1, 'series_date': 1}).to_list(5000):
+        if m['series_date'] not in keep:
+            await db.tejas_book_mocks.update_one({'_id': m['_id']}, {'$set': {'series_date': None, 'series_id': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
+            moved += 1
+    await series.update_one({'_id': SERIES_ID}, {'$set': new})
+    return {'moved': moved, **new}
+
+
+async def jee_dates_once():
+    from .library import run_once
+    return await run_once(JEE_DATES_ID, jee_dates_job, 'JEE Main series moved to 9 Dec 2026 – 27 Jan 2027')
 
 
 @router.post('/admin/master/series/{sid}/unassign')

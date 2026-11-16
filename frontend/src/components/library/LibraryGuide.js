@@ -5,7 +5,7 @@ import {ChevronDown,LifeBuoy,ShieldCheck,Upload} from 'lucide-react';
 const when=t=>t?new Date(t*1000).toLocaleDateString('en-IN',{dateStyle:'medium'}):'';
 const NEXT=[
  ['JEE Main chapter-wise PYQ','/super-admin/exam/jee-main/jee-main:chapters','Upload PDF in Chapter-wise Tests. Each chapter becomes its own test by itself.'],
- ['JEE Main All India Test Series','/super-admin/exam/jee-main/jee-main:aits','Your 62 dates are kept. Upload the papers, then press Fill days in order.'],
+ ['JEE Main All India Test Series','/super-admin/exam/jee-main/jee-main:aits','Your 50 dates (9 Dec – 27 Jan) are kept. Upload the papers, then press Fill days in order.'],
  ['BITSAT chapter-wise PYQ','/super-admin/exam/bitsat/bitsat:chapters','Same as JEE Main: one PDF, one test per chapter.'],
  ['BITSAT All India Test Series','/super-admin/exam/bitsat','Open BITSAT, add the type All India Test Series, choose its dates, then upload.'],
 ];

@@ -446,3 +446,5 @@ async def fresh_start_once():
 async def run_cleanups():
     await cleanup_once()
     await fresh_start_once()
+    from .series_admin import jee_dates_once
+    await jee_dates_once()

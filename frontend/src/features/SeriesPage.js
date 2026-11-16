@@ -13,10 +13,11 @@ const STATE={live:'LIVE TODAY',archive:'PRACTICE',start_closed:'STARTS CLOSED',e
 
 function Slot({s,path,attempt}){
  return <article className={'series-slot state-'+s.state} data-testid={'series-day-'+s.day}>
-  <div className="series-slot-top"><span>TEST {String(s.day).padStart(2,'0')}</span><span>{s.state==='live'&&!s.ready?'AWAITING PAPER':STATE[s.state]}</span></div>
+  <div className="series-slot-top"><span>TEST {String(s.day).padStart(2,'0')}</span><span>{s.early?'EARLY · ONLY YOU':s.state==='live'&&!s.ready?'AWAITING PAPER':STATE[s.state]}</span></div>
   <h3>{s.title}</h3><p><CalendarDays size={15}/>{dayLabel(s.date)} · {at(s.opens_at)} – last start {at(s.last_start_at)} IST</p>
+  {s.early&&<small data-testid={'series-day-early-'+s.day}>Open early for your owner account only. Students see it on its day. It counts as your live attempt.</small>}
   <div className="series-actions">{attempt&&<Button asChild variant="outline"><Link to={(attempt.resumable?'/attempts/':'/results/')+attempt.id} state={{returnTo:path}} data-testid={'series-resume-'+s.day}>{attempt.resumable?'Resume live attempt':'Open live result'}</Link></Button>}
-   {s.can_start&&(!attempt||s.state==='archive')&&<Button asChild><Link to={'/sets/'+s.set_id} state={{returnTo:path}} data-testid={'series-start-'+s.day}>{s.state==='archive'?'Practise this paper':'Check device & start'}<ArrowUpRight size={16}/></Link></Button>}</div>
+   {s.can_start&&(!attempt||s.state==='archive')&&<Button asChild><Link to={'/sets/'+s.set_id} state={{returnTo:path}} data-testid={'series-start-'+s.day}>{s.state==='archive'?'Practise this paper':s.early?'Start now · only you':'Check device & start'}<ArrowUpRight size={16}/></Link></Button>}</div>
  </article>;
 }
 
@@ -27,12 +28,13 @@ export default function SeriesPage(){
  useEffect(()=>{if(user)api(`/series/${seriesId}/history`).then(setHistory).catch(()=>setHistory({items:[]}));},[seriesId,user]);
  if(error)return <div className="container page"><Empty title="This series is not open." action={<Button asChild><Link to="/home">Back to Home</Link></Button>}>{error}</Empty></div>;
  if(!data)return <Loading/>;
- const today=data.today_slot,live=history?.items.find(a=>a.mode==='series_live'&&a.series_date===data.today),archive=data.slots.filter(s=>s.state==='archive').reverse();
+ const today=data.today_slot,live=history?.items.find(a=>a.mode==='series_live'&&a.series_date===data.today),archive=data.slots.filter(s=>s.state==='archive').reverse(),early=data.slots.filter(s=>s.early);
  return <div className={'container page series-hub exam-color-'+(data.exam.color||'teal')} data-testid="generic-series-hub">
   <Link className="breadcrumb" to={user?'/home':'/'} data-testid="series-back-home"><ArrowLeft size={15}/>Back to home</Link>
   <header className="series-hub-header"><div><span className="series-kicker">{data.exam.name.toUpperCase()} · ALL INDIA</span><h1 data-testid="series-hub-title">{data.title}</h1><p data-testid="series-hub-dates">{dayLabel(data.first_date)} – {dayLabel(data.last_date)} · {data.total} scheduled tests · Free</p></div></header>
   <Tabs value={tab} onValueChange={setTab} className="series-tabs"><TabsList>{[['today','Live & schedule',Radio],['archive','Practice archive',Archive],['results','My results',BarChart3]].map(([v,l,Icon])=><TabsTrigger key={v} value={v} data-testid={'series-tab-'+v}><Icon size={16}/>{l}</TabsTrigger>)}</TabsList></Tabs>
   {tab==='today'&&<>{today?<Slot s={today} path={path} attempt={live}/>:<div className="series-empty" data-testid="series-prelaunch"><Radio size={28}/><h2>{data.today<data.first_date?`The first test opens ${dayLabel(data.first_date)}.`:'The live series has ended.'}</h2><p>Live results release when each day closes. Earlier days move to the practice archive.</p></div>}
+   {early.length>0&&<section className="series-early" data-testid="series-owner-early"><div className="series-early-head"><span className="series-kicker">ONLY FOR YOU · OWNER ACCOUNT</span><h2>{early.length} paper{early.length===1?'':'s'} open early</h2><p>Students see each paper only on its own day.</p></div><div className="series-slot-grid">{early.map(s=><Slot key={s.day} s={s} path={path} attempt={history?.items.find(a=>a.mode==='series_live'&&a.series_date===s.date)}/>)}</div></section>}
    <h2 className="series-section-title">The {data.total}-day schedule</h2>
    <div className="series-calendar" data-testid="series-calendar">{data.slots.map(s=><div key={s.day} className={'series-calendar-day '+s.state}><strong>{String(s.day).padStart(2,'0')}</strong><span>{dayLabel(s.date).replace(/ 20\d\d/,'')}</span><small>{s.date===data.today?'Today':s.state==='archive'?'Archive':s.state==='upcoming'?'Upcoming':s.ready?'Scheduled':'Awaiting paper'}</small></div>)}</div></>}
   {tab==='archive'&&(archive.length?<div className="series-slot-grid">{archive.map(s=><Slot key={s.day} s={s} path={path}/>)}</div>:<div className="series-empty" data-testid="series-archive-empty"><Archive/><h2>The archive begins after day one.</h2></div>)}

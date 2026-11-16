@@ -263,7 +263,7 @@ async def start(id: str, data: Start, u=Depends(current)):
         raise HTTPException(404, "This set is not available to start.")
     entry = await paper(s)
     if not preview:
-        guard_start(s, started_at)
+        guard_start(s, started_at, early=u['role'] == 'owner')
         guard_live_start(s, started_at)
         if s.get('series_id') and not valid_paper({**s, 'questions': entry.questions}):
             raise HTTPException(409, 'This series paper needs owner review before new attempts can start.')
@@ -318,7 +318,7 @@ async def start(id: str, data: Start, u=Depends(current)):
         "parent_attempt": None,
     }
     if not preview and s.get('series_id'):
-        guard_start(s, a['started_at'])
+        guard_start(s, a['started_at'], early=u['role'] == 'owner')
         if series_mode(s, a['started_at']) != mode:
             raise HTTPException(409, 'The series day changed. Reload before starting.')
         a.update(series_id=s['series_id'], series_date=s['series_date'], test_kind='mock')
