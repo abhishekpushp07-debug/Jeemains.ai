@@ -27,7 +27,7 @@ export function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
  const [answer,setAnswer]=useState(q.answer||''),[typed,setTyped]=useState(q.typed_options||{}),[complete,setComplete]=useState(false),[keyOnly,setKeyOnly]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[done,setDone]=useState(false);
  const needsSolution=q.issues.some(x=>/original solution expected/i.test(x));
  const valid=complete&&answer.trim()&&(type==='integer'?/^[+-]?\d{1,20}$/.test(answer.trim()):options.length>=2&&options.includes(answer));
- function toggle(letter){setOptions(o=>o.includes(letter)?o.filter(x=>x!==letter):LETTERS.filter(x=>o.includes(x)||x===letter));}
+ function toggle(letter){if(options.includes(letter)&&answer===letter)setAnswer('');setOptions(o=>o.includes(letter)?o.filter(x=>x!==letter):LETTERS.filter(x=>o.includes(x)||x===letter));}
  async function save(){setBusy(true);setError('');try{const option_texts=type==='mcq'?Object.fromEntries(options.filter(l=>(typed[l]||'').trim()).map(l=>[l,typed[l].trim()])):{};
   const r=await post(`/admin/books/${bookId}/mocks/${mockId}/fix`,{revision,question_id:q.id,response_type:type,option_labels:type==='mcq'?options:[],option_texts,answer:answer.trim(),complete:true,key_only:keyOnly});toast.success(r.message);setDone(true);onSaved();}catch(e){setError(e.message);}finally{setBusy(false);}}
  return <article className={'held-card'+(done?' is-done':'')} data-testid={tag}>

@@ -284,9 +284,16 @@ async def delete_sets(ids):
 
 
 async def check_uploads(refs):
+    from .canonical import database_now
+    t = await database_now()
     for r in refs:
-        if r.kind != 'book_mock' and await sets.find_one({FIELD[r.kind]: r.id, 'archived': {'$ne': True}}, {'_id': 1}):
+        if r.kind == 'book_mock':
+            continue
+        if await sets.find_one({FIELD[r.kind]: r.id, 'archived': {'$ne': True}}, {'_id': 1}):
             raise HTTPException(409, 'Some tests made from this upload are still in Master. Move them to the Library first, then delete.')
+        ids = await sets.distinct('id', {FIELD[r.kind]: r.id})
+        if ids and await attempts.find_one({'set_id': {'$in': ids}, 'status': 'active', '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}, {'_id': 1}):
+            raise HTTPException(409, 'A student is still writing a test made from this upload. Try again when their time is up.')
 
 
 async def delete_uploads(refs):

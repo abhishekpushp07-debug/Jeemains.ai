@@ -1,0 +1,59 @@
+{
+  "summary": "Iteration 185 (typed missing options, edit-all questions, upload resume/retry, Live/Off switches, AITS day switch, Library permanent delete, deleted results). Backend: new isolated script tests/typed_delete_iso185.py, 54/54 PASS. It covers upload resume from the Library (same id, state uploading, received_parts [0,1], remaining parts + complete; a different section gives a new id), problems?all=true (owner gets every question; without all only marked ones; reviewer 404 on a ready mock), typed fix (C/D typed, E dropped, >2000 chars 422, ~10KB body passes the route limit, book back to ready, typed_options in the published set, the student attempt and the results), series day Live/Off (open day hidden: ready false, set_id null, cannot start; Live restores; 404 for a set outside the series; student denied), and Library delete (owner only; missing or wrong confirm 422; an active attempt gives 409 and nothing is deleted; non-archived ids ignored; set, saved_tests, solutions and versions removed; attempts set_deleted with title and summary kept; results status 'deleted'; the last test of an archived PDF removes the book with its pages, mocks and parts; an upload still used outside the Library is kept; an upload ref gives 409 while a test is outside the Library, then deletes everything once archived; book_mock gets deleted:true and leaves the uploads list; 160-id restore and delete accepted; empty delete 422). Frontend: Playwright against the preview UI with /api routed to the bridge tests/typed_bridge185.py. 1 real bug: the student player HIDES the typed option text (CSS). Everything else listed in the request works, apart from the minor design issues below.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/admin/library/delete", "issue": "Not atomic when ids and uploads are mixed. delete_sets(body.ids) is committed first. Then delete_uploads() calls delete_sets() for each upload's tests, and that raises 409 if one of those Library tests has an active attempt. check_uploads() only checks for non-archived tests, not active attempts. Result: the ids are deleted but the response is a 409 error. Fix: check active attempts for the upload-linked sets inside check_uploads before deleting anything."},
+      {"endpoint": "POST /api/admin/master/status (book_mock -> live) then POST /api/sets/{id}/start", "issue": "In the isolated bridge, starting right after publishing (after the worker drained) returned 404 'This set is not available to start.' It worked after a 2 s wait plus structure.visibility(force=True). There may be a short window after Make Live where students cannot start. Low priority, but worth checking whether visibility is refreshed when a book mock is published."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Player answer options for source (picture) questions with typed_options", "issue": "The typed text for C/D is in the DOM (player-option-math-C = '2√3 m/s', D = '4 m/s') but is NOT visible. frontend/src/exam-refinement.css line 62 '.answer-options-source .option-copy { display:none; }' hides every option-copy in source mode. Students only see buttons A B C D, while the hint says 'Options the picture does not show are typed below.' Fix: show .option-copy when the option has typed text, e.g. add a class such as 'has-typed' on the answer-option and a rule '.answer-options-source .has-typed .option-copy{display:block}'. Or stop hiding option-copy and render nothing for options without typed text.", "selector": "[data-testid=player-option-math-C]", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Library guide (/super-admin/library)", "issues": ["LibraryGuide.js line 23 still says 'Like a recycle bin, nothing is deleted'. This now contradicts Delete / Delete all and the page subtitle 'or deletes it for good'."]},
+      {"screen": "Library rows, mobile 390", "issues": ["No horizontal overflow, but rows are cramped: the title breaks mid-word ('TEST_Li / ve set'), meta chips stack one per line, and Restore/Delete take the right column. On narrow screens the actions should wrap below the title."]},
+      {"screen": "Edit questions (fix-mock-page ?all=1)", "issues": ["Typed-option text boxes are narrow, so the placeholder is cut off ('Text of option A, for exam') on desktop and mobile. Make them full width.", "At 390px the filter tabs run past the viewport: all-questions-filter-marked is partly off-screen (the strip scrolls; page scrollWidth stays 390). Consider wrapping.", "Text boxes appear for every ticked letter, including A and B that the picture already shows. Acceptable, but it adds noise."]},
+      {"screen": "AITS Days grid", "issues": ["A day with a built paper shows the Live/Off switch plus the 'Open today' chip, and the paper title shrinks to 'TEST…' (almost unreadable). Give the title its own line in the tile."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/typed_delete_iso185.py", "/app/backend/tests/typed_bridge185.py"],
+  "action_items": [
+    "HIGH: make typed option text visible in the Player for source questions (exam-refinement.css .answer-options-source .option-copy display:none).",
+    "Update LibraryGuide copy ('nothing is deleted') to mention permanent Delete.",
+    "Make /admin/library/delete check active attempts for upload-linked sets before deleting anything (no partial delete returned as 409).",
+    "Mobile Library row layout: wrap the actions below the title; widen the typed-option inputs; un-truncate AITS day tile titles."
+  ],
+  "critical_code_review_comments": [
+    "library.delete: delete_sets(ids) runs before delete_uploads(), and delete_uploads can raise 409 halfway, so earlier deletes are already committed (non-atomic).",
+    "series_admin.paper_live does not reject archived/Library sets that still carry series_id (they have no series_date). Harmless, but a 404 would be clearer.",
+    "uploadBook.js: retries only on network/5xx/408/429 (correct). Final message counts parts before i, which is correct because earlier parts are all sent. The UploadDialog catch keeps the message in upload-progress.",
+    "HeldFixer QuestionCard: unticking the letter that is the chosen answer leaves the stale answer, so Save is disabled with no hint. Consider clearing the answer or showing why."
+  ],
+  "updated_files": ["/app/backend/tests/typed_delete_iso185.py (new)", "/app/backend/tests/typed_bridge185.py (new)"],
+  "success_rate": {"backend": "100% (54/54)", "frontend": "~92% (1 HIGH bug: typed options hidden in Player; rest pass)"},
+  "seed_data_creation": "Only inside disposable isolated DBs (tejas_isolated_book170_*). All of mine were dropped. A pre-existing leftover DB tejas_isolated_book170_677e53c0 (created ~13 h before this run, not by me) was left untouched. The customer DB was never written; jeelive.ai was not called.",
+  "test_credentials": "No credentials created or changed. The bridge uses random owner/reviewer and a student with PIN 8261 inside the disposable DB only.",
+  "frontend_verified": [
+    "Master type page: mock-live-switch/word on every row (Live/Off). Status chip starts with a 'STATUS' caption. Live->Off, Off->Live and Draft book_mock -> 'Going live' -> Live all work. The switch is disabled for a Draft with to_fix>0. The menu has Make Live / Schedule… / Switch Off / Move to Library. The Edit link goes to /super-admin/fix/<book>/<mock>?all=1.",
+    "Edit questions page: title, filter counts (All 3 / Fewer than 4 1 / Marked 0), the 'Only 2 options' flag, the question picture, legends 1-4. Tick C/D, type text, answer C, tick complete, Save: toast 'Saved Physics Q2. Rechecking TEST_DRAFTB…', then the row shows 'Buttons A B C D · Answer C' and '2 typed'. The only-marked and all-questions links switch modes.",
+    "HeldFixer Fix flow on a held mock (2-option confirm) works; held-fixer-clear appears.",
+    "Upload retry: aborting part 2 of 3 once shows 'Connection dropped on part 2 of 3. Trying again in 2 s (1 of 7)…' in upload-progress, then the upload completes by itself (parts 0,1,1,2 then complete) with a success toast.",
+    "AITS Days: series-day-live-2 Live->Off shows toast and the word 'Off'. The student schedule then has ready false and set_id null while the day is open; switching back Live restores it.",
+    "Library: Delete on each row, Delete all per group, Delete on uploads and Delete selected all work. The dialog facts are correct (attempt count shown), the confirm button is disabled until ticked, Cancel changes nothing, and confirming refreshes the list with a success toast. Restore (single) still works.",
+    "Student: the deleted result page (results-deleted, score 0 / 12, note). My Tests card shows 'Test deleted' plus a note and no compare checkbox. Results review shows review-typed-options-2 'C. 2√3 m/s D. 4 m/s'. The Player hint text is correct but the typed text is hidden (bug).",
+    "Mobile 390x844: Master rows, Library and the delete dialog have no horizontal overflow."
+  ],
+  "not_tested": [
+    "Final upload failure after 8 tries (needs ~2.5 min of backoff); verified by code review only.",
+    "The navigator.onLine=false wait message.",
+    "AITS 'Papers without a day' Edit/Fix links (needs a 75-question complete PDF mock fixture).",
+    "Write editor UI for 2->4 options (the API path PUT /admin/master/written/{id}/questions was confirmed: the question goes from 2 to 4 options with answer C).",
+    "Forgot PIN/Login regression (untouched by this change; see iteration 184)."
+  ],
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend: cd /app/backend && timeout 290 python tests/typed_delete_iso185.py (54 checks, drops its DB). Browser: cd /app/backend && python tests/typed_bridge185.py 3000 & (about 50 s setup; fixtures under key 'f' in /tmp/uibridge/bridge.json: slug/section of exam NEETX, held/draft/draft2/typed [book, mock], typed_set, typed_attempt, live_set, off_set, day_set (AITS day 2026-12-02 open now), lib1..3, gone + gone_attempt (deleted test), import imp-ui185). Route **/api/** to http://127.0.0.1:8770 with the role cookie. Results review of a question: /results/<attempt>?view=solutions&subject=Physics&question=<qid>. Stop with pkill -INT -f typed_bridge185.py (it drops its DB). Retest: Player typed text visible (player-option-math-C visible, not only in the DOM)."
+}

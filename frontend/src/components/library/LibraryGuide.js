@@ -20,7 +20,7 @@ export function LibraryGuide({fresh}){
    <LifeBuoy size={18} aria-hidden="true"/><strong>How the Library works{fresh?' · what to do next':''}</strong><ChevronDown size={18} className={open?'is-open':''} aria-hidden="true"/>
   </button>
   {open&&<div className="library-guide-grid">
-   <div className="library-guide-card"><h3><ShieldCheck size={16}/>Like a recycle bin, nothing is deleted</h3><ul>
+   <div className="library-guide-card"><h3><ShieldCheck size={16}/>Like a recycle bin: nothing leaves unless you press Delete</h3><ul>
     <li><strong>Students cannot see or start</strong> anything in here.</li>
     <li><strong>Every student keeps their old score</strong> and result in their history.</li>
     <li><strong>Restore</strong> puts a test back exactly where it was: a Live test comes back Live, a Draft comes back as a Draft.</li>

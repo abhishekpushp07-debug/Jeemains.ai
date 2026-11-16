@@ -60,6 +60,9 @@
 .answer-options-source .answer-option { justify-content:center; min-height:var(--touch-target); padding:var(--space-3); gap:var(--space-2); }
 .answer-options-source .option-index { border:0; background:none; font-size:var(--text-base); }
 .answer-options-source .option-copy { display:none; }
+.player-layout .answer-options-source.has-typed { grid-template-columns:1fr; }
+.answer-options-source.has-typed .answer-option { justify-content:flex-start; }
+.answer-options-source.has-typed .option-copy { display:block; }
 .answer-options-source .selected .option-index { background:none; color:var(--brand-text); }
 .source-options-hint { font-size:var(--text-xs); margin-bottom:var(--space-3); }
 .studio-validation-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-3); margin-block:var(--space-5); }

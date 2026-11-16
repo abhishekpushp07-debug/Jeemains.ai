@@ -89,12 +89,12 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .master-option.is-correct .master-option-letter{background:var(--success);border-color:var(--success);color:#0b0b0b}
 
 .master-days{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
-.master-day{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px}
+.master-day{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto auto auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px}
 .master-day.has-paper{border-color:var(--brand-line)}
 .master-day.is-opened{opacity:.75}
 .master-day-num{font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
 .master-day-date{font-size:12px;color:var(--text-muted);white-space:nowrap}
-.master-day-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.master-day-title{overflow-wrap:anywhere;min-width:0}
 .master-series-head p{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 
 @media (max-width:760px){
@@ -102,7 +102,8 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
  .master-qlist{position:static;max-height:none}
  .master-qlist ol{flex-direction:row;flex-wrap:wrap}
  .master-qlist li button{width:auto}
- .master-day{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:'num title free' 'date state state'}
+ .master-day{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:'num title free' 'date live state'}
+ .master-day .master-live-switch{grid-area:live;justify-self:start}
  .master-day-num{grid-area:num}.master-day-title{grid-area:title}.master-day-date{grid-area:date}.master-day .admin-chip{grid-area:state;justify-self:start}.master-day button{grid-area:free}
  .master-option{grid-template-columns:44px minmax(0,1fr)}
  .master-option .master-photo{grid-column:2}
@@ -230,6 +231,8 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
  .library-stats>div>strong{font-size:20px}
  .library-row{flex-wrap:wrap}
  .library-row>button{width:100%}
+ .library-row-actions{width:100%}
+ .library-row-actions>button{flex:1}
  .library-group-actions{width:100%}
  .library-group-actions>button{flex:1}
  .library-sticky-bar{bottom:8px}

@@ -484,7 +484,7 @@ async def unassign(sid: str, body: SeriesUnassign, u=Depends(owner)):
 async def paper_live(sid: str, body: SeriesLive, u=Depends(owner)):
     """Off hides one day's paper from students; Live shows it again. The day still decides when it opens."""
     cfg = await series_cfg(sid)
-    done = await sets.update_one({'id': body.id, 'series_id': cfg['id']}, {'$unset': {'owner_unlive': ''}} if body.live else {'$set': {'owner_unlive': True}})
+    done = await sets.update_one({'id': body.id, 'series_id': cfg['id'], 'series_date': {'$nin': [None, '']}, 'archived': {'$ne': True}}, {'$unset': {'owner_unlive': ''}} if body.live else {'$set': {'owner_unlive': True}})
     if not done.matched_count:
         raise HTTPException(404, 'This paper has no day in this series. Reload.')
     await audit(u['id'], 'Test series paper ' + ('Live' if body.live else 'Off'), body.id, '')

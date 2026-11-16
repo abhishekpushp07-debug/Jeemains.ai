@@ -372,7 +372,7 @@ export default function Player() {
                   : "Enter your integer answer"}
               </legend>
               {q.type === "mcq" ? (
-                <div className={'answer-options ' + (q.render_mode==='source'?'answer-options-source':'')}>
+                <div className={'answer-options ' + (q.render_mode==='source'?'answer-options-source'+(Object.keys(q.typed_options||{}).length?' has-typed':''):'')}>
                   {Object.entries(q.options || {}).map(([key, value]) => (
                     <label
                       key={key}

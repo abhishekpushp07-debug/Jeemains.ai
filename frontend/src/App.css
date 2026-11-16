@@ -1797,8 +1797,10 @@ code {
 .all-q-chevron { flex: none; color: var(--text-muted); transition: transform 0.2s ease; }
 .all-q-chevron.is-open { transform: rotate(180deg); }
 .all-q-row .held-card { border: 0; border-top: 1px solid var(--line); border-radius: 0; margin: 0; }
-.held-typed-list { display: grid; gap: 8px; margin-top: 8px; }
-.held-typed { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 8px; }
+.held-typed-list { display: grid; gap: 8px; margin-top: 8px; width: 100%; }
+.held-typed { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: center; gap: 8px; width: 100%; }
+.held-typed input { width: 100%; min-width: 0; }
+.all-questions .library-segments { flex-wrap: wrap; overflow-x: visible; }
 .held-typed > span {
   display: inline-grid;
   place-items: center;
