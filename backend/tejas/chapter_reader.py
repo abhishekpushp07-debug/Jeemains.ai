@@ -9,6 +9,8 @@ HEAD = re.compile(rf'^(?:(?P<subj>{SUBJECTS})\s*[-–—:|/·]?\s*)?(?:chapter(?
 ROLE_FIRST = re.compile(rf'^(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(?P<role>solutions?|answers?\s*keys?|answers?)\s*(?:[:\-–—|·•]\s*|\s+(?:for|to|of)\s+)?(?:chapter|ch\.?|unit|topic)\s*(?:no\.?\s*)?[-–—:#]?\s*{NUMBER}\b(?!\.\d)\.?\s*(?:[:\-–—|(]\s*)?(?P<title>.*?)\)?$', re.I)
 ROLE_TAIL = re.compile(r'(?:\s*[-–—:|/·•]\s*|\s*\(\s*|\s+(?=(?:answer\s*keys?|answer\s*sheet|hints?\s*(?:&|and)\s*solutions?|(?:detailed|worked)\s+solutions?)\b))((?:detailed\s+|worked\s+|hints?\s*(?:&|and)\s*)?solutions?|answers?(?:\s*keys?)?|answer\s*sheet)\s*\)?$', re.I)
 ROLE_ONLY = re.compile(r'^(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?(?:\s*keys?)?)$', re.I)
+# 'Answer key – Sets Relations & Functions' / 'Solutions: Complex Numbers': a role heading that names its chapter instead of numbering it.
+ROLE_NAMED = re.compile(r'^(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(?P<role>solutions?|answers?\s*keys?|answers?)\s*[:\-–—|·•]\s*(?P<title>.+)$', re.I)
 EXERCISE = re.compile(r'^(?P<word>exercise|level|part)\s*[-–—:#]?\s*(?P<id>\d{1,2}|[ivx]{1,4}|[a-d])\b(?!\.\d)\s*(?:[:.\-–—)]\s*.{0,60})?$', re.I)
 FRONT = re.compile(r'^(?:contents|table of contents|index|preface|foreword|introduction|about|how to use|using this book|cover|title|copyright|acknowledg|answer|solution|hints?|appendix|formula|bibliography|references)', re.I)
 
@@ -144,11 +146,30 @@ def heading(value):
 
 
 def name_heading(value):
-    """A line that is just a syllabus chapter name, e.g. 'KINEMATICS' or 'Laws of Motion'."""
+    """A line that is just a syllabus chapter name, e.g. 'KINEMATICS' or 'Laws of Motion'; a wrapped '…Differentiability)' inside working is not."""
     v = ' '.join(value.split())
-    if not v[:1].isupper() or len(v) > 70 or ROLE_ONLY.match(v) or SUBJECT_LINE.match(v):
+    if not v[:1].isupper() or len(v) > 70 or ROLE_ONLY.match(v) or SUBJECT_LINE.match(v) or re.search(r'[()\[\]{}]', v):
         return ''
     return tidy(v) if norm(v) in NAMES else ''
+
+
+def named_role(value):
+    """'Answer key – <chapter name>', '<chapter name> – Solutions' or 'Solutions: <chapter name>' as (role, title); the title must match a chapter already seen."""
+    v = ' '.join(value.split())
+    if not v[:1].isupper() or len(v) > 110:
+        return None
+    m = ROLE_NAMED.match(v)
+    if m:
+        role, title = m['role'], m['title']
+    else:
+        tail = ROLE_TAIL.search(v)
+        if not tail or tail.start() == 0:
+            return None
+        role, title = tail[1], v[:tail.start()]
+    title = tidy(title)
+    if not title or not title[:1].isupper() or len(title.split()) > 12 or re.match(r'^\d', title):
+        return None
+    return ('solution' if 'solution' in role.lower() else 'key'), title
 
 
 def label_for(known, number, title):
@@ -185,6 +206,11 @@ def find(lines, known, band):
         value = line['text'].strip()
         h, mine = heading(value), []
         if h is None:
+            named = named_role(value)
+            label = label_for(known, None, named[1]) if named else ''
+            if label:
+                out.append({'y': line['rect'][1], 'label': label, 'role': named[0], 'record': dict(known[label]), 'rows': [line['rect'][1]]})
+                continue
             name = name_heading(value)
             label = label_for(known, None, name) if name else ''
             if not name or (not label and numbered):
@@ -273,6 +299,15 @@ def bookmark_plan(toc, pages):
         h = heading(title)
         chapters.append({'title': (h or {}).get('title') or tidy(title)[:120], 'subject': subj or (h or {}).get('subject', '')})
         starts.append({'page': page, 'chapter': len(chapters) - 1, 'role': 'question'})
+    # Child bookmarks such as 'Answer key' or 'Solutions' under a chapter start that chapter's key or solutions.
+    top_level, by_page, current = chosen[0][0], {s['page']: s['chapter'] for s in starts}, None
+    for level, title, page in rows:
+        if level == top_level and page in by_page:
+            current = by_page[page]
+        elif current is not None and level > top_level:
+            role = ROLE_ONLY.match(title) or ROLE_TAIL.search(title) or ROLE_NAMED.match(title)
+            if role and page >= starts[current]['page']:
+                starts.append({'page': page, 'chapter': current, 'role': 'solution' if 'solution' in title.lower() else 'key'})
     return labelled(chapters, starts)[:300]
 
 

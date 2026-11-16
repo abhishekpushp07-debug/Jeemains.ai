@@ -3,7 +3,7 @@ from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, choose_options
 from .chapter_reader import find as chapter_marks, exercise
 
-READER_VERSION=3
+READER_VERSION=4
 MOCK=re.compile(r'^(?:(?:jee\s*main|jee|bitsat|comedk)\s+)?(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
 ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,3}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
 BARE=re.compile(r'^(?:(Q)(?:uestion)?\.?\s*)?(\d{1,3})\s*[.):]$',re.I)
@@ -14,7 +14,7 @@ NUMERIC=re.compile(r'\b(?:numerical|integer[- ]type|integer\s+answers?|numeric(?
 PRINTED=re.compile(r'^\s*(?i:answer|ans\.?|correct\s+(?:option|answer))\s*[:=]\s*[\[(]?\s*([A-D]|[+\-\u2212]?\d{1,20})\b',re.M)
 INTRO_OK=re.compile(r'\b(?:instructions?|duration|time\s*:|marking|bonus\s+section|answer\s+keys?|questions?\s+only)\b',re.I)
 CELL_NUMBER=re.compile(r'\d{1,3}')
-CELL_KEY=re.compile(r'[A-D]|[+\-\u2212]?\d{1,20}')
+CELL_KEY=re.compile(r'\(?[A-D]\)?|[+\-\u2212]?\d{1,20}')
 # A printed key needs 'is', ':' or a bracket after the cue, so prose such as 'could then answer a different' is not a key.
 ANSWER_NEAR=re.compile(r'\b(?:[Aa]nswer|ANSWER|Ans\.?|[Cc]orrect[ \t]+(?:option|answer))[ \t]*(?:(?:is[ \t]+|[:=\-][ \t]*)[\[(]?|[\[(])[ \t]*([A-D](?![A-Za-z])|[+\-]?\d+(?![\d.]))')
 TOP,BOTTOM=.06,.94
@@ -58,7 +58,7 @@ def key_cells(body):
         while i+1<len(row):
             q,k=row[i],row[i+1]
             if CELL_NUMBER.fullmatch(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and 0<k['rect'][0]-q['rect'][2]<.15 and 1<=int(q['text'])<=600:
-                pairs.append((int(q['text']),k['text'].strip().replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])]));i+=2
+                pairs.append((int(q['text']),k['text'].strip().strip('()').replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])]));i+=2
             else:i+=1
     return pairs if len(pairs)>=10 and len({p[0] for p in pairs})==len(pairs) else []
 
@@ -217,8 +217,15 @@ def read_page(lines, previous, geometry=(), images=()):
     if (re.search(r'^\s*(contents|index)\b',body_text,re.I|re.M) and not margin_anchor) or (len(titles)>=3 and not any(ROLE.fullmatch(x['text'].strip()) for x in body)):
         return page_map('contents',[Region(role='ignore',rect=[.01,.01,.99,.99],text=text[:30000],checked=True)],[]),context
     if any(ROLE.fullmatch(x['text'].strip()) and 'solution' not in x['text'].lower() for x in body) or (context.get('chapters') and any(c['role']=='key' for c in chapter_headings(body,context)[0])):
-        pairs=key_cells(body)
-        if pairs:return read_keys(lines,body,pairs,context)
+        # A key table and the start of the worked solutions may share a page: the table above, the solutions from their heading down.
+        split=min([c['y'] for c in chapter_headings(body,context)[0] if c['role']=='solution']+[x['rect'][1] for x in body if ROLE.fullmatch(x['text'].strip()) and 'solution' in x['text'].lower()]+[2])
+        upper=[x for x in body if x['rect'][1]<split-.002]
+        pairs=key_cells(upper)
+        if pairs and split>1:return read_keys(lines,body,pairs,context)
+        if pairs:
+            keys,context=read_keys(margin+upper,upper,pairs,context)
+            rest,context=read_page(margin+[x for x in body if x['rect'][1]>=split-.002],context,[g for g in geometry if g[1]>=split-.004],[b for b in images if b[1]>=split-.004])
+            return page_map('mixed',keys.regions+rest.regions,keys.issues+rest.issues),context
     headers,anchors=scan_headers(lines,text,context,issues)
     page_role=next((v for y,k,v in headers if k=='role' and y<0),context.get('role'))
     if any(k=='mock' and v!=context.get('mock') for _,k,v in headers):page_role='question'
@@ -291,7 +298,10 @@ def read_page(lines, previous, geometry=(), images=()):
             allowed=r'^(?:jee|bitsat|comedk|mock|practice|test|paper|time|duration|questions|total|correct|incorrect|wrong|unanswered|skipped|all\s+questions|instructions|physics|chemistry|math|solutions?|answers?|no\s+worked|page|english|logical|numerical|section)\b'
             chapter_intro=context.get('chapters') and any(h[1]=='mock' and h[0]<first for h in headers)
             if context.get('chapters'):allowed=allowed[:-3]+r'|\d{1,3}\s*[–\-]\s*\d{1,3})\b'
-            if intro.strip() and not INTRO_OK.search(intro) and not chapter_intro and any(not re.search(allowed,line.strip(),re.I) for line in intro.splitlines() if len(line.strip())>3):
+            # A group label ending '(Q16–Q30)' announces exactly the questions that follow; it is not a continuation.
+            announced=re.search(r'\(\s*Q?\s*(\d{1,3})\s*[–\-]\s*Q?\s*\d{1,3}\s*\)\s*$',intro.strip(),re.I)
+            announced=bool(announced and int(announced[1])==next((s[3][1][0] for s in starts if s[2]=='anchor'),None))
+            if intro.strip() and not INTRO_OK.search(intro) and not chapter_intro and not announced and any(not re.search(allowed,line.strip(),re.I) for line in intro.splitlines() if len(line.strip())>3):
                 issues.append('Leading content may continue a previous question or solution. Attach it explicitly instead of discarding it as instructions.')
             regions.append(Region(role='instructions',mock=context.get('mock',''),rect=rect,text='\n'.join(x['text'] for x in above)[:30000],checked=True))
     if open_q:issues.append(f'Q{open_q["number"]} (starts on the previous page): confirm response type, options and continuation.')

@@ -84,6 +84,18 @@ async def hold(book, token, mock, reason):
     await save_mock(mock)
 
 
+def use_bookmark_parts(p):
+    """Bookmarks that mark every chapter's answer key or solutions describe the book exactly: read it by them from the start (an owner's own plan wins)."""
+    if not p.get('chapters') or p.get('plan_source') == 'owner':
+        return False
+    plan = bookmark_plan(p.get('bookmarks') or [], p['pages'])
+    chapters = {e['label'] for e in plan}
+    if len(chapters) >= 2 and {e['label'] for e in plan if e['role'] != 'question'} == chapters and p.get('chapter_plan') != plan:
+        p.update(chapter_plan=plan, plan_source='bookmarks')
+        return True
+    return False
+
+
 async def receive(book, token):
     p=book.payload
     chunks=[UploadPart.from_mongo(row) async for row in db.tejas_book_parts.find({'book_id':book.id}).sort('number',1)]
@@ -96,6 +108,7 @@ async def receive(book, token):
         except ValueError:p['bookmarks']=[]
     p['source_path']=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/original.pdf',raw,'application/pdf')
     p.update(pages=info['pages'],read_pages=0,scanned_pages=0,reader_version=READER_VERSION,message='Original received privately. Reading pages in recoverable batches.')
+    use_bookmark_parts(p)
     book.state='reading';await save_book(book,token)
     await db.tejas_book_parts.delete_many({'book_id':book.id})
     return source
@@ -120,6 +133,9 @@ async def step(job):
             published=sorted({n for m in await mocks_for(book) if m.published_generation for numbers in m.pages.values() for n in numbers})
             await db.tejas_book_pages.delete_many({'book_id':id,'number':{'$nin':published},'provenance.kind':{'$nin':['owner_repair','ai_proposal']},'provenance.reader':{'$ne':READER_VERSION}})
             p.update(read_pages=0,reader_version=READER_VERSION,message='Re-reading pages with the improved reader. Owner repairs are kept.')
+            if use_bookmark_parts(p):
+                # The chapters are now named by the PDF's bookmarks: copies under the old names that never reached students are rebuilt, not left held.
+                await db.tejas_book_mocks.delete_many({'book_id':id,'published_generation':0,'set_id':None,'series_date':None,'release_at':None,'live_exam':False})
             book.state='reading';await save_book(book,token)
         if p.get('read_pages',0)<p['pages']:
             more=await read_batch(book,token,source)
