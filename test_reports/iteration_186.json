@@ -1,0 +1,29 @@
+{
+  "summary": "Focused retest of the iteration 185 fixes. All isolated (disposable DBs); the preview customer DB was not touched. BACKEND: new tests/retest_iso186.py passes 17/17. (1) POST /api/admin/library/delete with ids plus uploads, where the upload's Library test has an active attempt (timed, or deadline 0): 409 'A student is still writing a test made from this upload…', and nothing is deleted (the body.ids test, the upload, its test, and attempt.set_deleted are all unchanged). Once the attempt expires, the same call returns 200 and deletes both (deleted 1, uploads 1), and the attempt keeps set_deleted. With an active attempt on a body.ids test, the upload is also kept. (2) POST /master/series/{sid}/live returns 404 and changes nothing for a set with series_id but no series_date, for series_date '', and for an archived day set. A valid day set still switches Off and back Live. Regressions: typed_delete_iso185.py 54/54 PASS, forgot_pin_iso184.py 53/53 PASS. FRONTEND (Playwright on the preview UI, /api routed to typed_bridge185.py): HIGH fix verified. In the Player, the source question with typed_options gets the class 'answer-options-source has-typed' and a single column (902px on desktop, 332px on mobile). C '2√3 m/s' and D '4 m/s' are visible (display block). A and B show 'Option A/B (as shown above)', and the hint says typed options are below. A source question without typed options keeps 4 compact letter buttons with option-copy display:none, on both 1920 and 390. Selecting typed option C saves. Edit questions: unticking the chosen answer letter clears the answer and disables Save, re-ticking it does not bring the answer back, and picking a new answer enables Save. Typed-option boxes are full width. Filter tabs wrap at 390 (no off-screen part, page scrollWidth 390). Library: the guide heading is the new text and the old 'nothing is deleted' text is gone. At 390, Restore/Delete sit on their own full-width line under the title, with no overflow. AITS day tile at 390: the title is on its own line and the Live/Off switch is on the second line. Remaining issues are minor design only (below).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "AITS Days grid, desktop 1920 (3-column tiles ~398px)", "issues": ["A day with a paper puts Day/date, title, Live switch and 'Open today' chip all on one row, so the title column is squeezed to ~30px and wraps mid-word over 3 lines ('TEST / _SD / AY'). It is no longer cut off with an ellipsis, but it is hard to read. The mobile layout (title line, then switch line) is fine; apply the same two-line layout to desktop tiles that have a paper (or give .master-day-title a min-width)."]},
+      {"screen": "Edit questions typed-option input, 390px", "issues": ["The input is full width, but the placeholder 'Text of option C, for example 2√3 m/s' is still cut off at 276px ('…2√3 r'). Cosmetic. A shorter placeholder on mobile would fix it."]},
+      {"screen": "Library filter tabs, 390px", "issues": ["The exam tab strip ('All exams / JEE Main / Uploads never Live') scrolls horizontally, so the third tab is partly off-screen. Same pattern that was fixed for the Edit-questions tabs. The page itself does not overflow."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/retest_iso186.py", "/app/backend/tests/typed_delete_iso185.py", "/app/backend/tests/forgot_pin_iso184.py", "/app/backend/tests/typed_bridge185.py", "/app/backend/tests/ui186_attempt.py"],
+  "action_items": [
+    "Optional (minor design): AITS desktop day tile with a paper: give the title its own line (as on mobile), because it currently wraps mid-word in a ~30px column.",
+    "Optional: shorten the typed-option placeholder on mobile; wrap the Library exam tabs at 390 like the Edit-questions tabs."
+  ],
+  "critical_code_review_comments": [
+    "library.delete is now effectively all-or-nothing for the checks (check_uploads runs first, and delete_sets checks active attempts before any write). It is still a series of separate writes with no transaction, so a crash mid-way could leave partial state. That is acceptable for this scale.",
+    "check_uploads skips book_mock refs, which is fine because delete_uploads only flags a book_mock deleted when set_id is None (there is no attempt to protect).",
+    "A leftover isolated DB 'tejas_isolated_book170_677e53c0' exists from an earlier session (~13 h old, not created by this run). It was left untouched; it can be dropped by whoever owns it."
+  ],
+  "updated_files": ["/app/backend/tests/retest_iso186.py (new)", "/app/backend/tests/ui186_attempt.py (new helper: starts an active attempt on the bridge typed set for Player checks)"],
+  "success_rate": {"backend": "100% (17/17 retest + 54/54 + 53/53 regression)", "frontend": "100% of requested fixes verified; 3 minor design notes"},
+  "seed_data_creation": "Only in disposable isolated DBs (dropped: retest, regression and bridge DBs). Bridge stopped; /tmp/uibridge/bridge.json removed.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend: cd /app/backend && timeout 200 python tests/retest_iso186.py (17 checks). Test-made attempts need unique user_id/start_key because of the unique index (user_id, start_key). Browser: python tests/typed_bridge185.py 2400 & (~60 s setup; one run hit a transient Mongo 'connection closed' at indexes(), and a retry worked), then python tests/ui186_attempt.py to create an active attempt (f.ui_attempt) for /attempts/<id>. Q1 is a source question without typed options, Q2 has typed C/D. At 390 use player-next, because the navigator is collapsed. AITS Days: /super-admin/exam/jee-main/jee-main:aits. Edit questions: /super-admin/fix/<book>/<mock>?all=1, card toggle all-q-toggle-physics-2, testids held-q-2-*. Stop with pkill -INT -f typed_bridge185.py."
+}

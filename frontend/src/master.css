@@ -95,6 +95,10 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .master-day-num{font-family:var(--font-mono);font-size:12px;color:var(--text-muted)}
 .master-day-date{font-size:12px;color:var(--text-muted);white-space:nowrap}
 .master-day-title{overflow-wrap:anywhere;min-width:0}
+.master-day.has-paper{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:'num date free' 'title title title' 'live state state'}
+.master-day.has-paper .master-day-num{grid-area:num}.master-day.has-paper .master-day-date{grid-area:date}.master-day.has-paper .master-day-title{grid-area:title}
+.master-day.has-paper .master-live-switch{grid-area:live;justify-self:start}.master-day.has-paper .admin-chip{grid-area:state;justify-self:start}.master-day.has-paper>button{grid-area:free}
+@media (max-width:640px){.library-page .library-segments{flex-wrap:wrap;overflow-x:visible}}
 .master-series-head p{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 
 @media (max-width:760px){

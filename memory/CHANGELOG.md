@@ -1,3 +1,12 @@
+## 2026-11-16 — Owner editing power (preview only, NOT deployed)
+- Edit questions on every Draft PDF mock: answer buttons A–E, type options the picture cuts off (students see them under the picture), change the answer; filter "Fewer than 4 options".
+- PDF upload: 8 retries with backoff and 90 s per part, waits while offline, resumes a half-sent copy even after it was moved to the Library.
+- Library: Delete / Delete all / Delete selected beside Restore (tests and uploads); students keep score lines only.
+- Master: visible Live/Off switch on every mock row, status menu labelled STATUS; AITS day papers get a Live/Off switch.
+- Body limits: library.restore/delete 128 KB, book_imports.fix_question 64 KB.
+- Tests: iteration_185, iteration_186 (tests/typed_delete_iso185.py, retest_iso186.py).
+
+
 ## 2026-11-15 (newest) — Simple PIN, One Account, Exam-Day Readiness (preview only, NOT deployed)
 - Forgot PIN: POST /api/auth/pin/reset {phone,new_pin,confirm_pin}; /forgot-pin screen; 'Forgot PIN?' link on /login; "There is no public PIN reset" removed from login and privacy page.
 - Change PIN in Profile verified working (shared replace_pin helper).

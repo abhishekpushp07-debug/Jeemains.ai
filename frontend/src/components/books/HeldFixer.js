@@ -17,7 +17,7 @@ function Choice({value,options,onChange,testId}){
 
 function TypedOptions({tag,options,typed,onChange}){
  return <fieldset><legend>3. Options the picture does not show (optional)</legend><small className="held-hint">Type an option only if the picture cuts it off or it is missing. Students see your text under the picture.</small>
-  <div className="held-typed-list">{options.map(l=><label key={l} className="held-typed"><span>{l}</span><Input value={typed[l]||''} maxLength={2000} placeholder={`Text of option ${l}, for example 2√3 m/s`} onChange={e=>onChange({...typed,[l]:e.target.value})} data-testid={`${tag}-typed-${l}`}/></label>)}</div>
+  <div className="held-typed-list">{options.map(l=><label key={l} className="held-typed"><span>{l}</span><Input value={typed[l]||''} maxLength={2000} placeholder={`Option ${l} text`} onChange={e=>onChange({...typed,[l]:e.target.value})} data-testid={`${tag}-typed-${l}`}/></label>)}</div>
  </fieldset>;
 }
 

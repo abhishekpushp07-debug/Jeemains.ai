@@ -1,3 +1,10 @@
+# Owner editing power (2026-11-16)
+- P0: Deploy only when the user says "deploy" (edit questions, typed options, upload resume, Library Delete, Live/Off switches).
+- P0 after deploy: owner re-uploads the 33 MB AITS PDF; if it stops, note the part number shown.
+- P1: Editing a question of a paper that is already Live / has a day (built set) still needs a corrected version; not built.
+- P2: Platform file storage cannot delete file bytes (DELETE 405); Library Delete removes database records only.
+
+
 # Simple PIN (2026-11-15)
 - P0: User said "Deploy" on 2026-11-15; deploy queued (deployer job bcd75d41-4661-4f5a-bead-654e0ffe34d2), outcome not yet confirmed. Carries Forgot PIN, fresh start migration and Library work. After deploy: check /api/auth/pin/reset is in the live openapi, Library on live, JEE Main PYQ still shows its papers, and the app agent switches its Forgot Password screen to it.
 - P0 (owner action): send docs/SERVER_SIZE_REQUEST.md to platform support.
