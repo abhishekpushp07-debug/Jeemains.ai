@@ -1,4 +1,5 @@
 """All India Test Series for any exam: one paper a day on its own dates and times. Students open it inside its exam; only JEE Main has the Home banner."""
+import time
 from datetime import date, datetime, timedelta
 from typing import Annotated, Literal
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request
@@ -387,8 +388,9 @@ async def assign_mocks(cfg, pairs, bg, u):
             if len(m.questions) != count:
                 raise HTTPException(409, f'{m.label}: every paper in this series needs {count} questions, so ranks stay fair.')
         by_book.setdefault(m.book_id, []).append((m, day, w))
+    until = time.monotonic() + 30
     for bid, items in by_book.items():
-        book, token = await lock_book_waiting(bid)
+        book, token = await lock_book_waiting(bid, max(1.5, until - time.monotonic()))
         try:
             for m, day, w in items:
                 m.series_date, m.series_id, m.publish_requested, m.release_at = day, cfg['id'], True, w['opens_at']

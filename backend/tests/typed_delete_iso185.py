@@ -107,18 +107,18 @@ async def typed_tests(own, rev, stu, sec, slug):
 
 
 async def series_tests(own, stu):
-    t = time.time(); w = live_series.window('2026-12-02'); shift = t - w['opens_at'] - 600
+    t = time.time(); w = live_series.window('2026-12-12'); shift = t - w['opens_at'] - 600
     w = {k: (v + shift if isinstance(v, (int, float)) else v) for k, v in w.items()}
-    pid = await mkset('SDAY', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-02', test_kind='mock', series_import=True, series_window=w, live_enabled=True, start_at=0, end_at=4e9)
+    pid = await mkset('SDAY', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-12', test_kind='mock', series_import=True, series_window=w, live_enabled=True, start_at=0, end_at=4e9)
     await DB.tejas_series.update_one({'_id': live_series.SERIES_ID}, {'$set': {'shown': True}})
     await structure.exams.update_one({'_id': 'jee-main'}, {'$set': {'shown': True}})
     url = f'/api/series/{live_series.SERIES_ID}/schedule'
-    day = lambda d: next((x for x in J(d).get('slots', []) if x['date'] == '2026-12-02'), {})
+    day = lambda d: next((x for x in J(d).get('slots', []) if x['date'] == '2026-12-12'), {})
     sl = day(await stu.get(url)); check('open day paper visible to students', sl.get('ready') and sl.get('set_id') == pid, (sl, (await stu.get(url)).status_code))
-    st = next((x for x in J(await own.get(f'{M}/series/{live_series.SERIES_ID}')).get('slots', []) if x['date'] == '2026-12-02'), {})
+    st = next((x for x in J(await own.get(f'{M}/series/{live_series.SERIES_ID}')).get('slots', []) if x['date'] == '2026-12-12'), {})
     check('studio day paper kind set, off False', (st.get('paper') or {}).get('kind') == 'set' and (st.get('paper') or {}).get('off') is False, st.get('paper'))
     r = await own.post(f'{M}/series/{live_series.SERIES_ID}/live', json={'id': pid, 'live': False})
-    sl = day(await stu.get(url)); st = next((x for x in J(await own.get(f'{M}/series/{live_series.SERIES_ID}')).get('slots', []) if x['date'] == '2026-12-02'), {})
+    sl = day(await stu.get(url)); st = next((x for x in J(await own.get(f'{M}/series/{live_series.SERIES_ID}')).get('slots', []) if x['date'] == '2026-12-12'), {})
     check('Off hides open day paper (not ready, no set_id)', r.status_code == 200 and 'Switched off' in J(r).get('message', '') and not sl.get('ready') and not sl.get('set_id'), (r.text[:150], sl))
     check('studio shows paper off', (st.get('paper') or {}).get('off') is True, st.get('paper'))
     r = await stu.post(f'/api/sets/{pid}/preflight', json={}); check('Off paper cannot be started', r.status_code in (403, 404, 409), r.status_code)

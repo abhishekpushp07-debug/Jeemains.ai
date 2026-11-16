@@ -158,3 +158,13 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Tests: tests/book_reader_regressions178.py (all pass), tests/reread_iso179.py 15/15 (isolated DB), tests/repro_book_rebuild.py, tests/boundary_slice179.py, tests/audit_crops.py; testing agent iteration_177. Test PDFs live in /tmp/book (lost on pod restart; not committed).
 - NOT deployed. Production book not reprocessed yet; waits for the user's go-ahead.
 
+
+## 2026-11-16 — Clickable PDF counts, JEE AITS 9 Dec–27 Jan, owner early access, series inside its exam
+- User (Hinglish): dashboard numbers clickable (Held → all held); JEE AITS 9 Dec 2026 – 27 Jan 2027 (50 days); papers whose day falls outside lose it ("Unka din hata do, main dobara dunga"); BITSAT AITS only inside BITSAT, no separate card; super admin abhishek@billpe.com takes AITS from today "Asli student jaisa, rank mein gine".
+- BookPublishing.js: Detected / Complete / Held / Published / Scheduled are buttons that filter the Book map (book-filter-*, book-filter-note, book-filter-clear); count numbers now 30px (CSS scoped to direct label span).
+- live_series.py FIRST 2026-12-09, TOTAL 50, LAST 2027-01-27; series_streak cups end at 50; one-time jee_dates_job (tejas_migrations 'jee-series-2026-12-09-50-days', via library.run_cleanups) moves the series doc and removes days outside the range (papers stay published as "without a day"; pending book mocks lose their day). Preview: done, moved 0.
+- Owner early access: owner role sees future given-day papers (early true) on /series/all-india-jee and /series/<sid>/schedule, can open and start them as a real series_live ranked attempt (content.permitted + attempts.guard_start early). Students unchanged. "EARLY · ONLY YOU" section on the hub.
+- SeriesCards removed from Home/Landing; catalog exam returns the AITS section with series_path, ExamHub links to it. Master toggle is "Open to students".
+- "Give a day" waits up to 30 s (one budget per request) for a busy PDF instead of the instant "book changed / processing" 409.
+- Tests: testing agent iteration_187 (47/47 new + 124/124 regression in isolated DBs, frontend all flows); follow-up fixes: schedule_data uses stored series_window, single wait budget, metric styling. NOT deployed.
+

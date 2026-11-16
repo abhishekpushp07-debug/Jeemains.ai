@@ -112,10 +112,11 @@ async def schedule_data(studio=False, early=False):
         day = (FIRST + timedelta(days=i)).isoformat()
         s = by_day.get(day)
         ready = bool(s and s['status'] == 'published' and permitted(s, series_schedule=True, at=t))
-        state = phase(day, t)
+        w = (s or {}).get('series_window') or window(day)
+        state = phase(day, t, w)
         soon = early and ready and state == 'upcoming'
         visible = ready and (state != 'upcoming' or soon)
-        slots.append({'day': i + 1, 'date': day, **window(day), 'state': state, 'early': soon,
+        slots.append({'day': i + 1, 'date': day, **w, 'state': state, 'early': soon,
                       'ready': ready if studio or soon or state != 'upcoming' else False, 'set_id': s['id'] if s and (studio or visible) else None,
                       'title': s['title'] if s and (studio or visible) else f'All India JEE Mains · Test {i + 1:02d}',
                       'can_start': ready and (state in ('live', 'archive') or soon),

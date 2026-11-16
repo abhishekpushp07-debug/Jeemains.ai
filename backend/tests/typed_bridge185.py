@@ -55,9 +55,9 @@ async def setup_and_serve():
     f['live_set'] = await mkset('LIVE', exam='NEETX', catalog_section_id=sec, test_kind='mock', title='TEST_Live set')
     f['off_set'] = await mkset('OFF', exam='NEETX', catalog_section_id=sec, test_kind='mock', title='TEST_Off set', owner_unlive=True)
     # AITS day with a built paper, open now.
-    t = time.time(); w = live_series.window('2026-12-02'); shift = t - w['opens_at'] - 600
+    t = time.time(); w = live_series.window('2026-12-12'); shift = t - w['opens_at'] - 600
     w = {k: (v + shift if isinstance(v, (int, float)) else v) for k, v in w.items()}
-    f['day_set'] = await mkset('SDAY', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-02', test_kind='mock', series_import=True, series_window=w, live_enabled=True, start_at=0, end_at=4e9)
+    f['day_set'] = await mkset('SDAY', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-12', test_kind='mock', series_import=True, series_window=w, live_enabled=True, start_at=0, end_at=4e9)
     await DB.tejas_series.update_one({'_id': live_series.SERIES_ID}, {'$set': {'shown': True}})
     await structure.exams.update_one({'_id': 'jee-main'}, {'$set': {'shown': True}})
     f['series_id'] = live_series.SERIES_ID

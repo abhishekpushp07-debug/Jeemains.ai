@@ -28,6 +28,11 @@
 
 # Active roadmap
 
+
+## AITS dates + owner early access (2026-11-16)
+- P0: Deploy only when the user says "Deploy". On deploy, the one-time JEE dates job runs on live: series becomes 9 Dec 2026 – 27 Jan 2027; live papers on 1–8 Dec (or after 27 Jan) lose their day and show under "without a day" for the owner to give again.
+- Known minor: anonymous GET /api/sets/{id} still 404s for owner early papers (UI uses /api/my/sets/{id}, so no effect).
+
 ## Super Admin content management (2026-11-14)
 - P0: The user asked to deploy on 2026-11-14. The deploy was dispatched (job bcd75d41-4661-4f5a-bead-654e0ffe34d2); the outcome is not confirmed yet. On the first production start, cleanup_once() moves BITSAT mocks + chapter-wise and JEE Main chapter-wise into the Library (PYQ untouched). After the deploy, check /super-admin/library on live and that the BITSAT/JEE Main PYQ sections still show their papers.
 - P1: In AITS books whose numerical questions have no "Numerical/Section B" heading, every numerical question is held. Each one then needs one Held-fixer save. Option: a bulk "these are numerical, keys as printed" confirm for each mock.
