@@ -119,10 +119,14 @@ def continued_solution(open_s, rect, value):
 
 
 def chapter_headings(lines, context):
-    """Chapter-wise books only: printed chapter headings, unless the owner's or the PDF's own chapter starts are in use."""
-    if not context.get('chapters') or context.get('plan'):
+    """Chapter-wise books: printed chapter headings. Under the owner's or the PDF's own chapter plan, only a printed
+    key/solution heading of the current chapter is used, so a key table and its solutions can share a page."""
+    if not context.get('chapters'):
         return [],set()
-    return chapter_marks(lines,context.get('chapter_info') or {},band)
+    marks,used=chapter_marks(lines,context.get('chapter_info') or {},band)
+    if context.get('plan'):
+        return [m for m in marks if m['role'] and m['label']==context.get('mock')],set()
+    return marks,used
 
 
 def read_keys(lines, body, pairs, context):

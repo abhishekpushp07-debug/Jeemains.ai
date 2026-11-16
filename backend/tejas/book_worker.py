@@ -6,7 +6,7 @@ from .book_store import lock_book, unlock, save_book, fence, renew, original, re
 from .book_pdf import inspect, inspect_many
 from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
-from .chapter_reader import plan_start, bookmark_plan
+from .chapter_reader import plan_start, bookmark_plan, norm
 from tejas_storage import put_object
 
 PAGES_PER_STEP=20
@@ -96,6 +96,17 @@ def use_bookmark_parts(p):
     return False
 
 
+async def relabel_kept(id, plan, published):
+    """Pages kept across a switch to the bookmark plan (owner repairs, AI-approved pages) move to the bookmark chapter of the same name."""
+    names = {norm(e['title']): e['label'] for e in plan}
+    async for row in db.tejas_book_pages.find({'book_id': id, 'number': {'$nin': published}}):
+        regions = [{**r, 'mock': names.get(norm(r.get('mock')), r.get('mock'))} for r in row.get('regions', [])]
+        context = {**(row.get('context') or {}), 'plan': True}
+        if context.get('mock'):
+            context['mock'] = names.get(norm(context['mock']), context['mock'])
+        await db.tejas_book_pages.update_one({'_id': row['_id']}, {'$set': {'regions': regions, 'context': context}})
+
+
 async def receive(book, token):
     p=book.payload
     chunks=[UploadPart.from_mongo(row) async for row in db.tejas_book_parts.find({'book_id':book.id}).sort('number',1)]
@@ -136,6 +147,7 @@ async def step(job):
             if use_bookmark_parts(p):
                 # The chapters are now named by the PDF's bookmarks: copies under the old names that never reached students are rebuilt, not left held.
                 await db.tejas_book_mocks.delete_many({'book_id':id,'published_generation':0,'set_id':None,'series_date':None,'release_at':None,'live_exam':False})
+                await relabel_kept(id,p['chapter_plan'],published)
             book.state='reading';await save_book(book,token)
         if p.get('read_pages',0)<p['pages']:
             more=await read_batch(book,token,source)

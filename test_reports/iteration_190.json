@@ -1,0 +1,29 @@
+{
+  "summary": "Backend-only test of the chapter-wise solutions fix on the owner's 640-page 'bitsat maths final' PDF (/tmp/maths.pdf, not stored under /app). (1) Replay with the bookmark plan: 32 chapters, each q=50 s=50 answered=50, conflicts=[], only 2 issues (Q37/Q38 crop on page 183). Replay on the printed-heading path: 29 chapters, all q=50 s=50 key=50, no conflicts, 3 issues. Logarithms, 3D Geometry and Mathematical Modelling merge into the chapter before them, which is the known limitation. (2) End-to-end in an isolated DB (new tests/maths_bookmarks_iso190.py, storage and AI mocked, DB dropped): plan_source='bookmarks' with 96 entries at receive, reader_version 4, 32 mocks titled from the bookmarks. 31 are ready with 50 questions each, all with solution_kind='supplied_worked' and an answer from A to D. Only Mathematical Induction is held, for the page 183 Q37/Q38 crop. There are 0 unresolved pages. Spot checks pass: Sets Q1=B, Q2=D; Complex Numbers Q1=B, Q2=D. The last chapter is 'Mathematical Modelling', after Linear Programming. (3) Upgrade path from a v3 book: the re-read switched to the bookmark plan, deleted the never-released old-label held mocks ('Sets Relations & Functions', 'Differentiability)'), kept the published mock untouched and built 32 new chapter mocks; 21/21 checks passed. (4) Key table: '(B)' cells now pair question to letter, and a page with the key table above and '<Chapter> – Solutions' below gives 20 keys plus solutions 1 and 2 with no issues (new tests/key_table_split190.py, 12/12). (5) Regression suites: book_reader_regressions178 29/29 and chapters_iso182 58/58. book_publishing_iso170 (10/11), book_publishing_rules_iso170 (0/4) and book_capture_iso170 (crash) fail because their uploads lack the section_id the API now requires ('Choose the exam and mock type'). These suites are out of date and the failures are not related to this change.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "book_worker.step: reader-version re-read with a bookmark plan switch", "issue": "Some pages are kept across the re-read: pages of published mocks and pages with provenance owner_repair or ai_proposal. Those pages still carry the old region labels (e.g. 'Complex Numbers', 'Sets Relations & Functions'), while the new plan labels chapters 'Chapter N'. Reproduced in phase 3 of tests/maths_bookmarks_iso190.py, which only prints these results and does not assert them. Three results: Chapter 2 came out held with 21 questions ('Key/solution has no matching question'). Chapter 1 came out held with 37 questions. A held old-label mock 'Sets Relations & Functions' (13 questions) was created again from one owner-repaired page. On live this does no harm only if book a05c49f7 has 0 published mocks (the RCA says all 34 are held) and 0 owner_repair or ai_proposal pages. Check metrics.manually_repaired_pages before deploying."},
+      {"endpoint": "book_reader.read_page on the bookmark (plan) path", "issue": "On the plan path the answer-key table is never read as 'key' regions (key=0 in every chapter). The key and solution bookmarks start on the same page, so plan_start sets role=solution and the table becomes an 'instructions' region. Answers then come only from 'N. Answer: (X)' in the solutions, so nothing checks the key table against the solutions. If a book had a key table but no answer line in its solutions, its questions would get no answers."},
+      {"endpoint": "tests (stale)", "issue": "book_publishing_iso170, book_publishing_rules_iso170 and book_capture_iso170 call POST /api/admin/books without section_id and get 422. They need section_id='jee_main:mocks' (or similar) added to their upload helpers."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/maths_bookmarks_iso190.py", "/app/backend/tests/key_table_split190.py", "/app/backend/tests/chapter_solutions_replay190.py"],
+  "action_items": [
+    "Before deploying, check that the live book has no owner_repair or ai_proposal pages and no published mocks. Or, in the re-read block, relabel the regions on kept pages to the new plan label when use_bookmark_parts switches the plan, or drop them.",
+    "Optional: on the plan path, read the key table when the 'key' and 'solution' plan entries start on the same page (apply the key/solution split), so keys are checked against solutions.",
+    "Update the stale *_iso170 suites to send section_id on upload."
+  ],
+  "critical_code_review_comments": [
+    "book_worker re-read: delete_many of never-released mocks ignores publish_requested and any owner edits on the mock. This is acceptable because pages are rebuilt, but owner-repaired pages keep their old labels (see the minor issue above).",
+    "CELL_KEY '\\(?[A-D]\\)?' also accepts the unbalanced '(B' and 'B)'. This is harmless in practice.",
+    "The recursive read_page in the key/solution split cannot recurse forever, because the lower part has no lines above the split."
+  ],
+  "updated_files": ["/app/backend/tests/maths_bookmarks_iso190.py", "/app/backend/tests/key_table_split190.py"],
+  "success_rate": {"backend": "100% of the requested features (replay, E2E, upgrade, key table); regression: 2 of 5 suites pass, 3 are stale and unrelated", "frontend": "not tested"},
+  "seed_data_creation": "Only isolated tejas_isolated_book170_* DBs, dropped at the end. Preview DB not touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && python tests/maths_bookmarks_iso190.py /tmp/maths.pdf (about 2-3 min; download the PDF to /tmp first). Phase 3 EDGE lines print what kept old-label pages do. python tests/key_table_split190.py is pure (no DB). The real last chapter of the PDF is Mathematical Modelling (32 chapters)."
+}
