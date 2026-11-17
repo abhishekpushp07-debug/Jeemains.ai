@@ -6,17 +6,13 @@ import { ErrorBox, Press, T } from "@/src/components/ui";
 import { Pill } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, space } from "@/src/theme";
-import { compareSaved, CompareCol, CompareItem, fmt } from "./api";
+import { compareSaved, CompareCol, fmt } from "./api";
 import { EXAM, SERIF, TAG } from "./tones";
 import { Strip, Tag } from "./controls";
-import { Saved, useShortlist } from "./shortlist";
+import { PdfButton } from "./PdfButton";
+import { Saved, savedPdfBody, toCompareItem, useShortlist } from "./shortlist";
 
 const MAX = 3;
-
-function toItem(s: Saved): CompareItem {
-  if (s.exam === "jee") return { exam: "jee", id: s.id, prog: s.seat?.prog, quota: s.seat?.quota, gender: s.seat?.gender, path: s.seat?.path };
-  return { exam: s.exam, id: s.id.replace(/^(comedk|bitsat)-/, "") };
-}
 
 export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
   const saved = useShortlist();
@@ -38,7 +34,7 @@ export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
     if (chosen.length < 2) { setData(null); return; }
     let live = true;
     setBusy(true); setError(null);
-    compareSaved(chosen.map(toItem)).then(d => { if (live) setData(d); }).catch(e => { if (live) setError(e.message); }).finally(() => { if (live) setBusy(false); });
+    compareSaved(chosen.map(toCompareItem)).then(d => { if (live) setData(d); }).catch(e => { if (live) setError(e.message); }).finally(() => { if (live) setBusy(false); });
     return () => { live = false; setBusy(false); };
   }, [key, tries]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -76,6 +72,8 @@ export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="cmp-error" />
     {busy && !data ? <ActivityIndicator testID="cmp-loading" color={colors.muted} /> : null}
     {data && chosen.length >= 2 ? <CompareTable cols={data.items} saved={chosen} notes={data.notes} /> : null}
+    <PdfButton testID="cmp-pdf" path="/saved" body={savedPdfBody(saved, chosen.length >= 2 ? chosen.map(s => s.id) : [])}
+      label={chosen.length >= 2 ? "Compare + saved list ki PDF" : "Saved list ki PDF"} />
   </>;
 }
 

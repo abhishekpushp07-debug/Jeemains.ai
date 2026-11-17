@@ -24,10 +24,12 @@ import { PercentileRank } from "@/src/rank/PercentileRank";
 import { TargetMarks } from "@/src/rank/TargetMarks";
 import { Compare } from "@/src/rank/Compare";
 import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
+import { PdfButton } from "@/src/rank/PdfButton";
 import { shareJee } from "@/src/rank/share";
 import { useShortlist } from "@/src/rank/shortlist";
 
 const SAVED = "rank.form.v1";
+type Exam = "jee" | "bitsat" | "comedk";
 
 function summaryOf(b: FormBody) {
   return [b.percentile !== undefined ? `${b.percentile} percentile` : `${b.marks} marks`, b.percentile === undefined ? LEVEL[b.level].label : null,
@@ -42,7 +44,10 @@ export default function RankTab() {
   // A tool mounts the first time it is opened and then only hides, so its answer is still there when the student comes back.
   const [seen, setSeen] = useState<Tool[]>(["rank"]);
   const openTool = (t: Tool) => { setTool(t); setSeen(s => (s.includes(t) ? s : [...s, t])); };
-  const [exam, setExam] = useState<"jee" | "bitsat" | "comedk">("jee");
+  // The College predictor's three exams follow the same rule: switching JEE / BITSAT / COMEDK keeps each one's score and list.
+  const [exam, setExamNow] = useState<Exam>("jee");
+  const [seenExam, setSeenExam] = useState<Exam[]>(["jee"]);
+  const setExam = (e: Exam) => { setExamNow(e); setSeenExam(s => (s.includes(e) ? s : [...s, e])); };
   const [comedkSeed, setComedkSeed] = useState<{ marks: number; at: number } | null>(null);
   const [mode, setMode] = useState<"marks" | "chart">("marks");
   const [meta, setMeta] = useState<Meta | null>(null);
@@ -114,6 +119,7 @@ export default function RankTab() {
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
   const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>{node}</View> : null;
+  const examPane = (e: Exam, node: React.ReactNode) => seenExam.includes(e) ? <View key={e} style={[styles.tool, exam !== e && styles.hidden]}>{node}</View> : null;
 
   return (
     <PaletteContext.Provider value={colors}>
@@ -136,11 +142,12 @@ export default function RankTab() {
         {pane("college", <>
         <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />
 
-        {exam === "bitsat" ? <BitsatPanel onShortlist={() => setShortOpen(true)} />
-          : exam === "comedk" ? <>
-            <ErrorBox error={metaError ?? undefined} retry={loadMeta} testID="rank-meta-error" />
+        {examPane("bitsat", <BitsatPanel onShortlist={() => setShortOpen(true)} />)}
+        {examPane("comedk", <>
+            <ErrorBox error={metaError ?? undefined} retry={loadMeta} testID="comedk-meta-error" />
             <ComedkPanel groups={meta?.comedk.groups ?? []} seed={comedkSeed} onSeedUsed={() => setComedkSeed(null)} onShortlist={() => setShortOpen(true)} />
-          </> : <>
+          </>)}
+        {examPane("jee", <>
           <Switch prefix="rank-mode" value={mode} onChange={setMode} items={[{ key: "marks", label: "My marks" }, { key: "chart", label: "Percentile chart" }]} />
           <ErrorBox error={metaError ?? undefined} retry={loadMeta} testID="rank-meta-error" />
 
@@ -152,7 +159,8 @@ export default function RankTab() {
               <ResultCard result={res.result} candidates={meta?.candidates} saved={saved.length} onShortlist={() => setShortOpen(true)}
                 onShare={() => shareJee(res.result, res.items)} />
               <SeatList data={res} segment={segment} onSegment={s => { setSegment(s); setPage(1); }} page={page} onPage={setPage}
-                branchText={branchLabel(form.branches)} onBranch={() => setBranchPicker(true)} onOpen={s => openSeat(s)} busy={busy} />
+                branchText={branchLabel(form.branches)} onBranch={() => setBranchPicker(true)} onOpen={s => openSeat(s)} busy={busy}
+                tools={<PdfButton testID="rank-pdf" path="/jee" body={{ ...query, segment }} label="Top 50 ki PDF" />} />
             </> : null}
           </> : meta ? <PercentileChart lines={meta.chart} branches={form.branches} branchText={branchLabel(form.branches)}
             onBranch={() => setBranchPicker(true)} onOpen={(s, body) => openSeat(s, body)} /> : null}
@@ -162,7 +170,7 @@ export default function RankTab() {
             <T size={11.5} color={colors.custom_dim}>Data: NTA JEE Main 2026, JoSAA 2026 Round 1–5, CSAB Special 2026 Round 1–2, JAC Delhi 2026 Round 1–4. Trend: JoSAA 2025 final round.</T>
             {meta?.missing.map(m => <T key={m} size={11.5} color={colors.custom_dim}>{m}</T>)}
           </View>
-        </>}
+        </>)}
         </>)}
 
         <View style={styles.links}>

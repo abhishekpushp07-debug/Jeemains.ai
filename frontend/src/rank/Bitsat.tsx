@@ -11,6 +11,7 @@ import { CAMPUS, TAG } from "./tones";
 import { StarButton, Strip, Summary, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps } from "./MetalCard";
 import { shareBitsat } from "./share";
+import { PdfButton } from "./PdfButton";
 import { bitsatSaved, toggleSaved, useShortlist } from "./shortlist";
 
 const SAVED = "rank.bitsat.v1";
@@ -69,6 +70,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
           {DEGREES.map(d => <Toggle key={d.key} testID={`bitsat-degree-${d.key}`} label={d.label} on={degree === d.key} onPress={() => setDegree(d.key)} />)}
         </ScrollView>
+        <PdfButton testID="bitsat-pdf" path="/bitsat" body={{ score, campus, degree }} label="Programs list ki PDF" />
         <BitsatList data={res} saved={new Set(saved.map(s => s.id))} />
       </Strip>
     </> : null}

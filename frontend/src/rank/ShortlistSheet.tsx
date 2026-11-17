@@ -8,7 +8,8 @@ import type { Seat } from "./api";
 import { EXAM, TAG } from "./tones";
 import { StarButton, Tag } from "./controls";
 import { shareShortlist } from "./share";
-import { toggleSaved, useShortlist } from "./shortlist";
+import { PdfButton } from "./PdfButton";
+import { savedPdfBody, toggleSaved, useShortlist } from "./shortlist";
 
 export function ShortlistSheet({ visible, onClose, onOpen }: { visible: boolean; onClose: () => void; onOpen?: (s: Seat) => void }) {
   const list = useShortlist();
@@ -36,6 +37,7 @@ export function ShortlistSheet({ visible, onClose, onOpen }: { visible: boolean;
     })}
     {list.length ? <Pill testID="rank-shortlist-share" icon="whatsapp" label="Shortlist WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onSurfaceInverse}
       onPress={() => shareShortlist(list)} style={{ marginTop: space.sm }} /> : null}
+    {list.length ? <PdfButton testID="rank-shortlist-pdf" path="/saved" body={savedPdfBody(list)} label="Shortlist ki PDF" /> : null}
   </DSheet>;
 }
 

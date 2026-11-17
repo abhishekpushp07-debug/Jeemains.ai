@@ -43,9 +43,9 @@ export function SeatRow({ seat, onPress, testID }: { seat: Seat; onPress: () => 
   </View>;
 }
 
-export function SeatList({ data, segment, onSegment, page, onPage, branchText, onBranch, onOpen, busy }: {
+export function SeatList({ data, segment, onSegment, page, onPage, branchText, onBranch, onOpen, busy, tools }: {
   data: PredictOut; segment: Segment; onSegment: (s: Segment) => void; page: number; onPage: (p: number) => void;
-  branchText: string; onBranch: () => void; onOpen: (s: Seat) => void; busy: boolean;
+  branchText: string; onBranch: () => void; onOpen: (s: Seat) => void; busy: boolean; tools?: React.ReactNode;
 }) {
   return <Strip title="Top college-branch" testID="rank-list"
     right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>Top {data.total}</T>}>
@@ -59,6 +59,7 @@ export function SeatList({ data, segment, onSegment, page, onPage, branchText, o
     <View style={styles.line}>
       <Toggle testID="rank-list-branch" label={branchText} caret on={branchText !== "All branches"} onPress={onBranch} />
     </View>
+    {data.items.length ? tools : null}
     {data.items.length === 0 ? <T testID="rank-list-empty" size={13.5} color={colors.muted}>
       Is filter mein 2026 ki koi seat aapki rank tak nahi gayi. Branch ya segment badal kar dekho.
     </T> : <View>

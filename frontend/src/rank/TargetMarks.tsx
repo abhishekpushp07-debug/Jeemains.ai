@@ -14,6 +14,7 @@ import { CAMPUS, CATEGORY_LABEL, KIND, LEVEL, SERIF } from "./tones";
 import { Picker, Strip, Switch, Tag, Toggle } from "./controls";
 import { CollegeSearch } from "./CollegeSearch";
 import { feeLine } from "./ComedkSheet";
+import { PdfButton } from "./PdfButton";
 
 const SAVED = "rank.target.v1";
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
@@ -104,6 +105,7 @@ function JeePart({ p, patch, states, colleges }: { p: Profile; patch: (x: Partia
     <ErrorBox error={t.error ?? undefined} retry={t.retry} testID="tm-error" />
     {t.data && q ? <Strip title={t.data.college.short} testID="tm-list" right={t.busy ? <ActivityIndicator size="small" color={colors.muted} /> : <Tag label={KIND[t.data.college.type].label} ink={KIND[t.data.college.type].ink} soft={KIND[t.data.college.type].soft} />}>
       <T size={12.5} color={colors.muted}>{t.data.college.city}, {t.data.college.state} · {t.data.rows.length} branches · tap karo, har round ka target</T>
+      {t.data.rows.length ? <PdfButton testID="tm-pdf" path="/target/jee" body={q} label="Is college ki PDF" /> : null}
       {t.data.rows.length === 0 ? <T testID="tm-empty" size={13.5} color={colors.muted}>Aapke category / state / gender ke liye is college mein 2026 ki koi seat nahi thi.</T> : null}
       {t.data.rows.map((r, i) => <JeeRow key={r.prog} r={r} rounds={t.data!.rounds} open={openRow === r.prog} onPress={() => setOpenRow(openRow === r.prog ? null : r.prog)} testID={`tm-row-${i}`} />)}
       {t.data.notes.map(n => <T key={n} size={11.5} color={colors.custom_dim}>{n}</T>)}
@@ -179,6 +181,7 @@ function ComedkPart({ p, patch, colleges }: { p: Profile; patch: (x: Partial<Pro
 function ComedkList({ data, busy, openRow, onRow }: { data: ComedkTarget; busy: boolean; openRow: string | null; onRow: (cc: string) => void }) {
   return <Strip title={data.college.short} testID="tm-list" right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <Tag label="COMEDK · GM" ink={colors.custom_rankBloodInk} soft={colors.custom_rankBloodSoft} />}>
     <T size={12.5} color={colors.muted}>{data.college.city} · {data.rows.length} courses · tap karo, har round ka target</T>
+    <PdfButton testID="tm-pdf" path="/target/comedk" body={{ code: data.college.code }} label="Is college ki PDF" />
     {data.rows.map((r, i) => <ComedkRow key={r.cc} r={r} open={openRow === r.cc} onPress={() => onRow(r.cc)} testID={`tm-row-${i}`} />)}
     {data.notes.map(n => <T key={n} size={11.5} color={colors.custom_dim}>{n}</T>)}
   </Strip>;
@@ -223,6 +226,7 @@ function BitsatPart({ campus, onCampus }: { campus: Profile["campus"]; onCampus:
     </View>
     <ErrorBox error={t.error ?? undefined} retry={t.retry} testID="tm-error" />
     {t.data ? <Strip title="BITSAT target" testID="tm-list" right={<T size={12} color={colors.muted}>score / {t.data.max}</T>}>
+      <PdfButton testID="tm-pdf" path="/target/bitsat" body={{ campus }} label="Target list ki PDF" />
       {rows.map((r, i) => <View key={r.id} testID={`tm-row-${i}`} style={[styles.row, styles.rowMain]}>
         <View style={{ flex: 1, gap: 3 }}>
           <View style={styles.line}>

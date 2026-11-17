@@ -15,6 +15,7 @@ import { branchLabel } from "./InputCard";
 import { Trend } from "./SeatList";
 import { ComedkSheet, feeLine } from "./ComedkSheet";
 import { shareComedk } from "./share";
+import { PdfButton } from "./PdfButton";
 import { comedkSaved, toggleSaved, useShortlist } from "./shortlist";
 
 const SAVED = "rank.comedk.v1";
@@ -121,7 +122,8 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
       <ComedkCard data={res} saved={saved.length} onShortlist={onShortlist} />
       <ComedkList data={res} area={area} onArea={a => { setArea(a); setPage(1); }} page={page} onPage={setPage} busy={busy}
         branchText={branchLabel(branches)} onBranch={() => setPicker(true)} saved={new Set(saved.map(s => s.id))}
-        onOpen={i => setDetail({ ...query, branches, code: i.code, course: i.cc })} />
+        onOpen={i => setDetail({ ...query, branches, code: i.code, course: i.cc })}
+        tools={<PdfButton testID="comedk-pdf" path="/comedk" body={{ ...query, branches, area }} label="Top 50 ki PDF" />} />
     </> : null}
     <View style={{ gap: 4 }}>
       {(res?.notes ?? []).map(n => <T key={n} size={12} color={colors.muted}>{n}</T>)}
@@ -155,9 +157,9 @@ function ComedkCard({ data, saved, onShortlist }: { data: ComedkOut; saved: numb
   </Animated.View>;
 }
 
-function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, onOpen, busy, saved }: {
+function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, onOpen, busy, saved, tools }: {
   data: ComedkOut; area: ComedkArea; onArea: (a: ComedkArea) => void; page: number; onPage: (p: number) => void;
-  branchText: string; onBranch: () => void; onOpen: (i: ComedkItem) => void; busy: boolean; saved: Set<string>;
+  branchText: string; onBranch: () => void; onOpen: (i: ComedkItem) => void; busy: boolean; saved: Set<string>; tools: React.ReactNode;
 }) {
   const row = (it: ComedkItem, testID: string) => <ComedkRow key={it.id} item={it} testID={testID} onPress={() => onOpen(it)} saved={saved.has(`comedk-${it.id}`)} />;
   return <Strip title="Top college-course" testID="comedk-list"
@@ -168,6 +170,7 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
     <View style={styles.wrap}>
       <Toggle testID="comedk-list-branch" label={branchText} caret on={branchText !== "All branches"} onPress={onBranch} />
     </View>
+    {data.items.length ? tools : null}
     {data.items.length === 0 ? <T testID="comedk-list-empty" size={13.5} color={colors.muted}>
       Is filter mein 2026 ki koi GM seat aapki rank tak nahi gayi. Branch ya shehar badal kar dekho.
     </T> : <View>{data.items.map((it, i) => row(it, `comedk-seat-${(page - 1) * 25 + i}`))}</View>}

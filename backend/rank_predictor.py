@@ -582,4 +582,6 @@ def make_router():
     router.post("/comedk/college")(rank_comedk.college)
     import rank_tools  # percentile -> rank, target marks, compare (it imports this module, so it loads last)
     rank_tools.register(router)
+    import rank_pdf  # white A4 PDFs of the same lists (uses rank_tools, so it loads after it)
+    rank_pdf.register(router)
     return router

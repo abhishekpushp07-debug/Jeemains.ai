@@ -1,0 +1,40 @@
+{
+  "summary": "Rank PDF export + College predictor answer persistence tested end-to-end. Backend: new suite test_rank_pdf_iter88.py 33/33 pass. It parses every PDF with pdfplumber and checks it against the live JSON APIs. JEE PDF (all 5 segments): the Top 50 rows are in the same order as /predict pages 1+2, with the same closing number and tag, and the 'Bas thoda sa door' section matches near[]. Percentile, female/pwd/Delhi and branch-filter variants also match. COMEDK (marks 120, rank 4500, blr/other areas, branch filter): closing, fee and GM seats match /comedk pages 1+2 row by row. BITSAT: every program from items/near/rest is present. Target JEE (MANIT inst 2, DTU 111, SC+pwd), COMEDK E095 and BITSAT Goa: every branch/round closing and the Normal target marks are present. Saved: side-by-side shows only when pick>=2, the unknown item shows 'nahi mili', and the filename is correct. All validation codes were exactly as specified (422/404/422/422/422). Every PDF built in 0.2-0.3 s; a 50-item saved PDF took 0.26 s. Older rank regression suites (iter83/86/87, predictor, comedk, estimate, phase2): 103/103 pass. Frontend (390 and 320 px, logged in as 7004186276): JEE (200), COMEDK (120) and BITSAT (280) results all survive switching JEE->COMEDK->BITSAT->JEE->BITSAT->COMEDK. comedk-card and comedk-list stay visible and the collapsed summary is identical. The Rank predictor COMEDK 110 -> rp-colleges handover opens comedk-card for 110. All PDF buttons download a file and show '<filename> taiyaar' with a spinner while building: rank-pdf, comedk-pdf, bitsat-pdf, tm-pdf (MANIT, RVCE, BITSAT), cmp-pdf (label changes correctly between 'Compare + saved list ki PDF' and 'Saved list ki PDF') and rank-shortlist-pdf. The PDF downloaded after picking the NIT segment matches the first NIT row on screen. At 320 px the buttons are 254x50 and the page has no horizontal overflow. Percentile se rank -> colleges, Target marks, Compare and stars still work. No console errors apart from the expected 401 before login. No deprecated Expo packages and no new frontend dependencies (package.json unchanged; the reportlab fonts add 1.1 MB on the backend only).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rank/pdf/jee (segment != all)", "issue": "The header says 'aapki pahunch mein kul 706' (len(best) across all segments) even when 'List: Sirf NIT' is shown. The screen shows NIT 315, so the number in the PDF is misleading. Use the segment count, or label 706 as 'sab colleges mein'. Reference: /app/backend/rank_pdf.py:248"},
+      {"endpoint": "POST /api/rank/pdf/jee, /pdf/comedk", "issue": "The filename does not include segment/area/branch filter. All, NIT and DELHI downloads are all called JEELIVE-JEE-colleges-200-marks.pdf, so they overwrite each other or get duplicated as '(1).pdf'. Reference: rank_pdf.py:258, 303"},
+      {"endpoint": "/api/rank/pdf/*", "issue": "These public, unauthenticated endpoints are CPU-bound (~0.2 s each) and have no rate limit. Consider a light limiter."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "pdf.ts savePdf error message", "issue": "On a network failure (fetch rejects) the raw 'Failed to fetch' (web) or 'Network request failed' (native) is shown instead of the Hinglish FAIL text. The catch passes through any Error with a message. Map TypeError/network errors to FAIL. Reference: /app/frontend/src/rank/pdf.ts:26", "testID": "rank-pdf-msg", "priority": "LOW"},
+      {"component": "PdfButton stale message", "issue": "'<file> taiyaar' stays after the student changes segment, filter or score, so it looks like the new list is already exported. Reset msg when body changes. Reference: /app/frontend/src/rank/PdfButton.tsx:11", "testID": "rank-pdf-msg / comedk-pdf-msg", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_pdf_iter88.py", "/app/test_reports/pytest/pytest_rank_pdf_iter88.xml"],
+  "action_items": [
+    "(minor) pdf.ts: map fetch TypeError ('Failed to fetch' / 'Network request failed') to the Hinglish FAIL message.",
+    "(minor) PdfButton: clear msg when the body prop changes (e.g. useEffect on JSON.stringify(body)).",
+    "(minor) rank_pdf.jee: make the 'aapki pahunch mein kul N' count segment-aware, or label it as the all-colleges total.",
+    "(minor) Add segment/area to PDF filenames (e.g. JEELIVE-JEE-NIT-colleges-200-marks.pdf).",
+    "(minor) Native pdf.ts: when Sharing.isAvailableAsync() is false the file stays in the cache but the UI still says 'taiyaar'. Show a fallback message."
+  ],
+  "critical_code_review_comments": [
+    "The native branch (expo-file-system File/Paths + expo-sharing) cannot be tested on web; it needs an Expo Go or device check.",
+    "frontend/package-lock.json (untracked, Nov 17 04:46) sits next to yarn.lock. Mixing npm and yarn lockfiles is risky; delete package-lock.json if yarn is the package manager.",
+    "backend.err.log has an old SyntaxError in rank_tools.py:194 (nested f-string quotes) from an edit at about 07:18. The backend has since reloaded and is healthy now, so this is not a current issue."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_pdf_iter88.py"],
+  "success_rate": {"backend": "100% (33/33 new + 103/103 regression)", "frontend": "100% of requested flows; 2 low-priority UX nits"},
+  "seed_data_creation": "None. Stars and shortlist are stored only in the browser context's local storage. No account or academic data was touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "PDF tests: test_rank_pdf_iter88.py (pdfplumber; pypdf is NOT installed). Older rank suites need EXPO_BACKEND_URL exported (test_rank_comedk/estimate/phase2/iter83). GET /api/rank/target/bitsat (not POST). To download in browser_automation, use page.expect_download plus locator.evaluate('e=>e.click()'). pdfplumber is not available inside the browser_automation sandbox: save the download to /tmp and parse it afterwards with bash. Login: type into the first input, then entry-pin-input, wait 1.5 s, click entry-continue-button.",
+  "rca_of_issue": ""
+}
