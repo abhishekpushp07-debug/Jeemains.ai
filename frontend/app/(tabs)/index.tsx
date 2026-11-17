@@ -9,13 +9,14 @@ import { Notice, Press, T } from "@/src/components/ui";
 import { SectionLabel } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { HomeSeriesCard } from "@/src/components/series/HomeSeriesCard";
-import { ChipItem, ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem, HomeFooter, PromoBanner } from "@/src/components/home/HomeParts";
+import { ChipItem, ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem, PromoBanner } from "@/src/components/home/HomeParts";
+import { ShareCard } from "@/src/components/home/ShareCard";
 import { useShare } from "@/src/components/SeriesBanner";
 import { BrandMark } from "@/src/components/BrandMark";
 import { getPyqCatalogue } from "@/src/api/pyq";
 import { colors, space } from "@/src/theme";
-import { EXAMS, usesNativeTabs } from "@/src/navigation";
-import { useSeriesData } from "@/src/series";
+import { EXAMS, istDate, usesNativeTabs } from "@/src/navigation";
+import { seriesDays, useSeriesData } from "@/src/series";
 import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
 
@@ -54,7 +55,8 @@ export default function Home() {
   const bottom = usesNativeTabs ? insets.bottom : 0;
   const s = series.data;
   const today = days.find(d => d.isToday);
-  const liveSub = !s ? "62-day series" : s.today < s.first_date ? "opens 1 dec" : s.today > s.last_date ? "practice archive" : today ? `day ${today.day} · ${today.label.toLowerCase()}` : "62-day series";
+  const total = seriesDays(s); // the website's schedule decides the day count
+  const liveSub = !s ? "daily full mocks" : s.today < s.first_date ? `opens ${istDate(s.first_date).toLowerCase()}` : s.today > s.last_date ? "practice archive" : today ? `day ${today.day} · ${today.label.toLowerCase()}` : `${total}-day series`;
   const first = user?.name?.trim().split(/\s+/)[0];
   const openTests = (tab: string) => router.push({ pathname: "/(tabs)/tests", params: { tab, at: String(Date.now()) } });
   // Shortcuts to an exam disappear with it when the owner hides that exam on the website.
@@ -119,7 +121,7 @@ export default function Home() {
         ]} />
       </View>
 
-      <PromoBanner onPress={() => router.push("/live")} />
+      <PromoBanner onPress={() => router.push("/live")} days={total} />
 
       <View style={{ gap: space.md }}>
         <SectionLabel title="Explore JEELIVE" />
@@ -135,7 +137,7 @@ export default function Home() {
         ] as (ChipItem & { exam?: string })[]).filter(c => !c.exam || shown(c.exam))} />
       </View>
 
-      <HomeFooter />
+      <ShareCard />
     </ScrollView>
   );
 }

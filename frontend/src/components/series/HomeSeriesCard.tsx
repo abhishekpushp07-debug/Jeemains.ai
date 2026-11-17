@@ -8,19 +8,20 @@ import { Pill, ProgressRing } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { colors, pastel, SeriesTone, space } from "@/src/theme";
 import { istDate } from "@/src/navigation";
-import { DayInfo, Series, Streak, dayAction, skippedCount } from "@/src/series";
+import { DayInfo, Series, Streak, dayAction, seriesDays, skippedCount } from "@/src/series";
 
 type CardState = { tone: SeriesTone; right: string; status: string; title: string; meta: string; action: { label: string; to: string; icon: any } };
 
 function cardState(s: Series | null, days: DayInfo[]): CardState {
   const meta = "75 Q · 180 min · +4 / −1";
-  if (!s) return { tone: "today", right: "62 DAYS", status: "All India JEE", title: "Checking today’s paper…", meta, action: { label: "Open series hub", to: "/live", icon: "arrow-right" } };
-  if (s.today < s.first_date) return { tone: "upcoming", right: "62 DAYS", status: `Starts ${istDate(s.first_date)}`, title: "62 daily full mocks", meta, action: { label: `Opens ${istDate(s.first_date)}`, to: "/live", icon: "calendar-clock" } };
-  if (s.today > s.last_date) return { tone: "done", right: "62 / 62", status: "Series complete", title: "Practice archive is open", meta: "Every paper · practise anytime", action: { label: "Open archive", to: "/live", icon: "archive-outline" } };
+  if (!s) return { tone: "today", right: "", status: "All India JEE", title: "Checking today’s paper…", meta, action: { label: "Open series hub", to: "/live", icon: "arrow-right" } };
+  const n = seriesDays(s); // from the website: changes the moment the owner changes the schedule
+  if (s.today < s.first_date) return { tone: "upcoming", right: `${n} DAYS`, status: `Starts ${istDate(s.first_date)}`, title: `${n} daily full mocks`, meta, action: { label: `Opens ${istDate(s.first_date)}`, to: "/live", icon: "calendar-clock" } };
+  if (s.today > s.last_date) return { tone: "done", right: `${n} / ${n}`, status: "Series complete", title: "Practice archive is open", meta: "Every paper · practise anytime", action: { label: "Open archive", to: "/live", icon: "archive-outline" } };
   const d = days.find(x => x.isToday);
-  if (!d) return { tone: "today", right: "62 DAYS", status: "Live series", title: s.title, meta, action: { label: "Open series hub", to: "/live", icon: "arrow-right" } };
+  if (!d) return { tone: "today", right: `${n} DAYS`, status: "Live series", title: s.title, meta, action: { label: "Open series hub", to: "/live", icon: "arrow-right" } };
   const act = dayAction(d);
-  const base = { right: `DAY ${d.day} / 62`, status: d.label, title: d.slot.title, meta };
+  const base = { right: `DAY ${d.day} / ${n}`, status: d.label, title: d.slot.title, meta };
   if (d.live && act) return { ...base, tone: d.tone, action: { label: d.live.resumable ? "Resume" : "View result", to: act.to, icon: act.icon } };
   if (d.live) return { ...base, tone: "done", action: { label: "Results at 11:59 PM", to: "/live", icon: "lock-clock" } };
   if (act) return { ...base, tone: "today", action: { label: "Start today’s test", to: act.to, icon: "arrow-right" } };
@@ -37,6 +38,7 @@ export function HomeSeriesCard({ series, streak, days, error }: { series: Series
   const glow = "seriesGlow" + useId().replace(/[^a-z0-9]/gi, "");
   const st = cardState(series, days);
   const done = streak?.completed_count ?? 0;
+  const total = seriesDays(series);
   const started = !!series && series.today >= series.first_date;
   return (
     <View testID="all-india-series-banner" style={styles.card}>
@@ -66,9 +68,9 @@ export function HomeSeriesCard({ series, streak, days, error }: { series: Series
             <T testID="series-availability-badge" w="bold" size={10.5} color={pastel[st.tone].from} style={styles.caps} numberOfLines={1}>{st.status.toUpperCase()}</T>
             <T testID="series-banner-title" w="heavy" size={narrow ? 20 : 23} color={colors.onSurfaceInverse} numberOfLines={2} style={{ letterSpacing: -0.3 }}>{st.title}</T>
           </View>
-          <ProgressRing testID="series-home-ring" size={narrow ? 66 : 78} stroke={6} value={done / 62} track={colors.custom_whiteA15} color={colors.brandPrimary} label={`${done} of 62 days done`}>
+          <ProgressRing testID="series-home-ring" size={narrow ? 66 : 78} stroke={6} value={total ? done / total : 0} track={colors.custom_whiteA15} color={colors.brandPrimary} label={`${done} of ${total || "—"} days done`}>
             <T w="heavy" size={narrow ? 16 : 18} color={colors.onSurfaceInverse}>{done}</T>
-            <T w="bold" size={9.5} color={colors.custom_whiteA70}>of 62</T>
+            <T w="bold" size={9.5} color={colors.custom_whiteA70}>of {total || "—"}</T>
           </ProgressRing>
         </View>
         <View testID="series-schedule-facts" accessibilityLabel={st.meta} style={styles.facts}>

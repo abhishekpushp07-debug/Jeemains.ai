@@ -1,17 +1,18 @@
 import React from "react";
-import { Share, View } from "react-native";
+import { View } from "react-native";
 import { T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { colors, space } from "@/src/theme";
+import { shareAppAnywhere } from "@/src/shareApp";
 import { DSheet, Pill } from "./design";
 
 export type { Series, Slot } from "@/src/series";
 
-export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function SeriesExplainer({ open, onClose, days }: { open: boolean; onClose: () => void; days: number }) {
   return (
     <DSheet visible={open} onClose={onClose} testID="series-explainer" title="How it works">
       <T w="heavy" size={10} color={colors.brandText} style={{ letterSpacing: 1.8 }}>THE DAILY FULL-SYLLABUS CHALLENGE</T>
-      <T w="heavy" size={22}>62 days. One focused mission.</T>
+      <T w="heavy" size={22}>{days ? `${days} days` : "Every day"}. One focused mission.</T>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
         <T w="heavy" size={14} color={colors.brandText}>Score 200+ with AI</T>
         <T size={13} color={colors.muted}>· AI analysed PYQ based test series · Created by <T w="heavy" size={13}>AI Astra</T></T>
@@ -38,6 +39,5 @@ export function SeriesExplainer({ open, onClose }: { open: boolean; onClose: () 
 }
 
 export function useShare() {
-  return () =>
-    Share.share({ message: "JEELIVE.AI — free JEE Main, BITSAT & COMEDK practice: chapter tests, 62-day All India series and 15-second Rapid Fire formula cards. Free for everyone. https://jeelive.ai" }).catch(() => {});
+  return shareAppAnywhere;
 }

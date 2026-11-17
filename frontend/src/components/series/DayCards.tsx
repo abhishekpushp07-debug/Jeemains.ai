@@ -5,7 +5,7 @@ import { Empty, Icon, Press, T } from "@/src/components/ui";
 import { PastelSurface, Pill } from "@/src/components/design";
 import { colors, pastel, space } from "@/src/theme";
 import { istDate } from "@/src/navigation";
-import { countdown, dayAction, DayInfo, dayNote, Series } from "@/src/series";
+import { countdown, dayAction, DayInfo, dayNote, Series, seriesDays } from "@/src/series";
 
 /** TODAY: the live paper with its state-driven primary action. */
 export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
@@ -18,7 +18,7 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
     return <PastelSurface testID="series-prelaunch" tone={before ? "upcoming" : "done"} style={styles.today}>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{before ? `STARTS ${istDate(series.first_date).toUpperCase()}` : "SERIES COMPLETE"}</T>
       <T w="heavy" size={20} color={colors.custom_pastelInk}>{before ? `The first challenge opens ${istDate(series.first_date)}.` : "The live series has ended."}</T>
-      <T size={12.5} color={p.body}>{before ? "Your 62-day schedule is below. Papers unlock only after publication and their opening time." : "Continue in the practice archive. Live results stay separate."}</T>
+      <T size={12.5} color={p.body}>{before ? `Your ${seriesDays(series)}-day schedule is below. Papers unlock only after publication and their opening time.` : "Continue in the practice archive. Live results stay separate."}</T>
     </PastelSurface>;
   }
   const p = pastel[day.tone];
@@ -41,7 +41,7 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
 }
 
 const CHIP = 52, GAP = 8;
-/** 1–62 day chips; opens on today. */
+/** One chip per series day; opens on today. */
 export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (day: number) => void }) {
   const list = useRef<FlatList<DayInfo>>(null);
   const index = Math.max(0, days.findIndex(d => d.day === selected));

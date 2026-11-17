@@ -11,7 +11,7 @@ import { DayCard, DayStrip, ResultsList, TodayCard } from "@/src/components/seri
 import { ScoreTrend, trendSummary } from "@/src/components/series/ScoreTrend";
 import { DayMap } from "@/src/components/series/DayMap";
 import { colors, space } from "@/src/theme";
-import { useSeriesData } from "@/src/series";
+import { seriesDays, useSeriesData } from "@/src/series";
 
 export default function Live() {
   const insets = useSafeAreaInsets();
@@ -24,6 +24,7 @@ export default function Live() {
   const scroll = useRef<React.ElementRef<typeof ScrollView>>(null);
   const stripY = useRef(0);
   const d = series.data;
+  const total = seriesDays(d);
   const today = days.find(x => x.isToday);
   const selected = picked ?? today?.day ?? (d && d.today > d.last_date ? days.length : 1);
   const selectedDay = days.find(x => x.day === selected);
@@ -36,7 +37,7 @@ export default function Live() {
     <ScrollView ref={scroll} testID="series-hub" style={{ flex: 1, backgroundColor: colors.surface }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}
       refreshControl={<RefreshControl refreshing={false} onRefresh={reload} />}>
       <View style={{ marginHorizontal: -space.lg, marginBottom: -space.md }}>
-        <ScreenHeader testID="series-header" title="All India Series" eyebrow="62 days · Full syllabus" backTestID="header-back-button"
+        <ScreenHeader testID="series-header" title="All India Series" eyebrow={`${total ? `${total} days` : "Daily mocks"} · Full syllabus`} backTestID="header-back-button"
           onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))}
           right={<RoundButton testID="series-tab-about" icon="information-variant" label="How it works" onPress={() => setOpen(true)} />} />
       </View>
@@ -76,12 +77,12 @@ export default function Live() {
         </View> : null}
 
         <View style={{ gap: space.sm }}>
-          <SectionLabel title="62-day map" />
+          <SectionLabel title={`${total}-day map`} />
           <DayMap days={days} selected={selected} onSelect={day => { setPicked(day); scroll.current?.scrollTo({ y: Math.max(0, stripY.current - space.sm), animated: true }); }} />
         </View>
       </> : null}
     </ScrollView>
-    <SeriesExplainer open={open} onClose={() => setOpen(false)} />
+    <SeriesExplainer open={open} onClose={() => setOpen(false)} days={total} />
     </View>
   );
 }

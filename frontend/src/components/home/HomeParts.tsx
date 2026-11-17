@@ -72,13 +72,13 @@ export function ContinueCard({ attempt, onPress }: { attempt: any; onPress: () =
 }
 
 /** Soft gradient promo with a big typographic number, like a fintech offer banner. */
-export function PromoBanner({ onPress }: { onPress: () => void }) {
+export function PromoBanner({ onPress, days }: { onPress: () => void; days: number }) {
   // Below 360px the big number would squeeze the copy, so the copy gets the full width.
   const narrow = useWindowDimensions().width < 360;
   return <LinearGradient testID="home-promo" colors={[colors.custom_promoFrom, colors.custom_promoTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.promo}>
     <View style={{ flex: 1, gap: 6 }}>
       <T w="bold" size={10.5} color={colors.custom_promoInk} style={{ letterSpacing: narrow ? 1.2 : 2 }} numberOfLines={1}>AI ASTRA · 100% AI</T>
-      <T w="heavy" size={narrow ? 16 : 17}>score 200+ with AI.{"\n"}62 daily mocks, free.</T>
+      <T testID="home-promo-title" w="heavy" size={narrow ? 16 : 17}>score 200+ with AI.{"\n"}{days ? `${days} daily mocks` : "daily full mocks"}, free.</T>
       <Press testID="home-promo-cta" onPress={onPress} accessibilityLabel="Know more about the All India series" style={styles.promoBtn}>
         <T w="bold" size={13} color={colors.onSurfaceInverse}>Know more</T>
       </Press>
@@ -97,14 +97,6 @@ export function ExploreChips({ items }: { items: ChipItem[] }) {
         <T w="semibold" size={15}>{it.label}</T>
       </LinearGradient>
     </Press>)}
-  </View>;
-}
-
-export function HomeFooter() {
-  return <View testID="home-footer" style={styles.footer}>
-    {/* Decorative watermark; the caption below carries the same meaning for screen readers. */}
-    <T w="heavy" size={34} color={colors.custom_qFreshLine} style={{ lineHeight: 38 }} aria-hidden accessibilityElementsHidden importantForAccessibility="no-hide-descendants">made for every{"\n"}aspirant.</T>
-    <T size={12} color={colors.custom_eyebrow}>JEELIVE.AI · free forever · crafted with AI Astra</T>
   </View>;
 }
 
@@ -136,5 +128,4 @@ const styles = StyleSheet.create({
   promoNum: { lineHeight: 56, letterSpacing: -2, opacity: 0.9 },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
   chip: { flexDirection: "row", alignItems: "center", gap: 8, height: 52, paddingHorizontal: 18, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
-  footer: { gap: space.sm, paddingTop: space.lg },
 });

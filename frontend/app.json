@@ -60,7 +60,12 @@
           "enableBackgroundPlayback": false
         }
       ],
-      "expo-build-properties"
+      [
+        "expo-build-properties",
+        {
+          "android": { "manifestQueries": { "package": ["com.whatsapp", "com.whatsapp.w4b"] } }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

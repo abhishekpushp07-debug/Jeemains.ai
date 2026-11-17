@@ -7,7 +7,7 @@ export type Slot = { day: number; date: string; state: string; ready: boolean; s
 export type Series = { id: string; title: string; first_date: string; last_date: string; total: number; today: string; server_now: number; slots: Slot[]; today_slot?: Slot | null };
 export type StreakDay = { day: number; date: string; state: "completed" | "pending" | "in_progress" | "missed" | "today" | "upcoming"; attempt_id?: string | null };
 export type Milestone = { days: number; title: string; subtitle?: string; earned: boolean };
-export type Streak = { stage: "prelaunch" | "live" | "finished"; completed_count: number; current_streak: number; best_streak: number; total_days: number; today_state?: string; days?: StreakDay[]; milestones?: Milestone[] };
+export type Streak = { stage: "prelaunch" | "live" | "finished"; first_date?: string; completed_count: number; current_streak: number; best_streak: number; total_days: number; today_state?: string; days?: StreakDay[]; milestones?: Milestone[] };
 export type SeriesAttempt = { id: string; title: string; mode: string; series_date?: string; status: string; resumable?: boolean; remaining_seconds?: number; summary?: { score: number; maximum: number } | null };
 export type SeriesHistory = { items: SeriesAttempt[]; total: number };
 
@@ -28,8 +28,15 @@ async function fetchHistory(signal: AbortSignal): Promise<SeriesHistory> {
   return { ...first, items };
 }
 
+const fetchSeries = (signal: AbortSignal) => api<Series>("/series/all-india-jee", { signal });
+
+/** How many days the series runs, exactly as the website sets it (0 while it loads). Never a number baked into the app. */
+export const seriesDays = (s?: Series | null) => s?.total || s?.slots?.length || 0;
+/** The same count for screens that don't load the whole series (shares the cached schedule). */
+export const useSeriesDays = () => seriesDays(useCached<Series>("series", fetchSeries).data);
+
 export function useSeriesData(uid?: string, historyAlways = true) {
-  const series = useCached<Series>("series", (signal) => api("/series/all-india-jee", { signal }));
+  const series = useCached<Series>("series", fetchSeries);
   const streak = useCached<Streak>(uid ? `u.${uid}.streak` : null, (signal) => api("/series/all-india-jee/streak", { signal }));
   const started = !!series.data && series.data.today >= series.data.first_date;
   const history = useCached<SeriesHistory>(uid && (historyAlways || started) ? `u.${uid}.serieshist` : null, fetchHistory);

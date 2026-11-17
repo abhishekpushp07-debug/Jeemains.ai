@@ -9,7 +9,7 @@ import { DayInfo } from "@/src/series";
 const ROWS = 7, GAP = 6;
 const LEGEND: SeriesTone[] = ["done", "today", "upcoming", "missed"];
 
-/** GitHub-style 62-day grid; tap a day to see it in the day strip. */
+/** GitHub-style grid of every series day; tap a day to see it in the day strip. */
 export function DayMap({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (day: number) => void }) {
   const [w, setW] = useState(0);
   const cols = Math.ceil(days.length / ROWS) || 9;

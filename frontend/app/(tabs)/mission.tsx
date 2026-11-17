@@ -9,6 +9,7 @@ import { DCard, IconCircle, Pill, SectionLabel } from "@/src/components/design";
 import { useShare } from "@/src/components/SeriesBanner";
 import { colors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
+import { useSeriesDays } from "@/src/series";
 
 const STEPS: { icon: IconName; title: string; body: string }[] = [
   { icon: "database-search-outline", title: "Every PYQ, studied", body: "Each previous-year JEE question is analysed by AI on 80 parameters — concept, sub-topic, difficulty, trap type, time cost, formula family and more." },
@@ -20,6 +21,7 @@ const STEPS: { icon: IconName; title: string; body: string }[] = [
 export default function Mission() {
   const insets = useSafeAreaInsets();
   const share = useShare();
+  const days = useSeriesDays();
   const reduced = useReducedMotion();
   const enter = (i: number) => reduced ? undefined : FadeInDown.delay(70 * i).duration(340);
   return (
@@ -34,7 +36,7 @@ export default function Mission() {
         <T w="heavy" size={30}>Built by AI.{"\n"}Made for you.</T>
         <T size={14} color={colors.muted}>JEELIVE.AI’s practice content and test series are designed by AI analysing every PYQ question on 80 parameters, aiming for the world’s best prediction and estimation of what to practise.</T>
         <View style={styles.stats}>
-          {[["80", "parameters"], ["62", "daily mocks"], ["₹0", "forever"]].map(([a, b], i) => (
+          {[["80", "parameters"], [days ? String(days) : "—", "daily mocks"], ["₹0", "forever"]].map(([a, b], i) => (
             <View key={b} style={[styles.stat, i > 0 && styles.statLine]}>
               <T w="heavy" size={24}>{a}</T>
               <T size={11.5} color={colors.custom_eyebrow}>{b}</T>

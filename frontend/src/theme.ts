@@ -173,6 +173,9 @@ const dark = {
   custom_rankSparkle: "#FFFFFF", custom_rankShimmer: "rgba(248,250,252,0.92)", custom_rankSilverLine: "rgba(226,232,240,0.38)",
   custom_rankTrack: "rgba(255,255,255,0.07)",
   custom_whatsapp: "#1FA855",
+  // Home share card: royal blue with a soft periwinkle glow and white glass (same in both palettes).
+  custom_royalFrom: "#3561F0", custom_royalMid: "#2344CC", custom_royalTo: "#142B8C", custom_royalGlow: "#9DB6FF",
+  custom_royalInk: "#DCE5FF", custom_royalDeep: "#132A86", custom_royalGlass: "rgba(255,255,255,0.12)", custom_royalLine: "rgba(255,255,255,0.24)",
   custom_rankBgFrom: "#111116", custom_rankBgMid: "#0A0A0E", custom_rankBgTo: "#0A0709", custom_rankBgGlow: "rgba(153,27,27,0.13)",
   custom_rankPanelSheen: "rgba(255,255,255,0.035)",
 };
