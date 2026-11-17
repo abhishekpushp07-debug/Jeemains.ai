@@ -1,0 +1,30 @@
+{
+  "summary": "Retest after iteration_84 of the Rank tab's Rank predictor. Backend: 49/49 pytest passed (test_rank_estimate, _edges, test_rank_comedk, test_rank_predictor). Frontend (mobile web, logged in as the QA learner): all 3 medium bugs are FIXED. Bug1: no ellipsis or clipped leaf text in rp-levels-tough|normal|easy at 320, 375 and 390px (JEE 180, OBC-NCL, PwD). Bug2: JEE and COMEDK each keep their own result, in both directions, and rp-colleges hands over the right exam. Bug3: after a COMEDK 100 handover, edit to 120 and switch tabs shows 120, and the saved branch (Computer Science) is kept after the handover and after a page reload. The minor fixes pass: the result stays after switching tiles, rp-input-error clears when the user types, and OBC‑NCL uses a non-breaking hyphen in rp-input-collapsed and rp-card-summary. The regression passes for tiles, JEE including rp-levels-tough, COMEDK 100 (2,350–5,500, mid 4,769), the JEE handover and BITSAT 280 (clears 47 of 50). New issue: if the user switches exam while an estimate is still loading, the busy flag gets stuck and the other exam's Predict button stays disabled. Cosmetic: the category/PwD rank line in the levels rows breaks inside 'OBC-NCL-PwD' and inside ranges.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "RankPredictor busy state", "issue": "If the user switches exam while a request is still loading, Predict rank on the other exam stays disabled with a spinner. Repro: slow /api/rank/estimate, show JEE 180, switch to rp-exam-comedk within the delay. rp-show is aria-disabled and spinning, and the user cannot predict COMEDK until they go back to JEE. Cause: the effect cleanup at RankPredictor.tsx:62 sets live=false, the .finally only calls setBusy(false) when live, and the COMEDK query is null so nothing resets busy.", "testID": "rp-show", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank predictor > Paper type ke hisaab se", "issues": ["The category line (RankPredictor.tsx:154) uses normal hyphens and spaces. At 320px it breaks as 'OBC-NCL-' / 'PwD rank: 8'. At 375 and 390px a range splits as '11 –' / '12' and '15 –' / '16'. Use \\u2011 in the labels and \\u00A0 around the en dash in fmtRange, or put the PwD rank on its own line."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_estimate.py", "/app/backend/tests/test_rank_estimate_edges.py", "/app/backend/tests/test_rank_comedk.py", "/app/backend/tests/test_rank_predictor.py", "/app/test_reports/pytest/pytest_iter85.xml"],
+  "action_items": [
+    "RankPredictor.tsx:62: reset busy when an exam's request is dropped (cleanup `return () => { live = false; setBusy(false); }`), or keep busy per exam. Then switching exam mid-request no longer leaves the other exam's rp-show disabled.",
+    "RankPredictor.tsx:154–155: stop the line breaking inside 'OBC-NCL-PwD' and inside ranges. Use non-breaking hyphens and spaces, or put the PwD rank on a separate line."
+  ],
+  "critical_code_review_comments": [
+    "RankPredictor: one error and one busy state are shared by both exams. switchExam clears the error but not busy (see the ui_bug above).",
+    "ComedkPanel seed handling looks right: onSeedUsed clears the parent seed, the saved branches are re-read and kept, and a remount reads the newest saved entry."
+  ],
+  "updated_files": ["/app/test_reports/iteration_85.json"],
+  "success_rate": {"backend": "100% (49/49)", "frontend": "100% of the requested retests and regression (1 new medium edge-case bug found)"},
+  "seed_data_creation": "None. Only this test browser's local storage changed: COMEDK saved 120 and the branch was reset to All. No accounts, academic or RF writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry: click the inputs, type 7004186276 and 5524, then entry-continue-button, then tab-rank. COMEDK branch picker option ids are comedk-branch-picker-<slug> (skip -backdrop, -close, -all); close it with comedk-branch-picker-done. To reproduce the busy bug, delay **/api/rank/estimate** with page.route for 4s. Clip check: leaf divs in rp-levels-* where scrollWidth > clientWidth.",
+  "rca_of_issue": "Stuck busy: the effect deps include query = queries[form.exam]. Switching exam changes query to undefined, so the cleanup sets live=false, the in-flight .finally skips setBusy(false), and the new effect returns early because query is null. busy stays true until the user goes back to the first exam, which refetches."
+}

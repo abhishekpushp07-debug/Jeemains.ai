@@ -268,5 +268,21 @@ def college(body: ComedkCollegeIn):
             "rows": rows, "total": len(seats), "line": line, "y25_label": "2025 final", "official": OFFICIAL}
 
 
+def estimate(marks):
+    """Rank predictor: COMEDK marks -> rank range (3 public analyses) and percentile, no colleges."""
+    rs = ranks_at(marks)
+    lo, hi, mid = min(rs), max(rs), round(statistics.median(rs))
+
+    def pct(r):
+        return round(max(0.0, 100 * (N - r) / N), 2)
+
+    return {"exam": "comedk", "rank": [lo, hi], "mid": mid, "percentile": [pct(hi), pct(lo)], "candidates": N,
+            "summary": f"{marks} / {MAX_MARKS} marks · COMEDK 2026",
+            "sources": [{"label": c["label"], "url": c["url"], "rank": r} for c, r in zip(CURVES, rs)],
+            "notes": ["COMEDK mein sabki ek hi merit list hai, isliye category aur paper type se rank nahi badalta.",
+                      "COMEDK marks-rank table publish nahi karta; ye 3 public analyses ki range hai.",
+                      f"Percentile = lagbhag kitne % students aapse peeche rahe ({fmt(N)} ne paper diya)."]}
+
+
 def meta():
     return {"groups": GROUP_NAMES, "candidates": N, "max_marks": MAX_MARKS, "rounds": ROUNDS, "notes": NOTES, "sources": SOURCES}

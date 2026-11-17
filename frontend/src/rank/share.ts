@@ -1,7 +1,7 @@
 // WhatsApp text for the Rank Card, the BITSAT card and the shortlist (plain text, so it reaches any phone instantly).
 import { sendWhatsApp } from "@/src/rapid/social";
-import { BitsatOut, ComedkOut, fmt, fmtRange, RankResult, Seat } from "./api";
-import { TAG } from "./tones";
+import { BitsatOut, ComedkOut, EstimateOut, fmt, fmtPct, fmtRange, RankResult, Seat } from "./api";
+import { LEVEL, TAG } from "./tones";
 import type { Saved } from "./shortlist";
 
 const SIGN = "JEELIVE.AI app ke Rank tab par apna rank aur college dekho.";
@@ -39,6 +39,22 @@ export function shareComedk(d: ComedkOut) {
     lines.push("", "Top college-course (2026 closing rank):");
     d.items.slice(0, 5).forEach((s, i) => lines.push(`${i + 1}. ${s.college} · ${s.course} · ${fmt(s.close)}${s.tag ? ` (${TAG[s.tag].label})` : ""}`));
   }
+  lines.push("", "2026 ke data par estimate, guarantee nahi.", SIGN);
+  return sendWhatsApp(lines.join("\n"));
+}
+
+export function shareEstimate(d: EstimateOut) {
+  const lines = d.exam === "jee" ? [
+    "🎯 Mera JEELIVE.AI Rank Predictor · JEE Main 2026", d.result.summary, "",
+    `Percentile: ${fmtPct(d.result.percentile)}`, `Rank (CRL): ${fmtRange(d.result.crl)}`,
+    ...(d.result.cat_rank ? [`${d.result.cat_rank.label}: ${fmtRange(d.result.cat_rank.range)}`] : []),
+    ...(d.result.pwd_rank ? [`${d.result.pwd_rank.label}: ${fmtRange(d.result.pwd_rank.range)}`] : []),
+    "", "Paper type ke hisaab se:",
+    ...d.levels.map(l => `${LEVEL[l.level].label}: ${fmtPct(l.percentile)} percentile · rank ${fmtRange(l.crl)}`),
+  ] : [
+    "🎯 Mera JEELIVE.AI Rank Predictor · COMEDK 2026", d.summary, "",
+    `Expected rank: ${fmtRange(d.rank)}`, `Percentile: lagbhag ${fmtPct(d.percentile)}`,
+  ];
   lines.push("", "2026 ke data par estimate, guarantee nahi.", SIGN);
   return sendWhatsApp(lines.join("\n"));
 }

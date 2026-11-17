@@ -72,7 +72,7 @@ export const SerifBig = ({ children, testID }: { children: string; testID?: stri
 };
 
 export const SilverCaps = ({ children, testID }: { children: string; testID?: string }) =>
-  <T testID={testID} w="semibold" size={12.5} color={silver} numberOfLines={3} style={styles.caps}>{children.toUpperCase()}</T>;
+  <T testID={testID} w="semibold" size={12.5} color={silver} numberOfLines={3} style={styles.caps}>{children.toUpperCase().replace(/-/g, "\u2011")}</T>;
 
 /** Blood-red hairline, then the label in light blood red tracked caps (tighter tracking on small phones so numbers stay together). */
 export const Hairline = ({ label, testID }: { label: string; testID?: string }) => {
@@ -95,9 +95,9 @@ export const Serial = ({ value, of, testID }: { value: string; of?: string; test
   {of ? <T color={muted} style={[styles.serif, { fontSize: 13 }]}> / {of}</T> : null}
 </View>;
 
-/** Light notes and the two actions under the card. */
+/** Light notes and the actions under the card (Shortlist only where the card leads to colleges). */
 export function CardActions({ notes, onShare, saved, onShortlist, prefix }: {
-  notes: (string | undefined | false)[]; onShare: () => void; saved: number; onShortlist: () => void; prefix: string;
+  notes: (string | undefined | false)[]; onShare: () => void; saved?: number; onShortlist?: () => void; prefix: string;
 }) {
   return <View style={{ gap: space.md }}>
     <View style={{ gap: 4 }}>
@@ -105,7 +105,7 @@ export function CardActions({ notes, onShare, saved, onShortlist, prefix }: {
     </View>
     <View style={styles.actions}>
       <Pill testID={`${prefix}-share`} size="sm" icon="whatsapp" label="WhatsApp" accessibilityLabel="WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onBrandPrimary} onPress={onShare} style={{ flex: 1 }} />
-      <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="star" label={`Shortlist ${saved}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} />
+      {onShortlist ? <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="star" label={`Shortlist ${saved ?? 0}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} /> : null}
     </View>
   </View>;
 }

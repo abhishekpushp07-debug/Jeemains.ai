@@ -1,0 +1,37 @@
+{
+  "summary": "Iteration 84: new Rank predictor tile + POST /api/rank/estimate + handover to the College predictor. Backend: 5/5 test_rank_estimate.py and 14/14 new edge tests (test_rank_estimate_edges.py) passed. Checks: JEE result equals /predict; tough beats easy; OBC-NCL + PwD labels on the result and on every level; COMEDK range, mid, percentile and 3 sources; monotonic; 422 for bad input; boundaries 0/180 and -75/300 accepted. Frontend (375/320/390, signed in as the QA learner): tiles work. Rank is selected by default with a NEW badge and the selected tile has the graphite/blood-red look. JEE: validation, 180 + OBC-NCL card, the 3-row levels strip, Tough re-read (card, summary and 'aapka paper' all update), rp-share present, no shortlist. COMEDK: no chips, note shown, 200 rejected, 100 gives rank 2,350–5,500, percentile and 3 sources. Handover works for JEE (same marks/Tough/OBC-NCL/PwD, CRL 9,452–9,952 matches) and for COMEDK (100/180, Edit shows 100). College tool regression OK (JEE 180 + NIT Rourkela ladder, BITSAT 280, COMEDK rank 4500 + RVCE ladder). Found 3 bugs: numbers cut off in the levels strip, the old exam's result card stays after switching exam in the Rank predictor, and the stale COMEDK handover seed overrides the user's newer entry.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "RankPredictor JeeCard levels strip", "issue": "Numbers are cut off with an ellipsis. At 320px every percentile, CRL and category rank in the 3 rows is cut ('99.35 – …', '9,452 – …', 'OBC-NCL 2,…'). At 375 and 390px the category-rank sub-line is cut ('OBC-NCL 2,552 – 2,…'), and at 375px the CRL in the Normal/Easy rows is cut too ('13,029 – 14,…'). adjustsFontSizeToFit does nothing on web, and the fixed 74px label column plus two flex:1 columns are too narrow. Reference: /app/frontend/src/rank/RankPredictor.tsx:136-146", "testID": "rp-levels-tough / rp-levels-normal / rp-levels-easy", "priority": "MEDIUM"},
+      {"component": "RankPredictor exam switch", "issue": "After a COMEDK result, tapping rp-exam-jee opens the JEE input but the COMEDK rp-card and rp-colleges stay visible under it. Tapping rp-colleges would then hand over the COMEDK score while JEE is selected. The same happens JEE -> COMEDK. `shown` checks only res.exam === query.exam and never form.exam. Reference: /app/frontend/src/rank/RankPredictor.tsx:74,101", "testID": "rp-card / rp-colleges", "priority": "MEDIUM"},
+      {"component": "College tool COMEDK handover seed", "issue": "comedkSeed is never cleared. Steps: hand over 100 marks, then Edit, type 120, Show (works, shows 120). Then switch rank-exam-jee and back to rank-exam-comedk: the panel shows '100 / 180 marks' again and ignores the user's newer saved value. The same happens after switching tiles, because ComedkPanel remounts with the old seed. Reference: /app/frontend/app/(tabs)/rank.tsx:40,104,130 and /app/frontend/src/rank/Comedk.tsx:52-66", "testID": "comedk-input-collapsed", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank tab / Rank predictor", "issues": [
+        "The collapsed summary and the card summary break 'OBC-NCL' across lines at the hyphen ('OBC-' / 'NCL') at 375px. Use a non-breaking hyphen (\\u2011) in the label.",
+        "Switching tiles Rank -> College -> Rank unmounts RankPredictor, so the shown result card is lost. Only the input with the saved marks comes back and the user has to tap Predict again. Minor, but consider keeping both tools mounted or saving the last query.",
+        "rp-input-error stays visible while the user fixes the marks, until the next submit. Minor."
+      ]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_estimate.py", "/app/backend/tests/test_rank_estimate_edges.py", "/app/test_reports/pytest/iter84_rank_estimate.xml"],
+  "action_items": [
+    "Fix the clipped numbers in the rp-levels rows at 320–390px. For example, put the category rank on its own full-width line under the row, shrink the label column (74 -> about 64), drop the font to about 14 when width < 380, or stack percentile above CRL on narrow screens. Do not rely on adjustsFontSizeToFit on web.",
+    "RankPredictor: hide the result when query.exam !== form.exam (shown = res && query && res.exam === query.exam && query.exam === form.exam), or clear query/res in switchExam, so rp-card and rp-colleges never show the other exam's score.",
+    "rank.tsx: clear comedkSeed once ComedkPanel has used it (an onSeedUsed callback that calls setComedkSeed(null)), or clear it when the user shows a new COMEDK score. A stale handover must not override a newer manual entry when the panel remounts."
+  ],
+  "critical_code_review_comments": [
+    "rank_predictor.estimate: COMEDK accepts JEE-range marks in the model (ge=-75), then checks 0..180 by hand and raises 422. This works, but the error 'detail' is a plain string while the other 422s are Pydantic lists. The frontend handles both.",
+    "Backend estimate computes result_block 3 times per request (once per level), which is fine for now. There is no caching."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_estimate_edges.py (new test file only)"],
+  "success_rate": {"backend": "100% (19/19)", "frontend": "~88% (3 medium bugs in otherwise working flows)"},
+  "seed_data_creation": "None. Rank endpoints are stateless. Only a read-only sign-in with the approved QA learner; no academic papers touched, no accounts created.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry: click the inputs, keyboard.type the phone and PIN, click entry-continue-button (normal click, no force), then wait_for_selector tab-rank (up to 25s). The Rank tab opens on the Rank predictor (rank-tool-rank). The Rank predictor unmounts when the College tile is selected. Backend tests: export EXPO_BACKEND_URL=<EXPO_PUBLIC_BACKEND_URL from frontend/.env>, then run with -o addopts=. Expected values: JEE 180 OBC-NCL normal gives CRL 13,029–14,029 and percentile 99.08–99.15; Tough gives 9,452–9,952. COMEDK 100 gives 2,350–5,500 (mid 4,769). To check for clipping, find leaf divs where scrollWidth > clientWidth inside rp-levels.",
+  "rca_of_issue": "Levels clipping: rows use width-74 label + two flex:1 columns with numberOfLines={1}; on web adjustsFontSizeToFit is ignored, so 16px serif ranges overflow. Stale card: RankPredictor.shown ignores form.exam. Stale seed: rank.tsx keeps comedkSeed forever and ComedkPanel's mount effect skips storage and re-applies the seed whenever it remounts (exam/tile switch)."
+}

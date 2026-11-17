@@ -1,5 +1,9 @@
 # JEELIVE.AI Native App — PRD
 
+## Iteration84 — Rank tab: RANK PREDICTOR tile (first) + COLLEGE PREDICTOR tile
+- User: rank predictor above college predictor; Home-style tiles; BITSAT left out. `src/rank/PredictorTiles.tsx`, `src/rank/RankPredictor.tsx` (JEE: marks, paper type, category, PwD -> percentile, CRL, category/PwD rank + all 3 paper types side by side; COMEDK: marks -> rank range + percentile + 3 analyses). POST /api/rank/estimate. "Is score se colleges dekho" hands the score to the College tool. Tests `tests/test_rank_estimate.py` (+ tester edges). Reports iteration_84, iteration_85.
+- After testing: one query/result per exam (no cross-exam card), COMEDK handover seed cleared after use, rank tool stays mounted when the College tile is open, busy reset on exam switch, paper rows fit 320px (category and PwD rank on their own lines, non-breaking hyphen/dash).
+
 ## Iteration82 — Rank: COMEDK + round-wise ladder + sparkle silver / light blood red + JEE data recheck
 - User order (Hinglish): COMEDK → round-wise cutoff → elegance → JEE data recheck. COMEDK: only GM (All India); marks OR rank input; marks→rank "pichhle saalon ke data se andaaza" as a range. College tap: closing rank of every round (R1 → last). Look: "Sparkle silver + halka blood red", "beautiful, perfect, elegant".
 - Backend `rank_comedk.py` (POST /api/rank/comedk, /api/rank/comedk/college; meta.comedk in GET /api/rank/meta). Data `rank_data/comedk_2026.json` from official COMEDK 2026 Round 1–4 cut-off PDFs, 2025 final, 2026 seat & fee matrix (`tools/rank_data/build_comedk.py fetch|build <raw>`; every numeric PDF cell parsed: R1 1191, R2 181, R3 547, R4 368). 880 GM college-course rows, 148 colleges. Marks→rank = range across 3 public analyses (CollegeDekho 2026, Shiksha 2026, 2024–25 trend), log interpolation, median as mid. Seat closing = max over rounds; demand = min round closing. Tags as JEE (Safe/Likely/Borderline); rank input uses a 5% band for Borderline.

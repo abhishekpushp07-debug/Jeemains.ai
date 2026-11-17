@@ -104,6 +104,20 @@ export type ComedkCollegeOut = {
 export const comedk = (body: ComedkQuery & { branches: string[]; area: ComedkArea; page: number }) => call<ComedkOut>("/comedk", body);
 export const getComedkCollege = (body: ComedkCollegeReq) => call<ComedkCollegeOut>("/comedk/college", body);
 
+/** Rank predictor (no colleges): JEE marks -> percentile + CRL for every paper type, COMEDK marks -> rank + percentile. */
+export type EstimateIn = { exam: "jee" | "comedk"; marks: number; level: Level; category: Category; pwd: boolean };
+export type JeeEstimate = {
+  exam: "jee"; result: RankResult; candidates: number; notes: string[];
+  levels: { level: Level; percentile: Range; crl: Range; cat_rank?: { label: string; range: Range } | null; pwd_rank?: { label: string; range: Range } | null }[];
+};
+export type ComedkEstimate = {
+  exam: "comedk"; rank: Range; mid: number; percentile: Range; candidates: number; summary: string; notes: string[];
+  sources: { label: string; url: string; rank: number }[];
+};
+export type EstimateOut = JeeEstimate | ComedkEstimate;
+export const estimate = (body: EstimateIn) => call<EstimateOut>("/estimate", body);
+export const fmtPct = (r: Range) => r[0] === r[1] ? r[0].toFixed(2) : `${r[0].toFixed(2)} – ${r[1].toFixed(2)}`;
+
 /** Indian grouping: 107693 -> 1,07,693. */
 export function fmt(n: number): string {
   const s = String(Math.round(n));

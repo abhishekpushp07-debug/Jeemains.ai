@@ -32,7 +32,9 @@ function toQuery(marks: string, rank: string): ComedkQuery | string {
   return Number.isInteger(n) && n >= 0 && n <= 180 ? { marks: n } : "Marks 0 se 180 ke beech poore ank mein daalo.";
 }
 
-export function ComedkPanel({ groups, onShortlist }: { groups: string[]; onShortlist: () => void }) {
+export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
+  groups: string[]; onShortlist: () => void; seed?: { marks: number; at: number } | null; onSeedUsed?: () => void;
+}) {
   const [marks, setMarks] = useState("");
   const [rank, setRank] = useState("");
   const [branches, setBranches] = useState<string[]>([]);
@@ -50,6 +52,7 @@ export function ComedkPanel({ groups, onShortlist }: { groups: string[]; onShort
   const saved = useShortlist();
 
   useEffect(() => {
+    if (seed) return; // a score handed over from the Rank predictor wins over the last saved one
     storage.getItem<string | null>(SAVED, null).then(raw => {
       if (!raw) return;
       try {
@@ -57,7 +60,20 @@ export function ComedkPanel({ groups, onShortlist }: { groups: string[]; onShort
         setMarks(v.marks ?? ""); setRank(v.rank ?? ""); setBranches(Array.isArray(v.branches) ? v.branches : []);
       } catch { /* keep empty */ }
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!seed) return;
+    setMarks(String(seed.marks)); setRank(""); setProblem(null);
+    setPage(1); setQuery({ marks: seed.marks }); setOpen(false);
+    // Save the handed-over score (keeping saved branches) so a later visit opens with it, then let the parent forget it.
+    storage.getItem<string | null>(SAVED, null).then(raw => {
+      let kept: string[] = [];
+      try { const v = raw ? JSON.parse(raw) : null; kept = Array.isArray(v?.branches) ? v.branches : []; } catch { /* none */ }
+      setBranches(kept);
+      storage.setItem(SAVED, JSON.stringify({ marks: String(seed.marks), rank: "", branches: kept }));
+    });
+    onSeedUsed?.();
+  }, [seed]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!query) return;
     let live = true;

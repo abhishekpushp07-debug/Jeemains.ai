@@ -545,9 +545,36 @@ def meta():
     }
 
 
+class EstimateIn(BaseModel):
+    exam: Literal["jee", "comedk"] = "jee"
+    marks: int = Field(ge=-75, le=300)
+    level: Literal["tough", "normal", "easy"] = "normal"
+    category: Literal["GEN", "EWS", "OBC-NCL", "SC", "ST"] = "GEN"
+    pwd: bool = False
+
+
+EST_NOTES = ["Tough / Normal / Easy = aapki shift ka paper kaisa tha; NTA 2026 ke shift-wise percentile data se.",
+             "Category aur PwD rank estimate hain; NTA inki table nahi deta.",
+             "Ye 2026 ke data par andaaza hai, guarantee nahi."]
+
+
+def estimate(body: EstimateIn):
+    """Rank predictor: marks -> percentile and rank only (no colleges), with all three paper types side by side."""
+    if body.exam == "comedk":
+        if body.marks < 0 or body.marks > rank_comedk.MAX_MARKS:
+            raise HTTPException(422, "COMEDK marks 0 se 180 ke beech daalo.")
+        return rank_comedk.estimate(body.marks)
+    blocks = {lvl: result_block(Student(Form(marks=body.marks, level=lvl, category=body.category, pwd=body.pwd)))
+              for lvl in ("tough", "normal", "easy")}
+    levels = [{"level": lvl, "percentile": r["percentile"], "crl": r["crl"], "cat_rank": r.get("cat_rank"), "pwd_rank": r.get("pwd_rank")}
+              for lvl, r in blocks.items()]
+    return {"exam": "jee", "result": blocks[body.level], "levels": levels, "candidates": N, "notes": EST_NOTES}
+
+
 def make_router():
     router = APIRouter(prefix="/rank", tags=["Rank predictor"])
     router.get("/meta")(meta)
+    router.post("/estimate")(estimate)
     router.post("/predict")(predict)
     router.post("/college")(college)
     router.post("/bitsat")(rank_bitsat.predict)

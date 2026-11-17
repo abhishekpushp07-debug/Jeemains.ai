@@ -68,7 +68,7 @@ export function StarButton({ saved, onPress, testID }: { saved: boolean; onPress
 /** The input after Show: one tappable line with Edit. */
 export function Summary({ text, onEdit, testID }: { text: string; onEdit: () => void; testID: string }) {
   return <Press testID={testID} onPress={onEdit} accessibilityLabel={`${text}. Edit`} scaleTo={0.99} style={styles.summary}>
-    <T w="semibold" size={14} numberOfLines={2} style={{ flex: 1 }}>{text}</T>
+    <T w="semibold" size={14} numberOfLines={2} style={{ flex: 1 }}>{text.replace(/-/g, "\u2011")}</T>
     <T w="bold" size={14} color={colors.brandText}>Edit</T>
   </Press>;
 }
