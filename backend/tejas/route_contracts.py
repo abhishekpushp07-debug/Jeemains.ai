@@ -13,7 +13,7 @@ SPEC = {
         ('listing','normal','read'),('create','control','owner_source_hash_edition'),('read','normal','read'),
         ('part','control','immutable_part_hash'),('complete','control','leased_completion'),
         ('page_list','normal','read'),('page_detail','normal','read'),('page_image','batch','read'),
-        ('repair_page','control','lease_page_revision'),('mock_detail','normal','read'),('rules','control','lease_mock_revision'),
+        ('repair_page','control','lease_page_revision'),('mock_detail','normal','read'),('rules','control','lease_mock_revision'),('confirm_all','control','lease_mock_revision'),
         ('control','control','lease_book_revision'),('allowance','control','owner_explicit_bounded_request_receipt'),
         ('preview_crop','batch','owner_source_region_only'),('map_range','control','lease_range_mapping'))},
     'book_imports.series_list': ('current_released_series_metadata_only','normal','read'),

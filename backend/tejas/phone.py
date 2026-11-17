@@ -128,12 +128,21 @@ async def replace_pin(u, phone, new_pin, response, action, extra=None):
     return result
 
 
+async def live_paper_guard(user_id, what):
+    """No PIN change while this student's live ranked paper (series day or live exam) is running."""
+    t = now()
+    if await db.tejas_attempts.find_one({'user_id': user_id, 'status': 'active', 'competition_end': {'$gt': t},
+                                         '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}, {'_id': 1}):
+        raise HTTPException(409, f'A live ranked paper is running on this number. {what} works again after that paper ends.')
+
+
 @router.post('/pin')
 async def change_pin(data: PinChangePayload, request: Request, response: Response, u=Depends(current)):
     phone = normalize_phone(data.phone)
     if u.get('access_type') != 'unverified_phone' or phone != u.get('phone'):
         raise HTTPException(403, 'You can change only your own student PIN.')
     await limit_pin(phone, request, 'change')
+    await live_paper_guard(u['id'], 'PIN change')
     return await replace_pin(u, phone, data.new_pin, response, 'student_pin_changed')
 
 
@@ -145,10 +154,7 @@ async def reset_pin(data: PinChangePayload, request: Request, response: Response
     u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0, 'id': 1, 'pin_version': 1})
     if not u:
         raise HTTPException(404, 'No account with this number. Create one instead.')
-    t = now()
-    if await db.tejas_attempts.find_one({'user_id': u['id'], 'status': 'active', 'competition_end': {'$gt': t},
-                                         '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}, {'_id': 1}):
-        raise HTTPException(409, 'A live ranked paper is running on this number. Forgot PIN works again after that paper ends.')
+    await live_paper_guard(u['id'], 'Forgot PIN')
     return await replace_pin(u, phone, data.new_pin, response, 'student_pin_reset_forgot',
                              {'pin_reset_at': now(), 'pin_reset_via': 'forgot_pin'})
 

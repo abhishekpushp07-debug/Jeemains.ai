@@ -1,0 +1,40 @@
+{
+  "summary": "Tested the owner per-question Override (fix confirmed:true), the Fix-screen problem grouping, and the Forgot PIN live-paper guard. Everything ran in isolated disposable DBs (storage/AI mocked; no customer DB, no jeelive.ai, no AI, no re-reads). The production case was reproduced: Q3 has a lone continuation solution region ('ambiguous worked-solution start'), and Q2 has an unchecked solution region on solution page 3 ('Page 3, Q2: source region needs review'). A plain fix (confirmed:false) returns 200, but the rebuild adds the same issues back, so the loop is confirmed. With confirmed:true the soft issues are dropped and the mock goes held -> ready. Hard issues stay (missing key is kept even when the question is confirmed). A reviewer sending confirmed:true gets 403, and confirmed:false still works for reviewers. GET /problems now puts the solution-page issue on Q2's card (not under general) and returns 'confirmed' per question. For POST /api/auth/pin/reset: a live paper (deadline in the future or deadline 0) gives 409 with the right message. An expired deadline, an ended competition, a submitted attempt, a practice attempt (no competition_end) or another student's live paper do not block it (200). Signed-in POST /api/auth/pin is not blocked. New suite: 31/31 passed. Regressions: forgot_pin_iso184 53/53, typed_delete_iso185 54/54. UI was tested through a bridge on 127.0.0.1:8770. Owner on desktop 1920 and mobile 390: the solutions details and override checkbox are shown; answer, complete, override and Save gave a toast 3 times; after reload the page says 'Nothing is left to fix' with 0 cards. At 390px scrollWidth is 390 with no overflow, and the Save button is reachable below the override. Reviewer: 0 override checkboxes. /forgot-pin shows the 409 message in the error box on desktop and mobile.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/admin/books/{id}/mocks/{mid}/problems vs rebuild()", "issue": "question_problems() puts 'Page P, Qn' issues on a card when P is the next page after the question (pages[-1]+1). The confirmed filter in rebuild() only covers pages in source_regions (question/solution/key). If such an issue sits on the next page, the card shows it and the Override cannot clear it."},
+      {"endpoint": "rebuild() confirmed filter", "issue": "Matching uses only subject + printed number ('Physics Q3:' and 'Page P, Q3'). In a per_section mock where two sections of the same subject both have Q3 on shared pages, confirming one Q3 also hides the other Q3's soft issues."},
+      {"endpoint": "POST /api/auth/pin/reset", "issue": "limit_pin runs before the live-paper guard, so blocked (409) tries use up the 5-per-15-min reset limit. After the paper ends the student can get 429. This is acceptable, but could be reordered."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "HeldFixer QuestionCard / PrivateBookImage", "issue": "Solution images are fetched on mount even when the <details> is closed, so asset requests per card double. The backend 'asset' lane allows 8 in flight (runtime INFLIGHT_LIMITS). On the preview (React StrictMode) a 3-card mock already got 4x 503 capacity_busy and showed 'Original image unavailable. Reload to retry.' for question and solution pictures. A real chapter mock with 10+ held cards would hit this in production too, and the owner could not see the pictures they are meant to check before pressing Override.", "selector": "[data-testid^=held-q-][data-testid$=-sol-img-0-error]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Super Admin Fix card", "issues": ["plain() turns both 'Page 3, Q2: source region needs review' (a SOLUTION-page issue) and 'Q3: ambiguous worked-solution start/continuations' into 'Check that the whole question is in the picture.' This is misleading: the problem is the solution picture, not the question.", "The card header shows only the question pages ('Page 1') and the Full page buttons cover only question pages + next page. There is no button for the solution page (e.g. 309) where the issue is."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/override_guard_iso192.py", "/app/backend/tests/override_bridge192.py", "/app/backend/tests/forgot_pin_iso184.py", "/app/backend/tests/typed_delete_iso185.py"],
+  "action_items": [
+    "Render solution PrivateBookImage only when the held-q-<n>-solutions details is open (lazy). Optionally retry once with backoff on 503 capacity_busy, or raise/queue the asset lane, so owners can see pictures before Override.",
+    "Give solution-page issues and 'ambiguous worked-solution' their own plain() text (e.g. 'Check the solution picture on page P.'). Add a 'Full page P' button for the solution/key pages.",
+    "Optional: line up question_problems() 'near' pages with the rebuild confirmed filter (include pages[-1]+1, or drop it from problems), so every issue shown on a card can be cleared by Override.",
+    "Optional: also match section in the confirmed filter for per_section mocks."
+  ],
+  "critical_code_review_comments": [
+    "book_publish.rebuild confirmed filter: the 'Page P, Qn' branch does not check HARD. None of the current Page-format issues are HARD, so this is fine today, but a future hard Page-level message would be cleared silently.",
+    "mock.confirmed is never cleared. If the owner later edits regions of a confirmed question, new soft warnings for it are hidden for good. Consider clearing a coverage key when its regions change in the page editor.",
+    "The UI shows the Override checkbox even when the only issues left are HARD. Ticking it saves fine but the card does not clear; a hint would help."
+  ],
+  "updated_files": ["/app/backend/tests/override_guard_iso192.py", "/app/backend/tests/override_bridge192.py"],
+  "success_rate": {"backend": "100% (31/31 new + 107/107 regression)", "frontend": "95% (all flows pass; image 503 under asset-lane limit)"},
+  "seed_data_creation": "None in the configured DB. Isolated DBs tejas_isolated_book170_* were created and dropped after each run; /tmp/uibridge/bridge.json removed.",
+  "test_credentials": "Random owner/reviewer/student made inside the disposable DBs only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run 'cd /app/backend && timeout 280 python tests/override_guard_iso192.py' for the backend. For UI: 'python tests/override_bridge192.py 2400 &' serves 3 held mocks (f.desk/f.mob/f.rev = [bookId, mockId]) plus f.live_phone (a student with a live ranked attempt) on 127.0.0.1:8770. Cookies are in /tmp/uibridge/bridge.json; route **/api/** there in Playwright. The bridge pumps drain() every 1s so rebuilds run. Wait about 6s between card saves, because the card revision reloads after 4s.",
+  "rca of the issue": "Production loop: fix_question() set answer/checked on the key/solution regions but never changed the solution region's continuation flag, and could miss a non-exact solution region. rebuild() then re-added the 'ambiguous worked-solution start' issue and the solution-page 'source region needs review' issue every time. The new owner confirmed list plus the rebuild filter breaks the loop, and this was verified in isolation."
+}

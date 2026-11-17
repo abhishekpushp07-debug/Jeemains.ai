@@ -29,6 +29,7 @@ const PLAIN=[[/response type is unresolved|confirm response type/i,'Could not te
  [/answer (or solution )?visible/i,'The answer seems to be printed inside the question picture.'],
  [/overlaps another/i,'The picture of this question overlaps another one.'],
  [/duplicate question|missing starting/i,'This question number appears twice.'],
+ [/ambiguous worked-solution/i,'The solution picture may start or end in the wrong place. Open it below and check it shows only this question\u2019s solution.'],
  [/needs review|continuation/i,'Check that the whole question is in the picture.'],
  [/confirm printed examination rules/i,'Time and marks could not be read for this mock.'],
  [/unmapped pages/i,'Some pages near this mock could not be read.'],

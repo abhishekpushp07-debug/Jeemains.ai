@@ -5,7 +5,7 @@ from starlette.concurrency import run_in_threadpool
 from .auth import owner, current, staff
 from .db import db, sets, now, audit
 from .canonical import database_now
-from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, Book, BookPage, BookMock, UploadPart, BookAllowance
+from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, MockConfirm, Book, BookPage, BookMock, UploadPart, BookAllowance
 from .book_store import CHUNK, normalized, identity, digest, load_book, book_view, lock_book, save_book, unlock, fence, original, enqueue_book, mocks_for, save_mock
 from .book_pdf import inspect, inspect_many
 
@@ -304,7 +304,8 @@ def question_problems(mock, everything=False):
     for q in mock.questions:
         n=q['original_number'];pages=sorted({r['page'] for r in q['source_regions']['question']})
         # Warnings on its solution or key pages belong to this question too (e.g. 'Page 309, Q11').
-        near=set(pages)|({pages[-1]+1} if pages else set())|{r['page'] for k in ('solution','key') for r in q['source_regions'].get(k,[])}
+        spages=sorted({r['page'] for k in ('solution','key') for r in q['source_regions'].get(k,[])}-set(pages))
+        near=set(pages)|({pages[-1]+1} if pages else set())|set(spages)
         mine=[]
         for i,x in enumerate(mock.issues):
             m=re.match(r'Page (\d+)(?:, |: )Q(\d+)\b',x)
@@ -312,7 +313,7 @@ def question_problems(mock, everything=False):
                 mine.append(x);used.add(i)
         if mine or everything:
             out.append({'id':q['id'],'subject':q['subject'],'section':q['section'],'number':n,'type':q['type'],'options':list(q.get('options',{})),'typed_options':q.get('typed_options',{}),
-                'answer':q.get('answer',''),'issues':mine,'pages':pages,'next_page':pages[-1]+1 if pages else None,
+                'answer':q.get('answer',''),'issues':mine,'pages':pages,'solution_pages':spages,'next_page':pages[-1]+1 if pages else None,
                 'question_images':len(q['source_regions']['question']),'solution_images':len(q['source_regions']['solution']),
                 'has_key':bool(q['source_regions']['solution']),'confirmed':q.get('coverage_key') in mock.confirmed,'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
     return out,[x for i,x in enumerate(mock.issues) if i not in used]
@@ -324,7 +325,7 @@ async def mock_problems(id:str,mid:str,every:bool=Query(False,alias='all'),u=Dep
     if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
     mock=BookMock.from_mongo(row);questions,general=question_problems(mock,every and u['role']=='owner')
     return {'id':mock.id,'label':(mock.chapter or {}).get('title') or mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
-            'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
+            'total':len(mock.questions),'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
 
 
 @router.post('/admin/books/{id}/mocks/{mid}/fix')
@@ -389,6 +390,25 @@ async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depe
     finally:await unlock(book,token)
     if not book.paused:await dispatch(book,bg)
     return {'ok':True,'message':f"Saved {q['subject']} Q{n}. Rechecking {mock.label}…"}
+
+
+@router.post('/admin/books/{id}/mocks/{mid}/confirm-all')
+async def confirm_all(id:str,mid:str,body:MockConfirm,bg:BackgroundTasks,u=Depends(owner)):
+    """Owner override for a whole Draft mock: every question was checked by eye, so the reader's warnings about questions no longer hold it."""
+    await load_book(id,u);book,token=await lock_book(id)
+    try:
+        row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id})
+        if not row:raise HTTPException(404,'Mock not found.')
+        mock=BookMock.from_mongo(row)
+        if mock.revision!=body.revision:raise HTTPException(409,'This mock was rechecked a moment ago. Reload and try again.')
+        if mock.published_generation==mock.generation:raise HTTPException(409,'Published mocks are frozen. Create a corrected version first.')
+        mock.confirmed=list(dict.fromkeys(mock.confirmed+[q['coverage_key'] for q in mock.questions if q.get('coverage_key')]))
+        mock.revision+=1;await save_mock(mock)
+        book.state='matching';await save_book(book,token)
+        await audit(u['id'],'Book mock owner override',mid,f'{mock.label}: owner checked all {len(mock.questions)} questions; their warnings cleared')
+    finally:await unlock(book,token)
+    if not book.paused:await dispatch(book,bg)
+    return {'ok':True,'message':f'Warnings cleared for {mock.label}. Rechecking…'}
 
 
 @router.post('/admin/books/{id}/allowances')

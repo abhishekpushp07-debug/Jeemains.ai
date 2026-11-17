@@ -139,6 +139,11 @@ class QuestionFix(Input):
     confirmed: bool = False
 
 
+class MockConfirm(Input):
+    revision: int = Field(ge=0)
+    confirm: Literal['CHECKED']
+
+
 class Allowance(Input):
     revision: int = Field(ge=0)
     purpose: Literal['reading','explanations']

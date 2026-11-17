@@ -193,7 +193,8 @@ async def rebuild(book, token):
         for q in questions:
             if q['coverage_key'] not in confirmed:continue
             # The owner checked this question by eye: the reader's warnings about it no longer hold the mock; a usable answer still does.
-            n=q['original_number'];own_pages={r['page'] for v in q['source_regions'].values() for r in v}
+            n=q['original_number'];qp=[r['page'] for r in q['source_regions']['question']]
+            own_pages={r['page'] for v in q['source_regions'].values() for r in v}|({max(qp)+1} if qp else set())
             def owned(x):
                 m=re.match(r'Page (\d+)(?:, |: )Q(\d+)\b',x)
                 return bool(m and int(m[2])==n and int(m[1]) in own_pages) or (x.startswith(f"{q['subject']} Q{n}:") and not any(h in x for h in HARD))

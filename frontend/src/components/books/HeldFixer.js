@@ -24,7 +24,9 @@ function TypedOptions({tag,options,typed,onChange}){
 
 export function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
  const tag='held-q-'+q.number;const {user}=useAuth();const owner=user?.role==='owner';
- const [confirmed,setConfirmed]=useState(false);
+ const [confirmed,setConfirmed]=useState(false),[showSol,setShowSol]=useState(false);
+ const solPages=q.solution_pages||[];
+ const say=x=>{const p=Number((x.match(/^Page (\d+)/)||[])[1]);return solPages.includes(p)&&/needs review|continuation|crop boundary/i.test(x)?`Solution page ${p}: check that the solution picture shows the whole solution of this question and nothing else.`:plain(x);};
  const [type,setType]=useState(q.type==='integer'?'integer':'mcq'),[options,setOptions]=useState(q.options.filter(x=>LETTERS.includes(x)).length>=2?q.options.filter(x=>LETTERS.includes(x)):['A','B','C','D']);
  const [answer,setAnswer]=useState(q.answer||''),[typed,setTyped]=useState(q.typed_options||{}),[complete,setComplete]=useState(false),[keyOnly,setKeyOnly]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[done,setDone]=useState(false);
  const needsSolution=q.issues.some(x=>/original solution expected/i.test(x));
@@ -34,10 +36,10 @@ export function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
   const r=await post(`/admin/books/${bookId}/mocks/${mockId}/fix`,{revision,question_id:q.id,response_type:type,option_labels:type==='mcq'?options:[],option_texts,answer:answer.trim(),complete:true,key_only:keyOnly,confirmed});toast.success(r.message);setDone(true);onSaved();}catch(e){setError(e.message);}finally{setBusy(false);}}
  return <article className={'held-card'+(done?' is-done':'')} data-testid={tag}>
   <header className="held-card-head"><strong>{q.subject} · Q{q.number}</strong><span>Page {q.pages.join(', ')}</span>{done&&<span className="held-saved" data-testid={tag+'-saved'}><CheckCircle2 size={15}/>Saved · rechecking</span>}</header>
-  {q.issues.length>0&&<ul className="admin-reasons">{[...new Set(q.issues.map(plain))].map((x,i)=><li key={i}>{x}</li>)}</ul>}
+  {q.issues.length>0&&<ul className="admin-reasons">{[...new Set(q.issues.map(say))].map((x,i)=><li key={i}>{x}</li>)}</ul>}
   <div className="held-crops">{Array.from({length:q.question_images},(_,i)=><PrivateBookImage key={i} path={`/admin/books/${bookId}/mocks/${mockId}/questions/${q.id}/asset/question/${i}`} alt={`${q.subject} question ${q.number}, part ${i+1}`} testId={`${tag}-img-${i}`}/>)}</div>
-  {q.solution_images>0&&<details className="held-solutions" data-testid={tag+'-solutions'}><summary>Solution picture students see ({q.solution_images})</summary><div className="held-crops">{Array.from({length:q.solution_images},(_,i)=><PrivateBookImage key={i} path={`/admin/books/${bookId}/mocks/${mockId}/questions/${q.id}/asset/solution/${i}`} alt={`${q.subject} solution ${q.number}, part ${i+1}`} testId={`${tag}-sol-img-${i}`}/>)}</div></details>}
-  {onOpenPage&&<div className="book-actions">{q.pages.map(n=><Button key={n} variant="outline" size="sm" onClick={()=>onOpenPage(n)} data-testid={`${tag}-page-${n}`}>Full page {n}</Button>)}{q.next_page&&<Button variant="outline" size="sm" onClick={()=>onOpenPage(q.next_page)} data-testid={`${tag}-next-page`}>Next page {q.next_page}</Button>}</div>}
+  {q.solution_images>0&&<details className="held-solutions" onToggle={e=>setShowSol(e.currentTarget.open)} data-testid={tag+'-solutions'}><summary>Solution picture students see ({q.solution_images})</summary><div className="held-crops">{showSol&&Array.from({length:q.solution_images},(_,i)=><PrivateBookImage key={i} path={`/admin/books/${bookId}/mocks/${mockId}/questions/${q.id}/asset/solution/${i}`} alt={`${q.subject} solution ${q.number}, part ${i+1}`} testId={`${tag}-sol-img-${i}`}/>)}</div></details>}
+  {onOpenPage&&<div className="book-actions">{q.pages.map(n=><Button key={n} variant="outline" size="sm" onClick={()=>onOpenPage(n)} data-testid={`${tag}-page-${n}`}>Full page {n}</Button>)}{q.next_page&&<Button variant="outline" size="sm" onClick={()=>onOpenPage(q.next_page)} data-testid={`${tag}-next-page`}>Next page {q.next_page}</Button>}{solPages.slice(0,3).map(n=><Button key={'s'+n} variant="outline" size="sm" onClick={()=>onOpenPage(n)} data-testid={`${tag}-sol-page-${n}`}>Solution page {n}</Button>)}</div>}
   <div className="held-form">
    <fieldset><legend>1. Answer type</legend><Choice value={type} onChange={v=>{setType(v);setAnswer('');}} options={[['mcq','Options (MCQ)'],['integer','Numerical answer']]} testId={tag+'-type'}/></fieldset>
    {type==='mcq'&&<fieldset><legend>2. Answer buttons students get</legend>{LETTERS.map(l=><label key={l} className="book-check held-option"><input type="checkbox" checked={options.includes(l)} onChange={()=>toggle(l)} data-testid={`${tag}-option-${l}`}/><span>{l}</span></label>)}</fieldset>}
@@ -53,7 +55,19 @@ export function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
  </article>;
 }
 
+function MockOverride({bookId,mockId,revision,count,onDone}){
+ const [ask,setAsk]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ async function go(){setBusy(true);setError('');try{const r=await post(`/admin/books/${bookId}/mocks/${mockId}/confirm-all`,{revision,confirm:'CHECKED'});toast.success(r.message);setAsk(false);onDone();}catch(e){setError(e.message);}finally{setBusy(false);}}
+ return <div className="held-override held-mock-override" data-testid="held-mock-override">
+  {!ask?<Button variant="outline" onClick={()=>setAsk(true)} data-testid="held-mock-override-open">Override whole mock</Button>
+  :<><p><strong>Are you sure?</strong> You checked all {count} question{count===1?'':'s'} of this mock and their solution pictures. Every remaining question warning is cleared. Missing answers still need a fix.</p>
+   <div className="book-actions"><Button disabled={busy} onClick={go} data-testid="held-mock-override-confirm">{busy?<Loader2 size={16} className="spin"/>:null}Yes, I checked everything</Button><Button variant="ghost" onClick={()=>setAsk(false)} data-testid="held-mock-override-cancel">Cancel</Button></div></>}
+  <BookError error={error}/>
+ </div>;
+}
+
 export function HeldFixer({bookId,mockId,onClose,onOpenPage,onOpenRules,onSaved}){
+ const {user}=useAuth();
  const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0);
  useEffect(()=>{api(`/admin/books/${bookId}/mocks/${mockId}/problems`).then(d=>{setData(d);setError('');}).catch(e=>setError(e.message));},[bookId,mockId,reload]);
  function saved(){onSaved?.();setTimeout(()=>setReload(n=>n+1),4000);}
@@ -62,6 +76,7 @@ export function HeldFixer({bookId,mockId,onClose,onOpenPage,onOpenRules,onSaved}
   <BookError error={error}/>
   {data&&<>
    {data.state!=='held'&&<p className="admin-note" data-testid="held-fixer-clear">Nothing is left to fix here. Go back to its list to make it Live.</p>}
+   {user?.role==='owner'&&data.state==='held'&&!data.frozen&&data.questions.length>0&&<MockOverride bookId={bookId} mockId={mockId} revision={data.revision} count={data.total||data.questions.length} onDone={saved}/>}
    {data.frozen&&<p className="admin-note warn">This mock is published. Create a corrected version before changing it.</p>}
    {data.general.length>0&&<div className="held-general" data-testid="held-general"><strong>Other things to check</strong><ul>{data.general.map((x,i)=><li key={i}><span>{plain(x)}</span>{onOpenPage&&pagesIn(x).map(n=><Button key={n} variant="link" size="sm" onClick={()=>onOpenPage(n)} data-testid={`held-general-page-${i}-${n}`}>Open page {n}</Button>)}</li>)}</ul>{onOpenRules&&(data.rules_missing||data.general.some(rulesIssue))&&<Button variant="outline" onClick={onOpenRules} data-testid="held-open-rules">Open this mock’s rules</Button>}</div>}
    {data.questions.map(q=><QuestionCard key={q.id+data.revision} q={q} bookId={bookId} mockId={mockId} revision={data.revision} onSaved={saved} onOpenPage={onOpenPage}/>)}
