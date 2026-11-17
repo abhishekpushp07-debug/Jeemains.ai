@@ -52,7 +52,7 @@ async def main():
         r = await stu.post('/api/auth/phone/signup', json={'phone': ph, 'pin': '1357', 'confirm_pin': '1357'}); t = time.time()
         await DB.tejas_attempts.insert_one({'id': 'TEST_att192ui', 'user_id': J(r)['id'], 'set_id': 'x', 'status': 'active', 'competition_end': t + 7200, 'deadline': 0, 'created_at': t})
         f['live_phone'] = ph[2:] if False else ph
-        with open(path, 'w') as fh: json.dump({'owner': dict(own.cookies), 'reviewer': dict(rev.cookies), 'f': f}, fh)
+        with open(path, 'w') as fh: json.dump({'owner': dict(own.cookies), 'reviewer': dict(rev.cookies), 'student': dict(stu.cookies), 'f': f}, fh)
         os.chmod(path, 0o600)
         print('READY', H.TEST_DB, json.dumps(f), flush=True)
         task = asyncio.create_task(pump())

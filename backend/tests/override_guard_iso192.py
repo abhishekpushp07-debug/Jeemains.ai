@@ -127,7 +127,8 @@ async def guard_tests():
     await DB.tejas_attempts.update_one({'id': aid}, {'$set': {'deadline': 0}})
     r = await client().post(RES, json=body('2468')); check('live paper deadline 0 -> 409', r.status_code == 409, (r.status_code, r.text[:150]))
     r = await c.post('/api/auth/pin', json={'phone': ph, 'new_pin': '1122', 'confirm_pin': '1122'})
-    check('signed-in Change PIN not blocked by live paper', r.status_code == 200, (r.status_code, r.text[:200]))
+    # iteration 193: owner chose to block signed-in Change PIN too during a live ranked paper
+    check('signed-in Change PIN blocked by live paper (409)', r.status_code == 409 and 'PIN change works again' in r.text, (r.status_code, r.text[:200]))
     await DB.tejas_attempts.update_one({'id': aid}, {'$set': {'deadline': t - 5}})
     r = await client().post(RES, json=body('2468')); check('expired deadline -> reset 200', r.status_code == 200 and J(r).get('id') == sid, (r.status_code, r.text[:150]))
     await DB.tejas_attempts.update_one({'id': aid}, {'$set': {'deadline': t + 1800, 'competition_end': t - 10}})
