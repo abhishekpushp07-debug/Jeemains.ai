@@ -1,6 +1,6 @@
 // WhatsApp text for the Rank Card, the BITSAT card and the shortlist (plain text, so it reaches any phone instantly).
 import { sendWhatsApp } from "@/src/rapid/social";
-import { BitsatOut, ComedkOut, EstimateOut, fmt, fmtPct, fmtRange, RankResult, Seat } from "./api";
+import { BitsatOut, ComedkOut, EstimateOut, fmt, fmtPct, fmtRange, PercentileOut, RankResult, Seat } from "./api";
 import { LEVEL, TAG } from "./tones";
 import type { Saved } from "./shortlist";
 
@@ -56,6 +56,17 @@ export function shareEstimate(d: EstimateOut) {
     `Expected rank: ${fmtRange(d.rank)}`, `Percentile: lagbhag ${fmtPct(d.percentile)}`,
   ];
   lines.push("", "2026 ke data par estimate, guarantee nahi.", SIGN);
+  return sendWhatsApp(lines.join("\n"));
+}
+
+export function sharePercentile(d: PercentileOut) {
+  const r = d.result;
+  const lines = ["🎯 Mera JEELIVE.AI Rank · JEE Main 2026", r.summary, "",
+    `Rank (CRL): ${fmtRange(r.crl)}`,
+    ...(r.cat_rank ? [`${r.cat_rank.label}: ${fmtRange(r.cat_rank.range)}`] : []),
+    ...(r.pwd_rank ? [`${r.pwd_rank.label}: ${fmtRange(r.pwd_rank.range)}`] : []),
+    "", "Is percentile ke liye marks (lagbhag):", ...d.marks.map(m => `${LEVEL[m.level].label} paper: ${m.marks} / 300`),
+    "", "2026 ke data par estimate, guarantee nahi.", SIGN];
   return sendWhatsApp(lines.join("\n"));
 }
 

@@ -1,0 +1,46 @@
+{
+  "summary": "Iteration 86: tested the new Rank tools on the backend and in the frontend. Backend: new suite test_rank_tools_iter86.py passes 27/27, and the earlier rank suites still pass (124 of 126 tests in the combined run; the 2 failures were wrong assertions in my own new compare tests, fixed and re-run green). Frontend at 390px and 320px: tiles, Percentile se rank, Target marks (JEE/COMEDK/BITSAT), College compare, and regression of the Rank and College predictors (JEE/COMEDK/BITSAT stars). Most things work. Found 3 real bugs. (1) The Compare pre-tick is wrong after first opening Compare while it is empty. (2) pr-card-percentile shows the rounded value 97.46 instead of the typed 97.4567. (3) The BITSAT target history shows the literal text 'null'. Plus a few minor design issues. No deprecated Expo packages found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rank/percentile", "issue": "result.percentile is rounded to 2 decimals (97.4567 -> [97.46, 97.46]). The frontend shows this value in pr-card-percentile, so the typed value is lost (see frontend bug)."},
+      {"endpoint": "POST /api/rank/compare (jee)", "issue": "final = JoSAA final (jclose/y26). The saved predictor seat may have been won in a CSAB round with a different close (e.g. NIT Delhi AI&DS: predictor 'CSAB 1 · 33,536', compare final 'R5 · 6,828'). The CSAB value does appear in rounds, so this works as designed, but the student may find it confusing. For category or PwD seats, the CSAB round values are CRL while rank_label says e.g. 'OBC-NCL rank', so one column mixes two units with no label."},
+      {"endpoint": "GET /api/rank/target/bitsat", "issue": "history contains null for years without data (e.g. Hyderabad M&C 2022/2023). Fine as API data, but the frontend prints it as is."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Compare pre-tick (Compare.tsx:32-36)", "issue": "The pane mounts on first visit and then only hides. If the student opens Compare while the shortlist is empty (cmp-empty -> cmp-go-college), the seed effect runs on the first star saved. It sets seeded=true with just that 1 item, so later saves are not ticked. Reproduced: rank-tool-compare (empty) -> cmp-go-college -> save 2 JEE + 1 COMEDK + 1 BITSAT -> rank-tool-compare shows only 1/3 ticked plus cmp-need, and no table. Without the empty visit, the first 3 are ticked correctly. Fix: seed only when the Compare pane becomes visible (pass an active prop), or keep auto-ticking new saves until the user ticks manually.", "testID": "cmp-item-N", "priority": "HIGH"},
+      {"component": "PercentileRank card (PercentileRank.tsx:95)", "issue": "pr-card-percentile shows 'PERCENTILE 97.46' for typed 97.4567, but the spec says it must show exactly the typed value. It uses r.percentile[0], which the backend rounds. Use query.percentile (the typed number) instead.", "testID": "pr-card-percentile", "priority": "MEDIUM"},
+      {"component": "Target marks BITSAT row history (TargetMarks.tsx:220)", "issue": "Shows '2022: null · 2023: null · 2024: 293' for programs without data. Render '—' or skip null years.", "testID": "tm-row-N", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank tab ToolGrid", "issues": ["The 'NEW' badge (absolute top:6 right:7) overlaps the tile title text on PERCENTILE SE RANK, TARGET MARKS and COLLEGE COMPARE. The bounding boxes intersect at both 390px and 320px, and at 320px it visibly covers the end of 'PERCENTILE'. Add paddingRight to the title or move the badge."]},
+      {"screen": "Target marks rounds table @320px", "issues": ["Headers do not wrap (all 15px high, no overflow), but CLOSING / TOUGH / NORMAL have almost no gap between them.", "On JAC Delhi, 'publish nahi' wraps onto 2 lines.", "The JAC (DTU) table footnote says 'CSAB rounds CRL par band hote hain', which does not apply to JAC (it has no CSAB rounds)."]},
+      {"screen": "Compare @320px", "issues": ["Titles are truncated with an ellipsis (e.g. 'R V College of Engineeri…', 'Sab categories, e…') because of numberOfLines=3/2. Acceptable, but 4 lines for the title would avoid cutting college names."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_tools_iter86.py", "/app/test_reports/pytest/rank_tools_iter86.xml"],
+  "action_items": [
+    "HIGH: Compare.tsx seed effect: do not seed while the Compare pane is hidden (pass active={tool==='compare'} from rank.tsx and seed when it becomes active), or keep auto-ticking new saves up to 3 until the user interacts.",
+    "PercentileRank.tsx:95: show the typed percentile (query.percentile) in pr-card-percentile instead of the rounded r.percentile[0].",
+    "TargetMarks.tsx:220: render null BITSAT history years as '—' (or omit them).",
+    "ToolGrid: stop the NEW badge overlapping the tile titles (paddingRight on the title, or move the badge).",
+    "Optional: in Compare (and in the Target JEE footnote), label CSAB rows as CRL when rank_label is a category or PwD rank. Hide the CSAB footnote for JAC colleges. Only show cmp-easiest when all JEE items share the same rank_label."
+  ],
+  "critical_code_review_comments": [
+    "Compare.tsx: 'easiest' compares final.close across JEE items even when their rank_label differs (CRL vs OBC-NCL rank vs PwD rank), so the answer is not meaningful in mixed cases.",
+    "rank_tools._jee_seat finds the seat again by parsing the readable path string ('Home state · OBC-NCL (PwD) · Female-only'). This is fragile if path_label wording ever changes. Saving cat/pwd/female explicitly in the shortlist would be safer. Today every /predict item resolves (tested across GEN, SC-PwD and Female+state lists).",
+    "Backend validation is correct: 422 for percentile 101/-1/str/null, bad category, unknown state, inst -1, >3 or 0 compare items, unknown exam. 404 for inst 9999 and COMEDK code ZZZZ. Unknown compare ids return missing:true.",
+    "All values checked: CRL decreases as percentile rises, tough <= normal <= easy for every JEE row and cell, a better closing rank means higher marks (MANIT), COMEDK mid lies within its range and within 0-180, BITSAT safe = min(390, cutoff+10), 50 BITSAT rows, 115 JEE + 148 COMEDK colleges."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_tools_iter86.py (new)"],
+  "success_rate": {"backend": "100% (27/27 new; 124/126 in combined regression run - the 2 failures were my wrong compare assertions, fixed and re-run green)", "frontend": "~85% (3 functional bugs out of ~20 checked flows)"},
+  "seed_data_creation": "None. The shortlist is device-local (rank.shortlist.v1) in throwaway browser contexts. No DB or academic writes.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry: wait ~3s, click the inputs, type 7004186276 and 5524, wait 1.5s, then entry-continue-button (no force; force-clicking too early does nothing). After a reload, wait ~3s before tapping rank-tool-* or the tap is lost. Bottom-sheet options (tm-state-picker-<slug>, tm-college-sheet-<inst|code>) need a JS click: locator.evaluate('e=>e.click()'). MANIT = inst 2, DTU = 111. To reproduce the compare seed bug: open rank-tool-compare while empty, then save items, then reopen compare.",
+  "rca_of_issue": "Compare seed: rank.tsx keeps panes mounted once seen (styles.hidden). Compare's useEffect([saved]) seeds the pick list the first time saved.length > 0, even when hidden, so seeding happens after the first star tap with only 1 item and is never redone. Percentile display: rank_predictor.result_block rounds the percentile to 2 decimals and PercentileRank shows that instead of the typed value."
+}

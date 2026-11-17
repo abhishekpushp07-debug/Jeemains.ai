@@ -580,4 +580,6 @@ def make_router():
     router.post("/bitsat")(rank_bitsat.predict)
     router.post("/comedk")(rank_comedk.predict)
     router.post("/comedk/college")(rank_comedk.college)
+    import rank_tools  # percentile -> rank, target marks, compare (it imports this module, so it loads last)
+    rank_tools.register(router)
     return router

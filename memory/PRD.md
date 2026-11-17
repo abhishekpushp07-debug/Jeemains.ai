@@ -731,3 +731,11 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Public page /api/rf/c/{cid}: Open in the app, Play in your browser (/api/arena/rapid/room/{cid}), Get the app; WhatsApp preview text (og tags).
 - Signed-out link visitors sign in and come straight back to the room (entry `next`). WhatsApp share uses api.whatsapp.com (emoji safe). Browser arena rebuilt.
 - Tests: tests/test_iter77_match_link.py, tests/test_iter78_match_link_public.py, test_rf_social.py pass; frontend iteration_78 pass.
+
+## Iterations 79–87 — JEELIVE.AI Rank tab (Jun 2026)
+- Dark brushed-metal Rank tab (sparkle silver + light blood red). Tools as Home-style tiles (src/rank/ToolGrid.tsx): Rank predictor (JEE/COMEDK, BITSAT excluded), Percentile se rank (NEW), Target marks (NEW), College predictor (JEE JoSAA/CSAB/JAC, BITSAT, COMEDK GM only), College compare (NEW, full width). Tools stay mounted after first open so results survive switching.
+- Percentile se rank: NTA percentile + category + PwD -> CRL range, category/PwD rank, marks for Tough/Normal/Easy; hands over to College predictor.
+- Target marks: pick college (search by short/full name/city) -> per branch marks needed for 2026 closing rank (JEE per paper type and per round incl. CSAB/JAC; COMEDK range of 3 analyses + fee + GM seats; BITSAT official cutoffs + safe target).
+- College compare: 2–3 saved colleges (any exam) side by side — final + round-wise closing (CSAB CRL marked), last year, seats (JoSAA seat matrix / COMEDK GM), fee (COMEDK; JEE/BITS note), chance tag; all columns fit the phone width.
+- Backend: rank_predictor.py, rank_comedk.py, rank_bitsat.py, rank_tools.py (/api/rank/*: meta, predict, college, estimate, bitsat, comedk, comedk/college, percentile, target/jee, target/comedk, target/bitsat, colleges, compare). Data = static JSON in backend/rank_data (no app size increase; text only).
+- Tested: iterations 82–87 pass (backend tests test_rank_*.py).

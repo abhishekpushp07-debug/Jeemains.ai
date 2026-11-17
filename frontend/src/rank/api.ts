@@ -118,6 +118,46 @@ export type EstimateOut = JeeEstimate | ComedkEstimate;
 export const estimate = (body: EstimateIn) => call<EstimateOut>("/estimate", body);
 export const fmtPct = (r: Range) => r[0] === r[1] ? r[0].toFixed(2) : `${r[0].toFixed(2)} – ${r[1].toFixed(2)}`;
 
+/** A score handed from a Rank tool to the College predictor. */
+export type Handover = { exam: "jee" | "comedk"; marks?: number; percentile?: number; level?: Level; category?: Category; pwd?: boolean };
+
+export type PercentileOut = { result: RankResult; candidates: number; marks: { level: Level; marks: number }[]; notes: string[] };
+export const percentileRank = (body: { percentile: number; category: Category; pwd: boolean }) => call<PercentileOut>("/percentile", body);
+
+export type JeeCollege = { inst: number; short: string; name: string; type: Exclude<Segment, "all">; state: string; city: string };
+export type ComedkCollege = { code: string; short: string; name: string; city: string };
+export const getColleges = () => call<{ jee: JeeCollege[]; comedk: ComedkCollege[] }>("/colleges");
+
+export type Marks3 = Record<Level, number>;
+export type JeeTargetRow = {
+  prog: number; branch: string; degree: string; group: string; path: string; rank_type: string; seats: number | null; y25: number | null;
+  cells: { label: string; close: number | null; crl?: number; pct?: number; marks?: Marks3; unpublished?: boolean }[];
+  final: { label: string; close: number; crl: number; pct: number; marks: Marks3 };
+};
+export type JeeTarget = { college: Omit<JeeCollege, "inst"> & { id: number }; rounds: string[]; rows: JeeTargetRow[]; official: string; notes: string[] };
+export type ComedkTargetRow = {
+  cc: string; course: string; group: string; fee: number | null; seats: number | null; y25: number | null;
+  cells: { label: string; close: number | null; marks?: Range; mid?: number }[];
+  final: { label: string; close: number; marks: Range; mid: number };
+};
+export type ComedkTarget = { college: { code: string; name: string; short: string; city: string }; rounds: string[]; rows: ComedkTargetRow[]; official: string; notes: string[] };
+export type BitsatTarget = {
+  years: number[]; max: number; source: string; notes: string[];
+  rows: { id: string; campus: Exclude<Campus, "all">; college: string; program: string; degree: string; cutoff: number; history: number[]; safe: number }[];
+};
+export const targetJee = (body: { inst: number; category: Category; female: boolean; pwd: boolean; state: string | null }) => call<JeeTarget>("/target/jee", body);
+export const targetComedk = (code: string) => call<ComedkTarget>("/target/comedk", { code });
+export const targetBitsat = () => call<BitsatTarget>("/target/bitsat");
+
+export type CompareItem = { exam: "jee" | "bitsat" | "comedk"; id: string; prog?: number; quota?: string; gender?: "N" | "F"; path?: string };
+export type CompareCol = {
+  exam: "jee" | "bitsat" | "comedk"; id: string; missing?: boolean; title?: string; name?: string; place?: string; sub?: string; path?: string;
+  rank_label?: string; rounds?: { label: string; close: number | null; crl?: boolean }[]; final?: { label: string; close: number } | null;
+  prev?: { label: string; close: number | null } | null; seats?: number | null; seats_label?: string | null; fee?: number | null; fee_note?: string;
+  higher_is_harder?: boolean;
+};
+export const compareSaved = (items: CompareItem[]) => call<{ items: CompareCol[]; notes: string[] }>("/compare", { items });
+
 /** Indian grouping: 107693 -> 1,07,693. */
 export function fmt(n: number): string {
   const s = String(Math.round(n));

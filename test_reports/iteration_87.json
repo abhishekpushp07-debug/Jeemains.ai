@@ -1,0 +1,23 @@
+{
+  "summary": "Iteration 87: retest of the iteration_86 fixes, plus a light regression of the Rank tools. All fixes verified. Backend: new test_rank_tools_iter87.py (compare rounds[].crl flag, DTU JAC rounds unpublished, MANIT CSAB, colleges full name, BITSAT history, 4-decimal percentile) and test_rank_tools_iter86.py pass 37/37. Frontend tested at 390px and 320px, logged in as 7004186276. (1) Compare pre-tick (HIGH): opened Compare while empty (cmp-empty), then cmp-go-college, then saved 2 JEE, 1 COMEDK and 1 BITSAT. Compare showed the latest 3 ticked (3/3) and cmp-table with no cmp-need. A manual untick/tick kept the choice, and a new save made afterwards was NOT auto-ticked. (2) pr-card-percentile shows 'PERCENTILE 97.4567'. (3) Target BITSAT shows no 'null' (35 history entries show '—'). (4) NEW badges sit on the icon's bottom edge with no bounding-box overlap with the titles at 390 and 320, and are hidden on the selected tile. (5) Target JEE @320: headers are title case and the columns are clearly separated. DTU shows Upgrade/Spot as '—*' with the JAC footnote and no CSAB line. MANIT shows the CSAB footnote. (6) Search: 'delhi technological' finds DTU, and 'bhopal' finds MANIT, IIIT Bhopal and NITTTR Bhopal. (7) Compare: OBC-NCL JoSAA seats show 'CRL' after the CSAB 1/2 values. The JAC column and CRL-only columns have no CRL tag. cmp-easiest is hidden for mixed rank_label and shown for 3 GEN CRL seats. Titles are full (no ellipsis) at 320 and there is no horizontal overflow. Regression: Rank predictor, Percentile se rank, Target COMEDK (RVCE) and College predictor JEE/COMEDK/BITSAT stars all work. No deprecated Expo packages found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank ToolGrid @320", "issues": ["The COLLEGE PREDICTOR tile subtitle is truncated to 'colleges + cut…' (numberOfLines=1). Cosmetic."]},
+      {"screen": "College predictor exam switch", "issues": ["Switching JEE -> COMEDK -> back resets the COMEDK input and results (the panel unmounts), so the student has to type the marks again. Not a regression, just a UX note."]},
+      {"screen": "Compare (JoSAA + JAC mix)", "issues": ["Rounds rows are aligned by index, so JoSAA 'R5' sits next to JAC 'Upgrade' and 'CSAB 1' next to 'Spot'. Each cell carries its own label, so it is readable. Cosmetic."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_tools_iter87.py", "/app/backend/tests/test_rank_tools_iter86.py", "/app/test_reports/pytest/rank_tools_iter87.xml"],
+  "action_items": ["Optional (cosmetic): let the ToolGrid subtitle wrap to 2 lines at <360px, or shorten 'colleges + cutoffs'."],
+  "critical_code_review_comments": ["Compare.tsx: the touched ref plus the saved-follow effect is correct. Note: if the student unticks everything manually and then saves new colleges, nothing auto-ticks. This is intended per spec."],
+  "updated_files": ["/app/backend/tests/test_rank_tools_iter87.py"],
+  "success_rate": {"backend": "100% (37/37)", "frontend": "100% of retested items"},
+  "seed_data_creation": "None. Shortlist stars exist only in the browser localStorage of throwaway Playwright contexts. No academic actions.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Login: type phone, click entry-pin-input, keyboard.type the PIN, wait 1.5s, then evaluate click on entry-continue-button. Use locator.evaluate('e=>e.click()') for all taps. Shortlist is newest-first. Compare auto-ticks shortlist[0:3] until a manual tick. Target college sheet option testIDs: tm-college-sheet-<inst|code> (DTU 111, MANIT 2, RVCE E095). The 401 on /api/jl/auth/refresh before login is expected."
+}

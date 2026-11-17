@@ -8,7 +8,7 @@ import { ErrorBox, Press, T } from "@/src/components/ui";
 import { PaletteContext, rankColors as colors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 import { storage } from "@/src/utils/storage";
-import { CollegeReq, EstimateIn, FormBody, getMeta, Meta, predict, PredictOut, Seat, Segment } from "@/src/rank/api";
+import { CollegeReq, FormBody, getMeta, Handover, Meta, predict, PredictOut, Seat, Segment } from "@/src/rank/api";
 import { CATEGORY_LABEL, LEVEL, SERIF } from "@/src/rank/tones";
 import { branchLabel, DEFAULT_FORM, FormState, InputCard, toBody } from "@/src/rank/InputCard";
 import { ResultCard } from "@/src/rank/ResultCard";
@@ -18,8 +18,11 @@ import { PercentileChart } from "@/src/rank/PercentileChart";
 import { Picker, RuleTitle, Switch } from "@/src/rank/controls";
 import { BitsatPanel } from "@/src/rank/Bitsat";
 import { ComedkPanel } from "@/src/rank/Comedk";
-import { PredictorTiles, Tool } from "@/src/rank/PredictorTiles";
+import { ToolGrid, Tool } from "@/src/rank/ToolGrid";
 import { RankPredictor } from "@/src/rank/RankPredictor";
+import { PercentileRank } from "@/src/rank/PercentileRank";
+import { TargetMarks } from "@/src/rank/TargetMarks";
+import { Compare } from "@/src/rank/Compare";
 import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
 import { shareJee } from "@/src/rank/share";
 import { useShortlist } from "@/src/rank/shortlist";
@@ -36,6 +39,9 @@ export default function RankTab() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [tool, setTool] = useState<Tool>("rank");
+  // A tool mounts the first time it is opened and then only hides, so its answer is still there when the student comes back.
+  const [seen, setSeen] = useState<Tool[]>(["rank"]);
+  const openTool = (t: Tool) => { setTool(t); setSeen(s => (s.includes(t) ? s : [...s, t])); };
   const [exam, setExam] = useState<"jee" | "bitsat" | "comedk">("jee");
   const [comedkSeed, setComedkSeed] = useState<{ marks: number; at: number } | null>(null);
   const [mode, setMode] = useState<"marks" | "chart">("marks");
@@ -93,19 +99,21 @@ export default function RankTab() {
   const openSeat = (s: Seat, body: FormBody | null = query) => {
     if (body) setDetail({ ...body, inst: s.inst, prog: s.prog, quota: s.quota, gender: s.gender, seat: s.seat });
   };
-  // Rank predictor -> College predictor with the same score already filled in and shown.
-  const goColleges = (q: EstimateIn) => {
+  // Any Rank tool -> College predictor with the same score already filled in and shown.
+  const goColleges = (q: Handover) => {
     if (q.exam === "jee") {
-      const nf: FormState = { ...form, marks: String(q.marks), pct: "", level: q.level, category: q.category, pwd: q.pwd };
+      const nf: FormState = { ...form, marks: q.marks !== undefined ? String(q.marks) : "", pct: q.percentile !== undefined ? String(q.percentile) : "",
+        level: q.level ?? form.level, category: q.category ?? form.category, pwd: q.pwd ?? form.pwd };
       const body = toBody(nf);
       setForm(nf); setExam("jee"); setMode("marks");
       if (typeof body !== "string") { storage.setItem(SAVED, JSON.stringify(nf)); setSegment("all"); setPage(1); setQuery(body); setOpen(false); }
-    } else {
+    } else if (q.marks !== undefined) {
       setComedkSeed({ marks: q.marks, at: Date.now() }); setExam("comedk");
     }
-    setTool("college");
+    openTool("college");
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
+  const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>{node}</View> : null;
 
   return (
     <PaletteContext.Provider value={colors}>
@@ -119,11 +127,13 @@ export default function RankTab() {
           <T testID="rank-title" style={styles.title}>Rank & college predictor</T>
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
-        <PredictorTiles value={tool} onChange={setTool} />
+        <ToolGrid value={tool} onChange={openTool} saved={saved.length} />
 
-        {/* The Rank predictor stays mounted (only hidden) so its result is still there after a look at colleges. */}
-        <View style={[styles.tool, tool !== "rank" && styles.hidden]}><RankPredictor onColleges={goColleges} /></View>
-        {tool === "rank" ? null : <>
+        {pane("rank", <RankPredictor onColleges={goColleges} />)}
+        {pane("pct", <PercentileRank onColleges={goColleges} />)}
+        {pane("target", <TargetMarks states={meta?.states ?? []} />)}
+        {pane("compare", <Compare onGoCollege={() => openTool("college")} />)}
+        {pane("college", <>
         <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />
 
         {exam === "bitsat" ? <BitsatPanel onShortlist={() => setShortOpen(true)} />
@@ -153,7 +163,7 @@ export default function RankTab() {
             {meta?.missing.map(m => <T key={m} size={11.5} color={colors.custom_dim}>{m}</T>)}
           </View>
         </>}
-        </>}
+        </>)}
 
         <View style={styles.links}>
           <Press testID="rank-open-series" onPress={() => router.push("/live")} style={styles.link} accessibilityLabel="All India series">
