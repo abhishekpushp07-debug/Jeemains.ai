@@ -6,6 +6,7 @@ import { rankColors as colors, radius, space } from "@/src/theme";
 import { fmt, PredictOut, Seat, Segment } from "./api";
 import { KIND, TAG } from "./tones";
 import { StarButton, Strip, Tag, Toggle } from "./controls";
+import { Medal, MedalWash } from "./Medal";
 import { jeeSaved, toggleSaved, useShortlist } from "./shortlist";
 
 const SEGMENTS: Segment[] = ["all", "NIT", "IIIT", "GFTI", "DELHI"];
@@ -20,15 +21,19 @@ export function Trend({ y25, y26, testID, label = "JoSAA final" }: { y25?: numbe
   </T>;
 }
 
-export function SeatRow({ seat, onPress, testID }: { seat: Seat; onPress: () => void; testID: string }) {
+export function SeatRow({ seat, onPress, testID, rank }: { seat: Seat; onPress: () => void; testID: string; rank?: number }) {
   const kind = KIND[seat.type];
   const saved = useShortlist().some(s => s.id === `jee-${seat.prog}`);
   return <View style={styles.seat}>
+  <MedalWash n={rank} />
   <Press testID={testID} onPress={onPress} scaleTo={0.99} accessibilityLabel={`${seat.college}, ${seat.branch}`} style={styles.seatMain}>
+    {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
     <View style={{ flex: 1, gap: 3 }}>
-      <View style={styles.line}>
-        <T w="bold" size={14.5} numberOfLines={1} style={{ flexShrink: 1 }}>{seat.college}</T>
+      <T w="bold" size={14.5} numberOfLines={2}>{seat.college}</T>
+      {/* Type and chance sit under the name, so the medal never squeezes the college name. */}
+      <View style={styles.tags}>
         <Tag label={kind.label} ink={kind.ink} soft={kind.soft} />
+        {seat.tag ? <Tag testID={`${testID}-tag`} label={TAG[seat.tag].label} ink={TAG[seat.tag].ink} soft={TAG[seat.tag].soft} /> : null}
       </View>
       <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{seat.branch}{seat.degree ? ` (${seat.degree})` : ""}</T>
       <T size={12} color={colors.muted} numberOfLines={2}>
@@ -37,7 +42,6 @@ export function SeatRow({ seat, onPress, testID }: { seat: Seat; onPress: () => 
       <Trend y25={seat.y25} y26={seat.y26} testID={`${testID}-trend`} />
       {seat.gap ? <T w="semibold" size={12} color={colors.custom_flame}>{seat.gap}</T> : null}
     </View>
-    {seat.tag ? <Tag testID={`${testID}-tag`} label={TAG[seat.tag].label} ink={TAG[seat.tag].ink} soft={TAG[seat.tag].soft} /> : null}
   </Press>
   <StarButton saved={saved} onPress={() => toggleSaved(jeeSaved(seat))} testID={`${testID}-star`} />
   </View>;
@@ -63,7 +67,7 @@ export function SeatList({ data, segment, onSegment, page, onPage, branchText, o
     {data.items.length === 0 ? <T testID="rank-list-empty" size={13.5} color={colors.muted}>
       Is filter mein 2026 ki koi seat aapki rank tak nahi gayi. Branch ya segment badal kar dekho.
     </T> : <View>
-      {data.items.map((s, i) => <SeatRow key={`${s.prog}`} seat={s} testID={`rank-seat-${(page - 1) * 25 + i}`} onPress={() => onOpen(s)} />)}
+      {data.items.map((s, i) => <SeatRow key={`${s.prog}`} seat={s} rank={(page - 1) * 25 + i + 1} testID={`rank-seat-${(page - 1) * 25 + i}`} onPress={() => onOpen(s)} />)}
     </View>}
     {data.pages > 1 ? <View style={styles.pager}>
       {Array.from({ length: data.pages }, (_, i) => i + 1).map(p => (
@@ -84,6 +88,7 @@ const styles = StyleSheet.create({
   seat: { flexDirection: "row", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine, alignItems: "flex-start" },
   seatMain: { flex: 1, flexDirection: "row", gap: space.sm, paddingVertical: space.md, alignItems: "flex-start" },
   line: { flexDirection: "row", alignItems: "center", gap: space.sm },
+  tags: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 6 },
   pager: { flexDirection: "row", gap: space.sm, justifyContent: "center", paddingTop: space.sm },
   pageBtn: { minHeight: 44, minWidth: 96, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center", paddingHorizontal: space.lg },
   pageOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },

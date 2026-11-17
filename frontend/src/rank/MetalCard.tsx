@@ -1,4 +1,5 @@
-// The Rank Card: brushed graphite, a soft blood-red glow, one diagonal sheen, sparkle-silver serif with a twinkling glint
+// The Rank Card, after a quiet black metal membership card: soft graphite fading to black, one faint diagonal sheen,
+// a hairline diamond across its right side, a small diamond mark by the name, sparkle-silver serif with a twinkling glint
 // and blood-red hairlines. Gradients, SVG and text only, so it costs nothing in app size.
 import React, { useEffect } from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
@@ -9,23 +10,24 @@ import { Pill } from "@/src/components/design";
 import { T } from "@/src/components/ui";
 import { rankColors as colors, space } from "@/src/theme";
 import { SERIF } from "./tones";
+import { DiamondLine, DiamondMark } from "./Diamond";
 
-type Stops = readonly [string, string, ...string[]];
-const BRUSH = Array.from({ length: 44 }, (_, i) => (i % 2 ? colors.custom_clear : colors.custom_rankBrush)) as unknown as Stops;
 const silver = colors.custom_rankSilver, muted = colors.custom_rankSilverMuted, bloodInk = colors.custom_rankBloodInk;
-const EDGE = [colors.custom_clear, colors.custom_rankBlood, colors.custom_rankShimmer, colors.custom_rankBlood, colors.custom_clear] as const;
+const EDGE = [colors.custom_clear, colors.custom_rankSilverLine, colors.custom_rankShimmer, colors.custom_rankSilverLine, colors.custom_clear] as const;
 
 export function MetalCard({ badge, children, foot, testID }: { badge: string; children: React.ReactNode; foot?: React.ReactNode; testID?: string }) {
   const narrow = useWindowDimensions().width < 360; // small phones: score caps above the № serial instead of beside it
   return <View style={styles.glow}><View testID={testID} style={styles.card}>
-    <LinearGradient colors={[colors.custom_rankFrom, colors.custom_rankMid, colors.custom_rankTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-    <LinearGradient colors={BRUSH} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={StyleSheet.absoluteFill} />
-    <LinearGradient colors={[colors.custom_clear, colors.custom_rankGlow]} start={{ x: 0.35, y: 0.15 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-    <LinearGradient colors={[colors.custom_clear, colors.custom_rankSheen, colors.custom_clear]} locations={[0.3, 0.48, 0.66]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+    <LinearGradient colors={[colors.custom_eliteFrom, colors.custom_eliteMid, colors.custom_eliteTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+    <DiamondLine size={300} style={styles.watermark} />
+    <LinearGradient colors={[colors.custom_clear, colors.custom_metalSheenSoft, colors.custom_clear]} locations={[0.3, 0.48, 0.66]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
     <LinearGradient colors={EDGE} locations={[0, 0.22, 0.5, 0.78, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.edge} />
     <View style={styles.top}>
-      <T w="bold" size={11} color={silver} style={styles.track}>JEELIVE.AI</T>
-      <T w="bold" size={10.5} color={bloodInk} style={styles.track}>{badge}</T>
+      <View style={styles.brand}>
+        <DiamondMark width={20} />
+        <T w="bold" size={11} color={silver} style={styles.track}>JEELIVE.AI</T>
+      </View>
+      <T w="bold" size={10.5} color={bloodInk} style={[styles.track, { flexShrink: 1 }]} numberOfLines={1}>{badge}</T>
     </View>
     {children}
     {foot ? <View style={[styles.foot, narrow && styles.footStack]}>{foot}</View> : null}
@@ -111,9 +113,12 @@ export function CardActions({ notes, onShare, saved, onShortlist, prefix }: {
 }
 
 const styles = StyleSheet.create({
-  glow: { borderRadius: 22, shadowColor: colors.custom_rankBlood, shadowOpacity: 0.3, shadowRadius: 26, shadowOffset: { width: 0, height: 10 }, elevation: 10, backgroundColor: colors.custom_rankMid },
+  glow: { borderRadius: 22, shadowColor: colors.custom_rankBg, shadowOpacity: 0.6, shadowRadius: 22, shadowOffset: { width: 0, height: 10 }, elevation: 10, backgroundColor: colors.custom_eliteMid },
   outline: { borderWidth: 1, borderColor: colors.custom_cardLineStrong },
-  card: { borderRadius: 22, padding: space.xl, gap: space.lg, overflow: "hidden", backgroundColor: colors.custom_rankMid, borderWidth: 1, borderColor: colors.custom_rankLine },
+  card: { borderRadius: 22, padding: space.xl, gap: space.lg, overflow: "hidden", backgroundColor: colors.custom_eliteMid, borderWidth: 1, borderColor: colors.custom_eliteLine },
+  // The hairline diamond sits half off the right edge, like the watermark on a metal card.
+  watermark: { position: "absolute", right: -120, top: -24 },
+  brand: { flexDirection: "row", alignItems: "center", gap: space.sm },
   edge: { position: "absolute", top: 0, left: 0, right: 0, height: 1.5 },
   top: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm },
   track: { letterSpacing: 3 },

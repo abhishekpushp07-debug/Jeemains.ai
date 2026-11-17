@@ -15,6 +15,7 @@ import { branchLabel } from "./InputCard";
 import { Trend } from "./SeatList";
 import { ComedkSheet, feeLine } from "./ComedkSheet";
 import { shareComedk } from "./share";
+import { Medal, MedalWash } from "./Medal";
 import { PdfButton } from "./PdfButton";
 import { comedkSaved, toggleSaved, useShortlist } from "./shortlist";
 
@@ -161,7 +162,7 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
   data: ComedkOut; area: ComedkArea; onArea: (a: ComedkArea) => void; page: number; onPage: (p: number) => void;
   branchText: string; onBranch: () => void; onOpen: (i: ComedkItem) => void; busy: boolean; saved: Set<string>; tools: React.ReactNode;
 }) {
-  const row = (it: ComedkItem, testID: string) => <ComedkRow key={it.id} item={it} testID={testID} onPress={() => onOpen(it)} saved={saved.has(`comedk-${it.id}`)} />;
+  const row = (it: ComedkItem, testID: string, rank?: number) => <ComedkRow key={it.id} item={it} testID={testID} rank={rank} onPress={() => onOpen(it)} saved={saved.has(`comedk-${it.id}`)} />;
   return <Strip title="Top college-course" testID="comedk-list"
     right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>Top {data.total}</T>}>
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
@@ -173,7 +174,7 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
     {data.items.length ? tools : null}
     {data.items.length === 0 ? <T testID="comedk-list-empty" size={13.5} color={colors.muted}>
       Is filter mein 2026 ki koi GM seat aapki rank tak nahi gayi. Branch ya shehar badal kar dekho.
-    </T> : <View>{data.items.map((it, i) => row(it, `comedk-seat-${(page - 1) * 25 + i}`))}</View>}
+    </T> : <View>{data.items.map((it, i) => row(it, `comedk-seat-${(page - 1) * 25 + i}`, (page - 1) * 25 + i + 1))}</View>}
     {data.pages > 1 ? <View style={styles.pager}>
       {Array.from({ length: data.pages }, (_, i) => i + 1).map(p => (
         <Press key={p} testID={`comedk-page-${p}`} onPress={() => onPage(p)} accessibilityState={{ selected: p === page }} style={[styles.pageBtn, p === page && styles.pageOn]}>
@@ -188,21 +189,21 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
   </Strip>;
 }
 
-function ComedkRow({ item, onPress, saved, testID }: { item: ComedkItem; onPress: () => void; saved: boolean; testID: string }) {
+function ComedkRow({ item, onPress, saved, testID, rank }: { item: ComedkItem; onPress: () => void; saved: boolean; testID: string; rank?: number }) {
   const money = feeLine(item.fee, item.seats);
   return <View style={styles.row}>
+    <MedalWash n={rank} />
     <Press testID={testID} onPress={onPress} scaleTo={0.99} accessibilityLabel={`${item.college}, ${item.course}`} style={styles.main}>
+      {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
       <View style={{ flex: 1, gap: 3 }}>
-        <View style={styles.line}>
-          <T w="bold" size={14.5} numberOfLines={2} style={{ flexShrink: 1 }}>{item.college}</T>
-        </View>
+        <T w="bold" size={14.5} numberOfLines={2}>{item.college}</T>
+        {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
         <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{item.course}</T>
         <T size={12} color={colors.muted}>{item.city ? `${item.city} · ` : ""}Closing {fmt(item.close)} · {item.round} · GM</T>
         <Trend label="COMEDK final" y25={item.y25} y26={item.close} testID={`${testID}-trend`} />
         {money ? <T size={12} color={colors.muted}>{money}</T> : null}
         {item.gap ? <T w="semibold" size={12} color={colors.custom_flame}>{item.gap}</T> : null}
       </View>
-      {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
     </Press>
     <StarButton saved={saved} onPress={() => toggleSaved(comedkSaved(item))} testID={`${testID}-star`} />
   </View>;
@@ -215,7 +216,6 @@ const styles = StyleSheet.create({
   chips: { gap: space.sm, paddingRight: space.sm },
   row: { flexDirection: "row", alignItems: "flex-start", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
   main: { flex: 1, flexDirection: "row", gap: space.sm, paddingVertical: space.md, alignItems: "flex-start" },
-  line: { flexDirection: "row", alignItems: "center", gap: space.sm },
   pager: { flexDirection: "row", gap: space.sm, justifyContent: "center", paddingTop: space.sm },
   pageBtn: { minHeight: 44, minWidth: 96, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center", paddingHorizontal: space.lg },
   pageOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },

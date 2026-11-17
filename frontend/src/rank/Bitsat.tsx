@@ -11,6 +11,7 @@ import { CAMPUS, TAG } from "./tones";
 import { StarButton, Strip, Summary, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps } from "./MetalCard";
 import { shareBitsat } from "./share";
+import { Medal, MedalWash } from "./Medal";
 import { PdfButton } from "./PdfButton";
 import { bitsatSaved, toggleSaved, useShortlist } from "./shortlist";
 
@@ -104,11 +105,11 @@ function BitsatCard({ data, saved, onShortlist }: { data: BitsatOut; saved: numb
 function BitsatList({ data, saved }: { data: BitsatOut; saved: Set<string> }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [rest, setRest] = useState(false);
-  const row = (b: BitsatItem, testID: string) => <BitsatRow key={b.id} item={b} score={data.result.score} years={data.years} testID={testID}
+  const row = (b: BitsatItem, testID: string, rank?: number) => <BitsatRow key={b.id} item={b} score={data.result.score} years={data.years} testID={testID} rank={rank}
     open={openId === b.id} onPress={() => setOpenId(openId === b.id ? null : b.id)} saved={saved.has(`bitsat-${b.id}`)} onStar={() => toggleSaved(bitsatSaved(b))} />;
   return <>
     {data.items.length === 0 ? <T testID="bitsat-list-empty" size={13.5} color={colors.muted}>Is score par is filter mein koi program 2026 cutoff ke paas nahi. Campus ya degree badal kar dekho.</T>
-      : <View>{data.items.map((b, i) => row(b, `bitsat-item-${i}`))}</View>}
+      : <View>{data.items.map((b, i) => row(b, `bitsat-item-${i}`, i + 1))}</View>}
     {data.near.length ? <View testID="bitsat-near" style={{ gap: space.xs, marginTop: space.sm }}>
       <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2 }}>BAS THODA SA DOOR</T>
       {data.near.map((b, i) => row(b, `bitsat-near-${i}`))}
@@ -118,17 +119,20 @@ function BitsatList({ data, saved }: { data: BitsatOut; saved: Set<string> }) {
   </>;
 }
 
-function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID }: {
-  item: BitsatItem; score: number; years: number[]; open: boolean; onPress: () => void; saved: boolean; onStar: () => void; testID: string;
+function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID, rank }: {
+  item: BitsatItem; score: number; years: number[]; open: boolean; onPress: () => void; saved: boolean; onStar: () => void; testID: string; rank?: number;
 }) {
   const k = CAMPUS[item.campus];
   const d = item.last === null ? null : item.cutoff - item.last, same = d !== null && Math.abs(d) <= 2;
   return <View style={styles.row}>
+    <MedalWash n={rank} />
     <Press testID={testID} onPress={onPress} accessibilityState={{ expanded: open }} accessibilityLabel={`${item.college}, ${item.program}`} scaleTo={0.99} style={styles.main}>
+      {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
       <View style={{ flex: 1, gap: 3 }}>
-        <View style={styles.line}>
-          <T w="bold" size={14.5} numberOfLines={1} style={{ flexShrink: 1 }}>{item.college}</T>
+        <T w="bold" size={14.5} numberOfLines={2}>{item.college}</T>
+        <View style={styles.tags}>
           <Tag label={k.label} ink={k.ink} soft={k.soft} />
+          {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
         </View>
         <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{item.program}</T>
         <T size={12} color={colors.muted}>Cutoff 2026: {item.cutoff}{item.last !== null ? ` · 2025: ${item.last}` : " · naya program"}</T>
@@ -142,7 +146,6 @@ function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID }:
           {years.map((y, i) => `${y}: ${item.history[i] ?? "—"}`).join("  ·  ")}
         </T> : null}
       </View>
-      {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
     </Press>
     <StarButton saved={saved} onPress={onStar} testID={`${testID}-star`} />
   </View>;
@@ -153,6 +156,6 @@ const styles = StyleSheet.create({
   chips: { gap: space.sm, paddingRight: space.sm },
   row: { flexDirection: "row", alignItems: "flex-start", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
   main: { flex: 1, flexDirection: "row", gap: space.sm, paddingVertical: space.md, alignItems: "flex-start" },
-  line: { flexDirection: "row", alignItems: "center", gap: space.sm },
+  tags: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 6 },
   outline: { minHeight: 48, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center", marginTop: space.sm },
 });

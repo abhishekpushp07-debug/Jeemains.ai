@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ErrorBox, Press, T } from "@/src/components/ui";
@@ -36,7 +35,7 @@ function summaryOf(b: FormBody) {
     CATEGORY_LABEL[b.category], b.female ? "Female" : null, b.pwd ? "PwD" : null, b.state].filter(Boolean).join(" · ");
 }
 
-// JEELIVE.AI Rank: one light, text-only screen in the Rank Card's dark brushed-metal look. All cut-off data stays on our server.
+// JEELIVE.AI Rank: one text-only screen on pure black. The tool tiles are coloured metal cards; everything below stays quiet black. All cut-off data stays on our server.
 export default function RankTab() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
@@ -123,9 +122,7 @@ export default function RankTab() {
 
   return (
     <PaletteContext.Provider value={colors}>
-    <View style={{ flex: 1, backgroundColor: colors.surface }}>
-      <LinearGradient colors={[colors.custom_rankBgFrom, colors.custom_rankBgMid, colors.custom_rankBgTo]} style={StyleSheet.absoluteFill} />
-      <LinearGradient colors={[colors.custom_rankBgGlow, colors.custom_clear]} start={{ x: 1, y: 0 }} end={{ x: 0.25, y: 0.4 }} style={StyleSheet.absoluteFill} />
+    <View style={{ flex: 1, backgroundColor: colors.custom_rankBg }}>
       <ScrollView ref={scroll} testID="rank-screen" keyboardShouldPersistTaps="handled" indicatorStyle="white"
         contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}>
         <View style={{ gap: 6 }}>

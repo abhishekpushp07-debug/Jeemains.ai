@@ -47,6 +47,6 @@ export function PdfButton({ path, body, label, testID }: { path: string; body: u
 const styles = StyleSheet.create({
   wrap: { gap: 6 },
   row: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  wa: { flexGrow: 1, flexBasis: 120 },
-  outline: { flexGrow: 1, flexBasis: 140, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
+  wa: { flexGrow: 1, flexBasis: 180 },
+  outline: { flexGrow: 1, flexBasis: 180, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
 });

@@ -1,80 +1,51 @@
 {
-  "app_name": "JEELIVE.AI Rank Predictor",
-  "personality": "6 Glass / Luxe DARK crossed with 7 Dark-First Utility DARK",
-  "personality_one_liner": "A highly elegant, luxurious, dark 'brushed metal' command center with sparkle silver and light blood red accents.",
+  "app_name": "JEELIVE.AI",
+  "personality": "6 Glass / Luxe",
+  "personality_one_liner": "An elegant, cinematic royal theme using deep jewel tones, rich gold accents, and layered glass to make every achievement feel prestigious without being gaudy.",
   "color": {
-    "surface": "#060A14",
-    "onSurface": "#E6E8EE",
-    "surfaceSecondary": "#121218",
-    "onSurfaceSecondary": "#C3C6D0",
-    "surfaceTertiary": "#1A1A23",
-    "onSurfaceTertiary": "#E6E8EE",
-    "surfaceInverse": "#E2E8F0",
-    "onSurfaceInverse": "#060A14",
-    "brand": "#991B1B",
-    "brandPrimary": "#B91C1C",
-    "onBrandPrimary": "#FFFFFF",
-    "brandSecondary": "#E2E8F0",
-    "onBrandSecondary": "#0A0A0E",
-    "brandTertiary": "rgba(153, 27, 27, 0.15)",
-    "onBrandTertiary": "#B91C1C",
-    "success": "#0E3A2D",
-    "onSuccess": "#6EE7B7",
-    "warning": "#33270C",
-    "onWarning": "#FCD34D",
-    "error": "#2D0E0E",
-    "onError": "#FCA5A5",
-    "info": "#14213F",
-    "onInfo": "#93C5FD",
-    "border": "rgba(255,255,255,0.06)",
-    "borderStrong": "#30303E",
-    "divider": "#23232E",
-    "muted": "#8F92A3",
-    "dim": "#62657A",
-    "metalGradientStart": "#1C1D22",
-    "metalGradientMid": "#0E0F12",
-    "metalGradientEnd": "#0B1730"
+    "surface": "#04070D",
+    "onSurface": "#FFFFFF",
+    "surfaceSecondary": "#080C16",
+    "onSurfaceSecondary": "#FFFFFF",
+    "surfaceTertiary": "#101624",
+    "onSurfaceTertiary": "#8E9BB0",
+    "surfaceInverse": "#D4AF37",
+    "onSurfaceInverse": "#04070D",
+    "brand": "#060B18",
+    "brandPrimary": "#D4AF37",
+    "onBrandPrimary": "#04070D",
+    "brandSecondary": "#11254D",
+    "onBrandSecondary": "#4A8BFF",
+    "brandTertiary": "#1E0A10",
+    "onBrandTertiary": "#E63956",
+    "success": "#20C997",
+    "onSuccess": "#000000",
+    "warning": "#F5A623",
+    "onWarning": "#000000",
+    "error": "#E63956",
+    "onError": "#FFFFFF",
+    "info": "#4AD5FF",
+    "onInfo": "#000000",
+    "border": "rgba(255,255,255,0.08)",
+    "borderStrong": "#D4AF37",
+    "divider": "rgba(255,255,255,0.04)",
+    "muted": "#8E9BB0",
+    "onBrand": "#FFFFFF"
   },
   "typography": {
-    "displayFontFamily": "Georgia, serif",
-    "textFontFamily": "System",
-    "scale": {
-      "sm": 12,
-      "base": 14,
-      "lg": 16,
-      "xl": 20,
-      "2xl": 24,
-      "3xl": 48
-    }
+    "displayFontFamily": "Georgia",
+    "textFontFamily": "Figtree",
+    "scale": { "sm": 12, "base": 14, "lg": 16, "xl": 20, "2xl": 24 }
   },
-  "spacing": {
-    "rule": "Strict 8pt grid. Padding and margin must use these exact increments.",
-    "xs": 4,
-    "sm": 8,
-    "md": 12,
-    "lg": 16,
-    "xl": 24,
-    "2xl": 32,
-    "3xl": 48
-  },
-  "radius_tokens": {
-    "sm": 6,
-    "md": 12,
-    "lg": 22,
-    "pill": 999
-  },
-  "shadow_tier": "1",
+  "spacing": { "rule": "Handle spacing correctly dont have extra spaces where its not required, handle padding and margin corectly and subtle for buttons and components", "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 24, "2xl": 32, "3xl": 48 },
+  "radius_tokens": { "sm": 6, "md": 12, "lg": 20, "pill": 999 },
+  "shadow_tier": "2",
   "navigation": "stack_only",
-  "icon_set": "Feather",
+  "icon_set": "Ionicons",
   "glassmorphism": {
     "enabled": "true",
-    "do's": [
-      "Use subtle glassmorphism on the bottom sheet handle/header",
-      "Use translucent overlays for the 'blood red' glow"
-    ],
-    "dont's": [
-      "Do not use glass for list rows or standard cards, rely on dark metal gradients and hairlines"
-    ]
+    "do's": ["Use on hero rank card", "Use on input panels"],
+    "dont's": ["Don't overuse on standard list rows"]
   },
   "platform_libraries": {
     "glass": {
@@ -88,68 +59,24 @@
     "animation": "react-native-reanimated",
     "gesture": "react-native-gesture-handler"
   },
-  "haptics": {
-    "events": {
-      "tab_press": "light",
-      "switch_exam": "medium",
-      "row_tap": "light"
-    }
-  },
   "screens": [
     {
-      "name": "RankPredictor",
-      "purpose": "Show predicted exam ranks and corresponding college/course cutoffs",
-      "states": {
-        "loading": "Dark metal skeletons with a shimmer passing over the #121218 surface",
-        "empty": "Subtle #62657A text 'Enter your score to predict rank'",
-        "error": "Blood red hairline border card with retry button"
+      "name": "Rank Tab",
+      "purpose": "Exam rank & college predictor tools",
+      "states": { 
+        "loading": "Gold spinner on dark void background", 
+        "empty": "Gold frame card with 'Enter marks' prompt", 
+        "error": "Red jewel tone card with retry button" 
       },
-      "layout": "Sticky exam switcher at top -> MetalCard -> COMEDK/JEE List Rows. Bottom sheet for round-wise ladder."
+      "layout": "The page consists of a dark void background with Sapphire and Amethyst glow blobs. The top features a segmented switch (pill style). Below is the input panel (glassmorphism), followed by a 2x2 + 1 grid of 5 tool tiles, each utilizing a distinct jewel-tone gradient (Ruby, Sapphire, Emerald, Amethyst, Topaz). The selected tile is highlighted with a gold frame and brighter gradient. The Hero Rank Card features a layered gradient with a gold border and Georgia serif typography for the rank number. The list panel displays rows with top 3 items receiving gold, silver, and bronze gradient washes."
     }
   ],
   "images": {},
   "instructions_to_main_agent": [
-    "1. METALCARD IMPLEMENTATION (Sparkle Silver + Halka Blood Red):",
-    "   - Background: Linear gradient #1C1D22 -> #0E0F12 -> #0B1730.",
-    "   - Texture: 44 alternating brush stripes overlay rgba(255,255,255,0.022).",
-    "   - Border: rgba(148,163,184,0.15) with radius 22px.",
-    "   - Replacement of Electric Blue: The old blue is completely replaced for luxury. Top right glow is now a radial/absolute overlay of rgba(153,27,27,0.25).",
-    "   - Blood Red (#B91C1C) placements: The absolute top hairline border of the card, the exam badge text (e.g. 'COMEDK 2026'), the 26px vertical hairline rule next to percentile, and the '№' symbol in the serial.",
-    "   - Sparkle Silver (#F8F9FA) placements: The large rank number (System Georgia/serif) with text-shadow rgba(255,255,255,0.25), and the serial numbers (e.g. '13,529 / 15,38,468').",
-    "   - Sparkle Animation: Implement a tiny SVG 4-point star (rgba(255,255,255,0.9)) positioned absolutely near the top-right of the big serif rank number. Use react-native-reanimated to pulse opacity from 0.2 to 1.0 slowly. Respect reduce-motion.",
-    "",
-    "2. EXAM SWITCHER (3-way: JEE Main / BITSAT / COMEDK):",
-    "   - Container: #121218 background, pill radius, flex-direction: row, padding 4px, min-height 52px (to allow 44px inner targets).",
-    "   - Selected state: Background #1A1A23, border 1px solid rgba(226,232,240,0.3) [Silver outline], text #E2E8F0 weight 500.",
-    "   - Unselected state: Transparent background, text #8F92A3.",
-    "",
-    "3. ROUND LADDER (College Bottom Sheet - NEW):",
-    "   - Layout: Vertical stack, gap 12px, padded 16px.",
-    "   - Row structure: min-height 44px, flex-direction row, alignItems center.",
-    "   - Round Label: Width ~50px, text #8F92A3, 12px, e.g., 'R1', 'R4'.",
-    "   - Visual Bar: A track (flex: 1, height 4px, bg rgba(255,255,255,0.06), borderRadius 2px). Inside, an absolute fill proportional to the round's closing rank relative to the max rank in the list, colored rgba(153,27,27,0.4) (Muted Blood Red).",
-    "   - Closing Rank Text: Positioned at the end of the red fill or just above it, Serif font, #C3C6D0, 14px.",
-    "   - Student Rank Marker: An absolute vertical hairline (width 1px, height 16px, bg #E2E8F0) intersecting all bars at the exact % of the student's rank.",
-    "   - 'In' State: If student rank <= closing rank, show text 'aapki rank andar' in Safe Green (#6EE7B7) under the bar, with a tiny silver checkmark.",
-    "   - Empty State (Round with no allotment): Replace bar with an em-dash '—', text 'is round mein allotment nahi' in Dim (#62657A), italicized.",
-    "",
-    "4. COMEDK / JEE LIST ROWS (Refinement):",
-    "   - Surface: #121218, bottom border #23232E, padding 16px.",
-    "   - Title/Course: #E6E8EE, 16px, sans-serif.",
-    "   - City Tag: bg rgba(255,255,255,0.06), text #9095AB, radius 4px, padding horizontal 6px.",
-    "   - Subtext: 'Closing 4,552 · R4 · GM' in #C3C6D0.",
-    "   - Trend Line: Soft SVG path graph on the right side, stroke rgba(255,255,255,0.15).",
-    "   - Fees & Seats: #8F92A3, 12px.",
-    "   - Chance Tags: Safe (#0E3A2D bg / #6EE7B7 text), Likely (#14213F bg / #93C5FD text), Borderline (#33270C bg / #FCD34D text). No icons, pure text and color for elegance.",
-    "",
-    "5. COLLEGE SHEET TABLE GRID:",
-    "   - Ensure the Branches x Rounds grid has strict 1px borders (#23232E).",
-    "   - 'In' cells get a subtle #0E3A2D background and Safe Green text.",
-    "",
-    "6. STRICT CONSTRAINTS:",
-    "   - Do NOT add new font files. Use system fonts (System for Sans, Georgia/serif for Serif).",
-    "   - Do NOT add any external image assets. Use react-native-svg for the sparkle star and trend lines.",
-    "   - Ensure touch targets for the exam switch and list rows are strictly >= 44px.",
-    "   - The entire theme relies on the exact HEX/RGBA tokens provided to avoid generic AI-blue looks. Blue is fully replaced by the Blood Red/Sparkle Silver palette aside from the functional chance tags."
+    "Refer to /app/design_guidelines_rank_royal_v2.md for the exact hex, rgba, and gradient stops requested by the user.",
+    "Implement the 5 tool tiles with distinct jewel-tone backgrounds to avoid the previous monotonous navy theme.",
+    "Ensure top 3 list rows get the Gold/Silver/Bronze tinted washes.",
+    "Use Georgia for the primary Rank numbers and Figtree for everything else.",
+    "Strictly follow the user's constraints: no images, no new fonts, just raw Views, SVGs, and expo-linear-gradient."
   ]
 }

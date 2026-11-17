@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend-only test of the Rank tab theme redesign. I used Playwright on the web preview at 390x844 and 320x700, signed in as 7004186276. The page background is pure black (rgb(0,0,0)). The 5 tool tiles each have their own colour: maroon, indigo, teal, pink and champagne. Every tile has a faceted diamond in its bottom-right corner. The chosen tile has aria-selected=true, a coloured border, a coloured title and a sparkling diamond. NEW badges stay inside the tiles and titles are not clipped. Document scrollWidth equals the viewport at both sizes on every screen. Each tool uses its own colour: rp-show maroon #A3173A, pr-show indigo #4F46E5, rank-show/bitsat-show/comedk-show pink #BE185D, cmp-go-college champagne with dark ink, and the section titles are coloured too (list title pink #FBBCDD). The rank cards show JEELIVE.AI and the exam badge on the left and a diamond on the right. The big number stays on one line at 320 (32/28px) and 390 (36px), and the № serial is readable. Full regression passed: Rank predictor (180 marks; tough/normal/easy change the values; rp-colleges hands over to College predictor), Rank predictor COMEDK, Percentile 97.5 (pr-card, pr-colleges hand over), Target marks (exam switch jee/bitsat/comedk, college sheet search MANIT, tm-row tap opens rounds), College predictor JEE (655 rows, medals 1/2/3, tags under the college name, segment chips, branch picker, CollegeSheet, Percentile chart mode), BITSAT 280 (card + 233 items), COMEDK 120 (card + 25 seats, result kept after switching exams), and College compare (star 2 colleges, cmp-list ticked, cmp-table, then the stars were removed again). PDF buttons render with full labels and nothing is truncated: rank-pdf(-whatsapp), tm-pdf(-whatsapp), cmp-pdf(-whatsapp), bitsat-pdf, comedk-pdf. One real visual issue: the diamond in each tile sits under the value text. Some hint text has low contrast. No functional regressions.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ToolGrid tile diamond", "issue": "The tile diamond (62px, right:-10, bottom:-12) sits under the tile's value text. Measured overlap: 11-34px at 390 (college 'colleges + cutoffs' 34px) and 30-35px at 320 (rank, pct, target). On the CHOSEN tile the diamond is at opacity 0.9 with white facets and sparkles, so the light-silver value text ('college ke liye', 'NTA percentile', 'colleges + cutoffs') becomes hard to read. Reference: /app/frontend/src/rank/Metal.tsx:39 and /app/frontend/src/rank/ToolGrid.tsx:45-48", "testID": "rank-tool-target / rank-tool-pct / rank-tool-college / rank-tool-rank", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank (all tools)", "issues": [
+        "Hint text uses custom_dim #62657A at 11.5px ('Paper type = aapki shift ka...', 'Safed A4 PDF: seedha WhatsApp...', 'Data: NTA JEE Main 2026...', 'JAC Delhi ki Upgradation...'). Contrast is about 3:1 on the dark panels and lower on the maroon/pink tinted ones, which is below 4.5:1.",
+        "In the College compare table, the 'FEE / SAAL' cells ('website par *') are very faint grey on the champagne panel and barely readable.",
+        "The CollegeSheet / RoundLadder 'Round-wise closing rank' card is always blood-red (custom_rankBloodSoft/Ink, Rounds.tsx:24-26), even inside the pink College predictor. This may be intentional because the legend says 'laal patti', but it does not follow the per-tool colour.",
+        "Seen once: at 320, cmp-pdf showed only its file icon right after scroll_into_view. The label 'Compare + saved list ki PDF' appeared after about 2 s. I could not reproduce it, so treat it as a transient render."
+      ]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_90.json"],
+  "action_items": [
+    "Keep the tile diamond out from under the value text: reserve right padding in the tile content (about 36-40px, or paddingRight on the text column), or make the gem smaller / move it further into the corner. Also lower its opacity on the chosen tile (0.9 now) so the text over it stays readable.",
+    "Raise the hint text colour (custom_dim #62657A → e.g. muted #8F92A3) for the 11.5px notes and the compare table 'website par *' cells so they reach 4.5:1.",
+    "Optional: give RoundLadder in CollegeSheet/ComedkSheet the tool's colour (pink) if the per-tool colour should also apply inside the sheets."
+  ],
+  "critical_code_review_comments": [
+    "MetalFace is only used on tiles, panels (Strip), the summary and the cards, not on each list row, so the SVG/gradient cost stays bounded. Good.",
+    "The tile content has no space reserved for the absolutely-positioned gem (ToolGrid styles.tile paddingHorizontal 12/9), which is the root cause of the overlap.",
+    "No deprecated Expo packages (expo-av / expo-barcode-scanner / expo-background-fetch) in package.json."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "Functional 100% (all listed flows pass); visual: 1 medium + 3 minor design issues"},
+  "seed_data_creation": "None. I starred 2 colleges (NIT Rourkela EE, NIT Delhi Aero) for the compare test and unstarred both afterwards (verified aria-selected=false).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: fill entry-phone-input and entry-pin-input, wait 1.5 s, click entry-continue-button, then goto /rank. Exam switches: rp-exam-jee/comedk, rank-exam-jee/bitsat/comedk, tm-exam-*. College/chart mode: rank-mode-marks/chart. Tile value text = next sibling of rank-tool-<k>-title. Measure the diamond overlap with a Range rect of the value text against the tile svg with width 40-80. In the Target college sheet, MANIT = tm-college-sheet-2.",
+  "rca_of_issue": "Tile diamond overlap: GEM.tile in Metal.tsx puts a 62px-wide diamond at right:-10/bottom:-12 inside a tile that is only 140-175px wide. The value text column is flex:1 up to the right padding, so any value longer than about 12 characters runs over the diamond. On the chosen tile the diamond is drawn at opacity 0.9 with white facets, so the text over it loses contrast."
+}

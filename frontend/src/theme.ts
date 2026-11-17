@@ -176,8 +176,30 @@ const dark = {
   // Home share card: royal blue with a soft periwinkle glow and white glass (same in both palettes).
   custom_royalFrom: "#3561F0", custom_royalMid: "#2344CC", custom_royalTo: "#142B8C", custom_royalGlow: "#9DB6FF",
   custom_royalInk: "#DCE5FF", custom_royalDeep: "#132A86", custom_royalGlass: "rgba(255,255,255,0.12)", custom_royalLine: "rgba(255,255,255,0.24)",
-  custom_rankBgFrom: "#111116", custom_rankBgMid: "#0A0A0E", custom_rankBgTo: "#0A0709", custom_rankBgGlow: "rgba(153,27,27,0.13)",
-  custom_rankPanelSheen: "rgba(255,255,255,0.035)",
+  // Rank page stays pure black; only the cards carry colour.
+  custom_rankBg: "#000000", custom_rankPanelSheen: "rgba(255,255,255,0.035)",
+  // Rank tool tiles: brushed graphite metal, a broad diagonal sheen, a bevelled top edge, a soft shade at the foot.
+  custom_metalMid: "#151619", custom_metalEdge: "rgba(255,255,255,0.10)",
+  custom_metalSheen: "rgba(255,255,255,0.14)", custom_metalSheenSoft: "rgba(255,255,255,0.05)", custom_metalBevel: "rgba(255,255,255,0.34)", custom_metalShade: "rgba(0,0,0,0.38)",
+  // Rank Card: a quiet black metal card (soft graphite corner → black) with a hairline diamond watermark.
+  custom_eliteFrom: "#1F1F23", custom_eliteMid: "#121215", custom_eliteTo: "#0B0B0D", custom_eliteLine: "rgba(255,255,255,0.09)",
+  // Rank tool jewels: each tile is graphite mixed into its own colour. from/mid/to = the tile's diagonal, glow (+glow2) = the light
+  // behind its diamond, line = accent, ink = light text on it, soft = chosen icon fill (same in both palettes).
+  custom_maroonFrom: "#25252A", custom_maroonMid: "#170B10", custom_maroonTo: "#4A1122", custom_maroonGlow: "#C0244F", custom_maroonLine: "#E0557B",
+  custom_maroonInk: "#F7AFC2", custom_maroonSoft: "rgba(224,85,123,0.20)",
+  custom_indigoFrom: "#24242C", custom_indigoMid: "#100E1F", custom_indigoTo: "#271C6E", custom_indigoGlow: "#7A52FF", custom_indigoGlow2: "#2F6BFF", custom_indigoLine: "#8E80FF",
+  custom_indigoInk: "#C9C2FF", custom_indigoSoft: "rgba(142,128,255,0.20)",
+  custom_tealFrom: "#232629", custom_tealMid: "#0A1516", custom_tealTo: "#0B4A45", custom_tealGlow: "#14B8A6", custom_tealLine: "#2DD4BF",
+  custom_tealInk: "#9CF2E3", custom_tealSoft: "rgba(45,212,191,0.18)",
+  custom_pinkFrom: "#262429", custom_pinkMid: "#180A14", custom_pinkTo: "#5A1347", custom_pinkGlow: "#EC4899", custom_pinkLine: "#F472B6",
+  custom_pinkInk: "#FBBCDD", custom_pinkSoft: "rgba(244,114,182,0.20)",
+  custom_champFrom: "#28282C", custom_champMid: "#141315", custom_champTo: "#47330F", custom_champGlow: "#D9A54A", custom_champLine: "#E8C273",
+  custom_champInk: "#F5DCA0", custom_champSoft: "rgba(232,194,115,0.18)",
+  // Medal coins for list positions 1-3 (light, middle, deep, ink) and the soft wash of their rows.
+  custom_medalGoldLight: "#FFF0C2", custom_medalGold: "#E7C26B", custom_medalGoldDeep: "#9A7426", custom_medalGoldInk: "#2A1D05",
+  custom_medalSilverLight: "#FFFFFF", custom_medalSilver: "#CDD5E2", custom_medalSilverDeep: "#7C879B", custom_medalSilverInk: "#18202E",
+  custom_medalBronzeLight: "#F8D3AE", custom_medalBronze: "#D08D55", custom_medalBronzeDeep: "#7E4A22", custom_medalBronzeInk: "#2A1508",
+  custom_washGold: "rgba(231,194,107,0.14)", custom_washSilver: "rgba(205,213,226,0.10)", custom_washBronze: "rgba(208,141,85,0.12)",
 };
 
 export type ThemeColors = typeof dark;
@@ -235,7 +257,7 @@ export const colors = light;
 export const rankColors: ThemeColors = {
   ...light,
   surface: "#0A0A0E", onSurface: "#E6E8EE", onSurfaceInverse: "#0A0A0E", custom_softText: "#C3C6D0",
-  muted: "#8F92A3", custom_dim: "#62657A", custom_eyebrow: "#9095AB",
+  muted: "#8F92A3", custom_dim: "#868A9C", custom_eyebrow: "#9095AB",
   custom_card: "#121218", custom_cardRaised: "#1A1A23", custom_cardLine: "#23232E", custom_cardLineStrong: "#30303E", custom_barLine: "#1D1D27",
   brandText: "#F4A3AE", brandPrimary: "#B3172F", onBrandPrimary: "#FFFFFF",
   success: "#6EE7B7", custom_successSoft: "#0E3A2D", error: "#FCA5A5", custom_errorSoft: "#3A1418",
