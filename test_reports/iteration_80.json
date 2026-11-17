@@ -1,0 +1,41 @@
+{
+  "summary": "Rank Predictor: tested the iter79 fixes and Phase 2. Backend: 46/46 pytest pass (23 existing in test_rank_predictor.py, which needed no changes, plus 23 new in test_rank_phase2.py). Confirmed: a male UP student is blocked from HS and Female-only seats at NIT Jalandhar with every cell in=false, and OS-N stays open. Delhi region seats at NSUT (inst 112) are blocked for a UP student, and Outside Delhi seats are blocked for a Delhi student. The CRL upper bound is capped at 1,538,468 for marks -75 and for percentile 0. At 120 and 180 marks the 'All' list mixes 20 Borderline, 15 Likely and 15 Safe. Meta has 19 shifts, '2025 R6' and the JoSAA 2025 and BITS sources. Shift 22 Jan S2 gives a better rank (8,435–8,935 vs 13,029–14,029); shift 'bad' -> 422. BITSAT 280 gives 47/50, best Goa CS 274, target Pilani ECE +9; the campus and degree filters narrow only the list; 400 and -131 -> 422. Pilani cutoffs match the official BITS page for 2022–2026. Frontend (390x844, QA learner, read-only): every requested flow works. Checked: shift chip row scrolls sideways and highlights the matching level; tapping a level clears the shift; dark Rank Card with CRL, percentile, uppercase summary and '№ 8,685 / 15,38,468'; WhatsApp share opens api.whatsapp.com/send?text=... with the CRL; stars turn gold and the count updates; shortlist survives a page reload; shortlist sheet (JEE/BITSAT tags, remove, empty state, share, a JEE item opens the college sheet); college sheet HS and Female-only lines turn red 'Ye raasta aapke liye nahi', branch detail sits above the table, '2025 R6' column present; full BITSAT flow (errors for 500 and empty, collapsed line, card, share, campus and degree chips, history, star, near list, rest 39 at score 200); chart line 99 seats have stars; trend colours red rgb(220,38,38) and green rgb(21,128,61); touch targets: chips and segmented items 44px tall, stars 44x44. Home, My Tests and Mission tabs open. No red screen and no page errors, only the known 401 from /api/jl/auth/refresh. No deprecated Expo packages detected.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rank/predict", "issue": "Item y26 is the JoSAA last-round close (s.jclose), but the row shows the best-path close, which is often CSAB. 39 of 150 items at 120/180/240 marks differ, e.g. NIT Delhi Aerospace shows 'Closing 17,362 CRL · CSAB 2' next to the trend '2025: 13,389 → 2026: 10,870'. Comparing JoSAA final with JoSAA final is fair, but the user cannot tell which round the trend uses. Reference: rank_predictor.py:350"},
+      {"endpoint": "POST /api/rank/predict", "issue": "When a shift is chosen, result.spread still says 'Tough paper hota to rank lagbhag 9,702, Easy ... 18,779', while the card for the Tough shift 22 Jan S2 shows ~8,685. The two numbers contradict each other. Hide or reword the spread when a shift is set."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Shortlist sheet", "issues": ["BITSAT rows render dimmed because the Press is disabled when there is no open() (ShortlistSheet.tsx:23). The title, sub-line and Likely tag look greyed out and have low contrast, unlike the JEE rows. Keep full opacity, e.g. render a plain View when the row cannot be tapped."]},
+      {"screen": "Seat trend line", "issues": ["Tiny changes get a direction label: '2025: 11,710 → 2026: 11,720 ↑ aasaan hua' (10 ranks). Consider a threshold such as <1-2% = 'lagbhag same', like BITSAT's '2025 jitna hi'.", "Arrows mean opposite things on the two tabs: on JEE '↓' means tougher (closing rank went down), on BITSAT '↑' means tougher (cutoff went up). The words and colours are right, but this may confuse users."]},
+      {"screen": "Shortlist -> college sheet", "issues": ["Opening a JEE item closes the shortlist sheet, and closing the college sheet goes back to the list, not to the shortlist. This is acceptable, but consider reopening the shortlist."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_predictor.py", "/app/backend/tests/test_rank_phase2.py", "/app/test_reports/pytest/rank_iter80.xml"],
+  "action_items": [
+    "Label which round the trend uses (e.g. '2025 R6 → 2026 R5 (JoSAA)'), or compare y25 with the same round as the shown close (rank_predictor.py:350, SeatList trend).",
+    "When form.shift is set, drop or reword result.spread ('Tough/Easy paper hota to ...'), because the shift table already decides the rank.",
+    "ShortlistSheet: BITSAT rows should not look disabled (full opacity / plain View).",
+    "Optional: add a 'lagbhag same' threshold to the JEE trend label."
+  ],
+  "critical_code_review_comments": [
+    "blocked() in rank_predictor.py covers F, HS, OS (home state = institute state), DL, OD and GO/JK/LA quotas. Cells use `not block and ...`, which is correct.",
+    "rank_bitsat.py: compact and correct. Pydantic Literal filters; cleared_all/best/target are computed over ALL rows, as specified. best = every[0] is the highest cutoff cleared (ties broken by id).",
+    "shortlist.ts: a useSyncExternalStore module store saved to storage. Newest first, capped at 50. load() merges stored items with in-memory ones.",
+    "share.ts uses Linking.openURL(api.whatsapp.com) on web and whatsapp:// on native. Fine.",
+    "Data spot-check against the official BITS page (crawler): Pilani CS 2022–2026 [320,331,327,304,308], Pilani B.Pharm [125,153,165,168,200], Pilani ECE [279,296,314,285,289], Goa CS [286,295,301,274,274], Goa Electronics & Computer [–,–,–,262,266], Hyd B.Pharm [109,135,161,151,200] all match. The crawler reported Hyd CS 2024 as 270 while the JSON has 298. This is most likely a crawler extraction error (2024 was the peak year everywhere else), but please confirm by hand."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_phase2.py"],
+  "success_rate": {"backend": "100% (46/46)", "frontend": "100% of requested flows working; 2 minor logic/UX inconsistencies + 1 contrast issue"},
+  "seed_data_creation": "None. Rank endpoints are read-only. Shortlist entries were only in each browser context's localStorage and were removed in-test. The QA learner was used read-only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry: wait ~2.5s, click first input and keyboard.type the phone, click [data-testid=entry-pin-input] and type the PIN, then click entry-continue-button (page.fill did not enable the button). The DSheet slides in for ~1.5s, so wait before clicking inside it. Backdrops: rank-college-backdrop, rank-shortlist-backdrop. To capture WhatsApp share, use add_init_script to override window.open. NSUT Delhi = inst 112 (DELHI type). BITSAT list rows: bitsat-item-N, bitsat-near-N, bitsat-rest-N.",
+  "rca_of_issue": "Trend mismatch: item() sets y26 = s.jclose (JoSAA final round), while close/round come from the best path (often CSAB), so the row's 'Closing X' and the trend's '2026: Y' can differ."
+}

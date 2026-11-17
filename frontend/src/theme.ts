@@ -165,6 +165,13 @@ const dark = {
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
+  // Rank Card: brushed graphite with a navy glow, silver serif and an electric-blue hairline (same in both palettes).
+  custom_rankFrom: "#1C1D22", custom_rankMid: "#0E0F12", custom_rankTo: "#0B1730", custom_rankGlow: "rgba(37,99,235,0.30)",
+  custom_rankSheen: "rgba(255,255,255,0.11)", custom_rankBrush: "rgba(255,255,255,0.022)", custom_rankChrome: "rgba(255,255,255,0.22)",
+  custom_rankSilver: "#E2E8F0", custom_rankSilverMuted: "#94A3B8", custom_rankBlue: "#5B8CFF", custom_rankLine: "rgba(148,163,184,0.22)",
+  custom_whatsapp: "#1FA855",
+  custom_rankBgFrom: "#111116", custom_rankBgMid: "#0A0A0E", custom_rankBgTo: "#060A14", custom_rankBgGlow: "rgba(37,99,235,0.16)",
+  custom_rankPanelSheen: "rgba(255,255,255,0.035)",
 };
 
 export type ThemeColors = typeof dark;
@@ -217,6 +224,21 @@ export const defaultScheme = "light" satisfies ColorScheme;
 Appearance.setColorScheme?.(defaultScheme); // academic screens are always the light palette
 
 export const colors = light;
+
+// Rank tab: the Rank Card's dark brushed-metal world carried across the whole tab and the sheets it opens.
+export const rankColors: ThemeColors = {
+  ...light,
+  surface: "#0A0A0E", onSurface: "#E6E8EE", onSurfaceInverse: "#0A0A0E", custom_softText: "#C3C6D0",
+  muted: "#8F92A3", custom_dim: "#62657A", custom_eyebrow: "#9095AB",
+  custom_card: "#121218", custom_cardRaised: "#1A1A23", custom_cardLine: "#23232E", custom_cardLineStrong: "#30303E", custom_barLine: "#1D1D27",
+  brandText: "#7DA2FF", brandPrimary: "#2563EB", onBrandPrimary: "#FFFFFF",
+  success: "#6EE7B7", custom_successSoft: "#0E3A2D", error: "#FCA5A5", custom_errorSoft: "#3A1418",
+  warning: "#FCD34D", custom_warningSoft: "#33270C", info: "#93C5FD", custom_infoSoft: "#151B2E",
+  custom_flame: "#FCD34D", custom_flameSoft: "#33270C", custom_savedBlue: "#93C5FD", custom_webSavedSoft: "#14213F",
+  custom_gold: "#E9C46A", custom_goldSoft: "#2E2712", custom_royalMaroon: "#F9A8C0", custom_webMaroonSoft: "#36141F",
+  custom_qMarked: "#5EEAD4", custom_qMarkedSoft: "#0F2E2B", custom_webLearningCompleted: "#C4B5FD", custom_webCompletedSoft: "#231B3D",
+  custom_qFreshLine: "#3A3A48", custom_shade: "rgba(0,0,0,0.72)",
+};
 
 // Rapid Fire is its own world: the Blood Red Arena. Academic tokens above never recolour it.
 // Shining blood red is the stage, teal is only for things you press, gold is only for wins, rewards and special frames.

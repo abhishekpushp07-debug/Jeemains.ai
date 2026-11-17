@@ -443,6 +443,7 @@ from leagues import make_router as make_leagues  # noqa: E402
 from cups import make_router as make_cups  # noqa: E402
 from squads import make_router as make_squads  # noqa: E402
 from pin_reset import make_pin_reset  # noqa: E402
+from rank_predictor import make_router as make_rank  # noqa: E402
 duel_router, duel_api = make_duels(db, rf_user, public_card, award)
 api.include_router(duel_router)
 api.include_router(make_social(db, rf_user))
@@ -460,6 +461,7 @@ api.include_router(branding_router)
 api.include_router(marketing_router)
 api.include_router(legal_router)
 api.include_router(arena_web_router)
+api.include_router(make_rank())
 api.include_router(make_access_router(db, lambda: http))
 app.include_router(api)
 install_access_guard(app, db)

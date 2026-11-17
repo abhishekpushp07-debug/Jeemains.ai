@@ -258,5 +258,56 @@
     "accessibility": "Ensure text contrast ratio >= 4.5:1 (WCAG AA). Buttons must have explicit focus and hover states.",
     "testing_attributes": "Add data-testid to all interactive components in kebab-case format (e.g. data-testid='format-toggle-9-16', data-testid='play-video-btn').",
     "code_language": "Use JavaScript / TypeScript React components (.js or .tsx files) matching existing repository structure."
+  },
+  "rank_card_phase2": {
+    "personality_one_liner": "A clean, utilitarian light-themed prep app featuring a highly premium, dark brushed-metal luxury 'Rank Card' for results.",
+    "typography": {
+      "displayFontFamily": "Figtree",
+      "textFontFamily": "Figtree",
+      "rankCardFontFamily": "Platform.OS === 'ios' ? 'Georgia' : 'serif'",
+      "scale": {
+        "sm": 12,
+        "base": 14,
+        "lg": 16,
+        "xl": 20,
+        "2xl": 24
+      }
+    },
+    "screens": [
+      {
+        "name": "RankPredictor",
+        "purpose": "Calculate and display JEE/BITSAT expected ranks and colleges while staying extremely lightweight.",
+        "states": {
+          "loading": "Standard spinner with 'Crunching latest cutoffs...'",
+          "empty": "Input form to enter marks, shift, category, etc.",
+          "error": "Text error message + Retry button"
+        },
+        "layout": "Top section: Input form (Light theme, Figtree). Shift picker is a horizontal ScrollView of pill chips. Middle section: The Luxury Rank Card (Dark metallic gradient, system serif). Bottom section: College/Program list (Light theme). Each row has a shortlist star (right-aligned, >=44px hit area) and trend arrows (↑ / ↓) comparing 2025 to 2026."
+      }
+    ],
+    "instructions_to_main_agent": [
+      "CRITICAL: Absolutely NO images, NO SVGs, and NO custom font files for the Rank Card. This must remain an extremely lightweight implementation.",
+      "Do NOT redesign the rest of the app. The main list, inputs, and background must stay in the existing Light theme (Figtree font, standard greys/reds).",
+      "RANK CARD IMPLEMENTATION: Create the dark luxury membership card using a `<View>` with `backgroundColor: '#0A192F'` (Navy Glow base) and wrap it with an `expo-linear-gradient` overlay simulating diagonal metallic sheen (stops like `['rgba(255,255,255,0.15)', 'transparent', 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.1)']`, start `[0,0]`, end `[1,1]`).",
+      "RANK CARD TYPOGRAPHY: Force system serif for the card text using `fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif'`. Use `color: '#E2E8F0'` (Silver). For the 'DIAMOND CIRCLE' style labels, use uppercase, `fontSize: 12`, and `letterSpacing: 3` to give it a tracked-out founding member look.",
+      "RANK CARD ACCENTS: Add a 1px divider line using the electric blue accent (`#2563EB`). Put the serial number/CRL (e.g., '№ 14,500 / 14M') in the bottom right corner with the same blue color and system serif.",
+      "SHIFT PICKER: Render as a horizontal `ScrollView` with chips. Unselected: `surfaceSecondary` background. Selected: `brandTertiary` background with a 1px `brandPrimary` border.",
+      "TREND ARROWS & SHORTLIST: In the seat rows, use simple text characters `↑` (green/success) and `↓` (red/error) to show the 2025->2026 trend. The shortlist star should be an `Ionicons` star (`star-outline` for inactive/muted, `star` for active/brand yellow), wrapped in a 44x44 Pressable.",
+      "WHATSAPP SHARE: Keep it native and lightweight. Add a simple share button (e.g., text 'Share on WhatsApp' with an Ionicons `logo-whatsapp` icon) located beneath the Rank Card or inside the Shortlist Sheet, using WhatsApp's standard green (#25D366) or the app's brand color."
+    ],
+    "glassmorphism": {
+      "enabled": "false",
+      "do's": [],
+      "dont's": [
+        "Do not use glass/blur effects. Stick strictly to flat colors and linear gradients for the metal card effect to keep it lightweight."
+      ]
+    },
+    "colors": {
+      "rankCard_bg": "#121214",
+      "rankCard_glow": "#0A192F",
+      "rankCard_accentBlue": "#2563EB",
+      "rankCard_silver": "#E2E8F0",
+      "rankCard_silverMuted": "#94A3B8"
+    }
   }
 }

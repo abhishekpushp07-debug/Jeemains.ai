@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Circle, Defs, LinearGradient as SvgGradient, Stop } from "react-native-svg";
 import Animated, { Easing, SlideInDown, FadeIn, useAnimatedProps, useReducedMotion, useSharedValue, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { colors, pastel, radius, SeriesTone, space } from "@/src/theme";
+import { colors, pastel, radius, SeriesTone, space, useTheme } from "@/src/theme";
 import { IconName, Press, T } from "./ui";
 import { Glyph } from "./Glyph";
 
@@ -162,19 +162,20 @@ export function DSheet({ visible, onClose, title, children, testID, closeTestID,
 }) {
   const insets = useSafeAreaInsets();
   const reduced = useReducedMotion();
+  const { colors: c } = useTheme(); // follows the screen's palette (the dark Rank tab opens dark sheets)
   if (!visible) return null;
   // A transparent Modal covers the whole window (tab bar included), wherever the sheet is declared.
   return <Modal visible transparent animationType="none" statusBarTranslucent onRequestClose={onClose}>
     <View style={styles.sheetLayer}>
     <Animated.View entering={reduced ? undefined : FadeIn.duration(160)} style={StyleSheet.absoluteFill}>
-      <Pressable testID={(testID ?? "sheet") + "-backdrop"} accessibilityLabel="Close" onPress={onClose} style={[StyleSheet.absoluteFill, { backgroundColor: colors.custom_shade }]} />
+      <Pressable testID={(testID ?? "sheet") + "-backdrop"} accessibilityLabel="Close" onPress={onClose} style={[StyleSheet.absoluteFill, { backgroundColor: c.custom_shade }]} />
     </Animated.View>
-    <Animated.View testID={testID} entering={reduced ? undefined : SlideInDown.duration(260)} style={[styles.sheet, { paddingBottom: insets.bottom + space.lg }]}>
-      <View style={styles.handle} />
+    <Animated.View testID={testID} entering={reduced ? undefined : SlideInDown.duration(260)} style={[styles.sheet, { backgroundColor: c.custom_card, paddingBottom: insets.bottom + space.lg }]}>
+      <View style={[styles.handle, { backgroundColor: c.custom_qFreshLine }]} />
       {title ? <View style={styles.sheetTitle}>
         <T w="heavy" size={19} style={{ flex: 1 }}>{title}</T>
-        <Press testID={closeTestID ?? (testID ? `${testID}-close` : undefined)} onPress={onClose} accessibilityLabel="Close" style={styles.sheetClose}>
-          <Glyph name="close" size={18} color={colors.onSurface} stroke={1.8} />
+        <Press testID={closeTestID ?? (testID ? `${testID}-close` : undefined)} onPress={onClose} accessibilityLabel="Close" style={[styles.sheetClose, { backgroundColor: c.custom_cardRaised }]}>
+          <Glyph name="close" size={18} color={c.onSurface} stroke={1.8} />
         </Press>
       </View> : null}
       {scroll ? <ScrollView contentContainerStyle={{ gap: space.md, paddingBottom: space.xs }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">{children}</ScrollView>

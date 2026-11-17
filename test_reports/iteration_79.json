@@ -1,0 +1,46 @@
+{
+  "summary": "Rank Predictor Phase 1 (RANK tab) tested end-to-end. Backend: 23/23 pytest pass (meta, predict marks/percentile/PwD/Delhi, validation 422s, college rows/all/quota/gender/seat switching, every institute index answers without 500). Frontend (390x844, logged in as QA learner, read-only): predictor renders on RANK tab; empty/invalid validation messages; 180 marks -> collapsed line '180 marks · Normal · General' + Edit, percentile 99.08–99.15, CRL 13,029–14,029 (Indian format), spread line; 25 rows/page, Page 2 shows different rows (rank-seat-25..), segments NIT/IIIT/GFTI/Delhi with counts, list branch picker (Mechanical) refreshes list and counts; near list 5 rows with '+N marks'; seat tap -> college sheet with table, highlighted cells, 'aapki rank Rx se andar aati hai', quota/gender/seat chips switch, Show all branches (10 -> 12), branch detail opening/closing per round, official links, close + reopen works; percentile-only 97.4 OBC-NCL + UP + PwD shows OBC rank + OBC-NCL-PwD rank, no spread; Percentile chart 50 lines (99.9 -> 80), line 99 opens 20 seats inline, one open at a time, SC chip reloads seats, Civil branch filter reloads, chart seat -> college sheet; BITSAT shows 'BITSAT predictor: Coming next.'; 'All India series' -> /live, 'My results' -> /tests?tab=completed; Home/My Tests/Mission/Rapid Fire tabs open. No console errors (only pre-existing 401 prefetch). No deprecated Expo packages detected. Main issues: college sheet marks ineligible paths (Home state of another state, Female-only for a non-female student) as green 'andar aati hai'; chip touch targets 40px; CRL upper bound can exceed total candidates at -75 marks.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rank/college", "issue": "Quota options always include HS/OS/AI (and gender options include F) regardless of student's eligibility. For a male UP student at NIT Rourkela, quota=HS or gender=F returns highlighted 'in' cells and line 'B.Tech in Mathematics and Computing: aapki rank R1 se andar aati hai.' though he cannot take Odisha Home-state or Female-only seats. Either hide ineligible options, or keep them but set in=false and change the line to e.g. 'Ye raasta aapke liye nahi (Home state Odisha / Female-only)'. Reference: rank_predictor.py:425-433, 449-459."},
+      {"endpoint": "POST /api/rank/predict", "issue": "marks=-75 / percentile=0 returns crl [1537968, 1538968] while meta.candidates=1538468 (hi exceeds total candidates). Clamp hi to N (Student.__init__, rank_predictor.py:228-229)."},
+      {"endpoint": "POST /api/rank/predict", "issue": "Chance-tag diversity: list is ordered purely by demand and capped at 50, so at 120 marks all 50 'All' items are Borderline via CSAB 2, at 180 marks page 1 is 25/25 Borderline and at 240 marks all 50 are Safe. Not a crash, but the user rarely sees a Safe/Likely mix. Product decision for main agent."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank tab", "issues": [
+        "Toggle chips (level, category, Female, PwD, Home state, Branch, segments, list-branch, chart category, college quota/gender/seat) are 40px tall (src/rank/controls.tsx:69 minHeight: 40) - below the 44px touch target.",
+        "Segmented JEE Main/BITSAT and My marks/Percentile chart items measure 42px tall (<44).",
+        "Collapsed summary truncates when state is set ('97.4 percentile · OBC-NCL · PwD · Uttar Pra...'); acceptable but consider 2 lines.",
+        "After Edit -> Show the previously selected segment (e.g. NIT) is kept while page resets to 1; fine but confirm it is intended.",
+        "College sheet opens with the tapped branch's detail pre-expanded at the bottom of the sheet (below table) - user must scroll to see it; OK but not obvious."
+      ]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_predictor.py", "/app/test_reports/pytest/rank_predictor.xml"],
+  "action_items": [
+    "College sheet: do not show ineligible paths as green/'andar aati hai' (Home state of another state, Female-only for non-female, Delhi region for non-Delhi). Hide those chips or mark cells in=false with a clear line (rank_predictor.py college()).",
+    "Clamp CRL upper bound to total candidates in Student.__init__.",
+    "Raise Toggle minHeight to 44 in src/rank/controls.tsx (and Segmented items to 44).",
+    "Optional: rethink ordering so 'All' list mixes Safe/Likely/Borderline (e.g. sort by tag then demand, or interleave)."
+  ],
+  "critical_code_review_comments": [
+    "rank_predictor.py: clean in-memory lookups, Pydantic validation and lru_cache on ranked lists; meta/predict/college are sync functions (fine, CPU-only, ms latency).",
+    "college(): options.quota built with `s.quota in (AI,HS,OS,DL,OD) or st.eligible(s)` - eligibility not applied to HS/OS/DL/OD, causing the misleading highlight above.",
+    "predict with page_size 20 and page 2 returns empty items with pages=1 (only chart uses page_size 20, page 1) - harmless.",
+    "Unknown branch names are silently dropped (validator) - fine.",
+    "Frontend uses BACKEND from src/api/client (env based); all API calls have loading/error/retry states; all text in <T>; testIDs present for every listed element."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_predictor.py"],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "100% of requested flows working; 1 medium logic issue (ineligible path highlight), 2 minor"},
+  "seed_data_creation": "None. Rank endpoints are read-only; QA learner used read-only (no tests started/submitted).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login 7004186276 / 5524 then tap [data-testid=tab-rank]. Rapid Fire tab replaces the main tab bar (tab-rank not present there) - navigate back via URL. Chart line testIDs use JS number formatting (rank-chart-line-99, -99.9, -80). Picker option slugs: rank-list-branch-picker-mechanical, rank-state-picker-uttar-pradesh. Each browser_automation call is a fresh context, so saved form (rank.form.v1) is not restored across calls.",
+  "rca_of_issue": "Ineligible-path highlight: college() computes cell 'in' only by rank vs closing (rank_predictor.py:449-450) and never calls st.eligible(s) for the selected quota/gender path, so any path the student picks is judged purely on rank."
+}

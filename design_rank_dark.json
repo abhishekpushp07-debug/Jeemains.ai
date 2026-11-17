@@ -1,0 +1,115 @@
+{
+  "app_name": "JEELIVE.AI Rank Predictor",
+  "personality": "6 Glass / Luxe DARK",
+  "personality_one_liner": "A cinematic, dark luxury experience evoking an exclusive brushed-metal membership card with sharp chrome typography and electric blue accents.",
+  "color": {
+    "surface": "#0A0A0E",
+    "onSurface": "#E3E4E8",
+    "surfaceSecondary": "#121218",
+    "onSurfaceSecondary": "#E3E4E8",
+    "surfaceTertiary": "#1B1B24",
+    "onSurfaceTertiary": "#D1D2DA",
+    "surfaceInverse": "#E3E4E8",
+    "onSurfaceInverse": "#0A0A0E",
+    "brand": "#1D4ED8",
+    "brandPrimary": "#2563EB",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#3B82F6",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#1E3A8A",
+    "onBrandTertiary": "#93C5FD",
+    "success": "#064E3B",
+    "onSuccess": "#6EE7B7",
+    "warning": "#78350F",
+    "onWarning": "#FDE68A",
+    "error": "#7F1D1D",
+    "onError": "#FECACA",
+    "info": "#1E3A8A",
+    "onInfo": "#93C5FD",
+    "border": "#272735",
+    "borderStrong": "#3B82F6",
+    "divider": "#191922",
+    "muted": "#8A8B9D",
+    "eyebrow": "#606277"
+  },
+  "typography": {
+    "displayFontFamily": "Georgia",
+    "textFontFamily": "System",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Use generous margins around panels to emphasize the dark canvas. Inner padding of cards should feel premium (md to lg).",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "1",
+  "navigation": "stack_only",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": "true",
+    "do's": [
+      "Use subtle expo-blur on bottom sheet backdrops",
+      "Apply glass effect to the segmented control background if scrolling content goes underneath"
+    ],
+    "dont's": [
+      "Do not over-blur; the metal texture and solid dark shapes should remain the primary visual element"
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Rank Predictor Tab",
+      "purpose": "Provides the user with a luxurious, dark-themed rank prediction and college shortlist experience.",
+      "states": {
+        "loading": "Centered silver spinner on surface.",
+        "empty": "N/A - input panel always visible.",
+        "error": "Silver serif error text with a Royal Blue Retry button."
+      },
+      "layout": "Header -> Segmented Switches -> Input Panel -> Rank Card -> Top College-Branch List. Use expo-linear-gradient for a faint navy glow behind the Rank Card area."
+    }
+  ],
+  "images": {},
+  "instructions_to_main_agent": [
+    "NO IMAGES OR CUSTOM FONTS: Rely purely on 'Georgia' for iOS/Web and 'serif' for Android, system sans-serif for body, and vector-icons.",
+    "PANEL TREATMENT: Raised panels use surfaceSecondary (#121218). Section titles inside panels must use an electric blue hairline border (e.g., borderLeftWidth: 2, borderColor: '#2563EB') with silver, widely tracked uppercase serif text (letterSpacing: 2).",
+    "RANK CARD THEME: Brushed metal dark charcoal, silver serif CRL, blue hairline rule, tracked caps percentile, and a subtle electric blue glow (#1E3A8A) using expo-linear-gradient behind it.",
+    "CHIP DESIGN (NEUTRAL): Background surfaceTertiary (#1B1B24), text onSurfaceTertiary (#D1D2DA), border #272735.",
+    "CHIP DESIGN (TINTED / CHANCE): Safe (bg #064E3B, text #6EE7B7), Likely (bg #78350F, text #FDE68A), Borderline (bg #7F1D1D, text #FECACA).",
+    "SEGMENTED SWITCHES: Background surfaceTertiary (#1B1B24), active thumb uses surface (#0A0A0E) with borderStrong (#3B82F6) outline, inactive text muted (#8A8B9D), active text onSurface (#E3E4E8).",
+    "BOTTOM SHEETS: Background surfaceSecondary (#121218), drag handle muted (#8A8B9D). Table highlighted cells use a dark emerald (success bg #064E3B)."
+  ],
+  "haptics": {
+    "primary_button": "impactMedium",
+    "segment_switch": "selection",
+    "chip_toggle": "selection",
+    "bottom_sheet_open": "impactLight"
+  }
+}

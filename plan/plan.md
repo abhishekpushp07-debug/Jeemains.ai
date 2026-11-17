@@ -1,142 +1,259 @@
-# JEELIVE.AI: website aur app, ek brand, ek ID, ek content
+# JEELIVE.AI Rank: ek halki screen par JEE Main ki rank, percentile aur college-branch
 
-JEELIVE.AI ki website aur Android app ko is tarah joda jaayega ki student kahin se bhi aaye, use wahi naam, wahi ID, wahi tests aur wahi Rapid Fire mile.
-Website par naya exam, section ya paper daalte hi wo app mein bina naye update ke dikhega, aur app ka poora Rapid Fire arena website ke students ke liye browser mein bhi khulega.
+Student apne expected marks (ya percentile) daalta hai aur usi ek screen par use JEE Main ki rank, percentile aur wo top 50 college-branch dikhte hain jo counselling ke aakhri round tak mil sakte hain.
+Poora feature sirf text aur rangeen segments se bana hai, 2026 ke official data (NTA, JoSAA, CSAB, JAC Delhi) par chalta hai, aur app ko bhaari nahi karta.
 
 ## Kiske liye
-- **Owner:** jo website ke panel se papers, sections aur exams daalta hai aur chahta hai ki app apne aap saath chale.
-- **App ke students:** jinhe website par aaya naya content turant chahiye.
-- **Website ke students:** laptop, iPhone ya bina app wale students, jinhe aaj Rapid Fire milta hi nahi.
+- **JEE Main 2027 ke aspirants:** "itne marks aaye to kya milega" jaanne ke liye.
+- **Exam de chuke students:** answer key se nikle marks, ya result ka percentile daalkar.
+- **Counselling ke waqt:** kaun sa college, kaun si branch, kis round mein band hui.
+- **Owner:** app ka X-factor, jo student ko baar-baar app par wapas laata hai.
 
 ## Core features aur experience
 
-### 1. Aaj kya juda hai, kya nahi
+### 1. Ek hi screen, bahut halka
+Ye is feature ke pakke niyam hain.
 
-| Cheez | Aaj ki sthiti |
+- **Ek hi screen:** poora feature neeche ki bar ke **RANK** tab par rehta hai. App mein koi naya page nahi judta.
+- **Sab kuch wahin khulta hai:** branch filter, home state ki list, college ki detail aur percentile chart, sab isi screen par khulte aur band hote hain.
+- **Sirf text aur rang:** text, ank aur rangeen chip. Koi photo, college ka logo, tasveer, graph ya nayi artwork nahi.
+- **App mein koi bhaari cheez nahi judti:** koi nayi image, font ya data file app ke andar nahi rakhi jaati. APK mein sirf is ek screen ka code judta hai.
+- **Data server par:** colleges aur cutoff ka poora data server par rehta hai. Phone utna hi mangta hai jitna us waqt dikhana hai:
+  - list ke 25 line ek baar mein
+  - college ki detail sirf tap karne par
+  - percentile chart ke 20 line sirf us percentile ko kholne par
+- **Kam memory:** ek waqt mein 25 line hi screen par banti hain, isliye sasta phone bhi aaram se chalata hai.
+- **Baaki app ko haath nahi lagta:** Home, tests, My Tests, Mission, Rapid Fire aur neeche ki bar jaise hain waise hi rehte hain. Sirf RANK tab ka "coming soon" page badalta hai.
+- **Alag-thalag:** rank ka data na aaye ya network kamzor ho to sirf isi tab par message aur Retry dikhta hai. Baaki app chalti rehti hai.
+
+### 2. Research se kya nikla
+Feature inhi tathyon par bana hai. Jahan official data nahi hai, wahan saaf likha hai.
+
+| Sawaal | Research ka jawab |
 |---|---|
-| Account (phone + PIN) | Juda hai. App website ke hi account se sign in karta hai; student ki ID dono jagah ek hai. |
-| Tests, PYQ, mocks, All India series, results | Juda hai. App ye sab seedha website ke server se padhta hai; ek hi paper, ek hi result. |
-| Naya exam ya naya section | Juda nahi. App mein 3 exam (JEE Main, BITSAT, COMEDK) aur har exam ke 2 khaane pehle se tay hain. |
-| Rapid Fire | Sirf app mein. Ye app ke apne server par chalta hai; website par hai hi nahi. |
-| Naam | Alag: app JEECIRCLE.AI, website JEELIVE.AI. |
+| Kya NTA marks → percentile ki table deta hai? | Nahi. NTA sirf itna batata hai: April 2026 mein 99 percentile ke liye sabse tough shift mein **165** aur sabse easy shift mein **196** marks lage (31 marks ka fark). 98 percentile par fark 27 aur 97 par 26 marks tha. |
+| To marks → percentile kaise banega? | 2026 ki 19 shifts ke liye students ke public kiye hue marks-percentile se, jise NTA ke upar wale official numbers par fit kiya jaayega. |
+| Percentile → rank kitna pakka hai? | Kaafi pakka. 2026 mein 15,38,468 students baithe. 1 percentile = lagbhag 15,385 rank. |
+| Seedha formula kaafi hai? | Nahi. Formula General cutoff (93.4123549) par rank 1,01,349 deta hai, jabki NTA ki apni ginti wahan 96,873 hai. Isliye rank NTA ki ginti par fit hogi aur public scorecards se jaanchi jaayegi. |
+| Category rank ki official table hai? | Nahi. NTA sirf category-wise ginti deta hai (General 5,38,239; OBC 6,11,953; EWS 1,80,086; SC 1,56,038; ST 52,152; PwD 4,800) aur JEE Advanced cutoff ki ginti. Category rank inhi se aur public scorecards se estimate hogi. |
+| Marks se kitna sahi bataya ja sakta hai? | NTA ki shift tables ke hisaab se 80–85 percentile ke aas-paas **ek mark** hi lagbhag 0.5 percentile (7,000+ rank) hila deta hai. Isliye sirf marks se asli phailaav bada hota hai; percentile daalne par rank tight ho jaati hai. |
+| College cutoff kahan se? | JoSAA 2026 ke 5 round, CSAB Special 2026 ke 2 round, JAC Delhi 2026 ke 4 round + upgradation + spot round. Teeno ke official portal par round-wise opening/closing rank hai. |
+| Kaun si seat kis rank se bharti hai? | JoSAA: Open seat par CRL, EWS/OBC-NCL/SC/ST seat par category rank, PwD seat par PwD rank. CSAB Special aur JAC Delhi: har seat par CRL. |
 
-- Phase 1 neeche ki teen "juda nahi" wali cheezein jodta hai.
-- Server do hi rahenge: website ka (accounts, tests) aur app ka (Rapid Fire). Student ko ye ek hi jagah jaisa lagega. Kisi student ka data ek jagah se doosri jagah nahi le jaaya jaayega.
+### 3. Screen ka dhaancha
+Upar se neeche, ek hi screen par:
 
-### 2. Ek naam: JEELIVE.AI
-- App ka naam JEECIRCLE.AI se wapas **JEELIVE.AI** hoga. Ye in sab jagah badlega:
-  - phone par app ka naam aur khulte waqt ki splash screen
-  - app ke andar ka logo: website wala original JEELIVE.AI logo
-  - saare screens ka text (Home, Mission, Account, Rapid Fire)
-  - privacy aur account wale pages
-  - WhatsApp share aur invite ke message, aur link kholne par dikhne wale pages
-- Website ka naam jaisa hai waisa hi rahega.
+1. **Exam ka switch:** JEE Main | BITSAT. BITSAT chunne par sirf ek line: "Coming next".
+2. **Tareeke ka switch:** "My marks" | "Percentile chart".
+3. **Input ka hissa:** chhota card.
+4. **Result ka hissa:** bade ankon mein percentile aur rank.
+5. **List ka hissa:** college type ke rangeen segment, 25 line, page 1 / page 2.
+6. **Sabse neeche:** data ka note aur do chhote text link (All India series, My results), jo aaj ke page par button hain.
 
-### 3. Website par daala, app mein dikha
+- "Show" dabate hi input card sikudkar ek line ban jaata hai ("180 marks · Normal · General · Edit"), taaki result turant saamne aaye. "Edit" se card wapas khulta hai.
 
-| Website par owner kya karta hai | App mein kya hota hai |
+### 4. Student kya daalta hai
+
+| Field | Zaroori? | Na bhare to |
+|---|---|---|
+| Marks (300 mein se) | Marks ya percentile mein se koi ek | — |
+| Percentile | Marks ya percentile mein se koi ek | — |
+| Paper level: Tough / Normal / Easy | Optional | Normal |
+| Category: General, EWS, OBC-NCL, SC, ST | Optional | General |
+| Female | Optional (on/off) | Off |
+| PwD | Optional (on/off) | Off |
+| Home state | Optional | Koi nahi |
+| Branch | Optional | All branches |
+
+- Marks aur percentile ke khaane ek hi line mein, saath-saath. Paper level ke teen chip unke theek neeche.
+- Category, Female, PwD, home state aur branch chhote chip hain. Tap karne par chunaav wahin khulta hai.
+- **Sirf marks:** paper level ke hisaab se percentile aur rank nikalti hai.
+- **Sirf percentile:** rank seedha percentile se nikalti hai. Paper level ki zaroorat nahi rehti.
+- **Dono:** percentile se rank banti hai. Marks se ye bataya jaata hai ki paper Tough, Normal ya Easy jaisa tha. Dono aapas mein mel na khayein to halka sa "ek baar check kar lo" note aata hai.
+- Pichhli baar bhari hui cheezein phone par yaad rehti hain.
+
+### 5. Rank aur percentile ka result
+- Bada result:
+  - **Expected percentile** (range)
+  - **Expected rank (CRL)** (range)
+  - **Category rank** (range), agar category General nahi hai; PwD on ho to **PwD rank** bhi.
+- Range ki chaudai owner ke niyam se:
+
+| Expected rank | Rank ki range |
 |---|---|
-| Naya paper ya mock publish | List mein apne aap aata hai. Aaj bhi aisa hi hai. |
-| Purana document naye se replace | Naya attempt naye document se khulta hai. Aaj bhi aisa hi hai. |
-| All India series mein din ka test lagana | Apne aap aata hai. Aaj bhi aisa hi hai. |
-| Naya section banana (jaise "Sample papers") | **Naya:** us exam ke page par naya khaana apne aap ban jaata hai. |
-| Naya exam jodna | **Naya:** Home par naya tile apne aap aata hai. |
-| Exam ya section chhupana | **Naya:** app se bhi hat jaata hai. |
+| 2,000 se behtar | 200 se zyada chaudi nahi |
+| 2,000 se 10,000 | 500 se zyada chaudi nahi |
+| 10,000 se aage | 1,000 se zyada chaudi nahi |
 
-- **Home ka Practice grid:** website ki exam list se banega, usi kram mein. JEE Main, BITSAT aur COMEDK ke tile jaise aaj hain waise rahenge; naya exam unke baad apne tile mein aayega. All India tile bana rahega.
-- **Exam ka page:** website par bane sections dikhayega, har section apni list kholta hai. JEE Main mein "PYQ papers" sabse upar bana rahega.
-- **My Tests:** exam ke filter bhi isi list se banenge, taaki naye exam ke attempts wahan bhi dikhein.
-- **Kab dikhta hai:** list kholne par, screen par wapas aane par, ya neeche kheenchkar refresh karne par, kuch second ke andar. App ka naya update ya naya build nahi chahiye.
-- **Khaali section:** saaf likha hoga ki abhi koi paper nahi hai. Koi nakli paper nahi dikhega.
-- **Replace ke baad purane results:** jo student pehle wala paper de chuka hai, uska result waisa hi rahega jaisa website rakhti hai.
+- Percentile ki range rank ki range se mel khaati hai aur kabhi 0.5 se chaudi nahi hoti.
+- **Imaandaari ki line:** sirf marks daalne par ye range estimate ka beech ka hissa hai, guarantee nahi. Isliye theek neeche ek aur line aati hai: "Tough paper hota to rank lagbhag X, Easy paper hota to lagbhag Y."
+- Percentile daalne par ye doosri line nahi aati, kyunki rank tight hoti hai.
+- Namoona (numbers sirf samjhane ke liye):
 
-### 4. Rapid Fire website ke students ke liye (browser arena)
-- App ka poora Rapid Fire arena ek link par browser mein khulega: phone ka browser, iPhone aur laptop.
-- **Kya-kya milega:** lobby, Quick Match, Play Friends, Practice Rival, Solo Sprint, Gang, Knockout Cup, Cup Night, live match dekhna, Store, Trophy, diamonds aur cheer squads. Wahi blood-red arena, wahi entry show.
-- **Sign in:** wahi phone number aur PIN jo website aur app par chalta hai. Ek browser mein ek baar; uske baad seedha lobby.
-- **Wahi ID:** coins, diamonds, level, friends, gangs aur crowns wahi jo app mein hain. Browser mein jeeta diamond app mein dikhega, aur ulta bhi.
-- **Ek hi maidan:** app wale aur browser wale students ek-doosre ke saath khelte hain. Quick Match, leaderboard, Gang War aur Cup Night sabke liye ek hi hain.
-- **Sirf Rapid Fire:** browser arena mein tests nahi honge, kyunki tests website par pehle se hain. Arena ki bar ka Home button jeelive.ai par le jaayega.
-- **Naya account:** jiske paas account nahi, wo yahin phone + PIN se bana sakta hai. Wahi account website aur app par bhi chalega.
-- **Browser ki seemaayein:** vibration nahi hota; sound pehle tap ke baad chalu hota hai; share karne par WhatsApp khulta hai.
+```
+180 marks · Normal paper · General
+Expected percentile   98.97 – 99.03
+Expected rank (CRL)   14,900 – 15,900
+Paper ke hisaab se    Tough: ~9,000  ·  Easy: ~27,000
+```
 
-### 5. Website project ke liye taiyaar note
-- Website ek alag project hai, isliye uske andar ka badlaav usi project ki chat mein hoga. Is kaam ke saath ek copy-paste note milega jisme likha hoga:
-  - website ke Home aur menu mein **Rapid Fire** button kahan lagana hai aur kis link par bhejna hai
-  - naam aur logo dono jagah ek jaisa rakhne ke niyam
-  - Phase 2 ka seedha pravesh kaise banega (website login se arena, bina dobara PIN)
-- Jab tak website par button nahi lagta, wahi link students ko seedha bheja ja sakta hai.
+### 6. Top 50 college-branch
+- Result ke neeche wo **50 college-branch** jo is rank par counselling ke aakhri round tak mil sakte hain. **25-25 ke do page**, usi screen par.
+- Ek line = ek college ki ek branch. Jaise "MNNIT Allahabad · Electronics & Communication".
+- **Kaun si seat ginti mein aati hai:** student jin-jin seats ka haqdaar hai, sab jaanchi jaati hain:
+  - Open seats (sabke liye)
+  - apni category ki seats
+  - PwD on ho to PwD seats
+  - Female on ho to female-only seats
+  - home state diya ho to us state ke NIT ki home-state seats; baaki NIT mein other-state seats
+- Jis raaste se seat sabse aasaani se milti hai, wo line par likha hota hai. Jaise "Home state · OBC-NCL".
+- **"Aakhri round tak" ka matlab:** JoSAA Round 5, CSAB Round 1 aur CSAB Round 2 mein jo closing rank sabse door tak gayi. Delhi ke colleges ke liye JAC ka aakhri round, upgradation aur spot round.
+- **Kram:** sabse zyada maang wali seat sabse upar. Maang ka paimana: 2026 mein wo seat general list par kitni jaldi bhar gayi.
+- **Har line par (sirf text):**
+  - college ka naam aur type ka rangeen tag (NIT / IIIT / GFTI / Delhi)
+  - branch ka naam
+  - 2026 ki aakhri closing rank aur kis round mein band hui
+  - chance ka rangeen tag
 
-### 6. NEET: abhi band, baad mein alag app
-- Is app mein NEET band hi rahega. 7,585 NEET cards (Physics 2,610, Chemistry 2,095, Biology 2,880), 18 diagrams aur purana NEET record safe rakhe hain.
-- **Kya exact copy possible hai?** Haan. Rapid Fire ke screens aur game server kisi ek exam se bandhe nahi hain; NEET isi arena mein pehle chal chuka hai, abhi sirf uska switch band hai. NEET app = isi code ki copy + NEET chalu + NEET ka naam aur logo.
-- **Naye builder ko teen cheezein deni hongi:**
-  - cards ka pack (ZIP, pehle se bana hua)
-  - app ka poora code (saare screens, artwork, sounds) aur game server ka code: "exact UI" yahi hai
-  - ek guide: kya chalu karna hai, kaun sa naam aur rang badalna hai
-- **Jo apne aap copy nahi hota:**
-  - students ke accounts aur unke coins, diamonds, gangs
-  - NEET ke mock tests (ye bane hi nahi hain)
-- Aaj ka NEET pack Rapid Fire 2.0 se purana hai, isliye naya pack Phase 2 mein banega.
+| Tag | Rang | Matlab |
+|---|---|---|
+| Safe | Hara | Closing rank student ki rank se 15% ya zyada aage thi |
+| Likely | Neela | Closing rank student ki rank se aage thi, par 15% se kam |
+| Borderline | Narangi | Student ki range closing rank ko chhoo rahi hai, ya seat sirf CSAB / spot round mein khuli thi |
+
+- **Segments:** All · NIT · IIIT · GFTI · Delhi. Har segment ka apna rang. Har segment mein 50 tak.
+- **Branch filter:** "All branches" (default) aur 20 branch group. Ek ya kai chune ja sakte hain. Mechanical chunne par Mechanical ke top 50 college dikhte hain.
+  - 20 group: Computer Science, AI & Data Science, Information Technology, Mathematics & Computing, Electronics & Communication, Electrical, Instrumentation, Mechanical, Civil, Chemical, Metallurgy & Materials, Production & Industrial, Aerospace, Biotechnology, Engineering Physics, Mining, Robotics & Mechatronics, Environmental, Food/Textile/Ceramic, Science & integrated courses.
+- **Bas thoda sa door:** list ke neeche 5 seats jo 10% tak ke fark se chhoot rahi hain, saath mein "lagbhag +N marks aur".
+- 50 se kam asli seats hon to utni hi dikhti hain. Ginti poori karne ke liye kuch joda nahi jaata.
+
+### 7. College ki detail (usi screen par pop-up)
+- Kisi bhi line par tap karne se us college ki detail **usi screen ke upar pop-up panel** mein khulti hai. Band karte hi student list mein wahin lautta hai jahan tha.
+- **Upar:** college ka naam, type, shehar, aur student ki rank.
+- **Text table:** us college ki 10 sabse zyada maang wali branches, har round ki closing rank ke saath.
+  - NIT / IIIT / GFTI: Round 1, 2, 3, 4, 5, CSAB 1, CSAB 2
+  - Delhi: Round 1, 2, 3, 4, Upgradation, Spot
+- Jis khaane mein student ki rank andar aati hai, wo rang se highlight hota hai. Ek line saaf batati hai: "Aapki rank Round 3 se andar aati hai."
+- **"Show all branches"** se usi panel mein us college ki saari branches khulti hain.
+- **Seat ka raasta badalna:** Home state / Other state, Gender-neutral / Female-only, Open / category. Shuru mein student wala raasta chuna hota hai.
+- Kisi branch par tap: us branch ki har round ki opening aur closing rank, wahin.
+- Neeche "Official page kholo" ka link, jo JoSAA / CSAB / JAC ka official cutoff page phone ke browser mein kholta hai.
+
+### 8. Percentile chart (usi screen par, bina kuch type kiye)
+- Upar ke switch mein **"Percentile chart"** chunte hi input card ki jagah percentile ki list aa jaati hai. Kuch type nahi karna.
+- 99.9 se 80 percentile tak **50 line**, har line par **20 college-branch** (kul 1,000 tak):
+
+| Percentile | Step |
+|---|---|
+| 99.9 se 99.0 | har 0.1 par |
+| 98.8 se 95.0 | har 0.2 par |
+| 94.5 se 90.0 | har 0.5 par |
+| 89 se 80 | har 1 par |
+
+- Har line par: percentile, lagbhag rank, aur Normal paper mein lagbhag marks.
+- Kisi line par tap: wahin neeche uski 20 sabse zyada maang wali seats khulti hain. Ek waqt mein ek hi line khuli rehti hai.
+- Upar category ke chip (General pehle se chuna) aur wahi branch filter.
+- Kisi seat par tap karne se wahi college ka pop-up khulta hai.
+- 80 percentile se neeche chart nahi jaata. Marks type karne wala raasta har marks par chalta hai.
+
+### 9. Data kahan se aata hai
+
+| Kya | Official source |
+|---|---|
+| 2026 ke students ki ginti, category-wise ginti, cutoff | NTA press release, 20 April 2026: cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260420809492136.pdf |
+| Shift-wise percentile ki ginti | NTA notice, 23 April 2026: cdnbbsr.s3waas.gov.in/s3f8e59f4b2fe7c5705bf878bbd494ccdf/uploads/2026/04/20260423459353913.pdf |
+| NIT / IIIT / GFTI, Round 1–5 | josaa.admissions.nic.in/Applicant/SeatAllotmentResult/CurrentORCR.aspx |
+| CSAB Special, Round 1–2 | admissions.nic.in/csabspl/Applicant/seatallotmentresult/currentorcr.aspx |
+| DTU, NSUT, IIIT-Delhi, IGDTUW | jacdelhi.admissions.nic.in/or-cr/ |
+
+- Ye data ek baar official portal se lekar app ke server par rakha jaayega. Student ke istemaal ke waqt sarkari site par koi call nahi jaati, isliye result turant aata hai.
+- Screen par likha hoga: "2026 ke data par estimate. Asli cutoff har saal badalta hai."
 
 ## User flow
-1. **Owner naya paper daalta hai:** website par publish → student app mein wo list kholta hai → paper dikhta hai → Start.
-2. **Owner naya exam ya section jodta hai:** website par banata hai → app ke Home par naya tile, ya exam ke page par naya khaana → student tap karke papers tak pahunchta hai.
-3. **Website ka student Rapid Fire khelta hai:**
-   - Rapid Fire ka link kholta hai (website ke button se, ya seedha link se)
-   - pehli baar phone + PIN daalta hai
-   - lobby mein apne coins aur diamonds dekhta hai
-   - PLAY dabata hai aur app wale student ke saath match khelta hai
-4. **Ek hi student, dono jagah:** din mein laptop par browser arena mein Cup jeetta hai → raat ko app kholta hai → wahi crown, wahi coins.
-5. **Arena se wapas:** bar mein Home → jeelive.ai.
+1. **Marks se:** RANK tab → marks daale (jaise 180) → Show → input sikudkar ek line → percentile aur rank ki range → neeche top 50 college-branch.
+2. **Percentile se:** marks khaali chhode → percentile daala (jaise 97.4) → Show → rank ki tight range aur colleges.
+3. **Apne hisaab se:** category OBC-NCL chuni, Female on kiya, home state Uttar Pradesh diya → list mein category, female-only aur home-state wali seats bhi aa gayin.
+4. **Branch chunkar:** branch chip → Mechanical → Mechanical ke top 50 college.
+5. **College ke andar:** "MNNIT Allahabad · ECE" par tap → pop-up mein 10 branches ki Round 1 se CSAB 2 tak closing rank → "Show all branches" → band kiya → list mein wahin wapas.
+6. **Bina type kiye:** "Percentile chart" → 99.9 se 80 tak scroll → kisi percentile par tap → uski 20 seats wahin khuli.
+
+Har flow shuru se aakhir tak isi ek screen par rehta hai.
 
 ## UI/UX feel
-- **Ek brand:** dono jagah wahi naam aur wahi logo. Rapid Fire app mein aur browser mein bilkul ek jaisa dikhta aur chalta hai.
-- **Laptop par arena:** beech mein phone jaisi chaudai ka column, kinaaron par wahi blood-red stage. Buttons mouse aur touch dono se chalte hain.
-- **Naye exam ke tile:** Home ke maujooda tiles jaise hi: wahi size, wahi maroon naam. Tiles do-do ki line mein; akela bacha tile poori chaudai leta hai.
-- **Imaandaar screens:** khaali section, band exam ya kamzor network par saaf message aur Retry. Koi nakli ginti ya nakli paper nahi.
-- **Sign in:** browser arena ki sign-in screen app jaisi hi, taaki student ko naya kuch seekhna na pade.
-- **Baaki app:** Home, tests aur Rapid Fire ka look aur jagah jaisi aaj hai waisi hi.
+- **Look:** app ke Home jaisa halka aur saaf, wahi font. Rapid Fire wala laal arena look yahan nahi.
+- **Sirf text:** naam, ank aur chip. Koi tasveer, logo ya graph nahi.
+- **Rangeen segmentation:**
+  - teen hisse alag halke rang ki patti se pehchane jaate hain: input, result, list
+  - college type ke chaar rang: NIT, IIIT, GFTI, Delhi
+  - chance ke teen rang: Safe hara, Likely neela, Borderline narangi
+  - paper level ke teen chip alag rang mein: Tough, Normal, Easy
+- **Bada result:** rank aur percentile bade ankon mein, Indian tareeke se likhe (1,07,693).
+- **Aasaan:** do khaane aur ek button se kaam chal jaata hai. Baaki sab optional chip.
+- **College pop-up ki table:** rounds aade mein scroll hote hain, branch ka naam jagah par tika rehta hai.
+- **Tez aur halka:** result ek second ke andar. Halka sa fade; koi bhaari animation ya entry show nahi.
+- **Imaandaar screens:** data na mile ya network kamzor ho to saaf message aur Retry. Koi nakli college ya nakli rank nahi.
 
 ## Implementation phases
 
 ### Phase 1: MVP (abhi yahi banega)
-1. **Ek naam:** app har jagah JEELIVE.AI, website wale original logo ke saath.
-2. **Website ka content apne aap:** exams aur sections website ki list se; Home grid, exam ka page aur My Tests ke filter usi se bante hain.
-3. **Browser arena:** poora Rapid Fire ek link par, wahi phone + PIN, wahi ID aur khazana, phone aur laptop dono par.
-4. **Website project ke liye note:** Rapid Fire button, naam/logo ke niyam aur Phase 2 ka seedha pravesh.
+1. RANK tab par ek hi screen: JEE Main chalu, BITSAT "Coming next".
+2. Input: marks / percentile / paper level, category, Female, PwD, home state, branch.
+3. Percentile aur rank ka result, owner ke range wale niyam ke saath, aur paper ke hisaab se phailaav ki line.
+4. Top 50 college-branch (25 × 2 page), rangeen segments, branch filter, chance tag, "bas thoda sa door" wali 5 seats.
+5. College ka pop-up: 10 branches × saare round, saari branches, seat ka raasta badalna, official page ka link.
+6. Percentile chart usi screen par: 50 line × 20 seats, bina type kiye.
+7. 2026 ka poora data server par: NTA, JoSAA Round 1–5, CSAB Round 1–2, JAC Delhi.
 
-### Phase 2: Gehra jod
-- Rapid Fire jeelive.ai ke apne address par, website ke login se seedha, bina dobara PIN. Iske liye website project mein kaam chahiye.
-- Website ke Home aur result page par Rapid Fire ke tile.
-- WhatsApp ke challenge, gang aur cup wale link browser mein seedha match kholein, taaki bina app wala dost bhi turant khel sake.
-- Website thodi der band ho to bhi chalu match aur Rapid Fire chalta rahe.
-- NEET app ke liye naya hand-over pack: cards, aaj ka arena code aur guide.
+### Phase 2: aur gehra
+- BITSAT predictor, owner ke link se, isi screen ke switch par.
+- 2025 aur 2026 ki tulna: college pop-up mein trend, aur Safe tag do saal ke data se.
+- JEE Main 2027 ke har session ke result ke baad naya data, aur apni date-shift chunne ka option.
+- "Mujhe apni rank pata hai": rank seedha daalna.
+- Test ya PYQ ke result se ek tap mein predictor.
+- Apni shortlist save karna aur WhatsApp par text share.
+- JAC Delhi ke khaas quota (defence, Kashmiri migrant, single girl child).
 
-### Phase 3: Ek ghar
-- Asli ek server: Rapid Fire ko website ke server par le jaana, sabke coins, diamonds aur gangs ke saath. Iske liye website project ka latest code chahiye.
-- Tests wale pages ka look website aur app mein ek jaisa.
-- Naye games, jo arena ek hone ki wajah se app aur website par ek saath aayenge.
-- Tests aur Rapid Fire ka saanjha profile aur Rank.
+### Phase 3: poora counselling saathi
+- JEE Advanced ke marks se IIT predictor.
+- JoSAA ke liye choice-filling ki list banane wala tool.
+- College ki jaankari: fees, seats, placement (official sources se).
+- Counselling ke dinon mein live round tracker.
+- Yahi feature jeelive.ai website par.
 
 ## Assumptions
-- **Launch ka layout:** jaisa aaj hai. Home par tests pehle, Rapid Fire neeche ki bar mein.
-- **Naam:** sirf app badlegi. App ki andar ki pehchaan (package), purane links aur pehle bane launch videos nahi badlenge.
-- **Logo:** website ka original JEELIVE.AI logo, app ke andar hi rakha hua taaki turant dikhe. App ka icon jaisa hai waisa.
-- **Server:** Rapid Fire app ke server par hi rahega. Shift Phase 3 mein.
-- **Website ke badlaav:** is project se website ke andar kuch nahi badla ja sakta. Website par Rapid Fire button website project mein lagega; yahan se sirf note milega.
-- **Browser arena ka address:** pehle app ke maujooda live server ka link. jeelive.ai ka apna address Phase 2 mein.
-- **Browser mein sign in:** Phase 1 mein har naye browser par ek baar phone + PIN. Website login se seedha pravesh Phase 2 mein.
-- **Phase 2 ka seedha pravesh:** website ek baar chalne wala, 60 second ka pass degi. Website ka PIN ya login ka raaz browser arena ko kabhi nahi diya jaayega.
-- **Browser arena mein kya nahi:** tests, PYQ aur All India series. Ye website par hi hain.
-- **Exam ki list:** website jo exams student ko dikhati hai wahi app dikhayega, usi kram mein. Website par chhupa exam app mein bhi nahi dikhega.
-- **Sections na milein to:** agar website kisi exam ke sections na de, to us exam mein aaj wale do khaane (Mock tests, Chapter-wise) hi dikhenge.
-- **Naye exam ka tile:** naam website se, icon app ke maujooda icons mein se. Har exam ke liye alag artwork nahi banega.
-- **Website par NEET exam:** agar owner website par NEET naam ka exam jodta hai, to uske tests app mein baaki exams ki tarah dikhenge. Rapid Fire ka NEET phir bhi band rahega.
-- **Rapid Fire ke cards:** ye app ke server par hi rehte hain. Website ke upload panel se nahi badalte.
-- **Khelne wale:** app aur browser ke students ek hi pool mein. Alag leaderboard nahi.
-- **Laptop:** arena phone jaisi chaudai mein hi rahega; laptop ke liye alag bada layout nahi banega.
-- **Bhasha:** buttons aur labels English mein, jaise abhi hain.
-- **Naya build:** naam ka badlaav, website wali exam list aur pichhla "connection" fix, teeno naye Android build mein aayenge. Uske baad website par naya exam ya section jodne ke liye build nahi chahiye. Browser arena ke liye sirf Publish.
-- **App ka size:** browser arena ki files server par rehti hain, APK mein nahi judti.
-- **Purane rukey kaam:** security ke do mudde, video ZIP download aur account deletion jaise the waise hi ruke rahenge.
+- **"Ek hi screen":** matlab RANK tab ke alawa koi naya page nahi. College ki detail usi screen par pop-up panel mein khulti hai (aapne pehle "pop-up" kaha tha). Percentile chart usi screen ka doosra tareeka hai.
+- **"Bahut halka":** app ke andar koi nayi image, font ya data file nahi; sirf ek screen ka code. Cutoff ka data server par.
+- **"All text":** photo, logo, graph aur nayi artwork nahi. Rang sirf chip, tag aur patti mein.
+- **Rang:** Safe hara, Likely neela, Borderline narangi; NIT / IIIT / GFTI / Delhi ke chaar alag rang. Ye app ke halke look se mel khaate hue chune jaayenge.
+- **"App kharab na ho":** RANK tab ke alawa app ki kisi screen, bar ya Rapid Fire mein koi badlaav nahi.
+- **Rank button:** neeche ki bar ka maujooda RANK tab. Uske "coming soon" page ki jagah ye screen aayegi. Us page ke do button (All India series, My results) sabse neeche chhote text link ban kar rahenge.
+- **Input ka sikudna:** Show ke baad input card ek line ban jaata hai, taaki ek hi screen par result aur list ko jagah mile.
+- **Range ka niyam:** rank ki range 200 / 500 / 1,000 tak, percentile ki range 0.5 tak. Sirf marks se ye range estimate ka beech ka hissa hai; asli phailaav neeche ki line mein dikhta hai.
+- **"Early rank":** 10,000 tak ki rank ko early maana gaya hai.
+- **Paper level:** 2026 ki 19 shifts ko 99 percentile ke marks ke hisaab se teen hisson mein baanta jaayega: Tough, Normal, Easy.
+- **Marks:** −75 se 300 tak, poore ank.
+- **Marks aur percentile dono:** percentile ko maana jaayega.
+- **Rank ka paimana:** 2026 (15,38,468 students). 2027 ke numbers aane tak yahi.
+- **Category aur PwD rank:** estimate hain, kyunki NTA inki table nahi deta. PwD rank sabse mota estimate hai.
+- **Marks → percentile:** students ke public data se, NTA ke official numbers par fit karke.
+- **Colleges:** JoSAA ke 114 institute (32 NIT, IIEST Shibpur samet; 26 IIIT; 56 GFTI) aur Delhi ke DTU, NSUT, IIIT-Delhi, IGDTUW. IIT, IIIT Hyderabad, BITS, private university aur DSEU nahi.
+- **Courses:** 4 saal ke B.Tech / B.E. aur Paper 1 ki rank se milne wale 5 saal ke dual / integrated course. B.Arch aur B.Planning nahi.
+- **CSAB wali seat:** jo seat sirf CSAB mein khuli, wo Borderline maani jaayegi, kyunki wo bachi hui seats par tiki hoti hai.
+- **Ek line:** ek college ki ek branch ek hi baar dikhegi, sabse aasaan raaste ke saath.
+- **Kram:** maang ke hisaab se, kisi banayi hui college ranking se nahi.
+- **Chance tag:** 15% aur 10% ki seema.
+- **50 result:** har segment mein 25-25 ke do page.
+- **Branch filter:** "top 20 branches" ka matlab 20 branch group + All branches liya gaya hai. Milte-julte naam wale course ek group mein.
+- **Home state na dene par:** NIT mein sirf other-state seats, IIIT / GFTI mein all-India seats. Goa, J&K aur Ladakh ke khaas quota home state se apne aap judte hain.
+- **Delhi:** home state Delhi chunne par JAC ki Delhi-region cutoff dikhegi, saath mein note ki iske liye 11th-12th Delhi ke school se zaroori hai. Baaki sabko Outside Delhi cutoff.
+- **Female:** on karne par female-only seats aur IGDTUW judte hain.
+- **Percentile chart:** General se shuru; home state ke bina; gender-neutral seats. Ek waqt mein ek hi percentile khula. Paas-paas ke step mein kai seats dobara aayengi. Jahan 20 se kam asli seats hain wahan utni hi.
+- **80 se neeche:** chart nahi, par type karne wala raasta chalta hai.
+- **"Bas thoda sa door":** ye maanga nahi gaya tha; joda gaya hai aur hataya ja sakta hai.
+- **College pop-up:** 10 branches maang ke hisaab se; "browser page" ka matlab official cutoff page ka link liya gaya hai.
+- **Data:** ek baar official portal se, app ke server par. Koi source apne aap padha na ja sake to wo hissa chhod kar screen par naam se bataya jaayega; andaaze se kuch nahi bhara jaayega.
+- **Yaad rakhna:** pichhle input sirf phone par. Server par history nahi.
+- **Test ke marks:** app ke tests ya All India series se marks nahi liye jaate; student khud daalta hai.
+- **Bhasha:** buttons aur labels English mein, jaise baaki app.
+- **Naya build:** feature dikhne ke liye naya Android build chahiye. Uske baad data bina build ke badla ja sakta hai.
+- **Browser arena aur website:** Phase 1 mein ye feature sirf app mein.

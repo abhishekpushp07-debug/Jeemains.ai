@@ -1,0 +1,27 @@
+{
+  "summary": "Iteration81: tested the dark Rank tab redesign and the removal of the shift picker at 390x844, logged in as 7004186276 (read-only, no tests started). Backend: 45/45 rank tests pass. Sending POST /api/rank/predict with an extra 'shift' field returns 200 with summary '180 marks · Normal · General', and GET /api/rank/meta has no 'shifts' key. Frontend: the whole Rank tab is dark (navy/charcoal gradient) with the Georgia serif title, the blue hairline and the tracked-caps header. A DOM scan of every Rank view (input, collapsed summary, Rank Card, list, chart, BITSAT input/card/list) found no light panels and no dark-on-dark text. The only light backgrounds are selected chips (silver rgb(230,232,238) with dark text), which have good contrast. Switches are 172x44 and paper chips are 44px tall. rank-shift-* count is 0 and the input has no 'shift' text. The summary shows the paper level ('180 marks · Tough/Normal/Easy · General/OBC-NCL'). The WhatsApp share message has no shift. Every sheet opened from Rank is dark rgb(18,18,24): state picker, branch picker, list branch picker (Done is blue rgb(37,99,235)), college sheet (green cells rgb(14,58,45) with green text, 2025 R6 row, branch detail above the table, quota and gender chips) and shortlist. Close and Done buttons work. Trend wording, colours and the 3% / ±2-mark thresholds are correct for JEE and BITSAT. Shortlist shows a JEE row and a BITSAT row. The BITSAT row is a plain View at opacity 1 and is not tappable; the JEE row opens the matching college sheet. The shared DSheet did not darken other screens: Home and My Tests stay light, and series-explainer (/live) and compare-sheet (My Tests) are white rgb(255,255,255). No functional bugs found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank input", "issues": ["Selected chips look different by row. A selected paper level (rank-level-*) is outlined, while a selected category (rank-cat-*) or filter (rank-seg-*, bitsat-campus-*, college quota/gender) is a filled silver chip. Cosmetic only; consider one selected style."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_predictor.py", "/app/backend/tests/test_rank_phase2.py", "/app/test_reports/pytest/rank_iter81.xml"],
+  "action_items": [
+    "Optional: rank.tsx:31 comment still says 'one light, text-only screen'. Change it to dark.",
+    "Optional: use the same selected style for paper-level chips and category/filter chips."
+  ],
+  "critical_code_review_comments": [
+    "DSheet reads the palette from PaletteContext through useTheme, and only the Rank tab provides rankColors, so the scoping is correct. Sheets on other screens stay light (verified).",
+    "Trend logic: SeatList.tsx:17 uses |d| < 3% of y25 and Bitsat.tsx:123 uses |d| <= 2. Both match the spec."
+  ],
+  "updated_files": ["/app/test_reports/iteration_81.json"],
+  "success_rate": {"backend": "100% (45/45 + 2 manual checks)", "frontend": "100% of requested checks"},
+  "seed_data_creation": "None. The shortlist stars added during the test (local storage only) were removed afterwards.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Login on /entry: click the first input and keyboard.type the phone, then entry-pin-input, then entry-continue-button. Shortlist openers: rank-shortlist-open (JEE) and bitsat-shortlist-open. WhatsApp share testID: rank-share (do not match 'home-explore-share'). To capture the share, override window.open with page.evaluate after the page loads. To check a sheet is light, use series-tab-about on /live (series-explainer) or 2 compare-select-* + compare-attempts-button on My Tests > Completed (compare-sheet)."
+}

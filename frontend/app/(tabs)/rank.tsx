@@ -1,52 +1,152 @@
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { setStatusBarStyle } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { T } from "@/src/components/ui";
-import { Glyph } from "@/src/components/Glyph";
-import { Pill } from "@/src/components/design";
-import { colors, space } from "@/src/theme";
+import { ErrorBox, Press, T } from "@/src/components/ui";
+import { PaletteContext, rankColors as colors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
+import { storage } from "@/src/utils/storage";
+import { CollegeReq, FormBody, getMeta, Meta, predict, PredictOut, Seat, Segment } from "@/src/rank/api";
+import { CATEGORY_LABEL, LEVEL, SERIF } from "@/src/rank/tones";
+import { branchLabel, DEFAULT_FORM, FormState, InputCard } from "@/src/rank/InputCard";
+import { ResultCard } from "@/src/rank/ResultCard";
+import { SeatList } from "@/src/rank/SeatList";
+import { CollegeSheet } from "@/src/rank/CollegeSheet";
+import { PercentileChart } from "@/src/rank/PercentileChart";
+import { Picker, RuleTitle, Switch } from "@/src/rank/controls";
+import { BitsatPanel } from "@/src/rank/Bitsat";
+import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
+import { shareJee } from "@/src/rank/share";
+import { useShortlist } from "@/src/rank/shortlist";
 
-// Placeholder tab: the rank feature is planned but not built yet, so nothing here pretends to rank anyone.
+const SAVED = "rank.form.v1";
+
+function summaryOf(b: FormBody) {
+  return [b.percentile !== undefined ? `${b.percentile} percentile` : `${b.marks} marks`, b.percentile === undefined ? LEVEL[b.level].label : null,
+    CATEGORY_LABEL[b.category], b.female ? "Female" : null, b.pwd ? "PwD" : null, b.state].filter(Boolean).join(" · ");
+}
+
+// JEELIVE.AI Rank: one light, text-only screen in the Rank Card's dark brushed-metal look. All cut-off data stays on our server.
 export default function RankTab() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const [exam, setExam] = useState<"jee" | "bitsat">("jee");
+  const [mode, setMode] = useState<"marks" | "chart">("marks");
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [metaError, setMetaError] = useState<string | null>(null);
+  const [form, setForm] = useState<FormState>(DEFAULT_FORM);
+  const [open, setOpen] = useState(true);
+  const [query, setQuery] = useState<FormBody | null>(null);
+  const [segment, setSegment] = useState<Segment>("all");
+  const [page, setPage] = useState(1);
+  const [res, setRes] = useState<PredictOut | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [detail, setDetail] = useState<CollegeReq | null>(null);
+  const [branchPicker, setBranchPicker] = useState(false);
+  const [shortOpen, setShortOpen] = useState(false);
+  const saved = useShortlist();
+  const ticket = useRef(0);
+  const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
+  useFocusEffect(useCallback(() => { setStatusBarStyle("light"); return () => setStatusBarStyle("dark"); }, []));
+
+  const loadMeta = useCallback(() => {
+    setMetaError(null);
+    getMeta().then(setMeta).catch(e => setMetaError(e.message));
+  }, []);
+  useEffect(() => {
+    loadMeta();
+    storage.getItem<string | null>(SAVED, null).then(raw => {
+      if (!raw) return;
+      try { setForm({ ...DEFAULT_FORM, ...JSON.parse(raw) }); } catch { /* keep defaults */ }
+    });
+  }, [loadMeta]);
+
+  const run = useCallback((q: FormBody, seg: Segment, pg: number) => {
+    const mine = ++ticket.current;
+    setBusy(true); setError(null);
+    predict({ ...q, segment: seg, page: pg })
+      .then(d => { if (mine === ticket.current) setRes(d); })
+      .catch(e => { if (mine === ticket.current) setError(e.message); })
+      .finally(() => { if (mine === ticket.current) setBusy(false); });
+  }, []);
+  useEffect(() => { if (query) run(query, segment, page); }, [query, segment, page, run]);
+
+  const patch = (p: Partial<FormState>) => setForm(f => ({ ...f, ...p }));
+  const show = (body: FormBody) => {
+    storage.setItem(SAVED, JSON.stringify(form));
+    setPage(1); setQuery(body); setOpen(false);
+    scroll.current?.scrollTo({ y: 0, animated: false });
+  };
+  const setBranches = (branches: string[]) => {
+    patch({ branches });
+    setQuery(q => (q ? { ...q, branches } : q));
+    setPage(1);
+  };
+  const openSeat = (s: Seat, body: FormBody | null = query) => {
+    if (body) setDetail({ ...body, inst: s.inst, prog: s.prog, quota: s.quota, gender: s.gender, seat: s.seat });
+  };
+
   return (
-    <ScrollView testID="rank-screen" style={{ flex: 1, backgroundColor: colors.surface }}
-      contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.xl }}>
-      <View style={{ gap: 2 }}>
-        <T w="bold" size={11} color={colors.custom_eyebrow} style={styles.caps}>ALL INDIA RANK</T>
-        <T testID="rank-title" w="heavy" size={30}>your rank.</T>
-        <T testID="rank-subtitle" w="heavy" size={30} color={colors.custom_eyebrow}>coming soon.</T>
-      </View>
-
-      <View testID="rank-hero" style={styles.hero}>
-        <LinearGradient colors={[colors.custom_seriesFrom, colors.custom_seriesMid, colors.custom_seriesTo]} locations={[0, 0.55, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-        <View style={styles.podium}><Glyph name="podium" size={40} color={colors.onSurfaceInverse} stroke={1.3} /></View>
-        <View testID="rank-soon-badge" style={styles.badge}>
-          <View style={styles.dot} />
-          <T w="bold" size={10.5} color={colors.onSurfaceInverse} style={styles.caps}>BEING BUILT</T>
+    <PaletteContext.Provider value={colors}>
+    <View style={{ flex: 1, backgroundColor: colors.surface }}>
+      <LinearGradient colors={[colors.custom_rankBgFrom, colors.custom_rankBgMid, colors.custom_rankBgTo]} style={StyleSheet.absoluteFill} />
+      <LinearGradient colors={[colors.custom_rankBgGlow, colors.custom_clear]} start={{ x: 1, y: 0 }} end={{ x: 0.25, y: 0.4 }} style={StyleSheet.absoluteFill} />
+      <ScrollView ref={scroll} testID="rank-screen" keyboardShouldPersistTaps="handled" indicatorStyle="white"
+        contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}>
+        <View style={{ gap: 6 }}>
+          <RuleTitle>JEELIVE.AI · Rank</RuleTitle>
+          <T testID="rank-title" style={styles.title}>Rank & college predictor</T>
+          <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT, 2026 cutoffs</T>
         </View>
-        <T w="heavy" size={21} color={colors.onSurfaceInverse} style={styles.center}>Your place among every aspirant.</T>
-        <T size={13.5} color={colors.custom_whiteA70} style={styles.center}>We’re building rank right now. Until it’s ready, your scores and results stay safe in My Tests.</T>
-      </View>
+        <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }]} />
 
-      <View style={{ gap: space.md }}>
-        <Pill testID="rank-open-series" size="lg" label="Open All India series" iconRight="arrow-right" onPress={() => router.push("/live")} />
-        <Pill testID="rank-open-results" kind="outline" label="See my results" icon="chart-box-outline"
-          onPress={() => router.push({ pathname: "/(tabs)/tests", params: { tab: "completed", at: String(Date.now()) } })} />
-      </View>
-    </ScrollView>
+        {exam === "bitsat" ? <BitsatPanel onShortlist={() => setShortOpen(true)} /> : <>
+          <Switch prefix="rank-mode" value={mode} onChange={setMode} items={[{ key: "marks", label: "My marks" }, { key: "chart", label: "Percentile chart" }]} />
+          <ErrorBox error={metaError ?? undefined} retry={loadMeta} testID="rank-meta-error" />
+
+          {mode === "marks" ? <>
+            <InputCard form={form} onChange={patch} states={meta?.states ?? []} branches={meta?.branches ?? []} open={open}
+              summary={query ? summaryOf(query) : ""} onShow={show} onEdit={() => setOpen(true)} busy={busy && !res} />
+            <ErrorBox error={error ?? undefined} retry={() => query && run(query, segment, page)} testID="rank-error" />
+            {res && query ? <>
+              <ResultCard result={res.result} candidates={meta?.candidates} saved={saved.length} onShortlist={() => setShortOpen(true)}
+                onShare={() => shareJee(res.result, res.items)} />
+              <SeatList data={res} segment={segment} onSegment={s => { setSegment(s); setPage(1); }} page={page} onPage={setPage}
+                branchText={branchLabel(form.branches)} onBranch={() => setBranchPicker(true)} onOpen={s => openSeat(s)} busy={busy} />
+            </> : null}
+          </> : meta ? <PercentileChart lines={meta.chart} branches={form.branches} branchText={branchLabel(form.branches)}
+            onBranch={() => setBranchPicker(true)} onOpen={(s, body) => openSeat(s, body)} /> : null}
+
+          <View style={{ gap: 4 }}>
+            <T size={12} color={colors.muted}>{meta?.note ?? "2026 ke data par estimate. Asli cutoff har saal badalta hai."}</T>
+            <T size={11.5} color={colors.custom_dim}>Data: NTA JEE Main 2026, JoSAA 2026 Round 1–5, CSAB Special 2026 Round 1–2, JAC Delhi 2026 Round 1–4. Trend: JoSAA 2025 final round.</T>
+            {meta?.missing.map(m => <T key={m} size={11.5} color={colors.custom_dim}>{m}</T>)}
+          </View>
+        </>}
+
+        <View style={styles.links}>
+          <Press testID="rank-open-series" onPress={() => router.push("/live")} style={styles.link} accessibilityLabel="All India series">
+            <T w="bold" size={13.5} color={colors.brandText}>All India series</T>
+          </Press>
+          <Press testID="rank-open-results" onPress={() => router.push({ pathname: "/(tabs)/tests", params: { tab: "completed", at: String(Date.now()) } })} style={styles.link} accessibilityLabel="My results">
+            <T w="bold" size={13.5} color={colors.brandText}>My results</T>
+          </Press>
+        </View>
+      </ScrollView>
+      <Picker visible={branchPicker} title="Branch" options={meta?.branches ?? []} value={form.branches} multi allLabel="All branches"
+        onChange={setBranches} onClose={() => setBranchPicker(false)} testID="rank-list-branch-picker" />
+      <ShortlistSheet visible={shortOpen} onClose={() => setShortOpen(false)} onOpen={query ? s => openSeat(s) : undefined} />
+      {detail ? <CollegeSheet key={`${detail.inst}-${detail.prog}-${detail.percentile}-${detail.marks}`} req={detail} onClose={() => setDetail(null)} /> : null}
+    </View>
+    </PaletteContext.Provider>
   );
 }
 
 const styles = StyleSheet.create({
-  caps: { letterSpacing: 2.2 },
-  hero: { borderRadius: 28, overflow: "hidden", padding: space.xl, paddingVertical: 36, alignItems: "center", gap: space.md, backgroundColor: colors.custom_series, borderWidth: 1, borderColor: colors.custom_webGlassLine },
-  podium: { width: 84, height: 84, borderRadius: 42, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_webGlass, borderWidth: 1, borderColor: colors.custom_webGlassLine },
-  badge: { flexDirection: "row", alignItems: "center", gap: 7, height: 28, paddingHorizontal: 12, borderRadius: 999, borderWidth: 1, borderColor: colors.custom_webGlassLine, backgroundColor: colors.custom_webGlass },
-  dot: { width: 7, height: 7, borderRadius: 4, backgroundColor: colors.brandPrimary },
-  center: { textAlign: "center" },
+  title: { fontFamily: SERIF, fontSize: 31, lineHeight: 38, color: colors.onSurface, textShadowColor: colors.custom_rankChrome, textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 12 },
+  links: { flexDirection: "row", gap: space.xl, justifyContent: "center" },
+  link: { minHeight: 44, justifyContent: "center" },
 });
