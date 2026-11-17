@@ -5,7 +5,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Path, Qu
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import UpdateOne
 from .auth import current, owner, staff
-from .db import db, sets, now, audit
+from .db import db, sets, now, audit, SafeIndexes
 from .canonical import database_now
 
 
@@ -150,9 +150,9 @@ def default_rules(exam_key, kind):
 
 
 async def seed():
-    await sections.create_index([('exam_slug', 1), ('slug', 1)], unique=True)
-    await sets.create_index('catalog_section_id', sparse=True)
-    await previews.create_index([('section_id', 1), ('created_at', -1)])
+    await SafeIndexes(sections).create_index([('exam_slug', 1), ('slug', 1)], unique=True)
+    await SafeIndexes(sets).create_index('catalog_section_id', sparse=True)
+    await SafeIndexes(previews).create_index([('section_id', 1), ('created_at', -1)])
     for order, (slug, key, short, subjects, kinds) in enumerate(BUILTIN, 1):
         await exams.update_one({'_id': slug}, {'$setOnInsert': {'slug': slug, 'key': key, 'name': key, 'short': short,
             'subjects': subjects, 'color': slug, 'builtin': True, 'shown': True, 'order': order, 'created_at': now()}}, upsert=True)

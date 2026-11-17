@@ -27,7 +27,8 @@ async def call(s, step, method, path, body=None, jar=None, tries=6):
         wait = 2
         try:
             async with s.request(method, BASE + '/api' + path, json=body, headers=headers, timeout=aiohttp.ClientTimeout(total=60)) as r:
-                text = await r.text()
+                raw = await r.read()
+                text = raw.decode('utf-8', 'replace') if 'json' in r.headers.get('Content-Type', '') or r.status >= 400 else ''
                 code = r.status
                 wait = float(r.headers.get('Retry-After') or 2)
                 if jar is not None:

@@ -69,6 +69,8 @@ async def lifespan(app):
     from tejas.live_window import apply_to_upcoming
     await apply_to_upcoming()
     from tejas.mock_solutions import solutions
+    from tejas.db import SafeIndexes
+    solutions = SafeIndexes(solutions)
     await solutions.create_index('id', unique=True)
     await solutions.create_index([('state', 1), ('order', 1)])
     await solutions.create_index('set_id')

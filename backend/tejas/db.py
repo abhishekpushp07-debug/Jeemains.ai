@@ -84,17 +84,17 @@ async def audit(actor, action, resource, detail=""):
 INDEX_PROBLEMS = []
 
 
-class _Safe:
+class SafeIndexes:
     """Index builds never stop the server from starting. A failed one is logged and shown in the nightly data check."""
     def __init__(self, target):
         self._t = target
 
     def __getattr__(self, name):
         value = getattr(self._t, name)
-        return _Safe(value) if isinstance(value, (AsyncIOMotorCollection, AsyncIOMotorDatabase)) else value
+        return SafeIndexes(value) if isinstance(value, (AsyncIOMotorCollection, AsyncIOMotorDatabase)) else value
 
     def __getitem__(self, name):
-        return _Safe(self._t[name])
+        return SafeIndexes(self._t[name])
 
     async def create_index(self, keys, **options):
         try:
@@ -106,7 +106,7 @@ class _Safe:
 
 async def indexes():
     g = globals()
-    db, users, sessions, sets, attempts, files, jobs, audits = (_Safe(g[n]) for n in ('db', 'users', 'sessions', 'sets', 'attempts', 'files', 'jobs', 'audits'))
+    db, users, sessions, sets, attempts, files, jobs, audits = (SafeIndexes(g[n]) for n in ('db', 'users', 'sessions', 'sets', 'attempts', 'files', 'jobs', 'audits'))
     await db.tejas_books.create_index([('owner_id', 1), ('created_at', -1)])
     await db.tejas_book_parts.create_index([('book_id', 1), ('number', 1)], unique=True)
     await db.tejas_book_pages.create_index([('book_id', 1), ('number', 1)], unique=True)

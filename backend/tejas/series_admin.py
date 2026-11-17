@@ -301,12 +301,22 @@ async def update_config(sid: str, body: SeriesConfig, u=Depends(owner)):
             await unassign_set(cfg, s['id'], u)
             moved += 1
         else:
-            nw = window(s['series_date'], new)
-            # Only the paper as it was read: a paper changed meanwhile is never overwritten.
-            done = await sets.update_one({'id': s['id'], 'series_id': sid, 'series_date': s['series_date'], 'revision': s.get('revision')},
-                                         {'$set': {'series_window': nw, 'start_at': nw['opens_at'], 'end_at': nw['closes_at']}, '$inc': {'revision': 1}})
-            if not done.matched_count:
-                raise HTTPException(409, 'A paper in this series changed while saving. Reload and save again.')
+            # Only the paper as it was read is rewritten. A paper changed meanwhile is read again and placed by its current day.
+            for _ in range(3):
+                nw = window(s['series_date'], new)
+                done = await sets.update_one({'id': s['id'], 'series_id': sid, 'series_date': s['series_date'], 'revision': s.get('revision')},
+                                             {'$set': {'series_window': nw, 'start_at': nw['opens_at'], 'end_at': nw['closes_at']}, '$inc': {'revision': 1}})
+                if done.matched_count:
+                    break
+                s = await sets.find_one({'id': s['id'], 'series_id': sid}, {'_id': 0, 'id': 1, 'series_date': 1, 'series_window': 1, 'revision': 1})
+                if not s or not s.get('series_date'):
+                    break
+                if s['series_date'] not in keep:
+                    await unassign_set(cfg, s['id'], u)
+                    moved += 1
+                    break
+            else:
+                raise HTTPException(409, 'A paper in this series keeps changing. Reload and save again.')
     for m in await db.tejas_book_mocks.find({'series_date': {'$nin': [None, '']}, 'set_id': None, **mock_scope(cfg)}, {'_id': 1, 'series_date': 1}).to_list(5000):
         if m['series_date'] not in keep:
             await db.tejas_book_mocks.update_one({'_id': m['_id'], 'series_date': m['series_date'], 'set_id': None}, {'$set': {'series_date': None, 'series_id': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
