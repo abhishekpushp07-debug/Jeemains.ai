@@ -4,20 +4,20 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { ErrorBox, Press, T } from "@/src/components/ui";
-import { Pill } from "@/src/components/design";
 import { rankColors as colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { storage } from "@/src/utils/storage";
 import { comedk, ComedkArea, ComedkCollegeReq, ComedkItem, ComedkOut, ComedkQuery, fmt, fmtRange } from "./api";
 import { TAG } from "./tones";
-import { Picker, StarButton, Strip, Summary, Tag, Toggle } from "./controls";
+import { Picker, Strip, Summary, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps } from "./MetalCard";
 import { branchLabel } from "./InputCard";
-import { Trend } from "./SeatList";
-import { ComedkSheet, feeLine } from "./ComedkSheet";
+import { edgeOf, trendStat } from "./SeatList";
+import { ComedkSheet } from "./ComedkSheet";
 import { shareComedk } from "./share";
-import { Medal, MedalWash } from "./Medal";
+import { CardsHeading, CollegeCard, TapHint, cardStyles, useCardViews } from "./CollegeCard";
 import { PdfButton } from "./PdfButton";
 import { comedkSaved, toggleSaved, useShortlist } from "./shortlist";
+import { FormButton, useField } from "./accent";
 
 const SAVED = "rank.comedk.v1";
 const AREAS: { key: ComedkArea; label: string }[] = [{ key: "all", label: "All" }, { key: "blr", label: "Bengaluru" }, { key: "other", label: "Other cities" }];
@@ -52,6 +52,7 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
   const [tries, setTries] = useState(0);
   const [detail, setDetail] = useState<ComedkCollegeReq | null>(null);
   const saved = useShortlist();
+  const field = useField();
 
   useEffect(() => {
     if (seed) return; // a score handed over from the Rank predictor wins over the last saved one
@@ -96,18 +97,18 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
   const summary = query ? [query.rank ? `Rank ${fmt(query.rank)}` : `${query.marks} / 180 marks`, "COMEDK 2026 · GM", branches.length ? branchLabel(branches) : null].filter(Boolean).join(" · ") : "";
 
   return <>
-    {open || !query ? <Strip title="Your COMEDK score" testID="comedk-input">
+    {open || !query ? <Strip form title="Your COMEDK score" testID="comedk-input">
       <View style={styles.inputs}>
         <View style={{ flex: 1, gap: 4 }}>
           <T w="semibold" size={12} color={colors.muted}>Marks (out of 180)</T>
           <TextInput testID="comedk-marks-input" value={marks} onChangeText={v => setMarks(v.replace(/[^0-9]/g, "").slice(0, 3))} keyboardType="number-pad"
-            placeholder="e.g. 110" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk}
+            placeholder="e.g. 110" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor}
             returnKeyType="done" maxLength={3} accessibilityLabel="COMEDK marks out of 180" />
         </View>
         <View style={{ flex: 1, gap: 4 }}>
           <T w="semibold" size={12} color={colors.muted}>Rank (rank card se)</T>
           <TextInput testID="comedk-rank-input" value={rank} onChangeText={v => setRank(v.replace(/[^0-9]/g, "").slice(0, 6))} keyboardType="number-pad"
-            placeholder="e.g. 4500" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk}
+            placeholder="e.g. 4500" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor}
             returnKeyType="done" maxLength={6} accessibilityLabel="COMEDK rank" />
         </View>
       </View>
@@ -116,7 +117,7 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
         <Toggle testID="comedk-branch" label={branchLabel(branches)} on={branches.length > 0} caret onPress={() => setPicker(true)} />
       </View>
       {problem ? <T testID="comedk-input-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
-      <Pill testID="comedk-show" size="lg" label="Show" iconRight="arrow-right" busy={busy && !res} onPress={show} bg={colors.brandPrimary} ink={colors.onBrandPrimary} />
+      <FormButton testID="comedk-show" label="Show" busy={busy && !res} onPress={show} />
     </Strip> : <Summary testID="comedk-input-collapsed" text={summary} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="comedk-error" />
     {res && query ? <>
@@ -162,19 +163,26 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
   data: ComedkOut; area: ComedkArea; onArea: (a: ComedkArea) => void; page: number; onPage: (p: number) => void;
   branchText: string; onBranch: () => void; onOpen: (i: ComedkItem) => void; busy: boolean; saved: Set<string>; tools: React.ReactNode;
 }) {
-  const row = (it: ComedkItem, testID: string, rank?: number) => <ComedkRow key={it.id} item={it} testID={testID} rank={rank} onPress={() => onOpen(it)} saved={saved.has(`comedk-${it.id}`)} />;
-  return <Strip title="Top college-course" testID="comedk-list"
-    right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>Top {data.total}</T>}>
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-      {AREAS.map(a => <Toggle key={a.key} testID={`comedk-area-${a.key}`} label={`${a.label} ${data.reach[a.key] ?? 0}`} on={area === a.key} onPress={() => onArea(a.key)} />)}
-    </ScrollView>
-    <View style={styles.wrap}>
-      <Toggle testID="comedk-list-branch" label={branchText} caret on={branchText !== "All branches"} onPress={onBranch} />
-    </View>
-    {data.items.length ? tools : null}
+  const views = useCardViews();
+  const row = (it: ComedkItem, testID: string, rank?: number, first?: boolean) => <ComedkRow key={`${testID}-${it.id}`} item={it} testID={testID} rank={rank}
+    viewed={views.viewed.has(it.id)} pulse={first && views.pulse} onPress={() => { views.mark(it.id); onOpen(it); }} saved={saved.has(`comedk-${it.id}`)} />;
+  return <View testID="comedk-list" style={cardStyles.list}>
+    <Strip title="Top college-course" testID="comedk-list-head"
+      right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>Top {data.total}</T>}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
+        {AREAS.map(a => <Toggle key={a.key} testID={`comedk-area-${a.key}`} label={`${a.label} ${data.reach[a.key] ?? 0}`} on={area === a.key} onPress={() => onArea(a.key)} />)}
+      </ScrollView>
+      <View style={styles.wrap}>
+        <Toggle testID="comedk-list-branch" label={branchText} caret on={branchText !== "All branches"} onPress={onBranch} />
+      </View>
+      {data.items.length ? tools : null}
+    </Strip>
     {data.items.length === 0 ? <T testID="comedk-list-empty" size={13.5} color={colors.muted}>
       Is filter mein 2026 ki koi GM seat aapki rank tak nahi gayi. Branch ya shehar badal kar dekho.
-    </T> : <View>{data.items.map((it, i) => row(it, `comedk-seat-${(page - 1) * 25 + i}`, (page - 1) * 25 + i + 1))}</View>}
+    </T> : <>
+      <TapHint testID="comedk-tap-hint" viewed={views.viewed.size} />
+      {data.items.map((it, i) => row(it, `comedk-seat-${(page - 1) * 25 + i}`, (page - 1) * 25 + i + 1, i === 0 && page === 1))}
+    </>}
     {data.pages > 1 ? <View style={styles.pager}>
       {Array.from({ length: data.pages }, (_, i) => i + 1).map(p => (
         <Press key={p} testID={`comedk-page-${p}`} onPress={() => onPage(p)} accessibilityState={{ selected: p === page }} style={[styles.pageBtn, p === page && styles.pageOn]}>
@@ -182,31 +190,28 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
         </Press>
       ))}
     </View> : null}
-    {data.near.length ? <View testID="comedk-near" style={{ gap: space.xs, marginTop: space.sm }}>
-      <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2 }}>BAS THODA SA DOOR</T>
+    {data.near.length ? <View testID="comedk-near" style={cardStyles.list}>
+      <CardsHeading icon="flag-checkered" title="BAS THODA SA DOOR" sub="Thode aur marks, aur ye seats bhi aapki" ink={colors.custom_flame} />
       {data.near.map((it, i) => row(it, `comedk-near-${i}`))}
     </View> : null}
-  </Strip>;
+  </View>;
 }
 
-function ComedkRow({ item, onPress, saved, testID, rank }: { item: ComedkItem; onPress: () => void; saved: boolean; testID: string; rank?: number }) {
-  const money = feeLine(item.fee, item.seats);
-  return <View style={styles.row}>
-    <MedalWash n={rank} />
-    <Press testID={testID} onPress={onPress} scaleTo={0.99} accessibilityLabel={`${item.college}, ${item.course}`} style={styles.main}>
-      {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
-      <View style={{ flex: 1, gap: 3 }}>
-        <T w="bold" size={14.5} numberOfLines={2}>{item.college}</T>
-        {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
-        <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{item.course}</T>
-        <T size={12} color={colors.muted}>{item.city ? `${item.city} · ` : ""}Closing {fmt(item.close)} · {item.round} · GM</T>
-        <Trend label="COMEDK final" y25={item.y25} y26={item.close} testID={`${testID}-trend`} />
-        {money ? <T size={12} color={colors.muted}>{money}</T> : null}
-        {item.gap ? <T w="semibold" size={12} color={colors.custom_flame}>{item.gap}</T> : null}
-      </View>
-    </Press>
-    <StarButton saved={saved} onPress={() => toggleSaved(comedkSaved(item))} testID={`${testID}-star`} />
-  </View>;
+/** ₹2,85,000 → "₹2.85 L" so the fee fits its stat box. */
+const lakh = (fee: number) => fee >= 100000 ? `₹${(fee / 100000).toFixed(2)} L` : `₹${fmt(fee)}`;
+
+function ComedkRow({ item, onPress, saved, testID, rank, viewed, pulse }: { item: ComedkItem; onPress: () => void; saved: boolean; testID: string; rank?: number; viewed?: boolean; pulse?: boolean }) {
+  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(item.tag, !!item.gap)} title={item.college} a11y={`${item.college}, ${item.course}`}
+    tags={item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : undefined}
+    sub={item.course} line={`${item.city ? `${item.city} · ` : ""}GM (All India)`}
+    stats={[
+      { label: "CLOSING", value: fmt(item.close), sub: `${item.round} · 2026` },
+      trendStat(item.y25, item.close, `${testID}-trend`),
+      { label: "FEE / SAAL", value: item.fee ? lakh(item.fee) : "—", sub: item.seats ? `${item.seats} GM seats` : "seats —" },
+    ]}
+    note={item.gap ? <T w="semibold" size={12} color={colors.custom_flame}>{item.gap}</T> : null}
+    teaser="Har round ka cutoff · fee · seats" viewed={viewed} pulse={pulse} onPress={onPress}
+    saved={saved} onStar={() => toggleSaved(comedkSaved(item))} />;
 }
 
 const styles = StyleSheet.create({
@@ -214,8 +219,6 @@ const styles = StyleSheet.create({
   input: { height: 52, borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, paddingHorizontal: space.md, fontFamily: fonts.bold, fontSize: 18, color: colors.onSurface, ...noOutline },
   wrap: { flexDirection: "row", flexWrap: "wrap", gap: space.sm },
   chips: { gap: space.sm, paddingRight: space.sm },
-  row: { flexDirection: "row", alignItems: "flex-start", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
-  main: { flex: 1, flexDirection: "row", gap: space.sm, paddingVertical: space.md, alignItems: "flex-start" },
   pager: { flexDirection: "row", gap: space.sm, justifyContent: "center", paddingTop: space.sm },
   pageBtn: { minHeight: 44, minWidth: 96, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center", paddingHorizontal: space.lg },
   pageOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },

@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only re-test of the College predictor change from pink to blood red, the glow fix and the Summary Edit pill. Signed in as QA learner 7004186276 and tested at 390x844 and 320x700. ALL REQUESTED CHECKS PASSED. College pane (JEE, BITSAT, COMEDK): rank-input-head, bitsat-input-head and comedk-input-head are rgb(209,15,42) with white 'COLLEGE PREDICTOR' and title text. Form frames are rgba(255,59,78,0.75) with a red glow (0 0 18px). rank-cat-GEN is filled red with white text. rank-show, bitsat-show and comedk-show are red with white text. The chosen side of rank-exam-jee, rank-exam-bitsat and rank-mode-marks is tinted red with #FF4D5E text. The marks field frame is red. Scanning every element's computed colours for pink (255,79,174, 244,114,182 and 236,72,153) found 0 hits in the form, the college list, the BITSAT and COMEDK lists, the rank-college sheet and the Percentile chart. The rank-tool-college border is rgb(255,77,94) and its glow is rgba(255,77,94,0.7) 0 4px 18px, so the blur is now 18px. The other tiles also glow with blur: rank yellow, pct teal, target lime and compare sky, each 0 4px 18px. Lists: rank-seat-0-cta, bitsat-item-0-cta and comedk-seat-0-cta are red with white 'Cutoff dekho'. The tap-hint icon is red. The first CTA has a red breathing glow (0 0 12px) only while localStorage rank.cta.seen.v1 is absent; other CTAs have none, and after opening a college the glow is gone, the key is set and rank-seat-0-viewed shows. Edit pill: rank-input-collapsed shows '200 marks · Normal · General', the hint 'Doosra number dekhna hai?' (#FF4D5E) and rank-input-collapsed-edit (79x44, red bg, white pencil and 'Edit', glow 0 2px 10px). Tapping it reopens the form with 200; entering 180 and tapping Show updates the summary to 180 and the list changes (first college IIIT Allahabad → NIT Rourkela). The same edit flow works on rp (yellow pill, dark text, 200→180), pr (teal pill, dark text, 98.5→95), bitsat (red, 300→250) and comedk (red, 120→100). Other tools are unchanged: rp yellow, pr teal, tm-profile lime, cmp-empty sky. At 320px the Edit pill sits inside the summary with no overlap, and the card stat boxes no longer cut text. One minor issue: at 320px the hint 'Doosra number dekhna hai?' is cut off with an ellipsis on all 5 summaries, and long summary lines (PR, COMEDK) are cut off at 2 lines.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Summary hint (controls.tsx:94)", "issue": "At 320px width the hint 'Doosra number dekhna hai?' (numberOfLines=1) is cut off as 'Doosra number dekh…' on rp, pr, rank, bitsat and comedk collapsed summaries. It fits at 390px.", "testID": "rank-input-collapsed-hint", "priority": "LOW"},
+      {"component": "Summary text (controls.tsx:93)", "issue": "At 320px long summaries are cut off at 2 lines, for example the PR summary '98.5 percentile · General · JEE Mai…' and the COMEDK summary '120 / 180 marks · COMEDK 2026 · GM'. They are readable but not complete.", "testID": "pr-input-collapsed", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank > College predictor > Percentile chart", "issues": ["The chart panel is not a form Strip, so its chosen category chip (General) is white/silver, not red. Optional: tint it red to match 'blood red everywhere'."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/iter95_helpers.txt"],
+  "action_items": [
+    "LOW: Summary hint at 320px: allow 2 lines, or use a shorter hint on narrow screens, so 'Doosra number dekhna hai?' is never cut off (src/rank/controls.tsx:94).",
+    "OPTIONAL: Tint the chosen chips in the College Percentile chart panel red. Clean up the stale 'pink' comment in app/(tabs)/rank.tsx:129 and the unused 'pink' jewel in src/rank/Metal.tsx."
+  ],
+  "critical_code_review_comments": [
+    "The glow fix is correct: the shadow props are spread into one inline style with shadowColor, and web now renders the blur (18px tile and form, 10px Edit, 12px CTA).",
+    "Accent colours are centralised in ACCENTS and theme tokens (custom_fBlood*), with no hardcoded hex values in components.",
+    "Dead code: the Jewel 'pink' in Metal.tsx and the custom_pink* theme tokens are no longer used by any tile."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% of requested checks (2 low-priority cosmetic issues at 320px)"},
+  "seed_data_creation": "None. Read-only Rank predictor queries only; no test started or submitted, PIN unchanged. Cleared and later set the localStorage key rank.cta.seen.v1 in the test browser only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: on /entry wait about 3s, then click + keyboard.type(delay=50) into entry-phone-input and entry-pin-input, click entry-continue-button, then click the text 'RANK' (page.goto('/rank') loses the session). Input fields: rp-marks-input, pr-percentile-input, rank-marks-input, bitsat-score-input, comedk-marks-input. CTAs: rank-seat-N-cta, bitsat-item-N-cta, comedk-seat-N-cta. The Edit pill is '<pfx>-input-collapsed-edit' and the hint is '<pfx>-input-collapsed-hint'.",
+  "rca_of_issue": ""
+}

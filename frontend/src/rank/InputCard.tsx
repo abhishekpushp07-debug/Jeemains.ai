@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { T } from "@/src/components/ui";
-import { Pill } from "@/src/components/design";
 import { rankColors as colors, fonts, noOutline, space } from "@/src/theme";
 import type { Category, FormBody, Level } from "./api";
 import { CATEGORY_LABEL, LEVEL } from "./tones";
 import { Picker, Strip, Summary, Toggle } from "./controls";
+import { FormButton, useField } from "./accent";
 
 export type FormState = { marks: string; pct: string; level: Level; category: Category; female: boolean; pwd: boolean; state: string | null; branches: string[] };
 export const DEFAULT_FORM: FormState = { marks: "", pct: "", level: "normal", category: "GEN", female: false, pwd: false, state: null, branches: [] };
@@ -41,6 +41,7 @@ export function InputCard({ form, onChange, states, branches, open, summary, onS
 }) {
   const [problem, setProblem] = useState<string | null>(null);
   const [picker, setPicker] = useState<"state" | "branch" | null>(null);
+  const field = useField();
   if (!open) return <Summary testID="rank-input-collapsed" text={summary} onEdit={onEdit} />;
   const show = () => {
     const body = toBody(form);
@@ -49,17 +50,17 @@ export function InputCard({ form, onChange, states, branches, open, summary, onS
     onShow(body);
   };
   const clean = (v: string, decimals: boolean) => v.replace(decimals ? /[^0-9.]/g : /[^0-9-]/g, "").slice(0, decimals ? 10 : 4);
-  return <Strip title="Your score" testID="rank-input">
+  return <Strip form title="Your score" testID="rank-input">
     <View style={styles.inputs}>
       <View style={{ flex: 1, gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Marks (out of 300)</T>
         <TextInput testID="rank-marks-input" value={form.marks} onChangeText={v => onChange({ marks: clean(v, false) })} keyboardType="numbers-and-punctuation"
-          placeholder="e.g. 180" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} returnKeyType="done" maxLength={4} accessibilityLabel="Marks out of 300" />
+          placeholder="e.g. 180" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor} returnKeyType="done" maxLength={4} accessibilityLabel="Marks out of 300" />
       </View>
       <View style={{ flex: 1, gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Percentile</T>
         <TextInput testID="rank-percentile-input" value={form.pct} onChangeText={v => onChange({ pct: clean(v, true) })} keyboardType="decimal-pad"
-          placeholder="e.g. 97.4" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} returnKeyType="done" maxLength={10} accessibilityLabel="Percentile" />
+          placeholder="e.g. 97.4" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor} returnKeyType="done" maxLength={10} accessibilityLabel="Percentile" />
       </View>
     </View>
     <View style={styles.row}>
@@ -76,7 +77,7 @@ export function InputCard({ form, onChange, states, branches, open, summary, onS
       <Toggle testID="rank-branch" label={branchLabel(form.branches)} on={form.branches.length > 0} caret onPress={() => setPicker("branch")} />
     </View>
     {problem ? <T testID="rank-input-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
-    <Pill testID="rank-show" size="lg" label="Show" iconRight="arrow-right" busy={busy} onPress={show} bg={colors.brandPrimary} ink={colors.onBrandPrimary} />
+    <FormButton testID="rank-show" label="Show" busy={busy} onPress={show} />
     <Picker visible={picker === "state"} title="Home state" options={states} value={form.state ? [form.state] : []} allLabel="No home state"
       onChange={v => onChange({ state: v[0] ?? null })} onClose={() => setPicker(null)} testID="rank-state-picker" />
     <Picker visible={picker === "branch"} title="Branch" options={branches} value={form.branches} multi allLabel="All branches"

@@ -1,0 +1,20 @@
+{
+  "summary": "Frontend-only re-test of the College predictor tile (pure blood red). Signed in as QA learner 7004186276 and checked /rank at 390x844 and 320x700. ALL REQUESTED CHECKS PASSED. rank-tool-college is pure red in both states. Pixel samples from element screenshots (not chosen / chosen): TL (221,27,51)/(221,27,51), centre (200,60,79)/(208,70,87), bottom-right (203,91,106)/(210,96,110), bottom edge (187,40,58)/(190,43,62). The lowest R value inside the tile is 155 at 390px and 159 at 320px. Every dark pixel (R<110) is outside the 18px rounded corners, where the page background shows through. The bottom rows are not darker than the top rows (avg (191,40,59) vs (188,27,48)), so there is no dark foot and no dark brush lines. The title 'COLLEGE PREDICTOR' is rgb(255,255,255), the small line 'colleges + cutoffs' is rgb(255,225,229), and the icon circle is light glass. Neither text overflows. Not chosen: bg #B80D24, border rgba(255,255,255,0.38), no shadow. Chosen: border rgb(255,194,201) (light pink-white) and glow rgba(255,77,94,0.7) 0 4px 18px. The other tiles are unchanged graphite metal: rank maroon, pct indigo, target teal, compare champagne, with backgrounds rgb(21,22,25) and mostly dark pixels. Regression: rank-input-head is rgb(209,15,42). 180 marks + rank-show gives rank-seat-0 with a red 'Cutoff dekho' CTA (rgb(209,15,42)). The summary reads '180 marks · Normal · General'. rank-input-collapsed-edit reopens the form with 180. At 320x700 no text in any of the 5 tiles overflows.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [{"screen": "Rank tool grid", "issues": ["Minor: the chosen tile's styles.tileOn borderWidth 1.5 shows as 1px in computed style on web at DPR 1. This is cosmetic and was already true in earlier rounds."]}],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/tmp_ui_smoke/i96_college_off.png", "/app/test_reports/tmp_ui_smoke/i96_college_on.png", "/app/test_reports/tmp_ui_smoke/i96_college_on_320.png", "/app/test_reports/tmp_ui_smoke/i96_college_off_320.png"],
+  "action_items": [],
+  "critical_code_review_comments": ["Metal.tsx removes the dark streaks and the metalShade foot only when the tile is `pure`, and ToolGrid sets the blood backgrounds and borders. This is clean and only affects the college tile."],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "None. Only read-only predictor use; no tests started or submitted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Login: on /entry wait about 3s, type with keyboard.type into entry-phone-input and entry-pin-input, click entry-continue-button, then click the text 'RANK'. Pixel check: element screenshot of rank-tool-college plus PIL. Ignore the pixels outside the 18px radius corners.",
+  "rca_of_issue": ""
+}

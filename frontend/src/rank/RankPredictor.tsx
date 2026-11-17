@@ -13,6 +13,7 @@ import { CATEGORY_LABEL, LEVEL, SERIF } from "./tones";
 import { Strip, Summary, Switch, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 import { shareEstimate } from "./share";
+import { FormButton, useField } from "./accent";
 
 const SAVED = "rank.estimate.v1";
 const LEVELS: Level[] = ["tough", "normal", "easy"];
@@ -46,6 +47,7 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
   const [problem, setProblem] = useState<string | null>(null);
   const [tries, setTries] = useState(0);
   const query = queries[form.exam] ?? null;
+  const field = useField();
 
   useEffect(() => {
     storage.getItem<string | null>(SAVED, null).then(raw => {
@@ -78,13 +80,13 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
 
   return <>
     <Switch prefix="rp-exam" value={form.exam} onChange={switchExam} items={[{ key: "jee", label: "JEE Main" }, { key: "comedk", label: "COMEDK" }]} />
-    {open || !query ? <Strip title="Your marks" testID="rp-input">
+    {open || !query ? <Strip form title="Your marks" testID="rp-input">
       <View style={{ gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Marks (out of {MAX[form.exam]})</T>
         <TextInput testID="rp-marks-input" value={form.exam === "jee" ? form.jee : form.comedk} keyboardType="numbers-and-punctuation"
           onChangeText={v => patch(form.exam === "jee" ? { jee: v.replace(/[^0-9-]/g, "").slice(0, 4) } : { comedk: v.replace(/[^0-9]/g, "").slice(0, 3) })}
-          placeholder={form.exam === "jee" ? "e.g. 180" : "e.g. 110"} placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark"
-          selectionColor={colors.custom_rankBloodInk} returnKeyType="done" maxLength={4} accessibilityLabel={`Marks out of ${MAX[form.exam]}`} onSubmitEditing={() => run(form)} />
+          placeholder={form.exam === "jee" ? "e.g. 180" : "e.g. 110"} placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark"
+          selectionColor={field.selectionColor} returnKeyType="done" maxLength={4} accessibilityLabel={`Marks out of ${MAX[form.exam]}`} onSubmitEditing={() => run(form)} />
       </View>
       {form.exam === "jee" ? <>
         <View style={styles.row}>
@@ -98,7 +100,7 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
         </View>
       </> : <T size={12} color={colors.muted}>COMEDK UGET 2026: 180 sawaal, +1 / 0. Sabki ek hi merit list, isliye category aur paper type nahi lagte.</T>}
       {problem ? <T testID="rp-input-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
-      <Pill testID="rp-show" size="lg" label="Predict rank" iconRight="arrow-right" busy={busy && !shown} onPress={() => run(form)} bg={colors.brandPrimary} ink={colors.onBrandPrimary} />
+      <FormButton testID="rp-show" label="Predict rank" busy={busy && !shown} onPress={() => run(form)} />
     </Strip> : <Summary testID="rp-input-collapsed" text={summaryOf(query)} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="rp-error" />
     {shown && query ? <>

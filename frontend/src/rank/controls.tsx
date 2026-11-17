@@ -6,6 +6,7 @@ import { Icon, Press, T } from "@/src/components/ui";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
+import { InForm, useAccent, useFormAccent } from "./accent";
 
 /** Section title in the Rank Card's voice: a blood-red hairline, then widely tracked silver caps. */
 export function RuleTitle({ children }: { children: string }) {
@@ -15,28 +16,39 @@ export function RuleTitle({ children }: { children: string }) {
   </View>;
 }
 
-/** A dark panel with a faint top-left sheen, like the back of the card. */
-export function Strip({ title, right, children, testID }: { title?: string; right?: React.ReactNode; children: React.ReactNode; testID?: string }) {
-  return <View testID={testID} style={styles.strip}>
-    <LinearGradient colors={[colors.custom_rankPanelSheen, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0.7, y: 0.6 }} style={StyleSheet.absoluteFill} />
-    {title ? <View style={styles.stripHead}>
+/** A dark panel with a faint top-left sheen, like the back of the card. With `form` it is the open tool's form: framed in the
+ *  tool's bright colour, a solid header band in that colour (tool icon, tool name, `title`) and chosen chips in it too. */
+export function Strip({ title, right, children, testID, form }: { title?: string; right?: React.ReactNode; children: React.ReactNode; testID?: string; form?: boolean }) {
+  const tool = useAccent();
+  const a = form ? tool : null;
+  return <View testID={testID} style={[styles.strip, a && { ...formGlow, borderColor: a.line, shadowColor: a.text }]}>
+    <LinearGradient colors={[a ? a.soft : colors.custom_rankPanelSheen, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0.7, y: 0.6 }} style={StyleSheet.absoluteFill} />
+    {a ? <View testID={testID ? `${testID}-head` : undefined} style={[styles.formHead, { backgroundColor: a.ink }]}>
+      <View style={[styles.formIcon, { backgroundColor: a.on }]}><Glyph name={a.icon} size={16} color={a.ink} stroke={1.6} /></View>
+      <View style={{ flex: 1, minWidth: 0 }}>
+        <T w="bold" size={10} color={a.on} style={styles.formName} numberOfLines={1}>{a.name.toUpperCase()}</T>
+        {title ? <T w="heavy" size={15.5} color={a.on} numberOfLines={1}>{title}</T> : null}
+      </View>
+      {right}
+    </View> : title ? <View style={styles.stripHead}>
       <View style={{ flexShrink: 1 }}><RuleTitle>{title}</RuleTitle></View>
       {right}
     </View> : null}
-    {children}
+    <InForm.Provider value={!!a}>{children}</InForm.Provider>
   </View>;
 }
 
-/** Exam / mode switch: dark track, the chosen side raised with a sparkle-silver outline. */
+/** Exam / mode switch: dark track, the chosen side raised with a sparkle-silver outline (the tool's colour inside a tool). */
 export function Switch<K extends string>({ items, value, onChange, prefix }: {
   items: { key: K; label: string }[]; value: K; onChange: (k: K) => void; prefix: string;
 }) {
+  const a = useAccent();
   return <View accessibilityRole="tablist" style={styles.switch}>
     {items.map(it => {
       const on = it.key === value;
       return <Press key={it.key} testID={`${prefix}-${it.key}`} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={it.label}
-        onPress={() => onChange(it.key)} scaleTo={0.98} style={[styles.switchItem, on && styles.switchOn]}>
-        <T w={on ? "bold" : "semibold"} size={13.5} color={on ? colors.onSurface : colors.muted} numberOfLines={1}>{it.label}</T>
+        onPress={() => onChange(it.key)} scaleTo={0.98} style={[styles.switchItem, on && styles.switchOn, on && a && { borderColor: a.line, backgroundColor: a.soft }]}>
+        <T w={on ? "bold" : "semibold"} size={13.5} color={on ? (a ? a.text : colors.onSurface) : colors.muted} numberOfLines={1}>{it.label}</T>
       </Press>;
     })}
   </View>;
@@ -51,10 +63,14 @@ export function Tag({ label, ink, soft, testID }: { label: string; ink: string; 
 export function Toggle({ label, on, onPress, ink = colors.onSurface, soft, testID, caret }: {
   label: string; on?: boolean; onPress: () => void; ink?: string; soft?: string; testID?: string; caret?: boolean;
 }) {
+  // Plain chips (no colour of their own) take the tool's colour inside its form.
+  const form = useFormAccent();
+  const a = !soft && ink === colors.onSurface ? form : null;
+  const onInk = a ? a.on : soft ? ink : colors.onSurfaceInverse;
   return <Press testID={testID} onPress={onPress} accessibilityLabel={label} accessibilityState={{ selected: !!on }} scaleTo={0.97}
-    style={[styles.toggle, on ? { backgroundColor: soft ?? ink, borderColor: ink } : null]}>
-    <T w="bold" size={13} color={on ? (soft ? ink : colors.onSurfaceInverse) : colors.custom_softText} numberOfLines={1}>{label}</T>
-    {caret ? <Glyph name="chevron-down" size={14} color={on ? (soft ? ink : colors.onSurfaceInverse) : colors.custom_dim} /> : null}
+    style={[styles.toggle, on ? { backgroundColor: a ? a.ink : soft ?? ink, borderColor: a ? a.ink : ink } : null]}>
+    <T w="bold" size={13} color={on ? onInk : colors.custom_softText} numberOfLines={1}>{label}</T>
+    {caret ? <Glyph name="chevron-down" size={14} color={on ? onInk : colors.custom_dim} /> : null}
   </Press>;
 }
 
@@ -65,11 +81,22 @@ export function StarButton({ saved, onPress, testID }: { saved: boolean; onPress
   </Press>;
 }
 
-/** The input after Show: one tappable line with Edit. */
+/** The input after Show: the score line and a bright filled "Edit" button in the tool's colour, so trying another number is obvious.
+ *  The whole row reopens the form. */
 export function Summary({ text, onEdit, testID }: { text: string; onEdit: () => void; testID: string }) {
-  return <Press testID={testID} onPress={onEdit} accessibilityLabel={`${text}. Edit`} scaleTo={0.99} style={styles.summary}>
-    <T w="semibold" size={14} numberOfLines={2} style={{ flex: 1 }}>{text.replace(/-/g, "\u2011")}</T>
-    <T w="bold" size={14} color={colors.brandText}>Edit</T>
+  const a = useAccent();
+  const bg = a?.ink ?? colors.brandPrimary, fg = a?.on ?? colors.onBrandPrimary, tint = a?.text ?? colors.brandText;
+  return <Press testID={testID} onPress={onEdit} accessibilityRole="button" accessibilityLabel={`${text}. Edit karke doosra number dekho`} scaleTo={0.99}
+    style={[styles.summary, a && { borderColor: a.line, backgroundColor: colors.custom_card }]}>
+    {a ? <View style={[styles.summaryIcon, { backgroundColor: a.soft, borderColor: a.line }]}><Glyph name={a.icon} size={15} color={a.text} stroke={1.6} /></View> : null}
+    <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
+      <T w="semibold" size={14} numberOfLines={2}>{text.replace(/-/g, "\u2011")}</T>
+      <T testID={`${testID}-hint`} w="semibold" size={11.5} color={tint} numberOfLines={1}>Doosra number dekhna hai?</T>
+    </View>
+    <View testID={`${testID}-edit`} style={[styles.editBtn, { ...editGlow, backgroundColor: bg, shadowColor: bg }]}>
+      <Glyph name="pencil" size={15} color={fg} />
+      <T w="heavy" size={14} color={fg}>Edit</T>
+    </View>
   </Press>;
 }
 
@@ -98,8 +125,17 @@ export function Picker({ visible, title, options, value, multi, allLabel, onChan
   </DSheet>;
 }
 
+// Glows kept as plain objects and spread into one inline style with their colour (web draws the blur, Android gets elevation).
+const formGlow = { borderWidth: 1.5, shadowOpacity: 0.45, shadowRadius: 18, shadowOffset: { width: 0, height: 0 }, elevation: 8 };
+const editGlow = { shadowOpacity: 0.55, shadowRadius: 10, shadowOffset: { width: 0, height: 2 }, elevation: 5 };
+
 const styles = StyleSheet.create({
   strip: { borderRadius: 22, padding: space.lg, gap: space.md, overflow: "hidden", backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine },
+  formHead: { flexDirection: "row", alignItems: "center", gap: 10, marginTop: -space.lg, marginHorizontal: -space.lg, paddingHorizontal: space.lg, paddingVertical: 10 },
+  formIcon: { width: 32, height: 32, borderRadius: 16, alignItems: "center", justifyContent: "center" },
+  formName: { letterSpacing: 1.6, opacity: 0.72 },
+  summaryIcon: { width: 30, height: 30, borderRadius: 15, borderWidth: 1, alignItems: "center", justifyContent: "center" },
+  editBtn: { flexDirection: "row", alignItems: "center", gap: 6, minHeight: 44, paddingHorizontal: 16, borderRadius: radius.pill },
   stripHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm, minHeight: 20 },
   ruleTitle: { flexDirection: "row", alignItems: "center", gap: space.sm },
   rule: { width: 18, height: 1.5, backgroundColor: colors.custom_rankBlood },

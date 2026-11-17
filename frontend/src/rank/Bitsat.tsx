@@ -3,17 +3,18 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { ErrorBox, Press, T } from "@/src/components/ui";
-import { Pill } from "@/src/components/design";
 import { rankColors as colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { storage } from "@/src/utils/storage";
 import { bitsat, BitsatItem, BitsatOut, Campus, Degree } from "./api";
 import { CAMPUS, TAG } from "./tones";
-import { StarButton, Strip, Summary, Tag, Toggle } from "./controls";
+import { Strip, Summary, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps } from "./MetalCard";
 import { shareBitsat } from "./share";
-import { Medal, MedalWash } from "./Medal";
+import { CardsHeading, CollegeCard, TapHint, cardStyles, useCardViews } from "./CollegeCard";
+import { edgeOf } from "./SeatList";
 import { PdfButton } from "./PdfButton";
 import { bitsatSaved, toggleSaved, useShortlist } from "./shortlist";
+import { FormButton, useField } from "./accent";
 
 const SAVED = "rank.bitsat.v1";
 const CAMPUSES: Campus[] = ["all", "Pilani", "Goa", "Hyderabad"];
@@ -31,6 +32,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
   const [problem, setProblem] = useState<string | null>(null);
   const [tries, setTries] = useState(0);
   const saved = useShortlist();
+  const field = useField();
 
   useEffect(() => { storage.getItem<string | null>(SAVED, null).then(v => { if (v) setText(v); }); }, []);
   useEffect(() => {
@@ -49,31 +51,33 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
   };
 
   return <>
-    {open || score === null ? <Strip title="Your BITSAT score" testID="bitsat-input">
+    {open || score === null ? <Strip form title="Your BITSAT score" testID="bitsat-input">
       <View style={{ gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Score (out of 390)</T>
         <TextInput testID="bitsat-score-input" value={text} onChangeText={v => setText(v.replace(/[^0-9-]/g, "").slice(0, 4))} keyboardType="numbers-and-punctuation"
-          placeholder="e.g. 280" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} returnKeyType="done" onSubmitEditing={show} maxLength={4} accessibilityLabel="BITSAT score out of 390" />
+          placeholder="e.g. 280" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor} returnKeyType="done" onSubmitEditing={show} maxLength={4} accessibilityLabel="BITSAT score out of 390" />
       </View>
       <T size={12} color={colors.muted}>BITSAT 2026: 130 sawaal, +3 / −1. Cutoff BITS ki official 2022–2026 list se.</T>
       {problem ? <T testID="bitsat-input-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
-      <Pill testID="bitsat-show" size="lg" label="Show" iconRight="arrow-right" busy={busy && !res} onPress={show} bg={colors.brandPrimary} ink={colors.onBrandPrimary} />
+      <FormButton testID="bitsat-show" label="Show" busy={busy && !res} onPress={show} />
     </Strip> : <Summary testID="bitsat-input-collapsed" text={`${score} / 390 · BITSAT 2026`} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="bitsat-error" />
     {res && score !== null ? <>
       <BitsatCard data={res} saved={saved.length} onShortlist={onShortlist} />
-      <Strip title="BITS programs" testID="bitsat-list"
-        right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>{res.result.cleared} / {res.result.total} clear</T>}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-          {CAMPUSES.map(c => <Toggle key={c} testID={`bitsat-campus-${c}`} label={c === "all" ? "All campus" : CAMPUS[c].label} on={campus === c}
-            ink={c === "all" ? colors.onSurface : CAMPUS[c].ink} soft={c === "all" ? undefined : CAMPUS[c].soft} onPress={() => setCampus(c)} />)}
-        </ScrollView>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
-          {DEGREES.map(d => <Toggle key={d.key} testID={`bitsat-degree-${d.key}`} label={d.label} on={degree === d.key} onPress={() => setDegree(d.key)} />)}
-        </ScrollView>
-        <PdfButton testID="bitsat-pdf" path="/bitsat" body={{ score, campus, degree }} label="Programs list ki PDF" />
+      <View testID="bitsat-list" style={cardStyles.list}>
+        <Strip title="BITS programs" testID="bitsat-list-head"
+          right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>{res.result.cleared} / {res.result.total} clear</T>}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
+            {CAMPUSES.map(c => <Toggle key={c} testID={`bitsat-campus-${c}`} label={c === "all" ? "All campus" : CAMPUS[c].label} on={campus === c}
+              ink={c === "all" ? colors.onSurface : CAMPUS[c].ink} soft={c === "all" ? undefined : CAMPUS[c].soft} onPress={() => setCampus(c)} />)}
+          </ScrollView>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
+            {DEGREES.map(d => <Toggle key={d.key} testID={`bitsat-degree-${d.key}`} label={d.label} on={degree === d.key} onPress={() => setDegree(d.key)} />)}
+          </ScrollView>
+          <PdfButton testID="bitsat-pdf" path="/bitsat" body={{ score, campus, degree }} label="Programs list ki PDF" />
+        </Strip>
         <BitsatList data={res} saved={new Set(saved.map(s => s.id))} />
-      </Strip>
+      </View>
     </> : null}
   </>;
 }
@@ -105,57 +109,63 @@ function BitsatCard({ data, saved, onShortlist }: { data: BitsatOut; saved: numb
 function BitsatList({ data, saved }: { data: BitsatOut; saved: Set<string> }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [rest, setRest] = useState(false);
-  const row = (b: BitsatItem, testID: string, rank?: number) => <BitsatRow key={b.id} item={b} score={data.result.score} years={data.years} testID={testID} rank={rank}
-    open={openId === b.id} onPress={() => setOpenId(openId === b.id ? null : b.id)} saved={saved.has(`bitsat-${b.id}`)} onStar={() => toggleSaved(bitsatSaved(b))} />;
+  const views = useCardViews();
+  const tap = (id: string) => { if (openId !== id) views.mark(id); setOpenId(openId === id ? null : id); };
+  const row = (b: BitsatItem, testID: string, rank?: number, first?: boolean) => <BitsatRow key={`${testID}-${b.id}`} item={b} score={data.result.score} years={data.years} testID={testID} rank={rank}
+    open={openId === b.id} viewed={views.viewed.has(b.id)} pulse={first && views.pulse} onPress={() => tap(b.id)} saved={saved.has(`bitsat-${b.id}`)} onStar={() => toggleSaved(bitsatSaved(b))} />;
   return <>
     {data.items.length === 0 ? <T testID="bitsat-list-empty" size={13.5} color={colors.muted}>Is score par is filter mein koi program 2026 cutoff ke paas nahi. Campus ya degree badal kar dekho.</T>
-      : <View>{data.items.map((b, i) => row(b, `bitsat-item-${i}`, i + 1))}</View>}
-    {data.near.length ? <View testID="bitsat-near" style={{ gap: space.xs, marginTop: space.sm }}>
-      <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2 }}>BAS THODA SA DOOR</T>
+      : <>
+        <TapHint testID="bitsat-tap-hint" viewed={views.viewed.size} what="program" />
+        {data.items.map((b, i) => row(b, `bitsat-item-${i}`, i + 1, i === 0))}
+      </>}
+    {data.near.length ? <View testID="bitsat-near" style={cardStyles.list}>
+      <CardsHeading icon="flag-checkered" title="BAS THODA SA DOOR" sub="Thode aur marks, aur ye programs bhi aapke" ink={colors.custom_flame} />
       {data.near.map((b, i) => row(b, `bitsat-near-${i}`))}
     </View> : null}
-    {data.rest.length ? rest ? <View testID="bitsat-rest">{data.rest.map((b, i) => row(b, `bitsat-rest-${i}`))}</View>
+    {data.rest.length ? rest ? <View testID="bitsat-rest" style={cardStyles.list}>
+      <CardsHeading icon="format-list-bulleted" title="BAAKI PROGRAMS" />
+      {data.rest.map((b, i) => row(b, `bitsat-rest-${i}`))}
+    </View>
       : <Press testID="bitsat-rest-show" onPress={() => setRest(true)} style={styles.outline}><T w="bold" size={14}>Baaki programs ({data.rest.length})</T></Press> : null}
   </>;
 }
 
-function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID, rank }: {
+function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID, rank, viewed, pulse }: {
   item: BitsatItem; score: number; years: number[]; open: boolean; onPress: () => void; saved: boolean; onStar: () => void; testID: string; rank?: number;
+  viewed?: boolean; pulse?: boolean;
 }) {
   const k = CAMPUS[item.campus];
   const d = item.last === null ? null : item.cutoff - item.last, same = d !== null && Math.abs(d) <= 2;
-  return <View style={styles.row}>
-    <MedalWash n={rank} />
-    <Press testID={testID} onPress={onPress} accessibilityState={{ expanded: open }} accessibilityLabel={`${item.college}, ${item.program}`} scaleTo={0.99} style={styles.main}>
-      {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
-      <View style={{ flex: 1, gap: 3 }}>
-        <T w="bold" size={14.5} numberOfLines={2}>{item.college}</T>
-        <View style={styles.tags}>
-          <Tag label={k.label} ink={k.ink} soft={k.soft} />
-          {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
-        </View>
-        <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{item.program}</T>
-        <T size={12} color={colors.muted}>Cutoff 2026: {item.cutoff}{item.last !== null ? ` · 2025: ${item.last}` : " · naya program"}</T>
-        {d !== null ? <T testID={`${testID}-trend`} w="semibold" size={12} color={same ? colors.muted : d > 0 ? colors.error : colors.success}>
-          {same ? "2025 jitna hi" : d > 0 ? `▲ ${d} marks, 2025 se tough hua` : `▼ ${-d} marks, 2025 se aasaan hua`}
-        </T> : null}
-        <T w="semibold" size={12} color={item.gap > 0 ? colors.custom_flame : colors.success}>
-          {item.gap > 0 ? `+${item.gap} marks aur chahiye` : `Aapka score cutoff se ${score - item.cutoff} upar`}
-        </T>
-        {open ? <T testID={`${testID}-history`} size={12} color={colors.custom_softText}>
-          {years.map((y, i) => `${y}: ${item.history[i] ?? "—"}`).join("  ·  ")}
-        </T> : null}
-      </View>
-    </Press>
-    <StarButton saved={saved} onPress={onStar} testID={`${testID}-star`} />
-  </View>;
+  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(item.tag, item.gap > 0)} title={item.college} a11y={`${item.college}, ${item.program}`} open={open}
+    tags={<>
+      <Tag label={k.label} ink={k.ink} soft={k.soft} />
+      {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}
+    </>}
+    sub={item.program}
+    stats={[
+      { label: "CUTOFF", value: String(item.cutoff), sub: "2026 · / 390" },
+      d === null ? { label: "2025 SE", value: "Naya", sub: "naya program", ink: colors.custom_softText, testID: `${testID}-trend` }
+        : { label: "2025 SE", value: same ? "≈ Same" : d > 0 ? `▲ ${d} tough` : `▼ ${-d} aasaan`, sub: `2025: ${item.last}`,
+          ink: same ? colors.custom_softText : d > 0 ? colors.error : colors.success, testID: `${testID}-trend` },
+      item.gap > 0 ? { label: "AAPKA", value: `+${item.gap} chahiye`, sub: `score ${score}`, ink: colors.custom_flame }
+        : { label: "AAPKA", value: `${score - item.cutoff} upar`, sub: `score ${score}`, ink: colors.success },
+    ]}
+    teaser="2022 se 2026 tak, 5 saal ke cutoff" viewed={viewed} pulse={pulse} onPress={onPress} saved={saved} onStar={onStar}>
+    {open ? <View testID={`${testID}-history`} style={styles.years}>
+      {years.map((y, i) => <View key={y} style={[styles.year, i === years.length - 1 && styles.yearNow]}>
+        <T w="bold" size={10.5} color={colors.custom_eyebrow}>{y}</T>
+        <T w="heavy" size={14} color={item.history[i] == null ? colors.custom_dim : colors.onSurface}>{item.history[i] ?? "—"}</T>
+      </View>)}
+    </View> : null}
+  </CollegeCard>;
 }
 
 const styles = StyleSheet.create({
   input: { height: 52, borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, paddingHorizontal: space.md, fontFamily: fonts.bold, fontSize: 18, color: colors.onSurface, ...noOutline },
   chips: { gap: space.sm, paddingRight: space.sm },
-  row: { flexDirection: "row", alignItems: "flex-start", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
-  main: { flex: 1, flexDirection: "row", gap: space.sm, paddingVertical: space.md, alignItems: "flex-start" },
-  tags: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 6 },
+  years: { flexDirection: "row", gap: 6 },
+  year: { flex: 1, minWidth: 0, alignItems: "center", gap: 2, paddingVertical: 8, borderRadius: 10, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_cardRaised },
+  yearNow: { borderColor: colors.custom_rankSilverLine },
   outline: { minHeight: 48, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center", marginTop: space.sm },
 });

@@ -15,6 +15,7 @@ import { Picker, Strip, Switch, Tag, Toggle } from "./controls";
 import { CollegeSearch } from "./CollegeSearch";
 import { feeLine } from "./ComedkSheet";
 import { PdfButton } from "./PdfButton";
+import { useAccent } from "./accent";
 
 const SAVED = "rank.target.v1";
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
@@ -58,10 +59,11 @@ export function TargetMarks({ states }: { states: string[] }) {
 }
 
 function Chooser({ label, onPress, testID }: { label: string | null; onPress: () => void; testID: string }) {
-  return <Press testID={testID} onPress={onPress} scaleTo={0.99} style={styles.chooser} accessibilityLabel={label ?? "College chuno"}>
-    <Glyph name="school-outline" size={20} color={colors.custom_rankSilver} stroke={1.5} />
+  const a = useAccent();
+  return <Press testID={testID} onPress={onPress} scaleTo={0.99} style={[styles.chooser, a && { borderColor: a.line }]} accessibilityLabel={label ?? "College chuno"}>
+    <Glyph name="school-outline" size={20} color={a ? a.text : colors.custom_rankSilver} stroke={1.5} />
     <T w="bold" size={15} color={label ? colors.onSurface : colors.custom_softText} numberOfLines={1} style={{ flex: 1 }}>{label ?? "College chuno"}</T>
-    <Glyph name="chevron-down" size={16} color={colors.muted} />
+    <Glyph name="chevron-down" size={16} color={a ? a.text : colors.muted} />
   </Press>;
 }
 
@@ -90,7 +92,7 @@ function JeePart({ p, patch, states, colleges }: { p: Profile; patch: (x: Partia
   const chosen = colleges.find(c => c.inst === p.inst);
   const options = useMemo(() => colleges.map(c => ({ key: String(c.inst), title: c.short, sub: `${KIND[c.type].label} · ${c.city}, ${c.state}`, find: c.name })), [colleges]);
   return <>
-    <Strip title="Aapki details" testID="tm-profile">
+    <Strip form title="Aapki details" testID="tm-profile">
       <View style={styles.wrap}>
         {CATS.map(c => <Toggle key={c} testID={`tm-cat-${c}`} label={CATEGORY_LABEL[c]} on={p.category === c} onPress={() => patch({ category: c })} />)}
       </View>
@@ -167,7 +169,7 @@ function ComedkPart({ p, patch, colleges }: { p: Profile; patch: (x: Partial<Pro
   const chosen = colleges.find(c => c.code === p.code);
   const options = useMemo(() => colleges.map(c => ({ key: c.code, title: c.short, sub: c.city || "Karnataka", find: c.name })), [colleges]);
   return <>
-    <Strip title="College" testID="tm-profile">
+    <Strip form title="College" testID="tm-profile">
       <Chooser testID="tm-college" label={chosen?.short ?? null} onPress={() => setPicker(true)} />
       <T size={11.5} color={colors.custom_dim}>Sirf GM (All India) seats. COMEDK mein category se cutoff nahi badalta.</T>
     </Strip>
@@ -221,9 +223,11 @@ function BitsatPart({ campus, onCampus }: { campus: Profile["campus"]; onCampus:
   const t = useOnce<BitsatTarget>(targetBitsat);
   const rows = (t.data?.rows ?? []).filter(r => campus === "all" || r.campus === campus);
   return <>
-    <View style={styles.wrap}>
-      {(["all", "Pilani", "Goa", "Hyderabad"] as const).map(c => <Toggle key={c} testID={`tm-campus-${c}`} label={c === "all" ? "All campuses" : c} on={campus === c} onPress={() => onCampus(c)} />)}
-    </View>
+    <Strip form title="Campus" testID="tm-campus">
+      <View style={styles.wrap}>
+        {(["all", "Pilani", "Goa", "Hyderabad"] as const).map(c => <Toggle key={c} testID={`tm-campus-${c}`} label={c === "all" ? "All campuses" : c} on={campus === c} onPress={() => onCampus(c)} />)}
+      </View>
+    </Strip>
     <ErrorBox error={t.error ?? undefined} retry={t.retry} testID="tm-error" />
     {t.data ? <Strip title="BITSAT target" testID="tm-list" right={<T size={12} color={colors.muted}>score / {t.data.max}</T>}>
       <PdfButton testID="tm-pdf" path="/target/bitsat" body={{ campus }} label="Target list ki PDF" />

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,6 +26,7 @@ import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
 import { PdfButton } from "@/src/rank/PdfButton";
 import { shareJee } from "@/src/rank/share";
 import { useShortlist } from "@/src/rank/shortlist";
+import { ACCENTS, AccentContext } from "@/src/rank/accent";
 
 const SAVED = "rank.form.v1";
 type Exam = "jee" | "bitsat" | "comedk";
@@ -65,6 +66,14 @@ export default function RankTab() {
   const saved = useShortlist();
   const ticket = useRef(0);
   const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
+  // Where the tool's form starts (just under the tiles) and how far the page is scrolled, so a tile tap can bring its form into view.
+  const formTop = useRef(0);
+  const scrollY = useRef(0);
+  const winH = useWindowDimensions().height;
+  const tapTool = (t: Tool) => {
+    openTool(t);
+    if (formTop.current - scrollY.current > winH * 0.62) scroll.current?.scrollTo({ y: Math.max(0, formTop.current - winH * 0.3), animated: true });
+  };
   useFocusEffect(useCallback(() => { setStatusBarStyle("light"); return () => setStatusBarStyle("dark"); }, []));
 
   const loadMeta = useCallback(() => {
@@ -117,20 +126,26 @@ export default function RankTab() {
     openTool("college");
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
-  const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>{node}</View> : null;
+  // Each tool pane carries its form colour (yellow, teal, lime, blood red, sky blue) for the form, chips, fields and buttons inside.
+  const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>
+    <AccentContext.Provider value={ACCENTS[t]}>{node}</AccentContext.Provider>
+  </View> : null;
   const examPane = (e: Exam, node: React.ReactNode) => seenExam.includes(e) ? <View key={e} style={[styles.tool, exam !== e && styles.hidden]}>{node}</View> : null;
 
   return (
     <PaletteContext.Provider value={colors}>
     <View style={{ flex: 1, backgroundColor: colors.custom_rankBg }}>
       <ScrollView ref={scroll} testID="rank-screen" keyboardShouldPersistTaps="handled" indicatorStyle="white"
+        onScroll={e => { scrollY.current = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
         contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}>
         <View style={{ gap: 6 }}>
           <RuleTitle>JEELIVE.AI · Rank</RuleTitle>
           <T testID="rank-title" style={styles.title}>Rank & college predictor</T>
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
-        <ToolGrid value={tool} onChange={openTool} saved={saved.length} />
+        <View onLayout={e => { formTop.current = e.nativeEvent.layout.y + e.nativeEvent.layout.height + space.lg; }}>
+          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} />
+        </View>
 
         {pane("rank", <RankPredictor onColleges={goColleges} />)}
         {pane("pct", <PercentileRank onColleges={goColleges} />)}

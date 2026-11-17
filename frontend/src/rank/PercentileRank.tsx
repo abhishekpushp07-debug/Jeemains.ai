@@ -12,6 +12,7 @@ import { CATEGORY_LABEL, LEVEL, SERIF } from "./tones";
 import { Strip, Summary, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 import { sharePercentile } from "./share";
+import { FormButton, useField } from "./accent";
 
 const SAVED = "rank.pct.v1";
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
@@ -28,6 +29,7 @@ export function PercentileRank({ onColleges }: { onColleges: (h: Handover) => vo
   const [error, setError] = useState<string | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   const [tries, setTries] = useState(0);
+  const field = useField();
 
   useEffect(() => {
     storage.getItem<string | null>(SAVED, null).then(raw => {
@@ -53,12 +55,12 @@ export function PercentileRank({ onColleges }: { onColleges: (h: Handover) => vo
   const summary = query ? [`${query.percentile} percentile`, CATEGORY_LABEL[query.category], query.pwd ? "PwD" : null, "JEE Main 2026"].filter(Boolean).join(" · ") : "";
 
   return <>
-    {open || !query ? <Strip title="Your NTA percentile" testID="pr-input">
+    {open || !query ? <Strip form title="Your NTA percentile" testID="pr-input">
       <View style={{ gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>JEE Main percentile (scorecard se)</T>
         <TextInput testID="pr-percentile-input" value={pct} onChangeText={v => { setPct(v.replace(/[^0-9.]/g, "").slice(0, 10)); setProblem(null); }}
-          keyboardType="decimal-pad" placeholder="e.g. 97.4567" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark"
-          selectionColor={colors.custom_rankBloodInk} returnKeyType="done" maxLength={10} accessibilityLabel="JEE Main percentile" onSubmitEditing={show} />
+          keyboardType="decimal-pad" placeholder="e.g. 97.4567" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark"
+          selectionColor={field.selectionColor} returnKeyType="done" maxLength={10} accessibilityLabel="JEE Main percentile" onSubmitEditing={show} />
       </View>
       <View style={styles.wrap}>
         {CATS.map(c => <Toggle key={c} testID={`pr-cat-${c}`} label={CATEGORY_LABEL[c]} on={category === c} onPress={() => setCategory(c)} />)}
@@ -66,7 +68,7 @@ export function PercentileRank({ onColleges }: { onColleges: (h: Handover) => vo
       </View>
       <T size={11.5} color={colors.custom_dim}>Percentile paper type par nahi badalta, isliye yahan Tough / Easy nahi chahiye.</T>
       {problem ? <T testID="pr-input-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
-      <Pill testID="pr-show" size="lg" label="Rank dekho" iconRight="arrow-right" busy={busy && !res} onPress={show} bg={colors.brandPrimary} ink={colors.onBrandPrimary} />
+      <FormButton testID="pr-show" label="Rank dekho" busy={busy && !res} onPress={show} />
     </Strip> : <Summary testID="pr-input-collapsed" text={summary} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="pr-error" />
     {res && query ? <>

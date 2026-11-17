@@ -199,10 +199,20 @@ const dark = {
   custom_indigoInk: "#C9C2FF", custom_indigoSoft: "rgba(142,128,255,0.20)",
   custom_tealFrom: "#232629", custom_tealMid: "#0A1516", custom_tealTo: "#0B4A45", custom_tealGlow: "#14B8A6", custom_tealLine: "#2DD4BF",
   custom_tealInk: "#9CF2E3", custom_tealSoft: "rgba(45,212,191,0.18)",
-  custom_pinkFrom: "#262429", custom_pinkMid: "#180A14", custom_pinkTo: "#5A1347", custom_pinkGlow: "#EC4899", custom_pinkLine: "#F472B6",
-  custom_pinkInk: "#FBBCDD", custom_pinkSoft: "rgba(244,114,182,0.20)",
   custom_champFrom: "#28282C", custom_champMid: "#141315", custom_champTo: "#47330F", custom_champGlow: "#D9A54A", custom_champLine: "#E8C273",
   custom_champInk: "#F5DCA0", custom_champSoft: "rgba(232,194,115,0.18)",
+  custom_bloodFrom: "#E01B33", custom_bloodMid: "#B80D24", custom_bloodTo: "#860818", custom_bloodGlow: "#FF6B78", custom_bloodLine: "#FFC2C9",
+  custom_bloodInk: "#FFFFFF", custom_bloodSoft: "rgba(255,255,255,0.18)",
+  // College predictor tile is pure blood red (no graphite): its small line, icon circle and icon ring on the red.
+  custom_bloodValue: "#FFE1E5", custom_bloodChip: "rgba(255,255,255,0.14)", custom_bloodChipLine: "rgba(255,255,255,0.38)",
+  // Rank tool forms: each tool's form gets its own bright colour (main, soft wash, frame line); text on it is near-black,
+  // except blood red (College predictor) which carries white text and a lighter red for words on black.
+  custom_fYellow: "#FFD60A", custom_fYellowSoft: "rgba(255,214,10,0.12)", custom_fYellowLine: "rgba(255,214,10,0.62)",
+  custom_fTeal: "#2DE1C2", custom_fTealSoft: "rgba(45,225,194,0.12)", custom_fTealLine: "rgba(45,225,194,0.62)",
+  custom_fLime: "#B5F23D", custom_fLimeSoft: "rgba(181,242,61,0.12)", custom_fLimeLine: "rgba(181,242,61,0.62)",
+  custom_fBlood: "#D10F2A", custom_fBloodText: "#FF4D5E", custom_fBloodSoft: "rgba(209,15,42,0.16)", custom_fBloodLine: "rgba(255,59,78,0.75)",
+  custom_fSky: "#4CC3FF", custom_fSkySoft: "rgba(76,195,255,0.12)", custom_fSkyLine: "rgba(76,195,255,0.62)",
+  custom_fOn: "#0B0B0F",
   // Medal coins for list positions 1-3 (light, middle, deep, ink) and the soft wash of their rows.
   custom_medalGoldLight: "#FFF0C2", custom_medalGold: "#E7C26B", custom_medalGoldDeep: "#9A7426", custom_medalGoldInk: "#2A1D05",
   custom_medalSilverLight: "#FFFFFF", custom_medalSilver: "#CDD5E2", custom_medalSilverDeep: "#7C879B", custom_medalSilverInk: "#18202E",

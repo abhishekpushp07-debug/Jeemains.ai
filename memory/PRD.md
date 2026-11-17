@@ -1,5 +1,12 @@
 # JEELIVE.AI Native App — PRD
 
+## Iteration94–96 — Rank tab: tool form colours, College predictor blood red, college button-cards, Edit pill
+- Forms by tool (src/rank/accent.tsx, AccentContext around each pane): Rank predictor yellow, Percentile teal, Target lime, College predictor blood red (white text), Compare sky blue. Each form has a coloured frame, header band, chips, fields and main button. The chosen tile's border and glow use the same colour.
+- College predictor tile is pure blood red: Metal jewel `blood` with `pure` (no graphite, no dark streaks or shade). The other tiles keep their graphite metal.
+- Collapsed form (Summary) shows a filled glowing "Edit" pill (`<id>-edit`) and the hint "Doosra number dekhna hai?".
+- College lists (JEE/COMEDK/BITSAT, src/rank/CollegeCard.tsx) show every college as a card: chance edge, medal, tags, 3 stat boxes and a "Cutoff dekho ›" CTA, plus a tap hint and a "Dekha" tag on opened cards. The first CTA breathes until a college has been opened once.
+- Tests: iteration_94/95/96 all pass.
+
 ## Iteration93 — Share gate opens on return from WhatsApp + Share Card Stats
 - User (Hinglish): result opens "WhatsApp khol kar wapas aane par; Max 3 sec"; then "Share Card Stats: Thank you, ki aapne itne log free education mein help kiya". Choices: a friend counts on opening the student's personal link; the thank-you also shows on the shared picture; "Make it very beautiful".
 - Gate: `src/mission/share.ts` `watchReturn()` (AppState; web = visibilitychange). Shares to another app/tab (`away`) unlock only after the student comes back; if the app never leaves, it unlocks after 3 s. iOS sheet / navigator.share dismissed keeps it locked. The note shows under the button that was pressed. Leaving during the thank-you still unlocks.

@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, useWindowDimensions, View } from "react-native";
 import { ErrorBox, Press, T } from "@/src/components/ui";
-import { Pill } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, space } from "@/src/theme";
 import { compareSaved, CompareCol, fmt } from "./api";
@@ -11,6 +10,7 @@ import { EXAM, SERIF, TAG } from "./tones";
 import { Strip, Tag } from "./controls";
 import { PdfButton } from "./PdfButton";
 import { Saved, savedPdfBody, toCompareItem, useShortlist } from "./shortlist";
+import { FormButton, useAccent } from "./accent";
 
 const MAX = 3;
 
@@ -23,6 +23,7 @@ export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
   const [error, setError] = useState<string | null>(null);
   const [tries, setTries] = useState(0);
   const touched = useRef(false);
+  const a = useAccent();
 
   // Until the student ticks something, the latest saved (up to 3) stay ticked, so a compare shows straight away.
   useEffect(() => {
@@ -45,18 +46,20 @@ export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
     setPick([...pick, id]); setHint(null);
   };
 
-  if (saved.length === 0) return <Strip title="College compare" testID="cmp-empty">
+  if (saved.length === 0) return <Strip form title="College compare" testID="cmp-empty">
     <T size={13.5} color={colors.custom_softText}>Abhi koi college save nahi hai. College predictor mein kisi bhi college ke ☆ par tap karo, phir yahan 2–3 colleges side by side dekho.</T>
-    <Pill testID="cmp-go-college" size="lg" label="College predictor kholo" iconRight="arrow-right" onPress={onGoCollege} bg={colors.brandPrimary} ink={colors.onBrandPrimary} />
+    <FormButton testID="cmp-go-college" label="College predictor kholo" onPress={onGoCollege} />
   </Strip>;
 
   return <>
-    <Strip title="Saved colleges" testID="cmp-list" right={<T size={12} color={colors.muted}>{pick.length} / {MAX} chune</T>}>
+    <Strip form title="Saved colleges" testID="cmp-list" right={<T w="bold" size={12} color={a ? a.on : colors.muted}>{pick.length} / {MAX} chune</T>}>
       {saved.map((s, i) => {
         const on = pick.includes(s.id);
         return <Press key={s.id} testID={`cmp-item-${i}`} onPress={() => toggle(s.id)} accessibilityRole="checkbox" accessibilityState={{ checked: on }}
           accessibilityLabel={`${s.title}, ${s.sub}`} scaleTo={0.99} style={styles.item}>
-          <View style={[styles.check, on && styles.checkOn]}>{on ? <Glyph name="check" size={14} color={colors.onBrandPrimary} stroke={2.4} /> : null}</View>
+          <View style={[styles.check, a && { borderColor: a.line }, on && styles.checkOn, on && a && { backgroundColor: a.ink, borderColor: a.ink }]}>
+            {on ? <Glyph name="check" size={14} color={a ? a.on : colors.onBrandPrimary} stroke={2.4} /> : null}
+          </View>
           <View style={{ flex: 1, gap: 2 }}>
             <View style={styles.line}>
               <Tag label={EXAM[s.exam].label} ink={EXAM[s.exam].ink} soft={EXAM[s.exam].soft} />

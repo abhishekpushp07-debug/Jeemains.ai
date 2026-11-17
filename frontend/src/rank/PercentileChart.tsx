@@ -70,5 +70,5 @@ const styles = StyleSheet.create({
   pct: { flex: 1.1 },
   rank: { flex: 1.2 },
   marks: { flex: 0.9 },
-  seats: { paddingLeft: space.sm, paddingBottom: space.sm },
+  seats: { paddingLeft: space.sm, paddingBottom: space.sm, gap: space.md },
 });
