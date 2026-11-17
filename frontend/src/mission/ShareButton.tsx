@@ -6,26 +6,28 @@ import { Press, T, buzz } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { colors, space } from "@/src/theme";
 import { sendWhatsApp } from "@/src/rapid/social";
-import { CAPTION } from "./copy";
-import { shareMission } from "./share";
+import { ShareOutcome, shareMission, watchReturn } from "./share";
 
 type CardRef = React.RefObject<React.ComponentRef<typeof View> | null>;
 
-/** Shares the card; `onShared` runs once the share went out (or the message-only fallback did), never on a closed sheet. */
-export function useMissionShare(card: CardRef, onShared?: () => void) {
+/** Shares the card with `caption`. `onShared` runs once the student is back from WhatsApp (or the other app), at most
+ *  3 seconds after the share where the app never leaves; never when the share sheet was closed without sending. */
+export function useMissionShare(card: CardRef, caption: string, onShared?: () => void) {
   const [busy, setBusy] = useState(false), [note, setNote] = useState("");
   const share = async (toWhatsApp: boolean) => {
     if (busy) return;
     setBusy(true); setNote("");
+    const trip = watchReturn();
     try {
-      const out = await shareMission(card, toWhatsApp);
-      if (out.shared) { setNote(out.note); onShared?.(); }
-      else if (onShared) setNote("Share pura nahi hua. Result dekhne ke liye ek baar share karo.");
-    } catch {
-      // The picture could not go out: send the message with the link instead.
-      try { await sendWhatsApp(CAPTION); onShared?.(); }
-      catch { setNote("Share nahi khula. Dobara try karo."); buzz("error"); }
-    } finally { setBusy(false); }
+      let out: ShareOutcome;
+      try { out = await shareMission(card, toWhatsApp, caption); }
+      catch { await sendWhatsApp(caption); out = { shared: true, away: true, note: "" }; } // the picture could not go out: the message with the link
+      if (!out.shared) { if (onShared) setNote("Share pura nahi hua. Result dekhne ke liye ek baar share karo."); return; }
+      if (onShared && out.away) { setNote("WhatsApp par bhej kar wapas aao, result yahin khul jaayega."); await trip.back(); }
+      setNote(out.note);
+      onShared?.();
+    } catch { setNote("Share nahi khula. Dobara try karo."); buzz("error"); }
+    finally { trip.stop(); setBusy(false); }
   };
   return { busy, note, share };
 }

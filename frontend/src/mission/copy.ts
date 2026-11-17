@@ -22,8 +22,8 @@ export const POINTS: { icon: IconName; title: string; body: string }[] = [
   { icon: "rocket-launch-outline", title: "Aage aur bhi aayega", body: "Koshish hai ki aane wale waqt mein features aur badhein. Aapka ek share is mission ko aage badhata hai." },
 ];
 
-/** Goes with the card picture (or alone, where a picture cannot be sent). */
-export const CAPTION = [
+/** Goes with the card picture (or alone, where a picture cannot be sent). `link` is the student's own link. */
+export const caption = (link: string) => [
   "🙏 Please share karo aur free education ko support karo!",
   "",
   "JEELIVE.AI: 100% free JEE Main, BITSAT & COMEDK prep. Abhishek Pushp ne ise AI ke saath, apne kharche par banaya hai.",
@@ -33,5 +33,5 @@ export const CAPTION = [
   "⚡ Rapid Fire: revision ka competitive game",
   "🎓 Rank + College predictor: dream college kitni door?",
   "",
-  "Abhi kholo 👉 https://jeelive.ai",
+  `Abhi kholo 👉 ${link}`,
 ].join("\n");

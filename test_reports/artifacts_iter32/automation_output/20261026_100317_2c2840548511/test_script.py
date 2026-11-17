@@ -17,7 +17,7 @@ async def run_test(page, output_dir, page_url):
             await route.continue_()
 
         await page.route('**/*', route_handler)
-        await page.goto('https://brushed-metal-rank--9b9d5o8b.preview.emergentagent.com/pyq')
+        await page.goto('https://share-card-stats--1s9i9qdg.preview.emergentagent.com/pyq')
         await page.wait_for_selector('[data-testid="pyq-screen"]', timeout=12000)
         await page.wait_for_timeout(1200)
 

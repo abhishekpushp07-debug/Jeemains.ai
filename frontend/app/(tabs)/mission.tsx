@@ -1,7 +1,7 @@
 // Our Mission: watch-only. The maker's share card on top with a red "Please share karo" WhatsApp button above and
 // below it, then the full story in segments, then the fine print.
 import React, { useRef } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
 import { Press, T } from "@/src/components/ui";
@@ -13,6 +13,8 @@ import { useCardWidth } from "@/src/mission/parts";
 import { MissionCard } from "@/src/mission/MissionCard";
 import { POINTS } from "@/src/mission/copy";
 import { ShareButton, useMissionShare } from "@/src/mission/ShareButton";
+import { ImpactPanel } from "@/src/mission/ImpactPanel";
+import { useMissionStats } from "@/src/mission/stats";
 
 export default function Mission() {
   const insets = useSafeAreaInsets();
@@ -20,17 +22,20 @@ export default function Mission() {
   const reduced = useReducedMotion();
   const enter = (i: number) => reduced ? undefined : FadeInDown.delay(60 * i).duration(320);
   const card = useRef<React.ComponentRef<typeof View>>(null);
-  const { busy, note, share } = useMissionShare(card);
+  const mission = useMissionStats();
+  const { busy, note, share } = useMissionShare(card, mission.caption);
   const button = (where: string) => <ShareButton testID={`mission-share-${where}`} title="Please share karo" busy={busy} onPress={() => share(true)} />;
 
   return <ScrollView testID="mission-screen" style={{ flex: 1, backgroundColor: colors.surface }}
+    refreshControl={<RefreshControl refreshing={mission.refreshing} onRefresh={mission.reload} tintColor={colors.custom_mBlueMid} />}
     contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}>
     <View style={{ gap: 4 }}>
       <T w="heavy" size={10} color={colors.brandText} style={{ letterSpacing: 2.4 }}>JEELIVE.AI · OUR MISSION</T>
       <T w="heavy" size={22}>Ek share, kisi ki free taiyari</T>
     </View>
+    <ImpactPanel stats={mission.stats} loading={mission.loading} />
     {button("top")}
-    <View style={styles.cardWrap}><View ref={card} collapsable={false}><MissionCard width={w} /></View></View>
+    <View style={styles.cardWrap}><View ref={card} collapsable={false}><MissionCard width={w} helped={mission.stats?.helped} name={mission.name} /></View></View>
     <View style={{ gap: space.sm }}>
       {button("bottom")}
       <Press testID="mission-share-more" onPress={() => share(false)} accessibilityLabel="Doosre app mein share karo" style={styles.more}>

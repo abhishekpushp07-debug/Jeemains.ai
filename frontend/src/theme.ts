@@ -181,6 +181,7 @@ const dark = {
   custom_mGold: "#F2C14E", custom_mGoldLight: "#FFE6A3", custom_mGoldDeep: "#A8761C",
   custom_mInk: "#DCE5FF", custom_mWhite: "#FFFFFF", custom_mNavy: "#0B1C6B",
   custom_mGlass: "rgba(255,255,255,0.09)", custom_mLine: "rgba(255,255,255,0.18)",
+  custom_mGoldWash: "rgba(242,193,78,0.13)", custom_mGoldLine: "rgba(242,193,78,0.45)", custom_mInkSoft: "rgba(220,229,255,0.74)",
   // Mission story list: royal-blue icon circles on the page.
   custom_royalTint: "#EEF2FF", custom_royalTintLine: "#D6DEFF",
   // Rank page stays pure black; only the cards carry colour.

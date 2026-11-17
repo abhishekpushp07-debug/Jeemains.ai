@@ -3,7 +3,7 @@ async def run_test(page, output_dir, page_url):
         import re
         await page.set_viewport_size({"width": 390, "height": 844})
         print('Step 1: Open app and perform canonical sign-in if needed')
-        await page.goto('https://brushed-metal-rank--9b9d5o8b.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
+        await page.goto('https://share-card-stats--1s9i9qdg.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
         await page.wait_for_timeout(1200)
 
         # If login screen appears, use secure env file values without logging them

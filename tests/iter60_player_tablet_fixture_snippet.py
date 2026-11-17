@@ -1,7 +1,7 @@
 import json, time
 ls = json.loads(open('/tmp/jl_ls.json').read())
 await page.add_init_script("localStorage.setItem('jl_sid', %s); localStorage.setItem('jl_user', %s);" % (json.dumps(ls['sid']), json.dumps(ls['user'])))
-B = "https://brushed-metal-rank--9b9d5o8b.preview.emergentagent.com"
+B = "https://share-card-stats--1s9i9qdg.preview.emergentagent.com"
 NOW = int(time.time())
 SUBJ = ['Physics','Physics','Chemistry','Chemistry','Mathematics','Mathematics','Mathematics']
 QS = []

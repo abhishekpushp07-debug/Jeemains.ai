@@ -1,0 +1,35 @@
+{
+  "summary": "Mission share stats + new return-from-WhatsApp share gate tested end to end. Backend 19/19 pytest pass: /api/j/{code} always 302 to https://jeelive.ai with no-store, jlv cookie on first visit, +1 only when cookie AND device hash are both new, robots (WhatsApp/2.x, facebookexternalhit, TelegramBot, curl, python-requests, HeadlessChrome, Playwright, empty UA) and unknown/malformed codes not counted, lowercase accepted. /api/rf/mission/me gives 401 without a grant, and with a grant returns a stable {code:VU6PE38, helped:12, week:3} that matches Mongo. Frontend (390x844 + 320x700): ImpactPanel sits between the title and share-top, counts 0 to 12, and shows the line, '+3 is hafte', 12/25 and the how-it-counts text. The card thank-you band (THANK YOU, LEARNER + count 12) shows on the Mission tab and on the gate. Zero state is right (invitation line, no week chip, no goal, no thanks band). The WhatsApp caption ends with 'Abhi kholo 👉 <backend>/api/j/VU6PE38'. Share gate Cases A to E all pass. A: stays locked 6 s while hidden with the right note; when visible, thanks shows in 0.04 s and the result in 1.36 s, flag removed. B: locked at 1.5 s, open at about 4.3 s. C: AbortError keeps the lock with the 'Share pura nahi hua' note. D: resolve opens it in 1.3 s. E: back keeps the lock and an old unflagged result opens directly. Layout: card ratio is exactly 1.250, footer fully inside, nothing overflows, no horizontal scroll. No deprecated Expo packages found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/j/{code}", "issue": "The BOTS regex matches the bare substring 'bot' (case-insensitive), so real Android browsers on CUBOT-brand phones (UA contains 'CUBOT ...') are never counted. In-app browsers whose UA has 'Snapchat' or 'LinkedInApp' are also excluded. Consider word-boundary patterns like '\\bbot\\b|bot/'."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "MissionCard at 320 wide", "issues": ["Chip subtitles are 8.5*u (about 7.6px) and thank-you band text is 9.5*u (about 8.5px) when u=0.9. They read fine in the 1080px exported PNG but are tiny on screen at 320 wide. Optional."]},
+      {"screen": "ShareGate while waiting for return", "issues": ["Both red buttons stay dimmed with a spinner the whole time the student is in WhatsApp. That is fine, but the waiting note sits under the card, below the fold at 390x844, so a student coming back sees dim buttons and has to scroll to read why. Consider showing the note near the top button too."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter93_mission_links.py", "/app/test_reports/pytest/iter93_mission.xml"],
+  "action_items": [
+    "Optional: tighten the BOTS regex in /app/backend/mission_links.py:24 so 'Cubot' phone UAs are not treated as robots.",
+    "Optional: in ShareGate.tsx:31, the setTimeout(onOpen, 900) is not cleared on unmount. If the student taps back during the 900 ms thank-you, onOpen still runs (unlockResult plus setGate on an unmounted screen). Keep a ref and clear it on unmount."
+  ],
+  "critical_code_review_comments": [
+    "share.ts watchReturn: logic is correct for every order of events (hidden before or after back(), already back, never left so 3 s fallback). AppState on react-native-web follows document.visibilityState, confirmed with a controllable getter.",
+    "sendWhatsApp calls window.open synchronously inside the tap (no real await before it), so the user activation is kept and mobile popup blockers should allow it.",
+    "mission_links.py: the rightmost X-Forwarded-For hop is used for the device hash, and the indexes are present (code_1_key_1 unique, code_1_counted_1_ts_-1)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter93_mission_links.py"],
+  "success_rate": {"backend": "100% (19/19)", "frontend": "100% of requested flows (Mission panel, card band, zero state, caption, gate Cases A-E, layout 390/320)"},
+  "seed_data_creation": "Per request: set mission_links.helped=0 for VU6PE38 and deleted its 3 c:QA* mission_visits rows. Final state verified: helped 0, no VU6PE38 visits. Temporary TEST-iter93-* mission_links rows and their visits were removed by exact code. share_gate localStorage flags were cleared in the browser. No test was started or submitted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run backend: QA_PHONE=7004186276 QA_PIN=5524 pytest backend/tests/test_iter93_mission_links.py -n0. It logs in once via /api/jl/auth/phone with a random X-JL-Sid, then /api/rf/access for a bearer. Gate visibility control: add_init_script defining document.visibilityState/hidden getters on window.__vis plus a window.__setVis helper that dispatches 'visibilitychange'. To check helped>0 UI without touching the DB, page.route('**/api/rf/mission/me') to fake {helped:12, week:3}. VU6PE38 is now helped=0.",
+  "rca_of_issue": ""
+}

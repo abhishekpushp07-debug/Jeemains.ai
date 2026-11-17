@@ -444,6 +444,7 @@ from cups import make_router as make_cups  # noqa: E402
 from squads import make_router as make_squads  # noqa: E402
 from pin_reset import make_pin_reset  # noqa: E402
 from rank_predictor import make_router as make_rank  # noqa: E402
+from mission_links import make_router as make_mission_links, ensure_indexes as mission_indexes  # noqa: E402
 duel_router, duel_api = make_duels(db, rf_user, public_card, award)
 api.include_router(duel_router)
 api.include_router(make_social(db, rf_user))
@@ -462,6 +463,7 @@ api.include_router(marketing_router)
 api.include_router(legal_router)
 api.include_router(arena_web_router)
 api.include_router(make_rank())
+api.include_router(make_mission_links(db, rf_user))
 api.include_router(make_access_router(db, lambda: http))
 app.include_router(api)
 install_access_guard(app, db)
@@ -526,6 +528,7 @@ async def startup():
     await db.jl_locks.create_index("until", expireAfterSeconds=60)
     await db.rf_night_seats.create_index([("day", 1), ("group", 1)])
     await db.rf_night_seats.create_index([("day", 1), ("ts", 1)])
+    await mission_indexes(db)
     await db.pin_resets.create_index([("phone", 1), ("at", -1)])
     await db.pin_resets.create_index([("ip", 1), ("at", -1)])
     await db.rf_duels.create_index("id", unique=True)

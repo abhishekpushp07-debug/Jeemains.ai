@@ -1,7 +1,8 @@
 // Shown after every test submission, before the result: the Mission card on royal night blue, "Aapka result taiyaar
-// hai", and a red "Share to view results" button above and below the card. One share (WhatsApp or any other app)
-// opens the result; closing the share sheet without sending keeps it locked.
-import React, { useRef, useState } from "react";
+// hai", and a red "Share to view results" button above and below the card. The result opens once the student comes
+// back from WhatsApp (or the other app); a phone cannot confirm the message was sent. Closing the share sheet without
+// sending (where the phone tells us) keeps it locked.
+import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
@@ -13,6 +14,7 @@ import { colors, space } from "@/src/theme";
 import { useCardWidth } from "./parts";
 import { MissionCard } from "./MissionCard";
 import { ShareButton, useMissionShare } from "./ShareButton";
+import { useMissionStats } from "./stats";
 
 /** stage: "ready" result is out, "grading" still being scored, "sealed" released later. */
 export function ShareGate({ title, stage, onOpen, onBack }: { title?: string; stage: "ready" | "grading" | "sealed"; onOpen: () => void; onBack: () => void }) {
@@ -23,17 +25,26 @@ export function ShareGate({ title, stage, onOpen, onBack }: { title?: string; st
   const enter = (i: number) => reduced ? undefined : FadeInDown.delay(90 * i).duration(380);
   const card = useRef<React.ComponentRef<typeof View>>(null);
   const [thanks, setThanks] = useState(false);
-  const { busy, note, share } = useMissionShare(card, () => {
+  const [from, setFrom] = useState<"top" | "bottom">("top"); // the note shows under the button that was pressed
+  const opening = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const open = useRef(onOpen);
+  open.current = onOpen;
+  // Leaving during the thank-you still counts the share: open (unlock) now instead of after the timer.
+  useEffect(() => () => { if (opening.current) { clearTimeout(opening.current); open.current(); } }, []);
+  const mission = useMissionStats();
+  const { busy, note, share } = useMissionShare(card, mission.caption, () => {
     setThanks(true); buzz("success");
-    setTimeout(onOpen, 900); // a short thank-you, then the result
+    opening.current = setTimeout(() => { opening.current = null; open.current(); }, 900); // back from WhatsApp: a short thank-you, then the result
   });
   const heading = stage === "ready" ? "Aapka result taiyaar hai 🎉" : stage === "grading" ? "Aapka result ban raha hai ⏳" : "Aapka result jald khulega 🔒";
-  const action = (where: string) => thanks
+  const noteView = (where: "top" | "bottom") => note && from === where
+    ? <Animated.View entering={reduced ? undefined : FadeIn}><T testID="share-gate-note" w="semibold" size={12.5} color={colors.custom_mGold} style={styles.center}>{note}</T></Animated.View> : null;
+  const action = (where: "top" | "bottom") => thanks
     ? <Animated.View entering={reduced ? undefined : ZoomIn.duration(260)} testID={`share-gate-thanks${where === "top" ? "" : "-bottom"}`} style={styles.thanks}>
       <Glyph name="heart" size={22} color={colors.onBrandPrimary} />
       <T w="heavy" size={17} color={colors.onBrandPrimary}>Shukriya! Result khul raha hai…</T>
     </Animated.View>
-    : <ShareButton testID={where === "top" ? "share-gate-share" : "share-gate-share-bottom"} title="Share to view results" busy={busy} onPress={() => share(true)} />;
+    : <ShareButton testID={where === "top" ? "share-gate-share" : "share-gate-share-bottom"} title="Share to view results" busy={busy} onPress={() => { setFrom(where); share(true); }} />;
 
   return <View testID="share-gate" style={{ flex: 1, backgroundColor: colors.custom_mBlueNight }}>
     <StatusBar style="light" />
@@ -57,19 +68,19 @@ export function ShareGate({ title, stage, onOpen, onBack }: { title?: string; st
         </View>
       </Animated.View>
 
-      <Animated.View entering={enter(1)}>{action("top")}</Animated.View>
+      <Animated.View entering={enter(1)} style={{ gap: space.sm }}>{action("top")}{noteView("top")}</Animated.View>
 
       <Animated.View entering={enter(2)} style={styles.cardWrap}>
-        <View ref={card} collapsable={false}><MissionCard width={w} /></View>
+        <View ref={card} collapsable={false}><MissionCard width={w} helped={mission.stats?.helped} name={mission.name} /></View>
       </Animated.View>
 
       <Animated.View entering={enter(3)} style={{ gap: space.sm }}>
         {action("bottom")}
-        <Press testID="share-gate-more" onPress={() => share(false)} disabled={busy || thanks} accessibilityLabel="Doosre app se share karke result dekho" style={styles.more}>
+        <Press testID="share-gate-more" onPress={() => { setFrom("bottom"); share(false); }} disabled={busy || thanks} accessibilityLabel="Doosre app se share karke result dekho" style={styles.more}>
           <Glyph name="share-variant" size={16} color={colors.custom_mInk} />
           <T w="semibold" size={13} color={colors.custom_mInk}>Doosre app se share karo</T>
         </Press>
-        {note ? <Animated.View entering={reduced ? undefined : FadeIn}><T testID="share-gate-note" w="semibold" size={12.5} color={colors.custom_mGold} style={styles.center}>{note}</T></Animated.View> : null}
+        {noteView("bottom")}
       </Animated.View>
     </ScrollView>
   </View>;
