@@ -9,6 +9,8 @@ import { KIND, TAG } from "./tones";
 import { Strip, Tag, Toggle } from "./controls";
 import { CardsHeading, CollegeCard, Stat, TapHint, cardStyles, useCardViews } from "./CollegeCard";
 import { jeeSaved, toggleSaved, useShortlist } from "./shortlist";
+import { useDreamToggle } from "@/src/dream/useDreamToggle";
+import { jeeDream } from "@/src/dream/need";
 
 const SEGMENTS: Segment[] = ["all", "NIT", "IIIT", "GFTI", "DELHI"];
 
@@ -26,7 +28,8 @@ export const edgeOf = (tag?: keyof typeof TAG | null, near?: boolean) => tag ? T
 export function SeatRow({ seat, onPress, testID, rank, viewed, pulse }: { seat: Seat; onPress: () => void; testID: string; rank?: number; viewed?: boolean; pulse?: boolean }) {
   const kind = KIND[seat.type];
   const saved = useShortlist().some(s => s.id === `jee-${seat.prog}`);
-  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(seat.tag, !!seat.gap)} title={seat.college} a11y={`${seat.college}, ${seat.branch}`}
+  const dream = useDreamToggle(`jee-${seat.prog}`, "jee", () => jeeDream(seat));
+  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(seat.tag, !!seat.gap)} title={seat.college} a11y={`${seat.college}, ${seat.branch}`} dream={dream}
     tags={<>
       <Tag label={kind.label} ink={kind.ink} soft={kind.soft} />
       {seat.tag ? <Tag testID={`${testID}-tag`} label={TAG[seat.tag].label} ink={TAG[seat.tag].ink} soft={TAG[seat.tag].soft} /> : null}

@@ -1,7 +1,7 @@
 // Rank predictor (Rank tab, first tile): pick JEE Main or COMEDK, type marks (JEE: category, PwD, paper type) and get the
 // expected rank and percentile only. JEE shows all three paper types side by side; COMEDK shows what each analysis says.
 // "Colleges dekho" carries the same score into the College predictor.
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, TextInput, useWindowDimensions, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { ErrorBox, Press, T } from "@/src/components/ui";
@@ -14,6 +14,8 @@ import { Strip, Summary, Switch, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 import { shareEstimate } from "./share";
 import { FormButton, useField } from "./accent";
+import { shareCard } from "@/src/shareCard";
+import { useShareLink } from "@/src/mission/stats";
 
 const SAVED = "rank.estimate.v1";
 const LEVELS: Level[] = ["tough", "normal", "easy"];
@@ -114,9 +116,11 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
 function JeeCard({ data, level, onLevel, busy }: { data: JeeEstimate; level: Level; onLevel: (l: Level) => void; busy: boolean }) {
   const reduced = useReducedMotion();
   const narrow = useWindowDimensions().width < 360;
+  const card = useRef<React.ComponentRef<typeof View>>(null);
+  const link = useShareLink();
   const r = data.result;
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
-    <MetalCard testID="rp-card" badge="JEE MAIN 2026" foot={<>
+    <MetalCard testID="rp-card" cardRef={card} badge="JEE MAIN 2026" foot={<>
       <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>YOUR SCORE</Eyebrow>
         <SilverCaps testID="rp-card-summary">{r.summary}</SilverCaps>
@@ -160,14 +164,16 @@ function JeeCard({ data, level, onLevel, busy }: { data: JeeEstimate; level: Lev
       })}
       <T size={11.5} color={colors.custom_dim}>Same marks par shift ka paper tough tha to percentile zyada aata hai. Kisi bhi row par tap karo, card us paper ke hisaab se badal jayega.</T>
     </Strip>
-    <CardActions prefix="rp" onShare={() => shareEstimate(data)} notes={[r.spread, ...data.notes]} />
+    <CardActions prefix="rp" onShare={() => shareCard(card, shareEstimate(data, link))} notes={[r.spread, ...data.notes]} />
   </Animated.View>;
 }
 
 function ComedkCard({ data }: { data: ComedkEstimate }) {
   const reduced = useReducedMotion();
+  const card = useRef<React.ComponentRef<typeof View>>(null);
+  const link = useShareLink();
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
-    <MetalCard testID="rp-card" badge="COMEDK 2026" foot={<>
+    <MetalCard testID="rp-card" cardRef={card} badge="COMEDK 2026" foot={<>
       <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>YOUR SCORE</Eyebrow>
         <SilverCaps testID="rp-card-summary">{data.summary}</SilverCaps>
@@ -187,7 +193,7 @@ function ComedkCard({ data }: { data: ComedkEstimate }) {
       </View>)}
       <T size={11.5} color={colors.custom_dim}>Beech wala andaaza (№ {fmt(data.mid)}) card par hai; range = sabse achha se sabse kharab andaaza.</T>
     </Strip>
-    <CardActions prefix="rp" onShare={() => shareEstimate(data)} notes={data.notes} />
+    <CardActions prefix="rp" onShare={() => shareCard(card, shareEstimate(data, link))} notes={data.notes} />
   </Animated.View>;
 }
 

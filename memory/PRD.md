@@ -1,5 +1,11 @@
 # JEELIVE.AI Native App — PRD
 
+## Audit June 2026 (5 phases + DB audit) — report only, fixes waiting for approval
+- Full findings + numbers: `/app/memory/AUDIT_2026_06.md` (reports iteration_97/98/99). User rule: full list first, then fixes that really hold at 1 lakh students in one mock.
+- Built on user request during the audit: Home promo replaced by the Dream College Meter; meter = purple outside (header band + border + glow), deep black inside, rows royal blue/teal alternating with a diamond on every row; Rank tab Dream panel moved into a 6th tile DREAM COLLEGE (`rank-tool-dream`, dark violet metal jewel `violet`, accent `dream`), tiles 3 rows × 2. Result screen + Home wired to Dream; Rank tab missing import fixed.
+- Load-test tools: backend/tools/fake_website.py, loadtest_mock.py, proto_proxy.py (benchmark only, not imported by server.py).
+- QA account used ONE real attempt: 7f61a0ac-7c68-49ff-b59d-256a6f82ec87 (JEE Main PYQ 22 Jan 2025 S1, −2/300). Do not start more.
+
 ## Iteration94–96 — Rank tab: tool form colours, College predictor blood red, college button-cards, Edit pill
 - Forms by tool (src/rank/accent.tsx, AccentContext around each pane): Rank predictor yellow, Percentile teal, Target lime, College predictor blood red (white text), Compare sky blue. Each form has a coloured frame, header band, chips, fields and main button. The chosen tile's border and glow use the same colour.
 - College predictor tile is pure blood red: Metal jewel `blood` with `pure` (no graphite, no dark streaks or shade). The other tiles keep their graphite metal.
@@ -773,3 +779,7 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Share (`src/mission/share.ts`): card PNG 1080×1350 + caption. Android build: straight into WhatsApp (shared helper `src/whatsappFile.ts`, also used by Rank PDF). iPhone: share sheet. Expo Go: share sheet + caption copied. Web: WhatsApp text with link.
 - "Poori baat" list (6 points) + disclaimer (200+ is a target, not a guarantee).
 - Tested: iteration_91 (all pass on web).
+
+## Deployment health check (June 2026)
+- Status: WARN, no blockers. Warnings: root .gitignore excludes .env files (fine if deploy copies the workspace); no in-app account deletion (App Store 5.1.1(v) risk, deferred by user); cups.py:325/421 load all rows at once; first-boot migration in exam_migration.py runs inside startup. Info: iOS ITSAppUsesNonExemptEncryption not set.
+- Audit fixes (AUDIT_2026_06.md) still waiting for user approval.

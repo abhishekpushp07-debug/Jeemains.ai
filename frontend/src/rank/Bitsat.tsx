@@ -1,5 +1,5 @@
 // BITSAT on the Rank tab: score in, BITSAT Rank Card out, then every BITS program with its 2026 cutoff and 5-year trend.
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { ErrorBox, Press, T } from "@/src/components/ui";
@@ -15,6 +15,10 @@ import { edgeOf } from "./SeatList";
 import { PdfButton } from "./PdfButton";
 import { bitsatSaved, toggleSaved, useShortlist } from "./shortlist";
 import { FormButton, useField } from "./accent";
+import { CardRef, shareCard } from "@/src/shareCard";
+import { useShareLink } from "@/src/mission/stats";
+import { useDreamToggle } from "@/src/dream/useDreamToggle";
+import { bitsatDream } from "@/src/dream/need";
 
 const SAVED = "rank.bitsat.v1";
 const CAMPUSES: Campus[] = ["all", "Pilani", "Goa", "Hyderabad"];
@@ -33,6 +37,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
   const [tries, setTries] = useState(0);
   const saved = useShortlist();
   const field = useField();
+  const card = useRef<React.ComponentRef<typeof View>>(null); // the BITSAT card: shared as a photo, and with the PDF
 
   useEffect(() => { storage.getItem<string | null>(SAVED, null).then(v => { if (v) setText(v); }); }, []);
   useEffect(() => {
@@ -63,7 +68,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
     </Strip> : <Summary testID="bitsat-input-collapsed" text={`${score} / 390 · BITSAT 2026`} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="bitsat-error" />
     {res && score !== null ? <>
-      <BitsatCard data={res} saved={saved.length} onShortlist={onShortlist} />
+      <BitsatCard data={res} saved={saved.length} onShortlist={onShortlist} cardRef={card} />
       <View testID="bitsat-list" style={cardStyles.list}>
         <Strip title="BITS programs" testID="bitsat-list-head"
           right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>{res.result.cleared} / {res.result.total} clear</T>}>
@@ -74,7 +79,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
             {DEGREES.map(d => <Toggle key={d.key} testID={`bitsat-degree-${d.key}`} label={d.label} on={degree === d.key} onPress={() => setDegree(d.key)} />)}
           </ScrollView>
-          <PdfButton testID="bitsat-pdf" path="/bitsat" body={{ score, campus, degree }} label="Programs list ki PDF" />
+          <PdfButton testID="bitsat-pdf" path="/bitsat" body={{ score, campus, degree }} label="Programs list ki PDF" card={card} />
         </Strip>
         <BitsatList data={res} saved={new Set(saved.map(s => s.id))} />
       </View>
@@ -82,11 +87,12 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
   </>;
 }
 
-function BitsatCard({ data, saved, onShortlist }: { data: BitsatOut; saved: number; onShortlist: () => void }) {
+function BitsatCard({ data, saved, onShortlist, cardRef }: { data: BitsatOut; saved: number; onShortlist: () => void; cardRef: CardRef }) {
   const reduced = useReducedMotion();
+  const link = useShareLink();
   const r = data.result;
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
-    <MetalCard testID="bitsat-card" badge="BITSAT 2026" foot={<>
+    <MetalCard testID="bitsat-card" cardRef={cardRef} badge="BITSAT 2026" foot={<>
       <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>BEST PROGRAM</Eyebrow>
         <SilverCaps testID="bitsat-card-best">{r.best ? `${r.best.college} · ${r.best.program}` : "Abhi koi program clear nahi"}</SilverCaps>
@@ -102,7 +108,7 @@ function BitsatCard({ data, saved, onShortlist }: { data: BitsatOut; saved: numb
         {r.target ? `Agla target: ${r.target.college} · ${r.target.program}, +${r.target.gap} marks aur (cutoff ${r.target.cutoff}).` : "Har BITS program ka 2026 cutoff clear!"}
       </T>
     </MetalCard>
-    <CardActions prefix="bitsat" onShare={() => shareBitsat(data)} saved={saved} onShortlist={onShortlist} notes={data.notes} />
+    <CardActions prefix="bitsat" onShare={() => shareCard(cardRef, shareBitsat(data, link))} saved={saved} onShortlist={onShortlist} notes={data.notes} />
   </Animated.View>;
 }
 
@@ -137,7 +143,8 @@ function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID, r
 }) {
   const k = CAMPUS[item.campus];
   const d = item.last === null ? null : item.cutoff - item.last, same = d !== null && Math.abs(d) <= 2;
-  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(item.tag, item.gap > 0)} title={item.college} a11y={`${item.college}, ${item.program}`} open={open}
+  const dream = useDreamToggle(`bitsat-${item.id}`, "bitsat", () => bitsatDream(item));
+  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(item.tag, item.gap > 0)} title={item.college} a11y={`${item.college}, ${item.program}`} open={open} dream={dream}
     tags={<>
       <Tag label={k.label} ink={k.ink} soft={k.soft} />
       {item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : null}

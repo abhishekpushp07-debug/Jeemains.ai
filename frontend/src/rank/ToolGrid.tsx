@@ -1,6 +1,6 @@
-// The Rank tab's five tools as Home-style tiles: two per row, College compare across the bottom.
-// Every tile is its own black-metal card with a diamond in the corner: maroon, indigo, teal and champagne; College predictor
-// is pure blood red (no black) so it stands apart.
+// The Rank tab's six tools as Home-style tiles, two per row.
+// Every tile is its own black-metal card with a diamond in the corner: maroon, indigo, teal, champagne and dark violet;
+// College predictor is pure blood red (no black) so it stands apart.
 // The chosen tile glows in its form's bright colour (border, glow, top edge), the same colour the form below wears.
 import React from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
@@ -10,24 +10,25 @@ import { rankColors as colors, space } from "@/src/theme";
 import { Jewel, JEWELS, MetalFace } from "./Metal";
 import { ACCENTS } from "./accent";
 
-export type Tool = "rank" | "pct" | "target" | "college" | "compare";
+export type Tool = "rank" | "pct" | "target" | "college" | "compare" | "dream";
 type Tile = { key: Tool; icon: IconName; title: string; value: string; badge?: string };
 const ROWS: Tile[][] = [
   [{ key: "rank", icon: "podium", title: "RANK PREDICTOR", value: "marks se rank" },
    { key: "pct", icon: "chart-line-variant", title: "PERCENTILE SE RANK", value: "NTA percentile", badge: "NEW" }],
   [{ key: "target", icon: "bullseye-arrow", title: "TARGET MARKS", value: "college ke liye", badge: "NEW" },
    { key: "college", icon: "school-outline", title: "COLLEGE PREDICTOR", value: "colleges + cutoffs" }],
-  [{ key: "compare", icon: "compare-horizontal", title: "COLLEGE COMPARE", value: "saved colleges side by side", badge: "NEW" }],
+  [{ key: "compare", icon: "compare-horizontal", title: "COLLEGE COMPARE", value: "side by side", badge: "NEW" },
+   { key: "dream", icon: "star-shooting-outline", title: "DREAM COLLEGE", value: "kitne marks door", badge: "NEW" }],
 ];
 /** Each tool's own colour. */
-const TOOL_JEWEL: Record<Tool, Jewel> = { rank: "maroon", pct: "indigo", target: "teal", college: "blood", compare: "champ" };
+const TOOL_JEWEL: Record<Tool, Jewel> = { rank: "maroon", pct: "indigo", target: "teal", college: "blood", compare: "champ", dream: "violet" };
 
-export function ToolGrid({ value, onChange, saved }: { value: Tool; onChange: (t: Tool) => void; saved: number }) {
+export function ToolGrid({ value, onChange, saved, dreams }: { value: Tool; onChange: (t: Tool) => void; saved: number; dreams: number }) {
   const narrow = useWindowDimensions().width < 360;
+  const valueOf = (t: Tile) => t.key === "compare" && saved ? `${saved} saved` : t.key === "dream" && dreams ? `${dreams} dream chune` : t.value;
   return <View accessibilityRole="tablist" style={styles.grid}>
     {ROWS.map((row, r) => <View key={r} style={styles.row}>
-      {row.map(t => <ToolTile key={t.key} t={t} on={t.key === value} narrow={narrow} onPress={() => onChange(t.key)}
-        value={t.key === "compare" && saved ? `${saved} saved · side by side` : t.value} />)}
+      {row.map(t => <ToolTile key={t.key} t={t} on={t.key === value} narrow={narrow} onPress={() => onChange(t.key)} value={valueOf(t)} />)}
     </View>)}
   </View>;
 }
@@ -36,9 +37,9 @@ function ToolTile({ t, on, narrow, value, onPress }: { t: Tile; on: boolean; nar
   const jewel = TOOL_JEWEL[t.key], j = JEWELS[jewel], form = ACCENTS[t.key].text, pure = j.pure;
   return <Press testID={`rank-tool-${t.key}`} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={`${t.title}. ${value}`}
     onPress={onPress} scaleTo={0.97} style={[styles.press, pure && { backgroundColor: j.mid }, on && { ...glow, shadowColor: form }]}>
-    <View style={[styles.tile, narrow && styles.tileNarrow, pure && { backgroundColor: j.mid, borderColor: pure.chipLine }, on && [styles.tileOn, { borderColor: pure ? j.line : form }]]}>
-      <MetalFace jewel={jewel} on={on} edge={pure ? j.line : form} />
-      <View style={[styles.icon, narrow && styles.iconNarrow, pure && { backgroundColor: pure.chip, borderColor: pure.chipLine }, on && { borderColor: j.line, backgroundColor: j.soft }]}>
+    <View style={[styles.tile, narrow && styles.tileNarrow, pure && { backgroundColor: j.mid, borderColor: j.mid }, on && [styles.tileOn, { borderColor: pure ? j.line : form }]]}>
+      <MetalFace jewel={jewel} on={on} edge={form} />
+      <View style={[styles.icon, narrow && styles.iconNarrow, pure ? { backgroundColor: pure.chip, borderColor: pure.chipLine } : on && { borderColor: j.line, backgroundColor: j.soft }]}>
         <Glyph name={t.icon} size={narrow ? 15 : 17} color={j.ink} stroke={1.4} />
         {t.badge && !on ? <View testID={`rank-tool-${t.key}-badge`} style={[styles.badge, { borderColor: j.line }]}>
           <T w="bold" size={8} color={j.ink} style={{ letterSpacing: 0.8 }}>{t.badge}</T>

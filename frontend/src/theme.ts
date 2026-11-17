@@ -158,7 +158,6 @@ const dark = {
   custom_shade: "rgba(0,0,0,0.62)",
   // Ink-black dock, promo and chip tints shared by both palettes.
   custom_dock: "#0B0B0D", custom_dockInk: "#FFFFFF", custom_dockMuted: "#7C7C85", custom_dockOrb: "#141417", custom_dockOrbLine: "#2C2C32",
-  custom_promoFrom: "#E6F7F3", custom_promoTo: "#F1F6FF", custom_promoInk: "#0F766E",
   custom_chipFrom: "#FFFFFF", custom_chipTo: "#F3F3F6",
   // All India card: onyx → deep ruby with a soft red glow and a hairline sheen.
   custom_seriesFrom: "#0B0B0D", custom_seriesMid: "#17090D", custom_seriesTo: "#3A0912", custom_seriesGlow: "#E11D2E",
@@ -201,10 +200,22 @@ const dark = {
   custom_tealInk: "#9CF2E3", custom_tealSoft: "rgba(45,212,191,0.18)",
   custom_champFrom: "#28282C", custom_champMid: "#141315", custom_champTo: "#47330F", custom_champGlow: "#D9A54A", custom_champLine: "#E8C273",
   custom_champInk: "#F5DCA0", custom_champSoft: "rgba(232,194,115,0.18)",
-  custom_bloodFrom: "#E01B33", custom_bloodMid: "#B80D24", custom_bloodTo: "#860818", custom_bloodGlow: "#FF6B78", custom_bloodLine: "#FFC2C9",
+  // Dream college tile: graphite into dark violet, like the other metal tiles.
+  custom_violetFrom: "#26232C", custom_violetMid: "#120A1C", custom_violetTo: "#3D0F63", custom_violetGlow: "#8B2FD9", custom_violetLine: "#B57BEA",
+  custom_violetInk: "#E2CCFF", custom_violetSoft: "rgba(181,123,234,0.20)",
+  custom_bloodFrom: "#D10F2A", custom_bloodMid: "#D10F2A", custom_bloodTo: "#D10F2A", custom_bloodGlow: "#FF6B78", custom_bloodLine: "#FF6B78",
   custom_bloodInk: "#FFFFFF", custom_bloodSoft: "rgba(255,255,255,0.18)",
-  // College predictor tile is pure blood red (no graphite): its small line, icon circle and icon ring on the red.
-  custom_bloodValue: "#FFE1E5", custom_bloodChip: "rgba(255,255,255,0.14)", custom_bloodChipLine: "rgba(255,255,255,0.38)",
+  // College predictor tile is pure flat blood red, the same red as its form: its small line, icon circle and icon ring on the red.
+  custom_bloodValue: "#FFE1E5", custom_bloodChip: "#A80B21", custom_bloodChipLine: "#FF6B78",
+  // College predictor's score bar after Show: bright shining purple, with the blood red Edit button on it.
+  custom_fPurpleFrom: "#B43CFF", custom_fPurpleTo: "#6A16E8", custom_fPurpleGlow: "#A855F7", custom_fPurpleHint: "#F3E8FF",
+  custom_fPurpleChip: "rgba(255,255,255,0.2)", custom_fShine: "rgba(255,255,255,0.55)",
+  // Dream College Meter ("Kitne marks door?"): shining purple only outside (border, header, glow); inside deep black
+  // so the royal blue and teal college cards stand out.
+  custom_fPurpleGlassLine: "rgba(255,255,255,0.3)", custom_fPurpleDown: "#FFC2CC",
+  custom_dreamBody: "#000000", custom_dreamBodyLine: "rgba(255,255,255,0.12)", custom_dreamGlass: "rgba(255,255,255,0.06)",
+  // Dream college rows: royal blue and teal cards, each with a diamond.
+  custom_dreamTealFrom: "#12A594", custom_dreamTealMid: "#0B6E64", custom_dreamTealTo: "#084840", custom_dreamTrack: "rgba(0,0,0,0.32)",
   // Rank tool forms: each tool's form gets its own bright colour (main, soft wash, frame line); text on it is near-black,
   // except blood red (College predictor) which carries white text and a lighter red for words on black.
   custom_fYellow: "#FFD60A", custom_fYellowSoft: "rgba(255,214,10,0.12)", custom_fYellowLine: "rgba(255,214,10,0.62)",
@@ -212,6 +223,7 @@ const dark = {
   custom_fLime: "#B5F23D", custom_fLimeSoft: "rgba(181,242,61,0.12)", custom_fLimeLine: "rgba(181,242,61,0.62)",
   custom_fBlood: "#D10F2A", custom_fBloodText: "#FF4D5E", custom_fBloodSoft: "rgba(209,15,42,0.16)", custom_fBloodLine: "rgba(255,59,78,0.75)",
   custom_fSky: "#4CC3FF", custom_fSkySoft: "rgba(76,195,255,0.12)", custom_fSkyLine: "rgba(76,195,255,0.62)",
+  custom_fViolet: "#7B2CBF", custom_fVioletText: "#B983FF", custom_fVioletSoft: "rgba(123,44,191,0.18)", custom_fVioletLine: "rgba(185,131,255,0.65)",
   custom_fOn: "#0B0B0F",
   // Medal coins for list positions 1-3 (light, middle, deep, ink) and the soft wash of their rows.
   custom_medalGoldLight: "#FFF0C2", custom_medalGold: "#E7C26B", custom_medalGoldDeep: "#9A7426", custom_medalGoldInk: "#2A1D05",

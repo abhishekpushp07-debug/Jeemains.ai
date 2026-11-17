@@ -1,6 +1,6 @@
 // COMEDK on the Rank tab: marks or rank in, COMEDK Rank Card out, then GM (All India) college-courses with every round's
 // closing rank, the 2025 trend, fee and seats. All data comes from our server (/api/rank/comedk).
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { ErrorBox, Press, T } from "@/src/components/ui";
@@ -18,6 +18,10 @@ import { CardsHeading, CollegeCard, TapHint, cardStyles, useCardViews } from "./
 import { PdfButton } from "./PdfButton";
 import { comedkSaved, toggleSaved, useShortlist } from "./shortlist";
 import { FormButton, useField } from "./accent";
+import { CardRef, shareCard } from "@/src/shareCard";
+import { useShareLink } from "@/src/mission/stats";
+import { useDreamToggle } from "@/src/dream/useDreamToggle";
+import { comedkDream } from "@/src/dream/need";
 
 const SAVED = "rank.comedk.v1";
 const AREAS: { key: ComedkArea; label: string }[] = [{ key: "all", label: "All" }, { key: "blr", label: "Bengaluru" }, { key: "other", label: "Other cities" }];
@@ -53,6 +57,7 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
   const [detail, setDetail] = useState<ComedkCollegeReq | null>(null);
   const saved = useShortlist();
   const field = useField();
+  const card = useRef<React.ComponentRef<typeof View>>(null); // the COMEDK card: shared as a photo, and with the PDF
 
   useEffect(() => {
     if (seed) return; // a score handed over from the Rank predictor wins over the last saved one
@@ -121,11 +126,11 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
     </Strip> : <Summary testID="comedk-input-collapsed" text={summary} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="comedk-error" />
     {res && query ? <>
-      <ComedkCard data={res} saved={saved.length} onShortlist={onShortlist} />
+      <ComedkCard data={res} saved={saved.length} onShortlist={onShortlist} cardRef={card} />
       <ComedkList data={res} area={area} onArea={a => { setArea(a); setPage(1); }} page={page} onPage={setPage} busy={busy}
         branchText={branchLabel(branches)} onBranch={() => setPicker(true)} saved={new Set(saved.map(s => s.id))}
         onOpen={i => setDetail({ ...query, branches, code: i.code, course: i.cc })}
-        tools={<PdfButton testID="comedk-pdf" path="/comedk" body={{ ...query, branches, area }} label="Top 50 ki PDF" />} />
+        tools={<PdfButton testID="comedk-pdf" path="/comedk" body={{ ...query, branches, area }} label="Top 50 ki PDF" card={card} />} />
     </> : null}
     <View style={{ gap: 4 }}>
       {(res?.notes ?? []).map(n => <T key={n} size={12} color={colors.muted}>{n}</T>)}
@@ -137,11 +142,12 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
   </>;
 }
 
-function ComedkCard({ data, saved, onShortlist }: { data: ComedkOut; saved: number; onShortlist: () => void }) {
+function ComedkCard({ data, saved, onShortlist, cardRef }: { data: ComedkOut; saved: number; onShortlist: () => void; cardRef: CardRef }) {
   const reduced = useReducedMotion();
+  const link = useShareLink();
   const r = data.result;
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
-    <MetalCard testID="comedk-card" badge="COMEDK 2026" foot={<>
+    <MetalCard testID="comedk-card" cardRef={cardRef} badge="COMEDK 2026" foot={<>
       <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>YOUR SCORE</Eyebrow>
         <SilverCaps testID="comedk-card-summary">{r.summary}</SilverCaps>
@@ -154,7 +160,7 @@ function ComedkCard({ data, saved, onShortlist }: { data: ComedkOut; saved: numb
       </View>
       <Hairline testID="comedk-card-reach" label={`${r.in_reach} OF ${r.total} GM SEATS IN REACH`} />
     </MetalCard>
-    <CardActions prefix="comedk" onShare={() => shareComedk(data)} saved={saved} onShortlist={onShortlist}
+    <CardActions prefix="comedk" onShare={() => shareCard(cardRef, shareComedk(data, link))} saved={saved} onShortlist={onShortlist}
       notes={[r.spread, r.check, "In reach = Safe + Likely + Borderline seats (Borderline pakki nahi)."]} />
   </Animated.View>;
 }
@@ -201,7 +207,8 @@ function ComedkList({ data, area, onArea, page, onPage, branchText, onBranch, on
 const lakh = (fee: number) => fee >= 100000 ? `₹${(fee / 100000).toFixed(2)} L` : `₹${fmt(fee)}`;
 
 function ComedkRow({ item, onPress, saved, testID, rank, viewed, pulse }: { item: ComedkItem; onPress: () => void; saved: boolean; testID: string; rank?: number; viewed?: boolean; pulse?: boolean }) {
-  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(item.tag, !!item.gap)} title={item.college} a11y={`${item.college}, ${item.course}`}
+  const dream = useDreamToggle(`comedk-${item.id}`, "comedk", () => comedkDream(item));
+  return <CollegeCard testID={testID} rank={rank} edge={edgeOf(item.tag, !!item.gap)} title={item.college} a11y={`${item.college}, ${item.course}`} dream={dream}
     tags={item.tag ? <Tag testID={`${testID}-tag`} label={TAG[item.tag].label} ink={TAG[item.tag].ink} soft={TAG[item.tag].soft} /> : undefined}
     sub={item.course} line={`${item.city ? `${item.city} · ` : ""}GM (All India)`}
     stats={[

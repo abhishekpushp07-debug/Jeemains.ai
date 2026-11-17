@@ -20,6 +20,8 @@ import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/a
 import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
 import { isResultLocked, unlockResult } from "@/src/mission/gate";
 import { ShareGate } from "@/src/mission/ShareGate";
+import { DreamMeter } from "@/src/dream/DreamMeter";
+import { examOf, FULL, recordMock } from "@/src/dream/store";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -54,8 +56,12 @@ function Pending({ r, id, reload }: { r: any; id: string; reload: () => void }) 
   );
 }
 
-function Analysis({ r }: { r: any }) {
+function Analysis({ r, id }: { r: any; id: string }) {
   const s = r.summary;
+  const router = useRouter();
+  const exam = examOf(r.exam);
+  // Full mocks only (the same rule recordMock uses): the Dream meter says how far each dream college is after this mock.
+  const dream = exam && s.maximum >= FULL[exam] / 2 ? exam : null;
   return (
     <View style={{ gap: space.md }}>
       <LinearGradient testID="result-score-card" colors={[colors.brandSecondary, colors.custom_series]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={learningStyles.score}>
@@ -63,6 +69,8 @@ function Analysis({ r }: { r: any }) {
         <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
         <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtClock(s.total_seconds)} used` : ""}</T>
       </LinearGradient>
+      {dream ? <DreamMeter exam={dream} testID="result-dream" mockId={id}
+        onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} /> : null}
       <View style={{ flexDirection: "row", gap: space.sm }}>
         <LearningStat testID="result-correct" label="Correct" value={s.correct} tone="completed" />
         <LearningStat testID="result-incorrect" label="Incorrect" value={s.incorrect} tone="error" />
@@ -314,6 +322,12 @@ export default function Result() {
   }, [id, version, n, user]);
 
   const ready = resultIsReleased(status, r);
+  // Every released full mock is remembered on the phone for the Dream College Meter (original score only).
+  useEffect(() => {
+    if (!ready || version !== "original" || !r?.summary) return;
+    recordMock({ id: id!, exam: r.exam, score: r.summary.score, maximum: r.summary.maximum, title: r.title,
+      at: typeof r.submitted_at === "number" ? r.submitted_at * 1000 : undefined });
+  }, [ready, r, id, version]);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
   usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready && tab !== "solutions");
   // A fresh submission shows the Mission card first ("Share to view results"); the result keeps loading behind it.
@@ -345,7 +359,7 @@ export default function Result() {
           </ScrollView>
         ) : null}
         {ready && version !== "original" ? <Notice tone="warning" testID="score-version-note">{r.change_note || "Revised scoring version. The original result is preserved."}</Notice> : null}
-        {ready && tab === "analysis" ? <Analysis r={r} /> : null}
+        {ready && tab === "analysis" ? <Analysis r={r} id={id!} /> : null}
         {ready && tab === "progress" ? <Remote path={`/attempts/${id}/journey`} render={(d) => d.state !== "available" ? <Unavailable testID="progress-unavailable" title="Progress journey unavailable" reason={d.reason} /> : (
           <Card testID="progress-journey" style={[learningStyles.section, { borderTopColor: learningTones.active.line }]}>
             <T w="heavy" size={16}>Your full-mock journey</T>

@@ -1,7 +1,8 @@
 // Small text-only building blocks of the dark Rank tab: section panel, switch, colour tag, toggle chip, star and a list picker.
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Animated, { cancelAnimation, Easing, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Icon, Press, T } from "@/src/components/ui";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
@@ -82,22 +83,54 @@ export function StarButton({ saved, onPress, testID }: { saved: boolean; onPress
 }
 
 /** The input after Show: the score line and a bright filled "Edit" button in the tool's colour, so trying another number is obvious.
- *  The whole row reopens the form. */
+ *  The whole row reopens the form. College predictor's bar is shining purple (a light sweep passes over it) with a blood red Edit. */
 export function Summary({ text, onEdit, testID }: { text: string; onEdit: () => void; testID: string }) {
   const a = useAccent();
   const bg = a?.ink ?? colors.brandPrimary, fg = a?.on ?? colors.onBrandPrimary, tint = a?.text ?? colors.brandText;
+  const bar = a?.bar;
+  const edit = <View testID={`${testID}-edit`} style={[styles.editBtn, { ...editGlow, backgroundColor: bg, shadowColor: bg }]}>
+    <Glyph name="pencil" size={15} color={fg} />
+    <T w="heavy" size={14} color={fg}>Edit</T>
+  </View>;
+  if (bar) return <View style={[styles.barGlow, { shadowColor: bar.glow, backgroundColor: bar.to }]}>
+    <Press testID={testID} onPress={onEdit} accessibilityRole="button" accessibilityLabel={`${text}. Edit karke doosra number dekho`} scaleTo={0.99} style={styles.bar}>
+      <LinearGradient colors={[bar.from, bar.to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+      <Shine />
+      <View style={[styles.summaryIcon, { backgroundColor: bar.chip, borderColor: bar.hint }]}><Glyph name={a.icon} size={15} color={bar.hint} stroke={1.6} /></View>
+      <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
+        <T w="bold" size={14} color={colors.onBrandPrimary} numberOfLines={2}>{text.replace(/-/g, "\u2011")}</T>
+        <T testID={`${testID}-hint`} w="semibold" size={11.5} color={bar.hint} numberOfLines={2}>Doosra number dekhna hai?</T>
+      </View>
+      {edit}
+    </Press>
+  </View>;
   return <Press testID={testID} onPress={onEdit} accessibilityRole="button" accessibilityLabel={`${text}. Edit karke doosra number dekho`} scaleTo={0.99}
     style={[styles.summary, a && { borderColor: a.line, backgroundColor: colors.custom_card }]}>
     {a ? <View style={[styles.summaryIcon, { backgroundColor: a.soft, borderColor: a.line }]}><Glyph name={a.icon} size={15} color={a.text} stroke={1.6} /></View> : null}
     <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
       <T w="semibold" size={14} numberOfLines={2}>{text.replace(/-/g, "\u2011")}</T>
-      <T testID={`${testID}-hint`} w="semibold" size={11.5} color={tint} numberOfLines={1}>Doosra number dekhna hai?</T>
+      <T testID={`${testID}-hint`} w="semibold" size={11.5} color={tint} numberOfLines={2}>Doosra number dekhna hai?</T>
     </View>
-    <View testID={`${testID}-edit`} style={[styles.editBtn, { ...editGlow, backgroundColor: bg, shadowColor: bg }]}>
-      <Glyph name="pencil" size={15} color={fg} />
-      <T w="heavy" size={14} color={fg}>Edit</T>
-    </View>
+    {edit}
   </Press>;
+}
+
+/** A soft band of light that sweeps across its parent every few seconds (still under Reduce Motion). */
+export function Shine() {
+  const reduced = useReducedMotion();
+  const [w, setW] = useState(0);
+  const x = useSharedValue(-1);
+  useEffect(() => {
+    if (reduced || !w) return;
+    x.value = withRepeat(withSequence(withTiming(-1, { duration: 0 }), withDelay(1600, withTiming(1, { duration: 1200, easing: Easing.inOut(Easing.quad) }))), -1);
+    return () => cancelAnimation(x);
+  }, [reduced, w, x]);
+  const sweep = useAnimatedStyle(() => ({ transform: [{ translateX: x.value * w }, { skewX: "-20deg" }] }));
+  return <View pointerEvents="none" style={StyleSheet.absoluteFill} onLayout={e => setW(e.nativeEvent.layout.width)}>
+    {w && !reduced ? <Animated.View style={[styles.shine, sweep]}>
+      <LinearGradient colors={[colors.custom_clear, colors.custom_fShine, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={StyleSheet.absoluteFill} />
+    </Animated.View> : null}
+  </View>;
 }
 
 /** Bottom sheet list for home state (one) or branches (many). */
@@ -136,6 +169,9 @@ const styles = StyleSheet.create({
   formName: { letterSpacing: 1.6, opacity: 0.72 },
   summaryIcon: { width: 30, height: 30, borderRadius: 15, borderWidth: 1, alignItems: "center", justifyContent: "center" },
   editBtn: { flexDirection: "row", alignItems: "center", gap: 6, minHeight: 44, paddingHorizontal: 16, borderRadius: radius.pill },
+  barGlow: { borderRadius: 18, shadowOpacity: 0.75, shadowRadius: 20, shadowOffset: { width: 0, height: 4 }, elevation: 10 },
+  bar: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 64, paddingVertical: space.md, paddingHorizontal: space.lg, borderRadius: 18, overflow: "hidden" },
+  shine: { position: "absolute", top: -10, bottom: -10, left: 0, width: 90 },
   stripHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm, minHeight: 20 },
   ruleTitle: { flexDirection: "row", alignItems: "center", gap: space.sm },
   rule: { width: 18, height: 1.5, backgroundColor: colors.custom_rankBlood },

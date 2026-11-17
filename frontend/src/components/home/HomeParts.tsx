@@ -71,22 +71,6 @@ export function ContinueCard({ attempt, onPress }: { attempt: any; onPress: () =
   </Press>;
 }
 
-/** Soft gradient promo with a big typographic number, like a fintech offer banner. */
-export function PromoBanner({ onPress, days }: { onPress: () => void; days: number }) {
-  // Below 360px the big number would squeeze the copy, so the copy gets the full width.
-  const narrow = useWindowDimensions().width < 360;
-  return <LinearGradient testID="home-promo" colors={[colors.custom_promoFrom, colors.custom_promoTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.promo}>
-    <View style={{ flex: 1, gap: 6 }}>
-      <T w="bold" size={10.5} color={colors.custom_promoInk} style={{ letterSpacing: narrow ? 1.2 : 2 }} numberOfLines={1}>AI ASTRA · 100% AI</T>
-      <T testID="home-promo-title" w="heavy" size={narrow ? 16 : 17}>score 200+ with AI.{"\n"}{days ? `${days} daily mocks` : "daily full mocks"}, free.</T>
-      <Press testID="home-promo-cta" onPress={onPress} accessibilityLabel="Know more about the All India series" style={styles.promoBtn}>
-        <T w="bold" size={13} color={colors.onSurfaceInverse}>Know more</T>
-      </Press>
-    </View>
-    {narrow ? null : <T w="heavy" size={50} color={colors.custom_promoInk} style={styles.promoNum} accessibilityElementsHidden importantForAccessibility="no">200+</T>}
-  </LinearGradient>;
-}
-
 /** Explore pills: lowercase labels with small coloured hairline icons. */
 export type ChipItem = { id: string; icon: IconName; label: string; tint: string; onPress: () => void };
 export function ExploreChips({ items }: { items: ChipItem[] }) {
@@ -123,9 +107,6 @@ const styles = StyleSheet.create({
   billRow: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.lg },
   billIcon: { width: 46, height: 46, borderRadius: 23, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" },
   resume: { height: 42, paddingHorizontal: 18, borderRadius: 12, backgroundColor: colors.onSurface, alignItems: "center", justifyContent: "center" },
-  promo: { borderRadius: 22, padding: 20, flexDirection: "row", alignItems: "center", gap: space.md, overflow: "hidden" },
-  promoBtn: { alignSelf: "flex-start", marginTop: 6, minHeight: 44, paddingHorizontal: 18, borderRadius: 12, backgroundColor: colors.onSurface, alignItems: "center", justifyContent: "center" },
-  promoNum: { lineHeight: 56, letterSpacing: -2, opacity: 0.9 },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
   chip: { flexDirection: "row", alignItems: "center", gap: 8, height: 52, paddingHorizontal: 18, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
 });

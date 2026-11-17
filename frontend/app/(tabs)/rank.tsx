@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
-import { useFocusEffect, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ErrorBox, Press, T } from "@/src/components/ui";
@@ -25,6 +25,11 @@ import { Compare } from "@/src/rank/Compare";
 import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
 import { PdfButton } from "@/src/rank/PdfButton";
 import { shareJee } from "@/src/rank/share";
+import { shareCard } from "@/src/shareCard";
+import { useShareLink } from "@/src/mission/stats";
+import { DreamPanel } from "@/src/dream/DreamPanel";
+import { setJeeProfile } from "@/src/dream/need";
+import { useDreams } from "@/src/dream/store";
 import { useShortlist } from "@/src/rank/shortlist";
 import { ACCENTS, AccentContext } from "@/src/rank/accent";
 
@@ -64,8 +69,11 @@ export default function RankTab() {
   const [branchPicker, setBranchPicker] = useState(false);
   const [shortOpen, setShortOpen] = useState(false);
   const saved = useShortlist();
+  const dreams = useDreams();
   const ticket = useRef(0);
   const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
+  const jeeCard = useRef<React.ComponentRef<typeof View>>(null); // the JEE Rank Card: shared as a photo, and with the PDF
+  const link = useShareLink();
   // Where the tool's form starts (just under the tiles) and how far the page is scrolled, so a tile tap can bring its form into view.
   const formTop = useRef(0);
   const scrollY = useRef(0);
@@ -75,6 +83,13 @@ export default function RankTab() {
     if (formTop.current - scrollY.current > winH * 0.62) scroll.current?.scrollTo({ y: Math.max(0, formTop.current - winH * 0.3), animated: true });
   };
   useFocusEffect(useCallback(() => { setStatusBarStyle("light"); return () => setStatusBarStyle("dark"); }, []));
+  // Home's Dream card links here: "college" opens the College predictor, "dream" opens the Dream college tool.
+  const params = useLocalSearchParams<{ tool?: string; at?: string }>();
+  useEffect(() => {
+    if (params.tool === "college" || params.tool === "dream") { openTool(params.tool); scroll.current?.scrollTo({ y: 0, animated: false }); }
+  }, [params.tool, params.at]);
+  // JEE dream colleges get their marks for the category, gender, PwD and state in the College predictor form.
+  useEffect(() => { setJeeProfile({ category: form.category, female: form.female, pwd: form.pwd, state: form.state }); }, [form.category, form.female, form.pwd, form.state]);
 
   const loadMeta = useCallback(() => {
     setMetaError(null);
@@ -144,13 +159,14 @@ export default function RankTab() {
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
         <View onLayout={e => { formTop.current = e.nativeEvent.layout.y + e.nativeEvent.layout.height + space.lg; }}>
-          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} />
+          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} dreams={dreams.dreams.length} />
         </View>
 
         {pane("rank", <RankPredictor onColleges={goColleges} />)}
         {pane("pct", <PercentileRank onColleges={goColleges} />)}
         {pane("target", <TargetMarks states={meta?.states ?? []} />)}
         {pane("compare", <Compare onGoCollege={() => openTool("college")} />)}
+        {pane("dream", <DreamPanel onAdd={() => tapTool("college")} />)}
         {pane("college", <>
         <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />
 
@@ -169,10 +185,10 @@ export default function RankTab() {
             <ErrorBox error={error ?? undefined} retry={() => query && run(query, segment, page)} testID="rank-error" />
             {res && query ? <>
               <ResultCard result={res.result} candidates={meta?.candidates} saved={saved.length} onShortlist={() => setShortOpen(true)}
-                onShare={() => shareJee(res.result, res.items)} />
+                cardRef={jeeCard} onShare={() => shareCard(jeeCard, shareJee(res.result, res.items, link))} />
               <SeatList data={res} segment={segment} onSegment={s => { setSegment(s); setPage(1); }} page={page} onPage={setPage}
                 branchText={branchLabel(form.branches)} onBranch={() => setBranchPicker(true)} onOpen={s => openSeat(s)} busy={busy}
-                tools={<PdfButton testID="rank-pdf" path="/jee" body={{ ...query, segment }} label="Top 50 ki PDF" />} />
+                tools={<PdfButton testID="rank-pdf" path="/jee" body={{ ...query, segment }} label="Top 50 ki PDF" card={jeeCard} />} />
             </> : null}
           </> : meta ? <PercentileChart lines={meta.chart} branches={form.branches} branchText={branchLabel(form.branches)}
             onBranch={() => setBranchPicker(true)} onOpen={(s, body) => openSeat(s, body)} /> : null}

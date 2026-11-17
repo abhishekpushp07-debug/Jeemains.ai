@@ -20,9 +20,17 @@ export function useMissionStats() {
   const uid = user?.id;
   const s = useCached<MissionStats>(uid ? `u.${uid}.mission` : null, () => rf<MissionStats>("/mission/me", uid!));
   useFocusEffect(useCallback(() => { s.revalidate(); }, [s.revalidate])); // eslint-disable-line react-hooks/exhaustive-deps
-  const link = s.data?.code ? `${BACKEND}/api/j/${s.data.code}` : "https://jeelive.ai";
   return { stats: s.data, loading: s.loading && !s.data, error: s.error, reload: s.reload, refreshing: s.refreshing,
-    name: firstName(user?.name), caption: caption(link) };
+    name: firstName(user?.name), caption: caption(linkOf(s.data)) };
+}
+
+const linkOf = (s: MissionStats | null | undefined) => s?.code ? `${BACKEND}/api/j/${s.code}` : "https://jeelive.ai";
+
+/** The student's own link for any share caption (Rank cards, PDFs), so friends who open it count on the Mission card. */
+export function useShareLink() {
+  const { user } = useAuth();
+  const uid = user?.id;
+  return linkOf(useCached<MissionStats>(uid ? `u.${uid}.mission` : null, () => rf<MissionStats>("/mission/me", uid!)).data);
 }
 
 /** Milestones on the way: the next one above the current count. */

@@ -6,8 +6,10 @@ import * as Sharing from "expo-sharing";
 import { BACKEND } from "@/src/api/client";
 import { sendWhatsApp } from "@/src/rapid/social";
 import { sendFileToWhatsApp } from "@/src/whatsappFile";
+import { CardRef, cardPhoto, cardWebFile } from "@/src/shareCard";
 
 const FAIL = "PDF nahi bani. Network check karke dobara try karo.";
+const PHOTO = "JEELIVE-Rank-Card.png";
 type Pdf = { name: string; bytes: Uint8Array };
 
 async function fetchPdf(path: string, body: unknown): Promise<Pdf> {
@@ -60,18 +62,20 @@ export async function savePdf(path: string, body: unknown): Promise<string> {
   return pdf.name;
 }
 
-export type SentVia = "whatsapp" | "sheet" | "download" | "cancelled";
+export type SentVia = "whatsapp" | "both" | "sheet" | "download" | "cancelled";
 
-/** "WhatsApp" button: the PDF file itself goes to a friend.
- *  Android app: WhatsApp opens with the file attached, the student only picks the friend.
- *  iPhone / Expo Go: iOS lets no app open WhatsApp with a file, so the share sheet opens (WhatsApp is in it).
- *  Web: a phone browser shares the file; a computer downloads it and opens WhatsApp with the message. */
-export async function sendPdfWhatsApp(path: string, body: unknown, caption: string): Promise<{ name: string; via: SentVia }> {
+/** "WhatsApp" button: the PDF file itself goes to a friend, with the photo of `card` (the Rank card) where possible.
+ *  Android app: WhatsApp opens with the card photo and the PDF attached, the student only picks the friend.
+ *  iPhone / Expo Go: iOS lets no app open WhatsApp with a file, so the share sheet opens with the PDF (WhatsApp is in it).
+ *  Web: a phone browser shares the photo and the PDF; a computer downloads the PDF and opens WhatsApp with the message. */
+export async function sendPdfWhatsApp(path: string, body: unknown, caption: string, card?: CardRef): Promise<{ name: string; via: SentVia }> {
   const pdf = await fetchPdf(path, body);
   if (Platform.OS === "web") {
     const nav = (globalThis as any).navigator, WebFile = (globalThis as any).File;
-    const files = WebFile ? [new WebFile([pdf.bytes], pdf.name, { type: "application/pdf" })] : [];
-    if (files.length && nav?.canShare?.({ files })) {
+    const doc = WebFile ? new WebFile([pdf.bytes], pdf.name, { type: "application/pdf" }) : null;
+    const photo = doc && card && nav?.canShare ? await cardWebFile(card, PHOTO) : null;
+    for (const files of [photo ? [photo, doc] : null, doc ? [doc] : null]) {
+      if (!files || !nav?.canShare?.({ files })) continue;
       try { await nav.share({ files, text: caption }); return { name: pdf.name, via: "sheet" }; }
       catch (e: any) { if (e?.name === "AbortError") return { name: pdf.name, via: "cancelled" }; }
     }
@@ -80,6 +84,8 @@ export async function sendPdfWhatsApp(path: string, body: unknown, caption: stri
     return { name: pdf.name, via: "download" };
   }
   const file = cacheFile(pdf);
+  const photo = card ? await cardPhoto(card) : null;
+  if (photo && await sendFileToWhatsApp({ urls: [photo, file.uri], filenames: [PHOTO, pdf.name], message: caption })) return { name: pdf.name, via: "both" };
   if (await sendFileToWhatsApp({ url: file.uri, type: "application/pdf", filename: pdf.name, message: caption })) return { name: pdf.name, via: "whatsapp" };
   await shareSheet(file, pdf.name); // WhatsApp missing or refused: the share sheet still gets the file out
   return { name: pdf.name, via: "sheet" };

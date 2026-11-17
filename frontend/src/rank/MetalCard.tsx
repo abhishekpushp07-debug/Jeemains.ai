@@ -1,7 +1,7 @@
 // The Rank Card, after a quiet black metal membership card: soft graphite fading to black, one faint diagonal sheen,
 // a hairline diamond across its right side, a small diamond mark by the name, sparkle-silver serif with a twinkling glint
 // and blood-red hairlines. Gradients, SVG and text only, so it costs nothing in app size.
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Path } from "react-native-svg";
@@ -9,15 +9,16 @@ import Animated, { cancelAnimation, useAnimatedStyle, useReducedMotion, useShare
 import { Pill } from "@/src/components/design";
 import { T } from "@/src/components/ui";
 import { rankColors as colors, space } from "@/src/theme";
+import type { CardRef } from "@/src/shareCard";
 import { SERIF } from "./tones";
 import { DiamondLine, DiamondMark } from "./Diamond";
 
 const silver = colors.custom_rankSilver, muted = colors.custom_rankSilverMuted, bloodInk = colors.custom_rankBloodInk;
 const EDGE = [colors.custom_clear, colors.custom_rankSilverLine, colors.custom_rankShimmer, colors.custom_rankSilverLine, colors.custom_clear] as const;
 
-export function MetalCard({ badge, children, foot, testID }: { badge: string; children: React.ReactNode; foot?: React.ReactNode; testID?: string }) {
+export function MetalCard({ badge, children, foot, testID, cardRef }: { badge: string; children: React.ReactNode; foot?: React.ReactNode; testID?: string; cardRef?: CardRef }) {
   const narrow = useWindowDimensions().width < 360; // small phones: score caps above the № serial instead of beside it
-  return <View style={styles.glow}><View testID={testID} style={styles.card}>
+  return <View style={styles.glow}><View ref={cardRef} collapsable={false} testID={testID} style={styles.card}>
     <LinearGradient colors={[colors.custom_eliteFrom, colors.custom_eliteMid, colors.custom_eliteTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
     <DiamondLine size={300} style={styles.watermark} />
     <LinearGradient colors={[colors.custom_clear, colors.custom_metalSheenSoft, colors.custom_clear]} locations={[0.3, 0.48, 0.66]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
@@ -97,16 +98,23 @@ export const Serial = ({ value, of, testID }: { value: string; of?: string; test
   {of ? <T color={muted} style={[styles.serif, { fontSize: 13 }]}> / {of}</T> : null}
 </View>;
 
-/** Light notes and the actions under the card (Shortlist only where the card leads to colleges). */
+/** Light notes and the actions under the card (Shortlist only where the card leads to colleges).
+ *  `onShare` sends the card's photo; the button spins while the photo is made. */
 export function CardActions({ notes, onShare, saved, onShortlist, prefix }: {
-  notes: (string | undefined | false)[]; onShare: () => void; saved?: number; onShortlist?: () => void; prefix: string;
+  notes: (string | undefined | false)[]; onShare: () => Promise<unknown>; saved?: number; onShortlist?: () => void; prefix: string;
 }) {
+  const [busy, setBusy] = useState(false);
+  const share = async () => {
+    if (busy) return;
+    setBusy(true);
+    try { await onShare(); } catch { /* the share sheet closed or WhatsApp refused: nothing to undo */ } finally { setBusy(false); }
+  };
   return <View style={{ gap: space.md }}>
     <View style={{ gap: 4 }}>
       {notes.filter(Boolean).map(n => <T key={n as string} size={12.5} color={colors.custom_softText}>{n}</T>)}
     </View>
     <View style={styles.actions}>
-      <Pill testID={`${prefix}-share`} size="sm" icon="whatsapp" label="WhatsApp" accessibilityLabel="WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onBrandPrimary} onPress={onShare} style={{ flex: 1 }} />
+      <Pill testID={`${prefix}-share`} size="sm" icon="whatsapp" label="WhatsApp" accessibilityLabel="Card WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onBrandPrimary} busy={busy} onPress={share} style={{ flex: 1 }} />
       {onShortlist ? <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="star" label={`Shortlist ${saved ?? 0}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} /> : null}
     </View>
   </View>;

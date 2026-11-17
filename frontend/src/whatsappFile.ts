@@ -12,7 +12,8 @@ function androidShare(): typeof import("react-native-share").default | null {
   try { return require("react-native-share").default; } catch { return null; }
 }
 
-export async function sendFileToWhatsApp(o: { url: string; type: string; filename: string; message: string }): Promise<boolean> {
+/** One file (`url`, `type`, `filename`) or several (`urls`, `filenames`: e.g. a card photo with a PDF) with the message. */
+export async function sendFileToWhatsApp(o: { url?: string; type?: string; filename?: string; urls?: string[]; filenames?: string[]; message: string }): Promise<boolean> {
   const share = androidShare();
   if (!share) return false;
   const apps: [string, ShareSingleOptions["social"]][] = [["com.whatsapp", share.Social.WHATSAPP as ShareSingleOptions["social"]],

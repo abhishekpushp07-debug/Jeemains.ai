@@ -1,6 +1,6 @@
 // Percentile se rank (Rank tab tile): NTA JEE Main percentile + category + PwD -> CRL, category / PwD rank, and the marks
 // that percentile took on each paper type. "Colleges dekho" carries the percentile into the College predictor.
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { ErrorBox, T } from "@/src/components/ui";
@@ -13,6 +13,8 @@ import { Strip, Summary, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 import { sharePercentile } from "./share";
 import { FormButton, useField } from "./accent";
+import { shareCard } from "@/src/shareCard";
+import { useShareLink } from "@/src/mission/stats";
 
 const SAVED = "rank.pct.v1";
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
@@ -81,9 +83,11 @@ export function PercentileRank({ onColleges }: { onColleges: (h: Handover) => vo
 
 function PercentileCard({ data, typed }: { data: PercentileOut; typed: number }) {
   const reduced = useReducedMotion();
+  const card = useRef<React.ComponentRef<typeof View>>(null);
+  const link = useShareLink();
   const r = data.result;
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
-    <MetalCard testID="pr-card" badge="JEE MAIN 2026" foot={<>
+    <MetalCard testID="pr-card" cardRef={card} badge="JEE MAIN 2026" foot={<>
       <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>YOUR SCORE</Eyebrow>
         <SilverCaps testID="pr-card-summary">{r.summary}</SilverCaps>
@@ -110,7 +114,7 @@ function PercentileCard({ data, typed }: { data: PercentileOut; typed: number })
       </View>
       <T size={11.5} color={colors.custom_dim}>Tough shift mein kam marks par hi ye percentile aa jaata hai, Easy shift mein zyada marks lagte hain.</T>
     </Strip>
-    <CardActions prefix="pr" onShare={() => sharePercentile(data)} notes={data.notes} />
+    <CardActions prefix="pr" onShare={() => shareCard(card, sharePercentile(data, link))} notes={data.notes} />
   </Animated.View>;
 }
 

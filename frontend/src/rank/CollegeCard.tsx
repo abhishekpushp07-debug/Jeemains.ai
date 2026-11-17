@@ -4,7 +4,7 @@
 // Cards already opened say "Dekha". Until the student has opened any college once, the first card's button breathes and a
 // hint above the list says to tap.
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Animated, { cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
@@ -13,13 +13,14 @@ import { storage } from "@/src/utils/storage";
 import { useAccent } from "./accent";
 import { StarButton } from "./controls";
 import { Medal, MedalWash } from "./Medal";
+import type { DreamToggle } from "@/src/dream/useDreamToggle";
 
 export type Stat = { label: string; value: string; sub?: string; ink?: string; testID?: string };
 
-export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats, note, teaser, viewed, pulse, open, onPress, saved, onStar, a11y, children }: {
+export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats, note, teaser, viewed, pulse, open, onPress, saved, onStar, a11y, children, dream }: {
   testID: string; rank?: number; edge: string; title: string; tags?: React.ReactNode; sub: string; line?: string; stats: Stat[];
   note?: React.ReactNode; teaser: string; viewed?: boolean; pulse?: boolean; open?: boolean; onPress: () => void;
-  saved: boolean; onStar: () => void; a11y: string; children?: React.ReactNode;
+  saved: boolean; onStar: () => void; a11y: string; children?: React.ReactNode; dream?: DreamToggle;
 }) {
   return <View style={[styles.card, rank && rank <= 3 ? styles.cardTop : null]}>
     <MedalWash n={rank} />
@@ -28,7 +29,7 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
       accessibilityState={open === undefined ? undefined : { expanded: open }} style={styles.press}>
       <View style={styles.head}>
         {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
-        <View style={{ flex: 1, gap: 4 }}>
+        <View style={{ flex: 1, gap: 4, paddingRight: dream ? 40 : 0 }}>
           <T w="bold" size={15} numberOfLines={2} style={styles.title}>{title}</T>
           {tags ? <View style={styles.tags}>{tags}</View> : null}
           <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{sub}</T>
@@ -43,6 +44,7 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
         </View>)}
       </View>
       {note}
+      {dream?.msg ? <T testID={`${testID}-dream-msg`} w="semibold" size={12} color={dream.on ? colors.custom_fBloodText : colors.custom_flame}>{dream.msg}</T> : null}
       {children}
       <View style={styles.foot}>
         <View style={styles.teaser}>
@@ -54,7 +56,16 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
         <Cta testID={`${testID}-cta`} open={open} pulse={pulse} />
       </View>
     </Press>
-    <View style={styles.star}><StarButton saved={saved} onPress={onStar} testID={`${testID}-star`} /></View>
+    <View style={styles.star}>
+      <StarButton saved={saved} onPress={onStar} testID={`${testID}-star`} />
+      {dream ? <Press testID={`${testID}-dream`} onPress={dream.toggle} scaleTo={0.92} accessibilityRole="button" accessibilityState={{ selected: dream.on, busy: dream.busy }}
+        accessibilityLabel={dream.on ? `${title} dream se hatao` : `${title} ko dream college banao`}
+        style={[styles.dream, dream.on && { ...dreamGlow, backgroundColor: colors.custom_fBlood, borderColor: colors.custom_fBlood, shadowColor: colors.custom_fBlood }]}>
+        {dream.busy ? <ActivityIndicator size="small" color={colors.custom_fBloodText} />
+          : <Glyph name="bullseye-arrow" size={17} color={dream.on ? colors.onBrandPrimary : colors.custom_fBloodText} />}
+        <T w="heavy" size={7.5} color={dream.on ? colors.onBrandPrimary : colors.custom_fBloodText} style={{ letterSpacing: 0.6 }}>DREAM</T>
+      </Press> : null}
+    </View>
   </View>;
 }
 
@@ -120,6 +131,7 @@ export const cardStyles = StyleSheet.create({ list: { gap: space.md } });
 
 /** The breathing CTA's glow, spread into one inline style with its colour (web draws the blur, Android gets elevation). */
 const ctaGlow = { shadowOpacity: 0.7, shadowRadius: 12, shadowOffset: { width: 0, height: 0 }, elevation: 6 };
+const dreamGlow = { shadowOpacity: 0.7, shadowRadius: 10, shadowOffset: { width: 0, height: 0 }, elevation: 5 };
 
 const styles = StyleSheet.create({
   card: { borderRadius: 18, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, overflow: "hidden" },
@@ -136,7 +148,9 @@ const styles = StyleSheet.create({
   foot: { flexDirection: "row", alignItems: "center", gap: space.sm, paddingTop: space.md, borderTopWidth: 1, borderTopColor: colors.custom_barLine },
   teaser: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 6 },
   cta: { flexDirection: "row", alignItems: "center", gap: 2, minHeight: 38, paddingLeft: 14, paddingRight: 10, borderRadius: radius.pill },
-  star: { position: "absolute", top: 4, right: 4 },
+  star: { position: "absolute", top: 4, right: 4, alignItems: "center", gap: 2 },
+  dream: { width: 40, height: 44, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_fBloodLine, backgroundColor: colors.custom_fBloodSoft,
+    alignItems: "center", justifyContent: "center", gap: 1 },
   hint: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, borderRadius: 18, borderWidth: 1,
     borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
   hintIcon: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center" },

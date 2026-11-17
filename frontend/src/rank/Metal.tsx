@@ -1,7 +1,7 @@
 // The face of each Rank tool tile, after a black metal membership card: brushed graphite mixed into the tool's own colour
 // (maroon, indigo, teal or champagne), fine brush lines, a broad diagonal sheen, a bevelled top edge, a soft light
 // behind a faceted diamond in the corner, and on the chosen tile a brighter glow with a jewel top edge. Gradients and SVG only.
-// Blood (College predictor) is the one exception: pure blood red, no graphite, no dark brush lines, no dark foot.
+// Blood (College predictor) is the one exception: one flat bright blood red, the same red as its form, with only the diamond.
 import React, { useId } from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,7 +9,7 @@ import Svg, { Defs, Pattern, RadialGradient, Rect, Stop } from "react-native-svg
 import { rankColors as colors } from "@/src/theme";
 import { Diamond } from "./Diamond";
 
-export type Jewel = "maroon" | "indigo" | "teal" | "champ" | "blood";
+export type Jewel = "maroon" | "indigo" | "teal" | "champ" | "blood" | "violet";
 /** `pure` = a solid colour tile (no black in it), with its own colours for the small line and the icon circle. */
 type Tone = { from: string; mid: string; to: string; glow: string; glow2?: string; line: string; ink: string; soft: string;
   pure?: { value: string; chip: string; chipLine: string } };
@@ -22,6 +22,8 @@ export const JEWELS: Record<Jewel, Tone> = {
     ink: colors.custom_tealInk, soft: colors.custom_tealSoft },
   champ: { from: colors.custom_champFrom, mid: colors.custom_champMid, to: colors.custom_champTo, glow: colors.custom_champGlow, line: colors.custom_champLine,
     ink: colors.custom_champInk, soft: colors.custom_champSoft },
+  violet: { from: colors.custom_violetFrom, mid: colors.custom_violetMid, to: colors.custom_violetTo, glow: colors.custom_violetGlow, line: colors.custom_violetLine,
+    ink: colors.custom_violetInk, soft: colors.custom_violetSoft },
   blood: { from: colors.custom_bloodFrom, mid: colors.custom_bloodMid, to: colors.custom_bloodTo, glow: colors.custom_bloodGlow, line: colors.custom_bloodLine,
     ink: colors.custom_bloodInk, soft: colors.custom_bloodSoft,
     pure: { value: colors.custom_bloodValue, chip: colors.custom_bloodChip, chipLine: colors.custom_bloodChipLine } },
@@ -40,12 +42,16 @@ export function MetalFace({ jewel, on, edge }: { jewel: Jewel; on?: boolean; edg
   const j = JEWELS[jewel];
   const top = edge ?? j.line;
   const strength = on ? 0.75 : 0.45;
+  // Pure tiles are one flat colour, exactly like their form; only the diamond sits on top.
+  if (j.pure) return <View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: j.mid }]}>
+    <Diamond width={46} tint={j.ink} sparkle={on} opacity={on ? 0.75 : 0.45} style={styles.gem} />
+  </View>;
   return <View pointerEvents="none" style={StyleSheet.absoluteFill}>
     <LinearGradient colors={[j.from, j.mid, j.to]} locations={[0, 0.45, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
     <Svg width="100%" height="100%" style={StyleSheet.absoluteFill}>
       <Defs>
         <Pattern id={`p${id}`} patternUnits="userSpaceOnUse" x="0" y="0" width="16" height={STREAK_TILE}>
-          {STREAKS.filter(s => !(j.pure && s.dark)).map(s => <Rect key={s.y} x="0" y={s.y} width="16" height={s.h} fill={s.dark ? colors.custom_rankBg : colors.custom_rankSparkle} fillOpacity={s.o} />)}
+          {STREAKS.map(s => <Rect key={s.y} x="0" y={s.y} width="16" height={s.h} fill={s.dark ? colors.custom_rankBg : colors.custom_rankSparkle} fillOpacity={s.o} />)}
         </Pattern>
         <RadialGradient id={`g${id}`} cx="86%" cy="62%" r="62%">
           <Stop offset="0" stopColor={j.glow} stopOpacity={strength} />
@@ -63,7 +69,7 @@ export function MetalFace({ jewel, on, edge }: { jewel: Jewel; on?: boolean; edg
     <Diamond width={46} tint={j.ink} sparkle={on} opacity={on ? 0.7 : 0.35} style={styles.gem} />
     <LinearGradient colors={[colors.custom_clear, colors.custom_metalSheenSoft, colors.custom_metalSheen, colors.custom_metalSheenSoft, colors.custom_clear]}
       locations={[0.2, 0.38, 0.48, 0.58, 0.76]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-    {j.pure ? null : <LinearGradient colors={[colors.custom_clear, colors.custom_metalShade]} locations={[0.55, 1]} style={StyleSheet.absoluteFill} />}
+    <LinearGradient colors={[colors.custom_clear, colors.custom_metalShade]} locations={[0.55, 1]} style={StyleSheet.absoluteFill} />
     <LinearGradient colors={on ? [colors.custom_clear, top, colors.custom_rankShimmer, top, colors.custom_clear] : [colors.custom_clear, colors.custom_metalBevel, colors.custom_metalSheen, colors.custom_clear]}
       start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={[styles.edge, on && styles.edgeOn]} />
   </View>;

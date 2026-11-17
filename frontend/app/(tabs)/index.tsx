@@ -9,7 +9,7 @@ import { Notice, Press, T } from "@/src/components/ui";
 import { SectionLabel } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { HomeSeriesCard } from "@/src/components/series/HomeSeriesCard";
-import { ChipItem, ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem, PromoBanner } from "@/src/components/home/HomeParts";
+import { ChipItem, ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem } from "@/src/components/home/HomeParts";
 import { ShareCard } from "@/src/components/home/ShareCard";
 import { useShare } from "@/src/components/SeriesBanner";
 import { BrandMark } from "@/src/components/BrandMark";
@@ -19,6 +19,7 @@ import { EXAMS, istDate, usesNativeTabs } from "@/src/navigation";
 import { seriesDays, useSeriesData } from "@/src/series";
 import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
+import { HomeDream } from "@/src/dream/HomeDream";
 
 const greeting = () => { const h = new Date().getHours(); return h < 5 ? "good night" : h < 12 ? "good morning" : h < 17 ? "good afternoon" : "good evening"; };
 // The three exams keep their own tile look; the names come from the website.
@@ -121,7 +122,7 @@ export default function Home() {
         ]} />
       </View>
 
-      <PromoBanner onPress={() => router.push("/live")} days={total} />
+      <HomeDream />
 
       <View style={{ gap: space.md }}>
         <SectionLabel title="Explore JEELIVE" />

@@ -5,16 +5,21 @@ import { StyleSheet, View } from "react-native";
 import { T } from "@/src/components/ui";
 import { Pill } from "@/src/components/design";
 import { rankColors as colors } from "@/src/theme";
+import { useShareLink } from "@/src/mission/stats";
+import type { CardRef } from "@/src/shareCard";
 import { savePdf, sendPdfWhatsApp, SentVia } from "./pdf";
 
-const CAPTION = "📄 Meri college list, JEELIVE.AI (2026 ke official data par). Apni list free mein banao: https://jeelive.ai";
+const caption = (link: string) => `📄 Meri college list, JEELIVE.AI (2026 ke official data par). Apni list free mein banao: ${link}`;
 const SENT: Record<Exclude<SentVia, "cancelled">, (name: string) => string> = {
   whatsapp: () => "WhatsApp khul gaya, PDF attach hai: bas dost chuno aur bhejo",
+  both: () => "WhatsApp khul gaya, card ki photo aur PDF dono attach hain: bas dost chuno aur bhejo",
   sheet: name => `${name} taiyaar: list mein WhatsApp chuno aur bhejo`,
   download: name => `${name} download hui. WhatsApp khul gaya: PDF attach karke bhejo`,
 };
 
-export function PdfButton({ path, body, label, testID }: { path: string; body: unknown; label: string; testID: string }) {
+/** `card` = the Rank card above the list: where the phone allows, its photo goes to WhatsApp together with the PDF. */
+export function PdfButton({ path, body, label, testID, card }: { path: string; body: unknown; label: string; testID: string; card?: CardRef }) {
+  const link = useShareLink();
   const [busy, setBusy] = useState<"wa" | "pdf" | null>(null);
   const working = useRef(false); // two taps in the same instant must still make one PDF
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
@@ -26,7 +31,7 @@ export function PdfButton({ path, body, label, testID }: { path: string; body: u
     working.current = true;
     setBusy(kind); setMsg(null);
     try {
-      if (kind === "wa") { const r = await sendPdfWhatsApp(path, body, CAPTION); setMsg(r.via === "cancelled" ? null : { ok: true, text: SENT[r.via](r.name) }); }
+      if (kind === "wa") { const r = await sendPdfWhatsApp(path, body, caption(link), card); setMsg(r.via === "cancelled" ? null : { ok: true, text: SENT[r.via](r.name) }); }
       else setMsg({ ok: true, text: `${await savePdf(path, body)} taiyaar` });
     } catch (e: any) { setMsg({ ok: false, text: e?.message || "PDF nahi bani. Dobara try karo." }); }
     finally { working.current = false; setBusy(null); }
