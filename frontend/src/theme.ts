@@ -176,6 +176,13 @@ const dark = {
   // Home share card: royal blue with a soft periwinkle glow and white glass (same in both palettes).
   custom_royalFrom: "#3561F0", custom_royalMid: "#2344CC", custom_royalTo: "#142B8C", custom_royalGlow: "#9DB6FF",
   custom_royalInk: "#DCE5FF", custom_royalDeep: "#132A86", custom_royalGlass: "rgba(255,255,255,0.12)", custom_royalLine: "rgba(255,255,255,0.24)",
+  // Mission share card: royal blue (bright → deep → night) with gold foil (light, main, deep, hairline, wash) and white glass (same in both palettes).
+  custom_mBlueMid: "#1A36B8", custom_mBlueTo: "#0B1C6B", custom_mBlueNight: "#071241",
+  custom_mGold: "#F2C14E", custom_mGoldLight: "#FFE6A3", custom_mGoldDeep: "#A8761C",
+  custom_mInk: "#DCE5FF", custom_mWhite: "#FFFFFF", custom_mNavy: "#0B1C6B",
+  custom_mGlass: "rgba(255,255,255,0.09)", custom_mLine: "rgba(255,255,255,0.18)",
+  // Mission story list: royal-blue icon circles on the page.
+  custom_royalTint: "#EEF2FF", custom_royalTintLine: "#D6DEFF",
   // Rank page stays pure black; only the cards carry colour.
   custom_rankBg: "#000000", custom_rankPanelSheen: "rgba(255,255,255,0.035)",
   // Rank tool tiles: brushed graphite metal, a broad diagonal sheen, a bevelled top edge, a soft shade at the foot.

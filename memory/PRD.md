@@ -750,3 +750,11 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Everything below the tiles stays simple (user: "niche simple rkho"): original black panels with red hairlines; the Rank Card is a quiet black metal card with a hairline diamond watermark and a small diamond mark by JEELIVE.AI (`src/rank/MetalCard.tsx`).
 - List rows: gold/silver/bronze medal coins for 1-3 (`src/rank/Medal.tsx`), type + chance tags under the college name; PDF buttons wrap on phones.
 - Rank features unchanged; no testID changed. Tested: iteration_90 (all features pass).
+
+## Iteration 91 — Mission tab: one shareable "Creator's Letter" card (DONE)
+- Watch-only Mission tab. User picked design 5 of 5 concepts shown in-app.
+- Card (`src/mission/MissionCard.tsx`, 4:5, royal blue + gold, Hinglish): gold corner ribbon "100% MADE BY AI ASTRA", maker's quote, signature "Abhishek Pushp" + gold AP seal, 4 chips (PYQ DNA, Target 200+, Rapid Fire, Rank + College), footer "100% FREE · Please share karo · jeelive.ai".
+- Red share buttons above and below the card: WhatsApp icon + "Please share karo" / "aur free education ko support karo". Plus "Doosre app mein share karo".
+- Share (`src/mission/share.ts`): card PNG 1080×1350 + caption. Android build: straight into WhatsApp (shared helper `src/whatsappFile.ts`, also used by Rank PDF). iPhone: share sheet. Expo Go: share sheet + caption copied. Web: WhatsApp text with link.
+- "Poori baat" list (6 points) + disclaimer (200+ is a target, not a guarantee).
+- Tested: iteration_91 (all pass on web).

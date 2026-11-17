@@ -1,12 +1,11 @@
 // White A4 PDFs of the Rank lists. The server draws them (so the app does not grow); the phone saves the file and
 // either opens the share sheet (Drive, Files, Print...) or goes straight into WhatsApp with the file attached.
 import { Platform } from "react-native";
-import Constants, { ExecutionEnvironment } from "expo-constants";
 import { File, Paths } from "expo-file-system";
 import * as Sharing from "expo-sharing";
-import type { ShareSingleOptions } from "react-native-share";
 import { BACKEND } from "@/src/api/client";
 import { sendWhatsApp } from "@/src/rapid/social";
+import { sendFileToWhatsApp } from "@/src/whatsappFile";
 
 const FAIL = "PDF nahi bani. Network check karke dobara try karo.";
 type Pdf = { name: string; bytes: Uint8Array };
@@ -61,13 +60,6 @@ export async function savePdf(path: string, body: unknown): Promise<string> {
   return pdf.name;
 }
 
-// react-native-share's native part exists only in our own Android build (not in Expo Go, not on the web).
-function androidShare(): typeof import("react-native-share").default | null {
-  if (Platform.OS !== "android" || Constants.executionEnvironment === ExecutionEnvironment.StoreClient) return null;
-  // eslint-disable-next-line @typescript-eslint/no-require-imports -- loaded only where its native part exists
-  try { return require("react-native-share").default; } catch { return null; }
-}
-
 export type SentVia = "whatsapp" | "sheet" | "download" | "cancelled";
 
 /** "WhatsApp" button: the PDF file itself goes to a friend.
@@ -88,18 +80,7 @@ export async function sendPdfWhatsApp(path: string, body: unknown, caption: stri
     return { name: pdf.name, via: "download" };
   }
   const file = cacheFile(pdf);
-  const share = androidShare();
-  if (share) {
-    const apps: [string, ShareSingleOptions["social"]][] = [["com.whatsapp", share.Social.WHATSAPP as ShareSingleOptions["social"]],
-      ["com.whatsapp.w4b", share.Social.WHATSAPPBUSINESS as ShareSingleOptions["social"]]];
-    for (const [pkg, social] of apps) {
-      if (!(await share.isPackageInstalled(pkg).then(r => r.isInstalled).catch(() => false))) continue;
-      try {
-        await share.shareSingle({ social, url: file.uri, type: "application/pdf", filename: pdf.name, message: caption } as ShareSingleOptions);
-        return { name: pdf.name, via: "whatsapp" };
-      } catch { break; } // WhatsApp refused: the share sheet below still gets the file out
-    }
-  }
-  await shareSheet(file, pdf.name);
+  if (await sendFileToWhatsApp({ url: file.uri, type: "application/pdf", filename: pdf.name, message: caption })) return { name: pdf.name, via: "whatsapp" };
+  await shareSheet(file, pdf.name); // WhatsApp missing or refused: the share sheet still gets the file out
   return { name: pdf.name, via: "sheet" };
 }
