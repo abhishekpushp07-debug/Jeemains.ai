@@ -175,6 +175,7 @@ SPEC = {
     'phone.reset_pin': ('public_forgot_pin_by_number', 'normal', 'pin_version_CAS_session_revocation_new_session'),
     'phone.owner_reset_pin': ('owner_only_existing_student_pin_reset', 'normal', 'pin_version_CAS_audited_no_student_session'),
     'students.list_students': ('owner_only_student_phone_projection', 'normal', 'read'),
+    'qa_cleanup.remove_test_accounts': ('owner_only_qa_test_account_removal', 'control', 'typed_confirm_idempotent_audited'),
     'content.catalogue': ('public_published_audience', 'normal', 'read'),
     'content.set_detail': ('public_published_audience', 'normal', 'read'),
     'content.studio_sets': ('authorized_editorial_workspace', 'control', 'read'),
