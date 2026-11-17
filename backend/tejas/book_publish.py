@@ -11,6 +11,9 @@ from .chapter_reader import book_subjects, match_subject, syllabus_subject, reso
 from tejas_storage import put_object
 
 
+HARD=('missing or conflicting supplied key','incomplete options or key','unsupported exact-integer key','response type is unresolved','original key region required')
+
+
 def overlap(a,b):
     return min(a[2],b[2])-max(a[0],b[0])>.001 and min(a[3],b[3])-max(a[1],b[1])>.001
 
@@ -186,6 +189,15 @@ async def rebuild(book, token):
         # Holds placed at publication time must survive the next rebuild; only an owner action clears them.
         if mock.missed_release and not mock.release_override:issues.append('Missed scheduled release. Choose a new release decision; it will not launch late automatically.')
         if mock.publish_hold:issues.append(mock.publish_hold)
+        confirmed=set(mock.confirmed)
+        for q in questions:
+            if q['coverage_key'] not in confirmed:continue
+            # The owner checked this question by eye: the reader's warnings about it no longer hold the mock; a usable answer still does.
+            n=q['original_number'];own_pages={r['page'] for v in q['source_regions'].values() for r in v}
+            def owned(x):
+                m=re.match(r'Page (\d+)(?:, |: )Q(\d+)\b',x)
+                return bool(m and int(m[2])==n and int(m[1]) in own_pages) or (x.startswith(f"{q['subject']} Q{n}:") and not any(h in x for h in HARD))
+            issues=[x for x in issues if not owned(x)]
         if chapters is not None:
             mock.chapter=chapter_record(book,mock,label,relevant,chapters,order)
             if not mock.chapter['subject']:issues.append('Choose the subject for this chapter.')

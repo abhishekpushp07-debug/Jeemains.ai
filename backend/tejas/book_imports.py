@@ -303,7 +303,8 @@ def question_problems(mock, everything=False):
     out,used=[],set()
     for q in mock.questions:
         n=q['original_number'];pages=sorted({r['page'] for r in q['source_regions']['question']})
-        near=set(pages)|({pages[-1]+1} if pages else set())
+        # Warnings on its solution or key pages belong to this question too (e.g. 'Page 309, Q11').
+        near=set(pages)|({pages[-1]+1} if pages else set())|{r['page'] for k in ('solution','key') for r in q['source_regions'].get(k,[])}
         mine=[]
         for i,x in enumerate(mock.issues):
             m=re.match(r'Page (\d+)(?:, |: )Q(\d+)\b',x)
@@ -313,7 +314,7 @@ def question_problems(mock, everything=False):
             out.append({'id':q['id'],'subject':q['subject'],'section':q['section'],'number':n,'type':q['type'],'options':list(q.get('options',{})),'typed_options':q.get('typed_options',{}),
                 'answer':q.get('answer',''),'issues':mine,'pages':pages,'next_page':pages[-1]+1 if pages else None,
                 'question_images':len(q['source_regions']['question']),'solution_images':len(q['source_regions']['solution']),
-                'has_key':bool(q['source_regions']['solution']),'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
+                'has_key':bool(q['source_regions']['solution']),'confirmed':q.get('coverage_key') in mock.confirmed,'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
     return out,[x for i,x in enumerate(mock.issues) if i not in used]
 
 
@@ -334,6 +335,7 @@ async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depe
         if not row:raise HTTPException(404,'Mock not found.')
         mock=BookMock.from_mongo(row)
         if u['role']!='owner' and mock.state!='held':raise HTTPException(404,'Mock not found.')
+        if body.confirmed and u['role']!='owner':raise HTTPException(403,'Only the owner can clear the warnings of a question.')
         if mock.revision!=body.revision:raise HTTPException(409,'This mock was rechecked a moment ago. Reload and try again.')
         if mock.published_generation==mock.generation:raise HTTPException(409,'Published mocks are frozen. Create a corrected version first.')
         q=next((x for x in mock.questions if x['id']==body.question_id),None)
@@ -379,9 +381,11 @@ async def fix_question(id:str,mid:str,body:QuestionFix,bg:BackgroundTasks,u=Depe
         if body.key_only:
             if mock.rules.get('solution_policy')=='original_expected':mock.rules['solution_policy']='mixed'
             if mock.rules.get('solution_policy')=='mixed' and coverage not in mock.rules.setdefault('key_only',[]):mock.rules['key_only'].append(coverage)
+        if body.confirmed and coverage not in mock.confirmed:mock.confirmed.append(coverage)
+        if body.key_only or body.confirmed:
             mock.revision+=1;await save_mock(mock)
         book.state='matching';await save_book(book,token)
-        await audit(u['id'],'Book question quick fix',mid,note+(' · key only' if body.key_only else ''))
+        await audit(u['id'],'Book question quick fix',mid,note+(' · key only' if body.key_only else '')+(' · owner checked, warnings cleared' if body.confirmed else ''))
     finally:await unlock(book,token)
     if not book.paused:await dispatch(book,bg)
     return {'ok':True,'message':f"Saved {q['subject']} Q{n}. Rechecking {mock.label}…"}

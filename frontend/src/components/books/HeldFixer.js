@@ -3,6 +3,7 @@ import {Loader2,CheckCircle2} from 'lucide-react';
 import {Button} from '../ui/button';
 import {Input} from '../ui/input';
 import {api,post} from '../../lib/api';
+import {useAuth} from '../../lib/auth';
 import {BookError,PrivateBookImage} from './BookShared';
 import {plain} from '../master/MasterShared';
 import {toast} from 'sonner';
@@ -22,18 +23,20 @@ function TypedOptions({tag,options,typed,onChange}){
 }
 
 export function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
- const tag='held-q-'+q.number;
+ const tag='held-q-'+q.number;const {user}=useAuth();const owner=user?.role==='owner';
+ const [confirmed,setConfirmed]=useState(false);
  const [type,setType]=useState(q.type==='integer'?'integer':'mcq'),[options,setOptions]=useState(q.options.filter(x=>LETTERS.includes(x)).length>=2?q.options.filter(x=>LETTERS.includes(x)):['A','B','C','D']);
  const [answer,setAnswer]=useState(q.answer||''),[typed,setTyped]=useState(q.typed_options||{}),[complete,setComplete]=useState(false),[keyOnly,setKeyOnly]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[done,setDone]=useState(false);
  const needsSolution=q.issues.some(x=>/original solution expected/i.test(x));
  const valid=complete&&answer.trim()&&(type==='integer'?/^[+-]?\d{1,20}$/.test(answer.trim()):options.length>=2&&options.includes(answer));
  function toggle(letter){if(options.includes(letter)&&answer===letter)setAnswer('');setOptions(o=>o.includes(letter)?o.filter(x=>x!==letter):LETTERS.filter(x=>o.includes(x)||x===letter));}
  async function save(){setBusy(true);setError('');try{const option_texts=type==='mcq'?Object.fromEntries(options.filter(l=>(typed[l]||'').trim()).map(l=>[l,typed[l].trim()])):{};
-  const r=await post(`/admin/books/${bookId}/mocks/${mockId}/fix`,{revision,question_id:q.id,response_type:type,option_labels:type==='mcq'?options:[],option_texts,answer:answer.trim(),complete:true,key_only:keyOnly});toast.success(r.message);setDone(true);onSaved();}catch(e){setError(e.message);}finally{setBusy(false);}}
+  const r=await post(`/admin/books/${bookId}/mocks/${mockId}/fix`,{revision,question_id:q.id,response_type:type,option_labels:type==='mcq'?options:[],option_texts,answer:answer.trim(),complete:true,key_only:keyOnly,confirmed});toast.success(r.message);setDone(true);onSaved();}catch(e){setError(e.message);}finally{setBusy(false);}}
  return <article className={'held-card'+(done?' is-done':'')} data-testid={tag}>
   <header className="held-card-head"><strong>{q.subject} · Q{q.number}</strong><span>Page {q.pages.join(', ')}</span>{done&&<span className="held-saved" data-testid={tag+'-saved'}><CheckCircle2 size={15}/>Saved · rechecking</span>}</header>
   {q.issues.length>0&&<ul className="admin-reasons">{[...new Set(q.issues.map(plain))].map((x,i)=><li key={i}>{x}</li>)}</ul>}
   <div className="held-crops">{Array.from({length:q.question_images},(_,i)=><PrivateBookImage key={i} path={`/admin/books/${bookId}/mocks/${mockId}/questions/${q.id}/asset/question/${i}`} alt={`${q.subject} question ${q.number}, part ${i+1}`} testId={`${tag}-img-${i}`}/>)}</div>
+  {q.solution_images>0&&<details className="held-solutions" data-testid={tag+'-solutions'}><summary>Solution picture students see ({q.solution_images})</summary><div className="held-crops">{Array.from({length:q.solution_images},(_,i)=><PrivateBookImage key={i} path={`/admin/books/${bookId}/mocks/${mockId}/questions/${q.id}/asset/solution/${i}`} alt={`${q.subject} solution ${q.number}, part ${i+1}`} testId={`${tag}-sol-img-${i}`}/>)}</div></details>}
   {onOpenPage&&<div className="book-actions">{q.pages.map(n=><Button key={n} variant="outline" size="sm" onClick={()=>onOpenPage(n)} data-testid={`${tag}-page-${n}`}>Full page {n}</Button>)}{q.next_page&&<Button variant="outline" size="sm" onClick={()=>onOpenPage(q.next_page)} data-testid={`${tag}-next-page`}>Next page {q.next_page}</Button>}</div>}
   <div className="held-form">
    <fieldset><legend>1. Answer type</legend><Choice value={type} onChange={v=>{setType(v);setAnswer('');}} options={[['mcq','Options (MCQ)'],['integer','Numerical answer']]} testId={tag+'-type'}/></fieldset>
@@ -42,7 +45,8 @@ export function QuestionCard({q,bookId,mockId,revision,onSaved,onOpenPage}){
    <fieldset><legend>{type==='mcq'?'4. Correct option':'2. Correct answer'}</legend>{type==='mcq'?<Choice value={answer} onChange={setAnswer} options={options.map(l=>[l,l])} testId={tag+'-answer'}/>:<Input value={answer} onChange={e=>setAnswer(e.target.value)} placeholder="e.g. 12" inputMode="numeric" className="held-number" data-testid={tag+'-answer-input'}/>}<small className="held-hint">{q.answer?`The book’s answer key says ${q.answer}.`:'No printed key was read for it yet.'}</small></fieldset>
    {needsSolution&&q.key_only_allowed&&<label className="book-check"><input type="checkbox" checked={keyOnly} onChange={e=>setKeyOnly(e.target.checked)} data-testid={tag+'-key-only'}/><span>The book has no worked solution for this question. Publish it with the answer key only.</span></label>}
    <label className="book-check"><input type="checkbox" checked={complete} onChange={e=>setComplete(e.target.checked)} data-testid={tag+'-complete'}/><span>I checked the picture. Every option is in it or typed above, and nothing else is cut off.</span></label>
-   
+   {owner&&q.issues.length>0&&<label className="book-check held-override"><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)} data-testid={tag+'-override'}/><span><strong>Override:</strong> I checked this question and its solution picture. Everything is correct. Clear its remaining warnings.</span></label>}
+   {q.confirmed&&<p className="held-hint" data-testid={tag+'-override-done'}>You already cleared this question's warnings.</p>}
    <BookError error={error}/>
    <Button disabled={busy||!valid||done} onClick={save} data-testid={tag+'-save'}>{busy?<Loader2 size={16} className="spin"/>:null}Save & recheck</Button>
   </div>

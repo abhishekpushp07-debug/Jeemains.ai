@@ -136,6 +136,7 @@ class QuestionFix(Input):
     option_texts: dict[Literal['A', 'B', 'C', 'D', 'E'], str] = Field(default_factory=dict, max_length=5)
     complete: Literal[True]
     key_only: bool = False
+    confirmed: bool = False
 
 
 class Allowance(Input):
@@ -198,6 +199,7 @@ class BookMock(BaseDocument):
     deleted: bool = False
     live_exam: bool = False
     chapter: dict = Field(default_factory=dict)
+    confirmed: list[str] = Field(default_factory=list)
 
 
 class UploadPart(BaseDocument):

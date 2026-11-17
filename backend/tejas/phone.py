@@ -145,6 +145,10 @@ async def reset_pin(data: PinChangePayload, request: Request, response: Response
     u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0, 'id': 1, 'pin_version': 1})
     if not u:
         raise HTTPException(404, 'No account with this number. Create one instead.')
+    t = now()
+    if await db.tejas_attempts.find_one({'user_id': u['id'], 'status': 'active', 'competition_end': {'$gt': t},
+                                         '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}, {'_id': 1}):
+        raise HTTPException(409, 'A live ranked paper is running on this number. Forgot PIN works again after that paper ends.')
     return await replace_pin(u, phone, data.new_pin, response, 'student_pin_reset_forgot',
                              {'pin_reset_at': now(), 'pin_reset_via': 'forgot_pin'})
 
