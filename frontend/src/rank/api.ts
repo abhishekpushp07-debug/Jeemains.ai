@@ -21,15 +21,18 @@ export type Seat = {
   tag?: Tag; gap?: string; y25?: number | null; y26?: number | null;
 };
 export type PredictOut = {
-  result: RankResult; counts: Record<Segment, number>; segment: Segment; page: number; pages: number; total: number;
+  result: RankResult; counts: Record<Segment, number>; reach?: Record<Segment, number>; segment: Segment; page: number; pages: number; total: number;
   items: Seat[]; near: Seat[]; note: string;
 };
 export type ChartLine = { pct: number; rank: number; marks: number };
 export type Meta = {
   states: string[]; branches: string[]; categories: Category[]; chart: ChartLine[]; note: string; missing: string[];
   sources: { label: string; url: string }[]; y25_label: string; candidates: number;
+  comedk: { groups: string[]; candidates: number; max_marks: number; rounds: string[]; notes: string[]; sources: { label: string; url: string }[] };
 };
-export type Cell = { open: number | null; close: number | null; in: boolean };
+/** One round of one seat: closing (and JEE opening) rank, whether the student is inside it, the student's best (mine) and
+ *  worst (hi) estimate compared, and for JAC Upgrade / Spot whether JAC never published the rank. */
+export type Cell = { open?: number | null; close: number | null; in: boolean; mine?: number | null; hi?: number | null; unpublished?: boolean };
 export type CollegeOut = {
   college: { id: number; name: string; short: string; type: Exclude<Segment, "all">; city: string; state: string };
   your_rank: { label: string; range: Range }; rounds: string[]; total: number; line: string | null; blocked: string | null; y25_label: string | null;
@@ -79,6 +82,27 @@ export type BitsatOut = {
   items: BitsatItem[]; near: BitsatItem[]; rest: BitsatItem[]; years: number[]; notes: string[]; source: string;
 };
 export const bitsat = (body: { score: number; campus: Campus; degree: Degree }) => call<BitsatOut>("/bitsat", body);
+
+export type ComedkArea = "all" | "blr" | "other";
+export type ComedkQuery = { marks?: number; rank?: number };
+export type ComedkItem = {
+  id: string; code: string; college: string; city: string; blr: boolean; course: string; cc: string; group: string;
+  close: number; round: string; rounds: (number | null)[]; y25: number | null; seats: number | null; fee: number | null; tag?: Tag; gap?: string;
+};
+export type ComedkOut = {
+  result: { rank: Range; mid: number; from_marks: boolean; candidates: number; in_reach: number; total: number; summary: string; spread?: string; check?: string };
+  counts: Record<ComedkArea, number>; reach: Record<ComedkArea, number>; area: ComedkArea; page: number; pages: number; total: number;
+  items: ComedkItem[]; near: ComedkItem[]; rounds: string[]; notes: string[];
+};
+export type ComedkCollegeReq = ComedkQuery & { branches?: string[]; code: string; course?: string; all?: boolean };
+export type ComedkCollegeOut = {
+  college: { code: string; name: string; short: string; city: string; blr: boolean }; your_rank: { label: string; range: Range };
+  rounds: string[]; total: number; line: string; y25_label: string; official: string;
+  rows: { cc: string; course: string; group: string; cells: Cell[]; close: number; round: string; first_in: string | null;
+    y25: number | null; seats: number | null; fee: number | null; tag: Tag | null }[];
+};
+export const comedk = (body: ComedkQuery & { branches: string[]; area: ComedkArea; page: number }) => call<ComedkOut>("/comedk", body);
+export const getComedkCollege = (body: ComedkCollegeReq) => call<ComedkCollegeOut>("/comedk/college", body);
 
 /** Indian grouping: 107693 -> 1,07,693. */
 export function fmt(n: number): string {

@@ -33,7 +33,8 @@ export const CAMPUS: Record<"Pilani" | "Goa" | "Hyderabad", { label: string; ink
   Hyderabad: { label: "Hyderabad", ink: colors.custom_gold, soft: colors.custom_goldSoft },
 };
 
-export const EXAM: Record<"jee" | "bitsat", { label: string; ink: string; soft: string }> = {
+export const EXAM: Record<"jee" | "bitsat" | "comedk", { label: string; ink: string; soft: string }> = {
   jee: { label: "JEE", ink: colors.custom_savedBlue, soft: colors.custom_webSavedSoft },
   bitsat: { label: "BITSAT", ink: colors.custom_royalMaroon, soft: colors.custom_webMaroonSoft },
+  comedk: { label: "COMEDK", ink: colors.custom_qMarked, soft: colors.custom_qMarkedSoft },
 };

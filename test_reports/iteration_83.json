@@ -1,0 +1,43 @@
+{
+  "summary": "Retest after iteration_82. Backend: 71/71 regression pytest (comedk, comedk_extended, predictor, phase2) + 9/9 new iteration-83 tests passed. The HIGH fix is verified. POST /college {180, inst 112, prog 726, OD} now includes prog 726. A sweep of every list item (segments all and DELHI, pages 1-2) found no tapped branch missing from its sheet. In the UI (375px), DELHI chip -> NSUT Mechanical (#8, outside the top 10), NSUT Mech EV West (#10), NSUT Biotech (#16), NSUT ECE-AI (#0) and DTU Civil (#13) each open rank-college-ladder with R1-R4, Upgrade and Spot. Upgrade/Spot say 'JAC ne ye rank publish nahi ki'. rank-college-line names the tapped branch. Ladder states are correct: -in only when close >= worst end, -maybe for part-in (e.g. Mech R1 13,069 vs 13,029-14,029), otherwise 'aapki rank bahar'. The marker is not pinned (ECE-AI, where the student is worse than every closing, puts it at 89%). Table cells: amber for part-in, green for whole range in. Picking another course in the table changes the line and the ladder title on both JEE and COMEDK. Chips show reach totals (All 655/NIT 291/IIIT 118/GFTI 228/Delhi 18; COMEDK All 755/Bengaluru 401/Other 354). The All header says 'Top 50'. The COMEDK reach label ends with '(MID ESTIMATE)' for marks and not for rank 4500. At 320px, JEE (180 and 40 marks), COMEDK (60) and BITSAT (280) show the full big number with no overflow, full caps, and the № serial below the caps. Ladder state text sits on its own line. 390px looks right (serial beside caps). Regression passed: COMEDK empty-input error, list, pager page 2, star/unstar shortlist, sheet show-all (15 courses), JEE blocked path ('Ye raasta aapke liye nahi', 0 andar/maybe/markers), BITSAT 280. Two minor issues remain: (1) the backend 'line' for JEE and COMEDK still uses the best end (lo), so after the user deselects the picked course the sheet says 'R4 se andar' for a borderline seat; (2) on the COMEDK screen the card says 752 seats in reach (mid) while the All chip says 755 (best case).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rank/comedk/college and POST /api/rank/college", "issue": "The `line` field still uses first_in = first round with lo <= close (best end). Example: COMEDK marks 60, code E197, course AD: range 36,000-41,500 and R4 close 39,386, yet line = 'Artificial Intelligence & Data Science: aapki rank R4 se andar aati hai.' The frontend ladderLine says 'R4 se borderline...'. JEE NSUT prog 726 behaves the same way (R4 13,220 < hi 14,029, backend says 'R4 se andar'). Users see the backend line when no course is picked: tap the picked course in the table again (onPick toggles to null) and the sheet falls back to data.line, which overstates the chance. rank_comedk.py:248-251, rank_predictor.py:509-516."},
+      {"endpoint": "POST /api/rank/comedk", "issue": "result.in_reach counts seats the mid estimate reaches (752 for 60 marks), but reach.all counts the best case (755), and both appear together on the COMEDK screen (card '752 OF 880 ... (MID ESTIMATE)' vs chip 'All 755'). The '(MID ESTIMATE)' suffix explains the card number, but the chip number is unlabelled, so the gap looks like a bug. rank_comedk.py:209."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "JEE rank-result at 320px", "issues": ["For 40 marks the 'PERCENTILE 64.51 – 64.58' hairline wraps so that '64.58' sits alone on the second line. This is cosmetic. Use non-breaking spaces around the en dash, or a smaller letterSpacing at <360px."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rank_iter83_fixes.py",
+    "/app/backend/tests/test_rank_comedk.py",
+    "/app/backend/tests/test_rank_comedk_extended.py",
+    "/app/backend/tests/test_rank_predictor.py",
+    "/app/backend/tests/test_rank_phase2.py",
+    "/app/test_reports/pytest/iter83_rank.xml",
+    "/app/test_reports/pytest/iter83_fixes.xml"
+  ],
+  "action_items": [
+    "MINOR: in rank_comedk.college() and rank_predictor.college(), compute first_in and `line` the same way as the frontend ladderLine (sure = close >= hi, else borderline = lo <= close). Then the line shown after deselecting a course matches the ladder states.",
+    "MINOR (optional): make the COMEDK area chips and the card in_reach use the same estimate, or label the chips (e.g. 'best case'), so 752 vs 755 does not look inconsistent.",
+    "COSMETIC (optional): keep the JEE percentile range on one line at 320px."
+  ],
+  "critical_code_review_comments": [
+    "CollegeSheet/ComedkSheet: pick is local state. If the user switches quota/gender/seat and the picked prog is not on the new path, `chosen` becomes null and the ladder silently disappears. This is acceptable but could fall back to the first row.",
+    "Rounds.tsx RoundLadder: top now includes cells' hi/mine, so the marker is never clamped. Verified."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_iter83_fixes.py (new test file only; no app code changed)"],
+  "success_rate": {"backend": "100% (80/80)", "frontend": "100% of requested flows; 2 minor consistency issues and 1 cosmetic issue"},
+  "seed_data_creation": "None. Starred one COMEDK seat and unstarred it again (shortlist back to 0). Read-only login with the approved QA learner; no academic test actions.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry: click the inputs and use keyboard.type (page.fill does not register), then click tab-rank and wait about 3.5s. In a fresh browser context the inputs are empty (no collapsed card), so type the marks directly. JEE DELHI list at 180 marks: rank-seat-8 = NSUT Mechanical. Sheet close = rank-college-close / comedk-college-close. Blocked path: tap rank-college-quota-DL in the NSUT sheet. Backend tests need EXPO_BACKEND_URL exported (frontend/.env only has EXPO_PUBLIC_BACKEND_URL) and -o addopts=.",
+  "rca_of_issue": "Backend line mismatch: rank_comedk.college sets first_in from cells with 'in' = lo <= close (best end of the range), and rank_predictor.college does the same. Iteration 82 changed the frontend ladder and ladderLine to judge 'sure' by close >= hi, but the backend line was not changed. The frontend overrides the line only while a course is picked."
+}

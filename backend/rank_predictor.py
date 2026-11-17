@@ -12,6 +12,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, field_validator
 
 import rank_bitsat
+import rank_comedk
 
 DIR = Path(__file__).parent / "rank_data"
 DATA = json.load(gzip.open(DIR / "jee_main_2026.json.gz", "rt", encoding="utf-8"))
@@ -436,7 +437,8 @@ def predict(body: PredictIn):
         near_items.append(it)
         if len(near_items) == 5:
             break
-    return {"result": result_block(st), "counts": {k: len(v) for k, v in lists.items()}, "segment": seg,
+    reach = {"all": len(best), **{k: sum(1 for p in best if INST[PROGS[p]["inst"]]["type"] == k) for k in ("NIT", "IIIT", "GFTI", "DELHI")}}
+    return {"result": result_block(st), "counts": {k: len(v) for k, v in lists.items()}, "reach": reach, "segment": seg,
             "page": body.page, "pages": max(1, math.ceil(len(chosen) / body.page_size)), "total": len(chosen),
             "items": items, "near": near_items if body.page_size == 25 else [], "note": NOTE}
 
@@ -487,6 +489,8 @@ def college(body: CollegeIn):
             rows[s.prog] = s
     progs = sorted(rows, key=demand_key)
     shown = progs if body.all else progs[:10]
+    if body.prog in rows and body.prog not in shown:  # the tapped branch is always in the sheet, even outside the top 10
+        shown = shown + [body.prog]
     out_rows = []
     for prog in shown:
         s = rows[prog]
@@ -494,8 +498,11 @@ def college(body: CollegeIn):
         for i in range(len(rounds)):
             close = s.closes[i] if i < len(s.closes) else None
             opening = s.opens[i] if i < len(s.opens) else None
-            mine = (crl[0] if (i >= 5 and not s.jac) else lo)
-            cells.append({"open": opening, "close": close, "in": bool(not block and close and mine <= close)})
+            csab = i >= 5 and not s.jac
+            mine, worst = (crl[0], crl[2]) if csab else (lo, hi)
+            cells.append({"open": opening, "close": close, "in": bool(not block and close and mine <= close),
+                          "mine": None if block else mine, "hi": None if block else worst,
+                          "unpublished": bool(s.jac and i >= 4)})
         first = next((rounds[i] for i, c in enumerate(cells) if c["in"]), None)
         out_rows.append({"prog": prog, "branch": PROGS[prog]["name"], "degree": PROGS[prog]["degree"], "cells": cells, "first_in": first, "y25": s.y25})
     target = next((r for r in out_rows if r["prog"] == body.prog), None) or next((r for r in out_rows if r["first_in"]), None)
@@ -503,8 +510,7 @@ def college(body: CollegeIn):
     if block:
         line = f"Ye raasta aapke liye nahi: {block}."
     elif target:
-        line = (f"{target['branch']}: aapki rank {target['first_in']} se andar aati hai." if target["first_in"]
-                else f"{target['branch']}: is raaste se aapki rank kisi round mein andar nahi aayi.")
+        line = rank_comedk.ladder_line(target["branch"], rounds, target["cells"])
     elif out_rows:
         line = "Is raaste se aapki rank in branches ke kisi round mein andar nahi aayi."
     return {
@@ -535,6 +541,7 @@ def meta():
                     {"label": "JAC Delhi 2026 Round 1-4", "url": OFFICIAL["jac"]},
                     {"label": "JoSAA 2025 final round (archive)", "url": "https://josaa.admissions.nic.in/applicant/seatmatrix/openingclosingrankarchieve.aspx"},
                     {"label": "BITS admissions: BITSAT cut-offs", "url": rank_bitsat.SOURCE}],
+        "comedk": rank_comedk.meta(),
     }
 
 
@@ -544,4 +551,6 @@ def make_router():
     router.post("/predict")(predict)
     router.post("/college")(college)
     router.post("/bitsat")(rank_bitsat.predict)
+    router.post("/comedk")(rank_comedk.predict)
+    router.post("/comedk/college")(rank_comedk.college)
     return router

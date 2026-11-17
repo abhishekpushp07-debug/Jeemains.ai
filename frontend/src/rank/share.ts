@@ -1,6 +1,6 @@
 // WhatsApp text for the Rank Card, the BITSAT card and the shortlist (plain text, so it reaches any phone instantly).
 import { sendWhatsApp } from "@/src/rapid/social";
-import { BitsatOut, fmtRange, RankResult, Seat } from "./api";
+import { BitsatOut, ComedkOut, fmt, fmtRange, RankResult, Seat } from "./api";
 import { TAG } from "./tones";
 import type { Saved } from "./shortlist";
 
@@ -28,6 +28,18 @@ export function shareBitsat(d: BitsatOut) {
   if (r.best) lines.push(`Best: ${r.best.college} · ${r.best.program} (cutoff ${r.best.cutoff})`);
   if (r.target) lines.push(`Agla target: ${r.target.college} · ${r.target.program}, +${r.target.gap} marks aur`);
   lines.push("", SIGN);
+  return sendWhatsApp(lines.join("\n"));
+}
+
+export function shareComedk(d: ComedkOut) {
+  const r = d.result;
+  const lines = ["🎯 Mera JEELIVE.AI Rank Card · COMEDK 2026", r.summary, "",
+    `${r.from_marks ? "Expected rank" : "Rank"} (GM): ${fmtRange(r.rank)}`, `${r.in_reach} / ${r.total} GM college-course pahunch mein`];
+  if (d.items.length) {
+    lines.push("", "Top college-course (2026 closing rank):");
+    d.items.slice(0, 5).forEach((s, i) => lines.push(`${i + 1}. ${s.college} · ${s.course} · ${fmt(s.close)}${s.tag ? ` (${TAG[s.tag].label})` : ""}`));
+  }
+  lines.push("", "2026 ke data par estimate, guarantee nahi.", SIGN);
   return sendWhatsApp(lines.join("\n"));
 }
 

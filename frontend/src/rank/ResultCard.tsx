@@ -4,7 +4,7 @@ import { View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { space } from "@/src/theme";
 import { fmt, fmtRange, RankResult } from "./api";
-import { BlueRule, CardActions, Eyebrow, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
+import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 
 export function ResultCard({ result, candidates, onShare, saved, onShortlist }: {
   result: RankResult; candidates?: number; onShare: () => void; saved: number; onShortlist: () => void;
@@ -14,7 +14,7 @@ export function ResultCard({ result, candidates, onShare, saved, onShortlist }: 
   const mid = Math.round((result.crl[0] + result.crl[1]) / 2);
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
     <MetalCard testID="rank-result" badge="JEE MAIN 2026" foot={<>
-      <View style={{ flex: 1, gap: 3 }}>
+      <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>YOUR SCORE</Eyebrow>
         <SilverCaps testID="rank-result-summary">{result.summary}</SilverCaps>
       </View>
@@ -24,7 +24,7 @@ export function ResultCard({ result, candidates, onShare, saved, onShortlist }: 
         <Eyebrow>EXPECTED RANK · CRL</Eyebrow>
         <SerifBig testID="rank-result-crl">{fmtRange(result.crl)}</SerifBig>
       </View>
-      <BlueRule testID="rank-result-percentile" label={`PERCENTILE  ${pct}`} />
+      <Hairline testID="rank-result-percentile" label={`PERCENTILE  ${pct}`} />
       {result.cat_rank || result.pwd_rank ? <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.md }}>
         {result.cat_rank ? <Small testID="rank-result-cat" label={result.cat_rank.label} value={fmtRange(result.cat_rank.range)} /> : null}
         {result.pwd_rank ? <Small testID="rank-result-pwd" label={result.pwd_rank.label} value={fmtRange(result.pwd_rank.range)} /> : null}

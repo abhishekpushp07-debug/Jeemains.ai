@@ -166,7 +166,7 @@ def test_college_basic(s, first_item):
     assert 0 < len(d["rows"]) <= 10
     assert d["rounds"] in (["R1", "R2", "R3", "R4", "R5", "CSAB 1", "CSAB 2"], ["R1", "R2", "R3", "R4", "Upgrade", "Spot"])
     assert all(len(row["cells"]) == len(d["rounds"]) for row in d["rows"])
-    assert d["line"] and "aapki rank" in d["line"]
+    assert d["line"] and ("aapki rank" in d["line"] or "aapki range" in d["line"])
     assert d["options"]["quota"] and d["path"]["quota"] == it["quota"]
     assert d["official"].startswith("https://")
     row = next((x for x in d["rows"] if x["prog"] == it["prog"]), None)

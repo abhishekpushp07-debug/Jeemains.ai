@@ -10,13 +10,13 @@ import { jeeSaved, toggleSaved, useShortlist } from "./shortlist";
 
 const SEGMENTS: Segment[] = ["all", "NIT", "IIIT", "GFTI", "DELHI"];
 
-/** JoSAA final round, 2025 vs 2026, for this same seat path: a higher closing rank this year means it got easier.
- *  ▲ always means tougher and ▼ easier, on JEE and BITSAT alike. */
-function Trend({ y25, y26, testID }: { y25?: number | null; y26?: number | null; testID: string }) {
+/** Final round, 2025 vs 2026, for this same seat path: a higher closing rank this year means it got easier.
+ *  ▲ always means tougher and ▼ easier, on JEE, BITSAT and COMEDK alike. */
+export function Trend({ y25, y26, testID, label = "JoSAA final" }: { y25?: number | null; y26?: number | null; testID: string; label?: string }) {
   if (!y25 || !y26) return null;
   const d = y26 - y25, same = Math.abs(d) < y25 * 0.03;
   return <T testID={testID} w="semibold" size={12} color={same ? colors.muted : d > 0 ? colors.success : colors.error}>
-    JoSAA final · 2025: {fmt(y25)} → 2026: {fmt(y26)}  {same ? "lagbhag same" : d > 0 ? "▼ aasaan hua" : "▲ tough hua"}
+    {label} · 2025: {fmt(y25)} → 2026: {fmt(y26)}  {same ? "lagbhag same" : d > 0 ? "▼ aasaan hua" : "▲ tough hua"}
   </T>;
 }
 
@@ -48,11 +48,11 @@ export function SeatList({ data, segment, onSegment, page, onPage, branchText, o
   branchText: string; onBranch: () => void; onOpen: (s: Seat) => void; busy: boolean;
 }) {
   return <Strip title="Top college-branch" testID="rank-list"
-    right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>{data.total} seats</T>}>
+    right={busy ? <ActivityIndicator size="small" color={colors.muted} /> : <T size={12} color={colors.muted}>Top {data.total}</T>}>
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.segs}>
       {SEGMENTS.map(s => {
         const k = s === "all" ? null : KIND[s];
-        return <Toggle key={s} testID={`rank-seg-${s}`} label={`${k ? k.label : "All"} ${data.counts[s] ?? 0}`} on={segment === s}
+        return <Toggle key={s} testID={`rank-seg-${s}`} label={`${k ? k.label : "All"} ${data.reach?.[s] ?? data.counts[s] ?? 0}`} on={segment === s}
           ink={k ? k.ink : colors.onSurface} soft={k ? k.soft : undefined} onPress={() => onSegment(s)} />;
       })}
     </ScrollView>

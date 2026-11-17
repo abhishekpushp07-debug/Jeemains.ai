@@ -9,7 +9,7 @@ import { storage } from "@/src/utils/storage";
 import { bitsat, BitsatItem, BitsatOut, Campus, Degree } from "./api";
 import { CAMPUS, TAG } from "./tones";
 import { StarButton, Strip, Summary, Tag, Toggle } from "./controls";
-import { BlueRule, CardActions, Eyebrow, MetalCard, Serial, SerifBig, SilverCaps } from "./MetalCard";
+import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps } from "./MetalCard";
 import { shareBitsat } from "./share";
 import { bitsatSaved, toggleSaved, useShortlist } from "./shortlist";
 
@@ -51,7 +51,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
       <View style={{ gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Score (out of 390)</T>
         <TextInput testID="bitsat-score-input" value={text} onChangeText={v => setText(v.replace(/[^0-9-]/g, "").slice(0, 4))} keyboardType="numbers-and-punctuation"
-          placeholder="e.g. 280" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBlue} returnKeyType="done" onSubmitEditing={show} maxLength={4} accessibilityLabel="BITSAT score out of 390" />
+          placeholder="e.g. 280" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} returnKeyType="done" onSubmitEditing={show} maxLength={4} accessibilityLabel="BITSAT score out of 390" />
       </View>
       <T size={12} color={colors.muted}>BITSAT 2026: 130 sawaal, +3 / −1. Cutoff BITS ki official 2022–2026 list se.</T>
       {problem ? <T testID="bitsat-input-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
@@ -80,7 +80,7 @@ function BitsatCard({ data, saved, onShortlist }: { data: BitsatOut; saved: numb
   const r = data.result;
   return <Animated.View entering={reduced ? undefined : FadeIn.duration(180)} style={{ gap: space.md }}>
     <MetalCard testID="bitsat-card" badge="BITSAT 2026" foot={<>
-      <View style={{ flex: 1, gap: 3 }}>
+      <View style={{ flexGrow: 1, flexShrink: 1, gap: 3 }}>
         <Eyebrow>BEST PROGRAM</Eyebrow>
         <SilverCaps testID="bitsat-card-best">{r.best ? `${r.best.college} · ${r.best.program}` : "Abhi koi program clear nahi"}</SilverCaps>
       </View>
@@ -90,7 +90,7 @@ function BitsatCard({ data, saved, onShortlist }: { data: BitsatOut; saved: numb
         <Eyebrow>YOUR SCORE</Eyebrow>
         <SerifBig testID="bitsat-card-score">{`${r.score} / ${r.max}`}</SerifBig>
       </View>
-      <BlueRule testID="bitsat-card-cleared" label={`CLEARS ${r.cleared_all} OF ${r.total_all} BITS PROGRAMS`} />
+      <Hairline testID="bitsat-card-cleared" label={`CLEARS ${r.cleared_all} OF ${r.total_all} BITS PROGRAMS`} />
       <T testID="bitsat-card-target" size={12.5} color={colors.custom_rankSilverMuted}>
         {r.target ? `Agla target: ${r.target.college} · ${r.target.program}, +${r.target.gap} marks aur (cutoff ${r.target.cutoff}).` : "Har BITS program ka 2026 cutoff clear!"}
       </T>

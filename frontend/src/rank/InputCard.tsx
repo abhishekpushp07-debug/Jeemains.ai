@@ -54,12 +54,12 @@ export function InputCard({ form, onChange, states, branches, open, summary, onS
       <View style={{ flex: 1, gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Marks (out of 300)</T>
         <TextInput testID="rank-marks-input" value={form.marks} onChangeText={v => onChange({ marks: clean(v, false) })} keyboardType="numbers-and-punctuation"
-          placeholder="e.g. 180" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBlue} returnKeyType="done" maxLength={4} accessibilityLabel="Marks out of 300" />
+          placeholder="e.g. 180" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} returnKeyType="done" maxLength={4} accessibilityLabel="Marks out of 300" />
       </View>
       <View style={{ flex: 1, gap: 4 }}>
         <T w="semibold" size={12} color={colors.muted}>Percentile</T>
         <TextInput testID="rank-percentile-input" value={form.pct} onChangeText={v => onChange({ pct: clean(v, true) })} keyboardType="decimal-pad"
-          placeholder="e.g. 97.4" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBlue} returnKeyType="done" maxLength={10} accessibilityLabel="Percentile" />
+          placeholder="e.g. 97.4" placeholderTextColor={colors.custom_dim} style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} returnKeyType="done" maxLength={10} accessibilityLabel="Percentile" />
       </View>
     </View>
     <View style={styles.row}>

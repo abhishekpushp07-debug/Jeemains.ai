@@ -10,7 +10,7 @@ async def run_test(page, output_dir, page_url):
         await page.wait_for_timeout(800)
         print("Step 2: Page loaded")
 
-        base_url = "https://jeelive-unified--01f8rch2.preview.emergentagent.com/api/marketing/launch"
+        base_url = "https://brushed-metal-rank--9b9d5o8b.preview.emergentagent.com/api/marketing/launch"
         downloads_dir = Path("/app/test_reports/artifacts_iter54/ui_downloads")
         downloads_dir.mkdir(parents=True, exist_ok=True)
 

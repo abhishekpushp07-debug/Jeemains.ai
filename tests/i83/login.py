@@ -1,0 +1,7 @@
+await page.set_viewport_size({"width": 375, "height": 667})
+await page.wait_for_selector('[data-testid="entry-phone-input"]', timeout=20000)
+await page.fill('[data-testid="entry-phone-input"]', "7004186276")
+await page.fill('[data-testid="entry-pin-input"]', "5524")
+await page.click('[data-testid="entry-continue-button"]', force=True)
+await page.wait_for_timeout(5000)
+print("after login", page.url)

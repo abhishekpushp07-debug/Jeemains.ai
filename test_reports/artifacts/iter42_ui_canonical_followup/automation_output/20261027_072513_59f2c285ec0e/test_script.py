@@ -2,7 +2,7 @@ async def run_test(page, output_dir, page_url):
     try:
         import re
         await page.set_viewport_size({"width": 390, "height": 844})
-        await page.goto('https://jeelive-unified--01f8rch2.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
+        await page.goto('https://brushed-metal-rank--9b9d5o8b.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
         await page.wait_for_timeout(1200)
 
         if await page.locator('[data-testid="entry-screen"]').is_visible():

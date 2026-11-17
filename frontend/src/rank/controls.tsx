@@ -7,7 +7,7 @@ import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
 
-/** Section title in the Rank Card's voice: a blue hairline, then widely tracked silver caps. */
+/** Section title in the Rank Card's voice: a blood-red hairline, then widely tracked silver caps. */
 export function RuleTitle({ children }: { children: string }) {
   return <View style={styles.ruleTitle}>
     <View style={styles.rule} />
@@ -27,7 +27,7 @@ export function Strip({ title, right, children, testID }: { title?: string; righ
   </View>;
 }
 
-/** Two-way switch: dark track, the chosen side outlined in electric blue. */
+/** Exam / mode switch: dark track, the chosen side raised with a sparkle-silver outline. */
 export function Switch<K extends string>({ items, value, onChange, prefix }: {
   items: { key: K; label: string }[]; value: K; onChange: (k: K) => void; prefix: string;
 }) {
@@ -89,7 +89,7 @@ export function Picker({ visible, title, options, value, multi, allLabel, onChan
       return <Press key={o ?? "all"} testID={`${testID}-${(o ?? "all").replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`} onPress={() => pick(o)}
         accessibilityState={{ selected: on }} accessibilityLabel={o ?? allLabel} scaleTo={0.99} style={styles.row}>
         <T w={on ? "bold" : "medium"} size={15} color={on ? colors.onSurface : colors.custom_softText} style={{ flex: 1 }}>{o ?? allLabel}</T>
-        {on ? <Glyph name="check" size={18} color={colors.custom_rankBlue} stroke={2} /> : null}
+        {on ? <Glyph name="check" size={18} color={colors.custom_rankBloodInk} stroke={2} /> : null}
       </Press>;
     })}
     {multi ? <Press testID={`${testID}-done`} onPress={onClose} style={styles.done} accessibilityLabel="Done">
@@ -102,11 +102,11 @@ const styles = StyleSheet.create({
   strip: { borderRadius: 22, padding: space.lg, gap: space.md, overflow: "hidden", backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine },
   stripHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm, minHeight: 20 },
   ruleTitle: { flexDirection: "row", alignItems: "center", gap: space.sm },
-  rule: { width: 18, height: 1.5, backgroundColor: colors.custom_rankBlue },
+  rule: { width: 18, height: 1.5, backgroundColor: colors.custom_rankBlood },
   caps: { letterSpacing: 3 },
   switch: { flexDirection: "row", padding: 4, gap: 4, borderRadius: radius.pill, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine },
   switchItem: { flex: 1, minWidth: 0, minHeight: 44, borderRadius: radius.pill, alignItems: "center", justifyContent: "center", paddingHorizontal: 6, borderWidth: 1, borderColor: colors.custom_clear },
-  switchOn: { backgroundColor: colors.custom_webSavedSoft, borderColor: colors.custom_rankBlue },
+  switchOn: { backgroundColor: colors.custom_cardRaised, borderColor: colors.custom_rankSilverLine },
   tag: { borderRadius: radius.pill, borderWidth: 1, paddingHorizontal: 8, paddingVertical: 2, alignSelf: "flex-start" },
   toggle: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, flexDirection: "row", alignItems: "center", gap: 4 },
   star: { width: 44, height: 44, alignItems: "center", justifyContent: "center" },

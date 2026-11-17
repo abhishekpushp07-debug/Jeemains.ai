@@ -165,12 +165,15 @@ const dark = {
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
-  // Rank Card: brushed graphite with a navy glow, silver serif and an electric-blue hairline (same in both palettes).
-  custom_rankFrom: "#1C1D22", custom_rankMid: "#0E0F12", custom_rankTo: "#0B1730", custom_rankGlow: "rgba(37,99,235,0.30)",
-  custom_rankSheen: "rgba(255,255,255,0.11)", custom_rankBrush: "rgba(255,255,255,0.022)", custom_rankChrome: "rgba(255,255,255,0.22)",
-  custom_rankSilver: "#E2E8F0", custom_rankSilverMuted: "#94A3B8", custom_rankBlue: "#5B8CFF", custom_rankLine: "rgba(148,163,184,0.22)",
+  // Rank Card: brushed graphite with a soft blood-red glow, sparkle-silver serif and blood-red hairlines (same in both palettes).
+  custom_rankFrom: "#1C1D22", custom_rankMid: "#0E0F12", custom_rankTo: "#150A0E", custom_rankGlow: "rgba(153,27,27,0.30)",
+  custom_rankSheen: "rgba(255,255,255,0.11)", custom_rankBrush: "rgba(255,255,255,0.022)", custom_rankChrome: "rgba(255,255,255,0.26)",
+  custom_rankSilver: "#EEF2F7", custom_rankSilverMuted: "#94A3B8", custom_rankLine: "rgba(148,163,184,0.20)",
+  custom_rankBlood: "#B3172F", custom_rankBloodInk: "#F4A3AE", custom_rankBloodSoft: "rgba(179,23,47,0.22)",
+  custom_rankSparkle: "#FFFFFF", custom_rankShimmer: "rgba(248,250,252,0.92)", custom_rankSilverLine: "rgba(226,232,240,0.38)",
+  custom_rankTrack: "rgba(255,255,255,0.07)",
   custom_whatsapp: "#1FA855",
-  custom_rankBgFrom: "#111116", custom_rankBgMid: "#0A0A0E", custom_rankBgTo: "#060A14", custom_rankBgGlow: "rgba(37,99,235,0.16)",
+  custom_rankBgFrom: "#111116", custom_rankBgMid: "#0A0A0E", custom_rankBgTo: "#0A0709", custom_rankBgGlow: "rgba(153,27,27,0.13)",
   custom_rankPanelSheen: "rgba(255,255,255,0.035)",
 };
 
@@ -231,7 +234,7 @@ export const rankColors: ThemeColors = {
   surface: "#0A0A0E", onSurface: "#E6E8EE", onSurfaceInverse: "#0A0A0E", custom_softText: "#C3C6D0",
   muted: "#8F92A3", custom_dim: "#62657A", custom_eyebrow: "#9095AB",
   custom_card: "#121218", custom_cardRaised: "#1A1A23", custom_cardLine: "#23232E", custom_cardLineStrong: "#30303E", custom_barLine: "#1D1D27",
-  brandText: "#7DA2FF", brandPrimary: "#2563EB", onBrandPrimary: "#FFFFFF",
+  brandText: "#F4A3AE", brandPrimary: "#B3172F", onBrandPrimary: "#FFFFFF",
   success: "#6EE7B7", custom_successSoft: "#0E3A2D", error: "#FCA5A5", custom_errorSoft: "#3A1418",
   warning: "#FCD34D", custom_warningSoft: "#33270C", info: "#93C5FD", custom_infoSoft: "#151B2E",
   custom_flame: "#FCD34D", custom_flameSoft: "#33270C", custom_savedBlue: "#93C5FD", custom_webSavedSoft: "#14213F",

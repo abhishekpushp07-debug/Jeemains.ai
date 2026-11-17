@@ -1,0 +1,48 @@
+{
+  "summary": "I tested the RANK tab: the COMEDK predictor and college sheet (new), the round-by-round view in the JEE college sheet, the redesigned Rank Card, and BITSAT and shortlist regression. Backend: 71/71 tests passed (the main agent's 52 plus 19 new ones in test_rank_comedk_extended.py). Frontend at 390px: COMEDK marks and rank input, errors, card, list chips, pager, star, shortlist, college sheet (all 4 rounds, empty round, 2025 final, silver line, 'andar', course switch, all courses, close), the JEE sheet (R1-R5 + CSAB 1/2 + 2025 R6, branch switch, gender and quota toggles, blocked path) and BITSAT all work. One HIGH bug: for JAC Delhi colleges (DTU and NSUT), tapping a branch outside the top 10 of that college opens a sheet with no round-wise view and a wrong message. This hit 20 of 68 list rows at 180 marks. At 320px the big rank number on the JEE and COMEDK cards is cut off with an ellipsis. No deprecated Expo packages were found. No data was created except one shortlist star saved on the device.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/rank/college", "issue": "rank_predictor.py:490 uses `shown = progs if body.all else progs[:10]` and never adds the requested body.prog when it is outside the top 10. Tapped branches at DTU and NSUT Delhi (18 branches each) are missing from rows, so target falls back to another branch or None. The line then says 'Is raaste se aapki rank in branches ke kisi round mein andar nahi aayi.' even though the list showed the seat in reach (e.g. NSUT Mechanical, closing 18,297, OD). Repro: POST {marks:180, inst:112, prog:726, quota:'OD', gender:'N', seat:'open'} returns no row with prog 726. 20 of 68 items on JEE 180-marks pages 1-2 (all + DELHI) are affected. COMEDK college() already has this fix (rank_comedk.py:245-246).", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/rank/college (JAC)", "issue": "For DTU and NSUT, the 'Upgrade' and 'Spot' cells are always close=null. The ladder therefore says 'is round mein allotment nahi' for these rounds, which is wrong: JAC did not publish those ranks, there were allotments. Return a flag (e.g. unpublished:true) or leave these rounds out for JAC. JAC colleges also have no previous-year row (y25_label null)."},
+      {"endpoint": "POST /api/rank/comedk(/college) marks path", "issue": "With marks as input, in_reach, the 'in' flag, the silver 'mine' line and the college line ('aapki rank R4 se andar aati hai') all use the most optimistic end of the range (lo). Example: at 100 marks, rank 2,350 is used while the middle estimate is 4,769, so 871/880 seats count as in reach. The tags show it as Borderline, but the 'andar' text overstates the chance. Consider using mid for 'in'/'mine'. JEE does the same."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "JEE CollegeSheet (JAC colleges)", "issue": "Tapping rank-seat-N for an NSUT/DTU branch outside the college's top-10 shows no rank-college-branch-detail / rank-college-ladder. rank-college-line shows a wrong 'not in reach' message. Cause is in the backend (see backend critical).", "testID": "rank-college-ladder", "priority": "HIGH"},
+      {"component": "MetalCard SerifBig at 320px", "issue": "At 320px the big number is cut with an ellipsis: '13,029 – 1…' (JEE) and '36,000 – 4…' (COMEDK). Measured scrollWidth 242 > clientWidth 212. adjustsFontSizeToFit does not work on web, and very small Android screens may clip too. Use a smaller fontSize when the screen is narrow or the text is long, or let it wrap onto 2 lines.", "testID": "rank-result-rank / comedk-card-rank", "priority": "MEDIUM"},
+      {"component": "MetalCard foot SilverCaps at 320px", "issue": "'YOUR SCORE' summary is cut to '180 MARKS · …' / '60 / 180 MARKS · …' because the Serial takes most of the row width.", "testID": "comedk-card-summary", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "RoundLadder (Rounds.tsx:19-20, 43)", "issues": ["top = max(closes) does not include the student's rank, so when the rank is worse than every closing rank, the silver marker is stuck at 100%. Example: rank 4,500 vs CSE AI-ML closings 359-975 looks 'just outside'. Include mine in top, or show an overflow arrow.", "After switching course in the sheet, comedk-college-line / rank-college-line still talks about the course that was first tapped (e.g. 'Aerospace Engineering: ...' while the ladder shows CSE AI-ML).", "Tapping the selected branch row again sets pick to null, and the whole ladder disappears with no hint."]},
+      {"screen": "RoundTable branch column", "issues": ["Long course names are cut at 3 lines in the 132px column (e.g. 'Computer Science and Engineering (Big Data Analytics) · …', 'Computer Science & Engineering (Artificial …'). The campus suffix and specialisation get hidden, so similar rows are hard to tell apart."]},
+      {"screen": "COMEDK list chips", "issues": ["The area chip counts are capped at the 50-item mix ('All 50', 'Bengaluru 50', 'Other cities 50'), while the card says '871 OF 880 GM SEATS IN REACH'. The capped counts look like real totals."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_comedk_extended.py", "/app/backend/tests/test_rank_comedk.py", "/app/backend/tests/test_rank_predictor.py", "/app/backend/tests/test_rank_phase2.py", "/app/test_reports/pytest/rank_comedk_extended.xml", "/app/test_reports/pytest/rank_comedk_iter.xml"],
+  "action_items": [
+    "HIGH: rank_predictor.py college(): after `shown = progs[:10]`, add body.prog when it is in rows but not in shown, as rank_comedk.py:245 does. Then re-check that tapping NSUT Mechanical (DELHI chip, 180 marks) shows rank-college-ladder with R1-R4/Upgrade/Spot and the correct 'R4 se andar' line.",
+    "JAC Upgrade/Spot: do not show 'is round mein allotment nahi' for rounds JAC never published. Label them 'JAC ne publish nahi ki' or leave them out.",
+    "MetalCard SerifBig/SilverCaps: make the number fit at 320px. adjustsFontSizeToFit does not work on web. Use a smaller fontSize based on width or text length, or allow 2 lines.",
+    "RoundLadder: include cells' mine in `top` so the silver marker is never clamped. Optionally update the line text when the user switches course.",
+    "Optional: use mid instead of lo for 'in'/'mine'/line when marks are the input, so 'aapki rank andar' does not overstate the chance."
+  ],
+  "critical_code_review_comments": [
+    "rank_predictor.py:490 — the top-10 cut drops the requested prog (root cause of the HIGH bug).",
+    "Rounds.tsx:19 — top ignores mine, so the marker clamps at Math.min(1, ...).",
+    "MetalCard.tsx:63 — adjustsFontSizeToFit + numberOfLines=1 causes an ellipsis on web.",
+    "rank_comedk.py is clean: validation through Pydantic plus 422 for {}, 404 for unknown code, GM-only filter at load, lru_cache on the pure ranking. No _id leaks (in-memory JSON data).",
+    "No deprecated Expo packages (expo-av / barcode-scanner / background-fetch) in package.json."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_comedk_extended.py (new)"],
+  "success_rate": {"backend": "100% of tests (71/71); 1 logic bug found by a direct API sweep (JEE college top-10 cut)", "frontend": "~90% (all requested flows pass except the JAC Delhi sheet for branches outside the top 10, and the 320px number clip)"},
+  "seed_data_creation": "None. The QA learner (7004186276) only signed in (read-only). One COMEDK shortlist star (MSRIT CSE Cyber Security) is saved in the test browser's local storage only.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "On the Rank tab, wait about 2.5s after load before clicking rank-exam-* tabs; an immediate force click does not switch the exam (hydration). Inputs are kept in local storage, so click Edit inside *-input-collapsed first. JEE college API needs inst/prog/quota/gender/seat from the list item. /tmp/jee_missing.py-style sweep: POST /predict pages 1-2 for segment all and DELHI, then POST /college for each item and check that item.prog is in rows.",
+  "rca_of_issue": "JEE college sheet missing branch: college() keeps only the first 10 progs by demand_key when all=false. For JAC colleges with 18 branches, the less-demanded branches (Mechanical, Civil, Biotech, EV, etc.) are cut. The frontend finds no row with pick === prog, so chosen is null and no ladder is drawn, and the backend line falls back to the first reachable row or the generic 'not in reach' text. Fix: append rows[body.prog] when it is in rows and missing from shown."
+}

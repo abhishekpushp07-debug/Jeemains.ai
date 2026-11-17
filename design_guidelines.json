@@ -1,313 +1,155 @@
 {
-  "scope_notice": "UNAPPROVED LAUNCH-FILM DRAFT ONLY, NOT NATIVE APP UI GUIDELINES. Unsupported coin/rank/percentile/NTA/fourth-exam claims and interactive-player scope below were REJECTED. The implemented, fact-checked creative is marketing/launch45/BRIEF.md. Never use this draft to recolour or redesign the existing app.",
-  "project_name": "JEELIVE 45-Second Cinematic Launch Video — Dual Aspect (9:16 Vertical Reel & 16:9 Landscape YouTube)",
-  "app_type": "marketing_launch_video",
-  "archetype": "ARCHETYPE 7: ELECTRIC & NEON (Rapid Fire Teal/Blue) + ARCHETYPE 5: LUXURY & PRECISION (All India Dark Ruby/Onyx)",
-  "creative_brief": {
-    "duration_seconds": 45,
-    "core_focus": "20-Second No-Pen Rapid Fire Challenge (Solo & 1v1 Duel) and All India Test Series",
-    "tone": "Cinematic, pulse-pounding, high-energy, non-mechanical, emotionally directed",
-    "language": "Hinglish On-Screen Typography + Synchronized Beats & SFX",
-    "formats": [
-      "9:16 Vertical Reel / Shorts (1080x1920)",
-      "16:9 Landscape YouTube (1920x1080)"
+  "app_name": "JEELIVE.AI Rank Predictor",
+  "personality": "6 Glass / Luxe DARK crossed with 7 Dark-First Utility DARK",
+  "personality_one_liner": "A highly elegant, luxurious, dark 'brushed metal' command center with sparkle silver and light blood red accents.",
+  "color": {
+    "surface": "#060A14",
+    "onSurface": "#E6E8EE",
+    "surfaceSecondary": "#121218",
+    "onSurfaceSecondary": "#C3C6D0",
+    "surfaceTertiary": "#1A1A23",
+    "onSurfaceTertiary": "#E6E8EE",
+    "surfaceInverse": "#E2E8F0",
+    "onSurfaceInverse": "#060A14",
+    "brand": "#991B1B",
+    "brandPrimary": "#B91C1C",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#E2E8F0",
+    "onBrandSecondary": "#0A0A0E",
+    "brandTertiary": "rgba(153, 27, 27, 0.15)",
+    "onBrandTertiary": "#B91C1C",
+    "success": "#0E3A2D",
+    "onSuccess": "#6EE7B7",
+    "warning": "#33270C",
+    "onWarning": "#FCD34D",
+    "error": "#2D0E0E",
+    "onError": "#FCA5A5",
+    "info": "#14213F",
+    "onInfo": "#93C5FD",
+    "border": "rgba(255,255,255,0.06)",
+    "borderStrong": "#30303E",
+    "divider": "#23232E",
+    "muted": "#8F92A3",
+    "dim": "#62657A",
+    "metalGradientStart": "#1C1D22",
+    "metalGradientMid": "#0E0F12",
+    "metalGradientEnd": "#0B1730"
+  },
+  "typography": {
+    "displayFontFamily": "Georgia, serif",
+    "textFontFamily": "System",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24,
+      "3xl": 48
+    }
+  },
+  "spacing": {
+    "rule": "Strict 8pt grid. Padding and margin must use these exact increments.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 22,
+    "pill": 999
+  },
+  "shadow_tier": "1",
+  "navigation": "stack_only",
+  "icon_set": "Feather",
+  "glassmorphism": {
+    "enabled": "true",
+    "do's": [
+      "Use subtle glassmorphism on the bottom sheet handle/header",
+      "Use translucent overlays for the 'blood red' glow"
     ],
-    "research_insights": [
-      "First 3s Hook: Immediate high-octane question hook, skip long logo intro",
-      "Mute-Readable: One clear Hinglish idea per shot in bold high-contrast text",
-      "Real Product Payoff: Showcase genuine gameplay, 20s circular timer, live 1v1 dual meters, and All India ruby test portal",
-      "Beatsync & Sound Design: Rhythmic visual pulses aligned to audio beats and sound triggers",
-      "Safezones: Keep essential text and UI within safe boundaries away from native social overlays"
+    "dont's": [
+      "Do not use glass for list rows or standard cards, rely on dark metal gradients and hairlines"
     ]
   },
-  "brand_assets_and_palettes": {
-    "logo_rule": "MUST preserve original JEELIVE logo artwork (/assets/images/jeelive-logo.webp, jeelive-original.jpg, jeelive-icon.png). DO NOT recolor or modify the brand mark.",
-    "exam_artworks": [
-      {
-        "exam": "JEE Mains",
-        "asset_path": "assets/images/tile-jee.jpg"
-      },
-      {
-        "exam": "BITSAT",
-        "asset_path": "assets/images/tile-bitsat.jpg"
-      },
-      {
-        "exam": "COMEDK",
-        "asset_path": "assets/images/tile-comedk.jpg"
-      },
-      {
-        "exam": "JEELIVE Original",
-        "asset_path": "assets/images/tile-live.jpg"
-      }
-    ],
-    "color_palettes": {
-      "rapid_fire_identity": {
-        "surface_bg": "#0B0C10",
-        "primary_teal": "#00F2FE",
-        "teal_glow": "rgba(0, 242, 254, 0.4)",
-        "royal_blue": "#2563EB",
-        "accent_purple": "#9333EA",
-        "timer_amber": "#F59E0B",
-        "card_graphite": "#12141C"
-      },
-      "all_india_identity": {
-        "surface_bg": "#1A0507",
-        "ruby_primary": "#9B1C2E",
-        "ruby_dark": "#4A0E17",
-        "ruby_glow": "rgba(225, 29, 72, 0.4)",
-        "crimson_accent": "#E11D48",
-        "gold_topper": "#FFD700",
-        "card_onyx": "#2A080C"
-      },
-      "common_neutrals": {
-        "text_primary": "#FFFFFF",
-        "text_secondary": "#E2E8F0",
-        "text_muted": "#94A3B8",
-        "overlay_scrim": "rgba(0, 0, 0, 0.65)"
-      }
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "haptics": {
+    "events": {
+      "tab_press": "light",
+      "switch_exam": "medium",
+      "row_tap": "light"
     }
   },
-  "aspect_ratio_safezones": {
-    "vertical_9_16": {
-      "canvas_dimensions": "1080 x 1920",
-      "safe_top_padding_px": 280,
-      "safe_bottom_padding_px": 340,
-      "safe_side_padding_px": 64,
-      "overlay_clearance": "Top 15% clear for story header; Bottom 18% clear for caption/CTA; Right 12% clear for like/share buttons",
-      "layout_strategy": "Vertical hero stack with centered focus card, bold top-center Hinglish text, and lower third action badge"
-    },
-    "landscape_16_9": {
-      "canvas_dimensions": "1920 x 1080",
-      "safe_top_padding_px": 96,
-      "safe_bottom_padding_px": 120,
-      "safe_side_padding_px": 120,
-      "overlay_clearance": "Top 10% clear for player bar; Bottom 12% clear for progress bar and video title",
-      "layout_strategy": "Dual-column cinematic layout: Left side big Hinglish kinetic typography, right side active app simulation and 3D glowing graphics"
-    }
-  },
-  "storyboard_45s_timestamped": [
+  "screens": [
     {
-      "shot_number": 1,
-      "timestamp_range": "0.0s - 3.0s",
-      "duration_sec": 3.0,
-      "title": "The Hook: 20 Sec No-Pen Challenge",
-      "emotional_tone": "Intense curiosity & challenge",
-      "hinglish_copy": "NO PEN CHALLENGE! ⚡\n20 Seconds Mein Mind Mein Solve Hoga?",
-      "visual_action": "Fast zoom-in onto glowing 20-second circular countdown timer pulsing with electric cyan ring. Flash cut of equation solving in mind without paper.",
-      "layout_9_16": "Full screen timer centered, energetic pulse rings radiating out, headline stacked top-center inside safezone.",
-      "layout_16_9": "Timer on right 50% split with 3D energy sphere; dynamic animated text sliding from left with cyan drop shadow.",
-      "sfx_audio_trigger": "sfx/go.wav (beat drop + electric charge pulse)"
-    },
-    {
-      "shot_number": 2,
-      "timestamp_range": "3.0s - 10.0s",
-      "duration_sec": 7.0,
-      "title": "Rapid Fire Solo Mode Showcase",
-      "emotional_tone": "Pure focus & mental speed",
-      "hinglish_copy": "RAPID FIRE MODE 🚀\nNo Calculation, Pure Concept Speed!",
-      "visual_action": "Rapid card flips of JEE Physics/Math conceptual questions. 20s timer ticks fast (20->15->8->0), correct green glow pops with combo streak counter (+100 Coins).",
-      "layout_9_16": "Card stack centered in vertical frame, combo multiplier floating top-right, timer top-center.",
-      "layout_16_9": "Left: Live question card + formula highlight. Right: Combo counter, streak progress bar, dynamic particle spray.",
-      "sfx_audio_trigger": "sfx/tick.wav -> sfx/correct.wav -> sfx/combo.wav"
-    },
-    {
-      "shot_number": 3,
-      "timestamp_range": "10.0s - 18.0s",
-      "duration_sec": 8.0,
-      "title": "Rapid Fire 1v1 Live Duel",
-      "emotional_tone": "Adrenaline & competitive rush",
-      "hinglish_copy": "1v1 LIVE DUEL ⚔️\nFriend Ke Saath Real-Time Combat!",
-      "visual_action": "Split screen collision! Avatar A (Player) vs Avatar B (Rival) with glowing 'VS' neon badge in center. Dual progress bars race across the screen as answers are locked in.",
-      "layout_9_16": "Vertical split top/bottom with central VS emblem badge and real-time score bar.",
-      "layout_16_9": "Side-by-side horizontal duel arena with avatars left and right, central VS badge glowing in royal blue and neon purple.",
-      "sfx_audio_trigger": "sfx/vs.wav -> sfx/levelup.wav"
-    },
-    {
-      "shot_number": 4,
-      "timestamp_range": "18.0s - 25.0s",
-      "duration_sec": 7.0,
-      "title": "Transition to All India Test Series",
-      "emotional_tone": "Authority, gravity & grandeur",
-      "hinglish_copy": "ALL INDIA TEST SERIES 🏆\nReal NTA Standard Mains Exam Experience",
-      "visual_action": "Smooth cinematic camera glide transition from Teal/Blue gaming atmosphere to Deep Dark Ruby/Onyx All India environment. Official All India Test Series banner unrolls with golden crest.",
-      "layout_9_16": "Full height ruby banner card with subtle noise overlay and metallic gold accents.",
-      "layout_16_9": "Wide dark ruby portal with gold emblem floating center-right, key feature callouts sliding in from left.",
-      "sfx_audio_trigger": "sfx/entry_crown.wav (deep bass boom + brass swell)"
-    },
-    {
-      "shot_number": 5,
-      "timestamp_range": "25.0s - 32.0s",
-      "duration_sec": 7.0,
-      "title": "All India Live Analytics & Percentile Matrix",
-      "emotional_tone": "Clarity & mastery",
-      "hinglish_copy": "REAL-TIME RANK & METRICS 📊\nDetailed Subject Breakdown & Accuracy Heatmap!",
-      "visual_action": "Interactive dashboard animation showing live score breakdown, speed vs accuracy charts, and instant predicted percentile gauge filling up.",
-      "layout_9_16": "High-density stacked analytical cards (Accuracy, Speed, Subject Split) with ruby outline strokes.",
-      "layout_16_9": "3-column dashboard grid layout with smooth chart bar fill animations and percentile dial.",
-      "sfx_audio_trigger": "sfx/levelup.wav"
-    },
-    {
-      "shot_number": 6,
-      "timestamp_range": "32.0s - 38.0s",
-      "duration_sec": 6.0,
-      "title": "4-Exam Ecosystem (JEE Mains, BITSAT, COMEDK, LIVE)",
-      "emotional_tone": "Completeness & empowerment",
-      "hinglish_copy": "ONE APP. 4 MAJOR EXAMS! 🎯\nJEE Mains • BITSAT • COMEDK • JEELIVE",
-      "visual_action": "Carousel of 4 original exam tiles (tile-jee.jpg, tile-bitsat.jpg, tile-comedk.jpg, tile-live.jpg) fanning out in 3D perspective with metallic borders.",
-      "layout_9_16": "2x2 grid layout of authentic exam artwork tiles with subtle hover scale and glow.",
-      "layout_16_9": "Horizontal row of 4 3D tilted exam cards with smooth perspective hover tilt effect.",
-      "sfx_audio_trigger": "sfx/entry_rocket.wav"
-    },
-    {
-      "shot_number": 7,
-      "timestamp_range": "38.0s - 42.0s",
-      "duration_sec": 4.0,
-      "title": "Rewards, Avatars & Coin Shop",
-      "emotional_tone": "Joy & gratification",
-      "hinglish_copy": "EARN COINS & UNLOCK AVATARS! 💎\nPractice Every Day & Rule The Leaderboard!",
-      "visual_action": "Coins burst animation (coin.wav sfx) with rotating rare avatars (Phoenix, Dragon, Einstein, Rocket) levitating in glowing pedestals.",
-      "layout_9_16": "Central avatar showcase wheel with coin explosion particles.",
-      "layout_16_9": "Left: Avatar gallery carousel. Right: Coins balance total ticking up (+5000 Coins).",
-      "sfx_audio_trigger": "sfx/coin.wav -> sfx/win.wav"
-    },
-    {
-      "shot_number": 8,
-      "timestamp_range": "42.0s - 45.0s",
-      "duration_sec": 3.0,
-      "title": "Cinematic Climax & Brand CTA",
-      "emotional_tone": "Triumphant call-to-action",
-      "hinglish_copy": "JEELIVE 💥\nPractice Hard. Rank Higher.\nTAP TO LAUNCH YOUR PREP!",
-      "visual_action": "Official JEELIVE logo artwork (/assets/images/jeelive-logo.webp) shines with radiant lens flare. High-contrast pill CTA button bounces into position with pulsating ring glow.",
-      "layout_9_16": "Centered logo top, bold tagline middle, large touch-friendly CTA pill bottom.",
-      "layout_16_9": "Logo left with tagline, massive animated CTA button right side with app icon badge.",
-      "sfx_audio_trigger": "sfx/entry_meteor.wav (climax crescendo)"
+      "name": "RankPredictor",
+      "purpose": "Show predicted exam ranks and corresponding college/course cutoffs",
+      "states": {
+        "loading": "Dark metal skeletons with a shimmer passing over the #121218 surface",
+        "empty": "Subtle #62657A text 'Enter your score to predict rank'",
+        "error": "Blood red hairline border card with retry button"
+      },
+      "layout": "Sticky exam switcher at top -> MetalCard -> COMEDK/JEE List Rows. Bottom sheet for round-wise ladder."
     }
   ],
-  "typography_system": {
-    "fonts": {
-      "display_heading": "Figtree, Outfit, System-UI, sans-serif",
-      "body_text": "PlusJakartaSans, Inter, System-UI, sans-serif",
-      "formula_code": "SpaceMono, KaTeX_Math, monospace"
-    },
-    "text_styles": {
-      "hook_headline": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,242,254,0.5)]",
-      "hinglish_subheading": "text-lg sm:text-xl lg:text-2xl font-bold text-cyan-200 tracking-wide uppercase",
-      "cta_button_text": "text-lg font-black tracking-wider text-white uppercase"
-    }
-  },
-  "motion_and_sound_design": {
-    "beatsync_milestones": [
-      {
-        "sec": 0.0,
-        "event": "Beat start & initial challenge hook zoom"
-      },
-      {
-        "sec": 3.0,
-        "event": "First beat drop & 20s timer spin up"
-      },
-      {
-        "sec": 10.0,
-        "event": "Dual clash sound & split screen slide"
-      },
-      {
-        "sec": 18.0,
-        "event": "Bass drop transition to Ruby All India theme"
-      },
-      {
-        "sec": 32.0,
-        "event": "High tempo synth rise for 4-exam ecosystem"
-      },
-      {
-        "sec": 42.0,
-        "event": "Climax crescendo & logo flare burst"
-      }
-    ],
-    "sfx_mapping": {
-      "go": "frontend/assets/sfx/go.wav",
-      "tick": "frontend/assets/sfx/tick.wav",
-      "correct": "frontend/assets/sfx/correct.wav",
-      "combo": "frontend/assets/sfx/combo.wav",
-      "vs": "frontend/assets/sfx/vs.wav",
-      "levelup": "frontend/assets/sfx/levelup.wav",
-      "win": "frontend/assets/sfx/win.wav",
-      "coin": "frontend/assets/sfx/coin.wav",
-      "entry_crown": "frontend/assets/sfx/entry_crown.wav",
-      "entry_rocket": "frontend/assets/sfx/entry_rocket.wav",
-      "entry_meteor": "frontend/assets/sfx/entry_meteor.wav"
-    }
-  },
-  "image_urls": {
-    "jeelive_logo": "/assets/images/jeelive-logo.webp",
-    "jeelive_original_jpg": "/assets/images/jeelive-original.jpg",
-    "jeelive_icon": "/assets/images/jeelive-icon.png",
-    "tile_jee": "/assets/images/tile-jee.jpg",
-    "tile_bitsat": "/assets/images/tile-bitsat.jpg",
-    "tile_comedk": "/assets/images/tile-comedk.jpg",
-    "tile_live": "/assets/images/tile-live.jpg",
-    "arena_bg": "/assets/images/arena_bg.webp"
-  },
+  "images": {},
   "instructions_to_main_agent": [
-    "Build the 45-second launch video runner / interactive storyboard player supporting both 9:16 Vertical Reel and 16:9 Landscape YouTube view modes.",
-    "Ensure interactive aspect ratio toggle switches smoothly between 9:16 and 16:9 modes with safezone boundary overlays.",
-    "Do NOT recolor original JEELIVE logo or exam tile artworks.",
-    "Ensure all interactive controls (play/pause, timestamp scrubber, format switcher, shot selector, sound toggle) have data-testid attributes.",
-    "DO NOT use fully transparent backgrounds for overlays or header bars; always use solid/semi-solid backgrounds (e.g., bg-black/70 with backdrop-blur).",
-    "Include real audio playback or animated SFX triggers corresponding to the timestamped storyboard beats."
-  ],
-  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
-    "accessibility": "Ensure text contrast ratio >= 4.5:1 (WCAG AA). Buttons must have explicit focus and hover states.",
-    "testing_attributes": "Add data-testid to all interactive components in kebab-case format (e.g. data-testid='format-toggle-9-16', data-testid='play-video-btn').",
-    "code_language": "Use JavaScript / TypeScript React components (.js or .tsx files) matching existing repository structure."
-  },
-  "rank_card_phase2": {
-    "personality_one_liner": "A clean, utilitarian light-themed prep app featuring a highly premium, dark brushed-metal luxury 'Rank Card' for results.",
-    "typography": {
-      "displayFontFamily": "Figtree",
-      "textFontFamily": "Figtree",
-      "rankCardFontFamily": "Platform.OS === 'ios' ? 'Georgia' : 'serif'",
-      "scale": {
-        "sm": 12,
-        "base": 14,
-        "lg": 16,
-        "xl": 20,
-        "2xl": 24
-      }
-    },
-    "screens": [
-      {
-        "name": "RankPredictor",
-        "purpose": "Calculate and display JEE/BITSAT expected ranks and colleges while staying extremely lightweight.",
-        "states": {
-          "loading": "Standard spinner with 'Crunching latest cutoffs...'",
-          "empty": "Input form to enter marks, shift, category, etc.",
-          "error": "Text error message + Retry button"
-        },
-        "layout": "Top section: Input form (Light theme, Figtree). Shift picker is a horizontal ScrollView of pill chips. Middle section: The Luxury Rank Card (Dark metallic gradient, system serif). Bottom section: College/Program list (Light theme). Each row has a shortlist star (right-aligned, >=44px hit area) and trend arrows (↑ / ↓) comparing 2025 to 2026."
-      }
-    ],
-    "instructions_to_main_agent": [
-      "CRITICAL: Absolutely NO images, NO SVGs, and NO custom font files for the Rank Card. This must remain an extremely lightweight implementation.",
-      "Do NOT redesign the rest of the app. The main list, inputs, and background must stay in the existing Light theme (Figtree font, standard greys/reds).",
-      "RANK CARD IMPLEMENTATION: Create the dark luxury membership card using a `<View>` with `backgroundColor: '#0A192F'` (Navy Glow base) and wrap it with an `expo-linear-gradient` overlay simulating diagonal metallic sheen (stops like `['rgba(255,255,255,0.15)', 'transparent', 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.1)']`, start `[0,0]`, end `[1,1]`).",
-      "RANK CARD TYPOGRAPHY: Force system serif for the card text using `fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif'`. Use `color: '#E2E8F0'` (Silver). For the 'DIAMOND CIRCLE' style labels, use uppercase, `fontSize: 12`, and `letterSpacing: 3` to give it a tracked-out founding member look.",
-      "RANK CARD ACCENTS: Add a 1px divider line using the electric blue accent (`#2563EB`). Put the serial number/CRL (e.g., '№ 14,500 / 14M') in the bottom right corner with the same blue color and system serif.",
-      "SHIFT PICKER: Render as a horizontal `ScrollView` with chips. Unselected: `surfaceSecondary` background. Selected: `brandTertiary` background with a 1px `brandPrimary` border.",
-      "TREND ARROWS & SHORTLIST: In the seat rows, use simple text characters `↑` (green/success) and `↓` (red/error) to show the 2025->2026 trend. The shortlist star should be an `Ionicons` star (`star-outline` for inactive/muted, `star` for active/brand yellow), wrapped in a 44x44 Pressable.",
-      "WHATSAPP SHARE: Keep it native and lightweight. Add a simple share button (e.g., text 'Share on WhatsApp' with an Ionicons `logo-whatsapp` icon) located beneath the Rank Card or inside the Shortlist Sheet, using WhatsApp's standard green (#25D366) or the app's brand color."
-    ],
-    "glassmorphism": {
-      "enabled": "false",
-      "do's": [],
-      "dont's": [
-        "Do not use glass/blur effects. Stick strictly to flat colors and linear gradients for the metal card effect to keep it lightweight."
-      ]
-    },
-    "colors": {
-      "rankCard_bg": "#121214",
-      "rankCard_glow": "#0A192F",
-      "rankCard_accentBlue": "#2563EB",
-      "rankCard_silver": "#E2E8F0",
-      "rankCard_silverMuted": "#94A3B8"
-    }
-  }
+    "1. METALCARD IMPLEMENTATION (Sparkle Silver + Halka Blood Red):",
+    "   - Background: Linear gradient #1C1D22 -> #0E0F12 -> #0B1730.",
+    "   - Texture: 44 alternating brush stripes overlay rgba(255,255,255,0.022).",
+    "   - Border: rgba(148,163,184,0.15) with radius 22px.",
+    "   - Replacement of Electric Blue: The old blue is completely replaced for luxury. Top right glow is now a radial/absolute overlay of rgba(153,27,27,0.25).",
+    "   - Blood Red (#B91C1C) placements: The absolute top hairline border of the card, the exam badge text (e.g. 'COMEDK 2026'), the 26px vertical hairline rule next to percentile, and the '№' symbol in the serial.",
+    "   - Sparkle Silver (#F8F9FA) placements: The large rank number (System Georgia/serif) with text-shadow rgba(255,255,255,0.25), and the serial numbers (e.g. '13,529 / 15,38,468').",
+    "   - Sparkle Animation: Implement a tiny SVG 4-point star (rgba(255,255,255,0.9)) positioned absolutely near the top-right of the big serif rank number. Use react-native-reanimated to pulse opacity from 0.2 to 1.0 slowly. Respect reduce-motion.",
+    "",
+    "2. EXAM SWITCHER (3-way: JEE Main / BITSAT / COMEDK):",
+    "   - Container: #121218 background, pill radius, flex-direction: row, padding 4px, min-height 52px (to allow 44px inner targets).",
+    "   - Selected state: Background #1A1A23, border 1px solid rgba(226,232,240,0.3) [Silver outline], text #E2E8F0 weight 500.",
+    "   - Unselected state: Transparent background, text #8F92A3.",
+    "",
+    "3. ROUND LADDER (College Bottom Sheet - NEW):",
+    "   - Layout: Vertical stack, gap 12px, padded 16px.",
+    "   - Row structure: min-height 44px, flex-direction row, alignItems center.",
+    "   - Round Label: Width ~50px, text #8F92A3, 12px, e.g., 'R1', 'R4'.",
+    "   - Visual Bar: A track (flex: 1, height 4px, bg rgba(255,255,255,0.06), borderRadius 2px). Inside, an absolute fill proportional to the round's closing rank relative to the max rank in the list, colored rgba(153,27,27,0.4) (Muted Blood Red).",
+    "   - Closing Rank Text: Positioned at the end of the red fill or just above it, Serif font, #C3C6D0, 14px.",
+    "   - Student Rank Marker: An absolute vertical hairline (width 1px, height 16px, bg #E2E8F0) intersecting all bars at the exact % of the student's rank.",
+    "   - 'In' State: If student rank <= closing rank, show text 'aapki rank andar' in Safe Green (#6EE7B7) under the bar, with a tiny silver checkmark.",
+    "   - Empty State (Round with no allotment): Replace bar with an em-dash '—', text 'is round mein allotment nahi' in Dim (#62657A), italicized.",
+    "",
+    "4. COMEDK / JEE LIST ROWS (Refinement):",
+    "   - Surface: #121218, bottom border #23232E, padding 16px.",
+    "   - Title/Course: #E6E8EE, 16px, sans-serif.",
+    "   - City Tag: bg rgba(255,255,255,0.06), text #9095AB, radius 4px, padding horizontal 6px.",
+    "   - Subtext: 'Closing 4,552 · R4 · GM' in #C3C6D0.",
+    "   - Trend Line: Soft SVG path graph on the right side, stroke rgba(255,255,255,0.15).",
+    "   - Fees & Seats: #8F92A3, 12px.",
+    "   - Chance Tags: Safe (#0E3A2D bg / #6EE7B7 text), Likely (#14213F bg / #93C5FD text), Borderline (#33270C bg / #FCD34D text). No icons, pure text and color for elegance.",
+    "",
+    "5. COLLEGE SHEET TABLE GRID:",
+    "   - Ensure the Branches x Rounds grid has strict 1px borders (#23232E).",
+    "   - 'In' cells get a subtle #0E3A2D background and Safe Green text.",
+    "",
+    "6. STRICT CONSTRAINTS:",
+    "   - Do NOT add new font files. Use system fonts (System for Sans, Georgia/serif for Serif).",
+    "   - Do NOT add any external image assets. Use react-native-svg for the sparkle star and trend lines.",
+    "   - Ensure touch targets for the exam switch and list rows are strictly >= 44px.",
+    "   - The entire theme relies on the exact HEX/RGBA tokens provided to avoid generic AI-blue looks. Blue is fully replaced by the Blood Red/Sparkle Silver palette aside from the functional chance tags."
+  ]
 }

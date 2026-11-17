@@ -17,6 +17,7 @@ import { CollegeSheet } from "@/src/rank/CollegeSheet";
 import { PercentileChart } from "@/src/rank/PercentileChart";
 import { Picker, RuleTitle, Switch } from "@/src/rank/controls";
 import { BitsatPanel } from "@/src/rank/Bitsat";
+import { ComedkPanel } from "@/src/rank/Comedk";
 import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
 import { shareJee } from "@/src/rank/share";
 import { useShortlist } from "@/src/rank/shortlist";
@@ -32,7 +33,7 @@ function summaryOf(b: FormBody) {
 export default function RankTab() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const [exam, setExam] = useState<"jee" | "bitsat">("jee");
+  const [exam, setExam] = useState<"jee" | "bitsat" | "comedk">("jee");
   const [mode, setMode] = useState<"marks" | "chart">("marks");
   const [meta, setMeta] = useState<Meta | null>(null);
   const [metaError, setMetaError] = useState<string | null>(null);
@@ -99,11 +100,15 @@ export default function RankTab() {
         <View style={{ gap: 6 }}>
           <RuleTitle>JEELIVE.AI · Rank</RuleTitle>
           <T testID="rank-title" style={styles.title}>Rank & college predictor</T>
-          <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT, 2026 cutoffs</T>
+          <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
-        <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }]} />
+        <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />
 
-        {exam === "bitsat" ? <BitsatPanel onShortlist={() => setShortOpen(true)} /> : <>
+        {exam === "bitsat" ? <BitsatPanel onShortlist={() => setShortOpen(true)} />
+          : exam === "comedk" ? <>
+            <ErrorBox error={metaError ?? undefined} retry={loadMeta} testID="rank-meta-error" />
+            <ComedkPanel groups={meta?.comedk.groups ?? []} onShortlist={() => setShortOpen(true)} />
+          </> : <>
           <Switch prefix="rank-mode" value={mode} onChange={setMode} items={[{ key: "marks", label: "My marks" }, { key: "chart", label: "Percentile chart" }]} />
           <ErrorBox error={metaError ?? undefined} retry={loadMeta} testID="rank-meta-error" />
 

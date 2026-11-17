@@ -85,10 +85,37 @@ def parse_fee(pdf_path):
     return seats
 
 
-# COMEDK UGET 2026: 180 questions, 1 mark each, no negative marking. Public 2026 marks-vs-rank analysis (estimate):
-# (marks, rank) points, higher marks -> better rank; interpolated in between.
-MARKS_RANK = [(180, 1), (170, 50), (160, 200), (150, 500), (140, 1500), (130, 3000), (120, 6000), (110, 10000), (100, 15000),
-              (90, 22000), (80, 30000), (70, 40000), (60, 52000), (50, 65000), (40, 78000), (30, 90000), (20, 100000), (0, 112000)]
+# COMEDK UGET 2026: 180 questions, 1 mark each, no negative marking; 1.29 lakh appeared (9 May 2026).
+# COMEDK publishes no marks-vs-rank table, so three public analyses are kept side by side; the app shows the range they span.
+# Each curve: (marks, rank) points, higher marks -> better rank; the server interpolates in log(rank).
+CANDIDATES = 129000
+MARKS_RANK = [
+    {"label": "CollegeDekho, COMEDK 2026 result analysis",
+     "url": "https://www.collegedekho.com/news/comedk-result-2026-live-updates-link-toppers-college-wise-cutoffs-78958/",
+     "points": [(180, 1), (140, 90), (130, 155), (120, 330), (110, 850), (100, 2350), (90, 5900), (80, 12500), (70, 17500),
+                (60, 41500), (50, 76500), (0, CANDIDATES)]},
+    {"label": "Shiksha, COMEDK 2026 marks vs rank",
+     "url": "https://www.shiksha.com/engineering/articles/comedk-2026-marks-vs-rank-blogId-230113",
+     "points": [(180, 1), (150, 100), (130, 500), (110, 2300), (80, 20500), (60, 37000), (50, 43000), (0, CANDIDATES)]},
+    {"label": "COMEDK 2024-2025 marks vs rank trend (PW, Careers360)",
+     "url": "https://www.pw.live/kseab/exams/comedk-uget-marks-vs-rank-2025",
+     "points": [(180, 1), (170, 10), (160, 50), (150, 150), (140, 350), (130, 800), (120, 1700), (110, 3200), (100, 5500),
+                (90, 9700), (80, 14000), (70, 23000), (60, 36000), (50, 43000), (0, CANDIDATES)]},
+]
+CITY_FIX = {"Bangalore": "Bengaluru", "Bangalore Rural": "Bengaluru Rural", "Tumkur": "Tumakuru", "Dakshin Kannada": "Dakshina Kannada",
+            "Kalaburgi": "Kalaburagi", "Mandya District": "Mandya", "Bagalkot": "Bagalkote"}
+
+
+def college_parts(full):
+    """'Acharya Institute of Technology-Soladevanahalli, Bengaluru' -> ('Acharya Institute of Technology', 'Bengaluru')."""
+    short = re.split(r"\s*-\s*|,", full, maxsplit=1)[0].strip()
+    tail = [p.strip() for p in full.split(",") if p.strip()]
+    city = tail[-1] if len(tail) > 1 else (re.split(r"\s*-\s*", full)[-1].strip(" ,") if "-" in full else "")
+    return short, CITY_FIX.get(city, city)
+
+
+def course_name(s):
+    return re.sub(r"(\w)- (\w)", r"\1\2", clean(s))  # 'Communicat- ion' -> 'Communication' (PDF line breaks)
 
 
 def build(raw):
@@ -111,8 +138,9 @@ def build(raw):
         colleges.setdefault(code, f["name"])
         courses.setdefault(cc, f["course"])
     data = {
-        "year": 2026, "rounds": ["R1", "R2", "R3", "R4"], "marks_rank": MARKS_RANK,
-        "colleges": colleges, "courses": courses, "rows": rows,
+        "year": 2026, "rounds": ["R1", "R2", "R3", "R4"], "marks_rank": MARKS_RANK, "candidates": CANDIDATES,
+        "colleges": {code: [name, *college_parts(name)] for code, name in colleges.items()},
+        "courses": {cc: course_name(n) for cc, n in courses.items()}, "rows": rows,
         "seats": {f"{code}|{cc}": [f["total"], f["gm"], f["kkr"], f["fee"]] for (code, cc), f in fee.items()},
         "sources": {k: U + v for k, v in FILES.items()},
     }

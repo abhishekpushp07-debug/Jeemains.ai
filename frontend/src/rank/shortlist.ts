@@ -1,9 +1,9 @@
 // Saved college-branches (JEE) and BITS programs, kept on the phone so the shortlist opens instantly and offline.
 import { useEffect, useSyncExternalStore } from "react";
 import { storage } from "@/src/utils/storage";
-import { BitsatItem, fmt, Seat, Tag } from "./api";
+import { BitsatItem, ComedkItem, fmt, Seat, Tag } from "./api";
 
-export type Saved = { id: string; exam: "jee" | "bitsat"; title: string; sub: string; line: string; tag: Tag | null; seat?: Seat };
+export type Saved = { id: string; exam: "jee" | "bitsat" | "comedk"; title: string; sub: string; line: string; tag: Tag | null; seat?: Seat };
 
 const KEY = "rank.shortlist.v1";
 let items: Saved[] = [];
@@ -41,4 +41,8 @@ export const jeeSaved = (s: Seat): Saved => ({
 
 export const bitsatSaved = (b: BitsatItem): Saved => ({
   id: `bitsat-${b.id}`, exam: "bitsat", title: b.college, sub: b.program, line: `BITSAT 2026 cutoff ${b.cutoff} / 390`, tag: b.tag,
+});
+
+export const comedkSaved = (c: ComedkItem): Saved => ({
+  id: `comedk-${c.id}`, exam: "comedk", title: c.college, sub: c.course, line: `COMEDK 2026 closing ${fmt(c.close)} · ${c.round} · GM`, tag: c.tag ?? null,
 });
