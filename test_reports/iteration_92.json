@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend-only test of the 'Share to view results' ShareGate (web preview, QA account 7004186276, read-only: NO test started/answered/submitted). A fresh submission was simulated by setting localStorage share_gate.4ff8dce7-c1a2-4b3a-b9a9-723e13252d00='true' on this account's completed attempt 'JEE Main PYQ · 22 Jan 2026 · Shift 1'. Everything requested passed. The gate shows every expected element, and no result elements (result-header, result-tab-*, result-score-card) appear while it is locked. Back keeps the lock, and reopening shows the gate again. The red WhatsApp button opens api.whatsapp.com/send with the correct caption, shows the green thanks, then the result; the flag is removed and reload opens the result directly. share-gate-more without navigator.share copies the caption, shows the note and unlocks. A completed attempt without the flag (952adf58...) opens directly. Layout is fine at 390x844 and 320x700: no horizontal scroll, no text overflow, card is 4:5 (1.25). The Mission tab still works. One gap: a cancelled share sheet also unlocks the result, which weakens the HARD gate. No deprecated Expo packages in the files reviewed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "HARD gate bypass via cancelled share", "issue": "On web, if navigator.share exists and the user cancels (AbortError), shareMission() in src/mission/share.ts:19-20 catches the error, copies the caption, returns a note, and onShared() unlocks the result. Verified: navigator.share mocked to reject with AbortError, tap share-gate-more → result opened and share_gate flag removed. On native, RN Share.share on iOS resolves with action 'dismissedAction' when cancelled (share.ts:25), and that also counts as a share. If the gate must be strict, treat AbortError / dismissedAction as 'not shared' (keep the lock, show a note instead).", "affected_testIDs": ["share-gate-more"]}
+    ],
+    "design_issues": [
+      {"screen": "ShareGate @320x700", "issues": ["Main CTA share-gate-share starts at y=690 on a 700px viewport, so it is below the fold and the user has to scroll to find it. Consider a smaller card or header on short screens.", "Title 'Aapka result taiyaar hai 🎉' wraps the emoji alone onto a second line at 320px width (cosmetic)."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_92.json"],
+  "action_items": [
+    "(Medium) Decide whether a cancelled share should unlock. For a strict HARD gate, in src/mission/share.ts: on web, re-throw or return a 'cancelled' result when Share.share rejects with AbortError (clipboard only when navigator.share is missing). On iOS, check Share.share's result action !== Share.dismissedAction. In useMissionShare, call onShared only when the share really went out.",
+    "(Low) useAttempt calls onCompleted at src/useAttempt.ts:65 whenever /attempt/<id> loads an attempt that is ALREADY completed. toResult then runs lockResult(id), so an old result opened through /attempt/<id> (stale list item, deep link, completed on another device) gets gated again. Lock only after a submit or auto-submit in this session, or accept this as intended.",
+    "(Low) The gate copy says 'Aapka result taiyaar hai' even when the result is still grading (202) or embargoed. Consider changing the wording, or showing the gate only once the result is released.",
+    "(Low, cosmetic) Keep the share CTA above the fold on short screens like 320x700."
+  ],
+  "critical_code_review_comments": [
+    "app/attempt/[id].tsx:33 toResult = invalidate + lockResult(id).finally(router.replace('/result/<id>')). It is used for manual submit (doSubmit, line 105) and passed as the auto-submit/completed callback to useAttempt (line 34, called at useAttempt.ts:65/115/182). Correct for both paths.",
+    "All submit paths (Mock, All India Test Series, PYQ) go through app/attempt/[id].tsx; no other screen redirects to /result after a submit, so the gate covers every test type.",
+    "result/[id].tsx: the gate state starts as 'checking' (empty result-screen View) before the localStorage read resolves, so result content never flashes before the gate. The result keeps loading behind the gate and the title fills in once loaded.",
+    "The lock key share_gate.<attemptId> is not scoped to the user and is not cleared on logout. Low risk because attempt ids are unique UUIDs."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped as requested)", "frontend": "100% of requested checks passed; 1 additional gate-bypass finding"},
+  "seed_data_creation": "None. Only the localStorage flag share_gate.4ff8dce7-c1a2-4b3a-b9a9-723e13252d00 was set in the test browser; it was removed by unlocking or explicitly afterwards. No academic writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "QA account completed attempts: 4ff8dce7-c1a2-4b3a-b9a9-723e13252d00 (JEE Main PYQ 22 Jan 2026 S1, 5/300) and 952adf58-7270-4e2a-add7-25ab00733152 (Coordination Compounds). To simulate a submission, call page.evaluate(\"() => localStorage.setItem('share_gate.<id>','true')\"). Pass an arrow function: an assignment string that evaluates to a function gets invoked by Playwright. Popups are caught with page.context.on('page'). In the headless browser navigator.share is undefined by default.",
+  "rca_of_issue": "Gate bypass: useMissionShare treats any resolved shareMission() as shared. On web, shareMission turns every Share.share rejection, including the user's AbortError cancel, into a clipboard copy and resolves. On iOS it ignores Share.share's dismissedAction. Repro: set the flag, open /result/<id>, run navigator.share=()=>Promise.reject(new DOMException('x','AbortError')), tap share-gate-more → result unlocks."
+}

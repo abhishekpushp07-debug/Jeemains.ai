@@ -18,6 +18,8 @@ import { colors, fonts, LearningTone, learningTones, radius, space, subjectColor
 import { fmtClock, unixDate } from "@/src/navigation";
 import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
 import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
+import { isResultLocked, unlockResult } from "@/src/mission/gate";
+import { ShareGate } from "@/src/mission/ShareGate";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -314,9 +316,16 @@ export default function Result() {
   const ready = resultIsReleased(status, r);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
   usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready && tab !== "solutions");
+  // A fresh submission shows the Mission card first ("Share to view results"); the result keeps loading behind it.
+  const [gate, setGate] = useState<"checking" | "locked" | "open">("checking");
+  useEffect(() => { let live = true; isResultLocked(id!).then(l => { if (live) setGate(l ? "locked" : "open"); }); return () => { live = false; }; }, [id]);
+  const back = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"));
+  if (gate === "checking") return <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface }} />;
+  if (gate === "locked") return <ShareGate title={r?.title} stage={ready || !r ? "ready" : r.status === "embargoed" ? "sealed" : status === 202 ? "grading" : "ready"}
+    onBack={back} onOpen={() => { void unlockResult(id!); setGate("open"); }} />;
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"))} />
+      <ScreenHeader testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={back} />
       {ready ? (
         <View style={learningStyles.navigation}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>

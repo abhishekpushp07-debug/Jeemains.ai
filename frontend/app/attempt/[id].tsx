@@ -16,6 +16,7 @@ import { ErrorBox, Icon, Notice, Press, Skeleton, T, tap } from "@/src/component
 import { DSheet, Pill, RoundButton } from "@/src/components/design";
 import { colors, fonts, radius, space } from "@/src/theme";
 import { fmtClock } from "@/src/navigation";
+import { lockResult } from "@/src/mission/gate";
 
 const CONF = [[0.25, "Guess"], [0.5, "Unsure"], [1, "Sure"]] as const;
 const ZOOM = [1, 1.2, 1.4];
@@ -29,9 +30,17 @@ export default function Player() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
-  const toResult = () => { invalidate(`u.${user?.id}.`); router.replace(`/result/${id}`); };
+  // Only a submission made here (the attempt was open on this screen) locks its result behind the share card;
+  // opening an attempt that was already finished goes straight to its result.
+  const wasActive = useRef(false);
+  const toResult = () => {
+    invalidate(`u.${user?.id}.`);
+    const go = () => router.replace(`/result/${id}`);
+    if (wasActive.current) void lockResult(id!).finally(go); else go();
+  };
   const A = useAttempt(id!, user?.id || "anon", toResult);
   const a = A.attempt;
+  useEffect(() => { if (a?.status === "active") wasActive.current = true; }, [a?.status]);
   const [sheet, setSheet] = useState<null | "palette" | "submit" | "exit" | "bonus">(null);
   const [busy, setBusy] = useState(false);
   const [conf, setConf] = useState<Record<string, number | undefined>>({});

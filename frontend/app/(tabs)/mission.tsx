@@ -1,7 +1,7 @@
 // Our Mission: watch-only. The maker's share card on top with a red "Please share karo" WhatsApp button above and
 // below it, then the full story in segments, then the fine print.
-import React, { useRef, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
+import React, { useRef } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, useReducedMotion } from "react-native-reanimated";
 import { Press, T } from "@/src/components/ui";
@@ -12,7 +12,7 @@ import { usesNativeTabs } from "@/src/navigation";
 import { useCardWidth } from "@/src/mission/parts";
 import { MissionCard } from "@/src/mission/MissionCard";
 import { POINTS } from "@/src/mission/copy";
-import { shareMission } from "@/src/mission/share";
+import { ShareButton, useMissionShare } from "@/src/mission/ShareButton";
 
 export default function Mission() {
   const insets = useSafeAreaInsets();
@@ -20,23 +20,8 @@ export default function Mission() {
   const reduced = useReducedMotion();
   const enter = (i: number) => reduced ? undefined : FadeInDown.delay(60 * i).duration(320);
   const card = useRef<React.ComponentRef<typeof View>>(null);
-  const narrow = useWindowDimensions().width < 360; // small phones: slightly smaller button text
-  const [busy, setBusy] = useState(false), [note, setNote] = useState("");
-  const share = async (toWhatsApp: boolean) => {
-    if (busy) return;
-    setBusy(true); setNote("");
-    try { setNote(await shareMission(card, toWhatsApp)); }
-    catch { setNote("Share nahi khula. Dobara try karo."); }
-    finally { setBusy(false); }
-  };
-  const button = (where: string) => <Press testID={`mission-share-${where}`} onPress={() => share(true)} disabled={busy} scaleTo={0.97}
-    accessibilityRole="button" accessibilityLabel="Please share karo aur free education ko support karo" style={styles.cta}>
-    {busy ? <ActivityIndicator color={colors.onBrandPrimary} /> : <Glyph name="whatsapp" size={narrow ? 26 : 30} color={colors.onBrandPrimary} />}
-    <View style={{ flex: 1 }}>
-      <T w="heavy" size={narrow ? 16 : 18} color={colors.onBrandPrimary}>Please share karo</T>
-      <T w="semibold" size={narrow ? 12 : 13} color={colors.onBrandPrimary} style={{ opacity: 0.92 }}>aur free education ko support karo</T>
-    </View>
-  </Press>;
+  const { busy, note, share } = useMissionShare(card);
+  const button = (where: string) => <ShareButton testID={`mission-share-${where}`} title="Please share karo" busy={busy} onPress={() => share(true)} />;
 
   return <ScrollView testID="mission-screen" style={{ flex: 1, backgroundColor: colors.surface }}
     contentContainerStyle={{ paddingTop: insets.top + space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}>
@@ -75,9 +60,6 @@ export default function Mission() {
 }
 
 const styles = StyleSheet.create({
-  // The whole red block is the share button: WhatsApp mark on the left, the two-line ask beside it.
-  cta: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 64, paddingVertical: space.md, paddingHorizontal: space.lg,
-    borderRadius: 18, backgroundColor: colors.brandPrimary },
   cardWrap: { alignSelf: "center", borderRadius: 22, shadowColor: colors.custom_mNavy, shadowOpacity: 0.3, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 8 },
   more: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, minHeight: 44 },
   point: { flexDirection: "row", gap: space.md, padding: space.lg, alignItems: "flex-start" },

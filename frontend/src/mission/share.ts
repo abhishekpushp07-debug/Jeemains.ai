@@ -12,18 +12,28 @@ import { sendWhatsApp } from "@/src/rapid/social";
 import { sendFileToWhatsApp } from "@/src/whatsappFile";
 import { CAPTION } from "./copy";
 
-/** Returns a note to show under the buttons ("" when nothing needs saying). */
-export async function shareMission(card: React.RefObject<React.ComponentRef<typeof View> | null>, toWhatsApp: boolean): Promise<string> {
+/** shared = false only when the student closed the share sheet without sending (where the phone tells us).
+ *  note = something to show under the buttons ("" when nothing needs saying). */
+export type ShareOutcome = { shared: boolean; note: string };
+
+export async function shareMission(card: React.RefObject<React.ComponentRef<typeof View> | null>, toWhatsApp: boolean): Promise<ShareOutcome> {
   if (Platform.OS === "web") {
-    if (toWhatsApp) { await sendWhatsApp(CAPTION); return ""; }
-    try { await Share.share({ message: CAPTION }); return ""; }
-    catch { await Clipboard.setStringAsync(CAPTION); return "Message copy ho gaya. Kahin bhi paste karke bhej do."; } // browsers without a share sheet
+    if (toWhatsApp) { await sendWhatsApp(CAPTION); return { shared: true, note: "" }; }
+    try { await Share.share({ message: CAPTION }); return { shared: true, note: "" }; }
+    catch (e: any) {
+      if (e?.name === "AbortError") return { shared: false, note: "" }; // closed the share sheet
+      await Clipboard.setStringAsync(CAPTION); // browsers without a share sheet
+      return { shared: true, note: "Message copy ho gaya. Kahin bhi paste karke bhej do." };
+    }
   }
   const uri = await captureRef(card, { format: "png", quality: 1, result: "tmpfile", width: 1080, height: 1350 });
-  if (toWhatsApp && await sendFileToWhatsApp({ url: uri, type: "image/png", filename: "JEELIVE-Mission.png", message: CAPTION })) return "";
-  if (Platform.OS === "ios") { await Share.share({ url: uri, message: CAPTION }); return ""; }
+  if (toWhatsApp && await sendFileToWhatsApp({ url: uri, type: "image/png", filename: "JEELIVE-Mission.png", message: CAPTION })) return { shared: true, note: "" };
+  if (Platform.OS === "ios") {
+    const r = await Share.share({ url: uri, message: CAPTION });
+    return { shared: r.action !== Share.dismissedAction, note: "" };
+  }
   await Clipboard.setStringAsync(CAPTION);
   if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(uri, { mimeType: "image/png", dialogTitle: "Please share karo" });
   else await sendWhatsApp(CAPTION);
-  return "Message copy ho gaya. WhatsApp mein photo ke neeche paste kar do.";
+  return { shared: true, note: "Message copy ho gaya. WhatsApp mein photo ke neeche paste kar do." };
 }
