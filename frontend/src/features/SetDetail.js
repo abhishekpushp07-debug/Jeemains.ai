@@ -2,7 +2,7 @@ import { examPath, safeExamReturn, seriesPath, JEE_SERIES } from '../lib/exams';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Clock3, ShieldCheck, Loader2, FileQuestion, Flag, PlayCircle, BookOpenCheck, Rocket } from 'lucide-react';
-import { api, post } from '../lib/api';
+import { api, postWhenFree } from '../lib/api';
 import { rememberStartedAttempt } from '../lib/privateResources';
 import { useAuth } from '../lib/auth';
 import { PageTitle, Loading, ErrorBox } from '../components/Shared';
@@ -66,7 +66,7 @@ export default function SetDetail() {
   async function start() {
     setBusy(true); setError('');
     try {
-      const a = await post('/sets/' + id + '/start', { preview, start_key: key.current, get_ready: true });
+      const a = await postWhenFree('/sets/' + id + '/start', { preview, start_key: key.current, get_ready: true });
       sessionStorage.removeItem('tejas-start-' + id);
       rememberStartedAttempt(userId, a);
       nav(a.status === 'completed' ? '/results/' + a.id : '/attempts/' + a.id, { state: { returnTo } });

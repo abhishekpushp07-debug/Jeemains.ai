@@ -15,7 +15,7 @@ export const invalidateCatalog=()=>cache.clear();
 
 export function useExamList(){
  const {user}=useAuth();const [items,setItems]=useState(null);const who=user?.id||'guest';
- useEffect(()=>{let live=true;cached(who+':exams',()=>api('/catalog/exams')).then(d=>{registerExams(d.items);if(live)setItems(d.items);}).catch(()=>{if(live)setItems([]);});return()=>{live=false;};},[who]);
+ useEffect(()=>{let live=true;if(who==='guest'){setItems([]);return;}cached(who+':exams',()=>api('/catalog/exams')).then(d=>{registerExams(d.items);if(live)setItems(d.items);}).catch(()=>{if(live)setItems([]);});return()=>{live=false;};},[who]);
  return items;
 }
 

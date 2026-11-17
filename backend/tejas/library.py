@@ -446,5 +446,7 @@ async def fresh_start_once():
 async def run_cleanups():
     await cleanup_once()
     await fresh_start_once()
+    from .cohorts import remove_staff_entries
+    await run_once('staff-out-of-peer-stats-2026-11', remove_staff_entries, 'Staff practice runs removed from student statistics')
     from .series_admin import jee_dates_once
     await jee_dates_once()

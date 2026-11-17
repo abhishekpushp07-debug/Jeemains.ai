@@ -77,6 +77,17 @@ export async function api(path, options = {}, retry = true) {
 }
 export const post = (path, data = {}) =>
   api(path, { method: "POST", body: JSON.stringify(data) });
+// For requests that are safe to repeat (sign-in, start with a start key): a busy server is retried quietly a few times.
+export async function postWhenFree(path, data = {}, tries = 4) {
+  for (let i = 1; ; i++) {
+    try {
+      return await post(path, data);
+    } catch (e) {
+      if (e.status !== 503 || i >= tries) throw e;
+      await new Promise(resolve => setTimeout(resolve, Math.min(8000, (e.retryAfterMs || 2000) * i) + Math.random() * 1000));
+    }
+  }
+}
 export const put = (path, data) =>
   api(path, { method: "PUT", body: JSON.stringify(data) });
 export const patch = (path, data) =>

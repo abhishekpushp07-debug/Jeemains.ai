@@ -6,7 +6,7 @@ from zoneinfo import ZoneInfo
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pymongo.errors import DuplicateKeyError
 from .auth import owner
-from .db import db, attempts, jobs, now, audit
+from .db import db, attempts, jobs, now, audit, INDEX_PROBLEMS
 from .canonical import CanonicalIntegrityError, verify_ledger
 
 router = APIRouter(prefix='/api/admin/integrity', tags=['Data integrity'])
@@ -265,6 +265,7 @@ async def run(trigger, repair=True):
             checks.append({**item, 'fixed': fixed.get(key, 0), 'left': left, 'state': state})
         report = {'last_run': now(), 'duration_s': round(time.monotonic() - started, 2), 'trigger': trigger, 'checks': checks,
                   'missing_safeguards': await safeguards(),
+                  'index_problems': INDEX_PROBLEMS[:20],
                   'found': sum(c['found'] or 0 for c in checks), 'fixed': sum(c['fixed'] for c in checks),
                   'needs_attention': sum(c['state'] == 'needs_attention' for c in checks)}
         await ops.update_one({'id': 'integrity'}, {'$set': {'id': 'integrity', 'report': report}}, upsert=True)

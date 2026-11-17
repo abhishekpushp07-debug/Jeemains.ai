@@ -12,7 +12,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { toast } from "sonner";
-import { post } from "../lib/api";
+import { postWhenFree } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import { Field, ErrorBox } from "../components/Shared";
 export default function Auth({ staff = false }) {
@@ -41,7 +41,7 @@ export default function Auth({ staff = false }) {
         : signup ? ['/auth/phone/signup', { phone, pin, confirm_pin: confirmPin }]
         : reset ? ['/auth/pin/reset', { phone, new_pin: pin, confirm_pin: confirmPin }]
         : ['/auth/phone', { phone, pin }];
-      const u = await post(path, body);
+      const u = await postWhenFree(path, body);
       if (staff && !["owner", "reviewer"].includes(u.role))
         throw new Error(
           "This is the staff entrance. Use mobile-number entry for student practice.",

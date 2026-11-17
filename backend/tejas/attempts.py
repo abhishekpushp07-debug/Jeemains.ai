@@ -623,6 +623,7 @@ async def retry(id: str, data: dict, u=Depends(current)):
     if not 8 <= len(start_key) <= 100:
         raise HTTPException(400, "A retry request identifier of 8–100 characters is required.")
     retry_hash = fingerprint({"operation": "retry", "parent_attempt": id, "score_version": data.get("score_version") or "original"})
+    started = a.get('_database_now') or now()
     existing = await attempts.find_one({"user_id": u["id"], "$or": [{"start_key": start_key}, {"start_request_keys": start_key}]}, {"id": 1, "parent_attempt": 1, "retry_fingerprint": 1})
     if existing:
         if existing.get("parent_attempt") != id or (existing.get("retry_fingerprint") and existing["retry_fingerprint"] != retry_hash):
@@ -655,7 +656,7 @@ async def retry(id: str, data: dict, u=Depends(current)):
             'answer_history_version': 1,
             'solution_events_version': 1,
             'solution_opened': [],
-            "started_at": now(),
+            "started_at": started,
             "deadline": 0,
         }
     )

@@ -302,13 +302,17 @@ async def update_config(sid: str, body: SeriesConfig, u=Depends(owner)):
             moved += 1
         else:
             nw = window(s['series_date'], new)
-            await sets.update_one({'id': s['id']}, {'$set': {'series_window': nw, 'start_at': nw['opens_at'], 'end_at': nw['closes_at']}, '$inc': {'revision': 1}})
+            # Only the paper as it was read: a paper changed meanwhile is never overwritten.
+            done = await sets.update_one({'id': s['id'], 'series_id': sid, 'series_date': s['series_date'], 'revision': s.get('revision')},
+                                         {'$set': {'series_window': nw, 'start_at': nw['opens_at'], 'end_at': nw['closes_at']}, '$inc': {'revision': 1}})
+            if not done.matched_count:
+                raise HTTPException(409, 'A paper in this series changed while saving. Reload and save again.')
     for m in await db.tejas_book_mocks.find({'series_date': {'$nin': [None, '']}, 'set_id': None, **mock_scope(cfg)}, {'_id': 1, 'series_date': 1}).to_list(5000):
         if m['series_date'] not in keep:
-            await db.tejas_book_mocks.update_one({'_id': m['_id']}, {'$set': {'series_date': None, 'series_id': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
+            await db.tejas_book_mocks.update_one({'_id': m['_id'], 'series_date': m['series_date'], 'set_id': None}, {'$set': {'series_date': None, 'series_id': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
             moved += 1
         else:
-            await db.tejas_book_mocks.update_one({'_id': m['_id']}, {'$set': {'release_at': window(m['series_date'], new)['opens_at']}})
+            await db.tejas_book_mocks.update_one({'_id': m['_id'], 'series_date': m['series_date'], 'set_id': None}, {'$set': {'release_at': window(m['series_date'], new)['opens_at']}})
     await series.update_one({'_id': sid}, {'$set': change})
     await audit(u['id'], 'Test series settings changed', sid, ', '.join(f'{k}={v}' for k, v in change.items()))
     note = f" {moved} paper{'s' if moved != 1 else ''} lost {'their' if moved != 1 else 'its'} day and can be given a new one." if moved else ''

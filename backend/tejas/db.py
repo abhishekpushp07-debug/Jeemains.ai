@@ -1,7 +1,8 @@
-import os, time, uuid
+import logging, os, time, uuid
 from datetime import datetime
-from motor.motor_asyncio import AsyncIOMotorClient
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection, AsyncIOMotorDatabase
 from fastapi import HTTPException
+from pymongo.errors import PyMongoError
 from .runtime import DB_POOL, DB_WAIT_MS
 from pymongo.write_concern import WriteConcern
 
@@ -80,7 +81,32 @@ async def audit(actor, action, resource, detail=""):
     )
 
 
+INDEX_PROBLEMS = []
+
+
+class _Safe:
+    """Index builds never stop the server from starting. A failed one is logged and shown in the nightly data check."""
+    def __init__(self, target):
+        self._t = target
+
+    def __getattr__(self, name):
+        value = getattr(self._t, name)
+        return _Safe(value) if isinstance(value, (AsyncIOMotorCollection, AsyncIOMotorDatabase)) else value
+
+    def __getitem__(self, name):
+        return _Safe(self._t[name])
+
+    async def create_index(self, keys, **options):
+        try:
+            return await self._t.create_index(keys, **options)
+        except PyMongoError as e:
+            INDEX_PROBLEMS.append({'collection': self._t.name, 'keys': str(keys), 'error': type(e).__name__, 'detail': str(e)[:200]})
+            logging.getLogger(__name__).error('Index on %s %s was not built: %s', self._t.name, keys, e)
+
+
 async def indexes():
+    g = globals()
+    db, users, sessions, sets, attempts, files, jobs, audits = (_Safe(g[n]) for n in ('db', 'users', 'sessions', 'sets', 'attempts', 'files', 'jobs', 'audits'))
     await db.tejas_books.create_index([('owner_id', 1), ('created_at', -1)])
     await db.tejas_book_parts.create_index([('book_id', 1), ('number', 1)], unique=True)
     await db.tejas_book_pages.create_index([('book_id', 1), ('number', 1)], unique=True)

@@ -62,6 +62,8 @@ def identity(a):
 
 async def record(a,ledger):
     if a.get('mode')!='practice' or a.get('status')!='completed' or not ledger:return False
+    # Owner and reviewer practice runs are checks, not students: they never enter student statistics.
+    if await db.tejas_users.find_one({'id':a['user_id']},{'_id':1}):return False
     if a.get('competition_end'):
         stamp = await clocked_one(attempts, {'id': a['id'], 'user_id': a['user_id']}, {'_id': 0, 'competition_end': 1})
         if not stamp or stamp.get('competition_end', 0) > stamp['_database_now']: return False
@@ -83,6 +85,15 @@ async def record(a,ledger):
     await db.tejas_cohorts.update_one({'id':cohort},{'$set':{'dirty':True,'generation':str(uuid.uuid4()),'set_id':a['set_id'],'version':a['version'],'rules':a['rules'],'pack_id':a.get('pack_id')},'$setOnInsert':{'created_at':now()}},upsert=True)
     await attempts.update_one({'id':a['id']},{'$set':{'cohort_indexed':True}})
     return True
+
+async def remove_staff_entries():
+    """One-time clean-up: staff practice runs recorded before the rule above leave student statistics, which rebuild on their next read."""
+    staff=await db.tejas_users.distinct('id')
+    cohorts=await db.tejas_cohort_entries.distinct('cohort_id',{'user_id':{'$in':staff}})
+    gone=(await db.tejas_cohort_entries.delete_many({'user_id':{'$in':staff}})).deleted_count
+    if cohorts:
+        await db.tejas_cohorts.update_many({'id':{'$in':cohorts}},{'$set':{'dirty':True,'generation':str(uuid.uuid4())}})
+    return {'staff_entries_removed':gone,'statistics_rebuilt':len(cohorts)}
 
 async def refresh(job):
     from .jobs import require_lease
@@ -154,6 +165,7 @@ async def read(id:str,bg:BackgroundTasks,score_version:str='original',u=Depends(
     if retry:
         a=await owned(a['parent_attempt'],u)
     if a.get('mode')!='practice':return CohortResponse(state='unavailable',reason='This peer comparison is for original practice attempts; competition standings remain separate.')
+    if u.get('access_type')!='unverified_phone':return CohortResponse(state='unavailable',reason='Staff practice attempts are kept out of student statistics, so they have no peer rank.')
     if not a.get('ledger'):return CohortResponse(state='preparing',reason='Your frozen scoring ledger is still being prepared.')
     if not a.get('cohort_indexed'):await record(a,a['ledger'])
     cid=identity(a);state=await db.tejas_cohorts.find_one({'id':cid}) or {}

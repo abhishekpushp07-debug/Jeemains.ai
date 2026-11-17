@@ -1,6 +1,7 @@
-import time
+import asyncio, time
+from collections import deque
 from .contracts import error_response
-from .runtime import INFLIGHT_LIMITS
+from .runtime import INFLIGHT_LIMITS, ADMISSION_WAIT
 
 BUCKETS = (0.005, 0.025, 0.1, 0.3, 1.0, 3.0, 10.0)
 
@@ -27,11 +28,48 @@ class AdmissionGate:
     def __init__(self, app, owner):
         self.app = app
         self.started = time.monotonic()
-        self.lanes = {name: {'limit': limit, 'in_flight': 0, 'peak': 0, 'admitted': 0,
+        self.lanes = {name: {'limit': limit, 'in_flight': 0, 'peak': 0, 'admitted': 0, 'waited': 0,
                             'rejected': 0, 'completed': 0, 'failed': 0,
                             'response_bytes': 0, 'duration_buckets': [0] * (len(BUCKETS) + 1)}
                       for name, limit in INFLIGHT_LIMITS.items()}
+        self.waiting = {name: deque() for name in INFLIGHT_LIMITS}
         owner.state.admission = self
+
+    async def wait_slot(self, name, lane):
+        """A short, bounded waiting line: a burst of sign-ins waits a few seconds for a free slot instead of being turned away."""
+        seconds, queue = ADMISSION_WAIT.get(name, 0), self.waiting[name]
+        if not seconds or len(queue) >= lane['limit'] * 64:
+            return False
+        turn = asyncio.get_running_loop().create_future()
+        queue.append(turn)
+        try:
+            await asyncio.wait_for(turn, seconds)
+            return True
+        except asyncio.TimeoutError:
+            # The slot may have been handed over at the very moment the wait ran out.
+            return turn.done() and not turn.cancelled()
+        except BaseException:
+            if turn.done() and not turn.cancelled():
+                self.give_back(name, lane)
+            raise
+        finally:
+            try:
+                queue.remove(turn)
+            except ValueError:
+                pass
+
+    def hand_over(self, name):
+        queue = self.waiting[name]
+        while queue:
+            turn = queue.popleft()
+            if not turn.done():
+                turn.set_result(True)
+                return True
+        return False
+
+    def give_back(self, name, lane):
+        if not self.hand_over(name):
+            lane['in_flight'] -= 1
 
     def snapshot(self):
         return {'scope': 'THIS_PROCESS_ONLY', 'capacity_qualified': False,
@@ -48,11 +86,14 @@ class AdmissionGate:
             return await self.app(scope, receive, send)
         lane = self.lanes[name]
         if lane['in_flight'] >= lane['limit']:
-            lane['rejected'] += 1
-            response = error_response('This service is busy. Your saved work is safe; retry shortly.', 503, 'capacity_busy')
-            response.headers['Retry-After'] = '2'
-            return await response(scope, receive, send)
-        lane['in_flight'] += 1
+            if not await self.wait_slot(name, lane):
+                lane['rejected'] += 1
+                response = error_response('This service is busy. Your saved work is safe; retry shortly.', 503, 'capacity_busy')
+                response.headers['Retry-After'] = '2'
+                return await response(scope, receive, send)
+            lane['waited'] += 1
+        else:
+            lane['in_flight'] += 1
         lane['admitted'] += 1
         lane['peak'] = max(lane['peak'], lane['in_flight'])
         started = time.monotonic()
@@ -65,7 +106,7 @@ class AdmissionGate:
             if released:
                 return
             released = True
-            lane['in_flight'] -= 1
+            self.give_back(name, lane)
             lane['completed'] += 1
             lane['failed'] += int(status >= 500)
             elapsed = (finished or time.monotonic()) - started

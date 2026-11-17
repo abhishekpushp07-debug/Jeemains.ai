@@ -97,7 +97,8 @@ async def signup(data: PhoneSignupPayload, request: Request, response: Response)
     if await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 1}):
         raise HTTPException(409, 'This number already has an account. Sign in, or use Forgot PIN to set a new PIN.')
     stamp = now()
-    profile = PhoneProfile.from_mongo({'_id': uid(), 'id': uid(), 'phone': phone,
+    pid = uid()
+    profile = PhoneProfile.from_mongo({'_id': pid, 'id': pid, 'phone': phone,
         'pin_hash': await run_in_threadpool(hash_pin, data.pin), 'created_at': stamp,
         'consent_at': stamp, 'last_seen_at': stamp})
     try:
@@ -130,7 +131,8 @@ async def replace_pin(u, phone, new_pin, response, action, extra=None):
 
 async def live_paper_guard(user_id, what):
     """No PIN change while this student's live ranked paper (series day or live exam) is running."""
-    t = now()
+    from .canonical import database_now
+    t = await database_now()
     if await db.tejas_attempts.find_one({'user_id': user_id, 'status': 'active', 'competition_end': {'$gt': t},
                                          '$or': [{'deadline': 0}, {'deadline': {'$gt': t}}]}, {'_id': 1}):
         raise HTTPException(409, f'A live ranked paper is running on this number. {what} works again after that paper ends.')
