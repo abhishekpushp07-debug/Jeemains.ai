@@ -51,8 +51,10 @@ import { isResultLocked, unlockResult } from '../components/mission/gate';
 import { ResultSparkle } from '../components/results/ResultSparkle';
 export default function Results() {
   const { id } = useParams();
+  return <ResultsGate key={id} id={id} />;
+}
+function ResultsGate({ id }) {
   const [locked, setLocked] = useState(() => isResultLocked(id));
-  useEffect(() => { setLocked(isResultLocked(id)); }, [id]);
   if (locked) return <ShareGate onOpen={() => { unlockResult(id); setLocked(false); }} />;
   return <ResultsView />;
 }

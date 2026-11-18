@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 199: tested the new Rank (6 tools), Dream, Mission, Share gate and Result sparkle features. Backend: new pytest file with 23 tests, all passing (public rank endpoints including PDFs, 422 validation, 401 on auth-only endpoints when signed out, and on the bridge: mission/me, /api/j visit counting that ignores curl and does not double-count, celebration, dream cheered). Frontend: Playwright runs on desktop 1920, mobile 390 and dark mode, signed out and signed in through the bridge. Every requested flow worked with no page errors. Problems found: (1) the JEE and COMEDK seat tabs and heading show the capped list size (50) instead of the real reachable count; the native app shows that count. (2) College search matches only the exact phrase, so 'RV' or 'RVCE' finds nothing ('R V' works). (3) In College vs college, colleges added after the first one are not ticked. Plus a few design nits.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/dream/cheered", "issue": "When signed out, a body with an empty ids list returns 422 instead of 401, because validation runs before the auth check. A valid body returns 401 as expected."},
+      {"endpoint": "POST /api/rank/predict, /api/rank/comedk", "issue": "'counts' and 'total' are capped at 50 (the size of the shown list), while 'reach' has the real number (e.g. 180 marks: reach.all=655, counts.all=50). The frontend uses counts/total, see frontend issue."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CollegePredictor segment tabs + heading, ComedkPanel area tabs + heading", "issue": "Tabs read All 50 / NIT 50 / IIIT 50 / GFTI 50 and the heading says '50 seats aapki pahunch mein', even when 655 seats are reachable. For COMEDK the card says 877/880 reachable but the heading says 50. The native app (SeatList.tsx line 62) uses data.reach?.[s] ?? data.counts[s] and labels the list 'Top N'. Fix: use data.reach for the tab badges and reword the heading (e.g. 'Top 50 of 655').", "selector": "[data-testid^=cp-seg-], [data-testid^=ck-area-]", "priority": "MEDIUM"},
+      {"component": "CollegeSearch (TargetMarks.js line 22)", "issue": "Matches the whole query as one substring, so 'RV' or 'RVCE' finds nothing (the college is named 'R V College of Engineering') and 'trichy nit' finds nothing. The native app (CollegeSearch.tsx) matches each word separately and shows up to 60 hits; the website shows 8. Suggest word-wise matching plus short aliases (RVCE, MSRIT, BMSCE).", "selector": "[data-testid=tm-ck-search-input], [data-testid=cmp-col-search-input]", "priority": "MEDIUM"},
+      {"component": "Compare.js usePick", "issue": "Only the first item ever added is auto-ticked. After adding 3 colleges in 'College vs college', only one is ticked and the button reads '2 ya 3 college chuno', so the user has to tick the rest by hand. Newly added items should be auto-ticked up to 3. Also, if the user unticks everything, the next list change silently re-ticks the first 3.", "selector": "[data-testid^=cmp-col-pick-]", "priority": "LOW"},
+      {"component": "CollegePredictor Pager", "issue": "Moving to page 2 scrolls to the very top of the page (scrollY 0, above the tool tiles) instead of the top of the seat list.", "selector": "[data-testid=cp-page-2]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "College compare table", "issues": ["BITSAT column shows 'BITS Pilani' as both title and subtitle.", "Fee row is '—' for BITS and NIT columns (no fee data); consider hiding the row or saying 'Data nahi'."]},
+      {"screen": "Mission share card (gate + mission page)", "issues": ["The small 'DOST' label under the number in the gold medal of the 'THANK YOU, ARJUN' box is gold on gold and nearly unreadable."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_rank_mission_dream199.py", "/app/test_reports/pytest/pytest_results199.xml"],
+  "action_items": [
+    "Use data.reach for the JEE segment and COMEDK area tab counts and fix the heading wording (app parity).",
+    "Make CollegeSearch match word by word (app parity) and add short aliases such as RVCE.",
+    "Auto-tick newly added compare items up to 3 in usePick.",
+    "Optional: scroll the pager to the list instead of the window top; fix the BITS duplicate subtitle; improve 'DOST' contrast in the medal."
+  ],
+  "critical_code_review_comments": [
+    "Results.js: useState(() => isResultLocked(id)) plus a sync in useEffect means that on an in-app id change one render uses the previous id's lock state. ResultsView can briefly mount (and fetch) for a locked result. Compute locked from id during render, or key the component by id.",
+    "MissionCard.useMissionShare: if the card picture is not drawn yet (on slow phones toBlob can take more than 700ms), share() waits for draw() before calling window.open or navigator.share. That loses the user's tap, so mobile Safari can block the popup or share sheet. window.open is called with 'noopener', so a blocked popup is never detected, and the gate unlocks after 3s anyway.",
+    "The share gate is client-side only (a localStorage key). Clearing storage or using another device skips it. That is fine for a nudge, just noting it.",
+    "Bottom-tab Rapid Fire is a non-link div with pointer-events:auto; it does not navigate, so the requirement is met (it is not pointer-events:none as the brief says)."
+  ],
+  "updated_files": ["/app/backend/tests/test_rank_mission_dream199.py"],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "~92% (all requested flows work; 3 UX/parity bugs)"},
+  "test_credentials": "No permanent credentials. Used the disposable bridge (tests/analysis_bridge196.py on 127.0.0.1:8773, cookies from /tmp/uibridge196/bridge.json, user 'hero').",
+  "seed_data_creation": "None in the preview DB. On the bridge DB (dropped automatically): 5 JEE dreams for hero (1 removed), cheered id 'TEST_x', and a few /api/j visit rows from the visit-count test.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 6 Rank tiles work signed out, URL ?tool= switches. Verified: rp (marks 400 shows error, 180 shows card, levels recompute, COMEDK sources, handover to college); pr (97.5 OBC PwD shows card and 3 marks, handover); cp (chart row runs the predictor, marks/category/female/state/branches, segment tabs, pager, near list, sheet with ladder/quota chips/table/official links, PDF download, WhatsApp popup); BITSAT (cards, history toggle, rest list uses bt-rest-N testids, PDF); COMEDK (area tabs, sheet ladder, rank mode, PDF); Target (JEE trichy rows, profile chip changes values, rounds toggle, PDF; COMEDK 'R V'; BITSAT campus filter 50 to 15); Compare (branches/colleges tables, persistence, remove, empty state, go button); Dream (signed out: message and dream-signin; signed in: add, max 5 message, remove, persists, home-dream). Mission page, share gate (WhatsApp, then thanks, then unlock about 3s later; 'more' path downloads PNG and unlocks; back keeps the lock; reopening shows no gate) and sparkle (banner '40%+', burst once per browser, close) all work. No overflow at 390px. Dark mode is readable. Branch picker sheet clicks need ~1s wait for the slide-in animation.",
+  "rca of the issue": "Seat counts: the frontend reads data.counts (the size of the shown list, capped at 50) instead of data.reach (the real reachable count) that the backend already returns. Search: substring match on the whole query instead of the app's word-by-word match. Compare ticks: usePick keeps the existing picks when the list grows and only falls back to the first 3 when nothing is ticked."
+}

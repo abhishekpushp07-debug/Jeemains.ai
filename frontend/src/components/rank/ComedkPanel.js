@@ -63,12 +63,13 @@ export function ComedkPanel({ handover }) {
     {r && query ? <div className="rk-stack rk-reveal">
       <RankCard testId="ck-card" badge="COMEDK 2026" eyebrow="EXPECTED RANK" big={fmtRange(r.rank)} rule={`${r.in_reach} / ${r.total} SEATS PAHUNCH MEIN`} summary={r.summary} serial={fmt(r.mid)} of={fmt(r.candidates)} />
       <div className="rk-segs" role="tablist">{AREAS.map(([k, l]) => <button key={k} type="button" role="tab" aria-selected={area === k} className={'rk-seg' + (area === k ? ' is-on' : '')}
-        onClick={() => { setArea(k); setPage(1); }} data-testid={`ck-area-${k}`}>{l}<b>{data.counts?.[k] ?? 0}</b></button>)}</div>
-      <Heading title={data.total ? `${data.total} seats aapki pahunch mein` : 'Is filter mein koi seat pahunch mein nahi'} sub="Closing rank = 2026 ke aakhri round tak, GM seats." />
+        onClick={() => { setArea(k); setPage(1); }} data-testid={`ck-area-${k}`}>{l}<b>{fmt(data.reach?.[k] ?? data.counts?.[k] ?? 0)}</b></button>)}</div>
+      <Heading title={data.total ? `${fmt(data.reach?.[area] ?? data.total)} seats aapki pahunch mein` : 'Is filter mein koi seat pahunch mein nahi'}
+        sub={[data.total && (data.reach?.[area] ?? 0) > data.total ? `Sabse achhi ${data.total} yahan, best pehle.` : null, 'Closing rank = 2026 ke aakhri round tak, GM seats.'].filter(Boolean).join(' ')} />
       {data.items.length ? <TapHint testId="ck-hint" viewed={views.viewed.size} /> : null}
       <div className="rk-list" data-testid="ck-list">{data.items.map((c, i) => <ComedkCard key={c.id} c={c} n={page === 1 && i < 3 ? i + 1 : null} first={i === 0} testId={`ck-seat-${(page - 1) * 25 + i}`} views={views}
         onOpen={() => setSheet({ ...query, code: c.code, course: c.cc })} />)}</div>
-      <Pager page={page} pages={data.pages} onPage={p => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }} prefix="ck" />
+      <Pager page={page} pages={data.pages} onPage={p => { setPage(p); requestAnimationFrame(() => document.querySelector('[data-testid="ck-list"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' })); }} prefix="ck" />
       {data.near?.length ? <><Heading title="Thoda aur mehnat, aur ye bhi" sub="Ye seats aapki rank se thoda pehle band hui." />
         <div className="rk-list" data-testid="ck-near">{data.near.map((c, i) => <ComedkCard key={'n' + c.id} c={c} testId={`ck-near-${i}`} views={views} onOpen={() => setSheet({ ...query, code: c.code, course: c.cc })} />)}</div></> : null}
       <div className="rk-actions"><PdfButton path="/comedk" body={{ ...query, area }} filename="JEELIVE-COMEDK-colleges.pdf" testId="ck-pdf" /><WaButton text={share} testId="ck-share" /></div>

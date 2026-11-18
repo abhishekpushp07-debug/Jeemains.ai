@@ -16,14 +16,19 @@ export function TargetMarks() {
   </>;
 }
 
-/** Type a college's short name, full name or city; up to 8 matches. */
+/** Every typed word must match the college's short name, full name, city or a common alias; up to 20 matches. */
+const ALIAS = { rvce: 'r v college', msrit: 'ramaiah', bmsce: 'b m s college', bmsit: 'b m s institute', dsce: 'dayananda sagar college', pesu: 'pes university', nmit: 'nitte meenakshi',
+  nitk: 'surathkal', trichy: 'tiruchirappalli', mnnit: 'allahabad', vnit: 'nagpur', mnit: 'jaipur', manit: 'bhopal', svnit: 'surat', dtu: 'delhi technological', nsut: 'netaji subhas', iiitd: 'indraprastha' };
+const squash = t => t.toLowerCase().replace(/[.\-,()]/g, ' ').replace(/\s+/g, ' ');
 export function CollegeSearch({ items, onPick, testId, placeholder = 'College ka naam ya shehar (jaise NIT Trichy, Surathkal)' }) {
   const [q, setQ] = useState('');
+  const index = useMemo(() => items.map(c => { const hay = squash(`${c.short} ${c.name} ${c.city || ''} ${c.state || ''}`); return [c, hay, hay.replace(/ /g, '')]; }), [items]);
   const hits = useMemo(() => {
-    const t = q.trim().toLowerCase();
-    if (!t) return [];
-    return items.filter(c => `${c.short} ${c.name} ${c.city || ''}`.toLowerCase().includes(t)).slice(0, 8);
-  }, [q, items]);
+    const words = squash(q).trim().split(' ').filter(Boolean);
+    if (!words.length) return [];
+    const ok = (hay, flat, w) => hay.includes(w) || flat.includes(w) || (ALIAS[w] && hay.includes(ALIAS[w]));
+    return index.filter(([, hay, flat]) => words.every(w => ok(hay, flat, w))).slice(0, 20).map(([c]) => c);
+  }, [q, index]);
   return <div className="rk-search" data-testid={testId}>
     <label className="rk-search-box"><Search size={18} /><input value={q} onChange={e => setQ(e.target.value)} placeholder={placeholder} aria-label="College dhoondo" data-testid={testId + '-input'} />
       {q ? <button type="button" onClick={() => setQ('')} aria-label="Clear" data-testid={testId + '-clear'}><X size={16} /></button> : null}</label>

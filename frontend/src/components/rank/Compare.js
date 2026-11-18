@@ -1,6 +1,6 @@
 // College compare: "Colleges" puts 2-3 whole colleges side by side (branches, seats, fee, easiest / toughest / CS seat);
 // "Branches" compares 2-3 saved branch seats round by round. Both lists stay in this browser.
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Trash2 } from 'lucide-react';
 import { fmt, getColleges, rank, rupees } from './rankApi';
 import { Chip, Err, Go, Heading, Notes, Panel, PdfButton, Switch } from './RankUi';
@@ -16,10 +16,15 @@ export function Compare({ onTool }) {
   </>;
 }
 
-/** Keeps up to 3 ticked ids that still exist in the list; starts with the first ones. */
+/** Ticks up to 3 items; newly added items are ticked while there is room, removed ones drop out. */
 function usePick(list) {
   const [pick, setPick] = useState(() => list.slice(0, 3).map(i => i.id));
-  useEffect(() => { setPick(p => { const kept = p.filter(id => list.some(i => i.id === id)); return kept.length ? kept : list.slice(0, 3).map(i => i.id); }); }, [list]);
+  const known = useRef(new Set(list.map(i => i.id)));
+  useEffect(() => {
+    const fresh = list.filter(i => !known.current.has(i.id)).map(i => i.id);
+    known.current = new Set(list.map(i => i.id));
+    setPick(p => { const kept = p.filter(id => list.some(i => i.id === id)); return [...kept, ...fresh.filter(id => !kept.includes(id))].slice(0, 3); });
+  }, [list]);
   const flip = id => setPick(p => (p.includes(id) ? p.filter(x => x !== id) : p.length >= 3 ? p : [...p, id]));
   return [pick, flip];
 }
@@ -38,13 +43,13 @@ const PickList = ({ list, pick, flip, onRemove, prefix }) => <ul className="rk-p
 
 function Table({ cols, rows, testId }) {
   return <div className="rk-table-wrap" data-testid={testId}><table className="rk-table rk-compare">
-    <thead><tr><th />{cols.map((c, i) => <th key={i} data-testid={`${testId}-col-${i}`}><b>{c.missing ? 'Data nahi mila' : c.title}</b>{c.name ? <small>{c.name}</small> : null}</th>)}</tr></thead>
+    <thead><tr><th />{cols.map((c, i) => <th key={i} data-testid={`${testId}-col-${i}`}><b>{c.missing ? 'Data nahi mila' : c.title}</b>{c.name && c.name !== c.title ? <small>{c.name}</small> : null}</th>)}</tr></thead>
     <tbody>{rows.map(([label, get]) => <tr key={label}><th>{label}</th>{cols.map((c, i) => <td key={i}>{c.missing ? '—' : get(c) ?? '—'}</td>)}</tr>)}</tbody>
   </table></div>;
 }
 
 const side = s => (s ? <span className="rk-cell"><b>{s.branch}</b><small>{s.marks} marks · {s.label} {fmt(s.close)} {s.rank_label}</small></span> : null);
-const fee = c => (c.fee ? <span className="rk-cell"><b>{Array.isArray(c.fee) ? (c.fee[0] === c.fee[1] ? rupees(c.fee[0]) : `${rupees(c.fee[0])} – ${rupees(c.fee[1])}`) : rupees(c.fee)}</b>{c.fee_note ? <small>{c.fee_note}</small> : null}</span> : null);
+const fee = c => (c.fee ? <span className="rk-cell"><b>{Array.isArray(c.fee) ? (c.fee[0] === c.fee[1] ? rupees(c.fee[0]) : `${rupees(c.fee[0])} – ${rupees(c.fee[1])}`) : rupees(c.fee)}</b>{c.fee_note ? <small>{c.fee_note}</small> : null}</span> : (c.fee_note || 'Fee data nahi'));
 const COLLEGE_ROWS = [
   ['Kahan', c => c.place], ['Type', c => c.kind], ['Branches', c => c.branches], ['Seats', c => (c.seats ? <span className="rk-cell"><b>{fmt(c.seats)}</b><small>{c.seats_label}</small></span> : null)],
   ['Fee / saal', fee], ['Sabse aasaan branch', c => side(c.easiest)], ['Sabse mushkil branch', c => side(c.toughest)],
@@ -68,7 +73,7 @@ function CollegesCompare() {
     if (!cols) return [];
     if (exam === 'jee') return cols.jee.map(c => ({ key: 'j' + c.inst, cid: String(c.inst), ...c }));
     if (exam === 'comedk') return cols.comedk.map(c => ({ key: 'c' + c.code, cid: c.code, ...c }));
-    return cols.bitsat.map(c => ({ key: 'b' + c.campus, cid: c.campus, short: c.name, name: `${c.programs} programs`, city: c.campus }));
+    return cols.bitsat.map(c => ({ key: 'b' + c.campus, cid: c.campus, short: c.name, name: `${c.campus} campus · ${c.programs} programs` }));
   }, [cols, exam]);
   const add = c => { const id = `${exam}-${c.cid}`; if (!list.some(x => x.id === id)) compareColleges.toggle({ id, exam, cid: c.cid, title: c.short, sub: `${EXAMS.find(e => e[0] === exam)[1]} · ${c.name}` }); };
   const chosen = list.filter(s => pick.includes(s.id));

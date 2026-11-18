@@ -107,7 +107,7 @@ export function useMissionShare(card, caption, onShared, ready = true) {
     setBusy(true); setNote('');
     const trip = watchReturn();
     try {
-      const out = await sendCard(file.current || await draw(), toWhatsApp, caption);
+      const out = await sendCard(file.current, toWhatsApp, caption);
       if (!out.shared) { if (onShared) setNote('Share pura nahi hua. Result dekhne ke liye ek baar share karo.'); return; }
       if (onShared && out.away) { setNote('WhatsApp par bhej kar wapas aao, result yahin khul jaayega.'); await trip.back(); }
       setNote(out.note);

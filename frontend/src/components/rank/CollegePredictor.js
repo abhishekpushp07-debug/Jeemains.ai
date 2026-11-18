@@ -99,12 +99,13 @@ function JeeColleges({ handover }) {
         smalls={[r.cat_rank && { label: r.cat_rank.label, value: fmtRange(r.cat_rank.range), testId: 'cp-card-cat' }, r.pwd_rank && { label: r.pwd_rank.label, value: fmtRange(r.pwd_rank.range), testId: 'cp-card-pwd' }].filter(Boolean)}
         summary={r.summary} serial={fmt((r.crl[0] + r.crl[1]) / 2)} of={meta ? fmt(meta.candidates) : null} />
       <div className="rk-segs" role="tablist">{SEGMENTS.map(([k, l]) => <button key={k} type="button" role="tab" aria-selected={segment === k} className={'rk-seg' + (segment === k ? ' is-on' : '')}
-        onClick={() => { setSegment(k); setPage(1); }} data-testid={`cp-seg-${k}`}>{l}<b>{data.counts?.[k] ?? 0}</b></button>)}</div>
-      <Heading title={data.total ? `${data.total} seats aapki pahunch mein` : 'Is filter mein koi seat pahunch mein nahi'} sub={data.note} />
+        onClick={() => { setSegment(k); setPage(1); }} data-testid={`cp-seg-${k}`}>{l}<b>{fmt(data.reach?.[k] ?? data.counts?.[k] ?? 0)}</b></button>)}</div>
+      <Heading title={data.total ? `${fmt(data.reach?.[segment] ?? data.total)} seats aapki pahunch mein` : 'Is filter mein koi seat pahunch mein nahi'}
+        sub={[data.total && (data.reach?.[segment] ?? 0) > data.total ? `Sabse achhi ${data.total} yahan, best pehle.` : null, data.note].filter(Boolean).join(' ')} />
       {data.items.length ? <TapHint testId="cp-hint" viewed={views.viewed.size} /> : null}
       <div className="rk-list" data-testid="cp-list">{data.items.map((s, i) => <SeatCard key={`${s.prog}-${s.path}`} s={s} n={page === 1 && i < 3 ? i + 1 : null} y25={meta?.y25_label}
         testId={`cp-seat-${(page - 1) * 25 + i}`} views={views} first={i === 0} onOpen={() => setSheet({ ...query, inst: s.inst, prog: s.prog, quota: s.quota, gender: s.gender, seat: s.seat })} />)}</div>
-      <Pager page={page} pages={data.pages} onPage={p => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); }} prefix="cp" />
+      <Pager page={page} pages={data.pages} onPage={p => { setPage(p); requestAnimationFrame(() => document.querySelector('[data-testid="cp-list"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' })); }} prefix="cp" />
       {data.near?.length ? <><Heading title="Thoda aur mehnat, aur ye bhi" sub="Ye seats aapki rank se thoda pehle band hui. Kuch marks aur, aur ye aapki." />
         <div className="rk-list" data-testid="cp-near">{data.near.map((s, i) => <SeatCard key={`n-${s.prog}-${s.path}`} s={s} y25={meta?.y25_label} testId={`cp-near-${i}`} views={views}
           onOpen={() => setSheet({ ...query, inst: s.inst, prog: s.prog, quota: s.quota, gender: s.gender, seat: s.seat })} />)}</div></> : null}
