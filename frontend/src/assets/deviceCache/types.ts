@@ -7,10 +7,6 @@ export type DeviceStore = {
   remove: (scope: string, key: string) => Promise<void>;
   clear: () => Promise<void>;
 };
-export function serialOperations() {
-  let tail: Promise<unknown> = Promise.resolve();
-  return <T>(fn: () => Promise<T>): Promise<T> => { const job = tail.then(fn, fn); tail = job.catch(() => {}); return job; };
-}
 /** `at`: when this copy was downloaded (ms). The website sends no validator for paper images, so a recent copy is reused. */
 export type SavedImage = { mime: string; etag: string; modified: string; bytes: Uint8Array; at?: number };
 export function packImage(image: SavedImage) {

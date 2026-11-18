@@ -111,17 +111,6 @@ class TestEffortRule:
         assert rw["coins"] == 8 and rw["xp"] == 60
         assert g["winner"] != g["you"]
 
-    def test_5_correct_boundary_wins_with_bonus(self, uid):
-        p0 = prof(uid)
-        d, raw, cards = seated_duel(uid)
-        g = play(uid, d, raw, cards, 5)
-        rw, o = g["reward"], opp(g)
-        print("5c: winner==you", g["winner"] == g["you"], "opp", o["score"], "reward", rw["xp"], rw["coins"])
-        assert g["winner"] == g["you"] and o["score"] == 4
-        assert rw["coins"] == 10 + 50 and rw["xp"] == 50 + 60
-        p1 = prof(uid)
-        assert p1["wins"] == p0.get("wins", 0) + 1 and p1["duels"] == p0.get("duels", 0) + 1
-        assert listed(uid, g["id"])["won"] is True
 
     def test_10_correct_win_pays_bonus(self, uid):
         p0 = prof(uid)

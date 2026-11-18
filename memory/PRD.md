@@ -1,5 +1,13 @@
 # JEELIVE.AI Native App — PRD
 
+## Deep audit round 2 (18 Nov 2026) — load test, real mock journey, cleanup (DONE)
+- Report: `/app/memory/AUDIT_2026_06.md` section "Deep audit — round 2". Load: 1,000 users app mix 0 errors (p95 46 ms), 1,000 Rapid Fire matches 0 errors, mock proxy 1,000 users 0 errors (00:00 storm 1.4 s). Public preview URL: Cloudflare challenges one machine at 100 users (not our server).
+- Fixed: `backend/client_ip.py` — student address = X-Forwarded-For entry 2 before the last (edge + balancer); used by login_guard (8 per number, 100 per address / 15 min), pin_reset, mission_links, website proxy header. Sweep closes archived-exam matches. Socket double-close guarded. Result "2 min 53 sec used". iOS ITSAppUsesNonExemptEncryption false.
+- Tests: obsolete suites removed/updated; conftest skips ffmpeg tests without ffmpeg and Cup Night tests after 8 pm IST. 506 pass, 0 fail.
+- New load tool `backend/tools/loadtest_app.py` (TEST-loadapp-* grants, `--cleanup`). Never edit files under backend/ during a load test: the preview backend runs with --reload and restarts.
+- QA account: one more real attempt `0a7b71fc-648f-4d36-b5b6-c2b182b7c031` (JEE Main PYQ 21 Jan 2026 S2, 5/300, submitted). Do not start more.
+- Open (needs owner/Emergent): images via CDN signed links (website), Cloudflare challenge exemption for /api/*, production servers (8-10 × 4 cores + Mongo 4-8 cores), share gate server-side, account deletion.
+
 ## Audit June 2026 (5 phases + DB audit) — report only, fixes waiting for approval
 - Full findings + numbers: `/app/memory/AUDIT_2026_06.md` (reports iteration_97/98/99). User rule: full list first, then fixes that really hold at 1 lakh students in one mock.
 - Built on user request during the audit: Home promo replaced by the Dream College Meter; meter = purple outside (header band + border + glow), deep black inside, rows royal blue/teal alternating with a diamond on every row; Rank tab Dream panel moved into a 6th tile DREAM COLLEGE (`rank-tool-dream`, dark violet metal jewel `violet`, accent `dream`), tiles 3 rows × 2. Result screen + Home wired to Dream; Rank tab missing import fixed.

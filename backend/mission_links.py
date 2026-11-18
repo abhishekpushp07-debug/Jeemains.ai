@@ -17,6 +17,8 @@ from fastapi import APIRouter, Header, Request
 from fastapi.responses import RedirectResponse
 from pymongo.errors import DuplicateKeyError
 
+from client_ip import client_ip
+
 SITE = "https://jeelive.ai"
 ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"  # no 0/O, 1/I/L
 CODE = re.compile(r"^[A-Z2-9]{7}$")
@@ -71,8 +73,7 @@ def make_router(db, rf_user):
         link = await db.mission_links.find_one({"code": code}, {"_id": 0, "code": 1})
         if not link:
             return out
-        # The rightmost X-Forwarded-For hop is the one our ingress added; earlier ones are caller-controlled.
-        ip = request.headers.get("x-forwarded-for", "").split(",")[-1].strip() or (request.client.host if request.client else "")
+        ip = client_ip(request)
         device = hashlib.sha256(f"{ip}|{ua}".encode()).hexdigest()[:32]
         now = time.time()
         new = []

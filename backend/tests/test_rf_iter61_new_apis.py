@@ -170,7 +170,9 @@ async def _h2h():
 
             # counts match profile.head_to_head
             prof = (await s.get(f"/players/{friend['pid']}", headers=me["h"])).json()
-            assert prof["head_to_head"] == {"you": 2, "them": 1, "played": 3, "last": {"id": duel_ids[0], "won": True, "tie": False}}
+            h2h = prof["head_to_head"]
+            assert (h2h["you"], h2h["them"], h2h["played"]) == (2, 1, 3)
+            assert {k: h2h["last"][k] for k in ("id", "won", "tie")} == {"id": duel_ids[0], "won": True, "tie": False} and "picks" in h2h["last"]
 
             # 404 for self
             assert (await s.get(f"/players/{me['pid']}/h2h", headers=me["h"])).status_code == 404

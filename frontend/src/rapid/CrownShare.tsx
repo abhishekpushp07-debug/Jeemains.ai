@@ -1,11 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Platform, Share, StyleSheet, View, useWindowDimensions } from "react-native";
+import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import * as Clipboard from "expo-clipboard";
-import * as Sharing from "expo-sharing";
-import { captureRef } from "react-native-view-shot";
 import { useAuth } from "@/src/auth";
+import { shareCard } from "@/src/shareCard";
 import { T } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
 import { arena, fx } from "@/src/theme";
@@ -43,8 +41,8 @@ function CrownCard({ s, code, width }: { s: CrownShareInfo; code?: string; width
 }
 
 /**
- * Share the crown: a preview of the card, then the phone's share sheet with the picture (pick WhatsApp). On Android the
- * message is copied so it can be pasted as the photo's caption; iPhone sends both. The web preview sends the message.
+ * Share the crown: a preview of the card, then its photo with the message (Android build: straight into WhatsApp;
+ * iPhone: the share sheet; see src/shareCard.ts). The web preview sends the message.
  */
 export function CrownShare({ s, onBack }: { s: CrownShareInfo; onBack: () => void }) {
   const uid = useAuth().user?.id, code = useFriendCode(uid).data?.code;
@@ -55,15 +53,8 @@ export function CrownShare({ s, onBack }: { s: CrownShareInfo; onBack: () => voi
     + `${code ? `\nMy Friend Code: ${prettyCode(code)}` : ""}\nhttps://jeelive.ai`;
   const send = async () => {
     setBusy(true); setNote("");
-    try {
-      if (Platform.OS === "web") { await sendWhatsApp(caption); return; }
-      const uri = await captureRef(card, { format: "png", quality: 1, result: "tmpfile" });
-      if (Platform.OS === "ios") { await Share.share({ url: uri, message: caption }); return; }
-      await Clipboard.setStringAsync(caption);
-      setNote("Message copied. In WhatsApp, paste it as the photo’s caption.");
-      if (await Sharing.isAvailableAsync()) await Sharing.shareAsync(uri, { mimeType: "image/png", dialogTitle: "Share your crown" });
-      else await sendWhatsApp(caption);
-    } catch { setNote("Sharing could not open. Try again, or send the message only."); }
+    try { setNote((await shareCard(card, { caption, filename: "JEELIVE-Crown.png" })).note); }
+    catch { setNote("Sharing could not open. Try again, or send the message only."); }
     finally { setBusy(false); }
   };
   return <View testID="crown-share" style={styles.sheet}>

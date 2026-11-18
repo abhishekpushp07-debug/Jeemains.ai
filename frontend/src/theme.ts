@@ -359,7 +359,6 @@ export const fonts = {
   bold: "Figtree-700",
   heavy: "Figtree-800",
 };
-export const monoFonts = { regular: "RobotoMono-400", medium: "RobotoMono-500", semibold: "RobotoMono-600", bold: "RobotoMono-700" };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
 // Rounded search pills draw their own frame; drop the browser's rectangular focus outline.

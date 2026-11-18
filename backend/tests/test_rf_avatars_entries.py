@@ -42,11 +42,11 @@ class TestAvatarShop:
         r = s.get(f"{API}/shop", headers=H(uid))
         assert r.status_code == 200, r.text
         av = r.json()["avatars"]
-        assert len(av) == 16
+        assert len(av) == 18
         for a in av:
-            assert set(a.keys()) == {"id", "title", "rarity", "price"}
-            assert a["rarity"] in ("common", "rare", "epic", "legendary")
-        free = {a["id"] for a in av if a["price"] == 0}
+            assert {"id", "title", "rarity", "price"} <= set(a.keys()) <= {"id", "title", "rarity", "price", "gems"}
+            assert a["rarity"] in ("common", "rare", "epic", "legendary", "diamond")
+        free = {a["id"] for a in av if a["price"] == 0 and not a.get("gems")}  # diamond avatars have no coin price
         assert free == FREE
         paid = [a for a in av if a["price"]]
         assert len(paid) == 12 and all(300 <= a["price"] <= 2000 for a in paid)
@@ -99,7 +99,7 @@ class TestEntryEffects:
     def test_ten_entries_in_shop(self, s, uid):
         items = s.get(f"{API}/shop", headers=H(uid)).json()["items"]
         ent = {i["id"] for i in items if i["slot"] == "entry"}
-        assert ent == ENTRIES
+        assert ENTRIES <= ent  # plus the diamond-priced specials
 
     def test_buy_equip_entry(self, s, uid):
         set_coins(uid, 3000)
@@ -135,7 +135,7 @@ class TestDuelStart:
         assert r.status_code == 200, r.text
         d = r.json()
         gap = d["start_at"] - d["server_now"]
-        assert 3.0 <= gap <= 4.8, gap  # iter16+: start_at = now + 4.6 s
+        assert abs(gap - (d["entry_seconds"] + 1.0)) < 0.6, gap  # card 1 opens 1 s after the entry show
         me = [p for p in d["players"] if p["you"]][0]
         bot = [p for p in d["players"] if p["bot"]][0]
         assert me["avatar"] in ("av_photon", "av_robo") and me["entry"] == "entry_blackhole"

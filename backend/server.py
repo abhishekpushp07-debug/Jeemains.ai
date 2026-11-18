@@ -7,7 +7,7 @@ from pymongo.asynchronous.collection import AsyncCollection
 from pydantic import BaseModel, Field, BeforeValidator, ConfigDict
 from typing import Annotated, Literal, Optional, List
 from pathlib import Path
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from bson import ObjectId
 from pymongo.errors import DuplicateKeyError
 from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resolve_exam
@@ -19,6 +19,8 @@ from legal_pages import router as legal_router
 from arena_web import router as arena_web_router
 from jl_transport import UpstreamError, canonical_request, make_client
 from session_coordination import session_rotation
+import login_guard
+from client_ip import client_ip
 from rf_access import make_access_router, install_access_guard, maintenance_on
 from load_guard import ArenaBusy, InflightCounter, arena_gate, busy_response, monitor as load_monitor, raise_fd_limit, snapshot as load_snapshot
 from rapid_deck import fresh_deck
@@ -146,15 +148,6 @@ async def save_cookie_changes(sid: str, sets: dict, gone: list):
     await db.jl_jars.update_one({"sid": sid}, update, upsert=True)
 
 
-def forwarded_for(request: Request) -> str:
-    """The student's address for the website's limiter: the chain our ingress received, plus the peer we saw."""
-    chain = [p.strip() for p in request.headers.get("x-forwarded-for", "").split(",") if p.strip()]
-    peer = request.client.host if request.client else ""
-    if peer and (not chain or chain[-1] != peer):
-        chain.append(peer)
-    return ", ".join(chain[-5:])
-
-
 @api.api_route("/jl/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
 async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)):
     if not SID_RE.match(x_jl_sid):
@@ -173,10 +166,13 @@ async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
             headers[name] = request.headers[name]
     if cookies:
         headers["Cookie"] = "; ".join(f"{k}={v}" for k, v in cookies.items())
-    ip = forwarded_for(request)
+    ip = client_ip(request)  # only the verified student address: entries a caller wrote themselves are never passed on
     if ip:
         headers["X-Forwarded-For"] = ip
     body = await request.body()
+    guard, paused = await login_guard.check(db, request, path, body)
+    if paused:
+        return paused
     try:
         r = await canonical_request(http, request.method, f"{JEELIVE_API}/{path}", path=path,
                                     params=request.query_params, body=body or None, headers=headers)
@@ -184,8 +180,12 @@ async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
         return Response(json.dumps({"data": None, "error": {"code": "upstream_unreachable",
                         "message": "Connection interrupted. Your last saved work is safe. Please try again."},
                         "meta": {"api_version": "1"}}), status_code=503, media_type="application/json", headers={'Cache-Control': 'no-store', 'Vary': 'X-JL-Sid'})
+    if guard:
+        await login_guard.record(db, guard, r.status_code)
     sets, gone = cookie_changes(cookies, r.headers)
-    if sets or gone:
+    if path == "auth/logout" and 200 <= r.status_code < 300:
+        await db.jl_jars.delete_one({"sid": x_jl_sid})  # signed out: this session handle carries nothing any more
+    elif sets or gone:
         await save_cookie_changes(x_jl_sid, sets, gone)
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}
     out['Vary'] = 'X-JL-Sid'
@@ -558,7 +558,11 @@ async def sweep():
     """Closes what nobody came back to: matches left waiting or past their end (their rewards are paid now), sprints
     never finished, and cup payouts cut off by a server restart."""
     now = time.time()
-    stale = await db.rf_duels.find({"$or": [{"status": "waiting", "created_ts": {"$lt": now - 1800}}, {"status": "ready", "ends_at": {"$lt": now - 120}}]}).limit(500).to_list(500)
+    late = {"$or": [{"status": "waiting", "created_ts": {"$lt": now - 1800}}, {"status": "ready", "ends_at": {"$lt": now - 120}}]}
+    # Matches of an archived exam cannot be settled (no rewards there); close them so they never fill the batch below.
+    await db.rf_duels.update_many({"$and": [late, {"$or": [{"exam": {"$nin": list(ACTIVE_EXAMS)}}, {"exam": {"$exists": False}, "subject": "Biology"}]}]},
+                                  {"$set": {"status": "archived", "archived_ts": now}})
+    stale = await db.rf_duels.find(late).limit(500).to_list(500)
     for d in stale:
         try:
             await duel_api["settle"](d)
@@ -625,6 +629,7 @@ async def setup_database():
     await mission_indexes(db)
     await db.pin_resets.create_index([("phone", 1), ("at", -1)])
     await db.pin_resets.create_index([("ip", 1), ("at", -1)])
+    await login_guard.setup(db)
     await db.rf_duels.create_index("id", unique=True)
     await db.rf_duels.create_index("code")
     await db.rf_duels.create_index([("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])

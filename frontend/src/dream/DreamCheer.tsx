@@ -20,7 +20,7 @@ import { arena, cheer, fx, gemColors } from "@/src/theme";
 import { GoldTitle, RaisedButton } from "@/src/rapid/arena";
 import { CheerBanner, CheerLevel, Pole } from "@/src/rapid/CheerBanner";
 import { Beam, Burst, Dancer } from "@/src/rapid/CheerSquad";
-import { Confetti, Pop, Twinkles } from "@/src/rapid/juice";
+import { Confetti, Pop, rnd, Twinkles } from "@/src/rapid/juice";
 import { SQUAD_GEO, prefetchSquad, squadFrames } from "@/src/rapid/squadArt";
 import { Diamond } from "@/src/rank/Diamond";
 import { CheerWin, claimCheer, DreamExam, EXAM_NAME, FULL, useDreams } from "./store";
@@ -35,7 +35,6 @@ const SPARKLE = [gemColors.kohinoor, K.foil[1], arena.gold, fx.ice, K.glitter[1]
 const BEAMS = [gemColors.kohinoor, K.foil[1], fx.ice, arena.gold];
 // Without the track (still loading, blocked, or silent) a few effects mark the big moments instead.
 const ACCENT: Record<number, string> = { 0: "levelup", 8: "go", 16: "correct", 24: "tick", 28: "tick", 32: "combo", 40: "correct", 48: "coin", 56: "tick", 60: "win" };
-const rnd = (i: number, k: number) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
 
 /** Opens the celebration when this screen (in focus) shows a mock that crossed a dream for the first time. */
 export function DreamCheerHost({ exam, mockId }: { exam: DreamExam; mockId?: string }) {

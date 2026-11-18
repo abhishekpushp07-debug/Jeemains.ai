@@ -10,7 +10,7 @@ import { rewardsReady, useGameProfile } from "@/src/components/game";
 import { arena } from "@/src/theme";
 import { ARENA } from "@/src/arenaMode";
 import { websiteHomeUrl } from "@/src/api/client";
-import { GameIcon, GameIconName, GemColor, PhoenixDiamond, topGem } from "./Art";
+import { GameIcon, GameIconName, PhoenixDiamond } from "./Art";
 import { Badge } from "./arena";
 import { Jelly, Twinkles } from "./juice";
 import { ArenaTab, gangNotices, setArenaTab, useArenaTab, useInbox } from "./social";

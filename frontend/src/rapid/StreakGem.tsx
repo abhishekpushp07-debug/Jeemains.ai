@@ -4,7 +4,7 @@ import Animated, { Easing, ZoomIn, interpolate, runOnJS, useAnimatedStyle, useRe
 import { T, buzz } from "@/src/components/ui";
 import { playSfx } from "@/src/sfx";
 import { arena, gemColors } from "@/src/theme";
-import { Alive, GEM_AT, GEM_LABEL, GEM_ORDER, Gem, GemColor, PhoenixDiamond } from "./Art";
+import { GEM_AT, GEM_LABEL, GEM_ORDER, Gem, GemColor, PhoenixDiamond } from "./Art";
 import { Panel } from "./arena";
 import { Pop } from "./juice";
 

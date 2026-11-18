@@ -36,32 +36,6 @@ export function LevelGem({ level, size = 46 }: { level: number; size?: number })
   );
 }
 
-export function GameHUD({ p, testID = "game-hud" }: { p?: GameProfile | null; testID?: string }) {
-  const pct = p ? Math.min(1, (p.xp - p.level_floor) / Math.max(1, p.next_level_xp - p.level_floor)) : 0;
-  return (
-    <View testID={testID} style={{ flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, borderRadius: radius.lg, backgroundColor: colors.custom_gameCard, borderWidth: 1, borderColor: colors.custom_gameLine }}>
-      <LevelGem level={p?.level ?? 1} />
-      <View style={{ flex: 1, gap: 4 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <T w="heavy" size={13} color={colors.onSurfaceInverse}>Level {p?.level ?? 1}</T>
-          <T w="bold" size={11} color={colors.custom_gameMuted} testID="game-hud-xp">{p ? `${p.xp} / ${p.next_level_xp} XP` : "— XP"}</T>
-        </View>
-        <View style={{ height: 8, borderRadius: 4, backgroundColor: colors.custom_gameLine, overflow: "hidden" }}>
-          <LinearGradient colors={[colors.custom_neonCyan, colors.custom_neonGreen]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ width: `${pct * 100}%`, height: "100%" }} />
-        </View>
-      </View>
-      <View testID="game-hud-coins" style={{ flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 8, height: 30, borderRadius: radius.pill, backgroundColor: colors.custom_gameCardHi }}>
-        <Icon name="hexagon-multiple" size={15} color={colors.custom_neonAmber} />
-        <T w="heavy" size={13} color={colors.custom_neonAmber}>{p?.coins ?? 0}</T>
-      </View>
-      <View testID="game-hud-streak" style={{ flexDirection: "row", alignItems: "center", gap: 2, paddingHorizontal: 8, height: 30, borderRadius: radius.pill, backgroundColor: colors.custom_gameCardHi }}>
-        <Icon name="fire" size={16} color={p?.played_today ? colors.custom_examBitsat : colors.custom_gameMuted} />
-        <T w="heavy" size={13} color={colors.onSurfaceInverse}>{p?.streak ?? 0}</T>
-      </View>
-    </View>
-  );
-}
-
 function Particle({ i }: { i: number }) {
   const t = useSharedValue(0);
   const angle = (i / 16) * Math.PI * 2;

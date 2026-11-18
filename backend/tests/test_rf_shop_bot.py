@@ -93,7 +93,7 @@ class TestBotDuel:
         r = s.post(f"{API}/duels", json={"subject": "Chemistry", "mode": "random", "name": "TEST_Bot", "request_id": uuid.uuid4().hex}, headers=H(uid))
         did = r.json()["id"]
         r2 = s.post(f"{API}/duels/{did}/bot", headers=H("TEST-other-" + uuid.uuid4().hex[:8]))
-        assert r2.status_code == 409
+        assert r2.status_code in (404, 409)  # someone else's match is not even shown to exist
         s.post(f"{API}/duels/{did}/cancel", headers=H(uid))
 
 

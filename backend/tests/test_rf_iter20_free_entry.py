@@ -46,7 +46,7 @@ class TestFreeEntry:
         assert r.status_code == 200, r.text
         p = r.json()
         assert "entry_spark" in p["owned"]
-        assert p["equipped"]["entry"] == "entry_spark"
+        assert "entry" not in p["equipped"]  # nothing picked: the app plays the default Royal entry
 
     def test_shop_spark_item_and_defaults(self, s):
         u = new_uid()
@@ -55,7 +55,7 @@ class TestFreeEntry:
         d = r.json()
         spark = [i for i in d["items"] if i["id"] == "entry_spark"]
         assert len(spark) == 1 and spark[0]["price"] == 0 and spark[0]["title"] == "Neon Spark" and spark[0]["slot"] == "entry"
-        assert "entry_spark" in d["owned"] and d["equipped"]["entry"] == "entry_spark"
+        assert "entry_spark" in d["owned"] and "entry" not in d["equipped"]
         assert d["owned"].count("entry_spark") == 1
         assert "_id" not in d
 
@@ -90,11 +90,11 @@ class TestFreeEntry:
         assert s.post(f"{API}/shop/equip", json={"slot": "entry", "item_id": "entry_spark"}, headers=H(u)).status_code == 200
         assert s.get(f"{API}/shop", headers=H(u)).json()["equipped"]["entry"] == "entry_spark"
 
-    def test_unequip_none_falls_back_to_spark(self, s):
+    def test_unequip_none_falls_back_to_royal(self, s):
         u = new_uid()
         r = s.post(f"{API}/shop/equip", json={"slot": "entry", "item_id": None}, headers=H(u))
         assert r.status_code == 200
-        assert s.get(f"{API}/profile", headers=H(u)).json()["equipped"]["entry"] == "entry_spark"
+        assert s.get(f"{API}/profile", headers=H(u)).json()["equipped"].get("entry") is None  # back to the default Royal entry
 
 
 # ---------- PLAY vs AI (frontend mode=ai -> invite + /bot) ----------
@@ -116,14 +116,14 @@ class TestAiDuel:
         assert v["status"] == "ready" and v["vs_bot"] is True
         assert len(v["players"]) == 2 and any(p["bot"] for p in v["players"])
         lead = v["start_at"] - v["server_now"]
-        assert 3.5 <= lead <= 5.0, lead
+        assert abs(lead - (v["entry_seconds"] + 1.0)) < 0.6, lead  # card 1 opens 1 s after the entry show
         assert len(v.get("cards") or []) == 30 or v.get("total", 30) == 30
 
-    def test_ai_duel_my_entry_is_spark(self, s):
+    def test_ai_duel_my_entry_is_default(self, s):
         u = new_uid()
         _, b, _ = self._ai(s, u, "Chemistry")
         me = [p for p in b.json()["players"] if p["you"]][0]
-        assert me["entry"] == "entry_spark"
+        assert me["entry"] is None  # default Royal entry until the student picks one
         bot = [p for p in b.json()["players"] if p["bot"]][0]
         assert bot["entry"] and bot["entry"].startswith("entry_")
 

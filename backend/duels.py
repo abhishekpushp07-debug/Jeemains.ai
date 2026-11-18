@@ -799,7 +799,10 @@ def make_router(db, rf_user, public_card, award):
         except (HTTPException, ValueError, asyncio.TimeoutError, WebSocketDisconnect):
             d = None
         if not d:
-            await ws.close(code=4404)
+            try:
+                await ws.close(code=4404)
+            except RuntimeError:  # the phone already hung up before saying hello
+                pass
             return
         ensure_bus()
         # New apps say "lite": after the first frame they keep the cards they have, so each push is a few hundred bytes.

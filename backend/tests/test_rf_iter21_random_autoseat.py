@@ -84,7 +84,7 @@ class TestRandomAutoSeat:
             d = s.post(f"{API}/duels/{d['id']}/bot", headers=H(u), json={}).json()
         wait = d["start_at"] - d["server_now"]
         if wait > 0:
-            time.sleep(min(wait + 0.3, 6))
+            time.sleep(wait + 0.3)
         c = d["cards"][0]
         a = s.post(f"{API}/duels/{d['id']}/answer", headers=H(u), json={"index": 0, "choice": 0, "outcome": "answer"})
         assert a.status_code == 200, a.text

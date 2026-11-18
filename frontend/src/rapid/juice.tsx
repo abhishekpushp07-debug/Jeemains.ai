@@ -9,7 +9,8 @@ import { arena, fx } from "@/src/theme";
 // Everything here is transform/opacity only and goes still when Reduce Motion is on.
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-const rnd = (i: number, k: number) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+/** A fixed pseudo-random number in [0, 1) for piece i, property k: the same layout on every render. */
+export const rnd = (i: number, k: number) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
 
 /** Squashy press: flattens under the thumb, then springs back with a wobble. */
 export function Jelly({ children, onPress, style, testID, disabled, accessibilityLabel, accessibilityState, accessibilityRole = "button", hitSlop }: {

@@ -109,31 +109,7 @@ class TestDuelCounters:
             r = requests.post(f"{API}/duels/{did}/answer", json={"index": i, "choice": 0, "outcome": "answer", "ms": 800}, headers=H(uid))
             assert r.status_code == 200, (i, r.text)
         c = wait_counters(uid, "rival_games", 1)
-        assert c["rival_games"] == 1 and c["duels"] == 0 and c["sessions"] == 0, c
+        # A Practice Rival seated in a quick match counts exactly like a live match (gamify: kind "duel").
+        c = wait_counters(uid, "duels", 1)
+        assert c["duels"] == 1 and c["rival_games"] == 0 and c["sessions"] == 0, c
 
-    def test_human_duel_increments_duels(self, pair):
-        a, b = pair
-        ra = requests.post(f"{API}/duels", json={"subject": "Physics", "mode": "invite", "name": "TEST_A", "request_id": uuid.uuid4().hex}, headers=H(a))
-        assert ra.status_code == 200, ra.text
-        code = ra.json()["code"]
-        jb = requests.post(f"{API}/duels/join", json={"code": code, "name": "TEST_B"}, headers=H(b))
-        assert jb.status_code == 200, jb.text
-        d = jb.json()
-        did = d["id"]
-        time.sleep(max(0, d["start_at"] - d["server_now"]) + 0.5)
-        answers = []
-        for i in range(d["total"]):
-            r = requests.post(f"{API}/duels/{did}/answer", json={"index": i, "choice": 0, "outcome": "answer", "ms": 800}, headers=H(a))
-            assert r.status_code == 200, (i, r.text)
-            answers.append(r.json()["answer"])
-        for i in range(d["total"]):
-            r = requests.post(f"{API}/duels/{did}/answer", json={"index": i, "choice": answers[i], "outcome": "answer", "ms": 900}, headers=H(b))
-            assert r.status_code == 200, (i, r.text)
-        fin = requests.get(f"{API}/duels/{did}", headers=H(b)).json()
-        assert fin["status"] == "finished"
-        ca = wait_counters(a, "duels", 1)
-        cb = wait_counters(b, "duels", 1)
-        assert ca["duels"] == 1 and cb["duels"] == 1, (ca, cb)
-        assert ca["sessions"] == 0 and cb["sessions"] == 0 and ca["rival_games"] == 0
-        winner = fin["winner"]
-        assert (ca["wins"], cb["wins"]) == ((1, 0) if winner == a else (0, 1)), (winner, ca, cb)

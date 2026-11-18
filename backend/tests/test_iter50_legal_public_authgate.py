@@ -59,7 +59,8 @@ def test_iter50_legal_privacy_html_headers_and_content(api_client: requests.Sess
     assert response.headers.get("x-frame-options") == "DENY"
     assert "no-store" in (response.headers.get("cache-control") or "")
     assert response.headers.get("referrer-policy") == "no-referrer"
-    html = response.text
+    # The preview's edge adds its own <script> to HTML it relays; our page itself must have none, so read it directly.
+    html = requests.get("http://127.0.0.1:8001/api/legal/privacy", timeout=20).text
     assert "Abhishek@billpe.com" in html
     assert html.count("data-testid=\"public-privacy-heading-") == 8
     assert "<script" not in html.lower()

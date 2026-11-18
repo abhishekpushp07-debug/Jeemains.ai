@@ -199,6 +199,7 @@ if __name__ == "__main__":
     ap.add_argument("--ramp", type=float, default=10.0, help="seconds over which players arrive")
     ap.add_argument("--base", default="http://127.0.0.1:8001/api/rf")
     ap.add_argument("--pairs", action="store_true", help="students play each other (quick match) instead of Practice Rivals")
+    ap.add_argument("--port", type=int, default=None, help="local port of the server under test, for its CPU use (default: from --base, else 8001)")
     ap.add_argument("--cleanup", action="store_true")
     a = ap.parse_args()
     if a.cleanup:
@@ -207,7 +208,7 @@ if __name__ == "__main__":
     ws_base = a.base.replace("http", "ws", 1)
     tokens = make_grants(a.players)
     per = -(-a.players // a.procs)
-    port = int(a.base.split(":")[2].split("/")[0])
+    port = a.port or (int(a.base.split(":")[2].split("/")[0]) if a.base.count(":") > 1 else 8001)
     q, procs, (cpu0, db0), t0 = mp.Queue(), [], backend_cpu(port), time.time()
     for k in range(a.procs):
         chunk = tokens[k * per:(k + 1) * per]

@@ -15,7 +15,7 @@ import { Button, Chip, Empty, ErrorBox, Icon, IconName, Notice, Press, Sheet, Sk
 import { DCard as Card, ScreenHeader } from "@/src/components/design";
 import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
 import { colors, fonts, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
-import { fmtClock, unixDate } from "@/src/navigation";
+import { fmtSpent, unixDate } from "@/src/navigation";
 import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
 import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
 import { isResultLocked, unlockResult } from "@/src/mission/gate";
@@ -68,7 +68,7 @@ function Analysis({ r, id }: { r: any; id: string }) {
       <LinearGradient testID="result-score-card" colors={[colors.brandSecondary, colors.custom_series]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={learningStyles.score}>
         <T testID="result-score-version-label" w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>YOUR SCORE · {r.score_version === "original" ? "ORIGINAL" : "REVISED"}</T>
         <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
-        <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtClock(s.total_seconds)} used` : ""}</T>
+        <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtSpent(s.total_seconds)} used` : ""}</T>
       </LinearGradient>
       {dream ? <DreamMeter exam={dream} testID="result-dream" mockId={id} chart="full"
         onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} /> : null}

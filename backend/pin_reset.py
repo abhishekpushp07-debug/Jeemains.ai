@@ -16,6 +16,8 @@ import httpx
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field
 
+from client_ip import client_ip
+
 logger = logging.getLogger("pin_reset")
 API = os.environ['JEELIVE_API'].rstrip('/')
 PIN = r'^[0-9]{4}$'
@@ -77,7 +79,7 @@ def make_pin_reset(db):
 
     async def throttle(request: Request, phone: str) -> dict:
         # The rightmost X-Forwarded-For hop is the one our ingress added; earlier ones are caller-controlled.
-        ip = request.headers.get('x-forwarded-for', '').split(',')[-1].strip() or (request.client.host if request.client else '')
+        ip = client_ip(request)
         keys = {'phone': hashlib.sha256(phone.encode()).hexdigest(), 'ip': hashlib.sha256(ip.encode()).hexdigest()}
         since = datetime.now(timezone.utc) - timedelta(hours=1)
         for kind, limit in LIMITS:

@@ -110,7 +110,7 @@ def cpu_of(port):
             procs[int(pid)] = (cmd, int(f[1]), (int(f[11]) + int(f[12])) / os.sysconf("SC_CLK_TCK"))
         except OSError:
             continue
-    roots = {pid for pid, (cmd, _, _) in procs.items() if (b"server:app" in cmd or b"proto_proxy:app" in cmd) and f"--port {port}".encode() in cmd}
+    roots = {pid for pid, (cmd, _, _) in procs.items() if b"server:app" in cmd and f"--port {port}".encode() in cmd}
     own = sum(cpu for pid, (_, ppid, cpu) in procs.items() if pid in roots or ppid in roots)
     db = sum(cpu for cmd, _, cpu in procs.values() if cmd.startswith(b"mongod") or b"/mongod " in cmd)
     fake = sum(cpu for cmd, _, cpu in procs.values() if b"fake_website.py" in cmd)

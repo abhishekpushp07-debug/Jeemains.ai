@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AppState, StyleSheet, TextInput, View } from "react-native";
-import { colors, fonts, radius, space } from "@/src/theme";
+import { colors, fonts, space } from "@/src/theme";
 import { Icon, Press, T } from "../ui";
 
 export function PhoneField({ value, onChange, disabled, testID = "entry-phone-input", label = "Mobile number" }: {

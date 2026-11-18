@@ -32,8 +32,6 @@ const fetchSeries = (signal: AbortSignal) => api<Series>("/series/all-india-jee"
 
 /** How many days the series runs, exactly as the website sets it (0 while it loads). Never a number baked into the app. */
 export const seriesDays = (s?: Series | null) => s?.total || s?.slots?.length || 0;
-/** The same count for screens that don't load the whole series (shares the cached schedule). */
-export const useSeriesDays = () => seriesDays(useCached<Series>("series", fetchSeries).data);
 
 export function useSeriesData(uid?: string, historyAlways = true) {
   const series = useCached<Series>("series", fetchSeries);

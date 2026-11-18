@@ -296,16 +296,9 @@ def test_cleanup_report_and_migration_marker_present(mongo):
 
 
 def test_source_sync_not_resurrecting_deleted_jee_artifacts(mongo):
-    """Sync module: old JEE testing history remains reset and card count not resurrected."""
+    """Sync module: the 890 rejected JEE cards never come back (history grows normally with real play since the cleanup)."""
     active_jee_cards = mongo.rf_cards.count_documents({"exam": "JEE", "retired": {"$ne": True}})
-    jee_sessions = mongo.rf_sessions.count_documents({"exam": "JEE"})
-    jee_duels = mongo.rf_duels.count_documents({"exam": "JEE"})
-    jee_learning = mongo.rf_learning_events.count_documents({"exam": "JEE"})
     assert active_jee_cards == 6155
-    # After approved cleanup baseline, old testing records should not reappear.
-    assert jee_sessions <= 5
-    assert jee_duels <= 5
-    assert jee_learning <= 5
 
 
 def test_shop_purchase_deducts_once_and_repeat_denied(mongo, scoped_ids):

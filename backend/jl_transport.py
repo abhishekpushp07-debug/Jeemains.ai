@@ -2,7 +2,7 @@
 Never replay a potentially committed write.
 
 aiohttp instead of httpx: under load httpx spent ~25% of the proxy's CPU in its connection-pool bookkeeping; the same
-proxy on aiohttp served 6.7x more requests per CPU-second (tools/proto_proxy.py, memory/AUDIT_2026_06.md L1).
+proxy on aiohttp served 6.7x more requests per CPU-second (measured with a benchmark copy, memory/AUDIT_2026_06.md L1).
 """
 import asyncio
 import json

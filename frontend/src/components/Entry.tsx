@@ -8,6 +8,7 @@ import Svg, { Circle, Defs, Path, RadialGradient, Stop } from "react-native-svg"
 import { Icon, T } from "@/src/components/ui";
 import { AVATAR_IMAGES } from "@/src/avatars";
 import { Emblem, PhoenixDiamond } from "@/src/rapid/Art";
+import { rnd } from "@/src/rapid/juice";
 import { playSfx } from "@/src/sfx";
 import { arena, fx, gemColors } from "@/src/theme";
 
@@ -71,10 +72,8 @@ export const effectOf = (id?: string | null) => (id && EFFECTS[id]) || ROYAL;
 
 export const BUILD = 0.5, EACH = 3.5, VS = 1.3, FIGHT = 0.7;
 /** Length of the show in seconds: 2 players = 9.5, 5 players = 20. */
-export const showSeconds = (players: number) => BUILD + EACH * players + VS + FIGHT;
 
 const N = 30;
-const rnd = (i: number, k: number) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
 const heavy = () => { if (Platform.OS !== "web") Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {}); };
 
 function Particle({ i, clock, start, motion, color, w, h }: { i: number; clock: SharedValue<number>; start: number; motion: Motion; color: string; w: number; h: number }) {

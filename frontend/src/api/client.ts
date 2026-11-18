@@ -23,7 +23,6 @@ export const BACKEND = (ARENA ? window.location.origin : extra?.backendUrl || pr
 const NO_SERVER = "This app build is missing its server address. Please install the latest build.";
 const offline = (message: string) => new ApiError(BACKEND ? message : NO_SERVER, 0);
 const BASE = `${BACKEND}/api/jl`;
-export const websiteLoginUrl = () => new URL("/login", CANONICAL_API).href;
 export const websiteHomeUrl = () => new URL("/", CANONICAL_API).href;
 export const RF_BASE = `${BACKEND}/api/rf`;
 

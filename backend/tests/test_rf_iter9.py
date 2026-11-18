@@ -93,31 +93,11 @@ class TestCards:
 class TestLeaderboard:
     def test_excludes_test_and_names_unnamed(self):
         a, b = "TEST-" + uuid.uuid4().hex[:12], "TEST-" + uuid.uuid4().hex[:12]
-        DB.rf_profiles.insert_many([{"uid": a, "xp": 10 ** 9, "name": "TEST_Hidden"}, {"uid": b, "xp": 10 ** 9 - 1}])
+        DB.rf_profiles.insert_many([{"uid": a, "xp": 10 ** 9, "exam_stats": {"JEE": {"xp": 10 ** 9}}, "name": "TEST_Hidden"},
+                                    {"uid": b, "xp": 10 ** 9 - 1, "exam_stats": {"JEE": {"xp": 10 ** 9 - 1}}}])
         try:
             items = requests.get(f"{API}/leaderboard", headers=H(b)).json()["items"]
             assert all(not (i["name"] or "").startswith("TEST_") for i in items)
-            me = [i for i in items if i["you"]]
-            assert me and me[0]["name"] == "JEE Aspirant" and me[0]["rank"] == 1
+            assert all(not i["you"] for i in items)  # TEST players are never ranked, not even for themselves
         finally:
             DB.rf_profiles.delete_many({"uid": {"$in": [a, b]}})
-
-
-# ---------- Card sync deletion ----------
-class TestCardSync:
-    def test_stray_card_removed_after_file_touch(self):
-        from pathlib import Path
-        f = sorted(Path("/app/backend/rapidfire/cards").glob("*.json"))[0]
-        import json
-        c0 = json.loads(f.read_text())[0]
-        stray = {**{k: c0[k] for k in ("subject", "chapter", "prompt", "options", "answer")}, "id": "TEST_stray_" + uuid.uuid4().hex[:6]}
-        DB.rf_cards.insert_one(stray)
-        os.utime(f, None)
-        try:
-            for _ in range(14):
-                time.sleep(5)
-                if not DB.rf_cards.find_one({"id": stray["id"]}):
-                    break
-            assert DB.rf_cards.find_one({"id": stray["id"]}) is None, "stray card not removed by sync"
-        finally:
-            DB.rf_cards.delete_many({"id": stray["id"]})

@@ -131,7 +131,7 @@ def test_dreams_are_kept_with_the_account():
     uid = UID + "-d"
     h, other = grant(uid), grant(UID + "-e")
     dream = {"id": "jee-12", "exam": "jee", "college": "NIT Test", "branch": "CSE", "need": 180, "range": [170, 195], "note": "CSAB 2 closing 14,859 CRL", "at": 1}
-    assert requests.get(f"{BASE}/rf/dream", headers=h, timeout=10).json() == {"dreams": [], "mocks": []}
+    assert requests.get(f"{BASE}/rf/dream", headers=h, timeout=10).json() == {"dreams": [], "mocks": [], "cheered": []}
     assert requests.put(f"{BASE}/rf/dream/dreams", headers=h, json={"dreams": [dream], "base": []}, timeout=10).status_code == 200
     six = [{**dream, "id": f"jee-{i}"} for i in range(6)]
     assert requests.put(f"{BASE}/rf/dream/dreams", headers=h, json={"dreams": six, "base": []}, timeout=10).status_code == 400
@@ -141,5 +141,5 @@ def test_dreams_are_kept_with_the_account():
     got = requests.get(f"{BASE}/rf/dream", headers=h, timeout=10).json()
     assert [d["id"] for d in got["dreams"]] == ["jee-12"]
     assert [(m["id"], m["score"]) for m in got["mocks"]] == [("m2", 120), ("m1", 130)]
-    assert requests.get(f"{BASE}/rf/dream", headers=other, timeout=10).json() == {"dreams": [], "mocks": []}  # never another account's
+    assert requests.get(f"{BASE}/rf/dream", headers=other, timeout=10).json() == {"dreams": [], "mocks": [], "cheered": []}  # never another account's
     assert requests.get(f"{BASE}/rf/dream", timeout=10).status_code == 401

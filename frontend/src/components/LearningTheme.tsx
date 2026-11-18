@@ -11,13 +11,6 @@ export function learningStatusTone(status: string): LearningTone | undefined {
   return undefined;
 }
 
-export function LearningBadge({ label, tone, testID }: { label: string; tone?: LearningTone; testID: string }) {
-  const palette = tone ? learningTones[tone] : { soft: colors.surface, ink: colors.muted };
-  return <View testID={testID} style={[styles.badge, { backgroundColor: palette.soft }]}>
-    <T testID={`${testID}-label`} size={11} w="bold" color={palette.ink}>{label}</T>
-  </View>;
-}
-
 export function LearningTab({ label, icon, active, onPress, testID }: {
   label: string; tone: LearningTone; icon: IconName; active: boolean; onPress: () => void; testID: string;
 }) {
@@ -38,7 +31,6 @@ export function LearningStat({ label, value, tone, testID }: { label: string; va
 }
 
 const styles = StyleSheet.create({
-  badge: { alignSelf: "flex-start", borderRadius: 6, paddingHorizontal: 7, paddingVertical: 4, flexShrink: 1 },
   tab: { minHeight: 44, paddingHorizontal: space.lg, borderRadius: 999, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card, flexDirection: "row", alignItems: "center", gap: 6 },
   stat: { flex: 1, minWidth: 0, padding: space.md, borderRadius: 18, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card, gap: 2 },
   dot: { position: "absolute", top: space.md, right: space.md, width: 7, height: 7, borderRadius: 4 },
