@@ -160,7 +160,7 @@ function Shell() {
             <Route path="/book-series/:id" element={<Protected><BookSeries /></Protected>} />
             <Route path="/super-admin/*" element={<Protected staff><AdminWorkspace /></Protected>} />
             <Route path="/profile" element={<Protected><Profile /></Protected>} />
-            <Route path="/rank" element={<Protected><Rank /></Protected>} />
+            <Route path="/rank" element={<Rank />} />
             <Route path="/mission" element={<Protected><Mission /></Protected>} />
             <Route path="/my-tests" element={<Navigate to="/profile" replace />} />
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />

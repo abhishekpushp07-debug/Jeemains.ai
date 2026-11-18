@@ -231,6 +231,18 @@ SPEC = {
     'corrections.regrade': ('owner_scoring_successor', 'batch', 'HELD'),
     'engineering.capacity_profile': ('staff_engineering_only', 'normal', 'read'),
     'engineering.safety_status': ('staff_engineering_only', 'normal', 'read'),
+    **{f'rank_predictor.{n}': ('public_static_cutoff_data_no_personal_data', 'normal', 'read') for n in ('meta', 'estimate', 'predict', 'college')},
+    **{f'rank_tools.{n}': ('public_static_cutoff_data_no_personal_data', 'normal', 'read') for n in ('percentile', 'target_jee', 'target_comedk', 'target_bitsat', 'colleges', 'compare', 'compare_colleges')},
+    **{f'rank_pdf.{n}': ('public_static_cutoff_pdf_no_personal_data', 'batch', 'read') for n in ('jee', 'comedk', 'bitsat', 'target_jee', 'target_comedk', 'target_bitsat', 'saved')},
+    'rank_bitsat.predict': ('public_static_cutoff_data_no_personal_data', 'normal', 'read'),
+    'rank_comedk.predict': ('public_static_cutoff_data_no_personal_data', 'normal', 'read'),
+    'rank_comedk.college': ('public_static_cutoff_data_no_personal_data', 'normal', 'read'),
+    'dreams.read': ('own_dream_list_and_released_full_mocks', 'normal', 'read'),
+    'dreams.save_dreams': ('own_dream_list_only', 'normal', 'revision_CAS_merge'),
+    'dreams.cheered': ('own_dream_list_only', 'normal', 'add_to_set'),
+    'dreams.celebration': ('own_released_attempt_scores_only', 'normal', 'read'),
+    'mission.mine': ('own_mission_link_counts_only', 'normal', 'create_once_then_read'),
+    'mission.open_link': ('public_redirect_counts_hashed_visitor_once', 'normal', 'unique_code_visitor'),
 }
 
 
@@ -265,6 +277,8 @@ def roles(dependant):
 
 def install_contracts(app):
     from fastapi.routing import iter_route_contexts
+    from .request_contracts import rank_models
+    MODELS.update(rank_models())
     registry = []
     for ctx in iter_route_contexts(app.routes):
         route = ctx.route
@@ -281,6 +295,8 @@ def install_contracts(app):
         if writes and not upload and route.body_field and key not in MODELS:
             raise RuntimeError('Body-bearing route lacks an explicit input model: ' + key)
         limit = 64 * 1024 if key in ('smart_imports.repair', 'smart_imports.clarify') else 256 * 1024 if key == 'content.edit_question' else 64 * 1024 if key in ('content.create_set', 'content.update_set', 'content.subset') else 4096
+        if key in ('dreams.save_dreams', 'rank_pdf.saved'):
+            limit = 64 * 1024
         if key == 'book_imports.repair_page':
             limit = 512 * 1024
         elif key in ('book_imports.rules', 'book_imports.allowance'):

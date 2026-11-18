@@ -1,0 +1,31 @@
+/* Result celebration: a light confetti fall (once per attempt), a banner, and the Dream College Meter under it. */
+.cb-burst { position: fixed; inset: 0; z-index: 70; pointer-events: none; overflow: hidden; }
+.cb-burst i { position: absolute; top: -20px; border-radius: 2px; opacity: 0; animation-name: cb-fall; animation-timing-function: cubic-bezier(.25,.6,.4,1); animation-fill-mode: both; }
+.cb-burst i.star { border-radius: 0; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+@keyframes cb-fall { 0% { opacity: 0; transform: translateY(0) rotate(0); } 10% { opacity: 1; } 100% { opacity: 0; transform: translateY(78vh) translateX(30px) rotate(calc(var(--r) + 540deg)); } }
+.cb-banner { position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; margin: 0 0 18px; padding: 14px 16px; border-radius: 20px; color: #FFF;
+  background: radial-gradient(80% 140% at 100% 0%, rgb(242 193 78 / .35), transparent 60%), linear-gradient(135deg, #8A1538 0%, #D90F23 60%, #FF4A5C 100%);
+  box-shadow: 0 18px 36px -20px rgb(138 21 56 / .8); animation: cb-pop .55s cubic-bezier(.2,1.3,.4,1) both; }
+.cb-banner::after { content: ''; position: absolute; inset: 0 auto 0 -40%; width: 35%; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .28), transparent); transform: skewX(-18deg); animation: cb-sheen 2.4s ease-in-out .5s 2 both; }
+.cb-banner.is-dream { background: radial-gradient(80% 140% at 100% 0%, rgb(255 230 163 / .4), transparent 60%), linear-gradient(135deg, #0B1C6B 0%, #1A36B8 55%, #7B2CBF 100%); }
+.cb-icon { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(160deg, #FFE6A3, #F2C14E 50%, #A8761C); color: #2A1A00; animation: cb-twinkle 1.6s ease-in-out infinite; }
+.cb-banner > div { flex: 1; min-width: 0; }
+.cb-banner b { display: block; font-size: 16.5px; font-weight: 900; letter-spacing: -.01em; color: #FFF; }
+.cb-banner small { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; color: rgb(255 255 255 / .92); line-height: 1.45; }
+.cb-banner button { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgb(255 255 255 / .16); color: #FFF; cursor: pointer; z-index: 1; }
+.cb-dreams { margin: 0 0 18px; padding: 16px; border-radius: 22px; border: 1px solid var(--line, #E6E6EB); background: var(--surface-card, #FFF); display: flex; flex-direction: column; gap: 12px;
+  --rk-card: var(--surface-card, #FFF); --rk-alt: var(--surface-alt, #F5F5F7); --rk-line: var(--line, #E6E6EB); --rk-text: var(--text, #0B0B0F); --rk-muted: var(--text-muted, #5E5E69); }
+.cb-dreams header b { display: block; font-size: 15px; font-weight: 800; } .cb-dreams header small { font-size: 12.5px; color: var(--text-muted, #5E5E69); }
+.cb-dreams p { margin: 0; font-size: 13.5px; color: var(--text-muted, #5E5E69); }
+.cb-dreams a { color: var(--brand-text, #8A1538); font-weight: 800; }
+.home-dream-cta { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 22px; color: #FFF; text-decoration: none;
+  background: radial-gradient(80% 140% at 100% 0%, rgb(217 184 255 / .35), transparent 60%), linear-gradient(135deg, #2E0B57 0%, #7B2CBF 100%); box-shadow: 0 18px 36px -22px #2E0B57; transition: transform .2s ease; }
+.home-dream-cta:hover { transform: translateY(-2px); }
+.home-dream-cta > span:nth-child(2) { flex: 1; min-width: 0; }
+.home-dream-cta b { display: block; font-size: 16px; font-weight: 900; color: #FFF; }
+.home-dream-cta small { display: block; margin-top: 2px; font-size: 13px; color: rgb(255 255 255 / .86); }
+.home-dream-all { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; font-weight: 800; font-size: 14px; color: var(--brand-text, #8A1538); text-decoration: none; }
+@keyframes cb-pop { from { opacity: 0; transform: translateY(-8px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes cb-sheen { 0% { left: -40%; } 70%, 100% { left: 130%; } }
+@keyframes cb-twinkle { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(-8deg) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .cb-burst { display: none; } .cb-banner, .cb-banner::after, .cb-icon { animation: none; } }

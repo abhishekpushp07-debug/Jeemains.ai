@@ -349,3 +349,18 @@ MODELS = {
     'attempts.retry': RetryPayload, 'attempts.report': ReportPayload,
     'reviewers.update_access': ReviewerPayload, 'corrections.regrade': RegradePayload,
 }
+
+
+def rank_models():
+    """Rank / dream inputs live with their own modules (rank data is big); install_contracts adds them once routes are loaded."""
+    from . import rank_predictor as rp, rank_tools as rt, rank_pdf as pdf, rank_bitsat as rb, rank_comedk as ck, dreams
+    return {
+        'rank_predictor.estimate': rp.EstimateIn, 'rank_predictor.predict': rp.PredictIn, 'rank_predictor.college': rp.CollegeIn,
+        'rank_bitsat.predict': rb.BitsatIn, 'rank_comedk.predict': ck.ComedkIn, 'rank_comedk.college': ck.ComedkCollegeIn,
+        'rank_tools.percentile': rt.PercentileIn, 'rank_tools.target_jee': rt.TargetJeeIn, 'rank_tools.target_comedk': rt.TargetComedkIn,
+        'rank_tools.compare': rt.CompareIn, 'rank_tools.compare_colleges': rt.CollegeCompareIn,
+        'rank_pdf.jee': pdf.JeePdfIn, 'rank_pdf.comedk': pdf.ComedkPdfIn, 'rank_pdf.bitsat': rb.BitsatIn,
+        'rank_pdf.target_jee': rt.TargetJeeIn, 'rank_pdf.target_comedk': rt.TargetComedkIn,
+        'rank_pdf.target_bitsat': pdf.TargetBitsatPdfIn, 'rank_pdf.saved': pdf.SavedPdfIn,
+        'dreams.save_dreams': dreams.DreamsIn, 'dreams.cheered': dreams.CheeredIn,
+    }

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { api, post, put } from "../../lib/api";
 import {takeStartedAttempt} from '../../lib/privateResources';
 import { createRecorder } from '../../lib/timeCapture';
+import { lockResult } from '../../components/mission/gate';
 const postpone = (state, error) => {
   state.current.failures = Math.min(6, state.current.failures + 1);
   state.current.after = Date.now() + Math.max(error?.retryAfterMs || 0, Math.min(30000, 1000 * 2 ** state.current.failures) + Math.random() * 1500);
@@ -386,6 +387,7 @@ export function useAttempt(id, user) {
     localStorage.removeItem(storage);
     localStorage.removeItem(storage.replace('tejas-draft-', 'tejas-draft-meta-'));
     localStorage.removeItem(confidenceStorage);
+    lockResult(receipt.id);
     navigate("/results/" + receipt.id, {state:navigationState.current});
   };
   const enterBonus = async () => {

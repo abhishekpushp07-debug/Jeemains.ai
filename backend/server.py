@@ -57,6 +57,9 @@ from tejas import (
     analysis_api,
     names,
     media,
+    rank_predictor,
+    dreams,
+    mission,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -270,6 +273,9 @@ for module in [
     analysis_api,
     names,
     media,
+    rank_predictor,
+    dreams,
+    mission,
 ]:
     app.include_router(module.router)
 

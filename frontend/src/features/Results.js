@@ -46,7 +46,17 @@ import { Button } from '../components/ui/button';
 import { AnalysisWorkspace } from '../components/analysis/AnalysisWorkspace';
 import { useAnalysis } from '../components/analysis/useAnalysis';
 import { SolutionInsight } from '../components/analysis/SolutionInsight';
+import { ShareGate } from '../components/mission/ShareGate';
+import { isResultLocked, unlockResult } from '../components/mission/gate';
+import { ResultSparkle } from '../components/results/ResultSparkle';
 export default function Results() {
+  const { id } = useParams();
+  const [locked, setLocked] = useState(() => isResultLocked(id));
+  useEffect(() => { setLocked(isResultLocked(id)); }, [id]);
+  if (locked) return <ShareGate onOpen={() => { unlockResult(id); setLocked(false); }} />;
+  return <ResultsView />;
+}
+function ResultsView() {
   const { id } = useParams();
   const { user } = useAuth();
   const [params, setParams] = useSearchParams();
@@ -224,6 +234,7 @@ export default function Results() {
         title={r.title}
         description="Your score, analysis and saved explanations—in one place."
       />
+      <ResultSparkle id={id} enabled={scoreVersion === 'original' && r.mode !== 'preview' && !!s} />
       {r.mode === "preview" && (
         <div className="notice amber">
           Private content preview—not an approved academic result.
