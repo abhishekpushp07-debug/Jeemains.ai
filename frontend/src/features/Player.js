@@ -162,7 +162,7 @@ export default function Player() {
   }
   return (
     <QuestionReportsProvider attemptId={id}><div className="player-layout">
-      <header className="player-header feature-dark">
+      <header className="player-header feature-dark" data-testid="player-header">
         <div onClickCapture={e=>{e.preventDefault();setExitOpen(true)}}><Logo testId="player-logo" onDark /></div>
         <div className="player-title">
           <strong>{a.title}</strong>

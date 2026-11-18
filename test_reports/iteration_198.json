@@ -1,0 +1,41 @@
+{
+  "summary": "Frontend-only QA of the light/maroon re-theme and new nav, using the disposable analysis bridge (127.0.0.1:8773) with hero/old/friend cookies at 1920x800/1000 and 390x844, in light and dark mode. Working: light is the default on every page checked. The theme-toggle switches html between light and dark, saves the choice in localStorage 'jeelive-theme' and keeps it after reload. Desktop header: pill nav (the active link is a black pill), a non-clickable Rapid Fire gem, and an account menu with all 7 items. Desktop shows no bottom tabs. Phone shows the black bottom-tabs bar with a white active tab, the 4 links go to the right pages, Rapid Fire is a DIV that does not navigate, the bar is hidden in the player and for signed-out visitors, the footer is hidden, the account icon shows (16px) and header-nav is hidden. Home greeting, series card text and links, practice cards and For-you links/badges all match the spec. Rank: 6 non-clickable tiles with SOON badges that do not overlap the text at 390. Mission: CTA goes to /home. My Tests: segmented tabs with counts, chips filter and update the URL (exam=BITSAT / JEE+Main, status=completed), search, date picker (shadcn calendar), refresh, display-name dialog, and the Open analysis / Solutions links all work. Player: black-maroon header, light palette colours (answered green, marked purple, visited light red, current black outline), answer, mark, Next and the Review & submit dialog work. Get Ready card is dark and Begin now works. Results: dark score card, green/red/amber tiles, black active tab pill, dark a2-block-score, and the a2-bar sits at bottom 66px above the tabs. No horizontal overflow at 390 on any page tested. No console errors. An automated contrast scan of 9 pages in both modes found no low-contrast text after the fixes below. I found and fixed 3 regressions and added 1 missing testid. One minor issue remains for the main agent: the Rapid Fire gem overlaps the results a2-bar section pills on phone.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Player header (all sizes)", "issue": "FIXED by testing agent: app-theme.css .feature-dark sets position:relative, which overrode App.css .player-header{position:sticky}. As a result the black header and timer scrolled away while .player-savebar stayed stuck at top 72/80px, leaving a gap with question text showing above it. Fix: added position:sticky; top:0; z-index:30 to .player-header.feature-dark.", "selector": "[data-testid=player-header]", "priority": "HIGH"},
+      {"component": "Get Ready screen title", "issue": "FIXED by testing agent: the h1 'Deep breath. You've got this.' was rgb(11,11,15) on the dark card in light mode, so it could not be seen. Cause: global h1,h2,h3{color:var(--navy)}, and --navy is resolved at :root from the light --ink. Fix: added --navy:#FFFFFF to the .feature-dark tokens, which also covers any other h1-h3 inside dark featured cards.", "selector": "[data-testid=get-ready-title]", "priority": "HIGH"},
+      {"component": "Series hub streak block (light mode)", "issue": "FIXED by testing agent: '.light .streak-journey' made the background white, but series-streak.css still hard-codes white text. As a result 'Your 50-day run.' (streak-title), the h3 'Consistency, collected.' and the streak-days-toggle summary were white on white. Fix: added color:var(--ink) for the light streak-journey and its h2/h3/summary.", "selector": "[data-testid=streak-title]", "priority": "HIGH"},
+      {"component": "Phone bottom tabs Rapid Fire gem vs results a2-bar", "issue": "NOT FIXED. On /results/<id> at 390px the gem image rises above the bar (top ~748, x 173-217) and covers part of the stuck a2-bar's section pill '2 Performance' (y 731-771). elementFromPoint there returns the gem IMG (pointer-events:auto), so the middle of that pill cannot be tapped. Suggested fix: give the gem pointer-events:none, or raise body.has-tabs .a2-bar bottom by ~30px, or move the pill row up.", "selector": "[data-testid=bottom-tab-rapid-fire] img, .a2-bar", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Landing / signed-out at 390px", "issues": ["'Log in' is hidden in the header on phone; only 'Start free' shows. Returning users have no direct login entry in the header (on desktop it is visible)."]},
+      {"screen": "Results analysis score ring (a2-block-score)", "issues": ["The '61 / 120' text inside the big ring is very small (~14px) compared with the ring. Consider a larger score number."]},
+      {"screen": "My Tests phone", "issues": ["The status chip row scrolls sideways inside itself and the 4th chip is cut off at the right edge with no fade or scroll hint.", "The profile box (name/number) does not span the full width on phone (~303 of 350px)."]},
+      {"screen": "Phone light header on scroll", "issues": ["The translucent header lets the red series card tint show through while scrolling. Minor."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/theme_start_attempts198.py"],
+  "action_items": [
+    "Fix the Rapid Fire gem covering the results a2-bar section pills on phone (pointer-events:none on .bottom-tab-rapid img and/or raise the a2-bar offset).",
+    "Review the 3 CSS fixes made in app-theme.css (sticky player header, --navy in .feature-dark, light streak text colours) and keep them.",
+    "Optional: show 'Log in' on the phone signed-out header; enlarge the score number in the analysis ring; add a scroll hint to the chip row."
+  ],
+  "critical_code_review_comments": [
+    "app-theme.css .feature-dark forces position:relative and overflow:hidden on every element that uses it. Any sticky or fixed element given this class (as player-header was) breaks. Keep a per-component override, or move position:relative into a wrapper.",
+    "Any rule that uses var(--navy) or other :root-derived aliases (--brand-navy) does not follow the --ink overrides inside .feature-dark. Check other derived tokens (e.g. --brand-navy) if they are used inside dark cards.",
+    "App.js Shell shows BottomTabs for every signed-in user on all routes except /attempts, including staff routes such as /super-admin. Confirm this is intended.",
+    "The legacy dark-only stylesheets (series-streak.css, vibrant-ui.css) hard-code white text. Other legacy sections may need .light overrides as more pages get light backgrounds."
+  ],
+  "updated_files": [
+    "/app/frontend/src/app-theme.css (player-header sticky; --navy in .feature-dark; light streak text colour)",
+    "/app/frontend/src/features/Player.js (added data-testid=player-header)",
+    "/app/backend/tests/theme_start_attempts198.py (helper to start bridge attempts)"
+  ],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "~95% (all requested flows pass after 3 small CSS fixes; 1 open medium issue)"},
+  "seed_data_creation": "None in the preview DB. Only bridge (throwaway DB) attempts were started: old, friend (get_ready) and hero (get_ready). The bridge DB is dropped when it stops.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge: cd /app/backend && python tests/analysis_bridge196.py 2400 & ; cookies in /tmp/uibridge196/bridge.json (dicts access_token/refresh_token; send them as a Cookie header in a Playwright route). Start attempts with tests/theme_start_attempts198.py; it writes the ids to /tmp/uibridge196/theme198.json. The Get Ready screen only appears for a freshly started get_ready attempt; re-starting the same set returns the existing active attempt. The player header testid is player-header; palette buttons are player-question-nav-N; options are radios player-option-X (.check(force=True)). The contrast scanner used is /tmp/contrast.js (it may be gone)."
+}

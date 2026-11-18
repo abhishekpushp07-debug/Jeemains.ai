@@ -1,3 +1,8 @@
+# App theme + navigation (2026-11-18)
+- DONE (preview, iteration_198): light default + dark switch, phone bottom tabs, Home like the app, Rank/Mission coming-soon, My Tests chips, player/results/analysis re-themed.
+- WAITING on owner: Rank document (build the 6 tools), Mission document, Rapid Fire Play Store link (then make the gem/tab/card open it).
+- P1: deploy when the owner asks. P2: light-mode polish of admin/Super Admin screens (not re-themed by hand).
+
 # Analysis 2.0 + sign-in limit + capacity (2026-11-18)
 - DONE 2026-11-18: jeelive.ai serves the new code (/api/media/probe.bin 200). Still check on live: sign-in counts only wrong PINs and the 401 message shows tries left.
 - P0 (app team): build from /downloads/jeelive-app-update-2026-11-18.zip (docs/app_packet/APP_UPDATE_2026-11-18.md), P0 items first: picture text, time capture, Analysis 2.0.
