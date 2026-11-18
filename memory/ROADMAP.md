@@ -1,7 +1,7 @@
 # Analysis 2.0 + sign-in limit + capacity (2026-11-18)
 - DONE 2026-11-18: jeelive.ai serves the new code (/api/media/probe.bin 200). Still check on live: sign-in counts only wrong PINs and the 401 message shows tries left.
 - P0 (app team): build from /downloads/jeelive-app-update-2026-11-18.zip (docs/app_packet/APP_UPDATE_2026-11-18.md), P0 items first: picture text, time capture, Analysis 2.0.
-- P1: Website has no screen to set the display name (PUT /api/profile/display-name exists); add one to Profile so leaderboards show real names.
+- DONE 2026-11-18 (preview): Leaderboard name field on My Tests profile box. P1: deploy; consider a "Set your name" link in the leaderboard/analysis when the student has no name.
 - P0 (platform support, owner sends docs/SERVER_SIZE_REQUEST.md): Cloudflare must not challenge /api calls from shared IPs; ~24 workers + 8 vCPU DB for 1 lakh, ~48 + 16 for 2 lakh; ask how many workers run per pod.
 - P0 (owner action): CDN links are built (preview). Set up a pull CDN for https://jeelive.ai/api/media/* (docs/CDN_SETUP.md), save its address in the MEDIA_CDN_URL live slot (secure card opened 2026-11-18), then deploy; after deploy `curl -I <cdn>/api/media/probe.bin` twice must show a HIT and `x-media-cdn` = the CDN address. Without it pictures still come from the server.
 - P0 (deploy): picture questions now send `text: ""` (player + results) so the app stops showing machine text under the picture; confirm on the app after deploy.

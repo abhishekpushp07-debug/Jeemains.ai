@@ -222,3 +222,10 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - backend/tools/export_app_analysis_samples.py: reads real responses from the isolated analysis bridge (synthetic students) into docs/app_packet/samples (14 files); analysis_rulebook.json from the server rules and copy.
 - docs/APP_INTEGRATION.md: date, series-as-section bullet corrected (kind aits + series_path), new §16 pointer. Public copies in frontend/public/downloads/app-update-2026-11-18/ + jeelive-app-update-2026-11-18.zip (SHA256SUMS checked; zip downloads 200 from the preview URL).
 - Found: the website has no screen to set the display name (API only), so leaderboards show "Learner xxxx" until a name is set.
+
+
+## 2026-11-18 — Leaderboard name on the website Profile
+- User: "Add a name field on the website Profile so leaderboards and compare show students' real names".
+- frontend/src/components/DisplayName.js (new): row "Leaderboard name: X / Not set" + Set name / Change → dialog (max 20, counter, Save name, Remove name, server error as is, 3 per day note); setUser keeps display_name. Profile.js shows it for phone students and uses display_name in the identity box. CSS .display-name-row (learning-workspace.css).
+- backend/tejas/names.py clean(): first character must be a letter/digit; combining marks (Unicode M*) allowed, so "राहुल शर्मा" is accepted (was 422 before).
+- Checked on tests/analysis_bridge196.py (disposable DB): Hindi name 200; phone-like, symbols and leading mark 422; UI save → "Priya 2026" in the profile box and on the hero's leaderboard; analysis student name intact; 390 px no overflow. App packet §8.6 updated. NOT deployed.

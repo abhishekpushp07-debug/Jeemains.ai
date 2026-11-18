@@ -129,6 +129,9 @@
 .profile-library-header p { color:var(--text-muted); font-size:16px; }
 .profile-identity { display:flex; flex-direction:column; border-left:3px solid #5C0025; padding:8px 18px; gap:7px; font-size:14px; }
 .profile-identity small { color:var(--text-muted); font-size:12px; }
+.display-name-row { display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:13px; color:var(--text-muted); }
+.display-name-row b { color:var(--ink); font-weight:600; overflow-wrap:anywhere; }
+.display-name-row button { height:auto; padding:2px 4px; gap:4px; }
 .library-tabs { margin:28px 0 22px; }
 .library-tabs [role='tablist'] { height:auto; display:flex; padding:6px; gap:6px; background:var(--surface-card); border:1px solid var(--line); border-radius:12px; }
 .library-tabs [role='tab'] { min-height:50px; padding:12px 20px; display:flex; gap:8px; font-size:14px; border-radius:8px; }

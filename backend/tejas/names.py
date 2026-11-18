@@ -1,5 +1,5 @@
 """Display name: what a student is called on leaderboards, in Compare and on their own report. Never the phone number."""
-import hashlib, re
+import hashlib, re, unicodedata
 from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from .auth import current, owner, forget_student
@@ -19,7 +19,7 @@ def clean(raw):
     name = ' '.join(raw.split())
     if not name:
         return ''
-    if not 2 <= len(name) <= 20 or any(not (ch.isalnum() or ch == ' ') for ch in name):
+    if not 2 <= len(name) <= 20 or not name[0].isalnum() or any(not (ch.isalnum() or ch == ' ' or unicodedata.category(ch)[0] == 'M') for ch in name):
         raise HTTPException(422, 'Naam 2 se 20 akshar ka rakho: sirf akshar, ank aur space.')
     packed = name.replace(' ', '').lower()
     if re.search(r'\d{6,}', packed):
