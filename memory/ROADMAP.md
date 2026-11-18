@@ -1,7 +1,8 @@
 # Analysis 2.0 + sign-in limit + capacity (2026-11-18)
 - P0: Deploy only when the user says "Deploy" (Analysis 2.0, wrong-PIN-only limit, plugin fix). After deploy: check sign-in on jeelive.ai counts only wrong PINs and the 401 message shows tries left.
 - P0 (platform support, owner sends docs/SERVER_SIZE_REQUEST.md): Cloudflare must not challenge /api calls from shared IPs; ~24 workers + 8 vCPU DB for 1 lakh, ~48 + 16 for 2 lakh; ask how many workers run per pod.
-- P0 (needs approval): question pictures via CDN-cacheable, locked until paper start (saves ~85% of start-window CPU and ~740 GB per lakh from the app).
+- P0 (owner action): CDN links are built (preview). Set up a pull CDN for https://jeelive.ai/api/media/* (docs/CDN_SETUP.md) and put its address in MEDIA_CDN_URL, then deploy; after deploy check a link shows a cache HIT. Without it pictures still come from the server.
+- P1: RedOS app should switch from /assets/pack to /assets/links (APP_INTEGRATION.md §15). Results-page review pictures still load privately one by one (lazy, not the start rush).
 - P1: TEJAS_INFLIGHT_AUTH (4) caps sign-in at ~50–60/s per process; size with cores. Read lane 16 gives 'busy' in pack/result bursts (website retries).
 - P1: class_stats rebuild is O(finishers) (~5 ms each, ~8 min at 1 lakh); make it incremental.
 - P2: tests/test_iter156_pin_hour_budget_isolated.py tests the removed hourly budget; replace with tests/wrong_pin_iso197.py. analysis.py still has an unused old build_analysis (analysis_build.py is the live one).

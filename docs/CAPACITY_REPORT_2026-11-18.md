@@ -1,5 +1,19 @@
 # JEELIVE.AI: load test + 1–2 lakh capacity report (18 Nov 2026)
 
+## Update 18 Nov (shaam): pictures ab CDN-ready hain (preview, deploy nahi)
+- Naya: `GET /api/attempts/{id}/assets/links`. Ek paper ke sab students ko ek din ke same signed, public links milte hain (`/api/media/pack/...bin`, `Cache-Control: public, s-maxage=86400, immutable`). Website pehle links se pictures leti hai, fail ho to purane private pack se. Setup: `docs/CDN_SETUP.md`.
+- Preview par A/B, 100 students, same paper, poori paper pictures (~7.7 MB per student, 774 MB total):
+
+| | Purana private pack | Naye links (abhi bhi server se, CDN nahi) |
+| --- | --- | --- |
+| Backend CPU (sign-in + start + pictures) | 9.9 CPU-s | 8.4 CPU-s |
+| Pehli baar "busy" mile | 30 / 700 parts | 0 / 700 |
+| Part p95 | 0.28 s | 0.21 s |
+
+- Matlab: CDN ke bina server ka kharcha thoda hi ghata (~15%), kyunki zyada CPU bytes bhejne mein jaata hai. Asli bachat (start window ~45 → ~6 vCPU per lakh) tabhi hogi jab `MEDIA_CDN_URL` mein ek pull CDN ka address daala jaaye. jeelive.ai ka current edge static files bhi cache nahi karta.
+- Logs: `/app/test_reports/load198_ab_packs.log`, `load198_ab_media.log`. 200 students wali stage preview ke Cloudflare "Just a moment…" check (ek hi IP) par ruki, server par nahi. Test ke 703 accounts aur 664 attempts hata diye gaye.
+
+
 Yeh test preview server par chala (jeelive.ai par nahi). Saare load accounts aur unka data test ke baad hata diya gaya.
 
 ## Seedhi baat

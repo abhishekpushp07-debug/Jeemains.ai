@@ -1,3 +1,11 @@
+## 2026-11-18 — Question pictures via CDN-cacheable signed links
+- New tejas/media.py: /api/attempts/{id}/assets/links + public /api/media/pack/... (signed, day-bucket expiry, public immutable cache headers, ACAO *, per-process cache + coalescing, never caches a part with a broken picture). /assets/pack reuses media.picture_refs/assemble (unchanged output).
+- server.py Protections: /api/media keeps its own Cache-Control (else private, no-store). origins.py: CORS middleware skips /api/media. admission/runtime: 'media' lane 32, wait 3 s. route_contracts: attempts.asset_links, media.media_pack.
+- Frontend privateResources.preloadPaper: CDN links first (credentials omit), quick retry, then private pack, then single pictures; skips links for papers without pictures.
+- backend/.env MEDIA_CDN_URL= (empty → links on the same server). docs/CDN_SETUP.md, APP_INTEGRATION.md §15, CAPACITY_REPORT update. tools/load_live.py LOAD_MEDIA=1.
+- Tests: tests/media_cdn_iso198.py 29/29, get_ready_iso188 47/47, iso189 15/15, iteration_196 (tests/media_cdn_bridge199.py 10/10, browser flows pass). Load A/B logs test_reports/load198_*. Load accounts +91600198 removed (703 accounts, 664 attempts); phone-limit rows expire by TTL.
+
+
 ## 2026-11-16 — Chapter-wise PDFs: solutions at the end of each chapter are read
 - Live RCA (book a05c49f7 'bitsat maths final', 640 pages): 435 pages 'unresolved', 0 solutions, all 34 chapter mocks held (~6,513 issues). Cause: the reader did not know headings like 'Answer key – <chapter name>' / '<chapter name> – Solutions', paired key-table cells '1' with '11' when keys print as '(B)', and took '…Differentiability)' inside working as a new chapter.
 - chapter_reader: named_role() (role heading naming a known chapter, digit-led titles like '3D Geometry' allowed), name_heading() rejects brackets, bookmark_plan() adds key/solution starts from child bookmarks.

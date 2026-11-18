@@ -65,7 +65,7 @@ export function preloadPaper(attemptId,paths,onProgress){
  const live=()=>!stopped&&generation===epoch&&!!userId;
  const missing=list=>list.filter(path=>!held.has(path));
  const report=()=>{if(live())onProgress(held.size,paths.length);};
- const linked=fetchWithSession(`/attempts/${attemptId}/assets/links`,{cache:'no-store',signal:controller.signal})
+ const linked=!paths.length?Promise.resolve(null):fetchWithSession(`/attempts/${attemptId}/assets/links`,{cache:'no-store',signal:controller.signal})
   .then(res=>res.ok?res.json():null).then(body=>{const d=body?.data??body;return d&&d.limit===PACK&&d.total===paths.length&&Array.isArray(d.parts)?d.parts:null;})
   .catch(()=>null);
  async function pack(offset,link){
@@ -92,7 +92,8 @@ export function preloadPaper(attemptId,paths,onProgress){
     else for(const path of missing(want)){const asset=await acquireSourceAsset(path);if(live()&&!held.has(path))held.set(path,asset.release);else asset.release();}
    }catch(e){if(e?.name==='AbortError')return;}
    report();
-   if(missing(want).length){failures+=1;await pause(Math.min(15000,1000*2**Math.min(failures,4))+Math.random()*800);}
+   // A failing CDN link gets a quick second try, then the private pack; later failures back off.
+   if(missing(want).length){const quick=parts&&failures<2;failures+=1;await pause(quick?500+Math.random()*500:Math.min(15000,1000*2**Math.min(failures,4))+Math.random()*800);}
   }
  }
  async function worker(){while(live()&&next<paths.length){const offset=next;next+=PACK;await part(offset);}}

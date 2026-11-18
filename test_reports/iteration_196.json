@@ -1,0 +1,28 @@
+{
+  "summary": "Tested question pictures served through CDN links, using the isolated bridge ui_bridge188 (disposable DB, now dropped). The preview frontend was routed to 127.0.0.1:8770, with the student cookies set on the preview domain so the network log shows which requests carry a Cookie header. FRONTEND: on the picture paper (TEST_PIC, 3 pictures in 1 part) the get-ready screen called GET /api/attempts/{id}/assets/links (Cookie header present), then 1 request to /api/media/pack/<pack>/0-12-0-<exp>-<sig>.bin (no Cookie header, so credentials:'omit' works). It made no request to /assets/pack and no per-picture /asset/question/N request. Progress reached 'Whole paper loaded 100%', Begin now worked, and the Q1 picture drew on the canvas at 1920x800 and 390x844. FALLBACK at 390x844: (a) route.abort of /api/media/**: 2 media tries at 0.9 s and 3.2 s, then /assets/pack?offset=0&limit=12 at 7.5 s, and the picture rendered. (b) 503 on /api/media/**: same pattern (/assets/pack at 7.9 s), picture rendered. (c) /assets/links returns 500: /assets/pack is called right away at 0.8 s with no media request, picture rendered. BACKEND spot checks (new tests/media_cdn_bridge199.py, 10/10 pass): links return 200 {limit:12, cdn:false, total, parts relative} for the owner, 404 for another student, 401 when signed out, 409 after submit; two students get identical parts. The public media part returns 200 octet-stream with Cache-Control 'public, max-age, s-maxage, immutable', ACAO '*' even with Origin https://evil.example, no Set-Cookie, and the body is byte-identical to /assets/pack offset=0 limit=12. Tampered sig, offset, bonus, pack id or expired exp returns 404 no-store. REGRESSION: the text-only practice paper started (get-ready showed 100% at once, Begin enabled), answer A saved ('All responses saved', PUT /answers), Submit & see results went to /results/{id} with score 4/12. No regressions found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Text-only paper start", "issue": "preloadPaper still calls GET /assets/links even when paths.length===0. That is one extra API call per student for every paper without pictures, which adds load at the exam-start rush. Skip the links call (or the whole preloadPaper) when there are no pictures.", "affected_selectors": ["[data-testid=get-ready-load]"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/media_cdn_bridge199.py", "/app/test_reports/pytest/media_cdn_bridge199.xml"],
+  "action_items": [
+    "Optional: in privateResources.preloadPaper, skip GET /attempts/{id}/assets/links when paths.length===0",
+    "Optional: when the CDN is down, the private pack fallback starts only about 7.5 s after the first try (2 media tries with about 2 s and 4 s backoff), so on a slow CDN failure the get-ready progress waits that long. This is acceptable inside the 60 s countdown, but consider a shorter first backoff for media failures"
+  ],
+  "critical_code_review_comments": [
+    "media.py: pack_links calls entry_for() and builds total on every links request. That is fine because it is cached by packs, but links depend on _database_now, so links rotate at the UTC day boundary. A student who loads just before midnight UTC gets exp = day+2, which is still valid. OK.",
+    "media.py: the in-memory _parts cache is per process (64 MB). With several workers and no CDN (MEDIA_CDN_URL empty), each worker renders each part once. This is acceptable, but at 1 lakh students MEDIA_CDN_URL must be set in production, otherwise every request still hits the API (only the coalescing and the process cache help).",
+    "privateResources.js pack(): the CDN fetch does not check Content-Type or the size of the body before DataView parsing. A wrong 200 from a CDN (for example an HTML error page) would throw on JSON.parse and count as a failure, which is then retried. This is safe."
+  ],
+  "updated_files": ["/app/backend/tests/media_cdn_bridge199.py"],
+  "success_rate": {"backend": "100% (10/10 spot checks)", "frontend": "100% (main flow, 3 fallback modes, text-only regression)"},
+  "seed_data_creation": "Only inside the disposable bridge DB tejas_isolated_book170_891da430, which was dropped when the bridge stopped. No preview DB writes.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "test_credentials": "No permanent credentials used; bridge cookies from /tmp/uibridge/bridge.json.",
+  "context_for_next_testing_agent": "Start the bridge: cd /app/backend && python tests/ui_bridge188.py 2400 &, wait about 45 s for READY. Stop it with pkill -INT -f ui_bridge188.py so the DB is dropped. Backend spot checks: python -m pytest tests/media_cdn_bridge199.py -q -n 0 -p no:cacheprovider. The cookies are Secure, so in requests send them as a raw Cookie header plus an Origin header for the preview domain. In Playwright, add the student cookies to the preview domain through context.add_cookies and forward request headers as-is to the bridge in a **/api/** route, so the log shows Cookie on /assets/links and no Cookie on /api/media. Submit returns 202. The submit confirm button is get_by_role('button', name='Submit & see results') and has no data-testid. The question picture renders as a canvas, not an img."
+}
