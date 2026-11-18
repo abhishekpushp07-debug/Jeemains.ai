@@ -13,6 +13,8 @@ def workload(path, method):
         return 'probe'
     if path in ('/api/auth/login', '/api/auth/phone', '/api/auth/phone/signup', '/api/auth/pin', '/api/auth/pin/reset', '/api/auth/owner/student-pin-reset', '/api/auth/register'):
         return 'auth'
+    if path.startswith('/api/media/'):
+        return 'media'
     if '/asset/' in path or path.endswith('/download') or '/source/' in path:
         return 'asset'
     if path.startswith(('/api/studio/', '/api/internal/', '/api/cron/')):

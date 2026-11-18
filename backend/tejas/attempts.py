@@ -368,6 +368,7 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
     Body: 4-byte big-endian header length, JSON header {total, items:[{question_id, index, size}]}, then the PNG bytes in order."""
     from .attempt_status import owned_header
     from .packs import entry_for
+    from .media import picture_refs, assemble
     a = await owned_header(id, u)
     if a["status"] != "active":
         raise HTTPException(409, "This attempt is no longer active.")
@@ -375,15 +376,27 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
         questions = (await entry_for(a["pack_id"])).questions
     else:
         questions = (await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "questions": 1}))["questions"]
-    refs = [(q["id"], i, r) for q in questions if not (q.get("bonus") and not a.get("bonus_unlocked_at")) for i, r in enumerate(q.get("q_refs", []))]
+    refs = picture_refs(questions, a.get("bonus_unlocked_at"))
     part = refs[offset:offset + limit]
     sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r in part})}}, {"_id": 0})}
     rendered = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r in part if r["file_id"] in sources), return_exceptions=True)
     # A picture that cannot render is left out; the app then loads it on its own, so one bad crop never blocks the rest.
     found = [(qid, i, b) for (qid, i, _), b in zip([p for p in part if p[2]["file_id"] in sources], rendered) if isinstance(b, bytes)]
-    head = json.dumps({"total": len(refs), "items": [{"question_id": qid, "index": i, "size": len(b)} for qid, i, b in found]}).encode()
-    return Response(len(head).to_bytes(4, "big") + head + b"".join(b for _, _, b in found), media_type="application/octet-stream",
-                    headers={"Cache-Control": "private, no-store"})
+    return Response(assemble(len(refs), found), media_type="application/octet-stream", headers={"Cache-Control": "private, no-store"})
+
+
+@router.get("/attempts/{id}/assets/links")
+async def asset_links(id: str, u=Depends(current)):
+    """The same pictures as /assets/pack, as public links a CDN can cache: {total, limit, cdn, expires_at, parts:[url]}.
+    Fetch part k without cookies; it covers pictures k*limit .. k*limit+limit-1 in the /assets/pack format."""
+    from .attempt_status import owned_header
+    from .media import pack_links
+    a = await owned_header(id, u)
+    if a["status"] != "active":
+        raise HTTPException(409, "This attempt is no longer active.")
+    if not a.get("pack_id"):
+        raise HTTPException(404, "This paper loads its pictures through /assets/pack.")
+    return await pack_links(a)
 
 
 class Visit(BaseModel):

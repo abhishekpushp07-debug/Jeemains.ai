@@ -112,6 +112,7 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 | Start/full reattempt | POST `/sets/{set_id}/start` | See next section |
 | Begin now | POST `/attempts/{attempt_id}/begin` | Empty JSON body; ends the 60 s get-ready early; returns `ready_until`, `deadline`, `server_now` |
 | Whole-paper pictures | GET `/attempts/{attempt_id}/assets/pack?offset=0&limit=12` | Active attempt only. Binary: 4-byte big-endian header length, JSON header `{total, items:[{question_id,index,size}]}`, then PNG bytes in order. Loop `offset` by `limit` until `total` |
+| Whole-paper pictures through the CDN (preferred, added 2026-11-18) | GET `/attempts/{attempt_id}/assets/links` | Active attempt only. `{total, limit: 12, cdn, expires_at, parts:[url]}`. Fetch each `parts[k]` **without cookies** (it may be on another host); the body is exactly the `/assets/pack?offset=12k&limit=12` format. If a link fails twice, use `/assets/pack` for that part. See section 15 |
 | All India rank | GET `/attempts/{attempt_id}/series-rank` | `state: sealed` (with `release_at`) until the day closes, then `ready` with `rank`, `total`, `top_percent` |
 | Resume state | GET `/attempts/{attempt_id}` | Same attempt, not another start |
 | Lightweight state | GET `/attempts/{attempt_id}/status` | Server time/deadline/status/grading |
@@ -235,3 +236,10 @@ Applies to regular live exams (`competition:true`), not the All India series.
 - `GET /api/catalog/exams/{slug}` never lists a series as a section: show each series as its own card from `GET /api/series`.
 - Questions written in Super Admin have `render_mode: "written"`: show `text` (maths between `$` signs) and option texts, then `asset_count` images from the existing `/asset/question/{i}` endpoint. `asset_labels[i]` is empty for the question figure or `Option A`…`Option D` for an option figure. Solutions work the same way with `solution_asset_count`.
 - PYQ papers made in Super Admin may have an empty `exam_date` and `shift: 0`; use `year` and `title` for those.
+
+## 15. Question pictures through a CDN (added 2026-11-18, preview only until deployed)
+- Why: at exam start the whole class downloads the same paper pictures (~7.4 MB per JEE paper). Through `/assets/pack` every student pulls them from the API server. Through `/assets/links` every student of one paper on one day gets the **same** public links, so a CDN downloads each part from the server once and serves everyone else itself.
+- Flow: start (or resume) the attempt → `GET /attempts/{id}/assets/links` with the session → fetch every `parts[k]` with no cookies and no extra headers (simple GET) → read it with the same parser as `/assets/pack`. Keep the pictures in memory for the test.
+- Links are handed out only for an active attempt, carry only question pictures (never answers or solutions), are signed and stop working after `expires_at` (1–2 days). Bonus pictures are left out until the bonus section opens; call `/assets/links` again after `/bonus`.
+- Responses: `200 application/octet-stream`, `Cache-Control: public, max-age≤86400, s-maxage, immutable`, `Access-Control-Allow-Origin: *`. A tampered or expired link answers `404` with `no-store`. If one picture of a part could not be prepared, that part comes back with `no-store` and without that picture; load the missing one from `/questions/{qid}/asset/question/{i}`.
+- `cdn: true` means the links point at the CDN host set in `MEDIA_CDN_URL`; `cdn: false` means they are on this server (`/api/media/pack/...`, relative: prefix the API host). `/assets/pack` stays as the fallback and is unchanged.

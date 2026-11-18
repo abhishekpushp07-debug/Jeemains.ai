@@ -22,9 +22,10 @@ JOB_DRAIN_QUANTUM = budget('TEJAS_JOB_DRAIN_QUANTUM', 16, 1, 64)
 PACK_CACHE_BYTES = budget('TEJAS_PACK_CACHE_BYTES', 32 * 1024 * 1024, 1024 * 1024, 128 * 1024 * 1024)
 PACK_MAX_BYTES = budget('TEJAS_PACK_MAX_BYTES', 16 * 1024 * 1024, 1024 * 1024, 32 * 1024 * 1024)
 INFLIGHT_LIMITS = {name: budget('TEJAS_INFLIGHT_' + name.upper(), default, 1, 256)
-                   for name, default in [('live', 32), ('read', 16), ('asset', 8), ('auth', 4), ('control', 4), ('probe', 2)]}
+                   for name, default in [('live', 32), ('read', 16), ('media', 32), ('asset', 8), ('auth', 4), ('control', 4), ('probe', 2)]}
 # Seconds a request may wait for a free slot before "busy" (sign-in bursts, exam starts and answer saves).
-ADMISSION_WAIT = {'auth': budget('TEJAS_WAIT_AUTH_MS', 6000, 0, 20000) / 1000, 'live': budget('TEJAS_WAIT_LIVE_MS', 3000, 0, 20000) / 1000}
+ADMISSION_WAIT = {'auth': budget('TEJAS_WAIT_AUTH_MS', 6000, 0, 20000) / 1000, 'live': budget('TEJAS_WAIT_LIVE_MS', 3000, 0, 20000) / 1000,
+                  'media': budget('TEJAS_WAIT_MEDIA_MS', 3000, 0, 20000) / 1000}
 INLINE_JOBS = os.environ.get('TEJAS_INLINE_JOBS', 'true').lower() == 'true'
 LANE_LIMITS = {
     'book_step': budget('TEJAS_BOOK_CONCURRENCY', 1, 1, 1),

@@ -54,9 +54,10 @@ function keep(path,blob){
  if(!entry){entry={url:URL.createObjectURL(blob),size:blob.size,refs:0,retired:false};entries.set(path,entry);bytes+=entry.size;}
  return hold(entry);
 }
-const PACK=12, pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const PACK=12, pause=ms=>new Promise(resolve=>setTimeout(resolve,ms)), BACKEND=process.env.REACT_APP_BACKEND_URL;
 // Loads every question picture of an active attempt in a few requests and keeps them in memory until stop().
-// A part that fails is retried (then fetched picture by picture) until it loads; loading never gives up while the test is open.
+// Parts come first from public CDN links (same for every student, no cookies), then the private pack, then picture by picture.
+// A part that fails is retried until it loads; loading never gives up while the test is open.
 export function preloadPaper(attemptId,paths,onProgress){
  const generation=epoch, held=new Map(), controller=new AbortController();
  controllers.add(controller);
@@ -64,8 +65,12 @@ export function preloadPaper(attemptId,paths,onProgress){
  const live=()=>!stopped&&generation===epoch&&!!userId;
  const missing=list=>list.filter(path=>!held.has(path));
  const report=()=>{if(live())onProgress(held.size,paths.length);};
- async function pack(offset){
-  const res=await fetchWithSession(`/attempts/${attemptId}/assets/pack?offset=${offset}&limit=${PACK}`,{cache:'no-store',signal:controller.signal});
+ const linked=fetchWithSession(`/attempts/${attemptId}/assets/links`,{cache:'no-store',signal:controller.signal})
+  .then(res=>res.ok?res.json():null).then(body=>{const d=body?.data??body;return d&&d.limit===PACK&&d.total===paths.length&&Array.isArray(d.parts)?d.parts:null;})
+  .catch(()=>null);
+ async function pack(offset,link){
+  const res=link?await fetch(link.startsWith('/')?BACKEND+link:link,{credentials:'omit',signal:controller.signal})
+   :await fetchWithSession(`/attempts/${attemptId}/assets/pack?offset=${offset}&limit=${PACK}`,{cache:'no-store',signal:controller.signal});
   if(!res.ok)throw new Error('Paper part '+res.status);
   const buffer=await res.arrayBuffer(), size=new DataView(buffer).getUint32(0);
   const head=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,4,size)));
@@ -77,13 +82,13 @@ export function preloadPaper(attemptId,paths,onProgress){
   }
  }
  async function part(offset){
-  const want=paths.slice(offset,offset+PACK);
+  const want=paths.slice(offset,offset+PACK), parts=await linked;
   for(let failures=0;live()&&missing(want).length;){
    for(const path of missing(want))if(entries.has(path))held.set(path,hold(entries.get(path)));
    if(!missing(want).length)break;
    if(!navigator.onLine){await pause(2000);continue;}
    try{
-    if(failures<3)await pack(offset);
+    if(failures<3)await pack(offset,failures<2?parts?.[offset/PACK]:null);
     else for(const path of missing(want)){const asset=await acquireSourceAsset(path);if(live()&&!held.has(path))held.set(path,asset.release);else asset.release();}
    }catch(e){if(e?.name==='AbortError')return;}
    report();

@@ -2,6 +2,7 @@
 Each stage stops by itself when errors pass 2 % or p95 latency passes 5 s. Accounts use one reserved test prefix.
 Usage: python tools/load_live.py BASE_URL PREFIX SET_ID STAGES   (e.g. https://jeelive.ai +91600001 jee-main-pyq-2025-04-02-s1 50,200,800)
 Env: LOAD_SIGNIN_ONLY=1 (accounts already seeded, exam-day sign-in rush), LOAD_PACKS (picture packs per student, 7 = whole JEE paper),
+LOAD_MEDIA=1 (pictures through the public CDN links of /assets/links, fetched without cookies, like the website),
 LOAD_PIDS=backend:PID,mongo:PID (CPU-seconds each process used per stage, same machine only).
 Every save carries the time record like the real player (2 on-screen stretches + the answer change); about 1 visit per 2 saves.
 """
@@ -13,6 +14,7 @@ BASE, PREFIX, SET_ID = sys.argv[1].rstrip('/'), sys.argv[2], sys.argv[3]
 STAGES = [int(x) for x in sys.argv[4].split(',')]
 SAVE_EVERY, WRITE_SECONDS, PIN = int(os.environ.get('LOAD_SAVE_EVERY', 30)), int(os.environ.get('LOAD_WRITE_SECONDS', 150)), '4826'
 SIGNIN_ONLY, PACKS, RAMP = os.environ.get('LOAD_SIGNIN_ONLY') == '1', int(os.environ.get('LOAD_PACKS', 1)), float(os.environ.get('LOAD_RAMP', 0))
+MEDIA = os.environ.get('LOAD_MEDIA') == '1'
 PIDS = dict(x.split(':') for x in os.environ.get('LOAD_PIDS', '').split(',') if x)
 UA = {'User-Agent': 'Mozilla/5.0 (JEELIVE load test)', 'Content-Type': 'application/json', 'Origin': os.environ.get('LOAD_ORIGIN', BASE)}
 LAT, CODES, ERR, BYTES = defaultdict(list), defaultdict(Counter), [], Counter()
@@ -73,7 +75,11 @@ async def student(i, signup_only=False):
             return
         aid = a['id']
         await go('begin', 'POST', f'/attempts/{aid}/begin')
-        for k in range(PACKS):
+        if MEDIA:
+            _, links = await go('links', 'GET', f'/attempts/{aid}/assets/links')
+            for link in ((links or {}).get('parts') or [])[:PACKS]:
+                await call(s, 'media', 'GET', link[len(BASE) + 4:] if link.startswith('http') else link[4:])
+        for k in range(0 if MEDIA else PACKS):
             await go('pack', 'GET', f'/attempts/{aid}/assets/pack?offset={12 * k}&limit=12')
         qs = [q for q in (a.get('questions') or []) if q.get('type') == 'mcq' and q.get('options')]
         rev, n, sid, seen = {}, 0, uuid.uuid4().hex[:16], time.time()

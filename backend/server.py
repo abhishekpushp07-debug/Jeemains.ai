@@ -56,6 +56,7 @@ from tejas import (
     timeline,
     analysis_api,
     names,
+    media,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -117,6 +118,13 @@ class Protections:
         "X-Frame-Options": "DENY",
         "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
     }
+    # Public CDN pictures set their own Cache-Control; anything else on /api/media stays private, no-store.
+    MEDIA_HEADERS = {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "same-origin",
+        "X-Frame-Options": "DENY",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    }
 
     def __init__(self, app):
         self.app = app
@@ -135,8 +143,11 @@ class Protections:
             if message["type"] == "http.response.start":
                 sent = True
                 headers = MutableHeaders(scope=message)
-                headers.update({**self.HEADERS, "X-Request-ID": rid,
+                media = scope["path"].startswith("/api/media/")
+                headers.update({**(self.MEDIA_HEADERS if media else self.HEADERS), "X-Request-ID": rid,
                                 "Server-Timing": f"app;dur={(time.perf_counter()-started)*1000:.1f}"})
+                if media and "cache-control" not in headers:
+                    headers["Cache-Control"] = "private, no-store"
             await send(message)
 
         try:
@@ -258,6 +269,7 @@ for module in [
     timeline,
     analysis_api,
     names,
+    media,
 ]:
     app.include_router(module.router)
 

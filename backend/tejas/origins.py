@@ -62,3 +62,9 @@ def origin_allowed(value, allowed):
 class ExplicitOriginCORS(CORSMiddleware):
     def is_allowed_origin(self, origin):
         return origin_allowed(origin, self.allow_origins)
+
+    async def __call__(self, scope, receive, send):
+        # Public CDN pictures answer every origin with "*" themselves, so one cached copy serves every site.
+        if scope["type"] == "http" and scope.get("path", "").startswith("/api/media/"):
+            return await self.app(scope, receive, send)
+        await super().__call__(scope, receive, send)
