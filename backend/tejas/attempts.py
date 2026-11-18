@@ -19,7 +19,7 @@ from .contracts import EnvelopeResponse
 from .derivatives import render_crop
 from .canonical import EPOCH_NOW, clocked_one, verify_ledger, database_now
 from .live_window import guard as guard_live_start, answers_sealed
-import asyncio, json
+import asyncio
 from fastapi import Query
 from pydantic import ConfigDict
 from .timeline_models import Batch
@@ -45,9 +45,9 @@ def delivered(q):
     if q.get('render_mode') == 'written':
         p['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
     p.pop("q_refs", None)
-    # Native extracted text can be inaccurate. Only reviewed source alt text is exposed in image mode.
+    # Picture questions: the picture is the question. Machine text is never sent; accessible_text is only the screen-reader label.
     if q.get("render_mode") == "source":
-        p["text"] = q.get("accessible_text", "")
+        p["text"] = "" if p["asset_count"] else q.get("accessible_text", "")
     return p
 
 
@@ -548,6 +548,8 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
         q["solution_asset_count"] = len(q.get("s_refs", []))
         if q.get('render_mode') == 'written':
             q['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
+        if q.get('render_mode') == 'source' and q['asset_count']:
+            q['text'] = ''
     from .insights import insights
     from .reviews import states_for, review_summary
     a['review_states'] = await states_for(a)

@@ -19,7 +19,7 @@
    - Sirf `/api/media/*` path is CDN se jaaye (CloudFront behaviour path pattern `/api/media/*`; BunnyCDN Edge Rule baaki path block kare). Login, answers aur results kabhi CDN se nahi jaane chahiye.
    - Cookies aur query strings forward mat karo. `Access-Control-Allow-Origin` header ko pass hone do.
 2. CDN ka address (jaise `https://jeelive-pics.b-cdn.net` ya `https://cdn.jeelive.ai`, end mein `/` nahi) backend setting `MEDIA_CDN_URL` mein daalo. Phir re-publish karo.
-3. Check karo: paper kholo, network mein `.../api/media/pack/...bin` links CDN host par dikhne chahiye. Ek link par do baar `curl -I` chalao. Doosri baar HIT aana chahiye (BunnyCDN `cdn-cache: HIT`, CloudFront `x-cache: Hit from cloudfront`, Cloudflare `cf-cache-status: HIT`).
+3. Check karo: `curl -I <CDN address>/api/media/probe.bin` do baar chalao. Doosri baar HIT aana chahiye (BunnyCDN `cdn-cache: HIT`, CloudFront `x-cache: Hit from cloudfront`, Cloudflare `cf-cache-status: HIT`). `x-media-cdn` header se pata chalta hai ki server ko CDN address mila ya nahi. Phir paper kholo: network mein `.../api/media/pack/...bin` links CDN host par dikhne chahiye.
 
 ## Kharcha (andaza)
 - Ek JEE paper ~7.4 MB pictures. 1 lakh students = ~740 GB, 2 lakh = ~1.5 TB ek paper par. Yeh CDN ka bandwidth bill hai; server par sirf har part ki pehli copy jaati hai (har CDN location se ek baar).

@@ -215,6 +215,7 @@ SPEC = {
     'attempts.asset_pack': ('attempt_owner_active_question_assets', 'live', 'read'),
     'attempts.asset_links': ('attempt_owner_active_signed_question_picture_links', 'live', 'read'),
     'media.media_pack': ('public_signed_expiring_question_pictures_no_answers', 'batch', 'read_immutable_cdn_cacheable'),
+    'media.media_probe': ('public_fixed_bytes_cdn_check', 'batch', 'read_immutable_cdn_cacheable'),
     'attempts.visit_question': ('attempt_owner_active_deadline', 'live', 'set_membership'),
     'attempts.submit': ('attempt_owner', 'live', 'atomic_seal_receipt'),
     'attempts.results': ('attempt_owner_and_solution_release', 'normal', 'read_grade_enqueue_side_effect'),

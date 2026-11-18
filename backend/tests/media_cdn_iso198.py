@@ -30,6 +30,11 @@ async def links_and_parts(own, stu, other):
     sid = await paper(own, stu)
     if not sid: return
     x = J(await go(stu, sid)); aid = x['id']
+    srcq = [q for q in x.get('questions', []) if q.get('render_mode') == 'source' and q.get('asset_count')]
+    check('player: picture questions carry no machine text', srcq and all(q.get('text') == '' for q in srcq), [q.get('text') for q in srcq][:2])
+    check('player: screen-reader label kept', all('accessible_text' in q for q in srcq), '')
+    r = await client().get('/api/media/probe.bin')
+    check('probe public cacheable', r.status_code == 200 and r.headers.get('cache-control', '').startswith('public') and r.headers.get('x-media-cdn') == 'same-server' and r.headers.get('access-control-allow-origin') == '*', dict(r.headers))
     r = await stu.get(f'/api/attempts/{aid}/assets/links'); d = J(r)
     total, parts = d.get('total', 0), d.get('parts') or []
     check('links 200 with total/limit/parts', r.status_code == 200 and d.get('limit') == 12 and total > 0 and len(parts) == -(-total // 12), (r.status_code, r.text[:300]))
@@ -95,6 +100,12 @@ async def links_and_parts(own, stu, other):
     r = await stu.get(f'/api/attempts/{aid}/assets/pack'); check('private pack still private no-store', r.status_code == 200 and 'no-store' in r.headers.get('cache-control', ''), r.headers.get('cache-control'))
     await stu.post(f'/api/attempts/{aid}/submit')
     r = await stu.get(f'/api/attempts/{aid}/assets/links'); check('links after submit 409', r.status_code == 409, r.status_code)
+    for _ in range(30):
+        r = await stu.get(f'/api/attempts/{aid}/results')
+        if r.status_code == 200: break
+        await drain(); await asyncio.sleep(0.5)
+    rq = [q for q in J(r).get('questions', []) if q.get('render_mode') == 'source' and q.get('asset_count')]
+    check('results: picture questions carry no machine text', r.status_code == 200 and rq and all(q.get('text') == '' for q in rq), (r.status_code, [q.get('text') for q in rq][:2]))
 
 
 def units():

@@ -84,6 +84,14 @@ async def part_bytes(pack_id, offset, limit, bonus):
     return await asyncio.shield(flight)
 
 
+@router.get("/media/probe.bin")
+async def media_probe():
+    """Fixed public bytes to check a CDN in front of /api/media: fetch twice through the CDN, the second answer should be a cache HIT."""
+    return Response(b"jeelive-media-probe-v1\n", media_type="application/octet-stream", headers={
+        "Cache-Control": "public, max-age=300, s-maxage=3600", "Access-Control-Allow-Origin": "*",
+        "Cross-Origin-Resource-Policy": "cross-origin", "X-Media-CDN": CDN or "same-server"})
+
+
 @router.get("/media/pack/{pack_id}/{name}")
 async def media_pack(pack_id: str, name: str):
     m = _NAME.fullmatch(name)
