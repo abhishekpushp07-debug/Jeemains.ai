@@ -1,9 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {Button} from '../components/ui/button';
-import {Bookmark,ArrowUpRight} from 'lucide-react';
-import {LiveSeriesBanner} from '../components/LiveSeriesBanner';
-import {ExamHomeCards} from '../components/exams/ExamNavigation';
+import {SERIES_PATH,useSeriesSchedule} from '../components/LiveSeriesBanner';
+import {Greeting,SectionLabel,SeriesFeatureCard,PracticeGrid,ForYou} from '../components/home/HomeParts';
+
 export default function Home(){
- return <div className="container page exam-home polished-home" data-testid="exam-home-page"><LiveSeriesBanner/><header className="exam-simple-heading"><span className="eyebrow" data-testid="exam-home-eyebrow">YOUR AMBITION. YOUR NEXT STEP.</span><h1 data-testid="exam-home-title">Choose your exam.</h1><p data-testid="exam-home-description">PYQs, mock tests, chapter-wise practice and your results. All in one place.</p><div className="home-quick-actions"><Button asChild variant="outline"><Link to="/profile" data-testid="home-my-tests"><Bookmark size={17}/>My Tests<ArrowUpRight size={16}/></Link></Button><span className="free-label" data-testid="exam-home-free">100% free for all students</span></div></header><ExamHomeCards/></div>;
+ const series=useSeriesSchedule();
+ return <div className="container page app-home" data-testid="exam-home-page">
+  <Greeting/>
+  <SectionLabel title="All India Series" to={SERIES_PATH} testId="home-series-view-all"/>
+  <SeriesFeatureCard series={series}/>
+  <SectionLabel title="Practice"/>
+  <PracticeGrid series={series}/>
+  <SectionLabel title="For you" to="/profile" testId="home-for-you-view-all"/>
+  <ForYou/>
+ </div>;
 }

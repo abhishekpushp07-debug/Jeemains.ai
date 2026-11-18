@@ -15,5 +15,6 @@ export const JEE_SERIES_DAYS = 50;
 export const JEE_SERIES_DATES = '9 Dec 2026 – 27 Jan 2027';
 export const JEE_SERIES_START = '9 December 2026';
 export const JEE_SERIES_START_SHORT = '9 Dec';
+export const JEE_SERIES_DATES_SHORT = '9 Dec – 27 Jan';
 export const seriesPath = id => id===JEE_SERIES ? '/series/all-india-jee' : '/series/'+id;
 export const examPath = name => {const e=examByName(name);return e?'/exams/'+e.slug:'/home'};

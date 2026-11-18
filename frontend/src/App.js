@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useLayoutEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -10,6 +10,8 @@ import {
 import { Toaster } from "./components/ui/sonner";
 import { Button } from './components/ui/button';
 import { AuthProvider, useAuth } from "./lib/auth";
+import "./lib/theme";
+import { BottomTabs } from './components/BottomTabs';
 import { Header, Footer, Loading, Empty } from "./components/Shared";
 import Landing from "./features/Landing";
 import "./App.css";
@@ -32,6 +34,9 @@ import './pyq.css';
 import './admin.css';
 import './master.css';
 import './analysis2.css';
+import './app-theme.css';
+const Rank = lazy(() => import('./features/Rank'));
+const Mission = lazy(() => import('./features/Mission'));
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
@@ -121,11 +126,12 @@ function StudioHome() {
 }
 function Shell() {
   const loc = useLocation();
+  const { user } = useAuth();
   const player = loc.pathname.startsWith("/attempts/");
-  useLayoutEffect(() => {
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('exam-light');
-  }, []);
+  const tabs = !!user && !player;
+  useEffect(() => {
+    document.body.classList.toggle('has-tabs', tabs);
+  }, [tabs]);
   useEffect(() => {
     if (!loc.hash) window.scrollTo(0, 0);
   }, [loc.pathname, loc.hash]);
@@ -154,6 +160,8 @@ function Shell() {
             <Route path="/book-series/:id" element={<Protected><BookSeries /></Protected>} />
             <Route path="/super-admin/*" element={<Protected staff><AdminWorkspace /></Protected>} />
             <Route path="/profile" element={<Protected><Profile /></Protected>} />
+            <Route path="/rank" element={<Protected><Rank /></Protected>} />
+            <Route path="/mission" element={<Protected><Mission /></Protected>} />
             <Route path="/my-tests" element={<Navigate to="/profile" replace />} />
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />
             <Route path="/login" element={<Auth />} />
@@ -220,6 +228,7 @@ function Shell() {
         </Suspense>
       </main>
       {!player && <Footer />}
+      {tabs && <BottomTabs />}
       <Toaster position="top-center" visibleToasts={3} closeButton offset={{ top: 'var(--space-24)' }} mobileOffset={{ top: 'calc(var(--space-16) + var(--space-4))', left: 'var(--space-4)', right: 'var(--space-4)' }} />
     </>
   );

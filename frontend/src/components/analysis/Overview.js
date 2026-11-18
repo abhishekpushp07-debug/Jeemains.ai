@@ -13,7 +13,7 @@ const GO = { overview: 'Overview', performance: 'Performance', potential: 'Score
 function Hero({ an, onDrill, go }) {
   const o = an.overview, v = o.verdict, by = t => pick(an, q => q.outcome === t), p = an.paper;
   return (
-    <Block id="score" kicker={`${p.count} SAWAAL · ${p.minutes ? p.minutes + ' MIN' : 'UNTIMED'} · +${p.marks.correct} / ${p.marks.wrong}`} title="Aapka Score">
+    <Block id="score" className="feature-dark a2-feature" kicker={`${p.count} SAWAAL · ${p.minutes ? p.minutes + ' MIN' : 'UNTIMED'} · +${p.marks.correct} / ${p.marks.wrong}`} title="Aapka Score">
       <div className="a2-hero">
         <ScoreRing score={o.score} maximum={o.maximum} percentage={o.percentage} />
         <div className="a2-hero-side">

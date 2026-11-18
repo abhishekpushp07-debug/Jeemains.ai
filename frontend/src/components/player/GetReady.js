@@ -51,7 +51,7 @@ export function GetReady({ attempt: a, seconds, loaded, onBegin }) {
     try { await onBegin(); } catch (e) { setError(e.message); setBusy(false); }
   }
   return <div className="get-ready" data-testid="get-ready-screen">
-    <div className="get-ready-card">
+    <div className="get-ready-card feature-dark">
       <div className="get-ready-top">
         <Countdown seconds={seconds} />
         <div>

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SourceDetailViewer } from './SourceDetailViewer';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowUpRight,
   ArrowRight,
   UserRound,
-  ChevronDown,
   Loader2,
   BookOpen,
   LogOut,
@@ -14,6 +13,9 @@ import {
   ZoomIn,
 } from "lucide-react";
 import { useAuth } from "../lib/auth";
+import { useTheme } from '../lib/theme';
+import { ThemeToggle } from './ThemeToggle';
+import { RapidFireMark } from './BottomTabs';
 import { acquireSourceAsset } from '../lib/privateResources';
 import {
   Dialog,
@@ -33,14 +35,24 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from './ui/dropdown-menu';
-export const Logo = ({testId='brand-home'}) => {
-  const {user}=useAuth();
-  return <Link to={user?'/home':'/'} className="logo simple-brand official-brand" aria-label="JEELIVE.AI home" data-testid={testId}><img className="official-logo" src="/brand/jeelive-vector.svg" alt="JEELIVE.AI — Score 200+ with AI" width="1415" height="565" decoding="async" data-testid={testId+'-image'}/></Link>;
+export const Logo = ({testId='brand-home',onDark=false}) => {
+  const {user}=useAuth();const theme=useTheme();
+  return <Link to={user?'/home':'/'} className="logo simple-brand official-brand" aria-label="JEELIVE.AI home" data-testid={testId}><img className="official-logo" src={onDark||theme==='dark'?'/brand/jeelive-vector.svg':'/brand/jeelive-vector-light.svg'} alt="JEELIVE.AI — Score 200+ with AI" width="1415" height="565" decoding="async" data-testid={testId+'-image'}/></Link>;
+};
+const NAV=[
+  ['/home','Home','header-nav-home',p=>p==='/home'||/^\/(exams|series|sets|competitions)/.test(p)],
+  ['/rank','Rank','header-nav-rank',p=>p.startsWith('/rank')],
+  ['/profile','My Tests','header-my-tests',p=>/^\/(profile|results|saved-drafts)/.test(p)],
+  ['/mission','Mission','header-nav-mission',p=>p.startsWith('/mission')],
+];
+const HeaderNav=()=>{
+  const {pathname}=useLocation();
+  return <nav className="header-nav" aria-label="Main" data-testid="header-nav">{NAV.map(([to,label,id,match])=><Link key={to} to={to} className={match(pathname)?'is-active':''} aria-current={match(pathname)?'page':undefined} data-testid={id}>{label}</Link>)}<RapidFireMark className="header-rapid" testId="header-rapid-fire"/></nav>;
 };
 export function Header() {
   const {user,logout}=useAuth();const nav=useNavigate();
   async function signOut(){try{if(await logout())nav('/')}catch(e){toast.error(e.message)}}
-  return <header className="site-header simple-header" data-testid="simple-header"><div className="container header-inner"><Logo testId={user?'app-header-logo':'public-header-logo'}/><div className="header-actions simple-header-actions"><span className="header-free-label" data-testid="header-free-label">100% free</span>{user&&<Button asChild variant="ghost" className="header-my-tests"><Link to="/profile" data-testid="header-my-tests"><BookOpen size={17}/>My Tests</Link></Button>}{user?<DropdownMenu><DropdownMenuTrigger asChild><Button variant="outline" className="account-trigger" aria-label="Open account menu" data-testid="app-header-profile-menu"><UserRound size={19}/><ChevronDown size={14}/></Button></DropdownMenuTrigger><DropdownMenuContent align="end" className="account-menu" data-testid="account-menu"><DropdownMenuLabel data-testid="account-menu-label">Your space</DropdownMenuLabel><DropdownMenuItem asChild><Link to="/profile" data-testid="nav-profile">Profile · My Tests</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/home" data-testid="nav-home">Home</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/saved-drafts" data-testid="nav-saved-drafts">Saved drafts</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/competitions" data-testid="nav-competitions">Competitions</Link></DropdownMenuItem>{['owner','reviewer'].includes(user.role)&&<DropdownMenuItem asChild><Link to="/super-admin" data-testid="nav-super-admin">{user.role==='owner'?'Super Admin':'Super Admin · Review'}</Link></DropdownMenuItem>}<DropdownMenuSeparator/><DropdownMenuItem data-testid="logout" onSelect={signOut}><LogOut size={16}/>Sign out</DropdownMenuItem></DropdownMenuContent></DropdownMenu>:<><Button asChild variant="ghost" className="public-login-link"><Link to="/login" data-testid="public-header-login-link">Log in</Link></Button><Button asChild className="btn btn-primary"><Link to="/login" data-testid="public-header-start-free-button">Start free<ArrowUpRight size={16}/></Link></Button></>}</div></div></header>;
+  return <header className="site-header simple-header" data-testid="simple-header"><div className="container header-inner"><Logo testId={user?'app-header-logo':'public-header-logo'}/>{user&&<HeaderNav/>}<div className="header-actions simple-header-actions">{!user&&<span className="header-free-label" data-testid="header-free-label">100% free</span>}<ThemeToggle/>{user?<DropdownMenu><DropdownMenuTrigger asChild><Button variant="outline" className="account-trigger" aria-label="Open account menu" data-testid="app-header-profile-menu"><UserRound size={20}/></Button></DropdownMenuTrigger><DropdownMenuContent align="end" className="account-menu" data-testid="account-menu"><DropdownMenuLabel data-testid="account-menu-label">Your space</DropdownMenuLabel><DropdownMenuItem asChild><Link to="/profile" data-testid="nav-profile">Profile · My Tests</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/home" data-testid="nav-home">Home</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/saved-drafts" data-testid="nav-saved-drafts">Saved drafts</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/competitions" data-testid="nav-competitions">Competitions</Link></DropdownMenuItem>{['owner','reviewer'].includes(user.role)&&<DropdownMenuItem asChild><Link to="/super-admin" data-testid="nav-super-admin">{user.role==='owner'?'Super Admin':'Super Admin · Review'}</Link></DropdownMenuItem>}<DropdownMenuSeparator/><DropdownMenuItem asChild><Link to="/privacy" data-testid="nav-privacy">Privacy</Link></DropdownMenuItem><DropdownMenuItem asChild><Link to="/accessibility" data-testid="nav-accessibility">Accessibility</Link></DropdownMenuItem><DropdownMenuSeparator/><DropdownMenuItem data-testid="logout" onSelect={signOut}><LogOut size={16}/>Sign out</DropdownMenuItem></DropdownMenuContent></DropdownMenu>:<><Button asChild variant="ghost" className="public-login-link"><Link to="/login" data-testid="public-header-login-link">Log in</Link></Button><Button asChild className="btn btn-primary"><Link to="/login" data-testid="public-header-start-free-button">Start free<ArrowUpRight size={16}/></Link></Button></>}</div></div></header>;
 }
 export const Footer = () => {
  const {user}=useAuth();
