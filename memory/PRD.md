@@ -807,3 +807,8 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Opens on the Mock Result screen or on Home (only the focused screen; newest mock of the exam, at most 7 days old, dream picked before that mock). Celebrated dreams are saved with the account (`cheered`, POST /api/rf/dream/cheered).
 - Track: backend/rf_art/sound/dream_cheer.m4a (made by backend/rapidfire/make_dream_cheer.py), downloaded from /api/rf/art/dream_cheer.m4a, so it adds nothing to the app size. Offline: the bundled Rookie Squad dances instead.
 - QA fixture: backend/tests/dream_cheer_fixture.py seed|cleanup.
+
+## June 2026 — Dream Share Card (DONE)
+- WhatsApp share of a crossed dream: black-metal card (big serif college, branch, diamond, "TARGET CROSS · +N MARKS UPAR", mock score X/300, target, student name, mock title, estimate note) sent as a photo with caption "🎯 Dream unlocked! … Tum bhi apna dream set karo 👉 <student link>".
+- From the end of the Dream Unlocked celebration (SHARE + Continue; replay moved to the top bar) and from every reached row of the Dream College Meter (Home, Rank Dream panel, Result) as "Dost ko dikhao".
+- The card is drawn only while sharing (src/dream/DreamShare.tsx, useDreamShare), so nothing hidden keeps animating.

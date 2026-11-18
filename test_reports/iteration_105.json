@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend-only QA of the Dream Share Card (web preview, QA learner, signed in through the UI, dream_cheer_fixture seed run 4 times, cleanup at the end printed 'restored original dream document'). The celebration end state is correct at 390x844 and 320x640: dream-cheer-share (SHARE / Dost ko dikhao) and dream-cheer-continue sit side by side and are fully visible; dream-cheer-again ('Phir se') replaces Skip; skip shows only while playing; replay works and Continue closes the show. Web fallback (no navigator.share) opens api.whatsapp.com/send with the correct caption: Dream unlocked!, NIT Surathkal, Electrical and Electronics Engineering, Score 207/300, Target 205, +2 marks upar, the estimate note, and 'Tum bhi apna dream set karo 👉 <backend>/api/j/VU6PE38'. With navigator.share/canShare stubbed, exactly 1 file is passed: JEELIVE-Dream-Unlocked.png, image/png, a real PNG of 360x359 (~172KB), with the caption (no estimate line). The off-screen card looks elegant with no visible clipping: badge, eyebrow, serif college, branch caps, diamond, hairline '+2 MARKS UPAR', 207 / 300, target 205, Learner, TEST Dream cheer mock, estimate note. Home shows pills on the 3 reached rows, and each pill shares its own row (NIT Delhi 204 +3, MNIT Jaipur 204 +3, NIT Surathkal 205 +2). In the Rank > Dream College panel, rows 0-2 (reached) have pills and rows 3-4 (IIIT Allahabad, NIT Trichy, not reached) have none. The Result screen of 4ff8dce7 (5/300) has no share pills, no share cards and no celebration. Regression is fine: banner, values 205/207/+2 and '+ 2 aur dream unlock: NIT Delhi, MNIT Jaipur'. There are no page errors and no console errors from the share code; the only 401 is the expected /api/jl/auth/refresh before sign-in. No deprecated Expo packages found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "DreamCheer end state at 320x640", "issues": ["Continue sub-label 'Ab agla dream!' is cut off ('Ab agla dre…'): its text needs 79px but has 71px, because the share button takes flex 1.15. Fix: shorten the sub-label on narrow screens, use a smaller sub font, or give the buttons equal flex.", "The footer buttons end at y≈637 of 640, so they are visible but with almost no bottom margin."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/dream_cheer_fixture.py (seed/cleanup used)", "browser_automation Playwright runs (iteration 105)"],
+  "action_items": [
+    "(minor) DreamCheer footer at 320 px: stop the 'Ab agla dream!' sub-label on Continue from being cut off (styles.share flex 1.15 vs flex 1).",
+    "(minor/perf) Every reached DreamRow mounts its own off-screen MetalCard with a sparkling Diamond. Home and Rank stay mounted, so 3 or more hidden cards with animations exist at once. Consider rendering the card only while sharing (mount on press, then capture)."
+  ],
+  "critical_code_review_comments": [
+    "shareCard web path: the WhatsApp fallback text uses o.fallback, which includes the estimate note, while navigator.share uses the caption without it. This is intended and is fine.",
+    "DreamShare off-screen cards repeat data-testid 'dream-share-card' (one per reached row, plus one in the cheer). Tests have to scope by ancestor; document.querySelector returns the Home row card (NIT Delhi), not the one in the celebration.",
+    "useDreamShare swallows all share errors silently (catch {}). That is OK for a dismissed share sheet, but a real capture failure gives the user no feedback."
+  ],
+  "updated_files": ["/app/test_reports/iteration_105.json"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100% of requested checks passed; 1 minor design issue"},
+  "seed_data_creation": "dream_cheer_fixture.py seed (x4) then cleanup: original dream document restored (TEST mock gone, cheered list back to original). No other data changed.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Sign in through the UI on the tool-provided page. A new browser context with saved storage_state plays the show too, and that marks the dreams cheered, so reseed before each run where the show must open. page.add_init_script after the tool's initial navigation only applies on reload, so inject window.open/navigator stubs with page.evaluate after sign-in. RN-web Linking.openURL calls window.open. The Rank Dream panel testIDs are dream-meter-row-N(-share), reached via tab-rank -> rank-tool-dream.",
+  "rca_of_issue": ""
+}

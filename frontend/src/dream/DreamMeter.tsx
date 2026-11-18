@@ -15,6 +15,7 @@ import { Shine } from "@/src/rank/controls";
 import { Diamond } from "@/src/rank/Diamond";
 import { Dream, DreamExam, dreamsOf, EXAM_NAME, FULL, MAX_DREAMS, Mock, mocksOf, removeDream, useDreamNotice, useDreams } from "./store";
 import { LINE_COLORS, ProgressChart, seriesOf, speedOf } from "./ProgressChart";
+import { useDreamShare } from "./DreamShare";
 
 const WHITE = colors.onBrandPrimary, SOFT = colors.custom_rankSilver, MUTED = colors.custom_rankSilverMuted;
 
@@ -84,7 +85,7 @@ export function DreamMeter({ exam, testID, mockId, editable, limit, onAdd, onMor
           <T size={12.5} color={SOFT}>College predictor mein kisi bhi college card par 🎯 Dream college dabao. Har mock ke baad yahan dikhega kitne marks door ho.</T>
           {onAdd ? <Pill testID={`${testID}-add`} size="lg" label="Dream college chuno" iconRight="arrow-right" onPress={onAdd} bg={colors.custom_fBlood} ink={WHITE}
             style={styles.cta} /> : null}
-        </View> : shown.map((d, i) => <DreamRow key={d.id} d={d} i={i} score={last?.score} testID={`${testID}-row-${i}`} editable={editable}
+        </View> : shown.map((d, i) => <DreamRow key={d.id} d={d} i={i} mock={last} testID={`${testID}-row-${i}`} editable={editable}
           eta={chart ? etaOf(last ? d.need - last.score : null, speed) : null} />)}
 
         {limit && dreams.length > limit && onMore ? <Press testID={`${testID}-more`} onPress={onMore} style={styles.more} accessibilityRole="button">
@@ -114,9 +115,11 @@ const ROYAL = { from: colors.custom_royalFrom, mid: colors.custom_royalMid, to: 
 const TEAL = { from: colors.custom_dreamTealFrom, mid: colors.custom_dreamTealMid, to: colors.custom_dreamTealTo, ink: colors.custom_tealInk, gem: colors.custom_tealInk };
 const TONES = [ROYAL, TEAL];
 
-function DreamRow({ d, i, score, testID, editable, eta }: { d: Dream; i: number; score?: number; testID: string; editable?: boolean; eta?: string | null }) {
+function DreamRow({ d, i, mock, testID, editable, eta }: { d: Dream; i: number; mock?: Mock; testID: string; editable?: boolean; eta?: string | null }) {
+  const score = mock?.score;
   const gap = score === undefined ? null : d.need - score;
   const done = gap !== null && gap <= 0;
+  const sharer = useDreamShare(done ? d : undefined, mock);
   const fill = score === undefined ? 0 : Math.max(4, Math.min(100, (score / Math.max(1, d.need)) * 100));
   const tone = TONES[i % TONES.length], ring = LINE_COLORS[i % LINE_COLORS.length];
   return <View testID={testID} style={[styles.row, done && styles.rowDone]}>
@@ -150,6 +153,10 @@ function DreamRow({ d, i, score, testID, editable, eta }: { d: Dream; i: number;
       Target {d.need}{d.range ? ` (${d.range[0]}–${d.range[1]})` : ""} / {FULL[d.exam]} · {d.note}
     </T>
     {eta ? <T testID={`${testID}-eta`} w="semibold" size={11.5} color={done ? colors.custom_fLime : WHITE} numberOfLines={3} style={styles.noteGem}>{eta}</T> : null}
+    {done ? <Pill testID={`${testID}-share`} size="sm" icon="whatsapp" label="Dost ko dikhao" accessibilityLabel={`${d.college} dream card WhatsApp par bhejo`}
+      bg={colors.custom_whatsapp} ink={WHITE} busy={sharer.busy} onPress={sharer.share} style={styles.share} /> : null}
+    {sharer.note ? <T testID={`${testID}-share-note`} size={11.5} color={colors.custom_fLime} style={styles.noteGem}>{sharer.note}</T> : null}
+    {sharer.card}
   </View>;
 }
 
@@ -184,4 +191,5 @@ const styles = StyleSheet.create({
   notice: { flexDirection: "row", alignItems: "flex-start", gap: 6, padding: space.sm, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_fYellow },
   track6: { height: 6, borderRadius: 3, overflow: "hidden", backgroundColor: colors.custom_dreamTrack },
   more: { flexDirection: "row", alignItems: "center", gap: 6, minHeight: 44 },
+  share: { alignSelf: "flex-start", marginTop: 2 },
 });

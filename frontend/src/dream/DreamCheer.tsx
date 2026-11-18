@@ -25,6 +25,7 @@ import { SQUAD_GEO, prefetchSquad, squadFrames } from "@/src/rapid/squadArt";
 import { Diamond } from "@/src/rank/Diamond";
 import { CheerWin, claimCheer, DreamExam, EXAM_NAME, FULL, useDreams } from "./store";
 import { BEAT, COUNTS, HOLD, HOLD_HOP, LEAD, LEAD_HOP, LEAD_SPIN, ROUTINE_MS, chantsFor } from "./routine";
+import { useDreamShare } from "./DreamShare";
 
 const ARENA = require("../../assets/arena/bg_colosseum.webp");
 const TRACK = `${RF_BASE}/art/dream_cheer.m4a`;
@@ -134,6 +135,7 @@ function DreamCheer({ win, exam, name, onClose }: { win: CheerWin; exam: DreamEx
   const clock = useSharedValue(0), drop = useSharedValue(0), glitter = useSharedValue(0), flutter = useSharedValue(0), sweep = useSharedValue(0), lights = useSharedValue(0);
   const d = win.dreams[0], more = win.dreams.slice(1), score = win.mock.score, over = Math.round(score - d.need);
   const lines = chantsFor(name, d.college, over);
+  const sharer = useDreamShare(d, win.mock);
 
   // Load the Kohinoor art and the track (at most 4 s). Offline, the Rookie Squad that ships inside the app dances instead.
   useEffect(() => {
@@ -234,7 +236,10 @@ function DreamCheer({ win, exam, name, onClose }: { win: CheerWin; exam: DreamEx
           {phase !== "done" ? <Press testID="dream-cheer-skip" onPress={close} accessibilityRole="button" accessibilityLabel="Skip celebration" style={styles.skip}>
             <T w="bold" size={13} color={arena.text}>Skip</T>
             <Glyph name="chevron-double-right" size={16} color={arena.text} />
-          </Press> : null}
+          </Press> : reduced ? null : <Press testID="dream-cheer-again" onPress={again} accessibilityRole="button" accessibilityLabel="Celebration phir se dekho" style={styles.skip}>
+            <Glyph name="replay" size={16} color={arena.text} />
+            <T w="bold" size={13} color={arena.text}> Phir se</T>
+          </Press>}
         </View>
 
         {live ? <Chant start={start} lines={lines} running={phase === "dance"} onBeat={onBeat} />
@@ -286,11 +291,13 @@ function DreamCheer({ win, exam, name, onClose }: { win: CheerWin; exam: DreamEx
         {/* One fixed-height slot, so the stage does not jump when the buttons replace the progress bar. */}
         <View style={styles.foot}>
           {phase === "done" ? <View style={styles.buttons}>
-            {reduced ? null : <RaisedButton testID="dream-cheer-again" tone="wine" glyph="party-popper" height={56} label="Phir se" sub="dekho" onPress={again} style={styles.again} />}
-            <RaisedButton testID="dream-cheer-continue" glyph="arrow-right" height={56} streak label="CONTINUE" sub="Ab agla dream!" onPress={close} style={styles.flex} />
+            <RaisedButton testID="dream-cheer-share" glyph="whatsapp" height={56} streak label="SHARE" sub="Dost ko dikhao" busy={sharer.busy} onPress={sharer.share} style={styles.flex} />
+            <RaisedButton testID="dream-cheer-continue" tone="wine" glyph="arrow-right" height={56} label="Continue" sub="Agla dream!" onPress={close} style={styles.flex} />
           </View> : live ? <Progress clock={clock} /> : null}
         </View>
+        {sharer.note ? <T testID="dream-cheer-share-note" w="bold" size={12} color={arena.aqua} style={styles.center}>{sharer.note}</T> : null}
       </ScrollView>
+      {sharer.card}
       {fired.includes(0) ? <Cannons key={`a${round}`} count={26} power={2.2} /> : null}
       {fired.includes(32) ? <Confetti key={`b${round}`} count={64} colors={SPARKLE} /> : null}
       {fired.includes(60) ? <><Cannons key={`c${round}`} count={40} /><Confetti key={`d${round}`} count={80} colors={SPARKLE} /></> : null}
@@ -320,7 +327,6 @@ const styles = StyleSheet.create({
   track: { alignSelf: "center", width: "80%", maxWidth: 360, height: 6, borderRadius: 3, overflow: "hidden", backgroundColor: arena.shade },
   fill: { height: "100%", borderRadius: 3, overflow: "hidden" },
   buttons: { alignSelf: "center", flexDirection: "row", gap: 10, maxWidth: 460, width: "100%", paddingHorizontal: 10 },
-  again: { flex: 0.7 },
   piece: { position: "absolute", left: 0, top: 0 },
   top: { zIndex: 60 },
 });
