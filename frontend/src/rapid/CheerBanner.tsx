@@ -69,13 +69,14 @@ export function Pole({ height, level, side }: { height: number; level: CheerLeve
   </View>;
 }
 
-/** The banner itself. `top` keeps the title clear of the champion's medal that hangs over the top edge. */
-export function CheerBanner({ w, h, top, level, name, crown, clock, count, glitter, wave, sweep }: {
-  w: number; h: number; top: number; level: CheerLevel; name: string; crown: { won: number; real: number };
+/** The banner itself. `top` keeps the title clear of the champion's medal that hangs over the top edge.
+ *  `word`: the foil title (CONGRATULATIONS! by default); without `crown` the name plate shows the name only. */
+export function CheerBanner({ w, h, top, level, name, crown, word = WORD, clock, count, glitter, wave, sweep }: {
+  w: number; h: number; top: number; level: CheerLevel; name: string; crown?: { won: number; real: number }; word?: string;
   clock: SharedValue<number>; count: number; glitter: SharedValue<number>; wave: SharedValue<number>; sweep: SharedValue<number>;
 }) {
   const look = cheer[level], L = level;
-  const fs = Math.min(h * 0.3, (w - 36) / WORD_EM), cap = fs * 0.7, yb = top + 5 + cap + 4, xm = w / 2 + SLANT * (yb - cap / 2);
+  const fs = Math.min(h * 0.3, (w - 36) / ((WORD_EM * word.length) / WORD.length)), cap = fs * 0.7, yb = top + 5 + cap + 4, xm = w / 2 + SLANT * (yb - cap / 2);
   // Narrow banners drop the corner stripes so the champion's name always fits on the plate.
   const plateTop = h - 8 - PLATE, striped = w >= 210, side = striped ? 11 + 2 * 8 + (h - 7 - plateTop) * SLANT + 4 : 10;
   const halo = useAnimatedStyle(() => { const x = clock.value * count, k = x - Math.floor(x); return { opacity: 0.45 + (1 - Math.min(1, k * 3)) * 0.55 }; });
@@ -113,20 +114,20 @@ export function CheerBanner({ w, h, top, level, name, crown, clock, count, glitt
         <LinearGradient colors={[arena.clear, arena.gloss, arena.glint, arena.gloss, arena.clear]} locations={[0, 0.4, 0.5, 0.6, 1]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={StyleSheet.absoluteFill} />
       </Animated.View>
     </View>
-    <Animated.View testID="cheer-banner-title" style={[StyleSheet.absoluteFill, punch]} pointerEvents="none" accessible accessibilityLabel={WORD}>
+    <Animated.View testID="cheer-banner-title" style={[StyleSheet.absoluteFill, punch]} pointerEvents="none" accessible accessibilityLabel={word}>
       <Svg width={w} height={h}>
         <Defs><Grad id={`foil${L}`} x1="0" y1={yb - cap} x2="0" y2={yb} gradientUnits="userSpaceOnUse">{look.foil.map((c, i) => <Stop key={i} offset={i / (look.foil.length - 1)} stopColor={c} />)}</Grad></Defs>
         <G transform="skewX(-12)">
-          <SvgText x={xm + SLANT * 2.5} y={yb + 2.5} fill={look.ink} fillOpacity={0.85} fontSize={fs} fontFamily={fonts.heavy} textAnchor="middle">{WORD}</SvgText>
-          <SvgText x={xm} y={yb} fill={look.ink} stroke={look.ink} strokeWidth={3} strokeLinejoin="round" fontSize={fs} fontFamily={fonts.heavy} textAnchor="middle">{WORD}</SvgText>
-          <SvgText x={xm} y={yb} fill={`url(#foil${L})`} fontSize={fs} fontFamily={fonts.heavy} textAnchor="middle">{WORD}</SvgText>
+          <SvgText x={xm + SLANT * 2.5} y={yb + 2.5} fill={look.ink} fillOpacity={0.85} fontSize={fs} fontFamily={fonts.heavy} textAnchor="middle">{word}</SvgText>
+          <SvgText x={xm} y={yb} fill={look.ink} stroke={look.ink} strokeWidth={3} strokeLinejoin="round" fontSize={fs} fontFamily={fonts.heavy} textAnchor="middle">{word}</SvgText>
+          <SvgText x={xm} y={yb} fill={`url(#foil${L})`} fontSize={fs} fontFamily={fonts.heavy} textAnchor="middle">{word}</SvgText>
         </G>
       </Svg>
     </Animated.View>
     <View pointerEvents="none" style={[styles.plateRow, { top: plateTop, paddingHorizontal: side }]}>
       <View style={[styles.plate, { backgroundColor: look.plate, borderColor: look.trim[1] }]}>
         <T testID="cheer-banner-name" w="heavy" size={Math.min(16, w / 15)} color={arena.text} numberOfLines={1} style={styles.shrink}>{name}</T>
-        <Crown c={crown} />
+        {crown ? <Crown c={crown} /> : null}
       </View>
     </View>
     {GLITTER.slice(0, GLITTER_N[level]).map(([x, y, size, phase], i) => <Glitter key={i} x={x * w} y={y * h} size={size * 1.35} phase={phase} color={look.glitter[i % look.glitter.length]} t={glitter} />)}

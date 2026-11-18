@@ -2,7 +2,7 @@
 the browser show the same list. A phone sends its list together with the account list it was edited from, so a
 change made on one device never wipes one made on another (or the account's own dreams)."""
 import time
-from typing import List, Literal, Optional
+from typing import Annotated, List, Literal, Optional
 
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
@@ -60,14 +60,19 @@ class MocksIn(BaseModel):
     mocks: List[Mock] = Field(min_length=1, max_length=MAX_MOCKS)
 
 
+class CheeredIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ids: List[Annotated[str, Field(min_length=1, max_length=80)]] = Field(min_length=1, max_length=MAX_DREAMS * 3)
+
+
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf/dream")
 
     @r.get("")
     async def read(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        doc = await db.rf_dreams.find_one({"uid": uid}, {"_id": 0, "dreams": 1, "mocks": 1}) or {}
-        return {"dreams": doc.get("dreams", []), "mocks": doc.get("mocks", [])}
+        doc = await db.rf_dreams.find_one({"uid": uid}, {"_id": 0, "dreams": 1, "mocks": 1, "cheered": 1}) or {}
+        return {"dreams": doc.get("dreams", []), "mocks": doc.get("mocks", []), "cheered": doc.get("cheered", [])}
 
     @r.put("/dreams")
     async def save_dreams(data: DreamsIn, x_rf_user: Optional[str] = Header(None)):
@@ -100,6 +105,17 @@ def make_router(db, rf_user):
         mocks = list({m.id: m.model_dump() for m in data.mocks}.values())
         await db.rf_dreams.update_one({"uid": uid}, {"$pull": {"mocks": {"id": {"$in": [m["id"] for m in mocks]}}}})
         await db.rf_dreams.update_one({"uid": uid}, {"$push": {"mocks": {"$each": mocks, "$sort": {"at": -1}, "$slice": MAX_MOCKS}}, "$set": {"ts": time.time()}}, upsert=True)
+        return {"ok": True}
+
+    @r.post("/cheered")
+    async def cheered(data: CheeredIn, x_rf_user: Optional[str] = Header(None)):
+        """Dreams whose "Dream Unlocked" celebration has played, so no device plays it again."""
+        uid = rf_user(x_rf_user)
+        change = {"$addToSet": {"cheered": {"$each": list(dict.fromkeys(data.ids))}}, "$set": {"ts": time.time()}}
+        try:
+            await db.rf_dreams.update_one({"uid": uid}, change, upsert=True)
+        except DuplicateKeyError:  # the account's first document was created at the same moment by another save
+            await db.rf_dreams.update_one({"uid": uid}, change)
         return {"ok": True}
 
     return r

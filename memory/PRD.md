@@ -800,3 +800,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - ETA line wording follows the rounded speed shown on screen (fixed "Score ruka hai" at +0.5). Verified on Home with the QA account.
 - Target reached: happy message "🎉 Target marks pahunch gaye! Ab har mock mein isse upar raho, seat pakki karo." and "Bilkul target par" when exactly on target.
 - Next: user to Publish for a fresh APK.
+
+## June 2026 — Dream Unlocked celebration (DONE)
+- First time a full mock crosses a dream college target (once per dream college, on any device): Rapid Fire's Kohinoor Legends (level 4 Cheer Squad) run a 30 s, 64-count routine to their own 128 BPM cheer track, with beat chants, fireworks, stage lights and confetti cannons at the start, the drop and the finale.
+- Banner "DREAM UNLOCKED!" + college name; card shows target, score, how far above, and other dreams unlocked by the same mock. Skip is always there while it plays; after 30 s: Continue + Phir se dekho.
+- Opens on the Mock Result screen or on Home (only the focused screen; newest mock of the exam, at most 7 days old, dream picked before that mock). Celebrated dreams are saved with the account (`cheered`, POST /api/rf/dream/cheered).
+- Track: backend/rf_art/sound/dream_cheer.m4a (made by backend/rapidfire/make_dream_cheer.py), downloaded from /api/rf/art/dream_cheer.m4a, so it adds nothing to the app size. Offline: the bundled Rookie Squad dances instead.
+- QA fixture: backend/tests/dream_cheer_fixture.py seed|cleanup.

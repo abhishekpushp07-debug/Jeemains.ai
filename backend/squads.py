@@ -81,7 +81,10 @@ def make_router(db, rf_user):
 
     @r.get("/art/{name}")
     async def art(name: str):
-        """Squad levels 2-4 are downloaded when first needed, so they never add to the app's size."""
+        """Squad levels 2-4 are downloaded when first needed, so they never add to the app's size. So is the 30-second
+        "Dream Unlocked" cheer track the Kohinoor Legends dance to (made by rapidfire/make_dream_cheer.py)."""
+        if name == "dream_cheer.m4a":
+            return FileResponse(ART.parent / "sound" / name, media_type="audio/mp4", headers={"Cache-Control": "public, max-age=31536000, immutable"})
         if not ART_NAME.match(name) or not (ART / name).is_file():
             raise HTTPException(404, "Not found.")
         return FileResponse(ART / name, media_type="image/webp", headers={"Cache-Control": "public, max-age=31536000, immutable"})

@@ -28,14 +28,22 @@ const FILES: Record<string, number> = {
 const players: Record<string, AudioPlayer> = {};
 let ready = false;
 
+/** Respect the phone's silent switch; never interrupt the student's music. */
+function audioMode() {
+  if (ready) return;
+  ready = true;
+  setAudioModeAsync({ playsInSilentMode: false, interruptionMode: "mixWithOthers" }).catch(() => {});
+}
+
+/** A longer piece of music from our server, downloaded before it plays so a dance can follow its beat. Same sound rules as the effects. */
+export function loadTrack(uri: string): AudioPlayer | null {
+  try { audioMode(); return createAudioPlayer({ uri }, { downloadFirst: true }); } catch { return null; }
+}
+
 export function playSfx(name?: string | null, volume = 1) {
   if (!name || !FILES[name]) return;
   try {
-    if (!ready) {
-      ready = true;
-      // Respect the phone's silent switch; never interrupt the student's music.
-      setAudioModeAsync({ playsInSilentMode: false, interruptionMode: "mixWithOthers" }).catch(() => {});
-    }
+    audioMode();
     const p = players[name] || (players[name] = createAudioPlayer(FILES[name]));
     p.volume = volume;
     p.seekTo(0).catch(() => {});

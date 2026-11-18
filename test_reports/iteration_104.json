@@ -1,0 +1,49 @@
+{
+  "summary": "Dream Unlocked celebration (Kohinoor Legends 30 s routine) tested end-to-end. Backend: 15/15 new tests (cheered endpoint auth/validation/upsert/dedupe/parallel, cheer track m4a public) + 16/16 iter100 + 4/4 iter101 pass. Frontend (390x844, 320x640, reduced-motion): Home opens the show by itself ~1.6 s after load; pill/skip/banner/card values (NIT Surathkal 205/207/+2, +2 more) are correct; Kohinoor squad4_* art loads with 200; chants land on the beat (OK! 0.85 s, DREAM! 5.9 s, WHOOO! 14.9 s, DREAM UNLOCKED! 28.2 s); cannons at start and end, rf-confetti at ~15 s and the finale; progress bar grows 1->85%; Continue appears at 30.2 s, Skip goes away; Continue + Phir se sit side by side inside 390x844; Phir se replays (Skip back, chant restarts, cannons again); Continue/Skip close it; cheered=[jee-113, jee-73, jee-22] synced to the server; no reopen after reload, fresh browser or a tab round trip; no show on the Tests tab, it opens as soon as Home is focused; Result 4ff8dce7 shows result-dream with no celebration and leaves cheered untouched; Rapid Fire squad preview still shows CONGRATULATIONS! with crown. Minor layout/edge issues only (listed below). Fixture cleanup run: printed 'restored original dream document' and verified (no cheered field, no TEST mock).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "DreamCheer reduced-motion replay", "issue": "With prefers-reduced-motion, tapping 'Phir se' starts a full 30 s routine (Skip comes back, chants run) but the progress bar is already full at the start and the dancers don't move. Reanimated withTiming finishes at once under reduced motion. Either keep reduced motion on the static done screen, or drive the progress bar from the JS clock.", "testID": "dream-cheer-progress", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "DreamCheer @320x640", "issues": [
+        "Pill text is cut off while Skip shows: 'DREAM UNLOCKED · JE…', so the exam name is lost (dream-cheer-pill 206px wide next to Skip 74px). Use a shorter label, a smaller font, or let it wrap.",
+        "The stat label 'TUMHARA SCORE' is cut to 'TUMHARA SC…' (numberOfLines=1, size 9.5 in a ~95px cell). Use adjustsFontSizeToFit or the shorter 'SCORE'.",
+        "While the show plays, the progress bar is at y=640, just below the fold, so it can't be seen at 640 height. When it ends, Continue/Phir se are also below the fold (y=640-701) and there is no hint to scroll. Allowed by the spec, but shrinking Hh/the card at small heights would keep the CTA on screen."]},
+      {"screen": "DreamCheer @390x844", "issues": [
+        "When it ends, the whole layout jumps about 28px up: the content is vertically centred and the buttons (61px) replace the 6px progress bar. A fixed footer height would avoid it.",
+        "The side holders touch or are clipped at the screen edges during kicks (left holder's leg at x<0 in the replay screenshot). Minor."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter104_dream_cheer_api.py",
+    "/app/backend/tests/test_iter100_dream_api_public.py",
+    "/app/backend/tests/test_iter101_dream_merge.py",
+    "/app/test_reports/pytest/iter104_dream_cheer.xml"
+  ],
+  "action_items": [
+    "LOW: 320px pill truncation ('DREAM UNLOCKED · JE…') and 'TUMHARA SC…' stat label truncation in DreamCheer.tsx (styles.pill / Stat).",
+    "LOW: Reduced-motion 'Phir se' replays with the progress bar already full and the dancers still. Make it consistent (DreamCheer.tsx again()/dance effect).",
+    "LOW: Optional: keep the CTA/progress visible on short screens (<=640 height) and avoid the ~28px layout jump when the buttons replace the progress bar.",
+    "LOW (code): music.current = true as soon as p.play() is called. On web, if autoplay is blocked, play() rejects asynchronously, so the fallback ACCENT SFX never play and the show is silent. Check the promise or the player's playing state before muting the fallback.",
+    "LOW (code): Chant skips intermediate counts when the timer jumps more than 2 counts (tab in background or JS stall). Counts 32/60 can then be missed, so the confetti/cannons for them never fire. Fire the special counts 0/32/60 if they were passed.",
+    "LOW (fixture): dream_cheer_fixture.py cleanup calls replace_one(doc) where doc may be None, if the account had no rf_dreams document at seed time. Handle it with delete_one in that case."
+  ],
+  "critical_code_review_comments": [
+    "claimCheer marks the dreams as celebrated the moment the modal opens, not on Continue/Skip. This matches 'once per dream' but means a crash or app kill in second 1 still counts as celebrated. Acceptable per the spec.",
+    "Home's DreamCheerHost uses the exam of the newest mock (auto), not the exam the user picked in the switch. Correct, since the newest mock is the one that can cross.",
+    "cheer-banner-title renders the word in several stacked layers; innerText repeats 'DREAM UNLOCKED!' 3 times. The container has accessibilityLabel, but check the inner layers are hidden from the accessibility tree so screen readers don't read it 3 times.",
+    "DreamCheer.tsx is 311 lines and uses StyleSheet and RN components, with testIDs on all interactive elements. Good. No deprecated expo packages (expo-audio is used, no expo-av)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter104_dream_cheer_api.py (new)"],
+  "success_rate": {"backend": "100% (35/35)", "frontend": "100% of the requested flows pass; 5 minor design/edge issues"},
+  "seed_data_creation": "Used dream_cheer_fixture.py seed (5 times) and cleanup once at the end; it printed 'restored original dream document' and was verified in the DB (no cheered field, TEST-cheer-mock gone, 5 dreams kept). The backend tests used TEST-it104-* uids and hashed grants, which were deleted by exact uid/digest.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Seed with `python /app/backend/tests/dream_cheer_fixture.py seed` (it can be re-run; the backup is kept until cleanup), always cleanup. The browser_automation script can call subprocess to seed. A fresh browser context has no local cheered list, so a re-seed reopens the show. Deep-linking to /tests keeps Home unfocused. The tab testIDs are tab-index and tab-tests. Under reduced motion it skips straight to the done screen. Not tested: the show opening on the Result screen of a newly submitted mock that crosses a dream, because that needs a real attempt, which is forbidden for this account."
+}

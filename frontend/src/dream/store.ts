@@ -19,18 +19,19 @@ export const MAX_DREAMS = 5;
 export type Dream = { id: string; exam: DreamExam; college: string; branch: string; need: number; range?: [number, number]; note: string; at: number };
 /** A full mock, its score scaled to the exam's full marks. */
 export type Mock = { id: string; exam: DreamExam; score: number; max: number; raw: number; rawMax: number; title: string; at: number };
-type State = { dreams: Dream[]; mocks: Mock[] };
+/** cheered = dreams whose "Dream Unlocked" celebration has played (once per dream college, on any device). */
+type State = { dreams: Dream[]; mocks: Mock[]; cheered: string[] };
 /** The phone's copy. `dirty` = the dream list was changed here and the account does not have that change yet;
- *  `base` = ids of the account's list those changes were made on; `unsent` = mocks not uploaded yet. */
-type Saved = State & { dirty?: boolean; base?: string[]; unsent?: string[] };
+ *  `base` = ids of the account's list those changes were made on; `unsent` = mocks not uploaded yet; `cheerSend` = celebrations not uploaded yet. */
+type Saved = State & { dirty?: boolean; base?: string[]; unsent?: string[]; cheerSend?: string[] };
 
 const LEGACY = "dream.v1"; // before dreams moved to the account: one list per phone
 const key = (uid: string) => `dream.v2.${uid}`;
-const EMPTY: State = { dreams: [], mocks: [] };
+const EMPTY: State = { dreams: [], mocks: [], cheered: [] };
 const REFRESH_MS = 60000; // coming back to the app reads the account's list again at most once a minute
 let state: State = EMPTY;
 let owner: string | null = null;
-let dirty = false, base: string[] = [], unsent = new Set<string>();
+let dirty = false, base: string[] = [], unsent = new Set<string>(), cheerSend = new Set<string>();
 let fetchedAt = 0; // when the account's list was last read (0 = not yet since sign-in)
 let notice = ""; // set when the account refused a change
 let ready: Promise<void> = Promise.resolve();
@@ -80,7 +81,7 @@ function noRoom(seen: string[], mine: Dream[], merged: Dream[]) {
 
 function persist() {
   if (!owner) return Promise.resolve();
-  const saved: Saved = { ...state, dirty, base, unsent: [...unsent] };
+  const saved: Saved = { ...state, dirty, base, unsent: [...unsent], cheerSend: [...cheerSend] };
   return Promise.resolve(storage.setItem(key(owner), JSON.stringify(saved))).catch(() => {});
 }
 
@@ -112,7 +113,9 @@ async function pull(uid: string) {
   const mocks = unionMocks(state.mocks, server.mocks, filled);
   const onServer = new Map(server.mocks.map(m => [m.id, m.score]));
   mocks.forEach(m => { if (onServer.get(m.id) !== m.score) unsent.add(m.id); });
-  state = { dreams, mocks };
+  const cheeredThere = new Set(server.cheered || []);
+  state.cheered.forEach(id => { if (!cheeredThere.has(id)) cheerSend.add(id); });
+  state = { dreams, mocks, cheered: [...new Set([...cheeredThere, ...state.cheered])] };
   emit();
 }
 
@@ -144,6 +147,12 @@ async function send(uid: string) {
     catch (e) { if (!refused(e)) throw e; /* never accepted: stays on this phone only */ }
     if (owner === uid) mocks.forEach(m => unsent.delete(m.id));
   }
+  const cheers = [...cheerSend].slice(0, MAX_DREAMS * 3);
+  if (cheers.length) {
+    try { await rf("/dream/cheered", uid, { method: "POST", body: { ids: cheers } }); }
+    catch (e) { if (!refused(e)) throw e; }
+    if (owner === uid) cheers.forEach(id => cheerSend.delete(id));
+  }
 }
 
 /** Full mocks from the student's completed tests list (newest page), for a phone that never opened those results. */
@@ -166,8 +175,8 @@ export function setDreamAccount(uid: string | null, forget = false) {
     if (uid && Date.now() - fetchedAt > REFRESH_MS) void ready.then(() => sync(uid, true));
     return;
   }
-  const gone = owner, pending = dirty || unsent.size > 0;
-  owner = uid; state = EMPTY; dirty = false; base = []; unsent = new Set(); fetchedAt = 0; notice = ""; emit();
+  const gone = owner, pending = dirty || unsent.size > 0 || cheerSend.size > 0;
+  owner = uid; state = EMPTY; dirty = false; base = []; unsent = new Set(); cheerSend = new Set(); fetchedAt = 0; notice = ""; emit();
   if (gone && forget && !pending) void storage.removeItem(key(gone));
   if (!uid) { ready = Promise.resolve(); return; }
   ready = (async () => {
@@ -176,10 +185,11 @@ export function setDreamAccount(uid: string | null, forget = false) {
     if (owner !== uid) return;
     // The old one-list-per-phone dreams join the first account signed in here after the update. They count as added
     // on this phone, so they only fill free slots: the account's own dreams always stay.
-    state = { dreams: addDreams(local?.dreams || [], legacy?.dreams || []), mocks: unionMocks(local?.mocks || [], legacy?.mocks || []) };
+    state = { dreams: addDreams(local?.dreams || [], legacy?.dreams || []), mocks: unionMocks(local?.mocks || [], legacy?.mocks || []), cheered: local?.cheered || [] };
     base = local?.base || [];
     dirty = !!local?.dirty || !!legacy?.dreams.length;
     unsent = new Set([...(local?.unsent || []), ...(legacy?.mocks || []).map(m => m.id)]);
+    cheerSend = new Set(local?.cheerSend || []);
     emit();
     await persist(); // saved under the account before the old key goes
     if (legacy) await storage.removeItem(LEGACY);
@@ -220,6 +230,25 @@ export async function toggleDream(d: Dream): Promise<"added" | "removed" | "full
 }
 
 export const removeDream = async (id: string) => { await ready; save({ ...state, dreams: state.dreams.filter(x => x.id !== id) }, true); };
+
+/** How long after a mock its celebration can still play: an old result opened much later stays quiet. */
+const CHEER_MS = 7 * 86400000;
+export type CheerWin = { mock: Mock; dreams: Dream[] };
+/** The dreams the newest full mock of `exam` crossed for the first time (a mock taken after the dream was picked),
+ *  hardest first. They are marked as celebrated at once, for the account on every device, so the show plays once per
+ *  dream college. `mockId`: only when that mock is the newest. Waits for the account's list, so a show already played
+ *  on another phone is known. */
+export function claimCheer(exam: DreamExam, mockId?: string): CheerWin | null {
+  if (!owner || !fetchedAt) return null;
+  const m = mocksOf(state, exam)[0];
+  if (!m || (mockId && m.id !== mockId) || Date.now() - m.at > CHEER_MS) return null;
+  const done = new Set(state.cheered);
+  const dreams = dreamsOf(state, exam).filter(d => !done.has(d.id) && d.at <= m.at && m.score >= d.need).sort((a, b) => b.need - a.need);
+  if (!dreams.length) return null;
+  dreams.forEach(d => cheerSend.add(d.id));
+  save({ ...state, cheered: [...state.cheered, ...dreams.map(d => d.id)] }, false);
+  return { mock: m, dreams };
+}
 
 /** Which dream exam a test belongs to, from the website's exam name ("JEE Main", "BITSAT", "COMEDK"). */
 export function examOf(name?: string | null): DreamExam | null {

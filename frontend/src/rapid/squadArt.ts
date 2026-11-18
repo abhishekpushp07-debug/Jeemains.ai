@@ -17,8 +17,8 @@ const LOCAL: Record<Who, number[]> = {
 export const squadFrames = (level: number, who: Who): (number | { uri: string })[] =>
   level <= 1 || !SQUAD_GEO[level] ? LOCAL[who] : [1, 2, 3, 4].map((i) => ({ uri: `${RF_BASE}/art/squad${level}_${who}${i}.webp` }));
 
-/** Start downloading a squad level before the show opens, so every pose is ready on the first beat. */
-export const prefetchSquad = (level?: number) => {
-  if (!level || level <= 1) return;
-  Image.prefetch((["a", "b", "c"] as Who[]).flatMap((w) => squadFrames(level, w).map((f) => (f as { uri: string }).uri))).catch(() => {});
+/** Start downloading a squad level before the show opens, so every pose is ready on the first beat. False = not downloaded (offline). */
+export const prefetchSquad = (level?: number): Promise<boolean> => {
+  if (!level || level <= 1) return Promise.resolve(true);
+  return Image.prefetch((["a", "b", "c"] as Who[]).flatMap((w) => squadFrames(level, w).map((f) => (f as { uri: string }).uri))).catch(() => false);
 };

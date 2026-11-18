@@ -21,6 +21,7 @@ import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNaviga
 import { isResultLocked, unlockResult } from "@/src/mission/gate";
 import { ShareGate } from "@/src/mission/ShareGate";
 import { DreamMeter } from "@/src/dream/DreamMeter";
+import { DreamCheerHost } from "@/src/dream/DreamCheer";
 import { examOf, isFullMock, recordMock } from "@/src/dream/store";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
@@ -71,6 +72,7 @@ function Analysis({ r, id }: { r: any; id: string }) {
       </LinearGradient>
       {dream ? <DreamMeter exam={dream} testID="result-dream" mockId={id} chart="full"
         onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} /> : null}
+      {dream ? <DreamCheerHost exam={dream} mockId={id} /> : null}
       <View style={{ flexDirection: "row", gap: space.sm }}>
         <LearningStat testID="result-correct" label="Correct" value={s.correct} tone="completed" />
         <LearningStat testID="result-incorrect" label="Incorrect" value={s.incorrect} tone="error" />

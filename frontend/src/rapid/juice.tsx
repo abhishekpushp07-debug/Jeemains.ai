@@ -46,19 +46,19 @@ export function Twinkles({ spots, color = arena.gold }: { spots: [number, number
 }
 
 const CONFETTI = [arena.gold, arena.tealHi, fx.crimson, fx.white, arena.aqua, fx.ember];
-function Piece({ i, w, h }: { i: number; w: number; h: number }) {
+function Piece({ i, w, h, colors }: { i: number; w: number; h: number; colors: readonly string[] }) {
   const t = useSharedValue(0);
   const x0 = rnd(i, 1) * w, drift = (rnd(i, 2) - 0.5) * 140, size = 7 + rnd(i, 4) * 7;
   useEffect(() => { t.value = withDelay(rnd(i, 5) * 400, withTiming(1, { duration: 1500 + rnd(i, 3) * 1400, easing: Easing.in(Easing.quad) })); }, [t, i]);
   const a = useAnimatedStyle(() => ({ opacity: interpolate(t.value, [0, 0.85, 1], [1, 1, 0]), transform: [{ translateX: x0 + drift * t.value }, { translateY: -24 + t.value * h * 0.85 }, { rotate: `${t.value * (500 + i * 40)}deg` }] }));
-  return <Animated.View style={[styles.abs, { width: size, height: size * 0.55, borderRadius: 2, backgroundColor: CONFETTI[i % CONFETTI.length] }, a]} />;
+  return <Animated.View style={[styles.abs, { width: size, height: size * 0.55, borderRadius: 2, backgroundColor: colors[i % colors.length] }, a]} />;
 }
 /** One shower of confetti for a win. Never loops. */
-export function Confetti({ count = 30 }: { count?: number }) {
+export function Confetti({ count = 30, colors = CONFETTI }: { count?: number; colors?: readonly string[] }) {
   const reduced = useReducedMotion();
   const { width, height } = useWindowDimensions();
   if (reduced) return null;
-  return <View pointerEvents="none" testID="rf-confetti" style={[StyleSheet.absoluteFill, styles.top]}>{Array.from({ length: count }, (_, i) => <Piece key={i} i={i} w={width} h={height} />)}</View>;
+  return <View pointerEvents="none" testID="rf-confetti" style={[StyleSheet.absoluteFill, styles.top]}>{Array.from({ length: count }, (_, i) => <Piece key={i} i={i} w={width} h={height} colors={colors} />)}</View>;
 }
 
 /** A number that counts up to its value. */

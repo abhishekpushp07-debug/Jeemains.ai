@@ -33,25 +33,25 @@ const LOOK = {
 } as const;
 type Level = keyof typeof LOOK;
 
-/** One pose of a dancer: shown only on the counts that use it. */
+/** One pose of a dancer: shown only on the counts that use it. `clock` runs 0 → 1 over the whole of `seq` (one pose per count). */
 function Frame({ src, i, clock, seq }: { src: number | { uri: string }; i: number; clock: SharedValue<number>; seq: number[] }) {
-  const style = useAnimatedStyle(() => ({ opacity: seq[Math.floor(clock.value * COUNT) % COUNT] === i ? 1 : 0 }));
+  const style = useAnimatedStyle(() => ({ opacity: seq[Math.floor(clock.value * seq.length) % seq.length] === i ? 1 : 0 }));
   return <Animated.View style={[StyleSheet.absoluteFill, style]}><Image source={src} style={StyleSheet.absoluteFill} contentFit="contain" transition={0} /></Animated.View>;
 }
 
 /** A dancer running the routine: the pose of each count, a hop, a squash on landing, a sway, and (lead only) full turns. */
-function Dancer({ frames, height, aspect, clock, seq, hops, spins, flip, style, testID }: {
+export function Dancer({ frames, height, aspect, clock, seq, hops, spins, flip, style, testID }: {
   frames: (number | { uri: string })[]; height: number; aspect: number; clock: SharedValue<number>; seq: number[]; hops: number[]; spins?: number[]; flip?: boolean; style?: object; testID?: string;
 }) {
   const w = height * aspect, dir = flip ? -1 : 1;
   const body = useAnimatedStyle(() => {
-    const x = clock.value * COUNT, n = Math.floor(x) % COUNT, k = x - Math.floor(x);
+    const x = clock.value * seq.length, n = Math.floor(x) % seq.length, k = x - Math.floor(x);
     const turn = spins && spins[n] ? Math.cos(k * Math.PI * 2) : 1;
     return { transform: [{ translateY: -Math.sin(k * Math.PI) * hops[n] * height }, { rotate: `${Math.sin(k * Math.PI) * 3 * dir * (n % 2 ? 1 : -1)}deg` },
       { scaleX: dir * (Math.abs(turn) < 0.08 ? 0.08 * Math.sign(turn || 1) : turn) }, { scaleY: 1 - (1 - Math.min(1, k * 6)) * 0.035 }] };
   });
   const shadow = useAnimatedStyle(() => {
-    const x = clock.value * COUNT, n = Math.floor(x) % COUNT, up = Math.sin((x - Math.floor(x)) * Math.PI) * hops[n] * 6;
+    const x = clock.value * seq.length, n = Math.floor(x) % seq.length, up = Math.sin((x - Math.floor(x)) * Math.PI) * hops[n] * 6;
     return { opacity: 0.32 - up * 0.2, transform: [{ scaleX: 1 - up * 0.4 }] };
   });
   return <View testID={testID} style={[{ position: "absolute", width: w, height }, style]}>
@@ -61,7 +61,7 @@ function Dancer({ frames, height, aspect, clock, seq, hops, spins, flip, style, 
 }
 
 /** A firework bursting in the sky over and over. */
-function Burst({ x, y, size, color, delay, testID }: { x: number; y: number; size: number; color: string; delay: number; testID?: string }) {
+export function Burst({ x, y, size, color, delay, testID }: { x: number; y: number; size: number; color: string; delay: number; testID?: string }) {
   const reduced = !!useReducedMotion();
   const p = useSharedValue(0);
   useEffect(() => {
@@ -81,7 +81,7 @@ function Burst({ x, y, size, color, delay, testID }: { x: number; y: number; siz
 }
 
 /** A sweeping stage light from the top: a soft cone that fades towards the floor. */
-function Beam({ x, color, clock, height, phase }: { x: number; color: string; clock: SharedValue<number>; height: number; phase: number }) {
+export function Beam({ x, color, clock, height, phase }: { x: number; color: string; clock: SharedValue<number>; height: number; phase: number }) {
   const style = useAnimatedStyle(() => ({ transform: [{ rotate: `${Math.sin((clock.value + phase) * Math.PI * 2) * 26}deg` }] }));
   const id = `cone${Math.round(phase * 100)}`;
   return <Animated.View pointerEvents="none" style={[styles.beam, { height, left: x - BEAM_W / 2, transformOrigin: "top center" }, style]}>

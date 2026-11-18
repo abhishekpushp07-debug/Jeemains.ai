@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { space } from "@/src/theme";
 import { Switch } from "@/src/rank/controls";
 import { DreamMeter } from "./DreamMeter";
+import { DreamCheerHost } from "./DreamCheer";
 import { DreamExam, dreamsOf, EXAM_NAME, EXAMS, MAX_DREAMS, useDreams } from "./store";
 
 export function HomeDream() {
@@ -20,6 +21,7 @@ export function HomeDream() {
     {withDreams.length > 1 ? <Switch prefix="home-dream-exam" value={exam} onChange={setPicked}
       items={withDreams.map(e => ({ key: e, label: `${EXAM_NAME[e]} ${dreamsOf(s, e).length}/${MAX_DREAMS}` }))} /> : null}
     <DreamMeter exam={exam} testID="home-dream" limit={3} chart="compact" onAdd={() => go("college")} onMore={() => go("dream")} />
+    <DreamCheerHost exam={auto} />
   </View>;
 }
 

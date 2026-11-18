@@ -61,7 +61,7 @@ def test_bad_bearer_401():
 
 # Dreams
 def test_empty_then_save(ha):
-    assert requests.get(f"{BASE}/rf/dream", headers=ha, timeout=15).json() == {"dreams": [], "mocks": []}
+    assert requests.get(f"{BASE}/rf/dream", headers=ha, timeout=15).json() == {"dreams": [], "mocks": [], "cheered": []}
     r = requests.put(f"{BASE}/rf/dream/dreams", headers=ha, json={"dreams": [D], "base": []}, timeout=15)
     assert r.status_code == 200 and r.json()["dreams"][0]["college"] == "TEST_NIT"
     got = requests.get(f"{BASE}/rf/dream", headers=ha, timeout=15).json()
@@ -159,4 +159,4 @@ def test_mocks_empty_or_31_422(ha):
 # Isolation
 def test_other_account_isolated(ha, hb):
     requests.put(f"{BASE}/rf/dream/dreams", headers=ha, json={"dreams": [D], "base": []}, timeout=15)
-    assert requests.get(f"{BASE}/rf/dream", headers=hb, timeout=15).json() == {"dreams": [], "mocks": []}
+    assert requests.get(f"{BASE}/rf/dream", headers=hb, timeout=15).json() == {"dreams": [], "mocks": [], "cheered": []}
