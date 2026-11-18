@@ -73,11 +73,11 @@ export function AnalysisWorkspace({ id, state, onOpen, onSolutions, onRetry }) {
   const key = known(params.get('a')) ? params.get('a') : known(stored) ? stored : 'overview';
   const compare = params.get('mode') === 'compare';
   const vs = params.get('vs') || 'topper';
-  const set = change => {
-    const next = new URLSearchParams(params);
+  const set = change => setParams(prev => {
+    const next = new URLSearchParams(prev);
     Object.entries(change).forEach(([k, v]) => (v == null ? next.delete(k) : next.set(k, v)));
-    setParams(next, { state: location.state, replace: true });
-  };
+    return next;
+  }, { state: location.state, replace: true });
   const open = k => {
     try { localStorage.setItem(LAST, k); } catch {}
     set({ a: k });

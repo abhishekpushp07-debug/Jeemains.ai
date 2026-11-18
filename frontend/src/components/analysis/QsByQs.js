@@ -16,7 +16,7 @@ function Row({ q, an, them, onOpen }) {
       <td>{q.response || '—'}{q.changed ? <small> ({q.changed})</small> : null}</td><td>{q.answer}</td>
       <td><span className={'a2-out tone-' + OUT_TONE[q.outcome]}>{RESULT[q.outcome]}</span></td><td className={q.marks < 0 ? 'bad' : q.marks > 0 ? 'good' : ''}>{q.marks > 0 ? '+' : ''}{q.marks}</td>
       <td className="a2-mono">{mmss(q.time)}</td><td className="a2-mono">{mmss(q.par)}</td>
-      {them && <td className="a2-mono">{mmss(them[q.id])}</td>}
+      {them && <td className="a2-mono">{mmss(them[q.id] || null)}</td>}
       <td className="a2-mono">{mmss(c?.avg_time)}</td><td className="a2-mono">{mmss(c?.topper_time || null)}</td><td>{pc(c?.correct)}</td>
       <td>{c?.top_wrong ? `${c.top_wrong.option} (${c.top_wrong.percent}%)` : '—'}</td><td>{q.visits ?? '—'}</td><td><TagChip tag={q.tag} copy={an.copy} /></td>
     </tr>
@@ -29,7 +29,7 @@ function Card({ q, an, them, onOpen }) {
     <button type="button" className={'a2-qs-card tone-' + OUT_TONE[q.outcome]} data-testid={'a2-qs-card-' + q.number} onClick={() => onOpen(q.id)}>
       <div><b>Q{q.number}</b><span>{q.subject} · {L[q.difficulty]}</span><span className={'a2-out tone-' + OUT_TONE[q.outcome]}>{RESULT[q.outcome]} {q.marks > 0 ? '+' : ''}{q.marks}</span></div>
       <p>Aapka <b>{q.response || '—'}</b> · Sahi <b>{q.answer}</b>{q.changed ? ` · badla ${q.changed}` : ''}</p>
-      <p className="a2-mono">Time {mmss(q.time)} · Par {mmss(q.par)}{them ? ` · Unka ${mmss(them[q.id])}` : ''}</p>
+      <p className="a2-mono">Time {mmss(q.time)} · Par {mmss(q.par)}{them ? ` · Unka ${mmss(them[q.id] || null)}` : ''}</p>
       {c && <p>Class: {pc(c.correct)} sahi · avg {mmss(c.avg_time)}{c.top_wrong ? ` · ${c.top_wrong.percent}% ne ${c.top_wrong.option} chuna` : ''}</p>}
       <TagChip tag={q.tag} copy={an.copy} />
     </button>
@@ -51,7 +51,7 @@ export function QsByQs({ an, onOpen }) {
       <Pills id="qs-filter" value={f} onChange={setF} items={FILTERS.map(([k, l]) => [k, `${l} (${base.filter(TEST[k]).length})`])} />
       {!rows.length && <p className="a2-empty" data-testid="a2-qs-empty">Is filter mein koi sawaal nahi.</p>}
       {rows.length > 0 && <div className="a2-scroll a2-qs-wide"><table className="a2-table" data-testid="a2-qs-table">
-        <thead><tr><th>Q</th><th>Subject</th>{an.performance.has_chapters && <th>Chapter</th>}<th>Level</th><th>Aapka</th><th>Sahi jawab</th><th>Result</th><th>Marks</th><th>Time</th><th>Par</th>{them && <th>{an.compare.label}</th>}<th>Class avg</th><th>Topper</th><th>Class % sahi</th><th>Sabse zyada galti</th><th>Visits</th><th>Tag</th></tr></thead>
+        <thead><tr><th>Q</th><th>Subject</th>{an.performance.has_chapters && <th>Chapter</th>}<th>Level</th><th>Aapka</th><th>Sahi jawab</th><th>Result</th><th>Marks</th><th>Time</th><th>Par</th>{them && <th>{an.compare.label} · time</th>}<th>Class avg</th><th>Class topper</th><th>Class % sahi</th><th>Sabse zyada galti</th><th>Visits</th><th>Tag</th></tr></thead>
         <tbody>{rows.map(q => <Row key={q.id} q={q} an={an} them={them} onOpen={onOpen} />)}</tbody>
       </table></div>}
       <div className="a2-qs-cards">{rows.map(q => <Card key={q.id} q={q} an={an} them={them} onOpen={onOpen} />)}</div>

@@ -1,0 +1,41 @@
+{
+  "summary": "Analysis 2.0 full run (isolated bridge only, customer DB untouched). BACKEND: analysis_iso195.py first gave 56/58. 2 FAILs ('name on analysis and leaderboard' and 'report PDF' missing the student name) came from one regression in tejas/analysis_api.py load(): the student's own display name `name` was overwritten by the name of the student ranked just above (klass['above']). I fixed it by renaming that variable to above_name. Re-run: 58/58 PASS. FRONTEND (local Playwright, preview frontend with /api routed to bridge 127.0.0.1:8773, 1920x800 and 390x844): 77/84 desktop checks, mobile 7/7 functional plus 16/16 overflow checks (personal and compare, all 8 sections), old attempt 16/16. These work: top bar, sticky bottom bar, 8 nav pills, the ?a= URL, deep link ?a=time&mode=compare, last section remembered in localStorage, prev/next pager, swipe left/right at 390, all overview numbers (61/120, 17/7/6, #9 of 14, 42.86 percentile, 70.8%), potential 61/76.4/81.8 with step cards and the guess rule, quality tags 16/2/3/1/3, difficulty Easy/Moderate/Tough/Not rated, drill dialog (tile, difficulty cell, potential careless list) to the focused solution, qchips to solution, Qs-by-Qs rows to solution, all Qs-by-Qs filter counts (Galat 7, Chhode 6, Careless 2, Overtime 3, Confused 1, Marked 1, Jawab badla 2, Sab 30), class-topper column showing '—' for Q5/Q21, phone cards at 390 (table hidden), compare picker Topper/Top 10%/Average, compare tables and pace chart, leaderboard a2-board-compare-<handle> setting vs=user:<handle>, no other-student answers in the compare payload or UI, old attempt locking only Time/Quality/Journey, report download (real %PDF-, attachment filename OK), share scorecard (PNG download in headless), Solutions careless/overtime/confused filters (they filter per subject), Journey 'Tag chhupao' toggle. No React errors, hydration or console warnings in any run. Waterfall labels do not overlap at 390 (checked on the screenshot).",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "GET /api/attempts/{id}/analysis (+ report.pdf, share.png)", "issue": "FIXED BY TESTING AGENT: analysis_api.load() reused the variable `name` for the student ranked above, so analysis.student.name, the PDF and the scorecard showed that student's name (or none) instead of the student's own. Caused 2 failures in iso195.", "priority": "HIGH"}
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "QsByQs compare column (Row + Card)", "issue": "In Comparative mode vs Topper, the extra compare column (header = compare.label 'Topper') shows '0m 00s' for questions the topper never opened (Q5, Q21; compare.times has 2 zero values out of 30). The phone card shows 'Unka 0m 00s' too. Use mmss(them[q.id] || null) so it shows '—', the same as the class-topper fix.", "selector": "[data-testid^='a2-qs-row-'] td, [data-testid^='a2-qs-card-']", "priority": "MEDIUM"},
+      {"component": "QsByQs header in compare mode", "issue": "Vs Topper, the table has two columns both called 'TOPPER' (the compare column and the class-topper time column). Rename one, e.g. 'Topper (compare)' / 'Class topper'.", "selector": "[data-testid='a2-qs-table'] thead", "priority": "LOW"},
+      {"component": "AnalysisWorkspace set() race", "issue": "set() builds the next URL from the `params` of the current render. Clicking 'Personal' (a2-mode-personal) and then a nav pill within about 100ms brings back mode=compare (reproduced in my first desktop run). Use the functional form setParams(prev => ...).", "selector": "[data-testid='a2-mode-personal'], [data-testid^='a2-nav-']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Score Potential waterfall", "issues": ["The bars add up to Max: Abhi 61, Careless +10, Risk +0, Time +10.8 = 81.8. They are followed by a 'Target 76.4' bar that is lower than the running total, which reads as a contradiction. Consider putting Target before the steps or adding a note. The 'Risk' step with 0 marks shows an empty slot with no '+0' label."]},
+      {"screen": "Results page 1920 on scroll", "issues": ["The sticky result-view tabs (Analysis/Progress/...) cover the kicker and title of the analysis block being scrolled (e.g. the Speed-Accuracy map title is hidden under them). Consider adding scroll-margin-top or not making them sticky while the Analysis tab is open."]},
+      {"screen": "Solutions filters (results-filter-careless/overtime/confused)", "issues": ["The filters apply per subject. If the current subject has no match, the label says 'Choose another filter' and the count is 0, even when other subjects have matches (e.g. Careless only in Physics). Consider jumping to the first subject with a match, or showing per-subject counts."]},
+      {"screen": "Time subject chart 390", "issues": ["The Y axis (0-16) has no unit (minutes)."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/analysis_iso195.py", "/app/backend/tests/ui_analysis2_t1.py", "/app/backend/tests/ui_analysis2_t1_probe.py", "/app/backend/tests/ui_analysis2_t1_probe2.py"],
+  "action_items": [
+    "QsByQs.js: show '—' instead of '0m 00s' in the compare column and phone card when them[q.id] is 0 or missing",
+    "QsByQs.js: make the two 'Topper' column headers different in compare mode",
+    "AnalysisWorkspace.js set(): use the functional setParams(prev => ...) to avoid the stale-params race",
+    "Optional UX: waterfall Target placement, sticky tabs covering block titles, Solutions filter jumping to a subject with matches"
+  ],
+  "critical_code_review_comments": [
+    "analysis_api.load(): variable shadowing of `name` (fixed). Keep the student's name and the 'above' name in separate variables.",
+    "analysis.py (450 lines) and analysis_build.py (282 lines) contain nearly identical blocks (quality by_subject, time by_subject, difficulty payload at analysis.py:439-445 vs analysis_build.py:265-273). Check whether one is dead code and remove the duplicate.",
+    "Downloads in the frontend use blob + a.click(). OK, but the PNG 'share' falls back to a download on desktop. This is expected."
+  ],
+  "updated_files": ["/app/backend/tejas/analysis_api.py", "/app/backend/tests/ui_analysis2_t1.py", "/app/backend/tests/ui_analysis2_t1_probe.py", "/app/backend/tests/ui_analysis2_t1_probe2.py"],
+  "success_rate": {"backend": "100% (58/58) after fix; 56/58 before", "frontend": "~95% (functional all pass; 1 medium + 2 low bugs)"},
+  "seed_data_creation": "None in the customer DB. Only the disposable bridge DB (tejas_isolated_book170_c980fe92), which has been dropped.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Start the bridge: cd /app/backend && python tests/analysis_bridge196.py 2400 > /tmp/b196.log 2>&1 & (wait for READY). Then: PLAYWRIGHT_BROWSERS_PATH=/pw-browsers python tests/ui_analysis2_t1.py desktop|mobile|old (FULL=1 for the 16 mobile overflow checks). The mobile waterfall tick check FAIL is a selector artifact; the labels were verified visually. In the desktop script the 'report pdf'/'share png' response-body checks read empty bodies (a Playwright artifact). Use probe.py, which checks the downloads via expect_download (PASS). The Q5/Q21 '—' check in desktop fails only because the run was left in compare mode (that is the compare-column bug). Stop the bridge with pkill -INT -f analysis_bridge196.py so it drops its DB."
+}

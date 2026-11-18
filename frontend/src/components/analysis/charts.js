@@ -97,12 +97,13 @@ export function Waterfall({ p }) {
     rows.push({ name, base: Math.max(0, run), v: step[k], label: '+' + step[k], tone: 'warn' });
     run += step[k];
   });
-  rows.push({ name: 'Target', base: 0, v: p.realistic, label: String(p.realistic), tone: 'good' }, { name: 'Max', base: 0, v: p.maximum, label: String(p.maximum), tone: 'good' });
+  rows.push({ name: 'Max', base: 0, v: p.maximum, label: String(p.maximum), tone: 'good' });
   return (
     <div className="a2-chart" data-testid="a2-potential-waterfall">
       <ResponsiveContainer width="100%" height={270}>
         <BarChart data={rows} margin={{ top: 22, right: 8, left: -18, bottom: 0 }}>
           <CartesianGrid {...GRID} /><XAxis dataKey="name" tick={AXIS} interval={0} /><YAxis tick={AXIS} domain={[0, 'auto']} />
+          <ReferenceLine y={p.realistic} stroke="var(--a-good)" strokeDasharray="6 4" ifOverflow="extendDomain" label={{ value: `Target ${p.realistic}`, position: 'insideTopLeft', fill: 'var(--a-good)', fontSize: 11, fontWeight: 700 }} />
           <Bar dataKey="base" stackId="w" fill="transparent" isAnimationActive={false} />
           <Bar dataKey="v" stackId="w" radius={[6, 6, 0, 0]}>
             {rows.map(r => <Cell key={r.name} fill={`var(--a-${r.tone})`} />)}

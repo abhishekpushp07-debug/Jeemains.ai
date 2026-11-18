@@ -31,7 +31,7 @@ function Subjects({ t }) {
   return (
     <Block id="time-subjects" kicker="SUBJECT-WISE" title="Kis subject ko kitna time" action={<Pills id="time-metric" value={metric} onChange={setMetric} items={[['time', 'Time'], ['questions', 'Questions'], ['accuracy', 'Accuracy']]} />}>
       <div className="a2-chart" data-testid="a2-time-subject-chart"><ResponsiveContainer width="100%" height={220}><BarChart data={data} margin={{ top: 8, right: 8, left: -22, bottom: 0 }}>
-        <CartesianGrid {...GRID} /><XAxis dataKey="name" tick={AXIS} /><YAxis tick={AXIS} /><Tooltip {...TIP} />
+        <CartesianGrid {...GRID} /><XAxis dataKey="name" tick={AXIS} /><YAxis tick={AXIS} unit={{ time: 'm', accuracy: '%' }[metric]} /><Tooltip {...TIP} />
         <Bar dataKey={metric} name={METRIC[metric][0]} fill={METRIC[metric][1]} radius={[6, 6, 0, 0]} />
       </BarChart></ResponsiveContainer></div>
       <div className="a2-scroll"><table className="a2-table" data-testid="a2-time-table">

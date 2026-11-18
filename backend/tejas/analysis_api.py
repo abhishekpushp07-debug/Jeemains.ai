@@ -85,8 +85,8 @@ async def load(a, u, bg, version='original'):
         above = await class_stats.entries.find_one({'cohort_id': cid, 'score': {'$gt': result['summary']['score']}},
                                                    {'_id': 0, 'handle': 1, 'score': 1, 'user_id': 1}, sort=[('score', 1), ('submitted_at', 1)])
         if above:
-            name = (await names_for([above['user_id']])).get(above['user_id'])
-            klass['above'] = {'handle': above['handle'], 'score': above['score'], 'name': name or class_stats.learner(above['handle'])}
+            above_name = (await names_for([above['user_id']])).get(above['user_id'])
+            klass['above'] = {'handle': above['handle'], 'score': above['score'], 'name': above_name or class_stats.learner(above['handle'])}
     events = (await timelines.find_one({'_id': a['id']}, {'_id': 0, 'events': 1}) or {}).get('events')
     hints = await class_stats.hints_for(a['set_id'])
     analysis = await run_in_threadpool(build_analysis, graded, result, stats, RULES, events, hints, klass, {'name': name})

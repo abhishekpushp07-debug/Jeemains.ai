@@ -44,16 +44,91 @@ def normalize_phone(raw):
         )
 
 
+CLOUDFLARE = [ipaddress.ip_network(n) for n in (
+    '173.245.48.0/20', '103.21.244.0/22', '103.22.200.0/22', '103.31.4.0/22', '141.101.64.0/18', '108.162.192.0/18',
+    '190.93.240.0/20', '188.114.96.0/20', '197.234.240.0/22', '198.41.128.0/17', '162.158.0.0/15', '104.16.0.0/13',
+    '104.24.0.0/14', '172.64.0.0/13', '131.0.72.0/22', '2400:cb00::/32', '2606:4700::/32', '2803:f800::/32',
+    '2405:b500::/32', '2405:8100::/32', '2a06:98c0::/29', '2c0f:f248::/32')]
+WRONG_PIN_LIMIT, IP_WRONG_PIN_LIMIT, WRONG_PIN_WAIT = 10, 100, 900
+
+
+def _ip(raw):
+    try:
+        return ipaddress.ip_address(raw.strip())
+    except ValueError:
+        return None
+
+
+def _cloudflare(ip):
+    return any(ip in n for n in CLOUDFLARE if n.version == ip.version)
+
+
+def client_ip(request):
+    """The student's own address. The edge sends X-Forwarded-For as '<anything the client typed>, student, Cloudflare, load balancer',
+    so the student is the hop just left of the last Cloudflare hop. Anything left of that can be typed by the client and is ignored.
+    None when it cannot be told safely: then only the per-number limit applies, never one shared proxy address for everyone."""
+    header = request.headers.get('x-forwarded-for')
+    if not header:
+        peer = _ip(request.client.host) if request.client else None
+        return peer.compressed if peer and peer.is_global else None
+    hops = [_ip(h) for h in header.split(',')]
+    edge = max((i for i, ip in enumerate(hops) if ip and _cloudflare(ip)), default=None)
+    while edge is not None and edge > 0 and hops[edge - 1] and _cloudflare(hops[edge - 1]):
+        edge -= 1
+    student = hops[edge - 1] if edge else None
+    return student.compressed if student and student.is_global else None
+
+
+def _wrong_pin_keys(phone, request):
+    keys = [(hashlib.sha256(f'pin-wrong:number:{phone}'.encode()).hexdigest(), WRONG_PIN_LIMIT)]
+    ip = client_ip(request)
+    if ip:
+        keys.append((hashlib.sha256(f'pin-wrong:ip:{ip}'.encode()).hexdigest(), IP_WRONG_PIN_LIMIT))
+    return keys
+
+
+async def wrong_pin_gate(keys):
+    """429 while this number (or this address) is in its 15-minute wait. Correct PINs are never counted."""
+    t = datetime.fromtimestamp(now(), timezone.utc)
+    try:
+        blocked = await db.tejas_phone_limits.find({'_id': {'$in': [k for k, _ in keys]}, 'blocked_until': {'$gt': t}},
+                                                   {'blocked_until': 1}).to_list(len(keys))
+    except PyMongoError:
+        raise HTTPException(503, 'Sign-in protection is temporarily unavailable. Retry shortly.', headers={'Retry-After': '3'})
+    if blocked:
+        wait = max(1, int((max(d['blocked_until'] for d in blocked) - t).total_seconds()) + 1)
+        raise HTTPException(429, f'Too many incorrect PINs. Try again in {max(1, round(wait / 60))} min, or use Forgot PIN.',
+                            headers={'Retry-After': str(wait)})
+
+
+async def count_wrong_pin(keys):
+    """One wrong PIN. 10 wrong for a number (100 for one address) within 15 minutes of the first starts a 15-minute wait.
+    Returns how many tries this number has left before the wait."""
+    t = datetime.fromtimestamp(now(), timezone.utc)
+    fresh = {'$lt': [{'$ifNull': ['$started', datetime.fromtimestamp(0, timezone.utc)]}, t - timedelta(seconds=WRONG_PIN_WAIT)]}
+    left = None
+    try:
+        for key, limit in keys:
+            doc = await db.tejas_phone_limits.find_one_and_update({'_id': key}, [{'$set': {
+                'count': {'$cond': [fresh, 1, {'$add': ['$count', 1]}]}, 'started': {'$cond': [fresh, t, '$started']},
+                'expires_at': t + timedelta(seconds=2 * WRONG_PIN_WAIT)}}], upsert=True, return_document=ReturnDocument.AFTER)
+            if doc['count'] >= limit:
+                await db.tejas_phone_limits.update_one({'_id': key}, {'$set': {'blocked_until': t + timedelta(seconds=WRONG_PIN_WAIT), 'count': 0},
+                                                                     '$unset': {'started': ''}})
+            if left is None:
+                left = max(0, limit - doc['count'])
+    except PyMongoError:
+        raise HTTPException(503, 'Sign-in protection is temporarily unavailable. Retry shortly.', headers={'Retry-After': '3'})
+    return left
+
+
 async def limit_pin(phone, request, action):
     stamp = now()
     window = int(stamp // 900)
     checks = []
-    try:
-        peer = ipaddress.ip_address(request.client.host) if request.client else None
-    except ValueError:
-        peer = None
-    if peer and peer.is_global:
-        checks.append((f'pin:ip:{peer.compressed}', 60))
+    ip = client_ip(request)
+    if ip:
+        checks.append((f'pin:ip:{ip}', 60))
     checks.append((f'{action}:number:{phone}', 5))
     account_key = hashlib.sha256(f'{action}:number:{phone}:{window}'.encode()).hexdigest()
     for identity, maximum in checks:
@@ -68,25 +143,22 @@ async def limit_pin(phone, request, action):
 @router.post('/phone')
 async def access(data: PhonePayload, request: Request, response: Response):
     phone = normalize_phone(data.phone)
-    limit_key = await limit_pin(phone, request, 'login')
+    keys = _wrong_pin_keys(phone, request)
+    await wrong_pin_gate(keys)
     u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0})
-    stamp = now()
-    hour = int(stamp // 3600)
-    budget_key = hashlib.sha256(f'pin:failed-hour:{phone}:{hour}'.encode()).hexdigest()
-    reserved = await increment(db.tejas_phone_limits, budget_key, datetime.now(timezone.utc) + timedelta(hours=2))
-    if reserved > 20:
-        await db.tejas_phone_limits.update_one({'_id': budget_key, 'count': {'$gt': 0}}, {'$inc': {'count': -1}})
-        raise HTTPException(429, 'Too many incorrect PIN attempts. Please wait before signing in again.',
-                            headers={'Retry-After': str(max(1, int((hour + 1) * 3600 - stamp) + 1))})
     if not u or not u.get('pin_hash') or not await run_in_threadpool(verify, data.pin, u['pin_hash']):
-        raise HTTPException(401, 'Mobile number or PIN is incorrect. Forgot your PIN? Use Forgot PIN to set a new one.')
-    await db.tejas_phone_limits.update_one({'_id': budget_key, 'count': {'$gt': 0}}, {'$inc': {'count': -1}})
+        left = await count_wrong_pin(keys)
+        if not left:
+            raise HTTPException(429, f'Too many incorrect PINs. Try again in {WRONG_PIN_WAIT // 60} min, or use Forgot PIN.',
+                                headers={'Retry-After': str(WRONG_PIN_WAIT)})
+        raise HTTPException(401, f'Mobile number or PIN is incorrect. {left} {"try" if left == 1 else "tries"} left before a '
+                                 f'{WRONG_PIN_WAIT // 60}-minute wait. Forgot your PIN? Use Forgot PIN to set a new one.')
     change = {'last_seen_at': now()}
     if pin_hash_heavy(u['pin_hash']):
         change['pin_hash'] = await run_in_threadpool(hash_pin, data.pin)
     await db.tejas_phone_profiles.update_one({'id': u['id'], 'pin_hash': u['pin_hash']}, {'$set': change})
     result = await new_session({**u, 'role': 'student', 'access_type': 'unverified_phone'}, response)
-    await db.tejas_phone_limits.delete_one({'_id': limit_key})
+    await db.tejas_phone_limits.delete_one({'_id': keys[0][0]})
     return result
 
 

@@ -74,7 +74,7 @@ export default function Results() {
   function setFilter(value) {
     const next = new URLSearchParams(params); next.set('filter', value);
     const matching = allQuestions.filter(q => q.subject === activeSubject && matchesOutcome(q, value));
-    const question = matching.find(q => q.id === selectedQuestion) || matching[0];
+    const question = matching.find(q => q.id === selectedQuestion) || matching[0] || allQuestions.find(q => matchesOutcome(q, value));
     if (question) next.set('question', question.id); else next.delete('question');
     setParams(next, {state:location.state});
   }
