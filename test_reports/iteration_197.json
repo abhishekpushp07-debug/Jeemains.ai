@@ -1,0 +1,24 @@
+{
+  "summary": "Tested the picture-question text fix, /api/media/probe.bin, and a short regression of the CDN picture links. All tests used the ui_bridge188 bridge (disposable DB, dropped at the end) or the isolated iso198 test. The preview DB was not touched and nothing was deployed. BACKEND: tests/media_cdn_iso198.py passed 33/33. The new tests/picture_text_bridge200.py (6 tests) plus media_cdn_bridge199.py (10 tests) passed 16/16. Picture questions (source mode, asset_count 1) send text '' in POST /sets/{id}/start, GET /attempts/{id}, POST /begin and GET /results. accessible_text is still sent, and options and keys are present. The text paper (prac_set) keeps its text ('PRAC q0'…) in both the player and the results. On localhost:8001 the probe returns 200, 23 bytes 'jeelive-media-probe-v1\\n', Cache-Control 'public, max-age=300, s-maxage=3600', ACAO '*', X-Media-CDN 'same-server', CORP cross-origin and no Set-Cookie. It also returns 200 through the preview URL. FRONTEND (preview UI routed to the bridge, 1920 and 390 wide): the Player shows the picture on the canvas inside player-question-stem. No machine text or 'Original PDF question…' text is visible. 'Read accessible text' (accessible-source-text) starts closed and opens to show the label. The option tiles show letters, and the DOM keeps 'Option B (as shown above)' in player-option-math-B (visually hidden in the letter grid). Selecting B saved and survived a reload. The UI submit led to /results/{id}. On Solutions the question and solution pictures render as <img> (1144 px natural width), the closed accessible-text details work, and there is no raw OCR text. There were no console errors or 4xx/5xx responses. CDN regression: the picture paper called /assets/links (with Cookie) and then /api/media/pack (without Cookie). With /api/media aborted it tried media at 1.1 s, tried again at 2.0 s, then used /assets/pack at 2.7 s, and the picture rendered. The text paper made no assets/links call.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/picture_text_bridge200.py", "/app/backend/tests/media_cdn_bridge199.py", "/app/backend/tests/media_cdn_iso198.py", "/app/test_reports/pytest/pytest_results_iter197.xml"],
+  "action_items": [
+    "Optional: the review request mentions data-testid 'question-source-figure', but no element in the frontend has it. Source pictures use 'source-{qid}-question-{i}' / 'source-{qid}-solution-{i}' (the -loading variant while loading). Either add the alias or update the docs and handoff.",
+    "Optional: docs/APP_INTEGRATION.md step 4 quotes the option strings as 'See original option A'. The server actually sends 'Original option A'. Align the wording."
+  ],
+  "critical_code_review_comments": [
+    "attempts.py delivered(): source mode with asset_count == 0 still falls back to accessible_text, the same as before (not a regression). If a source question has no pictures and no accessible_text, its text is ''. Make sure the authoring and publish checks block that case.",
+    "The results loop sets text '' only for source questions with asset_count > 0. Results for source questions with asset_count == 0 keep the score_attempt text, which may be raw extracted text, unlike the player (which uses accessible_text). Small inconsistency; consider using accessible_text there too."
+  ],
+  "updated_files": ["/app/backend/tests/picture_text_bridge200.py"],
+  "success_rate": {"backend": "100% (16/16 bridge + 33/33 iso)", "frontend": "100%"},
+  "seed_data_creation": "Only in the disposable bridge DB tejas_isolated_book170_7a7e51b1 (dropped). Nothing in test_database.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bridge: cd /app/backend && python tests/ui_bridge188.py 2400 & (READY in ~10 s; stop with pkill -INT -f ui_bridge188.py). pytest: python -m pytest tests/picture_text_bridge200.py tests/media_cdn_bridge199.py -q (pytest.ini adds xdist; do not pass -p no:xdist). Player option inputs are radios: data-testid player-option-{KEY} (use .check(force=True)), not buttons. Results solutions: click data-testid a2-view-solutions. Source picture testids are source-{qid}-question-{i}. The Playwright tool rewrites screenshot paths, so avoid f-strings in the path."
+}

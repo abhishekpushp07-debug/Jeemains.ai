@@ -548,8 +548,8 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
         q["solution_asset_count"] = len(q.get("s_refs", []))
         if q.get('render_mode') == 'written':
             q['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
-        if q.get('render_mode') == 'source' and q['asset_count']:
-            q['text'] = ''
+        if q.get('render_mode') == 'source':
+            q['text'] = '' if q['asset_count'] else q.get('accessible_text', '')
     from .insights import insights
     from .reviews import states_for, review_summary
     a['review_states'] = await states_for(a)

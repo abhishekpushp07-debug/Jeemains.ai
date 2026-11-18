@@ -1,6 +1,6 @@
 ## 2026-11-18 — Picture questions send no machine text; CDN probe
 - User: "on app i see that pic of question is also there and aaai written words also. Is that problem there on website too jeelive.ai bitsat chapter wise probably or pyq jee mains". Website (preview and live bundle checked) shows only the pictures + a closed "Read accessible text"; the app showed `text`. The player sent the accessible-text sentence as `text`, and results sent the raw machine/OCR text (BITSAT and JEE Main chapter-wise).
-- attempts.delivered + results: `render_mode: source` with pictures → `text: ""` (accessible_text kept as the screen-reader label). APP_INTEGRATION.md step 4 rule for the app.
+- attempts.delivered + results: `render_mode: source` with pictures → `text: ""` (accessible_text kept as the screen-reader label); source without pictures → accessible_text in both (never raw machine text). APP_INTEGRATION.md step 4 rule for the app. Testing agent iteration_197: backend 16/16 bridge + 33/33 iso, frontend player/results 1920 + 390 pass (tests/picture_text_bridge200.py).
 - media.py: public GET /api/media/probe.bin (fixed bytes, public cache, X-Media-CDN) to confirm CDN HITs. media_cdn_iso198 now 33/33; get_ready_iso188 47/47.
 - MEDIA_CDN_URL secret slot exists (separate test/live); live slot to be filled by the owner via the secure card, then deploy.
 
