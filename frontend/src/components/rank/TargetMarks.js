@@ -17,7 +17,7 @@ export function TargetMarks() {
 }
 
 /** Every typed word must match the college's short name, full name, city or a common alias; up to 20 matches. */
-const ALIAS = { rvce: 'r v college', msrit: 'ramaiah', bmsce: 'b m s college', bmsit: 'b m s institute', dsce: 'dayananda sagar college', pesu: 'pes university', nmit: 'nitte meenakshi',
+const ALIAS = { rvce: 'r v college', msrit: 'ramaiah', bmsce: 'bms college', bmsit: 'bms institute', dsce: 'dayananda sagar college', pesu: 'pes', nmit: 'nitte meenakshi',
   nitk: 'surathkal', trichy: 'tiruchirappalli', mnnit: 'allahabad', vnit: 'nagpur', mnit: 'jaipur', manit: 'bhopal', svnit: 'surat', dtu: 'delhi technological', nsut: 'netaji subhas', iiitd: 'indraprastha' };
 const squash = t => t.toLowerCase().replace(/[.\-,()]/g, ' ').replace(/\s+/g, ' ');
 export function CollegeSearch({ items, onPick, testId, placeholder = 'College ka naam ya shehar (jaise NIT Trichy, Surathkal)' }) {
@@ -26,8 +26,9 @@ export function CollegeSearch({ items, onPick, testId, placeholder = 'College ka
   const hits = useMemo(() => {
     const words = squash(q).trim().split(' ').filter(Boolean);
     if (!words.length) return [];
-    const ok = (hay, flat, w) => hay.includes(w) || flat.includes(w) || (ALIAS[w] && hay.includes(ALIAS[w]));
-    return index.filter(([, hay, flat]) => words.every(w => ok(hay, flat, w))).slice(0, 20).map(([c]) => c);
+    const ok = (hay, flat, w) => hay.includes(w) || flat.includes(w) || (ALIAS[w] && (hay.includes(ALIAS[w]) || flat.includes(ALIAS[w].replace(/ /g, ''))));
+    const byAlias = hay => (words.some(w => ALIAS[w] && hay.includes(ALIAS[w])) ? 0 : 1);
+    return index.filter(([, hay, flat]) => words.every(w => ok(hay, flat, w))).sort((a, b) => byAlias(a[1]) - byAlias(b[1])).slice(0, 20).map(([c]) => c);
   }, [q, index]);
   return <div className="rk-search" data-testid={testId}>
     <label className="rk-search-box"><Search size={18} /><input value={q} onChange={e => setQ(e.target.value)} placeholder={placeholder} aria-label="College dhoondo" data-testid={testId + '-input'} />

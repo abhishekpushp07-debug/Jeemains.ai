@@ -1,6 +1,10 @@
+# Rank 6 tools + Mission share gate + result sparkle + Dream college (2026-11-18)
+- DONE (preview, iteration_199/200): public /rank with 6 jewel tools (Rank predictor, Percentile se rank, Target marks, College predictor JEE/BITSAT/COMEDK, College compare, Dream college), PDFs, WhatsApp share; Mission page + share gate after every fresh submission; result sparkle (40%+ or own best); Dream College Meter on Rank, Results (full mocks) and Home.
+- P1: deploy when the owner asks. P1: when the owner sends the Rank document, check numbers/wording against it. P2: share gate is per browser (localStorage) like the app's per-phone lock; BITS seat cell in compare shows a dash (no seat data).
+- WAITING on owner: Rapid Fire Play Store link (then make the gem/tab/card open it). Rapid Fire stays a non-clickable picture until then.
+
 # App theme + navigation (2026-11-18)
-- DONE (preview, iteration_198): light default + dark switch, phone bottom tabs, Home like the app, Rank/Mission coming-soon, My Tests chips, player/results/analysis re-themed.
-- WAITING on owner: Rank document (build the 6 tools), Mission document, Rapid Fire Play Store link (then make the gem/tab/card open it).
+- DONE (preview, iteration_198): light default + dark switch, phone bottom tabs, Home like the app, My Tests chips, player/results/analysis re-themed.
 - P1: deploy when the owner asks. P2: light-mode polish of admin/Super Admin screens (not re-themed by hand).
 
 # Analysis 2.0 + sign-in limit + capacity (2026-11-18)

@@ -1,3 +1,7 @@
+## Status — 2026-11-18 (newest): Rank (6 tools, public), Mission share gate, result sparkle, Dream college built from the app's code and tested (preview, NOT deployed)
+User (Hindi, from the App branch github.com/abhishekpushp07-debug/Jeemains.ai/tree/App): build Rank's six tools, Mission like the app (result opens only after a share), result sparkle on a good score, whole site in the app theme, Rapid Fire NOT rebuilt (stays a picture). Choices: Mission = share-gated like the app; sparkle = own best broken or 40%+; Rank = light page + colourful jewel tiles; Rank open to everyone without login. Backend: tejas/rank_* (from the app), tejas/dreams.py (/api/dream, /dreams, /cheered, /celebration/{id}), tejas/mission.py (/api/mission/me, /api/j/{code}). Frontend: features/Rank.js + components/rank/*, features/Mission.js + components/mission/*, components/results/ResultSparkle.js, components/home/HomeDream.js, rank.css, mission.css, celebrate.css. iteration_199 (backend 23/23) + iteration_200 retest passed.
+
+
 ## Status — 2026-11-18 (latest): Leaderboard name on the website Profile (preview, NOT deployed). components/DisplayName.js in the My Tests profile box (students only) → PUT /api/profile/display-name; profile box shows the name. names.clean() now accepts Hindi/other-script names (combining marks after a letter). Checked on the analysis bridge: save, remove button, Hinglish 422 shown, leaderboard + analysis show the names, 390 px no overflow.
 
 

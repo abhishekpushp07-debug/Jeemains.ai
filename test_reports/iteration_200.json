@@ -1,0 +1,31 @@
+{
+  "summary": "Iteration 200, frontend-only retest of the iteration 199 fixes on desktop 1920. Signed-out Rank tools ran against the preview backend; Results, Mission and sparkle ran through bridge196 (restarted, hero cookies). Passed: (1) Seat counts: JEE at 180 marks shows tabs All 655 / NIT 291 / IIIT 118 / GFTI 228 / Delhi 18, and the heading reads '655 seats aapki pahunch mein' with 'Sabse achhi 50 yahan, best pehle.'. The NIT tab shows 291 and the note; Delhi shows 18 and correctly has no note. COMEDK at 110 marks shows All 877 / Bengaluru 495 / Baaki Karnataka 382, matching the card's 877/880, with the note. (2) College search: 'trichy nit', 'nit trichy', 'nitk', 'surathkal', 'dtu', 'RV', 'RVCE', 'rv college' and 'msrit' all find the right college in tm-jee-search, tm-ck-search and cmp-col-search; 'NIT' is capped at 20 hits; nonsense input shows the empty message. (3) Compare: added colleges are auto-ticked up to 3 (button reads '3 college compare karo'); a 4th is added unticked; removing a ticked one drops it; after unticking all, a later remove or mode switch does not re-tick anything. BITS column has no repeated subtitle; JEE and BITS fee cells show a note instead of a dash; COMEDK shows the fee in rupees. (4) Pager page 2 (cp and ck) scrolls so the list starts about 100px from the top (just under the 62px header) and shows the first item of page 2 (cp-seat-25). (5) Results gate: a locked id shows share-gate with no sparkle; moving within the app to another id does not show the gate; going back to the locked id shows it again; the WhatsApp share opens api.whatsapp.com and then unlocks (localStorage key removed, gate gone, sparkle '61 / 120 · 50.8%' shown); after a reload it stays unlocked. (6) Regression: rp-card shows at 180 marks; /mission signed in shows mission-card, mission-share-top, mission-share-bottom, mission-share-more and mission-points. No page errors. One fix did NOT work: the gold medal 'DOST' label is still gold on gold (tested by mocking helped=12). One minor search alias bug: 'bmsce' finds nothing.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "MissionCard thank-you medal (mission.css line 39 vs line 40)", "issue": "The 'DOST' label is still unreadable. Its computed color is rgb(242,193,78) (--m-gold) on the gold medal, 9px. Cause: '.ms-thanks small { color: var(--m-gold); font-size: 2.5cqw; letter-spacing: .5cqw ... }' comes AFTER '.ms-medal small' and has the same specificity (0,1,1). It also matches the medal's <small>, so it overrides the new --m-night color. Fix: change the selector to '.ms-thanks .ms-medal small' (or '.ms-medal > small'), or scope the other rule to '.ms-thanks > div > small'. This also affects the downloaded share PNG if it is drawn from the DOM.", "selector": ".ms-medal small inside [data-testid=mission-card-thanks]", "priority": "MEDIUM"},
+      {"component": "CollegeSearch ALIAS (TargetMarks.js line 20)", "issue": "'bmsce' and 'bmsit' find nothing. The aliases point to 'b m s college' / 'b m s institute', but the data has 'BMS College of Engineering' and 'BMS Institute of Technology and Management'. 'pesu' points to 'pes university', which is not in the COMEDK data either (it has 'P.E.S.College of Engineering' and 'PES Institute of Technology and Management'). Fix: bmsce -> 'bms college', bmsit -> 'bms institute', and add a 'pes' alias that matches the data.", "selector": "[data-testid=tm-ck-search-input]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "College search", "issues": ["'nitk' lists NIT Kurukshetra before NIT Surathkal: 'nitkurukshetra' contains 'nitk', so it matches as a substring. Consider ranking alias hits first.", "'R V' (two one-letter words) returns 20 loose hits (RVCE is first, so this is acceptable)."]},
+      {"screen": "College compare table", "issues": ["The BITS Seats cell is still a bare '—'; a short note like the fee row would be consistent."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix the CSS cascade so the medal 'DOST' label uses the dark color: use '.ms-thanks .ms-medal small' (it is currently overridden by '.ms-thanks small').",
+    "Fix the CollegeSearch aliases to match the data: bmsce -> 'bms college', bmsit -> 'bms institute', and pesu or pes to the real PES names."
+  ],
+  "critical_code_review_comments": [
+    "mission.css: two rules with equal specificity both match the medal <small>; the later, generic '.ms-thanks small' wins, so the iteration 199 color fix had no effect.",
+    "TargetMarks.js ALIAS: alias values must match the squashed data text exactly. Several were written with spaced letters ('b m s') that do not occur in the data.",
+    "Results.js now keys ResultsGate by id, which fixes the stale lock state; confirmed by moving between ids in the app."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not run (frontend only, per request)", "frontend": "95% (all retest items pass except the DOST label contrast; plus one minor alias bug)"},
+  "seed_data_creation": "None. Used the disposable bridge196 database (restarted). mission/me helped=12 was mocked only in the browser route.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge: `pkill -f analysis_bridge196; cd /app/backend && python tests/analysis_bridge196.py 1500 &`, wait for READY. Route **/api/** to 127.0.0.1:8773 with the hero cookie dict joined as a header. The hero has helped=0, so to see the thank-you box, mock /api/mission/me data.helped>0 in the route. old_attempt belongs to the 'old' user, so it returns 404 for the hero (expected). Pager list top is about 100px after scrolling. Compare lists the newest item first."
+}

@@ -237,3 +237,12 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Changed: index.html early theme script, ThemeToggle, Shared.js (HeaderNav + light/dark logo), App.js (/rank, /mission, body.has-tabs), Home.js, Landing.js, Profile.js (filter chips), TestCards.js (Solutions button), Player.js (dark header, testid), GetReady, Results.js score card, analysis Overview score block.
 - Tested iteration_198 (frontend, disposable bridge): ~95% → tester fixed sticky player header, Get Ready title colour (--navy in .feature-dark), light streak text. Main agent then fixed: Rapid Fire gem no longer covers the analysis bar (bars sit 98px up, gem pointer-events none), phone signed-out header shows Log in, chip row fade, profile box full width, bigger ring score text; 390 px no overflow on / and /login. NOT deployed.
 
+
+
+## 2026-11-18 — Rank 6 tools, Mission share gate, result sparkle, Dream college (from the App branch)
+- User (Hindi): read the app codebase, build Rank's 6 tools, Mission like the app, result sparkle; whole site like the app except Rapid Fire. Choices: share-gated Mission, sparkle at own best or 40%+, light Rank page with jewel tiles, Rank public.
+- Backend: rank_predictor/rank_tools/rank_bitsat/rank_comedk/rank_pdf (app logic + data, reportlab), dreams.py (5 dreams per exam, released full mocks, celebration), mission.py (personal link, friends counted once per real browser, bots ignored).
+- Frontend: /rank public (Rank predictor, Percentile se rank, Target marks, College predictor JEE/BITSAT/COMEDK with college sheets + round ladders, College compare colleges/branches, Dream college), PDFs + WhatsApp share; /mission (impact panel, maker's card, share buttons); share gate on results after each fresh submit (useAttempt → lockResult); ResultSparkle banner + confetti once per attempt + Dream College Meter; Home Dream college section.
+- Preview quirk found: the preview editor wraps dynamic children in display:contents spans, so CSS '>' selectors were replaced by classes/descendants.
+- Tested: iteration_199 (backend 23/23 in tests/test_rank_mission_dream199.py; frontend fixes: real reachable counts, word-wise college search + aliases, compare auto-tick, pager scroll, result gate keyed by id) and iteration_200 retest passed; then fixed DOST medal contrast and BMS/PES aliases (checked).
+
