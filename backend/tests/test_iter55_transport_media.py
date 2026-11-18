@@ -7,11 +7,11 @@ import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
-import httpx
 import pytest
+from multidict import CIMultiDict, CIMultiDictProxy
 import requests
 from dotenv import load_dotenv
-from jl_transport import canonical_request
+from jl_transport import Upstream, canonical_request
 
 load_dotenv('/app/frontend/.env')
 BASE = os.environ['EXPO_PUBLIC_BACKEND_URL'].rstrip('/')
@@ -26,7 +26,7 @@ def test_actual_proxy_serializes_cookie_rotating_endpoints(monkeypatch):
     release=asyncio.Event()
     jar={'refresh_token':'TEST_INITIAL'}
     async def load(_): return dict(jar)
-    async def save(_, cookies): jar.clear(); jar.update(cookies)
+    async def save(_, sets, gone): jar.update(sets); [jar.pop(k, None) for k in gone]
     async def canonical(*args, **kwargs):
         nonlocal active, maximum
         active+=1; maximum=max(maximum,active)
@@ -36,13 +36,14 @@ def test_actual_proxy_serializes_cookie_rotating_endpoints(monkeypatch):
         else:
             release.set()
         active-=1
-        return httpx.Response(200,json={'user':{'id':'TEST_A'}},headers={'set-cookie':'refresh_token=TEST_ROTATED; Path=/'})
+        return Upstream(200, CIMultiDictProxy(CIMultiDict({'set-cookie':'refresh_token=TEST_ROTATED; Path=/','content-type':'application/json'})), json.dumps({'user':{'id':'TEST_A'}}).encode())
     monkeypatch.setattr(server,'load_jar',load)
-    monkeypatch.setattr(server,'save_jar',save)
+    monkeypatch.setattr(server,'save_cookie_changes',save)
     monkeypatch.setattr(server,'canonical_request',canonical)
     class Request:
         headers={}
         query_params={}
+        client=None
         method='GET'
         async def body(self): return b''
     async def run():
@@ -60,9 +61,15 @@ def test_actual_proxy_serializes_cookie_rotating_endpoints(monkeypatch):
 @pytest.mark.parametrize('path,method,expected', [('auth/session','GET',1),('auth/refresh','POST',1),('auth/phone','POST',1),('my/tests','GET',2)])
 def test_transport_only_retries_safe_reads(path, method, expected):
     calls=[]
-    async def request(*args, **kwargs):
+    class Answer:
+        status=503
+        headers=CIMultiDictProxy(CIMultiDict({'content-type':'application/json'}))
+        async def read(self): return json.dumps({'detail':'isolated unavailable'}).encode()
+        async def __aenter__(self): return self
+        async def __aexit__(self,*a): return False
+    def request(*args, **kwargs):
         calls.append((args,kwargs))
-        return httpx.Response(503,json={'detail':'isolated unavailable'})
+        return Answer()
     async def run():
         r=await canonical_request(SimpleNamespace(request=request),method,CANONICAL+'/'+path,path=path,params={},body=None,headers={})
         assert r.status_code==503 and r.json()['detail']=='isolated unavailable'

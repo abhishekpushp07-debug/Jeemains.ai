@@ -13,7 +13,7 @@ import { rankColors as colors, space } from "@/src/theme";
 import { SERIF } from "@/src/rank/tones";
 import { Shine } from "@/src/rank/controls";
 import { Diamond } from "@/src/rank/Diamond";
-import { Dream, DreamExam, dreamsOf, EXAM_NAME, FULL, MAX_DREAMS, Mock, mocksOf, removeDream, useDreams } from "./store";
+import { Dream, DreamExam, dreamsOf, EXAM_NAME, FULL, MAX_DREAMS, Mock, mocksOf, removeDream, useDreamNotice, useDreams } from "./store";
 
 const WHITE = colors.onBrandPrimary, SOFT = colors.custom_rankSilver, MUTED = colors.custom_rankSilverMuted;
 
@@ -21,6 +21,7 @@ export function DreamMeter({ exam, testID, mockId, editable, limit, onAdd, onMor
   exam: DreamExam; testID: string; mockId?: string; editable?: boolean; limit?: number; onAdd?: () => void; onMore?: () => void;
 }) {
   const s = useDreams();
+  const notice = useDreamNotice();
   const dreams = dreamsOf(s, exam).slice().sort((a, b) => a.need - b.need);
   const mocks = mocksOf(s, exam);
   const at = mockId ? mocks.findIndex(m => m.id === mockId) : 0;
@@ -33,22 +34,27 @@ export function DreamMeter({ exam, testID, mockId, editable, limit, onAdd, onMor
         <Shine />
         <View style={styles.target}><Glyph name="bullseye-arrow" size={22} color={WHITE} /></View>
         <View style={{ flex: 1, gap: 2 }}>
-          <T w="bold" size={10.5} color={colors.custom_fPurpleHint} style={styles.track} numberOfLines={1}>DREAM COLLEGE METER · {EXAM_NAME[exam].toUpperCase()}</T>
+          <T w="bold" size={10.5} color={colors.custom_fPurpleHint} style={styles.track} numberOfLines={2}>DREAM COLLEGE METER · {EXAM_NAME[exam].toUpperCase()}</T>
           <T color={WHITE} style={styles.title}>Kitne marks door?</T>
         </View>
         <T testID={`${testID}-count`} w="bold" size={12} color={colors.custom_fPurpleHint}>{dreams.length}/{MAX_DREAMS}</T>
       </View>
 
       <View style={styles.body}>
+        {notice ? <View testID={`${testID}-notice`} style={styles.notice}>
+          <Glyph name="alert-circle-outline" size={16} color={colors.custom_fYellow} />
+          <T size={12} color={colors.custom_fYellow} style={{ flex: 1 }}>{notice}</T>
+        </View> : null}
         {last ? <View testID={`${testID}-mock`} style={styles.mock}>
           <View style={{ flex: 1, gap: 2 }}>
             <T w="bold" size={10} color={MUTED} style={styles.track}>{mockId ? "IS MOCK MEIN" : "LAST MOCK"}</T>
             <View style={styles.scoreRow}>
               <T testID={`${testID}-score`} color={WHITE} style={styles.score}>{last.score}</T>
-              <T w="semibold" size={14} color={MUTED}> / {FULL[exam]}</T>
+              <T w="semibold" size={14} color={MUTED}> / {Math.max(FULL[exam], last.rawMax)}</T>
             </View>
             <T size={11.5} color={MUTED} numberOfLines={1}>
-              {last.title}{last.rawMax !== FULL[exam] ? ` · ${last.raw}/${last.rawMax} ko ${FULL[exam]} par scale kiya` : ""}
+              {last.title}{last.rawMax < FULL[exam] ? ` · ${last.raw}/${last.rawMax} ko ${FULL[exam]} par scale kiya`
+                : last.rawMax > FULL[exam] ? ` · ${last.rawMax} marks ka paper (bonus sawal ke saath)` : ""}
             </T>
           </View>
           {prev ? <Delta d={last.score - prev.score} testID={`${testID}-delta`} /> : null}
@@ -155,7 +161,8 @@ const styles = StyleSheet.create({
   numDone: { backgroundColor: colors.custom_fLime, borderColor: colors.custom_fLime },
   right: { alignItems: "flex-end" },
   big: { fontFamily: SERIF, fontSize: 24, lineHeight: 28 },
-  remove: { width: 36, height: 36, alignItems: "center", justifyContent: "center" },
+  remove: { width: 44, height: 44, marginVertical: -6, marginRight: -8, alignItems: "center", justifyContent: "center" },
+  notice: { flexDirection: "row", alignItems: "flex-start", gap: 6, padding: space.sm, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_fYellow },
   track6: { height: 6, borderRadius: 3, overflow: "hidden", backgroundColor: colors.custom_dreamTrack },
   more: { flexDirection: "row", alignItems: "center", gap: 6, minHeight: 44 },
 });

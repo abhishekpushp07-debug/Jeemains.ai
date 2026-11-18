@@ -782,4 +782,14 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 
 ## Deployment health check (June 2026)
 - Status: WARN, no blockers. Warnings: root .gitignore excludes .env files (fine if deploy copies the workspace); no in-app account deletion (App Store 5.1.1(v) risk, deferred by user); cups.py:325/421 load all rows at once; first-boot migration in exam_migration.py runs inside startup. Info: iOS ITSAppUsesNonExemptEncryption not set.
-- Audit fixes (AUDIT_2026_06.md) still waiting for user approval.
+- Audit fixes (AUDIT_2026_06.md) approved and DONE (build minify/shrink off, DB safety, 1 lakh scale, Dream College per account).
+
+## Iteration 100–101 — Dream College account sync hardened (DONE)
+- Old phone dreams (dream.v1) now only fill free slots; the account's own dreams are never dropped (bug from iteration_100 fixed, verified in iteration_101).
+- 3-way merge: the phone sends {dreams, base}; the server merges atomically (rev field), so a change on one device never wipes another device's dreams. Missing base = add only (older builds).
+- Notices in the meter: refused save ("Ye badlav account mein save nahi hua...") and no room ("<college> nahi juda: account mein <exam> ke 5 ... pehle se hain").
+- Sign-out sends pending changes first, then removes the phone copy (kept only if changes are still unsent).
+- BITSAT 426-mark bonus paper keeps the real score (shown "/ 426"); shorter papers still scale up.
+- Paper submit: waits for saves already on the way; auto-submit holds back up to ~40 s for answers unsent because of the network.
+- Touch targets 44×44 (dream remove X, card DREAM button). Backend tests: 25 pass.
+- Next for user: tap Publish to make a fresh Android build (APK/AAB) — the old build failed because of the minify setting.

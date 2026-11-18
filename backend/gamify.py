@@ -10,6 +10,7 @@ from fastapi.responses import JSONResponse
 from metadata_cache import metadata_cache
 import hashlib
 import json
+from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, GEM_SHOP, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
 from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
@@ -122,6 +123,31 @@ def quests_of(p: dict) -> list:
     return [{**q, "progress": min(q["goal"], stats.get(q["stat"], 0)), "done": stats.get(q["stat"], 0) >= q["goal"], "claimed": q["id"] in claimed} for q in QUESTS]
 
 
+AWARD_STALE = 15  # seconds: a reward still unwritten after this was cut off by a server restart; the next call finishes it
+
+
+async def pay_once(db, uid: str, ref: str, update: dict) -> Optional[dict]:
+    """Applies `update` to the player's profile exactly once per `ref` and returns the profile after it, or None if this
+    ref was already paid. The ref is recorded in the same atomic write, so a retry after a crash never pays twice."""
+    try:
+        return await db.rf_profiles.find_one_and_update({"uid": uid, "paid_refs": {"$ne": ref}}, {**update, "$push": {"paid_refs": {"$each": [ref], "$slice": -40}}},
+                                                        upsert=True, return_document=ReturnDocument.AFTER)
+    except DuplicateKeyError:  # the profile exists and already carries this ref
+        return None
+
+
+def streak_after(p: dict, today: str, yday: str, freeze_ok: bool = True) -> tuple:
+    """(streak, uses a freeze) for a played match, from the profile as read."""
+    last, streak = p.get("last_day"), p.get("streak", 0)
+    if last == today:
+        return streak, False
+    if last == yday:
+        return streak + 1, False
+    if freeze_ok and last == ist_day(time.time() - 2 * 86400) and p.get("freezes", 0) > 0:
+        return streak + 1, True  # a Streak Freeze covers exactly one missed day
+    return 1, False
+
+
 def make_router(db, rf_user):
     r = APIRouter(prefix="/rf")
     board_cache = {}
@@ -130,19 +156,23 @@ def make_router(db, rf_user):
 
     async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE",
                     diamonds: Optional[dict] = None, phoenix_streak: int = 0, meta: Optional[dict] = None) -> dict:
-        """Idempotent per (uid, ref): replays return the original reward. `meta` describes the match for the friend feed."""
+        """Idempotent per (uid, ref): replays return the original reward. `meta` describes the match for the friend feed.
+        Every counter moves with $inc on its own field, so a quest claim, a chest or another match landing at the same
+        moment is never overwritten; the profile write records `ref`, so a crash half-way never pays twice or loses it."""
         require_active_exam(exam)
         try:
             await db.rf_awards.insert_one({"uid": uid, "ref": ref, "exam": exam, "ts": time.time()})
         except DuplicateKeyError:
-            import asyncio
             for _ in range(20):  # first call may still be writing the reward
                 prev = await db.rf_awards.find_one({"uid": uid, "ref": ref}, {"_id": 0})
                 if prev and prev.get("reward"):
                     return prev["reward"]
                 await asyncio.sleep(0.1)
-            return {}
-        p = await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid, "xp": 0, "coins": 0, "streak": 0, "best_streak": 0, "badges": []}
+            # Still no reward: the first call stopped half-way (server restart). Once that is clearly stale, finish it here.
+            if not await db.rf_awards.find_one_and_update({"uid": uid, "ref": ref, "reward": {"$exists": False}, "ts": {"$lt": time.time() - AWARD_STALE}},
+                                                          {"$set": {"ts": time.time()}}):
+                return {}
+        p = await db.rf_profiles.find_one({"uid": uid}) or {}
         acc = correct / answered if answered else 0
         perfect = total >= 10 and correct == total
         # A win only pays (and counts) with real effort: at least 5 correct answers. Skip/tap-farming earns nothing extra.
@@ -151,34 +181,31 @@ def make_router(db, rf_user):
         xp = correct * 10 + (25 if acc >= 0.8 and answered >= 10 else 0) + (50 if perfect else 0) + (60 if won else 20 if kind == "duel" and answered else 10 if kind == "bot" else 0)
         coins = (correct * 2 if kind != "bot" else correct) + (50 if won else 0) + (30 if perfect else 0)
         today, yday = ist_day(), ist_day(time.time() - 86400)
-        streak = p.get("streak", 0)
-        used_freeze = False
         played = answered > 0  # an all-skip run earns nothing and never keeps a streak alive
-        if not played:
-            streak = streak if p.get("last_day") in (today, yday) else 0
-        elif p.get("last_day") != today:
-            if p.get("last_day") == yday:
-                streak += 1
-            elif p.get("last_day") == ist_day(time.time() - 2 * 86400) and p.get("freezes", 0) > 0:
-                streak += 1  # a Streak Freeze covers exactly one missed day
-                used_freeze = True
-            else:
-                streak = 1
+        used_freeze = False
+        if played:
+            streak, used_freeze = streak_after(p, today, yday)
+            if used_freeze:  # spend the freeze only if no other match spent it a moment ago
+                spent = await db.rf_profiles.update_one({"uid": uid, "freezes": {"$gt": 0}, "last_day": p.get("last_day")}, {"$inc": {"freezes": -1}, "$set": {"last_day": yday}})
+                if not spent.modified_count:
+                    used_freeze = False
+                    p = await db.rf_profiles.find_one({"uid": uid}) or {}
+                    streak, _ = streak_after(p, today, yday, freeze_ok=False)
+        else:
+            streak = p.get("streak", 0) if p.get("last_day") in (today, yday) else 0
         diamonds = {c: n for c, n in (diamonds or {}).items() if c in DIAMONDS and n > 0}
-        ds = p.get("day_stats") or {}
-        if ds.get("day") != today:
-            ds = {"day": today, "sprints": 0, "correct": 0, "wins": 0, "claimed": [], "gems": 0, "rush": []}
-        ds = {**ds, "sprints": ds.get("sprints", 0) + (1 if kind == "solo" and played else 0), "correct": ds.get("correct", 0) + correct, "wins": ds.get("wins", 0) + (1 if won else 0),
-              "gems": ds.get("gems", 0) + sum(diamonds.values())}
-        # This week's totals feed the Friends League. A new week moves the old totals to `last_week` (prizes are paid from there).
-        week, ws, rolled = ist_week(), p.get("week_stats") or {}, {}
-        if ws.get("week") != week:
-            rolled = {"last_week": ws} if ws.get("week") else {}
-            ws = {"week": week, "xp": 0, "wins": 0, "correct": 0, "matches": 0}
-        ws = {**ws, "xp": ws.get("xp", 0) + xp, "wins": ws.get("wins", 0) + (1 if won else 0), "correct": ws.get("correct", 0) + correct, "matches": ws.get("matches", 0) + (1 if played and kind == "duel" else 0)}
-        # Wins in a row across matches (for the friend feed). Solo sprints never touch it.
-        win_run = p.get("win_run", 0) if kind == "solo" or not played else (p.get("win_run", 0) + 1 if won else 0)
-        before = level_of(p.get("xp", 0))
+        # A new day / league week starts the day's and week's totals from zero, once (whichever match comes first).
+        if (p.get("day_stats") or {}).get("day") != today:
+            try:
+                await db.rf_profiles.update_one({"uid": uid, "day_stats.day": {"$ne": today}},
+                                                {"$set": {"day_stats": {"day": today, "sprints": 0, "correct": 0, "wins": 0, "claimed": [], "gems": 0, "rush": []}}}, upsert=True)
+            except DuplicateKeyError:
+                pass  # another match of this player started today's totals first
+        week = ist_week()
+        if (p.get("week_stats") or {}).get("week") != week:  # last week's totals move to `last_week` (prizes are paid from there)
+            await db.rf_profiles.update_one({"uid": uid, "week_stats.week": {"$ne": week}}, [{"$set": {
+                "last_week": {"$cond": [{"$gt": ["$week_stats.week", None]}, "$week_stats", {"$ifNull": ["$last_week", "$$REMOVE"]}]},
+                "week_stats": {"$literal": {"week": week, "xp": 0, "wins": 0, "correct": 0, "matches": 0}}}}])
         inc = {"xp": xp, "coins": coins, "cards_correct": correct}
         inc[f"exam_stats.{exam}.xp"] = xp
         inc[f"exam_stats.{exam}.wins"] = 1 if won else 0
@@ -194,18 +221,30 @@ def make_router(db, rf_user):
             if played:
                 inc["duels"] = 1
             inc["wins"] = 1 if won else 0
-        # Atomic counters so concurrent sprint + duel never lose XP/coins.
-        p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {**inc, **({"freezes": -1} if used_freeze else {})}, "$set": {"streak": streak, "day_stats": ds, "win_run": win_run, "week_stats": ws, **rolled, **({"last_day": today} if played else {})}, "$max": {"best_streak": streak, "best_phoenix": phoenix_streak}},
-                                                     upsert=True, return_document=True)
+        inc.update({"day_stats.sprints": 1 if kind == "solo" and played else 0, "day_stats.correct": correct, "day_stats.wins": 1 if won else 0,
+                    "day_stats.gems": sum(diamonds.values()), "week_stats.xp": xp, "week_stats.wins": 1 if won else 0, "week_stats.correct": correct,
+                    "week_stats.matches": 1 if played and kind == "duel" else 0})
+        sets = {"streak": streak, "last_day": today} if played and p.get("last_day") != today else {}
+        # Wins in a row across matches (for the friend feed). Solo sprints never touch it.
+        if played and kind != "solo":
+            if won:
+                inc["win_run"] = 1
+            else:
+                sets["win_run"] = 0
+        update = {"$inc": inc, "$max": {"best_streak": streak, "best_phoenix": phoenix_streak}, **({"$set": sets} if sets else {})}
+        fresh = await pay_once(db, uid, ref, update)
+        p = fresh or await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid, "xp": xp, "coins": coins}
+        win_run = p.get("win_run", 0)
+        before = level_of(p.get("xp", 0) - xp)
         have = set(p.get("badges", []))
         rules = {"first_sprint": p.get("sessions", 0) >= 1, "first_win": p.get("wins", 0) >= 1, "streak_3": streak >= 3, "streak_7": streak >= 7, "streak_30": streak >= 30,
                  "sharpshooter": answered >= 25 and acc >= 0.9, "perfect": perfect, "duelist_10": p.get("duels", 0) >= 10, "champion_10": p.get("wins", 0) >= 10}
         new = [b for b, ok in rules.items() if ok and b not in have]
         if new:
             await db.rf_profiles.update_one({"uid": uid}, {"$addToSet": {"badges": {"$each": new}}})
-        after = level_of(p["xp"])
+        after = level_of(p.get("xp", 0))
         reward = {"exam": exam, "exam_xp_total": p.get("exam_stats", {}).get(exam, {}).get("xp", 0), "xp": xp, "coins": coins, "streak": streak, "freeze_used": used_freeze, "level_before": before, "level_after": after, "level_up": after > before,
-                  "xp_total": p["xp"], "coins_total": p["coins"], "level_floor": level_floor(after), "next_level_xp": level_floor(after + 1), "played": played,
+                  "xp_total": p.get("xp", 0), "coins_total": p.get("coins", 0), "level_floor": level_floor(after), "next_level_xp": level_floor(after + 1), "played": played,
                   "quest_ready": any(q["done"] and not q["claimed"] for q in quests_of(p)) or any(s["done"] and not s["claimed"] for s in rush_of(p)["steps"]),
                   "diamonds": diamonds, "phoenix_streak": phoenix_streak, "vault": vault_of(p),
                   "new_badges": [{"id": b, "title": BADGES[b][0], "body": BADGES[b][1]} for b in new]}
@@ -220,7 +259,7 @@ def make_router(db, rf_user):
         if after > before:
             events.append(("level", {"level": after}))
         events += [("badge", {"title": BADGES[b][0]}) for b in new]
-        if events and not uid.startswith("TEST"):
+        if events and fresh and not uid.startswith("TEST"):  # only the call that paid tells friends (never twice)
             now = datetime.now(timezone.utc)
             await db.rf_feed.insert_many([{"id": f"{ref}:{k}", "uid": uid, "kind": kind_, "data": data, "ts": time.time(), "at": now} for k, (kind_, data) in enumerate(events)])
         # The leaderboard is NOT reset here: with thousands of matches ending every second it would never stay cached.

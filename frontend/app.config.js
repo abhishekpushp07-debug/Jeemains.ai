@@ -15,8 +15,9 @@ module.exports = ({ config }) => {
       const name = Array.isArray(plugin) ? plugin[0] : plugin;
       if (name !== "expo-build-properties") return plugin;
       return [name, { android: {
-        enableMinifyInReleaseBuilds: true,
-        enableShrinkResourcesInReleaseBuilds: true,
+        // R8 minify + resource shrinking off: the release build must always produce an APK/AAB.
+        enableMinifyInReleaseBuilds: false,
+        enableShrinkResourcesInReleaseBuilds: false,
         enableBundleCompression: true,
         useLegacyPackaging: arm64,
         ...(arm64 ? { buildArchs: ["arm64-v8a"] } : {}),

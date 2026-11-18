@@ -8,6 +8,10 @@ import { imageBase64 } from "./base64";
 import { loadingMetrics, timed } from "./loadingMetrics";
 
 let nextKey = 0;
+// A copy saved on this phone (encrypted, for this account) within this window is shown again without downloading it:
+// a reload in the middle of a paper costs no image traffic. The account may open this question (the paper it just
+// loaded lists it); only copies older than this are checked against the server again.
+const REUSE_MS = 3 * 86400 * 1000;
 
 export type ImageResponse = { status: number; headers: Headers; bytes: Uint8Array };
 export type ImageTransport = (path: string, signal: AbortSignal, extra?: Record<string, string>) => Promise<ImageResponse>;
@@ -40,7 +44,7 @@ export async function loadOriginalImage(path: string, signal: AbortSignal, trans
   const saved = await timed("disk_read", () => readSavedImage(grant.contentKey));
   loadingMetrics.count(saved ? "disk_hit" : "disk_miss");
   ensureCurrent();
-  if (saved && grant.validated) return originalImageValue(saved, signal);
+  if (saved && (grant.validated || (!!saved.at && Date.now() - saved.at < REUSE_MS))) { grant.validated = true; return originalImageValue(saved, signal); }
   let response: ImageResponse | null = null;
   if (saved && (saved.etag || saved.modified)) {
     const headers: Record<string, string> = { Range: "bytes=0-0" };
@@ -54,7 +58,7 @@ export async function loadOriginalImage(path: string, signal: AbortSignal, trans
   ensureCurrent();
   const mime = (response.headers.get("content-type") || "").split(";")[0];
   if (!mime.startsWith("image/") || response.status !== 200 || !response.bytes.length) throw new Error("The original image could not be read. Please retry.");
-  const image: SavedImage = { bytes: response.bytes, mime, etag: response.headers.get("etag") || "", modified: response.headers.get("last-modified") || "" };
+  const image: SavedImage = { bytes: response.bytes, mime, etag: response.headers.get("etag") || "", modified: response.headers.get("last-modified") || "", at: Date.now() };
   grant.validated = true;
   const value = await originalImageValue(image, signal);
   try { ensureCurrent(); } catch (e) { value.dispose?.(); throw e; }

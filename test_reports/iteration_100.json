@@ -1,0 +1,48 @@
+{
+  "summary": "Tested the audit fixes (DB safety, aiohttp proxy, Dream College on the account) on the backend and in the 390x844 web preview. Signed in only twice with the QA learner. Backend: audit DB tests 5/5, transport 'serializes or retries' 5/5, and a new public-URL Dream API suite 11/11 all pass. Frontend: these work: sign-in through the aiohttp proxy, session check, My Tests Completed list (attempt 4ff8dce7 is listed and opens), result-dream on the direct-URL result, home-dream, all 6 Rank tiles, dream-panel with the jee/bitsat/comedk switch, pinning from the JEE and BITSAT predictors (message plus server PUT), the 5-per-exam limit message, removing from dream-meter rows, the Home exam switch (shows only exams that have dreams), staying signed in after a reload, and sign-out then sign-in bringing dreams back from the server. The CSAB round note is correct ('CSAB 2 closing 50,368 CRL'). D1 check: I removed mock 4ff8dce7 from the server for the test and cleared the local dream copy (fresh-phone case). Opening /result/<id> directly did not wipe the dreams and re-recorded the mock with POST /rf/dream/mocks, with identical data. Moving the old dream.v1 list works and the v1 key is removed, but I found a data-loss edge case (see issues). No academic writes. The QA dreams are back to the original 4 JEE dreams and the mocks are unchanged.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "PUT /api/rf/dream/dreams", "issue": "A full-list replace with no version or etag. Two devices changing dreams offline: the last one to sync overwrites the other (last-write-wins). This is acceptable for 5 items but is not documented."},
+      {"endpoint": "uvicorn --reload", "issue": "The backend reloads whenever a file under /app/backend/tests changes (WatchFiles). Writing test files restarts the preview server in the middle of a test. This is preview only."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "store.ts setDreamAccount legacy merge", "issue": "During the one-time dream.v1 move, addDreams(legacyDreams, serverDreams) puts the phone's old list first. If that exam is already at 5 on the server, a server dream is silently dropped and the PUT then overwrites the account. Reproduced: server had 5 JEE dreams and v1 had 1 JEE + 1 COMEDK; after sign-in the server lost jee-689 (NIELIT Calicut). Fix: merge as addDreams(server.dreams, legacy.dreams), so the account's list wins and old phone items only fill free slots. Reference: /app/frontend/src/dream/store.ts:109", "testID": "dream-meter", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Sign out privacy", "issue": "The store and dream.py comments say 'signing out leaves nothing of it on a shared phone'. Verified that after Account > Sign out, localStorage still has dream.v2.<uid> (dreams and mocks) and cache.u.<uid>.*. It is hidden from other users because the key is per account, but the data stays on the device. Either remove the key in forgetPrivateProfile (auth.tsx:36) or fix the comment.", "affected_testIDs": ["account-signout-button"]},
+      {"flow": "BITSAT mock scaling", "issue": "BITSAT mocks with bonus questions (rawMax 426) are scaled to 390 (for example -6/426 becomes -5/390). A real BITSAT score is absolute (bonus marks add on top of 390) and cutoffs such as 274 are absolute. Scaling makes the gap look about 9% larger (raw 300 shows as 275). Consider min(raw, 390) or no scaling when the max is 426. Reference: store.ts mockOf().", "affected_testIDs": ["home-dream", "result-dream"]},
+      {"flow": "Dream sync failure", "issue": "push() swallows every error. If the server answers PUT with 400 or 422, dirty stays true forever and is retried on every change, and the student never sees that the change was not saved.", "affected_testIDs": ["dream-meter"]}
+    ],
+    "design_issues": [
+      {"screen": "Rank > Dream panel / Home Dream meter", "issues": ["The dream-meter-row-N-remove (X) touch target is 36x36, below 44x44.", "The JEE predictor DREAM button is 40x44 (width under 44)."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter100_dream_api_public.py", "/app/backend/tests/test_audit_2026_06_db_fixes.py", "/app/backend/tests/qa_dream_probe.py", "/app/backend/tests/qa_mock_pull.py", "/app/test_reports/pytest/iter100_dream.xml", "/app/test_reports/pytest/audit_db.xml"],
+  "action_items": [
+    "MEDIUM: store.ts:109, change the legacy merge so it does not drop the account's existing dreams (server list first, then legacy items in free slots).",
+    "Remove dream.v2.<uid> on sign-out (forgetPrivateProfile), or correct the 'signing out leaves nothing' comments in store.ts and dream.py.",
+    "Decide on BITSAT bonus scaling (426 to 390) against absolute cutoffs.",
+    "Show a small message when a dream save is rejected (4xx) instead of retrying silently forever.",
+    "useAttempt.ts seal(): (a) if a debounced flush is running at 00:00, flush() returns at once (running.current) and submit can race the in-flight PUTs; await the running flush first. (b) Retry rounds 1+ skip flush, so answers that failed while offline at 00:00 are never re-sent before submit. Re-flush on retry if the server accepts in-deadline answers.",
+    "Make the remove X 44x44 (hitSlop is enough)."
+  ],
+  "critical_code_review_comments": [
+    "jl_transport.py: one pooled aiohttp session, DummyCookieJar (no cross-user leak), no retry of writes, GET retry limited to transient statuses with a deadline. Looks correct. Set-Cookie is read with headers.getall. PASS_HEADERS has no content-encoding or content-length, so aiohttp's auto-decompression is safe.",
+    "cups.finish sets payout='pending', resume_payouts runs from the sweep loop with pay_once idempotency. DB3 is addressed. jl_jars now has a 90-day TTL on seen_at and per-cookie $set (DB4 and DB5 addressed).",
+    "dream.py: Pydantic validation, 5-per-exam limit, duplicate ids give 400, uid unique index, $pull then $push with $sort/$slice 30. Correct. The 'exam' Literal gives 422 for other exams.",
+    "useAttempt.ts auto-submit: server-anchored timer, 0-10 s random spread, exponential backoff that honours Retry-After, and a non-transient error falls back to a status check. Good. See the action items for the flush race.",
+    "tsc --noEmit is clean. No deprecated expo packages (expo-av, expo-barcode-scanner, expo-background-fetch) in package.json.",
+    "The APK/AAB build fix cannot be verified here (needs an EAS or Publish build)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter100_dream_api_public.py (new)", "/app/backend/tests/qa_dream_probe.py (new QA helper)", "/app/backend/tests/qa_mock_pull.py (new QA helper)"],
+  "success_rate": {"backend": "100% (21/21 tests)", "frontend": "95% (all requested flows pass; 1 medium edge-case bug in the legacy move)"},
+  "seed_data_creation": "Only TEST-it100-* rf_dreams and rf_access grants, removed automatically. On the QA account: temporarily pinned NIELIT Calicut (JEE) and BITS Goa CS (BITSAT), injected 2 TEST_ legacy dreams, and pulled and re-recorded mock 4ff8dce7. Everything was restored to the original state: 4 JEE dreams and 9 mocks, unchanged.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The QA session can be reused across browser_automation calls by saving localStorage (jl_sid, jl_user) to a 0600 temp file and seeding it with add_init_script, which avoids the login limit. Tab screens stay mounted, so the testID lists include hidden tabs. Use specific ids. The BITSAT predictor uses bitsat-score-input / bitsat-show / bitsat-item-N-dream; JEE uses rank-marks-input / rank-show / rank-seat-N-dream. The storage helper JSON-encodes values twice (localStorage value = JSON string of a JSON string).",
+  "rca_of_issue": "Legacy merge: store.ts setDreamAccount sets state.dreams = addDreams(local||[], legacy.dreams) and then, because dirty is true, addDreams(state.dreams, server.dreams). The base list (legacy) keeps all its entries and server dreams are added only while the exam is under 5. The result is PUT to the server as the full list, so server-only dreams beyond 5 are deleted. Repro: account with 5 JEE dreams, set localStorage dream.v1 with 1 JEE dream, open the app, and GET /rf/dream shows one original JEE dream missing."
+}

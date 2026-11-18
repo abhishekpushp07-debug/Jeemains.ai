@@ -21,7 +21,7 @@ from pymongo.errors import DuplicateKeyError
 
 from exam_groups import resolve_exam
 from load_guard import arena_gate
-from gamify import crown_of
+from gamify import crown_of, pay_once
 from scope import Pick, normalise, scope_fields, scope_of
 from shop import rival_profile
 from social import blocked_uids, card, find_player
@@ -160,21 +160,39 @@ def make_router(db, rf_user, duels):
         if runner and not seats[runner].get("bot") and len(humans) > 2:
             prizes[runner] = 15 * (len(humans) - 1)
         gems = {u: g for u, g in ((champion, cup_gems(c, len(humans), 1)), (runner, cup_gems(c, len(humans), 2))) if u and g and not seats[u].get("bot")}
-        got = await db.rf_cups.find_one_and_update({"id": c["id"], "status": "live"}, {"$set": {"status": "finished", "champion": champion, "prizes": prizes, "gems": gems, "finished_ts": time.time()}}, return_document=after)
+        got = await db.rf_cups.find_one_and_update({"id": c["id"], "status": "live"}, {"$set": {"status": "finished", "champion": champion, "prizes": prizes, "gems": gems, "finished_ts": time.time(), "payout": "pending"}}, return_document=after)
         if not got:
             return await fresh(c["id"])
-        for uid, g in gems.items():  # diamonds straight into the Vault
-            await db.rf_profiles.update_one({"uid": uid}, {"$inc": {f"diamonds.{colour}": n for colour, n in g.items()}})
-        for uid, coins in prizes.items():  # paid once: only the request that closed the cup gets here
+        return await pay_cup(got)
+
+    async def pay_cup(c):
+        """Coins, diamonds and the crown for the champion and runner-up. Each player is paid exactly once (pay_once), so
+        a cup whose server stopped half-way is simply paid again by the sweep: whoever was paid already is skipped."""
+        humans = [p for p in c["players"] if not p.get("bot")]
+        champion, prizes, gems = c["champion"], c.get("prizes") or {}, c.get("gems") or {}
+        for uid in dict.fromkeys([*prizes, *gems]):
             won = uid == champion
-            p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$inc": {"coins": coins, **({"cups_won": 1, **({"cups_real": 1} if len(humans) > 1 else {})} if won else {})},
-                                                                        **({"$addToSet": {"badges": "cup_champion"}} if won and len(humans) > 1 else {})}, return_document=after)
-            if won and p:  # kept on the cup: this was the champion's title number N, for the crown celebration
-                got["title_no"] = p.get("cups_won", 1)
-                await db.rf_cups.update_one({"id": c["id"]}, {"$set": {"title_no": got["title_no"]}})
+            inc = {"coins": prizes.get(uid, 0), **{f"diamonds.{colour}": n for colour, n in gems.get(uid, {}).items()},
+                   **({"cups_won": 1, **({"cups_real": 1} if len(humans) > 1 else {})} if won and uid in prizes else {})}
+            p = await pay_once(db, uid, "cup:" + c["id"], {"$inc": inc, **({"$addToSet": {"badges": "cup_champion"}} if won and uid in prizes and len(humans) > 1 else {})})
+            if won and uid in prizes and not c.get("title_no"):  # kept on the cup: this was the champion's title number N, for the crown celebration
+                p = p or await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "cups_won": 1})
+                if p:
+                    c["title_no"] = p.get("cups_won", 1)
+                    await db.rf_cups.update_one({"id": c["id"]}, {"$set": {"title_no": c["title_no"]}})
         if champion in prizes and len(humans) > 1 and not champion.startswith("TEST"):
-            await db.rf_feed.insert_one({"id": "cup:" + c["id"], "uid": champion, "kind": "cup", "data": {"players": len(c["players"]), "label": c["label"]}, "ts": time.time(), "at": datetime.now(timezone.utc)})
-        return got
+            await db.rf_feed.update_one({"id": "cup:" + c["id"]}, {"$setOnInsert": {"uid": champion, "kind": "cup", "data": {"players": len(c["players"]), "label": c["label"]},
+                                                                                     "ts": time.time(), "at": datetime.now(timezone.utc)}}, upsert=True)
+        await db.rf_cups.update_one({"id": c["id"]}, {"$unset": {"payout": ""}})
+        c.pop("payout", None)
+        return c
+
+    async def resume_payouts():
+        """Cups that finished more than 30 s ago and are still marked unpaid: their server stopped while paying."""
+        async for c in db.rf_cups.find({"payout": "pending", "finished_ts": {"$lt": time.time() - 30}}).limit(200):
+            await pay_cup(c)
+
+    r.resume_payouts = resume_payouts
 
     async def settle(c):
         """Move the cup on when its moment has come: start it, record finished matches, seat the next round, crown the champion."""

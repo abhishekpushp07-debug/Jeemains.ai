@@ -2,14 +2,13 @@ from fastapi import FastAPI, APIRouter, Depends, Request, Header, HTTPException
 from fastapi.responses import Response, JSONResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from pymongo import AsyncMongoClient
+from pymongo import AsyncMongoClient, ReturnDocument
 from pymongo.asynchronous.collection import AsyncCollection
 from pydantic import BaseModel, Field, BeforeValidator, ConfigDict
 from typing import Annotated, Literal, Optional, List
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from bson import ObjectId
-from http.cookiejar import DefaultCookiePolicy
 from pymongo.errors import DuplicateKeyError
 from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resolve_exam
 from revision import record_learning, weak_chapters, make_router as make_revision
@@ -18,7 +17,7 @@ from branding import router as branding_router
 from marketing_media import router as marketing_router
 from legal_pages import router as legal_router
 from arena_web import router as arena_web_router
-from jl_transport import canonical_request
+from jl_transport import UpstreamError, canonical_request, make_client
 from session_coordination import session_rotation
 from rf_access import make_access_router, install_access_guard, maintenance_on
 from load_guard import ArenaBusy, InflightCounter, arena_gate, busy_response, monitor as load_monitor, raise_fd_limit, snapshot as load_snapshot
@@ -27,7 +26,7 @@ from scope import Pick, normalise, scope_fields
 from metadata_cache import metadata_cache
 from performance import ServerTiming, AssetAwareCompression
 from cors_config import allowed_origins
-import asyncio, json, logging, os, re, time, uuid, httpx
+import aiohttp, asyncio, hashlib, json, logging, os, random, re, time, uuid
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -90,43 +89,70 @@ def now_iso():
 
 
 # ---------- JEELIVE proxy (every platform signs in through here) ----------
-http: httpx.AsyncClient | None = None
+http: aiohttp.ClientSession | None = None
 SID_RE = re.compile(r"^[A-Za-z0-9-]{16,64}$")
 PASS_HEADERS = ("content-type", "retry-after", "location", "cache-control", "etag", "last-modified", "content-range", "accept-ranges")
+JAR_IDLE_DAYS = 90  # a jar no request used for 90 days is removed by Mongo (TTL on seen_at)
+JAR_TOUCH_SECONDS = 86400  # seen_at is refreshed at most once a day per jar, not on every request
 
 
-class CookieJar(BaseDocument):
-    sid: str
-    cookies: dict = {}
-    updated_at: str = Field(default_factory=now_iso)
+def jar_field(name: str) -> str:
+    """A cookie name as a Mongo field name ('.' and '$' cannot be used in an update path)."""
+    return name.replace("%", "%25").replace(".", "%2E").replace("$", "%24")
+
+
+def cookie_name(field: str) -> str:
+    return field.replace("%24", "$").replace("%2E", ".").replace("%25", "%")
 
 
 async def load_jar(sid: str) -> dict:
     # Always read from Mongo (one indexed read): with several server processes a per-process copy could send a
     # refresh cookie another process has just rotated, which signs the student out.
-    jar = CookieJar.from_mongo(await db.jl_jars.find_one({"sid": sid}, {"_id": 0, "sid": 1, "cookies": 1}))
-    return jar.cookies if jar else {}
+    jar = await db.jl_jars.find_one({"sid": sid}, {"_id": 0, "cookies": 1, "seen_at": 1})
+    if not jar:
+        return {}
+    now = datetime.now(timezone.utc)
+    seen = jar.get("seen_at")
+    if not isinstance(seen, datetime) or (now - seen.replace(tzinfo=timezone.utc)).total_seconds() > JAR_TOUCH_SECONDS:
+        await db.jl_jars.update_one({"sid": sid}, {"$set": {"seen_at": now}})
+    return {cookie_name(k): v for k, v in (jar.get("cookies") or {}).items()}
 
 
-async def save_jar(sid: str, cookies: dict):
-    await db.jl_jars.update_one({"sid": sid}, {"$set": CookieJar(sid=sid, cookies=cookies).to_mongo()}, upsert=True)
-
-
-def apply_set_cookies(cookies: dict, headers: httpx.Headers) -> bool:
-    changed = False
-    for raw in headers.get_list("set-cookie"):
+def cookie_changes(cookies: dict, headers) -> tuple[dict, list]:
+    """The cookies a website answer sets (new or changed values) and the ones it expires."""
+    sets, gone = {}, []
+    for raw in headers.getall("set-cookie", []):
         first, *attrs = raw.split(";")
         if "=" not in first:
             continue
         name, value = first.split("=", 1)
         name, value = name.strip(), value.strip().strip('"')
-        expired = any(a.strip().lower().startswith("max-age=0") for a in attrs) or value == ""
-        if expired:
-            changed |= cookies.pop(name, None) is not None
-        elif cookies.get(name) != value:
-            cookies[name] = value
-            changed = True
-    return changed
+        if any(a.strip().lower().startswith("max-age=0") for a in attrs) or value == "":
+            sets.pop(name, None)
+            gone.append(name)
+        else:
+            if name in gone:
+                gone.remove(name)
+            if cookies.get(name) != value:
+                sets[name] = value
+    return sets, gone
+
+
+async def save_cookie_changes(sid: str, sets: dict, gone: list):
+    # One field per cookie, never the whole set: two servers renewing different cookies at the same moment both keep theirs.
+    update = {"$set": {**{f"cookies.{jar_field(k)}": v for k, v in sets.items()}, "updated_at": now_iso(), "seen_at": datetime.now(timezone.utc)}}
+    if gone:
+        update["$unset"] = {f"cookies.{jar_field(k)}": "" for k in gone}
+    await db.jl_jars.update_one({"sid": sid}, update, upsert=True)
+
+
+def forwarded_for(request: Request) -> str:
+    """The student's address for the website's limiter: the chain our ingress received, plus the peer we saw."""
+    chain = [p.strip() for p in request.headers.get("x-forwarded-for", "").split(",") if p.strip()]
+    peer = request.client.host if request.client else ""
+    if peer and (not chain or chain[-1] != peer):
+        chain.append(peer)
+    return ", ".join(chain[-5:])
 
 
 @api.api_route("/jl/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
@@ -147,20 +173,20 @@ async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
             headers[name] = request.headers[name]
     if cookies:
         headers["Cookie"] = "; ".join(f"{k}={v}" for k, v in cookies.items())
+    ip = forwarded_for(request)
+    if ip:
+        headers["X-Forwarded-For"] = ip
     body = await request.body()
     try:
         r = await canonical_request(http, request.method, f"{JEELIVE_API}/{path}", path=path,
                                     params=request.query_params, body=body or None, headers=headers)
-    except (httpx.HTTPError, asyncio.TimeoutError):
+    except UpstreamError:
         return Response(json.dumps({"data": None, "error": {"code": "upstream_unreachable",
                         "message": "Connection interrupted. Your last saved work is safe. Please try again."},
                         "meta": {"api_version": "1"}}), status_code=503, media_type="application/json", headers={'Cache-Control': 'no-store', 'Vary': 'X-JL-Sid'})
-    if r.headers.get_list("set-cookie"):
-        # Merge only received cookie changes, never persist an older read's full
-        # cookie snapshot over a just-completed renewal.
-        current = dict(await load_jar(x_jl_sid))
-        if apply_set_cookies(current, r.headers):
-            await save_jar(x_jl_sid, current)
+    sets, gone = cookie_changes(cookies, r.headers)
+    if sets or gone:
+        await save_cookie_changes(x_jl_sid, sets, gone)
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}
     out['Vary'] = 'X-JL-Sid'
     if path.startswith('auth/'):
@@ -243,25 +269,30 @@ def _game():
 
 game_router, award = _game()
 
-CARD_MTIMES: dict[str, float] = {}
+CARD_HASHES: dict[str, str] = {}  # card file -> content hash already in Mongo (shared by every process via rf_meta)
+CARD_KEYS: dict[str, list] = {}
 
 
 async def sync_cards():
     from pymongo import UpdateOne
     if await maintenance_on(db):
         return
-    changed = False
+    if not CARD_HASHES:  # first run in this process: what the other servers already synced
+        saved = (await db.rf_meta.find_one({"_id": "card_files"}) or {}).get("files", {})
+        CARD_HASHES.update({cookie_name(k): v for k, v in saved.items()})
+    changed, synced = False, {}
     # NEET is a preserved archive, not an actively synced/live bank in this app.
     for exam, directory in (("JEE", CARDS_DIR),):
         if not directory.exists():
             continue
-        keys = [exam + ":" + f.name for f in directory.glob("*.json")]
+        keys = sorted(exam + ":" + f.name for f in directory.glob("*.json"))
         for f in directory.glob("*.json"):
-            key, m = exam + ":" + f.name, f.stat().st_mtime
-            if CARD_MTIMES.get(key) == m:
+            key, raw = exam + ":" + f.name, f.read_bytes()
+            digest = hashlib.sha1(raw).hexdigest()
+            if CARD_HASHES.get(key) == digest:
                 continue
             try:
-                cards = [Card(**{**c, "exam": exam}) for c in json.loads(f.read_text()) if c["subject"] in SUBJECTS[exam]]
+                cards = [Card(**{**c, "exam": exam}) for c in json.loads(raw) if c["subject"] in SUBJECTS[exam]]
             except Exception:
                 logger.warning("Skipping invalid or mid-write card file: %s", f.name)
                 continue
@@ -274,9 +305,13 @@ async def sync_cards():
             else:
                 result = await db.rf_cards.update_many({"source_file": key, "retired": {"$ne": True}}, {"$set": {"retired": True}})
                 changed |= bool(result.modified_count)
-            CARD_MTIMES[key] = m
-        result = await db.rf_cards.update_many({"source_file": {"$regex": "^" + exam + ":", "$nin": keys}, "retired": {"$ne": True}}, {"$set": {"retired": True}})
-        changed |= bool(result.modified_count)
+            CARD_HASHES[key] = synced[key] = digest
+        if CARD_KEYS.get(exam) != keys:  # a card file was removed: retire its cards (only when the file list changes)
+            result = await db.rf_cards.update_many({"source_file": {"$regex": "^" + exam + ":", "$nin": keys}, "retired": {"$ne": True}}, {"$set": {"retired": True}})
+            changed |= bool(result.modified_count)
+            CARD_KEYS[exam] = keys
+    if synced:
+        await db.rf_meta.update_one({"_id": "card_files"}, {"$set": {f"files.{jar_field(k)}": v for k, v in synced.items()}}, upsert=True)
     if changed:
         await metadata_cache.invalidate_prefix(f'{db.name}:')
 
@@ -445,6 +480,7 @@ from squads import make_router as make_squads  # noqa: E402
 from pin_reset import make_pin_reset  # noqa: E402
 from rank_predictor import make_router as make_rank  # noqa: E402
 from mission_links import make_router as make_mission_links, ensure_indexes as mission_indexes  # noqa: E402
+from dream import make_router as make_dream  # noqa: E402
 duel_router, duel_api = make_duels(db, rf_user, public_card, award)
 api.include_router(duel_router)
 api.include_router(make_social(db, rf_user))
@@ -464,6 +500,7 @@ api.include_router(legal_router)
 api.include_router(arena_web_router)
 api.include_router(make_rank())
 api.include_router(make_mission_links(db, rf_user))
+api.include_router(make_dream(db, rf_user))
 api.include_router(make_access_router(db, lambda: http))
 app.include_router(api)
 install_access_guard(app, db)
@@ -504,6 +541,44 @@ async def backfill_cup_crowns():
 
 
 
+SETUP_VERSION = hashlib.sha1(b"".join(p.read_bytes() for p in sorted(ROOT_DIR.glob("*.py")))).hexdigest()[:16]
+
+
+async def take_turn(name: str, seconds: float) -> bool:
+    """One server process at a time does `name`; a turn left by a process that stopped runs out after `seconds`."""
+    now = time.time()
+    try:
+        return bool(await db.rf_meta.find_one_and_update({"_id": "turn:" + name, "until": {"$lt": now}}, {"$set": {"until": now + seconds}},
+                                                         upsert=True, return_document=ReturnDocument.AFTER))
+    except DuplicateKeyError:
+        return False
+
+
+async def sweep():
+    """Closes what nobody came back to: matches left waiting or past their end (their rewards are paid now), sprints
+    never finished, and cup payouts cut off by a server restart."""
+    now = time.time()
+    stale = await db.rf_duels.find({"$or": [{"status": "waiting", "created_ts": {"$lt": now - 1800}}, {"status": "ready", "ends_at": {"$lt": now - 120}}]}).limit(500).to_list(500)
+    for d in stale:
+        try:
+            await duel_api["settle"](d)
+        except Exception as e:  # noqa: BLE001 - one bad match must not stop the rest
+            logger.warning("sweep could not close a match: %s", e)
+    old = datetime.fromtimestamp(now - 86400, timezone.utc).isoformat()
+    await db.rf_sessions.update_many({"status": "active", "created_at": {"$lt": old}}, {"$set": {"status": "expired"}})
+    await cups_router.resume_payouts()
+
+
+async def sweep_loop():
+    while True:
+        await asyncio.sleep(300 + random.random() * 30)
+        try:
+            if await take_turn("sweep", 240):
+                await sweep()
+        except Exception:  # noqa: BLE001
+            logger.exception("sweep failed")
+
+
 @app.on_event("startup")
 async def startup():
     global http
@@ -512,11 +587,27 @@ async def startup():
     if os.environ.get("RF_ACCESS_LOG") != "1":  # a log line per request costs real CPU at crowd scale
         logging.getLogger("uvicorn.access").setLevel(logging.WARNING)
         logging.getLogger("uvicorn.error").setLevel(logging.WARNING)
-    http = httpx.AsyncClient(http2=True, timeout=httpx.Timeout(30.0, connect=10.0),
-                             limits=httpx.Limits(max_connections=int(os.environ.get("JL_MAX_CONNECTIONS", "400")),
-                                                 max_keepalive_connections=int(os.environ.get("JL_KEEPALIVE_CONNECTIONS", "100")), keepalive_expiry=45.0))
-    # Never persist upstream cookies on the shared client; each sid has its own jar (prevents cross-user session leak)
-    http.cookies.jar.set_policy(DefaultCookiePolicy(allowed_domains=[]))
+    logging.getLogger("httpx").setLevel(logging.WARNING)  # httpx logs every request at INFO
+    http = make_client()
+    # Indexes, migrations and the first card sync run once per code version, on one process. The other processes of a
+    # big deployment wait for it (at most 30 s) instead of all repeating ~60 index calls and ~14k card writes.
+    done = {"_id": "setup:" + SETUP_VERSION, "done": True}
+    if not await db.rf_meta.find_one(done, {"_id": 1}):
+        if await take_turn("setup:" + SETUP_VERSION, 600):
+            await setup_database()
+            await db.rf_meta.update_one({"_id": done["_id"]}, {"$set": {"done": True, "ts": time.time()}}, upsert=True)
+            await db.rf_meta.delete_many({"_id": {"$regex": "^(turn:)?setup:", "$nin": [done["_id"], "turn:" + done["_id"]]}})
+        else:
+            for _ in range(30):
+                if await db.rf_meta.find_one(done, {"_id": 1}):
+                    break
+                await asyncio.sleep(1)
+    asyncio.create_task(cup_night_loop())
+    asyncio.create_task(card_sync_loop())
+    asyncio.create_task(sweep_loop())
+
+
+async def setup_database():
     await db.rf_cards.create_index("id", unique=True)
     await db.rf_access.create_index('digest', unique=True)
     await db.rf_access.create_index('expires_at', expireAfterSeconds=0)
@@ -525,6 +616,9 @@ async def startup():
     await db.rf_sessions.create_index("id", unique=True)
     await db.rf_sessions.create_index([("user_id", 1), ("status", 1), ("completed_at", -1)])
     await db.jl_jars.create_index("sid", unique=True)
+    # Jars nobody used for JAR_IDLE_DAYS are removed; rows from before seen_at existed get the full period from now.
+    await db.jl_jars.update_many({"seen_at": None}, {"$set": {"seen_at": datetime.now(timezone.utc)}})
+    await db.jl_jars.create_index("seen_at", expireAfterSeconds=JAR_IDLE_DAYS * 86400)
     await db.jl_locks.create_index("until", expireAfterSeconds=60)
     await db.rf_night_seats.create_index([("day", 1), ("group", 1)])
     await db.rf_night_seats.create_index([("day", 1), ("ts", 1)])
@@ -574,7 +668,7 @@ async def startup():
     await db.rf_cups.create_index([("night", 1), ("night_no", 1)], sparse=True)
     await backfill_cup_crowns()
     await cups_router.migrate_nights()
-    asyncio.create_task(cup_night_loop())
+    await db.rf_cups.create_index("payout", sparse=True)
     await db.rf_duels.create_index([("team_mode", 1), ("status", 1)], sparse=True)
     # Spectators of a live match, shared by every server (count + 100-watcher limit); rows vanish a minute after the last look.
     await db.rf_watch.create_index([("did", 1), ("ts", 1)])
@@ -599,12 +693,18 @@ async def startup():
             pass
     elif not (await db.rf_events.options()).get("capped"):
         await db.command("convertToCapped", "rf_events", size=EVENTS_BYTES)
-    asyncio.create_task(card_sync_loop())
+    await db.rf_sessions.create_index([("status", 1), ("created_at", 1)])
+    await db.rf_dreams.create_index("uid", unique=True)
+    # One report per player per gang: remove duplicates left by simultaneous reports, then let the index enforce it.
+    dupes = await db.rf_gang_reports.aggregate([{"$group": {"_id": {"g": "$gang_id", "u": "$uid"}, "ids": {"$push": "$_id"}, "n": {"$sum": 1}}}, {"$match": {"n": {"$gt": 1}}}])
+    async for row in dupes:
+        await db.rf_gang_reports.delete_many({"_id": {"$in": row["ids"][1:]}})
+    await db.rf_gang_reports.create_index([("gang_id", 1), ("uid", 1)], unique=True)
 
 
 @app.on_event("shutdown")
 async def shutdown():
     await metadata_cache.close()
     if http:
-        await http.aclose()
+        await http.close()
     await client.close()

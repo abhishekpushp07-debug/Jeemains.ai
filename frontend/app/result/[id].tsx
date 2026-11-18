@@ -21,7 +21,7 @@ import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNaviga
 import { isResultLocked, unlockResult } from "@/src/mission/gate";
 import { ShareGate } from "@/src/mission/ShareGate";
 import { DreamMeter } from "@/src/dream/DreamMeter";
-import { examOf, FULL, recordMock } from "@/src/dream/store";
+import { examOf, isFullMock, recordMock } from "@/src/dream/store";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -61,7 +61,7 @@ function Analysis({ r, id }: { r: any; id: string }) {
   const router = useRouter();
   const exam = examOf(r.exam);
   // Full mocks only (the same rule recordMock uses): the Dream meter says how far each dream college is after this mock.
-  const dream = exam && s.maximum >= FULL[exam] / 2 ? exam : null;
+  const dream = exam && isFullMock({ exam: r.exam, maximum: s.maximum, questions: r.count ?? r.questions?.length }) ? exam : null;
   return (
     <View style={{ gap: space.md }}>
       <LinearGradient testID="result-score-card" colors={[colors.brandSecondary, colors.custom_series]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={learningStyles.score}>
@@ -322,11 +322,11 @@ export default function Result() {
   }, [id, version, n, user]);
 
   const ready = resultIsReleased(status, r);
-  // Every released full mock is remembered on the phone for the Dream College Meter (original score only).
+  // Every released full mock is remembered with the account for the Dream College Meter (original score only).
   useEffect(() => {
     if (!ready || version !== "original" || !r?.summary) return;
-    recordMock({ id: id!, exam: r.exam, score: r.summary.score, maximum: r.summary.maximum, title: r.title,
-      at: typeof r.submitted_at === "number" ? r.submitted_at * 1000 : undefined });
+    void recordMock({ id: id!, exam: r.exam, score: r.summary.score, maximum: r.summary.maximum, questions: r.count ?? r.questions?.length, title: r.title,
+      at: typeof r.submitted_at === "number" ? r.submitted_at * 1000 : typeof r.submitted_at === "string" ? Date.parse(r.submitted_at) || undefined : undefined });
   }, [ready, r, id, version]);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
   usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready && tab !== "solutions");

@@ -29,7 +29,7 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
       accessibilityState={open === undefined ? undefined : { expanded: open }} style={styles.press}>
       <View style={styles.head}>
         {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
-        <View style={{ flex: 1, gap: 4, paddingRight: dream ? 40 : 0 }}>
+        <View style={{ flex: 1, gap: 4, paddingRight: dream ? 44 : 0 }}>
           <T w="bold" size={15} numberOfLines={2} style={styles.title}>{title}</T>
           {tags ? <View style={styles.tags}>{tags}</View> : null}
           <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{sub}</T>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   teaser: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 6 },
   cta: { flexDirection: "row", alignItems: "center", gap: 2, minHeight: 38, paddingLeft: 14, paddingRight: 10, borderRadius: radius.pill },
   star: { position: "absolute", top: 4, right: 4, alignItems: "center", gap: 2 },
-  dream: { width: 40, height: 44, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_fBloodLine, backgroundColor: colors.custom_fBloodSoft,
+  dream: { width: 44, height: 44, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_fBloodLine, backgroundColor: colors.custom_fBloodSoft,
     alignItems: "center", justifyContent: "center", gap: 1 },
   hint: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, borderRadius: 18, borderWidth: 1,
     borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },

@@ -16,9 +16,12 @@ export async function jeeDream(s: Seat): Promise<Dream> {
   const rows = t.rows.filter(r => r.prog === s.prog);
   const row = rows.find(r => r.path === s.path) ?? rows[0];
   if (!row) throw new Error(MISSING);
-  const m = row.final.marks;
+  // The round the card shows (e.g. CSAB 2, which gave this seat), not always the last JoSAA round.
+  const cell = row.path === s.path ? row.cells.find(c => c.label === s.round && c.close === s.close && c.marks) : undefined;
+  const m = cell?.marks ?? row.final.marks;
+  const label = cell ? cell.label : row.final.label, close = cell?.close ?? row.final.close;
   return { id: `jee-${s.prog}`, exam: "jee", college: s.college, branch: s.branch, need: m.normal,
-    range: [Math.min(m.easy, m.tough), Math.max(m.easy, m.tough)], note: `${row.final.label} closing ${fmt(row.final.close)} ${row.rank_type}`, at: Date.now() };
+    range: [Math.min(m.easy, m.tough), Math.max(m.easy, m.tough)], note: `${label} closing ${fmt(close)} ${row.rank_type}`, at: Date.now() };
 }
 
 export async function comedkDream(c: ComedkItem): Promise<Dream> {

@@ -158,14 +158,14 @@ def test_sync_cards_soft_retire_roundtrip():
     tmp = pathlib.Path(tempfile.mkdtemp())
     try:
         (tmp / src.name).write_text(json.dumps(cards[:-1]))
-        server.CARDS_DIR, server.CARD_MTIMES = tmp, {}
+        server.CARDS_DIR = tmp; server.CARD_HASHES.clear(); server.CARD_KEYS.clear()
         loop = asyncio.new_event_loop()
         loop.run_until_complete(server.sync_cards())
         assert mdb.rf_cards.count_documents({}) == total_before  # nothing deleted
         assert mdb.rf_cards.find_one({"id": x})["retired"] is True
         assert mdb.rf_cards.count_documents({"chapter": CHAP, "retired": True}) == 1
         shutil.copy(src, tmp / src.name)
-        server.CARD_MTIMES = {}
+        server.CARD_HASHES.clear()
         loop.run_until_complete(server.sync_cards())
         assert mdb.rf_cards.find_one({"id": x})["retired"] is False
         loop.close()

@@ -11,9 +11,10 @@ export function serialOperations() {
   let tail: Promise<unknown> = Promise.resolve();
   return <T>(fn: () => Promise<T>): Promise<T> => { const job = tail.then(fn, fn); tail = job.catch(() => {}); return job; };
 }
-export type SavedImage = { mime: string; etag: string; modified: string; bytes: Uint8Array };
+/** `at`: when this copy was downloaded (ms). The website sends no validator for paper images, so a recent copy is reused. */
+export type SavedImage = { mime: string; etag: string; modified: string; bytes: Uint8Array; at?: number };
 export function packImage(image: SavedImage) {
-  const header = new TextEncoder().encode(JSON.stringify({ mime: image.mime, etag: image.etag, modified: image.modified, length: image.bytes.length }));
+  const header = new TextEncoder().encode(JSON.stringify({ mime: image.mime, etag: image.etag, modified: image.modified, length: image.bytes.length, at: image.at || Date.now() }));
   const out = new Uint8Array(4 + header.length + image.bytes.length);
   new DataView(out.buffer).setUint32(0, header.length);
   out.set(header, 4); out.set(image.bytes, 4 + header.length); return out;
@@ -25,5 +26,6 @@ export function unpackImage(payload: Uint8Array): SavedImage {
   const header = JSON.parse(new TextDecoder().decode(payload.subarray(4, n + 4)));
   const bytes = payload.slice(4 + n);
   if (!/^image\/(png|jpeg|webp|gif|avif)$/.test(header.mime) || bytes.length !== header.length || bytes.length > MAX_IMAGE) throw new Error("Invalid cached image");
-  return { mime: header.mime, etag: typeof header.etag === "string" ? header.etag : "", modified: typeof header.modified === "string" ? header.modified : "", bytes };
+  return { mime: header.mime, etag: typeof header.etag === "string" ? header.etag : "", modified: typeof header.modified === "string" ? header.modified : "", bytes,
+    at: typeof header.at === "number" ? header.at : 0 };
 }

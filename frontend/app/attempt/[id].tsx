@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { BackHandler, ScrollView, StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -46,9 +46,6 @@ export default function Player() {
   const [conf, setConf] = useState<Record<string, number | undefined>>({});
   const [zoom, setZoom] = useState(0);
   const reading = useRef<React.ElementRef<typeof ScrollView>>(null);
-  const [painted, setPainted] = useState<Record<string, boolean>>({});
-  const imageLoaded = useCallback((path: string) => setPainted(old => old[path] ? old : { ...old, [path]: true }), []);
-  const imageFailed = useCallback((path: string) => setPainted(old => old[path] === false ? old : { ...old, [path]: false }), []);
 
   const bonusRule = a?.rules?.bonus_rule;
   const bonusOpen = !!a?.bonus_unlocked_at;
@@ -84,8 +81,8 @@ export default function Player() {
   const cur = answer(q) || { value: "", marked: false };
   const lockedMain = bonusOpen && !q?.bonus;
   const timeUp = A.seconds === 0;
-  const missingImage = q ? imagePaths(id!, q, "question").some(path => !painted[path]) : false;
-  const disabled = timeUp || A.conflict || lockedMain || missingImage;
+  // Options stay open while a question image is still loading: a slow image must never stop a student from answering.
+  const disabled = timeUp || A.conflict || lockedMain;
   const pendingCount = Object.keys(A.pending).length;
   const saveState = A.conflict ? ["Conflict", colors.error] : !A.online ? ["Offline", colors.error] : A.inflight ? ["Saving…", colors.info] : pendingCount ? [`${pendingCount} pending`, colors.warning] : ["Saved", colors.custom_mint];
   const idx = nav.index;
@@ -188,7 +185,7 @@ export default function Player() {
         <View testID="question-reading-surface" style={styles.question}>
           {q.render_mode !== "source" && q.text ? <MathText testID="player-question-text" size={Math.round(16 * scale)} text={q.text} /> : null}
           {imagePaths(id!, q, "question").map((path, i) => (
-            <AssetImage key={path} testID={`question-image-${q.number}-${i}`} path={path} label={`Question ${q.number} original image`} onLoaded={imageLoaded} onFailed={imageFailed} />
+            <AssetImage key={path} testID={`question-image-${q.number}-${i}`} path={path} label={`Question ${q.number} original image`} />
           ))}
           {q.render_mode === "source" && q.text ? <T size={11} color={colors.custom_eyebrow}>{q.text}</T> : null}
         </View>

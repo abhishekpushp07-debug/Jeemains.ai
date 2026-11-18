@@ -1,0 +1,37 @@
+{
+  "summary": "Retest of Dream College migration fix + 3-way merge + sign-out cleanup + refused-save notice + BITSAT bonus scaling on mobile web (375x667) with QA learner (2 logins total). ALL requested items PASS. Migration: account with 5 JEE dreams + dream.v1 {1 JEE, 1 COMEDK} and no dream.v2 -> server kept all 5 JEE + COMEDK, old JEE dropped, dream.v1 removed (PUT base = account ids). Variant with dream.v2 present (base = account list) + dream.v1 {JEE, BITSAT}: JEE dropped (full), BITSAT added, nothing lost. Merge: a BITSAT dream added on the server by 'another device' while the app was open survived removal of the COMEDK dream, removal of a JEE dream and pin/unpin from the JEE college predictor; PUT bodies always carried base; the app picked up the other-device dream from the PUT response (BITSAT 1/5). Pin from rank-seat-0-dream -> server has it + msg 'Dream mein juda: 195 marks chahiye'. Sign out -> dream.v2.<uid> and jl_user removed; sign in again -> dreams back from server (home-dream 5/5). Refused save (PUT intercepted 422) -> list reverts to account list, dream-meter-notice shows 'Ye badlav account mein save nahi hua...', exactly 1 PUT (no retry loop), notice gone after reload. BITSAT: real 426 mock shows -6/390 with '426 marks ka paper (bonus sawal ke saath)'; injected 100/200 paper shows 195 with '100/200 ko 390 par scale kiya' (mock POST intercepted, nothing written). Touch targets: dream-meter-row-N-remove 44x44, rank-seat-0-dream 44x44, bitsat-item-0-dream 44x44. Regression: home-dream, Rank dream-panel with dream-exam-jee|bitsat|comedk (5/5, 2/5, 0/5 + empty state), result-dream on 4ff8dce7 (mock 5/300, NIT Delhi 166 marks door) all OK. Backend: 21/21 existing + 4/4 new merge unit tests pass. useAttempt drain only code-reviewed (no paper started/submitted). QA account dreams restored byte-identical to the baseline recorded at start; mocks untouched.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "PUT /api/rf/dream/dreams", "issue": "`base` is now required (extra=forbid). Any already-installed build that still sends only {dreams} gets 422 on every save (shows the refused notice forever). If such a build was ever shipped, consider making base Optional and treating a missing base as [] (add-only, never removes) for backward compatibility."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home/Rank/Result Dream meter", "issues": ["Header 'DREAM COLLEGE METER · JEE MAIN' is ellipsized at 375px ('JEE MA...') - cosmetic.", "BITSAT bonus paper: a score above 390 (e.g. 410 on the 426 paper) would render as '410 / 390' - by design, but the '/ 390' denominator may confuse; consider '/ 426' or hiding the denominator when rawMax > FULL."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter101_dream_merge.py", "/app/backend/tests/iter101_dream_helper.py", "/app/backend/tests/test_iter100_dream_api_public.py", "/app/backend/tests/test_audit_2026_06_db_fixes.py", "/app/test_reports/pytest/iter101.xml"],
+  "action_items": [
+    "Optional: accept PUT /rf/dream/dreams without `base` (default []) so older app builds don't get permanent 422s.",
+    "Optional (minor UX): when the server merge drops a dream this phone added (exam filled to 5 on another device meanwhile), store.ts send() drops it silently - consider showing a short notice like the refused one.",
+    "Optional: in the refused path (store.ts send catch) if the follow-up pull() fails offline, the refused local list stays shown as non-dirty until the next pull; acceptable but could keep the notice + retry pull next open."
+  ],
+  "critical_code_review_comments": [
+    "store.ts migration now merges via mergeDreams(server, base=[] or local.base, local+legacy): server dreams are never removed; legacy fills only free slots - verified in UI for both no-v2 and v2-with-base cases.",
+    "store.ts send(): after a PUT, mergeDreams(res.dreams, ids(sent), state.dreams) correctly keeps changes made while the request was in flight.",
+    "dream.py merge mirrors the client rule; optimistic rev check + unique uid index (server.py:697) handles concurrent saves; legacy docs without rev match {rev: None}.",
+    "useAttempt.ts drain(): waits for flight.current then flushes again ignoring the retry pause - covers answers edited during an in-flight save. Auto-seal at 00:00 still submits even if drain could not send pending answers (offline); manual submit (settle) correctly refuses. Code-review only, not executed.",
+    "No deprecated Expo packages touched in the reviewed files."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter101_dream_merge.py (new)", "/app/backend/tests/iter101_dream_helper.py (new test helper)"],
+  "success_rate": {"backend": "100% (25/25)", "frontend": "100% (all 7 requested flows)"},
+  "seed_data_creation": "Temporary TEST dreams (jee-TEST-legacy1/2, comedk-TEST-legacy1, bitsat-TEST-legacy2, bitsat-TEST-otherdev) were written to the QA account during the run and removed: account dreams restored exactly to the baseline recorded at start (5 JEE: jee-373, jee-113, jee-73, jee-22, jee-260); mocks unchanged (9). Note: a dream 'jee-72' appeared on the account between my runs from another client (not created by this test, likely a concurrent session); it was not in the baseline and is not present after restore.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "RN-web TextInputs in the rank predictor need click + keyboard.type (page.fill does not update state). First click on account-signout-button right after load may be ignored; wait ~2s. QA uid 75d720a0-...; backend/tests/iter101_dream_helper.py reads/writes the account dream list using a saved jl_sid (0600 /tmp file) exchanged at POST /api/rf/access (Authorization: Bearer). Intercept POST /api/rf/dream/mocks when injecting fake mocks into dream.v2 so they are not uploaded.",
+  "rca_of_issue": "iteration_100 MEDIUM bug (legacy migration dropping account dreams) is FIXED: migration no longer builds the list with legacy as the base; pending changes are merged with base = ids the phone had seen ([] when none), so account dreams are never removed."
+}

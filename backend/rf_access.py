@@ -4,20 +4,18 @@ No PIN/password storage, no new accounts, no client-asserted identity. Web reuse
 the existing proxy SID; native supplies its canonical access cookie after refresh.
 """
 import hashlib
-import asyncio
 import os
 import secrets
 import time
 from collections import OrderedDict
 from datetime import datetime, timedelta, timezone
 
-import httpx
 from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.responses import JSONResponse
 from starlette.datastructures import Headers, MutableHeaders
-from jl_transport import canonical_request
+from jl_transport import UpstreamError, canonical_request
 
 load_dotenv()
 
@@ -95,7 +93,7 @@ def make_access_router(db, client):
             uid = user.get('id') if isinstance(user, dict) else None
             if not isinstance(uid, str) or not uid:
                 raise HTTPException(401, 'Canonical identity could not be verified.')
-        except (httpx.HTTPError, ValueError, asyncio.TimeoutError) as exc:
+        except (*UpstreamError, ValueError) as exc:
             raise HTTPException(503, 'Could not verify your session. Please retry.') from exc
         from social import remember_identity
         await remember_identity(db, uid, user)

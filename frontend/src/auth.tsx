@@ -3,6 +3,13 @@ import { AppState } from "react-native";
 import { advanceAuthEpoch, ApiError, api, clearAssetCache, clearRapidAccess, post, resetSessionHandle, setAssetAccount, setAuthLostHandler } from "@/src/api/client";
 import { storage } from "@/src/utils/storage";
 import { draftIndex, discardAllDrafts } from "@/src/drafts";
+import { flushDreams, setDreamAccount } from "@/src/dream/store";
+
+// A busy or unreachable server is not a signed-out student: the session check retries by itself (honouring the
+// server's Retry-After, spread a little so a crowd does not come back at the same second) before showing an error.
+const SESSION_RETRIES = [2000, 5000, 10000, 20000];
+const transient = (e: any) => e instanceof ApiError && (e.status === 0 || e.status === 408 || e.status === 429 || e.status >= 500);
+const pause = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export type User = { id: string; name: string; phone?: string; role: string; exam?: string; access_type?: string; pin_set?: boolean };
 type Ctx = {
@@ -26,7 +33,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const invalidateProbe = useCallback(() => { generation.current++; checking.current = null; }, []);
 
   const forgetPrivateProfile = useCallback(async (purgeDownloads = false) => {
-    clearAssetCache(purgeDownloads); clearRapidAccess(); setUser(null);
+    // Signing out (purgeDownloads) also removes the phone copy of the dreams; an expired session keeps it to sync later.
+    clearAssetCache(purgeDownloads); clearRapidAccess(); setDreamAccount(null, purgeDownloads); setUser(null);
     await storage.removeItem("jl_user");
     // Pending drafts remain partitioned by the original server-issued user ID.
   }, []);
@@ -37,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (version !== generation.current) return u;
     if (explicit) await storage.removeItem("jl_signed_out");
     if (version !== generation.current) return u;
-    setAssetAccount(u.id);
+    setAssetAccount(u.id); setDreamAccount(u.id);
     setUser(u); setExpired(false); setSessionError(""); setSignOutWarning(""); setReady(true);
     return u;
   }, []);
@@ -48,13 +56,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       if (await storage.getItem<boolean>("jl_signed_out", false)) return;
       setSessionError("");
-      const s = await api<{ user: User | null }>("/auth/session");
-      if (version !== generation.current) return;
-      if (s?.user) await acceptUser(s.user, version);
-      else { advanceAuthEpoch(); await forgetPrivateProfile(); }
+      for (let attempt = 0; ; attempt++) {
+        try {
+          const s = await api<{ user: User | null }>("/auth/session");
+          if (version !== generation.current) return;
+          if (s?.user) await acceptUser(s.user, version);
+          else { advanceAuthEpoch(); await forgetPrivateProfile(); }
+          return;
+        } catch (error: any) {
+          if (version !== generation.current || !transient(error) || attempt >= SESSION_RETRIES.length) throw error;
+          await pause(Math.max(error.retryAfterMs || 0, SESSION_RETRIES[attempt]) + Math.random() * 1500);
+          if (version !== generation.current) return;
+        }
+      }
     } catch (error: any) {
       if (version === generation.current && error?.name !== "AbortError") {
         if (error instanceof ApiError && error.status === 401) { advanceAuthEpoch(); setExpired(true); await forgetPrivateProfile(); }
+        else if (error instanceof ApiError && error.status === 429) setSessionError("Abhi bahut students ek saath aa rahe hain. Aapka saved kaam safe hai, thodi der baad Retry dabao.");
+        else if (error instanceof ApiError && error.status >= 500) setSessionError("Server abhi busy hai. Aapka account aur saved kaam safe hai, thodi der baad Retry dabao.");
         else setSessionError("Couldn't check your session. Connect to the internet and retry, or sign in below.");
       }
     } finally { if (version === generation.current) setReady(true); }
@@ -94,6 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [user, acceptUser]);
 
   const signOut = useCallback(async (drafts: "keep" | "discard") => {
+    await flushDreams(); // the last dream changes go up while the session still works
     generation.current++; advanceAuthEpoch();
     if (user && drafts === "discard") await discardAllDrafts(user.id);
     // Prevent native cookies left after an offline logout from silently signing

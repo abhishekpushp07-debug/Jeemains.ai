@@ -17,12 +17,14 @@ export function useDreamToggle(id: string, exam: DreamExam, build: () => Promise
   }, [msg]);
   const toggle = async () => {
     if (busy) return;
-    if (on) { removeDream(id); setMsg(null); return; }
+    if (on) { await removeDream(id); setMsg(null); return; }
     if (dreamsOf(s, exam).length >= MAX_DREAMS) { setMsg(`${EXAM_NAME[exam]} ke 5 dream college ho gaye. Rank tab ke Dream panel se ek hatao, phir ye jodo.`); buzz("error"); return; }
     setBusy(true);
     try {
       const d = await build();
-      if (toggleDream(d) === "added") { setMsg(`🎯 Dream mein juda: ${d.need} marks chahiye. Har mock ke baad dekho kitne door.`); buzz("success"); }
+      const done = await toggleDream(d);
+      if (done === "added") { setMsg(`🎯 Dream mein juda: ${d.need} marks chahiye. Har mock ke baad dekho kitne door.`); buzz("success"); }
+      else if (done === "full") { setMsg(`${EXAM_NAME[exam]} ke 5 dream college ho gaye. Rank tab ke Dream panel se ek hatao, phir ye jodo.`); buzz("error"); }
     } catch (e: any) { setMsg(e?.message || "Dream nahi juda. Dobara try karo."); }
     finally { setBusy(false); }
   };
