@@ -22,6 +22,7 @@ from .live_window import guard as guard_live_start, answers_sealed
 import asyncio, json
 from fastapi import Query
 from pydantic import ConfigDict
+from .timeline_models import Batch
 
 READY_SECONDS = 60
 
@@ -461,9 +462,25 @@ class SubmissionReceipt(BaseModel):
     command_state: str = "applied"
 
 
+class SubmitBody(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    timeline: Batch | None = None  # the last time events ride on the submit
+
+
 @router.post("/attempts/{id}/submit", response_model=SubmissionReceipt)
-async def submit(id: str, bg: BackgroundTasks, response: Response, u=Depends(current)):
-    a = await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "id": 1})
+async def submit(id: str, bg: BackgroundTasks, response: Response, data: SubmitBody | None = None, u=Depends(current)):
+    timeline = data.timeline if data else None
+    cursor = None
+    if timeline:
+        from .timeline import HEADER as TIME_HEADER, accept
+        a = await clocked_one(attempts, {"id": id, "user_id": u["id"]}, TIME_HEADER)
+        if a:
+            try:
+                cursor = await accept(id, u["id"], timeline, a, a["_database_now"])
+            except Exception:
+                cursor = None  # the submit itself never waits on the time record
+    else:
+        a = await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "id": 1})
     if not a:
         raise HTTPException(404, "Attempt not found.")
     from .attempt_status import HEADER
@@ -475,10 +492,13 @@ async def submit(id: str, bg: BackgroundTasks, response: Response, u=Depends(cur
         import logging
         logging.getLogger(__name__).error("Grade dispatch delayed; durable outbox retained")
     grading = a.get("grading_status", "ready" if a.get("summary") else "queued")
+    receipt = {"id": id, "receipt": a["receipt"], "status": a["status"], "submitted_at": a["submitted_at"], "sealed_seq": a.get("sealed_seq", 0), "grading_status": grading}
+    headers = {"Location": f"/api/attempts/{id}/results", "Retry-After": "2"}
+    if timeline:
+        return EnvelopeResponse({**SubmissionReceipt(**receipt).model_dump(), "timeline_cursor": cursor}, status_code=200 if grading == "ready" else 202, headers=headers)
     response.status_code = 200 if grading == "ready" else 202
-    response.headers["Location"] = f"/api/attempts/{id}/results"
-    response.headers["Retry-After"] = "2"
-    return {"id": id, "receipt": a["receipt"], "status": a["status"], "submitted_at": a["submitted_at"], "sealed_seq": a.get("sealed_seq", 0), "grading_status": grading}
+    response.headers.update(headers)
+    return receipt
 
 
 @router.get("/attempts/{id}/results")

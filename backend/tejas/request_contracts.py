@@ -7,6 +7,7 @@ import math
 from datetime import date
 from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator, model_validator
+from .timeline_models import Batch as TimeBatch
 
 Text = Annotated[str, Field(max_length=30000)]
 Short = Annotated[str, Field(max_length=300)]
@@ -227,6 +228,19 @@ class AnswerPayload(Payload):
     marked: bool = False
     revision: int = Field(ge=1, le=100000)
     request_id: RequestKey
+    timeline: TimeBatch | None = None
+
+
+class SubmitPayload(Payload):
+    timeline: TimeBatch | None = None
+
+
+class NamePayload(Payload):
+    name: str = Field(max_length=40)
+
+
+class LearningsPayload(Payload):
+    items: list[Annotated[str, Field(max_length=140)]] = Field(max_length=3)
 
 
 class RetryPayload(Payload):
@@ -321,6 +335,8 @@ MODELS = {
     'chapter_books.publish_book': ChapterAction, 'chapter_books.chapter_live': ChapterLive,
     'reviews.save_review': ReviewWrite, 'reviews.expected_value': ProbabilityInput,
     'attempts.solution_consulted': EmptyPayload,
+    'attempts.submit': SubmitPayload, 'timeline.flush_timeline': TimeBatch,
+    'names.set_display_name': NamePayload, 'analysis_api.save_learnings': LearningsPayload,
     'imports.schedule_import': ScheduleInput, 'imports.toggle_live': LiveInput,
     'auth.login': LoginPayload, 'phone.access': PhonePayload, 'auth.preferences': PreferencePayload,
     'phone.signup': PhoneSignupPayload, 'phone.change_pin': PinChangePayload, 'phone.reset_pin': PinChangePayload,

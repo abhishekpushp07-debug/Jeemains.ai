@@ -1,524 +1,121 @@
 {
-  "build_now": "Choose the smallest useful set of features from the user's scope that delivers the fastest aha moment through a complete core workflow, honoring explicit user priorities.",
-  "project_context": {
-    "app_name": "JEELIVE.AI Super Admin",
-    "route": "/super-admin/library",
-    "scope": "Targeted redesign of the single Super Admin Library page (/super-admin/library) without touching or breaking the rest of the application. Aligns perfectly with the existing dark theme (near-black plum surfaces, crimson/red brand accent, Figtree font for UI, Roboto Mono for machine tokens and numbers), AdminCrumbs, AdminHeading, admin-panel, admin-test-row, StatusChip, and shadcn ui components.",
-    "actor_profile": {
-      "role": "Layman Super Admin & Platform Owner",
-      "user_mindset": "Non-technical, high-stakes decision maker preparing a clean intake for JEE Mains and BITSAT chapter-wise PYQ and 62-day All India Test Series. Desires a powerhouse tool that feels effortlessly simple, normal, logical, and safe like an intuitive recycle bin.",
-      "critical_fears": [
-        "Accidentally deleting student scores or past attempt histories",
-        "Losing track of unlinked uploads or older mocks",
-        "Touching or disrupting Rapidfire data (MUST NEVER BE TOUCHED)",
-        "Overwhelming complex jargon, nested database IDs, or confusing multi-level configurations"
-      ],
-      "primary_goals": [
-        "Have all cleared/retired tests cleanly organized and segmented into logical exam buckets (JEE Main, BITSAT, COMEDK, Custom)",
-        "Inspect exactly why and when tests were moved, their question counts, previous states, and kept student attempts",
-        "Perform instant 1-click restore or multi-select restore with clear plain-language guarantees",
-        "Have a clear post-clean-up guided roadmap on what to upload next"
-      ]
+  "theme": {
+    "mode": "dark",
+    "base": "Deep Obsidian kaala and blood red brand palette for JEELIVE.AI",
+    "surface": {
+      "page": "#090507",
+      "surfaceCard": "#130A0E",
+      "surfaceAlt": "#1A0F15",
+      "surfaceOverlay": "rgba(19, 10, 14, 0.92)",
+      "line": "#2D1520",
+      "lineSubtle": "#221118",
+      "ink": "#F8FAFC",
+      "textMuted": "#9AA8BA",
+      "textMuted2": "#6B7C93"
     },
-    "key_data_entities": [
-      {
-        "field": "title",
-        "description": "Clean human-friendly test title (no internal file names or back-office strings shown to students)"
-      },
-      {
-        "field": "exam_name",
-        "description": "Target exam category (e.g., JEE Main, BITSAT, COMEDK)"
-      },
-      {
-        "field": "section_name / mock_type",
-        "description": "Mock type segment: PYQ Papers, Chapter-wise Tests (with subject: Physics/Chemistry/Maths), Mock Tests, All India Test Series (with day numbers), or custom sections"
-      },
-      {
-        "field": "count",
-        "description": "Total question count in test"
-      },
-      {
-        "field": "previous_state",
-        "description": "What it was before moving to Library (Live, Draft, Paused/Off, Scheduled)"
-      },
-      {
-        "field": "archived_at",
-        "description": "Epoch timestamp of when the test was moved to Library (formatted in Indian locale: DD MMM YYYY)"
-      },
-      {
-        "field": "reason",
-        "description": "Human-friendly reason tag, e.g. 'Fresh start clean-up on 15 Nov 2026', 'Replaced by a new PDF', 'Moved by you'"
-      },
-      {
-        "field": "attempts",
-        "description": "Number of preserved student attempts and recorded scores"
-      },
-      {
-        "field": "day_number",
-        "description": "For series papers (e.g., Day 14 of 62). If day slot is currently taken on restore, it restores without a day for safety"
-      },
-      {
-        "field": "uploads",
-        "description": "Unpublished source PDF uploads whose tests were never Live"
-      }
-    ],
-    "scale_and_performance": {
-      "item_volume": "Up to ~3,000 tests total; typical post-clean-up steady state of 250 to 400 tests across 3 major exams",
-      "performance_rules": "Client-side instant filtering and search with memoized segmentation; paginated/virtualized list beyond 150 items; immediate optimistic selection state; sticky action bar on viewport bottom."
+    "brand": {
+      "primary": "#E11D48",
+      "primaryHover": "#BE123C",
+      "primaryActive": "#9F1239",
+      "bloodRed": "#9F1239",
+      "soft": "#2A0E1A",
+      "glow": "0 0 24px rgba(225, 29, 72, 0.28)",
+      "ring": "#FB7185"
+    },
+    "semanticTones": {
+      "aGood": { "hex": "#34D399", "bg": "#06281E", "border": "#0D593E", "label": "Sahi / Mazboot" },
+      "aBad": { "hex": "#FB7185", "bg": "#310D17", "border": "#68192E", "label": "Galat / Kamzor" },
+      "aWarn": { "hex": "#FBBF24", "bg": "#2E1C03", "border": "#5C3B07", "label": "Overtime / Confused / Alert" },
+      "aInfo": { "hex": "#7DB2FF", "bg": "#0A1F3D", "border": "#1D447D", "label": "Theek / Smart skip" },
+      "aMute": { "hex": "#94A5C3", "bg": "#141C2A", "border": "#283448", "label": "Chhoda / Not seen / Unrated" },
+      "aTrack": "#22131B"
     }
   },
-  "research_and_design_decisions": {
-    "industry_benchmarks": [
-      {
-        "product": "macOS Trash / Google Drive Trash / Gmail Bin",
-        "observed_pattern": "Non-destructive holding area with one-click 'Put back' / 'Restore' where items return to their original container seamlessly.",
-        "adaptation": "Tests retain their exact exam + section routing and previous state (Live returns to Live, Draft to Draft). If a scheduled day in a test series is occupied, safe unassigned fallback occurs."
-      },
-      {
-        "product": "Linear / GitHub Archive & Backlog Management",
-        "observed_pattern": "Top segmented exam pills with live counter badges, search filter bar, and sticky batch action tray for multi-item restore.",
-        "adaptation": "Segmented tab controls by Exam (All, JEE Main, BITSAT, COMEDK, Custom) with count badges, secondary mock-type filter, and floating bottom bulk-restore bar."
-      }
-    ],
-    "layout_tradeoff_evaluation": {
-      "option_a": "Hierarchical Nested Accordion Tree (Folder per Exam > Subfolder per Mock Type > Table)",
-      "option_b_chosen": "Segmented Exam Pill Navigation + High-Affordance Summary Header + Collapsible Section Group Panels + Sticky Batch Bar",
-      "decision_rationale": "Option A requires multiple clicks and hides items behind collapsed folders, creating anxiety that items might be lost. Option B presents immediate visibility of total items, clear exam tabs (JEE Main, BITSAT, COMEDK), search with zero friction, and clear group headers with 'Restore all' buttons. Crucially, Option B is mobile-first responsive (390px viewport friendly)."
-    },
-    "rapidfire_safety_guarantee": "Rapidfire data is strictly separated in the backend and explicitly highlighted as untouched and safe on the guidance panel, reinforcing confidence for the owner."
-  },
-  "visual_system": {
-    "direction_choice": "Technical Dark Enterprise with Warm Crimson Accents (JEELIVE Brand Register)",
-    "rationale": "Preserves consistency with the existing JEELIVE.AI Super Admin theme: rich dark plum-tinted charcoal backgrounds, high-contrast crisp typography, tactile borders, and distinctive crimson brand accents for key calls-to-action.",
-    "typography": {
-      "ui_font_family": "Figtree, system-ui, -apple-system, sans-serif",
-      "numbers_font_family": "Roboto Mono, monospace",
-      "code_font_family": "Roboto Mono, monospace",
-      "font_weights": {
-        "regular": 400,
-        "medium": 500,
-        "semibold": 600,
-        "bold": 700,
-        "extrabold": 800
-      },
-      "type_scale": {
-        "micro": "0.6875rem",
-        "caption": "0.75rem",
-        "body_sm": "0.8125rem",
-        "body": "0.875rem",
-        "title_sm": "1rem",
-        "title_md": "1.125rem",
-        "title_lg": "1.375rem",
-        "headline": "1.75rem",
-        "display": "2.25rem"
-      },
-      "rules": "Internal admin UI uses Figtree for all headings, labels, buttons, and row titles. Monospace (Roboto Mono) is strictly reserved for machine tokens, questions counts, attempt tallies, and date values with tabular figures."
-    },
-    "color_palette_oklch": {
-      "surface_page": "oklch(0.13 0.015 340)",
-      "surface_card": "oklch(0.18 0.02 340)",
-      "surface_alt": "oklch(0.22 0.025 340)",
-      "surface_subtle": "oklch(0.15 0.018 340)",
-      "line_border": "oklch(0.28 0.025 340)",
-      "line_strong": "oklch(0.38 0.035 340)",
-      "ink_primary": "oklch(0.96 0.01 80)",
-      "ink_muted": "oklch(0.72 0.025 80)",
-      "ink_dim": "oklch(0.55 0.02 80)",
-      "brand_crimson": "oklch(0.68 0.20 20)",
-      "brand_crimson_hover": "oklch(0.62 0.22 20)",
-      "brand_soft": "oklch(0.24 0.05 20)",
-      "brand_line": "oklch(0.38 0.08 20)",
-      "success_text": "oklch(0.78 0.15 150)",
-      "success_soft": "oklch(0.22 0.05 150)",
-      "success_line": "oklch(0.35 0.08 150)",
-      "warning_text": "oklch(0.82 0.15 75)",
-      "warning_soft": "oklch(0.24 0.06 75)",
-      "warning_line": "oklch(0.38 0.09 75)",
-      "info_text": "oklch(0.75 0.14 240)",
-      "info_soft": "oklch(0.22 0.05 240)",
-      "info_line": "oklch(0.35 0.08 240)"
-    },
-    "accessibility_and_contrast": {
-      "ink_on_page": "Contrast ratio > 17:1 (Passes AAA)",
-      "ink_on_card": "Contrast ratio > 16:1 (Passes AAA)",
-      "muted_on_card": "Contrast ratio > 8.1:1 (Passes AAA)",
-      "brand_crimson_on_card": "Contrast ratio > 5.9:1 (Passes AA for standard text, AAA for large/bold)",
-      "touch_targets": "Minimum 44px by 44px on all touch devices",
-      "focus_ring": "3px solid oklch(0.68 0.20 20) with 2px offset"
+  "typography": {
+    "uiFont": "Figtree, -apple-system, BlinkMacSystemFont, sans-serif",
+    "numberFont": "Roboto Mono, monospace",
+    "scale": {
+      "h1Hero": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight",
+      "h2Section": "text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight",
+      "h3Subsection": "text-xl sm:text-2xl font-bold tracking-tight",
+      "h4CardTitle": "text-lg sm:text-xl font-bold",
+      "bigNumber": "text-3xl sm:text-4xl lg:text-5xl font-extrabold font-mono",
+      "tileValue": "text-2xl sm:text-3xl font-extrabold font-mono",
+      "body": "text-base leading-relaxed text-slate-200",
+      "small": "text-sm text-slate-400",
+      "kicker": "text-xs font-bold uppercase tracking-[0.18em] text-rose-400"
     }
   },
-  "page_architecture": {
-    "hierarchy": [
-      {
-        "level": 1,
-        "name": "Admin Breadcrumb & Header",
-        "components": ["AdminCrumbs", "AdminHeading", "Quick Stat Strip", "Download All ZIP Button"]
-      },
-      {
-        "level": 2,
-        "name": "Layman Safety & Guidance Panel",
-        "components": ["RecycleBinPrinciplesCard", "NextStepUploadRoadmap", "RapidfireUntouchedBadge"]
-      },
-      {
-        "level": 3,
-        "name": "Segmentation & Toolbar",
-        "components": ["ExamFilterPills", "MockTypeFilterChips", "SearchInput", "SelectionCounter"]
-      },
-      {
-        "level": 4,
-        "name": "Unpublished Uploads Bin (Conditional)",
-        "components": ["UploadsPanel", "DraftPDFRow", "RestoreUploadButton"]
-      },
-      {
-        "level": 5,
-        "name": "Segmented Test Groups & Rows",
-        "components": ["GroupHeaderWithRestoreAll", "LibraryTestRow", "PreviousStateChip", "RestoreSingleButton"]
-      },
-      {
-        "level": 6,
-        "name": "Sticky Batch Restore Tray",
-        "components": ["SelectedCountPill", "RestoreSelectedButton", "ClearSelectionButton"]
-      },
-      {
-        "level": 7,
-        "name": "Restore Confirmation Dialog",
-        "components": ["ConfirmDialog", "DestinationSummary", "ConflictResolutionNotice"]
-      }
-    ]
-  },
-  "detailed_specifications": {
-    "header_and_stats": {
-      "title": "Library (Recycle Bin)",
-      "description": "Safe holding area for retired and cleared tests. Students cannot see them, but all previous scores, question responses, and student histories remain 100% intact. Restore anytime back to where they were, or export everything as a backup ZIP.",
-      "quick_stats": [
-        {
-          "label": "Tests in Library",
-          "data_testid": "lib-stat-total-tests",
-          "description": "Total count of archived tests across all exams"
-        },
-        {
-          "label": "Student Attempts Kept",
-          "data_testid": "lib-stat-total-attempts",
-          "description": "Sum of student test submissions safely preserved"
-        },
-        {
-          "label": "Rapidfire Data",
-          "value": "100% Untouched",
-          "data_testid": "lib-stat-rapidfire-status",
-          "description": "Reassures the owner that rapidfire practice data is completely isolated and safe"
-        }
-      ],
-      "actions": [
-        {
-          "id": "zip_all",
-          "label": "Download all as ZIP",
-          "icon": "Download",
-          "data_testid": "library-zip-all",
-          "variant": "outline"
-        }
-      ]
-    },
-    "guidance_panel": {
-      "purpose": "Layman education and peace of mind for the platform owner",
-      "collapsible": true,
-      "default_state": "expanded_first_time",
-      "sections": [
-        {
-          "heading": "How the Library works (Recycle Bin rules)",
-          "bullets": [
-            "Nothing is permanently lost: Every question, diagram, answer key, and explanation stays intact.",
-            "Student scores are protected: Students cannot start these tests now, but any past student can still see their scorecard in their history.",
-            "Restoring is 1-click: Restoring a test puts it right back to where it was (a Live test returns Live; a Draft returns to Draft).",
-            "Series test safety: If an All India Test Series day slot is already filled by a newer test, the restored test comes back safely without a day number so nothing is overwritten."
-          ]
-        },
-        {
-          "heading": "Recommended Next Steps (Fresh Start Intake)",
-          "callout": "Now that older mocks are cleared into the Library, upload your fresh content in Master:",
-          "steps": [
-            "1. Upload JEE Main Chapter-wise PYQ (Physics, Chemistry, Maths) in Master › JEE Main › Chapter-wise Tests.",
-            "2. Upload JEE Main 62-Day All India Test Series papers in Master › JEE Main › All India Test Series (your scheduled dates are already saved!).",
-            "3. Upload BITSAT Chapter-wise PYQ and BITSAT All India Test Series.",
-            "4. Rapidfire data remains untouched and ready for student speed drills."
-          ]
-        }
-      ]
-    },
-    "segmentation_navigation": {
-      "level_1_exam_tabs": {
-        "container_testid": "library-exam-tabs",
-        "items": [
-          { "id": "all", "label": "All Exams" },
-          { "id": "jee-main", "label": "JEE Main", "badge_color": "blue" },
-          { "id": "bitsat", "label": "BITSAT", "badge_color": "amber" },
-          { "id": "comedk", "label": "COMEDK", "badge_color": "teal" },
-          { "id": "custom", "label": "Other Exams", "badge_color": "neutral" }
-        ],
-        "behavior": "Displays counter badge for each exam. Selecting a tab filters visible groups instantly without reloading."
-      },
-      "level_2_mock_type_chips": {
-        "container_testid": "library-type-filters",
-        "items": [
-          { "id": "all_types", "label": "All Mock Types" },
-          { "id": "pyq", "label": "PYQ Papers" },
-          { "id": "chapters", "label": "Chapter-wise Tests" },
-          { "id": "series", "label": "All India Test Series" },
-          { "id": "full_mocks", "label": "Full Mock Tests" },
-          { "id": "uploads_only", "label": "Unpublished Uploads" }
-        ]
-      },
-      "search_and_filter_bar": {
-        "input_testid": "library-search",
-        "placeholder": "Search by test title, chapter name, or subject (e.g., Rotational Motion, BITSAT Mock 3)...",
-        "clear_button_testid": "library-search-clear"
-      }
-    },
-    "group_and_row_specifications": {
-      "group_header": {
-        "elements": [
-          { "name": "Exam & Section Breadcrumb Badge", "example": "JEE Main › Chapter-wise Tests · Physics" },
-          { "name": "Count Indicator", "example": "14 tests" },
-          { "name": "Section Export Button", "label": "Export Section ZIP", "data_testid": "library-zip-{section_id}" },
-          { "name": "Restore All Button", "label": "Restore Section", "data_testid": "library-restore-group-{section_id}" }
-        ]
-      },
-      "test_row": {
-        "testid": "library-item-{id}",
-        "structure": [
-          {
-            "part": "checkbox",
-            "testid": "library-select-{id}",
-            "aria_label": "Select test for batch restore"
-          },
-          {
-            "part": "main_content",
-            "elements": [
-              {
-                "field": "title",
-                "format": "Bold, 15px Figtree, white text, no file extensions (.pdf is stripped)"
-              },
-              {
-                "field": "badges_line",
-                "elements": [
-                  "Subject Tag (e.g. Physics, Chemistry, Maths)",
-                  "Question Count (e.g. 30 questions) with Roboto Mono figures",
-                  "Previous State Chip (Live / Draft / Off / Scheduled)",
-                  "Student Attempts Tag (e.g. 48 student attempts preserved)",
-                  "Archived Date (e.g. Moved 15 Nov 2026)"
-                ]
-              },
-              {
-                "field": "reason_tag",
-                "example": "Reason: Fresh start clean-up on 15 Nov 2026",
-                "style": "Subtle amber/muted badge giving layman clarity on why it was moved"
-              }
-            ]
-          },
-          {
-            "part": "single_action",
-            "testid": "library-restore-{id}",
-            "label": "Restore",
-            "icon": "RotateCcw",
-            "variant": "outline",
-            "action_trigger": "Opens Restore Confirmation Dialog with precise destination and state explanation"
-          }
-        ]
-      }
-    },
-    "sticky_batch_bar": {
-      "element_testid": "library-sticky-batch-bar",
-      "visible_condition": "picked.size > 0",
-      "dock_position": "Sticky bottom bar at 16px from viewport bottom with backdrop-blur",
-      "elements": [
-        {
-          "testid": "library-selected-count",
-          "label": "{n} tests selected"
-        },
-        {
-          "testid": "library-restore-selected",
-          "label": "Restore Selected ({n})",
-          "icon": "RotateCcw",
-          "variant": "brand-crimson"
-        },
-        {
-          "testid": "library-clear-selection",
-          "label": "Deselect all",
-          "variant": "ghost"
-        }
-      ]
-    },
-    "restore_confirmation_dialog": {
-      "testid": "library-restore-confirm-dialog",
-      "title": "Restore {count} test{s} back to students?",
-      "body_copy": "These tests will return exactly to their original section. Live tests will immediately become accessible to students again. Past attempt records and scores remain intact.",
-      "series_conflict_note": "For any All India Test Series papers whose scheduled day is currently occupied, the paper will be restored without a day number so existing dates are not overwritten.",
-      "confirm_button_label": "Yes, Restore Now",
-      "cancel_button_label": "Cancel"
-    },
-    "empty_states": {
-      "library_completely_empty": {
-        "testid": "library-empty-all",
-        "icon": "Archive",
-        "heading": "Your Library is currently empty",
-        "description": "When you retire old mocks, make a clean start, or replace an existing test with a new PDF, cleared tests appear here safely. No test is ever permanently discarded without your knowledge."
-      },
-      "search_no_results": {
-        "testid": "library-empty-search",
-        "icon": "Search",
-        "heading": "No archived tests match '{query}'",
-        "description": "Try checking for typos or clear the search query to see all tests in this exam.",
-        "action": "Clear search"
-      },
-      "exam_tab_empty": {
-        "testid": "library-empty-exam",
-        "icon": "CheckCircle2",
-        "heading": "No archived tests for {exam}",
-        "description": "All tests for this exam are either currently active in Master or have not been cleared yet."
-      }
-    },
-    "mobile_responsive_adaptations": {
-      "breakpoint": "max-width: 640px (down to 390px mobile)",
-      "behaviors": [
-        "Horizontal scrolling for Exam Segmented Pills with hidden scrollbar and touch drag.",
-        "LibraryRow stacks vertically: Checkbox and title on top row, metadata badges wrap smoothly into flex-row, and Restore button spans full width or aligns right.",
-        "Group headers wrap gracefully with action buttons (ZIP and Restore All) dropping into a compact touch-friendly button row.",
-        "Sticky Batch Restore bar docks flush to the mobile bottom viewport with safe-area-inset padding for iOS Home Bar."
-      ]
+  "cardAnatomy": {
+    "principle": "Ek card, ek baat: bada number, neeche ek seedhi line.",
+    "container": "bg-[#130A0E] border border-[#2D1520] rounded-2xl p-4 sm:p-6 shadow-lg shadow-black/40 min-w-0 overflow-hidden",
+    "tile": "bg-[#1A0F15] border border-[#2D1520] border-l-4 rounded-xl p-3.5 sm:p-4 flex flex-col gap-1 transition-transform duration-200 hover:-translate-y-0.5",
+    "toneBorders": {
+      "good": "border-l-[#34D399]",
+      "bad": "border-l-[#FB7185]",
+      "warn": "border-l-[#FBBF24]",
+      "info": "border-l-[#7DB2FF]",
+      "brand": "border-l-[#E11D48]"
     }
   },
-  "css_implementation_blueprint": {
-    "target_file": "/app/frontend/src/master.css",
-    "classes_to_add": [
-      {
-        "selector": ".admin-library-guide",
-        "css": "display:flex;flex-direction:column;gap:14px;padding:20px 22px;border:1px solid var(--brand-line);border-radius:18px;background:linear-gradient(145deg,color-mix(in srgb,var(--blue) 14%,var(--surface-card)) 0%,var(--surface-card) 100%);color:var(--ink)"
-      },
-      {
-        "selector": ".admin-library-guide-head",
-        "css": "display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"
-      },
-      {
-        "selector": ".admin-library-guide-head h2",
-        "css": "display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;margin:0;color:var(--ink)"
-      },
-      {
-        "selector": ".admin-library-guide-grid",
-        "css": "display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px"
-      },
-      {
-        "selector": ".admin-library-guide-card",
-        "css": "display:flex;flex-direction:column;gap:8px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface-alt)"
-      },
-      {
-        "selector": ".admin-library-guide-card h3",
-        "css": "font-size:14px;font-weight:700;color:var(--ink);margin:0;display:flex;align-items:center;gap:8px"
-      },
-      {
-        "selector": ".admin-library-guide-card ul",
-        "css": "margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text-muted)"
-      },
-      {
-        "selector": ".admin-library-guide-card li strong",
-        "css": "color:var(--ink)"
-      },
-      {
-        "selector": ".admin-library-segments",
-        "css": "display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none"
-      },
-      {
-        "selector": ".admin-library-segments button",
-        "css": "display:inline-flex;align-items:center;gap:8px;flex:none;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface-card);color:var(--text-muted);font-weight:700;font-size:14px;cursor:pointer;transition:border-color var(--motion-fast),color var(--motion-fast)"
-      },
-      {
-        "selector": ".admin-library-segments button:hover",
-        "css": "color:var(--ink);border-color:var(--brand-line)"
-      },
-      {
-        "selector": ".admin-library-segments button.is-active",
-        "css": "color:var(--ink);border-color:var(--blue);background:var(--brand-soft);box-shadow:inset 0 -2px 0 var(--blue)"
-      },
-      {
-        "selector": ".admin-library-seg-count",
-        "css": "display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-family:var(--font-mono);background:var(--surface-alt);border:1px solid var(--line);color:var(--text-muted)"
-      },
-      {
-        "selector": ".admin-library-segments button.is-active .admin-library-seg-count",
-        "css": "background:var(--surface-card);color:var(--ink);border-color:var(--brand-line)"
-      },
-      {
-        "selector": ".admin-library-meta-tags",
-        "css": "display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:13px;color:var(--text-muted);margin-top:2px"
-      },
-      {
-        "selector": ".admin-library-tag",
-        "css": "display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:2px 8px;border-radius:6px;background:var(--surface-card);border:1px solid var(--line)"
-      },
-      {
-        "selector": ".admin-library-tag.has-attempts",
-        "css": "color:var(--success);border-color:var(--success-line);background:var(--success-soft)"
-      },
-      {
-        "selector": ".admin-library-tag.has-reason",
-        "css": "color:var(--warning);border-color:var(--warning-line);background:var(--warning-soft)"
-      },
-      {
-        "selector": ".admin-library-sticky-bar",
-        "css": "position:sticky;bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 20px;border-radius:16px;background:rgba(20,20,28,0.92);backdrop-filter:blur(12px);border:1px solid var(--brand-line);box-shadow:0 16px 36px rgba(0,0,0,0.45);z-index:40;animation:admin-rise .25s ease both"
-      },
-      {
-        "selector": ".admin-library-sticky-info",
-        "css": "display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink)"
-      },
-      {
-        "selector": ".admin-library-sticky-actions",
-        "css": "display:flex;align-items:center;gap:10px"
-      },
-      {
-        "selector": "@media (max-width:640px) .admin-library-sticky-bar",
-        "css": "bottom:8px;padding:12px 14px;border-radius:12px"
-      },
-      {
-        "selector": "@media (max-width:640px) .admin-test-row",
-        "css": "display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:'check main' 'action action';gap:12px"
-      },
-      {
-        "selector": "@media (max-width:640px) .admin-test-row .admin-row-check",
-        "css": "grid-area:check;align-self:start;margin-top:3px"
-      },
-      {
-        "selector": "@media (max-width:640px) .admin-test-row .admin-row-main",
-        "css": "grid-area:main"
-      },
-      {
-        "selector": "@media (max-width:640px) .admin-test-row button",
-        "css": "grid-area:action;width:100%"
-      }
-    ]
+  "heroComposition": {
+    "layout": "Grid with score ring on left/top (220px ring container) and 4 prominent metric tiles on right/bottom (Rank, Percentile, Accuracy, Time).",
+    "scoreRing": "Recharts PieChart innerRadius 68 outerRadius 88 with animated red arc (#E11D48) on track (#22131B), bold score centered in Roboto Mono, subtitle out of total marks.",
+    "verdictLine": "Single high-contrast statement below hero giving clear marks ledger (earned, negative loss, marks left on table).",
+    "marksLedger": "4 quick audit chips: +Marks Earned (Green), -Negative Penalty (Red), Left on table (Amber), Net Final (White/Red)."
   },
-  "data_testid_manifest": [
-    { "id": "admin-library-page", "element": "Top page container" },
-    { "id": "admin-library-title", "element": "AdminHeading title" },
-    { "id": "library-zip-all", "element": "Download full ZIP button" },
-    { "id": "library-guide-panel", "element": "Layman rules & what-next guide card" },
-    { "id": "library-guide-toggle", "element": "Guide show/hide accordion trigger" },
-    { "id": "library-exam-tabs", "element": "Exam segmentation pill row" },
-    { "id": "library-tab-{exam_slug}", "element": "Specific exam tab button" },
-    { "id": "library-type-filters", "element": "Secondary mock type filter chips" },
-    { "id": "library-search", "element": "Search input box" },
-    { "id": "library-search-clear", "element": "Search clear button" },
-    { "id": "library-group-{section_id}", "element": "Group panel per exam section" },
-    { "id": "library-zip-{section_id}", "element": "Download section ZIP button" },
-    { "id": "library-restore-group-{section_id}", "element": "Restore entire section button" },
-    { "id": "library-item-{test_id}", "element": "Archived test row" },
-    { "id": "library-select-{test_id}", "element": "Test row selection checkbox" },
-    { "id": "library-restore-{test_id}", "element": "Single test restore button" },
-    { "id": "library-uploads", "element": "Unpublished draft uploads panel" },
-    { "id": "library-upload-{upload_id}", "element": "Unpublished upload row" },
-    { "id": "library-upload-restore-{upload_id}", "element": "Restore unpublished upload button" },
-    { "id": "library-sticky-batch-bar", "element": "Sticky bottom selection tray" },
-    { "id": "library-selected-count", "element": "Selected items counter text" },
-    { "id": "library-restore-selected", "element": "Restore picked items button" },
-    { "id": "library-clear-selection", "element": "Clear selection button" },
-    { "id": "library-restore-confirm-dialog", "element": "Restore safety confirmation modal" }
+  "stickyBottomBar": {
+    "desktop": "Sticky at bottom z-40 bg-[#130A0E]/95 backdrop-blur-xl border-t border-[#2D1520] py-2 px-4 flex items-center justify-between gap-4",
+    "mobile390px": "Sticky at bottom z-40 bg-[#130A0E]/95 backdrop-blur-xl border-t border-[#2D1520] py-2 px-3 flex flex-col gap-2 w-full",
+    "switch": "Pill toggle group between Personal (User icon) and Comparative (Users icon) with smooth background transition.",
+    "sectionsNav": "Horizontally scrollable ribbon with no scrollbar, 8 numbered pills (1 Overview to 8 Qs by Qs) with active highlight in blood red (#E11D48)."
+  },
+  "chartStylingRecharts": {
+    "cartesianGrid": { "stroke": "#2D1520", "strokeDasharray": "3 3", "vertical": false },
+    "xAxis": { "stroke": "#475569", "tick": { "fill": "#9AA8BA", "fontSize": 11 } },
+    "yAxis": { "stroke": "#475569", "tick": { "fill": "#9AA8BA", "fontSize": 11 } },
+    "tooltip": {
+      "contentStyle": { "backgroundColor": "#130A0E", "borderColor": "#2D1520", "borderRadius": "12px", "color": "#F8FAFC", "boxShadow": "0 8px 24px rgba(0,0,0,0.6)" },
+      "cursor": { "fill": "rgba(225, 29, 72, 0.08)" }
+    },
+    "colors": { "you": "#E11D48", "topper": "#FBBF24", "classAvg": "#7DB2FF", "correct": "#34D399", "wrong": "#FB7185", "skipped": "#94A5C3" }
+  },
+  "specializedVisuals": {
+    "speedAccuracyScatter": "2D quadrant scatter map: X-axis time spent vs Par (Fast to Slow), Y-axis outcome (Correct vs Wrong vs Skipped). Each question is a tappable dot opening drawer/solution.",
+    "journeyChips": "Time-block chronological pills (0-30m, 30-60m, etc.) displaying visit number (2nd, 3rd), outcome icon, flag mark, time spent, and answer shift notation.",
+    "questionGridHeatmap": "Compact responsive grid of question numbers (1 to 75/90) color-coded by correctness (Green/Red/Gray) with border intensity representing peer difficulty.",
+    "scoreWaterfall": "Score Potential waterfall step-chart showing current score + Careless mistakes recovered + Risky guesses dropped + Reinvested time = Realistic Target & Max Potential.",
+    "comparativeVisuals": "Side-by-side gap breakdown: You vs Topper/Top 10%/Class Avg with subject differential delta bar and Pace curve comparison overlay."
+  },
+  "motionAndInteractions": {
+    "sectionSwitch": "Framer-motion or CSS @keyframes a2-in: fade in with 8px upward slide (0.24s cubic-bezier(0.16, 1, 0.3, 1)).",
+    "barFill": "Progress bars and metric meters smoothly ease-in width over 450ms.",
+    "touchGestures": "Horizontal swipe on 360-390px screens navigates between consecutive sections without blocking vertical table scroll.",
+    "microInteractions": "Tap lift on tiles (-2px hover), active press state on chips and question dots."
+  },
+  "emptyAndLockedStates": {
+    "style": "Subtle dashed border box in #2D1520 with warm amber/slate warning icon and encouraging Roman Hinglish copy.",
+    "cohortLock": "Abhi 3 students ne diya hai, 10 par rank aur topper data khulega.",
+    "timingLock": "Is attempt mein per-question time record nahi hua. Agle mock se shuru hoga."
+  },
+  "top5WowDetails": {
+    "1": "Instant Marks Ka Hisaab: A visual financial-ledger style breakdown of marks earned, negative marks thrown away, and easy marks left on table.",
+    "2": "Speed-Accuracy Matrix Dot Plot: Interactive scatter showing whether errors came from rushing (careless) or dragging in overtime.",
+    "3": "Realistic Score Target Calculator: One-tap waterfall simulating 'Agar careless galtiyan aur mushkil sawaal chhod dete to aapka score +36 marks aur rank #420 hoti'.",
+    "4": "Question Journey Replay: Visual breadcrumb showing which questions were revisited, where answers were flipped from right to wrong, and time blocks spent.",
+    "5": "Zero-Lag Mobile Navigation: Tactile sticky bottom bar with Personal vs Comparative mode switcher and scroll-locked horizontal data tables."
+  },
+  "component_path": "/app/frontend/src/components/results/ResultAnalysis.js",
+  "instructions_to_main_agent": [
+    "Retain all existing testing data-testid attributes (a2-bottom-bar, a2-mode-personal, a2-mode-compare, a2-score-ring, a2-tile-*, etc.) to pass regressions.",
+    "Ensure .js files (not .tsx) are used in frontend.",
+    "On mobile viewports (360px-390px), wide tables must scroll horizontally within .a2-scroll without breaking the outer viewport.",
+    "Keep dark theme colors consistent using #090507, #130A0E, and blood red #E11D48 accents."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Never use generic centered layouts or low-contrast washed gray surfaces.",
+    "Maintain strict APCA/WCAG contrast: bright crisp text (#F8FAFC, #9AA8BA) over dark surfaces (#130A0E).",
+    "Include data-testid on every interactive button, tab, card, and metric tile.",
+    "Do not apply global transition: all. Use specific transition: transform 0.18s ease, border-color 0.18s ease."
   ]
 }

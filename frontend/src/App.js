@@ -31,6 +31,7 @@ import './vibrant-ui.css';
 import './pyq.css';
 import './admin.css';
 import './master.css';
+import './analysis2.css';
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
@@ -42,6 +43,7 @@ const SetDetail = lazy(() => import("./features/SetDetail"));
 const Player = lazy(() => import("./features/Player"));
 const Results = lazy(() => import("./features/Results"));
 const Competitions = lazy(() => import('./features/Competitions'));
+const Compare = lazy(() => import('./features/Compare'));
 const StudioImport = lazy(() => import('./features/StudioImport'));
 const ChapterBookStudio = lazy(() => import('./features/ChapterBookStudio'));
 const Info = lazy(() => import("./features/Info"));
@@ -193,6 +195,7 @@ function Shell() {
             />
             <Route path="/competitions" element={<Protected><Competitions /></Protected>} />
             <Route path="/competitions/:id" element={<Protected><Competitions /></Protected>} />
+            <Route path="/competitions/:id/compare/:key" element={<Protected><Compare /></Protected>} />
             <Route path="/studio/chapter-books/:id" element={<Protected staff><ChapterBookStudio /></Protected>} />
             <Route path="/studio/imports/:id" element={<Protected staff><StudioImport /></Protected>} />
             <Route

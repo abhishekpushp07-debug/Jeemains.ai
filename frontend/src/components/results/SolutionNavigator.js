@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Atom, FlaskConical, Calculator, BookOpen, Brain, Check, X, Minus, Flag } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabs';
 
-export const matchesOutcome = (q, filter) => filter === 'all' || (filter === 'marked' ? q.marked : filter === 'bonus-section' ? q.bonus : q.outcome === filter);
+const TAGGED = { careless: ['wasted'], overtime: ['slow_correct', 'costly_overtime'], confused: ['confused'] };
+export const matchesOutcome = (q, filter) => filter === 'all' || (TAGGED[filter] ? TAGGED[filter].includes(q.tag) : filter === 'marked' ? q.marked : filter === 'bonus-section' ? q.bonus : q.outcome === filter);
 export const subjectSlug = subject => subject.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const subjectIcons = { Physics: Atom, Chemistry: FlaskConical, Mathematics: Calculator, 'Logical Reasoning': Brain, English: BookOpen };
 

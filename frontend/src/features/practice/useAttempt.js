@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { api, post, put } from "../../lib/api";
 import {takeStartedAttempt} from '../../lib/privateResources';
+import { createRecorder } from '../../lib/timeCapture';
 const postpone = (state, error) => {
   state.current.failures = Math.min(6, state.current.failures + 1);
   state.current.after = Date.now() + Math.max(error?.retryAfterMs || 0, Math.min(30000, 1000 * 2 ** state.current.failures) + Math.random() * 1500);
@@ -29,6 +30,7 @@ export function useAttempt(id, user) {
     anchor = useRef({ server: 0, mono: 0 }),
     timer = useRef(null),
     conflictRef = useRef(false);
+  const recorder = useRef(null), shown = useRef(null);
   const storage = `tejas-draft-${user.id}-${id}`;
   const confidenceStorage = `tejas-confidence-${user.id}-${id}`;
   const [confidencePreferences,setConfidencePreferences]=useState({});
@@ -59,13 +61,15 @@ export function useAttempt(id, user) {
     }
   }, [storage, id]);
   const openResult = useCallback(
-    () =>
+    () => {
+      recorder.current?.show(null);
       navigate(
         "/results/" +
           id +
           (Object.keys(drafts.current).length ? "?late=true" : ""),
         { replace: true, state: navigationState.current },
-      ),
+      );
+    },
     [id, navigate],
   );
   const load = useCallback(async () => {
@@ -79,6 +83,8 @@ export function useAttempt(id, user) {
       syncClock(d.server_now);
       data.current = d;
       setAttempt(d);
+      if (d.status === "active" && !recorder.current)
+        recorder.current = createRecorder(user.id, id, () => (anchor.current.server + performance.now() - anchor.current.mono) / 1000);
       let stored = {};
       try {
         stored = JSON.parse(localStorage.getItem(storage) || "{}");
@@ -135,7 +141,9 @@ export function useAttempt(id, user) {
           continue;
         }
         try {
-          const res = await put(`/attempts/${id}/answers/${qid}`, draft);
+          const batch = recorder.current?.take();
+          const res = await put(`/attempts/${id}/answers/${qid}`, batch ? { ...draft, timeline: batch } : draft);
+          recorder.current?.ack(res.timeline_cursor);
           retryState.current = { failures: 0, after: 0 };
           if (res.current_revision > res.accepted.revision) {
             conflictRef.current = true;
@@ -198,6 +206,7 @@ export function useAttempt(id, user) {
       if (!navigator.onLine) return;
       if (!data.current) await load();
       await flush();
+      if (recorder.current?.pending() >= 100) recorder.current.flush().catch(() => {});
     };
     const on = () => {
       setOnline(true);
@@ -292,6 +301,23 @@ export function useAttempt(id, user) {
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
   }, []);
+  useEffect(() => {
+    const seen = () => recorder.current?.show(document.visibilityState === "visible" ? shown.current : null);
+    const away = () => recorder.current?.show(null);
+    const beat = setInterval(() => recorder.current?.beat(), 5000);
+    document.addEventListener("visibilitychange", seen);
+    window.addEventListener("pagehide", away);
+    return () => {
+      clearInterval(beat);
+      document.removeEventListener("visibilitychange", seen);
+      window.removeEventListener("pagehide", away);
+      away();
+    };
+  }, []);
+  const watch = useCallback((qid) => {
+    shown.current = qid;
+    if (document.visibilityState === "visible") recorder.current?.show(qid);
+  }, []);
   const edit = (qid, change) => {
     if (seconds === 0 || conflictRef.current) return;
     const old = drafts.current[qid] ||
@@ -305,6 +331,8 @@ export function useAttempt(id, user) {
       revision: (data.current.answers[qid]?.revision || 0) + 1,
       request_id: crypto.randomUUID(),
     };
+    if ("value" in change) recorder.current?.answer(qid, change.value);
+    if ("marked" in change) recorder.current?.mark(qid, change.marked);
     persist();
     clearTimeout(timer.current);
     timer.current = setTimeout(flush, 350);
@@ -342,7 +370,19 @@ export function useAttempt(id, user) {
       throw new Error(
         "Wait for pending responses to be acknowledged before submitting.",
       );
-    const receipt = await post("/attempts/" + id + "/submit");
+    const rec = recorder.current;
+    rec?.show(null);
+    if (rec?.pending() > 200) await rec.flush().catch(() => {});
+    const batch = rec?.take();
+    let receipt;
+    try {
+      receipt = await post("/attempts/" + id + "/submit", batch ? { timeline: batch } : {});
+    } catch (e) {
+      rec?.show(shown.current);
+      throw e;
+    }
+    rec?.ack(receipt.timeline_cursor);
+    if (rec && !rec.pending()) rec.clear();
     localStorage.removeItem(storage);
     localStorage.removeItem(storage.replace('tejas-draft-', 'tejas-draft-meta-'));
     localStorage.removeItem(confidenceStorage);
@@ -373,6 +413,7 @@ export function useAttempt(id, user) {
     confidencePreferences,
     chooseConfidence,
     visit,
+    watch,
     discard,
     submit,
     enterBonus,

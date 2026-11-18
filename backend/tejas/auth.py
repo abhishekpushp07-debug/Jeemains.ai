@@ -28,7 +28,7 @@ class Credentials(BaseModel):
 
 
 def view(u):
-    result = {k: u[k] for k in ["id", "name", "email", "phone", "role", "exam", "access_type"] if k in u}
+    result = {k: u[k] for k in ["id", "name", "email", "phone", "role", "exam", "access_type", "display_name"] if k in u}
     if u.get('access_type') == 'unverified_phone':
         result['pin_configured'] = u.get('pin_version', 0) > 0
     return result

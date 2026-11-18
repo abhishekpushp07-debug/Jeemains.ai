@@ -8,7 +8,8 @@ from .db import db, attempts, audit
 
 router = APIRouter(prefix='/api/admin/qa', tags=['QA test accounts'])
 BY_USER = ('tejas_ledgers', 'tejas_saved_tests', 'tejas_question_reports', 'tejas_reviews', 'tejas_score_versions',
-           'tejas_preflight', 'tejas_sessions', 'tejas_jobs', 'tejas_solution_requests')
+           'tejas_preflight', 'tejas_sessions', 'tejas_jobs', 'tejas_solution_requests',
+           'tejas_attempt_timeline', 'tejas_analysis', 'tejas_learnings')
 LIMIT = 20000
 
 
@@ -34,6 +35,10 @@ async def remove_test_accounts(body: TestAccounts, u=Depends(owner)):
         return {'dry_run': body.dry_run, 'removed': {} if body.dry_run else counts, 'would_remove': counts}
     cohorts = await db.tejas_cohort_entries.distinct('cohort_id', {'user_id': {'$in': ids}})
     removed = {'cohort_entries': (await db.tejas_cohort_entries.delete_many({'user_id': {'$in': ids}})).deleted_count}
+    classes = await db.tejas_class_entries.distinct('cohort_id', {'user_id': {'$in': ids}})
+    removed['class_entries'] = (await db.tejas_class_entries.delete_many({'user_id': {'$in': ids}})).deleted_count
+    if classes:
+        await db.tejas_class_stats.update_many({'_id': {'$in': classes}}, {'$set': {'dirty': True, 'generation': str(uuid.uuid4())}})
     for name in BY_USER:
         removed[name.removeprefix('tejas_')] = (await db[name].delete_many({'user_id': {'$in': ids}})).deleted_count
     removed['attempts'] = (await attempts.delete_many({'user_id': {'$in': ids}})).deleted_count

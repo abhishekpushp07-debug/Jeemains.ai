@@ -48,7 +48,7 @@ async def enqueue(kind, user_id, set_id, payload):
         await jobs.insert_one(j)
     except DuplicateKeyError:
         existing = await get(jobs, j['id'])
-        if existing['user_id'] != user_id and kind not in ('extract', 'regrade', 'cohort'):
+        if existing['user_id'] != user_id and kind not in ('extract', 'regrade', 'cohort', 'class_stats'):
             raise HTTPException(404, 'Job not found.')
         return public_job(existing)
     return public_job(j)
@@ -104,6 +104,9 @@ async def run_job(id, drain=True):
             elif kind == 'cohort':
                 from .cohorts import refresh
                 message = await refresh(j)
+            elif kind == 'class_stats':
+                from .class_stats import refresh as refresh_class
+                message = await refresh_class(j)
             elif kind == 'grade':
                 from .corrections import freeze_ledger
                 a = await get(attempts, j['payload']['attempt_id'])

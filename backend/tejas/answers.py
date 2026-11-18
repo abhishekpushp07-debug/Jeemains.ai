@@ -11,6 +11,8 @@ from .idempotency import fingerprint
 from .runtime import MAX_ANSWER_COMMANDS
 from .canonical import EPOCH_NOW, clocked_one
 from tejas_core import normalize_answer
+from .timeline_models import Batch
+from .contracts import EnvelopeResponse
 
 router = APIRouter(prefix='/api/attempts', tags=['Acknowledged answers'])
 
@@ -22,6 +24,10 @@ class AnswerWrite(BaseModel):
     confidence: float | None = Field(default=None, ge=0, le=1, allow_inf_nan=False)
     revision: int = Field(ge=1, le=MAX_ANSWER_COMMANDS + 1)
     request_id: str = Field(min_length=8, max_length=100)
+
+
+class AnswerSave(AnswerWrite):
+    timeline: Batch | None = None  # optional time events riding on this save: no extra request during the rush
 
 
 class AcceptedAnswer(AnswerWrite):
@@ -45,17 +51,20 @@ def receipt_result(receipt, body_hash, current_revision, server_now=None):
 
 
 @router.put('/{id}/answers/{qid}', response_model=AnswerReceipt)
-async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
+async def save_answer(id: str, qid: str, data: AnswerSave, u=Depends(current)):
     try:
         UUID(qid)
     except ValueError:
         raise HTTPException(404, 'Question not found.')
     key = fingerprint({'qid': qid, 'request_id': data.request_id})
-    body = data.model_dump(exclude_none=True)
+    body = data.model_dump(exclude_none=True, exclude={'timeline'})
     body_hash = fingerprint(body)
     projection = {'_id': 0, 'id': 1, 'user_id': 1, 'status': 1, 'deadline': 1, 'pack_id': 1,
                   f'answers.{qid}': 1, f'response_schema.{qid}': 1,
                   f'command_receipts.{key}': 1, 'command_count': 1, 'rules.bonus_rule': 1, 'bonus_unlocked_at': 1, 'ready_until': 1}
+    if data.timeline:
+        del projection[f'response_schema.{qid}']
+        projection.update(response_schema=1, started_at=1)
     a = await clocked_one(attempts, {'id': id, 'user_id': u['id']}, projection)
     if not a:
         raise HTTPException(404, 'Attempt not found.')
@@ -134,4 +143,13 @@ async def save_answer(id: str, qid: str, data: AnswerWrite, u=Depends(current)):
         if existing:
             return receipt_result(existing, body_hash, latest.get('answers', {}).get(qid, {}).get('revision', 0), latest['_database_now'])
         raise HTTPException(409, 'Save conflict or deadline reached. Reconnect to check the accepted response.')
-    return {'accepted': updated['answers'][qid], 'server_now': updated['answers'][qid]['accepted_at'], 'current_revision': data.revision}
+    result = {'accepted': updated['answers'][qid], 'server_now': updated['answers'][qid]['accepted_at'], 'current_revision': data.revision}
+    if not data.timeline:
+        return result
+    # The answer is already saved; a time record that cannot be stored never fails the save.
+    try:
+        from .timeline import accept
+        cursor = await accept(id, u['id'], data.timeline, a, result['server_now'])
+    except Exception:
+        cursor = None
+    return EnvelopeResponse({**AnswerReceipt(**result).model_dump(), 'timeline_cursor': cursor})

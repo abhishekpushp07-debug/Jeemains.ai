@@ -1,5 +1,5 @@
 import { examPath, safeExamReturn, seriesPath, JEE_SERIES } from '../lib/exams';
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Link,
   useParams,
@@ -43,6 +43,9 @@ import {Tabs, TabsList, TabsTrigger} from '../components/ui/tabs';
 import { SolutionNavigator, matchesOutcome } from '../components/results/SolutionNavigator';
 import {useLocation} from 'react-router-dom';
 import { Button } from '../components/ui/button';
+import { AnalysisWorkspace } from '../components/analysis/AnalysisWorkspace';
+import { useAnalysis } from '../components/analysis/useAnalysis';
+import { SolutionInsight } from '../components/analysis/SolutionInsight';
 export default function Results() {
   const { id } = useParams();
   const { user } = useAuth();
@@ -67,7 +70,7 @@ export default function Results() {
   const nav = useNavigate();
   const [r, setR] = useState(null);
   const [error, setError] = useState("");
-  const filter = ['all','marked','bonus-section','incorrect','skipped','correct','dropped','bonus'].includes(params.get('filter')) ? params.get('filter') : 'all';
+  const filter = ['all','marked','bonus-section','incorrect','skipped','correct','dropped','bonus','careless','overtime','confused'].includes(params.get('filter')) ? params.get('filter') : 'all';
   function setFilter(value) {
     const next = new URLSearchParams(params); next.set('filter', value);
     const matching = allQuestions.filter(q => q.subject === activeSubject && matchesOutcome(q, value));
@@ -90,7 +93,13 @@ export default function Results() {
   const extras = useResultExtras(id, !!r, !!r?.questions?.length && r.questions.every(q => q.solution_kind === 'supplied_worked'));
   const meters = useLearningMeters(id,scoreVersion,!!r);
   const resultAttemptId = r?.id;
-  const allQuestions = r?.questions || [];
+  const vs = /^(topper|top10|average|user:[0-9a-f]{16})$/.test(params.get('vs') || '') ? params.get('vs') : 'topper';
+  const analysis = useAnalysis(id, user.id, scoreVersion, !!r, params.get('mode') === 'compare', vs);
+  const insight = useMemo(() => Object.fromEntries((analysis.data?.questions || []).map(q => [q.id, q])), [analysis.data]);
+  const allQuestions = useMemo(() => (r?.questions || []).map(q => ({ ...q, tag: insight[q.id]?.tag })), [r, insight]);
+  useEffect(() => {
+    if (view === 'analysis' && scrollPositions.current.analysis) requestAnimationFrame(() => window.scrollTo(0, scrollPositions.current.analysis));
+  }, [view]);
   const selectedQuestion = params.get('question');
   const subjects = [...new Set(allQuestions.map(q => q.subject))];
   const requestedSubject = params.get('subject');
@@ -323,6 +332,8 @@ export default function Results() {
       {r.mode === 'series_live' && <SeriesRankCard id={id} />}
       <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank',r.exam==='BITSAT'?'Branch matches':'Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
       <section className="result-view-panel" hidden={view!=='analysis'} data-testid="result-analysis-panel" aria-label="Result analysis">
+      <AnalysisWorkspace id={id} state={analysis} onOpen={openQuestion} onSolutions={() => changeView('solutions')} onRetry={s.incorrect || s.skipped ? () => setRetryOpen(true) : null} />
+      <details className="a2-legacy" data-testid="legacy-analysis"><summary data-testid="legacy-analysis-toggle">Purana detailed analysis · charts, 25 insights aur study plan</summary>
       <MeterShortcuts exam={r.exam} journey={meters.journey} rank={meters.rank} onView={changeView}/>
       <MockSectionScores s={s} />
       <ResultAnalysis r={r} cohort={extras.cohort} peer={extras.peer} onOpen={openQuestion} />
@@ -405,6 +416,7 @@ export default function Results() {
       </div>
       {r.insights && <section className="import-card mb-8" data-testid="results-evidence-insights"><div className="import-section-label">YOUR NEXT STUDY SESSION</div><h2>Start where this attempt points.</h2><div className="insight-grid">{r.insights.priorities.length ? r.insights.priorities.map((g,i) => <article className="import-issue" data-testid={'results-priority-' + i} key={g.label}><strong>{g.label}</strong><p>{g.incorrect} incorrect · {g.skipped} skipped · {g.count} questions</p><p>Attempted accuracy: {g.accuracy === null ? 'Not available' : g.accuracy + '%'} ({g.correct}/{g.attempted})</p><p>{g.action}</p><small>{g.evidence} · Review Q{g.questions.join(', Q')}</small></article>) : <p data-testid="results-no-priorities">No incorrect or skipped eligible questions in this attempt. Use fresh questions to gather more evidence.</p>}</div><p className="import-fineprint mt-4" data-testid="results-insights-basis">{r.insights.basis}</p></section>}
       <details className="advanced-analysis" data-testid="advanced-result-analysis"><summary data-testid="advanced-result-analysis-toggle">Deeper review tools · decisions, revision & study plan</summary><ResultsAnalyticsWorkspace key={`${id}-${scoreVersion}`} analysis={r.analytics} questions={r.questions} userId={user.id} attemptId={id} onOpenQuestion={openQuestion} onRefresh={refreshAnalytics} confidenceThreshold={confidenceThreshold} review={r.review} /></details>
+      </details>
       </section>
       {view==='progress'&&<JourneyView data={meters.journey} retry={meters.retry}/>}
       {view==='accuracy'&&<ConfidenceView data={meters.journey} retry={meters.retry} latestAccuracy={s.accuracy}/>}
@@ -428,6 +440,7 @@ export default function Results() {
           ["dropped", "Dropped"],
           ["bonus", "Bonus-to-all"],
           ...(s.sections ? [["bonus-section", "Bonus section"]] : []),
+          ...(analysis.data?.quality?.available ? [["careless", "Careless galti"], ["overtime", "Overtime"], ["confused", "Confused"]] : []),
         ].map(([v, l]) => (
           <button
             data-testid={"results-filter-" + v}
@@ -482,6 +495,7 @@ export default function Results() {
               </strong>
             </div>
               <div className="review-expanded" data-testid="selected-question-solution-panel" aria-label={'Question ' + q.number + ' and solution'}>
+                {analysis.data && <SolutionInsight q={insight[q.id]} copy={analysis.data.copy} />}
                 <QuestionContent
                   question={q}
                   base={`/attempts/${id}/questions/${q.id}`}

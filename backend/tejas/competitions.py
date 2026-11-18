@@ -33,6 +33,7 @@ class Ranking(BaseModel):
     score:float
     accuracy:float|None=None
     is_you:bool=False
+    key:str=''
 
 class Leaderboard(BaseModel):
     competition:Competition
@@ -95,5 +96,7 @@ async def leaderboard(id:str,u=Depends(current)):
     # Equal scores share rank (1, 1, 3): 1 + number of ranked attempts with a strictly higher frozen score.
     mine=await attempts.find_one({**ranked,'user_id':u['id']},{'_id':0,'id':1,'user_id':1,'summary.score':1,'summary.accuracy':1})
     if mine: mine['rank']=1+await attempts.count_documents({**ranked,'summary.score':{'$gt':mine['summary']['score']}})
-    def rank(r): return Ranking(rank=r['rank'],learner='Learner '+hashlib.sha256((id+r['user_id']).encode()).hexdigest()[:8].upper(),score=r['summary']['score'],accuracy=r['summary'].get('accuracy'),is_you=r['user_id']==u['id'])
+    def rank(r):
+        h=hashlib.sha256((id+r['user_id']).encode()).hexdigest()
+        return Ranking(rank=r['rank'],learner='Learner '+h[:8].upper(),score=r['summary']['score'],accuracy=r['summary'].get('accuracy'),is_you=r['user_id']==u['id'],key=h[:16])
     return Leaderboard(status='provisional' if count<participants else 'ready',rows=[rank(r) for r in top],you=rank(mine) if mine else None,**common)

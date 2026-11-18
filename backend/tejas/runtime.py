@@ -36,4 +36,5 @@ LANE_LIMITS = {
     'smart_prepare': budget('TEJAS_SMART_PREPARE_CONCURRENCY', 1, 1, 1),
     'smart_page': budget('TEJAS_SMART_PAGE_CONCURRENCY', 1, 1, 1),
     'cohort': budget('TEJAS_COHORT_CONCURRENCY', 1, 1, 2),
+    'class_stats': budget('TEJAS_CLASS_STATS_CONCURRENCY', 1, 1, 2),
 }

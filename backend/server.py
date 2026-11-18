@@ -53,6 +53,9 @@ from tejas import (
     chapter_split,
     draft_preview,
     qa_cleanup,
+    timeline,
+    analysis_api,
+    names,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -252,6 +255,9 @@ for module in [
     chapter_split,
     draft_preview,
     qa_cleanup,
+    timeline,
+    analysis_api,
+    names,
 ]:
     app.include_router(module.router)
 

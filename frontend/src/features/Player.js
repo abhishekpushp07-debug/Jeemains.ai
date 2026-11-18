@@ -49,6 +49,7 @@ export default function Player() {
     confidencePreferences,
     chooseConfidence,
     visit,
+    watch,
     discard,
     submit,
     enterBonus,
@@ -80,8 +81,8 @@ export default function Player() {
   }, [a?.id, bonusOpen]);
   useEffect(()=>{if(a&&qs.length)try{sessionStorage.setItem(`test-question-${id}-${bonusOpen}`,String(index))}catch{}},[id,a?.id,bonusOpen,index]);
   useEffect(() => {
-    if (questionId && !readying) visit(questionId);
-  }, [questionId, visit, online, readying]);
+    if (questionId && !readying) { visit(questionId); watch(questionId); }
+  }, [questionId, visit, watch, online, readying]);
   useEffect(() => {
     if (!a || !q || readying) return;
     function shortcut(e) {

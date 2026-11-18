@@ -159,6 +159,16 @@ SPEC = {
     'reviews.save_review': ('attempt_owner_private_post_release_notes', 'normal', 'question_version_revision_CAS_body_receipt'),
     'reviews.expected_value': ('attempt_owner_released_rules_only', 'normal', 'stateless_hypothetical'),
     'attempts.solution_consulted': ('attempt_owner_released_solutions', 'normal', 'set_membership_idempotent'),
+    'timeline.flush_timeline': ('attempt_owner_active_or_10_minutes_after_close', 'live', 'device_cursor_append_once'),
+    'analysis_api.read_analysis': ('attempt_owner_released_totals_of_others_only', 'normal', 'read_with_materialization'),
+    'analysis_api.analysis_questions': ('attempt_owner_released', 'normal', 'read'),
+    'analysis_api.report_pdf': ('attempt_owner_released', 'batch', 'read_stored_per_analysis'),
+    'analysis_api.share_image': ('attempt_owner_released_no_phone_or_name', 'batch', 'read_stored_per_analysis'),
+    'analysis_api.compare_learner': ('own_released_attempt_vs_leaderboard_totals_only', 'normal', 'read'),
+    'analysis_api.leaderboard': ('attempt_owner_released_names_scores_totals_only', 'normal', 'read'),
+    'analysis_api.save_learnings': ('attempt_owner_private_notes', 'normal', 'replace_field'),
+    'names.set_display_name': ('authenticated_own_student_only', 'normal', 'replace_field_3_per_day'),
+    'names.remove_display_name': ('owner_only_remove_student_display_name', 'control', 'repeatable_delete_audited'),
     'competitions.catalogue': ('authenticated_competition_metadata', 'normal', 'read'),
     'competitions.leaderboard': ('anonymous_cohort_after_close', 'normal', 'read'),
     'server.health': ('public_liveness_only', 'normal', 'read'),
@@ -278,6 +288,8 @@ def install_contracts(app):
             limit = 64 * 1024
         elif key in ('written.save_question', 'written.paste'):
             limit = 512 * 1024
+        elif key in ('timeline.flush_timeline', 'answers.save_answer', 'attempts.submit'):
+            limit = 48 * 1024  # an answer save or submit may carry up to 200 time events
         if not writes or upload:
             limit = 0
         registry.append(RouteContract(route, key, owner, tier, idem, roles(route.dependant), limit, model, writes and not upload))

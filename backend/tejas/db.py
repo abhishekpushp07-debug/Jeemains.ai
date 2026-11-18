@@ -127,6 +127,16 @@ async def indexes():
                  'tejas_ai_daily', 'tejas_ai_limits', 'tejas_cohorts', 'tejas_cohort_snapshots',
                  'tejas_cohort_entries'):
         await db[name].create_index('id', unique=True)
+    await db.tejas_class_entries.create_index([('cohort_id', 1), ('handle', 1)])
+    await db.tejas_class_entries.create_index('attempt_id')
+    await db.tejas_class_entries.create_index('user_id')
+    await db.tejas_class_entries.create_index([('cohort_id', 1), ('score', -1), ('submitted_at', 1)])
+    await db.tejas_learnings.create_index([('user_id', 1), ('submitted_at', -1)])
+    await db.tejas_phone_profiles.create_index('display_key', sparse=True)
+    await db.tejas_analysis.create_index('attempt_id')
+    await db.tejas_analysis.create_index('user_id')
+    await db.tejas_analysis.create_index('expires_at', expireAfterSeconds=0)
+    await db.tejas_attempt_timeline.create_index('user_id')
     await db.tejas_saved_tests.create_index([('user_id', 1), ('set_id', 1)], unique=True)
     await db.tejas_saved_tests.create_index([('user_id', 1), ('saved_at', -1)])
     await attempts.create_index([('user_id', 1), ('exam', 1), ('mode', 1), ('status', 1), ('submitted_at', -1)])

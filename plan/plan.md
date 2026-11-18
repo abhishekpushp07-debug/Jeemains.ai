@@ -1,157 +1,291 @@
-# JEELIVE.AI: Simple PIN, One Account, Exam-Day Readiness
+# JEELIVE.AI Analysis 2.0: jo baaki hai, uska poora plan
 
-A student who forgets the PIN sets a new one in three steps, with no OTP, on the website and in the app.
-The same number and PIN work on both, and the site is checked and prepared for a first live exam of 20,000 to 1 lakh students.
+Har mock ke baad student ek hi jagah dekhega ki marks kahan bane, kahan gaye, time kahan gaya aur agle mock mein kya badalna hai.
+Har number student ke apne jawab aur time se banta hai (koi AI nahi), aur website aur app dono ek hi server se lete hain.
 
-## Who it's for
+## Kiske liye
 
-- **Students:** sign up once, use the same number and PIN on the website and the app, and reset a forgotten PIN themselves.
-- **Owner:** no more PIN reset requests, a plain report of what is wrong on the live site, and a clear list of what 1 lakh students need.
-- **App agent:** one short message that says exactly which server calls the app must use.
+- **Student:** mock ke turant baad saaf hisaab, phone par bhi. Har number ke peeche ke sawaal aur unka solution ek tap par.
+- **Owner:** Quizrr ke har screen ke barabar ka analysis, uske aage ki cheezein, aur ek PDF report jo student WhatsApp par bhej sake.
+- **App agent:** ek taiyaar packet, jisse app wahi screens usi server se bana sake.
 
-## What was found before writing this plan
+## Core features aur experience
 
-Read from the code, not yet run:
+### Abhi ki haalat
 
-- The website login has no "Forgot PIN". It tells the student to ask the owner. A student who forgot the PIN cannot get back in alone.
-- A PIN can be changed only from inside Profile, after signing in.
-- Older students who never set a PIN cannot sign in at all unless they are still signed in somewhere.
-- Not yet checked: whether the Change PIN button inside Profile itself fails. It is tested first, and fixed if it does.
+Jo material dekha gaya:
 
-Website and app, by design:
+- Purana plan (17 Nov, 6 hisson wala).
+- Quizrr ki 14-page analysis PDF.
+- Quizrr ke 12 screenshots: Overview (2), Leaderboard, Performance, Attempt Analysis, Time Analysis, Difficulty, Question Journey, Qs by Qs (2), Solutions (2).
+- "Results: 60 analyses" guide, aur site ka apna purana analysis (25 insights, charts, 60-metric ledger).
+- Embibe, Aakash, Allen aur PW ke public feature pages (naye ideas ke liye).
+- Quizrr ke Comparative mode aur Compare screen ka koi screenshot nahi mila. Woh hissa apne design se banega.
 
-- Both use one server and one student list. A student who signs up on the website can sign in on the app with the same number and PIN, and the other way round.
-- This holds only if the app calls the same server with the same sign-up and sign-in calls. The app's code cannot be seen from here, so this is not confirmed.
-- Rapid Fire has its own separate accounts. That stays as it is.
+Code padhne par jo mila (chalakar ya test karke nahi dekha gaya):
 
-## Core features and experience
+- Pichhle note mein likha tha ki screens sirf dhaancha hain. Yeh sahi nahi nikla. 8 sections, Personal/Comparative switch, Compare screen, Solutions ki ek line, time record, class ka data, PDF report aur share image, sab ka code likha hua hai aur Results page se juda hai.
+- Is poore kaam ki ek bhi test report nahi hai. App packet abhi bana hi nahi.
+- Record ke hisaab se yeh live par nahi gaya. Is baar live par check nahi kiya gaya.
 
-### 1. Forgot PIN (website)
+Isliye baaki kaam do tarah ka hai: (1) jo likha hai use chalakar, test karke pakka karna, (2) neeche har section mein likhi "Baaki" cheezein banana.
 
-- A "Forgot PIN?" link under the PIN box on the login screen.
-- One screen: mobile number, new 4-digit PIN, confirm PIN.
-- A "PIN changed" confirmation. The student is signed in and continues to Home.
-- No OTP, no old PIN, no owner approval.
-- Works for every student number, including older accounts that never had a PIN.
-- A number with no account shows "No account with this number" and a link to create one.
-- The line "There is no public PIN reset" is removed from the login screen.
+### Ek baat jo pehle jaan leni chahiye
 
-### 2. Change PIN inside Profile
+Rank, Percentile, class ka % sahi, students se bana Par time, Difficulty level aur Compare, yeh sab tabhi bharte hain jab usi paper ko doosre students ne bhi diya ho. 15 Nov ki report mein live par 14 student profiles the. Jab tak students kam hain, in jagahon par saaf message dikhega ("Abhi 3 students ne diya hai, 10 par khulega"), koi andaaza nahi. Student ka apna hisaab (Score, Time, Attempt Quality, Journey) pehle attempt se poora dikhega.
 
-- Stays where it is: new PIN, confirm, save.
-- Tested first. If it fails, the cause is found and fixed.
+### Quizrr ke saamne
 
-### 3. One account on website and app
+| Cheez | Quizrr (diye gaye screens mein) | JEELIVE, is plan ke baad |
+| --- | --- | --- |
+| 8 sections aur neeche ka bar | Hai | Hai |
+| Attempt ke tags | 4 (Perfect, Wasted, Overtime, Confused) | 8, jisme Careless galti aur Concept gap alag hain |
+| Score Potential | Sirf "galti kam hoti to Score" | 3 step, har step ke sawaal, aur us Score par Rank |
+| Par time kahan se aaya | Nahi dikha | Har jagah likha hoga |
+| Agle mock ke liye 3 kaam | Nahi dikha | Hai |
+| Har sawaal ki journey Solutions mein | Hai | Banega |
+| Painful questions | Hai | Banega |
+| "Note down your learnings" | Hai | Banega ("Is test se 3 seekh") |
+| Leaderboard par naam aur Compare | Hai | Banega, naam student khud likhega |
+| Jawab badalne ka hisaab | Nahi dikha | Banega |
+| Pehli nazar vs wapas aakar | Nahi dikha | Banega |
+| Speed–Accuracy map | Nahi dikha | Banega |
+| Har number par "yeh kaise bana" | Chhota (i) | Poora hisaab aur ginti |
+| Bhasha | English | Roman Hinglish |
 
-- The same Forgot PIN call is opened for the app, so the app's Forgot Password screen can use it.
-- The app guide is updated.
-- The read-only look at the live site (item 5) shows whether the app's sign-ups arrive at the same server as the website's.
-- The message for the app agent:
+### 1. Overview
 
-```
-Use one server for everything: https://jeelive.ai/api
-Do not keep a separate student list. Rapid Fire stays separate, as today.
+Likha hua hai: Score ring, Rank, Percentile, Accuracy, Time, Attempted / Sahi / Galat / Chhode (tap par sawaal), har subject ka card, "Agle mock ke liye 3 kaam".
 
-Sign up:            POST /auth/phone/signup   phone, pin, confirm_pin
-Sign in:            POST /auth/phone          phone, pin
-Change PIN (signed in): POST /auth/pin        phone, new_pin, confirm_pin
-Forgot PIN (not signed in): POST /auth/pin/reset   phone, new_pin, confirm_pin
-   -> signs the student in, same reply as Sign in
-   -> works on jeelive.ai only after the next deploy
+Baaki:
 
-PIN is text of exactly 4 digits. Keep leading zeros.
-Keep the cookies the server sends and send them on every call. There is no bearer token.
-Identify the student by the server's user.id, never by a local id.
-After any PIN change, other devices are signed out. Saved answers and results stay.
+- Sabse upar ek line ka nateeja, data se bana. Jaise: "Accuracy 100% thi, lekin 16 sawaal chhoot gaye. Sabse zyada marks yahin gaye."
+- "Marks ka hisaab": Positive Score, negative mein kate marks, aur galat ya chhode sawaalon mein reh gaye marks.
+- "Aap kahan khade ho": sab students ke Score ka chart, student ka hissa alag rang mein. Rank par tap karne se Leaderboard khulega.
+- "Is test se 3 seekh": student 3 tak chhoti baatein likhega. Yeh agle mock ke Overview par aur PDF mein dikhengi.
+- Har number par (i): number ka matlab aur woh kaise gina gaya.
+- Akela student ho ya khud topper ho, to saaf message.
 
-Check: sign up on the website, sign in on the app with the same number and PIN,
-and My Tests must show the same attempts. Then repeat the other way round.
-```
+### 2. Performance
 
-### 4. Sign-in rush before a live exam
+Likha hua hai: subject tabs; Score, Accuracy, Attempt rate, Negative marks; MCQ vs Numerical; chapter table (Mazboot / Theek / Kamzor).
 
-- Seen in the code, not measured: every sign-in checks the PIN with a deliberately slow lock. On the two small live servers this could allow only a few hundred sign-ins per minute.
-- 20,000 students signing in within 15 minutes need about 1,300 per minute.
-- The real number is measured first. If it is too low, the student PIN check is made lighter. Staff passwords are not changed. Existing PINs keep working.
+Baaki:
 
-### 5. Read-only look at the live site
+- Sab subjects ki ek table: Score, Sahi, Galat, Chhode, Dekha hi nahi.
+- Chapter par tap karne se uske sawaal.
+- "Kamzor chapter" ki list, gaye hue marks ke hisaab se.
+- BITSAT ke sections aur bonus section ka Score yahin.
+- Jis paper mein chapter ka tag nahi, wahan saaf likha hoga.
 
-Nothing is changed and no test account is created. A plain report covers:
+### 3. Score Potential
 
-- whether the earlier deploys and the first nightly data repair actually completed
-- error and slow-request counts, including the 30-second hangs seen earlier
-- whether the live server allows the safe PDF reader
-- database size, the lookups that are slow, and whether a backup is visible
-- whether sign-ups from the app reach this server
+Likha hua hai: step chart (abhi, + Careless galti theek, + mushkil par risk nahi, + atka time wapas, Realistic target, Maximum), har step ke sawaal, "itne marks par Rank lagbhag".
 
-Any fix on live waits for the word "deploy".
+Baaki:
 
-### 6. Server size for 1 lakh
+- "Marks kis chapter se gaye": galat sawaal chapter ke hisaab se.
+- "Bina galat jawab ke Score": har galat jawab chhoda hota to kitna banta.
+- Guess ka niyam: is paper ki marking par kitna pakka hone par hi guess faydemand hai (+4 / −1 par 20%).
+- Time record na ho to kaun se step 0 hain, yeh saaf likha hoga.
 
-- Measured earlier, not re-measured: the live site runs on 2 small servers. That is about 10,000 exam starts per minute and roughly 16,000 to 22,000 students writing at once.
-- 1 lakh at once needs about 10 to 12 CPUs and a database that takes about 1,400 answer saves per second.
-- This cannot be fixed in code. A ready request for platform support is prepared with these numbers, for the owner to send.
+### 4. Attempt Quality
 
-### 7. Three small known faults
+Likha hua hai: 5 bade cards (Perfect, Careless galti, Overtime, Confused, Concept gap), baaki tags, subject × tag table, bars, tap par sawaal.
 
-- A tab left open across a deploy shows "We couldn't open this screen" on the next click. It will reload itself once instead.
-- The clean source line could lose the exam name just after a server restart. Confirmed first, then fixed.
-- A PDF restored from the Library after it was read does not come back in the Uploads panel. It will.
+Baaki:
+
+- Speed–Accuracy map: har sawaal ek dot (kitna time laga vs Par, sahi ya galat). Dot par tap se solution.
+- "Jaldi-sahi" note: jo sahi jawab Par ke 25% se kam time mein aaye. Tukka tha to concept ek baar dekh lene ki salah. Yeh alag tag nahi hai.
+- "Painful sawaal": galat bhi aur Par se zyada time bhi, chapter ke hisaab se.
+- Chart par har tag on/off.
+
+### 5. Time kahan gaya
+
+Likha hua hai: paper mein laga time, screen par time, sahi / galat / bina jawab par time ki patti, subject chart (Time / Questions / Accuracy), time journey blocks, pace curve, sabse dheeme 5 sawaal.
+
+Baaki:
+
+- Screen se bahar gaya time alag dikhega.
+- "Pehli nazar vs wapas aakar": pehli baar mein diye jawab aur laut kar diye jawab, dono ki ginti, Accuracy aur time.
+- "Aakhri 20% time": aakhir mein Accuracy giri ya nahi.
+- Har subject ka time ka hissa vs marks ka hissa ("Physics par 45% time, 30% marks").
+- Line chart par Sahi / Galat / Sab on/off.
+
+### 6. Difficulty
+
+Likha hua hai: subject tabs, Easy / Moderate / Tough / Not rated ki table (har khana tap hota hai), bars, "Leak: Easy sawaal".
+
+Baaki:
+
+- Har level ke saath likha hoga ki woh kahan se aaya (students ke result, paper ka tag, ya Not rated) aur kitne students par.
+- "Tough jo aapne nikale": class mein 35% se kam sahi, student ka sahi.
+- Not rated zyada ho to: "itne aur students ke baad level khulega".
+
+### 7. Question Journey
+
+Likha hua hai: har visit ka chip, time block ke hisaab se; kaun si baar dekha, kitna time, mark for review, jawab badla; tag ka rang on/off; ek line ka saar; subject order.
+
+Baaki:
+
+- Chip par result aur tag ka icon (sirf rang nahi), aur ek legend.
+- Jawab badalne ka hisaab: galat se sahi, sahi se galat, galat se galat, aur isse kitne marks bane ya gaye.
+- Sabse lambi sahi aur galat streak, asli solving order mein.
+- Lambi journey mein time block fold ho sakenge.
+
+### 8. Qs by Qs
+
+Likha hua hai: desktop par table, phone par cards, 8 filters, row par tap se solution.
+
+Baaki:
+
+- Upar sawaalon ka grid: subject aur MCQ / Numerical ke hisaab se; har number par result ka icon, tag, aur class mein kitne % ne sahi kiya uska halka rang.
+- Sort (time, marks, sawaal number) aur subject / level filter.
+- "Dekha hi nahi" aur "Dekha, jawab nahi diya" alag.
+- Comparative mode mein class ka average time aur topper ka time.
+
+### 9. Solutions screen
+
+Likha hua hai: har sawaal ke upar ek line (subject, level, aapka time, Par, kitne % sahi, topper ka time, sabse zyada chuna galat option, kitni baar dekha, jawab badla, tag); Careless / Overtime / Confused filter.
+
+Baaki:
+
+- Chaar cards: aapka time vs Par; class ka average time aur topper ka time; attempt karne walon mein kitne % sahi aur galat; kitne % ne attempt kiya aur kitne ne chhoda.
+- Is sawaal ki journey: khola, chhoda, dobara khola, option diya, badla, har kadam ke saath time.
+- Number ki patti par result aur tag ka rang aur icon. Naye labels Hinglish mein.
+
+### 10. Comparative mode, Leaderboard, Compare screen
+
+Likha hua hai: Personal / Comparative switch; Topper, Top 10%, Class average aur top 10 students ki list; aap vs woh ke cards; "gap sabse bada kahan"; subject chart aur table; Attempt Quality table; dono pace curve; Difficulty par Accuracy; live exam ke leaderboard se Compare screen.
+
+Baaki:
+
+- Leaderboard har us paper par jahan class ka data hai: top 50, student ke aas-paas ke 5 upar aur 5 neeche, naam ya Rank se search, har row par Compare.
+- Chunne ki list mein "Aapse ek Rank upar".
+- "Gap ka hisaab": gap ke kitne marks kam attempt se hain aur kitne galat jawab se, subject ke hisaab se.
+- Har section mein compare ka apna hissa (Journey mein kul visits aur wapsi; Qs by Qs mein class ke columns).
+- Har subject par laga time, dono ka saath-saath.
+- Doosre student ke jawab kabhi nahi dikhenge. Sirf totals, averages aur time.
+
+### 11. Display naam (naya)
+
+- Student Profile mein ya Leaderboard par apna naam likhega. Phone number kabhi nahi dikhega.
+- Naam na likhe to pehle jaisa "Learner AB12CD34".
+- Naam Leaderboard, Compare, apni PDF ke cover aur apne scorecard par dikhega.
+- Owner Super Admin › Students se kisi ka naam hata sakega.
+
+### 12. Download aur Share
+
+Likha hua hai: Hinglish A4 PDF report (har section ki tables aur bars), WhatsApp ke liye scorecard image, file ka naam `JEELIVE_<paper>_<date>`.
+
+Baaki:
+
+- PDF mein cover, contents, charts (Score ring, marks ka hisaab, pace curve, time blocks, Speed–Accuracy map), Question Journey, "3 seekh" aur tags ke matlab.
+- PDF phone par khulti hai ya nahi, yeh check.
+- Results page par do alag download, saaf naam ke saath: "Analysis report" aur "Solutions PDF" (purani, solutions wali).
+
+### 13. Purana analysis
+
+- Naye analysis ke neeche jo purana English fold hai, woh hatega.
+- Uski kaam ki cheezein naye sections mein Hinglish mein jayengi: Score ka chart, subject par aap vs average vs top, sawaalon ka heat map, negative se gaye marks, bina galat ke Score, streak, aakhri hisse ki Accuracy, guess ka niyam, Easy chhoote aur Tough nikale.
+- 60-metric ledger aur offline drafts wali screen ek chhoti "Advanced" link ke peeche rahegi, jaisi hai.
+- Analysis tab par upar ke purane Score tiles nahi dikhenge, kyunki wahi cheez Overview mein hai.
+- Progress, Confidence, Real-exam rank / Branch matches aur Solutions tabs jaise hain waise rahenge.
+
+### 14. Har section par laagu
+
+- Har comparison ke saath class ka size ("23 students mein").
+- Khaali ya band haalat mein wajah aur kab khulega: live exam chal raha hai, result ban raha hai, class ka data ban raha hai, purana attempt, staff ka attempt, corrected Score.
+- Purane attempts: Time, Attempt Quality aur Journey "Agle mock se shuru hoga" dikhayenge. Baaki sab chalega.
+- Ek hi request mein poora analysis. Pichhla khula analysis bina internet ke bhi dikhega.
+
+### 15. Time record aur app packet
+
+Likha hua hai: website ka player har sawaal ka screen time, jawab badalna aur mark for review record karta hai. Refresh ya crash par record nahi jaata, aur jawab save ke saath hi server par jaata hai.
+
+Baaki:
+
+- Ise bheed mein chalakar pakka karna (answer save dheema na ho).
+- App packet: server calls ki guide, analysis ka format, rulebook, har screen ka spec aur uski haalatein, app ke player ke liye time record ka spec, rang aur font, sample data, test checklist. Display naam, Leaderboard aur "3 seekh" ke calls bhi isi mein.
+
+### Rulebook (pehle se tay, yahan ek jagah)
+
+- **Par time:** 30 ya zyada students ne sahi kiya ho to unka beech ka time. Warna paper standard (paper ke 90% time ka hissa; Numerical ko MCQ se zyada).
+- **Tags:** Perfect (sahi, Par ke 1.25 guna tak). Slow-correct (sahi, usse zyada). Careless galti (galat, Par ke aadhe se kam mein). Concept gap (galat, Par ke 0.5 se 1.5 guna). Mehnga overtime (galat, 1.5 guna se zyada). Confused (jawab nahi, par Par ke aadhe se zyada time). Smart skip. Dekha hi nahi. Har sawaal ko ek hi tag.
+- **Difficulty:** 50 ya zyada students ne attempt kiya ho to: 65% ya zyada sahi = Easy, 35% se kam = Tough, beech mein Moderate. Warna paper ka apna tag. Warna Not rated.
+- **Class aur Top 10% average:** kam se kam 10 students. **Topper:** kam se kam 2 students.
+- **Realistic target:** abhi ka Score + Careless + mushkil par risk + time wale step ka aadha.
+- **Time:** sirf screen par khula time. Tab chhupa ho to nahi ginta. Ek baar mein zyada se zyada 15 minute.
+- **Naye:** Jaldi-sahi = Par ke 25% se kam. Painful = galat aur Par se zyada time. Aakhri hissa = paper ke aakhri 20% time, tabhi jab dono taraf 5 ya zyada jawab hon.
 
 ## User flow
 
-1. A student opens Login and taps "Forgot PIN?".
-2. The student enters the mobile number, a new PIN, and the PIN again.
-3. "PIN changed" appears and the student is on Home, signed in.
-4. The student opens the app and signs in with the same number and the new PIN. My Tests shows the same attempts.
-5. A signed-in student can still change the PIN from Profile.
-6. The owner reads the live report and sends the server-size request to platform support.
+1. Student mock submit karta hai. Result khulta hai, Analysis ka Overview saamne hota hai.
+2. Upar ek line ka nateeja, phir Score, Rank aur "3 kaam".
+3. Kisi number par tap: uske sawaalon ki list. Sawaal par tap: uska solution, upar time, class ka data aur us sawaal ki journey. Back: wahi chart, wahi jagah.
+4. Neeche ke bar se ya swipe se agla section.
+5. "Comparative" par switch: Topper, Top 10%, Class average ya Leaderboard ka koi student.
+6. Rank par tap: Leaderboard. Kisi student par Compare: aap vs woh.
+7. "Is test se 3 seekh" likhta hai.
+8. "Analysis report" download karta hai ya scorecard WhatsApp par bhejta hai.
+9. Agle mock ke Overview par pichhli 3 seekh dikhti hain.
 
 ## UI/UX feel
 
-- Same dark theme and the same login card.
-- One link, one screen, one confirmation. No extra steps or warnings.
-- Large number boxes that open the number keypad on a phone.
-- Short, plain English messages.
-- Works fully at phone width.
+- Wahi dark theme (kaala aur blood red) aur wahi fonts.
+- Ek card, ek baat: bada number, neeche ek seedhi line.
+- Sahi, galat aur chhoda: rang ke saath icon bhi.
+- Har chart ke saath wahi data table mein.
+- Neeche chipka hua bar: Personal / Comparative aur 8 sections. Phone par swipe.
+- 360 se 390 px ke phone par poora chalega. Chaudi table apne dabbe ke andar scroll hogi.
+- Halka motion: section badalne par aur bars bharne par.
+- Copy Roman Hinglish mein ("Time kahan gaya", "Careless galti", "Yahan se marks bach sakte the"). Score, Rank, Accuracy, Time, Percentile, Par English mein.
 
 ## Implementation phases
 
-**Phase 1 (built now):** the seven items above. Forgot PIN, Change PIN check, one account with the app message and guide, sign-in rush, read-only live report, server-size request, three small faults.
+**Phase 1 (abhi banega):** upar likha poora Analysis.
+- Jo likha hua hai use chalakar aur test karke pakka karna.
+- Har section ki "Baaki" cheezein.
+- Solutions screen ke cards aur sawaal ki journey.
+- Har paper par Leaderboard, "koi bhi student" se Compare, display naam.
+- Naya PDF, scorecard, purane analysis ka naye mein milna.
+- App packet.
+- Sirf preview mein. Live par tabhi jab "deploy" kaha jaye.
 
-**Phase 2 (separate approval):**
-- One staged load test at exam size after the servers are enlarged.
-- A short waiting line under overload, so answer saves are not turned away.
-- 100 MB PDFs uploaded without holding the whole file in memory, and one real 100 MB storage test.
-- Faster reading of very large PDFs.
-- Decimal numerical answers.
-- Browser checks still open: replacing mocks with a new PDF, a series day while it is open, photo and Excel upload.
-- A check of student-history lookups at 1-lakh size.
+**Phase 2 (alag approval):**
+- Sign-in rate limiter fix: student ka asli IP padhna aur sirf galat PIN ginna. Analysis dikhane ke turant baad.
+- Mock se mock ka trend: pichhle 5 mocks mein Careless, Overtime aur galat par gaya time.
+- Owner Master mein har sawaal ka Difficulty aur chapter tag set kar sake, taaki kam students par bhi Difficulty bhari rahe.
+- Subject ke hisaab se Rank aur Percentile.
+- Galti notebook: sab mocks ke galat aur chhode sawaal ek jagah, dobara practice ke liye.
 
-**Phase 3 (separate approval):**
-- Scanned (photo) PDFs.
-- A database backup and restore drill.
-- The 30-second hangs at the network edge, taken up with platform support.
-- Series cards for new exams in the app.
-- The earlier Master Phase 2 and 3 items.
+**Phase 3 (alag approval):**
+- 1 se 2 lakh students ek saath ka load test.
+- Owner ke liye paper report: kaun sa sawaal sabse zyada galat hua, kaun sa galat option sabse zyada chuna gaya.
+- Agle mock ka target Score aur uska follow-up.
 
 ## Assumptions
 
-1. "Forgot Password" is labelled "Forgot PIN?" because students have a PIN, not a password.
-2. Anyone who knows a student's mobile number can set a new PIN for it, open that student's tests and results, and sign that student out. This follows the owner's words: "Anyone can change any phone number or password, and it's okay."
-3. This also applies during a live exam. Someone can sign another student out in the middle of a ranked paper, or submit it. No guard for this is included. One can be added on request: no outside reset while that student's live paper is running.
-4. A limit stays: 5 PIN resets per number in 15 minutes, then a wait message.
-5. After a reset, every other device on that number is signed out. Saved answers, attempts and results stay. A running attempt continues after signing in again.
-6. A number with no account is not created by Forgot PIN. The student is sent to sign-up.
-7. Owner and reviewer logins (email and password) cannot be reset this way.
-8. The owner's reset in Super Admin › Students stays.
-9. The privacy page gets one honest line: a PIN can be reset by anyone who knows the number.
-10. "It is there in the app" is read as: the app already has a Forgot Password screen. The app's code is not visible from here, so the app side is done by the app agent.
-11. Rapid Fire accounts and server are not touched.
-12. The student PIN check is made lighter only if the measurement shows sign-in is too slow.
-13. The live look is read-only. The 100 MB storage test is not run, as it was not chosen.
-14. The capacity numbers are from earlier measurements. Phase 1 does not include a new load test.
-15. The server request is sized for 1 lakh, the top of the range given.
-16. One deploy carries everything built in preview. Forgot PIN reaches jeelive.ai together with the one-time cleanup: old non-PYQ tests go to the Library and the JEE Main series loses its papers but keeps its dates. Nothing goes live until the owner says "deploy".
-17. The note "Deprecated. The not code" was not understood. Nothing is removed or changed because of it.
-18. Screen labels stay in simple English.
+1. Naya Analysis, Solutions ke naye hisse aur PDF Roman Hinglish mein. Results page ke baaki purane labels English mein rahenge.
+2. Section ke naam: Overview, Performance, Score Potential, Attempt Quality, Time kahan gaya, Difficulty, Question Journey, Qs by Qs.
+3. Compare: Topper, Top 10%, Class average, aur Leaderboard ka koi bhi student.
+4. Quizrr ke Comparative screens nahi mile, isliye woh hissa apne design se.
+5. Revision PDF nahi banega, kisi phase mein nahi.
+6. Display naam: 2 se 20 akshar; akshar, ank aur space. Phone number jaisa naam (6 ya zyada ank ek saath) nahi chalega. Gaaliyon ki ek list block hogi. Din mein 3 baar se zyada nahi badlega. Do students ek hi naam rakh sakte hain; naam ke saath Rank dikhta hai.
+7. Koi student kisi aur ka naam likh sakta hai. Rok sirf owner ka "naam hatao" hai.
+8. Leaderboard ya Compare se bahar rehne ka option Phase 1 mein nahi hai. Naam na likhne par student Learner ID ke peeche rehta hai.
+9. Compare mein doosre student ka har sawaal par time aur uske totals dikhte hain, jawab nahi.
+10. Rulebook ke number (30, 50, 10) nahi badle. Is wajah se abhi ke kam students par Difficulty aksar "Not rated" aur Compare aksar band dikhega.
+11. Sawaal ki journey mein time "paper shuru hone ke kitne minute baad" likha hoga, ghadi ka time nahi.
+12. "3 seekh" sirf usi student ko dikhengi. Har seekh 140 akshar tak.
+13. PDF 8 se 12 page ki hogi (75 sawaal ke paper par). Naam cover par tabhi, jab student ne likha ho.
+14. Scorecard par Score, Rank, Percentile, Accuracy aur naam (agar likha ho). Phone number kabhi nahi.
+15. Purana English fold hatega; 60-metric ledger "Advanced" link ke peeche rahega.
+16. Purane download button ka naam "Solutions PDF" hoga.
+17. Class mein har student ka usi paper par pehla attempt ginta hai. Owner aur reviewer ke attempts nahi ginte. Live paper ka class data window band hone ke baad banta hai.
+18. Purane attempts mein time record nahi hai, isliye unke teen time wale sections khaali rahenge.
+19. App ke attempts mein time record tabhi aayega jab app agent packet ke hisaab se player badle. Tab tak app se diye mocks mein bhi wahi teen sections khaali.
+20. Koi AI nahi, koi AI credit nahi.
+21. Rate limiter fix Analysis ke baad alag se hoga. Yeh pehle ki "dono saath mein dikhao" wali baat ki jagah leta hai.
+22. Phase 1 lagataar banega, har hissa test hoga, aur sab ek saath dikhaya jayega. Deploy sirf "deploy" kehne par.
+23. Quizrr ke screenshots ek image reader se padhe gaye. Chhoti detail mein fark ho sakta hai.
