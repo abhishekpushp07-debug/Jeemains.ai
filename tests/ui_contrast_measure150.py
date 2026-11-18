@@ -1,7 +1,7 @@
 # Iteration 150: robust pixel contrast measurement for Home exam cards (BITSAT/COMEDK/JEE). Read-only route fixtures.
 # Paste body into browser_automation (expects `page`). VIEWPORT set per run via VW/VH.
 import json, base64
-BASE='https://campus-search-debug.preview.emergentagent.com'
+BASE='https://tejas-analysis--2bbp29h1.preview.emergentagent.com'
 writes=[]
 async def handler(route):
     req=route.request; u=req.url.split('?')[0]

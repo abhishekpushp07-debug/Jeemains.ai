@@ -1,0 +1,60 @@
+import React, { useState } from 'react';
+import { Block, Pills, TagChip, RESULT, OUT_TONE, mmss, pc } from './parts';
+
+const FILTERS = [['all', 'Sab'], ['wrong', 'Galat'], ['skipped', 'Chhode'], ['careless', 'Careless'], ['overtime', 'Overtime'], ['confused', 'Confused'], ['marked', 'Marked'], ['changed', 'Jawab badla']];
+const TEST = {
+  all: () => true, wrong: q => q.outcome === 'incorrect', skipped: q => q.outcome === 'skipped', careless: q => q.tag === 'wasted',
+  overtime: q => ['slow_correct', 'costly_overtime'].includes(q.tag), confused: q => q.tag === 'confused', marked: q => q.marked, changed: q => !!q.changed,
+};
+const SORT = { number: (a, b) => a.number - b.number, time: (a, b) => (b.time || 0) - (a.time || 0), hard: (a, b) => (a.class?.correct ?? 101) - (b.class?.correct ?? 101), marks: (a, b) => a.marks - b.marks };
+
+function Row({ q, an, them, onOpen }) {
+  const c = q.class, L = an.copy.levels;
+  return (
+    <tr className="tap" data-testid={'a2-qs-row-' + q.number} onClick={() => onOpen(q.id)}>
+      <td><b>{q.number}</b></td><td>{q.subject}</td>{an.performance.has_chapters && <td>{q.topic || '—'}</td>}<td>{L[q.difficulty]}</td>
+      <td>{q.response || '—'}{q.changed ? <small> ({q.changed})</small> : null}</td><td>{q.answer}</td>
+      <td><span className={'a2-out tone-' + OUT_TONE[q.outcome]}>{RESULT[q.outcome]}</span></td><td className={q.marks < 0 ? 'bad' : q.marks > 0 ? 'good' : ''}>{q.marks > 0 ? '+' : ''}{q.marks}</td>
+      <td className="a2-mono">{mmss(q.time)}</td><td className="a2-mono">{mmss(q.par)}</td>
+      {them && <td className="a2-mono">{mmss(them[q.id])}</td>}
+      <td className="a2-mono">{mmss(c?.avg_time)}</td><td className="a2-mono">{mmss(c?.topper_time || null)}</td><td>{pc(c?.correct)}</td>
+      <td>{c?.top_wrong ? `${c.top_wrong.option} (${c.top_wrong.percent}%)` : '—'}</td><td>{q.visits ?? '—'}</td><td><TagChip tag={q.tag} copy={an.copy} /></td>
+    </tr>
+  );
+}
+
+function Card({ q, an, them, onOpen }) {
+  const c = q.class, L = an.copy.levels;
+  return (
+    <button type="button" className={'a2-qs-card tone-' + OUT_TONE[q.outcome]} data-testid={'a2-qs-card-' + q.number} onClick={() => onOpen(q.id)}>
+      <div><b>Q{q.number}</b><span>{q.subject} · {L[q.difficulty]}</span><span className={'a2-out tone-' + OUT_TONE[q.outcome]}>{RESULT[q.outcome]} {q.marks > 0 ? '+' : ''}{q.marks}</span></div>
+      <p>Aapka <b>{q.response || '—'}</b> · Sahi <b>{q.answer}</b>{q.changed ? ` · badla ${q.changed}` : ''}</p>
+      <p className="a2-mono">Time {mmss(q.time)} · Par {mmss(q.par)}{them ? ` · Unka ${mmss(them[q.id])}` : ''}</p>
+      {c && <p>Class: {pc(c.correct)} sahi · avg {mmss(c.avg_time)}{c.top_wrong ? ` · ${c.top_wrong.percent}% ne ${c.top_wrong.option} chuna` : ''}</p>}
+      <TagChip tag={q.tag} copy={an.copy} />
+    </button>
+  );
+}
+
+export function QsByQs({ an, onOpen }) {
+  const [f, setF] = useState('all');
+  const [subject, setSubject] = useState('all');
+  const [sort, setSort] = useState('number');
+  const subjects = [...new Set(an.questions.map(q => q.subject))];
+  const base = an.questions.filter(q => subject === 'all' || q.subject === subject);
+  const rows = base.filter(TEST[f]).sort(SORT[sort]);
+  const them = an.compare?.available ? an.compare.times : null;
+  return (
+    <Block id="qs" kicker="QS BY QS" title="Har sawaal ka hisaab" note={`${rows.length} / ${an.questions.length} sawaal. Kisi bhi sawaal par tap karo, uska solution khulega.`}
+      action={<label className="a2-sort">Sort <select value={sort} onChange={e => setSort(e.target.value)} data-testid="a2-qs-sort"><option value="number">Sawaal number</option><option value="time">Sabse zyada time</option><option value="hard">Class mein sabse mushkil</option><option value="marks">Sabse zyada marks gaye</option></select></label>}>
+      {subjects.length > 1 && <Pills id="qs-subject" value={subject} onChange={setSubject} items={[['all', 'Sab subjects'], ...subjects.map(s => [s, s])]} />}
+      <Pills id="qs-filter" value={f} onChange={setF} items={FILTERS.map(([k, l]) => [k, `${l} (${base.filter(TEST[k]).length})`])} />
+      {!rows.length && <p className="a2-empty" data-testid="a2-qs-empty">Is filter mein koi sawaal nahi.</p>}
+      {rows.length > 0 && <div className="a2-scroll a2-qs-wide"><table className="a2-table" data-testid="a2-qs-table">
+        <thead><tr><th>Q</th><th>Subject</th>{an.performance.has_chapters && <th>Chapter</th>}<th>Level</th><th>Aapka</th><th>Sahi jawab</th><th>Result</th><th>Marks</th><th>Time</th><th>Par</th>{them && <th>{an.compare.label}</th>}<th>Class avg</th><th>Topper</th><th>Class % sahi</th><th>Sabse zyada galti</th><th>Visits</th><th>Tag</th></tr></thead>
+        <tbody>{rows.map(q => <Row key={q.id} q={q} an={an} them={them} onOpen={onOpen} />)}</tbody>
+      </table></div>}
+      <div className="a2-qs-cards">{rows.map(q => <Card key={q.id} q={q} an={an} them={them} onOpen={onOpen} />)}</div>
+    </Block>
+  );
+}

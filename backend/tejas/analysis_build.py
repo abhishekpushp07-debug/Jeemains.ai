@@ -58,7 +58,7 @@ def distribution(stats, score, extra=0):
     bins = []
     for i in range(10):
         a, b = low + i * width, low + (i + 1) * width
-        inside = lambda s: a <= s and (s < b or (i == 9 and s <= b))
+        inside = lambda s, a=a, b=b, last=i == 9: a <= s and (s < b or (last and s <= b))
         bins.append({'from': round(a), 'to': round(b), 'count': sum(c for s, c in scores if inside(s)), 'you': inside(score)})
     run, median = 0, None
     for s, c in sorted(scores):

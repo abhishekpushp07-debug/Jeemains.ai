@@ -153,7 +153,11 @@ const buildDynamicExpressionWrapper = (child, t) =>
     false,
   );
 
+// A <span> is not valid HTML inside these, so their dynamic children stay unwrapped.
+const NO_SPAN_PARENTS = new Set(["table", "thead", "tbody", "tfoot", "tr", "colgroup", "select", "optgroup", "datalist", "html", "head"]);
+
 const wrapDynamicExpressionChildren = (jsxPath, t) => {
+  if (NO_SPAN_PARENTS.has(jsxNameOf(jsxPath.node.openingElement, t))) return;
   const children = jsxPath.node.children || [];
   let didChange = false;
 

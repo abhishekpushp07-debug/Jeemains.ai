@@ -245,7 +245,7 @@ Directory structure:
 
 **Screenshot Format:** JPEG (quality=20)  
 **Test Phone:** +12025550341  
-**Base URL:** https://campus-launch-2.preview.emergentagent.com
+**Base URL:** https://tejas-analysis--2bbp29h1.preview.emergentagent.com
 
 ---
 

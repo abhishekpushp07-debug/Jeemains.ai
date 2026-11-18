@@ -345,7 +345,7 @@ def class_view(stat, q, label):
     wrong = max(((k, v) for k, v in (stat.get('options') or {}).items() if k not in accepted), key=lambda x: x[1], default=None)
     return {'n': n, 'correct': pct(stat['correct'], n), 'wrong': pct(stat['incorrect'], n), 'skipped': pct(stat['skipped'], n),
             'attempted': pct(stat['correct'] + stat['incorrect'], n), 'right_of_attempted': pct(stat['correct'], stat['correct'] + stat['incorrect']),
-            'avg_time': stat.get('avg'), 'topper_time': stat.get('topper'),
+            'avg_time': stat.get('avg'), 'topper_time': stat.get('topper') or None,
             'top_wrong': {'option': label(wrong[0]), 'percent': pct(wrong[1], n)} if wrong and wrong[1] else None}
 
 

@@ -39,8 +39,8 @@ def test_invalid_explicit_config_fails_closed(fe, extra):
 
 
 def test_legacy_star_does_not_crash_and_is_ignored():
-    env = dict(os.environ, FRONTEND_URL='https://campus-search-debug.preview.emergentagent.com', CORS_ORIGINS='*')
+    env = dict(os.environ, FRONTEND_URL='https://tejas-analysis--2bbp29h1.preview.emergentagent.com', CORS_ORIGINS='*')
     p = subprocess.run([sys.executable, '-c', 'import server; print("ORIGINS", server.origins)'], cwd=HERE.parent, env=env,
                        capture_output=True, text=True, timeout=90)
     assert p.returncode == 0, p.stderr[-500:]
-    assert "ORIGINS ['https://campus-search-debug.preview.emergentagent.com']" in p.stdout
+    assert "ORIGINS ['https://tejas-analysis--2bbp29h1.preview.emergentagent.com']" in p.stdout

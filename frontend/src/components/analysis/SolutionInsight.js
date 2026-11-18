@@ -11,7 +11,7 @@ export function SolutionInsight({ q, copy }) {
       {q.time != null && <span data-testid="solution-insight-time">Aapka time {mmss(q.time)}</span>}
       {q.par != null && <span title={q.par_source === 'solvers' ? `${q.par_n} solvers se` : 'paper standard'}>Par {mmss(q.par)}</span>}
       {c && <span data-testid="solution-insight-class">{pc(c.correct)} ne sahi kiya</span>}
-      {c?.topper_time != null && <span>Topper {mmss(c.topper_time)}</span>}
+      {c?.topper_time > 0 && <span>Topper {mmss(c.topper_time)}</span>}
       {c?.top_wrong && <span>Sabse zyada galti: option {c.top_wrong.option} ({c.top_wrong.percent}%)</span>}
       {q.visits > 1 && <span>{q.visits} baar dekha</span>}
       {q.changed && <span>Jawab badla {q.changed}</span>}

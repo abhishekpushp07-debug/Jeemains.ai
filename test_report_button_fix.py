@@ -121,7 +121,7 @@ async def setup_failed_report_test():
     print(f"\n=== Setup complete ===")
     print(f"Attempt ID: {attempt_id}")
     print(f"Job ID: {job_id}")
-    print(f"Results URL: https://campus-launch-2.preview.emergentagent.com/results/{attempt_id}")
+    print(f"Results URL: https://tejas-analysis--2bbp29h1.preview.emergentagent.com/results/{attempt_id}")
     
     return attempt_id
 

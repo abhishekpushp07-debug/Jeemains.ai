@@ -117,7 +117,7 @@ async def setup_pending_grading_test():
     print(f"\n=== Setup complete ===")
     print(f"Attempt ID: {attempt_id}")
     print(f"Job ID: {job_id}")
-    print(f"Results URL: https://campus-launch-2.preview.emergentagent.com/results/{attempt_id}")
+    print(f"Results URL: https://tejas-analysis--2bbp29h1.preview.emergentagent.com/results/{attempt_id}")
     print(f"\nNext: Open browser to results page")
     print(f"Expected: GET /api/attempts/{attempt_id}/results returns 202")
     print(f"Expected: UI shows results-grading-pending page with receipt")

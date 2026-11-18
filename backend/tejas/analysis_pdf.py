@@ -68,8 +68,9 @@ class Sheet:
             self.para(note, 9, MUTE)
         self.y += 4
 
-    def h2(self, text):
-        self.need(44)
+    def h2(self, text, keep=60):
+        """Section heading kept on the same page as the first lines below it."""
+        self.need(44 + keep)
         self.y += 4
         self.text((40, self.y + 12), text, 11.5, RED, True)
         self.y += 20
@@ -258,7 +259,8 @@ def render(an, notes=None):
     s.para(f"Negative mein kate: {led['negative']} marks. Net Score: {led['net']} / {led['maximum']}. Bina kisi galat jawab ke Score {led['no_negative']} hota.", 9.5)
     s.h2('Is report mein')
     for i, line in enumerate(('Overview: Score, Rank, subject-wise aur agle mock ke 3 kaam', 'Performance: subject aur chapter ka hisaab', 'Score Potential: yahan se marks bach sakte the',
-                              'Attempt Quality: har sawaal ka tag aur Speed-Accuracy map', 'Time kahan gaya: subject, blocks aur pace', 'Difficulty aur Question Journey', 'Qs by Qs: har sawaal ka poora hisaab'), 1):
+                              'Attempt Quality: har sawaal ka tag aur Speed-Accuracy map', 'Time kahan gaya: subject, blocks aur pace', 'Difficulty: Easy, Moderate, Tough aur Easy ka leak',
+                              'Question Journey: raasta, jawab badalna aur streaks', 'Qs by Qs: har sawaal ka poora hisaab'), 1):
         s.para(f'{i}. {line}', 9.5, MUTE)
     s.para('Yeh report sirf aapke jawab aur time se bani hai. Isme koi andaaza ya AI nahi hai.', 8.5, MUTE)
 
@@ -298,7 +300,7 @@ def render(an, notes=None):
             [[g['name'], f"{g['score']} / {g['maximum']}", pc(g['accuracy']), pc(g['attempt_rate']), g['negative'], g['not_seen'],
               f"{g['types'].get('mcq', {}).get('correct', 0)} / {g['types'].get('mcq', {}).get('count', 0)}",
               f"{g['types'].get('integer', {}).get('correct', 0)} / {g['types'].get('integer', {}).get('count', 0)}"] for g in perf['subjects']],
-            [115, 70, 60, 70, 55, 55, 50, 40])
+            [100, 60, 58, 68, 54, 60, 55, 60])
     if perf['weak']:
         s.h2('Marks kis chapter se gaye')
         most = max(g['lost'] for g in perf['weak']) or 1
@@ -389,7 +391,7 @@ def render(an, notes=None):
         s.h2('Pehli nazar vs wapas aakar')
         s.table(['Kab jawab diya', 'Jawab', 'Sahi', 'Accuracy', 'Time'],
                 [[label, look[k]['count'], look[k]['correct'], pc(look[k]['accuracy']), mmss(look[k]['time'])] for k, label in (('first', 'Pehli nazar mein'), ('return', 'Wapas aakar'))], [170, 80, 80, 90, 95])
-        s.h2('Sabse dheeme 5 sawaal')
+        s.h2('Sabse dheeme 5 sawaal', 6 * 18)
         s.table(['Sawaal', 'Subject', 'Aapka time', 'Par time', 'Result'],
                 [['Q' + str(rows[i]['number']), rows[i]['subject'], mmss(rows[i]['time']), mmss(rows[i]['par']), RESULT.get(rows[i]['outcome'], '-')] for i in time['slowest']], [80, 150, 95, 95, 95])
     else:
@@ -433,7 +435,7 @@ def render(an, notes=None):
     s.new()
     s.h1('8. Qs by Qs', 'Har sawaal ka poora hisaab. Class ke column tab bharte hain jab kaafi students ne paper diya ho.')
     s.table(['Q', 'Subject', 'Level', 'Aapka', 'Sahi', 'Result', 'Marks', 'Time', 'Par', 'Class avg', 'Topper', 'Class %', 'Tag'],
-            [[q['number'], q['subject'][:10], L[q['difficulty']], q['response'] or '-', q['answer'], RESULT.get(q['outcome'], '-'), q['marks'], mmss(q['time']),
+            [[q['number'], q['subject'][:13], L[q['difficulty']], q['response'] or '-', q['answer'], RESULT.get(q['outcome'], '-'), q['marks'], mmss(q['time']),
               mmss(q['par']), mmss((q['class'] or {}).get('avg_time')), mmss((q['class'] or {}).get('topper_time')), pc((q['class'] or {}).get('correct')),
               tags[q['tag']][0] if q['tag'] else '-'] for q in an['questions']],
             [22, 54, 44, 32, 34, 38, 30, 42, 42, 44, 42, 36, 55], 7)
@@ -456,18 +458,38 @@ def share_png(an):
     for line in textwrap.wrap(plain(an.get('title') or 'Mock'), 30)[:3]:
         d.text((72, y), line, font=font(50), fill='#F8FAFC')
         y += 66
-    d.rounded_rectangle((72, 470, 1008, 800), 36, fill='#14141C', outline='#67202C', width=3)
-    d.text((112, 505), 'SCORE', font=font(30), fill='#B0B0BF')
-    d.text((112, 560), str(o['score']), font=font(170), fill='#F8FAFC')
-    d.text((112 + d.textlength(str(o['score']), font=font(170)) + 20, 680), f"/ {o['maximum']}", font=font(56, False), fill='#B0B0BF')
+    top = y + 44
+    d.rounded_rectangle((72, top, 1008, top + 300), 36, fill='#14141C', outline='#67202C', width=3)
+    d.text((112, top + 32), 'SCORE', font=font(30), fill='#B0B0BF')
+    d.text((112, top + 80), str(o['score']), font=font(160), fill='#F8FAFC')
+    d.text((112 + d.textlength(str(o['score']), font=font(160)) + 20, top + 190), f"/ {o['maximum']}", font=font(56, False), fill='#B0B0BF')
+    share = max(0, min(1, o['score'] / max(o['maximum'], 1)))
+    d.arc((790, top + 70, 960, top + 240), 0, 360, fill='#2A1018', width=22)
+    if share:
+        d.arc((790, top + 70, 960, top + 240), -90, -90 + 360 * share, fill='#E11D48', width=22)
+    pct = f"{round(100 * share)}%"
+    d.text((875 - d.textlength(pct, font=font(34)) / 2, top + 135), pct, font=font(34), fill='#F8FAFC')
     tiles = [('RANK', f"#{o['rank']}" if o.get('rank') else '-', f"{o['of']} mein se" if o.get('rank') else 'Result ke baad'),
              ('PERCENTILE', str(o.get('percentile', '-')), 'is paper par'), ('ACCURACY', pc(o['accuracy']), f"{o['correct']} sahi / {o['attempted']}")]
+    y = top + 340
     for i, (label, value, note) in enumerate(tiles):
         x = 72 + i * 320
-        d.rounded_rectangle((x, 850, x + 296, 1090), 28, fill='#0F0F14', outline='#2A2A38', width=2)
-        d.text((x + 28, 880), label, font=font(24), fill='#B0B0BF')
-        d.text((x + 28, 930), value, font=font(64), fill='#FF6974' if i == 0 else '#F8FAFC')
-        d.text((x + 28, 1030), note, font=font(22, False), fill='#9292A5')
+        d.rounded_rectangle((x, y, x + 296, y + 220), 28, fill='#0F0F14', outline='#2A2A38', width=2)
+        d.text((x + 28, y + 28), label, font=font(24), fill='#B0B0BF')
+        d.text((x + 28, y + 74), value, font=font(60), fill='#FF6974' if i == 0 else '#F8FAFC')
+        d.text((x + 28, y + 168), note, font=font(22, False), fill='#9292A5')
+    y += 250
+    subjects = o.get('subjects') or []
+    if subjects and y + 120 < 1140:
+        w = 936 / min(4, len(subjects))
+        for i, g in enumerate(subjects[:4]):
+            x = 72 + i * w
+            d.text((x, y), plain(g['name'])[:14].upper(), font=font(20), fill='#9292A5')
+            d.text((x, y + 30), f"{g['score']}/{g['maximum']}", font=font(34), fill='#F8FAFC')
+            d.rounded_rectangle((x, y + 80, x + w - 24, y + 92), 6, fill='#2A1018')
+            part = max(0, min(1, g['score'] / max(g['maximum'], 1)))
+            if part:
+                d.rounded_rectangle((x, y + 80, x + max(12, (w - 24) * part), y + 92), 6, fill='#E11D48')
     d.text((72, 1160), f"{when(an):%d %b %Y}", font=font(28, False), fill='#B0B0BF')
     d.text((72, 1215), 'Free mock tests + poora analysis: jeelive.ai', font=font(30), fill='#F8FAFC')
     out = io.BytesIO()

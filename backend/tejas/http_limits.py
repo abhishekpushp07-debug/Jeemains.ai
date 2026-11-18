@@ -126,7 +126,8 @@ class JsonBodyLimits:
         except (ValueError, RecursionError, UnicodeError):
             return await reject('Invalid JSON: use unique keys, finite numbers, valid text and bounded nesting.', 400)
         if contract and contract.model:
-            if not body and contract.route.body_field and contract.route.body_field.required:
+            field = contract.route.body_field
+            if not body and field and field.field_info.is_required():
                 return await reject('This operation requires a JSON body.', 422, 'validation_error')
             try:
                 contract.model.model_validate(value)

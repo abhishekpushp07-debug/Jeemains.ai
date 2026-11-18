@@ -7,7 +7,7 @@ from .auth import current
 from .canonical import clocked_one
 from .db import attempts, db
 from .analysis_rules import RULES
-from .timeline_models import Batch, MAX_BATCH
+from .timeline_models import Batch
 
 router = APIRouter(prefix='/api/attempts', tags=['Time capture'])
 timelines = db.tejas_attempt_timeline

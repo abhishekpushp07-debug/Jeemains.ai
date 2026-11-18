@@ -1,7 +1,7 @@
 # Iteration 152: lossless pixel contrast for swapped Home JEE card (blue/platinum) + All India banner (ruby/onyx).
 # Normal, hover (card + CTA), forced moving-glare offsets. Read-only fixtures. Paste into browser_automation.
 import json, base64
-BASE='https://campus-search-debug.preview.emergentagent.com'
+BASE='https://tejas-analysis--2bbp29h1.preview.emergentagent.com'
 writes=[]
 async def handler(route):
     req=route.request; u=req.url.split('?')[0]

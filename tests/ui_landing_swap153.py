@@ -1,7 +1,7 @@
 # Iteration 153: REAL public root "/" (guest, no API mocks) palette swap + regressions; then /home via read-only fixture for comparison.
 # Paste into browser_automation (expects `page`). Guest phase only observes requests (no interception).
 import json
-BASE='https://campus-search-debug.preview.emergentagent.com'
+BASE='https://tejas-analysis--2bbp29h1.preview.emergentagent.com'
 reqlog=[]; writes=[]
 page.on('request', lambda r: reqlog.append(r.method+' '+r.url.split('?')[0]) if '/api/' in r.url and r.method not in ('GET','HEAD','OPTIONS') else None)
 
