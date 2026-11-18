@@ -214,3 +214,11 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Load test on preview (backend/tools/load_live.py + new tools/load_accounts.py seed/remove): 9,000 seeded +91600197xxxx accounts, JEE Main PYQ 08 Apr 2026 S2. Public URL: 200 together 0 failures; ~500 from one IP → Cloudflare 429 "Just a moment…" challenge. Same server direct: 500 and 1,000 (30 s ramp) 0 failed sign-in/start/save, 2,000 → pod CPU 2.0/2.0 and auto-stop. Per student 3-hour paper ≈ 1.2 backend CPU-s + 0.43 Mongo CPU-s; 1 lakh ≈ 11 vCPU average / ~45 at start (pictures 7.4 MB per student); 2 lakh ≈ 22 / ~90. Report: docs/CAPACITY_REPORT_2026-11-18.md; docs/SERVER_SIZE_REQUEST.md updated. All load data removed via qa_cleanup (9,000 accounts, 3,889 attempts, …); preview back to 2 profiles / 8 attempts, 0 orphans.
 - NOT deployed.
 
+
+
+## 2026-11-18 — App team update packet (Analysis 2.0 and everything since 26 Oct)
+- User (Hindi): one deep file for the app team listing everything the app must build after the earlier package, so nothing is missed.
+- docs/app_packet/APP_UPDATE_2026-11-18.md: P0/P1/P2 checklist; picture questions (text ""), start + get-ready + /assets/links; PIN and busy/limit messages; time capture spec (v/a/m events, sid, n, server clock, timeline on answer saves/submit, /timeline, limits); Analysis 2.0 API, gates, class.state, every response field, 8 screens with Hinglish copy, comparative mode, leaderboard, learnings, PDF, share PNG, retry, Solutions insight line; exam structure, live window, series, typed options, bonus, display name; acceptance checks.
+- backend/tools/export_app_analysis_samples.py: reads real responses from the isolated analysis bridge (synthetic students) into docs/app_packet/samples (14 files); analysis_rulebook.json from the server rules and copy.
+- docs/APP_INTEGRATION.md: date, series-as-section bullet corrected (kind aits + series_path), new §16 pointer. Public copies in frontend/public/downloads/app-update-2026-11-18/ + jeelive-app-update-2026-11-18.zip (SHA256SUMS checked; zip downloads 200 from the preview URL).
+- Found: the website has no screen to set the display name (API only), so leaderboards show "Learner xxxx" until a name is set.

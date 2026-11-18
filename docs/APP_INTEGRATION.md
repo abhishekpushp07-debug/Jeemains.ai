@@ -1,6 +1,6 @@
 # JEELIVE website ↔ native Expo integration
 
-Updated: 2026-10-26. Canonical production API: **https://jeelive.ai/api**. This handoff supplements, and supersedes conflicting assumptions in, older Android handoff bundles.
+Updated: 2026-11-18 (first written 2026-10-26). Canonical production API: **https://jeelive.ai/api**. This handoff supplements, and supersedes conflicting assumptions in, older Android handoff bundles. **What changed since the 26 Oct package (Analysis 2.0, time capture, picture questions, start flow and more): read `APP_UPDATE_2026-11-18.md` first.**
 
 ## 1. Non-negotiable scope
 
@@ -234,7 +234,7 @@ Applies to regular live exams (`competition:true`), not the All India series.
 - `GET /api/series` (no login needed) lists every test series that is switched on: `id`, `title`, `exam {slug,name,color}`, `first_date`, `last_date`, `total`, `open_time`, `last_start`, `today`, `today_slot`, `builtin`. The JEE Main series is the item with `builtin: true`; its existing endpoints under `/api/series/all-india-jee` are unchanged.
 - `GET /api/series/{id}/schedule` gives the day list in the same slot shape as the JEE series (`day`, `date`, `opens_at`, `last_start_at`, `closes_at`, `archive_at`, `state`, `ready`, `set_id`, `title`, `can_start`). `GET /api/series/{id}/history` (login) lists the student's own attempts.
 - Starting, autosave, submit and results use the existing set and attempt endpoints. A live series attempt carries `series_id`, `series_date`, `mode: series_live`; its score and solutions open on submission and its rank at that day's `closes_at`.
-- `GET /api/catalog/exams/{slug}` never lists a series as a section: show each series as its own card from `GET /api/series`.
+- Changed 2026-11-16: `GET /api/catalog/exams/{slug}` lists an open test series inside its own exam as a section with `kind: "aits"`, `live_count: 0` and `series_path` (`/series/all-india-jee` or `/series/{id}`). Open the series screen when `series_path` is set. `GET /api/series` still lists every open series.
 - Questions written in Super Admin have `render_mode: "written"`: show `text` (maths between `$` signs) and option texts, then `asset_count` images from the existing `/asset/question/{i}` endpoint. `asset_labels[i]` is empty for the question figure or `Option A`…`Option D` for an option figure. Solutions work the same way with `solution_asset_count`.
 - PYQ papers made in Super Admin may have an empty `exam_date` and `shift: 0`; use `year` and `title` for those.
 
@@ -244,3 +244,6 @@ Applies to regular live exams (`competition:true`), not the All India series.
 - Links are handed out only for an active attempt, carry only question pictures (never answers or solutions), are signed and stop working after `expires_at` (1–2 days). Bonus pictures are left out until the bonus section opens; call `/assets/links` again after `/bonus`.
 - Responses: `200 application/octet-stream`, `Cache-Control: public, max-age≤86400, s-maxage, immutable`, `Access-Control-Allow-Origin: *`. A tampered or expired link answers `404` with `no-store`. If one picture of a part could not be prepared, that part comes back with `no-store` and without that picture; load the missing one from `/questions/{qid}/asset/question/{i}`.
 - `cdn: true` means the links point at the CDN host set in `MEDIA_CDN_URL`; `cdn: false` means they are on this server (`/api/media/pack/...`, relative: prefix the API host). `/assets/pack` stays as the fallback and is unchanged.
+
+## 16. Analysis 2.0, time capture and display name (added 2026-11-18, live)
+- Time capture in the player (`timeline` on answer saves and submit, `POST /attempts/{id}/timeline`), the 8-section analysis (`GET /attempts/{id}/analysis`, `/analysis/questions`, `/leaderboard`, `PUT /learnings`, `/analysis/report.pdf`, `/analysis/share.png`, `GET /competitions/{id}/compare/{handle}`) and `PUT /profile/display-name` are specified field by field in `APP_UPDATE_2026-11-18.md`, with real sample responses in `samples/` and the rules in `analysis_rulebook.json`.

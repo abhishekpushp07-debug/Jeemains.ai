@@ -1,3 +1,7 @@
+## Status — 2026-11-18 (night): app team update packet written. docs/app_packet/ (APP_UPDATE_2026-11-18.md guide + APP_INTEGRATION.md §16 + analysis_rulebook.json + 14 real sample responses from a test copy) → download /downloads/jeelive-app-update-2026-11-18.zip. jeelive.ai already serves the new code (/api/media/probe.bin 200, x-media-cdn same-server). No app code changed.
+
+
+
 ## Status — 2026-11-18 (late): picture questions send `text: ""` to students (player + results) so the app shows only the picture like the website; /api/media/probe.bin added for CDN HIT checks. Waiting for the owner's CDN address (MEDIA_CDN_URL live slot), then deploy + HIT check.
 
 

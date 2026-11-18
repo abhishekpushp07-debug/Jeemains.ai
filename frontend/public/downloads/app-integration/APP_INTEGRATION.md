@@ -1,6 +1,6 @@
 # JEELIVE website ↔ native Expo integration
 
-Updated: 2026-10-26. Canonical production API: **https://jeelive.ai/api**. This handoff supplements, and supersedes conflicting assumptions in, older Android handoff bundles.
+Updated: 2026-11-18 (first written 2026-10-26). Canonical production API: **https://jeelive.ai/api**. This handoff supplements, and supersedes conflicting assumptions in, older Android handoff bundles. **What changed since the 26 Oct package (Analysis 2.0, time capture, picture questions, start flow and more): read `APP_UPDATE_2026-11-18.md` first.**
 
 ## 1. Non-negotiable scope
 
@@ -20,29 +20,38 @@ The existing owner-authorized, insert-only/resumable importer has now completed 
 
 `evidence/isolated-two-session-proof.json` is a real-backend, real-JWT, original-PDF test using a disposable database. It is explicitly **NOT production/native-device proof**. Two separate sessions for one learner passed preflight → start → save → resume same attempt → second save → submit → identical results → original solution PNG → fresh reattempt with old result retained. No customer test records were created. Native Expo was not available here; its parity must be verified by the app agent.
 
-## 3. Deployment boundary: LIVE auth vs prepared PIN auth
+## 3. PIN cutover LIVE — verified on 2026-10-26
 
-Read `evidence/canonical-api-contract.json` for the live route/schema snapshot. **Do not assume the current repository auth changes are deployed.**
+The owner explicitly requested publishing PIN first and receiving this handoff afterward. **The canonical website PIN login UI and live PIN API routes have now been verified.** This post-deployment PIN ZIP supersedes older ZIPs describing a phone-only login or a pending native-readiness hold.
 
-### Current live student login
+Read `evidence/canonical-api-contract.json` and `evidence/live-pin-verification.json` for dated verification. Both `pin_signup_route_live` and `pin_change_route_live` are `true`; a phone-only login request is rejected with422. Do not silently downgrade to old phone-only login.
 
-The deployed app currently accepts `POST /auth/phone` with `{ "phone": "<student-entered-number>" }`, using the existing phone profile. This legacy flow is unverified phone-only access, not proof of phone ownership. The frontend must not silently create a second account when a request fails.
+### Previous live student login (before this cutover)
 
-### Prepared, tested, NOT yet published PIN update
+The previous deployed app accepted `POST /auth/phone` with `{ "phone": "<student-entered-number>" }`, using the existing phone profile. That legacy flow was unverified phone-only access, not proof of phone ownership. Once the PIN revision is live, a phone-only request is rejected; the frontend must not create a second account when a request fails.
 
-The website preview implements the following, but the live cutover is held until the native client is ready:
+### Current live PIN API
+
+Implement these verified live contracts in the native client:
 
 | Action | Method/path (relative to API base) | Body |
 |---|---|---|
 | New student signup | POST `/auth/phone/signup` | `phone`, `pin`, `confirm_pin` |
 | Existing student sign-in | POST `/auth/phone` | `phone`, `pin` |
 | Own signed-in PIN change | POST `/auth/pin` | `phone`, `new_pin`, `confirm_pin` |
+| Forgot PIN (not signed in) | POST `/auth/pin/reset` | `phone`, `new_pin`, `confirm_pin` |
 
-PIN fields are **strings of exactly four ASCII digits**; preserve leading zeroes. Signup never claims an existing phone-only profile. PIN change requires the current authenticated student and matching normalized phone; no OTP, old PIN or public reset is used. Other sessions become invalid after changing the PIN, but saved work and the account ID remain unchanged. Owner/reviewer password access is separate and never granted from a phone number.
+Forgot PIN (added 2026-11-15, in preview; live on jeelive.ai only after the owner's next deploy): no OTP, no old PIN, no owner approval. It works for every existing student number, including older profiles that never had a PIN. On success it signs the student in and returns the same body and cookies as sign-in. A number with no account gets 404 "No account with this number": send the student to signup, never create the account here. Limit: 5 resets per number in 15 minutes, then 429 with `Retry-After`. Every other device on that number is signed out; attempts and results stay. Owner/reviewer logins cannot be reset this way. Live paper guard (added 2026-11-17): while that number has a live ranked paper running (All India series day or a live exam), the reset answers 409 "A live ranked paper is running on this number. Forgot PIN works again after that paper ends." Show the message as is. Signed-in Change PIN (POST `/auth/pin`) is blocked the same way with "... PIN change works again after that paper ends."
 
-Existing legacy students can set their first PIN from an existing signed-in session. A legacy user without an active session must not be given an insecure public claim/reset flow. Coordinate that recovery policy with the owner before rollout; do not reset or duplicate the account. The new login intentionally rejects phone-only requests after cutover. **Update native signup/login/PIN UI before publishing this backend revision.** Do not add an automatic phone-only fallback after any PIN failure.
+One account on website and app: use one server (`https://jeelive.ai/api`) and one student list. Keep the cookies the server sends and send them on every call; there is no bearer token. Identify the student by the server's `user.id`, never a local id. Rapid Fire keeps its separate accounts.
 
-PIN rate-limiting limitation: short-window per-number limits are enforced; successful sign-in resets that short window. A trusted/public ASGI peer also has an IP limit. The shared private ingress does NOT provide a trusted client IP yet; per-number protection plus existing auth concurrency applies there. Raw forwarded headers are not trusted. A longer-window failure budget and operator-managed trusted proxy configuration remain optional hardening, not claimed as completed protection or 500,000-user capacity.
+Check: sign up on the website, sign in on the app with the same number and PIN, and My Tests must show the same attempts. Then repeat the other way round.
+
+PIN fields are **strings of exactly four ASCII digits**; preserve leading zeroes. Signup never claims an existing profile. Signed-in PIN change requires the current authenticated student and matching normalized phone. Forgot PIN (above) is the public reset chosen by the owner. Other sessions become invalid after any PIN change, but saved work and the account ID remain unchanged. Owner/reviewer password access is separate and never granted from a phone number.
+
+A student who forgot the PIN, or an older profile that never set one, uses Forgot PIN. The login intentionally rejects phone-only requests. Do not add an automatic phone-only fallback after any PIN failure.
+
+PIN rate-limiting (2026-11-18): only WRONG PINs are counted; a correct PIN is never counted and clears that number's count. 10 wrong PINs for one number within 15 minutes of the first one start a 15-minute wait for that number; during the wait every sign-in for it (even the correct PIN) gets 429 with `Retry-After` in seconds, and the PIN is not checked. Each wrong PIN returns 401 with the tries left in the message ("3 tries left before a 15-minute wait"); the 10th returns 429. One student address gets 100 wrong PINs per 15 minutes, then the same 15-minute wait for that address only. The address is the student's real IP: the hop just left of the last Cloudflare address in X-Forwarded-For (anything the client typed further left is ignored). When it cannot be told safely (no Cloudflare hop, private address) only the per-number limit applies, so students behind one proxy are never limited together. Sign-up, Forgot PIN and Change PIN keep their own attempt limits (5 per number, 60 per student address, per 15 minutes). Someone who knows a number can still make that number wait 15 minutes by typing wrong PINs; this is the trade-off of the short-PIN flow.
 
 ## 4. Session/cookie transport
 
@@ -90,15 +99,21 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 | Public paper summary | GET `/sets/{set_id}` | Published/available only |
 | My available papers | GET `/my/sets?exam=JEE%20Main&page=1` | Authenticated availability |
 | My paper summary | GET `/my/sets/{set_id}` | Use before start, retains server rules |
-| Exam chapters/mocks | GET `/exam-navigation/{slug}/catalogue?kind=chapters` | Slugs `jee-main`, `bitsat`, `comedk`; JEE date-wise PYQ uses its dedicated endpoint |
+| Exam list (new) | GET `/catalog/exams` | Auth required. Exams in Home order, built-in first; owner-created exams appear only after the owner chooses Show on Home |
+| Exam sections (new) | GET `/catalog/exams/{slug}` | Sections in the owner's order; only sections with at least one live test for this learner are returned, with `live_count` |
+| Exam section tests | GET `/exam-navigation/{slug}/catalogue?section={section_slug}` | Use the section `slug` from `/catalog/exams/{slug}`. Legacy `kind=mocks|chapters` still works. Response `section.layout` is `list` or `chapters` (subject › chapter) |
 | Exam result history | GET `/exam-navigation/{slug}/history` | Current learner only |
 | All India schedule | GET `/series/all-india-jee` | Never substitute locally invented dates/counts |
 | All India own history | GET `/series/all-india-jee/history` | Auth required |
 | My Tests library | GET `/my/tests` | Read current response filters/counts; do not create a second local history store |
 | Saved-paper state | GET/POST/DELETE `/my/tests/saved/{set_id}` | Same canonical learner |
 | Attempt history | GET `/attempts?page=1` | Current learner; 20 per page |
-| Connection/content check | POST `/sets/{set_id}/preflight` | Body `{ "test_response": "A" }`; no timer starts |
+| Connection check (optional) | POST `/sets/{set_id}/preflight` | Body `{ "test_response": "A" }`; no timer starts; no longer required before start |
 | Start/full reattempt | POST `/sets/{set_id}/start` | See next section |
+| Begin now | POST `/attempts/{attempt_id}/begin` | Empty JSON body; ends the 60 s get-ready early; returns `ready_until`, `deadline`, `server_now` |
+| Whole-paper pictures | GET `/attempts/{attempt_id}/assets/pack?offset=0&limit=12` | Active attempt only. Binary: 4-byte big-endian header length, JSON header `{total, items:[{question_id,index,size}]}`, then PNG bytes in order. Loop `offset` by `limit` until `total` |
+| Whole-paper pictures through the CDN (preferred, added 2026-11-18) | GET `/attempts/{attempt_id}/assets/links` | Active attempt only. `{total, limit: 12, cdn, expires_at, parts:[url]}`. Fetch each `parts[k]` **without cookies** (it may be on another host); the body is exactly the `/assets/pack?offset=12k&limit=12` format. If a link fails twice, use `/assets/pack` for that part. See section 15 |
+| All India rank | GET `/attempts/{attempt_id}/series-rank` | `state: sealed` (with `release_at`) until the day closes, then `ready` with `rank`, `total`, `top_percent` |
 | Resume state | GET `/attempts/{attempt_id}` | Same attempt, not another start |
 | Lightweight state | GET `/attempts/{attempt_id}/status` | Server time/deadline/status/grading |
 | Save answer | PUT `/attempts/{attempt_id}/answers/{question_id}` | Receipt + revision protocol below |
@@ -111,12 +126,15 @@ Paths below are relative to `https://jeelive.ai/api`; do not append `/api` twice
 
 The website's route `/exams/jee-main/pyq` corresponds to the dedicated catalogue. An app route can be named differently; paper, learner and attempt identities must not differ.
 
+Latest PYQ UI revision (2026-10-26): only a year selector; render EVERY paper of that year in one vertical list (current reviewed metadata:2026 has19,2025 has11). No date filter, pagination or load-more. Dates/shifts remain on each card. Ignore/remove legacy `date` query parameters while retaining `year`. Cards alternate ruby/navy/plum/forest dark surfaces and keep Start/Resume/View Result/Attempt Again actions. This UI revision is newer than the previously delivered PIN LIVE ZIP's design snapshot; use the updated source `pyq.css`/`PyqCatalogue.js` or request a refreshed visual handoff before asserting native pixel parity.
+
 ## 7. Start, autosave and two-device consistency
 
 1. Fetch the summary and server rules; preserve official question/order/options/marking.
-2. Run preflight successfully. Within its validity window, POST start with `{ "start_key": "<fresh UUID for this intentional start>", "device_checked": true, "preview": false }`.
+2. POST start with `{ "start_key": "<fresh UUID for this intentional start>", "preview": false, "get_ready": true }`. Preflight is no longer needed. With `get_ready: true` the attempt has `ready_until` (start + up to 60 s): show the rules and load the whole paper with `/assets/pack`; the `deadline` already adds this time. Open the paper at `ready_until`, or call `/begin` when the student taps Begin now (the deadline then becomes now + full duration). Without `get_ready` the clock starts at once, as before.
 3. Persist that start key until its response is known; retries reuse it. An already active same-paper attempt is returned, including the same ID/deadline. Use its server state, not a freshly reset timer. Full intentional reattempt after completion uses a NEW start key and retains old results.
 4. Render the returned `questions` using their server UUIDs, `type`, `options`, text/HTML/math and `asset_count`. Scanned question and solution images must come from the protected crop endpoint; do not OCR/retype them or guess options.
+   - **Picture questions (`render_mode: "source"`, `asset_count > 0`) — fixed 2026-11-18:** show only the pictures, exactly like the website. Do not show `text`, `accessible_text` or the `options` strings ("Original option A" / "Option 1, as printed in the source") as question words. The server now sends `text: ""` for these in the test and in results. `accessible_text` is only the screen-reader label of the picture. Option buttons show just the letter (or `source_option_labels`) and any `typed_options[key]`.
 5. Queue edits per learner → attempt → question. Save body:
 
 ```json
@@ -174,7 +192,7 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 4. Compare an existing saved result ID/score privately on both. Do not manipulate anyone else's attempts.
 5. Use a disposable isolated environment for new tests, or obtain explicit approval for a dedicated production test learner before creating attempts. Run one supplied full paper start/save/resume/submit/solution scenario. Verify same attempt ID across devices, old result retained on reattempt, asset ordering and no active-attempt solution leakage.
 6. Compare all card styles at 390px with supplied references, including selected/disabled and reduced-motion states. Keep Rapid Fire untouched.
-7. Coordinate PIN client rollout, legacy-profile enrollment and website/backend release together. Re-run the existing same-ID/history checks after cutover. Until then, leave live auth unchanged.
+7. Update native PIN signup/login/change now that the owner has requested the backend cutover first. Preserve valid sessions for first-PIN enrollment. Re-run the existing same-ID/history checks after installing the app update; reject old phone-only sign-in instead of falling back.
 
 ## 11. Evidence boundaries and current status
 
@@ -183,7 +201,7 @@ Native rendering must reproduce **layered** gradients, thin inner highlights, bo
 - Shared backend two-session full-paper flow and PIN/admin regression: test155 passed in isolation (12 new + 27 regression tests). Not a native-device test or production-load proof.
 - Native existing-history/ID checks described by the app agent were reported by that agent, not independently reproduced here.
 - Full native visual parity and actual native cookie persistence: app-agent/device verification pending.
-- PIN + simple owner student directory: built/tested in preview; publication held for coordinated native compatibility. No payment/OTP service enabled.
+- PIN + simple owner student directory: deployed; live route/schema/validation and public login/signup forms verified without creating production students or attempts. Full real-auth signup/change/permissions tests were run in isolated databases. No payment/OTP service enabled.
 - No passwords, cookies, signing keys, private source PDFs, answer-key dumps or private student exports are included in this package.
 
 ## 12. Exam structure: exams, sections, order and visibility (added 2026-11-14)
@@ -200,3 +218,32 @@ The owner now manages the student-facing structure from Super Admin › Exams & 
 
 Acceptance: compare the app's Home, exam page and one section list with the website for the same learner; names, order and counts must match.
 
+
+
+## 13. Live exam start window and instant score (added 2026-11-14)
+
+Applies to regular live exams (`competition:true`), not the All India series.
+
+1. `GET /competitions` and `GET /competitions/{id}` items now include `last_start_at` (epoch seconds, may be null on older exams) and `can_start` (bool). `status` is unchanged (`scheduled|live|unlive|ended`). Show "Start by <last_start_at>" and hide the start button when `can_start` is false.
+2. New starts are accepted from `start_at` until `last_start_at` (15 minutes). Each student's `deadline` is their own start + full duration. `end_at` = `last_start_at` + duration (the last possible finish). After `last_start_at`, `POST /sets/{id}/preflight` and `POST /sets/{id}/start` return 409 with a readable message; resuming an attempt already started still works.
+3. Score on submission: `GET /attempts/{id}/results` before `end_at` still returns `status:"embargoed"` with `release_at`, plus `score_released:true` and `summary` (score, maximum, correct, incorrect, skipped, accuracy, subjects…). While scoring is running `summary` is null; poll again after `retry_after_ms`. `GET /attempts`, `GET /attempts/{id}` and My Tests show the summary as soon as it is graded.
+4. Answers, solutions, worked solutions, question reports, revision attempts and the leaderboard stay locked until `end_at`, so students who started later in the window cannot receive answers early.
+5. All India series attempts (changed 2026-11-17): score, answers and solutions open right after submission. Only the day's All India rank waits until the series day closes (`GET /attempts/{id}/series-rank`).
+
+## 14. Test series for every exam and written questions (added 2026-11-15, preview only until deployed)
+- `GET /api/series` (no login needed) lists every test series that is switched on: `id`, `title`, `exam {slug,name,color}`, `first_date`, `last_date`, `total`, `open_time`, `last_start`, `today`, `today_slot`, `builtin`. The JEE Main series is the item with `builtin: true`; its existing endpoints under `/api/series/all-india-jee` are unchanged.
+- `GET /api/series/{id}/schedule` gives the day list in the same slot shape as the JEE series (`day`, `date`, `opens_at`, `last_start_at`, `closes_at`, `archive_at`, `state`, `ready`, `set_id`, `title`, `can_start`). `GET /api/series/{id}/history` (login) lists the student's own attempts.
+- Starting, autosave, submit and results use the existing set and attempt endpoints. A live series attempt carries `series_id`, `series_date`, `mode: series_live`; its score and solutions open on submission and its rank at that day's `closes_at`.
+- Changed 2026-11-16: `GET /api/catalog/exams/{slug}` lists an open test series inside its own exam as a section with `kind: "aits"`, `live_count: 0` and `series_path` (`/series/all-india-jee` or `/series/{id}`). Open the series screen when `series_path` is set. `GET /api/series` still lists every open series.
+- Questions written in Super Admin have `render_mode: "written"`: show `text` (maths between `$` signs) and option texts, then `asset_count` images from the existing `/asset/question/{i}` endpoint. `asset_labels[i]` is empty for the question figure or `Option A`…`Option D` for an option figure. Solutions work the same way with `solution_asset_count`.
+- PYQ papers made in Super Admin may have an empty `exam_date` and `shift: 0`; use `year` and `title` for those.
+
+## 15. Question pictures through a CDN (added 2026-11-18, preview only until deployed)
+- Why: at exam start the whole class downloads the same paper pictures (~7.4 MB per JEE paper). Through `/assets/pack` every student pulls them from the API server. Through `/assets/links` every student of one paper on one day gets the **same** public links, so a CDN downloads each part from the server once and serves everyone else itself.
+- Flow: start (or resume) the attempt → `GET /attempts/{id}/assets/links` with the session → fetch every `parts[k]` with no cookies and no extra headers (simple GET) → read it with the same parser as `/assets/pack`. Keep the pictures in memory for the test.
+- Links are handed out only for an active attempt, carry only question pictures (never answers or solutions), are signed and stop working after `expires_at` (1–2 days). Bonus pictures are left out until the bonus section opens; call `/assets/links` again after `/bonus`.
+- Responses: `200 application/octet-stream`, `Cache-Control: public, max-age≤86400, s-maxage, immutable`, `Access-Control-Allow-Origin: *`. A tampered or expired link answers `404` with `no-store`. If one picture of a part could not be prepared, that part comes back with `no-store` and without that picture; load the missing one from `/questions/{qid}/asset/question/{i}`.
+- `cdn: true` means the links point at the CDN host set in `MEDIA_CDN_URL`; `cdn: false` means they are on this server (`/api/media/pack/...`, relative: prefix the API host). `/assets/pack` stays as the fallback and is unchanged.
+
+## 16. Analysis 2.0, time capture and display name (added 2026-11-18, live)
+- Time capture in the player (`timeline` on answer saves and submit, `POST /attempts/{id}/timeline`), the 8-section analysis (`GET /attempts/{id}/analysis`, `/analysis/questions`, `/leaderboard`, `PUT /learnings`, `/analysis/report.pdf`, `/analysis/share.png`, `GET /competitions/{id}/compare/{handle}`) and `PUT /profile/display-name` are specified field by field in `APP_UPDATE_2026-11-18.md`, with real sample responses in `samples/` and the rules in `analysis_rulebook.json`.

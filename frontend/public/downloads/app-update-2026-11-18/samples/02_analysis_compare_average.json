@@ -1,0 +1,2951 @@
+{
+ "request": {
+  "method": "GET",
+  "path": "/attempts/9f0e0c5c-ffcc-4760-9ee7-510e28f16bbe/analysis?mode=comparative&compare=average"
+ },
+ "status": 200,
+ "headers": {
+  "content-type": "application/json",
+  "cache-control": "private, no-store"
+ },
+ "response": {
+  "data": {
+   "analysis_version": 2,
+   "rules_version": 2,
+   "attempt_id": "9f0e0c5c-ffcc-4760-9ee7-510e28f16bbe",
+   "title": "TEST_JEE Main Full Mock 7",
+   "exam": "JEE Main",
+   "mode": "practice",
+   "score_version": "original",
+   "submitted_at": 1795027469.647,
+   "student": {
+    "name": "Arjun"
+   },
+   "paper": {
+    "count": 30,
+    "minutes": 60,
+    "duration": 3600,
+    "block": 900,
+    "not_opened_bonus": 0,
+    "marks": {
+     "correct": 4,
+     "wrong": -1
+    }
+   },
+   "time_data": true,
+   "copy": {
+    "tags": {
+     "perfect": [
+      "Perfect",
+      "Sahi jawab, sahi time mein."
+     ],
+     "slow_correct": [
+      "Slow-correct",
+      "Jawab sahi, lekin Par time se zyada laga."
+     ],
+     "wasted": [
+      "Careless galti",
+      "Bahut jaldi mein galat. Ek baar dobara padhte to bach jaata."
+     ],
+     "concept_gap": [
+      "Concept gap",
+      "Poora time diya, phir bhi galat. Concept dobara dekho."
+     ],
+     "costly_overtime": [
+      "Mehnga overtime",
+      "Bahut zyada time laga aur jawab bhi galat."
+     ],
+     "confused": [
+      "Confused",
+      "Time lagaya, lekin jawab nahi diya."
+     ],
+     "smart_skip": [
+      "Smart skip",
+      "Dekha aur jaldi chhod diya. Time bacha."
+     ],
+     "not_seen": [
+      "Dekha hi nahi",
+      "Yeh sawaal khula hi nahi."
+     ],
+     "no_score": [
+      "Score se bahar",
+      "Dropped ya sabko bonus mila: tag nahi lagta."
+     ]
+    },
+    "levels": {
+     "easy": "Easy",
+     "moderate": "Moderate",
+     "tough": "Tough",
+     "unrated": "Not rated"
+    },
+    "time_label": "Time = sawaal screen par kitni der khula raha (time on screen).",
+    "level_sources": {
+     "students": "students ke result se",
+     "early": "shuruaati result se",
+     "paper": "paper ke tag se",
+     "none": "abhi Not rated"
+    }
+   },
+   "class": {
+    "state": "ready",
+    "ranked": true,
+    "n": 14,
+    "computed_at": 1795027469.8309374,
+    "min_finishers": 10,
+    "included": true,
+    "above": {
+     "handle": "b4b068819cedf450",
+     "score": 62,
+     "name": "Learner B4B06881"
+    }
+   },
+   "overview": {
+    "score": 61,
+    "maximum": 120,
+    "percentage": 50.83,
+    "rank": 9,
+    "of": 14,
+    "percentile": 42.86,
+    "attempted": 24,
+    "correct": 17,
+    "incorrect": 7,
+    "skipped": 6,
+    "accuracy": 70.8,
+    "time_used": 3000,
+    "time_on_screen": 2495,
+    "subjects": [
+     {
+      "name": "Physics",
+      "count": 10,
+      "maximum": 40,
+      "score": 8,
+      "correct": 3,
+      "incorrect": 4,
+      "skipped": 3,
+      "time": 900,
+      "attempted": 7,
+      "accuracy": 42.9
+     },
+     {
+      "name": "Chemistry",
+      "count": 10,
+      "maximum": 40,
+      "score": 31,
+      "correct": 8,
+      "incorrect": 1,
+      "skipped": 1,
+      "time": 710,
+      "attempted": 9,
+      "accuracy": 88.9
+     },
+     {
+      "name": "Mathematics",
+      "count": 10,
+      "maximum": 40,
+      "score": 22,
+      "correct": 6,
+      "incorrect": 2,
+      "skipped": 2,
+      "time": 885,
+      "attempted": 8,
+      "accuracy": 75.0
+     }
+    ],
+    "ledger": {
+     "earned": 68,
+     "negative": 7,
+     "left_wrong": 28,
+     "left_skipped": 24,
+     "net": 61,
+     "maximum": 120,
+     "no_negative": 68
+    },
+    "verdict": {
+     "tone": "warn",
+     "section": "potential",
+     "text": "Accuracy 70.8% theek rahi, 7 galat jawab se 7 marks kate aur 28 marks reh gaye."
+    },
+    "distribution": {
+     "bins": [
+      {
+       "from": 0,
+       "to": 12,
+       "count": 1,
+       "you": false
+      },
+      {
+       "from": 12,
+       "to": 24,
+       "count": 1,
+       "you": false
+      },
+      {
+       "from": 24,
+       "to": 36,
+       "count": 0,
+       "you": false
+      },
+      {
+       "from": 36,
+       "to": 48,
+       "count": 2,
+       "you": false
+      },
+      {
+       "from": 48,
+       "to": 60,
+       "count": 1,
+       "you": false
+      },
+      {
+       "from": 60,
+       "to": 72,
+       "count": 4,
+       "you": true
+      },
+      {
+       "from": 72,
+       "to": 84,
+       "count": 3,
+       "you": false
+      },
+      {
+       "from": 84,
+       "to": 96,
+       "count": 0,
+       "you": false
+      },
+      {
+       "from": 96,
+       "to": 108,
+       "count": 2,
+       "you": false
+      },
+      {
+       "from": 108,
+       "to": 120,
+       "count": 0,
+       "you": false
+      }
+     ],
+     "n": 14,
+     "average": 60.6,
+     "median": 62,
+     "top": 100
+    },
+    "next3": [
+     {
+      "key": "leak",
+      "marks": 23,
+      "title": "Easy sawaal pakke karo",
+      "detail": "3 Easy galat aur 2 Easy chhoote. Yahan se 23 marks bach sakte the.",
+      "questions": [
+       "82d5284b-382c-46df-bd3f-c8d072b1075e",
+       "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+       "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+       "e0fca752-c266-4c10-b250-dbcf840a2b59",
+       "eb2a7e71-d156-4e7c-ad11-c13a64e25d61"
+      ],
+      "section": "difficulty"
+     },
+     {
+      "key": "subject",
+      "marks": 20,
+      "title": "Physics ko mazboot karo",
+      "detail": "Physics mein 4 galat, Accuracy 42.9%. Yeh sahi hote to +20 marks.",
+      "questions": [
+       "82d5284b-382c-46df-bd3f-c8d072b1075e",
+       "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
+       "e9692627-ea60-481e-83ee-09276844176d",
+       "ec832239-d9dd-4914-9619-02c5763a7213"
+      ],
+      "section": "performance"
+     },
+     {
+      "key": "careless",
+      "marks": 10,
+      "title": "Careless galti roko",
+      "detail": "2 sawaal jaldbaazi mein galat hue. Inhe aaram se padhte to +10 marks milte.",
+      "questions": [
+       "82d5284b-382c-46df-bd3f-c8d072b1075e",
+       "ec832239-d9dd-4914-9619-02c5763a7213"
+      ],
+      "section": "quality"
+     }
+    ]
+   },
+   "performance": {
+    "subjects": [
+     {
+      "name": "Physics",
+      "count": 10,
+      "correct": 3,
+      "incorrect": 4,
+      "skipped": 3,
+      "score": 8,
+      "maximum": 40,
+      "negative": 4,
+      "attempted": 7,
+      "accuracy": 42.9,
+      "attempt_rate": 70.0,
+      "types": {
+       "mcq": {
+        "count": 8,
+        "correct": 2,
+        "incorrect": 3,
+        "skipped": 3,
+        "score": 5,
+        "maximum": 32,
+        "negative": 3,
+        "attempted": 5,
+        "accuracy": 40.0,
+        "attempt_rate": 62.5
+       },
+       "integer": {
+        "count": 2,
+        "correct": 1,
+        "incorrect": 1,
+        "skipped": 0,
+        "score": 3,
+        "maximum": 8,
+        "negative": 1,
+        "attempted": 2,
+        "accuracy": 50.0,
+        "attempt_rate": 100.0
+       }
+      },
+      "chapters": [
+       {
+        "name": "Kinematics",
+        "count": 4,
+        "correct": 2,
+        "incorrect": 2,
+        "skipped": 0,
+        "score": 6,
+        "maximum": 16,
+        "negative": 2,
+        "attempted": 4,
+        "accuracy": 50.0,
+        "attempt_rate": 100.0,
+        "label": "steady",
+        "lost": 10
+       },
+       {
+        "name": "Electrostatics",
+        "count": 3,
+        "correct": 1,
+        "incorrect": 1,
+        "skipped": 1,
+        "score": 3,
+        "maximum": 12,
+        "negative": 1,
+        "attempted": 2,
+        "accuracy": 50.0,
+        "attempt_rate": 66.7,
+        "label": "steady",
+        "lost": 9
+       },
+       {
+        "name": "Laws of Motion",
+        "count": 3,
+        "correct": 0,
+        "incorrect": 1,
+        "skipped": 2,
+        "score": -1,
+        "maximum": 12,
+        "negative": 1,
+        "attempted": 1,
+        "accuracy": 0.0,
+        "attempt_rate": 33.3,
+        "label": "weak",
+        "lost": 13
+       }
+      ],
+      "not_seen": 1,
+      "time": 900
+     },
+     {
+      "name": "Chemistry",
+      "count": 10,
+      "correct": 8,
+      "incorrect": 1,
+      "skipped": 1,
+      "score": 31,
+      "maximum": 40,
+      "negative": 1,
+      "attempted": 9,
+      "accuracy": 88.9,
+      "attempt_rate": 90.0,
+      "types": {
+       "mcq": {
+        "count": 8,
+        "correct": 7,
+        "incorrect": 1,
+        "skipped": 0,
+        "score": 27,
+        "maximum": 32,
+        "negative": 1,
+        "attempted": 8,
+        "accuracy": 87.5,
+        "attempt_rate": 100.0
+       },
+       "integer": {
+        "count": 2,
+        "correct": 1,
+        "incorrect": 0,
+        "skipped": 1,
+        "score": 4,
+        "maximum": 8,
+        "negative": 0,
+        "attempted": 1,
+        "accuracy": 100.0,
+        "attempt_rate": 50.0
+       }
+      },
+      "chapters": [
+       {
+        "name": "Mole Concept",
+        "count": 4,
+        "correct": 3,
+        "incorrect": 1,
+        "skipped": 0,
+        "score": 11,
+        "maximum": 16,
+        "negative": 1,
+        "attempted": 4,
+        "accuracy": 75.0,
+        "attempt_rate": 100.0,
+        "label": "strong",
+        "lost": 5
+       },
+       {
+        "name": "Chemical Bonding",
+        "count": 3,
+        "correct": 3,
+        "incorrect": 0,
+        "skipped": 0,
+        "score": 12,
+        "maximum": 12,
+        "negative": 0,
+        "attempted": 3,
+        "accuracy": 100.0,
+        "attempt_rate": 100.0,
+        "label": "strong",
+        "lost": 0
+       },
+       {
+        "name": "Thermodynamics",
+        "count": 3,
+        "correct": 2,
+        "incorrect": 0,
+        "skipped": 1,
+        "score": 8,
+        "maximum": 12,
+        "negative": 0,
+        "attempted": 2,
+        "accuracy": 100.0,
+        "attempt_rate": 66.7,
+        "label": "strong",
+        "lost": 4
+       }
+      ],
+      "not_seen": 1,
+      "time": 710
+     },
+     {
+      "name": "Mathematics",
+      "count": 10,
+      "correct": 6,
+      "incorrect": 2,
+      "skipped": 2,
+      "score": 22,
+      "maximum": 40,
+      "negative": 2,
+      "attempted": 8,
+      "accuracy": 75.0,
+      "attempt_rate": 80.0,
+      "types": {
+       "mcq": {
+        "count": 8,
+        "correct": 5,
+        "incorrect": 2,
+        "skipped": 1,
+        "score": 18,
+        "maximum": 32,
+        "negative": 2,
+        "attempted": 7,
+        "accuracy": 71.4,
+        "attempt_rate": 87.5
+       },
+       "integer": {
+        "count": 2,
+        "correct": 1,
+        "incorrect": 0,
+        "skipped": 1,
+        "score": 4,
+        "maximum": 8,
+        "negative": 0,
+        "attempted": 1,
+        "accuracy": 100.0,
+        "attempt_rate": 50.0
+       }
+      },
+      "chapters": [
+       {
+        "name": "Quadratic Equations",
+        "count": 4,
+        "correct": 4,
+        "incorrect": 0,
+        "skipped": 0,
+        "score": 16,
+        "maximum": 16,
+        "negative": 0,
+        "attempted": 4,
+        "accuracy": 100.0,
+        "attempt_rate": 100.0,
+        "label": "strong",
+        "lost": 0
+       },
+       {
+        "name": "Integration",
+        "count": 3,
+        "correct": 1,
+        "incorrect": 1,
+        "skipped": 1,
+        "score": 3,
+        "maximum": 12,
+        "negative": 1,
+        "attempted": 2,
+        "accuracy": 50.0,
+        "attempt_rate": 66.7,
+        "label": "steady",
+        "lost": 9
+       },
+       {
+        "name": "Matrices",
+        "count": 3,
+        "correct": 1,
+        "incorrect": 1,
+        "skipped": 1,
+        "score": 3,
+        "maximum": 12,
+        "negative": 1,
+        "attempted": 2,
+        "accuracy": 50.0,
+        "attempt_rate": 66.7,
+        "label": "steady",
+        "lost": 9
+       }
+      ],
+      "not_seen": 1,
+      "time": 885
+     }
+    ],
+    "weak": [
+     {
+      "subject": "Physics",
+      "name": "Laws of Motion",
+      "wrong": 1,
+      "skipped": 2,
+      "lost": 13,
+      "questions": [
+       "e9692627-ea60-481e-83ee-09276844176d",
+       "e0fca752-c266-4c10-b250-dbcf840a2b59",
+       "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4"
+      ]
+     },
+     {
+      "subject": "Physics",
+      "name": "Kinematics",
+      "wrong": 2,
+      "skipped": 0,
+      "lost": 10,
+      "questions": [
+       "82d5284b-382c-46df-bd3f-c8d072b1075e",
+       "d81ddec7-8cf9-4728-bb5a-a6fa28e75336"
+      ]
+     },
+     {
+      "subject": "Physics",
+      "name": "Electrostatics",
+      "wrong": 1,
+      "skipped": 1,
+      "lost": 9,
+      "questions": [
+       "422b6c5b-f260-40ad-9a44-53ca91dfa052",
+       "ec832239-d9dd-4914-9619-02c5763a7213"
+      ]
+     },
+     {
+      "subject": "Mathematics",
+      "name": "Matrices",
+      "wrong": 1,
+      "skipped": 1,
+      "lost": 9,
+      "questions": [
+       "34420f44-58a6-4be7-ac3f-1f73f875f952",
+       "eb2a7e71-d156-4e7c-ad11-c13a64e25d61"
+      ]
+     },
+     {
+      "subject": "Mathematics",
+      "name": "Integration",
+      "wrong": 1,
+      "skipped": 1,
+      "lost": 9,
+      "questions": [
+       "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+       "231b7d0d-a0d5-46b6-877c-4105790d408f"
+      ]
+     },
+     {
+      "subject": "Chemistry",
+      "name": "Mole Concept",
+      "wrong": 1,
+      "skipped": 0,
+      "lost": 5,
+      "questions": [
+       "b5179084-8c61-44fa-82d1-d240bb12c1e0"
+      ]
+     },
+     {
+      "subject": "Chemistry",
+      "name": "Thermodynamics",
+      "wrong": 0,
+      "skipped": 1,
+      "lost": 4,
+      "questions": [
+       "99e9cfd0-8f58-4290-9f0d-4a4e2efcb33b"
+      ]
+     }
+    ],
+    "sections": null,
+    "has_chapters": true
+   },
+   "potential": {
+    "available": true,
+    "current": 61,
+    "steps": [
+     {
+      "key": "careless",
+      "marks": 10,
+      "questions": [
+       "82d5284b-382c-46df-bd3f-c8d072b1075e",
+       "ec832239-d9dd-4914-9619-02c5763a7213"
+      ]
+     },
+     {
+      "key": "guard",
+      "marks": 0,
+      "questions": []
+     },
+     {
+      "key": "reinvest",
+      "marks": 10.8,
+      "minutes": 8.1,
+      "questions": [
+       "eb2a7e71-d156-4e7c-ad11-c13a64e25d61",
+       "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4",
+       "231b7d0d-a0d5-46b6-877c-4105790d408f",
+       "422b6c5b-f260-40ad-9a44-53ca91dfa052"
+      ]
+     }
+    ],
+    "realistic": 76.4,
+    "maximum": 81.8,
+    "paper_maximum": 120,
+    "at": [
+     {
+      "key": "current",
+      "score": 61,
+      "rank": 9,
+      "of": 14,
+      "percentile": 42.86
+     },
+     {
+      "key": "realistic",
+      "score": 76.4,
+      "rank": 4,
+      "of": 14,
+      "percentile": 78.57
+     },
+     {
+      "key": "maximum",
+      "score": 81.8,
+      "rank": 3,
+      "of": 14,
+      "percentile": 85.71
+     }
+    ],
+    "no_negative": 68,
+    "guess": {
+     "pos": 4,
+     "neg": -1,
+     "break_even": 20
+    }
+   },
+   "quality": {
+    "available": true,
+    "counts": {
+     "perfect": 16,
+     "slow_correct": 1,
+     "wasted": 2,
+     "concept_gap": 3,
+     "costly_overtime": 2,
+     "confused": 1,
+     "smart_skip": 2,
+     "not_seen": 3,
+     "no_score": 0
+    },
+    "headline": {
+     "perfect": 16,
+     "wasted": 2,
+     "overtime": 3,
+     "confused": 1,
+     "concept_gap": 3
+    },
+    "by_subject": [
+     {
+      "name": "Physics",
+      "counts": {
+       "perfect": 2,
+       "slow_correct": 1,
+       "wasted": 2,
+       "concept_gap": 1,
+       "costly_overtime": 1,
+       "confused": 1,
+       "smart_skip": 1,
+       "not_seen": 1,
+       "no_score": 0
+      }
+     },
+     {
+      "name": "Chemistry",
+      "counts": {
+       "perfect": 8,
+       "slow_correct": 0,
+       "wasted": 0,
+       "concept_gap": 1,
+       "costly_overtime": 0,
+       "confused": 0,
+       "smart_skip": 0,
+       "not_seen": 1,
+       "no_score": 0
+      }
+     },
+     {
+      "name": "Mathematics",
+      "counts": {
+       "perfect": 6,
+       "slow_correct": 0,
+       "wasted": 0,
+       "concept_gap": 1,
+       "costly_overtime": 1,
+       "confused": 0,
+       "smart_skip": 1,
+       "not_seen": 1,
+       "no_score": 0
+      }
+     }
+    ],
+    "par_from": {
+     "standard": 30
+    },
+    "lucky": [],
+    "painful": [
+     "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+     "e9692627-ea60-481e-83ee-09276844176d",
+     "d81ddec7-8cf9-4728-bb5a-a6fa28e75336"
+    ]
+   },
+   "time": {
+    "available": true,
+    "elapsed": 3000,
+    "on_screen": 2495,
+    "by_outcome": {
+     "correct": 1510,
+     "incorrect": 840,
+     "unanswered": 145
+    },
+    "by_subject": [
+     {
+      "name": "Physics",
+      "time": 900,
+      "attempted": 7,
+      "accuracy": 42.9,
+      "count": 10
+     },
+     {
+      "name": "Chemistry",
+      "time": 710,
+      "attempted": 9,
+      "accuracy": 88.9,
+      "count": 10
+     },
+     {
+      "name": "Mathematics",
+      "time": 885,
+      "attempted": 8,
+      "accuracy": 75.0,
+      "count": 10
+     }
+    ],
+    "blocks": [
+     {
+      "from": 0,
+      "to": 900,
+      "correct": 3,
+      "incorrect": 3,
+      "answered": 6,
+      "time": 900
+     },
+     {
+      "from": 900,
+      "to": 1800,
+      "correct": 10,
+      "incorrect": 2,
+      "answered": 12,
+      "time": 880
+     },
+     {
+      "from": 1800,
+      "to": 2700,
+      "correct": 4,
+      "incorrect": 2,
+      "answered": 6,
+      "time": 715
+     },
+     {
+      "from": 2700,
+      "to": 3600,
+      "correct": 0,
+      "incorrect": 0,
+      "answered": 0,
+      "time": 0
+     }
+    ],
+    "pace": [
+     0,
+     1,
+     3,
+     4,
+     5,
+     6,
+     10,
+     12,
+     14,
+     16,
+     18,
+     21,
+     21,
+     22,
+     23,
+     24,
+     24,
+     24,
+     24,
+     24,
+     24
+    ],
+    "pace_split": {
+     "correct": [
+      0,
+      1,
+      2,
+      2,
+      2,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      15,
+      15,
+      16,
+      17,
+      17,
+      17,
+      17,
+      17,
+      17
+     ],
+     "incorrect": [
+      0,
+      0,
+      1,
+      2,
+      3,
+      3,
+      5,
+      5,
+      5,
+      5,
+      5,
+      6,
+      6,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7
+     ]
+    },
+    "slowest": [
+     "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+     "e9692627-ea60-481e-83ee-09276844176d",
+     "1b4a2254-5cba-4984-b635-33652e15e936",
+     "ea7e074d-97f4-4ded-806c-dc6662137819",
+     "e0fca752-c266-4c10-b250-dbcf840a2b59"
+    ],
+    "off_screen": 505,
+    "first_look": {
+     "first": {
+      "count": 23,
+      "correct": 16,
+      "accuracy": 69.6,
+      "time": 2270,
+      "questions": [
+       "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72",
+       "1b4a2254-5cba-4984-b635-33652e15e936",
+       "82d5284b-382c-46df-bd3f-c8d072b1075e",
+       "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
+       "e9692627-ea60-481e-83ee-09276844176d",
+       "28dd13ee-f209-44c1-97a3-9ba5682004e6",
+       "ec832239-d9dd-4914-9619-02c5763a7213",
+       "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+       "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+       "549cb7a8-3a29-419f-b3ce-3f81414a0c23",
+       "233bcdea-96cc-478f-bd40-5a3474cf940b",
+       "d05cb02c-cb5f-4135-ba08-0ff3271cde8b",
+       "fdcc52da-294e-48c3-87ce-11fc9d7f73fe",
+       "d4adae35-5da1-4905-9f10-e59839dfbcf5",
+       "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4",
+       "176a1615-5e54-403f-b29a-6e9ffdfd56ec",
+       "71dc525f-0f9d-4ab5-bea4-f12a428494e8",
+       "1b82efb8-d367-4182-82e5-9dd3c739cb88",
+       "01ecd40b-d4de-4f71-8263-8c25511968bc",
+       "152dce11-5c69-4ef1-b90c-90ab15dc01d9",
+       "34420f44-58a6-4be7-ac3f-1f73f875f952",
+       "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+       "ea7e074d-97f4-4ded-806c-dc6662137819"
+      ]
+     },
+     "return": {
+      "count": 1,
+      "correct": 1,
+      "accuracy": 100.0,
+      "time": 80,
+      "questions": [
+       "3a756f34-b581-4a56-9986-402cb918a7ef"
+      ]
+     }
+    },
+    "share": [
+     {
+      "name": "Physics",
+      "time_pct": 36.1,
+      "weight_pct": 33.3,
+      "score": 8,
+      "maximum": 40
+     },
+     {
+      "name": "Chemistry",
+      "time_pct": 28.5,
+      "weight_pct": 33.3,
+      "score": 31,
+      "maximum": 40
+     },
+     {
+      "name": "Mathematics",
+      "time_pct": 35.5,
+      "weight_pct": 33.3,
+      "score": 22,
+      "maximum": 40
+     }
+    ]
+   },
+   "difficulty": {
+    "all": {
+     "easy": {
+      "count": 12,
+      "correct": 7,
+      "incorrect": 3,
+      "skipped": 2,
+      "attempted": 10,
+      "accuracy": 70.0
+     },
+     "moderate": {
+      "count": 10,
+      "correct": 6,
+      "incorrect": 2,
+      "skipped": 2,
+      "attempted": 8,
+      "accuracy": 75.0
+     },
+     "tough": {
+      "count": 5,
+      "correct": 3,
+      "incorrect": 1,
+      "skipped": 1,
+      "attempted": 4,
+      "accuracy": 75.0
+     },
+     "unrated": {
+      "count": 3,
+      "correct": 1,
+      "incorrect": 1,
+      "skipped": 1,
+      "attempted": 2,
+      "accuracy": 50.0
+     }
+    },
+    "by_subject": [
+     {
+      "name": "Physics",
+      "levels": {
+       "easy": {
+        "count": 3,
+        "correct": 1,
+        "incorrect": 1,
+        "skipped": 1
+       },
+       "moderate": {
+        "count": 4,
+        "correct": 1,
+        "incorrect": 2,
+        "skipped": 1
+       },
+       "tough": {
+        "count": 3,
+        "correct": 1,
+        "incorrect": 1,
+        "skipped": 1
+       },
+       "unrated": {
+        "count": 0,
+        "correct": 0,
+        "incorrect": 0,
+        "skipped": 0
+       }
+      }
+     },
+     {
+      "name": "Chemistry",
+      "levels": {
+       "easy": {
+        "count": 4,
+        "correct": 3,
+        "incorrect": 1,
+        "skipped": 0
+       },
+       "moderate": {
+        "count": 2,
+        "correct": 2,
+        "incorrect": 0,
+        "skipped": 0
+       },
+       "tough": {
+        "count": 2,
+        "correct": 2,
+        "incorrect": 0,
+        "skipped": 0
+       },
+       "unrated": {
+        "count": 2,
+        "correct": 1,
+        "incorrect": 0,
+        "skipped": 1
+       }
+      }
+     },
+     {
+      "name": "Mathematics",
+      "levels": {
+       "easy": {
+        "count": 5,
+        "correct": 3,
+        "incorrect": 1,
+        "skipped": 1
+       },
+       "moderate": {
+        "count": 4,
+        "correct": 3,
+        "incorrect": 0,
+        "skipped": 1
+       },
+       "tough": {
+        "count": 0,
+        "correct": 0,
+        "incorrect": 0,
+        "skipped": 0
+       },
+       "unrated": {
+        "count": 1,
+        "correct": 0,
+        "incorrect": 1,
+        "skipped": 0
+       }
+      }
+     }
+    ],
+    "leak": {
+     "wrong": [
+      "82d5284b-382c-46df-bd3f-c8d072b1075e",
+      "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+      "97f56cc6-a56d-4c06-bb14-96acdad5cd7a"
+     ],
+     "skipped": [
+      "e0fca752-c266-4c10-b250-dbcf840a2b59",
+      "eb2a7e71-d156-4e7c-ad11-c13a64e25d61"
+     ],
+     "marks": 23
+    },
+    "sources": {
+     "paper": 15,
+     "early": 12,
+     "none": 3
+    },
+    "class_n": 14,
+    "tough_solved": [
+     "1b4a2254-5cba-4984-b635-33652e15e936",
+     "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+     "233bcdea-96cc-478f-bd40-5a3474cf940b"
+    ],
+    "unlock": {
+     "have": 14,
+     "need": 10,
+     "unrated": 3
+    }
+   },
+   "journey": {
+    "available": true,
+    "visits": [
+     {
+      "q": "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72",
+      "n": 1,
+      "a": 5,
+      "d": 60,
+      "v": 1,
+      "set": "B"
+     },
+     {
+      "q": "1b4a2254-5cba-4984-b635-33652e15e936",
+      "n": 2,
+      "a": 66,
+      "d": 200,
+      "v": 1,
+      "set": "C"
+     },
+     {
+      "q": "82d5284b-382c-46df-bd3f-c8d072b1075e",
+      "n": 3,
+      "a": 267,
+      "d": 20,
+      "v": 1,
+      "set": "A"
+     },
+     {
+      "q": "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
+      "n": 4,
+      "a": 288,
+      "d": 100,
+      "v": 1,
+      "set": "B"
+     },
+     {
+      "q": "e9692627-ea60-481e-83ee-09276844176d",
+      "n": 5,
+      "a": 389,
+      "d": 260,
+      "v": 1,
+      "set": "C"
+     },
+     {
+      "q": "e0fca752-c266-4c10-b250-dbcf840a2b59",
+      "n": 6,
+      "a": 650,
+      "d": 120,
+      "v": 1,
+      "mark": true
+     },
+     {
+      "q": "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4",
+      "n": 7,
+      "a": 771,
+      "d": 10,
+      "v": 1
+     },
+     {
+      "q": "28dd13ee-f209-44c1-97a3-9ba5682004e6",
+      "n": 9,
+      "a": 782,
+      "d": 100,
+      "v": 1,
+      "set": "5"
+     },
+     {
+      "q": "ec832239-d9dd-4914-9619-02c5763a7213",
+      "n": 10,
+      "a": 883,
+      "d": 30,
+      "v": 1,
+      "set": "7"
+     },
+     {
+      "q": "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+      "n": 11,
+      "a": 914,
+      "d": 50,
+      "v": 1,
+      "set": "A"
+     },
+     {
+      "q": "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+      "n": 12,
+      "a": 965,
+      "d": 40,
+      "v": 1,
+      "set": "A"
+     },
+     {
+      "q": "549cb7a8-3a29-419f-b3ce-3f81414a0c23",
+      "n": 13,
+      "a": 1006,
+      "d": 70,
+      "v": 1,
+      "mark": true,
+      "set": "B"
+     },
+     {
+      "q": "233bcdea-96cc-478f-bd40-5a3474cf940b",
+      "n": 14,
+      "a": 1077,
+      "d": 60,
+      "v": 1,
+      "set": "C"
+     },
+     {
+      "q": "d05cb02c-cb5f-4135-ba08-0ff3271cde8b",
+      "n": 15,
+      "a": 1138,
+      "d": 75,
+      "v": 1,
+      "set": "D"
+     },
+     {
+      "q": "fdcc52da-294e-48c3-87ce-11fc9d7f73fe",
+      "n": 16,
+      "a": 1214,
+      "d": 80,
+      "v": 1,
+      "set": "A"
+     },
+     {
+      "q": "d4adae35-5da1-4905-9f10-e59839dfbcf5",
+      "n": 17,
+      "a": 1295,
+      "d": 90,
+      "v": 1,
+      "set": "B"
+     },
+     {
+      "q": "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4",
+      "n": 18,
+      "a": 1386,
+      "d": 65,
+      "v": 1,
+      "set": "C"
+     },
+     {
+      "q": "176a1615-5e54-403f-b29a-6e9ffdfd56ec",
+      "n": 19,
+      "a": 1452,
+      "d": 120,
+      "v": 1,
+      "set": "5"
+     },
+     {
+      "q": "3a756f34-b581-4a56-9986-402cb918a7ef",
+      "n": 21,
+      "a": 1573,
+      "d": 20,
+      "v": 1
+     },
+     {
+      "q": "71dc525f-0f9d-4ab5-bea4-f12a428494e8",
+      "n": 22,
+      "a": 1594,
+      "d": 70,
+      "v": 1,
+      "set": "C"
+     },
+     {
+      "q": "1b82efb8-d367-4182-82e5-9dd3c739cb88",
+      "n": 23,
+      "a": 1665,
+      "d": 70,
+      "v": 1,
+      "set": "D"
+     },
+     {
+      "q": "01ecd40b-d4de-4f71-8263-8c25511968bc",
+      "n": 24,
+      "a": 1736,
+      "d": 70,
+      "v": 1,
+      "set": "A"
+     },
+     {
+      "q": "152dce11-5c69-4ef1-b90c-90ab15dc01d9",
+      "n": 25,
+      "a": 1807,
+      "d": 70,
+      "v": 1,
+      "set": "B"
+     },
+     {
+      "q": "34420f44-58a6-4be7-ac3f-1f73f875f952",
+      "n": 26,
+      "a": 1878,
+      "d": 60,
+      "v": 1,
+      "set": "D"
+     },
+     {
+      "q": "eb2a7e71-d156-4e7c-ad11-c13a64e25d61",
+      "n": 27,
+      "a": 1939,
+      "d": 15,
+      "v": 1
+     },
+     {
+      "q": "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+      "n": 28,
+      "a": 1955,
+      "d": 300,
+      "v": 1,
+      "set": "B"
+     },
+     {
+      "q": "ea7e074d-97f4-4ded-806c-dc6662137819",
+      "n": 29,
+      "a": 2256,
+      "d": 150,
+      "v": 1,
+      "set": "5"
+     },
+     {
+      "q": "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+      "n": 11,
+      "a": 2407,
+      "d": 30,
+      "v": 2,
+      "set": "A→D"
+     },
+     {
+      "q": "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+      "n": 12,
+      "a": 2438,
+      "d": 30,
+      "v": 2,
+      "set": "A→B"
+     },
+     {
+      "q": "3a756f34-b581-4a56-9986-402cb918a7ef",
+      "n": 21,
+      "a": 2469,
+      "d": 60,
+      "v": 2,
+      "set": "B"
+     }
+    ],
+    "order": [
+     "Physics",
+     "Chemistry",
+     "Mathematics"
+    ],
+    "block": 900,
+    "summary": {
+     "visited": 27,
+     "total": 30,
+     "revisits": 3,
+     "thrice": 0
+    },
+    "first_block": {
+     "minutes": 15,
+     "answered": 6,
+     "correct": 3,
+     "incorrect": 3
+    }
+   },
+   "habits": {
+    "changes": {
+     "groups": {
+      "w2r": [
+       "11b82c2c-47fa-4144-b009-80aeaf8c1e3e"
+      ],
+      "r2w": [
+       "b5179084-8c61-44fa-82d1-d240bb12c1e0"
+      ],
+      "w2w": [],
+      "r2s": [],
+      "w2s": []
+     },
+     "marks": 0,
+     "total": 2
+    },
+    "streaks": {
+     "correct": 11,
+     "incorrect": 3
+    },
+    "last": null
+   },
+   "questions": [
+    {
+     "id": "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72",
+     "number": 1,
+     "subject": "Physics",
+     "topic": "Kinematics",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "paper",
+     "response": "B",
+     "answer": "B",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 60,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 64,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 28.6,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 66.7,
+      "avg_time": 78,
+      "topper_time": 129,
+      "top_wrong": {
+       "option": "C",
+       "percent": 28.6
+      }
+     }
+    },
+    {
+     "id": "1b4a2254-5cba-4984-b635-33652e15e936",
+     "number": 2,
+     "subject": "Physics",
+     "topic": "Kinematics",
+     "type": "mcq",
+     "difficulty": "tough",
+     "difficulty_source": "paper",
+     "response": "C",
+     "answer": "C",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 200,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "slow_correct",
+     "marked": false,
+     "seen": true,
+     "at": 265,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 64.3,
+      "wrong": 14.3,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 81.8,
+      "avg_time": 77,
+      "topper_time": 82,
+      "top_wrong": {
+       "option": "D",
+       "percent": 14.3
+      }
+     }
+    },
+    {
+     "id": "82d5284b-382c-46df-bd3f-c8d072b1075e",
+     "number": 3,
+     "subject": "Physics",
+     "topic": "Kinematics",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "paper",
+     "response": "A",
+     "answer": "D",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 20,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "wasted",
+     "marked": false,
+     "seen": true,
+     "at": 286,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 21.4,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 72.7,
+      "avg_time": 66,
+      "topper_time": 33,
+      "top_wrong": {
+       "option": "A",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
+     "number": 4,
+     "subject": "Physics",
+     "topic": "Kinematics",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "paper",
+     "response": "B",
+     "answer": "A",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 100,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "concept_gap",
+     "marked": false,
+     "seen": true,
+     "at": 387,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 35.7,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 58.3,
+      "avg_time": 74,
+      "topper_time": 133,
+      "top_wrong": {
+       "option": "B",
+       "percent": 35.7
+      }
+     }
+    },
+    {
+     "id": "e9692627-ea60-481e-83ee-09276844176d",
+     "number": 5,
+     "subject": "Physics",
+     "topic": "Laws of Motion",
+     "type": "mcq",
+     "difficulty": "tough",
+     "difficulty_source": "paper",
+     "response": "C",
+     "answer": "B",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 260,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "costly_overtime",
+     "marked": false,
+     "seen": true,
+     "at": 648,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 28.6,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 63.6,
+      "avg_time": 77,
+      "topper_time": null,
+      "top_wrong": {
+       "option": "C",
+       "percent": 28.6
+      }
+     }
+    },
+    {
+     "id": "e0fca752-c266-4c10-b250-dbcf840a2b59",
+     "number": 6,
+     "subject": "Physics",
+     "topic": "Laws of Motion",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "paper",
+     "response": "",
+     "answer": "C",
+     "outcome": "skipped",
+     "marks": 0,
+     "pos": 4,
+     "neg": -1,
+     "time": 120,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "confused",
+     "marked": false,
+     "seen": true,
+     "at": null,
+     "look": null,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 42.9,
+      "wrong": 0.0,
+      "skipped": 57.1,
+      "attempted": 42.9,
+      "right_of_attempted": 100.0,
+      "avg_time": 68,
+      "topper_time": 30,
+      "top_wrong": null
+     }
+    },
+    {
+     "id": "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4",
+     "number": 7,
+     "subject": "Physics",
+     "topic": "Laws of Motion",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "paper",
+     "response": "",
+     "answer": "D",
+     "outcome": "skipped",
+     "marks": 0,
+     "pos": 4,
+     "neg": -1,
+     "time": 10,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "smart_skip",
+     "marked": false,
+     "seen": true,
+     "at": null,
+     "look": null,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 35.7,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 58.3,
+      "avg_time": 59,
+      "topper_time": 73,
+      "top_wrong": {
+       "option": "A",
+       "percent": 35.7
+      }
+     }
+    },
+    {
+     "id": "422b6c5b-f260-40ad-9a44-53ca91dfa052",
+     "number": 8,
+     "subject": "Physics",
+     "topic": "Electrostatics",
+     "type": "mcq",
+     "difficulty": "tough",
+     "difficulty_source": "paper",
+     "response": "",
+     "answer": "A",
+     "outcome": "skipped",
+     "marks": 0,
+     "pos": 4,
+     "neg": -1,
+     "time": 0,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "not_seen",
+     "marked": false,
+     "seen": false,
+     "at": null,
+     "look": null,
+     "changed": null,
+     "visits": 0,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 28.6,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 66.7,
+      "avg_time": 74,
+      "topper_time": 99,
+      "top_wrong": {
+       "option": "B",
+       "percent": 28.6
+      }
+     }
+    },
+    {
+     "id": "28dd13ee-f209-44c1-97a3-9ba5682004e6",
+     "number": 9,
+     "subject": "Physics",
+     "topic": "Electrostatics",
+     "type": "integer",
+     "difficulty": "easy",
+     "difficulty_source": "paper",
+     "response": "5",
+     "answer": "5",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 100,
+     "par": 153.5,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 881,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 35.7,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 58.3,
+      "avg_time": 78,
+      "topper_time": 119,
+      "top_wrong": null
+     }
+    },
+    {
+     "id": "ec832239-d9dd-4914-9619-02c5763a7213",
+     "number": 10,
+     "subject": "Physics",
+     "topic": "Electrostatics",
+     "type": "integer",
+     "difficulty": "moderate",
+     "difficulty_source": "paper",
+     "response": "7",
+     "answer": "5",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 30,
+     "par": 153.5,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "wasted",
+     "marked": false,
+     "seen": true,
+     "at": 912,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 64.3,
+      "wrong": 21.4,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 75.0,
+      "avg_time": 83,
+      "topper_time": 31,
+      "top_wrong": null
+     }
+    },
+    {
+     "id": "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+     "number": 11,
+     "subject": "Chemistry",
+     "topic": "Mole Concept",
+     "type": "mcq",
+     "difficulty": "tough",
+     "difficulty_source": "paper",
+     "response": "D",
+     "answer": "D",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 80,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 963,
+     "look": 1,
+     "changed": "A→D",
+     "visits": 2,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 21.4,
+      "skipped": 28.6,
+      "attempted": 71.4,
+      "right_of_attempted": 70.0,
+      "avg_time": 85,
+      "topper_time": 133,
+      "top_wrong": {
+       "option": "A",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+     "number": 12,
+     "subject": "Chemistry",
+     "topic": "Mole Concept",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "paper",
+     "response": "B",
+     "answer": "A",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 70,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "concept_gap",
+     "marked": false,
+     "seen": true,
+     "at": 1004,
+     "look": 1,
+     "changed": "A→B",
+     "visits": 2,
+     "class": {
+      "n": 14,
+      "correct": 71.4,
+      "wrong": 21.4,
+      "skipped": 7.1,
+      "attempted": 92.9,
+      "right_of_attempted": 76.9,
+      "avg_time": 90,
+      "topper_time": 77,
+      "top_wrong": {
+       "option": "B",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "549cb7a8-3a29-419f-b3ce-3f81414a0c23",
+     "number": 13,
+     "subject": "Chemistry",
+     "topic": "Mole Concept",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "paper",
+     "response": "B",
+     "answer": "B",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 70,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": true,
+     "seen": true,
+     "at": 1075,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 64.3,
+      "wrong": 14.3,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 81.8,
+      "avg_time": 81,
+      "topper_time": 112,
+      "top_wrong": {
+       "option": "C",
+       "percent": 14.3
+      }
+     }
+    },
+    {
+     "id": "233bcdea-96cc-478f-bd40-5a3474cf940b",
+     "number": 14,
+     "subject": "Chemistry",
+     "topic": "Mole Concept",
+     "type": "mcq",
+     "difficulty": "tough",
+     "difficulty_source": "paper",
+     "response": "C",
+     "answer": "C",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 60,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1136,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 14.3,
+      "skipped": 35.7,
+      "attempted": 64.3,
+      "right_of_attempted": 77.8,
+      "avg_time": 53,
+      "topper_time": 110,
+      "top_wrong": {
+       "option": "D",
+       "percent": 14.3
+      }
+     }
+    },
+    {
+     "id": "d05cb02c-cb5f-4135-ba08-0ff3271cde8b",
+     "number": 15,
+     "subject": "Chemistry",
+     "topic": "Chemical Bonding",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "paper",
+     "response": "D",
+     "answer": "D",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 75,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1212,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 71.4,
+      "wrong": 21.4,
+      "skipped": 7.1,
+      "attempted": 92.9,
+      "right_of_attempted": 76.9,
+      "avg_time": 81,
+      "topper_time": 30,
+      "top_wrong": {
+       "option": "A",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "fdcc52da-294e-48c3-87ce-11fc9d7f73fe",
+     "number": 16,
+     "subject": "Chemistry",
+     "topic": "Chemical Bonding",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "A",
+     "answer": "A",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 80,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1293,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 28.6,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 66.7,
+      "avg_time": 64,
+      "topper_time": 45,
+      "top_wrong": {
+       "option": "B",
+       "percent": 28.6
+      }
+     }
+    },
+    {
+     "id": "d4adae35-5da1-4905-9f10-e59839dfbcf5",
+     "number": 17,
+     "subject": "Chemistry",
+     "topic": "Chemical Bonding",
+     "type": "mcq",
+     "difficulty": "unrated",
+     "difficulty_source": "none",
+     "response": "B",
+     "answer": "B",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 90,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1384,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 7.1,
+      "skipped": 35.7,
+      "attempted": 64.3,
+      "right_of_attempted": 88.9,
+      "avg_time": 65,
+      "topper_time": 71,
+      "top_wrong": {
+       "option": "C",
+       "percent": 7.1
+      }
+     }
+    },
+    {
+     "id": "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4",
+     "number": 18,
+     "subject": "Chemistry",
+     "topic": "Thermodynamics",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "early",
+     "response": "C",
+     "answer": "C",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 65,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1450,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 42.9,
+      "skipped": 0.0,
+      "attempted": 100.0,
+      "right_of_attempted": 57.1,
+      "avg_time": 79,
+      "topper_time": 58,
+      "top_wrong": {
+       "option": "D",
+       "percent": 42.9
+      }
+     }
+    },
+    {
+     "id": "176a1615-5e54-403f-b29a-6e9ffdfd56ec",
+     "number": 19,
+     "subject": "Chemistry",
+     "topic": "Thermodynamics",
+     "type": "integer",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "5",
+     "answer": "5",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 120,
+     "par": 153.5,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1571,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 21.4,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 72.7,
+      "avg_time": 69,
+      "topper_time": 96,
+      "top_wrong": null
+     }
+    },
+    {
+     "id": "99e9cfd0-8f58-4290-9f0d-4a4e2efcb33b",
+     "number": 20,
+     "subject": "Chemistry",
+     "topic": "Thermodynamics",
+     "type": "integer",
+     "difficulty": "unrated",
+     "difficulty_source": "none",
+     "response": "",
+     "answer": "5",
+     "outcome": "skipped",
+     "marks": 0,
+     "pos": 4,
+     "neg": -1,
+     "time": 0,
+     "par": 153.5,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "not_seen",
+     "marked": false,
+     "seen": false,
+     "at": null,
+     "look": null,
+     "changed": null,
+     "visits": 0,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 7.1,
+      "skipped": 35.7,
+      "attempted": 64.3,
+      "right_of_attempted": 88.9,
+      "avg_time": 74,
+      "topper_time": 53,
+      "top_wrong": null
+     }
+    },
+    {
+     "id": "3a756f34-b581-4a56-9986-402cb918a7ef",
+     "number": 21,
+     "subject": "Mathematics",
+     "topic": "Quadratic Equations",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "B",
+     "answer": "B",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 80,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 2528,
+     "look": 2,
+     "changed": null,
+     "visits": 2,
+     "class": {
+      "n": 14,
+      "correct": 78.6,
+      "wrong": 7.1,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 91.7,
+      "avg_time": 52,
+      "topper_time": null,
+      "top_wrong": {
+       "option": "C",
+       "percent": 7.1
+      }
+     }
+    },
+    {
+     "id": "71dc525f-0f9d-4ab5-bea4-f12a428494e8",
+     "number": 22,
+     "subject": "Mathematics",
+     "topic": "Quadratic Equations",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "early",
+     "response": "C",
+     "answer": "C",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 70,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1663,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 28.6,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 63.6,
+      "avg_time": 61,
+      "topper_time": 90,
+      "top_wrong": {
+       "option": "D",
+       "percent": 28.6
+      }
+     }
+    },
+    {
+     "id": "1b82efb8-d367-4182-82e5-9dd3c739cb88",
+     "number": 23,
+     "subject": "Mathematics",
+     "topic": "Quadratic Equations",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "D",
+     "answer": "D",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 70,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1734,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 71.4,
+      "wrong": 7.1,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 90.9,
+      "avg_time": 83,
+      "topper_time": 133,
+      "top_wrong": {
+       "option": "A",
+       "percent": 7.1
+      }
+     }
+    },
+    {
+     "id": "01ecd40b-d4de-4f71-8263-8c25511968bc",
+     "number": 24,
+     "subject": "Mathematics",
+     "topic": "Quadratic Equations",
+     "type": "mcq",
+     "difficulty": "moderate",
+     "difficulty_source": "early",
+     "response": "A",
+     "answer": "A",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 70,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1805,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 35.7,
+      "skipped": 14.3,
+      "attempted": 85.7,
+      "right_of_attempted": 58.3,
+      "avg_time": 68,
+      "topper_time": 41,
+      "top_wrong": {
+       "option": "B",
+       "percent": 35.7
+      }
+     }
+    },
+    {
+     "id": "152dce11-5c69-4ef1-b90c-90ab15dc01d9",
+     "number": 25,
+     "subject": "Mathematics",
+     "topic": "Matrices",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "B",
+     "answer": "B",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 70,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 1876,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 71.4,
+      "wrong": 21.4,
+      "skipped": 7.1,
+      "attempted": 92.9,
+      "right_of_attempted": 76.9,
+      "avg_time": 84,
+      "topper_time": 108,
+      "top_wrong": {
+       "option": "C",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "34420f44-58a6-4be7-ac3f-1f73f875f952",
+     "number": 26,
+     "subject": "Mathematics",
+     "topic": "Matrices",
+     "type": "mcq",
+     "difficulty": "unrated",
+     "difficulty_source": "none",
+     "response": "D",
+     "answer": "C",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 60,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "concept_gap",
+     "marked": false,
+     "seen": true,
+     "at": 1937,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 28.6,
+      "wrong": 28.6,
+      "skipped": 42.9,
+      "attempted": 57.1,
+      "right_of_attempted": 50.0,
+      "avg_time": 55,
+      "topper_time": 92,
+      "top_wrong": {
+       "option": "D",
+       "percent": 28.6
+      }
+     }
+    },
+    {
+     "id": "eb2a7e71-d156-4e7c-ad11-c13a64e25d61",
+     "number": 27,
+     "subject": "Mathematics",
+     "topic": "Matrices",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "",
+     "answer": "D",
+     "outcome": "skipped",
+     "marks": 0,
+     "pos": 4,
+     "neg": -1,
+     "time": 15,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "smart_skip",
+     "marked": false,
+     "seen": true,
+     "at": null,
+     "look": null,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 57.1,
+      "wrong": 21.4,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 72.7,
+      "avg_time": 58,
+      "topper_time": 50,
+      "top_wrong": {
+       "option": "A",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+     "number": 28,
+     "subject": "Mathematics",
+     "topic": "Integration",
+     "type": "mcq",
+     "difficulty": "easy",
+     "difficulty_source": "early",
+     "response": "B",
+     "answer": "A",
+     "outcome": "incorrect",
+     "marks": -1,
+     "pos": 4,
+     "neg": -1,
+     "time": 300,
+     "par": 96.6,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "costly_overtime",
+     "marked": false,
+     "seen": true,
+     "at": 2254,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 21.4,
+      "skipped": 28.6,
+      "attempted": 71.4,
+      "right_of_attempted": 70.0,
+      "avg_time": 86,
+      "topper_time": 57,
+      "top_wrong": {
+       "option": "B",
+       "percent": 21.4
+      }
+     }
+    },
+    {
+     "id": "ea7e074d-97f4-4ded-806c-dc6662137819",
+     "number": 29,
+     "subject": "Mathematics",
+     "topic": "Integration",
+     "type": "integer",
+     "difficulty": "moderate",
+     "difficulty_source": "early",
+     "response": "5",
+     "answer": "5",
+     "outcome": "correct",
+     "marks": 4,
+     "pos": 4,
+     "neg": -1,
+     "time": 150,
+     "par": 153.5,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "perfect",
+     "marked": false,
+     "seen": true,
+     "at": 2405,
+     "look": 1,
+     "changed": null,
+     "visits": 1,
+     "class": {
+      "n": 14,
+      "correct": 50.0,
+      "wrong": 28.6,
+      "skipped": 21.4,
+      "attempted": 78.6,
+      "right_of_attempted": 63.6,
+      "avg_time": 74,
+      "topper_time": 87,
+      "top_wrong": null
+     }
+    },
+    {
+     "id": "231b7d0d-a0d5-46b6-877c-4105790d408f",
+     "number": 30,
+     "subject": "Mathematics",
+     "topic": "Integration",
+     "type": "integer",
+     "difficulty": "moderate",
+     "difficulty_source": "early",
+     "response": "",
+     "answer": "5",
+     "outcome": "skipped",
+     "marks": 0,
+     "pos": 4,
+     "neg": -1,
+     "time": 0,
+     "par": 153.5,
+     "par_source": "standard",
+     "par_n": 0,
+     "tag": "not_seen",
+     "marked": false,
+     "seen": false,
+     "at": null,
+     "look": null,
+     "changed": null,
+     "visits": 0,
+     "class": {
+      "n": 14,
+      "correct": 42.9,
+      "wrong": 28.6,
+      "skipped": 28.6,
+      "attempted": 71.4,
+      "right_of_attempted": 60.0,
+      "avg_time": 63,
+      "topper_time": 46,
+      "top_wrong": null
+     }
+    }
+   ],
+   "you": {
+    "n": 1,
+    "score": 61,
+    "maximum": 120,
+    "correct": 17,
+    "incorrect": 7,
+    "skipped": 6,
+    "attempted": 24,
+    "accuracy": 70.8,
+    "time": 3000,
+    "on_screen": 2495,
+    "subjects": [
+     {
+      "name": "Physics",
+      "count": 10,
+      "maximum": 40,
+      "score": 8,
+      "correct": 3,
+      "incorrect": 4,
+      "skipped": 3,
+      "time": 900,
+      "attempted": 7,
+      "accuracy": 42.9
+     },
+     {
+      "name": "Chemistry",
+      "count": 10,
+      "maximum": 40,
+      "score": 31,
+      "correct": 8,
+      "incorrect": 1,
+      "skipped": 1,
+      "time": 710,
+      "attempted": 9,
+      "accuracy": 88.9
+     },
+     {
+      "name": "Mathematics",
+      "count": 10,
+      "maximum": 40,
+      "score": 22,
+      "correct": 6,
+      "incorrect": 2,
+      "skipped": 2,
+      "time": 885,
+      "attempted": 8,
+      "accuracy": 75.0
+     }
+    ],
+    "difficulty": {
+     "easy": {
+      "count": 12,
+      "correct": 7,
+      "incorrect": 3,
+      "skipped": 2,
+      "attempted": 10,
+      "accuracy": 70.0
+     },
+     "moderate": {
+      "count": 10,
+      "correct": 6,
+      "incorrect": 2,
+      "skipped": 2,
+      "attempted": 8,
+      "accuracy": 75.0
+     },
+     "tough": {
+      "count": 5,
+      "correct": 3,
+      "incorrect": 1,
+      "skipped": 1,
+      "attempted": 4,
+      "accuracy": 75.0
+     },
+     "unrated": {
+      "count": 3,
+      "correct": 1,
+      "incorrect": 1,
+      "skipped": 1,
+      "attempted": 2,
+      "accuracy": 50.0
+     }
+    },
+    "tags": {
+     "perfect": 16,
+     "slow_correct": 1,
+     "wasted": 2,
+     "concept_gap": 3,
+     "costly_overtime": 2,
+     "confused": 1,
+     "smart_skip": 2,
+     "not_seen": 3,
+     "no_score": 0
+    },
+    "time_by_outcome": {
+     "correct": 1510,
+     "incorrect": 840,
+     "unanswered": 145
+    },
+    "pace": [
+     0,
+     1,
+     3,
+     4,
+     5,
+     6,
+     10,
+     12,
+     14,
+     16,
+     18,
+     21,
+     21,
+     22,
+     23,
+     24,
+     24,
+     24,
+     24,
+     24,
+     24
+    ]
+   },
+   "compare": {
+    "available": true,
+    "kind": "average",
+    "label": "Class ka average",
+    "profile": {
+     "n": 14,
+     "score": 60.6,
+     "maximum": 120,
+     "correct": 16.9,
+     "incorrect": 6.8,
+     "skipped": 6.4,
+     "attempted": 23.6,
+     "accuracy": 71.3,
+     "time": 3000,
+     "on_screen": 2157.5,
+     "subjects": [
+      {
+       "name": "Physics",
+       "count": 10,
+       "maximum": 40,
+       "score": 19.2,
+       "correct": 5.4,
+       "incorrect": 2.5,
+       "skipped": 2.1,
+       "time": 734.3,
+       "attempted": 7.9,
+       "accuracy": 68.5
+      },
+      {
+       "name": "Chemistry",
+       "count": 10,
+       "maximum": 40,
+       "score": 21.7,
+       "correct": 5.9,
+       "incorrect": 2,
+       "skipped": 2.1,
+       "time": 740.7,
+       "attempted": 7.9,
+       "accuracy": 74.8
+      },
+      {
+       "name": "Mathematics",
+       "count": 10,
+       "maximum": 40,
+       "score": 19.7,
+       "correct": 5.5,
+       "incorrect": 2.3,
+       "skipped": 2.2,
+       "time": 682.5,
+       "attempted": 7.8,
+       "accuracy": 70.6
+      }
+     ],
+     "difficulty": {
+      "easy": {
+       "count": 12,
+       "correct": 7.4,
+       "incorrect": 2.3,
+       "skipped": 2.4,
+       "attempted": 9.6,
+       "accuracy": 76.3
+      },
+      "moderate": {
+       "count": 10,
+       "correct": 5.4,
+       "incorrect": 3,
+       "skipped": 1.6,
+       "attempted": 8.4,
+       "accuracy": 64.1
+      },
+      "tough": {
+       "count": 5,
+       "correct": 2.7,
+       "incorrect": 1.1,
+       "skipped": 1.2,
+       "attempted": 3.8,
+       "accuracy": 71.7
+      },
+      "unrated": {
+       "count": 3,
+       "correct": 1.4,
+       "incorrect": 0.4,
+       "skipped": 1.1,
+       "attempted": 1.9,
+       "accuracy": 76.9
+      }
+     },
+     "tags": {
+      "perfect": 14.7,
+      "slow_correct": 1.6,
+      "wasted": 2.3,
+      "concept_gap": 4.4,
+      "costly_overtime": 0.6,
+      "confused": 2.3,
+      "smart_skip": 0.9,
+      "not_seen": 3.2,
+      "no_score": 0
+     },
+     "time_by_outcome": {
+      "correct": 1295.8,
+      "incorrect": 603.2,
+      "unanswered": 258.5
+     },
+     "pace": [
+      0,
+      1.6,
+      3.4,
+      5.9,
+      7.3,
+      9.1,
+      11.1,
+      13.4,
+      15.6,
+      17.4,
+      19.4,
+      21.1,
+      22.1,
+      22.8,
+      23.3,
+      23.6,
+      23.6,
+      23.6,
+      23.6,
+      23.6,
+      23.6
+     ]
+    },
+    "gap": -0.4,
+    "by_subject": [
+     {
+      "name": "Physics",
+      "you": 8,
+      "them": 19.2,
+      "gap": 11.2
+     },
+     {
+      "name": "Mathematics",
+      "you": 22,
+      "them": 19.7,
+      "gap": -2.3
+     },
+     {
+      "name": "Chemistry",
+      "you": 31,
+      "them": 21.7,
+      "gap": -9.3
+     }
+    ],
+    "by_difficulty": [
+     {
+      "level": "easy",
+      "you": 70.0,
+      "them": 76.3
+     },
+     {
+      "level": "moderate",
+      "you": 75.0,
+      "them": 64.1
+     },
+     {
+      "level": "tough",
+      "you": 75.0,
+      "them": 71.7
+     },
+     {
+      "level": "unrated",
+      "you": 50.0,
+      "them": 76.9
+     }
+    ],
+    "split": [
+     {
+      "name": "Physics",
+      "volume": 2.2,
+      "quality": 9
+     },
+     {
+      "name": "Chemistry",
+      "volume": -3,
+      "quality": -6.3
+     },
+     {
+      "name": "Mathematics",
+      "volume": -0.5,
+      "quality": -1.8
+     }
+    ],
+    "split_total": {
+     "volume": -1.3,
+     "quality": 0.9
+    },
+    "score": 60.6,
+    "times": {
+     "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72": 78,
+     "1b4a2254-5cba-4984-b635-33652e15e936": 77,
+     "82d5284b-382c-46df-bd3f-c8d072b1075e": 66,
+     "d81ddec7-8cf9-4728-bb5a-a6fa28e75336": 74,
+     "e9692627-ea60-481e-83ee-09276844176d": 77,
+     "e0fca752-c266-4c10-b250-dbcf840a2b59": 68,
+     "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4": 59,
+     "422b6c5b-f260-40ad-9a44-53ca91dfa052": 74,
+     "28dd13ee-f209-44c1-97a3-9ba5682004e6": 78,
+     "ec832239-d9dd-4914-9619-02c5763a7213": 83,
+     "11b82c2c-47fa-4144-b009-80aeaf8c1e3e": 85,
+     "b5179084-8c61-44fa-82d1-d240bb12c1e0": 90,
+     "549cb7a8-3a29-419f-b3ce-3f81414a0c23": 81,
+     "233bcdea-96cc-478f-bd40-5a3474cf940b": 53,
+     "d05cb02c-cb5f-4135-ba08-0ff3271cde8b": 81,
+     "fdcc52da-294e-48c3-87ce-11fc9d7f73fe": 64,
+     "d4adae35-5da1-4905-9f10-e59839dfbcf5": 65,
+     "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4": 79,
+     "176a1615-5e54-403f-b29a-6e9ffdfd56ec": 69,
+     "99e9cfd0-8f58-4290-9f0d-4a4e2efcb33b": 74,
+     "3a756f34-b581-4a56-9986-402cb918a7ef": 52,
+     "71dc525f-0f9d-4ab5-bea4-f12a428494e8": 61,
+     "1b82efb8-d367-4182-82e5-9dd3c739cb88": 83,
+     "01ecd40b-d4de-4f71-8263-8c25511968bc": 68,
+     "152dce11-5c69-4ef1-b90c-90ab15dc01d9": 84,
+     "34420f44-58a6-4be7-ac3f-1f73f875f952": 55,
+     "eb2a7e71-d156-4e7c-ad11-c13a64e25d61": 58,
+     "97f56cc6-a56d-4c06-bb14-96acdad5cd7a": 86,
+     "ea7e074d-97f4-4ded-806c-dc6662137819": 74,
+     "231b7d0d-a0d5-46b6-877c-4105790d408f": 63
+    },
+    "n": 14
+   },
+   "view": "comparative",
+   "learnings": {
+    "mine": [],
+    "previous": null
+   },
+   "server_now": 1795027508.343
+  },
+  "error": null,
+  "meta": {
+   "api_version": "1",
+   "request_id": "306739e2-45f2-4fef-a1c4-363f087a7454"
+  }
+ }
+}
