@@ -31,6 +31,7 @@ import { DreamPanel } from "@/src/dream/DreamPanel";
 import { setJeeProfile } from "@/src/dream/need";
 import { useDreams } from "@/src/dream/store";
 import { useShortlist } from "@/src/rank/shortlist";
+import { useCompareColleges } from "@/src/rank/colleges";
 import { ACCENTS, AccentContext } from "@/src/rank/accent";
 
 const SAVED = "rank.form.v1";
@@ -69,6 +70,7 @@ export default function RankTab() {
   const [branchPicker, setBranchPicker] = useState(false);
   const [shortOpen, setShortOpen] = useState(false);
   const saved = useShortlist();
+  const colleges = useCompareColleges();
   const dreams = useDreams();
   const ticket = useRef(0);
   const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
@@ -159,13 +161,14 @@ export default function RankTab() {
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
         <View onLayout={e => { formTop.current = e.nativeEvent.layout.y + e.nativeEvent.layout.height + space.lg; }}>
-          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} dreams={dreams.dreams.length} />
+          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} colleges={colleges.length} dreams={dreams.dreams.length} />
         </View>
 
         {pane("rank", <RankPredictor onColleges={goColleges} />)}
         {pane("pct", <PercentileRank onColleges={goColleges} />)}
         {pane("target", <TargetMarks states={meta?.states ?? []} />)}
-        {pane("compare", <Compare onGoCollege={() => openTool("college")} />)}
+        {pane("compare", <Compare onGoCollege={() => openTool("college")}
+          profile={{ category: form.category, female: form.female, pwd: form.pwd, state: form.state }} />)}
         {pane("dream", <DreamPanel onAdd={() => tapTool("college")} />)}
         {pane("college", <>
         <Switch prefix="rank-exam" value={exam} onChange={setExam} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />

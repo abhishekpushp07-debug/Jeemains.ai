@@ -1,20 +1,41 @@
-// College compare (Rank tab tile): pick 2–3 saved colleges (any exam) and read them side by side — round-wise closing,
-// final and last year's cutoff, seats, fee and the saved chance. Everything stays text, so it costs nothing in app size.
+// College compare (Rank tab tile), two ways:
+// Colleges: search any college (JEE Main, COMEDK, BITS campus), add it, and read 2–3 colleges side by side (marks for
+// the easiest branch, Computer Science and the toughest branch, branches, seats, fee). Each college opens its full branch
+// list ("Saari branches dekho"), and any branch there can be added to the branch compare.
+// Branches: 2–3 college-branches (added from a College predictor card or a college's branch list) side by side: round-wise
+// closing, final and last year's cutoff, seats, fee and the chance. Everything stays text, so it costs nothing in app size.
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, useWindowDimensions, View } from "react-native";
 import { ErrorBox, Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, space } from "@/src/theme";
-import { compareSaved, CompareCol, fmt } from "./api";
-import { EXAM, SERIF, TAG } from "./tones";
-import { Strip, Tag } from "./controls";
+import { compareSaved, CompareCol, fmt, JeeProfileIn } from "./api";
+import { EXAM, TAG } from "./tones";
+import { RemoveButton, Strip, Switch, Tag } from "./controls";
 import { PdfButton } from "./PdfButton";
-import { Saved, savedPdfBody, toCompareItem, useShortlist } from "./shortlist";
+import { Saved, savedPdfBody, toCompareItem, toggleSaved, useShortlist } from "./shortlist";
 import { FormButton, useAccent } from "./accent";
+import { useCompareColleges } from "./colleges";
+import { CollegeCompare } from "./CompareColleges";
+import { Dash, TableRow, tableStyles } from "./compareKit";
 
 const MAX = 3;
+type Mode = "college" | "branch";
 
-export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
+export function Compare({ onGoCollege, profile }: { onGoCollege: () => void; profile: JeeProfileIn }) {
+  const saved = useShortlist(), colleges = useCompareColleges();
+  const [mode, setMode] = useState<Mode | null>(null);
+  // Until the student picks a side, branches open first only when they have branches and no colleges yet.
+  const shown: Mode = mode ?? (saved.length && !colleges.length ? "branch" : "college");
+  return <>
+    <Switch prefix="cmp-mode" value={shown} onChange={setMode}
+      items={[{ key: "college", label: `Colleges · ${colleges.length}` }, { key: "branch", label: `Branches · ${saved.length}` }]} />
+    <View style={[styles.mode, shown !== "college" && styles.hidden]}><CollegeCompare profile={profile} onBranches={() => setMode("branch")} /></View>
+    <View style={[styles.mode, shown !== "branch" && styles.hidden]}><BranchCompare onGoCollege={onGoCollege} onColleges={() => setMode("college")} /></View>
+  </>;
+}
+
+function BranchCompare({ onGoCollege, onColleges }: { onGoCollege: () => void; onColleges: () => void }) {
   const saved = useShortlist();
   const [pick, setPick] = useState<string[]>([]);
   const [hint, setHint] = useState<string | null>(null);
@@ -42,35 +63,43 @@ export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
   const toggle = (id: string) => {
     touched.current = true;
     if (pick.includes(id)) { setPick(pick.filter(x => x !== id)); setHint(null); return; }
-    if (pick.length >= MAX) { setHint("Ek baar mein 3 colleges tak. Pehle kisi ek ka tick hatao."); return; }
+    if (pick.length >= MAX) { setHint("Ek baar mein 3 branches tak. Pehle kisi ek ka tick hatao."); return; }
     setPick([...pick, id]); setHint(null);
   };
 
-  if (saved.length === 0) return <Strip form title="College compare" testID="cmp-empty">
-    <T size={13.5} color={colors.custom_softText}>Abhi koi college save nahi hai. College predictor mein kisi bhi college ke ☆ par tap karo, phir yahan 2–3 colleges side by side dekho.</T>
+  if (saved.length === 0) return <Strip form title="Branches compare" testID="cmp-empty">
+    <T size={13.5} color={colors.custom_softText}>Abhi koi branch nahi judi. College predictor ke kisi bhi card par “Add to Compare” dabao, ya Colleges mein kisi college ki “Saari branches dekho” se jodo. Phir yahan 2–3 branches side by side dekho.</T>
     <FormButton testID="cmp-go-college" label="College predictor kholo" onPress={onGoCollege} />
+    <Press testID="cmp-go-colleges" onPress={onColleges} style={styles.link} accessibilityRole="button">
+      <Glyph name="magnify" size={16} color={colors.custom_fSky} />
+      <T w="bold" size={13.5} color={colors.custom_fSky}>Ya college dhoondo, uski branches jodo</T>
+    </Press>
   </Strip>;
 
   return <>
-    <Strip form title="Saved colleges" testID="cmp-list" right={<T w="bold" size={12} color={a ? a.on : colors.muted}>{pick.length} / {MAX} chune</T>}>
+    <Strip form title="Saved branches" testID="cmp-list" right={<T w="bold" size={12} color={a ? a.on : colors.muted}>{pick.length} / {MAX} chune</T>}>
       {saved.map((s, i) => {
         const on = pick.includes(s.id);
-        return <Press key={s.id} testID={`cmp-item-${i}`} onPress={() => toggle(s.id)} accessibilityRole="checkbox" accessibilityState={{ checked: on }}
-          accessibilityLabel={`${s.title}, ${s.sub}`} scaleTo={0.99} style={styles.item}>
-          <View style={[styles.check, a && { borderColor: a.line }, on && styles.checkOn, on && a && { backgroundColor: a.ink, borderColor: a.ink }]}>
-            {on ? <Glyph name="check" size={14} color={a ? a.on : colors.onBrandPrimary} stroke={2.4} /> : null}
-          </View>
-          <View style={{ flex: 1, gap: 2 }}>
-            <View style={styles.line}>
-              <Tag label={EXAM[s.exam].label} ink={EXAM[s.exam].ink} soft={EXAM[s.exam].soft} />
-              <T w="bold" size={14} numberOfLines={1} style={{ flexShrink: 1 }}>{s.title}</T>
+        return <View key={s.id} style={styles.item}>
+          <Press testID={`cmp-item-${i}`} onPress={() => toggle(s.id)} accessibilityRole="checkbox" accessibilityState={{ checked: on }}
+            accessibilityLabel={`${s.title}, ${s.sub}`} scaleTo={0.99} style={styles.itemMain}>
+            <View style={[tableStyles.check, a && { borderColor: a.line }, on && styles.checkOn, on && a && { backgroundColor: a.ink, borderColor: a.ink }]}>
+              {on ? <Glyph name="check" size={14} color={a ? a.on : colors.onBrandPrimary} stroke={2.4} /> : null}
             </View>
-            <T size={12.5} color={colors.custom_softText} numberOfLines={1}>{s.sub}</T>
-          </View>
-        </Press>;
+            <View style={{ flex: 1, gap: 2 }}>
+              <View style={styles.line}>
+                <Tag label={EXAM[s.exam].label} ink={EXAM[s.exam].ink} soft={EXAM[s.exam].soft} />
+                <T w="bold" size={14} numberOfLines={1} style={{ flexShrink: 1 }}>{s.title}</T>
+              </View>
+              <T size={12.5} color={colors.custom_softText} numberOfLines={1}>{s.sub}</T>
+            </View>
+          </Press>
+          <RemoveButton testID={`cmp-item-${i}-remove`} label={`${s.title}, ${s.sub} compare se hatao`}
+            onPress={() => { touched.current = true; setPick(p => p.filter(x => x !== s.id)); toggleSaved(s); }} />
+        </View>;
       })}
       {hint ? <T testID="cmp-hint" w="semibold" size={12.5} color={colors.custom_flame}>{hint}</T> : null}
-      {pick.length < 2 ? <T testID="cmp-need" size={12.5} color={colors.muted}>Compare ke liye kam se kam 2 colleges chuno.</T> : null}
+      {pick.length < 2 ? <T testID="cmp-need" size={12.5} color={colors.muted}>Compare ke liye kam se kam 2 branches chuno.</T> : null}
     </Strip>
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="cmp-error" />
     {busy && !data ? <ActivityIndicator testID="cmp-loading" color={colors.muted} /> : null}
@@ -80,10 +109,7 @@ export function Compare({ onGoCollege }: { onGoCollege: () => void }) {
   </>;
 }
 
-const Dash = () => <T size={12} color={colors.custom_dim}>—</T>;
-
-// Every column fits on the phone (no sideways scroll): a full-width label line, then one row of 2–3 equal cells,
-// so each row grows to its tallest cell and the columns always stay level.
+// Branch vs branch.
 function CompareTable({ cols, saved, notes }: { cols: CompareCol[]; saved: Saved[]; notes: string[] }) {
   const tight = useWindowDimensions().width < 360 && cols.length === 3;
   // "Sabse aasaan" only when every closing is the same kind of number (same exam and same rank type).
@@ -92,17 +118,12 @@ function CompareTable({ cols, saved, notes }: { cols: CompareCol[]; saved: Saved
   const easiest = same ? finals.indexOf((cols[0].higher_is_harder ? Math.min : Math.max)(...finals)) : -1;
   const nRounds = Math.max(...cols.map(c => c.rounds?.length ?? 0));
   const feeNotes = [...new Set(cols.filter(c => !c.missing && !c.fee && c.fee_note).map(c => c.fee_note!))];
-  const row = (key: string, label: string | null, cell: (c: CompareCol, i: number) => React.ReactNode) => <View key={key}>
-    {label ? <T w="bold" size={10.5} color={colors.custom_eyebrow} style={styles.section}>{label.toUpperCase()}</T> : null}
-    <View testID={`cmp-row-${key}`} style={styles.tr}>
-      {cols.map((c, i) => <View key={i} style={[styles.td, tight && styles.tdTight, i > 0 && styles.tdLine, i === easiest && styles.best]}>
-        {c.missing && key !== "head" ? <Dash /> : cell(c, i)}
-      </View>)}
-    </View>
-  </View>;
+  const row = (key: string, label: string | null, cell: (c: CompareCol, i: number) => React.ReactNode) =>
+    <TableRow key={key} id={`cmp-row-${key}`} label={label} count={cols.length} tight={tight} best={easiest}
+      cell={i => cols[i].missing && key !== "head" ? <Dash /> : cell(cols[i], i)} />;
   const tag = (i: number) => { const t = saved[i]?.tag; return t ? <Tag label={TAG[t].label} ink={TAG[t].ink} soft={TAG[t].soft} /> : <Dash />; };
   return <Strip title="Side by side" testID="cmp-table">
-    <View style={styles.table}>
+    <View style={tableStyles.table}>
       {row("head", null, (c, i) => <View testID={`cmp-col-${i}`} style={{ gap: 3 }}>
         <Tag label={EXAM[c.exam].label} ink={EXAM[c.exam].ink} soft={EXAM[c.exam].soft} />
         {c.missing ? <T size={12} color={colors.error}>Ye seat 2026 ke data mein nahi mili. Isko dobara save karo.</T> : <>
@@ -112,13 +133,13 @@ function CompareTable({ cols, saved, notes }: { cols: CompareCol[]; saved: Saved
         </>}
       </View>)}
       {row("final", "Final cutoff", (c, i) => c.final ? <View style={{ gap: 1 }}>
-        <T testID={`cmp-final-${i}`} color={colors.custom_rankSilver} style={styles.serif}>{fmt(c.final.close)}</T>
+        <T testID={`cmp-final-${i}`} color={colors.custom_rankSilver} style={tableStyles.serif}>{fmt(c.final.close)}</T>
         <T size={11} color={colors.muted}>{c.final.label} · {c.rank_label}</T>
         {i === easiest ? <T testID={`cmp-easiest-${i}`} w="semibold" size={11} color={TAG.safe.ink}>sabse aasaan</T> : null}
       </View> : <Dash />)}
       {Array.from({ length: nRounds }, (_, r) => row(`r${r}`, r === 0 ? (cols.some(c => c.exam === "bitsat") ? "Round / saal-wise" : "Round-wise closing") : null, c => {
         const x = c.rounds?.[r];
-        return x ? <View style={styles.cellLine}>
+        return x ? <View style={tableStyles.cellLine}>
           <T size={11} color={colors.muted}>{x.label}</T>
           <T w="semibold" size={12.5} color={x.close ? colors.onSurface : colors.custom_dim}>{x.close ? fmt(x.close) : "—"}</T>
           {x.close && x.crl ? <T size={10} color={colors.muted}>CRL</T> : null}
@@ -141,18 +162,11 @@ function CompareTable({ cols, saved, notes }: { cols: CompareCol[]; saved: Saved
 }
 
 const styles = StyleSheet.create({
-  item: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingVertical: space.sm, borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
-  check: { width: 24, height: 24, borderRadius: 7, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" },
+  mode: { gap: space.lg },
+  hidden: { display: "none" },
+  item: { flexDirection: "row", alignItems: "center", gap: space.xs, borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
+  itemMain: { flex: 1, flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingVertical: space.sm },
   checkOn: { backgroundColor: colors.custom_rankBlood, borderColor: colors.custom_rankBlood },
   line: { flexDirection: "row", alignItems: "center", gap: space.sm },
-  table: { borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLine, overflow: "hidden" },
-  section: { letterSpacing: 1, paddingHorizontal: 8, paddingTop: 7, paddingBottom: 5, backgroundColor: colors.custom_cardRaised,
-    borderTopWidth: 1, borderTopColor: colors.custom_cardLine },
-  tr: { flexDirection: "row" },
-  td: { flex: 1, minWidth: 0, justifyContent: "center", paddingHorizontal: 8, paddingVertical: 7 },
-  tdTight: { paddingHorizontal: 6 },
-  tdLine: { borderLeftWidth: 1, borderLeftColor: colors.custom_cardLine },
-  best: { backgroundColor: colors.custom_rankBloodSoft },
-  cellLine: { flexDirection: "row", flexWrap: "wrap", alignItems: "baseline", columnGap: 6 },
-  serif: { fontFamily: SERIF, fontSize: 18, lineHeight: 23 },
+  link: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, minHeight: 44 },
 });

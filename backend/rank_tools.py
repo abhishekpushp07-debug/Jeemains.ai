@@ -57,8 +57,8 @@ def _rank_type(s):
     return f"{s.cat} rank"
 
 
-class TargetJeeIn(BaseModel):
-    inst: int = Field(ge=0)
+class Profile(BaseModel):
+    """The student's JEE seat profile (from the College predictor form)."""
     category: Category = "GEN"
     female: bool = False
     pwd: bool = False
@@ -70,6 +70,10 @@ class TargetJeeIn(BaseModel):
         if v and v not in rp.STATES:
             raise ValueError("unknown state")
         return v or None
+
+
+class TargetJeeIn(Profile):
+    inst: int = Field(ge=0)
 
 
 def target_jee(body: TargetJeeIn):
@@ -101,6 +105,7 @@ def target_jee(body: TargetJeeIn):
         pct, marks = _marks(need)
         p = rp.PROGS[prog]
         rows.append({"prog": prog, "branch": p["name"], "degree": p["degree"], "group": p["group"], "path": rp.path_label(s),
+                     "quota": s.quota, "gender": "F" if s.female else "N",
                      "rank_type": _rank_type(s), "cells": cells, "seats": JEE_SEATS.get(prog), "y25": s.y25,
                      "final": {"label": rounds[s.jround], "close": s.jclose, "crl": round(need), "pct": pct, "marks": marks}})
     return {"exam": "jee", "college": {"id": body.inst, "name": inst["name"], "short": inst["short"], "type": inst["type"],
@@ -155,7 +160,9 @@ def colleges():
            for i, c in enumerate(rp.INST) if i in rp.BY_INST]
     comedk = [{"code": code, "short": ck.INFO[code]["short"], "name": ck.INFO[code]["name"], "city": ck.INFO[code]["city"]}
               for code in sorted(ck.BY_COLLEGE, key=lambda c: ck.BY_COLLEGE[c][0].demand)]
-    return {"jee": sorted(jee, key=lambda c: (c["type"] != "NIT", c["short"])), "comedk": comedk}
+    bitsat = [{"campus": campus, "name": f"BITS {campus}", "programs": sum(r["campus"] == campus for r in rank_bitsat.ROWS)}
+              for campus in ("Pilani", "Goa", "Hyderabad") if any(r["campus"] == campus for r in rank_bitsat.ROWS)]
+    return {"jee": sorted(jee, key=lambda c: (c["type"] != "NIT", c["short"])), "comedk": comedk, "bitsat": bitsat}
 
 
 # ---------- compare ----------
@@ -227,6 +234,64 @@ def compare(body: CompareIn):
                       "JEE seats = JoSAA 2026 seat matrix (us branch ki saari quota-category seats). COMEDK seats = sirf GM."]}
 
 
+# ---------- college vs college ----------
+class CollegeRef(BaseModel):
+    exam: Literal["jee", "bitsat", "comedk"]
+    id: str = Field(min_length=1, max_length=40)  # JEE institute number, COMEDK code, BITS campus
+
+
+class CollegeCompareIn(Profile):
+    items: List[CollegeRef] = Field(min_length=1, max_length=3)
+
+
+CS = "Computer Science"
+
+
+def _college_one(it: CollegeRef, prof: Profile):
+    """One college as a whole: how many branches, the branch needing the fewest / most marks, its Computer Science seat,
+    seats and fee. Marks = normal paper, the same numbers as Target marks (JEE: the student's easiest seat path)."""
+    gone = {"exam": it.exam, "id": it.id, "missing": True}
+    if it.exam == "jee":
+        if not it.id.isdigit() or int(it.id) not in rp.BY_INST:
+            return gone
+        t = target_jee(TargetJeeIn(inst=int(it.id), **prof.model_dump(include={"category", "female", "pwd", "state"})))
+        c = t["college"]
+        sides = [{"branch": r["branch"] + (f" ({r['degree']})" if r["degree"] else ""), "close": r["final"]["close"], "label": r["final"]["label"],
+                  "rank_label": r["rank_type"], "marks": r["final"]["marks"]["normal"], "cs": r["group"] == CS} for r in t["rows"]]
+        head = {"title": c["short"], "name": c["name"], "place": f"{c['city']}, {c['state']}", "kind": c["type"]}
+        seats, seats_label, fees, fee_note = sum(r["seats"] or 0 for r in t["rows"]), "JoSAA seats (sab quota)", [], JEE_FEE_NOTE
+    elif it.exam == "comedk":
+        if it.id not in ck.BY_COLLEGE:
+            return gone
+        t = target_comedk(TargetComedkIn(code=it.id))
+        c = t["college"]
+        sides = [{"branch": r["course"], "close": r["final"]["close"], "label": r["final"]["label"], "rank_label": "COMEDK rank",
+                  "marks": r["final"]["mid"], "cs": r["group"] == CS} for r in t["rows"]]
+        head = {"title": c["short"], "name": c["name"], "place": c["city"], "kind": "COMEDK"}
+        seats, seats_label, fees, fee_note = sum(r["seats"] or 0 for r in t["rows"]), "GM seats", [r["fee"] for r in t["rows"] if r["fee"]], None
+    else:
+        rows = [r for r in rank_bitsat.ROWS if r["campus"] == it.id]
+        if not rows:
+            return gone
+        sides = [{"branch": r["program"], "close": r["cutoff"], "label": str(rank_bitsat.YEARS[-1]), "rank_label": f"score / {rank_bitsat.MAX}",
+                  "marks": r["cutoff"], "cs": CS in r["program"]} for r in rows]
+        head = {"title": rows[0]["college"], "name": rows[0]["college"], "place": it.id, "kind": "BITS"}
+        seats, seats_label, fees, fee_note = 0, None, [], "BITS program-wise fee aur seats bits-pilani.ac.in par."
+    by_marks = sorted(sides, key=lambda s: s["marks"])
+    cs = [s for s in sides if s["cs"]]
+    return {"exam": it.exam, "id": it.id, **head, "branches": len(sides), "seats": seats or None, "seats_label": seats_label,
+            "fee": [min(fees), max(fees)] if fees else None, "fee_note": fee_note,
+            "easiest": by_marks[0] if by_marks else None, "toughest": by_marks[-1] if by_marks else None,
+            "cs": max(cs, key=lambda s: s["marks"]) if cs else None, "cs_count": len(cs)}
+
+
+def compare_colleges(body: CollegeCompareIn):
+    return {"items": [_college_one(it, body) for it in body.items],
+            "notes": ["Marks = normal paper par 2026 ki final closing tak pahunchne ke liye lagbhag kitne marks. JEE: aapki category, state aur gender ka sabse aasaan seat raasta.",
+                      "Sabse aasaan branch = jisme sabse kam marks chahiye; sabse mushkil = sabse zyada.",
+                      "Cutoff har saal badalta hai; 10-15 marks extra ka target rakho."]}
+
+
 def register(router):
     router.post("/percentile")(percentile)
     router.post("/target/jee")(target_jee)
@@ -234,3 +299,4 @@ def register(router):
     router.get("/target/bitsat")(target_bitsat)
     router.get("/colleges")(colleges)
     router.post("/compare")(compare)
+    router.post("/compare/colleges")(compare_colleges)

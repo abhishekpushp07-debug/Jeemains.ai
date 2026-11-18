@@ -225,6 +225,9 @@ const dark = {
   custom_fSky: "#4CC3FF", custom_fSkySoft: "rgba(76,195,255,0.12)", custom_fSkyLine: "rgba(76,195,255,0.62)",
   custom_fViolet: "#7B2CBF", custom_fVioletText: "#B983FF", custom_fVioletSoft: "rgba(123,44,191,0.18)", custom_fVioletLine: "rgba(185,131,255,0.65)",
   custom_fOn: "#0B0B0F",
+  // Dream Progress Chart: grid hairlines and one colour per dream college's target line (matching its row number).
+  custom_dreamGrid: "rgba(255,255,255,0.09)", custom_dreamLine1: "#9DB6FF", custom_dreamLine2: "#5EF0D6", custom_dreamLine3: "#FFC94D",
+  custom_dreamLine4: "#FF8FC7", custom_dreamLine5: "#C6F36B",
   // Medal coins for list positions 1-3 (light, middle, deep, ink) and the soft wash of their rows.
   custom_medalGoldLight: "#FFF0C2", custom_medalGold: "#E7C26B", custom_medalGoldDeep: "#9A7426", custom_medalGoldInk: "#2A1D05",
   custom_medalSilverLight: "#FFFFFF", custom_medalSilver: "#CDD5E2", custom_medalSilverDeep: "#7C879B", custom_medalSilverInk: "#18202E",

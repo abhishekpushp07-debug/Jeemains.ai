@@ -19,7 +19,7 @@ export function HomeDream() {
   return <View style={styles.wrap}>
     {withDreams.length > 1 ? <Switch prefix="home-dream-exam" value={exam} onChange={setPicked}
       items={withDreams.map(e => ({ key: e, label: `${EXAM_NAME[e]} ${dreamsOf(s, e).length}/${MAX_DREAMS}` }))} /> : null}
-    <DreamMeter exam={exam} testID="home-dream" limit={3} onAdd={() => go("college")} onMore={() => go("dream")} />
+    <DreamMeter exam={exam} testID="home-dream" limit={3} chart="compact" onAdd={() => go("college")} onMore={() => go("dream")} />
   </View>;
 }
 

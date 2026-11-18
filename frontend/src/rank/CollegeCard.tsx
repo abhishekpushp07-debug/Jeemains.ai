@@ -1,27 +1,35 @@
 // One college in the College predictor lists (JEE, COMEDK, BITSAT) as its own card that reads like a button: the chance
 // colour down the left edge, medal + name, type and chance tags, the course, three stat boxes, and a footer saying what is
-// inside next to a bright "Cutoff dekho ›" button in the tool's colour. The whole card opens the details; the star saves it.
+// inside next to a bright "Cutoff dekho ›" button in the tool's colour. The whole card opens the details. Under it, two
+// clear buttons: "Add to Compare" (sky blue, the College compare colour) and "Dream college" (blood red).
 // Cards already opened say "Dekha". Until the student has opened any college once, the first card's button breathes and a
 // hint above the list says to tap.
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, useWindowDimensions, View } from "react-native";
 import Animated, { cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
-import { Press, T } from "@/src/components/ui";
+import { buzz, Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
 import { storage } from "@/src/utils/storage";
 import { useAccent } from "./accent";
-import { StarButton } from "./controls";
 import { Medal, MedalWash } from "./Medal";
 import type { DreamToggle } from "@/src/dream/useDreamToggle";
 
 export type Stat = { label: string; value: string; sub?: string; ink?: string; testID?: string };
 
-export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats, note, teaser, viewed, pulse, open, onPress, saved, onStar, a11y, children, dream }: {
+export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats, note, teaser, viewed, pulse, open, onPress, compared, onCompare, a11y, children, dream }: {
   testID: string; rank?: number; edge: string; title: string; tags?: React.ReactNode; sub: string; line?: string; stats: Stat[];
   note?: React.ReactNode; teaser: string; viewed?: boolean; pulse?: boolean; open?: boolean; onPress: () => void;
-  saved: boolean; onStar: () => void; a11y: string; children?: React.ReactNode; dream?: DreamToggle;
+  compared: boolean; onCompare: () => void; a11y: string; children?: React.ReactNode; dream?: DreamToggle;
 }) {
+  const [cmpMsg, setCmpMsg] = useState(false);
+  const narrow = useWindowDimensions().width < 360; // short button words on small phones, so nothing is cut
+  useEffect(() => {
+    if (!cmpMsg) return;
+    const t = setTimeout(() => setCmpMsg(false), 4500);
+    return () => clearTimeout(t);
+  }, [cmpMsg]);
+  const compare = () => { setCmpMsg(!compared); if (!compared) buzz("success"); onCompare(); };
   return <View style={[styles.card, rank && rank <= 3 ? styles.cardTop : null]}>
     <MedalWash n={rank} />
     <View style={[styles.edge, { backgroundColor: edge }]} />
@@ -29,8 +37,8 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
       accessibilityState={open === undefined ? undefined : { expanded: open }} style={styles.press}>
       <View style={styles.head}>
         {rank ? <Medal n={rank} testID={`${testID}-medal`} /> : null}
-        <View style={{ flex: 1, gap: 4, paddingRight: dream ? 44 : 0 }}>
-          <T w="bold" size={15} numberOfLines={2} style={styles.title}>{title}</T>
+        <View style={{ flex: 1, gap: 4 }}>
+          <T w="bold" size={15} numberOfLines={2}>{title}</T>
           {tags ? <View style={styles.tags}>{tags}</View> : null}
           <T size={13.5} color={colors.custom_softText} numberOfLines={2}>{sub}</T>
           {line ? <T size={11.5} color={colors.muted} numberOfLines={2}>{line}</T> : null}
@@ -44,7 +52,6 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
         </View>)}
       </View>
       {note}
-      {dream?.msg ? <T testID={`${testID}-dream-msg`} w="semibold" size={12} color={dream.on ? colors.custom_fBloodText : colors.custom_flame}>{dream.msg}</T> : null}
       {children}
       <View style={styles.foot}>
         <View style={styles.teaser}>
@@ -56,15 +63,26 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
         <Cta testID={`${testID}-cta`} open={open} pulse={pulse} />
       </View>
     </Press>
-    <View style={styles.star}>
-      <StarButton saved={saved} onPress={onStar} testID={`${testID}-star`} />
-      {dream ? <Press testID={`${testID}-dream`} onPress={dream.toggle} scaleTo={0.92} accessibilityRole="button" accessibilityState={{ selected: dream.on, busy: dream.busy }}
-        accessibilityLabel={dream.on ? `${title} dream se hatao` : `${title} ko dream college banao`}
-        style={[styles.dream, dream.on && { ...dreamGlow, backgroundColor: colors.custom_fBlood, borderColor: colors.custom_fBlood, shadowColor: colors.custom_fBlood }]}>
-        {dream.busy ? <ActivityIndicator size="small" color={colors.custom_fBloodText} />
-          : <Glyph name="bullseye-arrow" size={17} color={dream.on ? colors.onBrandPrimary : colors.custom_fBloodText} />}
-        <T w="heavy" size={7.5} color={dream.on ? colors.onBrandPrimary : colors.custom_fBloodText} style={{ letterSpacing: 0.6 }}>DREAM</T>
-      </Press> : null}
+    <View style={styles.actions}>
+      <View style={styles.actionRow}>
+        <Press testID={`${testID}-compare`} onPress={compare} scaleTo={0.96} accessibilityRole="button" accessibilityState={{ selected: compared }}
+          accessibilityLabel={compared ? `${a11y} compare list se hatao` : `${a11y} compare mein jodo`}
+          style={[styles.action, styles.cmp, compared && styles.cmpOn]}>
+          <Glyph name={compared ? "check" : "plus"} size={16} color={compared ? colors.custom_fOn : colors.custom_fSky} stroke={2.2} />
+          <T w="heavy" size={13} color={compared ? colors.custom_fOn : colors.custom_fSky} numberOfLines={1}>{compared ? "In Compare" : narrow ? "Compare" : "Add to Compare"}</T>
+        </Press>
+        {dream ? <Press testID={`${testID}-dream`} onPress={dream.toggle} scaleTo={0.96} accessibilityRole="button" accessibilityState={{ selected: dream.on, busy: dream.busy }}
+          accessibilityLabel={dream.on ? `${title} dream se hatao` : `${title} ko dream college banao`}
+          style={[styles.action, styles.dream, dream.on && { ...dreamGlow, backgroundColor: colors.custom_fBlood, borderColor: colors.custom_fBlood, shadowColor: colors.custom_fBlood }]}>
+          {dream.busy ? <ActivityIndicator size="small" color={colors.custom_fBloodText} />
+            : <Glyph name="bullseye-arrow" size={16} color={dream.on ? colors.onBrandPrimary : colors.custom_fBloodText} />}
+          <T w="heavy" size={13} color={dream.on ? colors.onBrandPrimary : colors.custom_fBloodText} numberOfLines={1}>{dream.on ? "Dream ✓" : narrow ? "Dream" : "Dream college"}</T>
+        </Press> : null}
+      </View>
+      {cmpMsg && compared ? <T testID={`${testID}-compare-msg`} w="semibold" size={12} color={colors.custom_fSky}>
+        Compare mein juda. College compare tile mein 2–3 ko side by side dekho.
+      </T> : null}
+      {dream?.msg ? <T testID={`${testID}-dream-msg`} w="semibold" size={12} color={dream.on ? colors.custom_fBloodText : colors.custom_flame}>{dream.msg}</T> : null}
     </View>
   </View>;
 }
@@ -139,7 +157,6 @@ const styles = StyleSheet.create({
   edge: { position: "absolute", left: 0, top: 0, bottom: 0, width: 4 },
   press: { gap: space.md, paddingVertical: 14, paddingLeft: 16, paddingRight: 14 },
   head: { flexDirection: "row", gap: space.sm, alignItems: "flex-start" },
-  title: { paddingRight: 34 }, // room for the star in the corner
   tags: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 6 },
   stats: { flexDirection: "row", borderRadius: 12, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_cardRaised, overflow: "hidden" },
   stat: { flex: 1, minWidth: 0, gap: 2, paddingVertical: 8, paddingHorizontal: 9 },
@@ -148,9 +165,13 @@ const styles = StyleSheet.create({
   foot: { flexDirection: "row", alignItems: "center", gap: space.sm, paddingTop: space.md, borderTopWidth: 1, borderTopColor: colors.custom_barLine },
   teaser: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 6 },
   cta: { flexDirection: "row", alignItems: "center", gap: 2, minHeight: 38, paddingLeft: 14, paddingRight: 10, borderRadius: radius.pill },
-  star: { position: "absolute", top: 4, right: 4, alignItems: "center", gap: 2 },
-  dream: { width: 44, height: 44, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_fBloodLine, backgroundColor: colors.custom_fBloodSoft,
-    alignItems: "center", justifyContent: "center", gap: 1 },
+  actions: { gap: space.sm, paddingLeft: 16, paddingRight: 14, paddingBottom: 14 },
+  actionRow: { flexDirection: "row", gap: space.sm },
+  action: { flex: 1, minWidth: 0, minHeight: 44, borderRadius: radius.pill, borderWidth: 1, flexDirection: "row", alignItems: "center", justifyContent: "center",
+    gap: 6, paddingHorizontal: 10 },
+  cmp: { borderColor: colors.custom_fSkyLine, backgroundColor: colors.custom_fSkySoft },
+  cmpOn: { borderColor: colors.custom_fSky, backgroundColor: colors.custom_fSky },
+  dream: { borderColor: colors.custom_fBloodLine, backgroundColor: colors.custom_fBloodSoft },
   hint: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.md, borderRadius: 18, borderWidth: 1,
     borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
   hintIcon: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center" },

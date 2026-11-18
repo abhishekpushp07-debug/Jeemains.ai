@@ -126,11 +126,12 @@ export const percentileRank = (body: { percentile: number; category: Category; p
 
 export type JeeCollege = { inst: number; short: string; name: string; type: Exclude<Segment, "all">; state: string; city: string };
 export type ComedkCollege = { code: string; short: string; name: string; city: string };
-export const getColleges = () => call<{ jee: JeeCollege[]; comedk: ComedkCollege[] }>("/colleges");
+export type BitsatCampusOpt = { campus: Exclude<Campus, "all">; name: string; programs: number };
+export const getColleges = () => call<{ jee: JeeCollege[]; comedk: ComedkCollege[]; bitsat: BitsatCampusOpt[] }>("/colleges");
 
 export type Marks3 = Record<Level, number>;
 export type JeeTargetRow = {
-  prog: number; branch: string; degree: string; group: string; path: string; rank_type: string; seats: number | null; y25: number | null;
+  prog: number; branch: string; degree: string; group: string; path: string; quota: string; gender: "N" | "F"; rank_type: string; seats: number | null; y25: number | null;
   cells: { label: string; close: number | null; crl?: number; pct?: number; marks?: Marks3; unpublished?: boolean }[];
   final: { label: string; close: number; crl: number; pct: number; marks: Marks3 };
 };
@@ -157,6 +158,17 @@ export type CompareCol = {
   higher_is_harder?: boolean;
 };
 export const compareSaved = (items: CompareItem[]) => call<{ items: CompareCol[]; notes: string[] }>("/compare", { items });
+
+/** College vs college: a whole college's branches summed up (marks = normal paper; JEE for the student's profile). */
+export type JeeProfileIn = { category: Category; female: boolean; pwd: boolean; state: string | null };
+export type CollegeSide = { branch: string; close: number; label: string; rank_label: string; marks: number; cs: boolean };
+export type CollegeCol = {
+  exam: "jee" | "bitsat" | "comedk"; id: string; missing?: boolean; title?: string; name?: string; place?: string; kind?: string;
+  branches?: number; seats?: number | null; seats_label?: string | null; fee?: [number, number] | null; fee_note?: string | null;
+  easiest?: CollegeSide | null; toughest?: CollegeSide | null; cs?: CollegeSide | null; cs_count?: number;
+};
+export const compareColleges = (items: { exam: "jee" | "bitsat" | "comedk"; id: string }[], profile: JeeProfileIn) =>
+  call<{ items: CollegeCol[]; notes: string[] }>("/compare/colleges", { items, ...profile });
 
 /** Indian grouping: 107693 -> 1,07,693. */
 export function fmt(n: number): string {

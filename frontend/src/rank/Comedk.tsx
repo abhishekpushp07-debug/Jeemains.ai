@@ -218,7 +218,7 @@ function ComedkRow({ item, onPress, saved, testID, rank, viewed, pulse }: { item
     ]}
     note={item.gap ? <T w="semibold" size={12} color={colors.custom_flame}>{item.gap}</T> : null}
     teaser="Har round ka cutoff · fee · seats" viewed={viewed} pulse={pulse} onPress={onPress}
-    saved={saved} onStar={() => toggleSaved(comedkSaved(item))} />;
+    compared={saved} onCompare={() => toggleSaved(comedkSaved(item))} />;
 }
 
 const styles = StyleSheet.create({

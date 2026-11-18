@@ -42,7 +42,7 @@ export function SeatRow({ seat, onPress, testID, rank, viewed, pulse }: { seat: 
     ]}
     note={seat.gap ? <T w="semibold" size={12} color={colors.custom_flame}>{seat.gap}</T> : null}
     teaser="Har round ka cutoff + sab branches" viewed={viewed} pulse={pulse} onPress={onPress}
-    saved={saved} onStar={() => toggleSaved(jeeSaved(seat))} />;
+    compared={saved} onCompare={() => toggleSaved(jeeSaved(seat))} />;
 }
 
 export function SeatList({ data, segment, onSegment, page, onPage, branchText, onBranch, onOpen, busy, tools }: {

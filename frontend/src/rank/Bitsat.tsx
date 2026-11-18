@@ -118,7 +118,7 @@ function BitsatList({ data, saved }: { data: BitsatOut; saved: Set<string> }) {
   const views = useCardViews();
   const tap = (id: string) => { if (openId !== id) views.mark(id); setOpenId(openId === id ? null : id); };
   const row = (b: BitsatItem, testID: string, rank?: number, first?: boolean) => <BitsatRow key={`${testID}-${b.id}`} item={b} score={data.result.score} years={data.years} testID={testID} rank={rank}
-    open={openId === b.id} viewed={views.viewed.has(b.id)} pulse={first && views.pulse} onPress={() => tap(b.id)} saved={saved.has(`bitsat-${b.id}`)} onStar={() => toggleSaved(bitsatSaved(b))} />;
+    open={openId === b.id} viewed={views.viewed.has(b.id)} pulse={first && views.pulse} onPress={() => tap(b.id)} saved={saved.has(`bitsat-${b.id}`)} onCompare={() => toggleSaved(bitsatSaved(b))} />;
   return <>
     {data.items.length === 0 ? <T testID="bitsat-list-empty" size={13.5} color={colors.muted}>Is score par is filter mein koi program 2026 cutoff ke paas nahi. Campus ya degree badal kar dekho.</T>
       : <>
@@ -137,8 +137,8 @@ function BitsatList({ data, saved }: { data: BitsatOut; saved: Set<string> }) {
   </>;
 }
 
-function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID, rank, viewed, pulse }: {
-  item: BitsatItem; score: number; years: number[]; open: boolean; onPress: () => void; saved: boolean; onStar: () => void; testID: string; rank?: number;
+function BitsatRow({ item, score, years, open, onPress, saved, onCompare, testID, rank, viewed, pulse }: {
+  item: BitsatItem; score: number; years: number[]; open: boolean; onPress: () => void; saved: boolean; onCompare: () => void; testID: string; rank?: number;
   viewed?: boolean; pulse?: boolean;
 }) {
   const k = CAMPUS[item.campus];
@@ -158,7 +158,7 @@ function BitsatRow({ item, score, years, open, onPress, saved, onStar, testID, r
       item.gap > 0 ? { label: "AAPKA", value: `+${item.gap} chahiye`, sub: `score ${score}`, ink: colors.custom_flame }
         : { label: "AAPKA", value: `${score - item.cutoff} upar`, sub: `score ${score}`, ink: colors.success },
     ]}
-    teaser="2022 se 2026 tak, 5 saal ke cutoff" viewed={viewed} pulse={pulse} onPress={onPress} saved={saved} onStar={onStar}>
+    teaser="2022 se 2026 tak, 5 saal ke cutoff" viewed={viewed} pulse={pulse} onPress={onPress} compared={saved} onCompare={onCompare}>
     {open ? <View testID={`${testID}-history`} style={styles.years}>
       {years.map((y, i) => <View key={y} style={[styles.year, i === years.length - 1 && styles.yearNow]}>
         <T w="bold" size={10.5} color={colors.custom_eyebrow}>{y}</T>

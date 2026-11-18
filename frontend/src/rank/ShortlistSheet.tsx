@@ -1,4 +1,4 @@
-// "Meri shortlist": every saved JEE seat and BITS program in one sheet, with remove, PDF and WhatsApp share.
+// "Meri shortlist": every college-branch added to Compare (JEE, COMEDK, BITS) in one sheet, with remove, PDF and WhatsApp share.
 // WhatsApp sends a Shortlist card photo (drawn off screen, in the Rank card's black metal) with a short caption.
 import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -9,7 +9,7 @@ import { shareCard } from "@/src/shareCard";
 import { useShareLink } from "@/src/mission/stats";
 import type { Seat } from "./api";
 import { EXAM, SERIF, TAG } from "./tones";
-import { StarButton, Tag } from "./controls";
+import { RemoveButton, Tag } from "./controls";
 import { shareShortlist } from "./share";
 import { PdfButton } from "./PdfButton";
 import { Eyebrow, MetalCard } from "./MetalCard";
@@ -29,7 +29,7 @@ export function ShortlistSheet({ visible, onClose, onOpen }: { visible: boolean;
   };
   return <DSheet visible={visible} onClose={onClose} title="Meri shortlist" testID="rank-shortlist">
     {list.length === 0 ? <T testID="rank-shortlist-empty" size={13.5} color={colors.muted}>
-      Abhi kuch save nahi kiya. Kisi bhi college-branch ke star par tap karo, wo yahan aa jayega.
+      Abhi kuch save nahi kiya. Kisi bhi college card par “Add to Compare” dabao, wo yahan aa jayega.
     </T> : null}
     {list.map((s, i) => {
       const exam = EXAM[s.exam];
@@ -46,7 +46,7 @@ export function ShortlistSheet({ visible, onClose, onOpen }: { visible: boolean;
           </View>
           {s.tag ? <Tag label={TAG[s.tag].label} ink={TAG[s.tag].ink} soft={TAG[s.tag].soft} /> : null}
         </Row>
-        <StarButton saved onPress={() => toggleSaved(s)} testID={`rank-shortlist-remove-${i}`} />
+        <RemoveButton onPress={() => toggleSaved(s)} testID={`rank-shortlist-remove-${i}`} label={`${s.title} shortlist se hatao`} />
       </View>;
     })}
     {list.length ? <Pill testID="rank-shortlist-share" icon="whatsapp" label="Shortlist card WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onSurfaceInverse}

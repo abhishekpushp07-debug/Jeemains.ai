@@ -17,7 +17,7 @@ export function DreamPanel({ onAdd }: { onAdd: () => void }) {
   return <View testID="dream-panel" style={styles.wrap}>
     <Switch prefix="dream-exam" value={shown} onChange={setExam}
       items={EXAMS.map(e => ({ key: e, label: `${EXAM_NAME[e]} ${dreamsOf(s, e).length}/${MAX_DREAMS}` }))} />
-    <DreamMeter exam={shown} testID="dream-meter" editable onAdd={onAdd} />
+    <DreamMeter exam={shown} testID="dream-meter" editable chart="full" onAdd={onAdd} />
   </View>;
 }
 

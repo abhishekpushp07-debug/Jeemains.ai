@@ -69,7 +69,7 @@ function Analysis({ r, id }: { r: any; id: string }) {
         <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
         <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtClock(s.total_seconds)} used` : ""}</T>
       </LinearGradient>
-      {dream ? <DreamMeter exam={dream} testID="result-dream" mockId={id}
+      {dream ? <DreamMeter exam={dream} testID="result-dream" mockId={id} chart="full"
         onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} /> : null}
       <View style={{ flexDirection: "row", gap: space.sm }}>
         <LearningStat testID="result-correct" label="Correct" value={s.correct} tone="completed" />

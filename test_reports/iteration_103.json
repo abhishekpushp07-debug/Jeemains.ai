@@ -1,0 +1,30 @@
+{
+  "summary": "Iter103 frontend-only retest of the iteration_102 UI fixes, using the QA learner. There was no new sign-in: the saved /tmp/iter102_sess.json session was reused through add_init_script. FIX 1 (chart tip bar) PASS: '<meter>-chart-tip' is now a bar above the SVG on home-dream-chart, dream-meter-chart and result-dream-chart. At 390 and 320 none of the target labels (-target-0..4) overlap it. Tapping -point-N updates the title, date and 'mock k / n' (for example '27 Oct · mock 3 / 6'). On the result page the last point shows 'is mock' and 'IS MOCK'. FIX 2 (320px) PASS: rank-seat-N-compare / -dream read 'Compare' / 'Dream' at 320px (124x44, not clipped) and 'Add to Compare' / 'Dream college' at 390px (159x44). BEST / AVG / RAFTAAR and their sub-labels are not clipped. dream-meter-row-N-eta shows its full text on 3 lines (scrollHeight equals clientHeight) and the target line fits in 2 lines. The 3-college table (BITS Pilani / R V College / NIT Jalandhar) at 320px has no mid-word breaks: 'Biotechnology' is whole, and only the URL 'bits-pilani.ac.in' wraps at its hyphen. No text cell is clipped and there is no horizontal overflow. FIX 3 (ETA wording) FAIL: Home and the Rank Dream panel show RAFTAAR '+0.5', but every ETA still reads 'Score ruka hai. 10 mock mein ... +21 chahiye.' Regression PASS: the card compare toggle gives 'In Compare', the tile shows '1 branch' and 'Shortlist 1', and toggling again reverts. The college sheet adds colleges (newest first, auto-ticked) and the table renders. See branches lists 15 branches; tapping + turns it to a check and shows 'go' ('1 branch compare mein'). 'go' leads to cmp-list, and remove leads to cmp-empty. Everything was restored: the compare list is local-only and is empty again. No dream writes or academic actions were made, and the dreams stay at 5/5 JEE. Deprecated packages detected: none.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "DreamMeter etaOf", "issue": "With the QA account's speed the ETA should read 'Raftaar dheemi (+0.5/mock)...', but it reads 'Score ruka hai...'. RCA: the last 5 JEE scores are [-2, 0, 0, 5, -2], and their least-squares slope is exactly 0.5 (num 5 / den 10). DreamMeter.tsx:28 uses the strict test `speed > 0.5`, so 0.5 falls through to 'Score ruka hai' even though RAFTAAR shows '+0.5'. Fix: compare the rounded value, e.g. `s > 0 ? 'Raftaar dheemi (+${s}/mock)' : s < 0 ? 'Score gir raha hai' : 'Score ruka hai'`, or use `speed >= 0.5`. Related: the Result page has speed +0.4 and also reads 'Score ruka hai', which still contradicts '+0.4' on screen. Using the rounded `s > 0` fixes both. The RAFTAAR colour test in ProgressChart.tsx:81 (`sp > 0.5`) should use the same threshold for consistency.", "testID": "home-dream-row-N-eta / dream-meter-row-N-eta / result-dream-row-N-eta", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Dream meter @320px (minor)", "issues": ["The tip bar title is ellipsized ('JEE Main PYQ · 22 Jan …'), so the shift is lost. Consider 2 lines, or a shorter title, on narrow screens.", "Dream row college and branch names are cut at 320 in the editable Rank panel ('MNIT Jai…', 'Artificial Int…') because of the 206 MARKS DOOR block and the close button. The college name could wrap to 2 lines."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/tmp_ui_smoke/i103_home_390.jpeg", "/app/test_reports/tmp_ui_smoke/i103_home_320.jpeg", "/app/test_reports/tmp_ui_smoke/i103_result_390.jpeg", "/app/test_reports/tmp_ui_smoke/i103_result_320.jpeg", "/app/test_reports/tmp_ui_smoke/i103_table_320.jpeg", "/app/test_reports/tmp_ui_smoke/i103_cards_320.jpeg", "/app/test_reports/tmp_ui_smoke/i103_branches_390.jpeg"],
+  "action_items": [
+    "DreamMeter.tsx:28: base the ETA wording on the rounded speed `s` (s > 0 gives 'Raftaar dheemi (+s/mock)', s < 0 gives 'Score gir raha hai', 0 gives 'Score ruka hai'), so that a speed of exactly +0.5 (the QA account) or +0.4 (the result page) no longer says 'ruka'.",
+    "Optional at 320px: let the tip title and the dream-row college name wrap to 2 lines instead of being ellipsized."
+  ],
+  "critical_code_review_comments": [
+    "DreamMeter.tsx:26-28: the thresholds (k is computed only when speed >= 1, and the 'dheemi' wording needs speed > 0.5) use the raw float, while the UI shows the rounded value. Boundary values such as 0.5 produce wording that contradicts the number on screen.",
+    "backend/tests/iter102_dream_read.py printed 0 dreams and 0 mocks even though the UI shows 5 dreams and 6 mocks. The helper's endpoint or token key is probably stale, so don't rely on it."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "~90% (fixes 1 and 2 pass, fix 3 fails, regression passes)"},
+  "seed_data_creation": "None. The local compare list was used temporarily and then emptied. No dream or academic writes were made.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Session: /tmp/iter102_sess.json (jl_sid/jl_user) via add_init_script still works. On /rank, wait about 3s before clicking rank-tool-*, and retry the click if needed. In the college sheet, tap the exam tabs with dispatch_event('click'), and select rows as [data-testid^=cmp-college-sheet-<exam>-] (exclude -backdrop/-close). The compare list is in localStorage, so a fresh context starts empty. QA JEE last-5 scores [-2,0,0,5,-2] give a slope of exactly 0.5.",
+  "rca_of_issue": "ETA wording: speedOf gives exactly 0.5 and etaOf checks `speed > 0.5`, so the text says 'Score ruka hai'. Reproduce: Home or Rank > Dream panel with the QA account and read home-dream-row-0-eta."
+}

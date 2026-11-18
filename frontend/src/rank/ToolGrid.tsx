@@ -23,9 +23,10 @@ const ROWS: Tile[][] = [
 /** Each tool's own colour. */
 const TOOL_JEWEL: Record<Tool, Jewel> = { rank: "maroon", pct: "indigo", target: "teal", college: "blood", compare: "champ", dream: "violet" };
 
-export function ToolGrid({ value, onChange, saved, dreams }: { value: Tool; onChange: (t: Tool) => void; saved: number; dreams: number }) {
+export function ToolGrid({ value, onChange, saved, colleges, dreams }: { value: Tool; onChange: (t: Tool) => void; saved: number; colleges: number; dreams: number }) {
   const narrow = useWindowDimensions().width < 360;
-  const valueOf = (t: Tile) => t.key === "compare" && saved ? `${saved} saved` : t.key === "dream" && dreams ? `${dreams} dream chune` : t.value;
+  const compare = [colleges ? `${colleges} college` : null, saved ? `${saved} branch` : null].filter(Boolean).join(" · ");
+  const valueOf = (t: Tile) => t.key === "compare" && compare ? compare : t.key === "dream" && dreams ? `${dreams} dream chune` : t.value;
   return <View accessibilityRole="tablist" style={styles.grid}>
     {ROWS.map((row, r) => <View key={r} style={styles.row}>
       {row.map(t => <ToolTile key={t.key} t={t} on={t.key === value} narrow={narrow} onPress={() => onChange(t.key)} value={valueOf(t)} />)}

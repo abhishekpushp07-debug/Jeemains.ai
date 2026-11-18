@@ -1,9 +1,9 @@
-// Small text-only building blocks of the dark Rank tab: section panel, switch, colour tag, toggle chip, star and a list picker.
+// Small text-only building blocks of the dark Rank tab: section panel, switch, colour tag, toggle chip, remove button and a list picker.
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated, { cancelAnimation, Easing, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
-import { Icon, Press, T } from "@/src/components/ui";
+import { Press, T } from "@/src/components/ui";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
@@ -75,10 +75,10 @@ export function Toggle({ label, on, onPress, ink = colors.onSurface, soft, testI
   </Press>;
 }
 
-/** Shortlist star: outline when not saved, gold when saved. */
-export function StarButton({ saved, onPress, testID }: { saved: boolean; onPress: () => void; testID?: string }) {
-  return <Press testID={testID} onPress={onPress} accessibilityLabel={saved ? "Shortlist se hatao" : "Shortlist mein daalo"} accessibilityState={{ selected: saved }} scaleTo={0.9} style={styles.star}>
-    <Icon name={saved ? "star" : "star-outline"} size={22} color={saved ? colors.custom_gold : colors.custom_dim} />
+/** A 44×44 "×" that takes a row off a list. */
+export function RemoveButton({ onPress, testID, label }: { onPress: () => void; testID?: string; label: string }) {
+  return <Press testID={testID} onPress={onPress} accessibilityLabel={label} scaleTo={0.9} style={styles.remove}>
+    <Glyph name="close" size={18} color={colors.custom_dim} />
   </Press>;
 }
 
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   switchOn: { backgroundColor: colors.custom_cardRaised, borderColor: colors.custom_rankSilverLine },
   tag: { borderRadius: radius.pill, borderWidth: 1, paddingHorizontal: 8, paddingVertical: 2, alignSelf: "flex-start" },
   toggle: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, flexDirection: "row", alignItems: "center", gap: 4 },
-  star: { width: 44, height: 44, alignItems: "center", justifyContent: "center" },
+  remove: { width: 44, height: 44, alignItems: "center", justifyContent: "center" },
   summary: { minHeight: 52, borderRadius: 26, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, paddingHorizontal: space.lg, paddingVertical: space.sm, flexDirection: "row", alignItems: "center", gap: space.md },
   row: { minHeight: 48, flexDirection: "row", alignItems: "center", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
   done: { minHeight: 50, borderRadius: radius.pill, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", marginTop: space.sm },

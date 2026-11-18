@@ -115,7 +115,7 @@ export function CardActions({ notes, onShare, saved, onShortlist, prefix }: {
     </View>
     <View style={styles.actions}>
       <Pill testID={`${prefix}-share`} size="sm" icon="whatsapp" label="WhatsApp" accessibilityLabel="Card WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onBrandPrimary} busy={busy} onPress={share} style={{ flex: 1 }} />
-      {onShortlist ? <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="star" label={`Shortlist ${saved ?? 0}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} /> : null}
+      {onShortlist ? <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="playlist-check" label={`Shortlist ${saved ?? 0}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} /> : null}
     </View>
   </View>;
 }

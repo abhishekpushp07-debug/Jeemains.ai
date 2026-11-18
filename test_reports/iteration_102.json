@@ -1,0 +1,40 @@
+{
+  "summary": "Iter102: tested Add to Compare on predictor cards, college vs college compare with branch lists, Branches mode, and the Dream Progress Chart (Rank Dream panel, Home, Result). Used the QA learner with 3 sign-ins, the session was reused through a 0600 temp file. Backend: 9/9 pytest pass (4 existing localhost tests + 5 new public-URL tests). Frontend: all requested flows work at 390px and 320px with no horizontal overflow. The JEE/BITSAT/COMEDK cards have no star. '<card>-compare' (44px) switches 'Add to Compare' -> 'In Compare' and shows the compare-msg, and the shortlist count goes up. '<card>-dream' (44px) switches 'Dream college' -> 'Dream ✓'. On JEE, where the account already has 5/5 dreams, it shows the 'full' message and makes no write. I pinned and then unpinned one BITSAT dream, and the server dreams are back to the original 5 JEE. Compare tile reads 'N college · M branch'. The college sheet works for all 3 exams: search for jalandhar / R V / Pilani, tap a row to add it and close the sheet, newest is first, up to 3 are auto-ticked, '-on' Juda shows on added rows and tapping again removes. The table has all 7 rows. 'best' appears only when every college is the same exam. The 4th tick shows the hint, remove works, and switching to SC in the predictor form changes JEE marks (150/132 -> 107/97). See branches shows 15 JEE branches with marks; COMEDK and BITSAT lists also work. + turns into a check, and 'go' switches to Branches mode where 2 branches show real closings (15,141 / 13,411), no 'nahi mili'. cmp-item remove leads to cmp-empty; cmp-go-college and cmp-go-colleges both work; cmp-pdf is present. Dream chart: the account has 9 mocks but only 6 are JEE (3 are BITSAT), so the chart correctly shows 6 points, not 9. Best/avg/speed (5 / 1 / +0.5) match the data. Tapping a point updates the tooltip. Home is compact with 3 targets. Result shows 5 points and 'IS MOCK'. Main problem: the default tooltip sits on top of the dream target labels on all three screens. At 320px several labels are cut short. Deprecated packages detected: none.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rank/target/jee", "issue": "Flaky: returned 502 once from the ingress during the first See-branches run, so the UI showed 'Rank abhi load nahi hua' (the Retry box worked). Could not reproduce it with 24 parallel curls or in later UI runs. Around that time uvicorn --reload had restarted the backend several times because files in backend/tests/ changed. That only happens in dev, but a reload watch that includes tests/ can briefly drop requests."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ProgressChart tooltip", "issue": "The default tooltip (newest point, at the right edge, with a low score) covers the dream target labels in the right-hand label area. Home: labels 1 and 2 (both 204) are hidden at 390 and 320. Rank Dream panel: label 2 is hidden. Result: label 1 overlaps. Cause: ProgressChart.tsx:70 limits tipLeft to w - tipW, which includes the R=46 label area, and tipTop = py-58 puts the tooltip in the upper band where the target lines and labels are. Fix: limit the left edge to L+plotW-tipW, and/or move the tooltip down or to the left when it would overlap a label (or place it below the point when the targets are above).", "testID": "home-dream-chart-tip / dream-meter-chart-tip / result-dream-chart-tip", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "College predictor cards @320px", "issues": ["Action buttons are ellipsized: 'Add to Co…' and 'Dream colle…' (rank-seat-N-compare / -dream, bitsat-item-N-*). Nothing overflows, but the label is cut. Use a shorter label or a smaller font below 360px, or allow the text to shrink."]},
+      {"screen": "Dream chart / meter @320px", "issues": ["Stat labels are cut short: 'LAST 3 A…' and 'marks / mo…'.", "dream-meter-row-N-eta is cut at 2 lines ('…har mock +21 …') and the key word 'chahiye' is lost. The target line 'Target 204 (192–216) / 300 · R5 closing…' and the branch name are also cut.", "The tooltip title is always ellipsized ('JEE Main PYQ · 22 Jan…') because tipW is fixed at 132."]},
+      {"screen": "College vs college table @320px with 3 columns", "issues": ["Words break in the middle ('Biotechnolog/y'). 'R V College of Engineeri…' is cut at 3 lines. 'COMEDK ran…' is cut."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_iter102_college_compare_public.py", "/app/backend/tests/test_iter102_college_compare.py", "/app/backend/tests/iter102_dream_read.py", "/app/test_reports/pytest/iter102_public.xml"],
+  "action_items": [
+    "ProgressChart.tsx:70: keep the tooltip out of the target-label area (right gutter) and the dashed target band so it never hides the dream numbers (Home, Rank Dream panel, Result).",
+    "At 320px: shorten or shrink the card action labels ('Add to Compare' / 'Dream college'), the chart stat labels, and the dream row ETA text, which is currently cut at 2 lines.",
+    "Optional: DreamMeter.tsx:26-28 etaOf treats any speed from 0 to 1 as 'Score abhi ruka hai'. With RAFTAAR showing +0.5 this reads as a contradiction, and a negative speed (score going down) also says 'ruka'. Consider different wording for a positive-slow speed and for a falling one.",
+    "Optional: only one college's 'Saari branches' list can be open at a time, so opening another closes the first one along with its 'N branch compare mein' button. This may be intentional; just confirm it is the UX you want."
+  ],
+  "critical_code_review_comments": [
+    "CompareColleges.tsx:84: add() reads the 'pick' state captured when the function was created (pick.length) but then updates with setPick(p => ...). Harmless today, but use the functional form for both the check and the update.",
+    "ProgressChart.tsx:54: scaleOf runs before the n=0 early return. With no mocks and no dreams, Math.min()/Math.max() give ±Infinity and NaN. The result is not used, so it does not crash, but it is better to skip it.",
+    "CollegeBranches refetches targetBitsat() (the whole BITSAT list) every time a BITSAT college's branches open. The same caching used for options (cached) would avoid repeat calls."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter102_college_compare_public.py (new)", "/app/backend/tests/iter102_dream_read.py (new, read-only helper)"],
+  "success_rate": {"backend": "100% (9/9)", "frontend": "~92% (all functional flows pass; tooltip/label overlap and truncation at 320px)"},
+  "seed_data_creation": "None. One BITSAT dream was pinned and then unpinned through the UI, and the server list was checked afterwards: the original 5 JEE dreams are restored. The compare and shortlist lists are local to the browser context. No academic writes.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Several setup facts for the next run. /rank needs sign-in (it redirects to /entry); the session is saved to /tmp/iter102_sess.json (0600, jl_sid/jl_user) and restored with add_init_script. Each COMEDK pane has its own shortlist button: comedk-shortlist-open, not rank-shortlist-open. The QA account has 6 JEE mocks plus 3 BITSAT (9 in total) and 5/5 JEE dreams (204, 204, 205, 208, 222). page.fill works on rank-marks-input, bitsat-score-input, comedk-marks-input and cmp-college-sheet-search. Only one college branch list is open at a time. backend/tests/iter102_dream_read.py prints the account's dreams and mocks, read-only. Creating files in backend/tests triggers a uvicorn reload.",
+  "rca_of_issue": "Tooltip overlap: tipLeft = min(max(0, px - tipW/2), w - tipW). The newest point is at x = L + plotW, so the tooltip is pushed to the right edge, which is the R=46px target-label area. With low scores (-2..5), tipTop = py - 58 lands at the height of the target labels that were pushed down near the bottom (labels at 204-222 are spaced GAP=15 apart). Seen on Home (labels 0 and 1), the Rank panel (label 1) and Result (label 1), at both 390 and 320."
+}

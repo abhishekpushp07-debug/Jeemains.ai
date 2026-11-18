@@ -793,3 +793,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Paper submit: waits for saves already on the way; auto-submit holds back up to ~40 s for answers unsent because of the network.
 - Touch targets 44×44 (dream remove X, card DREAM button). Backend tests: 25 pass.
 - Next for user: tap Publish to make a fresh Android build (APK/AAB) — the old build failed because of the minify setting.
+
+## June 2026 — College/Branch Compare + Dream Progress Chart (DONE)
+- "+ Add to Compare" button replaces the star on college cards; branch compare from "See branches".
+- Dream Progress Chart (SVG line graph of full mocks vs dream targets) on Home Dream card, Rank Dream panel and Mock Result.
+- ETA line wording follows the rounded speed shown on screen (fixed "Score ruka hai" at +0.5). Verified on Home with the QA account.
+- Target reached: happy message "🎉 Target marks pahunch gaye! Ab har mock mein isse upar raho, seat pakki karo." and "Bilkul target par" when exactly on target.
+- Next: user to Publish for a fresh APK.
