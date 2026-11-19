@@ -194,7 +194,7 @@ The two endpoints are the same. The PDF content changed (the server makes it; th
 
 - Page 1 is a cover: paper, exam, date, the display name when set, Score ring, Rank, Percentile, Accuracy, Time, the verdict line, the marks bar and "Is report mein" (contents).
 - Then the 8 sections with their charts (class Score chart, Speed-Accuracy map, time blocks, pace lines), "Is test se meri 3 seekh", "Tags ke matlab", and the Question Journey as visit boxes per time block.
-- A4, PDF 1.7, not encrypted, standard Helvetica only. For the 30-question sample: 8 pages, about 220 KB (6 pages without a time record).
+- A4, PDF 1.7, not encrypted. Roman text uses standard Helvetica. A display name, note or paper title in Hindi or another script is printed in that script with an embedded font (the scorecard PNG too). For the 30-question sample: 8 pages, about 220 KB (6 pages without a time record).
 - File name is unchanged: `JEELIVE_<paper>_<date>.pdf`.
 
 ---

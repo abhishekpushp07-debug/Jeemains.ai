@@ -136,6 +136,13 @@ async def main():
     if r.status_code == 200:
         Path(OUT + '/share.png').write_bytes(r.content)
     check('scorecard image', r.status_code == 200 and r.content[:4] == b'\x89PNG', r.status_code)
+    from tejas.analysis_pdf import render, share_png
+    import fitz
+    named = {**an3, 'student': {'name': 'अर्जुन शर्मा'}}
+    doc = fitz.open(stream=render(named, {'mine': ['Easy सवाल पहले'], 'previous': None}), filetype='pdf')
+    fonts = {f[3] for p in doc for f in p.get_fonts(full=True)}
+    check('report PDF prints a Hindi name and note', len(doc) == pages and '???' not in ' '.join(p.get_text() for p in doc) and any('Devanagari' in f for f in fonts), sorted(fonts))
+    check('scorecard image with a Hindi name', share_png(named)[:4] == b'\x89PNG')
     r = await hero.get(f'/api/attempts/{aid}/analysis/questions?filter=careless')
     check('question filter', r.status_code == 200 and r.json()['total'] == 2, r.text[:200])
 

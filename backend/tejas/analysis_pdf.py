@@ -1,5 +1,5 @@
 """Analysis report (A4 PDF) and the share image, drawn only from the analysis JSON: no question text, no phone number."""
-import io, re, textwrap
+import html, io, re, textwrap
 from datetime import datetime
 from zoneinfo import ZoneInfo
 import fitz
@@ -16,7 +16,16 @@ def plain(v):
     s = str('' if v is None else v)
     for a, b in (('→', '->'), ('—', '-'), ('–', '-'), ('−', '-'), ('’', "'"), ('‘', "'"), ('“', '"'), ('”', '"'), ('…', '...')):
         s = s.replace(a, b)
-    return s.encode('latin-1', 'replace').decode('latin-1')
+    return s
+
+
+def basic(s):
+    """True when the built-in font can print it. Hindi and other scripts take the other path."""
+    try:
+        s.encode('latin-1')
+        return True
+    except UnicodeEncodeError:
+        return False
 
 
 def mmss(s):
@@ -41,10 +50,17 @@ def file_name(an):
 
 class Sheet:
     def __init__(self, title, sub):
-        self.doc, self.title, self.sub, self.page, self.y = fitz.open(), plain(title), plain(sub), None, 0
+        self.doc, self.title, self.sub, self.page, self.y, self.rich = fitz.open(), plain(title), plain(sub), None, 0, False
 
     def text(self, at, s, size=10, color=INK, bold=False):
-        self.page.insert_text(at, plain(s), fontsize=size, fontname='hebo' if bold else 'helv', color=color)
+        s = plain(s)
+        if basic(s):
+            self.page.insert_text(at, s, fontsize=size, fontname='hebo' if bold else 'helv', color=color)
+            return
+        # A name or note in Hindi or another script: MuPDF picks a font that has the letters and joins them correctly.
+        self.rich = True
+        css = f"p{{margin:0;font-family:sans-serif;font-size:{size}pt;font-weight:{'bold' if bold else 'normal'};color:rgb({','.join(str(round(255 * c)) for c in color)})}}"
+        self.page.insert_htmlbox(fitz.Rect(at[0], at[1] - size, 555, at[1] + size), f'<p>{html.escape(s)}</p>', css=css)
 
     def box(self, x0, y0, x1, y1, fill=None, color=None, width=0.7):
         self.page.draw_rect(fitz.Rect(x0, y0, x1, y1), color=color or fill, fill=fill, width=width)
@@ -234,7 +250,10 @@ class Sheet:
 
     def done(self):
         for i, p in enumerate(self.doc):
-            p.insert_text((40, 822), f'{self.sub}  |  Personal study report  |  {i + 1} / {len(self.doc)}', fontsize=7.5, color=MUTE)
+            self.page = p
+            self.text((40, 822), f'{self.sub}  |  Personal study report  |  {i + 1} / {len(self.doc)}', 7.5, MUTE)
+        if self.rich:
+            self.doc.subset_fonts()
         return self.doc.tobytes(garbage=3, deflate=True)
 
 
@@ -483,11 +502,25 @@ def share_png(an):
     img = Image.new('RGB', (1080, 1350), '#08080A')
     d = ImageDraw.Draw(img)
     d.rectangle((0, 0, 1080, 14), fill='#D91222')
+
+    def put(xy, s, size, bold, fill):
+        s = plain(s)
+        if basic(s):
+            d.text(xy, s, font=font(size, bold), fill=fill)
+            return
+        # Hindi and other scripts: this font has no such letters, so MuPDF draws the line.
+        doc = fitz.open()
+        page = doc.new_page(width=1080 - xy[0], height=size * 2)
+        page.insert_htmlbox(page.rect, f'<p style="margin:0;font-family:sans-serif;font-size:{size}pt;font-weight:{"bold" if bold else "normal"};color:{fill}">{html.escape(s)}</p>')
+        pix = page.get_pixmap(alpha=True)
+        line = Image.frombytes('RGBa', (pix.width, pix.height), pix.samples).convert('RGBA')
+        img.paste(line, (int(xy[0]), int(xy[1])), line)
+
     d.text((72, 80), 'JEELIVE.AI', font=font(44), fill='#FF6974')
-    d.text((72, 150), plain(' · '.join(x for x in ((an.get('exam') or '').upper(), name) if x)), font=font(26, False), fill='#B0B0BF')
+    put((72, 150), ' · '.join(x for x in ((an.get('exam') or '').upper(), name) if x), 26, False, '#B0B0BF')
     y = 215
     for line in textwrap.wrap(plain(an.get('title') or 'Mock'), 30)[:3]:
-        d.text((72, y), line, font=font(50), fill='#F8FAFC')
+        put((72, y), line, 50, True, '#F8FAFC')
         y += 66
     top = y + 44
     d.rounded_rectangle((72, top, 1008, top + 300), 36, fill='#14141C', outline='#67202C', width=3)
@@ -515,7 +548,7 @@ def share_png(an):
         w = 936 / min(4, len(subjects))
         for i, g in enumerate(subjects[:4]):
             x = 72 + i * w
-            d.text((x, y), plain(g['name'])[:14].upper(), font=font(20), fill='#9292A5')
+            put((x, y), plain(g['name'])[:14].upper(), 20, True, '#9292A5')
             d.text((x, y + 30), f"{g['score']}/{g['maximum']}", font=font(34), fill='#F8FAFC')
             d.rounded_rectangle((x, y + 80, x + w - 24, y + 92), 6, fill='#2A1018')
             part = max(0, min(1, g['score'] / max(g['maximum'], 1)))

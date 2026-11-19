@@ -3,7 +3,7 @@
 - P0: deploy when the owner says "deploy". After deploy, tell the app team the 19 Nov addendum is live (it says "preview only").
 - P1 (Phase 2, needs approval): mock-to-mock trend (last 5), owner sets Difficulty/chapter tags in Master, subject-wise Rank and Percentile, Galti notebook.
 - P1 (Phase 3, needs approval): 1 to 2 lakh load test, owner paper report, target score follow-up.
-- P2: PDF uses standard Helvetica only, so a Hindi-script display name or learning would not print correctly in the PDF (Roman text is fine).
+- OPEN (owner's call): an isolated test database from an earlier session is still on the preview MongoDB: tejas_isolated_book170_436fa878 (14 synthetic TEST_ students, written 13:38–13:42 UTC on 19 Nov, nothing running against it, not the app database). This session did not create it, so it was not removed. Drop it only if the owner agrees.
 - P2: analysis.py still has an unused old build_analysis (analysis_build.py is the live one).
 
 # Rank 6 tools + Mission share gate + result sparkle + Dream college (2026-11-18)

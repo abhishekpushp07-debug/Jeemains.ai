@@ -121,4 +121,5 @@ async def main():
         if 'm' in WANT: await walk(pw, 390, 844, 'm')
         if 'k' in WANT: await walk(pw, 1920, 800, 'k', 'dark', ['overview', 'quality', 'journey'])
         if 'km' in WANT: await walk(pw, 390, 844, 'km', 'dark', ['overview', 'qs'])
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main())

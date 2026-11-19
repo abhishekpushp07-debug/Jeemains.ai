@@ -1,0 +1,48 @@
+{
+  "summary": "Analysis 2.0 Phase-1 first full testing-agent run against the isolated bridge on 127.0.0.1:8773 (preview DB never written). Backend regression tests/analysis_iso195.py = 60/60. Full UI walk tests/ui_analysis2_walk204.py over all 8 sections + compare sections at 1920x800 and 390x844 in light + dark reports zero horizontal page overflow, zero page/console errors except the pre-accepted GET /api/dream 503 (bridge forwards to external app server, documented). Two focused Playwright suites (205b, 205c) cover the previously-fixed items and the remaining spec: 16/16 and 23/23 all PASS. Nothing in app code was modified.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": { "ui_bugs": [], "integration_issues": [], "design_issues": [] },
+  "coverage": {
+    "walk_all_sections": "8 sections (overview, performance, potential, quality, time, difficulty, journey, qs) rendered in personal + comparative, light + dark, 1920x800 + 390x844 — no overflow outside scrollable boxes.",
+    "score_ring": "score rendered horizontally as one line (width/height check and visual sheet S_d_overview_1 / S_m_overview_1).",
+    "tiles_full_width": "rank/percentile/accuracy/time each fill ~100% of their grid cell on 390 px.",
+    "info_popover": "a2-info-rank opens a2-info-pop-rank; Escape closes; click on (i) does NOT open drill-down; click on the tile body does.",
+    "pace_toggles": "last visible line cannot be turned off (aria-pressed stays 'true').",
+    "qs_by_qs": "filter pills present incl. not-seen and seen-skipped; rows(not_seen) + rows(seen_skipped) == rows(skipped/chhode); level/sort/subject pickers work.",
+    "solutions_from_qgrid": "Tapping a2-qgrid-q-11 opens Solutions with one-line insight, four cards (time/class-time/right/attempted) and multiple journey steps (Q11 has two visits & changed answer). Browser Back returns to ?a=qs.",
+    "old_attempt_no_time": "Quality/Time/Journey show a2-later-<section> card; Journey ALSO shows the 'baar jawab badla' content; Potential shows a2-potential-partial.",
+    "display_name": "friend opens display-name-dialog via display-name-edit; phone-number refused with Hinglish copy; 1-letter and abusive refused; valid 'Test Dost' saves, dialog closes, a2-board-name-ask disappears from the overview.",
+    "downloads": "PDF: application/pdf, header %PDF-, filename JEELIVE_<paper>_<date>.pdf, 8 pages for hero, 6 for old, cover text 'Is report mein', later-page phrases 'Speed-Accuracy', 'Pace curve', 'Aapka raasta', 'Tags ke matlab' present, NO phone-number regex match in either PDF. Scorecard download starts with 89 PNG header.",
+    "leaderboard": "top rows render, 'Top N dikhao' button present, search by 'Naam ya Rank' narrows rows, Compare buttons on rows.",
+    "comparative": "picker renders at ?mode=compare&vs=topper; compare-head + compare-gap + compare-subjects all render; text 'Aap vs' present.",
+    "advanced_link": "advanced-result-analysis-toggle exists with Hinglish copy and opens the old ledger panel.",
+    "theme_default": "fresh browser context defaults to light theme; dark forced via localStorage 'jeelive-theme'='dark' renders every walked section.",
+    "hinglish_copy_spot_checks": "'Har mark kahan gaya', 'Agle mock', 'Class mein aap kahan', 'Is paper ka leaderboard', 'Har subject', 'Is test se meri' all present on overview."
+  },
+  "test_report_links": [
+    "/app/backend/tests/analysis_iso195.py (60/60)",
+    "/app/backend/tests/ui_analysis2_walk204.py (walk, see /tmp/walk204.log)",
+    "/app/backend/tests/ui_analysis2_focused205b.py (16/16, see /tmp/focus205b.log)",
+    "/app/backend/tests/ui_analysis2_focused205c.py (23/23, see /tmp/focus205c.log)",
+    "/app/backend/tests/ui_analysis2_debug.py (selector discovery helper)"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Small QA ergonomics: Leaderboard search uses a native <input placeholder='Naam ya Rank'> without a data-testid. Adding data-testid like 'a2-board-search' would let tests avoid placeholder-based selectors.",
+    "DisplayName row has data-testid 'display-name-edit' on the button but no equivalent testid for the ask-box's clickable target as a 'open dialog' entry point (clicking a2-board-name-ask alone did not open the dialog in tests — it required clicking display-name-edit). Either make a2-board-name-ask open the dialog directly, or document that the entry point is display-name-edit."
+  ],
+  "updated_files": [
+    "/app/backend/tests/ui_analysis2_focused205.py (new; superseded during run)",
+    "/app/backend/tests/ui_analysis2_focused205b.py (new; 16/16 PASS)",
+    "/app/backend/tests/ui_analysis2_focused205c.py (new; 23/23 PASS)",
+    "/app/backend/tests/ui_analysis2_debug.py (new; selector discovery)"
+  ],
+  "success_rate": { "backend": "100% (60/60)", "frontend": "100% (16/16 + 23/23 focused checks; walk clean across 8 sections × 2 themes × 2 viewports + 8 compare sections)" },
+  "test_credentials": "Isolated bridge only — never signed in to the configured preview DB. Cookies read from /tmp/uibridge196/bridge.json (hero/old/friend/*_attempt). No value printed in this report.",
+  "seed_data_creation": "Only inside the disposable isolated DB spun up by tests/analysis_bridge196.py (synthetic class of 14). Dropped at end: 'dropped tejas_isolated_book170_407fedd5' in /tmp/bridge196.log. No writes to the preview DB.",
+  "isolated_databases_created_and_dropped": ["tejas_isolated_book170_407fedd5 (dropped)"],
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Bridge is stopped (pkill -f analysis_bridge196 done). To re-run: `cd /app/backend && (nohup python tests/analysis_bridge196.py 3000 > /tmp/bridge196.log 2>&1 &)`, wait ~45 s for READY, then `python tests/ui_analysis2_walk204.py d m k`, `python tests/ui_analysis2_focused205b.py`, `python tests/ui_analysis2_focused205c.py`, and `python tests/analysis_iso195.py`. Known accepted noise: GET /api/dream returns 503 through the bridge (external app server) — do not flag.",
+  "rca of the issue": "No defects found. Earlier fixes called out in the agent-to-agent note (score-ring stacking caused by the preview dev-server's visual-edit span wrapper, Recharts legend order, waterfall Target/Max overlap, PDF empty pages and journey-as-one-line) were all verified rendered correctly: score shows as '61' horizontally inside the ring, tiles fill their full grid-cell width, PDF has the expected page counts (8 hero / 6 old) and contains the four expected later-page sections."
+}
