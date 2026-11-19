@@ -9,13 +9,13 @@ import { Alive } from "./Art";
 import { Twinkles, rnd } from "./juice";
 import type { DailyLook } from "./daily";
 
-// The five All India card scenes share one world (the student's pick): a dark ridge against blazing red smoke, black
-// silhouettes on it and embers rising. Every scene is drawn on a 360 × 360 stage, then scaled to the card.
+// The five All India card scenes share one world (the student's pick): a dark ridge against blazing red smoke, the
+// student's own battleground (riders in the smoke) on the horizon, black silhouettes in front and embers rising. Every scene is drawn on a 360 × 360 stage, then scaled to the card.
 // Motion is CSS animation (UI thread on phones, plain CSS on the web); with Reduce Motion each scene rests in its best pose.
 const B = 360;
 
 const ART = {
-  fire: require("../../assets/arena/th_fire_bg.webp"), ship: require("../../assets/arena/sil_ship.webp"), army: require("../../assets/arena/sil_army.webp"),
+  fire: require("../../assets/arena/th_fire_bg.webp"), ship: require("../../assets/arena/sil_ship.webp"), battle: require("../../assets/arena/battleground.webp"),
   trophy: require("../../assets/arena/daily_trophy.webp"), lion: require("../../assets/arena/sil_lion.webp"), archer: require("../../assets/arena/sil_archer.webp"),
   riders: [require("../../assets/arena/sil_rider1.webp"), require("../../assets/arena/sil_rider2.webp"), require("../../assets/arena/sil_rider3.webp")],
 };
@@ -29,6 +29,7 @@ const at = (x: number, y: number, r = 0, s = 1) => ({ transform: [{ translateX: 
 
 // ---- The fire world: smoke slowly drifting, the glow breathing, embers rising off the ridge (or blown sideways by the race).
 const DRIFT = css.keyframes({ from: { transform: [{ scale: 1 }, { translateX: 0 }] }, to: { transform: [{ scale: 1.07 }, { translateX: -8 }] } });
+const PARALLAX = css.keyframes({ from: { transform: [{ translateX: -4 }] }, to: { transform: [{ translateX: 6 }] } });
 const FLARE = css.keyframes({ from: { opacity: 0.3, transform: [{ scale: 0.92 }] }, to: { opacity: 0.75, transform: [{ scale: 1.06 }] } });
 const RISE = css.keyframes({
   "0%": { opacity: 0, ...at(0, 0) }, "15%": { opacity: 1, ...at(6, -30) }, "60%": { opacity: 0.85, ...at(-8, -120, 0, 0.8) }, "100%": { opacity: 0, ...at(10, -200, 0, 0.4) },
@@ -45,6 +46,7 @@ function Fire({ still, wind }: { still: boolean; wind?: boolean }) {
         <Ellipse cx={170} cy={120} rx={170} ry={120} fill="url(#aiFlare)" />
       </Svg>
     </Animated.View>
+    <Animated.View style={[styles.battle, run(still, PARALLAX, 9000, { ease: "ease-in-out", alt: true })]}><Image source={ART.battle} style={styles.full} contentFit="fill" /></Animated.View>
     {still ? null : EMBERS.map((e, i) => <Animated.View key={i} style={[styles.ember, wind
       ? { left: 360 + e.x * 0.2, top: 40 + rnd(i, 6) * 170, width: e.s * 5, height: 2, backgroundColor: e.c }
       : { left: e.x, top: e.y, width: e.s, height: e.s, borderRadius: e.s, backgroundColor: e.c },
@@ -81,9 +83,8 @@ function Space({ still }: { still: boolean }) {
   </>;
 }
 
-// ---- 2 · World Cup: the golden cup blazing over the ridge, the army below raising swords, gold light turning behind it.
+// ---- 2 · World Cup: the golden cup blazing over the student's battleground, gold light turning behind it.
 const SPIN = css.keyframes({ from: { transform: [{ rotate: "0deg" }] }, to: { transform: [{ rotate: "360deg" }] } });
-const CHEER = css.keyframes({ from: { transform: [{ translateY: 0 }] }, to: { transform: [{ translateY: -3 }] } });
 
 function Rays({ still }: { still: boolean }) {
   const c = 200, n = 16;
@@ -96,7 +97,6 @@ function Rays({ still }: { still: boolean }) {
 function Cup({ still }: { still: boolean }) {
   return <>
     <Rays still={still} />
-    <Animated.View style={[styles.army, run(still, CHEER, 520, { ease: "ease-in-out", alt: true })]}><Image source={ART.army} style={styles.full} contentFit="contain" /></Animated.View>
     <Svg style={styles.cupGlow} width={240} height={240}>
       <Defs><RadialGradient id="aiCupGlow" cx="50%" cy="50%" r="50%"><Stop offset="0" stopColor={arena.gold} stopOpacity={0.6} /><Stop offset="1" stopColor={arena.gold} stopOpacity={0} /></RadialGradient></Defs>
       <Circle cx={120} cy={120} r={120} fill="url(#aiCupGlow)" />
@@ -206,6 +206,8 @@ function Archery({ still }: { still: boolean }) {
 }
 
 const SCENES: Record<DailyLook, (p: { still: boolean }) => React.ReactElement> = { 1: Space, 2: Cup, 3: Lions, 4: Race, 5: Archery };
+/** Each scene's short sound: launch, war horn + cheering crowd, roar, neigh + gallop, arrow whoosh + thud. */
+export const SCENE_SOUND: Record<DailyLook, string> = { 1: "scene_space", 2: "scene_cup", 3: "scene_lion", 4: "scene_race", 5: "scene_arrow" };
 
 /** The living picture behind the All India card: the fire world plus the chosen look's story. `size` = the card's inner side. */
 export function DailyScene({ look, size, still }: { look: DailyLook; size: number; still: boolean }) {
@@ -222,13 +224,13 @@ const styles = StyleSheet.create({
   // The ridge of the fire picture sits at y ≈ 205, where every figure stands.
   bg: { position: "absolute", left: -30, top: -85, width: 420, height: 420 },
   flare: { position: "absolute", left: 10, top: 50 },
+  battle: { position: "absolute", left: -20, top: 95, width: 400, height: 140 },
   ember: { position: "absolute", opacity: 0 },
   streak: { position: "absolute", height: 2, borderRadius: 1, backgroundColor: allIndia.star, opacity: 0 },
   ship: { position: "absolute", left: 75, top: 6, width: 210, height: 210 },
   shipTilt: { width: "100%", height: "100%", transform: [{ rotate: `${TILT}deg` }] },
   flame: { position: "absolute", left: -100, top: 90, width: 110, height: 30, transformOrigin: "100% 50%" },
   rays: { position: "absolute", left: -20, top: -88, width: 400, height: 400 },
-  army: { position: "absolute", left: -10, top: 117, width: 380, height: 98 },
   cupGlow: { position: "absolute", left: 60, top: -8 },
   trophy: { position: "absolute", left: 97, top: 28, width: 166, height: 166 }, cupArt: { width: 166, height: 166 },
   lion: { position: "absolute", left: -8, top: 63, width: 190, height: 190 },

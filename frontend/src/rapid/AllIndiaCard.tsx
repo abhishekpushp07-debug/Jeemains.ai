@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, { css, useReducedMotion } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
@@ -7,13 +7,18 @@ import { allIndia, arena } from "@/src/theme";
 import { GoldTitle } from "./arena";
 import { Glitter } from "./Glitter";
 import { Jelly, LiveDot } from "./juice";
-import { DailyScene } from "./DailyScenes";
+import { playSfx } from "@/src/sfx";
+import { DailyScene, SCENE_SOUND } from "./DailyScenes";
 import { DailyLook, DailyStatus, grouped, hms, useEndsIn } from "./daily";
 
 /** The All India Rapid trophy (original artwork: a golden globe with India lit up, held by two flames). */
 export const TROPHY = require("../../assets/arena/daily_trophy.webp");
 
 const SHINE = css.keyframes({ "0%": { transform: [{ translateX: -140 }, { rotate: "18deg" }] }, "55%": { transform: [{ translateX: 560 }, { rotate: "18deg" }] }, "100%": { transform: [{ translateX: 560 }, { rotate: "18deg" }] } });
+
+let heard = false; // the card's sound plays once per app session: the first time it appears (popup or lobby)
+/** Play a scene's sound now (the styles page uses it as a preview). */
+export const playScene = (look: DailyLook) => playSfx(SCENE_SOUND[look], 0.85);
 
 function copy(d?: DailyStatus | null) {
   const you = d?.you, total = d?.total || 30;
@@ -27,8 +32,13 @@ function copy(d?: DailyStatus | null) {
  * The All India Rapid card: one big square on the lobby. The whole card is the button (straight to the questions).
  * Five living scenes in one fire world; the story on it (players today, your rank, today's #1, the countdown) is the same in each.
  */
-export function AllIndiaCard({ d, look = 2, size, onPress, onLongPress, paused, testID = "rf-all-india" }: { d?: DailyStatus | null; look?: DailyLook; size: number; onPress?: () => void; onLongPress?: () => void; paused?: boolean; testID?: string }) {
+export function AllIndiaCard({ d, look = 2, size, onPress, onLongPress, paused, sound, testID = "rf-all-india" }: { d?: DailyStatus | null; look?: DailyLook; size: number; onPress?: () => void; onLongPress?: () => void; paused?: boolean; sound?: boolean; testID?: string }) {
   const still = !!useReducedMotion() || !!paused;
+  useEffect(() => {
+    if (!sound || heard) return;
+    const t = setTimeout(() => { if (!heard) { heard = true; playScene(look); } }, 450);
+    return () => clearTimeout(t);
+  }, [sound, look]);
   const left = useEndsIn(d?.ends_in), c = copy(d);
   const champ = d?.top?.[0] && d.you.status !== "done" ? `Today’s #1: ${d.top[0].you ? "You" : d.top[0].name} · ${d.top[0].correct}/${d.total}`
     : d?.yesterday?.[0] ? `Yesterday’s champion: ${d.yesterday[0].you ? "You" : d.yesterday[0].name} · ${d.yesterday[0].correct}/${d.total}` : "Same 30 cards for every JEE student";

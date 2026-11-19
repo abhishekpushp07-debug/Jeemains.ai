@@ -23,6 +23,12 @@ const FILES: Record<string, number> = {
   lose: require("../assets/sfx/lose.m4a"),
   levelup: require("../assets/sfx/levelup.m4a"),
   coin: require("../assets/sfx/coin.m4a"),
+  // All India card scenes (Mixkit free sound effects, mixed by backend/rapidfire/make_scene_sfx.py)
+  scene_space: require("../assets/sfx/scene_space.m4a"),
+  scene_cup: require("../assets/sfx/scene_cup.m4a"),
+  scene_lion: require("../assets/sfx/scene_lion.m4a"),
+  scene_race: require("../assets/sfx/scene_race.m4a"),
+  scene_arrow: require("../assets/sfx/scene_arrow.m4a"),
 };
 
 const players: Record<string, AudioPlayer> = {};

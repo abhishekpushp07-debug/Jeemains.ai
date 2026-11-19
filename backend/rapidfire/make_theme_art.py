@@ -127,7 +127,21 @@ async def make(name: str):
     print("saved", name, flush=True)
 
 
+def battleground():
+    """The student's own battle picture as a wide band (riders on the ridge in the smoke), edges feathered so it melts into
+    the fire world behind every scene."""
+    band = Image.open(REF).convert("RGB").crop((0, 90, 600, 300))
+    w, h = band.size
+    ys, xs = np.arange(h) / h, np.arange(w) / w
+    alpha = (np.clip(ys / 0.45, 0, 1) ** 1.5 * np.clip((1 - ys) / 0.12, 0, 1))[:, None] * (np.clip(xs / 0.14, 0, 1) * np.clip((1 - xs) / 0.14, 0, 1))[None, :]
+    Image.fromarray(np.dstack([np.asarray(band), (alpha * 255).astype(np.uint8)]), "RGBA").save(OUT + "battleground.webp", "WEBP", quality=88, method=6)
+    print("saved battleground", flush=True)
+
+
 async def main(names):
+    if "battleground" in names:
+        battleground()
+        names = [n for n in names if n != "battleground"]
     res = await asyncio.gather(*(make(n) for n in names), return_exceptions=True)
     for n, r in zip(names, res):
         if isinstance(r, Exception):

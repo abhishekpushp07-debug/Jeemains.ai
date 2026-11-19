@@ -33,7 +33,7 @@ export function useEndsIn(endsIn?: number) {
 // card (or a long press on it) opens the five to compare. The pick is kept on this phone only.
 export const DAILY_STYLES = [
   { id: 1, name: "Space Race", line: "A rocket blasts out of the fire and into the stars" },
-  { id: 2, name: "World Cup", line: "The golden cup held high over the army" },
+  { id: 2, name: "World Cup", line: "The golden cup blazing over your battleground" },
   { id: 3, name: "Lion Clash", line: "Two lions leap and crash in a white-hot burst" },
   { id: 4, name: "Cavalry Race", line: "Three riders race along the burning ridge" },
   { id: 5, name: "Bullseye", line: "One arrow across the fire, dead centre: +10" },

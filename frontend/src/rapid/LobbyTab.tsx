@@ -105,19 +105,19 @@ export function LobbyTab() {
         <Tile testID="rf-duel-ai" icon="rival" label="Practice Rival" sub="No waiting" delay={1300} narrow={narrow} disabled={!can} onPress={() => play("ai")} />
         <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${size || chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => play("solo")} />
       </View>
-      <WeakSprintStrip uid={uid} narrow={narrow} />
 
-      <CupNightBanner uid={uid} />
-
-      {/* All India Rapid: the big square right below Cup Night. The whole card opens today's 30 cards. */}
+      {/* All India Rapid: the big square right below the three mode tiles. The whole card opens today's 30 cards. */}
       <View style={styles.daily}>
-        <AllIndiaCard d={daily.data} look={look} size={cardSize} onPress={() => router.push(go.daily())} onLongPress={() => router.push(go.dailyStyles())} />
+        <AllIndiaCard d={daily.data} look={look} size={cardSize} sound onPress={() => router.push(go.daily())} onLongPress={() => router.push(go.dailyStyles())} />
         <Jelly testID="rf-all-india-style" accessibilityLabel={`Card style ${dailyStyleName(look)}. Change style`} onPress={() => router.push(go.dailyStyles())} style={styles.stylePill}>
           <Icon name="palette" size={14} color={arena.gold} />
           <T w="heavy" size={11.5} color={arena.text}>{dailyStyleName(look)}</T>
           <T w="bold" size={11.5} color={arena.aqua}>· Change style ›</T>
         </Jelly>
       </View>
+
+      <WeakSprintStrip uid={uid} narrow={narrow} />
+      <CupNightBanner uid={uid} />
       <ChampionsWall uid={uid} />
       <Jelly testID="rf-knockout" accessibilityLabel={`Knockout Cup. 4, 8 or 16 players${cupLive ? ". Your cup is on" : ""}`} onPress={() => router.push(cupLive ? go.cup(inbox!.cup!) : go.cups())}>
         <Glitter radius={22} inner={styles.cupInner}><LinearGradient colors={["#5A0A14", arena.panel]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.cup}>

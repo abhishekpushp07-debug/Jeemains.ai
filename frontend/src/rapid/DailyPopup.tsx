@@ -17,7 +17,7 @@ export function DailyPopup({ visible, d, look, onEnter, onExit }: { visible: boo
       <Pressable style={StyleSheet.absoluteFill} onPress={onExit} accessibilityLabel="Close" testID="rf-daily-popup-backdrop" />
       <T w="heavy" size={11} color={arena.aqua} style={styles.kicker}>TODAY’S BIG MATCH</T>
       <GoldTitle size={24} center>{playing ? "Finish what you started!" : "All India Rapid is live!"}</GoldTitle>
-      <AllIndiaCard d={d} look={look} size={size} testID="rf-daily-popup-card" onPress={onEnter} />
+      <AllIndiaCard d={d} look={look} size={size} sound testID="rf-daily-popup-card" onPress={onEnter} />
       <View style={[styles.buttons, { width: size }]}>
         <RaisedButton testID="rf-daily-popup-exit" label="EXIT" tone="wine" height={54} onPress={onExit} style={styles.exit} />
         <RaisedButton testID="rf-daily-popup-enter" label={playing ? "CONTINUE" : "ENTER"} icon="bolt" height={54} streak onPress={onEnter} style={styles.enter} />
