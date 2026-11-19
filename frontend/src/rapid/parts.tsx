@@ -9,6 +9,7 @@ import { arena, fx } from "@/src/theme";
 import { GEM_LABEL, GEM_ORDER, Gem, PhoenixDiamond, topGem } from "./Art";
 import { ArenaBg, OnlineDot, ScreenTop } from "./arena";
 import { Jelly, Pop } from "./juice";
+import { Glitter } from "./Glitter";
 import { Crown as CrownT, PlayerCard } from "./social";
 
 type Person = Partial<Omit<PlayerCard, "pid">> & { pid?: string | null; name?: string };
@@ -29,7 +30,7 @@ export function WingedFace({ p, diamonds, size = 104, testID }: { p: Person; dia
 }
 
 export function PersonRow({ p, sub, right, onPress, testID, selected }: { p: Person; sub?: string; right?: React.ReactNode; onPress?: () => void; testID?: string; selected?: boolean }) {
-  return <View testID={testID} style={[styles.row, selected && styles.rowOn]}>
+  return <Glitter testID={testID} radius={18} sparkles={1} inner={[styles.row, selected && styles.rowOn]}>
     <Pressable onPress={onPress ? () => { tap(); onPress(); } : undefined} disabled={!onPress} accessibilityRole="button" accessibilityLabel={`${p.name || "Player"}${crownText(p.crown)}`} accessibilityState={{ selected: !!selected }} style={styles.rowMain}>
       <Face p={p} />
       <View style={styles.flex}>
@@ -38,7 +39,7 @@ export function PersonRow({ p, sub, right, onPress, testID, selected }: { p: Per
       </View>
     </Pressable>
     {right}
-  </View>;
+  </Glitter>;
 }
 
 /** Read out after a name in a row's label: ", Cup Champion ×3". Empty when the player has no crown. */
@@ -92,12 +93,13 @@ export function Note({ children, testID }: { children: React.ReactNode; testID?:
 }
 
 /** Inner arena screen: crimson stage, raised Back button and a scrolling body. `footer` stays above the keyboardless bottom edge. */
-export function InnerScreen({ title, sub, right, children, testID, footer }: { title: string; sub?: string; right?: React.ReactNode; children: React.ReactNode; testID: string; footer?: React.ReactNode }) {
+export function InnerScreen({ title, sub, right, children, testID, footer, onScroll }: { title: string; sub?: string; right?: React.ReactNode; children: React.ReactNode; testID: string; footer?: React.ReactNode; onScroll?: (y: number, height: number) => void }) {
   const insets = useSafeAreaInsets(), router = useRouter();
   return <ArenaBg testID={testID}>
     <View style={[styles.inner, { paddingTop: insets.top + 6 }]}>
       <ScreenTop title={title} sub={sub} right={right} testID={testID} onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)/rapid"))} />
-      <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + 28 }]}>{children}</KeyboardAwareScrollView>
+      <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} scrollEventThrottle={100}
+        onScroll={onScroll ? (e) => onScroll(e.nativeEvent.contentOffset.y, e.nativeEvent.layoutMeasurement.height) : undefined} contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + 28 }]}>{children}</KeyboardAwareScrollView>
       {footer ? <View style={[styles.footer, { paddingBottom: insets.bottom + 10 }]}>{footer}</View> : null}
     </View>
   </ArenaBg>;
@@ -109,8 +111,8 @@ const styles = StyleSheet.create({
   crown: { flexDirection: "row", alignItems: "center", gap: 2, height: 20, paddingHorizontal: 5, borderRadius: 10, borderWidth: 1.5 },
   crownBig: { height: 32, paddingHorizontal: 9, borderRadius: 16, gap: 4 },
   crownGold: { backgroundColor: arena.gold, borderColor: arena.goldDeep }, crownSilver: { backgroundColor: fx.smoke, borderColor: fx.white },
-  row: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 64, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 18, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },
-  rowOn: { borderColor: arena.tealHi, backgroundColor: arena.panelHi }, rowMain: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 12, minHeight: 48 },
+  row: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 64, paddingHorizontal: 12, paddingVertical: 8, backgroundColor: arena.panel },
+  rowOn: { backgroundColor: arena.panelHi, borderLeftWidth: 4, borderLeftColor: arena.tealHi }, rowMain: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 12, minHeight: 48 },
   check: { width: 30, height: 30, borderRadius: 10, borderWidth: 2, borderColor: arena.rimHi, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelEdge },
   checkOn: { backgroundColor: arena.teal, borderColor: arena.tealOutline },
   gems: { flexDirection: "row", justifyContent: "space-around", alignItems: "flex-end" }, gem: { alignItems: "center", gap: 2, flex: 1 },

@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from bson import ObjectId
 from pymongo.errors import DuplicateKeyError
 from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resolve_exam
-from revision import record_learning, weak_chapters, make_router as make_revision
+from revision import record_learning, weak_chapters, weak_topic_deck, make_router as make_revision
 from owner_downloads import make_router as make_owner_downloads
 from branding import router as branding_router
 from marketing_media import router as marketing_router
@@ -23,7 +23,7 @@ import login_guard
 from client_ip import client_ip
 from rf_access import make_access_router, install_access_guard, maintenance_on
 from load_guard import ArenaBusy, InflightCounter, arena_gate, busy_response, monitor as load_monitor, raise_fd_limit, snapshot as load_snapshot
-from rapid_deck import fresh_deck
+from rapid_deck import fresh_deck, seen_cards
 from scope import CARD_COUNTS, CARD_SECONDS, Pick, normalise, scope_fields
 from metadata_cache import metadata_cache
 from performance import ServerTiming, AssetAwareCompression
@@ -227,6 +227,7 @@ class SessionCreate(BaseModel):
     exam: Optional[Exam] = None
     diagram_only: bool = False
     revision: bool = False
+    weak_topics: bool = False  # Weak Topic Sprint: only the subtopics this student keeps missing
 
 
 class CardResult(BaseModel):
@@ -352,7 +353,7 @@ def public_card(c: Card) -> dict:
 @api.post("/rf/sessions", dependencies=[Depends(arena_gate)])
 async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)):
     uid = rf_user(x_rf_user)
-    scope = None if data.revision or data.card_ids else scope_fields(normalise(data.picks, data.subject, data.chapter))
+    scope = None if data.revision or data.card_ids or data.weak_topics else scope_fields(normalise(data.picks, data.subject, data.chapter))
     if scope:
         data.subject, data.chapter = scope["subject"], scope["chapter"]
     exam = resolve_exam(data.exam, data.subject)
@@ -363,7 +364,14 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
         resolve_exam(existing.exam, existing.subject)
         cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(MAX_ROUND)]
     else:
-        if data.revision:
+        label = None
+        if data.weak_topics:
+            docs, topics = await weak_topic_deck(db, uid, exam, data.count, await seen_cards(db, uid, exam))
+            if not docs:
+                raise HTTPException(404, "No weak subtopics yet. Play a few sprints or matches and your Weak Topic Sprint builds itself.")
+            data.subject, data.chapter, label = docs[0]["subject"], None, f"Weak Topic Sprint · {len(topics)} subtopic{'s' if len(topics) > 1 else ''}"
+            mode = "weak_topics"
+        elif data.revision:
             weak = await weak_chapters(db, uid, exam)
             selected = next((row for row in weak if row["subject"] == data.subject and (not data.chapter or row["chapter"] == data.chapter)), None)
             if not selected:
@@ -383,7 +391,7 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
             raise HTTPException(404, "No reviewed cards are available for this selection yet.")
         cards = [Card.from_mongo(d) for d in docs]
         existing = RfSession(id=str(uuid.uuid4()), user_id=uid, request_id=data.request_id, subject=data.subject,
-                             chapter=data.chapter, exam=exam, mode=mode, card_ids=[c.id for c in cards], **({"picks": scope["picks"], "label": scope["label"]} if scope else {}))
+                             chapter=data.chapter, exam=exam, mode=mode, card_ids=[c.id for c in cards], **({"picks": scope["picks"], "label": scope["label"]} if scope else {"label": label} if label else {}))
         try:
             await db.rf_sessions.insert_one(existing.to_mongo())
         except DuplicateKeyError:
@@ -484,7 +492,9 @@ from pin_reset import make_pin_reset  # noqa: E402
 from rank_predictor import make_router as make_rank  # noqa: E402
 from mission_links import make_router as make_mission_links, ensure_indexes as mission_indexes  # noqa: E402
 from dream import make_router as make_dream  # noqa: E402
+from daily import make_router as make_daily, ensure_indexes as daily_indexes  # noqa: E402
 duel_router, duel_api = make_duels(db, rf_user, public_card, award)
+api.include_router(make_daily(db, rf_user, award))
 api.include_router(duel_router)
 api.include_router(make_social(db, rf_user))
 api.include_router(make_rooms(db, rf_user, duel_api["seat"]))
@@ -704,6 +714,7 @@ async def setup_database():
     elif not (await db.rf_events.options()).get("capped"):
         await db.command("convertToCapped", "rf_events", size=EVENTS_BYTES)
     await db.rf_sessions.create_index([("status", 1), ("created_at", 1)])
+    await daily_indexes(db)
     await db.rf_dreams.create_index("uid", unique=True)
     # One report per player per gang: remove duplicates left by simultaneous reports, then let the index enforce it.
     dupes = await db.rf_gang_reports.aggregate([{"$group": {"_id": {"g": "$gang_id", "u": "$uid"}, "ids": {"$push": "$_id"}, "n": {"$sum": 1}}}, {"$match": {"n": {"$gt": 1}}}])

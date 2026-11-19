@@ -10,11 +10,12 @@ import { playSfx } from "@/src/sfx";
 import { arena } from "@/src/theme";
 import { Alive, GEM_ORDER, GameIcon, Gem } from "./Art";
 import { GoldTitle, Panel, RaisedButton, SectionTitle, Segment } from "./arena";
-import { Jelly, Pop } from "./juice";
+import { Jelly } from "./juice";
 import { Bar, Face, GemStrip, NameLine, Note, crownText } from "./parts";
 import { RushTrack } from "./RushTrack";
 import { FriendsLeague, GangWarBoard } from "./Leagues";
 import { ErrorBox } from "./ui";
+import { Glitter } from "./Glitter";
 import { go, ordinal, takeArenaPart } from "./social";
 
 type Part = "ranks" | "rewards" | "matches";
@@ -46,8 +47,8 @@ function AllIndia({ uid }: { uid: string }) {
         <T testID="rf-board-your-xp" w="bold" size={12} color={arena.aqua}>{d.you.xp} XP · Level {d.you.level}</T>
       </View>
     </Panel> : null}
-    {d?.items?.map((row: any, i: number) => <Pop key={row.rank} delay={Math.min(i, 8) * 40}>
-      <Pressable testID={`rf-board-row-${row.rank}`} disabled={!row.pid} onPress={() => { tap(); router.push(go.player(row.pid)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}${crownText(row.crown)}`} style={[styles.row, row.you && styles.rowYou]}>
+    {d?.items?.map((row: any) => <View key={row.rank}>
+      <Pressable testID={`rf-board-row-${row.rank}`} disabled={!row.pid} onPress={() => { tap(); router.push(go.player(row.pid)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}${crownText(row.crown)}`}><Glitter radius={18} sparkles={1} inner={[styles.row, row.you && styles.rowYou]}>
         <View style={[styles.medal, row.rank <= 3 && { backgroundColor: MEDAL[row.rank - 1], borderColor: arena.badgeInk }]}><T testID={`rf-board-rank-${row.rank}`} w="heavy" size={13} color={row.rank <= 3 ? arena.badgeInk : arena.muted}>{row.rank}</T></View>
         <Face p={row} size={40} />
         <View style={styles.flex}>
@@ -55,8 +56,8 @@ function AllIndia({ uid }: { uid: string }) {
           <T w="bold" size={11} color={arena.muted}>Level {row.level} · {row.wins} win{row.wins === 1 ? "" : "s"}</T>
         </View>
         <T testID={`rf-board-xp-${row.rank}`} w="heavy" size={13} color={arena.gold}>{row.xp} XP</T>
-      </Pressable>
-    </Pop>)}
+      </Glitter></Pressable>
+    </View>)}
     {d && !d.items.length ? <Note testID="rf-board-empty">Nobody on the board yet. Play a sprint and take the first spot!</Note> : null}
     <T testID="rf-board-wallet-note" size={10} color={arena.faint} style={styles.center}>Ranked by Rapid Fire practice XP. Not exam ranks.</T>
   </View>;
@@ -99,11 +100,11 @@ function Rewards({ uid }: { uid: string }) {
       <Panel gold style={styles.vault}><GemStrip diamonds={p?.diamonds} size={42} labels wings /><T w="bold" size={12} color={arena.aqua} style={styles.center}>Longest Phoenix streak: {p?.best_phoenix ?? 0}</T></Panel>
     </Jelly>
     <SectionTitle title="Trophies" />
-    <View style={styles.trophies}>{(p?.badges || []).map((b) => <View key={b.id} testID={`rf-badge-${b.id}`} style={[styles.trophy, !b.earned && styles.locked]}>
+    <View style={styles.trophies}>{(p?.badges || []).map((b) => <Glitter key={b.id} testID={`rf-badge-${b.id}`} radius={16} sparkles={1} style={[styles.trophyCell, !b.earned && styles.locked]} inner={styles.trophy}>
       <View style={[styles.trophyIcon, b.earned && styles.trophyOn]}><Icon name={b.earned ? BADGE_ICON[b.id] : "lock"} size={26} color={b.earned ? arena.badgeInk : arena.faint} /></View>
       <T w="heavy" size={12} color={b.earned ? arena.gold : arena.muted} numberOfLines={1}>{b.title}</T>
       <T size={10} color={arena.muted} numberOfLines={2} style={styles.center}>{b.body}</T>
-    </View>)}</View>
+    </Glitter>)}</View>
   </View>;
 }
 
@@ -122,22 +123,22 @@ function Matches({ uid }: { uid: string }) {
     {!q.data && q.loading ? <ActivityIndicator color={arena.aqua} /> : null}
     {kind === "duels" ? duels.data?.items?.map((m: any) => {
       const group = m.scores.length > 2, others = m.scores.filter((s: any) => !s.you), me = m.scores.find((s: any) => s.you);
-      return <Pressable key={m.id} testID={`rf-match-${m.id}`} onPress={() => { tap(); router.push(go.duel({ review: m.id })); }} accessibilityRole="button" style={styles.row}>
+      return <Pressable key={m.id} testID={`rf-match-${m.id}`} onPress={() => { tap(); router.push(go.duel({ review: m.id })); }} accessibilityRole="button"><Glitter radius={18} sparkles={1} inner={styles.row}>
         <View style={[styles.result, m.won && styles.resultWon]}><T w="heavy" size={12} color={m.won ? arena.badgeInk : arena.text}>{group ? ordinal(m.place) : m.won ? "WON" : m.tie ? "TIE" : "LOST"}</T></View>
         <View style={styles.flex}>
           <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{group ? `${m.scores.length} players` : `vs ${others[0]?.name || "Rival"}`} · {me?.score ?? 0}{group ? "" : ` – ${others[0]?.score ?? 0}`}</T>
           <T w="bold" size={11} color={arena.muted} numberOfLines={1}>{m.cup ? "Cup · " : m.team ? "Gang War · " : ""}{m.label || m.chapter || "Mixed"} · {day(m.finished_at)}</T>
         </View>
         <View style={styles.gemRow}>{gems(m.diamonds)}</View>
-      </Pressable>;
-    }) : solo.data?.items?.map((s: any) => <Pressable key={s.id} testID={`rf-solo-${s.id}`} onPress={() => { tap(); router.push({ pathname: "/rapid/session", params: { review: s.id } }); }} accessibilityRole="button" style={styles.row}>
+      </Glitter></Pressable>;
+    }) : solo.data?.items?.map((s: any) => <Pressable key={s.id} testID={`rf-solo-${s.id}`} onPress={() => { tap(); router.push({ pathname: "/rapid/session", params: { review: s.id } }); }} accessibilityRole="button"><Glitter radius={18} sparkles={1} inner={styles.row}>
       <View style={styles.result}><T w="heavy" size={13} color={arena.text}>{s.summary?.score ?? 0}/{s.summary?.total ?? 0}</T></View>
       <View style={styles.flex}>
-        <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{s.mode === "weak_revision" ? "Weak cards" : "Solo Sprint"} · {s.chapter || "Mixed"}</T>
+        <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{s.mode === "weak_revision" ? "Weak cards" : s.mode === "weak_topics" ? "Weak Topic Sprint" : "Solo Sprint"} · {s.chapter || "Mixed"}</T>
         <T w="bold" size={11} color={arena.muted}>{s.label || s.subject} · {day(s.completed_at)}</T>
       </View>
       <View style={styles.gemRow}>{gems(s.diamonds)}</View>
-    </Pressable>)}
+    </Glitter></Pressable>)}
     {q.data && !q.data.items.length ? <Note testID="rf-history-empty">{kind === "duels" ? "No matches yet. Hit PLAY in the Arena!" : "No sprints yet. Try a Solo Sprint."}</Note> : null}
   </View>;
 }
@@ -161,14 +162,14 @@ const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, center: { textAlign: "center" }, head: { paddingHorizontal: 16, gap: 8, paddingTop: 4 },
   content: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 28 }, list: { gap: 10 },
   mine: { flexDirection: "row", alignItems: "center", gap: 12, padding: 14 },
-  row: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 60, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 18, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim },
-  rowYou: { borderColor: arena.gold, backgroundColor: arena.panelHi },
+  row: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 60, paddingHorizontal: 12, paddingVertical: 8, backgroundColor: arena.panel },
+  rowYou: { backgroundColor: arena.panelHi },
   medal: { width: 30, height: 30, borderRadius: 15, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.rim },
   streak: { flexDirection: "row", alignItems: "center", gap: 12, padding: 14 },
   quest: { flexDirection: "row", alignItems: "center", gap: 10, padding: 12 }, questCopy: { flex: 1, minWidth: 0, gap: 5 }, claim: { width: 92 },
   vault: { padding: 14, gap: 10 },
   trophies: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  trophy: { width: "31.5%", minHeight: 118, alignItems: "center", gap: 3, padding: 8, borderRadius: 16, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim }, locked: { opacity: 0.6 },
+  trophyCell: { width: "31.5%" }, trophy: { minHeight: 118, alignItems: "center", gap: 3, padding: 8, backgroundColor: arena.panel }, locked: { opacity: 0.6 },
   trophyIcon: { width: 46, height: 46, borderRadius: 23, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.rim },
   trophyOn: { backgroundColor: arena.gold, borderColor: arena.goldDeep },
   result: { minWidth: 52, height: 34, paddingHorizontal: 6, borderRadius: 10, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.rim },

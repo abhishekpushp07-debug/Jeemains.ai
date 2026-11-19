@@ -34,7 +34,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
       <RewardPanel reward={s.reward} historical={historical} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "What a run!" : "Sprint complete"} />
       {s.mode === "fresh" ? <DiamondsWon reward={s.reward} /> : null}
-      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{cards.length && cards.every((c) => isBitsat(c.subject)) ? "BITSAT" : s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : "Solo Sprint"}</T>
+      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{s.mode !== "weak_topics" && cards.length && cards.every((c) => isBitsat(c.subject)) ? "BITSAT" : s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : s.mode === "weak_topics" ? "Weak Topic Sprint" : "Solo Sprint"}</T>
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
         <T w="heavy" size={44} color={colors.onSurfaceInverse} testID="rf-summary-score">{sum.score}<T w="semibold" size={22} color={colors.custom_whiteA70}> / {sum.total}</T></T>
@@ -80,11 +80,11 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
 
 function RapidSession() {
   const p = useLocalSearchParams();
-  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.revision, p.n])} />;
+  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.revision, p.weak, p.n])} />;
 }
 
 function RapidSessionRound() {
-  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; picks?: string; ids?: string; review?: string; diagrams?: string; revision?: string; n?: string }>();
+  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; picks?: string; ids?: string; review?: string; diagrams?: string; revision?: string; weak?: string; n?: string }>();
   const picks = decodePicks(p.picks);
   const size = (CARD_COUNTS as readonly number[]).includes(Number(p.n)) ? Number(p.n) : 30;
   const insets = useSafeAreaInsets();
@@ -125,12 +125,12 @@ function RapidSessionRound() {
     }
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
-      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: p.revision === "1" || p.ids ? 30 : size, revision: p.revision === "1", request_id: reqId.current,
-          ...(picks && !p.ids && p.revision !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
+      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: p.revision === "1" || p.ids ? 30 : size, revision: p.revision === "1", weak_topics: p.weak === "1", request_id: reqId.current,
+          ...(picks && !p.ids && p.revision !== "1" && p.weak !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
     run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else if (!seat.hold(e)) setError(e.message); });
     return () => { alive = false; };
-  }, [p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.diagrams, p.revision, uid, n]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.diagrams, p.revision, p.weak, uid, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Timer starts only when the card is visible; resets per card.
   useEffect(() => {
@@ -151,6 +151,7 @@ function RapidSessionRound() {
       invalidate(`u.${uid}.rfprofile`);
       invalidate(`u.${uid}.rfshop`);
       invalidate(`u.${uid}.revision`);
+      invalidate(`u.${uid}.rfweaktopics`);
       invalidate(`u.${uid}.rfboard`);
       setDone(s);
     } catch (e: any) { setError(e.message + " Your answers are kept — tap Retry."); }
@@ -242,7 +243,7 @@ function RapidSessionRound() {
   const cardStyle = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { rotate: `${x.value / 25}deg` }] }));
 
   const tint = subjectColor(card?.subject || p.subject);
-  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", picks: p.picks || "", diagrams: p.diagrams || "", n: String(size), r: uuid() } });
+  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", picks: p.picks || "", diagrams: p.diagrams || "", weak: p.weak || "", n: String(size), r: uuid() } });
   const examLabel = isBitsat(card?.subject) ? "BITSAT" : session?.exam || done?.exam || p.exam || "";
 
   return (
@@ -252,7 +253,7 @@ function RapidSessionRound() {
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
-          <T testID="rf-session-exam" w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? `${examLabel} · ${card.subject} · ${done ? (done.chapter || "Mixed chapters") : card.chapter}` : "Rapid Fire"}</T>
+          <T testID="rf-session-exam" w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? p.weak === "1" ? `Weak Topic · ${done ? (done.label?.split(" · ")[1] || "your weak subtopics") : card.topic || card.chapter}` : `${examLabel} · ${card.subject} · ${done ? (done.chapter || "Mixed chapters") : card.chapter}` : "Rapid Fire"}</T>
           {card && !done ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
               <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter" numberOfLines={1}>{narrow ? `${i + 1} / ${cards.length}` : `Card ${i + 1} of ${cards.length}`}</T>
@@ -272,7 +273,7 @@ function RapidSessionRound() {
 
       {seat.waiting && !card ? <ArenaWait testID="rf-arena-wait" left={seat.left} onCancel={() => { seat.cancel(); router.back(); }} /> : null}
       {error ? <View style={{ padding: space.lg }}><ErrorBox error={error} retry={() => (session ? finish() : setN((v) => v + 1))} testID="rf-error" /></View> : null}
-      {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={() => router.back()} />} /></Card></View> : null}
+      {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.weak ? "No weak subtopics yet" : p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.weak ? "Play a few sprints or matches first. The subtopics you keep missing will build your Weak Topic Sprint." : p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={() => router.back()} />} /></Card></View> : null}
       {!card && !error && !empty && !done && !seat.waiting ? <View style={{ padding: space.lg }}><Skeleton h={380} /></View> : null}
 
       {done ? <Summary s={done} cards={cards} historical={!!p.review} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (

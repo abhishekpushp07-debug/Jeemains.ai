@@ -1,0 +1,51 @@
+{
+  "summary": "I tested the backend (Weak Topic Sprint APIs) and the frontend (All India 5-scene styles page, lobby popup and order, Trophy/Gang flicker, Weak Topic Sprint, 320 px layouts) on a 375x667 mobile web preview with the QA learner. Backend: 6/6 pytest passed. Frontend: every requested feature works. All 5 fire-world scenes render and animate. Use-style switches the button to 'IN USE ✓' and updates the pill. The choice persists after reload and shows in the popup. Long press opens the styles page. The popup shows on entry and EXIT closes it. Lobby order is correct. The flicker fix holds: Trophy/Gang do one ~120-170 ms fade and the rows do not move. The Weak Topic Sprint flow works from start to end. Issues found are UX/layout only: clipped text at 320/375 px, a truncated START button label in the weak sheet, a low-contrast card kicker, a misleading summary subject, and a one-try daily round that starts the moment someone taps a preview card on the styles page. No deprecated Expo packages were found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/rf/weak-topics", "issue": "'cards' is count_documents(topic_filter), which also counts cards the deck later drops (unsupported diagram kinds, duplicate prompts). So the lobby's 'M cards' can be higher than what is dealt. Also, topics are ranked by lifetime misses, so a subtopic stays listed after every card in it has been answered correctly (missed=0)."},
+      {"endpoint": "weak_topic_deck (revision.py:90-93)", "issue": "Fallback lane lookup lanes.get((subject, chapter, chapter)): when a weak 'topic' equals its chapter, topic_filter loads the whole chapter. Cards with a different, non-weak topic then fall into that chapter lane and get dealt, so they are not strictly 'weak subtopics'."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "WeakSprintPanel START button", "issue": "The label 'START WEAK TOPIC SPRINT' is truncated to 'START WEAK TO…' at 375 px inside rf-weak-sheet. Shorten it (e.g. 'START SPRINT') or allow 2 lines / a smaller font.", "testID": "rf-weak-sprint-start", "priority": "MEDIUM"},
+      {"component": "WeakSprintStrip at 320 px", "issue": "The kicker 'YOUR MISSES · 20 S' is clipped to 'YOUR MISSES · 2…'. The line '3 subtopics · 23 cards · …' loses all the subtopic names, even at 375 px ('Distri…'). The title 'Weak Topic Sprint' wraps to 2 lines at 375 and 320 px.", "testID": "rf-weak-sprint-line", "priority": "LOW"},
+      {"component": "Session header (Weak Topic Sprint)", "issue": "rf-session-exam 'Weak Topic Sprint · Logical Reasoning · Distribution of terms…' is cut off at 375 px after 'Logical Reasoni…', so the subtopic (the key information) is never visible during the sprint.", "testID": "rf-session-exam", "priority": "LOW"},
+      {"component": "Summary of Weak Topic Sprint", "issue": "The summary header reads 'Weak Topic Sprint · English · Mixed chapters' for a sprint that mixed Logical Reasoning and English cards, so one subject is shown as if it were the whole sprint. rf-summary-exam reads 'BITSAT · Weak Topic Sprint' (isBitsat because the weak topics are English/LR), even though the user is in the JEE arena. Ends with 'Weak Topic Sprint' as required.", "testID": "rf-summary-exam", "priority": "LOW"}
+    ],
+    "integration_issues": [
+      {"flow": "Styles page card tap -> /rapid/daily", "issue": "Tapping a preview card on /rapid/daily-styles goes straight into the one-try All India round. The countdown and server clock start at once (rf_daily_plays status 'playing', started_ts set), so a student who is only browsing styles can burn today's single attempt by accident. This happened to the QA account during testing (opened, left at card 1, not played to the end). Suggest a confirm step, or only start the server clock on the first card.", "affected_testIDs": ["rf-daily-style-card-1", "rf-daily-style-card-2", "rf-daily-style-card-3", "rf-daily-style-card-4", "rf-daily-style-card-5"]}
+    ],
+    "design_issues": [
+      {"screen": "All India card (lobby, popup, styles page)", "issues": ["The kicker 'ALL INDIA RAPID FIRE · TODAY' (allIndia.ember on orange smoke) is almost unreadable in all 5 scenes. Add a text shadow or scrim, or use a lighter colour.", "Popup heading 'Your All India round is on' repeats the card title 'Your round is on'."]},
+      {"screen": "Lobby", "issues": ["The rf-all-india-style pill is 36 px tall, below the 44 px minimum touch target.", "The All India board in Trophy > Ranks shows several leftover 'qa30-rank-a' test profiles (8 qa30-rank* rf_profiles in DB) from earlier test runs."]},
+      {"screen": "/rapid/daily-styles", "issues": ["All 5 animated scenes (fire drift, embers, streaks, etc.) are mounted and running at once, which may cost performance on low-end Android. Consider pausing scenes that are off-screen."]},
+      {"screen": "Trophy sub-tabs", "issues": ["Friends / Gang War / My matches sub-tabs fill in about 100 ms after the tap (element count jumps 46->51). This is only a tiny pop, not the old 3-4x flicker; the top-level tab fade happens once."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_weak_topics.py", "/app/backend/tests/test_rf_weak_topics_extra.py", "/app/test_reports/pytest/iter110_weak.xml"],
+  "action_items": [
+    "Stop a tap on a style preview card from silently starting the one-try daily round: add a confirm step, or start the server clock only on the first card.",
+    "Shorten or fit the 'START WEAK TOPIC SPRINT' RaisedButton label in rf-weak-sheet (truncated at 375 px).",
+    "Fix clipping in the Weak strip at 320 px (kicker and line) and keep at least one subtopic name visible; consider shrinking the title so it stays on one line.",
+    "Make the All India card kicker 'ALL INDIA RAPID FIRE · TODAY' readable on the fire background.",
+    "Weak Topic Sprint summary: show 'Mixed subjects' instead of a single subject, and consider 'JEE' instead of 'BITSAT' when the sprint was started from the JEE arena.",
+    "Raise the rf-all-india-style pill to at least 44 px tall.",
+    "Optional backend: make 'cards' in /rf/weak-topics match what the deck can actually deal; restrict the chapter-lane fallback to cards without a topic."
+  ],
+  "critical_code_review_comments": [
+    "revision.py weak_topics: the ranking uses lifetime misses, so subtopics that are fully recovered stay in the sprint forever. Consider weighting by missed (still-wrong cards) or by recency.",
+    "revision.py:91 lane fallback deals cards from other topics into a chapter-level lane (see backend minor).",
+    "LobbyTab useFocusEffect reloads 6 resources on every focus. This is fine because cached data paints at once, but it means 6 network calls each time the user returns to the tab.",
+    "daily-styles.tsx renders 5 AllIndiaCard instances each with a full animated DailyScene and a Glitter ring at the same time."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_weak_topics_extra.py (new)"],
+  "success_rate": {"backend": "100% (6/6)", "frontend": "~90% (all requested flows work; layout/UX issues listed)"},
+  "seed_data_creation": "Backend tests used transient TEST-weak-* RF players, cleaned up after (0 left). The QA account played one Weak Topic Sprint (3 answered wrong, then finished): its weak list went from 4 subtopics/28 cards to 3/23 because 3 subtopics now have at least 2 misses. The QA account's All India daily round for 2026-11-20 is now in 'playing' state at card 1, because tapping a style preview card auto-started it. It was not played to the end. The style pick (Bullseye) is kept only in that browser's local storage.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on web: type into entry-phone-input and entry-pin-input with keyboard.type (page.fill did not trigger the RN state), then tap the 'RAPID FIRE' tab text. The session does not carry over between browser_automation calls, so log in each time. Flicker check: a JS sampler of the cumulative opacity of rf-board-row-* every 50 ms showed one fade 0.42->1.0 in about 140 ms and no transforms. Do not tap rf-daily-style-card-N or rf-all-india again with the QA account unless you intend to enter the daily round; it is already 'playing' today.",
+  "rca_of_issue": "Daily round consumed by preview tap: daily-styles.tsx:25 onPress={() => router.push(go.daily())} for every preview card, and /rapid/daily starts the session (and the server started_ts) as soon as it mounts."
+}

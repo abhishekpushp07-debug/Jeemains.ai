@@ -5,7 +5,6 @@ import { T, tap } from "@/src/components/ui";
 import { arena } from "@/src/theme";
 import { GEM_LABEL, GameIcon, GameIconName, Gem, GemColor } from "./Art";
 import { SectionTitle } from "./arena";
-import { Pop } from "./juice";
 import { Face, Note } from "./parts";
 import { ErrorBox } from "./ui";
 import { FeedItem, ago, go, useFeed } from "./social";
@@ -36,7 +35,7 @@ export function FriendFeed({ uid, hasFriends }: { uid: string; hasFriends: boole
     <SectionTitle title="Friend activity" testID="rf-feed-toggle" action={items.length > PREVIEW ? (all ? "Show less" : `See all (${items.length})`) : undefined} onAction={() => setAll(!all)} />
     <ErrorBox testID="rf-feed-error" error={feed.error} retry={feed.reload} />
     {!feed.data && feed.loading ? <ActivityIndicator testID="rf-feed-loading" color={arena.aqua} /> : null}
-    {(all ? items : items.slice(0, PREVIEW)).map((e, i) => <Pop key={`${e.from.pid}:${e.id}`} delay={Math.min(i, 6) * 40}>
+    {(all ? items : items.slice(0, PREVIEW)).map((e, i) => <View key={`${e.from.pid}:${e.id}`}>
       <Pressable testID={`rf-feed-row-${i}`} onPress={() => { tap(); router.push(go.player(e.from.pid)); }} accessibilityRole="button" accessibilityLabel={`${e.from.name} ${story(e)}. Open profile`} style={styles.row}>
         <Face p={e.from} size={42} />
         <View style={styles.flex}>
@@ -45,7 +44,7 @@ export function FriendFeed({ uid, hasFriends }: { uid: string; hasFriends: boole
         </View>
         {e.kind === "gem" ? <Gem color={e.data.colour} size={34} /> : <GameIcon name={ICONS[e.kind] || "trophy"} size={36} />}
       </Pressable>
-    </Pop>)}
+    </View>)}
     {feed.data && !items.length ? <Note testID="rf-feed-empty">Quiet for now. Your friends’ wins, streaks and diamonds show up here.</Note> : null}
   </View>;
 }

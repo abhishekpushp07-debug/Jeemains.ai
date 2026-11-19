@@ -44,19 +44,19 @@ const EMBLEMS: Record<string, number> = {
 };
 
 /** Gentle life for artwork: a slow float, or a breathing pulse. Still when Reduce Motion is on. */
-export function Alive({ children, kind = "float", delay = 0, style }: { children: React.ReactNode; kind?: "float" | "breathe" | "wiggle" | "hop"; delay?: number; style?: StyleProp<ImageStyle> }) {
+export function Alive({ children, kind = "float", delay = 0, style, once }: { children: React.ReactNode; kind?: "float" | "breathe" | "wiggle" | "hop"; delay?: number; style?: StyleProp<ImageStyle>; once?: boolean }) {
   const reduced = useReducedMotion();
   const t = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
     const calm = Easing.inOut(Easing.sin), rest = withDelay(2600, withTiming(0, { duration: 0 }));
-    // float and breathe never stop; wiggle and hop are a quick burst of fun, then a rest.
+    // float and breathe never stop; wiggle and hop are a quick burst of fun, then a rest. `once`: one burst, then still.
     const loop = kind === "wiggle" ? withSequence(withTiming(1, { duration: 110 }), withTiming(-1, { duration: 170 }), withTiming(0.6, { duration: 140 }), withTiming(0, { duration: 120 }), rest)
       : kind === "hop" ? withSequence(withTiming(1, { duration: 240, easing: Easing.out(Easing.quad) }), withTiming(0, { duration: 420, easing: Easing.bounce }), rest)
       : withSequence(withTiming(1, { duration: 1500, easing: calm }), withTiming(0, { duration: 1500, easing: calm }));
-    t.value = withDelay(delay, withRepeat(loop, -1, false));
+    t.value = withDelay(delay, once && (kind === "wiggle" || kind === "hop") ? loop : withRepeat(loop, -1, false));
     return () => cancelAnimation(t);
-  }, [reduced, t, delay, kind]);
+  }, [reduced, t, delay, kind, once]);
   const a = useAnimatedStyle(() => (kind === "float" ? { transform: [{ translateY: -3 * t.value }, { rotate: `${-2 + 4 * t.value}deg` }] }
     : kind === "breathe" ? { transform: [{ scale: 1 + 0.05 * t.value }] }
     : kind === "wiggle" ? { transform: [{ rotate: `${t.value * 10}deg` }] }

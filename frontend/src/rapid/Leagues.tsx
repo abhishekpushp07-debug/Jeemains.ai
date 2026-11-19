@@ -9,7 +9,7 @@ import { playSfx } from "@/src/sfx";
 import { arena } from "@/src/theme";
 import { GameIcon } from "./Art";
 import { GoldTitle, Panel, RaisedButton, Segment } from "./arena";
-import { Confetti, Pop } from "./juice";
+import { Confetti } from "./juice";
 import { Face, NameLine, Note, crownText } from "./parts";
 import { ErrorBox } from "./ui";
 import { Crown as CrownT, go, setArenaTab } from "./social";
@@ -19,10 +19,9 @@ type Row = { rank: number; pid?: string | null; name: string; avatar?: string | 
 const left = (s: number) => { const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600); return d ? `${d}d ${h}h` : `${h}h ${Math.floor((s % 3600) / 60)}m`; };
 
 /** One ranked row: medal, face, name, and the number that ranks it. */
-export function BoardRow({ row, value, sub, testID, i = 0 }: { row: Row; value: string; sub: string; testID: string; i?: number }) {
+export function BoardRow({ row, value, sub, testID }: { row: Row; value: string; sub: string; testID: string }) {
   const router = useRouter();
-  return <Pop delay={Math.min(i, 8) * 40}>
-    <Pressable testID={testID} disabled={!row.pid || row.you} onPress={() => { tap(); router.push(go.player(row.pid!)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}${crownText(row.crown)}, ${value}`} style={[styles.row, row.you && styles.rowYou]}>
+  return <Pressable testID={testID} disabled={!row.pid || row.you} onPress={() => { tap(); router.push(go.player(row.pid!)); }} accessibilityRole="button" accessibilityLabel={`Rank ${row.rank}, ${row.name}${crownText(row.crown)}, ${value}`} style={[styles.row, row.you && styles.rowYou]}>
       <View style={[styles.medal, row.rank <= 3 && { backgroundColor: MEDAL[row.rank - 1], borderColor: arena.badgeInk }]}><T w="heavy" size={13} color={row.rank <= 3 ? arena.badgeInk : arena.muted}>{row.rank}</T></View>
       <Face p={row} size={40} />
       <View style={styles.flex}>
@@ -30,8 +29,7 @@ export function BoardRow({ row, value, sub, testID, i = 0 }: { row: Row; value: 
         <T w="bold" size={11} color={arena.muted} numberOfLines={1}>{sub}</T>
       </View>
       <T w="heavy" size={13} color={arena.gold}>{value}</T>
-    </Pressable>
-  </Pop>;
+    </Pressable>;
 }
 
 /** Friends League: you and your friends, ranked by this week's XP (Monday to Sunday). Last week's top 3 collect coins. */
@@ -75,7 +73,7 @@ export function FriendsLeague({ uid }: { uid: string }) {
     {!d.friends ? <>
       <Note testID="rf-league-empty">Your league is just you for now. Add friends with their Friend Code and race them every week.</Note>
       <RaisedButton testID="rf-league-add" tone="wine" icon="friends" label="Add friends" onPress={() => setArenaTab("gang")} />
-    </> : rows.map((r, i) => <BoardRow key={r.pid || r.rank} i={i} row={r} testID={`rf-league-row-${r.rank}`} value={`${r.xp} XP`} sub={`Level ${r.level} · ${r.wins} win${r.wins === 1 ? "" : "s"}`} />)}
+    </> : rows.map((r) => <BoardRow key={r.pid || r.rank} row={r} testID={`rf-league-row-${r.rank}`} value={`${r.xp} XP`} sub={`Level ${r.level} · ${r.wins} win${r.wins === 1 ? "" : "s"}`} />)}
     <T size={10} color={arena.faint} style={styles.center}>Weekly XP from every sprint and match. Practice only, not exam ranks.</T>
     {won ? <Confetti count={28} /> : null}
   </View>;
@@ -97,7 +95,7 @@ export function GangWarBoard({ uid }: { uid: string }) {
         <T testID="rf-gangwar-you" w="bold" size={12} color={arena.muted}>{d.you ? `You: #${d.you.rank} · ${d.you.score} points in ${d.you.matches} war${d.you.matches === 1 ? "" : "s"}` : "Fight a Gang War to get on this board"}</T>
       </View>
     </Panel>
-    {d.items.map((r: Row, i: number) => <BoardRow key={r.pid || r.rank} i={i} row={r} testID={`rf-gangwar-row-${r.rank}`} value={`${r.score} pts`} sub={`${r.matches} war${r.matches === 1 ? "" : "s"} · ${r.wins} won`} />)}
+    {d.items.map((r: Row) => <BoardRow key={r.pid || r.rank} row={r} testID={`rf-gangwar-row-${r.rank}`} value={`${r.score} pts`} sub={`${r.matches} war${r.matches === 1 ? "" : "s"} · ${r.wins} won`} />)}
     {!d.items.length ? <Note testID="rf-gangwar-empty">No Gang War yet. Open your gang and press GANG WAR to battle another gang!</Note> : null}
     {!d.you ? <RaisedButton testID="rf-gangwar-go" tone="wine" icon="gang" label="Open my gangs" onPress={() => setArenaTab("gang")} /> : null}
     <T size={10} color={arena.faint} style={styles.center}>Points = correct answers scored for your gang in Gang vs Gang battles.</T>

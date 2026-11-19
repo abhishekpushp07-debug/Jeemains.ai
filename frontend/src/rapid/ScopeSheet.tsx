@@ -8,7 +8,7 @@ import { arena, fonts, rapidSubjectColor as subjectColor } from "@/src/theme";
 import { GoldTitle, RaisedButton } from "./arena";
 import { Check } from "./parts";
 import { CardCountPicker } from "./CardCount";
-import { CatalogSubject, MAX_PICKS, PCM, Pick, SHORT, SUBJECTS, cardCount, isBitsat, isPCM, isWhole, normalise, pickKey, scopeLabel } from "./scope";
+import { CatalogSubject, MAX_PICKS, PCM, Pick, SHORT, SUBJECTS, cardCount, fitCount, isBitsat, isPCM, isWhole, normalise, pickKey, scopeLabel, useCardCount } from "./scope";
 
 const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", English: "alphabetical-variant", "Logical Reasoning": "puzzle-outline" };
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -57,8 +57,10 @@ export function SubjectChips({ picks, onChange, onLimit, testID = "rf-subject-ch
  * Battleground picker: up to 5 picks across Physics, Chemistry and Maths. Each pick is a whole subject (Mixed) or one chapter.
  * Quick mixes on top (PCM Mixed and Mixed of each subject), chapters per subject below, chosen picks in the tray.
  */
-export function ScopeSheet({ visible, onClose, subjects, value, onDone, min = 30, title = "Choose your battleground", hint, action, testID = "rf-scope-sheet" }: {
+export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, min = 30, title = "Choose your battleground", hint, action, testID = "rf-scope-sheet" }: {
   visible: boolean; onClose: () => void; subjects: CatalogSubject[]; value: Pick[]; onDone: (picks: Pick[]) => void; min?: number; title?: string; hint?: string; action?: string; testID?: string;
+  /** Lobby: PLAY right here starts a Quick Match on what is picked (saved as the lobby's choice too). */
+  onPlay?: (picks: Pick[]) => void;
 }) {
   const insets = useSafeAreaInsets(), reduced = useReducedMotion();
   const [draft, setDraft] = useState<Pick[]>(value), [tab, setTab] = useState(value[0]?.subject || "Physics");
@@ -67,7 +69,7 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, min = 30
   if (visible !== was) { setWas(visible); if (visible) { setDraft(value); setTab(value[0]?.subject || "Physics"); setQ(""); setWarn(""); } }
   const query = q.trim().toLowerCase();
   const hits = useMemo(() => (query ? subjects.flatMap((s) => s.chapters.filter((c) => c.name.toLowerCase().includes(query)).map((c) => ({ ...c, subject: s.name }))) : []), [query, subjects]);
-  const cards = cardCount(draft, subjects), full = draft.length >= MAX_PICKS;
+  const cards = cardCount(draft, subjects), full = draft.length >= MAX_PICKS, size = fitCount(useCardCount(), cards);
   const cur = subjects.find((s) => s.name === tab);
 
   const toggle = (pick: Pick) => {
@@ -156,9 +158,13 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, min = 30
           </ScrollView>
           {warn ? <T testID="rf-scope-warn" w="bold" size={12} color={arena.danger} style={styles.center}>{warn}</T>
             : draft.length && cards < min ? <T testID="rf-scope-short" w="bold" size={12} color={arena.danger} style={styles.center}>{cards} cards. Add a chapter for a full {min}-card round.</T> : null}
-          <RaisedButton testID="rf-scope-done" height={58} streak icon={action ? "flame" : undefined} label={!draft.length ? "PICK A SUBJECT" : action || scopeLabel(draft).toUpperCase()}
+          {onPlay ? <View style={styles.playRow}>
+            <RaisedButton testID="rf-scope-done" height={58} tone="wine" label="SAVE" sub={`${draft.length}/${MAX_PICKS} picked`} disabled={!draft.length || cards < min} onPress={() => { onDone(draft); onClose(); }} style={styles.save} />
+            <RaisedButton testID="rf-scope-play" height={58} streak icon="swords" label="PLAY" sub={!draft.length ? "Pick a subject" : `Quick Match · ${size} cards`}
+              disabled={!draft.length || cards < min || !size} onPress={() => { onDone(draft); onClose(); onPlay(draft); }} style={styles.play} />
+          </View> : <RaisedButton testID="rf-scope-done" height={58} streak icon={action ? "flame" : undefined} label={!draft.length ? "PICK A SUBJECT" : action || scopeLabel(draft).toUpperCase()}
             sub={`${action && draft.length ? scopeLabel(draft) + " · " : ""}${draft.length}/${MAX_PICKS} picked · ${cards} cards`}
-            disabled={!draft.length || cards < min} onPress={() => { onDone(draft); onClose(); }} />
+            disabled={!draft.length || cards < min} onPress={() => { onDone(draft); onClose(); }} />}
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -188,7 +194,7 @@ const styles = StyleSheet.create({
   tray: { paddingHorizontal: 18, paddingTop: 10, gap: 8, borderTopWidth: 1, borderTopColor: arena.rim },
   trayRow: { gap: 6, alignItems: "center", minHeight: 36 },
   picked: { flexDirection: "row", alignItems: "center", gap: 4, height: 34, paddingHorizontal: 10, borderRadius: 17, borderWidth: 1.5, backgroundColor: arena.panelHi, maxWidth: 220 },
-  pickedText: { flexShrink: 1 },
+  pickedText: { flexShrink: 1 }, playRow: { flexDirection: "row", gap: 10 }, save: { flex: 1 }, play: { flex: 1.7 },
   chips: { flexDirection: "row", gap: 6, alignSelf: "stretch", justifyContent: "center" },
   chipRows: { alignSelf: "stretch", gap: 6 },
   bitsat: { minHeight: 44, paddingHorizontal: 8, borderRadius: 12, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: arena.goldDeep, borderStyle: "dashed" },

@@ -1,5 +1,13 @@
 # JEELIVE.AI Native App — PRD
 
+## All India card: 5 living scenes in the student's fire world + flicker fix + Weak Topic Sprint (20 Nov 2026)
+- User (Hinglish): "5 screens: spaceship, World Cup, Lions fight, horse racing, archery", then sent a reference picture (black rider silhouettes on a dark ridge against blazing red smoke): "use this as the theme and background of the All India Rapid Fire cards — beautiful, perfect, elegant, powerful".
+- `src/rapid/DailyScenes.tsx`: one fire world (th_fire_bg drifting, breathing glow, rising embers) + 5 scenes on a 360 stage scaled to the card: 1 Space Race (rocket silhouette + flame flies across, star streaks), 2 World Cup (default; golden trophy over silhouette army, gold rays), 3 Lion Clash (lions lunge, white-hot burst, VS), 4 Cavalry Race (3 riders swap the lead, dust, wind embers), 5 Bullseye (archer, arrow into glowing target, +10). Art: `backend/rapidfire/make_theme_art.py` (Gemini Nano Banana; fire bg made from the student's picture `rapidfire/ref_battle.jpeg`; silhouettes keyed from white). Style key `rf.dailyStyle.v2`.
+- Lobby: tiles → Weak Topic Sprint strip → Cup Night → All India square card → "World Cup · Change style ›" pill (44 px) → Knockout. Styles page: tap = pick the style (never starts the one-try round); only the card in view animates.
+- Flicker fix: no row-by-row pop-in on Trophy/Gang lists (Pop removed from rows, BoardRow, FriendFeed, notices, no icon hop); each arena tab fades in once (200 ms); leaderboard/feed/friend code prefetched from the lobby.
+- Weak Topic Sprint: GET `/api/rf/weak-topics` (subtopics with still-missed cards, ranked by misses; ≥2 misses = frequent, top-up when <3; `cards` = what a round can really deal), POST `/api/rf/sessions {weak_topics:true}` → mode `weak_topics`, only those subtopics, own missed cards first then unseen, 20 s. `src/rapid/WeakSprint.tsx` (lobby strip + panel in the Weak cards sheet). Tests `tests/test_rf_weak_topics.py` + `_extra.py` 6 pass; iteration_110 frontend all pass, fixes applied after.
+- Note: the tester opened today's All India round on the QA account (status playing).
+
 ## Rapid Fire content expansion LIVE (20 Nov 2026)
 - User: "Sirf Rapid Fire poora karo" + "don't ask me again, give your best".
 - Gate finished for all 110 chapters; new `dedupe` stage (LLM judge per chapter + same-answer cards from the subject's other chapters) dropped ~3,500 repeats; 2 top-up rounds (author now also sees the whole chapter); merge with subject-wide near-dup check and raw-TeX skip.

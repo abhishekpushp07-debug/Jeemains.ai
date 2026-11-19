@@ -6,6 +6,7 @@ import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, 
 import { Icon, IconName, T, tap } from "@/src/components/ui";
 import { arena, fonts } from "@/src/theme";
 import { GameIcon, GameIconName } from "./Art";
+import { Glitter, splitStyle } from "./Glitter";
 
 // Blood Red Arena building blocks. Shining blood red is the stage, teal is anything you press, gold is for wins and rewards.
 
@@ -67,13 +68,15 @@ export function ArenaBg({ children, dim, style, testID }: { children: React.Reac
   </View>;
 }
 
-/** Raised black-cherry glass panel with a glossy top. `gold` gives it the special frame kept for rewards and showcases. */
-export function Panel({ children, style, testID, gold, flat }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string; gold?: boolean; flat?: boolean }) {
-  return <View testID={testID} style={[styles.panel, gold && styles.panelGold, flat && styles.panelFlat, style]}>
+/** Raised black-cherry glass panel with a glossy top and the running glitter border. `gold` keeps the golden lip for rewards and showcases. */
+export function Panel({ children, style, testID, gold, flat, sparkles }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string; gold?: boolean; flat?: boolean; sparkles?: number }) {
+  const [outer, { borderRadius, ...inner }] = splitStyle(style);
+  return <Glitter testID={testID} radius={typeof borderRadius === "number" ? borderRadius : 20} sparkles={sparkles ?? (flat ? 1 : 3)} style={[!flat && styles.panelLift, outer]}
+    inner={[styles.panel, gold && styles.panelGold, flat && styles.panelFlat, inner]}>
     <LinearGradient pointerEvents="none" colors={[arena.panelGloss, arena.clear]} style={styles.panelSheen} />
     <LinearGradient pointerEvents="none" colors={[arena.clear, gold ? arena.gold : arena.rimHi, arena.clear]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.hairline} />
     {children}
-  </View>;
+  </Glitter>;
 }
 
 type Tone = "teal" | "wine" | "danger";
@@ -133,8 +136,8 @@ export function OnlineDot({ size = 12 }: { size?: number }) {
 }
 
 /** Golden heading with a dark outline. */
-export function GoldTitle({ children, size = 22, testID, center }: { children: React.ReactNode; size?: number; testID?: string; center?: boolean }) {
-  return <T testID={testID} w="heavy" size={size} color={arena.gold} style={[styles.goldShadow, center && styles.center, { letterSpacing: size > 26 ? 1.5 : 0.3 }]}>{children}</T>;
+export function GoldTitle({ children, size = 22, testID, center, lines }: { children: React.ReactNode; size?: number; testID?: string; center?: boolean; lines?: number }) {
+  return <T testID={testID} w="heavy" size={size} color={arena.gold} numberOfLines={lines} adjustsFontSizeToFit={!!lines} minimumFontScale={0.8} style={[styles.goldShadow, center && styles.center, { letterSpacing: size > 26 ? 1.5 : 0.3 }]}>{children}</T>;
 }
 export function ScreenTop({ title, sub, onBack, right, testID }: { title: string; sub?: string; onBack: () => void; right?: React.ReactNode; testID?: string }) {
   return <View style={styles.top}>
@@ -150,16 +153,16 @@ export function SectionTitle({ title, action, onAction, testID }: { title: strin
   </View>;
 }
 
-/** Tabs inside a screen. The chosen one is a pressed-in teal key. */
+/** Tabs inside a screen, framed by the glitter border. The chosen one is a pressed-in teal key. */
 export function Segment<K extends string>({ items, value, onChange, prefix }: { items: [K, string][]; value: K; onChange: (k: K) => void; prefix: string }) {
-  return <View style={styles.segment}>
+  return <Glitter radius={16} sparkles={2} inner={styles.segment}>
     {items.map(([k, label]) => {
       const on = k === value;
       return <Pressable key={k} testID={`${prefix}-${k}`} accessibilityRole="tab" accessibilityState={{ selected: on }} aria-selected={on} onPress={() => { tap(); onChange(k); }} style={[styles.segItem, on && styles.segOn]}>
         <T w="heavy" size={13} color={on ? arena.text : arena.muted} numberOfLines={1}>{label}</T>
       </Pressable>;
     })}
-  </View>;
+  </Glitter>;
 }
 
 /** Gold ribbon label (the chosen subject and chapter on the stage). */
@@ -177,9 +180,9 @@ export const arenaInput = { height: 52, borderRadius: 16, paddingHorizontal: 14,
 const styles = StyleSheet.create({
   bg: { flex: 1, backgroundColor: arena.bg, overflow: "hidden" }, flex: { flex: 1, minWidth: 0 }, center: { textAlign: "center" },
   panelSheen: { position: "absolute", top: 0, left: 0, right: 0, height: "55%" },
-  panel: { borderRadius: 20, backgroundColor: arena.panel, borderWidth: 1.5, borderColor: arena.rim, borderBottomWidth: 5, borderBottomColor: arena.panelEdge, overflow: "hidden",
-    shadowColor: arena.black, shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 6 }, elevation: 5 },
-  panelGold: { borderColor: arena.gold, borderBottomColor: arena.goldDeep }, panelFlat: { borderBottomWidth: 1.5, borderBottomColor: arena.rim, elevation: 0, shadowOpacity: 0 },
+  panel: { backgroundColor: arena.panel, borderBottomWidth: 4, borderBottomColor: arena.panelEdge },
+  panelLift: { backgroundColor: arena.panelEdge, shadowColor: arena.black, shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 6 }, elevation: 5 },
+  panelGold: { borderBottomColor: arena.goldDeep }, panelFlat: { borderBottomWidth: 0 },
   hairline: { position: "absolute", top: 0, left: 20, right: 20, height: 1.5 },
   gloss: { position: "absolute", top: 2, left: 3, right: 3, height: "42%", backgroundColor: arena.gloss },
   streak: { position: "absolute", top: -40, bottom: -40, width: 56, left: 0 },
@@ -190,7 +193,7 @@ const styles = StyleSheet.create({
   badge: { minWidth: 20, height: 20, borderRadius: 10, paddingHorizontal: 5, alignItems: "center", justifyContent: "center", backgroundColor: arena.badge, borderWidth: 1.5, borderColor: arena.badgeInk },
   top: { flexDirection: "row", alignItems: "center", gap: 12, paddingHorizontal: 16, minHeight: 56 },
   section: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginTop: 4 }, sectionAction: { minHeight: 44, justifyContent: "center", paddingLeft: 12 },
-  segment: { flexDirection: "row", gap: 4, padding: 4, borderRadius: 16, backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.rim },
+  segment: { flexDirection: "row", gap: 4, padding: 4, backgroundColor: arena.panelEdge },
   segItem: { flex: 1, minHeight: 44, borderRadius: 12, alignItems: "center", justifyContent: "center", paddingHorizontal: 4 },
   segOn: { backgroundColor: arena.teal, borderWidth: 1.5, borderColor: arena.tealOutline, borderBottomWidth: 3, borderBottomColor: arena.tealDeep },
   ribbonWrap: { alignSelf: "center", minWidth: 220, maxWidth: "92%", borderRadius: 14, backgroundColor: arena.goldDeep, paddingBottom: 4 },

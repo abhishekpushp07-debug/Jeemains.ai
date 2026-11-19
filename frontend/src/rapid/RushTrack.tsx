@@ -16,7 +16,7 @@ type Rush = NonNullable<GameProfile["rush"]>;
 function Chest({ s }: { s: Rush["steps"][number] }) {
   const ready = s.done && !s.claimed;
   return <>
-    {ready ? <Alive kind="hop"><GameIcon name="chest" size={40} /></Alive> : <GameIcon name="chest" size={40} style={s.done ? undefined : styles.locked} />}
+    {ready ? <Alive kind="hop" once><GameIcon name="chest" size={40} /></Alive> : <GameIcon name="chest" size={40} style={s.done ? undefined : styles.locked} />}
     <T w="heavy" size={10.5} color={s.done ? arena.text : arena.muted} numberOfLines={1}>{s.chest}</T>
     <View style={styles.line}>
       <GameIcon name="coin" size={14} /><T w="heavy" size={10.5} color={arena.gold}>{s.coins}</T>

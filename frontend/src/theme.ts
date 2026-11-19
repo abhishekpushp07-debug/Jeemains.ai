@@ -318,6 +318,12 @@ export const arena = {
 // The five streak diamonds, and the lights used by entry effects.
 export const gemColors = { red: "#FF4D5E", blue: "#4D7CFF", emerald: "#2FD27A", gold: "#FFD75E", kohinoor: "#F4F8FF" };
 export const fx = { fire: "#FF7A2F", ember: "#FFC24D", bolt: "#7DF9FF", white: "#FFFFFF", smoke: "#C9CED6", gold: "#FFD75E", crimson: "#FF4D5E", sky: "#4D7CFF", ice: "#9EF3E6", night: "#0B1026" };
+// The glittering border that runs round every Rapid Fire card: pink → gold → teal → sky → violet, and back to pink.
+export const glitterColors = ["#FF5EDB", "#FFD75E", "#3EE6D0", "#7DB4FF", "#B57BFF", "#FF5EDB"] as const;
+// All India Rapid: one fire world (blazing smoke behind a dark ridge, black silhouettes on it) for all five card scenes.
+export const allIndia = {
+  hot: "#FFE9C2", flame: "#FF6A1A", ember: "#FFB347", ink: "#080204", dust: "rgba(255,138,61,0.35)", star: "#FFF4E0",
+};
 // The stadium banner the Cheer Squad carries, per squad level: satin cloth (top → bottom), metallic foil for the letters,
 // the trim on the border, poles and fringe (light → deep), the corner stripes, the letter outline, the name plate and the glitter.
 const goldFoil = ["#FFF8D6", "#FFD75E", "#B8760C", "#FFE38A", "#FFF8D6"] as const, goldTrim = ["#FFF2B8", "#E2A82A", "#8A5806"] as const;

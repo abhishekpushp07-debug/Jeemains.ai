@@ -13,8 +13,8 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 export const rnd = (i: number, k: number) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
 
 /** Squashy press: flattens under the thumb, then springs back with a wobble. */
-export function Jelly({ children, onPress, style, testID, disabled, accessibilityLabel, accessibilityState, accessibilityRole = "button", hitSlop }: {
-  children: React.ReactNode; onPress?: () => void; style?: StyleProp<ViewStyle>; testID?: string; disabled?: boolean; accessibilityLabel?: string;
+export function Jelly({ children, onPress, onLongPress, style, testID, disabled, accessibilityLabel, accessibilityState, accessibilityRole = "button", hitSlop }: {
+  children: React.ReactNode; onPress?: () => void; onLongPress?: () => void; style?: StyleProp<ViewStyle>; testID?: string; disabled?: boolean; accessibilityLabel?: string;
   accessibilityState?: PressableProps["accessibilityState"]; accessibilityRole?: PressableProps["accessibilityRole"]; hitSlop?: PressableProps["hitSlop"];
 }) {
   const reduced = useReducedMotion();
@@ -24,6 +24,7 @@ export function Jelly({ children, onPress, style, testID, disabled, accessibilit
     accessibilityState={{ ...accessibilityState, disabled: !!disabled }} aria-selected={accessibilityState?.selected}
     onPressIn={() => { if (!reduced) s.value = withTiming(1, { duration: 70 }); }}
     onPressOut={() => { s.value = reduced ? 0 : withSpring(0, { damping: 5, stiffness: 300, mass: 0.6 }); }}
+    onLongPress={onLongPress ? () => { tap(); onLongPress(); } : undefined}
     onPress={() => { tap(); onPress?.(); }} style={[style, a, disabled && styles.off]}>{children}</AnimatedPressable>;
 }
 
@@ -75,10 +76,10 @@ export function Count({ to, prefix = "", size = 24, color = arena.text, testID }
   return <T testID={testID} w="heavy" size={size} color={color}>{prefix}{v}</T>;
 }
 
-/** Children pop in with a springy overshoot, one after another when given a delay. */
+/** Children pop in once, smoothly (no springy wobble: a wobble read as the cards flickering), one after another when given a delay. */
 export function Pop({ children, delay = 0, style }: { children: React.ReactNode; delay?: number; style?: StyleProp<ViewStyle> }) {
   const reduced = useReducedMotion();
-  return <Animated.View entering={reduced ? undefined : ZoomIn.delay(delay).springify().damping(9)} style={style}>{children}</Animated.View>;
+  return <Animated.View entering={reduced ? undefined : ZoomIn.delay(delay).duration(220).easing(Easing.out(Easing.cubic))} style={style}>{children}</Animated.View>;
 }
 
 function Wave({ i, size }: { i: number; size: number }) {

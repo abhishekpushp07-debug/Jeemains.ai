@@ -42,6 +42,7 @@ export default function RootLayout() {
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
               <Stack.Screen name="attempt/[id]" options={{ gestureEnabled: false }} />
               <Stack.Screen name="rapid/session" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
+              <Stack.Screen name="rapid/daily" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
               <Stack.Screen name="rapid/duel" options={{ gestureEnabled: false, animation: "fade" }} />
               <Stack.Screen name="rapid/room/[cid]" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
             </Stack></SessionBoundary>

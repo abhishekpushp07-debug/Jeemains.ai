@@ -9,6 +9,7 @@ import { Alive, GameIcon } from "./Art";
 import { GoldTitle } from "./arena";
 import { Jelly, LiveDot } from "./juice";
 import { CupNight, countdown, go, useCupNight } from "./social";
+import { Glitter } from "./Glitter";
 
 /** The Colosseum stands, packed and roaring: the backdrop of Cup Night. */
 export const STANDS = require("../../assets/arena/bg_colosseum_stands.webp");
@@ -69,8 +70,8 @@ export function CupNightBanner({ uid, testID = "rf-cup-night" }: { uid: string; 
   if (!n || !s) return null;
   const [kicker, line, cta] = LINES[s.key](n, s.left);
   const mine = n.cups.find((c) => c.mine), hot = s.key === "mine" || s.key === "live" || s.key === "drawing";
-  return <Jelly testID={testID} accessibilityLabel={`Cup Night. ${kicker}. ${line}`} onPress={() => router.push(s.key === "mine" && mine ? go.cup(mine.id) : go.night())} style={styles.wrap}>
-    <View style={styles.face}>
+  return <Jelly testID={testID} accessibilityLabel={`Cup Night. ${kicker}. ${line}`} onPress={() => router.push(s.key === "mine" && mine ? go.cup(mine.id) : go.night())}>
+    <Glitter radius={22} inner={styles.face}>
       <Image source={STANDS} style={StyleSheet.absoluteFill} contentFit="cover" contentPosition="center" />
       <LinearGradient pointerEvents="none" colors={[arena.scrim, arena.shade, arena.scrim]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={StyleSheet.absoluteFill} />
       <Alive kind="breathe"><GameIcon name="trophy" size={narrow ? 44 : 58} /></Alive>
@@ -80,14 +81,13 @@ export function CupNightBanner({ uid, testID = "rf-cup-night" }: { uid: string; 
         <T testID={`${testID}-line`} w="bold" size={12} color={arena.text} numberOfLines={2}>{line}</T>
       </View>
       <View style={[styles.go, narrow && styles.goNarrow, s.key === "doors" || s.key === "mine" ? styles.goHot : null]}><T w="heavy" size={13} color={arena.text}>{cta}</T></View>
-    </View>
+    </Glitter>
   </Jelly>;
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0, gap: 1 }, spaced: { letterSpacing: 1.2, flexShrink: 1 },
-  wrap: { borderRadius: 22, borderWidth: 2, borderColor: arena.gold, borderBottomWidth: 5, borderBottomColor: arena.goldDeep, overflow: "hidden" },
-  face: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 92, paddingHorizontal: 12, paddingVertical: 10 },
+  face: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 92, paddingHorizontal: 12, paddingVertical: 10, borderBottomWidth: 4, borderBottomColor: arena.goldDeep },
   kick: { flexDirection: "row", alignItems: "center", gap: 5 },
   go: { height: 44, paddingHorizontal: 12, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: arena.panelHi, borderWidth: 1.5, borderColor: arena.rimHi, borderBottomWidth: 4, borderBottomColor: arena.panelEdge },
   goNarrow: { paddingHorizontal: 9 },

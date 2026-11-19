@@ -108,6 +108,9 @@ export const go = {
   cups: () => "/rapid/cup" as any,
   squads: () => "/rapid/squads" as any,
   night: () => "/rapid/cup/night" as any,
+  /** All India Rapid: today's 30 cards (or your result and the All India board once played). */
+  daily: () => "/rapid/daily" as any,
+  dailyStyles: () => "/rapid/daily-styles" as any,
   cup: (cid: string) => ({ pathname: "/rapid/cup/[cid]", params: { cid } }) as any,
   watch: (did: string) => ({ pathname: "/rapid/watch/[did]", params: { did } }) as any,
 };

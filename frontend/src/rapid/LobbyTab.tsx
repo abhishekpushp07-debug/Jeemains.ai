@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { rf, uuid } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
-import { T } from "@/src/components/ui";
+import { Icon, T } from "@/src/components/ui";
 import { WeakRevision } from "@/src/components/ArenaLearning";
 import { rewardsReady, useGameProfile } from "@/src/components/game";
 import { arena } from "@/src/theme";
@@ -22,6 +22,10 @@ import { CardCountPicker } from "./CardCount";
 import { CARD_SECONDS, MAX_PICKS, cardCount, encodePicks, fitCount, scopeLabel, scopeSubjects, setScope, useCardCount, useScope } from "./scope";
 import { ErrorBox, Sheet } from "./ui";
 import { Friend, GangRow, go, seenText, sendChallenge, setArenaTab, useFriends, useGangs, useInbox } from "./social";
+import { Glitter } from "./Glitter";
+import { AllIndiaCard } from "./AllIndiaCard";
+import { dailyStyleName, useDaily, useDailyLook } from "./daily";
+import { WeakSprintPanel, WeakSprintStrip, useWeakTopics } from "./WeakSprint";
 
 function Sticker({ icon, label, badge, onPress, testID, delay, narrow }: { icon: GameIconName; label: string; badge: number; onPress: () => void; testID: string; delay: number; narrow?: boolean }) {
   return <Jelly testID={testID} onPress={onPress} accessibilityLabel={badge ? `${label}, ${badge}` : label} style={[styles.sticker, narrow && styles.stickerNarrow]}>
@@ -33,12 +37,12 @@ function Sticker({ icon, label, badge, onPress, testID, delay, narrow }: { icon:
 
 function Tile({ icon, label, sub, badge, onPress, testID, delay, disabled, narrow }: { icon: GameIconName; label: string; sub: string; badge?: number; onPress: () => void; testID: string; delay: number; disabled?: boolean; narrow?: boolean }) {
   return <Jelly testID={testID} onPress={onPress} disabled={disabled} accessibilityLabel={`${label}. ${sub}`} style={styles.tile}>
-    <LinearGradient colors={[arena.panelHi, arena.panel]} style={styles.tileFace}>
+    <Glitter radius={20} sparkles={2} inner={styles.tileInner}><LinearGradient colors={[arena.panelHi, arena.panel]} style={styles.tileFace}>
       <View pointerEvents="none" style={styles.tileGloss} />
       <Alive kind="hop" delay={delay}><GameIcon name={icon} size={narrow ? 52 : 60} /></Alive>
       <T w="heavy" size={narrow ? 11.5 : 13} color={arena.text} numberOfLines={narrow ? 2 : 1} style={styles.center}>{label}</T>
       <T testID={`${testID}-sub`} w="bold" size={10.5} color={arena.aqua} numberOfLines={1}>{sub}</T>
-    </LinearGradient>
+    </LinearGradient></Glitter>
     {badge ? <Badge n={badge} testID={`${testID}-badge`} style={styles.tileBadge} /> : null}
   </Jelly>;
 }
@@ -54,13 +58,16 @@ export function LobbyTab() {
   const cat = useCached<any>("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", uid));
   const prof = useGameProfile(uid), friends = useFriends(uid), gangs = useGangs(uid);
   const weak = useCached<any>(uid ? `u.${uid}.revision.JEE` : null, () => rf("/revision?exam=JEE", uid), false);
-  const { revalidate } = prof, { reload: reloadFriends } = friends, { reload: reloadGangs } = gangs, { reload: reloadWeak } = weak;
-  useFocusEffect(useCallback(() => { revalidate(); reloadFriends(); reloadGangs(); reloadWeak(); }, [revalidate, reloadFriends, reloadGangs, reloadWeak]));
+  const daily = useDaily(uid), look = useDailyLook(), cardSize = Math.min(width, 560) - 32, weakTopics = useWeakTopics(uid);
+  const { revalidate } = prof, { reload: reloadFriends } = friends, { reload: reloadGangs } = gangs, { reload: reloadWeak } = weak, { reload: reloadDaily } = daily, { reload: reloadTopics } = weakTopics;
+  useFocusEffect(useCallback(() => { revalidate(); reloadFriends(); reloadGangs(); reloadWeak(); reloadDaily(); reloadTopics(); }, [revalidate, reloadFriends, reloadGangs, reloadWeak, reloadDaily, reloadTopics]));
 
   const available = cardCount(picks, cat.data?.subjects);
   const chosen = useCardCount(), size = cat.data ? fitCount(chosen, available) : 0;
   const can = size > 0 && !!uid;
   const play = (mode: "random" | "ai" | "solo") => router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: encodePicks(picks), n: String(size), r: uuid() } } : go.duel({ mode, exam: "JEE", picks: encodePicks(picks), n: String(size), r: uuid() }));
+  // Quick Match now starts from the battleground sheet, right where the subject or chapter is chosen.
+  const quickMatch = (next: typeof picks) => router.push(go.duel({ mode: "random", exam: "JEE", picks: encodePicks(next), n: String(fitCount(chosen, cardCount(next, cat.data?.subjects))), r: uuid() }));
   const challenge = async (body: { pids?: string[]; gang_id?: string }) => {
     setBusy(true); setError("");
     try { const room = await sendChallenge(uid, { ...body, picks, count: size || 30 }); setQuick(null); router.push(go.room(room)); }
@@ -75,7 +82,7 @@ export function LobbyTab() {
 
   return <View style={styles.flex}>
     <ScrollView testID="rapid-fire-home" showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}
-      refreshControl={<RefreshControl refreshing={prof.refreshing} tintColor={arena.aqua} onRefresh={() => { prof.reload(); cat.reload(); friends.reload(); gangs.reload(); weak.reload(); }} />}>
+      refreshControl={<RefreshControl refreshing={prof.refreshing} tintColor={arena.aqua} onRefresh={() => { prof.reload(); cat.reload(); friends.reload(); gangs.reload(); weak.reload(); daily.reload(); weakTopics.reload(); }} />}>
       <View style={styles.stage}>
         <GoldTitle size={36} center testID="rf-title">RAPID FIRE</GoldTitle>
         <T testID="rf-tagline" w="heavy" size={14} color={arena.aqua} style={styles.tagline}>Pen down Fight</T>
@@ -98,11 +105,22 @@ export function LobbyTab() {
         <Tile testID="rf-duel-ai" icon="rival" label="Practice Rival" sub="No waiting" delay={1300} narrow={narrow} disabled={!can} onPress={() => play("ai")} />
         <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${size || chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => play("solo")} />
       </View>
+      <WeakSprintStrip uid={uid} narrow={narrow} />
 
       <CupNightBanner uid={uid} />
+
+      {/* All India Rapid: the big square right below Cup Night. The whole card opens today's 30 cards. */}
+      <View style={styles.daily}>
+        <AllIndiaCard d={daily.data} look={look} size={cardSize} onPress={() => router.push(go.daily())} onLongPress={() => router.push(go.dailyStyles())} />
+        <Jelly testID="rf-all-india-style" accessibilityLabel={`Card style ${dailyStyleName(look)}. Change style`} onPress={() => router.push(go.dailyStyles())} style={styles.stylePill}>
+          <Icon name="palette" size={14} color={arena.gold} />
+          <T w="heavy" size={11.5} color={arena.text}>{dailyStyleName(look)}</T>
+          <T w="bold" size={11.5} color={arena.aqua}>· Change style ›</T>
+        </Jelly>
+      </View>
       <ChampionsWall uid={uid} />
-      <Jelly testID="rf-knockout" accessibilityLabel={`Knockout Cup. 4, 8 or 16 players${cupLive ? ". Your cup is on" : ""}`} onPress={() => router.push(cupLive ? go.cup(inbox!.cup!) : go.cups())} style={styles.cupWrap}>
-        <LinearGradient colors={["#5A0A14", arena.panel]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.cup}>
+      <Jelly testID="rf-knockout" accessibilityLabel={`Knockout Cup. 4, 8 or 16 players${cupLive ? ". Your cup is on" : ""}`} onPress={() => router.push(cupLive ? go.cup(inbox!.cup!) : go.cups())}>
+        <Glitter radius={22} inner={styles.cupInner}><LinearGradient colors={["#5A0A14", arena.panel]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.cup}>
           <View pointerEvents="none" style={styles.tileGloss} />
           <Alive kind="breathe"><GameIcon name="trophy" size={narrow ? 48 : 64} /></Alive>
           <View style={styles.flex}>
@@ -111,7 +129,7 @@ export function LobbyTab() {
             <T w="bold" size={narrow ? 10.5 : 11.5} color={arena.muted} numberOfLines={1}>{narrow ? "4 · 8 · 16 players" : "4 · 8 · 16 players · live bracket"}</T>
           </View>
           <View style={[styles.cupGo, narrow && styles.cupGoNarrow]}><T w="heavy" size={13} color={arena.text}>{cupLive ? "OPEN" : "PLAY"}</T></View>
-        </LinearGradient>
+        </LinearGradient></Glitter>
         {cupInvites ? <Badge n={cupInvites} testID="rf-knockout-badge" style={styles.tileBadge} /> : null}
       </Jelly>
 
@@ -146,12 +164,8 @@ export function LobbyTab() {
       <T testID="rf-practice-note" size={10} color={arena.faint} style={styles.center}>Practice, not exam marks. Coins and diamonds are earned only by playing.</T>
     </ScrollView>
 
-    <View style={styles.dock}>
-      <RaisedButton testID="rf-duel-random" label="PLAY" sub={`Quick Match · ${label}${size ? ` · ${size} cards` : ""}`} icon="swords" height={64} streak disabled={!can} onPress={() => play("random")} />
-    </View>
-
-    <ScopeSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={cat.data?.subjects || []} value={picks} onDone={setScope} />
-    <Sheet visible={sheet === "weak"} onClose={() => setSheet("")} testID="rf-weak-sheet">{uid ? <WeakRevision uid={uid} exam="JEE" /> : null}</Sheet>
+    <ScopeSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={cat.data?.subjects || []} value={picks} onDone={setScope} onPlay={uid ? quickMatch : undefined} />
+    <Sheet visible={sheet === "weak"} onClose={() => setSheet("")} testID="rf-weak-sheet">{uid ? <><WeakSprintPanel uid={uid} /><WeakRevision uid={uid} exam="JEE" /></> : null}</Sheet>
     <Sheet visible={!!quick} onClose={() => setQuick(null)} testID="rf-quick-sheet">
       {quick?.gang ? <View style={styles.quick}>
         <Emblem id={quick.gang.emblem} size={92} />
@@ -173,23 +187,24 @@ export function LobbyTab() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 }, center: { textAlign: "center" }, stretch: { alignSelf: "stretch" },
-  content: { paddingHorizontal: 16, paddingTop: 6, paddingBottom: 18, gap: 14 },
+  // Room at the bottom for the Phoenix Diamond rising out of the arena bar.
+  content: { paddingHorizontal: 16, paddingTop: 6, paddingBottom: 36, gap: 14 },
   stage: { alignItems: "center", gap: 2 }, tagline: { letterSpacing: 3, textTransform: "uppercase" }, chipRow: { alignSelf: "stretch", marginTop: 8 }, kicker: { letterSpacing: 1.5 },
-  cupWrap: { borderRadius: 22, backgroundColor: arena.goldDeep, paddingBottom: 5 },
-  cup: { flexDirection: "row", alignItems: "center", gap: 12, minHeight: 92, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 22, borderWidth: 1.5, borderColor: arena.gold, overflow: "hidden" },
+  cupInner: { borderBottomWidth: 4, borderBottomColor: arena.goldDeep },
+  cup: { flexDirection: "row", alignItems: "center", gap: 12, minHeight: 92, paddingHorizontal: 14, paddingVertical: 10, overflow: "hidden" },
   cupGo: { height: 44, paddingHorizontal: 14, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: arena.teal, borderWidth: 1.5, borderColor: arena.tealOutline, borderBottomWidth: 4, borderBottomColor: arena.tealDeep },
   cupGoNarrow: { paddingHorizontal: 10 }, stickerNarrow: { width: 68 },
   diamondRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", alignSelf: "stretch", marginVertical: 2 },
   sticker: { width: 76, minHeight: 84, alignItems: "center", justifyContent: "center", gap: 2 }, stickerBadge: { position: "absolute", top: 2, right: 6 },
   tiles: { flexDirection: "row", gap: 10 },
-  tile: { flex: 1, borderRadius: 20, backgroundColor: arena.panelEdge, paddingBottom: 6 },
-  tileFace: { borderRadius: 20, borderWidth: 1.5, borderColor: arena.rim, alignItems: "center", paddingTop: 10, paddingBottom: 10, paddingHorizontal: 4, gap: 1, overflow: "hidden" },
+  tile: { flex: 1 }, tileInner: { borderBottomWidth: 5, borderBottomColor: arena.panelEdge },
+  tileFace: { flexGrow: 1, alignItems: "center", paddingTop: 10, paddingBottom: 10, paddingHorizontal: 4, gap: 1, overflow: "hidden" },
   tileGloss: { position: "absolute", top: 2, left: 3, right: 3, height: "38%", borderRadius: 18, backgroundColor: arena.goldSoft },
   tileBadge: { position: "absolute", top: -6, right: -4 },
   people: { gap: 6, paddingRight: 8, alignItems: "flex-start" }, person: { width: 76, alignItems: "center", gap: 2, minHeight: 84 }, peopleEmpty: { alignSelf: "center", maxWidth: 220, marginLeft: 6 },
   add: { width: 52, height: 52, borderRadius: 26, alignItems: "center", justifyContent: "center", backgroundColor: arena.teal, borderWidth: 2, borderColor: arena.tealOutline, borderBottomWidth: 5, borderBottomColor: arena.tealDeep },
   vault: { padding: 12, gap: 8 }, vaultTitle: { letterSpacing: 2, textAlign: "center" },
-  // Room below PLAY for the Phoenix Diamond rising out of the arena bar.
-  dock: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 24 },
   quick: { alignItems: "center", gap: 10 },
+  daily: { gap: 8 },
+  stylePill: { flexDirection: "row", alignItems: "center", alignSelf: "center", gap: 5, minHeight: 44, paddingHorizontal: 14, borderRadius: 18, backgroundColor: arena.scrim, borderWidth: 1, borderColor: arena.rim },
 });
