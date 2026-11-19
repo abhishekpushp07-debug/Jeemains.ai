@@ -1,5 +1,11 @@
 # JEELIVE.AI Native App — PRD
 
+## Analysis 2.0 Phase 1–2 (19 Nov 2026) — DONE
+- User: "Phase 1–2 shuru karo, asli test mein time ki sync pakki karo, exactly like jeelive.ai". Choices: keep app WHITE look (cards/charts website-style); yes one real QA practice test.
+- Phase 1 verified on a real scripted attempt 9332443d-284c-4456-bf87-a4e506658971 (QA 7004186276): server per-question times, answer change, mark, revisit and 8 s background all matched within 1 s (src/analysis/timeCapture.ts + useAttempt.ts already wired; TS errors from the old handoff were already gone).
+- Phase 2: website card language in light theme — Roboto Mono numbers (assets/website-2026-10-26/roboto-mono-latin-400/700, fonts.mono/monoRegular, T w="mono"), Tile with 4px coloured left edge + caps label, Block radius 20 + soft shadow, Overview "Aapka Score" card with big centred ring, 2x2 action buttons (stack icon-over-label under 360 px), Potential 2-col tiles, odd last tile full width, mono numbers in ledger/grids/Qs-by-Qs/Difficulty/bottom bar. iteration_106: all pass; 320 px label clip fixed after.
+- Next (user order): Phase 3 comparative → Phase 4 solutions summary / Meri 3 seekh / PDF / share → Phase 5 small screens + real attempt → then login 401 fix.
+
 ## Rank + Mission website hand-off ZIP (19 Nov 2026) — DONE, link given to user
 - User (Hinglish): ZIP for the website team, NO Rapid Fire, "seedha simple link", link valid 7 days, fresh screenshots, and "rank ka data / colleges alag se nahi likhna chahiye — tumhare server ko call karke bula le".
 - So the pack ships NO data copies (no RANK/data, no rank_data, no CSV/JSON dumps, no test vectors, no "host it yourself" option). The website reads every number live from the app server through `CONNECT/backend_fastapi/jeelive_app_connect.py`. docs/05 §1 states the rule; README + START_HERE carry it.

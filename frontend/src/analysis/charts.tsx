@@ -34,10 +34,13 @@ function Axis({ w, top, steps, y, left, unit = "" }: { w: number; top: number; s
   </G>)}</G>;
 }
 
-export function ScoreRing({ percentage, size = 96 }: { percentage?: number | null; size?: number }) {
+/** The website's score ring: the score itself in the middle, out of the paper's maximum, with the percentage under it. */
+export function ScoreRing({ percentage, score, maximum, size = 168 }: { percentage?: number | null; score: React.ReactNode; maximum: React.ReactNode; size?: number }) {
   const share = Math.max(0, Math.min(1, (percentage || 0) / 100));
-  return <ProgressRing testID="a2-score-ring" size={size} stroke={9} value={share} track={colors.custom_whiteA15} color={colors.onSurfaceInverse} label={`Score ${percentage ?? 0}%`}>
-    <T w="heavy" size={19} color={colors.onSurfaceInverse}>{percentage ?? 0}%</T>
+  return <ProgressRing testID="a2-score-ring" size={size} stroke={12} value={share} track={colors.custom_whiteA15} color={colors.onSurfaceInverse} label={`Score ${percentage ?? 0}%`}>
+    <T testID="result-score" w="mono" size={44} color={colors.onSurfaceInverse} numberOfLines={1} adjustsFontSizeToFit style={styles.ringScore}>{score}</T>
+    <T w="monoRegular" size={14} color={colors.custom_whiteA70}>/ {maximum}</T>
+    <View style={styles.ringPill}><T w="heavy" size={12} color={colors.onSurfaceInverse}>{percentage ?? 0}%</T></View>
   </ProgressRing>;
 }
 
@@ -209,6 +212,8 @@ export function QGrid({ an, onOpen }: { an: An; onOpen: Open }) {
 }
 
 const styles = StyleSheet.create({
+  ringScore: { letterSpacing: -1.6, maxWidth: "70%", textAlign: "center" },
+  ringPill: { marginTop: 6, paddingHorizontal: 10, paddingVertical: 2, borderRadius: 999, backgroundColor: colors.custom_whiteA15 },
   hist: { flexDirection: "row", alignItems: "flex-end", gap: 3, height: 132 },
   histCol: { flex: 1, alignItems: "center", justifyContent: "flex-end", gap: 3 },
   histBar: { width: "100%", borderTopLeftRadius: 4, borderTopRightRadius: 4 },

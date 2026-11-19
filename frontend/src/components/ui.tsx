@@ -9,7 +9,7 @@ import { Glyph } from "./Glyph";
 export const Icon = MaterialDesignIcons;
 export type IconName = React.ComponentProps<typeof MaterialDesignIcons>["name"];
 
-type W = "regular" | "medium" | "semibold" | "bold" | "heavy";
+type W = "regular" | "medium" | "semibold" | "bold" | "heavy" | "mono" | "monoRegular";
 export function T({ w = "regular", size = 14, color, style, ...p }: TextProps & { w?: W; size?: number; color?: string }) {
   const { colors } = useTheme();
   return <RNText {...p} maxFontSizeMultiplier={1.6} style={[{ fontFamily: fonts[w], fontSize: size, color: color ?? colors.onSurface, lineHeight: Math.round(size * 1.35) }, style as StyleProp<TextStyle>]} />;

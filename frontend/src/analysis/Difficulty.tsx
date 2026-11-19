@@ -20,7 +20,7 @@ function Table({ an, name, levels, onDrill }: { an: An; name: string; levels: an
           <View style={styles.levelHead}>
             <View style={[styles.dot, { backgroundColor: TONE[LEVEL_TONE[l]].fill }]} />
             <T w="heavy" size={14} style={{ flex: 1 }}>{L[l]} <T size={12} color={colors.muted}>({x.count} sawaal)</T></T>
-            <T w="heavy" size={13}>Accuracy {pc(acc)}</T>
+            <T w="heavy" size={13}>Accuracy <T w="mono" size={13}>{pc(acc)}</T></T>
           </View>
           <View style={styles.meter}><Meter value={acc || 0} tone={LEVEL_TONE[l]} /></View>
           <View style={styles.cells}>
@@ -28,7 +28,7 @@ function Table({ an, name, levels, onDrill }: { an: An; name: string; levels: an
               const list = ids(l, k), t = TONE[tone];
               return <Press key={k} testID={`a2-difficulty-${l}-${k}`} disabled={!list.length} onPress={() => onDrill(`${L[l]} · ${label}`, list)} accessibilityLabel={`${L[l]} ${label}: ${x[k]} / ${x.count}. Sawaal dekho`}
                 style={[styles.cell, { backgroundColor: t.soft, borderColor: t.line }]}>
-                <T w="heavy" size={14} color={tone === "mute" ? colors.onSurface : t.ink}>{x[k]} <T size={11} color={colors.muted}>/ {x.count}</T></T>
+                <T w="mono" size={14} color={tone === "mute" ? colors.onSurface : t.ink}>{x[k]}<T w="monoRegular" size={11} color={colors.muted}> / {x.count}</T></T>
                 <T size={11} w="bold" color={colors.custom_softText}>{label}</T>
               </Press>;
             })}

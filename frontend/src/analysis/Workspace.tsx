@@ -1,7 +1,7 @@
 // Analysis 2.0 on the phone: the same 8 sections, Personal / Comparative switch and question lists as jeelive.ai.
 // AnalysisBody goes inside the page's scroll; AnalysisBar stays fixed at the bottom of the screen.
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, GestureResponderEvent, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, GestureResponderEvent, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
 import { storage } from "@/src/utils/storage";
 import { ErrorBox, Icon, IconName, Press, Skeleton, T } from "@/src/components/ui";
@@ -65,11 +65,12 @@ export function useAnalysisNav(id: string, onSection: () => void): AnalysisNav {
   return { key, compare, vs, open, setCompare, setVs };
 }
 
-function Act({ testID, icon, label, onPress, busy, disabled, primary }: { testID: string; icon: IconName; label: string; onPress: () => void; busy?: boolean; disabled?: boolean; primary?: boolean }) {
+function Act({ testID, icon, label, onPress, busy, disabled, primary, stacked }: { testID: string; icon: IconName; label: string; onPress: () => void; busy?: boolean; disabled?: boolean; primary?: boolean; stacked?: boolean }) {
   const ink = primary ? colors.onBrandPrimary : colors.onSurface;
-  return <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={label} accessibilityState={{ busy: !!busy }} style={[styles.act, primary && styles.actOn]}>
-    {busy ? <ActivityIndicator size="small" color={ink} /> : <Icon name={icon} size={20} color={ink} />}
-    <T w="heavy" size={11} color={ink} numberOfLines={2} style={styles.actLabel}>{label}</T>
+  // On a narrow phone the icon sits above the words, so even "Galat + chhode dobara" is never cut.
+  return <Press testID={testID} onPress={onPress} disabled={disabled || busy} accessibilityLabel={label} accessibilityState={{ busy: !!busy }} style={[styles.act, stacked && styles.actStacked, primary && styles.actOn]}>
+    {busy ? <ActivityIndicator size="small" color={ink} /> : <Icon name={icon} size={18} color={ink} />}
+    <T w="heavy" size={stacked ? 12.5 : 13} color={ink} numberOfLines={2} style={styles.actLabel}>{label}</T>
   </Press>;
 }
 
@@ -89,10 +90,10 @@ function Pager({ at, open }: { at: number; open: (key: string) => void }) {
   return <View style={styles.pager}>
     {prev ? <Press testID="a2-prev-section" onPress={() => open(prev[0])} accessibilityLabel={"Pichhla: " + prev[1]} style={styles.page}>
       <Icon name="arrow-left" size={17} color={colors.onSurface} />
-      <View style={{ flex: 1, minWidth: 0 }}><T size={9.5} w="heavy" color={colors.custom_eyebrow} style={styles.caps}>PICHHLA</T><T size={13} w="heavy" numberOfLines={1}>{prev[1]}</T></View>
+      <View style={{ flex: 1, minWidth: 0 }}><T size={9.5} w="heavy" color={colors.custom_eyebrow} style={styles.caps}>PICHHLA</T><T size={13} w="heavy" numberOfLines={2}>{prev[1]}</T></View>
     </Press> : <View style={{ flex: 1 }} />}
     {next ? <Press testID="a2-next-section" onPress={() => open(next[0])} accessibilityLabel={"Agla: " + next[1]} style={[styles.page, styles.pageNext]}>
-      <View style={{ flex: 1, minWidth: 0, alignItems: "flex-end" }}><T size={9.5} w="heavy" color={colors.custom_whiteA70} style={styles.caps}>AGLA</T><T size={13} w="heavy" color={colors.onBrandPrimary} numberOfLines={1}>{next[1]}</T></View>
+      <View style={{ flex: 1, minWidth: 0, alignItems: "flex-end" }}><T size={9.5} w="heavy" color={colors.custom_whiteA70} style={styles.caps}>AGLA</T><T size={13} w="heavy" color={colors.onBrandPrimary} numberOfLines={2} style={{ textAlign: "right" }}>{next[1]}</T></View>
       <Icon name="arrow-right" size={17} color={colors.onBrandPrimary} />
     </Press> : <View style={{ flex: 1 }} />}
   </View>;
@@ -103,6 +104,7 @@ export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slo
 }) {
   const { data: an, error, offline, loading, reload } = state;
   const reduced = useReducedMotion();
+  const narrow = useWindowDimensions().width < 360;
   const [drill, setDrill] = useState<{ title: string; ids: string[] } | null>(null);
   const [busy, setBusy] = useState<"" | "pdf" | "png">("");
   const [note, setNote] = useState<{ ok: boolean; text: string } | null>(null);
@@ -142,14 +144,14 @@ export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slo
 
   return <View testID="analysis2" style={styles.root}>
     <View testID="a2-top-bar" style={styles.top}>
-      <T w="heavy" size={10} color={colors.brandText} style={styles.kicker}>ANALYSIS · {at + 1} / {SECTIONS.length}{nav.compare ? " · COMPARATIVE" : ""}</T>
-      <T testID="a2-section-title" w="heavy" size={24}>{label}</T>
-      <T size={12.5} color={colors.muted}>{about}</T>
+      <T w="heavy" size={10.5} color={colors.brandText} style={styles.kicker}>ANALYSIS · {at + 1} / {SECTIONS.length}{nav.compare ? " · COMPARATIVE" : ""}</T>
+      <T testID="a2-section-title" w="heavy" size={26} style={styles.title}>{label}</T>
+      <T size={13} color={colors.muted}>{about}</T>
       <View style={styles.acts}>
-        <Act testID="a2-download-report" icon="file-download-outline" label="Report PDF" busy={busy === "pdf"} disabled={!!busy} onPress={() => run("pdf", downloadReport)} />
-        <Act testID="a2-share-scorecard" icon="share-variant-outline" label="Share" busy={busy === "png"} disabled={!!busy} onPress={() => run("png", shareScorecard)} />
-        {onRetry ? <Act testID="a2-retry-mistakes" icon="restart" label="Galtiyan dobara" onPress={onRetry} /> : null}
-        <Act testID="a2-view-solutions" icon="book-open-variant" label="Solutions" primary onPress={onSolutions} />
+        <Act testID="a2-download-report" icon="tray-arrow-down" label="Report download" stacked={narrow} busy={busy === "pdf"} disabled={!!busy} onPress={() => run("pdf", downloadReport)} />
+        <Act testID="a2-share-scorecard" icon="share-variant-outline" label="Share" stacked={narrow} busy={busy === "png"} disabled={!!busy} onPress={() => run("png", shareScorecard)} />
+        {onRetry ? <Act testID="a2-retry-mistakes" icon="restart" label="Galat + chhode dobara" stacked={narrow} onPress={onRetry} /> : null}
+        <Act testID="a2-view-solutions" icon="book-open-variant" label="Solutions dekho" stacked={narrow} primary onPress={onSolutions} />
       </View>
       {note ? <T testID="a2-actions-note" size={12.5} w="bold" color={note.ok ? colors.success : colors.error}>{note.text}</T> : null}
     </View>
@@ -198,7 +200,7 @@ export function AnalysisBar({ nav, inset }: { nav: AnalysisNav; inset: number })
         return <View key={k} onLayout={e => { xs.current[k] = e.nativeEvent.layout.x; }}>
           <Press testID={"a2-nav-" + k} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={`${i + 1}. ${name}`} onPress={() => nav.open(k)} scaleTo={0.97}
             style={[styles.navItem, on && styles.navOn]}>
-            <T size={10.5} w="heavy" color={on ? colors.custom_whiteA70 : colors.custom_eyebrow}>{i + 1}</T>
+            <T size={10.5} w="mono" color={on ? colors.custom_whiteA70 : colors.custom_eyebrow}>{i + 1}</T>
             <T size={12.5} w={on ? "heavy" : "bold"} color={on ? colors.onBrandPrimary : colors.custom_softText}>{NAV_NAME[k] || name}</T>
           </Press>
         </View>;
@@ -210,12 +212,14 @@ export function AnalysisBar({ nav, inset }: { nav: AnalysisNav; inset: number })
 const styles = StyleSheet.create({
   root: { gap: space.md },
   top: { gap: 4 },
-  kicker: { letterSpacing: 1.6 },
+  kicker: { letterSpacing: 1.7 },
+  title: { letterSpacing: -0.9 },
   caps: { letterSpacing: 1.2 },
-  acts: { flexDirection: "row", gap: 8, marginTop: 10 },
-  act: { flex: 1, minWidth: 0, minHeight: 62, borderRadius: 16, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, alignItems: "center", justifyContent: "center", gap: 4, paddingHorizontal: 4, paddingVertical: 8 },
+  acts: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 12 },
+  act: { flexBasis: "45%", flexGrow: 1, minWidth: 0, minHeight: 50, borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingHorizontal: 12, paddingVertical: 8 },
   actOn: { backgroundColor: colors.brandPrimary, borderColor: colors.brandPrimary },
-  actLabel: { textAlign: "center", lineHeight: 13.5 },
+  actStacked: { flexDirection: "column", gap: 4, minHeight: 62, paddingHorizontal: 6 },
+  actLabel: { textAlign: "center", lineHeight: 16, flexShrink: 1 },
   offline: { flexDirection: "row", alignItems: "center", gap: 8, padding: space.md, borderRadius: 14, borderWidth: 1, borderColor: TONE.warn.line, backgroundColor: TONE.warn.soft },
   pager: { flexDirection: "row", gap: space.sm },
   page: { flex: 1, minWidth: 0, minHeight: 56, flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: space.md, borderRadius: 16, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },

@@ -358,6 +358,8 @@ export const fonts = {
   semibold: "Figtree-600",
   bold: "Figtree-700",
   heavy: "Figtree-800",
+  mono: "RobotoMono-700",
+  monoRegular: "RobotoMono-400",
 };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };

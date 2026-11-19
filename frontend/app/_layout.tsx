@@ -24,6 +24,9 @@ export default function RootLayout() {
     "Figtree-600": require("../assets/website-2026-10-26/figtree-latin-600-normal.ttf"),
     "Figtree-700": require("../assets/website-2026-10-26/figtree-latin-700-normal.ttf"),
     "Figtree-800": require("../assets/website-2026-10-26/figtree-latin-800-normal.ttf"),
+    // The website's number face (scores, ranks, times in the analysis).
+    "RobotoMono-400": require("../assets/website-2026-10-26/roboto-mono-latin-400-normal.ttf"),
+    "RobotoMono-700": require("../assets/website-2026-10-26/roboto-mono-latin-700-normal.ttf"),
     MaterialDesignIcons: require("@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf"),
   });
   if (!loaded && !failed) return null;

@@ -21,7 +21,7 @@ function Steps({ an, p, onDrill, onOpen }: { an: An; p: any; onDrill: Drill; onO
         <View style={styles.stepHead}>
           <Icon name={icon} size={19} color={TONE.warn.ink} />
           <T w="heavy" size={14.5} style={{ flex: 1 }}>{name}</T>
-          <T w="heavy" size={18} color={TONE.good.ink}>+{s.marks}</T>
+          <T w="mono" size={18} color={TONE.good.ink}>+{s.marks}</T>
         </View>
         <T size={12.5} color={colors.muted}>{about}{s.key === "reinvest" && s.minutes ? ` Atka time: ${s.minutes} min.` : ""}</T>
         {s.questions.length > 0 ? <>
@@ -38,10 +38,10 @@ export function Potential({ an, onDrill, onOpen }: SectionProps) {
   return <>
     <Block id="potential" kicker="SEEDHA HISAAB · KOI ANDAAZA NAHI" title="Yahan se marks bach sakte the" note="Realistic target = Careless + Risk poora, aur atke time ka aadha. Maximum = teeno poore.">
       {!p.available ? <EmptyLine testID="a2-potential-partial">Is attempt mein time record nahi hua, isliye Careless aur Time wale step 0 hain. Agle mock se poore dikhenge.</EmptyLine> : null}
-      <Tiles cols={3}>
-        <Tile id="potential-current" label="Abhi" value={p.current} sub={`${p.paper_maximum} mein se`} />
-        <Tile id="potential-realistic" label="Realistic" value={p.realistic} sub={`+${r1(p.realistic - p.current)} marks`} tone="good" />
-        <Tile id="potential-maximum" label="Maximum" value={p.maximum} sub={`+${r1(p.maximum - p.current)} marks`} tone="good" />
+      <Tiles>
+        <Tile id="potential-current" label="Abhi ka score" value={p.current} sub={`${p.paper_maximum} mein se`} />
+        <Tile id="potential-realistic" label="Realistic target" value={p.realistic} sub={`+${r1(p.realistic - p.current)} marks, sirf aadatein badal kar`} tone="good" />
+        <Tile id="potential-maximum" label="Maximum potential" value={p.maximum} sub={`+${r1(p.maximum - p.current)} marks`} tone="good" />
       </Tiles>
       <T size={12} color={colors.muted}>Realistic target sirf aadatein badal kar mil sakta hai, bina naya padhe.</T>
       <Waterfall p={p} />
@@ -54,7 +54,7 @@ export function Potential({ an, onDrill, onOpen }: SectionProps) {
             <T w="heavy" size={13.5}>{AT[x.key]}</T>
             <T size={12} color={colors.muted}>{x.score} marks · {x.of} mein · Percentile {x.percentile}</T>
           </View>
-          <T testID={`a2-tile-at-${x.key}-value`} w="heavy" size={22} color={x.key === "current" ? colors.onSurface : TONE.good.ink}>#{x.rank}</T>
+          <T testID={`a2-tile-at-${x.key}-value`} w="mono" size={22} color={x.key === "current" ? colors.onSurface : TONE.good.ink}>#{x.rank}</T>
         </View>)}
       </View>
     </Block> : null}

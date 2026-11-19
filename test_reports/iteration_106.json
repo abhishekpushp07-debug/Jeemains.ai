@@ -1,0 +1,33 @@
+{
+  "summary": "Iteration106 frontend-only, read-only check of Analysis 2.0 Phase 2 on result 8725c731 (QA 7004186276). I logged in once per browser context on the public preview URL. I did not start, answer or submit any test. Almost everything works: all 8 sections open from the bottom bar, and the pager walks the full 8 forward and 8 back with the correct a2-section-title each time. Nothing showed an error screen, a blank section, a page error or horizontal overflow at 320, 360, 375 and 390 width. The Overview score card matches the spec exactly. The 4 count tiles open drill sheets with exactly 22, 14, 8 and 53 rows. The Quality tiles (13/6/2) and the Mathematics Performance tiles (5/3/17) open the right drills. Potential tiles show 48 / 79.1 / 80.2 in 2 columns and the waterfall renders (324x230). All 6 Time tiles show the expected values. Comparative mode shows the picker and the locked note, and Personal mode restores the view. Fonts: result-score, a2-tile-rank-value and the count values compute to RobotoMono-700, titles and kickers to Figtree-800, and both RobotoMono faces are loaded. One requirement fails: at 320 width the a2-retry-mistakes label is clipped to 'Galat + chhode ...'.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Act (Workspace.tsx:72)", "issue": "At 320 width the label 'Galat + chhode dobara' needs 3 lines in a 140px button (about 88px for text after the 24px padding, 18px icon and 8px gap). numberOfLines={2} cuts it to 'Galat + chhode ...' (scrollHeight 48 vs 32). This breaks the requirement that labels are not clipped at 320. 'Report download' and 'Solutions dekho' fit on 2 lines. At 390 all 4 labels fit; 'Galat + chhode dobara' wraps to 2 lines.", "testID": "a2-retry-mistakes", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Analysis pager (Workspace.tsx Pager) at 320", "issues": ["The a2-prev-section and a2-next-section labels are cut with an ellipsis: 'Time kahan g…', 'Question Jou…', 'Score Potential', 'Attempt Quality'. Allow 2 lines or use NAV_NAME short names."]},
+      {"screen": "Overview score card at 320", "issues": ["The kicker '75 SAWAAL · 180 MIN · +4 / -1' wraps and leaves '/ -1' alone on the second line next to the ORIGINAL badge. Use a slightly smaller size or letter spacing on narrow screens, or keep '+4 / -1' together."]},
+      {"screen": "Qs by Qs cards at 320", "issues": ["The subject line 'Mathematics · Not rated' is cut to 'Mathematics · Not ra…' on every a2-qs-card-*. Minor."]},
+      {"screen": "Leaderboard (Leaderboard.tsx:59) in Comparative", "issues": ["The kicker reads '1 STUDENTS'. Make it singular when n === 1, as Overview's Rank tile already does ('1 student mein')."]},
+      {"screen": "Score Potential", "issues": ["The third tile (Maximum potential) sits alone in a half-width column with empty space on its right. Consider making the last odd tile full width. Cosmetic."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_106.json"],
+  "action_items": [
+    "Fix the a2-retry-mistakes clipping at 320 (Workspace.tsx Act). Options: numberOfLines={3}, a shorter label at narrow widths, or stack the icon above the label when the button is under about 150px. Re-check 320 and 360.",
+    "Optional polish: let the pager labels wrap to 2 lines at 320; keep '+4 / -1' together in the score kicker; make '1 STUDENTS' singular in Leaderboard.tsx; make the odd last Potential tile full width."
+  ],
+  "critical_code_review_comments": [
+    "a2-mode-personal and a2-mode-compare are 38px tall. hitSlop top/bottom 4 brings the touch area to 46px, which is acceptable.",
+    "Tile uses numberOfLines={1} with adjustsFontSizeToFit. On web this cannot shrink text, so long values could be cut. None were cut with this data (for example, '17 / 100' fits at 320)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "96% (1 explicit requirement failed: action label clipped at 320; all other checks passed)"},
+  "seed_data_creation": "None. Read-only. No attempts started or submitted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use the public URL; localhost:3000 sometimes shows 'Couldn't check your session' at first load. After login go to window.location.href='/result/8725c731-5dc4-4449-849f-68f5fc9361f5'. The drill closes with a2-drill-close, and rows are a2-drill-q-*. Performance tiles appear only after picking a subject pill (a2-pill-perf-subject-mathematics). Leaf-text clamp check: compare scrollHeight with clientHeight on divs that have -webkit-line-clamp set."
+}

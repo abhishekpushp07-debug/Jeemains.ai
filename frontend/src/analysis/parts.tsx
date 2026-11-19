@@ -5,13 +5,13 @@ import { Icon, IconName, Press, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 import { An, Drill, Open, OUT_ICON, OUT_TONE, RESULT, TAG, TONE, Tone, index, mmss, slug } from "./format";
 
-/** One white card of the analysis: small caps kicker, title, a one-line note, then the content. */
+/** One card of the analysis, as on jeelive.ai: tracked caps kicker, title, a one-line note, then the content. */
 export function Block({ id, kicker, title, note, action, children }: { id: string; kicker?: string; title: string; note?: string; action?: React.ReactNode; children?: React.ReactNode }) {
   return <View testID={"a2-block-" + id} style={styles.block}>
     <View style={styles.blockHead}>
-      <View style={{ flex: 1, gap: 2 }}>
-        {kicker ? <T w="heavy" size={10} color={colors.brandText} style={styles.kicker}>{kicker}</T> : null}
-        <T w="heavy" size={18}>{title}</T>
+      <View style={{ flex: 1, gap: 3 }}>
+        {kicker ? <T w="heavy" size={10.5} color={colors.brandText} style={styles.kicker}>{kicker}</T> : null}
+        <T w="heavy" size={17.5} style={styles.blockTitle}>{title}</T>
         {note ? <T size={12.5} color={colors.muted}>{note}</T> : null}
       </View>
       {action}
@@ -20,23 +20,26 @@ export function Block({ id, kicker, title, note, action, children }: { id: strin
   </View>;
 }
 
-/** A number with its label. With `ids` it opens those questions. */
+/** The website's stat tile: a coloured edge on the left, a caps label, the number in the number face. With `ids` it opens those questions. */
 export function Tile({ id, label, value, sub, tone = "plain", ids, onDrill }: { id: string; label: string; value: React.ReactNode; sub?: string; tone?: Tone; ids?: string[]; onDrill?: Drill }) {
   const t = TONE[tone], tappable = !!ids?.length && !!onDrill;
+  const edge = tone === "plain" ? colors.custom_cardLineStrong : t.fill;
   const body = <>
-    {tone !== "plain" ? <View style={[styles.tileDot, { backgroundColor: t.fill }]} /> : null}
-    <T size={11} w="bold" color={colors.custom_eyebrow} numberOfLines={1} style={{ paddingRight: 12 }}>{label}</T>
-    <T testID={`a2-tile-${id}-value`} w="heavy" size={21} color={tone === "plain" || tone === "mute" ? colors.onSurface : t.ink} numberOfLines={1} adjustsFontSizeToFit>{value}</T>
-    {sub ? <T size={11} color={colors.muted}>{sub}</T> : null}
-    {tappable ? <T size={11} w="bold" color={colors.brandText}>Sawaal dekho ›</T> : null}
+    <T size={10.5} w="heavy" color={colors.custom_eyebrow} numberOfLines={2} style={styles.tileLabel}>{label.toUpperCase()}</T>
+    <T testID={`a2-tile-${id}-value`} w="mono" size={22} color={tone === "plain" || tone === "mute" ? colors.onSurface : t.ink} numberOfLines={1} adjustsFontSizeToFit style={styles.tileValue}>{value}</T>
+    {sub ? <T size={11.5} color={colors.muted}>{sub}</T> : null}
+    {tappable ? <View style={styles.tileLink}><T size={11.5} w="heavy" color={colors.brandText}>Sawaal dekho</T><Icon name="arrow-right" size={13} color={colors.brandText} /></View> : null}
   </>;
   return tappable
-    ? <Press testID={"a2-tile-" + id} onPress={() => onDrill!(label, ids!)} accessibilityLabel={`${label}: ${typeof value === "string" || typeof value === "number" ? value : ""}. Sawaal dekho`} style={styles.tile}>{body}</Press>
-    : <View testID={"a2-tile-" + id} style={styles.tile}>{body}</View>;
+    ? <Press testID={"a2-tile-" + id} onPress={() => onDrill!(label, ids!)} scaleTo={0.98} accessibilityLabel={`${label}: ${typeof value === "string" || typeof value === "number" ? value : ""}. Sawaal dekho`} style={[styles.tile, { borderLeftColor: edge }]}>{body}</Press>
+    : <View testID={"a2-tile-" + id} style={[styles.tile, { borderLeftColor: edge }]}>{body}</View>;
 }
-export const Tiles = ({ children, cols = 2 }: { children: React.ReactNode; cols?: 2 | 3 }) => (
-  <View style={styles.tiles}>{React.Children.toArray(children).filter(Boolean).map((c, i) => <View key={i} style={cols === 3 ? styles.third : styles.half}>{c}</View>)}</View>
-);
+/** Two to a row; an odd last tile takes the whole row, so no card sits alone beside an empty gap. */
+export const Tiles = ({ children, cols = 2 }: { children: React.ReactNode; cols?: 2 | 3 }) => {
+  const items = React.Children.toArray(children).filter(Boolean);
+  const wide = cols === 2 && items.length % 2 === 1 ? items.length - 1 : -1;
+  return <View style={styles.tiles}>{items.map((c, i) => <View key={i} style={i === wide ? styles.full : cols === 3 ? styles.third : styles.half}>{c}</View>)}</View>;
+};
 
 export function TagChip({ tag, copy }: { tag?: string | null; copy: An["copy"] }) {
   if (!tag || !TAG[tag]) return <View style={[styles.tag, { backgroundColor: TONE.mute.soft }]}><T size={10.5} w="bold" color={colors.muted}>—</T></View>;
@@ -126,7 +129,7 @@ export function Grid({ head, rows, testID, first = 1.6 }: { head: React.ReactNod
   const cell = (c: React.ReactNode, i: number, headRow = false) => (
     <View key={i} style={{ flex: i ? 1 : first, minWidth: 0, alignItems: i ? "center" : "flex-start", justifyContent: "center" }}>
       {typeof c === "string" || typeof c === "number"
-        ? <T size={headRow ? 10 : 13} w={headRow ? "heavy" : i ? "bold" : "heavy"} color={headRow ? colors.custom_eyebrow : colors.onSurface} numberOfLines={headRow ? 2 : 1} style={headRow ? styles.gridHead : undefined}>{c}</T> : c}
+        ? <T size={headRow ? 10 : i ? 12.5 : 13} w={headRow ? "heavy" : i ? "mono" : "heavy"} color={headRow ? colors.custom_eyebrow : colors.onSurface} numberOfLines={headRow ? 2 : 1} style={headRow ? styles.gridHead : undefined}>{c}</T> : c}
     </View>
   );
   return <View testID={testID} style={styles.grid}>
@@ -148,7 +151,7 @@ export function StatRow({ testID, title, caption, right, rightTone, sub, onPress
         {caption ? <T size={11.5} color={colors.muted}>{caption}</T> : null}
       </View>
       {tag}
-      {typeof right === "string" || typeof right === "number" ? <T w="heavy" size={14.5} color={rightTone ? TONE[rightTone].ink : colors.onSurface}>{right}</T> : right}
+      {typeof right === "string" || typeof right === "number" ? <T w="mono" size={14} color={rightTone ? TONE[rightTone].ink : colors.onSurface}>{right}</T> : right}
       {onPress ? <Icon name="chevron-right" size={18} color={colors.custom_dim} /> : null}
     </View>
     {children}
@@ -213,13 +216,19 @@ const styles = StyleSheet.create({
   fold: { borderRadius: 18, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card, paddingHorizontal: space.lg },
   foldHead: { minHeight: 52, flexDirection: "row", alignItems: "center", gap: 8 },
   callout: { flexDirection: "row", gap: space.md, padding: space.lg, borderRadius: 20, borderWidth: 1 },
-  block: { backgroundColor: colors.custom_card, borderRadius: 22, borderWidth: 1, borderColor: colors.custom_cardLine, padding: space.lg, gap: space.md },
+  block: {
+    backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine, padding: space.lg, gap: space.md,
+    shadowColor: "#0F172A", shadowOpacity: 0.05, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 1,
+  },
   blockHead: { flexDirection: "row", alignItems: "flex-start", gap: space.sm },
-  kicker: { letterSpacing: 1.6 },
+  kicker: { letterSpacing: 1.7 },
+  blockTitle: { letterSpacing: -0.25 },
   tiles: { flexDirection: "row", flexWrap: "wrap", marginHorizontal: -4, rowGap: 8 },
-  half: { width: "50%", paddingHorizontal: 4 }, third: { width: "33.333%", paddingHorizontal: 4 },
-  tile: { flex: 1, minHeight: 84, padding: space.md, borderRadius: 18, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card, gap: 2 },
-  tileDot: { position: "absolute", top: 12, right: 12, width: 7, height: 7, borderRadius: 4 },
+  half: { width: "50%", paddingHorizontal: 4 }, third: { width: "33.333%", paddingHorizontal: 4 }, full: { width: "100%", paddingHorizontal: 4 },
+  tile: { flex: 1, minHeight: 88, paddingVertical: 13, paddingLeft: 13, paddingRight: 11, borderRadius: 14, borderWidth: 1, borderLeftWidth: 4, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card, gap: 3 },
+  tileLabel: { letterSpacing: 1.1 },
+  tileValue: { letterSpacing: -0.6 },
+  tileLink: { flexDirection: "row", alignItems: "center", gap: 3, marginTop: 2 },
   tag: { flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 8, height: 22, borderRadius: 11, alignSelf: "flex-start", flexShrink: 1 },
   locked: { flexDirection: "row", gap: space.md, alignItems: "center", padding: space.lg, borderRadius: 22, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_cardRaised },
   lockedIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" },

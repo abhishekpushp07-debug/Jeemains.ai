@@ -23,12 +23,12 @@ function Card({ q, an, them, label, onOpen }: { q: Q; an: An; them: Record<strin
     style={[styles.card, { borderLeftColor: TONE[tone].fill }]}>
     <View style={styles.top}>
       <T w="heavy" size={15}>Q{q.number}</T>
-      <T size={12} color={colors.muted} numberOfLines={1} style={{ flex: 1 }}>{q.subject} · {L[q.difficulty] || "—"}</T>
+      <T size={12} color={colors.muted} numberOfLines={2} style={{ flex: 1 }}>{q.subject} · {L[q.difficulty] || "—"}</T>
       <ToneTag label={`${RESULT[q.outcome]} ${q.marks > 0 ? "+" : ""}${q.marks}`} tone={tone} icon={OUT_ICON[q.outcome]} />
     </View>
     {an.performance.has_chapters && q.topic ? <T size={11.5} color={colors.muted} numberOfLines={1}>{q.topic}</T> : null}
     <T size={12.5} color={colors.custom_softText}>Aapka <B>{q.response || "—"}</B> · Sahi <B>{q.answer}</B>{q.changed ? ` · badla ${q.changed}` : ""}</T>
-    <T size={12} color={colors.custom_softText}>Time <B>{mmss(q.time)}</B> · Par {mmss(q.par)}{them ? ` · ${label} ${mmss(them[q.id] || null)}` : ""}{q.visits != null ? ` · ${q.visits} baar dekha` : ""}</T>
+    <T size={12} color={colors.custom_softText}>Time <T w="mono" size={12}>{mmss(q.time)}</T> · Par <T w="monoRegular" size={12}>{mmss(q.par)}</T>{them ? ` · ${label} ${mmss(them[q.id] || null)}` : ""}{q.visits != null ? ` · ${q.visits} baar dekha` : ""}</T>
     {c ? <T size={12} color={colors.muted}>Class: {pc(c.correct)} sahi · avg {mmss(c.avg_time)}{c.topper_time > 0 ? ` · Topper ${mmss(c.topper_time)}` : ""}{c.top_wrong ? ` · ${c.top_wrong.percent}% ne ${c.top_wrong.option} chuna` : ""}</T> : null}
     <View style={styles.bottom}><TagChip tag={q.tag} copy={an.copy} /><Icon name="chevron-right" size={18} color={colors.custom_dim} /></View>
   </Press>;

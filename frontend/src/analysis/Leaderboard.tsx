@@ -56,7 +56,7 @@ export function Leaderboard({ id, value, onPick }: { id: string; value: string; 
   if (!d || d.state !== "ready") return null;
   const top: any[] = d.rows.slice(0, 10);
   const rows: any[] = q.trim() ? d.found : top;
-  return <Block id="leaderboard" kicker={`${d.n} STUDENTS`} title="Is paper ka leaderboard" note="Kisi bhi student se Compare karo. Sirf naam, Score aur totals dikhte hain; kisi ke jawab kabhi nahi.">
+  return <Block id="leaderboard" kicker={`${d.n} ${d.n === 1 ? "STUDENT" : "STUDENTS"}`} title="Is paper ka leaderboard" note="Kisi bhi student se Compare karo. Sirf naam, Score aur totals dikhte hain; kisi ke jawab kabhi nahi.">
     <View style={styles.search}>
       <Icon name="magnify" size={18} color={colors.custom_softText} />
       <TextInput testID="a2-board-search" value={q} onChangeText={t => setQ(t.slice(0, 20))} placeholder="Naam ya Rank" placeholderTextColor={colors.custom_dim}
