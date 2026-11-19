@@ -31,7 +31,7 @@ export function ReportActions({ id, an }) {
     else { save(file, file.name); toast.success('Scorecard download ho gaya. Ab WhatsApp par bhej sakte ho.'); }
   });
   return <>
-    <button type="button" className="btn btn-secondary" data-testid="a2-download-report" disabled={!!busy} onClick={report}>{busy === 'pdf' ? <Loader2 size={16} className="spin" /> : <Download size={16} />} Report download</button>
-    <button type="button" className="btn btn-secondary" data-testid="a2-share-scorecard" disabled={!!busy} onClick={share}>{busy === 'png' ? <Loader2 size={16} className="spin" /> : <Share2 size={16} />} Share</button>
+    <button type="button" className="btn btn-secondary" data-testid="a2-download-report" disabled={!!busy} onClick={report}>{busy === 'pdf' ? <Loader2 size={16} className="spin" /> : <Download size={16} />} Analysis report</button>
+    <button type="button" className="btn btn-secondary" data-testid="a2-share-scorecard" disabled={!!busy} onClick={share}>{busy === 'png' ? <Loader2 size={16} className="spin" /> : <Share2 size={16} />} Scorecard share</button>
   </>;
 }

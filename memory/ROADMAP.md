@@ -1,3 +1,11 @@
+# Analysis 2.0 Phase 1 (2026-11-19)
+- DONE (preview): website 8 sections + Comparative + Leaderboard + Solutions cards + (i) texts styled and browser-checked; PDF report with cover/contents/charts/journey; app packet addendum /downloads/jeelive-app-update-2026-11-19.zip.
+- P0: deploy when the owner says "deploy". After deploy, tell the app team the 19 Nov addendum is live (it says "preview only").
+- P1 (Phase 2, needs approval): mock-to-mock trend (last 5), owner sets Difficulty/chapter tags in Master, subject-wise Rank and Percentile, Galti notebook.
+- P1 (Phase 3, needs approval): 1 to 2 lakh load test, owner paper report, target score follow-up.
+- P2: PDF uses standard Helvetica only, so a Hindi-script display name or learning would not print correctly in the PDF (Roman text is fine).
+- P2: analysis.py still has an unused old build_analysis (analysis_build.py is the live one).
+
 # Rank 6 tools + Mission share gate + result sparkle + Dream college (2026-11-18)
 - DONE (preview, iteration_199/200): public /rank with 6 jewel tools (Rank predictor, Percentile se rank, Target marks, College predictor JEE/BITSAT/COMEDK, College compare, Dream college), PDFs, WhatsApp share; Mission page + share gate after every fresh submission; result sparkle (40%+ or own best); Dream College Meter on Rank, Results (full mocks) and Home.
 - DONE 2026-11-19 (preview, iteration_201): Rank restyled to the app's look and design notes (black-metal jewel tiles, tool-colour form bands, purple College summary, metal Rank Card, numbered medal coins); Mission count-up 1.2 s + 'Aapka impact card par dikhega' note.

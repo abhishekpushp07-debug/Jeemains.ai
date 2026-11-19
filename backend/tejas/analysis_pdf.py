@@ -56,6 +56,13 @@ class Sheet:
         self.text((40, 44), self.title[:95], 9, MUTE)
         self.y = 66
 
+    def start(self, room=None):
+        """A section opens a new page, unless `room` points are still free on this one."""
+        if room is None or self.page is None or self.y + room > 792:
+            self.new()
+        else:
+            self.y += 16
+
     def need(self, h):
         if self.page is None or self.y + h > 792:
             self.new()
@@ -204,6 +211,19 @@ class Sheet:
             self.page.draw_circle((x, y), 2.6, color=TONE.get(outcome, MUTE), fill=TONE.get(outcome, MUTE), width=0.3)
         self.y = y0 + height + 18
 
+    def chips(self, items, cols=6, h=16):
+        """Journey chips in rows: [(text, colour)]."""
+        w = 515 / cols
+        for i, (label, color) in enumerate(items):
+            if i % cols == 0:
+                self.need(h + 4)
+            x = 40 + (i % cols) * w
+            self.box(x, self.y, x + w - 4, self.y + h, color=color, width=0.8)
+            self.box(x, self.y, x + 3, self.y + h, color)
+            self.text((x + 7, self.y + 11), plain(label)[:22], 7.5)
+            if i % cols == cols - 1 or i == len(items) - 1:
+                self.y += h + 4
+
     def ring(self, cx, cy, r, share, color=RED):
         self.page.draw_circle((cx, cy), r, color=SOFT, fill=SOFT)
         if share > 0.999:
@@ -334,7 +354,7 @@ def render(an, notes=None):
     s.para(f"Careless galti ({len(step['careless']['questions'])}): {qn(step['careless']['questions'])}", 9)
     s.para(f"Mushkil par risk ({len(step['guard']['questions'])}): {qn(step['guard']['questions'])}", 9)
     s.para(f"Atka time ({step['reinvest']['minutes']} min) in sawaalon ko dete: {qn(step['reinvest']['questions'])}", 9)
-    ranked = [x for x in pot['at'] if x.get('rank')]
+    ranked = list({x['score']: x for x in pot['at'] if x.get('rank')}.values())
     if ranked:
         s.h2('Itne marks par Rank lagbhag')
         s.table(['Score', 'Rank', 'Percentile'], [[x['score'], f"#{x['rank']} / {x['of']}", x['percentile']] for x in ranked], [120, 120, 120])
@@ -344,8 +364,8 @@ def render(an, notes=None):
            f"4 option mein se 1 bhi pakka hata sako to guess faydemand hai; bilkul andhere mein chhodna behtar. Bina galat jawab ke Score {pot['no_negative']} hota.")
 
     # 4 Attempt Quality
-    s.new()
     quality = an['quality']
+    s.start(None if quality['available'] else 130)
     s.h1('4. Attempt Quality', 'Har sawaal ko ek hi tag milta hai. ' + copy['time_label'])
     if quality['available']:
         most = max(an['paper']['count'], 1)
@@ -370,8 +390,8 @@ def render(an, notes=None):
         s.para(later)
 
     # 5 Time
-    s.new()
     time = an['time']
+    s.start(None if time['available'] else 130)
     s.h1('5. Time kahan gaya', copy['time_label'])
     if time['available']:
         by = time['by_outcome']
@@ -398,7 +418,7 @@ def render(an, notes=None):
         s.para(later)
 
     # 6 Difficulty + Journey
-    s.new()
+    s.start(330)
     diff = an['difficulty']
     s.h1('6. Difficulty', 'Easy sawaal chhootna sabse mehnga padta hai. Jahan students ka data kam hai wahan "Not rated" likha hai, andaaza nahi lagaya.')
     s.table(['Level', 'Sawaal', 'Sahi', 'Galat', 'Chhode', 'Accuracy'],
@@ -427,9 +447,20 @@ def render(an, notes=None):
         z = habits['last']
         s.para(f"Aakhri 20% time mein Accuracy {pc(z['late']['accuracy'])} ({z['late']['count']} jawab), usse pehle {pc(z['early']['accuracy'])} ({z['early']['count']} jawab).")
     if trip['available']:
-        s.y += 4
-        line = '  '.join(f"Q{v['n']}" + (f"({v['v']})" if v['v'] > 1 else '') for v in trip['visits'][:260])
-        s.para('Aapka raasta (bracket = kaun si baar): ' + line, 8, MUTE)
+        s.h2('Aapka raasta: har visit, time ke hisaab se')
+        s.para('Ek dabba = ek baar sawaal khola, saath mein us par ruka time. Rang = us sawaal ka result (hara sahi, laal galat, grey jawab nahi). (2) = doosri baar. B->C = jawab badla. * = review ke liye mark.', 8, MUTE)
+        size, groups = trip['block'], {}
+        for v in trip['visits'][:300]:
+            groups.setdefault(int(v['a'] // size), []).append(v)
+        for i in sorted(groups):
+            s.need(40)
+            s.text((40, s.y + 10), f"{i * size // 60}-{(i + 1) * size // 60} min  |  {len(groups[i])} visits", 8.5, INK, True)
+            s.y += 15
+            s.chips([(f"Q{v['n']}" + (f"({v['v']})" if v['v'] > 1 else '') + f" {mmss(v['d'])}" + (f" {v['set']}" if v.get('set') else '') + (' *' if v.get('mark') else ''),
+                      TONE.get((rows.get(v['q']) or {}).get('outcome'), MUTE)) for v in groups[i]])
+            s.y += 4
+        if len(trip['visits']) > 300:
+            s.para(f"... aur {len(trip['visits']) - 300} visits. Poora raasta website par Question Journey mein hai.", 8, MUTE)
 
     # 8 Qs by Qs
     s.new()

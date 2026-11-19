@@ -4,7 +4,7 @@ import math
 from collections import Counter
 from .analysis_rules import RULES, VERSION, TAGS, LEVELS, COPY, standard_par, par_for, tag_for, difficulty_for
 
-ANALYSIS_VERSION = 2
+ANALYSIS_VERSION = 3
 PACE_POINTS = 20
 CODE = {'correct': 'c', 'incorrect': 'w', 'skipped': 's', 'dropped': 'd', 'bonus': 'b'}
 OUT = {v: k for k, v in CODE.items()}
@@ -60,6 +60,7 @@ def entry_of(a, questions, rows, st, summary):
     first, final = a.get('first_answers') or {}, a.get('answers') or {}
     seen = set(a.get('visited') or ()) | set(secs) | set(final)
     locked = bool((a.get('rules') or {}).get('bonus_rule')) and not a.get('bonus_unlocked_at')
+    opened = Counter(v['q'] for v in visits(st))
 
     def answered_at(qid):
         at = (first.get(qid) or final.get(qid) or {}).get('accepted_at')
@@ -72,6 +73,7 @@ def entry_of(a, questions, rows, st, summary):
         'v': ''.join('1' if q['id'] in seen else '0' for q in questions),
         'score': summary['score'], 'maximum': summary['maximum'], 'secs': round(end - start),
         'on': round(sum(secs.values())) if st else None,
+        'j': [len(opened), sum(c - 1 for c in opened.values())] if st else None,  # questions opened, times came back
     }
 
 
@@ -108,7 +110,8 @@ class Group:
 
     def __init__(self, frame, duration, rules=RULES):
         self.frame, self.duration, self.rules = frame, duration, rules
-        self.n = self.timed = 0
+        self.n = self.timed = self.walked = 0
+        self.walk = [0, 0]
         self.tot, self.byo = Counter(), Counter()
         self.q = [[0, 0, 0, 0, 0] for _ in frame]  # correct, wrong, skipped, marks, seconds
         self.tags = [Counter() for _ in frame]
@@ -119,6 +122,9 @@ class Group:
         timed = bool(e.get('t'))
         self.timed += timed
         self.tot.update(score=e['score'], secs=e['secs'], on=e.get('on') or 0)
+        if e.get('j'):
+            self.walked += 1
+            self.walk = [self.walk[0] + e['j'][0], self.walk[1] + e['j'][1]]
         for i, f in enumerate(self.frame):
             o, s = e['o'][i], self.q[i]
             if o == 'c':
@@ -185,6 +191,7 @@ class Group:
                 'difficulty': {l: close(g) for l, g in levels.items()},
                 'tags': {k: num(tags[k]) for k in TAGS} if t else None,
                 'time_by_outcome': {k: num(self.byo[k] / t) for k in ('correct', 'incorrect', 'unanswered')} if t else None,
+                'journey': {'visited': num(self.walk[0] / self.walked), 'revisits': num(self.walk[1] / self.walked)} if self.walked else None,
                 'pace': pace if self.duration else None}
 
 

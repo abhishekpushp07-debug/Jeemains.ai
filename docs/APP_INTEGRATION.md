@@ -246,4 +246,5 @@ Applies to regular live exams (`competition:true`), not the All India series.
 - `cdn: true` means the links point at the CDN host set in `MEDIA_CDN_URL`; `cdn: false` means they are on this server (`/api/media/pack/...`, relative: prefix the API host). `/assets/pack` stays as the fallback and is unchanged.
 
 ## 16. Analysis 2.0, time capture and display name (added 2026-11-18, live)
+- After 18 Nov: `APP_UPDATE_2026-11-19.md` lists what changed next (analysis version 3: `rules`, `overview.class_subjects`, `journey` in `you` / `compare.profile`; Solutions cards; leaderboard on Overview; (i) texts). Preview only until the next deploy.
 - Time capture in the player (`timeline` on answer saves and submit, `POST /attempts/{id}/timeline`), the 8-section analysis (`GET /attempts/{id}/analysis`, `/analysis/questions`, `/leaderboard`, `PUT /learnings`, `/analysis/report.pdf`, `/analysis/share.png`, `GET /competitions/{id}/compare/{handle}`) and `PUT /profile/display-name` are specified field by field in `APP_UPDATE_2026-11-18.md`, with real sample responses in `samples/` and the rules in `analysis_rulebook.json`.

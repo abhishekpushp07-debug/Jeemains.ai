@@ -90,6 +90,7 @@ export async function postWhenFree(path, data = {}, tries = 4) {
 }
 export const put = (path, data) =>
   api(path, { method: "PUT", body: JSON.stringify(data) });
+export const del = path => api(path, { method: 'DELETE' });
 export const patch = (path, data) =>
   api(path, { method: "PATCH", body: JSON.stringify(data) });
 export async function downloadFile(path, filename) {

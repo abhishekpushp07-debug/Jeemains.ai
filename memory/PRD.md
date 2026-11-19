@@ -1,3 +1,14 @@
+## Status — 2026-11-19 (evening): Analysis 2.0 Phase 1 finished in preview (NOT deployed)
+User (Hinglish): "Mat poocho, poora banakar ek saath dikhao." Plan = plan/plan.md. Do not ask questions during Phase 1; deploy only when the user says "deploy".
+- Website: 8 sections + Comparative + Leaderboard + Solutions cards/journey + (i) "yeh kaise bana" on every number are styled (frontend/src/analysis2.css) and were walked in a browser at 1920x800 and 390x844, light and dark, with no horizontal overflow and no page errors. Display-name dialog copy is now Hinglish; the name box on the leaderboard saves and refreshes the board.
+- PDF report (backend/tejas/analysis_pdf.py): cover, contents, charts, Question Journey as visit boxes per time block, 3 seekh, tags ke matlab. 30-question sample = 8 pages (6 without time record); a 75-question layout test = 10 pages. Opened with two renderers (PyMuPDF, poppler).
+- Backend: tests/analysis_iso195.py 60/60 in an isolated disposable DB. No endpoint added or changed in this session.
+- App packet: docs/app_packet/APP_UPDATE_2026-11-19.md (addendum: analysis_version 3 fields rules / overview.class_subjects / journey in you + compare.profile, new blocks, Solutions cards, leaderboard, (i) texts via explain.js), samples re-exported, zip at /downloads/jeelive-app-update-2026-11-19.zip.
+- Browser QA helper: backend/tests/ui_analysis2_walk204.py (needs tests/analysis_bridge196.py running).
+- Preview-only quirk: the dev server's visual-edit plugin wraps text in <span data-ve-dynamic>; CSS child selectors (`>`) and bare `span` rules break on it. analysis2.css avoids `>` for those and has a reset for that span. The live build has no such span.
+
+
+
 ## Status — 2026-11-18 (newest): Rank (6 tools, public), Mission share gate, result sparkle, Dream college built from the app's code and tested (preview, NOT deployed)
 User (Hindi, from the App branch github.com/abhishekpushp07-debug/Jeemains.ai/tree/App): build Rank's six tools, Mission like the app (result opens only after a share), result sparkle on a good score, whole site in the app theme, Rapid Fire NOT rebuilt (stays a picture). Choices: Mission = share-gated like the app; sparkle = own best broken or 40%+; Rank = light page + colourful jewel tiles; Rank open to everyone without login. Backend: tejas/rank_* (from the app), tejas/dreams.py (/api/dream, /dreams, /cheered, /celebration/{id}), tejas/mission.py (/api/mission/me, /api/j/{code}). Frontend: features/Rank.js + components/rank/*, features/Mission.js + components/mission/*, components/results/ResultSparkle.js, components/home/HomeDream.js, rank.css, mission.css, celebrate.css. iteration_199 (backend 23/23) + iteration_200 retest passed.
 

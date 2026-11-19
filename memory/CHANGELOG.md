@@ -261,3 +261,14 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Frontend: app DreamMeter + ProgressChart ported (Rank Dream tool, Home compact meter, Results); app college/COMEDK/BITSAT card stat boxes (CLOSING/ROUND/2025 SE, CUTOFF/AAPKA, FEE / SAAL), BITSAT AAPKA bug fixed, 5-year history bars scale to cutoffs; server filenames on PDFs; Mission share link from the server.
 - Preview quirk: dynamic SVG children are hidden by the editor's wrapper spans, so the Gem and the chart are drawn from fixed markup; no bare 'span' selectors in these components.
 - Tested iteration_202 (backend 18/18 + pack connect_check 22/22; frontend all flows with route mocks, no DB writes). Then fixed BITSAT history bar heights, the Dream exam switch at 320 px and missing-key guards in mission_me/_grant (iteration_203).
+
+
+## 2026-11-19 — Analysis 2.0 Phase 1 finished (preview only, NOT deployed)
+- User: build everything in plan/plan.md without asking, show it together.
+- frontend/src/analysis2.css: styles for everything that had none ((i) popover, on/off chips, Painful by chapter, journey folds + result mark, Qs grid tag dot + class strip, leaderboard name box, Solutions four cards + question journey, Advanced link). Removed `>` child selectors that the preview's visual-edit span broke (score ring digits were stacking, tiles lost their width) and added a reset for that span.
+- charts.js / parts.js: one LEGEND setting (legend order = bar order), Waterfall has Target and Max as bars (no overlapping dashed label), +0 steps draw a thin bar, pace "Sab jawab" line uses the ink colour.
+- Journey.js: tag icon on each visit chip when tag colours are on. CompareBody.js: "{n} students ka hisaab" only for groups above 1. SolutionNavigator.js: tag key moved under the strip. DisplayName.js: all copy in Hinglish.
+- backend/tejas/analysis_pdf.py: Question Journey drawn as visit boxes per time block; sections share a page when the previous one is short (no near-empty pages); rank table drops duplicate scores.
+- tests/analysis_iso195.py: PDF check now also needs contents, journey, tags and pace. 60/60.
+- docs/app_packet: APP_UPDATE_2026-11-19.md addendum, explain.js, samples re-exported at analysis_version 3 + 12_explain_texts.json, rulebook version 3, README. Public copy + zip: frontend/public/downloads/app-update-2026-11-19/ and jeelive-app-update-2026-11-19.zip (SHA256SUMS checked, 200 from the preview URL).
+- Checked in a browser (isolated bridge, synthetic class of 14): all 8 sections personal + comparative at 1920 and 390, light and dark; attempt without time record; name box save; report and scorecard downloads.

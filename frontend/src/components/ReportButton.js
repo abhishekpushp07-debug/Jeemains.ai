@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 
 export const ReportButton = () => null;
 
-const ReportDownload = ({ id, compact = false, scoreVersion = 'original', answerKeyOnly = false }) => {
+const ReportDownload = ({ id, compact = false, scoreVersion = 'original', answerKeyOnly = false, label = '' }) => {
   const filename = answerKeyOnly ? 'jeelive-ai-results-and-answer-keys.pdf' : 'jeelive-ai-results-and-solutions.pdf';
   const [job, setJob] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -79,11 +79,14 @@ const ReportDownload = ({ id, compact = false, scoreVersion = 'original', answer
     }
   };
   return <div className="report-button-wrap">
-    <Button variant={compact ? 'ghost' : 'default'} className={'btn ' + (compact ? 'btn-quiet' : 'btn-primary')} data-testid="results-download-report-button" disabled={busy} onClick={start}>
+    <Button variant={label ? 'outline' : compact ? 'ghost' : 'default'} className={'btn ' + (label ? 'btn-secondary' : compact ? 'btn-quiet' : 'btn-primary')} data-testid="results-download-report-button" disabled={busy} onClick={start}>
       {busy ? <Loader2 size={18} className="spin" /> : error ? <RefreshCw size={18} /> : <Download size={18} />}
-      {busy ? `Preparing report${job ? ' · ' + job.progress + '%' : ''}` : error ? 'Retry PDF download' : compact ? 'Download PDF' : answerKeyOnly ? 'Download results & answer keys PDF' : 'Download results & solutions PDF'}
+      {label ? (busy ? `${label} ban rahi hai${job ? ' · ' + job.progress + '%' : ''}` : error ? `${label}: dobara try karo` : label) : busy ? `Preparing report${job ? ' · ' + job.progress + '%' : ''}` : error ? 'Retry PDF download' : compact ? 'Download PDF' : answerKeyOnly ? 'Download results & answer keys PDF' : 'Download results & solutions PDF'}
     </Button>
     {error && <small className="error-text" role="alert" data-testid="report-download-error">{error}</small>}
     {busy && <div className="report-progress" role="progressbar" data-testid="report-download-progress" aria-label="Report generation" aria-valuenow={job?.progress || 5} aria-valuemin={0} aria-valuemax={100}><span style={{ width: (job?.progress || 5) + '%' }} /></div>}
   </div>;
 };
+
+// The older PDF: every question with its solution or answer key.
+export const SolutionsPdf = props => <ReportDownload {...props} label={props.answerKeyOnly ? 'Answer keys PDF' : 'Solutions PDF'} />;

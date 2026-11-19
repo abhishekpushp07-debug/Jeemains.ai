@@ -23,7 +23,7 @@ async def main():
     check('analysis opens', r.status_code == 200 and an, r.text[:300])
     qs = {q['number']: q for q in an['questions']}
     o = an['overview']
-    check('version 2 with time data', an['analysis_version'] == 2 and an['time_data'] is True)
+    check('version 3 with time data and rules', an['analysis_version'] == 3 and an['time_data'] is True and an['rules']['quality']['perfect_x'] == 1.25 and an['rules']['compare']['min_finishers'] == 10, an.get('rules'))
     wrong_tags = {n: (qs[n]['tag'], t) for n, t in F.HERO_TAGS.items() if qs[n]['tag'] != t}
     check('every scripted tag is right', not wrong_tags, wrong_tags)
     check('every question has exactly one tag', sum(an['quality']['counts'].values()) == 30 and all(q['tag'] for q in an['questions']), an['quality']['counts'])
@@ -37,6 +37,9 @@ async def main():
     d = o['distribution']
     check('score distribution', d and sum(b['count'] for b in d['bins']) == 14 and sum(b['you'] for b in d['bins']) == 1 and d['n'] == 14, d)
     check('3 things for the next mock', 1 <= len(o['next3']) <= 3 and all(x['marks'] > 0 and x['questions'] for x in o['next3']), o['next3'])
+    cs = o.get('class_subjects')
+    check('subject scores of class average, top 10% and topper', cs and [x['name'] for x in cs] == ['Physics', 'Chemistry', 'Mathematics'] and all(x['topper'] is not None and x['average'] is not None and x['top10'] is not None for x in cs), cs)
+    check('own journey totals', an['you']['journey'] == {'visited': 27, 'revisits': 3}, an['you'].get('journey'))
     pot = an['potential']
     careless = next(s for s in pot['steps'] if s['key'] == 'careless')
     check('score potential', careless['marks'] == 10 and sorted(number[i] for i in careless['questions']) == [3, 10] and pot['current'] == 61 <= pot['realistic'] <= pot['maximum'] <= 120 and pot['no_negative'] == 68 and pot['guess']['break_even'] == 20, pot)
@@ -67,7 +70,8 @@ async def main():
         r, c = await F.analysis(hero, aid, f'?mode=comparative&compare={target}')
         c = c['compare']
         gap_ok = c['available'] and abs(c['split_total']['volume'] + c['split_total']['quality'] - c['gap']) <= 0.6
-        check(f'compare with {target}', gap_ok and len(c['times'] or {}) == 30 and c['by_subject'] and c['profile']['pace'], {k: c.get(k) for k in ('available', 'gap', 'split_total', 'reason')})
+        walk = c['profile'].get('journey') or {}
+        check(f'compare with {target}', gap_ok and len(c['times'] or {}) == 30 and c['by_subject'] and c['profile']['pace'] and walk.get('visited', 0) > 0 and walk.get('revisits') is not None, {k: c.get(k) for k in ('available', 'gap', 'split_total', 'reason')})
     r = await hero.get(f'/api/attempts/{aid}/leaderboard')
     board = r.json()
     check('leaderboard', r.status_code == 200 and board['state'] == 'ready' and board['n'] == 14 and len(board['rows']) == 14 and [x['score'] for x in board['rows']] == sorted((x['score'] for x in board['rows']), reverse=True)
@@ -126,7 +130,7 @@ async def main():
         doc = fitz.open(stream=r.content, filetype='pdf')
         pages = len(doc)
         text = ' '.join(p.get_text() for p in doc)
-        ok = 'Arjun' in text and 'Easy sawaal pehle' in text and 'Marks ka hisaab' in text and 'Speed-Accuracy map' in text
+        ok = all(x in text for x in ('Arjun', 'Easy sawaal pehle', 'Marks ka hisaab', 'Speed-Accuracy map', 'Is report mein', 'Aapka raasta', 'Tags ke matlab', 'Pace curve'))
     check('report PDF', ok and 7 <= pages <= 14, [r.status_code, pages])
     r = await hero.get(f'/api/attempts/{aid}/analysis/share.png')
     if r.status_code == 200:

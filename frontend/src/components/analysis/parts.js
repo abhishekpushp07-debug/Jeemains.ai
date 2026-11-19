@@ -1,5 +1,6 @@
 import React from 'react';
-import { CheckCircle2, Zap, Hourglass, HelpCircle, SkipForward, EyeOff, Ban, Brain, Clock3, Lock } from 'lucide-react';
+import { CheckCircle2, Zap, Hourglass, HelpCircle, SkipForward, EyeOff, Ban, Brain, Clock3, Lock, Info as InfoIcon } from 'lucide-react';
+import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 
 export const mmss = s => (s == null ? '—' : `${Math.floor(Math.round(s) / 60)}m ${String(Math.round(s) % 60).padStart(2, '0')}s`);
 export const pc = v => (v == null ? '—' : v + '%');
@@ -20,19 +21,32 @@ export const TIP = {
 };
 export const AXIS = { fontSize: 11, fill: 'var(--text-muted)' };
 export const GRID = { vertical: false, stroke: 'var(--line)', strokeDasharray: '3 3' };
+export const LEGEND = { wrapperStyle: { fontSize: 12 }, itemSorter: null };
 
-export const Block = ({ id, kicker, title, note, action, children, className = '' }) => (
+// (i): what a number means and how it was counted.
+export const Info = ({ id, title, text }) => (
+  <Popover>
+    <PopoverTrigger asChild><button type="button" className="a2-info" aria-label={`${title}: yeh kaise bana`} data-testid={'a2-info-' + id} onClick={e => e.stopPropagation()}><InfoIcon size={15} aria-hidden="true" /></button></PopoverTrigger>
+    <PopoverContent className="a2-info-pop" align="end" data-testid={'a2-info-pop-' + id}><b>{title}</b><p>{text}</p></PopoverContent>
+  </Popover>
+);
+
+export const Block = ({ id, kicker, title, note, action, info, children, className = '' }) => (
   <section className={'a2-block ' + className} data-testid={'a2-block-' + id}>
-    <header><div>{kicker && <span className="a2-kicker">{kicker}</span>}<h3>{title}</h3>{note && <p>{note}</p>}</div>{action}</header>
+    <header><div>{kicker && <span className="a2-kicker">{kicker}</span>}<h3>{title}</h3>{note && <p>{note}</p>}</div>
+      {(action || info) && <div className={'a2-head-act' + (action ? '' : ' solo')}>{action}{info && <Info id={'block-' + id} title={title} text={info} />}</div>}
+    </header>
     {children}
   </section>
 );
 
-export const Tile = ({ id, label, value, sub, tone = '', ids, onDrill }) => {
+export const Tile = ({ id, label, value, sub, tone = '', ids, onDrill, onTap, tap = 'Sawaal dekho →', info }) => {
   const body = <><span className="a2-tile-label">{label}</span><strong className="a2-tile-value" data-testid={'a2-tile-' + id + '-value'}>{value}</strong>{sub ? <small className="a2-tile-sub">{sub}</small> : null}</>;
-  return ids?.length && onDrill
-    ? <button type="button" className={'a2-tile tap tone-' + tone} data-testid={'a2-tile-' + id} onClick={() => onDrill(label, ids)}>{body}<em>Sawaal dekho →</em></button>
+  const act = onTap || (ids?.length && onDrill ? () => onDrill(label, ids) : null);
+  const tile = act
+    ? <button type="button" className={'a2-tile tap tone-' + tone} data-testid={'a2-tile-' + id} onClick={act}>{body}<em>{tap}</em></button>
     : <div className={'a2-tile tone-' + tone} data-testid={'a2-tile-' + id}>{body}</div>;
+  return info ? <div className="a2-tile-box">{tile}<Info id={id} title={label} text={info} /></div> : tile;
 };
 
 export const TagChip = ({ tag, copy }) => {

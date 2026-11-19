@@ -29,12 +29,10 @@ import { QuestionContent, MathText } from "../components/QuestionContent";
 import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalyticsWorkspace';
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
 import { EmbargoedResult, DeletedResult } from '../components/results/EmbargoedResult';
-import { ReportButton } from "../components/ReportButton";
-import { MockSectionScores } from '../components/results/MockSectionScores';
+import { SolutionsPdf } from "../components/ReportButton";
 import {BitsatBranchView} from '../components/results/BitsatBranchView';
-import {useLearningMeters,MeterShortcuts,JourneyView,ConfidenceView,HistoricalRankView} from '../components/results/LearningMeters';
+import {useLearningMeters,JourneyView,ConfidenceView,HistoricalRankView} from '../components/results/LearningMeters';
 import { BarChart3,TrendingUp,Target,Trophy,BookOpen } from 'lucide-react';
-import { ResultAnalysis } from '../components/results/ResultAnalysis';
 import { AiSolution, PeerQuestionStat } from '../components/results/AiSolution';
 import { useResultExtras } from '../components/results/useResultExtras';
 import { SeriesRankCard } from '../components/results/SeriesRankCard';
@@ -303,7 +301,7 @@ function ResultsView() {
       )}
       <div className="results-review-shortcuts" data-testid="results-review-shortcuts"><p data-testid="results-attempt-immutable-notice"><ShieldCheck size={16}/> Your submitted answers are sealed. Review notes won’t change your score.</p></div>
       {r.questions.every(q=>q.solution_kind==='answer_key_only')&&<p className="results-key-notice" data-testid="results-answer-keys-only-disclosure">The source supplies official keys, not worked solutions. Saved owner or AI explanations appear in Solutions where available.</p>}
-      <div className="results-summary" data-testid="results-summary-tiles">
+      {(view !== 'analysis' || !analysis.data) && <div className="results-summary" data-testid="results-summary-tiles">
         <div className="score-card feature-dark">
           <span>Your score</span>
           <strong data-testid="results-score-total">
@@ -341,101 +339,19 @@ function ResultsView() {
           <strong>{s.skipped}</strong>
           <small>Worth another look</small>
         </div>
-      </div>
+      </div>}
       {r.mode === 'series_live' && <SeriesRankCard id={id} />}
-      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank',r.exam==='BITSAT'?'Branch matches':'Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList><ReportButton key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /></Tabs>
+      <Tabs value={view} onValueChange={changeView} className="result-destinations" data-testid="result-view-navigation"><TabsList aria-label="Result sections">{[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',TrendingUp,'amber'],['accuracy','Confidence',Target,'emerald'],['rank',r.exam==='BITSAT'?'Branch matches':'Real-exam rank',Trophy,'sapphire'],['solutions','Solutions',BookOpen,'crimson']].map(([value,label,Icon,tone])=><TabsTrigger key={value} value={value} className={'tone-'+tone} data-testid={'result-view-'+value}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList></Tabs>
       <section className="result-view-panel" hidden={view!=='analysis'} data-testid="result-analysis-panel" aria-label="Result analysis">
-      <AnalysisWorkspace id={id} state={analysis} onOpen={openQuestion} onSolutions={() => changeView('solutions')} onRetry={s.incorrect || s.skipped ? () => setRetryOpen(true) : null} />
-      <details className="a2-legacy" data-testid="legacy-analysis"><summary data-testid="legacy-analysis-toggle">Purana detailed analysis · charts, 25 insights aur study plan</summary>
-      <MeterShortcuts exam={r.exam} journey={meters.journey} rank={meters.rank} onView={changeView}/>
-      <MockSectionScores s={s} />
-      <ResultAnalysis r={r} cohort={extras.cohort} peer={extras.peer} onOpen={openQuestion} />
-      <div className="result-metrics">
-        <div>
-          <span>Attempt rate</span>
-          <strong>
-            {s.attempt_rate === null ? "Not applicable" : s.attempt_rate + "%"}
-          </strong>
-          <small>
-            {s.attempted} / {s.eligible_count ?? r.count} eligible questions
-          </small>
-        </div>
-        <div>
-          <span>Attempted accuracy</span>
-          <strong>
-            {s.accuracy === null ? "Not applicable" : s.accuracy + "%"}
-          </strong>
-          <small>Correct ÷ attempted (excludes dropped/bonus)</small>
-        </div>
-        <div>
-          <span>Penalty marks</span>
-          <strong>{s.penalties}</strong>
-          <small>Marks lost to wrong answers</small>
-        </div>
-        <div>
-          <span>Total elapsed time</span>
-          <strong>
-            {Math.floor(s.total_seconds / 60)}m {s.total_seconds % 60}s
-          </strong>
-          <small>Includes time away; per-question timing unavailable</small>
-        </div>
-      </div>
-      <div className="summary-tables">
-        <section className="card">
-          <h3>By subject</h3>
-          {Object.entries(s.subjects).map(([name, d]) => (
-            <div className="subject-result" key={name}>
-              <span>{name}</span>
-              <strong>{d.score} marks</strong>
-              <small>
-                {d.correct} correct / {d.attempted} attempted
-              </small>
-              <div className="subject-track">
-                <span style={{ width: (100 * d.correct) / d.count + "%" }} />
-              </div>
-            </div>
-          ))}
-        </section>
-        <section className="card">
-          <h3>A clearer next step.</h3>
-          <p>
-            {r.questions.every(q=>q.solution_kind==='answer_key_only')?'Compare each missed question with the supplied key; this book has no worked explanations.':'Review the explanation beside each missed question.'} Then try a separate, untimed revision attempt.
-          </p>
-          <button
-            className="btn btn-secondary"
-            data-testid="results-retry-mistakes"
-            disabled={!s.incorrect && !s.skipped}
-            onClick={() => setRetryOpen(true)}
-          >
-            <RotateCcw size={17} /> Retry incorrect & skipped
-          </button>
-          <small>
-            Repeated exposure is revision—not a new readiness estimate.
-          </small>
-          <details>
-            <summary data-testid="topic-summary-toggle">
-              Topic summary ({Object.keys(s.topics).length})
-            </summary>
-            {Object.entries(s.topics).map(([name, d]) => (
-              <p className="topic-result" key={name}>
-                <span>{name}</span>
-                <strong>
-                  {d.correct}/{d.count} correct · {d.score} marks
-                </strong>
-              </p>
-            ))}
-          </details>
-        </section>
-      </div>
-      {r.insights && <section className="import-card mb-8" data-testid="results-evidence-insights"><div className="import-section-label">YOUR NEXT STUDY SESSION</div><h2>Start where this attempt points.</h2><div className="insight-grid">{r.insights.priorities.length ? r.insights.priorities.map((g,i) => <article className="import-issue" data-testid={'results-priority-' + i} key={g.label}><strong>{g.label}</strong><p>{g.incorrect} incorrect · {g.skipped} skipped · {g.count} questions</p><p>Attempted accuracy: {g.accuracy === null ? 'Not available' : g.accuracy + '%'} ({g.correct}/{g.attempted})</p><p>{g.action}</p><small>{g.evidence} · Review Q{g.questions.join(', Q')}</small></article>) : <p data-testid="results-no-priorities">No incorrect or skipped eligible questions in this attempt. Use fresh questions to gather more evidence.</p>}</div><p className="import-fineprint mt-4" data-testid="results-insights-basis">{r.insights.basis}</p></section>}
-      <details className="advanced-analysis" data-testid="advanced-result-analysis"><summary data-testid="advanced-result-analysis-toggle">Deeper review tools · decisions, revision & study plan</summary><ResultsAnalyticsWorkspace key={`${id}-${scoreVersion}`} analysis={r.analytics} questions={r.questions} userId={user.id} attemptId={id} onOpenQuestion={openQuestion} onRefresh={refreshAnalytics} confidenceThreshold={confidenceThreshold} review={r.review} /></details>
-      </details>
+      <AnalysisWorkspace id={id} state={analysis} onOpen={openQuestion} onSolutions={() => changeView('solutions')} onRetry={s.incorrect || s.skipped ? () => setRetryOpen(true) : null}
+        extra={r.report_allowed ? <SolutionsPdf key={`${id}-${scoreVersion}`} id={id} scoreVersion={scoreVersion} answerKeyOnly={r.questions.every(q=>q.solution_kind==='answer_key_only')} /> : null} />
+      <details className="advanced-analysis a2-advanced" data-testid="advanced-result-analysis"><summary data-testid="advanced-result-analysis-toggle">Advanced · 60-metric ledger aur offline drafts</summary><ResultsAnalyticsWorkspace key={`${id}-${scoreVersion}`} analysis={r.analytics} questions={r.questions} userId={user.id} attemptId={id} onOpenQuestion={openQuestion} onRefresh={refreshAnalytics} confidenceThreshold={confidenceThreshold} review={r.review} /></details>
       </section>
       {view==='progress'&&<JourneyView data={meters.journey} retry={meters.retry}/>}
       {view==='accuracy'&&<ConfidenceView data={meters.journey} retry={meters.retry} latestAccuracy={s.accuracy}/>}
       {view==='rank'&&(r.exam==='BITSAT'?<BitsatBranchView key={`${id}-${scoreVersion}`} data={meters.rank} retry={meters.retry}/>:<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>)}
       {view === 'solutions' && <section className="result-view-panel" data-testid="result-solutions-panel" aria-label="Question solutions">
-      <SolutionNavigator subjects={subjects} subject={activeSubject} questions={qs} allQuestions={allQuestions} filter={filter} selected={activeQuestion?.id} onSubject={chooseSubject} onQuestion={openQuestion}/>
+      <SolutionNavigator subjects={subjects} subject={activeSubject} questions={qs} allQuestions={allQuestions} filter={filter} selected={activeQuestion?.id} onSubject={chooseSubject} onQuestion={openQuestion} tags={analysis.data?.copy?.tags}/>
       <div className="review-heading" id="results-review-heading">
         <div>
           <span className="eyebrow">UNDERSTAND THE WHY</span>
@@ -508,7 +424,7 @@ function ResultsView() {
               </strong>
             </div>
               <div className="review-expanded" data-testid="selected-question-solution-panel" aria-label={'Question ' + q.number + ' and solution'}>
-                {analysis.data && <SolutionInsight q={insight[q.id]} copy={analysis.data.copy} />}
+                {analysis.data && <SolutionInsight q={insight[q.id]} an={analysis.data} />}
                 <QuestionContent
                   question={q}
                   base={`/attempts/${id}/questions/${q.id}`}
@@ -561,7 +477,7 @@ function ResultsView() {
                 </div>}
                 {(!['ai_generated','supplied_worked','supplied_key_only'].includes(q.solution_kind)||(!q.solution&&!q.s_refs?.length)||extras.ai[q.id]?.state==='ready')&&<AiSolution item={extras.ai[q.id]} number={q.number}/>}
                 </section>
-                <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />
+                {!insight[q.id]?.class && <PeerQuestionStat p={extras.peer[q.id]} number={q.number} />}
                 <div className="ledger-meta">
                   Scoring reason: {q.reason_code} · Exact marks: {q.marks_exact}{" "}
                   · Key version: {q.key_version}

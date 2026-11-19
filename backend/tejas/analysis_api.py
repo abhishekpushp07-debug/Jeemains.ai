@@ -68,6 +68,17 @@ async def class_state(a, u, bg, version):
             'min_finishers': least, 'included': included}, cid
 
 
+def class_subjects(groups, n, least):
+    """Subject scores of the class average, the top 10% and the topper, next to the student's own on the Overview."""
+    if n < 2:
+        return None
+    by = {k: {s['name']: s for s in (groups.get(k) or {}).get('subjects', [])} for k in ('average', 'top10', 'topper')}
+    wide = n >= least
+    return [{'name': name, 'topper': top['score'], 'average': by['average'][name]['score'] if wide and name in by['average'] else None,
+             'top10': by['top10'][name]['score'] if wide and name in by['top10'] else None,
+             'average_accuracy': by['average'][name]['accuracy'] if wide and name in by['average'] else None} for name, top in by['topper'].items()]
+
+
 async def load(a, u, bg, version='original'):
     """(analysis, class id, cache key): built once and kept until the key, the class statistics, the time record or the display name change."""
     klass, cid = await class_state(a, u, bg, version)
@@ -90,6 +101,9 @@ async def load(a, u, bg, version='original'):
     events = (await timelines.find_one({'_id': a['id']}, {'_id': 0, 'events': 1}) or {}).get('events')
     hints = await class_stats.hints_for(a['set_id'])
     analysis = await run_in_threadpool(build_analysis, graded, result, stats, RULES, events, hints, klass, {'name': name})
+    if stats and klass.get('ranked'):
+        groups = (await class_stats.stats.find_one({'_id': cid}, {'_id': 0, 'groups.average.subjects': 1, 'groups.top10.subjects': 1, 'groups.topper.subjects': 1}) or {}).get('groups') or {}
+        analysis['overview']['class_subjects'] = class_subjects(groups, stats['n'], RULES['compare']['min_finishers'])
     packed = Binary(zlib.compress(json.dumps(analysis, separators=(',', ':')).encode(), 6))  # about a tenth of the plain size
     await cache.update_one({'_id': key}, {'$set': {'attempt_id': a['id'], 'user_id': u['id'], 'mark': mark, 'z': packed,
                                                  'expires_at': datetime.now(timezone.utc) + timedelta(days=KEEP_DAYS)},

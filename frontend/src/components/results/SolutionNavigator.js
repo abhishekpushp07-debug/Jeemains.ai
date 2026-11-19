@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { Atom, FlaskConical, Calculator, BookOpen, Brain, Check, X, Minus, Flag } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabs';
+import { TAG, Key } from '../analysis/parts';
 
 const TAGGED = { careless: ['wasted'], overtime: ['slow_correct', 'costly_overtime'], confused: ['confused'] };
 export const matchesOutcome = (q, filter) => filter === 'all' || (TAGGED[filter] ? TAGGED[filter].includes(q.tag) : filter === 'marked' ? q.marked : filter === 'bonus-section' ? q.bonus : q.outcome === filter);
 export const subjectSlug = subject => subject.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const subjectIcons = { Physics: Atom, Chemistry: FlaskConical, Mathematics: Calculator, 'Logical Reasoning': Brain, English: BookOpen };
 
-export const SolutionNavigator = ({ subjects, subject, questions, allQuestions, filter, selected, onSubject, onQuestion }) => {
+export const SolutionNavigator = ({ subjects, subject, questions, allQuestions, filter, selected, onSubject, onQuestion, tags }) => {
   const rail = useRef(null);
   useEffect(() => {
     const row = rail.current, button = row?.querySelector('[aria-current="true"]');
@@ -25,11 +26,12 @@ export const SolutionNavigator = ({ subjects, subject, questions, allQuestions, 
         <div className="solution-rail-label"><strong data-testid="solution-active-subject">{subject}</strong><span data-testid="solution-swipe-hint">Choose a number · scroll sideways for more</span></div>
         <nav ref={rail} className="solution-question-rail" aria-label={subject + ' question numbers'} data-testid="solution-question-rail">{questions.map(q => {
           const Status = q.marked ? Flag : q.outcome === 'correct' ? Check : q.outcome === 'incorrect' ? X : Minus;
-          return <button type="button" key={q.id} className={'solution-number outcome-' + q.outcome} aria-current={selected === q.id ? 'true' : undefined} aria-label={`Question ${q.number}, ${q.subject}, ${q.outcome}${q.marked ? ', marked for review' : ''}`} title={`Q${q.number} · ${q.outcome}${q.marked ? ' · Marked' : ''}`} data-testid={'solution-question-' + q.number} onClick={() => onQuestion(q.id)}><span>{q.number}</span><Status size={11} aria-hidden="true"/></button>;
+          return <button type="button" key={q.id} className={'solution-number outcome-' + q.outcome} aria-current={selected === q.id ? 'true' : undefined} aria-label={`Question ${q.number}, ${q.subject}, ${q.outcome}${q.marked ? ', marked for review' : ''}`} title={`Q${q.number} · ${q.outcome}${q.marked ? ' · Marked' : ''}${q.tag && tags ? ' · ' + tags[q.tag][0] : ''}`} data-testid={'solution-question-' + q.number} onClick={() => onQuestion(q.id)}><span>{q.number}</span><Status size={11} aria-hidden="true"/>{q.tag && TAG[q.tag] && <i className={'tagdot tone-' + TAG[q.tag][0]} data-testid={'solution-question-tag-' + q.number} aria-hidden="true"/>}</button>;
         })}</nav>
         {!questions.length && <p className="solution-no-numbers" data-testid="solution-empty-subject">No questions match this filter in {subject}.</p>}
       </TabsContent>
     </Tabs>
     <div className="solution-legend" data-testid="solution-navigation-legend"><span><Check size={12}/>Correct</span><span><X size={12}/>Incorrect</span><span><Minus size={12}/>Skipped / other</span><span><Flag size={12}/>Marked</span></div>
+    {tags && allQuestions.some(q => q.tag) && <div className="a2-tagkey" data-testid="solution-legend-tags"><Key items={[['Kone ka dot = tag. Perfect', 'good'], ['Careless / Concept gap / Mehnga overtime', 'bad'], ['Slow-correct / Confused', 'warn'], ['Smart skip', 'info']]} /></div>}
   </div>;
 };

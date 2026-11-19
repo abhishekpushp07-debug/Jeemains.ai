@@ -248,6 +248,7 @@ def build_analysis(attempt, result, stats=None, rules=RULES, events=None, hints=
         'analysis_version': ANALYSIS_VERSION, 'rules_version': VERSION, 'attempt_id': a['id'], 'title': a.get('title'), 'exam': a.get('exam'),
         'mode': a.get('mode'), 'score_version': a.get('score_version', 'original'), 'submitted_at': a.get('submitted_at'),
         'student': student or {},
+        'rules': {k: rules[k] for k in ('par', 'quality', 'difficulty', 'extra', 'potential', 'compare')},
         'paper': {'count': len(rows), 'minutes': minutes, 'duration': duration, 'block': size, 'not_opened_bonus': len(questions) - len(rows),
                   'marks': {'correct': pos, 'wrong': neg}},
         'time_data': timed, 'copy': COPY, 'class': klass,

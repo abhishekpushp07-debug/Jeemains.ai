@@ -62,7 +62,7 @@ function Pager({ at, open }) {
   );
 }
 
-export function AnalysisWorkspace({ id, state, onOpen, onSolutions, onRetry }) {
+export function AnalysisWorkspace({ id, state, onOpen, onSolutions, onRetry, extra }) {
   const { data: an, error, offline, reload } = state;
   const [params, setParams] = useSearchParams();
   const location = useLocation();
@@ -83,7 +83,7 @@ export function AnalysisWorkspace({ id, state, onOpen, onSolutions, onRetry }) {
     set({ a: k });
     top.current?.scrollIntoView({ block: 'start' });
   };
-  const start = e => { const t = e.touches[0]; touch.current = e.target.closest('.a2-scroll, .a2-pills, .recharts-wrapper, .a2-qgrid, input, select') ? null : [t.clientX, t.clientY]; };
+  const start = e => { const t = e.touches[0]; touch.current = e.target.closest('.a2-scroll, .a2-pills, .a2-toggles, .recharts-wrapper, .a2-qgrid, input, select') ? null : [t.clientX, t.clientY]; };
   const finish = e => {
     if (!touch.current) return;
     const t = e.changedTouches[0], dx = t.clientX - touch.current[0], dy = t.clientY - touch.current[1];
@@ -95,23 +95,26 @@ export function AnalysisWorkspace({ id, state, onOpen, onSolutions, onRetry }) {
   if (!an) return <div className="a2" data-testid="analysis2"><ErrorBox error={error} retry={reload} />{!error && <Loading text="Analysis khul raha hai…" />}</div>;
   const at = SECTIONS.findIndex(s => s[0] === key);
   const [, label, Section, about] = SECTIONS[at];
+  const pick = v => { set({ mode: 'compare', vs: v }); top.current?.scrollIntoView({ block: 'start' }); };
+  const board = key === 'overview' && an.class.state === 'ready' ? <Leaderboard id={id} value={compare ? vs : ''} onPick={pick} /> : null;
+  const toBoard = () => document.querySelector('[data-testid="a2-block-leaderboard"]')?.scrollIntoView({ block: 'start' });
   return (
     <div className="a2" data-testid="analysis2" ref={top}>
       <div className="a2-top" data-testid="a2-top-bar">
         <div><span className="a2-kicker">ANALYSIS · {at + 1} / {SECTIONS.length}{compare ? ' · COMPARATIVE' : ''}</span><h2 data-testid="a2-section-title">{label}</h2><p>{about}</p></div>
         <div className="a2-actions">
           <ReportActions id={id} an={an} />
+          {extra}
           {onRetry && <button type="button" className="btn btn-secondary" data-testid="a2-retry-mistakes" onClick={onRetry}><RotateCcw size={16} /> Galat + chhode dobara</button>}
           <button type="button" className="btn btn-primary" data-testid="a2-view-solutions" onClick={onSolutions}><BookOpen size={16} /> Solutions dekho</button>
         </div>
       </div>
       {offline && <p className="a2-offline" role="status" data-testid="a2-offline"><WifiOff size={16} /> Internet nahi hai. Yeh pichhli baar khula hua analysis hai.</p>}
       <ErrorBox error={error} retry={reload} />
-      {compare && <ComparePicker id={id} value={vs} onChange={v => set({ vs: v })} />}
+      {compare && <ComparePicker id={id} value={vs} onChange={v => set({ vs: v })} above={an.class.above} />}
       <div className="a2-stage" key={key + (compare ? ':c' : '')} data-testid={'a2-section-' + key} onTouchStart={start} onTouchEnd={finish}>
         {compare && <CompareBody an={an} part={key} />}
-        {compare && key === 'overview' && an.class.state === 'ready' && <Leaderboard id={id} value={vs} onPick={v => set({ vs: v })} />}
-        <Section an={an} id={id} onDrill={(title, ids) => setDrill({ title, ids })} onOpen={onOpen} go={open} />
+        <Section an={an} id={id} onDrill={(title, ids) => setDrill({ title, ids })} onOpen={onOpen} go={open} board={board} toBoard={board ? toBoard : null} />
         <Pager at={at} open={open} />
       </div>
       <nav className="a2-bar" aria-label="Analysis sections" data-testid="a2-bottom-bar">

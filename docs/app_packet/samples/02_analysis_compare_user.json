@@ -1,7 +1,7 @@
 {
  "request": {
   "method": "GET",
-  "path": "/attempts/9f0e0c5c-ffcc-4760-9ee7-510e28f16bbe/analysis?mode=comparative&compare=user:04462e31e0442347"
+  "path": "/attempts/94da2f68-56ac-4f55-bdc2-83f2f0ac8e41/analysis?mode=comparative&compare=user:96fa69be723dc946"
  },
  "status": 200,
  "headers": {
@@ -10,16 +10,51 @@
  },
  "response": {
   "data": {
-   "analysis_version": 2,
+   "analysis_version": 3,
    "rules_version": 2,
-   "attempt_id": "9f0e0c5c-ffcc-4760-9ee7-510e28f16bbe",
+   "attempt_id": "94da2f68-56ac-4f55-bdc2-83f2f0ac8e41",
    "title": "TEST_JEE Main Full Mock 7",
    "exam": "JEE Main",
    "mode": "practice",
    "score_version": "original",
-   "submitted_at": 1795027469.647,
+   "submitted_at": 1795108422.262,
    "student": {
     "name": "Arjun"
+   },
+   "rules": {
+    "par": {
+     "min_solvers": 30,
+     "floor": 30,
+     "ceiling_x_average": 2,
+     "type_factor": {
+      "mcq": 0.85,
+      "integer": 1.35
+     },
+     "share_of_duration": 0.9
+    },
+    "quality": {
+     "perfect_x": 1.25,
+     "wasted_x": 0.5,
+     "gap_x": 1.5,
+     "confused_x": 0.5
+    },
+    "difficulty": {
+     "min_attempted": 50,
+     "early_attempted": 10,
+     "easy": 65,
+     "tough": 35
+    },
+    "extra": {
+     "lucky_x": 0.25,
+     "last_share": 0.2,
+     "last_min": 5
+    },
+    "potential": {
+     "guard_solved_below": 25
+    },
+    "compare": {
+     "min_finishers": 10
+    }
    },
    "paper": {
     "count": 30,
@@ -90,13 +125,13 @@
     "state": "ready",
     "ranked": true,
     "n": 14,
-    "computed_at": 1795027469.8309374,
+    "computed_at": 1795108422.5102067,
     "min_finishers": 10,
     "included": true,
     "above": {
-     "handle": "b4b068819cedf450",
+     "handle": "16cc396c7e63dc0d",
      "score": 62,
-     "name": "Learner B4B06881"
+     "name": "Learner 16CC396C"
     }
    },
    "overview": {
@@ -240,11 +275,11 @@
       "title": "Easy sawaal pakke karo",
       "detail": "3 Easy galat aur 2 Easy chhoote. Yahan se 23 marks bach sakte the.",
       "questions": [
-       "82d5284b-382c-46df-bd3f-c8d072b1075e",
-       "b5179084-8c61-44fa-82d1-d240bb12c1e0",
-       "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
-       "e0fca752-c266-4c10-b250-dbcf840a2b59",
-       "eb2a7e71-d156-4e7c-ad11-c13a64e25d61"
+       "f058b5f1-fd03-4186-a3d3-fca71992e481",
+       "77d95046-0540-487b-af11-7a87e60af2d6",
+       "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
+       "721c5126-8764-4de6-a540-79a255a824f3",
+       "52de1bc0-6ed6-4859-a15c-88bcd15b7d45"
       ],
       "section": "difficulty"
      },
@@ -254,10 +289,10 @@
       "title": "Physics ko mazboot karo",
       "detail": "Physics mein 4 galat, Accuracy 42.9%. Yeh sahi hote to +20 marks.",
       "questions": [
-       "82d5284b-382c-46df-bd3f-c8d072b1075e",
-       "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
-       "e9692627-ea60-481e-83ee-09276844176d",
-       "ec832239-d9dd-4914-9619-02c5763a7213"
+       "f058b5f1-fd03-4186-a3d3-fca71992e481",
+       "88c7aa77-f1bf-4316-a385-e4e7893f5cb5",
+       "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
+       "20defeca-6916-4743-91b9-6625f4887807"
       ],
       "section": "performance"
      },
@@ -267,10 +302,33 @@
       "title": "Careless galti roko",
       "detail": "2 sawaal jaldbaazi mein galat hue. Inhe aaram se padhte to +10 marks milte.",
       "questions": [
-       "82d5284b-382c-46df-bd3f-c8d072b1075e",
-       "ec832239-d9dd-4914-9619-02c5763a7213"
+       "f058b5f1-fd03-4186-a3d3-fca71992e481",
+       "20defeca-6916-4743-91b9-6625f4887807"
       ],
       "section": "quality"
+     }
+    ],
+    "class_subjects": [
+     {
+      "name": "Physics",
+      "topper": 36,
+      "average": 19.2,
+      "top10": 34,
+      "average_accuracy": 68.5
+     },
+     {
+      "name": "Chemistry",
+      "topper": 32,
+      "average": 21.7,
+      "top10": 28,
+      "average_accuracy": 74.8
+     },
+     {
+      "name": "Mathematics",
+      "topper": 32,
+      "average": 19.7,
+      "top10": 36,
+      "average_accuracy": 70.6
      }
     ]
    },
@@ -549,9 +607,9 @@
       "skipped": 2,
       "lost": 13,
       "questions": [
-       "e9692627-ea60-481e-83ee-09276844176d",
-       "e0fca752-c266-4c10-b250-dbcf840a2b59",
-       "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4"
+       "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
+       "721c5126-8764-4de6-a540-79a255a824f3",
+       "b71549fc-9b5e-4844-8485-4ed6426d1972"
       ]
      },
      {
@@ -561,8 +619,8 @@
       "skipped": 0,
       "lost": 10,
       "questions": [
-       "82d5284b-382c-46df-bd3f-c8d072b1075e",
-       "d81ddec7-8cf9-4728-bb5a-a6fa28e75336"
+       "f058b5f1-fd03-4186-a3d3-fca71992e481",
+       "88c7aa77-f1bf-4316-a385-e4e7893f5cb5"
       ]
      },
      {
@@ -572,8 +630,8 @@
       "skipped": 1,
       "lost": 9,
       "questions": [
-       "422b6c5b-f260-40ad-9a44-53ca91dfa052",
-       "ec832239-d9dd-4914-9619-02c5763a7213"
+       "78215faf-27d4-4c7d-9c24-8c68fbca9afe",
+       "20defeca-6916-4743-91b9-6625f4887807"
       ]
      },
      {
@@ -583,8 +641,8 @@
       "skipped": 1,
       "lost": 9,
       "questions": [
-       "34420f44-58a6-4be7-ac3f-1f73f875f952",
-       "eb2a7e71-d156-4e7c-ad11-c13a64e25d61"
+       "cb1100a8-8661-4a8a-ba94-ae34fc804a11",
+       "52de1bc0-6ed6-4859-a15c-88bcd15b7d45"
       ]
      },
      {
@@ -594,8 +652,8 @@
       "skipped": 1,
       "lost": 9,
       "questions": [
-       "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
-       "231b7d0d-a0d5-46b6-877c-4105790d408f"
+       "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
+       "8e8fd306-7058-4765-b1c4-5bcea4ad6be5"
       ]
      },
      {
@@ -605,7 +663,7 @@
       "skipped": 0,
       "lost": 5,
       "questions": [
-       "b5179084-8c61-44fa-82d1-d240bb12c1e0"
+       "77d95046-0540-487b-af11-7a87e60af2d6"
       ]
      },
      {
@@ -615,7 +673,7 @@
       "skipped": 1,
       "lost": 4,
       "questions": [
-       "99e9cfd0-8f58-4290-9f0d-4a4e2efcb33b"
+       "4644bd2e-cdb4-4b9f-9a6c-5c14e7988965"
       ]
      }
     ],
@@ -630,8 +688,8 @@
       "key": "careless",
       "marks": 10,
       "questions": [
-       "82d5284b-382c-46df-bd3f-c8d072b1075e",
-       "ec832239-d9dd-4914-9619-02c5763a7213"
+       "f058b5f1-fd03-4186-a3d3-fca71992e481",
+       "20defeca-6916-4743-91b9-6625f4887807"
       ]
      },
      {
@@ -644,10 +702,10 @@
       "marks": 10.8,
       "minutes": 8.1,
       "questions": [
-       "eb2a7e71-d156-4e7c-ad11-c13a64e25d61",
-       "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4",
-       "231b7d0d-a0d5-46b6-877c-4105790d408f",
-       "422b6c5b-f260-40ad-9a44-53ca91dfa052"
+       "52de1bc0-6ed6-4859-a15c-88bcd15b7d45",
+       "b71549fc-9b5e-4844-8485-4ed6426d1972",
+       "8e8fd306-7058-4765-b1c4-5bcea4ad6be5",
+       "78215faf-27d4-4c7d-9c24-8c68fbca9afe"
       ]
      }
     ],
@@ -753,9 +811,9 @@
     },
     "lucky": [],
     "painful": [
-     "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
-     "e9692627-ea60-481e-83ee-09276844176d",
-     "d81ddec7-8cf9-4728-bb5a-a6fa28e75336"
+     "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
+     "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
+     "88c7aa77-f1bf-4316-a385-e4e7893f5cb5"
     ]
    },
    "time": {
@@ -896,11 +954,11 @@
      ]
     },
     "slowest": [
-     "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
-     "e9692627-ea60-481e-83ee-09276844176d",
-     "1b4a2254-5cba-4984-b635-33652e15e936",
-     "ea7e074d-97f4-4ded-806c-dc6662137819",
-     "e0fca752-c266-4c10-b250-dbcf840a2b59"
+     "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
+     "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
+     "bb8a0d47-c9c8-4e57-95cd-5790be233ab3",
+     "b455365b-0c35-4dc2-94ec-2af323d324fa",
+     "721c5126-8764-4de6-a540-79a255a824f3"
     ],
     "off_screen": 505,
     "first_look": {
@@ -910,29 +968,29 @@
       "accuracy": 69.6,
       "time": 2270,
       "questions": [
-       "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72",
-       "1b4a2254-5cba-4984-b635-33652e15e936",
-       "82d5284b-382c-46df-bd3f-c8d072b1075e",
-       "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
-       "e9692627-ea60-481e-83ee-09276844176d",
-       "28dd13ee-f209-44c1-97a3-9ba5682004e6",
-       "ec832239-d9dd-4914-9619-02c5763a7213",
-       "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
-       "b5179084-8c61-44fa-82d1-d240bb12c1e0",
-       "549cb7a8-3a29-419f-b3ce-3f81414a0c23",
-       "233bcdea-96cc-478f-bd40-5a3474cf940b",
-       "d05cb02c-cb5f-4135-ba08-0ff3271cde8b",
-       "fdcc52da-294e-48c3-87ce-11fc9d7f73fe",
-       "d4adae35-5da1-4905-9f10-e59839dfbcf5",
-       "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4",
-       "176a1615-5e54-403f-b29a-6e9ffdfd56ec",
-       "71dc525f-0f9d-4ab5-bea4-f12a428494e8",
-       "1b82efb8-d367-4182-82e5-9dd3c739cb88",
-       "01ecd40b-d4de-4f71-8263-8c25511968bc",
-       "152dce11-5c69-4ef1-b90c-90ab15dc01d9",
-       "34420f44-58a6-4be7-ac3f-1f73f875f952",
-       "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
-       "ea7e074d-97f4-4ded-806c-dc6662137819"
+       "ff86598b-2220-4189-ace8-b9fdc87e3c00",
+       "bb8a0d47-c9c8-4e57-95cd-5790be233ab3",
+       "f058b5f1-fd03-4186-a3d3-fca71992e481",
+       "88c7aa77-f1bf-4316-a385-e4e7893f5cb5",
+       "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
+       "572c1e72-6a09-4667-9381-78fe224c5076",
+       "20defeca-6916-4743-91b9-6625f4887807",
+       "a92a544f-681c-4302-b843-f4a79f30a90d",
+       "77d95046-0540-487b-af11-7a87e60af2d6",
+       "8b23ffc1-8ec3-4894-8421-dbc6077e9743",
+       "acf12ece-6712-49ec-98cb-114ae8308983",
+       "8440167b-319a-4e40-bea8-696f1b9a8692",
+       "61d55510-f02a-4955-91d7-345b4c1a2050",
+       "cc6ad2fd-42c5-4cc9-bef9-f92162d23595",
+       "03eea36c-692b-4cd0-b182-a0a97a77e0e7",
+       "15f8c826-ed5b-4c0d-8443-77a407723ec2",
+       "8ea03680-4ddc-4625-a9fa-54b658932553",
+       "66315e7d-cb27-4873-beae-b284011c2aa4",
+       "9605a612-1d32-459f-85d4-4458f6c929d6",
+       "3ee0ce82-94b9-4813-aa3e-ff4b3bf7314b",
+       "cb1100a8-8661-4a8a-ba94-ae34fc804a11",
+       "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
+       "b455365b-0c35-4dc2-94ec-2af323d324fa"
       ]
      },
      "return": {
@@ -941,7 +999,7 @@
       "accuracy": 100.0,
       "time": 80,
       "questions": [
-       "3a756f34-b581-4a56-9986-402cb918a7ef"
+       "9a178376-ed48-4ab9-852c-ab7015342be7"
       ]
      }
     },
@@ -1095,13 +1153,13 @@
     ],
     "leak": {
      "wrong": [
-      "82d5284b-382c-46df-bd3f-c8d072b1075e",
-      "b5179084-8c61-44fa-82d1-d240bb12c1e0",
-      "97f56cc6-a56d-4c06-bb14-96acdad5cd7a"
+      "f058b5f1-fd03-4186-a3d3-fca71992e481",
+      "77d95046-0540-487b-af11-7a87e60af2d6",
+      "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded"
      ],
      "skipped": [
-      "e0fca752-c266-4c10-b250-dbcf840a2b59",
-      "eb2a7e71-d156-4e7c-ad11-c13a64e25d61"
+      "721c5126-8764-4de6-a540-79a255a824f3",
+      "52de1bc0-6ed6-4859-a15c-88bcd15b7d45"
      ],
      "marks": 23
     },
@@ -1112,9 +1170,9 @@
     },
     "class_n": 14,
     "tough_solved": [
-     "1b4a2254-5cba-4984-b635-33652e15e936",
-     "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
-     "233bcdea-96cc-478f-bd40-5a3474cf940b"
+     "bb8a0d47-c9c8-4e57-95cd-5790be233ab3",
+     "a92a544f-681c-4302-b843-f4a79f30a90d",
+     "acf12ece-6712-49ec-98cb-114ae8308983"
     ],
     "unlock": {
      "have": 14,
@@ -1126,7 +1184,7 @@
     "available": true,
     "visits": [
      {
-      "q": "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72",
+      "q": "ff86598b-2220-4189-ace8-b9fdc87e3c00",
       "n": 1,
       "a": 5,
       "d": 60,
@@ -1134,7 +1192,7 @@
       "set": "B"
      },
      {
-      "q": "1b4a2254-5cba-4984-b635-33652e15e936",
+      "q": "bb8a0d47-c9c8-4e57-95cd-5790be233ab3",
       "n": 2,
       "a": 66,
       "d": 200,
@@ -1142,7 +1200,7 @@
       "set": "C"
      },
      {
-      "q": "82d5284b-382c-46df-bd3f-c8d072b1075e",
+      "q": "f058b5f1-fd03-4186-a3d3-fca71992e481",
       "n": 3,
       "a": 267,
       "d": 20,
@@ -1150,7 +1208,7 @@
       "set": "A"
      },
      {
-      "q": "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
+      "q": "88c7aa77-f1bf-4316-a385-e4e7893f5cb5",
       "n": 4,
       "a": 288,
       "d": 100,
@@ -1158,7 +1216,7 @@
       "set": "B"
      },
      {
-      "q": "e9692627-ea60-481e-83ee-09276844176d",
+      "q": "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
       "n": 5,
       "a": 389,
       "d": 260,
@@ -1166,7 +1224,7 @@
       "set": "C"
      },
      {
-      "q": "e0fca752-c266-4c10-b250-dbcf840a2b59",
+      "q": "721c5126-8764-4de6-a540-79a255a824f3",
       "n": 6,
       "a": 650,
       "d": 120,
@@ -1174,14 +1232,14 @@
       "mark": true
      },
      {
-      "q": "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4",
+      "q": "b71549fc-9b5e-4844-8485-4ed6426d1972",
       "n": 7,
       "a": 771,
       "d": 10,
       "v": 1
      },
      {
-      "q": "28dd13ee-f209-44c1-97a3-9ba5682004e6",
+      "q": "572c1e72-6a09-4667-9381-78fe224c5076",
       "n": 9,
       "a": 782,
       "d": 100,
@@ -1189,7 +1247,7 @@
       "set": "5"
      },
      {
-      "q": "ec832239-d9dd-4914-9619-02c5763a7213",
+      "q": "20defeca-6916-4743-91b9-6625f4887807",
       "n": 10,
       "a": 883,
       "d": 30,
@@ -1197,7 +1255,7 @@
       "set": "7"
      },
      {
-      "q": "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+      "q": "a92a544f-681c-4302-b843-f4a79f30a90d",
       "n": 11,
       "a": 914,
       "d": 50,
@@ -1205,7 +1263,7 @@
       "set": "A"
      },
      {
-      "q": "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+      "q": "77d95046-0540-487b-af11-7a87e60af2d6",
       "n": 12,
       "a": 965,
       "d": 40,
@@ -1213,7 +1271,7 @@
       "set": "A"
      },
      {
-      "q": "549cb7a8-3a29-419f-b3ce-3f81414a0c23",
+      "q": "8b23ffc1-8ec3-4894-8421-dbc6077e9743",
       "n": 13,
       "a": 1006,
       "d": 70,
@@ -1222,7 +1280,7 @@
       "set": "B"
      },
      {
-      "q": "233bcdea-96cc-478f-bd40-5a3474cf940b",
+      "q": "acf12ece-6712-49ec-98cb-114ae8308983",
       "n": 14,
       "a": 1077,
       "d": 60,
@@ -1230,7 +1288,7 @@
       "set": "C"
      },
      {
-      "q": "d05cb02c-cb5f-4135-ba08-0ff3271cde8b",
+      "q": "8440167b-319a-4e40-bea8-696f1b9a8692",
       "n": 15,
       "a": 1138,
       "d": 75,
@@ -1238,7 +1296,7 @@
       "set": "D"
      },
      {
-      "q": "fdcc52da-294e-48c3-87ce-11fc9d7f73fe",
+      "q": "61d55510-f02a-4955-91d7-345b4c1a2050",
       "n": 16,
       "a": 1214,
       "d": 80,
@@ -1246,7 +1304,7 @@
       "set": "A"
      },
      {
-      "q": "d4adae35-5da1-4905-9f10-e59839dfbcf5",
+      "q": "cc6ad2fd-42c5-4cc9-bef9-f92162d23595",
       "n": 17,
       "a": 1295,
       "d": 90,
@@ -1254,7 +1312,7 @@
       "set": "B"
      },
      {
-      "q": "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4",
+      "q": "03eea36c-692b-4cd0-b182-a0a97a77e0e7",
       "n": 18,
       "a": 1386,
       "d": 65,
@@ -1262,7 +1320,7 @@
       "set": "C"
      },
      {
-      "q": "176a1615-5e54-403f-b29a-6e9ffdfd56ec",
+      "q": "15f8c826-ed5b-4c0d-8443-77a407723ec2",
       "n": 19,
       "a": 1452,
       "d": 120,
@@ -1270,14 +1328,14 @@
       "set": "5"
      },
      {
-      "q": "3a756f34-b581-4a56-9986-402cb918a7ef",
+      "q": "9a178376-ed48-4ab9-852c-ab7015342be7",
       "n": 21,
       "a": 1573,
       "d": 20,
       "v": 1
      },
      {
-      "q": "71dc525f-0f9d-4ab5-bea4-f12a428494e8",
+      "q": "8ea03680-4ddc-4625-a9fa-54b658932553",
       "n": 22,
       "a": 1594,
       "d": 70,
@@ -1285,7 +1343,7 @@
       "set": "C"
      },
      {
-      "q": "1b82efb8-d367-4182-82e5-9dd3c739cb88",
+      "q": "66315e7d-cb27-4873-beae-b284011c2aa4",
       "n": 23,
       "a": 1665,
       "d": 70,
@@ -1293,7 +1351,7 @@
       "set": "D"
      },
      {
-      "q": "01ecd40b-d4de-4f71-8263-8c25511968bc",
+      "q": "9605a612-1d32-459f-85d4-4458f6c929d6",
       "n": 24,
       "a": 1736,
       "d": 70,
@@ -1301,7 +1359,7 @@
       "set": "A"
      },
      {
-      "q": "152dce11-5c69-4ef1-b90c-90ab15dc01d9",
+      "q": "3ee0ce82-94b9-4813-aa3e-ff4b3bf7314b",
       "n": 25,
       "a": 1807,
       "d": 70,
@@ -1309,7 +1367,7 @@
       "set": "B"
      },
      {
-      "q": "34420f44-58a6-4be7-ac3f-1f73f875f952",
+      "q": "cb1100a8-8661-4a8a-ba94-ae34fc804a11",
       "n": 26,
       "a": 1878,
       "d": 60,
@@ -1317,14 +1375,14 @@
       "set": "D"
      },
      {
-      "q": "eb2a7e71-d156-4e7c-ad11-c13a64e25d61",
+      "q": "52de1bc0-6ed6-4859-a15c-88bcd15b7d45",
       "n": 27,
       "a": 1939,
       "d": 15,
       "v": 1
      },
      {
-      "q": "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+      "q": "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
       "n": 28,
       "a": 1955,
       "d": 300,
@@ -1332,7 +1390,7 @@
       "set": "B"
      },
      {
-      "q": "ea7e074d-97f4-4ded-806c-dc6662137819",
+      "q": "b455365b-0c35-4dc2-94ec-2af323d324fa",
       "n": 29,
       "a": 2256,
       "d": 150,
@@ -1340,7 +1398,7 @@
       "set": "5"
      },
      {
-      "q": "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+      "q": "a92a544f-681c-4302-b843-f4a79f30a90d",
       "n": 11,
       "a": 2407,
       "d": 30,
@@ -1348,7 +1406,7 @@
       "set": "A→D"
      },
      {
-      "q": "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+      "q": "77d95046-0540-487b-af11-7a87e60af2d6",
       "n": 12,
       "a": 2438,
       "d": 30,
@@ -1356,7 +1414,7 @@
       "set": "A→B"
      },
      {
-      "q": "3a756f34-b581-4a56-9986-402cb918a7ef",
+      "q": "9a178376-ed48-4ab9-852c-ab7015342be7",
       "n": 21,
       "a": 2469,
       "d": 60,
@@ -1387,10 +1445,10 @@
     "changes": {
      "groups": {
       "w2r": [
-       "11b82c2c-47fa-4144-b009-80aeaf8c1e3e"
+       "a92a544f-681c-4302-b843-f4a79f30a90d"
       ],
       "r2w": [
-       "b5179084-8c61-44fa-82d1-d240bb12c1e0"
+       "77d95046-0540-487b-af11-7a87e60af2d6"
       ],
       "w2w": [],
       "r2s": [],
@@ -1407,7 +1465,7 @@
    },
    "questions": [
     {
-     "id": "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72",
+     "id": "ff86598b-2220-4189-ace8-b9fdc87e3c00",
      "number": 1,
      "subject": "Physics",
      "topic": "Kinematics",
@@ -1447,7 +1505,7 @@
      }
     },
     {
-     "id": "1b4a2254-5cba-4984-b635-33652e15e936",
+     "id": "bb8a0d47-c9c8-4e57-95cd-5790be233ab3",
      "number": 2,
      "subject": "Physics",
      "topic": "Kinematics",
@@ -1487,7 +1545,7 @@
      }
     },
     {
-     "id": "82d5284b-382c-46df-bd3f-c8d072b1075e",
+     "id": "f058b5f1-fd03-4186-a3d3-fca71992e481",
      "number": 3,
      "subject": "Physics",
      "topic": "Kinematics",
@@ -1527,7 +1585,7 @@
      }
     },
     {
-     "id": "d81ddec7-8cf9-4728-bb5a-a6fa28e75336",
+     "id": "88c7aa77-f1bf-4316-a385-e4e7893f5cb5",
      "number": 4,
      "subject": "Physics",
      "topic": "Kinematics",
@@ -1567,7 +1625,7 @@
      }
     },
     {
-     "id": "e9692627-ea60-481e-83ee-09276844176d",
+     "id": "458450a7-a25e-4c56-b8ae-f82a9ed21cd7",
      "number": 5,
      "subject": "Physics",
      "topic": "Laws of Motion",
@@ -1607,7 +1665,7 @@
      }
     },
     {
-     "id": "e0fca752-c266-4c10-b250-dbcf840a2b59",
+     "id": "721c5126-8764-4de6-a540-79a255a824f3",
      "number": 6,
      "subject": "Physics",
      "topic": "Laws of Motion",
@@ -1644,7 +1702,7 @@
      }
     },
     {
-     "id": "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4",
+     "id": "b71549fc-9b5e-4844-8485-4ed6426d1972",
      "number": 7,
      "subject": "Physics",
      "topic": "Laws of Motion",
@@ -1684,7 +1742,7 @@
      }
     },
     {
-     "id": "422b6c5b-f260-40ad-9a44-53ca91dfa052",
+     "id": "78215faf-27d4-4c7d-9c24-8c68fbca9afe",
      "number": 8,
      "subject": "Physics",
      "topic": "Electrostatics",
@@ -1724,7 +1782,7 @@
      }
     },
     {
-     "id": "28dd13ee-f209-44c1-97a3-9ba5682004e6",
+     "id": "572c1e72-6a09-4667-9381-78fe224c5076",
      "number": 9,
      "subject": "Physics",
      "topic": "Electrostatics",
@@ -1761,7 +1819,7 @@
      }
     },
     {
-     "id": "ec832239-d9dd-4914-9619-02c5763a7213",
+     "id": "20defeca-6916-4743-91b9-6625f4887807",
      "number": 10,
      "subject": "Physics",
      "topic": "Electrostatics",
@@ -1798,7 +1856,7 @@
      }
     },
     {
-     "id": "11b82c2c-47fa-4144-b009-80aeaf8c1e3e",
+     "id": "a92a544f-681c-4302-b843-f4a79f30a90d",
      "number": 11,
      "subject": "Chemistry",
      "topic": "Mole Concept",
@@ -1838,7 +1896,7 @@
      }
     },
     {
-     "id": "b5179084-8c61-44fa-82d1-d240bb12c1e0",
+     "id": "77d95046-0540-487b-af11-7a87e60af2d6",
      "number": 12,
      "subject": "Chemistry",
      "topic": "Mole Concept",
@@ -1878,7 +1936,7 @@
      }
     },
     {
-     "id": "549cb7a8-3a29-419f-b3ce-3f81414a0c23",
+     "id": "8b23ffc1-8ec3-4894-8421-dbc6077e9743",
      "number": 13,
      "subject": "Chemistry",
      "topic": "Mole Concept",
@@ -1918,7 +1976,7 @@
      }
     },
     {
-     "id": "233bcdea-96cc-478f-bd40-5a3474cf940b",
+     "id": "acf12ece-6712-49ec-98cb-114ae8308983",
      "number": 14,
      "subject": "Chemistry",
      "topic": "Mole Concept",
@@ -1958,7 +2016,7 @@
      }
     },
     {
-     "id": "d05cb02c-cb5f-4135-ba08-0ff3271cde8b",
+     "id": "8440167b-319a-4e40-bea8-696f1b9a8692",
      "number": 15,
      "subject": "Chemistry",
      "topic": "Chemical Bonding",
@@ -1998,7 +2056,7 @@
      }
     },
     {
-     "id": "fdcc52da-294e-48c3-87ce-11fc9d7f73fe",
+     "id": "61d55510-f02a-4955-91d7-345b4c1a2050",
      "number": 16,
      "subject": "Chemistry",
      "topic": "Chemical Bonding",
@@ -2038,7 +2096,7 @@
      }
     },
     {
-     "id": "d4adae35-5da1-4905-9f10-e59839dfbcf5",
+     "id": "cc6ad2fd-42c5-4cc9-bef9-f92162d23595",
      "number": 17,
      "subject": "Chemistry",
      "topic": "Chemical Bonding",
@@ -2078,7 +2136,7 @@
      }
     },
     {
-     "id": "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4",
+     "id": "03eea36c-692b-4cd0-b182-a0a97a77e0e7",
      "number": 18,
      "subject": "Chemistry",
      "topic": "Thermodynamics",
@@ -2118,7 +2176,7 @@
      }
     },
     {
-     "id": "176a1615-5e54-403f-b29a-6e9ffdfd56ec",
+     "id": "15f8c826-ed5b-4c0d-8443-77a407723ec2",
      "number": 19,
      "subject": "Chemistry",
      "topic": "Thermodynamics",
@@ -2155,7 +2213,7 @@
      }
     },
     {
-     "id": "99e9cfd0-8f58-4290-9f0d-4a4e2efcb33b",
+     "id": "4644bd2e-cdb4-4b9f-9a6c-5c14e7988965",
      "number": 20,
      "subject": "Chemistry",
      "topic": "Thermodynamics",
@@ -2192,7 +2250,7 @@
      }
     },
     {
-     "id": "3a756f34-b581-4a56-9986-402cb918a7ef",
+     "id": "9a178376-ed48-4ab9-852c-ab7015342be7",
      "number": 21,
      "subject": "Mathematics",
      "topic": "Quadratic Equations",
@@ -2232,7 +2290,7 @@
      }
     },
     {
-     "id": "71dc525f-0f9d-4ab5-bea4-f12a428494e8",
+     "id": "8ea03680-4ddc-4625-a9fa-54b658932553",
      "number": 22,
      "subject": "Mathematics",
      "topic": "Quadratic Equations",
@@ -2272,7 +2330,7 @@
      }
     },
     {
-     "id": "1b82efb8-d367-4182-82e5-9dd3c739cb88",
+     "id": "66315e7d-cb27-4873-beae-b284011c2aa4",
      "number": 23,
      "subject": "Mathematics",
      "topic": "Quadratic Equations",
@@ -2312,7 +2370,7 @@
      }
     },
     {
-     "id": "01ecd40b-d4de-4f71-8263-8c25511968bc",
+     "id": "9605a612-1d32-459f-85d4-4458f6c929d6",
      "number": 24,
      "subject": "Mathematics",
      "topic": "Quadratic Equations",
@@ -2352,7 +2410,7 @@
      }
     },
     {
-     "id": "152dce11-5c69-4ef1-b90c-90ab15dc01d9",
+     "id": "3ee0ce82-94b9-4813-aa3e-ff4b3bf7314b",
      "number": 25,
      "subject": "Mathematics",
      "topic": "Matrices",
@@ -2392,7 +2450,7 @@
      }
     },
     {
-     "id": "34420f44-58a6-4be7-ac3f-1f73f875f952",
+     "id": "cb1100a8-8661-4a8a-ba94-ae34fc804a11",
      "number": 26,
      "subject": "Mathematics",
      "topic": "Matrices",
@@ -2432,7 +2490,7 @@
      }
     },
     {
-     "id": "eb2a7e71-d156-4e7c-ad11-c13a64e25d61",
+     "id": "52de1bc0-6ed6-4859-a15c-88bcd15b7d45",
      "number": 27,
      "subject": "Mathematics",
      "topic": "Matrices",
@@ -2472,7 +2530,7 @@
      }
     },
     {
-     "id": "97f56cc6-a56d-4c06-bb14-96acdad5cd7a",
+     "id": "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded",
      "number": 28,
      "subject": "Mathematics",
      "topic": "Integration",
@@ -2512,7 +2570,7 @@
      }
     },
     {
-     "id": "ea7e074d-97f4-4ded-806c-dc6662137819",
+     "id": "b455365b-0c35-4dc2-94ec-2af323d324fa",
      "number": 29,
      "subject": "Mathematics",
      "topic": "Integration",
@@ -2549,7 +2607,7 @@
      }
     },
     {
-     "id": "231b7d0d-a0d5-46b6-877c-4105790d408f",
+     "id": "8e8fd306-7058-4765-b1c4-5bcea4ad6be5",
      "number": 30,
      "subject": "Mathematics",
      "topic": "Integration",
@@ -2685,6 +2743,10 @@
      "incorrect": 840,
      "unanswered": 145
     },
+    "journey": {
+     "visited": 27,
+     "revisits": 3
+    },
     "pace": [
      0,
      1,
@@ -2712,7 +2774,7 @@
    "compare": {
     "available": true,
     "kind": "user",
-    "label": "Learner 04462E31",
+    "label": "Learner 96FA69BE",
     "profile": {
      "n": 1,
      "score": 100,
@@ -2812,6 +2874,10 @@
       "incorrect": 0,
       "unanswered": 252
      },
+     "journey": {
+      "visited": 28,
+      "revisits": 0
+     },
      "pace": [
       0,
       1,
@@ -2901,38 +2967,38 @@
      "quality": 35
     },
     "score": 100,
-    "handle": "04462e31e0442347",
+    "handle": "96fa69be723dc946",
     "times": {
-     "0eb449e4-9f4f-46f7-b9dc-50e5c3edee72": 129,
-     "1b4a2254-5cba-4984-b635-33652e15e936": 82,
-     "82d5284b-382c-46df-bd3f-c8d072b1075e": 33,
-     "d81ddec7-8cf9-4728-bb5a-a6fa28e75336": 133,
-     "e9692627-ea60-481e-83ee-09276844176d": 0,
-     "e0fca752-c266-4c10-b250-dbcf840a2b59": 30,
-     "c0c03f5e-22f0-4696-af6b-3fa2a1a579c4": 73,
-     "422b6c5b-f260-40ad-9a44-53ca91dfa052": 99,
-     "28dd13ee-f209-44c1-97a3-9ba5682004e6": 119,
-     "ec832239-d9dd-4914-9619-02c5763a7213": 31,
-     "11b82c2c-47fa-4144-b009-80aeaf8c1e3e": 133,
-     "b5179084-8c61-44fa-82d1-d240bb12c1e0": 77,
-     "549cb7a8-3a29-419f-b3ce-3f81414a0c23": 112,
-     "233bcdea-96cc-478f-bd40-5a3474cf940b": 110,
-     "d05cb02c-cb5f-4135-ba08-0ff3271cde8b": 30,
-     "fdcc52da-294e-48c3-87ce-11fc9d7f73fe": 45,
-     "d4adae35-5da1-4905-9f10-e59839dfbcf5": 71,
-     "f8ab3e74-bdc6-4ed8-a97a-731fd0bb80c4": 58,
-     "176a1615-5e54-403f-b29a-6e9ffdfd56ec": 96,
-     "99e9cfd0-8f58-4290-9f0d-4a4e2efcb33b": 53,
-     "3a756f34-b581-4a56-9986-402cb918a7ef": 0,
-     "71dc525f-0f9d-4ab5-bea4-f12a428494e8": 90,
-     "1b82efb8-d367-4182-82e5-9dd3c739cb88": 133,
-     "01ecd40b-d4de-4f71-8263-8c25511968bc": 41,
-     "152dce11-5c69-4ef1-b90c-90ab15dc01d9": 108,
-     "34420f44-58a6-4be7-ac3f-1f73f875f952": 92,
-     "eb2a7e71-d156-4e7c-ad11-c13a64e25d61": 50,
-     "97f56cc6-a56d-4c06-bb14-96acdad5cd7a": 57,
-     "ea7e074d-97f4-4ded-806c-dc6662137819": 87,
-     "231b7d0d-a0d5-46b6-877c-4105790d408f": 46
+     "ff86598b-2220-4189-ace8-b9fdc87e3c00": 129,
+     "bb8a0d47-c9c8-4e57-95cd-5790be233ab3": 82,
+     "f058b5f1-fd03-4186-a3d3-fca71992e481": 33,
+     "88c7aa77-f1bf-4316-a385-e4e7893f5cb5": 133,
+     "458450a7-a25e-4c56-b8ae-f82a9ed21cd7": 0,
+     "721c5126-8764-4de6-a540-79a255a824f3": 30,
+     "b71549fc-9b5e-4844-8485-4ed6426d1972": 73,
+     "78215faf-27d4-4c7d-9c24-8c68fbca9afe": 99,
+     "572c1e72-6a09-4667-9381-78fe224c5076": 119,
+     "20defeca-6916-4743-91b9-6625f4887807": 31,
+     "a92a544f-681c-4302-b843-f4a79f30a90d": 133,
+     "77d95046-0540-487b-af11-7a87e60af2d6": 77,
+     "8b23ffc1-8ec3-4894-8421-dbc6077e9743": 112,
+     "acf12ece-6712-49ec-98cb-114ae8308983": 110,
+     "8440167b-319a-4e40-bea8-696f1b9a8692": 30,
+     "61d55510-f02a-4955-91d7-345b4c1a2050": 45,
+     "cc6ad2fd-42c5-4cc9-bef9-f92162d23595": 71,
+     "03eea36c-692b-4cd0-b182-a0a97a77e0e7": 58,
+     "15f8c826-ed5b-4c0d-8443-77a407723ec2": 96,
+     "4644bd2e-cdb4-4b9f-9a6c-5c14e7988965": 53,
+     "9a178376-ed48-4ab9-852c-ab7015342be7": 0,
+     "8ea03680-4ddc-4625-a9fa-54b658932553": 90,
+     "66315e7d-cb27-4873-beae-b284011c2aa4": 133,
+     "9605a612-1d32-459f-85d4-4458f6c929d6": 41,
+     "3ee0ce82-94b9-4813-aa3e-ff4b3bf7314b": 108,
+     "cb1100a8-8661-4a8a-ba94-ae34fc804a11": 92,
+     "52de1bc0-6ed6-4859-a15c-88bcd15b7d45": 50,
+     "b8e72eb5-89b5-4ccf-ae1d-4bbd6ab3bded": 57,
+     "b455365b-0c35-4dc2-94ec-2af323d324fa": 87,
+     "8e8fd306-7058-4765-b1c4-5bcea4ad6be5": 46
     },
     "rank": 1,
     "of": 14,
@@ -2943,12 +3009,12 @@
     "mine": [],
     "previous": null
    },
-   "server_now": 1795027508.368
+   "server_now": 1795108463.843
   },
   "error": null,
   "meta": {
    "api_version": "1",
-   "request_id": "32a62a8c-55db-4ee5-bf2f-16e5aac32b33"
+   "request_id": "028e26e2-0647-4e8f-a6d6-8ba61461f884"
   }
  }
 }

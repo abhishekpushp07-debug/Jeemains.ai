@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
-import { Block, Tile, Later, Pills, Meter, Key, TagChip, RESULT, OUT_TONE, mmss, pc, index, TIP, AXIS, GRID } from './parts';
+import { Block, Tile, Later, Pills, Meter, Key, TagChip, RESULT, OUT_TONE, mmss, pc, index, TIP, LEGEND, AXIS, GRID } from './parts';
 import { PaceChart, Split } from './charts';
+import { explain } from './explain';
 
 const METRIC = { time: ['Time (min)', 'var(--a-fill)'], questions: ['Attempted', 'var(--a-info)'], accuracy: ['Accuracy %', 'var(--a-good)'] };
 
-function Where({ t }) {
+function Where({ t, X }) {
   const o = t.by_outcome, total = Math.max(1, o.correct + o.incorrect + o.unanswered);
   const part = [['correct', 'Sahi par', 'good'], ['incorrect', 'Galat par', 'bad'], ['unanswered', 'Bina jawab', 'mute']];
   return (
     <Block id="time" kicker="TIME ON SCREEN" title="Time kahan gaya" note={t.off_screen != null ? 'Paper ka time = sawaalon par screen time + screen se bahar (tab band, app background).' : ''}>
       <div className="a2-tiles five">
-        <Tile id="time-elapsed" label="Paper mein laga" value={mmss(t.elapsed)} tone="brand" />
-        <Tile id="time-screen" label="Sawaalon par" value={mmss(t.on_screen)} />
-        <Tile id="time-off" label="Screen se bahar" value={mmss(t.off_screen)} tone="mute" />
+        <Tile id="time-elapsed" label="Paper mein laga" value={mmss(t.elapsed)} tone="brand" info={X.elapsed} />
+        <Tile id="time-screen" label="Sawaalon par" value={mmss(t.on_screen)} info={X.on_screen} />
+        <Tile id="time-off" label="Screen se bahar" value={mmss(t.off_screen)} tone="mute" info={X.off_screen} />
         <Tile id="time-correct" label="Sahi par" value={mmss(o.correct)} tone="good" />
         <Tile id="time-wrong" label="Galat par" value={mmss(o.incorrect)} tone="bad" />
       </div>
@@ -24,12 +25,14 @@ function Where({ t }) {
   );
 }
 
-function Subjects({ t }) {
+function Subjects({ t, X }) {
   const [metric, setMetric] = useState('time');
   const share = Object.fromEntries((t.share || []).map(s => [s.name, s]));
   const data = t.by_subject.map(s => ({ name: s.name, time: Math.round((s.time || 0) / 6) / 10, questions: s.attempted, accuracy: s.accuracy ?? 0 }));
+  const heavy = (t.share || []).filter(s => s.time_pct != null && s.time_pct - s.weight_pct >= 8).sort((a, b) => (b.time_pct - b.weight_pct) - (a.time_pct - a.weight_pct))[0];
   return (
-    <Block id="time-subjects" kicker="SUBJECT-WISE" title="Kis subject ko kitna time" action={<Pills id="time-metric" value={metric} onChange={setMetric} items={[['time', 'Time'], ['questions', 'Questions'], ['accuracy', 'Accuracy']]} />}>
+    <Block id="time-subjects" kicker="SUBJECT-WISE" title="Kis subject ko kitna time" info={X.time_share} action={<Pills id="time-metric" value={metric} onChange={setMetric} items={[['time', 'Time'], ['questions', 'Questions'], ['accuracy', 'Accuracy']]} />}>
+      {heavy && <p className="a2-lead" data-testid="a2-time-heavy">{heavy.name} par {pc(heavy.time_pct)} time gaya, jabki paper mein uske marks {pc(heavy.weight_pct)} hain. Wahan se {heavy.score} / {heavy.maximum} marks bane.</p>}
       <div className="a2-chart" data-testid="a2-time-subject-chart"><ResponsiveContainer width="100%" height={220}><BarChart data={data} margin={{ top: 8, right: 8, left: -22, bottom: 0 }}>
         <CartesianGrid {...GRID} /><XAxis dataKey="name" tick={AXIS} /><YAxis tick={AXIS} unit={{ time: 'm', accuracy: '%' }[metric]} /><Tooltip {...TIP} />
         <Bar dataKey={metric} name={METRIC[metric][0]} fill={METRIC[metric][1]} radius={[6, 6, 0, 0]} />
@@ -53,28 +56,32 @@ function Blocks({ an }) {
   return (
     <Block id="time-journey" kicker="TIME JOURNEY" title="Paper ke har hisse mein kya hua" note={`Har ${Math.round(an.paper.block / 60)} min mein kitne jawab diye, kitne sahi aur kitne galat.`}>
       <div className="a2-chart" data-testid="a2-time-blocks-chart"><ResponsiveContainer width="100%" height={230}><BarChart data={data} margin={{ top: 8, right: 8, left: -22, bottom: 0 }}>
-        <CartesianGrid {...GRID} /><XAxis dataKey="name" tick={AXIS} /><YAxis allowDecimals={false} tick={AXIS} /><Tooltip {...TIP} /><Legend wrapperStyle={{ fontSize: 12 }} />
+        <CartesianGrid {...GRID} /><XAxis dataKey="name" tick={AXIS} /><YAxis allowDecimals={false} tick={AXIS} /><Tooltip {...TIP} /><Legend {...LEGEND} />
         <Bar dataKey="Sahi" stackId="a" fill="var(--a-good)" /><Bar dataKey="Galat" stackId="a" fill="var(--a-bad)" radius={[6, 6, 0, 0]} />
       </BarChart></ResponsiveContainer></div>
     </Block>
   );
 }
 
-function Looks({ t, last }) {
+function Looks({ t, last, X, onDrill }) {
   const f = t.first_look;
+  const drop = last && last.early.accuracy != null && last.late.accuracy != null ? Math.round((last.early.accuracy - last.late.accuracy) * 10) / 10 : null;
   return (
     <div className="a2-duo">
-      {f && <Block id="first-look" kicker="PEHLI NAZAR VS WAPAS AAKAR" title="Kab ke jawab zyada sahi" note="Jawab pehli baar khulte hi diya, ya baad mein wapas aakar.">
+      {f && <Block id="first-look" kicker="PEHLI NAZAR VS WAPAS AAKAR" title="Kab ke jawab zyada sahi" info={X.first_look} note="Jawab pehli baar khulte hi diya, ya baad mein wapas aakar.">
         <div className="a2-tiles two">
-          <Tile id="look-first" label="Pehli nazar mein" value={pc(f.first.accuracy)} sub={`${f.first.correct} / ${f.first.count} sahi · ${mmss(f.first.time)}`} tone="info" />
-          <Tile id="look-return" label="Wapas aakar" value={pc(f.return.accuracy)} sub={`${f.return.correct} / ${f.return.count} sahi · ${mmss(f.return.time)}`} tone="warn" />
+          <Tile id="look-first" label="Pehli nazar mein" value={pc(f.first.accuracy)} sub={`${f.first.correct} / ${f.first.count} sahi · ${mmss(f.first.time)}`} tone="info" ids={f.first.questions} onDrill={onDrill} />
+          <Tile id="look-return" label="Wapas aakar" value={pc(f.return.accuracy)} sub={`${f.return.correct} / ${f.return.count} sahi · ${mmss(f.return.time)}`} tone="warn" ids={f.return.questions} onDrill={onDrill} />
         </div>
       </Block>}
-      <Block id="last-stretch" kicker="AAKHRI 20% TIME" title="Thakaan ka asar">
-        {last ? <div className="a2-tiles two">
-          <Tile id="last-early" label="Usse pehle" value={pc(last.early.accuracy)} sub={`${last.early.count} jawab`} tone="info" />
-          <Tile id="last-late" label="Aakhri 20% mein" value={pc(last.late.accuracy)} sub={`${last.late.count} jawab`} tone={(last.late.accuracy ?? 0) + 10 < (last.early.accuracy ?? 0) ? 'bad' : 'good'} />
-        </div> : <p className="a2-empty" data-testid="a2-last-stretch-empty">Dono hisson mein kam se kam 5 jawab hone par yeh compare banta hai.</p>}
+      <Block id="last-stretch" kicker="AAKHRI 20% TIME" title="Thakaan ka asar" info={X.last}>
+        {last ? <>
+          <div className="a2-tiles two">
+            <Tile id="last-early" label="Usse pehle" value={pc(last.early.accuracy)} sub={`${last.early.count} jawab`} tone="info" ids={last.early.questions} onDrill={onDrill} />
+            <Tile id="last-late" label="Aakhri 20% mein" value={pc(last.late.accuracy)} sub={`${last.late.count} jawab`} tone={drop > 10 ? 'bad' : 'good'} ids={last.late.questions} onDrill={onDrill} />
+          </div>
+          <p className="a2-foot" data-testid="a2-last-stretch-note">{drop > 10 ? `Aakhir mein Accuracy ${drop}% giri. Aakhri hisse mein naye mushkil sawaal mat kholo, pakke wale dobara check karo.` : drop < -10 ? `Aakhir mein Accuracy ${-drop}% badhi. Aapka stamina achha hai.` : 'Aakhir tak Accuracy lagbhag barabar rahi.'}</p>
+        </> : <p className="a2-empty" data-testid="a2-last-stretch-empty">Dono hisson mein kam se kam 5 jawab hone par yeh compare banta hai.</p>}
       </Block>
     </div>
   );
@@ -94,17 +101,17 @@ function Slowest({ an, onOpen }) {
   );
 }
 
-export function TimeSection({ an, onOpen }) {
-  const t = an.time;
+export function TimeSection({ an, onOpen, onDrill }) {
+  const t = an.time, X = explain(an);
   if (!t.available) return <Later id="time" />;
   return <>
-    <Where t={t} />
-    <Subjects t={t} />
+    <Where t={t} X={X} />
+    <Subjects t={t} X={X} />
     <Blocks an={an} />
-    {t.pace?.length > 1 && <Block id="pace" kicker="PACE CURVE" title="Jawab kitni tezi se aaye" note="Time ke saath kul kitne jawab ho chuke the. Seedhi line = barabar speed, sapaat hissa = atke hue.">
+    {t.pace?.length > 1 && <Block id="pace" kicker="PACE CURVE" title="Jawab kitni tezi se aaye" info={X.pace} note="Time ke saath kul kitne jawab ho chuke the. Seedhi line = barabar speed, sapaat hissa = atke hue. Line ke naam par tap karke use chhupa ya dikha sakte ho.">
       <PaceChart an={an} />
     </Block>}
-    <Looks t={t} last={an.habits?.last} />
+    <Looks t={t} last={an.habits?.last} X={X} onDrill={onDrill} />
     <Slowest an={an} onOpen={onOpen} />
   </>;
 }
